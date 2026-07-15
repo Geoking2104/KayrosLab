@@ -1,41 +1,39 @@
 # KayrosLab
 
-[![Open in Browser](https://img.shields.io/badge/▶_Open_in_Browser-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html)
+[![Open in Browser](https://img.shields.io/badge/▶_Open_in_Browser-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-updated.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
 
-> **Du Signal Faible à la Décision Stratégique**
-> Une plateforme d’idéation collaborative augmentée par l’IA, conçue pour transformer des signaux émergents en stratégies robustes et actionnables.
+**Du Signal Faible à la Décision Stratégique — Atelier d’Idéation Agentique Hybride**
+
+KayrosLab est un **atelier d’idéation stratégique** qui transforme des signaux faibles en idées robustes, challengées et arbitrées grâce à une architecture agentique avancée (Plan-and-Solve + ReAct), une mémoire partagée + vectorielle, et un Human-in-the-Loop structuré.
+
+Contrairement aux LLMs classiques (ChatGPT, Claude, Gemini…), KayrosLab ne se contente pas de générer du texte : il suit un **processus rigoureux, traçable et résilient** en 5 étapes.
 
 > ▶ **Démo en ligne (sans installation)** : clique sur le badge **Open in Browser** ci-dessus, ou ouvre
-> https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html
+> https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-updated.html
 
 ---
 
-## Vision
+## 🌟 Ce qui rend KayrosLab unique par rapport aux LLMs standards
 
-KayrosLab n’est **pas un simple chatbot**. C’est un **véritable atelier d’idéation stratégique** dans lequel l’IA agit comme un collaborateur créatif doté d’une **mémoire vivante** de chaque idée.
+| Critère                        | ChatGPT / Claude / Gemini                  | **KayrosLab**                                                                 |
+|--------------------------------|--------------------------------------------|-------------------------------------------------------------------------------|
+| **Structure**                  | Conversation linéaire                      | **Processus structuré en 5 étapes** (Écouter → Arbitrer)                     |
+| **Agents**                     | Un seul modèle                             | **Multi-agents spécialisés** (Red Team offensif, Devil’s Advocate, Planner…) |
+| **Raisonnement**               | Prompt simple                              | **Plan-and-Solve + ReAct** (planification + raisonnement itératif avec outils) |
+| **Mémoire**                    | Contexte de session limité                 | **Shared Memory + Vector Memory** (recherche sémantique)                     |
+| **Robustesse**                 | Aucune                                     | **Retry + Circuit Breaker** + fallback intelligent                           |
+| **Traçabilité**                | Faible                                     | Timeline complète + évaluation des outputs agents + scoring KI               |
+| **Décision humaine**           | Informelle                                 | **Human-in-the-Loop structuré** (votes multi-critères, Working Groups)       |
+| **Multi-projets**              | Non                                        | **Gestion multi-idées** avec persistance isolée                              |
+| **Souveraineté**               | Dépendance cloud                           | **LLM-ready** (Ollama local, Claude via API, abstraction propre)             |
+| **Déploiement**                | Nécessite backend                          | **Standalone** (un seul fichier HTML autonome)                               |
 
-Contrairement aux LLM classiques qui oublient tout à chaque conversation, KayrosLab construit une **fiche d’identité de l’idée** qui s’enrichit à chaque étape : origine des signaux, hypothèses testées, débats entre agents et humains, versions successives, scoring multi-critères, et interventions du Red Team.
-
----
-
-## Fonctionnalités Clés
-
-- **5 briques d’idéation structurées** : Écouter → Cartographier → Construire → Éprouver → Arbitrer
-- **Système multi-agents hybride** : Agents IA (Planner, Critic, Devil’s Advocate, Red Team, Bisociateur, Synthesizer) + Agents Humains (individus et groupes)
-- **Mémoire partagée** entre les agents dans l’étape Éprouver
-- **Collision Mode** : Génération d’idées originales par bisociation entre concepts réels
-- **Red Team offensif** : Attaques structurées + Kill Shots pour tester la robustesse des idées
-- **Kayroslab Index (KI)** : Scoring intelligent et visuel (Radar Chart) basé sur la qualité réelle du travail
-- **Timeline vivante** de l’idée (traçabilité complète des contributions IA + Humaines)
-- **Persistance robuste** (localStorage complet : Timeline, tâches, contributions, état du workflow, mémoire partagée)
-- **Multi-utilisateurs** + Attribution de tâches + Historique des contributions par personne
-- **Mode collaboratif simulé** : Simulation d’actions d’autres collaborateurs en temps réel
-- **Approche Human-in-the-Loop avancée** : Votes, validation par rôles métier, file de tâches
+**En résumé** : KayrosLab transforme l’IA générative en un **système d’idéation gouverné**, comparable à un CODIR augmenté par des agents IA.
 
 ---
 
-## Le Processus en 5 Étapes
+## 🔄 Les 5 Étapes du Processus
 
 | Étape | Nom | Rôle principal | Sortie |
 |-------|-----|----------------|--------|
@@ -47,82 +45,59 @@ Contrairement aux LLM classiques qui oublient tout à chaque conversation, Kayro
 
 ---
 
-## Ce qui rend KayrosLab unique
+## 📦 Fichier Standalone Complet
 
-| Critère | ChatGPT / Claude | **KayrosLab** |
-|-----------------------------|---------------------------|----------------------------------------|
-| Mémoire de l’idée | Aucune | **Fiche d’identité persistante** + Mémoire partagée |
-| Créativité | Réponses linéaires | **Bisociation forcée** (Le Bisociateur) |
-| Robustesse stratégique | Faible | **Red Team offensif** + Devil’s Advocate |
-| Scoring | Subjectif | **KI intelligent** (5 dimensions + contexte réel) |
-| Traçabilité | Faible | **Timeline complète** (IA + Humain) |
-| Gouvernance | Suggestion | **Human-in-the-Loop structuré** + attribution de tâches |
+Le prototype le plus abouti est disponible directement dans le dépôt :
 
----
+**[`kayroslab-complete-updated.html`](kayroslab-complete-updated.html)** (version v12)
 
-## État Actuel du Projet (Juillet 2026)
+Ce fichier unique contient :
+- L’ensemble du workflow en 5 étapes
+- L’architecture agentique complète (Plan-and-Solve + ReAct)
+- Le système d’évaluation des agents
+- La mémoire partagée + vectorielle
+- La gestion multi-idées
+- La préparation LLM (Anthropic SDK + Ollama local)
+- Le Circuit Breaker + Retry avec backoff
+- L’interface multi-utilisateurs et collaborative simulée
 
-Le projet est disponible sous forme de **prototype standalone haute-fidélité** :
-
-- `kayroslab-complete-with-ai-agents.html` → **Version recommandée** (la plus à jour)
-
-Cette version intègre :
-- Visualisation du flux de travail avec tous les agents visibles directement sous chaque étape
-- Rôle Red Team offensif dans l’étape Éprouver
-- Mémoire partagée entre les agents
-- Persistance complète via localStorage
-- Multi-utilisateurs + attribution de tâches
-- Mode collaboratif simulé
+Tu peux l’ouvrir directement dans un navigateur sans installation.
 
 ---
 
-## Getting Started
+## 🛠️ Architecture Technique Actuelle
 
-1. Clone le repository :
-```bash
-git clone https://github.com/Geoking2104/KayrosLab.git
-cd KayrosLab
-```
-
-2. Ouvre le fichier recommandé dans ton navigateur :
-```bash
-open kayroslab-complete-with-ai-agents.html
-```
-
-3. Explore le flux via l’onglet **"Interactive Showcase"** → déploie les 5 étapes.
+- **Frontend** : HTML + Tailwind + JavaScript (standalone)
+- **Agents** : ReAct + Plan-and-Solve (simulation avancée, prêt pour vrais LLMs)
+- **Outils** : Tool Registry extensible (`search_regulatory_risks`, `calculate_ki_impact`…)
+- **Mémoire** : Shared Memory + Vector Memory (similarité cosinus)
+- **Résilience** : Retry exponentiel + Circuit Breaker (CLOSED / OPEN / HALF_OPEN)
+- **Persistance** : localStorage (multi-idées)
+- **LLM** : Abstraction `KayrosLLM` (mock → Anthropic / Ollama)
 
 ---
 
-## Roadmap
+## 🚀 Feuille de Route
 
-- [ ] Intégration React / Vite (version production)
-- [ ] Export PDF du livrable complet (avec KI, Timeline, Red Team report, Gantt)
-- [ ] Système de vote multi-critères complet avec Radar Chart
-- [ ] Connexion réelle aux bases de données (OpenAlex, arXiv, etc.)
-- [ ] Mode multi-utilisateurs temps réel
-- [ ] Version SaaS / Self-hosted
-
----
-
-## Philosophie
-
-> « La meilleure idée n’est pas celle qui vient le plus vite, mais celle qui a été correctement **écoutée**, **cartographiée**, **construite**, **éprouvée** (Red Team inclus) et **arbitrée**. »
+| Phase | Objectif                              | Statut      |
+|-------|---------------------------------------|-------------|
+| v1    | Prototype standalone complet          | ✅ Terminé  |
+| v2    | Architecture agentique (ReAct + Plan-and-Solve) | ✅ Terminé |
+| v3    | Résilience (Retry + Circuit Breaker)  | ✅ Terminé  |
+| v4    | Multi-idées + Vector Memory           | ✅ Terminé  |
+| v5    | Intégration réelle LLM (Ollama / Claude) | En cours |
+| v6    | Synchronisation cloud (ElectricSQL)   | Prévu       |
+| v7    | Version décentralisée (Holochain)     | Vision long terme |
 
 ---
 
-## Auteur
+## 📬 Contact
 
 **Geoffroy de La Tournelle**
-Founder & Director @ KayrosLab
-[LinkedIn](https://www.linkedin.com/in/gdelatournelle/) • contact@gdelatournelle.fr
+Founder & Director – KayrosLab
+[geoffroydelatournelle@gmail.com](mailto:geoffroydelatournelle@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/gdelatournelle/)
 
 ---
 
-## Licence
-
-Ce projet est actuellement en développement interne.
-Toute utilisation, fork ou contribution doit faire l’objet d’une discussion préalable.
-
----
-
-**KayrosLab** — *Transformer le bruit du monde en décisions stratégiques claires.*
+*KayrosLab – Transformer le bruit en stratégie gouvernée.*
