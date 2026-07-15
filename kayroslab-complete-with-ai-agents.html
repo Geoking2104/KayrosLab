@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KayrosLab • Agent d'Idéation Collaborative + AI Connectors</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #2FB9A8;
+      --gold: #fbbf24;
+      --navy: #0a1628;
+      --violet: #a78bfa;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #0a1628 0%, #050d1a 100%);
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .header {
+      text-align: center;
+      padding: 2rem 1rem 1.5rem;
+      border-bottom: 1px solid rgba(47,185,168,0.15);
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(47,185,168,0.2);
+      color: #94a3b8;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .tab-btn.active {
+      background: var(--teal);
+      color: #0a1628;
+      border-color: var(--teal);
+    }
+    .section {
+      max-width: 1180px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(47, 185, 168, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-teal { background: var(--teal); color: #0a1628; }
+    .btn-gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0a1628; font-weight: 700; }
+    .mini-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: #94a3b8;
+    }
+    .agent-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(47,185,168,0.25);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .history-log {
+      max-height: 280px;
+      overflow-y: auto;
+      background: #030408;
+      border-radius: 10px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>KayrosLab</h1>
+    <p style="color:#94a3b8; max-width:720px; margin:0.5rem auto 0;">
+      Agent d'Idéation Collaborative • Intégration d'agents IA externes (Claude, GPT, Gemini, DeepSeek)
+    </p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('showcase')">Interactive Showcase</button>
+    <button class="tab-btn" onclick="switchTab('connectors')">AI Connectors</button>
+    <button class="tab-btn" onclick="switchTab('history')">Agent Call History</button>
+    <button class="tab-btn" onclick="switchTab('feed')">Feed</button>
+  </div>
+
+  <!-- SHOWCASE -->
+  <div id="panel-showcase" class="section">
+    <div class="glass-card">
+      <h2 style="margin-top:0;">Étape 4 • Future Proofing Avancé</h2>
+      <p style="color:#94a3b8;">Utilisez les agents internes + déléguez à des agents IA externes (Claude, GPT-4o, Gemini...).</p>
+
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin:1rem 0;">
+        <button class="btn btn-teal" onclick="runEnhancedFutureProofing()">Lancer Future Proofing Complet</button>
+        <button class="btn btn-gold" onclick="launchAdvancedCollisionMode()">⚡ Collision Mode</button>
+      </div>
+
+      <!-- External Agent Delegation -->
+      <div style="margin-top:1.5rem; padding:1rem; background:rgba(0,0,0,0.25); border-radius:12px; border:1px solid rgba(167,139,250,0.3);">
+        <strong style="color:#a78bfa;">External Agent Delegation</strong>
+        <div style="display:flex; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap;">
+          <select id="external-agent-select" style="flex:1; min-width:220px; background:#0a1628; color:white; border:1px solid #64748b; padding:8px; border-radius:8px;">
+            <option value="">-- Choisir un agent externe --</option>
+            <option value="claude-3.5">Claude 3.5 Sonnet (Anthropic)</option>
+            <option value="gpt-4o">GPT-4o (OpenAI)</option>
+            <option value="gemini-1.5">Gemini 1.5 Pro (Google)</option>
+            <option value="deepseek">DeepSeek R1</option>
+          </select>
+          <button class="btn btn-teal" onclick="delegateToExternalAgent()">Déléguer à l'agent externe</button>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <h4 style="margin-bottom:0.5rem;">Timeline de l’Idée</h4>
+        <div id="futureproofing-timeline" style="max-height:260px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:10px; padding:0.75rem; font-size:0.85rem;"></div>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <h4>Kayroslab Index (KI) — Dynamique</h4>
+        <div id="ki-visual-block"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI CONNECTORS -->
+  <div id="panel-connectors" class="section" style="display:none;">
+    <div class="glass-card">
+      <h2>AI Connectors & Compétences</h2>
+      <p style="color:#94a3b8;">Ajoutez des agents IA externes comme compétences du framework KayrosLab.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1.5rem;" id="connectors-list"></div>
+
+      <div style="margin-top:2rem; padding:1rem; background:rgba(0,0,0,0.3); border-radius:12px;">
+        <h4>Ajouter un nouveau connecteur</h4>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <input id="new-connector-name" placeholder="Nom de l'agent (ex: Claude 3.5 Sonnet)" style="flex:1; padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
+          <select id="new-connector-role" style="padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
+            <option value="Strategic Reasoning">Strategic Reasoning</option>
+            <option value="Creative Divergence">Creative Divergence</option>
+            <option value="Risk & Critique">Risk & Critique</option>
+            <option value="Synthesis">Synthesis</option>
+            <option value="Technical Feasibility">Technical Feasibility</option>
+          </select>
+          <input id="new-connector-key" placeholder="API Key (demo)" style="flex:1; padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
+          <button class="btn btn-teal" onclick="addNewConnector()">Ajouter</button>
+        </div>
+        <small style="color:#64748b;">Les clés API sont stockées localement (localStorage). Ne jamais utiliser de vraies clés en production sans backend sécurisé.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT CALL HISTORY -->
+  <div id="panel-history" class="section" style="display:none;">
+    <div class="glass-card">
+      <h2>Historique des appels aux agents externes</h2>
+      <div class="history-log" id="agent-call-history"></div>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div id="panel-feed" class="section" style="display:none;">
+    <div class="glass-card">
+      <h2>Proposals Feed</h2>
+      <div id="feed-proposals-root"></div>
+    </div>
+  </div>
+
+  <script>
+    let futureProofingTimeline = [];
+    let scenarioCanvas = ["p1", "p2", "p8"];
+    let externalConnectors = [];
+    let agentCallHistory = [];
+
+    function saveState() {
+      localStorage.setItem("kayros_connectors", JSON.stringify(externalConnectors));
+      localStorage.setItem("kayros_agent_history", JSON.stringify(agentCallHistory));
+    }
+
+    function loadState() {
+      const savedConnectors = localStorage.getItem("kayros_connectors");
+      if (savedConnectors) externalConnectors = JSON.parse(savedConnectors);
+      const savedHistory = localStorage.getItem("kayros_agent_history");
+      if (savedHistory) agentCallHistory = JSON.parse(savedHistory);
+    }
+
+    function addToTimeline(actor, action, detail = "") {
+      futureProofingTimeline.unshift({
+        time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+        actor,
+        action,
+        detail
+      });
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      const el = document.getElementById("futureproofing-timeline");
+      if (!el) return;
+      el.innerHTML = futureProofingTimeline.map(item => `
+        <div style="padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <strong style="color:#2FB9A8;">${item.time}</strong> — 
+          <span style="color:#fbbf24; font-weight:600;">${item.actor}</span><br>
+          <span>${item.action}</span>
+          ${item.detail ? `<br><small style="color:#94a3b8;">${item.detail}</small>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function calculateIntelligentKI() {
+      const canvasItems = scenarioCanvas.length;
+      const timelineLength = futureProofingTimeline.length;
+      const hasBisociateur = futureProofingTimeline.some(e => e.actor.includes("Bisociateur"));
+      const externalCalls = agentCallHistory.length;
+
+      let base = 5.5;
+      base += Math.min(2.5, canvasItems * 0.35);
+      base += Math.min(2.0, timelineLength * 0.12);
+      if (hasBisociateur) base += 0.8;
+      if (externalCalls > 0) base += Math.min(1.2, externalCalls * 0.3);
+
+      return {
+        global: Math.min(9.7, parseFloat(base.toFixed(1))),
+        velocite: Math.min(9.8, parseFloat((base * 0.95).toFixed(1))),
+        divergence: Math.min(9.8, parseFloat((base + (hasBisociateur ? 0.9 : 0)).toFixed(1))),
+        fiabilite: Math.min(9.5, parseFloat((base * 1.05).toFixed(1))),
+        impact: Math.min(9.6, parseFloat((base * 0.98).toFixed(1))),
+        originalite: Math.min(9.8, parseFloat((base + (hasBisociateur ? 1.1 : 0) + (externalCalls * 0.2)).toFixed(1)))
+      };
+    }
+
+    function refreshKIDisplay() {
+      const scores = calculateIntelligentKI();
+      const container = document.getElementById("ki-visual-block");
+      if (!container) return;
+
+      container.innerHTML = `
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+          <div style="font-size:2.8rem; font-weight:800; color:#2FB9A8;">${scores.global}</div>
+          <div style="font-size:0.9rem; color:#94a3b8;">/ 10<br><span style="font-size:0.75rem;">Kayroslab Index</span></div>
+        </div>
+        <div style="display:grid; gap:0.5rem; font-size:0.85rem;">
+          <div>Vélocité: <strong>${scores.velocite}</strong></div>
+          <div>Divergence: <strong>${scores.divergence}</strong> ${scores.originalite > 8.5 ? '✨' : ''}</div>
+          <div>Originalité: <strong>${scores.originalite}</strong></div>
+        </div>
+      `;
+    }
+
+    function renderConnectors() {
+      const container = document.getElementById("connectors-list");
+      if (!container) return;
+      container.innerHTML = externalConnectors.map((conn, index) => `
+        <div class="agent-card">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${conn.name}</strong>
+            <span class="mini-badge">${conn.role}</span>
+          </div>
+          <div style="font-size:0.75rem; color:#64748b; margin-top:0.35rem;">Provider: ${conn.provider || 'Custom'}</div>
+          <div style="margin-top:0.5rem;">
+            <button class="btn" style="padding:4px 10px; font-size:0.75rem;" onclick="removeConnector(${index})">Supprimer</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addNewConnector() {
+      const name = document.getElementById("new-connector-name").value.trim();
+      const role = document.getElementById("new-connector-role").value;
+      const key = document.getElementById("new-connector-key").value.trim();
+
+      if (!name) return alert("Nom requis");
+
+      externalConnectors.push({
+        id: Date.now(),
+        name,
+        role,
+        provider: name.includes("Claude") ? "Anthropic" : name.includes("GPT") ? "OpenAI" : "Custom",
+        apiKey: key || "demo-key-" + Date.now()
+      });
+
+      saveState();
+      renderConnectors();
+    }
+
+    function removeConnector(index) {
+      externalConnectors.splice(index, 1);
+      saveState();
+      renderConnectors();
+    }
+
+    async function delegateToExternalAgent() {
+      const select = document.getElementById("external-agent-select");
+      const model = select.value;
+      if (!model) return alert("Veuillez choisir un agent externe");
+
+      const modelName = select.options[select.selectedIndex].text;
+
+      addToTimeline("Système", `Délégation à ${modelName}`, "Appel API simulé en cours...");
+
+      await new Promise(r => setTimeout(r, 1400));
+
+      const simulatedResponse = `Analyse réalisée par ${modelName}. Recommandation stratégique ajoutée avec succès.`;
+
+      addToTimeline(modelName, "Résultat reçu", simulatedResponse);
+
+      agentCallHistory.unshift({
+        timestamp: new Date().toISOString(),
+        model: modelName,
+        role: "Future Proofing",
+        tokensIn: Math.floor(Math.random() * 800) + 1200,
+        tokensOut: Math.floor(Math.random() * 400) + 600,
+        estimatedCost: (Math.random() * 0.018 + 0.012).toFixed(4)
+      });
+      saveState();
+      renderAgentHistory();
+      refreshKIDisplay();
+    }
+
+    function launchAdvancedCollisionMode() {
+      alert("Collision Mode avec délégation IA externe activé (version démo).");
+    }
+
+    function renderAgentHistory() {
+      const container = document.getElementById("agent-call-history");
+      if (!container) return;
+
+      if (agentCallHistory.length === 0) {
+        container.innerHTML = `<div style="color:#64748b; padding:1rem;">Aucun appel enregistré pour le moment.</div>`;
+        return;
+      }
+
+      container.innerHTML = agentCallHistory.map(call => `
+        <div style="padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <strong>${new Date(call.timestamp).toLocaleString()}</strong> — 
+          <span style="color:#a78bfa;">${call.model}</span><br>
+          <small>Tokens: ${call.tokensIn} in / ${call.tokensOut} out • Coût estimé: $${call.estimatedCost}</small>
+        </div>
+      `).join('');
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+
+      const btn = Array.from(document.querySelectorAll(".tab-btn")).find(b => b.textContent.toLowerCase().includes(tab));
+      if (btn) btn.classList.add("active");
+
+      const panel = document.getElementById(`panel-${tab}`);
+      if (panel) panel.style.display = "block";
+
+      if (tab === "connectors") renderConnectors();
+      if (tab === "history") renderAgentHistory();
+    }
+
+    function runEnhancedFutureProofing() {
+      addToTimeline("Système", "Future Proofing lancé");
+      setTimeout(() => addToTimeline("Planner", "Décomposition terminée"), 800);
+      setTimeout(() => addToTimeline("Critic", "Risques identifiés"), 1600);
+      setTimeout(() => {
+        addToTimeline("Le Bisociateur", "Idée créative générée");
+        refreshKIDisplay();
+      }, 2400);
+    }
+
+    window.onload = () => {
+      loadState();
+
+      if (externalConnectors.length === 0) {
+        externalConnectors = [
+          { id: 1, name: "Claude 3.5 Sonnet", role: "Strategic Reasoning", provider: "Anthropic", apiKey: "demo" },
+          { id: 2, name: "GPT-4o", role: "Creative Divergence", provider: "OpenAI", apiKey: "demo" }
+        ];
+        saveState();
+      }
+
+      renderTimeline();
+      refreshKIDisplay();
+      renderConnectors();
+      renderAgentHistory();
+    };
+  </script>
+</body>
+</html>
