@@ -9,19 +9,23 @@
 
 KayrosLab n’est **pas un simple chatbot**. C’est un **véritable atelier d’idéation stratégique** dans lequel l’IA agit comme un collaborateur créatif doté d’une **mémoire vivante** de chaque idée.
 
-Contrairement aux LLM classiques qui oublient tout à chaque conversation, KayrosLab construit une **fiche d’identité de l’idée** qui s’enrichit à chaque étape : origine des signaux, hypothèses testées, débats entre agents et humains, versions successives, et scoring multi-critères.
+Contrairement aux LLM classiques qui oublient tout à chaque conversation, KayrosLab construit une **fiche d’identité de l’idée** qui s’enrichit à chaque étape : origine des signaux, hypothèses testées, débats entre agents et humains, versions successives, scoring multi-critères, et interventions du Red Team.
 
 ---
 
 ## Fonctionnalités Clés
 
 - **5 briques d’idéation structurées** : Écouter → Cartographier → Construire → Éprouver → Arbitrer
-- **Système multi-agents IA** : Planner, Executor, Critic, Synthétiseur + **Le Bisociateur**
+- **Système multi-agents hybride** : Agents IA (Planner, Critic, Devil’s Advocate, Red Team, Bisociateur, Synthesizer) + Agents Humains (individus et groupes)
+- **Mémoire partagée** entre les agents dans l’étape Éprouver
 - **Collision Mode** : Génération d’idées originales par bisociation entre concepts réels
+- **Red Team offensif** : Attaques structurées + Kill Shots pour tester la robustesse des idées
 - **Kayroslab Index (KI)** : Scoring intelligent et visuel (Radar Chart) basé sur la qualité réelle du travail
 - **Timeline vivante** de l’idée (traçabilité complète des contributions IA + Humaines)
-- **Persistance robuste** (IndexedDB + fallback localStorage)
-- **Approche Human-in-the-Loop** : les vrais rôles métier (Finance, Produit, Marketing, DSI, RH) challengent les scénarios
+- **Persistance robuste** (localStorage complet : Timeline, tâches, contributions, état du workflow, mémoire partagée)
+- **Multi-utilisateurs** + Attribution de tâches + Historique des contributions par personne
+- **Mode collaboratif simulé** : Simulation d’actions d’autres collaborateurs en temps réel
+- **Approche Human-in-the-Loop avancée** : Votes, validation par rôles métier, file de tâches
 
 ---
 
@@ -29,36 +33,40 @@ Contrairement aux LLM classiques qui oublient tout à chaque conversation, Kayro
 
 | Étape | Nom | Rôle principal | Sortie |
 |-------|-----|----------------|--------|
-| **01** | **Écouter** | Réduction du bruit | Signaux qualifiés + scoring KI |
+| **01** | **Écouter** | Réduction du bruit + scoring | Signaux qualifiés |
 | **02** | **Cartographier** | Réseau de tendances | Visualisation des relations + ponts stratégiques |
 | **03** | **Construire** | Constructeur de scénarios | Scénarios candidats + brief structuré |
-| **04** | **Éprouver** | Future Proofing multi-agents | Idées challengées + Bisociation |
-| **05** | **Arbitrer** | Challenge humain | Décision finale + Gantt + livrable |
+| **04** | **Éprouver** | Future Proofing multi-agents (Critic + Devil’s Advocate + **Red Team**) | Idées challengées + rapport d’attaque |
+| **05** | **Arbitrer** | Challenge humain + décision | Décision finale + Gantt + livrable |
 
 ---
 
 ## Ce qui rend KayrosLab unique
 
-| Critère                      | ChatGPT / Claude          | **KayrosLab**                          |
+| Critère | ChatGPT / Claude | **KayrosLab** |
 |-----------------------------|---------------------------|----------------------------------------|
-| Mémoire de l’idée           | Aucune                    | **Fiche d’identité persistante**       |
-| Créativité                  | Réponses linéaires        | **Bisociation forcée** (Le Bisociateur) |
-| Scoring                     | Subjectif                 | **KI intelligent** (5 dimensions + contexte réel) |
-| Traçabilité                 | Faible                    | **Timeline complète** (IA + Humain)    |
-| Décision                    | Suggestion                | **Arbitrage structuré** par rôles métier |
-| Robustesse stratégique      | Faible                    | **Future Proofing** multi-agents       |
+| Mémoire de l’idée | Aucune | **Fiche d’identité persistante** + Mémoire partagée |
+| Créativité | Réponses linéaires | **Bisociation forcée** (Le Bisociateur) |
+| Robustesse stratégique | Faible | **Red Team offensif** + Devil’s Advocate |
+| Scoring | Subjectif | **KI intelligent** (5 dimensions + contexte réel) |
+| Traçabilité | Faible | **Timeline complète** (IA + Humain) |
+| Gouvernance | Suggestion | **Human-in-the-Loop structuré** + attribution de tâches |
 
 ---
 
 ## État Actuel du Projet (Juillet 2026)
 
-Le projet est actuellement disponible sous forme de **prototypes standalone haute-fidélité** :
+Le projet est disponible sous forme de **prototype standalone haute-fidélité** :
 
-- `kayroslab-complete-updated.html` → Version la plus aboutie (recommandée)
-- `kayroslab_standalone.html` → Version historique complète
-- `kayroslab-du-signal-a-la-strategie.html` → Focus sur le flux stratégique
+- `kayroslab-complete-persisted.html` → **Version recommandée** (la plus à jour)
 
-Tous les prototypes sont **100% autonomes** (HTML + CSS + JS) et ne nécessitent aucune installation.
+Cette version intègre :
+- Visualisation du flux de travail avec tous les agents visibles directement sous chaque étape
+- Rôle Red Team offensif dans l’étape Éprouver
+- Mémoire partagée entre les agents
+- Persistance complète via localStorage
+- Multi-utilisateurs + attribution de tâches
+- Mode collaboratif simulé
 
 ---
 
@@ -72,7 +80,7 @@ Tous les prototypes sont **100% autonomes** (HTML + CSS + JS) et ne nécessitent
 
 2. Ouvre le fichier recommandé dans ton navigateur :
    ```bash
-   open kayroslab-complete-updated.html
+   open kayroslab-complete-persisted.html
    ```
 
 3. Explore le flux via l’onglet **"Interactive Showcase"** → déploie les 5 étapes.
@@ -82,19 +90,17 @@ Tous les prototypes sont **100% autonomes** (HTML + CSS + JS) et ne nécessitent
 ## Roadmap
 
 - [ ] Intégration React / Vite (version production)
-- [ ] Export PDF du livrable complet (avec KI, Timeline, Gantt)
+- [ ] Export PDF du livrable complet (avec KI, Timeline, Red Team report, Gantt)
+- [ ] Système de vote multi-critères complet avec Radar Chart
 - [ ] Connexion réelle aux bases de données (OpenAlex, arXiv, etc.)
-- [ ] Mode multi-utilisateurs + collaboration temps réel
-- [ ] Intégration avec outils existants (Notion, Linear, Miro…)
+- [ ] Mode multi-utilisateurs temps réel
 - [ ] Version SaaS / Self-hosted
 
 ---
 
 ## Philosophie
 
-> « La meilleure idée n’est pas celle qui vient le plus vite, mais celle qui a été correctement **écoutée**, **cartographiée**, **construite**, **éprouvée** et **arbitrée**. »
-
-KayrosLab est conçu pour les équipes qui veulent sortir de la **réactivité** pour entrer dans une **stratégie intentionnelle et traçable**.
+> « La meilleure idée n’est pas celle qui vient le plus vite, mais celle qui a été correctement **écoutée**, **cartographiée**, **construite**, **éprouvée** (Red Team inclus) et **arbitrée**. »
 
 ---
 
