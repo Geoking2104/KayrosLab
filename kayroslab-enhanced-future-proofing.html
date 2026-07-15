@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KayrosLab • Future Proofing Enhanced</title>
+  <style>
+    :root {
+      --teal: #2FB9A8;
+      --gold: #fbbf24;
+      --navy: #0a1628;
+    }
+    body { background: #0a1628; color: #e2e8f0; font-family: system-ui, sans-serif; }
+    .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(47,185,168,0.2); border-radius: 16px; padding: 24px; }
+    .btn { padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+    .btn-teal { background: #2FB9A8; color: #0a1628; }
+    .btn-gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0a1628; font-weight: 700; }
+    .timeline { max-height: 400px; overflow-y: auto; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; }
+    .mini-badge { font-size: 0.75rem; padding: 4px 10px; border-radius: 9999px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="color:#2FB9A8;">KayrosLab — Future Proofing Enhanced</h1>
+    <p style="color:#94a3b8;">Version avec Multi-Agents + Collision Contextuelle + Choix 1 ou 2 idées + IndexedDB</p>
+
+    <!-- Future Proofing Section -->
+    <div class="glass" style="margin-top:40px;">
+      <h2>Étape 4 • Future Proofing Avancé</h2>
+      
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:20px 0;">
+        <button class="btn btn-teal" onclick="runEnhancedFutureProofing()">Lancer le Future Proofing Complet</button>
+        <button class="btn btn-gold" onclick="launchAdvancedCollisionMode()">⚡ Collision Mode (Éléments Réels)</button>
+      </div>
+
+      <h3 style="margin-top:30px;">Timeline de l’Idée (Historique vivant)</h3>
+      <div id="futureproofing-timeline" class="timeline"></div>
+
+      <div style="margin-top:20px; background:rgba(47,185,168,0.08); padding:16px; border-radius:12px;">
+        <strong>Kayroslab Index (KI) amélioré</strong><br>
+        <small>KI = (0.30 × Vélocité) + (0.25 × Divergence) + (0.20 × Fiabilité Sources) + (0.15 × Impact Stratégique) + (0.10 × Originalité) + bonus/malus</small>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== PERSISTENCE (IndexedDB + localStorage Fallback) ====================
+    const DB_NAME = "KayrosLabDB";
+    const STORE_NAME = "appState";
+    const STATE_KEY = "main";
+    let db = null;
+    let storageMode = "indexeddb";
+
+    async function initIndexedDB() {
+      return new Promise((resolve) => {
+        if (db) return resolve(true);
+        if (!window.indexedDB) {
+          storageMode = "localstorage";
+          return resolve(false);
+        }
+        const request = indexedDB.open(DB_NAME, 1);
+        request.onerror = () => { storageMode = "localstorage"; return resolve(false); };
+        request.onsuccess = (e) => { db = e.target.result; resolve(true); };
+        request.onupgradeneeded = (e) => {
+          if (!e.target.result.objectStoreNames.contains(STORE_NAME)) {
+            e.target.result.createObjectStore(STORE_NAME, { keyPath: "id" });
+          }
+        };
+      });
+    }
+
+    async function saveKayrosState() {
+      const state = {
+        id: STATE_KEY,
+        futureProofingTimeline: futureProofingTimeline,
+        lastUpdated: new Date().toISOString()
+      };
+
+      if (storageMode === "indexeddb" && db) {
+        try {
+          const tx = db.transaction(STORE_NAME, "readwrite");
+          tx.objectStore(STORE_NAME).put(state);
+          await new Promise(r => tx.oncomplete = r);
+          return;
+        } catch (e) { storageMode = "localstorage"; }
+      }
+      localStorage.setItem("kayros_state", JSON.stringify(state));
+    }
+
+    async function loadKayrosState() {
+      await initIndexedDB();
+      let state = null;
+
+      if (storageMode === "indexeddb" && db) {
+        try {
+          const tx = db.transaction(STORE_NAME, "readonly");
+          const req = tx.objectStore(STORE_NAME).get(STATE_KEY);
+          state = await new Promise(r => req.onsuccess = () => r(req.result));
+        } catch (e) { storageMode = "localstorage"; }
+      }
+      if (!state) {
+        const raw = localStorage.getItem("kayros_state");
+        if (raw) state = JSON.parse(raw);
+      }
+      if (state && state.futureProofingTimeline) {
+        futureProofingTimeline = state.futureProofingTimeline;
+      }
+    }
+
+    // ==================== FUTURE PROOFING ====================
+    let futureProofingTimeline = [];
+
+    function addToFutureProofingTimeline(actor, action, detail = "") {
+      futureProofingTimeline.unshift({
+        time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+        actor, action, detail
+      });
+      renderFutureProofingTimeline();
+      saveKayrosState();
+    }
+
+    function renderFutureProofingTimeline() {
+      const el = document.getElementById("futureproofing-timeline");
+      if (!el) return;
+      el.innerHTML = futureProofingTimeline.map(item => `
+        <div style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+          <strong style="color:#2FB9A8;">${item.time}</strong> — 
+          <span style="color:#fbbf24;">${item.actor}</span><br>
+          <span>${item.action}</span>
+          ${item.detail ? `<br><small style="color:#94a3b8;">${item.detail}</small>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function runEnhancedFutureProofing() {
+      futureProofingTimeline = [];
+      document.getElementById("futureproofing-timeline").innerHTML = "";
+      addToFutureProofingTimeline("Système", "Future Proofing lancé");
+      setTimeout(() => addToFutureProofingTimeline("Planner", "Décomposition stratégique"), 800);
+      setTimeout(() => addToFutureProofingTimeline("Executor", "Solutions générées"), 1600);
+      setTimeout(() => addToFutureProofingTimeline("Critic", "Risques identifiés"), 2400);
+      setTimeout(() => addToFutureProofingTimeline("Synthétiseur", "Version consolidée (KI 8.7)"), 3200);
+      setTimeout(() => addToFutureProofingTimeline("Le Bisociateur", "Collision créative effectuée"), 4000);
+    }
+
+    // ==================== COLLISION MODE ====================
+    let currentCollisionPair = { item1: null, item2: null };
+
+    function launchAdvancedCollisionMode() {
+      const modal = document.createElement('div');
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(5,13,26,0.96);z-index:99999;display:flex;align-items:center;justify-content:center;';
+      modal.innerHTML = `
+        <div style="background:#0a1628;border:1px solid #2FB9A8;border-radius:16px;width:92%;max-width:900px;padding:2rem;">
+          <h3 style="color:#fbbf24;text-align:center;">Collision Mode • Le Bisociateur</h3>
+          <p style="text-align:center;color:#94a3b8;">Sélectionne deux éléments → Génère 2 idées. Tu choisis quoi ajouter.</p>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;">
+            <div><div style="font-size:0.75rem;color:#94a3b8;margin-bottom:0.5rem;">Élément 1</div><div id="col1" style="max-height:200px;overflow:auto;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;"></div></div>
+            <div><div style="font-size:0.75rem;color:#94a3b8;margin-bottom:0.5rem;">Élément 2</div><div id="col2" style="max-height:200px;overflow:auto;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;"></div></div>
+          </div>
+
+          <button onclick="executeCollisionWithChoice(this)" class="btn btn-gold" style="width:100%;padding:14px;">⚡ Générer 2 idées</button>
+          <div id="collision-result" style="min-height:120px;margin-top:1rem;"></div>
+          <button onclick="this.closest('div[style*=\'position:fixed\']').remove()" style="margin-top:1rem;width:100%;background:#334155;color:white;border:none;padding:10px;border-radius:8px;">Fermer</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      const demoItems = [
+        {id:"s1", label:"Second-life batteries", type:"Signal"},
+        {id:"n1", label:"Decentralized Energy", type:"Trend"},
+        {id:"c1", label:"AI Urban Planning", type:"Scenario"}
+      ];
+      renderDemoSelectors(demoItems, modal);
+    }
+
+    function renderDemoSelectors(items, modal) {
+      const c1 = modal.querySelector("#col1");
+      const c2 = modal.querySelector("#col2");
+      items.forEach(item => {
+        const el = document.createElement("div");
+        el.style.cssText = "padding:8px;margin:4px 0;border:1px solid rgba(255,255,255,0.1);border-radius:6px;cursor:pointer;";
+        el.innerHTML = `<strong>${item.label}</strong> <small>(${item.type})</small>`;
+        el.onclick = () => {
+          if (!currentCollisionPair.item1) {
+            currentCollisionPair.item1 = item;
+            el.style.border = "2px solid #2FB9A8";
+          } else if (!currentCollisionPair.item2 && item.id !== currentCollisionPair.item1.id) {
+            currentCollisionPair.item2 = item;
+            el.style.border = "2px solid #fbbf24";
+          }
+        };
+        c1.appendChild(el.cloneNode(true));
+        c2.appendChild(el);
+      });
+    }
+
+    function executeCollisionWithChoice(btn) {
+      const result = document.getElementById("collision-result");
+      if (!currentCollisionPair.item1 || !currentCollisionPair.item2) {
+        result.innerHTML = `<p style="color:#ef4444;">Sélectionne deux éléments différents.</p>`;
+        return;
+      }
+      result.innerHTML = `<p style="color:#fbbf24;">Le Bisociateur génère deux idées...</p>`;
+
+      setTimeout(() => {
+        const i1 = currentCollisionPair.item1.label;
+        const i2 = currentCollisionPair.item2.label;
+
+        result.innerHTML = `
+          <div style="background:rgba(251,191,36,0.08);padding:12px;border-radius:10px;margin-bottom:12px;">
+            <strong>Idée 1 :</strong> Hybridation ${i1} × ${i2}<br>
+            <button onclick="addIdea('${i1} × ${i2} (Idée 1)', this)" class="btn btn-teal" style="margin-top:8px;padding:6px 14px;font-size:0.8rem;">Ajouter cette idée</button>
+          </div>
+          <div style="background:rgba(251,191,36,0.08);padding:12px;border-radius:10px;margin-bottom:12px;">
+            <strong>Idée 2 :</strong> Écosystème ${i1} + ${i2}<br>
+            <button onclick="addIdea('${i1} + ${i2} (Idée 2)', this)" class="btn btn-teal" style="margin-top:8px;padding:6px 14px;font-size:0.8rem;">Ajouter cette idée</button>
+          </div>
+          <button onclick="addBothIdeas('${i1} × ${i2}', '${i1} + ${i2}', this)" class="btn btn-gold" style="width:100%;">Ajouter les DEUX idées</button>
+        `;
+      }, 1400);
+    }
+
+    function addIdea(title, btn) {
+      addToFutureProofingTimeline("Le Bisociateur", "Idée ajoutée", title);
+      btn.textContent = "✓ Ajoutée";
+      btn.disabled = true;
+    }
+
+    function addBothIdeas(t1, t2, btn) {
+      addToFutureProofingTimeline("Le Bisociateur", "Idée ajoutée", t1);
+      setTimeout(() => addToFutureProofingTimeline("Le Bisociateur", "Idée ajoutée", t2), 300);
+      btn.textContent = "✓ Les deux ajoutées";
+      btn.disabled = true;
+    }
+
+    window.onload = async () => {
+      await loadKayrosState();
+      renderFutureProofingTimeline();
+    };
+  </script>
+</body>
+</html>
