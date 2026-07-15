@@ -1,0 +1,4300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6990e0b39f59648840c520e0/0edeee4c0_Kayrossablier.png" rel="icon" type="image/svg+xml">
+  <meta content="KayrosLab is a gamified ideation platform that turns ideas into projects. Propose a measure, let AI estimate it, let the community improve it, and let the team deploy it in the field. Track its evolution and adapt it over time through user feedback." name="description">
+  <meta content="KayrosLab" property="og:title">
+  <meta content="KayrosLab is a gamified ideation platform that turns ideas into projects. Propose a measure, let AI estimate it, let the community improve it, and let the team deploy it in the field. Track its evolution and adapt it over time through user feedback." property="og:description">
+  <meta content="https://kayroslab.base44.app" property="og:url">
+  <meta content="website" property="og:type">
+  <meta content="KayrosLab" property="og:site_name">
+  <meta content="KayrosLab" name="twitter:title">
+  <meta content="KayrosLab is a gamified ideation platform that turns ideas into projects. Propose a measure, let AI estimate it, let the community improve it, and let the team deploy it in the field. Track its evolution and adapt it over time through user feedback." name="twitter:description">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="https://kayroslab.base44.app" name="twitter:url">
+  <meta content="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/render/image/public/base44-prod/public/6990e0b39f59648840c520e0/0edeee4c0_Kayrossablier.png?width=1200&amp;height=630&amp;resize=contain" property="og:image">
+  <meta content="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/render/image/public/base44-prod/public/6990e0b39f59648840c520e0/0edeee4c0_Kayrossablier.png?width=1200&amp;height=630&amp;resize=contain" name="twitter:image">
+  <meta content="yes" name="mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="KayrosLab" name="apple-mobile-web-app-title">
+  <link href="https://kayroslab.base44.app" rel="canonical">
+  <meta content="noindex, follow" name="robots">
+  <title>KayrosLab</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --kayros-navy:      #2C3E7D;
+      --kayros-navy-dark: #1f2d5a;
+      --kayros-navy-deep: #0a1628;
+      --kayros-teal:      #2FB9A8;
+      --kayros-teal-hover:#3fc9b8;
+      --kayros-gold:      #c4b098;
+      --terracotta:       #c4785a;
+      --cyan:             #22d3ee;
+      --violet:           #a78bfa;
+      --emerald:          #34d399;
+      --amber:            #fbbf24;
+      --bg-dark:          #050d1a;
+      --bg-card:          rgba(15, 23, 42, 0.72);
+      --bg-accent-dark:   #0a1628;
+      --border-glow:      rgba(47, 185, 168, 0.18);
+      --primary:          #2FB9A8;
+      --primary-hover:    #3fc9b8;
+      --secondary:        #2C3E7D;
+      --accent:           #c4b098;
+      --text-white:       #f9fafb;
+      --text-gray:        #9ca3af;
+      --text-dark:        #111827;
+      --transition:       all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        linear-gradient(to bottom, #0a1628 0%, #050d1a 100%),
+        radial-gradient(at 8% 4%, rgba(47, 185, 168, 0.12) 0px, transparent 44%),
+        radial-gradient(at 92% 92%, rgba(196, 176, 152, 0.08) 0px, transparent 44%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-white);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header Nav */
+    .nav-header {
+      border-bottom: 1px solid rgba(47, 185, 168, 0.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(2, 8, 23, 0.84);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4.5rem;
+    }
+
+    .logo-area {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.72rem;
+      text-decoration: none;
+      color: var(--text-white);
+      padding: 0.42rem 0.72rem;
+      border-radius: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 2.35rem;
+      height: 2.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.32rem;
+      line-height: 1;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.42);
+    }
+
+    .logo-text {
+      font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+    .logo-text span { color: var(--kayros-teal); }
+
+    .brand-subline {
+      display: block;
+      font-size: 0.48rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #cbd5e1;
+      margin-top: 0.08rem;
+      font-weight: 600;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-gray);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--text-white);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: var(--text-white);
+      background: rgba(47, 185, 168, 0.1);
+      border-color: rgba(47, 185, 168, 0.32);
+    }
+
+    .tab-btn.showcase-btn.active {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+    }
+
+    /* Auth Badge */
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+    }
+
+    .user-avatar {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--primary);
+    }
+
+    .user-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .user-rep {
+      font-size: 0.65rem;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .landing-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem 0 2.5rem;
+    }
+
+    .landing-banner {
+      border: 1px solid rgba(47, 185, 168, 0.3);
+      background: linear-gradient(90deg, rgba(44, 62, 125, 0.3), rgba(2, 8, 23, 0.72));
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.72rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .landing-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .landing-brand-logo {
+      height: 3rem;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .landing-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      color: white;
+      margin: 1.1rem 0 1rem;
+      letter-spacing: 0;
+    }
+
+    .landing-hero h1 span {
+      color: var(--kayros-teal);
+    }
+
+    .landing-description {
+      color: #dbeafe;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 1.25rem;
+    }
+
+    .landing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kayros-primary-btn {
+      border: 0;
+      border-radius: 0.55rem;
+      background: var(--kayros-teal);
+      color: white;
+      padding: 0.85rem 1.2rem;
+      font-size: 0.86rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 12px 28px rgba(47, 185, 168, 0.18);
+    }
+
+    .kayros-primary-btn:hover {
+      background: var(--kayros-teal-hover);
+      transform: translateY(-1px);
+    }
+
+    .kayros-outline-btn {
+      border: 2px solid rgba(47, 185, 168, 0.48);
+      border-radius: 0.55rem;
+      background: rgba(44, 62, 125, 0.14);
+      color: white;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.86rem;
+      font-weight: 750;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .kayros-outline-btn:hover {
+      border-color: var(--kayros-teal);
+      background: rgba(44, 62, 125, 0.28);
+    }
+
+    .landing-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+
+    .landing-stat {
+      border: 1px solid rgba(196, 176, 152, 0.3);
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.4), rgba(2, 8, 23, 0.8));
+      border-radius: 0.8rem;
+      padding: 0.9rem;
+    }
+
+    .landing-stat-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(196, 176, 152, 0.82);
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+
+    .landing-stat-value {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: white;
+    }
+
+    .process-card, .trending-card {
+      border: 1px solid rgba(196, 176, 152, 0.3);
+      background: rgba(2, 8, 23, 0.86);
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+
+    .process-step-row {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .process-step-row:last-child {
+      border-bottom: 0;
+    }
+
+    .process-step-num {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.55rem;
+      background: rgba(47, 185, 168, 0.14);
+      color: var(--kayros-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      border: 1px solid rgba(47, 185, 168, 0.3);
+    }
+
+    .trending-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .trending-item {
+      display: block;
+      border: 1px solid rgba(196, 176, 152, 0.22);
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.3), rgba(2, 8, 23, 0.72));
+      border-radius: 0.8rem;
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .trending-item:hover {
+      border-color: rgba(196, 176, 152, 0.62);
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.42), rgba(2, 8, 23, 0.78));
+    }
+
+    .powered-band {
+      margin-top: 1rem;
+      border: 1px solid rgba(196, 176, 152, 0.28);
+      background: linear-gradient(90deg, rgba(0, 51, 102, 0.28), rgba(2, 8, 23, 0.8));
+      border-radius: 0.9rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.72rem;
+      color: #e2e8f0;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .root-directory {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 3rem 0 4rem;
+    }
+
+    .root-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 0.95;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0;
+    }
+
+    .root-description {
+      color: #dbeafe;
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 780px;
+      margin-bottom: 2.4rem;
+    }
+
+    .root-section-title {
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .root-pages-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .root-page-link {
+      text-align: left;
+      border: 1px solid rgba(47, 185, 168, 0.22);
+      background: rgba(2, 8, 23, 0.7);
+      color: #e2e8f0;
+      border-radius: 0.7rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .root-page-link:hover {
+      border-color: rgba(47, 185, 168, 0.65);
+      background: rgba(44, 62, 125, 0.28);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .root-page-link small {
+      display: block;
+      color: #94a3b8;
+      margin-top: 0.2rem;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .copied-root-page {
+      max-width: 760px;
+    }
+
+    .exact-root-links {
+      display: block;
+      padding-left: 1.5rem;
+      margin: 0;
+    }
+
+    .exact-root-links li {
+      margin: 0.35rem 0;
+      color: #e2e8f0;
+    }
+
+    .exact-root-links a {
+      color: #dbeafe;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .exact-root-links a:hover {
+      color: var(--kayros-teal);
+    }
+
+    @media (max-width: 900px) {
+      .landing-grid {
+        grid-template-columns: 1fr;
+      }
+      .landing-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 3rem 0;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Showcase Layout */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .showcase-grid {
+        grid-template-columns: 1fr 2fr;
+      }
+    }
+
+    /* Challenge Select Card */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glow);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(47, 185, 168, 0.25);
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title svg {
+      color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    /* Challenge Buttons */
+    .challenge-option {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      width: 100%;
+    }
+
+    .challenge-option:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(47, 185, 168, 0.25);
+    }
+
+    .challenge-option.active {
+      background: rgba(47, 185, 168, 0.05);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(47, 185, 168, 0.15);
+    }
+
+    .challenge-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.25rem;
+    }
+
+    .challenge-meta {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+    }
+
+    /* Step Pipeline Accordion */
+    .pipeline-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .accordion-item {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      background: rgba(17, 24, 39, 0.4);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .accordion-item.active {
+      border-color: var(--border-glow);
+      background: var(--bg-card);
+    }
+
+    .accordion-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition);
+    }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .accordion-title-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-number {
+      width: 1.75rem;
+      height: 1.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-gray);
+      transition: var(--transition);
+    }
+
+    .accordion-item.active .step-number {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      box-shadow: 0 0 10px rgba(47, 185, 168, 0.3);
+    }
+
+    .step-name-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .step-meta {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 800px;
+    }
+
+    .accordion-body {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.25rem;
+    }
+
+    /* Custom Showcase Step Visualizers */
+    
+    /* Stage 1: Noise Filter */
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .signal-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      font-size: 0.75rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .signal-card.filtered {
+      border-color: rgba(239, 68, 68, 0.25);
+      opacity: 0.4;
+      text-decoration: line-through;
+    }
+
+    .signal-card.pristine {
+      border-color: rgba(16, 185, 129, 0.25);
+      background: rgba(16, 185, 129, 0.02);
+    }
+
+    .signal-badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+    }
+
+    .badge-spam { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+    .badge-pristine { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+
+    /* Stage 2: Trend Network SVG */
+    .trend-network-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .network-svg {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      cursor: crosshair;
+    }
+
+    .network-node {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .network-node circle {
+      fill: rgba(17, 24, 39, 0.9);
+      stroke: var(--text-gray);
+      stroke-width: 1.5;
+      transition: var(--transition);
+    }
+
+    .network-node:hover circle {
+      stroke: var(--text-white);
+      fill: rgba(255, 255, 255, 0.05);
+    }
+
+    .network-node.selected circle {
+      stroke: var(--primary);
+      fill: rgba(47, 185, 168, 0.15);
+      filter: drop-shadow(0 0 5px rgba(47, 185, 168, 0.5));
+    }
+
+    .bridge-display {
+      background: rgba(47, 185, 168, 0.04);
+      border: 1px dashed var(--primary);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Stage 3: Scenario Canvas Sliders */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 600px) {
+      .canvas-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-gray);
+    }
+
+    .slider-header span.val {
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      height: 6px;
+      border-radius: 9999px;
+      outline: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(47, 185, 168, 0.6);
+      transition: var(--transition);
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .canvas-metrics {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      justify-content: space-around;
+      font-size: 0.75rem;
+    }
+
+    .metric-box {
+      text-align: center;
+    }
+
+    .metric-label {
+      color: var(--text-gray);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+
+    .metric-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: 0.15rem;
+    }
+
+    /* Stage 4: adversarial Roundtable */
+    .roundtable-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .roundtable-chat {
+      background: #030408;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      height: 220px;
+      overflow-y: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .persona-msg {
+      line-height: 1.4;
+    }
+
+    .msg-planner { color: #3b82f6; }
+    .msg-critic { color: #2FB9A8; }
+    .msg-executor { color: #10b981; }
+    .msg-synth { color: #a855f7; }
+
+    .btn-debate {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.65rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .btn-debate:hover {
+      background: rgba(47, 185, 168, 0.08);
+      border-color: var(--primary);
+    }
+
+    /* Stage 5: Collision Plot */
+    .collision-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .collision-preview-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .collision-panel-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Dedicate Semantic Collider tab structures */
+    .collider-card-full {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .collider-card-full {
+        grid-template-columns: 1.2fr 1.8fr;
+      }
+    }
+
+    .collider-setup-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .collider-results-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .results-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .chart-panel-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .chart-panel-row {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    /* Graph Grid */
+    .plot-arena {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 280px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+
+    .axis-line-h, .axis-line-v {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .axis-line-h {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+    }
+
+    .axis-line-v {
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 100%;
+    }
+
+    .hivemind-zone {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3rem;
+      height: 3rem;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.01);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hivemind-zone span {
+      font-size: 0.4rem;
+      color: rgba(255, 255, 255, 0.25);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .quadrant-label {
+      position: absolute;
+      font-size: 0.42rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .quad-top-left { top: 0.5rem; left: 0.5rem; }
+    .quad-top-right { top: 0.5rem; right: 0.5rem; color: rgba(47, 185, 168, 0.4); }
+    .quad-bottom-left { bottom: 0.5rem; left: 0.5rem; }
+    .quad-bottom-right { bottom: 0.5rem; right: 0.5rem; color: rgba(245, 158, 11, 0.4); }
+
+    .axis-caption-x, .axis-caption-y {
+      position: absolute;
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .axis-caption-x { bottom: 0.25rem; right: 2rem; }
+    .axis-caption-y {
+      left: 0.25rem;
+      top: 1.5rem;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .plot-dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: var(--secondary);
+      border: 2px solid transparent;
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: var(--text-white);
+      z-index: 20;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .plot-dot.sweet-quad {
+      background: var(--primary);
+    }
+
+    .plot-dot.sweet-quad::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(47, 185, 168, 0.4);
+      animation: pulse-slow 1.5s infinite;
+    }
+
+    .plot-dot.active {
+      background: var(--text-white);
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+      transform: translate(-50%, -50%) scale(1.2);
+      color: var(--text-dark);
+    }
+
+    /* Terminal Console */
+    .console-box {
+      background: #030408;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      height: 110px;
+      overflow-y: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.62rem;
+      color: rgba(47, 185, 168, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .console-line.active-log {
+      color: var(--text-white);
+      font-weight: 600;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-gray);
+    }
+
+    textarea, input[type=text], select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 0.5rem;
+      color: var(--text-white);
+      padding: 0.65rem 0.85rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    textarea:focus, input[type=text]:focus, select:focus {
+      border-color: rgba(47, 185, 168, 0.5);
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border: none;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+
+    .btn-action:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-action:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Feed Layout */
+    .feed-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .feed-container {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .proposal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .proposal-card:hover {
+      border-color: rgba(47, 185, 168, 0.3);
+    }
+
+    .proposal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .proposal-title-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proposal-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .proposal-author {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+      margin-top: 0.15rem;
+    }
+
+    .proposal-body {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .scorecard-summary-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .mini-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-gray);
+    }
+
+    .mini-badge.amber { color: var(--accent); background: rgba(196, 176, 152, 0.1); border-color: rgba(196, 176, 152, 0.24); }
+    .mini-badge.teal { color: var(--primary-hover); background: rgba(47, 185, 168, 0.1); border-color: rgba(47, 185, 168, 0.2); }
+
+    .proposal-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .proposal-action-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-gray);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+
+    .proposal-action-btn:hover {
+      color: var(--primary);
+    }
+
+    .proposal-action-btn.active {
+      color: var(--primary);
+    }
+
+    .working-group-box {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0.65rem;
+      padding: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .working-group-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .working-group-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 0.2rem;
+    }
+
+    .working-group-meta {
+      font-size: 0.68rem;
+      color: var(--text-gray);
+      line-height: 1.45;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin: 0.7rem 0;
+    }
+
+    @media (min-width: 760px) {
+      .role-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .role-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      border-radius: 0.5rem;
+      padding: 0.65rem;
+    }
+
+    .role-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .role-card span {
+      display: block;
+      color: var(--text-gray);
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.7rem;
+    }
+
+    .task-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.45rem;
+      padding: 0.55rem 0.65rem;
+    }
+
+    .task-row.done {
+      opacity: 0.68;
+    }
+
+    .task-row span {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+      line-height: 1.35;
+    }
+
+    .task-row.done span {
+      text-decoration: line-through;
+    }
+
+    .group-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.7rem;
+    }
+
+    .comment-item {
+      color: var(--text-gray);
+      font-size: 0.68rem;
+      line-height: 1.4;
+      border-left: 2px solid rgba(47, 185, 168, 0.35);
+      padding-left: 0.55rem;
+    }
+
+    .app-shell {
+      background: rgba(10, 22, 40, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 22px 50px -18px rgba(0, 0, 0, 0.62);
+    }
+
+    .app-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(7, 16, 32, 0.95);
+    }
+
+    .app-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-white);
+    }
+
+    .app-subtitle {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+      margin-top: 0.15rem;
+      line-height: 1.35;
+    }
+
+    .three-col-app {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr) 250px;
+      min-height: 560px;
+    }
+
+    .app-side {
+      border-right: 1px solid rgba(148, 163, 184, 0.15);
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.5);
+      overflow-y: auto;
+    }
+
+    .app-side.right {
+      border-right: 0;
+      border-left: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .app-main {
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .data-card {
+      background: rgba(15, 23, 42, 0.66);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 0.75rem;
+      padding: 0.85rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .data-card.active {
+      border-color: rgba(34, 211, 238, 0.72);
+      background: rgba(8, 145, 178, 0.12);
+    }
+
+    .data-card-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 0.35rem;
+    }
+
+    .data-card-meta {
+      color: var(--text-gray);
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+
+    .chart-box {
+      background: rgba(2, 6, 23, 0.58);
+      border: 1px solid rgba(148, 163, 184, 0.13);
+      border-radius: 0.8rem;
+      padding: 0.9rem;
+      min-height: 185px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: end;
+      gap: 0.25rem;
+      height: 130px;
+      margin-top: 0.8rem;
+    }
+
+    .bar {
+      flex: 1;
+      min-width: 4px;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(to top, #0891b2, #22d3ee);
+    }
+
+    .source-row, .filter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.52rem 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      font-size: 0.7rem;
+      color: var(--text-gray);
+    }
+
+    .source-meter {
+      width: 82px;
+      height: 6px;
+      background: rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .source-meter span {
+      display: block;
+      height: 100%;
+      background: #22d3ee;
+    }
+
+    .network-canvas {
+      position: relative;
+      height: 520px;
+      background:
+        linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        rgba(13, 30, 53, 0.95);
+      background-size: 28px 28px;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      overflow: hidden;
+    }
+
+    .network-canvas svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .network-dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.18);
+    }
+
+    .network-dot.active {
+      outline: 4px solid rgba(34, 211, 238, 0.22);
+    }
+
+    .network-label {
+      position: absolute;
+      transform: translate(12px, -50%);
+      font-size: 0.64rem;
+      color: #c8d8ee;
+      z-index: 2;
+      width: 120px;
+      line-height: 1.2;
+      pointer-events: none;
+    }
+
+    .scenario-workspace {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr) 250px;
+      min-height: 590px;
+    }
+
+    .draggable-signal {
+      border-radius: 0.65rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      padding: 0.65rem;
+      margin-bottom: 0.55rem;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.62);
+      transition: var(--transition);
+    }
+
+    .draggable-signal:hover, .draggable-signal.selected {
+      border-color: rgba(34, 211, 238, 0.6);
+      background: rgba(8, 145, 178, 0.12);
+    }
+
+    .scenario-canvas {
+      min-height: 360px;
+      border: 2px dashed rgba(148, 163, 184, 0.22);
+      border-radius: 1rem;
+      background: rgba(15, 23, 42, 0.28);
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      align-content: start;
+    }
+
+    .scenario-item {
+      border-radius: 0.75rem;
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      background: rgba(34, 211, 238, 0.08);
+      padding: 0.75rem;
+      min-height: 132px;
+    }
+
+    .score-bar {
+      height: 7px;
+      background: rgba(148, 163, 184, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.3rem;
+    }
+
+    .score-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #22d3ee, #2FB9A8);
+    }
+
+    @media (max-width: 980px) {
+      .three-col-app,
+      .scenario-workspace {
+        grid-template-columns: 1fr;
+      }
+      .app-side,
+      .app-side.right {
+        border: 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      }
+    }
+
+    .deliverable-layout {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+
+    .deliverable-preview {
+      background: white;
+      color: #111827;
+      border-radius: 0.75rem;
+      padding: 2rem;
+      min-height: 900px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      font-family: Arial, sans-serif;
+    }
+
+    .delivery-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.82);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .delivery-modal.active {
+      display: flex;
+    }
+
+    .delivery-modal-card {
+      width: min(1180px, 96vw);
+      max-height: 92vh;
+      overflow: auto;
+      background: #071020;
+      border: 1px solid rgba(47,185,168,0.35);
+      border-radius: 1rem;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+      padding: 1rem;
+    }
+
+    .delivery-modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .delivery-modal-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .pdf-page h1 {
+      color: #111827;
+      font-size: 1.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .pdf-page h2 {
+      color: #0f766e;
+      font-size: 1.05rem;
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 0.25rem;
+      margin: 1.2rem 0 0.55rem;
+    }
+
+    .pdf-page h3 {
+      color: #111827;
+      font-size: 0.86rem;
+      margin: 0.75rem 0 0.25rem;
+    }
+
+    .pdf-page p, .pdf-page li, .pdf-page td {
+      color: #374151;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .pdf-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin: 0.8rem 0;
+    }
+
+    .pdf-kpi {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 0.35rem;
+      padding: 0.55rem;
+    }
+
+    .pdf-kpi strong {
+      display: block;
+      color: #111827;
+      font-size: 0.9rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.45rem;
+    }
+
+    .pdf-table th, .pdf-table td {
+      border: 1px solid #d1d5db;
+      padding: 0.45rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .pdf-table th {
+      background: #f9fafb;
+      color: #111827;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .pdf-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+      margin: 0.75rem 0;
+    }
+
+    .pdf-flow div {
+      border: 1px solid #99f6e4;
+      background: #f0fdfa;
+      border-radius: 0.35rem;
+      padding: 0.5rem;
+      font-size: 0.68rem;
+      color: #115e59;
+      min-height: 70px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #pdf-deliverable-content, #pdf-deliverable-content * {
+        visibility: visible !important;
+      }
+      #pdf-deliverable-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 18mm;
+      }
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+    }
+
+    /* Leaderboard Card */
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .leader-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.5rem;
+    }
+
+    .leader-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .leader-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .leader-rank {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      width: 1rem;
+    }
+
+    /* ROI calculator structures */
+    .roi-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      .roi-grid {
+        grid-template-columns: 1.2fr 1.8fr;
+      }
+    }
+
+    .roi-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .roi-stat-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .roi-stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .roi-stat-desc {
+      font-size: 0.7rem;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      margin-top: auto;
+    }
+
+    /* Inline Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0f0814;
+      border: 1px solid var(--primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .toast-popup.active {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Collision Anim */
+    .arena-box {
+      width: 100%;
+      height: 160px;
+      position: relative;
+      background: #000;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .colliding-node {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .colliding-node.node-left {
+      left: 10%;
+      background: var(--primary);
+    }
+
+    .colliding-node.node-right {
+      right: 10%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .spark-effect {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+    }
+
+    .sweet-detail-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .tool-brief {
+      background: rgba(47, 185, 168, 0.055);
+      border: 1px solid rgba(47, 185, 168, 0.18);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tool-brief-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tool-brief p {
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      line-height: 1.55;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (min-width: 720px) {
+      .learning-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .learning-card {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      border-radius: 0.6rem;
+      padding: 0.85rem;
+    }
+
+    .learning-card strong {
+      display: block;
+      color: var(--primary-hover);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.045em;
+      margin-bottom: 0.35rem;
+    }
+
+    .learning-card span,
+    .learning-card li {
+      color: var(--text-gray);
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+
+    .method-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.65rem;
+    }
+
+    .method-list li {
+      border-left: 2px solid rgba(47, 185, 168, 0.45);
+      padding-left: 0.65rem;
+    }
+
+    .evidence-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+      margin-top: 0.7rem;
+    }
+
+    .evidence-list span {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      border-radius: 0.45rem;
+      padding: 0.55rem 0.65rem;
+      color: var(--text-gray);
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (min-width: 760px) {
+      .rubric-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .rubric-cell {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.055);
+      border-radius: 0.5rem;
+      padding: 0.7rem;
+      font-size: 0.68rem;
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+
+    .rubric-cell b {
+      display: block;
+      color: var(--accent);
+      font-size: 0.72rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .proposal-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin: 0.75rem 0 1rem;
+    }
+
+    @media (min-width: 720px) {
+      .proposal-detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .proposal-detail-box {
+      background: rgba(0, 0, 0, 0.19);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      padding: 0.7rem;
+    }
+
+    .proposal-detail-box b {
+      display: block;
+      color: var(--text-white);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    .proposal-detail-box span {
+      color: var(--text-gray);
+      font-size: 0.71rem;
+      line-height: 1.45;
+    }
+
+    .feed-toolbar {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 760px) {
+      .feed-toolbar {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: end;
+      }
+    }
+
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.65rem 0.8rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .secondary-btn:hover {
+      border-color: rgba(47, 185, 168, 0.35);
+      background: rgba(47, 185, 168, 0.08);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Nav Header -->
+  <header class="nav-header">
+    <div class="container nav-container">
+      <a href="Kayros_standalone.html" class="logo-area">
+        <svg class="logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="2" x2="20" y2="38" stroke="currentColor" stroke-width="1" />
+          <path d="M 11 14 L 24 20 L 11 26" fill="none" stroke="var(--terracotta)" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-text">Kayros<span>Lab</span></div>
+      </a>
+      <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('noise')">Signal Noise</button>
+        <button class="tab-btn" onclick="switchTab('network')">Trend Network</button>
+        <button class="tab-btn" onclick="switchTab('scenario')">Scenario Builder</button>
+        <button class="tab-btn showcase-btn" onclick="switchTab('showcase')">Interactive Showcase</button>
+        <button class="tab-btn" onclick="switchTab('collider')">Semantic Collider</button>
+        <button class="tab-btn" onclick="switchTab('feed')">Proposals Feed</button>
+        <button class="tab-btn" onclick="switchTab('roi')">Dynamic ROI</button>
+      </div>
+      <div class="user-badge">
+        <img class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="avatar" />
+        <span class="user-name">Geoff</span>
+        <span class="user-rep">2.5k XP</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Area -->
+  <main class="container">
+<!-- Tab 0A: Noise Reduction -->
+    <div id="panel-noise" class="tab-panel active">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app - AI Noise Reduction and signal qualification</div>
+        <p>This app mirrors the KayrosLab signal-ingestion experience: identify raw signals, separate noise from useful weak signals, score velocity and acceleration, inspect source distribution, and decide whether a signal is strong enough to enter the Trend Network.</p>
+      </div>
+      <div class="app-shell">
+        <div class="app-topbar">
+          <div>
+            <div class="app-title">KayrosLab Signal Intelligence</div>
+            <div class="app-subtitle">Operational purpose: avoid building scenarios from generic commentary, duplicated news, or non-actionable hype.</div>
+          </div>
+          <span class="mini-badge amber" id="noise-selected-ki">KI --</span>
+        </div>
+        <div class="three-col-app">
+          <aside class="app-side">
+            <div class="form-label">Emerging signals</div>
+            <div id="noise-trend-list"></div>
+          </aside>
+          <section class="app-main">
+            <div class="learning-grid">
+              <div class="learning-card"><strong>Step 1</strong><span>Check whether the signal has a measurable change: volume, acceleration, sentiment shift, or entity concentration.</span></div>
+              <div class="learning-card"><strong>Step 2</strong><span>Inspect source quality. A signal is stronger when it appears across different source types, not only one social channel.</span></div>
+              <div class="learning-card"><strong>Step 3</strong><span>Promote only signals that can inform a decision, experiment, or scenario constraint.</span></div>
+            </div>
+            <div class="chart-box" style="margin-top:1rem;">
+              <div class="data-card-title"><span id="noise-chart-title">Volume history</span><span id="noise-sentiment" class="mini-badge">sentiment</span></div>
+              <div class="bar-chart" id="noise-volume-chart"></div>
+            </div>
+            <div class="learning-grid" style="margin-top:1rem;">
+              <div class="chart-box">
+                <div class="form-label">Source distribution</div>
+                <div id="noise-source-breakdown"></div>
+              </div>
+              <div class="chart-box">
+                <div class="form-label">Noise filter decisions</div>
+                <div id="noise-filter-decisions"></div>
+              </div>
+              <div class="chart-box">
+                <div class="form-label">Decision output</div>
+                <div id="noise-decision-output" class="data-card-meta"></div>
+                <button class="secondary-btn" style="margin-top:0.75rem; width:100%;" onclick="promoteNoiseSignal()">Promote to Trend Network</button>
+              </div>
+            </div>
+          </section>
+          <aside class="app-side right">
+            <div class="form-label">Related entities</div>
+            <div id="noise-entities" class="scorecard-summary-row"></div>
+            <div class="data-card">
+              <div class="data-card-title">Interpretation rubric</div>
+              <ul class="method-list">
+                <li>KI above 8: useful candidate for scenario work.</li>
+                <li>Acceleration above 10: time-sensitive signal.</li>
+                <li>Multiple sources: less fragile than a single-channel spike.</li>
+                <li>Named entities: easier to validate with real evidence.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 0B: Visual Trend Network -->
+    <div id="panel-network" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app - Visual Trend Network</div>
+        <p>This app turns qualified signals into a relationship map. The goal is not a pretty graph; it is to expose adjacency, hidden bridges, impact timing, and candidate combinations for scenario building.</p>
+      </div>
+      <div class="app-shell">
+        <div class="app-topbar">
+          <div>
+            <div class="app-title">Trend Network Explorer</div>
+            <div class="app-subtitle">Click nodes to inspect strategic meaning and add useful combinations to the scenario canvas.</div>
+          </div>
+          <button class="secondary-btn" onclick="sendNetworkSelectionToScenario()">Use selected trend in Scenario Builder</button>
+        </div>
+        <div class="three-col-app">
+          <aside class="app-side">
+            <div class="form-label">Filters</div>
+            <label class="filter-row"><span>Megatrends</span><input type="checkbox" checked onchange="renderTrendNetwork()"></label>
+            <label class="filter-row"><span>Trends</span><input type="checkbox" checked onchange="renderTrendNetwork()"></label>
+            <label class="filter-row"><span>Signals</span><input type="checkbox" checked onchange="renderTrendNetwork()"></label>
+            <div class="data-card">
+              <div class="data-card-title">How to read it</div>
+              <div class="data-card-meta">Dense clusters reveal mainstream opportunity. Weak links between distant clusters are often the most useful starting point for breakthrough concepts.</div>
+            </div>
+          </aside>
+          <section class="app-main">
+            <div class="network-canvas" id="trend-network-canvas">
+              <svg id="trend-network-lines"></svg>
+            </div>
+          </section>
+          <aside class="app-side right">
+            <div class="form-label">Selected node</div>
+            <div class="data-card" id="network-node-detail">Select a node to inspect why it matters.</div>
+            <div class="data-card">
+              <div class="data-card-title">Bridge prompts</div>
+              <ul class="method-list" id="network-bridge-prompts"></ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 0C: Future Scenario Builder -->
+    <div id="panel-scenario" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app - Future Scenario Builder</div>
+        <p>This app composes a scenario from qualified trends and signals. It calculates impact, feasibility, synergy, risk, and produces a scenario brief that can be sent to the Semantic Collider or published into the Feed as a proposal candidate.</p>
+      </div>
+      <div class="app-shell">
+        <div class="app-topbar">
+          <div>
+            <div class="app-title">Future Scenario Builder</div>
+            <div class="app-subtitle">Select items from the palette. The canvas updates scores and generates a decision-ready scenario brief.</div>
+          </div>
+          <input id="scenario-name" type="text" value="My Future Scenario" oninput="renderScenarioBuilder()" />
+        </div>
+        <div class="scenario-workspace">
+          <aside class="app-side">
+            <div class="form-label">Signals and trends palette</div>
+            <div id="scenario-palette"></div>
+          </aside>
+          <section class="app-main">
+            <div class="scenario-canvas" id="scenario-canvas"></div>
+            <div class="chart-box" style="margin-top:1rem;">
+              <div class="data-card-title">Generated scenario brief</div>
+              <div id="scenario-brief-output" class="data-card-meta"></div>
+            </div>
+          </section>
+          <aside class="app-side right">
+            <div class="form-label">Scenario analysis</div>
+            <div id="scenario-analysis-panel"></div>
+            <div class="group-actions">
+              <button class="secondary-btn" onclick="clearScenarioCanvas()">Clear canvas</button>
+              <button class="secondary-btn" onclick="sendScenarioToCollider()">Send to Collider</button>
+              <button class="secondary-btn" onclick="publishScenarioToFeed()">Publish to Feed</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 1: Interactive Showcase -->
+    <div id="panel-showcase" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app 1 - Guided ideation workshop</div>
+        <p>This app teaches the complete KayrosLab method: start from noisy signals, build conceptual bridges, convert them into an initiative brief, stress-test the proposal, then publish the resulting measure to the Feed for community review.</p>
+      </div>
+      <div class="showcase-grid">
+        
+        <!-- Left Col: Strategic Challenges Selector -->
+        <div class="collider-setup-col">
+          <div class="glass-card">
+            <h2 class="card-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Strategic Sandbox Challenges
+            </h2>
+            <p class="card-desc">Select an enterprise-scale challenge to load a premium end-to-end strategic demonstration of KayrosLab's value proposition.</p>
+            
+            <div id="challenge-options-list">
+              <!-- Rendered Dynamically -->
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="card-title">Sequential Value Pipeline</h2>
+            <p class="card-desc">Expand each stage in the accordion pipeline sequentially to see how KayrosLab handles signals, constructs scenario canvases, audits concepts, and sparks breakthroughs.</p>
+            <div id="challenge-learning-card" class="learning-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Col: Accordion Pipeline Stages -->
+        <div class="pipeline-accordion">
+          
+          <!-- Stage 1: Noise Filter -->
+          <div class="accordion-item active" id="accordion-step-1">
+            <div class="accordion-header" onclick="toggleAccordion(1)">
+              <div class="accordion-title-area">
+                <div class="step-number">1</div>
+                <div class="step-name-meta">
+                  <span class="step-name">AI Noise Reduction & Signal Ingestion</span>
+                  <span class="step-meta">Ingests feeds, filters spam & redundancies, surfaces velocity signals</span>
+                </div>
+              </div>
+              <span class="accordion-chevron">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p class="card-desc">Ingesting local market reports, environmental registries, and consumer feed streams. Multi-layered AI filters surface 3 high-velocity trends from a sea of digital noise.</p>
+                <div class="learning-card" style="margin-bottom:0.75rem;">
+                  <strong>Pedagogical objective</strong>
+                  <span>Distinguish a usable signal from generic commentary. A retained signal must identify a constraint, a behavior shift, a measurable trigger, or a deployable mechanism.</span>
+                </div>
+                <div class="filter-grid" id="stage1-signals-grid">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 2: Trend Network -->
+          <div class="accordion-item" id="accordion-step-2">
+            <div class="accordion-header" onclick="toggleAccordion(2)">
+              <div class="accordion-title-area">
+                <div class="step-number">2</div>
+                <div class="step-name-meta">
+                  <span class="step-name">Visual Trend Networking</span>
+                  <span class="step-meta">Bridge distant strategic dimensions on our interactive conceptual map</span>
+                </div>
+              </div>
+              <span class="accordion-chevron">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p class="card-desc">Click two nodes on the dynamic network map below to establish a **conceptual bridge** and formulate a draft scenario brief.</p>
+                <div class="learning-card" style="margin-bottom:0.75rem;">
+                  <strong>What this teaches</strong>
+                  <span>The bridge is not a metaphor for decoration. It must explain how one domain's mechanism can reduce a real blocker in the target domain.</span>
+                </div>
+                <div class="trend-network-container">
+                  <svg width="400" height="200" class="network-svg" id="stage2-network-svg">
+                    <!-- Network Lines & Nodes rendered dynamically -->
+                  </svg>
+                  <div class="bridge-display" id="stage2-bridge-box">
+                    Select 2 nodes above to establish a strategic bridge
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 3: Scenario Canvas -->
+          <div class="accordion-item" id="accordion-step-3">
+            <div class="accordion-header" onclick="toggleAccordion(3)">
+              <div class="accordion-title-area">
+                <div class="step-number">3</div>
+                <div class="step-name-meta">
+                  <span class="step-name">Dynamic Scenario Canvas</span>
+                  <span class="step-meta">Calibrate urgency indicators and draft target initiative briefs</span>
+                </div>
+              </div>
+              <span class="accordion-chevron">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p class="card-desc">Configure the impact vector variables. Changing sliders computes strategic urgency indexes in real-time.</p>
+                <div class="rubric-grid" id="scenario-rubric-grid">
+                  <!-- Rendered dynamically -->
+                </div>
+                
+                <div class="canvas-grid">
+                  <div class="slider-group">
+                    <div class="slider-header">
+                      <span>Innovation Velocity</span>
+                      <span class="val" id="slide-vel-val">65%</span>
+                    </div>
+                    <input type="range" min="10" max="100" value="65" oninput="updateCanvasSlider('velocity', this.value)" />
+                  </div>
+                  
+                  <div class="slider-group">
+                    <div class="slider-header">
+                      <span>Market Disruptive Intensity</span>
+                      <span class="val" id="slide-int-val">80%</span>
+                    </div>
+                    <input type="range" min="10" max="100" value="80" oninput="updateCanvasSlider('intensity', this.value)" />
+                  </div>
+
+                  <div class="canvas-metrics">
+                    <div class="metric-box">
+                      <div class="metric-label">Plausibility Index</div>
+                      <div class="metric-value" id="canvas-plausibility">72%</div>
+                    </div>
+                    <div class="metric-box">
+                      <div class="metric-label">Urgency Score</div>
+                      <div class="metric-value" id="canvas-urgency">8.4 / 10</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="grid-column:1/-1;">
+                    <label class="form-label">Scenario Initiative Brief</label>
+                    <textarea id="stage3-brief-text" rows="3" readonly></textarea>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 4: adversarial Roundtable -->
+          <div class="accordion-item" id="accordion-step-4">
+            <div class="accordion-header" onclick="toggleAccordion(4)">
+              <div class="accordion-title-area">
+                <div class="step-number">4</div>
+                <div class="step-name-meta">
+                  <span class="step-name">Future Proofing AI Roundtable Debate</span>
+                  <span class="step-meta">adversarial agent debate auditing compliance, risk, and deployment speed</span>
+                </div>
+              </div>
+              <span class="accordion-chevron">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <p class="card-desc">Simulate an adversarial audit between four specialized AI personas evaluating compliance, scaling parameters, and key risks.</p>
+                <div class="learning-card" style="margin-bottom:0.75rem;">
+                  <strong>Audit standard</strong>
+                  <span>Each role must add a specific decision: assumption to validate, risk to mitigate, implementation constraint, or revised synthesis.</span>
+                </div>
+                <div class="roundtable-container">
+                  <div class="roundtable-chat" id="roundtable-log-box">
+                    [System] Standby. Click "Trigger AI Roundtable Audit" to animate debate.
+                  </div>
+                  <button class="btn-debate" onclick="runRoundtableDebate()" id="btn-trigger-roundtable">
+                    Trigger AI Roundtable Audit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 5: Semantic Collider -->
+          <div class="accordion-item" id="accordion-step-5">
+            <div class="accordion-header" onclick="toggleAccordion(5)">
+              <div class="accordion-title-area">
+                <div class="step-number">5</div>
+                <div class="step-name-meta">
+                  <span class="step-name">Bisociation Semantic Collider Sweet Spot</span>
+                  <span class="step-meta">Bisociates the brief with analogical domains to spark breakthroughs</span>
+                </div>
+              </div>
+              <span class="accordion-chevron">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-body">
+                <div class="collision-preview-grid">
+                  <div class="collision-panel-left">
+                    <p class="card-desc">The semantic collider bisociates the audited brief against a distant analogical domain, calculating conceptual drift distance and generating the final breakthrough proposal.</p>
+                    <div class="evidence-list" id="collision-evidence-list">
+                      <!-- Rendered dynamically -->
+                    </div>
+                    
+                    <div class="arena-box">
+                      <div class="colliding-node node-left" id="node-preview-left"></div>
+                      <div class="colliding-node node-right" id="node-preview-right"></div>
+                      <div class="progress-text" id="node-preview-text">READY</div>
+                    </div>
+
+                    <button class="btn-action" onclick="runShowcaseCollision()" id="btn-trigger-preview-collision">
+                      Trigger Analogical Collision
+                    </button>
+                  </div>
+
+                  <div class="collider-results-col">
+                    <div class="results-card">
+                      <div>
+                        <h4 style="font-size:0.85rem; font-weight:700; color:var(--primary); margin-bottom:0.25rem;">Resulting Breakthrough</h4>
+                        <div class="sweet-detail-card" id="showcase-result-box">
+                          Click "Trigger Analogical Collision" on the left to activate Arthur Koestler's bisociation framework and plot the resulting proposal in the glowing novelty quadrant.
+                        </div>
+                      </div>
+                      <button class="btn-action" id="btn-publish-showcase-result" style="display:none; margin-top:0.75rem;" onclick="publishShowcaseToFeed()">
+                        Publish Breakthrough to Live Feed
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 2: Standalone Semantic Collider Canvas -->
+    <div id="panel-collider" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app 2 - Semantic collider sandbox</div>
+        <p>This app is the free-form version of the workshop collider. It teaches analogical reasoning by forcing a strategic brief through a distant expert framework, then explains why the generated output is novel, feasible, and worth testing.</p>
+      </div>
+      <div class="collider-card-full">
+        
+        <!-- Left: Setup Sandbox -->
+        <div class="collider-setup-col">
+          <div class="glass-card">
+            <h2 class="card-title">Standalone Collider Sandbox</h2>
+            <p class="card-desc">Write your own corporate strategy or industrial initiative, select a specialized domain framework, and collide them to produce highly novel proposals.</p>
+            <div class="learning-card" style="margin-bottom:1rem;">
+              <strong>Minimum input quality</strong>
+              <span>Use one concrete population, one constraint, and one measurable outcome. Weak prompts generate generic concepts; precise constraints create useful collisions.</span>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Core Strategic Brief / Challenge</label>
+              <textarea id="custom-brief-input" rows="3" placeholder="e.g. Optimize localized clean water distribution systems in dense metropolitan sectors with high regulatory blocks..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Target Analogy Framework</label>
+              <select id="custom-persona-select" onchange="updateCustomPersonaMeta()">
+                <option value="marine_biologist">Marine Symbiotic Biologist (Symbiotic mesh exchanges)</option>
+                <option value="origami_master">Origami Structural Architect (Kinetic collapsing folds)</option>
+                <option value="hft_quant">HFT Quantitative Arbitrage Manager (Order-book liquidity)</option>
+                <option value="chef">Gastronomy Expert / Master Chef (Molecular emulsion layering)</option>
+                <option value="volcanologist">Volcanologist / Geothermal Expert (Controlled thermal-chimney pressure release)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">BISO-PARAMS</label>
+              <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-gray);">
+                <span>Conceptual Vector Distance (Drift)</span>
+                <span style="font-weight:700; color:var(--primary);" id="vector-drift-val">85%</span>
+              </div>
+              <input type="range" min="30" max="100" value="85" oninput="document.getElementById('vector-drift-val').textContent = this.value + '%'" />
+            </div>
+
+            <button class="btn-action" style="width:100%;" onclick="runSandboxCollision()" id="btn-sandbox-collide">
+              Ignite Bisociation Collision
+            </button>
+          </div>
+          <div class="glass-card">
+            <h3 class="card-title">Output contract</h3>
+            <ul class="method-list">
+              <li>Restate the operating constraint before inventing a solution.</li>
+              <li>Name the analogical mechanism transferred from the selected domain.</li>
+              <li>Plot novelty and feasibility separately so unrealistic ideas are visible.</li>
+              <li>Publish only concepts with a testable first experiment.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Results Matrix -->
+        <div class="collider-results-col">
+          <div class="glass-card" style="height:100%;">
+            <div class="chart-panel-row">
+              
+              <!-- Scatter Plot -->
+              <div>
+                <h4 style="font-size:0.8rem; font-weight:700; margin-bottom:0.75rem; text-transform:uppercase; color:var(--text-gray);">Novelty-Feasibility Plot</h4>
+                <div class="plot-arena" id="sandbox-plot-arena">
+                  <div class="axis-line-h"></div>
+                  <div class="axis-line-v"></div>
+                  <div class="hivemind-zone"><span>SWEET SPOT</span></div>
+                  <div class="quadrant-label quad-top-left">Pure Hype</div>
+                  <div class="quadrant-label quad-top-right">Breakthrough</div>
+                  <div class="quadrant-label quad-bottom-left">Incremental</div>
+                  <div class="quadrant-label quad-bottom-right">Feasible</div>
+                  
+                  <div class="axis-caption-x">Novelty -&gt;</div>
+                  <div class="axis-caption-y">Feasibility -&gt;</div>
+                  
+                  <!-- Plot Dots Rendered Dynamically -->
+                </div>
+              </div>
+
+              <!-- Collision Logs & Outputs -->
+              <div style="display:flex; flex-direction:column; justify-content:space-between; gap:1rem;">
+                <div>
+                  <h4 style="font-size:0.8rem; font-weight:700; margin-bottom:0.5rem; text-transform:uppercase; color:var(--text-gray);">Collision Arena</h4>
+                  <div class="console-box" id="sandbox-console-box">
+                    [System] Standby. Configure settings on the left and trigger the collision.
+                  </div>
+                </div>
+
+                <div class="sweet-detail-card" id="sandbox-result-box" style="min-height:90px;">
+                  No breakthrough plotted yet. Trigger the collision to compute conceptual drift metrics.
+                </div>
+
+                <button class="btn-action" id="btn-sandbox-publish" style="display:none;" onclick="publishSandboxToFeed()">
+                  Publish Breakthrough to Feed
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 3: Community Feed & Leaderboard -->
+    <div id="panel-feed" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app 3 - Feed, scoring and community validation</div>
+        <p>This app is the connector. Workshop outputs and Collider outputs become proposal cards with rationale, scorecards, next experiments, support votes, and readiness signals. It mirrors the public KayrosLab Feed scope: propose, evaluate, enrich, compare, and move toward field deployment.</p>
+      </div>
+      <div class="feed-container">
+        
+        <!-- Live Proposals Feed -->
+        <div class="feed-list">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <h2 class="card-title">Publish: Collaborative Innovation Feed</h2>
+            <span style="font-size:0.75rem; color:var(--text-gray);" id="feed-proposal-count">3 Proposals Loaded</span>
+          </div>
+
+          <div class="feed-toolbar">
+            <div class="learning-card">
+              <strong>Review protocol</strong>
+              <span>Read the proposal, inspect the evidence, check the scorecard, then support only if the next experiment is specific enough to execute.</span>
+            </div>
+            <button class="secondary-btn" onclick="switchTab('showcase')">Create a guided proposal</button>
+          </div>
+
+          <div id="feed-proposals-root">
+            <!-- Dynamic Proposal Cards -->
+          </div>
+        </div>
+
+        <!-- Right Side: Leaderboard & User Rank -->
+        <div class="collider-setup-col">
+          <div class="glass-card">
+            <h3 class="card-title">How tools connect</h3>
+            <ul class="method-list">
+              <li>Interactive Showcase teaches the full pipeline and publishes validated examples.</li>
+              <li>Semantic Collider creates custom breakthrough candidates from user briefs.</li>
+              <li>Feed preserves proposals, scores, support state, and deployment evidence locally.</li>
+              <li>ROI estimates where the highest-value initiatives justify a structured review.</li>
+            </ul>
+          </div>
+          <div class="glass-card">
+            <h3 class="card-title">Innovation Leaderboard</h3>
+            <p class="card-desc">Strategic contributors ranked by conceptual depth, support velocity, and badges earned.</p>
+            
+            <div class="leaderboard-list">
+              <div class="leader-row">
+                <div class="leader-left">
+                  <span class="leader-rank">#1</span>
+                  <div>
+                    <span style="font-size:0.8rem; font-weight:700;">Geoff</span>
+                    <p style="font-size:0.65rem; color:var(--text-gray);">Strategic Architect</p>
+                  </div>
+                </div>
+                <span class="user-rep">2,500 XP</span>
+              </div>
+
+              <div class="leader-row">
+                <div class="leader-left">
+                  <span class="leader-rank">#2</span>
+                  <div>
+                    <span style="font-size:0.8rem; font-weight:700;">Sarah Chen</span>
+                    <p style="font-size:0.65rem; color:var(--text-gray);">HFT Quant Specialist</p>
+                  </div>
+                </div>
+                <span class="user-rep">1,820 XP</span>
+              </div>
+
+              <div class="leader-row">
+                <div class="leader-left">
+                  <span class="leader-rank">#3</span>
+                  <div>
+                    <span style="font-size:0.8rem; font-weight:700;">Jean-Pierre</span>
+                    <p style="font-size:0.65rem; color:var(--text-gray);">Community Mesh Coordinator</p>
+                  </div>
+                </div>
+                <span class="user-rep">1,210 XP</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="card-title">Active Badges</h3>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.75rem;">
+              <span class="mini-badge amber">Pioneer Elite</span>
+              <span class="mini-badge teal">Collaborator Master</span>
+              <span class="mini-badge" style="color:#a855f7; background:rgba(168,85,247,0.1); border-color:rgba(168,85,247,0.2);">Bisociation Champion</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 4: Dynamic ROI Strategic Calculator -->
+    <div id="panel-roi" class="tab-panel">
+      <div class="tool-brief">
+        <div class="tool-brief-title">Standalone app 4 - ROI and deployment framing</div>
+        <p>This app translates the learning pipeline into an executive decision frame. It compares cost, cycle time, and review capacity, then documents assumptions so the result is pedagogical instead of a black-box marketing number.</p>
+      </div>
+      <div class="roi-grid">
+        
+        <!-- Cost Benefit Calculator -->
+        <div class="glass-card">
+          <h2 class="card-title">Dynamic ROI Calculator</h2>
+          <p class="card-desc">Compare the costs and timelines of traditional corporate consulting firms against KayrosLab's automated AI-assisted ideation engine.</p>
+          
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-gray);">
+              <span>Initiative Scale (Number of Challenges)</span>
+              <span style="font-weight:700; color:var(--primary);" id="roi-challenges-val">5 Challenges</span>
+            </div>
+            <input type="range" min="1" max="25" value="5" oninput="updateRoiCalculations(this.value)" />
+          </div>
+
+          <div class="roi-stats-row">
+            <div class="roi-stat-card">
+              <div class="roi-stat-num" id="roi-consulting-cost">$120,000</div>
+              <div class="roi-stat-desc">Traditional Agency Cost</div>
+            </div>
+            <div class="roi-stat-card" style="border-color:var(--primary); background:rgba(244,63,94,0.03);">
+              <div class="roi-stat-num" id="roi-kayros-cost">$18,000</div>
+              <div class="roi-stat-desc">KayrosLab Cost</div>
+            </div>
+            <div class="roi-stat-card">
+              <div class="roi-stat-num" id="roi-consulting-time">20 Weeks</div>
+              <div class="roi-stat-desc">Traditional Timeline</div>
+            </div>
+            <div class="roi-stat-card" style="border-color:var(--accent); background:rgba(245,158,11,0.03);">
+              <div class="roi-stat-num" id="roi-kayros-time">4 Hours</div>
+              <div class="roi-stat-desc">KayrosLab Timeline</div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem; background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2); padding:1rem; border-radius:0.5rem; font-size:0.8rem; line-height:1.5; color:#10b981; text-align:center;">
+            <strong>Estimated Total Savings: <span id="roi-savings-pct">85%</span> Budget Reduction and <span id="roi-savings-time">99%</span> Acceleration</strong>
+          </div>
+          <div class="rubric-grid">
+            <div class="rubric-cell"><b>Traditional baseline</b>Discovery, interviews, synthesis, workshops, and recommendation deck per challenge.</div>
+            <div class="rubric-cell"><b>KayrosLab baseline</b>Structured signal ingestion, guided synthesis, offline scoring, and Feed publication.</div>
+            <div class="rubric-cell"><b>What is excluded</b>Procurement, legal approval, field implementation cost, and production engineering.</div>
+            <div class="rubric-cell"><b>Decision use</b>Use this to prioritize which proposals deserve a real pilot budget.</div>
+          </div>
+        </div>
+
+        <!-- Dynamic Lead Capture Booking Form -->
+        <div class="glass-card">
+          <h2 class="card-title">Schedule an Enterprise Consultation</h2>
+          <p class="card-desc">Connect with our strategic team to integrate the KayrosLab suite inside your innovation department.</p>
+          
+          <form id="roi-booking-form" onsubmit="handleBookingSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="booking-name" required placeholder="e.g. Geoffrey" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Corporate Email</label>
+              <input type="text" id="booking-email" required placeholder="e.g. geoff@kayroslab.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Department / Strategic Focus</label>
+              <select id="booking-focus">
+                <option>Corporate Innovation & R&D</option>
+                <option>ESG & Clean Energy Infrastructure</option>
+                <option>HR & Vocational Workforce Retraining</option>
+                <option>Healthcare & Decentralized mesh Operations</option>
+              </select>
+            </div>
+
+            <button class="btn-action" style="width:100%; margin-top:0.75rem;" type="submit">
+              Schedule Strategic Review
+            </button>
+          </form>
+          
+          <div id="booking-success-box" style="display:none; background:rgba(16,185,129,0.1); border:1px solid #10b981; border-radius:0.5rem; padding:1rem; text-align:center; font-size:0.8rem; color:#10b981;">
+            Success: Consultation request registered successfully! A KayrosLab strategist will contact you within 24 hours.
+            <button class="secondary-btn" style="margin-top:0.75rem;" onclick="openDeliveryModal()">Open delivery proof</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Delivery Proof Modal -->
+  <div class="delivery-modal" id="delivery-proof-modal">
+    <div class="delivery-modal-card">
+      <div class="delivery-modal-header">
+        <div>
+          <h2 class="card-title">Final delivery proof</h2>
+          <p class="card-desc">The process is complete. Generate the PDF dossier and send the delivery proof by email.</p>
+        </div>
+        <div class="delivery-modal-actions">
+          <select id="deliverable-proposal-select" onchange="renderDeliverablePreview()"></select>
+          <button class="secondary-btn" onclick="generateIdeaPdf()">Generate PDF</button>
+          <a class="secondary-btn" id="delivery-mailto-link" href="#">Send delivery proof</a>
+          <button class="secondary-btn" onclick="closeDeliveryModal()">Close</button>
+        </div>
+      </div>
+      <section class="deliverable-preview pdf-page" id="pdf-deliverable-content">
+        <!-- Rendered dynamically -->
+      </section>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popup -->
+  <div class="toast-popup" id="app-toast-popup">
+    <span>Publish:</span>
+    <span id="app-toast-text">Breakthrough saved successfully!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>(c) 2026 KayrosLab &middot; Standalone Enterprise Suite. Made for Arthur Koestler's strategic descendants.</p>
+    </div>
+  </footer>
+
+  <script>
+    // -------------------------------------------------------------
+    // LOCAL STATIC DATASETS
+    // -------------------------------------------------------------
+    const PRELOADED_CHALLENGES = [
+      {
+        id: "challenge-energy",
+        category: "Ecology & Energy",
+        title: "Paris Residential Energy Autonomy",
+        problem: "Multi-family residential blocks in dense cities face extreme regulatory delays and space constraints for traditional solar installations.",
+        signals: [
+          { text: "Paris municipal zoning delays roof space approvals.", type: "filtered", reason: "Spam / Duplicate" },
+          { text: "Miura paper folds compress large flat dimensions into compact structural sails.", type: "pristine", label: "Structural Mechanics" },
+          { text: "Vertical residential building facades capture 40% unused wind-flow corridors.", type: "pristine", label: "Aeolian Corridors" },
+          { text: "Traditional solar panel setups are expensive.", type: "filtered", reason: "Redundant Noise" },
+          { text: "Co-owners veto installations due to aesthetic concerns.", type: "pristine", label: "Social Blocks" },
+          { text: "Solar sails block clean window corridors.", type: "filtered", reason: "Irrelevant Noise" }
+        ],
+        nodes: [
+          { id: "A", label: "Zoning Vetoes", x: 100, y: 50 },
+          { id: "B", label: "Miura Origami Folds", x: 300, y: 50 },
+          { id: "C", label: "Facade Wind Corridors", x: 200, y: 150 }
+        ],
+        bridgeOptions: [
+          { nodes: ["A", "B"], text: "Folding kinetics compressed into aesthetic resident-approved assemblies bypassing co-ownership locks." },
+          { nodes: ["B", "C"], text: "Origami-collapsible carbon Sails mounted on facade wind tunnels capturing dynamic hybrid energy." }
+        ],
+        briefTemplate: "Deploy local clean energy utilizing multi-angle, vertically collapsible solar folds modeled after Miura origami structures to bypass traditional residential co-ownership roof space voting locks.",
+        persona: "Origami Structural Architect",
+        mechanism: "Miura-fold paper mechanics applied to carbon-fiber photovoltaic sails",
+        sweetSpotProposal: {
+          id: "prop-energy",
+          title: "Miura Origami Kinetic Rooftop Solar Arrays",
+          description: "Localized, clean-energy supply utilizing multi-angle vertically collapsible solar folds modeled after Miura origami structures to bypass traditional residential co-ownership roof space voting locks.",
+          brief: "Design residential rooftop kinetic installations folding automatically during high-wind storms and maximizing active collection surfaces.",
+          novelty: 9.2,
+          feasibility: 8.4,
+          impact: 8.8,
+          x: 82, // mapped coordinate on 100x100 scatter plot
+          y: 78
+        }
+      },
+      {
+        id: "challenge-reskill",
+        category: "Employment & Economy",
+        title: "Regional Vocational Reskilling Pool",
+        problem: "Traditional vocational retraining programs take 6-12 months to respond, failing displaced industrial workers while critical talent deficits grow.",
+        signals: [
+          { text: "Local vocational institutions update registries annually.", type: "filtered", reason: "Noise" },
+          { text: "Asynchronous micro-apprenticeships match talent needs on short notice.", type: "pristine", label: "Modular Reskilling" },
+          { text: "High-frequency stock order-books clear transactions in milliseconds.", type: "pristine", label: "Liquidity Exchange" },
+          { text: "Worker training is beneficial.", type: "filtered", reason: "Spam" },
+          { text: "Regional manufacturer announces mass lay-off inside industrial sector.", type: "pristine", label: "Crisis Signal" },
+          { text: "Displaced workers prefer working locally.", type: "filtered", reason: "Redundant" }
+        ],
+        nodes: [
+          { id: "A", label: "Modular Apprenticeships", x: 100, y: 50 },
+          { id: "B", label: "Stock Order-Books", x: 300, y: 50 },
+          { id: "C", label: "Industrial Layoffs", x: 200, y: 150 }
+        ],
+        bridgeOptions: [
+          { nodes: ["A", "B"], text: "Skills portfolios traded like order-book orders, pairing modular industrial workers with micro-retraining tasks instantly." },
+          { nodes: ["B", "C"], text: "A matching engine matching local company talent deficits instantly with asynchronous modular reskilling blocks." }
+        ],
+        briefTemplate: "A matching engine modeled after financial high-frequency order-books that pairs local company talent deficits instantly with asynchronous modular reskilling blocks for displaced industrial workers.",
+        persona: "HFT Quantitative Arbitrage Manager",
+        mechanism: "Microsecond queue matching buffers mapped onto localized skills liquidity catalogs",
+        sweetSpotProposal: {
+          id: "prop-reskill",
+          title: "High-Frequency Skills Arbitrage & Reskilling Exchange",
+          description: "A matching engine modeled after financial high-frequency order-books that pairs local company talent deficits instantly with asynchronous modular reskilling blocks for displaced industrial workers.",
+          brief: "A live matching database handling local talent profiles as order-books, automatically suggesting short micro-apprenticeships to preserve regional economic output.",
+          novelty: 9.0,
+          feasibility: 8.6,
+          impact: 9.4,
+          x: 75,
+          y: 84
+        }
+      },
+      {
+        id: "challenge-social",
+        category: "Health & Social",
+        title: "Decentralized Community Social Care",
+        problem: "Densely congested urban quarters suffer from extreme isolated elder health risks and emergency support response latency.",
+        signals: [
+          { text: "Seniors prefer privacy over telemetry trackers.", type: "pristine", label: "Privacy Core" },
+          { text: "Bioluminescent signaling helps cells share distress under high stress.", type: "pristine", label: "Bioluminescent Network" },
+          { text: "Local social care agencies suffer 40% funding cut.", type: "filtered", reason: "Systemic Noise" },
+          { text: "Neighbors verify local wellbeing through passive exchanges.", type: "pristine", label: "Community Mesh" },
+          { text: "Medical records leakage is highly dangerous.", type: "filtered", reason: "Noise" },
+          { text: "Elderly isolated care is critical.", type: "filtered", reason: "Spam" }
+        ],
+        nodes: [
+          { id: "A", label: "Privacy Trackers", x: 100, y: 50 },
+          { id: "B", label: "Bioluminescent Signals", x: 300, y: 50 },
+          { id: "C", label: "Community Mesh Network", x: 200, y: 150 }
+        ],
+        bridgeOptions: [
+          { nodes: ["A", "B"], text: "Passive community social care mesh network where neighbors passively verify safe wellness statuses." },
+          { nodes: ["B", "C"], text: "Decentralized check-in networks modeled after marine bioluminescent distress signaling." }
+        ],
+        briefTemplate: "A decentralized, privacy-preserving community social care mesh network where neighbors passively verify safe wellness statuses and trade home visitations using zero-knowledge cryptography.",
+        persona: "Marine Symbiotic Biologist",
+        mechanism: "Distress signaling algorithms modeled after bioluminescent cell exchanges under extreme deep-sea metabolic stress",
+        sweetSpotProposal: {
+          id: "prop-social",
+          title: "Bioluminescent Peer Social Care Networks",
+          description: "A decentralized, privacy-preserving community social care mesh network where neighbors passively verify safe wellness statuses and trade home visitations using zero-knowledge cryptography.",
+          brief: "Create an offline mesh network monitoring neighborhood wellness signals without leaking medical files.",
+          novelty: 9.4,
+          feasibility: 7.2,
+          impact: 8.9,
+          x: 88,
+          y: 65
+        }
+      }
+    ];
+
+    const SIGNAL_TRENDS = [
+      {
+        id: "second-life-batteries",
+        name: "Second-life batteries in Europe",
+        ki: 8.7,
+        velocity: 45.2,
+        acceleration: 12.3,
+        sentiment: "positive",
+        decision: "Promote. The signal combines policy pressure, infrastructure need, named entities, and a near-term reuse mechanism.",
+        volumeHistory: [50,60,55,70,80,95,110,130,155,180,200,230,250,270,300,320,310,340,360,390,420,450,480,500,530,560,600,640,680,720],
+        sourceBreakdown: [{ name:"News", value:120 },{ name:"Social", value:340 },{ name:"LinkedIn", value:45 },{ name:"GDELT", value:78 }],
+        relatedEntities: ["Skoda", "ADS-TEC", "Lithium-ion", "EU Batteries Regulation"],
+        filters: [
+          ["Duplicate press releases", "Removed: repeated investment announcements with no new deployment data."],
+          ["Actionable constraint", "Kept: grid storage and recycling constraints create a concrete use case."],
+          ["Time horizon", "Kept: commercial pilots are plausible within 0-5 years."]
+        ]
+      },
+      {
+        id: "wireless-roads",
+        name: "Wireless charging roads",
+        ki: 6.2,
+        velocity: 30.1,
+        acceleration: 5.4,
+        sentiment: "neutral",
+        decision: "Hold. Technically relevant, but infrastructure cost and public procurement cycles require stronger evidence before scenario promotion.",
+        volumeHistory: [20,22,25,28,30,35,40,42,45,48,50,55,60,65,70,72,75,80,82,85,88,90,95,98,100,105,110,115,118,120],
+        sourceBreakdown: [{ name:"News", value:80 },{ name:"Social", value:120 },{ name:"LinkedIn", value:20 },{ name:"GDELT", value:30 }],
+        relatedEntities: ["EV infrastructure", "Municipal roads", "Public procurement"],
+        filters: [
+          ["Demo hype", "Removed: lab demonstrations without deployment economics."],
+          ["Infrastructure friction", "Kept: long permitting and roadwork cycles are a real blocker."],
+          ["Adoption uncertainty", "Flagged: vehicle compatibility remains fragmented."]
+        ]
+      },
+      {
+        id: "ai-energy-storage",
+        name: "AI-driven energy storage",
+        ki: 9.1,
+        velocity: 60.3,
+        acceleration: 18.7,
+        sentiment: "positive",
+        decision: "Promote. Strong acceleration, cross-source validation, and clear link to grid balancing and local autonomy.",
+        volumeHistory: [100,120,150,180,220,270,330,400,480,570,670,780,900,1040,1190,1350,1520,1700,1890,2090,2300,2520,2750,2990,3240,3500,3770,4050,4340,4640],
+        sourceBreakdown: [{ name:"News", value:400 },{ name:"Social", value:800 },{ name:"LinkedIn", value:200 },{ name:"GDELT", value:150 }],
+        relatedEntities: ["DeepMind", "Tesla", "GridBeyond", "Demand response"],
+        filters: [
+          ["Vendor marketing", "Removed: generic AI claims without grid metrics."],
+          ["Validated use case", "Kept: peak shaving and storage optimization can be measured."],
+          ["Entity concentration", "Kept: multiple named actors indicate market movement."]
+        ]
+      }
+    ];
+
+    const NETWORK_NODES = [
+      { id: "Fluent Spaces", group: "urban", type: "Megatrend", x: 24, y: 24, impact: 7.4, time: "5-10 years", desc: "Spaces that change use depending on work, housing, care, or energy needs." },
+      { id: "New Living Concepts", group: "urban", type: "Trend", x: 43, y: 18, impact: 7.8, time: "0-5 years", desc: "Hybrid housing models combining shared services, modular layouts, and community infrastructure." },
+      { id: "Augmented & Mixed Reality", group: "digital", type: "Trend", x: 70, y: 20, impact: 6.7, time: "0-5 years", desc: "Interfaces that make complex systems visible for training, planning, and maintenance." },
+      { id: "Urbanisation", group: "urban", type: "Megatrend", x: 31, y: 48, impact: 8.8, time: "10+ years", desc: "Long-term density pressure on housing, energy, transport, and care systems." },
+      { id: "Virtual Reality", group: "digital", type: "Signal", x: 82, y: 39, impact: 5.9, time: "0-5 years", desc: "Immersive simulation environments for scenario rehearsal and training." },
+      { id: "Cityside", group: "urban", type: "Signal Cluster", x: 49, y: 57, impact: 7.1, time: "0-5 years", desc: "Local urban services moving closer to residents and building-level infrastructure." },
+      { id: "Collaboration", group: "social", type: "Trend", x: 70, y: 65, impact: 8.1, time: "0-5 years", desc: "Distributed human groups coordinating with AI tools and shared evidence." },
+      { id: "Decentralized Energy", group: "energy", type: "Trend", x: 36, y: 77, impact: 8.9, time: "0-5 years", desc: "Local energy generation, storage, and balancing close to demand." },
+      { id: "Circular Economy", group: "energy", type: "Megatrend", x: 18, y: 73, impact: 8.0, time: "5-10 years", desc: "Designing reuse, repair, and second-life loops into economic systems." },
+      { id: "AI Governance", group: "digital", type: "Trend", x: 82, y: 78, impact: 8.3, time: "0-5 years", desc: "Rules, controls, and auditability for AI-assisted decisions." }
+    ];
+
+    const NETWORK_LINKS = [
+      ["Fluent Spaces", "New Living Concepts"], ["Fluent Spaces", "Cityside"], ["New Living Concepts", "Urbanisation"],
+      ["Augmented & Mixed Reality", "Virtual Reality"], ["Virtual Reality", "Collaboration"], ["Urbanisation", "Cityside"],
+      ["Cityside", "Decentralized Energy"], ["Collaboration", "AI Governance"], ["Decentralized Energy", "Circular Economy"],
+      ["AI Governance", "Augmented & Mixed Reality"], ["Circular Economy", "Fluent Spaces"], ["Collaboration", "Cityside"]
+    ];
+
+    const NETWORK_COLORS = { urban: "#3a7bd5", digital: "#4f9e7a", energy: "#b58b4a", social: "#a05c9e" };
+
+    const SCENARIO_ITEMS = [
+      { id: "p1", label: "AI-driven energy storage", type: "trend", impact: 8.5, feasibility: 7.2, color: "#3b82f6" },
+      { id: "p2", label: "Decentralized energy grids", type: "trend", impact: 7.8, feasibility: 6.5, color: "#8b5cf6" },
+      { id: "p3", label: "Second-life batteries", type: "trend", impact: 6.9, feasibility: 8.1, color: "#10b981" },
+      { id: "p4", label: "Wireless charging roads", type: "trend", impact: 7.2, feasibility: 5.4, color: "#f59e0b" },
+      { id: "p5", label: "Carbon credit tokenisation", type: "signal", impact: 5.8, feasibility: 6.0, color: "#2C3E7D" },
+      { id: "p6", label: "AI urban planning", type: "signal", impact: 8.1, feasibility: 7.8, color: "#06b6d4" },
+      { id: "p7", label: "Circular manufacturing", type: "signal", impact: 6.4, feasibility: 7.5, color: "#f97316" },
+      { id: "p8", label: "Smart micro-grids", type: "signal", impact: 7.5, feasibility: 8.0, color: "#a3e635" },
+      { id: "p9", label: "Vertical urban farming", type: "trend", impact: 6.2, feasibility: 6.8, color: "#3fc9b8" },
+      { id: "p10", label: "Digital twin cities", type: "signal", impact: 8.8, feasibility: 5.9, color: "#38bdf8" }
+    ];
+
+    let activeSignalId = "second-life-batteries";
+    let activeNetworkNodeId = "Decentralized Energy";
+    let scenarioCanvas = ["p1", "p2", "p8"];
+
+    // Initial Live Proposals Feed loaded in localStorage Mock Database
+    let liveProposals = [];
+    const storedProps = localStorage.getItem("kayros_standalone_proposals");
+    if (storedProps) {
+      liveProposals = JSON.parse(storedProps);
+    } else {
+      // Seed with initial proposals matching PRELOADED_CHALLENGES
+      liveProposals = PRELOADED_CHALLENGES.map(ch => ({
+        id: ch.sweetSpotProposal.id,
+        title: ch.sweetSpotProposal.title,
+        description: ch.sweetSpotProposal.description,
+        brief: ch.sweetSpotProposal.brief,
+        author: "Geoff",
+        category: ch.category,
+        novelty: ch.sweetSpotProposal.novelty,
+        feasibility: ch.sweetSpotProposal.feasibility,
+        impact: ch.sweetSpotProposal.impact,
+        supports: Math.floor(Math.random() * 25) + 15,
+        supportedByUser: false
+      }));
+      localStorage.setItem("kayros_standalone_proposals", JSON.stringify(liveProposals));
+    }
+
+    // Active Setup State
+    let activeChallengeIndex = 0;
+    let selectedShowcaseNodes = [];
+    let canvasSliderVals = { velocity: 65, intensity: 80 };
+    let currentDebateIndex = 0;
+    let debateInterval = null;
+    
+    // Sandbox State
+    let sandboxDots = [
+      { id: "dot-seed-1", title: "Origami Rooftop Sails", x: 82, y: 78, novelty: 9.2, feasibility: 8.4 },
+      { id: "dot-seed-2", title: "HF Skills Exchange", x: 75, y: 84, novelty: 9.0, feasibility: 8.6 },
+      { id: "dot-seed-3", title: "Bioluminescent mesh Care", x: 88, y: 65, novelty: 9.4, feasibility: 7.2 }
+    ];
+    let sandboxActiveDotIndex = 0;
+    let generatedSandboxProposal = null;
+
+    const GROUP_STORAGE_KEY = "kayros_standalone_working_groups";
+    let workingGroups = JSON.parse(localStorage.getItem(GROUP_STORAGE_KEY) || "{}");
+
+    function saveWorkingGroups() {
+      localStorage.setItem(GROUP_STORAGE_KEY, JSON.stringify(workingGroups));
+    }
+
+    function createDefaultWorkingGroup(prop) {
+      const detail = getProposalDetails(prop);
+      return {
+        name: `${prop.title} Working Group`,
+        cadence: "45-minute weekly field review",
+        aiLoop: "AI prepares synthesis, humans validate assumptions, Feed records decisions.",
+        members: [
+          { role: "Project owner", name: prop.author || "Geoff", contribution: "Keeps the proposal coherent and decides what moves to pilot." },
+          { role: "Field validator", name: "Open seat", contribution: "Tests assumptions with affected users or operators." },
+          { role: "Critical reviewer", name: "Open seat", contribution: "Challenges evidence quality, feasibility, ethics, and incentives." }
+        ],
+        tasks: [
+          { text: `Validate the core problem with 3 target stakeholders.`, done: false },
+          { text: `Convert the first experiment into a dated pilot checklist: ${detail.experiment}`, done: false },
+          { text: "Ask the AI tools to summarize objections after human feedback is entered.", done: false }
+        ],
+        comments: [
+          { author: "AI facilitator", text: "Initial synthesis ready. Human validation is required before treating this as a pilot candidate." }
+        ],
+        neededRoles: ["domain expert", "affected user", "implementation partner"]
+      };
+    }
+
+    function getWorkingGroup(prop) {
+      if (!workingGroups[prop.id]) {
+        workingGroups[prop.id] = createDefaultWorkingGroup(prop);
+        saveWorkingGroups();
+      }
+      return workingGroups[prop.id];
+    }
+
+    function selectedSignal() {
+      return SIGNAL_TRENDS.find(t => t.id === activeSignalId) || SIGNAL_TRENDS[0];
+    }
+
+    function renderNoiseReduction() {
+      const trend = selectedSignal();
+      document.getElementById("noise-selected-ki").textContent = `Kayroslab Index ${trend.ki}`;
+      document.getElementById("noise-chart-title").textContent = `${trend.name} &middot; 30-day volume`;
+      document.getElementById("noise-sentiment").textContent = trend.sentiment;
+
+      document.getElementById("noise-trend-list").innerHTML = SIGNAL_TRENDS.map(t => `
+        <div class="data-card ${t.id === activeSignalId ? 'active' : ''}" onclick="activeSignalId='${t.id}'; renderNoiseReduction();">
+          <div class="data-card-title"><span>${t.name}</span><span class="mini-badge">KI ${t.ki}</span></div>
+          <div class="data-card-meta">Velocity ${t.velocity} &middot; Acceleration ${t.acceleration > 0 ? '+' : ''}${t.acceleration} &middot; ${t.sentiment}</div>
+        </div>
+      `).join("");
+
+      const maxVolume = Math.max(...trend.volumeHistory);
+      document.getElementById("noise-volume-chart").innerHTML = trend.volumeHistory.map(v => `
+        <div class="bar" title="${v}" style="height:${Math.max(6, (v / maxVolume) * 100)}%;"></div>
+      `).join("");
+
+      const maxSource = Math.max(...trend.sourceBreakdown.map(s => s.value));
+      document.getElementById("noise-source-breakdown").innerHTML = trend.sourceBreakdown.map(s => `
+        <div class="source-row"><span>${s.name}</span><div class="source-meter"><span style="width:${(s.value / maxSource) * 100}%"></span></div><strong>${s.value}</strong></div>
+      `).join("");
+
+      document.getElementById("noise-filter-decisions").innerHTML = trend.filters.map(([label, desc]) => `
+        <div class="source-row"><span><strong style="color:white;">${label}</strong><br>${desc}</span></div>
+      `).join("");
+
+      document.getElementById("noise-entities").innerHTML = trend.relatedEntities.map(e => `<span class="mini-badge">${e}</span>`).join("");
+      document.getElementById("noise-decision-output").innerHTML = `
+        <strong style="color:white;">Decision:</strong> ${trend.decision}<br><br>
+        <strong style="color:white;">Next step:</strong> if promoted, the signal becomes a node or bridge candidate in the Visual Trend Network.
+      `;
+    }
+
+    function promoteNoiseSignal() {
+      const trend = selectedSignal();
+      const mapped = {
+        id: `promoted-${trend.id}`,
+        label: trend.name,
+        type: "signal",
+        impact: Math.min(9.5, Number((trend.ki - 0.4).toFixed(1))),
+        feasibility: trend.id === "wireless-roads" ? 5.4 : 7.8,
+        color: "#22d3ee"
+      };
+      if (!SCENARIO_ITEMS.find(i => i.id === mapped.id)) SCENARIO_ITEMS.unshift(mapped);
+      if (!scenarioCanvas.includes(mapped.id)) scenarioCanvas.unshift(mapped.id);
+      triggerToast("Signal promoted to Scenario Builder.");
+      switchTab("scenario");
+      renderScenarioBuilder();
+    }
+
+    function renderTrendNetwork() {
+      const canvas = document.getElementById("trend-network-canvas");
+      const svg = document.getElementById("trend-network-lines");
+      const nodeById = Object.fromEntries(NETWORK_NODES.map(n => [n.id, n]));
+      svg.innerHTML = NETWORK_LINKS.map(([a, b]) => {
+        const left = nodeById[a], right = nodeById[b];
+        return `<line x1="${left.x}%" y1="${left.y}%" x2="${right.x}%" y2="${right.y}%" stroke="rgba(166,193,224,0.42)" stroke-width="2" />`;
+      }).join("");
+
+      canvas.querySelectorAll(".network-dot,.network-label").forEach(el => el.remove());
+      NETWORK_NODES.forEach(n => {
+        const dot = document.createElement("div");
+        dot.className = `network-dot ${n.id === activeNetworkNodeId ? 'active' : ''}`;
+        dot.style.left = n.x + "%";
+        dot.style.top = n.y + "%";
+        dot.style.background = NETWORK_COLORS[n.group];
+        dot.onclick = () => { activeNetworkNodeId = n.id; renderTrendNetwork(); };
+        canvas.appendChild(dot);
+        const label = document.createElement("div");
+        label.className = "network-label";
+        label.style.left = n.x + "%";
+        label.style.top = n.y + "%";
+        label.textContent = n.id;
+        canvas.appendChild(label);
+      });
+
+      const active = nodeById[activeNetworkNodeId] || NETWORK_NODES[0];
+      const neighbors = NETWORK_LINKS
+        .filter(([a, b]) => a === active.id || b === active.id)
+        .map(([a, b]) => a === active.id ? b : a);
+
+      document.getElementById("network-node-detail").innerHTML = `
+        <div class="data-card-title"><span>${active.id}</span><span class="mini-badge">${active.type}</span></div>
+        <div class="data-card-meta">${active.desc}<br><br>Impact ${active.impact}/10 &middot; Time to impact ${active.time}<br>Connected to: ${neighbors.join(", ")}</div>
+      `;
+      document.getElementById("network-bridge-prompts").innerHTML = neighbors.slice(0, 4).map(n => `
+        <li>How could <strong>${active.id}</strong> reduce a blocker or amplify an opportunity in <strong>${n}</strong>?</li>
+      `).join("");
+    }
+
+    function sendNetworkSelectionToScenario() {
+      const active = NETWORK_NODES.find(n => n.id === activeNetworkNodeId) || NETWORK_NODES[0];
+      const id = `network-${active.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+      if (!SCENARIO_ITEMS.find(i => i.id === id)) {
+        SCENARIO_ITEMS.unshift({ id, label: active.id, type: active.type.toLowerCase(), impact: active.impact, feasibility: active.impact > 8 ? 6.8 : 7.4, color: NETWORK_COLORS[active.group] });
+      }
+      if (!scenarioCanvas.includes(id)) scenarioCanvas.unshift(id);
+      triggerToast("Network node added to scenario canvas.");
+      switchTab("scenario");
+      renderScenarioBuilder();
+    }
+
+    function scenarioItemsSelected() {
+      return scenarioCanvas.map(id => SCENARIO_ITEMS.find(i => i.id === id)).filter(Boolean);
+    }
+
+    function renderScenarioBuilder() {
+      const selected = scenarioItemsSelected();
+      const selectedIds = new Set(scenarioCanvas);
+      const available = SCENARIO_ITEMS.filter(i => !selectedIds.has(i.id));
+      document.getElementById("scenario-palette").innerHTML = available.map(item => `
+        <div class="draggable-signal" onclick="scenarioCanvas.push('${item.id}'); renderScenarioBuilder();">
+          <div class="data-card-title"><span>${item.label}</span><span class="mini-badge">${item.type}</span></div>
+          <div class="data-card-meta">Impact ${item.impact}/10 &middot; Feasibility ${item.feasibility}/10</div>
+        </div>
+      `).join("") || `<div class="data-card-meta">All items are already on the canvas.</div>`;
+
+      document.getElementById("scenario-canvas").innerHTML = selected.length ? selected.map(item => `
+        <div class="scenario-item">
+          <div class="data-card-title"><span>${item.label}</span><button class="proposal-action-btn" onclick="removeScenarioItem('${item.id}')">Remove</button></div>
+          <div class="data-card-meta">${item.type}</div>
+          <div class="data-card-meta" style="margin-top:0.55rem;">Impact ${item.impact}</div>
+          <div class="score-bar"><span style="width:${item.impact * 10}%; background:${item.color};"></span></div>
+          <div class="data-card-meta" style="margin-top:0.55rem;">Feasibility ${item.feasibility}</div>
+          <div class="score-bar"><span style="width:${item.feasibility * 10}%;"></span></div>
+        </div>
+      `).join("") : `<div class="data-card-meta">Select signals from the palette to build a future scenario.</div>`;
+
+      const count = selected.length;
+      const avgImpact = count ? selected.reduce((s, i) => s + i.impact, 0) / count : 0;
+      const avgFeasibility = count ? selected.reduce((s, i) => s + i.feasibility, 0) / count : 0;
+      const synergy = count ? Math.min(10, avgImpact * (1 + count * 0.04)) : 0;
+      const risk = avgFeasibility >= 7 ? "High viability" : avgFeasibility >= 5.5 ? "Moderate risk" : "High risk";
+      const name = document.getElementById("scenario-name")?.value || "My Future Scenario";
+      const itemsList = selected.map(i => i.label).join(", ");
+      const brief = count
+        ? `Scenario "${name}" combines ${itemsList}. It should be tested as a future-facing initiative with cumulative impact ${synergy.toFixed(1)}/10 and average feasibility ${avgFeasibility.toFixed(1)}/10.`
+        : "Add at least one signal or trend to generate a scenario brief.";
+
+      document.getElementById("scenario-analysis-panel").innerHTML = `
+        <div class="data-card"><div class="data-card-title"><span>${count}</span><span>items combined</span></div><div class="data-card-meta">Each additional item increases synergy but can reduce clarity if unrelated.</div></div>
+        <div class="data-card"><div class="data-card-title"><span>${synergy.toFixed(1)}/10</span><span>Cumulative impact</span></div><div class="score-bar"><span style="width:${synergy * 10}%"></span></div></div>
+        <div class="data-card"><div class="data-card-title"><span>${avgFeasibility.toFixed(1)}/10</span><span>Avg feasibility</span></div><div class="score-bar"><span style="width:${avgFeasibility * 10}%"></span></div></div>
+        <div class="data-card"><div class="data-card-title"><span>${risk}</span></div><div class="data-card-meta">Use this as a discussion trigger, not as an automatic decision.</div></div>
+      `;
+      document.getElementById("scenario-brief-output").textContent = brief;
+    }
+
+    function removeScenarioItem(id) {
+      scenarioCanvas = scenarioCanvas.filter(itemId => itemId !== id);
+      renderScenarioBuilder();
+    }
+
+    function clearScenarioCanvas() {
+      scenarioCanvas = [];
+      renderScenarioBuilder();
+    }
+
+    function currentScenarioBrief() {
+      return document.getElementById("scenario-brief-output")?.textContent || "";
+    }
+
+    function sendScenarioToCollider() {
+      const input = document.getElementById("custom-brief-input");
+      if (input) input.value = currentScenarioBrief();
+      triggerToast("Scenario brief sent to Semantic Collider.");
+      switchTab("collider");
+    }
+
+    function publishScenarioToFeed() {
+      const selected = scenarioItemsSelected();
+      if (!selected.length) return;
+      const avgImpact = selected.reduce((s, i) => s + i.impact, 0) / selected.length;
+      const avgFeasibility = selected.reduce((s, i) => s + i.feasibility, 0) / selected.length;
+      const proposal = {
+        id: "scenario-" + Date.now(),
+        title: document.getElementById("scenario-name").value || "Future Scenario",
+        description: currentScenarioBrief(),
+        brief: currentScenarioBrief(),
+        author: "Geoff",
+        category: "Scenario Builder",
+        novelty: Number(Math.min(9.4, avgImpact + 0.6).toFixed(1)),
+        feasibility: Number(avgFeasibility.toFixed(1)),
+        impact: Number(Math.min(10, avgImpact * (1 + selected.length * 0.04)).toFixed(1)),
+        supports: 0,
+        supportedByUser: false
+      };
+      liveProposals.unshift(proposal);
+      localStorage.setItem("kayros_standalone_proposals", JSON.stringify(liveProposals));
+      triggerToast("Scenario published to Feed.");
+      switchTab("feed");
+    }
+
+    // -------------------------------------------------------------
+    // NAVIGATION & TAB CORE
+    // -------------------------------------------------------------
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+      
+      const targetBtn = Array.from(document.querySelectorAll(".tab-btn")).find(btn => btn.textContent.toLowerCase().includes(tabId));
+      if (targetBtn) targetBtn.classList.add("active");
+      
+      const targetPanel = document.getElementById(`panel-${tabId}`);
+      if (targetPanel) targetPanel.classList.add("active");
+
+      // Side Effects
+      if (tabId === 'noise') renderNoiseReduction();
+      if (tabId === 'network') renderTrendNetwork();
+      if (tabId === 'scenario') renderScenarioBuilder();
+      if (tabId === 'feed') renderFeed();
+      if (tabId === 'collider') renderSandboxGraph();
+    }
+
+    function toggleAccordion(stepNum) {
+      const items = document.querySelectorAll(".accordion-item");
+      const target = document.getElementById(`accordion-step-${stepNum}`);
+      const isCurrentlyActive = target.classList.contains("active");
+      
+      items.forEach(item => item.classList.remove("active"));
+      
+      if (!isCurrentlyActive) {
+        target.classList.add("active");
+      }
+    }
+
+    function triggerToast(text) {
+      const toast = document.getElementById("app-toast-popup");
+      document.getElementById("app-toast-text").textContent = text;
+      toast.classList.add("active");
+      setTimeout(() => {
+        toast.classList.remove("active");
+      }, 3000);
+    }
+
+    function getChallengePedagogy(ch) {
+      const retainedSignals = ch.signals.filter(s => s.type === "pristine").length;
+      return {
+        objective: `Learn how to turn ${retainedSignals} retained signals into one deployable ${ch.category.toLowerCase()} measure.`,
+        stakeholder: ch.category.includes("Energy")
+          ? "Residents, co-owners, city permitting teams, installers, local energy operators."
+          : ch.category.includes("Employment")
+            ? "Displaced workers, employers, training providers, local government, unions."
+            : "Elder residents, family carers, neighbours, health coordinators, privacy officers.",
+        evidence: ch.signals.filter(s => s.type === "pristine").map(s => s.text),
+        rubric: [
+          ["Constraint clarity", "Does the brief name the operational blocker, not only the desired outcome?"],
+          ["Mechanism transfer", `Can ${ch.persona} explain how the analogy actually works?`],
+          ["Pilot realism", "Can a first test run with local actors, a short timeline, and observable metrics?"],
+          ["Feed readiness", "Is the proposal specific enough for support, critique, and next-step ownership?"]
+        ],
+        experiment: ch.category.includes("Energy")
+          ? "Pilot on one residential block: 12-week facade/wind audit, resident vote simulation, fold prototype test, and kWh yield model."
+          : ch.category.includes("Employment")
+            ? "Pilot with 30 workers and 8 employers: skill inventory, micro-apprenticeship matching, completion rate, and time-to-placement."
+            : "Pilot across one neighbourhood: opt-in wellness signals, privacy review, response-time drill, and resident trust survey.",
+        risks: ch.category.includes("Energy")
+          ? "Permitting friction, resident acceptance, structural load, maintenance ownership."
+          : ch.category.includes("Employment")
+            ? "Credential validity, worker trust, employer adoption, matching bias."
+            : "Privacy leakage, false reassurance, care responsibility ambiguity, opt-in fatigue."
+      };
+    }
+
+    function renderChallengeLearning(ch) {
+      const p = getChallengePedagogy(ch);
+      document.getElementById("challenge-learning-card").innerHTML = `
+        <div class="learning-card"><strong>Learning goal</strong><span>${p.objective}</span></div>
+        <div class="learning-card"><strong>Stakeholders</strong><span>${p.stakeholder}</span></div>
+        <div class="learning-card"><strong>First experiment</strong><span>${p.experiment}</span></div>
+      `;
+      document.getElementById("scenario-rubric-grid").innerHTML = p.rubric.map(([title, body]) => `
+        <div class="rubric-cell"><b>${title}</b>${body}</div>
+      `).join("");
+      document.getElementById("collision-evidence-list").innerHTML = `
+        <span><b>Analogy:</b> ${ch.mechanism}</span>
+        <span><b>Risk controls:</b> ${p.risks}</span>
+        <span><b>Feed output:</b> a proposal with scores, evidence, experiment plan, and support tracking.</span>
+      `;
+    }
+
+    function getProposalDetails(prop) {
+      const sourceChallenge = PRELOADED_CHALLENGES.find(ch => ch.sweetSpotProposal.id === prop.id);
+      const pedagogy = sourceChallenge ? getChallengePedagogy(sourceChallenge) : null;
+      return {
+        brief: prop.brief || "Custom strategic brief produced by the Semantic Collider sandbox.",
+        evidence: pedagogy?.evidence || [
+          "User-defined strategic constraint captured in the custom brief.",
+          "Distant-domain analogy selected to create non-obvious solution options.",
+          "Novelty-feasibility plot generated before publication."
+        ],
+        experiment: pedagogy?.experiment || "Run a 2-week discovery sprint: interview 5 target users, define one prototype, measure feasibility risk, and decide whether to continue.",
+        risks: pedagogy?.risks || "Main risks: weak input specificity, operational feasibility, stakeholder acceptance, and lack of measurable pilot criteria.",
+        framework: sourceChallenge?.mechanism || "Custom analogical transfer from selected expert persona."
+      };
+    }
+
+    function renderWorkingGroup(prop) {
+      const group = getWorkingGroup(prop);
+      const filledSeats = group.members.filter(m => m.name !== "Open seat").length;
+      return `
+        <div class="working-group-box">
+          <div class="working-group-header">
+            <div>
+              <div class="working-group-title">Human working group</div>
+              <div class="working-group-meta">${group.name}<br>${group.cadence}<br><strong style="color:var(--primary-hover);">Human + AI loop:</strong> ${group.aiLoop}</div>
+            </div>
+            <span class="mini-badge amber">${filledSeats}/${group.members.length} roles filled</span>
+          </div>
+
+          <div class="role-grid">
+            ${group.members.map((member, roleIndex) => `
+              <div class="role-card">
+                <strong>${member.role}</strong>
+                <span>${member.name}</span>
+                <span>${member.contribution}</span>
+                ${member.name === "Open seat" ? `<button class="secondary-btn" style="margin-top:0.5rem; width:100%;" onclick="joinWorkingGroup('${prop.id}', ${roleIndex})">Take this role</button>` : ""}
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="scorecard-summary-row">
+            ${group.neededRoles.map(role => `<span class="mini-badge">Needed: ${role}</span>`).join("")}
+          </div>
+
+          <div class="task-list">
+            ${group.tasks.map((task, taskIndex) => `
+              <div class="task-row ${task.done ? 'done' : ''}">
+                <span>${task.text}</span>
+                <button class="proposal-action-btn ${task.done ? 'active' : ''}" onclick="toggleGroupTask('${prop.id}', ${taskIndex})">${task.done ? 'Done' : 'Mark done'}</button>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="comment-list">
+            ${group.comments.slice(-3).map(comment => `<div class="comment-item"><strong>${comment.author}:</strong> ${comment.text}</div>`).join("")}
+          </div>
+
+          <div class="group-actions">
+            <button class="secondary-btn" onclick="addGroupComment('${prop.id}', 'Human reviewer')">Add field note</button>
+            <button class="secondary-btn" onclick="askAiFacilitator('${prop.id}')">AI synthesis after human input</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function joinWorkingGroup(proposalId, roleIndex) {
+      const prop = liveProposals.find(p => p.id === proposalId);
+      const group = getWorkingGroup(prop);
+      group.members[roleIndex].name = "Geoff";
+      group.comments.push({
+        author: "System",
+        text: `${group.members[roleIndex].role} role joined. Next step: add a field note or validate a task.`
+      });
+      saveWorkingGroups();
+      renderFeed();
+      triggerToast("Working group role assigned.");
+    }
+
+    function toggleGroupTask(proposalId, taskIndex) {
+      const prop = liveProposals.find(p => p.id === proposalId);
+      const group = getWorkingGroup(prop);
+      group.tasks[taskIndex].done = !group.tasks[taskIndex].done;
+      group.comments.push({
+        author: "Working group",
+        text: `${group.tasks[taskIndex].done ? "Completed" : "Reopened"} task: ${group.tasks[taskIndex].text}`
+      });
+      saveWorkingGroups();
+      renderFeed();
+    }
+
+    function addGroupComment(proposalId, author) {
+      const prop = liveProposals.find(p => p.id === proposalId);
+      const group = getWorkingGroup(prop);
+      const note = prompt("Add a field note, objection, user insight, or implementation constraint:");
+      if (!note || !note.trim()) return;
+      group.comments.push({ author, text: note.trim() });
+      saveWorkingGroups();
+      renderFeed();
+      triggerToast("Field note added to working group.");
+    }
+
+    function askAiFacilitator(proposalId) {
+      const prop = liveProposals.find(p => p.id === proposalId);
+      const group = getWorkingGroup(prop);
+      const openTasks = group.tasks.filter(t => !t.done).length;
+      const openRoles = group.members.filter(m => m.name === "Open seat").map(m => m.role);
+      group.comments.push({
+        author: "AI facilitator",
+        text: openRoles.length
+          ? `Synthesis: ${openTasks} validation tasks remain. Priority: fill ${openRoles.join(", ")} before escalating this proposal.`
+          : `Synthesis: all human roles are filled. Focus next on evidence quality, pilot calendar, and success metrics.`
+      });
+      saveWorkingGroups();
+      renderFeed();
+      triggerToast("AI facilitator synthesis added.");
+    }
+
+    // -------------------------------------------------------------
+    // SHOWCASE PIPELINE ENGINE
+    // -------------------------------------------------------------
+    function loadChallenge(index) {
+      activeChallengeIndex = index;
+      const ch = PRELOADED_CHALLENGES[index];
+      renderChallengeLearning(ch);
+      
+      // Update Challenge Select Styles
+      const listRoot = document.getElementById("challenge-options-list");
+      listRoot.innerHTML = PRELOADED_CHALLENGES.map((c, idx) => `
+        <button class="challenge-option ${idx === index ? 'active' : ''}" onclick="loadChallenge(${idx})">
+          <div class="challenge-title">Scenario: ${c.title}</div>
+          <div class="challenge-meta">${c.category}</div>
+        </button>
+      `).join('');
+
+      // Step 1: Signals
+      const signalsGrid = document.getElementById("stage1-signals-grid");
+      signalsGrid.innerHTML = ch.signals.map(s => `
+        <div class="signal-card ${s.type}">
+          <span class="signal-badge ${s.type === 'pristine' ? 'badge-pristine' : 'badge-spam'}">
+            ${s.type === 'pristine' ? s.label : s.reason}
+          </span>
+          <p>${s.text}</p>
+        </div>
+      `).join('');
+
+      // Step 2: SVG Network Graph
+      selectedShowcaseNodes = [];
+      const svg = document.getElementById("stage2-network-svg");
+      svg.innerHTML = `
+        <!-- Connections -->
+        <line x1="${ch.nodes[0].x}" y1="${ch.nodes[0].y}" x2="${ch.nodes[1].x}" y2="${ch.nodes[1].y}" stroke="rgba(255,255,255,0.08)" stroke-width="2" id="line-A-B" />
+        <line x1="${ch.nodes[1].x}" y1="${ch.nodes[1].y}" x2="${ch.nodes[2].x}" y2="${ch.nodes[2].y}" stroke="rgba(255,255,255,0.08)" stroke-width="2" id="line-B-C" />
+        <line x1="${ch.nodes[2].x}" y1="${ch.nodes[2].y}" x2="${ch.nodes[0].x}" y2="${ch.nodes[0].y}" stroke="rgba(255,255,255,0.08)" stroke-width="2" id="line-C-A" />
+        
+        <!-- Nodes -->
+        ${ch.nodes.map(n => `
+          <g class="network-node" onclick="clickShowcaseNode('${n.id}')" id="node-${n.id}">
+            <circle cx="${n.x}" cy="${n.y}" r="22" />
+            <text x="${n.x}" y="${n.y + 4}" fill="white" font-size="8" font-weight="700" text-anchor="middle">${n.label.split(' ')[0]}</text>
+          </g>
+        `).join('')}
+      `;
+      document.getElementById("stage2-bridge-box").innerHTML = `
+        <strong style="color:var(--accent);">STRATEGIC INPUT NEEDED:</strong> Click 2 nodes on the network map above to bridge concepts.
+      `;
+
+      // Step 3: Brief Text
+      document.getElementById("stage3-brief-text").value = "Establish a conceptual bridge in Step 2 to generate scenario brief.";
+      updateCanvasMetrics();
+
+      // Step 4: Reset Roundtable Debate
+      document.getElementById("roundtable-log-box").innerHTML = `[System] Challenge Loaded. Standby to trigger AI Roundtable Audit.`;
+      document.getElementById("btn-trigger-roundtable").disabled = false;
+      document.getElementById("btn-trigger-roundtable").textContent = "Trigger AI Roundtable Audit";
+      clearInterval(debateInterval);
+      currentDebateIndex = 0;
+
+      // Step 5: Reset Collision
+      document.getElementById("node-preview-text").textContent = "READY";
+      document.getElementById("node-preview-left").style.left = "10%";
+      document.getElementById("node-preview-right").style.right = "10%";
+      document.getElementById("showcase-result-box").innerHTML = `
+        Arthur Koestler's Bisociation Matrix configured. Ready for collision.
+      `;
+      document.getElementById("btn-publish-showcase-result").style.display = "none";
+      document.getElementById("btn-trigger-preview-collision").disabled = false;
+      document.getElementById("btn-trigger-preview-collision").textContent = "Trigger Analogical Collision";
+    }
+
+    function clickShowcaseNode(nodeId) {
+      if (selectedShowcaseNodes.includes(nodeId)) {
+        selectedShowcaseNodes = selectedShowcaseNodes.filter(id => id !== nodeId);
+        document.getElementById(`node-${nodeId}`).classList.remove("selected");
+      } else if (selectedShowcaseNodes.length < 2) {
+        selectedShowcaseNodes.push(nodeId);
+        document.getElementById(`node-${nodeId}`).classList.add("selected");
+      }
+
+      // Check for Line Highlights
+      const ch = PRELOADED_CHALLENGES[activeChallengeIndex];
+      const lineAB = document.getElementById("line-A-B");
+      const lineBC = document.getElementById("line-B-C");
+      const lineCA = document.getElementById("line-C-A");
+
+      if (lineAB) lineAB.setAttribute("stroke", "rgba(255,255,255,0.08)");
+      if (lineBC) lineBC.setAttribute("stroke", "rgba(255,255,255,0.08)");
+      if (lineCA) lineCA.setAttribute("stroke", "rgba(255,255,255,0.08)");
+
+      if (selectedShowcaseNodes.includes("A") && selectedShowcaseNodes.includes("B") && lineAB) lineAB.setAttribute("stroke", "var(--primary)");
+      if (selectedShowcaseNodes.includes("B") && selectedShowcaseNodes.includes("C") && lineBC) lineBC.setAttribute("stroke", "var(--primary)");
+      if (selectedShowcaseNodes.includes("C") && selectedShowcaseNodes.includes("A") && lineCA) lineCA.setAttribute("stroke", "var(--primary)");
+
+      // Update Bridge text & canvas brief
+      const bridgeBox = document.getElementById("stage2-bridge-box");
+      const canvasBrief = document.getElementById("stage3-brief-text");
+
+      if (selectedShowcaseNodes.length === 2) {
+        selectedShowcaseNodes.sort();
+        const bridgeMatch = ch.bridgeOptions.find(b => b.nodes[0] === selectedShowcaseNodes[0] && b.nodes[1] === selectedShowcaseNodes[1]);
+        if (bridgeMatch) {
+          bridgeBox.innerHTML = `
+            <strong>SUCCESSFUL CONCEPT BRIDGE ESTABLISHED:</strong> "${bridgeMatch.text}"
+          `;
+          canvasBrief.value = ch.briefTemplate;
+          triggerToast("Strategic Bridge Created!");
+          setTimeout(() => toggleAccordion(3), 1000);
+        }
+      } else {
+        bridgeBox.innerHTML = `
+          <strong style="color:var(--accent);">STRATEGIC INPUT NEEDED:</strong> Click 2 nodes on the network map above to bridge concepts.
+        `;
+        canvasBrief.value = "Establish a conceptual bridge in Step 2 to generate scenario brief.";
+      }
+    }
+
+    function updateCanvasSlider(param, value) {
+      canvasSliderVals[param] = parseInt(value);
+      document.getElementById(`slide-${param.substring(0,3)}-val`).textContent = value + "%";
+      updateCanvasMetrics();
+    }
+
+    function updateCanvasMetrics() {
+      const vel = canvasSliderVals.velocity;
+      const intensity = canvasSliderVals.intensity;
+
+      const plausibility = Math.floor(100 - (vel * 0.4));
+      const urgency = ((vel * 0.05) + (intensity * 0.05)).toFixed(1);
+
+      document.getElementById("canvas-plausibility").textContent = plausibility + "%";
+      document.getElementById("canvas-urgency").textContent = urgency + " / 10";
+    }
+
+    // Stage 4 Roundtable Simulation
+    function runRoundtableDebate() {
+      const logBox = document.getElementById("roundtable-log-box");
+      const btn = document.getElementById("btn-trigger-roundtable");
+      btn.disabled = true;
+      btn.textContent = "Debate in progress...";
+      logBox.innerHTML = "";
+
+      const ch = PRELOADED_CHALLENGES[activeChallengeIndex];
+      const pedagogy = getChallengePedagogy(ch);
+      const debateScript = [
+        { role: "Planner", msg: `[System.Planner] Scope check: ${pedagogy.stakeholder}` },
+        { role: "Critic", msg: `[System.Critic] Main risk set: ${pedagogy.risks}` },
+        { role: "Executor", msg: `[System.Executor] Pilot design: ${pedagogy.experiment}` },
+        { role: "Planner", msg: `[System.Planner] Bridge validated against mechanism: ${ch.mechanism}` },
+        { role: "Synthesizer", msg: `[System.Synthesizer] Feed-ready proposal requires: evidence, scorecard, first experiment, and ownership path.` }
+      ];
+
+      currentDebateIndex = 0;
+      debateInterval = setInterval(() => {
+        if (currentDebateIndex < debateScript.length) {
+          const item = debateScript[currentDebateIndex];
+          const div = document.createElement("div");
+          div.className = `persona-msg msg-${item.role.toLowerCase()}`;
+          div.textContent = item.msg;
+          logBox.appendChild(div);
+          logBox.scrollTop = logBox.scrollHeight;
+          currentDebateIndex++;
+        } else {
+          clearInterval(debateInterval);
+          btn.textContent = "Roundtable Completed";
+          triggerToast("AI Roundtable Finished Audit!");
+          setTimeout(() => toggleAccordion(5), 1000);
+        }
+      }, 1200);
+    }
+
+    // Stage 5 Showcase Collision
+    function runShowcaseCollision() {
+      const btn = document.getElementById("btn-trigger-preview-collision");
+      const text = document.getElementById("node-preview-text");
+      const nodeL = document.getElementById("node-preview-left");
+      const nodeR = document.getElementById("node-preview-right");
+      
+      btn.disabled = true;
+      btn.textContent = "Collision Process Active...";
+      text.textContent = "COLLIDING...";
+      
+      // Animate Nodes Colliding
+      nodeL.style.transition = "left 1.2s ease-in";
+      nodeR.style.transition = "right 1.2s ease-in";
+      
+      nodeL.style.left = "47%";
+      nodeR.style.right = "47%";
+      
+      setTimeout(() => {
+        text.textContent = "IMPACT!";
+        text.style.color = "var(--primary-hover)";
+        
+        // Show result breakthrough
+        const ch = PRELOADED_CHALLENGES[activeChallengeIndex];
+        const resBox = document.getElementById("showcase-result-box");
+        resBox.innerHTML = `
+          <h4 style="font-weight:700; color:white; font-size:0.85rem; margin-bottom:0.25rem;">Collision: ${ch.sweetSpotProposal.title}</h4>
+          <p style="color:var(--text-gray); font-size:0.72rem; line-height:1.4; margin-bottom:0.5rem;">${ch.sweetSpotProposal.description}</p>
+          <div style="display:flex; gap:0.4rem;">
+            <span class="mini-badge amber">Novelty: ${ch.sweetSpotProposal.novelty}</span>
+            <span class="mini-badge teal">Feasibility: ${ch.sweetSpotProposal.feasibility}</span>
+            <span class="mini-badge" style="color:#10b981; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.2);">Urgency: ${ch.sweetSpotProposal.impact}</span>
+          </div>
+        `;
+        document.getElementById("btn-publish-showcase-result").style.display = "block";
+        triggerToast("Bisociation Sparked Breakthrough!");
+      }, 1200);
+    }
+
+    function publishShowcaseToFeed() {
+      const ch = PRELOADED_CHALLENGES[activeChallengeIndex];
+      const checkExists = liveProposals.find(p => p.id === ch.sweetSpotProposal.id);
+      
+      if (checkExists) {
+        triggerToast("Breakthrough already in Feed!");
+        return;
+      }
+
+      const newProp = {
+        id: ch.sweetSpotProposal.id,
+        title: ch.sweetSpotProposal.title,
+        description: ch.sweetSpotProposal.description,
+        brief: ch.sweetSpotProposal.brief,
+        author: "Geoff",
+        category: ch.category,
+        novelty: ch.sweetSpotProposal.novelty,
+        feasibility: ch.sweetSpotProposal.feasibility,
+        impact: ch.sweetSpotProposal.impact,
+        supports: 1,
+        supportedByUser: true
+      };
+
+      liveProposals.unshift(newProp);
+      localStorage.setItem("kayros_standalone_proposals", JSON.stringify(liveProposals));
+      triggerToast("Published to Live Feed!");
+      switchTab("feed");
+    }
+
+    // -------------------------------------------------------------
+    // FULL SANDBOX COLLIDER ENGINE
+    // -------------------------------------------------------------
+    function updateCustomPersonaMeta() {
+      const select = document.getElementById("custom-persona-select");
+      const val = select.value;
+      const driftSlider = document.querySelector("#panel-collider input[type=range]");
+      
+      if (val === 'marine_biologist') driftSlider.value = 85;
+      if (val === 'origami_master') driftSlider.value = 92;
+      if (val === 'hft_quant') driftSlider.value = 90;
+      if (val === 'chef') driftSlider.value = 75;
+      if (val === 'volcanologist') driftSlider.value = 88;
+
+      document.getElementById('vector-drift-val').textContent = driftSlider.value + "%";
+    }
+
+    function renderSandboxGraph() {
+      const arena = document.getElementById("sandbox-plot-arena");
+      
+      // Clear existing dots (leaving axis elements)
+      const existingDots = arena.querySelectorAll(".plot-dot");
+      existingDots.forEach(d => d.remove());
+
+      // Render Active Dots
+      sandboxDots.forEach((dot, idx) => {
+        const dotEl = document.createElement("div");
+        dotEl.className = `plot-dot sweet-quad ${idx === sandboxActiveDotIndex ? 'active' : ''}`;
+        dotEl.style.left = dot.x + "%";
+        dotEl.style.bottom = dot.y + "%";
+        dotEl.textContent = idx + 1;
+        dotEl.onclick = () => selectSandboxDot(idx);
+        arena.appendChild(dotEl);
+      });
+    }
+
+    function selectSandboxDot(index) {
+      sandboxActiveDotIndex = index;
+      renderSandboxGraph();
+
+      const dot = sandboxDots[index];
+      const resBox = document.getElementById("sandbox-result-box");
+      resBox.innerHTML = `
+        <h4 style="font-weight:700; color:white; font-size:0.8rem; margin-bottom:0.25rem;">Breakthrough Plot #${index + 1}: ${dot.title}</h4>
+        <div style="display:flex; gap:0.4rem; margin-top:0.35rem;">
+          <span class="mini-badge amber">Novelty: ${dot.novelty}</span>
+          <span class="mini-badge teal">Feasibility: ${dot.feasibility}</span>
+        </div>
+      `;
+    }
+
+    function runSandboxCollision() {
+      const brief = document.getElementById("custom-brief-input").value.trim();
+      if (!brief) {
+        alert("Please write a custom strategic brief first.");
+        return;
+      }
+
+      const select = document.getElementById("custom-persona-select");
+      const personaName = select.options[select.selectedIndex].text.split('(')[0].trim();
+      const consoleBox = document.getElementById("sandbox-console-box");
+      const btn = document.getElementById("btn-sandbox-collide");
+
+      btn.disabled = true;
+      btn.textContent = "Colliding Particle Briefs...";
+      consoleBox.innerHTML = "";
+
+      const steps = [
+        `[Collider] Loading strategic challenge coordinates: "${brief.substring(0,40)}..."`,
+        `[Collider] Aligning vectors against analogical framework: "${personaName}"`,
+        `[Collider] Conceptual Drift Distance calculated at 88.5% drift`,
+        `[Collider] Simulating bisociation cognitive leap logs...`,
+        `[System] Breakthrough compiled successfully! Plotting coordinates...`
+      ];
+
+      let stepIdx = 0;
+      const interval = setInterval(() => {
+        if (stepIdx < steps.length) {
+          const div = document.createElement("div");
+          div.className = "console-line";
+          if (stepIdx === steps.length - 1) div.className = "console-line active-log";
+          div.textContent = steps[stepIdx];
+          consoleBox.appendChild(div);
+          consoleBox.scrollTop = consoleBox.scrollHeight;
+          stepIdx++;
+        } else {
+          clearInterval(interval);
+          btn.disabled = false;
+          btn.textContent = "Ignite Bisociation Collision";
+
+          // Synthesize dynamic title
+          const actionWords = ["Autonomous", "Bioluminescent", "Kinetic", "Decentralized", "Modular"];
+          const techWords = ["Emulsion", "Mesh-Grid", "Arbitrage Sails", "Zoning-Bypass Folds"];
+          const dynTitle = actionWords[Math.floor(Math.random() * actionWords.length)] + " " + techWords[Math.floor(Math.random() * techWords.length)];
+
+          const nov = (Math.random() * 1.2 + 8.2).toFixed(1);
+          const feas = (Math.random() * 1.5 + 7.0).toFixed(1);
+
+          generatedSandboxProposal = {
+            id: "sandbox-prop-" + Math.random().toString(36).substr(2, 9),
+            title: dynTitle,
+            description: brief,
+            brief: "Analogical cognitive synthesis inspired by the structural properties of " + personaName + ".",
+            author: "Geoff",
+            category: "Custom Sandbox",
+            novelty: parseFloat(nov),
+            feasibility: parseFloat(feas),
+            impact: parseFloat((Math.random() * 1.5 + 8.0).toFixed(1)),
+            supports: 0,
+            supportedByUser: false
+          };
+
+          // Add to sandbox dots
+          const newDot = {
+            id: generatedSandboxProposal.id,
+            title: dynTitle,
+            x: Math.floor(parseFloat(nov) * 9.5),
+            y: Math.floor(parseFloat(feas) * 9.5),
+            novelty: parseFloat(nov),
+            feasibility: parseFloat(feas)
+          };
+
+          sandboxDots.push(newDot);
+          sandboxActiveDotIndex = sandboxDots.length - 1;
+          
+          renderSandboxGraph();
+          selectSandboxDot(sandboxActiveDotIndex);
+
+          document.getElementById("btn-sandbox-publish").style.display = "block";
+          triggerToast("Breakthrough Added to Scatter Plot!");
+        }
+      }, 1000);
+    }
+
+    function publishSandboxToFeed() {
+      if (!generatedSandboxProposal) return;
+      
+      liveProposals.unshift(generatedSandboxProposal);
+      localStorage.setItem("kayros_standalone_proposals", JSON.stringify(liveProposals));
+      triggerToast("Published Breakthrough to Feed!");
+      switchTab("feed");
+    }
+
+    // -------------------------------------------------------------
+    // COMMUNITY FEED & VOTE HANDLERS
+    // -------------------------------------------------------------
+    function renderFeed() {
+      const root = document.getElementById("feed-proposals-root");
+      document.getElementById("feed-proposal-count").textContent = `${liveProposals.length} Proposals Active`;
+
+      root.innerHTML = liveProposals.map((prop, idx) => `
+        <div class="proposal-card">
+          <div class="proposal-header">
+            <div class="proposal-title-meta">
+              <span class="proposal-card-title">${prop.title}</span>
+              <span class="proposal-author">Initiative by ${prop.author} &middot; <strong style="color:var(--primary);">${prop.category}</strong></span>
+            </div>
+            <div style="display:flex; gap:0.25rem;">
+              <span class="mini-badge amber">Novelty: ${prop.novelty}</span>
+              <span class="mini-badge teal">Feasibility: ${prop.feasibility}</span>
+            </div>
+          </div>
+          <p class="proposal-body">${prop.description}</p>
+          <div class="proposal-detail-grid">
+            <div class="proposal-detail-box"><b>Strategic brief</b><span>${getProposalDetails(prop).brief}</span></div>
+            <div class="proposal-detail-box"><b>Analogical framework</b><span>${getProposalDetails(prop).framework}</span></div>
+            <div class="proposal-detail-box"><b>First experiment</b><span>${getProposalDetails(prop).experiment}</span></div>
+            <div class="proposal-detail-box"><b>Risk controls</b><span>${getProposalDetails(prop).risks}</span></div>
+          </div>
+          <div class="evidence-list">
+            ${getProposalDetails(prop).evidence.slice(0, 3).map(item => `<span>${item}</span>`).join("")}
+          </div>
+          <div class="scorecard-summary-row">
+            <span class="mini-badge">Impact Urgency: ${prop.impact}</span>
+            <span class="mini-badge">Synthesis Framework: Koestler Bisociation Matrix</span>
+            <span class="mini-badge">Readiness: ${prop.feasibility >= 8 ? 'Pilot candidate' : 'Needs validation'}</span>
+          </div>
+          ${renderWorkingGroup(prop)}
+          <div class="proposal-actions">
+            <button class="proposal-action-btn ${prop.supportedByUser ? 'active' : ''}" onclick="toggleSupport('${prop.id}')">
+              ${prop.supportedByUser ? 'Supported' : 'Support'} (${prop.supports})
+            </button>
+            <span style="font-size:0.7rem; color:var(--text-gray);">Saved locally and connected to standalone tools</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleSupport(id) {
+      const idx = liveProposals.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        const item = liveProposals[idx];
+        if (item.supportedByUser) {
+          item.supports--;
+          item.supportedByUser = false;
+        } else {
+          item.supports++;
+          item.supportedByUser = true;
+          triggerToast("Thanks for supporting!");
+        }
+        localStorage.setItem("kayros_standalone_proposals", JSON.stringify(liveProposals));
+        renderFeed();
+      }
+    }
+
+    // -------------------------------------------------------------
+    // DYNAMIC ROI CORE
+    // -------------------------------------------------------------
+    function updateRoiCalculations(challengesCount) {
+      document.getElementById("roi-challenges-val").textContent = challengesCount + " Challenges";
+      
+      const consultingCost = challengesCount * 24000;
+      const kayrosCost = challengesCount * 3600;
+      const consultingTime = challengesCount * 4;
+
+      document.getElementById("roi-consulting-cost").textContent = "$" + consultingCost.toLocaleString();
+      document.getElementById("roi-kayros-cost").textContent = "$" + kayrosCost.toLocaleString();
+      document.getElementById("roi-consulting-time").textContent = consultingTime + " Weeks";
+      document.getElementById("roi-kayros-time").textContent = "4 Hours";
+    }
+
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+      document.getElementById("roi-booking-form").style.display = "none";
+      document.getElementById("booking-success-box").style.display = "block";
+      openDeliveryModal();
+      triggerToast("Consultation Scheduled!");
+    }
+
+    // -------------------------------------------------------------
+    // PDF IDEA DEFINITION DELIVERABLE
+    // -------------------------------------------------------------
+    function moneyNumber(text) {
+      return Number(String(text || "").replace(/[^0-9.-]/g, "")) || 0;
+    }
+
+    function currentRoiSummary() {
+      const consulting = moneyNumber(document.getElementById("roi-consulting-cost")?.textContent);
+      const kayros = moneyNumber(document.getElementById("roi-kayros-cost")?.textContent);
+      const savings = consulting > 0 ? Math.round(((consulting - kayros) / consulting) * 100) : 0;
+      return {
+        challenges: document.getElementById("roi-challenges-val")?.textContent || "5 Challenges",
+        consultingCost: document.getElementById("roi-consulting-cost")?.textContent || "$120,000",
+        kayrosCost: document.getElementById("roi-kayros-cost")?.textContent || "$18,000",
+        consultingTime: document.getElementById("roi-consulting-time")?.textContent || "20 Weeks",
+        kayrosTime: document.getElementById("roi-kayros-time")?.textContent || "4 Hours",
+        savings
+      };
+    }
+
+    function selectedDeliverableProposal() {
+      const select = document.getElementById("deliverable-proposal-select");
+      const id = select?.value || liveProposals[0]?.id;
+      return liveProposals.find(p => p.id === id) || liveProposals[0];
+    }
+
+    function renderDeliverableOptions() {
+      const select = document.getElementById("deliverable-proposal-select");
+      if (!select) return;
+      const current = select.value;
+      select.innerHTML = liveProposals.map(p => `<option value="${p.id}">${p.title}</option>`).join("");
+      if (current && liveProposals.find(p => p.id === current)) select.value = current;
+    }
+
+    function deliverableSignalSummary() {
+      const trend = selectedSignal();
+      return {
+        name: trend.name,
+        ki: trend.ki,
+        velocity: trend.velocity,
+        acceleration: trend.acceleration,
+        sentiment: trend.sentiment,
+        decision: trend.decision,
+        entities: trend.relatedEntities.join(", "),
+        filters: trend.filters.map(([label, desc]) => `${label}: ${desc}`)
+      };
+    }
+
+    function deliverableScenarioSummary() {
+      const selected = scenarioItemsSelected();
+      const count = selected.length;
+      const avgImpact = count ? selected.reduce((s, i) => s + i.impact, 0) / count : 0;
+      const avgFeasibility = count ? selected.reduce((s, i) => s + i.feasibility, 0) / count : 0;
+      return {
+        name: document.getElementById("scenario-name")?.value || "My Future Scenario",
+        items: selected,
+        brief: currentScenarioBrief(),
+        impact: Math.min(10, avgImpact * (1 + count * 0.04)).toFixed(1),
+        feasibility: avgFeasibility.toFixed(1)
+      };
+    }
+
+    function renderDeliverablePreview() {
+      renderDeliverableOptions();
+      const prop = selectedDeliverableProposal();
+      if (!prop) return;
+      const detail = getProposalDetails(prop);
+      const group = getWorkingGroup(prop);
+      const signal = deliverableSignalSummary();
+      const scenario = deliverableScenarioSummary();
+      const roi = currentRoiSummary();
+      const network = NETWORK_NODES.find(n => n.id === activeNetworkNodeId) || NETWORK_NODES[0];
+      const completedTasks = group.tasks.filter(t => t.done).length;
+      const openRoles = group.members.filter(m => m.name === "Open seat").map(m => m.role);
+
+      document.getElementById("pdf-deliverable-content").innerHTML = `
+        <h1>KayrosLab Idea Definition Dossier</h1>
+        <p><strong>Generated:</strong> ${new Date().toLocaleString()} &middot; <strong>Proposal:</strong> ${prop.title}</p>
+        <div class="pdf-kpi-grid">
+          <div class="pdf-kpi"><strong>${prop.novelty}/10</strong><span>Novelty</span></div>
+          <div class="pdf-kpi"><strong>${prop.feasibility}/10</strong><span>Feasibility</span></div>
+          <div class="pdf-kpi"><strong>${prop.impact}/10</strong><span>Impact urgency</span></div>
+          <div class="pdf-kpi"><strong>${roi.savings}%</strong><span>Budget reduction</span></div>
+        </div>
+
+        <h2>1. Executive Definition</h2>
+        <p>${prop.description}</p>
+        <table class="pdf-table">
+          <tr><th>Strategic brief</th><td>${detail.brief}</td></tr>
+          <tr><th>Analogical framework</th><td>${detail.framework}</td></tr>
+          <tr><th>First experiment</th><td>${detail.experiment}</td></tr>
+          <tr><th>Risk controls</th><td>${detail.risks}</td></tr>
+        </table>
+
+        <h2>2. Process Map and Options Taken</h2>
+        <div class="pdf-flow">
+          <div><strong>Noise reduction</strong><br>${signal.name}<br>KI ${signal.ki}, acceleration ${signal.acceleration}</div>
+          <div><strong>Trend network</strong><br>${network.id}<br>${network.type}, impact ${network.impact}/10</div>
+          <div><strong>Scenario builder</strong><br>${scenario.name}<br>${scenario.items.length} selected drivers</div>
+          <div><strong>Collider / Feed</strong><br>${detail.framework}<br>Proposal scored and published</div>
+          <div><strong>Human loop + ROI</strong><br>${group.name}<br>${roi.kayrosCost} / ${roi.kayrosTime}</div>
+        </div>
+
+        <h2>3. Signal Noise-Reduction Summary</h2>
+        <table class="pdf-table">
+          <tr><th>Selected signal</th><td>${signal.name}</td></tr>
+          <tr><th>Metrics</th><td>Kayroslab Index ${signal.ki}; velocity ${signal.velocity}; acceleration ${signal.acceleration}; sentiment ${signal.sentiment}</td></tr>
+          <tr><th>Entities</th><td>${signal.entities}</td></tr>
+          <tr><th>Decision</th><td>${signal.decision}</td></tr>
+        </table>
+        <h3>Filter decisions</h3>
+        <ul>${signal.filters.map(f => `<li>${f}</li>`).join("")}</ul>
+
+        <h2>4. Visual Trend Network and Scenario Builder</h2>
+        <table class="pdf-table">
+          <tr><th>Selected network node</th><td>${network.id}: ${network.desc}</td></tr>
+          <tr><th>Time to impact</th><td>${network.time}</td></tr>
+          <tr><th>Scenario drivers</th><td>${scenario.items.map(i => `${i.label} (${i.type}, impact ${i.impact}, feasibility ${i.feasibility})`).join("<br>") || "No current scenario drivers selected."}</td></tr>
+          <tr><th>Scenario score</th><td>Impact ${scenario.impact}/10 &middot; Feasibility ${scenario.feasibility}/10</td></tr>
+          <tr><th>Scenario brief</th><td>${scenario.brief}</td></tr>
+        </table>
+
+        <h2>5. Human Working Group in the Loop</h2>
+        <table class="pdf-table">
+          <tr><th>Cadence</th><td>${group.cadence}</td></tr>
+          <tr><th>AI + human loop</th><td>${group.aiLoop}</td></tr>
+          <tr><th>Roles</th><td>${group.members.map(m => `<strong>${m.role}</strong>: ${m.name} - ${m.contribution}`).join("<br>")}</td></tr>
+          <tr><th>Open human seats</th><td>${openRoles.length ? openRoles.join(", ") : "All core roles filled"}</td></tr>
+          <tr><th>Task progress</th><td>${completedTasks}/${group.tasks.length} validation tasks completed</td></tr>
+        </table>
+        <h3>Human and AI interaction log</h3>
+        <ul>${group.comments.map(c => `<li><strong>${c.author}:</strong> ${c.text}</li>`).join("")}</ul>
+
+        <h2>6. ROI, Budget, Timeline and Constraints</h2>
+        <div class="pdf-kpi-grid">
+          <div class="pdf-kpi"><strong>${roi.consultingCost}</strong><span>Traditional budget</span></div>
+          <div class="pdf-kpi"><strong>${roi.kayrosCost}</strong><span>KayrosLab budget</span></div>
+          <div class="pdf-kpi"><strong>${roi.consultingTime}</strong><span>Traditional timeline</span></div>
+          <div class="pdf-kpi"><strong>${roi.kayrosTime}</strong><span>KayrosLab synthesis time</span></div>
+        </div>
+        <table class="pdf-table">
+          <tr><th>Scope scale</th><td>${roi.challenges}</td></tr>
+          <tr><th>Budget constraint</th><td>Estimated savings ${roi.savings}%. Excludes procurement, legal validation, field implementation, and production engineering.</td></tr>
+          <tr><th>Project constraints</th><td>${detail.risks}</td></tr>
+          <tr><th>Next governance decision</th><td>Confirm working-group roles, validate the first experiment, and decide whether to allocate pilot budget.</td></tr>
+        </table>
+      `;
+      updateDeliveryMailto(prop, roi, completedTasks, group.tasks.length);
+    }
+
+    function generateIdeaPdf() {
+      renderDeliverablePreview();
+      document.title = "KayrosLab-Idea-Definition-Dossier";
+      window.print();
+      triggerToast("PDF print dialog opened.");
+    }
+
+    function updateDeliveryMailto(prop, roi, completedTasks, totalTasks) {
+      const link = document.getElementById("delivery-mailto-link");
+      if (!link || !prop) return;
+      const subject = `KayrosLab delivery proof - ${prop.title}`;
+      const body = [
+        `KayrosLab delivery proof`,
+        ``,
+        `Proposal: ${prop.title}`,
+        `Delivery date: ${new Date().toLocaleString()}`,
+        `Novelty: ${prop.novelty}/10`,
+        `Feasibility: ${prop.feasibility}/10`,
+        `Impact urgency: ${prop.impact}/10`,
+        `ROI scope: ${roi.challenges}`,
+        `Traditional budget: ${roi.consultingCost}`,
+        `KayrosLab budget: ${roi.kayrosCost}`,
+        `Estimated budget reduction: ${roi.savings}%`,
+        `Traditional timeline: ${roi.consultingTime}`,
+        `KayrosLab synthesis time: ${roi.kayrosTime}`,
+        `Human validation tasks: ${completedTasks}/${totalTasks} completed`,
+        ``,
+        `The PDF idea-definition dossier was generated from the local KayrosLab process and can be attached to this email as proof of delivery.`
+      ].join("%0D%0A");
+      link.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }
+
+    function openDeliveryModal() {
+      renderDeliverablePreview();
+      document.getElementById("delivery-proof-modal").classList.add("active");
+    }
+
+    function closeDeliveryModal() {
+      document.getElementById("delivery-proof-modal").classList.remove("active");
+    }
+
+    // -------------------------------------------------------------
+    // CONSOLE INITIALIZER
+    // -------------------------------------------------------------
+    window.onload = () => {
+      // URL param tab routing — activated from hamburger menu links (?tab=xxx)
+      const _urlTab = new URLSearchParams(window.location.search).get('tab');
+      if (_urlTab) { switchTab(_urlTab); }
+
+      renderNoiseReduction();
+      renderTrendNetwork();
+      renderScenarioBuilder();
+      renderDeliverablePreview();
+      loadChallenge(0);
+      updateRoiCalculations(5);
+    };
+
+  </script>
+</body>
+</html>
