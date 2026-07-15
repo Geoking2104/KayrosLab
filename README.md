@@ -1,7 +1,13 @@
 # KayrosLab
 
-> **Du Signal Faible à la Décision Stratégique**  
+[![Open in Browser](https://img.shields.io/badge/▶_Open_in_Browser-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html)
+[![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
+
+> **Du Signal Faible à la Décision Stratégique**
 > Une plateforme d’idéation collaborative augmentée par l’IA, conçue pour transformer des signaux émergents en stratégies robustes et actionnables.
+
+> ▶ **Démo en ligne (sans installation)** : clique sur le badge **Open in Browser** ci-dessus, ou ouvre
+> https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html
 
 ---
 
@@ -58,7 +64,7 @@ Contrairement aux LLM classiques qui oublient tout à chaque conversation, Kayro
 
 Le projet est disponible sous forme de **prototype standalone haute-fidélité** :
 
-- `kayroslab-complete-persisted.html` → **Version recommandée** (la plus à jour)
+- `kayroslab-complete-with-ai-agents.html` → **Version recommandée** (la plus à jour)
 
 Cette version intègre :
 - Visualisation du flux de travail avec tous les agents visibles directement sous chaque étape
@@ -73,15 +79,15 @@ Cette version intègre :
 ## Getting Started
 
 1. Clone le repository :
-   ```bash
-   git clone https://github.com/Geoking2104/KayrosLab.git
-   cd KayrosLab
-   ```
+```bash
+git clone https://github.com/Geoking2104/KayrosLab.git
+cd KayrosLab
+```
 
 2. Ouvre le fichier recommandé dans ton navigateur :
-   ```bash
-   open kayroslab-complete-persisted.html
-   ```
+```bash
+open kayroslab-complete-with-ai-agents.html
+```
 
 3. Explore le flux via l’onglet **"Interactive Showcase"** → déploie les 5 étapes.
 
@@ -106,15 +112,15 @@ Cette version intègre :
 
 ## Auteur
 
-**Geoffroy de La Tournelle**  
-Founder & Director @ KayrosLab  
+**Geoffroy de La Tournelle**
+Founder & Director @ KayrosLab
 [LinkedIn](https://www.linkedin.com/in/gdelatournelle/) • contact@gdelatournelle.fr
 
 ---
 
 ## Licence
 
-Ce projet est actuellement en développement interne.  
+Ce projet est actuellement en développement interne.
 Toute utilisation, fork ou contribution doit faire l’objet d’une discussion préalable.
 
 ---
