@@ -1,6 +1,6 @@
 # KayrosLab
 
-[![Open in Browser](https://img.shields.io/badge/▶_Open_in_Browser-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-updated.html)
+[![Open in Browser](https://img.shields.io/badge/▶_Open_in_Browser-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
 
 **Du Signal Faible à la Décision Stratégique — Atelier d’Idéation Agentique Hybride**
@@ -10,7 +10,7 @@ KayrosLab est un **atelier d’idéation stratégique** qui transforme des signa
 Contrairement aux LLMs classiques (ChatGPT, Claude, Gemini…), KayrosLab ne se contente pas de générer du texte : il suit un **processus rigoureux, traçable et résilient** en 5 étapes.
 
 > ▶ **Démo en ligne (sans installation)** : clique sur le badge **Open in Browser** ci-dessus, ou ouvre
-> https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-updated.html
+> https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-complete-with-ai-agents.html
 
 ---
 
@@ -49,7 +49,7 @@ Contrairement aux LLMs classiques (ChatGPT, Claude, Gemini…), KayrosLab ne se 
 
 Le prototype le plus abouti est disponible directement dans le dépôt :
 
-**[`kayroslab-complete-updated.html`](kayroslab-complete-updated.html)** (version v12)
+**[`kayroslab-complete-with-ai-agents.html`](kayroslab-complete-with-ai-agents.html)** (version v12)
 
 Ce fichier unique contient :
 - L’ensemble du workflow en 5 étapes
