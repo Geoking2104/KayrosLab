@@ -223,3 +223,56 @@ test('QdrantVectorStore : ensureCollection + upsert + search (filtre ideaId)', a
   assert.equal(res[0].ideaId, 'i1');
   assert.ok(res[0].score > 0.9);
 });
+
+// ---------- Embeddings + MemoryService ----------
+import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
+
+test('MockEmbeddings : deterministe + dimension', async () => {
+  const e = new MockEmbeddings({ dim: 8 });
+  const a = await e.embed('batteries seconde vie');
+  const b = await e.embed('batteries seconde vie');
+  assert.equal(a.length, 8);
+  assert.deepEqual(a, b);
+  const batch = await e.embedBatch(['x', 'y']);
+  assert.equal(batch.length, 2);
+});
+
+test('OllamaEmbeddings : /api/embed (fetch simule)', async () => {
+  const fake = async (url, opts) => {
+    assert.ok(url.endsWith('/api/embed'));
+    const body = JSON.parse(opts.body);
+    return { ok: true, json: async () => ({ embeddings: body.input.map(() => [0.1, 0.2, 0.3]) }) };
+  };
+  const e = new OllamaEmbeddings({ model: 'nomic-embed-text', fetchImpl: fake });
+  const v = await e.embed('bonjour');
+  assert.deepEqual(v, [0.1, 0.2, 0.3]);
+});
+
+test('HttpEmbeddings : proxy backend (fetch simule)', async () => {
+  const fake = async (url, opts) => ({ ok: true, json: async () => ({ embeddings: [[1, 0, 0]] }) });
+  const e = new HttpEmbeddings({ url: 'https://x/v1/embed', secret: 's', fetchImpl: fake });
+  const v = await e.embed('hi');
+  assert.deepEqual(v, [1, 0, 0]);
+});
+
+test('MemoryService : remember + recall (semantique)', async () => {
+  const { InMemoryVectorStore } = await import('./memory.mjs');
+  const mem = new MemoryService({ embeddings: new MockEmbeddings({ dim: 16 }), store: new InMemoryVectorStore() });
+  await mem.rememberMany([
+    { id: 'a', ideaId: 'i1', text: 'pack batteries seconde vie stockage residentiel' },
+    { id: 'b', ideaId: 'i1', text: 'recette de tarte aux pommes' },
+    { id: 'c', ideaId: 'i2', text: 'autre idee isolee' },
+  ]);
+  const res = await mem.recall('i1', 'batteries stockage residentiel', 2);
+  assert.ok(res.length <= 2);
+  assert.equal(res[0].id, 'a');            // le plus proche semantiquement
+  assert.ok(res.every((r) => r.ideaId === 'i1')); // isolation par idee
+});
+
+test('createEngine expose embeddings + memory (mock offline)', async () => {
+  const eng = createEngine();
+  assert.ok(eng.embeddings && eng.memory);
+  await eng.memory.remember({ id: '1', ideaId: 'x', text: 'test' });
+  const r = await eng.memory.recall('x', 'test', 1);
+  assert.equal(r[0].id, '1');
+});

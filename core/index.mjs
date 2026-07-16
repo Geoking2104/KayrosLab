@@ -3,6 +3,7 @@ export * from './resilience.mjs';
 export * from './kayros-llm.mjs';
 export * from './tool-registry.mjs';
 export * from './memory.mjs';
+export * from './embeddings.mjs';
 export * from './ki.mjs';
 export * from './governance.mjs';
 export * from './orchestrator.mjs';
@@ -12,13 +13,14 @@ import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
 import { InMemoryVectorStore } from './memory.mjs';
+import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 
 /**
  * Fabrique un moteur.
  * - P0 : mock (defaut, offline).
- * - P1 : sovereignty:'local' => Ollama direct.
- * - P2 : backendUrl => proxy PHP/Fastify (cle cote serveur), provider par defaut 'backend'.
- * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, backendUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function}} [opts]
+ * - P1 : sovereignty:'local' => Ollama (LLM + embeddings).
+ * - P2 : backendUrl => proxy PHP/Fastify ; embeddingsUrl => embeddings via proxy.
+ * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, embedModel?:string, backendUrl?:string, embeddingsUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function}} [opts]
  */
 export function createEngine(opts = {}) {
   const providers = { mock: new MockProvider() };
@@ -34,6 +36,14 @@ export function createEngine(opts = {}) {
   const tools = demoTools();
   const governance = new GovernanceService();
   const vectors = new InMemoryVectorStore();
+
+  // Embeddings : proxy > Ollama local > mock offline.
+  let embeddings;
+  if (opts.embeddingsUrl) embeddings = new HttpEmbeddings({ url: opts.embeddingsUrl, model: opts.embedModel, secret: opts.secret, fetchImpl: opts.fetchImpl });
+  else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel, fetchImpl: opts.fetchImpl });
+  else embeddings = new MockEmbeddings();
+  const memory = new MemoryService({ embeddings, store: vectors });
+
   const orchestrator = new Orchestrator({ llm, tools, governance });
-  return { llm, tools, governance, vectors, orchestrator };
+  return { llm, tools, governance, vectors, embeddings, memory, orchestrator };
 }
