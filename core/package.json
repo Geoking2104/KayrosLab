@@ -1,0 +1,11 @@
+{
+  "name": "kayroslab-core",
+  "version": "0.1.0",
+  "description": "Cœur LLM gouverné de KayrosLab : orchestrateur (Plan-and-Solve + ReAct), abstraction LLM, résilience, mémoire, gouvernance humaine.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test"
+  }
+}
