@@ -1,50 +1,66 @@
-# KayrosLab — Cœur « LLM gouverné » (`core/`)
+# `core/` — Cœur LLM gouverné KayrosLab
 
-Modules ESM **portables navigateur + Node**, zéro dépendance, dérivés de `SPECIFICATIONS_TECHNIQUES.md`.
-Objectif : orchestrer de vrais LLMs (Claude/Ollama) derrière une couche de gouvernance humaine.
+Moteur agentique (zéro dépendance, ESM, Node 20+) qui orchestre de vrais LLM
+(Claude / Ollama) derrière une couche de gouvernance avec censeurs humains.
+Ce n'est **pas** un modèle entraîné : c'est un orchestrateur gouverné.
 
 ## Modules
 
-| Fichier | Rôle | Réf. specs |
-|---|---|---|
-| `resilience.mjs` | Retry (backoff exponentiel + jitter) + Circuit Breaker (CLOSED/OPEN/HALF_OPEN) | §7 (EF-27/28) |
-| `kayros-llm.mjs` | Abstraction `KayrosLLM` + adaptateurs Mock / Anthropic / Ollama + RoutingPolicy | §5 (EF-24/25/26) |
-| `tool-registry.mjs` | Registre d'outils (function calling) + validation | §4 |
-| `memory.mjs` | Shared Memory + Vector Store en mémoire (cosinus, interface Qdrant-compatible) | §6 (EF-17/18) |
-| `ki.mjs` | KI : 5 dimensions **stratégiques** alimentées par 6 dimensions techniques | §11 (EF-22/23) |
-| `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité, `policyFor` (défaut `supervise`) | §8 (EF-19/20/21, 34/36/37/38) |
-| `orchestrator.mjs` | Plan-and-Solve + ReAct (flux de traces) + gouvernance de sortie | §3 (EF-15/16) |
-| `index.mjs` | Assemblage `createEngine()` | — |
+| Fichier | Rôle |
+|---|---|
+| `index.mjs` | `createEngine(opts)` — assemble providers, routage, mémoire, embeddings, gouvernance, orchestrateur. |
+| `kayros-llm.mjs` | Abstraction `KayrosLLM` + adaptateurs `Mock`, `Anthropic`, `Ollama`, `HttpBackend` ; `RoutingPolicy` ; circuit breaker par provider. |
+| `orchestrator.mjs` | `Orchestrator` (Plan-and-Solve + ReAct), memory-aware. Planner LLM + repli déterministe. |
+| `resilience.mjs` | `computeBackoff`, `CircuitBreaker`, `withResilience` (retry + backoff + jitter). |
+| `memory.mjs` | `SharedMemory`, `InMemoryVectorStore`, `QdrantVectorStore` (cosinus, filtre par `ideaId`). |
+| `embeddings.mjs` | `OllamaEmbeddings`, `MockEmbeddings`, `HttpEmbeddings`, `MemoryService` (remember/recall). |
+| `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité (LLM + repli), `policyFor`. |
+| `ki.mjs` | Kayroslab Index (5 dimensions stratégiques + 6 techniques). |
+| `tool-registry.mjs` | Registre d'outils (`demoTools`). |
 
-## Utilisation
+## Démarrage rapide
 
 ```js
-import { createEngine } from './core/index.mjs';
+import { createEngine } from './index.mjs';
 
-const eng = createEngine();                       // adaptateur mock par défaut (offline)
-const plan = await eng.orchestrator.plan('Évaluer un scénario');
+// P0 (offline, mock) : createEngine()
+// P1 (local souverain, Ollama) :
+const eng = createEngine({ sovereignty: 'local', model: 'llama3.2' });
 
-for await (const ev of eng.orchestrator.run(plan, { governance: 'supervise' })) {
-  if (ev.type === 'gate') {
-    // un censeur humain habilité valide ou pose un veto
-    eng.governance.resolve(ev.gateId, { decision: 'approve', by: 'geoff', role: 'comex' });
-  }
-  console.log(ev);
+// PLAN : le Planner LLM génère le plan (repli déterministe si échec/non-JSON).
+const plan = await eng.orchestrator.plan("Lancer une offre B2B", { ideaId: 'idea-1', sovereignty: 'local' });
+// -> { ideaId, goal, generatedBy: 'llm' | 'fallback', steps: [...] }
+
+// SOLVE (ReAct) : flux d'événements (recall / trace / gate / final).
+for await (const ev of eng.orchestrator.run(plan, { governance: 'supervise', sovereignty: 'local' })) {
+  console.log(ev.type, ev);
 }
 ```
 
-Souveraineté (LLM local) : `createEngine({ sovereignty: 'local', ollamaEndpoint: 'http://localhost:11434' })`.
+Démo réelle Ollama : `node core/planner-ollama-demo.mjs [modèle] ["objectif"]`.
+
+## Planner LLM (notes)
+
+Le Planner attend un **tableau JSON** `[{ "agent", "description" }]` (dernière étape = `Synthesizer`).
+`parsePlanSteps` est robuste : il retire les blocs `<think>…</think>` (modèles *thinking*),
+les fences markdown, extrait le premier tableau JSON équilibré et récupère les objets
+complets d'un JSON tronqué. En cas d'échec total → repli déterministe (4 étapes).
+
+- **`plannerModel`** (`createEngine` / `Orchestrator`) : modèle léger dédié au Planner
+  (latence). Les gros modèles *thinking* (ex. `qwen3.5:9b`) sont contre-productifs ici
+  et lents en CPU — à réserver au VPS/GPU ou au batch async.
+- **`think: false`** est transmis à Ollama pour les appels Planner (JSON direct, pas de
+  raisonnement exposé).
+
+## Paliers de déploiement
+
+- **P0** — standalone (mock, offline).
+- **P1** — local souverain (`sovereignty: 'local'` → Ollama, aucune donnée ne sort).
+- **P2** — cloud gouverné : passer par le **backend proxy** (`backendUrl`) qui détient les clés
+  (PHP mutualisé OU Fastify VPS). Jamais de clé côté client.
 
 ## Tests
 
 ```bash
-cd core && npm test        # ou: node --test
+cd core && node --test      # 34 tests, zéro dépendance
 ```
-
-14 tests unitaires + intégration (fonctions pures + orchestrateur auto/strict/veto). **Statut : ✅ tous verts.**
-
-## Périmètre & limites
-
-- Les adaptateurs **Anthropic/Ollama** sont des squelettes : Anthropic passe par un **backend proxy** (clé jamais au client, §10). Le mock est déterministe (offline).
-- Interactivité DOM non couverte ici (à intégrer dans `kayroslab-reference.html`).
-- Prochaines étapes : brancher Ollama réel, Qdrant, backend Fastify, puis câbler l'UI.
