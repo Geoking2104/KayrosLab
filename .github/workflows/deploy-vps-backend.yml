@@ -1,0 +1,81 @@
+name: Deploy KayrosLab backend → OVH VPS
+
+# Deploie backend/fastify/ sur le VPS OVH (51.210.9.71, partage avec openDPE),
+# dans /opt/kayroslab/backend, via SSH + PM2. Calque sur le pipeline openDPE.
+#
+# Secrets requis (Settings > Secrets and variables > Actions) :
+#   VPS_SSH_USER     -> "ubuntu"        (reutilisable depuis openDPE)
+#   VPS_SSH_KEY      -> cle privee SSH  (reutilisable depuis openDPE)
+#   ANTHROPIC_API_KEY-> sk-ant-...      (requis pour le provider Claude)
+# Secrets optionnels :
+#   ANTHROPIC_MODEL  -> ex. claude-3-5-sonnet-latest
+#   ALLOWED_ORIGIN   -> ex. https://www.kayroslab.com  (defaut: *)
+#   KAYROS_SECRET    -> active l'entete X-Kayros-Secret
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/fastify/**'
+      - '.github/workflows/deploy-vps-backend.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-vps:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+      ALLOWED_ORIGIN: ${{ secrets.ALLOWED_ORIGIN }}
+      KAYROS_SECRET: ${{ secrets.KAYROS_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare target directory on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            sudo mkdir -p /opt/kayroslab/backend
+            sudo chown -R "${{ secrets.VPS_SSH_USER }}":"${{ secrets.VPS_SSH_USER }}" /opt/kayroslab
+
+      - name: Upload backend files to VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "backend/fastify/*"
+          target: "/opt/kayroslab/backend"
+          strip_components: 2
+
+      - name: Install deps, write .env, (re)start with PM2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          envs: ANTHROPIC_API_KEY,ANTHROPIC_MODEL,ALLOWED_ORIGIN,KAYROS_SECRET
+          script: |
+            set -e
+            cd /opt/kayroslab/backend
+            PORT=8787
+            : > .env
+            echo "PORT=${PORT}" >> .env
+            echo "ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-*}" >> .env
+            [ -n "${ANTHROPIC_API_KEY:-}" ] && echo "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}" >> .env
+            [ -n "${ANTHROPIC_MODEL:-}" ] && echo "ANTHROPIC_MODEL=${ANTHROPIC_MODEL}" >> .env
+            [ -n "${KAYROS_SECRET:-}" ] && echo "KAYROS_SECRET=${KAYROS_SECRET}" >> .env
+            npm install --omit=dev
+            if pm2 describe kayros-api > /dev/null 2>&1; then
+              pm2 reload kayros-api --update-env
+            else
+              pm2 start "node --env-file=.env index.mjs" --name kayros-api
+            fi
+            pm2 save
+            sleep 2
+            curl -fsS "localhost:${PORT}/health" && echo " -> health OK"
