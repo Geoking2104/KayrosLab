@@ -5,6 +5,7 @@ export * from './tool-registry.mjs';
 export * from './memory.mjs';
 export * from './embeddings.mjs';
 export * from './projection.mjs';
+export * from './loop.mjs';
 export * from './ki.mjs';
 export * from './governance.mjs';
 export * from './orchestrator.mjs';

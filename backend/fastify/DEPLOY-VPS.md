@@ -128,3 +128,22 @@ ollama pull llama3.2
 # dans .env : OLLAMA_ENDPOINT=http://localhost:11434, puis provider:'ollama'
 ```
 Pour du raisonnement stratégique, Claude via l'API reste recommandé.
+
+## Boucle Projeter → Écouter (EF-43) — cron
+
+L'endpoint `POST /v1/projeter/monitor` est un **tick sans état** (évalue les KPIs, renvoie
+`{alerts, signals, reArbitrage}`). Un cron sur le VPS l'appelle périodiquement ; ton pipeline
+décide ensuite de ré-injecter les `signals` dans le corpus d'Écouter et d'ouvrir un re-arbitrage.
+
+Exemple (toutes les heures) — `crontab -e` :
+
+```cron
+0 * * * * curl -fsS -X POST http://localhost:8787/v1/projeter/monitor \
+  -H 'Content-Type: application/json' \
+  -d @/opt/kayroslab/monitor-payload.json >> /var/log/kayros-monitor.log 2>&1
+```
+
+`monitor-payload.json` : `{ "ideaId": "...", "kpis": [{ "id":"adoption","threshold":100,"comparator":"lte" }], "readings": [{ "kpiId":"adoption","value": 80 }] }`.
+
+> Côté application (navigateur), la même logique tourne en pur JS via `MonitoringLoop` +
+> `orchestrator.monitorProjection(...)` — pas d'appel réseau nécessaire.

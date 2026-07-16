@@ -456,3 +456,65 @@ test('Orchestrator.project : No-Go -> capitalisation ; Revision -> renvoi Eprouv
   assert.equal(rev.status, 'Révision');
   assert.equal(rev.renvoi, 'Éprouver');
 });
+
+// ---------- Boucle Projeter -> Ecouter (EF-43) ----------
+test('evaluateKpis : detecte les seuils franchis (lte/gte)', async () => {
+  const { evaluateKpis } = await import('./loop.mjs');
+  const kpis = [
+    { id: 'adoption', name: 'Adoption', threshold: 100, comparator: 'lte' }, // alerte si <= 100
+    { id: 'churn', name: 'Churn', threshold: 0.1, comparator: 'gte' },        // alerte si >= 0.1
+  ];
+  const { alerts, ok } = evaluateKpis(kpis, [{ kpiId: 'adoption', value: 80 }, { kpiId: 'churn', value: 0.05 }]);
+  assert.equal(alerts.length, 1);
+  assert.equal(alerts[0].kpiId, 'adoption');
+  assert.equal(ok.length, 1);
+  assert.equal(ok[0].kpiId, 'churn');
+});
+
+test('alertsToSignals : forme des signaux re-injectables', async () => {
+  const { alertsToSignals } = await import('./loop.mjs');
+  const sig = alertsToSignals([{ kpiId: 'adoption', name: 'Adoption', value: 80, threshold: 100, comparator: 'lte' }], { ideaId: 'i1', now: () => 'T0' });
+  assert.equal(sig.length, 1);
+  assert.equal(sig[0].source, 'projeter-loop');
+  assert.equal(sig[0].date, 'T0');
+  assert.match(sig[0].contenu, /Adoption/);
+});
+
+test('MonitoringLoop : ordonnanceur injectable (start/tick/stop)', async () => {
+  const { MonitoringLoop } = await import('./loop.mjs');
+  let captured = null, cleared = false, ticks = 0;
+  const scheduler = { setInterval: (fn) => { captured = fn; return 7; }, clearInterval: (h) => { cleared = (h === 7); } };
+  const loop = new MonitoringLoop({ task: async () => { ticks++; }, scheduler });
+  loop.start(1000);
+  assert.equal(typeof captured, 'function');
+  captured();                    // simule un tick de l'ordonnanceur
+  await loop.tick();             // tick manuel
+  assert.equal(ticks, 2);
+  loop.stop();
+  assert.equal(cleared, true);
+  assert.equal(loop.running, false);
+});
+
+test('Orchestrator.monitorProjection : alerte -> signal en memoire + re-arbitrage', async () => {
+  const eng = createEngine(); // memoire vectorielle mock active
+  const before = eng.vectors.size();
+  const out = await eng.orchestrator.monitorProjection(
+    { kpis: [{ id: 'adoption', name: 'Adoption', threshold: 100, comparator: 'lte' }], readings: [{ kpiId: 'adoption', value: 80 }] },
+    { ideaId: 'iLoop' },
+  );
+  assert.equal(out.alerts.length, 1);
+  assert.equal(out.signals.length, 1);
+  assert.ok(out.reArbitrage);
+  assert.equal(out.reArbitrage.type, 're-arbitrage');
+  assert.ok(eng.vectors.size() > before); // signal re-injecte dans Ecouter
+});
+
+test('Orchestrator.monitorProjection : aucun seuil franchi -> pas de re-arbitrage', async () => {
+  const eng = createEngine();
+  const out = await eng.orchestrator.monitorProjection(
+    { kpis: [{ id: 'adoption', threshold: 100, comparator: 'lte' }], readings: [{ kpiId: 'adoption', value: 150 }] },
+    { ideaId: 'iLoop2' },
+  );
+  assert.equal(out.alerts.length, 0);
+  assert.equal(out.reArbitrage, null);
+});

@@ -5,6 +5,7 @@ import cors from '@fastify/cors';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
+  evaluateKpis, alertsToSignals,
 } from '../../core/index.mjs';
 
 const {
@@ -120,6 +121,17 @@ app.post('/v1/govern/query', async (req, reply) => {
   }
   if (gate) return reply.code(202).send({ status: 'pending_review', gateId: gate.gateId, gateType: gate.gateType, trace: { agents } });
   return { status: final.status, answer: final.answer ?? final.message, trace: { agents } };
+});
+
+// Boucle Projeter -> Ecouter (EF-43) : tick SANS ETAT, appelable par un cron.
+// Evalue les KPIs et renvoie les signaux a re-injecter + une proposition de re-arbitrage.
+app.post('/v1/projeter/monitor', async (req, reply) => {
+  const { kpis = [], readings = [], ideaId = 'idea' } = req.body || {};
+  if (!Array.isArray(kpis) || !Array.isArray(readings)) return reply.code(400).send({ error: 'kpis[] et readings[] requis' });
+  const { alerts } = evaluateKpis(kpis, readings);
+  const signals = alertsToSignals(alerts, { ideaId });
+  const reArbitrage = alerts.length ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId) } : null;
+  return { alerts, signals, reArbitrage };
 });
 
 app.listen({ port: Number(PORT), host: '0.0.0.0' })

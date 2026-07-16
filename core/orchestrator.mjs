@@ -2,6 +2,7 @@
 // Ref. specs techniques §3 (EF-15/16) + §6 (EF-17/18). Emet des ReActTrace en flux.
 
 import { classifySensitive, policyFor } from './governance.mjs';
+import { evaluateKpis, alertsToSignals } from './loop.mjs';
 
 /** @typedef {'Planner'|'Critic'|'DevilsAdvocate'|'RedTeam'|'Bisociateur'|'Synthesizer'} AgentType */
 
@@ -238,6 +239,30 @@ export class Orchestrator {
     };
     this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
     return { ...base, status: 'Go', roadmap, projections };
+  }
+
+  /**
+   * Boucle Projeter -> Ecouter (EF-43) : evalue les KPIs, re-injecte les alertes comme
+   * signaux dans le corpus d'Ecouter (memoire), et propose un re-arbitrage si seuil franchi.
+   * Un tick unique (a appeler depuis un ordonnanceur : MonitoringLoop, cron, ou tache planifiee).
+   * @param {{kpis?:any[], readings?:any[]}} input
+   * @param {{ideaId?:string}} [ctx]
+   * @returns {Promise<{alerts:any[], signals:any[], reArbitrage:object|null}>}
+   */
+  async monitorProjection({ kpis = [], readings = [] } = {}, ctx = {}) {
+    const ideaId = ctx.ideaId ?? 'idea';
+    const { alerts } = evaluateKpis(kpis, readings);
+    const signals = alertsToSignals(alerts, { ideaId });
+    // Re-injection dans le corpus d'Ecouter.
+    if (this._hasVectorMemory()) {
+      for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* best-effort */ } }
+    } else {
+      for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
+    }
+    const reArbitrage = alerts.length
+      ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId), ts: new Date().toISOString() }
+      : null;
+    return { alerts, signals, reArbitrage };
   }
 }
 
