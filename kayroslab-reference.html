@@ -4301,11 +4301,27 @@
 <script type="module">
   try {
     const { createEngine } = await import('./core/index.mjs');
-    const BACKEND = window.KAYROS_BACKEND_URL || 'https://api.kayroslab.com/v1/llm';
-    const engine = createEngine({ backendUrl: BACKEND, backendProvider: window.KAYROS_PROVIDER || 'anthropic', secret: window.KAYROS_SECRET });
+    // Base API unique (prod VPS via reverse proxy). Overrides : window.KAYROS_API_BASE,
+    // ou l'ancien window.KAYROS_BACKEND_URL (on en derive la base en retirant /llm).
+    const API_BASE = (window.KAYROS_API_BASE
+      || (window.KAYROS_BACKEND_URL ? String(window.KAYROS_BACKEND_URL).replace(/\/llm\/?$/, '') : '')
+      || 'https://api.kayroslab.com/v1').replace(/\/$/, '');
+    const ORIGIN = API_BASE.replace(/\/v1$/, '');
+    const BACKEND = `${API_BASE}/llm`;
+    const EMBEDDINGS = `${API_BASE}/embed`;
+    const engine = createEngine({
+      backendUrl: BACKEND,
+      embeddingsUrl: EMBEDDINGS,
+      backendProvider: window.KAYROS_PROVIDER || 'anthropic',
+      secret: window.KAYROS_SECRET,
+    });
     window.Kayros = {
       engine,
+      apiBase: API_BASE,
       backendUrl: BACKEND,
+      embeddingsUrl: EMBEDDINGS,
+      // Sonde de sante du backend (true si /health repond 200).
+      async health() { try { const r = await fetch(`${ORIGIN}/health`); return r.ok; } catch { return false; } },
       // Requete gouvernee complete (orchestrateur + gate). Retourne {status, answer, traces, gate}.
       async ask(query, { governance = 'supervise', provider } = {}) {
         const plan = await engine.orchestrator.plan(query, { ideaId: 'ui' });
@@ -4322,7 +4338,7 @@
       // Appel LLM brut (une completion) via le backend.
       llm(messages, opts = {}) { return engine.llm.complete({ messages }, opts); },
     };
-    console.info('[KayrosLab] Pont LLM gouverne pret — window.Kayros.ask("...") | backend:', BACKEND);
+    console.info('[KayrosLab] Pont LLM gouverne pret — window.Kayros.ask("...") | API:', API_BASE);
   } catch (e) {
     console.warn('[KayrosLab] Pont LLM non initialise (core/ absent ou backend non configure):', e.message);
   }
