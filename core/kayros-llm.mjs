@@ -54,6 +54,8 @@ export class OllamaProvider {
         model: req.model ?? this.defaultModel,
         messages: req.messages,
         stream: false,
+        // Desactive le raisonnement expose pour les modeles "thinking" (ex. Planner : JSON direct).
+        ...(typeof req.think === 'boolean' ? { think: req.think } : {}),
         options: typeof req.temperature === 'number' ? { temperature: req.temperature } : undefined,
       }),
     });

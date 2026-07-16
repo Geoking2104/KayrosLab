@@ -339,3 +339,55 @@ test('parsePlanSteps : ignore agents invalides, renvoie null si vide', async () 
   assert.equal(ok.length, 1);
   assert.equal(ok[0].agent, 'Critic');
 });
+
+test('parsePlanSteps : retire les blocs <think> (avec crochets parasites)', async () => {
+  const { parsePlanSteps } = await import('./orchestrator.mjs');
+  const txt = '<think>je liste [a, b, c] et je reflechis</think>[{"agent":"Planner","description":"p"},{"agent":"Synthesizer","description":"s"}]';
+  const steps = parsePlanSteps(txt);
+  assert.equal(steps.length, 2);
+  assert.equal(steps[0].agent, 'Planner');
+  assert.equal(steps.at(-1).agent, 'Synthesizer');
+});
+
+test('parsePlanSteps : gere les fences markdown', async () => {
+  const { parsePlanSteps } = await import('./orchestrator.mjs');
+  const txt = '```json\n[{"agent":"Critic","description":"c"}]\n```';
+  const steps = parsePlanSteps(txt);
+  assert.equal(steps.length, 1);
+  assert.equal(steps[0].agent, 'Critic');
+});
+
+test('parsePlanSteps : recupere les objets d un JSON tronque', async () => {
+  const { parsePlanSteps } = await import('./orchestrator.mjs');
+  // tableau non ferme (reponse coupee) : 2 objets complets + 1 incomplet
+  const txt = '[{"agent":"Planner","description":"p"},{"agent":"RedTeam","description":"r"},{"agent":"Synthesi';
+  const steps = parsePlanSteps(txt);
+  assert.equal(steps.length, 2);
+  assert.equal(steps[0].agent, 'Planner');
+  assert.equal(steps[1].agent, 'RedTeam');
+});
+
+test('extractFirstArray / salvageObjects : primitives exportees', async () => {
+  const { extractFirstArray, salvageObjects } = await import('./orchestrator.mjs');
+  assert.equal(extractFirstArray('rien ici'), null);
+  assert.equal(extractFirstArray('a [1,2] b'), '[1,2]');
+  assert.equal(salvageObjects('[{"x":1},{"y":2},{"z"').length, 2);
+});
+
+test('Planner : think:false transmis a Ollama + plannerModel applique', async () => {
+  const { OllamaProvider, KayrosLLM, RoutingPolicy } = await import('./kayros-llm.mjs');
+  let captured = null;
+  const fetchImpl = async (_url, opts) => {
+    captured = JSON.parse(opts.body);
+    return { ok: true, json: async () => ({ message: { content: '[{"agent":"Planner","description":"p"},{"agent":"Synthesizer","description":"s"}]' }, prompt_eval_count: 1, eval_count: 1 }) };
+  };
+  const llm = new KayrosLLM(
+    { ollama: new OllamaProvider({ fetchImpl }) },
+    new RoutingPolicy({ defaultProvider: 'ollama', fallback: null })
+  );
+  const orch = new Orchestrator({ llm, plannerModel: 'llama3.2' });
+  const plan = await orch.plan('Objectif', { ideaId: 'iT', sovereignty: 'local' });
+  assert.equal(plan.generatedBy, 'llm');
+  assert.equal(captured.think, false);
+  assert.equal(captured.model, 'llama3.2');
+});

@@ -20,7 +20,7 @@ import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from 
  * - P0 : mock (defaut, offline).
  * - P1 : sovereignty:'local' => Ollama (LLM + embeddings).
  * - P2 : backendUrl => proxy PHP/Fastify ; embeddingsUrl => embeddings via proxy.
- * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, embedModel?:string, backendUrl?:string, embeddingsUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function}} [opts]
+ * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, plannerModel?:string, embedModel?:string, backendUrl?:string, embeddingsUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function}} [opts]
  */
 export function createEngine(opts = {}) {
   const providers = { mock: new MockProvider() };
@@ -44,6 +44,6 @@ export function createEngine(opts = {}) {
   else embeddings = new MockEmbeddings();
   const memory = new MemoryService({ embeddings, store: vectors });
 
-  const orchestrator = new Orchestrator({ llm, tools, governance, memory });
+  const orchestrator = new Orchestrator({ llm, tools, governance, memory, plannerModel: opts.plannerModel });
   return { llm, tools, governance, vectors, embeddings, memory, orchestrator };
 }

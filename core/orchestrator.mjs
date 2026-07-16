@@ -14,26 +14,79 @@ const PLANNER_SYSTEM =
   'Reponds UNIQUEMENT par un tableau JSON, sans texte autour : ' +
   '[{"agent":"Planner","description":"..."},{"agent":"RedTeam","description":"..."},{"agent":"Synthesizer","description":"..."}]';
 
-/** Extrait et valide un tableau d'etapes depuis la reponse LLM. Renvoie null si invalide. */
+/** Extrait le premier tableau JSON equilibre. Renvoie la sous-chaine (tronquee si non fermee) ou null. */
+export function extractFirstArray(s) {
+  const start = s.indexOf('[');
+  if (start < 0) return null;
+  let depth = 0, inStr = false, esc = false;
+  for (let i = start; i < s.length; i++) {
+    const c = s[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === '\\') esc = true;
+      else if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') inStr = true;
+    else if (c === '[') depth++;
+    else if (c === ']') { depth--; if (depth === 0) return s.slice(start, i + 1); }
+  }
+  return s.slice(start); // tronque : pas de ] final -> tentative de recuperation
+}
+
+/** Recupere les objets {...} complets d'un tableau JSON eventuellement tronque. */
+export function salvageObjects(raw) {
+  const objs = [];
+  let depth = 0, inStr = false, esc = false, startObj = -1;
+  for (let i = 0; i < raw.length; i++) {
+    const c = raw[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === '\\') esc = true;
+      else if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') inStr = true;
+    else if (c === '{') { if (depth === 0) startObj = i; depth++; }
+    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* objet invalide ignore */ } startObj = -1; } }
+  }
+  return objs;
+}
+
+/**
+ * Extrait et valide un tableau d'etapes depuis la reponse LLM. Renvoie null si invalide.
+ * Robuste aux modeles "thinking" (<think>...</think>), aux fences markdown et au JSON tronque.
+ */
 export function parsePlanSteps(text) {
   try {
-    const m = String(text ?? '').match(/\[[\s\S]*\]/);
-    if (!m) return null;
-    const arr = JSON.parse(m[0]);
+    let s = String(text ?? '');
+    // 1) retirer les blocs de raisonnement (modeles thinking), fermes ou non.
+    s = s.replace(/<think>[\s\S]*?<\/think>/gi, ' ').replace(/<think>[\s\S]*$/i, ' ');
+    // 2) retirer les fences markdown eventuelles.
+    s = s.replace(/```(?:json)?/gi, ' ');
+    // 3) extraire le premier tableau JSON equilibre.
+    const raw = extractFirstArray(s);
+    if (!raw) return null;
+    let arr;
+    try { arr = JSON.parse(raw); }
+    catch { arr = salvageObjects(raw); } // JSON tronque -> objets complets seulement
     if (!Array.isArray(arr) || !arr.length) return null;
     const allowed = new Set(AGENTS);
     const steps = arr
-      .filter((s) => s && typeof s.description === 'string' && allowed.has(s.agent))
+      .filter((x) => x && typeof x.description === 'string' && allowed.has(x.agent))
       .slice(0, 8)
-      .map((s, i) => ({ id: `s${i + 1}`, agent: s.agent, description: s.description, ...(s.tool ? { tool: s.tool } : {}) }));
+      .map((x, i) => ({ id: `s${i + 1}`, agent: x.agent, description: x.description, ...(x.tool ? { tool: x.tool } : {}) }));
     return steps.length ? steps : null;
   } catch { return null; }
 }
 
 export class Orchestrator {
-  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3 } = {}) {
+  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3, plannerModel = null } = {}) {
     if (!llm) throw new Error('Orchestrator: llm (KayrosLLM) requis');
     this.llm = llm; this.tools = tools; this.memory = memory; this.governance = governance; this.classifier = classifier; this.recallK = recallK;
+    // Modele leger dedie au Planner (structure JSON, faible latence). Les gros modeles "thinking"
+    // sont contre-productifs ici (lenteur + crochets parasites). null => defaut du provider.
+    this.plannerModel = plannerModel;
   }
 
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
@@ -60,7 +113,7 @@ export class Orchestrator {
       if (ctx.provider) opts.provider = ctx.provider;
       if (ctx.sovereignty) opts.sovereignty = ctx.sovereignty;
       const res = await this.llm.complete(
-        { role: 'Planner', model: ctx.model, temperature: 0.2, messages: [
+        { role: 'Planner', model: ctx.model ?? this.plannerModel, temperature: 0.2, think: false, messages: [
           { role: 'system', content: PLANNER_SYSTEM },
           { role: 'user', content: `Objectif : ${goal}` },
         ] },
