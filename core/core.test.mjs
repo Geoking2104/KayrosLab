@@ -391,3 +391,68 @@ test('Planner : think:false transmis a Ollama + plannerModel applique', async ()
   assert.equal(captured.think, false);
   assert.equal(captured.model, 'llama3.2');
 });
+
+// ---------- Projeter : projection deterministe + outils + orchestrateur ----------
+test('simulateTrajectory : esperance exacte + quantiles ordonnes + reproductible', async () => {
+  const { simulateTrajectory } = await import('./projection.mjs');
+  const input = { scenarios: [{ probability: 0.5, value: 100 }, { probability: 0.5, value: 0 }], seed: 7, iterations: 5000 };
+  const a = simulateTrajectory(input);
+  const b = simulateTrajectory(input);
+  assert.equal(a.valeurAttendue, 50);            // esperance analytique exacte
+  assert.ok(a.p10 <= a.p50 && a.p50 <= a.p90);   // quantiles ordonnes
+  assert.deepEqual(a, b);                         // reproductible (meme seed)
+});
+
+test('simulateTrajectory : probabilites normalisees + variables ajoutent du bruit', async () => {
+  const { simulateTrajectory } = await import('./projection.mjs');
+  const r = simulateTrajectory({ scenarios: [{ probability: 2, value: 10 }, { probability: 2, value: 20 }], variables: [{ min: 0, max: 4 }], seed: 1, iterations: 4000 });
+  assert.equal(r.scenariosPonderes[0].probability, 0.5); // 2/(2+2)
+  assert.equal(r.valeurAttendue, 15);                    // 0.5*10 + 0.5*20 (esperance sans bruit)
+  assert.ok(r.p90 > r.p10);
+});
+
+test('estimateResources : arithmetique budget/etp/tco/roi', async () => {
+  const { estimateResources } = await import('./projection.mjs');
+  const r = estimateResources({
+    milestones: [{ effortPersonMonths: 10 }, { effortPersonMonths: 5 }],
+    costHypotheses: { costPerPersonMonth: 1000, overheadRate: 0.2, horizonMonths: 5, runRateMonthly: 100, expectedRevenue: 30000 },
+  });
+  assert.equal(r.budget, 18000);     // 15 * 1000 * 1.2
+  assert.equal(r.tco, 18500);        // 18000 + 100*5
+  assert.equal(r.etp, 3);            // 15 / 5
+  assert.equal(r.roiProjete, 0.621622); // (30000-18500)/18500 arrondi
+});
+
+test('demoTools : outils Projeter enregistres et appelables', async () => {
+  const { demoTools } = await import('./tool-registry.mjs');
+  const reg = demoTools();
+  assert.ok(reg.get('simulate_trajectory'));
+  assert.ok(reg.get('estimate_resources'));
+  const r = await reg.call('simulate_trajectory', { scenarios: [{ probability: 1, value: 42 }], seed: 2, iterations: 500 });
+  assert.equal(r.valeurAttendue, 42);
+});
+
+test('Orchestrator.project : Go -> roadmap + ressources + projections', async () => {
+  const eng = createEngine();
+  const out = await eng.orchestrator.project({
+    status: 'Go',
+    milestones: [{ name: 'MVP', effortPersonMonths: 4, durationMonths: 2 }],
+    costHypotheses: { costPerPersonMonth: 1000 },
+    scenarios: [{ probability: 1, value: 50 }],
+    raci: [{ jalon: 'MVP', R: 'geoff' }],
+  }, { ideaId: 'p1', seed: 1, iterations: 1000 });
+  assert.equal(out.status, 'Go');
+  assert.equal(out.roadmap.jalons.length, 1);
+  assert.equal(out.roadmap.ressources.budget, 4000);
+  assert.equal(out.projections.valeurAttendue, 50);
+});
+
+test('Orchestrator.project : No-Go -> capitalisation ; Revision -> renvoi Eprouver', async () => {
+  const eng = createEngine();
+  const nogo = await eng.orchestrator.project({ status: 'No-Go', apprentissages: ['a', 'b'] }, { ideaId: 'p2' });
+  assert.equal(nogo.status, 'No-Go');
+  assert.equal(nogo.capitalisation.apprentissages.length, 2);
+  const rev = await eng.orchestrator.project({ status: 'Révision', motif: 'revoir X' }, { ideaId: 'p3' });
+  assert.equal(rev.status, 'Révision');
+  assert.equal(rev.renvoi, 'Éprouver');
+});

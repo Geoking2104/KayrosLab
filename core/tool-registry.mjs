@@ -1,6 +1,8 @@
 // KayrosLab — Tool Registry (outils déclaratifs pour l'orchestrateur / function calling).
 // Réf. specs techniques §4.
 
+import { simulateTrajectory, estimateResources } from './projection.mjs';
+
 /**
  * @typedef {{name:string, description:string, inputKeys?:string[], sideEffect?:'none'|'read'|'write', gate?:boolean, handler:(input:any,ctx?:any)=>Promise<any>}} ToolDef
  */
@@ -57,6 +59,17 @@ export function demoTools() {
     name: 'calculate_ki_impact', description: 'Impact estimé d’un changement sur le KI',
     inputKeys: ['ideaId', 'changement'], sideEffect: 'read',
     handler: async ({ changement }) => ({ delta_KI: Math.min(2, (changement?.length || 0) / 50) }),
+  });
+  // Étape Projeter (EF-41) — calculs DETERMINISTES (le LLM ne fait qu'alimenter les hypotheses).
+  reg.register({
+    name: 'simulate_trajectory', description: 'Simulation de trajectoire probabiliste (Monte-Carlo deterministe) : valeur attendue + P10/P50/P90',
+    inputKeys: ['scenarios'], sideEffect: 'read',
+    handler: async (input) => simulateTrajectory(input),
+  });
+  reg.register({
+    name: 'estimate_resources', description: 'Estimation ressources & budget (ETP, budget, TCO, ROI projete) — deterministe',
+    inputKeys: ['milestones'], sideEffect: 'read',
+    handler: async (input) => estimateResources(input),
   });
   return reg;
 }

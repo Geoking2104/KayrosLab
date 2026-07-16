@@ -192,6 +192,53 @@ export class Orchestrator {
     }
     yield { type: 'final', status: 'auto', answer, ts: new Date().toISOString() };
   }
+
+  /**
+   * Phase PROJETER (EF-39 a EF-45) : transforme une decision en trajectoire pilotee.
+   * Deterministe pour les chiffres (outils simulate_trajectory / estimate_resources) ;
+   * branche selon la decision Go / No-Go / Revision.
+   * @param {{status?:'Go'|'No-Go'|'Revision'|'Révision', milestones?:any[], scenarios?:any[], variables?:any[], costHypotheses?:object, raci?:any[], kpis?:any[], risques?:any[], gatesFuturs?:any[], apprentissages?:any[], reactivation?:any, signaux?:any[], motif?:string}} decision
+   * @param {{ideaId?:string, iterations?:number, seed?:number}} [ctx]
+   */
+  async project(decision = {}, ctx = {}) {
+    const ideaId = ctx.ideaId ?? 'idea';
+    const status = decision.status ?? 'Go';
+    const base = { ideaId, generatedBy: 'projeter', ts: new Date().toISOString() };
+    const hasTool = (n) => !!(this.tools && typeof this.tools.get === 'function' && this.tools.get(n));
+
+    if (status === 'No-Go') {
+      const capitalisation = {
+        apprentissages: decision.apprentissages ?? [],
+        reactivation: decision.reactivation ?? null,
+        signaux: decision.signaux ?? [],
+      };
+      this.memory?.addContribution?.({ actor: 'Projeter', content: `capitalisation No-Go (${capitalisation.apprentissages.length} apprentissages)` });
+      return { ...base, status: 'No-Go', capitalisation };
+    }
+    if (status === 'Revision' || status === 'Révision') {
+      return { ...base, status: 'Révision', note: decision.motif ?? 'Révision demandée', renvoi: 'Éprouver' };
+    }
+
+    // Go : roadmap + ressources/budget + projections probabilistes (chiffres deterministes).
+    const milestones = decision.milestones ?? [];
+    let ressources = null, projections = null;
+    if (hasTool('estimate_resources')) {
+      try { ressources = await this.tools.call('estimate_resources', { milestones, costHypotheses: decision.costHypotheses ?? {} }, { ideaId }); } catch { ressources = null; }
+    }
+    if (hasTool('simulate_trajectory') && Array.isArray(decision.scenarios) && decision.scenarios.length) {
+      try { projections = await this.tools.call('simulate_trajectory', { scenarios: decision.scenarios, variables: decision.variables ?? [], iterations: ctx.iterations, seed: ctx.seed }, { ideaId }); } catch { projections = null; }
+    }
+    const roadmap = {
+      jalons: milestones,
+      raci: decision.raci ?? [],
+      ressources,
+      kpis: decision.kpis ?? [],
+      risques: decision.risques ?? [],
+      gatesFuturs: decision.gatesFuturs ?? [],
+    };
+    this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
+    return { ...base, status: 'Go', roadmap, projections };
+  }
 }
 
 export async function collect(gen) {
