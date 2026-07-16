@@ -189,10 +189,19 @@ interface ToolRegistry {
 |---|---|---|---|
 | `search_regulatory_risks` | `{ domaine, marché }` | `{ risques[] }` | read |
 | `calculate_ki_impact` | `{ ideaId, changement }` | `{ delta_KI }` | read |
+| `simulate_trajectory` | `{ scénarios[], variables[], iterations? }` | `{ scénariosPondérés[], valeurAttendue, p10, p50, p90 }` | read |
+| `estimate_resources` | `{ jalons[], hypothèsesCoût }` | `{ etp, budget, tco, roiProjeté }` | read |
 | `persist_idea` | `{ idea }` | `{ ok, version }` | write |
 | `publish_to_feed` | `{ ideaId }` | `{ ok }` | write |
 
 > **Sécurité.** Les outils `write` peuvent exiger une validation humaine avant exécution (config `gate`).
+> **Déterminisme (EF-41).** `simulate_trajectory` et `estimate_resources` sont des **calculs déterministes** (Monte-Carlo/espérance, arithmétique de coûts) : le LLM ne fournit que les **hypothèses et distributions** en entrée ; l'outil calcule et renvoie les résultats tracés. Aucun chiffre n'est « inventé » par le LLM.
+
+### 4.1 Étape Projeter — boucle cyclique (EF-39 à EF-45)
+
+- **Roadmap & ressources.** Générées par le Planner (`simulate_trajectory`, `estimate_resources`) ; modèle `Roadmap = { jalons[], raci[], budget, kpis[], risques[], gatesFuturs[] }` persisté par idée.
+- **Boucle Projeter → Écouter (EF-43).** Une **tâche planifiée** (scheduler cron/interval) évalue périodiquement les KPIs de suivi ; si un seuil d'alerte est franchi, elle ré-injecte un signal dans le corpus d'Écouter (`persist` signal) et **propose un re-arbitrage** (ouverture d'un gate COMEX). Rend le processus continu et apprenant.
+- **Portée décisionnelle.** `Go` → roadmap + suivi ; `No-Go` → dossier de capitalisation (`Capitalisation = { apprentissages[], réactivation, signaux[] }`) ; `Révision` → note conditionnelle renvoyée à Éprouver.
 
 ---
 
@@ -630,6 +639,7 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 | EF-29/30 | §9 Données |
 | EF-31/32 | §13 Observabilité |
 | EF-33/34/35/36/37/38 | §10 API gouvernée |
+| EF-39/40/41/42/43/44/45 | §4.1 Étape Projeter (outils `simulate_trajectory`, `estimate_resources`, boucle planifiée) |
 
 ---
 

@@ -20,7 +20,7 @@
 
 ## 0. Résumé exécutif
 
-KayrosLab est un **atelier d'idéation stratégique gouverné** qui transforme des signaux faibles en décisions robustes via un processus traçable en **5 étapes** (Écouter → Cartographier → Construire → Éprouver → Arbitrer). Sa singularité par rapport à un LLM conversationnel classique tient à trois piliers :
+KayrosLab est un **atelier d'idéation stratégique gouverné** qui transforme des signaux faibles en décisions robustes via un processus traçable et **cyclique en 6 étapes** (Écouter → Cartographier → Construire → Éprouver → Arbitrer → Projeter, qui reboucle sur Écouter). Sa singularité par rapport à un LLM conversationnel classique tient à trois piliers :
 
 1. **Un collectif d'agents IA spécialisés** (Planner, Critic, Devil's Advocate, Red Team, Bisociateur, Synthesizer) plutôt qu'un modèle unique.
 2. **Un orchestrateur** qui planifie, séquence et arbitre les agents (paradigme *Plan-and-Solve + ReAct*) avec mémoire partagée et vectorielle.
@@ -116,10 +116,10 @@ Composant central qui : (a) reçoit la demande via l'interface unique ; (b) éta
 
 | Rôle humain | Responsabilité | Droit de veto | Point d'intervention |
 |---|---|---|---|
-| **Arbitre / COMEX** | Décision finale, priorisation | ✅ Oui | Étape 5 (Arbitrer) |
+| **Arbitre / COMEX** | Décision finale, priorisation ; validation roadmap/budget & jalons futurs | ✅ Oui | Étapes 5 (Arbitrer) & 6 (Projeter) |
 | **Expert métier** | Validation de pertinence sectorielle | ⚠️ Conditionnel | Étapes 3–4 |
-| **Red Team humaine** | Challenge final avant décision | ⚠️ Alerte bloquante | Étape 4 |
-| **Facilitateur** | Anime le processus, arbitre les Working Groups | ❌ Non (orchestration) | Toutes étapes |
+| **Red Team humaine** | Challenge final avant décision ; scénario adverse projeté | ⚠️ Alerte bloquante | Étapes 4 & 6 |
+| **Facilitateur** | Anime le processus, arbitre les Working Groups, valide le RACI | ❌ Non (orchestration) | Toutes étapes |
 | **Censeur de sortie** | Contrôle des outputs sensibles avant restitution en mode « LLM gouverné » | ✅ Oui | Gate de sortie (§7) |
 
 > **Working Groups (existant 🟢).** Le prototype 163 Ko permet déjà de rejoindre un groupe de travail, d'assigner/cocher des tâches et de commenter — socle concret des censeurs humains à formaliser.
@@ -135,6 +135,7 @@ Légende : **R**esponsable · **A**pprobateur · **C**onsulté · **I**nformé �
 | Construire scénarios (É3) | A | R | C | I | R | **C/V** | I |
 | Éprouver / attaquer (É4) | A | C | R | **R/V** | C | C | I |
 | Arbitrer & décider (É5) | C | I | C | C | R | C | **A/V** |
+| Projeter trajectoire & roadmap (É6) | A | R | C | C | R | C | **A/V** |
 | Restituer en mode LLM gouverné | A | C | C | C | R | I | **A/V** |
 
 ---
@@ -187,7 +188,7 @@ flowchart TD
 
 ---
 
-## 5. Le processus en 5 étapes
+## 5. Le processus en 6 étapes (cyclique)
 
 ```mermaid
 flowchart LR
@@ -195,11 +196,15 @@ flowchart LR
     E2 --> E3["03 · Construire<br/>scénarios + brief"]
     E3 --> E4["04 · Éprouver<br/>Critic + Devil + Red Team"]
     E4 --> E5["05 · Arbitrer<br/>décision + livrable"]
+    E5 --> E6["06 · Projeter<br/>trajectoire + prospective"]
     E4 -. "kill shot / veto" .-> E3
     E5 -. "révision demandée" .-> E4
+    E6 -. "KPIs / signaux de suivi (boucle)" .-> E1
 ```
 
-Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/sorties, statut, user stories + critères d'acceptation.
+> **Modèle cyclique.** Le processus n'est plus linéaire : **Projeter** reboucle sur **Écouter** via les KPIs et signaux de suivi (tâche planifiée), rendant l'idéation continue et apprenante.
+
+Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaillées**, agents, censeurs, entrées/sorties, statut, user stories + critères d'acceptation.
 
 ### Étape 1 — Écouter
 
@@ -207,6 +212,18 @@ Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/
 **Agents.** Planner (cadrage), Critic (scoring). **Censeurs.** Expert métier (consulté).
 **Entrées.** Corpus de signaux / sources. **Sorties.** Signaux qualifiés & scorés.
 **Statut.** 🟢 Réduction de bruit et promotion de signal existent (`promoteNoiseSignal`, `renderNoiseReduction`). 🔵 Scoring assisté par LLM réel.
+
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Cadrage d'écoute | Le Planner formule périmètre : question stratégique + sources + horizon. |
+| F2 | Ingestion multi-source | Saisie texte/URL, upload, connecteurs veille. Signal `{id, source, date, contenu, url?}`. |
+| F3 | Déduplication / clustering | Regroupement sémantique (embeddings) → évite doublons, pré-forme les clusters. |
+| F4 | Scoring LLM expliqué | Pertinence · fraîcheur · impact → note 0–100 + justification traçable. |
+| F5 | Réduction de bruit | Seuil configurable ; signaux sous seuil masqués mais conservés (réversible). |
+| F6 | Promotion en signal qualifié | Action humaine horodatée, écrite en mémoire vectorielle (`ideaId`). |
+| F7 | Tagging thématique | Tags/clusters proposés pour préparer Cartographier. |
 
 - **EF-01 (🟢)** Le système présente les signaux et permet d'en promouvoir en signaux qualifiés.
 - **EF-02 (🔵)** Chaque signal reçoit un score de pertinence expliqué (source, fraîcheur, impact).
@@ -222,6 +239,18 @@ Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/
 **Agents.** Planner, Bisociateur (ponts). **Censeurs.** Expert métier (consulté).
 **Statut.** 🟢 Réseau de tendances (`renderTrendNetwork`), sélection et envoi vers le scénario (`sendNetworkSelectionToScenario`).
 
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Construction du réseau | Nœuds = tendances/clusters ; arêtes typées (corrélation, causalité, opposition) proposées par le LLM. |
+| F2 | Détection de ponts (bisociation) | Liens non-évidents entre clusters distants, score nouveauté × plausibilité + justification. |
+| F3 | Centralité / tendances-pivots | Repérage des nœuds leviers (fort pouvoir structurant). |
+| F4 | Zones de tension | Contradictions/oppositions → zones fertiles pour l'idéation. |
+| F5 | Horizon temporel | Étiquetage court/moyen/long par tendance (prépare Projeter). |
+| F6 | Sélection → Construire | Sélection de nœuds/ponts → payload structuré transmis à l'étape 3. |
+| F7 | Recall mémoire | Réutilise les signaux qualifiés d'Écouter via recall vectoriel (`ideaId`). |
+
 - **EF-03 (🟢)** Visualiser les relations entre tendances et sélectionner des nœuds.
 - **EF-04 (🔵)** Suggestion automatique de ponts non-évidents (bisociation) entre clusters distants.
 
@@ -233,6 +262,18 @@ Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/
 **Objectif.** Générer des scénarios candidats et un brief structuré.
 **Agents.** Planner, Synthesizer, Bisociateur (Collision Mode). **Censeurs.** Expert métier (**consulté / veto conditionnel**).
 **Statut.** 🟢 Scenario builder, canvas, collider (`renderScenarioBuilder`, `runShowcaseCollision`, `sendScenarioToCollider`). 🟠 Collision Mode (démo). 🔵 Génération assistée LLM réel.
+
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Canvas de scénario | Composer/éditer un scénario à partir des nœuds/ponts sélectionnés en Cartographier. |
+| F2 | Génération assistée LLM | `Synthesizer` produit 2–3 variantes typées (rupture / prudente / optimiste). |
+| F3 | Collision Mode (bisociation) | `Bisociateur` force la collision de 2 concepts distants → idées scorées nouveauté × faisabilité. |
+| F4 | Brief structuré | Problème · insight · proposition de valeur · cible · hypothèses clés · métriques. |
+| F5 | Hypothèses explicites | Chaque scénario liste ses hypothèses critiques (matière d'Éprouver). |
+| F6 | Pré-scoring KI provisoire | KI initial (5 dimensions stratégiques) pour prioriser les scénarios. |
+| F7 | Traçabilité | Chaque idée bisociative ajoutée ⇒ timeline horodatée + mémoire. |
 
 - **EF-05 (🟢)** Composer un scénario à partir de signaux/tendances (canvas éditable).
 - **EF-06 (🟠→🔵)** Lancer un **Collision Mode** produisant des idées originales par bisociation.
@@ -246,6 +287,20 @@ Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/
 **Objectif.** Challenger les idées (Future Proofing) : Critic + Devil's Advocate + **Red Team offensive**.
 **Agents.** Critic, Devil's Advocate, **Red Team**, connecteurs externes. **Censeurs.** Red Team humaine (**alerte bloquante**).
 **Statut.** 🟠 Timeline scriptée (Planner→Critic→Bisociateur) + délégation externe simulée + KI dynamique (`runEnhancedFutureProofing`, `delegateToExternalAgent`, `calculateIntelligentKI`). 🔵 Red Team réelle + rapport d'attaque + boucle de correction.
+
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Future Proofing multi-agents | Timeline horodatée `Critic → Devil's Advocate → Red Team`. |
+| F2 | Critic | Angles morts, biais, failles logiques. |
+| F3 | Devil's Advocate | Conteste systématiquement les hypothèses clés issues de Construire. |
+| F4 | Red Team offensive | Kill shots (attaques létales) + scénarios d'échec plausibles. |
+| F5 | Rapport d'attaque | Chaque attaque `{type, sévérité, hypothèse visée, argument/preuve}`. |
+| F6 | Boucle de correction | Vulnérabilité « critique » ⇒ renvoi en Étape 3 + blocage d'Arbitrer. |
+| F7 | Délégation externe | Sous-tâches à un LLM externe, journalisées (modèle, tokens, coût). |
+| F8 | Recalcul KI réel | KI recalculé d'après le travail d'attaque (stratégique + technique). |
+| F9 | Red flags résiduels | Faiblesses non bloquantes listées pour l'arbitrage. |
 
 - **EF-08 (🟠)** Lancer un Future Proofing multi-agents affichant une timeline horodatée.
 - **EF-09 (🟠)** Déléguer une sous-tâche à un LLM externe et journaliser tokens & coût estimé.
@@ -262,12 +317,64 @@ Chaque étape est spécifiée ci-dessous : objectif, agents, censeurs, entrées/
 **Agents.** Synthesizer. **Censeurs.** **Arbitre / COMEX (approbateur + veto)**.
 **Statut.** 🟢 Livrables + génération PDF + ROI + délivrance (`generateIdeaPdf`, `openDeliveryModal`, `updateRoiCalculations`). 🔵 Vote multi-critères formalisé + décision tracée.
 
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Synthèse d'arbitrage | `Synthesizer` consolide scénario, KI, rapport d'attaque, red flags, ROI. |
+| F2 | Vote multi-critères | Working Group : pondération sur les dimensions KI, vote par membre, agrégation tracée. |
+| F3 | Décision Go / No-Go / Révision | Tranchée par l'Arbitre / COMEX. |
+| F4 | Gate d'approbation + veto | Décision via gate humain ; Révision ⇒ renvoi en Étape 4. |
+| F5 | Livrable | PDF + récap ROI + Gantt/roadmap synthétique. |
+| F6 | Traçabilité immuable | Décision + auteur + horodatage immuables (audit). |
+| F7 | Justification | Motif de décision consigné. |
+
 - **EF-12 (🟢)** Générer un livrable (PDF) et un récapitulatif ROI de l'idée.
 - **EF-13 (🔵)** Vote multi-critères (Working Group) débouchant sur une décision **Go / No-Go / Révision**.
 - **EF-14 (🔵)** La décision et son auteur humain sont horodatés et immuables dans la timeline.
 
 > **US-05.** En tant qu'**arbitre COMEX**, je veux **trancher sur la base d'une synthèse tracée** afin d'**assumer une décision auditable**.
 > **Critères.** *Étant donné* une idée éprouvée, *quand* je vote « No-Go » ou « Révision », *alors* l'idée n'est pas restituée en sortie et la raison est journalisée.
+
+### Étape 6 — Projeter 🔵 *(nouvelle)*
+
+**Objectif.** Transformer **toute décision** d'Arbitrer (Go / No-Go / Révision) en **trajectoire pilotée et prospective probabilisée**, avec allocation de ressources, puis **reboucler automatiquement** sur Écouter.
+**Agents.** Planner (roadmap/ressources), Synthesizer (récit/projection), Red Team (scénario adverse projeté), Critic (stress de trajectoire). **Censeurs.** COMEX (roadmap, budget, gates), Facilitateur (RACI).
+**Entrées.** Décision + livrable + KI figé + red flags (Arbitrer). **Sorties.** *(Go)* `roadmap{jalons, RACI, ressources, budget, KPIs, risquesProbabilisés, gatesFuturs}` + `projections{scénariosPondérés, P10/P50/P90, valeurAttendue}` ; *(No-Go)* `capitalisation{apprentissages, réactivation, signaux}`.
+**Statut.** 🔵 Cible (à construire).
+
+**Portée selon la décision.** **Go** → roadmap + ressources/budget + suivi + projections probabilistes. **No-Go** → capitalisation (apprentissages archivés, conditions de réactivation, signaux à re-surveiller). **Révision** → note de trajectoire conditionnelle renvoyée à Éprouver.
+
+**Fonctionnalités détaillées.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Roadmap d'exécution (Go) | Now / Next / Later, jalons datés, dépendances. |
+| F2 | Attribution & RACI | Porteurs/responsables par jalon. |
+| F3 | Ressources & budget | Capacité (ETP), budget/coûts, arbitrage de capacité, TCO/ROI projeté. |
+| F4 | Simulation probabiliste | Scénarios base/optimiste/adverse **avec probabilités** + valeur attendue ; Monte-Carlo léger → P10/P50/P90. |
+| F5 | Indicateurs de suivi | *Leading/lagging* + seuils d'alerte. |
+| F6 | Risques probabilisés | Red flags résiduels → matrice probabilité × impact + déclencheurs de re-arbitrage. |
+| F7 | Boucle automatisée | KPIs/signaux ré-injectés dans Écouter via tâche planifiée ; re-arbitrage si seuil franchi. |
+| F8 | Jalons de gouvernance | Gates futurs datés (COMEX). |
+| F9 | Capitalisation (No-Go) | Archivage structuré des apprentissages + conditions de réactivation. |
+| F10 | Export exécution | Roadmap (Gantt) + fiche projet + tableau KPI + note prospective probabiliste. |
+
+> **Rigueur.** Les probabilités/espérances/quantiles sont calculés par un **outil déterministe** (Monte-Carlo/espérance) : le LLM fournit hypothèses et distributions, l'outil calcule — jamais de chiffres inventés. Tout est tracé (hypothèses → résultat).
+
+- **EF-39 (🔵)** Générer, sur décision **Go**, une roadmap datée (Now/Next/Later) avec RACI proposé.
+- **EF-40 (🔵)** Estimer **ressources et budget** (ETP, coûts, TCO/ROI projeté) et arbitrer la capacité.
+- **EF-41 (🔵)** Produire des **projections de trajectoire probabilisées** (scénarios pondérés, valeur attendue, P10/P50/P90) via un outil déterministe.
+- **EF-42 (🔵)** Maintenir une **matrice de risques** (probabilité × impact) avec déclencheurs de re-arbitrage.
+- **EF-43 (🔵)** **Reboucler automatiquement** vers Écouter : les KPIs de suivi ré-alimentent le corpus via tâche planifiée.
+- **EF-44 (🔵)** Sur décision **No-Go**, produire un **dossier de capitalisation** (apprentissages, conditions de réactivation).
+- **EF-45 (🔵)** Planifier des **jalons de gouvernance futurs** (gates COMEX datés).
+
+> **US-06.** En tant que **porteur de projet**, je veux **transformer une décision en trajectoire pilotée et probabilisée** afin de **piloter l'exécution et déclencher un re-arbitrage au bon moment**.
+> **Critères.**
+> *Étant donné* une décision **Go**, *quand* Projeter s'exécute, *alors* une roadmap datée avec RACI, ressources et budget est produite.
+> *Étant donné* des variables clés incertaines, *quand* la simulation tourne, *alors* des scénarios **probabilisés** (valeur attendue + P10/P50/P90) calculés par outil déterministe sont restitués.
+> *Étant donné* un KPI franchissant son seuil d'alerte, *quand* la boucle planifiée s'exécute, *alors* un signal est ré-injecté en Écouter et un re-arbitrage est proposé.
 
 ---
 
