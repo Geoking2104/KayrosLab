@@ -4296,5 +4296,37 @@
     };
 
   </script>
+
+<!-- KayrosLab — Pont vers le coeur "LLM gouverne" (backend proxy). Additif, non intrusif. -->
+<script type="module">
+  try {
+    const { createEngine } = await import('./core/index.mjs');
+    const BACKEND = window.KAYROS_BACKEND_URL || 'https://api.kayroslab.com/v1/llm';
+    const engine = createEngine({ backendUrl: BACKEND, backendProvider: window.KAYROS_PROVIDER || 'anthropic', secret: window.KAYROS_SECRET });
+    window.Kayros = {
+      engine,
+      backendUrl: BACKEND,
+      // Requete gouvernee complete (orchestrateur + gate). Retourne {status, answer, traces, gate}.
+      async ask(query, { governance = 'supervise', provider } = {}) {
+        const plan = await engine.orchestrator.plan(query, { ideaId: 'ui' });
+        const res = { status: null, answer: null, traces: [], gate: null };
+        for await (const ev of engine.orchestrator.run(plan, { governance, provider })) {
+          if (ev.type === 'trace') res.traces.push({ agent: ev.agent, observation: ev.observation });
+          else if (ev.type === 'gate') { res.gate = ev; res.status = 'pending_review'; break; }
+          else if (ev.type === 'final') { res.status = ev.status; res.answer = ev.answer ?? ev.message; }
+        }
+        return res;
+      },
+      // Lever un gate de gouvernance (censeur humain).
+      approveGate(gateId, by = 'geoff', role = 'comex') { return engine.governance.resolve(gateId, { decision: 'approve', by, role }); },
+      // Appel LLM brut (une completion) via le backend.
+      llm(messages, opts = {}) { return engine.llm.complete({ messages }, opts); },
+    };
+    console.info('[KayrosLab] Pont LLM gouverne pret — window.Kayros.ask("...") | backend:', BACKEND);
+  } catch (e) {
+    console.warn('[KayrosLab] Pont LLM non initialise (core/ absent ou backend non configure):', e.message);
+  }
+</script>
+
 </body>
 </html>
