@@ -453,6 +453,13 @@
       approveGate(gateId, by = 'geoff', role = 'comex') { return engine.governance.resolve(gateId, { decision: 'approve', by, role }); },
       // Appel LLM brut (une completion) via le backend.
       llm(messages, opts = {}) { return engine.llm.complete({ messages }, opts); },
+      // Projeter (etape 6) : decision -> trajectoire (roadmap + projections, chiffres deterministes).
+      project(decision, ctx = {}) { return engine.orchestrator.project(decision, ctx); },
+      // Appel d'un outil deterministe via le backend (ex: simulate_trajectory, estimate_resources).
+      async callTool(name, input, { ideaId } = {}) {
+        const r = await fetch(`${API_BASE}/tools/call`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, input, ideaId }) });
+        return r.json();
+      },
     };
     console.info('[KayrosLab] Pont LLM gouverne pret — window.Kayros.ask("...") | API:', API_BASE);
   } catch (e) {

@@ -51,6 +51,7 @@ const providers = {
 const policy = new RoutingPolicy({ defaultProvider: ANTHROPIC_API_KEY ? 'anthropic' : 'mock', fallback: 'mock' });
 const llm = new KayrosLLM(providers, policy);
 const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
+const tools = demoTools(); // registre partage (inclut simulate_trajectory / estimate_resources, deterministes)
 
 const app = Fastify({ logger: true });
 await app.register(cors, { origin: ALLOWED_ORIGIN });
@@ -83,6 +84,25 @@ app.post('/v1/embed', async (req, reply) => {
     const vecs = await embeddings.embedBatch(texts);
     return { embeddings: vecs, model: embeddings.model };
   } catch (e) { return reply.code(502).send({ error: String(e.message || e) }); }
+});
+
+// Liste des outils exposables (metadonnees uniquement).
+app.get('/v1/tools', async () => ({
+  tools: tools.list().map((t) => ({ name: t.name, description: t.description, sideEffect: t.sideEffect, inputKeys: t.inputKeys })),
+}));
+
+// Execution d'un outil. Restreint aux outils `read` (deterministes, sans effet de bord) :
+// simulate_trajectory / estimate_resources / search_regulatory_risks / calculate_ki_impact.
+app.post('/v1/tools/call', async (req, reply) => {
+  const { name, input, ideaId } = req.body || {};
+  if (!name) return reply.code(400).send({ error: 'name requis' });
+  const t = tools.get(name);
+  if (!t) return reply.code(404).send({ error: `outil inconnu: ${name}` });
+  if (t.sideEffect !== 'read') return reply.code(403).send({ error: `outil ${name} non exposable (sideEffect=${t.sideEffect})` });
+  try {
+    const result = await tools.call(name, input || {}, { ideaId });
+    return { name, result };
+  } catch (e) { return reply.code(400).send({ error: String(e.message || e) }); }
 });
 
 // Requete gouvernee (orchestrateur + gate de sortie). En mode gate: 202 pending_review.
