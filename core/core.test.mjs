@@ -168,3 +168,30 @@ test('Orchestrateur : veto -> sortie bloquée sans contenu sensible', async () =
   assert.match(final.message, /risque non couvert/);
   assert.ok(!('answer' in final));
 });
+
+// ---------- HttpBackendProvider + override de fournisseur ----------
+import { HttpBackendProvider } from './kayros-llm.mjs';
+test('HttpBackendProvider : POST vers le proxy + normalisation', async () => {
+  let seen;
+  const fakeFetch = async (url, opts) => { seen = { url, body: JSON.parse(opts.body), headers: opts.headers }; return { ok: true, json: async () => ({ text: 'reponse backend', provider: 'anthropic', usage: { tokensIn: 12, tokensOut: 8 } }) }; };
+  const p = new HttpBackendProvider({ url: 'https://x/api/govern.php', provider: 'anthropic', secret: 's3cr3t', fetchImpl: fakeFetch });
+  const r = await p.complete({ messages: [{ role: 'user', content: 'salut' }], role: 'Planner' });
+  assert.equal(r.text, 'reponse backend');
+  assert.equal(r.provider, 'anthropic');
+  assert.equal(r.usage.tokensIn, 12);
+  assert.equal(seen.url, 'https://x/api/govern.php');
+  assert.equal(seen.headers['X-Kayros-Secret'], 's3cr3t');
+  assert.equal(seen.body.provider, 'anthropic');
+});
+test('RoutingPolicy : opts.provider force le fournisseur', () => {
+  const p = new RoutingPolicy({ defaultProvider: 'mock' });
+  assert.equal(p.choose({}, { provider: 'backend' }), 'backend');
+  assert.equal(p.choose({}, { sovereignty: 'local' }), 'ollama');
+  assert.equal(p.choose({}, {}), 'mock');
+});
+test('createEngine backendUrl => provider backend par defaut', async () => {
+  const fakeFetch = async () => ({ ok: true, json: async () => ({ text: 'ok', provider: 'anthropic', usage: {} }) });
+  const eng = createEngine({ backendUrl: 'https://x/api/govern.php', fetchImpl: fakeFetch });
+  const r = await eng.llm.complete({ messages: [{ role: 'user', content: 'x' }] });
+  assert.equal(r.provider, 'anthropic');
+});

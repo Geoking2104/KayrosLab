@@ -22,7 +22,7 @@ export class MockProvider {
   }
 }
 
-/** Squelette d'adaptateur Anthropic (a brancher en P2 cote backend, jamais de cle au client). */
+/** Squelette d'adaptateur Anthropic (a brancher cote backend, jamais de cle au client). */
 export class AnthropicProvider {
   constructor({ callBackend } = {}) { this.id = 'anthropic'; this._callBackend = callBackend; }
   async complete(req) {
@@ -68,12 +68,49 @@ export class OllamaProvider {
   }
 }
 
-/** Politique de routage : souverainete > role > defaut, avec fallback. EF-26 : local => Ollama. */
+/**
+ * Adaptateur backend HTTP : le navigateur (ou tout client) appelle le proxy KayrosLab
+ * (PHP mutualise OU Fastify) qui detient la cle et relaie vers Claude/Ollama.
+ * POST { messages, model, provider, role, temperature } -> { text, provider, usage }.
+ */
+export class HttpBackendProvider {
+  constructor({ url, provider = 'anthropic', secret, fetchImpl } = {}) {
+    if (!url) throw new Error('HttpBackendProvider: url requis');
+    this.id = 'backend'; this.url = url; this.provider = provider; this.secret = secret; this._fetch = fetchImpl;
+  }
+  _f() {
+    const f = this._fetch ?? (typeof fetch !== 'undefined' ? fetch : null);
+    if (!f) { const e = new Error('HttpBackendProvider: fetch indisponible'); e.code = 'NO_FETCH'; throw e; }
+    return f;
+  }
+  async complete(req) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (this.secret) headers['X-Kayros-Secret'] = this.secret;
+    const res = await this._f()(this.url, {
+      method: 'POST', headers,
+      body: JSON.stringify({ messages: req.messages, model: req.model, provider: req.provider ?? this.provider, role: req.role, temperature: req.temperature }),
+    });
+    if (!res.ok) { const e = new Error(`Backend HTTP ${res.status}`); e.code = 'BACKEND_HTTP'; throw e; }
+    const d = await res.json();
+    if (d?.error) { const e = new Error(`Backend: ${d.error}`); e.code = 'BACKEND_ERROR'; throw e; }
+    return {
+      text: d.text ?? '',
+      usage: { tokensIn: d.usage?.tokensIn ?? 0, tokensOut: d.usage?.tokensOut ?? 0, costUsd: d.usage?.costUsd ?? 0 },
+      provider: d.provider ?? this.id, latencyMs: d.latencyMs ?? 0,
+    };
+  }
+}
+
+/**
+ * Politique de routage : override explicite > souverainete > defaut, avec fallback.
+ * EF-26 : sovereignty='local' force Ollama ; opts.provider force un fournisseur precis.
+ */
 export class RoutingPolicy {
   constructor({ roleModel = {}, defaultProvider = 'anthropic', fallback = 'mock' } = {}) {
     this.roleModel = roleModel; this.defaultProvider = defaultProvider; this.fallback = fallback;
   }
   choose(req, opts = {}) {
+    if (opts.provider) return opts.provider;
     if (opts.sovereignty === 'local') return 'ollama';
     return this.defaultProvider;
   }
