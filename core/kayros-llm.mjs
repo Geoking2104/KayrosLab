@@ -1,5 +1,5 @@
-// KayrosLab — Abstraction LLM (`KayrosLLM`) + adaptateurs.
-// Réf. specs techniques §5 (EF-24/25/26). Le code métier ne connaît jamais le fournisseur.
+// KayrosLab — Abstraction LLM (KayrosLLM) + adaptateurs.
+// Ref. specs techniques §5 (EF-24/25/26). Le code metier ne connait jamais le fournisseur.
 
 import { CircuitBreaker, withResilience } from './resilience.mjs';
 
@@ -11,45 +11,53 @@ import { CircuitBreaker, withResilience } from './resilience.mjs';
 
 const approxTokens = (s) => Math.max(1, Math.round((s || '').length / 4));
 
-/** Adaptateur simulé, déterministe (aucun réseau). Sert de défaut et de fallback. */
+/** Adaptateur simule, deterministe (aucun reseau). Sert de defaut et de fallback. */
 export class MockProvider {
   constructor(id = 'mock') { this.id = id; }
-  /** @param {LLMRequest} req @returns {Promise<LLMResponse>} */
   async complete(req) {
     const last = req.messages[req.messages.length - 1]?.content ?? '';
     const tokensIn = req.messages.reduce((n, m) => n + approxTokens(m.content), 0);
-    const text = `【${this.id}】(${req.role ?? 'agent'}) réponse simulée à: ${last.slice(0, 120)}`;
-    return {
-      text,
-      usage: { tokensIn, tokensOut: approxTokens(text), costUsd: 0 },
-      provider: this.id,
-      latencyMs: 1,
-    };
+    const text = `[${this.id}] (${req.role ?? 'agent'}) reponse simulee a: ${last.slice(0, 120)}`;
+    return { text, usage: { tokensIn, tokensOut: approxTokens(text), costUsd: 0 }, provider: this.id, latencyMs: 1 };
   }
 }
 
-/** Squelette d'adaptateur Anthropic (à brancher en P2 côté backend, jamais de clé au client). */
+/** Squelette d'adaptateur Anthropic (a brancher en P2 cote backend, jamais de cle au client). */
 export class AnthropicProvider {
   constructor({ callBackend } = {}) { this.id = 'anthropic'; this._callBackend = callBackend; }
   async complete(req) {
-    if (!this._callBackend) { const e = new Error('AnthropicProvider non configuré (backend requis)'); e.code = 'NOT_CONFIGURED'; throw e; }
-    return this._callBackend(req); // le backend proxie l'appel réel (clé côté serveur)
+    if (!this._callBackend) { const e = new Error('AnthropicProvider non configure (backend requis)'); e.code = 'NOT_CONFIGURED'; throw e; }
+    return this._callBackend(req);
   }
 }
 
-/** Squelette d'adaptateur Ollama (local / souverain). */
+/** Adaptateur Ollama (local / souverain). Fonctionne contre un vrai serveur Ollama. */
 export class OllamaProvider {
-  constructor({ endpoint = 'http://localhost:11434', fetchImpl } = {}) {
-    this.id = 'ollama'; this.endpoint = endpoint; this._fetch = fetchImpl;
+  constructor({ endpoint = 'http://localhost:11434', defaultModel = 'llama3.2', fetchImpl } = {}) {
+    this.id = 'ollama'; this.endpoint = endpoint; this.defaultModel = defaultModel; this._fetch = fetchImpl;
+  }
+  _f() {
+    const f = this._fetch ?? (typeof fetch !== 'undefined' ? fetch : null);
+    if (!f) { const e = new Error('OllamaProvider: fetch indisponible (fournir fetchImpl)'); e.code = 'NO_FETCH'; throw e; }
+    return f;
+  }
+  async listModels() {
+    const res = await this._f()(`${this.endpoint}/api/tags`);
+    const data = await res.json();
+    return (data?.models ?? []).map((m) => m.name);
   }
   async complete(req) {
-    const f = this._fetch ?? (typeof fetch !== 'undefined' ? fetch : null);
-    if (!f) { const e = new Error('OllamaProvider: fetch indisponible'); e.code = 'NO_FETCH'; throw e; }
-    const res = await f(`${this.endpoint}/api/chat`, {
+    const res = await this._f()(`${this.endpoint}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: req.model ?? 'llama3.1', messages: req.messages, stream: false }),
+      body: JSON.stringify({
+        model: req.model ?? this.defaultModel,
+        messages: req.messages,
+        stream: false,
+        options: typeof req.temperature === 'number' ? { temperature: req.temperature } : undefined,
+      }),
     });
+    if (!res.ok) { const e = new Error(`Ollama HTTP ${res.status}`); e.code = 'OLLAMA_HTTP'; throw e; }
     const data = await res.json();
     const text = data?.message?.content ?? '';
     return {
@@ -60,10 +68,7 @@ export class OllamaProvider {
   }
 }
 
-/**
- * Politique de routage : souveraineté > rôle > défaut, avec fallback.
- * EF-26 : `sovereignty:'local'` force Ollama.
- */
+/** Politique de routage : souverainete > role > defaut, avec fallback. EF-26 : local => Ollama. */
 export class RoutingPolicy {
   constructor({ roleModel = {}, defaultProvider = 'anthropic', fallback = 'mock' } = {}) {
     this.roleModel = roleModel; this.defaultProvider = defaultProvider; this.fallback = fallback;
@@ -75,9 +80,8 @@ export class RoutingPolicy {
   modelFor(req) { return req.model ?? this.roleModel[req.role] ?? undefined; }
 }
 
-/** Façade unique. Le métier appelle `complete()` sans connaître le fournisseur. */
+/** Facade unique. Le metier appelle complete() sans connaitre le fournisseur. */
 export class KayrosLLM {
-  /** @param {Record<string, {complete:Function}>} providers @param {RoutingPolicy} policy */
   constructor(providers, policy = new RoutingPolicy(), { breakerConfig } = {}) {
     this.providers = providers;
     this.policy = policy;
@@ -88,7 +92,6 @@ export class KayrosLLM {
     if (!this._breakers.has(id)) this._breakers.set(id, new CircuitBreaker(this._breakerConfig));
     return this._breakers.get(id);
   }
-  /** @param {LLMRequest} req @returns {Promise<LLMResponse>} */
   async complete(req, opts = {}) {
     const primaryId = this.policy.choose(req, opts);
     const model = this.policy.modelFor(req);

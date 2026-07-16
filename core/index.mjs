@@ -1,6 +1,4 @@
-// KayrosLab — Cœur « LLM gouverné » : point d'assemblage.
-// Réf. specs techniques. Construit un moteur prêt à l'emploi (adaptateur mock par défaut).
-
+// KayrosLab — Coeur LLM gouverne : point d'assemblage.
 export * from './resilience.mjs';
 export * from './kayros-llm.mjs';
 export * from './tool-registry.mjs';
@@ -15,13 +13,11 @@ import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
 import { InMemoryVectorStore } from './memory.mjs';
 
-/**
- * Fabrique un moteur par défaut (P0/P1).
- * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string}} [opts]
- */
 export function createEngine(opts = {}) {
   const providers = { mock: new MockProvider() };
-  if (opts.sovereignty === 'local') providers.ollama = new OllamaProvider({ endpoint: opts.ollamaEndpoint });
+  if (opts.sovereignty === 'local') {
+    providers.ollama = new OllamaProvider({ endpoint: opts.ollamaEndpoint, defaultModel: opts.model, fetchImpl: opts.fetchImpl });
+  }
   const policy = new RoutingPolicy({ defaultProvider: opts.sovereignty === 'local' ? 'ollama' : 'mock', fallback: 'mock' });
   const llm = new KayrosLLM(providers, policy);
   const tools = demoTools();

@@ -93,7 +93,7 @@ test('ToolRegistry : validation des clés + exécution', async () => {
 test('KayrosLLM : mock renvoie une réponse + fallback sur échec du primaire', async () => {
   const llm = new KayrosLLM({ mock: new MockProvider() }, new RoutingPolicy({ defaultProvider: 'mock', fallback: 'mock' }));
   const r = await llm.complete({ role: 'Planner', messages: [{ role: 'user', content: 'bonjour' }] });
-  assert.match(r.text, /simulée/);
+  assert.match(r.text, /simulee/);
   assert.ok(r.usage.tokensIn > 0);
 
   const boom = { complete: async () => { throw new Error('down'); } };
