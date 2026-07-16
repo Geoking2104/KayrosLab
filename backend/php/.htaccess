@@ -1,0 +1,4 @@
+# Protege config.php (sert la config uniquement via govern.php). CORS geres dans govern.php.
+<Files "config.php">
+Require all denied
+</Files>
