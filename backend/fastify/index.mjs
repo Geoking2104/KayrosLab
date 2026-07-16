@@ -1,10 +1,10 @@
-// KayrosLab — Backend Fastify : proxy LLM securise (cle cote serveur) + endpoints gouvernes.
+// KayrosLab — Backend Fastify : proxy LLM securise (cle cote serveur) + endpoints gouvernes + embeddings.
 // Reutilise le coeur committe (../../core). A deployer sur un hote Node (VPS/PaaS), pas sur mutualise.
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
-  Orchestrator, GovernanceService, demoTools,
+  Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
 } from '../../core/index.mjs';
 
 const {
@@ -15,6 +15,7 @@ const {
   ANTHROPIC_MAXTOK = '1024',
   OLLAMA_ENDPOINT = 'http://localhost:11434',
   OLLAMA_MODEL = 'llama3.2',
+  EMBED_MODEL = 'nomic-embed-text',
   KAYROS_SECRET = '',
 } = process.env;
 
@@ -49,6 +50,7 @@ const providers = {
 };
 const policy = new RoutingPolicy({ defaultProvider: ANTHROPIC_API_KEY ? 'anthropic' : 'mock', fallback: 'mock' });
 const llm = new KayrosLLM(providers, policy);
+const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
 
 const app = Fastify({ logger: true });
 await app.register(cors, { origin: ALLOWED_ORIGIN });
@@ -60,7 +62,7 @@ app.addHook('preHandler', async (req, reply) => {
   if (req.headers['x-kayros-secret'] !== KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });
 
-app.get('/health', async () => ({ ok: true, providers: Object.keys(providers), model: ANTHROPIC_MODEL, anthropicConfigured: !!ANTHROPIC_API_KEY }));
+app.get('/health', async () => ({ ok: true, providers: Object.keys(providers), model: ANTHROPIC_MODEL, embedModel: EMBED_MODEL, anthropicConfigured: !!ANTHROPIC_API_KEY }));
 
 // Completion brute (utilisee par HttpBackendProvider cote navigateur).
 app.post('/v1/llm', async (req, reply) => {
@@ -69,6 +71,18 @@ app.post('/v1/llm', async (req, reply) => {
   const opts = provider ? { provider } : {};
   const r = await llm.complete({ messages, model, role, temperature }, opts);
   return { text: r.text, provider: r.provider, usage: r.usage, latencyMs: r.latencyMs };
+});
+
+// Embeddings (souverain via Ollama). Utilise par HttpEmbeddings cote navigateur.
+app.post('/v1/embed', async (req, reply) => {
+  const { input, model } = req.body || {};
+  const texts = Array.isArray(input) ? input : (typeof input === 'string' ? [input] : null);
+  if (!texts || !texts.length) return reply.code(400).send({ error: 'champ input requis (string ou string[])' });
+  if (model) embeddings.model = model;
+  try {
+    const vecs = await embeddings.embedBatch(texts);
+    return { embeddings: vecs, model: embeddings.model };
+  } catch (e) { return reply.code(502).send({ error: String(e.message || e) }); }
 });
 
 // Requete gouvernee (orchestrateur + gate de sortie). En mode gate: 202 pending_review.
