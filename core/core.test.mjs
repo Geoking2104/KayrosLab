@@ -304,3 +304,38 @@ test('Orchestrateur sans memoire vectorielle : aucun recall, fonctionne', async 
   assert.equal(events.filter((e) => e.type === 'trace').length, 4);
   assert.equal(events.at(-1).status, 'auto');
 });
+
+// ---------- Planner LLM (plan genere) ----------
+test('Planner LLM : plan genere depuis JSON valide', async () => {
+  const llm = { complete: async () => ({ text: 'Plan: [{"agent":"Planner","description":"cadrer"},{"agent":"RedTeam","description":"attaquer"},{"agent":"Synthesizer","description":"synthese"}] .', usage: { tokensIn: 1, tokensOut: 1 } }) };
+  const orch = new Orchestrator({ llm });
+  const plan = await orch.plan('Objectif X', { ideaId: 'i9' });
+  assert.equal(plan.generatedBy, 'llm');
+  assert.equal(plan.steps.length, 3);
+  assert.equal(plan.steps[0].agent, 'Planner');
+  assert.equal(plan.steps[0].id, 's1');
+  assert.equal(plan.steps.at(-1).agent, 'Synthesizer');
+});
+
+test('Planner : repli deterministe si sortie non-JSON (mock)', async () => {
+  const eng = createEngine(); // provider mock -> texte non JSON
+  const plan = await eng.orchestrator.plan('objectif', { ideaId: 'iF' });
+  assert.equal(plan.generatedBy, 'fallback');
+  assert.equal(plan.steps.length, 4);
+});
+
+test('Planner : llmPlan:false force le repli', async () => {
+  const eng = createEngine();
+  const plan = await eng.orchestrator.plan('x', { ideaId: 'z', llmPlan: false });
+  assert.equal(plan.generatedBy, 'fallback');
+  assert.equal(plan.steps.length, 4);
+});
+
+test('parsePlanSteps : ignore agents invalides, renvoie null si vide', async () => {
+  const { parsePlanSteps } = await import('./orchestrator.mjs');
+  assert.equal(parsePlanSteps('pas de json'), null);
+  assert.equal(parsePlanSteps('[{"agent":"Inconnu","description":"x"}]'), null);
+  const ok = parsePlanSteps('[{"agent":"Critic","description":"c"}]');
+  assert.equal(ok.length, 1);
+  assert.equal(ok[0].agent, 'Critic');
+});
