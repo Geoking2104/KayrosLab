@@ -195,3 +195,31 @@ test('createEngine backendUrl => provider backend par defaut', async () => {
   const r = await eng.llm.complete({ messages: [{ role: 'user', content: 'x' }] });
   assert.equal(r.provider, 'anthropic');
 });
+
+// ---------- QdrantVectorStore (fetch simule) ----------
+import { QdrantVectorStore } from './memory.mjs';
+test('QdrantVectorStore : ensureCollection + upsert + search (filtre ideaId)', async () => {
+  const calls = [];
+  const fakeFetch = async (url, opts) => {
+    calls.push({ url, method: opts.method, body: opts.body ? JSON.parse(opts.body) : null });
+    if (opts.method === 'PUT' && url.endsWith('/collections/kayroslab')) return { ok: true, json: async () => ({ result: true }) };
+    if (opts.method === 'PUT' && url.endsWith('/points')) return { ok: true, json: async () => ({ result: { status: 'acknowledged' } }) };
+    if (opts.method === 'POST' && url.endsWith('/points/search')) return { ok: true, json: async () => ({ result: [ { id: 1, score: 0.97, payload: { ideaId: 'i1', text: 'A' } } ] }) };
+    return { ok: false, status: 404, json: async () => ({}) };
+  };
+  const q = new QdrantVectorStore({ dim: 3, apiKey: 'k', fetchImpl: fakeFetch });
+  assert.equal(await q.ensureCollection(), true);
+  const created = calls.find((c) => c.url.endsWith('/collections/kayroslab') && c.method === 'PUT');
+  assert.deepEqual(created.body.vectors, { size: 3, distance: 'Cosine' });
+
+  await q.upsert({ id: 1, ideaId: 'i1', text: 'A', embedding: [1, 0, 0] });
+  const up = calls.find((c) => c.url.endsWith('/points') && c.method === 'PUT');
+  assert.equal(up.body.points[0].payload.ideaId, 'i1');
+
+  const res = await q.search([1, 0, 0], 5, { ideaId: 'i1' });
+  const search = calls.find((c) => c.url.endsWith('/points/search'));
+  assert.deepEqual(search.body.filter.must[0], { key: 'ideaId', match: { value: 'i1' } });
+  assert.equal(res[0].id, 1);
+  assert.equal(res[0].ideaId, 'i1');
+  assert.ok(res[0].score > 0.9);
+});
