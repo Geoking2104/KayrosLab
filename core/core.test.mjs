@@ -276,3 +276,31 @@ test('createEngine expose embeddings + memory (mock offline)', async () => {
   const r = await eng.memory.recall('x', 'test', 1);
   assert.equal(r[0].id, '1');
 });
+
+// ---------- Orchestrateur memory-aware ----------
+test('Orchestrateur : rappel memoire (recall) + memorisation des observations', async () => {
+  const eng = createEngine(); // MockEmbeddings + InMemoryVectorStore cables
+  await eng.memory.remember({ id: 'seed', ideaId: 'i1', text: 'contrainte reglementaire batteries seconde vie Europe' });
+  const plan = await eng.orchestrator.plan('Evaluer batteries seconde vie en Europe', { ideaId: 'i1' });
+  const events = [];
+  for await (const ev of eng.orchestrator.run(plan, { governance: 'auto' })) events.push(ev);
+  const recall = events.find((e) => e.type === 'recall');
+  assert.ok(recall, 'un evenement recall doit etre emis');
+  assert.ok(recall.items.some((i) => i.id === 'seed'));
+  const traces = events.filter((e) => e.type === 'trace');
+  assert.equal(traces.length, 4);
+  assert.ok(traces.every((t) => t.usedContext === true)); // contexte memoire injecte
+  assert.ok(eng.vectors.size() > 1); // seed + observations memorisees
+  assert.equal(events.at(-1).status, 'auto');
+});
+
+test('Orchestrateur sans memoire vectorielle : aucun recall, fonctionne', async () => {
+  const eng = createEngine();
+  const plan = await eng.orchestrator.plan('idee neutre', { ideaId: 'vide' });
+  // ideaId "vide" n'a rien en memoire -> pas d'evenement recall
+  const events = [];
+  for await (const ev of eng.orchestrator.run(plan, { governance: 'auto', remember: false })) events.push(ev);
+  assert.ok(!events.some((e) => e.type === 'recall'));
+  assert.equal(events.filter((e) => e.type === 'trace').length, 4);
+  assert.equal(events.at(-1).status, 'auto');
+});

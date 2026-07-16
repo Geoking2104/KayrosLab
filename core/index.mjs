@@ -44,6 +44,6 @@ export function createEngine(opts = {}) {
   else embeddings = new MockEmbeddings();
   const memory = new MemoryService({ embeddings, store: vectors });
 
-  const orchestrator = new Orchestrator({ llm, tools, governance });
+  const orchestrator = new Orchestrator({ llm, tools, governance, memory });
   return { llm, tools, governance, vectors, embeddings, memory, orchestrator };
 }
