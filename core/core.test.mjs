@@ -794,3 +794,65 @@ test('auth : rotation de mot de passe + invalidation des sessions', async () => 
   await assert.rejects(() => auth.login({ email: 'rot@x.com', password: 'ancien-mot-de-passe-2026' }));
   assert.ok((await auth.login({ email: 'rot@x.com', password: 'nouveau-mot-de-passe-2026' })).token);
 });
+
+// ---------- Canaux de notification (circuit reellement branche) ----------
+test('notify : webhook envoie une charge utile exploitable', async () => {
+  const { WebhookNotifier, formatGateEvent } = await import('./notify.mjs');
+  let recu = null;
+  const fetchImpl = async (url, opts) => { recu = { url, body: JSON.parse(opts.body) }; return { ok: true, status: 200 }; };
+  const w = new WebhookNotifier({ url: 'https://hooks.example/x', fetchImpl });
+  const msg = formatGateEvent(
+    { gateId: 'g1', gateType: 'validation', requiredRole: 'comex', ideaId: 'i1', createdAt: 'T', evaluation: { count: 2, moyennePonderee: 70, recommandation: 'Go', consensus: true } },
+    { titre: 'Offre B2B', destinataires: ['c@x.com'] },
+  );
+  const r = await w.send(msg);
+  assert.equal(r.ok, true);
+  assert.equal(recu.url, 'https://hooks.example/x');
+  assert.match(recu.body.text, /Offre B2B/);
+  assert.match(recu.body.text, /70\/100/);        // l'agregat qui instruit est transmis
+  assert.equal(recu.body.gate.gateId, 'g1');
+  assert.deepEqual(recu.body.destinataires, ['c@x.com']);
+});
+
+test('notify : sans vote, le message le dit explicitement', async () => {
+  const { formatGateEvent } = await import('./notify.mjs');
+  const msg = formatGateEvent({ ideaId: 'i2', requiredRole: 'comex' }, { titre: 'X' });
+  assert.match(msg.texte, /Aucun vote préalable/);
+  assert.match(msg.texte, /doit être motivé/);
+});
+
+test('notify : un canal en panne n empeche pas les autres', async () => {
+  const { CompositeNotifier, ConsoleNotifier, WebhookNotifier } = await import('./notify.mjs');
+  const logs = [];
+  const ko = new WebhookNotifier({ url: 'https://x', fetchImpl: async () => { throw new Error('injoignable'); } });
+  const ok = new ConsoleNotifier({ logger: { info: (m) => logs.push(m) } });
+  const res = await new CompositeNotifier([ko, ok]).send({ sujet: 'S', texte: 'T', destinataires: [] });
+  assert.equal(res.length, 2);
+  assert.equal(res.find((r) => r.canal === 'webhook').ok, false);
+  assert.equal(res.find((r) => r.canal === 'console').ok, true);
+  assert.equal(logs.length, 1);                    // le canal sain a bien emis
+});
+
+test('notify : gateNotifier resout destinataires et ne propage jamais d erreur', async () => {
+  const { gateNotifier, CompositeNotifier, WebhookNotifier } = await import('./notify.mjs');
+  let recu = null;
+  const canal = new CompositeNotifier([new WebhookNotifier({ url: 'https://h', fetchImpl: async (u, o) => { recu = JSON.parse(o.body); return { ok: true }; } })]);
+  const n = gateNotifier({ canal, resolveDestinataires: async () => ['a@x.com', 'b@x.com'], resolveTitre: async () => 'Titre' });
+  await n({ gateId: 'g', requiredRole: 'comex', ideaId: 'i' });
+  assert.deepEqual(recu.destinataires, ['a@x.com', 'b@x.com']);
+
+  // resolution defaillante : renvoie une erreur structuree, ne leve pas
+  const nKo = gateNotifier({ canal, resolveDestinataires: async () => { throw new Error('annuaire hs'); } });
+  const r = await nKo({ gateId: 'g2' });
+  assert.equal(r.ok, false);
+  assert.match(r.erreur, /annuaire hs/);
+});
+
+test('notify : EmailNotifier sans destinataire n envoie pas', async () => {
+  const { EmailNotifier } = await import('./notify.mjs');
+  let appels = 0;
+  const e = new EmailNotifier({ send: async () => { appels++; } });
+  const r = await e.send({ sujet: 'S', texte: 'T', destinataires: [] });
+  assert.equal(r.ok, false);
+  assert.equal(appels, 0);
+});

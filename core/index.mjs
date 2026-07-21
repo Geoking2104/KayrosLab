@@ -12,6 +12,7 @@ export * from './intake.mjs';
 export * from './scorecard.mjs';
 export * from './evaluation.mjs';
 export * from './impact.mjs';
+export * from './notify.mjs';
 export * from './auth.mjs';
 export * from './ki.mjs';
 export * from './governance.mjs';

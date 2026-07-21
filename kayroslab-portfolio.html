@@ -331,6 +331,9 @@ function openDrawer(id) {
     <ul class="text-xs text-slate-600 space-y-1 mb-6">
       ${votes.map((v) => `<li>${esc(v.by)} <span class="text-slate-400">(${v.role})</span> — <strong>${v.score}</strong></li>`).join('') || '<li class="text-slate-400">Aucun vote</li>'}
     </ul>
+    <h3 class="font-semibold text-sm mb-2">Notation (grille de l'étape)</h3>
+    <div id="dScore" class="mb-6 text-sm text-slate-400">chargement…</div>
+
     <h3 class="font-semibold text-sm mb-2">Impact — réalisé vs projeté</h3>
     <div id="dImpact" class="mb-6 text-sm text-slate-400">chargement…</div>
 
@@ -343,7 +346,58 @@ function openDrawer(id) {
     </ol>`;
   $('#drawer').classList.remove('hidden');
   bindDrawer(i);
+  loadScorecard(i);
   loadImpact(i.id);
+}
+
+// ============ Notation ============
+async function loadScorecard(idea) {
+  let d;
+  try { d = await api(`/scorecards?stage=${encodeURIComponent(idea.stage)}`); }
+  catch { $('#dScore').textContent = 'indisponible'; return; }
+  const card = (d.scorecards || [])[0];
+  if (!card) { $('#dScore').innerHTML = `<p class="text-slate-500">Aucune grille définie pour l'étape « ${esc(idea.stage)} ».</p>`; return; }
+
+  const dernier = (idea.scores ?? {})[card.id] ?? null;
+  const hist = (idea.scoreHistory ?? []).filter((h) => h.scorecardId === card.id);
+
+  $('#dScore').innerHTML = `
+    <p class="text-xs text-slate-500 mb-2">${esc(card.label)} — échelle 0 à ${card.scale}</p>
+    <div class="space-y-2 mb-3">
+      ${card.criteria.map((c) => `
+        <div class="flex items-center gap-2">
+          <label class="text-sm flex-1">${esc(c.label ?? c.id)} <span class="text-slate-400 text-xs">×${c.weight}</span></label>
+          <input data-crit="${c.id}" type="number" min="0" max="${card.scale}" step="any"
+                 value="${dernier?.values?.[c.id] ?? ''}"
+                 class="border rounded-lg px-2 py-1 text-sm w-20">
+        </div>`).join('')}
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="scoreBtn" class="bg-slate-800 hover:bg-slate-900 text-white text-sm rounded-lg px-3 py-1.5">Enregistrer la note</button>
+      <span id="scoreOut" class="text-sm">${dernier ? renduScore(dernier.resultat) : '<span class="text-slate-400">non évaluée</span>'}</span>
+    </div>
+    ${hist.length > 1 ? `<p class="text-xs text-slate-400 mt-2">${hist.length} notations enregistrées (historisées)</p>` : ''}`;
+
+  $('#scoreBtn').addEventListener('click', async () => {
+    const values = {};
+    document.querySelectorAll('#dScore [data-crit]').forEach((el) => {
+      const v = Number(el.value);
+      if (el.value !== '' && Number.isFinite(v)) values[el.dataset.crit] = v;
+    });
+    try {
+      const { resultat } = await api(`/ideas/${idea.id}/score`, { method: 'POST', body: { scorecardId: card.id, values } });
+      $('#scoreOut').innerHTML = renduScore(resultat);
+      await refresh();
+    } catch (e) { alert(e.message); }
+  });
+}
+
+/** Affiche le score en distinguant clairement une evaluation PARTIELLE. */
+function renduScore(r) {
+  if (!r || !r.evalue) return '<span class="text-slate-400">non évaluée</span>';
+  const partiel = r.couverture < 1
+    ? ` <span class="text-amber-600">(partielle : ${Math.round(r.couverture * 100)} % des critères)</span>` : '';
+  return `<strong>${r.total}</strong>/${r.echelle} · <strong>${r.normalise}</strong>/100${partiel}`;
 }
 
 // ============ Impact : realise vs projete ============

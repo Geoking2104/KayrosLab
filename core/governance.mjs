@@ -51,7 +51,9 @@ export class GovernanceService {
       createdAt: record.createdAt,
     };
     this._notifications.push(evt);
-    try { this._notifier?.(evt); } catch { /* une notif qui echoue ne bloque pas le gate */ }
+    // Le notifier peut etre asynchrone : on neutralise aussi les rejets de promesse,
+    // sinon un canal en panne provoquerait un unhandledRejection.
+    try { Promise.resolve(this._notifier?.(evt)).catch(() => {}); } catch { /* notif non bloquante */ }
     return { gateId, promise };
   }
 

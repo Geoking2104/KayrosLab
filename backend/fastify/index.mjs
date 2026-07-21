@@ -11,6 +11,7 @@ import {
   portfolio, counts, processIntake, aggregateVotes, defaultScorecards,
   emptyImpact, recordInvestment, recordBenefit, recordActual, impactReport,
   simulateTrajectory, estimateResources,
+  ConsoleNotifier, WebhookNotifier, EmailNotifier, CompositeNotifier, gateNotifier,
 } from '../../core/index.mjs';
 
 const {
@@ -74,13 +75,47 @@ if (IDEAS_FILE) await ideas.load();
 const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
 const scorecards = defaultScorecards();
 
+// Metadonnees des gates (l'idee concernee, l'agregat de vote qui instruit la decision).
+const gateMeta = new Map();
+
+// --- Canaux de notification reels ---
+// Webhook (Slack/Teams/n8n) si configure ; SMTP via nodemailer si configure ET installe.
+const canaux = [new ConsoleNotifier({ logger: console })];
+if (process.env.KAYROS_NOTIFY_WEBHOOK) {
+  canaux.push(new WebhookNotifier({ url: process.env.KAYROS_NOTIFY_WEBHOOK }));
+}
+if (process.env.KAYROS_SMTP_URL) {
+  try {
+    const { createTransport } = await import('nodemailer');   // dependance OPTIONNELLE
+    const transport = createTransport(process.env.KAYROS_SMTP_URL);
+    canaux.push(new EmailNotifier({
+      from: process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost',
+      send: ({ to, from, subject, text }) => transport.sendMail({ to: to.join(','), from, subject, text }),
+    }));
+  } catch (e) {
+    console.warn('[kayroslab] SMTP configure mais nodemailer absent — canal email desactive.', e.message);
+  }
+}
+if (canaux.length === 1) {
+  console.warn('[kayroslab] Aucun canal externe : definissez KAYROS_NOTIFY_WEBHOOK ou KAYROS_SMTP_URL, sinon les censeurs hors application ne seront pas prevenus.');
+}
+
 // Gouvernance PARTAGEE : un gate ouvert doit rester visible par le censeur
 // entre deux requetes HTTP (sinon la file d'attente n'existe pas).
 const governance = new GovernanceService({
-  notifier: (evt) => app.log.info({ evt }, 'gate ouvert — censeur attendu'),
+  notifier: gateNotifier({
+    canal: new CompositeNotifier(canaux),
+    // Destinataires = les porteurs du role requis, DANS le tenant de l'idee.
+    // On lit l'idee dans le depot : la notification part pendant open(), donc AVANT
+    // que gateMeta soit renseigne — ne pas dependre de l'ordre d'execution.
+    resolveDestinataires: async (evt) => {
+      const idea = evt.ideaId ? await ideas.get(evt.ideaId) : null;
+      const users = await userStore.list({ tenantId: idea?.tenantId ?? 'default' });
+      return users.filter((u) => u.role === evt.requiredRole).map((u) => u.email);
+    },
+    resolveTitre: async (evt) => (evt.ideaId ? (await ideas.get(evt.ideaId))?.title ?? null : null),
+  }),
 });
-// Metadonnees des gates (l'idee concernee, l'agregat de vote qui instruit la decision).
-const gateMeta = new Map();
 
 if (AUTH_SECRET && !USERS_FILE) {
   console.warn('[kayroslab] KAYROS_USERS_FILE non defini : les comptes seront perdus au redemarrage.');
@@ -375,6 +410,25 @@ app.get('/v1/ideas/:id/impact', async (req, reply) => {
     ressources: idea.ressources ?? null,
     rapport: impactReport(idea.projection ?? {}, idea.impact ?? emptyImpact()),
   };
+});
+
+// Notation d'une idee avec une grille : le circuit d'ecriture qui manquait.
+app.post('/v1/ideas/:id/score', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { scorecardId, values = {} } = req.body || {};
+  const card = scorecardId ? scorecards.get(scorecardId) : (scorecards.forStage(idea.stage)[0] ?? null);
+  if (!card) return reply.code(400).send({ error: `aucune grille pour l'etape "${idea.stage}"` });
+  try {
+    const resultat = card.score(values);
+    const entree = { scorecardId: card.id, values, resultat, by: me.email, ts: new Date().toISOString() };
+    const scores = { ...(idea.scores ?? {}), [card.id]: entree };
+    // Historisation (EF-71) : on conserve chaque notation, on n'ecrase pas.
+    const scoreHistory = [...(idea.scoreHistory ?? []), entree];
+    await ideas.save({ ...idea, scores, scoreHistory, ki: resultat.normalise, updatedAt: entree.ts });
+    return { resultat, historique: scoreHistory.length };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
 
 app.get('/v1/scorecards', async (req, reply) => {
