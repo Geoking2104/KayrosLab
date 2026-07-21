@@ -14,7 +14,10 @@ import {
   ConsoleNotifier, WebhookNotifier, EmailNotifier, CompositeNotifier, gateNotifier,
   InMemoryGateStore, FileGateStore,
   startExecution, updateJalon, advancePhase, cloturer, progression,
-  funnel, tempsParEtape, dashboard, exportCsv,
+  funnel, tempsParEtape, dashboard, exportCsv, compare,
+  createCampaign, estOuverte, etatInitial, moderer, estPubliee, fileModeration, statsCampagne,
+  addComment, editComment, removeComment, commentTree, countComments,
+  buildDigest, formatDigest,
 } from '../../core/index.mjs';
 
 const {
@@ -273,21 +276,38 @@ app.get('/v1/auth/me', async (req, reply) => {
 // ---------------- Portefeuille (toutes routes scopees au tenant du porteur) ----------------
 app.get('/v1/ideas', async (req, reply) => {
   const me = await requireAuth(req, reply); if (!me) return;
-  const { stage, status, category, q } = req.query || {};
-  return { ideas: await ideas.list({ tenantId: me.tenantId, stage, status, category, q }) };
+  const { stage, status, category, q, inclureModeration } = req.query || {};
+  const list = await ideas.list({ tenantId: me.tenantId, stage, status, category, q });
+  // Une idee en attente de moderation ne pollue pas le portefeuille (ni WIP, ni entonnoir).
+  return { ideas: inclureModeration === 'true' ? list : list.filter(estPubliee) };
 });
 
 app.post('/v1/ideas', async (req, reply) => {
   const me = await requireAuth(req, reply); if (!me) return;
-  const { id, title, intake, category } = req.body || {};
+  const { id, title, intake, category, campagneId } = req.body || {};
   try {
+    // Campagne : fenetre de soumission respectee, moderation appliquee si exigee.
+    const campagne = campagneId ? campagnes.get(campagneId) : null;
+    if (campagneId && !campagne) return reply.code(404).send({ error: 'campagne introuvable' });
+    if (campagne && campagne.tenantId !== me.tenantId) return reply.code(404).send({ error: 'campagne introuvable' });
+    const fenetre = estOuverte(campagne);
+    if (!fenetre.ouverte) return reply.code(409).send({ error: `campagne ${fenetre.raison}`, code: fenetre.raison });
+
     const derive = intake ? processIntake(intake) : null;
-    const idea = createIdea({
-      id: id || `D${Date.now()}`, title, author: me.email, category,
-      intake, tenantId: me.tenantId,                       // tenant impose par le jeton, pas par le client
-    });
+    const idea = {
+      ...createIdea({
+        id: id || `D${Date.now()}`, title, author: me.email, category,
+        intake, tenantId: me.tenantId,                     // tenant impose par le jeton, pas par le client
+      }),
+      campagneId: campagne?.id ?? null,
+      moderation: etatInitial(campagne),
+      comments: [],
+    };
     await ideas.save(idea);
-    return reply.code(201).send({ idea, derive });          // hypotheses + cibles d'attaque
+    return reply.code(201).send({
+      idea, derive,                                        // hypotheses + cibles d'attaque
+      enModeration: !estPubliee(idea),                     // l'auteur sait si son idee attend un feu vert
+    });
   } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
 
@@ -308,6 +328,8 @@ app.patch('/v1/ideas/:id', async (req, reply) => {
     if (stage) out = setStage(out, stage, { by: me.email, motif });
     if (status) out = setStatus(out, status, { by: me.email, motif });
     await ideas.save(out);
+    if (stage) journal({ type: 'etape', by: me.email, de: idea.stage, a: stage, ideaId: idea.id, titre: idea.title });
+    if (status) journal({ type: 'statut', by: me.email, de: idea.status, a: status, ideaId: idea.id, titre: idea.title });
     return { idea: out };
   } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
@@ -331,6 +353,7 @@ app.post('/v1/ideas/:id/votes', async (req, reply) => {
   const votes = [...(idea.votes ?? []).filter((v) => v.by !== me.email), { by: me.email, role: me.role, score, comment }];
   const out = { ...idea, votes, updatedAt: new Date().toISOString() };
   await ideas.save(out);
+  journal({ type: 'vote', by: me.email, score, ideaId: idea.id, titre: idea.title });
   return { agregat: aggregateVotes(votes) };
 });
 
@@ -464,6 +487,100 @@ app.get('/v1/scorecards', async (req, reply) => {
   const { stage } = req.query || {};
   const list = stage ? scorecards.forStage(stage) : scorecards.list();
   return { scorecards: list.map((s) => ({ id: s.id, stage: s.stage, label: s.label, scale: s.scale, criteria: s.criteria })) };
+});
+
+// ---------------- Campagnes & moderation (EF-61/62) ----------------
+const campagnes = new Map();          // en memoire : volume faible, redemarrage tolerable
+const activites = [];                 // journal d'activite (digest)
+const journal = (evt) => { activites.push({ ...evt, ts: evt.ts ?? new Date().toISOString() }); if (activites.length > 5000) activites.shift(); };
+
+app.get('/v1/campaigns', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const list = [...campagnes.values()].filter((c) => c.tenantId === me.tenantId);
+  const toutes = await ideas.list({ tenantId: me.tenantId });
+  return { campaigns: list.map((c) => ({ ...c, stats: statsCampagne(toutes, c.id), ...estOuverte(c) })) };
+});
+
+app.post('/v1/campaigns', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  try {
+    auth.requireRole(me, ['comex', 'facilitateur']);   // seuls eux ouvrent une campagne
+    const c = createCampaign({ ...req.body, id: req.body?.id || `camp_${Date.now()}`, tenantId: me.tenantId });
+    campagnes.set(c.id, c);
+    return reply.code(201).send({ campaign: c });
+  } catch (e) { return reply.code(e.code === 'AUTH_FORBIDDEN' ? 403 : 400).send({ error: e.message }); }
+});
+
+// File de moderation : les soumissions en attente de recevabilite.
+app.get('/v1/moderation', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const toutes = await ideas.list({ tenantId: me.tenantId });
+  return { file: fileModeration(toutes, { tenantId: me.tenantId }), monRole: me.role };
+});
+
+app.post('/v1/ideas/:id/moderate', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  const { decision, motif } = req.body || {};
+  try {
+    auth.requireRole(me, ['comex', 'facilitateur']);
+    const out = moderer(idea, { decision, by: me.email, motif });
+    await ideas.save(out);
+    journal({ type: 'moderation', by: me.email, a: decision, ideaId: idea.id, titre: idea.title });
+    return { idea: out };
+  } catch (e) { return reply.code(e.code === 'AUTH_FORBIDDEN' ? 403 : 400).send({ error: e.message }); }
+});
+
+// ---------------- Fil de commentaires (EF-67) ----------------
+app.get('/v1/ideas/:id/comments', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  return { fil: commentTree(idea.comments ?? []), total: countComments(idea.comments ?? []) };
+});
+
+app.post('/v1/ideas/:id/comments', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  try {
+    const comments = addComment(idea.comments ?? [], { by: me.email, role: me.role, texte: req.body?.texte, parentId: req.body?.parentId ?? null });
+    await ideas.save({ ...idea, comments, updatedAt: new Date().toISOString() });
+    journal({ type: 'commentaire', by: me.email, ideaId: idea.id, titre: idea.title });
+    return reply.code(201).send({ fil: commentTree(comments), total: countComments(comments) });
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+app.delete('/v1/ideas/:id/comments/:commentId', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  try {
+    const comments = removeComment(idea.comments ?? [], req.params.commentId, { by: me.email, role: me.role });
+    await ideas.save({ ...idea, comments, updatedAt: new Date().toISOString() });
+    return { fil: commentTree(comments), total: countComments(comments) };
+  } catch (e) { return reply.code(403).send({ error: e.message }); }
+});
+
+// ---------------- Activite & digest (EF-74/75) ----------------
+app.get('/v1/activity', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const mesIdees = new Set((await ideas.list({ tenantId: me.tenantId })).map((i) => i.id));
+  return { activites: activites.filter((a) => mesIdees.has(a.ideaId)).slice(-100).reverse() };
+});
+
+app.get('/v1/digest', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { depuis, jusqua, periode = 'quotidien' } = req.query || {};
+  const mesIdees = new Set((await ideas.list({ tenantId: me.tenantId })).map((i) => i.id));
+  const d = buildDigest(activites.filter((a) => mesIdees.has(a.ideaId)), { depuis, jusqua, periode });
+  return { digest: d, message: formatDigest(d, { destinataires: [me.email] }) };
+});
+
+// ---------------- Comparaison inter-idees (EF-54) ----------------
+app.post('/v1/reporting/compare', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const ids = Array.isArray(req.body?.ids) ? req.body.ids : [];
+  if (ids.length < 2) return reply.code(400).send({ error: 'au moins 2 idees a comparer' });
+  const list = (await ideas.list({ tenantId: me.tenantId })).filter((i) => ids.includes(i.id));
+  return { comparaison: compare(list) };
 });
 
 // ---------------- Cycle aval : etape Realiser (EF-80 a EF-83) ----------------

@@ -42,6 +42,11 @@
         <option value="">Tous les statuts</option>
       </select>
       <button id="btnNew" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg px-3 py-1.5">+ Idée</button>
+      <div class="flex rounded-lg border overflow-hidden text-sm">
+        <button data-vue="kanban" class="vue-btn px-3 py-1.5 bg-slate-800 text-white">Kanban</button>
+        <button data-vue="liste" class="vue-btn px-3 py-1.5 hover:bg-slate-50">Liste</button>
+      </div>
+      <button id="btnCompare" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50" disabled>Comparer (0)</button>
       <button id="btnReport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50">Reporting</button>
       <a id="btnExport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50 cursor-pointer">Export CSV</a>
       <div class="ml-auto flex items-center gap-3 text-sm">
@@ -59,6 +64,15 @@
       <span id="gatesCount" class="text-xs bg-amber-200 text-amber-900 rounded-full px-2 py-0.5"></span>
     </div>
     <div id="gatesList" class="space-y-2"></div>
+  </section>
+
+  <!-- File de modération : soumissions en attente de recevabilité -->
+  <section id="modBar" class="hidden bg-sky-50 border-b border-sky-200 px-6 py-3">
+    <div class="flex items-center gap-2 mb-2">
+      <h2 class="text-sm font-semibold text-sky-900">Soumissions à modérer</h2>
+      <span id="modCount" class="text-xs bg-sky-200 text-sky-900 rounded-full px-2 py-0.5"></span>
+    </div>
+    <div id="modList" class="space-y-2"></div>
   </section>
 
   <main class="p-6 overflow-x-auto">
@@ -94,7 +108,7 @@
 // ============ Etat ============
 // Le jeton reste EN MEMOIRE (pas de localStorage) : un XSS ne peut pas le voler
 // dans un stockage persistant. Contrepartie assumee : rechargement = reconnexion.
-const S = { token: null, user: null, api: null, ideas: [], filters: { q: '', status: '' } };
+const S = { token: null, user: null, api: null, ideas: [], filters: { q: '', status: '' }, vue: 'kanban', selection: new Set() };
 
 const STAGES = [
   { id: 'recueillir',    label: '00 · Recueillir' },
@@ -174,6 +188,51 @@ async function refresh() {
   S.ideas = ideas || [];
   render();
   await refreshGates();
+  await refreshModeration();
+}
+
+// ============ File de modération (EF-62) ============
+async function refreshModeration() {
+  let d;
+  try { d = await api('/moderation'); } catch { return; }
+  const file = d.file ?? [];
+  const bar = $('#modBar');
+  const peutModerer = ['comex', 'facilitateur'].includes(d.monRole);
+  if (!file.length) { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  $('#modCount').textContent = file.length;
+
+  $('#modList').innerHTML = file.map((i) => `
+    <div class="bg-white border rounded-lg p-3" data-mod="${i.id}">
+      <div class="flex items-start gap-3 flex-wrap">
+        <div class="flex-1 min-w-[220px]">
+          <p class="text-sm font-medium">${esc(i.title)}</p>
+          <p class="text-xs text-slate-500">${esc(i.author ?? '')}${i.campagneId ? ` · campagne ${esc(i.campagneId)}` : ''}</p>
+        </div>
+        ${peutModerer ? `
+        <div class="flex items-center gap-2">
+          <input data-motif class="border rounded-lg px-2 py-1 text-xs w-52" placeholder="Motif (obligatoire si rejet)">
+          <button data-act="approuve" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-lg px-3 py-1.5">Approuver</button>
+          <button data-act="rejete" class="bg-rose-600 hover:bg-rose-700 text-white text-xs rounded-lg px-3 py-1.5">Rejeter</button>
+        </div>` : '<span class="text-xs text-slate-400 self-center">réservé aux modérateurs</span>'}
+      </div>
+      <p data-err class="text-xs text-rose-600 mt-2 hidden"></p>
+    </div>`).join('');
+
+  document.querySelectorAll('[data-mod]').forEach((row) => {
+    row.querySelectorAll('[data-act]').forEach((btn) => btn.addEventListener('click', async () => {
+      const decision = btn.dataset.act;
+      const motif = row.querySelector('[data-motif]').value.trim();
+      const err = row.querySelector('[data-err]');
+      // Même règle que le veto : un rejet doit être motivé.
+      if (decision === 'rejete' && !motif) {
+        err.textContent = 'Un motif est obligatoire pour rejeter une soumission.';
+        err.classList.remove('hidden'); return;
+      }
+      try { await api(`/ideas/${row.dataset.mod}/moderate`, { method: 'POST', body: { decision, motif } }); await refresh(); }
+      catch (e) { err.textContent = e.message; err.classList.remove('hidden'); }
+    }));
+  });
 }
 
 // ============ Gates en attente ============
@@ -251,6 +310,8 @@ function render() {
     Object.entries(byStatus).map(([s, n]) =>
       `<span class="px-2 py-0.5 rounded ${STATUS_STYLE[s] ?? 'bg-slate-100'}">${s.replace(/_/g,' ')} · ${n}</span>`).join('');
 
+  if (S.vue === 'liste') { renderListe(items); bindBoard(); return; }
+
   // Colonnes = etapes (axe EXECUTION) ; badge de chaque carte = statut (axe DECISION)
   $('#board').innerHTML = STAGES.map((st) => {
     const col = items.filter((i) => i.stage === st.id);
@@ -264,6 +325,41 @@ function render() {
   }).join('');
 
   bindBoard();
+}
+
+/** Vue liste triable (EF-53) : lecture dense, tri par colonne. */
+function renderListe(items) {
+  const cols = [['title', 'Idée'], ['stage', 'Étape'], ['status', 'Statut'], ['ki', 'KI'], ['votes', 'Votes'], ['author', 'Auteur'], ['updatedAt', 'MAJ']];
+  const tri = S.tri ?? { col: 'updatedAt', dir: 'desc' };
+  const val = (i, c) => c === 'votes' ? (i.votes ?? []).length : (i[c] ?? '');
+  const rows = [...items].sort((a, b) => {
+    const x = val(a, tri.col), y = val(b, tri.col);
+    const r = x > y ? 1 : x < y ? -1 : 0;
+    return tri.dir === 'desc' ? -r : r;
+  });
+  $('#board').innerHTML = `<div class="bg-white border rounded-xl w-full overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-slate-600 text-xs">
+        <tr><th class="w-8"></th>${cols.map(([c, l]) =>
+          `<th class="text-left px-3 py-2 cursor-pointer hover:text-slate-900" data-tri="${c}">${l}${tri.col === c ? (tri.dir === 'desc' ? ' ▼' : ' ▲') : ''}</th>`).join('')}</tr>
+      </thead>
+      <tbody>${rows.map((i) => `<tr class="border-t hover:bg-slate-50">
+        <td class="px-2"><input type="checkbox" data-sel="${i.id}" ${S.selection.has(i.id) ? 'checked' : ''}></td>
+        <td class="px-3 py-2 cursor-pointer" data-id="${i.id}">${esc(i.title)}</td>
+        <td class="px-3 text-xs">${esc(i.stage)}</td>
+        <td class="px-3"><span class="text-[11px] px-1.5 py-0.5 rounded ${STATUS_STYLE[i.status] ?? 'bg-slate-100'}">${i.status.replace(/_/g,' ')}</span></td>
+        <td class="px-3 text-xs">${i.ki ?? '—'}</td>
+        <td class="px-3 text-xs">${(i.votes ?? []).length}</td>
+        <td class="px-3 text-xs text-slate-500">${esc(i.author ?? '')}</td>
+        <td class="px-3 text-xs text-slate-400">${(i.updatedAt ?? '').slice(0, 10)}</td>
+      </tr>`).join('') || '<tr><td colspan="8" class="p-6 text-center text-slate-400">Aucune idée</td></tr>'}</tbody>
+    </table></div>`;
+
+  document.querySelectorAll('[data-tri]').forEach((th) => th.addEventListener('click', () => {
+    const c = th.dataset.tri;
+    S.tri = { col: c, dir: tri.col === c && tri.dir === 'desc' ? 'asc' : 'desc' };
+    render();
+  }));
 }
 
 function card(i) {
@@ -282,6 +378,13 @@ function card(i) {
 
 // ============ Interactions du board ============
 function bindBoard() {
+  // Selection pour la comparaison inter-idees
+  document.querySelectorAll('[data-sel]').forEach((cb) => cb.addEventListener('change', () => {
+    cb.checked ? S.selection.add(cb.dataset.sel) : S.selection.delete(cb.dataset.sel);
+    const n = S.selection.size;
+    $('#btnCompare').textContent = `Comparer (${n})`;
+    $('#btnCompare').disabled = n < 2;
+  }));
   document.querySelectorAll('[data-id]').forEach((el) => {
     el.addEventListener('click', () => openDrawer(el.dataset.id));
     el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', el.dataset.id));
@@ -334,6 +437,9 @@ function openDrawer(id) {
     <ul class="text-xs text-slate-600 space-y-1 mb-6">
       ${votes.map((v) => `<li>${esc(v.by)} <span class="text-slate-400">(${v.role})</span> — <strong>${v.score}</strong></li>`).join('') || '<li class="text-slate-400">Aucun vote</li>'}
     </ul>
+    <h3 class="font-semibold text-sm mb-2">Discussion</h3>
+    <div id="dComments" class="mb-6 text-sm text-slate-400">chargement…</div>
+
     <h3 class="font-semibold text-sm mb-2">Notation (grille de l'étape)</h3>
     <div id="dScore" class="mb-6 text-sm text-slate-400">chargement…</div>
 
@@ -349,6 +455,7 @@ function openDrawer(id) {
     </ol>`;
   $('#drawer').classList.remove('hidden');
   bindDrawer(i);
+  loadComments(i.id);
   loadScorecard(i);
   loadImpact(i.id);
 }
@@ -530,6 +637,91 @@ $('#ideaForm').addEventListener('submit', async (e) => {
     }
   } catch (err) { $('#formErr').textContent = err.message; }
 });
+
+// ============ Vues (EF-53) ============
+document.querySelectorAll('.vue-btn').forEach((b) => b.addEventListener('click', () => {
+  S.vue = b.dataset.vue;
+  document.querySelectorAll('.vue-btn').forEach((x) => {
+    const actif = x.dataset.vue === S.vue;
+    x.classList.toggle('bg-slate-800', actif); x.classList.toggle('text-white', actif);
+  });
+  render();
+}));
+
+// ============ Comparaison inter-idées (EF-54) ============
+$('#btnCompare').addEventListener('click', async () => {
+  let d;
+  try { d = await api('/reporting/compare', { method: 'POST', body: { ids: [...S.selection] } }); }
+  catch (e) { alert(e.message); return; }
+  const c = d.comparaison;
+  const fmt = (v) => (v === null || v === undefined ? '<span class="text-slate-300">—</span>' : v);
+
+  $('#drawerBody').innerHTML = `
+    <div class="flex items-start justify-between mb-4">
+      <h2 class="text-xl font-bold">Comparaison (${c.lignes.length})</h2>
+      <button data-close class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left text-xs text-slate-500">
+          <th class="py-2">Critère</th>${c.lignes.map((l) => `<th class="py-2 px-2">${esc(l.titre)}</th>`).join('')}
+        </tr></thead>
+        <tbody>${c.criteres.map((cr) => `<tr class="border-t">
+          <td class="py-2 text-slate-600">${cr.label}</td>
+          ${c.lignes.map((l) => {
+            const best = c.meilleurs[cr.id] === l.id;
+            return `<td class="py-2 px-2 ${best ? 'font-semibold text-emerald-700' : ''}">${fmt(l.mesures[cr.id])}${best ? ' ★' : ''}</td>`;
+          }).join('')}
+        </tr>`).join('')}</tbody>
+      </table>
+    </div>
+    ${c.nonRenseignes.length ? `<p class="text-xs text-amber-600 mt-3">${c.nonRenseignes.length} idée(s) sans KI : elles ne peuvent pas être départagées sur ce critère.</p>` : ''}
+    <p class="text-xs text-slate-400 mt-2">★ = meilleur sur le critère. Aucune étoile en cas d'égalité ou de donnée manquante.</p>`;
+  $('#drawer').classList.remove('hidden');
+  document.querySelectorAll('#drawer [data-close]').forEach((el) =>
+    el.addEventListener('click', () => $('#drawer').classList.add('hidden')));
+});
+
+// ============ Commentaires (EF-67) ============
+async function loadComments(id) {
+  let d;
+  try { d = await api(`/ideas/${id}/comments`); } catch { $('#dComments').textContent = 'indisponible'; return; }
+  const fil = d.fil ?? [];
+  const bloc = (c, reponse = false) => {
+    const supp = !!c.supprime;
+    return `<div class="${reponse ? 'ml-6 border-l pl-3' : ''} py-2">
+      <p class="text-xs text-slate-500">${esc(c.by)}${c.role ? ` · ${esc(c.role)}` : ''} · ${(c.ts ?? '').slice(0, 16).replace('T', ' ')}${c.edite ? ' · <em>modifié</em>' : ''}</p>
+      <p class="text-sm ${supp ? 'italic text-slate-400' : ''}">${supp ? 'commentaire supprimé' : esc(c.texte)}</p>
+      ${!supp ? `<button data-rep="${c.id}" class="text-xs text-sky-600 hover:underline mr-2">Répondre</button>
+                 <button data-del="${c.id}" class="text-xs text-slate-400 hover:text-rose-600">Supprimer</button>` : ''}
+    </div>`;
+  };
+  $('#dComments').innerHTML = `
+    ${fil.map((c) => bloc(c) + (c.reponses ?? []).map((r) => bloc(r, true)).join('')).join('') || '<p class="text-sm text-slate-400">Aucun commentaire</p>'}
+    <div class="mt-3">
+      <textarea id="cTexte" rows="2" class="w-full border rounded-lg px-3 py-2 text-sm" placeholder="Ajouter un commentaire…"></textarea>
+      <input type="hidden" id="cParent" value="">
+      <div class="flex items-center gap-2 mt-1">
+        <button id="cSend" class="bg-slate-800 text-white text-sm rounded-lg px-3 py-1">Publier</button>
+        <span id="cRep" class="text-xs text-slate-500"></span>
+      </div>
+    </div>`;
+
+  document.querySelectorAll('#dComments [data-rep]').forEach((b) => b.addEventListener('click', () => {
+    $('#cParent').value = b.dataset.rep; $('#cRep').textContent = 'en réponse — Échap pour annuler'; $('#cTexte').focus();
+  }));
+  document.querySelectorAll('#dComments [data-del]').forEach((b) => b.addEventListener('click', async () => {
+    try { await api(`/ideas/${id}/comments/${b.dataset.del}`, { method: 'DELETE' }); await loadComments(id); }
+    catch (e) { alert(e.message); }
+  }));
+  $('#cSend').addEventListener('click', async () => {
+    const texte = $('#cTexte').value.trim(); if (!texte) return;
+    try {
+      await api(`/ideas/${id}/comments`, { method: 'POST', body: { texte, parentId: $('#cParent').value || null } });
+      await loadComments(id);
+    } catch (e) { alert(e.message); }
+  });
+}
 
 // ============ Reporting ============
 $('#btnReport').addEventListener('click', async () => {

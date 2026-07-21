@@ -1,4 +1,4 @@
-# KayrosLab — Spécifications Fonctionnelles
+﻿# KayrosLab — Spécifications Fonctionnelles
 
 > **Du Signal Faible à la Décision Stratégique — Atelier d'Idéation Agentique Hybride, vers un « LLM gouverné ».**
 
@@ -598,8 +598,8 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 
 - **EF-51 (🟢)** Vue portefeuille en colonnes par étape (kanban) avec déplacement d'une idée d'une étape à l'autre.
 - **EF-52 (🟢)** Chaque colonne affiche son **compteur de charge (WIP)**.
-- **EF-53 (🔴)** Vues alternatives : liste triable et tableau de bord.
-- **EF-54 (🔴)** Comparaison de plusieurs idées côte à côte (KI, votes, impact).
+- **EF-53 (🟢)** Vues alternatives : **liste triable** (tri par colonne) et tableau de bord.
+- **EF-54 (🟢)** Comparaison de plusieurs idées côte à côte (KI, votes, net réalisé, ROI, ancienneté). Le meilleur par critère est signalé **uniquement si la donnée existe** et **hors ex æquo**.
 - **EF-55 (🟡)** Filtres combinables (statut, étape, catégorie) et recherche plein texte. *Statut et texte disponibles ; facettes incomplètes.*
 
 ### 13.3 Statut × Étape (EF-56 → EF-58)
@@ -615,8 +615,8 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 
 - **EF-59 (🟢)** Formulaire de soumission structuré (valeur, problème, ressources, parties prenantes, risques, équipe) rendant les idées comparables dès l'entrée.
 - **EF-60 (🟢)** Les champs du canevas **alimentent automatiquement** les hypothèses de *Construire* et les cibles d'attaque d'*Éprouver* ; un champ non renseigné devient lui-même un **angle mort** assigné à un agent.
-- **EF-61 (🔴)** Campagnes / défis thématiques multiples.
-- **EF-62 (🔴)** File de modération des soumissions entrantes.
+- **EF-61 (🟢)** Campagnes / défis thématiques avec **fenêtre de soumission** (ouverture, fermeture) et statistiques de collecte.
+- **EF-62 (🟢)** File de modération : une soumission en attente **n'entre pas dans le portefeuille** (ni WIP, ni entonnoir). Un **rejet exige un motif**, comme le veto.
 
 ### 13.5 Évaluation collaborative (EF-63 → EF-67)
 
@@ -624,7 +624,7 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 - **EF-64 (🟢)** L'agrégation est **pondérée par rôle** (COMEX ×3, expert/Red Team ×2, contributeur ×1).
 - **EF-65 (🟢)** L'agrégat expose la **dispersion** et un indicateur de **consensus**.
 - **EF-66 (🟢)** L'agrégat est **transmis au gate** et présenté au censeur : il **instruit** la décision sans la remplacer ; le veto reste entier.
-- **EF-67 (🔴)** Fil de commentaires par idée.
+- **EF-67 (🟢)** Fil de commentaires par idée, à deux niveaux (réponses). Édition datée ; **suppression douce** conservant auteur et horodatage — un fil de décision fait partie de l'audit.
 
 ### 13.6 Scorecards (EF-68 → EF-71)
 
@@ -637,8 +637,8 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 
 - **EF-72 (🟢)** L'ouverture d'un gate **notifie les censeurs habilités** du tenant concerné. *Sans cette exigence, la gouvernance reste théorique : le processus se fige.*
 - **EF-73 (🟢)** Les notifications partent sur des **canaux externes réels** (webhook, email) ; une panne de canal n'empêche ni les autres ni l'arbitrage.
-- **EF-74 (🔴)** Notifications d'activité (nouveau vote, changement d'étape, commentaire).
-- **EF-75 (🔴)** Digest périodique planifié.
+- **EF-74 (🟢)** Notifications d'activité (vote, commentaire, étape, statut, notation, modération, impact), diffusées **aux abonnés et jamais à l'auteur de l'action**.
+- **EF-75 (🟢)** Digest périodique agrégé par idée et par type. Un **digest vide n'est pas envoyé**.
 
 > **US-09.** En tant que **censeur COMEX**, je veux **être prévenu hors de l'application qu'un arbitrage m'attend** afin de **ne pas bloquer le processus sans le savoir**.
 > **Critères.** *Étant donné* un gate ouvert, *quand* un canal est configuré, *alors* les porteurs du rôle requis reçoivent un message contenant l'idée et l'agrégat de vote.
@@ -683,16 +683,16 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | Bloc | EF | Réalisé | Partiel | À construire |
 |---|---|---|---|---|
 | Persistance & comptes | 46–50 | 4 | 1 | 0 |
-| Portefeuille | 51–55 | 2 | 1 | 2 |
+| Portefeuille | 51–55 | 4 | 1 | 0 |
 | Statut × Étape | 56–58 | 2 | 1 | 0 |
-| Collecte | 59–62 | 2 | 0 | 2 |
-| Évaluation collaborative | 63–67 | 4 | 0 | 1 |
+| Collecte | 59–62 | 4 | 0 | 0 |
+| Évaluation collaborative | 63–67 | 5 | 0 | 0 |
 | Scorecards | 68–71 | 4 | 0 | 0 |
-| Notifications | 72–75 | 2 | 0 | 2 |
+| Notifications | 72–75 | 4 | 0 | 0 |
 | Impact réel | 76–79 | 4 | 0 | 0 |
 | Cycle aval | 80–83 | 4 | 0 | 0 |
 | Reporting | 84–87 | 4 | 0 | 0 |
-| **Total** | **42** | **32** | **3** | **7** |
+| **Total** | **42** | **39** | **3** | **0** |
 
 **Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
 

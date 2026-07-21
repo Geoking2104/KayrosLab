@@ -110,3 +110,88 @@ export function gateNotifier({ canal, resolveDestinataires = async () => [], res
     }
   };
 }
+
+// ---------- Activite (EF-74) & digest (EF-75) ----------
+
+export const ACTIVITES = ['vote', 'commentaire', 'etape', 'statut', 'notation', 'moderation', 'impact'];
+
+const LIB = {
+  vote: (e) => `${e.by} a voté ${e.score}/100`,
+  commentaire: (e) => `${e.by} a commenté`,
+  etape: (e) => `${e.by} a déplacé l'idée : ${e.de} → ${e.a}`,
+  statut: (e) => `${e.by} a changé le statut : ${e.de} → ${e.a}`,
+  notation: (e) => `${e.by} a noté l'idée (${e.score}/100)`,
+  moderation: (e) => `${e.by} a ${e.a === 'approuve' ? 'approuvé' : 'rejeté'} la soumission`,
+  impact: (e) => `${e.by} a enregistré un ${e.nature} de ${e.montant} €`,
+};
+
+/** Met en forme un evenement d'activite. */
+export function formatActivity(evt = {}, { titre = null, destinataires = [] } = {}) {
+  const quoi = LIB[evt.type]?.(evt) ?? `${evt.by ?? 'quelqu un'} a agi sur l'idée`;
+  const sujet = `[KayrosLab] ${titre ?? evt.ideaId ?? 'Idée'} — ${quoi}`;
+  return { sujet, texte: `${quoi}\n\nIdée : ${titre ?? evt.ideaId ?? '—'}\nDate : ${evt.ts ?? new Date().toISOString()}`, destinataires, evt };
+}
+
+/**
+ * Notifier d'activite : ne diffuse qu'aux ABONNES, et jamais a l'auteur de l'action
+ * (personne n'a besoin d'etre notifie de son propre geste).
+ */
+export function activityNotifier({ canal, resolveAbonnes = async () => [], resolveTitre = async () => null, types = ACTIVITES } = {}) {
+  return async (evt) => {
+    if (!canal || !types.includes(evt?.type)) return null;
+    try {
+      const [abonnes, titre] = await Promise.all([resolveAbonnes(evt), resolveTitre(evt)]);
+      const destinataires = abonnes.filter((a) => a && a !== evt.by);
+      if (!destinataires.length) return { ok: true, ignore: 'aucun abonne a notifier' };
+      return await canal.send(formatActivity(evt, { titre, destinataires }));
+    } catch (e) { return { ok: false, erreur: String(e?.message ?? e) }; }
+  };
+}
+
+/**
+ * Construit un digest periodique (EF-75) : agrege les evenements d'une fenetre,
+ * par idee puis par type. Un digest VIDE n'est pas envoye — mieux vaut pas de
+ * message qu'un message inutile qui apprend a ignorer les notifications.
+ */
+export function buildDigest(evenements = [], { depuis = null, jusqua = null, periode = 'quotidien' } = {}) {
+  const d0 = depuis ? new Date(depuis) : null;
+  const d1 = jusqua ? new Date(jusqua) : null;
+  const dans = evenements.filter((e) => {
+    if (!e?.ts) return false;
+    const t = new Date(e.ts);
+    return (!d0 || t >= d0) && (!d1 || t <= d1);
+  });
+
+  const parIdee = new Map();
+  const parType = {};
+  for (const e of dans) {
+    const k = e.ideaId ?? '—';
+    if (!parIdee.has(k)) parIdee.set(k, { ideaId: k, titre: e.titre ?? null, total: 0, types: {} });
+    const bloc = parIdee.get(k);
+    bloc.total++; bloc.types[e.type] = (bloc.types[e.type] ?? 0) + 1;
+    parType[e.type] = (parType[e.type] ?? 0) + 1;
+  }
+  const idees = [...parIdee.values()].sort((a, b) => b.total - a.total);
+  const acteurs = new Set(dans.map((e) => e.by).filter(Boolean));
+
+  return {
+    periode, depuis: depuis ?? null, jusqua: jusqua ?? null,
+    total: dans.length, vide: dans.length === 0,
+    parType, acteurs: acteurs.size, idees,
+  };
+}
+
+/** Met en forme un digest en message lisible. Renvoie null si le digest est vide. */
+export function formatDigest(digest, { destinataires = [] } = {}) {
+  if (!digest || digest.vide) return null;                      // rien a dire : on n'envoie pas
+  const lignes = digest.idees.slice(0, 10).map((i) => {
+    const detail = Object.entries(i.types).map(([t, n]) => `${n} ${t}`).join(', ');
+    return `• ${i.titre ?? i.ideaId} — ${detail}`;
+  });
+  const reste = digest.idees.length > 10 ? `\n… et ${digest.idees.length - 10} autre(s) idée(s).` : '';
+  return {
+    sujet: `[KayrosLab] Digest ${digest.periode} — ${digest.total} activité(s) sur ${digest.idees.length} idée(s)`,
+    texte: [`${digest.total} activité(s), ${digest.acteurs} contributeur(s).`, '', ...lignes].join('\n') + reste,
+    destinataires, evt: { type: 'digest', ...digest },
+  };
+}

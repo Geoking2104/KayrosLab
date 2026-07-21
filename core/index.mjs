@@ -14,6 +14,8 @@ export * from './evaluation.mjs';
 export * from './impact.mjs';
 export * from './execution.mjs';
 export * from './reporting.mjs';
+export * from './campaign.mjs';
+export * from './comments.mjs';
 export * from './notify.mjs';
 export * from './auth.mjs';
 export * from './ki.mjs';

@@ -1011,3 +1011,119 @@ test('reporting : export CSV echappe correctement', async () => {
   assert.match(entete, /^id,titre,etape,statut/);
   assert.match(ligne, /"Offre ""B2B"", Europe/);   // guillemets doubles + separateur cites
 });
+
+// ---------- Campagnes & moderation (EF-61/62) ----------
+test('campagne : fenetre de soumission et etat initial de moderation', async () => {
+  const { createCampaign, estOuverte, etatInitial } = await import('./campaign.mjs');
+  const c = createCampaign({ id: 'c1', nom: 'Défi IA', moderation: true, ouverteLe: '2026-01-01', fermeeLe: '2026-06-01' });
+  assert.equal(estOuverte(c, { now: () => new Date('2026-03-01') }).ouverte, true);
+  assert.equal(estOuverte(c, { now: () => new Date('2025-12-01') }).raison, 'pas_encore_ouverte');
+  assert.equal(estOuverte(c, { now: () => new Date('2026-09-01') }).raison, 'fermee');
+  assert.equal(etatInitial(c).etat, 'en_attente');
+  assert.equal(etatInitial(createCampaign({ id: 'c2', nom: 'Libre' })).etat, 'approuve');
+  assert.equal(estOuverte(null).ouverte, true);          // hors campagne = libre
+});
+
+test('moderation : rejet motive obligatoire, exclusion du portefeuille', async () => {
+  const { createIdea } = await import('./model.mjs');
+  const { moderer, estPubliee, fileModeration, statsCampagne } = await import('./campaign.mjs');
+  const base = { ...createIdea({ id: 'i1', title: 'A', tenantId: 't' }), campagneId: 'c1', moderation: { etat: 'en_attente' } };
+  assert.equal(estPubliee(base), false);                 // pas encore visible
+  assert.equal(fileModeration([base], { tenantId: 't' }).length, 1);
+  assert.throws(() => moderer(base, { decision: 'rejete', by: 'g' }));   // motif obligatoire
+  const rejete = moderer(base, { decision: 'rejete', by: 'g', motif: 'hors périmètre' });
+  assert.equal(rejete.moderation.motif, 'hors périmètre');
+  assert.equal(estPubliee(rejete), false);
+  const ok = moderer(base, { decision: 'approuve', by: 'g' });
+  assert.equal(estPubliee(ok), true);
+  assert.equal(fileModeration([ok]).length, 0);
+  const s = statsCampagne([ok, rejete], 'c1');
+  assert.equal(s.soumises, 2); assert.equal(s.approuvees, 1); assert.equal(s.rejetees, 1);
+});
+
+// ---------- Fil de commentaires (EF-67) ----------
+test('commentaires : fil a deux niveaux, edition datee, suppression douce', async () => {
+  const { addComment, editComment, removeComment, commentTree, countComments } = await import('./comments.mjs');
+  let fil = addComment([], { by: 'a@x.com', role: 'expert', texte: 'Attention au marché.' });
+  const racine = fil[0].id;
+  fil = addComment(fil, { by: 'b@x.com', texte: 'D accord.', parentId: racine });
+  assert.equal(commentTree(fil)[0].reponses.length, 1);
+  // pas de troisieme niveau
+  const reponse = fil[1].id;
+  assert.throws(() => addComment(fil, { by: 'c@x.com', texte: 'x', parentId: reponse }));
+  assert.throws(() => addComment(fil, { by: 'a@x.com', texte: '   ' }));   // texte vide
+
+  fil = editComment(fil, racine, { texte: 'Attention au marché européen.', by: 'a@x.com' });
+  assert.ok(fil[0].edite);                                // edition transparente
+  assert.throws(() => editComment(fil, racine, { texte: 'pirate', by: 'b@x.com' }));
+
+  // suppression douce : trace conservee, contenu masque
+  fil = removeComment(fil, racine, { by: 'z@x.com', role: 'comex' });   // moderation
+  assert.equal(fil[0].texte, null);
+  assert.equal(fil[0].by, 'a@x.com');                     // auteur conserve (audit)
+  assert.ok(fil[0].supprime.by);
+  assert.equal(countComments(fil), 1);                    // le supprime ne compte plus
+  assert.throws(() => removeComment(fil, reponse, { by: 'etranger@x.com', role: 'contributeur' }));
+});
+
+// ---------- Activite & digest (EF-74/75) ----------
+test('activite : ne notifie que les abonnes, jamais l auteur de l action', async () => {
+  const { activityNotifier, CompositeNotifier, WebhookNotifier } = await import('./notify.mjs');
+  let recu = null;
+  const canal = new CompositeNotifier([new WebhookNotifier({ url: 'https://h', fetchImpl: async (u, o) => { recu = JSON.parse(o.body); return { ok: true }; } })]);
+  const n = activityNotifier({ canal, resolveAbonnes: async () => ['a@x.com', 'b@x.com'], resolveTitre: async () => 'Offre B2B' });
+
+  await n({ type: 'vote', by: 'a@x.com', score: 80, ideaId: 'i1', ts: 'T' });
+  assert.deepEqual(recu.destinataires, ['b@x.com']);      // a@x.com exclu : c'est lui qui a agi
+  assert.match(recu.text, /a voté 80\/100/);
+
+  // seul abonne = acteur -> rien n'est envoye
+  recu = null;
+  const n2 = activityNotifier({ canal, resolveAbonnes: async () => ['a@x.com'] });
+  const r = await n2({ type: 'vote', by: 'a@x.com', score: 50, ideaId: 'i1' });
+  assert.equal(recu, null);
+  assert.ok(r.ignore);
+});
+
+test('digest : agrege par idee et ne s envoie jamais vide', async () => {
+  const { buildDigest, formatDigest } = await import('./notify.mjs');
+  const ev = [
+    { type: 'vote', by: 'a', ideaId: 'i1', titre: 'Alpha', ts: '2026-07-20T10:00:00Z' },
+    { type: 'commentaire', by: 'b', ideaId: 'i1', titre: 'Alpha', ts: '2026-07-20T11:00:00Z' },
+    { type: 'etape', by: 'c', ideaId: 'i2', titre: 'Beta', ts: '2026-07-20T12:00:00Z' },
+    { type: 'vote', by: 'd', ideaId: 'i3', ts: '2026-07-01T09:00:00Z' },   // hors fenetre
+  ];
+  const d = buildDigest(ev, { depuis: '2026-07-19', jusqua: '2026-07-21', periode: 'quotidien' });
+  assert.equal(d.total, 3);
+  assert.equal(d.idees[0].ideaId, 'i1');                  // trie par volume
+  assert.equal(d.idees[0].total, 2);
+  assert.equal(d.parType.vote, 1);
+  assert.equal(d.acteurs, 3);
+  const msg = formatDigest(d, { destinataires: ['x@y.com'] });
+  assert.match(msg.sujet, /Digest quotidien/);
+  assert.match(msg.texte, /Alpha/);
+  // digest vide -> aucun message
+  assert.equal(formatDigest(buildDigest([], {})), null);
+});
+
+// ---------- Comparaison inter-idees (EF-54) ----------
+test('comparaison : meilleur par critere, sans designer de gagnant sans donnee', async () => {
+  const { createIdea } = await import('./model.mjs');
+  const { emptyImpact, recordInvestment, recordBenefit } = await import('./impact.mjs');
+  const { compare } = await import('./reporting.mjs');
+  const imp = recordBenefit(recordInvestment(emptyImpact(), { montant: 100 }), { montant: 300 });
+  const a = { ...createIdea({ id: 'a', title: 'Alpha' }), ki: 80, votes: [{ by: 'x', score: 90 }], impact: imp };
+  const b = { ...createIdea({ id: 'b', title: 'Beta' }), ki: 60, votes: [{ by: 'y', score: 40 }] };
+  const c = { ...createIdea({ id: 'c', title: 'Gamma' }) };   // ni KI ni votes
+
+  const r = compare([a, b, c]);
+  assert.equal(r.lignes.length, 3);
+  assert.equal(r.meilleurs.ki, 'a');
+  assert.equal(r.meilleurs.votesMoyenne, 'a');
+  assert.equal(r.meilleurs.net, 'a');                     // seule idee avec impact
+  assert.deepEqual(r.nonRenseignes, ['c']);               // signalee comme non notee
+  // egalite parfaite -> aucun gagnant designe
+  const d1 = { ...createIdea({ id: 'd', title: 'D' }), ki: 50 };
+  const d2 = { ...createIdea({ id: 'e', title: 'E' }), ki: 50 };
+  assert.equal(compare([d1, d2]).meilleurs.ki, null);
+});

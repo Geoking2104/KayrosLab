@@ -107,3 +107,49 @@ export function exportCsv(ideas = []) {
   });
   return [cols.join(','), ...lignes].join('\n');
 }
+
+/** Critères comparables entre idées (EF-54). */
+export const CRITERES_COMPARAISON = [
+  { id: 'ki', label: 'KI', sens: 'max' },
+  { id: 'votesMoyenne', label: 'Vote moyen', sens: 'max' },
+  { id: 'votesCount', label: 'Évaluateurs', sens: 'max' },
+  { id: 'net', label: 'Net réalisé (€)', sens: 'max' },
+  { id: 'roiReel', label: 'ROI réel', sens: 'max' },
+  { id: 'ageJours', label: 'Ancienneté (j)', sens: 'min' },
+];
+
+function mesures(idea, now) {
+  const votes = idea.votes ?? [];
+  const t = idea.impact ? totals(idea.impact) : { net: null, roiReel: null };
+  return {
+    ki: typeof idea.ki === 'number' ? idea.ki : null,
+    votesMoyenne: votes.length ? r2(votes.reduce((a, v) => a + v.score, 0) / votes.length) : null,
+    votesCount: votes.length,
+    net: t.net, roiReel: t.roiReel,
+    ageJours: idea.createdAt ? r2((now - new Date(idea.createdAt)) / 86400000) : null,
+  };
+}
+
+/**
+ * Comparaison côte à côte (EF-54). Pour chaque critère, la meilleure idée est
+ * signalée — mais SEULEMENT si la donnée existe : une idée non notée n'est jamais
+ * declaree "meilleure" par defaut d'information.
+ */
+export function compare(ideas = [], { now = () => new Date() } = {}) {
+  const d = now();
+  const lignes = ideas.map((i) => ({
+    id: i.id, titre: i.title, etape: i.stage, statut: i.status, mesures: mesures(i, d),
+  }));
+  const meilleurs = {};
+  for (const c of CRITERES_COMPARAISON) {
+    const dispo = lignes.filter((l) => typeof l.mesures[c.id] === 'number');
+    if (!dispo.length) { meilleurs[c.id] = null; continue; }
+    const best = dispo.reduce((a, b) =>
+      (c.sens === 'max' ? b.mesures[c.id] > a.mesures[c.id] : b.mesures[c.id] < a.mesures[c.id]) ? b : a);
+    // Egalite parfaite : pas de gagnant designe.
+    const exaequo = dispo.filter((l) => l.mesures[c.id] === best.mesures[c.id]).length > 1;
+    meilleurs[c.id] = exaequo ? null : best.id;
+    if (!exaequo) continue;
+  }
+  return { criteres: CRITERES_COMPARAISON, lignes, meilleurs, nonRenseignes: lignes.filter((l) => l.mesures.ki === null).map((l) => l.id) };
+}
