@@ -104,9 +104,11 @@ export const publicUser = (u) => (u ? { id: u.id, email: u.email, name: u.name, 
 
 /** Service d'authentification : inscription, connexion, verification, RBAC. */
 export class AuthService {
-  constructor({ users = new InMemoryUserStore(), secret, ttlSec = 3600 } = {}) {
+  constructor({ users = new InMemoryUserStore(), secret, ttlSec = 3600, sessions = null, throttle = null } = {}) {
     if (!secret) throw new Error('AuthService: secret requis (variable d environnement)');
     this.users = users; this.secret = secret; this.ttlSec = ttlSec;
+    this.sessions = sessions ?? new SessionStore();
+    this.throttle = throttle ?? new LoginThrottle();
   }
 
   async register({ email, password, name = null, role = 'contributeur', tenantId = 'default' }) {
@@ -122,23 +124,43 @@ export class AuthService {
    * Connexion. Message d'erreur VOLONTAIREMENT identique pour email inconnu et
    * mot de passe faux : ne pas reveler quels comptes existent (enumeration).
    */
-  async login({ email, password }) {
+  async login({ email, password, throttleKey = null }) {
+    const key = throttleKey ?? String(email ?? '').toLowerCase();
+    this.throttle.check(key);                       // leve si verrouille
     const user = await this.users.findByEmail(email ?? '');
     const ok = user ? await verifyPassword(password ?? '', user.passwordHash) : false;
-    if (!ok) { const e = new Error('identifiants invalides'); e.code = 'AUTH_INVALID'; throw e; }
+    if (!ok) {
+      this.throttle.fail(key);
+      const e = new Error('identifiants invalides'); e.code = 'AUTH_INVALID'; throw e;
+    }
+    this.throttle.reset(key);
+    const jti = globalThis.crypto?.randomUUID?.() ?? `j_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const token = await issueToken(
-      { sub: user.id, email: user.email, role: user.role, tenantId: user.tenantId },
+      { sub: user.id, email: user.email, role: user.role, tenantId: user.tenantId, jti },
       this.secret, { ttlSec: this.ttlSec },
     );
     return { token, user: publicUser(user) };
   }
 
-  /** Verifie un jeton et renvoie le contexte d'appel. */
+  /** Verifie un jeton : signature, expiration, revocation unitaire et globale. */
   async verify(token) {
     const r = await verifyToken(token, this.secret);
     if (!r.valid) { const e = new Error(`jeton invalide (${r.reason})`); e.code = 'AUTH_TOKEN'; throw e; }
-    return r.payload;
+    const p = r.payload;
+    if (this.sessions.isRevoked(p.jti)) { const e = new Error('jeton revoque'); e.code = 'AUTH_REVOKED'; throw e; }
+    if (this.sessions.isBeforeCutoff(p.sub, p.iat)) { const e = new Error('session invalidee'); e.code = 'AUTH_REVOKED'; throw e; }
+    return p;
   }
+
+  /** Deconnexion : revoque ce jeton precis. */
+  async logout(token) {
+    const r = await verifyToken(token, this.secret);
+    if (r.valid) this.sessions.revoke(r.payload.jti);
+    return true;
+  }
+
+  /** Invalide toutes les sessions d'un utilisateur (changement de mot de passe, compromission). */
+  revokeAllSessions(userId) { this.sessions.revokeAllForUser(userId); return true; }
 
   /** Garde RBAC : le porteur possede-t-il l'un des roles requis ? */
   hasRole(payload, roles = []) {
@@ -159,5 +181,46 @@ export class AuthService {
     if (!payload?.tenantId) return false;
     const rt = resource?.tenantId ?? 'default';
     return payload.tenantId === rt;
+  }
+}
+
+/**
+ * Limitation des tentatives de connexion (anti-bruteforce en ligne).
+ * scrypt ralentit le bruteforce hors-ligne ; ceci freine le bruteforce en ligne.
+ * Horloge injectable pour des tests deterministes.
+ */
+export class LoginThrottle {
+  constructor({ maxAttempts = 5, windowMs = 15 * 60 * 1000, now = () => Date.now() } = {}) {
+    this.maxAttempts = maxAttempts; this.windowMs = windowMs; this.now = now; this._m = new Map();
+  }
+  _entry(key) {
+    const e = this._m.get(key);
+    if (!e || this.now() - e.first > this.windowMs) { const n = { count: 0, first: this.now() }; this._m.set(key, n); return n; }
+    return e;
+  }
+  /** Leve si la cle est verrouillee. */
+  check(key) {
+    const e = this._entry(key);
+    if (e.count >= this.maxAttempts) {
+      const reste = Math.max(0, this.windowMs - (this.now() - e.first));
+      const err = new Error(`trop de tentatives, reessayez dans ${Math.ceil(reste / 1000)}s`);
+      err.code = 'AUTH_THROTTLED'; err.retryAfterMs = reste; throw err;
+    }
+    return true;
+  }
+  fail(key) { const e = this._entry(key); e.count++; return e.count; }
+  reset(key) { this._m.delete(key); }
+}
+
+/** Denylist de jetons revoques (jti) + revocation globale par utilisateur. */
+export class SessionStore {
+  constructor() { this._revoked = new Set(); this._notBefore = new Map(); }
+  revoke(jti) { if (jti) this._revoked.add(jti); return this; }
+  isRevoked(jti) { return this._revoked.has(jti); }
+  /** Invalide TOUS les jetons d'un utilisateur emis avant maintenant (ex. changement de mot de passe). */
+  revokeAllForUser(userId, at = Math.floor(Date.now() / 1000)) { this._notBefore.set(userId, at); return this; }
+  isBeforeCutoff(userId, iat) {
+    const nb = this._notBefore.get(userId);
+    return typeof nb === 'number' && typeof iat === 'number' && iat < nb;
   }
 }

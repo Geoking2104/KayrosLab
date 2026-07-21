@@ -708,3 +708,37 @@ test('auth : RBAC et isolation multi-tenant', async () => {
   assert.equal(visibles[0].id, 'a');                    // pas de fuite inter-tenant
   assert.equal(auth.sameTenant(payload, { tenantId: 'other' }), false);
 });
+
+test('auth : deconnexion revoque le jeton, revocation globale invalide les anciens', async () => {
+  const { AuthService } = await import('./auth.mjs');
+  const auth = new AuthService({ secret: 'secret-de-test-uniquement' });
+  const u = await auth.register({ email: 'r@x.com', password: 'motdepasse-solide-2026' });
+  const { token } = await auth.login({ email: 'r@x.com', password: 'motdepasse-solide-2026' });
+  assert.ok(await auth.verify(token));            // valide avant deconnexion
+  await auth.logout(token);
+  await assert.rejects(() => auth.verify(token), (e) => e.code === 'AUTH_REVOKED');
+
+  // revocation globale (ex. changement de mot de passe) : les jetons anterieurs tombent
+  const { token: t2 } = await auth.login({ email: 'r@x.com', password: 'motdepasse-solide-2026' });
+  auth.sessions.revokeAllForUser(u.id, Math.floor(Date.now() / 1000) + 5);
+  await assert.rejects(() => auth.verify(t2), (e) => e.code === 'AUTH_REVOKED');
+});
+
+test('auth : limitation des tentatives (anti-bruteforce)', async () => {
+  const { AuthService, LoginThrottle } = await import('./auth.mjs');
+  let t = 0;
+  const throttle = new LoginThrottle({ maxAttempts: 3, windowMs: 1000, now: () => t });
+  const auth = new AuthService({ secret: 'secret-de-test-uniquement', throttle });
+  await auth.register({ email: 'b@x.com', password: 'motdepasse-solide-2026' });
+  for (let i = 0; i < 3; i++) {
+    await assert.rejects(() => auth.login({ email: 'b@x.com', password: 'faux' }), (e) => e.code === 'AUTH_INVALID');
+  }
+  // 4e tentative : verrouille, meme avec le BON mot de passe
+  await assert.rejects(
+    () => auth.login({ email: 'b@x.com', password: 'motdepasse-solide-2026' }),
+    (e) => e.code === 'AUTH_THROTTLED',
+  );
+  t += 1500;                                       // fenetre expiree
+  const ok = await auth.login({ email: 'b@x.com', password: 'motdepasse-solide-2026' });
+  assert.ok(ok.token);
+});

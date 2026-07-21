@@ -6,6 +6,8 @@ import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
   evaluateKpis, alertsToSignals,
+  AuthService, InMemoryIdeaRepository, createIdea, setStage, setStatus,
+  portfolio, counts, processIntake, aggregateVotes, defaultScorecards,
 } from '../../core/index.mjs';
 
 const {
@@ -53,6 +55,23 @@ const policy = new RoutingPolicy({ defaultProvider: ANTHROPIC_API_KEY ? 'anthrop
 const llm = new KayrosLLM(providers, policy);
 const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
 const tools = demoTools(); // registre partage (inclut simulate_trajectory / estimate_resources, deterministes)
+
+// --- Authentification & portefeuille ---
+// KAYROS_AUTH_SECRET absent => les routes protegees sont desactivees (503), pas ouvertes.
+const AUTH_SECRET = process.env.KAYROS_AUTH_SECRET || '';
+const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET }) : null;
+const ideas = new InMemoryIdeaRepository();
+const scorecards = defaultScorecards();
+
+/** Extrait et verifie le porteur. Leve 401/503 le cas echeant. */
+async function requireAuth(req, reply) {
+  if (!auth) { reply.code(503).send({ error: 'authentification non configuree (KAYROS_AUTH_SECRET)' }); return null; }
+  const h = req.headers.authorization || '';
+  const token = h.startsWith('Bearer ') ? h.slice(7) : null;
+  if (!token) { reply.code(401).send({ error: 'jeton requis' }); return null; }
+  try { return await auth.verify(token); }
+  catch (e) { reply.code(401).send({ error: e.message }); return null; }
+}
 
 const app = Fastify({ logger: true });
 await app.register(cors, { origin: ALLOWED_ORIGIN });
@@ -132,6 +151,116 @@ app.post('/v1/projeter/monitor', async (req, reply) => {
   const signals = alertsToSignals(alerts, { ideaId });
   const reArbitrage = alerts.length ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId) } : null;
   return { alerts, signals, reArbitrage };
+});
+
+// ---------------- Authentification ----------------
+app.post('/v1/auth/register', async (req, reply) => {
+  if (!auth) return reply.code(503).send({ error: 'authentification non configuree' });
+  const { email, password, name, role, tenantId } = req.body || {};
+  try {
+    // Creation d'un role privilegie reservee au COMEX authentifie.
+    let asked = role || 'contributeur';
+    if (asked !== 'contributeur') {
+      const caller = await requireAuth(req, reply); if (!caller) return;
+      if (caller.role !== 'comex') return reply.code(403).send({ error: 'seul un COMEX peut creer ce role' });
+    }
+    return { user: await auth.register({ email, password, name, role: asked, tenantId }) };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+app.post('/v1/auth/login', async (req, reply) => {
+  if (!auth) return reply.code(503).send({ error: 'authentification non configuree' });
+  const { email, password } = req.body || {};
+  try {
+    // Cle de limitation combinant email et IP (freine le bruteforce cible et distribue).
+    return await auth.login({ email, password, throttleKey: `${String(email ?? '').toLowerCase()}|${req.ip}` });
+  } catch (e) {
+    if (e.code === 'AUTH_THROTTLED') return reply.code(429).send({ error: e.message });
+    return reply.code(401).send({ error: e.message });
+  }
+});
+
+app.post('/v1/auth/logout', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const h = req.headers.authorization || '';
+  await auth.logout(h.slice(7));
+  return { ok: true };
+});
+
+app.get('/v1/auth/me', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  return { user: { id: me.sub, email: me.email, role: me.role, tenantId: me.tenantId } };
+});
+
+// ---------------- Portefeuille (toutes routes scopees au tenant du porteur) ----------------
+app.get('/v1/ideas', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { stage, status, category, q } = req.query || {};
+  return { ideas: await ideas.list({ tenantId: me.tenantId, stage, status, category, q }) };
+});
+
+app.post('/v1/ideas', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { id, title, intake, category } = req.body || {};
+  try {
+    const derive = intake ? processIntake(intake) : null;
+    const idea = createIdea({
+      id: id || `D${Date.now()}`, title, author: me.email, category,
+      intake, tenantId: me.tenantId,                       // tenant impose par le jeton, pas par le client
+    });
+    await ideas.save(idea);
+    return reply.code(201).send({ idea, derive });          // hypotheses + cibles d'attaque
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+app.get('/v1/ideas/:id', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  return { idea };
+});
+
+app.patch('/v1/ideas/:id', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { stage, status, motif } = req.body || {};
+  try {
+    let out = idea;
+    if (stage) out = setStage(out, stage, { by: me.email, motif });
+    if (status) out = setStatus(out, status, { by: me.email, motif });
+    await ideas.save(out);
+    return { idea: out };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+app.get('/v1/portfolio', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const board = await portfolio(ideas, { tenantId: me.tenantId });
+  const all = await ideas.list({ tenantId: me.tenantId });
+  const byStatus = {};
+  for (const i of all) byStatus[i.status] = (byStatus[i.status] ?? 0) + 1;
+  return { ...board, byStatus };
+});
+
+// Vote multi-evaluateurs : instruit la decision, ne la tranche pas.
+app.post('/v1/ideas/:id/votes', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { score, comment } = req.body || {};
+  if (typeof score !== 'number') return reply.code(400).send({ error: 'score numerique requis (0..100)' });
+  const votes = [...(idea.votes ?? []).filter((v) => v.by !== me.email), { by: me.email, role: me.role, score, comment }];
+  const out = { ...idea, votes, updatedAt: new Date().toISOString() };
+  await ideas.save(out);
+  return { agregat: aggregateVotes(votes) };
+});
+
+app.get('/v1/scorecards', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { stage } = req.query || {};
+  const list = stage ? scorecards.forStage(stage) : scorecards.list();
+  return { scorecards: list.map((s) => ({ id: s.id, stage: s.stage, label: s.label, scale: s.scale, criteria: s.criteria })) };
 });
 
 app.listen({ port: Number(PORT), host: '0.0.0.0' })
