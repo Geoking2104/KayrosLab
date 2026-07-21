@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KayrosLab — Portefeuille</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .col { min-width: 260px; }
+  .card { transition: transform .12s ease, box-shadow .12s ease; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.10); }
+  .drag-over { outline: 2px dashed #6366f1; outline-offset: -6px; background: #eef2ff; }
+</style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+<!-- ====== Connexion ====== -->
+<div id="authView" class="min-h-screen flex items-center justify-center p-6">
+  <form id="loginForm" class="bg-white rounded-xl shadow p-8 w-full max-w-sm">
+    <h1 class="text-2xl font-bold mb-1">KayrosLab</h1>
+    <p class="text-sm text-slate-500 mb-6">Portefeuille d'idées gouverné</p>
+    <label class="block text-sm font-medium mb-1">Email</label>
+    <input id="email" type="email" autocomplete="username" required
+           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <label class="block text-sm font-medium mb-1">Mot de passe</label>
+    <input id="password" type="password" autocomplete="current-password" required
+           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <label class="block text-sm font-medium mb-1">API</label>
+    <input id="apiBase" type="text" class="w-full border rounded-lg px-3 py-2 mb-5 text-sm text-slate-600">
+    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg py-2 font-medium">Se connecter</button>
+    <p id="authErr" class="text-sm text-red-600 mt-3 hidden"></p>
+  </form>
+</div>
+
+<!-- ====== Application ====== -->
+<div id="appView" class="hidden">
+  <header class="bg-white border-b sticky top-0 z-20">
+    <div class="px-6 py-3 flex items-center gap-4">
+      <h1 class="text-lg font-bold">KayrosLab <span class="text-slate-400 font-normal">Portefeuille</span></h1>
+      <input id="search" placeholder="Rechercher…" class="border rounded-lg px-3 py-1.5 text-sm w-64">
+      <select id="fStatus" class="border rounded-lg px-2 py-1.5 text-sm">
+        <option value="">Tous les statuts</option>
+      </select>
+      <button id="btnNew" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg px-3 py-1.5">+ Idée</button>
+      <div class="ml-auto flex items-center gap-3 text-sm">
+        <span id="who" class="text-slate-600"></span>
+        <button id="btnLogout" class="text-slate-500 hover:text-slate-800">Déconnexion</button>
+      </div>
+    </div>
+    <div id="stats" class="px-6 pb-3 flex gap-4 text-xs text-slate-500"></div>
+  </header>
+
+  <main class="p-6 overflow-x-auto">
+    <div id="board" class="flex gap-4 items-start"></div>
+  </main>
+</div>
+
+<!-- ====== Modale : nouvelle idée (canevas Recueillir) ====== -->
+<div id="modal" class="hidden fixed inset-0 bg-black/40 z-30 flex items-start justify-center p-6 overflow-y-auto">
+  <form id="ideaForm" class="bg-white rounded-xl shadow-xl p-6 w-full max-w-2xl my-8">
+    <h2 class="text-xl font-bold mb-1">Recueillir une idée</h2>
+    <p class="text-sm text-slate-500 mb-5">Les champs renseignés alimentent les hypothèses de <em>Construire</em> et les cibles d'attaque d'<em>Éprouver</em>. Un champ laissé vide devient lui-même un angle mort à challenger.</p>
+    <label class="block text-sm font-medium mb-1">Titre *</label>
+    <input name="title" required class="w-full border rounded-lg px-3 py-2 mb-4">
+    <div id="intakeFields" class="space-y-3"></div>
+    <div class="flex gap-3 mt-6">
+      <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-4 py-2 font-medium">Soumettre</button>
+      <button type="button" id="btnCancel" class="px-4 py-2 rounded-lg border">Annuler</button>
+      <span id="formErr" class="text-sm text-red-600 self-center"></span>
+    </div>
+  </form>
+</div>
+
+<!-- ====== Panneau latéral : détail d'une idée ====== -->
+<div id="drawer" class="hidden fixed inset-0 z-30">
+  <div class="absolute inset-0 bg-black/30" data-close></div>
+  <aside class="absolute right-0 top-0 h-full w-full max-w-lg bg-white shadow-2xl p-6 overflow-y-auto">
+    <div id="drawerBody"></div>
+  </aside>
+</div>
+
+<script>
+// ============ Etat ============
+// Le jeton reste EN MEMOIRE (pas de localStorage) : un XSS ne peut pas le voler
+// dans un stockage persistant. Contrepartie assumee : rechargement = reconnexion.
+const S = { token: null, user: null, api: null, ideas: [], filters: { q: '', status: '' } };
+
+const STAGES = [
+  { id: 'recueillir',    label: '00 · Recueillir' },
+  { id: 'ecouter',       label: '01 · Écouter' },
+  { id: 'cartographier', label: '02 · Cartographier' },
+  { id: 'construire',    label: '03 · Construire' },
+  { id: 'eprouver',      label: '04 · Éprouver' },
+  { id: 'arbitrer',      label: '05 · Arbitrer' },
+  { id: 'projeter',      label: '06 · Projeter' },
+];
+const STATUSES = ['nouveau','en_revue','discussion','en_developpement','termine','non_poursuivi','consideration_future','en_pause'];
+const STATUS_STYLE = {
+  nouveau: 'bg-slate-100 text-slate-700', en_revue: 'bg-amber-100 text-amber-800',
+  discussion: 'bg-sky-100 text-sky-800', en_developpement: 'bg-indigo-100 text-indigo-800',
+  termine: 'bg-emerald-100 text-emerald-800', non_poursuivi: 'bg-rose-100 text-rose-800',
+  consideration_future: 'bg-violet-100 text-violet-800', en_pause: 'bg-stone-200 text-stone-700',
+};
+const INTAKE = [
+  ['valeur', 'Quelle est la proposition de valeur ?', true],
+  ['probleme', 'Quel problème résolvez-vous ?', true],
+  ['ressources', 'Quelles ressources clés sont nécessaires ?', false],
+  ['partiesPrenantes', 'Qui sont les parties prenantes clés ?', false],
+  ['risques', "Quels sont les risques clés d'exécution ?", false],
+  ['equipe', "Expérience de l'équipe", false],
+];
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+// ============ API ============
+async function api(path, { method = 'GET', body } = {}) {
+  const res = await fetch(`${S.api}${path}`, {
+    method,
+    headers: { 'Content-Type': 'application/json', ...(S.token ? { Authorization: `Bearer ${S.token}` } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+
+// ============ Connexion ============
+$('#apiBase').value = window.KAYROS_API_BASE || 'https://api.kayroslab.com/v1';
+STATUSES.forEach((s) => $('#fStatus').insertAdjacentHTML('beforeend', `<option value="${s}">${s.replace(/_/g,' ')}</option>`));
+INTAKE.forEach(([id, label, req]) => $('#intakeFields').insertAdjacentHTML('beforeend',
+  `<div><label class="block text-sm font-medium mb-1">${label}${req ? ' *' : ''}</label>
+   <textarea name="${id}" rows="2" ${req ? 'required' : ''} class="w-full border rounded-lg px-3 py-2 text-sm"></textarea></div>`));
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  S.api = $('#apiBase').value.replace(/\/$/, '');
+  try {
+    const r = await api('/auth/login', { method: 'POST', body: { email: $('#email').value, password: $('#password').value } });
+    S.token = r.token; S.user = r.user;
+    $('#password').value = '';                       // ne pas laisser le clair dans le DOM
+    $('#authView').classList.add('hidden');
+    $('#appView').classList.remove('hidden');
+    $('#who').textContent = `${r.user.email} · ${r.user.role}`;
+    await refresh();
+  } catch (err) {
+    $('#authErr').textContent = err.message;
+    $('#authErr').classList.remove('hidden');
+  }
+});
+
+$('#btnLogout').addEventListener('click', async () => {
+  try { await api('/auth/logout', { method: 'POST' }); } catch {}
+  S.token = null; S.user = null; S.ideas = [];
+  $('#appView').classList.add('hidden');
+  $('#authView').classList.remove('hidden');
+});
+
+// ============ Chargement & rendu ============
+async function refresh() {
+  const { ideas } = await api('/ideas');
+  S.ideas = ideas || [];
+  render();
+}
+
+function visibles() {
+  const q = S.filters.q.toLowerCase();
+  return S.ideas.filter((i) =>
+    (!S.filters.status || i.status === S.filters.status) &&
+    (!q || `${i.title} ${JSON.stringify(i.intake ?? '')}`.toLowerCase().includes(q)));
+}
+
+function render() {
+  const items = visibles();
+
+  // Bandeau : WIP + repartition par statut (les DEUX axes, cote a cote)
+  const byStatus = {};
+  items.forEach((i) => { byStatus[i.status] = (byStatus[i.status] ?? 0) + 1; });
+  $('#stats').innerHTML =
+    `<span><strong>${items.length}</strong> idée(s)</span>` +
+    Object.entries(byStatus).map(([s, n]) =>
+      `<span class="px-2 py-0.5 rounded ${STATUS_STYLE[s] ?? 'bg-slate-100'}">${s.replace(/_/g,' ')} · ${n}</span>`).join('');
+
+  // Colonnes = etapes (axe EXECUTION) ; badge de chaque carte = statut (axe DECISION)
+  $('#board').innerHTML = STAGES.map((st) => {
+    const col = items.filter((i) => i.stage === st.id);
+    return `<section class="col bg-slate-50 rounded-xl border flex-1" data-stage="${st.id}">
+      <div class="px-3 py-2 border-b flex items-center justify-between sticky top-0 bg-slate-50 rounded-t-xl">
+        <span class="text-sm font-semibold">${st.label}</span>
+        <span class="text-xs bg-white border rounded-full px-2 py-0.5">${col.length}</span>
+      </div>
+      <div class="p-2 space-y-2 min-h-[80px]">${col.map(card).join('') || '<p class="text-xs text-slate-400 px-1 py-3">—</p>'}</div>
+    </section>`;
+  }).join('');
+
+  bindBoard();
+}
+
+function card(i) {
+  const votes = i.votes ?? [];
+  const moy = votes.length ? Math.round(votes.reduce((a, v) => a + v.score, 0) / votes.length) : null;
+  return `<article draggable="true" data-id="${i.id}"
+      class="card bg-white rounded-lg border p-3 cursor-pointer">
+    <h3 class="text-sm font-medium leading-snug mb-2">${esc(i.title)}</h3>
+    <div class="flex items-center gap-2 flex-wrap text-[11px]">
+      <span class="px-1.5 py-0.5 rounded ${STATUS_STYLE[i.status] ?? 'bg-slate-100'}">${i.status.replace(/_/g,' ')}</span>
+      ${moy !== null ? `<span class="text-slate-500">★ ${moy}/100 (${votes.length})</span>` : ''}
+    </div>
+    <p class="text-[11px] text-slate-400 mt-2">${esc(i.author ?? '')}</p>
+  </article>`;
+}
+
+// ============ Interactions du board ============
+function bindBoard() {
+  document.querySelectorAll('[data-id]').forEach((el) => {
+    el.addEventListener('click', () => openDrawer(el.dataset.id));
+    el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', el.dataset.id));
+  });
+  document.querySelectorAll('[data-stage]').forEach((col) => {
+    col.addEventListener('dragover', (e) => { e.preventDefault(); col.classList.add('drag-over'); });
+    col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    col.addEventListener('drop', async (e) => {
+      e.preventDefault(); col.classList.remove('drag-over');
+      const id = e.dataTransfer.getData('text/plain');
+      const idea = S.ideas.find((x) => x.id === id);
+      if (!idea || idea.stage === col.dataset.stage) return;
+      try {
+        const { idea: maj } = await api(`/ideas/${id}`, { method: 'PATCH', body: { stage: col.dataset.stage, motif: 'déplacement portefeuille' } });
+        Object.assign(idea, maj); render();
+      } catch (err) { alert(err.message); }
+    });
+  });
+}
+
+// ============ Detail ============
+function openDrawer(id) {
+  const i = S.ideas.find((x) => x.id === id); if (!i) return;
+  const votes = i.votes ?? [];
+  const intake = i.intake ?? {};
+  $('#drawerBody').innerHTML = `
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <h2 class="text-xl font-bold">${esc(i.title)}</h2>
+      <button data-close class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="flex gap-2 mb-5">
+      <select id="dStage" class="border rounded-lg px-2 py-1 text-sm">
+        ${STAGES.map((s) => `<option value="${s.id}" ${s.id === i.stage ? 'selected' : ''}>${s.label}</option>`).join('')}
+      </select>
+      <select id="dStatus" class="border rounded-lg px-2 py-1 text-sm">
+        ${STATUSES.map((s) => `<option value="${s}" ${s === i.status ? 'selected' : ''}>${s.replace(/_/g,' ')}</option>`).join('')}
+      </select>
+    </div>
+    <h3 class="font-semibold text-sm mb-2">Canevas</h3>
+    <dl class="text-sm space-y-2 mb-6">
+      ${INTAKE.map(([k, label]) => `<div><dt class="text-slate-500 text-xs">${label}</dt>
+        <dd class="${intake[k] ? '' : 'text-rose-500 italic'}">${intake[k] ? esc(intake[k]) : 'non renseigné — angle mort'}</dd></div>`).join('')}
+    </dl>
+    <h3 class="font-semibold text-sm mb-2">Évaluation collaborative</h3>
+    <div class="flex items-center gap-2 mb-2">
+      <input id="dVote" type="number" min="0" max="100" placeholder="0–100" class="border rounded-lg px-2 py-1 text-sm w-28">
+      <button id="dVoteBtn" class="bg-slate-800 text-white text-sm rounded-lg px-3 py-1">Voter</button>
+      <span id="dAgg" class="text-xs text-slate-500"></span>
+    </div>
+    <ul class="text-xs text-slate-600 space-y-1 mb-6">
+      ${votes.map((v) => `<li>${esc(v.by)} <span class="text-slate-400">(${v.role})</span> — <strong>${v.score}</strong></li>`).join('') || '<li class="text-slate-400">Aucun vote</li>'}
+    </ul>
+    <h3 class="font-semibold text-sm mb-2">Historique</h3>
+    <ol class="text-xs text-slate-500 space-y-1">
+      ${(i.history ?? []).slice().reverse().map((h) => `<li>${h.ts?.slice(0,16).replace('T',' ')} — ${h.type}${h.from ? ` : ${h.from} → ${h.to}` : ''}</li>`).join('')}
+    </ol>`;
+  $('#drawer').classList.remove('hidden');
+  bindDrawer(i);
+}
+
+function bindDrawer(i) {
+  document.querySelectorAll('#drawer [data-close]').forEach((el) =>
+    el.addEventListener('click', () => $('#drawer').classList.add('hidden')));
+
+  // Les deux axes se modifient INDEPENDAMMENT.
+  const patch = async (body) => {
+    try {
+      const { idea: maj } = await api(`/ideas/${i.id}`, { method: 'PATCH', body });
+      Object.assign(i, maj); render();
+    } catch (e) { alert(e.message); }
+  };
+  $('#dStage').addEventListener('change', (e) => patch({ stage: e.target.value }));
+  $('#dStatus').addEventListener('change', (e) => patch({ status: e.target.value }));
+
+  $('#dVoteBtn').addEventListener('click', async () => {
+    const score = Number($('#dVote').value);
+    if (!Number.isFinite(score)) return;
+    try {
+      const { agregat } = await api(`/ideas/${i.id}/votes`, { method: 'POST', body: { score } });
+      $('#dAgg').textContent = `pondéré ${agregat.moyennePonderee}/100 · ${agregat.recommandation}` +
+        (agregat.consensus ? ' · consensus' : ' · dispersé');
+      await refresh(); openDrawer(i.id);
+    } catch (e) { alert(e.message); }
+  });
+}
+
+// ============ Creation ============
+$('#btnNew').addEventListener('click', () => { $('#formErr').textContent = ''; $('#modal').classList.remove('hidden'); });
+$('#btnCancel').addEventListener('click', () => $('#modal').classList.add('hidden'));
+
+$('#ideaForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const intake = {};
+  INTAKE.forEach(([k]) => { const v = (fd.get(k) || '').trim(); if (v) intake[k] = v; });
+  try {
+    const { derive } = await api('/ideas', { method: 'POST', body: { title: fd.get('title'), intake } });
+    e.target.reset(); $('#modal').classList.add('hidden');
+    await refresh();
+    if (derive) {
+      const h = derive.hypotheses.length, c = derive.cibles.length;
+      alert(`Idée créée.\n\n${h} hypothèse(s) dérivée(s) pour Construire.\n${c} cible(s) d'attaque pour Éprouver.`);
+    }
+  } catch (err) { $('#formErr').textContent = err.message; }
+});
+
+// ============ Filtres ============
+$('#search').addEventListener('input', (e) => { S.filters.q = e.target.value; render(); });
+$('#fStatus').addEventListener('change', (e) => { S.filters.status = e.target.value; render(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { $('#modal').classList.add('hidden'); $('#drawer').classList.add('hidden'); }
+});
+</script>
+</body>
+</html>
