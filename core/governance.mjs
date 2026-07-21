@@ -25,7 +25,18 @@ const uuid = () => (globalThis.crypto?.randomUUID?.() ?? `gate_${Date.now()}_${M
 
 /** Service de gouvernance en mémoire : file d'attente de gates + résolution promise-based. */
 export class GovernanceService {
-  constructor() { this._pending = new Map(); this._resolvers = new Map(); }
+  /**
+   * @param {{notifier?:(evt:object)=>any, evaluation?:object}} [opts]
+   * `notifier` est appele a l'ouverture d'un gate : sans lui, un censeur ne sait pas
+   * qu'on l'attend et la gouvernance reste theorique (blocage en production).
+   */
+  constructor({ notifier = null } = {}) {
+    this._pending = new Map(); this._resolvers = new Map(); this._notifier = notifier;
+    this._notifications = [];
+  }
+
+  /** Journal des notifications emises (utile en test et pour l'audit). */
+  notifications() { return [...this._notifications]; }
 
   /** Ouvre un gate. @returns {{gateId:string, promise:Promise<object>}} */
   open(req) {
@@ -33,6 +44,14 @@ export class GovernanceService {
     const record = { gateId, createdAt: new Date().toISOString(), ...req };
     const promise = new Promise((resolve) => this._resolvers.set(gateId, resolve));
     this._pending.set(gateId, record);
+    // EF : notifier l'ouverture (le censeur doit savoir qu'on l'attend).
+    const evt = {
+      type: 'gate_opened', gateId, gateType: record.type, ideaId: record.ideaId ?? null,
+      requiredRole: record.requiredRole ?? null, evaluation: record.evaluation ?? null,
+      createdAt: record.createdAt,
+    };
+    this._notifications.push(evt);
+    try { this._notifier?.(evt); } catch { /* une notif qui echoue ne bloque pas le gate */ }
     return { gateId, promise };
   }
 

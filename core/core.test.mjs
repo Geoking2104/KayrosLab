@@ -518,3 +518,120 @@ test('Orchestrator.monitorProjection : aucun seuil franchi -> pas de re-arbitrag
   assert.equal(out.alerts.length, 0);
   assert.equal(out.reArbitrage, null);
 });
+
+// ---------- P0 : modele, portefeuille, intake, scorecards, vote, impact, notif ----------
+test('model : statut orthogonal a etape + historique', async () => {
+  const { createIdea, setStage, setStatus, applyDecision } = await import('./model.mjs');
+  let idea = createIdea({ id: 'i1', title: 'Offre B2B' });
+  assert.equal(idea.stage, 'recueillir');
+  assert.equal(idea.status, 'nouveau');
+  idea = setStage(idea, 'construire');
+  idea = setStatus(idea, 'en_revue');
+  assert.equal(idea.stage, 'construire');   // les deux axes evoluent independamment
+  assert.equal(idea.status, 'en_revue');
+  assert.equal(idea.history.length, 3);
+  const go = applyDecision(idea, { status: 'Go' }, { by: 'geoff' });
+  assert.equal(go.status, 'en_developpement');
+  assert.equal(go.stage, 'projeter');
+  assert.throws(() => setStage(idea, 'inconnu'));
+});
+
+test('model : reactivation d une idee dormante', async () => {
+  const { createIdea, setStatus, reactivate } = await import('./model.mjs');
+  const dormante = setStatus(createIdea({ id: 'i2', title: 'X' }), 'non_poursuivi');
+  const reprise = reactivate(dormante, { by: 'geoff', stage: 'eprouver' });
+  assert.equal(reprise.status, 'en_revue');
+  assert.equal(reprise.stage, 'eprouver');
+  assert.throws(() => reactivate(reprise));   // plus dormante
+});
+
+test('repository + portefeuille : filtres et WIP', async () => {
+  const { createIdea, setStage } = await import('./model.mjs');
+  const { InMemoryIdeaRepository, counts, portfolio } = await import('./repository.mjs');
+  const repo = new InMemoryIdeaRepository();
+  await repo.save(createIdea({ id: 'a', title: 'Alpha' }));
+  await repo.save(setStage(createIdea({ id: 'b', title: 'Beta' }), 'eprouver'));
+  await repo.save(setStage(createIdea({ id: 'c', title: 'Gamma' }), 'eprouver'));
+  const c = await counts(repo);
+  assert.equal(c.total, 3);
+  assert.equal(c.byStage.eprouver, 2);
+  assert.equal(c.byStage.recueillir, 1);
+  const board = await portfolio(repo);
+  assert.equal(board.columns.find((x) => x.stage === 'eprouver').wip, 2);
+  const found = await repo.list({ q: 'alph' });
+  assert.equal(found.length, 1);
+});
+
+test('intake : validation + derivation hypotheses/cibles', async () => {
+  const { processIntake } = await import('./intake.mjs');
+  const r = processIntake({ valeur: 'réduire le coût de 30%', probleme: 'process manuel', risques: 'concurrent installé' });
+  assert.equal(r.validation.ok, true);
+  assert.ok(r.hypotheses.some((h) => h.source === 'valeur' && h.critique));
+  assert.ok(r.cibles.some((t) => t.origine === 'declare'));
+  // champ equipe absent -> angle mort detecte automatiquement
+  assert.ok(r.cibles.some((t) => t.id === 't-equipe-absent'));
+  const ko = processIntake({ valeur: 'x' });
+  assert.equal(ko.validation.ok, false);
+  assert.deepEqual(ko.validation.missing, ['probleme']);
+  assert.ok(ko.cibles.some((t) => t.origine === 'angle_mort')); // risques non declares
+});
+
+test('scorecard : parametrable, multi-grilles par etape', async () => {
+  const { Scorecard, defaultScorecards } = await import('./scorecard.mjs');
+  const sc = new Scorecard({ id: 't', stage: 'ecouter', scale: 10, criteria: [{ id: 'a', weight: 3 }, { id: 'b', weight: 1 }] });
+  const r = sc.score({ a: 10, b: 2 });
+  assert.equal(r.total, 8);            // (10*3 + 2*1) / 4
+  assert.equal(r.normalise, 80);       // sur 100
+  assert.equal(r.couverture, 1);
+  const reg = defaultScorecards();
+  assert.equal(reg.forStage('ecouter')[0].scale, 10);    // screening leger
+  assert.equal(reg.forStage('arbitrer')[0].scale, 100);  // evaluation approfondie
+  const partiel = reg.forStage('arbitrer')[0].score({ fit: 80 });
+  assert.ok(partiel.couverture < 1 && partiel.evalue);
+});
+
+test('evaluation : agregation ponderee par role + recommandation', async () => {
+  const { aggregateVotes } = await import('./evaluation.mjs');
+  const r = aggregateVotes([
+    { by: 'a', role: 'comex', score: 80 },
+    { by: 'b', role: 'contributeur', score: 40 },
+  ]);
+  assert.equal(r.count, 2);
+  assert.equal(r.moyenne, 60);
+  assert.equal(r.moyennePonderee, 70);   // (80*3 + 40*1)/4
+  assert.equal(r.recommandation, 'Go');
+  assert.equal(r.parRole.comex.moyenne, 80);
+  assert.equal(aggregateVotes([]).recommandation, 'insuffisant');
+});
+
+test('impact : totaux + ecart realise vs projete', async () => {
+  const { emptyImpact, recordInvestment, recordBenefit, computeVariance, totals } = await import('./impact.mjs');
+  let imp = emptyImpact();
+  imp = recordInvestment(imp, { montant: 1000 });
+  imp = recordBenefit(imp, { montant: 1500 });
+  const t = totals(imp);
+  assert.equal(t.net, 500);
+  assert.equal(t.roiReel, 0.5);
+  const v = computeVariance({ valeurAttendue: 400, p10: 100, p90: 900 }, imp);
+  assert.equal(v.realise, 500);
+  assert.equal(v.ecart, 100);            // 500 realise - 400 projete
+  assert.equal(v.dansIntervalle, true);
+  assert.equal(v.position, 'conforme');
+  const sous = computeVariance({ valeurAttendue: 400, p10: 600, p90: 900 }, imp);
+  assert.equal(sous.position, 'sous_performance');
+});
+
+test('gouvernance : notification a l ouverture d un gate', async () => {
+  const { GovernanceService } = await import('./governance.mjs');
+  const recus = [];
+  const gov = new GovernanceService({ notifier: (e) => recus.push(e) });
+  const { gateId } = gov.open({ ideaId: 'i9', type: 'validation', requiredRole: 'comex', payload: 'x' });
+  assert.equal(recus.length, 1);
+  assert.equal(recus[0].type, 'gate_opened');
+  assert.equal(recus[0].gateId, gateId);
+  assert.equal(recus[0].requiredRole, 'comex');
+  assert.equal(gov.notifications().length, 1);
+  // un notifier defaillant ne doit pas casser l'ouverture du gate
+  const gov2 = new GovernanceService({ notifier: () => { throw new Error('smtp down'); } });
+  assert.ok(gov2.open({ ideaId: 'i', type: 'validation', requiredRole: 'comex' }).gateId);
+});
