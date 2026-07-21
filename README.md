@@ -65,7 +65,7 @@ Le vote agrégé **instruit** la décision, il ne la remplace pas : le veto rest
 
 ## 🧠 Le cœur `core/`
 
-Moteur **zéro dépendance** (ESM, Node 20+), **75 tests**, réutilisé par l'application navigateur et le backend. Voir **[core/README.md](core/README.md)**.
+Moteur **zéro dépendance** (ESM, Node 20+), **81 tests**, réutilisé par l'application navigateur et le backend. Voir **[core/README.md](core/README.md)**.
 
 | Module | Rôle |
 |---|---|
@@ -78,13 +78,15 @@ Moteur **zéro dépendance** (ESM, Node 20+), **75 tests**, réutilisé par l'ap
 | `intake.mjs` | Canevas Recueillir → **hypothèses** (Construire) + **cibles d'attaque** (Éprouver) |
 | `scorecard.mjs` | Grilles paramétrables, une par étape, couverture partielle explicite |
 | `evaluation.mjs` | Vote pondéré par rôle, dispersion, consensus, recommandation |
+| `campaign.mjs` | Campagnes (fenêtre de soumission) + **modération** : rejet motivé, exclusion du portefeuille |
+| `comments.mjs` | Fil de discussion à deux niveaux, édition datée, **suppression douce** (audit préservé) |
 | `projection.mjs` | **Monte-Carlo seedé** (P10/P50/P90), estimation ETP/budget/TCO/ROI |
 | `impact.mjs` | Investissements, bénéfices, **écart réalisé vs projeté** |
 | `execution.mjs` | Étape Réaliser : phases, jalons suivis, retards, bilan |
-| `reporting.mjs` | Dashboard, **entonnoir**, temps par étape, ROI agrégé, export CSV |
+| `reporting.mjs` | Dashboard, **entonnoir**, temps par étape, ROI agrégé, comparaison inter-idées, export CSV |
 | `loop.mjs` | Boucle Projeter → Écouter (KPIs, seuils, re-arbitrage) |
 | `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité, **persistance + audit** |
-| `notify.mjs` | Canaux réels : webhook, email, composite tolérant aux pannes |
+| `notify.mjs` | Canaux réels (webhook, email, composite tolérant aux pannes), **activité** et **digest** |
 | `memory.mjs` · `embeddings.mjs` | Shared + Vector Memory (InMemory / Qdrant), recall sémantique |
 | `resilience.mjs` · `ki.mjs` · `tool-registry.mjs` | Retry + Circuit Breaker · Kayroslab Index · outils déclaratifs |
 
@@ -100,10 +102,13 @@ Moteur **zéro dépendance** (ESM, Node 20+), **75 tests**, réutilisé par l'ap
 | Authentification | `POST /v1/auth/register\|login\|logout` · `GET /v1/auth/me` |
 | Portefeuille | `GET\|POST /v1/ideas` · `GET\|PATCH /v1/ideas/:id` · `GET /v1/portfolio` |
 | Évaluation | `POST /v1/ideas/:id/votes` · `POST /v1/ideas/:id/score` · `GET /v1/scorecards` |
+| Collecte | `GET\|POST /v1/campaigns` · `GET /v1/moderation` · `POST /v1/ideas/:id/moderate` |
+| Discussion | `GET\|POST /v1/ideas/:id/comments` · `DELETE /v1/ideas/:id/comments/:commentId` |
+| Activité | `GET /v1/activity` · `GET /v1/digest` |
 | Gouvernance | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
 | Projeter & impact | `POST /v1/ideas/:id/projection` · `GET\|POST /v1/ideas/:id/impact` · `POST /v1/projeter/monitor` |
 | Réaliser | `POST\|PATCH /v1/ideas/:id/execution` |
-| Reporting | `GET /v1/reporting/dashboard` · `GET /v1/reporting/export` |
+| Reporting | `GET /v1/reporting/dashboard` · `POST /v1/reporting/compare` · `GET /v1/reporting/export` |
 
 **Sécurité par défaut sûre.** Sans `KAYROS_AUTH_SECRET`, les routes protégées répondent `503` — jamais ouvertes. Le `tenantId` provient du jeton, jamais du client. Les clés LLM restent côté serveur.
 
@@ -112,7 +117,7 @@ Moteur **zéro dépendance** (ESM, Node 20+), **75 tests**, réutilisé par l'ap
 ## 🛠️ Développement
 
 ```bash
-cd core && node --test      # 75 tests, zéro dépendance
+cd core && node --test      # 81 tests, zéro dépendance
 ```
 
 **Persistance** (fichiers JSON, écriture atomique) : `KAYROS_USERS_FILE` (0600), `KAYROS_IDEAS_FILE`, `KAYROS_GATES_FILE`.
@@ -142,9 +147,9 @@ cd core && node --test      # 75 tests, zéro dépendance
 | Périmètre | Exigences | État |
 |---|---|---|
 | Processus d'idéation | EF-01 → EF-45 | ✅ implémenté |
-| Plateforme & collaboration | EF-46 → EF-87 | 32 réalisées · 3 partielles · 7 à construire |
+| Plateforme & collaboration | EF-46 → EF-87 | **39 réalisées · 3 partielles · 0 à construire** |
 
-Restent à construire : vues alternatives et comparaison inter-idées, campagnes et modération, fil de commentaires, notifications d'activité et digest.
+Les 3 partielles sont assumées : persistance en fichiers plutôt qu'en base partagée multi-instance (EF-46), réactivation d'idée dormante sans action dédiée dans l'interface (EF-58), facettes de filtrage incomplètes (EF-55).
 
 > ⚠️ **Réserve.** Les statuts « réalisé » attestent d'un code **testé unitairement**, pas d'une recette fonctionnelle : le parcours HTTP complet n'a pas encore été exécuté contre un serveur en fonctionnement (déploiement P2 en attente).
 
@@ -159,7 +164,8 @@ Restent à construire : vues alternatives et comparaison inter-idées, campagnes
 | v6 | Étape Projeter + boucle cyclique + prospective probabiliste | ✅ |
 | v7 | Backends, authentification, portefeuille multi-utilisateur | ✅ |
 | v8 | Cycle aval (Réaliser) + reporting portefeuille | ✅ |
-| v9 | Recette en conditions réelles, base partagée multi-instance | 🔵 |
+| v9 | Collaboration : campagnes, modération, commentaires, activité & digest | ✅ |
+| v10 | Recette en conditions réelles, base partagée multi-instance | 🔵 |
 
 ---
 
