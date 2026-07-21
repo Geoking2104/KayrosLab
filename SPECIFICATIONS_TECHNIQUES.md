@@ -640,6 +640,28 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 | EF-31/32 | §13 Observabilité |
 | EF-33/34/35/36/37/38 | §10 API gouvernée |
 | EF-39/40/41/42/43/44/45 | §4.1 Étape Projeter (outils `simulate_trajectory`, `estimate_resources`, boucle planifiée) |
+| EF-46/47/48/49/50 | `core/auth.mjs` (scrypt, jetons HMAC, `SessionStore`, `LoginThrottle`, `FileUserStore`), `core/repository.mjs` |
+| EF-51/52/53/54/55 | `core/repository.mjs` (`portfolio`, `counts`, `list`), `kayroslab-portfolio.html` |
+| EF-56/57/58 | `core/model.mjs` (`setStage`/`setStatus`, `DORMANT_STATUSES`, `reactivate`, `applyDecision`) |
+| EF-59/60/61/62 | `core/intake.mjs` (`validateIntake`, `intakeToHypotheses`, `intakeToAttackTargets`) |
+| EF-63/64/65/66/67 | `core/evaluation.mjs` (`aggregateVotes`, `ROLE_WEIGHTS`), `POST /v1/ideas/:id/votes` |
+| EF-68/69/70/71 | `core/scorecard.mjs` (`Scorecard`, `ScorecardRegistry`), `POST /v1/ideas/:id/score` |
+| EF-72/73/74/75 | `core/notify.mjs` (`WebhookNotifier`, `EmailNotifier`, `CompositeNotifier`, `gateNotifier`), hook `GovernanceService` |
+| EF-76/77/78/79 | `core/impact.mjs` (`recordInvestment`, `recordBenefit`, `computeVariance`, `impactReport`) |
+| EF-80/81/82/83 | *Non implémenté — suppose une extension du modèle de processus (à arbitrer).* |
+| EF-84/85/86/87 | *Non implémenté — reporting portefeuille.* |
+
+### 19.1 Persistance des données (EF-46, EF-49)
+
+Trois dépôts fichiers à écriture **atomique** (temporaire + `rename`), configurés par variables d'environnement :
+
+| Donnée | Variable | Module | Remarque |
+|---|---|---|---|
+| Comptes | `KAYROS_USERS_FILE` | `FileUserStore` | permissions `0600` (contient des empreintes) |
+| Idées | `KAYROS_IDEAS_FILE` | `FileIdeaRepository` | |
+| Gates + audit | `KAYROS_GATES_FILE` | `FileGateStore` | file restaurée via `governance.restore()` |
+
+**Limite connue.** Les promesses de gate ne sont pas persistables : après redémarrage, un gate restauré n'a plus de résolveur en mémoire. Il reste résolvable et la décision est tracée, mais l'appelant qui attendait a disparu avec le process. La **denylist de jetons révoqués** reste en mémoire (dernière donnée volatile).
 
 ---
 

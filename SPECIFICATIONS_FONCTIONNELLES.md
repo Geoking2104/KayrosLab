@@ -575,6 +575,120 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 
 ---
 
+## 13. Plateforme & collaboration (EF-46 → EF-87)
+
+> **Origine.** Ces exigences sont issues de l'analyse d'écarts vs Brightidea (cf. `ANALYSE-ECARTS-BRIGHTIDEA.md`).
+> Elles couvrent la **couche plateforme** — persistance, portefeuille, collaboration, reporting — par opposition
+> aux EF-01→45 qui couvrent le **processus d'idéation** lui-même.
+> **Statuts au 2026-07-21** : 🟢 réalisé · 🟡 partiel · 🔴 à construire.
+
+### 13.1 Persistance & comptes (EF-46 → EF-50)
+
+- **EF-46 (🟡)** Les données (idées, comptes, gates) sont persistées côté serveur et survivent à un redémarrage.
+  *Réalisé en fichiers JSON à écriture atomique (mono-serveur). Une base partagée reste nécessaire pour le multi-instance.*
+- **EF-47 (🟢)** Un utilisateur dispose d'un compte : mot de passe haché (scrypt + sel), jeton de session signé, aucune donnée secrète stockée en clair.
+- **EF-48 (🟢)** Les données sont **isolées par tenant** ; le tenant provient du jeton et jamais de la requête cliente.
+- **EF-49 (🟢)** Chaque transition (étape, statut) et chaque résolution de gate est **horodatée, attribuée et persistée** (audit).
+- **EF-50 (🟢)** Une session peut être révoquée (déconnexion, compromission) et les tentatives de connexion sont limitées.
+
+> **US-07.** En tant qu'**administrateur**, je veux que **comptes, idées et arbitrages survivent à un redémarrage** afin de **ne pas perdre le travail en cours**.
+> **Critères.** *Étant donné* un serveur redémarré, *quand* un utilisateur se reconnecte, *alors* il retrouve son portefeuille et les gates en attente.
+
+### 13.2 Portefeuille (EF-51 → EF-55)
+
+- **EF-51 (🟢)** Vue portefeuille en colonnes par étape (kanban) avec déplacement d'une idée d'une étape à l'autre.
+- **EF-52 (🟢)** Chaque colonne affiche son **compteur de charge (WIP)**.
+- **EF-53 (🔴)** Vues alternatives : liste triable et tableau de bord.
+- **EF-54 (🔴)** Comparaison de plusieurs idées côte à côte (KI, votes, impact).
+- **EF-55 (🟡)** Filtres combinables (statut, étape, catégorie) et recherche plein texte. *Statut et texte disponibles ; facettes incomplètes.*
+
+### 13.3 Statut × Étape (EF-56 → EF-58)
+
+- **EF-56 (🟢)** Le **statut décisionnel** est indépendant de l'**étape d'exécution** ; les deux évoluent séparément.
+- **EF-57 (🟢)** Des états dormants existent (`consideration_future`, `en_pause`, `non_poursuivi`) sans suppression de l'idée.
+- **EF-58 (🟡)** Une idée dormante peut être **réactivée** et repositionnée à une étape. *Disponible dans le cœur ; pas d'action dédiée dans l'interface.*
+
+> **US-08.** En tant que **facilitateur**, je veux **geler une idée validée sans la supprimer** afin de **pouvoir la réactiver quand le budget existera**.
+> **Critères.** *Étant donné* une idée en `en_pause`, *quand* je la réactive, *alors* son statut repasse en revue et l'historique conserve les deux transitions.
+
+### 13.4 Collecte (EF-59 → EF-62)
+
+- **EF-59 (🟢)** Formulaire de soumission structuré (valeur, problème, ressources, parties prenantes, risques, équipe) rendant les idées comparables dès l'entrée.
+- **EF-60 (🟢)** Les champs du canevas **alimentent automatiquement** les hypothèses de *Construire* et les cibles d'attaque d'*Éprouver* ; un champ non renseigné devient lui-même un **angle mort** assigné à un agent.
+- **EF-61 (🔴)** Campagnes / défis thématiques multiples.
+- **EF-62 (🔴)** File de modération des soumissions entrantes.
+
+### 13.5 Évaluation collaborative (EF-63 → EF-67)
+
+- **EF-63 (🟢)** Plusieurs évaluateurs notent une idée (0–100) ; un évaluateur ne compte qu'une fois.
+- **EF-64 (🟢)** L'agrégation est **pondérée par rôle** (COMEX ×3, expert/Red Team ×2, contributeur ×1).
+- **EF-65 (🟢)** L'agrégat expose la **dispersion** et un indicateur de **consensus**.
+- **EF-66 (🟢)** L'agrégat est **transmis au gate** et présenté au censeur : il **instruit** la décision sans la remplacer ; le veto reste entier.
+- **EF-67 (🔴)** Fil de commentaires par idée.
+
+### 13.6 Scorecards (EF-68 → EF-71)
+
+- **EF-68 (🟢)** Les grilles d'évaluation sont **paramétrables** : critères, poids, échelle.
+- **EF-69 (🟢)** Une grille **par étape** (screening léger échelle 10, évaluation approfondie échelle 100).
+- **EF-70 (🟢)** Une idée peut être notée ; une évaluation **partielle** est signalée comme telle (taux de couverture), jamais présentée comme complète.
+- **EF-71 (🟢)** Chaque notation est **historisée** (pas d'écrasement), permettant de suivre l'évolution du score.
+
+### 13.7 Notifications (EF-72 → EF-75)
+
+- **EF-72 (🟢)** L'ouverture d'un gate **notifie les censeurs habilités** du tenant concerné. *Sans cette exigence, la gouvernance reste théorique : le processus se fige.*
+- **EF-73 (🟢)** Les notifications partent sur des **canaux externes réels** (webhook, email) ; une panne de canal n'empêche ni les autres ni l'arbitrage.
+- **EF-74 (🔴)** Notifications d'activité (nouveau vote, changement d'étape, commentaire).
+- **EF-75 (🔴)** Digest périodique planifié.
+
+> **US-09.** En tant que **censeur COMEX**, je veux **être prévenu hors de l'application qu'un arbitrage m'attend** afin de **ne pas bloquer le processus sans le savoir**.
+> **Critères.** *Étant donné* un gate ouvert, *quand* un canal est configuré, *alors* les porteurs du rôle requis reçoivent un message contenant l'idée et l'agrégat de vote.
+
+### 13.8 Impact réel (EF-76 → EF-79)
+
+- **EF-76 (🟢)** Les **investissements** constatés sont enregistrés par idée.
+- **EF-77 (🟢)** Les **bénéfices** constatés sont enregistrés par idée ; le ROI réel est calculé.
+- **EF-78 (🟢)** Le **réalisé est confronté au projeté** : écart absolu et relatif, position vis-à-vis de l'intervalle P10–P90. En l'absence de projection, l'écart est déclaré non calculable plutôt qu'affiché à zéro.
+- **EF-79 (🔴)** ROI agrégé au niveau du portefeuille.
+
+> **US-10.** En tant qu'**arbitre COMEX**, je veux **comparer ce qui a été réalisé à ce qui avait été projeté** afin de **calibrer la fiabilité de nos projections**.
+> **Critères.** *Étant donné* une idée disposant d'une projection, *quand* des bénéfices sont saisis, *alors* l'écart et la position vs P10–P90 sont restitués.
+
+### 13.9 Cycle aval (EF-80 → EF-83)
+
+- **EF-80 (🔴)** Étape **Pilote** (expérimentation à échelle réduite).
+- **EF-81 (🔴)** Étape **Déploiement** (généralisation).
+- **EF-82 (🔴)** Suivi d'exécution des jalons de la roadmap produite en *Projeter*.
+- **EF-83 (🔴)** **Bilan de clôture** consignant les enseignements.
+
+> **Note d'arbitrage.** Ce bloc suppose d'étendre le modèle au-delà des 6 étapes actuelles (étape 7 « Réaliser », ou extension de *Projeter*). **À trancher avant spécification détaillée.**
+
+### 13.10 Reporting (EF-84 → EF-87)
+
+- **EF-84 (🔴)** Tableau de bord portefeuille (volumes, KI moyen, charge par étape).
+- **EF-85 (🔴)** **Entonnoir de conversion** par étape (taux de passage, taux d'abandon).
+- **EF-86 (🔴)** Temps moyen passé par étape (détection des goulots).
+- **EF-87 (🔴)** Export du portefeuille (PDF / tableur).
+
+### 13.11 Synthèse d'avancement
+
+| Bloc | EF | Réalisé | Partiel | À construire |
+|---|---|---|---|---|
+| Persistance & comptes | 46–50 | 4 | 1 | 0 |
+| Portefeuille | 51–55 | 2 | 1 | 2 |
+| Statut × Étape | 56–58 | 2 | 1 | 0 |
+| Collecte | 59–62 | 2 | 0 | 2 |
+| Évaluation collaborative | 63–67 | 4 | 0 | 1 |
+| Scorecards | 68–71 | 4 | 0 | 0 |
+| Notifications | 72–75 | 2 | 0 | 2 |
+| Impact réel | 76–79 | 3 | 0 | 1 |
+| Cycle aval | 80–83 | 0 | 0 | 4 |
+| Reporting | 84–87 | 0 | 0 | 4 |
+| **Total** | **42** | **23** | **3** | **16** |
+
+**Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
+
+---
+
 ## Annexe A — Matrice complète Existant → Cible (par exigence)
 
 | EF | Fonction | Existant | Cible |
