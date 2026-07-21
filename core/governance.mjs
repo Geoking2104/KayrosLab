@@ -30,13 +30,34 @@ export class GovernanceService {
    * `notifier` est appele a l'ouverture d'un gate : sans lui, un censeur ne sait pas
    * qu'on l'attend et la gouvernance reste theorique (blocage en production).
    */
-  constructor({ notifier = null } = {}) {
+  constructor({ notifier = null, store = null } = {}) {
     this._pending = new Map(); this._resolvers = new Map(); this._notifier = notifier;
-    this._notifications = [];
+    this._notifications = []; this._store = store;
   }
 
   /** Journal des notifications emises (utile en test et pour l'audit). */
   notifications() { return [...this._notifications]; }
+
+  /** Ecriture best-effort : la persistance ne doit jamais bloquer l'arbitrage. */
+  _persist(fn) {
+    if (!this._store) return;
+    try { Promise.resolve(fn(this._store)).catch(() => {}); } catch { /* non bloquant */ }
+  }
+
+  /**
+   * Restaure la file d'attente depuis le magasin (au demarrage).
+   * Les gates restaures n'ont plus de promesse associee : l'appelant qui attendait
+   * a disparu avec le process. Ils restent resolvables, et la decision est tracee.
+   */
+  async restore() {
+    if (!this._store) return this;
+    await this._store.load();
+    for (const rec of await this._store.allPending()) this._pending.set(rec.gateId, rec);
+    return this;
+  }
+
+  /** Historique persistant des resolutions (audit). */
+  async history() { return this._store ? this._store.allHistory() : []; }
 
   /** Ouvre un gate. @returns {{gateId:string, promise:Promise<object>}} */
   open(req) {
@@ -44,6 +65,7 @@ export class GovernanceService {
     const record = { gateId, createdAt: new Date().toISOString(), ...req };
     const promise = new Promise((resolve) => this._resolvers.set(gateId, resolve));
     this._pending.set(gateId, record);
+    this._persist((s) => s.putPending(record));   // la file survit au redemarrage
     // EF : notifier l'ouverture (le censeur doit savoir qu'on l'attend).
     const evt = {
       type: 'gate_opened', gateId, gateType: record.type, ideaId: record.ideaId ?? null,
@@ -65,10 +87,13 @@ export class GovernanceService {
     if (!req) throw new Error(`Gate inconnu: ${gateId}`);
     if (!canResolve(role, req.type)) throw new Error(`Rôle "${role}" non habilité pour ${req.type}`);
     if ((decision === 'reject' || decision === 'revise') && !reason) throw new Error('Motif obligatoire pour reject/revise (EF-20)');
-    const resolution = { gateId, decision, by, role, reason, resolvedAt: new Date().toISOString() };
+    const resolution = { gateId, decision, by, role, reason, resolvedAt: new Date().toISOString(), ideaId: req.ideaId ?? null, type: req.type };
+    // `?.` : un gate RESTAURE apres redemarrage n'a plus de resolveur — c'est normal,
+    // la decision est tout de meme enregistree et tracee.
     this._resolvers.get(gateId)?.(resolution);
     this._pending.delete(gateId);
     this._resolvers.delete(gateId);
+    this._persist(async (s) => { await s.removePending(gateId); await s.appendHistory(resolution); });
     return resolution;
   }
 }
@@ -105,4 +130,48 @@ export function policyFor(output, level = 'supervise') {
   if (level === 'auto') return null;
   if (level === 'strict') return GateType.OUTPUT_CENSOR;
   return output?.sensitive ? GateType.OUTPUT_CENSOR : null; // supervise
+}
+
+/**
+ * Magasin de gates. Les PROMESSES ne sont pas persistables : on conserve donc les
+ * ENREGISTREMENTS (file d'attente + historique des resolutions). Apres redemarrage,
+ * la file du censeur est restauree ; seul l'appelant qui attendait la promesse a disparu.
+ */
+export class InMemoryGateStore {
+  constructor() { this.pending = new Map(); this.history = []; }
+  async load() { return this; }
+  async putPending(rec) { this.pending.set(rec.gateId, rec); }
+  async removePending(gateId) { this.pending.delete(gateId); }
+  async appendHistory(res) { this.history.push(res); }
+  async allPending() { return [...this.pending.values()]; }
+  async allHistory() { return [...this.history]; }
+}
+
+/** Magasin fichier (JSON) : ecriture atomique, comme les autres depots. */
+export class FileGateStore extends InMemoryGateStore {
+  constructor({ path, fs } = {}) {
+    super();
+    if (!path) throw new Error('FileGateStore: path requis');
+    this.path = path; this._fs = fs;
+  }
+  async _mod() { return this._fs ?? (await import('node:fs/promises')); }
+  async load() {
+    const fs = await this._mod();
+    try {
+      const d = JSON.parse(await fs.readFile(this.path, 'utf8'));
+      this.pending = new Map((d.pending ?? []).map((r) => [r.gateId, r]));
+      this.history = d.history ?? [];
+    } catch { /* fichier absent = file vide */ }
+    return this;
+  }
+  async flush() {
+    const fs = await this._mod();
+    const tmp = `${this.path}.tmp`;
+    await fs.writeFile(tmp, JSON.stringify({ pending: [...this.pending.values()], history: this.history }, null, 2), 'utf8');
+    await fs.rename(tmp, this.path);
+    return true;
+  }
+  async putPending(rec) { await super.putPending(rec); await this.flush(); }
+  async removePending(id) { await super.removePending(id); await this.flush(); }
+  async appendHistory(res) { await super.appendHistory(res); await this.flush(); }
 }

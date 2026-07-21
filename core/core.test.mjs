@@ -856,3 +856,70 @@ test('notify : EmailNotifier sans destinataire n envoie pas', async () => {
   assert.equal(r.ok, false);
   assert.equal(appels, 0);
 });
+
+// ---------- Persistance des gates ----------
+function fauxDisque() {
+  const d = new Map();
+  return { d, fs: {
+    async readFile(p) { if (!d.has(p)) { const e = new Error('ENOENT'); e.code = 'ENOENT'; throw e; } return d.get(p); },
+    async writeFile(p, data) { d.set(p, data); },
+    async rename(a, b) { d.set(b, d.get(a)); d.delete(a); },
+  } };
+}
+
+test('gates : la file survit au redemarrage', async () => {
+  const { GovernanceService, FileGateStore, GateType } = await import('./governance.mjs');
+  const { d, fs } = fauxDisque(); const path = '/var/kayros/gates.json';
+
+  const gov1 = new GovernanceService({ store: new FileGateStore({ path, fs }) });
+  gov1.open({ ideaId: 'i1', type: GateType.COMEX_ARBITRAGE, requiredRole: 'comex', payload: 'Offre B2B', evaluation: { count: 2, moyennePonderee: 70, recommandation: 'Go' } });
+  await new Promise((r) => setImmediate(r));      // laisse l'ecriture best-effort se terminer
+  assert.ok(d.has(path));
+
+  // "redemarrage" : nouveau service, meme fichier
+  const gov2 = new GovernanceService({ store: new FileGateStore({ path, fs }) });
+  await gov2.restore();
+  const file = gov2.list();
+  assert.equal(file.length, 1);
+  assert.equal(file[0].ideaId, 'i1');
+  assert.equal(file[0].evaluation.moyennePonderee, 70);   // l'agregat qui instruit est conserve
+});
+
+test('gates : un gate restaure reste resolvable et la resolution est tracee', async () => {
+  const { GovernanceService, FileGateStore, GateType } = await import('./governance.mjs');
+  const { fs } = fauxDisque(); const path = '/var/kayros/g2.json';
+
+  const gov1 = new GovernanceService({ store: new FileGateStore({ path, fs }) });
+  gov1.open({ ideaId: 'i9', type: GateType.COMEX_ARBITRAGE, requiredRole: 'comex' });
+  await new Promise((r) => setImmediate(r));
+
+  const gov2 = new GovernanceService({ store: new FileGateStore({ path, fs }) });
+  await gov2.restore();
+  const g = gov2.list()[0];
+
+  // Plus aucun resolveur en memoire (le process qui attendait a disparu) : ne doit PAS lever.
+  const res = gov2.resolve(g.gateId, { decision: 'approve', by: 'geoff', role: 'comex' });
+  assert.equal(res.decision, 'approve');
+  assert.equal(res.ideaId, 'i9');
+  await new Promise((r) => setImmediate(r));
+  assert.equal(gov2.list().length, 0);                    // retire de la file
+  const hist = await gov2.history();
+  assert.equal(hist.length, 1);
+  assert.equal(hist[0].by, 'geoff');                      // audit persistant
+});
+
+test('gates : la persistance n empeche jamais l arbitrage (magasin defaillant)', async () => {
+  const { GovernanceService, GateType } = await import('./governance.mjs');
+  const storeKo = {
+    async load() {}, async allPending() { return []; }, async allHistory() { return []; },
+    async putPending() { throw new Error('disque plein'); },
+    async removePending() { throw new Error('disque plein'); },
+    async appendHistory() { throw new Error('disque plein'); },
+  };
+  const gov = new GovernanceService({ store: storeKo });
+  const { gateId } = gov.open({ ideaId: 'i', type: GateType.COMEX_ARBITRAGE, requiredRole: 'comex' });
+  assert.ok(gateId);                                       // ouverture non bloquee
+  const res = gov.resolve(gateId, { decision: 'approve', by: 'g', role: 'comex' });
+  assert.equal(res.decision, 'approve');                   // resolution non bloquee
+  await new Promise((r) => setImmediate(r));               // aucun unhandledRejection
+});

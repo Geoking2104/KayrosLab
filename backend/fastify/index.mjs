@@ -12,6 +12,7 @@ import {
   emptyImpact, recordInvestment, recordBenefit, recordActual, impactReport,
   simulateTrajectory, estimateResources,
   ConsoleNotifier, WebhookNotifier, EmailNotifier, CompositeNotifier, gateNotifier,
+  InMemoryGateStore, FileGateStore,
 } from '../../core/index.mjs';
 
 const {
@@ -75,8 +76,9 @@ if (IDEAS_FILE) await ideas.load();
 const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
 const scorecards = defaultScorecards();
 
-// Metadonnees des gates (l'idee concernee, l'agregat de vote qui instruit la decision).
-const gateMeta = new Map();
+// Pas de cache de metadonnees : tout (idee, agregat, titre) est porte par
+// l'enregistrement du gate persiste ou relu depuis l'idee. Un cache memoire
+// aurait ete perdu au redemarrage, contredisant la persistance des gates.
 
 // --- Canaux de notification reels ---
 // Webhook (Slack/Teams/n8n) si configure ; SMTP via nodemailer si configure ET installe.
@@ -102,7 +104,11 @@ if (canaux.length === 1) {
 
 // Gouvernance PARTAGEE : un gate ouvert doit rester visible par le censeur
 // entre deux requetes HTTP (sinon la file d'attente n'existe pas).
+const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
+const gateStore = GATES_FILE ? new FileGateStore({ path: GATES_FILE }) : new InMemoryGateStore();
+
 const governance = new GovernanceService({
+  store: gateStore,
   notifier: gateNotifier({
     canal: new CompositeNotifier(canaux),
     // Destinataires = les porteurs du role requis, DANS le tenant de l'idee.
@@ -116,6 +122,18 @@ const governance = new GovernanceService({
     resolveTitre: async (evt) => (evt.ideaId ? (await ideas.get(evt.ideaId))?.title ?? null : null),
   }),
 });
+
+// Restaure la file d'arbitrage : sans cela, un redemarrage effacait les gates en cours
+// alors que comptes et idees survivaient.
+await governance.restore();
+if (!GATES_FILE) {
+  console.warn('[kayroslab] KAYROS_GATES_FILE non defini : les gates en cours seront perdus au redemarrage.');
+} else {
+  const enCours = governance.list().length;
+  if (enCours) console.warn(`[kayroslab] ${enCours} gate(s) en attente restaure(s).`);
+}
+
+// Les metadonnees des gates restaures sont reconstruites depuis les idees (voir /v1/gates).
 
 if (AUTH_SECRET && !USERS_FILE) {
   console.warn('[kayroslab] KAYROS_USERS_FILE non defini : les comptes seront perdus au redemarrage.');
@@ -323,21 +341,27 @@ app.post('/v1/ideas/:id/gates', async (req, reply) => {
   const { type = 'validation', requiredRole = 'comex' } = req.body || {};
   const agregat = aggregateVotes(idea.votes ?? []);
   const { gateId } = governance.open({ ideaId: idea.id, type, requiredRole, payload: idea.title, evaluation: agregat });
-  gateMeta.set(gateId, { ideaId: idea.id, tenantId: idea.tenantId ?? 'default', titre: idea.title, agregat, ouvertPar: me.email });
   return reply.code(201).send({ gateId, agregat });
 });
 
 // File d'attente du censeur : ce qu'IL doit arbitrer, dans SON tenant.
 app.get('/v1/gates', async (req, reply) => {
   const me = await requireAuth(req, reply); if (!me) return;
-  const tous = governance.list().map((g) => ({ ...g, ...(gateMeta.get(g.gateId) ?? {}) }));
-  const miens = tous.filter((g) => (g.tenantId ?? 'default') === me.tenantId);
-  return {
-    gates: miens.map((g) => ({
-      gateId: g.gateId, type: g.type, requiredRole: g.requiredRole, ideaId: g.ideaId,
-      titre: g.titre ?? g.payload, agregat: g.agregat ?? null, createdAt: g.createdAt,
+  // Enrichissement depuis l'IDEE (et non depuis un cache memoire) : les gates
+  // restaures apres redemarrage restent complets.
+  const enrichis = await Promise.all(governance.list().map(async (g) => {
+    const idea = g.ideaId ? await ideas.get(g.ideaId) : null;
+    return {
+      gateId: g.gateId, type: g.type, requiredRole: g.requiredRole, ideaId: g.ideaId ?? null,
+      titre: idea?.title ?? g.payload ?? g.ideaId,
+      agregat: g.evaluation ?? null,               // l'agregat est persiste avec le gate
+      createdAt: g.createdAt,
+      tenantId: idea?.tenantId ?? 'default',
       pourMoi: g.requiredRole === me.role,          // l'UI met en avant ce qui m'incombe
-    })),
+    };
+  }));
+  return {
+    gates: enrichis.filter((g) => g.tenantId === me.tenantId).map(({ tenantId, ...g }) => g),
     monRole: me.role,
   };
 });
@@ -345,14 +369,17 @@ app.get('/v1/gates', async (req, reply) => {
 // Resolution : le service verifie l'habilitation du role ET impose un motif si refus/revision.
 app.post('/v1/gates/:gateId/resolve', async (req, reply) => {
   const me = await requireAuth(req, reply); if (!me) return;
-  const meta = gateMeta.get(req.params.gateId);
-  if (meta && meta.tenantId !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  // On lit l'enregistrement AVANT resolution (resolve() le retire de la file).
+  const rec = governance.list().find((g) => g.gateId === req.params.gateId);
+  if (!rec) return reply.code(404).send({ error: 'gate introuvable' });
+  const cible = rec.ideaId ? await ideas.get(rec.ideaId) : null;
+  if (cible && (cible.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
   const { decision, reason = '' } = req.body || {};
   try {
     const resolution = governance.resolve(req.params.gateId, { decision, by: me.email, role: me.role, reason });
     // Repercussion sur l'idee : la decision touche les DEUX axes.
-    if (meta) {
-      const idea = await ideas.get(meta.ideaId);
+    {
+      const idea = cible;
       if (idea) {
         const map = { approve: 'en_developpement', reject: 'non_poursuivi', revise: 'en_revue' };
         let out = setStatus(idea, map[decision] ?? idea.status, { by: me.email, motif: reason || decision });
@@ -360,7 +387,6 @@ app.post('/v1/gates/:gateId/resolve', async (req, reply) => {
         if (decision === 'revise') out = setStage(out, 'eprouver', { by: me.email, motif: 'revision demandee' });
         await ideas.save(out);
       }
-      gateMeta.delete(req.params.gateId);
     }
     return { resolution };
   } catch (e) { return reply.code(403).send({ error: e.message }); }
