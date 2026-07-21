@@ -1,0 +1,62 @@
+name: Setup SSL (Let's Encrypt) - api.kayroslab.com
+
+# A lancer UNE FOIS, apres que le DNS api.kayroslab.com pointe vers 51.210.9.71.
+# Calque sur setup-ssl-vps.yml d'openDPE. certbot est deja installe sur ce VPS,
+# mais les commandes restent idempotentes.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-ssl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure HTTPS for api.kayroslab.com
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 5m
+          script: |
+            set -e
+
+            apt-get update -qq
+            apt-get install -y -qq certbot python3-certbot-nginx
+
+            # Config HTTP : indispensable pour le challenge ACME.
+            mkdir -p /var/www/html
+            cat > /etc/nginx/sites-available/api.kayroslab.com << 'NGINX_EOF'
+            server {
+                listen 80;
+                server_name api.kayroslab.com;
+
+                location /.well-known/acme-challenge/ {
+                    root /var/www/html;
+                }
+
+                location / {
+                    proxy_pass http://127.0.0.1:8787;
+                    proxy_http_version 1.1;
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto $scheme;
+                }
+            }
+            NGINX_EOF
+            ln -sf /etc/nginx/sites-available/api.kayroslab.com /etc/nginx/sites-enabled/api.kayroslab.com
+            nginx -t && systemctl reload nginx
+
+            # Certificat (non interactif). --redirect force HTTP -> HTTPS.
+            certbot --nginx \
+              -d api.kayroslab.com \
+              --non-interactive \
+              --agree-tos \
+              --email contact@kayroslab.com \
+              --redirect
+
+            nginx -t && systemctl reload nginx
+            certbot certificates
+            systemctl enable --now certbot.timer || true
+            echo "SSL configure pour api.kayroslab.com"

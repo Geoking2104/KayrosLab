@@ -1,0 +1,9 @@
+# Le depot est edite sous Windows mais execute sous Linux.
+# Forcer LF sur tout ce qui est interprete par bash ou par le serveur :
+# un "\r" invisible fait echouer un script shell avec un message incomprehensible.
+*.sh    text eol=lf
+*.mjs   text eol=lf
+*.cjs   text eol=lf
+*.conf  text eol=lf
+*.yml   text eol=lf
+*.json  text eol=lf
