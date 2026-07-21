@@ -14,8 +14,10 @@ export class InMemoryIdeaRepository {
   async size() { return this._m.size; }
 
   /** Filtrage combinable (facettes) + recherche plein texte simple. */
-  async list({ stage, status, category, author, q, sort = 'updatedAt', order = 'desc' } = {}) {
+  async list({ tenantId, stage, status, category, author, q, sort = 'updatedAt', order = 'desc' } = {}) {
     let out = [...this._m.values()];
+    // Isolation multi-tenant : filtre applique EN PREMIER.
+    if (tenantId) out = out.filter((i) => (i.tenantId ?? 'default') === tenantId);
     if (stage) out = out.filter((i) => i.stage === stage);
     if (status) out = out.filter((i) => i.status === status);
     if (category) out = out.filter((i) => i.category === category);

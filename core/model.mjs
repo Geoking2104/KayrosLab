@@ -25,7 +25,7 @@ const nowIso = () => new Date().toISOString();
 export function createIdea({
   id, title, author = null, stage = 'recueillir', status = 'nouveau',
   intake = null, category = 'general', ki = null, scores = {}, votes = [],
-  impact = null, roadmap = null, ts = null,
+  impact = null, roadmap = null, ts = null, tenantId = 'default',
 } = {}) {
   if (!id) throw new Error('createIdea: id requis');
   if (!title) throw new Error('createIdea: title requis');
@@ -34,7 +34,7 @@ export function createIdea({
   const t = ts ?? nowIso();
   return {
     id, title, author, stage, status, intake, category, ki, scores, votes,
-    impact, roadmap, createdAt: t, updatedAt: t,
+    impact, roadmap, tenantId, createdAt: t, updatedAt: t,
     history: [{ type: 'created', stage, status, ts: t }],
   };
 }

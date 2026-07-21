@@ -635,3 +635,76 @@ test('gouvernance : notification a l ouverture d un gate', async () => {
   const gov2 = new GovernanceService({ notifier: () => { throw new Error('smtp down'); } });
   assert.ok(gov2.open({ ideaId: 'i', type: 'validation', requiredRole: 'comex' }).gateId);
 });
+
+// ---------- Authentification ----------
+test('auth : hash scrypt + verification (jamais de clair)', async () => {
+  const { hashPassword, verifyPassword } = await import('./auth.mjs');
+  const h = await hashPassword('motdepasse-solide-2026');
+  assert.ok(h.startsWith('scrypt$'));
+  assert.ok(!h.includes('motdepasse'));                 // le clair n'apparait pas
+  assert.equal(await verifyPassword('motdepasse-solide-2026', h), true);
+  assert.equal(await verifyPassword('mauvais-mot-de-passe', h), false);
+  await assert.rejects(() => hashPassword('court'));    // politique de longueur
+});
+
+test('auth : jeton signe, falsification et expiration rejetees', async () => {
+  const { issueToken, verifyToken } = await import('./auth.mjs');
+  const secret = 'secret-de-test-uniquement';
+  const token = await issueToken({ sub: 'u1', role: 'comex' }, secret, { ttlSec: 60 });
+  const ok = await verifyToken(token, secret);
+  assert.equal(ok.valid, true);
+  assert.equal(ok.payload.role, 'comex');
+
+  // signature falsifiee
+  const [data] = token.split('.');
+  assert.equal((await verifyToken(`${data}.signaturebidon`, secret)).valid, false);
+  // payload modifie (elevation de privilege) -> signature invalide
+  const forge = Buffer.from(JSON.stringify({ sub: 'u1', role: 'comex', exp: 9e9 })).toString('base64url');
+  assert.equal((await verifyToken(`${forge}.${token.split('.')[1]}`, secret)).valid, false);
+  // mauvais secret
+  assert.equal((await verifyToken(token, 'autre-secret')).valid, false);
+  // expiration
+  const expire = await verifyToken(token, secret, { now: () => Math.floor(Date.now() / 1000) + 3600 });
+  assert.equal(expire.valid, false);
+  assert.equal(expire.reason, 'expire');
+});
+
+test('auth : inscription, connexion, et non-enumeration des comptes', async () => {
+  const { AuthService } = await import('./auth.mjs');
+  const auth = new AuthService({ secret: 'secret-de-test-uniquement' });
+  const u = await auth.register({ email: 'Geoff@Example.com', password: 'motdepasse-solide-2026', role: 'comex' });
+  assert.equal(u.email, 'geoff@example.com');           // normalise
+  assert.equal(u.passwordHash, undefined);              // jamais expose
+  const { token, user } = await auth.login({ email: 'geoff@example.com', password: 'motdepasse-solide-2026' });
+  assert.equal(user.role, 'comex');
+  const payload = await auth.verify(token);
+  assert.equal(payload.sub, u.id);
+
+  // meme message d'erreur : compte inconnu vs mot de passe faux
+  const e1 = await auth.login({ email: 'inconnu@example.com', password: 'x' }).catch((e) => e.message);
+  const e2 = await auth.login({ email: 'geoff@example.com', password: 'mauvais' }).catch((e) => e.message);
+  assert.equal(e1, e2);
+  await assert.rejects(() => auth.register({ email: 'geoff@example.com', password: 'motdepasse-solide-2026' }));
+});
+
+test('auth : RBAC et isolation multi-tenant', async () => {
+  const { AuthService } = await import('./auth.mjs');
+  const { createIdea } = await import('./model.mjs');
+  const { InMemoryIdeaRepository } = await import('./repository.mjs');
+  const auth = new AuthService({ secret: 'secret-de-test-uniquement' });
+  await auth.register({ email: 'c@x.com', password: 'motdepasse-solide-2026', role: 'comex', tenantId: 'acme' });
+  const { token } = await auth.login({ email: 'c@x.com', password: 'motdepasse-solide-2026' });
+  const payload = await auth.verify(token);
+
+  assert.equal(auth.hasRole(payload, ['comex', 'expert']), true);
+  assert.equal(auth.hasRole(payload, ['contributeur']), false);
+  assert.throws(() => auth.requireRole(payload, ['contributeur']));
+
+  const repo = new InMemoryIdeaRepository();
+  await repo.save(createIdea({ id: 'a', title: 'Acme', tenantId: 'acme' }));
+  await repo.save(createIdea({ id: 'b', title: 'Autre', tenantId: 'other' }));
+  const visibles = await repo.list({ tenantId: payload.tenantId });
+  assert.equal(visibles.length, 1);
+  assert.equal(visibles[0].id, 'a');                    // pas de fuite inter-tenant
+  assert.equal(auth.sameTenant(payload, { tenantId: 'other' }), false);
+});
