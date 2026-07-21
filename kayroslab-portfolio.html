@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -6,28 +6,66 @@
 <title>KayrosLab — Portefeuille</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+  /* Charte KayrosLab — alignée sur index.html (site public). */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+
+  :root {
+    --primary: #0f172a;   /* slate-900 — fonds sombres, en-têtes */
+    --accent:  #0ea5e9;   /* sky-500  — action principale */
+    --accent-strong: #0284c7;
+    --success: #10b981;   /* emerald-500 — validation, impact positif */
+    --surface: #f8fafc;   /* slate-50 */
+    --line:    #e2e8f0;   /* slate-200 */
+  }
+
+  body { font-family: 'Inter', system-ui, sans-serif; }
+
+  /* Titres en Space Grotesk, comme les section-header du site. */
+  h1, h2, h3, .font-display {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
   .col { min-width: 260px; }
-  .card { transition: transform .12s ease, box-shadow .12s ease; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.10); }
-  .drag-over { outline: 2px dashed #6366f1; outline-offset: -6px; background: #eef2ff; }
+
+  /* Même élévation au survol que les .step-card du site. */
+  .card { transition: all .3s cubic-bezier(.4, 0, .2, 1); }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);
+  }
+
+  .drag-over { outline: 2px dashed var(--accent); outline-offset: -6px; background: #f0f9ff; }
+
+  /* Boutons d'action : sky, cohérent avec les CTA du site. */
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-dark { background: var(--primary); color: #fff; }
+  .btn-dark:hover { background: #1e293b; }
 </style>
 </head>
-<body class="bg-slate-100 text-slate-800">
+<body class="bg-slate-50 text-slate-800">
 
 <!-- ====== Connexion ====== -->
 <div id="authView" class="min-h-screen flex items-center justify-center p-6">
-  <form id="loginForm" class="bg-white rounded-xl shadow p-8 w-full max-w-sm">
-    <h1 class="text-2xl font-bold mb-1">KayrosLab</h1>
+  <form id="loginForm" class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-sm border border-slate-200">
+    <div class="flex items-center gap-x-3 mb-1">
+      <div class="w-9 h-9 rounded-2xl bg-slate-900 flex items-center justify-center">
+        <span class="text-white font-display text-lg">K</span>
+      </div>
+      <h1 class="text-2xl">KayrosLab</h1>
+    </div>
     <p class="text-sm text-slate-500 mb-6">Portefeuille d'idées gouverné</p>
     <label class="block text-sm font-medium mb-1">Email</label>
     <input id="email" type="email" autocomplete="username" required
-           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500">
     <label class="block text-sm font-medium mb-1">Mot de passe</label>
     <input id="password" type="password" autocomplete="current-password" required
-           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+           class="w-full border rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500">
     <label class="block text-sm font-medium mb-1">API</label>
     <input id="apiBase" type="text" class="w-full border rounded-lg px-3 py-2 mb-5 text-sm text-slate-600">
-    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg py-2 font-medium">Se connecter</button>
+    <button class="w-full btn-primary text-white rounded-xl py-2 font-medium">Se connecter</button>
     <p id="authErr" class="text-sm text-red-600 mt-3 hidden"></p>
   </form>
 </div>
@@ -36,19 +74,24 @@
 <div id="appView" class="hidden">
   <header class="bg-white border-b sticky top-0 z-20">
     <div class="px-6 py-3 flex items-center gap-4">
-      <h1 class="text-lg font-bold">KayrosLab <span class="text-slate-400 font-normal">Portefeuille</span></h1>
-      <input id="search" placeholder="Rechercher…" class="border rounded-lg px-3 py-1.5 text-sm w-64">
+      <a href="index.html" class="flex items-center gap-x-2.5 shrink-0" title="Retour au site">
+        <div class="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center">
+          <span class="text-white font-display text-sm">K</span>
+        </div>
+        <h1 class="text-lg">KayrosLab <span class="text-slate-400 font-normal text-sm">Portefeuille</span></h1>
+      </a>
+      <input id="search" placeholder="Rechercher…" class="border rounded-xl px-3 py-1.5 text-sm w-64">
       <select id="fStatus" class="border rounded-lg px-2 py-1.5 text-sm">
         <option value="">Tous les statuts</option>
       </select>
-      <button id="btnNew" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg px-3 py-1.5">+ Idée</button>
+      <button id="btnNew" class="btn-primary text-white text-sm rounded-xl px-3 py-1.5">+ Idée</button>
       <div class="flex rounded-lg border overflow-hidden text-sm">
-        <button data-vue="kanban" class="vue-btn px-3 py-1.5 bg-slate-800 text-white">Kanban</button>
+        <button data-vue="kanban" class="vue-btn px-3 py-1.5 btn-dark text-white">Kanban</button>
         <button data-vue="liste" class="vue-btn px-3 py-1.5 hover:bg-slate-50">Liste</button>
       </div>
-      <button id="btnCompare" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50" disabled>Comparer (0)</button>
-      <button id="btnReport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50">Reporting</button>
-      <a id="btnExport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50 cursor-pointer">Export CSV</a>
+      <button id="btnCompare" class="border text-sm rounded-xl px-3 py-1.5 hover:bg-slate-50" disabled>Comparer (0)</button>
+      <button id="btnReport" class="border text-sm rounded-xl px-3 py-1.5 hover:bg-slate-50">Reporting</button>
+      <a id="btnExport" class="border text-sm rounded-xl px-3 py-1.5 hover:bg-slate-50 cursor-pointer">Export CSV</a>
       <div class="ml-auto flex items-center gap-3 text-sm">
         <span id="who" class="text-slate-600"></span>
         <button id="btnLogout" class="text-slate-500 hover:text-slate-800">Déconnexion</button>
@@ -82,14 +125,14 @@
 
 <!-- ====== Modale : nouvelle idée (canevas Recueillir) ====== -->
 <div id="modal" class="hidden fixed inset-0 bg-black/40 z-30 flex items-start justify-center p-6 overflow-y-auto">
-  <form id="ideaForm" class="bg-white rounded-xl shadow-xl p-6 w-full max-w-2xl my-8">
+  <form id="ideaForm" class="bg-white rounded-3xl shadow-xl p-6 w-full max-w-2xl my-8">
     <h2 class="text-xl font-bold mb-1">Recueillir une idée</h2>
     <p class="text-sm text-slate-500 mb-5">Les champs renseignés alimentent les hypothèses de <em>Construire</em> et les cibles d'attaque d'<em>Éprouver</em>. Un champ laissé vide devient lui-même un angle mort à challenger.</p>
     <label class="block text-sm font-medium mb-1">Titre *</label>
     <input name="title" required class="w-full border rounded-lg px-3 py-2 mb-4">
     <div id="intakeFields" class="space-y-3"></div>
     <div class="flex gap-3 mt-6">
-      <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-4 py-2 font-medium">Soumettre</button>
+      <button class="btn-primary text-white rounded-xl px-4 py-2 font-medium">Soumettre</button>
       <button type="button" id="btnCancel" class="px-4 py-2 rounded-lg border">Annuler</button>
       <span id="formErr" class="text-sm text-red-600 self-center"></span>
     </div>
@@ -123,7 +166,7 @@ const STAGES = [
 const STATUSES = ['nouveau','en_revue','discussion','en_developpement','termine','non_poursuivi','consideration_future','en_pause'];
 const STATUS_STYLE = {
   nouveau: 'bg-slate-100 text-slate-700', en_revue: 'bg-amber-100 text-amber-800',
-  discussion: 'bg-sky-100 text-sky-800', en_developpement: 'bg-indigo-100 text-indigo-800',
+  discussion: 'bg-sky-100 text-sky-800', en_developpement: 'bg-sky-100 text-sky-800',
   termine: 'bg-emerald-100 text-emerald-800', non_poursuivi: 'bg-rose-100 text-rose-800',
   consideration_future: 'bg-violet-100 text-violet-800', en_pause: 'bg-stone-200 text-stone-700',
 };
@@ -203,7 +246,7 @@ async function refreshModeration() {
   $('#modCount').textContent = file.length;
 
   $('#modList').innerHTML = file.map((i) => `
-    <div class="bg-white border rounded-lg p-3" data-mod="${i.id}">
+    <div class="bg-white border border-slate-200 rounded-2xl p-3" data-mod="${i.id}">
       <div class="flex items-start gap-3 flex-wrap">
         <div class="flex-1 min-w-[220px]">
           <p class="text-sm font-medium">${esc(i.title)}</p>
@@ -212,8 +255,8 @@ async function refreshModeration() {
         ${peutModerer ? `
         <div class="flex items-center gap-2">
           <input data-motif class="border rounded-lg px-2 py-1 text-xs w-52" placeholder="Motif (obligatoire si rejet)">
-          <button data-act="approuve" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-lg px-3 py-1.5">Approuver</button>
-          <button data-act="rejete" class="bg-rose-600 hover:bg-rose-700 text-white text-xs rounded-lg px-3 py-1.5">Rejeter</button>
+          <button data-act="approuve" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-xl px-3 py-1.5">Approuver</button>
+          <button data-act="rejete" class="bg-rose-600 hover:bg-rose-700 text-white text-xs rounded-xl px-3 py-1.5">Rejeter</button>
         </div>` : '<span class="text-xs text-slate-400 self-center">réservé aux modérateurs</span>'}
       </div>
       <p data-err class="text-xs text-rose-600 mt-2 hidden"></p>
@@ -253,7 +296,7 @@ async function refreshGates() {
     const instruction = a && a.count
       ? `<span class="text-xs text-slate-600">vote pondéré <strong>${a.moyennePonderee}</strong>/100 · ${a.count} évaluateur(s) · suggère <strong>${a.recommandation}</strong>${a.consensus ? '' : ' <em>(dispersé)</em>'}</span>`
       : '<span class="text-xs text-slate-400">aucun vote — décision non instruite</span>';
-    return `<div class="bg-white border rounded-lg p-3" data-gate="${g.gateId}">
+    return `<div class="bg-white border border-slate-200 rounded-2xl p-3" data-gate="${g.gateId}">
       <div class="flex items-start gap-3 flex-wrap">
         <div class="flex-1 min-w-[220px]">
           <p class="text-sm font-medium">${esc(g.titre ?? g.ideaId)}</p>
@@ -263,9 +306,9 @@ async function refreshGates() {
         ${g.pourMoi ? `
         <div class="flex items-center gap-2">
           <input data-reason class="border rounded-lg px-2 py-1 text-xs w-52" placeholder="Motif (obligatoire si refus/révision)">
-          <button data-act="approve" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-lg px-3 py-1.5">Approuver</button>
-          <button data-act="revise"  class="bg-amber-500 hover:bg-amber-600 text-white text-xs rounded-lg px-3 py-1.5">Réviser</button>
-          <button data-act="reject"  class="bg-rose-600 hover:bg-rose-700 text-white text-xs rounded-lg px-3 py-1.5">Refuser (veto)</button>
+          <button data-act="approve" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs rounded-xl px-3 py-1.5">Approuver</button>
+          <button data-act="revise"  class="bg-amber-500 hover:bg-amber-600 text-white text-xs rounded-xl px-3 py-1.5">Réviser</button>
+          <button data-act="reject"  class="bg-rose-600 hover:bg-rose-700 text-white text-xs rounded-xl px-3 py-1.5">Refuser (veto)</button>
         </div>` : `<span class="text-xs text-slate-400 self-center">réservé au rôle ${g.requiredRole}</span>`}
       </div>
       <p data-err class="text-xs text-rose-600 mt-2 hidden"></p>
@@ -315,8 +358,8 @@ function render() {
   // Colonnes = etapes (axe EXECUTION) ; badge de chaque carte = statut (axe DECISION)
   $('#board').innerHTML = STAGES.map((st) => {
     const col = items.filter((i) => i.stage === st.id);
-    return `<section class="col bg-slate-50 rounded-xl border flex-1" data-stage="${st.id}">
-      <div class="px-3 py-2 border-b flex items-center justify-between sticky top-0 bg-slate-50 rounded-t-xl">
+    return `<section class="col bg-white rounded-3xl border border-slate-200 flex-1" data-stage="${st.id}">
+      <div class="px-3 py-2 border-b flex items-center justify-between sticky top-0 bg-white rounded-t-3xl">
         <span class="text-sm font-semibold">${st.label}</span>
         <span class="text-xs bg-white border rounded-full px-2 py-0.5">${col.length}</span>
       </div>
@@ -337,7 +380,7 @@ function renderListe(items) {
     const r = x > y ? 1 : x < y ? -1 : 0;
     return tri.dir === 'desc' ? -r : r;
   });
-  $('#board').innerHTML = `<div class="bg-white border rounded-xl w-full overflow-hidden">
+  $('#board').innerHTML = `<div class="bg-white border border-slate-200 rounded-3xl w-full overflow-hidden">
     <table class="w-full text-sm">
       <thead class="bg-slate-50 text-slate-600 text-xs">
         <tr><th class="w-8"></th>${cols.map(([c, l]) =>
@@ -366,7 +409,7 @@ function card(i) {
   const votes = i.votes ?? [];
   const moy = votes.length ? Math.round(votes.reduce((a, v) => a + v.score, 0) / votes.length) : null;
   return `<article draggable="true" data-id="${i.id}"
-      class="card bg-white rounded-lg border p-3 cursor-pointer">
+      class="card bg-white rounded-2xl border border-slate-200 p-3 cursor-pointer">
     <h3 class="text-sm font-medium leading-snug mb-2">${esc(i.title)}</h3>
     <div class="flex items-center gap-2 flex-wrap text-[11px]">
       <span class="px-1.5 py-0.5 rounded ${STATUS_STYLE[i.status] ?? 'bg-slate-100'}">${i.status.replace(/_/g,' ')}</span>
@@ -431,7 +474,7 @@ function openDrawer(id) {
     <h3 class="font-semibold text-sm mb-2">Évaluation collaborative</h3>
     <div class="flex items-center gap-2 mb-2">
       <input id="dVote" type="number" min="0" max="100" placeholder="0–100" class="border rounded-lg px-2 py-1 text-sm w-28">
-      <button id="dVoteBtn" class="bg-slate-800 text-white text-sm rounded-lg px-3 py-1">Voter</button>
+      <button id="dVoteBtn" class="btn-dark text-white text-sm rounded-lg px-3 py-1">Voter</button>
       <span id="dAgg" class="text-xs text-slate-500"></span>
     </div>
     <ul class="text-xs text-slate-600 space-y-1 mb-6">
@@ -447,7 +490,7 @@ function openDrawer(id) {
     <div id="dImpact" class="mb-6 text-sm text-slate-400">chargement…</div>
 
     <h3 class="font-semibold text-sm mb-2">Arbitrage</h3>
-    <button id="dGate" class="mb-6 bg-slate-800 hover:bg-slate-900 text-white text-sm rounded-lg px-3 py-1.5">Ouvrir un gate COMEX</button>
+    <button id="dGate" class="mb-6 btn-dark text-white text-sm rounded-xl px-3 py-1.5">Ouvrir un gate COMEX</button>
 
     <h3 class="font-semibold text-sm mb-2">Historique</h3>
     <ol class="text-xs text-slate-500 space-y-1">
@@ -483,7 +526,7 @@ async function loadScorecard(idea) {
         </div>`).join('')}
     </div>
     <div class="flex items-center gap-3">
-      <button id="scoreBtn" class="bg-slate-800 hover:bg-slate-900 text-white text-sm rounded-lg px-3 py-1.5">Enregistrer la note</button>
+      <button id="scoreBtn" class="btn-dark text-white text-sm rounded-xl px-3 py-1.5">Enregistrer la note</button>
       <span id="scoreOut" class="text-sm">${dernier ? renduScore(dernier.resultat) : '<span class="text-slate-400">non évaluée</span>'}</span>
     </div>
     ${hist.length > 1 ? `<p class="text-xs text-slate-400 mt-2">${hist.length} notations enregistrées (historisées)</p>` : ''}`;
@@ -544,7 +587,7 @@ async function loadImpact(id) {
       </select>
       <input id="iMontant" type="number" step="any" placeholder="Montant €" class="border rounded-lg px-2 py-1 text-xs w-28">
       <input id="iLibelle" placeholder="Libellé" class="border rounded-lg px-2 py-1 text-xs w-32">
-      <button id="iAdd" class="bg-slate-800 text-white text-xs rounded-lg px-3 py-1">Ajouter</button>
+      <button id="iAdd" class="btn-dark text-white text-xs rounded-lg px-3 py-1">Ajouter</button>
     </div>`;
 
   $('#iAdd').addEventListener('click', async () => {
@@ -568,8 +611,8 @@ function jauge(p, e) {
     <div class="mb-2">
       <div class="relative h-8">
         <div class="absolute inset-x-0 top-3 h-2 bg-slate-200 rounded"></div>
-        <div class="absolute top-3 h-2 bg-indigo-200 rounded" style="left:${g10}%;width:${Math.max(1, g90 - g10)}%"></div>
-        <div class="absolute top-2 w-0.5 h-4 bg-indigo-600" style="left:${gAtt}%" title="valeur attendue"></div>
+        <div class="absolute top-3 h-2 bg-sky-200 rounded" style="left:${g10}%;width:${Math.max(1, g90 - g10)}%"></div>
+        <div class="absolute top-2 w-0.5 h-4 bg-sky-600" style="left:${gAtt}%" title="valeur attendue"></div>
         <div class="absolute top-0 w-1 h-8 ${dedans ? 'bg-emerald-600' : 'bg-rose-600'} rounded" style="left:${gReel}%" title="réalisé"></div>
       </div>
       <div class="flex justify-between text-[11px] text-slate-500">
@@ -643,7 +686,7 @@ document.querySelectorAll('.vue-btn').forEach((b) => b.addEventListener('click',
   S.vue = b.dataset.vue;
   document.querySelectorAll('.vue-btn').forEach((x) => {
     const actif = x.dataset.vue === S.vue;
-    x.classList.toggle('bg-slate-800', actif); x.classList.toggle('text-white', actif);
+    x.classList.toggle('btn-dark', actif); x.classList.toggle('text-white', actif);
   });
   render();
 }));
@@ -702,7 +745,7 @@ async function loadComments(id) {
       <textarea id="cTexte" rows="2" class="w-full border rounded-lg px-3 py-2 text-sm" placeholder="Ajouter un commentaire…"></textarea>
       <input type="hidden" id="cParent" value="">
       <div class="flex items-center gap-2 mt-1">
-        <button id="cSend" class="bg-slate-800 text-white text-sm rounded-lg px-3 py-1">Publier</button>
+        <button id="cSend" class="btn-dark text-white text-sm rounded-lg px-3 py-1">Publier</button>
         <span id="cRep" class="text-xs text-slate-500"></span>
       </div>
     </div>`;
@@ -754,7 +797,7 @@ $('#btnReport').addEventListener('click', async () => {
             <span>${nom(e.stage)}</span>
             <span class="text-slate-500">${e.atteintes} atteinte(s) · ${e.presentes} présente(s)${e.conversion !== null ? ` · conv. ${(e.conversion * 100).toFixed(0)} %` : ''}</span>
           </div>
-          <div class="h-2 bg-slate-100 rounded"><div class="h-2 bg-indigo-500 rounded" style="width:${largeur}%"></div></div>
+          <div class="h-2 bg-slate-100 rounded"><div class="h-2 bg-sky-500 rounded" style="width:${largeur}%"></div></div>
         </div>`;
       }).join('')}
     </div>
