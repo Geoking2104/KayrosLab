@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KayrosLab • Offre Commerciale Entreprises | Atelier d'Idéation Agentique Hybride</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #0f172a;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-active {
+            color: #0ea5e9;
+            font-weight: 600;
+        }
+
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .comparison-table th {
+            background-color: #0f172a;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            transition: background-color 0.2s ease;
+        }
+        
+        .comparison-table tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .pricing-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pricing-card.popular {
+            border-color: #0ea5e9;
+            box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25);
+            transform: scale(1.02);
+        }
+
+        .metric {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .agent-badge {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c8 100%);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .glass {
+            background: rgba(255,255,255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .nav-scrolled {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+
+        .value-prop {
+            background: linear-gradient(to right, #f8fafc, #ffffff);
+        }
+
+        .modern-table {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 10px -3px rgb(0 0 0 / 0.05);
+        }
+        
+        .feature-check {
+            color: #10b981;
+        }
+
+        .kayros-gradient {
+            background: linear-gradient(90deg, #0ea5e9, #0284c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ===== FLUID ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Initial state for scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+        .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+        .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+        .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+        .stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+        .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+        .stagger-children.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card hover enhancements */
+        .step-card,
+        .pricing-card,
+        .project-card,
+        .bc-card {
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .step-card:hover,
+        .project-card:hover,
+        .bc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.12);
+        }
+
+        /* Smooth button transitions */
+        button, a[class*="rounded"] {
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Modal animation */
+        .modal-backdrop {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-backdrop.flex {
+            opacity: 1;
+        }
+        .modal-content {
+            opacity: 0;
+            transform: scale(0.96) translateY(12px);
+            transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .modal-backdrop.flex .modal-content {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Burger icon smooth transition */
+        #burger-icon {
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Mobile menu slide */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.3s ease;
+            opacity: 0;
+        }
+        #mobile-menu:not(.hidden) {
+            max-height: 480px;
+            opacity: 1;
+        }
+
+        /* Subtle pulse for live indicators */
+        @keyframes softPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.55; }
+        }
+        .soft-pulse {
+            animation: softPulse 2.4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- NAV -->
+    <nav id="nav" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-5 md:px-8 py-4 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-2.5">
+                        <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-brain text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl font-semibold tracking-tighter">KayrosLab</span>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block px-2.5 py-1 bg-emerald-100 text-emerald-700 text-[11px] font-semibold rounded-full tracking-wider">PROTOTYPE v5</div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-x-7 text-sm font-medium">
+                    <a href="#modele" class="hover:text-sky-600 transition-colors">Le Modèle</a>
+                    <a href="#differenciation" class="hover:text-sky-600 transition-colors">Différenciation</a>
+                    <a href="#dashboard" class="hover:text-sky-600 transition-colors">Pilotage</a>
+                    <a href="#offre" class="hover:text-sky-600 transition-colors">Offre</a>
+                    <a href="#business-cases" class="hover:text-sky-600 transition-colors">Business Cases</a>
+                    <a href="#projets" class="hover:text-sky-600 transition-colors">Projets</a>
+                    <a href="#contact" class="hover:text-sky-600 transition-colors">Contact</a>
+                </div>
+
+                <!-- Right side: Demo + Burger -->
+                <div class="flex items-center gap-x-3">
+                    <a href="https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html" 
+                       target="_blank" rel="noopener noreferrer"
+                       class="hidden sm:inline-flex items-center gap-x-2 px-4 py-2 text-sm font-semibold rounded-xl border border-slate-300 hover:bg-slate-50 transition-all">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        <span>Démo</span>
+                    </a>
+
+                    <!-- Burger Button -->
+                    <button id="burger-btn" 
+                            class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 transition-colors"
+                            aria-label="Ouvrir le menu">
+                        <i id="burger-icon" class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
+            <div class="px-5 py-4 space-y-1">
+                <a href="#modele" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Le Modèle</a>
+                <a href="#differenciation" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Différenciation</a>
+                <a href="#dashboard" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Tableau de bord</a>
+                <a href="#offre" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Offre Commerciale</a>
+                <a href="#business-cases" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Business Cases</a>
+                <a href="#projets" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Projets en cours</a>
+                <a href="#contact" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Contact</a>
+                
+                <div class="pt-3 mt-2 border-t border-slate-100">
+                    <a href="https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html" 
+                       target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        Lancer la démo standalone
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg text-white">
+        <div class="max-w-screen-2xl mx-auto px-8 pt-16 pb-20">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-3xl mb-6 text-sm">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="font-medium">Atelier d'idéation stratégique agentique hybride</span>
+                    </div>
+                    
+                    <h1 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-6">
+                        Du signal faible<br>à la <span class="kayros-gradient">décision stratégique</span><br>gouvernée.
+                    </h1>
+                    
+                    <p class="max-w-lg text-xl text-slate-300 mb-8">
+                        KayrosLab est un système d'IA agentique structuré qui transforme l'idéation en un processus rigoureux, traçable et résilient — comparable à un <strong>CODIR augmenté par des agents IA</strong>.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#offre" 
+                           class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
+                            Découvrir l'offre entreprise
+                        </a>
+                        <a href="https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
+                            <i class="fa-solid fa-play mr-2"></i>
+                            <span>Lancer la démo standalone</span>
+                            <span class="text-[10px] px-1.5 py-0.5 bg-white/20 rounded">→ Ouvre directement</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex items-center gap-x-6 text-sm text-slate-400">
+                        <div class="flex -space-x-2">
+                            <div class="w-7 h-7 bg-white rounded-full border border-slate-800 flex items-center justify-center ring-1 ring-white/50"><i class="fa-solid fa-user text-[10px] text-slate-900"></i></div>
+                            <div class="w-7 h-7 bg-white rounded-full border border-slate-800 flex items-center justify-center ring-1 ring-white/50"><i class="fa-solid fa-user text-[10px] text-slate-900"></i></div>
+                            <div class="w-7 h-7 bg-white rounded-full border border-slate-800 flex items-center justify-center ring-1 ring-white/50"><i class="fa-solid fa-user text-[10px] text-slate-900"></i></div>
+                        </div>
+                        <span class="text-xs">Déjà adopté par des équipes stratégie &amp; innovation en early access</span>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-5">
+                    <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
+                        <div class="text-xs uppercase tracking-[2px] text-emerald-400 font-semibold mb-3">PROTOTYPE DE RÉFÉRENCE</div>
+                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-reference.html • Standalone complet</div>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center py-1 border-b border-white/10">
+                                <span class="text-slate-400">Architecture</span>
+                                <span class="font-medium">Plan-and-Solve + ReAct</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-white/10">
+                                <span class="text-slate-400">Agents spécialisés</span>
+                                <span class="font-medium">6+ (Red Team, Devil’s Advocate…)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-white/10">
+                                <span class="text-slate-400">Mémoire</span>
+                                <span class="font-medium">Shared + Vectorielle</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                                <span class="text-slate-400">Déploiement</span>
+                                <span class="font-medium text-emerald-400">P0 Standalone → P2 Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- LE MODÈLE -->
+    <section id="modele" class="max-w-screen-2xl mx-auto px-8 py-20 border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-3xl mb-12">
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">LE MODÈLE KAYROSLAB</div>
+            <h2 class="section-header tracking-tighter">Un processus structuré en 6 étapes.<br>Une gouvernance hybride IA + Humain.</h2>
+            <p class="mt-4 text-lg text-slate-600">Contrairement aux conversations libres des LLMs, KayrosLab suit un workflow <strong>cyclique</strong> inspiré des meilleures pratiques de stratégie et de foresight, industrialisé par des agents IA spécialisés et un Human-in-the-Loop formalisé. La 6<sup>e</sup> étape <strong>Projeter</strong> transforme la décision en trajectoire pilotée et reboucle sur Écouter.</p>
+        </div>
+
+        <!-- 6 Steps -->
+        <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-4 stagger-children">
+            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5">
+                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                    <span class="font-mono text-sky-700 font-bold text-lg">01</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Écouter</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Réduction du bruit, qualification et scoring des signaux faibles.</p>
+                <div class="mt-3 text-xs text-sky-600 font-medium">→ Signaux qualifiés</div>
+                <a href="#outils-etape-01" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+            
+            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5">
+                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                    <span class="font-mono text-sky-700 font-bold text-lg">02</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Cartographier</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Réseau de tendances, ponts bisociatifs et relations stratégiques.</p>
+                <div class="mt-3 text-xs text-sky-600 font-medium">→ Réseau + ponts</div>
+                <a href="#outils-etape-02" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+            
+            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5">
+                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                    <span class="font-mono text-sky-700 font-bold text-lg">03</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Construire</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Scénarios, Collision Mode et briefs structurés collaboratifs.</p>
+                <div class="mt-3 text-xs text-sky-600 font-medium">→ Scénarios + brief</div>
+                <a href="#outils-etape-03" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+            
+            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5">
+                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                    <span class="font-mono text-sky-700 font-bold text-lg">04</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Éprouver</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Future-proofing multi-agents : Critic, Devil’s Advocate, Red Team.</p>
+                <div class="mt-3 text-xs text-sky-600 font-medium">→ Idées challengées</div>
+                <a href="#outils-etape-04" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+            
+            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5">
+                <div class="w-9 h-9 rounded-2xl bg-emerald-100 flex items-center justify-center mb-3">
+                    <span class="font-mono text-emerald-700 font-bold text-lg">05</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Arbitrer</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Votes multi-critères, Working Groups et décision finale structurée.</p>
+                <div class="mt-3 text-xs text-emerald-600 font-medium">→ Décision + livrable</div>
+                <a href="#outils-etape-05" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+
+            <div class="step-card bg-white border border-emerald-300 rounded-3xl p-5 ring-2 ring-emerald-100">
+                <div class="w-9 h-9 rounded-2xl bg-emerald-500 flex items-center justify-center mb-3">
+                    <span class="font-mono text-white font-bold text-lg">06</span>
+                </div>
+                <h4 class="font-semibold text-lg mb-1.5">Projeter</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">Trajectoire, roadmap, simulation probabilisée et boucle d’apprentissage.</p>
+                <div class="mt-3 text-xs text-emerald-600 font-medium">→ Roadmap + KPIs → boucle</div>
+                <a href="#outils-etape-06" class="mt-2 inline-flex items-center text-xs text-sky-600 hover:text-sky-700 font-medium">
+                    <i class="fa-solid fa-tools mr-1.5"></i> Outils →
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <p class="text-sm text-slate-500 mb-6">Chaque étape est traçable, évaluée par les agents et soumise à des gates humains (veto COMEX, validation experts, etc.).</p>
+            
+            <!-- Prominent Demo CTA -->
+            <a href="https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html" 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 transition-all text-white px-10 h-14 rounded-3xl font-semibold text-base shadow-lg active:scale-[0.985]">
+                <i class="fa-solid fa-play mr-2"></i>
+                <span>Essayer la démo standalone maintenant</span>
+                <span class="ml-2 text-xs bg-white/20 px-2.5 py-0.5 rounded-full">Aucune installation • Ouvre dans le navigateur</span>
+            </a>
+            <p class="text-[10px] text-slate-400 mt-3">Prototype complet • Workflow cyclique 6 étapes + agents + mémoire vectorielle</p>
+        </div>
+    </section>
+
+    <!-- NOUVELLE SECTION : OUTILS INTÉGRÉS PAR ÉTAPE -->
+    <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-3xl mb-10">
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp; OUTILS INTÉGRÉS</div>
+            <h2 class="section-header tracking-tighter">Des outils spécialisés<br>pour chaque étape du processus.</h2>
+            <p class="mt-3 text-slate-600">KayrosLab dispose d’un <strong>Tool Registry</strong> extensible. Les agents (via ReAct) peuvent appeler ces outils de manière autonome ou semi-autonome. Voici les principaux outils associés à chaque étape.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+            
+            <!-- Outils Étape 01 -->
+            <div id="outils-etape-01" class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">01</span>
+                    <span class="font-semibold text-sm">Écouter</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>signal_scoring</strong></li>
+                    <li><i class="fa-solid fa-filter w-3.5 mr-1.5 text-sky-500"></i> <strong>context_enrichment</strong></li>
+                    <li><i class="fa-solid fa-shield-alt w-3.5 mr-1.5 text-sky-500"></i> <strong>search_regulatory_risks</strong></li>
+                </ul>
+            </div>
+
+            <!-- Outils Étape 02 -->
+            <div id="outils-etape-02" class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">02</span>
+                    <span class="font-semibold text-sm">Cartographier</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-project-diagram w-3.5 mr-1.5 text-sky-500"></i> <strong>trend_network_builder</strong></li>
+                    <li><i class="fa-solid fa-link w-3.5 mr-1.5 text-sky-500"></i> <strong>bisociation_detector</strong></li>
+                    <li><i class="fa-solid fa-chart-network w-3.5 mr-1.5 text-sky-500"></i> <strong>weak_signal_mapper</strong></li>
+                </ul>
+            </div>
+
+            <!-- Outils Étape 03 -->
+            <div id="outils-etape-03" class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">03</span>
+                    <span class="font-semibold text-sm">Construire</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-magic w-3.5 mr-1.5 text-sky-500"></i> <strong>scenario_generator</strong></li>
+                    <li><i class="fa-solid fa-file-alt w-3.5 mr-1.5 text-sky-500"></i> <strong>brief_structurer</strong></li>
+                    <li><i class="fa-solid fa-random w-3.5 mr-1.5 text-sky-500"></i> <strong>collision_mode</strong></li>
+                </ul>
+            </div>
+
+            <!-- Outils Étape 04 -->
+            <div id="outils-etape-04" class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">04</span>
+                    <span class="font-semibold text-sm">Éprouver</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-user-secret w-3.5 mr-1.5 text-sky-500"></i> <strong>red_team_attack</strong></li>
+                    <li><i class="fa-solid fa-balance-scale w-3.5 mr-1.5 text-sky-500"></i> <strong>calculate_ki_impact</strong></li>
+                    <li><i class="fa-solid fa-exclamation-triangle w-3.5 mr-1.5 text-sky-500"></i> <strong>risk_assessor</strong></li>
+                </ul>
+            </div>
+
+            <!-- Outils Étape 05 -->
+            <div id="outils-etape-05" class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">05</span>
+                    <span class="font-semibold text-sm">Arbitrer</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-chart-bar w-3.5 mr-1.5 text-sky-500"></i> <strong>ki_scorer</strong></li>
+                    <li><i class="fa-solid fa-file-pdf w-3.5 mr-1.5 text-sky-500"></i> <strong>pdf_livrable_generator</strong></li>
+                    <li><i class="fa-solid fa-vote-yea w-3.5 mr-1.5 text-sky-500"></i> <strong>vote_aggregator</strong></li>
+                </ul>
+            </div>
+
+            <!-- Outils Étape 06 -->
+            <div id="outils-etape-06" class="bg-emerald-50 border border-emerald-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-emerald-500 text-white px-2 py-0.5 rounded font-bold">06</span>
+                    <span class="font-semibold text-sm">Projeter</span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <li><i class="fa-solid fa-road w-3.5 mr-1.5 text-emerald-500"></i> <strong>roadmap_builder</strong></li>
+                    <li><i class="fa-solid fa-chart-line w-3.5 mr-1.5 text-emerald-500"></i> <strong>scenario_simulator</strong></li>
+                    <li><i class="fa-solid fa-bullseye w-3.5 mr-1.5 text-emerald-500"></i> <strong>kpi_tracker</strong></li>
+                    <li><i class="fa-solid fa-sync w-3.5 mr-1.5 text-emerald-500"></i> <strong>feedback_loop</strong></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="mt-8 text-center text-xs text-slate-500">
+            Tous les outils sont déclarés dans le <strong>Tool Registry</strong> et exposés aux agents via function calling. Le registry est extensible (vous pouvez ajouter vos propres outils métier).
+        </div>
+    </section>
+
+    <!-- SECTION : TABLEAU DE BORD DE PILOTAGE -->
+    <section id="dashboard" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-50 border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    Sortie de l'étape 06 • Projeter
+                </div>
+                <h2 class="section-header tracking-tighter">Tableau de bord de pilotage</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+                    Une fois la décision arbitrée, KayrosLab transforme le Go en <strong>trajectoire pilotée</strong> : roadmap, KPIs, scénarios probabilisés et boucle de re-arbitrage automatique.
+                </p>
+            </div>
+
+            <!-- Mock Dashboard -->
+            <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
+                
+                <!-- Dashboard Header -->
+                <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                            <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Pilotage Stratégique</div>
+                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Mis à jour il y a 2h</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4 text-sm">
+                        <div class="flex items-center gap-x-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-emerald-300">Boucle active</span>
+                        </div>
+                        <div class="px-3 py-1 rounded-full bg-white/10 text-xs font-medium">Kayros Index 78</div>
+                    </div>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Left Column : KPIs + Scenarios -->
+                    <div class="lg:col-span-2 space-y-6">
+                        
+                        <!-- KPI Cards - Approfondis -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Indicateurs de pilotage stratégique</div>
+                            
+                            <!-- Primary KPIs (3 colonnes) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-emerald-700 font-medium">Kayros Index</div>
+                                        <i class="fa-solid fa-gauge-high text-emerald-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-slate-900">78<span class="text-sm font-medium text-slate-400">/100</span></div>
+                                    <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1">
+                                        <i class="fa-solid fa-arrow-up text-[10px]"></i> +6 pts depuis arbitrage
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-slate-500">Probabilité de succès</div>
+                                        <i class="fa-solid fa-bullseye text-sky-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-semibold text-slate-900">68%</div>
+                                    <div class="text-xs text-slate-500 mt-1">P50 • Intervalle 52–81%</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-slate-500">ROI projeté (P50)</div>
+                                        <i class="fa-solid fa-chart-line text-emerald-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-semibold text-slate-900">2.4×</div>
+                                    <div class="text-xs text-emerald-600 mt-1">P90 : 3.1× • P10 : 1.3×</div>
+                                </div>
+                            </div>
+
+                            <!-- Secondary KPIs (6 colonnes) -->
+                            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Risque résiduel</div>
+                                    <div class="text-lg font-semibold text-amber-600">Moyen</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">3 red flags actifs</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Time-to-Value</div>
+                                    <div class="text-lg font-semibold text-slate-900">9 mois</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">Premier impact mesurable</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Alignement COMEX</div>
+                                    <div class="text-lg font-semibold text-emerald-600">Élevé</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">4/5 décideurs</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Prochain gate</div>
+                                    <div class="text-lg font-semibold text-slate-900">J+45</div>
+                                    <div class="text-[11px] text-sky-600 mt-0.5">COMEX • Go / No-Go</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Budget consommé</div>
+                                    <div class="text-lg font-semibold text-slate-900">38%</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">142 k€ / 375 k€</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Couverture hypothèses</div>
+                                    <div class="text-lg font-semibold text-emerald-600">81%</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">17/21 validées</div>
+                                </div>
+                            </div>
+
+                            <!-- Légende -->
+                            <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-slate-400">
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Leading</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Lagging</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Risk</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-violet-400"></span> Budget / Hypothèses</span>
+                            </div>
+                        </div>
+
+                        <!-- Scenario Simulation -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Simulation probabiliste (P10 / P50 / P90)</div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-slate-700">Scénario Base</span>
+                                        <span class="text-slate-500">Valeur attendue</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-sky-500 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-emerald-700">Scénario Optimiste</span>
+                                        <span class="text-emerald-600">P90</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-emerald-500 rounded-full" style="width: 89%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-rose-700">Scénario Adverse</span>
+                                        <span class="text-rose-600">P10</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-rose-400 rounded-full" style="width: 34%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Budget Impact Simulation -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Simulation des impacts budgétaires</div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <!-- Header budget -->
+                                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200">
+                                    <div>
+                                        <div class="text-xs text-slate-500">Budget total alloué</div>
+                                        <div class="text-xl font-bold text-slate-900">375 k€</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-slate-500">Consommé à date</div>
+                                        <div class="text-xl font-bold text-slate-900">142 k€ <span class="text-sm font-medium text-slate-400">(38%)</span></div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-slate-500">Reste à engager</div>
+                                        <div class="text-xl font-bold text-emerald-600">233 k€</div>
+                                    </div>
+                                </div>
+
+                                <!-- Impact by scenario -->
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                                    <div class="bg-white border border-slate-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-slate-500 mb-1">Scénario Base</div>
+                                        <div class="text-lg font-semibold text-slate-900">361 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−14 k€ vs budget</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-sky-500 rounded-full" style="width: 96%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white border border-emerald-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-emerald-700 mb-1">Scénario Optimiste</div>
+                                        <div class="text-lg font-semibold text-slate-900">298 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−77 k€ (sous-consommation)</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500 rounded-full" style="width: 79%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white border border-rose-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-rose-700 mb-1">Scénario Adverse</div>
+                                        <div class="text-lg font-semibold text-slate-900">452 k€</div>
+                                        <div class="text-[11px] text-rose-600 mt-0.5">+77 k€ (dépassement)</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-rose-400 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Simulation de l’impact du retard -->
+                                <div class="mt-5 pt-4 border-t border-slate-200">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Simulation de l’impact d’un retard (POC)</div>
+                                        <div class="text-[10px] text-slate-400">Hypothèse : coût journalier marginal + perte d’opportunité</div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
+                                        <!-- +15j -->
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+15 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+18 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 393 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-600">Prob. succès −3 pts</div>
+                                                <div class="text-slate-500">TtV +0,5 mois</div>
+                                            </div>
+                                        </div>
+                                        <!-- +30j -->
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+30 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+37 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 412 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-600">Prob. succès −6 pts</div>
+                                                <div class="text-slate-500">TtV +1,0 mois</div>
+                                            </div>
+                                        </div>
+                                        <!-- +45j (highlighted) -->
+                                        <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-center relative">
+                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">Référence</div>
+                                            <div class="text-[11px] font-medium text-amber-700 mb-1">+45 jours</div>
+                                            <div class="text-base font-bold text-amber-800">+52 k€</div>
+                                            <div class="text-[10px] text-amber-700/80 mt-0.5">Budget → 427 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-700 font-medium">Prob. succès −9 pts</div>
+                                                <div class="text-amber-600">TtV +1,5 mois</div>
+                                            </div>
+                                        </div>
+                                        <!-- +60j -->
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+60 jours</div>
+                                            <div class="text-base font-bold text-rose-600">+71 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 446 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-rose-600">Prob. succès −14 pts</div>
+                                                <div class="text-slate-500">TtV +2,0 mois</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Alerts -->
+                                    <div class="flex flex-col sm:flex-row gap-3 text-xs">
+                                        <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                                            <div>
+                                                <div class="font-medium text-amber-800">Seuil d’alerte</div>
+                                                <div class="text-amber-700/80 mt-0.5">Au-delà de +45 j, le ROI tombe sous 2,0× et le scénario adverse devient le plus probable.</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 flex items-start gap-2 bg-sky-50 border border-sky-200 rounded-xl px-3 py-2.5">
+                                            <i class="fa-solid fa-lightbulb text-sky-500 mt-0.5"></i>
+                                            <div>
+                                                <div class="font-medium text-sky-800">Levier de mitigation</div>
+                                                <div class="text-sky-700/80 mt-0.5">Mutualisation partenaires + phasage → −18 % CAPEX et réduction du risque de retard.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analyse de sensibilité des coûts + Tornado Chart -->
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Analyse de sensibilité des coûts</div>
+                                <div class="text-[10px] text-slate-400">Graphique en éventail — Impact ±20 % sur le budget total</div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                
+                                <!-- Tornado Chart (Graphique en éventail) -->
+                                <div class="mb-5">
+                                    <div class="text-[10px] font-medium text-slate-500 mb-3 flex items-center justify-between">
+                                        <span>Impact négatif (−)</span>
+                                        <span class="text-slate-400">Base</span>
+                                        <span>Impact positif (+)</span>
+                                    </div>
+                                    
+                                    <!-- Axis labels -->
+                                    <div class="relative">
+                                        <!-- Center vertical line -->
+                                        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-slate-300 -translate-x-1/2 z-0"></div>
+                                        
+                                        <div class="space-y-2.5 relative z-10">
+                                            <!-- Driver 1 - highest -->
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Partenaires / sous-traitance</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end">
+                                                        <div class="h-5 bg-gradient-to-l from-rose-500 to-rose-400 rounded-l-md" style="width: 92%"></div>
+                                                    </div>
+                                                    <div class="w-1/2 flex justify-start">
+                                                        <div class="h-5 bg-gradient-to-r from-rose-500 to-rose-400 rounded-r-md" style="width: 92%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-rose-600">±48 k€</div>
+                                            </div>
+                                            
+                                            <!-- Driver 2 -->
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Durée du POC (délai)</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end">
+                                                        <div class="h-5 bg-gradient-to-l from-amber-500 to-amber-400 rounded-l-md" style="width: 71%"></div>
+                                                    </div>
+                                                    <div class="w-1/2 flex justify-start">
+                                                        <div class="h-5 bg-gradient-to-r from-amber-500 to-amber-400 rounded-r-md" style="width: 71%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-amber-600">±37 k€</div>
+                                            </div>
+                                            
+                                            <!-- Driver 3 -->
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Effectif interne</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end">
+                                                        <div class="h-5 bg-gradient-to-l from-slate-400 to-slate-300 rounded-l-md" style="width: 56%"></div>
+                                                    </div>
+                                                    <div class="w-1/2 flex justify-start">
+                                                        <div class="h-5 bg-gradient-to-r from-slate-400 to-slate-300 rounded-r-md" style="width: 56%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-600">±29 k€</div>
+                                            </div>
+                                            
+                                            <!-- Driver 4 -->
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-600 truncate pr-1">Conformité & réglementaire</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end">
+                                                        <div class="h-5 bg-gradient-to-l from-slate-300 to-slate-200 rounded-l-md" style="width: 35%"></div>
+                                                    </div>
+                                                    <div class="w-1/2 flex justify-start">
+                                                        <div class="h-5 bg-gradient-to-r from-slate-300 to-slate-200 rounded-r-md" style="width: 35%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-500">±18 k€</div>
+                                            </div>
+                                            
+                                            <!-- Driver 5 -->
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-500 truncate pr-1">Go-to-market / acquisition</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end">
+                                                        <div class="h-5 bg-gradient-to-l from-slate-200 to-slate-100 rounded-l-md" style="width: 23%"></div>
+                                                    </div>
+                                                    <div class="w-1/2 flex justify-start">
+                                                        <div class="h-5 bg-gradient-to-r from-slate-200 to-slate-100 rounded-r-md" style="width: 23%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-400">±12 k€</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Legend -->
+                                    <div class="mt-3 flex items-center justify-center gap-4 text-[10px] text-slate-400">
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-rose-500"></span> Critique</span>
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-amber-500"></span> Élevé</span>
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-slate-400"></span> Moyen / Faible</span>
+                                    </div>
+                                </div>
+
+                                <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
+                                    <div class="flex-1 flex items-start gap-2 bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-rose-800 text-xs">Point de sensibilité critique</div>
+                                            <div class="text-rose-700/80 text-[11px] mt-0.5">Une hausse de 20 % des coûts partenaires fait basculer le ROI sous 2,0× dans le scénario base.</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-shield-halved text-emerald-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-emerald-800 text-xs">Action recommandée</div>
+                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Négocier un plafond de dépenses partenaires + clause de révision à J+45.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analyse du Retour sur Investissement (ROI) -->
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Analyse du Retour sur Investissement</div>
+                                <div class="text-[10px] text-slate-400">Horizon 24 mois • Scénario de base vs fourchettes</div>
+                            </div>
+                            
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-5">
+                                
+                                <!-- ROI Headline -->
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div class="bg-white border border-emerald-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-1">ROI Base</div>
+                                        <div class="text-3xl font-bold text-emerald-700 tracking-tight">2.4×</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">+140 % net</div>
+                                    </div>
+                                    <div class="bg-white border border-sky-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-sky-600 mb-1">Payback</div>
+                                        <div class="text-3xl font-bold text-sky-700 tracking-tight">11 mois</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Récupération du capital</div>
+                                    </div>
+                                    <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">VAN (approx.)</div>
+                                        <div class="text-3xl font-bold text-slate-800 tracking-tight">+412 k€</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Sur 24 mois</div>
+                                    </div>
+                                </div>
+
+                                <!-- ROI by Scenario -->
+                                <div>
+                                    <div class="text-[11px] font-medium text-slate-500 mb-2.5">ROI par scénario probabiliste</div>
+                                    <div class="space-y-2.5">
+                                        <!-- Optimiste -->
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-emerald-700">Optimiste</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-emerald-500 rounded-full" style="width: 92%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2">
+                                                    <span class="text-[11px] font-bold text-white drop-shadow">3.1×</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P90</div>
+                                        </div>
+                                        <!-- Base -->
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-sky-700">Base</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-sky-500 rounded-full" style="width: 72%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2">
+                                                    <span class="text-[11px] font-bold text-white drop-shadow">2.4×</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P50</div>
+                                        </div>
+                                        <!-- Adverse -->
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-rose-700">Adverse</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-rose-400 rounded-full" style="width: 38%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2">
+                                                    <span class="text-[11px] font-bold text-white drop-shadow">1.3×</span>
+                                                </div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P10</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakdown Costs vs Benefits -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                    <div class="bg-white border border-slate-200 rounded-xl p-3.5">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Coûts totaux (24 mois)</div>
+                                        <div class="text-xl font-bold text-slate-800">375 k€</div>
+                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
+                                            <div class="flex justify-between"><span>Partenaires / sous-traitance</span><span class="font-medium">192 k€</span></div>
+                                            <div class="flex justify-between"><span>Équipe interne</span><span class="font-medium">98 k€</span></div>
+                                            <div class="flex justify-between"><span>Conformité & outils</span><span class="font-medium">47 k€</span></div>
+                                            <div class="flex justify-between"><span>Go-to-market</span><span class="font-medium">38 k€</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white border border-emerald-200 rounded-xl p-3.5">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-2">Bénéfices projetés (24 mois)</div>
+                                        <div class="text-xl font-bold text-emerald-700">900 k€</div>
+                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
+                                            <div class="flex justify-between"><span>Gains opérationnels</span><span class="font-medium">410 k€</span></div>
+                                            <div class="flex justify-between"><span>Nouveaux revenus</span><span class="font-medium">320 k€</span></div>
+                                            <div class="flex justify-between"><span>Évitement de coûts</span><span class="font-medium">120 k€</span></div>
+                                            <div class="flex justify-between"><span>Valorisation stratégique</span><span class="font-medium">50 k€</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Insights -->
+                                <div class="pt-2 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
+                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-chart-line text-emerald-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-emerald-800 text-xs">Seuil de rentabilité</div>
+                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Le projet devient rentable dès le mois 11. Au-delà de 18 mois, le ROI dépasse 2,8× dans le scénario base.</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-amber-800 text-xs">Point de vigilance</div>
+                                            <div class="text-amber-700/80 text-[11px] mt-0.5">Dans le scénario adverse (P10), le ROI reste positif (1.3×) mais le payback s’étire à 19 mois.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Roadmap -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Roadmap d'exécution (Now / Next / Later)</div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <div class="flex-1 bg-sky-50 border border-sky-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-sky-600 uppercase tracking-wider mb-2">Now</div>
+                                    <div class="text-sm font-medium text-slate-800">Structuration équipe & budget</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+0 → J+30</div>
+                                </div>
+                                <div class="flex-1 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-2">Next</div>
+                                    <div class="text-sm font-medium text-slate-800">POC marché & partenaires</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+30 → J+90</div>
+                                </div>
+                                <div class="flex-1 bg-slate-100 border border-slate-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Later</div>
+                                    <div class="text-sm font-medium text-slate-800">Scale & industrialisation</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+90 → J+180</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column : Risk + Feedback -->
+                    <div class="space-y-6">
+                        
+                        <!-- Risk Matrix simplified -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Matrice de risques</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Dépendance fournisseur</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">Élevé</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Réglementaire</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium">Moyen</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Adoption marché</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">Faible</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-500">
+                                <i class="fa-solid fa-bell text-amber-500 mr-1"></i> 1 déclencheur de re-arbitrage actif
+                            </div>
+                        </div>
+
+                        <!-- Feedback Loop -->
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+                            <div class="flex items-center gap-x-2 mb-3">
+                                <i class="fa-solid fa-sync text-emerald-600"></i>
+                                <span class="text-sm font-semibold text-emerald-800">Boucle de rétroaction</span>
+                            </div>
+                            <p class="text-xs text-emerald-900/80 leading-relaxed">
+                                Les KPIs et signaux sont réinjectés automatiquement dans l’étape <strong>Écouter</strong>. Un seuil franchi déclenche un re-arbitrage formel.
+                            </p>
+                            <div class="mt-4 flex items-center gap-x-2 text-xs text-emerald-700">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                Prochaine injection : J+7
+                            </div>
+                        </div>
+
+                        <!-- Quick actions -->
+                        <div class="space-y-2">
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Livrables générés</div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-file-pdf text-rose-500"></i> Fiche projet + Roadmap
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-chart-gantt text-sky-500"></i> Gantt & RACI
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-table text-emerald-500"></i> Tableau KPI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-6 text-center text-sm text-slate-500">
+                Ce tableau de bord est généré automatiquement à l’issue de l’étape <strong>Projeter</strong> et reste vivant grâce à la boucle de rétroaction.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION : ORCHESTRATION AGENTIQUE IA -->
+    <section id="orchestration" class="max-w-screen-2xl mx-auto px-8 py-16 bg-slate-900 text-white animate-on-scroll">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-10">
+                <div>
+                    <div class="uppercase tracking-[3px] text-emerald-400 text-xs font-semibold mb-2">COEUR TECHNOLOGIQUE</div>
+                    <h2 class="text-4xl font-semibold tracking-tighter">Orchestration Agentique<br>Gouvernée</h2>
+                </div>
+                <div class="text-sm text-emerald-300 max-w-xs">
+                    L’orchestrateur transforme une simple conversation en un <strong>système de décision stratégique structuré, cyclique et résilient</strong> sur 6 étapes.
+                </div>
+            </div>
+
+            <!-- Orchestration Flow -->
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 mb-10">
+                <div class="text-xs uppercase tracking-[2px] text-emerald-400 mb-6">FLUX D’ORCHESTRATION MULTI-AGENTS — 6 ÉTAPES CYCLIQUES</div>
+                
+                <!-- Professional 6-step Flow -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-y-5 md:gap-x-2">
+                    
+                    <!-- 01 Écouter -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-2 group-hover:bg-sky-500/20 transition-colors">
+                            <i class="fa-solid fa-headset text-sky-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-sky-400 tracking-widest mb-0.5">01</div>
+                        <div class="font-semibold text-white text-sm">Écouter</div>
+                        <div class="text-[10px] text-white/50 mt-0.5">Signaux</div>
+                    </div>
+
+                    <div class="hidden md:block text-emerald-400/50 text-lg">→</div>
+
+                    <!-- 02 Cartographier -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-2 group-hover:bg-sky-500/20 transition-colors">
+                            <i class="fa-solid fa-project-diagram text-sky-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-sky-400 tracking-widest mb-0.5">02</div>
+                        <div class="font-semibold text-white text-sm">Cartographier</div>
+                        <div class="text-[10px] text-white/50 mt-0.5">Tendances</div>
+                    </div>
+
+                    <div class="hidden md:block text-emerald-400/50 text-lg">→</div>
+
+                    <!-- 03 Construire -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-2 group-hover:bg-sky-500/20 transition-colors">
+                            <i class="fa-solid fa-cubes text-sky-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-sky-400 tracking-widest mb-0.5">03</div>
+                        <div class="font-semibold text-white text-sm">Construire</div>
+                        <div class="text-[10px] text-white/50 mt-0.5">Scénarios</div>
+                    </div>
+
+                    <div class="hidden md:block text-emerald-400/50 text-lg">→</div>
+
+                    <!-- 04 Éprouver -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-2 group-hover:bg-sky-500/20 transition-colors">
+                            <i class="fa-solid fa-shield-halved text-sky-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-sky-400 tracking-widest mb-0.5">04</div>
+                        <div class="font-semibold text-white text-sm">Éprouver</div>
+                        <div class="text-[10px] text-white/50 mt-0.5">Red Team</div>
+                    </div>
+
+                    <div class="hidden md:block text-emerald-400/50 text-lg">→</div>
+
+                    <!-- 05 Arbitrer -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-2 group-hover:bg-sky-500/20 transition-colors">
+                            <i class="fa-solid fa-gavel text-sky-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-sky-400 tracking-widest mb-0.5">05</div>
+                        <div class="font-semibold text-white text-sm">Arbitrer</div>
+                        <div class="text-[10px] text-white/50 mt-0.5">Décision</div>
+                    </div>
+
+                    <div class="hidden md:block text-emerald-400/50 text-lg">→</div>
+
+                    <!-- 06 Projeter -->
+                    <div class="flex flex-col items-center text-center group flex-1">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center mb-2 group-hover:bg-emerald-500/30 transition-colors">
+                            <i class="fa-solid fa-road text-emerald-400 text-lg"></i>
+                        </div>
+                        <div class="font-mono text-[10px] text-emerald-400 tracking-widest mb-0.5">06</div>
+                        <div class="font-semibold text-emerald-300 text-sm">Projeter</div>
+                        <div class="text-[10px] text-emerald-200/70 mt-0.5">Trajectoire</div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="my-8 border-t border-white/10"></div>
+
+                <!-- Central Orchestrator -->
+                <div class="text-center">
+                    <div class="inline-flex flex-col items-center">
+                        <div class="inline-flex items-center gap-x-3 bg-emerald-500/10 border border-emerald-400/30 px-6 py-2 rounded-2xl mb-4">
+                            <i class="fa-solid fa-robot text-emerald-400"></i>
+                            <span class="font-semibold text-emerald-400 tracking-wide text-sm">ORCHESTRATEUR AGENTIQUE CENTRAL</span>
+                        </div>
+                        
+                        <div class="text-xl font-semibold text-white mb-2">Plan-and-Solve + ReAct Loop</div>
+                        
+                        <div class="max-w-xl text-sm text-white/60 leading-relaxed">
+                            Planification dynamique → Raisonnement itératif avec outils → 
+                            Mémoire partagée + vectorielle → <span class="text-emerald-400">Gates humains structurés</span> → 
+                            Résilience (Retry + Circuit Breaker) → <span class="text-emerald-300">Boucle de rétroaction via Projeter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valeur pour les décideurs -->
+            <div class="mb-10">
+                <div class="text-xs uppercase tracking-[2px] text-emerald-400 mb-3">POUR LES DÉCIDEURS (CODIR, STRATÉGIE, RISQUE, TRANSFORMATION, CONFORMITÉ)</div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                        <div class="flex items-center gap-x-2 text-emerald-400 mb-2">
+                            <i class="fa-solid fa-shield-alt"></i>
+                            <span class="font-semibold">Réduction des risques</span>
+                        </div>
+                        <div class="text-sm text-white/80">Challenge systématique via Red Team agents + gates humains obligatoires. Moins d’angles morts et protection renforcée contre les biais et hallucinations des LLMs classiques.</div>
+                    </div>
+                    
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                        <div class="flex items-center gap-x-2 text-emerald-400 mb-2">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <span class="font-semibold">Auditabilité totale</span>
+                        </div>
+                        <div class="text-sm text-white/80">Timeline complète, scoring KI, логи d’agents et décisions humaines. Conforme aux exigences des CA, NIS2, DORA et RGPD.</div>
+                    </div>
+                    
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                        <div class="flex items-center gap-x-2 text-emerald-400 mb-2">
+                            <i class="fa-solid fa-expand-arrows-alt"></i>
+                            <span class="font-semibold">Scalabilité maîtrisée</span>
+                        </div>
+                        <div class="text-sm text-white/80">Du pilote standalone au déploiement souverain local ou cloud privé. Gouvernance et contrôle conservés à chaque étape.</div>
+                    </div>
+
+                    <!-- NOUVEAU : Souveraineté des données -->
+                    <div class="bg-emerald-500/10 border border-emerald-400/40 rounded-2xl p-5 ring-1 ring-emerald-400/30">
+                        <div class="flex items-center gap-x-2 text-emerald-400 mb-2">
+                            <i class="fa-solid fa-globe-europe"></i>
+                            <span class="font-semibold">Souveraineté des données</span>
+                        </div>
+                        <div class="text-sm text-white/90">
+                            <strong>Vos données stratégiques restent exclusivement dans votre infrastructure.</strong><br><br>
+                            En mode souverain local (Ollama + Qdrant) : <strong>zéro transfert de données</strong> vers des tiers, le cloud ou des modèles externes. 
+                            Exploitation et valorisation <strong>uniquement par votre entreprise</strong>, sans aucune fuite ni utilisation par des acteurs tiers.<br><br>
+                            
+                            <span class="text-emerald-300 text-xs">Architecture locale souveraine conçue pour faciliter la mise en conformité avec les exigences de la <strong>certification HDS</strong> (Hébergeur de Données de Santé) et du <strong>European Health Data Space (EHDS)</strong>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key capabilities -->
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-project-diagram text-xl"></i></div>
+                    <div class="font-semibold mb-2">Planification intelligente</div>
+                    <div class="text-sm text-white/70">L’orchestrateur décompose les objectifs stratégiques en sous-tâches, choisit les agents et outils appropriés, et adapte le plan en fonction des résultats intermédiaires.</div>
+                </div>
+                
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-sync text-xl"></i></div>
+                    <div class="font-semibold mb-2">ReAct + Mémoire persistante</div>
+                    <div class="text-sm text-white/70">Chaque agent raisonne (Thought → Action → Observation) avec accès à une mémoire partagée et vectorielle qui conserve le contexte sur l’ensemble du processus et des idées précédentes.</div>
+                </div>
+                
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-shield-alt text-xl"></i></div>
+                    <div class="font-semibold mb-2">Résilience &amp; Gouvernance</div>
+                    <div class="text-sm text-white/70">Circuit Breaker, retry exponentiel, budgets de tokens, et surtout des <strong>gates humains structurés</strong> (veto, validation, arbitrage) à chaque étape critique.</div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-xs text-white/50">
+                Cette couche d’orchestration est ce qui permet à KayrosLab de passer d’un simple assistant IA à un véritable <strong>système de décision stratégique gouverné</strong>.
+            </div>
+
+            <!-- Diagrammes d'architecture visuels -->
+            <div class="mt-12">
+                <div class="text-xs uppercase tracking-[2px] text-emerald-400 mb-4">DIAGRAMMES D'ARCHITECTURE</div>
+                <h3 class="text-2xl font-semibold text-white mb-6">Représentation formelle du système</h3>
+
+                <div class="grid lg:grid-cols-2 gap-6">
+                    
+                    <!-- ========== FLUX DU PROCESSUS ========== -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                        <div class="flex items-center gap-x-3 mb-6">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                                <i class="fa-solid fa-diagram-project text-emerald-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Flux du Processus</div>
+                                <div class="text-xs text-white/50">6 étapes cycliques + Orchestrateur</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <!-- 01 -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-sky-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">01</div>
+                                <div class="flex-1 bg-slate-800/70 border border-sky-500/20 rounded-2xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm">Écouter</div>
+                                    <div class="text-[11px] text-white/45">Signaux faibles & contexte</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-emerald-400/60 text-xs"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- 02 -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-sky-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">02</div>
+                                <div class="flex-1 bg-slate-800/70 border border-sky-500/20 rounded-2xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm">Cartographier</div>
+                                    <div class="text-[11px] text-white/45">Réseau de tendances</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-emerald-400/60 text-xs"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- 03 -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-sky-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">03</div>
+                                <div class="flex-1 bg-slate-800/70 border border-sky-500/20 rounded-2xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm">Construire</div>
+                                    <div class="text-[11px] text-white/45">Scénarios & briefs</div>
+                                </div>
+                            </div>
+
+                            <!-- ORCHESTRATEUR -->
+                            <div class="my-1">
+                                <div class="bg-gradient-to-r from-emerald-600/30 to-emerald-500/20 border border-emerald-400/50 rounded-2xl px-3.5 py-3 text-center">
+                                    <div class="text-[10px] uppercase tracking-[2px] text-emerald-300 font-semibold">Orchestrateur Agentique</div>
+                                    <div class="text-xs text-emerald-100/80 mt-0.5">Plan-and-Solve • ReAct • Mémoire • Gates</div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center text-emerald-400/60 text-xs"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- 04 + 05 -->
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">04</div>
+                                    <div class="flex-1 bg-slate-800/70 border border-emerald-500/20 rounded-xl px-2.5 py-2">
+                                        <div class="font-semibold text-xs">Éprouver</div>
+                                        <div class="text-[10px] text-white/45">Red Team</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">05</div>
+                                    <div class="flex-1 bg-slate-800/70 border border-emerald-500/20 rounded-xl px-2.5 py-2">
+                                        <div class="font-semibold text-xs">Arbitrer</div>
+                                        <div class="text-[10px] text-white/45">Décision</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center text-emerald-400/60 text-xs"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- 06 Projeter -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-400 flex items-center justify-center text-slate-900 font-bold text-xs flex-shrink-0">06</div>
+                                <div class="flex-1 bg-emerald-900/40 border border-emerald-400/40 rounded-2xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm text-emerald-100">Projeter</div>
+                                    <div class="text-[11px] text-emerald-200/70">Trajectoire • KPIs • Boucle → Écouter</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== INTERACTIONS AGENTS ========== -->
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                        <div class="flex items-center gap-x-3 mb-6">
+                            <div class="w-9 h-9 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                                <i class="fa-solid fa-network-wired text-purple-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Interactions Agents</div>
+                                <div class="text-xs text-white/50">Flux de contrôle & données</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <!-- CODIR -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-slate-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-user-tie text-white text-xs"></i>
+                                </div>
+                                <div class="flex-1 bg-slate-700/50 border border-slate-500/30 rounded-xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm">CODIR / Décideur</div>
+                                    <div class="text-[10px] text-white/45">Lance • Valide • Arbitre</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-emerald-400/50 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- Orchestrateur -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-brain text-white text-xs"></i>
+                                </div>
+                                <div class="flex-1 bg-emerald-600/15 border border-emerald-400/40 rounded-xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm text-emerald-300">Orchestrateur Agentique</div>
+                                    <div class="text-[10px] text-emerald-200/60">Planifie • Coordonne • Synthétise</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-purple-400/50 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- Agents + Tools -->
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="bg-purple-600/10 border border-purple-400/30 rounded-xl p-3">
+                                    <div class="flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-robot text-purple-400 text-[10px]"></i>
+                                        <div class="font-semibold text-xs text-purple-300">Agents</div>
+                                    </div>
+                                    <div class="text-[10px] text-white/45 leading-snug">Planner • Red Team<br>Critic • Devil's Advocate</div>
+                                </div>
+                                <div class="bg-orange-600/10 border border-orange-400/30 rounded-xl p-3">
+                                    <div class="flex items-center gap-1.5 mb-1">
+                                        <i class="fa-solid fa-toolbox text-orange-400 text-[10px]"></i>
+                                        <div class="font-semibold text-xs text-orange-300">Tools</div>
+                                    </div>
+                                    <div class="text-[10px] text-white/45 leading-snug">Scoring • Recherche<br>Impact • Export</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-red-400/50 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- Human Gates -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-red-600/80 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-hand text-white text-xs"></i>
+                                </div>
+                                <div class="flex-1 bg-red-600/10 border border-red-400/30 rounded-xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm text-red-300">Human Gates</div>
+                                    <div class="text-[10px] text-white/45">Validation • Veto • Arbitrage</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center text-teal-400/50 text-[10px]"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <!-- Livrables -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-teal-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-file-export text-white text-xs"></i>
+                                </div>
+                                <div class="flex-1 bg-teal-600/10 border border-teal-400/30 rounded-xl px-3.5 py-2.5">
+                                    <div class="font-semibold text-sm text-teal-300">Livrables</div>
+                                    <div class="text-[10px] text-white/45">PDF • Gantt • Kayros Index</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION : CONFORMITÉ & SOUVERAINETÉ -->
+    <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-10">
+                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">CONFORMITÉ &amp; SOUVERAINETÉ</div>
+                <h2 class="section-header tracking-tighter">Une architecture conçue pour les environnements<br>les plus exigeants en matière de conformité.</h2>
+                <p class="mt-3 text-lg text-slate-600">KayrosLab a été pensé dès l’origine pour répondre aux exigences de souveraineté, de traçabilité et de sécurité des organisations régulées et des secteurs stratégiques.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <!-- Carte 1 : Souveraineté des données -->
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i>
+                        <h4 class="font-semibold text-xl">Souveraineté des données</h4>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Déploiement souverain local (Ollama + Qdrant) sans transfert de données vers l’extérieur</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Zéro dépendance aux hyperscalers américains pour le traitement des données stratégiques</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Exploitation et valorisation des données exclusivement par votre organisation</span></li>
+                    </ul>
+                </div>
+
+                <!-- Carte 2 : Certifications & Alignements -->
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <i class="fa-solid fa-certificate text-2xl text-emerald-600"></i>
+                        <h4 class="font-semibold text-xl">Certifications &amp; Alignements</h4>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Architecture locale conçue pour faciliter la mise en conformité <strong>HDS</strong> (Hébergeur de Données de Santé)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Alignement avec le <strong>European Health Data Space (EHDS)</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Compatible avec les exigences de souveraineté numérique française et européenne</span></li>
+                    </ul>
+                </div>
+
+                <!-- Carte 3 : Conformité réglementaire -->
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <i class="fa-solid fa-balance-scale text-2xl text-emerald-600"></i>
+                        <h4 class="font-semibold text-xl">Conformité réglementaire</h4>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span><strong>RGPD</strong> natif (minimisation des données, droit à l’oubli, consentement)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Aligné sur les exigences <strong>NIS2</strong> et <strong>DORA</strong> (résilience, traçabilité, gouvernance des risques)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Normes ISO pertinentes : <strong>ISO 27001</strong> (sécurité de l’information), <strong>ISO 27701</strong> (management de la vie privée) et <strong>ISO 42001</strong> (systèmes de management de l’IA)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Préparation à la <strong>certification SOC 2 Type II</strong> (sécurité, disponibilité, confidentialité et intégrité des données)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Traçabilité complète des décisions et des traitements pour les audits internes et externes</span></li>
+                    </ul>
+                </div>
+
+                <!-- Carte 4 : Auditabilité & Gouvernance -->
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4">
+                        <i class="fa-solid fa-search text-2xl text-emerald-600"></i>
+                        <h4 class="font-semibold text-xl">Auditabilité &amp; Gouvernance</h4>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Timeline complète et horodatée de toutes les étapes et décisions</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Scoring <strong>Kayros Index (KI)</strong> traçable et exportable</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Logs d’agents IA + décisions humaines pour les audits et comités de risque</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>Gates humains structurés (veto COMEX, validation experte) avec traçabilité</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFFÉRENCIATION -->
+    <section id="differenciation" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-3xl mb-10">
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">POURQUOI KAYROSLAB EST UNIQUE</div>
+            <h2 class="section-header tracking-tighter">Pas un énième chatbot.<br> Un système d’idéation gouverné.</h2>
+            <p class="mt-3 text-lg text-slate-600">Les LLMs classiques excellent dans la génération de texte. KayrosLab industrialise un processus complet de prise de décision stratégique où l’IA est un collaborateur contrôlé, traçable et arbitré.</p>
+        </div>
+
+        <div class="modern-table overflow-x-auto">
+            <table class="comparison-table w-full min-w-[900px] text-sm">
+                <thead>
+                    <tr>
+                        <th class="text-left px-6 py-4 w-56">Critère</th>
+                        <th class="text-center px-4 py-4">ChatGPT / Claude<br>Entreprise / Gemini</th>
+                        <th class="text-center px-4 py-4">Plateformes d’Innovation<br>(IdeaScale, Viima…)</th>
+                        <th class="text-center px-4 py-4 bg-sky-900 text-white">KayrosLab</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Structure du processus</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Conversation linéaire libre</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Collecte + vote d’idées</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Processus cyclique 6 étapes</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp; Agents</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Un seul modèle générique</td>
+                        <td class="px-4 py-4 text-center text-slate-500">IA d’assistance limitée</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Multi-agents spécialisés</strong><br><span class="text-xs">(Red Team, Devil’s Advocate, Bisociateur…)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp; Continuité</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Contexte de session limité</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Base d’idées simple</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Recherche sémantique persistante</span></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp; Résilience</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Aucune (hallucinations fréquentes)</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Faible</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp; Audit</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Faible / conversation éphémère</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Historique basique</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Timeline complète + scoring KI + logs agents</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Gouvernance Humaine</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Informelle (prompt engineering)</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Workflows de validation simples</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Human-in-the-Loop structuré</strong><br><span class="text-xs">Votes multi-critères, veto COMEX, Working Groups</span></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Souveraineté des données</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Cloud uniquement (dépendance)</td>
+                        <td class="px-4 py-4 text-center text-slate-500">SaaS cloud généralement</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">LLM-ready local (Ollama)</strong><br><span class="text-xs">Mode souverain P1 : zéro egress de données</span></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Déploiement</td>
+                        <td class="px-4 py-4 text-center text-slate-500">SaaS uniquement</td>
+                        <td class="px-4 py-4 text-center text-slate-500">SaaS cloud</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Standalone (1 fichier HTML) → Local → Cloud</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Cas d’usage principal</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp; assistance</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Boîte à idées collaborative</td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Idéation stratégique de haut niveau + décisions auditables</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-6 text-center text-xs text-slate-500 max-w-md mx-auto">
+            KayrosLab n’est pas un outil de plus. C’est un <strong>système de gouvernance de l’IA générative</strong> appliqué à la stratégie d’entreprise.
+        </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS &amp; OUTPUTS -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-16 border-b border-slate-200 bg-slate-900 text-white">
+        <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
+            <div>
+                <div class="uppercase tracking-[2.5px] text-emerald-400 text-xs font-semibold mb-3">CE QUE PRODUIT KAYROSLAB</div>
+                <h3 class="text-4xl font-semibold tracking-tighter mb-6">Des livrables exécutables,<br>pas seulement des idées.</h3>
+                
+                <div class="space-y-6 text-sm">
+                    <div class="flex gap-4">
+                        <i class="fa-solid fa-file-pdf text-2xl text-emerald-400 mt-0.5 w-6"></i>
+                        <div>
+                            <div class="font-semibold">Livrable PDF complet</div>
+                            <div class="text-slate-400">Récapitulatif de l’atelier, scénarios retenus, analyse KI, recommandations et plan d’action.</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fa-solid fa-chart-gantt text-2xl text-emerald-400 mt-0.5 w-6"></i>
+                        <div>
+                            <div class="font-semibold">Gantt &amp; Timeline stratégique</div>
+                            <div class="text-slate-400">Roadmap d’implémentation avec jalons, dépendances et responsables.</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fa-solid fa-chart-radar text-2xl text-emerald-400 mt-0.5 w-6"></i>
+                        <div>
+                            <div class="font-semibold">Kayros Index (KI) &amp; Radar</div>
+                            <div class="text-slate-400">Scoring multi-dimensionnel (Fit stratégique, Désirabilité, Faisabilité, Viabilité, Adaptabilité) + visualisation radar pour l’arbitrage.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8">
+                <div class="text-xs uppercase tracking-widest text-emerald-400 mb-4">AGENTS SPÉCIALISÉS INCLUS</div>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-chess-knight w-4"></i> <span>Red Team (offensif)</span></div>
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-balance-scale w-4"></i> <span>Devil’s Advocate</span></div>
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-search w-4"></i> <span>Critic &amp; Risk Detector</span></div>
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-lightbulb w-4"></i> <span>Bisociateur (idées collision)</span></div>
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-tasks w-4"></i> <span>Planner (Plan-and-Solve)</span></div>
+                    <div class="flex items-center gap-x-3 bg-white/5 px-4 py-3 rounded-2xl"><i class="fa-solid fa-compress-arrows-alt w-4"></i> <span>Synthesizer &amp; Arbitre</span></div>
+                </div>
+                <div class="mt-6 text-xs text-emerald-300/70">+ Tool Registry extensible (recherche risques réglementaires, calcul impact KI, etc.)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFRE COMMERCIALE -->
+    <section id="offre" class="max-w-screen-2xl mx-auto px-8 py-20 animate-on-scroll">
+        <div class="max-w-2xl mb-12">
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">OFFRE DÉDIÉE AUX ENTREPRISES</div>
+            <h2 class="section-header tracking-tighter">Équipez vos équipes stratégie et innovation<br>d’un atelier d’idéation de nouvelle génération.</h2>
+            <p class="mt-4 text-lg text-slate-600">KayrosLab s’adresse aux directions générales, comités de direction, équipes stratégie/innovation, risk management et transformation digitale des entreprises de taille intermédiaire à grande.</p>
+        </div>
+
+        <!-- Pricing Tiers -->
+        <div class="grid lg:grid-cols-3 gap-6 mb-16 stagger-children">
+            
+            <!-- Tier 1: Essentiel / Pilote -->
+            <div class="pricing-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div>
+                    <div class="text-xs font-semibold tracking-wider text-slate-500">EARLY ACCESS</div>
+                    <h4 class="text-3xl font-semibold mt-1">Essentiel</h4>
+                    <p class="text-sm text-slate-500 mt-1">Pour tester et valider le modèle sur vos premiers cas d’usage stratégiques.</p>
+                </div>
+                
+                <div class="my-8">
+                    <div class="flex items-baseline">
+                        <span class="text-5xl font-semibold tracking-tighter">4 900</span>
+                        <span class="text-xl text-slate-400 ml-1.5">€ HT</span>
+                    </div>
+                    <div class="text-xs text-emerald-600 font-medium">Setup one-time + 6 mois d’accès inclus</div>
+                    <div class="text-xs text-slate-500 mt-1">ou 890 € / mois en abonnement</div>
+                </div>
+                
+                <ul class="space-y-3 text-sm flex-1 mb-8">
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Accès complet au prototype standalone + mises à jour</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Workflow cyclique 6 étapes + agents spécialisés</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Exports PDF, Gantt, KI Radar</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Support email prioritaire + onboarding 2h</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Jusqu’à 3 workspaces stratégiques simultanés</span></li>
+                    <li class="flex gap-x-3 text-slate-400"><i class="fa-solid fa-check mt-1 opacity-40"></i> <span>Mode souverain local (Ollama) – beta</span></li>
+                </ul>
+                
+                <a href="#contact" class="mt-auto block text-center py-3.5 rounded-2xl border border-slate-300 hover:bg-slate-50 font-semibold text-sm transition-all">Commencer un pilote</a>
+            </div>
+            
+            <!-- Tier 2: Professionnel -->
+            <div class="pricing-card popular bg-white border-2 border-sky-500 rounded-3xl p-8 flex flex-col shadow-xl relative">
+                <div class="absolute -top-3 right-6 bg-sky-500 text-white text-[10px] font-bold px-4 py-1 rounded-full tracking-widest">RECOMMANDÉ</div>
+                
+                <div>
+                    <div class="text-xs font-semibold tracking-wider text-sky-600">PRODUCTION READY</div>
+                    <h4 class="text-3xl font-semibold mt-1">Professionnel</h4>
+                    <p class="text-sm text-slate-500 mt-1">Pour les équipes qui veulent industrialiser l’idéation stratégique avec gouvernance.</p>
+                </div>
+                
+                <div class="my-8">
+                    <div class="flex items-baseline">
+                        <span class="text-5xl font-semibold tracking-tighter">18 500</span>
+                        <span class="text-xl text-slate-400 ml-1.5">€ HT / an</span>
+                    </div>
+                    <div class="text-xs text-emerald-600 font-medium">ou 1 650 € / mois • 10-25 utilisateurs</div>
+                </div>
+                
+                <ul class="space-y-3 text-sm flex-1 mb-8">
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Tout du niveau Essentiel +</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Multi-utilisateurs collaboratif + Working Groups</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Mémoire vectorielle persistante + multi-idées</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Intégrations de base (Slack / Teams / Notion)</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Déploiement souverain local (P1) ou cloud privé</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Formation équipe (1 jour) + certification facilitateurs</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Support prioritaire + SLA 99.5%</span></li>
+                </ul>
+                
+                <a href="#contact" class="mt-auto block text-center py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm transition-all">Choisir Professionnel</a>
+            </div>
+            
+            <!-- Tier 3: Entreprise -->
+            <div class="pricing-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
+                <div>
+                    <div class="text-xs font-semibold tracking-wider text-slate-500">GOUVERNANCE &amp; ÉCHELLE</div>
+                    <h4 class="text-3xl font-semibold mt-1">Entreprise</h4>
+                    <p class="text-sm text-slate-500 mt-1">Pour les grandes organisations et les cas d’usage critiques nécessitant auditabilité maximale et customisation.</p>
+                </div>
+                
+                <div class="my-8">
+                    <div class="text-3xl font-semibold tracking-tighter">Sur devis</div>
+                    <div class="text-xs text-emerald-600 font-medium">À partir de 45 000 € HT / an</div>
+                </div>
+                
+                <ul class="space-y-3 text-sm flex-1 mb-8">
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Tout du niveau Professionnel +</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>RBAC complet, SSO (SAML/OIDC), audit logs exportables</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Compliance pack (RGPD, NIS2, DORA ready)</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Agents &amp; outils métier custom (Tool Registry avancé)</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>White-label possible + branding interne</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Ateliers stratégiques facilités par l’équipe KayrosLab (inclus)</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Support dédié + Customer Success Manager + SLA premium</span></li>
+                    <li class="flex gap-x-3"><i class="fa-solid fa-check feature-check mt-1"></i> <span>Siège au comité de pilotage produit &amp; influence roadmap</span></li>
+                </ul>
+                
+                <a href="#contact" class="mt-auto block text-center py-3.5 rounded-2xl border border-slate-900 hover:bg-slate-900 hover:text-white font-semibold text-sm transition-all">Demander un devis sur mesure</a>
+            </div>
+        </div>
+
+        <!-- Services additionnels -->
+        <div class="bg-slate-900 text-white rounded-3xl p-10">
+            <div class="flex flex-col lg:flex-row gap-y-8 lg:items-center justify-between mb-8">
+                <div>
+                    <div class="text-emerald-400 text-xs tracking-[2px] font-semibold">SERVICES COMPLÉMENTAIRES</div>
+                    <h4 class="text-3xl font-semibold tracking-tighter">Accélérez l’adoption et maximisez l’impact</h4>
+                </div>
+                <a href="#contact" class="text-sm font-semibold underline decoration-white/30 hover:decoration-white">Voir tous les services →</a>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 text-sm">
+                <div class="bg-white/5 p-5 rounded-2xl">
+                    <i class="fa-solid fa-users-gear text-emerald-400 text-xl mb-3"></i>
+                    <div class="font-semibold mb-1">Ateliers stratégiques facilités</div>
+                    <div class="text-xs text-white/70">Sessions de 1 à 3 jours animées par nos facilitateurs certifiés. Du signal à la décision arbitrée.</div>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl">
+                    <i class="fa-solid fa-graduation-cap text-emerald-400 text-xl mb-3"></i>
+                    <div class="font-semibold mb-1">Formation &amp; Enablement</div>
+                    <div class="text-xs text-white/70">"Agentic Ideation Masterclass" – 2 jours pour former vos équipes à animer des ateliers gouvernés.</div>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl">
+                    <i class="fa-solid fa-plug text-emerald-400 text-xl mb-3"></i>
+                    <div class="font-semibold mb-1">Intégration &amp; Connecteurs</div>
+                    <div class="text-xs text-white/70">API gouvernée, connecteurs vers vos outils internes, data lake, ou systèmes de veille.</div>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl">
+                    <i class="fa-solid fa-cogs text-emerald-400 text-xl mb-3"></i>
+                    <div class="font-semibold mb-1">Customisation &amp; Co-développement</div>
+                    <div class="text-xs text-white/70">Développement d’agents spécifiques à votre secteur (immobilier, énergie, finance, santé…).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BÉNÉFICES -->
+    <section id="benefices" class="max-w-screen-2xl mx-auto px-8 py-16 border-t border-slate-200 bg-white">
+        <div class="max-w-3xl mb-10">
+            <h2 class="section-header tracking-tighter">Ce que vos équipes gagnent concrètement.</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="p-7 border border-slate-100 rounded-3xl">
+                <div class="text-emerald-500 text-xs font-bold tracking-widest mb-2">ACCÉLÉRATION</div>
+                <h5 class="font-semibold text-xl mb-3">Décisions stratégiques 3 à 5× plus rapides</h5>
+                <p class="text-sm text-slate-600">Passez d’ateliers dispersés sur plusieurs semaines à des sessions structurées et documentées en quelques jours, avec un niveau de robustesse équivalent ou supérieur aux méthodes de cabinets de conseil.</p>
+            </div>
+            <div class="p-7 border border-slate-100 rounded-3xl">
+                <div class="text-emerald-500 text-xs font-bold tracking-widest mb-2">GOUVERNANCE &amp; RISQUE</div>
+                <h5 class="font-semibold text-xl mb-3">Décisions auditables et défiables</h5>
+                <p class="text-sm text-slate-600">Traçabilité complète, scoring objectif (KI), Red Team systématique et veto humain formalisé. Idéal pour les comités de direction, les conseils d’administration et les secteurs régulés.</p>
+            </div>
+            <div class="p-7 border border-slate-100 rounded-3xl">
+                <div class="text-emerald-500 text-xs font-bold tracking-widest mb-2">SOUVERAINETÉ &amp; COÛTS</div>
+                <h5 class="font-semibold text-xl mb-3">Maîtrise totale de vos données et de vos coûts</h5>
+                <p class="text-sm text-slate-600">Mode déploiement souverain local (Ollama + Qdrant) : vos signaux stratégiques ne quittent jamais vos infrastructures. Contrôle des coûts LLM et indépendance vis-à-vis des hyperscalers.</p>
+            </div>
+        </div>
+        
+        <div class="mt-10 text-center text-sm text-slate-500 max-w-lg mx-auto">
+            KayrosLab ne remplace pas vos experts ni vos processus existants. Il les <strong>augmente</strong> avec une structure, une mémoire et une puissance de challenge que les méthodes traditionnelles ne peuvent égaler à cette échelle.
+        </div>
+    </section>
+
+    <!-- BUSINESS CASES -->
+    <section id="business-cases" class="max-w-screen-2xl mx-auto px-8 py-16 border-t border-slate-200 bg-slate-50 animate-on-scroll">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="uppercase text-emerald-600 text-xs tracking-[3px] font-semibold mb-2">CAS D’USAGE CONCRETS</div>
+                <h2 class="text-3xl font-semibold tracking-tighter">Business Cases détaillés</h2>
+                <p class="text-slate-600 mt-3 max-w-2xl mx-auto">Comment KayrosLab transforme des problématiques stratégiques réelles en décisions structurées, auditables et souveraines.</p>
+            </div>
+
+            <div class="space-y-8">
+
+                <!-- Business Case 1 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl font-bold">01</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h3 class="text-xl font-semibold">Diversification stratégique d’un industriel</h3>
+                                <span class="text-xs px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full font-medium">Industrie / Énergie</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Une ETI industrielle (CA 180 M€) souhaite explorer de nouveaux marchés adjacents face à la saturation de son cœur de métier. Le CODIR dispose de signaux faibles, d’études externes et d’idées internes, mais peine à structurer un arbitrage clair entre 7 options concurrentes.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Défi principal</div>
+                                    <p class="text-slate-600">Éviter le biais de confirmation, comparer objectivement les options et produire un dossier de décision défendable devant le Conseil d’Administration.</p>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Apport KayrosLab</div>
+                                    <p class="text-slate-600">Atelier 6 étapes en 4–5 jours. Scoring multi-critères (Kayros Index), Red Team systématique, projection de trajectoire + KPIs de suivi, et livrable PDF + Gantt prêts pour le CA.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-500">
+                                <span><i class="fa-solid fa-clock mr-1.5 text-emerald-500"></i>Durée : 3–5 jours</span>
+                                <span><i class="fa-solid fa-users mr-1.5 text-emerald-500"></i>Participants : CODIR + 2 experts métier</span>
+                                <span><i class="fa-solid fa-file-lines mr-1.5 text-emerald-500"></i>Livrables : Rapport KI, Gantt, synthèse exécutive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Case 2 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center text-xl font-bold">02</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h3 class="text-xl font-semibold">Préparation à la conformité NIS2 / DORA</h3>
+                                <span class="text-xs px-2.5 py-1 bg-violet-50 text-violet-700 rounded-full font-medium">Finance / Assurance</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Une banque régionale et une mutuelle doivent prioriser leurs investissements de résilience cyber et opérationnelle face aux exigences NIS2 et DORA. Les équipes techniques et métiers ont des visions divergentes sur les priorités et le niveau de risque acceptable.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Défi principal</div>
+                                    <p class="text-slate-600">Transformer une contrainte réglementaire en plan d’action priorisé, partagé et traçable, sans bloquer l’innovation ni exploser les budgets.</p>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Apport KayrosLab</div>
+                                    <p class="text-slate-600">Cartographie des exigences → scénarios de risque → scoring d’impact × effort. Human Gates formalisés pour les arbitrages budgétaires. Timeline d’audit complète pour les régulateurs.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-500">
+                                <span><i class="fa-solid fa-clock mr-1.5 text-emerald-500"></i>Durée : 5–7 jours</span>
+                                <span><i class="fa-solid fa-users mr-1.5 text-emerald-500"></i>Participants : RSSI, DSI, Risk, Métiers</span>
+                                <span><i class="fa-solid fa-file-lines mr-1.5 text-emerald-500"></i>Livrables : Matrice de priorisation, plan de conformité, journal d’arbitrage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Case 3 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold">03</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h3 class="text-xl font-semibold">Lancement d’une offre IA souveraine</h3>
+                                <span class="text-xs px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full font-medium">Tech / SaaS B2B</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Une scale-up européenne souhaite positionner une offre d’IA générative « souveraineté + confidentialité » face aux solutions américaines. Elle doit clarifier son positionnement, ses cas d’usage prioritaires et sa différenciation technique avant un tour de table.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Défi principal</div>
+                                    <p class="text-slate-600">Passer d’une intuition produit forte à un positionnement marché clair, testé et défendable auprès d’investisseurs et de premiers clients grands comptes.</p>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Apport KayrosLab</div>
+                                    <p class="text-slate-600">Exploration multi-agents des segments, stress-test concurrentiel (Red Team), scoring de différenciation, et construction d’un narrative stratégique cohérent prêt pour le pitch.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-500">
+                                <span><i class="fa-solid fa-clock mr-1.5 text-emerald-500"></i>Durée : 4 jours</span>
+                                <span><i class="fa-solid fa-users mr-1.5 text-emerald-500"></i>Participants : Founders + Product + Sales</span>
+                                <span><i class="fa-solid fa-file-lines mr-1.5 text-emerald-500"></i>Livrables : Positionnement, ICP priorisés, argumentaire concurrentiel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Case 4 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">04</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h3 class="text-xl font-semibold">Arbitrage d’un portefeuille d’innovation</h3>
+                                <span class="text-xs px-2.5 py-1 bg-amber-50 text-amber-700 rounded-full font-medium">Grande Entreprise / R&amp;D</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Un groupe industriel gère 40+ projets d’innovation en parallèle. Les budgets sont sous pression et le COMEX demande une rationalisation claire : quels projets arrêter, accélérer ou pivoter ?
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Défi principal</div>
+                                    <p class="text-slate-600">Décider de façon transparente et documentée, sans créer de guerre politique interne, tout en protégeant les signaux stratégiques sensibles.</p>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Apport KayrosLab</div>
+                                    <p class="text-slate-600">Scoring homogène de tous les projets (KI), confrontation multi-agents, gates humains formalisés, et génération automatique d’un tableau de bord décisionnel pour le COMEX. Mode souverain local pour ne jamais exposer les données R&amp;D.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-500">
+                                <span><i class="fa-solid fa-clock mr-1.5 text-emerald-500"></i>Durée : 7–10 jours</span>
+                                <span><i class="fa-solid fa-users mr-1.5 text-emerald-500"></i>Participants : Innovation, Finance, Business Units</span>
+                                <span><i class="fa-solid fa-file-lines mr-1.5 text-emerald-500"></i>Livrables : Ranking KI, recommandations d’arbitrage, journal de décision</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Case 5 -->
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold">05</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h3 class="text-xl font-semibold">Stratégie de sortie / Build-up pour un fonds</h3>
+                                <span class="text-xs px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full font-medium">Private Equity / M&amp;A</span>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Un fonds de private equity prépare la cession ou le build-up d’une participation. Il doit identifier rapidement les axes de création de valeur les plus crédibles et les risques cachés avant de lancer le processus formel.
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Défi principal</div>
+                                    <p class="text-slate-600">Produire une analyse stratégique profonde, multi-scénarios et défendable, dans un délai très court, tout en gardant une confidentialité absolue.</p>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-slate-800 mb-1">Apport KayrosLab</div>
+                                    <p class="text-slate-600">Atelier intensif en mode souverain. Exploration de scénarios de valeur, Red Team des hypothèses de croissance, scoring des options, et production d’un dossier de décision prêt pour le comité d’investissement.</p>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-500">
+                                <span><i class="fa-solid fa-clock mr-1.5 text-emerald-500"></i>Durée : 3–4 jours intensifs</span>
+                                <span><i class="fa-solid fa-users mr-1.5 text-emerald-500"></i>Participants : Deal Team + Management</span>
+                                <span><i class="fa-solid fa-file-lines mr-1.5 text-emerald-500"></i>Livrables : Scénarios de valeur, risques prioritaires, recommandation d’arbitrage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto">
+                    Chaque business case peut être adapté à votre contexte. Nous pouvons co-construire un atelier sur-mesure à partir de vos signaux stratégiques réels.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJETS EN COURS -->
+    <section id="projets" class="max-w-screen-2xl mx-auto px-8 py-16 border-t border-slate-200 bg-white animate-on-scroll">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <div class="uppercase text-emerald-600 text-xs tracking-[3px] font-semibold mb-2">ÉCOSYSTÈME KAYROSLAB</div>
+                <h2 class="text-3xl font-semibold tracking-tighter">Projets en cours</h2>
+                <p class="text-slate-600 mt-2 max-w-md mx-auto">Des initiatives concrètes portées par KayrosLab pour transformer des secteurs clés.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 stagger-children">
+                
+                <!-- OpenDPE -->
+                <div class="project-card border border-slate-200 rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-xl">OpenDPE</h3>
+                        <a href="https://www.opendpe.net/" target="_blank" 
+                           class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200">Site web →</a>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Simulateur DPE avancé pour les professionnels de l’immobilier. Permet de projeter la performance énergétique, d’estimer les travaux de rénovation et d’accélérer les décisions.
+                    </p>
+                    <div class="mt-4 text-xs">
+                        <a href="https://github.com/Geoking2104/openDPE" target="_blank" class="text-emerald-600 hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Filenymous -->
+                <div class="border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-xl">Filenymous</h3>
+                        <a href="https://filenymous.eu/" target="_blank" rel="noopener noreferrer" 
+                           class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200">Site web →</a>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Transferts de fichiers P2P chiffrés localement (AES-256). Aucune donnée ne passe par des serveurs centraux. Idéal pour les échanges confidentiels sans compte ni traçabilité.
+                    </p>
+                    <div class="mt-4 text-xs">
+                        <a href="https://github.com/Geoking2104/Filenymous" target="_blank" class="text-emerald-600 hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+
+                <!-- AInonymous -->
+                <div class="border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-xl">AInonymous</h3>
+                        <a href="https://geoking2104.github.io/autonymous.me/" target="_blank" rel="noopener noreferrer" 
+                           class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200">Site web →</a>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Plateforme d’inférence IA souveraine et décentralisée. Conçue pour les environnements exigeant un contrôle total des données et de l’exécution.
+                    </p>
+                    <div class="mt-4 text-xs">
+                        <a href="https://github.com/Geoking2104/AInonymous" target="_blank" class="text-emerald-600 hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Qinode -->
+                <div class="border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-xl">Qinode</h3>
+                        <a href="https://geoking2104.github.io/Qinode/" target="_blank" rel="noopener noreferrer" 
+                           class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200">Site web →</a>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Plateforme d’énergie P2P et tokenisation. Permet de créer des communautés énergétiques locales et de valoriser les surplus de production.
+                    </p>
+                    <div class="mt-4 text-xs">
+                        <a href="https://github.com/Geoking2104/Qinode" target="_blank" class="text-emerald-600 hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+
+                <!-- GarageVault -->
+                <div class="border border-slate-200 rounded-3xl p-6 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-xl">GarageVault</h3>
+                        <a href="https://geoking2104.github.io/GarageVault/" target="_blank" rel="noopener noreferrer" 
+                           class="text-xs px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full hover:bg-emerald-200">Demo →</a>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Outil de retrofit et de personnalisation automobile (Mini Countryman). Intègre des fonctionnalités modernes tout en préservant l’esprit du véhicule.
+                    </p>
+                    <div class="mt-4 text-xs">
+                        <a href="https://github.com/Geoking2104/GarageVault" target="_blank" class="text-emerald-600 hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL + CONTACT FORM -->
+    <section id="contact" class="max-w-screen-2xl mx-auto px-8 py-16 animate-on-scroll">
+        <div class="bg-slate-900 rounded-3xl px-10 py-14 text-white">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-10">
+                    <h3 class="text-4xl font-semibold tracking-tighter mb-4">Prêt à transformer<br>votre approche de la stratégie ?</h3>
+                    <p class="text-slate-300">Réservez une démonstration personnalisée de 45 minutes ou contactez directement l’équipe.</p>
+                </div>
+
+                <!-- Contact Form (email invisible) -->
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-white/80 mb-1.5">Votre nom</label>
+                            <input type="text" name="name" required
+                                   class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-white/80 mb-1.5">Votre email</label>
+                            <input type="email" name="email" required
+                                   class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white/80 mb-1.5">Objet</label>
+                        <select name="subject" required
+                                class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-emerald-400">
+                            <option value="">Choisissez un objet</option>
+                            <option value="Demande de démo personnalisée">Demande de démo personnalisée</option>
+                            <option value="Question sur l'offre Entreprise">Question sur l'offre Entreprise</option>
+                            <option value="Partenariat / Intégration">Partenariat / Intégration</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white/80 mb-1.5">Votre message</label>
+                        <textarea name="message" rows="5" required
+                                  class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400"
+                                  placeholder="Décrivez votre besoin ou votre cas d'usage..."></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                                class="w-full md:w-auto inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-10 h-14 rounded-3xl font-semibold active:scale-[0.985]">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>
+                            Envoyer le message
+                        </button>
+                        <p class="text-xs text-white/40 mt-3 text-center md:text-left">
+                            Votre message est envoyé de manière sécurisée. Votre adresse email reste confidentielle.
+                        </p>
+                    </div>
+                </form>
+
+                <div class="mt-10 text-center text-xs text-white/50">
+                    Vous pouvez aussi nous contacter directement :<br>
+                    <span class="font-mono">+33 6 69 28 29 16</span> • 
+                    <a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="underline hover:text-white">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200 py-8 text-xs text-slate-500">
+        <div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-y-3">
+            <div>
+                © 2026 KayrosLab. Tous droits réservés. Prototype en évolution active (v5 – Intégration LLM réelle en cours).
+            </div>
+            <div class="flex gap-x-5">
+                <a href="https://github.com/Geoking2104/KayrosLab" target="_blank" class="hover:text-slate-700">GitHub (open elements)</a>
+                <span>•</span>
+                <a href="#" onclick="showLegalModal(); return false;" class="hover:text-slate-700">Mentions légales</a>
+                <span>•</span>
+                <a href="#" onclick="showSovereigntyModal(); return false;" class="hover:text-slate-700">Confidentialité &amp; Souveraineté</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="modal-backdrop hidden fixed inset-0 bg-black/70 items-center justify-center z-[100]">
+        <div class="modal-content bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900">Mentions légales</h2>
+                    <button onclick="hideLegalModal()" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+                </div>
+
+                <div class="prose prose-sm text-slate-700 space-y-6">
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Éditeur du site</h3>
+                        <p>KayrosLab<br>
+                        Représenté par Geoffroy de La Tournelle, Founder &amp; Director<br>
+                        SIRET : [à compléter]<br>
+                        Email : <a href="mailto:geoffroydelatournelle@gmail.com" class="text-sky-600">geoffroydelatournelle@gmail.com</a><br>
+                        Téléphone : +33 6 69 28 29 16</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Hébergement</h3>
+                        <p>Ce site est hébergé par [Nom de l'hébergeur]<br>
+                        Adresse de l'hébergeur<br>
+                        [Compléter avec les informations de l'hébergeur]</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Propriété intellectuelle</h3>
+                        <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Responsabilité</h3>
+                        <p>Les informations contenues sur ce site sont aussi précises que possible. Toutefois, KayrosLab ne saurait être tenu responsable des omissions, des inexactitudes ou des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Protection des données et RGPD</h3>
+                        <p>Conformément au Règlement (UE) 2016/679 (RGPD) et à la loi Informatique et Libertés, KayrosLab s'engage à protéger les données personnelles de ses utilisateurs.</p>
+                        
+                        <p class="mt-2">Vous disposez des droits suivants :</p>
+                        <ul class="list-disc pl-5 mt-1 space-y-1">
+                            <li>Droit d'accès à vos données</li>
+                            <li>Droit de rectification</li>
+                            <li>Droit à l'effacement (« droit à l'oubli »)</li>
+                            <li>Droit à la limitation du traitement</li>
+                            <li>Droit à la portabilité des données</li>
+                            <li>Droit d'opposition au traitement</li>
+                            <li>Droit de retirer votre consentement à tout moment</li>
+                        </ul>
+                        
+                        <p class="mt-3">Pour exercer ces droits ou pour toute question relative à la protection de vos données, vous pouvez nous contacter à l'adresse : <strong>geoffroydelatournelle@gmail.com</strong>.</p>
+                        
+                        <p class="mt-2 text-xs text-slate-500">Vous avez également le droit d'introduire une réclamation auprès de la CNIL (www.cnil.fr).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t px-8 py-4 flex justify-end">
+                <button onclick="hideLegalModal()" 
+                        class="px-6 py-2 rounded-2xl border border-slate-300 hover:bg-slate-50 text-sm font-medium">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sovereignty & Confidentiality Modal -->
+    <div id="sovereignty-modal" class="modal-backdrop hidden fixed inset-0 bg-black/70 items-center justify-center z-[100]">
+        <div class="modal-content bg-white rounded-3xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900">Confidentialité &amp; Souveraineté des données</h2>
+                    <button onclick="hideSovereigntyModal()" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+                </div>
+
+                <div class="prose prose-sm text-slate-700 space-y-6">
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Engagement de souveraineté</h3>
+                        <p>KayrosLab a été conçu dès l’origine avec une exigence forte de souveraineté numérique. Nous proposons plusieurs modes de déploiement permettant de garder le contrôle total sur vos données stratégiques.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Modes de déploiement souverains</h3>
+                        <div class="overflow-x-auto mt-3">
+                            <table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+                                <thead class="bg-slate-100">
+                                    <tr>
+                                        <th class="text-left px-4 py-3 font-semibold">Mode</th>
+                                        <th class="text-left px-4 py-3 font-semibold">Description</th>
+                                        <th class="text-center px-3 py-3 font-semibold">Souveraineté</th>
+                                        <th class="text-center px-3 py-3 font-semibold">Scalabilité</th>
+                                        <th class="text-left px-4 py-3 font-semibold">Idéal pour</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-xs">
+                                    <tr>
+                                        <td class="px-4 py-3 font-medium">P0 Standalone</td>
+                                        <td class="px-4 py-3">Fichier HTML unique, fonctionnement hors-ligne</td>
+                                        <td class="px-3 py-3 text-center"><span class="inline-block bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px]">Très élevée</span></td>
+                                        <td class="px-3 py-3 text-center text-slate-500">Faible</td>
+                                        <td class="px-4 py-3">Démo, prototypage, usage individuel</td>
+                                    </tr>
+                                    <tr class="bg-emerald-50/50">
+                                        <td class="px-4 py-3 font-medium">P1 Local</td>
+                                        <td class="px-4 py-3">Application locale + Ollama + Qdrant (auto-hébergé)</td>
+                                        <td class="px-3 py-3 text-center"><span class="inline-block bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-medium">Élevée</span></td>
+                                        <td class="px-3 py-3 text-center">Moyenne</td>
+                                        <td class="px-4 py-3">Usage interne souverain, équipes restreintes</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 font-medium">P2 Cloud</td>
+                                        <td class="px-4 py-3">Frontend + Backend gouverné + Vector Store managé</td>
+                                        <td class="px-3 py-3 text-center"><span class="inline-block bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px]">Moyenne</span></td>
+                                        <td class="px-3 py-3 text-center"><span class="text-emerald-600 font-medium">Élevée</span></td>
+                                        <td class="px-4 py-3">Entreprises, déploiements multi-utilisateurs</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Recommandations selon la taille de votre organisation</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                            
+                            <!-- Petite structure -->
+                            <div class="border border-slate-200 rounded-2xl p-4">
+                                <div class="font-semibold text-sky-700 mb-1">Petites structures / Indépendants</div>
+                                <div class="text-xs text-slate-600 mb-2">1 à 10 personnes</div>
+                                <div class="text-sm">→ <strong>Mode P0 Standalone</strong><br>
+                                Idéal pour tester, prototyper et utiliser en solo ou en petite équipe sans infrastructure complexe.</div>
+                            </div>
+
+                            <!-- ETI / PME -->
+                            <div class="border border-emerald-300 bg-emerald-50/50 rounded-2xl p-4">
+                                <div class="font-semibold text-emerald-700 mb-1">ETI / PME</div>
+                                <div class="text-xs text-emerald-600 mb-2">10 à 250 personnes</div>
+                                <div class="text-sm">→ <strong>Mode P1 Local</strong> (recommandé)<br>
+                                Meilleur équilibre entre souveraineté forte et facilité d’utilisation pour des équipes structurées.</div>
+                            </div>
+
+                            <!-- Grandes entreprises -->
+                            <div class="border border-slate-200 rounded-2xl p-4">
+                                <div class="font-semibold text-amber-700 mb-1">Grandes entreprises / Groupes</div>
+                                <div class="text-xs text-amber-600 mb-2">+ 250 personnes</div>
+                                <div class="text-sm">→ <strong>Mode P2 Cloud</strong><br>
+                                Déploiement gouverné avec SSO, RBAC, audit logs et scalabilité pour un usage à grande échelle.</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Zéro transfert de données</h3>
+                        <p>En mode souverain local, <strong>aucune donnée</strong> (signaux stratégiques, idées, décisions, embeddings) n’est envoyée vers des serveurs tiers, des modèles cloud ou des infrastructures étrangères.</p>
+                        <p class="mt-2">Vos données stratégiques restent <strong>exclusivement dans votre infrastructure</strong> et ne sont exploitées que par votre organisation.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Protection et conformité</h3>
+                        <p>Notre architecture est conçue pour faciliter la mise en conformité avec :</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Le RGPD</li>
+                            <li>La certification HDS (Hébergeur de Données de Santé)</li>
+                            <li>Le European Health Data Space (EHDS)</li>
+                            <li>Les normes ISO 27001, 27701 et 42001</li>
+                            <li>Les exigences NIS2 et DORA</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Contact</h3>
+                        <p>Pour toute question relative à la souveraineté ou à la protection de vos données, contactez-nous à : <strong>geoffroydelatournelle@gmail.com</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t px-8 py-4 flex justify-end">
+                <button onclick="hideSovereigntyModal()" 
+                        class="px-6 py-2 rounded-2xl border border-slate-300 hover:bg-slate-50 text-sm font-medium">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSovereigntyModal() {
+            document.getElementById('sovereignty-modal').classList.remove('hidden');
+            document.getElementById('sovereignty-modal').classList.add('flex');
+        }
+        
+        function hideSovereigntyModal() {
+            document.getElementById('sovereignty-modal').classList.remove('flex');
+            document.getElementById('sovereignty-modal').classList.add('hidden');
+        }
+        
+        // Close sovereignty modal when clicking outside
+        document.getElementById('sovereignty-modal').addEventListener('click', function(e) {
+            if (e.target.id === 'sovereignty-modal') {
+                hideSovereigntyModal();
+            }
+        });
+        
+        function showLegalModal() {
+            document.getElementById('legal-modal').classList.remove('hidden');
+            document.getElementById('legal-modal').classList.add('flex');
+        }
+        
+        function hideLegalModal() {
+            document.getElementById('legal-modal').classList.remove('flex');
+            document.getElementById('legal-modal').classList.add('hidden');
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('legal-modal').addEventListener('click', function(e) {
+            if (e.target.id === 'legal-modal') {
+                hideLegalModal();
+            }
+        });
+        
+        // Tailwind script + Animations
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#0ea5e9');
+            
+            // Nav scroll effect
+            const nav = document.getElementById('nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    nav.classList.add('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
+                } else {
+                    nav.classList.remove('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
+                }
+            });
+            
+            // Burger menu with smoother handling
+            const burgerBtn = document.getElementById('burger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const burgerIcon = document.getElementById('burger-icon');
+            
+            if (burgerBtn && mobileMenu) {
+                burgerBtn.addEventListener('click', () => {
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    
+                    if (isHidden) {
+                        mobileMenu.classList.remove('hidden');
+                        // Force reflow then allow transition
+                        requestAnimationFrame(() => {
+                            mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                            mobileMenu.style.opacity = '1';
+                        });
+                        burgerIcon.classList.remove('fa-bars');
+                        burgerIcon.classList.add('fa-xmark');
+                    } else {
+                        mobileMenu.style.maxHeight = '0';
+                        mobileMenu.style.opacity = '0';
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 350);
+                        burgerIcon.classList.remove('fa-xmark');
+                        burgerIcon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.style.maxHeight = '0';
+                        mobileMenu.style.opacity = '0';
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
+                        burgerIcon.classList.remove('fa-xmark');
+                        burgerIcon.classList.add('fa-bars');
+                    });
+                });
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // ===== SCROLL ANIMATIONS (Intersection Observer) =====
+            const observerOptions = {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: unobserve after first animation for performance
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animation classes
+            document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(el => {
+                observer.observe(el);
+            });
+            
+            console.log('%c[KayrosLab] Offre commerciale + animations fluides chargée.', 'color:#10b981');
+        }
+        
+        window.onload = initializeTailwind;
+    </script>
+</body>
+</html>
