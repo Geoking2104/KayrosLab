@@ -694,6 +694,18 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | Reporting | 84–87 | 4 | 0 | 0 |
 | **Total** | **42** | **39** | **3** | **0** |
 
+### 13.12 Connecteurs conversationnels (EF-88 → EF-109)
+
+Les exigences **EF-88 à EF-109** couvrent l'intégration Slack / Teams / Discord et sont spécifiées dans un document dédié : **[SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md)**.
+
+**Principe directeur.** Le connecteur n'est pas une boîte à idées déportée (modèle Brightidea, centré capture) mais une **salle d'arbitrage dans le canal** : le censeur approuve, révise ou refuse avec motif sans ouvrir l'application, et la décision reste aussi tracée et contraignante qu'en back-office.
+
+**Préalable non négociable.** Le rôle et le tenant proviennent du **compte KayrosLab lié**, jamais du chat : sans cela, le droit de veto deviendrait cliquable par n'importe quel membre du canal.
+
+Statut : 🔴 à construire (22 exigences). Dépend du déploiement P2.
+
+---
+
 **Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
 
 ---
