@@ -742,3 +742,55 @@ test('auth : limitation des tentatives (anti-bruteforce)', async () => {
   const ok = await auth.login({ email: 'b@x.com', password: 'motdepasse-solide-2026' });
   assert.ok(ok.token);
 });
+
+test('auth : persistance des utilisateurs (survie au redemarrage, ecriture atomique)', async () => {
+  const { FileUserStore, AuthService } = await import('./auth.mjs');
+  // Faux systeme de fichiers : evite toute E/S disque dans les tests.
+  const disque = new Map(); const ecritures = [];
+  const fakeFs = {
+    async readFile(p) { if (!disque.has(p)) { const e = new Error('ENOENT'); e.code = 'ENOENT'; throw e; } return disque.get(p); },
+    async writeFile(p, data, opts) { ecritures.push({ p, mode: opts?.mode }); disque.set(p, data); },
+    async rename(a, b) { disque.set(b, disque.get(a)); disque.delete(a); },
+    async chmod() {},
+  };
+  const path = '/var/kayros/users.json';
+
+  const store1 = new FileUserStore({ path, fs: fakeFs });
+  await store1.load();
+  const auth1 = new AuthService({ users: store1, secret: 'secret-de-test-uniquement' });
+  await auth1.register({ email: 'p@x.com', password: 'motdepasse-solide-2026', role: 'comex', tenantId: 'acme' });
+
+  // ecriture atomique : on ecrit dans .tmp puis on renomme
+  assert.ok(ecritures.some((e) => e.p.endsWith('.tmp')));
+  assert.equal(ecritures[0].mode, 0o600);            // permissions restreintes
+  assert.ok(disque.has(path) && !disque.has(`${path}.tmp`));
+
+  // "redemarrage" : nouveau magasin, meme fichier
+  const store2 = new FileUserStore({ path, fs: fakeFs });
+  await store2.load();
+  const auth2 = new AuthService({ users: store2, secret: 'secret-de-test-uniquement' });
+  const { user } = await auth2.login({ email: 'p@x.com', password: 'motdepasse-solide-2026' });
+  assert.equal(user.role, 'comex');
+  assert.equal(user.tenantId, 'acme');
+
+  // le fichier ne contient pas le mot de passe en clair
+  assert.ok(!disque.get(path).includes('motdepasse-solide-2026'));
+});
+
+test('auth : rotation de mot de passe + invalidation des sessions', async () => {
+  const { InMemoryUserStore, AuthService, hashPassword } = await import('./auth.mjs');
+  const store = new InMemoryUserStore();
+  const auth = new AuthService({ users: store, secret: 'secret-de-test-uniquement' });
+  const u = await auth.register({ email: 'rot@x.com', password: 'ancien-mot-de-passe-2026' });
+  const { token: ancien } = await auth.login({ email: 'rot@x.com', password: 'ancien-mot-de-passe-2026' });
+
+  // rotation : nouvelle empreinte + revocation globale
+  const cible = await store.findById(u.id);
+  cible.passwordHash = await hashPassword('nouveau-mot-de-passe-2026');
+  auth.revokeAllSessions(u.id);
+  auth.sessions.revokeAllForUser(u.id, Math.floor(Date.now() / 1000) + 5);
+
+  await assert.rejects(() => auth.verify(ancien), (e) => e.code === 'AUTH_REVOKED');
+  await assert.rejects(() => auth.login({ email: 'rot@x.com', password: 'ancien-mot-de-passe-2026' }));
+  assert.ok((await auth.login({ email: 'rot@x.com', password: 'nouveau-mot-de-passe-2026' })).token);
+});

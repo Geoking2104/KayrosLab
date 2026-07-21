@@ -224,3 +224,52 @@ export class SessionStore {
     return typeof nb === 'number' && typeof iat === 'number' && iat < nb;
   }
 }
+
+/**
+ * Magasin d'utilisateurs persistant (fichier JSON).
+ * Precautions : le fichier contient des EMPREINTES de mots de passe.
+ *  - ecriture ATOMIQUE (fichier temporaire + rename) : pas de fichier corrompu si crash
+ *  - permissions 0600 (proprietaire seul) sur les systemes qui les supportent
+ *  - `load()` explicite avant usage
+ */
+export class FileUserStore extends InMemoryUserStore {
+  constructor({ path, fs } = {}) {
+    super([]);
+    if (!path) throw new Error('FileUserStore: path requis');
+    this.path = path; this._fs = fs; this.loaded = false;
+  }
+  async _mod() { return this._fs ?? (await import('node:fs/promises')); }
+
+  async load() {
+    const fs = await this._mod();
+    try {
+      const arr = JSON.parse(await fs.readFile(this.path, 'utf8'));
+      this._byId = new Map(); this._byEmail = new Map();
+      for (const u of arr) this._put(u);
+    } catch { /* fichier absent = base vide */ }
+    this.loaded = true; return this;
+  }
+
+  async flush() {
+    const fs = await this._mod();
+    const tmp = `${this.path}.tmp`;
+    const data = JSON.stringify([...this._byId.values()], null, 2);
+    await fs.writeFile(tmp, data, { encoding: 'utf8', mode: 0o600 });
+    await fs.rename(tmp, this.path);                 // atomique
+    try { await fs.chmod(this.path, 0o600); } catch { /* systeme sans chmod */ }
+    return true;
+  }
+
+  async create(user) { const u = await super.create(user); await this.flush(); return u; }
+
+  /** Met a jour un utilisateur existant (ex. rotation de mot de passe). */
+  async update(id, patch = {}) {
+    const u = await this.findById(id);
+    if (!u) throw new Error('utilisateur introuvable');
+    if (patch.email && String(patch.email).toLowerCase() !== u.email) {
+      this._byEmail.delete(u.email);
+    }
+    const next = { ...u, ...patch, id: u.id, email: String(patch.email ?? u.email).toLowerCase() };
+    this._put(next); await this.flush(); return next;
+  }
+}

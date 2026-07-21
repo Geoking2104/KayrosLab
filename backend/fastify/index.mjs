@@ -6,7 +6,8 @@ import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
   evaluateKpis, alertsToSignals,
-  AuthService, InMemoryIdeaRepository, createIdea, setStage, setStatus,
+  AuthService, InMemoryUserStore, FileUserStore,
+  InMemoryIdeaRepository, FileIdeaRepository, createIdea, setStage, setStatus,
   portfolio, counts, processIntake, aggregateVotes, defaultScorecards,
 } from '../../core/index.mjs';
 
@@ -59,9 +60,21 @@ const tools = demoTools(); // registre partage (inclut simulate_trajectory / est
 // --- Authentification & portefeuille ---
 // KAYROS_AUTH_SECRET absent => les routes protegees sont desactivees (503), pas ouvertes.
 const AUTH_SECRET = process.env.KAYROS_AUTH_SECRET || '';
-const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET }) : null;
-const ideas = new InMemoryIdeaRepository();
+const USERS_FILE = process.env.KAYROS_USERS_FILE || '';
+const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
+
+// Persistance : fichier si configure, sinon memoire (perdue au redemarrage).
+const userStore = USERS_FILE ? new FileUserStore({ path: USERS_FILE }) : new InMemoryUserStore();
+if (USERS_FILE) await userStore.load();
+const ideas = IDEAS_FILE ? new FileIdeaRepository({ path: IDEAS_FILE }) : new InMemoryIdeaRepository();
+if (IDEAS_FILE) await ideas.load();
+
+const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
 const scorecards = defaultScorecards();
+
+if (AUTH_SECRET && !USERS_FILE) {
+  console.warn('[kayroslab] KAYROS_USERS_FILE non defini : les comptes seront perdus au redemarrage.');
+}
 
 /** Extrait et verifie le porteur. Leve 401/503 le cas echeant. */
 async function requireAuth(req, reply) {
