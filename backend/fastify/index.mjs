@@ -9,6 +9,8 @@ import {
   AuthService, InMemoryUserStore, FileUserStore,
   InMemoryIdeaRepository, FileIdeaRepository, createIdea, setStage, setStatus,
   portfolio, counts, processIntake, aggregateVotes, defaultScorecards,
+  emptyImpact, recordInvestment, recordBenefit, recordActual, impactReport,
+  simulateTrajectory, estimateResources,
 } from '../../core/index.mjs';
 
 const {
@@ -71,6 +73,14 @@ if (IDEAS_FILE) await ideas.load();
 
 const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
 const scorecards = defaultScorecards();
+
+// Gouvernance PARTAGEE : un gate ouvert doit rester visible par le censeur
+// entre deux requetes HTTP (sinon la file d'attente n'existe pas).
+const governance = new GovernanceService({
+  notifier: (evt) => app.log.info({ evt }, 'gate ouvert — censeur attendu'),
+});
+// Metadonnees des gates (l'idee concernee, l'agregat de vote qui instruit la decision).
+const gateMeta = new Map();
 
 if (AUTH_SECRET && !USERS_FILE) {
   console.warn('[kayroslab] KAYROS_USERS_FILE non defini : les comptes seront perdus au redemarrage.');
@@ -267,6 +277,104 @@ app.post('/v1/ideas/:id/votes', async (req, reply) => {
   const out = { ...idea, votes, updatedAt: new Date().toISOString() };
   await ideas.save(out);
   return { agregat: aggregateVotes(votes) };
+});
+
+// ---------------- Gates de gouvernance ----------------
+// Ouvre un gate d'arbitrage : l'agregat de vote INSTRUIT la decision, le veto tranche.
+app.post('/v1/ideas/:id/gates', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { type = 'validation', requiredRole = 'comex' } = req.body || {};
+  const agregat = aggregateVotes(idea.votes ?? []);
+  const { gateId } = governance.open({ ideaId: idea.id, type, requiredRole, payload: idea.title, evaluation: agregat });
+  gateMeta.set(gateId, { ideaId: idea.id, tenantId: idea.tenantId ?? 'default', titre: idea.title, agregat, ouvertPar: me.email });
+  return reply.code(201).send({ gateId, agregat });
+});
+
+// File d'attente du censeur : ce qu'IL doit arbitrer, dans SON tenant.
+app.get('/v1/gates', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const tous = governance.list().map((g) => ({ ...g, ...(gateMeta.get(g.gateId) ?? {}) }));
+  const miens = tous.filter((g) => (g.tenantId ?? 'default') === me.tenantId);
+  return {
+    gates: miens.map((g) => ({
+      gateId: g.gateId, type: g.type, requiredRole: g.requiredRole, ideaId: g.ideaId,
+      titre: g.titre ?? g.payload, agregat: g.agregat ?? null, createdAt: g.createdAt,
+      pourMoi: g.requiredRole === me.role,          // l'UI met en avant ce qui m'incombe
+    })),
+    monRole: me.role,
+  };
+});
+
+// Resolution : le service verifie l'habilitation du role ET impose un motif si refus/revision.
+app.post('/v1/gates/:gateId/resolve', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const meta = gateMeta.get(req.params.gateId);
+  if (meta && meta.tenantId !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { decision, reason = '' } = req.body || {};
+  try {
+    const resolution = governance.resolve(req.params.gateId, { decision, by: me.email, role: me.role, reason });
+    // Repercussion sur l'idee : la decision touche les DEUX axes.
+    if (meta) {
+      const idea = await ideas.get(meta.ideaId);
+      if (idea) {
+        const map = { approve: 'en_developpement', reject: 'non_poursuivi', revise: 'en_revue' };
+        let out = setStatus(idea, map[decision] ?? idea.status, { by: me.email, motif: reason || decision });
+        if (decision === 'approve') out = setStage(out, 'projeter', { by: me.email, motif: 'gate approuve' });
+        if (decision === 'revise') out = setStage(out, 'eprouver', { by: me.email, motif: 'revision demandee' });
+        await ideas.save(out);
+      }
+      gateMeta.delete(req.params.gateId);
+    }
+    return { resolution };
+  } catch (e) { return reply.code(403).send({ error: e.message }); }
+});
+
+// ---------------- Impact : realise vs projete ----------------
+// Calcule et STOCKE la projection sur l'idee (reference future du suivi).
+app.post('/v1/ideas/:id/projection', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { scenarios = [], variables = [], milestones = [], costHypotheses = {}, seed } = req.body || {};
+  try {
+    const projection = scenarios.length ? simulateTrajectory({ scenarios, variables, seed }) : null;
+    const ressources = milestones.length ? estimateResources({ milestones, costHypotheses }) : null;
+    const out = { ...idea, projection, ressources, updatedAt: new Date().toISOString() };
+    await ideas.save(out);
+    return { projection, ressources };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+// Enregistre une valeur CONSTATEE (investissement, benefice, releve de KPI).
+app.post('/v1/ideas/:id/impact', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  const { type, montant, libelle, kpiId, value } = req.body || {};
+  let impact = idea.impact ?? emptyImpact();
+  try {
+    if (type === 'investissement') impact = recordInvestment(impact, { montant, libelle });
+    else if (type === 'benefice') impact = recordBenefit(impact, { montant, libelle });
+    else if (type === 'releve') impact = recordActual(impact, { kpiId, value });
+    else return reply.code(400).send({ error: "type attendu : investissement | benefice | releve" });
+    const out = { ...idea, impact, updatedAt: new Date().toISOString() };
+    await ideas.save(out);
+    return { rapport: impactReport(idea.projection ?? {}, impact) };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+// Le rapport d'ecart : c'est ici que la projection rencontre le reel.
+app.get('/v1/ideas/:id/impact', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+  return {
+    projection: idea.projection ?? null,
+    ressources: idea.ressources ?? null,
+    rapport: impactReport(idea.projection ?? {}, idea.impact ?? emptyImpact()),
+  };
 });
 
 app.get('/v1/scorecards', async (req, reply) => {
