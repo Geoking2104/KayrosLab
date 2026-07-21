@@ -4,7 +4,10 @@
 //   - `status` : ou en est la DECISION (etat social/decisionnel)
 // Une idee peut etre "en_revue" (statut) tout en etant en "construire" (etape).
 
-export const STAGES = ['recueillir', 'ecouter', 'cartographier', 'construire', 'eprouver', 'arbitrer', 'projeter'];
+// `realiser` (etape 7) porte l'EXECUTION post-decision. Ses sous-phases
+// (pilote -> deploiement -> bilan) vivent dans `execution.phase`, sur le meme
+// principe orthogonal que statut/etape : on n'ajoute pas 3 colonnes au kanban.
+export const STAGES = ['recueillir', 'ecouter', 'cartographier', 'construire', 'eprouver', 'arbitrer', 'projeter', 'realiser'];
 
 export const STATUSES = [
   'nouveau', 'en_revue', 'discussion', 'en_developpement',

@@ -13,6 +13,8 @@ import {
   simulateTrajectory, estimateResources,
   ConsoleNotifier, WebhookNotifier, EmailNotifier, CompositeNotifier, gateNotifier,
   InMemoryGateStore, FileGateStore,
+  startExecution, updateJalon, advancePhase, cloturer, progression,
+  funnel, tempsParEtape, dashboard, exportCsv,
 } from '../../core/index.mjs';
 
 const {
@@ -462,6 +464,64 @@ app.get('/v1/scorecards', async (req, reply) => {
   const { stage } = req.query || {};
   const list = stage ? scorecards.forStage(stage) : scorecards.list();
   return { scorecards: list.map((s) => ({ id: s.id, stage: s.stage, label: s.label, scale: s.scale, criteria: s.criteria })) };
+});
+
+// ---------------- Cycle aval : etape Realiser (EF-80 a EF-83) ----------------
+async function chargerIdee(req, reply, me) {
+  const idea = await ideas.get(req.params.id);
+  if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) { reply.code(404).send({ error: 'introuvable' }); return null; }
+  return idea;
+}
+
+// Demarre l'execution a partir de la roadmap produite en Projeter.
+app.post('/v1/ideas/:id/execution', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  if (!idea.roadmap?.jalons?.length && !req.body?.roadmap?.jalons?.length) {
+    return reply.code(400).send({ error: "aucune roadmap : passer d'abord par Projeter" });
+  }
+  try {
+    const execution = startExecution({ roadmap: req.body?.roadmap ?? idea.roadmap });
+    const out = setStage({ ...idea, execution }, 'realiser', { by: me.email, motif: 'demarrage execution' });
+    await ideas.save(out);
+    return reply.code(201).send({ execution, progression: progression(execution) });
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
+});
+
+// Avancement d'un jalon, changement de phase, ou cloture.
+app.patch('/v1/ideas/:id/execution', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const idea = await chargerIdee(req, reply, me); if (!idea) return;
+  if (!idea.execution) return reply.code(400).send({ error: 'execution non demarree' });
+  const { jalonId, patch, action, force, verdict, enseignements } = req.body || {};
+  try {
+    let execution = idea.execution;
+    if (jalonId) execution = updateJalon(execution, jalonId, patch ?? {}, { by: me.email });
+    if (action === 'phase_suivante') execution = advancePhase(execution, { force: !!force, by: me.email });
+    if (action === 'cloturer') execution = cloturer(execution, { verdict, enseignements, by: me.email });
+    let out = { ...idea, execution, updatedAt: new Date().toISOString() };
+    // Une cloture termine l'idee : le statut suit.
+    if (action === 'cloturer') out = setStatus(out, 'termine', { by: me.email, motif: `bilan ${verdict}` });
+    await ideas.save(out);
+    return { execution, progression: progression(execution) };
+  } catch (e) {
+    return reply.code(e.code === 'JALONS_OUVERTS' ? 409 : 400).send({ error: e.message, code: e.code ?? null });
+  }
+});
+
+// ---------------- Reporting (EF-84 a EF-87) ----------------
+app.get('/v1/reporting/dashboard', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const list = await ideas.list({ tenantId: me.tenantId });
+  return { dashboard: dashboard(list), funnel: funnel(list), tempsParEtape: tempsParEtape(list) };
+});
+
+app.get('/v1/reporting/export', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const list = await ideas.list({ tenantId: me.tenantId });
+  reply.header('Content-Type', 'text/csv; charset=utf-8');
+  reply.header('Content-Disposition', `attachment; filename="portefeuille-${me.tenantId}.csv"`);
+  return exportCsv(list);
 });
 
 app.listen({ port: Number(PORT), host: '0.0.0.0' })

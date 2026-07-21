@@ -648,26 +648,35 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 - **EF-76 (🟢)** Les **investissements** constatés sont enregistrés par idée.
 - **EF-77 (🟢)** Les **bénéfices** constatés sont enregistrés par idée ; le ROI réel est calculé.
 - **EF-78 (🟢)** Le **réalisé est confronté au projeté** : écart absolu et relatif, position vis-à-vis de l'intervalle P10–P90. En l'absence de projection, l'écart est déclaré non calculable plutôt qu'affiché à zéro.
-- **EF-79 (🔴)** ROI agrégé au niveau du portefeuille.
+- **EF-79 (🟢)** ROI agrégé au niveau du portefeuille. *Ne porte que sur les idées disposant de données financières : agréger des idées sans impact fausserait le ratio.*
 
 > **US-10.** En tant qu'**arbitre COMEX**, je veux **comparer ce qui a été réalisé à ce qui avait été projeté** afin de **calibrer la fiabilité de nos projections**.
 > **Critères.** *Étant donné* une idée disposant d'une projection, *quand* des bénéfices sont saisis, *alors* l'écart et la position vs P10–P90 sont restitués.
 
 ### 13.9 Cycle aval (EF-80 → EF-83)
 
-- **EF-80 (🔴)** Étape **Pilote** (expérimentation à échelle réduite).
-- **EF-81 (🔴)** Étape **Déploiement** (généralisation).
-- **EF-82 (🔴)** Suivi d'exécution des jalons de la roadmap produite en *Projeter*.
-- **EF-83 (🔴)** **Bilan de clôture** consignant les enseignements.
+> **Arbitrage tranché.** Le cycle aval est porté par une **étape 7 « Réaliser »**, dont les sous-phases
+> (**pilote → déploiement → bilan**) sont un attribut interne `execution.phase`. Motif : ajouter trois étapes
+> aurait porté le kanban à dix colonnes et dilué l'identité du processus, qui reste un cycle d'**idéation**.
+> Le modèle réutilise le motif orthogonal déjà établi entre statut et étape.
 
-> **Note d'arbitrage.** Ce bloc suppose d'étendre le modèle au-delà des 6 étapes actuelles (étape 7 « Réaliser », ou extension de *Projeter*). **À trancher avant spécification détaillée.**
+- **EF-80 (🟢)** Phase **Pilote** : l'exécution démarre à partir de la roadmap produite en *Projeter*, dont les jalons planifiés deviennent des jalons suivis.
+- **EF-81 (🟢)** Phase **Déploiement** : passage de phase tracé.
+- **EF-82 (🟢)** Suivi d'exécution des jalons (statut, date cible, date réelle), avec **avancement, blocages et jalons en retard**.
+- **EF-83 (🟢)** **Bilan de clôture** : verdict (succès / mitigé / échec) et enseignements consignés ; la clôture bascule l'idée en statut `termine`.
+
+> **Règle de clôture.** Le passage au bilan est **refusé si des jalons restent ouverts**. Un forçage explicite reste possible, mais il est **tracé dans l'historique** — on ne clôt pas silencieusement un projet inachevé.
+
+> **US-11.** En tant que **porteur de projet**, je veux **suivre l'exécution des jalons issus de la roadmap** afin de **constater les dérives avant la clôture**.
+> **Critères.** *Étant donné* une idée en `realiser`, *quand* un jalon dépasse sa date cible sans être fait, *alors* il est signalé en retard.
+> *Étant donné* des jalons non terminés, *quand* je demande le passage au bilan, *alors* la clôture est refusée sauf forçage explicite tracé.
 
 ### 13.10 Reporting (EF-84 → EF-87)
 
-- **EF-84 (🔴)** Tableau de bord portefeuille (volumes, KI moyen, charge par étape).
-- **EF-85 (🔴)** **Entonnoir de conversion** par étape (taux de passage, taux d'abandon).
-- **EF-86 (🔴)** Temps moyen passé par étape (détection des goulots).
-- **EF-87 (🔴)** Export du portefeuille (PDF / tableur).
+- **EF-84 (🟢)** Tableau de bord portefeuille : volumes, actives/abandonnées, taux d'abandon, KI moyen, charge par étape et par statut.
+- **EF-85 (🟢)** **Entonnoir de conversion** par étape, calculé sur l'**historique réel** : une idée n'est comptée comme ayant franchi une étape que si son historique l'atteste.
+- **EF-86 (🟢)** Temps moyen passé par étape, déduit des transitions ; les séjours **encore en cours** sont comptés et distingués des séjours terminés.
+- **EF-87 (🟢)** Export du portefeuille au format **CSV** (échappement conforme : séparateurs, guillemets et sauts de ligne). *Export PDF non couvert.*
 
 ### 13.11 Synthèse d'avancement
 
@@ -680,10 +689,10 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | Évaluation collaborative | 63–67 | 4 | 0 | 1 |
 | Scorecards | 68–71 | 4 | 0 | 0 |
 | Notifications | 72–75 | 2 | 0 | 2 |
-| Impact réel | 76–79 | 3 | 0 | 1 |
-| Cycle aval | 80–83 | 0 | 0 | 4 |
-| Reporting | 84–87 | 0 | 0 | 4 |
-| **Total** | **42** | **23** | **3** | **16** |
+| Impact réel | 76–79 | 4 | 0 | 0 |
+| Cycle aval | 80–83 | 4 | 0 | 0 |
+| Reporting | 84–87 | 4 | 0 | 0 |
+| **Total** | **42** | **32** | **3** | **7** |
 
 **Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
 

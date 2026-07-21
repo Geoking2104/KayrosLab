@@ -42,6 +42,8 @@
         <option value="">Tous les statuts</option>
       </select>
       <button id="btnNew" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-lg px-3 py-1.5">+ Idée</button>
+      <button id="btnReport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50">Reporting</button>
+      <a id="btnExport" class="border text-sm rounded-lg px-3 py-1.5 hover:bg-slate-50 cursor-pointer">Export CSV</a>
       <div class="ml-auto flex items-center gap-3 text-sm">
         <span id="who" class="text-slate-600"></span>
         <button id="btnLogout" class="text-slate-500 hover:text-slate-800">Déconnexion</button>
@@ -102,6 +104,7 @@ const STAGES = [
   { id: 'eprouver',      label: '04 · Éprouver' },
   { id: 'arbitrer',      label: '05 · Arbitrer' },
   { id: 'projeter',      label: '06 · Projeter' },
+  { id: 'realiser',      label: '07 · Réaliser' },
 ];
 const STATUSES = ['nouveau','en_revue','discussion','en_developpement','termine','non_poursuivi','consideration_future','en_pause'];
 const STATUS_STYLE = {
@@ -526,6 +529,78 @@ $('#ideaForm').addEventListener('submit', async (e) => {
       alert(`Idée créée.\n\n${h} hypothèse(s) dérivée(s) pour Construire.\n${c} cible(s) d'attaque pour Éprouver.`);
     }
   } catch (err) { $('#formErr').textContent = err.message; }
+});
+
+// ============ Reporting ============
+$('#btnReport').addEventListener('click', async () => {
+  let d;
+  try { d = await api('/reporting/dashboard'); } catch (e) { alert(e.message); return; }
+  const b = d.dashboard, f = d.funnel, t = d.tempsParEtape;
+  const pf = b.portefeuilleFinancier;
+  const nom = (s) => (STAGES.find((x) => x.id === s)?.label ?? s);
+
+  $('#drawerBody').innerHTML = `
+    <div class="flex items-start justify-between mb-4">
+      <h2 class="text-xl font-bold">Reporting portefeuille</h2>
+      <button data-close class="text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-6">
+      ${[['Idées', b.total], ['Actives', b.actives], ['Abandonnées', b.abandonnees],
+         ['Taux d\'abandon', b.tauxAbandon === null ? '—' : (b.tauxAbandon * 100).toFixed(0) + ' %'],
+         ['KI moyen', b.kiMoyen === null ? '—' : b.kiMoyen + '/100'],
+         ['Idées notées', b.idesNotees]]
+        .map(([k, v]) => `<div class="border rounded-lg p-3"><p class="text-xs text-slate-500">${k}</p><p class="text-lg font-semibold">${v}</p></div>`).join('')}
+    </div>
+
+    <h3 class="font-semibold text-sm mb-2">Entonnoir de conversion</h3>
+    <div class="space-y-1 mb-6">
+      ${f.etapes.map((e) => {
+        const largeur = f.total ? Math.round((e.atteintes / f.total) * 100) : 0;
+        return `<div class="text-xs">
+          <div class="flex justify-between mb-0.5">
+            <span>${nom(e.stage)}</span>
+            <span class="text-slate-500">${e.atteintes} atteinte(s) · ${e.presentes} présente(s)${e.conversion !== null ? ` · conv. ${(e.conversion * 100).toFixed(0)} %` : ''}</span>
+          </div>
+          <div class="h-2 bg-slate-100 rounded"><div class="h-2 bg-indigo-500 rounded" style="width:${largeur}%"></div></div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <h3 class="font-semibold text-sm mb-2">Temps moyen par étape</h3>
+    <table class="w-full text-xs mb-6">
+      <thead><tr class="text-slate-500 text-left"><th class="py-1">Étape</th><th>Moy. (jours)</th><th>Terminés</th><th>En cours</th></tr></thead>
+      <tbody>${t.map((x) => `<tr class="border-t"><td class="py-1">${nom(x.stage)}</td>
+        <td>${x.moyenneJours === null ? '—' : x.moyenneJours}</td><td>${x.sejoursTermines}</td><td>${x.enCours}</td></tr>`).join('')}</tbody>
+    </table>
+
+    <h3 class="font-semibold text-sm mb-2">Portefeuille financier</h3>
+    ${pf.idesAvecImpact === 0
+      ? '<p class="text-sm text-slate-500">Aucune idée ne porte encore de données financières — le ROI agrégé n\'est pas calculable.</p>'
+      : `<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+          <dt class="text-slate-500">Idées avec impact</dt><dd>${pf.idesAvecImpact}</dd>
+          <dt class="text-slate-500">Investi</dt><dd>${eur(pf.investi)} €</dd>
+          <dt class="text-slate-500">Bénéfices</dt><dd>${eur(pf.beneficie)} €</dd>
+          <dt class="text-slate-500">Net</dt><dd class="font-medium">${eur(pf.net)} €</dd>
+          <dt class="text-slate-500">ROI agrégé</dt><dd>${pf.roiAgrege === null ? '—' : (pf.roiAgrege * 100).toFixed(1) + ' %'}</dd>
+        </dl>
+        <p class="text-xs text-slate-400 mt-2">Le ROI agrégé ne porte que sur les idées disposant de données financières.</p>`}`;
+
+  $('#drawer').classList.remove('hidden');
+  document.querySelectorAll('#drawer [data-close]').forEach((el) =>
+    el.addEventListener('click', () => $('#drawer').classList.add('hidden')));
+});
+
+// Export CSV : on passe par fetch pour porter le jeton, puis telechargement local.
+$('#btnExport').addEventListener('click', async () => {
+  try {
+    const res = await fetch(`${S.api}/reporting/export`, { headers: { Authorization: `Bearer ${S.token}` } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const url = URL.createObjectURL(await res.blob());
+    const a = document.createElement('a');
+    a.href = url; a.download = 'portefeuille.csv'; a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) { alert(e.message); }
 });
 
 // ============ Filtres ============

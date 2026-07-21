@@ -923,3 +923,91 @@ test('gates : la persistance n empeche jamais l arbitrage (magasin defaillant)',
   assert.equal(res.decision, 'approve');                   // resolution non bloquee
   await new Promise((r) => setImmediate(r));               // aucun unhandledRejection
 });
+
+// ---------- Cycle aval : etape Realiser (EF-80 a EF-83) ----------
+test('execution : demarrage depuis la roadmap + avancement des jalons', async () => {
+  const { startExecution, updateJalon, progression } = await import('./execution.mjs');
+  const exec = startExecution({ roadmap: { jalons: [{ name: 'MVP' }, { name: 'Beta' }] } });
+  assert.equal(exec.phase, 'pilote');
+  assert.equal(exec.jalons.length, 2);
+  assert.equal(exec.jalons[0].statut, 'a_faire');
+
+  const e2 = updateJalon(exec, 'j1', { statut: 'fait' }, { by: 'geoff' });
+  assert.ok(e2.jalons[0].dateReelle);            // date de realisation automatique
+  const p = progression(e2);
+  assert.equal(p.faits, 1);
+  assert.equal(p.avancement, 0.5);
+  assert.throws(() => updateJalon(e2, 'inconnu', {}));
+});
+
+test('execution : le passage au bilan refuse de laisser des jalons ouverts', async () => {
+  const { startExecution, updateJalon, advancePhase } = await import('./execution.mjs');
+  let exec = startExecution({ roadmap: { jalons: [{ name: 'A' }, { name: 'B' }] } });
+  exec = advancePhase(exec);                     // pilote -> deploiement : libre
+  assert.equal(exec.phase, 'deploiement');
+  // deploiement -> bilan avec un jalon ouvert : refuse
+  assert.throws(() => advancePhase(exec), (e) => e.code === 'JALONS_OUVERTS');
+  // forcage possible, mais TRACE
+  const force = advancePhase(exec, { force: true, by: 'geoff' });
+  assert.equal(force.phase, 'bilan');
+  assert.equal(force.history.at(-1).force, true);
+  // voie normale : tout terminer
+  let ok = updateJalon(updateJalon(exec, 'j1', { statut: 'fait' }), 'j2', { statut: 'fait' });
+  ok = advancePhase(ok);
+  assert.equal(ok.phase, 'bilan');
+});
+
+test('execution : jalons en retard et cloture avec verdict', async () => {
+  const { startExecution, progression, cloturer } = await import('./execution.mjs');
+  const exec = startExecution({ roadmap: { jalons: [{ name: 'A', dateCible: '2020-01-01' }] } });
+  const p = progression(exec, { now: () => new Date('2026-01-01') });
+  assert.equal(p.enRetard, 1);
+  assert.deepEqual(p.jalonsEnRetard, ['j1']);
+
+  const clos = cloturer(exec, { verdict: 'mitige', enseignements: ['sous-estimation du délai'], by: 'geoff' });
+  assert.equal(clos.phase, 'bilan');
+  assert.equal(clos.cloture.verdict, 'mitige');
+  assert.equal(clos.cloture.enseignements.length, 1);
+  assert.throws(() => cloturer(exec, { verdict: 'inconnu' }));
+});
+
+// ---------- Reporting (EF-84 a EF-87, EF-79) ----------
+test('reporting : entonnoir base sur l historique reel', async () => {
+  const { createIdea, setStage, setStatus } = await import('./model.mjs');
+  const { funnel } = await import('./reporting.mjs');
+  const a = setStage(setStage(createIdea({ id: 'a', title: 'A' }), 'ecouter'), 'construire');
+  const b = setStage(createIdea({ id: 'b', title: 'B' }), 'ecouter');
+  const c = createIdea({ id: 'c', title: 'C' });
+  const f = funnel([a, b, c]);
+  const parEtape = Object.fromEntries(f.etapes.map((e) => [e.stage, e]));
+  assert.equal(parEtape.recueillir.atteintes, 3);   // toutes y sont passees
+  assert.equal(parEtape.ecouter.atteintes, 2);
+  assert.equal(parEtape.construire.atteintes, 1);
+  assert.equal(parEtape.eprouver.atteintes, 0);
+  assert.equal(parEtape.recueillir.conversion, 0.67); // 2/3
+});
+
+test('reporting : tableau de bord + ROI agrege sur les seules idees avec impact', async () => {
+  const { createIdea } = await import('./model.mjs');
+  const { emptyImpact, recordInvestment, recordBenefit } = await import('./impact.mjs');
+  const { dashboard } = await import('./reporting.mjs');
+  let imp = recordBenefit(recordInvestment(emptyImpact(), { montant: 1000 }), { montant: 1500 });
+  const a = { ...createIdea({ id: 'a', title: 'A' }), impact: imp, ki: 80 };
+  const b = { ...createIdea({ id: 'b', title: 'B' }), ki: 60 };   // sans impact
+  const d = dashboard([a, b]);
+  assert.equal(d.total, 2);
+  assert.equal(d.kiMoyen, 70);
+  assert.equal(d.portefeuilleFinancier.idesAvecImpact, 1);        // b n'entre pas dans le ratio
+  assert.equal(d.portefeuilleFinancier.net, 500);
+  assert.equal(d.portefeuilleFinancier.roiAgrege, 0.5);
+});
+
+test('reporting : export CSV echappe correctement', async () => {
+  const { createIdea } = await import('./model.mjs');
+  const { exportCsv } = await import('./reporting.mjs');
+  const a = createIdea({ id: 'a', title: 'Offre "B2B", Europe\nligne 2' });
+  const csv = exportCsv([a]);
+  const [entete, ligne] = csv.split('\n');
+  assert.match(entete, /^id,titre,etape,statut/);
+  assert.match(ligne, /"Offre ""B2B"", Europe/);   // guillemets doubles + separateur cites
+});
