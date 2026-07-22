@@ -1,7 +1,7 @@
 # KayrosLab
 
 [![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/index.html)
-[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/frontend/positionning-app/dist/index.html)
+[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
 [![Portefeuille](https://img.shields.io/badge/📊_Portefeuille-Application-059669?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-portfolio.html)
 [![Open in Browser](https://img.shields.io/badge/▶_Atelier-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
@@ -178,6 +178,20 @@ Les 3 partielles sont assumées : persistance en fichiers plutôt qu'en base par
 
 **Geoffroy de La Tournelle** — Founder & Director, KayrosLab
 [geoffroydelatournelle@gmail.com](mailto:geoffroydelatournelle@gmail.com) · [LinkedIn](https://www.linkedin.com/in/gdelatournelle/)
+
+---
+
+## 🌐 GitHub Pages
+
+L'application **Positionner** est déployée sur GitHub Pages via le workflow `.github/workflows/deploy-positionning-pages.yml`.
+
+**URL :** [https://geoking2104.github.io/KayrosLab/](https://geoking2104.github.io/KayrosLab/)
+
+**Pour activer le déploiement (une fois) :**
+1. Aller dans Settings → Pages du dépôt
+2. Source : **Deploy from a branch**
+3. Branch : `gh-pages` · `/ (root)`
+4. Sauvegarder — le prochain push sur `main` déclenchera le déploiement automatique
 
 ---
 

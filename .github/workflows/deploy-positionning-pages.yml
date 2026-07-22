@@ -1,0 +1,29 @@
+name: Deploy Positionner to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/positionning-app/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+        working-directory: frontend/positionning-app
+      - run: npm run build
+        working-directory: frontend/positionning-app
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: frontend/positionning-app/dist
+          force_orphan: true
