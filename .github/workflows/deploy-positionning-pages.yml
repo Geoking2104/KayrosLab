@@ -28,7 +28,7 @@ jobs:
 
       - run: |
           mkdir -p deploy/positionner-app
-          cp index.html kayroslab-reference.html kayroslab-portfolio.html deploy/
+          cp index.html kayroslab-reference.html kayroslab-portfolio.html livret-blanc-kayroslab.html deploy/
           cp -r frontend/positionning-app/dist/* deploy/positionner-app/
           touch deploy/.nojekyll
           # CNAME doit etre republie a chaque deploiement : force_orphan efface

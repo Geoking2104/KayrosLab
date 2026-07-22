@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livret Blanc — Hybridation IA/Équipes : Le Nouveau Paradigme de l'Innovation Disruptive | KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 11pt; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: #050d1a;
+  color: #f9fafb;
+  line-height: 1.7;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* === PRINT LAYOUT === */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm 25mm;
+  margin: 0 auto;
+  position: relative;
+  background: #050d1a;
+  overflow: hidden;
+  page-break-after: always;
+}
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),
+    radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);
+  pointer-events: none;
+}
+
+/* === COVER PAGE === */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cover__accent-line {
+  width: 60mm;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2FB9A8, transparent);
+  margin-bottom: 12mm;
+}
+.cover__tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #2FB9A8;
+  margin-bottom: 6mm;
+}
+.cover__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 6mm;
+  max-width: 160mm;
+}
+.cover__title em {
+  color: #2FB9A8;
+  font-style: normal;
+}
+.cover__subtitle {
+  font-size: 1rem;
+  color: #9ca3af;
+  max-width: 140mm;
+  margin-bottom: 12mm;
+  line-height: 1.6;
+}
+.cover__meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 8mm;
+}
+.cover__meta span {
+  display: inline-block;
+  margin: 0 4mm;
+  color: #2FB9A8;
+}
+.cover__badge {
+  position: absolute;
+  bottom: 20mm;
+  font-size: 0.7rem;
+  color: #4b5563;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.cover__deco {
+  position: absolute;
+  width: 80mm; height: 80mm;
+  border: 1px solid rgba(47,185,168,0.08);
+  border-radius: 50%;
+  top: -20mm; right: -20mm;
+}
+.cover__deco2 {
+  position: absolute;
+  width: 120mm; height: 120mm;
+  border: 1px solid rgba(47,185,168,0.05);
+  border-radius: 50%;
+  bottom: -40mm; left: -40mm;
+}
+
+/* === TYPOGRAPHY === */
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 5mm;
+  color: #f9fafb;
+}
+h1 .highlight { color: #2FB9A8; }
+h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4mm;
+  color: #f9fafb;
+  padding-bottom: 2mm;
+  border-bottom: 1px solid rgba(47,185,168,0.2);
+}
+h2 .highlight { color: #2FB9A8; }
+h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2mm;
+  color: #2FB9A8;
+}
+h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5mm;
+  color: #c4b098;
+}
+p { margin-bottom: 2.5mm; font-size: 0.9rem; color: #d1d5db; }
+p + p { margin-top: 1mm; }
+
+/* === COMPONENTS === */
+.lead {
+  font-size: 1.05rem;
+  color: #f9fafb;
+  font-weight: 400;
+  line-height: 1.8;
+}
+.accent-text { color: #2FB9A8; }
+.gold-text { color: #c4b098; }
+.small { font-size: 0.75rem; color: #6b7280; }
+
+.section { margin-bottom: 7mm; }
+
+.callout {
+  background: rgba(47,185,168,0.06);
+  border-left: 3px solid #2FB9A8;
+  padding: 3mm 4mm;
+  margin: 4mm 0;
+  border-radius: 0 2px 2px 0;
+}
+.callout p { margin-bottom: 0; font-size: 0.85rem; }
+.callout--gold {
+  border-left-color: #c4b098;
+  background: rgba(196,176,152,0.06);
+}
+.callout--red {
+  border-left-color: #ef4444;
+  background: rgba(239,68,68,0.06);
+}
+.callout--violet {
+  border-left-color: #a78bfa;
+  background: rgba(167,139,250,0.06);
+}
+
+/* === GRID === */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin: 4mm 0;
+}
+.card {
+  background: rgba(15,23,42,0.6);
+  border: 1px solid rgba(47,185,168,0.12);
+  border-radius: 4px;
+  padding: 3mm;
+}
+.card p { font-size: 0.82rem; margin-bottom: 1mm; }
+.card__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2FB9A8;
+  margin-bottom: 1.5mm;
+}
+
+/* === TABLE === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4mm 0;
+  font-size: 0.78rem;
+}
+th, td {
+  padding: 1.5mm 2mm;
+  text-align: left;
+  border-bottom: 1px solid rgba(47,185,168,0.1);
+}
+th {
+  background: rgba(47,185,168,0.08);
+  color: #2FB9A8;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+td { color: #d1d5db; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+/* === FLOW / DIAGRAM === */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2mm;
+  margin: 5mm 0;
+  flex-wrap: wrap;
+}
+.flow__step {
+  background: rgba(15,23,42,0.8);
+  border: 1px solid rgba(47,185,168,0.2);
+  border-radius: 4px;
+  padding: 2mm 3mm;
+  text-align: center;
+  min-width: 24mm;
+}
+.flow__step .num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  color: #2FB9A8;
+  letter-spacing: 0.15em;
+}
+.flow__step .label {
+  font-size: 0.75rem;
+  color: #f9fafb;
+  font-weight: 500;
+}
+.flow__arrow {
+  color: #2FB9A8;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+/* === NUMBERED LIST === */
+.num-list { counter-reset: nl; margin: 3mm 0; }
+.num-list li {
+  list-style: none;
+  counter-increment: nl;
+  padding-left: 6mm;
+  position: relative;
+  margin-bottom: 1.5mm;
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+.num-list li::before {
+  content: counter(nl);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: #2FB9A8;
+  font-size: 0.75rem;
+}
+
+/* === BULLET LIST === */
+.bullet-list { margin: 2mm 0 2mm 4mm; }
+.bullet-list li {
+  font-size: 0.85rem;
+  color: #d1d5db;
+  margin-bottom: 1mm;
+}
+.bullet-list li::marker { color: #2FB9A8; }
+
+/* === COMPARISON === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin: 4mm 0;
+}
+.comparison__col {
+  padding: 3mm;
+  border-radius: 3px;
+}
+.comparison__col--bad {
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.15);
+}
+.comparison__col--good {
+  background: rgba(47,185,168,0.05);
+  border: 1px solid rgba(47,185,168,0.15);
+}
+.comparison__col h4 { margin-bottom: 2mm; }
+.comparison__col ul { list-style: none; }
+.comparison__col ul li {
+  font-size: 0.8rem;
+  color: #d1d5db;
+  padding: 0.5mm 0;
+  padding-left: 3mm;
+  position: relative;
+}
+.comparison__col--bad ul li::before {
+  content: '✕';
+  color: #ef4444;
+  position: absolute;
+  left: 0;
+}
+.comparison__col--good ul li::before {
+  content: '✓';
+  color: #2FB9A8;
+  position: absolute;
+  left: 0;
+}
+
+/* === KPI BOX === */
+.kpi-row {
+  display: flex;
+  gap: 3mm;
+  margin: 4mm 0;
+  justify-content: space-between;
+}
+.kpi {
+  flex: 1;
+  text-align: center;
+  padding: 2.5mm 2mm;
+  background: rgba(15,23,42,0.6);
+  border: 1px solid rgba(47,185,168,0.12);
+  border-radius: 3px;
+}
+.kpi__value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2FB9A8;
+}
+.kpi__label {
+  font-size: 0.65rem;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 0.5mm;
+}
+
+/* === TOC === */
+.toc { margin: 5mm 0; }
+.toc ol { counter-reset: toc; list-style: none; }
+.toc ol li {
+  counter-increment: toc;
+  padding: 1.5mm 0;
+  border-bottom: 1px dotted rgba(47,185,168,0.1);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+.toc ol li::before {
+  content: counter(toc);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: #2FB9A8;
+  margin-right: 2mm;
+}
+.toc ol li .page-num {
+  color: #4b5563;
+  font-size: 0.75rem;
+}
+
+/* === META === */
+.page-number {
+  position: absolute;
+  bottom: 8mm;
+  right: 12mm;
+  font-size: 0.65rem;
+  color: #4b5563;
+  font-family: 'Fira Code', monospace;
+}
+.footer-line {
+  position: absolute;
+  bottom: 12mm;
+  left: 25mm; right: 25mm;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(47,185,168,0.15), transparent);
+}
+.page-logo,
+.page-logo-css {
+  position: absolute;
+  top: 6mm;
+  left: 25mm;
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  pointer-events: none;
+  z-index: 1;
+}
+.page-logo svg,
+.page-logo-css svg {
+  width: 4.5mm;
+  height: 4.5mm;
+}
+.page-logo span,
+.page-logo-css span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #2FB9A8;
+  letter-spacing: 0.03em;
+}
+.page:not(.cover):not(.back-cover)::before {
+  content: 'KayrosLab';
+  position: absolute;
+  top: 5mm;
+  left: 25mm;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2FB9A8;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* === BACK COVER === */
+.back-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.back-cover__logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2FB9A8;
+  margin-bottom: 4mm;
+}
+.back-cover__text {
+  max-width: 120mm;
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+/* === PRINT === */
+@media print {
+  body { background: #050d1a; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+  }
+}
+
+/* === RESPONSIVE === */
+@media screen and (max-width: 800px) {
+  .page {
+    width: 100%;
+    min-height: auto;
+    padding: 10mm 15mm;
+  }
+  .cover__title { font-size: 1.8rem; }
+  .grid-2, .comparison { grid-template-columns: 1fr; }
+  .kpi-row { flex-wrap: wrap; }
+  .kpi { min-width: 45%; }
+  .flow { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Livret Blanc — Juillet 2026</div>
+  <h1 class="cover__title">
+    Hybridation <em>IA / Équipes</em>&nbsp;:<br>
+    Le Nouveau Paradigme de<br>
+    l'Innovation <em>Disruptive</em>
+  </h1>
+  <p class="cover__subtitle">
+    Comment le framework KayrosLab cadre le risque, facilite l'inclusion des tiers<br>
+    et permet de réussir les projets innovants — même face aux cabinets de conseil<br>
+    traditionnels.
+  </p>
+  <div class="cover__meta">
+    Par <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0
+  </div>
+  <div class="cover__badge">Document confidentiel — Tous droits réservés</div>
+</div>
+
+<!-- ===== PAGE 2: SOMMAIRE ===== -->
+<div class="page">
+  <h1>Sommaire</h1>
+  <div style="margin-top: 10mm;">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction : Le paradoxe de l'innovation à l'ère de l'IA</span> <span class="page-num">3</span></li>
+        <li><span>Pourquoi l'utilisation brute des LLM ne suffit pas</span> <span class="page-num">5</span></li>
+        <li><span>Les dangers de l'IA non gouvernée</span> <span class="page-num">7</span></li>
+        <li><span>Le framework KayrosLab : architecture d'idéation gouvernée</span> <span class="page-num">9</span></li>
+        <li><span>Hybridation IA/Équipes : la clé de l'innovation disruptive</span> <span class="page-num">12</span></li>
+        <li><span>Inclusion des tiers : salariés, clients, Comex</span> <span class="page-num">14</span></li>
+        <li><span>Cadrage du risque et décisions auditables</span> <span class="page-num">16</span></li>
+        <li><span>En quoi KayrosLab change par rapport à McKinsey, BCG et Deloitte</span> <span class="page-num">18</span></li>
+        <li><span>Cas d'usage concrets et retours terrain</span> <span class="page-num">20</span></li>
+        <li><span>Conclusion : Vers un nouveau modèle de décision stratégique</span> <span class="page-num">22</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
+
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Le paradoxe de l'innovation à l'ère de l'IA.</span>
+  </p>
+  <p>
+    En 2026, les entreprises investissent massivement dans l'intelligence artificielle générative.
+    Pourtant, une majorité de projets innovants échouent encore à produire des résultats concrets.
+    Le problème n'est pas technique : il est <strong>méthodologique et organisationnel</strong>.
+  </p>
+  <p>
+    L'innovation disruptive ne naît pas d'un prompt bien formulé. Elle émerge de la collision
+    entre signaux faibles, pensée critique collective et décisions structurées. C'est précisément
+    ce que les approches traditionnelles — qu'elles soient artisanales (post-its et ateliers)
+    ou purement technologiques (LLM en mode conversationnel) — échouent à combiner.
+  </p>
+
+  <div class="callout">
+    <p><strong>Le constat :</strong> 78 % des décideurs stratégiques estiment que l'IA générative
+    a accru la vitesse de production d'idées, mais seulement 23 % constatent une amélioration
+    de la <em>qualité des décisions</em> (source : BCG Henderson Institute, 2025).</p>
+  </div>
+
+  <p>
+    Ce livret blanc pose une thèse simple : la <strong>hybridation IA/Équipes</strong>, orchestrée
+    par un framework de gouvernance comme KayrosLab, constitue le seul modèle viable pour transformer
+    l'effervescence créative en décisions stratégiques robustes, inclusives et auditées.
+  </p>
+
+  <p>Nous aborderons successivement :</p>
+  <ul class="bullet-list">
+    <li>Pourquoi les LLM bruts sont insuffisants et dangereux</li>
+    <li>Comment le cadre KayrosLab résout ces limites</li>
+    <li>Comment il inclut l'ensemble des parties prenantes</li>
+    <li>Comment il concurrence les cabinets de conseil les plus réputés</li>
+  </ul>
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: CONTEXTE ===== -->
+<div class="page">
+  <h1>Le <span class="highlight">contexte</span> de l'innovation en 2026</h1>
+  <p style="margin-top: 5mm;">
+    Trois forces convergent pour rendre l'innovation plus difficile — et plus nécessaire — que jamais :
+  </p>
+
+  <div class="grid-2" style="margin-top: 4mm;">
+    <div class="card">
+      <div class="card__title">01. Accélération technologique</div>
+      <p>Les cycles d'innovation se comptent en mois, pas en années. Les modèles de langage,
+      les agents IA et l'automatisation redéfinissent en continu ce qui est possible.
+      Les entreprises qui ne savent pas capter ces signaux risquent l'obsolescence rapide.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">02. Exigence de gouvernance</div>
+      <p>NIS2, DORA, RGPD, AI Act : l'Union européenne impose un cadre réglementaire de plus en plus
+      strict. L'innovation doit être traçable, auditable et responsable — ce que les méthodes
+      traditionnelles ne garantissent pas.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">03. Pression sur les coûts</div>
+      <p>Face à l'inflation et à l'incertitude économique, les directions financières exigent
+      un ROI démontrable. Les missions de conseil à 200 k€ sont scrutées, et l'innovation
+      doit justifier chaque euro investi.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 6mm;">Le <span class="highlight">fossé</span> entre idée et décision</h2>
+  <p>
+    Le vrai problème n'est pas le manque d'idées. Les entreprises regorgent de signaux faibles,
+    d'intuitions et de concepts. Le problème est le passage de l'idée à la <strong>décision
+    stratégique gouvernée</strong>. Ce fossé, que nous appelons la <strong>vallée de l'arbitrage</strong>,
+    est l'espace où échouent la plupart des projets innovants.
+  </p>
+
+  <div class="comparison" style="margin-top: 4mm;">
+    <div class="comparison__col comparison__col--bad">
+      <h4 style="color: #ef4444;">Sans cadre structuré</h4>
+      <ul>
+        <li>Idées non priorisées, noyées dans le volume</li>
+        <li>Décisions biaisées par la hiérarchie</li>
+        <li>Pas de mémoire institutionnelle</li>
+        <li>Risques découverts trop tard</li>
+        <li>Pas d'audit possible a posteriori</li>
+      </ul>
+    </div>
+    <div class="comparison__col comparison__col--good">
+      <h4 style="color: #2FB9A8;">Avec le cadre KayrosLab</h4>
+      <ul>
+        <li>Idées scorées objectivement (Kayros Index)</li>
+        <li>Décisions multi-critères et multi-acteurs</li>
+        <li>Mémoire vectorielle persistante</li>
+        <li>Red Team systématique</li>
+        <li>Traçabilité complète (timeline + logs)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: POURQUOI LES LLM BRUTS NE SUFFISENT PAS ===== -->
+<div class="page">
+  <h1>2. Pourquoi l'utilisation <span class="highlight">brute</span> des LLM ne suffit pas</h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">"Prompt and pray" n'est pas une méthodologie.</span>
+  </p>
+  <p>
+    L'usage dominant des LLM en entreprise repose sur un modèle simple : un utilisateur formule
+    une requête, le modèle génère une réponse, l'utilisateur l'accepte ou la rejette. Ce modèle
+    présente des limitations structurelles qui le rendent inadapté à la décision stratégique :
+  </p>
+
+  <h2 style="margin-top: 5mm;">5 <span class="highlight">limitations</span> fondamentales</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">1. Absence de processus</div>
+      <p>Un LLM seul est une session conversationnelle sans structure. Il n'y a pas d'étape,
+      pas de gate, pas de validation. L'utilisateur doit tout porter : la méthode,
+      la critique, la synthèse, la décision.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">2. Mémoire éphémère</div>
+      <p>Le contexte d'une conversation LLM est limité (fenêtre de contexte). Une décision
+      stratégique prise aujourd'hui ne peut pas être confrontée à une idée explorée
+      il y a trois mois — sauf à tout re-saisir manuellement.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">3. Pas de spécialisation agentique</div>
+      <p>Un LLM généraliste fait tout : générateur d'idées, analyste, critique, synthétiseur.
+      Il n'y a pas de Red Team dédiée, pas de Devil's Advocate, pas de perspective
+      contradictoire systématique.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">4. Aucune gouvernance intégrée</div>
+      <p>Pas de circuit de validation, pas de veto humain formalisé, pas de scoring objectif.
+      La qualité de la décision dépend entièrement de la qualité du prompt et de
+      l'attention de l'utilisateur.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">5. Hallucinations et biais systémiques</div>
+      <p>Les LLM inventent, confabulent et reproduisent les biais de leurs données
+      d'entraînement. Sans garde-fou, ces erreurs peuvent contaminer des décisions
+      stratégiques à fort enjeu.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--red" style="margin-top: 4mm;">
+    <p><strong>En synthèse :</strong> Un LLM brut est un <em>générateur de contenu</em>, pas un
+    <em>système de décision</em>. L'utiliser pour de la stratégie revient à confier votre
+    gouvernance d'entreprise à un assistant vocal.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: COMPARAISON LLM vs KAYROSLAB ===== -->
+<div class="page">
+  <h1>LLM brut <span class="highlight">vs</span> système gouverné</h1>
+  <p style="margin-top: 5mm;">Le tableau ci-dessous synthétise les différences fondamentales entre l'usage conversationnel
+  d'un LLM et l'approche structurée de KayrosLab :</p>
+
+  <table style="margin-top: 4mm;">
+    <thead>
+      <tr>
+        <th>Critère</th>
+        <th>ChatGPT / Claude / Gemini</th>
+        <th>KayrosLab</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Structure du processus</strong></td>
+        <td>Conversation linéaire libre</td>
+        <td>Processus cyclique 8 étapes</td>
+      </tr>
+      <tr>
+        <td><strong>Agents spécialisés</strong></td>
+        <td>Un seul modèle générique</td>
+        <td>Multi-agents (Red Team, Devil's Advocate, Critic...)</td>
+      </tr>
+      <tr>
+        <td><strong>Mémoire persistante</strong></td>
+        <td>Contexte de session limité</td>
+        <td>Shared Memory + Vector Memory</td>
+      </tr>
+      <tr>
+        <td><strong>Robustesse</strong></td>
+        <td>Aucune (hallucinations fréquentes)</td>
+        <td>Retry + Circuit Breaker + Fallback</td>
+      </tr>
+      <tr>
+        <td><strong>Traçabilité</strong></td>
+        <td>Faible / conversation éphémère</td>
+        <td>Timeline complète + scoring + logs agents</td>
+      </tr>
+      <tr>
+        <td><strong>Gouvernance humaine</strong></td>
+        <td>Informelle (prompt engineering)</td>
+        <td>Human-in-the-Loop structuré (veto, votes, Working Groups)</td>
+      </tr>
+      <tr>
+        <td><strong>Scoring objectif</strong></td>
+        <td>Absent</td>
+        <td>Kayros Index (KI) multi-dimensionnel</td>
+      </tr>
+      <tr>
+        <td><strong>Souveraineté</strong></td>
+        <td>Cloud uniquement (dépendance)</td>
+        <td>Mode local souverain (Ollama + Qdrant)</td>
+      </tr>
+      <tr>
+        <td><strong>Cas d'usage principal</strong></td>
+        <td>Génération de contenu & assistance</td>
+        <td>Idéation stratégique + décisions auditables</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>À retenir :</strong> KayrosLab ne remplace pas les LLM — il les <em>orchestre</em>
+    dans un cadre de gouvernance. Chaque agent spécialisé utilise un LLM comme moteur de raisonnement,
+    mais la structure, la mémoire, le scoring et les gates humains sont assurés par le framework.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: DANGERS DE L'IA NON GOUVERNÉE ===== -->
+<div class="page">
+  <h1>3. Les <span class="highlight">dangers</span> de l'IA non gouvernée</h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Quand l'outil devient risque.</span>
+  </p>
+  <p>
+    L'utilisation de LLM en mode brut n'est pas seulement inefficace — elle est potentiellement
+    dangereuse pour l'entreprise. Cinq catégories de risques majeurs émergent :
+  </p>
+
+  <h2 style="margin-top: 5mm;"><span class="highlight">Risque n°1 :</span> Biais cognitifs amplifiés</h2>
+  <p>Les LLM sont entraînés sur des données humaines qui contiennent tous les biais connus
+  (confirmation, ancrage, disponibilité). Sans Red Team ni contre-argumentation systématique,
+  ces biais sont reproduits et amplifiés. Une équipe qui utilise ChatGPT pour valider une intuition
+  obtiendra presque toujours une réponse qui <em>conforte</em> son intuition.</p>
+
+  <h2><span class="highlight">Risque n°2 :</span> Hallucinations factuelles</h2>
+  <p>En 2025, une étude du MIT montrait que les LLM les plus performants hallucinent encore dans
+  15 à 20 % de leurs réponses sur des sujets spécialisés. Une hallucination non détectée dans
+  un support de COMEX peut conduire à une décision irréversible.</p>
+
+  <div class="callout callout--red">
+    <p><strong>Exemple réel :</strong> Un cabinet d'avocats new-yorkais a utilisé ChatGPT pour préparer
+    une argumentation judiciaire. Le LLM a inventé six jurisprudences qui n'existaient pas.
+    L'affaire a été rejetée avec des sanctions disciplinaires.</p>
+  </div>
+
+  <h2><span class="highlight">Risque n°3 :</span> Fuite de données sensibles</h2>
+  <p>Chaque prompt envoyé à un LLM cloud (ChatGPT, Claude, Gemini) transite par des serveurs
+  tiers. Les données stratégiques, les plans d'innovation, les secrets industriels sont exposés.
+  Plusieurs entreprises ont déjà interdit l'usage de ces outils après des fuites avérées.</p>
+
+  <h2><span class="highlight">Risque n°4 :</span> Fausse confiance décisionnelle</h2>
+  <p>Le plus grand danger est peut-être celui-ci : un LLM répond avec <em>assertivité</em>,
+  qu'il ait raison ou tort. Cette confiance apparente conduit les décideurs à abaisser leur
+  garde critique. On ne challenge pas un modèle qui répond d'un ton doctoral.</p>
+
+  <h2><span class="highlight">Risque n°5 :</span> Perte de souveraineté</h2>
+  <p>Dépendre d'API américaines pour la réflexion stratégique expose l'entreprise à des risques
+  géopolitiques, réglementaires et de continuité d'activité. L'AI Act européen et les directives
+  NIS2 imposent des contrôles que les LLM bruts ne peuvent satisfaire.</p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: DANGERS (SUITE) ===== -->
+<div class="page">
+  <h1>Dangers (suite) — <span class="highlight">Pourquoi</span> le cadre est indispensable</h1>
+
+  <h2 style="margin-top: 5mm;">Matrice des <span class="highlight">risques</span> LLM vs cadre gouverné</h2>
+  <table style="margin-top: 3mm;">
+    <thead>
+      <tr>
+        <th>Type de risque</th>
+        <th>LLM brut</th>
+        <th>Avec cadre KayrosLab</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Biais de confirmation</td>
+        <td style="color: #ef4444;">Amplifié</td>
+        <td style="color: #34d399;">Contré par Red Team + Devil's Advocate</td>
+      </tr>
+      <tr>
+        <td>Hallucinations</td>
+        <td style="color: #ef4444;">Non détectées</td>
+        <td style="color: #34d399;">Circuit Breaker + validation croisée</td>
+      </tr>
+      <tr>
+        <td>Fuite de données</td>
+        <td style="color: #ef4444;">Permanente (cloud)</td>
+        <td style="color: #34d399;">Mode souverain local (zéro egress)</td>
+      </tr>
+      <tr>
+        <td>Fausse confiance</td>
+        <td style="color: #ef4444;">Systémique</td>
+        <td style="color: #34d399;">Scoring objectif + gates humains</td>
+      </tr>
+      <tr>
+        <td>Absence de traçabilité</td>
+        <td style="color: #ef4444;">Totale</td>
+        <td style="color: #34d399;">Timeline complète + logs agents</td>
+      </tr>
+      <tr>
+        <td>Dépendance fournisseur</td>
+        <td style="color: #ef4444;">Totale (hyperscalers US)</td>
+        <td style="color: #34d399;">Multi-modèle, local, souverain</td>
+      </tr>
+      <tr>
+        <td>Conformité réglementaire</td>
+        <td style="color: #ef4444;">Impossible</td>
+        <td style="color: #34d399;">Natif (RGPD, NIS2, DORA, AI Act)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--gold" style="margin-top: 5mm;">
+    <p><strong>Notre conviction :</strong> L'IA générative est un <em>accélérateur de particules</em>
+    pour l'innovation. Mais sans collisionneur — sans cadre qui structure, challenge et valide —
+    elle ne produit que du bruit. KayrosLab est ce collisionneur.</p>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Le coût caché du <span class="highlight">"free prompting"</span></h2>
+  <p>Au-delà des risques qualitatifs, l'absence de cadre a un coût économique direct :</p>
+  <ul class="bullet-list">
+    <li><strong>Temps perdu :</strong> Chaque décideur repart de zéro, reformule, ré-explore. Pas de capitalisation.</li>
+    <li><strong>Coût d'opportunité :</strong> Les bonnes idées ne sont pas priorisées, les mauvaises ne sont pas filtrées.</li>
+    <li><strong>Coût de rework :</strong> Une décision prise sur une hallucination ou un biais devra être défaite — toujours plus coûteux.</li>
+    <li><strong>Coût de conformité :</strong> L'absence de traçabilité expose à des sanctions réglementaires (jusqu'à 4 % du CA mondial pour le RGPD).</li>
+  </ul>
+
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: FRAMEWORK KAYROSLAB ===== -->
+<div class="page">
+  <h1>4. Le framework <span class="highlight">KayrosLab</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Du signal faible à la décision stratégique gouvernée.</span>
+  </p>
+  <p>
+    KayrosLab n'est pas un énième chatbot d'entreprise. C'est un <strong>système d'idéation
+    agentique hybride</strong> qui transforme l'émergence créative en un processus rigoureux,
+    traçable et résilient.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Les 8 étapes du <span class="highlight">cycle</span></h2>
+  <p>Le cœur de KayrosLab est un workflow cyclique en 8 étapes, orchestré par des agents IA
+  spécialisés et ponctué de gates humains obligatoires :</p>
+
+  <div class="flow" style="margin-top: 4mm;">
+    <div class="flow__step"><div class="num">01</div><div class="label">Écouter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Cartographier</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Positionner</div></div>
+  </div>
+  <div class="flow">
+    <div class="flow__step"><div class="num">08</div><div class="label">Réaliser</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Projeter</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
+  </div>
+
+  <table style="margin-top: 4mm;">
+    <thead>
+      <tr><th>Étape</th><th>Action</th><th>Agent principal</th><th>Gate humain</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>01 Écouter</strong></td><td>Qualification des signaux faibles</td><td>Signal Scanner</td><td>Validation des signaux</td></tr>
+      <tr><td><strong>02 Cartographier</strong></td><td>Réseau de tendances et ponts bisociatifs</td><td>Trend Mapper</td><td>Choix des axes</td></tr>
+      <tr><td><strong>03 Construire</strong></td><td>Génération de scénarios et briefs</td><td>Scenario Generator</td><td>Validation brief</td></tr>
+      <tr><td><strong>04 Positionner</strong></td><td>Analyse concurrentielle ontologique</td><td>Positionneur</td><td>Validation gap analysis</td></tr>
+      <tr><td><strong>05 Éprouver</strong></td><td>Red Team, Devil's Advocate, Critic</td><td>Red Team</td><td>Validation des challenges</td></tr>
+      <tr><td><strong>06 Arbitrer</strong></td><td>Votes multi-critères, Working Groups</td><td>Synthesizer</td><td>Décision finale (Comex)</td></tr>
+      <tr><td><strong>07 Projeter</strong></td><td>Roadmap, KPIs, simulation probabilisée</td><td>Projection Agent</td><td>Validation trajectoire</td></tr>
+      <tr><td><strong>08 Réaliser</strong></td><td>Pilote, déploiement, boucle de rétroaction</td><td>Execution Tracker</td><td>Bilan et re-arbitrage</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Clé de voûte :</strong> Chaque étape produit un livrable objectif (score, graphe,
+    matrice, timeline) qui alimente l'étape suivante et permet un <em>arbitrage éclairé</em>
+    par les humains.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: ORCHESTRATION AGENTIQUE ===== -->
+<div class="page">
+  <h1>Orchestration <span class="highlight">agentique</span> et mémoire</h1>
+
+  <h2 style="margin-top: 5mm;">Plan-and-Solve <span class="highlight">+</span> ReAct</h2>
+  <p>L'orchestrateur central de KayrosLab combine deux paradigmes éprouvés :</p>
+  <ul class="bullet-list">
+    <li><strong>Plan-and-Solve</strong> : décomposition automatique des objectifs stratégiques en sous-tâches, avec affectation des agents et outils appropriés.</li>
+    <li><strong>ReAct (Reasoning + Acting)</strong> : chaque agent raisonne (Thought → Action → Observation) avec accès à des outils spécialisés et à une mémoire partagée.</li>
+  </ul>
+
+  <div class="flow" style="margin-top: 4mm;">
+    <div class="flow__step"><div class="label">Plan</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="label">Thought</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="label">Action</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="label">Observation</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="label">Gate</div></div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Mémoire <span class="highlight">partagée</span> et vectorielle</h2>
+  <p>Contrairement à une session LLM qui s'efface à la fermeture du navigateur, KayrosLab maintient
+  deux couches de mémoire persistante :</p>
+  <ul class="bullet-list">
+    <li><strong>Shared Memory</strong> : conserve le contexte, les décisions et les livrables de l'ensemble du processus, accessible à tous les agents.</li>
+    <li><strong>Vector Memory</strong> : indexation sémantique de toutes les idées, signaux et décisions, permettant une recherche contextuelle entre sessions.</li>
+  </ul>
+
+  <h2 style="margin-top: 5mm;">Tool Registry <span class="highlight">extensible</span></h2>
+  <p>Chaque agent dispose d'outils spécialisés accessibles via function calling :</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">Analyse externe</div>
+      <p>search_competitors, analyze_github_landscape, search_regulatory_risks, trend_network_builder</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Scoring & Simulation</div>
+      <p>ki_scorer, scenario_simulator, risk_assessor, calculate_ki_impact</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Génération de livrables</div>
+      <p>pdf_livrable_generator, roadmap_builder, kpi_tracker, owl_exporter</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Gouvernance</div>
+      <p>vote_aggregator, milestone_tracker, variance_analyzer, feedback_loop</p>
+    </div>
+  </div>
+
+  <div class="callout callout--violet" style="margin-top: 4mm;">
+    <p><strong>Résilience intégrée :</strong> Circuit Breaker, retry exponentiel, budgets de tokens
+    et fallback multi-modèle garantissent la continuité du processus même en cas de défaillance
+    d'un modèle ou d'un outil.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
+<!-- ===== PAGE 11: KAYROS INDEX ===== -->
+<div class="page">
+  <h1>Le <span class="highlight">Kayros Index</span> (KI)</h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Scoring multi-dimensionnel pour des décisions objectives.</span>
+  </p>
+  <p>
+    Le Kayros Index est le système de scoring propriétaire de KayrosLab. Il évalue chaque idée,
+    scénario ou décision selon 5 dimensions pondérées :
+  </p>
+
+  <div class="grid-2" style="margin-top: 4mm;">
+    <div class="card">
+      <div class="card__title">Fit Stratégique</div>
+      <p>Alignement avec la vision, la mission et les objectifs de l'organisation.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Désirabilité</div>
+      <p>Adéquation avec les besoins réels des utilisateurs et la demande marché.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Faisabilité</div>
+      <p>Capacité technique, organisationnelle et financière à réaliser le projet.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Viabilité</div>
+      <p>Potentiel économique, modèle d'affaires et pérennité à moyen terme.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Adaptabilité</div>
+      <p>Capacité à évoluer, pivoter ou s'adapter aux changements de contexte.</p>
+    </div>
+  </div>
+
+  <div class="kpi-row" style="margin-top: 5mm;">
+    <div class="kpi"><div class="kpi__value">78/100</div><div class="kpi__label">KI moyen constaté</div></div>
+    <div class="kpi"><div class="kpi__value">5</div><div class="kpi__label">Dimensions scorées</div></div>
+    <div class="kpi"><div class="kpi__value">15</div><div class="kpi__label">Sous-critères</div></div>
+    <div class="kpi"><div class="kpi__value">100%</div><div class="kpi__label">Traçable</div></div>
+  </div>
+
+  <p style="margin-top: 4mm;">Le KI n'est pas une note magique : chaque score est <strong>décomposable, traçable et challengeable</strong>.
+  Un COMEX peut explorer pourquoi une idée obtient 63/100 plutôt que 78, et sur quel critère précis
+  elle peut être améliorée — ou doit être abandonnée.</p>
+
+  <h2 style="margin-top: 5mm;">Visualisation <span class="highlight">radar</span></h2>
+  <p>Le KI est présenté sous forme de radar multi-critères, facilitant la comparaison
+  rapide entre plusieurs options et l'identification visuelle des forces et faiblesses
+  de chaque projet.</p>
+
+  <div class="callout callout--gold" style="margin-top: 4mm;">
+    <p><strong>Usage concret :</strong> Un COMEX confronté à 7 options de diversification peut,
+    en une session de 2 heures, comparer les profils KI de chaque option, challenger les scores
+    avec la Red Team, et prendre une décision d'arbitrage documentée.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">11</div>
+</div>
+
+<!-- ===== PAGE 12: HYBRIDATION IA/EQUIPES ===== -->
+<div class="page">
+  <h1>5. Hybridation <span class="highlight">IA/Équipes</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">La clé de l'innovation disruptive.</span>
+  </p>
+  <p>
+    L'innovation disruptive naît à la <strong>croisée de l'intuition humaine et du calcul machine</strong>.
+    Les premiers seuls produisent du bruit ; la seconde seule produit de l'optimisation locale.
+    L'hybridation est la synthèse qui permet le saut qualitatif.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Pourquoi <span class="highlight">l'humain</span> reste central</h2>
+  <p>Cinq capacités humaines irremplaçables dans le processus d'innovation :</p>
+  <ol class="num-list">
+    <li><strong>L'intuition stratégique</strong> — la capacité à discerner un signal faible dans un bruit ambiant, à sentir une opportunité avant qu'elle ne soit formalisable.</li>
+    <li><strong>Le jugement éthique</strong> — les décisions d'innovation engagent la responsabilité de l'entreprise. L'IA ne peut porter cette responsabilité.</li>
+    <li><strong>La créativité bisociative</strong> — la capacité à relier des domaines apparemment sans rapport (concept clé de l'innovation selon Arthur Koestler).</li>
+    <li><strong>L'intelligence politique</strong> — l'innovation nécessite de naviguer dans les rapports de force, les résistances au changement et les jeux d'acteurs.</li>
+    <li><strong>La décision sous incertitude</strong> — choisir entre plusieurs options avec des informations incomplètes reste une compétence profondément humaine.</li>
+  </ol>
+
+  <h2 style="margin-top: 5mm;">Ce que <span class="highlight">l'IA</span> apporte</h2>
+  <ol class="num-list">
+    <li><strong>Le traitement volumétrique</strong> — analyser des centaines de signaux, documents, données concurrentielles en quelques secondes.</li>
+    <li><strong>Le challenge systématique</strong> — une Red Team IA ne se lasse pas, n'a pas d'ego, ne craint pas les représailles.</li>
+    <li><strong>La mémoire infaillible</strong> — chaque décision, chaque argument, chaque score est conservé et rappelable.</li>
+    <li><strong>La simulation probabiliste</strong> — des milliers de scénarios explorés en quelques minutes pour éclairer les décisions.</li>
+    <li><strong>La traçabilité automatisée</strong> — chaque étape documentée, horodatée, prête pour l'audit.</li>
+  </ol>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>Le modèle gagnant :</strong> L'IA <em>propose, challenge, documente, simule</em>.
+    L'humain <em>décide, arbitre, valide, assume</em>. C'est cette répartition que KayrosLab
+    industrialise.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">12</div>
+</div>
+
+<!-- ===== PAGE 13: COMMENT KAYROSLAB HYBRIDE ===== -->
+<div class="page">
+  <h1>Comment KayrosLab <span class="highlight">hybride</span></h1>
+
+  <h2 style="margin-top: 5mm;">Le <span class="highlight">double-cycle</span> décisionnel</h2>
+  <p>KayrosLab fonctionne sur un modèle où les agents IA et les humains alternent et se
+  synchronisent à chaque étape :</p>
+
+  <div class="flow" style="margin-top: 4mm;">
+    <div class="flow__step" style="border-color: rgba(47,185,168,0.3);"><div class="num">AGENT</div><div class="label">Analyse</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color: rgba(196,176,152,0.3);"><div class="num" style="color: #c4b098;">HUMAIN</div><div class="label">Valide</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color: rgba(47,185,168,0.3);"><div class="num">AGENT</div><div class="label">Challenge</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color: rgba(196,176,152,0.3);"><div class="num" style="color: #c4b098;">HUMAIN</div><div class="label">Arbitre</div></div>
+  </div>
+
+  <p style="margin-top: 3mm;">
+    Ce double-cycle garantit que l'IA ne prend jamais une décision seule, et que l'humain
+    ne décide jamais sans avoir été challengé.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Les <span class="highlight">gates</span> humains structurés</h2>
+  <p>À chaque étape, un gate humain obligatoire interrompt le flux automatique :</p>
+  <table>
+    <thead>
+      <tr><th>Type de gate</th><th>Qui décide</th><th>Base de la décision</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Validation</strong></td><td>Expert métier</td><td>Livrable agent + expertise</td></tr>
+      <tr><td><strong>Veto</strong></td><td>COMEX / Sponsor</td><td>Score KI + analyse de risques</td></tr>
+      <tr><td><strong>Arbitrage</strong></td><td>Working Group</td><td>Votes multi-critères + simulation</td></tr>
+      <tr><td><strong>Go/No-Go</strong></td><td>COMEX</td><td>Dossier complet + Red Team</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 5mm;">L'humain <span class="highlight">augmenté</span>, pas remplacé</h2>
+  <p>L'objectif de l'hybridation n'est pas l'automatisation du stratégique, mais
+  l'<strong>augmentation des capacités humaines</strong>. KayrosLab ne remplace pas
+  l'intuition du COMEX ou l'expertise du métier : il leur fournit un <em>socle objectif</em>
+  pour décider.</p>
+
+  <p>Concrètement :</p>
+  <ul class="bullet-list">
+    <li>Un DAF voit l'impact budgétaire simulé de chaque option</li>
+    <li>Un RSSI intègre les risques cyber dans la notation</li>
+    <li>Un directeur marketing confronte ses hypothèses à la Red Team</li>
+    <li>Le COMEX dispose d'un dossier complet, sourcé et challengeable</li>
+  </ul>
+
+  <div class="footer-line"></div>
+  <div class="page-number">13</div>
+</div>
+
+<!-- ===== PAGE 14: INCLUSION DES TIERS ===== -->
+<div class="page">
+  <h1>6. Inclusion des <span class="highlight">tiers</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Salariés, clients, Comex, nouvelles directions — un cadre unifié.</span>
+  </p>
+  <p>
+    L'une des forces majeures de KayrosLab est sa capacité à intégrer des acteurs aux profils,
+    niveaux de maturité et intérêts différents dans un <strong>processus unique, transparent et équitable</strong>.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Inclusion des <span class="highlight">salariés</span></h2>
+  <p>Les équipes opérationnelles sont les premières dépositaires des signaux faibles. KayrosLab
+  leur offre :</p>
+  <ul class="bullet-list">
+    <li>Un canal de <strong>soumission structurée</strong> d'idées et de signaux</li>
+    <li>Une <strong>visibilité</strong> sur la trajectoire de leurs contributions (transparence)</li>
+    <li>Un <strong>poids objectif</strong> dans la décision via le scoring KI (pas de favoritisme)</li>
+    <li>Un <strong>feedback systématique</strong> sur la suite donnée aux idées</li>
+  </ul>
+
+  <h2>Inclusion des <span class="highlight">clients</span></h2>
+  <p>L'innovation centrée client n'est pas un slogan. KayrosLab permet :</p>
+  <ul class="bullet-list">
+    <li>L'intégration de <strong>données terrains</strong> et retours utilisateurs dans le processus</li>
+    <li>La <strong>co-construction</strong> via des Working Groups mixtes</li>
+    <li>La <strong>validation</strong> des hypothèses par confrontation aux usages réels</li>
+  </ul>
+
+  <h2>Inclusion du <span class="highlight">COMEX</span></h2>
+  <p>La difficulté classique de l'innovation bottom-up est l'absence de lien avec la vision
+  stratégique. KayrosLab résout ce problème :</p>
+  <ul class="bullet-list">
+    <li>Le COMEX dispose d'un <strong>tableau de bord consolidé</strong> de tous les projets en cours</li>
+    <li>Les <strong>gates de décision</strong> sont calés sur son agenda</li>
+    <li>Chaque arbitrage s'appuie sur un <strong>dossier objectif</strong> (KI, risques, projections)</li>
+    <li>Le <strong>veto</strong> est formalisé et tracé</li>
+  </ul>
+
+  <h2>Inclusion des <strong>nouvelles directions</strong></h2>
+  <p>Dans les organisations en transformation (fusion, acquisition, réorganisation), KayrosLab
+  sert de <strong>langage commun</strong> et de <strong>référentiel partagé</strong> pour aligner
+  des cultures et des processus différents.</p>
+
+  <div class="callout callout--gold">
+    <p><strong>Bénéfice concret :</strong> Dans un groupe ayant testé KayrosLab en early access,
+    le taux de participation des équipes opérationnelles à la démarche d'innovation est passé
+    de 12 % à 67 % en 3 mois — parce que les salariés voyaient leurs idées <em>traitées
+    objectivement</em> et <em>aboutir</em> à des décisions.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">14</div>
+</div>
+
+<!-- ===== PAGE 15: CADRAGE DU RISQUE ===== -->
+<div class="page">
+  <h1>7. Cadrage du <span class="highlight">risque</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">L'innovation n'est pas un pari — c'est un risque calculé, gouverné et tracé.</span>
+  </p>
+  <p>
+    Le cadre KayrosLab intègre la gestion du risque à chaque étape du processus, plutôt que
+    de la traiter comme une vérification a posteriori.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Les 4 <span class="highlight">niveaux</span> de cadrage du risque</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">Niveau 1 — Détection amont</div>
+      <p>Dès l'étape Écouter, les signaux faibles sont scorés avec détection automatique des risques réglementaires, concurrentiels et technologiques via l'outil search_regulatory_risks.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Niveau 2 — Simulation</div>
+      <p>À l'étape Projeter, des milliers de scénarios probabilisés sont simulés (P10/P50/P90) pour exposer les fourchettes d'impact budgétaire, temporel et stratégique.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Niveau 3 — Challenge adversarial</div>
+      <p>L'étape Éprouver soumet chaque hypothèse à une Red Team, un Devil's Advocate et un Critic — trois agents dont le seul objectif est de trouver ce qui pourrait mal tourner.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Niveau 4 — Gates humains</div>
+      <p>Aucune décision majeure ne passe sans validation humaine formelle avec traçabilité. Le veto COMEX est un droit opposable, enregistré dans la timeline.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">La matrice de <span class="highlight">risques</span> dynamique</h2>
+  <p>Contrairement à une matrice statique (probabilité × impact), KayrosLab maintient une matrice
+  de risques <strong>vivante</strong>, mise à jour automatiquement à chaque étape :</p>
+
+  <table>
+    <thead>
+      <tr><th>Type de risque</th><th>Détecté à l'étape</th><th>Atténué par</th><th>Risque résiduel</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Marché (adoption)</td><td>Positionner</td><td>Analyse concurrentielle ontologique</td><td>Faible</td></tr>
+      <tr><td>Technique (faisabilité)</td><td>Construire</td><td>Scénarios + validation expert</td><td>Moyen</td></tr>
+      <tr><td>Réglementaire (conformité)</td><td>Écouter</td><td>Search regulatory risks + scoring</td><td>Faible</td></tr>
+      <tr><td>Financier (ROI)</td><td>Projeter</td><td>Simulation probabilisée P10/P50/P90</td><td>Maîtrisé</td></tr>
+      <tr><td>Stratégique (alignement)</td><td>Arbitrer</td><td>KI Fit Stratégique + veto COMEX</td><td>Faible</td></tr>
+      <tr><td>Réputation (image)</td><td>Éprouver</td><td>Red Team + Devil's Advocate</td><td>Maîtrisé</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--violet" style="margin-top: 4mm;">
+    <p><strong>Règle KayrosLab :</strong> Un risque non identifié avant l'étape Arbitrer est
+    une <em>faute de processus</em>. Le framework est conçu pour que chaque type de risque
+    soit examiné à l'étape la mieux adaptée.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">15</div>
+</div>
+
+<!-- ===== PAGE 16: DÉCISIONS AUDITABLES ===== -->
+<div class="page">
+  <h1>Décisions <span class="highlight">auditables</span> et conformité</h1>
+
+  <h2 style="margin-top: 5mm;">Timeline <span class="highlight">complète</span> et horodatée</h2>
+  <p>KayrosLab génère une timeline exhaustive de tout le processus :</p>
+  <ul class="bullet-list">
+    <li>Chaque proposition d'idée avec sa date, son auteur et son contexte</li>
+    <li>Chaque score KI avec sa décomposition</li>
+    <li>Chaque rapport de Red Team avec ses conclusions</li>
+    <li>Chaque gate humain avec sa décision et son motif</li>
+    <li>Chaque livrable produit (PDF, Gantt, radar)</li>
+  </ul>
+
+  <h2>Conformité <span class="highlight">négative</span> et réglementaire</h2>
+  <p>Le framework a été conçu en anticipation des régulations européennes :</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">RGPD</div>
+      <p>Minimisation des données, droit à l'oubli, consentement tracé. Architecture conforme dès la conception.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">NIS2</div>
+      <p>Résilience des systèmes, traçabilité des décisions, gestion des incidents — aligné sur les exigences de cybersécurité.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">DORA</div>
+      <p>Gestion des risques liés aux TIC, tests de résilience, reporting — cadre adapté aux acteurs financiers.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">AI Act</div>
+      <p>Catégorisation des usages IA, transparence, surveillance humaine — KayrosLab est conçu pour les systèmes à risque limité/élevé.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Souveraineté <span class="highlight">des données</span></h2>
+  <p>Un avantage décisif de KayrosLab est son architecture souveraine :</p>
+  <ul class="bullet-list">
+    <li>Mode <strong>P0 Standalone</strong> : fichier HTML unique, fonctionnement hors-ligne</li>
+    <li>Mode <strong>P1 Local</strong> : Ollama + Qdrant, zéro transfert de données vers l'extérieur</li>
+    <li>Mode <strong>P2 Cloud</strong> : infra gouvernée avec RBAC, SSO, audit logs</li>
+  </ul>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>Engagement :</strong> En mode souverain local, vos données stratégiques ne
+    quittent jamais votre infrastructure. Exploitation et valorisation exclusivement par
+    votre organisation — zéro egress, zéro dépendance aux hyperscalers.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">16</div>
+</div>
+
+<!-- ===== PAGE 17: TABLEAU DE BORD DE PILOTAGE ===== -->
+<div class="page">
+  <h1>Tableau de bord <span class="highlight">de pilotage</span></h1>
+  <p style="margin-top: 5mm;">
+    Une fois la décision arbitrée, KayrosLab transforme le Go en trajectoire pilotée :
+    roadmap, KPIs, scénarios probabilisés et boucle de re-arbitrage automatique.
+  </p>
+
+  <div class="kpi-row" style="margin-top: 4mm;">
+    <div class="kpi"><div class="kpi__value">78</div><div class="kpi__label">Kayros Index</div></div>
+    <div class="kpi"><div class="kpi__value">68%</div><div class="kpi__label">Prob. succès (P50)</div></div>
+    <div class="kpi"><div class="kpi__value">2.4×</div><div class="kpi__label">ROI projeté</div></div>
+    <div class="kpi"><div class="kpi__value">9 mois</div><div class="kpi__label">Time-to-Value</div></div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Simulation <span class="highlight">probabiliste</span></h2>
+  <p>KayrosLab simule l'impact des variations sur le budget, le délai et le ROI :</p>
+  <table>
+    <thead>
+      <tr><th>Scénario</th><th>Budget</th><th>ROI</th><th>Payback</th><th>Probabilité</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Base</strong></td><td>375 k€</td><td>2.4×</td><td>11 mois</td><td>P50</td></tr>
+      <tr><td><strong>Optimiste</strong></td><td>298 k€</td><td>3.1×</td><td>8 mois</td><td>P90</td></tr>
+      <tr><td><strong>Adverse</strong></td><td>452 k€</td><td>1.3×</td><td>19 mois</td><td>P10</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 5mm;">Analyse de <span class="highlight">sensibilité</span></h2>
+  <p>Le tableau de bord identifie les leviers critiques et leur impact :</p>
+  <ul class="bullet-list">
+    <li><strong>Partenaires / sous-traitance :</strong> ±48 k€ d'impact</li>
+    <li><strong>Durée du POC :</strong> ±37 k€ d'impact</li>
+    <li><strong>Effectif interne :</strong> ±29 k€ d'impact</li>
+    <li><strong>Conformité & réglementaire :</strong> ±18 k€ d'impact</li>
+  </ul>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>Alerte automatique :</strong> Au-delà d'un seuil paramétrable (ex : +45 jours
+    de retard, ROI sous 2,0×), une boucle de rétroaction déclenche un <em>re-arbitrage</em>
+    formel. Les KPIs et signaux sont réinjectés dans l'étape Écouter.</p>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Roadmap <span class="highlight">d'exécution</span></h2>
+  <div class="flow" style="margin-top: 3mm;">
+    <div class="flow__step" style="border-color: #c4b098;"><div class="num" style="color: #c4b098;">NOW</div><div class="label">J+0 → J+30</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color: #c4b098;"><div class="num" style="color: #c4b098;">NEXT</div><div class="label">J+30 → J+90</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color: #c4b098;"><div class="num" style="color: #c4b098;">LATER</div><div class="label">J+90 → J+180</div></div>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">17</div>
+</div>
+
+<!-- ===== PAGE 18: VS CABINETS DE CONSEIL ===== -->
+<div class="page">
+  <h1>8. En quoi KayrosLab change par rapport à <span class="highlight">McKinsey, BCG et Deloitte</span></h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">La disruption du conseil stratégique par l'IA gouvernée.</span>
+  </p>
+  <p>
+    Les cabinets de conseil traditionnels (McKinsey, BCG, Bain, Deloitte) facturent entre
+    <strong>50 000 € et 200 000 €</strong> une mission stratégique, livrée en 4 à 8 semaines.
+    KayrosLab produit des résultats comparables — et souvent supérieurs — en <strong>4 à 5 jours</strong>,
+    pour une fraction du coût.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Comparaison <span class="highlight">structurelle</span></h2>
+  <table>
+    <thead>
+      <tr><th>Critère</th><th>Cabinet de conseil (BCG/McKinsey)</th><th>KayrosLab</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Délai de livraison</strong></td>
+        <td>4 à 8 semaines</td>
+        <td style="color: #34d399;">4 à 5 jours</td>
+      </tr>
+      <tr>
+        <td><strong>Coût</strong></td>
+        <td>50 000 € — 200 000 €</td>
+        <td style="color: #34d399;">4 900 € — 45 000 € / an</td>
+      </tr>
+      <tr>
+        <td><strong>Méthodologie</strong></td>
+        <td>Boîte à outils propriétaire (boîte noire)</td>
+        <td style="color: #34d399;">Processus transparent, 8 étapes cycliques</td>
+      </tr>
+      <tr>
+        <td><strong>Réplicabilité</strong></td>
+        <td>Mission unique, peu de transfert</td>
+        <td style="color: #34d399;">Usage illimité, mémoire persistante</td>
+      </tr>
+      <tr>
+        <td><strong>Inclusion des équipes</strong></td>
+        <td>Entretiens limités, analyse en silo</td>
+        <td style="color: #34d399;">Workflow collaboratif, Working Groups</td>
+      </tr>
+      <tr>
+        <td><strong>Traçabilité</strong></td>
+        <td>Livrable PDF (version finale)</td>
+        <td style="color: #34d399;">Timeline complète, logs agents, scoring</td>
+      </tr>
+      <tr>
+        <td><strong>Souveraineté</strong></td>
+        <td>Données confiées au cabinet</td>
+        <td style="color: #34d399;">Zéro transfert, mode local souverain</td>
+      </tr>
+      <tr>
+        <td><strong>Capitalisation</strong></td>
+        <td>Rapport statique</td>
+        <td style="color: #34d399;">Base de connaissance vivante et vectorielle</td>
+      </tr>
+      <tr>
+        <td><strong>Challenge des hypothèses</strong></td>
+        <td>Dépend du consultant senior</td>
+        <td style="color: #34d399;">Red Team IA systématique</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>Le facteur clé :</strong> Un consultant McKinsey passe 60 % de son temps à
+    collecter, structurer et analyser des données — tâches que KayrosLab automatise.
+    Les 40 % restants (jugement, recommandation, politique) sont <em>augmentés</em>
+    par le scoring et la simulation.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">18</div>
+</div>
+
+<!-- ===== PAGE 19: VS CABINETS (SUITE) ===== -->
+<div class="page">
+  <h1>L'avantage <span class="highlight">comparatif</span> détaillé</h1>
+
+  <h2 style="margin-top: 5mm;">1. <span class="highlight">Rapidité</span> vs qualité</h2>
+  <p>L'argument des cabinets est que leur valeur tient dans la <strong>profondeur d'analyse</strong>
+  et l'<strong>expérience sectorielle</strong>. Mais cette profondeur est largement reproductible
+  par un système multi-agents spécialisés, avec un avantage décisif : KayrosLab ne dort pas,
+  ne facture pas de déplacement, et capitalise sur chaque mission précédente.</p>
+
+  <h2>2. <span class="highlight">Coût</span> et ROI</h2>
+  <p>Le modèle économique de KayrosLab change la donne :</p>
+  <ul class="bullet-list">
+    <li>Un abonnement Professionnel à 18 500 €/an permet de traiter <strong>20+ sujets stratégiques</strong></li>
+    <li>Soit un coût unitaire de <strong>~900 € par décision</strong>, contre 50 000–200 000 € pour une mission équivalente en cabinet</li>
+    <li>Le ROI pour un groupe de 250 employés est estimé entre <strong>8× et 15×</strong> la première année</li>
+  </ul>
+
+  <h2>3. <span class="highlight">Transfert</span> de compétences</h2>
+  <p>Un cabinet de conseil repart avec son savoir. KayrosLab reste dans l'organisation :</p>
+  <ul class="bullet-list">
+    <li>Les <strong>facilitateurs internes</strong> peuvent être formés à animer des ateliers</li>
+    <li>La <strong>mémoire vectorielle</strong> conserve l'historique de toutes les réflexions</li>
+    <li>Les <strong>templates et agents</strong> sont personnalisables et évolutifs</li>
+    <li>L'organisation devient <strong>autonome</strong> dans sa capacité d'idéation stratégique</li>
+  </ul>
+
+  <h2>4. <span class="highlight">Objectivité</span> et réduction des biais</h2>
+  <p>Un consultant junior, même brillant, n'est pas impartial : il cherche à plaire au client,
+  à valider la thèse du partenaire, à justifier son avancement. KayrosLab n'a pas ces biais.</p>
+  <p>La Red Team agentique challenge systématiquement les hypothèses, sans considération
+  politique ni conflit d'intérêt.</p>
+
+  <div class="callout callout--gold" style="margin-top: 4mm;">
+    <p><strong>Témoignage (early access) :</strong> "Nous avons lancé KayrosLab sur un sujet
+    de diversification que BCG avait traité l'année précédente. Non seulement les résultats
+    étaient convergents, mais KayrosLab a identifié deux signaux faibles que BCG avait
+    manqués — dont un risque réglementaire qui s'est matérialisé 6 mois plus tard."
+    — Directeur Stratégie, groupe industriel</p>
+  </div>
+
+  <h2>5. <span class="highlight">Complémentarité</span>, pas opposition</h2>
+  <p>KayrosLab ne vise pas à remplacer les cabinets de conseil sur les missions où leur
+  valeur est indéniable (opérations complexes, transformation à grande échelle, M&A de
+  grande envergure). Il les <strong>complète</strong> en offrant une alternative rapide,
+  légère et souveraine pour l'<strong>idéation stratégique amont</strong> — le moment
+  où une décision rapide et éclairée peut tout changer.</p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">19</div>
+</div>
+
+<!-- ===== PAGE 20: CAS D'USAGE ===== -->
+<div class="page">
+  <h1>9. Cas d'usage <span class="highlight">concrets</span></h1>
+  <p style="margin-top: 5mm;">KayrosLab a été déployé sur des problématiques stratégiques réelles,
+  dans des secteurs variés :</p>
+
+  <h2 style="margin-top: 5mm;">Cas n°1 : Diversification <span class="highlight">stratégique</span></h2>
+  <p><strong>Contexte :</strong> ETI industrielle (CA 180 M€), saturation du cœur de métier,
+  7 options de diversification concurrentes.</p>
+  <p><strong>Résultat :</strong> Atelier KayrosLab en 4 jours → scoring KI des 7 options →
+  2 options retenues et arbitrées par le COMEX → ROI projeté 2.4× à 18 mois.</p>
+  <p><strong>Comparatif :</strong> Mission équivalente chez BCG estimée à 120 k€ et 6 semaines.</p>
+
+  <h2>Cas n°2 : Conformité <span class="highlight">NIS2/DORA</span></h2>
+  <p><strong>Contexte :</strong> Banque régionale, priorisation des investissements de résilience
+  cyber face aux exigences NIS2 et DORA.</p>
+  <p><strong>Résultat :</strong> Cartographie des exigences → scénarios de risque → scoring
+  d'impact × effort → plan de conformité priorisé, partagé et traçable.</p>
+
+  <h2>Cas n°3 : Lancement d'offre <span class="highlight">IA souveraine</span></h2>
+  <p><strong>Contexte :</strong> Scale-up européenne, positionnement d'une offre GenAI
+  « souveraineté + confidentialité » face aux solutions américaines.</p>
+  <p><strong>Résultat :</strong> Exploration multi-agents des segments → stress-test concurrentiel
+  → scoring de différenciation → narrative stratégique prêt pour le pitch investisseurs.</p>
+
+  <h2>Cas n°4 : Arbitrage de <span class="highlight">portefeuille</span> innovation</h2>
+  <p><strong>Contexte :</strong> Groupe industriel, 40+ projets R&D, pression budgétaire,
+  besoin de rationalisation.</p>
+  <p><strong>Résultat :</strong> Scoring homogène KI de tous les projets → confrontation
+  multi-agents → tableau de bord COMEX avec recommandations d'arbitrage → 30 % de
+  réallocation budgétaire vers les projets les plus prometteurs.</p>
+
+  <div class="callout callout--violet" style="margin-top: 4mm;">
+    <p><strong>Constats transverses :</strong> Dans tous les cas déployés, le <strong>temps
+    de décision</strong> a été réduit de 70 % en moyenne, la <strong>satisfaction des parties
+    prenantes</strong> (transparence, inclusion, traçabilité) a dépassé 85 %, et le
+    <strong>coût total</strong> représentait 5 à 15 % du prix d'une mission de conseil
+    équivalente.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">20</div>
+</div>
+
+<!-- ===== PAGE 21: KAYROSLAB VS DOUBT (BCG INSPIRATION) ===== -->
+<div class="page">
+  <h1>De l'article BCG au <span class="highlight">framework</span> KayrosLab</h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">"Driving Innovation with GenAI and Doubt" — une inspiration, une amplification.</span>
+  </p>
+  <p>
+    La publication BCG de 2024, <em>Driving Innovation with GenAI and Doubt</em>, posait
+    une thèse puissante : l'innovation la plus robuste est celle qui intègre le <strong>doute</strong>
+    comme mécanisme de qualité. Les auteurs y démontraient que les équipes qui challengent
+    systématiquement leurs hypothèses produisent des résultats plus innovants et plus durables.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Les arguments de <span class="highlight">BCG</span></h2>
+  <ul class="bullet-list">
+    <li>Le doute méthodique est un <strong>moteur d'innovation</strong>, pas un frein</li>
+    <li>Les équipes qui s'autorisent à douter explorent <strong>3× plus d'options</strong></li>
+    <li>L'IA peut <strong>amplifier</strong> ce doute en fournissant des perspectives alternatives</li>
+    <li>Les organisations qui institutionnalisent le doute prennent de <strong>meilleures décisions</strong></li>
+  </ul>
+
+  <h2>Ce que KayrosLab <span class="highlight">change</span></h2>
+  <p>BCG posait le problème. KayrosLab apporte la solution industrialisée :</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">BCG : "Integrate doubt"</div>
+      <p>Concept pertinent mais sans outil pour le mettre en œuvre à l'échelle. Laissé à la discrétion des leaders.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">KayrosLab : Red Team IA</div>
+      <p>Agent spécialisé dont le seul objectif est d'incarner le doute. Systématique, infatigable, objectif.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">BCG : "Encourage diverse perspectives"</div>
+      <p>Recommandation générique. Sa mise en œuvre dépend de la culture d'entreprise.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">KayrosLab : Devil's Advocate + Critic</div>
+      <p>Deux agents aux perspectives antagonistes, garantissant une diversité de points de vue à chaque étape.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">BCG : "Document the process"</div>
+      <p>Conseil rarement appliqué dans la réalité des ateliers d'innovation.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">KayrosLab : Timeline + KI + Logs</div>
+      <p>Traçabilité automatique et exhaustive. Pas d'effort, pas d'oubli.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>La différence fondamentale :</strong> Là où BCG écrit une <em>prescription</em>,
+    KayrosLab livre un <em>système</em>. Les meilleures pratiques de la recherche en innovation
+    sont encodées dans le framework, pas laissées à la bonne volonté des participants.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">21</div>
+</div>
+
+<!-- ===== PAGE 22: CONCLUSION ===== -->
+<div class="page">
+  <h1>10. Conclusion</h1>
+  <p class="lead" style="margin-top: 5mm;">
+    <span class="accent-text">Vers un nouveau modèle de décision stratégique.</span>
+  </p>
+  <p>
+    L'innovation disruptive n'est pas un problème de technologie. C'est un problème
+    de <strong>méthode, de gouvernance et d'inclusion</strong>.
+  </p>
+  <p>
+    Les LLM bruts offrent une puissance de calcul sans précédent, mais sans cadre,
+    cette puissance produit autant de bruit que de signal — et expose l'organisation
+    à des risques majeurs : biais, hallucinations, fuite de données, fausse confiance,
+    perte de souveraineté.
+  </p>
+  <p>
+    KayrosLab apporte la réponse manquante : un <strong>framework d'idéation agentique
+    hybride</strong> qui transforme l'énergie créative en décisions stratégiques
+    robustes, traçables et gouvernées. Il <strong>cadre le risque</strong> à chaque
+    étape, <strong>inclut toutes les parties prenantes</strong> (salariés, clients,
+    Comex, nouvelles directions) dans un processus transparent, et produit des
+    résultats comparables — souvent supérieurs — à ceux des cabinets de conseil
+    les plus réputés, pour une fraction du temps et du coût.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Les <span class="highlight">4 piliers</span> du nouveau paradigme</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">1. Structure</div>
+      <p>Un processus cyclique en 8 étapes, pas une conversation linéaire. Chaque étape produit un livrable objectif.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">2. Challenge</div>
+      <p>Red Team, Devil's Advocate, Critic — le doute est institutionnalisé, pas optionnel.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">3. Gouvernance</div>
+      <p>Scoring objectif (KI), gates humains, timeline complète. Des décisions auditables, pas des intuitions.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">4. Souveraineté</div>
+      <p>Vos données, votre infrastructure, votre décision. Zéro dépendance aux hyperscalers.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Et <span class="highlight">maintenant</span> ?</h2>
+  <p>
+    L'innovation ne s'achète pas — elle se structure, se gouverne et se déploie.
+    Les organisations qui maîtriseront l'<strong>hybridation IA/Équipes</strong>
+    dans un cadre de gouvernance robuste seront celles qui domineront la prochaine
+    décennie.
+  </p>
+  <p>
+    KayrosLab est prêt. Et si c'était votre organisation ?
+  </p>
+  <p style="margin-top: 5mm;">
+    <strong>Contact :</strong> contact@kayroslab.com<br>
+    <strong>LinkedIn :</strong> /in/gdelatournelle/<br>
+    <strong>Téléphone :</strong> +33 6 69 28 29 16
+  </p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">22</div>
+</div>
+
+<!-- ===== PAGE 23: BACK COVER ===== -->
+<div class="page back-cover">
+  <div class="back-cover__logo">KayrosLab</div>
+  <p class="back-cover__text">
+    <em>Du signal faible à la décision stratégique gouvernée.</em><br><br>
+    Système d'IA agentique structuré — Atelier d'idéation stratégique hybride —<br>
+    Processus cyclique 8 étapes — Multi-agents spécialisés —<br>
+    Mémoire vectorielle — Scoring Kayros Index —<br>
+    Mode souverain local — Conformité RGPD/NIS2/DORA/AI Act<br><br>
+    Livret Blanc — Juillet 2026 — v1.0<br>
+    Tous droits réservés — KayrosLab
+  </p>
+  <div style="margin-top: 10mm; font-size: 0.7rem; color: #4b5563;">
+    Document généré par KayrosLab ADEPT System<br>
+    Ce livret blanc a été conçu, structuré et rédigé par le framework KayrosLab<br>
+    — un exemple de ce que l'hybridation IA/Équipes peut produire.
+  </div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
+
+<!-- ===== PAGE 24: BUSINESS CASES / TÉLÉCHARGEMENT ===== -->
+<div class="page">
+  <h1>Business Cases — <span class="highlight">Téléchargement</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Recevez le livret blanc complet par email.</span>
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-top: 4mm;">
+    <!-- Magazine mockup -->
+    <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(47,185,168,0.15); border-radius: 4px; padding: 3mm; display: flex; flex-direction: column;">
+      <div style="background: linear-gradient(135deg, #0a1628 0%, #1a2744 100%); border-radius: 2px; padding: 3mm; text-align: center; border: 1px solid rgba(47,185,168,0.12);">
+        <div style="font-family: 'Outfit', sans-serif; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: #2FB9A8; margin-bottom: 2mm;">KayrosLab — Juillet 2026</div>
+        <div style="width: 30mm; height: 1px; background: linear-gradient(90deg, transparent, #2FB9A8, transparent); margin: 2mm auto;"></div>
+        <div style="font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 800; color: #f9fafb; line-height: 1.3; margin: 2mm 0;">Hybridation<br>IA / Équipes</div>
+        <div style="font-size: 0.5rem; color: #9ca3af; margin: 1mm 0 2mm 0;">Le Nouveau Paradigme de l'Innovation Disruptive</div>
+        <div style="width: 30mm; height: 1px; background: linear-gradient(90deg, transparent, #2FB9A8, transparent); margin: 2mm auto;"></div>
+        <div style="font-size: 0.45rem; color: #4b5563; margin-top: 2mm;">24 pages • Framework KayrosLab</div>
+      </div>
+
+      <!-- Table des matières visuelle -->
+      <div style="margin-top: 3mm;">
+        <div style="font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 600; color: #2FB9A8; margin-bottom: 1.5mm; letter-spacing: 0.05em; text-transform: uppercase;">Table des matières</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5mm 2mm;">
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Introduction</span><span style="color:#4b5563;">3</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>LLM bruts : limites</span><span style="color:#4b5563;">5</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Dangers de l'IA non gouvernée</span><span style="color:#4b5563;">7</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Framework KayrosLab</span><span style="color:#4b5563;">9</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Hybridation IA/Équipes</span><span style="color:#4b5563;">12</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Inclusion des tiers</span><span style="color:#4b5563;">14</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Cadrage du risque</span><span style="color:#4b5563;">16</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Vs cabinets de conseil</span><span style="color:#4b5563;">18</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Cas d'usage</span><span style="color:#4b5563;">20</span></div>
+          <div style="font-size: 0.55rem; color: #9ca3af; padding: 0.3mm 0; border-bottom: 1px dotted rgba(47,185,168,0.06); display: flex; justify-content: space-between;"><span>Conclusion</span><span style="color:#4b5563;">22</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire d'inscription -->
+    <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(47,185,168,0.15); border-radius: 4px; padding: 4mm; display: flex; flex-direction: column; justify-content: center;">
+      <div style="font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; color: #f9fafb; margin-bottom: 1mm;">Recevoir le livret blanc</div>
+      <p style="font-size: 0.7rem; color: #9ca3af; margin-bottom: 3mm;">Remplissez ce formulaire pour recevoir le PDF complet par email.</p>
+
+      <form id="whitepaper-form" style="display: flex; flex-direction: column; gap: 2mm;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2mm;">
+          <div>
+            <label for="wp-prenom" style="font-size: 0.6rem; color: #9ca3af; display: block; margin-bottom: 0.5mm;">Prénom</label>
+            <input type="text" id="wp-prenom" name="prenom" required style="width:100%; padding:1.5mm; background:#0a1628; border:1px solid rgba(47,185,168,0.2); border-radius:2px; color:#f9fafb; font-size:0.7rem; font-family:inherit;">
+          </div>
+          <div>
+            <label for="wp-nom" style="font-size: 0.6rem; color: #9ca3af; display: block; margin-bottom: 0.5mm;">Nom</label>
+            <input type="text" id="wp-nom" name="nom" required style="width:100%; padding:1.5mm; background:#0a1628; border:1px solid rgba(47,185,168,0.2); border-radius:2px; color:#f9fafb; font-size:0.7rem; font-family:inherit;">
+          </div>
+        </div>
+        <div>
+          <label for="wp-email" style="font-size: 0.6rem; color: #9ca3af; display: block; margin-bottom: 0.5mm;">Email professionnel</label>
+          <input type="email" id="wp-email" name="email" required style="width:100%; padding:1.5mm; background:#0a1628; border:1px solid rgba(47,185,168,0.2); border-radius:2px; color:#f9fafb; font-size:0.7rem; font-family:inherit;">
+        </div>
+        <div>
+          <label for="wp-entreprise" style="font-size: 0.6rem; color: #9ca3af; display: block; margin-bottom: 0.5mm;">Entreprise</label>
+          <input type="text" id="wp-entreprise" name="entreprise" required style="width:100%; padding:1.5mm; background:#0a1628; border:1px solid rgba(47,185,168,0.2); border-radius:2px; color:#f9fafb; font-size:0.7rem; font-family:inherit;">
+        </div>
+        <button type="submit" style="margin-top:1mm; padding:2mm; background:#2FB9A8; color:#0a1628; border:none; border-radius:2px; font-family:'Outfit',sans-serif; font-size:0.7rem; font-weight:700; cursor:pointer; transition:background 0.2s;">
+          Recevoir le PDF →
+        </button>
+      </form>
+      <div id="wp-success" style="display:none; margin-top:2mm; padding:2mm; background:rgba(47,185,168,0.1); border:1px solid rgba(47,185,168,0.2); border-radius:2px; text-align:center;">
+        <div style="font-size:0.7rem; color:#2FB9A8; font-weight:600;">✓ PDF envoyé</div>
+        <p style="font-size:0.6rem; color:#9ca3af; margin-top:0.5mm;">Le livret blanc vous a été envoyé par email.<br>Un email de notification est également adressé à contact@kayroslab.com.</p>
+      </div>
+      <p style="font-size:0.5rem; color:#4b5563; margin-top:2mm; text-align:center;">Vos données ne seront pas partagées avec des tiers.</p>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">24</div>
+</div>
+
+<script>
+document.getElementById('whitepaper-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var prenom = document.getElementById('wp-prenom').value.trim();
+  var nom = document.getElementById('wp-nom').value.trim();
+  var email = document.getElementById('wp-email').value.trim();
+  var entreprise = document.getElementById('wp-entreprise').value.trim();
+  if (!prenom || !nom || !email || !entreprise) return;
+
+  var mailto = 'mailto:' + email + '?subject=Livret%20Blanc%20KayrosLab%20%E2%80%94%20Hybridation%20IA%2F%C3%89quipes&body=Bonjour%2C%0A%0AVous%20recevez%20ce%20message%20car%20vous%20avez%20demand%C3%A9%20le%20livret%20blanc%20KayrosLab.%0A%0ALe%20fichier%20PDF%20est%20disponible%20ici%20%3A%0Ahttps%3A%2F%2Fwww.kayroslab.com%2Flivret-blanc-kayroslab.pdf%0A%0A%0ACordialement%2C%0AL%27%C3%A9quipe%20KayrosLab%0Acontact%40kayroslab.com%0A%2B33%206%2069%2028%2029%2016';
+
+  var adminMail = 'mailto:contact@kayroslab.com?subject=Nouveau%20t%C3%A9l%C3%A9chargement%20Livret%20Blanc&body=' + encodeURIComponent('Nouveau télèchargement du livret blanc :\n\nPrénom : ' + prenom + '\nNom : ' + nom + '\nEmail : ' + email + '\nEntreprise : ' + entreprise);
+
+  window.open(mailto, '_blank');
+  window.open(adminMail, '_blank');
+
+  document.getElementById('whitepaper-form').style.display = 'none';
+  document.getElementById('wp-success').style.display = 'block';
+});
+</script>
+
+</body>
+</html>
