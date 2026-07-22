@@ -706,6 +706,78 @@ Statut : 🔴 à construire (22 exigences). Dépend du déploiement P2.
 
 ---
 
+---
+
+## 8. Étape « Positionner » — Analyse concurrentielle automatisée
+
+### 8.1 Vue d'ensemble
+
+L'étape **Positionner** s'intercale entre **Construire** (03) et **Éprouver** (04). Une fois le scénario construit, l'idée est confrontée au marché réel via une analyse concurrentielle multi-sources avant d'être challengée par la Red Team.
+
+**Finalité :** produire une **matrice de positionnement** sur 14 dimensions (7 tech, 7 business) en confrontant l'idée à ses concurrents identifiés automatiquement.
+
+### 8.2 Sources de données
+
+| Source | Données collectées | Méthode |
+|--------|-------------------|---------|
+| Web (DuckDuckGo / Google) | Pages concurrentes, extraits, positionnement déclaré | HTTP scraping / API Google CX |
+| GitHub API | Repos, stars, forks, contributeurs, commits 90j, issues, fraîcheur | REST API publique |
+| GitLab API | Repos, stars, forks, activité | REST API publique |
+
+### 8.3 Protocole de scoring — 3 canaux pondérés
+
+```
+Score(n) = 0.25 × Web(n) + 0.40 × GitHub(n) + 0.35 × Heuristique(n)
+```
+
+### 8.4 Ontologie — 14 neurones
+
+**Tech :** Architecture, Stack, Data Layer, Sécurité, IA/ML, Scale & Perf, API Surface
+**Business :** Business Model, Pricing, Go-to-Market, ICP, Revenue Model, Customer Success, Unit Economics
+
+Chaque neurone est scoré de 0 à 100 via analyse de mots-clés et KPIs objectifs (stars, forks, commits, closure rate, recency).
+
+### 8.5 Livrables
+
+| Livrable | Format | Contenu |
+|----------|--------|---------|
+| Matrice de positionnement | JSON | Scores par neurone pour chaque concurrent + baseline de l'idée |
+| Gap analysis | Liste | Écarts de différenciation (avantage/désavantage), seuil ≥ 5 pts |
+| Graphe interactif | React app | Grille 2 colonnes (tech / business), barres de score, traces concurrentes |
+| Export RDF | RDF/XML | Ontologie de positionnement réutilisable |
+
+### 8.6 Intégration dans le Kayros Index
+
+Les gaps de différenciation sont injectés comme facteurs dans le KI :
+
+| Facteur KI | Alimentation |
+|------------|-------------|
+| `competitive_intensity` | `avg(score_concurrents)` — plus le marché est dense, plus le risque est élevé |
+| `differentiation` | `avg(positive_gaps)` — plus l'idée se différencie, plus le score monte |
+| `market_maturity` | Dérivé de l'âge moyen des repos et du nombre de concurrents |
+
+### 8.7 Exigences fonctionnelles — Positionner
+
+| EF | Fonction | Statut |
+|----|----------|--------|
+| EF-88 | Recherche web de concurrents (DuckDuckGo) | 🟢 |
+| EF-89 | Recherche GitHub par concurrence (repos, stars, forks) | 🟢 |
+| EF-90 | Recherche GitLab (repos, stars, activité) | 🟢 |
+| EF-91 | Calcul des KPIs GitHub (stars normalisées, forks, contributeurs, closure rate, recency, commits 90j) | 🟢 |
+| EF-92 | Scoring 14 neurones (7 tech + 7 business) par analyse de mots-clés | 🟢 |
+| EF-93 | Scoring 14 neurones par KPIs GitHub | 🟢 |
+| EF-94 | Synthèse pondérée des 3 canaux (Web 25%, GitHub 40%, Heuristique 35%) | 🟢 |
+| EF-95 | Gap analysis (écart baseline vs concurrents, seuil ≥ 5 pts) | 🟢 |
+| EF-96 | Export matrice JSON | 🟢 |
+| EF-97 | Export RDF/XML | 🟢 |
+| EF-98 | Interface interactive React (grille 2 colonnes) | 🟢 |
+| EF-99 | Lien direct depuis l'interface KayrosLab | 🟢 |
+| EF-100 | Utilisation de Google Custom Search comme alternative (si clé configurée) | 🟢 |
+
+Statut : 🟢 implémenté dans `frontend/positionning-app/` + endpoint `POST /v1/positionning/search`
+
+---
+
 **Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
 
 ---
@@ -728,7 +800,8 @@ Statut : 🔴 à construire (22 exigences). Dépend du déploiement P2.
 | EF-29/30 | Persistance / multi-idées | 🟠 | IndexedDB multi-idées |
 | EF-31/32 | Traçabilité | 🟢 | Audit exportable |
 | EF-33→37 | LLM gouverné | ❌ | Interface + gates de censure |
+| EF-88→100 | Positionner — analyse concurrentielle | 🟢 | Positionnement, gap analysis, export RDF, interface React |
 
 ---
 
-*Fin des spécifications fonctionnelles v0.1 — en attente de validation. Les spécifications techniques (`SPECIFICATIONS_TECHNIQUES.md`) seront dérivées de ce document une fois validé.*
+*Fin des spécifications fonctionnelles v0.2 — en attente de validation. Les spécifications techniques (`SPECIFICATIONS_TECHNIQUES.md`) seront dérivées de ce document une fois validé.*

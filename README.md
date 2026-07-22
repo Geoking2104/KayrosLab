@@ -1,6 +1,7 @@
 # KayrosLab
 
 [![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/index.html)
+[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/frontend/positionning-app/dist/index.html)
 [![Portefeuille](https://img.shields.io/badge/📊_Portefeuille-Application-059669?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-portfolio.html)
 [![Open in Browser](https://img.shields.io/badge/▶_Atelier-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
@@ -20,13 +21,14 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 | **[`index.html`](index.html)** | Site & offre commerciale entreprises (processus, architecture, conformité, tarification, business cases) |
 | **[`kayroslab-portfolio.html`](kayroslab-portfolio.html)** | Application portefeuille : kanban, gates, votes, notation, impact, reporting |
 | **[`kayroslab-reference.html`](kayroslab-reference.html)** | Atelier d'idéation (démo du moteur agentique) |
+| **[`frontend/positionning-app/`](frontend/positionning-app/)** | Application React de positionnement concurrentiel (scoring 14 neurones, graphe, export RDF) |
 
 ---
 
 ## 🔄 Le processus
 
 ```
-Écouter → Cartographier → Construire → Éprouver → Arbitrer → Projeter → Réaliser
+Écouter → Cartographier → Construire → Positionner → Éprouver → Arbitrer → Projeter → Réaliser
    ▲                                                                         │
    └──────────────────  KPIs / signaux de suivi (boucle)  ◄──────────────────┘
 ```
@@ -37,10 +39,11 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 | 01 | **Écouter** | Réduction du bruit, scoring, clustering | Signaux qualifiés |
 | 02 | **Cartographier** | Réseau de tendances, ponts (bisociation) | Graphe + ponts stratégiques |
 | 03 | **Construire** | Scénarios, Collision Mode, brief | Scénarios + hypothèses |
-| 04 | **Éprouver** | Critic + Devil's Advocate + **Red Team** | Rapport d'attaque, kill shots |
-| 05 | **Arbitrer** | Vote pondéré, gate humain, veto | Go / No-Go / Révision |
-| 06 | **Projeter** | Roadmap, ressources, **prospective probabiliste** | Trajectoire + boucle vers Écouter |
-| 07 | **Réaliser** | Pilote → Déploiement → Bilan | Jalons suivis, impact constaté |
+| 04 | **Positionner** | Web + GitHub/GitLab scraping, scoring 14 neurones, gap analysis | Matrice concurrentielle + gap analysis |
+| 05 | **Éprouver** | Critic + Devil's Advocate + **Red Team** | Rapport d'attaque, kill shots |
+| 06 | **Arbitrer** | Vote pondéré, gate humain, veto | Go / No-Go / Révision |
+| 07 | **Projeter** | Roadmap, ressources, **prospective probabiliste** | Trajectoire + boucle vers Écouter |
+| 08 | **Réaliser** | Pilote → Déploiement → Bilan | Jalons suivis, impact constaté |
 
 **Deux axes orthogonaux.** L'**étape** dit où en est l'*exécution* ; le **statut** dit où en est la *décision*. Une idée peut être « en revue » tout en étant en « Construire ». Les états dormants (`en_pause`, `consideration_future`, `non_poursuivi`) sont réactivables.
 
@@ -85,6 +88,7 @@ Moteur **zéro dépendance** (ESM, Node 20+), **81 tests**, réutilisé par l'ap
 | `execution.mjs` | Étape Réaliser : phases, jalons suivis, retards, bilan |
 | `reporting.mjs` | Dashboard, **entonnoir**, temps par étape, ROI agrégé, comparaison inter-idées, export CSV |
 | `loop.mjs` | Boucle Projeter → Écouter (KPIs, seuils, re-arbitrage) |
+| `positionning/` | Module de positionnement concurrentiel : web scanner, GitHub/GitLab scanner, scoring 14 neurones, gap analysis, matrice + export RDF |
 | `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité, **persistance + audit** |
 | `notify.mjs` | Canaux réels (webhook, email, composite tolérant aux pannes), **activité** et **digest** |
 | `memory.mjs` · `embeddings.mjs` | Shared + Vector Memory (InMemory / Qdrant), recall sémantique |
