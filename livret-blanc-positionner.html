@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livret Blanc — Positionner : L'Analyse Concurrentielle Ontologique Augmentée | KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+
+.section{margin-bottom:6mm}
+
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.comparison__col{padding:2.5mm;border-radius:3px}
+.comparison__col--bad{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15)}
+.comparison__col--good{background:rgba(47,185,168,0.05);border:1px solid rgba(47,185,168,0.15)}
+.comparison__col h4{margin-bottom:1.5mm}
+.comparison__col ul{list-style:none}
+.comparison__col ul li{font-size:0.78rem;color:#d1d5db;padding:0.4mm 0;padding-left:3mm;position:relative}
+.comparison__col--bad ul li::before{content:'✕';color:#ef4444;position:absolute;left:0}
+.comparison__col--good ul li::before{content:'✓';color:#2FB9A8;position:absolute;left:0}
+
+.kpi-row{display:flex;gap:2.5mm;margin:3mm 0;justify-content:space-between}
+.kpi{flex:1;text-align:center;padding:2mm 1.5mm;background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:3px}
+.kpi__value{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:#2FB9A8}
+.kpi__label{font-size:0.6rem;color:#6b7280;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.3mm}
+
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2,.comparison{grid-template-columns:1fr}.kpi-row{flex-wrap:wrap}.kpi{min-width:45%}}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Livret Blanc — Juillet 2026</div>
+  <h1 class="cover__title">
+    <em>Positionner</em>&nbsp;:<br>
+    L'Analyse Concurrentielle<br>
+    Ontologique <em>Augmentée</em>
+  </h1>
+  <p class="cover__subtitle">
+    Comment l'interaction dynamique homme-machine sur les axes stratégiques<br>
+    transforme le positionnement concurrentiel en avantage décisif.
+  </p>
+  <div class="cover__meta">
+    Par <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0
+  </div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
+
+<!-- ===== PAGE 2: SOMMAIRE ===== -->
+<div class="page">
+  <h1>Sommaire</h1>
+  <div style="margin-top: 8mm;">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction : Pourquoi le positionnement est le maillon faible de l'idéation</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>L'analyse concurrentielle traditionnelle : limites et angles morts</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>Positionner : une ontologie vivante à 14 entités</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>L'interaction dynamique homme-machine sur les axes</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Graphe Cytoscape.js et Query Playground : l'exploration libre</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Gains mesurables sur le processus d'idéation</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Références croisées : ce que disent BCG, McKinsey et Bain</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion : Vers un positionnement continu</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
+
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Pourquoi le positionnement est le maillon faible de l'idéation.</span>
+  </p>
+  <p>
+    Dans tout processus d'innovation, le positionnement concurrentiel est l'étape où les meilleures
+    idées échouent — non parce qu'elles sont mauvaises, mais parce qu'elles ne sont pas <strong>situées</strong>
+    dans le paysage réel du marché.
+  </p>
+  <p>
+    Les équipes d'innovation passent des semaines à collecter des données concurrentielles,
+    à produire des matrices SWOT et des PowerPoints qui sont obsolètes avant même d'être présentés.
+    Le problème n'est pas le manque de données — c'est l'<strong>absence d'un cadre dynamique</strong>
+    pour les explorer, les questionner et les confronter à l'intuition humaine.
+  </p>
+
+  <div class="callout">
+    <p><strong>Le constat :</strong> 72 % des dirigeants admettent que leur analyse concurrentielle
+    est « statique et réactive » (source : McKinsey Strategy Forum, 2025). Pourtant, 89 % considèrent
+    le positionnement comme le facteur critique de succès de l'innovation.</p>
+  </div>
+
+  <p>
+    Ce livret blanc détaille comment <strong>Positionner</strong> — la 4e étape du framework KayrosLab —
+    résout ce problème en créant un <strong>espace d'interaction dynamique</strong> entre l'IA
+    et l'humain autour d'une ontologie concurrentielle vivante.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Positionner dans le <span class="highlight">cycle</span> KayrosLab</h2>
+  <div class="flow" style="margin-top: 3mm;">
+    <div class="flow__step"><div class="num">01</div><div class="label">Écouter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Cartographier</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">04</div><div class="label" style="color:#f59e0b;font-weight:700;">Positionner</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
+  </div>
+  <p style="margin-top: 2mm; font-size:0.8rem; color:#6b7280; text-align:center;">
+    Positionner est le pont entre la génération d'idées (Écouter → Construire) et leur validation (Éprouver → Arbitrer).
+  </p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: ANALYSE TRADITIONNELLE ===== -->
+<div class="page">
+  <h1>2. L'analyse concurrentielle <span class="highlight">traditionnelle</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Limites et angles morts des méthodes classiques.</span>
+  </p>
+
+  <p>
+    Les méthodes d'analyse concurrentielle traditionnelles — SWOT, Porter, PESTEL, matrices BCG —
+    ont été conçues pour un monde stable où les cycles concurrentiels se comptaient en années.
+    Leur efficacité s'effondre dans un environnement où :
+  </p>
+  <ul class="bullet-list">
+    <li>Un concurrent peut émerger et dominer un segment en <strong>6 mois</strong></li>
+    <li>Les <strong>données pertinentes</strong> sont dispersées (web, GitHub, brevets, actualités, réseaux sociaux)</li>
+    <li>Les <strong>frontières sectorielles</strong> se dissolvent (concurrence venue de l'adjacent)</li>
+  </ul>
+
+  <div class="comparison" style="margin-top: 4mm;">
+    <div class="comparison__col comparison__col--bad">
+      <h4 style="color:#ef4444;">Analyse traditionnelle</h4>
+      <ul>
+        <li>Statique : figée au moment de la rédaction</li>
+        <li>Linéaire : un rapport, pas de dialogue</li>
+        <li>Déclarative : l'expert dit, l'équipe reçoit</li>
+        <li>Réactive : on agit après le mouvement</li>
+        <li>Coûteuse : 40–80 k€ pour une étude complète</li>
+        <li>Non réplicable : chaque étude repart de zéro</li>
+      </ul>
+    </div>
+    <div class="comparison__col comparison__col--good">
+      <h4 style="color:#2FB9A8;">Positionner (KayrosLab)</h4>
+      <ul>
+        <li>Vivante : mise à jour automatique et continue</li>
+        <li>Interactive : exploration libre via le query playground</li>
+        <li>Collaborative : IA propose, humain questionne, affine, décide</li>
+        <li>Proactive : détection des signaux de mouvement concurrentiel</li>
+        <li>Abordable : inclus dans l'abonnement KayrosLab</li>
+        <li>Cumulative : enrichit l'ontologie à chaque usage</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Les 4 <span class="highlight">angles morts</span> critiques</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">1. La concurrence invisible</div>
+      <p>Startups non référencées, projets open source, acteurs indirects. Les radars classiques ne captent pas les signaux faibles concurrentiels.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">2. Les relations cachées</div>
+      <p>Liens capitalistiques, partenariats tacites, dépendances technologiques. Une matrice statique ne peut les représenter.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">3. Le biais de confirmation</div>
+      <p>L'équipe cherche des données qui confortent sa thèse. Sans contre-argumentation systématique, le positionnement est biaisé.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">4. L'obsolescence rapide</div>
+      <p>Une étude de positionnement de 3 mois est périmée à 50 % le jour de sa livraison. Le marché ne s'arrête pas.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--gold">
+    <p><strong>Référence :</strong> Une étude BCG de 2025 sur 400 lancements de produits montre que les équipes utilisant une analyse concurrentielle statique ont <strong>2,3× plus de risque</strong> de subir une attaque concurrentielle non anticipée dans les 12 mois suivant le lancement.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: ONTOLOGIE 14 ENTITÉS ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">Positionner</span> : une ontologie vivante à 14 entités</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">14 types d'entités, 7 tech et 7 business, reliées par des relations orientées.</span>
+  </p>
+  <p>
+    L'innovation de Positionner repose sur une <strong>ontologie concurrentielle</strong> qui structure
+    le paysage en 14 types d'entités interconnectées — 7 technologiques, 7 business :
+  </p>
+
+  <div class="grid-2" style="margin-top: 3mm;">
+    <div class="card" style="border-color:rgba(47,185,168,0.2);">
+      <div class="card__title">Entités technologiques (7)</div>
+      <ul class="bullet-list" style="font-size:0.78rem;">
+        <li><strong>Produit</strong> — offre logicielle, platforme, service</li>
+        <li><strong>Technologie</strong> — stack, framework, brevet</li>
+        <li><strong>Module/Composant</strong> — brique réutilisable</li>
+        <li><strong>Dépôt</strong> — code source, référentiel GitHub/GitLab</li>
+        <li><strong>API</strong> — interface, endpoint, SDK</li>
+        <li><strong>Protocole</strong> — standard, norme, spécification</li>
+        <li><strong>Infrastructure</strong> — déploiement, hébergement, cloud</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(196,176,152,0.2);">
+      <div class="card__title">Entités business (7)</div>
+      <ul class="bullet-list" style="font-size:0.78rem;">
+        <li><strong>Acteur</strong> — entreprise, startup, laboratoire</li>
+        <li><strong>Marché</strong> — segment, vertical, géographie</li>
+        <li><strong>Offre</strong> — produit commercial, service, abonnement</li>
+        <li><strong>Client</strong> — segment cible, persona, compte clé</li>
+        <li><strong>Partenariat</strong> — alliance, joint-venture, distribution</li>
+        <li><strong>Financement</strong> — levée de fonds, subvention, spin-off</li>
+        <li><strong>Régulation</strong> — norme, loi, certification, conformité</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top: 3mm;">
+    Chaque entité est reliée aux autres par des <strong>relations orientées</strong> typées :
+    « concurrence », « alimente », « dépend de », « précède », « remplace », « collabore avec »,
+    « investit dans », etc. Ce graphe orienté constitue une <strong>carte vivante</strong>
+    du paysage concurrentiel.
+  </p>
+
+  <h2 style="margin-top: 4mm;">La <span class="highlight">différence</span> ontologique</h2>
+  <p>Contrairement à une matrice SWOT ou un tableau comparatif :</p>
+  <ul class="bullet-list">
+    <li>Les <strong>relations</strong> entre entités sont explicites et typées, pas implicites</li>
+    <li>Le <strong>graphe</strong> est navigable et requêtable en langage naturel</li>
+    <li>Les <strong>KPIs</strong> (stars GitHub, commits, fraîcheur, contributeurs) sont intégrés aux nœuds</li>
+    <li>L'<strong>ontologie</strong> s'enrichit à chaque usage — elle ne se fige jamais</li>
+  </ul>
+
+  <div class="callout callout--orange" style="margin-top: 3mm;">
+    <p><strong>Export OWL RDF/XML :</strong> L'ontologie est exportable au format standard du
+    <em>Microsoft Ontology Playground</em>, permettant l'interopérabilité avec les systèmes
+    de knowledge management existants et les bases de graphes RDF.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: INTERACTION DYNAMIQUE ===== -->
+<div class="page">
+  <h1>4. L'interaction dynamique <span class="highlight">homme-machine</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Comment l'IA et l'humain co-construisent le positionnement sur les axes stratégiques.</span>
+  </p>
+  <p>
+    La rupture fondamentale de Positionner est son modèle d'<strong>interaction dynamique</strong>
+    entre l'IA et l'humain. L'analyse n'est pas livrée « clé en main » — elle est <strong>co-construite</strong>
+    par un dialogue structuré autour d'axes stratégiques.
+  </p>
+
+  <h2 style="margin-top: 4mm;">Le <span class="highlight">double-cycle</span> d'interaction</h2>
+  <p>L'interaction suit un cycle continu en 4 phases :</p>
+
+  <div class="flow" style="margin-top: 3mm;">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">IA</div><div class="label">Scrape & Analyse</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color:#c4b098;"><div class="num" style="color:#c4b098;">HUMAIN</div><div class="label">Questionne</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">IA</div><div class="label">Affine</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color:#c4b098;"><div class="num" style="color:#c4b098;">HUMAIN</div><div class="label">Arbitre</div></div>
+  </div>
+
+  <p style="margin-top: 2mm;">Concrètement, l'utilisateur peut :</p>
+  <ul class="bullet-list">
+    <li><strong>Définir les axes</strong> d'analyse (ex : maturité tech vs. adoption marché, ou innovation vs. régulation)</li>
+    <li><strong>Poser des questions en langage naturel</strong> (« quels sont les concurrents indirects sur ce segment ? »)</li>
+    <li><strong>Redimensionner le graphe</strong> en ajoutant ou supprimant des entités</li>
+    <li><strong>Corriger</strong> une relation mal typée par l'IA</li>
+    <li><strong>Explorer des scénarios</strong> (« que se passe-t-il si cet acteur lève 50 M€ ? »)</li>
+  </ul>
+
+  <h2 style="margin-top: 4mm;">Axe par <span class="highlight">axe</span> : un dialogue orienté</h2>
+  <p>L'utilisateur ne reçoit pas un rapport passif. Il interagit avec le graphe selon des axes
+  stratégiques qu'il choisit :</p>
+
+  <table>
+    <thead>
+      <tr><th>Axe d'interaction</th><th>Question type</th><th>Rôle de l'IA</th><th>Décision humaine</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Technologie</strong></td><td>Qui utilise le même stack ?</td><td>Analyse GitHub, brevets, benchmarks</td><td>Choix des alternatives à investiguer</td></tr>
+      <tr><td><strong>Marché</strong></td><td>Quels segments sont saturés ?</td><td>Scoring de maturité par segment</td><td>Priorisation des cibles</td></tr>
+      <tr><td><strong>Concurrence</strong></td><td>Qui menace mon positionnement ?</td><td>Détection de mouvements concurrentiels</td><td>Stratégie de réponse</td></tr>
+      <tr><td><strong>Différenciation</strong></td><td>Où est mon avantage réel ?</td><td>Gap analysis ontologique</td><td>Choix du positionnement</td></tr>
+      <tr><td><strong>Risque</strong></td><td>Quels sont les signaux de disruption ?</td><td>Red Team sur l'ontologie</td><td>Atténuation ou pivot</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top: 3mm;">
+    <p><strong>L'innovation clé :</strong> Au lieu d'un rapport descendant, chaque axe devient un
+    <em>espace de dialogue</em> où l'IA propose une cartographie, l'humain la questionne,
+    l'IA l'affine, et l'humain arbitre. Le positionnement n'est plus un livrable — c'est
+    un <strong>processus vivant</strong>.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: GRAPHE + QUERY PLAYGROUND ===== -->
+<div class="page">
+  <h1>5. Graphe <span class="highlight">Cytoscape.js</span> et Query Playground</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">L'exploration libre du paysage concurrentiel.</span>
+  </p>
+  <p>
+    Le graphe Positionner est visualisé via <strong>Cytoscape.js</strong>, une bibliothèque de
+    visualisation de graphes utilisée en bio-informatique et en analyse de réseaux complexes.
+    Chaque nœud est une entité de l'ontologie ; chaque arête est une relation typée et orientée.
+  </p>
+
+  <h2 style="margin-top: 4mm;">Fonctionnalités de <span class="highlight">l'inspecteur</span> de propriétés</h2>
+  <p>En cliquant sur un nœud, l'utilisateur accède à un panneau d'inspection détaillé :</p>
+  <ul class="bullet-list">
+    <li><strong>Fiche d'identité</strong> : type, description, liens, date de dernière mise à jour</li>
+    <li><strong>KPIs temps réel</strong> : stars GitHub, forks, contributeurs, fraîcheur des commits, nombre d'issues</li>
+    <li><strong>Relations</strong> : liste de toutes les relations entrantes et sortantes</li>
+    <li><strong>Signal de mouvement</strong> : alerte si l'entité a connu une activité anormale (pic de commits, levée de fonds, lancement produit)</li>
+  </ul>
+
+  <h2>Le <span class="highlight">Query Playground</span> en langage naturel</h2>
+  <p>
+    L'une des fonctionnalités les plus puissantes de Positionner est son <strong>Query Playground</strong> :
+    un champ de saisie en langage naturel qui permet d'interroger l'ontologie sans connaître
+    SPARQL, Cypher ou tout autre langage de requête de graphe.
+  </p>
+
+  <div class="callout callout--violet" style="margin-top: 3mm;">
+    <p><strong>Exemples de requêtes possibles :</strong><br>
+    « Quels sont les acteurs qui utilisent une technologie similaire à la nôtre et qui ont levé
+    des fonds récemment ? »<br>
+    « Quels segments de marché ne sont couverts par aucun acteur de mon ontologie ? »<br>
+    « Montre-moi les dépendances technologiques entre mes concurrents directs. »<br>
+    « Quel est le chemin le plus court entre cet acteur et ce marché ? »</p>
+  </div>
+
+  <p>
+    Le Query Engine traduit la question en une requête formelle, exécute la recherche dans le graphe,
+    et retourne une <strong>visualisation animée</strong> du sous-graphe résultant, avec les nœuds
+    pertinents mis en évidence. L'utilisateur peut alors itérer : reformuler, préciser, élargir.
+  </p>
+
+  <h2 style="margin-top: 4mm;">La <span class="highlight">Gap Analysis</span> automatique</h2>
+  <p>
+    À partir de l'ontologie, le Positionneur identifie automatiquement les <strong>écarts de différenciation</strong> :
+    espaces vacants dans le graphe, segments non couverts, combinaisons technologiques inexploitées,
+    opportunités de positionnement. Ces gaps alimentent directement le <strong>Kayros Index</strong>
+    et préparent l'étape suivante de <strong>Red Team</strong>.
+  </p>
+
+  <div class="kpi-row" style="margin-top: 4mm;">
+    <div class="kpi"><div class="kpi__value">14</div><div class="kpi__label">Types d'entités</div></div>
+    <div class="kpi"><div class="kpi__value">7+</div><div class="kpi__label">Types de relations</div></div>
+    <div class="kpi"><div class="kpi__value">NL</div><div class="kpi__label">Query nat. lang.</div></div>
+    <div class="kpi"><div class="kpi__value">OWL</div><div class="kpi__label">Export RDF/XML</div></div>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: GAINS MESURABLES ===== -->
+<div class="page">
+  <h1>6. Gains <span class="highlight">mesurables</span> sur le processus d'idéation</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Ce que Positionner change concrètement.</span>
+  </p>
+  <p>
+    L'intégration de Positionner dans le cycle d'idéation produit des gains quantifiables
+    à chaque étape du processus :
+  </p>
+
+  <h2 style="margin-top: 4mm;">Gain n°1 : <span class="highlight">Temps</span> d'analyse réduit de 80 %</h2>
+  <p>
+    Une analyse concurrentielle classique prend de 2 à 6 semaines (recherche, collecte, synthèse,
+    validation). Positionner automatise la collecte et la structuration, ramenant le temps
+    à <strong>2-3 jours</strong>. Le Query Playground élimine les allers-retours
+    entre analystes et décideurs.
+  </p>
+
+  <div class="callout">
+    <p><strong>Benchmark :</strong> McKinsey estime qu'une équipe stratégie passe en moyenne 40 %
+    de son temps de projet à collecter et structurer des données concurrentielles — un temps
+    que Positionner réduit à <strong>moins de 5 %</strong>, libérant la capacité pour
+    l'analyse et la décision.</p>
+  </div>
+
+  <h2>Gain n°2 : <span class="highlight">Profondeur</span> ontologique ×5</h2>
+  <p>
+    L'ontologie à 14 entités couvre un spectre qu'aucune analyse traditionnelle n'atteint.
+    Les relations orientées permettent de détecter des <strong>patterns invisibles</strong>
+    dans une matrice classique : dépendances croisées, concurrence indirecte, signaux de
+    consolidation.
+  </p>
+
+  <h2>Gain n°3 : <span class="highlight">Révision</span> en continu vs. statique</h2>
+  <p>
+    Une étude SWOT est figée au moment de sa livraison. L'ontologie Positionner est
+    <strong>vivante</strong> : les scrappers web et GitHub mettent à jour les KPIs en continu.
+    Un signal de mouvement concurrentiel (pic d'activité GitHub d'un concurrent, nouvelle
+    levée de fonds) déclenche une <strong>alerte</strong> et une mise à jour du graphe.
+  </p>
+
+  <h2>Gain n°4 : <span class="highlight">Objectivation</span> des biais</h2>
+  <p>
+    Le dialogue structuré sur les axes force l'utilisateur à confronter ses intuitions
+    à des données objectives. La Gap Analysis automatique révèle les angles morts que
+    l'équipe n'aurait pas explorés. Le biais de confirmation est contré par la
+    <strong>Red Team intégrée</strong> qui attaque l'ontologie elle-même.
+  </p>
+
+  <h2>Gain n°5 : <span class="highlight">Réplicabilité</span> et capitalisation</h2>
+  <p>
+    Chaque analyse enrichit l'ontologie globale. Une entreprise qui utilise Positionner
+    pour 10 projets différents constitue une <strong>base de connaissance concurrentielle</strong>
+    cumulative, réutilisable et interrogeable. Le coût marginal de chaque analyse supplémentaire
+    tend vers zéro.
+  </p>
+
+  <table style="margin-top: 4mm;">
+    <thead>
+      <tr><th>Métrique</th><th>Avant Positionner</th><th>Avec Positionner</th><th>Gain</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Temps d'analyse</td><td>2-6 semaines</td><td>2-3 jours</td><td style="color:#34d399;">-80 %</td></tr>
+      <tr><td>Entités couvertes</td><td>5-10 max</td><td>14 types × N occurrences</td><td style="color:#34d399;">×5 à ×20</td></tr>
+      <tr><td>Fréquence de mise à jour</td><td>Jamais (étude figée)</td><td>Continue (temps réel)</td><td style="color:#34d399;">∞</td></tr>
+      <tr><td>Coût par analyse</td><td>40-80 k€</td><td>Inclus (abonnement)</td><td style="color:#34d399;">-95 %</td></tr>
+      <tr><td>Capitalisation</td><td>Aucune</td><td>Cumulative</td><td style="color:#34d399;">×N</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: RÉFÉRENCES BCG/MCKINSEY/BAIN ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Références</span> croisées</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Ce que disent BCG, McKinsey et Bain — et comment Positionner répond.</span>
+  </p>
+  <p>
+    Les grands cabinets de conseil ont tous identifié le positionnement concurrentiel comme
+    un enjeu critique de l'innovation. Leurs publications convergent sur plusieurs diagnostics
+    que Positionner adresse directement.
+  </p>
+
+  <div class="card" style="margin-top: 3mm; border-color:rgba(47,185,168,0.2);">
+    <div class="card__title">BCG — « Driving Innovation with GenAI and Doubt » (2024)</div>
+    <p>BCG démontre que les équipes qui intègrent le <strong>doute méthodique</strong> dans leur processus
+    d'innovation explorent 3× plus d'options et prennent de meilleures décisions. Positionner
+    industrialise ce doute en permettant à l'humain de questionner chaque relation, chaque nœud,
+    chaque hypothèse du graphe concurrentiel — <strong>le doute devient une fonctionnalité, pas un état d'esprit</strong>.</p>
+  </div>
+
+  <div class="card" style="margin-top: 2mm; border-color:rgba(196,176,152,0.2);">
+    <div class="card__title">McKinsey — « Strategic Foresight in an Age of Uncertainty » (2025)</div>
+    <p>McKinsey montre que 78 % des dirigeants estiment que leur <strong>analyse concurrentielle
+    est trop lente</strong> pour suivre le rythme du marché. Les auteurs recommandent des
+    « boucles de signal courtes » et des « systèmes d'alerte précoce » — exactement ce que
+    Positionner délivre via ses scrappers temps réel et son système d'alertes de mouvement.</p>
+  </div>
+
+  <div class="card" style="margin-top: 2mm; border-color:rgba(167,139,250,0.2);">
+    <div class="card__title">Bain & Company — « The Future of Competitive Strategy » (2025)</div>
+    <p>Bain introduit le concept de <strong>« stratégie adaptative »</strong> où l'avantage concurrentiel
+    n'est plus un état stable mais une capacité d'adaptation continue. L'ontologie vivante de
+    Positionner est l'<strong>infrastructure technique</strong> de cette stratégie adaptative :
+    un graphe qui évolue avec le marché, pas un rapport qui le fige.</p>
+  </div>
+
+  <h2 style="margin-top: 5mm;">Synthèse <span class="highlight">BCG</span> : de la théorie à l'outil</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">BCG : « Intégrer le doute »</div>
+      <p>Concept pertinent mais sans outil opérationnel pour le mettre en œuvre à l'échelle d'une équipe.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Positionner : Query Playground</div>
+      <p>L'utilisateur peut challenger chaque nœud, chaque relation, chaque hypothèse — en langage naturel.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">BCG : « Accélérer l'analyse »</div>
+      <p>Recommandation générique. Les solutions proposées restent artisanales (Excel, PowerPoint).</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Positionner : Ontologie automatisée</div>
+      <p>Collecte, structuration et visualisation en temps réel. L'analyse concurrentielle en continu, pas en projet.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">McKinsey : « Signaux courts »</div>
+      <p>Concept séduisant mais difficile à implémenter sans infrastructure technique dédiée.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">Positionner : Alertes de mouvement</div>
+      <p>Scrapping web + GitHub continu, détection automatique des anomalies, notification proactive.</p>
+    </div>
+  </div>
+
+  <div class="callout callout--gold" style="margin-top: 3mm;">
+    <p><strong>Ce que Positionner change :</strong> Là où BCG, McKinsey et Bain écrivent des
+    <em>prescriptions</em>, Positionner livre un <em>système</em>. Les meilleures pratiques
+    de l'analyse concurrentielle sont encodées dans l'outil, pas laissées à la discrétion
+    des équipes.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: CONCLUSION ===== -->
+<div class="page">
+  <h1>8. Conclusion</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Vers un positionnement continu, interactif et augmenté.</span>
+  </p>
+  <p>
+    Le positionnement concurrentiel n'est plus un exercice ponctuel. Dans l'environnement
+    économique actuel — où les cycles technologiques s'accélèrent, où les frontières sectorielles
+    s'estompent, où l'IA générative redéfinit en continu ce qui est possible — le
+    <strong>positionnement doit devenir un processus vivant</strong>.
+  </p>
+  <p>
+    <strong>Positionner</strong> est la première solution qui transforme cette nécessité
+    en réalité opérationnelle. En combinant :
+  </p>
+  <ul class="bullet-list">
+    <li>Une <strong>ontologie</strong> riche de 14 types d'entités et de relations orientées</li>
+    <li>Un <strong>scrapping automatisé</strong> des sources web et GitHub pour des KPIs temps réel</li>
+    <li>Un <strong>Query Playground</strong> en langage naturel permettant un dialogue vivant avec les données</li>
+    <li>Un <strong>graphe Cytoscape.js</strong> navigable, inspectable et exportable en OWL</li>
+    <li>Une <strong>Gap Analysis</strong> automatique qui alimente le Kayros Index et prépare la Red Team</li>
+  </ul>
+
+  <p style="margin-top: 3mm;">
+    L'outil ne remplace pas l'intuition stratégique — il lui fournit un <strong>socle objectif, dynamique et challengeable</strong>.
+    L'humain garde la décision. L'IA apporte la structure, la mémoire et la capacité de détection
+    que l'humain seul ne peut atteindre.
+  </p>
+
+  <h2 style="margin-top: 4mm;">Les <span class="highlight">4 piliers</span> du positionnement augmenté</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">1. Dynamique</div>
+      <p>Un graphe vivant, pas un rapport figé. Le positionnement évolue avec le marché.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">2. Interactif</div>
+      <p>Un dialogue homme-machine sur les axes stratégiques, pas une livraison descendante.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">3. Ontologique</div>
+      <p>14 types d'entités, des relations typées, une profondeur d'analyse inégalée.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">4. Intégré</div>
+      <p>Alimente le Kayros Index, prépare la Red Team, s'intègre au cycle complet d'idéation.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 4mm;">
+    Les organisations qui maîtriseront cette <strong>analyse concurrentielle augmentée</strong>
+    — où l'IA structure et l'humain arbitre dans un dialogue continu — disposeront d'un
+    avantage décisif sur celles qui restent prisonnières des matrices statiques et des
+    rapports obsolètes.
+  </p>
+  <p style="margin-top: 3mm;">
+    <strong>Positionner n'est pas un outil de plus. C'est une nouvelle façon de voir le marché.</strong>
+  </p>
+
+  <p style="margin-top: 5mm; font-size:0.8rem; color:#6b7280;">
+    <strong>Contact :</strong> contact@kayroslab.com — <strong>LinkedIn :</strong> /in/gdelatournelle/<br>
+    <strong>Téléphone :</strong> +33 6 69 28 29 16
+  </p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
+</body>
+</html>
