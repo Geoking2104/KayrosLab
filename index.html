@@ -2393,17 +2393,53 @@
                     <p class="text-slate-300">Réservez une démonstration personnalisée de 45 minutes ou contactez directement l’équipe.</p>
                 </div>
 
-                <!-- Cal.com booking embed -->
-                <div class="cal-booking-wrapper mx-auto" style="max-width:700px;">
-                    <div class="text-sm text-white/60 text-center mb-4">Sélectionnez un créneau pour une démo personnalisée de 30 min :</div>
-                    <iframe 
-                        src="https://cal.com/geoking2104/30min?theme=dark" 
-                        style="width:100%;height:650px;border:none;border-radius:16px;" 
-                        loading="lazy">
-                    </iframe>
-                </div>
+                <!-- Contact Form -->
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-white/80 mb-1.5">Votre nom</label>
+                            <input type="text" name="name" required
+                                   class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-white/80 mb-1.5">Votre email</label>
+                            <input type="email" name="email" required
+                                   class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400">
+                        </div>
+                    </div>
 
-                <div class="mt-6 text-center text-xs text-white/50">
+                    <div>
+                        <label class="block text-sm font-medium text-white/80 mb-1.5">Objet</label>
+                        <select name="subject" required
+                                class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-emerald-400">
+                            <option value="">Choisissez un objet</option>
+                            <option value="Demande de démo personnalisée">Demande de démo personnalisée</option>
+                            <option value="Question sur l'offre Entreprise">Question sur l'offre Entreprise</option>
+                            <option value="Partenariat / Intégration">Partenariat / Intégration</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-white/80 mb-1.5">Votre message</label>
+                        <textarea name="message" rows="5" required
+                                  class="w-full bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-emerald-400"
+                                  placeholder="Décrivez votre besoin ou votre cas d'usage..."></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                                class="w-full md:w-auto inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-10 h-14 rounded-3xl font-semibold active:scale-[0.985]">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>
+                            Envoyer le message
+                        </button>
+                        <p class="text-xs text-white/40 mt-3 text-center md:text-left">
+                            Votre message est envoyé de manière sécurisée. Votre adresse email reste confidentielle.
+                        </p>
+                    </div>
+                </form>
+
+                <div class="mt-10 text-center text-xs text-white/50">
                     Vous pouvez aussi nous contacter directement :<br>
                     <span class="font-mono">+33 6 69 28 29 16</span> • 
                     <a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="underline hover:text-white">LinkedIn</a>
