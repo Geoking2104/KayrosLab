@@ -744,6 +744,77 @@ app.post('/v1/connectors/link/:token', async (req, reply) => {
   } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
 
+// === POST /v1/positionning/search — Recherche concurrents (DuckDuckGo par defaut, Google si API key) ===
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
+const GOOGLE_CX = process.env.GOOGLE_CX || '';
+
+app.post('/v1/positionning/search', async (req, reply) => {
+  const { q, limit = 5 } = req.body || {};
+  if (!q) return reply.code(400).send({ error: 'Champ "q" requis' });
+
+  try {
+    let results;
+    if (GOOGLE_API_KEY && GOOGLE_CX) {
+      results = await searchGoogle(q, limit);
+    } else {
+      results = await searchDuckDuckGo(q, limit);
+    }
+    return { results, provider: GOOGLE_API_KEY ? 'google' : 'duckduckgo' };
+  } catch (err) {
+    app.log.error(err);
+    return reply.code(502).send({ error: 'Echec de la recherche', message: err.message });
+  }
+});
+
+async function searchGoogle(q, limit) {
+  const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(q)}&num=${limit}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Google Search API: ${res.status}`);
+  const data = await res.json();
+  return (data.items || []).map((item) => ({
+    name: item.title,
+    url: item.link,
+    snippet: item.snippet || '',
+  }));
+}
+
+async function searchDuckDuckGo(q, limit) {
+  // Scrape les resultats HTML de DuckDuckGo (lite, sans JS)
+  const url = `https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(q)}`;
+  const res = await fetch(url, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; KayrosLab/1.0)' },
+  });
+  if (!res.ok) throw new Error(`DuckDuckGo: ${res.status}`);
+  const html = await res.text();
+
+  // Parse la table de resultats (structure HTML de lite.duckduckgo.com)
+  const results = [];
+  const rows = html.match(/<tr>.*?<\/tr>/gs) || [];
+  let current = null;
+
+  for (const row of rows) {
+    const nameMatch = row.match(/class=["']result-link["'][^>]*>([^<]+)<\/a>/i);
+    const urlMatch = row.match(/href=["'](https?:\/\/[^"']+)["']/i);
+    const snippetMatch = row.match(/class=["']result-snippet["'][^>]*>(.*?)<\/td>/is);
+
+    if (nameMatch && urlMatch) {
+      current = {
+        name: nameMatch[1].replace(/<[^>]*>/g, '').trim(),
+        url: urlMatch[1].split('?')[0], // nettoie les parametres de tracking
+        snippet: '',
+      };
+    }
+    if (current && snippetMatch) {
+      current.snippet = snippetMatch[1].replace(/<[^>]*>/g, '').trim();
+      results.push(current);
+      current = null;
+      if (results.length >= limit) break;
+    }
+  }
+
+  return results;
+}
+
 app.listen({ port: Number(PORT), host: '0.0.0.0' })
   .then((addr) => app.log.info(`KayrosLab backend sur ${addr}`))
   .catch((e) => { app.log.error(e); process.exit(1); });
