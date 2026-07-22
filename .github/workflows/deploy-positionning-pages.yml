@@ -1,10 +1,14 @@
-name: Deploy Positionner to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - 'frontend/positionning-app/**'
+      - 'index.html'
+      - 'kayroslab-reference.html'
+      - 'kayroslab-portfolio.html'
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -22,8 +26,14 @@ jobs:
       - run: npm run build
         working-directory: frontend/positionning-app
 
+      - run: |
+          mkdir -p deploy/positionner-app
+          cp index.html kayroslab-reference.html kayroslab-portfolio.html deploy/
+          cp -r frontend/positionning-app/dist/* deploy/positionner-app/
+          touch deploy/.nojekyll
+
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: frontend/positionning-app/dist
+          publish_dir: deploy
           force_orphan: true

@@ -1,9 +1,9 @@
 # KayrosLab
 
-[![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/index.html)
-[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
-[![Portefeuille](https://img.shields.io/badge/📊_Portefeuille-Application-059669?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-portfolio.html)
-[![Open in Browser](https://img.shields.io/badge/▶_Atelier-Live_Demo-2563eb?style=for-the-badge)](https://raw.githack.com/Geoking2104/KayrosLab/main/kayroslab-reference.html)
+[![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
+[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/positionner-app/)
+[![Portefeuille](https://img.shields.io/badge/📊_Portefeuille-Application-059669?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-portfolio.html)
+[![Open in Browser](https://img.shields.io/badge/▶_Atelier-Live_Demo-2563eb?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-reference.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
 
 **Du signal faible à la décision stratégique — gouvernée.**
@@ -185,7 +185,7 @@ Les 3 partielles sont assumées : persistance en fichiers plutôt qu'en base par
 
 L'application **Positionner** est déployée sur GitHub Pages via le workflow `.github/workflows/deploy-positionning-pages.yml`.
 
-**URL :** [https://geoking2104.github.io/KayrosLab/](https://geoking2104.github.io/KayrosLab/)
+**URL :** [https://geoking2104.github.io/KayrosLab/positionner-app/](https://geoking2104.github.io/KayrosLab/positionner-app/)
 
 **Pour activer le déploiement (une fois) :**
 1. Aller dans Settings → Pages du dépôt
