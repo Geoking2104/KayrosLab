@@ -9,7 +9,7 @@ export default function IdeaInput({ onAnalyze, loading }) {
 
   return (
     <div className="idea-input-section">
-      <label htmlFor="idea-input">Décrivez votre idée, concept ou positionnement</label>
+      <label htmlFor="idea-input">Décrivez votre idée, concept ou positionnement à analyser</label>
       <div className="idea-input-row">
         <textarea
           id="idea-input"
@@ -20,7 +20,7 @@ export default function IdeaInput({ onAnalyze, loading }) {
           onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSubmit(); }}
         />
         <button className="btn btn-primary" onClick={handleSubmit} disabled={loading || !value.trim()}>
-          {loading ? 'Analyse...' : 'Analyser'}
+          {loading ? 'Analyse en cours...' : 'Analyser'}
         </button>
       </div>
     </div>
