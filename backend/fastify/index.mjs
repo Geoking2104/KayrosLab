@@ -14,10 +14,12 @@ import {
   ConsoleNotifier, WebhookNotifier, EmailNotifier, CompositeNotifier, gateNotifier,
   InMemoryGateStore, FileGateStore,
   startExecution, updateJalon, advancePhase, cloturer, progression,
-  funnel, tempsParEtape, dashboard, exportCsv, compare,
+  funnel, tempsParEtape, dashboard, exportCsv, compare, leaderboard,
   createCampaign, estOuverte, etatInitial, moderer, estPubliee, fileModeration, statsCampagne,
   addComment, editComment, removeComment, commentTree, countComments,
   buildDigest, formatDigest,
+  StageTimer, DEFAULT_STAGE_LIMITS,
+  ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
 } from '../../core/index.mjs';
 
 const {
@@ -639,6 +641,107 @@ app.get('/v1/reporting/export', async (req, reply) => {
   reply.header('Content-Type', 'text/csv; charset=utf-8');
   reply.header('Content-Disposition', `attachment; filename="portefeuille-${me.tenantId}.csv"`);
   return exportCsv(list);
+});
+
+// ---------------- Stage Timer (hackathon deadlines) ----------------
+const stageTimer = new StageTimer({ governance });
+
+app.post('/v1/timer/deadline', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { ideaId, stage, maxHours, deadline } = req.body || {};
+  if (!ideaId || !stage) return reply.code(400).send({ error: 'ideaId et stage requis' });
+  stageTimer.setDeadline(ideaId, stage, { maxHours, deadline });
+  return { ok: true, status: stageTimer.status() };
+});
+
+app.post('/v1/timer/tick', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const result = await stageTimer.tick();
+  return { gates: result.gates.length, warnings: result.warnings.length, status: stageTimer.status() };
+});
+
+app.get('/v1/timer/status', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  return { timer: stageTimer.status() };
+});
+
+// ---------------- Leaderboard temps reel (hackathon) ----------------
+app.post('/v1/reporting/leaderboard', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { critere = 'ki', sens = 'desc', top = 20, campagneId = null } = req.body || {};
+  const list = await ideas.list({ tenantId: me.tenantId });
+  return { leaderboard: leaderboard(list, { critere, sens, top, campagneId }) };
+});
+
+// ---------------- Connecteurs conversationnels (Slack/Teams/Discord) ----------------
+const linkService = new AccountLinkService();
+const slackAdapter = process.env.SLACK_BOT_TOKEN
+  ? new SlackAdapter({
+      signingSecret: process.env.SLACK_SIGNING_SECRET || '',
+      botToken: process.env.SLACK_BOT_TOKEN,
+      webhookUrl: process.env.SLACK_WEBHOOK_URL || '',
+      linkService,
+    })
+  : null;
+const connectorService = new ConnectorService({
+  adapters: [slackAdapter].filter(Boolean),
+  linkService, governance, ideas, users: userStore,
+});
+
+// Hook le notifier de gouvernance pour publier les gates ouverts dans le chat
+if (slackAdapter) {
+  const origNotifier = governance._notifier;
+  governance._notifier = async (evt) => {
+    if (origNotifier) try { await origNotifier(evt); } catch { /* best-effort */ }
+    try {
+      const idea = evt.ideaId ? await ideas.get(evt.ideaId) : null;
+      const view = slackAdapter.buildGateView(evt, {
+        ideaTitre: idea?.title ?? null,
+        gateType: evt.type ?? evt.gateType ?? null,
+        agregat: evt.evaluation ?? null,
+      });
+      await slackAdapter.postMessage(process.env.SLACK_GATE_CHANNEL || 'general', view);
+    } catch { /* panne Slack non bloquante */ }
+  };
+}
+
+// Point d'entree Slack (block actions, view submissions, slash commands)
+app.post('/v1/connectors/slack/interactive', async (req, reply) => {
+  const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
+  // Slack envoie parfois un payload en form-encoded string
+  let payload = body;
+  if (body.payload) try { payload = JSON.parse(body.payload); } catch { payload = body; }
+  const evt = slackAdapter?.parseRequest({ body: payload, headers: req.headers });
+  if (!evt) return reply.code(200).send(''); // Slack attend un 200 meme si rien
+  const res = await connectorService.handleInteraction(evt);
+  if (res.type === 'ack') return reply.code(200).send('');
+  if (res.type === 'ephemeral') return reply.code(200).send({ response_type: 'ephemeral', text: res.text });
+  if (res.type === 'modal' && res.view) {
+    const blocks = slackAdapter.renderView(res.view);
+    return reply.code(200).send({
+      response_action: 'push',
+      view: { type: 'modal', callback_id: 'gate_motif', title: { text: res.view.title }, blocks, submit: { text: 'Confirmer' } },
+    });
+  }
+  return reply.code(200).send('');
+});
+
+// Generation d'un jeton de liaison (back-office -> chat)
+app.post('/v1/connectors/link', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  const { platformId, userId, platform = 'slack' } = req.body || {};
+  if (!platformId || !userId) return reply.code(400).send({ error: 'platformId et userId requis' });
+  const { token, expiresAt } = linkService.createToken({ platformId, userId, platform });
+  return { token, expiresAt, modeEmploi: `Dans KayrosLab, allez dans Profil > Lier un compte et saisissez ce jeton (expire dans 15 min).` };
+});
+
+// Validation du jeton de liaison (depuis le back-office apres auth)
+app.post('/v1/connectors/link/:token', async (req, reply) => {
+  const me = await requireAuth(req, reply); if (!me) return;
+  try {
+    const result = linkService.link(req.params.token, { id: me.sub, email: me.email, role: me.role, tenantId: me.tenantId });
+    return { ok: true, platformId: result.platformId };
+  } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
 
 app.listen({ port: Number(PORT), host: '0.0.0.0' })

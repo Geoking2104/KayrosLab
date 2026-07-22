@@ -91,6 +91,44 @@ export function dashboard(ideas = []) {
   };
 }
 
+/**
+ * Leaderboard temps reel (hackathon / classement).
+ * Classe les idees selon un critere avec possibilite de filtrer par campagne.
+ */
+export function leaderboard(ideas = [], { critere = 'ki', sens = 'desc', top = 20, campagneId = null, now = new Date() } = {}) {
+  const filtered = campagneId ? ideas.filter((i) => i.campagneId === campagneId) : ideas;
+  const withScore = [];
+  for (const i of filtered) {
+    const votesMoy = i.votes?.length ? Math.round(i.votes.reduce((a, v) => a + v.score, 0) / i.votes.length * 10) / 10 : null;
+    const t = i.impact ? totals(i.impact) : { net: 0, investi: 0, beneficie: 0 };
+    const avancement = STAGES.indexOf(i.stage) / (STAGES.length - 1);
+    const age = i.createdAt ? Math.max(1, Math.round((now - new Date(i.createdAt)) / 86400000)) : 1;
+    const scoreKi = typeof i.ki === 'number' ? i.ki : 0;
+    const scoreVotes = votesMoy ?? 0;
+    const scoreImpact = t.net > 0 ? Math.min(100, t.net / 1000) : 0;
+    const scoreAvancement = avancement * 100;
+    const score = Math.round(
+      critere === 'ki'         ? scoreKi :
+      critere === 'votes'      ? scoreVotes :
+      critere === 'impact'     ? scoreImpact :
+      critere === 'avancement' ? scoreAvancement :
+      critere === 'age'        ? (100 / age) :
+      (scoreKi * 0.4 + scoreVotes * 0.2 + scoreImpact * 0.2 + scoreAvancement * 0.2)
+    );
+    withScore.push({
+      id: i.id, titre: i.title, auteur: i.author, categorie: i.category, campagneId: i.campagneId,
+      etape: i.stage, statut: i.status, score,
+      ki: scoreKi, votesMoy: votesMoy, nbVotes: i.votes?.length ?? 0,
+      impactNet: t.net, age
+    });
+  }
+  const tri = sens === 'asc' ? (a, b) => a.score - b.score : (a, b) => b.score - a.score;
+  withScore.sort(tri);
+  const items = top ? withScore.slice(0, top) : withScore;
+  const meilleur = items.length ? items.reduce((a, b) => a.score >= b.score ? a : b) : null;
+  return { items, total: filtered.length, critere, sens, meilleur: meilleur ? { id: meilleur.id, score: meilleur.score } : null };
+}
+
 /** Echappement CSV : une valeur contenant separateur, guillemet ou saut de ligne est citee. */
 function csvCell(v) {
   const s = v === null || v === undefined ? '' : String(v);

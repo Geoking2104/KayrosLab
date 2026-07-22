@@ -21,6 +21,8 @@ export * from './auth.mjs';
 export * from './ki.mjs';
 export * from './governance.mjs';
 export * from './orchestrator.mjs';
+export * from './timer.mjs';
+export * from './connectors.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
