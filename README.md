@@ -21,7 +21,7 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 | **[`index.html`](index.html)** | Site & offre commerciale entreprises (processus, architecture, conformité, tarification, business cases) |
 | **[`kayroslab-portfolio.html`](kayroslab-portfolio.html)** | Application portefeuille : kanban, gates, votes, notation, impact, reporting |
 | **[`kayroslab-reference.html`](kayroslab-reference.html)** | Atelier d'idéation (démo du moteur agentique) |
-| **[`frontend/positionning-app/`](frontend/positionning-app/)** | Application React de positionnement concurrentiel (scoring 14 neurones, graphe, export RDF) |
+| **[`frontend/positionning-app/`](frontend/positionning-app/)** | Application React de positionnement concurrentiel ontologique (types d'entités, propriétés typées, relations orientées, graphe Cytoscape.js, export OWL, query playground) |
 
 ---
 
@@ -39,7 +39,7 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 | 01 | **Écouter** | Réduction du bruit, scoring, clustering | Signaux qualifiés |
 | 02 | **Cartographier** | Réseau de tendances, ponts (bisociation) | Graphe + ponts stratégiques |
 | 03 | **Construire** | Scénarios, Collision Mode, brief | Scénarios + hypothèses |
-| 04 | **Positionner** | Web + GitHub/GitLab scraping, scoring 14 neurones, gap analysis | Matrice concurrentielle + gap analysis |
+| 04 | **Positionner** | Web + GitHub/GitLab scraping, ontologie 14 types d'entités, relations orientées, propriétés typées, gap analysis | Graphe Cytoscape + inspecteur + instances concurrentes + query playground + export OWL |
 | 05 | **Éprouver** | Critic + Devil's Advocate + **Red Team** | Rapport d'attaque, kill shots |
 | 06 | **Arbitrer** | Vote pondéré, gate humain, veto | Go / No-Go / Révision |
 | 07 | **Projeter** | Roadmap, ressources, **prospective probabiliste** | Trajectoire + boucle vers Écouter |
@@ -54,8 +54,8 @@ Détail exhaustif : **[SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTION
 ## 🌟 Ce qui distingue KayrosLab
 
 | Critère | LLM conversationnel | Plateforme d'innovation | **KayrosLab** |
-|---|---|---|---|
-| Structure | Conversation | Stage-gate | **Cycle gouverné en 7 étapes** |
+|---|---|---|---|---|
+| Structure | Conversation | Stage-gate | **Cycle gouverné en 8 étapes** |
 | Agents | Un modèle | — | **Multi-agents** (Planner, Critic, Devil's Advocate, **Red Team**, Bisociateur, Synthesizer) |
 | Chiffres | Approximations du LLM | Saisie manuelle | **Calculs déterministes** (Monte-Carlo seedé, P10/P50/P90) |
 | Décision | Informelle | Vote | **Vote pondéré qui instruit + veto qui tranche** |
@@ -88,7 +88,7 @@ Moteur **zéro dépendance** (ESM, Node 20+), **81 tests**, réutilisé par l'ap
 | `execution.mjs` | Étape Réaliser : phases, jalons suivis, retards, bilan |
 | `reporting.mjs` | Dashboard, **entonnoir**, temps par étape, ROI agrégé, comparaison inter-idées, export CSV |
 | `loop.mjs` | Boucle Projeter → Écouter (KPIs, seuils, re-arbitrage) |
-| `positionning/` | Module de positionnement concurrentiel : web scanner, GitHub/GitLab scanner, scoring 14 neurones, gap analysis, matrice + export RDF |
+| `positionning/` | Module de positionnement concurrentiel ontologique : web scanner, GitHub/GitLab scanner, ontologie 14 types d'entités avec propriétés typées et relations orientées, gap analysis, instances concurrentes, export OWL |
 | `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité, **persistance + audit** |
 | `notify.mjs` | Canaux réels (webhook, email, composite tolérant aux pannes), **activité** et **digest** |
 | `memory.mjs` · `embeddings.mjs` | Shared + Vector Memory (InMemory / Qdrant), recall sémantique |
@@ -152,6 +152,7 @@ cd core && node --test      # 81 tests, zéro dépendance
 |---|---|---|
 | Processus d'idéation | EF-01 → EF-45 | ✅ implémenté |
 | Plateforme & collaboration | EF-46 → EF-87 | **39 réalisées · 3 partielles · 0 à construire** |
+| Positionner — analyse concurrentielle ontologique | EF-88 → EF-101 | 🟢 collecteurs & gap analysis · 🔴 restructuration ontologique (graphe, inspecteur, query playground, OWL, instances) |
 
 Les 3 partielles sont assumées : persistance en fichiers plutôt qu'en base partagée multi-instance (EF-46), réactivation d'idée dormante sans action dédiée dans l'interface (EF-58), facettes de filtrage incomplètes (EF-55).
 

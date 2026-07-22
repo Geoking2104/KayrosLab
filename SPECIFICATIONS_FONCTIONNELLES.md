@@ -20,7 +20,7 @@
 
 ## 0. Résumé exécutif
 
-KayrosLab est un **atelier d'idéation stratégique gouverné** qui transforme des signaux faibles en décisions robustes via un processus traçable et **cyclique en 6 étapes** (Écouter → Cartographier → Construire → Éprouver → Arbitrer → Projeter, qui reboucle sur Écouter). Sa singularité par rapport à un LLM conversationnel classique tient à trois piliers :
+KayrosLab est un **atelier d'idéation stratégique gouverné** qui transforme des signaux faibles en décisions robustes via un processus traçable et **cyclique en 8 étapes** (Écouter → Cartographier → Construire → **Positionner** → Éprouver → Arbitrer → Projeter → Réaliser, qui reboucle sur Écouter). Sa singularité par rapport à un LLM conversationnel classique tient à trois piliers :
 
 1. **Un collectif d'agents IA spécialisés** (Planner, Critic, Devil's Advocate, Red Team, Bisociateur, Synthesizer) plutôt qu'un modèle unique.
 2. **Un orchestrateur** qui planifie, séquence et arbitre les agents (paradigme *Plan-and-Solve + ReAct*) avec mémoire partagée et vectorielle.
@@ -188,18 +188,21 @@ flowchart TD
 
 ---
 
-## 5. Le processus en 6 étapes (cyclique)
+## 5. Le processus en 8 étapes (cyclique)
 
 ```mermaid
 flowchart LR
-    E1["01 · Écouter<br/>signaux qualifiés"] --> E2["02 · Cartographier<br/>réseau de tendances"]
-    E2 --> E3["03 · Construire<br/>scénarios + brief"]
-    E3 --> E4["04 · Éprouver<br/>Critic + Devil + Red Team"]
-    E4 --> E5["05 · Arbitrer<br/>décision + livrable"]
-    E5 --> E6["06 · Projeter<br/>trajectoire + prospective"]
-    E4 -. "kill shot / veto" .-> E3
-    E5 -. "révision demandée" .-> E4
-    E6 -. "KPIs / signaux de suivi (boucle)" .-> E1
+    E1["01 · Écouter\nsignaux qualifiés"] --> E2["02 · Cartographier\nréseau de tendances"]
+    E2 --> E3["03 · Construire\nscénarios + brief"]
+    E3 --> E4["04 · Positionner\nanalyse concurrentielle ontologique"]
+    E4 --> E5["05 · Éprouver\nCritic + Devil + Red Team"]
+    E5 --> E6["06 · Arbitrer\ndécision + livrable"]
+    E6 --> E7["07 · Projeter\ntrajectoire + prospective"]
+    E7 --> E8["08 · Réaliser\npilote → déploiement → bilan"]
+    E5 -. "kill shot / veto" .-> E3
+    E5 -. "gaps critiques" .-> E4
+    E6 -. "révision demandée" .-> E5
+    E7 -. "KPIs / signaux de suivi (boucle)" .-> E1
 ```
 
 > **Modèle cyclique.** Le processus n'est plus linéaire : **Projeter** reboucle sur **Écouter** via les KPIs et signaux de suivi (tâche planifiée), rendant l'idéation continue et apprenante.
@@ -708,13 +711,24 @@ Statut : 🔴 à construire (22 exigences). Dépend du déploiement P2.
 
 ---
 
-## 8. Étape « Positionner » — Analyse concurrentielle automatisée
+## 8. Étape « Positionner » — Analyse concurrentielle ontologique
 
 ### 8.1 Vue d'ensemble
 
 L'étape **Positionner** s'intercale entre **Construire** (03) et **Éprouver** (04). Une fois le scénario construit, l'idée est confrontée au marché réel via une analyse concurrentielle multi-sources avant d'être challengée par la Red Team.
 
-**Finalité :** produire une **matrice de positionnement** sur 14 dimensions (7 tech, 7 business) en confrontant l'idée à ses concurrents identifiés automatiquement.
+**Finalité :** produire une **ontologie de positionnement** explorable sur 14 dimensions (7 tech, 7 business) en confrontant l'idée à ses concurrents identifiés automatiquement, selon le **prisme de l'Ontology Playground Microsoft** — une ontologie OWL avec types d'entités, propriétés typées, relations orientées et instances concurrentes.
+
+**Conformité au modèle Ontology Playground.** L'outil se conforme au [Microsoft Ontology Playground](https://microsoft.github.io/Ontology-Playground/) sur 6 attributs obligatoires :
+
+| Attribut | Exigence |
+|----------|----------|
+| **Types d'entités** | 3–8 types, chacun avec id, nom, description, icône (emoji), couleur hexadécimale, et 3–8 propriétés typées |
+| **Relations** | Liens orientés entre types, avec nom verbal (verbe), cardinalité (`one-to-one`, `one-to-many`, `many-to-one`, `many-to-many`), description |
+| **Graphe visuel** | Rendu Cytoscape.js : nœuds circulaires (icône + étiquette + couleur), arêtes orientées (verbe + flèche), layout force-directed (`fcose`) |
+| **Inspecteur** | Panneau d'inspection au clic : propriétés du type, attributs, data bindings des instances |
+| **Export OWL** | RDF/XML conforme OWL (owl:Class, owl:DatatypeProperty, owl:ObjectProperty, rdfs:domain/rdfs:range) |
+| **Requêtes en langage naturel** | Moteur de requêtes intégré : suggestions automatiques, interrogation par entité et relation |
 
 ### 8.2 Sources de données
 
@@ -724,29 +738,116 @@ L'étape **Positionner** s'intercale entre **Construire** (03) et **Éprouver** 
 | GitHub API | Repos, stars, forks, contributeurs, commits 90j, issues, fraîcheur | REST API publique |
 | GitLab API | Repos, stars, forks, activité | REST API publique |
 
-### 8.3 Protocole de scoring — 3 canaux pondérés
+### 8.3 Ontologie — 14 types d'entités
+
+**7 types Tech (pôle orange) :**
+
+| ID | Nom | Icône | Couleur | Propriétés |
+|----|-----|-------|---------|-----------|
+| `architecture` | Architecture | 🏗️ | `#D83B01` | `pattern` (enum: monolith, modular, microservices, event-driven), `coupling` (string), `scalability` (string) |
+| `stack` | Stack | 🛠️ | `#0078D4` | `languages` (string), `frameworks` (string), `database` (string), `cloud` (string), `ci_cd` (string) |
+| `data_layer` | Data Layer | 💾 | `#107C10` | `storage_type` (enum: relational, nosql, graph, vector), `pipeline` (string), `caching` (string), `vector_store` (boolean) |
+| `security` | Security | 🔒 | `#5C2D91` | `encryption` (enum: none, transit, rest, both), `auth` (string), `compliance` (string), `hds` (boolean), `nis2` (boolean) |
+| `ia_ml` | IA / ML | 🤖 | `#00A9E0` | `models` (string), `rag` (boolean), `fine_tuning` (boolean), `training` (string), `inference` (string) |
+| `scale_perf` | Scale & Perf | ⚡ | `#FFB900` | `throughput` (string), `latency_ms` (integer), `concurrency` (string), `sla` (decimal) |
+| `api_surface` | API Surface | 🔌 | `#008272` | `protocols` (enum: rest, graphql, grpc, websocket), `versioning` (string), `sdk` (boolean), `openapi` (boolean) |
+
+**7 types Business (pôle bleu) :**
+
+| ID | Nom | Icône | Couleur | Propriétés |
+|----|-----|-------|---------|-----------|
+| `business_model` | Business Model | 💼 | `#0078D4` | `type` (enum: saas, paas, iaas, marketplace, hybrid), `maturity` (enum: seed, early, growth, mature) |
+| `pricing` | Pricing | 💰 | `#107C10` | `model` (enum: subscription, usage, tiered, flat, freemium), `entry_price` (decimal), `per_seat` (boolean), `trial_days` (integer) |
+| `go_to_market` | Go-to-Market | 🚀 | `#D83B01` | `channel` (enum: direct, partner, marketplace, hybrid), `sales_model` (enum: self, inside, field), `geography` (string) |
+| `icp` | ICP | 👤 | `#5C2D91` | `segment` (enum: smb, mid, enterprise, all), `persona` (string), `vertical` (string), `employees_min` (integer) |
+| `revenue_model` | Revenue | 📈 | `#008272` | `subscription` (boolean), `transactional` (boolean), `marketplace` (boolean), `arr_estimate` (string) |
+| `customer_success` | Customer Success | 🤝 | `#00A9E0` | `support_tier` (enum: self, chat, email, phone, dedicated), `onboarding` (string), `sla_hours` (integer) |
+| `unit_economics` | Unit Economics | 📊 | `#E81123` | `cac` (string), `ltv` (string), `margin` (decimal), `payback_months` (integer) |
+
+### 8.4 Relations entre types d'entités
+
+Chaque relation est un lien orienté entre deux types d'entités, avec un **verbe** comme nom de relation.
+
+| ID | Verbe | Source → Cible | Cardinalité | Description |
+|----|-------|---------------|-------------|-------------|
+| `constrains` | contraint | architecture → stack | one-to-many | L'architecture contraint le choix de la stack |
+| `determines` | détermine | stack → data_layer | one-to-one | La stack détermine le data layer |
+| `secures` | sécurise | security → data_layer | many-to-one | La sécurité sécurise le data layer |
+| `consumes` | consomme | ia_ml → data_layer | many-to-many | L'IA consomme les données du data layer |
+| `exposes` | expose | api_surface → stack | one-to-one | L'API surface expose la stack |
+| `impacts` | impacte | scale_perf → architecture | many-to-many | Les besoins de scale impactent l'architecture |
+| `governs` | gouverne | security → compliance | many-to-many | La sécurité gouverne la conformité |
+| `monetizes` | monétise | business_model → pricing | one-to-many | Le business model monétise via le pricing |
+| `distributes` | distribue | go_to_market → pricing | many-to-many | Le GTM distribue selon le pricing |
+| `targets` | cible | go_to_market → icp | many-to-one | Le GTM cible l'ICP |
+| `drives` | pilote | revenue_model → unit_economics | one-to-one | Le revenue model pilote l'unit economics |
+| `retains` | fidélise | customer_success → revenue_model | many-to-one | Le customer success fidélise le revenue |
+| `funds` | finance | revenue_model → business_model | many-to-one | Le revenue finance le business model |
+
+### 8.5 Protocole de scoring — 3 canaux pondérés
+
+Chaque propriété de chaque instance concurrente est alimentée par 3 canaux :
 
 ```
-Score(n) = 0.25 × Web(n) + 0.40 × GitHub(n) + 0.35 × Heuristique(n)
+Score(propriété, concurrent) = 0.25 × Web(p) + 0.40 × GitHub(p) + 0.35 × Heuristique(p)
 ```
 
-### 8.4 Ontologie — 14 neurones
+### 8.6 Livrables
 
-**Tech :** Architecture, Stack, Data Layer, Sécurité, IA/ML, Scale & Perf, API Surface
-**Business :** Business Model, Pricing, Go-to-Market, ICP, Revenue Model, Customer Success, Unit Economics
+| Livrable | Format | Description |
+|----------|--------|-------------|
+| Ontologie de positionnement | JSON (ontologie) | Types d'entités, propriétés, relations, instances concurrentes, data bindings |
+| Graphe interactif | React + Cytoscape.js | Nœuds = types d'entités (icône + couleur + propriétés inspectables), arêtes = relations (verbe + cardinalité + flèche), layout fcose force-directed |
+| Inspecteur de propriétés | Panel coulissant | Au clic sur un nœud : propriétés typées, data bindings du concurrent sélectionné, gap analysis |
+| Gap analysis | Liste superposée | Écarts de différenciation par propriété : baseline vs concurrents, seuil ≥ 5 pts |
+| Catalogue d'instances | JSON (métadonnées) | Concurrents comme instances de l'ontologie avec leurs scores par propriété |
+| Export OWL | RDF/XML | Ontologie conforme OWL (classes, propriétés, relations) prête à importer dans Ontology Playground |
+| Query playground | Interface de requêtes | Requêtes en langage naturel : *« Show me all competitors with strong Security »*, *« How does Architecture connect to Stack? »* |
 
-Chaque neurone est scoré de 0 à 100 via analyse de mots-clés et KPIs objectifs (stars, forks, commits, closure rate, recency).
+#### 8.6.1 Structure de l'ontologie de positionnement
 
-### 8.5 Livrables
+```json
+{
+  "name": "Positionnement Concurrentiel",
+  "description": "Ontologie d'analyse concurrentielle multi-dimensionnelle sur 14 dimensions tech et business",
+  "entityTypes": [
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "description": "Le pattern architectural et la structure technique du produit",
+      "icon": "🏗️",
+      "color": "#D83B01",
+      "properties": [
+        { "name": "pattern", "type": "enum", "values": ["monolith", "modular", "microservices", "event-driven"], "isIdentifier": true },
+        { "name": "coupling", "type": "string" },
+        { "name": "scalability", "type": "string" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "constrains",
+      "name": "constrains",
+      "from": "architecture",
+      "to": "stack",
+      "cardinality": "one-to-many"
+    }
+  ]
+}
+```
 
-| Livrable | Format | Contenu |
-|----------|--------|---------|
-| Matrice de positionnement | JSON | Scores par neurone pour chaque concurrent + baseline de l'idée |
-| Gap analysis | Liste | Écarts de différenciation (avantage/désavantage), seuil ≥ 5 pts |
-| Graphe interactif | React app | Grille 2 colonnes (tech / business), barres de score, traces concurrentes |
-| Export RDF | RDF/XML | Ontologie de positionnement réutilisable |
+#### 8.6.2 Visualisation interactive
 
-### 8.6 Intégration dans le Kayros Index
+Le graphe interactif remplace la grille 2 colonnes par :
+
+- **Nœuds** : chaque type d'entité est un cercle (60 px) avec icône emoji + nom en label. Couleur de fond = couleur du type. Clic → ouvre l'inspecteur.
+- **Arêtes** : chaque relation est une flèche orientée avec le verbe comme label. Cardinalité optionnelle affichée au survol.
+- **Layout** : force-directed `fcose` pour un placement organique.
+- **Sélecteur de concurrent** : liste déroulante en haut du graphe. La sélection d'un concurrent ou de l'idée baseline applique ses data bindings sur les nœuds (intensité de remplissage proportionnelle au score).
+- **Inspector panel** : au clic sur un nœud, affiche les propriétés du type + les valeurs bindées pour le concurrent sélectionné + l'écart baseline.
+- **Query playground** : champ de saisie avec suggestions auto-générées : *« Show me all competitors »*, *« List all architectures »*, *« Show architecture by pattern »*, *« How does Architecture connect to Stack? »*.
+
+### 8.7 Intégration dans le Kayros Index
 
 Les gaps de différenciation sont injectés comme facteurs dans le KI :
 
@@ -756,7 +857,7 @@ Les gaps de différenciation sont injectés comme facteurs dans le KI :
 | `differentiation` | `avg(positive_gaps)` — plus l'idée se différencie, plus le score monte |
 | `market_maturity` | Dérivé de l'âge moyen des repos et du nombre de concurrents |
 
-### 8.7 Exigences fonctionnelles — Positionner
+### 8.8 Exigences fonctionnelles — Positionner
 
 | EF | Fonction | Statut |
 |----|----------|--------|
@@ -764,17 +865,18 @@ Les gaps de différenciation sont injectés comme facteurs dans le KI :
 | EF-89 | Recherche GitHub par concurrence (repos, stars, forks) | 🟢 |
 | EF-90 | Recherche GitLab (repos, stars, activité) | 🟢 |
 | EF-91 | Calcul des KPIs GitHub (stars normalisées, forks, contributeurs, closure rate, recency, commits 90j) | 🟢 |
-| EF-92 | Scoring 14 neurones (7 tech + 7 business) par analyse de mots-clés | 🟢 |
-| EF-93 | Scoring 14 neurones par KPIs GitHub | 🟢 |
-| EF-94 | Synthèse pondérée des 3 canaux (Web 25%, GitHub 40%, Heuristique 35%) | 🟢 |
-| EF-95 | Gap analysis (écart baseline vs concurrents, seuil ≥ 5 pts) | 🟢 |
-| EF-96 | Export matrice JSON | 🟢 |
-| EF-97 | Export RDF/XML | 🟢 |
-| EF-98 | Interface interactive React (grille 2 colonnes) | 🟢 |
-| EF-99 | Lien direct depuis l'interface KayrosLab | 🟢 |
-| EF-100 | Utilisation de Google Custom Search comme alternative (si clé configurée) | 🟢 |
+| EF-92 | Alimentation des 14 types d'entités avec propriétés typées (enum, string, integer, decimal, boolean) | 🔴 | 
+| EF-93 | Relations orientées entre types (verbe, cardinalité, description) | 🔴 |
+| EF-94 | Graphe Cytoscape.js interactif (nœuds, arêtes, layout fcose) | 🔴 |
+| EF-95 | Inspecteur de propriétés par clic sur nœud (type + data bindings concurrent) | 🔴 |
+| EF-96 | Gap analysis par propriété (baseline vs concurrents, seuil ≥ 5 pts) | 🟢 |
+| EF-97 | Query playground en langage naturel avec suggestions auto-générées | 🔴 |
+| EF-98 | Export OWL RDF/XML conforme (classes, datatype/object properties) | 🔴 |
+| EF-99 | Catalogue d'instances concurrentes (métadonnées, scores bindés) | 🔴 |
+| EF-100 | Lien direct depuis l'interface KayrosLab | 🟢 |
+| EF-101 | Utilisation de Google Custom Search comme alternative (si clé configurée) | 🟢 |
 
-Statut : 🟢 implémenté dans `frontend/positionning-app/` + endpoint `POST /v1/positionning/search`
+Statut : 🟢 partiel (collecteurs, scoring, gap analysis, lien) · 🔴 restructuration ontologique complète à réaliser dans l'application React
 
 ---
 
@@ -800,7 +902,7 @@ Statut : 🟢 implémenté dans `frontend/positionning-app/` + endpoint `POST /v
 | EF-29/30 | Persistance / multi-idées | 🟠 | IndexedDB multi-idées |
 | EF-31/32 | Traçabilité | 🟢 | Audit exportable |
 | EF-33→37 | LLM gouverné | ❌ | Interface + gates de censure |
-| EF-88→100 | Positionner — analyse concurrentielle | 🟢 | Positionnement, gap analysis, export RDF, interface React |
+| EF-88→101 | Positionner — analyse concurrentielle ontologique | 🟢 (collecteurs) / 🔴 (ontologie) | Graphe Cytoscape, inspecteur, query playground, export OWL, instances concurrentes |
 
 ---
 
