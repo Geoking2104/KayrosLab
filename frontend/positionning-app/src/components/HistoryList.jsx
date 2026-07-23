@@ -8,6 +8,7 @@ export default function HistoryList({ onRestore, onCompare }) {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(new Set());
 
+  // useEffect() reads listHistory() from localStorage on mount.
   useEffect(() => { setEntries(listHistory()); }, []);
 
   const refresh = () => setEntries(listHistory());
@@ -66,7 +67,12 @@ export default function HistoryList({ onRestore, onCompare }) {
       ) : (
         <div className="history-entries">
           {filtered.map((e) => (
-            <div key={e.id} className={`history-card ${selected.has(e.id) ? 'selected' : ''}`} onClick={() => onRestore(e)}>
+            <div key={e.id} className={`history-card ${selected.has(e.id) ? 'selected' : ''}`}>
+              <button
+                className="btn btn-primary btn-xs history-restore-button"
+                onClick={(ev) => { ev.stopPropagation(); onRestore(e); }}
+                title={t('app.history.restore')}
+              >{t('app.history.restore')}</button>
               <div className="history-card-left">
                 <input
                   type="checkbox"

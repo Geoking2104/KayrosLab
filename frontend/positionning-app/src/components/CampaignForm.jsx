@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { createCampaign } from '../data/campaignStore.js';
 import { useI18n } from '../i18n/I18nContext.jsx';
+import { useToast } from './Toast.jsx';
 
 export default function CampaignForm({ onCreated, onCancel }) {
   const { t } = useI18n();
+  const toast = useToast();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -11,14 +13,25 @@ export default function CampaignForm({ onCreated, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    const campaign = createCampaign({
-      name: name.trim(),
-      description: description.trim(),
-      endDate: endDate || null,
-      prizes: prizes.trim(),
-    });
-    onCreated(campaign);
+    if (!name.trim()) {
+      toast(t('app.campaigns.nameRequired'), { type: 'error' });
+      return;
+    }
+    if (name.trim().length < 3) {
+      toast(t('app.campaigns.nameTooShort'), { type: 'error' });
+      return;
+    }
+    try {
+      const campaign = createCampaign({
+        name: name.trim(),
+        description: description.trim(),
+        endDate: endDate || null,
+        prizes: prizes.trim(),
+      });
+      onCreated(campaign);
+    } catch (e) {
+      toast(`${t('app.toast.error')}: ${e.message || t('app.toast.error')}`, { type: 'error' });
+    }
   };
 
   return (

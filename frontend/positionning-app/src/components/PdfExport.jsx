@@ -26,7 +26,9 @@ export default function PdfExport({ idea, competitors, baseline, ki, gaps }) {
       <div className="print-report">
         <div className="print-header">
           <h1>{t('app.export.reportTitle')}</h1>
-          <p className="print-date">{new Date().toLocaleDateString()}</p>
+          <p className="print-date">
+            {new Date().toLocaleDateString(t.locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
         </div>
 
         <section className="print-section">

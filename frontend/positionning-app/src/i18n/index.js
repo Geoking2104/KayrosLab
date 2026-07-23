@@ -78,6 +78,11 @@ const translations = {
         colNumber: '#', colTeam: 'Team', colIdea: 'Idea', colKi: 'KI', colDate: 'Date',
         emptyList: 'No campaigns yet. Create your first hackathon or ideation campaign!',
         created: 'Created', notFound: 'Campaign not found.', prize: 'Prize',
+        nameRequired: 'Name is required',
+        nameTooShort: 'Name must be at least 3 characters',
+      },
+      toast: {
+        error: 'Error',
       },
       history: {
         tab: 'History', clearAll: 'Clear All', search: 'Search analyses...',
@@ -95,14 +100,15 @@ const translations = {
         analyze: 'Analyze All', analyzing: 'Analyzing...', sort: 'Sort:',
         kiScore: 'KI Score', name: 'Name', analysisFailed: 'Analysis failed',
         analysisComplete: 'Analysis complete', rank: 'Rank', progress: 'Progress',
+        placeholder: 'AI-native coding assistant for enterprises\nOpen-source LLM fine-tuning platform\nPrivacy-first medical diagnosis AI'
       },
       settings: {
         tab: 'Settings', title: 'Settings',
         theme: 'Theme', themeDesc: 'Light / Dark',
         language: 'Language', languageDesc: 'FR / EN',
         gapThreshold: 'Gap Threshold', gapThresholdDesc: 'Minimum score difference to highlight a gap',
-        pts: 'pts', apiKey: 'Backend API Key',
-        slackIntegration: 'Slack Integration', slackWebhookUrl: 'Webhook URL',
+        pts: 'pts', apiKey: 'Backend API Key', apiKeyDesc: 'Optional key sent as X-API-Key header to the backend BFF',
+        slackIntegration: 'Slack Integration', slackWebhookUrl: 'Webhook URL', slackWebhookDesc: 'Incoming webhook URL from Slack Apps → Incoming Webhooks',
         slackAutoSend: 'Auto-send after each analysis',
         testWebhook: 'Test Webhook', sending: 'Sending...', sent: 'Sent!', failed: 'Failed',
         dark: 'Dark', light: 'Light',
@@ -141,6 +147,14 @@ const translations = {
   },
   fr: {
     app: {
+      multi: {
+        tab: 'Multi', title: 'Analyse multi-idées',
+        instruction: 'Entrez une idée par ligne (min 10 car. chacune). Jusqu\'à 10 idées.',
+        analyze: 'Tout analyser', analyzing: 'Analyse en cours...', sort: 'Trier :',
+        kiScore: 'Score KI', name: 'Nom', analysisFailed: 'Échec de l\'analyse',
+        analysisComplete: 'Analyse terminée', rank: 'Rang', progress: 'Progression',
+        placeholder: 'Assistant IA natif pour le codage\nPlateforme open-source de fine-tuning LLM\nIA de diagnostic médical privacy-first'
+      },
       title: 'Positionner',
       subtitle: 'Analyse concurrentielle ontologique',
       beta: 'Bêta',
@@ -216,6 +230,8 @@ const translations = {
         colNumber: '#', colTeam: 'Équipe', colIdea: 'Idée', colKi: 'KI', colDate: 'Date',
         emptyList: 'Aucune campagne. Créez votre premier hackathon ou campagne d\'idéation !',
         created: 'Créée le', notFound: 'Campagne introuvable.', prize: 'Lot',
+        nameRequired: 'Le nom est requis',
+        nameTooShort: 'Le nom doit faire au moins 3 caractères',
       },
       history: {
         tab: 'Historique', clearAll: 'Tout effacer', search: 'Rechercher des analyses...',
@@ -233,14 +249,15 @@ const translations = {
         analyze: 'Tout analyser', analyzing: 'Analyse en cours...', sort: 'Trier :',
         kiScore: 'Score KI', name: 'Nom', analysisFailed: 'Échec de l\'analyse',
         analysisComplete: 'Analyse terminée', rank: 'Rang', progress: 'Progression',
+        placeholder: 'Assistant IA natif pour le codage\nPlateforme open-source de fine-tuning LLM\nIA de diagnostic médical privacy-first'
       },
       settings: {
         tab: 'Paramètres', title: 'Paramètres',
         theme: 'Thème', themeDesc: 'Clair / Sombre',
         language: 'Langue', languageDesc: 'FR / EN',
         gapThreshold: 'Seuil d\'écart', gapThresholdDesc: 'Différence minimale pour signaler un écart',
-        pts: 'pts', apiKey: 'Clé API Backend',
-        slackIntegration: 'Intégration Slack', slackWebhookUrl: 'URL du webhook',
+        pts: 'pts', apiKey: 'Clé API Backend', apiKeyDesc: 'Clé optionnelle envoyée comme en-tête X-API-Key au backend BFF',
+        slackIntegration: 'Intégration Slack', slackWebhookUrl: 'URL du webhook', slackWebhookDesc: 'URL du webhook entrant depuis Slack Apps → Incoming Webhooks',
         slackAutoSend: 'Envoi automatique après chaque analyse',
         testWebhook: 'Tester le webhook', sending: 'Envoi...', sent: 'Envoyé !', failed: 'Échec',
         dark: 'Sombre', light: 'Clair',

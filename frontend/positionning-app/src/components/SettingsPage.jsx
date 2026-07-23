@@ -5,14 +5,18 @@ import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function SettingsPage({ onSettingsChange, analysisData }) {
   const { t } = useI18n();
-  const [settings, setSettings] = useState(loadSettings);
+  const [settings, setSettings] = useState(() => loadSettings());
   const [slackStatus, setSlackStatus] = useState('');
 
   const update = (field, value) => {
     const next = { ...settings, [field]: value };
-    setSettings(next);
-    saveSettings(next);
-    if (onSettingsChange) onSettingsChange(next);
+    try {
+      setSettings(next);
+      saveSettings(next);
+      if (onSettingsChange) onSettingsChange(next);
+    } catch (e) {
+      console.error('Failed to save settings:', e);
+    }
   };
 
   const handleTestSlack = async () => {
@@ -81,7 +85,7 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
 
       <div className="settings-group">
         <label className="settings-label" htmlFor="apiKey">{t('app.settings.apiKey')}</label>
-        <p className="settings-hint">Optional key sent as X-API-Key header to the backend BFF</p>
+        <p className="settings-hint">{t('app.settings.apiKeyDesc')}</p>
         <input
           id="apiKey"
           type="password"
@@ -97,7 +101,7 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
 
       <div className="settings-group">
         <label className="settings-label" htmlFor="slackWebhookUrl">{t('app.settings.slackWebhookUrl')}</label>
-        <p className="settings-hint">Incoming webhook URL from Slack Apps → Incoming Webhooks</p>
+        <p className="settings-hint">{t('app.settings.slackWebhookDesc')}</p>
         <input
           id="slackWebhookUrl"
           type="password"

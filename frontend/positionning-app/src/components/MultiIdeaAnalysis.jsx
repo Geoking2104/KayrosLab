@@ -46,12 +46,17 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
     setRunning(true);
     setResults([]);
     setProgress({ done: 0, total: ideas.length });
-    const res = await runAll(ideas, runAnalysis, gapThreshold, apiKey, (done, total) => {
-      setProgress({ done, total });
-    });
-    setResults(res);
-    setRunning(false);
-    toast(t('app.multi.analysisComplete', { succeeded: res.filter((r) => !r.error).length, total: res.length }), { type: 'success' });
+    try {
+      const res = await runAll(ideas, runAnalysis, gapThreshold, apiKey, (done, total) => {
+        setProgress({ done, total });
+      });
+      setResults(res);
+      toast(t('app.multi.analysisComplete') + ' (' + res.filter((r) => !r.error).length + '/' + res.length + ')', { type: 'success' });
+    } catch (err) {
+      setResults([]);
+    } finally {
+      setRunning(false);
+    }
   };
 
   const sorted = useMemo(() => {
@@ -73,7 +78,7 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
         rows={6}
         value={raw}
         onChange={(e) => setRaw(e.target.value)}
-        placeholder={'AI-native coding assistant for enterprises\nOpen-source LLM fine-tuning platform\nPrivacy-first medical diagnosis AI'}
+        placeholder={t('app.multi.placeholder')}
         disabled={running}
       />
 
@@ -82,7 +87,7 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
         onClick={handleAnalyzeAll}
         disabled={running || ideas.length === 0 || ideas.length > 10}
       >
-        {running ? t('app.multi.analyzing', { done: progress.done, total: progress.total }) : t('app.multi.analyze', { count: ideas.length })}
+        {running ? t('app.multi.analyzing') : t('app.multi.analyze')}
       </button>
 
       {running && (

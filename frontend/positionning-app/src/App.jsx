@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { ENTITY_TYPES } from './data/ontology.js';
-import { searchCompetitors, searchGitHub, searchArXiv, analyzeIdea } from './collectors/scanner.js';
+import { searchCompetitors, analyzeIdea } from './collectors/scanner.js';
 import { useI18n } from './i18n/I18nContext.jsx';
 import { ToastProvider, useToast } from './components/Toast.jsx';
 import { SkeletonGraph, SkeletonTabs, SkeletonChips } from './components/Skeleton.jsx';
@@ -8,6 +8,7 @@ import OntologyGraph from './components/OntologyGraph.jsx';
 import InspectorPanel from './components/InspectorPanel.jsx';
 import QueryPlayground from './components/QueryPlayground.jsx';
 import GapAnalysis from './components/GapAnalysis.jsx';
+import { loadSettings, saveSettings } from './data/settingsStore.js';
 import OWLExporter from './components/OWLExporter.jsx';
 import PdfExport from './components/PdfExport.jsx';
 import StrategicDashboard from './components/StrategicDashboard.jsx';
@@ -89,11 +90,11 @@ function AppInner() {
   const [activeTab, setActiveTab] = useState('graph');
   const [campaignView, setCampaignView] = useState(null);
   const [compareIds, setCompareIds] = useState(null);
-  const [settings, setSettings] = useState(loadSettings);
+  const [settings, setSettings] = useState(() => loadSettings());
   const [showTour, setShowTour] = useState(!isTourCompleted());
 
   useEffect(() => { applyTheme(settings.theme); }, [settings.theme]);
-  useEffect(() => { if (settings.locale && settings.locale !== locale) setLocale(settings.locale); }, []);
+  useEffect(() => { if (settings.locale && settings.locale !== locale) setLocale(settings.locale); }, [settings.locale, locale, setLocale]);
 
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') setInspectedEntity(null); };
@@ -302,7 +303,7 @@ function AppInner() {
                       <CampaignDetail
                         campaignId={campaignView}
                         onBack={() => setCampaignView('list')}
-                        onAnalyze={runAnalysis}
+                        onAnalyze={(idea) => runAnalysis(idea, { gapThreshold: settings.gapThreshold, apiKey: settings.apiKey })}
                       />
                     )}
                   </div>
@@ -333,12 +334,12 @@ function AppInner() {
 
                 {activeTab === 'history' && (
                   <div className="history-container">
-                    {compareIds ? (
-                      <HistoryCompare
-                        entries={compareIds.map((id) => ({ id, ...getHistoryEntry(id) }))}
-                        onClose={() => setCompareIds(null)}
-                      />
-                    ) : (
+          {compareIds ? (
+            <HistoryCompare
+              entries={compareIds.map((id) => ({ id, ...getHistoryEntry(id) || {} })).filter((e) => e)}
+              onClose={() => setCompareIds(null)}
+            />
+          ) : (
                       <HistoryList
                         onRestore={(entry) => {
                           setBaseline(entry.baseline);

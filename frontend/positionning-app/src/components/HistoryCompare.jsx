@@ -46,7 +46,7 @@ export default function HistoryCompare({ entries, onClose }) {
             const diff = scoreA !== null && scoreB !== null ? scoreA - scoreB : null;
             return (
               <tr key={et.id}>
-                <td>{et.icon} {et.name}</td>
+                <td>{et.icon && <span>{et.icon}</span>} {et.name}</td>
                 <td className={scoreA >= 50 ? 'score-high' : 'score-low'}>{scoreA !== null ? scoreA : '—'}</td>
                 <td className={scoreB >= 50 ? 'score-high' : 'score-low'}>{scoreB !== null ? scoreB : '—'}</td>
                 <td className={diff !== null ? (diff > 0 ? 'diff-pos' : diff < 0 ? 'diff-neg' : '') : ''}>
@@ -57,8 +57,8 @@ export default function HistoryCompare({ entries, onClose }) {
           })}
           <tr className="compare-total">
             <td><strong>{t('app.historyCompare.avgScore')}</strong></td>
-            <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (a.baseline?.[et.id] || 0), 0) / ENTITY_TYPES.length)}</td>
-            <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (b.baseline?.[et.id] || 0), 0) / ENTITY_TYPES.length)}</td>
+            <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (a.baseline?.[et.id] ?? 0), 0) / ENTITY_TYPES.length)}</td>
+            <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (b.baseline?.[et.id] ?? 0), 0) / ENTITY_TYPES.length)}</td>
             <td></td>
           </tr>
         </tbody>
@@ -69,13 +69,13 @@ export default function HistoryCompare({ entries, onClose }) {
         <div className="compare-grid">
           <div className="compare-col">
             {a.competitors.map((c) => (
-              <div key={c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
+              <div key={c.id || c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
             ))}
             {a.competitors.length === 0 && <span className="text-muted">{t('app.historyCompare.none')}</span>}
           </div>
           <div className="compare-col">
             {b.competitors.map((c) => (
-              <div key={c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
+              <div key={c.id || c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
             ))}
             {b.competitors.length === 0 && <span className="text-muted">{t('app.historyCompare.none')}</span>}
           </div>

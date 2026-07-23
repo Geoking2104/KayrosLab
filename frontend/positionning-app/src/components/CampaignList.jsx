@@ -14,13 +14,16 @@ export default function CampaignList({ onSelect }) {
 
   const getStatusLabel = (c) => {
     if (c.status === 'closed') return { label: t('app.campaigns.closed'), cls: 'badge-closed' };
-    if (c.endDate && new Date(c.endDate) < new Date()) return { label: t('app.campaigns.expired'), cls: 'badge-expired' };
+    const now = new Date();
+    if (c.endDate && !isNaN(new Date(c.endDate)) && new Date(c.endDate) < now) return { label: t('app.campaigns.expired'), cls: 'badge-expired' };
     return { label: t('app.campaigns.open'), cls: 'badge-open' };
   };
 
   if (showForm) {
     return <CampaignForm onCreated={refresh} onCancel={() => setShowForm(false)} />;
   }
+
+  const now = new Date();
 
   if (campaigns.length === 0) {
     return (
@@ -41,16 +44,16 @@ export default function CampaignList({ onSelect }) {
       {campaigns.map((c) => {
         const { label, cls } = getStatusLabel(c);
         return (
-          <div key={c.id} className="campaign-card" onClick={() => onSelect(c)}>
+          <div key={c.id} className="campaign-card" onClick={() => onSelect?.(c)}>
             <div className="campaign-card-top">
               <span className="campaign-name">{c.name}</span>
               <span className={`campaign-badge ${cls}`}>{label}</span>
             </div>
             {c.description && <p className="campaign-desc">{c.description}</p>}
             <div className="campaign-meta">
-              {c.endDate && <span>⏱️ {new Date(c.endDate).toLocaleDateString()}</span>}
+              {c.endDate && !isNaN(new Date(c.endDate)) && <span>⏱️ {new Date(c.endDate).toLocaleDateString()}</span>}
               {c.prizes && <span>🎁 {c.prizes}</span>}
-              <span className="campaign-date">{t('app.campaigns.created')} {new Date(c.createdAt).toLocaleDateString()}</span>
+              <span className="campaign-date">{t('app.campaigns.created')} {c.createdAt ? new Date(c.createdAt).toLocaleDateString() : 'Invalid Date'}</span>
             </div>
           </div>
         );

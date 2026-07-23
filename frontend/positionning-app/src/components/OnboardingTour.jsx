@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { completeTour } from '../data/tourStore.js';
 import { useI18n } from '../i18n/I18nContext.jsx';
 
@@ -70,11 +70,17 @@ export default function OnboardingTour({ onFinish }) {
     return () => clearInterval(check);
   }, []);
 
-  const filtered = STEPS.filter((s) => {
-    if (s.requiresData && !hasData) return false;
-    if (s.skipIfData && hasData) return false;
-    return true;
-  });
+  useEffect(() => {
+    setStep(s => Math.min(s, filtered.length - 1));
+  }, [filtered.length]);
+
+  const filtered = useMemo(() => {
+    return STEPS.filter((s) => {
+      if (s.requiresData && !hasData) return false;
+      if (s.skipIfData && hasData) return false;
+      return true;
+    });
+  }, [STEPS, hasData]);
 
   const current = filtered[step];
   const isLast = step >= filtered.length - 1;

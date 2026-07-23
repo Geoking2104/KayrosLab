@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getCampaign, listSubmissions, addSubmission, removeSubmission, updateCampaign } from '../data/campaignStore.js';
 import { useI18n } from '../i18n/I18nContext.jsx';
 
@@ -18,12 +18,42 @@ function Countdown({ endDate }) {
     tick();
     const id = setInterval(tick, 60000);
     return () => clearInterval(id);
-  }, [endDate]);
+  }, [endDate, t]);
 
   return <span className="countdown">{remaining}</span>;
 }
 
 export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
+  const { t } = useI18n();
+  const [campaign, setCampaign] = useState(null);
+  const [submissions, setSubmissions] = useState([]);
+  const [author, setAuthor] = useState('');
+  const [idea, setIdea] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [now, setNow] = useState(Date.now());
+  const unmountedRef = useRef(false);
+
+  useEffect(() => {
+    unmountedRef.current = false;
+    return () => {
+      unmountedRef.current = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (unmountedRef.current) return;
+    setCampaign(getCampaign(campaignId));
+    setSubmissions(listSubmissions(campaignId));
+  }, [campaignId]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!unmountedRef.current) {
+        setNow(Date.now());
+      }
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
   const { t } = useI18n();
   const [campaign, setCampaign] = useState(null);
   const [submissions, setSubmissions] = useState([]);
@@ -37,6 +67,7 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
   }, [campaignId]);
 
   const refresh = () => {
+    if (unmountedRef.current) return;
     setCampaign(getCampaign(campaignId));
     setSubmissions(listSubmissions(campaignId));
     setSubmitting(false);
@@ -75,7 +106,7 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
 
   if (!campaign) return <p>{t('app.campaigns.notFound')}</p>;
 
-  const isOpen = campaign.status === 'open' && (!campaign.endDate || new Date(campaign.endDate) > new Date());
+  const isOpen = campaign.status === 'open' && (!campaign.endDate || new Date(campaign.endDate) > now);
 
   return (
     <div className="campaign-detail">
