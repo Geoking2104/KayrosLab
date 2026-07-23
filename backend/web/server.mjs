@@ -45,6 +45,13 @@ app.get('/', (req, res) => {
 	});
 });
 
+app.get('/index.html', (req, res) => {
+	res.render('index', {
+		locale: req.getLocale(),
+		path: req.path,
+	});
+});
+
 app.get('/whitepaper/listen', (req, res) => {
 	res.render('whitepaper-listen', {
 		locale: req.getLocale(),
@@ -61,6 +68,11 @@ app.get('/whitepaper/kayroslab', (req, res) => {
 	res.render('whitepaper-kayroslab', {
 		locale: req.getLocale(),
 	});
+});
+
+// --- Serve French version at /index.fr.html (for static build compatibility) ---
+app.get('/index.fr.html', (req, res) => {
+	res.render('index', { locale: 'fr' });
 });
 
 // --- Language switch redirect ---
