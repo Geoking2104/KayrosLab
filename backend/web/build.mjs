@@ -69,6 +69,10 @@ async function build() {
 	const wpKayros = await renderTemplate('whitepaper-kayroslab', 'en');
 	fs.writeFileSync(path.join(outputDir, 'whitepaper-kayroslab.html'), wpKayros, 'utf-8');
 	console.log(`  ✓ whitepaper-kayroslab.html (EN) — ${wpKayros.length} bytes`);
+
+	const wpHackathon = await renderTemplate('whitepaper-hackathon', 'en');
+	fs.writeFileSync(path.join(outputDir, 'whitepaper-hackathon.html'), wpHackathon, 'utf-8');
+	console.log(`  ✓ whitepaper-hackathon.html (EN) — ${wpHackathon.length} bytes`);
 	
 	console.log('\nDone! Static HTML files generated in repo root.');
 }
