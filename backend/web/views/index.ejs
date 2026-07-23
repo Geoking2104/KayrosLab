@@ -81,7 +81,7 @@
                             <span class="font-display text-2xl font-semibold tracking-tighter">KayrosLab</span>
                         </div>
                     </a>
-                    <div class="hidden lg:block px-2.5 py-1 bg-emerald-100 text-emerald-700 text-[11px] font-semibold rounded-full tracking-wider"><%= __('nav_prototype') %></div>
+                    <% if (__('nav_prototype')) { %><div class="hidden lg:block px-2.5 py-1 bg-emerald-100 text-emerald-700 text-[11px] font-semibold rounded-full tracking-wider"><%= __('nav_prototype') %></div><% } %>
                 </div>
 
                 <!-- Desktop Navigation - Mega Menu Style (visible lg+) -->
@@ -1162,13 +1162,13 @@
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter mb-4"><%= __('contact_title') %></h2>
                 <p class="text-xl text-slate-300 mb-8"><%= __('contact_subtitle') %></p>
-                <a href="mailto:geoffroydelatournelle@gmail.com" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 text-white px-8 h-14 rounded-3xl font-semibold text-base transition-all shadow-lg">
+                <a href="mailto:<%= __('footer_email') %>" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 text-white px-8 h-14 rounded-3xl font-semibold text-base transition-all shadow-lg">
                     <i class="fa-solid fa-envelope"></i>
                     <%= __('contact_cta') %>
                 </a>
                 <p class="mt-6 text-sm text-slate-400">
                     <%= __('contact_or') %><br>
-                    <a href="mailto:geoffroydelatournelle@gmail.com" class="text-sky-400 hover:text-sky-300 underline">geoffroydelatournelle@gmail.com</a>
+                    <a href="mailto:<%= __('footer_email') %>" class="text-sky-400 hover:text-sky-300 underline"><%= __('footer_email') %></a>
                 </p>
                 <p class="mt-4 text-sm text-slate-500"><%= __('contact_founder') %></p>
             </div>
