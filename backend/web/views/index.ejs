@@ -28,12 +28,22 @@
         .kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         /* Mega-menu styles */
-        .mega-menu { display: none; position: absolute; left: 50%; transform: translateX(-50%); top: 100%; width: 100vw; max-width: 1200px; }
-        .group:hover .mega-menu { display: block; }
-        .mega-menu a { transition: all 0.2s ease; }
-        .mega-menu-overlay { display: none; }
-        .group:hover .mega-menu-overlay ~ .mega-menu { display: block; }
-        @media (max-width: 1023px) { .mega-menu { position: static; transform: none; width: 100%; max-width: 100%; } }
+        .mega-menu { display: none; position: absolute; left: 0; top: 100%; min-width: 280px; }
+        .mega-menu-wide { display: none; position: absolute; left: -9999px; right: auto; top: 100%; }
+        .group:hover > .mega-menu { display: block; }
+        .group:hover > .mega-menu-wide { display: block; left: 50%; transform: translateX(-50%); width: 90vw; max-width: 1100px; }
+        .mega-menu a, .mega-menu-wide a { transition: all 0.2s ease; }
+        /* Mobile tap support for dropdowns */
+        .dropdown-toggle.active + .mega-menu, .dropdown-toggle.active + .mega-menu-wide { display: block; }
+        .dropdown-toggle.active i.fa-chevron-down { transform: rotate(180deg); }
+        @media (max-width: 1023px) {
+            .mega-menu, .mega-menu-wide { position: static !important; left: auto !important; transform: none !important; width: 100% !important; max-width: 100% !important; min-width: auto !important; }
+            .group:hover > .mega-menu, .group:hover > .mega-menu-wide { display: none; }
+            .dropdown-toggle.active + .mega-menu, .dropdown-toggle.active + .mega-menu-wide { display: block !important; }
+        }
+        /* Mobile menu scroll */
+        #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; }
+        #mobile-menu.open { max-height: 80vh !important; opacity: 1 !important; overflow-y: auto; }
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -75,28 +85,28 @@
                 </div>
 
                 <!-- Desktop Navigation - Mega Menu Style (visible lg+) -->
-                <div class="hidden lg:flex items-center gap-x-0">
+                <div class="hidden lg:flex items-center">
                     
-                    <!-- Platform (mega menu) -->
-                    <div class="group relative">
-                        <a href="#modele" class="flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">
+                    <!-- Platform (mega menu wide) -->
+                    <div class="group relative px-1">
+                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
                             <%= __('nav_platform') %>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                        </a>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="grid grid-cols-3 gap-6">
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="mega-menu-wide bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
+                            <div class="grid md:grid-cols-3 gap-6">
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_platform') %></div>
                                     <div class="text-xs text-slate-500 mb-4"><%= __('nav_platform_subtitle') %></div>
-                                    <a href="#modele" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <a href="#modele" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-layer-group text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_model') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_model_desc') %></div></div>
                                     </a>
-                                    <a href="#orchestration" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <a href="#orchestration" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_architecture') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_architecture_desc') %></div></div>
                                     </a>
-                                    <a href="#dashboard" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_dashboard') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_dashboard_desc') %></div></div>
                                     </a>
@@ -104,7 +114,7 @@
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_solutions') %></div>
                                     <div class="text-xs text-slate-500 mb-4"><%= __('nav_solutions_by_sector') %></div>
-                                    <div class="space-y-2">
+                                    <div class="space-y-1">
                                         <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_pharma') %></a>
                                         <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_finance') %></a>
                                         <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_industry') %></a>
@@ -114,22 +124,22 @@
                                 </div>
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_resources') %></div>
-                                    <div class="space-y-2">
-                                        <a href="#livret-blanc" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="space-y-1">
+                                        <a href="#livret-blanc" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-file-pdf text-emerald-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_whitepapers') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_resources_whitepapers_desc') %></div></div>
+                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_whitepapers') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_whitepapers_desc') %></div></div>
                                         </a>
-                                        <a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-brands fa-linkedin text-sky-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">LinkedIn</div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_resources_blog_desc') %></div></div>
+                                            <div><div class="text-sm font-medium text-slate-900">LinkedIn</div><div class="text-xs text-slate-500"><%= __('nav_resources_blog_desc') %></div></div>
                                         </a>
-                                        <a href="/KayrosLab/kayroslab-reference.html" target="_blank" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <a href="/KayrosLab/kayroslab-reference.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_demo') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_resources_demo_desc') %></div></div>
+                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_demo') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_demo_desc') %></div></div>
                                         </a>
-                                        <a href="/KayrosLab/kayroslab-portfolio.html" target="_blank" class="flex items-start gap-3 p-3 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <a href="/KayrosLab/kayroslab-portfolio.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-violet-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_portfolio') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_resources_portfolio_desc') %></div></div>
+                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_portfolio') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_portfolio_desc') %></div></div>
                                         </a>
                                     </div>
                                 </div>
@@ -138,54 +148,48 @@
                     </div>
 
                     <!-- Solutions -->
-                    <div class="group relative">
-                        <a href="#business-cases" class="flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">
+                    <div class="group relative px-1">
+                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
                             <%= __('nav_solutions') %>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                        </a>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
+                        </button>
                         <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="grid grid-cols-2 gap-6">
-                                <div>
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_solutions_by_sector') %></div>
-                                    <div class="space-y-1">
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_pharma') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_finance') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_industry') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_retail') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_public') %></a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_solutions_by_use_case') %></div>
-                                    <div class="space-y-1">
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_rd') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_regulatory') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_roadmap') %></a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_cx') %></a>
-                                    </div>
+                            <div class="space-y-1">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"><%= __('nav_solutions_by_sector') %></div>
+                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_pharma') %></a>
+                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_finance') %></a>
+                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_industry') %></a>
+                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_retail') %></a>
+                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_public') %></a>
+                                <div class="border-t border-slate-100 my-2 pt-2">
+                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"><%= __('nav_solutions_by_use_case') %></div>
+                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_rd') %></a>
+                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_regulatory') %></a>
+                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_roadmap') %></a>
+                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors"><%= __('nav_solutions_cx') %></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Resources -->
-                    <div class="group relative">
-                        <a href="#livret-blanc" class="flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">
+                    <div class="group relative px-1">
+                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
                             <%= __('nav_resources') %>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                        </a>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2" style="max-width: 600px;">
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
                             <div class="space-y-1">
-                                <a href="#livret-blanc" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center"><i class="fa-solid fa-file-pdf text-emerald-600 text-xs"></i></div>
+                                <a href="#livret-blanc" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-file-pdf text-emerald-600 text-xs"></i></div>
                                     <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_whitepapers') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_whitepapers_desc') %></div></div>
                                 </a>
-                                <a href="#business-cases" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center"><i class="fa-solid fa-briefcase text-sky-600 text-xs"></i></div>
+                                <a href="#business-cases" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-sky-600 text-xs"></i></div>
                                     <div><div class="text-sm font-medium text-slate-900"><%= __('nav_cases') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_blog_desc') %></div></div>
                                 </a>
-                                <a href="/KayrosLab/kayroslab-reference.html" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
+                                <a href="/KayrosLab/kayroslab-reference.html" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
                                     <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_demo') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_demo_desc') %></div></div>
                                 </a>
                             </div>
@@ -193,40 +197,42 @@
                     </div>
 
                     <!-- Company -->
-                    <div class="group relative">
-                        <a href="#contact" class="flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">
+                    <div class="group relative px-1">
+                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
                             <%= __('nav_company') %>
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 group-hover:rotate-180 transition-transform"></i>
-                        </a>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2" style="max-width: 400px;">
-                            <a href="#contact" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-sky-50 transition-colors">
-                                <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center"><i class="fa-solid fa-building text-sky-600 text-xs"></i></div>
-                                <div><div class="text-sm font-medium text-slate-900"><%= __('nav_company_about') %></div><div class="text-xs text-slate-500"><%= __('nav_company_about_desc') %></div></div>
-                            </a>
-                            <a href="#contact" class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-sky-50 transition-colors">
-                                <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center"><i class="fa-solid fa-envelope text-sky-600 text-xs"></i></div>
-                                <div><div class="text-sm font-medium text-slate-900"><%= __('nav_company_contact') %></div><div class="text-xs text-slate-500"><%= __('nav_company_contact_desc') %></div></div>
-                            </a>
+                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
+                            <div class="space-y-1">
+                                <a href="#contact" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-building text-sky-600 text-xs"></i></div>
+                                    <div><div class="text-sm font-medium text-slate-900"><%= __('nav_company_about') %></div><div class="text-xs text-slate-500"><%= __('nav_company_about_desc') %></div></div>
+                                </a>
+                                <a href="#contact" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-envelope text-sky-600 text-xs"></i></div>
+                                    <div><div class="text-sm font-medium text-slate-900"><%= __('nav_company_contact') %></div><div class="text-xs text-slate-500"><%= __('nav_company_contact_desc') %></div></div>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Direct links -->
-                    <a href="#differenciation" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50"><%= __('nav_diff') %></a>
-                    <a href="#offre" class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50"><%= __('nav_offer') %></a>
+                    <a href="#differenciation" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50"><%= __('nav_diff') %></a>
+                    <a href="#offre" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50"><%= __('nav_offer') %></a>
                 </div>
 
                 <!-- Right side -->
-                <div class="flex items-center gap-x-3">
+                <div class="flex items-center gap-x-2">
                     
                     <!-- Language Switcher -->
                     <div class="hidden sm:flex items-center border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
-                        <a href="/lang/en" class="px-3 py-1.5 transition-colors <%= locale === 'en' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50' %>">EN</a>
-                        <a href="/lang/fr" class="px-3 py-1.5 transition-colors <%= locale === 'fr' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50' %>">FR</a>
+                        <a href="/lang/en" class="px-2.5 py-1.5 transition-colors <%= locale === 'en' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50 text-slate-600' %>">EN</a>
+                        <a href="/lang/fr" class="px-2.5 py-1.5 transition-colors <%= locale === 'fr' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50 text-slate-600' %>">FR</a>
                     </div>
 
                     <!-- Demo CTA -->
                     <a href="/KayrosLab/kayroslab-reference.html" target="_blank" rel="noopener noreferrer"
-                       class="hidden sm:inline-flex items-center gap-x-2 px-4 py-2 text-sm font-semibold rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm">
+                       class="hidden sm:inline-flex items-center gap-x-2 px-3.5 py-2 text-sm font-semibold rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-all shadow-sm whitespace-nowrap">
                         <i class="fa-solid fa-play text-xs"></i>
                         <span><%= __('demo') %></span>
                     </a>
@@ -239,22 +245,61 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white">
-            <div class="px-5 py-4 space-y-1 max-h-[80vh] overflow-y-auto">
-                <a href="#modele" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_platform') %></a>
+        <!-- Mobile Menu (lg hidden) -->
+        <div id="mobile-menu" class="lg:hidden border-t border-slate-100 bg-white">
+            <div class="px-5 py-4 space-y-1">
+                <!-- Platform mobile dropdown -->
+                <div class="mobile-dropdown border-b border-slate-50 pb-1">
+                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
+                        <span><%= __('nav_platform') %></span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
+                        <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_model') %></a>
+                        <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_architecture') %></a>
+                        <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_dashboard') %></a>
+                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1"><%= __('nav_solutions') %></div>
+                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_pharma') %></a>
+                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_finance') %></a>
+                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_industry') %></a>
+                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_retail') %></a>
+                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_public') %></a>
+                    </div>
+                </div>
+
                 <a href="#differenciation" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_diff') %></a>
-                <a href="#livret-blanc" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_whitepapers') %></a>
-                <a href="#dashboard" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_dashboard') %></a>
                 <a href="#offre" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_offer') %></a>
                 <a href="#business-cases" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_cases') %></a>
-                <a href="#projets" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_projects') %></a>
-                <a href="#contact" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors"><%= __('nav_contact') %></a>
+
+                <!-- Resources mobile dropdown -->
+                <div class="mobile-dropdown border-t border-slate-50 pt-1">
+                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
+                        <span><%= __('nav_resources') %></span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
+                        <a href="#livret-blanc" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_whitepapers') %></a>
+                        <a href="/KayrosLab/kayroslab-reference.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_resources_demo') %></a>
+                        <a href="/KayrosLab/kayroslab-portfolio.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_resources_portfolio') %></a>
+                    </div>
+                </div>
+
+                <!-- Company mobile dropdown -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
+                        <span><%= __('nav_company') %></span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
+                        <a href="#contact" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_company_about') %></a>
+                        <a href="#contact" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_company_contact') %></a>
+                    </div>
+                </div>
                 
                 <div class="pt-3 mt-2 border-t border-slate-100 space-y-2">
                     <div class="flex border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
-                        <a href="/lang/en" class="flex-1 text-center px-3 py-2 transition-colors <%= locale === 'en' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50' %>">EN</a>
-                        <a href="/lang/fr" class="flex-1 text-center px-3 py-2 transition-colors <%= locale === 'fr' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50' %>">FR</a>
+                        <a href="/lang/en" class="flex-1 text-center px-3 py-2.5 transition-colors <%= locale === 'en' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50 text-slate-600' %>">EN</a>
+                        <a href="/lang/fr" class="flex-1 text-center px-3 py-2.5 transition-colors <%= locale === 'fr' ? 'bg-sky-600 text-white' : 'hover:bg-slate-50 text-slate-600' %>">FR</a>
                     </div>
                     <a href="/KayrosLab/kayroslab-reference.html" target="_blank" rel="noopener noreferrer"
                        class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
@@ -671,8 +716,9 @@
 
     <script>
         (function() {
+            var nav = document.getElementById('nav');
+            
             // Nav scroll effect
-            const nav = document.getElementById('nav');
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 20) {
                     nav.classList.add('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
@@ -681,33 +727,86 @@
                 }
             });
             
-            // Burger menu
-            const burgerBtn = document.getElementById('burger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const burgerIcon = document.getElementById('burger-icon');
-            if (burgerBtn && mobileMenu) {
-                burgerBtn.addEventListener('click', function() {
-                    const isHidden = mobileMenu.classList.contains('hidden');
-                    if (isHidden) {
-                        mobileMenu.classList.remove('hidden');
-                        burgerIcon.classList.remove('fa-bars');
-                        burgerIcon.classList.add('fa-xmark');
+            // ---- Desktop mega-menu: click support for touch devices ----
+            document.querySelectorAll('.group .dropdown-toggle').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var isActive = this.classList.contains('active');
+                    // Close all other open dropdowns
+                    document.querySelectorAll('.group .dropdown-toggle.active').forEach(function(other) {
+                        if (other !== btn) other.classList.remove('active');
+                    });
+                    if (!isActive) {
+                        this.classList.add('active');
                     } else {
-                        mobileMenu.classList.add('hidden');
-                        burgerIcon.classList.remove('fa-xmark');
-                        burgerIcon.classList.add('fa-bars');
+                        this.classList.remove('active');
                     }
                 });
+            });
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.group .dropdown-toggle.active').forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+            });
+            
+            // ---- Mobile burger menu ----
+            var burgerBtn = document.getElementById('burger-btn');
+            var mobileMenu = document.getElementById('mobile-menu');
+            var burgerIcon = document.getElementById('burger-icon');
+            
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                if (burgerIcon) {
+                    burgerIcon.classList.remove('fa-xmark');
+                    burgerIcon.classList.add('fa-bars');
+                }
+            }
+            
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                if (burgerIcon) {
+                    burgerIcon.classList.remove('fa-bars');
+                    burgerIcon.classList.add('fa-xmark');
+                }
+            }
+            
+            if (burgerBtn && mobileMenu) {
+                burgerBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (mobileMenu.classList.contains('open')) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            }
+            
+            // ---- Mobile dropdown toggles ----
+            document.querySelectorAll('.mobile-dropdown-toggle').forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    var content = this.nextElementSibling;
+                    var icon = this.querySelector('.fa-chevron-down');
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.classList.add('hidden');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+            
+            // Close mobile menu on link click
+            if (mobileMenu) {
                 mobileMenu.querySelectorAll('a').forEach(function(link) {
                     link.addEventListener('click', function() {
-                        mobileMenu.classList.add('hidden');
-                        burgerIcon.classList.remove('fa-xmark');
-                        burgerIcon.classList.add('fa-bars');
+                        closeMobileMenu();
                     });
                 });
             }
             
-            // Smooth scroll for anchor links
+            // ---- Smooth scroll for anchor links ----
             document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
                 anchor.addEventListener('click', function(e) {
                     var target = document.querySelector(this.getAttribute('href'));
@@ -718,7 +817,7 @@
                 });
             });
             
-            // Intersection Observer for scroll animations
+            // ---- Intersection Observer for scroll animations ----
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
