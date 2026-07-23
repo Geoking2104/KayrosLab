@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { listCampaigns } from '../data/campaignStore.js';
 import CampaignForm from './CampaignForm.jsx';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function CampaignList({ onSelect }) {
+  const { t } = useI18n();
   const [campaigns, setCampaigns] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
@@ -11,9 +13,9 @@ export default function CampaignList({ onSelect }) {
   const refresh = () => { setCampaigns(listCampaigns()); setShowForm(false); };
 
   const getStatusLabel = (c) => {
-    if (c.status === 'closed') return { label: 'Closed', cls: 'badge-closed' };
-    if (c.endDate && new Date(c.endDate) < new Date()) return { label: 'Expired', cls: 'badge-expired' };
-    return { label: 'Open', cls: 'badge-open' };
+    if (c.status === 'closed') return { label: t('app.campaigns.closed'), cls: 'badge-closed' };
+    if (c.endDate && new Date(c.endDate) < new Date()) return { label: t('app.campaigns.expired'), cls: 'badge-expired' };
+    return { label: t('app.campaigns.open'), cls: 'badge-open' };
   };
 
   if (showForm) {
@@ -24,8 +26,8 @@ export default function CampaignList({ onSelect }) {
     return (
       <div className="campaigns-empty">
         <div className="campaigns-empty-icon">🏆</div>
-        <p>No campaigns yet. Create your first hackathon or ideation campaign!</p>
-        <button className="btn btn-primary" onClick={() => setShowForm(true)}>Create Campaign</button>
+        <p>{t('app.campaigns.emptyList')}</p>
+        <button className="btn btn-primary" onClick={() => setShowForm(true)}>{t('app.campaigns.create')}</button>
       </div>
     );
   }
@@ -33,8 +35,8 @@ export default function CampaignList({ onSelect }) {
   return (
     <div className="campaigns-list">
       <div className="campaigns-header">
-        <h3>Campaigns ({campaigns.length})</h3>
-        <button className="btn btn-primary btn-sm" onClick={() => setShowForm(true)}>+ New</button>
+        <h3>{t('app.campaigns.tab')} ({campaigns.length})</h3>
+        <button className="btn btn-primary btn-sm" onClick={() => setShowForm(true)}>{t('app.campaigns.new')}</button>
       </div>
       {campaigns.map((c) => {
         const { label, cls } = getStatusLabel(c);
@@ -48,7 +50,7 @@ export default function CampaignList({ onSelect }) {
             <div className="campaign-meta">
               {c.endDate && <span>⏱️ {new Date(c.endDate).toLocaleDateString()}</span>}
               {c.prizes && <span>🎁 {c.prizes}</span>}
-              <span className="campaign-date">Created {new Date(c.createdAt).toLocaleDateString()}</span>
+              <span className="campaign-date">{t('app.campaigns.created')} {new Date(c.createdAt).toLocaleDateString()}</span>
             </div>
           </div>
         );

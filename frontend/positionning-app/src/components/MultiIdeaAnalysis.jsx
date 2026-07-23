@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ENTITY_TYPES } from '../data/ontology.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 async function runAll(ideas, runAnalysis, gapThreshold, apiKey, onProgress) {
   const results = [];
@@ -28,6 +29,7 @@ async function runAll(ideas, runAnalysis, gapThreshold, apiKey, onProgress) {
 }
 
 export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, toast }) {
+  const { t } = useI18n();
   const [raw, setRaw] = useState('');
   const [results, setResults] = useState([]);
   const [running, setRunning] = useState(false);
@@ -49,7 +51,7 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
     });
     setResults(res);
     setRunning(false);
-    toast(`Analysis complete: ${res.filter((r) => !r.error).length}/${res.length} succeeded`, { type: 'success' });
+    toast(t('app.multi.analysisComplete', { succeeded: res.filter((r) => !r.error).length, total: res.length }), { type: 'success' });
   };
 
   const sorted = useMemo(() => {
@@ -63,8 +65,8 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
 
   return (
     <div className="multi-idea">
-      <h3>Multi-Idea Analysis</h3>
-      <p className="multi-hint">Enter one idea per line (min 10 chars each). Up to 10 ideas.</p>
+      <h3>{t('app.multi.title')}</h3>
+      <p className="multi-hint">{t('app.multi.instruction')}</p>
 
       <textarea
         className="multi-input"
@@ -80,7 +82,7 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
         onClick={handleAnalyzeAll}
         disabled={running || ideas.length === 0 || ideas.length > 10}
       >
-        {running ? `Analyzing ${progress.done}/${progress.total}...` : `Analyze ${ideas.length} idea${ideas.length > 1 ? 's' : ''}`}
+        {running ? t('app.multi.analyzing', { done: progress.done, total: progress.total }) : t('app.multi.analyze', { count: ideas.length })}
       </button>
 
       {running && (
@@ -92,9 +94,9 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
       {results.length > 0 && (
         <>
           <div className="multi-sort">
-            <span>Sort: </span>
-            <button className={`btn-outline btn-xs ${sortBy === 'ki' ? 'active' : ''}`} onClick={() => setSortBy('ki')}>KI Score</button>
-            <button className={`btn-outline btn-xs ${sortBy === 'name' ? 'active' : ''}`} onClick={() => setSortBy('name')}>Name</button>
+            <span>{t('app.multi.sort')}</span>
+            <button className={`btn-outline btn-xs ${sortBy === 'ki' ? 'active' : ''}`} onClick={() => setSortBy('ki')}>{t('app.multi.kiScore')}</button>
+            <button className={`btn-outline btn-xs ${sortBy === 'name' ? 'active' : ''}`} onClick={() => setSortBy('name')}>{t('app.multi.name')}</button>
           </div>
 
           <div className="multi-results">
@@ -118,7 +120,7 @@ export default function MultiIdeaAnalysis({ runAnalysis, gapThreshold, apiKey, t
                     })}
                   </div>
                 )}
-                {r.error && <p className="multi-error-msg">Analysis failed</p>}
+                {r.error && <p className="multi-error-msg">{t('app.multi.analysisFailed')}</p>}
               </div>
             ))}
           </div>

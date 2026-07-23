@@ -130,9 +130,9 @@ function AppInner() {
       if (settings.slackWebhookUrl && settings.slackAutoSend) {
         sendToSlack(settings.slackWebhookUrl, { idea: ideaText, ki: result.kayrosIndex, competitors: result.competitors, gaps: result.gaps }).catch(() => {});
       }
-      toast(result.kayrosIndex !== null ? 'Analyse terminée' : 'Analyse locale effectuée', { type: 'success' });
+      toast(result.kayrosIndex !== null ? t('app.toast.analysisComplete') : t('app.toast.analysisLocal'), { type: 'success' });
     } catch (e) {
-      toast(`Erreur: ${e.message || 'analyse impossible'}`, { type: 'error', duration: 6000 });
+      toast(`${t('app.toast.error')}: ${e.message || t('app.toast.analysisImpossible')}`, { type: 'error', duration: 6000 });
     } finally {
       setLoading(false);
     }
@@ -229,16 +229,16 @@ function AppInner() {
                   📥 {t('app.tabs.export')}
                 </button>
                 <button className={`tab ${activeTab === 'history' ? 'active' : ''}`} onClick={() => { setActiveTab('history'); setCompareIds(null); }}>
-                  📋 History
+                  📋 {t('app.tabs.history')}
                 </button>
                 <button className={`tab ${activeTab === 'multi' ? 'active' : ''}`} onClick={() => setActiveTab('multi')}>
-                  📊 Multi
+                  📊 {t('app.tabs.multi')}
                 </button>
                 <button className={`tab ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
-                  ⚙️ Settings
+                  ⚙️ {t('app.tabs.settings')}
                 </button>
                 <button className={`tab ${activeTab === 'campaigns' ? 'active' : ''}`} onClick={() => { setActiveTab('campaigns'); setCampaignView('list'); }}>
-                  🏆 Campaigns
+                  🏆 {t('app.tabs.campaigns')}
                 </button>
               </div>
 
@@ -282,10 +282,10 @@ function AppInner() {
                         <button className="btn btn-outline" onClick={async () => {
                           try {
                             await sendToSlack(settings.slackWebhookUrl, { idea, ki, competitors, gaps });
-                            toast('Sent to Slack!', { type: 'success' });
-                          } catch { toast('Slack send failed', { type: 'error' }); }
+                            toast(t('app.toast.slackSent'), { type: 'success' });
+                          } catch { toast(t('app.toast.slackFailed'), { type: 'error' }); }
                         }}>
-                          📤 Share to Slack
+                          📤 {t('app.toast.shareSlack')}
                         </button>
                       </div>
                     )}
@@ -346,7 +346,7 @@ function AppInner() {
                           setKi(entry.ki);
                           setIdea(entry.idea);
                           setActiveTab('graph');
-                          toast('Analysis restored from history', { type: 'info' });
+                          toast(t('app.toast.restored'), { type: 'info' });
                         }}
                         onCompare={(ids) => setCompareIds(ids)}
                       />

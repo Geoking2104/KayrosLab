@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ENTITY_TYPES, RELATIONSHIPS, getEntity } from '../data/ontology.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 const SUGGESTIONS = [
   'Show me all competitors',
@@ -12,6 +13,7 @@ const SUGGESTIONS = [
 ];
 
 export default function QueryPlayground({ competitorList, baseline }) {
+  const { t } = useI18n();
   const [query, setQuery] = useState('');
   const [result, setResult] = useState(null);
   const [suggestionIdx, setSuggestionIdx] = useState(0);
@@ -27,7 +29,7 @@ export default function QueryPlayground({ competitorList, baseline }) {
 
     if (matchShowAll) {
       setResult({
-        title: 'Tous les concurrents',
+        title: t('app.query.allCompetitors'),
         lines: (competitorList || []).map((c) => ({
           label: c.name,
           value: `${c.avgScore}/100`,
@@ -43,7 +45,7 @@ export default function QueryPlayground({ competitorList, baseline }) {
       setResult({
         title: `${matchEntity.icon} ${matchEntity.name}`,
         desc: matchEntity.description,
-        lines: comps.length > 0 ? comps : [{ label: 'Aucun concurrent scoré', value: '' }],
+        lines: comps.length > 0 ? comps : [{ label: t('app.query.noScored'), value: '' }],
       });
     } else if (matchRel) {
       const from = getEntity(matchRel.from);
@@ -51,12 +53,12 @@ export default function QueryPlayground({ competitorList, baseline }) {
       setResult({
         title: `${(from?.icon || '')} ${matchRel.from} → ${matchRel.name} → ${(to?.icon || '')} ${matchRel.to}`,
         desc: matchRel.description,
-        lines: [{ label: 'Cardinalité', value: matchRel.cardinality }],
+        lines: [{ label: t('app.inspector.cardinality'), value: matchRel.cardinality }],
       });
     } else {
       setResult({
-        title: 'Requête non reconnue',
-        desc: 'Essayez une suggestion ci-dessous ou cliquez sur un exemple.',
+        title: t('app.query.unrecognized'),
+        desc: t('app.query.trySuggestion'),
       });
     }
   };
@@ -80,7 +82,7 @@ export default function QueryPlayground({ competitorList, baseline }) {
     <div className="query-playground">
       <div className="query-header">
         <i className="fa-solid fa-search" />
-        <span>Query Playground</span>
+        <span>{t('app.tabs.query')}</span>
       </div>
 
       <div className="query-input-row">
@@ -89,7 +91,7 @@ export default function QueryPlayground({ competitorList, baseline }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') handleQuery(); }}
-          placeholder="Posez une question en anglais..." 
+          placeholder={t('app.query.placeholder')} 
           className="query-input"
         />
         <button className="query-go" onClick={() => handleQuery()}>Go</button>

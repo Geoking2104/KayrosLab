@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 const MAX_CHARS = 2000;
 
 export default function IdeaInput({ onAnalyze, loading }) {
+  const { t } = useI18n();
   const [value, setValue] = useState('');
   const [touched, setTouched] = useState(false);
   const textareaRef = useRef(null);
@@ -20,14 +22,14 @@ export default function IdeaInput({ onAnalyze, loading }) {
 
   return (
     <div className="idea-input-section">
-      <label htmlFor="idea-input">Décrivez votre idée, concept ou positionnement à analyser</label>
+      <label htmlFor="idea-input">{t('app.analyzeInput.label')}</label>
       <div className="idea-input-row">
         <textarea
           ref={textareaRef}
           id="idea-input"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder='Ex : "Plateforme IA souveraine pour le diagnostic médical vétérinaire"'
+          placeholder={t('app.analyzeInput.placeholder')}
           disabled={loading}
           maxLength={MAX_CHARS}
           onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit(); } }}
@@ -35,14 +37,14 @@ export default function IdeaInput({ onAnalyze, loading }) {
         />
         <div className="idea-actions">
           <button className="btn btn-primary" onClick={handleSubmit} disabled={loading || !valid}>
-            {loading ? 'Analyse en cours...' : 'Analyser'}
+            {loading ? t('app.analyzing') : t('app.analyze')}
           </button>
           <span className={`char-count ${value.length > MAX_CHARS * 0.9 ? 'char-warn' : ''}`}>
             {value.length}/{MAX_CHARS}
           </span>
         </div>
       </div>
-      {showError && <p className="field-error">Minimum 10 caractères requis ({trimmed.length}/10)</p>}
+      {showError && <p className="field-error">{t('app.analyzeInput.minLength')} ({trimmed.length}/10)</p>}
     </div>
   );
 }

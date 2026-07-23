@@ -1,15 +1,18 @@
 import { RELATIONSHIPS } from '../data/ontology.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 const TYPE_LABELS = { string: 'string', integer: 'int', decimal: 'decimal', boolean: 'bool', enum: 'enum' };
 const TYPE_COLORS = { string: '#6366f1', integer: '#f59e0b', decimal: '#10b981', boolean: '#ef4444', enum: '#8b5cf6' };
 
 export default function InspectorPanel({ entity, competitor, competitorList, baseline, onClose }) {
+  const { t } = useI18n();
+
   if (!entity) {
     return (
       <div className="inspector-empty">
         <div className="inspector-icon">🔍</div>
-        <p>Cliquez sur un nœud du graphe pour inspecter ses propriétés</p>
-        <p className="inspector-hint">Sélectionnez aussi un concurrent pour voir ses data bindings</p>
+        <p>{t('app.graph.clickHint')}</p>
+        <p className="inspector-hint">{t('app.graph.selectHint')}</p>
       </div>
     );
   }
@@ -29,7 +32,7 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
       </div>
 
       <div className="inspector-section">
-        <div className="inspector-section-title">Propriétés</div>
+        <div className="inspector-section-title">{t('app.inspector.properties')}</div>
         {entity.properties.map((prop) => {
           const val = competitor?.scores?.[entity.id] ?? null;
           const ourVal = baseline?.[entity.id] ?? null;
@@ -45,7 +48,7 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
               </div>
               {prop.values && (
                 <div className="inspector-prop-values">
-                  Valeurs : {prop.values.map((v) => <code key={v}>{v}</code>)}
+                  {t('app.inspector.values')} : {prop.values.map((v) => <code key={v}>{v}</code>)}
                 </div>
               )}
               {competitor && (
@@ -61,7 +64,7 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
               )}
               {!competitor && baseline && (
                 <div className="inspector-binding">
-                  <span>Notre idée</span>
+                  <span>{t('app.ourIdea')}</span>
                   <span className="inspector-binding-score">{ourVal ?? '—'}</span>
                 </div>
               )}
@@ -71,9 +74,9 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
       </div>
 
       <div className="inspector-section">
-        <div className="inspector-section-title">Relations</div>
+        <div className="inspector-section-title">{t('app.inspector.relations')}</div>
         {relsFrom.length === 0 && relsTo.length === 0 && (
-          <div className="inspector-empty-rel">Aucune relation</div>
+          <div className="inspector-empty-rel">{t('app.inspector.noRelations')}</div>
         )}
         {relsFrom.map((r) => (
           <div key={r.id} className="inspector-rel">
@@ -85,7 +88,7 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
         {relsTo.map((r) => (
           <div key={r.id} className="inspector-rel">
             <span className="rel-dir">←</span>
-            <span><strong>{r.name}</strong> depuis {r.from}</span>
+            <span><strong>{r.name}</strong> {t('app.inspector.relationshipFrom')} {r.from}</span>
             <span className="rel-card">{r.cardinality}</span>
           </div>
         ))}
@@ -93,7 +96,7 @@ export default function InspectorPanel({ entity, competitor, competitorList, bas
 
       {competitorList && competitorList.length > 0 && (
         <div className="inspector-section">
-          <div className="inspector-section-title">Instances concurrentes</div>
+          <div className="inspector-section-title">{t('app.inspector.instances')}</div>
           {competitorList.map((c) => {
             const score = c.scores?.[entity.id];
             return (

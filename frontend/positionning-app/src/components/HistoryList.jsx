@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { listHistory, removeHistoryEntry, clearHistory } from '../data/historyStore.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function HistoryList({ onRestore, onCompare }) {
+  const { t } = useI18n();
   const [entries, setEntries] = useState([]);
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(new Set());
@@ -32,11 +34,11 @@ export default function HistoryList({ onRestore, onCompare }) {
   return (
     <div className="history-list">
       <div className="history-header">
-        <h3>History ({entries.length})</h3>
+        <h3>{t('app.history.tab')} ({entries.length})</h3>
         <div className="history-actions">
           <button className="btn btn-outline btn-sm" onClick={refresh}>↻</button>
           {entries.length > 0 && (
-            <button className="btn btn-outline btn-sm" onClick={() => { if (confirm('Clear all history?')) { clearHistory(); refresh(); } }}>Clear All</button>
+            <button className="btn btn-outline btn-sm" onClick={() => { if (confirm(t('app.history.confirmClear'))) { clearHistory(); refresh(); } }}>{t('app.history.clearAll')}</button>
           )}
         </div>
       </div>
@@ -45,7 +47,7 @@ export default function HistoryList({ onRestore, onCompare }) {
         <input
           type="text"
           className="history-search"
-          placeholder="Search analyses..."
+          placeholder={t('app.history.search')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -53,13 +55,13 @@ export default function HistoryList({ onRestore, onCompare }) {
 
       {selected.size === 2 && (
         <button className="btn btn-primary btn-sm mb-8" onClick={() => onCompare([...selected])}>
-          Compare Selected
+          {t('app.history.compare')}
         </button>
       )}
 
       {filtered.length === 0 ? (
         <div className="history-empty">
-          {search ? 'No results.' : 'No analyses yet. Run an analysis and it will appear here.'}
+          {search ? t('app.history.noResults') : t('app.history.empty')}
         </div>
       ) : (
         <div className="history-entries">
@@ -76,7 +78,7 @@ export default function HistoryList({ onRestore, onCompare }) {
                   <p className="history-idea">{e.idea}</p>
                   <div className="history-meta">
                     <span>{new Date(e.createdAt).toLocaleString()}</span>
-                    <span>{e.competitors.length} competitors</span>
+                    <span>{e.competitors.length} {t('app.history.competitors')}</span>
                   </div>
                 </div>
               </div>

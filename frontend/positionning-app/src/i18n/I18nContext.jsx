@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { t as coreT, LOCALES } from './index.js';
 
-const I18nContext = createContext({ locale: 'en', setLocale: () => {}, t: (k, f) => f });
+export const I18nContext = createContext({ locale: 'en', setLocale: () => {}, t: (k, f) => f });
 
 export function I18nProvider({ children, defaultLocale = 'en' }) {
   const [locale, setLocale] = useState(() => {

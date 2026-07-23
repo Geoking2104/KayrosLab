@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { sendToSlack } from '../utils/slack.js';
 import { loadSettings, saveSettings } from '../data/settingsStore.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function SettingsPage({ onSettingsChange, analysisData }) {
+  const { t } = useI18n();
   const [settings, setSettings] = useState(loadSettings);
   const [slackStatus, setSlackStatus] = useState('');
 
@@ -33,24 +35,24 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
 
   return (
     <div className="settings-page">
-      <h3>Settings</h3>
+      <h3>{t('app.settings.title')}</h3>
 
       <div className="settings-group">
-        <label className="settings-label">Theme</label>
+        <label className="settings-label">{t('app.settings.theme')}</label>
         <div className="settings-toggle">
           <button
             className={`toggle-btn ${settings.theme === 'light' ? 'active' : ''}`}
             onClick={() => update('theme', 'light')}
-          >☀️ Light</button>
+          >{t('app.settings.light')}</button>
           <button
             className={`toggle-btn ${settings.theme === 'dark' ? 'active' : ''}`}
             onClick={() => update('theme', 'dark')}
-          >🌙 Dark</button>
+          >{t('app.settings.dark')}</button>
         </div>
       </div>
 
       <div className="settings-group">
-        <label className="settings-label">Language</label>
+        <label className="settings-label">{t('app.settings.language')}</label>
         <div className="settings-toggle">
           <button
             className={`toggle-btn ${settings.locale === 'fr' ? 'active' : ''}`}
@@ -64,8 +66,8 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
       </div>
 
       <div className="settings-group">
-        <label className="settings-label" htmlFor="gapThreshold">Gap Threshold</label>
-        <p className="settings-hint">Minimum score difference to show as advantage/disadvantage</p>
+        <label className="settings-label" htmlFor="gapThreshold">{t('app.settings.gapThreshold')}</label>
+        <p className="settings-hint">{t('app.settings.gapThresholdDesc')}</p>
         <input
           id="gapThreshold"
           type="range"
@@ -74,11 +76,11 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
           value={settings.gapThreshold}
           onChange={(e) => update('gapThreshold', Number(e.target.value))}
         />
-        <span className="settings-value">{settings.gapThreshold} pts</span>
+        <span className="settings-value">{settings.gapThreshold} {t('app.settings.pts')}</span>
       </div>
 
       <div className="settings-group">
-        <label className="settings-label" htmlFor="apiKey">Backend API Key</label>
+        <label className="settings-label" htmlFor="apiKey">{t('app.settings.apiKey')}</label>
         <p className="settings-hint">Optional key sent as X-API-Key header to the backend BFF</p>
         <input
           id="apiKey"
@@ -91,10 +93,10 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
 
       <hr className="settings-divider" />
 
-      <h4 className="settings-subtitle">Slack Integration</h4>
+      <h4 className="settings-subtitle">{t('app.settings.slackIntegration')}</h4>
 
       <div className="settings-group">
-        <label className="settings-label" htmlFor="slackWebhookUrl">Webhook URL</label>
+        <label className="settings-label" htmlFor="slackWebhookUrl">{t('app.settings.slackWebhookUrl')}</label>
         <p className="settings-hint">Incoming webhook URL from Slack Apps → Incoming Webhooks</p>
         <input
           id="slackWebhookUrl"
@@ -108,13 +110,13 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
       <div className="settings-group">
         <label className="settings-label">
           <input type="checkbox" checked={settings.slackAutoSend} onChange={(e) => update('slackAutoSend', e.target.checked)} />
-          {' '}Auto-send after each analysis
+          {' '}{t('app.settings.slackAutoSend')}
         </label>
       </div>
 
       <div className="settings-group">
         <button className="btn btn-outline btn-sm" onClick={handleTestSlack} disabled={!settings.slackWebhookUrl || slackStatus === 'sending'}>
-          {slackStatus === 'sending' ? 'Sending...' : slackStatus === 'sent' ? '✓ Sent!' : slackStatus === 'error' ? '✕ Failed' : 'Test Webhook'}
+          {slackStatus === 'sending' ? t('app.settings.sending') : slackStatus === 'sent' ? t('app.settings.sent') : slackStatus === 'error' ? t('app.settings.failed') : t('app.settings.testWebhook')}
         </button>
       </div>
     </div>

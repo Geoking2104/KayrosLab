@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { getCampaign, listSubmissions, addSubmission, removeSubmission, updateCampaign } from '../data/campaignStore.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 function Countdown({ endDate }) {
+  const { t } = useI18n();
   const [remaining, setRemaining] = useState('');
 
   useEffect(() => {
     const tick = () => {
       const diff = new Date(endDate) - Date.now();
-      if (diff <= 0) return setRemaining('Expired');
+      if (diff <= 0) return setRemaining(t('app.campaigns.expired'));
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
@@ -22,6 +24,7 @@ function Countdown({ endDate }) {
 }
 
 export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
+  const { t } = useI18n();
   const [campaign, setCampaign] = useState(null);
   const [submissions, setSubmissions] = useState([]);
   const [author, setAuthor] = useState('');
@@ -70,13 +73,13 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
     refresh();
   };
 
-  if (!campaign) return <p>Campaign not found.</p>;
+  if (!campaign) return <p>{t('app.campaigns.notFound')}</p>;
 
   const isOpen = campaign.status === 'open' && (!campaign.endDate || new Date(campaign.endDate) > new Date());
 
   return (
     <div className="campaign-detail">
-      <button className="btn btn-outline btn-sm mb-8" onClick={onBack}>← Back</button>
+      <button className="btn btn-outline btn-sm mb-8" onClick={onBack}>← {t('app.campaigns.back')}</button>
 
       <div className="campaign-detail-header">
         <div>
@@ -85,9 +88,9 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
         </div>
         <div className="campaign-detail-actions">
           {isOpen ? (
-            <button className="btn btn-outline btn-sm" onClick={handleClose}>Close</button>
+            <button className="btn btn-outline btn-sm" onClick={handleClose}>{t('app.campaigns.close')}</button>
           ) : (
-            <button className="btn btn-primary btn-sm" onClick={handleReopen}>Reopen</button>
+            <button className="btn btn-primary btn-sm" onClick={handleReopen}>{t('app.campaigns.reopen')}</button>
           )}
         </div>
       </div>
@@ -95,33 +98,33 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
       <div className="campaign-meta-row">
         {campaign.endDate && <Countdown endDate={campaign.endDate} />}
         {campaign.prizes && <span className="campaign-prizes">🎁 {campaign.prizes}</span>}
-        <span className="campaign-status-dot" data-open={isOpen}>{isOpen ? 'Open' : 'Closed'}</span>
+        <span className="campaign-status-dot" data-open={isOpen}>{isOpen ? t('app.campaigns.open') : t('app.campaigns.closed')}</span>
       </div>
 
       {isOpen && (
         <form className="campaign-submit-form" onSubmit={handleSubmitIdea}>
-          <h4>Submit an Idea</h4>
-          <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Your name / team" required disabled={submitting} />
-          <textarea value={idea} onChange={(e) => setIdea(e.target.value)} rows={2} placeholder="Describe your idea..." required disabled={submitting} />
+          <h4>{t('app.campaigns.submitIdea')}</h4>
+          <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder={t('app.campaigns.teamName')} required disabled={submitting} />
+          <textarea value={idea} onChange={(e) => setIdea(e.target.value)} rows={2} placeholder={t('app.campaigns.ideaPlaceholder')} required disabled={submitting} />
           <button type="submit" className="btn btn-primary" disabled={submitting || !author.trim() || !idea.trim()}>
-            {submitting ? 'Analyzing...' : 'Submit & Analyze'}
+            {submitting ? t('app.campaigns.analyzing') : t('app.campaigns.submitAnalyze')}
           </button>
         </form>
       )}
 
       <div className="leaderboard">
-        <h4>Leaderboard ({submissions.length})</h4>
+        <h4>{t('app.campaigns.leaderboard')} ({submissions.length})</h4>
         {submissions.length === 0 ? (
-          <p className="leaderboard-empty">No submissions yet. Be the first!</p>
+          <p className="leaderboard-empty">{t('app.campaigns.noSubmissions')}</p>
         ) : (
           <table className="leaderboard-table">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Team</th>
-                <th>Idea</th>
-                <th>KI</th>
-                <th>Date</th>
+                <th>{t('app.campaigns.colNumber')}</th>
+                <th>{t('app.campaigns.colTeam')}</th>
+                <th>{t('app.campaigns.colIdea')}</th>
+                <th>{t('app.campaigns.colKi')}</th>
+                <th>{t('app.campaigns.colDate')}</th>
                 <th></th>
               </tr>
             </thead>

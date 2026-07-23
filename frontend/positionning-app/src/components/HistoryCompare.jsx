@@ -1,14 +1,16 @@
 import { ENTITY_TYPES } from '../data/ontology.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function HistoryCompare({ entries, onClose }) {
+  const { t } = useI18n();
   if (entries.length !== 2) return null;
   const [a, b] = entries;
 
   return (
     <div className="history-compare">
       <div className="history-compare-header">
-        <h3>Compare Analyses</h3>
-        <button className="btn btn-outline btn-sm" onClick={onClose}>Close</button>
+        <h3>{t('app.historyCompare.title')}</h3>
+        <button className="btn btn-outline btn-sm" onClick={onClose}>{t('app.historyCompare.close')}</button>
       </div>
 
       <div className="compare-grid">
@@ -16,14 +18,14 @@ export default function HistoryCompare({ entries, onClose }) {
           <div className="compare-card">
             <p className="compare-idea">{a.idea}</p>
             <div className="compare-meta">{new Date(a.createdAt).toLocaleDateString()}</div>
-            {a.ki !== null && <div className="compare-ki">KI {a.ki}/100</div>}
+            {a.ki !== null && <div className="compare-ki">{t('app.historyCompare.ki')} {a.ki}/100</div>}
           </div>
         </div>
         <div className="compare-col">
           <div className="compare-card">
             <p className="compare-idea">{b.idea}</p>
             <div className="compare-meta">{new Date(b.createdAt).toLocaleDateString()}</div>
-            {b.ki !== null && <div className="compare-ki">KI {b.ki}/100</div>}
+            {b.ki !== null && <div className="compare-ki">{t('app.historyCompare.ki')} {b.ki}/100</div>}
           </div>
         </div>
       </div>
@@ -31,10 +33,10 @@ export default function HistoryCompare({ entries, onClose }) {
       <table className="compare-table">
         <thead>
           <tr>
-            <th>Dimension</th>
+            <th>{t('app.historyCompare.dimension')}</th>
             <th>{a.idea.slice(0, 30)}</th>
             <th>{b.idea.slice(0, 30)}</th>
-            <th>Δ</th>
+            <th>{t('app.historyCompare.delta')}</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +56,7 @@ export default function HistoryCompare({ entries, onClose }) {
             );
           })}
           <tr className="compare-total">
-            <td><strong>Avg Score</strong></td>
+            <td><strong>{t('app.historyCompare.avgScore')}</strong></td>
             <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (a.baseline?.[et.id] || 0), 0) / ENTITY_TYPES.length)}</td>
             <td>{Math.round(ENTITY_TYPES.reduce((s, et) => s + (b.baseline?.[et.id] || 0), 0) / ENTITY_TYPES.length)}</td>
             <td></td>
@@ -63,19 +65,19 @@ export default function HistoryCompare({ entries, onClose }) {
       </table>
 
       <div className="compare-competitors">
-        <h4>Competitors</h4>
+        <h4>{t('app.historyCompare.competitors')}</h4>
         <div className="compare-grid">
           <div className="compare-col">
             {a.competitors.map((c) => (
               <div key={c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
             ))}
-            {a.competitors.length === 0 && <span className="text-muted">None</span>}
+            {a.competitors.length === 0 && <span className="text-muted">{t('app.historyCompare.none')}</span>}
           </div>
           <div className="compare-col">
             {b.competitors.map((c) => (
               <div key={c.name} className="compare-comp">{c.name} — {c.avgScore}</div>
             ))}
-            {b.competitors.length === 0 && <span className="text-muted">None</span>}
+            {b.competitors.length === 0 && <span className="text-muted">{t('app.historyCompare.none')}</span>}
           </div>
         </div>
       </div>

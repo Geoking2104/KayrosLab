@@ -1,57 +1,60 @@
 import { useState, useEffect, useCallback } from 'react';
 import { completeTour } from '../data/tourStore.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
-const STEPS = [
+export default function OnboardingTour({ onFinish }) {
+  const { t } = useI18n();
+
+  const STEPS = [
   {
     target: '.header',
-    title: '👋 Welcome to KayrosLab',
-    text: 'Analyze your ideas against competitors using a 14-dimensional ontology (7 tech + 7 business dimensions). Position, compare, and discover gaps.',
+    title: t('app.onboarding.step1Title'),
+    text: t('app.onboarding.step1Desc'),
     placement: 'bottom',
   },
   {
     target: '.idea-input-section',
-    title: '💡 Enter Your Idea',
-    text: 'Type or paste your idea here (min 10 characters). Describe your product, startup, or concept in detail for the best analysis.',
+    title: t('app.onboarding.step2Title'),
+    text: t('app.onboarding.step2Desc'),
     placement: 'bottom',
   },
   {
     target: '.ki-banner',
-    title: '📊 Kayros Index',
-    text: 'After analysis, this banner shows your KI score (0–100). It measures how well your idea scores across all 14 dimensions compared to competitors.',
+    title: t('app.onboarding.step3Title'),
+    text: t('app.onboarding.step3Desc'),
     placement: 'bottom',
     requiresData: true,
   },
   {
     target: '.tabs',
-    title: '🗂️ Explore the Results',
-    text: 'Use the tabs to dive deeper: Graph (ontology visualization), Dashboard, Query (SPARQL), Gaps, Export, Multi, History, Campaigns, and Settings.',
+    title: t('app.onboarding.step4Title'),
+    text: t('app.onboarding.step4Desc'),
     placement: 'top',
     requiresData: true,
   },
   {
     target: '.graph-area',
-    title: '🕸️ Ontology Graph',
-    text: 'Each node is a dimension (tech or business). Click a node to inspect details. Select competitors to highlight their scores on the graph.',
+    title: t('app.onboarding.step5Title'),
+    text: t('app.onboarding.step5Desc'),
     placement: 'left',
     requiresData: true,
   },
   {
     target: '.comp-chips',
-    title: '🏢 Competitor Comparison',
-    text: 'Click a competitor chip to highlight their scores on the graph. Compare your idea side-by-side with any competitor.',
+    title: t('app.onboarding.step6Title'),
+    text: t('app.onboarding.step6Desc'),
     placement: 'top',
     requiresData: true,
   },
   {
     target: '.empty-state',
-    title: '🚀 Ready to Start?',
-    text: 'Enter an idea above and click "Analyze" to begin. The more detail you provide, the richer your analysis will be!',
+    title: t('app.onboarding.step7Title'),
+    text: t('app.onboarding.step7Desc'),
     placement: 'center',
     skipIfData: true,
   },
 ];
 
-export default function OnboardingTour({ onFinish }) {
   const [step, setStep] = useState(0);
   const [hasData, setHasData] = useState(false);
 
@@ -144,9 +147,9 @@ export default function OnboardingTour({ onFinish }) {
             ))}
           </div>
           <div className="tour-actions">
-            <button className="btn-outline btn-xs" onClick={handleSkip}>Skip all</button>
+            <button className="btn-outline btn-xs" onClick={handleSkip}>{t('app.onboarding.skip')}</button>
             <button className="btn btn-primary btn-sm" onClick={handleNext}>
-              {isLast ? 'Got it!' : 'Next →'}
+              {isLast ? t('app.onboarding.gotIt') : t('app.onboarding.next')}
             </button>
           </div>
         </div>

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { createCampaign } from '../data/campaignStore.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function CampaignForm({ onCreated, onCancel }) {
+  const { t } = useI18n();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -21,26 +23,26 @@ export default function CampaignForm({ onCreated, onCancel }) {
 
   return (
     <form className="campaign-form" onSubmit={handleSubmit}>
-      <h3>New Campaign</h3>
+      <h3>{t('app.campaigns.title')}</h3>
       <label>
-        Name *
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. EdTech Hackathon 2026" required autoFocus />
+        {t('app.campaigns.name')} *
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t('app.campaigns.namePlaceholder')} required autoFocus />
       </label>
       <label>
-        Description
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} placeholder="Theme, rules, context..." />
+        {t('app.campaigns.description')}
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} placeholder={t('app.campaigns.descriptionPlaceholder')} />
       </label>
       <label>
-        End Date
+        {t('app.campaigns.endDate')}
         <input type="datetime-local" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
       </label>
       <label>
-        Prizes
-        <input type="text" value={prizes} onChange={(e) => setPrizes(e.target.value)} placeholder="e.g. 1st: 500€, 2nd: 200€" />
+        {t('app.campaigns.prizes')}
+        <input type="text" value={prizes} onChange={(e) => setPrizes(e.target.value)} placeholder={t('app.campaigns.prizesPlaceholder')} />
       </label>
       <div className="form-actions">
-        <button type="submit" className="btn btn-primary">Create</button>
-        <button type="button" className="btn btn-outline" onClick={onCancel}>Cancel</button>
+        <button type="submit" className="btn btn-primary">{t('app.campaigns.create_btn')}</button>
+        <button type="button" className="btn btn-outline" onClick={onCancel}>{t('app.campaigns.cancel')}</button>
       </div>
     </form>
   );
