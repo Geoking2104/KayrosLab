@@ -110,6 +110,10 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_dashboard') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_dashboard_desc') %></div></div>
                                     </a>
+                                    <a href="#technologie" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-microchip text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_technology') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_technology_desc') %></div></div>
+                                    </a>
                                 </div>
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3"><%= __('nav_solutions') %></div>
@@ -249,7 +253,8 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_model') %></a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_architecture') %></a>
-                        <a href="#outils" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_dashboard') %></a>
+                        <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_dashboard') %></a>
+                        <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_technology') %></a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1"><%= __('nav_solutions') %></div>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_pharma') %></a>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_solutions_finance') %></a>
@@ -978,6 +983,90 @@
                     <div class="font-semibold mb-2"><%= __('tech_controlled_scalability') %></div>
                     <div class="text-sm text-white/70"><%= __('tech_controlled_scalability_desc') %></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECHNOLOGY SECTION ===== -->
+    <section id="technologie" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-12">
+                <div>
+                    <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3"><%= __('tech2_section_label') %></div>
+                    <h2 class="section-header tracking-tighter"><%- __('tech2_title') %></h2>
+                </div>
+                <div class="text-sm text-slate-600 max-w-md"><%- __('tech2_subtitle') %></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_1_icon') %> text-sky-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_1_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_1_desc') %></p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_2_icon') %> text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_2_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_2_desc') %></p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_3_icon') %> text-amber-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_3_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_3_desc') %></p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_4_icon') %> text-violet-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_4_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_4_desc') %></p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_5_icon') %> text-rose-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_5_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_5_desc') %></p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_6_icon') %> text-cyan-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_6_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_6_desc') %></p>
+                </div>
+                <!-- Card 7 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_7_icon') %> text-orange-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_7_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_7_desc') %></p>
+                </div>
+                <!-- Card 8 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_8_icon') %> text-indigo-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_8_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_8_desc') %></p>
+                </div>
+                <!-- Card 9 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_9_icon') %> text-teal-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_9_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_9_desc') %></p>
+                </div>
+                <!-- Card 10 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid <%= __('tech2_card_10_icon') %> text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2"><%= __('tech2_card_10_title') %></h3>
+                    <p class="text-xs text-slate-600 leading-relaxed"><%= __('tech2_card_10_desc') %></p>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="https://github.com/Geoking2104/KayrosLab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 hover:bg-slate-800 text-white px-6 h-12 rounded-2xl font-semibold text-sm transition-all shadow-lg">
+                    <i class="fa-brands fa-github text-lg"></i>
+                    <%= __('tech2_cta') %>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
             </div>
         </div>
     </section>

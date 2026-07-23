@@ -110,6 +110,10 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Dashboard</div><div class="text-xs text-slate-500 mt-0.5">Strategic dashboard, KPIs, scenario simulation</div></div>
                                     </a>
+                                    <a href="#technologie" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-microchip text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900">Technology</div><div class="text-xs text-slate-500 mt-0.5">Zero-dependency core, multi-agent orchestration, governance</div></div>
+                                    </a>
                                 </div>
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Solutions</div>
@@ -249,7 +253,8 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">The Model</a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Architecture</a>
-                        <a href="#outils" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Dashboard</a>
+                        <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Dashboard</a>
+                        <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Technology</a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1">Solutions</div>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Pharmaceutical Industry</a>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Banking &amp; Insurance</a>
@@ -1224,6 +1229,90 @@
                     <div class="font-semibold mb-2">Controlled Scalability</div>
                     <div class="text-sm text-white/70">From standalone pilot to sovereign local or private cloud deployment. Governance and control maintained at every step.</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECHNOLOGY SECTION ===== -->
+    <section id="technologie" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-12">
+                <div>
+                    <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TECHNOLOGY ARCHITECTURE</div>
+                    <h2 class="section-header tracking-tighter">A zero-dependency engine.<br>A governed architecture.</h2>
+                </div>
+                <div class="text-sm text-slate-600 max-w-md">KayrosLab is built around a <strong>pure Node.js core (ESM, zero-dependency)</strong> that orchestrates AI agents, applies Human-in-the-Loop governance, and computes trajectories deterministically — without ever inventing numbers.</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center mb-4"><i class="fa-solid fa-cube text-sky-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Zero-Dependency Core</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Pure Node 20+ ESM engine — zero npm dependencies. 81+ unit tests. Usable client-side (browser imports) and server-side (Fastify).</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-diagram-project text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Multi-Agent Orchestration</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Plan-and-Solve + ReAct. 6 specialized agents: Planner, Critic, Devil&#39;s Advocate, Red Team, Bisociator, Synthesizer — each with a defined role in the ideation pipeline.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><i class="fa-solid fa-gavel text-amber-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Human-in-the-Loop Governance</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">4 gate types (expert_review, red_team_veto, comex_arbitrage, output_censor) and 4 human roles. Absolute veto with mandatory justification. Gates persisted to disk.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-4"><i class="fa-solid fa-calculator text-violet-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Deterministic Calculations</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Monte-Carlo (seeded PRNG), Kayros Index scoring (5 strategic × 6 technical dimensions), ROI, TCO, NPV — all computed, never hallucinated. The LLM provides hypotheses; the engine calculates.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4"><i class="fa-solid fa-microchip text-rose-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Pluggable LLM Providers</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Mock (offline), Ollama (sovereign), Anthropic Claude (proxy), HTTP Backend. RoutingPolicy with automatic failover and Circuit Breaker per provider (3 strikes, 30s cooldown). Client never sees API keys.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center mb-4"><i class="fa-solid fa-database text-cyan-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Vector Memory</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">InMemory or Qdrant. Semantic recall via cosine similarity with ideaId filtering. Used for agent context (ReAct loop) and the Monitor/Listen feedback loop.</p>
+                </div>
+                <!-- Card 7 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center mb-4"><i class="fa-solid fa-shield-halved text-orange-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Resilience &amp; Circuit Breaker</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Exponential backoff with full jitter. 3-state Circuit Breaker (CLOSED/OPEN/HALF_OPEN). withResilience() composes retry + breaker + fallback. Everything is non-blocking.</p>
+                </div>
+                <!-- Card 8 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center mb-4"><i class="fa-solid fa-sitemap text-indigo-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Ontological Positioning</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">14 entity types, typed properties, oriented relationships. Web + GitHub scraping. OWL RDF/XML export. Cytoscape.js graph with inspector, query playground, competitive gap analysis.</p>
+                </div>
+                <!-- Card 9 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center mb-4"><i class="fa-solid fa-comments text-teal-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Conversational Connectors</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Slack (Block Kit, modals, slash commands), Teams/Discord (Adaptive Cards). Abstract View/Action translated to native formats. Account linking via single-use cryptographic tokens.</p>
+                </div>
+                <!-- Card 10 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-chart-gantt text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Strategic Steering &amp; KPIs</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Kanban with gates, per-stage configurable scorecards, weighted votes, impact tracking (projected vs actual), leaderboards, campaigns with moderation, CSV export, funnel analysis.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="https://github.com/Geoking2104/KayrosLab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 hover:bg-slate-800 text-white px-6 h-12 rounded-2xl font-semibold text-sm transition-all shadow-lg">
+                    <i class="fa-brands fa-github text-lg"></i>
+                    Explore the source code
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
             </div>
         </div>
     </section>

@@ -110,6 +110,10 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Pilotage</div><div class="text-xs text-slate-500 mt-0.5">Tableau de bord stratégique, KPIs, simulation de scénarios</div></div>
                                     </a>
+                                    <a href="#technologie" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-microchip text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900">Technologie</div><div class="text-xs text-slate-500 mt-0.5">Architecture zero-dépendance, orchestration multi-agents, gouvernance</div></div>
+                                    </a>
                                 </div>
                                 <div>
                                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Solutions</div>
@@ -249,7 +253,8 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Le Modèle</a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Architecture</a>
-                        <a href="#outils" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Pilotage</a>
+                        <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Pilotage</a>
+                        <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Technologie</a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1">Solutions</div>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Industrie Pharmaceutique</a>
                         <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Banque &amp; Assurance</a>
@@ -1224,6 +1229,90 @@
                     <div class="font-semibold mb-2">Scalabilité maîtrisée</div>
                     <div class="text-sm text-white/70">Du pilote standalone au déploiement souverain local ou cloud privé. Gouvernance et contrôle conservés à chaque étape.</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECHNOLOGY SECTION ===== -->
+    <section id="technologie" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-12">
+                <div>
+                    <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">ARCHITECTURE TECHNOLOGIQUE</div>
+                    <h2 class="section-header tracking-tighter">Un moteur zero-dépendance.<br>Une architecture gouvernée.</h2>
+                </div>
+                <div class="text-sm text-slate-600 max-w-md">KayrosLab est construit autour d'un <strong>core pur Node.js (ESM, zero-dépendance)</strong> qui orchestre des agents IA, applique une gouvernance Humain-dans-la-boucle, et calcule des trajectoires de manière déterministe — sans jamais inventer de chiffres.</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center mb-4"><i class="fa-solid fa-cube text-sky-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Core Zero-Dépendance</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Moteur pur Node 20+ ESM — zéro dépendance npm. 81+ tests unitaires. Utilisable côté client (imports navigateur) et serveur (Fastify).</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-diagram-project text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Orchestration Multi-Agents</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Plan-and-Solve + ReAct. 6 agents spécialisés : Planner, Critic, Devil&#39;s Advocate, Red Team, Bisociateur, Synthesizer — chaque agent avec un rôle défini dans le pipeline d&#39;idéation.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><i class="fa-solid fa-gavel text-amber-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Gouvernance Humain-dans-la-Boucle</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">4 types de gates (expert_review, red_team_veto, comex_arbitrage, output_censor) et 4 rôles humains. Veto absolu avec justification obligatoire. Gates persistées sur disque.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-4"><i class="fa-solid fa-calculator text-violet-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Calculs Déterministes</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Monte-Carlo (PRNG seedé), scoring Kayros Index (5 dimensions stratégiques × 6 dimensions techniques), ROI, TCO, VAN — tout est calculé, jamais halluciné. Le LLM fournit les hypothèses ; le moteur calcule.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4"><i class="fa-solid fa-microchip text-rose-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Abstracteurs LLM Pluggables</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Mock (offline), Ollama (souverain), Anthropic Claude (proxy), HTTP Backend. RoutingPolicy avec failover automatique et Circuit Breaker par provider (3 strikes, 30s cooldown). Le client ne voit jamais les clés API.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center mb-4"><i class="fa-solid fa-database text-cyan-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Mémoire Vectorielle</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">InMemory ou Qdrant. Rappel sémantique par similarité cosinus avec filtrage par ideaId. Utilisée pour le contexte agent (boucle ReAct) et la boucle de rétroaction Monitor/Listen.</p>
+                </div>
+                <!-- Card 7 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center mb-4"><i class="fa-solid fa-shield-halved text-orange-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Résilience &amp; Circuit Breaker</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Backoff exponentiel avec full jitter. Circuit Breaker 3 états (CLOSED/OPEN/HALF_OPEN). withResilience() compose retry + breaker + fallback. Tout est non-bloquant.</p>
+                </div>
+                <!-- Card 8 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center mb-4"><i class="fa-solid fa-sitemap text-indigo-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Positionnement Ontologique</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">14 types d&#39;entités, propriétés typées, relations orientées. Scraping web + GitHub. Export OWL RDF/XML. Graphe Cytoscape.js avec inspecteur, query playground, analyse d&#39;écart concurrentiel.</p>
+                </div>
+                <!-- Card 9 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center mb-4"><i class="fa-solid fa-comments text-teal-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Connecteurs Conversationnels</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Slack (Block Kit, modaux, commandes slash), Teams/Discord (Adaptive Cards). Abstraction View/Action traduite en natif. Lien de compte via tokens cryptographiques à usage unique.</p>
+                </div>
+                <!-- Card 10 -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-chart-gantt text-emerald-600 text-lg"></i></div>
+                    <h3 class="font-semibold text-sm mb-2">Pilotage Stratégique &amp; KPIs</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Kanban avec gates, scorecards configurables par étape, votes pondérés, suivi d&#39;impact (projeté vs réel), leaderboards, campagnes avec modération, export CSV, analyse d&#39;entonnoir.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="https://github.com/Geoking2104/KayrosLab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 hover:bg-slate-800 text-white px-6 h-12 rounded-2xl font-semibold text-sm transition-all shadow-lg">
+                    <i class="fa-brands fa-github text-lg"></i>
+                    Explorer le code source
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
             </div>
         </div>
     </section>
