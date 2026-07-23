@@ -24,6 +24,7 @@ import { isTourCompleted } from './data/tourStore.js';
 import { addHistoryEntry, getHistoryEntry } from './data/historyStore.js';
 import { loadSettings, saveSettings, applyTheme } from './data/settingsStore.js';
 import { sendToSlack } from './utils/slack.js';
+import './styles/tokens.css';
 import './styles/positioning.css';
 
 const COMPETITOR_COLORS = ['#ef4444', '#f97316', '#8b5cf6', '#06b6d4', '#ec4899'];
