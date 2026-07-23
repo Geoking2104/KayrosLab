@@ -106,7 +106,7 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Architecture</div><div class="text-xs text-slate-500 mt-0.5">Orchestration multi-agents, mémoire, conformité</div></div>
                                     </a>
-                                    <a href="#outils" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Pilotage</div><div class="text-xs text-slate-500 mt-0.5">Tableau de bord stratégique, KPIs, simulation de scénarios</div></div>
                                     </a>
@@ -687,6 +687,515 @@
             
         </div>
         <div class="mt-8 text-center text-xs text-slate-500">Tous les outils sont déclarés dans le <strong>Tool Registry</strong> et exposés aux agents via function calling. Le registry est extensible (vous pouvez ajouter vos propres outils métier).</div>
+    </section>
+
+    <!-- ===== DASHBOARD SECTION ===== -->
+    <section id="dashboard" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-50 border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    Sortie de l&#39;étape 06 • Projeter
+                </div>
+                <h2 class="section-header tracking-tighter">Tableau de bord de pilotage</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Une fois la décision arbitrée, KayrosLab transforme le Go en <strong>trajectoire pilotée</strong> : roadmap, KPIs, scénarios probabilisés et boucle de re-arbitrage automatique.</p>
+            </div>
+
+            <!-- Mock Dashboard -->
+            <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
+
+                <!-- Dashboard Header -->
+                <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                            <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Pilotage Stratégique</div>
+                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Mis à jour il y a 2h</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4 text-sm">
+                        <div class="flex items-center gap-x-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-emerald-300">Boucle active</span>
+                        </div>
+                        <div class="px-3 py-1 rounded-full bg-white/10 text-xs font-medium">Kayros Index 78</div>
+                    </div>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Left Column : KPIs + Scenarios -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- KPI Cards -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Indicateurs de pilotage stratégique</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-emerald-700 font-medium">Kayros Index</div>
+                                        <i class="fa-solid fa-gauge-high text-emerald-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-slate-900">78<span class="text-sm font-medium text-slate-400">/100</span></div>
+                                    <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1"><i class="fa-solid fa-arrow-up text-[10px]"></i> +6 pts depuis arbitrage</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-slate-500">Probabilité de succès</div>
+                                        <i class="fa-solid fa-bullseye text-sky-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-semibold text-slate-900">68%</div>
+                                    <div class="text-xs text-slate-500 mt-1">P50 • Intervalle 52–81%</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <div class="text-xs text-slate-500">ROI projeté (P50)</div>
+                                        <i class="fa-solid fa-chart-line text-emerald-500 text-xs"></i>
+                                    </div>
+                                    <div class="text-2xl font-semibold text-slate-900">2.4×</div>
+                                    <div class="text-xs text-emerald-600 mt-1">P90 : 3.1× • P10 : 1.3×</div>
+                                </div>
+                            </div>
+
+                            <!-- Secondary KPIs -->
+                            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Risque résiduel</div>
+                                    <div class="text-lg font-semibold text-amber-600">Moyen</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">3 red flags actifs</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Time-to-Value</div>
+                                    <div class="text-lg font-semibold text-slate-900">9 mois</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">Premier impact mesurable</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Alignement COMEX</div>
+                                    <div class="text-lg font-semibold text-emerald-600">Élevé</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">4/5 décideurs</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Prochain gate</div>
+                                    <div class="text-lg font-semibold text-slate-900">J+45</div>
+                                    <div class="text-[11px] text-sky-600 mt-0.5">COMEX • Go / No-Go</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Budget consommé</div>
+                                    <div class="text-lg font-semibold text-slate-900">38%</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">142 k€ / 375 k€</div>
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
+                                    <div class="text-[11px] text-slate-500 mb-0.5">Couverture hypothèses</div>
+                                    <div class="text-lg font-semibold text-emerald-600">81%</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">17/21 validées</div>
+                                </div>
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-slate-400">
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Leading</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Lagging</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Risk</span>
+                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-violet-400"></span> Budget / Hypothèses</span>
+                            </div>
+                        </div>
+
+                        <!-- Scenario Simulation -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Simulation probabiliste (P10 / P50 / P90)</div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-slate-700">Scénario Base</span>
+                                        <span class="text-slate-500">Valeur attendue</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-sky-500 rounded-full" style="width: 68%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-emerald-700">Scénario Optimiste</span>
+                                        <span class="text-emerald-600">P90</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width: 89%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1">
+                                        <span class="font-medium text-rose-700">Scénario Adverse</span>
+                                        <span class="text-rose-600">P10</span>
+                                    </div>
+                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width: 34%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Budget Impact Simulation -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Simulation des impacts budgétaires</div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200">
+                                    <div>
+                                        <div class="text-xs text-slate-500">Budget total alloué</div>
+                                        <div class="text-xl font-bold text-slate-900">375 k€</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-slate-500">Consommé à date</div>
+                                        <div class="text-xl font-bold text-slate-900">142 k€ <span class="text-sm font-medium text-slate-400">(38%)</span></div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-slate-500">Reste à engager</div>
+                                        <div class="text-xl font-bold text-emerald-600">233 k€</div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                                    <div class="bg-white border border-slate-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-slate-500 mb-1">Scénario Base</div>
+                                        <div class="text-lg font-semibold text-slate-900">361 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−14 k€ vs budget</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-sky-500 rounded-full" style="width: 96%"></div></div>
+                                    </div>
+                                    <div class="bg-white border border-emerald-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-emerald-700 mb-1">Scénario Optimiste</div>
+                                        <div class="text-lg font-semibold text-slate-900">298 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−77 k€ (sous-consommation)</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width: 79%"></div></div>
+                                    </div>
+                                    <div class="bg-white border border-rose-200 rounded-xl p-3">
+                                        <div class="text-[11px] font-medium text-rose-700 mb-1">Scénario Adverse</div>
+                                        <div class="text-lg font-semibold text-slate-900">452 k€</div>
+                                        <div class="text-[11px] text-rose-600 mt-0.5">+77 k€ (dépassement)</div>
+                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width: 100%"></div></div>
+                                    </div>
+                                </div>
+
+                                <!-- Delay simulation -->
+                                <div class="mt-5 pt-4 border-t border-slate-200">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Simulation de l&#39;impact d&#39;un retard (POC)</div>
+                                        <div class="text-[10px] text-slate-400">Hypothèse : coût journalier marginal + perte d&#39;opportunité</div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+15 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+18 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 393 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-600">Prob. succès −3 pts</div>
+                                                <div class="text-slate-500">TtV +0,5 mois</div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+30 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+37 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 412 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-600">Prob. succès −6 pts</div>
+                                                <div class="text-slate-500">TtV +1,0 mois</div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-center relative">
+                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">Référence</div>
+                                            <div class="text-[11px] font-medium text-amber-700 mb-1">+45 jours</div>
+                                            <div class="text-base font-bold text-amber-800">+52 k€</div>
+                                            <div class="text-[10px] text-amber-700/80 mt-0.5">Budget → 427 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-amber-700 font-medium">Prob. succès −9 pts</div>
+                                                <div class="text-amber-600">TtV +1,5 mois</div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+60 jours</div>
+                                            <div class="text-base font-bold text-rose-600">+71 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 446 k€</div>
+                                            <div class="mt-2 space-y-0.5 text-[10px]">
+                                                <div class="text-rose-600">Prob. succès −14 pts</div>
+                                                <div class="text-slate-500">TtV +2,0 mois</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col sm:flex-row gap-3 text-xs">
+                                        <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                                            <div>
+                                                <div class="font-medium text-amber-800">Seuil d&#39;alerte</div>
+                                                <div class="text-amber-700/80 mt-0.5">Au-delà de +45 j, le ROI tombe sous 2,0× et le scénario adverse devient le plus probable.</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 flex items-start gap-2 bg-sky-50 border border-sky-200 rounded-xl px-3 py-2.5">
+                                            <i class="fa-solid fa-lightbulb text-sky-500 mt-0.5"></i>
+                                            <div>
+                                                <div class="font-medium text-sky-800">Levier de mitigation</div>
+                                                <div class="text-sky-700/80 mt-0.5">Mutualisation partenaires + phasage → −18 % CAPEX et réduction du risque de retard.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sensitivity Analysis + Tornado -->
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Analyse de sensibilité des coûts</div>
+                                <div class="text-[10px] text-slate-400">Graphique en éventail — Impact ±20 % sur le budget total</div>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <div class="mb-5">
+                                    <div class="text-[10px] font-medium text-slate-500 mb-3 flex items-center justify-between">
+                                        <span>Impact négatif (−)</span>
+                                        <span class="text-slate-400">Base</span>
+                                        <span>Impact positif (+)</span>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-slate-300 -translate-x-1/2 z-0"></div>
+                                        <div class="space-y-2.5 relative z-10">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Partenaires / sous-traitance</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-rose-500 to-rose-400 rounded-l-md" style="width: 92%"></div></div>
+                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-rose-500 to-rose-400 rounded-r-md" style="width: 92%"></div></div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-rose-600">±48 k€</div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Durée du POC (délai)</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-amber-500 to-amber-400 rounded-l-md" style="width: 71%"></div></div>
+                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-amber-500 to-amber-400 rounded-r-md" style="width: 71%"></div></div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-amber-600">±37 k€</div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Effectif interne</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-400 to-slate-300 rounded-l-md" style="width: 56%"></div></div>
+                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-400 to-slate-300 rounded-r-md" style="width: 56%"></div></div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-600">±29 k€</div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-600 truncate pr-1">Conformité &amp; réglementaire</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-300 to-slate-200 rounded-l-md" style="width: 35%"></div></div>
+                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-300 to-slate-200 rounded-r-md" style="width: 35%"></div></div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-500">±18 k€</div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-500 truncate pr-1">Go-to-market / acquisition</div>
+                                                <div class="flex-1 flex items-center h-6">
+                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-200 to-slate-100 rounded-l-md" style="width: 23%"></div></div>
+                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-200 to-slate-100 rounded-r-md" style="width: 23%"></div></div>
+                                                </div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-400">±12 k€</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 flex items-center justify-center gap-4 text-[10px] text-slate-400">
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-rose-500"></span> Critique</span>
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-amber-500"></span> Élevé</span>
+                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-slate-400"></span> Moyen / Faible</span>
+                                    </div>
+                                </div>
+
+                                <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
+                                    <div class="flex-1 flex items-start gap-2 bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-rose-800 text-xs">Critique</div>
+                                            <div class="text-rose-700/80 text-[11px] mt-0.5">Une hausse de 20 % des coûts partenaires fait basculer le ROI sous 2,0× dans le scénario base.</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-shield-halved text-emerald-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-emerald-800 text-xs">Action recommandée</div>
+                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Négocier un plafond de dépenses partenaires + clause de révision à J+45.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ROI Analysis -->
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Analyse du Retour sur Investissement</div>
+                                <div class="text-[10px] text-slate-400">Horizon 24 mois • Scénario de base vs fourchettes</div>
+                            </div>
+
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-5">
+                                <!-- ROI Headline -->
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div class="bg-white border border-emerald-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-1">ROI Base</div>
+                                        <div class="text-3xl font-bold text-emerald-700 tracking-tight">2.4×</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">+140 % net</div>
+                                    </div>
+                                    <div class="bg-white border border-sky-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-sky-600 mb-1">Payback</div>
+                                        <div class="text-3xl font-bold text-sky-700 tracking-tight">11 mois</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Récupération du capital</div>
+                                    </div>
+                                    <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">VAN (approx.)</div>
+                                        <div class="text-3xl font-bold text-slate-800 tracking-tight">+412 k€</div>
+                                        <div class="text-[11px] text-slate-500 mt-1">Sur 24 mois</div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="text-[11px] font-medium text-slate-500 mb-2.5">ROI par scénario probabiliste</div>
+                                    <div class="space-y-2.5">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-emerald-700">Scénario Optimiste</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-emerald-500 rounded-full" style="width: 92%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">3.1×</span></div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P90</div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-sky-700">Scénario Base</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-sky-500 rounded-full" style="width: 72%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">2.4×</span></div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P50</div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-20 text-[11px] font-medium text-rose-700">Scénario Adverse</div>
+                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
+                                                <div class="absolute inset-y-0 left-0 bg-rose-400 rounded-full" style="width: 38%"></div>
+                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">1.3×</span></div>
+                                            </div>
+                                            <div class="w-16 text-right text-[11px] text-slate-500">P10</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                    <div class="bg-white border border-slate-200 rounded-xl p-3.5">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Coûts totaux (24 mois)</div>
+                                        <div class="text-xl font-bold text-slate-800">375 k€</div>
+                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
+                                            <div class="flex justify-between"><span>Partenaires / sous-traitance</span><span class="font-medium">192 k€</span></div>
+                                            <div class="flex justify-between"><span>Équipe interne</span><span class="font-medium">98 k€</span></div>
+                                            <div class="flex justify-between"><span>Conformité & outils</span><span class="font-medium">47 k€</span></div>
+                                            <div class="flex justify-between"><span>Go-to-market</span><span class="font-medium">38 k€</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white border border-emerald-200 rounded-xl p-3.5">
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-2">Bénéfices projetés (24 mois)</div>
+                                        <div class="text-xl font-bold text-emerald-700">900 k€</div>
+                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
+                                            <div class="flex justify-between"><span>Gains opérationnels</span><span class="font-medium">410 k€</span></div>
+                                            <div class="flex justify-between"><span>Nouveaux revenus</span><span class="font-medium">320 k€</span></div>
+                                            <div class="flex justify-between"><span>Évitement de coûts</span><span class="font-medium">120 k€</span></div>
+                                            <div class="flex justify-between"><span>Valorisation stratégique</span><span class="font-medium">50 k€</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pt-2 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
+                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-chart-line text-emerald-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-emerald-800 text-xs">Seuil de rentabilité</div>
+                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Le projet devient rentable dès le mois 11. Au-delà de 18 mois, le ROI dépasse 2,8× dans le scénario base.</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+                                        <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                                        <div>
+                                            <div class="font-medium text-amber-800 text-xs">Point de vigilance</div>
+                                            <div class="text-amber-700/80 text-[11px] mt-0.5">Dans le scénario adverse (P10), le ROI reste positif (1.3×) mais le payback s&#39;étire à 19 mois.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Roadmap -->
+                        <div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Roadmap d&#39;exécution (Now / Next / Later)</div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <div class="flex-1 bg-sky-50 border border-sky-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-sky-600 uppercase tracking-wider mb-2">Now</div>
+                                    <div class="text-sm font-medium text-slate-800">Structuration équipe &amp; budget</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+0 → J+30</div>
+                                </div>
+                                <div class="flex-1 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-2">Next</div>
+                                    <div class="text-sm font-medium text-slate-800">POC marché &amp; partenaires</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+30 → J+90</div>
+                                </div>
+                                <div class="flex-1 bg-slate-100 border border-slate-200 rounded-2xl p-4">
+                                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Later</div>
+                                    <div class="text-sm font-medium text-slate-800">Scale &amp; industrialisation</div>
+                                    <div class="text-xs text-slate-500 mt-1">J+90 → J+180</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column : Risk + Feedback -->
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Matrice de risques</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Dépendance fournisseur</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">Élevé</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Réglementaire</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium">Moyen</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-700">Adoption marché</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">Faible</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-500">
+                                <i class="fa-solid fa-bell text-amber-500 mr-1"></i> 1 déclencheur de re-arbitrage actif
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+                            <div class="flex items-center gap-x-2 mb-3">
+                                <i class="fa-solid fa-sync text-emerald-600"></i>
+                                <span class="text-sm font-semibold text-emerald-800">Boucle de rétroaction</span>
+                            </div>
+                            <p class="text-xs text-emerald-900/80 leading-relaxed">Les KPIs et signaux sont réinjectés automatiquement dans l'étape <strong>Écouter</strong>. Un seuil franchi déclenche un re-arbitrage formel.</p>
+                            <div class="mt-4 flex items-center gap-x-2 text-xs text-emerald-700">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                Prochaine injection : J+7
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Livrables générés</div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-file-pdf text-rose-500"></i> Fiche projet + Roadmap
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-chart-gantt text-sky-500"></i> Gantt &amp; RACI
+                            </div>
+                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
+                                <i class="fa-solid fa-table text-emerald-500"></i> Tableau KPI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="px-6 pb-6 text-center text-sm text-slate-500">Ce tableau de bord est généré automatiquement à l'issue de l'étape <strong>Projeter</strong> et reste vivant grâce à la boucle de rétroaction.</p>
+            </div>
+        </div>
     </section>
 
     <!-- ===== ORCHESTRATION SECTION ===== -->
