@@ -1,15 +1,29 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ENTITY_TYPES } from './data/ontology.js';
 import { searchCompetitors, searchGitHub, searchArXiv, analyzeIdea } from './collectors/scanner.js';
 import { useI18n } from './i18n/I18nContext.jsx';
+import { ToastProvider, useToast } from './components/Toast.jsx';
+import { SkeletonGraph, SkeletonTabs, SkeletonChips } from './components/Skeleton.jsx';
 import OntologyGraph from './components/OntologyGraph.jsx';
 import InspectorPanel from './components/InspectorPanel.jsx';
 import QueryPlayground from './components/QueryPlayground.jsx';
 import GapAnalysis from './components/GapAnalysis.jsx';
 import OWLExporter from './components/OWLExporter.jsx';
+import PdfExport from './components/PdfExport.jsx';
 import StrategicDashboard from './components/StrategicDashboard.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import IdeaInput from './components/IdeaInput.jsx';
+import CampaignList from './components/CampaignList.jsx';
+import CampaignDetail from './components/CampaignDetail.jsx';
+import HistoryList from './components/HistoryList.jsx';
+import HistoryCompare from './components/HistoryCompare.jsx';
+import SettingsPage from './components/SettingsPage.jsx';
+import MultiIdeaAnalysis from './components/MultiIdeaAnalysis.jsx';
+import OnboardingTour from './components/OnboardingTour.jsx';
+import { isTourCompleted } from './data/tourStore.js';
+import { addHistoryEntry, getHistoryEntry } from './data/historyStore.js';
+import { loadSettings, saveSettings, applyTheme } from './data/settingsStore.js';
+import { sendToSlack } from './utils/slack.js';
 import './styles/positioning.css';
 
 const COMPETITOR_COLORS = ['#ef4444', '#f97316', '#8b5cf6', '#06b6d4', '#ec4899'];
@@ -45,14 +59,14 @@ function computeCompetitorScores(idea, webResults) {
   });
 }
 
-function computeGaps(baseline, competitors) {
+function computeGaps(baseline, competitors, threshold = 5) {
   const gaps = [];
   for (const et of ENTITY_TYPES) {
     const ours = baseline[et.id] || 50;
     const scores = competitors.map((c) => c.scores?.[et.id] || 50);
     const avg = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 50;
     const diff = ours - avg;
-    if (Math.abs(diff) >= 5) {
+    if (Math.abs(diff) >= threshold) {
       gaps.push({ neuronId: et.id, diff, type: diff > 0 ? 'advantage' : 'disadvantage' });
     }
   }
@@ -60,8 +74,9 @@ function computeGaps(baseline, competitors) {
   return gaps;
 }
 
-export default function App() {
+function AppInner() {
   const { t, locale, setLocale, available } = useI18n();
+  const toast = useToast();
   const [idea, setIdea] = useState('');
   const [competitors, setCompetitors] = useState([]);
   const [gaps, setGaps] = useState([]);
@@ -71,35 +86,57 @@ export default function App() {
   const [inspectedEntity, setInspectedEntity] = useState(null);
   const [selectedComp, setSelectedComp] = useState(null);
   const [activeTab, setActiveTab] = useState('graph');
+  const [campaignView, setCampaignView] = useState(null);
+  const [compareIds, setCompareIds] = useState(null);
+  const [settings, setSettings] = useState(loadSettings);
+  const [showTour, setShowTour] = useState(!isTourCompleted());
+
+  useEffect(() => { applyTheme(settings.theme); }, [settings.theme]);
+  useEffect(() => { if (settings.locale && settings.locale !== locale) setLocale(settings.locale); }, []);
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') setInspectedEntity(null); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  const runAnalysis = useCallback(async (ideaText, { gapThreshold, apiKey } = {}) => {
+    const opts = apiKey ? { headers: { 'X-API-Key': apiKey } } : {};
+    const analysisResult = await analyzeIdea(ideaText, opts);
+    if (analysisResult) {
+      const colorMapped = (analysisResult.competitors || []).map((c, i) => ({
+        ...c, color: COMPETITOR_COLORS[i % COMPETITOR_COLORS.length],
+      }));
+      return { baseline: analysisResult.baseline, competitors: colorMapped, gaps: analysisResult.gaps || [], kayrosIndex: analysisResult.kayrosIndex ?? null };
+    }
+    const webResults = await searchCompetitors(ideaText);
+    const comps = computeCompetitorScores(ideaText, webResults);
+    const base = computeBaseline(ideaText);
+    const gapList = computeGaps(base, comps, gapThreshold || 5);
+    return { baseline: base, competitors: comps, gaps: gapList, kayrosIndex: null };
+  }, []);
 
   const handleAnalyze = useCallback(async (ideaText) => {
     setLoading(true);
     setIdea(ideaText);
     setInspectedEntity(null);
     try {
-      const analysisResult = await analyzeIdea(ideaText);
-      if (analysisResult) {
-        setBaseline(analysisResult.baseline);
-        const colorMapped = (analysisResult.competitors || []).map((c, i) => ({
-          ...c, color: COMPETITOR_COLORS[i % COMPETITOR_COLORS.length],
-        }));
-        setCompetitors(colorMapped);
-        setGaps(analysisResult.gaps || []);
-        setKi(analysisResult.kayrosIndex ?? null);
-      } else {
-        const webResults = await searchCompetitors(ideaText);
-        const comps = computeCompetitorScores(ideaText, webResults);
-        const base = computeBaseline(ideaText);
-        const gapList = computeGaps(base, comps);
-        setBaseline(base);
-        setCompetitors(comps);
-        setGaps(gapList);
-        setKi(null);
+      const result = await runAnalysis(ideaText, { gapThreshold: settings.gapThreshold, apiKey: settings.apiKey });
+      setBaseline(result.baseline);
+      setCompetitors(result.competitors);
+      setGaps(result.gaps);
+      setKi(result.kayrosIndex);
+      addHistoryEntry({ idea: ideaText, ki: result.kayrosIndex, baseline: result.baseline, competitors: result.competitors, gaps: result.gaps });
+      if (settings.slackWebhookUrl && settings.slackAutoSend) {
+        sendToSlack(settings.slackWebhookUrl, { idea: ideaText, ki: result.kayrosIndex, competitors: result.competitors, gaps: result.gaps }).catch(() => {});
       }
+      toast(result.kayrosIndex !== null ? 'Analyse terminée' : 'Analyse locale effectuée', { type: 'success' });
+    } catch (e) {
+      toast(`Erreur: ${e.message || 'analyse impossible'}`, { type: 'error', duration: 6000 });
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [runAnalysis, settings, toast]);
 
   const handleNodeClick = useCallback((entity) => {
     setInspectedEntity(entity);
@@ -109,6 +146,7 @@ export default function App() {
     ...(baseline ? [{ name: 'Notre idée', color: '#6366f1', isBaseline: true, scores: baseline }] : []),
     ...competitors,
   ];
+  const hasData = baseline || competitors.length > 0;
 
   return (
     <div className="app">
@@ -130,7 +168,7 @@ export default function App() {
           <span className="header-badge ontology">{t('app.ontology')}</span>
           <div className="locale-switcher">
             {Object.entries(available).map(([code, label]) => (
-              <button key={code} className={`locale-btn ${locale === code ? 'active' : ''}`} onClick={() => setLocale(code)}>{label}</button>
+              <button key={code} className={`locale-btn ${locale === code ? 'active' : ''}`} onClick={() => { setLocale(code); saveSettings({ ...settings, locale: code }); setSettings({ ...settings, locale: code }); }}>{label}</button>
             ))}
           </div>
         </div>
@@ -142,13 +180,14 @@ export default function App() {
           <IdeaInput onAnalyze={handleAnalyze} loading={loading} />
 
           {loading && (
-            <div className="loading-bar">
-              <div className="loading-fill" />
-              <span>{t('app.analyzing')}</span>
+            <div className="loading-skeleton">
+              <SkeletonChips />
+              <SkeletonTabs />
+              <SkeletonGraph />
             </div>
           )}
 
-          {(baseline || competitors.length > 0) && (
+          {!loading && hasData && (
             <>
               {ki !== null && (
                 <div className="ki-banner">
@@ -189,6 +228,18 @@ export default function App() {
                 <button className={`tab ${activeTab === 'export' ? 'active' : ''}`} onClick={() => setActiveTab('export')}>
                   📥 {t('app.tabs.export')}
                 </button>
+                <button className={`tab ${activeTab === 'history' ? 'active' : ''}`} onClick={() => { setActiveTab('history'); setCompareIds(null); }}>
+                  📋 History
+                </button>
+                <button className={`tab ${activeTab === 'multi' ? 'active' : ''}`} onClick={() => setActiveTab('multi')}>
+                  📊 Multi
+                </button>
+                <button className={`tab ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
+                  ⚙️ Settings
+                </button>
+                <button className={`tab ${activeTab === 'campaigns' ? 'active' : ''}`} onClick={() => { setActiveTab('campaigns'); setCampaignView('list'); }}>
+                  🏆 Campaigns
+                </button>
               </div>
 
               <div className="tab-content">
@@ -224,13 +275,89 @@ export default function App() {
                 )}
 
                 {activeTab === 'export' && (
-                  <OWLExporter competitorList={competitors} baseline={baseline} />
+                  <>
+                    <PdfExport idea={idea} competitors={competitors} baseline={baseline} ki={ki} gaps={gaps} />
+                    {settings.slackWebhookUrl && (
+                      <div className="export-bar">
+                        <button className="btn btn-outline" onClick={async () => {
+                          try {
+                            await sendToSlack(settings.slackWebhookUrl, { idea, ki, competitors, gaps });
+                            toast('Sent to Slack!', { type: 'success' });
+                          } catch { toast('Slack send failed', { type: 'error' }); }
+                        }}>
+                          📤 Share to Slack
+                        </button>
+                      </div>
+                    )}
+                    <OWLExporter competitorList={competitors} baseline={baseline} />
+                  </>
+                )}
+
+                {activeTab === 'campaigns' && (
+                  <div className="campaigns-container">
+                    {campaignView === 'list' ? (
+                      <CampaignList onSelect={(c) => setCampaignView(c.id)} />
+                    ) : (
+                      <CampaignDetail
+                        campaignId={campaignView}
+                        onBack={() => setCampaignView('list')}
+                        onAnalyze={runAnalysis}
+                      />
+                    )}
+                  </div>
+                )}
+
+                {activeTab === 'multi' && (
+                  <div className="multi-container">
+                    <MultiIdeaAnalysis
+                      runAnalysis={runAnalysis}
+                      gapThreshold={settings.gapThreshold}
+                      apiKey={settings.apiKey}
+                      toast={toast}
+                    />
+                  </div>
+                )}
+
+                {activeTab === 'settings' && (
+                  <div className="settings-container">
+                    <SettingsPage
+                      analysisData={{ idea, ki, competitors, gaps }}
+                      onSettingsChange={(s) => {
+                        setSettings(s);
+                        if (s.locale !== locale) setLocale(s.locale);
+                      }}
+                    />
+                  </div>
+                )}
+
+                {activeTab === 'history' && (
+                  <div className="history-container">
+                    {compareIds ? (
+                      <HistoryCompare
+                        entries={compareIds.map((id) => ({ id, ...getHistoryEntry(id) }))}
+                        onClose={() => setCompareIds(null)}
+                      />
+                    ) : (
+                      <HistoryList
+                        onRestore={(entry) => {
+                          setBaseline(entry.baseline);
+                          setCompetitors(entry.competitors);
+                          setGaps(entry.gaps);
+                          setKi(entry.ki);
+                          setIdea(entry.idea);
+                          setActiveTab('graph');
+                          toast('Analysis restored from history', { type: 'info' });
+                        }}
+                        onCompare={(ids) => setCompareIds(ids)}
+                      />
+                    )}
+                  </div>
                 )}
               </div>
             </>
           )}
 
-          {!baseline && competitors.length === 0 && !loading && (
+          {!loading && !hasData && (
             <div className="empty-state">
               <div className="empty-icon">🔍</div>
               <p>{t('app.emptyTitle')} <strong>{t('app.analyze')}</strong> {t('app.emptyDesc')}</p>
@@ -242,6 +369,16 @@ export default function App() {
           </ErrorBoundary>
         </div>
       </div>
+
+      {showTour && <OnboardingTour onFinish={() => setShowTour(false)} />}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <AppInner />
+    </ToastProvider>
   );
 }

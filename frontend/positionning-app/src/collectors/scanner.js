@@ -48,11 +48,12 @@ export async function searchArXiv(idea, { limit = 5 } = {}) {
   }
 }
 
-export async function analyzeIdea(idea) {
+export async function analyzeIdea(idea, opts = {}) {
   try {
+    const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
     const res = await fetch(BACKEND_ANALYZE, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ idea, limit: 5 }),
     });
     if (!res.ok) throw new Error(`Analyze backend returned ${res.status}`);
