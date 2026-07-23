@@ -1,14 +1,14 @@
 # KayrosLab — Spécifications Techniques
 
-> Dérivé de `SPECIFICATIONS_FONCTIONNELLES.md` (v0.2 validée). Décrit **comment** construire le « LLM gouverné » : architecture, composants, contrats d'interface, données, résilience, sécurité, tests.
+> Dérivé de `SPECIFICATIONS_FONCTIONNELLES.md` (v0.3 validée). Décrit **comment** construire le « LLM gouverné » : architecture, composants, contrats d'interface, données, résilience, sécurité, tests.
 
 | | |
 |---|---|
 | **Document** | Spécifications techniques (STD) |
-| **Version** | 0.2 — décisions d'architecture intégrées |
-| **Date** | 15 juillet 2026 |
-| **Statut** | 🟢 Prêt à committer (5 arbitrages techniques tranchés) |
-| **Réf. fonctionnelle** | `SPECIFICATIONS_FONCTIONNELLES.md` v0.2 (EF-01 → EF-38) |
+| **Version** | 0.3 — v0.3.0 features intégrées |
+| **Date** | 23 juillet 2026 |
+| **Statut** | 🟢 Validé |
+| **Réf. fonctionnelle** | `SPECIFICATIONS_FONCTIONNELLES.md` v0.3 (EF-01 → EF-38, EF-88 → EF-111) |
 | **Dépôt** | https://github.com/Geoking2104/KayrosLab |
 | **Cible de version langage** | ES2023, Node 20 LTS, TypeScript 5.x (progressif) |
 
@@ -22,7 +22,7 @@
 2. **Abstraction avant intégration.** Tout appel LLM passe par `KayrosLLM` : le code métier ne connaît jamais le fournisseur.
 3. **Tout est tracé.** Chaque action agent/humaine produit un événement horodaté rattaché à une idée (EF-31/32).
 4. **La gouvernance est un composant, pas une option.** Les gates HITL et le veto sont des points d'extension de l'orchestrateur (EF-20, EF-34).
-5. **Complexité proportionnée.** On n'introduit IndexedDB, Vector Memory ou backend que lorsque la fonction l'exige (roadmap §16).
+5. **Complexité proportionnée.** On n'introduit IndexedDB, Vector Memory ou backend que lorsque la fonction l'exige (roadmap §24).
 
 ---
 
@@ -71,7 +71,7 @@ flowchart TB
 
 | Palier | Description | LLM | Clés API | Statut |
 |---|---|---|---|---|
-| **P0 — Standalone** | 1 fichier HTML, tout en mémoire/localStorage, LLM simulé | Mock | Aucune | 🟢 |
+| **P0 — Standalone** | SPA React/Vite + localStorage, LLM simulé ; export PDF, campaigns, history, settings, slack, multi-idea, onboarding tour | Mock | Aucune | 🟢 |
 | **P1 — Local souverain** | SPA React/Vite + backend Fastify local + Ollama + Qdrant embarqué | Ollama | Aucune (local) | 🔵 |
 | **P2 — Cloud gouverné** | App (SPA) + backend proxy + vector store + service gouvernance | Claude/Ollama | Backend uniquement | 🔵 |
 
@@ -79,17 +79,17 @@ flowchart TB
 
 ## 2. Stack technique
 
-| Couche | Existant (🟢/🟠) | Cible (🔵) |
+| Couche | Existant (🟢) | Cible (🔵) |
 |---|---|---|
-| UI | HTML + CSS inline + JS vanilla ; Chart.js 4.x ; three.js r134 | Conserver P0 ; **migrer vers React 18 + Vite 5 dès P1** (décision actée) |
-| État | variables globales + `localStorage` | Store typé + IndexedDB (idb) |
+| UI | **React 18 + Vite 5** ; Chart.js 4.x ; three.js r134 | 🟢 |
+| État | **React Context** + stores localStorage (settings, history, campaigns, tour) | Store typé + IndexedDB (idb) |
 | LLM | délégation **simulée** (`setTimeout`) | `KayrosLLM` → Anthropic SDK (`@anthropic-ai/sdk`) / Ollama REST |
 | Backend | inexistant | **Node 20 + Fastify** (proxy, gouvernance, vector) — décision actée |
 | Vector store | inexistant | **Qdrant** dès qu'un store persistant est requis (P1 embarqué / P2 service) — décision actée |
-| Persistance | `localStorage` | IndexedDB → (v6) ElectricSQL pour sync |
-| Build/CI | aucun | GitHub Actions (lint, test, build, déploiement Pages/preview) |
-
-> **Note migration.** Le passage vanilla → React n'est pas un prérequis du « LLM gouverné » : l'orchestrateur, `KayrosLLM` et la résilience peuvent être livrés en modules JS/TS importés dans le fichier standalone. La SPA React est un confort de maintenance (palier P2).
+| Persistance | **localStorage** (campaigns, history, settings, tour) | IndexedDB → (v6) ElectricSQL pour sync |
+| Export | **CSS @media print** (zéro dépendance) | Bibliothèque PDF dédiée (P1) |
+| PWA | **manifest.json + sw.js** (cache-first, offline fallback) | 🟢 |
+| Build/CI | Vite build | GitHub Actions (lint, test, build, déploiement Pages/preview) |
 
 ---
 
@@ -568,26 +568,387 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 
 ---
 
-## 16. Feuille de route technique (dérivée du backlog fonctionnel)
+## 16. Export PDF — Print-based (EF-88/89)
 
-| Lot technique | Réf. EF | Palier | Priorité |
-|---|---|---|---|
-| Modules `KayrosLLM` + adaptateur mock (extraction) | EF-24/25 | P0 | Must |
-| Orchestrateur Plan-and-Solve + ReAct | EF-15/16 | P0/P1 | Must |
-| Résilience Retry + Circuit Breaker | EF-27/28 | P0 | Must |
-| Adaptateur Ollama (souverain) | EF-26 | P1 | Must |
-| Gouvernance : gates + RBAC + veto | EF-20/34/36/38 | P1/P2 | Must |
-| Migration IndexedDB + multi-idées | EF-29/30 | P1 | Should |
-| Vector Memory | EF-18 | P1/P2 | Should |
-| Backend proxy + API gouvernée + sécurité clés | EF-33/35 §10 | P2 | Must |
-| KI stratégique + Radar | EF-23 | P1 | Could |
-| Consolidation artefacts (1 fichier) | §12 | P0/P1 | Must |
-| Sync cloud (ElectricSQL) | — | v6 | Won't-now |
-| Décentralisation (Holochain) | — | v7 | Won't-now |
+Aucune dépendance. L'export repose sur CSS `@media print` et l'API native `window.print()`.
+
+### 16.1 Composant `PdfExport.jsx`
+
+```tsx
+// Rendu conditionnel d'un div.print-report masqué à l'écran, visible à l'impression
+// Inclut : KI score, tableau concurrents, tableau gaps, grille ontologie
+// Déclenché par bouton "Exporter PDF" → window.print()
+function PdfExport({ baseline, competitors, gaps, ki, ontology }) {
+  return (
+    <div className="print-report">
+      <header><h1>KayrosLab — Rapport d'analyse</h1></header>
+      <section className="ki-score">…</section>
+      <section className="competitors">…</section>
+      <section className="gaps">…</section>
+      <section className="ontology-grid">…</section>
+    </div>
+  );
+}
+```
+
+### 16.2 CSS `@media print`
+
+```css
+@media print {
+  .header, .tabs, .export-bar, .sidebar, .actions, .back-button { display: none !important; }
+  .print-report { display: block; position: absolute; top: 0; left: 0; width: 100%; }
+  body { font-size: 12pt; color: #000; background: #fff; }
+  @page { margin: 2cm; }
+}
+```
 
 ---
 
-## 17. Décisions d'architecture (ADR — synthèse)
+## 17. Campaigns / Hackathons (EF-90/91)
+
+Stockage localStorage via `campaignStore.js`. CRUD complet, soumissions liées à une campagne, classement par KI.
+
+### 17.1 Store
+
+```ts
+interface Campaign {
+  id: string;
+  title: string;
+  description: string;
+  deadline: string;           // ISO 8601
+  status: "open" | "closed";
+  submissions: Submission[];  // idées soumises
+  createdAt: string;
+}
+interface Submission {
+  idea: string;
+  ki: number;
+  scores: Record<string, number>;
+  author: string;
+  submittedAt: string;
+}
+
+// campaignStore.js — CRUD localStorage
+const STORAGE_KEY = "kayros_campaigns";
+function loadCampaigns(): Campaign[] { return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]"); }
+function saveCampaigns(c: Campaign[]): void { localStorage.setItem(STORAGE_KEY, JSON.stringify(c)); }
+```
+
+### 17.2 Composants
+
+- **CampaignList** — liste des campagnes avec filtre open/closed, bouton créer.
+- **CampaignForm** — formulaire titre, description, deadline (date picker).
+- **CampaignDetail** — détail + soumissions + countdown (`setInterval`, calcul `new Date(campaign.deadline) - Date.now()`). Boutons Close/Reopen togglent `status`.
+
+### 17.3 Analyse et classement
+
+Les soumissions sont analysées via `runAnalysis()` (store partagé). Le leaderboard trie par KI descendant.
+
+---
+
+## 18. History (EF-92/93)
+
+Stockage localStorage via `historyStore.js`. Sauvegarde automatique après chaque analyse, consultation, comparaison, restauration.
+
+### 18.1 Store
+
+```ts
+interface HistoryEntry {
+  id: string;
+  idea: string;
+  baseline: string;
+  competitors: Competitor[];
+  gaps: Gap[];
+  ki: KIStrategic;
+  scores: Record<string, number>;
+  timestamp: string;
+}
+
+// historyStore.js — CRUD localStorage
+const STORAGE_KEY = "kayros_history";
+function loadHistory(): HistoryEntry[] { /* JSON.parse */ }
+function saveHistory(entries: HistoryEntry[]): void { /* JSON.stringify */ }
+function addEntry(entry: HistoryEntry): void { /* load + push + save */ }
+function deleteEntries(ids: string[]): void { /* filter + save */ }
+```
+
+### 18.2 Sauvegarde automatique
+
+Dans `handleAnalyze()`, après le calcul des résultats, un appel à `addEntry` persisté l'analyse complète (baseline, concurrents, gaps, KI, idée reformulée).
+
+### 18.3 Composants
+
+- **HistoryList** — recherche textuelle (`input` → `filter`), sélection par checkbox (`ids: Set<string>`).
+- **HistoryCompare** — deux entrées côte à côte ; tableau des 14 scores `ENTITY_TYPES` avec colonne Δ (différence).
+- **Restauration** — clic « Restore » charge l'état complet de l'analyse dans le formulaire (baseline, competitors, gaps, ki, idea).
+
+---
+
+## 19. Settings (EF-94/95)
+
+Stockage localStorage via `settingsStore.js`. Thème clair/sombre, seuil de gap, clé API backend, locale.
+
+### 19.1 Store
+
+```ts
+interface Settings {
+  theme: "light" | "dark";
+  gapThreshold: number;       // défaut 0.15
+  apiKey: string;             // X-API-Key header
+  locale: "fr" | "en";
+  slackWebhookUrl: string;
+  slackAutoSend: boolean;
+}
+
+// settingsStore.js
+const STORAGE_KEY = "kayros_settings";
+function loadSettings(): Settings { /* defaults + merge localStorage */ }
+function saveSettings(s: Partial<Settings>): void { /* merge + save */ }
+```
+
+### 19.2 Thème
+
+`applyTheme(theme)` écrit `data-theme` sur `document.documentElement`. CSS :
+
+```css
+[data-theme="dark"] { --bg: #1a1a2e; --text: #e0e0e0; --card-bg: #16213e; --accent: #e94560; }
+```
+
+~250 lignes de surcharges dark pour tous les composants (header, tabs, cards, tableaux, formulaires, badges).
+
+### 19.3 Intégrations
+
+- **Seuil de gap** — passé à `computeGaps()` pour filtrer les écarts significatifs.
+- **Clé API** — envoyée comme header `X-API-Key` sur les requêtes backend.
+- **Locale** — synchronisée bidirectionnellement avec le contexte i18n (`I18nContext`).
+
+---
+
+## 20. PWA (Progressive Web App) (EF-101/102/103/104)
+
+Permet l'installation sur mobile/desktop, offline fallback, cache des assets statiques.
+
+### 20.1 `manifest.json`
+
+```json
+{
+  "name": "KayrosLab",
+  "short_name": "KayrosLab",
+  "description": "LLM gouverné — analyse stratégique",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#D83B01",
+  "icons": [
+    { "src": "./icon-192.svg", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "./icon-512.svg", "sizes": "512x512", "type": "image/svg+xml" }
+  ]
+}
+```
+
+### 20.2 `sw.js` — Service Worker
+
+```js
+const CACHE = "kayroslab-v1";
+const ASSETS = ["./", "./index.html", "./assets/index.css", "./assets/index.js"];
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+});
+
+self.addEventListener("fetch", (e) => {
+  const url = new URL(e.request.url);
+  // Cache-first pour les assets statiques
+  if (url.origin === location.origin && (url.pathname.match(/\.(css|js|svg|woff2?)$/) || url.pathname === "/")) {
+    e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+  } else {
+    // Network-first pour le reste
+    e.respondWith(
+      fetch(e.request).then((r) => { const resp = r.clone(); caches.open(CACHE).then((c) => c.put(e.request, resp)); return r; })
+        .catch(() => caches.match("./") || caches.match(e.request))
+    );
+  }
+});
+```
+
+### 20.3 Icônes SVG
+
+Inline SVG : lettre « K » blanche sur fond rectangulaire orange `#D83B01`. Deux tailles : 192×192 et 512×512.
+
+### 20.4 Métas iOS
+
+```html
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="KayrosLab" />
+<link rel="apple-touch-icon" href="./icon-192.svg" />
+```
+
+### 20.5 Enregistrement SW
+
+Dans `index.html`, script inline :
+
+```js
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").catch(console.warn);
+}
+```
+
+---
+
+## 21. Slack Webhooks (EF-96)
+
+Zéro dépendance. Envoi POST JSON vers une URL Slack Incoming Webhook au format Block Kit.
+
+### 21.1 Envoi
+
+```ts
+async function sendSlackNotification(webhookUrl: string, payload: SlackPayload): Promise<boolean> {
+  try {
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    return res.ok;
+  } catch { return false; }
+}
+```
+
+### 21.2 Format Block Kit
+
+```json
+{
+  "blocks": [
+    { "type": "header", "text": { "type": "plain_text", "text": "Nouvelle analyse KayrosLab" } },
+    { "type": "section", "fields": [{ "type": "mrkdwn", "text": "*Idée:* ..." }] },
+    { "type": "section", "fields": [{ "type": "mrkdwn", "text": "*Concurrents:* ..." }] },
+    { "type": "section", "fields": [{ "type": "mrkdwn", "text": "*Gaps:* ..." }] },
+    { "type": "context", "elements": [{ "type": "mrkdwn", "text": "KayrosLab — analyse stratégique" }] }
+  ]
+}
+```
+
+### 21.3 Auto-send
+
+Après chaque analyse, la fonction vérifie `settings.slackWebhookUrl && settings.slackAutoSend` ; si vrai, déclenche `sendSlackNotification`.
+
+### 21.4 Test
+
+Bouton « Test Slack » dans la page Settings envoie un échantillon avec le texte « Test de connexion KayrosLab ✅ ».
+
+---
+
+## 22. Multi-idea Analysis (EF-97/98)
+
+Analyse groupée de plusieurs idées avec limite de concurrence, barre de progression, classement par KI.
+
+### 22.1 Composant `MultiIdeaAnalysis.jsx`
+
+```tsx
+function MultiIdeaAnalysis() {
+  const [ideas, setIdeas] = useState<string[]>([]);
+  const [results, setResults] = useState<AnalysisResult[]>([]);
+  const [progress, setProgress] = useState({ current: 0, total: 0 });
+  const [running, setRunning] = useState(false);
+
+  const extractIdeas = (raw: string): string[] =>
+    raw.split("\n").map(l => l.trim()).filter(l => l.length >= 10).slice(0, 10);
+
+  const runAll = async (ideas: string[]) => {
+    const CONCURRENCY = 3;
+    const results: AnalysisResult[] = [];
+    const iterator = ideas.entries();
+    const workers = Array(CONCURRENCY).fill(null).map(async () => {
+      for (const [i, idea] of iterator) {
+        const r = await runAnalysis(idea);
+        results.push({ idea, ...r });
+        setProgress({ current: results.length, total: ideas.length });
+      }
+    });
+    await Promise.all(workers);
+    return results.sort((a, b) => b.ki.global - a.ki.global);
+  };
+}
+```
+
+### 22.2 Affichage
+
+Chaque carte de résultat affiche l'idée et les 14 scores `ENTITY_TYPES` sous forme de badges colorés (vert ≥ 7, orange 4-6, rouge < 4). Barre de progression `(current / total)`.
+
+---
+
+## 23. Onboarding Tour (EF-99/100)
+
+Guide interactif en 7 étapes avec surlignage, positionnement dynamique, sauvegarde localStorage.
+
+### 23.1 Store
+
+```ts
+// tourStore.js
+const STORAGE_KEY = "kayros_tour_completed";
+function isTourCompleted(): boolean { return localStorage.getItem(STORAGE_KEY) === "true"; }
+function completeTour(): void { localStorage.setItem(STORAGE_KEY, "true"); }
+function resetTour(): void { localStorage.removeItem(STORAGE_KEY); }
+```
+
+### 23.2 Définitions
+
+7 étapes :
+1. « Bienvenue dans KayrosLab » → cible `body`
+2. « Saisissez votre idée » → cible `#idea-input` (skip if data exists)
+3. « Analysez » → cible `.analyze-btn`
+4. « Découvrez le KI » → cible `.ki-score-card`
+5. « Comparez » → cible `.competitors-section`
+6. « Exportez » → cible `.export-bar`
+7. « Terminé » → cible `body`
+
+### 23.3 Composant `OnboardingTour.jsx`
+
+```tsx
+function OnboardingTour() {
+  const [step, setStep] = useState(0);
+  const steps = useMemo(() => defineSteps().filter(s => s.requiresData ? hasData() : true), []);
+  // Position via getBoundingClientRect() + fixed
+  // Overlay semi-transparent avec backdrop click → skip
+  // Highlight pulse CSS animation sur la cible
+}
+```
+
+- Filtrage adaptatif : `requiresData` masque une étape si l'utilisateur n'a pas encore de données ; `skipIfData` saute si déjà renseigné.
+- Positionnement : `getBoundingClientRect()` + `position: fixed` pour placer le tooltip.
+- Animation : `@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(216, 59, 1, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(216, 59, 1, 0); } }`.
+
+---
+
+## 24. Feuille de route technique (dérivée du backlog fonctionnel)
+
+| Lot technique | Réf. EF | Palier | Priorité | Statut |
+|---|---|---|---|---|
+| Modules `KayrosLLM` + adaptateur mock (extraction) | EF-24/25 | P0 | Must | 🟢 |
+| Orchestrateur Plan-and-Solve + ReAct | EF-15/16 | P0/P1 | Must | 🟢 |
+| Résilience Retry + Circuit Breaker | EF-27/28 | P0 | Must | 🟢 |
+| Adaptateur Ollama (souverain) | EF-26 | P1 | Must | 🔵 |
+| Gouvernance : gates + RBAC + veto | EF-20/34/36/38 | P1/P2 | Must | 🔵 |
+| Migration IndexedDB + multi-idées | EF-29/30 | P1 | Should | 🔵 |
+| Vector Memory | EF-18 | P1/P2 | Should | 🔵 |
+| Backend proxy + API gouvernée + sécurité clés | EF-33/35 §10 | P2 | Must | 🔵 |
+| KI stratégique + Radar | EF-23 | P1 | Could | 🔵 |
+| Consolidation artefacts (1 fichier) | §12 | P0/P1 | Must | 🟢 |
+| **Export PDF** | EF-88/89 | P0 | Must | 🟢 |
+| **Campaigns / Hackathons** | EF-90/91 | P0 | Must | 🟢 |
+| **History** | EF-92/93 | P0 | Must | 🟢 |
+| **Settings (theme, seuil, locale, clé)** | EF-94/95 | P0 | Must | 🟢 |
+| **Slack Webhooks** | EF-96 | P0 | Must | 🟢 |
+| **Multi-idea Analysis** | EF-97/98 | P0 | Must | 🟢 |
+| **Onboarding Tour** | EF-99/100 | P0 | Must | 🟢 |
+| **PWA (manifest, SW, icons)** | EF-101/102/103/104 | P0 | Must | 🟢 |
+| Sync cloud (ElectricSQL) | — | v6 | Won't-now | 🔵 |
+| Décentralisation (Holochain) | — | v7 | Won't-now | 🔵 |
+
+---
+
+## 25. Décisions d'architecture (ADR — synthèse)
 
 | ADR | Décision | Raison | Statut |
 |---|---|---|---|
@@ -604,7 +965,7 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 
 ---
 
-## 18. Risques techniques & questions ouvertes
+## 26. Risques techniques & questions ouvertes
 
 | Risque | Impact | Mitigation |
 |---|---|---|
@@ -614,6 +975,7 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 | Fusion artefacts régressive | qualité démo | branche + PR + non-régression |
 | Latence gates humains | UX | modes async + notifications |
 | Embeddings/souveraineté | dépendance | Ollama local par défaut |
+| localStorage size limit (5-10 Mo) | saturation | compression + nettoyage ; migration IndexedDB P1 |
 
 **Décisions actées (16/07/2026) :**
 1. ✅ Backend = **Fastify** (Node 20).
@@ -626,7 +988,7 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 
 ---
 
-## 19. Traçabilité EF → composants techniques
+## 27. Traçabilité EF → composants techniques
 
 | EF (fonctionnel) | Composant technique (ce doc) |
 |---|---|
@@ -650,8 +1012,16 @@ Outils cibles : Vitest (unit/contrat), Playwright (E2E). ⚠️ à trancher.
 | EF-76/77/78/79 | `core/impact.mjs` (`recordInvestment`, `recordBenefit`, `computeVariance`, `impactReport`) |
 | EF-80/81/82/83 | *Non implémenté — suppose une extension du modèle de processus (à arbitrer).* |
 | EF-84/85/86/87 | *Non implémenté — reporting portefeuille.* |
+| **EF-88/89** | **§16 Export PDF — print-based, CSS @media print** |
+| **EF-90/91** | **§17 Campaigns / Hackathons — localStorage, countdown, leaderboard** |
+| **EF-92/93** | **§18 History — localStorage, auto-save, compare, restore** |
+| **EF-94/95** | **§19 Settings — theme, gap threshold, API key, locale** |
+| **EF-96** | **§21 Slack Webhooks — fetch POST, Block Kit, auto-send** |
+| **EF-97/98** | **§22 Multi-idea Analysis — concurrency 3, progress bar, sorted results** |
+| **EF-99/100** | **§23 Onboarding Tour — 7 steps, getBoundingClientRect, localStorage flag** |
+| **EF-101/102/103/104** | **§20 PWA — manifest.json, sw.js, icons SVG, meta iOS, SW registration** |
 
-### 19.1 Persistance des données (EF-46, EF-49)
+### 27.1 Persistance des données (EF-46, EF-49)
 
 Trois dépôts fichiers à écriture **atomique** (temporaire + `rename`), configurés par variables d'environnement :
 
@@ -665,4 +1035,4 @@ Trois dépôts fichiers à écriture **atomique** (temporaire + `rename`), confi
 
 ---
 
-*Fin des spécifications techniques v0.1 — soumises à validation. À committer sur le dépôt après revue, comme les specs fonctionnelles.*
+*Fin des spécifications techniques v0.3 — Validé le 23 juillet 2026.*

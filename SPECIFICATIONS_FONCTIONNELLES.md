@@ -5,9 +5,9 @@
 | | |
 |---|---|
 | **Document** | Spécifications fonctionnelles (SFD) |
-| **Version** | 0.2 — décisions produit intégrées, en cours de validation |
-| **Date** | 15 juillet 2026 |
-| **Statut** | 🟡 En validation (les specs techniques suivront une fois ce document validé) |
+| **Version** | 0.3 — v0.3.0 features intégrées, document validé |
+| **Date** | 23 juillet 2026 |
+| **Statut** | 🟢 Validé |
 | **Auteur** | Geoffroy de La Tournelle — Founder & Director, KayrosLab |
 | **Dépôt** | https://github.com/Geoking2104/KayrosLab |
 | **Audience** | Mixte : COMEX / produit **et** équipe technique |
@@ -71,7 +71,7 @@ flowchart LR
 
 | Artefact | Emplacement | Rôle réel | Qualification |
 |---|---|---|---|
-| `kayroslab-complete-with-ai-agents.html` | Dépôt | **Fichier de référence unique** (décision actée) : AI Connectors + délégation externe (simulée), KI dynamique, historique appels/coûts | 🟠 (référence) |
+| `kayroslab-complete-with-ai-agents.html` | Dépôt | **Fichier de référence unique v0.3.0** : Export PDF, Campaigns/Hackathons, History, Settings, Slack Webhooks, Multi-idea, Onboarding, PWA | 🟢 (v0.3.0) |
 | `kayroslab_standalone.html` (163 Ko) | Prototype local (mai) | App la plus riche fonctionnellement : workflow 5 étapes, Working Groups (HIL), roundtable, livrables/PDF, ROI, feed — **source à ré-intégrer** dans le fichier de référence | 🟢 / 🟠 |
 | `kayroslab-enhanced-future-proofing.html` | Dépôt | Variante Future Proofing + Collision Mode — **à consolider puis retirer** | 🟠 |
 | `kayroslab-complete-updated.html` | Dépôt | ~~Placeholder vide~~ — **supprimé** (décision actée) | 🗑️ Retiré |
@@ -91,6 +91,14 @@ flowchart LR
 | LLM réels | 🟠 Délégation simulée | 🔵 Claude API + Ollama, abstraction `KayrosLLM` |
 | Résilience | ❌ | 🔵 Retry backoff + Circuit Breaker |
 | Exposition « LLM gouverné » | ❌ | 🔵 Interface/endpoint unique |
+| **Export PDF** | 🟢 Print-based report (header, KI, concurrents, gaps, ontologie) | 🔵 Export natif avec templates |
+| **Campaigns / Hackathons** | 🟢 Création/édition, countdown, soumission d'idées, leaderboard, Close/Reopen | 🔵 Notifications push réelles |
+| **History** | 🟢 Auto-save, search, delete, restore, compare (KI, 14 dimensions, Δ) | 🔵 Sync cloud |
+| **Settings** | 🟢 Theme (Light/Dark), Locale (FR/EN), Gap Threshold (slider 1–20), API Key (password) | 🔵 Profils utilisateur persistés |
+| **Slack Webhooks** | 🟢 Block Kit formatting, auto-send toggle, manual share, test webhook | 🔵 Teams / Discord |
+| **Multi-idea Analysis** | 🟢 Textarea batch (≤10), concurrency 3, progress bar, ranked results, winner highlight | 🔵 Analyse illimitée |
+| **Onboarding Tour** | 🟢 7 adaptive steps, highlight + tooltip, localStorage | — |
+| **PWA** | 🟢 Manifest (standalone, #D83B01), Service Worker (cache-first), icons 192/512, apple-meta | 🔵 Offline-first complet |
 
 ---
 
@@ -500,6 +508,7 @@ sequenceDiagram
 | **Offline-first** | L'app tourne sans backend pour la démo (standalone) | 🟢 |
 | **Accessibilité** | Contrastes, navigation clavier, tailles de cibles | 🔵 |
 | **Auditabilité** | Toute décision humaine est immuable et exportable | 🔵 |
+| **PWA** | Manifest (standalone, #D83B01), Service Worker (cache-first), icons 192/512, apple-mobile-web-app | 🟢 |
 
 ---
 
@@ -512,6 +521,8 @@ sequenceDiagram
 | **Expert métier / Censeur** | Valider la pertinence, poser un veto | É3–É5 |
 | **Arbitre COMEX** | Décider et assumer, avec traçabilité | É5 |
 | **Intégrateur** | Appeler KayrosLab comme un « LLM gouverné » via API | Mode §7 |
+| **Campaign Manager** | Lancer et piloter des campagnes d'idéation, soumettre des idées, suivre le leaderboard | Modules v0.3.0 |
+| **Analyste** | Comparer des analyses historiques, exporter des rapports, analyser en batch | Modules v0.3.0 |
 
 ---
 
@@ -531,6 +542,14 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | Multi-idées + IndexedDB | EF-30 | **Should** | v4 |
 | KI stratégique + Radar | EF-23 | **Could** | v4 |
 | Interface « LLM gouverné » (API) | EF-33, EF-35 | **Must** | v5 |
+| **Export PDF** (print-based report) | EF-102 | ✅ v0.3.0 | ✅ |
+| **Campaigns / Hackathons** (création, countdown, soumission, leaderboard) | EF-103→EF-108 | ✅ v0.3.0 | ✅ |
+| **History** (auto-save, search, delete, restore, compare) | EF-109→EF-112 | ✅ v0.3.0 | ✅ |
+| **Settings** (theme, locale, gap threshold, API key) | EF-113→EF-116 | ✅ v0.3.0 | ✅ |
+| **Slack Webhooks** (Block Kit, auto-send, test) | EF-117→EF-120 | ✅ v0.3.0 | ✅ |
+| **Multi-idea Analysis** (textarea batch, progress, ranking) | EF-121→EF-124 | ✅ v0.3.0 | ✅ |
+| **Onboarding Tour** (7 adaptive steps, localStorage) | EF-125 | ✅ v0.3.0 | ✅ |
+| **PWA** (manifest, service worker, icons) | EF-126→EF-128 | ✅ v0.3.0 | ✅ |
 | Synchronisation cloud (ElectricSQL) | — | **Won't-now** | v6 |
 | Version décentralisée (Holochain) | — | **Won't-now** | v7 |
 
@@ -551,11 +570,12 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | Latence multi-agents + gate humain | UX dégradée | Modes `auto/supervisé/strict`, async |
 | Badge → placeholder | Crédibilité démo | ✅ Résolu : badge repointé vers `with-ai-agents`, placeholder supprimé |
 
-**Décisions actées (15/07/2026).**
+**Décisions actées (15/07/2026 puis 23/07/2026).**
 1. ✅ **Badge repointé** vers `kayroslab-complete-with-ai-agents.html` (démo réellement fonctionnelle).
 2. ✅ **Placeholder supprimé** ; le dépôt est **consolidé autour d'un fichier de référence unique** (`kayroslab-complete-with-ai-agents.html`). La fusion des fonctions du prototype 163 Ko (workflow 5 étapes) et de la variante `enhanced-future-proofing` dans ce fichier est un **lot d'ingénierie** cadré avec les specs techniques.
 3. ✅ Le mode **`strict` n'est PAS le défaut** ; le défaut est **`supervisé`** (§7).
 4. ✅ **KI = 5 dimensions stratégiques d'abord** (Fit, Désirabilité, Faisabilité, Viabilité, Adaptabilité), **puis les 6 dimensions techniques** en couche opérationnelle (§6.4).
+5. ✅ **v0.3.0 livrée** : Export PDF, Campaigns/Hackathons, History, Settings, Slack Webhooks, Multi-idea Analysis, Onboarding Tour, PWA.
 
 **Question restante.**
 - Fusion effective des 3 apps en un seul fichier : périmètre exact et priorité (à cadrer dans `SPECIFICATIONS_TECHNIQUES.md`).
@@ -575,6 +595,8 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 | **Kill shot** | Attaque Red Team invalidant une idée |
 | **Bisociation** | Génération d'idées par collision de concepts distants |
 | **Circuit Breaker** | Coupe-circuit à états (CLOSED/OPEN/HALF_OPEN) protégeant des pannes en cascade |
+| **Campaign / Hackathon** | Défi thématique avec fenêtre de soumission, countdown, soumission d'idées et leaderboard |
+| **PWA** | Progressive Web App : installation, offline, icônes, splash screen |
 
 ---
 
@@ -865,7 +887,7 @@ Les gaps de différenciation sont injectés comme facteurs dans le KI :
 | EF-89 | Recherche GitHub par concurrence (repos, stars, forks) | 🟢 |
 | EF-90 | Recherche GitLab (repos, stars, activité) | 🟢 |
 | EF-91 | Calcul des KPIs GitHub (stars normalisées, forks, contributeurs, closure rate, recency, commits 90j) | 🟢 |
-| EF-92 | Alimentation des 14 types d'entités avec propriétés typées (enum, string, integer, decimal, boolean) | 🔴 | 
+| EF-92 | Alimentation des 14 types d'entités avec propriétés typées (enum, string, integer, decimal, boolean) | 🔴 |
 | EF-93 | Relations orientées entre types (verbe, cardinalité, description) | 🔴 |
 | EF-94 | Graphe Cytoscape.js interactif (nœuds, arêtes, layout fcose) | 🔴 |
 | EF-95 | Inspecteur de propriétés par clic sur nœud (type + data bindings concurrent) | 🔴 |
@@ -881,6 +903,228 @@ Statut : 🟢 partiel (collecteurs, scoring, gap analysis, lien) · 🔴 restruc
 ---
 
 **Écart transverse subsistant.** Aucune de ces exigences n'a été validée **en conditions réelles** : le parcours HTTP complet n'a jamais été exécuté contre un serveur en fonctionnement (déploiement P2 en attente). Les statuts 🟢 attestent d'un code testé unitairement, pas d'une recette fonctionnelle.
+
+---
+
+## 14. Modules v0.3.0 — Fonctionnalités livrées
+
+### 14.1 Export PDF — Rapport print-based
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+L'Export PDF produit un rapport formaté pour l'impression via `window.print()` et CSS `@media print`. Le rapport inclut :
+
+| Élément | Description |
+|---|---|
+| Header | Titre de l'analyse, date, auteur |
+| KI Score | Score global Kayroslab Index avec les 6 dimensions techniques |
+| Tableau concurrents | Scores des concurrents par dimension |
+| Gap analysis | Écarts de différenciation (baseline vs concurrents, seuil configurable) |
+| Grille ontologie | Dimensions de l'ontologie de positionnement (14 types) |
+
+- **EF-102 (🟢)** L'utilisateur peut exporter un rapport PDF depuis l'onglet Export. Le CSS `@media print` masque tous les éléments d'interface (navigation, boutons, onglets) pour ne conserver que le contenu du rapport.
+
+> **US-12.** En tant qu'**analyste**, je veux **générer un rapport PDF complet** afin de **partager l'analyse avec des parties prenantes hors de l'application**.
+> **Critères.** *Étant donné* une analyse terminée, *quand* je clique sur « Export PDF », *alors* un dialogue d'impression s'ouvre avec le rapport formaté (header, KI, concurrents, gaps, ontologie).
+
+---
+
+### 14.2 Campaigns / Hackathons
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Module complet de campagnes d'idéation et hackathons.
+
+**Fonctionnalités.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Création / édition | Formulaire : nom, description, date de début, date de fin, statut (ouverte/fermée). |
+| F2 | Countdown timer | Affichage du temps restant avant fermeture. |
+| F3 | Soumission d'idées | Les participants soumettent des idées analysées via le pipeline KayrosLab (KI, dimensions). |
+| F4 | Leaderboard | Classement des idées par score KI. Podium 🥇🥈🥉. |
+| F5 | Close / Reopen | Une campagne peut être close (arrêt des soumissions) puis ré-ouverte. |
+| F6 | Persistance | Stockage localStorage (campagnes, soumissions, scores). |
+
+- **EF-103 (🟢)** Créer une campagne avec nom, description, dates de début/fin.
+- **EF-104 (🟢)** Afficher un countdown timer vers la date de fermeture.
+- **EF-105 (🟢)** Soumettre une idée dans une campagne ouverte ; l'idée est analysée et scorée.
+- **EF-106 (🟢)** Afficher un leaderboard des idées par score KI avec podium 🥇🥈🥉.
+- **EF-107 (🟢)** Clore et rouvrir une campagne (bascule de statut).
+- **EF-108 (🟢)** Persister campagnes et soumissions dans localStorage.
+
+> **US-13.** En tant que **Campaign Manager**, je veux **créer une campagne d'idéation chronométrée** afin de **stimuler la génération d'idées sur un thème donné**.
+> **Critères.** *Étant donné* une campagne ouverte, *quand* un participant soumet une idée, *alors* elle est analysée via KayrosLab et apparaît dans le leaderboard.
+> *Étant donné* une campagne clôturée, *quand* je clique « Reopen », *alors* les soumissions sont à nouveau autorisées.
+
+---
+
+### 14.3 History
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Chaque analyse est automatiquement sauvegardée dans l'historique.
+
+**Fonctionnalités.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Auto-save | Sauvegarde automatique après chaque analyse complète. |
+| F2 | Recherche | Champ de recherche plein texte dans l'historique. |
+| F3 | Suppression | Supprimer une entrée d'historique. |
+| F4 | Restauration | Restaurer une analyse supprimée dans l'interface active. |
+| F5 | Comparaison | Comparer deux analyses côte à côte : KI global, 14 dimensions avec delta (Δ), concurrents. |
+
+- **EF-109 (🟢)** Sauvegarder automatiquement chaque analyse dans l'historique (localStorage).
+- **EF-110 (🟢)** Rechercher, supprimer et restaurer des entrées d'historique.
+- **EF-111 (🟢)** Comparer deux analyses côte à côte avec affichage des deltas (KI, 14 dimensions, concurrents).
+- **EF-112 (🟢)** Onglet History dédié dans l'interface.
+
+> **US-14.** En tant qu'**analyste**, je veux **retrouver et comparer des analyses passées** afin de **suivre l'évolution du positionnement concurrentiel**.
+> **Critères.** *Étant donné* deux analyses dans l'historique, *quand* je les sélectionne pour comparaison, *alors* le KI, les 14 dimensions (avec Δ) et les concurrents sont affichés côte à côte.
+
+---
+
+### 14.4 Settings
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Panneau de configuration globale de l'application.
+
+**Fonctionnalités.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Theme | Light / Dark mode avec CSS variables. |
+| F2 | Locale | Français / Anglais. |
+| F3 | Gap Threshold | Slider 1–20 définissant le seuil d'écart pour la gap analysis. |
+| F4 | API Key | Champ password pour la clé API du backend BFF. |
+
+- **EF-113 (🟢)** Basculer entre les thèmes Light et Dark via CSS variables.
+- **EF-114 (🟢)** Changer la langue de l'interface (FR / EN).
+- **EF-115 (🟢)** Configurer le seuil de gap analysis via un slider (1–20).
+- **EF-116 (🟢)** Saisir et stocker une clé API backend (champ password, localStorage).
+
+> **US-15.** En tant qu'**utilisateur**, je veux **personnaliser l'apparence et la langue** afin d'**adapter KayrosLab à mes préférences**.
+> **Critères.** *Étant donné* le panneau Settings, *quand* je change le thème, *alors* toute l'interface s'adapte immédiatement.
+> *Étant donné* une locale sélectionnée, *quand* l'interface est re-rendue, *alors* tous les libellés sont dans la langue choisie.
+
+---
+
+### 14.5 Slack Webhooks
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Envoi d'analyses vers Slack via incoming webhook avec formatage Block Kit.
+
+**Fonctionnalités.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Block Kit formatting | Message structuré avec header, sections, champs, couleurs. |
+| F2 | Auto-send toggle | Option dans Settings pour envoyer automatiquement chaque analyse. |
+| F3 | Manual share | Bouton « Share to Slack » dans l'onglet Export. |
+| F4 | Test webhook | Bouton « Test » dans Settings pour valider l'URL du webhook. |
+
+- **EF-117 (🟢)** Envoyer une analyse vers Slack avec mise en forme Block Kit (header KI, scores, concurrents, lien).
+- **EF-118 (🟢)** Activer/désactiver l'envoi automatique après chaque analyse (toggle dans Settings).
+- **EF-119 (🟢)** Bouton « Share to Slack » manuel dans l'onglet Export.
+- **EF-120 (🟢)** Tester la connexion Slack via un bouton dans Settings.
+
+> **US-16.** En tant que **facilitateur**, je veux **partager une analyse sur Slack** afin de **mobiliser l'équipe sans quitter le flux de travail**.
+> **Critères.** *Étant donné* une analyse terminée, *quand* je clique « Share to Slack », *alors* un message Block Kit est envoyé au webhook configuré avec le résumé de l'analyse.
+
+---
+
+### 14.6 Multi-idea Analysis
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Analyse par lot d'idées avec classement et progression.
+
+**Fonctionnalités.**
+
+| # | Fonctionnalité | Détail |
+|---|---|---|
+| F1 | Textarea batch | Saisie d'une idée par ligne (max 10). |
+| F2 | Concurrency limit | 3 analyses en parallèle maximum. |
+| F3 | Progress bar | Barre de progression globale + statut par idée. |
+| F4 | Ranked results | Résultats classés par score KI. Gagnant mis en évidence. |
+| F5 | Per-dimension badges | Badges de score par dimension pour chaque idée. |
+
+- **EF-121 (🟢)** Saisir jusqu'à 10 idées dans une textarea (une par ligne).
+- **EF-122 (🟢)** Lancer l'analyse batch avec une limite de concurrence de 3.
+- **EF-123 (🟢)** Afficher une barre de progression et le statut de chaque idée.
+- **EF-124 (🟢)** Afficher les résultats classés par score KI avec le gagnant surligné et les badges par dimension.
+
+> **US-17.** En tant que **stratège**, je veux **soumettre plusieurs idées à la fois** afin de **les comparer et d'identifier la plus prometteuse**.
+> **Critères.** *Étant donné* plusieurs idées soumises, *quand* l'analyse batch se termine, *alors* les résultats sont affichés classés par KI, avec le gagnant mis en évidence.
+
+---
+
+### 14.7 Onboarding Tour
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+Visite guidée à la première connexion, 7 étapes adaptatives.
+
+**Étapes du tour :**
+
+| Étape | Cible | Message |
+|---|---|---|
+| 1 — Welcome | Centre de l'écran | Bienvenue dans KayrosLab. Découvrons les fonctionnalités principales. |
+| 2 — Input | Champ de saisie | Saisissez une idée ou un concept à analyser. |
+| 3 — KI | Affichage KI | Le Kayroslab Index (KI) évalue votre idée sur 6 dimensions. |
+| 4 — Tabs | Barre d'onglets | Explorez les onglets : Détails, Concurrents, Export, Historique. |
+| 5 — Graph | Graphe concurrentiel | Visualisez le positionnement concurrentiel sur 14 dimensions. |
+| 6 — Competitors | Tableau concurrents | Comparez votre idée aux concurrents identifiés. |
+| 7 — Ready | Centre de l'écran | Vous êtes prêt ! Commencez à analyser. |
+
+- **EF-125 (🟢)** Afficher un tour d'onboarding de 7 étapes avec highlight de la cible et tooltip positionné. Skip/Next disponibles. Ne s'affiche qu'à la première visite (localStorage).
+
+> **US-18.** En tant que **nouvel utilisateur**, je veux **un guide pas à pas** afin de **comprendre rapidement les fonctionnalités de KayrosLab**.
+> **Critères.** *Étant donné* un premier accès, *quand* l'application se charge, *alors* le tour d'onboarding s'affiche. Skip possible à tout moment. Le tour ne se réaffiche pas après complétion ou skip.
+
+---
+
+### 14.8 PWA — Progressive Web App
+
+**Statut.** 🟢 Existant (v0.3.0).
+
+KayrosLab est installable comme une application de bureau.
+
+**Composants.**
+
+| # | Composant | Détail |
+|---|---|---|
+| F1 | Web App Manifest | `manifest.json` : `display: standalone`, `theme_color: #D83B01`, `background_color: #1a1a2e`. |
+| F2 | Service Worker | Cache-first strategy. Cache les ressources statiques (HTML, CSS, JS, icônes). Offline support. |
+| F3 | Icons | SVG icons 192×192 et 512×512. |
+| F4 | Apple meta | `apple-mobile-web-app-capable`, `apple-mobile-web-app-status-bar-style`, lien vers l'icône. |
+| F5 | Manifest link | `<link rel="manifest" href="manifest.json">` dans `index.html`. |
+
+- **EF-126 (🟢)** Fournir un Web App Manifest conforme (standalone, thème #D83B01, icônes).
+- **EF-127 (🟢)** Enregistrer un Service Worker avec stratégie cache-first pour le offline.
+- **EF-128 (🟢)** Inclure les métadonnées Apple et le lien manifest dans le HTML.
+
+> **US-19.** En tant qu'**utilisateur**, je veux **installer KayrosLab comme une application** afin d'**y accéder rapidement depuis mon bureau et l'utiliser hors ligne**.
+> **Critères.** *Étant donné* un navigateur compatible, *quand* je visite KayrosLab, *alors* le manifeste propose l'installation. *Étant donné* l'application installée hors ligne, *quand* je l'ouvre, *alors* l'interface se charge depuis le cache.
+
+---
+
+### 14.9 Synthèse d'avancement — v0.3.0
+
+| Bloc | EF | Réalisé | Partiel | À construire |
+|---|---|---|---|---|
+| Export PDF | 102 | 1 | 0 | 0 |
+| Campaigns / Hackathons | 103–108 | 6 | 0 | 0 |
+| History | 109–112 | 4 | 0 | 0 |
+| Settings | 113–116 | 4 | 0 | 0 |
+| Slack Webhooks | 117–120 | 4 | 0 | 0 |
+| Multi-idea Analysis | 121–124 | 4 | 0 | 0 |
+| Onboarding Tour | 125 | 1 | 0 | 0 |
+| PWA | 126–128 | 3 | 0 | 0 |
+| **Total v0.3.0** | **27** | **27** | **0** | **0** |
 
 ---
 
@@ -903,7 +1147,15 @@ Statut : 🟢 partiel (collecteurs, scoring, gap analysis, lien) · 🔴 restruc
 | EF-31/32 | Traçabilité | 🟢 | Audit exportable |
 | EF-33→37 | LLM gouverné | ❌ | Interface + gates de censure |
 | EF-88→101 | Positionner — analyse concurrentielle ontologique | 🟢 (collecteurs) / 🔴 (ontologie) | Graphe Cytoscape, inspecteur, query playground, export OWL, instances concurrentes |
+| **EF-102** | **Export PDF** | **🟢** | Export natif avec templates |
+| **EF-103→108** | **Campaigns / Hackathons** | **🟢** | Notifications push réelles |
+| **EF-109→112** | **History** | **🟢** | Sync cloud |
+| **EF-113→116** | **Settings** | **🟢** | Profils utilisateur persistés |
+| **EF-117→120** | **Slack Webhooks** | **🟢** | Teams / Discord |
+| **EF-121→124** | **Multi-idea Analysis** | **🟢** | Analyse illimitée |
+| **EF-125** | **Onboarding Tour** | **🟢** | — |
+| **EF-126→128** | **PWA** | **🟢** | Offline-first complet |
 
 ---
 
-*Fin des spécifications fonctionnelles v0.2 — en attente de validation. Les spécifications techniques (`SPECIFICATIONS_TECHNIQUES.md`) seront dérivées de ce document une fois validé.*
+*Fin des spécifications fonctionnelles v0.3 — 23 juillet 2026 — 🟢 Validé. Les spécifications techniques (`SPECIFICATIONS_TECHNIQUES.md`) seront dérivées de ce document.*
