@@ -516,15 +516,16 @@ function toStrategic(t: KITechnical, signals: KISignals): KIStrategic { /* pond�
 
 ## 12. Consolidation des artefacts (lot d'ingénierie)
 
-Objectif : **1 fichier de référence unique** (`kayroslab-complete-with-ai-agents.html`) intégrant le workflow 5 étapes du prototype 163 Ko et le Collision Mode de `enhanced-future-proofing`.
+Objectif : **1 fichier de référence unique** (`kayroslab-complete-with-ai-agents.html`) intégrant le workflow 5 étapes du prototype 163 Ko.
+
+**Fichiers legacy retirés** (nettoyage v0.3.0) : `kayroslab-enhanced-future-proofing.html`, `kayroslab-portfolio.html`, `kayroslab-reference.html`, `CONSOLIDATION.md`.
 
 | Étape | Action | Risque |
 |---|---|---|
 | 1 | Extraire les modules JS du 163 Ko (workflow, Working Groups, PDF, ROI) | Couplage au DOM |
 | 2 | Namespacing (éviter collisions de fonctions globales `switchTab`, etc.) | Conflits de noms |
-| 3 | Fusionner Collision Mode + délégation externe dans le showcase | Régressions |
+| 3 | Fusionner les fonctionnalités manquantes dans le fichier de référence | Régressions |
 | 4 | Tests de non-régression manuels + captures | Couverture |
-| 5 | Retirer `enhanced-future-proofing.html` une fois fusionné | Perte si non testé |
 
 > Recommandation : préparer la fusion dans une **branche** dédiée + PR, plutôt que des commits directs sur `main`.
 
@@ -1003,7 +1004,7 @@ function OnboardingTour() {
 | EF-33/34/35/36/37/38 | §10 API gouvernée |
 | EF-39/40/41/42/43/44/45 | §4.1 Étape Projeter (outils `simulate_trajectory`, `estimate_resources`, boucle planifiée) |
 | EF-46/47/48/49/50 | `core/auth.mjs` (scrypt, jetons HMAC, `SessionStore`, `LoginThrottle`, `FileUserStore`), `core/repository.mjs` |
-| EF-51/52/53/54/55 | `core/repository.mjs` (`portfolio`, `counts`, `list`), `kayroslab-portfolio.html` |
+| EF-51/52/53/54/55 | `core/repository.mjs` (`portfolio`, `counts`, `list`) |
 | EF-56/57/58 | `core/model.mjs` (`setStage`/`setStatus`, `DORMANT_STATUSES`, `reactivate`, `applyDecision`) |
 | EF-59/60/61/62 | `core/intake.mjs` (`validateIntake`, `intakeToHypotheses`, `intakeToAttackTargets`) |
 | EF-63/64/65/66/67 | `core/evaluation.mjs` (`aggregateVotes`, `ROLE_WEIGHTS`), `POST /v1/ideas/:id/votes` |

@@ -2,8 +2,8 @@
 
 [![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
 [![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/positionner-app/)
-[![Portefeuille](https://img.shields.io/badge/📊_Portefeuille-Application-059669?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-portfolio.html)
-[![Open in Browser](https://img.shields.io/badge/▶_Atelier-Live_Demo-2563eb?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-reference.html)
+[![Agents IA](https://img.shields.io/badge/📊_Agents_IA-Application-059669?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
+[![Open in Browser](https://img.shields.io/badge/▶_App-Live_Demo-2563eb?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
 
 **Du signal faible à la décision stratégique — gouvernée.**
@@ -19,8 +19,7 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 | Page | Usage |
 |---|---|
 | **[`index.html`](index.html)** | Site & offre commerciale entreprises (processus, architecture, conformité, tarification, business cases) |
-| **[`kayroslab-portfolio.html`](kayroslab-portfolio.html)** | Application portefeuille : kanban, gates, votes, notation, impact, reporting |
-| **[`kayroslab-reference.html`](kayroslab-reference.html)** | Atelier d'idéation (démo du moteur agentique) |
+| **[`kayroslab-complete-with-ai-agents.html`](kayroslab-complete-with-ai-agents.html)** | Application de référence v0.3.0 : positionnement, campagnes, historique, export PDF, multi‑idées, PWA |
 | **[`frontend/positionning-app/`](frontend/positionning-app/)** | Application React de positionnement concurrentiel ontologique (types d'entités, propriétés typées, relations orientées, graphe Cytoscape.js, export OWL, query playground) |
 
 ---

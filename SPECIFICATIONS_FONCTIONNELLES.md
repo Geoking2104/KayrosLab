@@ -73,11 +73,11 @@ flowchart LR
 |---|---|---|---|
 | `kayroslab-complete-with-ai-agents.html` | Dépôt | **Fichier de référence unique v0.3.0** : Export PDF, Campaigns/Hackathons, History, Settings, Slack Webhooks, Multi-idea, Onboarding, PWA | 🟢 (v0.3.0) |
 | `kayroslab_standalone.html` (163 Ko) | Prototype local (mai) | App la plus riche fonctionnellement : workflow 5 étapes, Working Groups (HIL), roundtable, livrables/PDF, ROI, feed — **source à ré-intégrer** dans le fichier de référence | 🟢 / 🟠 |
-| `kayroslab-enhanced-future-proofing.html` | Dépôt | Variante Future Proofing + Collision Mode — **à consolider puis retirer** | 🟠 |
+| `kayroslab-enhanced-future-proofing.html` | Dépôt | Variante Future Proofing + Collision Mode — **retiré** (nettoyage v0.3.0) | 🗑️ Retiré |
 | `kayroslab-complete-updated.html` | Dépôt | ~~Placeholder vide~~ — **supprimé** (décision actée) | 🗑️ Retiré |
 | `Kayros_standalone.html` | Prototype local | Landing / pricing (marketing) | Hors périmètre app |
 
-> **Décision actée (produit).** Le badge « Open in Browser » pointe désormais vers `kayroslab-complete-with-ai-agents.html`, désigné **fichier de référence unique**. Le placeholder est supprimé. La variante `enhanced-future-proofing` et les fonctions du prototype 163 Ko (workflow 5 étapes complet) doivent être **fusionnées** dans ce fichier de référence — c'est un lot d'ingénierie identifié au backlog (§10), qui sera cadré avec les specs techniques.
+> **Décision actée (produit).** Le badge « Open in Browser » pointe désormais vers `kayroslab-complete-with-ai-agents.html`, désigné **fichier de référence unique**. Le placeholder est supprimé. Les fichiers legacy (`enhanced-future-proofing`, `portfolio`, `reference`) ont été retirés. Les fonctions du prototype 163 Ko (workflow 5 étapes complet) restent à fusionner — c'est un lot d'ingénierie identifié au backlog (§10).
 
 **Synthèse Existant vs Cible (macro) :**
 
@@ -572,7 +572,7 @@ Priorisation **MoSCoW** (Must / Should / Could / Won't-now) alignée sur la road
 
 **Décisions actées (15/07/2026 puis 23/07/2026).**
 1. ✅ **Badge repointé** vers `kayroslab-complete-with-ai-agents.html` (démo réellement fonctionnelle).
-2. ✅ **Placeholder supprimé** ; le dépôt est **consolidé autour d'un fichier de référence unique** (`kayroslab-complete-with-ai-agents.html`). La fusion des fonctions du prototype 163 Ko (workflow 5 étapes) et de la variante `enhanced-future-proofing` dans ce fichier est un **lot d'ingénierie** cadré avec les specs techniques.
+2. ✅ **Placeholder supprimé** ; le dépôt est **consolidé autour d'un fichier de référence unique** (`kayroslab-complete-with-ai-agents.html`). Les fichiers legacy (`kayroslab-enhanced-future-proofing.html`, `kayroslab-portfolio.html`, `kayroslab-reference.html`) et le plan de consolidation (`CONSOLIDATION.md`) ont été **retirés** (nettoyage v0.3.0). La fusion des fonctions du prototype 163 Ko (workflow 5 étapes) reste un lot d'ingénierie identifié.
 3. ✅ Le mode **`strict` n'est PAS le défaut** ; le défaut est **`supervisé`** (§7).
 4. ✅ **KI = 5 dimensions stratégiques d'abord** (Fit, Désirabilité, Faisabilité, Viabilité, Adaptabilité), **puis les 6 dimensions techniques** en couche opérationnelle (§6.4).
 5. ✅ **v0.3.0 livrée** : Export PDF, Campaigns/Hackathons, History, Settings, Slack Webhooks, Multi-idea Analysis, Onboarding Tour, PWA.

@@ -33,7 +33,7 @@ node core/ollama-demo.mjs llama3.2
 Le script fait de **vrais appels LLM** (un par étape de l'orchestrateur), puis passe par un
 **gate de gouvernance** (mode strict) auto-validé pour la démo. Node peut joindre `localhost:11434` sans souci.
 
-## 3. Usage depuis le navigateur (app `kayroslab-reference.html`)
+## 3. Usage depuis le navigateur (app `kayroslab-complete-with-ai-agents.html`)
 
 Deux obstacles quand la page est servie depuis `https://…githack.com` :
 
@@ -46,7 +46,7 @@ Solutions (palier P1, local) :
   ```bash
   # depuis le dossier du dépôt
   python -m http.server 8080
-  # puis ouvrir http://localhost:8080/kayroslab-reference.html
+  # puis ouvrir http://localhost:8080/kayroslab-complete-with-ai-agents.html
   ```
 - **Autoriser l'origine côté Ollama** (CORS) en lançant Ollama avec :
   ```bash
