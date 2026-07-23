@@ -3,10 +3,10 @@
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
+import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 
 /** @typedef {'Planner'|'Critic'|'DevilsAdvocate'|'RedTeam'|'Bisociateur'|'Synthesizer'} AgentType */
-
-const AGENTS = ['Planner', 'Critic', 'DevilsAdvocate', 'RedTeam', 'Bisociateur', 'Synthesizer'];
+const AGENTS = AGENT_TYPES;
 
 const PLANNER_SYSTEM =
   "Tu es le Planner de KayrosLab. Decompose l'objectif en 3 a 6 etapes d'ideation strategique. " +
@@ -82,12 +82,12 @@ export function parsePlanSteps(text) {
 }
 
 export class Orchestrator {
-  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3, plannerModel = null } = {}) {
+  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3, plannerModel = null, agents = null } = {}) {
     if (!llm) throw new Error('Orchestrator: llm (KayrosLLM) requis');
     this.llm = llm; this.tools = tools; this.memory = memory; this.governance = governance; this.classifier = classifier; this.recallK = recallK;
-    // Modele leger dedie au Planner (structure JSON, faible latence). Les gros modeles "thinking"
-    // sont contre-productifs ici (lenteur + crochets parasites). null => defaut du provider.
     this.plannerModel = plannerModel;
+    // Specialized agents (P2) — null = fallback to generic LLM calls (backward compat)
+    this.agents = agents || createAllAgents({ llm, tools, memory });
   }
 
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
@@ -122,7 +122,7 @@ export class Orchestrator {
       );
       const steps = parsePlanSteps(res.text);
       if (steps) return { ideaId, goal, generatedBy: 'llm', steps };
-    } catch { /* repli */ }
+    } catch (e) { /* repli silencieux */ }
     return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps() };
   }
 
@@ -149,17 +149,33 @@ export class Orchestrator {
     }
 
     let count = 0;
+    const agentOutputs = [];
     for (const s of plan.steps) {
       if (count++ >= maxSteps) { yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() }; break; }
 
-      const messages = [];
-      if (contextBlock) messages.push({ role: 'system', content: contextBlock });
-      messages.push({ role: 'user', content: `${plan.goal}\n\nTache : ${s.description}` });
+      // Use specialized agent if available, else fallback to generic LLM call
+      const specialist = this.agents?.[s.agent];
+      let observation, actionType = 'llm', actionName = 'complete', usage = { tokensIn: 0, tokensOut: 0 };
 
-      const llmRes = await this.llm.complete({ role: s.agent, messages }, opts);
-      let observation = llmRes.text;
-      let actionType = 'llm', actionName = 'complete';
-      if (s.tool && this.tools) { observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId }); actionType = 'tool'; actionName = s.tool; }
+      if (specialist && specialist.execute) {
+        const res = await specialist.execute(s.description, {
+          goal: plan.goal, context: contextBlock,
+          provider: opts.provider, sovereignty: opts.sovereignty,
+        });
+        observation = res.output;
+        actionType = 'specialized_agent';
+        actionName = s.agent;
+        agentOutputs.push(res);
+      } else {
+        const messages = [];
+        if (contextBlock) messages.push({ role: 'system', content: contextBlock });
+        messages.push({ role: 'user', content: `${plan.goal}\n\nTache : ${s.description}` });
+
+        const llmRes = await this.llm.complete({ role: s.agent, messages }, opts);
+        observation = llmRes.text;
+        usage = llmRes.usage;
+        if (s.tool && this.tools) { observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId }); actionType = 'tool'; actionName = s.tool; }
+      }
 
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
@@ -173,12 +189,21 @@ export class Orchestrator {
         action: { type: actionType, name: actionName },
         observation,
         usedContext: !!contextBlock,
-        tokens: { in: llmRes.usage.tokensIn, out: llmRes.usage.tokensOut },
+        tokens: { in: usage.tokensIn, out: usage.tokensOut },
         ts: new Date().toISOString(),
       };
     }
 
-    const answer = `Synthese gouvernee pour: ${plan.goal}`;
+    // Synthesize if Synthesizer agent is available and there were agent outputs
+    const synthAgent = this.agents?.Synthesizer;
+    if (synthAgent && synthAgent.synthesize && agentOutputs.length > 0) {
+      const synthesis = await synthAgent.synthesize(agentOutputs, opts);
+      yield { type: 'synthesis', agent: 'Synthesizer', output: synthesis.output, decision: synthesis.structured, ts: new Date().toISOString() };
+    }
+
+    const answer = agentOutputs.length > 0
+      ? `Synthese gouvernee pour: ${plan.goal}\n${agentOutputs.map((o) => `[${o.agent}] ${o.output?.substring(0, 200)}`).join('\n')}`
+      : `Synthese gouvernee pour: ${plan.goal}`;
     const sens = await classifySensitive(answer, { classifier: this.classifier });
     const gateType = policyFor({ sensitive: sens.sensitive }, level);
 

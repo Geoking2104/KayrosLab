@@ -32,7 +32,7 @@ export async function hashPassword(password, params = {}) {
 
 /** Verifie un mot de passe contre une empreinte stockee. Temps constant. */
 export async function verifyPassword(password, stored) {
-  if (typeof password !== 'string' || typeof stored !== 'string') return false;
+  if (typeof password !== 'string' || password.length > 128 || typeof stored !== 'string') return false;
   const parts = stored.split('$');
   if (parts.length !== 6 || parts[0] !== 'scrypt') return false;
   const [, N, r, p, saltB64, keyB64] = parts;

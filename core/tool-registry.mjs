@@ -2,6 +2,7 @@
 // Réf. specs techniques §4.
 
 import { simulateTrajectory, estimateResources } from './projection.mjs';
+import { runPositionningAnalysis, generateOWL, generateJSON } from './positionning/index.mjs';
 
 /**
  * @typedef {{name:string, description:string, inputKeys?:string[], sideEffect?:'none'|'read'|'write', gate?:boolean, handler:(input:any,ctx?:any)=>Promise<any>}} ToolDef
@@ -70,6 +71,58 @@ export function demoTools() {
     name: 'estimate_resources', description: 'Estimation ressources & budget (ETP, budget, TCO, ROI projete) — deterministe',
     inputKeys: ['milestones'], sideEffect: 'read',
     handler: async (input) => estimateResources(input),
+  });
+  // Positionner — analyse concurrentielle ontologique
+  reg.register({
+    name: 'search_competitors', description: 'Recherche concurrents web (Google/DuckDuckGo)',
+    inputKeys: ['q'], sideEffect: 'read',
+    handler: async ({ q, limit }) => {
+      const { WebScanner } = await import('./positionning/scanner-web.mjs');
+      const scanner = new WebScanner();
+      return scanner.search(q, { limit: limit ?? 5 });
+    },
+  });
+  reg.register({
+    name: 'analyze_github_landscape', description: 'Analyse du paysage GitHub (stars, forks, contributeurs, commits, fraicheur, issues)',
+    inputKeys: ['q'], sideEffect: 'read',
+    handler: async ({ q, limit, token }) => {
+      const { GitHubScanner } = await import('./positionning/scanner-github.mjs');
+      const scanner = new GitHubScanner({ token });
+      return scanner.search(q, { limit: limit ?? 5 });
+    },
+  });
+  reg.register({
+    name: 'search_arxiv', description: 'Recherche d\'articles académiques sur ArXiv',
+    inputKeys: ['q'], sideEffect: 'read',
+    handler: async ({ q, limit }) => {
+      const { ArXivScanner } = await import('./positionning/scanner-arxiv.mjs');
+      const scanner = new ArXivScanner();
+      return scanner.search(q, { limit: limit ?? 5 });
+    },
+  });
+  reg.register({
+    name: 'ontology_builder', description: 'Analyse concurrentielle ontologique complète : web + GitHub + ArXiv, scoring 14 dimensions, gap analysis, KI',
+    inputKeys: ['idea'], sideEffect: 'read',
+    handler: async ({ idea, limit, githubToken }) => {
+      const result = await runPositionningAnalysis(idea, { limit: limit ?? 5, githubToken });
+      return result;
+    },
+  });
+  reg.register({
+    name: 'gap_analyzer', description: 'Analyse des écarts compétitifs entre l\'idée et les concurrents',
+    inputKeys: ['idea'], sideEffect: 'read',
+    handler: async ({ idea }) => {
+      const result = await runPositionningAnalysis(idea, { limit: 5 });
+      return { gaps: result.gaps, kayrosIndex: result.kayrosIndex };
+    },
+  });
+  reg.register({
+    name: 'owl_exporter', description: 'Export OWL RDF/XML de l\'ontologie de positionnement',
+    inputKeys: ['competitors'], sideEffect: 'read',
+    handler: async ({ competitors }) => {
+      const list = typeof competitors === 'string' ? JSON.parse(competitors) : (competitors ?? []);
+      return { owl: generateOWL(list), json: generateJSON(list) };
+    },
   });
   return reg;
 }

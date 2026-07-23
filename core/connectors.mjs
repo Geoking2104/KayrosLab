@@ -327,6 +327,183 @@ export class SlackAdapter extends ChatAdapter {
   }
 }
 
+// ---- Adaptateur Microsoft Teams (Adaptive Cards) ----
+
+export class TeamsAdapter extends ChatAdapter {
+  /**
+   * @param {{webhookUrl?:string, botId?:string, fetchImpl?:Function, linkService?:AccountLinkService}} opts
+   */
+  constructor({ webhookUrl = '', botId = '', fetchImpl, linkService } = {}) {
+    super({ name: 'teams', platform: 'teams', linkService });
+    this.webhookUrl = webhookUrl;
+    this.botId = botId;
+    this._fetch = fetchImpl ?? globalThis.fetch;
+    if (!this._fetch) throw new Error('TeamsAdapter: fetch indisponible');
+  }
+
+  /**
+   * Verifie la signature JWT d'une requete Teams.
+   * En pratique, Teams utilise Azure Bot Service avec AppId + jeton.
+   */
+  verifySignature(req) {
+    const auth = req.headers?.authorization || '';
+    if (!auth.startsWith('Bearer ')) return false;
+    // La verification reelle necessite la cle Azure AD. Modele ici.
+    return !!auth;
+  }
+
+  parseRequest(req) {
+    const body = req.body ?? {};
+    if (body.type === 'message' && body.text) {
+      const text = String(body.text || '').trim();
+      if (text.startsWith('/')) {
+        return new InteractionEvent({
+          platform: 'teams', actionId: `slash_${text.slice(1).split(' ')[0]}`,
+          userId: body.from?.aadObjectId || body.from?.id,
+          channelId: body.conversation?.id,
+          teamId: body.channelData?.team?.id,
+          payload: { text: text.slice(1), command: text.split(' ')[0] },
+          raw: body,
+        });
+      }
+    }
+    if (body.type === 'invoke' && body.name === 'adaptiveCard/action') {
+      const action = body.value?.action;
+      return new InteractionEvent({
+        platform: 'teams', actionId: action?.id || 'unknown',
+        userId: body.from?.aadObjectId || body.from?.id,
+        channelId: body.conversation?.id,
+        teamId: body.channelData?.team?.id,
+        payload: action?.data || {},
+        raw: body,
+      });
+    }
+    return null;
+  }
+
+  async postMessage(channelId, view) {
+    const card = this.renderView(view);
+    const payload = {
+      type: 'message',
+      attachments: [{ contentType: 'application/vnd.microsoft.card.adaptive', content: card }],
+    };
+    if (this.webhookUrl) {
+      const res = await this._fetch(this.webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      return { ok: res.ok };
+    }
+    return { ok: false, error: 'webhookUrl non configure' };
+  }
+
+  async updateMessage(channelId, messageId, view) {
+    const card = this.renderView(view);
+    // Teams supporte l'update via activityId (messageId) sur le conversation endpoint
+    const url = `https://smba.trafficmanager.net/amer/v3/conversations/${channelId}/activities/${messageId}`;
+    const payload = {
+      type: 'message',
+      attachments: [{ contentType: 'application/vnd.microsoft.card.adaptive', content: card }],
+    };
+    const res = await this._fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.botId}` },
+      body: JSON.stringify(payload),
+    });
+    return { ok: res.ok };
+  }
+
+  async ephemeralMessage(channelId, userId, text) {
+    // Teams n'a pas de message ephemere natif. On utilise un message normal.
+    return this.postMessage(channelId, new AbstractView({ title: text, text }));
+  }
+
+  async openModal(triggerId, form) {
+    // Teams Task Module : equivalent du modal Slack.
+    const card = this.renderView(form);
+    return { ok: true, task: { type: 'continue', value: { card: { contentType: 'application/vnd.microsoft.card.adaptive', content: card } } } };
+  }
+
+  renderView(view) {
+    const body = [];
+    if (view.title) {
+      body.push({ type: 'TextBlock', text: view.title, weight: 'Bolder', size: 'Medium', wrap: true });
+    }
+    if (view.text) {
+      body.push({ type: 'TextBlock', text: view.text, wrap: true, isSubtle: !view.title });
+    }
+    for (const f of view.fields ?? []) {
+      body.push({
+        type: 'FactSet',
+        facts: [
+          { title: f.label || '', value: String(f.value ?? '—') },
+        ],
+      });
+    }
+    const actions = [];
+    for (const a of view.actions ?? []) {
+      const cardAction = {
+        type: 'Action.Submit',
+        id: a.id,
+        title: a.label,
+        data: { actionId: a.id },
+      };
+      if (a.style === 'danger') cardAction.style = 'destructive';
+      if (a.confirm) cardAction.tooltip = a.confirm;
+      actions.push(cardAction);
+    }
+
+    const card = {
+      type: 'AdaptiveCard',
+      version: '1.5',
+      $schema: 'https://adaptivecards.io/schemas/adaptive-card.json',
+      body,
+    };
+    if (actions.length) card.actions = actions;
+    if (view.color) {
+      const accentMap = { '#ef4444': 'attention', '#22c55e': 'good', '#3b82f6': 'accent' };
+      const fallbackColor = '#3b82f6';
+      card.backgroundColor = view.color;
+      card.accent = accentMap[view.color] || fallbackColor;
+    }
+    return card;
+  }
+
+  buildGateView(evt, { ideaTitre, gateType, agregat } = {}) {
+    const roleLabel = { comex: 'COMEX', red_team: 'Red Team', expert_metier: 'Expert', facilitateur: 'Facilitateur' };
+    const fields = [
+      { label: 'Idee', value: ideaTitre ?? evt.ideaId ?? '—' },
+      { label: 'Type de gate', value: gateType ?? evt.type ?? '—' },
+      { label: 'Role requis', value: roleLabel[evt.requiredRole] ?? evt.requiredRole ?? '—' },
+    ];
+    if (agregat) {
+      fields.push({ label: 'Vote', value: `${agregat.moyennePonderee ?? '—'}/100 (${agregat.count ?? 0} evaluateur(s))` });
+    }
+    const actions = [
+      { id: `approve:${evt.gateId}`, label: 'Approuver', style: 'primary' },
+      { id: `revise:${evt.gateId}`, label: 'Reviser', style: 'default' },
+      { id: `reject:${evt.gateId}`, label: 'Refuser', style: 'danger', confirm: 'Confirmer le refus ?' },
+    ];
+    return new AbstractView({
+      title: `Arbitrage requis — ${ideaTitre ?? evt.ideaId ?? 'idee'}`,
+      text: agregat?.count
+        ? `Vote pondere : ${agregat.moyennePonderee}/100 — ${agregat.recommandation ?? 'decision'}`
+        : 'Aucun vote prealable : la decision ne sera pas instruite.',
+      fields, actions, color: '#3b82f6',
+    });
+  }
+
+  buildGateResultView(resolution, { ideaTitre } = {}) {
+    const decisionLabel = { approve: 'Approuve', reject: 'Refuse (veto)', revise: 'Revision demandee' };
+    return new AbstractView({
+      title: `${decisionLabel[resolution.decision] ?? resolution.decision} — ${ideaTitre ?? ''}`,
+      text: `Par : ${resolution.by ?? '—'}\nMotif : ${resolution.reason ?? '—'}\nLe : ${resolution.resolvedAt ?? '—'}`,
+      actions: [], color: resolution.decision === 'approve' ? '#22c55e' : '#ef4444',
+    });
+  }
+}
+
 // ---- Service de routage des connecteurs ----
 
 export class ConnectorService {

@@ -2,6 +2,8 @@
 // Reutilise le coeur committe (../../core). A deployer sur un hote Node (VPS/PaaS), pas sur mutualise.
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import rateLimit from '@fastify/rate-limit';
+import metricsPlugin from 'fastify-metrics';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
@@ -33,6 +35,18 @@ const {
   EMBED_MODEL = 'nomic-embed-text',
   KAYROS_SECRET = '',
 } = process.env;
+
+/** Valide les configs critiques au demarrage et log les avertissements. */
+function validateEnv() {
+  const warn = (msg) => console.warn(`[kayroslab] ${msg}`);
+  if (!ANTHROPIC_API_KEY) warn('ANTHROPIC_API_KEY non definie — le fallback Ollama/mock sera utilise.');
+  if (!process.env.KAYROS_AUTH_SECRET) warn('KAYROS_AUTH_SECRET absent — les routes /v1/auth, /v1/ideas, /v1/portfolio sont desactivees (503).');
+  if (!process.env.KAYROS_IDEAS_FILE) warn('KAYROS_IDEAS_FILE non defini — les donnees vivent en memoire et seront perdues au redemarrage.');
+  if (!process.env.KAYROS_USERS_FILE) warn('KAYROS_USERS_FILE non defini — les comptes vivent en memoire.');
+  if (!process.env.KAYROS_GATES_FILE) warn('KAYROS_GATES_FILE non defini — les gates en cours sont perdus au redemarrage.');
+  if (!process.env.KAYROS_NOTIFY_WEBHOOK && !process.env.KAYROS_SMTP_URL) warn('Aucun canal de notification externe — les censeurs hors app ne seront pas prevenus.');
+}
+validateEnv();
 
 // Appel reel Anthropic (cle cote serveur). Transforme le format messages.
 async function anthropicBackend(req) {
@@ -156,8 +170,17 @@ async function requireAuth(req, reply) {
   catch (e) { reply.code(401).send({ error: e.message }); return null; }
 }
 
-const app = Fastify({ logger: true });
+const app = Fastify({ logger: true, bodyLimit: 1048576 }); // 1 MB max body
 await app.register(cors, { origin: ALLOWED_ORIGIN });
+await app.register(metricsPlugin, { endpoint: '/metrics' });
+await app.register(rateLimit, {
+  global: true,
+  max: 100,
+  timeWindow: '1 minute',
+  errorResponseBuilder: (req, ctx) => ({
+    statusCode: 429, error: 'Too Many Requests', message: `Rate limit depasse. Reessayez dans ${Math.ceil((ctx.ttl || 60000) / 1000)}s.`,
+  }),
+});
 
 // Secret partage optionnel
 app.addHook('preHandler', async (req, reply) => {
@@ -744,21 +767,18 @@ app.post('/v1/connectors/link/:token', async (req, reply) => {
   } catch (e) { return reply.code(400).send({ error: e.message }); }
 });
 
-// === POST /v1/positionning/search — Recherche concurrents (DuckDuckGo par defaut, Google si API key) ===
+// === Positionnement — Recherche concurrents et analyse ontologique ===
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
 const GOOGLE_CX = process.env.GOOGLE_CX || '';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 
 app.post('/v1/positionning/search', async (req, reply) => {
   const { q, limit = 5 } = req.body || {};
   if (!q) return reply.code(400).send({ error: 'Champ "q" requis' });
-
   try {
-    let results;
-    if (GOOGLE_API_KEY && GOOGLE_CX) {
-      results = await searchGoogle(q, limit);
-    } else {
-      results = await searchDuckDuckGo(q, limit);
-    }
+    const { WebScanner } = await import('../../core/positionning/scanner-web.mjs');
+    const scanner = new WebScanner({ googleApiKey: GOOGLE_API_KEY, googleCx: GOOGLE_CX });
+    const results = await scanner.search(q, { limit });
     return { results, provider: GOOGLE_API_KEY ? 'google' : 'duckduckgo' };
   } catch (err) {
     app.log.error(err);
@@ -766,54 +786,60 @@ app.post('/v1/positionning/search', async (req, reply) => {
   }
 });
 
-async function searchGoogle(q, limit) {
-  const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(q)}&num=${limit}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Google Search API: ${res.status}`);
-  const data = await res.json();
-  return (data.items || []).map((item) => ({
-    name: item.title,
-    url: item.link,
-    snippet: item.snippet || '',
-  }));
-}
-
-async function searchDuckDuckGo(q, limit) {
-  // Scrape les resultats HTML de DuckDuckGo (lite, sans JS)
-  const url = `https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(q)}`;
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; KayrosLab/1.0)' },
-  });
-  if (!res.ok) throw new Error(`DuckDuckGo: ${res.status}`);
-  const html = await res.text();
-
-  // Parse la table de resultats (structure HTML de lite.duckduckgo.com)
-  const results = [];
-  const rows = html.match(/<tr>.*?<\/tr>/gs) || [];
-  let current = null;
-
-  for (const row of rows) {
-    const nameMatch = row.match(/class=["']result-link["'][^>]*>([^<]+)<\/a>/i);
-    const urlMatch = row.match(/href=["'](https?:\/\/[^"']+)["']/i);
-    const snippetMatch = row.match(/class=["']result-snippet["'][^>]*>(.*?)<\/td>/is);
-
-    if (nameMatch && urlMatch) {
-      current = {
-        name: nameMatch[1].replace(/<[^>]*>/g, '').trim(),
-        url: urlMatch[1].split('?')[0], // nettoie les parametres de tracking
-        snippet: '',
-      };
-    }
-    if (current && snippetMatch) {
-      current.snippet = snippetMatch[1].replace(/<[^>]*>/g, '').trim();
-      results.push(current);
-      current = null;
-      if (results.length >= limit) break;
-    }
+app.post('/v1/positionning/github', async (req, reply) => {
+  const { q, limit = 5 } = req.body || {};
+  if (!q) return reply.code(400).send({ error: 'Champ "q" requis' });
+  try {
+    const { GitHubScanner } = await import('../../core/positionning/scanner-github.mjs');
+    const scanner = new GitHubScanner({ token: GITHUB_TOKEN });
+    const results = await scanner.search(q, { limit });
+    return { results };
+  } catch (err) {
+    app.log.error(err);
+    return reply.code(502).send({ error: 'Echec de la recherche GitHub', message: err.message });
   }
+});
 
-  return results;
-}
+app.post('/v1/positionning/arxiv', async (req, reply) => {
+  const { q, limit = 5 } = req.body || {};
+  if (!q) return reply.code(400).send({ error: 'Champ "q" requis' });
+  try {
+    const { ArXivScanner } = await import('../../core/positionning/scanner-arxiv.mjs');
+    const scanner = new ArXivScanner();
+    const results = await scanner.search(q, { limit });
+    return { results };
+  } catch (err) {
+    app.log.error(err);
+    return reply.code(502).send({ error: 'Echec de la recherche ArXiv', message: err.message });
+  }
+});
+
+app.post('/v1/positionning/analyze', async (req, reply) => {
+  const { idea, limit = 5, gapThreshold } = req.body || {};
+  if (!idea) return reply.code(400).send({ error: 'Champ "idea" requis' });
+  try {
+    const { runPositionningAnalysis } = await import('../../core/positionning/index.mjs');
+    const result = await runPositionningAnalysis(idea, {
+      googleApiKey: GOOGLE_API_KEY, googleCx: GOOGLE_CX,
+      githubToken: GITHUB_TOKEN,
+      limit, gapThreshold,
+    });
+    return result;
+  } catch (err) {
+    app.log.error(err);
+    return reply.code(502).send({ error: 'Echec de l\'analyse ontologique', message: err.message });
+  }
+});
+
+app.post('/v1/positionning/export/owl', async (req, reply) => {
+  const { generateOWL } = await import('../../core/positionning/owl-exporter.mjs');
+  const { competitors } = req.body || {};
+  const list = Array.isArray(competitors) ? competitors : [];
+  const owl = generateOWL(list);
+  reply.header('Content-Type', 'application/rdf+xml; charset=utf-8');
+  reply.header('Content-Disposition', 'attachment; filename="positionning-ontology.rdf"');
+  return reply.send(owl);
+});
 
 app.listen({ port: Number(PORT), host: '0.0.0.0' })
   .then((addr) => app.log.info(`KayrosLab backend sur ${addr}`))

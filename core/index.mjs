@@ -23,13 +23,15 @@ export * from './governance.mjs';
 export * from './orchestrator.mjs';
 export * from './timer.mjs';
 export * from './connectors.mjs';
+export * from './positionning/index.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
-import { InMemoryVectorStore } from './memory.mjs';
+import { InMemoryVectorStore, QdrantVectorStore } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
+import { createAllAgents } from './agents/index.mjs';
 
 /**
  * Fabrique un moteur.
@@ -51,7 +53,16 @@ export function createEngine(opts = {}) {
   const llm = new KayrosLLM(providers, policy);
   const tools = demoTools();
   const governance = new GovernanceService();
-  const vectors = new InMemoryVectorStore();
+  // Vector store : Qdrant > InMemory.
+  let vectors;
+  if (opts.qdrantUrl) {
+    vectors = new QdrantVectorStore({
+      url: opts.qdrantUrl, collection: opts.qdrantCollection || 'kayroslab',
+      dim: opts.qdrantDim || 768, apiKey: opts.qdrantApiKey, fetchImpl: opts.fetchImpl,
+    });
+  } else {
+    vectors = new InMemoryVectorStore();
+  }
 
   // Embeddings : proxy > Ollama local > mock offline.
   let embeddings;
@@ -60,6 +71,7 @@ export function createEngine(opts = {}) {
   else embeddings = new MockEmbeddings();
   const memory = new MemoryService({ embeddings, store: vectors });
 
-  const orchestrator = new Orchestrator({ llm, tools, governance, memory, plannerModel: opts.plannerModel });
-  return { llm, tools, governance, vectors, embeddings, memory, orchestrator };
+  const agents = createAllAgents({ llm, tools, memory });
+  const orchestrator = new Orchestrator({ llm, tools, governance, memory, plannerModel: opts.plannerModel, agents });
+  return { llm, tools, governance, vectors, embeddings, memory, orchestrator, agents };
 }

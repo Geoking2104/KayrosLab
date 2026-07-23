@@ -60,6 +60,29 @@ bash deploy/ovh-vps/deploy-backend.sh
 > ⚠️ À ajouter chez IONOS. Le domaine `www.kayroslab.com` pointe vers GitHub Pages
 > (site vitrine) ; seul le sous-domaine `api` vise le VPS.
 
+## Sauvegarde automatique (cron)
+
+Les données JSON (comptes, idées, gates) sont dans `/opt/kayroslab/data`. Ajouter une sauvegarde
+quotidienne dans la crontab :
+
+```bash
+crontab -e
+# Ajouter la ligne :
+0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh >> /var/log/kayros-backup.log 2>&1
+```
+
+## Métriques Prometheus
+
+Le backend expose un endpoint `/metrics` au format Prometheus. Configurer un scrape dans
+`/etc/prometheus/prometheus.yml` :
+
+```yaml
+scrape_configs:
+  - job_name: 'kayroslab'
+    static_configs:
+      - targets: ['127.0.0.1:8787']
+```
+
 ## Vérifications
 
 ```bash

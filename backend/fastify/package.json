@@ -12,12 +12,13 @@
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
-    "ejs": "^6.0.1",
-    "express": "^5.2.1",
+    "@fastify/rate-limit": "^9.1.0",
     "fastify": "^4.28.1",
-    "i18n": "^0.15.3"
+    "fastify-metrics": "^10.6.0",
+    "i18n": "^0.15.3",
+    "nodemailer": "^6.9.16"
   },
-  "main": "index.js",
+  "main": "index.mjs",
   "keywords": [],
   "author": "",
   "license": "ISC"

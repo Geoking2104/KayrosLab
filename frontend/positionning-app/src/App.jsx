@@ -1,27 +1,33 @@
-import { useState, useCallback, useRef } from 'react';
-import { ENTITY_TYPES, RELATIONSHIPS } from './data/ontology.js';
-import { searchCompetitors } from './collectors/scanner.js';
+import { useState, useCallback } from 'react';
+import { ENTITY_TYPES } from './data/ontology.js';
+import { searchCompetitors, searchGitHub, searchArXiv, analyzeIdea } from './collectors/scanner.js';
+import { useI18n } from './i18n/I18nContext.jsx';
 import OntologyGraph from './components/OntologyGraph.jsx';
 import InspectorPanel from './components/InspectorPanel.jsx';
 import QueryPlayground from './components/QueryPlayground.jsx';
 import GapAnalysis from './components/GapAnalysis.jsx';
 import OWLExporter from './components/OWLExporter.jsx';
+import StrategicDashboard from './components/StrategicDashboard.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 import IdeaInput from './components/IdeaInput.jsx';
 import './styles/positioning.css';
 
 const COMPETITOR_COLORS = ['#ef4444', '#f97316', '#8b5cf6', '#06b6d4', '#ec4899'];
 
-function computeIdeaBaseline(text) {
+function computeBaseline(text) {
+  const words = text.trim().split(/\s+/).filter((w) => w.length > 2);
+  const wordCount = words.length;
   const scores = {};
   for (const et of ENTITY_TYPES) {
-    const heuristic = 40 + (text.split(' ').length * 2);
-    scores[et.id] = Math.min(100, Math.max(10, heuristic));
+    const keywordMatches = words.filter((w) => (et.name + ' ' + et.description).toLowerCase().includes(w.toLowerCase())).length;
+    const heuristic = 40 + Math.min(wordCount * 2, 40) + keywordMatches * 3;
+    scores[et.id] = Math.max(10, Math.min(100, heuristic));
   }
   return scores;
 }
 
 function computeCompetitorScores(idea, webResults) {
-  const terms = idea.toLowerCase().split(' ');
+  const terms = idea.toLowerCase().split(/\s+/).filter((w) => w.length > 2);
   return webResults.map((r, i) => {
     const text = (r.snippet + ' ' + r.name).toLowerCase();
     const scores = {};
@@ -30,17 +36,12 @@ function computeCompetitorScores(idea, webResults) {
       for (const kw of terms) {
         if (text.includes(kw)) matches++;
       }
-      const base = (et.group === 'tech' ? 55 : 45);
-      scores[et.id] = Math.min(95, Math.max(5, base + matches * 4 - i * 3 + Math.floor(Math.random() * 10)));
+      const base = et.group === 'tech' ? 55 : 45;
+      const position = Math.max(0, (5 - i) * 2);
+      scores[et.id] = Math.max(5, Math.min(95, base + matches * 4 + position));
     }
-    const avg = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length);
-    return {
-      name: r.name,
-      url: r.url,
-      avgScore: avg,
-      color: COMPETITOR_COLORS[i % COMPETITOR_COLORS.length],
-      scores,
-    };
+    const avgScore = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length);
+    return { name: r.name, url: r.url, avgScore, scores, color: COMPETITOR_COLORS[i % COMPETITOR_COLORS.length] };
   });
 }
 
@@ -48,9 +49,8 @@ function computeGaps(baseline, competitors) {
   const gaps = [];
   for (const et of ENTITY_TYPES) {
     const ours = baseline[et.id] || 50;
-    const avg = competitors.length > 0
-      ? Math.round(competitors.reduce((s, c) => s + (c.scores[et.id] || 50), 0) / competitors.length)
-      : 50;
+    const scores = competitors.map((c) => c.scores?.[et.id] || 50);
+    const avg = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 50;
     const diff = ours - avg;
     if (Math.abs(diff) >= 5) {
       gaps.push({ neuronId: et.id, diff, type: diff > 0 ? 'advantage' : 'disadvantage' });
@@ -61,10 +61,12 @@ function computeGaps(baseline, competitors) {
 }
 
 export default function App() {
+  const { t, locale, setLocale, available } = useI18n();
   const [idea, setIdea] = useState('');
-  const [baseline, setBaseline] = useState(null);
   const [competitors, setCompetitors] = useState([]);
   const [gaps, setGaps] = useState([]);
+  const [baseline, setBaseline] = useState(null);
+  const [ki, setKi] = useState(null);
   const [loading, setLoading] = useState(false);
   const [inspectedEntity, setInspectedEntity] = useState(null);
   const [selectedComp, setSelectedComp] = useState(null);
@@ -75,19 +77,31 @@ export default function App() {
     setIdea(ideaText);
     setInspectedEntity(null);
     try {
-      const webResults = await searchCompetitors(ideaText);
-      const comps = computeCompetitorScores(ideaText, webResults);
-      const base = computeIdeaBaseline(ideaText);
-      const gapList = computeGaps(base, comps);
-      setBaseline(base);
-      setCompetitors(comps);
-      setGaps(gapList);
+      const analysisResult = await analyzeIdea(ideaText);
+      if (analysisResult) {
+        setBaseline(analysisResult.baseline);
+        const colorMapped = (analysisResult.competitors || []).map((c, i) => ({
+          ...c, color: COMPETITOR_COLORS[i % COMPETITOR_COLORS.length],
+        }));
+        setCompetitors(colorMapped);
+        setGaps(analysisResult.gaps || []);
+        setKi(analysisResult.kayrosIndex ?? null);
+      } else {
+        const webResults = await searchCompetitors(ideaText);
+        const comps = computeCompetitorScores(ideaText, webResults);
+        const base = computeBaseline(ideaText);
+        const gapList = computeGaps(base, comps);
+        setBaseline(base);
+        setCompetitors(comps);
+        setGaps(gapList);
+        setKi(null);
+      }
     } finally {
       setLoading(false);
     }
   }, []);
 
-  const handleNodeClick = useCallback((entity, comp) => {
+  const handleNodeClick = useCallback((entity) => {
     setInspectedEntity(entity);
   }, []);
 
@@ -107,31 +121,44 @@ export default function App() {
             </svg>
           </div>
           <div>
-            <h1 className="header-title">Positionner</h1>
-            <span className="header-sub">Analyse concurrentielle ontologique</span>
+            <h1 className="header-title">{t('app.title')}</h1>
+            <span className="header-sub">{t('app.subtitle')}</span>
           </div>
         </div>
         <div className="header-right">
-          <span className="header-badge beta">Bêta</span>
-          <span className="header-badge ontology">Ontology Playground</span>
+          <span className="header-badge beta">{t('app.beta')}</span>
+          <span className="header-badge ontology">{t('app.ontology')}</span>
+          <div className="locale-switcher">
+            {Object.entries(available).map(([code, label]) => (
+              <button key={code} className={`locale-btn ${locale === code ? 'active' : ''}`} onClick={() => setLocale(code)}>{label}</button>
+            ))}
+          </div>
         </div>
       </header>
 
       <div className="main-layout">
         <div className="main-content">
+          <ErrorBoundary>
           <IdeaInput onAnalyze={handleAnalyze} loading={loading} />
 
           {loading && (
             <div className="loading-bar">
               <div className="loading-fill" />
-              <span>Collecte et scoring en cours...</span>
+              <span>{t('app.analyzing')}</span>
             </div>
           )}
 
           {(baseline || competitors.length > 0) && (
             <>
+              {ki !== null && (
+                <div className="ki-banner">
+                  <span className="ki-label">Kayros Index</span>
+                  <span className="ki-value">{ki}/100</span>
+                </div>
+              )}
+
               <div className="competitor-selector">
-                <label>Concurrent actif :</label>
+                <label>{t('app.activeCompetitor')}</label>
                 <div className="comp-chips">
                   {allInstances.map((c) => (
                     <button
@@ -140,7 +167,7 @@ export default function App() {
                       style={{ '--comp-color': c.color }}
                       onClick={() => setSelectedComp(c)}
                     >
-                      {c.isBaseline ? '🏠' : ''} {c.name} <span className="comp-score">({c.avgScore || '—'})</span>
+                      {c.isBaseline ? `🏠 ${t('app.ourIdea')}` : c.name} <span className="comp-score">({c.avgScore || '—'})</span>
                     </button>
                   ))}
                 </div>
@@ -148,20 +175,26 @@ export default function App() {
 
               <div className="tabs">
                 <button className={`tab ${activeTab === 'graph' ? 'active' : ''}`} onClick={() => setActiveTab('graph')}>
-                  🕸️ Graphe
+                  🕸️ {t('app.tabs.graph')}
+                </button>
+                <button className={`tab ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+                  📊 {t('app.dashboard.tab')}
                 </button>
                 <button className={`tab ${activeTab === 'query' ? 'active' : ''}`} onClick={() => setActiveTab('query')}>
-                  🔍 Query Playground
+                  🔍 {t('app.tabs.query')}
                 </button>
                 <button className={`tab ${activeTab === 'gaps' ? 'active' : ''}`} onClick={() => setActiveTab('gaps')}>
-                  📊 Gap Analysis
+                  📉 {t('app.tabs.gaps')}
                 </button>
                 <button className={`tab ${activeTab === 'export' ? 'active' : ''}`} onClick={() => setActiveTab('export')}>
-                  📥 Export
+                  📥 {t('app.tabs.export')}
                 </button>
               </div>
 
               <div className="tab-content">
+                {activeTab === 'dashboard' && (
+                  <StrategicDashboard />
+                )}
                 {activeTab === 'graph' && (
                   <div className="graph-inspector-layout">
                     <div className="graph-area">
@@ -200,16 +233,13 @@ export default function App() {
           {!baseline && competitors.length === 0 && !loading && (
             <div className="empty-state">
               <div className="empty-icon">🔍</div>
-              <p>Entrez une idée et cliquez sur <strong>Analyser</strong> pour explorer l'ontologie de positionnement concurrentiel.</p>
+              <p>{t('app.emptyTitle')} <strong>{t('app.analyze')}</strong> {t('app.emptyDesc')}</p>
               <div className="empty-features">
-                <span>🏗️ 14 types d'entités</span>
-                <span>🔗 13 relations orientées</span>
-                <span>🕸️ Graphe Cytoscape.js</span>
-                <span>🔍 Query Playground</span>
-                <span>🏷️ Export OWL RDF/XML</span>
+                {t('app.features').map((f, i) => <span key={i}>{f}</span>)}
               </div>
             </div>
           )}
+          </ErrorBoundary>
         </div>
       </div>
     </div>
