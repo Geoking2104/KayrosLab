@@ -1,70 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Paper — Listen: From Weak Signal to Strategic Decision &bull; KayrosLab</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');body{font-family:'Inter',system-ui,sans-serif;}.font-display{font-family:'Space Grotesk','Inter',sans-serif;}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Paper — Listen: From Weak Signal to Strategic Decision &bull; KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+.section{margin-bottom:6mm}
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-x-2.5">
-                <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
-                <span class="font-display text-xl font-semibold tracking-tighter">KayrosLab</span>
-            </a>
-            <div class="flex items-center gap-x-3">
-                <a href="/index.fr.html" class="text-xs font-medium px-3 py-1.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors">FR</a>
-                <a href="/" class="text-sm text-slate-600 hover:text-sky-600 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Back to site</a>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <div class="max-w-4xl mx-auto px-8 py-16">
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold mb-4"><i class="fa-solid fa-file-pdf"></i> Whitepapers</div>
-            <h1 class="text-4xl md:text-5xl font-semibold tracking-tighter mb-4">White Paper — Listen: From Weak Signal to Strategic Decision</h1>
-            <p class="text-xl text-slate-600 mb-6">How to detect, qualify and amplify weak signals using hybrid AI-human governance.</p>
-        </div>
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Whitepaper &mdash; July 2026</div>
+  <h1 class="cover__title">
+    <em>Listen</em>:<br>
+    Noise Reduction &amp;<br>
+    <em>Weak Signal</em> Perception
+  </h1>
+  <p class="cover__subtitle">How KayrosLab's augmented listening step transforms ambient noise into actionable strategic intelligence through AI-driven filtering, enrichment, and scoring.</p>
+  <div class="cover__meta">By <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0</div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
 
-        <div class="prose prose-slate max-w-none">
-            <h2>1. Introduction</h2>
-            <p>In an increasingly complex and uncertain environment, organizations face a critical challenge: how to detect, qualify and act on weak signals before they become obvious trends or threats. This white paper presents a structured methodology for transforming weak signals into strategic decisions using a hybrid AI-human governance framework.</p>
-            
-            <h2>2. What Are Weak Signals?</h2>
-            <p>Weak signals are subtle, often ambiguous indicators of potential change that may herald significant future developments. They are characterized by their low intensity, novelty and difficulty to detect using conventional monitoring tools. Examples include emerging technologies, regulatory whispers, shifts in consumer behavior or geopolitical tensions.</p>
-            
-            <h2>3. The Listen Methodology</h2>
-            <p>The Listen step of the KayrosLab process employs a multi-stage approach:</p>
-            <ul>
-                <li><strong>Collection</strong> &mdash; Aggregation of signals from diverse sources (web, social media, internal data, expert networks)</li>
-                <li><strong>Filtering</strong> &mdash; Noise reduction and relevance scoring using AI agents</li>
-                <li><strong>Enrichment</strong> &mdash; Contextualization through semantic search and vector memory</li>
-                <li><strong>Scoring</strong> &mdash; Multi-criteria evaluation (novelty, impact, urgency, feasibility)</li>
-                <li><strong>Qualification</strong> &mdash; Human validation and signal prioritization</li>
-            </ul>
-            
-            <h2>4. The Role of AI Agents</h2>
-            <p>KayrosLab deploys specialized AI agents to automate and enhance each stage of the Listen process. The Signal Analyzer agent filters and scores incoming signals. The Context Enricher agent searches for related information in the vector memory and external sources. The Regulatory Risk agent evaluates compliance implications.</p>
-            
-            <h2>5. From Signal to Decision</h2>
-            <p>Qualified weak signals feed directly into the subsequent steps of the KayrosLab process: Mapping (trend network construction), Building (scenario generation), and Positioning (competitive analysis). Each transmission between steps is governed by structured human gates ensuring quality and relevance.</p>
-            
-            <h2>6. Conclusion</h2>
-            <p>The ability to systematically detect, qualify and act on weak signals represents a decisive competitive advantage. The KayrosLab methodology, combining AI automation with structured human governance, provides organizations with a rigorous framework for turning uncertainty into strategic opportunity.</p>
-        </div>
-        
-        <div class="mt-12 pt-8 border-t border-slate-200 text-center">
-            <a href="/" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium"><i class="fa-solid fa-arrow-left"></i> Back to KayrosLab</a>
-        </div>
+<!-- ===== PAGE 2: TABLE OF CONTENTS ===== -->
+<div class="page">
+  <h1>Table of Contents</h1>
+  <div style="margin-top:8mm">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction &mdash; The Strategic Noise Problem</span> <span style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>The Nature of Weak Signals</span> <span style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>Architecture of Listen</span> <span style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>The Signal Scanner Agent</span> <span style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Signal Scoring &amp; the Pre-Kayros Index</span> <span style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Context Enrichment</span> <span style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Regulatory Risk Detection</span> <span style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion</span> <span style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
     </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
 
-    <footer class="bg-slate-900 text-white py-8">
-        <div class="max-w-4xl mx-auto px-8 text-center text-sm text-slate-400">
-            <p>&copy; 2026 KayrosLab. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">The Strategic Noise Problem.</span></p>
+  <p>Organizations have never had access to so much data. Sensors, social media, patent publications, analyst reports, field feedback, regulatory feeds — the volume of available information grows exponentially. Yet <strong>the quality of strategic decisions does not follow</strong>.</p>
+  <p>This paradox has a name: <strong>strategic noise</strong>. The overabundance of unfiltered, uncontextualized, and unprioritized information drowns truly valuable signals under a flood of anecdotal, redundant, or misleading data. As volume increases, the signal-to-noise ratio degrades — and the risk of missing a competitive rupture grows.</p>
+
+  <div class="callout callout--red">
+    <p><strong>The paradox:</strong> 74% of strategic decision-makers say they have "more data than ever," but only 31% believe this data actually improves their decisions (source: MIT Sloan Management Review, 2025).</p>
+  </div>
+
+  <p>The cost of noise is not abstract. Every weak signal lost in the noise, every early warning ignored, every emerging trend detected too late translates into <strong>opportunity costs</strong>, <strong>emergency reactions</strong>, and <strong>suboptimal decisions</strong>.</p>
+
+  <h2 style="margin-top:5mm">Listen in the <span class="highlight">KayrosLab</span> Cycle</h2>
+  <div class="flow" style="margin-top:3mm">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label" style="color:#f59e0b;font-weight:700;">Listen</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Map</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Build</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Position</div></div>
+  </div>
+  <div class="flow" style="margin-top:1mm">
+    <div class="flow__step"><div class="num">08</div><div class="label">Realize</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Project</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrate</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Test</div></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: WEAK SIGNALS ===== -->
+<div class="page">
+  <h1>2. <span class="highlight">The Nature of Weak Signals</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Why the most important signals are the hardest to see.</span></p>
+  <p>A <strong>weak signal</strong> is a fragmentary, often ambiguous piece of information that emerges at the edges of mainstream flows. It precedes a trend, announces a rupture, signals an emerging risk. By definition, it is not yet validated, not yet measurable at scale — and therefore <strong>easy to ignore</strong>.</p>
+
+  <h2>The <span class="highlight">5 characteristics</span> of weak signals</h2>
+  <div class="grid-2">
+    <div class="card"><div class="card__title">01. Fragility</div><p>The weak signal is tenuous. A mention in a specialized blog, a patent filed in an unusual classification, a startup raising funds in an unexpected segment.</p></div>
+    <div class="card"><div class="card__title">02. Ambiguity</div><p>Its meaning is not immediate. Is it a statistical anomaly or the first indicator of a major trend? Weak signals require interpretation.</p></div>
+    <div class="card"><div class="card__title">03. Interstitiality</div><p>Weak signals nest at intersections — between sectors, between technologies, between disciplines. They escape specialized radars.</p></div>
+    <div class="card"><div class="card__title">04. Short Temporality</div><p>The detection window for a weak signal is limited. Either captured early and turned into advantage, or lost in the noise.</p></div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Real-world example:</strong> In 2022, the Chinese decree on "recommendation algorithms" was mentioned in two academic papers and one LinkedIn post before being formally published. Companies that <strong>listened</strong> to these weak signals adapted their compliance in advance. Others faced market blocks six months later.</p>
+  </div>
+
+  <h2 style="margin-top:4mm">Why the <span class="highlight">human brain</span> underestimates them</h2>
+  <p>Confirmation bias, availability bias, anchoring — cognitive psychology identifies several mechanisms that lead teams to favor strong, familiar signals over weak, emerging ones. This is not a skill issue: it is a <strong>cognitive architecture</strong> that did not evolve for 21st-century information volume and complexity.</p>
+  <p>This is precisely where <strong>Listen</strong> intervenes: not to replace human intuition, but to <strong>augment it with a systematic, objective, and traceable filter</strong>.</p>
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: ARCHITECTURE ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">Architecture of Listen</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">The noise-to-signal-to-intelligence pipeline.</span></p>
+  <p>The Listen step is organized into three sequential stages, each powered by specialized AI agents working in a ReAct loop:</p>
+
+  <h2>Stage 1 &mdash; <span class="highlight">Screen</span>: Rapid triage</h2>
+  <p>The first stage ingests raw information from diverse sources and performs an initial triage. AI agents scan feeds, apply coarse filters based on strategic domains, and discard obviously irrelevant data. This stage reduces the raw information volume by approximately 80% while preserving all potentially valuable signals.</p>
+
+  <h2>Stage 2 &mdash; <span class="highlight">Enrich</span>: Contextualization</h2>
+  <p>Preserved signals enter the enrichment stage. Each signal is cross-referenced against the vector memory (past signals, decisions, scenarios), enriched with semantic search results from external sources, and contextualized with metadata (timing, source credibility, related entities). The output is a structured signal card.</p>
+
+  <h2>Stage 3 &mdash; <span class="highlight">Score</span>: The Pre-Kayros Index</h2>
+  <p>Each enriched signal receives a composite score across five criteria: novelty, impact, urgency, feasibility, and strategic alignment. The Pre-Kayros Index (PKI) provides a normalized score that enables direct comparison across signals and feeds into the next KayrosLab steps (Map and Build).</p>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Guardrail:</strong> At the end of the Listen step, a <strong>human gate</strong> validates scored signals before they enter the next step (Map). This ensures that AI recommendations are always subject to human judgment and organizational context.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: SIGNAL SCANNER ===== -->
+<div class="page">
+  <h1>4. <span class="highlight">The Signal Scanner Agent</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">The intelligent core of the Listen step.</span></p>
+  <p>The Signal Scanner is the primary AI agent in the Listen step. It operates in a continuous ReAct (Reasoning + Acting) loop: it observes the information environment, reasons about what it finds, acts to gather more context, and refines its analysis iteratively.</p>
+
+  <h2>ReAct <span class="highlight">operation</span></h2>
+  <div class="grid-2">
+    <div class="card"><div class="card__title">1. Observe</div><p>Monitor configured sources (RSS, APIs, web crawlers, internal feeds) for new information.</p></div>
+    <div class="card"><div class="card__title">2. Reason</div><p>Evaluate each new item against active strategic domains and historical patterns.</p></div>
+    <div class="card"><div class="card__title">3. Act</div><p>If a potential signal is detected, search for corroborating or contradictory evidence.</p></div>
+    <div class="card"><div class="card__title">4. Refine</div><p>Update signal score and card based on new evidence, then loop back to observe.</p></div>
+  </div>
+
+  <h2 style="margin-top:4mm">Tool <span class="highlight">registry</span></h2>
+  <p>The Signal Scanner has access to a growing set of tools: semantic search across vector memory, web search for real-time corroboration, patent database queries, regulatory feed monitoring, social media trend analysis, and internal knowledge base search. Each tool can be enabled or disabled based on organizational policy.</p>
+
+  <div class="callout callout--gold" style="margin-top:3mm">
+    <p><strong>Human gate:</strong> After the Signal Scanner completes its analysis, a human reviewer validates the scored signal before it proceeds to Map. The reviewer can adjust scores, add context, or discard false positives — and every action is logged.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: SCORING ===== -->
+<div class="page">
+  <h1>5. <span class="highlight">Signal Scoring</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">The Pre-Kayros Index (PKI).</span></p>
+  <p>Each signal is scored on a 0-10 scale across five criteria, producing a composite Pre-Kayros Index score. This scoring enables objective comparison across signals and provides decision-makers with a clear prioritization framework.</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead>
+        <tr><th>Criterion</th><th>0-3 (Low)</th><th>4-7 (Medium)</th><th>8-10 (High)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Novelty</strong></td><td>Known pattern</td><td>Emerging pattern</td><td>Unprecedented signal</td></tr>
+        <tr><td><strong>Impact</strong></td><td>Marginal effect</td><td>Moderate strategic effect</td><td>Transformational potential</td></tr>
+        <tr><td><strong>Urgency</strong></td><td>Long-term horizon (&gt;3yr)</td><td>Medium-term (1-3yr)</td><td>Short-term (&lt;1yr)</td></tr>
+        <tr><td><strong>Feasibility</strong></td><td>No clear response path</td><td>Response possible</td><td>Clear action available</td></tr>
+        <tr><td><strong>Strategic Fit</strong></td><td>Outside current scope</td><td>Partial alignment</td><td>Direct strategic alignment</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Normalization:</strong> The PKI score is normalized so that signals can be compared across domains, timeframes, and source types. A PKI of 7+ triggers automatic notification to strategy teams. A PKI of 4-7 enters the regular review queue. A PKI below 4 is archived for pattern analysis.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: ENRICHMENT ===== -->
+<div class="page">
+  <h1>6. <span class="highlight">Context Enrichment</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">From raw signal to actionable intelligence.</span></p>
+  <p>A raw signal has limited value. A signal enriched with context, history, and cross-references becomes actionable intelligence. The enrichment stage achieves this through a multi-step process:</p>
+
+  <ul class="num-list">
+    <li><strong>Source verification</strong> — Assess the credibility and authority of the originating source</li>
+    <li><strong>Historical correlation</strong> — Search the vector memory for similar past signals and decisions</li>
+    <li><strong>Semantic enrichment</strong> — Expand the signal with related concepts, entities, and trends from external knowledge bases</li>
+    <li><strong>Temporal analysis</strong> — Place the signal on a timeline with related events and inflection points</li>
+    <li><strong>Competitive triangulation</strong> — Cross-reference with competitor movements in the same space</li>
+  </ul>
+
+  <p>The output of enrichment is a structured <strong>Signal Card</strong> containing: the raw signal text and source, enriched context and cross-references, PKI score and sub-scores, recommended next actions, and a confidence level for each assessment.</p>
+
+  <div class="callout callout--violet" style="margin-top:3mm">
+    <p><strong>Signal Card example:</strong> "Patent filed by Company X in classification Y (previously unused) detected via USPTO feed. PKI: 7.8 — Novelty: 9 (first use of this classification), Impact: 8 (potential disruption of segment Z), Urgency: 6 (3-5 year horizon), Feasibility: 7, Strategic Fit: 8. Recommended: Enter Map step for trend network construction."</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: REGULATORY ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Regulatory Risk Detection</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Proactive compliance wired into the listening process.</span></p>
+  <p>One of the most powerful applications of the Listen step is the early detection of regulatory signals. The Regulatory Risk agent monitors over 200 regulatory sources across jurisdictions (EU, US, APAC) and feeds detected changes directly into the signal pipeline.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">Regulatory Radar</div><p>Continuous monitoring of official journals, regulatory publications, parliamentary debates, and industry body communications across 15+ regulatory domains.</p></div>
+    <div class="card"><div class="card__title">Impact Pre-Assessment</div><p>Each detected regulatory signal is assessed for potential impact on the organization's products, processes, and compliance obligations.</p></div>
+    <div class="card"><div class="card__title">Gap Analysis</div><p>Automated comparison of current compliance posture against detected regulatory changes, highlighting gaps and required actions.</p></div>
+    <div class="card"><div class="card__title">Compliance Timeline</div><p>Projected timeline for regulatory enforcement with milestones for required compliance actions.</p></div>
+  </div>
+
+  <div class="callout callout--orange" style="margin-top:3mm">
+    <p><strong>Example:</strong> When the EU AI Act was in its proposal phase, organizations using KayrosLab's Listen step detected the signal 14 months before enforcement — enabling them to adjust their AI governance frameworks proactively rather than reactively.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: CONCLUSION ===== -->
+<div class="page">
+  <h1>8. <span class="highlight">Conclusion</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Listen as a strategic capability.</span></p>
+  <p>In an era of information abundance, the competitive advantage no longer belongs to organizations that have access to the most data — but to those that can <strong>separate signal from noise</strong> most effectively and act on what they find.</p>
+  <p>KayrosLab's Listen step provides this capability through a structured, AI-augmented pipeline that transforms raw information into scored, enriched, and prioritized strategic signals. By combining the tireless scanning power of AI agents with the contextual judgment of human reviewers, Listen delivers what neither humans nor machines can achieve alone:</p>
+
+  <ul class="num-list">
+    <li>A continuous, 24/7 radar on the strategic environment</li>
+    <li>Objective, repeatable signal scoring across domains</li>
+    <li>Rich contextualization that transforms signals into intelligence</li>
+    <li>Proactive regulatory risk detection and compliance planning</li>
+    <li>A traceable, auditable process from raw data to strategic decision</li>
+  </ul>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>Listen is not a tool — it is a capability.</strong> One that turns the overwhelming complexity of the information environment into a structured, governed, and actionable strategic advantage.</p>
+  </div>
+
+  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#6b7280">Ready to transform noise into intelligence?<br>Contact us at <span class="accent-text">contact@kayroslab.com</span></p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
 </body>
 </html>

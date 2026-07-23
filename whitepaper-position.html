@@ -1,66 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Paper — Position: Ontological Competitive Analysis &bull; KayrosLab</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');body{font-family:'Inter',system-ui,sans-serif;}.font-display{font-family:'Space Grotesk','Inter',sans-serif;}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Paper — Position: Ontological Competitive Analysis &bull; KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+.section{margin-bottom:6mm}
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-x-2.5">
-                <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
-                <span class="font-display text-xl font-semibold tracking-tighter">KayrosLab</span>
-            </a>
-            <div class="flex items-center gap-x-3">
-                <a href="/index.fr.html" class="text-xs font-medium px-3 py-1.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors">FR</a>
-                <a href="/" class="text-sm text-slate-600 hover:text-sky-600 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Back to site</a>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <div class="max-w-4xl mx-auto px-8 py-16">
-        <div class="mb-8">
-            <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold mb-4"><i class="fa-solid fa-file-pdf"></i> Whitepapers</div>
-            <h1 class="text-4xl md:text-5xl font-semibold tracking-tighter mb-4">White Paper — Position: Ontological Competitive Analysis</h1>
-            <p class="text-xl text-slate-600 mb-6">Position your innovation through automated ontological analysis of the competitive landscape.</p>
-        </div>
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Whitepaper &mdash; July 2026</div>
+  <h1 class="cover__title">
+    <em>Position</em>:<br>
+    Augmented Ontological<br>
+    <em>Competitive Analysis</em>
+  </h1>
+  <p class="cover__subtitle">How KayrosLab transforms competitive positioning from a static exercise into a dynamic, AI-powered ontological analysis that reveals white spaces, blind spots, and strategic opportunities.</p>
+  <div class="cover__meta">By <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0</div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
 
-        <div class="prose prose-slate max-w-none">
-            <h2>1. Introduction</h2>
-            <p>Positioning an innovation requires a deep understanding of the competitive landscape. Traditional competitive analysis methods are often manual, static and subjective. This white paper presents an ontological approach to competitive analysis that is automated, dynamic and objective.</p>
-            
-            <h2>2. The Ontological Approach</h2>
-            <p>KayrosLab's positioning module uses a 14-type ontology (7 technology entities, 7 business entities) connected by oriented relationships. This formal representation enables precise comparison of competitive offerings across multiple dimensions.</p>
-            
-            <h2>3. Automated Data Collection</h2>
-            <p>The system automatically collects competitive intelligence from multiple sources: web scraping for product and market data, GitHub/GitLab APIs for technology metrics (stars, forks, contributors, commit frequency, freshness, issues), and structured expert input.</p>
-            
-            <h2>4. Ontology Construction</h2>
-            <p>Collected data is structured into the ontology using AI agents (Ontology Designer, Query Engine). Entities are classified, properties are typed, and relationships are oriented to create a rich, queryable knowledge graph.</p>
-            
-            <h2>5. Gap Analysis</h2>
-            <p>The gap analyzer compares your innovation against the competitive landscape, identifying differentiation opportunities, strategic white spaces, and areas of potential competitive threat. Results are visualized in a Cytoscape.js graph with full interactivity.</p>
-            
-            <h2>6. Export and Reuse</h2>
-            <p>The ontology can be exported in OWL RDF/XML format, compliant with the Microsoft Ontology Playground, enabling reuse across your organization and integration with existing knowledge management systems.</p>
-            
-            <h2>7. Conclusion</h2>
-            <p>Ontological competitive analysis transforms positioning from an intuitive art into a rigorous science. By combining automated data collection, formal ontology, and AI-powered analysis, KayrosLab enables organizations to position their innovations with unprecedented precision and objectivity.</p>
-        </div>
-        
-        <div class="mt-12 pt-8 border-t border-slate-200 text-center">
-            <a href="/" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium"><i class="fa-solid fa-arrow-left"></i> Back to KayrosLab</a>
-        </div>
+<!-- ===== PAGE 2: TABLE OF CONTENTS ===== -->
+<div class="page">
+  <h1>Table of Contents</h1>
+  <div style="margin-top:8mm">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction &mdash; Why Positioning Is the Weak Link</span> <span style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>Limits of Traditional Competitive Analysis</span> <span style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>A Living Ontology with 14 Entities</span> <span style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>Dynamic Human-Machine Interaction</span> <span style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Cytoscape Graph &amp; Query Playground</span> <span style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Measurable Impact on Ideation</span> <span style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Cross-References &amp; Industry Standards</span> <span style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion</span> <span style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
     </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
 
-    <footer class="bg-slate-900 text-white py-8">
-        <div class="max-w-4xl mx-auto px-8 text-center text-sm text-slate-400">
-            <p>&copy; 2026 KayrosLab. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Why positioning is the weakest link in ideation.</span></p>
+  <p>Generating ideas is relatively easy. Validating them against competitive reality is where most innovation processes fail. Organizations invest heavily in creative ideation only to discover, late in the process, that their promising concept is already crowded, undifferentiated, or irrelevant to market needs.</p>
+  <p>This failure stems from a fundamental weakness: <strong>competitive analysis is typically static, retrospective, and siloed</strong>. It is performed once, captured in a slide deck, and rarely revisited. By the time a new competitive movement is noticed, the window of opportunity has often closed.</p>
+  <p>KayrosLab's <strong>Position</strong> step reimagines competitive analysis as a dynamic, continuous, and AI-augmented process built on an ontological model of 14 entity types. This white paper presents how Position transforms competitive intelligence from a periodic reporting exercise into an always-on strategic capability.</p>
+
+  <h2 style="margin-top:5mm">Position in the <span class="highlight">KayrosLab</span> Cycle</h2>
+  <div class="flow" style="margin-top:3mm">
+    <div class="flow__step"><div class="num">01</div><div class="label">Listen</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Map</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Build</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">04</div><div class="label" style="color:#f59e0b;font-weight:700;">Position</div></div>
+  </div>
+  <div class="flow" style="margin-top:1mm">
+    <div class="flow__step"><div class="num">08</div><div class="label">Realize</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Project</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrate</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Test</div></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: TRADITIONAL LIMITS ===== -->
+<div class="page">
+  <h1>2. <span class="highlight">Limits of Traditional Analysis</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">4 critical blind spots.</span></p>
+  <p>Traditional competitive analysis methods — SWOT, Porter's Five Forces, BCG matrix — were designed for a slower, more stable industrial era. They suffer from four critical blind spots that make them ill-suited for today's dynamic environment:</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">01. Static Snapshot</div><p>Analysis is performed at a point in time and quickly becomes obsolete. Competitors, technologies, and market conditions shift continuously.</p></div>
+    <div class="card"><div class="card__title">02. Siloed View</div><p>Each department maintains its own competitive picture. Product, strategy, sales, and innovation teams rarely share a unified view.</p></div>
+    <div class="card"><div class="card__title">03. Human Bias</div><p>Confirmation bias leads teams to focus on familiar competitors and known patterns, missing emerging threats from adjacent or unrelated sectors.</p></div>
+    <div class="card"><div class="card__title">04. Low Granularity</div><p>Frameworks like SWOT operate at the company level, missing the nuance of specific products, features, patents, or talent movements.</p></div>
+  </div>
+
+  <div class="callout callout--red" style="margin-top:3mm">
+    <p><strong>The blind spot cost:</strong> 52% of organizations report being "surprised" by a competitive move that was visible in public data — simply because no systematic, continuous analysis was in place (source: Competitive Intelligence Benchmark, 2025).</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: ONTOLOGY ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">A Living Ontology</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">14 entity types for competitive intelligence.</span></p>
+  <p>At the heart of Position is a <strong>living ontology</strong> of 14 entity types that captures the competitive landscape at the right level of granularity. Unlike rigid taxonomies, this ontology evolves as new entity types, relationships, and competitive dynamics emerge.</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead><tr><th>Category</th><th>Entity Type</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Actors</strong></td><td>Organization, Team, Individual</td><td>Competitor X, R&D team, Key hire</td></tr>
+        <tr><td><strong>Offerings</strong></td><td>Product, Service, Feature</td><td>SaaS platform, Consulting, AI module</td></tr>
+        <tr><td><strong>Assets</strong></td><td>Patent, Technology, Dataset</td><td>Patent filing, Proprietary algorithm, Training data</td></tr>
+        <tr><td><strong>Signals</strong></td><td>Partnership, Investment, Publication</td><td>Strategic alliance, Series B, Research paper</td></tr>
+        <tr><td><strong>Market</strong></td><td>Segment, Geography, Regulation</td><td>Enterprise segment, APAC region, GDPR</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Each entity carries structured properties and relationships. A <strong>graph database</strong> (powered by Cytoscape.js) enables visual exploration of the competitive landscape, revealing connections, clusters, and white spaces invisible to traditional analysis.</p>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Ontological insight:</strong> By modeling the competitive landscape as a graph of entities and relationships, Position enables queries that would be impossible with traditional tools: "Which organizations have both a patent in classification X and a recent partnership in geography Y, but no product in segment Z?"</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: HUMAN-MACHINE ===== -->
+<div class="page">
+  <h1>4. <span class="highlight">Dynamic Human-Machine Interaction</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Co-construction between AI and human analysts.</span></p>
+  <p>Position operates through a <strong>double-cycle interaction</strong> between AI agents and human analysts:</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">AI Cycle</div><p>Agents scan sources, detect new entities and relationships, update the ontology, suggest connections, and flag anomalies. This cycle runs continuously, 24/7.</p></div>
+    <div class="card"><div class="card__title">Human Cycle</div><p>Analysts validate AI suggestions, add contextual knowledge, refine entity properties, define strategic filters, and set alert thresholds. The human remains the decision-maker.</p></div>
+  </div>
+
+  <p>This dual-cycle approach delivers the best of both worlds: the tireless scanning and pattern recognition of AI, combined with the strategic intuition and contextual understanding of human experts. Each cycle informs and improves the other.</p>
+
+  <h2 style="margin-top:4mm">Axis-by-axis <span class="highlight">guided dialogue</span></h2>
+  <p>The analysis is structured around configurable axes: competitive intensity, technological convergence, regulatory pressure, talent movement, and customer sentiment. For each axis, AI agents prepare a structured analysis that the human can validate, adjust, or override — with every interaction logged for auditability.</p>
+
+  <div class="callout callout--gold" style="margin-top:3mm">
+    <p><strong>Key principle:</strong> AI proposes, human disposes. The system never makes autonomous competitive assessments — it prepares, enriches, and suggests. The final judgment always rests with the human analyst.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: CYTOGRAPH ===== -->
+<div class="page">
+  <h1>5. <span class="highlight">Cytoscape Graph &amp; Query Playground</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Free exploration of the competitive landscape.</span></p>
+  <p>Position integrates a <strong>Cytoscape.js</strong> powered graph visualization that transforms the entity ontology into an interactive, explorable map of the competitive landscape. Users can navigate the graph, inspect entity properties, and discover hidden relationships.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">Property Inspector</div><p>Click any entity to inspect its full property set: type, attributes, relationships, source evidence, confidence score, and last updated timestamp.</p></div>
+    <div class="card"><div class="card__title">Query Playground</div><p>A natural language interface that translates strategic questions into ontology queries: "Who are the emerging competitors in segment X with recent patent activity?"</p></div>
+    <div class="card"><div class="card__title">Automatic Gap Analysis</div><p>The system compares the current ontology against strategic objectives and automatically highlights white spaces — areas where the organization has no presence but competitors are active.</p></div>
+    <div class="card"><div class="card__title">Temporal View</div><p>A time-slider that shows how the competitive graph evolved over time, revealing entry patterns, consolidation trends, and competitive dynamics.</p></div>
+  </div>
+
+  <div class="callout callout--violet" style="margin-top:3mm">
+    <p><strong>Example query:</strong> "Show me all startups founded after 2023 in the AI compliance space that have received venture funding and have a published patent." The Query Playground translates this into an ontology traversal and returns a subgraph of matching entities.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: MEASURABLE IMPACT ===== -->
+<div class="page">
+  <h1>6. <span class="highlight">Measurable Impact</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">What Position changes concretely.</span></p>
+  <p>Organizations using the Position step report transformative improvements across the ideation process:</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead><tr><th>Metric</th><th>Before</th><th>After Position</th></tr></thead>
+      <tbody>
+        <tr><td>Analysis time per competitive topic</td><td>3-4 weeks</td><td>3-4 days (-80%)</td></tr>
+        <tr><td>Ontological depth</td><td>3-5 entities per topic</td><td>15-25 entities per topic (5x)</td></tr>
+        <tr><td>Update frequency</td><td>Quarterly</td><td>Continuous (daily)</td></tr>
+        <tr><td>Cross-department sharing</td><td>Ad-hoc email</td><td>Shared graph with role-based views</td></tr>
+        <tr><td>Actionable insights per cycle</td><td>2-3</td><td>12-18 (6x)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>Gain n°1 — Analysis time reduced by 80%:</strong> AI agents handle the scanning, enrichment, and initial correlation. Human analysts focus on validation and strategic interpretation.</p>
+  </div>
+  <div class="callout callout--gold" style="margin-top:2mm">
+    <p><strong>Gain n°2 — 5x ontological depth:</strong> The 14-entity ontology captures dimensions that traditional analysis misses: technology adjacencies, talent flows, regulatory signals, indirect competitors.</p>
+  </div>
+  <div class="callout callout--orange" style="margin-top:2mm">
+    <p><strong>Gain n°3 — Continuous vs. static:</strong> The graph updates continuously. Yesterday's analysis is not obsolete — it is incorporated into today's enriched view.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: CROSS-REFERENCES ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Cross-References</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Alignment with industry standards and best practices.</span></p>
+  <p>The Position methodology is informed by and compatible with leading competitive analysis frameworks from BCG, McKinsey, and Bain — while extending them with AI-augmented ontological depth and continuous operation.</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead><tr><th>Framework</th><th>Source</th><th>How Position Extends It</th></tr></thead>
+      <tbody>
+        <tr><td>Strategy Palette</td><td>BCG</td><td>Adds dynamic ontological layer to strategic context analysis</td></tr>
+        <tr><td>Horizon Scanning</td><td>McKinsey</td><td>Automates signal detection and cross-correlation at scale</td></tr>
+        <tr><td>Strategic Foresight</td><td>Bain</td><td>Provides traceable, auditable evidence for scenario planning</td></tr>
+        <tr><td>Disruptive Innovation</td><td>Christensen</td><td>Ontological detection of market entry patterns and overshooting</td></tr>
+        <tr><td>Blue Ocean Shift</td><td>Kim & Mauborgne</td><td>Quantified white space identification through graph analysis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>From theory to tool:</strong> Where these frameworks provide conceptual models, KayrosLab's Position step provides an operational, AI-augmented tool that implements the concepts in daily practice with full traceability and continuous updating.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: CONCLUSION ===== -->
+<div class="page">
+  <h1>8. <span class="highlight">Conclusion</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Toward continuous, interactive, augmented positioning.</span></p>
+  <p>In a world where competitive landscapes shift at digital speed, static analysis is no longer sufficient. KayrosLab's Position step redefines competitive analysis as a <strong>continuous, interactive, and AI-augmented practice</strong>.</p>
+
+  <h2 style="margin-top:5mm">The <span class="highlight">4 pillars</span> of augmented positioning</h2>
+  <ul class="num-list">
+    <li><strong>Ontological depth</strong> — 14 entity types capture competitive reality at the right granularity</li>
+    <li><strong>Continuous sensing</strong> — AI agents scan, correlate, and enrich 24/7</li>
+    <li><strong>Human-AI collaboration</strong> — Structured double-cycle with human judgment at every decision point</li>
+    <li><strong>Auditable traceability</strong> — Every insight is linked to evidence, source, and timestamp</li>
+  </ul>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>Position is not a tool — it is a strategic capability.</strong> One that ensures every ideation cycle is grounded in an up-to-date, comprehensive, and actionable understanding of the competitive landscape.</p>
+  </div>
+
+  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#6b7280">Ready to transform your competitive analysis?<br>Contact us at <span class="accent-text">contact@kayroslab.com</span></p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
 </body>
 </html>
