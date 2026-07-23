@@ -1,0 +1,16 @@
+{
+	"name": "kayroslab-web",
+	"version": "0.1.0",
+	"description": "KayrosLab website with i18n internationalization",
+	"type": "module",
+	"private": true,
+	"engines": { "node": ">=20" },
+	"scripts": {
+		"start": "node server.mjs"
+	},
+	"dependencies": {
+		"express": "^4.21.0",
+		"ejs": "^3.1.10",
+		"i18n": "^0.15.1"
+	}
+}

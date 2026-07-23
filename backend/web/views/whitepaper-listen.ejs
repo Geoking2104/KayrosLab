@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="<%= locale %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= __('whitepaper_listen_title') %> &bull; KayrosLab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');body{font-family:'Inter',system-ui,sans-serif;}.font-display{font-family:'Space Grotesk','Inter',sans-serif;}</style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-x-2.5">
+                <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
+                <span class="font-display text-xl font-semibold tracking-tighter">KayrosLab</span>
+            </a>
+            <div class="flex items-center gap-x-3">
+                <a href="/lang/<%= locale === 'en' ? 'fr' : 'en' %>" class="text-xs font-medium px-3 py-1.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"><%= locale === 'en' ? 'FR' : 'EN' %></a>
+                <a href="/" class="text-sm text-slate-600 hover:text-sky-600 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Back to site</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-8 py-16">
+        <div class="mb-8">
+            <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold mb-4"><i class="fa-solid fa-file-pdf"></i> <%= __('nav_whitepapers') %></div>
+            <h1 class="text-4xl md:text-5xl font-semibold tracking-tighter mb-4"><%= __('whitepaper_listen_title') %></h1>
+            <p class="text-xl text-slate-600 mb-6"><%= __('whitepaper_listen_subtitle') %></p>
+        </div>
+
+        <div class="prose prose-slate max-w-none">
+            <h2>1. Introduction</h2>
+            <p>In an increasingly complex and uncertain environment, organizations face a critical challenge: how to detect, qualify and act on weak signals before they become obvious trends or threats. This white paper presents a structured methodology for transforming weak signals into strategic decisions using a hybrid AI-human governance framework.</p>
+            
+            <h2>2. What Are Weak Signals?</h2>
+            <p>Weak signals are subtle, often ambiguous indicators of potential change that may herald significant future developments. They are characterized by their low intensity, novelty and difficulty to detect using conventional monitoring tools. Examples include emerging technologies, regulatory whispers, shifts in consumer behavior or geopolitical tensions.</p>
+            
+            <h2>3. The Listen Methodology</h2>
+            <p>The Listen step of the KayrosLab process employs a multi-stage approach:</p>
+            <ul>
+                <li><strong>Collection</strong> &mdash; Aggregation of signals from diverse sources (web, social media, internal data, expert networks)</li>
+                <li><strong>Filtering</strong> &mdash; Noise reduction and relevance scoring using AI agents</li>
+                <li><strong>Enrichment</strong> &mdash; Contextualization through semantic search and vector memory</li>
+                <li><strong>Scoring</strong> &mdash; Multi-criteria evaluation (novelty, impact, urgency, feasibility)</li>
+                <li><strong>Qualification</strong> &mdash; Human validation and signal prioritization</li>
+            </ul>
+            
+            <h2>4. The Role of AI Agents</h2>
+            <p>KayrosLab deploys specialized AI agents to automate and enhance each stage of the Listen process. The Signal Analyzer agent filters and scores incoming signals. The Context Enricher agent searches for related information in the vector memory and external sources. The Regulatory Risk agent evaluates compliance implications.</p>
+            
+            <h2>5. From Signal to Decision</h2>
+            <p>Qualified weak signals feed directly into the subsequent steps of the KayrosLab process: Mapping (trend network construction), Building (scenario generation), and Positioning (competitive analysis). Each transmission between steps is governed by structured human gates ensuring quality and relevance.</p>
+            
+            <h2>6. Conclusion</h2>
+            <p>The ability to systematically detect, qualify and act on weak signals represents a decisive competitive advantage. The KayrosLab methodology, combining AI automation with structured human governance, provides organizations with a rigorous framework for turning uncertainty into strategic opportunity.</p>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-slate-200 text-center">
+            <a href="/" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium"><i class="fa-solid fa-arrow-left"></i> Back to KayrosLab</a>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 text-white py-8">
+        <div class="max-w-4xl mx-auto px-8 text-center text-sm text-slate-400">
+            <p>&copy; <%= new Date().getFullYear() %> KayrosLab. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -4,10 +4,21 @@
   "description": "Backend Fastify de KayrosLab : proxy LLM securise + endpoint gouverne. A deployer sur VPS/PaaS (Node), pas sur mutualise.",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=20" },
-  "scripts": { "start": "node index.mjs" },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node index.mjs"
+  },
   "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
     "fastify": "^4.28.1",
-    "@fastify/cors": "^9.0.1"
-  }
+    "i18n": "^0.15.3"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
