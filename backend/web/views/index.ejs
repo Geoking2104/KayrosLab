@@ -380,6 +380,110 @@
         </div>
     </section>
 
+    <!-- ===== TOOLS SECTION ===== -->
+    <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-3xl mb-10">
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3"><%= __('tools_section_label') %></div>
+            <h2 class="section-header tracking-tighter"><%- __('tools_title') %></h2>
+            <p class="mt-3 text-slate-600"><%- __('tools_subtitle') %></p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+            <% for (let s = 1; s <= 8; s++) { %>
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold"><%= String(s).padStart(2,'0') %></span>
+                    <span class="font-semibold text-sm"><%= __('step_0' + s + '_title') %></span>
+                </div>
+                <ul class="text-xs space-y-1.5 text-slate-600">
+                    <% for (let t = 1; t <= 7; t++) { %>
+                    <% const key = 'tools_0' + s + '_list_' + t; if (__(key) !== key) { %>
+                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong><%= __(key) %></strong></li>
+                    <% } } %>
+                </ul>
+            </div>
+            <% } %>
+        </div>
+        <div class="mt-8 text-center text-xs text-slate-500"><%- __('tools_footer') %></div>
+    </section>
+
+    <!-- ===== ORCHESTRATION SECTION ===== -->
+    <section id="orchestration" class="max-w-screen-2xl mx-auto px-8 py-16 bg-slate-900 text-white animate-on-scroll">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-10">
+                <div>
+                    <div class="uppercase tracking-[3px] text-emerald-400 text-xs font-semibold mb-2"><%= __('tech_section_label') %></div>
+                    <h2 class="text-4xl font-semibold tracking-tighter"><%- __('tech_title') %></h2>
+                </div>
+                <div class="text-sm text-emerald-300 max-w-xs"><%- __('tech_subtitle') %></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-shield-alt text-xl"></i></div>
+                    <div class="font-semibold mb-2"><%= __('tech_risk_reduction') %></div>
+                    <div class="text-sm text-white/70"><%= __('tech_risk_reduction_desc') %></div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-clipboard-check text-xl"></i></div>
+                    <div class="font-semibold mb-2"><%= __('tech_full_auditability') %></div>
+                    <div class="text-sm text-white/70"><%= __('tech_full_auditability_desc') %></div>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-expand-arrows-alt text-xl"></i></div>
+                    <div class="font-semibold mb-2"><%= __('tech_controlled_scalability') %></div>
+                    <div class="text-sm text-white/70"><%= __('tech_controlled_scalability_desc') %></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMPLIANCE SECTION ===== -->
+    <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-10">
+                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2"><%= __('compliance_label') %></div>
+                <h2 class="section-header tracking-tighter"><%- __('compliance_title') %></h2>
+                <p class="mt-3 text-lg text-slate-600"><%= __('compliance_subtitle') %></p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl"><%= __('compliance_sovereignty_title') %></h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_sovereignty_1') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_sovereignty_2') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_sovereignty_3') %></span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-certificate text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl"><%= __('compliance_cert_title') %></h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_cert_1') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_cert_2') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_cert_3') %></span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-balance-scale text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl"><%= __('compliance_regulatory_title') %></h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_regulatory_1') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_regulatory_2') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_regulatory_3') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_regulatory_4') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_regulatory_5') %></span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl"><%= __('compliance_audit_title') %></h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_audit_1') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%- __('compliance_audit_2') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_audit_3') %></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><%= __('compliance_audit_4') %></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== DIFFERENTIATION TABLE ===== -->
     <section id="differenciation" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-3xl mb-10">
