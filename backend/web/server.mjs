@@ -58,7 +58,19 @@ app.get('/whitepaper/listen', (req, res) => {
 	});
 });
 
+app.get('/whitepaper-listen.html', (req, res) => {
+	res.render('whitepaper-listen', {
+		locale: req.getLocale(),
+	});
+});
+
 app.get('/whitepaper/position', (req, res) => {
+	res.render('whitepaper-position', {
+		locale: req.getLocale(),
+	});
+});
+
+app.get('/whitepaper-position.html', (req, res) => {
 	res.render('whitepaper-position', {
 		locale: req.getLocale(),
 	});
@@ -66,6 +78,18 @@ app.get('/whitepaper/position', (req, res) => {
 
 app.get('/whitepaper/kayroslab', (req, res) => {
 	res.render('whitepaper-kayroslab', {
+		locale: req.getLocale(),
+	});
+});
+
+app.get('/whitepaper-kayroslab.html', (req, res) => {
+	res.render('whitepaper-kayroslab', {
+		locale: req.getLocale(),
+	});
+});
+
+app.get('/whitepaper-hackathon.html', (req, res) => {
+	res.render('whitepaper-hackathon', {
 		locale: req.getLocale(),
 	});
 });

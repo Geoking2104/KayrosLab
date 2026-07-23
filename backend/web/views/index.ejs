@@ -619,24 +619,30 @@
         <div class="text-center mb-12">
             <h2 class="section-header tracking-tighter"><%= __('nav_whitepapers') %></h2>
         </div>
-        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
                 <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-ear-listen text-sky-600 text-xl"></i></div>
                 <h3 class="font-semibold text-lg mb-2"><%= __('whitepaper_listen_title') %></h3>
-                <p class="text-sm text-slate-600 mb-6"><%= __('whitepaper_listen_subtitle') %></p>
-                <a href="/whitepaper/listen" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_1_cta') %></a>
+                <p class="text-sm text-slate-600 mb-6 flex-1"><%= __('whitepaper_listen_subtitle') %></p>
+                <a href="/whitepaper-listen.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_1_cta') %></a>
             </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center">
+            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
                 <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-bullseye text-orange-600 text-xl"></i></div>
                 <h3 class="font-semibold text-lg mb-2"><%= __('whitepaper_position_title') %></h3>
-                <p class="text-sm text-slate-600 mb-6"><%= __('whitepaper_position_subtitle') %></p>
-                <a href="/whitepaper/position" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_2_cta') %></a>
+                <p class="text-sm text-slate-600 mb-6 flex-1"><%= __('whitepaper_position_subtitle') %></p>
+                <a href="/whitepaper-position.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_2_cta') %></a>
             </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center">
+            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
                 <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-book text-emerald-600 text-xl"></i></div>
                 <h3 class="font-semibold text-lg mb-2"><%= __('whitepaper_kayros_title') %></h3>
-                <p class="text-sm text-slate-600 mb-6"><%= __('whitepaper_kayros_subtitle') %></p>
-                <a href="/whitepaper/kayroslab" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_kayros_cta') %></a>
+                <p class="text-sm text-slate-600 mb-6 flex-1"><%= __('whitepaper_kayros_subtitle') %></p>
+                <a href="/whitepaper-kayroslab.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_kayros_cta') %></a>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
+                <div class="w-14 h-14 rounded-2xl bg-violet-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-rocket text-violet-600 text-xl"></i></div>
+                <h3 class="font-semibold text-lg mb-2"><%= __('whitepaper_hackathon_title') %></h3>
+                <p class="text-sm text-slate-600 mb-6 flex-1"><%= __('whitepaper_hackathon_subtitle') %></p>
+                <a href="/whitepaper-hackathon.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm"><%= __('projects_whitepaper_hackathon_cta') %></a>
             </div>
         </div>
     </section>
