@@ -29,9 +29,9 @@
         
         /* Mega-menu styles */
         .mega-menu { display: none; position: absolute; left: 0; top: 100%; min-width: 280px; }
-        .mega-menu-wide { display: none; position: absolute; left: -9999px; right: auto; top: 100%; }
+        .mega-menu-wide { display: none; position: absolute; left: 50%; transform: translateX(-50%); top: 100%; width: 90vw; max-width: 1100px; }
         .group:hover > .mega-menu { display: block; }
-        .group:hover > .mega-menu-wide { display: block; left: 50%; transform: translateX(-50%); width: 90vw; max-width: 1100px; }
+        .group:hover > .mega-menu-wide { display: block; }
         .mega-menu a, .mega-menu-wide a { transition: all 0.2s ease; }
         /* Mobile tap support for dropdowns */
         .dropdown-toggle.active + .mega-menu, .dropdown-toggle.active + .mega-menu-wide { display: block; }
@@ -85,10 +85,10 @@
                 </div>
 
                 <!-- Desktop Navigation - Mega Menu Style (visible lg+) -->
-                <div class="hidden lg:flex items-center">
+                <div class="hidden lg:flex items-center relative">
                     
                     <!-- Platform (mega menu wide) -->
-                    <div class="group relative px-1">
+                    <div class="group px-1">
                         <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
                             Platform
                             <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
