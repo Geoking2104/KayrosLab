@@ -23,9 +23,12 @@ await app.register(rateLimit, {
 await app.register(authPlugin);
 
 // --- middleware secret partage ---
+// Routes /v1/demo/* are public (HTML demo, no client-side key).
 app.addHook('preHandler', async (req, reply) => {
   if (!ctx.KAYROS_SECRET) return;
   if (req.method === 'GET') return;
+  const path = (req.url || '').split('?')[0];
+  if (path.startsWith('/v1/demo/')) return;
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });
 
