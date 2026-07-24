@@ -26,14 +26,6 @@ tailwind.config = {
 .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 .stagger-children > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; }
-.stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
-.stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
-.stagger-children.visible > *:nth-child(4) { transition-delay: 0.2s; }
-.stagger-children.visible > *:nth-child(5) { transition-delay: 0.25s; }
-.stagger-children.visible > *:nth-child(6) { transition-delay: 0.3s; }
-.stagger-children.visible > *:nth-child(7) { transition-delay: 0.35s; }
-.stagger-children.visible > *:nth-child(8) { transition-delay: 0.4s; }
 .stagger-children.visible > * { opacity: 1; transform: translateY(0); }
 .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
 .kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -57,8 +49,13 @@ tailwind.config = {
 .ki-ring { width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(#0ea5e9 calc(var(--ki) * 1%), #e2e8f0 0); display: flex; align-items: center; justify-content: center; }
 .ki-ring-inner { width: 58px; height: 58px; border-radius: 50%; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .human-note { border-left: 3px solid #f59e0b; background: #fffbeb; }
-#report-template { position: absolute; left: -9999px; top: 0; width: 210mm; }
+#report-template { position: fixed; left: 0; top: 0; width: 210mm; background: white; z-index: -1; opacity: 0; pointer-events: none; }
+#report-template.capturing { opacity: 1; z-index: 9999; }
 .ontology-embed { border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
+.prose-llm h3, .prose-llm h4 { font-weight: 700; margin-top: 0.75rem; margin-bottom: 0.35rem; }
+.prose-llm ul { list-style: disc; padding-left: 1.25rem; margin: 0.4rem 0; }
+.prose-llm p { margin: 0.35rem 0; }
+.prose-llm strong { font-weight: 600; }
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
@@ -103,7 +100,7 @@ tailwind.config = {
       <p class="font-display text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Agent <span class="text-slate-400 font-normal mx-1">=</span> Model <span class="text-slate-400 font-normal mx-1">+</span> Tools <span class="text-slate-400 font-normal mx-1">+</span> Prompt <span class="text-slate-400 font-normal mx-1">+</span> Middleware</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children">
-      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div><h3 class="font-display font-semibold text-base mb-2">Model</h3><p class="text-slate-600 text-sm">Claude, GPT, Gemini, DeepSeek or local Ollama.</p></div>
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div><h3 class="font-display font-semibold text-base mb-2">Model</h3><p class="text-slate-600 text-sm">Mistral (live), Claude, GPT, Gemini, local Ollama.</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-amber-400 hover:shadow-lg"><div class="arch-icon bg-amber-100 text-amber-600"><i class="fas fa-wrench"></i></div><h3 class="font-display font-semibold text-base mb-2">Tools</h3><p class="text-slate-600 text-sm">ki_scorer, search_competitors, ontological_mapper…</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-violet-400 hover:shadow-lg"><div class="arch-icon bg-violet-100 text-violet-600"><i class="fas fa-clipboard-list"></i></div><h3 class="font-display font-semibold text-base mb-2">Prompt</h3><p class="text-slate-600 text-sm">Specialized system prompts per agent role.</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-shield-halved"></i></div><h3 class="font-display font-semibold text-base mb-2">Middleware</h3><p class="text-slate-600 text-sm">Guardrails + human-in-the-loop gates.</p></div>
@@ -139,10 +136,10 @@ tailwind.config = {
       <h2 class="section-header font-display mb-2">Swap Models, <span class="kayros-gradient">Not Code</span></h2>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 stagger-children">
+      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-orange-500 text-white">M</div><div><h3 class="font-display font-semibold text-sm">Mistral</h3><div class="text-slate-400 text-xs">Live API</div></div></div></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-amber-100 text-amber-800">C</div><div><h3 class="font-display font-semibold text-sm">Claude 3.5</h3><div class="text-slate-400 text-xs">Anthropic</div></div></div></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-emerald-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">GPT-4o</h3><div class="text-slate-400 text-xs">OpenAI</div></div></div></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-blue-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">Gemini 1.5</h3><div class="text-slate-400 text-xs">Google</div></div></div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-indigo-500 text-white">D</div><div><h3 class="font-display font-semibold text-sm">DeepSeek R1</h3><div class="text-slate-400 text-xs">DeepSeek</div></div></div></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-slate-700 text-white">O</div><div><h3 class="font-display font-semibold text-sm">Local (Ollama)</h3><div class="text-slate-400 text-xs">Sovereign</div></div></div></div>
     </div>
   </div>
@@ -166,12 +163,20 @@ tailwind.config = {
 <section id="demo" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Live Demo</div>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Live Demo · Real LLM</div>
       <h2 class="section-header font-display mb-2">Watch <span class="kayros-gradient">Agents</span> Work</h2>
-      <p class="text-slate-600 max-w-2xl mb-6">Define scope & conditions, walk the governed cycle with full human annotations, watch the Kayros Index evolve, then export a branded PDF report.</p>
+      <p class="text-slate-600 max-w-2xl mb-6">Chaque étape appelle réellement l’API Mistral. Vos notes et conditions sont injectées dans le contexte de chaque agent.</p>
     </div>
 
     <div id="setup-panel" class="bg-white border border-slate-200 rounded-3xl p-6 mb-6 space-y-5">
+      <div>
+        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">0. Mistral API Key <span class="text-orange-600 normal-case font-normal">(requis pour les appels LLM)</span></label>
+        <div class="flex gap-2">
+          <input id="mistral-key" type="password" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-sky-500 font-mono" placeholder="sk-... ou votre clé console.mistral.ai" autocomplete="off">
+          <button type="button" onclick="toggleKeyVisibility()" class="px-3 py-2 border border-slate-200 rounded-xl text-slate-500 hover:text-sky-600 text-sm" title="Afficher / masquer"><i class="fas fa-eye" id="key-eye"></i></button>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1.5">La clé est stockée uniquement en sessionStorage de ce navigateur. Ne la partagez jamais publiquement. <a href="https://console.mistral.ai/home?profile_dialog=api-keys" target="_blank" class="text-sky-600 underline">Obtenir une clé</a></p>
+      </div>
       <div>
         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Your Strategic Idea</label>
         <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 placeholder-slate-400 resize-y focus:outline-none focus:border-sky-500 font-body" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
@@ -193,7 +198,7 @@ tailwind.config = {
         <p class="text-[11px] text-slate-400 mt-2">Richer conditions = higher starting KI and more relevant agent outputs.</p>
       </div>
       <div class="flex flex-wrap gap-3 pt-2">
-        <button id="demo-start-btn" onclick="startGovernedCycle()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-play mr-1.5"></i>Start Governed Cycle</button>
+        <button id="demo-start-btn" onclick="startGovernedCycle()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-play mr-1.5"></i>Start Governed Cycle (Mistral)</button>
         <button onclick="resetDemo()" class="bg-transparent border border-slate-200 text-slate-600 hover:border-sky-500 hover:text-sky-600 font-semibold px-6 py-2.5 rounded-3xl transition-all text-sm">Reset</button>
       </div>
     </div>
@@ -224,12 +229,12 @@ tailwind.config = {
         <div class="bg-white border border-slate-200 rounded-3xl p-6 h-full flex flex-col">
           <div class="flex items-center justify-between mb-4"><h3 class="font-display font-semibold text-sm text-slate-900">Generated Output</h3><div id="step-tools" class="text-xs text-slate-400"></div></div>
           <div id="generated-panel" class="flex-1 flex flex-col min-h-[340px]">
-            <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Define your idea + conditions, then start the cycle.</p></div></div>
+            <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Entrez votre clé Mistral + idée, puis lancez le cycle.</p></div></div>
             <div id="content-state" class="hidden flex-1 flex flex-col">
-              <div id="generated-content" class="generated-content bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm text-slate-700 mb-4"></div>
+              <div id="generated-content" class="generated-content prose-llm bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm text-slate-700 mb-4"></div>
               <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 mb-4">
                 <div class="flex items-center gap-2 mb-2"><i class="fas fa-user-edit text-amber-600"></i><span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Your intervention (comments · corrections · additions)</span></div>
-                <textarea id="editable-output" rows="4" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm text-slate-800 font-body" placeholder="Add notes, correct facts, impose new constraints, request deeper analysis… These interventions improve the Kayros Index and are fed to subsequent agents."></textarea>
+                <textarea id="editable-output" rows="4" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm text-slate-800 font-body" placeholder="Add notes, correct facts, impose new constraints… These are fed to the next agents and improve the Kayros Index."></textarea>
                 <p class="text-[11px] text-amber-700/80 mt-1.5">Your notes are recorded in the audit trail and influence the next steps + final KI score.</p>
               </div>
               <div id="gate-actions" class="flex flex-wrap gap-2 pt-1">
@@ -251,19 +256,27 @@ tailwind.config = {
 
 <footer class="text-center py-12 px-6 border-t border-slate-200">
   <p class="text-slate-500 text-sm mb-2"><span class="font-display font-bold text-slate-900">KayrosLab</span> — The Governed Agent Platform</p>
-  <p class="text-slate-400 text-xs">contact@kayroslab.com · Built with the <a href="https://github.com/langchain-ai/langchain" target="_blank" class="text-sky-600 hover:text-sky-500">LangChain</a> agent architecture · Ontological maps powered by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 hover:text-sky-500">Microsoft Ontology Playground</a></p>
+  <p class="text-slate-400 text-xs">contact@kayroslab.com · Powered by <a href="https://mistral.ai" target="_blank" class="text-sky-600 hover:text-sky-500">Mistral AI</a> · Ontological maps by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 hover:text-sky-500">Microsoft Ontology Playground</a></p>
 </footer>
 
 <script>
 const cycleData = [
-  { title: 'Step 01 — Ecouter', agent: 'Signal Scanner', model: 'Claude 3.5 Sonnet', role: 'Qualifies weak signals', tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'], gateWho: 'Expert Métier' },
-  { title: 'Step 02 — Cartographier', agent: 'Trend Mapper', model: 'GPT-4o', role: 'Trend graphs & bisociation', tools: ['trend_network_builder()', 'bisociation_detector()'], gateWho: 'Strategic Lead' },
-  { title: 'Step 03 — Construire', agent: 'Scenario Generator', model: 'GPT-4o', role: 'Scenarios & briefs', tools: ['scenario_simulator()', 'pdf_livrable_generator()'], gateWho: 'Expert Métier' },
-  { title: 'Step 04 — Positionner', agent: 'Positionneur', model: 'Gemini 1.5 Pro', role: 'Competitive ontology + associations/divergences', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper() · Ontology Playground'], gateWho: 'Market Expert' },
-  { title: 'Step 05 — Eprouver', agent: "Red Team + Devil's Advocate", model: 'Claude 3.5 Sonnet', role: 'Adversarial challenge', tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'], gateWho: 'Risk Owner' },
-  { title: 'Step 06 — Arbitrer', agent: 'Synthesizer', model: 'Gemini 1.5 Pro', role: 'KI scoring & decision', tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'], gateWho: 'COMEX' },
-  { title: 'Step 07 — Projeter', agent: 'Projection Agent', model: 'DeepSeek R1', role: 'Roadmap & simulation', tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'], gateWho: 'Project Sponsor' },
-  { title: 'Step 08 — Realiser', agent: 'Execution Tracker', model: 'GPT-4o', role: 'Pilot & feedback', tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'], gateWho: 'COMEX' }
+  { title: 'Step 01 — Ecouter', agent: 'Signal Scanner', model: 'mistral-small-latest', role: 'Qualifies weak signals from market, tech, regulatory and competitive sources', tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'], gateWho: 'Expert Métier',
+    system: 'Tu es le Signal Scanner de KayrosLab. Tu qualifies les signaux faibles (marché, technologie, réglementation, concurrentiel) liés à une idée stratégique. Réponds en français, de façon structurée, concise et actionnable. Utilise des scores 1-10 quand pertinent. Formate en HTML simple (p, ul, li, strong).' },
+  { title: 'Step 02 — Cartographier', agent: 'Trend Mapper', model: 'mistral-small-latest', role: 'Builds trend graphs and bisociative bridges', tools: ['trend_network_builder()', 'bisociation_detector()'], gateWho: 'Strategic Lead',
+    system: 'Tu es le Trend Mapper de KayrosLab. Tu cartographies les tendances et identifies des ponts bisociatifs (analogies inter-domaines). Réponds en français, structure claire, HTML simple.' },
+  { title: 'Step 03 — Construire', agent: 'Scenario Generator', model: 'mistral-small-latest', role: 'Generates 2-3 concrete scenarios with feasibility', tools: ['scenario_simulator()', 'pdf_livrable_generator()'], gateWho: 'Expert Métier',
+    system: 'Tu es le Scenario Generator de KayrosLab. Tu proposes 2 ou 3 scénarios concrets (nom, description, faisabilité, horizon) pour l\'idée donnée, en respectant les contraintes. Réponds en français, HTML simple.' },
+  { title: 'Step 04 — Positionner', agent: 'Positionneur', model: 'mistral-small-latest', role: 'Competitive ontology + associations/divergences', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'], gateWho: 'Market Expert',
+    system: 'Tu es le Positionneur de KayrosLab. Tu analyses le positionnement concurrentiel sous forme ontologique : associations (capacités partagées) et divergences/gaps (opportunités). Réponds en français, structure claire, HTML simple. Mentionne les associations et les gaps de façon explicite.' },
+  { title: 'Step 05 — Eprouver', agent: "Red Team", model: 'mistral-small-latest', role: 'Adversarial challenge of the idea', tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'], gateWho: 'Risk Owner',
+    system: 'Tu es le Red Team / Devil\'s Advocate de KayrosLab. Tu challenges l\'idée de façon adversariale : risques, biais, points de rupture. Sois critique mais constructif. Réponds en français, HTML simple, 3 risques prioritaires maximum.' },
+  { title: 'Step 06 — Arbitrer', agent: 'Synthesizer', model: 'mistral-small-latest', role: 'KI scoring and go / no-go recommendation', tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'], gateWho: 'COMEX',
+    system: 'Tu es le Synthesizer de KayrosLab. Tu synthétises le dossier, proposes un score Kayros Index (1-10) et une recommandation (Go / Conditional Go / No-Go) avec justification. Réponds en français, HTML simple.' },
+  { title: 'Step 07 — Projeter', agent: 'Projection Agent', model: 'mistral-small-latest', role: 'Roadmap and P10/P50/P90 simulation', tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'], gateWho: 'Project Sponsor',
+    system: 'Tu es le Projection Agent de KayrosLab. Tu construis une roadmap réaliste (jalons) et des estimations P10 / P50 / P90 de valeur. Réponds en français, HTML simple.' },
+  { title: 'Step 08 — Realiser', agent: 'Execution Tracker', model: 'mistral-small-latest', role: 'Pilot package and feedback loop', tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'], gateWho: 'COMEX',
+    system: 'Tu es l\'Execution Tracker de KayrosLab. Tu définis le package de pilotage : critères de succès, gouvernance, boucle de feedback, triggers de sortie. Réponds en français, HTML simple.' }
 ];
 
 function showStep(idx) {
@@ -276,7 +289,7 @@ function showStep(idx) {
   document.getElementById('cycle-detail').classList.remove('hidden');
 }
 
-const demoState = { idea: '', conditions: {}, currentStep: -1, history: [], isRunning: false, ki: 3.5, kiHistory: [3.5] };
+const demoState = { idea: '', conditions: {}, currentStep: -1, history: [], isRunning: false, ki: 3.5, kiHistory: [3.5], apiKey: '' };
 const stepMeta = [
   { icon: 'fa-satellite-dish', short: 'Ecouter', agent: 'Signal Scanner' },
   { icon: 'fa-map-location-dot', short: 'Cartographier', agent: 'Trend Mapper' },
@@ -300,9 +313,15 @@ function toggleConditions() {
   box.classList.toggle('hidden');
   btn.textContent = open ? 'Show details ▾' : 'Hide details ▴';
 }
+function toggleKeyVisibility() {
+  const input = document.getElementById('mistral-key');
+  const eye = document.getElementById('key-eye');
+  if (input.type === 'password') { input.type = 'text'; eye.className = 'fas fa-eye-slash'; }
+  else { input.type = 'password'; eye.className = 'fas fa-eye'; }
+}
 function log(msg, type = 'info') {
   const logs = document.getElementById('agent-logs');
-  const colors = { info: 'text-slate-400', tool: 'text-sky-400', success: 'text-emerald-400', warn: 'text-amber-400', error: 'text-red-400', human: 'text-amber-300' };
+  const colors = { info: 'text-slate-400', tool: 'text-sky-400', success: 'text-emerald-400', warn: 'text-amber-400', error: 'text-red-400', human: 'text-amber-300', llm: 'text-violet-300' };
   const line = document.createElement('div');
   line.className = colors[type] || colors.info;
   const ts = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -352,40 +371,67 @@ function computeBaseKI(idea, cond) {
   if (cond.notes && cond.notes.length > 20) score += 0.5;
   return Math.min(5.8, score);
 }
-function generateStepContent(stepIdx, idea, cond, humanNotesSoFar) {
-  const ideaShort = idea.length > 70 ? idea.substring(0, 67) + '…' : idea;
-  const scopeNote = [cond.geo, cond.budget, cond.time, cond.must].filter(Boolean).join(' · ') || 'No hard constraints defined';
-  const hasHuman = humanNotesSoFar.length > 0;
-  const templates = [
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Signal Scanner — Qualified Weak Signals</p><p class="text-xs text-slate-500">Idea: “${ideaShort}”</p><p class="text-xs bg-sky-50 text-sky-700 px-2 py-1 rounded inline-block">Scope applied: ${scopeNote}</p><ul class="list-disc pl-4 space-y-1 text-sm"><li><strong>Market (8.4)</strong> — Rising demand for predictive maintenance in EU manufacturing.</li><li><strong>Tech (7.9)</strong> — Edge AI / tinyML now accurate enough for vibration anomaly detection.</li><li><strong>Regulatory (7.1)</strong> — EU AI Act may classify safety-critical systems as high-risk.</li><li><strong>Competitive (6.8)</strong> — Pure-plays still mostly US-centric; EU localization gap.</li></ul>${hasHuman ? '<p class="text-xs text-amber-700 mt-1"><i class="fas fa-user-edit mr-1"></i>Prior human notes integrated into ranking weights.</p>' : ''}</div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Trend Mapper — Relationship Graph</p><div class="flex flex-wrap gap-1.5 mb-1"><span class="px-2 py-0.5 bg-sky-100 text-sky-700 rounded-full text-xs">Industrial IoT</span><span class="px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full text-xs">Edge AI</span><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs">PdM</span><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs">EU Mfg 4.0</span></div><p class="text-sm"><strong>Bisociative bridges:</strong> Aerospace vibration → factory motors · Federated learning (health) → multi-site industrial · Digital twin (auto) → brownfield plants.</p><p class="text-xs text-slate-500">Axes suggested: federated edge models, brownfield retrofit, AI-Act audit trails.</p></div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Scenario Generator — Concept Briefs</p><div class="border border-slate-200 rounded-lg p-2.5 bg-white text-sm"><p class="font-medium">A — “Edge Guardian”</p><p class="text-xs text-slate-600">On-premise tinyML on existing gateways. Local inference + AI Act audit logs. Feasibility High · 4-6 mo.</p></div><div class="border border-slate-200 rounded-lg p-2.5 bg-white text-sm"><p class="font-medium">B — “Sovereign Twin”</p><p class="text-xs text-slate-600">Full twin in EU sovereign cloud. Higher data gravity, longer cycle. Feasibility Medium · 9-12 mo.</p></div><p class="text-xs text-slate-500">Preferred under your constraints: Scenario A.</p></div>`,
-    // STEP 04 — Positionner with Ontology Playground embed
-    `<div class="space-y-3">
-      <p class="font-semibold text-slate-800">Positionneur — Ontological Competitive Map</p>
-      <p class="text-xs text-slate-500">Interactive graph powered by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 underline">Microsoft Ontology Playground</a>. Explore associations (shared capabilities) and divergences (gaps) between your idea and the competitive landscape.</p>
-      <div class="grid grid-cols-2 gap-2 text-xs mb-2">
-        <div class="p-2 bg-emerald-50 border border-emerald-100 rounded"><span class="font-semibold text-emerald-700">Associations</span><br>Shared edge AI, vibration analytics, industrial IoT</div>
-        <div class="p-2 bg-amber-50 border border-amber-100 rounded"><span class="font-semibold text-amber-700">Divergences / Gaps</span><br>EU localization, AI Act audit trails, brownfield retrofit simplicity</div>
-      </div>
-      <div class="ontology-embed"
-           data-catalogue-id="official/ecommerce"
-           data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/"
-           data-theme="light"
-           data-height="320px">
-      </div>
-      <p class="text-[11px] text-slate-400 mt-1">Pan / zoom the graph · Click nodes to inspect properties · This ontology illustrates entity relationships that the Positionneur uses to surface strategic gaps.</p>
-    </div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800 text-red-700">Red Team — Challenge Findings</p><div class="p-2.5 bg-red-50 border border-red-100 rounded-lg text-xs"><p class="font-bold text-red-700">RISK 1 — Adoption friction (High)</p><p>Brownfield plants lack standardized data layers. Must include hardware + change-management.</p></div><div class="p-2.5 bg-red-50 border border-red-100 rounded-lg text-xs"><p class="font-bold text-red-700">RISK 2 — AI Act classification (Med-High)</p><p>Safety-critical decisions may trigger high-risk obligations → early legal mapping required.</p></div><div class="p-2.5 bg-amber-50 border border-amber-100 rounded-lg text-xs"><p class="font-bold text-amber-700">RISK 3 — Model drift (Medium)</p><p>Industrial signatures change with wear/temperature. Continuous monitoring + human override mandatory.</p></div></div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Synthesizer — Decision Dossier</p><div class="flex items-baseline gap-2 mb-2"><span class="font-display text-3xl font-bold text-sky-600">${demoState.ki.toFixed(1)}</span><span class="text-xs text-slate-500">/ 10 Kayros Index (live)</span></div><div class="grid grid-cols-2 gap-1.5 text-xs mb-2"><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Strategic Fit</span><span class="font-semibold text-sky-600">${(demoState.ki * 1.05).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Feasibility</span><span class="font-semibold text-sky-600">${(demoState.ki * 0.98).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Risk</span><span class="font-semibold text-amber-600">${(demoState.ki * 0.85).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Impact</span><span class="font-semibold text-sky-600">${(demoState.ki * 1.02).toFixed(1)}</span></div></div><p class="text-sm"><strong>Recommendation:</strong> Conditional Go — Scenario A (Edge Guardian) with explicit AI Act + change-management mitigation.</p></div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Projection Agent — Roadmap & P10/P50/P90</p><div class="text-xs space-y-1 mb-2"><div class="flex gap-2"><span class="font-medium w-16">M0-M2</span><span>Hardware + edge prototype + first data contract</span></div><div class="flex gap-2"><span class="font-medium w-16">M3-M5</span><span>Pilot 2-3 lines · training · AI Act gap analysis</span></div><div class="flex gap-2"><span class="font-medium w-16">M6-M9</span><span>Full site + reference case</span></div></div><div class="flex gap-2 text-xs"><div class="flex-1 p-2 bg-red-50 rounded text-center"><div class="text-red-600 font-bold">P10</div>−0.4 M€</div><div class="flex-1 p-2 bg-sky-50 rounded text-center"><div class="text-sky-600 font-bold">P50</div>+1.8 M€</div><div class="flex-1 p-2 bg-emerald-50 rounded text-center"><div class="text-emerald-600 font-bold">P90</div>+4.2 M€</div></div></div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Execution Tracker — Pilot Package</p><ul class="list-disc pl-4 space-y-1 text-sm"><li><strong>Success criteria</strong> — ≥12 % downtime reduction in 6 months; FP rate < 8 %; full audit trail.</li><li><strong>Governance</strong> — Weekly plant stand-up · monthly Legal (AI Act) · quarterly COMEX.</li><li><strong>Feedback loop</strong> — Every rejected alert / confirmed failure feeds next training cycle.</li><li><strong>Exit triggers</strong> — <5 % reduction after 4 months or prohibitive regulation → re-arbitrage.</li></ul></div>`
-  ];
-  return templates[stepIdx] || '<p>No content.</p>';
-}
 function setStatus(html) { document.getElementById('agent-status').innerHTML = html; }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function stripHtml(html) { const tmp = document.createElement('div'); tmp.innerHTML = html; return (tmp.textContent || tmp.innerText || '').trim(); }
+
+async function callMistral(systemPrompt, userPrompt) {
+  const key = demoState.apiKey || document.getElementById('mistral-key').value.trim();
+  if (!key) throw new Error('Clé API Mistral manquante');
+  const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + key
+    },
+    body: JSON.stringify({
+      model: 'mistral-small-latest',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.4,
+      max_tokens: 1200
+    })
+  });
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Mistral API ${res.status}: ${errText.substring(0, 200)}`);
+  }
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || 'Aucune réponse générée.';
+}
+
+function buildUserPrompt(stepIdx, idea, cond, humanNotes) {
+  let p = `Idée stratégique :\n"${idea}"\n\n`;
+  const scopeParts = [];
+  if (cond.geo) scopeParts.push('Géographie : ' + cond.geo);
+  if (cond.budget) scopeParts.push('Budget : ' + cond.budget);
+  if (cond.time) scopeParts.push('Horizon : ' + cond.time);
+  if (cond.must) scopeParts.push('Must-have : ' + cond.must);
+  if (cond.notes) scopeParts.push('Notes : ' + cond.notes);
+  if (scopeParts.length) p += 'Contraintes / scope :\n' + scopeParts.join('\n') + '\n\n';
+  if (humanNotes && humanNotes.length) {
+    p += 'Notes humaines des étapes précédentes (à intégrer) :\n' + humanNotes.map((n, i) => `- ${n}`).join('\n') + '\n\n';
+  }
+  p += 'Produis maintenant ton livrable pour cette étape. Sois concret et actionnable.';
+  return p;
+}
+
+function markdownishToHtml(text) {
+  // Very light conversion so LLM output looks decent
+  let html = text
+    .replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^### (.+)$/gm, '<h4>$1</h4>')
+    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^# (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+  return '<div class="space-y-1"><p>' + html + '</p></div>';
+}
 
 async function runStep(stepIdx) {
   if (demoState.isRunning) return;
@@ -402,29 +448,31 @@ async function runStep(stepIdx) {
   document.getElementById('step-tools').textContent = data.tools.join(' · ');
   updateProgress();
   clearLogs();
-  setStatus(`<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">${meta.agent} working…</div><div class="text-xs text-sky-600">Model: ${data.model}</div></div></div>`);
+  setStatus(`<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">${meta.agent} · appel Mistral…</div><div class="text-xs text-sky-600">Model: ${data.model}</div></div></div>`);
   log(`Starting ${meta.agent} (${data.model})`, 'info');
-  await sleep(350 + Math.random() * 250);
-  for (const tool of data.tools) {
-    log(`→ ${tool}`, 'tool');
-    await sleep(280 + Math.random() * 320);
-    log(`← structured payload received`, 'success');
-  }
-  if (demoState.history.some(h => h.humanNote)) {
-    log(`Injecting ${demoState.history.filter(h => h.humanNote).length} prior human note(s) into context`, 'human');
-    await sleep(300);
-  }
-  log(`Synthesizing output…`, 'info');
-  await sleep(450 + Math.random() * 350);
+  log(`→ Calling Mistral API…`, 'llm');
+
   const humanNotesSoFar = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
-  const contentHtml = generateStepContent(stepIdx, demoState.idea, demoState.conditions, humanNotesSoFar);
+  let contentHtml = '';
+  try {
+    const raw = await callMistral(data.system, buildUserPrompt(stepIdx, demoState.idea, demoState.conditions, humanNotesSoFar));
+    log(`← Mistral response received (${raw.length} chars)`, 'success');
+    contentHtml = markdownishToHtml(raw);
+    // Special enrichment for Positionner
+    if (stepIdx === 3) {
+      contentHtml += `<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Interactive Ontological Map (Microsoft Ontology Playground)</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="280px"></div></div>`;
+    }
+  } catch (err) {
+    log(`API error: ${err.message}`, 'error');
+    contentHtml = `<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>Erreur Mistral</strong><br>${err.message}<br><br>Vérifiez votre clé API et le solde de votre compte console.mistral.ai.</div>`;
+  }
+
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
-  // Init Ontology Playground embed if present (Step 04)
   if (stepIdx === 3 && window.OntologyEmbed) {
-    setTimeout(() => { try { window.OntologyEmbed.init(); } catch(e) { console.warn(e); } }, 100);
+    setTimeout(() => { try { window.OntologyEmbed.init(); } catch(e) {} }, 150);
   }
-  updateKI(demoState.ki + 0.25 + (stepIdx === 5 ? 0.4 : 0), `Step ${stepIdx + 1} completed`);
+  updateKI(demoState.ki + 0.25 + (stepIdx === 5 ? 0.35 : 0), `Step ${stepIdx + 1} completed`);
   setStatus(`<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">${meta.agent} completed</div><div class="text-xs text-emerald-600">Human gate — ${data.gateWho}</div></div></div>`);
   log(`Output ready. Awaiting human decision (${data.gateWho}).`, 'warn');
   document.getElementById('content-state').classList.remove('hidden');
@@ -433,7 +481,11 @@ async function runStep(stepIdx) {
 
 function startGovernedCycle() {
   const idea = document.getElementById('demo-idea').value.trim();
-  if (!idea) { alert('Please enter a strategic idea.'); return; }
+  const key = document.getElementById('mistral-key').value.trim();
+  if (!key) { alert('Veuillez entrer votre clé API Mistral.'); return; }
+  if (!idea) { alert('Veuillez entrer une idée stratégique.'); return; }
+  demoState.apiKey = key;
+  try { sessionStorage.setItem('kayros_mistral_key', key); } catch(e) {}
   demoState.idea = idea;
   demoState.conditions = collectConditions();
   demoState.currentStep = -1;
@@ -452,7 +504,7 @@ function approveAndContinue() {
   if (demoState.currentStep < 0 || demoState.isRunning) return;
   const humanNote = document.getElementById('editable-output').value.trim();
   const meta = stepMeta[demoState.currentStep];
-  const summary = stripHtml(document.getElementById('generated-content').innerHTML).substring(0, 100);
+  const summary = stripHtml(document.getElementById('generated-content').innerHTML).substring(0, 110);
   let boost = 0.15;
   if (humanNote.length > 15) boost += 0.25;
   if (humanNote.length > 60) boost += 0.35;
@@ -482,7 +534,7 @@ function rejectAndRestart() {
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('demo-start-btn').disabled = false;
-  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle (Mistral)';
   clearLogs();
   setStatus('');
 }
@@ -506,9 +558,9 @@ function finishCycle() {
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.remove('hidden');
   const notesCount = demoState.history.filter(h => h.humanNote).length;
-  document.getElementById('final-state').innerHTML = `<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl text-slate-900 mb-1">Governed Cycle Complete</h3><p class="text-slate-600 text-sm mb-5">Full audit trail ready · Final Kayros Index: <strong class="text-sky-600">${demoState.ki.toFixed(1)}</strong></p><div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-sm mb-5 max-w-lg mx-auto"><div class="grid grid-cols-2 gap-3 text-xs"><div><span class="text-slate-500">Human interventions</span><br><strong>${notesCount}</strong></div><div><span class="text-slate-500">KI evolution</span><br><strong>${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</strong></div><div class="col-span-2"><span class="text-slate-500">Recommendation</span><br><strong>Conditional Go — Edge Guardian scenario with AI Act mitigation</strong></div></div></div><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-file-pdf mr-1.5"></i>Export KayrosLab Report (PDF)</button><button onclick="resetDemo()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-rotate-left mr-1.5"></i>New Idea</button></div></div>`;
+  document.getElementById('final-state').innerHTML = `<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl text-slate-900 mb-1">Governed Cycle Complete</h3><p class="text-slate-600 text-sm mb-5">Full audit trail ready · Final Kayros Index: <strong class="text-sky-600">${demoState.ki.toFixed(1)}</strong></p><div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-sm mb-5 max-w-lg mx-auto"><div class="grid grid-cols-2 gap-3 text-xs"><div><span class="text-slate-500">Human interventions</span><br><strong>${notesCount}</strong></div><div><span class="text-slate-500">KI evolution</span><br><strong>${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</strong></div><div class="col-span-2"><span class="text-slate-500">Powered by</span><br><strong>Mistral AI (real LLM calls)</strong></div></div></div><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-file-pdf mr-1.5"></i>Export KayrosLab Report (PDF)</button><button onclick="resetDemo()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-rotate-left mr-1.5"></i>New Idea</button></div></div>`;
   document.getElementById('demo-start-btn').disabled = false;
-  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle (Mistral)';
   log('Cycle finished. Ready for PDF export.', 'success');
 }
 
@@ -519,7 +571,7 @@ function resetDemo() {
   document.getElementById('demo-progress').classList.add('hidden');
   document.getElementById('demo-workspace').classList.add('hidden');
   document.getElementById('demo-start-btn').disabled = false;
-  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle (Mistral)';
   clearLogs(); setStatus('');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('content-state').classList.add('hidden');
@@ -530,13 +582,37 @@ function exportKayrosPDF() {
   const cond = demoState.conditions;
   const notesCount = demoState.history.filter(h => h.humanNote).length;
   const dateStr = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-  const historyRows = demoState.history.map(h => `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-weight:600;width:40px;">${h.stepIdx + 1}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;">${h.agent}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">${h.summary || '—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309;">${h.humanNote ? h.humanNote.substring(0, 140) + (h.humanNote.length > 140 ? '…' : '') : '—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;font-weight:600;color:#0284c8;">${h.kiAtApproval ? h.kiAtApproval.toFixed(1) : '—'}</td></tr>`).join('');
-  const html = `<div style="font-family:Inter,system-ui,sans-serif;color:#0f172a;padding:0;margin:0;"><div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:white;padding:48px 40px;border-radius:0 0 24px 24px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;"><div style="width:40px;height:40px;background:#0ea5e9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;">K</div><span style="font-size:20px;font-weight:700;letter-spacing:-0.02em;">KayrosLab</span></div><h1 style="font-size:28px;font-weight:700;margin:0 0 12px;letter-spacing:-0.03em;">Governed Cycle Report</h1><p style="opacity:0.7;font-size:14px;margin:0;">${dateStr} · Final Kayros Index ${demoState.ki.toFixed(1)} / 10</p></div><div style="padding:32px 40px;"><h2 style="font-size:16px;font-weight:700;color:#0284c8;margin:0 0 12px;text-transform:uppercase;letter-spacing:0.05em;">Strategic Idea</h2><p style="font-size:14px;line-height:1.5;background:#f8fafc;padding:16px;border-radius:12px;border:1px solid #e2e8f0;margin:0 0 24px;">${demoState.idea}</p><h2 style="font-size:16px;font-weight:700;color:#0284c8;margin:0 0 12px;text-transform:uppercase;letter-spacing:0.05em;">Scope & Conditions</h2><table style="width:100%;font-size:13px;margin-bottom:24px;border-collapse:collapse;"><tr><td style="padding:6px 0;color:#64748b;width:140px;">Geography</td><td style="padding:6px 0;font-weight:500;">${cond.geo || '—'}</td></tr><tr><td style="padding:6px 0;color:#64748b;">Budget</td><td style="padding:6px 0;font-weight:500;">${cond.budget || '—'}</td></tr><tr><td style="padding:6px 0;color:#64748b;">Time horizon</td><td style="padding:6px 0;font-weight:500;">${cond.time || '—'}</td></tr><tr><td style="padding:6px 0;color:#64748b;">Must-have</td><td style="padding:6px 0;font-weight:500;">${cond.must || '—'}</td></tr><tr><td style="padding:6px 0;color:#64748b;vertical-align:top;">Notes</td><td style="padding:6px 0;font-weight:500;">${cond.notes || '—'}</td></tr></table><div style="display:flex;gap:16px;margin-bottom:28px;"><div style="flex:1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;padding:20px;text-align:center;"><div style="font-size:36px;font-weight:800;color:#0284c8;line-height:1;">${demoState.ki.toFixed(1)}</div><div style="font-size:11px;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Final Kayros Index</div></div><div style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:20px;"><div style="font-size:13px;color:#64748b;margin-bottom:6px;">Evolution</div><div style="font-size:18px;font-weight:700;">${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</div><div style="font-size:12px;color:#64748b;margin-top:4px;">${notesCount} human intervention(s)</div></div></div><h2 style="font-size:16px;font-weight:700;color:#0284c8;margin:0 0 12px;text-transform:uppercase;letter-spacing:0.05em;">Full Audit Trail</h2><table style="width:100%;font-size:12px;border-collapse:collapse;margin-bottom:28px;"><thead><tr style="background:#f1f5f9;text-align:left;"><th style="padding:8px;font-weight:600;">#</th><th style="padding:8px;font-weight:600;">Agent</th><th style="padding:8px;font-weight:600;">Summary</th><th style="padding:8px;font-weight:600;">Human note</th><th style="padding:8px;font-weight:600;text-align:center;">KI</th></tr></thead><tbody>${historyRows}</tbody></table><div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:16px;padding:20px;margin-bottom:24px;"><div style="font-size:12px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Recommendation</div><p style="font-size:14px;margin:0;line-height:1.5;">Conditional Go — proceed with Scenario A (“Edge Guardian”) under explicit AI Act classification and change-management mitigation plan. Pilot success criteria and exit triggers defined.</p></div><p style="font-size:10px;color:#94a3b8;text-align:center;margin-top:32px;">Generated by KayrosLab · Governed Agent Platform · ${dateStr}<br>This report is for decision-support purposes and does not constitute formal advice.</p></div></div>`;
+  const historyRows = demoState.history.map(h => `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-weight:600;width:40px;">${h.stepIdx + 1}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;">${h.agent}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">${(h.summary || '—').substring(0, 90)}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309;">${h.humanNote ? h.humanNote.substring(0, 100) + (h.humanNote.length > 100 ? '…' : '') : '—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;font-weight:600;color:#0284c8;">${h.kiAtApproval ? h.kiAtApproval.toFixed(1) : '—'}</td></tr>`).join('');
+  const html = `<div style="font-family:Inter,system-ui,sans-serif;color:#0f172a;padding:0;margin:0;width:210mm;"><div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:white;padding:40px 36px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><div style="width:36px;height:36px;background:#0ea5e9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;">K</div><span style="font-size:18px;font-weight:700;">KayrosLab</span></div><h1 style="font-size:24px;font-weight:700;margin:0 0 8px;">Governed Cycle Report</h1><p style="opacity:0.7;font-size:13px;margin:0;">${dateStr} · Final Kayros Index ${demoState.ki.toFixed(1)} / 10 · Powered by Mistral AI</p></div><div style="padding:28px 36px;"><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Strategic Idea</h2><p style="font-size:13px;line-height:1.5;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;margin:0 0 20px;">${demoState.idea}</p><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Scope & Conditions</h2><table style="width:100%;font-size:12px;margin-bottom:20px;border-collapse:collapse;"><tr><td style="padding:5px 0;color:#64748b;width:130px;">Geography</td><td style="padding:5px 0;font-weight:500;">${cond.geo || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Budget</td><td style="padding:5px 0;font-weight:500;">${cond.budget || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Time horizon</td><td style="padding:5px 0;font-weight:500;">${cond.time || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Must-have</td><td style="padding:5px 0;font-weight:500;">${cond.must || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;vertical-align:top;">Notes</td><td style="padding:5px 0;font-weight:500;">${cond.notes || '—'}</td></tr></table><div style="display:flex;gap:14px;margin-bottom:22px;"><div style="flex:1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:14px;padding:16px;text-align:center;"><div style="font-size:32px;font-weight:800;color:#0284c8;line-height:1;">${demoState.ki.toFixed(1)}</div><div style="font-size:10px;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Final Kayros Index</div></div><div style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;"><div style="font-size:12px;color:#64748b;margin-bottom:4px;">Evolution</div><div style="font-size:16px;font-weight:700;">${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</div><div style="font-size:11px;color:#64748b;margin-top:4px;">${notesCount} human intervention(s)</div></div></div><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Full Audit Trail</h2><table style="width:100%;font-size:11px;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#f1f5f9;text-align:left;"><th style="padding:7px;font-weight:600;">#</th><th style="padding:7px;font-weight:600;">Agent</th><th style="padding:7px;font-weight:600;">Summary</th><th style="padding:7px;font-weight:600;">Human note</th><th style="padding:7px;font-weight:600;text-align:center;">KI</th></tr></thead><tbody>${historyRows}</tbody></table><div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:16px;margin-bottom:16px;"><div style="font-size:11px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Recommendation</div><p style="font-size:13px;margin:0;line-height:1.45;">Dossier généré par les agents KayrosLab sous supervision humaine, avec appels réels à Mistral AI.</p></div><p style="font-size:9px;color:#94a3b8;text-align:center;margin-top:24px;">Generated by KayrosLab · Governed Agent Platform · ${dateStr}<br>This report is for decision-support purposes and does not constitute formal advice.</p></div></div>`;
+
   const container = document.getElementById('report-template');
   container.innerHTML = html;
-  const opt = { margin: 0, filename: `KayrosLab_Report_${new Date().toISOString().slice(0,10)}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, logging: false }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
-  html2pdf().set(opt).from(container).save().then(() => { log('PDF report exported successfully.', 'success'); }).catch(err => { console.error(err); alert('PDF generation failed. Please try again or use the browser print function.'); });
+  container.classList.add('capturing');
+
+  const opt = {
+    margin: 0,
+    filename: `KayrosLab_Report_${new Date().toISOString().slice(0,10)}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 794 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(container).save().then(() => {
+    container.classList.remove('capturing');
+    container.innerHTML = '';
+    log('PDF report exported successfully.', 'success');
+  }).catch(err => {
+    container.classList.remove('capturing');
+    console.error(err);
+    alert('PDF generation failed: ' + err.message);
+  });
 }
+
+// Restore key from session if present
+try {
+  const saved = sessionStorage.getItem('kayros_mistral_key');
+  if (saved) document.getElementById('mistral-key').value = saved;
+} catch(e) {}
 
 const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(el => observer.observe(el));
