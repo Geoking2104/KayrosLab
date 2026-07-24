@@ -25,6 +25,8 @@ export default async function buildContext() {
     ANTHROPIC_API_KEY = '',
     ANTHROPIC_MODEL = 'claude-3-5-sonnet-latest',
     ANTHROPIC_MAXTOK = '1024',
+    MISTRAL_API_KEY = '',
+    MISTRAL_MODEL = 'mistral-small-latest',
     OLLAMA_ENDPOINT = 'http://localhost:11434',
     OLLAMA_MODEL = 'llama3.2',
     EMBED_MODEL = 'nomic-embed-text',
@@ -56,10 +58,54 @@ export default async function buildContext() {
         return { text, provider: 'anthropic', latencyMs: Date.now() - t0, usage: { tokensIn: data.usage?.input_tokens ?? 0, tokensOut: data.usage?.output_tokens ?? 0, costUsd: 0 } };
       },
     }),
+    mistral: {
+      id: 'mistral',
+      async complete(req) {
+        if (!MISTRAL_API_KEY) { const e = new Error('MISTRAL_API_KEY non configuree'); e.code = 'NO_KEY'; throw e; }
+        const messages = (req.messages || []).map((m) => ({
+          role: m.role === 'assistant' ? 'assistant' : m.role === 'system' ? 'system' : 'user',
+          content: String(m.content ?? ''),
+        }));
+        const t0 = Date.now();
+        const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + MISTRAL_API_KEY,
+          },
+          body: JSON.stringify({
+            model: req.model || MISTRAL_MODEL,
+            messages,
+            temperature: typeof req.temperature === 'number' ? req.temperature : 0.4,
+            max_tokens: 1200,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          const e = new Error('mistral http ' + res.status);
+          e.detail = data;
+          throw e;
+        }
+        const text = data.choices?.[0]?.message?.content ?? '';
+        return {
+          text,
+          provider: 'mistral',
+          latencyMs: Date.now() - t0,
+          usage: {
+            tokensIn: data.usage?.prompt_tokens ?? 0,
+            tokensOut: data.usage?.completion_tokens ?? 0,
+            costUsd: 0,
+          },
+        };
+      },
+    },
     ollama: new OllamaProvider({ endpoint: OLLAMA_ENDPOINT, defaultModel: OLLAMA_MODEL }),
   };
 
-  const policy = new RoutingPolicy({ defaultProvider: ANTHROPIC_API_KEY ? 'anthropic' : 'mock', fallback: 'mock' });
+  const defaultProvider = MISTRAL_API_KEY
+    ? 'mistral'
+    : (ANTHROPIC_API_KEY ? 'anthropic' : 'mock');
+  const policy = new RoutingPolicy({ defaultProvider, fallback: 'mock' });
   const llm = new KayrosLLM(providers, policy);
   const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
   const tools = demoTools();
@@ -146,6 +192,7 @@ export default async function buildContext() {
     governance, gateStore, campagnes, activites, journal, stageTimer,
     linkService, slackAdapter, connectorService,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN,
-    ANTHROPIC_API_KEY, ANTHROPIC_MODEL, EMBED_MODEL, PORT, ALLOWED_ORIGIN,
+    ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
+    EMBED_MODEL, PORT, ALLOWED_ORIGIN,
   };
 }
