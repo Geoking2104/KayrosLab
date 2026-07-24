@@ -12,12 +12,9 @@
 <script>tailwind.config={theme:{extend:{fontFamily:{body:['Inter','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
 .animate-on-scroll{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
-.stagger-children>*{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}.stagger-children.visible>*{opacity:1;transform:translateY(0)}
 .hero-bg{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
 .kayros-gradient{background:linear-gradient(90deg,#0ea5e9,#0284c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .section-header{font-size:2.25rem;font-weight:700;letter-spacing:-.025em}
-.cycle-step:hover{transform:translateY(-4px)}
-.step-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:#e0f2fe;color:#0284c8;font-weight:700;font-size:.75rem}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid #e0f2fe;border-top-color:#0ea5e9;border-radius:50%;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 .step-progress{transition:all .3s ease}.step-progress.done{background:#0ea5e9;color:#fff;border-color:#0ea5e9}.step-progress.active{background:#e0f2fe;color:#0284c8;border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.2)}.step-progress.pending{background:#fff;color:#94a3b8;border-color:#e2e8f0}
 .agent-log{font-family:'Fira Code',monospace;font-size:11px;line-height:1.5}
@@ -47,7 +44,7 @@
   <div class="max-w-3xl mx-auto">
     <div class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6 border border-sky-500/20">Governed Agents · Demo publique</div>
     <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Strategic Innovation,<br><span class="text-sky-400">Governed by Agents</span></h1>
-    <p class="text-slate-300 mb-8">Cycle 8 étapes sous supervision humaine. Les appels LLM passent par une passerelle sécurisée — aucune clé côté navigateur.</p>
+    <p class="text-slate-300 mb-8">Cycle 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code> — clé invisible côté navigateur.</p>
     <button onclick="scrollToSection('demo')" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-3 rounded-3xl"><i class="fas fa-play mr-2"></i>Lancer la démo</button>
   </div>
 </section>
@@ -57,13 +54,13 @@
     <div class="mb-6">
       <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-3">Live Demo</div>
       <h2 class="section-header font-display mb-2">Watch <span class="kayros-gradient">Agents</span> Work</h2>
-      <p class="text-slate-600 max-w-2xl">Entrez une idée → chaque agent appelle Mistral via le proxy Rust (clé invisible) → vous annotez → KI évolue → export PDF.</p>
+      <p class="text-slate-600 max-w-2xl">Idée → agents Mistral (proxy serveur) → annotations humaines → KI → PDF.</p>
     </div>
 
     <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-6 space-y-5">
       <div class="flex flex-wrap items-center gap-2 p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-sm text-emerald-800">
         <i class="fas fa-lock text-emerald-600"></i>
-        <span><strong>Connexion LLM invisible</strong> — proxy Rust Cloudflare → Mistral. Aucun provider à configurer.</span>
+        <span><strong>LLM invisible</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> sur api.kayroslab.com. Aucune clé dans le navigateur.</span>
       </div>
 
       <div>
@@ -121,7 +118,7 @@
       <div class="lg:col-span-3">
         <div class="bg-white border border-slate-200 rounded-3xl p-6 min-h-[360px] flex flex-col">
           <div class="flex justify-between mb-4"><h3 class="font-display font-semibold text-sm">Sortie générée</h3><span id="step-tools" class="text-xs text-slate-400"></span></div>
-          <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Idée → Start → réponse Mistral dans la console.</p></div></div>
+          <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Idée → Start → réponse dans la console.</p></div></div>
           <div id="content-state" class="hidden flex-1 flex flex-col">
             <div id="generated-content" class="generated-content prose-llm bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm mb-4"></div>
             <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 mb-4">
@@ -145,16 +142,12 @@
 <div id="report-template"></div>
 
 <footer class="text-center py-10 border-t border-slate-200 text-slate-400 text-xs">
-  KayrosLab · LLM via Rust Cloudflare Worker (clé serveur) · contact@kayroslab.com
+  KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com
 </footer>
 
 <script>
-/* ─────────────────────────────────────────────────────────────
-   PROXY_URL = URL du Worker Rust après `wrangler deploy`
-   Voir workers/rust-mistral-proxy/README.md
-   La clé Mistral est UNIQUEMENT dans le secret Worker — jamais ici.
-   ───────────────────────────────────────────────────────────── */
-const PROXY_URL = 'https://kayros-mistral-proxy.workers.dev'; // ← remplacer par votre URL Worker
+/* Backend public demo — clé Mistral uniquement sur le serveur Fastify */
+const PROXY_URL = 'https://api.kayroslab.com/v1/demo/chat';
 
 const cycleData = [
   { agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()'], gateWho:'Expert Métier',
@@ -199,17 +192,16 @@ function log(msg,type='info'){
   const colors={info:'text-slate-400',success:'text-emerald-400',warn:'text-amber-400',error:'text-red-400',human:'text-amber-300',llm:'text-violet-300'};
   const line=document.createElement('div'); line.className=colors[type]||colors.info;
   const ts=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  line.innerHTML=`<span class="text-slate-600">[${ts}]</span> ${msg}`;
+  line.textContent='['+ts+'] '+msg.replace(/<[^>]+>/g,'');
   logs.appendChild(line); logs.scrollTop=logs.scrollHeight;
-  // mirror important events to browser console for debugging (no secrets)
-  console.log(`[KayrosLab ${ts}]`, msg.replace(/<[^>]+>/g,''));
+  console.log('[KayrosLab '+ts+']', msg.replace(/<[^>]+>/g,''));
 }
 function clearLogs(){ document.getElementById('agent-logs').innerHTML=''; }
 function updateProgress(){
   const c=document.querySelector('#demo-progress > div > div');
   c.innerHTML=stepMeta.map((s,i)=>{
     const cls=i<demoState.currentStep?'done':i===demoState.currentStep?'active':'pending';
-    return `<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap ${cls}"><i class="fas ${s.icon} text-[10px]"></i><span>${i+1}. ${s.short}</span></div>`;
+    return '<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap '+cls+'"><i class="fas '+s.icon+' text-[10px]"></i><span>'+(i+1)+'. '+s.short+'</span></div>';
   }).join('<div class="w-3 h-px bg-slate-200 flex-shrink-0"></div>');
 }
 function updateKI(v,reason){
@@ -217,22 +209,25 @@ function updateKI(v,reason){
   document.querySelector('.ki-ring')?.style.setProperty('--ki',demoState.ki*10);
   document.getElementById('ki-value').textContent=demoState.ki.toFixed(1);
   const d=demoState.ki-prev, el=document.getElementById('ki-delta');
-  if(d>0.05) el.innerHTML=`<span class="text-emerald-600">+${d.toFixed(1)}</span> · ${reason}`;
+  if(d>0.05) el.innerHTML='<span class="text-emerald-600">+'+d.toFixed(1)+'</span> · '+reason;
   else el.textContent=reason||'Stable';
 }
 function updateHistory(){
   const el=document.getElementById('cycle-history');
   if(!demoState.history.length){ el.innerHTML='<p class="text-slate-400 text-xs">Aucune étape.</p>'; return; }
-  el.innerHTML=demoState.history.map(h=>`<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">${h.stepIdx+1}</div><div class="min-w-0 flex-1"><div class="font-semibold text-xs">${h.agent}</div><div class="text-[11px] text-slate-500 line-clamp-2">${h.summary}</div>${h.humanNote?`<div class="mt-1 human-note text-[11px] text-amber-800 px-2 py-1 rounded">${h.humanNote.substring(0,100)}</div>`:''}</div></div></div>`).join('');
+  el.innerHTML=demoState.history.map(h=>{
+    const note=h.humanNote?'<div class="mt-1 human-note text-[11px] text-amber-800 px-2 py-1 rounded">'+escapeHtml(h.humanNote.substring(0,100))+'</div>':'';
+    return '<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">'+(h.stepIdx+1)+'</div><div class="min-w-0 flex-1"><div class="font-semibold text-xs">'+escapeHtml(h.agent)+'</div><div class="text-[11px] text-slate-500 line-clamp-2">'+escapeHtml(h.summary||'')+'</div>'+note+'</div></div></div>';
+  }).join('');
 }
 function collectConditions(){ return { geo:document.getElementById('cond-geo').value.trim(), budget:document.getElementById('cond-budget').value.trim(), time:document.getElementById('cond-time').value.trim(), must:document.getElementById('cond-must').value.trim(), notes:document.getElementById('cond-notes').value.trim() }; }
 function computeBaseKI(idea,c){ let s=3.2; if(idea.length>40)s+=.4; if(idea.length>100)s+=.3; if(c.geo)s+=.35; if(c.budget)s+=.3; if(c.time)s+=.25; if(c.must)s+=.4; if(c.notes&&c.notes.length>20)s+=.5; return Math.min(5.8,s); }
 function setStatus(html){ document.getElementById('agent-status').innerHTML=html; }
 function stripHtml(html){ const t=document.createElement('div'); t.innerHTML=html; return (t.textContent||'').trim(); }
+function escapeHtml(s){ return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"'); }
 
-/** Unique path: browser → Rust Worker → Mistral (key stays on Worker) */
 async function callMistralViaProxy(systemPrompt, userPrompt) {
-  console.log('[KayrosLab] → proxy request', { systemLen: systemPrompt.length, userLen: userPrompt.length });
+  console.log('[KayrosLab] →', PROXY_URL, { systemLen: systemPrompt.length, userLen: userPrompt.length });
   const res = await fetch(PROXY_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -240,15 +235,16 @@ async function callMistralViaProxy(systemPrompt, userPrompt) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    console.error('[KayrosLab] proxy error', res.status, data);
-    throw new Error(data.error || `Proxy HTTP ${res.status}`);
+    console.error('[KayrosLab] error', res.status, data);
+    throw new Error(data.error || ('HTTP ' + res.status));
   }
-  console.log('[KayrosLab] ← proxy response', { chars: (data.content||'').length, model: data.model });
-  return data.content || 'Aucune réponse.';
+  const text = data.content || data.text || '';
+  console.log('[KayrosLab] ←', { chars: text.length, provider: data.provider });
+  return text || 'Aucune réponse.';
 }
 
 function buildUserPrompt(idea, cond, notes) {
-  let p = `Idée stratégique :\n"${idea}"\n\n`;
+  let p = 'Idée stratégique :\n"' + idea + '"\n\n';
   const parts=[];
   if(cond.geo) parts.push('Géographie : '+cond.geo);
   if(cond.budget) parts.push('Budget : '+cond.budget);
@@ -256,18 +252,19 @@ function buildUserPrompt(idea, cond, notes) {
   if(cond.must) parts.push('Must-have : '+cond.must);
   if(cond.notes) parts.push('Notes : '+cond.notes);
   if(parts.length) p += 'Contraintes :\n'+parts.join('\n')+'\n\n';
-  if(notes?.length) p += 'Notes humaines :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
+  if(notes&&notes.length) p += 'Notes humaines :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
   p += 'Produis ton livrable. Concret et actionnable.';
   return p;
 }
 
 function markdownishToHtml(text) {
-  let html = text.replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>')
+  let html = escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
     .replace(/^###? (.+)$/gm,'<h4>$1</h4>')
     .replace(/^- (.+)$/gm,'<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>')
-    .replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+    .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, function(m){ return '<ul>'+m+'</ul>'; })
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/\n/g,'<br>');
   return '<div class="space-y-1"><p>'+html+'</p></div>';
 }
 
@@ -282,33 +279,33 @@ async function runStep(stepIdx) {
   document.getElementById('waiting-state').classList.add('hidden');
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.add('hidden');
-  document.getElementById('current-step-label').textContent = `Step ${stepIdx+1}/8`;
+  document.getElementById('current-step-label').textContent = 'Step '+(stepIdx+1)+'/8';
   document.getElementById('step-tools').textContent = data.tools.join(' · ');
   updateProgress(); clearLogs();
-  setStatus(`<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">${meta.agent}</div><div class="text-xs text-sky-600">Mistral via proxy Rust</div></div></div>`);
-  log(`Agent ${meta.agent} démarré`, 'info');
-  log(`→ POST proxy (query utilisateur + system prompt)`, 'llm');
+  setStatus('<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">'+meta.agent+'</div><div class="text-xs text-sky-600">api.kayroslab.com → Mistral</div></div></div>');
+  log('Agent '+meta.agent+' démarré', 'info');
+  log('→ POST /v1/demo/chat', 'llm');
 
   const notes = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
   let contentHtml = '';
   try {
     const raw = await callMistralViaProxy(data.system, buildUserPrompt(demoState.idea, demoState.conditions, notes));
-    log(`← Réponse reçue (${raw.length} car.)`, 'success');
+    log('← Réponse ('+raw.length+' car.)', 'success');
     contentHtml = markdownishToHtml(raw);
     if (stepIdx === 3) {
-      contentHtml += `<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Carte ontologique</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>`;
+      contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Carte ontologique</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>';
     }
   } catch (err) {
-    log(`Erreur: ${err.message}`, 'error');
-    contentHtml = `<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>Proxy indisponible</strong><br>${err.message}<br><br>Déployez <code>workers/rust-mistral-proxy</code> puis mettez à jour <code>PROXY_URL</code> dans cette page. Voir README du Worker.</div>`;
+    log('Erreur: '+err.message, 'error');
+    contentHtml = '<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>API indisponible</strong><br>'+escapeHtml(err.message)+'<br><br>Vérifiez que le backend est déployé avec <code>MISTRAL_API_KEY</code> et joignable sur api.kayroslab.com.</div>';
   }
 
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
-  if (stepIdx === 3 && window.OntologyEmbed) setTimeout(() => { try { OntologyEmbed.init(); } catch(e){} }, 120);
-  updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), `Step ${stepIdx+1}`);
-  setStatus(`<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">${meta.agent} OK</div><div class="text-xs text-emerald-600">Gate — ${data.gateWho}</div></div></div>`);
-  log(`En attente décision humaine (${data.gateWho})`, 'warn');
+  if (stepIdx === 3 && window.OntologyEmbed) setTimeout(function(){ try { OntologyEmbed.init(); } catch(e){} }, 120);
+  updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), 'Step '+(stepIdx+1));
+  setStatus('<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">'+meta.agent+' OK</div><div class="text-xs text-emerald-600">Gate — '+data.gateWho+'</div></div></div>');
+  log('En attente décision ('+data.gateWho+')', 'warn');
   document.getElementById('content-state').classList.remove('hidden');
   demoState.isRunning = false;
 }
@@ -324,7 +321,7 @@ function startGovernedCycle() {
   updateKI(base, 'Score initial');
   document.getElementById('demo-start-btn').disabled = true;
   document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span> Running…';
-  console.log('[KayrosLab] cycle start', { ideaLen: idea.length, conditions: demoState.conditions });
+  console.log('[KayrosLab] cycle start', { ideaLen: idea.length });
   runStep(0);
 }
 
@@ -337,7 +334,7 @@ function approveAndContinue() {
   updateKI(demoState.ki+boost, note?'Annotation humaine':'Approuvé');
   demoState.history.push({ stepIdx:demoState.currentStep, agent:meta.agent, summary, humanNote:note||null, kiAtApproval:demoState.ki });
   updateHistory();
-  log(note?`Note enregistrée (${note.length} car.)`:'Approuvé', note?'human':'success');
+  log(note?'Note enregistrée ('+note.length+' car.)':'Approuvé', note?'human':'success');
   if (demoState.currentStep >= 7) finishCycle(); else runStep(demoState.currentStep+1);
 }
 function rerunCurrentStep(){ if(demoState.currentStep<0||demoState.isRunning)return; log('Relance…','warn'); runStep(demoState.currentStep); }
@@ -363,7 +360,7 @@ function finishCycle(){
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.remove('hidden');
   const n=demoState.history.filter(h=>h.humanNote).length;
-  document.getElementById('final-state').innerHTML=`<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Cycle terminé</h3><p class="text-slate-600 text-sm mb-4">KI final : <strong class="text-sky-600">${demoState.ki.toFixed(1)}</strong> · ${n} intervention(s)</p><div class="flex gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>Export PDF</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Nouvelle idée</button></div></div>`;
+  document.getElementById('final-state').innerHTML='<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Cycle terminé</h3><p class="text-slate-600 text-sm mb-4">KI final : <strong class="text-sky-600">'+demoState.ki.toFixed(1)+'</strong> · '+n+' intervention(s)</p><div class="flex gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>Export PDF</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Nouvelle idée</button></div></div>';
   document.getElementById('demo-start-btn').disabled=false;
   document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
   log('Cycle finished','success');
@@ -371,7 +368,7 @@ function finishCycle(){
 function resetDemo(){
   demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5];
   document.getElementById('demo-idea').value='';
-  ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(id=>document.getElementById(id).value='');
+  ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(function(id){ document.getElementById(id).value=''; });
   document.getElementById('demo-progress').classList.add('hidden');
   document.getElementById('demo-workspace').classList.add('hidden');
   document.getElementById('demo-start-btn').disabled=false;
@@ -384,15 +381,13 @@ function resetDemo(){
 function exportKayrosPDF(){
   const cond=demoState.conditions, n=demoState.history.filter(h=>h.humanNote).length;
   const dateStr=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
-  const rows=demoState.history.map(h=>`<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0">${h.stepIdx+1}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${h.agent}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px">${(h.summary||'').substring(0,90)}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309">${h.humanNote?h.humanNote.substring(0,80):'—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;color:#0284c8;font-weight:600">${h.kiAtApproval?h.kiAtApproval.toFixed(1):'—'}</td></tr>`).join('');
-  const html=`<div style="font-family:Inter,sans-serif;width:210mm;color:#0f172a"><div style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:36px"><div style="font-weight:700;font-size:18px;margin-bottom:16px">KayrosLab</div><h1 style="font-size:22px;margin:0 0 6px">Governed Cycle Report</h1><p style="opacity:.7;font-size:13px;margin:0">${dateStr} · KI ${demoState.ki.toFixed(1)} · Mistral (proxy)</p></div><div style="padding:28px 36px"><p style="background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;font-size:13px">${demoState.idea}</p><p style="font-size:12px;margin-top:12px">Geo: ${cond.geo||'—'} · Budget: ${cond.budget||'—'} · Time: ${cond.time||'—'} · Must: ${cond.must||'—'}</p><p style="font-size:14px;font-weight:700;margin:16px 0 8px">KI ${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)} · ${n} note(s)</p><table style="width:100%;font-size:11px;border-collapse:collapse"><thead><tr style="background:#f1f5f9"><th style="padding:6px">#</th><th style="padding:6px">Agent</th><th style="padding:6px">Summary</th><th style="padding:6px">Note</th><th style="padding:6px">KI</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  const rows=demoState.history.map(function(h){
+    return '<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0">'+(h.stepIdx+1)+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">'+escapeHtml(h.agent)+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px">'+escapeHtml((h.summary||'').substring(0,90))+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309">'+(h.humanNote?escapeHtml(h.humanNote.substring(0,80)):'—')+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;color:#0284c8;font-weight:600">'+(h.kiAtApproval?h.kiAtApproval.toFixed(1):'—')+'</td></tr>';
+  }).join('');
+  const html='<div style="font-family:Inter,sans-serif;width:210mm;color:#0f172a"><div style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:36px"><div style="font-weight:700;font-size:18px;margin-bottom:16px">KayrosLab</div><h1 style="font-size:22px;margin:0 0 6px">Governed Cycle Report</h1><p style="opacity:.7;font-size:13px;margin:0">'+dateStr+' · KI '+demoState.ki.toFixed(1)+'</p></div><div style="padding:28px 36px"><p style="background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;font-size:13px">'+escapeHtml(demoState.idea)+'</p><p style="font-size:12px;margin-top:12px">Geo: '+escapeHtml(cond.geo||'—')+' · Budget: '+escapeHtml(cond.budget||'—')+' · Time: '+escapeHtml(cond.time||'—')+' · Must: '+escapeHtml(cond.must||'—')+'</p><p style="font-size:14px;font-weight:700;margin:16px 0 8px">KI '+demoState.kiHistory[0].toFixed(1)+' → '+demoState.ki.toFixed(1)+' · '+n+' note(s)</p><table style="width:100%;font-size:11px;border-collapse:collapse"><thead><tr style="background:#f1f5f9"><th style="padding:6px">#</th><th style="padding:6px">Agent</th><th style="padding:6px">Summary</th><th style="padding:6px">Note</th><th style="padding:6px">KI</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
   const c=document.getElementById('report-template'); c.innerHTML=html; c.classList.add('capturing');
-  html2pdf().set({margin:0,filename:`KayrosLab_${new Date().toISOString().slice(0,10)}.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(c).save().then(()=>{c.classList.remove('capturing');c.innerHTML='';log('PDF OK','success');});
+  html2pdf().set({margin:0,filename:'KayrosLab_'+new Date().toISOString().slice(0,10)+'.pdf',image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(c).save().then(function(){c.classList.remove('capturing');c.innerHTML='';log('PDF OK','success');});
 }
-
-document.querySelectorAll('.animate-on-scroll,.stagger-children').forEach(el=>{
-  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1}).observe(el);
-});
 </script>
 </body>
 </html>
