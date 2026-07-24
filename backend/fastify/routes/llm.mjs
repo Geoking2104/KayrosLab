@@ -33,6 +33,28 @@ const monitorSchema = z.object({
   ideaId: z.string().optional().default('idea'),
 });
 
+/** Public demo body: system + user (no key on client). */
+const demoChatSchema = z.object({
+  system: z.string().max(4000).optional().default(''),
+  user: z.string().min(1).max(6000),
+});
+
+// Simple IP rate map for public demo (process lifetime)
+const demoRate = new Map();
+const DEMO_MAX_PER_HOUR = 30;
+
+function checkDemoRate(ip) {
+  const now = Date.now();
+  const windowMs = 60 * 60 * 1000;
+  let e = demoRate.get(ip);
+  if (!e || now - e.start > windowMs) {
+    e = { start: now, count: 0 };
+    demoRate.set(ip, e);
+  }
+  e.count += 1;
+  return e.count <= DEMO_MAX_PER_HOUR;
+}
+
 export default async function llmRoute(app) {
   app.post('/v1/llm', async (req, reply) => {
     const parsed = completeSchema.safeParse(req.body);
@@ -41,6 +63,48 @@ export default async function llmRoute(app) {
     const opts = provider ? { provider } : {};
     const r = await app.kayrosContext.llm.complete({ messages, model, role, temperature }, opts);
     return { text: r.text, provider: r.provider, usage: r.usage, latencyMs: r.latencyMs };
+  });
+
+  /**
+   * Public demo for kayroslab-complete-with-ai-agents.html
+   * No X-Kayros-Secret required (exempted in index.mjs).
+   * Uses Mistral when MISTRAL_API_KEY is set, else default routing.
+   */
+  app.post('/v1/demo/chat', async (req, reply) => {
+    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
+      || req.ip
+      || 'unknown';
+    if (!checkDemoRate(ip)) {
+      return reply.code(429).send({ error: `Quota démo dépassé (${DEMO_MAX_PER_HOUR}/h). Réessayez plus tard.` });
+    }
+
+    const parsed = demoChatSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return reply.code(400).send({ error: 'user requis', issues: parsed.error.issues });
+    }
+    const { system, user } = parsed.data;
+    const messages = [];
+    if (system) messages.push({ role: 'system', content: system });
+    messages.push({ role: 'user', content: user });
+
+    try {
+      const provider = app.kayrosContext.MISTRAL_API_KEY ? 'mistral' : undefined;
+      const r = await app.kayrosContext.llm.complete(
+        { messages, temperature: 0.4, role: 'demo-agent' },
+        provider ? { provider } : {},
+      );
+      return {
+        content: r.text,
+        text: r.text,
+        model: app.kayrosContext.MISTRAL_MODEL || r.provider,
+        provider: r.provider,
+        usage: r.usage,
+        latencyMs: r.latencyMs,
+      };
+    } catch (e) {
+      app.log.error(e);
+      return reply.code(502).send({ error: String(e.message || e) });
+    }
   });
 
   app.post('/v1/embed', async (req, reply) => {
