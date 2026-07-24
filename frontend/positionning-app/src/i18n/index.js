@@ -144,6 +144,27 @@ const translations = {
         title: 'Something went wrong', unknown: 'Unknown error', retry: 'Retry',
       },
     },
+    kanban: {
+      tab: 'Pipeline',
+      title: 'Idea Pipeline',
+      subtitle: 'Drag ideas across stages',
+      addToPipeline: '+ Add to Pipeline',
+      dropHere: 'Drop here',
+      moveSuccess: 'Moved to {stage}',
+      invalidMove: 'Cannot move to this stage',
+      wipWarning: 'High workload ({n} ideas)',
+      contextMenu: { status: 'Set Status', delete: 'Delete idea' },
+      stages: {
+        recueillir: 'Collect', ecouter: 'Listen', cartographier: 'Map',
+        construire: 'Build', eprouver: 'Test', arbitrer: 'Decide',
+        projeter: 'Project', realiser: 'Deliver',
+      },
+      statuses: {
+        nouveau: 'New', en_revue: 'In Review', discussion: 'Discussion',
+        en_developpement: 'In Development', termine: 'Done',
+        non_poursuivi: 'Not Pursued', consideration_future: 'Future Consideration', en_pause: 'Paused',
+      },
+    },
   },
   fr: {
     app: {
@@ -291,6 +312,27 @@ const translations = {
       },
       error: {
         title: 'Une erreur est survenue', unknown: 'Erreur inconnue', retry: 'Réessayer',
+      },
+    },
+    kanban: {
+      tab: 'Pipeline',
+      title: 'Pipeline d\'idées',
+      subtitle: 'Glissez les idées entre les étapes',
+      addToPipeline: '+ Ajouter au Pipeline',
+      dropHere: 'Déposez ici',
+      moveSuccess: 'Déplacé vers {stage}',
+      invalidMove: 'Déplacement impossible vers cette étape',
+      wipWarning: 'Charge élevée ({n} idées)',
+      contextMenu: { status: 'Changer le statut', delete: 'Supprimer l\'idée' },
+      stages: {
+        recueillir: 'Recueillir', ecouter: 'Écouter', cartographier: 'Cartographier',
+        construire: 'Construire', eprouver: 'Éprouver', arbitrer: 'Arbitrer',
+        projeter: 'Projeter', realiser: 'Réaliser',
+      },
+      statuses: {
+        nouveau: 'Nouveau', en_revue: 'En Revue', discussion: 'Discussion',
+        en_developpement: 'En Développement', termine: 'Terminé',
+        non_poursuivi: 'Non Poursuivi', consideration_future: 'Considération Future', en_pause: 'En Pause',
       },
     },
   },

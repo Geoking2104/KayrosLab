@@ -8,7 +8,7 @@ import OntologyGraph from './components/OntologyGraph.jsx';
 import InspectorPanel from './components/InspectorPanel.jsx';
 import QueryPlayground from './components/QueryPlayground.jsx';
 import GapAnalysis from './components/GapAnalysis.jsx';
-import { loadSettings, saveSettings } from './data/settingsStore.js';
+import { loadSettings, saveSettings, applyTheme } from './data/settingsStore.js';
 import OWLExporter from './components/OWLExporter.jsx';
 import PdfExport from './components/PdfExport.jsx';
 import StrategicDashboard from './components/StrategicDashboard.jsx';
@@ -23,10 +23,11 @@ import MultiIdeaAnalysis from './components/MultiIdeaAnalysis.jsx';
 import OnboardingTour from './components/OnboardingTour.jsx';
 import { isTourCompleted } from './data/tourStore.js';
 import { addHistoryEntry, getHistoryEntry } from './data/historyStore.js';
-import { loadSettings, saveSettings, applyTheme } from './data/settingsStore.js';
 import { sendToSlack } from './utils/slack.js';
+import IdeaKanban from './components/IdeaKanban.jsx';
 import './styles/tokens.css';
 import './styles/positioning.css';
+import './styles/kanban.css';
 
 const COMPETITOR_COLORS = ['#ef4444', '#f97316', '#8b5cf6', '#06b6d4', '#ec4899'];
 
@@ -239,6 +240,9 @@ function AppInner() {
                 <button className={`tab ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
                   ⚙️ {t('app.tabs.settings')}
                 </button>
+                <button className={`tab ${activeTab === 'pipeline' ? 'active' : ''}`} onClick={() => setActiveTab('pipeline')}>
+                  📋 {t('kanban.tab')}
+                </button>
                 <button className={`tab ${activeTab === 'campaigns' ? 'active' : ''}`} onClick={() => { setActiveTab('campaigns'); setCampaignView('list'); }}>
                   🏆 {t('app.tabs.campaigns')}
                 </button>
@@ -293,6 +297,12 @@ function AppInner() {
                     )}
                     <OWLExporter competitorList={competitors} baseline={baseline} />
                   </>
+                )}
+
+                {activeTab === 'pipeline' && (
+                  <div className="pipeline-container">
+                    <IdeaKanban />
+                  </div>
                 )}
 
                 {activeTab === 'campaigns' && (

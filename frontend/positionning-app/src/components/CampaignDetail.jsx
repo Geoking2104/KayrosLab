@@ -54,17 +54,6 @@ export default function CampaignDetail({ campaignId, onBack, onAnalyze }) {
     }, 30000);
     return () => clearInterval(interval);
   }, []);
-  const { t } = useI18n();
-  const [campaign, setCampaign] = useState(null);
-  const [submissions, setSubmissions] = useState([]);
-  const [author, setAuthor] = useState('');
-  const [idea, setIdea] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    setCampaign(getCampaign(campaignId));
-    setSubmissions(listSubmissions(campaignId));
-  }, [campaignId]);
 
   const refresh = () => {
     if (unmountedRef.current) return;

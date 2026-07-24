@@ -71,8 +71,10 @@ export class AccountLinkService {
    * @returns {{token:string, expiresAt:string}}
    */
   createToken({ platformId, userId, platform }) {
-    const token = `link_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-    const expiresAt = new Date(Date.now() + 15 * 60_000).toISOString(); // 15 min
+    const randomBytes = new Uint8Array(16);
+    globalThis.crypto?.getRandomValues?.(randomBytes) ?? randomBytes.forEach((_, i, arr) => { arr[i] = Math.floor(Math.random() * 256); });
+    const token = `link_${Date.now()}_${Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('')}`;
+    const expiresAt = new Date(Date.now() + 15 * 60_000).toISOString();
     this._tokens.set(token, { platformId, userId, platform, expiresAt });
     return { token, expiresAt };
   }
@@ -195,17 +197,20 @@ export class SlackAdapter extends ChatAdapter {
    * Verifie la signature HMAC-SHA256 d'une requete Slack.
    * Rejette les requetes de plus de 5 minutes (anti-rejeu).
    */
-  verifySignature(req) {
-    if (!this.signingSecret) return true; // pas de verification si non configure
+  async verifySignature(req) {
+    if (!this.signingSecret) return true;
     const sig = req.headers['x-slack-signature'];
     const ts = req.headers['x-slack-request-timestamp'];
     if (!sig || !ts) return false;
     if (Math.abs(Math.floor(Date.now() / 1000) - Number(ts)) > 300) return false;
     const base = `v0:${ts}:${req.rawBody ?? ''}`;
     const crypto = globalThis.crypto?.subtle;
-    if (!crypto) return true; // pas de crypto disponible => fallback
-    // La verification HMAC est faite dans le handler (async)
-    return true;
+    if (!crypto) return false;
+    const encoder = new TextEncoder();
+    const key = await crypto.importKey('raw', encoder.encode(this.signingSecret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const signature = await crypto.sign('HMAC', key, encoder.encode(base));
+    const expected = `v0=${Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')}`;
+    return expected === sig;
   }
 
   parseRequest(req) {
@@ -348,8 +353,9 @@ export class TeamsAdapter extends ChatAdapter {
   verifySignature(req) {
     const auth = req.headers?.authorization || '';
     if (!auth.startsWith('Bearer ')) return false;
-    // La verification reelle necessite la cle Azure AD. Modele ici.
-    return !!auth;
+    // TODO: Implement real JWT verification using Azure AD public keys
+    // For now, reject all requests as unverified
+    return false;
   }
 
   parseRequest(req) {

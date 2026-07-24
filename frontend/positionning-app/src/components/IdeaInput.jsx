@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useI18n } from '../i18n/I18nContext.jsx';
+import { addFromAnalysis } from '../data/ideaStore.js';
 
 const MAX_CHARS = 2000;
 
-export default function IdeaInput({ onAnalyze, loading }) {
+export default function IdeaInput({ onAnalyze, loading, onAddToPipeline }) {
   const { t } = useI18n();
   const [value, setValue] = useState('');
   const [touched, setTouched] = useState(false);
@@ -45,6 +46,20 @@ export default function IdeaInput({ onAnalyze, loading }) {
         </div>
       </div>
       {showError && <p className="field-error">{t('app.analyzeInput.minLength')} ({trimmed.length}/10)</p>}
+      {trimmed.length >= 10 && (
+        <div className="idea-pipeline-row">
+          <button
+            className="btn btn-outline btn-sm"
+            onClick={() => {
+              addFromAnalysis({ title: trimmed, author: 'User' });
+              setValue('');
+              onAddToPipeline?.();
+            }}
+          >
+            {t('kanban.addToPipeline')}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

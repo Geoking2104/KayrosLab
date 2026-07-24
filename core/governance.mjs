@@ -21,7 +21,12 @@ export function canResolve(role, gateType) {
   return !!r && r.gates.includes(gateType);
 }
 
-const uuid = () => (globalThis.crypto?.randomUUID?.() ?? `gate_${Date.now()}_${Math.random().toString(36).slice(2)}`);
+const uuid = () => {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  const randomBytes = new Uint8Array(16);
+  globalThis.crypto?.getRandomValues?.(randomBytes) ?? randomBytes.forEach((_, i, arr) => { arr[i] = Math.floor(Math.random() * 256); });
+  return `gate_${Date.now()}_${Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('')}`;
+};
 
 /** Service de gouvernance en mémoire : file d'attente de gates + résolution promise-based. */
 export class GovernanceService {
