@@ -21,21 +21,9 @@ tailwind.config = {
 };
 </script>
 <style>
-/* === ANIMATIONS === */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.stagger-children > * {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
+.animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+.stagger-children > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .stagger-children.visible > *:nth-child(1) { transition-delay: 0.05s; }
 .stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
 .stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
@@ -44,99 +32,28 @@ tailwind.config = {
 .stagger-children.visible > *:nth-child(6) { transition-delay: 0.3s; }
 .stagger-children.visible > *:nth-child(7) { transition-delay: 0.35s; }
 .stagger-children.visible > *:nth-child(8) { transition-delay: 0.4s; }
-.stagger-children.visible > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* === HERO BG === */
-.hero-bg {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-}
-
-/* === KAYROS GRADIENT === */
-.kayros-gradient {
-  background: linear-gradient(90deg, #0ea5e9, #0284c8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* === SECTION HEADER === */
-.section-header {
-  font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-/* === STEP CARDS === */
-.cycle-step:hover {
-  transform: translateY(-4px);
-}
-
-/* === STEP NUMBER BADGE === */
-.step-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  background: #e0f2fe;
-  color: #0284c8;
-  font-weight: 700;
-  font-size: 0.75rem;
-}
-
-/* === ARCH CARD ICON === */
-.arch-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  margin: 0 auto 1rem;
-  font-size: 1.25rem;
-}
-
-/* === MODEL LOGO === */
-.model-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-/* === SPINNER === */
-.spinner {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #e0f2fe;
-  border-top-color: #0ea5e9;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
+.stagger-children.visible > * { opacity: 1; transform: translateY(0); }
+.hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+.kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.section-header { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; }
+.cycle-step:hover { transform: translateY(-4px); }
+.step-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: #e0f2fe; color: #0284c8; font-weight: 700; font-size: 0.75rem; }
+.arch-icon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 1rem; font-size: 1.25rem; }
+.model-logo { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #e0f2fe; border-top-color: #0ea5e9; border-radius: 50%; animation: spin 0.6s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.3); border-radius: 3px; }
-
-/* === FADE IN ANIMATION === */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.demo-step {
-  animation: fadeIn 0.3s ease;
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.demo-step { animation: fadeIn 0.3s ease; }
+.step-progress { transition: all 0.3s ease; }
+.step-progress.done { background: #0ea5e9; color: white; border-color: #0ea5e9; }
+.step-progress.active { background: #e0f2fe; color: #0284c8; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.2); }
+.step-progress.pending { background: white; color: #94a3b8; border-color: #e2e8f0; }
+.agent-log { font-family: 'Fira Code', monospace; font-size: 11px; line-height: 1.5; }
+.generated-content { max-height: 280px; overflow-y: auto; }
+.editable-output:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.15); }
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
@@ -193,16 +110,10 @@ tailwind.config = {
 <section id="architecture" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">
-        Architecture
-      </div>
-      <h2 class="section-header font-display mb-2">
-        Agent <span class="kayros-gradient">= Model</span> + Harness
-      </h2>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Architecture</div>
+      <h2 class="section-header font-display mb-2">Agent <span class="kayros-gradient">= Model</span> + Harness</h2>
       <p class="text-slate-600 max-w-2xl mb-6">Every agent in KayrosLab follows the LangChain pattern: a model providing reasoning, wrapped in a harness of tools, prompts, and middleware that shapes its behavior.</p>
     </div>
-
-    <!-- Formula -->
     <div class="animate-on-scroll bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center mb-10">
       <p class="font-display text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
         Agent <span class="text-slate-400 font-normal mx-1">=</span> Model
@@ -211,34 +122,24 @@ tailwind.config = {
         <span class="text-slate-400 font-normal mx-1">+</span> Middleware
       </p>
     </div>
-
-    <!-- Arch Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children">
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-500/5">
-        <div class="arch-icon bg-sky-100 text-sky-600">
-          <i class="fas fa-microchip"></i>
-        </div>
+        <div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div>
         <h3 class="font-display font-semibold text-base mb-2">Model</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Swap between Claude, GPT, Gemini, DeepSeek, or local Ollama. Each agent picks the best model for its role.</p>
       </div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/5">
-        <div class="arch-icon bg-amber-100 text-amber-600">
-          <i class="fas fa-wrench"></i>
-        </div>
+        <div class="arch-icon bg-amber-100 text-amber-600"><i class="fas fa-wrench"></i></div>
         <h3 class="font-display font-semibold text-base mb-2">Tools</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Function-calling registry: agents call <code class="text-sky-600 text-xs font-mono">ki_scorer</code>, <code class="text-sky-600 text-xs font-mono">search_competitors</code>, <code class="text-sky-600 text-xs font-mono">risk_assessor</code> and more.</p>
       </div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-violet-400 hover:shadow-lg hover:shadow-violet-500/5">
-        <div class="arch-icon bg-violet-100 text-violet-600">
-          <i class="fas fa-clipboard-list"></i>
-        </div>
+        <div class="arch-icon bg-violet-100 text-violet-600"><i class="fas fa-clipboard-list"></i></div>
         <h3 class="font-display font-semibold text-base mb-2">Prompt</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Each agent has a specialized system prompt defining its role, constraints, and output format.</p>
       </div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg hover:shadow-sky-500/5">
-        <div class="arch-icon bg-sky-100 text-sky-600">
-          <i class="fas fa-shield-halved"></i>
-        </div>
+        <div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-shield-halved"></i></div>
         <h3 class="font-display font-semibold text-base mb-2">Middleware</h3>
         <p class="text-slate-600 text-sm leading-relaxed">Fault tolerance, guardrails, human-in-the-loop gates, and context management between sessions.</p>
       </div>
@@ -250,86 +151,53 @@ tailwind.config = {
 <section id="cycle" class="py-20 px-6 bg-slate-50 border-t border-slate-200">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">
-        The Process
-      </div>
-      <h2 class="section-header font-display mb-2">
-        The <span class="kayros-gradient">8-Step</span> Governed Cycle
-      </h2>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">The Process</div>
+      <h2 class="section-header font-display mb-2">The <span class="kayros-gradient">8-Step</span> Governed Cycle</h2>
       <p class="text-slate-600 max-w-2xl mb-6">Each step is driven by a specialized agent, produces a structured output, and ends with a human gate. Click any step to see its architecture.</p>
     </div>
-
-    <!-- Cycle Steps -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children" id="cycle-steps">
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="0" onclick="showStep(0)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">1</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 01</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">1</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 01</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Ecouter</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Scan and qualify weak signals</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="1" onclick="showStep(1)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">2</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 02</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">2</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 02</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Cartographier</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Map trends and bisociative bridges</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="2" onclick="showStep(2)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">3</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 03</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">3</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 03</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Construire</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Generate scenarios and briefs</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="3" onclick="showStep(3)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">4</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 04</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">4</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 04</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Positionner</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Ontological competitive analysis</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="4" onclick="showStep(4)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">5</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 05</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">5</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 05</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Eprouver</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Red Team, Devil's Advocate, Critic</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="5" onclick="showStep(5)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">6</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 06</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">6</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 06</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Arbitrer</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Multi-criteria voting and decisions</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="6" onclick="showStep(6)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">7</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 07</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">7</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 07</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Projeter</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Roadmap, KPIs, probabilistic simulation</p>
       </div>
       <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md relative overflow-hidden" data-step="7" onclick="showStep(7)">
-        <div class="flex items-center gap-2 mb-2">
-          <span class="step-badge">8</span>
-          <span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 08</span>
-        </div>
+        <div class="flex items-center gap-2 mb-2"><span class="step-badge">8</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 08</span></div>
         <h4 class="font-display font-semibold text-sm mb-1">Realiser</h4>
         <p class="text-slate-500 text-xs leading-relaxed">Pilot, deploy, feedback loop</p>
       </div>
     </div>
-
-    <!-- Cycle Detail -->
-    <div id="cycle-detail" class="mt-6 bg-white border border-slate-200 rounded-3xl p-6 hidden">
-    </div>
+    <div id="cycle-detail" class="mt-6 bg-white border border-slate-200 rounded-3xl p-6 hidden"></div>
   </div>
 </section>
 
@@ -337,86 +205,30 @@ tailwind.config = {
 <section id="models" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">
-        Model Interoperability
-      </div>
-      <h2 class="section-header font-display mb-2">
-        Swap Models, <span class="kayros-gradient">Not Code</span>
-      </h2>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">Model Interoperability</div>
+      <h2 class="section-header font-display mb-2">Swap Models, <span class="kayros-gradient">Not Code</span></h2>
       <p class="text-slate-600 max-w-2xl mb-6">Like LangChain's model interface, KayrosLab lets you switch providers per agent role. Use Claude for reasoning, GPT for creativity, Gemini for speed — or all local via Ollama.</p>
     </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 stagger-children">
-      <!-- Anthropic -->
       <div class="bg-white border border-slate-200 rounded-3xl p-5 transition-all hover:border-sky-400 hover:shadow-md">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="model-logo bg-amber-100 text-amber-800">C</div>
-          <div>
-            <h3 class="font-display font-semibold text-sm">Claude 3.5 Sonnet</h3>
-            <div class="text-slate-400 text-xs">Anthropic</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Strategic Reasoning</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Red Team</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Risk Analysis</span>
-        </div>
+        <div class="flex items-center gap-3 mb-3"><div class="model-logo bg-amber-100 text-amber-800">C</div><div><h3 class="font-display font-semibold text-sm">Claude 3.5 Sonnet</h3><div class="text-slate-400 text-xs">Anthropic</div></div></div>
+        <div class="flex flex-wrap gap-1.5"><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Strategic Reasoning</span><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Red Team</span></div>
       </div>
-      <!-- OpenAI -->
       <div class="bg-white border border-slate-200 rounded-3xl p-5 transition-all hover:border-sky-400 hover:shadow-md">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="model-logo bg-emerald-500 text-white">G</div>
-          <div>
-            <h3 class="font-display font-semibold text-sm">GPT-4o</h3>
-            <div class="text-slate-400 text-xs">OpenAI</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Creative Divergence</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Scenario Generation</span>
-        </div>
+        <div class="flex items-center gap-3 mb-3"><div class="model-logo bg-emerald-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">GPT-4o</h3><div class="text-slate-400 text-xs">OpenAI</div></div></div>
+        <div class="flex flex-wrap gap-1.5"><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Creative Divergence</span><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Scenario Generation</span></div>
       </div>
-      <!-- Google -->
       <div class="bg-white border border-slate-200 rounded-3xl p-5 transition-all hover:border-sky-400 hover:shadow-md">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="model-logo bg-blue-500 text-white">G</div>
-          <div>
-            <h3 class="font-display font-semibold text-sm">Gemini 1.5 Pro</h3>
-            <div class="text-slate-400 text-xs">Google</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Synthesis</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Data Analysis</span>
-        </div>
+        <div class="flex items-center gap-3 mb-3"><div class="model-logo bg-blue-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">Gemini 1.5 Pro</h3><div class="text-slate-400 text-xs">Google</div></div></div>
+        <div class="flex flex-wrap gap-1.5"><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Synthesis</span><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Data Analysis</span></div>
       </div>
-      <!-- DeepSeek -->
       <div class="bg-white border border-slate-200 rounded-3xl p-5 transition-all hover:border-sky-400 hover:shadow-md">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="model-logo bg-indigo-500 text-white">D</div>
-          <div>
-            <h3 class="font-display font-semibold text-sm">DeepSeek R1</h3>
-            <div class="text-slate-400 text-xs">DeepSeek</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Technical Feasibility</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Code Analysis</span>
-        </div>
+        <div class="flex items-center gap-3 mb-3"><div class="model-logo bg-indigo-500 text-white">D</div><div><h3 class="font-display font-semibold text-sm">DeepSeek R1</h3><div class="text-slate-400 text-xs">DeepSeek</div></div></div>
+        <div class="flex flex-wrap gap-1.5"><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Technical Feasibility</span><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Code Analysis</span></div>
       </div>
-      <!-- Ollama -->
       <div class="bg-white border border-slate-200 rounded-3xl p-5 transition-all hover:border-sky-400 hover:shadow-md">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="model-logo bg-slate-700 text-white">O</div>
-          <div>
-            <h3 class="font-display font-semibold text-sm">Local (Ollama)</h3>
-            <div class="text-slate-400 text-xs">Sovereign / On-premise</div>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Zero Egress</span>
-          <span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">NIS2 / RGPD Compliant</span>
-        </div>
+        <div class="flex items-center gap-3 mb-3"><div class="model-logo bg-slate-700 text-white">O</div><div><h3 class="font-display font-semibold text-sm">Local (Ollama)</h3><div class="text-slate-400 text-xs">Sovereign / On-premise</div></div></div>
+        <div class="flex flex-wrap gap-1.5"><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Zero Egress</span><span class="inline-block text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">NIS2 / RGPD Compliant</span></div>
       </div>
     </div>
   </div>
@@ -426,15 +238,10 @@ tailwind.config = {
 <section id="tools" class="py-20 px-6 bg-slate-50 border-t border-slate-200">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold tracking-widest uppercase mb-4">
-        Tool Registry
-      </div>
-      <h2 class="section-header font-display mb-2">
-        Extensible <span class="kayros-gradient">Tools</span> via Function Calling
-      </h2>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold tracking-widest uppercase mb-4">Tool Registry</div>
+      <h2 class="section-header font-display mb-2">Extensible <span class="kayros-gradient">Tools</span> via Function Calling</h2>
       <p class="text-slate-600 max-w-2xl mb-6">Each agent has access to specialized tools. Like LangChain's tool system, KayrosLab tools are Python callables with typed inputs and structured outputs.</p>
     </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children">
       <div class="bg-white border border-slate-200 rounded-3xl p-5">
         <div class="text-xs font-bold text-violet-600 tracking-widest uppercase mb-2">Analysis</div>
@@ -476,39 +283,110 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ===== LIVE DEMO ===== -->
+<!-- ===== LIVE DEMO — INTERACTIVE GOVERNED CYCLE ===== -->
 <section id="demo" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">
-        Live Demo
-      </div>
-      <h2 class="section-header font-display mb-2">
-        Watch <span class="kayros-gradient">Agents</span> Work
-      </h2>
-      <p class="text-slate-600 max-w-2xl mb-6">Enter a strategic idea and watch KayrosLab's agents process it through the governed cycle — with real-time tool calls, KI scoring, and a human gate before final output.</p>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Live Demo</div>
+      <h2 class="section-header font-display mb-2">Watch <span class="kayros-gradient">Agents</span> Work</h2>
+      <p class="text-slate-600 max-w-2xl mb-6">Enter a strategic idea. At every step you see the agent's output, can edit it, approve, reject or relaunch. Full human-in-the-loop control — the way governed agents should work.</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Input -->
-      <div class="bg-white border border-slate-200 rounded-3xl p-6">
-        <h3 class="font-display font-semibold text-sm mb-3 text-slate-900">Your Strategic Idea</h3>
-        <textarea id="demo-idea" class="w-full min-h-[120px] bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 placeholder-slate-400 resize-y focus:outline-none focus:border-sky-500 transition-colors font-body" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
-        <div class="flex gap-3 mt-4 flex-wrap">
-          <button id="demo-run-btn" onclick="runDemo()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25">
-            <i class="fas fa-play mr-1.5"></i>Run Full Cycle
+    <!-- Idea Input (always visible) -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-6">
+      <div class="flex flex-col sm:flex-row gap-4 items-start">
+        <div class="flex-1 w-full">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Your Strategic Idea</label>
+          <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 placeholder-slate-400 resize-y focus:outline-none focus:border-sky-500 transition-colors font-body" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
+        </div>
+        <div class="flex flex-col gap-2 sm:pt-6">
+          <button id="demo-start-btn" onclick="startGovernedCycle()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25 whitespace-nowrap">
+            <i class="fas fa-play mr-1.5"></i>Start Cycle
           </button>
-          <button onclick="clearDemo()" class="bg-transparent border border-slate-200 text-slate-600 hover:border-sky-500 hover:text-sky-600 font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm">
-            Clear
+          <button onclick="resetDemo()" class="bg-transparent border border-slate-200 text-slate-600 hover:border-sky-500 hover:text-sky-600 font-semibold px-6 py-2.5 rounded-3xl transition-all text-sm whitespace-nowrap">
+            Reset
           </button>
         </div>
       </div>
+    </div>
 
-      <!-- Output -->
-      <div class="bg-white border border-slate-200 rounded-3xl p-6 max-h-[500px] overflow-y-auto" id="demo-output">
-        <div class="text-slate-400 text-center py-8">
-          <i class="fas fa-robot text-3xl mb-3 text-slate-300"></i>
-          <p class="text-sm">Enter an idea and click <strong class="text-slate-600">Run Full Cycle</strong></p>
+    <!-- Progress Steps -->
+    <div id="demo-progress" class="hidden mb-6">
+      <div class="flex items-center gap-1 overflow-x-auto pb-2">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <div id="demo-workspace" class="hidden grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <!-- Left: Agent activity + logs -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-white border border-slate-200 rounded-3xl p-5">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-display font-semibold text-sm text-slate-900">Agent Activity</h3>
+            <span id="current-step-label" class="text-xs font-bold text-sky-600 uppercase tracking-wider"></span>
+          </div>
+          <div id="agent-status" class="mb-4">
+            <!-- status filled by JS -->
+          </div>
+          <div id="agent-logs" class="agent-log bg-slate-900 text-slate-300 rounded-xl p-3 max-h-48 overflow-y-auto text-[11px] space-y-1">
+            <!-- logs -->
+          </div>
+        </div>
+
+        <!-- History of previous steps -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-5">
+          <h3 class="font-display font-semibold text-sm text-slate-900 mb-3">Cycle History</h3>
+          <div id="cycle-history" class="space-y-2 max-h-64 overflow-y-auto text-sm">
+            <p class="text-slate-400 text-xs">No steps completed yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Generated content + human gate -->
+      <div class="lg:col-span-3">
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 h-full flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-display font-semibold text-sm text-slate-900">Generated Output</h3>
+            <div id="step-tools" class="text-xs text-slate-400"></div>
+          </div>
+
+          <div id="generated-panel" class="flex-1 flex flex-col min-h-[320px]">
+            <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400">
+              <div class="text-center">
+                <i class="fas fa-robot text-4xl mb-3 text-slate-300"></i>
+                <p class="text-sm">Start the cycle to see agents produce structured outputs.</p>
+              </div>
+            </div>
+
+            <div id="content-state" class="hidden flex-1 flex flex-col">
+              <div id="generated-content" class="generated-content bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm text-slate-700 mb-4 prose prose-sm max-w-none"></div>
+              
+              <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Edit / Annotate this output (optional)</label>
+              <textarea id="editable-output" rows="4" class="editable-output w-full bg-white border border-slate-200 rounded-xl p-3 text-sm text-slate-800 mb-4 font-body" placeholder="Modify the agent's output, add constraints, correct facts..."></textarea>
+
+              <!-- Human Gate Actions -->
+              <div id="gate-actions" class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                <button onclick="approveAndContinue()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25">
+                  <i class="fas fa-check mr-1.5"></i>Approve & Continue
+                </button>
+                <button onclick="rerunCurrentStep()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 hover:text-sky-600 font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm">
+                  <i class="fas fa-rotate-right mr-1.5"></i>Rerun Step
+                </button>
+                <button onclick="rejectAndRestart()" class="bg-white border border-red-200 hover:border-red-400 text-red-600 font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm">
+                  <i class="fas fa-times mr-1.5"></i>Reject & Restart
+                </button>
+                <button onclick="skipToEnd()" class="text-slate-400 hover:text-slate-600 text-sm font-medium px-3 py-2.5">
+                  Skip remaining →
+                </button>
+              </div>
+            </div>
+
+            <!-- Final state -->
+            <div id="final-state" class="hidden flex-1">
+              <!-- filled when cycle completes -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -523,150 +401,25 @@ tailwind.config = {
   <p class="text-slate-400 text-xs">contact@kayroslab.com · Built with the <a href="https://github.com/langchain-ai/langchain" target="_blank" class="text-sky-600 hover:text-sky-500">LangChain</a> agent architecture</p>
 </footer>
 
-<!-- ===== BACKEND INTEGRATION ===== -->
-<script type="module">
-  try {
-    const { createEngine } = await import('./core/index.mjs');
-    const API_BASE = (window.KAYROS_API_BASE
-      || (window.KAYROS_BACKEND_URL ? String(window.KAYROS_BACKEND_URL).replace(/\/llm\/?$/, '') : '')
-      || 'https://api.kayroslab.com/v1').replace(/\/$/, '');
-    const ORIGIN = API_BASE.replace(/\/v1$/, '');
-    const BACKEND = `${API_BASE}/llm`;
-    const EMBEDDINGS = `${API_BASE}/embed`;
-    const engine = createEngine({
-      backendUrl: BACKEND,
-      embeddingsUrl: EMBEDDINGS,
-      backendProvider: window.KAYROS_PROVIDER || 'anthropic',
-      secret: window.KAYROS_SECRET,
-    });
-    window.Kayros = {
-      engine,
-      apiBase: API_BASE,
-      backendUrl: BACKEND,
-      embeddingsUrl: EMBEDDINGS,
-      async health() { try { const r = await fetch(`${ORIGIN}/health`); return r.ok; } catch { return false; } },
-      async ask(query, { governance = 'supervise', provider } = {}) {
-        const plan = await engine.orchestrator.plan(query, { ideaId: 'ui' });
-        const res = { status: null, answer: null, traces: [], gate: null };
-        for await (const ev of engine.orchestrator.run(plan, { governance, provider })) {
-          if (ev.type === 'trace') res.traces.push({ agent: ev.agent, observation: ev.observation });
-          else if (ev.type === 'gate') { res.gate = ev; res.status = 'pending_review'; break; }
-          else if (ev.type === 'final') { res.status = ev.status; res.answer = ev.answer ?? ev.message; }
-        }
-        return res;
-      },
-      approveGate(gateId, by = 'geoff', role = 'comex') { return engine.governance.resolve(gateId, { decision: 'approve', by, role }); },
-      llm(messages, opts = {}) { return engine.llm.complete({ messages }, opts); },
-      project(decision, ctx = {}) { return engine.orchestrator.project(decision, ctx); },
-      async callTool(name, input, { ideaId } = {}) {
-        const r = await fetch(`${API_BASE}/tools/call`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, input, ideaId }) });
-        return r.json();
-      },
-    };
-    console.info('[KayrosLab] Backend connected —', API_BASE);
-  } catch (e) {
-    console.warn('[KayrosLab] Backend unavailable, using demo mode:', e.message);
-    window.Kayros = null;
-  }
-</script>
-
 <!-- ===== APPLICATION LOGIC ===== -->
 <script>
 // === CYCLE STEPS DATA ===
 const cycleData = [
-  {
-    title: 'Step 01 — Ecouter (Listen)',
-    agent: 'Signal Scanner',
-    model: 'Claude 3.5 Sonnet',
-    role: 'Qualifies weak signals from market, tech, and regulatory sources',
-    tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'],
-    output: 'Ranked signal list with relevance scores',
-    gate: 'Human validates which signals enter the pipeline',
-    gateWho: 'Expert Metier'
-  },
-  {
-    title: 'Step 02 — Cartographier (Map)',
-    agent: 'Trend Mapper',
-    model: 'GPT-4o',
-    role: 'Builds trend relationship graphs and finds bisociative bridges between domains',
-    tools: ['trend_network_builder()', 'bisociation_detector()'],
-    output: 'Trend graph with connected domains and opportunity nodes',
-    gate: 'Human selects which axes to explore',
-    gateWho: 'Strategic Lead'
-  },
-  {
-    title: 'Step 03 — Construire (Build)',
-    agent: 'Scenario Generator',
-    model: 'GPT-4o',
-    role: 'Generates concrete scenarios, briefs, and concept proposals',
-    tools: ['scenario_simulator()', 'pdf_livrable_generator()'],
-    output: 'Structured briefs with feasibility sketches',
-    gate: 'Human validates brief quality and relevance',
-    gateWho: 'Expert Metier'
-  },
-  {
-    title: 'Step 04 — Positionner (Position)',
-    agent: 'Positionneur',
-    model: 'Gemini 1.5 Pro',
-    role: 'Ontological competitive analysis — maps your idea against the real market landscape',
-    tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'],
-    output: 'Competitive position map with gap analysis',
-    gate: 'Human confirms market positioning assumptions',
-    gateWho: 'Market Expert'
-  },
-  {
-    title: 'Step 05 — Eprouver (Challenge)',
-    agent: 'Red Team + Devil\'s Advocate + Critic',
-    model: 'Claude 3.5 Sonnet',
-    role: 'Three adversarial agents systematically find what could go wrong',
-    tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'],
-    output: 'Challenge report with identified risks and weaknesses',
-    gate: 'Human reviews challenges and decides which to address',
-    gateWho: 'Risk Owner'
-  },
-  {
-    title: 'Step 06 — Arbitrer (Decide)',
-    agent: 'Synthesizer',
-    model: 'Gemini 1.5 Pro',
-    role: 'Aggregates votes, runs multi-criteria analysis, produces decision dossier',
-    tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'],
-    output: 'Decision dossier with KI scores and recommendation',
-    gate: 'COMEX makes final Go/No-Go decision',
-    gateWho: 'COMEX'
-  },
-  {
-    title: 'Step 07 — Projeter (Project)',
-    agent: 'Projection Agent',
-    model: 'DeepSeek R1',
-    role: 'Builds roadmap, KPIs, and runs P10/P50/P90 probabilistic simulation',
-    tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'],
-    output: 'Roadmap with milestones, KPIs, and cost projections',
-    gate: 'Human validates trajectory feasibility',
-    gateWho: 'Project Sponsor'
-  },
-  {
-    title: 'Step 08 — Realizer (Execute)',
-    agent: 'Execution Tracker',
-    model: 'GPT-4o',
-    role: 'Manages pilot deployment, tracks progress, feeds results back into the system',
-    tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'],
-    output: 'Progress report with variance analysis and feedback',
-    gate: 'Human conducts post-pilot review and re-arbitrage',
-    gateWho: 'COMEX'
-  }
+  { title: 'Step 01 — Ecouter (Listen)', agent: 'Signal Scanner', model: 'Claude 3.5 Sonnet', role: 'Qualifies weak signals from market, tech, and regulatory sources', tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'], output: 'Ranked signal list with relevance scores', gate: 'Human validates which signals enter the pipeline', gateWho: 'Expert Métier' },
+  { title: 'Step 02 — Cartographier (Map)', agent: 'Trend Mapper', model: 'GPT-4o', role: 'Builds trend relationship graphs and finds bisociative bridges between domains', tools: ['trend_network_builder()', 'bisociation_detector()'], output: 'Trend graph with connected domains and opportunity nodes', gate: 'Human selects which axes to explore', gateWho: 'Strategic Lead' },
+  { title: 'Step 03 — Construire (Build)', agent: 'Scenario Generator', model: 'GPT-4o', role: 'Generates concrete scenarios, briefs, and concept proposals', tools: ['scenario_simulator()', 'pdf_livrable_generator()'], output: 'Structured briefs with feasibility sketches', gate: 'Human validates brief quality and relevance', gateWho: 'Expert Métier' },
+  { title: 'Step 04 — Positionner (Position)', agent: 'Positionneur', model: 'Gemini 1.5 Pro', role: 'Ontological competitive analysis — maps your idea against the real market landscape', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'], output: 'Competitive position map with gap analysis', gate: 'Human confirms market positioning assumptions', gateWho: 'Market Expert' },
+  { title: 'Step 05 — Eprouver (Challenge)', agent: "Red Team + Devil's Advocate + Critic", model: 'Claude 3.5 Sonnet', role: 'Three adversarial agents systematically find what could go wrong', tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'], output: 'Challenge report with identified risks and weaknesses', gate: 'Human reviews challenges and decides which to address', gateWho: 'Risk Owner' },
+  { title: 'Step 06 — Arbitrer (Decide)', agent: 'Synthesizer', model: 'Gemini 1.5 Pro', role: 'Aggregates votes, runs multi-criteria analysis, produces decision dossier', tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'], output: 'Decision dossier with KI scores and recommendation', gate: 'COMEX makes final Go/No-Go decision', gateWho: 'COMEX' },
+  { title: 'Step 07 — Projeter (Project)', agent: 'Projection Agent', model: 'DeepSeek R1', role: 'Builds roadmap, KPIs, and runs P10/P50/P90 probabilistic simulation', tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'], output: 'Roadmap with milestones, KPIs, and cost projections', gate: 'Human validates trajectory feasibility', gateWho: 'Project Sponsor' },
+  { title: 'Step 08 — Realiser (Execute)', agent: 'Execution Tracker', model: 'GPT-4o', role: 'Manages pilot deployment, tracks progress, feeds results back into the system', tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'], output: 'Progress report with variance analysis and feedback', gate: 'Human conducts post-pilot review and re-arbitrage', gateWho: 'COMEX' }
 ];
 
 function showStep(idx) {
   document.querySelectorAll('.cycle-step').forEach((el, i) => {
-    if (i === idx) {
-      el.classList.add('border-sky-500', 'shadow-md');
-      el.classList.remove('border-slate-200');
-    } else {
-      el.classList.remove('border-sky-500', 'shadow-md');
-      el.classList.add('border-slate-200');
-    }
+    if (i === idx) { el.classList.add('border-sky-500', 'shadow-md'); el.classList.remove('border-slate-200'); }
+    else { el.classList.remove('border-sky-500', 'shadow-md'); el.classList.add('border-slate-200'); }
   });
-
   const d = cycleData[idx];
   const detail = document.getElementById('cycle-detail');
   detail.innerHTML = `
@@ -692,210 +445,420 @@ function showStep(idx) {
     </div>
     <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-xl text-sm font-semibold text-amber-700">
       <i class="fas fa-lock"></i> Human Gate: ${d.gateWho} — ${d.gate}
-    </div>
-  `;
+    </div>`;
   detail.classList.remove('hidden');
-  detail.classList.add('block');
 }
 
-// === DEMO LOGIC ===
-let demoRunning = false;
+// === INTERACTIVE DEMO STATE ===
+const demoState = {
+  idea: '',
+  currentStep: -1,
+  history: [],
+  isRunning: false,
+  stepOutputs: []
+};
 
-const demoSteps = [
-  { icon: 'fa-satellite-dish', cls: 'teal', title: 'Signal Scanner', text: 'Scanning market signals and weak signals...' },
-  { icon: 'fa-map-location-dot', cls: 'violet', title: 'Trend Mapper', text: 'Building trend relationship graph...' },
-  { icon: 'fa-building', cls: 'teal', title: 'Scenario Generator', text: 'Generating strategic scenarios...' },
-  { icon: 'fa-location-dot', cls: 'gold', title: 'Positionneur', text: 'Running ontological competitive analysis...' },
-  { icon: 'fa-shield-halved', cls: 'red', title: 'Red Team', text: 'Challenging assumptions and finding risks...' },
-  { icon: 'fa-balance-scale', cls: 'gold', title: 'Synthesizer', text: 'Aggregating votes and computing KI scores...' },
-  { icon: 'fa-chart-line', cls: 'teal', title: 'Projection Agent', text: 'Simulating P10/P50/P90 trajectories...' },
-  { icon: 'fa-rocket', cls: 'teal', title: 'Execution Tracker', text: 'Preparing deployment roadmap...' },
+const stepMeta = [
+  { icon: 'fa-satellite-dish', color: 'sky', short: 'Ecouter', agent: 'Signal Scanner' },
+  { icon: 'fa-map-location-dot', color: 'violet', short: 'Cartographier', agent: 'Trend Mapper' },
+  { icon: 'fa-building', color: 'sky', short: 'Construire', agent: 'Scenario Generator' },
+  { icon: 'fa-location-dot', color: 'amber', short: 'Positionner', agent: 'Positionneur' },
+  { icon: 'fa-shield-halved', color: 'red', short: 'Eprouver', agent: 'Red Team' },
+  { icon: 'fa-scale-balanced', color: 'amber', short: 'Arbitrer', agent: 'Synthesizer' },
+  { icon: 'fa-chart-line', color: 'sky', short: 'Projeter', agent: 'Projection Agent' },
+  { icon: 'fa-rocket', color: 'emerald', short: 'Realiser', agent: 'Execution Tracker' }
 ];
 
 function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 
-function clearDemo() {
-  document.getElementById('demo-idea').value = '';
-  document.getElementById('demo-output').innerHTML = `
-    <div class="text-slate-400 text-center py-8">
-      <i class="fas fa-robot text-3xl mb-3 text-slate-300"></i>
-      <p class="text-sm">Enter an idea and click <strong class="text-slate-600">Run Full Cycle</strong></p>
-    </div>
-  `;
-}
-
-function addDemoStep(icon, cls, title, text, extra = '') {
-  const output = document.getElementById('demo-output');
-  const colorMap = {
-    teal: 'bg-sky-100 text-sky-600',
-    gold: 'bg-amber-100 text-amber-600',
-    violet: 'bg-violet-100 text-violet-600',
-    red: 'bg-red-100 text-red-500',
-  };
-  const div = document.createElement('div');
-  div.className = 'demo-step flex gap-3 py-3 border-b border-slate-100';
-  div.innerHTML = `
-    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${colorMap[cls] || colorMap.teal}">
-      <i class="fas ${icon} text-xs"></i>
-    </div>
-    <div class="flex-1 min-w-0">
-      <h4 class="font-display font-semibold text-xs text-slate-900 mb-0.5">${title}</h4>
-      <p class="text-slate-500 text-xs">${text}</p>
-      ${extra}
-    </div>
-  `;
-  output.appendChild(div);
-  output.scrollTop = output.scrollHeight;
-}
-
-function addSpinner(title) {
-  const output = document.getElementById('demo-output');
-  const div = document.createElement('div');
-  div.className = 'demo-step flex gap-3 py-3 border-b border-slate-100';
-  div.id = 'demo-spinner';
-  div.innerHTML = `
-    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-sky-100 text-sky-600"><span class="spinner"></span></div>
-    <div class="flex-1 min-w-0">
-      <h4 class="font-display font-semibold text-xs text-slate-900 mb-0.5">${title}</h4>
-      <p class="text-slate-400 text-xs">Processing...</p>
-    </div>
-  `;
-  output.appendChild(div);
-  output.scrollTop = output.scrollHeight;
-}
-
-function removeSpinner() {
-  document.getElementById('demo-spinner')?.remove();
-}
-
-function calculateDemoKI(stepsCompleted, hasChallenge, hasExternal) {
-  let base = 4.0;
-  base += stepsCompleted * 0.55;
-  if (hasChallenge) base += 1.2;
-  if (hasExternal) base += 0.8;
-  const clamp = v => Math.min(9.8, Math.max(1.0, v));
-  return {
-    global: clamp(base).toFixed(1),
-    strategic: clamp(base * 0.95).toFixed(1),
-    feasibility: clamp(base * 1.05).toFixed(1),
-    risk: clamp(base * 0.85).toFixed(1),
-    impact: clamp(base * 0.98).toFixed(1),
-    originality: clamp(base + (hasChallenge ? 0.8 : 0)).toFixed(1),
-  };
-}
-
-async function runDemo() {
-  if (demoRunning) return;
-  const idea = document.getElementById('demo-idea').value.trim();
-  if (!idea) { alert('Please enter a strategic idea.'); return; }
-
-  demoRunning = true;
-  const btn = document.getElementById('demo-run-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner mr-1.5"></span> Running...';
-
-  const output = document.getElementById('demo-output');
-  output.innerHTML = '';
-
-  addDemoStep('fa-lightbulb', 'teal', 'Idea Received', `"${idea.substring(0, 80)}${idea.length > 80 ? '...' : ''}"`);
-
-  for (let i = 0; i < demoSteps.length; i++) {
-    const s = demoSteps[i];
-    addSpinner(s.title);
-    await new Promise(r => setTimeout(r, 600 + Math.random() * 800));
-    removeSpinner();
-
-    const hasChallenge = i >= 4;
-    const ki = calculateDemoKI(i + 1, hasChallenge, false);
-    const extra = (i === 4)
-      ? `<div class="mt-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-xs text-red-600">
-           <strong>3 risks identified:</strong> Market adoption speed, regulatory uncertainty in EU AI Act, integration complexity with legacy OT systems
-         </div>`
-      : (i === 5)
-      ? `<div class="mt-2 p-3 bg-slate-50 border border-slate-200 rounded-lg">
-           <div class="flex items-baseline gap-2">
-             <span class="font-display text-2xl font-bold text-sky-600">${ki.global}</span>
-             <span class="text-xs text-slate-400 uppercase tracking-wider">/ 10 Kayros Index</span>
-           </div>
-           <div class="grid grid-cols-2 gap-1 mt-2 text-xs">
-             <div class="flex justify-between"><span class="text-slate-500">Strategic Fit</span><span class="font-semibold text-sky-600">${ki.strategic}</span></div>
-             <div class="flex justify-between"><span class="text-slate-500">Feasibility</span><span class="font-semibold text-sky-600">${ki.feasibility}</span></div>
-             <div class="flex justify-between"><span class="text-slate-500">Risk Profile</span><span class="font-semibold text-sky-600">${ki.risk}</span></div>
-             <div class="flex justify-between"><span class="text-slate-500">Impact</span><span class="font-semibold text-sky-600">${ki.impact}</span></div>
-           </div>
-         </div>`
-      : '';
-    addDemoStep(s.icon, s.cls, s.title, s.text, extra);
-  }
-
-  await new Promise(r => setTimeout(r, 500));
-  const gateDiv = document.createElement('div');
-  gateDiv.className = 'mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl';
-  gateDiv.innerHTML = `
-    <h4 class="font-display font-semibold text-sm text-amber-700 mb-1"><i class="fas fa-lock mr-1.5"></i>Human Gate — COMEX Review Required</h4>
-    <p class="text-slate-600 text-xs mb-3">The agents have completed their analysis. A human decision is required before proceeding to execution.</p>
-    <div class="flex gap-2">
-      <button class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-4 py-1.5 rounded-3xl transition-all text-xs" onclick="approveDemoGate(this)">Approve & Execute</button>
-      <button class="bg-transparent border border-red-300 text-red-500 hover:border-red-400 font-semibold px-4 py-1.5 rounded-3xl transition-all text-xs" onclick="rejectDemoGate(this)">Reject</button>
-    </div>
-  `;
-  output.appendChild(gateDiv);
-  output.scrollTop = output.scrollHeight;
-
-  if (window.Kayros) {
-    try {
-      const result = await window.Kayros.ask(idea);
-      console.log('[Demo] Backend result:', result);
-    } catch (e) {
-      console.warn('[Demo] Backend call failed:', e.message);
-    }
-  }
-
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fas fa-play mr-1.5"></i>Run Full Cycle';
-  demoRunning = false;
-}
-
-function approveDemoGate(btn) {
-  const gate = btn.closest('div[class*="bg-amber"]');
-  gate.innerHTML = `
-    <h4 class="font-display font-semibold text-sm text-sky-600 mb-1"><i class="fas fa-check-circle mr-1.5"></i>Approved — Execution Initiated</h4>
-    <p class="text-slate-600 text-xs">Decision logged. Roadmap and KPIs have been generated. The execution tracker will monitor progress.</p>
-  `;
-}
-
-function rejectDemoGate(btn) {
-  const gate = btn.closest('div[class*="bg-amber"]');
-  gate.innerHTML = `
-    <h4 class="font-display font-semibold text-sm text-red-500 mb-1"><i class="fas fa-times-circle mr-1.5"></i>Rejected — Feedback Logged</h4>
-    <p class="text-slate-600 text-xs">Your rejection and comments have been recorded. The idea will be revised based on your feedback.</p>
-  `;
-}
-
-// === LANGUAGE SWITCHER ===
 function setLang(lang) {
-  document.getElementById('lang-fr').className = lang === 'fr'
-    ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white'
-    : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
-  document.getElementById('lang-en').className = lang === 'en'
-    ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white'
-    : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
+  document.getElementById('lang-fr').className = lang === 'fr' ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white' : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
+  document.getElementById('lang-en').className = lang === 'en' ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white' : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
 }
 
-// === SCROLL ANIMATIONS ===
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+function log(msg, type = 'info') {
+  const logs = document.getElementById('agent-logs');
+  const colors = { info: 'text-slate-400', tool: 'text-sky-400', success: 'text-emerald-400', warn: 'text-amber-400', error: 'text-red-400' };
+  const line = document.createElement('div');
+  line.className = colors[type] || colors.info;
+  const ts = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  line.innerHTML = `<span class="text-slate-600">[${ts}]</span> ${msg}`;
+  logs.appendChild(line);
+  logs.scrollTop = logs.scrollHeight;
+}
 
+function clearLogs() {
+  document.getElementById('agent-logs').innerHTML = '';
+}
+
+function updateProgress() {
+  const container = document.querySelector('#demo-progress > div');
+  container.innerHTML = stepMeta.map((s, i) => {
+    let cls = 'pending';
+    if (i < demoState.currentStep) cls = 'done';
+    else if (i === demoState.currentStep) cls = 'active';
+    return `<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap ${cls}" title="${s.short}">
+      <i class="fas ${s.icon} text-[10px]"></i><span>${i + 1}. ${s.short}</span>
+    </div>`;
+  }).join('<div class="w-4 h-px bg-slate-200 flex-shrink-0"></div>');
+}
+
+function updateHistory() {
+  const el = document.getElementById('cycle-history');
+  if (demoState.history.length === 0) {
+    el.innerHTML = '<p class="text-slate-400 text-xs">No steps completed yet.</p>';
+    return;
+  }
+  el.innerHTML = demoState.history.map(h => `
+    <div class="flex items-start gap-2 p-2 rounded-lg bg-slate-50 border border-slate-100">
+      <div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">${h.stepIdx + 1}</div>
+      <div class="min-w-0 flex-1">
+        <div class="font-semibold text-xs text-slate-800">${h.agent}</div>
+        <div class="text-[11px] text-slate-500 truncate">${h.editedText.substring(0, 80)}${h.editedText.length > 80 ? '…' : ''}</div>
+      </div>
+      <i class="fas fa-check-circle text-emerald-500 text-xs mt-0.5"></i>
+    </div>`).join('');
+}
+
+function generateStepContent(stepIdx, idea) {
+  const ideaShort = idea.length > 60 ? idea.substring(0, 57) + '…' : idea;
+  const templates = [
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Signal Scanner — Qualified Weak Signals</p>
+      <p class="text-xs text-slate-500">Input idea: “${ideaShort}”</p>
+      <ul class="list-disc pl-4 space-y-1.5 text-sm">
+        <li><strong>Market signal (score 8.4)</strong> — Rising demand for predictive maintenance in EU manufacturing (CAGR ~18 % 2024-28). Source: industrial IoT reports + recent CAPEX announcements.</li>
+        <li><strong>Tech signal (score 7.9)</strong> — Edge AI + tinyML models now accurate enough for vibration/acoustic anomaly detection on low-power sensors.</li>
+        <li><strong>Regulatory signal (score 7.1)</strong> — EU AI Act high-risk classification may apply to safety-critical industrial systems → need for conformity assessment path.</li>
+        <li><strong>Competitive signal (score 6.8)</strong> — Several pure-play startups (e.g. Senseye, Uptake) still focused on North America; European localization gap remains.</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-2">Recommendation: prioritize the first three signals for the next mapping step.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Trend Mapper — Relationship Graph & Bisociation Nodes</p>
+      <p class="text-sm">Core domains detected:</p>
+      <div class="flex flex-wrap gap-2 mb-2">
+        <span class="px-2 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-medium">Industrial IoT</span>
+        <span class="px-2 py-1 bg-violet-100 text-violet-700 rounded-full text-xs font-medium">Edge AI / tinyML</span>
+        <span class="px-2 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">Predictive Maintenance</span>
+        <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">EU Manufacturing 4.0</span>
+      </div>
+      <p class="text-sm"><strong>Bisociative bridges identified:</strong></p>
+      <ul class="list-disc pl-4 space-y-1 text-sm">
+        <li>Vibration analysis techniques from aerospace → factory motors & pumps</li>
+        <li>Federated learning patterns used in healthcare → multi-site industrial data without centralization</li>
+        <li>Digital twin maturity models from automotive → brownfield European plants</li>
+      </ul>
+      <p class="text-xs text-slate-500">Suggested exploration axes: (1) federated edge models, (2) brownfield retrofit packages, (3) AI-Act compliant audit trails.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Scenario Generator — Concept Briefs</p>
+      <div class="border border-slate-200 rounded-lg p-3 bg-white">
+        <p class="font-medium text-sm mb-1">Scenario A — “Edge Guardian”</p>
+        <p class="text-xs text-slate-600">On-premise tinyML agents running on existing PLC / gateway hardware. Local inference only. Central dashboard for fleet health + mandatory audit logs for AI Act.</p>
+        <p class="text-xs mt-1"><span class="text-emerald-600 font-medium">Feasibility: High</span> · Time-to-pilot: 4-6 months · CAPEX: low-medium</p>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-3 bg-white">
+        <p class="font-medium text-sm mb-1">Scenario B — “Sovereign Twin”</p>
+        <p class="text-xs text-slate-600">Full digital twin + predictive layer hosted in EU sovereign cloud. Richer analytics, higher data gravity, longer integration cycle.</p>
+        <p class="text-xs mt-1"><span class="text-amber-600 font-medium">Feasibility: Medium</span> · Time-to-pilot: 9-12 months · CAPEX: high</p>
+      </div>
+      <p class="text-xs text-slate-500">Preferred path for most mid-size European manufacturers: Scenario A with optional cloud enrichment later.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Positionneur — Competitive Ontological Map</p>
+      <table class="w-full text-xs border-collapse">
+        <thead><tr class="bg-slate-100 text-left"><th class="p-2">Player</th><th class="p-2">Focus</th><th class="p-2">EU strength</th><th class="p-2">Gap vs. idea</th></tr></thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="p-2 font-medium">Senseye</td><td class="p-2">Cloud PdM</td><td class="p-2">Medium</td><td class="p-2">Limited edge / AI-Act readiness</td></tr>
+          <tr class="border-b border-slate-100"><td class="p-2 font-medium">Uptake</td><td class="p-2">Enterprise AI</td><td class="p-2">Low</td><td class="p-2">US-centric, heavy integration</td></tr>
+          <tr class="border-b border-slate-100"><td class="p-2 font-medium">Siemens Insights Hub</td><td class="p-2">Platform</td><td class="p-2">High</td><td class="p-2">Broad but complex / expensive</td></tr>
+          <tr><td class="p-2 font-medium text-sky-700">Your idea</td><td class="p-2">Edge-first EU</td><td class="p-2">—</td><td class="p-2 text-emerald-600">Localization + compliance + retrofit simplicity</td></tr>
+        </tbody>
+      </table>
+      <p class="text-xs text-slate-500 mt-2">White-space: mid-market European plants that refuse full cloud migration and need AI-Act compliant auditability out of the box.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800 text-red-700">Red Team Report — Challenge Findings</p>
+      <div class="space-y-2">
+        <div class="p-3 bg-red-50 border border-red-100 rounded-lg">
+          <p class="text-xs font-bold text-red-700 mb-1">RISK 1 — Adoption friction (High)</p>
+          <p class="text-xs text-slate-700">Brownfield plants often have no standardized data layer. Retrofit packages must include hardware + change-management, otherwise pilots stall after 3 months.</p>
+        </div>
+        <div class="p-3 bg-red-50 border border-red-100 rounded-lg">
+          <p class="text-xs font-bold text-red-700 mb-1">RISK 2 — Regulatory classification (Medium-High)</p>
+          <p class="text-xs text-slate-700">If the system influences safety-critical decisions, it may fall under high-risk AI Act obligations. Early legal mapping and conformity strategy required.</p>
+        </div>
+        <div class="p-3 bg-amber-50 border border-amber-100 rounded-lg">
+          <p class="text-xs font-bold text-amber-700 mb-1">RISK 3 — Model drift in industrial environments (Medium)</p>
+          <p class="text-xs text-slate-700">Vibration signatures change with wear, lubrication, temperature. Continuous monitoring of model performance and human override paths are mandatory.</p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500">Devil’s Advocate note: “If the value is only 5-8 % unplanned downtime reduction, payback may not clear the investment committee without a strong reference case.”</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Synthesizer — Decision Dossier & Kayros Index</p>
+      <div class="flex items-baseline gap-3 mb-3">
+        <span class="font-display text-4xl font-bold text-sky-600">7.4</span>
+        <span class="text-sm text-slate-500">/ 10 Kayros Index</span>
+      </div>
+      <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Strategic Fit</span><span class="font-semibold text-sky-600">8.1</span></div>
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Feasibility</span><span class="font-semibold text-sky-600">7.6</span></div>
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Risk Profile</span><span class="font-semibold text-amber-600">6.2</span></div>
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Impact</span><span class="font-semibold text-sky-600">7.9</span></div>
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Originality</span><span class="font-semibold text-sky-600">7.0</span></div>
+        <div class="flex justify-between p-2 bg-slate-50 rounded"><span class="text-slate-500">Time-to-value</span><span class="font-semibold text-sky-600">7.5</span></div>
+      </div>
+      <p class="text-sm"><strong>Recommendation:</strong> Conditional Go — proceed to pilot under Scenario A (Edge Guardian) with explicit risk mitigation plan for AI Act classification and change management.</p>
+      <p class="text-xs text-slate-500">Voting simulation (weighted): Expert Métier 70 % Go · Risk Owner 55 % Go · Strategic Lead 80 % Go.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Projection Agent — Roadmap & Probabilistic Outlook</p>
+      <div class="text-xs space-y-1 mb-3">
+        <div class="flex gap-3"><span class="font-medium w-20">M0-M2</span><span>Hardware selection + edge agent prototype + first plant data contract</span></div>
+        <div class="flex gap-3"><span class="font-medium w-20">M3-M5</span><span>Pilot on 2-3 production lines · model training · AI Act gap analysis</span></div>
+        <div class="flex gap-3"><span class="font-medium w-20">M6-M9</span><span>Scale to 1 full site · reference case + commercial packaging</span></div>
+        <div class="flex gap-3"><span class="font-medium w-20">M10+</span><span>Multi-site rollout / partner channel</span></div>
+      </div>
+      <p class="text-sm font-medium mb-1">P10 / P50 / P90 (3-year NPV, simplified)</p>
+      <div class="flex gap-3 text-xs">
+        <div class="flex-1 p-2 bg-red-50 rounded text-center"><div class="text-red-600 font-bold">P10</div><div>−0.4 M€</div></div>
+        <div class="flex-1 p-2 bg-sky-50 rounded text-center"><div class="text-sky-600 font-bold">P50</div><div>+1.8 M€</div></div>
+        <div class="flex-1 p-2 bg-emerald-50 rounded text-center"><div class="text-emerald-600 font-bold">P90</div><div>+4.2 M€</div></div>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">Key sensitivity: adoption rate inside first 12 months and regulatory classification outcome.</p>
+    </div>`,
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Execution Tracker — Pilot Kick-off Package</p>
+      <ul class="list-disc pl-4 space-y-1.5 text-sm">
+        <li><strong>Success criteria</strong> — ≥ 12 % reduction in unplanned downtime on pilot lines within 6 months; model false-positive rate < 8 %; full audit trail available.</li>
+        <li><strong>Governance</strong> — Weekly stand-up with plant managers; monthly risk review with Legal (AI Act); quarterly COMEX checkpoint.</li>
+        <li><strong>Feedback loop</strong> — Every rejected alert and every confirmed failure is logged and fed back into the next training cycle.</li>
+        <li><strong>Exit / pivot triggers</strong> — If after 4 months downtime reduction < 5 % or regulatory path becomes prohibitive → re-arbitrage to pure analytics offering.</li>
+      </ul>
+      <p class="text-xs text-slate-500">Ready for formal pilot charter signature.</p>
+    </div>`
+  ];
+  return templates[stepIdx] || '<p>No content generated.</p>';
+}
+
+function setStatus(html) {
+  document.getElementById('agent-status').innerHTML = html;
+}
+
+async function runStep(stepIdx) {
+  if (demoState.isRunning) return;
+  demoState.isRunning = true;
+  demoState.currentStep = stepIdx;
+
+  const meta = stepMeta[stepIdx];
+  const data = cycleData[stepIdx];
+
+  document.getElementById('demo-progress').classList.remove('hidden');
+  document.getElementById('demo-workspace').classList.remove('hidden');
+  document.getElementById('waiting-state').classList.add('hidden');
+  document.getElementById('content-state').classList.add('hidden');
+  document.getElementById('final-state').classList.add('hidden');
+  document.getElementById('current-step-label').textContent = `Step ${stepIdx + 1} / 8`;
+  document.getElementById('step-tools').textContent = data.tools.join(' · ');
+
+  updateProgress();
+  clearLogs();
+
+  setStatus(`
+    <div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl">
+      <span class="spinner"></span>
+      <div>
+        <div class="font-semibold text-sm text-sky-800">${meta.agent} is working…</div>
+        <div class="text-xs text-sky-600">Model: ${data.model}</div>
+      </div>
+    </div>`);
+
+  log(`Starting ${meta.agent} (${data.model})`, 'info');
+  await sleep(400 + Math.random() * 300);
+
+  for (const tool of data.tools) {
+    log(`→ Calling tool ${tool}`, 'tool');
+    await sleep(350 + Math.random() * 400);
+    log(`← ${tool} returned structured payload`, 'success');
+  }
+
+  log(`Synthesizing final structured output…`, 'info');
+  await sleep(500 + Math.random() * 400);
+
+  const contentHtml = generateStepContent(stepIdx, demoState.idea);
+  document.getElementById('generated-content').innerHTML = contentHtml;
+  document.getElementById('editable-output').value = stripHtml(contentHtml).substring(0, 600);
+
+  setStatus(`
+    <div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl">
+      <i class="fas fa-check-circle text-emerald-500"></i>
+      <div>
+        <div class="font-semibold text-sm text-emerald-800">${meta.agent} completed</div>
+        <div class="text-xs text-emerald-600">Human gate required — ${data.gateWho}</div>
+      </div>
+    </div>`);
+
+  log(`Output ready. Waiting for human decision (${data.gateWho}).`, 'warn');
+
+  document.getElementById('content-state').classList.remove('hidden');
+  demoState.isRunning = false;
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+function startGovernedCycle() {
+  const idea = document.getElementById('demo-idea').value.trim();
+  if (!idea) {
+    alert('Please enter a strategic idea first.');
+    return;
+  }
+  demoState.idea = idea;
+  demoState.currentStep = -1;
+  demoState.history = [];
+  demoState.stepOutputs = [];
+  document.getElementById('demo-start-btn').disabled = true;
+  document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span> Running…';
+  runStep(0);
+}
+
+function approveAndContinue() {
+  if (demoState.currentStep < 0 || demoState.isRunning) return;
+
+  const edited = document.getElementById('editable-output').value.trim();
+  const meta = stepMeta[demoState.currentStep];
+
+  demoState.history.push({
+    stepIdx: demoState.currentStep,
+    agent: meta.agent,
+    outputHtml: document.getElementById('generated-content').innerHTML,
+    editedText: edited || stripHtml(document.getElementById('generated-content').innerHTML),
+    approved: true
+  });
+  updateHistory();
+
+  log(`Human approved step ${demoState.currentStep + 1}. Proceeding…`, 'success');
+
+  if (demoState.currentStep >= 7) {
+    finishCycle();
+  } else {
+    runStep(demoState.currentStep + 1);
+  }
+}
+
+function rerunCurrentStep() {
+  if (demoState.currentStep < 0 || demoState.isRunning) return;
+  log(`Relaunching step ${demoState.currentStep + 1} with current idea / annotations…`, 'warn');
+  runStep(demoState.currentStep);
+}
+
+function rejectAndRestart() {
+  if (demoState.isRunning) return;
+  const reason = prompt('Optional: why are you rejecting? (will be logged)');
+  log(`Human rejected at step ${demoState.currentStep + 1}${reason ? ': ' + reason : ''}. Restarting cycle.`, 'error');
+  demoState.history = [];
+  demoState.currentStep = -1;
+  updateHistory();
+  updateProgress();
+  document.getElementById('content-state').classList.add('hidden');
+  document.getElementById('waiting-state').classList.remove('hidden');
+  document.getElementById('demo-start-btn').disabled = false;
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Cycle';
+  clearLogs();
+  setStatus('');
+}
+
+function skipToEnd() {
+  if (demoState.isRunning) return;
+  const edited = document.getElementById('editable-output').value.trim();
+  const meta = stepMeta[demoState.currentStep];
+  demoState.history.push({
+    stepIdx: demoState.currentStep,
+    agent: meta.agent,
+    outputHtml: document.getElementById('generated-content').innerHTML,
+    editedText: edited,
+    approved: true
+  });
+  for (let i = demoState.currentStep + 1; i < 8; i++) {
+    demoState.history.push({
+      stepIdx: i,
+      agent: stepMeta[i].agent,
+      outputHtml: '<p class="text-slate-400 text-sm">Step skipped by user.</p>',
+      editedText: 'Skipped',
+      approved: true
+    });
+  }
+  updateHistory();
+  finishCycle();
+}
+
+function finishCycle() {
+  demoState.currentStep = 8;
+  updateProgress();
+  document.getElementById('content-state').classList.add('hidden');
+  document.getElementById('final-state').classList.remove('hidden');
+
+  const finalHtml = `
+    <div class="text-center py-6">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-flag-checkered text-2xl"></i>
+      </div>
+      <h3 class="font-display font-bold text-xl text-slate-900 mb-2">Governed Cycle Complete</h3>
+      <p class="text-slate-600 text-sm mb-6 max-w-md mx-auto">All 8 steps have been executed under human supervision. Full audit trail is available in the history panel.</p>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-sm mb-6">
+        <p class="font-semibold mb-2">Final recommendation (from Arbitrer step)</p>
+        <p class="text-slate-600">Conditional Go on the Edge-first European predictive maintenance offering, with explicit AI Act and change-management mitigation.</p>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button onclick="resetDemo()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl text-sm">
+          <i class="fas fa-rotate-left mr-1.5"></i>New Idea
+        </button>
+        <button onclick="alert('In the full platform this would export the complete decision dossier + audit log as PDF / JSON.')" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 font-semibold px-5 py-2.5 rounded-3xl text-sm">
+          <i class="fas fa-download mr-1.5"></i>Export Dossier
+        </button>
+      </div>
+    </div>`;
+  document.getElementById('final-state').innerHTML = finalHtml;
+  document.getElementById('demo-start-btn').disabled = false;
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Cycle';
+  log('Full cycle finished. Human remains in control of next actions.', 'success');
+}
+
+function resetDemo() {
+  demoState.idea = '';
+  demoState.currentStep = -1;
+  demoState.history = [];
+  demoState.isRunning = false;
+  document.getElementById('demo-idea').value = '';
+  document.getElementById('demo-progress').classList.add('hidden');
+  document.getElementById('demo-workspace').classList.add('hidden');
+  document.getElementById('demo-start-btn').disabled = false;
+  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Cycle';
+  clearLogs();
+  setStatus('');
+  document.getElementById('waiting-state').classList.remove('hidden');
+  document.getElementById('content-state').classList.add('hidden');
+  document.getElementById('final-state').classList.add('hidden');
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(el => observer.observe(el));
 
-// Initialize first step
+// Init
 showStep(0);
 </script>
 
