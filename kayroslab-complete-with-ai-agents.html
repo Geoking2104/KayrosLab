@@ -9,55 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://microsoft.github.io/Ontology-Playground/embed/ontology-embed.js"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
-        mono: ['Fira Code', 'monospace'],
-      },
-    },
-  },
-};
-</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{body:['Inter','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
-.animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-.stagger-children > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.stagger-children.visible > * { opacity: 1; transform: translateY(0); }
-.hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-.kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.section-header { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; }
-.cycle-step:hover { transform: translateY(-4px); }
-.step-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: #e0f2fe; color: #0284c8; font-weight: 700; font-size: 0.75rem; }
-.arch-icon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 1rem; font-size: 1.25rem; }
-.model-logo { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
-.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #e0f2fe; border-top-color: #0ea5e9; border-radius: 50%; animation: spin 0.6s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.3); border-radius: 3px; }
-.step-progress { transition: all 0.3s ease; }
-.step-progress.done { background: #0ea5e9; color: white; border-color: #0ea5e9; }
-.step-progress.active { background: #e0f2fe; color: #0284c8; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.2); }
-.step-progress.pending { background: white; color: #94a3b8; border-color: #e2e8f0; }
-.agent-log { font-family: 'Fira Code', monospace; font-size: 11px; line-height: 1.5; }
-.generated-content { max-height: 420px; overflow-y: auto; }
-.editable-output:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.15); }
-.ki-ring { width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(#0ea5e9 calc(var(--ki) * 1%), #e2e8f0 0); display: flex; align-items: center; justify-content: center; }
-.ki-ring-inner { width: 58px; height: 58px; border-radius: 50%; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.human-note { border-left: 3px solid #f59e0b; background: #fffbeb; }
-#report-template { position: fixed; left: 0; top: 0; width: 210mm; background: white; z-index: -1; opacity: 0; pointer-events: none; }
-#report-template.capturing { opacity: 1; z-index: 9999; }
-.ontology-embed { border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
-.prose-llm h3, .prose-llm h4 { font-weight: 700; margin-top: 0.75rem; margin-bottom: 0.35rem; }
-.prose-llm ul { list-style: disc; padding-left: 1.25rem; margin: 0.4rem 0; }
-.prose-llm p { margin: 0.35rem 0; }
-.prose-llm strong { font-weight: 600; }
-.provider-tab { transition: all 0.15s; }
-.provider-tab.active { background: #0f172a; color: white; }
+.animate-on-scroll{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
+.stagger-children>*{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}.stagger-children.visible>*{opacity:1;transform:translateY(0)}
+.hero-bg{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
+.kayros-gradient{background:linear-gradient(90deg,#0ea5e9,#0284c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-header{font-size:2.25rem;font-weight:700;letter-spacing:-.025em}
+.cycle-step:hover{transform:translateY(-4px)}
+.step-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:#e0f2fe;color:#0284c8;font-weight:700;font-size:.75rem}
+.arch-icon{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;margin:0 auto 1rem;font-size:1.25rem}
+.model-logo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #e0f2fe;border-top-color:#0ea5e9;border-radius:50%;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.step-progress{transition:all .3s ease}.step-progress.done{background:#0ea5e9;color:#fff;border-color:#0ea5e9}.step-progress.active{background:#e0f2fe;color:#0284c8;border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.2)}.step-progress.pending{background:#fff;color:#94a3b8;border-color:#e2e8f0}
+.agent-log{font-family:'Fira Code',monospace;font-size:11px;line-height:1.5}
+.generated-content{max-height:420px;overflow-y:auto}
+.editable-output:focus{outline:none;border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.ki-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(#0ea5e9 calc(var(--ki)*1%),#e2e8f0 0);display:flex;align-items:center;justify-content:center}
+.ki-ring-inner{width:58px;height:58px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.human-note{border-left:3px solid #f59e0b;background:#fffbeb}
+#report-template{position:fixed;left:0;top:0;width:210mm;background:#fff;z-index:-1;opacity:0;pointer-events:none}#report-template.capturing{opacity:1;z-index:9999}
+.ontology-embed{border-radius:12px;overflow:hidden;border:1px solid #e2e8f0}
+.prose-llm h3,.prose-llm h4{font-weight:700;margin-top:.75rem;margin-bottom:.35rem}.prose-llm ul{list-style:disc;padding-left:1.25rem;margin:.4rem 0}.prose-llm p{margin:.35rem 0}.prose-llm strong{font-weight:600}
+.provider-tab{transition:all .15s}.provider-tab.active{background:#0f172a;color:#fff}
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
@@ -79,7 +53,7 @@ tailwind.config = {
 </nav>
 
 <section class="hero-bg text-white py-24 px-6 text-center relative overflow-hidden">
-  <div class="absolute inset-0 opacity-30 pointer-events-none" style="background: radial-gradient(ellipse at 30% 20%, rgba(14,165,233,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(2,132,200,0.1) 0%, transparent 60%);"></div>
+  <div class="absolute inset-0 opacity-30 pointer-events-none" style="background:radial-gradient(ellipse at 30% 20%,rgba(14,165,233,.15) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(2,132,200,.1) 0%,transparent 60%)"></div>
   <div class="relative z-10 max-w-4xl mx-auto">
     <div class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6 border border-sky-500/20">The Governed Agent Platform</div>
     <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">Strategic Innovation,<br><span class="text-sky-400">Governed by Agents</span></h1>
@@ -96,13 +70,13 @@ tailwind.config = {
     <div class="animate-on-scroll">
       <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Architecture</div>
       <h2 class="section-header font-display mb-2">Agent <span class="kayros-gradient">= Model</span> + Harness</h2>
-      <p class="text-slate-600 max-w-2xl mb-6">Every agent in KayrosLab follows the LangChain pattern: a model providing reasoning, wrapped in a harness of tools, prompts, and middleware.</p>
+      <p class="text-slate-600 max-w-2xl mb-6">Every agent follows the LangChain pattern: model + tools + prompt + middleware, with human-in-the-loop gates.</p>
     </div>
     <div class="animate-on-scroll bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center mb-10">
       <p class="font-display text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Agent <span class="text-slate-400 font-normal mx-1">=</span> Model <span class="text-slate-400 font-normal mx-1">+</span> Tools <span class="text-slate-400 font-normal mx-1">+</span> Prompt <span class="text-slate-400 font-normal mx-1">+</span> Middleware</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children">
-      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div><h3 class="font-display font-semibold text-base mb-2">Model</h3><p class="text-slate-600 text-sm">Ollama (local), Mistral, Claude, GPT, Gemini.</p></div>
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div><h3 class="font-display font-semibold text-base mb-2">Model</h3><p class="text-slate-600 text-sm">Mistral via secure proxy · Ollama local · Claude · GPT</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-amber-400 hover:shadow-lg"><div class="arch-icon bg-amber-100 text-amber-600"><i class="fas fa-wrench"></i></div><h3 class="font-display font-semibold text-base mb-2">Tools</h3><p class="text-slate-600 text-sm">ki_scorer, search_competitors, ontological_mapper…</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-violet-400 hover:shadow-lg"><div class="arch-icon bg-violet-100 text-violet-600"><i class="fas fa-clipboard-list"></i></div><h3 class="font-display font-semibold text-base mb-2">Prompt</h3><p class="text-slate-600 text-sm">Specialized system prompts per agent role.</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-shield-halved"></i></div><h3 class="font-display font-semibold text-base mb-2">Middleware</h3><p class="text-slate-600 text-sm">Guardrails + human-in-the-loop gates.</p></div>
@@ -118,116 +92,69 @@ tailwind.config = {
       <p class="text-slate-600 max-w-2xl mb-6">Each step ends with a human gate. Click any step for details.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-children" id="cycle-steps">
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="0" onclick="showStep(0)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">1</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 01</span></div><h4 class="font-display font-semibold text-sm mb-1">Ecouter</h4><p class="text-slate-500 text-xs">Scan and qualify weak signals</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="1" onclick="showStep(1)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">2</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 02</span></div><h4 class="font-display font-semibold text-sm mb-1">Cartographier</h4><p class="text-slate-500 text-xs">Map trends and bisociative bridges</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="2" onclick="showStep(2)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">3</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 03</span></div><h4 class="font-display font-semibold text-sm mb-1">Construire</h4><p class="text-slate-500 text-xs">Generate scenarios and briefs</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="3" onclick="showStep(3)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">4</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 04</span></div><h4 class="font-display font-semibold text-sm mb-1">Positionner</h4><p class="text-slate-500 text-xs">Ontological competitive analysis</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="4" onclick="showStep(4)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">5</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 05</span></div><h4 class="font-display font-semibold text-sm mb-1">Eprouver</h4><p class="text-slate-500 text-xs">Red Team, Devil's Advocate, Critic</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="5" onclick="showStep(5)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">6</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 06</span></div><h4 class="font-display font-semibold text-sm mb-1">Arbitrer</h4><p class="text-slate-500 text-xs">Multi-criteria voting and decisions</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="6" onclick="showStep(6)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">7</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 07</span></div><h4 class="font-display font-semibold text-sm mb-1">Projeter</h4><p class="text-slate-500 text-xs">Roadmap, KPIs, probabilistic simulation</p></div>
-      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" data-step="7" onclick="showStep(7)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">8</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 08</span></div><h4 class="font-display font-semibold text-sm mb-1">Realiser</h4><p class="text-slate-500 text-xs">Pilot, deploy, feedback loop</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(0)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">1</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 01</span></div><h4 class="font-display font-semibold text-sm mb-1">Ecouter</h4><p class="text-slate-500 text-xs">Scan and qualify weak signals</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(1)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">2</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 02</span></div><h4 class="font-display font-semibold text-sm mb-1">Cartographier</h4><p class="text-slate-500 text-xs">Map trends and bisociative bridges</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(2)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">3</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 03</span></div><h4 class="font-display font-semibold text-sm mb-1">Construire</h4><p class="text-slate-500 text-xs">Generate scenarios and briefs</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(3)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">4</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 04</span></div><h4 class="font-display font-semibold text-sm mb-1">Positionner</h4><p class="text-slate-500 text-xs">Ontological competitive analysis</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(4)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">5</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 05</span></div><h4 class="font-display font-semibold text-sm mb-1">Eprouver</h4><p class="text-slate-500 text-xs">Red Team, Devil's Advocate, Critic</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(5)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">6</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 06</span></div><h4 class="font-display font-semibold text-sm mb-1">Arbitrer</h4><p class="text-slate-500 text-xs">Multi-criteria voting and decisions</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(6)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">7</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 07</span></div><h4 class="font-display font-semibold text-sm mb-1">Projeter</h4><p class="text-slate-500 text-xs">Roadmap, KPIs, probabilistic simulation</p></div>
+      <div class="cycle-step bg-white border border-slate-200 rounded-3xl p-5 cursor-pointer transition-all hover:border-sky-500 hover:shadow-md" onclick="showStep(7)"><div class="flex items-center gap-2 mb-2"><span class="step-badge">8</span><span class="text-xs font-bold text-sky-600 tracking-widest uppercase">Step 08</span></div><h4 class="font-display font-semibold text-sm mb-1">Realiser</h4><p class="text-slate-500 text-xs">Pilot, deploy, feedback loop</p></div>
     </div>
     <div id="cycle-detail" class="mt-6 bg-white border border-slate-200 rounded-3xl p-6 hidden"></div>
   </div>
 </section>
 
-<section id="models" class="py-20 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold tracking-widest uppercase mb-4">Model Interoperability</div>
-      <h2 class="section-header font-display mb-2">Swap Models, <span class="kayros-gradient">Not Code</span></h2>
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 stagger-children">
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-slate-800 text-white">O</div><div><h3 class="font-display font-semibold text-sm">Ollama</h3><div class="text-slate-400 text-xs">Local / Sovereign</div></div></div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-orange-500 text-white">M</div><div><h3 class="font-display font-semibold text-sm">Mistral</h3><div class="text-slate-400 text-xs">Cloud API</div></div></div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-amber-100 text-amber-800">C</div><div><h3 class="font-display font-semibold text-sm">Claude 3.5</h3><div class="text-slate-400 text-xs">Anthropic</div></div></div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-emerald-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">GPT-4o</h3><div class="text-slate-400 text-xs">OpenAI</div></div></div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="flex items-center gap-3"><div class="model-logo bg-blue-500 text-white">G</div><div><h3 class="font-display font-semibold text-sm">Gemini 1.5</h3><div class="text-slate-400 text-xs">Google</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="tools" class="py-20 px-6 bg-slate-50 border-t border-slate-200">
-  <div class="max-w-6xl mx-auto">
-    <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold tracking-widest uppercase mb-4">Tool Registry</div>
-      <h2 class="section-header font-display mb-2">Extensible <span class="kayros-gradient">Tools</span></h2>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 stagger-children">
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-violet-600 tracking-widest uppercase mb-2">Analysis</div><h3 class="font-display font-semibold text-sm mb-1">Competitor Scanner</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">search_competitors()</div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-sky-600 tracking-widest uppercase mb-2">Scoring</div><h3 class="font-display font-semibold text-sm mb-1">KI Scorer</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">ki_scorer()</div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-amber-600 tracking-widest uppercase mb-2">Ontology</div><h3 class="font-display font-semibold text-sm mb-1">Ontological Mapper</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">ontological_mapper() · Ontology Playground</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- LIVE DEMO -->
 <section id="demo" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="animate-on-scroll">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Live Demo · Real LLM</div>
+      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-4">Live Demo · Public</div>
       <h2 class="section-header font-display mb-2">Watch <span class="kayros-gradient">Agents</span> Work</h2>
-      <p class="text-slate-600 max-w-2xl mb-6">Chaque étape appelle un vrai modèle (Ollama local par défaut, ou Mistral cloud). Vos notes et conditions sont injectées dans le contexte de chaque agent.</p>
+      <p class="text-slate-600 max-w-2xl mb-6">Version réduite publique : chaque étape appelle Mistral via une passerelle sécurisée (clé API invisible). Annotez, validez, et exportez un rapport PDF.</p>
     </div>
 
     <div id="setup-panel" class="bg-white border border-slate-200 rounded-3xl p-6 mb-6 space-y-5">
-      <!-- Provider selector -->
+      <div class="flex flex-wrap items-center gap-2 p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-sm text-emerald-800">
+        <i class="fas fa-shield-halved text-emerald-600"></i>
+        <span><strong>Mode public</strong> — appels Mistral via proxy Cloudflare. Aucune clé à saisir. Quota limité (version démo).</span>
+      </div>
+
       <div>
-        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">0. LLM Provider</label>
-        <div class="flex gap-2 mb-3">
-          <button type="button" id="tab-ollama" onclick="setProvider('ollama')" class="provider-tab active px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200">Ollama (local)</button>
-          <button type="button" id="tab-mistral" onclick="setProvider('mistral')" class="provider-tab px-4 py-2 rounded-xl text-sm font-semibold border border-slate-200 text-slate-600 hover:bg-slate-50">Mistral API</button>
-        </div>
-
-        <!-- Ollama settings -->
-        <div id="ollama-settings" class="space-y-3">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="text-[11px] font-semibold text-slate-500 mb-1 block">Ollama Base URL</label>
-              <input id="ollama-url" type="text" value="http://localhost:11434" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-sky-500">
-            </div>
-            <div>
-              <label class="text-[11px] font-semibold text-slate-500 mb-1 block">Model name</label>
-              <input id="ollama-model" type="text" value="llama3.2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-sky-500" placeholder="llama3.2 · mistral · qwen2.5 · …">
-            </div>
-          </div>
-          <p class="text-[11px] text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-            <strong>CORS :</strong> si la page est servie depuis un autre domaine, lancez Ollama avec<br>
-            <code class="font-mono text-[11px]">OLLAMA_ORIGINS="*" ollama serve</code>
-            (ou ouvrez le fichier HTML en local).
-          </p>
-        </div>
-
-        <!-- Mistral settings -->
-        <div id="mistral-settings" class="hidden space-y-2">
+        <button type="button" onclick="document.getElementById('advanced-provider').classList.toggle('hidden')" class="text-xs text-slate-500 hover:text-sky-600 font-medium">
+          <i class="fas fa-sliders mr-1"></i> Options avancées (Ollama local) ▾
+        </button>
+        <div id="advanced-provider" class="hidden mt-3 space-y-3 border border-slate-100 rounded-xl p-4">
           <div class="flex gap-2">
-            <input id="mistral-key" type="password" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-sky-500 font-mono" placeholder="Clé API console.mistral.ai" autocomplete="off">
-            <button type="button" onclick="toggleKeyVisibility()" class="px-3 py-2 border border-slate-200 rounded-xl text-slate-500 hover:text-sky-600 text-sm" title="Afficher / masquer"><i class="fas fa-eye" id="key-eye"></i></button>
+            <button type="button" id="tab-proxy" onclick="setProvider('proxy')" class="provider-tab active px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200">Proxy public</button>
+            <button type="button" id="tab-ollama" onclick="setProvider('ollama')" class="provider-tab px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 text-slate-600">Ollama local</button>
           </div>
-          <p class="text-[11px] text-slate-400">Clé stockée uniquement en sessionStorage. <a href="https://console.mistral.ai/home?profile_dialog=api-keys" target="_blank" class="text-sky-600 underline">Obtenir une clé</a></p>
+          <div id="ollama-settings" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Ollama URL</label><input id="ollama-url" type="text" value="http://localhost:11434" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-sky-500"></div>
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Model</label><input id="ollama-model" type="text" value="llama3.2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-sky-500"></div>
+          </div>
+          <p class="text-[11px] text-slate-400">PROXY_URL est défini dans le code (après déploiement du Worker). Voir <code class="font-mono">workers/README.md</code>.</p>
         </div>
       </div>
 
       <div>
         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">1. Your Strategic Idea</label>
-        <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-900 placeholder-slate-400 resize-y focus:outline-none focus:border-sky-500 font-body" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
+        <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
       </div>
 
       <div class="border-t border-slate-100 pt-5">
         <div class="flex items-center justify-between mb-3">
-          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">2. Scope, Conditions & Constraints <span class="text-amber-600 font-normal normal-case">(improves KI)</span></label>
-          <button type="button" onclick="toggleConditions()" class="text-xs text-sky-600 hover:text-sky-700 font-medium" id="cond-toggle">Show details ▾</button>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">2. Scope & Conditions <span class="text-amber-600 font-normal normal-case">(improves KI)</span></label>
+          <button type="button" onclick="toggleConditions()" class="text-xs text-sky-600 font-medium" id="cond-toggle">Show details ▾</button>
         </div>
         <div id="conditions-box" class="hidden space-y-3">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Geographic / Market scope</label><input id="cond-geo" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. EU-27, focus DACH + France"></div>
-            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Budget / Investment ceiling</label><input id="cond-budget" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. < 1.5 M€ for pilot phase"></div>
-            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Time horizon / Deadline</label><input id="cond-time" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. Pilot live Q2 2027"></div>
-            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Must-have / Non-negotiable</label><input id="cond-must" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. AI Act compliant, on-premise option"></div>
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Geographic scope</label><input id="cond-geo" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. EU-27"></div>
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Budget ceiling</label><input id="cond-budget" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. < 1.5 M€"></div>
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Time horizon</label><input id="cond-time" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. Pilot Q2 2027"></div>
+            <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Must-have</label><input id="cond-must" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="e.g. AI Act compliant"></div>
           </div>
-          <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Free-form notes, exclusions, strategic priorities</label><textarea id="cond-notes" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="Competitors to avoid, partners already engaged, regulatory red lines..."></textarea></div>
+          <div><label class="text-[11px] font-semibold text-slate-500 mb-1 block">Notes / exclusions</label><textarea id="cond-notes" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500" placeholder="Competitors to avoid, partners…"></textarea></div>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2">Richer conditions = higher starting KI and more relevant agent outputs.</p>
       </div>
 
       <div class="flex flex-wrap gap-3 pt-2">
@@ -240,7 +167,7 @@ tailwind.config = {
       <div class="flex flex-col sm:flex-row sm:items-center gap-4">
         <div class="flex items-center gap-1 overflow-x-auto pb-2 flex-1"></div>
         <div id="live-ki" class="flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-2 shadow-sm">
-          <div class="ki-ring" style="--ki: 35"><div class="ki-ring-inner"><span id="ki-value" class="font-display font-bold text-lg text-sky-600 leading-none">3.5</span><span class="text-[9px] text-slate-400 uppercase">KI</span></div></div>
+          <div class="ki-ring" style="--ki:35"><div class="ki-ring-inner"><span id="ki-value" class="font-display font-bold text-lg text-sky-600 leading-none">3.5</span><span class="text-[9px] text-slate-400 uppercase">KI</span></div></div>
           <div class="text-xs"><div class="font-semibold text-slate-700">Kayros Index</div><div id="ki-delta" class="text-slate-400">Base score</div></div>
         </div>
       </div>
@@ -249,31 +176,30 @@ tailwind.config = {
     <div id="demo-workspace" class="hidden grid grid-cols-1 lg:grid-cols-5 gap-6">
       <div class="lg:col-span-2 space-y-4">
         <div class="bg-white border border-slate-200 rounded-3xl p-5">
-          <div class="flex items-center justify-between mb-3"><h3 class="font-display font-semibold text-sm text-slate-900">Agent Activity</h3><span id="current-step-label" class="text-xs font-bold text-sky-600 uppercase tracking-wider"></span></div>
+          <div class="flex items-center justify-between mb-3"><h3 class="font-display font-semibold text-sm">Agent Activity</h3><span id="current-step-label" class="text-xs font-bold text-sky-600 uppercase tracking-wider"></span></div>
           <div id="agent-status" class="mb-4"></div>
           <div id="agent-logs" class="agent-log bg-slate-900 text-slate-300 rounded-xl p-3 max-h-44 overflow-y-auto text-[11px] space-y-1"></div>
         </div>
         <div class="bg-white border border-slate-200 rounded-3xl p-5">
-          <h3 class="font-display font-semibold text-sm text-slate-900 mb-3">Cycle History + Human Notes</h3>
+          <h3 class="font-display font-semibold text-sm mb-3">Cycle History + Human Notes</h3>
           <div id="cycle-history" class="space-y-2 max-h-72 overflow-y-auto text-sm"><p class="text-slate-400 text-xs">No steps completed yet.</p></div>
         </div>
       </div>
       <div class="lg:col-span-3">
         <div class="bg-white border border-slate-200 rounded-3xl p-6 h-full flex flex-col">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-display font-semibold text-sm text-slate-900">Generated Output</h3><div id="step-tools" class="text-xs text-slate-400"></div></div>
+          <div class="flex items-center justify-between mb-4"><h3 class="font-display font-semibold text-sm">Generated Output</h3><div id="step-tools" class="text-xs text-slate-400"></div></div>
           <div id="generated-panel" class="flex-1 flex flex-col min-h-[340px]">
-            <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Choisissez Ollama ou Mistral, entrez une idée, puis lancez le cycle.</p></div></div>
+            <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Entrez une idée, puis lancez le cycle (proxy public).</p></div></div>
             <div id="content-state" class="hidden flex-1 flex flex-col">
               <div id="generated-content" class="generated-content prose-llm bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm text-slate-700 mb-4"></div>
               <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 mb-4">
-                <div class="flex items-center gap-2 mb-2"><i class="fas fa-user-edit text-amber-600"></i><span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Your intervention (comments · corrections · additions)</span></div>
-                <textarea id="editable-output" rows="4" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm text-slate-800 font-body" placeholder="Add notes, correct facts, impose new constraints… These are fed to the next agents and improve the Kayros Index."></textarea>
-                <p class="text-[11px] text-amber-700/80 mt-1.5">Your notes are recorded in the audit trail and influence the next steps + final KI score.</p>
+                <div class="flex items-center gap-2 mb-2"><i class="fas fa-user-edit text-amber-600"></i><span class="text-xs font-bold text-amber-800 uppercase tracking-wider">Your intervention</span></div>
+                <textarea id="editable-output" rows="4" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm" placeholder="Notes, corrections, contraintes… injectées aux agents suivants."></textarea>
               </div>
-              <div id="gate-actions" class="flex flex-wrap gap-2 pt-1">
-                <button onclick="approveAndContinue()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-check mr-1.5"></i>Approve & Continue</button>
-                <button onclick="rerunCurrentStep()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 hover:text-sky-600 font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm"><i class="fas fa-rotate-right mr-1.5"></i>Rerun Step</button>
-                <button onclick="rejectAndRestart()" class="bg-white border border-red-200 hover:border-red-400 text-red-600 font-semibold px-5 py-2.5 rounded-3xl transition-all text-sm"><i class="fas fa-times mr-1.5"></i>Reject & Restart</button>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="approveAndContinue()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-check mr-1.5"></i>Approve & Continue</button>
+                <button onclick="rerunCurrentStep()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-rotate-right mr-1.5"></i>Rerun</button>
+                <button onclick="rejectAndRestart()" class="bg-white border border-red-200 text-red-600 font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-times mr-1.5"></i>Reject</button>
                 <button onclick="skipToEnd()" class="text-slate-400 hover:text-slate-600 text-sm font-medium px-3 py-2.5">Skip remaining →</button>
               </div>
             </div>
@@ -289,271 +215,210 @@ tailwind.config = {
 
 <footer class="text-center py-12 px-6 border-t border-slate-200">
   <p class="text-slate-500 text-sm mb-2"><span class="font-display font-bold text-slate-900">KayrosLab</span> — The Governed Agent Platform</p>
-  <p class="text-slate-400 text-xs">contact@kayroslab.com · Local inference via <a href="https://ollama.com" target="_blank" class="text-sky-600 hover:text-sky-500">Ollama</a> · Ontological maps by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 hover:text-sky-500">Microsoft Ontology Playground</a></p>
+  <p class="text-slate-400 text-xs">contact@kayroslab.com · Public demo via Cloudflare Worker proxy · Ontology Playground</p>
 </footer>
 
 <script>
+/* ═══════════════════════════════════════════════════════════
+   PROXY URL — set this AFTER deploying workers/mistral-demo-proxy.js
+   Example: 'https://kayros-demo-proxy.<account>.workers.dev'
+   See workers/README.md for deploy steps.
+   ═══════════════════════════════════════════════════════════ */
+const PROXY_URL = 'https://kayros-demo-proxy.workers.dev'; // ← replace with your Worker URL
+
 const cycleData = [
-  { title: 'Step 01 — Ecouter', agent: 'Signal Scanner', role: 'Qualifies weak signals from market, tech, regulatory and competitive sources', tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'], gateWho: 'Expert Métier',
-    system: 'Tu es le Signal Scanner de KayrosLab. Tu qualifies les signaux faibles (marché, technologie, réglementation, concurrentiel) liés à une idée stratégique. Réponds en français, de façon structurée, concise et actionnable. Utilise des scores 1-10 quand pertinent. Formate en HTML simple (p, ul, li, strong) ou markdown léger.' },
-  { title: 'Step 02 — Cartographier', agent: 'Trend Mapper', role: 'Builds trend graphs and bisociative bridges', tools: ['trend_network_builder()', 'bisociation_detector()'], gateWho: 'Strategic Lead',
-    system: 'Tu es le Trend Mapper de KayrosLab. Tu cartographies les tendances et identifies des ponts bisociatifs (analogies inter-domaines). Réponds en français, structure claire.' },
-  { title: 'Step 03 — Construire', agent: 'Scenario Generator', role: 'Generates 2-3 concrete scenarios with feasibility', tools: ['scenario_simulator()', 'pdf_livrable_generator()'], gateWho: 'Expert Métier',
-    system: 'Tu es le Scenario Generator de KayrosLab. Tu proposes 2 ou 3 scénarios concrets (nom, description, faisabilité, horizon) pour l\'idée donnée, en respectant les contraintes. Réponds en français.' },
-  { title: 'Step 04 — Positionner', agent: 'Positionneur', role: 'Competitive ontology + associations/divergences', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'], gateWho: 'Market Expert',
-    system: 'Tu es le Positionneur de KayrosLab. Tu analyses le positionnement concurrentiel sous forme ontologique : associations (capacités partagées) et divergences/gaps (opportunités). Réponds en français. Mentionne explicitement associations et gaps.' },
-  { title: 'Step 05 — Eprouver', agent: 'Red Team', role: 'Adversarial challenge of the idea', tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'], gateWho: 'Risk Owner',
-    system: 'Tu es le Red Team / Devil\'s Advocate de KayrosLab. Tu challenges l\'idée de façon adversariale : risques, biais, points de rupture. Sois critique mais constructif. Réponds en français, 3 risques prioritaires maximum.' },
-  { title: 'Step 06 — Arbitrer', agent: 'Synthesizer', role: 'KI scoring and go / no-go recommendation', tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'], gateWho: 'COMEX',
-    system: 'Tu es le Synthesizer de KayrosLab. Tu synthétises le dossier, proposes un score Kayros Index (1-10) et une recommandation (Go / Conditional Go / No-Go) avec justification. Réponds en français.' },
-  { title: 'Step 07 — Projeter', agent: 'Projection Agent', role: 'Roadmap and P10/P50/P90 simulation', tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'], gateWho: 'Project Sponsor',
-    system: 'Tu es le Projection Agent de KayrosLab. Tu construis une roadmap réaliste (jalons) et des estimations P10 / P50 / P90 de valeur. Réponds en français.' },
-  { title: 'Step 08 — Realiser', agent: 'Execution Tracker', role: 'Pilot package and feedback loop', tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'], gateWho: 'COMEX',
-    system: 'Tu es l\'Execution Tracker de KayrosLab. Tu définis le package de pilotage : critères de succès, gouvernance, boucle de feedback, triggers de sortie. Réponds en français.' }
+  { title:'Step 01 — Ecouter', agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()','search_regulatory_risks()'], gateWho:'Expert Métier',
+    system:'Tu es le Signal Scanner de KayrosLab. Tu qualifies les signaux faibles (marché, tech, réglementation, concurrentiel). Réponds en français, structuré, scores 1-10 si pertinent.' },
+  { title:'Step 02 — Cartographier', agent:'Trend Mapper', tools:['trend_network_builder()','bisociation_detector()'], gateWho:'Strategic Lead',
+    system:'Tu es le Trend Mapper de KayrosLab. Cartographie les tendances et ponts bisociatifs. Réponds en français.' },
+  { title:'Step 03 — Construire', agent:'Scenario Generator', tools:['scenario_simulator()','pdf_livrable_generator()'], gateWho:'Expert Métier',
+    system:'Tu es le Scenario Generator de KayrosLab. Propose 2-3 scénarios concrets (nom, description, faisabilité, horizon). Réponds en français.' },
+  { title:'Step 04 — Positionner', agent:'Positionneur', tools:['search_competitors()','gap_analyzer()','ontological_mapper()'], gateWho:'Market Expert',
+    system:'Tu es le Positionneur de KayrosLab. Analyse concurrentielle ontologique : associations et divergences/gaps. Réponds en français.' },
+  { title:'Step 05 — Eprouver', agent:'Red Team', tools:['risk_assessor()','bias_detector()','stress_test()'], gateWho:'Risk Owner',
+    system:'Tu es le Red Team de KayrosLab. Challenge adversarial : 3 risques prioritaires max. Critique mais constructif. Réponds en français.' },
+  { title:'Step 06 — Arbitrer', agent:'Synthesizer', tools:['vote_aggregator()','ki_scorer()','criteria_weighter()'], gateWho:'COMEX',
+    system:'Tu es le Synthesizer de KayrosLab. Synthèse, score Kayros Index 1-10, recommandation Go / Conditional Go / No-Go. Réponds en français.' },
+  { title:'Step 07 — Projeter', agent:'Projection Agent', tools:['scenario_simulator()','roadmap_builder()','kpi_tracker()'], gateWho:'Project Sponsor',
+    system:'Tu es le Projection Agent de KayrosLab. Roadmap jalons + P10/P50/P90. Réponds en français.' },
+  { title:'Step 08 — Realiser', agent:'Execution Tracker', tools:['milestone_tracker()','variance_analyzer()','feedback_loop()'], gateWho:'COMEX',
+    system:'Tu es l\'Execution Tracker de KayrosLab. Critères de succès, gouvernance, feedback loop, exit triggers. Réponds en français.' }
 ];
 
+const stepMeta = [
+  { icon:'fa-satellite-dish', short:'Ecouter', agent:'Signal Scanner' },
+  { icon:'fa-map-location-dot', short:'Cartographier', agent:'Trend Mapper' },
+  { icon:'fa-building', short:'Construire', agent:'Scenario Generator' },
+  { icon:'fa-location-dot', short:'Positionner', agent:'Positionneur' },
+  { icon:'fa-shield-halved', short:'Eprouver', agent:'Red Team' },
+  { icon:'fa-scale-balanced', short:'Arbitrer', agent:'Synthesizer' },
+  { icon:'fa-chart-line', short:'Projeter', agent:'Projection Agent' },
+  { icon:'fa-rocket', short:'Realiser', agent:'Execution Tracker' }
+];
+
+const demoState = { idea:'', conditions:{}, currentStep:-1, history:[], isRunning:false, ki:3.5, kiHistory:[3.5], provider:'proxy', ollamaModel:'llama3.2' };
+
 function showStep(idx) {
-  document.querySelectorAll('.cycle-step').forEach((el, i) => {
-    if (i === idx) { el.classList.add('border-sky-500', 'shadow-md'); el.classList.remove('border-slate-200'); }
-    else { el.classList.remove('border-sky-500', 'shadow-md'); el.classList.add('border-slate-200'); }
+  document.querySelectorAll('.cycle-step').forEach((el,i)=>{
+    el.classList.toggle('border-sky-500', i===idx); el.classList.toggle('shadow-md', i===idx);
+    el.classList.toggle('border-slate-200', i!==idx);
   });
   const d = cycleData[idx];
-  document.getElementById('cycle-detail').innerHTML = `<h3 class="font-display font-bold text-lg text-slate-900 mb-4">${d.title}</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase tracking-wider">Agent</h4><p class="text-sm text-slate-900"><strong>${d.agent}</strong></p></div><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase tracking-wider">Role</h4><p class="text-sm text-slate-600">${d.role}</p></div><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase tracking-wider">Tools</h4><p class="text-sm">${d.tools.map(t => '<code class="text-sky-600 font-mono text-xs">' + t + '</code>').join('<br>')}</p></div><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase tracking-wider">Human Gate</h4><p class="text-sm text-slate-600">${d.gateWho}</p></div></div>`;
+  document.getElementById('cycle-detail').innerHTML = `<h3 class="font-display font-bold text-lg mb-4">${d.title}</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase">Agent</h4><p class="text-sm"><strong>${d.agent}</strong></p></div><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase">Tools</h4><p class="text-sm">${d.tools.map(t=>'<code class="text-sky-600 font-mono text-xs">'+t+'</code>').join('<br>')}</p></div><div class="bg-slate-50 rounded-xl p-4 border border-slate-100"><h4 class="text-xs font-bold text-sky-600 mb-1 uppercase">Human Gate</h4><p class="text-sm">${d.gateWho}</p></div></div>`;
   document.getElementById('cycle-detail').classList.remove('hidden');
 }
 
-const demoState = {
-  idea: '', conditions: {}, currentStep: -1, history: [], isRunning: false,
-  ki: 3.5, kiHistory: [3.5], provider: 'ollama', apiKey: '', ollamaUrl: 'http://localhost:11434', ollamaModel: 'llama3.2'
-};
-const stepMeta = [
-  { icon: 'fa-satellite-dish', short: 'Ecouter', agent: 'Signal Scanner' },
-  { icon: 'fa-map-location-dot', short: 'Cartographier', agent: 'Trend Mapper' },
-  { icon: 'fa-building', short: 'Construire', agent: 'Scenario Generator' },
-  { icon: 'fa-location-dot', short: 'Positionner', agent: 'Positionneur' },
-  { icon: 'fa-shield-halved', short: 'Eprouver', agent: 'Red Team' },
-  { icon: 'fa-scale-balanced', short: 'Arbitrer', agent: 'Synthesizer' },
-  { icon: 'fa-chart-line', short: 'Projeter', agent: 'Projection Agent' },
-  { icon: 'fa-rocket', short: 'Realiser', agent: 'Execution Tracker' }
-];
-
 function setProvider(p) {
   demoState.provider = p;
-  document.getElementById('tab-ollama').classList.toggle('active', p === 'ollama');
-  document.getElementById('tab-mistral').classList.toggle('active', p === 'mistral');
-  document.getElementById('ollama-settings').classList.toggle('hidden', p !== 'ollama');
-  document.getElementById('mistral-settings').classList.toggle('hidden', p !== 'mistral');
+  document.getElementById('tab-proxy')?.classList.toggle('active', p==='proxy');
+  document.getElementById('tab-ollama')?.classList.toggle('active', p==='ollama');
+  document.getElementById('ollama-settings')?.classList.toggle('hidden', p!=='ollama');
 }
-function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
-function setLang(lang) {
-  document.getElementById('lang-fr').className = lang === 'fr' ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white' : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
-  document.getElementById('lang-en').className = lang === 'en' ? 'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white' : 'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
+function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
+function setLang(lang){
+  document.getElementById('lang-fr').className = lang==='fr'?'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white':'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
+  document.getElementById('lang-en').className = lang==='en'?'px-3 py-1 rounded-full font-semibold transition-colors bg-slate-900 text-white':'px-3 py-1 rounded-full font-semibold transition-colors text-slate-500 hover:bg-slate-100';
 }
-function toggleConditions() {
-  const box = document.getElementById('conditions-box');
-  const btn = document.getElementById('cond-toggle');
-  const open = !box.classList.contains('hidden');
-  box.classList.toggle('hidden');
-  btn.textContent = open ? 'Show details ▾' : 'Hide details ▴';
+function toggleConditions(){
+  const box=document.getElementById('conditions-box'), btn=document.getElementById('cond-toggle');
+  const open=!box.classList.contains('hidden');
+  box.classList.toggle('hidden'); btn.textContent=open?'Show details ▾':'Hide details ▴';
 }
-function toggleKeyVisibility() {
-  const input = document.getElementById('mistral-key');
-  const eye = document.getElementById('key-eye');
-  if (input.type === 'password') { input.type = 'text'; eye.className = 'fas fa-eye-slash'; }
-  else { input.type = 'password'; eye.className = 'fas fa-eye'; }
+function log(msg,type='info'){
+  const logs=document.getElementById('agent-logs');
+  const colors={info:'text-slate-400',tool:'text-sky-400',success:'text-emerald-400',warn:'text-amber-400',error:'text-red-400',human:'text-amber-300',llm:'text-violet-300'};
+  const line=document.createElement('div'); line.className=colors[type]||colors.info;
+  const ts=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  line.innerHTML=`<span class="text-slate-600">[${ts}]</span> ${msg}`;
+  logs.appendChild(line); logs.scrollTop=logs.scrollHeight;
 }
-function log(msg, type = 'info') {
-  const logs = document.getElementById('agent-logs');
-  const colors = { info: 'text-slate-400', tool: 'text-sky-400', success: 'text-emerald-400', warn: 'text-amber-400', error: 'text-red-400', human: 'text-amber-300', llm: 'text-violet-300' };
-  const line = document.createElement('div');
-  line.className = colors[type] || colors.info;
-  const ts = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  line.innerHTML = `<span class="text-slate-600">[${ts}]</span> ${msg}`;
-  logs.appendChild(line);
-  logs.scrollTop = logs.scrollHeight;
-}
-function clearLogs() { document.getElementById('agent-logs').innerHTML = ''; }
-function updateProgress() {
-  const container = document.querySelector('#demo-progress > div > div');
-  container.innerHTML = stepMeta.map((s, i) => {
-    let cls = 'pending';
-    if (i < demoState.currentStep) cls = 'done';
-    else if (i === demoState.currentStep) cls = 'active';
-    return `<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap ${cls}" title="${s.short}"><i class="fas ${s.icon} text-[10px]"></i><span>${i + 1}. ${s.short}</span></div>`;
+function clearLogs(){ document.getElementById('agent-logs').innerHTML=''; }
+function updateProgress(){
+  const c=document.querySelector('#demo-progress > div > div');
+  c.innerHTML=stepMeta.map((s,i)=>{
+    let cls=i<demoState.currentStep?'done':i===demoState.currentStep?'active':'pending';
+    return `<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap ${cls}"><i class="fas ${s.icon} text-[10px]"></i><span>${i+1}. ${s.short}</span></div>`;
   }).join('<div class="w-3 h-px bg-slate-200 flex-shrink-0"></div>');
 }
-function updateKI(newVal, reason) {
-  const prev = demoState.ki;
-  demoState.ki = Math.min(9.8, Math.max(1.0, +newVal.toFixed(1)));
-  demoState.kiHistory.push(demoState.ki);
-  const ring = document.querySelector('.ki-ring');
-  if (ring) ring.style.setProperty('--ki', demoState.ki * 10);
-  document.getElementById('ki-value').textContent = demoState.ki.toFixed(1);
-  const delta = demoState.ki - prev;
-  const deltaEl = document.getElementById('ki-delta');
-  if (delta > 0.05) deltaEl.innerHTML = `<span class="text-emerald-600 font-medium">+${delta.toFixed(1)}</span> · ${reason}`;
-  else if (delta < -0.05) deltaEl.innerHTML = `<span class="text-red-500 font-medium">${delta.toFixed(1)}</span> · ${reason}`;
-  else deltaEl.textContent = reason || 'Stable';
+function updateKI(v,reason){
+  const prev=demoState.ki; demoState.ki=Math.min(9.8,Math.max(1,+v.toFixed(1))); demoState.kiHistory.push(demoState.ki);
+  document.querySelector('.ki-ring')?.style.setProperty('--ki', demoState.ki*10);
+  document.getElementById('ki-value').textContent=demoState.ki.toFixed(1);
+  const d=demoState.ki-prev, el=document.getElementById('ki-delta');
+  if(d>0.05) el.innerHTML=`<span class="text-emerald-600 font-medium">+${d.toFixed(1)}</span> · ${reason}`;
+  else if(d<-0.05) el.innerHTML=`<span class="text-red-500 font-medium">${d.toFixed(1)}</span> · ${reason}`;
+  else el.textContent=reason||'Stable';
 }
-function updateHistory() {
-  const el = document.getElementById('cycle-history');
-  if (demoState.history.length === 0) { el.innerHTML = '<p class="text-slate-400 text-xs">No steps completed yet.</p>'; return; }
-  el.innerHTML = demoState.history.map(h => `<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex items-start gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">${h.stepIdx + 1}</div><div class="min-w-0 flex-1"><div class="font-semibold text-xs text-slate-800">${h.agent}</div><div class="text-[11px] text-slate-500 line-clamp-2">${h.summary}</div>${h.humanNote ? `<div class="mt-1.5 human-note text-[11px] text-amber-800 px-2 py-1 rounded"><i class="fas fa-comment-dots mr-1"></i>${h.humanNote.substring(0, 120)}${h.humanNote.length > 120 ? '…' : ''}</div>` : ''}</div><i class="fas fa-check-circle text-emerald-500 text-xs mt-0.5"></i></div></div>`).join('');
+function updateHistory(){
+  const el=document.getElementById('cycle-history');
+  if(!demoState.history.length){ el.innerHTML='<p class="text-slate-400 text-xs">No steps completed yet.</p>'; return; }
+  el.innerHTML=demoState.history.map(h=>`<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex items-start gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">${h.stepIdx+1}</div><div class="min-w-0 flex-1"><div class="font-semibold text-xs">${h.agent}</div><div class="text-[11px] text-slate-500 line-clamp-2">${h.summary}</div>${h.humanNote?`<div class="mt-1.5 human-note text-[11px] text-amber-800 px-2 py-1 rounded"><i class="fas fa-comment-dots mr-1"></i>${h.humanNote.substring(0,120)}${h.humanNote.length>120?'…':''}</div>`:''}</div><i class="fas fa-check-circle text-emerald-500 text-xs mt-0.5"></i></div></div>`).join('');
 }
-function collectConditions() {
-  return { geo: document.getElementById('cond-geo').value.trim(), budget: document.getElementById('cond-budget').value.trim(), time: document.getElementById('cond-time').value.trim(), must: document.getElementById('cond-must').value.trim(), notes: document.getElementById('cond-notes').value.trim() };
+function collectConditions(){ return { geo:document.getElementById('cond-geo').value.trim(), budget:document.getElementById('cond-budget').value.trim(), time:document.getElementById('cond-time').value.trim(), must:document.getElementById('cond-must').value.trim(), notes:document.getElementById('cond-notes').value.trim() }; }
+function computeBaseKI(idea,cond){ let s=3.2; if(idea.length>40)s+=.4; if(idea.length>100)s+=.3; if(cond.geo)s+=.35; if(cond.budget)s+=.3; if(cond.time)s+=.25; if(cond.must)s+=.4; if(cond.notes&&cond.notes.length>20)s+=.5; return Math.min(5.8,s); }
+function setStatus(html){ document.getElementById('agent-status').innerHTML=html; }
+function stripHtml(html){ const t=document.createElement('div'); t.innerHTML=html; return (t.textContent||'').trim(); }
+
+/* ── LLM backends ─────────────────────────────────────── */
+async function callProxy(systemPrompt, userPrompt) {
+  if (!PROXY_URL || PROXY_URL.includes('workers.dev') && PROXY_URL === 'https://kayros-demo-proxy.workers.dev') {
+    // Still the placeholder — try anyway; error message will guide deploy
+  }
+  const res = await fetch(PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ system: systemPrompt, user: userPrompt })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || data.detail || `Proxy ${res.status}`);
+  return data.content || 'Aucune réponse.';
 }
-function computeBaseKI(idea, cond) {
-  let score = 3.2;
-  if (idea.length > 40) score += 0.4;
-  if (idea.length > 100) score += 0.3;
-  if (cond.geo) score += 0.35;
-  if (cond.budget) score += 0.3;
-  if (cond.time) score += 0.25;
-  if (cond.must) score += 0.4;
-  if (cond.notes && cond.notes.length > 20) score += 0.5;
-  return Math.min(5.8, score);
-}
-function setStatus(html) { document.getElementById('agent-status').innerHTML = html; }
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function stripHtml(html) { const tmp = document.createElement('div'); tmp.innerHTML = html; return (tmp.textContent || tmp.innerText || '').trim(); }
 
 async function callOllama(systemPrompt, userPrompt) {
   const base = (document.getElementById('ollama-url').value.trim() || 'http://localhost:11434').replace(/\/$/, '');
   const model = document.getElementById('ollama-model').value.trim() || 'llama3.2';
-  demoState.ollamaUrl = base;
   demoState.ollamaModel = model;
   const res = await fetch(base + '/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt }
-      ],
-      stream: false,
-      options: { temperature: 0.4 }
-    })
+    body: JSON.stringify({ model, messages: [{ role:'system', content:systemPrompt }, { role:'user', content:userPrompt }], stream:false, options:{ temperature:0.4 } })
   });
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`Ollama ${res.status}: ${errText.substring(0, 180)}`);
-  }
+  if (!res.ok) throw new Error(`Ollama ${res.status}: ${(await res.text()).substring(0,160)}`);
   const data = await res.json();
-  return data.message?.content || data.response || 'Aucune réponse générée.';
+  return data.message?.content || data.response || 'Aucune réponse.';
 }
 
-async function callMistral(systemPrompt, userPrompt) {
-  const key = demoState.apiKey || document.getElementById('mistral-key').value.trim();
-  if (!key) throw new Error('Clé API Mistral manquante');
-  const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + key
-    },
-    body: JSON.stringify({
-      model: 'mistral-small-latest',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt }
-      ],
-      temperature: 0.4,
-      max_tokens: 1200
-    })
-  });
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`Mistral API ${res.status}: ${errText.substring(0, 180)}`);
-  }
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content || 'Aucune réponse générée.';
+async function callLLM(system, user) {
+  if (demoState.provider === 'ollama') return callOllama(system, user);
+  return callProxy(system, user);
 }
 
-async function callLLM(systemPrompt, userPrompt) {
-  if (demoState.provider === 'ollama') return callOllama(systemPrompt, userPrompt);
-  return callMistral(systemPrompt, userPrompt);
-}
-
-function buildUserPrompt(stepIdx, idea, cond, humanNotes) {
+function buildUserPrompt(stepIdx, idea, cond, notes) {
   let p = `Idée stratégique :\n"${idea}"\n\n`;
-  const scopeParts = [];
-  if (cond.geo) scopeParts.push('Géographie : ' + cond.geo);
-  if (cond.budget) scopeParts.push('Budget : ' + cond.budget);
-  if (cond.time) scopeParts.push('Horizon : ' + cond.time);
-  if (cond.must) scopeParts.push('Must-have : ' + cond.must);
-  if (cond.notes) scopeParts.push('Notes : ' + cond.notes);
-  if (scopeParts.length) p += 'Contraintes / scope :\n' + scopeParts.join('\n') + '\n\n';
-  if (humanNotes && humanNotes.length) {
-    p += 'Notes humaines des étapes précédentes (à intégrer) :\n' + humanNotes.map(n => '- ' + n).join('\n') + '\n\n';
-  }
-  p += 'Produis maintenant ton livrable pour cette étape. Sois concret et actionnable.';
+  const parts = [];
+  if (cond.geo) parts.push('Géographie : ' + cond.geo);
+  if (cond.budget) parts.push('Budget : ' + cond.budget);
+  if (cond.time) parts.push('Horizon : ' + cond.time);
+  if (cond.must) parts.push('Must-have : ' + cond.must);
+  if (cond.notes) parts.push('Notes : ' + cond.notes);
+  if (parts.length) p += 'Contraintes :\n' + parts.join('\n') + '\n\n';
+  if (notes?.length) p += 'Notes humaines précédentes :\n' + notes.map(n => '- ' + n).join('\n') + '\n\n';
+  p += 'Produis ton livrable pour cette étape. Concret et actionnable.';
   return p;
 }
 
 function markdownishToHtml(text) {
-  let html = text
-    .replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^### (.+)$/gm, '<h4>$1</h4>')
-    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^# (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>');
-  return '<div class="space-y-1"><p>' + html + '</p></div>';
+  let html = text.replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^### (.+)$/gm,'<h4>$1</h4>').replace(/^## (.+)$/gm,'<h3>$1</h3>').replace(/^# (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>'+m+'</ul>')
+    .replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+  return '<div class="space-y-1"><p>'+html+'</p></div>';
 }
 
 async function runStep(stepIdx) {
   if (demoState.isRunning) return;
   demoState.isRunning = true;
   demoState.currentStep = stepIdx;
-  const meta = stepMeta[stepIdx];
-  const data = cycleData[stepIdx];
-  const modelLabel = demoState.provider === 'ollama'
-    ? (document.getElementById('ollama-model').value.trim() || 'llama3.2') + ' @ Ollama'
-    : 'mistral-small-latest';
+  const meta = stepMeta[stepIdx], data = cycleData[stepIdx];
+  const label = demoState.provider === 'ollama' ? (demoState.ollamaModel + ' @ Ollama') : 'Mistral via proxy';
 
   document.getElementById('demo-progress').classList.remove('hidden');
   document.getElementById('demo-workspace').classList.remove('hidden');
   document.getElementById('waiting-state').classList.add('hidden');
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.add('hidden');
-  document.getElementById('current-step-label').textContent = `Step ${stepIdx + 1} / 8`;
+  document.getElementById('current-step-label').textContent = `Step ${stepIdx+1} / 8`;
   document.getElementById('step-tools').textContent = data.tools.join(' · ');
-  updateProgress();
-  clearLogs();
-  setStatus(`<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">${meta.agent} · ${demoState.provider === 'ollama' ? 'Ollama' : 'Mistral'}…</div><div class="text-xs text-sky-600">${modelLabel}</div></div></div>`);
+  updateProgress(); clearLogs();
+  setStatus(`<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">${meta.agent}…</div><div class="text-xs text-sky-600">${label}</div></div></div>`);
   log(`Starting ${meta.agent}`, 'info');
-  log(`→ Calling ${demoState.provider === 'ollama' ? 'Ollama' : 'Mistral'}…`, 'llm');
+  log(`→ ${demoState.provider === 'ollama' ? 'Ollama' : 'Proxy Mistral'}…`, 'llm');
 
-  const humanNotesSoFar = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
+  const notes = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
   let contentHtml = '';
   try {
-    const raw = await callLLM(data.system, buildUserPrompt(stepIdx, demoState.idea, demoState.conditions, humanNotesSoFar));
-    log(`← Response received (${raw.length} chars)`, 'success');
+    const raw = await callLLM(data.system, buildUserPrompt(stepIdx, demoState.idea, demoState.conditions, notes));
+    log(`← Response (${raw.length} chars)`, 'success');
     contentHtml = markdownishToHtml(raw);
     if (stepIdx === 3) {
-      contentHtml += `<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Interactive Ontological Map (Microsoft Ontology Playground)</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="280px"></div></div>`;
+      contentHtml += `<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Ontological Map (Ontology Playground)</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="280px"></div></div>`;
     }
   } catch (err) {
-    log(`API error: ${err.message}`, 'error');
+    log(`Error: ${err.message}`, 'error');
     const tip = demoState.provider === 'ollama'
-      ? 'Vérifiez qu\'Ollama tourne (<code>ollama serve</code>), que le modèle est tiré (<code>ollama pull llama3.2</code>) et que CORS est autorisé (<code>OLLAMA_ORIGINS="*"</code>).'
-      : 'Vérifiez votre clé API et le solde console.mistral.ai.';
+      ? 'Ollama tourne-t-il ? <code>ollama serve</code> + <code>ollama pull llama3.2</code>'
+      : 'Proxy non déployé ou indisponible. Déployez <code>workers/mistral-demo-proxy.js</code> (voir workers/README.md) et mettez à jour <code>PROXY_URL</code>.';
     contentHtml = `<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>Erreur</strong><br>${err.message}<br><br>${tip}</div>`;
   }
 
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
-  if (stepIdx === 3 && window.OntologyEmbed) {
-    setTimeout(() => { try { window.OntologyEmbed.init(); } catch(e) {} }, 150);
-  }
-  updateKI(demoState.ki + 0.25 + (stepIdx === 5 ? 0.35 : 0), `Step ${stepIdx + 1} completed`);
-  setStatus(`<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">${meta.agent} completed</div><div class="text-xs text-emerald-600">Human gate — ${data.gateWho}</div></div></div>`);
-  log(`Output ready. Awaiting human decision (${data.gateWho}).`, 'warn');
+  if (stepIdx === 3 && window.OntologyEmbed) setTimeout(() => { try { window.OntologyEmbed.init(); } catch(e){} }, 150);
+  updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), `Step ${stepIdx+1} completed`);
+  setStatus(`<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">${meta.agent} completed</div><div class="text-xs text-emerald-600">Gate — ${data.gateWho}</div></div></div>`);
+  log(`Awaiting human decision (${data.gateWho})`, 'warn');
   document.getElementById('content-state').classList.remove('hidden');
   demoState.isRunning = false;
 }
@@ -561,27 +426,14 @@ async function runStep(stepIdx) {
 function startGovernedCycle() {
   const idea = document.getElementById('demo-idea').value.trim();
   if (!idea) { alert('Veuillez entrer une idée stratégique.'); return; }
-  if (demoState.provider === 'mistral') {
-    const key = document.getElementById('mistral-key').value.trim();
-    if (!key) { alert('Veuillez entrer votre clé API Mistral.'); return; }
-    demoState.apiKey = key;
-    try { sessionStorage.setItem('kayros_mistral_key', key); } catch(e) {}
-  } else {
-    demoState.ollamaUrl = document.getElementById('ollama-url').value.trim();
-    demoState.ollamaModel = document.getElementById('ollama-model').value.trim();
-    try {
-      sessionStorage.setItem('kayros_ollama_url', demoState.ollamaUrl);
-      sessionStorage.setItem('kayros_ollama_model', demoState.ollamaModel);
-    } catch(e) {}
+  if (demoState.provider === 'ollama') {
+    demoState.ollamaModel = document.getElementById('ollama-model').value.trim() || 'llama3.2';
   }
   demoState.idea = idea;
   demoState.conditions = collectConditions();
-  demoState.currentStep = -1;
-  demoState.history = [];
-  demoState.kiHistory = [];
+  demoState.currentStep = -1; demoState.history = []; demoState.kiHistory = [];
   const base = computeBaseKI(idea, demoState.conditions);
-  demoState.ki = base;
-  demoState.kiHistory.push(base);
+  demoState.ki = base; demoState.kiHistory.push(base);
   updateKI(base, 'Initial score from idea + conditions');
   document.getElementById('demo-start-btn').disabled = true;
   document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span> Running…';
@@ -590,79 +442,68 @@ function startGovernedCycle() {
 
 function approveAndContinue() {
   if (demoState.currentStep < 0 || demoState.isRunning) return;
-  const humanNote = document.getElementById('editable-output').value.trim();
+  const note = document.getElementById('editable-output').value.trim();
   const meta = stepMeta[demoState.currentStep];
   const summary = stripHtml(document.getElementById('generated-content').innerHTML).substring(0, 110);
   let boost = 0.15;
-  if (humanNote.length > 15) boost += 0.25;
-  if (humanNote.length > 60) boost += 0.35;
-  if (humanNote.toLowerCase().includes('risk') || humanNote.toLowerCase().includes('constraint') || humanNote.toLowerCase().includes('must')) boost += 0.2;
-  updateKI(demoState.ki + boost, humanNote ? 'Human annotation integrated' : 'Step approved');
-  demoState.history.push({ stepIdx: demoState.currentStep, agent: meta.agent, summary, humanNote: humanNote || null, kiAtApproval: demoState.ki });
+  if (note.length > 15) boost += 0.25;
+  if (note.length > 60) boost += 0.35;
+  updateKI(demoState.ki + boost, note ? 'Human annotation' : 'Approved');
+  demoState.history.push({ stepIdx: demoState.currentStep, agent: meta.agent, summary, humanNote: note || null, kiAtApproval: demoState.ki });
   updateHistory();
-  log(humanNote ? `Human note recorded (${humanNote.length} chars) → KI +${boost.toFixed(2)}` : `Approved without extra notes`, humanNote ? 'human' : 'success');
+  log(note ? `Note recorded (${note.length} chars)` : 'Approved', note ? 'human' : 'success');
   if (demoState.currentStep >= 7) finishCycle();
   else runStep(demoState.currentStep + 1);
 }
 
 function rerunCurrentStep() {
   if (demoState.currentStep < 0 || demoState.isRunning) return;
-  log(`Relaunching step ${demoState.currentStep + 1}…`, 'warn');
+  log(`Relaunch step ${demoState.currentStep+1}`, 'warn');
   runStep(demoState.currentStep);
 }
 
 function rejectAndRestart() {
   if (demoState.isRunning) return;
-  const reason = prompt('Optional rejection reason (logged in audit trail):') || '';
-  log(`Rejected at step ${demoState.currentStep + 1}${reason ? ': ' + reason : ''}`, 'error');
-  demoState.history = [];
-  demoState.currentStep = -1;
-  updateHistory();
-  updateProgress();
+  log(`Rejected at step ${demoState.currentStep+1}`, 'error');
+  demoState.history = []; demoState.currentStep = -1;
+  updateHistory(); updateProgress();
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('demo-start-btn').disabled = false;
   document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
-  clearLogs();
-  setStatus('');
+  clearLogs(); setStatus('');
 }
 
 function skipToEnd() {
   if (demoState.isRunning) return;
-  const humanNote = document.getElementById('editable-output').value.trim();
+  const note = document.getElementById('editable-output').value.trim();
   const meta = stepMeta[demoState.currentStep];
-  demoState.history.push({ stepIdx: demoState.currentStep, agent: meta.agent, summary: stripHtml(document.getElementById('generated-content').innerHTML).substring(0, 80), humanNote: humanNote || null, kiAtApproval: demoState.ki });
-  for (let i = demoState.currentStep + 1; i < 8; i++) {
-    demoState.history.push({ stepIdx: i, agent: stepMeta[i].agent, summary: 'Skipped by user', humanNote: null, kiAtApproval: demoState.ki });
-  }
-  updateHistory();
-  finishCycle();
+  demoState.history.push({ stepIdx: demoState.currentStep, agent: meta.agent, summary: stripHtml(document.getElementById('generated-content').innerHTML).substring(0,80), humanNote: note||null, kiAtApproval: demoState.ki });
+  for (let i = demoState.currentStep+1; i<8; i++) demoState.history.push({ stepIdx:i, agent:stepMeta[i].agent, summary:'Skipped', humanNote:null, kiAtApproval:demoState.ki });
+  updateHistory(); finishCycle();
 }
 
 function finishCycle() {
-  demoState.currentStep = 8;
-  updateProgress();
-  updateKI(demoState.ki + 0.3, 'Full cycle completed under human supervision');
+  demoState.currentStep = 8; updateProgress();
+  updateKI(demoState.ki + 0.3, 'Full cycle completed');
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.remove('hidden');
   const notesCount = demoState.history.filter(h => h.humanNote).length;
-  const poweredBy = demoState.provider === 'ollama'
-    ? `Ollama (${demoState.ollamaModel})`
-    : 'Mistral AI';
-  document.getElementById('final-state').innerHTML = `<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl text-slate-900 mb-1">Governed Cycle Complete</h3><p class="text-slate-600 text-sm mb-5">Full audit trail ready · Final Kayros Index: <strong class="text-sky-600">${demoState.ki.toFixed(1)}</strong></p><div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-sm mb-5 max-w-lg mx-auto"><div class="grid grid-cols-2 gap-3 text-xs"><div><span class="text-slate-500">Human interventions</span><br><strong>${notesCount}</strong></div><div><span class="text-slate-500">KI evolution</span><br><strong>${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</strong></div><div class="col-span-2"><span class="text-slate-500">Powered by</span><br><strong>${poweredBy}</strong></div></div></div><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm hover:shadow-lg hover:shadow-sky-500/25"><i class="fas fa-file-pdf mr-1.5"></i>Export KayrosLab Report (PDF)</button><button onclick="resetDemo()" class="bg-white border border-slate-200 hover:border-sky-400 text-slate-700 font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-rotate-left mr-1.5"></i>New Idea</button></div></div>`;
+  const poweredBy = demoState.provider === 'ollama' ? `Ollama (${demoState.ollamaModel})` : 'Mistral (secure proxy)';
+  document.getElementById('final-state').innerHTML = `<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Governed Cycle Complete</h3><p class="text-slate-600 text-sm mb-5">Final KI: <strong class="text-sky-600">${demoState.ki.toFixed(1)}</strong></p><div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-sm mb-5 max-w-lg mx-auto"><div class="grid grid-cols-2 gap-3 text-xs"><div><span class="text-slate-500">Interventions</span><br><strong>${notesCount}</strong></div><div><span class="text-slate-500">KI</span><br><strong>${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</strong></div><div class="col-span-2"><span class="text-slate-500">Powered by</span><br><strong>${poweredBy}</strong></div></div></div><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1.5"></i>Export PDF</button><button onclick="resetDemo()" class="bg-white border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">New Idea</button></div></div>`;
   document.getElementById('demo-start-btn').disabled = false;
   document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
-  log('Cycle finished. Ready for PDF export.', 'success');
+  log('Cycle finished.', 'success');
 }
 
 function resetDemo() {
-  demoState.idea = ''; demoState.conditions = {}; demoState.currentStep = -1; demoState.history = []; demoState.isRunning = false; demoState.ki = 3.5; demoState.kiHistory = [3.5];
-  document.getElementById('demo-idea').value = '';
-  ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(id => document.getElementById(id).value = '');
+  demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5];
+  document.getElementById('demo-idea').value='';
+  ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(id => document.getElementById(id).value='');
   document.getElementById('demo-progress').classList.add('hidden');
   document.getElementById('demo-workspace').classList.add('hidden');
-  document.getElementById('demo-start-btn').disabled = false;
-  document.getElementById('demo-start-btn').innerHTML = '<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  document.getElementById('demo-start-btn').disabled=false;
+  document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
   clearLogs(); setStatus('');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('content-state').classList.add('hidden');
@@ -672,46 +513,19 @@ function resetDemo() {
 function exportKayrosPDF() {
   const cond = demoState.conditions;
   const notesCount = demoState.history.filter(h => h.humanNote).length;
-  const dateStr = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-  const poweredBy = demoState.provider === 'ollama' ? `Ollama (${demoState.ollamaModel})` : 'Mistral AI';
-  const historyRows = demoState.history.map(h => `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-weight:600;width:40px;">${h.stepIdx + 1}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;">${h.agent}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569;">${(h.summary || '—').substring(0, 90)}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309;">${h.humanNote ? h.humanNote.substring(0, 100) + (h.humanNote.length > 100 ? '…' : '') : '—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;font-weight:600;color:#0284c8;">${h.kiAtApproval ? h.kiAtApproval.toFixed(1) : '—'}</td></tr>`).join('');
-  const html = `<div style="font-family:Inter,system-ui,sans-serif;color:#0f172a;padding:0;margin:0;width:210mm;"><div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:white;padding:40px 36px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><div style="width:36px;height:36px;background:#0ea5e9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;">K</div><span style="font-size:18px;font-weight:700;">KayrosLab</span></div><h1 style="font-size:24px;font-weight:700;margin:0 0 8px;">Governed Cycle Report</h1><p style="opacity:0.7;font-size:13px;margin:0;">${dateStr} · Final Kayros Index ${demoState.ki.toFixed(1)} / 10 · Powered by ${poweredBy}</p></div><div style="padding:28px 36px;"><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Strategic Idea</h2><p style="font-size:13px;line-height:1.5;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;margin:0 0 20px;">${demoState.idea}</p><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Scope & Conditions</h2><table style="width:100%;font-size:12px;margin-bottom:20px;border-collapse:collapse;"><tr><td style="padding:5px 0;color:#64748b;width:130px;">Geography</td><td style="padding:5px 0;font-weight:500;">${cond.geo || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Budget</td><td style="padding:5px 0;font-weight:500;">${cond.budget || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Time horizon</td><td style="padding:5px 0;font-weight:500;">${cond.time || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;">Must-have</td><td style="padding:5px 0;font-weight:500;">${cond.must || '—'}</td></tr><tr><td style="padding:5px 0;color:#64748b;vertical-align:top;">Notes</td><td style="padding:5px 0;font-weight:500;">${cond.notes || '—'}</td></tr></table><div style="display:flex;gap:14px;margin-bottom:22px;"><div style="flex:1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:14px;padding:16px;text-align:center;"><div style="font-size:32px;font-weight:800;color:#0284c8;line-height:1;">${demoState.ki.toFixed(1)}</div><div style="font-size:10px;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">Final Kayros Index</div></div><div style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;"><div style="font-size:12px;color:#64748b;margin-bottom:4px;">Evolution</div><div style="font-size:16px;font-weight:700;">${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</div><div style="font-size:11px;color:#64748b;margin-top:4px;">${notesCount} human intervention(s)</div></div></div><h2 style="font-size:14px;font-weight:700;color:#0284c8;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.05em;">Full Audit Trail</h2><table style="width:100%;font-size:11px;border-collapse:collapse;margin-bottom:20px;"><thead><tr style="background:#f1f5f9;text-align:left;"><th style="padding:7px;font-weight:600;">#</th><th style="padding:7px;font-weight:600;">Agent</th><th style="padding:7px;font-weight:600;">Summary</th><th style="padding:7px;font-weight:600;">Human note</th><th style="padding:7px;font-weight:600;text-align:center;">KI</th></tr></thead><tbody>${historyRows}</tbody></table><div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:16px;margin-bottom:16px;"><div style="font-size:11px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Recommendation</div><p style="font-size:13px;margin:0;line-height:1.45;">Dossier généré par les agents KayrosLab sous supervision humaine, avec appels réels au modèle ${poweredBy}.</p></div><p style="font-size:9px;color:#94a3b8;text-align:center;margin-top:24px;">Generated by KayrosLab · Governed Agent Platform · ${dateStr}<br>This report is for decision-support purposes and does not constitute formal advice.</p></div></div>`;
-
+  const dateStr = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+  const poweredBy = demoState.provider === 'ollama' ? `Ollama (${demoState.ollamaModel})` : 'Mistral (secure proxy)';
+  const rows = demoState.history.map(h => `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-weight:600">${h.stepIdx+1}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${h.agent}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#475569">${(h.summary||'—').substring(0,90)}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309">${h.humanNote?h.humanNote.substring(0,100):'—'}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;font-weight:600;color:#0284c8">${h.kiAtApproval?h.kiAtApproval.toFixed(1):'—'}</td></tr>`).join('');
+  const html = `<div style="font-family:Inter,system-ui,sans-serif;color:#0f172a;width:210mm"><div style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:40px 36px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:24px"><div style="width:36px;height:36px;background:#0ea5e9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700">K</div><span style="font-size:18px;font-weight:700">KayrosLab</span></div><h1 style="font-size:24px;font-weight:700;margin:0 0 8px">Governed Cycle Report</h1><p style="opacity:.7;font-size:13px;margin:0">${dateStr} · KI ${demoState.ki.toFixed(1)} · ${poweredBy}</p></div><div style="padding:28px 36px"><h2 style="font-size:14px;font-weight:700;color:#0284c8;text-transform:uppercase">Strategic Idea</h2><p style="font-size:13px;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0">${demoState.idea}</p><h2 style="font-size:14px;font-weight:700;color:#0284c8;text-transform:uppercase;margin-top:20px">Scope</h2><table style="width:100%;font-size:12px"><tr><td style="color:#64748b;width:130px">Geo</td><td>${cond.geo||'—'}</td></tr><tr><td style="color:#64748b">Budget</td><td>${cond.budget||'—'}</td></tr><tr><td style="color:#64748b">Time</td><td>${cond.time||'—'}</td></tr><tr><td style="color:#64748b">Must</td><td>${cond.must||'—'}</td></tr></table><div style="display:flex;gap:14px;margin:22px 0"><div style="flex:1;background:#f0f9ff;border:1px solid #bae6fd;border-radius:14px;padding:16px;text-align:center"><div style="font-size:32px;font-weight:800;color:#0284c8">${demoState.ki.toFixed(1)}</div><div style="font-size:10px;color:#0369a1;text-transform:uppercase">Final KI</div></div><div style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px"><div style="font-size:12px;color:#64748b">Evolution</div><div style="font-size:16px;font-weight:700">${demoState.kiHistory[0].toFixed(1)} → ${demoState.ki.toFixed(1)}</div><div style="font-size:11px;color:#64748b">${notesCount} intervention(s)</div></div></div><h2 style="font-size:14px;font-weight:700;color:#0284c8;text-transform:uppercase">Audit Trail</h2><table style="width:100%;font-size:11px;border-collapse:collapse"><thead><tr style="background:#f1f5f9"><th style="padding:7px">#</th><th style="padding:7px">Agent</th><th style="padding:7px">Summary</th><th style="padding:7px">Note</th><th style="padding:7px">KI</th></tr></thead><tbody>${rows}</tbody></table><p style="font-size:9px;color:#94a3b8;text-align:center;margin-top:24px">KayrosLab · ${dateStr}</p></div></div>`;
   const container = document.getElementById('report-template');
-  container.innerHTML = html;
-  container.classList.add('capturing');
-  const opt = {
-    margin: 0,
-    filename: `KayrosLab_Report_${new Date().toISOString().slice(0,10)}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 794 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-  html2pdf().set(opt).from(container).save().then(() => {
-    container.classList.remove('capturing');
-    container.innerHTML = '';
-    log('PDF report exported successfully.', 'success');
-  }).catch(err => {
-    container.classList.remove('capturing');
-    console.error(err);
-    alert('PDF generation failed: ' + err.message);
-  });
+  container.innerHTML = html; container.classList.add('capturing');
+  html2pdf().set({ margin:0, filename:`KayrosLab_Report_${new Date().toISOString().slice(0,10)}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true,windowWidth:794}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} }).from(container).save().then(() => { container.classList.remove('capturing'); container.innerHTML=''; log('PDF exported.','success'); }).catch(err => { container.classList.remove('capturing'); alert('PDF failed: '+err.message); });
 }
 
-// Restore settings
-try {
-  const savedKey = sessionStorage.getItem('kayros_mistral_key');
-  if (savedKey) document.getElementById('mistral-key').value = savedKey;
-  const savedUrl = sessionStorage.getItem('kayros_ollama_url');
-  if (savedUrl) document.getElementById('ollama-url').value = savedUrl;
-  const savedModel = sessionStorage.getItem('kayros_ollama_model');
-  if (savedModel) document.getElementById('ollama-model').value = savedModel;
-} catch(e) {}
-
-const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold:0.1 });
 document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(el => observer.observe(el));
 showStep(0);
-setProvider('ollama');
+setProvider('proxy');
 </script>
 </body>
 </html>
