@@ -1,424 +1,707 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KayrosLab • Agent d'Idéation Collaborative + AI Connectors</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --teal: #2FB9A8;
-      --gold: #fbbf24;
-      --navy: #0a1628;
-      --violet: #a78bfa;
-    }
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #0a1628 0%, #050d1a 100%);
-      color: #e2e8f0;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    }
-    .header {
-      text-align: center;
-      padding: 2rem 1rem 1.5rem;
-      border-bottom: 1px solid rgba(47,185,168,0.15);
-    }
-    h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--teal), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .tab-btn {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(47,185,168,0.2);
-      color: #94a3b8;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.85rem;
-    }
-    .tab-btn.active {
-      background: var(--teal);
-      color: #0a1628;
-      border-color: var(--teal);
-    }
-    .section {
-      max-width: 1180px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid rgba(47, 185, 168, 0.2);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-teal { background: var(--teal); color: #0a1628; }
-    .btn-gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #0a1628; font-weight: 700; }
-    .mini-badge {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: #94a3b8;
-    }
-    .agent-card {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(47,185,168,0.25);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    .history-log {
-      max-height: 280px;
-      overflow-y: auto;
-      background: #030408;
-      border-radius: 10px;
-      padding: 0.75rem;
-      font-size: 0.8rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — The Governed Agent Platform for Strategic Innovation</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === RESET & VARIABLES === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --teal: #2FB9A8;
+  --teal-dim: rgba(47,185,168,0.15);
+  --gold: #fbbf24;
+  --gold-dim: rgba(251,191,36,0.12);
+  --navy: #0a1628;
+  --navy-deep: #050d1a;
+  --violet: #a78bfa;
+  --violet-dim: rgba(167,139,250,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --surface: rgba(15,23,42,0.72);
+  --surface-solid: rgba(15,23,42,0.95);
+  --border: rgba(47,185,168,0.18);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-faint: #64748b;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-xs: 5px;
+}
+
+/* === BASE === */
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--teal); text-decoration: none; }
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; }
+h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; line-height: 1.2; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+h4 { font-size: 0.9rem; font-weight: 600; color: var(--gold); }
+p { color: var(--text-dim); font-size: 0.95rem; }
+.highlight { color: var(--teal); }
+
+/* === LAYOUT === */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4rem 0; }
+section + section { border-top: 1px solid var(--border); }
+
+/* === COMPONENTS === */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--teal-dim);
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.badge--gold { background: var(--gold-dim); color: var(--gold); }
+.badge--violet { background: var(--violet-dim); color: var(--violet); }
+
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glass-card:hover {
+  border-color: rgba(47,185,168,0.35);
+  box-shadow: 0 0 30px rgba(47,185,168,0.06);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-teal { background: var(--teal); color: var(--navy); }
+.btn-teal:hover { background: #3cc9b7; box-shadow: 0 4px 20px rgba(47,185,168,0.3); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #f59e0b); color: var(--navy); }
+.btn-gold:hover { box-shadow: 0 4px 20px rgba(251,191,36,0.3); }
+
+/* === HERO === */
+.hero {
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; left: -10%; right: -10%; bottom: -30%;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(47,185,168,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(251,191,36,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero h1 { max-width: 800px; margin: 0 auto 1.2rem; position: relative; }
+.hero p { max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; position: relative; }
+.hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* === ARCHITECTURE === */
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+@media (max-width: 900px) { .arch-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 550px) { .arch-grid { grid-template-columns: 1fr; } }
+
+.arch-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s;
+}
+.arch-card:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 8px 30px rgba(47,185,168,0.1); }
+.arch-card__icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 1rem;
+  background: var(--teal-dim);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.arch-card__icon--gold { background: var(--gold-dim); }
+.arch-card__icon--violet { background: var(--violet-dim); }
+.arch-card h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+.arch-card p { font-size: 0.82rem; line-height: 1.5; }
+
+.arch-formula {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.arch-formula .op { color: var(--text-faint); font-weight: 400; margin: 0 0.3rem; }
+
+/* === CYCLE === */
+.cycle-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 800px) { .cycle-steps { grid-template-columns: 1fr 1fr; } }
+
+.cycle-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.cycle-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.cycle-step:hover::before, .cycle-step.active::before { opacity: 1; }
+.cycle-step:hover, .cycle-step.active { border-color: var(--teal); }
+.cycle-step__num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.cycle-step h4 { color: var(--text); margin-bottom: 0.3rem; }
+.cycle-step p { font-size: 0.78rem; line-height: 1.4; }
+
+.cycle-detail {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: none;
+}
+.cycle-detail.visible { display: block; }
+.cycle-detail h3 { margin-bottom: 0.75rem; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
+
+.detail-item {
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.detail-item h4 { font-size: 0.75rem; margin-bottom: 0.4rem; color: var(--teal); }
+.detail-item p { font-size: 0.82rem; }
+
+.gate-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(251,191,36,0.3);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* === MODEL MARKETPLACE === */
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.model-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  transition: all 0.25s;
+}
+.model-card:hover { border-color: var(--teal); }
+.model-card__header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.model-card__logo {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700;
+}
+.model-card__logo--anthropic { background: #d4a574; color: #1a1a1a; }
+.model-card__logo--openai { background: #10a37f; color: white; }
+.model-card__logo--google { background: #4285f4; color: white; }
+.model-card__logo--deepseek { background: #6366f1; color: white; }
+.model-card__logo--ollama { background: #374151; color: white; }
+.model-card h3 { font-size: 0.95rem; }
+.model-card__provider { font-size: 0.75rem; color: var(--text-faint); }
+.model-card__roles { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+.model-card__role {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  color: var(--text-dim);
+}
+
+/* === TOOLS === */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+}
+.tool-card__category {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin-bottom: 0.5rem;
+}
+.tool-card h3 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+.tool-card p { font-size: 0.8rem; }
+.tool-card__fn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: var(--radius-xs);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--teal);
+}
+
+/* === DEMO === */
+.demo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 800px) { .demo-container { grid-template-columns: 1fr; } }
+
+.demo-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.demo-input textarea {
+  width: 100%;
+  min-height: 120px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+.demo-input textarea:focus { outline: none; border-color: var(--teal); }
+.demo-input textarea::placeholder { color: var(--text-faint); }
+
+.demo-output {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.demo-step {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.demo-step__icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.demo-step__icon--teal { background: var(--teal-dim); color: var(--teal); }
+.demo-step__icon--gold { background: var(--gold-dim); color: var(--gold); }
+.demo-step__icon--violet { background: var(--violet-dim); color: var(--violet); }
+.demo-step__icon--red { background: var(--red-dim); color: var(--red); }
+
+.demo-step__content h4 { font-size: 0.82rem; color: var(--text); margin-bottom: 0.2rem; }
+.demo-step__content p { font-size: 0.78rem; }
+
+/* === KI DISPLAY === */
+.ki-display {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(47,185,168,0.2);
+}
+.ki-score {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--teal);
+}
+.ki-label { font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; }
+.ki-dims { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; margin-top: 0.75rem; font-size: 0.8rem; }
+.ki-dim { display: flex; justify-content: space-between; }
+.ki-dim span:last-child { font-weight: 600; color: var(--teal); }
+
+/* === GATE === */
+.gate-block {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(251,191,36,0.3);
+  border-radius: var(--radius-sm);
+  display: none;
+}
+.gate-block.visible { display: block; }
+.gate-block h4 { color: var(--gold); margin-bottom: 0.4rem; }
+.gate-block p { font-size: 0.82rem; color: var(--text-dim); }
+.gate-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+
+/* === SPINNER === */
+.spinner {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid var(--teal-dim);
+  border-top-color: var(--teal);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 0.8rem;
+}
+.footer a { color: var(--teal); }
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(47,185,168,0.3); border-radius: 3px; }
+</style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>KayrosLab</h1>
-    <p style="color:#94a3b8; max-width:720px; margin:0.5rem auto 0;">
-      Agent d'Idéation Collaborative • Intégration d'agents IA externes (Claude, GPT, Gemini, DeepSeek)
-    </p>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="badge">The Governed Agent Platform</div>
+  <h1>Strategic Innovation,<br><span class="highlight">Governed by Agents</span></h1>
+  <p>KayrosLab orchestrates specialized AI agents within an auditable framework — so every idea is challenged, scored, and decided with full traceability.</p>
+  <div class="hero-actions">
+    <button class="btn btn-teal" onclick="scrollToSection('demo')">Try the Live Demo</button>
+    <button class="btn btn-outline" onclick="scrollToSection('architecture')">See How It Works</button>
   </div>
+</section>
 
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('showcase')">Interactive Showcase</button>
-    <button class="tab-btn" onclick="switchTab('connectors')">AI Connectors</button>
-    <button class="tab-btn" onclick="switchTab('history')">Agent Call History</button>
-    <button class="tab-btn" onclick="switchTab('feed')">Feed</button>
-  </div>
+<!-- ===== ARCHITECTURE ===== -->
+<section id="architecture">
+  <div class="container">
+    <div class="badge">Architecture</div>
+    <h2>Agent <span class="highlight">= Model</span> + Harness</h2>
+    <p style="max-width:650px; margin-top:0.5rem;">Every agent in KayrosLab follows the LangChain pattern: a model providing reasoning, wrapped in a harness of tools, prompts, and middleware that shapes its behavior.</p>
 
-  <!-- SHOWCASE -->
-  <div id="panel-showcase" class="section">
-    <div class="glass-card">
-      <h2 style="margin-top:0;">Étape 4 • Future Proofing Avancé</h2>
-      <p style="color:#94a3b8;">Utilisez les agents internes + déléguez à des agents IA externes (Claude, GPT-4o, Gemini...).</p>
+    <div class="arch-formula">
+      Agent <span class="op">=</span> Model <span class="op">+</span> Tools <span class="op">+</span> Prompt <span class="op">+</span> Middleware
+    </div>
 
-      <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin:1rem 0;">
-        <button class="btn btn-teal" onclick="runEnhancedFutureProofing()">Lancer Future Proofing Complet</button>
-        <button class="btn btn-gold" onclick="launchAdvancedCollisionMode()">⚡ Collision Mode</button>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-card__icon">🧠</div>
+        <h3>Model</h3>
+        <p>Swap between Claude, GPT, Gemini, DeepSeek, or local Ollama. Each agent picks the best model for its role.</p>
       </div>
+      <div class="arch-card">
+        <div class="arch-card__icon arch-card__icon--gold">🔧</div>
+        <h3>Tools</h3>
+        <p>Function-calling registry: agents call <code>ki_scorer</code>, <code>search_competitors</code>, <code>risk_assessor</code> and more.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card__icon arch-card__icon--violet">📋</div>
+        <h3>Prompt</h3>
+        <p>Each agent has a specialized system prompt defining its role, constraints, and output format.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card__icon">🛡️</div>
+        <h3>Middleware</h3>
+        <p>Fault tolerance, guardrails, human-in-the-loop gates, and context management between sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- External Agent Delegation -->
-      <div style="margin-top:1.5rem; padding:1rem; background:rgba(0,0,0,0.25); border-radius:12px; border:1px solid rgba(167,139,250,0.3);">
-        <strong style="color:#a78bfa;">External Agent Delegation</strong>
+<!-- ===== 8-STEP CYCLE ===== -->
+<section id="cycle">
+  <div class="container">
+    <div class="badge">The Process</div>
+    <h2>The <span class="highlight">8-Step</span> Governed Cycle</h2>
+    <p style="max-width:650px; margin-top:0.5rem;">Each step is driven by a specialized agent, produces a structured output, and ends with a human gate. Click any step to see its architecture.</p>
+
+    <div class="cycle-steps" id="cycle-steps">
+      <div class="cycle-step" data-step="0" onclick="showStep(0)">
+        <div class="cycle-step__num">Step 01</div>
+        <h4>Ecouter</h4>
+        <p>Scan and qualify weak signals</p>
+      </div>
+      <div class="cycle-step" data-step="1" onclick="showStep(1)">
+        <div class="cycle-step__num">Step 02</div>
+        <h4>Cartographier</h4>
+        <p>Map trends and bisociative bridges</p>
+      </div>
+      <div class="cycle-step" data-step="2" onclick="showStep(2)">
+        <div class="cycle-step__num">Step 03</div>
+        <h4>Construire</h4>
+        <p>Generate scenarios and briefs</p>
+      </div>
+      <div class="cycle-step" data-step="3" onclick="showStep(3)">
+        <div class="cycle-step__num">Step 04</div>
+        <h4>Positionner</h4>
+        <p>Ontological competitive analysis</p>
+      </div>
+      <div class="cycle-step" data-step="4" onclick="showStep(4)">
+        <div class="cycle-step__num">Step 05</div>
+        <h4>Eprouver</h4>
+        <p>Red Team, Devil's Advocate, Critic</p>
+      </div>
+      <div class="cycle-step" data-step="5" onclick="showStep(5)">
+        <div class="cycle-step__num">Step 06</div>
+        <h4>Arbitrer</h4>
+        <p>Multi-criteria voting and decisions</p>
+      </div>
+      <div class="cycle-step" data-step="6" onclick="showStep(6)">
+        <div class="cycle-step__num">Step 07</div>
+        <h4>Projeter</h4>
+        <p>Roadmap, KPIs, probabilistic simulation</p>
+      </div>
+      <div class="cycle-step" data-step="7" onclick="showStep(7)">
+        <div class="cycle-step__num">Step 08</div>
+        <h4>Realiser</h4>
+        <p>Pilot, deploy, feedback loop</p>
+      </div>
+    </div>
+
+    <div class="cycle-detail" id="cycle-detail"></div>
+  </div>
+</section>
+
+<!-- ===== MODEL MARKETPLACE ===== -->
+<section id="models">
+  <div class="container">
+    <div class="badge badge--gold">Model Interoperability</div>
+    <h2>Swap Models, <span class="highlight">Not Code</span></h2>
+    <p style="max-width:650px; margin-top:0.5rem;">Like LangChain's model interface, KayrosLab lets you switch providers per agent role. Use Claude for reasoning, GPT for creativity, Gemini for speed — or all local via Ollama.</p>
+
+    <div class="model-grid">
+      <div class="model-card">
+        <div class="model-card__header">
+          <div class="model-card__logo model-card__logo--anthropic">C</div>
+          <div><h3>Claude 3.5 Sonnet</h3><div class="model-card__provider">Anthropic</div></div>
+        </div>
+        <div class="model-card__roles">
+          <span class="model-card__role">Strategic Reasoning</span>
+          <span class="model-card__role">Red Team</span>
+          <span class="model-card__role">Risk Analysis</span>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-card__header">
+          <div class="model-card__logo model-card__logo--openai">G</div>
+          <div><h3>GPT-4o</h3><div class="model-card__provider">OpenAI</div></div>
+        </div>
+        <div class="model-card__roles">
+          <span class="model-card__role">Creative Divergence</span>
+          <span class="model-card__role">Scenario Generation</span>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-card__header">
+          <div class="model-card__logo model-card__logo--google">G</div>
+          <div><h3>Gemini 1.5 Pro</h3><div class="model-card__provider">Google</div></div>
+        </div>
+        <div class="model-card__roles">
+          <span class="model-card__role">Synthesis</span>
+          <span class="model-card__role">Data Analysis</span>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-card__header">
+          <div class="model-card__logo model-card__logo--deepseek">D</div>
+          <div><h3>DeepSeek R1</h3><div class="model-card__provider">DeepSeek</div></div>
+        </div>
+        <div class="model-card__roles">
+          <span class="model-card__role">Technical Feasibility</span>
+          <span class="model-card__role">Code Analysis</span>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-card__header">
+          <div class="model-card__logo model-card__logo--ollama">O</div>
+          <div><h3>Local (Ollama)</h3><div class="model-card__provider">Sovereign / On-premise</div></div>
+        </div>
+        <div class="model-card__roles">
+          <span class="model-card__role">Zero Egress</span>
+          <span class="model-card__role">NIS2 / RGPD Compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOL REGISTRY ===== -->
+<section id="tools">
+  <div class="container">
+    <div class="badge badge--violet">Tool Registry</div>
+    <h2>Extensible <span class="highlight">Tools</span> via Function Calling</h2>
+    <p style="max-width:650px; margin-top:0.5rem;">Each agent has access to specialized tools. Like LangChain's tool system, KayrosLab tools are Python callables with typed inputs and structured outputs.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-card__category">Analysis</div>
+        <h3>Competitor Scanner</h3>
+        <p>Search and analyze competitive landscape in real-time.</p>
+        <div class="tool-card__fn">search_competitors(query, depth)</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card__category">Analysis</div>
+        <h3>Trend Network Builder</h3>
+        <p>Map trend relationships and bisociative bridges between domains.</p>
+        <div class="tool-card__fn">trend_network_builder(domains)</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card__category">Scoring</div>
+        <h3>KI Scorer</h3>
+        <p>Multi-dimensional scoring across 5 axes with sub-criteria.</p>
+        <div class="tool-card__fn">ki_scorer(idea, context)</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card__category">Scoring</div>
+        <h3>Risk Assessor</h3>
+        <p>Detect regulatory, market, and technical risks at each step.</p>
+        <div class="tool-card__fn">risk_assessor(hypothesis, type)</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card__category">Generation</div>
+        <h3>Scenario Simulator</h3>
+        <p>Probabilistic P10/P50/P90 scenario simulation for decisions.</p>
+        <div class="tool-card__fn">scenario_simulator(decision, params)</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card__category">Governance</div>
+        <h3>Vote Aggregator</h3>
+        <p>Multi-criteria voting with weighted stakeholder input.</p>
+        <div class="tool-card__fn">vote_aggregator(options, voters)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LIVE DEMO ===== -->
+<section id="demo">
+  <div class="container">
+    <div class="badge">Live Demo</div>
+    <h2>Watch <span class="highlight">Agents</span> Work</h2>
+    <p style="max-width:650px; margin-top:0.5rem;">Enter a strategic idea and watch KayrosLab's agents process it through the governed cycle — with real-time tool calls, KI scoring, and a human gate before final output.</p>
+
+    <div class="demo-container">
+      <div class="demo-input">
+        <h4>Your Strategic Idea</h4>
+        <textarea id="demo-idea" placeholder="e.g. Launch an AI-powered predictive maintenance platform for industrial IoT sensors in European manufacturing..."></textarea>
         <div style="display:flex; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap;">
-          <select id="external-agent-select" style="flex:1; min-width:220px; background:#0a1628; color:white; border:1px solid #64748b; padding:8px; border-radius:8px;">
-            <option value="">-- Choisir un agent externe --</option>
-            <option value="claude-3.5">Claude 3.5 Sonnet (Anthropic)</option>
-            <option value="gpt-4o">GPT-4o (OpenAI)</option>
-            <option value="gemini-1.5">Gemini 1.5 Pro (Google)</option>
-            <option value="deepseek">DeepSeek R1</option>
-          </select>
-          <button class="btn btn-teal" onclick="delegateToExternalAgent()">Déléguer à l'agent externe</button>
+          <button class="btn btn-teal" id="demo-run-btn" onclick="runDemo()">Run Full Cycle</button>
+          <button class="btn btn-outline" onclick="clearDemo()">Clear</button>
         </div>
       </div>
 
-      <div style="margin-top:1.5rem;">
-        <h4 style="margin-bottom:0.5rem;">Timeline de l’Idée</h4>
-        <div id="futureproofing-timeline" style="max-height:260px; overflow-y:auto; background:rgba(0,0,0,0.3); border-radius:10px; padding:0.75rem; font-size:0.85rem;"></div>
-      </div>
-
-      <div style="margin-top:1.5rem;">
-        <h4>Kayroslab Index (KI) — Dynamique</h4>
-        <div id="ki-visual-block"></div>
+      <div class="demo-output" id="demo-output">
+        <div style="color: var(--text-faint); text-align: center; padding: 2rem 0;">
+          <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">→</p>
+          <p>Enter an idea and click <strong>Run Full Cycle</strong></p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- AI CONNECTORS -->
-  <div id="panel-connectors" class="section" style="display:none;">
-    <div class="glass-card">
-      <h2>AI Connectors & Compétences</h2>
-      <p style="color:#94a3b8;">Ajoutez des agents IA externes comme compétences du framework KayrosLab.</p>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p style="margin-bottom: 0.5rem;"><strong style="color: var(--teal); font-family: 'Outfit', sans-serif;">KayrosLab</strong> — The Governed Agent Platform</p>
+  <p>contact@kayroslab.com · Built with the <a href="https://github.com/langchain-ai/langchain" target="_blank">LangChain</a> agent architecture</p>
+</footer>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1.5rem;" id="connectors-list"></div>
-
-      <div style="margin-top:2rem; padding:1rem; background:rgba(0,0,0,0.3); border-radius:12px;">
-        <h4>Ajouter un nouveau connecteur</h4>
-        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <input id="new-connector-name" placeholder="Nom de l'agent (ex: Claude 3.5 Sonnet)" style="flex:1; padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
-          <select id="new-connector-role" style="padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
-            <option value="Strategic Reasoning">Strategic Reasoning</option>
-            <option value="Creative Divergence">Creative Divergence</option>
-            <option value="Risk & Critique">Risk & Critique</option>
-            <option value="Synthesis">Synthesis</option>
-            <option value="Technical Feasibility">Technical Feasibility</option>
-          </select>
-          <input id="new-connector-key" placeholder="API Key (demo)" style="flex:1; padding:10px; border-radius:8px; background:#0a1628; color:white; border:1px solid #64748b;">
-          <button class="btn btn-teal" onclick="addNewConnector()">Ajouter</button>
-        </div>
-        <small style="color:#64748b;">Les clés API sont stockées localement (localStorage). Ne jamais utiliser de vraies clés en production sans backend sécurisé.</small>
-      </div>
-    </div>
-  </div>
-
-  <!-- AGENT CALL HISTORY -->
-  <div id="panel-history" class="section" style="display:none;">
-    <div class="glass-card">
-      <h2>Historique des appels aux agents externes</h2>
-      <div class="history-log" id="agent-call-history"></div>
-    </div>
-  </div>
-
-  <!-- FEED -->
-  <div id="panel-feed" class="section" style="display:none;">
-    <div class="glass-card">
-      <h2>Proposals Feed</h2>
-      <div id="feed-proposals-root"></div>
-    </div>
-  </div>
-
-  <script>
-    let futureProofingTimeline = [];
-    let scenarioCanvas = ["p1", "p2", "p8"];
-    let externalConnectors = [];
-    let agentCallHistory = [];
-
-    function saveState() {
-      localStorage.setItem("kayros_connectors", JSON.stringify(externalConnectors));
-      localStorage.setItem("kayros_agent_history", JSON.stringify(agentCallHistory));
-    }
-
-    function loadState() {
-      const savedConnectors = localStorage.getItem("kayros_connectors");
-      if (savedConnectors) externalConnectors = JSON.parse(savedConnectors);
-      const savedHistory = localStorage.getItem("kayros_agent_history");
-      if (savedHistory) agentCallHistory = JSON.parse(savedHistory);
-    }
-
-    function addToTimeline(actor, action, detail = "") {
-      futureProofingTimeline.unshift({
-        time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-        actor,
-        action,
-        detail
-      });
-      renderTimeline();
-    }
-
-    function renderTimeline() {
-      const el = document.getElementById("futureproofing-timeline");
-      if (!el) return;
-      el.innerHTML = futureProofingTimeline.map(item => `
-        <div style="padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-          <strong style="color:#2FB9A8;">${item.time}</strong> — 
-          <span style="color:#fbbf24; font-weight:600;">${item.actor}</span><br>
-          <span>${item.action}</span>
-          ${item.detail ? `<br><small style="color:#94a3b8;">${item.detail}</small>` : ''}
-        </div>
-      `).join('');
-    }
-
-    function calculateIntelligentKI() {
-      const canvasItems = scenarioCanvas.length;
-      const timelineLength = futureProofingTimeline.length;
-      const hasBisociateur = futureProofingTimeline.some(e => e.actor.includes("Bisociateur"));
-      const externalCalls = agentCallHistory.length;
-
-      let base = 5.5;
-      base += Math.min(2.5, canvasItems * 0.35);
-      base += Math.min(2.0, timelineLength * 0.12);
-      if (hasBisociateur) base += 0.8;
-      if (externalCalls > 0) base += Math.min(1.2, externalCalls * 0.3);
-
-      return {
-        global: Math.min(9.7, parseFloat(base.toFixed(1))),
-        velocite: Math.min(9.8, parseFloat((base * 0.95).toFixed(1))),
-        divergence: Math.min(9.8, parseFloat((base + (hasBisociateur ? 0.9 : 0)).toFixed(1))),
-        fiabilite: Math.min(9.5, parseFloat((base * 1.05).toFixed(1))),
-        impact: Math.min(9.6, parseFloat((base * 0.98).toFixed(1))),
-        originalite: Math.min(9.8, parseFloat((base + (hasBisociateur ? 1.1 : 0) + (externalCalls * 0.2)).toFixed(1)))
-      };
-    }
-
-    function refreshKIDisplay() {
-      const scores = calculateIntelligentKI();
-      const container = document.getElementById("ki-visual-block");
-      if (!container) return;
-
-      container.innerHTML = `
-        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
-          <div style="font-size:2.8rem; font-weight:800; color:#2FB9A8;">${scores.global}</div>
-          <div style="font-size:0.9rem; color:#94a3b8;">/ 10<br><span style="font-size:0.75rem;">Kayroslab Index</span></div>
-        </div>
-        <div style="display:grid; gap:0.5rem; font-size:0.85rem;">
-          <div>Vélocité: <strong>${scores.velocite}</strong></div>
-          <div>Divergence: <strong>${scores.divergence}</strong> ${scores.originalite > 8.5 ? '✨' : ''}</div>
-          <div>Originalité: <strong>${scores.originalite}</strong></div>
-        </div>
-      `;
-    }
-
-    function renderConnectors() {
-      const container = document.getElementById("connectors-list");
-      if (!container) return;
-      container.innerHTML = externalConnectors.map((conn, index) => `
-        <div class="agent-card">
-          <div style="display:flex; justify-content:space-between;">
-            <strong>${conn.name}</strong>
-            <span class="mini-badge">${conn.role}</span>
-          </div>
-          <div style="font-size:0.75rem; color:#64748b; margin-top:0.35rem;">Provider: ${conn.provider || 'Custom'}</div>
-          <div style="margin-top:0.5rem;">
-            <button class="btn" style="padding:4px 10px; font-size:0.75rem;" onclick="removeConnector(${index})">Supprimer</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function addNewConnector() {
-      const name = document.getElementById("new-connector-name").value.trim();
-      const role = document.getElementById("new-connector-role").value;
-      const key = document.getElementById("new-connector-key").value.trim();
-
-      if (!name) return alert("Nom requis");
-
-      externalConnectors.push({
-        id: Date.now(),
-        name,
-        role,
-        provider: name.includes("Claude") ? "Anthropic" : name.includes("GPT") ? "OpenAI" : "Custom",
-        apiKey: key || "demo-key-" + Date.now()
-      });
-
-      saveState();
-      renderConnectors();
-    }
-
-    function removeConnector(index) {
-      externalConnectors.splice(index, 1);
-      saveState();
-      renderConnectors();
-    }
-
-    async function delegateToExternalAgent() {
-      const select = document.getElementById("external-agent-select");
-      const model = select.value;
-      if (!model) return alert("Veuillez choisir un agent externe");
-
-      const modelName = select.options[select.selectedIndex].text;
-
-      addToTimeline("Système", `Délégation à ${modelName}`, "Appel API simulé en cours...");
-
-      await new Promise(r => setTimeout(r, 1400));
-
-      const simulatedResponse = `Analyse réalisée par ${modelName}. Recommandation stratégique ajoutée avec succès.`;
-
-      addToTimeline(modelName, "Résultat reçu", simulatedResponse);
-
-      agentCallHistory.unshift({
-        timestamp: new Date().toISOString(),
-        model: modelName,
-        role: "Future Proofing",
-        tokensIn: Math.floor(Math.random() * 800) + 1200,
-        tokensOut: Math.floor(Math.random() * 400) + 600,
-        estimatedCost: (Math.random() * 0.018 + 0.012).toFixed(4)
-      });
-      saveState();
-      renderAgentHistory();
-      refreshKIDisplay();
-    }
-
-    function launchAdvancedCollisionMode() {
-      alert("Collision Mode avec délégation IA externe activé (version démo).");
-    }
-
-    function renderAgentHistory() {
-      const container = document.getElementById("agent-call-history");
-      if (!container) return;
-
-      if (agentCallHistory.length === 0) {
-        container.innerHTML = `<div style="color:#64748b; padding:1rem;">Aucun appel enregistré pour le moment.</div>`;
-        return;
-      }
-
-      container.innerHTML = agentCallHistory.map(call => `
-        <div style="padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-          <strong>${new Date(call.timestamp).toLocaleString()}</strong> — 
-          <span style="color:#a78bfa;">${call.model}</span><br>
-          <small>Tokens: ${call.tokensIn} in / ${call.tokensOut} out • Coût estimé: $${call.estimatedCost}</small>
-        </div>
-      `).join('');
-    }
-
-    function switchTab(tab) {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".section").forEach(s => s.style.display = "none");
-
-      const btn = Array.from(document.querySelectorAll(".tab-btn")).find(b => b.textContent.toLowerCase().includes(tab));
-      if (btn) btn.classList.add("active");
-
-      const panel = document.getElementById(`panel-${tab}`);
-      if (panel) panel.style.display = "block";
-
-      if (tab === "connectors") renderConnectors();
-      if (tab === "history") renderAgentHistory();
-    }
-
-    function runEnhancedFutureProofing() {
-      addToTimeline("Système", "Future Proofing lancé");
-      setTimeout(() => addToTimeline("Planner", "Décomposition terminée"), 800);
-      setTimeout(() => addToTimeline("Critic", "Risques identifiés"), 1600);
-      setTimeout(() => {
-        addToTimeline("Le Bisociateur", "Idée créative générée");
-        refreshKIDisplay();
-      }, 2400);
-    }
-
-    window.onload = () => {
-      loadState();
-
-      if (externalConnectors.length === 0) {
-        externalConnectors = [
-          { id: 1, name: "Claude 3.5 Sonnet", role: "Strategic Reasoning", provider: "Anthropic", apiKey: "demo" },
-          { id: 2, name: "GPT-4o", role: "Creative Divergence", provider: "OpenAI", apiKey: "demo" }
-        ];
-        saveState();
-      }
-
-      renderTimeline();
-      refreshKIDisplay();
-      renderConnectors();
-      renderAgentHistory();
-    };
-  </script>
-
-<!-- KayrosLab — Pont vers le coeur "LLM gouverne" (backend proxy prod). Additif, non intrusif. -->
+<!-- ===== BACKEND INTEGRATION ===== -->
 <script type="module">
   try {
     const { createEngine } = await import('./core/index.mjs');
-    // Base API unique (prod VPS via reverse proxy). Overrides : window.KAYROS_API_BASE,
-    // ou l'ancien window.KAYROS_BACKEND_URL (on en derive la base en retirant /llm).
     const API_BASE = (window.KAYROS_API_BASE
       || (window.KAYROS_BACKEND_URL ? String(window.KAYROS_BACKEND_URL).replace(/\/llm\/?$/, '') : '')
       || 'https://api.kayroslab.com/v1').replace(/\/$/, '');
@@ -436,9 +719,7 @@
       apiBase: API_BASE,
       backendUrl: BACKEND,
       embeddingsUrl: EMBEDDINGS,
-      // Sonde de sante du backend (true si /health repond 200).
       async health() { try { const r = await fetch(`${ORIGIN}/health`); return r.ok; } catch { return false; } },
-      // Requete gouvernee complete (orchestrateur + gate). Retourne {status, answer, traces, gate}.
       async ask(query, { governance = 'supervise', provider } = {}) {
         const plan = await engine.orchestrator.plan(query, { ideaId: 'ui' });
         const res = { status: null, answer: null, traces: [], gate: null };
@@ -449,22 +730,315 @@
         }
         return res;
       },
-      // Lever un gate de gouvernance (censeur humain).
       approveGate(gateId, by = 'geoff', role = 'comex') { return engine.governance.resolve(gateId, { decision: 'approve', by, role }); },
-      // Appel LLM brut (une completion) via le backend.
       llm(messages, opts = {}) { return engine.llm.complete({ messages }, opts); },
-      // Projeter (etape 6) : decision -> trajectoire (roadmap + projections, chiffres deterministes).
       project(decision, ctx = {}) { return engine.orchestrator.project(decision, ctx); },
-      // Appel d'un outil deterministe via le backend (ex: simulate_trajectory, estimate_resources).
       async callTool(name, input, { ideaId } = {}) {
         const r = await fetch(`${API_BASE}/tools/call`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, input, ideaId }) });
         return r.json();
       },
     };
-    console.info('[KayrosLab] Pont LLM gouverne pret — window.Kayros.ask("...") | API:', API_BASE);
+    console.info('[KayrosLab] Backend connected —', API_BASE);
   } catch (e) {
-    console.warn('[KayrosLab] Pont LLM non initialise (core/ absent ou backend non configure):', e.message);
+    console.warn('[KayrosLab] Backend unavailable, using demo mode:', e.message);
+    window.Kayros = null;
   }
+</script>
+
+<!-- ===== APPLICATION LOGIC ===== -->
+<script>
+// === CYCLE STEPS DATA ===
+const cycleData = [
+  {
+    title: 'Step 01 — Ecouter (Listen)',
+    agent: 'Signal Scanner',
+    model: 'Claude 3.5 Sonnet',
+    role: 'Qualifies weak signals from market, tech, and regulatory sources',
+    tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'],
+    output: 'Ranked signal list with relevance scores',
+    gate: 'Human validates which signals enter the pipeline',
+    gateWho: 'Expert Metier'
+  },
+  {
+    title: 'Step 02 — Cartographier (Map)',
+    agent: 'Trend Mapper',
+    model: 'GPT-4o',
+    role: 'Builds trend relationship graphs and finds bisociative bridges between domains',
+    tools: ['trend_network_builder()', 'bisociation_detector()'],
+    output: 'Trend graph with connected domains and opportunity nodes',
+    gate: 'Human selects which axes to explore',
+    gateWho: 'Strategic Lead'
+  },
+  {
+    title: 'Step 03 — Construire (Build)',
+    agent: 'Scenario Generator',
+    model: 'GPT-4o',
+    role: 'Generates concrete scenarios, briefs, and concept proposals',
+    tools: ['scenario_simulator()', 'pdf_livrable_generator()'],
+    output: 'Structured briefs with feasibility sketches',
+    gate: 'Human validates brief quality and relevance',
+    gateWho: 'Expert Metier'
+  },
+  {
+    title: 'Step 04 — Positionner (Position)',
+    agent: 'Positionneur',
+    model: 'Gemini 1.5 Pro',
+    role: 'Ontological competitive analysis — maps your idea against the real market landscape',
+    tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'],
+    output: 'Competitive position map with gap analysis',
+    gate: 'Human confirms market positioning assumptions',
+    gateWho: 'Market Expert'
+  },
+  {
+    title: 'Step 05 — Eprouver (Challenge)',
+    agent: 'Red Team + Devil\'s Advocate + Critic',
+    model: 'Claude 3.5 Sonnet',
+    role: 'Three adversarial agents systematically find what could go wrong',
+    tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'],
+    output: 'Challenge report with identified risks and weaknesses',
+    gate: 'Human reviews challenges and decides which to address',
+    gateWho: 'Risk Owner'
+  },
+  {
+    title: 'Step 06 — Arbitrer (Decide)',
+    agent: 'Synthesizer',
+    model: 'Gemini 1.5 Pro',
+    role: 'Aggregates votes, runs multi-criteria analysis, produces decision dossier',
+    tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'],
+    output: 'Decision dossier with KI scores and recommendation',
+    gate: 'COMEX makes final Go/No-Go decision',
+    gateWho: 'COMEX'
+  },
+  {
+    title: 'Step 07 — Projeter (Project)',
+    agent: 'Projection Agent',
+    model: 'DeepSeek R1',
+    role: 'Builds roadmap, KPIs, and runs P10/P50/P90 probabilistic simulation',
+    tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'],
+    output: 'Roadmap with milestones, KPIs, and cost projections',
+    gate: 'Human validates trajectory feasibility',
+    gateWho: 'Project Sponsor'
+  },
+  {
+    title: 'Step 08 — Realizer (Execute)',
+    agent: 'Execution Tracker',
+    model: 'GPT-4o',
+    role: 'Manages pilot deployment, tracks progress, feeds results back into the system',
+    tools: ['milestone_tracker()', 'variance_analyzer()', 'feedback_loop()'],
+    output: 'Progress report with variance analysis and feedback',
+    gate: 'Human conducts post-pilot review and re-arbitrage',
+    gateWho: 'COMEX'
+  }
+];
+
+function showStep(idx) {
+  document.querySelectorAll('.cycle-step').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+
+  const d = cycleData[idx];
+  const detail = document.getElementById('cycle-detail');
+  detail.innerHTML = `
+    <h3>${d.title}</h3>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <h4>Agent</h4>
+        <p><strong>${d.agent}</strong></p>
+        <p style="font-size:0.75rem; color:var(--text-faint);">Model: ${d.model}</p>
+      </div>
+      <div class="detail-item">
+        <h4>Role</h4>
+        <p>${d.role}</p>
+      </div>
+      <div class="detail-item">
+        <h4>Tools Called</h4>
+        <p>${d.tools.map(t => '<code style="color:var(--teal); font-family:\'Fira Code\',monospace; font-size:0.78rem;">' + t + '</code>').join('<br>')}</p>
+      </div>
+      <div class="detail-item">
+        <h4>Output</h4>
+        <p>${d.output}</p>
+      </div>
+    </div>
+    <div class="gate-indicator">
+      <span>🔒</span> Human Gate: ${d.gateWho} — ${d.gate}
+    </div>
+  `;
+  detail.classList.add('visible');
+}
+
+// === DEMO LOGIC ===
+let demoRunning = false;
+
+const demoSteps = [
+  { icon: '📡', cls: 'teal', title: 'Signal Scanner', text: 'Scanning market signals and weak signals...' },
+  { icon: '🗺️', cls: 'violet', title: 'Trend Mapper', text: 'Building trend relationship graph...' },
+  { icon: '🏗️', cls: 'teal', title: 'Scenario Generator', text: 'Generating strategic scenarios...' },
+  { icon: '📍', cls: 'gold', title: 'Positionneur', text: 'Running ontological competitive analysis...' },
+  { icon: '⚔️', cls: 'red', title: 'Red Team', text: 'Challenging assumptions and finding risks...' },
+  { icon: '⚖️', cls: 'gold', title: 'Synthesizer', text: 'Aggregating votes and computing KI scores...' },
+  { icon: '📊', cls: 'teal', title: 'Projection Agent', text: 'Simulating P10/P50/P90 trajectories...' },
+  { icon: '🚀', cls: 'teal', title: 'Execution Tracker', text: 'Preparing deployment roadmap...' },
+];
+
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function clearDemo() {
+  document.getElementById('demo-idea').value = '';
+  document.getElementById('demo-output').innerHTML = `
+    <div style="color: var(--text-faint); text-align: center; padding: 2rem 0;">
+      <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">→</p>
+      <p>Enter an idea and click <strong>Run Full Cycle</strong></p>
+    </div>
+  `;
+}
+
+function addDemoStep(icon, cls, title, text, extra = '') {
+  const output = document.getElementById('demo-output');
+  const div = document.createElement('div');
+  div.className = 'demo-step';
+  div.innerHTML = `
+    <div class="demo-step__icon demo-step__icon--${cls}">${icon}</div>
+    <div class="demo-step__content">
+      <h4>${title}</h4>
+      <p>${text}</p>
+      ${extra}
+    </div>
+  `;
+  output.appendChild(div);
+  output.scrollTop = output.scrollHeight;
+}
+
+function addSpinner(title) {
+  const output = document.getElementById('demo-output');
+  const div = document.createElement('div');
+  div.className = 'demo-step';
+  div.id = 'demo-spinner';
+  div.innerHTML = `
+    <div class="demo-step__icon demo-step__icon--teal"><span class="spinner"></span></div>
+    <div class="demo-step__content">
+      <h4>${title}</h4>
+      <p style="font-size:0.78rem; color:var(--text-faint);">Processing...</p>
+    </div>
+  `;
+  output.appendChild(div);
+  output.scrollTop = output.scrollHeight;
+}
+
+function removeSpinner() {
+  document.getElementById('demo-spinner')?.remove();
+}
+
+function calculateDemoKI(stepsCompleted, hasChallenge, hasExternal) {
+  let base = 4.0;
+  base += stepsCompleted * 0.55;
+  if (hasChallenge) base += 1.2;
+  if (hasExternal) base += 0.8;
+  const clamp = v => Math.min(9.8, Math.max(1.0, v));
+  return {
+    global: clamp(base).toFixed(1),
+    strategic: clamp(base * 0.95).toFixed(1),
+    feasibility: clamp(base * 1.05).toFixed(1),
+    risk: clamp(base * 0.85).toFixed(1),
+    impact: clamp(base * 0.98).toFixed(1),
+    originality: clamp(base + (hasChallenge ? 0.8 : 0)).toFixed(1),
+  };
+}
+
+async function runDemo() {
+  if (demoRunning) return;
+  const idea = document.getElementById('demo-idea').value.trim();
+  if (!idea) { alert('Please enter a strategic idea.'); return; }
+
+  demoRunning = true;
+  const btn = document.getElementById('demo-run-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Running...';
+
+  const output = document.getElementById('demo-output');
+  output.innerHTML = '';
+
+  addDemoStep('💡', 'teal', 'Idea Received', `"${idea.substring(0, 80)}${idea.length > 80 ? '...' : ''}"`);
+
+  // Simulate each step
+  for (let i = 0; i < demoSteps.length; i++) {
+    const s = demoSteps[i];
+    addSpinner(s.title);
+    await new Promise(r => setTimeout(r, 600 + Math.random() * 800));
+    removeSpinner();
+
+    const hasChallenge = i >= 4;
+    const ki = calculateDemoKI(i + 1, hasChallenge, false);
+    const extra = (i === 4)
+      ? `<div style="margin-top:0.4rem; padding:0.4rem 0.6rem; background:var(--red-dim); border-radius:var(--radius-xs); font-size:0.75rem; color:var(--red);">
+           <strong>3 risks identified:</strong> Market adoption speed, regulatory uncertainty in EU AI Act, integration complexity with legacy OT systems
+         </div>`
+      : (i === 5)
+      ? `<div class="ki-display" style="margin-top:0.4rem;">
+           <div style="display:flex; align-items:baseline; gap:0.5rem;">
+             <span class="ki-score">${ki.global}</span>
+             <span class="ki-label">/ 10 Kayros Index</span>
+           </div>
+           <div class="ki-dims">
+             <div class="ki-dim"><span>Strategic Fit</span><span>${ki.strategic}</span></div>
+             <div class="ki-dim"><span>Feasibility</span><span>${ki.feasibility}</span></div>
+             <div class="ki-dim"><span>Risk Profile</span><span>${ki.risk}</span></div>
+             <div class="ki-dim"><span>Impact</span><span>${ki.impact}</span></div>
+           </div>
+         </div>`
+      : '';
+    addDemoStep(s.icon, s.cls, s.title, s.text, extra);
+  }
+
+  // Gate
+  await new Promise(r => setTimeout(r, 500));
+  const gateDiv = document.createElement('div');
+  gateDiv.className = 'gate-block visible';
+  gateDiv.innerHTML = `
+    <h4>🔒 Human Gate — COMEX Review Required</h4>
+    <p>The agents have completed their analysis. A human decision is required before proceeding to execution.</p>
+    <div class="gate-actions">
+      <button class="btn btn-teal" onclick="approveDemoGate(this)">Approve & Execute</button>
+      <button class="btn btn-outline" style="border-color:var(--red); color:var(--red);" onclick="rejectDemoGate(this)">Reject</button>
+    </div>
+  `;
+  output.appendChild(gateDiv);
+  output.scrollTop = output.scrollHeight;
+
+  // Try backend integration
+  if (window.Kayros) {
+    try {
+      const result = await window.Kayros.ask(idea);
+      console.log('[Demo] Backend result:', result);
+    } catch (e) {
+      console.warn('[Demo] Backend call failed:', e.message);
+    }
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Run Full Cycle';
+  demoRunning = false;
+}
+
+function approveDemoGate(btn) {
+  const gate = btn.closest('.gate-block');
+  gate.innerHTML = `
+    <h4 style="color:var(--teal);">✅ Approved — Execution Initiated</h4>
+    <p>Decision logged. Roadmap and KPIs have been generated. The execution tracker will monitor progress.</p>
+  `;
+}
+
+function rejectDemoGate(btn) {
+  const gate = btn.closest('.gate-block');
+  gate.innerHTML = `
+    <h4 style="color:var(--red);">✕ Rejected — Feedback Logged</h4>
+    <p>Your rejection and comments have been recorded. The idea will be revised based on your feedback.</p>
+  `;
+}
+
+// Initialize first step
+showStep(0);
 </script>
 
 </body>
