@@ -1,0 +1,10 @@
+name = "kayros-mistral-proxy"
+main = "build/worker/shim.mjs"
+compatibility_date = "2024-11-01"
+
+[build]
+command = "cargo install -q worker-build && worker-build --release"
+
+# Set secret after deploy:
+#   npx wrangler secret put MISTRAL_API_KEY
+# Do NOT put the key in this file.
