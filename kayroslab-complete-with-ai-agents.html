@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://microsoft.github.io/Ontology-Playground/embed/ontology-embed.js"></script>
 <script>
 tailwind.config = {
   theme: {
@@ -51,12 +52,13 @@ tailwind.config = {
 .step-progress.active { background: #e0f2fe; color: #0284c8; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.2); }
 .step-progress.pending { background: white; color: #94a3b8; border-color: #e2e8f0; }
 .agent-log { font-family: 'Fira Code', monospace; font-size: 11px; line-height: 1.5; }
-.generated-content { max-height: 260px; overflow-y: auto; }
+.generated-content { max-height: 420px; overflow-y: auto; }
 .editable-output:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.15); }
 .ki-ring { width: 72px; height: 72px; border-radius: 50%; background: conic-gradient(#0ea5e9 calc(var(--ki) * 1%), #e2e8f0 0); display: flex; align-items: center; justify-content: center; }
 .ki-ring-inner { width: 58px; height: 58px; border-radius: 50%; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .human-note { border-left: 3px solid #f59e0b; background: #fffbeb; }
 #report-template { position: absolute; left: -9999px; top: 0; width: 210mm; }
+.ontology-embed { border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
@@ -102,7 +104,7 @@ tailwind.config = {
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children">
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-microchip"></i></div><h3 class="font-display font-semibold text-base mb-2">Model</h3><p class="text-slate-600 text-sm">Claude, GPT, Gemini, DeepSeek or local Ollama.</p></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-amber-400 hover:shadow-lg"><div class="arch-icon bg-amber-100 text-amber-600"><i class="fas fa-wrench"></i></div><h3 class="font-display font-semibold text-base mb-2">Tools</h3><p class="text-slate-600 text-sm">ki_scorer, search_competitors, risk_assessor…</p></div>
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-amber-400 hover:shadow-lg"><div class="arch-icon bg-amber-100 text-amber-600"><i class="fas fa-wrench"></i></div><h3 class="font-display font-semibold text-base mb-2">Tools</h3><p class="text-slate-600 text-sm">ki_scorer, search_competitors, ontological_mapper…</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-violet-400 hover:shadow-lg"><div class="arch-icon bg-violet-100 text-violet-600"><i class="fas fa-clipboard-list"></i></div><h3 class="font-display font-semibold text-base mb-2">Prompt</h3><p class="text-slate-600 text-sm">Specialized system prompts per agent role.</p></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:border-sky-500 hover:shadow-lg"><div class="arch-icon bg-sky-100 text-sky-600"><i class="fas fa-shield-halved"></i></div><h3 class="font-display font-semibold text-base mb-2">Middleware</h3><p class="text-slate-600 text-sm">Guardrails + human-in-the-loop gates.</p></div>
     </div>
@@ -155,7 +157,7 @@ tailwind.config = {
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 stagger-children">
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-violet-600 tracking-widest uppercase mb-2">Analysis</div><h3 class="font-display font-semibold text-sm mb-1">Competitor Scanner</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">search_competitors()</div></div>
       <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-sky-600 tracking-widest uppercase mb-2">Scoring</div><h3 class="font-display font-semibold text-sm mb-1">KI Scorer</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">ki_scorer()</div></div>
-      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-amber-600 tracking-widest uppercase mb-2">Generation</div><h3 class="font-display font-semibold text-sm mb-1">Scenario Simulator</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">scenario_simulator()</div></div>
+      <div class="bg-white border border-slate-200 rounded-3xl p-5"><div class="text-xs font-bold text-amber-600 tracking-widest uppercase mb-2">Ontology</div><h3 class="font-display font-semibold text-sm mb-1">Ontological Mapper</h3><div class="px-3 py-2 bg-slate-100 rounded-lg font-mono text-xs text-sky-600">ontological_mapper() · Ontology Playground</div></div>
     </div>
   </div>
 </section>
@@ -249,7 +251,7 @@ tailwind.config = {
 
 <footer class="text-center py-12 px-6 border-t border-slate-200">
   <p class="text-slate-500 text-sm mb-2"><span class="font-display font-bold text-slate-900">KayrosLab</span> — The Governed Agent Platform</p>
-  <p class="text-slate-400 text-xs">contact@kayroslab.com · Built with the <a href="https://github.com/langchain-ai/langchain" target="_blank" class="text-sky-600 hover:text-sky-500">LangChain</a> agent architecture</p>
+  <p class="text-slate-400 text-xs">contact@kayroslab.com · Built with the <a href="https://github.com/langchain-ai/langchain" target="_blank" class="text-sky-600 hover:text-sky-500">LangChain</a> agent architecture · Ontological maps powered by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 hover:text-sky-500">Microsoft Ontology Playground</a></p>
 </footer>
 
 <script>
@@ -257,7 +259,7 @@ const cycleData = [
   { title: 'Step 01 — Ecouter', agent: 'Signal Scanner', model: 'Claude 3.5 Sonnet', role: 'Qualifies weak signals', tools: ['search_competitors()', 'trend_network_builder()', 'search_regulatory_risks()'], gateWho: 'Expert Métier' },
   { title: 'Step 02 — Cartographier', agent: 'Trend Mapper', model: 'GPT-4o', role: 'Trend graphs & bisociation', tools: ['trend_network_builder()', 'bisociation_detector()'], gateWho: 'Strategic Lead' },
   { title: 'Step 03 — Construire', agent: 'Scenario Generator', model: 'GPT-4o', role: 'Scenarios & briefs', tools: ['scenario_simulator()', 'pdf_livrable_generator()'], gateWho: 'Expert Métier' },
-  { title: 'Step 04 — Positionner', agent: 'Positionneur', model: 'Gemini 1.5 Pro', role: 'Competitive ontology', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper()'], gateWho: 'Market Expert' },
+  { title: 'Step 04 — Positionner', agent: 'Positionneur', model: 'Gemini 1.5 Pro', role: 'Competitive ontology + associations/divergences', tools: ['search_competitors()', 'gap_analyzer()', 'ontological_mapper() · Ontology Playground'], gateWho: 'Market Expert' },
   { title: 'Step 05 — Eprouver', agent: "Red Team + Devil's Advocate", model: 'Claude 3.5 Sonnet', role: 'Adversarial challenge', tools: ['risk_assessor()', 'bias_detector()', 'stress_test()'], gateWho: 'Risk Owner' },
   { title: 'Step 06 — Arbitrer', agent: 'Synthesizer', model: 'Gemini 1.5 Pro', role: 'KI scoring & decision', tools: ['vote_aggregator()', 'ki_scorer()', 'criteria_weighter()'], gateWho: 'COMEX' },
   { title: 'Step 07 — Projeter', agent: 'Projection Agent', model: 'DeepSeek R1', role: 'Roadmap & simulation', tools: ['scenario_simulator()', 'roadmap_builder()', 'kpi_tracker()'], gateWho: 'Project Sponsor' },
@@ -358,7 +360,22 @@ function generateStepContent(stepIdx, idea, cond, humanNotesSoFar) {
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Signal Scanner — Qualified Weak Signals</p><p class="text-xs text-slate-500">Idea: “${ideaShort}”</p><p class="text-xs bg-sky-50 text-sky-700 px-2 py-1 rounded inline-block">Scope applied: ${scopeNote}</p><ul class="list-disc pl-4 space-y-1 text-sm"><li><strong>Market (8.4)</strong> — Rising demand for predictive maintenance in EU manufacturing.</li><li><strong>Tech (7.9)</strong> — Edge AI / tinyML now accurate enough for vibration anomaly detection.</li><li><strong>Regulatory (7.1)</strong> — EU AI Act may classify safety-critical systems as high-risk.</li><li><strong>Competitive (6.8)</strong> — Pure-plays still mostly US-centric; EU localization gap.</li></ul>${hasHuman ? '<p class="text-xs text-amber-700 mt-1"><i class="fas fa-user-edit mr-1"></i>Prior human notes integrated into ranking weights.</p>' : ''}</div>`,
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Trend Mapper — Relationship Graph</p><div class="flex flex-wrap gap-1.5 mb-1"><span class="px-2 py-0.5 bg-sky-100 text-sky-700 rounded-full text-xs">Industrial IoT</span><span class="px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full text-xs">Edge AI</span><span class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs">PdM</span><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs">EU Mfg 4.0</span></div><p class="text-sm"><strong>Bisociative bridges:</strong> Aerospace vibration → factory motors · Federated learning (health) → multi-site industrial · Digital twin (auto) → brownfield plants.</p><p class="text-xs text-slate-500">Axes suggested: federated edge models, brownfield retrofit, AI-Act audit trails.</p></div>`,
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Scenario Generator — Concept Briefs</p><div class="border border-slate-200 rounded-lg p-2.5 bg-white text-sm"><p class="font-medium">A — “Edge Guardian”</p><p class="text-xs text-slate-600">On-premise tinyML on existing gateways. Local inference + AI Act audit logs. Feasibility High · 4-6 mo.</p></div><div class="border border-slate-200 rounded-lg p-2.5 bg-white text-sm"><p class="font-medium">B — “Sovereign Twin”</p><p class="text-xs text-slate-600">Full twin in EU sovereign cloud. Higher data gravity, longer cycle. Feasibility Medium · 9-12 mo.</p></div><p class="text-xs text-slate-500">Preferred under your constraints: Scenario A.</p></div>`,
-    `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Positionneur — Competitive Map</p><table class="w-full text-xs"><thead><tr class="bg-slate-100 text-left"><th class="p-1.5">Player</th><th class="p-1.5">EU strength</th><th class="p-1.5">Gap</th></tr></thead><tbody><tr class="border-b"><td class="p-1.5">Senseye</td><td class="p-1.5">Medium</td><td class="p-1.5">Limited edge / AI-Act</td></tr><tr class="border-b"><td class="p-1.5">Uptake</td><td class="p-1.5">Low</td><td class="p-1.5">US-centric</td></tr><tr class="border-b"><td class="p-1.5">Siemens IH</td><td class="p-1.5">High</td><td class="p-1.5">Complex / costly</td></tr><tr><td class="p-1.5 font-medium text-sky-700">Your idea</td><td class="p-1.5">—</td><td class="p-1.5 text-emerald-600">Localization + compliance + retrofit simplicity</td></tr></tbody></table></div>`,
+    // STEP 04 — Positionner with Ontology Playground embed
+    `<div class="space-y-3">
+      <p class="font-semibold text-slate-800">Positionneur — Ontological Competitive Map</p>
+      <p class="text-xs text-slate-500">Interactive graph powered by <a href="https://github.com/microsoft/Ontology-Playground" target="_blank" class="text-sky-600 underline">Microsoft Ontology Playground</a>. Explore associations (shared capabilities) and divergences (gaps) between your idea and the competitive landscape.</p>
+      <div class="grid grid-cols-2 gap-2 text-xs mb-2">
+        <div class="p-2 bg-emerald-50 border border-emerald-100 rounded"><span class="font-semibold text-emerald-700">Associations</span><br>Shared edge AI, vibration analytics, industrial IoT</div>
+        <div class="p-2 bg-amber-50 border border-amber-100 rounded"><span class="font-semibold text-amber-700">Divergences / Gaps</span><br>EU localization, AI Act audit trails, brownfield retrofit simplicity</div>
+      </div>
+      <div class="ontology-embed"
+           data-catalogue-id="official/ecommerce"
+           data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/"
+           data-theme="light"
+           data-height="320px">
+      </div>
+      <p class="text-[11px] text-slate-400 mt-1">Pan / zoom the graph · Click nodes to inspect properties · This ontology illustrates entity relationships that the Positionneur uses to surface strategic gaps.</p>
+    </div>`,
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800 text-red-700">Red Team — Challenge Findings</p><div class="p-2.5 bg-red-50 border border-red-100 rounded-lg text-xs"><p class="font-bold text-red-700">RISK 1 — Adoption friction (High)</p><p>Brownfield plants lack standardized data layers. Must include hardware + change-management.</p></div><div class="p-2.5 bg-red-50 border border-red-100 rounded-lg text-xs"><p class="font-bold text-red-700">RISK 2 — AI Act classification (Med-High)</p><p>Safety-critical decisions may trigger high-risk obligations → early legal mapping required.</p></div><div class="p-2.5 bg-amber-50 border border-amber-100 rounded-lg text-xs"><p class="font-bold text-amber-700">RISK 3 — Model drift (Medium)</p><p>Industrial signatures change with wear/temperature. Continuous monitoring + human override mandatory.</p></div></div>`,
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Synthesizer — Decision Dossier</p><div class="flex items-baseline gap-2 mb-2"><span class="font-display text-3xl font-bold text-sky-600">${demoState.ki.toFixed(1)}</span><span class="text-xs text-slate-500">/ 10 Kayros Index (live)</span></div><div class="grid grid-cols-2 gap-1.5 text-xs mb-2"><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Strategic Fit</span><span class="font-semibold text-sky-600">${(demoState.ki * 1.05).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Feasibility</span><span class="font-semibold text-sky-600">${(demoState.ki * 0.98).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Risk</span><span class="font-semibold text-amber-600">${(demoState.ki * 0.85).toFixed(1)}</span></div><div class="flex justify-between p-1.5 bg-slate-50 rounded"><span class="text-slate-500">Impact</span><span class="font-semibold text-sky-600">${(demoState.ki * 1.02).toFixed(1)}</span></div></div><p class="text-sm"><strong>Recommendation:</strong> Conditional Go — Scenario A (Edge Guardian) with explicit AI Act + change-management mitigation.</p></div>`,
     `<div class="space-y-2.5"><p class="font-semibold text-slate-800">Projection Agent — Roadmap & P10/P50/P90</p><div class="text-xs space-y-1 mb-2"><div class="flex gap-2"><span class="font-medium w-16">M0-M2</span><span>Hardware + edge prototype + first data contract</span></div><div class="flex gap-2"><span class="font-medium w-16">M3-M5</span><span>Pilot 2-3 lines · training · AI Act gap analysis</span></div><div class="flex gap-2"><span class="font-medium w-16">M6-M9</span><span>Full site + reference case</span></div></div><div class="flex gap-2 text-xs"><div class="flex-1 p-2 bg-red-50 rounded text-center"><div class="text-red-600 font-bold">P10</div>−0.4 M€</div><div class="flex-1 p-2 bg-sky-50 rounded text-center"><div class="text-sky-600 font-bold">P50</div>+1.8 M€</div><div class="flex-1 p-2 bg-emerald-50 rounded text-center"><div class="text-emerald-600 font-bold">P90</div>+4.2 M€</div></div></div>`,
@@ -403,6 +420,10 @@ async function runStep(stepIdx) {
   const contentHtml = generateStepContent(stepIdx, demoState.idea, demoState.conditions, humanNotesSoFar);
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
+  // Init Ontology Playground embed if present (Step 04)
+  if (stepIdx === 3 && window.OntologyEmbed) {
+    setTimeout(() => { try { window.OntologyEmbed.init(); } catch(e) { console.warn(e); } }, 100);
+  }
   updateKI(demoState.ki + 0.25 + (stepIdx === 5 ? 0.4 : 0), `Step ${stepIdx + 1} completed`);
   setStatus(`<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">${meta.agent} completed</div><div class="text-xs text-emerald-600">Human gate — ${data.gateWho}</div></div></div>`);
   log(`Output ready. Awaiting human decision (${data.gateWho}).`, 'warn');
