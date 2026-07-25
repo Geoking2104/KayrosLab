@@ -16,7 +16,7 @@ import {
   buildDigest, formatDigest,
   StageTimer, DEFAULT_STAGE_LIMITS,
   ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
-} from '../../core/index.mjs';
+} from '../../../core/index.mjs';
 
 export default async function buildContext() {
   const {
