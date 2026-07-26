@@ -12,7 +12,9 @@ const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
 
 // --- plugins globaux ---
-await app.register(cors, { origin: ctx.ALLOWED_ORIGIN });
+// Keep the production site whitelisted and allow the standalone HTML demo
+// when it is opened directly from disk (browsers send `Origin: null`).
+await app.register(cors, { origin: [ctx.ALLOWED_ORIGIN, 'null'] });
 await app.register(metricsPlugin, { endpoint: '/metrics' });
 await app.register(rateLimit, {
   global: true, max: 100, timeWindow: '1 minute',
