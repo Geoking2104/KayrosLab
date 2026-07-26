@@ -23,7 +23,7 @@
 .ki-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(#0ea5e9 calc(var(--ki)*1%),#e2e8f0 0);display:flex;align-items:center;justify-content:center}
 .ki-ring-inner{width:58px;height:58px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .human-note{border-left:3px solid #f59e0b;background:#fffbeb}
-#report-template{position:fixed;left:0;top:0;width:210mm;background:#fff;z-index:-1;opacity:0;pointer-events:none}#report-template.capturing{opacity:1;z-index:9999}
+#report-template{position:fixed;left:0;top:0;width:210mm;background:#fff;z-index:-1;opacity:0;pointer-events:none}#report-template.capturing{position:relative;left:auto;top:auto;opacity:1;z-index:9999}
 .ontology-embed{border-radius:12px;overflow:hidden;border:1px solid #e2e8f0}
 .prose-llm h3,.prose-llm h4{font-weight:700;margin-top:.75rem;margin-bottom:.35rem}.prose-llm ul{list-style:disc;padding-left:1.25rem;margin:.4rem 0}.prose-llm p{margin:.35rem 0}.prose-llm strong{font-weight:600}
 </style>
@@ -179,7 +179,11 @@ const stepMeta = [
   { icon:'fa-rocket', short:'Realiser', agent:'Execution Tracker' }
 ];
 
-const demoState = { idea:'', conditions:{}, currentStep:-1, history:[], isRunning:false, ki:3.5, kiHistory:[3.5] };
+const demoState = {
+  idea:'', conditions:{}, currentStep:-1, history:[], userActions:[],
+  isRunning:false, ki:3.5, kiHistory:[3.5],
+  currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null
+};
 
 function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 function toggleConditions(){
@@ -216,15 +220,45 @@ function updateHistory(){
   const el=document.getElementById('cycle-history');
   if(!demoState.history.length){ el.innerHTML='<p class="text-slate-400 text-xs">Aucune étape.</p>'; return; }
   el.innerHTML=demoState.history.map(h=>{
+    const decision=decisionLabel(h.decision);
     const note=h.humanNote?'<div class="mt-1 human-note text-[11px] text-amber-800 px-2 py-1 rounded">'+escapeHtml(h.humanNote.substring(0,100))+'</div>':'';
-    return '<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">'+(h.stepIdx+1)+'</div><div class="min-w-0 flex-1"><div class="font-semibold text-xs">'+escapeHtml(h.agent)+'</div><div class="text-[11px] text-slate-500 line-clamp-2">'+escapeHtml(h.summary||'')+'</div>'+note+'</div></div></div>';
+    return '<div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100"><div class="flex gap-2"><div class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0">'+(h.stepIdx+1)+'</div><div class="min-w-0 flex-1"><div class="flex items-center justify-between gap-2"><div class="font-semibold text-xs">'+escapeHtml(h.agent)+'</div><span class="text-[9px] uppercase tracking-wide text-slate-400">'+escapeHtml(decision)+'</span></div><div class="text-[11px] text-slate-500 line-clamp-2">'+escapeHtml(h.summary||'')+'</div>'+note+'</div></div></div>';
   }).join('');
 }
 function collectConditions(){ return { geo:document.getElementById('cond-geo').value.trim(), budget:document.getElementById('cond-budget').value.trim(), time:document.getElementById('cond-time').value.trim(), must:document.getElementById('cond-must').value.trim(), notes:document.getElementById('cond-notes').value.trim() }; }
 function computeBaseKI(idea,c){ let s=3.2; if(idea.length>40)s+=.4; if(idea.length>100)s+=.3; if(c.geo)s+=.35; if(c.budget)s+=.3; if(c.time)s+=.25; if(c.must)s+=.4; if(c.notes&&c.notes.length>20)s+=.5; return Math.min(5.8,s); }
 function setStatus(html){ document.getElementById('agent-status').innerHTML=html; }
 function stripHtml(html){ const t=document.createElement('div'); t.innerHTML=html; return (t.textContent||'').trim(); }
-function escapeHtml(s){ return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"'); }
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function formatTimestamp(value){
+  if(!value) return '—';
+  return new Date(value).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'medium'});
+}
+function decisionLabel(value){
+  return ({approved:'Approuvé',rerun:'Relancé',rejected:'Rejeté',skip_to_end:'Fin anticipée',skipped:'Non exécuté'})[value]||value||'—';
+}
+function actionLabel(value){
+  return ({cycle_started:'Cycle démarré',cycle_restarted:'Cycle redémarré',approved:'Étape approuvée',rerun:'Étape relancée',rejected:'Étape rejetée',skip_to_end:'Fin anticipée demandée'})[value]||value||'Action';
+}
+function recordUserAction(action, stepIdx, note, details){
+  demoState.userActions.push({
+    action, stepIdx:Number.isInteger(stepIdx)?stepIdx:null,
+    note:note||'', details:details||'', at:new Date().toISOString()
+  });
+}
+function saveStepResult(decision, humanNote, kiBefore, kiAfter){
+  const stepIdx=demoState.currentStep, meta=stepMeta[stepIdx];
+  const output=(demoState.currentOutput||stripHtml(document.getElementById('generated-content').innerHTML)||'').trim();
+  demoState.history.push({
+    stepIdx, step:meta.short, agent:meta.agent, decision,
+    output, summary:output.replace(/\s+/g,' ').substring(0,180),
+    humanNote:humanNote||null,
+    generatedAt:demoState.currentOutputGeneratedAt,
+    decidedAt:new Date().toISOString(),
+    kiBefore:Number.isFinite(kiBefore)?kiBefore:demoState.ki,
+    kiAtApproval:Number.isFinite(kiAfter)?kiAfter:demoState.ki
+  });
+}
 
 async function callMistralViaProxy(systemPrompt, userPrompt) {
   console.log('[KayrosLab] →', PROXY_URL, { systemLen: systemPrompt.length, userLen: userPrompt.length });
@@ -287,19 +321,24 @@ async function runStep(stepIdx) {
   log('→ POST /v1/demo/chat', 'llm');
 
   const notes = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
-  let contentHtml = '';
+  let contentHtml = '', outputText = '';
   try {
     const raw = await callMistralViaProxy(data.system, buildUserPrompt(demoState.idea, demoState.conditions, notes));
     log('← Réponse ('+raw.length+' car.)', 'success');
+    outputText = raw;
     contentHtml = markdownishToHtml(raw);
     if (stepIdx === 3) {
+      outputText += '\n\n[Carte ontologique interactive générée dans l’interface.]';
       contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Carte ontologique</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>';
     }
   } catch (err) {
     log('Erreur: '+err.message, 'error');
+    outputText = 'API indisponible : '+err.message;
     contentHtml = '<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>API indisponible</strong><br>'+escapeHtml(err.message)+'<br><br>Vérifiez que le backend est déployé avec <code>MISTRAL_API_KEY</code> et joignable sur api.kayroslab.com.</div>';
   }
 
+  demoState.currentOutput = outputText;
+  demoState.currentOutputGeneratedAt = new Date().toISOString();
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
   if (stepIdx === 3 && window.OntologyEmbed) setTimeout(function(){ try { OntologyEmbed.init(); } catch(e){} }, 120);
@@ -313,12 +352,23 @@ async function runStep(stepIdx) {
 function startGovernedCycle() {
   const idea = document.getElementById('demo-idea').value.trim();
   if (!idea) { alert('Entrez une idée stratégique.'); return; }
+  const continuing = demoState.history.length>0 && demoState.idea===idea && demoState.currentStep===-1 && !demoState.completedAt;
   demoState.idea = idea;
   demoState.conditions = collectConditions();
-  demoState.currentStep = -1; demoState.history = []; demoState.kiHistory = [];
+  demoState.currentStep = -1;
+  demoState.currentOutput = '';
+  demoState.currentOutputGeneratedAt = null;
+  demoState.completedAt = null;
+  if(!continuing){
+    demoState.history = [];
+    demoState.userActions = [];
+    demoState.kiHistory = [];
+    demoState.startedAt = new Date().toISOString();
+  }
   const base = computeBaseKI(idea, demoState.conditions);
-  demoState.ki = base; demoState.kiHistory.push(base);
+  demoState.ki = base;
   updateKI(base, 'Score initial');
+  recordUserAction(continuing?'cycle_restarted':'cycle_started',null,'',continuing?'Reprise après rejet':'Idée et contraintes initiales enregistrées');
   document.getElementById('demo-start-btn').disabled = true;
   document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span> Running…';
   console.log('[KayrosLab] cycle start', { ideaLen: idea.length });
@@ -328,19 +378,30 @@ function startGovernedCycle() {
 function approveAndContinue() {
   if (demoState.currentStep < 0 || demoState.isRunning) return;
   const note = document.getElementById('editable-output').value.trim();
-  const meta = stepMeta[demoState.currentStep];
-  const summary = stripHtml(document.getElementById('generated-content').innerHTML).substring(0,110);
+  const stepIdx=demoState.currentStep, kiBefore=demoState.ki;
   let boost = 0.15; if (note.length>15) boost+=0.25; if (note.length>60) boost+=0.35;
   updateKI(demoState.ki+boost, note?'Annotation humaine':'Approuvé');
-  demoState.history.push({ stepIdx:demoState.currentStep, agent:meta.agent, summary, humanNote:note||null, kiAtApproval:demoState.ki });
+  saveStepResult('approved',note,kiBefore,demoState.ki);
+  recordUserAction('approved',stepIdx,note,note?'Approbation avec annotation':'Approbation sans annotation');
   updateHistory();
   log(note?'Note enregistrée ('+note.length+' car.)':'Approuvé', note?'human':'success');
   if (demoState.currentStep >= 7) finishCycle(); else runStep(demoState.currentStep+1);
 }
-function rerunCurrentStep(){ if(demoState.currentStep<0||demoState.isRunning)return; log('Relance…','warn'); runStep(demoState.currentStep); }
+function rerunCurrentStep(){
+  if(demoState.currentStep<0||demoState.isRunning)return;
+  const stepIdx=demoState.currentStep, note=document.getElementById('editable-output').value.trim();
+  saveStepResult('rerun',note,demoState.ki,demoState.ki);
+  recordUserAction('rerun',stepIdx,note,'Nouvelle génération demandée');
+  updateHistory(); log('Relance…','warn'); runStep(stepIdx);
+}
 function rejectAndRestart(){
   if(demoState.isRunning)return;
-  log('Rejeté','error'); demoState.history=[]; demoState.currentStep=-1; updateHistory(); updateProgress();
+  const stepIdx=demoState.currentStep, note=document.getElementById('editable-output').value.trim();
+  if(stepIdx>=0){
+    saveStepResult('rejected',note,demoState.ki,demoState.ki);
+    recordUserAction('rejected',stepIdx,note,'Retour au début du cycle');
+  }
+  log('Rejeté','error'); demoState.currentStep=-1; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; updateHistory(); updateProgress();
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('demo-start-btn').disabled=false;
@@ -350,23 +411,29 @@ function rejectAndRestart(){
 function skipToEnd(){
   if(demoState.isRunning)return;
   const note=document.getElementById('editable-output').value.trim();
-  const meta=stepMeta[demoState.currentStep];
-  demoState.history.push({stepIdx:demoState.currentStep,agent:meta.agent,summary:stripHtml(document.getElementById('generated-content').innerHTML).substring(0,80),humanNote:note||null,kiAtApproval:demoState.ki});
-  for(let i=demoState.currentStep+1;i<8;i++) demoState.history.push({stepIdx:i,agent:stepMeta[i].agent,summary:'Skipped',humanNote:null,kiAtApproval:demoState.ki});
+  const stepIdx=demoState.currentStep, now=new Date().toISOString();
+  saveStepResult('skip_to_end',note,demoState.ki,demoState.ki);
+  recordUserAction('skip_to_end',stepIdx,note,'Les étapes suivantes ne sont pas exécutées');
+  for(let i=stepIdx+1;i<8;i++) demoState.history.push({
+    stepIdx:i,step:stepMeta[i].short,agent:stepMeta[i].agent,decision:'skipped',
+    output:'',summary:'Étape non exécutée',humanNote:null,
+    generatedAt:null,decidedAt:now,kiBefore:demoState.ki,kiAtApproval:demoState.ki
+  });
   updateHistory(); finishCycle();
 }
 function finishCycle(){
   demoState.currentStep=8; updateProgress(); updateKI(demoState.ki+0.3,'Cycle terminé');
+  demoState.completedAt=new Date().toISOString();
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.remove('hidden');
   const n=demoState.history.filter(h=>h.humanNote).length;
-  document.getElementById('final-state').innerHTML='<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Cycle terminé</h3><p class="text-slate-600 text-sm mb-4">KI final : <strong class="text-sky-600">'+demoState.ki.toFixed(1)+'</strong> · '+n+' intervention(s)</p><div class="flex gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>Export PDF</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Nouvelle idée</button></div></div>';
+  document.getElementById('final-state').innerHTML='<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Cycle terminé</h3><p class="text-slate-600 text-sm mb-4">KI final : <strong class="text-sky-600">'+demoState.ki.toFixed(1)+'</strong> · '+n+' intervention(s)</p><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>Export complet PDF</button><button onclick="exportKayrosMarkdown()" class="bg-slate-800 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-lines mr-1"></i>Export complet MD</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Nouvelle idée</button></div></div>';
   document.getElementById('demo-start-btn').disabled=false;
   document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
   log('Cycle finished','success');
 }
 function resetDemo(){
-  demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5];
+  demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.userActions=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5]; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; demoState.startedAt=null; demoState.completedAt=null;
   document.getElementById('demo-idea').value='';
   ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(function(id){ document.getElementById(id).value=''; });
   document.getElementById('demo-progress').classList.add('hidden');
@@ -378,15 +445,148 @@ function resetDemo(){
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.add('hidden');
 }
-function exportKayrosPDF(){
-  const cond=demoState.conditions, n=demoState.history.filter(h=>h.humanNote).length;
-  const dateStr=new Date().toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
-  const rows=demoState.history.map(function(h){
-    return '<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0">'+(h.stepIdx+1)+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">'+escapeHtml(h.agent)+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px">'+escapeHtml((h.summary||'').substring(0,90))+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;font-size:11px;color:#b45309">'+(h.humanNote?escapeHtml(h.humanNote.substring(0,80)):'—')+'</td><td style="padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;color:#0284c8;font-weight:600">'+(h.kiAtApproval?h.kiAtApproval.toFixed(1):'—')+'</td></tr>';
+function reportFileBase(){
+  return 'KayrosLab_parcours_complet_'+new Date().toISOString().slice(0,10);
+}
+function normalizeReportText(value){
+  return String(value||'').replace(/\r\n?/g,'\n').trim();
+}
+function buildReportModel(){
+  return {
+    title:'KayrosLab - Rapport complet du parcours gouverné',
+    generatedAt:new Date().toISOString(),
+    startedAt:demoState.startedAt,
+    completedAt:demoState.completedAt,
+    idea:demoState.idea,
+    conditions:{...demoState.conditions},
+    initialKi:demoState.kiHistory.length?demoState.kiHistory[0]:demoState.ki,
+    finalKi:demoState.ki,
+    kiHistory:[...demoState.kiHistory],
+    actions:demoState.userActions.map(a=>({...a})),
+    steps:demoState.history.map(h=>({...h}))
+  };
+}
+function buildKayrosMarkdown(){
+  const r=buildReportModel(), c=r.conditions;
+  const lines=[
+    '# '+r.title,
+    '',
+    '- Généré le : '+formatTimestamp(r.generatedAt),
+    '- Début du cycle : '+formatTimestamp(r.startedAt),
+    '- Fin du cycle : '+formatTimestamp(r.completedAt),
+    '- Kayros Index : '+Number(r.initialKi).toFixed(1)+' -> '+Number(r.finalKi).toFixed(1),
+    '- Nombre d’actions utilisateur : '+r.actions.length,
+    '- Nombre de résultats enregistrés : '+r.steps.length,
+    '',
+    '## Idée stratégique',
+    '',
+    normalizeReportText(r.idea)||'—',
+    '',
+    '## Contraintes initiales',
+    '',
+    '- Géographie : '+(normalizeReportText(c.geo)||'—'),
+    '- Budget : '+(normalizeReportText(c.budget)||'—'),
+    '- Horizon : '+(normalizeReportText(c.time)||'—'),
+    '- Must-have : '+(normalizeReportText(c.must)||'—'),
+    '- Notes complémentaires : '+(normalizeReportText(c.notes)||'—'),
+    '',
+    '## Évolution du Kayros Index',
+    '',
+    r.kiHistory.map(v=>Number(v).toFixed(1)).join(' -> ')||'—',
+    '',
+    '## Journal des actions utilisateur',
+    ''
+  ];
+  if(!r.actions.length) lines.push('Aucune action utilisateur enregistrée.');
+  r.actions.forEach((a,i)=>{
+    const step=Number.isInteger(a.stepIdx)?' - Étape '+(a.stepIdx+1)+' '+stepMeta[a.stepIdx].short:'';
+    lines.push((i+1)+'. **'+actionLabel(a.action)+'**'+step+' - '+formatTimestamp(a.at));
+    if(a.details) lines.push('   - Détail : '+normalizeReportText(a.details));
+    if(a.note) lines.push('   - Saisie utilisateur : '+normalizeReportText(a.note));
+  });
+  lines.push('','## Parcours détaillé','');
+  r.steps.forEach((h,i)=>{
+    const meta=stepMeta[h.stepIdx]||{short:h.step||'Étape',agent:h.agent||'—'};
+    lines.push(
+      '### '+(i+1)+'. Étape '+(h.stepIdx+1)+' - '+meta.short,
+      '',
+      '- Agent : '+(h.agent||meta.agent),
+      '- Décision utilisateur : '+decisionLabel(h.decision),
+      '- Généré le : '+formatTimestamp(h.generatedAt),
+      '- Décidé le : '+formatTimestamp(h.decidedAt),
+      '- Kayros Index : '+Number(h.kiBefore??r.finalKi).toFixed(1)+' -> '+Number(h.kiAtApproval??r.finalKi).toFixed(1),
+      '',
+      '#### Contenu développé',
+      '',
+      normalizeReportText(h.output)||'_Étape non exécutée._',
+      '',
+      '#### Intervention utilisateur',
+      '',
+      normalizeReportText(h.humanNote)||'_Aucune annotation._',
+      ''
+    );
+  });
+  return lines.join('\n');
+}
+function downloadTextFile(content,filename,mimeType){
+  const blob=new Blob(['\ufeff'+content],{type:mimeType||'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+function exportKayrosMarkdown(){
+  downloadTextFile(buildKayrosMarkdown(),reportFileBase()+'.md','text/markdown;charset=utf-8');
+  log('Markdown complet OK','success');
+}
+function inlineMarkdown(value){
+  return escapeHtml(value).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+}
+function reportTextToHtml(value){
+  return normalizeReportText(value).split('\n').map(function(line){
+    const t=line.trim();
+    if(!t) return '<div style="height:7px"></div>';
+    if(/^###\s+/.test(t)) return '<h4 style="font-size:12px;margin:12px 0 5px;color:#0f172a">'+inlineMarkdown(t.replace(/^###\s+/,''))+'</h4>';
+    if(/^##\s+/.test(t)) return '<h3 style="font-size:14px;margin:14px 0 6px;color:#0f172a">'+inlineMarkdown(t.replace(/^##\s+/,''))+'</h3>';
+    if(/^#\s+/.test(t)) return '<h2 style="font-size:16px;margin:16px 0 7px;color:#0f172a">'+inlineMarkdown(t.replace(/^#\s+/,''))+'</h2>';
+    if(/^[-*]\s+/.test(t)) return '<div style="display:flex;gap:7px;margin:4px 0"><span style="color:#0284c8">•</span><span>'+inlineMarkdown(t.replace(/^[-*]\s+/,''))+'</span></div>';
+    return '<p style="margin:5px 0;line-height:1.55">'+inlineMarkdown(t)+'</p>';
   }).join('');
-  const html='<div style="font-family:Inter,sans-serif;width:210mm;color:#0f172a"><div style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:36px"><div style="font-weight:700;font-size:18px;margin-bottom:16px">KayrosLab</div><h1 style="font-size:22px;margin:0 0 6px">Governed Cycle Report</h1><p style="opacity:.7;font-size:13px;margin:0">'+dateStr+' · KI '+demoState.ki.toFixed(1)+'</p></div><div style="padding:28px 36px"><p style="background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;font-size:13px">'+escapeHtml(demoState.idea)+'</p><p style="font-size:12px;margin-top:12px">Geo: '+escapeHtml(cond.geo||'—')+' · Budget: '+escapeHtml(cond.budget||'—')+' · Time: '+escapeHtml(cond.time||'—')+' · Must: '+escapeHtml(cond.must||'—')+'</p><p style="font-size:14px;font-weight:700;margin:16px 0 8px">KI '+demoState.kiHistory[0].toFixed(1)+' → '+demoState.ki.toFixed(1)+' · '+n+' note(s)</p><table style="width:100%;font-size:11px;border-collapse:collapse"><thead><tr style="background:#f1f5f9"><th style="padding:6px">#</th><th style="padding:6px">Agent</th><th style="padding:6px">Summary</th><th style="padding:6px">Note</th><th style="padding:6px">KI</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
-  const c=document.getElementById('report-template'); c.innerHTML=html; c.classList.add('capturing');
-  html2pdf().set({margin:0,filename:'KayrosLab_'+new Date().toISOString().slice(0,10)+'.pdf',image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,windowWidth:794},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(c).save().then(function(){c.classList.remove('capturing');c.innerHTML='';log('PDF OK','success');});
+}
+function buildKayrosReportHtml(){
+  const r=buildReportModel(), c=r.conditions;
+  const actions=r.actions.map(function(a,i){
+    const step=Number.isInteger(a.stepIdx)?'Étape '+(a.stepIdx+1)+' - '+stepMeta[a.stepIdx].short:'Cycle';
+    return '<div style="display:grid;grid-template-columns:25px 1fr;gap:10px;margin:0 0 12px"><div style="width:25px;height:25px;border-radius:50%;background:#e0f2fe;color:#0369a1;text-align:center;line-height:25px;font-weight:700">'+(i+1)+'</div><div><div style="font-size:11px;font-weight:700;color:#0f172a">'+escapeHtml(actionLabel(a.action))+' · '+escapeHtml(step)+'</div><div style="font-size:9px;color:#64748b;margin:2px 0">'+escapeHtml(formatTimestamp(a.at))+'</div>'+(a.details?'<div style="font-size:10px;color:#334155">'+escapeHtml(a.details)+'</div>':'')+(a.note?'<div style="font-size:10px;color:#92400e;background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 8px;margin-top:5px">'+reportTextToHtml(a.note)+'</div>':'')+'</div></div>';
+  }).join('')||'<p style="font-size:11px;color:#64748b">Aucune action utilisateur enregistrée.</p>';
+  const steps=r.steps.map(function(h,i){
+    const meta=stepMeta[h.stepIdx]||{short:h.step||'Étape',agent:h.agent||'—'};
+    const note=h.humanNote?reportTextToHtml(h.humanNote):'<p style="color:#94a3b8;font-style:italic">Aucune annotation.</p>';
+    const output=h.output?reportTextToHtml(h.output):'<p style="color:#94a3b8;font-style:italic">Étape non exécutée.</p>';
+    return '<section class="report-step" style="page-break-before:always;padding:16mm 16mm 15mm;color:#0f172a;overflow-wrap:anywhere"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:13px"><div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#0284c8;font-weight:700">Résultat '+(i+1)+' · Étape '+(h.stepIdx+1)+'</div><h2 style="font-size:20px;margin:4px 0 2px">'+escapeHtml(meta.short)+'</h2><div style="font-size:10px;color:#64748b">Agent : '+escapeHtml(h.agent||meta.agent)+'</div></div><div style="font-size:10px;font-weight:700;color:#fff;background:#0f172a;border-radius:999px;padding:6px 10px;white-space:nowrap">'+escapeHtml(decisionLabel(h.decision))+'</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>Généré</strong><br>'+escapeHtml(formatTimestamp(h.generatedAt))+'</div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>Décidé</strong><br>'+escapeHtml(formatTimestamp(h.decidedAt))+'</div></div><h3 style="font-size:12px;margin:0 0 7px;color:#0369a1;text-transform:uppercase;letter-spacing:.08em">Contenu développé</h3><div style="font-size:10px;line-height:1.55">'+output+'</div><div style="margin-top:15px;padding:10px 12px;background:#fffbeb;border-left:4px solid #f59e0b"><h3 style="font-size:10px;margin:0 0 5px;color:#92400e;text-transform:uppercase;letter-spacing:.08em">Action et saisie utilisateur</h3><div style="font-size:10px;color:#78350f"><strong>'+escapeHtml(decisionLabel(h.decision))+'</strong>'+note+'</div></div><div style="margin-top:13px;font-size:9px;color:#64748b">Kayros Index : '+Number(h.kiBefore??r.finalKi).toFixed(1)+' -> <strong style="color:#0284c8">'+Number(h.kiAtApproval??r.finalKi).toFixed(1)+'</strong></div></section>';
+  }).join('');
+  return '<div style="font-family:Arial,Helvetica,sans-serif;width:210mm;background:#fff;color:#0f172a"><section style="position:relative;height:296mm;background:linear-gradient(145deg,#0f172a,#1e3a5f);color:#fff;padding:30mm 20mm;box-sizing:border-box;page-break-after:always"><div style="font-size:18px;font-weight:700;letter-spacing:.04em">KayrosLab</div><div style="margin-top:42mm;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#7dd3fc">Rapport d’audit complet</div><h1 style="font-size:30px;line-height:1.15;margin:9px 0 15px">Parcours gouverné<br>de bout en bout</h1><p style="font-size:13px;line-height:1.55;color:#cbd5e1;max-width:145mm">'+escapeHtml(r.idea)+'</p><div style="margin-top:32mm;display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">KI initial</div><div style="font-size:20px;font-weight:700">'+Number(r.initialKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">KI final</div><div style="font-size:20px;font-weight:700;color:#7dd3fc">'+Number(r.finalKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">Actions humaines</div><div style="font-size:20px;font-weight:700">'+r.actions.length+'</div></div></div><div style="position:absolute;left:20mm;bottom:22mm;font-size:9px;color:#94a3b8">Généré le '+escapeHtml(formatTimestamp(r.generatedAt))+'</div></section><section style="padding:16mm 16mm 15mm"><h2 style="font-size:20px;margin:0 0 12px">Cadre initial et audit utilisateur</h2><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:14px"><div style="font-size:9px;text-transform:uppercase;color:#64748b;margin-bottom:5px">Idée stratégique</div><div style="font-size:11px;line-height:1.55">'+reportTextToHtml(r.idea)+'</div></div><table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:16px"><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b;width:32%">Géographie</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.geo||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Budget</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.budget||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Horizon</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.time||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Must-have</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.must||'—')+'</td></tr><tr><td style="padding:7px;color:#64748b">Notes</td><td style="padding:7px">'+reportTextToHtml(c.notes||'—')+'</td></tr></table><h3 style="font-size:13px;margin:0 0 10px">Journal horodaté des actions utilisateur</h3>'+actions+'</section>'+steps+'</div>';
+}
+function exportKayrosPDF(){
+  const c=document.getElementById('report-template');
+  c.innerHTML=buildKayrosReportHtml(); c.classList.add('capturing');
+  const worker=html2pdf().set({
+    margin:0,filename:reportFileBase()+'.pdf',
+    image:{type:'jpeg',quality:0.98},
+    html2canvas:{scale:1.6,scrollX:0,scrollY:0,useCORS:true,letterRendering:true},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+    pagebreak:{mode:['css','legacy']}
+  }).from(c).toPdf();
+  worker.get('pdf').then(function(pdf){
+    const total=pdf.internal.getNumberOfPages();
+    for(let page=1;page<=total;page++){
+      pdf.setPage(page); pdf.setFontSize(8); pdf.setTextColor(100,116,139);
+      pdf.text('KayrosLab · Page '+page+' / '+total,105,293,{align:'center'});
+    }
+  }).save().then(function(){
+    c.classList.remove('capturing'); c.innerHTML=''; log('PDF complet OK','success');
+  }).catch(function(err){
+    c.classList.remove('capturing'); c.innerHTML=''; log('Erreur PDF: '+err.message,'error');
+  });
 }
 </script>
 </body>
