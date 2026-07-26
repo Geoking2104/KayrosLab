@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KayrosLab — The Governed Agent Platform</title>
+<title>KayrosLab — Plateforme d’agents gouvernés</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -36,57 +36,63 @@
       <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center"><i class="fas fa-brain text-white text-sm"></i></div>
       <span class="font-display font-bold text-lg">KayrosLab</span>
     </a>
-    <a href="https://www.kayroslab.com" class="text-sm text-slate-600 hover:text-sky-600 font-medium"><i class="fas fa-arrow-left mr-1"></i> Back</a>
+    <div class="flex items-center gap-3">
+      <div class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 p-1" role="group" data-i18n-aria="language_selector">
+        <button type="button" data-lang="fr" onclick="setLanguage('fr')" class="lang-btn rounded-full px-3 py-1 text-xs font-bold transition" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" onclick="setLanguage('en')" class="lang-btn rounded-full px-3 py-1 text-xs font-bold transition" aria-pressed="false">EN</button>
+      </div>
+      <a href="https://www.kayroslab.com" class="text-sm text-slate-600 hover:text-sky-600 font-medium"><i class="fas fa-arrow-left mr-1"></i><span data-i18n="back">Retour</span></a>
+    </div>
   </div>
 </nav>
 
 <section class="hero-bg text-white py-20 px-6 text-center">
   <div class="max-w-3xl mx-auto">
-    <div class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6 border border-sky-500/20">Governed Agents · Demo publique</div>
-    <h1 class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Strategic Innovation,<br><span class="text-sky-400">Governed by Agents</span></h1>
-    <p class="text-slate-300 mb-8">Cycle 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code> — clé invisible côté navigateur.</p>
-    <button onclick="scrollToSection('demo')" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-3 rounded-3xl"><i class="fas fa-play mr-2"></i>Lancer la démo</button>
+    <div data-i18n="hero_badge" class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6 border border-sky-500/20">Agents gouvernés · Démo publique</div>
+    <h1 data-i18n-html="hero_title" class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Innovation stratégique,<br><span class="text-sky-400">gouvernée par des agents</span></h1>
+    <p data-i18n-html="hero_description" class="text-slate-300 mb-8">Cycle en 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code> — clé invisible côté navigateur.</p>
+    <button onclick="scrollToSection('demo')" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-3 rounded-3xl"><i class="fas fa-play mr-2"></i><span data-i18n="launch_demo">Lancer la démo</span></button>
   </div>
 </section>
 
 <section id="demo" class="py-16 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="mb-6">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-3">Live Demo</div>
-      <h2 class="section-header font-display mb-2">Watch <span class="kayros-gradient">Agents</span> Work</h2>
-      <p class="text-slate-600 max-w-2xl">Idée → agents Mistral (proxy serveur) → annotations humaines → KI → PDF.</p>
+      <div data-i18n="live_demo" class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-3">Démo en direct</div>
+      <h2 data-i18n-html="demo_title" class="section-header font-display mb-2">Observez les <span class="kayros-gradient">agents</span> travailler</h2>
+      <p data-i18n="demo_subtitle" class="text-slate-600 max-w-2xl">Idée → agents Mistral (proxy serveur) → annotations humaines → KI → rapport complet.</p>
     </div>
 
     <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-6 space-y-5">
       <div class="flex flex-wrap items-center gap-2 p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-sm text-emerald-800">
         <i class="fas fa-lock text-emerald-600"></i>
-        <span><strong>LLM invisible</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> sur api.kayroslab.com. Aucune clé dans le navigateur.</span>
+        <span data-i18n-html="security_notice"><strong>LLM sécurisé</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> sur api.kayroslab.com. Aucune clé dans le navigateur.</span>
       </div>
 
       <div>
-        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Votre idée stratégique</label>
-        <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-sky-500" placeholder="Ex. Lancer une plateforme de maintenance prédictive IoT pour l'industrie européenne…"></textarea>
+        <label data-i18n="idea_label" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Votre idée stratégique</label>
+        <textarea id="demo-idea" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-sky-500" data-i18n-placeholder="idea_placeholder" placeholder="Ex. Lancer une plateforme de maintenance prédictive IoT pour l’industrie européenne…"></textarea>
       </div>
 
       <div class="border-t border-slate-100 pt-4">
         <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Scope & conditions <span class="text-amber-600 font-normal normal-case">(↑ KI)</span></label>
-          <button type="button" onclick="toggleConditions()" id="cond-toggle" class="text-xs text-sky-600 font-medium">Détails ▾</button>
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span data-i18n="scope_conditions">Périmètre et conditions</span> <span class="text-amber-600 font-normal normal-case">(↑ KI)</span></label>
+          <button type="button" onclick="toggleConditions()" id="cond-toggle" class="text-xs text-sky-600 font-medium" data-i18n="details_open">Détails ▾</button>
         </div>
         <div id="conditions-box" class="hidden space-y-3">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input id="cond-geo" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Géographie (ex. UE-27)">
-            <input id="cond-budget" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Budget (ex. < 1,5 M€)">
-            <input id="cond-time" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Horizon (ex. Pilot Q2 2027)">
-            <input id="cond-must" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Must-have (ex. AI Act)">
+            <input id="cond-geo" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" data-i18n-placeholder="geo_placeholder" placeholder="Géographie (ex. UE-27)">
+            <input id="cond-budget" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" data-i18n-placeholder="budget_placeholder" placeholder="Budget (ex. < 1,5 M€)">
+            <input id="cond-time" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" data-i18n-placeholder="time_placeholder" placeholder="Horizon (ex. pilote T2 2027)">
+            <input id="cond-must" type="text" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" data-i18n-placeholder="must_placeholder" placeholder="Exigence (ex. AI Act)">
           </div>
-          <textarea id="cond-notes" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" placeholder="Notes, exclusions, priorités…"></textarea>
+          <textarea id="cond-notes" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm" data-i18n-placeholder="notes_placeholder" placeholder="Notes, exclusions, priorités…"></textarea>
         </div>
       </div>
 
       <div class="flex gap-3">
-        <button id="demo-start-btn" onclick="startGovernedCycle()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-play mr-1.5"></i>Start Governed Cycle</button>
-        <button onclick="resetDemo()" class="border border-slate-200 text-slate-600 font-semibold px-6 py-2.5 rounded-3xl text-sm">Reset</button>
+        <button id="demo-start-btn" onclick="startGovernedCycle()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-play mr-1.5"></i><span data-i18n="start_cycle">Démarrer le cycle gouverné</span></button>
+        <button onclick="resetDemo()" class="border border-slate-200 text-slate-600 font-semibold px-6 py-2.5 rounded-3xl text-sm" data-i18n="reset">Réinitialiser</button>
       </div>
     </div>
 
@@ -95,7 +101,7 @@
         <div class="flex items-center gap-1 overflow-x-auto pb-2 flex-1"></div>
         <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-2 shadow-sm">
           <div class="ki-ring" style="--ki:35"><div class="ki-ring-inner"><span id="ki-value" class="font-display font-bold text-lg text-sky-600 leading-none">3.5</span><span class="text-[9px] text-slate-400 uppercase">KI</span></div></div>
-          <div class="text-xs"><div class="font-semibold text-slate-700">Kayros Index</div><div id="ki-delta" class="text-slate-400">Base</div></div>
+          <div class="text-xs"><div class="font-semibold text-slate-700">Kayros Index</div><div id="ki-delta" class="text-slate-400" data-i18n="base">Base</div></div>
         </div>
       </div>
     </div>
@@ -104,32 +110,32 @@
       <div class="lg:col-span-2 space-y-4">
         <div class="bg-white border border-slate-200 rounded-3xl p-5">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="font-display font-semibold text-sm">Console agents</h3>
+            <h3 class="font-display font-semibold text-sm" data-i18n="agent_console">Console des agents</h3>
             <span id="current-step-label" class="text-xs font-bold text-sky-600 uppercase"></span>
           </div>
           <div id="agent-status" class="mb-3"></div>
           <div id="agent-logs" class="agent-log bg-slate-900 text-slate-300 rounded-xl p-3 max-h-52 overflow-y-auto space-y-1"></div>
         </div>
         <div class="bg-white border border-slate-200 rounded-3xl p-5">
-          <h3 class="font-display font-semibold text-sm mb-3">Historique + notes</h3>
-          <div id="cycle-history" class="space-y-2 max-h-64 overflow-y-auto text-sm"><p class="text-slate-400 text-xs">Aucune étape.</p></div>
+          <h3 class="font-display font-semibold text-sm mb-3" data-i18n="history_notes">Historique et notes</h3>
+          <div id="cycle-history" class="space-y-2 max-h-64 overflow-y-auto text-sm"><p class="text-slate-400 text-xs" data-i18n="no_steps">Aucune étape.</p></div>
         </div>
       </div>
       <div class="lg:col-span-3">
         <div class="bg-white border border-slate-200 rounded-3xl p-6 min-h-[360px] flex flex-col">
-          <div class="flex justify-between mb-4"><h3 class="font-display font-semibold text-sm">Sortie générée</h3><span id="step-tools" class="text-xs text-slate-400"></span></div>
-          <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm">Idée → Start → réponse dans la console.</p></div></div>
+          <div class="flex justify-between mb-4"><h3 class="font-display font-semibold text-sm" data-i18n="generated_output">Sortie générée</h3><span id="step-tools" class="text-xs text-slate-400"></span></div>
+          <div id="waiting-state" class="flex-1 flex items-center justify-center text-slate-400"><div class="text-center"><i class="fas fa-robot text-4xl mb-3 text-slate-300"></i><p class="text-sm" data-i18n="waiting_hint">Saisissez une idée, puis démarrez le cycle.</p></div></div>
           <div id="content-state" class="hidden flex-1 flex flex-col">
             <div id="generated-content" class="generated-content prose-llm bg-slate-50 border border-slate-100 rounded-xl p-4 text-sm mb-4"></div>
             <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 mb-4">
-              <div class="text-xs font-bold text-amber-800 uppercase mb-2"><i class="fas fa-user-edit mr-1"></i> Votre intervention</div>
-              <textarea id="editable-output" rows="3" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm" placeholder="Commentaires, corrections… injectés aux agents suivants"></textarea>
+              <div class="text-xs font-bold text-amber-800 uppercase mb-2"><i class="fas fa-user-edit mr-1"></i> <span data-i18n="your_intervention">Votre intervention</span></div>
+              <textarea id="editable-output" rows="3" class="editable-output w-full bg-white border border-amber-200 rounded-lg p-3 text-sm" data-i18n-placeholder="intervention_placeholder" placeholder="Commentaires et corrections transmis aux agents suivants…"></textarea>
             </div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="approveAndContinue()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-check mr-1"></i>Approve & Continue</button>
-              <button onclick="rerunCurrentStep()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Rerun</button>
-              <button onclick="rejectAndRestart()" class="border border-red-200 text-red-600 font-semibold px-5 py-2.5 rounded-3xl text-sm">Reject</button>
-              <button onclick="skipToEnd()" class="text-slate-400 text-sm px-3 py-2.5">Skip →</button>
+              <button onclick="approveAndContinue()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 rounded-3xl text-sm"><i class="fas fa-check mr-1"></i><span data-i18n="approve_continue">Approuver et continuer</span></button>
+              <button onclick="rerunCurrentStep()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm" data-i18n="rerun">Relancer</button>
+              <button onclick="rejectAndRestart()" class="border border-red-200 text-red-600 font-semibold px-5 py-2.5 rounded-3xl text-sm" data-i18n="reject">Rejeter</button>
+              <button onclick="skipToEnd()" class="text-slate-400 text-sm px-3 py-2.5" data-i18n="skip">Passer à la fin →</button>
             </div>
           </div>
           <div id="final-state" class="hidden"></div>
@@ -142,60 +148,256 @@
 <div id="report-template"></div>
 
 <footer class="text-center py-10 border-t border-slate-200 text-slate-400 text-xs">
-  KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com
+  <span data-i18n="footer">KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com</span>
 </footer>
 
 <script>
 /* Backend public demo — clé Mistral uniquement sur le serveur Fastify */
 const PROXY_URL = 'https://api.kayroslab.com/v1/demo/chat';
 
+const translations = {
+  fr: {
+    language_selector:'Choisir la langue', page_title:'KayrosLab — Plateforme d’agents gouvernés',
+    back:'Retour', hero_badge:'Agents gouvernés · Démo publique',
+    hero_title:'Innovation stratégique,<br><span class="text-sky-400">gouvernée par des agents</span>',
+    hero_description:'Cycle en 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code> — clé invisible côté navigateur.',
+    launch_demo:'Lancer la démo', live_demo:'Démo en direct',
+    demo_title:'Observez les <span class="kayros-gradient">agents</span> travailler',
+    demo_subtitle:'Idée → agents Mistral (proxy serveur) → annotations humaines → KI → rapport complet.',
+    security_notice:'<strong>LLM sécurisé</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> sur api.kayroslab.com. Aucune clé dans le navigateur.',
+    idea_label:'Votre idée stratégique',
+    idea_placeholder:'Ex. Lancer une plateforme de maintenance prédictive IoT pour l’industrie européenne…',
+    scope_conditions:'Périmètre et conditions', details_open:'Détails ▾', details_closed:'Masquer ▴',
+    geo_placeholder:'Géographie (ex. UE-27)', budget_placeholder:'Budget (ex. < 1,5 M€)',
+    time_placeholder:'Horizon (ex. pilote T2 2027)', must_placeholder:'Exigence (ex. AI Act)',
+    notes_placeholder:'Notes, exclusions, priorités…', start_cycle:'Démarrer le cycle gouverné',
+    reset:'Réinitialiser', base:'Base', agent_console:'Console des agents',
+    history_notes:'Historique et notes', no_steps:'Aucune étape.', generated_output:'Sortie générée',
+    waiting_hint:'Saisissez une idée, puis démarrez le cycle.', your_intervention:'Votre intervention',
+    intervention_placeholder:'Commentaires et corrections transmis aux agents suivants…',
+    approve_continue:'Approuver et continuer', rerun:'Relancer', reject:'Rejeter',
+    skip:'Passer à la fin →', footer:'KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com',
+    language_locked:'La langue est verrouillée pour ce parcours afin de conserver des réponses et des exports cohérents. Réinitialisez le cycle pour changer de langue.',
+    language_locked_short:'Réinitialisez le cycle pour changer de langue',
+    start_required:'Entrez une idée stratégique.', stable:'Stable', score_initial:'Score initial',
+    step_reason:'Étape {step}', step_counter:'Étape {step}/8', agent_started:'Agent {agent} démarré',
+    response_received:'Réponse reçue ({count} car.)', waiting_decision:'En attente de décision ({gate})', gate_label:'Validation',
+    api_unavailable:'API indisponible : {error}', api_title:'API indisponible',
+    network_error:'Impossible de joindre le serveur',
+    api_help:'Vérifiez que le backend est déployé avec MISTRAL_API_KEY et joignable sur api.kayroslab.com.',
+    no_response:'Aucune réponse.', ontology_note:'[Carte ontologique interactive générée dans l’interface.]',
+    ontology_card:'Carte ontologique', annotation_human:'Annotation humaine', approved:'Approuvé',
+    note_recorded:'Note enregistrée ({count} car.)', rerunning:'Relance…', rejected:'Rejeté',
+    cycle_finished_log:'Cycle terminé', running:'Exécution…', cycle_complete:'Cycle terminé',
+    final_summary:'KI final : <strong class="text-sky-600">{ki}</strong> · {count} intervention(s)',
+    export_pdf:'Export complet PDF', export_md:'Export complet MD', new_idea:'Nouvelle idée',
+    markdown_ok:'Markdown complet OK', pdf_ok:'PDF complet OK', pdf_error:'Erreur PDF : {error}',
+    decision_approved:'Approuvé', decision_rerun:'Relancé', decision_rejected:'Rejeté',
+    decision_skip_to_end:'Fin anticipée', decision_skipped:'Non exécuté',
+    action_cycle_started:'Cycle démarré', action_cycle_restarted:'Cycle redémarré',
+    action_approved:'Étape approuvée', action_rerun:'Étape relancée',
+    action_rejected:'Étape rejetée', action_skip_to_end:'Fin anticipée demandée', action_default:'Action',
+    detail_cycle_started:'Idée et contraintes initiales enregistrées', detail_cycle_restarted:'Reprise après rejet',
+    detail_approved_note:'Approbation avec annotation', detail_approved_plain:'Approbation sans annotation',
+    detail_rerun:'Nouvelle génération demandée', detail_rejected:'Retour au début du cycle',
+    detail_skip:'Les étapes suivantes ne sont pas exécutées', skipped_output:'Étape non exécutée',
+    prompt_idea:'Idée stratégique', prompt_geo:'Géographie', prompt_budget:'Budget',
+    prompt_time:'Horizon', prompt_must:'Exigence', prompt_notes:'Notes',
+    prompt_constraints:'Contraintes', prompt_human_notes:'Notes humaines',
+    prompt_deliverable:'Produis ton livrable en français. Sois concret et actionnable.',
+    report_file:'KayrosLab_parcours_complet', report_title:'KayrosLab - Rapport complet du parcours gouverné',
+    report_generated:'Généré le', report_started:'Début du cycle', report_completed:'Fin du cycle',
+    report_action_count:'Nombre d’actions utilisateur', report_result_count:'Nombre de résultats enregistrés',
+    strategic_idea:'Idée stratégique', initial_constraints:'Contraintes initiales',
+    geography:'Géographie', budget:'Budget', horizon:'Horizon', must_have:'Exigence',
+    additional_notes:'Notes complémentaires', ki_evolution:'Évolution du Kayros Index',
+    user_action_log:'Journal des actions utilisateur', no_user_actions:'Aucune action utilisateur enregistrée.',
+    step_word:'Étape', cycle_word:'Cycle', detail:'Détail', user_input:'Saisie utilisateur',
+    detailed_journey:'Parcours détaillé', agent:'Agent', user_decision:'Décision utilisateur',
+    generated_on:'Généré le', decided_on:'Décidé le', developed_content:'Contenu développé',
+    user_intervention:'Intervention utilisateur', no_annotation:'Aucune annotation.',
+    audit_report:'Rapport d’audit complet', end_to_end_journey:'Parcours gouverné<br>de bout en bout',
+    initial_ki:'KI initial', final_ki:'KI final', human_actions:'Actions humaines',
+    initial_context_audit:'Cadre initial et audit utilisateur', result:'Résultat',
+    generated:'Généré', decided:'Décidé', user_action_input:'Action et saisie utilisateur'
+  },
+  en: {
+    language_selector:'Choose language', page_title:'KayrosLab — Governed Agent Platform',
+    back:'Back', hero_badge:'Governed agents · Public demo',
+    hero_title:'Strategic innovation,<br><span class="text-sky-400">governed by agents</span>',
+    hero_description:'An 8-step cycle under human supervision. LLM calls via <code class="text-sky-300">api.kayroslab.com</code> — no key exposed in the browser.',
+    launch_demo:'Launch demo', live_demo:'Live demo',
+    demo_title:'Watch <span class="kayros-gradient">agents</span> work',
+    demo_subtitle:'Idea → Mistral agents (server proxy) → human annotations → KI → complete report.',
+    security_notice:'<strong>Secure LLM</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> on api.kayroslab.com. No key is exposed in the browser.',
+    idea_label:'Your strategic idea',
+    idea_placeholder:'E.g. Launch an IoT predictive maintenance platform for European industry…',
+    scope_conditions:'Scope and conditions', details_open:'Details ▾', details_closed:'Hide ▴',
+    geo_placeholder:'Geography (e.g. EU-27)', budget_placeholder:'Budget (e.g. < €1.5M)',
+    time_placeholder:'Timeline (e.g. Q2 2027 pilot)', must_placeholder:'Requirement (e.g. AI Act)',
+    notes_placeholder:'Notes, exclusions, priorities…', start_cycle:'Start governed cycle',
+    reset:'Reset', base:'Base', agent_console:'Agent console',
+    history_notes:'History and notes', no_steps:'No steps yet.', generated_output:'Generated output',
+    waiting_hint:'Enter an idea, then start the cycle.', your_intervention:'Your input',
+    intervention_placeholder:'Comments and corrections passed to the next agents…',
+    approve_continue:'Approve and continue', rerun:'Rerun', reject:'Reject',
+    skip:'Skip to end →', footer:'KayrosLab · LLM via api.kayroslab.com (server-side key) · contact@kayroslab.com',
+    language_locked:'The language is locked for this journey so responses and exports remain consistent. Reset the cycle to change language.',
+    language_locked_short:'Reset the cycle to change language',
+    start_required:'Enter a strategic idea.', stable:'Stable', score_initial:'Initial score',
+    step_reason:'Step {step}', step_counter:'Step {step}/8', agent_started:'Agent {agent} started',
+    response_received:'Response received ({count} chars)', waiting_decision:'Awaiting decision ({gate})', gate_label:'Gate',
+    api_unavailable:'API unavailable: {error}', api_title:'API unavailable',
+    network_error:'Could not connect to the server',
+    api_help:'Check that the backend is deployed with MISTRAL_API_KEY and reachable at api.kayroslab.com.',
+    no_response:'No response.', ontology_note:'[Interactive ontology map generated in the interface.]',
+    ontology_card:'Ontology map', annotation_human:'Human annotation', approved:'Approved',
+    note_recorded:'Note saved ({count} chars)', rerunning:'Rerunning…', rejected:'Rejected',
+    cycle_finished_log:'Cycle completed', running:'Running…', cycle_complete:'Cycle completed',
+    final_summary:'Final KI: <strong class="text-sky-600">{ki}</strong> · {count} intervention(s)',
+    export_pdf:'Export complete PDF', export_md:'Export complete MD', new_idea:'New idea',
+    markdown_ok:'Complete Markdown exported', pdf_ok:'Complete PDF exported', pdf_error:'PDF error: {error}',
+    decision_approved:'Approved', decision_rerun:'Rerun', decision_rejected:'Rejected',
+    decision_skip_to_end:'Ended early', decision_skipped:'Not run',
+    action_cycle_started:'Cycle started', action_cycle_restarted:'Cycle restarted',
+    action_approved:'Step approved', action_rerun:'Step rerun',
+    action_rejected:'Step rejected', action_skip_to_end:'Early completion requested', action_default:'Action',
+    detail_cycle_started:'Idea and initial constraints recorded', detail_cycle_restarted:'Restart after rejection',
+    detail_approved_note:'Approved with annotation', detail_approved_plain:'Approved without annotation',
+    detail_rerun:'New generation requested', detail_rejected:'Return to the beginning of the cycle',
+    detail_skip:'The following steps are not run', skipped_output:'Step not run',
+    prompt_idea:'Strategic idea', prompt_geo:'Geography', prompt_budget:'Budget',
+    prompt_time:'Timeline', prompt_must:'Requirement', prompt_notes:'Notes',
+    prompt_constraints:'Constraints', prompt_human_notes:'Human notes',
+    prompt_deliverable:'Produce your deliverable in English. Be concrete and actionable.',
+    report_file:'KayrosLab_complete_journey', report_title:'KayrosLab - Complete governed journey report',
+    report_generated:'Generated on', report_started:'Cycle started', report_completed:'Cycle completed',
+    report_action_count:'User actions', report_result_count:'Recorded results',
+    strategic_idea:'Strategic idea', initial_constraints:'Initial constraints',
+    geography:'Geography', budget:'Budget', horizon:'Timeline', must_have:'Requirement',
+    additional_notes:'Additional notes', ki_evolution:'Kayros Index evolution',
+    user_action_log:'User action log', no_user_actions:'No user actions recorded.',
+    step_word:'Step', cycle_word:'Cycle', detail:'Detail', user_input:'User input',
+    detailed_journey:'Detailed journey', agent:'Agent', user_decision:'User decision',
+    generated_on:'Generated on', decided_on:'Decided on', developed_content:'Developed content',
+    user_intervention:'User intervention', no_annotation:'No annotation.',
+    audit_report:'Complete audit report', end_to_end_journey:'Governed journey<br>end to end',
+    initial_ki:'Initial KI', final_ki:'Final KI', human_actions:'Human actions',
+    initial_context_audit:'Initial context and user audit', result:'Result',
+    generated:'Generated', decided:'Decided', user_action_input:'User action and input'
+  }
+};
+
+function initialLanguage(){
+  try {
+    const saved=localStorage.getItem('kayroslab-language');
+    if(saved==='fr'||saved==='en') return saved;
+  } catch(e){}
+  return (navigator.language||'fr').toLowerCase().startsWith('fr')?'fr':'en';
+}
+let currentLang=initialLanguage();
+function t(key,vars,lang){
+  const locale=lang||currentLang, dict=translations[locale]||translations.fr;
+  let value=dict[key]??translations.fr[key]??key;
+  Object.entries(vars||{}).forEach(([name,replacement])=>{
+    value=value.replace(new RegExp('\\{'+name+'\\}','g'),String(replacement));
+  });
+  return value;
+}
+
 const cycleData = [
-  { agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()'], gateWho:'Expert Métier',
-    system:'Tu es le Signal Scanner de KayrosLab. Qualifie les signaux faibles (marché, tech, réglementation). Réponds en français, structuré, scores 1-10 si utile.' },
-  { agent:'Trend Mapper', tools:['trend_network_builder()','bisociation_detector()'], gateWho:'Strategic Lead',
-    system:'Tu es le Trend Mapper de KayrosLab. Cartographie tendances et ponts bisociatifs. Réponds en français.' },
-  { agent:'Scenario Generator', tools:['scenario_simulator()'], gateWho:'Expert Métier',
-    system:'Tu es le Scenario Generator de KayrosLab. Propose 2-3 scénarios concrets (nom, faisabilité, horizon). Réponds en français.' },
-  { agent:'Positionneur', tools:['gap_analyzer()','ontological_mapper()'], gateWho:'Market Expert',
-    system:'Tu es le Positionneur de KayrosLab. Associations et divergences concurrentielles. Réponds en français.' },
-  { agent:'Red Team', tools:['risk_assessor()','stress_test()'], gateWho:'Risk Owner',
-    system:'Tu es le Red Team de KayrosLab. 3 risques prioritaires max, critique constructif. Réponds en français.' },
-  { agent:'Synthesizer', tools:['ki_scorer()','vote_aggregator()'], gateWho:'COMEX',
-    system:'Tu es le Synthesizer de KayrosLab. Score KI 1-10 et Go / Conditional Go / No-Go. Réponds en français.' },
-  { agent:'Projection Agent', tools:['roadmap_builder()','kpi_tracker()'], gateWho:'Project Sponsor',
-    system:'Tu es le Projection Agent de KayrosLab. Roadmap + P10/P50/P90. Réponds en français.' },
-  { agent:'Execution Tracker', tools:['milestone_tracker()','feedback_loop()'], gateWho:'COMEX',
-    system:'Tu es l\'Execution Tracker de KayrosLab. Critères de succès, gouvernance, exit triggers. Réponds en français.' }
+  { agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()'], gate:{fr:'Expert métier',en:'Domain Expert'},
+    system:{fr:'Tu es le Signal Scanner de KayrosLab. Qualifie les signaux faibles (marché, technologie, réglementation). Réponds en français, de façon structurée, avec des scores de 1 à 10 si utile.',en:'You are KayrosLab’s Signal Scanner. Qualify weak signals across market, technology, and regulation. Answer in English with a clear structure and 1–10 scores where useful.'} },
+  { agent:'Trend Mapper', tools:['trend_network_builder()','bisociation_detector()'], gate:{fr:'Direction stratégique',en:'Strategic Lead'},
+    system:{fr:'Tu es le Trend Mapper de KayrosLab. Cartographie les tendances et les ponts bisociatifs. Réponds en français.',en:'You are KayrosLab’s Trend Mapper. Map trends and bisociative links. Answer in English.'} },
+  { agent:'Scenario Generator', tools:['scenario_simulator()'], gate:{fr:'Expert métier',en:'Domain Expert'},
+    system:{fr:'Tu es le Scenario Generator de KayrosLab. Propose 2 à 3 scénarios concrets avec nom, faisabilité et horizon. Réponds en français.',en:'You are KayrosLab’s Scenario Generator. Propose 2–3 concrete scenarios with a name, feasibility, and timeline. Answer in English.'} },
+  { agent:'Positioner', tools:['gap_analyzer()','ontological_mapper()'], gate:{fr:'Expert marché',en:'Market Expert'},
+    system:{fr:'Tu es le Positionneur de KayrosLab. Analyse les associations et divergences concurrentielles. Réponds en français.',en:'You are KayrosLab’s Positioner. Analyze competitive associations and divergences. Answer in English.'} },
+  { agent:'Red Team', tools:['risk_assessor()','stress_test()'], gate:{fr:'Responsable des risques',en:'Risk Owner'},
+    system:{fr:'Tu es la Red Team de KayrosLab. Présente au maximum 3 risques prioritaires avec une critique constructive. Réponds en français.',en:'You are KayrosLab’s Red Team. Present no more than 3 priority risks with constructive criticism. Answer in English.'} },
+  { agent:'Synthesizer', tools:['ki_scorer()','vote_aggregator()'], gate:{fr:'COMEX',en:'Executive Committee'},
+    system:{fr:'Tu es le Synthesizer de KayrosLab. Attribue un score KI de 1 à 10 et conclus par Go, Go conditionnel ou No-Go. Réponds en français.',en:'You are KayrosLab’s Synthesizer. Assign a 1–10 KI score and conclude with Go, Conditional Go, or No-Go. Answer in English.'} },
+  { agent:'Projection Agent', tools:['roadmap_builder()','kpi_tracker()'], gate:{fr:'Sponsor du projet',en:'Project Sponsor'},
+    system:{fr:'Tu es le Projection Agent de KayrosLab. Produis une feuille de route avec scénarios P10, P50 et P90. Réponds en français.',en:'You are KayrosLab’s Projection Agent. Produce a roadmap with P10, P50, and P90 scenarios. Answer in English.'} },
+  { agent:'Execution Tracker', tools:['milestone_tracker()','feedback_loop()'], gate:{fr:'COMEX',en:'Executive Committee'},
+    system:{fr:'Tu es l’Execution Tracker de KayrosLab. Définis les critères de succès, la gouvernance et les seuils d’arrêt. Réponds en français.',en:'You are KayrosLab’s Execution Tracker. Define success criteria, governance, and exit triggers. Answer in English.'} }
 ];
 
 const stepMeta = [
-  { icon:'fa-satellite-dish', short:'Ecouter', agent:'Signal Scanner' },
-  { icon:'fa-map-location-dot', short:'Cartographier', agent:'Trend Mapper' },
-  { icon:'fa-building', short:'Construire', agent:'Scenario Generator' },
-  { icon:'fa-location-dot', short:'Positionner', agent:'Positionneur' },
-  { icon:'fa-shield-halved', short:'Eprouver', agent:'Red Team' },
-  { icon:'fa-scale-balanced', short:'Arbitrer', agent:'Synthesizer' },
-  { icon:'fa-chart-line', short:'Projeter', agent:'Projection Agent' },
-  { icon:'fa-rocket', short:'Realiser', agent:'Execution Tracker' }
+  { icon:'fa-satellite-dish', short:{fr:'Écouter',en:'Listen'}, agent:{fr:'Éclaireur de signaux',en:'Signal Scanner'} },
+  { icon:'fa-map-location-dot', short:{fr:'Cartographier',en:'Map'}, agent:{fr:'Cartographe des tendances',en:'Trend Mapper'} },
+  { icon:'fa-building', short:{fr:'Construire',en:'Build'}, agent:{fr:'Générateur de scénarios',en:'Scenario Generator'} },
+  { icon:'fa-location-dot', short:{fr:'Positionner',en:'Position'}, agent:{fr:'Positionneur',en:'Positioner'} },
+  { icon:'fa-shield-halved', short:{fr:'Éprouver',en:'Challenge'}, agent:{fr:'Équipe contradictoire',en:'Red Team'} },
+  { icon:'fa-scale-balanced', short:{fr:'Arbitrer',en:'Decide'}, agent:{fr:'Synthétiseur',en:'Synthesizer'} },
+  { icon:'fa-chart-line', short:{fr:'Projeter',en:'Project'}, agent:{fr:'Agent de projection',en:'Projection Agent'} },
+  { icon:'fa-rocket', short:{fr:'Réaliser',en:'Execute'}, agent:{fr:'Suivi d’exécution',en:'Execution Tracker'} }
 ];
 
 const demoState = {
   idea:'', conditions:{}, currentStep:-1, history:[], userActions:[],
   isRunning:false, ki:3.5, kiHistory:[3.5],
-  currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null
+  currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null,
+  language:currentLang
 };
+
+function stepLabel(index,lang){
+  const meta=stepMeta[index];
+  return meta?(meta.short[lang||currentLang]||meta.short.fr):t('step_word',{},lang);
+}
+function agentLabel(index,lang){
+  const meta=stepMeta[index];
+  return meta?(meta.agent[lang||currentLang]||meta.agent.fr):t('agent',{},lang);
+}
+function cycleLanguage(){ return demoState.language||currentLang; }
+function updateLanguageButtons(){
+  const locked=Boolean(demoState.startedAt);
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    const active=btn.dataset.lang===currentLang;
+    btn.classList.toggle('bg-slate-900',active); btn.classList.toggle('text-white',active);
+    btn.classList.toggle('text-slate-500',!active); btn.classList.toggle('hover:text-slate-900',!active);
+    btn.setAttribute('aria-pressed',String(active));
+    btn.disabled=locked&&!active;
+    btn.classList.toggle('opacity-40',locked&&!active);
+    btn.title=locked&&!active?t('language_locked_short'):'';
+  });
+}
+function applyTranslations(){
+  document.documentElement.lang=currentLang;
+  document.title=t('page_title');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML=t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ el.placeholder=t(el.dataset.i18nPlaceholder); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{ el.setAttribute('aria-label',t(el.dataset.i18nAria)); });
+  const conditions=document.getElementById('conditions-box');
+  document.getElementById('cond-toggle').textContent=t(conditions.classList.contains('hidden')?'details_open':'details_closed');
+  if(!demoState.isRunning) renderStartButton();
+  updateLanguageButtons();
+  updateProgress();
+  updateHistory();
+  if(!document.getElementById('final-state').classList.contains('hidden')) renderFinalState();
+}
+function setLanguage(lang){
+  if(lang!=='fr'&&lang!=='en') return;
+  if(demoState.startedAt&&lang!==demoState.language){ alert(t('language_locked')); return; }
+  currentLang=lang;
+  if(!demoState.startedAt) demoState.language=lang;
+  try { localStorage.setItem('kayroslab-language',lang); } catch(e){}
+  applyTranslations();
+}
 
 function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 function toggleConditions(){
   const box=document.getElementById('conditions-box'), btn=document.getElementById('cond-toggle');
   const open=!box.classList.contains('hidden');
-  box.classList.toggle('hidden'); btn.textContent=open?'Détails ▾':'Masquer ▴';
+  box.classList.toggle('hidden'); btn.textContent=t(open?'details_open':'details_closed');
 }
 function log(msg,type='info'){
   const logs=document.getElementById('agent-logs');
   const colors={info:'text-slate-400',success:'text-emerald-400',warn:'text-amber-400',error:'text-red-400',human:'text-amber-300',llm:'text-violet-300'};
   const line=document.createElement('div'); line.className=colors[type]||colors.info;
-  const ts=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const ts=new Date().toLocaleTimeString(cycleLanguage()==='fr'?'fr-FR':'en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   line.textContent='['+ts+'] '+msg.replace(/<[^>]+>/g,'');
   logs.appendChild(line); logs.scrollTop=logs.scrollHeight;
   console.log('[KayrosLab '+ts+']', msg.replace(/<[^>]+>/g,''));
@@ -205,7 +407,7 @@ function updateProgress(){
   const c=document.querySelector('#demo-progress > div > div');
   c.innerHTML=stepMeta.map((s,i)=>{
     const cls=i<demoState.currentStep?'done':i===demoState.currentStep?'active':'pending';
-    return '<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap '+cls+'"><i class="fas '+s.icon+' text-[10px]"></i><span>'+(i+1)+'. '+s.short+'</span></div>';
+    return '<div class="step-progress flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold whitespace-nowrap '+cls+'"><i class="fas '+s.icon+' text-[10px]"></i><span>'+(i+1)+'. '+escapeHtml(stepLabel(i))+'</span></div>';
   }).join('<div class="w-3 h-px bg-slate-200 flex-shrink-0"></div>');
 }
 function updateKI(v,reason){
@@ -214,11 +416,11 @@ function updateKI(v,reason){
   document.getElementById('ki-value').textContent=demoState.ki.toFixed(1);
   const d=demoState.ki-prev, el=document.getElementById('ki-delta');
   if(d>0.05) el.innerHTML='<span class="text-emerald-600">+'+d.toFixed(1)+'</span> · '+reason;
-  else el.textContent=reason||'Stable';
+  else el.textContent=reason||t('stable');
 }
 function updateHistory(){
   const el=document.getElementById('cycle-history');
-  if(!demoState.history.length){ el.innerHTML='<p class="text-slate-400 text-xs">Aucune étape.</p>'; return; }
+  if(!demoState.history.length){ el.innerHTML='<p class="text-slate-400 text-xs">'+escapeHtml(t('no_steps'))+'</p>'; return; }
   el.innerHTML=demoState.history.map(h=>{
     const decision=decisionLabel(h.decision);
     const note=h.humanNote?'<div class="mt-1 human-note text-[11px] text-amber-800 px-2 py-1 rounded">'+escapeHtml(h.humanNote.substring(0,100))+'</div>':'';
@@ -232,25 +434,28 @@ function stripHtml(html){ const t=document.createElement('div'); t.innerHTML=htm
 function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function formatTimestamp(value){
   if(!value) return '—';
-  return new Date(value).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'medium'});
+  const lang=arguments.length>1?arguments[1]:cycleLanguage();
+  return new Date(value).toLocaleString(lang==='fr'?'fr-FR':'en-GB',{dateStyle:'short',timeStyle:'medium'});
 }
 function decisionLabel(value){
-  return ({approved:'Approuvé',rerun:'Relancé',rejected:'Rejeté',skip_to_end:'Fin anticipée',skipped:'Non exécuté'})[value]||value||'—';
+  const lang=arguments.length>1?arguments[1]:cycleLanguage();
+  return ({approved:t('decision_approved',{},lang),rerun:t('decision_rerun',{},lang),rejected:t('decision_rejected',{},lang),skip_to_end:t('decision_skip_to_end',{},lang),skipped:t('decision_skipped',{},lang)})[value]||value||'—';
 }
 function actionLabel(value){
-  return ({cycle_started:'Cycle démarré',cycle_restarted:'Cycle redémarré',approved:'Étape approuvée',rerun:'Étape relancée',rejected:'Étape rejetée',skip_to_end:'Fin anticipée demandée'})[value]||value||'Action';
+  const lang=arguments.length>1?arguments[1]:cycleLanguage();
+  return ({cycle_started:t('action_cycle_started',{},lang),cycle_restarted:t('action_cycle_restarted',{},lang),approved:t('action_approved',{},lang),rerun:t('action_rerun',{},lang),rejected:t('action_rejected',{},lang),skip_to_end:t('action_skip_to_end',{},lang)})[value]||value||t('action_default',{},lang);
 }
-function recordUserAction(action, stepIdx, note, details){
+function recordUserAction(action, stepIdx, note, detailsKey){
   demoState.userActions.push({
     action, stepIdx:Number.isInteger(stepIdx)?stepIdx:null,
-    note:note||'', details:details||'', at:new Date().toISOString()
+    note:note||'', detailsKey:detailsKey||'', at:new Date().toISOString()
   });
 }
 function saveStepResult(decision, humanNote, kiBefore, kiAfter){
   const stepIdx=demoState.currentStep, meta=stepMeta[stepIdx];
   const output=(demoState.currentOutput||stripHtml(document.getElementById('generated-content').innerHTML)||'').trim();
   demoState.history.push({
-    stepIdx, step:meta.short, agent:meta.agent, decision,
+    stepIdx, step:stepLabel(stepIdx,cycleLanguage()), agent:agentLabel(stepIdx,cycleLanguage()), decision,
     output, summary:output.replace(/\s+/g,' ').substring(0,180),
     humanNote:humanNote||null,
     generatedAt:demoState.currentOutputGeneratedAt,
@@ -274,20 +479,20 @@ async function callMistralViaProxy(systemPrompt, userPrompt) {
   }
   const text = data.content || data.text || '';
   console.log('[KayrosLab] ←', { chars: text.length, provider: data.provider });
-  return text || 'Aucune réponse.';
+  return text || t('no_response',{},cycleLanguage());
 }
 
-function buildUserPrompt(idea, cond, notes) {
-  let p = 'Idée stratégique :\n"' + idea + '"\n\n';
+function buildUserPrompt(idea, cond, notes, lang) {
+  let p = t('prompt_idea',{},lang)+' :\n"' + idea + '"\n\n';
   const parts=[];
-  if(cond.geo) parts.push('Géographie : '+cond.geo);
-  if(cond.budget) parts.push('Budget : '+cond.budget);
-  if(cond.time) parts.push('Horizon : '+cond.time);
-  if(cond.must) parts.push('Must-have : '+cond.must);
-  if(cond.notes) parts.push('Notes : '+cond.notes);
-  if(parts.length) p += 'Contraintes :\n'+parts.join('\n')+'\n\n';
-  if(notes&&notes.length) p += 'Notes humaines :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
-  p += 'Produis ton livrable. Concret et actionnable.';
+  if(cond.geo) parts.push(t('prompt_geo',{},lang)+' : '+cond.geo);
+  if(cond.budget) parts.push(t('prompt_budget',{},lang)+' : '+cond.budget);
+  if(cond.time) parts.push(t('prompt_time',{},lang)+' : '+cond.time);
+  if(cond.must) parts.push(t('prompt_must',{},lang)+' : '+cond.must);
+  if(cond.notes) parts.push(t('prompt_notes',{},lang)+' : '+cond.notes);
+  if(parts.length) p += t('prompt_constraints',{},lang)+' :\n'+parts.join('\n')+'\n\n';
+  if(notes&&notes.length) p += t('prompt_human_notes',{},lang)+' :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
+  p += t('prompt_deliverable',{},lang);
   return p;
 }
 
@@ -307,34 +512,36 @@ async function runStep(stepIdx) {
   demoState.isRunning = true;
   demoState.currentStep = stepIdx;
   const meta = stepMeta[stepIdx], data = cycleData[stepIdx];
+  const lang=cycleLanguage(), gate=data.gate[lang]||data.gate.fr;
 
   document.getElementById('demo-progress').classList.remove('hidden');
   document.getElementById('demo-workspace').classList.remove('hidden');
   document.getElementById('waiting-state').classList.add('hidden');
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.add('hidden');
-  document.getElementById('current-step-label').textContent = 'Step '+(stepIdx+1)+'/8';
+  document.getElementById('current-step-label').textContent = t('step_counter',{step:stepIdx+1},lang);
   document.getElementById('step-tools').textContent = data.tools.join(' · ');
   updateProgress(); clearLogs();
-  setStatus('<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">'+meta.agent+'</div><div class="text-xs text-sky-600">api.kayroslab.com → Mistral</div></div></div>');
-  log('Agent '+meta.agent+' démarré', 'info');
+  setStatus('<div class="flex items-center gap-3 p-3 bg-sky-50 border border-sky-100 rounded-xl"><span class="spinner"></span><div><div class="font-semibold text-sm text-sky-800">'+escapeHtml(agentLabel(stepIdx,lang))+'</div><div class="text-xs text-sky-600">api.kayroslab.com → Mistral</div></div></div>');
+  log(t('agent_started',{agent:agentLabel(stepIdx,lang)},lang), 'info');
   log('→ POST /v1/demo/chat', 'llm');
 
   const notes = demoState.history.filter(h => h.humanNote).map(h => h.humanNote);
   let contentHtml = '', outputText = '';
   try {
-    const raw = await callMistralViaProxy(data.system, buildUserPrompt(demoState.idea, demoState.conditions, notes));
-    log('← Réponse ('+raw.length+' car.)', 'success');
+    const raw = await callMistralViaProxy(data.system[lang]||data.system.fr, buildUserPrompt(demoState.idea, demoState.conditions, notes, lang));
+    log('← '+t('response_received',{count:raw.length},lang), 'success');
     outputText = raw;
     contentHtml = markdownishToHtml(raw);
     if (stepIdx === 3) {
-      outputText += '\n\n[Carte ontologique interactive générée dans l’interface.]';
-      contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">Carte ontologique</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>';
+      outputText += '\n\n'+t('ontology_note',{},lang);
+      contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">'+escapeHtml(t('ontology_card',{},lang))+'</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>';
     }
   } catch (err) {
-    log('Erreur: '+err.message, 'error');
-    outputText = 'API indisponible : '+err.message;
-    contentHtml = '<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>API indisponible</strong><br>'+escapeHtml(err.message)+'<br><br>Vérifiez que le backend est déployé avec <code>MISTRAL_API_KEY</code> et joignable sur api.kayroslab.com.</div>';
+    const errorMessage=err.message==='Failed to fetch'?t('network_error',{},lang):err.message;
+    log(t('api_unavailable',{error:errorMessage},lang), 'error');
+    outputText = t('api_unavailable',{error:errorMessage},lang);
+    contentHtml = '<div class="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"><strong>'+escapeHtml(t('api_title',{},lang))+'</strong><br>'+escapeHtml(errorMessage)+'<br><br>'+escapeHtml(t('api_help',{},lang))+'</div>';
   }
 
   demoState.currentOutput = outputText;
@@ -342,16 +549,16 @@ async function runStep(stepIdx) {
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
   if (stepIdx === 3 && window.OntologyEmbed) setTimeout(function(){ try { OntologyEmbed.init(); } catch(e){} }, 120);
-  updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), 'Step '+(stepIdx+1));
-  setStatus('<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">'+meta.agent+' OK</div><div class="text-xs text-emerald-600">Gate — '+data.gateWho+'</div></div></div>');
-  log('En attente décision ('+data.gateWho+')', 'warn');
+  updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), t('step_reason',{step:stepIdx+1},lang));
+  setStatus('<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">'+escapeHtml(agentLabel(stepIdx,lang))+' OK</div><div class="text-xs text-emerald-600">'+escapeHtml(t('gate_label',{},lang))+' — '+escapeHtml(gate)+'</div></div></div>');
+  log(t('waiting_decision',{gate},lang), 'warn');
   document.getElementById('content-state').classList.remove('hidden');
   demoState.isRunning = false;
 }
 
 function startGovernedCycle() {
   const idea = document.getElementById('demo-idea').value.trim();
-  if (!idea) { alert('Entrez une idée stratégique.'); return; }
+  if (!idea) { alert(t('start_required')); return; }
   const continuing = demoState.history.length>0 && demoState.idea===idea && demoState.currentStep===-1 && !demoState.completedAt;
   demoState.idea = idea;
   demoState.conditions = collectConditions();
@@ -364,13 +571,15 @@ function startGovernedCycle() {
     demoState.userActions = [];
     demoState.kiHistory = [];
     demoState.startedAt = new Date().toISOString();
+    demoState.language = currentLang;
   }
   const base = computeBaseKI(idea, demoState.conditions);
   demoState.ki = base;
-  updateKI(base, 'Score initial');
-  recordUserAction(continuing?'cycle_restarted':'cycle_started',null,'',continuing?'Reprise après rejet':'Idée et contraintes initiales enregistrées');
+  updateKI(base, t('score_initial',{},cycleLanguage()));
+  recordUserAction(continuing?'cycle_restarted':'cycle_started',null,'',continuing?'detail_cycle_restarted':'detail_cycle_started');
+  updateLanguageButtons();
   document.getElementById('demo-start-btn').disabled = true;
-  document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span> Running…';
+  document.getElementById('demo-start-btn').innerHTML = '<span class="spinner mr-1.5"></span>'+escapeHtml(t('running',{},cycleLanguage()));
   console.log('[KayrosLab] cycle start', { ideaLen: idea.length });
   runStep(0);
 }
@@ -380,32 +589,32 @@ function approveAndContinue() {
   const note = document.getElementById('editable-output').value.trim();
   const stepIdx=demoState.currentStep, kiBefore=demoState.ki;
   let boost = 0.15; if (note.length>15) boost+=0.25; if (note.length>60) boost+=0.35;
-  updateKI(demoState.ki+boost, note?'Annotation humaine':'Approuvé');
+  updateKI(demoState.ki+boost, t(note?'annotation_human':'approved',{},cycleLanguage()));
   saveStepResult('approved',note,kiBefore,demoState.ki);
-  recordUserAction('approved',stepIdx,note,note?'Approbation avec annotation':'Approbation sans annotation');
+  recordUserAction('approved',stepIdx,note,note?'detail_approved_note':'detail_approved_plain');
   updateHistory();
-  log(note?'Note enregistrée ('+note.length+' car.)':'Approuvé', note?'human':'success');
+  log(note?t('note_recorded',{count:note.length},cycleLanguage()):t('approved',{},cycleLanguage()), note?'human':'success');
   if (demoState.currentStep >= 7) finishCycle(); else runStep(demoState.currentStep+1);
 }
 function rerunCurrentStep(){
   if(demoState.currentStep<0||demoState.isRunning)return;
   const stepIdx=demoState.currentStep, note=document.getElementById('editable-output').value.trim();
   saveStepResult('rerun',note,demoState.ki,demoState.ki);
-  recordUserAction('rerun',stepIdx,note,'Nouvelle génération demandée');
-  updateHistory(); log('Relance…','warn'); runStep(stepIdx);
+  recordUserAction('rerun',stepIdx,note,'detail_rerun');
+  updateHistory(); log(t('rerunning',{},cycleLanguage()),'warn'); runStep(stepIdx);
 }
 function rejectAndRestart(){
   if(demoState.isRunning)return;
   const stepIdx=demoState.currentStep, note=document.getElementById('editable-output').value.trim();
   if(stepIdx>=0){
     saveStepResult('rejected',note,demoState.ki,demoState.ki);
-    recordUserAction('rejected',stepIdx,note,'Retour au début du cycle');
+    recordUserAction('rejected',stepIdx,note,'detail_rejected');
   }
-  log('Rejeté','error'); demoState.currentStep=-1; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; updateHistory(); updateProgress();
+  log(t('rejected',{},cycleLanguage()),'error'); demoState.currentStep=-1; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; updateHistory(); updateProgress();
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('demo-start-btn').disabled=false;
-  document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  renderStartButton();
   clearLogs(); setStatus('');
 }
 function skipToEnd(){
@@ -413,47 +622,56 @@ function skipToEnd(){
   const note=document.getElementById('editable-output').value.trim();
   const stepIdx=demoState.currentStep, now=new Date().toISOString();
   saveStepResult('skip_to_end',note,demoState.ki,demoState.ki);
-  recordUserAction('skip_to_end',stepIdx,note,'Les étapes suivantes ne sont pas exécutées');
+  recordUserAction('skip_to_end',stepIdx,note,'detail_skip');
   for(let i=stepIdx+1;i<8;i++) demoState.history.push({
-    stepIdx:i,step:stepMeta[i].short,agent:stepMeta[i].agent,decision:'skipped',
-    output:'',summary:'Étape non exécutée',humanNote:null,
+    stepIdx:i,step:stepLabel(i,cycleLanguage()),agent:agentLabel(i,cycleLanguage()),decision:'skipped',
+    output:'',summary:t('skipped_output',{},cycleLanguage()),humanNote:null,
     generatedAt:null,decidedAt:now,kiBefore:demoState.ki,kiAtApproval:demoState.ki
   });
   updateHistory(); finishCycle();
 }
+function renderStartButton(){
+  document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i><span>'+escapeHtml(t('start_cycle'))+'</span>';
+}
+function renderFinalState(){
+  const n=demoState.history.filter(h=>h.humanNote).length, lang=cycleLanguage();
+  document.getElementById('final-state').innerHTML='<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">'+escapeHtml(t('cycle_complete',{},lang))+'</h3><p class="text-slate-600 text-sm mb-4">'+t('final_summary',{ki:demoState.ki.toFixed(1),count:n},lang)+'</p><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>'+escapeHtml(t('export_pdf',{},lang))+'</button><button onclick="exportKayrosMarkdown()" class="bg-slate-800 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-lines mr-1"></i>'+escapeHtml(t('export_md',{},lang))+'</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">'+escapeHtml(t('new_idea',{},lang))+'</button></div></div>';
+}
 function finishCycle(){
-  demoState.currentStep=8; updateProgress(); updateKI(demoState.ki+0.3,'Cycle terminé');
+  demoState.currentStep=8; updateProgress(); updateKI(demoState.ki+0.3,t('cycle_complete',{},cycleLanguage()));
   demoState.completedAt=new Date().toISOString();
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.remove('hidden');
-  const n=demoState.history.filter(h=>h.humanNote).length;
-  document.getElementById('final-state').innerHTML='<div class="text-center py-4"><div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-flag-checkered text-2xl"></i></div><h3 class="font-display font-bold text-xl mb-1">Cycle terminé</h3><p class="text-slate-600 text-sm mb-4">KI final : <strong class="text-sky-600">'+demoState.ki.toFixed(1)+'</strong> · '+n+' intervention(s)</p><div class="flex flex-wrap gap-3 justify-center"><button onclick="exportKayrosPDF()" class="bg-sky-600 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-pdf mr-1"></i>Export complet PDF</button><button onclick="exportKayrosMarkdown()" class="bg-slate-800 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-file-lines mr-1"></i>Export complet MD</button><button onclick="resetDemo()" class="border border-slate-200 font-semibold px-5 py-2.5 rounded-3xl text-sm">Nouvelle idée</button></div></div>';
+  renderFinalState();
   document.getElementById('demo-start-btn').disabled=false;
-  document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
-  log('Cycle finished','success');
+  renderStartButton();
+  log(t('cycle_finished_log',{},cycleLanguage()),'success');
 }
 function resetDemo(){
-  demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.userActions=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5]; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; demoState.startedAt=null; demoState.completedAt=null;
+  demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1; demoState.history=[]; demoState.userActions=[]; demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5]; demoState.currentOutput=''; demoState.currentOutputGeneratedAt=null; demoState.startedAt=null; demoState.completedAt=null; demoState.language=currentLang;
   document.getElementById('demo-idea').value='';
   ['cond-geo','cond-budget','cond-time','cond-must','cond-notes'].forEach(function(id){ document.getElementById(id).value=''; });
   document.getElementById('demo-progress').classList.add('hidden');
   document.getElementById('demo-workspace').classList.add('hidden');
   document.getElementById('demo-start-btn').disabled=false;
-  document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-play mr-1.5"></i>Start Governed Cycle';
+  renderStartButton();
   clearLogs(); setStatus('');
   document.getElementById('waiting-state').classList.remove('hidden');
   document.getElementById('content-state').classList.add('hidden');
   document.getElementById('final-state').classList.add('hidden');
+  applyTranslations();
 }
 function reportFileBase(){
-  return 'KayrosLab_parcours_complet_'+new Date().toISOString().slice(0,10);
+  return t('report_file',{},cycleLanguage())+'_'+new Date().toISOString().slice(0,10);
 }
 function normalizeReportText(value){
   return String(value||'').replace(/\r\n?/g,'\n').trim();
 }
 function buildReportModel(){
+  const lang=cycleLanguage();
   return {
-    title:'KayrosLab - Rapport complet du parcours gouverné',
+    title:t('report_title',{},lang),
+    lang,
     generatedAt:new Date().toISOString(),
     startedAt:demoState.startedAt,
     completedAt:demoState.completedAt,
@@ -467,62 +685,62 @@ function buildReportModel(){
   };
 }
 function buildKayrosMarkdown(){
-  const r=buildReportModel(), c=r.conditions;
+  const r=buildReportModel(), c=r.conditions, lang=r.lang;
   const lines=[
     '# '+r.title,
     '',
-    '- Généré le : '+formatTimestamp(r.generatedAt),
-    '- Début du cycle : '+formatTimestamp(r.startedAt),
-    '- Fin du cycle : '+formatTimestamp(r.completedAt),
+    '- '+t('report_generated',{},lang)+' : '+formatTimestamp(r.generatedAt,lang),
+    '- '+t('report_started',{},lang)+' : '+formatTimestamp(r.startedAt,lang),
+    '- '+t('report_completed',{},lang)+' : '+formatTimestamp(r.completedAt,lang),
     '- Kayros Index : '+Number(r.initialKi).toFixed(1)+' -> '+Number(r.finalKi).toFixed(1),
-    '- Nombre d’actions utilisateur : '+r.actions.length,
-    '- Nombre de résultats enregistrés : '+r.steps.length,
+    '- '+t('report_action_count',{},lang)+' : '+r.actions.length,
+    '- '+t('report_result_count',{},lang)+' : '+r.steps.length,
     '',
-    '## Idée stratégique',
+    '## '+t('strategic_idea',{},lang),
     '',
     normalizeReportText(r.idea)||'—',
     '',
-    '## Contraintes initiales',
+    '## '+t('initial_constraints',{},lang),
     '',
-    '- Géographie : '+(normalizeReportText(c.geo)||'—'),
-    '- Budget : '+(normalizeReportText(c.budget)||'—'),
-    '- Horizon : '+(normalizeReportText(c.time)||'—'),
-    '- Must-have : '+(normalizeReportText(c.must)||'—'),
-    '- Notes complémentaires : '+(normalizeReportText(c.notes)||'—'),
+    '- '+t('geography',{},lang)+' : '+(normalizeReportText(c.geo)||'—'),
+    '- '+t('budget',{},lang)+' : '+(normalizeReportText(c.budget)||'—'),
+    '- '+t('horizon',{},lang)+' : '+(normalizeReportText(c.time)||'—'),
+    '- '+t('must_have',{},lang)+' : '+(normalizeReportText(c.must)||'—'),
+    '- '+t('additional_notes',{},lang)+' : '+(normalizeReportText(c.notes)||'—'),
     '',
-    '## Évolution du Kayros Index',
+    '## '+t('ki_evolution',{},lang),
     '',
     r.kiHistory.map(v=>Number(v).toFixed(1)).join(' -> ')||'—',
     '',
-    '## Journal des actions utilisateur',
+    '## '+t('user_action_log',{},lang),
     ''
   ];
-  if(!r.actions.length) lines.push('Aucune action utilisateur enregistrée.');
+  if(!r.actions.length) lines.push(t('no_user_actions',{},lang));
   r.actions.forEach((a,i)=>{
-    const step=Number.isInteger(a.stepIdx)?' - Étape '+(a.stepIdx+1)+' '+stepMeta[a.stepIdx].short:'';
-    lines.push((i+1)+'. **'+actionLabel(a.action)+'**'+step+' - '+formatTimestamp(a.at));
-    if(a.details) lines.push('   - Détail : '+normalizeReportText(a.details));
-    if(a.note) lines.push('   - Saisie utilisateur : '+normalizeReportText(a.note));
+    const step=Number.isInteger(a.stepIdx)?' - '+t('step_word',{},lang)+' '+(a.stepIdx+1)+' '+stepLabel(a.stepIdx,lang):'';
+    lines.push((i+1)+'. **'+actionLabel(a.action,lang)+'**'+step+' - '+formatTimestamp(a.at,lang));
+    if(a.detailsKey||a.details) lines.push('   - '+t('detail',{},lang)+' : '+normalizeReportText(a.detailsKey?t(a.detailsKey,{},lang):a.details));
+    if(a.note) lines.push('   - '+t('user_input',{},lang)+' : '+normalizeReportText(a.note));
   });
-  lines.push('','## Parcours détaillé','');
+  lines.push('','## '+t('detailed_journey',{},lang),'');
   r.steps.forEach((h,i)=>{
-    const meta=stepMeta[h.stepIdx]||{short:h.step||'Étape',agent:h.agent||'—'};
+    const agentName=h.agent||agentLabel(h.stepIdx,lang);
     lines.push(
-      '### '+(i+1)+'. Étape '+(h.stepIdx+1)+' - '+meta.short,
+      '### '+(i+1)+'. '+t('step_word',{},lang)+' '+(h.stepIdx+1)+' - '+stepLabel(h.stepIdx,lang),
       '',
-      '- Agent : '+(h.agent||meta.agent),
-      '- Décision utilisateur : '+decisionLabel(h.decision),
-      '- Généré le : '+formatTimestamp(h.generatedAt),
-      '- Décidé le : '+formatTimestamp(h.decidedAt),
+      '- '+t('agent',{},lang)+' : '+agentName,
+      '- '+t('user_decision',{},lang)+' : '+decisionLabel(h.decision,lang),
+      '- '+t('generated_on',{},lang)+' : '+formatTimestamp(h.generatedAt,lang),
+      '- '+t('decided_on',{},lang)+' : '+formatTimestamp(h.decidedAt,lang),
       '- Kayros Index : '+Number(h.kiBefore??r.finalKi).toFixed(1)+' -> '+Number(h.kiAtApproval??r.finalKi).toFixed(1),
       '',
-      '#### Contenu développé',
+      '#### '+t('developed_content',{},lang),
       '',
-      normalizeReportText(h.output)||'_Étape non exécutée._',
+      normalizeReportText(h.output)||'_'+t('skipped_output',{},lang)+'._',
       '',
-      '#### Intervention utilisateur',
+      '#### '+t('user_intervention',{},lang),
       '',
-      normalizeReportText(h.humanNote)||'_Aucune annotation._',
+      normalizeReportText(h.humanNote)||'_'+t('no_annotation',{},lang)+'_',
       ''
     );
   });
@@ -536,7 +754,7 @@ function downloadTextFile(content,filename,mimeType){
 }
 function exportKayrosMarkdown(){
   downloadTextFile(buildKayrosMarkdown(),reportFileBase()+'.md','text/markdown;charset=utf-8');
-  log('Markdown complet OK','success');
+  log(t('markdown_ok',{},cycleLanguage()),'success');
 }
 function inlineMarkdown(value){
   return escapeHtml(value).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
@@ -553,18 +771,19 @@ function reportTextToHtml(value){
   }).join('');
 }
 function buildKayrosReportHtml(){
-  const r=buildReportModel(), c=r.conditions;
+  const r=buildReportModel(), c=r.conditions, lang=r.lang;
   const actions=r.actions.map(function(a,i){
-    const step=Number.isInteger(a.stepIdx)?'Étape '+(a.stepIdx+1)+' - '+stepMeta[a.stepIdx].short:'Cycle';
-    return '<div style="display:grid;grid-template-columns:25px 1fr;gap:10px;margin:0 0 12px"><div style="width:25px;height:25px;border-radius:50%;background:#e0f2fe;color:#0369a1;text-align:center;line-height:25px;font-weight:700">'+(i+1)+'</div><div><div style="font-size:11px;font-weight:700;color:#0f172a">'+escapeHtml(actionLabel(a.action))+' · '+escapeHtml(step)+'</div><div style="font-size:9px;color:#64748b;margin:2px 0">'+escapeHtml(formatTimestamp(a.at))+'</div>'+(a.details?'<div style="font-size:10px;color:#334155">'+escapeHtml(a.details)+'</div>':'')+(a.note?'<div style="font-size:10px;color:#92400e;background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 8px;margin-top:5px">'+reportTextToHtml(a.note)+'</div>':'')+'</div></div>';
-  }).join('')||'<p style="font-size:11px;color:#64748b">Aucune action utilisateur enregistrée.</p>';
+    const step=Number.isInteger(a.stepIdx)?t('step_word',{},lang)+' '+(a.stepIdx+1)+' - '+stepLabel(a.stepIdx,lang):t('cycle_word',{},lang);
+    const detail=a.detailsKey?t(a.detailsKey,{},lang):(a.details||'');
+    return '<div style="display:grid;grid-template-columns:25px 1fr;gap:10px;margin:0 0 12px"><div style="width:25px;height:25px;border-radius:50%;background:#e0f2fe;color:#0369a1;text-align:center;line-height:25px;font-weight:700">'+(i+1)+'</div><div><div style="font-size:11px;font-weight:700;color:#0f172a">'+escapeHtml(actionLabel(a.action,lang))+' · '+escapeHtml(step)+'</div><div style="font-size:9px;color:#64748b;margin:2px 0">'+escapeHtml(formatTimestamp(a.at,lang))+'</div>'+(detail?'<div style="font-size:10px;color:#334155">'+escapeHtml(detail)+'</div>':'')+(a.note?'<div style="font-size:10px;color:#92400e;background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 8px;margin-top:5px">'+reportTextToHtml(a.note)+'</div>':'')+'</div></div>';
+  }).join('')||'<p style="font-size:11px;color:#64748b">'+escapeHtml(t('no_user_actions',{},lang))+'</p>';
   const steps=r.steps.map(function(h,i){
-    const meta=stepMeta[h.stepIdx]||{short:h.step||'Étape',agent:h.agent||'—'};
-    const note=h.humanNote?reportTextToHtml(h.humanNote):'<p style="color:#94a3b8;font-style:italic">Aucune annotation.</p>';
-    const output=h.output?reportTextToHtml(h.output):'<p style="color:#94a3b8;font-style:italic">Étape non exécutée.</p>';
-    return '<section class="report-step" style="page-break-before:always;padding:16mm 16mm 15mm;color:#0f172a;overflow-wrap:anywhere"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:13px"><div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#0284c8;font-weight:700">Résultat '+(i+1)+' · Étape '+(h.stepIdx+1)+'</div><h2 style="font-size:20px;margin:4px 0 2px">'+escapeHtml(meta.short)+'</h2><div style="font-size:10px;color:#64748b">Agent : '+escapeHtml(h.agent||meta.agent)+'</div></div><div style="font-size:10px;font-weight:700;color:#fff;background:#0f172a;border-radius:999px;padding:6px 10px;white-space:nowrap">'+escapeHtml(decisionLabel(h.decision))+'</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>Généré</strong><br>'+escapeHtml(formatTimestamp(h.generatedAt))+'</div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>Décidé</strong><br>'+escapeHtml(formatTimestamp(h.decidedAt))+'</div></div><h3 style="font-size:12px;margin:0 0 7px;color:#0369a1;text-transform:uppercase;letter-spacing:.08em">Contenu développé</h3><div style="font-size:10px;line-height:1.55">'+output+'</div><div style="margin-top:15px;padding:10px 12px;background:#fffbeb;border-left:4px solid #f59e0b"><h3 style="font-size:10px;margin:0 0 5px;color:#92400e;text-transform:uppercase;letter-spacing:.08em">Action et saisie utilisateur</h3><div style="font-size:10px;color:#78350f"><strong>'+escapeHtml(decisionLabel(h.decision))+'</strong>'+note+'</div></div><div style="margin-top:13px;font-size:9px;color:#64748b">Kayros Index : '+Number(h.kiBefore??r.finalKi).toFixed(1)+' -> <strong style="color:#0284c8">'+Number(h.kiAtApproval??r.finalKi).toFixed(1)+'</strong></div></section>';
+    const agentName=h.agent||agentLabel(h.stepIdx,lang);
+    const note=h.humanNote?reportTextToHtml(h.humanNote):'<p style="color:#94a3b8;font-style:italic">'+escapeHtml(t('no_annotation',{},lang))+'</p>';
+    const output=h.output?reportTextToHtml(h.output):'<p style="color:#94a3b8;font-style:italic">'+escapeHtml(t('skipped_output',{},lang))+'</p>';
+    return '<section class="report-step" style="page-break-before:always;padding:16mm 16mm 15mm;color:#0f172a;overflow-wrap:anywhere"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;margin-bottom:13px"><div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#0284c8;font-weight:700">'+escapeHtml(t('result',{},lang))+' '+(i+1)+' · '+escapeHtml(t('step_word',{},lang))+' '+(h.stepIdx+1)+'</div><h2 style="font-size:20px;margin:4px 0 2px">'+escapeHtml(stepLabel(h.stepIdx,lang))+'</h2><div style="font-size:10px;color:#64748b">'+escapeHtml(t('agent',{},lang))+' : '+escapeHtml(agentName)+'</div></div><div style="font-size:10px;font-weight:700;color:#fff;background:#0f172a;border-radius:999px;padding:6px 10px;white-space:nowrap">'+escapeHtml(decisionLabel(h.decision,lang))+'</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>'+escapeHtml(t('generated',{},lang))+'</strong><br>'+escapeHtml(formatTimestamp(h.generatedAt,lang))+'</div><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;font-size:9px"><strong>'+escapeHtml(t('decided',{},lang))+'</strong><br>'+escapeHtml(formatTimestamp(h.decidedAt,lang))+'</div></div><h3 style="font-size:12px;margin:0 0 7px;color:#0369a1;text-transform:uppercase;letter-spacing:.08em">'+escapeHtml(t('developed_content',{},lang))+'</h3><div style="font-size:10px;line-height:1.55">'+output+'</div><div style="margin-top:15px;padding:10px 12px;background:#fffbeb;border-left:4px solid #f59e0b"><h3 style="font-size:10px;margin:0 0 5px;color:#92400e;text-transform:uppercase;letter-spacing:.08em">'+escapeHtml(t('user_action_input',{},lang))+'</h3><div style="font-size:10px;color:#78350f"><strong>'+escapeHtml(decisionLabel(h.decision,lang))+'</strong>'+note+'</div></div><div style="margin-top:13px;font-size:9px;color:#64748b">Kayros Index : '+Number(h.kiBefore??r.finalKi).toFixed(1)+' -> <strong style="color:#0284c8">'+Number(h.kiAtApproval??r.finalKi).toFixed(1)+'</strong></div></section>';
   }).join('');
-  return '<div style="font-family:Arial,Helvetica,sans-serif;width:210mm;background:#fff;color:#0f172a"><section style="position:relative;height:296mm;background:linear-gradient(145deg,#0f172a,#1e3a5f);color:#fff;padding:30mm 20mm;box-sizing:border-box;page-break-after:always"><div style="font-size:18px;font-weight:700;letter-spacing:.04em">KayrosLab</div><div style="margin-top:42mm;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#7dd3fc">Rapport d’audit complet</div><h1 style="font-size:30px;line-height:1.15;margin:9px 0 15px">Parcours gouverné<br>de bout en bout</h1><p style="font-size:13px;line-height:1.55;color:#cbd5e1;max-width:145mm">'+escapeHtml(r.idea)+'</p><div style="margin-top:32mm;display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">KI initial</div><div style="font-size:20px;font-weight:700">'+Number(r.initialKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">KI final</div><div style="font-size:20px;font-weight:700;color:#7dd3fc">'+Number(r.finalKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">Actions humaines</div><div style="font-size:20px;font-weight:700">'+r.actions.length+'</div></div></div><div style="position:absolute;left:20mm;bottom:22mm;font-size:9px;color:#94a3b8">Généré le '+escapeHtml(formatTimestamp(r.generatedAt))+'</div></section><section style="padding:16mm 16mm 15mm"><h2 style="font-size:20px;margin:0 0 12px">Cadre initial et audit utilisateur</h2><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:14px"><div style="font-size:9px;text-transform:uppercase;color:#64748b;margin-bottom:5px">Idée stratégique</div><div style="font-size:11px;line-height:1.55">'+reportTextToHtml(r.idea)+'</div></div><table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:16px"><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b;width:32%">Géographie</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.geo||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Budget</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.budget||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Horizon</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.time||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">Must-have</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.must||'—')+'</td></tr><tr><td style="padding:7px;color:#64748b">Notes</td><td style="padding:7px">'+reportTextToHtml(c.notes||'—')+'</td></tr></table><h3 style="font-size:13px;margin:0 0 10px">Journal horodaté des actions utilisateur</h3>'+actions+'</section>'+steps+'</div>';
+  return '<div style="font-family:Arial,Helvetica,sans-serif;width:210mm;background:#fff;color:#0f172a"><section style="position:relative;height:296mm;background:linear-gradient(145deg,#0f172a,#1e3a5f);color:#fff;padding:30mm 20mm;box-sizing:border-box;page-break-after:always"><div style="font-size:18px;font-weight:700;letter-spacing:.04em">KayrosLab</div><div style="margin-top:42mm;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#7dd3fc">'+escapeHtml(t('audit_report',{},lang))+'</div><h1 style="font-size:30px;line-height:1.15;margin:9px 0 15px">'+t('end_to_end_journey',{},lang)+'</h1><p style="font-size:13px;line-height:1.55;color:#cbd5e1;max-width:145mm">'+escapeHtml(r.idea)+'</p><div style="margin-top:32mm;display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">'+escapeHtml(t('initial_ki',{},lang))+'</div><div style="font-size:20px;font-weight:700">'+Number(r.initialKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">'+escapeHtml(t('final_ki',{},lang))+'</div><div style="font-size:20px;font-weight:700;color:#7dd3fc">'+Number(r.finalKi).toFixed(1)+'</div></div><div style="border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px"><div style="font-size:8px;color:#94a3b8;text-transform:uppercase">'+escapeHtml(t('human_actions',{},lang))+'</div><div style="font-size:20px;font-weight:700">'+r.actions.length+'</div></div></div><div style="position:absolute;left:20mm;bottom:22mm;font-size:9px;color:#94a3b8">'+escapeHtml(t('report_generated',{},lang))+' '+escapeHtml(formatTimestamp(r.generatedAt,lang))+'</div></section><section style="padding:16mm 16mm 15mm"><h2 style="font-size:20px;margin:0 0 12px">'+escapeHtml(t('initial_context_audit',{},lang))+'</h2><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:14px"><div style="font-size:9px;text-transform:uppercase;color:#64748b;margin-bottom:5px">'+escapeHtml(t('strategic_idea',{},lang))+'</div><div style="font-size:11px;line-height:1.55">'+reportTextToHtml(r.idea)+'</div></div><table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:16px"><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b;width:32%">'+escapeHtml(t('geography',{},lang))+'</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.geo||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">'+escapeHtml(t('budget',{},lang))+'</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.budget||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">'+escapeHtml(t('horizon',{},lang))+'</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.time||'—')+'</td></tr><tr><td style="padding:7px;border-bottom:1px solid #e2e8f0;color:#64748b">'+escapeHtml(t('must_have',{},lang))+'</td><td style="padding:7px;border-bottom:1px solid #e2e8f0">'+escapeHtml(c.must||'—')+'</td></tr><tr><td style="padding:7px;color:#64748b">'+escapeHtml(t('additional_notes',{},lang))+'</td><td style="padding:7px">'+reportTextToHtml(c.notes||'—')+'</td></tr></table><h3 style="font-size:13px;margin:0 0 10px">'+escapeHtml(t('user_action_log',{},lang))+'</h3>'+actions+'</section>'+steps+'</div>';
 }
 function exportKayrosPDF(){
   const c=document.getElementById('report-template');
@@ -583,11 +802,12 @@ function exportKayrosPDF(){
       pdf.text('KayrosLab · Page '+page+' / '+total,105,293,{align:'center'});
     }
   }).save().then(function(){
-    c.classList.remove('capturing'); c.innerHTML=''; log('PDF complet OK','success');
+    c.classList.remove('capturing'); c.innerHTML=''; log(t('pdf_ok',{},cycleLanguage()),'success');
   }).catch(function(err){
-    c.classList.remove('capturing'); c.innerHTML=''; log('Erreur PDF: '+err.message,'error');
+    c.classList.remove('capturing'); c.innerHTML=''; log(t('pdf_error',{error:err.message},cycleLanguage()),'error');
   });
 }
+applyTranslations();
 </script>
 </body>
 </html>
