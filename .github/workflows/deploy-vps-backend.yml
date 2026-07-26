@@ -9,7 +9,7 @@ name: Deploy KayrosLab backend - OVH VPS
 #   cp /opt/kayroslab/backend/fastify/.env.sample /opt/kayroslab/backend/fastify/.env
 #
 # Secrets requis : VPS_SSH_USER, VPS_SSH_KEY (identiques a ceux d'openDPE)
-# et ANTHROPIC_API_KEY pour activer le fournisseur LLM en production.
+# et MISTRAL_API_KEY pour activer le fournisseur LLM en production.
 
 on:
   push:
@@ -28,31 +28,38 @@ jobs:
       - name: SSH into VPS and deploy
         uses: appleboy/ssh-action@v1.2.0
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         with:
           host: 51.210.9.71
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: ANTHROPIC_API_KEY
+          envs: MISTRAL_API_KEY
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
             cd /opt/kayroslab
             git pull origin main
-            if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
-              echo "ERREUR : le secret ANTHROPIC_API_KEY est vide." >&2
+            if [ -z "${MISTRAL_API_KEY:-}" ]; then
+              echo "ERREUR : le secret MISTRAL_API_KEY est vide." >&2
               exit 1
             fi
             node <<'NODE'
             const fs = require('fs');
             const envPath = '/opt/kayroslab/backend/fastify/.env';
             let contents = fs.readFileSync(envPath, 'utf8');
-            const line = `ANTHROPIC_API_KEY=${process.env.ANTHROPIC_API_KEY}`;
-            contents = /^ANTHROPIC_API_KEY=.*$/m.test(contents)
-              ? contents.replace(/^ANTHROPIC_API_KEY=.*$/m, line)
-              : `${contents.trimEnd()}\n${line}\n`;
+            const replacements = {
+              ANTHROPIC_API_KEY: '',
+              MISTRAL_API_KEY: process.env.MISTRAL_API_KEY,
+            };
+            for (const [name, value] of Object.entries(replacements)) {
+              const line = `${name}=${value}`;
+              const pattern = new RegExp(`^${name}=.*$`, 'm');
+              contents = pattern.test(contents)
+                ? contents.replace(pattern, line)
+                : `${contents.trimEnd()}\n${line}\n`;
+            }
             fs.writeFileSync(envPath, contents, { mode: 0o600 });
             NODE
             # Les scripts sont edites sous Windows : neutraliser les CRLF,
