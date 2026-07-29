@@ -9,6 +9,7 @@ on:
       - 'index.fr.html'
       # (supprimé)
       - 'kayroslab-complete-with-ai-agents.html'
+      - 'tokens.css'
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
   workflow_dispatch:
@@ -31,7 +32,7 @@ jobs:
 
       - run: |
           mkdir -p deploy/positionner-app
-          cp index.html index.fr.html kayroslab-complete-with-ai-agents.html livret-blanc-kayroslab.html livret-blanc-positionner.html livret-blanc-ecouter.html whitepaper-*.html deploy/
+          cp index.html index.fr.html kayroslab-complete-with-ai-agents.html tokens.css livret-blanc-kayroslab.html livret-blanc-positionner.html livret-blanc-ecouter.html whitepaper-*.html deploy/
           cp -r frontend/positionning-app/dist/* deploy/positionner-app/
           touch deploy/.nojekyll
           # CNAME doit etre republie a chaque deploiement : force_orphan efface
