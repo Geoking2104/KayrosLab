@@ -99,7 +99,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
 
-<nav class="site-nav" aria-label="Navigation principale">
+<nav class="site-nav" data-i18n-aria="main_nav_aria" aria-label="Navigation principale">
   <div class="site-nav__inner">
     <a href="https://www.kayroslab.com" class="wordmark">
       <span class="wordmark__mark"><i class="fas fa-brain" aria-hidden="true"></i></span>
@@ -138,7 +138,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
         <div class="journey-panel__head"><span class="journey-label journey-label--accent" data-i18n="transformation_label">Transformation</span><span data-i18n="stress_test_label">KayrosLab met l’idée à l’épreuve</span></div>
         <div class="transform-flow">
           <div class="transform-step"><span class="transform-step__icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span><div><strong data-i18n="semantic_exploration">Exploration sémantique</strong><span data-i18n="semantic_exploration_desc">Élargir le champ avant de cadrer.</span></div></div>
-          <div class="hypothesis-branches" aria-label="Trois hypothèses"><span class="hypothesis-chip">H1</span><span class="hypothesis-chip">H2</span><span class="hypothesis-chip">H3</span></div>
+          <div class="hypothesis-branches" data-i18n-aria="three_hypotheses_aria" aria-label="Trois hypothèses"><span class="hypothesis-chip">H1</span><span class="hypothesis-chip">H2</span><span class="hypothesis-chip">H3</span></div>
           <div class="transform-step"><span class="transform-step__icon"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><div><strong data-i18n="compare_hypotheses">Hypothèses comparées</strong><span data-i18n="compare_hypotheses_desc">Même grille, risques et tests visibles.</span></div></div>
           <div class="human-gate"><i class="fas fa-user-check" aria-hidden="true"></i><span data-i18n-html="human_gate_copy"><strong>Décision humaine :</strong> orienter, combiner ou relancer.</span></div>
         </div>
@@ -345,7 +345,7 @@ const PROXY_URL = 'https://api.kayroslab.com/v1/demo/chat';
 const translations = {
   fr: {
     language_selector:'Choisir la langue', page_title:'KayrosLab — Plateforme d’agents gouvernés',
-    back:'Retour', hero_badge:'Agents gouvernés · Démo publique', journey_map_aria:'Comparaison entre un LLM classique et KayrosLab',
+    back:'Retour', hero_badge:'Agents gouvernés · Démo publique', main_nav_aria:'Navigation principale', journey_map_aria:'Comparaison entre un LLM classique et KayrosLab', three_hypotheses_aria:'Trois hypothèses',
     hero_title:'Une idée n’a pas besoin d’être validée. Elle a besoin d’être challengée.',
     hero_description:'KayrosLab transforme une intuition en options comparables, puis en décisions traçables — sous votre supervision.',
     launch_demo:'Challenger mon idée', live_demo:'Démo en direct', see_eight_steps:'Voir les 8 étapes',
@@ -474,7 +474,7 @@ const translations = {
   },
   en: {
     language_selector:'Choose language', page_title:'KayrosLab — Governed Agent Platform',
-    back:'Back', hero_badge:'Governed agents · Public demo', journey_map_aria:'Comparison between a classic LLM and KayrosLab',
+    back:'Back', hero_badge:'Governed agents · Public demo', main_nav_aria:'Main navigation', journey_map_aria:'Comparison between a classic LLM and KayrosLab', three_hypotheses_aria:'Three hypotheses',
     hero_title:'An idea does not need validation. It needs to be challenged.',
     hero_description:'KayrosLab turns an intuition into comparable options, then traceable decisions — under your supervision.',
     launch_demo:'Challenge my idea', live_demo:'Live demo', see_eight_steps:'See the 8 steps',
