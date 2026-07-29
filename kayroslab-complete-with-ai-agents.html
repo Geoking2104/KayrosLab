@@ -6,63 +6,180 @@
 <title>KayrosLab — Plateforme d’agents gouvernés</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Geist:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://microsoft.github.io/Ontology-Playground/embed/ontology-embed.js"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{body:['Inter','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{body:['Geist','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
-.animate-on-scroll{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
-.hero-bg{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%)}
-.kayros-gradient{background:linear-gradient(90deg,#0ea5e9,#0284c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.section-header{font-size:2.25rem;font-weight:700;letter-spacing:-.025em}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid #e0f2fe;border-top-color:#0ea5e9;border-radius:50%;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-.step-progress{transition:all .3s ease}.step-progress.done{background:#0ea5e9;color:#fff;border-color:#0ea5e9}.step-progress.active{background:#e0f2fe;color:#0284c8;border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.2)}.step-progress.pending{background:#fff;color:#94a3b8;border-color:#e2e8f0}
-.agent-log{font-family:'Fira Code',monospace;font-size:11px;line-height:1.5}
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
+/* Hallmark · genre: modern-minimal · macrostructure: Map / Diagram · theme: custom
+ * vibe: "strategic clarity, governed, technical, human-led" · axes: mixed / geometric-sans / cool
+ * nav: N9 Edge-aligned minimal · footer: Ft5 Statement · context: selected visual option 3
+ */
+html,body{overflow-x:clip}html{scroll-behavior:smooth}body{margin:0;background:var(--color-paper);color:var(--color-ink);font-family:var(--font-body)}
+h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}button,a{white-space:nowrap}button{min-height:44px}input,textarea{border-width:1px;outline:2px solid transparent;outline-offset:1px}button:disabled,input:disabled,textarea:disabled,[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+:focus{outline:none}:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px;border-radius:inherit}
+.animate-on-scroll{opacity:0;transform:translateY(8px);transition:opacity var(--dur-long) var(--ease-out),transform var(--dur-long) var(--ease-out)}.animate-on-scroll.visible{opacity:1;transform:none}
+.kayros-gradient{color:var(--color-accent)}
+.section-header{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.04em;overflow-wrap:anywhere;min-width:0}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--color-accent-soft);border-top-color:var(--color-accent);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.step-progress{transition:transform var(--dur-short) var(--ease-out),opacity var(--dur-short) var(--ease-out)}.step-progress.done{background:var(--color-accent);color:var(--color-accent-ink);border-color:var(--color-accent)}.step-progress.active{background:var(--color-accent-soft);color:var(--color-accent-strong);border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in oklch,var(--color-accent) 18%,transparent)}.step-progress.pending{background:var(--color-paper);color:var(--color-muted);border-color:var(--color-rule)}
+.agent-log{font-family:var(--font-mono);font-size:11px;line-height:1.5}
 .generated-content{max-height:420px;overflow-y:auto}
-.editable-output:focus{outline:none;border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.15)}
-.ki-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(#0ea5e9 calc(var(--ki)*1%),#e2e8f0 0);display:flex;align-items:center;justify-content:center}
-.ki-ring-inner{width:58px;height:58px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.human-note{border-left:3px solid #f59e0b;background:#fffbeb}
-#report-template{position:fixed;left:0;top:0;width:210mm;background:#fff;z-index:-1;opacity:0;pointer-events:none}#report-template.capturing{position:relative;left:auto;top:auto;opacity:1;z-index:9999}
-.ontology-embed{border-radius:12px;overflow:hidden;border:1px solid #e2e8f0}
+.editable-output:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in oklch,var(--color-accent) 15%,transparent)}
+.ki-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--color-accent) calc(var(--ki)*1%),var(--color-rule) 0);display:flex;align-items:center;justify-content:center}
+.ki-ring-inner{width:58px;height:58px;border-radius:50%;background:var(--color-paper);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.human-note{border-inline-start:3px solid var(--color-warning);background:color-mix(in oklch,var(--color-warning) 10%,var(--color-paper))}
+#report-template{position:fixed;inset-block-start:0;inset-inline-start:0;width:210mm;background:var(--color-paper);z-index:-1;opacity:0;pointer-events:none}#report-template.capturing{position:relative;inset:auto;opacity:1;z-index:400}
+.ontology-embed{border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--color-rule)}
 .prose-llm h3,.prose-llm h4{font-weight:700;margin-top:.75rem;margin-bottom:.35rem}.prose-llm ul{list-style:disc;padding-left:1.25rem;margin:.4rem 0}.prose-llm p{margin:.35rem 0}.prose-llm strong{font-weight:600}
-.idea-card{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.idea-card:hover{transform:translateY(-2px);border-color:#7dd3fc;box-shadow:0 12px 28px rgba(15,23,42,.08)}.idea-card.shortlisted{border-color:#0ea5e9;box-shadow:0 0 0 3px rgba(14,165,233,.12)}
-.semantic-field{transition:border-color .2s ease,background .2s ease,transform .2s ease}.semantic-field:hover{transform:translateY(-1px);border-color:#a78bfa}.semantic-field.selected{border-color:#a78bfa;background:rgba(139,92,246,.16);box-shadow:0 0 0 2px rgba(139,92,246,.1)}.semantic-graph text{font-family:'Inter',sans-serif;pointer-events:none}.semantic-graph .edge{stroke:#475569;stroke-width:1;opacity:.55}.semantic-graph .bridge-edge{stroke:#c084fc;stroke-width:1.5;stroke-dasharray:4 3;opacity:.85}
+.idea-card{transition:transform var(--dur-short) var(--ease-out),border-color var(--dur-short) var(--ease-out)}.idea-card.shortlisted{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in oklch,var(--color-accent) 12%,transparent)}
+.semantic-field{transition:background var(--dur-short) var(--ease-out),transform var(--dur-short) var(--ease-out)}.semantic-field.selected{border-color:var(--color-violet);background:color-mix(in oklch,var(--color-violet) 16%,transparent);box-shadow:0 0 0 2px color-mix(in oklch,var(--color-violet) 10%,transparent)}.semantic-graph text{font-family:var(--font-body);pointer-events:none}.semantic-graph .edge{stroke:var(--color-muted);stroke-width:1;opacity:.55}.semantic-graph .bridge-edge{stroke:var(--color-violet);stroke-width:1.5;stroke-dasharray:4 3;opacity:.85}
+
+.site-nav{position:sticky;inset-block-start:0;z-index:200;background:color-mix(in oklch,var(--color-paper) 92%,transparent);border-block-end:1px solid var(--color-rule);backdrop-filter:blur(16px)}
+.site-nav__inner{max-width:1200px;margin-inline:auto;padding:var(--space-sm) clamp(var(--space-sm),4vw,var(--space-lg));display:flex;align-items:center;justify-content:space-between;gap:var(--space-md)}
+.wordmark{display:inline-flex;align-items:center;gap:var(--space-xs);color:var(--color-ink);text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);letter-spacing:-.03em}
+.wordmark__mark{inline-size:44px;block-size:44px;display:grid;place-items:center;border-radius:var(--radius-md);background:var(--color-ink);color:var(--color-paper)}
+.site-nav__actions{display:flex;align-items:center;gap:var(--space-xs)}
+.language-switch{display:inline-flex;align-items:center;padding:var(--space-3xs);border:1px solid var(--color-rule);border-radius:var(--radius-pill);background:var(--color-paper-2)}
+.lang-btn{min-height:36px;border:0;background:transparent;color:var(--color-ink-2);border-radius:var(--radius-pill);padding-inline:var(--space-xs);font-weight:700;font-size:var(--text-xs)}
+.lang-btn[aria-pressed="true"]{background:var(--color-accent);color:var(--color-accent-ink)}
+.nav-demo{display:inline-flex;align-items:center;gap:var(--space-2xs);min-height:44px;padding-inline:var(--space-md);border:1px solid var(--color-accent);border-radius:var(--radius-pill);color:var(--color-accent-strong);font-size:var(--text-sm);font-weight:700;text-decoration:none}
+.nav-back{color:var(--color-ink-2);font-size:var(--text-sm);font-weight:600;text-decoration:none}
+
+.comparison-hero{background:var(--color-ink-deep);color:var(--color-paper);padding:clamp(var(--space-xl),5vw,var(--space-2xl)) clamp(var(--space-sm),4vw,var(--space-lg)) clamp(var(--space-2xl),8vw,var(--space-3xl))}
+.comparison-hero__inner{max-width:1200px;margin-inline:auto}
+.comparison-hero__intro{display:grid;gap:var(--space-sm);margin-block-end:var(--space-xl);max-width:1040px}
+.comparison-hero h1{margin:0;font-family:var(--font-display);font-size:var(--text-display-s);line-height:1.02;letter-spacing:-.055em;max-width:22ch;overflow-wrap:anywhere;min-width:0}
+.comparison-hero__lede{margin:0;max-width:70ch;color:var(--color-muted-on-dark);font-size:var(--text-md);line-height:1.6}
+.journey-map{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.1fr) minmax(0,1.48fr);border:1px solid var(--color-rule-dark);border-radius:var(--radius-lg);overflow:hidden;background:color-mix(in oklch,var(--color-ink) 62%,var(--color-ink-deep))}
+.journey-panel{min-width:0;padding:var(--space-md);position:relative}.journey-panel+.journey-panel{border-inline-start:1px solid var(--color-rule-dark)}
+.journey-panel__head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xs);margin-block-end:var(--space-md);font-family:var(--font-display);font-weight:700}
+.journey-label{display:inline-flex;align-items:center;min-height:30px;padding-inline:var(--space-xs);border-radius:var(--radius-pill);background:color-mix(in oklch,var(--color-paper) 9%,transparent);color:var(--color-paper);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.journey-label--accent{background:var(--color-accent);color:var(--color-accent-ink)}
+.classic-flow{display:grid;gap:var(--space-sm)}
+.classic-box{padding:var(--space-sm);border-radius:var(--radius-sm);background:color-mix(in oklch,var(--color-paper) 7%,transparent);color:color-mix(in oklch,var(--color-paper) 84%,var(--color-muted));font-size:var(--text-sm);line-height:1.5}
+.classic-arrow{text-align:center;color:var(--color-muted)}
+.journey-foot{margin-block-start:var(--space-md);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}
+.transform-flow{display:grid;gap:var(--space-sm);align-content:start}
+.transform-step{display:grid;grid-template-columns:36px minmax(0,1fr);align-items:center;gap:var(--space-xs);padding:var(--space-sm);border-radius:var(--radius-sm);background:color-mix(in oklch,var(--color-paper) 7%,transparent)}
+.transform-step__icon{inline-size:36px;block-size:36px;border-radius:50%;display:grid;place-items:center;background:color-mix(in oklch,var(--color-accent) 18%,transparent);color:var(--color-accent)}
+.transform-step strong{display:block;font-size:var(--text-sm)}.transform-step span{display:block;color:var(--color-muted-on-dark);font-size:var(--text-xs);margin-block-start:var(--space-3xs)}
+.hypothesis-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-2xs)}
+.hypothesis-chip{padding:var(--space-xs);border:1px solid var(--color-rule-dark);border-radius:var(--radius-sm);text-align:center;color:var(--color-muted-on-dark);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700}
+.human-gate{display:flex;align-items:center;gap:var(--space-xs);padding:var(--space-sm);border:1px solid color-mix(in oklch,var(--color-warning) 40%,var(--color-rule-dark));border-radius:var(--radius-sm);color:var(--color-paper);font-size:var(--text-sm)}
+.governed-table{display:grid;gap:var(--space-2xs)}
+.governed-row{display:grid;grid-template-columns:44px minmax(0,1.15fr) minmax(78px,.7fr) minmax(70px,.65fr) 42px;align-items:center;gap:var(--space-xs);padding:var(--space-xs);border-radius:var(--radius-sm);background:color-mix(in oklch,var(--color-paper) 8%,transparent);font-size:var(--text-xs)}
+.hypothesis-id{inline-size:36px;block-size:36px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent);color:var(--color-accent-ink);font-family:var(--font-body);font-weight:700}
+.governed-row:nth-child(2) .hypothesis-id{background:var(--color-positive)}.governed-row:nth-child(3) .hypothesis-id{background:var(--color-violet)}
+.governed-score strong{display:block;font-size:var(--text-sm);font-variant-numeric:tabular-nums}.governed-score span,.governed-cell span{color:var(--color-muted-on-dark)}
+.governed-cell{display:flex;align-items:center;gap:var(--space-2xs)}.governed-cell i{color:var(--color-accent)}
+.outcome-strip{display:flex;flex-wrap:wrap;gap:var(--space-xs);margin-block-start:var(--space-md);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark)}
+.outcome-strip span{display:inline-flex;align-items:center;gap:var(--space-2xs);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.outcome-strip i{color:var(--color-accent)}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--space-sm);margin-block-start:var(--space-lg)}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2xs);min-height:48px;padding-inline:var(--space-lg);border-radius:var(--radius-pill);font-weight:700;text-decoration:none;transition:transform var(--dur-micro) var(--ease-out),opacity var(--dur-micro) var(--ease-out)}
+.btn-primary{border:1px solid var(--color-accent);background:var(--color-accent);color:var(--color-accent-ink)}.btn-secondary{border:1px solid var(--color-rule-dark);background:transparent;color:var(--color-paper)}
+
+.change-ledger{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg));background:var(--color-paper);color:var(--color-ink)}
+.change-ledger__inner{max-width:1040px;margin-inline:auto}.change-ledger h2{margin:0 0 var(--space-lg);font-family:var(--font-display);font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.045em;text-align:center}
+.change-row{display:grid;grid-template-columns:minmax(0,1fr) 52px minmax(0,1.25fr);align-items:center;gap:var(--space-md);padding-block:var(--space-md);border-block-start:1px solid var(--color-rule)}.change-row:last-of-type{border-block-end:1px solid var(--color-rule)}
+.change-before{color:var(--color-muted);font-size:var(--text-lg)}.change-after{font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;letter-spacing:-.025em}.change-arrow{inline-size:44px;block-size:44px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent-soft);color:var(--color-accent-strong)}
+.change-ledger__note{margin:var(--space-lg) auto 0;max-width:55ch;text-align:center;color:var(--color-ink-2);font-weight:600}
+
+#demo{background:var(--color-paper-2)}#demo>.max-w-6xl{max-width:1120px}.demo-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:var(--space-lg);align-items:end;margin-block-end:var(--space-lg)}.demo-intro p{margin:0;color:var(--color-ink-2);line-height:1.6}.demo-kicker{color:var(--color-accent-strong);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:30ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.05;letter-spacing:-.035em}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
+
+@media (hover:hover) and (pointer:fine){.nav-demo:hover,.btn-secondary:hover{background:color-mix(in oklch,var(--color-accent) 10%,transparent)}.btn-primary:hover,.btn-secondary:hover,.idea-card:hover,.semantic-field:hover{transform:translateY(-1px)}}
+.btn-primary:active,.btn-secondary:active,.nav-demo:active{transform:translateY(1px)}
+@media (max-width:59.99rem){.journey-map{grid-template-columns:1fr}.journey-panel+.journey-panel{border-inline-start:0;border-block-start:1px solid var(--color-rule-dark)}.demo-intro{grid-template-columns:1fr}.governed-row{grid-template-columns:44px minmax(0,1fr) 42px}.governed-cell--optional{display:none}}
+@media (max-width:39.99rem){.site-nav__inner{padding-inline:var(--space-sm)}.nav-back{display:none}.nav-demo{padding-inline:var(--space-sm)}.comparison-hero{padding-block-start:var(--space-xl)}.comparison-hero h1{font-size:clamp(2.2rem,12vw,3.3rem)}.hypothesis-branches{grid-template-columns:1fr}.governed-row{grid-template-columns:40px minmax(0,1fr) 36px}.change-row{grid-template-columns:1fr;gap:var(--space-xs)}.change-arrow{transform:rotate(90deg)}.change-before{font-size:var(--text-base)}.change-after{font-size:var(--text-lg)}.hero-actions{align-items:stretch}.btn-primary,.btn-secondary{width:100%}.foot-stmt__meta{align-items:flex-start;flex-direction:column}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:150ms!important;animation-iteration-count:1!important;transition-duration:150ms!important}.animate-on-scroll{transform:none}}
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
 
-<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="https://www.kayroslab.com" class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center"><i class="fas fa-brain text-white text-sm"></i></div>
-      <span class="font-display font-bold text-lg">KayrosLab</span>
+<nav class="site-nav" aria-label="Navigation principale">
+  <div class="site-nav__inner">
+    <a href="https://www.kayroslab.com" class="wordmark">
+      <span class="wordmark__mark"><i class="fas fa-brain" aria-hidden="true"></i></span>
+      <span>KayrosLab</span>
     </a>
-    <div class="flex items-center gap-3">
-      <div class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 p-1" role="group" data-i18n-aria="language_selector">
-        <button type="button" data-lang="fr" onclick="setLanguage('fr')" class="lang-btn rounded-full px-3 py-1 text-xs font-bold transition" aria-pressed="true">FR</button>
-        <button type="button" data-lang="en" onclick="setLanguage('en')" class="lang-btn rounded-full px-3 py-1 text-xs font-bold transition" aria-pressed="false">EN</button>
+    <div class="site-nav__actions">
+      <a href="#demo" class="nav-demo"><span data-i18n="live_demo">Démo en direct</span></a>
+      <div class="language-switch" role="group" data-i18n-aria="language_selector">
+        <button type="button" data-lang="fr" onclick="setLanguage('fr')" class="lang-btn" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" onclick="setLanguage('en')" class="lang-btn" aria-pressed="false">EN</button>
       </div>
-      <a href="https://www.kayroslab.com" class="text-sm text-slate-600 hover:text-sky-600 font-medium"><i class="fas fa-arrow-left mr-1"></i><span data-i18n="back">Retour</span></a>
+      <a href="https://www.kayroslab.com" class="nav-back"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span data-i18n="back">Retour</span></a>
     </div>
   </div>
 </nav>
 
-<section class="hero-bg text-white py-20 px-6 text-center">
-  <div class="max-w-3xl mx-auto">
-    <div data-i18n="hero_badge" class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold tracking-widest uppercase mb-6 border border-sky-500/20">Agents gouvernés · Démo publique</div>
-    <h1 data-i18n-html="hero_title" class="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">Innovation stratégique,<br><span class="text-sky-400">gouvernée par des agents</span></h1>
-    <p data-i18n-html="hero_description" class="text-slate-300 mb-8">Cycle en 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code>.</p>
-    <button onclick="scrollToSection('demo')" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-3 rounded-3xl"><i class="fas fa-play mr-2"></i><span data-i18n="launch_demo">Lancer la démo</span></button>
+<section class="comparison-hero">
+  <div class="comparison-hero__inner">
+    <div class="comparison-hero__intro">
+      <h1 data-i18n="hero_title">Une idée n’a pas besoin d’être validée. Elle a besoin d’être challengée.</h1>
+      <p class="comparison-hero__lede" data-i18n="hero_description">KayrosLab transforme une intuition en options comparables, puis en décisions traçables — sous votre supervision.</p>
+    </div>
+
+    <div class="journey-map" data-i18n-aria="journey_map_aria" aria-label="Comparaison entre un LLM classique et KayrosLab">
+      <article class="journey-panel">
+        <div class="journey-panel__head"><span class="journey-label" data-i18n="before_label">Avant</span><span data-i18n="classic_llm">Avec un LLM classique</span></div>
+        <div class="classic-flow">
+          <div class="classic-box"><strong data-i18n="initial_idea_label">Idée initiale, encore vague</strong><br><span data-i18n="classic_prompt_example">Comment mieux fidéliser nos clients B2B ?</span></div>
+          <div class="classic-arrow"><i class="fas fa-arrow-down" aria-hidden="true"></i></div>
+          <div class="classic-box"><strong data-i18n="single_response">Une réponse unique</strong><br><span data-i18n="classic_response_example">Une synthèse plausible, mais une seule direction à examiner.</span></div>
+        </div>
+        <p class="journey-foot" data-i18n="classic_limit">Un chemin. Aucun arbitrage explicite.</p>
+      </article>
+
+      <article class="journey-panel">
+        <div class="journey-panel__head"><span class="journey-label journey-label--accent" data-i18n="transformation_label">Transformation</span><span data-i18n="stress_test_label">KayrosLab met l’idée à l’épreuve</span></div>
+        <div class="transform-flow">
+          <div class="transform-step"><span class="transform-step__icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span><div><strong data-i18n="semantic_exploration">Exploration sémantique</strong><span data-i18n="semantic_exploration_desc">Élargir le champ avant de cadrer.</span></div></div>
+          <div class="hypothesis-branches" aria-label="Trois hypothèses"><span class="hypothesis-chip">H1</span><span class="hypothesis-chip">H2</span><span class="hypothesis-chip">H3</span></div>
+          <div class="transform-step"><span class="transform-step__icon"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><div><strong data-i18n="compare_hypotheses">Hypothèses comparées</strong><span data-i18n="compare_hypotheses_desc">Même grille, risques et tests visibles.</span></div></div>
+          <div class="human-gate"><i class="fas fa-user-check" aria-hidden="true"></i><span data-i18n-html="human_gate_copy"><strong>Décision humaine :</strong> orienter, combiner ou relancer.</span></div>
+        </div>
+      </article>
+
+      <article class="journey-panel">
+        <div class="journey-panel__head"><span class="journey-label" data-i18n="after_label">Après</span><span data-i18n="governed_agents">Avec des agents gouvernés</span></div>
+        <div class="governed-table">
+          <div class="governed-row"><span class="hypothesis-id">H1</span><div class="governed-score"><strong>78/100</strong><span data-i18n="hypothesis_one">Onboarding augmenté</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-circle-check" aria-hidden="true"></i><span data-i18n="human_review">Revue humaine</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-flask" aria-hidden="true"></i><span data-i18n="three_tests">3 tests</span></div><i class="fas fa-file-lines" aria-hidden="true"></i></div>
+          <div class="governed-row"><span class="hypothesis-id">H2</span><div class="governed-score"><strong>64/100</strong><span data-i18n="hypothesis_two">Succès client proactif</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-clock" aria-hidden="true"></i><span data-i18n="human_review">Revue humaine</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-flask" aria-hidden="true"></i><span data-i18n="four_tests">4 tests</span></div><i class="fas fa-file-lines" aria-hidden="true"></i></div>
+          <div class="governed-row"><span class="hypothesis-id">H3</span><div class="governed-score"><strong>51/100</strong><span data-i18n="hypothesis_three">Offre adaptative</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-clock" aria-hidden="true"></i><span data-i18n="human_review">Revue humaine</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-flask" aria-hidden="true"></i><span data-i18n="two_tests">2 tests</span></div><i class="fas fa-file-lines" aria-hidden="true"></i></div>
+        </div>
+        <div class="outcome-strip"><span><i class="fas fa-up-right-and-down-left-from-center" aria-hidden="true"></i><span data-i18n="broadened_field">Champ élargi</span></span><span><i class="fas fa-scale-balanced" aria-hidden="true"></i><span data-i18n="argued_choices">Choix argumentés</span></span><span><i class="fas fa-download" aria-hidden="true"></i><span data-i18n="exportable_journey">Parcours exportable</span></span></div>
+      </article>
+    </div>
+
+    <div class="hero-actions">
+      <button type="button" onclick="scrollToSection('demo')" class="btn-primary"><span data-i18n="launch_demo">Challenger mon idée</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+      <a href="#demo" class="btn-secondary"><span data-i18n="see_eight_steps">Voir les 8 étapes</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="change-ledger" aria-labelledby="changes-title">
+  <div class="change-ledger__inner">
+    <h2 id="changes-title" data-i18n="what_changes">Ce qui change vraiment</h2>
+    <div class="change-row"><div class="change-before" data-i18n="one_answer">Une réponse</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="many_hypotheses">Plusieurs hypothèses</div></div>
+    <div class="change-row"><div class="change-before" data-i18n="black_box">Une boîte noire</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="visible_arbitrations">Des arbitrages visibles</div></div>
+    <div class="change-row"><div class="change-before" data-i18n="a_chat">Un chat</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="decision_file">Un dossier de décision</div></div>
+    <p class="change-ledger__note" data-i18n="agents_propose">Les agents proposent. Vous orientez, tranchez et validez.</p>
   </div>
 </section>
 
 <section id="demo" class="py-16 px-6">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-6">
-      <div data-i18n="live_demo" class="inline-block px-4 py-1.5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-widest uppercase mb-3">Démo en direct</div>
-      <h2 data-i18n-html="demo_title" class="section-header font-display mb-2">Dirigez le travail des <span class="kayros-gradient">agents</span></h2>
-      <p data-i18n="demo_subtitle" class="text-slate-600 max-w-2xl">Idée → agents Mistral (proxy serveur) → annotations humaines → KI → rapport complet.</p>
+    <div class="demo-intro">
+      <div>
+        <div data-i18n="live_demo" class="demo-kicker mb-3">Démo en direct</div>
+        <h2 data-i18n-html="demo_title" class="section-header font-display mb-2">Mettez votre idée à l’épreuve avec les <span class="kayros-gradient">agents</span></h2>
+      </div>
+      <p data-i18n="demo_subtitle">Commencez par élargir l’idée, comparez plusieurs hypothèses, puis dirigez les huit agents jusqu’au rapport complet.</p>
     </div>
 
     <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-6 space-y-5">
@@ -211,8 +328,14 @@
 
 <div id="report-template"></div>
 
-<footer class="text-center py-10 border-t border-slate-200 text-slate-400 text-xs">
-  <span data-i18n="footer">KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com</span>
+<footer class="foot-stmt">
+  <div class="foot-stmt__inner">
+    <p class="foot-stmt__line" data-i18n="footer_statement">Les agents proposent. La décision reste humaine.</p>
+    <div class="foot-stmt__meta">
+      <span class="wordmark">KayrosLab</span>
+      <span data-i18n="footer">KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com</span>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -222,12 +345,26 @@ const PROXY_URL = 'https://api.kayroslab.com/v1/demo/chat';
 const translations = {
   fr: {
     language_selector:'Choisir la langue', page_title:'KayrosLab — Plateforme d’agents gouvernés',
-    back:'Retour', hero_badge:'Agents gouvernés · Démo publique',
-    hero_title:'Innovation stratégique,<br><span class="text-sky-400">gouvernée par des agents</span>',
-    hero_description:'Cycle en 8 étapes sous supervision humaine. Appels LLM via <code class="text-sky-300">api.kayroslab.com</code>.',
-    launch_demo:'Lancer la démo', live_demo:'Démo en direct',
-    demo_title:'Dirigez le travail des <span class="kayros-gradient">agents</span>',
-    demo_subtitle:'Idée → agents Mistral (proxy serveur) → annotations humaines → KI → rapport complet.',
+    back:'Retour', hero_badge:'Agents gouvernés · Démo publique', journey_map_aria:'Comparaison entre un LLM classique et KayrosLab',
+    hero_title:'Une idée n’a pas besoin d’être validée. Elle a besoin d’être challengée.',
+    hero_description:'KayrosLab transforme une intuition en options comparables, puis en décisions traçables — sous votre supervision.',
+    launch_demo:'Challenger mon idée', live_demo:'Démo en direct', see_eight_steps:'Voir les 8 étapes',
+    before_label:'Avant', after_label:'Après', classic_llm:'Avec un LLM classique', governed_agents:'Avec des agents gouvernés',
+    initial_idea_label:'Idée initiale, encore vague', classic_prompt_example:'Comment mieux fidéliser nos clients B2B ?',
+    single_response:'Une réponse unique', classic_response_example:'Une synthèse plausible, mais une seule direction à examiner.',
+    classic_limit:'Un chemin. Aucun arbitrage explicite.', transformation_label:'Transformation',
+    stress_test_label:'KayrosLab met l’idée à l’épreuve', semantic_exploration:'Exploration sémantique',
+    semantic_exploration_desc:'Élargir le champ avant de cadrer.', compare_hypotheses:'Hypothèses comparées',
+    compare_hypotheses_desc:'Même grille, risques et tests visibles.',
+    human_gate_copy:'<strong>Décision humaine :</strong> orienter, combiner ou relancer.',
+    hypothesis_one:'Onboarding augmenté', hypothesis_two:'Succès client proactif', hypothesis_three:'Offre adaptative',
+    human_review:'Revue humaine', three_tests:'3 tests', four_tests:'4 tests', two_tests:'2 tests',
+    broadened_field:'Champ élargi', argued_choices:'Choix argumentés', exportable_journey:'Parcours exportable',
+    what_changes:'Ce qui change vraiment', one_answer:'Une réponse', many_hypotheses:'Plusieurs hypothèses',
+    black_box:'Une boîte noire', visible_arbitrations:'Des arbitrages visibles', a_chat:'Un chat',
+    decision_file:'Un dossier de décision', agents_propose:'Les agents proposent. Vous orientez, tranchez et validez.',
+    demo_title:'Mettez votre idée à l’épreuve avec les <span class="kayros-gradient">agents</span>',
+    demo_subtitle:'Commencez par élargir l’idée, comparez plusieurs hypothèses, puis dirigez les huit agents jusqu’au rapport complet.',
     security_notice:'<strong>LLM sécurisé</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> sur api.kayroslab.com. Aucune clé dans le navigateur.',
     idea_label:'Votre idée stratégique',
     idea_placeholder:'Ex. Lancer une plateforme de maintenance prédictive IoT pour l’industrie européenne…',
@@ -285,7 +422,7 @@ const translations = {
     waiting_hint:'Saisissez une idée, puis démarrez le cycle.', your_intervention:'Votre intervention',
     intervention_placeholder:'Commentaires et corrections transmis aux agents suivants…',
     approve_continue:'Approuver et continuer', rerun:'Relancer', reject:'Rejeter',
-    skip:'Passer à la fin →', footer:'KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com',
+    skip:'Passer à la fin →', footer_statement:'Les agents proposent. La décision reste humaine.', footer:'KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com',
     language_locked:'La langue est verrouillée pour ce parcours afin de conserver des réponses et des exports cohérents. Réinitialisez le cycle pour changer de langue.',
     language_locked_short:'Réinitialisez le cycle pour changer de langue',
     start_required:'Entrez une idée stratégique.', stable:'Stable', score_initial:'Score initial',
@@ -337,12 +474,26 @@ const translations = {
   },
   en: {
     language_selector:'Choose language', page_title:'KayrosLab — Governed Agent Platform',
-    back:'Back', hero_badge:'Governed agents · Public demo',
-    hero_title:'Strategic innovation,<br><span class="text-sky-400">governed by agents</span>',
-    hero_description:'An 8-step cycle under human supervision. LLM calls via <code class="text-sky-300">api.kayroslab.com</code>.',
-    launch_demo:'Launch demo', live_demo:'Live demo',
-    demo_title:'Direct the work of the <span class="kayros-gradient">agents</span>',
-    demo_subtitle:'Idea → Mistral agents (server proxy) → human annotations → KI → complete report.',
+    back:'Back', hero_badge:'Governed agents · Public demo', journey_map_aria:'Comparison between a classic LLM and KayrosLab',
+    hero_title:'An idea does not need validation. It needs to be challenged.',
+    hero_description:'KayrosLab turns an intuition into comparable options, then traceable decisions — under your supervision.',
+    launch_demo:'Challenge my idea', live_demo:'Live demo', see_eight_steps:'See the 8 steps',
+    before_label:'Before', after_label:'After', classic_llm:'With a classic LLM', governed_agents:'With governed agents',
+    initial_idea_label:'Initial idea, still vague', classic_prompt_example:'How could we improve B2B customer retention?',
+    single_response:'One response', classic_response_example:'A plausible synthesis, but only one direction to examine.',
+    classic_limit:'One path. No explicit arbitration.', transformation_label:'Transformation',
+    stress_test_label:'KayrosLab stress-tests the idea', semantic_exploration:'Semantic exploration',
+    semantic_exploration_desc:'Widen the field before framing it.', compare_hypotheses:'Compared hypotheses',
+    compare_hypotheses_desc:'Same rubric, visible risks and tests.',
+    human_gate_copy:'<strong>Human decision:</strong> redirect, combine, or iterate.',
+    hypothesis_one:'Augmented onboarding', hypothesis_two:'Proactive customer success', hypothesis_three:'Adaptive offer',
+    human_review:'Human review', three_tests:'3 tests', four_tests:'4 tests', two_tests:'2 tests',
+    broadened_field:'Broader field', argued_choices:'Reasoned choices', exportable_journey:'Exportable journey',
+    what_changes:'What actually changes', one_answer:'One answer', many_hypotheses:'Multiple hypotheses',
+    black_box:'A black box', visible_arbitrations:'Visible trade-offs', a_chat:'A chat',
+    decision_file:'A decision record', agents_propose:'Agents propose. You redirect, decide, and approve.',
+    demo_title:'Stress-test your idea with the <span class="kayros-gradient">agents</span>',
+    demo_subtitle:'Start by widening the idea, compare several hypotheses, then direct the eight agents through to the complete report.',
     security_notice:'<strong>Secure LLM</strong> — <code class="font-mono text-xs">POST /v1/demo/chat</code> on api.kayroslab.com. No key is exposed in the browser.',
     idea_label:'Your strategic idea',
     idea_placeholder:'E.g. Launch an IoT predictive maintenance platform for European industry…',
@@ -400,7 +551,7 @@ const translations = {
     waiting_hint:'Enter an idea, then start the cycle.', your_intervention:'Your input',
     intervention_placeholder:'Comments and corrections passed to the next agents…',
     approve_continue:'Approve and continue', rerun:'Rerun', reject:'Reject',
-    skip:'Skip to end →', footer:'KayrosLab · LLM via api.kayroslab.com (server-side key) · contact@kayroslab.com',
+    skip:'Skip to end →', footer_statement:'Agents propose. The decision stays human.', footer:'KayrosLab · LLM via api.kayroslab.com (server-side key) · contact@kayroslab.com',
     language_locked:'The language is locked for this journey so responses and exports remain consistent. Reset the cycle to change language.',
     language_locked_short:'Reset the cycle to change language',
     start_required:'Enter a strategic idea.', stable:'Stable', score_initial:'Initial score',

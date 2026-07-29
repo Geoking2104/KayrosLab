@@ -1,0 +1,9 @@
+{
+  "date": "2026-07-29",
+  "framework": "vanilla HTML with Tailwind CDN",
+  "font_stack": "Space Grotesk + Inter + Fira Code",
+  "palette": "slate and cyan utilities with inline CSS colours",
+  "motion": "CSS transitions and IntersectionObserver; no motion library",
+  "spacing": "Tailwind spacing scale",
+  "preserve": ["slate/cyan brand", "single-page route", "live demo workflow", "FR/EN translations"]
+}
