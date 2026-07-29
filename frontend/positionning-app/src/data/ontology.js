@@ -104,7 +104,7 @@ export const RELATIONSHIPS = [
   { id: 'consumes',    name: 'consumes',    from: 'ia_ml',          to: 'data_layer',     cardinality: 'many-to-many', description: "L'IA consomme les données du data layer" },
   { id: 'exposes',     name: 'exposes',     from: 'api_surface',    to: 'stack',          cardinality: 'one-to-one',  description: "L'API surface expose la stack" },
   { id: 'impacts',     name: 'impacts',     from: 'scale_perf',     to: 'architecture',   cardinality: 'many-to-many', description: 'Les besoins de scale impactent l\'architecture' },
-  { id: 'governs',     name: 'governs',     from: 'security',       to: 'compliance',     cardinality: 'many-to-many', description: 'La sécurité gouverne la conformité' },
+  { id: 'governs',     name: 'governs',     from: 'security',       to: 'business_model', cardinality: 'many-to-many', description: 'La sécurité gouverne les options de modèle économique et de conformité' },
   { id: 'monetizes',   name: 'monetizes',   from: 'business_model', to: 'pricing',        cardinality: 'one-to-many', description: 'Le business model monétise via le pricing' },
   { id: 'distributes', name: 'distributes', from: 'go_to_market',   to: 'pricing',        cardinality: 'many-to-many', description: 'Le GTM distribue selon le pricing' },
   { id: 'targets',     name: 'targets',     from: 'go_to_market',   to: 'icp',            cardinality: 'many-to-one', description: 'Le GTM cible l\'ICP' },

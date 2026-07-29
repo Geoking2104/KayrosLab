@@ -70,10 +70,6 @@ export default function OnboardingTour({ onFinish }) {
     return () => clearInterval(check);
   }, []);
 
-  useEffect(() => {
-    setStep(s => Math.min(s, filtered.length - 1));
-  }, [filtered.length]);
-
   const filtered = useMemo(() => {
     return STEPS.filter((s) => {
       if (s.requiresData && !hasData) return false;
@@ -81,6 +77,10 @@ export default function OnboardingTour({ onFinish }) {
       return true;
     });
   }, [STEPS, hasData]);
+
+  useEffect(() => {
+    setStep(s => Math.min(s, filtered.length - 1));
+  }, [filtered.length]);
 
   const current = filtered[step];
   const isLast = step >= filtered.length - 1;

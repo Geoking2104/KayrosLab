@@ -77,22 +77,94 @@ function computeGaps(baseline, competitors, threshold = 5) {
   return gaps;
 }
 
+function averageScore(scores) {
+  const values = Object.values(scores);
+  return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+}
+
+function createDemoAnalysis() {
+  const idea = 'KayrosLab : outil de génération et management d’idées hybride IA + équipes pour entreprises';
+  const baseline = {
+    architecture: 84, stack: 81, data_layer: 86, security: 88, ia_ml: 92, scale_perf: 78, api_surface: 82,
+    business_model: 84, pricing: 72, go_to_market: 76, icp: 86, revenue_model: 78, customer_success: 81, unit_economics: 74,
+  };
+  const makeCompetitor = (name, url, scores, kpis, colorIndex) => ({
+    name,
+    url,
+    scores,
+    kpis,
+    avgScore: averageScore(scores),
+    color: COMPETITOR_COLORS[colorIndex % COMPETITOR_COLORS.length],
+  });
+  const competitors = [
+    makeCompetitor('Aha! Ideas', 'https://www.aha.io/software/idea-management-software', {
+      architecture: 76, stack: 70, data_layer: 72, security: 82, ia_ml: 46, scale_perf: 80, api_surface: 74,
+      business_model: 88, pricing: 76, go_to_market: 86, icp: 90, revenue_model: 84, customer_success: 86, unit_economics: 80,
+    }, {
+      web: { sources: 9, mentions: 42, freshness: '6 j' },
+      github: { stars: 1180, forks: 148, contributors: 31, commits90: 64, issues: 42, freshness: '3 j' },
+      gitlab: { stars: 86, forks: 11, contributors: 8, commits90: 12, issues: 7, freshness: '16 j' },
+    }, 0),
+    makeCompetitor('Klaxoon', 'https://klaxoon.com/klaxoon-difference/', {
+      architecture: 72, stack: 68, data_layer: 70, security: 76, ia_ml: 52, scale_perf: 74, api_surface: 62,
+      business_model: 82, pricing: 68, go_to_market: 88, icp: 84, revenue_model: 78, customer_success: 80, unit_economics: 70,
+    }, {
+      web: { sources: 8, mentions: 36, freshness: '4 j' },
+      github: { stars: 420, forks: 54, contributors: 14, commits90: 24, issues: 18, freshness: '9 j' },
+      gitlab: { stars: 63, forks: 7, contributors: 5, commits90: 9, issues: 4, freshness: '21 j' },
+    }, 1),
+    makeCompetitor('Accept Mission', 'https://www.acceptmission.com/idea-management-software/', {
+      architecture: 70, stack: 66, data_layer: 68, security: 74, ia_ml: 55, scale_perf: 70, api_surface: 64,
+      business_model: 80, pricing: 74, go_to_market: 78, icp: 82, revenue_model: 76, customer_success: 78, unit_economics: 72,
+    }, {
+      web: { sources: 7, mentions: 29, freshness: '8 j' },
+      github: { stars: 260, forks: 37, contributors: 10, commits90: 17, issues: 11, freshness: '14 j' },
+      gitlab: { stars: 41, forks: 5, contributors: 4, commits90: 6, issues: 3, freshness: '24 j' },
+    }, 2),
+    makeCompetitor('Miro AI', 'https://miro.com/', {
+      architecture: 82, stack: 78, data_layer: 80, security: 84, ia_ml: 76, scale_perf: 86, api_surface: 80,
+      business_model: 86, pricing: 78, go_to_market: 90, icp: 86, revenue_model: 86, customer_success: 82, unit_economics: 82,
+    }, {
+      web: { sources: 10, mentions: 58, freshness: '2 j' },
+      github: { stars: 2120, forks: 284, contributors: 47, commits90: 96, issues: 68, freshness: '1 j' },
+      gitlab: { stars: 132, forks: 19, contributors: 11, commits90: 18, issues: 10, freshness: '12 j' },
+    }, 3),
+  ];
+  return {
+    idea,
+    baseline,
+    competitors,
+    gaps: computeGaps(baseline, competitors, 5),
+    kayrosIndex: 82,
+  };
+}
+
+function shouldShowTour() {
+  try {
+    return new URLSearchParams(window.location.search).has('tour') && !isTourCompleted();
+  } catch {
+    return false;
+  }
+}
+
+const DEMO_ANALYSIS = createDemoAnalysis();
+
 function AppInner() {
   const { t, locale, setLocale, available } = useI18n();
   const toast = useToast();
-  const [idea, setIdea] = useState('');
-  const [competitors, setCompetitors] = useState([]);
-  const [gaps, setGaps] = useState([]);
-  const [baseline, setBaseline] = useState(null);
-  const [ki, setKi] = useState(null);
+  const [idea, setIdea] = useState(DEMO_ANALYSIS.idea);
+  const [competitors, setCompetitors] = useState(DEMO_ANALYSIS.competitors);
+  const [gaps, setGaps] = useState(DEMO_ANALYSIS.gaps);
+  const [baseline, setBaseline] = useState(DEMO_ANALYSIS.baseline);
+  const [ki, setKi] = useState(DEMO_ANALYSIS.kayrosIndex);
   const [loading, setLoading] = useState(false);
-  const [inspectedEntity, setInspectedEntity] = useState(null);
-  const [selectedComp, setSelectedComp] = useState(null);
+  const [inspectedEntity, setInspectedEntity] = useState(() => ENTITY_TYPES.find((entity) => entity.id === 'ia_ml') || ENTITY_TYPES[0]);
+  const [selectedComp, setSelectedComp] = useState(DEMO_ANALYSIS.competitors[0]);
   const [activeTab, setActiveTab] = useState('graph');
   const [campaignView, setCampaignView] = useState(null);
   const [compareIds, setCompareIds] = useState(null);
   const [settings, setSettings] = useState(() => loadSettings());
-  const [showTour, setShowTour] = useState(!isTourCompleted());
+  const [showTour, setShowTour] = useState(() => shouldShowTour());
 
   useEffect(() => { applyTheme(settings.theme); }, [settings.theme]);
   useEffect(() => { if (settings.locale && settings.locale !== locale) setLocale(settings.locale); }, [settings.locale, locale, setLocale]);
@@ -150,6 +222,46 @@ function AppInner() {
     ...competitors,
   ];
   const hasData = baseline || competitors.length > 0;
+  const activeEvidence = selectedComp?.kpis || competitors[0]?.kpis || null;
+  const evidenceLabels = locale === 'fr'
+    ? {
+        demo: 'Analyse de démonstration préchargée',
+        agents: 'Agents : Positionneur · Ontology Designer · Query Engine',
+        deliverable: 'Livrable : Ontologie + Graphe + Gap Analysis + Export OWL',
+        web: 'Scraping web',
+        github: 'GitHub KPIs',
+        gitlab: 'GitLab KPIs',
+        owl: 'OWL / RDF/XML',
+        sources: 'sources',
+        mentions: 'mentions',
+        freshness: 'fraîcheur',
+        stars: 'stars',
+        forks: 'forks',
+        contributors: 'contributeurs',
+        commits: 'commits 90j',
+        issues: 'issues',
+        ontology: '14 types · 13 relations orientées',
+        playground: 'Compatible Microsoft Ontology Playground',
+      }
+    : {
+        demo: 'Preloaded demonstration analysis',
+        agents: 'Agents: Positioner · Ontology Designer · Query Engine',
+        deliverable: 'Deliverable: Ontology + Graph + Gap Analysis + OWL Export',
+        web: 'Web scraping',
+        github: 'GitHub KPIs',
+        gitlab: 'GitLab KPIs',
+        owl: 'OWL / RDF/XML',
+        sources: 'sources',
+        mentions: 'mentions',
+        freshness: 'freshness',
+        stars: 'stars',
+        forks: 'forks',
+        contributors: 'contributors',
+        commits: '90d commits',
+        issues: 'issues',
+        ontology: '14 types · 13 oriented relationships',
+        playground: 'Microsoft Ontology Playground compliant',
+      };
 
   return (
     <div className="app">
@@ -214,6 +326,38 @@ function AppInner() {
                   ))}
                 </div>
               </div>
+
+              {activeEvidence && (
+                <section className="positioning-evidence" aria-label="Positioning analysis evidence">
+                  <div className="evidence-intro">
+                    <span className="evidence-demo">{evidenceLabels.demo}</span>
+                    <strong>{evidenceLabels.agents}</strong>
+                    <span>{evidenceLabels.deliverable}</span>
+                  </div>
+                  <div className="evidence-grid">
+                    <article className="evidence-card">
+                      <span className="evidence-card-title">🌐 {evidenceLabels.web}</span>
+                      <strong>{activeEvidence.web.sources} {evidenceLabels.sources}</strong>
+                      <span>{activeEvidence.web.mentions} {evidenceLabels.mentions} · {evidenceLabels.freshness} {activeEvidence.web.freshness}</span>
+                    </article>
+                    <article className="evidence-card">
+                      <span className="evidence-card-title">⭐ {evidenceLabels.github}</span>
+                      <strong>{activeEvidence.github.stars} {evidenceLabels.stars} · {activeEvidence.github.forks} {evidenceLabels.forks}</strong>
+                      <span>{activeEvidence.github.contributors} {evidenceLabels.contributors} · {activeEvidence.github.commits90} {evidenceLabels.commits} · {activeEvidence.github.issues} {evidenceLabels.issues}</span>
+                    </article>
+                    <article className="evidence-card">
+                      <span className="evidence-card-title">🦊 {evidenceLabels.gitlab}</span>
+                      <strong>{activeEvidence.gitlab.stars} {evidenceLabels.stars} · {activeEvidence.gitlab.forks} {evidenceLabels.forks}</strong>
+                      <span>{activeEvidence.gitlab.contributors} {evidenceLabels.contributors} · {activeEvidence.gitlab.commits90} {evidenceLabels.commits} · {evidenceLabels.freshness} {activeEvidence.gitlab.freshness}</span>
+                    </article>
+                    <article className="evidence-card">
+                      <span className="evidence-card-title">🏷️ {evidenceLabels.owl}</span>
+                      <strong>{evidenceLabels.ontology}</strong>
+                      <span>{evidenceLabels.playground}</span>
+                    </article>
+                  </div>
+                </section>
+              )}
 
               <div className="tabs">
                 <button className={`tab ${activeTab === 'graph' ? 'active' : ''}`} onClick={() => setActiveTab('graph')}>

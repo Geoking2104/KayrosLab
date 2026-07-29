@@ -74,7 +74,7 @@ export default function OntologyGraph({ selectedCompetitor, onNodeClick, onEdgeC
           },
         },
       ],
-      layout: { name: 'fcose', animate: true, animationDuration: 500, fit: true, padding: 40 },
+      layout: { name: 'cose', animate: true, animationDuration: 500, fit: true, padding: 40 },
       minZoom: 0.5,
       maxZoom: 2.5,
       wheelSensitivity: 0.3,
