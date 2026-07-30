@@ -41,10 +41,19 @@ export class BisociateurAgent extends BaseAgent {
     this.frameworks = opts.frameworks || ANALOGY_FRAMEWORKS;
   }
 
-  async execute(task, ctx) {
-    const result = await super.execute(task, ctx);
-    const collision = await this.runBisociation(result.output, ctx);
-    return { ...result, structured: { collision } };
+  /** Single LLM path: bisociation on goal+task (no double complete). */
+  async execute(task, ctx = {}) {
+    const brief = [ctx.goal, task].filter(Boolean).join('\n');
+    const collision = await this.runBisociation(brief || task, ctx);
+    const text = collision.output;
+    await this.addContribution(text);
+    return {
+      agent: this.name,
+      output: text,
+      model: this._resolveModel(ctx.model) || null,
+      structured: { collision },
+      degraded: collision.degraded || null,
+    };
   }
 
   async runBisociation(brief, ctx = {}) {
@@ -52,6 +61,7 @@ export class BisociateurAgent extends BaseAgent {
     const domain = { source: framework.name, mechanism: framework.mechanism };
 
     let collisionOutput;
+    let degraded = null;
     if (this.llm) {
       const messages = [
         { role: 'system', content: this.systemPrompt },
@@ -67,22 +77,24 @@ export class BisociateurAgent extends BaseAgent {
         { provider: ctx.provider, sovereignty: ctx.sovereignty },
       );
       collisionOutput = res.text;
+      degraded = res.degraded || null;
     } else {
       collisionOutput = `[Bisociateur] Using "${framework.name}" as the analogy framework:\n` +
         `Mechanism transferred: ${framework.mechanism}\n` +
-        `Applied to brief "${brief.substring(0, 50)}...": novel recombination identified.`;
+        `Applied to brief "${String(brief).substring(0, 50)}...": novel recombination identified.`;
     }
 
     return {
       framework: domain,
       output: collisionOutput,
-      noveltyScore: 65 + (brief.length % 30),
-      feasibilityScore: 40 + (brief.split(' ').length % 40),
+      noveltyScore: 65 + (String(brief).length % 30),
+      feasibilityScore: 40 + (String(brief).split(' ').length % 40),
+      degraded,
     };
   }
 
   _selectFramework(brief) {
-    const text = brief.toLowerCase();
+    const text = String(brief || '').toLowerCase();
     let best = 0, bestIdx = 0;
     for (let i = 0; i < this.frameworks.length; i++) {
       const fw = this.frameworks[i];
