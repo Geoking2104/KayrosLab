@@ -28,7 +28,12 @@ export class SynthesizerAgent extends BaseAgent {
         { role: 'user', content: task },
       ];
       const res = await this.llm.complete(
-        { role: 'Synthesizer', messages, temperature: 0.2 },
+        {
+          role: 'Synthesizer',
+          messages,
+          temperature: 0.2,
+          model: this._resolveModel(ctx.model),
+        },
         { provider: ctx.provider, sovereignty: ctx.sovereignty },
       );
       text = res.text;
@@ -37,7 +42,7 @@ export class SynthesizerAgent extends BaseAgent {
     }
 
     await this.addContribution(text);
-    return { agent: 'Synthesizer', output: text, structured: this._extractDecision(text) };
+    return { agent: 'Synthesizer', output: text, structured: this._extractDecision(text), model: this._resolveModel(ctx.model) || null };
   }
 
   _fallbackSynthesis(agentOutputs) {

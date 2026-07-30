@@ -1,11 +1,11 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
-// Ref. specs techniques §3 (EF-15/16) + §6 (EF-17/18). Emet des ReActTrace en flux.
+// Quant-aware : expose quantRec / preferredModel dans les events.
+// autoDistill optionnel en fin de cycle.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
 import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 
-/** @typedef {'Planner'|'Critic'|'DevilsAdvocate'|'RedTeam'|'Bisociateur'|'Synthesizer'} AgentType */
 const AGENTS = AGENT_TYPES;
 
 const PLANNER_SYSTEM =
@@ -15,7 +15,6 @@ const PLANNER_SYSTEM =
   'Reponds UNIQUEMENT par un tableau JSON, sans texte autour : ' +
   '[{"agent":"Planner","description":"..."},{"agent":"RedTeam","description":"..."},{"agent":"Synthesizer","description":"..."}]';
 
-/** Extrait le premier tableau JSON equilibre. Renvoie la sous-chaine (tronquee si non fermee) ou null. */
 export function extractFirstArray(s) {
   const start = s.indexOf('[');
   if (start < 0) return null;
@@ -32,10 +31,9 @@ export function extractFirstArray(s) {
     else if (c === '[') depth++;
     else if (c === ']') { depth--; if (depth === 0) return s.slice(start, i + 1); }
   }
-  return s.slice(start); // tronque : pas de ] final -> tentative de recuperation
+  return s.slice(start);
 }
 
-/** Recupere les objets {...} complets d'un tableau JSON eventuellement tronque. */
 export function salvageObjects(raw) {
   const objs = [];
   let depth = 0, inStr = false, esc = false, startObj = -1;
@@ -49,28 +47,21 @@ export function salvageObjects(raw) {
     }
     if (c === '"') inStr = true;
     else if (c === '{') { if (depth === 0) startObj = i; depth++; }
-    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* objet invalide ignore */ } startObj = -1; } }
+    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* ignore */ } startObj = -1; } }
   }
   return objs;
 }
 
-/**
- * Extrait et valide un tableau d'etapes depuis la reponse LLM. Renvoie null si invalide.
- * Robuste aux modeles "thinking" (<think>...</think>), aux fences markdown et au JSON tronque.
- */
 export function parsePlanSteps(text) {
   try {
     let s = String(text ?? '');
-    // 1) retirer les blocs de raisonnement (modeles thinking), fermes ou non.
     s = s.replace(/<think>[\s\S]*?<\/think>/gi, ' ').replace(/<think>[\s\S]*$/i, ' ');
-    // 2) retirer les fences markdown eventuelles.
     s = s.replace(/```(?:json)?/gi, ' ');
-    // 3) extraire le premier tableau JSON equilibre.
     const raw = extractFirstArray(s);
     if (!raw) return null;
     let arr;
     try { arr = JSON.parse(raw); }
-    catch { arr = salvageObjects(raw); } // JSON tronque -> objets complets seulement
+    catch { arr = salvageObjects(raw); }
     if (!Array.isArray(arr) || !arr.length) return null;
     const allowed = new Set(AGENTS);
     const steps = arr
@@ -81,16 +72,54 @@ export function parsePlanSteps(text) {
   } catch { return null; }
 }
 
+function agentQuantInfo(agent) {
+  if (!agent) return null;
+  const rec = agent.quantRec || null;
+  return {
+    preferredModel: agent.preferredModel || null,
+    quant: rec?.quant || null,
+    tier: rec?.tier || null,
+    quality: rec?.meta?.quality ?? null,
+    label: rec?.meta?.label || null,
+  };
+}
+
 export class Orchestrator {
-  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3, plannerModel = null, agents = null } = {}) {
+  constructor({
+    llm, tools = null, memory = null, layered = null, governance = null,
+    classifier = null, recallK = 3, plannerModel = null, agents = null,
+    quantGuidance = null,
+  } = {}) {
     if (!llm) throw new Error('Orchestrator: llm (KayrosLLM) requis');
-    this.llm = llm; this.tools = tools; this.memory = memory; this.governance = governance; this.classifier = classifier; this.recallK = recallK;
+    this.llm = llm;
+    this.tools = tools;
+    this.memory = memory;
+    this.layered = layered;
+    this.governance = governance;
+    this.classifier = classifier;
+    this.recallK = recallK;
     this.plannerModel = plannerModel;
-    // Specialized agents (P2) — null = fallback to generic LLM calls (backward compat)
     this.agents = agents || createAllAgents({ llm, tools, memory });
+    this.quantGuidance = quantGuidance || null;
   }
 
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
+  _hasLayered() { return !!this.layered && typeof this.layered.recall === 'function'; }
+
+  _quantSnapshot() {
+    if (!this.quantGuidance && !this.agents) return null;
+    const byAgent = {};
+    for (const name of AGENTS) {
+      const info = agentQuantInfo(this.agents?.[name]);
+      if (info && (info.preferredModel || info.quant)) byAgent[name] = info;
+    }
+    return {
+      global: this.quantGuidance?.global || null,
+      resolvedDefaultModel: this.quantGuidance?.resolvedDefaultModel || null,
+      availableQuants: this.quantGuidance?.availableQuants || null,
+      byAgent,
+    };
+  }
 
   _fallbackSteps() {
     return [
@@ -101,50 +130,77 @@ export class Orchestrator {
     ];
   }
 
-  /**
-   * Phase PLAN (EF-15) : le Planner LLM genere le plan ; repli deterministe si echec/non-JSON.
-   * @param {string} goal
-   * @param {{ideaId?:string, provider?:string, sovereignty?:'cloud'|'local', model?:string, llmPlan?:boolean}} [ctx]
-   */
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
-    if (ctx.llmPlan === false) return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps() };
+    if (ctx.llmPlan === false) {
+      return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
+    }
     try {
       const opts = {};
       if (ctx.provider) opts.provider = ctx.provider;
       if (ctx.sovereignty) opts.sovereignty = ctx.sovereignty;
+
+      const plannerAgent = this.agents?.Planner;
+      const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
+
       const res = await this.llm.complete(
-        { role: 'Planner', model: ctx.model ?? this.plannerModel, temperature: 0.2, think: false, messages: [
-          { role: 'system', content: PLANNER_SYSTEM },
-          { role: 'user', content: `Objectif : ${goal}` },
-        ] },
-        opts
+        {
+          role: 'Planner', model, temperature: 0.2, think: false,
+          messages: [
+            { role: 'system', content: PLANNER_SYSTEM },
+            { role: 'user', content: `Objectif : ${goal}` },
+          ],
+        },
+        opts,
       );
       const steps = parsePlanSteps(res.text);
-      if (steps) return { ideaId, goal, generatedBy: 'llm', steps };
-    } catch (e) { /* repli silencieux */ }
-    return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps() };
+      if (steps) {
+        return {
+          ideaId, goal, generatedBy: 'llm', steps,
+          quant: { modelUsed: model || null, agent: agentQuantInfo(plannerAgent), snapshot: this._quantSnapshot() },
+        };
+      }
+    } catch { /* soft */ }
+    return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
   }
 
-  /**
-   * Phase SOLVE (ReAct) : rappel memoire -> etapes -> gouvernance de sortie.
-   * @param {{ideaId:string, goal:string, steps:any[]}} plan
-   * @param {{governance?:'auto'|'supervise'|'strict', sovereignty?:'cloud'|'local', provider?:string, maxSteps?:number, recall?:boolean, remember?:boolean}} [opts]
-   */
   async *run(plan, opts = {}) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
     const doRemember = opts.remember !== false;
+    const doOffload = opts.offload !== false;
+    const doAutoDistill = opts.autoDistill === true;
 
-    // 1) RAPPEL memoire (EF-18).
+    yield {
+      type: 'start',
+      ideaId: plan.ideaId,
+      goal: plan.goal,
+      quant: this._quantSnapshot(),
+      ts: new Date().toISOString(),
+    };
+
     let contextBlock = '';
-    if (doRecall && this._hasVectorMemory()) {
-      let recalled = [];
-      try { recalled = await this.memory.recall(plan.ideaId, plan.goal, this.recallK); } catch { recalled = []; }
-      if (recalled.length) {
-        contextBlock = 'Contexte pertinent (memoire de l\'idee) :\n' + recalled.map((r) => `- ${r.text}`).join('\n');
-        yield { type: 'recall', ideaId: plan.ideaId, items: recalled.map((r) => ({ id: r.id, score: r.score, text: r.text })), ts: new Date().toISOString() };
+    if (doRecall) {
+      if (this._hasLayered()) {
+        try {
+          contextBlock = await this.layered.buildContextBlock(plan.goal, { ideaId: plan.ideaId, k: this.recallK });
+          if (contextBlock) {
+            const snap = this.layered.snapshot(plan.ideaId);
+            yield {
+              type: 'recall', ideaId: plan.ideaId, source: 'layered',
+              stats: snap.stats, preview: contextBlock.slice(0, 400),
+              ts: new Date().toISOString(),
+            };
+          }
+        } catch { /* soft */ }
+      } else if (this._hasVectorMemory()) {
+        let recalled = [];
+        try { recalled = await this.memory.recall(plan.ideaId, plan.goal, this.recallK); } catch { recalled = []; }
+        if (recalled.length) {
+          contextBlock = 'Contexte pertinent (memoire de l\'idee) :\n' + recalled.map((r) => `- ${r.text}`).join('\n');
+          yield { type: 'recall', ideaId: plan.ideaId, source: 'vector', items: recalled.map((r) => ({ id: r.id, score: r.score, text: r.text })), ts: new Date().toISOString() };
+        }
       }
     }
 
@@ -153,52 +209,109 @@ export class Orchestrator {
     for (const s of plan.steps) {
       if (count++ >= maxSteps) { yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() }; break; }
 
-      // Use specialized agent if available, else fallback to generic LLM call
       const specialist = this.agents?.[s.agent];
       let observation, actionType = 'llm', actionName = 'complete', usage = { tokensIn: 0, tokensOut: 0 };
+      let modelUsed = null;
 
       if (specialist && specialist.execute) {
         const res = await specialist.execute(s.description, {
           goal: plan.goal, context: contextBlock,
           provider: opts.provider, sovereignty: opts.sovereignty,
+          model: opts.model,
         });
         observation = res.output;
         actionType = 'specialized_agent';
         actionName = s.agent;
+        modelUsed = res.model || specialist.preferredModel || null;
         agentOutputs.push(res);
       } else {
         const messages = [];
         if (contextBlock) messages.push({ role: 'system', content: contextBlock });
         messages.push({ role: 'user', content: `${plan.goal}\n\nTache : ${s.description}` });
-
-        const llmRes = await this.llm.complete({ role: s.agent, messages }, opts);
+        const model = opts.model || specialist?.preferredModel || undefined;
+        const llmRes = await this.llm.complete({ role: s.agent, messages, model }, opts);
         observation = llmRes.text;
         usage = llmRes.usage;
-        if (s.tool && this.tools) { observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId }); actionType = 'tool'; actionName = s.tool; }
+        modelUsed = model || null;
+        if (s.tool && this.tools) {
+          observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
+          actionType = 'tool'; actionName = s.tool;
+        }
       }
 
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
+
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
       if (doRemember && this._hasVectorMemory()) {
-        try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* best-effort */ }
+        try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* soft */ }
+      }
+
+      if (this._hasLayered()) {
+        try {
+          this.layered.rememberL0({
+            ideaId: plan.ideaId, step: s.id, agentRole: s.agent,
+            kind: 'agent_scratch', content: obsText, summary: obsText.slice(0, 200),
+          });
+          if (obsText.length < 400 && obsText.length > 30) {
+            await this.layered.addAtomicFact({
+              ideaId: plan.ideaId, content: obsText.slice(0, 300), type: 'observation',
+              actors: [s.agent], confidence: 0.55,
+              sourceRefs: [{ type: 'agent', id: s.agent }],
+            });
+          }
+        } catch { /* soft */ }
       }
 
       yield {
         type: 'trace', stepId: s.id, agent: s.agent,
         thought: `[${s.agent}] ${s.description}`,
         action: { type: actionType, name: actionName },
-        observation,
-        usedContext: !!contextBlock,
+        observation, usedContext: !!contextBlock,
         tokens: { in: usage.tokensIn, out: usage.tokensOut },
+        quant: { modelUsed, agent: agentQuantInfo(specialist) },
         ts: new Date().toISOString(),
       };
     }
 
-    // Synthesize if Synthesizer agent is available and there were agent outputs
+    if (doOffload && this._hasLayered()) {
+      try {
+        const refs = await this.layered.offload(plan.ideaId);
+        if (refs.length) {
+          yield { type: 'offload', ideaId: plan.ideaId, count: refs.length, refs: refs.slice(0, 5), ts: new Date().toISOString() };
+        }
+      } catch { /* soft */ }
+    }
+
+    // Optional L1 → L2 auto distillation at end of cycle
+    if (doAutoDistill && this._hasLayered() && typeof this.layered.autoDistillL2 === 'function') {
+      try {
+        const created = await this.layered.autoDistillL2(plan.ideaId, {
+          minFacts: opts.distillMinFacts ?? 3,
+          llm: opts.distillLlm || null,
+          distillFn: opts.distillFn || null,
+          force: !!opts.distillForce,
+        });
+        if (created.length) {
+          yield {
+            type: 'distill',
+            ideaId: plan.ideaId,
+            count: created.length,
+            titles: created.map((s) => s.title),
+            ts: new Date().toISOString(),
+          };
+        }
+      } catch { /* soft */ }
+    }
+
     const synthAgent = this.agents?.Synthesizer;
     if (synthAgent && synthAgent.synthesize && agentOutputs.length > 0) {
       const synthesis = await synthAgent.synthesize(agentOutputs, opts);
-      yield { type: 'synthesis', agent: 'Synthesizer', output: synthesis.output, decision: synthesis.structured, ts: new Date().toISOString() };
+      yield {
+        type: 'synthesis', agent: 'Synthesizer',
+        output: synthesis.output, decision: synthesis.structured,
+        quant: { modelUsed: synthesis.model || synthAgent.preferredModel || null, agent: agentQuantInfo(synthAgent) },
+        ts: new Date().toISOString(),
+      };
     }
 
     const answer = agentOutputs.length > 0
@@ -213,19 +326,12 @@ export class Orchestrator {
       const res = await promise;
       if (res.decision === 'reject') { yield { type: 'final', status: 'blocked_veto', message: `Bloque (veto) : ${res.reason}`, ts: new Date().toISOString() }; return; }
       if (res.decision === 'revise') { yield { type: 'final', status: 'revise', message: res.reason, ts: new Date().toISOString() }; return; }
-      yield { type: 'final', status: 'validated_human', answer, ts: new Date().toISOString() };
+      yield { type: 'final', status: 'validated_human', answer, quant: this._quantSnapshot(), ts: new Date().toISOString() };
       return;
     }
-    yield { type: 'final', status: 'auto', answer, ts: new Date().toISOString() };
+    yield { type: 'final', status: 'auto', answer, quant: this._quantSnapshot(), ts: new Date().toISOString() };
   }
 
-  /**
-   * Phase PROJETER (EF-39 a EF-45) : transforme une decision en trajectoire pilotee.
-   * Deterministe pour les chiffres (outils simulate_trajectory / estimate_resources) ;
-   * branche selon la decision Go / No-Go / Revision.
-   * @param {{status?:'Go'|'No-Go'|'Revision'|'Révision', milestones?:any[], scenarios?:any[], variables?:any[], costHypotheses?:object, raci?:any[], kpis?:any[], risques?:any[], gatesFuturs?:any[], apprentissages?:any[], reactivation?:any, signaux?:any[], motif?:string}} decision
-   * @param {{ideaId?:string, iterations?:number, seed?:number}} [ctx]
-   */
   async project(decision = {}, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     const status = decision.status ?? 'Go';
@@ -245,7 +351,6 @@ export class Orchestrator {
       return { ...base, status: 'Révision', note: decision.motif ?? 'Révision demandée', renvoi: 'Éprouver' };
     }
 
-    // Go : roadmap + ressources/budget + projections probabilistes (chiffres deterministes).
     const milestones = decision.milestones ?? [];
     let ressources = null, projections = null;
     if (hasTool('estimate_resources')) {
@@ -255,34 +360,30 @@ export class Orchestrator {
       try { projections = await this.tools.call('simulate_trajectory', { scenarios: decision.scenarios, variables: decision.variables ?? [], iterations: ctx.iterations, seed: ctx.seed }, { ideaId }); } catch { projections = null; }
     }
     const roadmap = {
-      jalons: milestones,
-      raci: decision.raci ?? [],
-      ressources,
-      kpis: decision.kpis ?? [],
-      risques: decision.risques ?? [],
-      gatesFuturs: decision.gatesFuturs ?? [],
+      jalons: milestones, raci: decision.raci ?? [], ressources,
+      kpis: decision.kpis ?? [], risques: decision.risques ?? [], gatesFuturs: decision.gatesFuturs ?? [],
     };
     this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
     return { ...base, status: 'Go', roadmap, projections };
   }
 
-  /**
-   * Boucle Projeter -> Ecouter (EF-43) : evalue les KPIs, re-injecte les alertes comme
-   * signaux dans le corpus d'Ecouter (memoire), et propose un re-arbitrage si seuil franchi.
-   * Un tick unique (a appeler depuis un ordonnanceur : MonitoringLoop, cron, ou tache planifiee).
-   * @param {{kpis?:any[], readings?:any[]}} input
-   * @param {{ideaId?:string}} [ctx]
-   * @returns {Promise<{alerts:any[], signals:any[], reArbitrage:object|null}>}
-   */
   async monitorProjection({ kpis = [], readings = [] } = {}, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     const { alerts } = evaluateKpis(kpis, readings);
     const signals = alertsToSignals(alerts, { ideaId });
-    // Re-injection dans le corpus d'Ecouter.
     if (this._hasVectorMemory()) {
-      for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* best-effort */ } }
+      for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* soft */ } }
     } else {
       for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
+    }
+    if (this._hasLayered()) {
+      for (const s of signals) {
+        try {
+          await this.layered.addAtomicFact({
+            ideaId, content: s.contenu, type: 'metric', actors: ['monitor'], confidence: 0.8, tags: ['kpi-alert'],
+          });
+        } catch { /* soft */ }
+      }
     }
     const reArbitrage = alerts.length
       ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId), ts: new Date().toISOString() }

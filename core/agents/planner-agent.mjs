@@ -28,7 +28,7 @@ export class PlannerAgent extends BaseAgent {
       let text;
       if (this.llm) {
         const res = await this.llm.complete(
-          { role: 'Planner', messages, temperature: 0.2, model },
+          { role: 'Planner', messages, temperature: 0.2, model: this._resolveModel(model) },
           { provider, sovereignty },
         );
         text = res.text;

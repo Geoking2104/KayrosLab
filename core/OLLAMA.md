@@ -1,74 +1,73 @@
 # Brancher le cœur KayrosLab sur Ollama (LLM local souverain)
 
-Le cœur (`core/`) sait déjà parler à un vrai Ollama via `OllamaProvider` / `createEngine({ sovereignty: 'local' })`.
-Ce guide couvre l'usage **local** (aucune donnée ne sort de la machine).
+Le cœur (`core/`) parle à Ollama via `OllamaProvider` / `createEngine({ sovereignty: 'local' })`.
+Aucune donnée ne sort de la machine en mode local.
 
 ## 1. Prérequis
 
-Ollama est installé et lancé (vérifié : `http://localhost:11434` répond).
-Il faut **installer au moins un modèle** :
-
 ```bash
-ollama pull llama3.2        # ~2 Go, rapide (recommandé pour démarrer)
-# alternatives :
-# ollama pull llama3.1      # 8B, plus lent, meilleure qualité
-# ollama pull qwen2.5:7b    # bon raisonnement
-```
-
-Vérifier :
-
-```bash
-ollama list                 # doit afficher le modèle
+ollama pull llama3.2
+# ou avec quant explicite si dispo dans la lib Ollama / GGUF importé :
+# ollama pull llama3.1:8b-instruct-q4_K_M
+ollama list
 curl http://localhost:11434/api/tags
 ```
 
-## 2. Démo en ligne de commande (Node)
+## 2. Quantization-aware engine
 
-Depuis la racine du dépôt (Node 20+) :
+```js
+import { createEngine } from './index.mjs';
+
+const eng = createEngine({
+  sovereignty: 'local',
+  model: 'llama3.1:8b-instruct',
+  quant: 'q4_K_M',                    // défaut recommandé
+  roleQuant: {
+    Planner: 'q5_K_M',
+    Critic: 'q5_K_M',
+    Synthesizer: 'q5_K_M',
+  },
+  syncAvailableQuants: true,          // adapte aux tags réellement listés
+});
+
+// eng.quantGuidance.global / .byRole / .resolvedDefaultModel
+// eng.agents.Planner.preferredModel  → tag résolu
+await eng.syncAvailableQuants;        // promesse de sync best-effort
+```
+
+### Recommandations 2026
+
+| Situation | Quant |
+|---|---|
+| Défaut / chat | **Q4_K_M** |
+| Raisonnement / code / agents critiques | **Q5_K_M** (ou Q6_K) |
+| Qualité max, VRAM OK | Q8_0 |
+| VRAM très contrainte | Q4_K_S / IQ4_XS |
+
+Les agents à fort enjeu (Planner, Critic, Synthesizer, RedTeam) sont en tier **high** → préférence Q5+.
+
+## 3. Démo CLI
 
 ```bash
 node core/ollama-demo.mjs llama3.2
+node core/planner-ollama-demo.mjs llama3.2 "Objectif test"
 ```
 
-Le script fait de **vrais appels LLM** (un par étape de l'orchestrateur), puis passe par un
-**gate de gouvernance** (mode strict) auto-validé pour la démo. Node peut joindre `localhost:11434` sans souci.
+## 4. Navigateur
 
-## 3. Usage depuis le navigateur (app `kayroslab-complete-with-ai-agents.html`)
+Mixed content + CORS : servir l'app en local et éventuellement :
 
-Deux obstacles quand la page est servie depuis `https://…githack.com` :
-
-1. **Mixed content** : une page `https://` ne peut pas appeler `http://localhost:11434`.
-2. **CORS** : Ollama n'autorise pas toutes les origines par défaut.
-
-Solutions (palier P1, local) :
-
-- **Servir l'app en local** (même origine que possible) :
-  ```bash
-  # depuis le dossier du dépôt
-  python -m http.server 8080
-  # puis ouvrir http://localhost:8080/kayroslab-complete-with-ai-agents.html
-  ```
-- **Autoriser l'origine côté Ollama** (CORS) en lançant Ollama avec :
-  ```bash
-  # Windows (PowerShell) :  $env:OLLAMA_ORIGINS="http://localhost:8080"; ollama serve
-  # macOS/Linux :           OLLAMA_ORIGINS="http://localhost:8080" ollama serve
-  ```
-  (ou `OLLAMA_ORIGINS=*` en développement uniquement — jamais en production).
-
-Dans le code de l'app :
-
-```js
-import { createEngine } from './core/index.mjs';
-const eng = createEngine({ sovereignty: 'local', model: 'llama3.2' });
-// eng.orchestrator.run(plan, { governance: 'supervise', sovereignty: 'local' })
+```bash
+OLLAMA_ORIGINS="http://localhost:8080" ollama serve
 ```
 
-## 4. Production (palier P2)
+## 5. Events quant
 
-En production, **ne pas** appeler Ollama/Claude directement depuis le client : passer par le
-**backend proxy Fastify** (les clés et l'accès LLM restent côté serveur, cf. `SPECIFICATIONS_TECHNIQUES.md` §10).
+`orchestrator.run` émet `quant` sur `start` / `trace` / `synthesis` / `final`.
+Schémas : `core/quant-schema.mjs`.
 
 ## Rappel
 
-- `sovereignty: 'local'` force le routage vers Ollama (`RoutingPolicy`).
-- En cas d'échec Ollama, le moteur bascule sur l'adaptateur `mock` (fallback tracé).
+- `sovereignty: 'local'` force Ollama.
+- Fallback `mock` si Ollama échoue (circuit breaker).
+- `autoDistill: true` sur `run()` déclenche la distillation L1→L2 en fin de cycle.

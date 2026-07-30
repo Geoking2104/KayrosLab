@@ -16,7 +16,22 @@ export const SynthesizerAgent = _SynthesizerAgent;
 
 export const AGENT_TYPES = ['Planner', 'Critic', 'DevilsAdvocate', 'RedTeam', 'Bisociateur', 'Synthesizer'];
 
-export function createAgent(name, { llm, tools, memory } = {}) {
+/** Map agent constructor names → quantGuidance role keys when they differ. */
+const ROLE_ALIAS = {
+  DevilsAdvocate: "Devil's Advocate",
+  Bisociateur: 'Bisociator',
+};
+
+/**
+ * @param {string} name
+ * @param {Object} [opts]
+ * @param {Object} [opts.llm]
+ * @param {Object} [opts.tools]
+ * @param {Object} [opts.memory]
+ * @param {Object} [opts.quantGuidance]  // from recommendForEngine / createEngine
+ * @param {string} [opts.baseModel]      // base model tag before quant suffix
+ */
+export function createAgent(name, { llm, tools, memory, quantGuidance = null, baseModel = null } = {}) {
   const factories = {
     Planner: (o) => new _PlannerAgent(o),
     Critic: (o) => new _CriticAgent(o),
@@ -27,13 +42,30 @@ export function createAgent(name, { llm, tools, memory } = {}) {
   };
   const factory = factories[name];
   if (!factory) throw new Error(`Unknown agent type: ${name}`);
-  return factory({ llm, tools, memory });
+
+  let preferredModel = null;
+  let quantRec = null;
+  if (quantGuidance) {
+    const roleKey = ROLE_ALIAS[name] || name;
+    quantRec = quantGuidance.byRole?.[roleKey] || quantGuidance.byRole?.[name] || quantGuidance.global || null;
+    if (typeof quantGuidance.resolveForRole === 'function' && baseModel) {
+      preferredModel = quantGuidance.resolveForRole(roleKey, baseModel)
+        || quantGuidance.resolveForRole(name, baseModel);
+    } else if (quantRec?.quant && baseModel) {
+      // Fallback without resolveForRole
+      preferredModel = baseModel;
+    } else if (quantGuidance.resolvedDefaultModel) {
+      preferredModel = quantGuidance.resolvedDefaultModel;
+    }
+  }
+
+  return factory({ llm, tools, memory, preferredModel, quantRec });
 }
 
-export function createAllAgents({ llm, tools, memory } = {}) {
+export function createAllAgents({ llm, tools, memory, quantGuidance = null, baseModel = null } = {}) {
   const map = {};
   for (const name of AGENT_TYPES) {
-    map[name] = createAgent(name, { llm, tools, memory });
+    map[name] = createAgent(name, { llm, tools, memory, quantGuidance, baseModel });
   }
   return map;
 }
