@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useI18n } from '../i18n/I18nContext.jsx';
+import { getApiBase } from '../collectors/scanner.js';
 
 const STAGES = ['recueillir', 'ecouter', 'cartographier', 'construire', 'eprouver', 'arbitrer', 'projeter', 'realiser'];
 
-const DASHBOARD_ENDPOINT = '/v1/reporting/dashboard';
-const LEADERBOARD_ENDPOINT = '/v1/reporting/leaderboard';
+const API_BASE = getApiBase();
+const DASHBOARD_ENDPOINT = `${API_BASE}/v1/reporting/dashboard`;
+const LEADERBOARD_ENDPOINT = `${API_BASE}/v1/reporting/leaderboard`;
 
 const STAGE_LABELS = {
   recueillir: 'Collect', ecouter: 'Listen', cartographier: 'Map',
@@ -18,62 +20,13 @@ const STAGE_COLORS = [
 
 function r2(x) { return x === null || x === undefined ? '—' : Math.round(x * 100) / 100; }
 
-function getMockDashboard() {
-  return {
-    dashboard: {
-      total: 12, actives: 8, abandonnees: 2, tauxAbandon: 0.17, kiMoyen: 64, idesNotees: 10,
-      parEtape: { recueillir: 3, ecouter: 2, cartographier: 2, construire: 2, eprouver: 1, arbitrer: 1, projeter: 1, realiser: 0 },
-      parStatut: { nouveau: 2, en_revue: 3, discussion: 2, en_developpement: 3, termine: 2, non_poursuivi: 2, consideration_future: 1, en_pause: 0 },
-      portefeuilleFinancier: { idesAvecImpact: 5, investi: 45000, beneficie: 89000, net: 44000, roiAgrege: 0.98 },
-    },
-    funnel: {
-      etapes: [
-        { stage: 'recueillir', atteintes: 12, presentes: 3, abandons: 0, conversion: 0.75 },
-        { stage: 'ecouter', atteintes: 9, presentes: 2, abandons: 1, conversion: 0.78 },
-        { stage: 'cartographier', atteintes: 7, presentes: 2, abandons: 1, conversion: 0.86 },
-        { stage: 'construire', atteintes: 5, presentes: 2, abandons: 0, conversion: 0.6 },
-        { stage: 'eprouver', atteintes: 3, presentes: 1, abandons: 0, conversion: 0.67 },
-        { stage: 'arbitrer', atteintes: 2, presentes: 1, abandons: 0, conversion: 0.5 },
-        { stage: 'projeter', atteintes: 1, presentes: 1, abandons: 0, conversion: null },
-        { stage: 'realiser', atteintes: 0, presentes: 0, abandons: 0, conversion: null },
-      ],
-      total: 12,
-    },
-    tempsParEtape: [
-      { stage: 'recueillir', moyenneJours: 4.5, sejoursTermines: 9, enCours: 3 },
-      { stage: 'ecouter', moyenneJours: 7.2, sejoursTermines: 7, enCours: 2 },
-      { stage: 'cartographier', moyenneJours: 5.1, sejoursTermines: 5, enCours: 2 },
-      { stage: 'construire', moyenneJours: 12.3, sejoursTermines: 3, enCours: 2 },
-      { stage: 'eprouver', moyenneJours: 8.0, sejoursTermines: 2, enCours: 1 },
-      { stage: 'arbitrer', moyenneJours: 3.5, sejoursTermines: 1, enCours: 1 },
-      { stage: 'projeter', moyenneJours: 6.0, sejoursTermines: 0, enCours: 1 },
-      { stage: 'realiser', moyenneJours: null, sejoursTermines: 0, enCours: 0 },
-    ],
-  };
-}
-
-function getMockLeaderboard() {
-  return {
-    leaderboard: {
-      items: [
-        { id: 'i1', titre: 'AI-powered recruitment screening', ki: 82, etape: 'realiser', score: 82 },
-        { id: 'i2', titre: 'Automated compliance monitoring', ki: 76, etape: 'arbitrer', score: 76 },
-        { id: 'i3', titre: 'Predictive maintenance for wind turbines', ki: 71, etape: 'projeter', score: 71 },
-        { id: 'i4', titre: 'Smart inventory optimization', ki: 68, etape: 'construire', score: 68 },
-        { id: 'i5', titre: 'Customer churn prediction engine', ki: 65, etape: 'eprouver', score: 65 },
-      ],
-      total: 12,
-    },
-  };
-}
-
 async function fetchDashboard() {
   try {
     const res = await fetch(DASHBOARD_ENDPOINT);
     if (!res.ok) throw new Error(`Dashboard HTTP ${res.status}`);
     return await res.json();
   } catch {
-    return getMockDashboard();
+    return null;
   }
 }
 
@@ -87,7 +40,7 @@ async function fetchLeaderboard() {
     if (!res.ok) throw new Error(`Leaderboard HTTP ${res.status}`);
     return await res.json();
   } catch {
-    return getMockLeaderboard();
+    return { leaderboard: { items: [] } };
   }
 }
 

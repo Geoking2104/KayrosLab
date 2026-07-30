@@ -2,16 +2,6 @@ import { useState, useMemo } from 'react';
 import { ENTITY_TYPES, RELATIONSHIPS, getEntity } from '../data/ontology.js';
 import { useI18n } from '../i18n/I18nContext.jsx';
 
-const SUGGESTIONS = [
-  'Show me all competitors',
-  'List all architectures',
-  'Show architectures by pattern',
-  'How does Architecture connect to Stack?',
-  'What entities have a Security relationship?',
-  'Show all business entities',
-  'How does Go-to-Market target ICP?',
-];
-
 export default function QueryPlayground({ competitorList, baseline }) {
   const { t } = useI18n();
   const [query, setQuery] = useState('');
@@ -25,7 +15,8 @@ export default function QueryPlayground({ competitorList, baseline }) {
 
     const matchEntity = ENTITY_TYPES.find((e) => text.includes(e.name.toLowerCase()) || text.includes(e.id));
     const matchRel = RELATIONSHIPS.find((r) => text.includes(r.name.toLowerCase()) || (r.from && text.includes(r.from)));
-    const matchShowAll = text.includes('show me all') || text.includes('list all') || text.includes('all competitors');
+    const allLabel = t('app.query.allCompetitors').toLowerCase();
+    const matchShowAll = text.includes(allLabel) || text.includes('show me all') || text.includes('list all') || text.includes('all aligned');
 
     if (matchShowAll) {
       setResult({
@@ -64,14 +55,17 @@ export default function QueryPlayground({ competitorList, baseline }) {
   };
 
   const suggestions = useMemo(() => {
-    const list = [...SUGGESTIONS];
+    const list = [];
+    if (competitorList?.length > 0) list.push(t('app.query.allCompetitors'));
+    for (const entity of ENTITY_TYPES.slice(0, 3)) list.push(entity.name);
+    for (const relation of RELATIONSHIPS.slice(0, 2)) list.push(`${relation.from} ${relation.name} ${relation.to}`);
     if (competitorList?.length > 0) {
       for (const c of competitorList.slice(0, 3)) {
         list.push(`Show ${c.name} scores`);
       }
     }
     return list;
-  }, [competitorList]);
+  }, [competitorList, t]);
 
   const handleSuggestion = (s) => {
     setQuery(s);

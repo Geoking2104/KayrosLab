@@ -24,10 +24,10 @@ export default function SettingsPage({ onSettingsChange, analysisData }) {
     setSlackStatus('sending');
     try {
       await sendToSlack(settings.slackWebhookUrl, {
-        idea: analysisData?.idea || 'Test from KayrosLab Settings',
-        ki: analysisData?.ki ?? 42,
-        competitors: analysisData?.competitors || [{ name: 'Example Corp', avgScore: 65 }],
-        gaps: analysisData?.gaps || [{ icon: '📊', neuronId: 'Example', diff: 12, type: 'advantage' }],
+        idea: analysisData?.idea || '',
+        ki: analysisData?.ki ?? null,
+        competitors: analysisData?.competitors || [],
+        gaps: analysisData?.gaps || [],
       });
       setSlackStatus('sent');
       setTimeout(() => setSlackStatus(''), 3000);

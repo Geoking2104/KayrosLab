@@ -12,11 +12,12 @@ export default function GapAnalysis({ gaps }) {
       <p className="gap-subtitle">{t('app.gaps.subtitle')}</p>
       <div className="gap-list">
         {gaps.map((g) => {
-          const entity = getEntity(g.neuronId);
+          const neuronId = g.neuronId ?? g.entityId;
+          const entity = getEntity(neuronId);
           return (
-            <span key={g.neuronId} className={`gap-chip ${g.type}`}>
+            <span key={neuronId} className={`gap-chip ${g.type}`}>
               {g.type === 'advantage' ? '🟢' : '🔴'}
-              {(entity?.icon || '') + ' ' + (entity?.name || g.neuronId)}
+              {(entity?.icon || '') + ' ' + (entity?.name || neuronId)}
               <span className="gap-value">{g.diff > 0 ? `+${g.diff}` : g.diff}</span>
             </span>
           );

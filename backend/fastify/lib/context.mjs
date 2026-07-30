@@ -186,12 +186,14 @@ export default async function buildContext() {
   const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
   const GOOGLE_CX = process.env.GOOGLE_CX || '';
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
+  const GITLAB_TOKEN = process.env.GITLAB_TOKEN || '';
+  const GITLAB_BASE_URL = process.env.GITLAB_BASE_URL || 'https://gitlab.com';
 
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, campagnes, activites, journal, stageTimer,
     linkService, slackAdapter, connectorService,
-    KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN,
+    KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
   };

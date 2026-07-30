@@ -29,13 +29,17 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          POSITIONNER_GITHUB_TOKEN: ${{ secrets.POSITIONNER_GITHUB_TOKEN }}
+          POSITIONNER_GITLAB_TOKEN: ${{ secrets.POSITIONNER_GITLAB_TOKEN }}
+          POSITIONNER_GOOGLE_API_KEY: ${{ secrets.POSITIONNER_GOOGLE_API_KEY }}
+          POSITIONNER_GOOGLE_CX: ${{ secrets.POSITIONNER_GOOGLE_CX }}
         with:
           host: 51.210.9.71
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: MISTRAL_API_KEY
+          envs: MISTRAL_API_KEY,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -53,6 +57,15 @@ jobs:
               ANTHROPIC_API_KEY: '',
               MISTRAL_API_KEY: process.env.MISTRAL_API_KEY,
             };
+            const optionalSources = {
+              GITHUB_TOKEN: process.env.POSITIONNER_GITHUB_TOKEN,
+              GITLAB_TOKEN: process.env.POSITIONNER_GITLAB_TOKEN,
+              GOOGLE_API_KEY: process.env.POSITIONNER_GOOGLE_API_KEY,
+              GOOGLE_CX: process.env.POSITIONNER_GOOGLE_CX,
+            };
+            for (const [name, value] of Object.entries(optionalSources)) {
+              if (value) replacements[name] = value;
+            }
             for (const [name, value] of Object.entries(replacements)) {
               const line = `${name}=${value}`;
               const pattern = new RegExp(`^${name}=.*$`, 'm');

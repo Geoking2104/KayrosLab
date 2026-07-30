@@ -18,6 +18,7 @@ Le serveur écoute sur `PORT` (défaut 8787).
 - `GET  /health` → état + providers + modèle.
 - `POST /v1/demo/chat` → proxy LLM public de la démo HTML, sans clé côté navigateur.
 - `POST /v1/demo/report-leads` → capture lead RGPD et envoi SMTP du PDF/Markdown généré par la démo.
+- `POST /v1/demo/positionning/analyze` → analyse Positionner publique via Mistral serveur, sans fallback local ni exemples codés en dur.
 - `POST /v1/llm` → complétion brute `{ messages, provider, model, role, temperature }` (utilisé par l'app navigateur).
 - `POST /v1/govern/query` → orchestrateur complet `{ query, governance, sovereignty, provider }`.
   - Réponse `200 { status, answer, trace }` en mode `auto` / non sensible.
@@ -36,4 +37,5 @@ curl -s -X POST localhost:8787/v1/llm -H 'content-type: application/json' \
 - Servir derrière un reverse proxy HTTPS (nginx/caddy), restreindre `ALLOWED_ORIGIN`.
 - Gérer le process avec pm2/systemd. Clés via variables d'environnement (jamais dans le dépôt).
 - Pour l'envoi des rapports de la démo, renseigner `KAYROS_SMTP_URL`, `KAYROS_MAIL_FROM` et `KAYROS_REPORT_LEAD_BCC` (par défaut : `geoffroydelatournelle@gmail.com`).
+- Pour Positionner, renseigner `MISTRAL_API_KEY`; `GITHUB_TOKEN`, `GITLAB_TOKEN`, `GOOGLE_API_KEY` et `GOOGLE_CX` améliorent la collecte GitHub/GitLab/web utilisée comme base de comparaison.
 - Résolution des gates entre requêtes (HITL asynchrone) = lot ultérieur (store partagé).

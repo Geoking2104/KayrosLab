@@ -101,7 +101,7 @@ Moteur **zéro dépendance** (ESM, Node 20+), **81 tests**, réutilisé par l'ap
 
 | Domaine | Endpoints |
 |---|---|
-| Démo publique | `POST /v1/demo/chat` · `POST /v1/demo/report-leads` |
+| Démo publique | `POST /v1/demo/chat` · `POST /v1/demo/report-leads` · `POST /v1/demo/positionning/analyze` |
 | LLM & outils | `POST /v1/llm` · `POST /v1/embed` · `GET /v1/tools` · `POST /v1/tools/call` · `POST /v1/govern/query` |
 | Authentification | `POST /v1/auth/register\|login\|logout` · `GET /v1/auth/me` |
 | Portefeuille | `GET\|POST /v1/ideas` · `GET\|PATCH /v1/ideas/:id` · `GET /v1/portfolio` |
@@ -128,6 +128,8 @@ cd core && node --test      # 81 tests, zéro dépendance
 **Notifications** : `KAYROS_NOTIFY_WEBHOOK` (Slack/Teams/n8n) ou `KAYROS_SMTP_URL`. Voir `backend/fastify/.env.sample`.
 
 **Capture lead de la démo HTML** : les exports complets PDF/Markdown de `kayroslab-complete-with-ai-agents.html` passent par un formulaire obligatoire avant téléchargement. Le formulaire collecte nom, prénom, téléphone, mail professionnel, société, position et consentement RGPD au nom de `SASU KayrosLab`. Le navigateur poste ensuite le document demandé sur `POST /v1/demo/report-leads`; le backend l'envoie par email au prospect avec `KAYROS_REPORT_LEAD_BCC` en CCI (`geoffroydelatournelle@gmail.com` par défaut). `KAYROS_SMTP_URL` et `KAYROS_MAIL_FROM` doivent être configurés en production.
+
+**Positionner public** : `POST /v1/demo/positionning/analyze` utilise `MISTRAL_API_KEY` côté serveur pour rechercher et scorer des exemples alignés avec la saisie utilisateur. Les signaux GitHub, GitLab, Crunchbase et IdeaProof servent de bases de comparaison quand ils sont disponibles; l'app n'affiche plus de concurrents ou résultats locaux codés en dur.
 
 ---
 

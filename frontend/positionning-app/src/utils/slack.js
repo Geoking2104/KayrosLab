@@ -15,7 +15,7 @@ export async function sendToSlack(webhookUrl, { idea, ki, competitors, gaps }) {
     const lines = top.map((c) => `• *${c.name}* — ${c.avgScore}/100`).join('\n');
     blocks.push({
       type: 'section',
-      text: { type: 'mrkdwn', text: `*Competitors (${competitors.length}):*\n${lines}` },
+      text: { type: 'mrkdwn', text: `*Aligned examples (${competitors.length}):*\n${lines}` },
     });
   }
 

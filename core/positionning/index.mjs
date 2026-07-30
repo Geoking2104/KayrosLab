@@ -8,6 +8,7 @@ export {
   computeGaps, computeKayrosIndex,
 } from './analyzer.mjs';
 export { generateOWL, generateJSON } from './owl-exporter.mjs';
+export { runMistralContextualPositionning } from './mistral-contextual-search.mjs';
 
 export async function runPositionningAnalysis(ideaText, {
   googleApiKey, googleCx,

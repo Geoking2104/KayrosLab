@@ -1,7 +1,17 @@
-const BACKEND_SEARCH = '/v1/positionning/search';
-const BACKEND_GITHUB = '/v1/positionning/github';
-const BACKEND_ARXIV = '/v1/positionning/arxiv';
-const BACKEND_ANALYZE = '/v1/positionning/analyze';
+const API_BASE = getApiBase();
+const BACKEND_SEARCH = `${API_BASE}/v1/positionning/search`;
+const BACKEND_GITHUB = `${API_BASE}/v1/positionning/github`;
+const BACKEND_ARXIV = `${API_BASE}/v1/positionning/arxiv`;
+const BACKEND_ANALYZE = `${API_BASE}/v1/demo/positionning/analyze`;
+
+export function getApiBase() {
+  const configured = import.meta.env?.VITE_KAYROS_API_BASE?.trim();
+  if (configured) return configured.replace(/\/+$/, '');
+  if (typeof window !== 'undefined' && /(^|\.)kayroslab\.com$/i.test(window.location.hostname)) {
+    return 'https://api.kayroslab.com';
+  }
+  return '';
+}
 
 export async function searchCompetitors(idea) {
   try {
@@ -14,7 +24,7 @@ export async function searchCompetitors(idea) {
     const data = await res.json();
     return data.results || [];
   } catch {
-    return getMockResults(idea);
+    return [];
   }
 }
 
@@ -49,35 +59,25 @@ export async function searchArXiv(idea, { limit = 5 } = {}) {
 }
 
 export async function analyzeIdea(idea, opts = {}) {
-  try {
-    const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
-    const res = await fetch(BACKEND_ANALYZE, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ idea, limit: 5 }),
-    });
-    if (!res.ok) throw new Error(`Analyze backend returned ${res.status}`);
-    return await res.json();
-  } catch {
-    return null;
+  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+  const res = await fetch(BACKEND_ANALYZE, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      idea,
+      limit: opts.limit || 5,
+      gapThreshold: opts.gapThreshold,
+    }),
+  });
+  if (!res.ok) {
+    let message = `Analyze backend returned ${res.status}`;
+    try {
+      const data = await res.json();
+      message = data.message || data.error || message;
+    } catch {
+      // Keep the HTTP status message.
+    }
+    throw new Error(message);
   }
-}
-
-function getMockResults(idea) {
-  const terms = idea.toLowerCase();
-  const mockDb = [
-    { name: 'Hugging Face', url: 'https://huggingface.co', snippet: 'Plateforme ML open-source avec modèles pré-entraînés et datasets collaboratifs' },
-    { name: 'OpenAI', url: 'https://openai.com', snippet: 'API GPT-4, DALL-E, Whisper. Modèles propriétaires avancés pour entreprise' },
-    { name: 'Anthropic', url: 'https://anthropic.com', snippet: 'Claude API, safety-first. Modèles pour entreprise et déploiement sécurisé' },
-    { name: 'Mistral AI', url: 'https://mistral.ai', snippet: 'LLMs open-weight français. Déploiement souverain et personnalisable' },
-    { name: 'Google Vertex AI', url: 'https://cloud.google.com/vertex-ai', snippet: 'Plateforme ML GCP. Modèles Gemini, entraînement et déploiement MLOps' },
-    { name: 'Replicate', url: 'https://replicate.com', snippet: 'Cloud ML pour développeurs avec API standardisée et modèles communautaires' },
-    { name: 'Cohere', url: 'https://cohere.com', snippet: 'API NLP entreprise avec embeddings, RAG, classification et recherche sémantique' },
-    { name: 'LlamaIndex', url: 'https://llamaindex.ai', snippet: 'Framework open-source RAG et agentic pour applications LLM avec données' },
-    { name: 'LangChain', url: 'https://langchain.com', snippet: 'Framework pour applications LLM avec chaînes, agents et outils' },
-    { name: 'Qdrant', url: 'https://qdrant.tech', snippet: 'Vector database open-source haute performance avec recherche sémantique' },
-  ];
-  return mockDb.filter((r) =>
-    terms.split(' ').some((t) => r.snippet.toLowerCase().includes(t) || r.name.toLowerCase().includes(t))
-  ).slice(0, 5);
+  return res.json();
 }

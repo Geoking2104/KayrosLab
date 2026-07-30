@@ -1,9 +1,40 @@
 import { z } from 'zod';
 
+const publicAnalyzeRate = new Map();
+const PUBLIC_ANALYZE_MAX_PER_HOUR = 20;
+
+function checkPublicAnalyzeRate(ip) {
+  const now = Date.now();
+  const windowMs = 60 * 60 * 1000;
+  let entry = publicAnalyzeRate.get(ip);
+  if (!entry || now - entry.start > windowMs) {
+    entry = { start: now, count: 0 };
+    publicAnalyzeRate.set(ip, entry);
+  }
+  entry.count += 1;
+  return entry.count <= PUBLIC_ANALYZE_MAX_PER_HOUR;
+}
+
 export default async function positionningRoute(app) {
   const searchSchema = z.object({ q: z.string().min(1), limit: z.number().optional().default(5) });
   const analyzeSchema = z.object({ idea: z.string().min(1), limit: z.number().optional().default(5), gapThreshold: z.number().optional() });
   const owlSchema = z.object({ competitors: z.array(z.any()).optional().default([]) });
+
+  async function runMistralAnalysis({ idea, limit, gapThreshold }) {
+    const ctx = app.kayrosContext;
+    const { runMistralContextualPositionning } = await import('../../core/positionning/index.mjs');
+    return runMistralContextualPositionning(idea, {
+      apiKey: ctx.MISTRAL_API_KEY,
+      model: ctx.MISTRAL_MODEL,
+      limit,
+      gapThreshold,
+      googleApiKey: ctx.GOOGLE_API_KEY,
+      googleCx: ctx.GOOGLE_CX,
+      githubToken: ctx.GITHUB_TOKEN,
+      gitlabToken: ctx.GITLAB_TOKEN,
+      gitlabBaseUrl: ctx.GITLAB_BASE_URL,
+    });
+  }
 
   app.post('/v1/positionning/search', async (req, reply) => {
     const parsed = searchSchema.safeParse(req.body);
@@ -55,14 +86,33 @@ export default async function positionningRoute(app) {
     const parsed = analyzeSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'Champ "idea" requis', issues: parsed.error.issues });
     const { idea, limit, gapThreshold } = parsed.data;
-    const ctx = app.kayrosContext;
     try {
-      const { runPositionningAnalysis } = await import('../../core/positionning/index.mjs');
-      const result = await runPositionningAnalysis(idea, { googleApiKey: ctx.GOOGLE_API_KEY, googleCx: ctx.GOOGLE_CX, githubToken: ctx.GITHUB_TOKEN, limit, gapThreshold });
+      const result = await runMistralAnalysis({ idea, limit, gapThreshold });
       return result;
     } catch (err) {
       app.log.error(err);
-      return reply.code(502).send({ error: "Echec de l'analyse ontologique", message: err.message });
+      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: "Echec de l'analyse ontologique Mistral", message: err.message });
+    }
+  });
+
+  app.post('/v1/demo/positionning/analyze', async (req, reply) => {
+    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
+      || req.ip
+      || 'unknown';
+    if (!checkPublicAnalyzeRate(ip)) {
+      return reply.code(429).send({ error: `Quota analyse Positionner depasse (${PUBLIC_ANALYZE_MAX_PER_HOUR}/h). Reessayez plus tard.` });
+    }
+
+    const parsed = analyzeSchema.safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'Champ "idea" requis', issues: parsed.error.issues });
+    const { idea, limit, gapThreshold } = parsed.data;
+
+    try {
+      const result = await runMistralAnalysis({ idea, limit, gapThreshold });
+      return result;
+    } catch (err) {
+      app.log.error(err);
+      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: "Echec de la recherche contextuelle Mistral", message: err.message });
     }
   });
 
