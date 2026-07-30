@@ -2,7 +2,9 @@
 // Quant soft-fallback: strip quant suffix → retry → policy fallback (mock).
 
 import { CircuitBreaker, withResilience } from './resilience.mjs';
-import { resolveModelTag, recommendQuant, parseQuantFromTag, stripQuantFromTag } from './quant-guidance.mjs';
+import {
+  resolveModelTag, recommendQuant, parseQuantFromTag, stripQuantFromTag, normalizeRole,
+} from './quant-guidance.mjs';
 
 const approxTokens = (s) => Math.max(1, Math.round((s || '').length / 4));
 
@@ -97,6 +99,7 @@ export class RoutingPolicy {
     roleQuant = {},
     defaultQuant = null,
     preferHigherQuant = false,
+    availableModels = null,
   } = {}) {
     this.roleModel = roleModel;
     this.defaultProvider = defaultProvider;
@@ -104,6 +107,7 @@ export class RoutingPolicy {
     this.roleQuant = roleQuant;
     this.defaultQuant = defaultQuant;
     this.preferHigherQuant = preferHigherQuant;
+    this.availableModels = availableModels;
   }
 
   choose(req, opts = {}) {
@@ -113,13 +117,17 @@ export class RoutingPolicy {
   }
 
   modelFor(req, opts = {}) {
-    const base = req.model ?? this.roleModel[req.role] ?? undefined;
+    const base = req.model ?? this.roleModel[req.role] ?? this.roleModel[normalizeRole(req.role)] ?? undefined;
     if (!base) return undefined;
 
     if (parseQuantFromTag(base)) return base;
 
-    const role = req.role || 'default';
-    const prefer = this.roleQuant[role] || this.defaultQuant || opts.quant || null;
+    const role = normalizeRole(req.role || 'default');
+    const prefer = this.roleQuant[role]
+      || this.roleQuant[req.role]
+      || this.defaultQuant
+      || opts.quant
+      || null;
     if (!prefer && !this.preferHigherQuant) return base;
 
     const rec = recommendQuant({
@@ -127,7 +135,8 @@ export class RoutingPolicy {
       prefer,
       preferHigher: this.preferHigherQuant || !!opts.preferHigherQuant,
     });
-    return resolveModelTag(base, rec.quant);
+    const available = opts.availableModels || this.availableModels || null;
+    return resolveModelTag(base, rec.quant, available);
   }
 }
 
@@ -156,13 +165,12 @@ export class KayrosLLM {
       );
     };
 
-    // 1) Primary provider + resolved model (often quant-suffixed)
     try {
       return await attempt(primaryId, model);
     } catch (primaryErr) {
-      // 2) Soft quant fallback: strip quant suffix and retry same provider once
       const quant = model ? parseQuantFromTag(model) : null;
-      if (quant && primaryId === 'ollama') {
+      // Strip quant for any provider that might reject unknown tags (ollama + backend)
+      if (quant) {
         const baseTag = stripQuantFromTag(model);
         if (baseTag && baseTag !== model) {
           try {
@@ -176,11 +184,10 @@ export class KayrosLLM {
                 provider: primaryId,
               },
             };
-          } catch { /* continue to policy fallback */ }
+          } catch { /* continue */ }
         }
       }
 
-      // 3) Policy fallback (mock)
       const fb = this.policy.fallback;
       if (fb && fb !== primaryId && this.providers[fb]) {
         const res = await attempt(fb, model);

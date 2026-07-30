@@ -1,76 +1,15 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
-// Quant-aware : expose quantRec / preferredModel dans les events.
-// autoDistill optionnel en fin de cycle.
+// Unified plan via PlannerAgent; quant events; autoDistill uses this.llm by default.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
 import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
+import { defaultFallbackSteps } from './agents/planner-agent.mjs';
+import { parsePlanSteps, ensureSynthesizerLast, extractFirstArray, salvageObjects } from './plan-parse.mjs';
 
 const AGENTS = AGENT_TYPES;
 
-const PLANNER_SYSTEM =
-  "Tu es le Planner de KayrosLab. Decompose l'objectif en 3 a 6 etapes d'ideation strategique. " +
-  'Agents disponibles : Planner, Critic, DevilsAdvocate, RedTeam, Bisociateur, Synthesizer. ' +
-  'La derniere etape doit etre Synthesizer. ' +
-  'Reponds UNIQUEMENT par un tableau JSON, sans texte autour : ' +
-  '[{"agent":"Planner","description":"..."},{"agent":"RedTeam","description":"..."},{"agent":"Synthesizer","description":"..."}]';
-
-export function extractFirstArray(s) {
-  const start = s.indexOf('[');
-  if (start < 0) return null;
-  let depth = 0, inStr = false, esc = false;
-  for (let i = start; i < s.length; i++) {
-    const c = s[i];
-    if (inStr) {
-      if (esc) esc = false;
-      else if (c === '\\') esc = true;
-      else if (c === '"') inStr = false;
-      continue;
-    }
-    if (c === '"') inStr = true;
-    else if (c === '[') depth++;
-    else if (c === ']') { depth--; if (depth === 0) return s.slice(start, i + 1); }
-  }
-  return s.slice(start);
-}
-
-export function salvageObjects(raw) {
-  const objs = [];
-  let depth = 0, inStr = false, esc = false, startObj = -1;
-  for (let i = 0; i < raw.length; i++) {
-    const c = raw[i];
-    if (inStr) {
-      if (esc) esc = false;
-      else if (c === '\\') esc = true;
-      else if (c === '"') inStr = false;
-      continue;
-    }
-    if (c === '"') inStr = true;
-    else if (c === '{') { if (depth === 0) startObj = i; depth++; }
-    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* ignore */ } startObj = -1; } }
-  }
-  return objs;
-}
-
-export function parsePlanSteps(text) {
-  try {
-    let s = String(text ?? '');
-    s = s.replace(/<think>[\s\S]*?<\/think>/gi, ' ').replace(/<think>[\s\S]*$/i, ' ');
-    s = s.replace(/```(?:json)?/gi, ' ');
-    const raw = extractFirstArray(s);
-    if (!raw) return null;
-    let arr;
-    try { arr = JSON.parse(raw); }
-    catch { arr = salvageObjects(raw); }
-    if (!Array.isArray(arr) || !arr.length) return null;
-    const allowed = new Set(AGENTS);
-    const steps = arr
-      .filter((x) => x && typeof x.description === 'string' && allowed.has(x.agent))
-      .slice(0, 8)
-      .map((x, i) => ({ id: `s${i + 1}`, agent: x.agent, description: x.description, ...(x.tool ? { tool: x.tool } : {}) }));
-    return steps.length ? steps : null;
-  } catch { return null; }
-}
+export { parsePlanSteps, extractFirstArray, salvageObjects, ensureSynthesizerLast };
 
 function agentQuantInfo(agent) {
   if (!agent) return null;
@@ -122,45 +61,69 @@ export class Orchestrator {
   }
 
   _fallbackSteps() {
-    return [
-      { id: 's1', description: 'Cadrer et planifier la reponse', agent: 'Planner' },
-      { id: 's2', description: 'Critiquer et detecter les angles morts', agent: 'Critic' },
-      { id: 's3', description: 'Attaquer la robustesse (kill shots)', agent: 'RedTeam' },
-      { id: 's4', description: 'Synthetiser une reponse arbitrable', agent: 'Synthesizer' },
-    ];
+    return defaultFallbackSteps();
   }
 
+  /** Single planning path: prefer PlannerAgent.createPlan, else shared parse + fallback. */
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     if (ctx.llmPlan === false) {
       return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
     }
-    try {
-      const opts = {};
-      if (ctx.provider) opts.provider = ctx.provider;
-      if (ctx.sovereignty) opts.sovereignty = ctx.sovereignty;
 
-      const plannerAgent = this.agents?.Planner;
-      const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
+    const plannerAgent = this.agents?.Planner;
+    const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
 
-      const res = await this.llm.complete(
-        {
-          role: 'Planner', model, temperature: 0.2, think: false,
-          messages: [
-            { role: 'system', content: PLANNER_SYSTEM },
-            { role: 'user', content: `Objectif : ${goal}` },
-          ],
-        },
-        opts,
-      );
-      const steps = parsePlanSteps(res.text);
-      if (steps) {
-        return {
-          ideaId, goal, generatedBy: 'llm', steps,
-          quant: { modelUsed: model || null, agent: agentQuantInfo(plannerAgent), snapshot: this._quantSnapshot() },
-        };
-      }
-    } catch { /* soft */ }
+    if (plannerAgent && typeof plannerAgent.createPlan === 'function') {
+      try {
+        const result = await plannerAgent.createPlan(goal, {
+          provider: ctx.provider,
+          sovereignty: ctx.sovereignty,
+          model,
+          llmPlan: ctx.llmPlan,
+        });
+        if (result?.steps?.length) {
+          return {
+            ideaId,
+            goal,
+            generatedBy: result.generatedBy || 'llm',
+            steps: ensureSynthesizerLast(result.steps),
+            quant: {
+              modelUsed: model || null,
+              agent: agentQuantInfo(plannerAgent),
+              snapshot: this._quantSnapshot(),
+            },
+            degraded: result.degraded || null,
+          };
+        }
+      } catch { /* soft → fallback */ }
+    } else {
+      // Legacy direct LLM path if no Planner agent
+      try {
+        const opts = {};
+        if (ctx.provider) opts.provider = ctx.provider;
+        if (ctx.sovereignty) opts.sovereignty = ctx.sovereignty;
+        const res = await this.llm.complete(
+          {
+            role: 'Planner', model, temperature: 0.2, think: false,
+            messages: [
+              { role: 'system', content: 'Tu es le Planner. Reponds UNIQUEMENT par un tableau JSON d\'etapes.' },
+              { role: 'user', content: `Objectif : ${goal}` },
+            ],
+          },
+          opts,
+        );
+        const steps = parsePlanSteps(res.text);
+        if (steps) {
+          return {
+            ideaId, goal, generatedBy: 'llm', steps: ensureSynthesizerLast(steps),
+            quant: { modelUsed: model || null, agent: null, snapshot: this._quantSnapshot() },
+            degraded: res.degraded || null,
+          };
+        }
+      } catch { /* soft */ }
+    }
+
     return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
   }
 
@@ -177,6 +140,7 @@ export class Orchestrator {
       ideaId: plan.ideaId,
       goal: plan.goal,
       quant: this._quantSnapshot(),
+      degraded: plan.degraded || null,
       ts: new Date().toISOString(),
     };
 
@@ -184,7 +148,13 @@ export class Orchestrator {
     if (doRecall) {
       if (this._hasLayered()) {
         try {
-          contextBlock = await this.layered.buildContextBlock(plan.goal, { ideaId: plan.ideaId, k: this.recallK });
+          contextBlock = await this.layered.buildContextBlock(plan.goal, {
+            ideaId: plan.ideaId,
+            k: this.recallK,
+            scope: opts.scope || null,
+            scopeId: opts.scopeId || opts.tenantId || null,
+            tenantId: opts.tenantId || null,
+          });
           if (contextBlock) {
             const snap = this.layered.snapshot(plan.ideaId);
             yield {
@@ -212,8 +182,14 @@ export class Orchestrator {
       const specialist = this.agents?.[s.agent];
       let observation, actionType = 'llm', actionName = 'complete', usage = { tokensIn: 0, tokensOut: 0 };
       let modelUsed = null;
+      let degraded = null;
 
-      if (specialist && specialist.execute) {
+      if (s.tool && this.tools && !specialist) {
+        // Tool-first when no specialist: avoid wasted LLM call
+        observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
+        actionType = 'tool';
+        actionName = s.tool;
+      } else if (specialist && specialist.execute) {
         const res = await specialist.execute(s.description, {
           goal: plan.goal, context: contextBlock,
           provider: opts.provider, sovereignty: opts.sovereignty,
@@ -223,6 +199,7 @@ export class Orchestrator {
         actionType = 'specialized_agent';
         actionName = s.agent;
         modelUsed = res.model || specialist.preferredModel || null;
+        degraded = res.degraded || null;
         agentOutputs.push(res);
       } else {
         const messages = [];
@@ -233,16 +210,14 @@ export class Orchestrator {
         observation = llmRes.text;
         usage = llmRes.usage;
         modelUsed = model || null;
-        if (s.tool && this.tools) {
-          observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
-          actionType = 'tool'; actionName = s.tool;
-        }
+        degraded = llmRes.degraded || null;
       }
 
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
 
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
-      if (doRemember && this._hasVectorMemory()) {
+      // Prefer layered L1 when available; avoid dual-write noise
+      if (doRemember && this._hasVectorMemory() && !this._hasLayered()) {
         try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* soft */ }
       }
 
@@ -262,6 +237,16 @@ export class Orchestrator {
         } catch { /* soft */ }
       }
 
+      if (degraded) {
+        yield {
+          type: 'degraded',
+          stepId: s.id,
+          agent: s.agent,
+          ...degraded,
+          ts: new Date().toISOString(),
+        };
+      }
+
       yield {
         type: 'trace', stepId: s.id, agent: s.agent,
         thought: `[${s.agent}] ${s.description}`,
@@ -269,27 +254,33 @@ export class Orchestrator {
         observation, usedContext: !!contextBlock,
         tokens: { in: usage.tokensIn, out: usage.tokensOut },
         quant: { modelUsed, agent: agentQuantInfo(specialist) },
+        degraded,
         ts: new Date().toISOString(),
       };
     }
 
     if (doOffload && this._hasLayered()) {
       try {
-        const refs = await this.layered.offload(plan.ideaId);
+        const refs = await this.layered.offload(plan.ideaId, null, {
+          minContentLength: opts.offloadMinLength ?? 600,
+        });
         if (refs.length) {
           yield { type: 'offload', ideaId: plan.ideaId, count: refs.length, refs: refs.slice(0, 5), ts: new Date().toISOString() };
         }
       } catch { /* soft */ }
     }
 
-    // Optional L1 → L2 auto distillation at end of cycle
     if (doAutoDistill && this._hasLayered() && typeof this.layered.autoDistillL2 === 'function') {
       try {
         const created = await this.layered.autoDistillL2(plan.ideaId, {
           minFacts: opts.distillMinFacts ?? 3,
-          llm: opts.distillLlm || null,
+          llm: opts.distillLlm ?? this.llm,
           distillFn: opts.distillFn || null,
           force: !!opts.distillForce,
+          llmOpts: {
+            provider: opts.provider,
+            sovereignty: opts.sovereignty,
+          },
         });
         if (created.length) {
           yield {
@@ -306,10 +297,14 @@ export class Orchestrator {
     const synthAgent = this.agents?.Synthesizer;
     if (synthAgent && synthAgent.synthesize && agentOutputs.length > 0) {
       const synthesis = await synthAgent.synthesize(agentOutputs, opts);
+      if (synthesis.degraded) {
+        yield { type: 'degraded', agent: 'Synthesizer', ...synthesis.degraded, ts: new Date().toISOString() };
+      }
       yield {
         type: 'synthesis', agent: 'Synthesizer',
         output: synthesis.output, decision: synthesis.structured,
         quant: { modelUsed: synthesis.model || synthAgent.preferredModel || null, agent: agentQuantInfo(synthAgent) },
+        degraded: synthesis.degraded || null,
         ts: new Date().toISOString(),
       };
     }
@@ -371,7 +366,7 @@ export class Orchestrator {
     const ideaId = ctx.ideaId ?? 'idea';
     const { alerts } = evaluateKpis(kpis, readings);
     const signals = alertsToSignals(alerts, { ideaId });
-    if (this._hasVectorMemory()) {
+    if (this._hasVectorMemory() && !this._hasLayered()) {
       for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* soft */ } }
     } else {
       for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
