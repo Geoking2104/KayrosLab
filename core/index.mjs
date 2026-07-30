@@ -46,8 +46,8 @@ import { recommendForEngine } from './quant-guidance.mjs';
  * @param {string} [opts.offloadRoot]
  * @param {Object} [opts.fs]
  * @param {Object} [opts.path]
- * @param {string} [opts.quant]               // quant global (ex. 'q4_K_M')
- * @param {Object} [opts.roleQuant]           // { Planner: 'q5_K_M', Critic: 'q5_K_M', ... }
+ * @param {string} [opts.quant]
+ * @param {Object} [opts.roleQuant]
  * @param {boolean} [opts.preferHigherQuant]
  */
 export function createEngine(opts = {}) {
@@ -134,7 +134,6 @@ export function createEngine(opts = {}) {
     layered.load().catch(() => {});
   }
 
-  // Wire quant guidance into every agent constructor
   const agents = createAllAgents({
     llm,
     tools,
@@ -145,7 +144,9 @@ export function createEngine(opts = {}) {
 
   const orchestrator = new Orchestrator({
     llm, tools, governance, memory, layered,
-    plannerModel: opts.plannerModel, agents,
+    plannerModel: opts.plannerModel,
+    agents,
+    quantGuidance,
   });
 
   return {
