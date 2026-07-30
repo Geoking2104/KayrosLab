@@ -6,8 +6,8 @@ export class BaseAgent {
    * @param {Object} [opts.tools]
    * @param {Object} [opts.memory]
    * @param {Object} [opts.llm]
-   * @param {string} [opts.preferredModel]  // quant-resolved tag from quantGuidance
-   * @param {Object} [opts.quantRec]        // { quant, tier, reason, meta } for inspection
+   * @param {string} [opts.preferredModel]
+   * @param {Object} [opts.quantRec]
    */
   constructor({ name, systemPrompt, tools = null, memory = null, llm = null, preferredModel = null, quantRec = null } = {}) {
     if (!name) throw new Error('BaseAgent: name required');
@@ -43,17 +43,24 @@ export class BaseAgent {
     messages.push({ role: 'user', content: `Goal: ${goal}\n\nTask: ${task}` });
 
     let text;
+    let degraded = null;
     if (this.llm) {
       const res = await this.llm.complete(
         { role: this.name, messages, model: this._resolveModel(model), temperature: 0.3 },
         { provider, sovereignty },
       );
       text = res.text;
+      degraded = res.degraded || null;
     } else {
       text = `[${this.name}] Analysis for: ${task.substring(0, 100)}`;
     }
     await this.addContribution(text);
-    return { agent: this.name, output: text, model: this._resolveModel(model) || null };
+    return {
+      agent: this.name,
+      output: text,
+      model: this._resolveModel(model) || null,
+      degraded,
+    };
   }
 
   getToolNames() {

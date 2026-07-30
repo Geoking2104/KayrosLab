@@ -242,7 +242,6 @@ export function extractFirstObject(s) {
   return null;
 }
 
-/** Construit un prompt de distillation à partir d'un groupe de L1. */
 function buildDistillPrompt(type, group, ideaId) {
   const lines = group.slice(0, 15).map((f, i) =>
     `${i + 1}. [conf=${f.confidence.toFixed(2)}] ${f.content}`
@@ -254,7 +253,6 @@ function buildDistillPrompt(type, group, ideaId) {
   );
 }
 
-/** Fallback heuristique (sans LLM). */
 function heuristicDistill(type, group, ideaId) {
   const lines = group.slice(0, 12).map((f) =>
     `- (${f.confidence.toFixed(2)}) ${f.content}`
@@ -285,8 +283,6 @@ export class LayeredMemory {
     this._dirty = false;
   }
 
-  // ---------- L0 ----------
-
   rememberL0(p) {
     const item = createL0(p);
     this._l0.set(item.id, item);
@@ -294,12 +290,25 @@ export class LayeredMemory {
     return item;
   }
 
-  async offload(ideaId, step = null) {
+  /**
+   * Offload heavy L0 items only (size threshold). Short scratch stays active.
+   * @param {string} ideaId
+   * @param {string|null} step
+   * @param {{ minContentLength?: number }} [opts]
+   */
+  async offload(ideaId, step = null, { minContentLength = 600 } = {}) {
     const refs = [];
     for (const [id, item] of this._l0) {
       if (item.ideaId !== ideaId) continue;
       if (step && item.step !== step) continue;
       if (item.expiresAt) continue;
+
+      const len = typeof item.content === 'string'
+        ? item.content.length
+        : JSON.stringify(item.content ?? '').length;
+
+      // Keep short working items active for subsequent runs / canvas
+      if (len < minContentLength && !item.filePath) continue;
 
       item.expiresAt = nowIso();
 
@@ -393,8 +402,6 @@ export class LayeredMemory {
     };
   }
 
-  // ---------- L1 ----------
-
   async addAtomicFact(p) {
     const fact = createL1(p);
     this._l1.set(fact.id, fact);
@@ -425,8 +432,6 @@ export class LayeredMemory {
     return out;
   }
 
-  // ---------- L2 ----------
-
   async distillScenario(p) {
     const scenario = createL2(p);
     this._l2.set(scenario.id, scenario);
@@ -446,23 +451,6 @@ export class LayeredMemory {
     return scenario;
   }
 
-  /**
-   * Job de distillation automatique L1 → L2.
-   *
-   * Modes :
-   * 1. Heuristique pure (défaut) — aucune dépendance LLM
-   * 2. `distillFn(groupCtx) => { title, summary, content, patternType }` — callback pur
-   * 3. `llm` (KayrosLLM-like avec `.complete`) — distillation LLM avec fallback heuristique
-   *
-   * @param {string} ideaId
-   * @param {Object} [opts]
-   * @param {number} [opts.minFacts=3]
-   * @param {boolean} [opts.force=false]
-   * @param {Object} [opts.llm]           // { complete: async (req, opts?) => { text } }
-   * @param {Function} [opts.distillFn]   // pure async callback, priorité sur llm
-   * @param {Object} [opts.llmOpts]       // provider / sovereignty / model passés à llm.complete
-   * @returns {Promise<import('./memory-types.mjs').L2Scenario[]>}
-   */
   async autoDistillL2(ideaId, {
     minFacts = 3,
     force = false,
@@ -490,7 +478,6 @@ export class LayeredMemory {
     for (const [type, group] of groups) {
       if (group.length < minFacts) continue;
 
-      // 1) Génération du contenu
       let draft = null;
 
       if (typeof distillFn === 'function') {
@@ -520,7 +507,6 @@ export class LayeredMemory {
         } catch { /* soft → heuristic */ }
       }
 
-      // 2) Fallback heuristique
       if (!draft) draft = heuristicDistill(type, group, ideaId);
 
       if (!force && existingTitles.has(draft.title.toLowerCase())) continue;
@@ -554,8 +540,6 @@ export class LayeredMemory {
     return out;
   }
 
-  // ---------- L3 ----------
-
   updateCore(p) {
     const core = createL3(p);
     for (const existing of this._l3.values()) {
@@ -571,18 +555,17 @@ export class LayeredMemory {
     return core;
   }
 
-  getCore({ scope = null, scopeId = null, kind = null } = {}) {
+  getCore({ scope = null, scopeId = null, kind = null, tenantId = null } = {}) {
     const out = [];
     for (const c of this._l3.values()) {
       if (scope && c.scope !== scope) continue;
       if (scopeId && c.scopeId !== scopeId) continue;
+      if (tenantId && c.scope === 'tenant' && c.scopeId !== tenantId) continue;
       if (kind && c.kind !== kind) continue;
       out.push(c);
     }
     return out;
   }
-
-  // ---------- Persistence ----------
 
   async save() {
     if (!this.persistentStore) return false;
@@ -636,13 +619,25 @@ export class LayeredMemory {
     return true;
   }
 
-  // ---------- Unified Recall ----------
-
-  async recall(query, { ideaId = null, layers = ['L1', 'L2', 'L3'], k = 5 } = {}) {
+  /**
+   * Unified recall. L3 is scoped (scope / scopeId / tenantId) — never dumps all cores.
+   * If no scope is provided, L3 is omitted (safe multi-tenant default).
+   */
+  async recall(query, {
+    ideaId = null,
+    layers = ['L1', 'L2', 'L3'],
+    k = 5,
+    scope = null,
+    scopeId = null,
+    tenantId = null,
+  } = {}) {
     const result = { l1: [], l2: [], l3: [] };
 
     if (layers.includes('L3')) {
-      result.l3 = this.getCore().slice(0, k);
+      if (scope || scopeId || tenantId) {
+        result.l3 = this.getCore({ scope, scopeId: scopeId || tenantId, tenantId }).slice(0, k);
+      }
+      // else: intentionally empty — prevent cross-tenant L3 leakage
     }
 
     if (this.memoryService && (layers.includes('L1') || layers.includes('L2'))) {
@@ -673,8 +668,14 @@ export class LayeredMemory {
     return result;
   }
 
-  async buildContextBlock(query, { ideaId = null, k = 4 } = {}) {
-    const { l1, l2, l3 } = await this.recall(query, { ideaId, k });
+  async buildContextBlock(query, {
+    ideaId = null,
+    k = 4,
+    scope = null,
+    scopeId = null,
+    tenantId = null,
+  } = {}) {
+    const { l1, l2, l3 } = await this.recall(query, { ideaId, k, scope, scopeId, tenantId });
     const parts = [];
     if (l3.length) {
       parts.push('### Connaissances stables (L3)');

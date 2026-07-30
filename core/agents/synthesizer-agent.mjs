@@ -22,6 +22,7 @@ export class SynthesizerAgent extends BaseAgent {
     const task = `Synthesize the following multi-agent analyses into a decision-ready recommendation:\n\n${contributions}`;
 
     let text;
+    let degraded = null;
     if (this.llm) {
       const messages = [
         { role: 'system', content: this.systemPrompt },
@@ -37,12 +38,19 @@ export class SynthesizerAgent extends BaseAgent {
         { provider: ctx.provider, sovereignty: ctx.sovereignty },
       );
       text = res.text;
+      degraded = res.degraded || null;
     } else {
       text = this._fallbackSynthesis(agentOutputs);
     }
 
     await this.addContribution(text);
-    return { agent: 'Synthesizer', output: text, structured: this._extractDecision(text), model: this._resolveModel(ctx.model) || null };
+    return {
+      agent: 'Synthesizer',
+      output: text,
+      structured: this._extractDecision(text),
+      model: this._resolveModel(ctx.model) || null,
+      degraded,
+    };
   }
 
   _fallbackSynthesis(agentOutputs) {
@@ -56,17 +64,24 @@ export class SynthesizerAgent extends BaseAgent {
       `**Confidence:** Medium`;
   }
 
+  /** Parse Go / No-Go / Revise without matching "go" inside "no-go". */
   _extractDecision(text) {
-    const t = text.toLowerCase();
+    const raw = String(text ?? '');
+    const t = raw.toLowerCase();
     let decision = 'revise';
-    if (t.includes('go')) decision = 'go';
-    else if (t.includes('no-go') || t.includes('reject')) decision = 'no-go';
+    if (/\bno[-\s]?go\b|\breject(?:ed|ion)?\b/i.test(t)) {
+      decision = 'no-go';
+    } else if (/\bgo\b/i.test(t) && !/\bno[-\s]?go\b/i.test(t)) {
+      decision = 'go';
+    } else if (/\brevise\b|\brevision\b/i.test(t)) {
+      decision = 'revise';
+    }
 
-    const confidenceMatch = text.match(/confiden[^:]*:\s*(high|medium|low)/i);
+    const confidenceMatch = raw.match(/confiden[^:]*:\s*(high|medium|low)/i);
     return {
       decision,
       confidence: confidenceMatch?.[1]?.toLowerCase() || 'medium',
-      summary: text.substring(0, 300),
+      summary: raw.substring(0, 300),
     };
   }
 }
