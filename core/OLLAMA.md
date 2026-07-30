@@ -7,7 +7,7 @@ Aucune donnée ne sort de la machine en mode local.
 
 ```bash
 ollama pull llama3.2
-# ou avec quant explicite si dispo dans la lib Ollama / GGUF importé :
+# ou avec quant explicite si dispo :
 # ollama pull llama3.1:8b-instruct-q4_K_M
 ollama list
 curl http://localhost:11434/api/tags
@@ -21,18 +21,28 @@ import { createEngine } from './index.mjs';
 const eng = createEngine({
   sovereignty: 'local',
   model: 'llama3.1:8b-instruct',
-  quant: 'q4_K_M',                    // défaut recommandé
+  quant: 'q4_K_M',
   roleQuant: {
     Planner: 'q5_K_M',
     Critic: 'q5_K_M',
     Synthesizer: 'q5_K_M',
   },
-  syncAvailableQuants: true,          // adapte aux tags réellement listés
+  syncAvailableQuants: true,
 });
 
-// eng.quantGuidance.global / .byRole / .resolvedDefaultModel
-// eng.agents.Planner.preferredModel  → tag résolu
-await eng.syncAvailableQuants;        // promesse de sync best-effort
+await eng.syncAvailableQuants; // rebind agents preferredModel
+// eng.rebindFromAvailable(tags) — manuel
+```
+
+### Soft fallback (quant)
+
+1. Appel avec tag quant (`…-q5_K_M`)
+2. Si échec Ollama → **retry sans suffixe quant** (`stripQuantFromTag`)
+3. Si échec → **provider fallback** (`mock`) avec `response.degraded`
+
+```js
+// degraded shape
+{ reason: 'quant_tag_unavailable' | 'provider_fallback', from, to, ... }
 ```
 
 ### Recommandations 2026
@@ -40,25 +50,23 @@ await eng.syncAvailableQuants;        // promesse de sync best-effort
 | Situation | Quant |
 |---|---|
 | Défaut / chat | **Q4_K_M** |
-| Raisonnement / code / agents critiques | **Q5_K_M** (ou Q6_K) |
-| Qualité max, VRAM OK | Q8_0 |
-| VRAM très contrainte | Q4_K_S / IQ4_XS |
-
-Les agents à fort enjeu (Planner, Critic, Synthesizer, RedTeam) sont en tier **high** → préférence Q5+.
+| Agents critiques | **Q5_K_M** (ou Q6_K) |
+| Qualité max | Q8_0 |
+| VRAM faible | Q4_K_S / IQ4_XS |
 
 ## 3. Démo CLI
 
 ```bash
+node core/quant-ollama-demo.mjs llama3.2 "Objectif test"
 node core/ollama-demo.mjs llama3.2
 node core/planner-ollama-demo.mjs llama3.2 "Objectif test"
 ```
 
-## 4. Navigateur
+## 4. UI helpers
 
-Mixed content + CORS : servir l'app en local et éventuellement :
-
-```bash
-OLLAMA_ORIGINS="http://localhost:8080" ollama serve
+```js
+import { quantTimelineHtml, mermaidCanvasHtml, quantControlsHtml } from './quant-ui.mjs';
+// ou ouvrir core/quant-panel-demo.html via un serveur local
 ```
 
 ## 5. Events quant
@@ -69,5 +77,5 @@ Schémas : `core/quant-schema.mjs`.
 ## Rappel
 
 - `sovereignty: 'local'` force Ollama.
-- Fallback `mock` si Ollama échoue (circuit breaker).
+- Fallback `mock` si Ollama échoue (circuit breaker + soft quant strip).
 - `autoDistill: true` sur `run()` déclenche la distillation L1→L2 en fin de cycle.
