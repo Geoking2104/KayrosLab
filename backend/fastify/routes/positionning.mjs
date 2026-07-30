@@ -22,7 +22,7 @@ export default async function positionningRoute(app) {
 
   async function runMistralAnalysis({ idea, limit, gapThreshold }) {
     const ctx = app.kayrosContext;
-    const { runMistralContextualPositionning } = await import('../../core/positionning/index.mjs');
+    const { runMistralContextualPositionning } = await import('../../../core/positionning/index.mjs');
     return runMistralContextualPositionning(idea, {
       apiKey: ctx.MISTRAL_API_KEY,
       model: ctx.MISTRAL_MODEL,
@@ -42,7 +42,7 @@ export default async function positionningRoute(app) {
     const { q, limit } = parsed.data;
     const ctx = app.kayrosContext;
     try {
-      const { WebScanner } = await import('../../core/positionning/scanner-web.mjs');
+      const { WebScanner } = await import('../../../core/positionning/scanner-web.mjs');
       const scanner = new WebScanner({ googleApiKey: ctx.GOOGLE_API_KEY, googleCx: ctx.GOOGLE_CX });
       const results = await scanner.search(q, { limit });
       return { results, provider: ctx.GOOGLE_API_KEY ? 'google' : 'duckduckgo' };
@@ -57,7 +57,7 @@ export default async function positionningRoute(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
     const { q, limit } = parsed.data;
     try {
-      const { GitHubScanner } = await import('../../core/positionning/scanner-github.mjs');
+      const { GitHubScanner } = await import('../../../core/positionning/scanner-github.mjs');
       const scanner = new GitHubScanner({ token: app.kayrosContext.GITHUB_TOKEN });
       const results = await scanner.search(q, { limit });
       return { results };
@@ -72,7 +72,7 @@ export default async function positionningRoute(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
     const { q, limit } = parsed.data;
     try {
-      const { ArXivScanner } = await import('../../core/positionning/scanner-arxiv.mjs');
+      const { ArXivScanner } = await import('../../../core/positionning/scanner-arxiv.mjs');
       const scanner = new ArXivScanner();
       const results = await scanner.search(q, { limit });
       return { results };
@@ -120,7 +120,7 @@ export default async function positionningRoute(app) {
     const parsed = owlSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'validation failed', issues: parsed.error.issues });
     const { competitors } = parsed.data;
-    const { generateOWL } = await import('../../core/positionning/owl-exporter.mjs');
+    const { generateOWL } = await import('../../../core/positionning/owl-exporter.mjs');
     const owl = generateOWL(competitors);
     reply.header('Content-Type', 'application/rdf+xml; charset=utf-8');
     reply.header('Content-Disposition', 'attachment; filename="positionning-ontology.rdf"');
