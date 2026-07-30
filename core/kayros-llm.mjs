@@ -2,6 +2,7 @@
 // Ref. specs techniques §5 (EF-24/25/26). Le code metier ne connait jamais le fournisseur.
 
 import { CircuitBreaker, withResilience } from './resilience.mjs';
+import { resolveModelTag, recommendQuant, parseQuantFromTag } from './quant-guidance.mjs';
 
 /**
  * @typedef {{role:'system'|'user'|'assistant'|'tool', content:string}} LLMMessage
@@ -106,17 +107,63 @@ export class HttpBackendProvider {
 /**
  * Politique de routage : override explicite > souverainete > defaut, avec fallback.
  * EF-26 : sovereignty='local' force Ollama ; opts.provider force un fournisseur precis.
+ * Quant-aware : roleQuant / preferHigherQuant influencent le tag modele final.
  */
 export class RoutingPolicy {
-  constructor({ roleModel = {}, defaultProvider = 'anthropic', fallback = 'mock' } = {}) {
-    this.roleModel = roleModel; this.defaultProvider = defaultProvider; this.fallback = fallback;
+  /**
+   * @param {Object} [opts]
+   * @param {Object} [opts.roleModel]       // role → base model name
+   * @param {string} [opts.defaultProvider]
+   * @param {string} [opts.fallback]
+   * @param {Object} [opts.roleQuant]       // role → preferred quant (e.g. { Planner: 'q5_K_M' })
+   * @param {string} [opts.defaultQuant]    // global quant fallback
+   * @param {boolean} [opts.preferHigherQuant]
+   */
+  constructor({
+    roleModel = {},
+    defaultProvider = 'anthropic',
+    fallback = 'mock',
+    roleQuant = {},
+    defaultQuant = null,
+    preferHigherQuant = false,
+  } = {}) {
+    this.roleModel = roleModel;
+    this.defaultProvider = defaultProvider;
+    this.fallback = fallback;
+    this.roleQuant = roleQuant;
+    this.defaultQuant = defaultQuant;
+    this.preferHigherQuant = preferHigherQuant;
   }
+
   choose(req, opts = {}) {
     if (opts.provider) return opts.provider;
     if (opts.sovereignty === 'local') return 'ollama';
     return this.defaultProvider;
   }
-  modelFor(req) { return req.model ?? this.roleModel[req.role] ?? undefined; }
+
+  /**
+   * Résout le tag modèle en tenant compte du rôle et de la guidance quant.
+   * - Si req.model est déjà fourni avec un quant, on le respecte.
+   * - Sinon on applique roleQuant / defaultQuant via resolveModelTag.
+   */
+  modelFor(req, opts = {}) {
+    const base = req.model ?? this.roleModel[req.role] ?? undefined;
+    if (!base) return undefined;
+
+    // Si l'appelant a déjà collé un quant dans le tag, on ne force pas
+    if (parseQuantFromTag(base)) return base;
+
+    const role = req.role || 'default';
+    const prefer = this.roleQuant[role] || this.defaultQuant || opts.quant || null;
+    if (!prefer && !this.preferHigherQuant) return base;
+
+    const rec = recommendQuant({
+      role,
+      prefer,
+      preferHigher: this.preferHigherQuant || !!opts.preferHigherQuant,
+    });
+    return resolveModelTag(base, rec.quant);
+  }
 }
 
 /** Facade unique. Le metier appelle complete() sans connaitre le fournisseur. */
@@ -133,7 +180,7 @@ export class KayrosLLM {
   }
   async complete(req, opts = {}) {
     const primaryId = this.policy.choose(req, opts);
-    const model = this.policy.modelFor(req);
+    const model = this.policy.modelFor(req, opts);
     const attempt = async (id) => {
       const p = this.providers[id];
       if (!p) { const e = new Error(`Provider inconnu: ${id}`); e.code = 'UNKNOWN_PROVIDER'; throw e; }

@@ -25,6 +25,7 @@ export * from './orchestrator.mjs';
 export * from './timer.mjs';
 export * from './connectors.mjs';
 export * from './positionning/index.mjs';
+export * from './quant-guidance.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
@@ -36,25 +37,53 @@ import {
 } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
+import { recommendForEngine, resolveModelTag } from './quant-guidance.mjs';
 
 /**
  * Fabrique un moteur.
  * @param {Object} [opts]
- * @param {string} [opts.memoryPath]     // chemin du fichier de persistance L1/L2/L3
- * @param {string} [opts.offloadRoot]    // dossier L0 offload
+ * @param {string} [opts.memoryPath]          // chemin du fichier de persistance L1/L2/L3
+ * @param {string} [opts.offloadRoot]         // dossier L0 offload
  * @param {Object} [opts.fs]
  * @param {Object} [opts.path]
+ * @param {string} [opts.quant]               // quant global (ex. 'q4_K_M')
+ * @param {Object} [opts.roleQuant]           // { Planner: 'q5_K_M', Critic: 'q5_K_M', ... }
+ * @param {boolean} [opts.preferHigherQuant]  // biais vers Q5+ quand possible
  */
 export function createEngine(opts = {}) {
+  const quantGuidance = recommendForEngine({
+    model: opts.model || 'llama3.2',
+    quant: opts.quant || null,
+    roleQuant: opts.roleQuant || {},
+    preferHigherQuant: !!opts.preferHigherQuant,
+    sovereignty: opts.sovereignty || null,
+  });
+
   const providers = { mock: new MockProvider() };
   if (opts.sovereignty === 'local') {
-    providers.ollama = new OllamaProvider({ endpoint: opts.ollamaEndpoint, defaultModel: opts.model, fetchImpl: opts.fetchImpl });
+    const defaultModel = quantGuidance.resolvedDefaultModel || opts.model || 'llama3.2';
+    providers.ollama = new OllamaProvider({
+      endpoint: opts.ollamaEndpoint,
+      defaultModel,
+      fetchImpl: opts.fetchImpl,
+    });
   }
   if (opts.backendUrl) {
-    providers.backend = new HttpBackendProvider({ url: opts.backendUrl, provider: opts.backendProvider, secret: opts.secret, fetchImpl: opts.fetchImpl });
+    providers.backend = new HttpBackendProvider({
+      url: opts.backendUrl, provider: opts.backendProvider, secret: opts.secret, fetchImpl: opts.fetchImpl,
+    });
   }
   const defaultProvider = opts.backendUrl ? 'backend' : (opts.sovereignty === 'local' ? 'ollama' : 'mock');
-  const policy = new RoutingPolicy({ defaultProvider, fallback: 'mock' });
+
+  const policy = new RoutingPolicy({
+    defaultProvider,
+    fallback: 'mock',
+    roleModel: opts.roleModel || {},
+    roleQuant: opts.roleQuant || {},
+    defaultQuant: opts.quant || null,
+    preferHigherQuant: !!opts.preferHigherQuant,
+  });
+
   const llm = new KayrosLLM(providers, policy);
   const tools = demoTools();
   const governance = new GovernanceService();
@@ -100,7 +129,6 @@ export function createEngine(opts = {}) {
     persistentStore,
   });
 
-  // Chargement best-effort au démarrage
   if (persistentStore) {
     layered.load().catch(() => {});
   }
@@ -114,5 +142,6 @@ export function createEngine(opts = {}) {
   return {
     llm, tools, governance, vectors, embeddings,
     memory, layered, orchestrator, agents,
+    quantGuidance, // expose for inspection / UI
   };
 }
