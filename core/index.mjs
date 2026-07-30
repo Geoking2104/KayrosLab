@@ -1,8 +1,9 @@
-// KayrosLab — Coeur LLM gouverne : point d'assemblage.
+// KayrosLab — Cœur LLM gouverné : point d'assemblage.
 export * from './resilience.mjs';
 export * from './kayros-llm.mjs';
 export * from './tool-registry.mjs';
 export * from './memory.mjs';
+export * from './memory-types.mjs';
 export * from './embeddings.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
@@ -29,16 +30,16 @@ import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProv
 import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
-import { InMemoryVectorStore, QdrantVectorStore } from './memory.mjs';
+import { InMemoryVectorStore, QdrantVectorStore, LayeredMemory } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
 
 /**
  * Fabrique un moteur.
- * - P0 : mock (defaut, offline).
+ * - P0 : mock (défaut, offline).
  * - P1 : sovereignty:'local' => Ollama (LLM + embeddings).
  * - P2 : backendUrl => proxy PHP/Fastify ; embeddingsUrl => embeddings via proxy.
- * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, plannerModel?:string, embedModel?:string, backendUrl?:string, embeddingsUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function}} [opts]
+ * @param {{sovereignty?:'cloud'|'local', ollamaEndpoint?:string, model?:string, plannerModel?:string, embedModel?:string, backendUrl?:string, embeddingsUrl?:string, backendProvider?:string, secret?:string, fetchImpl?:Function, qdrantUrl?:string, qdrantCollection?:string, qdrantDim?:number, qdrantApiKey?:string}} [opts]
  */
 export function createEngine(opts = {}) {
   const providers = { mock: new MockProvider() };
@@ -53,6 +54,7 @@ export function createEngine(opts = {}) {
   const llm = new KayrosLLM(providers, policy);
   const tools = demoTools();
   const governance = new GovernanceService();
+
   // Vector store : Qdrant > InMemory.
   let vectors;
   if (opts.qdrantUrl) {
@@ -69,9 +71,24 @@ export function createEngine(opts = {}) {
   if (opts.embeddingsUrl) embeddings = new HttpEmbeddings({ url: opts.embeddingsUrl, model: opts.embedModel, secret: opts.secret, fetchImpl: opts.fetchImpl });
   else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel, fetchImpl: opts.fetchImpl });
   else embeddings = new MockEmbeddings();
+
   const memory = new MemoryService({ embeddings, store: vectors });
+
+  // Nouvelle mémoire stratifiée (L0–L3) — optionnelle mais recommandée
+  const layered = new LayeredMemory({ memoryService: memory, store: vectors });
 
   const agents = createAllAgents({ llm, tools, memory });
   const orchestrator = new Orchestrator({ llm, tools, governance, memory, plannerModel: opts.plannerModel, agents });
-  return { llm, tools, governance, vectors, embeddings, memory, orchestrator, agents };
+
+  return {
+    llm,
+    tools,
+    governance,
+    vectors,
+    embeddings,
+    memory,          // MemoryService classique (compat)
+    layered,         // LayeredMemory L0–L3
+    orchestrator,
+    agents,
+  };
 }
