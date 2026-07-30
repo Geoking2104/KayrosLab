@@ -11,7 +11,6 @@ export {
   validateQuantSnapshot, validateEventQuantBlock,
 } from './quant-schema.mjs';
 
-/** Role sensitivity to quantization quality (higher = prefer higher quant). */
 export const ROLE_QUANT_TIER = {
   Planner: 'high',
   Synthesizer: 'high',
@@ -70,13 +69,11 @@ export function recommendQuant({
 
   const forced = normalizeQuant(prefer);
   if (forced && QUANT_META[forced]) {
-    // If available list is provided, only force if present; else keep force
     if (Array.isArray(available) && available.length) {
       const normAvail = available.map(normalizeQuant);
       if (normAvail.includes(forced)) {
         return { quant: forced, tier: t, reason: `Explicit preference (${forced})`, meta: QUANT_META[forced] };
       }
-      // fall through to pick best available
     } else {
       return { quant: forced, tier: t, reason: `Explicit preference (${forced})`, meta: QUANT_META[forced] };
     }
@@ -87,7 +84,7 @@ export function recommendQuant({
     const normAvail = available.map(normalizeQuant).filter(Boolean);
     const hit = list.find((q) => normAvail.includes(q));
     if (hit) chosen = hit;
-    else if (normAvail.length) chosen = normAvail[0]; // last resort: any installed
+    else if (normAvail.length) chosen = normAvail[0];
   }
 
   return {
@@ -98,7 +95,6 @@ export function recommendQuant({
   };
 }
 
-/** Extract unique quant keys from a list of Ollama model tags. */
 export function extractAvailableQuants(modelTags = []) {
   const set = new Set();
   for (const tag of modelTags) {
@@ -108,20 +104,12 @@ export function extractAvailableQuants(modelTags = []) {
   return [...set];
 }
 
-/**
- * Re-resolve guidance using only quants present in installed Ollama tags.
- * Soft: if nothing matches, keeps original recommendations.
- */
 export function filterGuidanceByAvailable(guidance, modelTags = []) {
   if (!guidance || !modelTags.length) return guidance;
   const available = extractAvailableQuants(modelTags);
-  if (!available.length) return guidance; // tags without quant suffix → keep defaults
+  if (!available.length) return guidance;
 
-  const recompute = (role, prefer) => recommendQuant({
-    role,
-    prefer,
-    available,
-  });
+  const recompute = (role, prefer) => recommendQuant({ role, prefer, available });
 
   const global = recompute('default', guidance.global?.quant);
   const byRole = {};
@@ -130,7 +118,7 @@ export function filterGuidanceByAvailable(guidance, modelTags = []) {
   }
 
   const baseModel = guidance.resolvedDefaultModel
-    ? String(guidance.resolvedDefaultModel).replace(/[-_](q[0-9].*|iq.*)$/i, '')
+    ? stripQuantFromTag(guidance.resolvedDefaultModel)
     : 'llama3.2';
 
   return {
@@ -158,6 +146,15 @@ export function resolveModelTag(baseModel, quant) {
 
   if (cleaned.includes(':')) return `${cleaned}-${q}`;
   return `${cleaned}:${q}`;
+}
+
+/** Remove trailing quant suffix from a model tag. */
+export function stripQuantFromTag(modelTag) {
+  if (!modelTag) return modelTag;
+  const quantKeys = Object.keys(QUANT_META).join('|').replace(/_/g, '[_-]?');
+  const re = new RegExp(`[-_]?((?:${quantKeys}))$`, 'i');
+  const cleaned = String(modelTag).replace(re, '');
+  return cleaned || modelTag;
 }
 
 export function parseQuantFromTag(modelTag) {
