@@ -1,5 +1,4 @@
 // KayrosLab — Quantization-aware guidance for local / sovereign models.
-// Helps choose GGUF quant levels by role sensitivity and available headroom.
 // Zero dependencies. Safe defaults oriented toward Ollama + llama.cpp.
 
 export {
@@ -10,6 +9,19 @@ export {
   validateQuantRecommendation, validateAgentQuantInfo,
   validateQuantSnapshot, validateEventQuantBlock,
 } from './quant-schema.mjs';
+
+/** Map agent constructor names → quant role keys. */
+export const ROLE_ALIAS = {
+  DevilsAdvocate: "Devil's Advocate",
+  Bisociateur: 'Bisociator',
+  "Devil's Advocate": "Devil's Advocate",
+  Bisociator: 'Bisociator',
+};
+
+export function normalizeRole(role) {
+  if (!role) return 'default';
+  return ROLE_ALIAS[role] || role;
+}
 
 export const ROLE_QUANT_TIER = {
   Planner: 'high',
@@ -60,7 +72,8 @@ export function recommendQuant({
   preferHigher = false,
   available = null,
 } = {}) {
-  const t = tier || ROLE_QUANT_TIER[role] || ROLE_QUANT_TIER.default;
+  const roleKey = normalizeRole(role);
+  const t = tier || ROLE_QUANT_TIER[roleKey] || ROLE_QUANT_TIER.default;
   let list = [...(QUANT_PREFERENCE[t] || QUANT_PREFERENCE.medium)];
 
   if (preferHigher && t !== 'high') {
@@ -90,7 +103,7 @@ export function recommendQuant({
   return {
     quant: chosen,
     tier: t,
-    reason: `Role « ${role} » → tier ${t}`,
+    reason: `Role « ${roleKey} » → tier ${t}`,
     meta: QUANT_META[chosen] || { bits: null, quality: null, label: chosen },
   };
 }
@@ -107,7 +120,17 @@ export function extractAvailableQuants(modelTags = []) {
 export function filterGuidanceByAvailable(guidance, modelTags = []) {
   if (!guidance || !modelTags.length) return guidance;
   const available = extractAvailableQuants(modelTags);
-  if (!available.length) return guidance;
+  if (!available.length) {
+    // Still attach availableModels for exact tag matching even without quant suffixes
+    return {
+      ...guidance,
+      availableModels: [...modelTags],
+      resolveForRole(role, model) {
+        const rec = guidance.byRole?.[normalizeRole(role)] || guidance.byRole?.[role] || guidance.global;
+        return resolveModelTag(model || stripQuantFromTag(guidance.resolvedDefaultModel) || 'llama3.2', rec?.quant, modelTags);
+      },
+    };
+  }
 
   const recompute = (role, prefer) => recommendQuant({ role, prefer, available });
 
@@ -127,15 +150,22 @@ export function filterGuidanceByAvailable(guidance, modelTags = []) {
     byRole,
     availableQuants: available,
     availableModels: [...modelTags],
-    resolvedDefaultModel: resolveModelTag(baseModel, global.quant),
+    resolvedDefaultModel: resolveModelTag(baseModel, global.quant, modelTags),
     resolveForRole(role, model = baseModel) {
-      const rec = byRole[role] || global;
-      return resolveModelTag(model, rec.quant);
+      const rec = byRole[normalizeRole(role)] || byRole[role] || global;
+      return resolveModelTag(model, rec.quant, modelTags);
     },
   };
 }
 
-export function resolveModelTag(baseModel, quant) {
+/**
+ * Build an Ollama-style model tag.
+ * - Never invent `name:tag-q4_K_M` (invalid for most registries).
+ * - If availableModels is provided, prefer an exact installed match.
+ * - If base already has a `:` tag and no installed match, keep base (no invented quant).
+ * - If base has no `:`, use `base:quant`.
+ */
+export function resolveModelTag(baseModel, quant, availableModels = null) {
   if (!baseModel) return baseModel;
   const q = normalizeQuant(quant);
   if (!q) return baseModel;
@@ -143,12 +173,37 @@ export function resolveModelTag(baseModel, quant) {
   const quantKeys = Object.keys(QUANT_META).join('|').replace(/_/g, '[_-]?');
   const re = new RegExp(`[-_]?((?:${quantKeys}))$`, 'i');
   const cleaned = String(baseModel).replace(re, '');
+  const family = cleaned.split(':')[0];
 
-  if (cleaned.includes(':')) return `${cleaned}-${q}`;
-  return `${cleaned}:${q}`;
+  const candidates = [];
+  if (!cleaned.includes(':')) {
+    candidates.push(`${cleaned}:${q}`);
+  } else {
+    // Prefer replacing after colon only when inventing is necessary and list allows
+    candidates.push(`${family}:${q}`);
+    candidates.push(`${cleaned}-${q}`); // legacy form, only if installed
+  }
+
+  if (Array.isArray(availableModels) && availableModels.length) {
+    const tags = availableModels.map(String);
+    for (const c of candidates) {
+      if (tags.includes(c)) return c;
+    }
+    const byFamilyQuant = tags.find(
+      (t) => t.startsWith(`${family}:`) && parseQuantFromTag(t) === q,
+    );
+    if (byFamilyQuant) return byFamilyQuant;
+    const byFamily = tags.find((t) => t === cleaned || t.startsWith(`${family}:`));
+    if (byFamily) return byFamily; // installed base, no invented quant
+    // no match → keep cleaned base rather than inventing
+    return cleaned;
+  }
+
+  // No inventory: only invent quant suffix when base has no tag part
+  if (!cleaned.includes(':')) return `${cleaned}:${q}`;
+  return cleaned;
 }
 
-/** Remove trailing quant suffix from a model tag. */
 export function stripQuantFromTag(modelTag) {
   if (!modelTag) return modelTag;
   const quantKeys = Object.keys(QUANT_META).join('|').replace(/_/g, '[_-]?');
@@ -196,7 +251,7 @@ export function recommendForEngine({
 
   const byRole = {};
   for (const role of Object.keys(ROLE_QUANT_TIER)) {
-    const override = roleQuant[role];
+    const override = roleQuant[role] || roleQuant[normalizeRole(role)];
     byRole[role] = recommendQuant({
       role,
       prefer: override || quant,
@@ -206,7 +261,7 @@ export function recommendForEngine({
   }
 
   const resolvedDefault = sovereignty === 'local'
-    ? resolveModelTag(model, global.quant)
+    ? resolveModelTag(model, global.quant, availableModels)
     : model;
 
   return {
@@ -216,8 +271,9 @@ export function recommendForEngine({
     availableQuants: available,
     availableModels: availableModels || null,
     resolveForRole(role, baseModel = model) {
-      const rec = byRole[role] || global;
-      return resolveModelTag(baseModel, rec.quant);
+      const key = normalizeRole(role);
+      const rec = byRole[key] || byRole[role] || global;
+      return resolveModelTag(baseModel, rec.quant, availableModels);
     },
   };
 }

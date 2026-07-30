@@ -1,5 +1,5 @@
 import { BaseAgent } from './base-agent.mjs';
-import { parsePlanSteps } from '../orchestrator.mjs';
+import { parsePlanSteps, ensureSynthesizerLast, PLAN_AGENTS } from '../plan-parse.mjs';
 
 /** Canonical fallback plan — shared with Orchestrator. */
 export function defaultFallbackSteps() {
@@ -29,7 +29,7 @@ export class PlannerAgent extends BaseAgent {
   }
 
   async createPlan(goal, { provider, sovereignty, model, llmPlan } = {}) {
-    if (llmPlan === false) return this._fallbackPlan(goal);
+    if (llmPlan === false) return this._fallbackPlan();
 
     const messages = [
       { role: 'system', content: this.systemPrompt },
@@ -37,7 +37,7 @@ export class PlannerAgent extends BaseAgent {
     ];
 
     try {
-      if (!this.llm) return this._fallbackPlan(goal);
+      if (!this.llm) return this._fallbackPlan();
       const res = await this.llm.complete(
         {
           role: 'Planner',
@@ -48,29 +48,22 @@ export class PlannerAgent extends BaseAgent {
         },
         { provider, sovereignty },
       );
-      const steps = parsePlanSteps(res.text);
-      if (!steps?.length) return this._fallbackPlan(goal);
-      // Ensure Synthesizer is last
-      const normalized = [...steps];
-      const last = normalized[normalized.length - 1];
-      if (!last || last.agent !== 'Synthesizer') {
-        normalized.push({
-          id: `s${normalized.length + 1}`,
-          agent: 'Synthesizer',
-          description: 'Synthese et recommandations arbitrables',
-        });
-      }
+      // Planner itself is rarely a step agent; allow specialist set + optional Planner
+      const steps = parsePlanSteps(res.text, {
+        allowed: PLAN_AGENTS.filter((a) => a !== 'Planner').concat(['Planner']),
+      });
+      if (!steps?.length) return this._fallbackPlan();
       return {
         generatedBy: 'llm',
-        steps: normalized,
+        steps: ensureSynthesizerLast(steps),
         degraded: res.degraded || null,
       };
     } catch {
-      return this._fallbackPlan(goal);
+      return this._fallbackPlan();
     }
   }
 
-  _fallbackPlan(_goal) {
+  _fallbackPlan() {
     return { generatedBy: 'fallback', steps: defaultFallbackSteps(), degraded: null };
   }
 }
