@@ -28,6 +28,7 @@ export * from './positionning/index.mjs';
 export * from './quant-guidance.mjs';
 export * from './quant-schema.mjs';
 export * from './quant-ui.mjs';
+export * from './plan-parse.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
@@ -39,17 +40,13 @@ import {
 } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
-import { recommendForEngine, filterGuidanceByAvailable } from './quant-guidance.mjs';
+import { recommendForEngine, filterGuidanceByAvailable, ROLE_ALIAS, normalizeRole } from './quant-guidance.mjs';
 
-/**
- * Apply quantGuidance onto an existing agents map (mutates preferredModel / quantRec).
- */
 export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
   if (!agents || !quantGuidance) return agents;
-  const ROLE_ALIAS = { DevilsAdvocate: "Devil's Advocate", Bisociateur: 'Bisociator' };
   for (const [name, agent] of Object.entries(agents)) {
     if (!agent) continue;
-    const roleKey = ROLE_ALIAS[name] || name;
+    const roleKey = normalizeRole(name);
     const quantRec = quantGuidance.byRole?.[roleKey]
       || quantGuidance.byRole?.[name]
       || quantGuidance.global
@@ -65,6 +62,20 @@ export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
     agent.quantRec = quantRec;
   }
   return agents;
+}
+
+/** Best-effort Node fs/path when memoryPath / offloadRoot set without injection. */
+async function tryLoadNodeIo() {
+  try {
+    if (typeof process === 'undefined' || !process.versions?.node) return null;
+    const [fs, path] = await Promise.all([
+      import('node:fs/promises'),
+      import('node:path'),
+    ]);
+    return { fs, path };
+  } catch {
+    return null;
+  }
 }
 
 export function createEngine(opts = {}) {
@@ -104,6 +115,7 @@ export function createEngine(opts = {}) {
     roleQuant: opts.roleQuant || {},
     defaultQuant: opts.quant || null,
     preferHigherQuant: !!opts.preferHigherQuant,
+    availableModels: opts.availableModels || null,
   });
 
   const llm = new KayrosLLM(providers, policy);
@@ -151,7 +163,7 @@ export function createEngine(opts = {}) {
     persistentStore,
   });
 
-  if (persistentStore) {
+  if (persistentStore?.enabled) {
     layered.load().catch(() => {});
   }
 
@@ -173,12 +185,39 @@ export function createEngine(opts = {}) {
     baseModel,
   };
 
-  /** Refresh guidance from Ollama tags and rebind agent preferredModel. */
+  /** Attach Node fs/path when paths were requested without injection. */
+  engine.attachNodeFs = async () => {
+    if (opts.fs) return true;
+    if (!opts.memoryPath && !opts.offloadRoot) return false;
+    const io = await tryLoadNodeIo();
+    if (!io) return false;
+    if (opts.offloadRoot || opts.memoryPath) {
+      layered.offloadBackend = new FileOffloadBackend({
+        rootDir: opts.offloadRoot || './.kayros-l0',
+        fs: io.fs,
+        path: io.path,
+      });
+      layered.persistentStore = new FileLayeredStore({
+        path: opts.memoryPath || './.kayros-memory.json',
+        fs: io.fs,
+      });
+      await layered.load().catch(() => {});
+    }
+    return true;
+  };
+
+  if ((opts.memoryPath || opts.offloadRoot) && !opts.fs) {
+    engine.persistenceReady = engine.attachNodeFs().catch(() => false);
+  } else {
+    engine.persistenceReady = Promise.resolve(!!(persistentStore?.enabled));
+  }
+
   engine.rebindFromAvailable = async (tags) => {
     if (!Array.isArray(tags) || !tags.length) return quantGuidance;
     quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
     engine.quantGuidance = quantGuidance;
     orchestrator.quantGuidance = quantGuidance;
+    if (policy) policy.availableModels = tags;
     if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
       ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
     }
