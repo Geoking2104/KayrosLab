@@ -65,7 +65,7 @@ export async function analyzeIdea(idea, opts = {}) {
     headers,
     body: JSON.stringify({
       idea,
-      limit: opts.limit || 5,
+      limit: opts.limit || 3,
       gapThreshold: opts.gapThreshold,
     }),
   });

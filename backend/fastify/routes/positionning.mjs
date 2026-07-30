@@ -22,11 +22,12 @@ export default async function positionningRoute(app) {
 
   async function runMistralAnalysis({ idea, limit, gapThreshold }) {
     const ctx = app.kayrosContext;
+    const safeLimit = Math.max(1, Math.min(Number(limit) || 3, 3));
     const { runMistralContextualPositionning } = await import('../../../core/positionning/index.mjs');
     return runMistralContextualPositionning(idea, {
       apiKey: ctx.MISTRAL_API_KEY,
       model: ctx.MISTRAL_MODEL,
-      limit,
+      limit: safeLimit,
       gapThreshold,
       googleApiKey: ctx.GOOGLE_API_KEY,
       googleCx: ctx.GOOGLE_CX,
