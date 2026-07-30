@@ -1,18 +1,11 @@
 // KayrosLab — Abstraction LLM (KayrosLLM) + adaptateurs.
-// Ref. specs techniques §5 (EF-24/25/26). Le code metier ne connait jamais le fournisseur.
+// Quant soft-fallback: strip quant suffix → retry → policy fallback (mock).
 
 import { CircuitBreaker, withResilience } from './resilience.mjs';
-import { resolveModelTag, recommendQuant, parseQuantFromTag } from './quant-guidance.mjs';
-
-/**
- * @typedef {{role:'system'|'user'|'assistant'|'tool', content:string}} LLMMessage
- * @typedef {{messages:LLMMessage[], model?:string, tools?:any[], temperature?:number, stream?:boolean, role?:string}} LLMRequest
- * @typedef {{text:string, toolCalls?:{name:string,input:any}[], usage:{tokensIn:number,tokensOut:number,costUsd:number}, provider:string, latencyMs:number}} LLMResponse
- */
+import { resolveModelTag, recommendQuant, parseQuantFromTag, stripQuantFromTag } from './quant-guidance.mjs';
 
 const approxTokens = (s) => Math.max(1, Math.round((s || '').length / 4));
 
-/** Adaptateur simule, deterministe (aucun reseau). Sert de defaut et de fallback. */
 export class MockProvider {
   constructor(id = 'mock') { this.id = id; }
   async complete(req) {
@@ -23,7 +16,6 @@ export class MockProvider {
   }
 }
 
-/** Squelette d'adaptateur Anthropic (a brancher cote backend, jamais de cle au client). */
 export class AnthropicProvider {
   constructor({ callBackend } = {}) { this.id = 'anthropic'; this._callBackend = callBackend; }
   async complete(req) {
@@ -32,7 +24,6 @@ export class AnthropicProvider {
   }
 }
 
-/** Adaptateur Ollama (local / souverain). Fonctionne contre un vrai serveur Ollama. */
 export class OllamaProvider {
   constructor({ endpoint = 'http://localhost:11434', defaultModel = 'llama3.2', fetchImpl } = {}) {
     this.id = 'ollama'; this.endpoint = endpoint; this.defaultModel = defaultModel; this._fetch = fetchImpl;
@@ -55,7 +46,6 @@ export class OllamaProvider {
         model: req.model ?? this.defaultModel,
         messages: req.messages,
         stream: false,
-        // Desactive le raisonnement expose pour les modeles "thinking" (ex. Planner : JSON direct).
         ...(typeof req.think === 'boolean' ? { think: req.think } : {}),
         options: typeof req.temperature === 'number' ? { temperature: req.temperature } : undefined,
       }),
@@ -71,11 +61,6 @@ export class OllamaProvider {
   }
 }
 
-/**
- * Adaptateur backend HTTP : le navigateur (ou tout client) appelle le proxy KayrosLab
- * (PHP mutualise OU Fastify) qui detient la cle et relaie vers Claude/Ollama.
- * POST { messages, model, provider, role, temperature } -> { text, provider, usage }.
- */
 export class HttpBackendProvider {
   constructor({ url, provider = 'anthropic', secret, fetchImpl } = {}) {
     if (!url) throw new Error('HttpBackendProvider: url requis');
@@ -104,21 +89,7 @@ export class HttpBackendProvider {
   }
 }
 
-/**
- * Politique de routage : override explicite > souverainete > defaut, avec fallback.
- * EF-26 : sovereignty='local' force Ollama ; opts.provider force un fournisseur precis.
- * Quant-aware : roleQuant / preferHigherQuant influencent le tag modele final.
- */
 export class RoutingPolicy {
-  /**
-   * @param {Object} [opts]
-   * @param {Object} [opts.roleModel]       // role → base model name
-   * @param {string} [opts.defaultProvider]
-   * @param {string} [opts.fallback]
-   * @param {Object} [opts.roleQuant]       // role → preferred quant (e.g. { Planner: 'q5_K_M' })
-   * @param {string} [opts.defaultQuant]    // global quant fallback
-   * @param {boolean} [opts.preferHigherQuant]
-   */
   constructor({
     roleModel = {},
     defaultProvider = 'anthropic',
@@ -141,16 +112,10 @@ export class RoutingPolicy {
     return this.defaultProvider;
   }
 
-  /**
-   * Résout le tag modèle en tenant compte du rôle et de la guidance quant.
-   * - Si req.model est déjà fourni avec un quant, on le respecte.
-   * - Sinon on applique roleQuant / defaultQuant via resolveModelTag.
-   */
   modelFor(req, opts = {}) {
     const base = req.model ?? this.roleModel[req.role] ?? undefined;
     if (!base) return undefined;
 
-    // Si l'appelant a déjà collé un quant dans le tag, on ne force pas
     if (parseQuantFromTag(base)) return base;
 
     const role = req.role || 'default';
@@ -166,7 +131,6 @@ export class RoutingPolicy {
   }
 }
 
-/** Facade unique. Le metier appelle complete() sans connaitre le fournisseur. */
 export class KayrosLLM {
   constructor(providers, policy = new RoutingPolicy(), { breakerConfig } = {}) {
     this.providers = providers;
@@ -178,21 +142,60 @@ export class KayrosLLM {
     if (!this._breakers.has(id)) this._breakers.set(id, new CircuitBreaker(this._breakerConfig));
     return this._breakers.get(id);
   }
+
   async complete(req, opts = {}) {
     const primaryId = this.policy.choose(req, opts);
     const model = this.policy.modelFor(req, opts);
-    const attempt = async (id) => {
+    const attempt = async (id, modelOverride) => {
       const p = this.providers[id];
       if (!p) { const e = new Error(`Provider inconnu: ${id}`); e.code = 'UNKNOWN_PROVIDER'; throw e; }
       const breaker = this._breakerFor(id);
-      return withResilience(() => p.complete({ ...req, model }), breaker);
+      return withResilience(
+        () => p.complete({ ...req, model: modelOverride !== undefined ? modelOverride : model }),
+        breaker,
+      );
     };
+
+    // 1) Primary provider + resolved model (often quant-suffixed)
     try {
-      return await attempt(primaryId);
-    } catch (e) {
+      return await attempt(primaryId, model);
+    } catch (primaryErr) {
+      // 2) Soft quant fallback: strip quant suffix and retry same provider once
+      const quant = model ? parseQuantFromTag(model) : null;
+      if (quant && primaryId === 'ollama') {
+        const baseTag = stripQuantFromTag(model);
+        if (baseTag && baseTag !== model) {
+          try {
+            const res = await attempt(primaryId, baseTag);
+            return {
+              ...res,
+              degraded: {
+                reason: 'quant_tag_unavailable',
+                from: model,
+                to: baseTag,
+                provider: primaryId,
+              },
+            };
+          } catch { /* continue to policy fallback */ }
+        }
+      }
+
+      // 3) Policy fallback (mock)
       const fb = this.policy.fallback;
-      if (fb && fb !== primaryId && this.providers[fb]) return attempt(fb);
-      throw e;
+      if (fb && fb !== primaryId && this.providers[fb]) {
+        const res = await attempt(fb, model);
+        return {
+          ...res,
+          degraded: {
+            reason: 'provider_fallback',
+            from: primaryId,
+            to: fb,
+            modelAttempted: model || null,
+            error: primaryErr?.message || String(primaryErr),
+          },
+        };
+      }
+      throw primaryErr;
     }
   }
 }

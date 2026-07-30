@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>KayrosLab — quant panel demo</title>
+  <script type="importmap">
+  { "imports": { "./index.mjs": "./index.mjs" } }
+  </script>
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; margin: 24px; background: #f8fafc; color: #0f172a; }
+    h1 { font-size: 1.25rem; }
+    .kayros-quant-badge { background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .kayros-quant-timeline { list-style: none; padding: 0; }
+    .kayros-quant-timeline li { padding: 8px 12px; margin: 4px 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; }
+    .ev-type { font-weight: 600; text-transform: uppercase; font-size: 11px; color: #64748b; margin-right: 8px; }
+    pre.mermaid { background: #fff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; overflow: auto; }
+    button { background: #0284c7; color: #fff; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Quant panel (mock engine)</h1>
+  <div id="controls"></div>
+  <p><button id="run">Run cycle</button></p>
+  <div id="timeline"></div>
+  <div id="canvas"></div>
+
+  <script type="module">
+    import { createEngine, collect } from './index.mjs';
+    import { quantControlsHtml, quantTimelineHtml, mermaidCanvasHtml } from './quant-ui.mjs';
+
+    const eng = createEngine({
+      quant: 'q4_K_M',
+      roleQuant: { Planner: 'q5_K_M', Critic: 'q5_K_M' },
+    });
+
+    document.getElementById('controls').innerHTML = quantControlsHtml({
+      autoDistill: true,
+      quantGuidance: eng.quantGuidance,
+    });
+
+    document.getElementById('run').onclick = async () => {
+      const autoDistill = document.getElementById('kayros-auto-distill')?.checked;
+      for (let i = 0; i < 3; i++) {
+        await eng.layered.addAtomicFact({
+          ideaId: 'ui-demo',
+          content: `Observation UI ${i} marché énergie`,
+          type: 'observation',
+          confidence: 0.8,
+        });
+      }
+      const plan = await eng.orchestrator.plan('Demo quant UI', { ideaId: 'ui-demo', llmPlan: false });
+      const events = await collect(eng.orchestrator.run(plan, {
+        governance: 'auto',
+        autoDistill: !!autoDistill,
+        distillMinFacts: 3,
+      }));
+      document.getElementById('timeline').innerHTML = quantTimelineHtml(events);
+      const canvas = eng.layered.getWorkingCanvas('ui-demo', { includeOffloaded: true });
+      document.getElementById('canvas').innerHTML = mermaidCanvasHtml(canvas);
+    };
+  </script>
+</body>
+</html>

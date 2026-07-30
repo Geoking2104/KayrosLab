@@ -27,6 +27,7 @@ export * from './connectors.mjs';
 export * from './positionning/index.mjs';
 export * from './quant-guidance.mjs';
 export * from './quant-schema.mjs';
+export * from './quant-ui.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
@@ -41,14 +42,31 @@ import { createAllAgents } from './agents/index.mjs';
 import { recommendForEngine, filterGuidanceByAvailable } from './quant-guidance.mjs';
 
 /**
- * Fabrique un moteur.
- * @param {Object} [opts]
- * @param {string} [opts.quant]
- * @param {Object} [opts.roleQuant]
- * @param {boolean} [opts.preferHigherQuant]
- * @param {boolean} [opts.syncAvailableQuants]  // try ollama listModels and filter
- * @param {string[]} [opts.availableModels]     // explicit installed tags
+ * Apply quantGuidance onto an existing agents map (mutates preferredModel / quantRec).
  */
+export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
+  if (!agents || !quantGuidance) return agents;
+  const ROLE_ALIAS = { DevilsAdvocate: "Devil's Advocate", Bisociateur: 'Bisociator' };
+  for (const [name, agent] of Object.entries(agents)) {
+    if (!agent) continue;
+    const roleKey = ROLE_ALIAS[name] || name;
+    const quantRec = quantGuidance.byRole?.[roleKey]
+      || quantGuidance.byRole?.[name]
+      || quantGuidance.global
+      || null;
+    let preferredModel = null;
+    if (typeof quantGuidance.resolveForRole === 'function' && baseModel) {
+      preferredModel = quantGuidance.resolveForRole(roleKey, baseModel)
+        || quantGuidance.resolveForRole(name, baseModel);
+    } else if (quantGuidance.resolvedDefaultModel) {
+      preferredModel = quantGuidance.resolvedDefaultModel;
+    }
+    agent.preferredModel = preferredModel;
+    agent.quantRec = quantRec;
+  }
+  return agents;
+}
+
 export function createEngine(opts = {}) {
   const baseModel = opts.model || 'llama3.2';
 
@@ -137,22 +155,6 @@ export function createEngine(opts = {}) {
     layered.load().catch(() => {});
   }
 
-  // Best-effort: sync installed Ollama tags → filter quant recommendations
-  const maybeSync = async () => {
-    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') return;
-    try {
-      const tags = await ollamaProvider.listModels();
-      if (Array.isArray(tags) && tags.length) {
-        quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
-        if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
-          ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
-        }
-      }
-    } catch { /* soft — Ollama down */ }
-  };
-  // Fire and forget; agents below use initial guidance (acceptable for cold start)
-  const syncPromise = maybeSync();
-
   const agents = createAllAgents({
     llm, tools, memory, quantGuidance, baseModel,
   });
@@ -164,11 +166,40 @@ export function createEngine(opts = {}) {
     quantGuidance,
   });
 
-  return {
+  const engine = {
     llm, tools, governance, vectors, embeddings,
     memory, layered, orchestrator, agents,
     quantGuidance,
-    /** Await to refresh quantGuidance from live `ollama list`. */
-    syncAvailableQuants: syncPromise,
+    baseModel,
   };
+
+  /** Refresh guidance from Ollama tags and rebind agent preferredModel. */
+  engine.rebindFromAvailable = async (tags) => {
+    if (!Array.isArray(tags) || !tags.length) return quantGuidance;
+    quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
+    engine.quantGuidance = quantGuidance;
+    orchestrator.quantGuidance = quantGuidance;
+    if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
+      ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
+    }
+    rebindAgentsQuant(agents, quantGuidance, baseModel);
+    return quantGuidance;
+  };
+
+  const maybeSync = async () => {
+    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') {
+      return quantGuidance;
+    }
+    try {
+      const tags = await ollamaProvider.listModels();
+      if (Array.isArray(tags) && tags.length) {
+        return engine.rebindFromAvailable(tags);
+      }
+    } catch { /* soft */ }
+    return quantGuidance;
+  };
+
+  engine.syncAvailableQuants = maybeSync();
+
+  return engine;
 }
