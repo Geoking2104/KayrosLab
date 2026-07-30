@@ -40,20 +40,23 @@ export async function runMistralContextualPositionning(ideaText, {
     gitlabBaseUrl,
   });
   const prompt = buildPrompt(idea, limit, comparisonSources);
-  let rawText = '';
+  let payload;
   let references = [];
   let providerMode = 'mistral_conversations_web_search';
 
   try {
     const conversation = await callMistralConversation({ apiKey, model, prompt, fetchFn });
-    rawText = conversation.text;
     references = conversation.references;
+    payload = parseJsonPayload(conversation.text);
+    validatePayload(payload, { idea, limit, references });
   } catch {
     providerMode = 'mistral_chat_json';
-    rawText = await callMistralChatJson({ apiKey, model, prompt, fetchFn });
+    references = [];
+    const rawText = await callMistralChatJson({ apiKey, model, prompt, fetchFn });
+    payload = parseJsonPayload(rawText);
+    validatePayload(payload, { idea, limit, references });
   }
 
-  const payload = parseJsonPayload(rawText);
   const examples = normalizeExamples(payload.examples, { idea, limit, references });
   if (!examples.length) throw new Error("Mistral n'a retourne aucun exemple exploitable");
 
@@ -88,6 +91,12 @@ export async function runMistralContextualPositionning(ideaText, {
       topGaps: gaps.slice(0, 3),
     },
   };
+}
+
+function validatePayload(payload, { idea, limit, references }) {
+  const examples = normalizeExamples(payload?.examples, { idea, limit, references });
+  if (!examples.length) throw new Error("Mistral n'a retourne aucun exemple exploitable");
+  if (!normalizeScores(payload?.baselineScores)) throw new Error("Mistral n'a pas retourne de baselineScores complets");
 }
 
 async function callMistralConversation({ apiKey, model, prompt, fetchFn }) {
