@@ -1,13 +1,11 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
-// Ref. specs techniques §3 (EF-15/16) + §6 (EF-17/18). Emet des ReActTrace en flux.
-// Étendu pour LayeredMemory (L0–L3) : recall multi-couches + offload + distillation.
 // Quant-aware : expose quantRec / preferredModel dans les events.
+// autoDistill optionnel en fin de cycle.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
 import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 
-/** @typedef {'Planner'|'Critic'|'DevilsAdvocate'|'RedTeam'|'Bisociateur'|'Synthesizer'} AgentType */
 const AGENTS = AGENT_TYPES;
 
 const PLANNER_SYSTEM =
@@ -17,7 +15,6 @@ const PLANNER_SYSTEM =
   'Reponds UNIQUEMENT par un tableau JSON, sans texte autour : ' +
   '[{"agent":"Planner","description":"..."},{"agent":"RedTeam","description":"..."},{"agent":"Synthesizer","description":"..."}]';
 
-/** Extrait le premier tableau JSON equilibre. Renvoie la sous-chaine (tronquee si non fermee) ou null. */
 export function extractFirstArray(s) {
   const start = s.indexOf('[');
   if (start < 0) return null;
@@ -37,7 +34,6 @@ export function extractFirstArray(s) {
   return s.slice(start);
 }
 
-/** Recupere les objets {...} complets d'un tableau JSON eventuellement tronque. */
 export function salvageObjects(raw) {
   const objs = [];
   let depth = 0, inStr = false, esc = false, startObj = -1;
@@ -51,14 +47,11 @@ export function salvageObjects(raw) {
     }
     if (c === '"') inStr = true;
     else if (c === '{') { if (depth === 0) startObj = i; depth++; }
-    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* objet invalide ignore */ } startObj = -1; } }
+    else if (c === '}') { depth--; if (depth === 0 && startObj >= 0) { try { objs.push(JSON.parse(raw.slice(startObj, i + 1))); } catch { /* ignore */ } startObj = -1; } }
   }
   return objs;
 }
 
-/**
- * Extrait et valide un tableau d'etapes depuis la reponse LLM. Renvoie null si invalide.
- */
 export function parsePlanSteps(text) {
   try {
     let s = String(text ?? '');
@@ -79,7 +72,6 @@ export function parsePlanSteps(text) {
   } catch { return null; }
 }
 
-/** Snapshot quant info for one agent (safe if missing). */
 function agentQuantInfo(agent) {
   if (!agent) return null;
   const rec = agent.quantRec || null;
@@ -93,19 +85,6 @@ function agentQuantInfo(agent) {
 }
 
 export class Orchestrator {
-  /**
-   * @param {Object} opts
-   * @param {Object} opts.llm
-   * @param {Object} [opts.tools]
-   * @param {Object} [opts.memory]
-   * @param {Object} [opts.layered]
-   * @param {Object} [opts.governance]
-   * @param {Object} [opts.classifier]
-   * @param {number} [opts.recallK=3]
-   * @param {string} [opts.plannerModel]
-   * @param {Object} [opts.agents]
-   * @param {Object} [opts.quantGuidance]  // from recommendForEngine
-   */
   constructor({
     llm, tools = null, memory = null, layered = null, governance = null,
     classifier = null, recallK = 3, plannerModel = null, agents = null,
@@ -127,7 +106,6 @@ export class Orchestrator {
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
   _hasLayered() { return !!this.layered && typeof this.layered.recall === 'function'; }
 
-  /** Build a compact quant snapshot for events. */
   _quantSnapshot() {
     if (!this.quantGuidance && !this.agents) return null;
     const byAgent = {};
@@ -138,6 +116,7 @@ export class Orchestrator {
     return {
       global: this.quantGuidance?.global || null,
       resolvedDefaultModel: this.quantGuidance?.resolvedDefaultModel || null,
+      availableQuants: this.quantGuidance?.availableQuants || null,
       byAgent,
     };
   }
@@ -154,29 +133,19 @@ export class Orchestrator {
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     if (ctx.llmPlan === false) {
-      return {
-        ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(),
-        quant: this._quantSnapshot(),
-      };
+      return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
     }
     try {
       const opts = {};
       if (ctx.provider) opts.provider = ctx.provider;
       if (ctx.sovereignty) opts.sovereignty = ctx.sovereignty;
 
-      // Prefer agent preferredModel (quant-aware) then explicit ctx / plannerModel
       const plannerAgent = this.agents?.Planner;
-      const model = ctx.model
-        ?? plannerAgent?.preferredModel
-        ?? this.plannerModel
-        ?? undefined;
+      const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
 
       const res = await this.llm.complete(
         {
-          role: 'Planner',
-          model,
-          temperature: 0.2,
-          think: false,
+          role: 'Planner', model, temperature: 0.2, think: false,
           messages: [
             { role: 'system', content: PLANNER_SYSTEM },
             { role: 'user', content: `Objectif : ${goal}` },
@@ -188,31 +157,21 @@ export class Orchestrator {
       if (steps) {
         return {
           ideaId, goal, generatedBy: 'llm', steps,
-          quant: {
-            modelUsed: model || null,
-            agent: agentQuantInfo(plannerAgent),
-            snapshot: this._quantSnapshot(),
-          },
+          quant: { modelUsed: model || null, agent: agentQuantInfo(plannerAgent), snapshot: this._quantSnapshot() },
         };
       }
-    } catch (e) { /* repli silencieux */ }
-    return {
-      ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(),
-      quant: this._quantSnapshot(),
-    };
+    } catch { /* soft */ }
+    return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
   }
 
-  /**
-   * Phase SOLVE (ReAct) : rappel mémoire (classique ou layered) -> étapes -> gouvernance.
-   */
   async *run(plan, opts = {}) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
     const doRemember = opts.remember !== false;
     const doOffload = opts.offload !== false;
+    const doAutoDistill = opts.autoDistill === true;
 
-    // 0) Start event with quant snapshot
     yield {
       type: 'start',
       ideaId: plan.ideaId,
@@ -221,7 +180,6 @@ export class Orchestrator {
       ts: new Date().toISOString(),
     };
 
-    // 1) RAPPEL mémoire — préfère LayeredMemory si disponible
     let contextBlock = '';
     if (doRecall) {
       if (this._hasLayered()) {
@@ -230,11 +188,8 @@ export class Orchestrator {
           if (contextBlock) {
             const snap = this.layered.snapshot(plan.ideaId);
             yield {
-              type: 'recall',
-              ideaId: plan.ideaId,
-              source: 'layered',
-              stats: snap.stats,
-              preview: contextBlock.slice(0, 400),
+              type: 'recall', ideaId: plan.ideaId, source: 'layered',
+              stats: snap.stats, preview: contextBlock.slice(0, 400),
               ts: new Date().toISOString(),
             };
           }
@@ -262,7 +217,7 @@ export class Orchestrator {
         const res = await specialist.execute(s.description, {
           goal: plan.goal, context: contextBlock,
           provider: opts.provider, sovereignty: opts.sovereignty,
-          model: opts.model, // optional override
+          model: opts.model,
         });
         observation = res.output;
         actionType = 'specialized_agent';
@@ -273,49 +228,34 @@ export class Orchestrator {
         const messages = [];
         if (contextBlock) messages.push({ role: 'system', content: contextBlock });
         messages.push({ role: 'user', content: `${plan.goal}\n\nTache : ${s.description}` });
-
-        // Prefer agent preferredModel when present
-        const model = opts.model
-          || specialist?.preferredModel
-          || undefined;
-
+        const model = opts.model || specialist?.preferredModel || undefined;
         const llmRes = await this.llm.complete({ role: s.agent, messages, model }, opts);
         observation = llmRes.text;
         usage = llmRes.usage;
         modelUsed = model || null;
         if (s.tool && this.tools) {
           observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
-          actionType = 'tool';
-          actionName = s.tool;
+          actionType = 'tool'; actionName = s.tool;
         }
       }
 
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
 
-      // Enregistrement classique
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
       if (doRemember && this._hasVectorMemory()) {
-        try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* best-effort */ }
+        try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* soft */ }
       }
 
-      // Layered path : L0 working item + best-effort L1 fact
       if (this._hasLayered()) {
         try {
           this.layered.rememberL0({
-            ideaId: plan.ideaId,
-            step: s.id,
-            agentRole: s.agent,
-            kind: 'agent_scratch',
-            content: obsText,
-            summary: obsText.slice(0, 200),
+            ideaId: plan.ideaId, step: s.id, agentRole: s.agent,
+            kind: 'agent_scratch', content: obsText, summary: obsText.slice(0, 200),
           });
           if (obsText.length < 400 && obsText.length > 30) {
             await this.layered.addAtomicFact({
-              ideaId: plan.ideaId,
-              content: obsText.slice(0, 300),
-              type: 'observation',
-              actors: [s.agent],
-              confidence: 0.55,
+              ideaId: plan.ideaId, content: obsText.slice(0, 300), type: 'observation',
+              actors: [s.agent], confidence: 0.55,
               sourceRefs: [{ type: 'agent', id: s.agent }],
             });
           }
@@ -323,23 +263,16 @@ export class Orchestrator {
       }
 
       yield {
-        type: 'trace',
-        stepId: s.id,
-        agent: s.agent,
+        type: 'trace', stepId: s.id, agent: s.agent,
         thought: `[${s.agent}] ${s.description}`,
         action: { type: actionType, name: actionName },
-        observation,
-        usedContext: !!contextBlock,
+        observation, usedContext: !!contextBlock,
         tokens: { in: usage.tokensIn, out: usage.tokensOut },
-        quant: {
-          modelUsed,
-          agent: agentQuantInfo(specialist),
-        },
+        quant: { modelUsed, agent: agentQuantInfo(specialist) },
         ts: new Date().toISOString(),
       };
     }
 
-    // Fin de cycle : offload L0
     if (doOffload && this._hasLayered()) {
       try {
         const refs = await this.layered.offload(plan.ideaId);
@@ -349,19 +282,34 @@ export class Orchestrator {
       } catch { /* soft */ }
     }
 
-    // Synthesize
+    // Optional L1 → L2 auto distillation at end of cycle
+    if (doAutoDistill && this._hasLayered() && typeof this.layered.autoDistillL2 === 'function') {
+      try {
+        const created = await this.layered.autoDistillL2(plan.ideaId, {
+          minFacts: opts.distillMinFacts ?? 3,
+          llm: opts.distillLlm || null,
+          distillFn: opts.distillFn || null,
+          force: !!opts.distillForce,
+        });
+        if (created.length) {
+          yield {
+            type: 'distill',
+            ideaId: plan.ideaId,
+            count: created.length,
+            titles: created.map((s) => s.title),
+            ts: new Date().toISOString(),
+          };
+        }
+      } catch { /* soft */ }
+    }
+
     const synthAgent = this.agents?.Synthesizer;
     if (synthAgent && synthAgent.synthesize && agentOutputs.length > 0) {
       const synthesis = await synthAgent.synthesize(agentOutputs, opts);
       yield {
-        type: 'synthesis',
-        agent: 'Synthesizer',
-        output: synthesis.output,
-        decision: synthesis.structured,
-        quant: {
-          modelUsed: synthesis.model || synthAgent.preferredModel || null,
-          agent: agentQuantInfo(synthAgent),
-        },
+        type: 'synthesis', agent: 'Synthesizer',
+        output: synthesis.output, decision: synthesis.structured,
+        quant: { modelUsed: synthesis.model || synthAgent.preferredModel || null, agent: agentQuantInfo(synthAgent) },
         ts: new Date().toISOString(),
       };
     }
@@ -412,12 +360,8 @@ export class Orchestrator {
       try { projections = await this.tools.call('simulate_trajectory', { scenarios: decision.scenarios, variables: decision.variables ?? [], iterations: ctx.iterations, seed: ctx.seed }, { ideaId }); } catch { projections = null; }
     }
     const roadmap = {
-      jalons: milestones,
-      raci: decision.raci ?? [],
-      ressources,
-      kpis: decision.kpis ?? [],
-      risques: decision.risques ?? [],
-      gatesFuturs: decision.gatesFuturs ?? [],
+      jalons: milestones, raci: decision.raci ?? [], ressources,
+      kpis: decision.kpis ?? [], risques: decision.risques ?? [], gatesFuturs: decision.gatesFuturs ?? [],
     };
     this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
     return { ...base, status: 'Go', roadmap, projections };
@@ -428,7 +372,7 @@ export class Orchestrator {
     const { alerts } = evaluateKpis(kpis, readings);
     const signals = alertsToSignals(alerts, { ideaId });
     if (this._hasVectorMemory()) {
-      for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* best-effort */ } }
+      for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* soft */ } }
     } else {
       for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
     }
@@ -436,12 +380,7 @@ export class Orchestrator {
       for (const s of signals) {
         try {
           await this.layered.addAtomicFact({
-            ideaId,
-            content: s.contenu,
-            type: 'metric',
-            actors: ['monitor'],
-            confidence: 0.8,
-            tags: ['kpi-alert'],
+            ideaId, content: s.contenu, type: 'metric', actors: ['monitor'], confidence: 0.8, tags: ['kpi-alert'],
           });
         } catch { /* soft */ }
       }

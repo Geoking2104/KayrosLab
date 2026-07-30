@@ -9,58 +9,73 @@ Ce n'est **pas** un modèle entraîné : c'est un orchestrateur gouverné.
 | Fichier | Rôle |
 |---|---|
 | `index.mjs` | `createEngine(opts)` — assemble providers, routage, mémoire, embeddings, gouvernance, orchestrateur. |
-| `kayros-llm.mjs` | Abstraction `KayrosLLM` + adaptateurs `Mock`, `Anthropic`, `Ollama`, `HttpBackend` ; `RoutingPolicy` ; circuit breaker par provider. |
-| `orchestrator.mjs` | `Orchestrator` (Plan-and-Solve + ReAct), memory-aware. Planner LLM + repli déterministe. |
-| `resilience.mjs` | `computeBackoff`, `CircuitBreaker`, `withResilience` (retry + backoff + jitter). |
-| `memory.mjs` | `SharedMemory`, `InMemoryVectorStore`, `QdrantVectorStore` (cosinus, filtre par `ideaId`). |
-| `embeddings.mjs` | `OllamaEmbeddings`, `MockEmbeddings`, `HttpEmbeddings`, `MemoryService` (remember/recall). |
-| `governance.mjs` | Gates, RBAC, veto, classifieur de sensibilité (LLM + repli), `policyFor`. |
-| `ki.mjs` | Kayroslab Index (5 dimensions stratégiques + 6 techniques). |
-| `tool-registry.mjs` | Registre d'outils (`demoTools`). |
+| `kayros-llm.mjs` | Abstraction `KayrosLLM` + adaptateurs ; `RoutingPolicy` quant-aware. |
+| `orchestrator.mjs` | Plan-and-Solve + ReAct ; events `quant` ; `autoDistill` optionnel. |
+| `memory.mjs` / `memory-types.mjs` | SharedMemory + **LayeredMemory L0–L3** + offload / persistence. |
+| `quant-guidance.mjs` / `quant-schema.mjs` | Recommandations de quant GGUF + JSON Schema + validateurs. |
+| `embeddings.mjs` | Ollama / Mock / Http embeddings + `MemoryService`. |
+| `governance.mjs` | Gates, RBAC, veto, sensibilité. |
+| `agents/` | Planner, Critic, RedTeam, Bisociateur, Synthesizer… (`preferredModel`). |
 
 ## Démarrage rapide
 
 ```js
 import { createEngine } from './index.mjs';
 
-// P0 (offline, mock) : createEngine()
-// P1 (local souverain, Ollama) :
-const eng = createEngine({ sovereignty: 'local', model: 'llama3.2' });
+const eng = createEngine({
+  sovereignty: 'local',
+  model: 'llama3.1:8b-instruct',
+  quant: 'q4_K_M',
+  roleQuant: { Planner: 'q5_K_M', Critic: 'q5_K_M', Synthesizer: 'q5_K_M' },
+  preferHigherQuant: false,
+  // syncAvailableQuants: true,  // filtre via `ollama list`
+  // memoryPath: './.kayros-memory.json',
+  // offloadRoot: './.kayros-l0',
+});
 
-// PLAN : le Planner LLM génère le plan (repli déterministe si échec/non-JSON).
-const plan = await eng.orchestrator.plan("Lancer une offre B2B", { ideaId: 'idea-1', sovereignty: 'local' });
-// -> { ideaId, goal, generatedBy: 'llm' | 'fallback', steps: [...] }
+const plan = await eng.orchestrator.plan('Lancer une offre B2B', { ideaId: 'idea-1', sovereignty: 'local' });
 
-// SOLVE (ReAct) : flux d'événements (recall / trace / gate / final).
-for await (const ev of eng.orchestrator.run(plan, { governance: 'supervise', sovereignty: 'local' })) {
-  console.log(ev.type, ev);
+for await (const ev of eng.orchestrator.run(plan, {
+  governance: 'supervise',
+  sovereignty: 'local',
+  autoDistill: true,       // L1 → L2 en fin de cycle
+  distillMinFacts: 3,
+})) {
+  if (ev.quant) console.log(ev.type, ev.quant);
+  else console.log(ev.type);
 }
 ```
 
-Démo réelle Ollama : `node core/planner-ollama-demo.mjs [modèle] ["objectif"]`.
+## Mémoire stratifiée (L0–L3)
 
-## Planner LLM (notes)
+- **L0** working / offloadable (`rememberL0`, `offload`, `getWorkingCanvas`)
+- **L1** atomic facts (`addAtomicFact`)
+- **L2** scenarios (`distillScenario`, `autoDistillL2` ± LLM)
+- **L3** core / persona / skills (`updateCore`)
+- Persistence : `FileLayeredStore` via `memoryPath` ; L0 files via `offloadRoot`
 
-Le Planner attend un **tableau JSON** `[{ "agent", "description" }]` (dernière étape = `Synthesizer`).
-`parsePlanSteps` est robuste : il retire les blocs `<think>…</think>` (modèles *thinking*),
-les fences markdown, extrait le premier tableau JSON équilibré et récupère les objets
-complets d'un JSON tronqué. En cas d'échec total → repli déterministe (4 étapes).
+## Quantization (local / Ollama)
 
-- **`plannerModel`** (`createEngine` / `Orchestrator`) : modèle léger dédié au Planner
-  (latence). Les gros modèles *thinking* (ex. `qwen3.5:9b`) sont contre-productifs ici
-  et lents en CPU — à réserver au VPS/GPU ou au batch async.
-- **`think: false`** est transmis à Ollama pour les appels Planner (JSON direct, pas de
-  raisonnement exposé).
+| Option | Effet |
+|---|---|
+| `quant` | Quant global (ex. `q4_K_M`) |
+| `roleQuant` | Override par rôle agent |
+| `preferHigherQuant` | Biais vers Q5+ |
+| `syncAvailableQuants` | Filtre avec les tags réellement installés |
+| `availableModels` | Liste explicite de tags installés |
 
-## Paliers de déploiement
-
-- **P0** — standalone (mock, offline).
-- **P1** — local souverain (`sovereignty: 'local'` → Ollama, aucune donnée ne sort).
-- **P2** — cloud gouverné : passer par le **backend proxy** (`backendUrl`) qui détient les clés
-  (PHP mutualisé OU Fastify VPS). Jamais de clé côté client.
+Voir aussi `OLLAMA.md` et `quant-schema.mjs`.
 
 ## Tests
 
 ```bash
-cd core && node --test      # 34 tests, zéro dépendance
+cd core && node --test
 ```
+
+Inclut `memory-layered.test.mjs` et `quant-guidance.test.mjs`.
+
+## Paliers
+
+- **P0** — mock offline
+- **P1** — `sovereignty: 'local'` → Ollama
+- **P2** — `backendUrl` proxy (clés côté serveur)

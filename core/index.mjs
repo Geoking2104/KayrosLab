@@ -38,37 +38,39 @@ import {
 } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
-import { recommendForEngine } from './quant-guidance.mjs';
+import { recommendForEngine, filterGuidanceByAvailable } from './quant-guidance.mjs';
 
 /**
  * Fabrique un moteur.
  * @param {Object} [opts]
- * @param {string} [opts.memoryPath]
- * @param {string} [opts.offloadRoot]
- * @param {Object} [opts.fs]
- * @param {Object} [opts.path]
  * @param {string} [opts.quant]
  * @param {Object} [opts.roleQuant]
  * @param {boolean} [opts.preferHigherQuant]
+ * @param {boolean} [opts.syncAvailableQuants]  // try ollama listModels and filter
+ * @param {string[]} [opts.availableModels]     // explicit installed tags
  */
 export function createEngine(opts = {}) {
   const baseModel = opts.model || 'llama3.2';
-  const quantGuidance = recommendForEngine({
+
+  let quantGuidance = recommendForEngine({
     model: baseModel,
     quant: opts.quant || null,
     roleQuant: opts.roleQuant || {},
     preferHigherQuant: !!opts.preferHigherQuant,
     sovereignty: opts.sovereignty || null,
+    availableModels: opts.availableModels || null,
   });
 
   const providers = { mock: new MockProvider() };
+  let ollamaProvider = null;
   if (opts.sovereignty === 'local') {
     const defaultModel = quantGuidance.resolvedDefaultModel || baseModel;
-    providers.ollama = new OllamaProvider({
+    ollamaProvider = new OllamaProvider({
       endpoint: opts.ollamaEndpoint,
       defaultModel,
       fetchImpl: opts.fetchImpl,
     });
+    providers.ollama = ollamaProvider;
   }
   if (opts.backendUrl) {
     providers.backend = new HttpBackendProvider({
@@ -135,12 +137,24 @@ export function createEngine(opts = {}) {
     layered.load().catch(() => {});
   }
 
+  // Best-effort: sync installed Ollama tags → filter quant recommendations
+  const maybeSync = async () => {
+    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') return;
+    try {
+      const tags = await ollamaProvider.listModels();
+      if (Array.isArray(tags) && tags.length) {
+        quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
+        if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
+          ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
+        }
+      }
+    } catch { /* soft — Ollama down */ }
+  };
+  // Fire and forget; agents below use initial guidance (acceptable for cold start)
+  const syncPromise = maybeSync();
+
   const agents = createAllAgents({
-    llm,
-    tools,
-    memory,
-    quantGuidance,
-    baseModel,
+    llm, tools, memory, quantGuidance, baseModel,
   });
 
   const orchestrator = new Orchestrator({
@@ -154,5 +168,7 @@ export function createEngine(opts = {}) {
     llm, tools, governance, vectors, embeddings,
     memory, layered, orchestrator, agents,
     quantGuidance,
+    /** Await to refresh quantGuidance from live `ollama list`. */
+    syncAvailableQuants: syncPromise,
   };
 }

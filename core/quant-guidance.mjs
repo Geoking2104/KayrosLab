@@ -13,28 +13,23 @@ export {
 
 /** Role sensitivity to quantization quality (higher = prefer higher quant). */
 export const ROLE_QUANT_TIER = {
-  // High-stakes reasoning / structured output
   Planner: 'high',
   Synthesizer: 'high',
   Critic: 'high',
   "Devil's Advocate": 'high',
   RedTeam: 'high',
-  // Creative / exploratory — more tolerant
   Bisociator: 'medium',
-  // Generic / tool / distillation
   agent: 'medium',
   SynthesizerDistill: 'high',
   default: 'medium',
 };
 
-/** Ordered preference lists (best → acceptable). */
 const QUANT_PREFERENCE = {
   high: ['q5_K_M', 'q6_K', 'q5_K_S', 'q4_K_M', 'q8_0'],
   medium: ['q4_K_M', 'q5_K_M', 'q4_K_S', 'q5_K_S', 'q6_K'],
   low: ['q4_K_M', 'q4_K_S', 'q3_K_M', 'iq4_xs', 'q5_K_M'],
 };
 
-/** Human-readable notes + rough quality retention vs FP16. */
 export const QUANT_META = {
   q8_0: { bits: 8.5, quality: 0.995, label: 'Near-lossless' },
   q6_K: { bits: 6.6, quality: 0.99, label: 'Excellent' },
@@ -47,7 +42,6 @@ export const QUANT_META = {
   q2_K: { bits: 2.5, quality: 0.85, label: 'Last resort' },
 };
 
-/** Normalize quant string to canonical key (q4_K_M, …). */
 export function normalizeQuant(q) {
   if (!q) return null;
   const s = String(q).trim().toLowerCase().replace(/-/g, '_');
@@ -60,10 +54,6 @@ export function normalizeQuant(q) {
   return hit || s;
 }
 
-/**
- * Recommend a quant for a given role and optional constraints.
- * @returns {{ quant: string, tier: string, reason: string, meta: object }}
- */
 export function recommendQuant({
   role = 'default',
   tier = null,
@@ -80,19 +70,24 @@ export function recommendQuant({
 
   const forced = normalizeQuant(prefer);
   if (forced && QUANT_META[forced]) {
-    return {
-      quant: forced,
-      tier: t,
-      reason: `Explicit preference (${forced})`,
-      meta: QUANT_META[forced],
-    };
+    // If available list is provided, only force if present; else keep force
+    if (Array.isArray(available) && available.length) {
+      const normAvail = available.map(normalizeQuant);
+      if (normAvail.includes(forced)) {
+        return { quant: forced, tier: t, reason: `Explicit preference (${forced})`, meta: QUANT_META[forced] };
+      }
+      // fall through to pick best available
+    } else {
+      return { quant: forced, tier: t, reason: `Explicit preference (${forced})`, meta: QUANT_META[forced] };
+    }
   }
 
   let chosen = list[0];
   if (Array.isArray(available) && available.length) {
-    const normAvail = available.map(normalizeQuant);
+    const normAvail = available.map(normalizeQuant).filter(Boolean);
     const hit = list.find((q) => normAvail.includes(q));
     if (hit) chosen = hit;
+    else if (normAvail.length) chosen = normAvail[0]; // last resort: any installed
   }
 
   return {
@@ -103,7 +98,55 @@ export function recommendQuant({
   };
 }
 
-/** Build an Ollama-style model tag with quant suffix. */
+/** Extract unique quant keys from a list of Ollama model tags. */
+export function extractAvailableQuants(modelTags = []) {
+  const set = new Set();
+  for (const tag of modelTags) {
+    const q = parseQuantFromTag(tag);
+    if (q) set.add(q);
+  }
+  return [...set];
+}
+
+/**
+ * Re-resolve guidance using only quants present in installed Ollama tags.
+ * Soft: if nothing matches, keeps original recommendations.
+ */
+export function filterGuidanceByAvailable(guidance, modelTags = []) {
+  if (!guidance || !modelTags.length) return guidance;
+  const available = extractAvailableQuants(modelTags);
+  if (!available.length) return guidance; // tags without quant suffix → keep defaults
+
+  const recompute = (role, prefer) => recommendQuant({
+    role,
+    prefer,
+    available,
+  });
+
+  const global = recompute('default', guidance.global?.quant);
+  const byRole = {};
+  for (const role of Object.keys(ROLE_QUANT_TIER)) {
+    byRole[role] = recompute(role, guidance.byRole?.[role]?.quant);
+  }
+
+  const baseModel = guidance.resolvedDefaultModel
+    ? String(guidance.resolvedDefaultModel).replace(/[-_](q[0-9].*|iq.*)$/i, '')
+    : 'llama3.2';
+
+  return {
+    ...guidance,
+    global,
+    byRole,
+    availableQuants: available,
+    availableModels: [...modelTags],
+    resolvedDefaultModel: resolveModelTag(baseModel, global.quant),
+    resolveForRole(role, model = baseModel) {
+      const rec = byRole[role] || global;
+      return resolveModelTag(model, rec.quant);
+    },
+  };
+}
+
 export function resolveModelTag(baseModel, quant) {
   if (!baseModel) return baseModel;
   const q = normalizeQuant(quant);
@@ -113,12 +156,10 @@ export function resolveModelTag(baseModel, quant) {
   const re = new RegExp(`[-_]?((?:${quantKeys}))$`, 'i');
   const cleaned = String(baseModel).replace(re, '');
 
-  const suffix = q;
-  if (cleaned.includes(':')) return `${cleaned}-${suffix}`;
-  return `${cleaned}:${suffix}`;
+  if (cleaned.includes(':')) return `${cleaned}-${q}`;
+  return `${cleaned}:${q}`;
 }
 
-/** Extract quant from a model tag if present. */
 export function parseQuantFromTag(modelTag) {
   if (!modelTag) return null;
   const quantKeys = Object.keys(QUANT_META);
@@ -132,27 +173,28 @@ export function parseQuantFromTag(modelTag) {
   return m ? normalizeQuant(m[1]) : null;
 }
 
-/** Rough quality estimate 0–1 for a quant key. */
 export function estimateQuality(quant) {
   const q = normalizeQuant(quant);
   return QUANT_META[q]?.quality ?? 0.9;
 }
 
-/**
- * High-level helper used by createEngine.
- * Returns guidance object + resolved default model tag.
- */
 export function recommendForEngine({
   model = 'llama3.2',
   roleQuant = {},
   quant = null,
   preferHigherQuant = false,
   sovereignty = null,
+  availableModels = null,
 } = {}) {
+  const available = Array.isArray(availableModels)
+    ? extractAvailableQuants(availableModels)
+    : null;
+
   const global = recommendQuant({
     role: 'default',
     prefer: quant,
     preferHigher: preferHigherQuant,
+    available,
   });
 
   const byRole = {};
@@ -162,6 +204,7 @@ export function recommendForEngine({
       role,
       prefer: override || quant,
       preferHigher: preferHigherQuant,
+      available,
     });
   }
 
@@ -173,6 +216,8 @@ export function recommendForEngine({
     global,
     byRole,
     resolvedDefaultModel: resolvedDefault,
+    availableQuants: available,
+    availableModels: availableModels || null,
     resolveForRole(role, baseModel = model) {
       const rec = byRole[role] || global;
       return resolveModelTag(baseModel, rec.quant);
