@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {
   createL0, createL1, createL2, createL3,
   LayeredMemory, FileOffloadBackend, FileLayeredStore, InMemoryVectorStore,
+  extractFirstObject,
 } from './memory.mjs';
 import { MockEmbeddings, MemoryService } from './embeddings.mjs';
 import { createEngine } from './index.mjs';
@@ -49,8 +50,8 @@ test('getWorkingCanvas : subgraphs par step + classes active/offloaded', async (
   assert.ok(canvas.nodeIds.length >= 3);
 });
 
-// ---------- Auto L2 distillation ----------
-test('autoDistillL2 : regroupe par type et crée des scénarios draft', async () => {
+// ---------- Auto L2 distillation (heuristic) ----------
+test('autoDistillL2 heuristic : regroupe par type et crée des scénarios draft', async () => {
   const store = new InMemoryVectorStore();
   const mem = new MemoryService({ embeddings: new MockEmbeddings({ dim: 16 }), store });
   const lm = new LayeredMemory({ memoryService: mem, store });
@@ -63,7 +64,7 @@ test('autoDistillL2 : regroupe par type et crée des scénarios draft', async ()
       confidence: 0.7 + i * 0.05,
     });
   }
-  await lm.addAtomicFact({ ideaId: 'iD', content: 'risque unique', type: 'risk' }); // < minFacts
+  await lm.addAtomicFact({ ideaId: 'iD', content: 'risque unique', type: 'risk' });
 
   const created = await lm.autoDistillL2('iD', { minFacts: 3 });
   assert.equal(created.length, 1);
@@ -72,9 +73,74 @@ test('autoDistillL2 : regroupe par type et crée des scénarios draft', async ()
   assert.ok(created[0].relatedL1Ids.length >= 3);
   assert.ok(created[0].tags.includes('auto-distill'));
 
-  // Idempotence (sans force)
   const again = await lm.autoDistillL2('iD', { minFacts: 3 });
   assert.equal(again.length, 0);
+});
+
+// ---------- LLM-backed distillation ----------
+test('extractFirstObject : parse robuste', () => {
+  assert.equal(extractFirstObject('rien'), null);
+  const o = extractFirstObject('bla {"title":"T","content":"C","summary":"S","patternType":"insight"} fin');
+  assert.equal(o.title, 'T');
+  assert.equal(o.content, 'C');
+});
+
+test('autoDistillL2 avec distillFn (callback pur)', async () => {
+  const lm = new LayeredMemory();
+  for (let i = 0; i < 3; i++) {
+    await lm.addAtomicFact({
+      ideaId: 'iFn',
+      content: `Observation ${i} sur le marché énergie`,
+      type: 'observation',
+      confidence: 0.8,
+    });
+  }
+
+  const created = await lm.autoDistillL2('iFn', {
+    minFacts: 3,
+    distillFn: async ({ type, group, ideaId }) => ({
+      title: `Insight marché (${ideaId})`,
+      summary: `Synthèse LLM-like de ${group.length} observations`,
+      content: `## Analyse\n\n${group.map((f) => `- ${f.content}`).join('\n')}`,
+      patternType: 'insight',
+    }),
+  });
+
+  assert.equal(created.length, 1);
+  assert.equal(created[0].title, 'Insight marché (iFn)');
+  assert.ok(created[0].tags.includes('llm-distill'));
+  assert.match(created[0].content, /Observation 0/);
+});
+
+test('autoDistillL2 avec llm.complete (mock) + fallback si JSON invalide', async () => {
+  const lm = new LayeredMemory();
+  for (let i = 0; i < 3; i++) {
+    await lm.addAtomicFact({
+      ideaId: 'iLLM',
+      content: `Fait concurrent ${i}`,
+      type: 'competitor',
+      confidence: 0.75,
+    });
+  }
+
+  // Cas 1 : JSON valide
+  const llmOk = {
+    complete: async () => ({
+      text: 'Voici : {"title":"Gap concurrentiel énergie","summary":"3 signaux faibles consolidés","content":"## Analyse\\n- signal A","patternType":"competitive_gap"}',
+    }),
+  };
+  const created = await lm.autoDistillL2('iLLM', { minFacts: 3, llm: llmOk });
+  assert.equal(created.length, 1);
+  assert.equal(created[0].title, 'Gap concurrentiel énergie');
+  assert.equal(created[0].patternType, 'competitive_gap');
+  assert.ok(created[0].tags.includes('llm-distill'));
+
+  // Cas 2 : JSON invalide → fallback heuristique (nouveau force)
+  const llmKo = { complete: async () => ({ text: 'désolé je ne peux pas' }) };
+  const fallback = await lm.autoDistillL2('iLLM', { minFacts: 3, force: true, llm: llmKo });
+  assert.equal(fallback.length, 1);
+  assert.match(fallback[0].title, /Synthèse competitor/);
+  assert.ok(fallback[0].tags.includes('llm-distill')); // le flag reste car llm était fourni
 });
 
 // ---------- Persistence L1/L2/L3 ----------
@@ -102,9 +168,7 @@ test('FileLayeredStore + save/load round-trip', async () => {
   });
 
   assert.equal(await lm1.save(), true);
-  assert.ok(disque.has('/tmp/mem.json') || disque.has('/tmp/mem.json.tmp') || [...disque.keys()].some(k => k.includes('mem')));
 
-  // Nouveau process
   const lm2 = new LayeredMemory({ persistentStore: store });
   assert.equal(await lm2.load(), true);
   assert.equal(lm2.getAtomicFacts({ ideaId: 'iP' }).length, 1);

@@ -168,17 +168,7 @@ export class FileOffloadBackend {
 
 // ========== File Layered Store (L1 / L2 / L3 persistence) ==========
 
-/**
- * Persistance atomique des couches L1–L3 (et snapshot L0 léger).
- * Même pattern que FileUserStore / FileGateStore : write tmp → rename.
- */
 export class FileLayeredStore {
-  /**
-   * @param {Object} opts
-   * @param {string} [opts.path='./.kayros-memory.json']
-   * @param {Object} [opts.fs]
-   * @param {Object} [opts.pathModule]  // { dirname, join } si besoin
-   */
   constructor({ path = './.kayros-memory.json', fs = null } = {}) {
     this.path = path;
     this.fs = fs;
@@ -206,7 +196,6 @@ export class FileLayeredStore {
         l1: snapshot.l1 || [],
         l2: snapshot.l2 || [],
         l3: snapshot.l3 || [],
-        // L0 n'est volontairement pas persisté en masse (trop volatile)
       }, null, 2);
       await this.fs.writeFile(tmp, payload, 'utf8');
       if (typeof this.fs.rename === 'function') {
@@ -221,16 +210,66 @@ export class FileLayeredStore {
   }
 }
 
+// ========== LLM distillation helpers ==========
+
+const DISTILL_SYSTEM =
+  'Tu es un analyste stratégique. À partir d\'une liste de faits atomiques, produis UN scénario consolidé. ' +
+  'Réponds UNIQUEMENT par un objet JSON valide, sans markdown ni texte autour : ' +
+  '{"title":"...","summary":"...","content":"...","patternType":"insight|competitive_gap|success_path|failure_mode|process|ontology_update|pattern"}';
+
+/** Extrait le premier objet JSON équilibré d\'une réponse LLM. */
+export function extractFirstObject(s) {
+  const start = String(s ?? '').indexOf('{');
+  if (start < 0) return null;
+  let depth = 0, inStr = false, esc = false;
+  for (let i = start; i < s.length; i++) {
+    const c = s[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === '\\') esc = true;
+      else if (c === '"') inStr = false;
+      continue;
+    }
+    if (c === '"') inStr = true;
+    else if (c === '{') depth++;
+    else if (c === '}') {
+      depth--;
+      if (depth === 0) {
+        try { return JSON.parse(s.slice(start, i + 1)); } catch { return null; }
+      }
+    }
+  }
+  return null;
+}
+
+/** Construit un prompt de distillation à partir d'un groupe de L1. */
+function buildDistillPrompt(type, group, ideaId) {
+  const lines = group.slice(0, 15).map((f, i) =>
+    `${i + 1}. [conf=${f.confidence.toFixed(2)}] ${f.content}`
+  );
+  return (
+    `Idée : ${ideaId}\nType de faits : ${type}\n\nFaits à consolider :\n` +
+    lines.join('\n') +
+    '\n\nProduis un scénario stratégique clair, actionnable, en français.'
+  );
+}
+
+/** Fallback heuristique (sans LLM). */
+function heuristicDistill(type, group, ideaId) {
+  const lines = group.slice(0, 12).map((f) =>
+    `- (${f.confidence.toFixed(2)}) ${f.content}`
+  );
+  return {
+    title: `Synthèse ${type} (${ideaId})`,
+    summary: `${group.length} faits de type « ${type} » consolidés.`,
+    content: `## Faits ${type}\n\n${lines.join('\n')}\n\n_Généré automatiquement le ${nowIso()}_`,
+    patternType: type === 'competitor' || type === 'risk' ? 'competitive_gap' : 'insight',
+  };
+}
+
 // ========== Layered Memory (L0–L3) ==========
 
 export class LayeredMemory {
-  /**
-   * @param {Object} [opts]
-   * @param {import('./embeddings.mjs').MemoryService} [opts.memoryService]
-   * @param {Object} [opts.store]
-   * @param {FileOffloadBackend} [opts.offloadBackend]
-   * @param {FileLayeredStore} [opts.persistentStore]
-   */
   constructor({ memoryService = null, store = null, offloadBackend = null, persistentStore = null } = {}) {
     this.memoryService = memoryService;
     this.store = store ?? new InMemoryVectorStore();
@@ -287,14 +326,6 @@ export class LayeredMemory {
     return refs;
   }
 
-  /**
-   * Canvas Mermaid enrichi.
-   * - Subgraphs par étape
-   * - Nœuds colorés (actif vs offloadé)
-   * - Label agent + kind
-   * - Liens séquentiels approximatifs
-   * - IDs stables pour drill-down
-   */
   getWorkingCanvas(ideaId, { includeOffloaded = true } = {}) {
     const items = [];
     for (const item of this._l0.values()) {
@@ -303,7 +334,6 @@ export class LayeredMemory {
       items.push(item);
     }
 
-    // Group by step
     const byStep = new Map();
     for (const it of items) {
       const key = it.step || 'unknown';
@@ -338,14 +368,12 @@ export class LayeredMemory {
         lines.push(`    ${nid}["${label}"]:::${cls}`);
       });
 
-      // Liens internes au step
       for (let i = 1; i < group.length; i++) {
         lines.push(`    N_${safeStep}_${i - 1} --> N_${safeStep}_${i}`);
       }
 
       lines.push('  end');
 
-      // Lien inter-step
       if (prevStepLast && group.length) {
         lines.push(`  ${prevStepLast} --> N_${safeStep}_0`);
       }
@@ -420,23 +448,32 @@ export class LayeredMemory {
 
   /**
    * Job de distillation automatique L1 → L2.
-   * Heuristique légère (pas de LLM obligatoire) :
-   * - regroupe les faits actifs par `type`
-   * - si ≥ minFacts dans un groupe → crée un scénario draft
-   * - évite les doublons de titre
+   *
+   * Modes :
+   * 1. Heuristique pure (défaut) — aucune dépendance LLM
+   * 2. `distillFn(groupCtx) => { title, summary, content, patternType }` — callback pur
+   * 3. `llm` (KayrosLLM-like avec `.complete`) — distillation LLM avec fallback heuristique
    *
    * @param {string} ideaId
    * @param {Object} [opts]
    * @param {number} [opts.minFacts=3]
-   * @param {boolean} [opts.force=false]  // ignore les titres déjà existants
+   * @param {boolean} [opts.force=false]
+   * @param {Object} [opts.llm]           // { complete: async (req, opts?) => { text } }
+   * @param {Function} [opts.distillFn]   // pure async callback, priorité sur llm
+   * @param {Object} [opts.llmOpts]       // provider / sovereignty / model passés à llm.complete
    * @returns {Promise<import('./memory-types.mjs').L2Scenario[]>}
    */
-  async autoDistillL2(ideaId, { minFacts = 3, force = false } = {}) {
+  async autoDistillL2(ideaId, {
+    minFacts = 3,
+    force = false,
+    llm = null,
+    distillFn = null,
+    llmOpts = {},
+  } = {}) {
     if (!ideaId) throw new Error('autoDistillL2: ideaId requis');
     const facts = this.getAtomicFacts({ ideaId, status: 'active' });
     if (facts.length < minFacts) return [];
 
-    // Group by type
     const groups = new Map();
     for (const f of facts) {
       const key = f.type || 'observation';
@@ -448,30 +485,57 @@ export class LayeredMemory {
       this.getScenarios({ ideaId }).map((s) => s.title.toLowerCase())
     );
     const created = [];
+    const usedLlm = !!(distillFn || llm);
 
     for (const [type, group] of groups) {
       if (group.length < minFacts) continue;
 
-      const title = `Synthèse ${type} (${ideaId})`;
-      if (!force && existingTitles.has(title.toLowerCase())) continue;
+      // 1) Génération du contenu
+      let draft = null;
 
-      // Contenu Markdown simple
-      const lines = group.slice(0, 12).map((f) =>
-        `- (${f.confidence.toFixed(2)}) ${f.content}`
-      );
-      const content = `## Faits ${type}\n\n${lines.join('\n')}\n\n_Généré automatiquement le ${nowIso()}_`;
-      const summary = `${group.length} faits de type « ${type} » consolidés.`;
+      if (typeof distillFn === 'function') {
+        try {
+          draft = await distillFn({ type, group, ideaId });
+        } catch { /* soft → heuristic */ }
+      } else if (llm && typeof llm.complete === 'function') {
+        try {
+          const res = await llm.complete({
+            role: 'Synthesizer',
+            temperature: 0.2,
+            think: false,
+            messages: [
+              { role: 'system', content: DISTILL_SYSTEM },
+              { role: 'user', content: buildDistillPrompt(type, group, ideaId) },
+            ],
+          }, llmOpts);
+          const parsed = extractFirstObject(res?.text ?? '');
+          if (parsed && parsed.title && parsed.content) {
+            draft = {
+              title: String(parsed.title).trim(),
+              summary: String(parsed.summary || parsed.title).trim(),
+              content: String(parsed.content).trim(),
+              patternType: parsed.patternType || (type === 'competitor' || type === 'risk' ? 'competitive_gap' : 'insight'),
+            };
+          }
+        } catch { /* soft → heuristic */ }
+      }
+
+      // 2) Fallback heuristique
+      if (!draft) draft = heuristicDistill(type, group, ideaId);
+
+      if (!force && existingTitles.has(draft.title.toLowerCase())) continue;
+      existingTitles.add(draft.title.toLowerCase());
 
       const scenario = await this.distillScenario({
-        title,
-        content,
-        summary,
+        title: draft.title,
+        content: draft.content,
+        summary: draft.summary,
         ideaIds: [ideaId],
         relatedL1Ids: group.map((f) => f.id),
-        patternType: type === 'competitor' || type === 'risk' ? 'competitive_gap' : 'insight',
-        confidence: Math.min(0.85, group.reduce((s, f) => s + f.confidence, 0) / group.length),
+        patternType: draft.patternType,
+        confidence: Math.min(0.9, group.reduce((s, f) => s + f.confidence, 0) / group.length),
         reviewStatus: 'draft',
-        tags: [type, 'auto-distill'],
+        tags: [type, usedLlm ? 'llm-distill' : 'auto-distill'],
       });
       created.push(scenario);
     }
@@ -520,7 +584,6 @@ export class LayeredMemory {
 
   // ---------- Persistence ----------
 
-  /** Sauvegarde L1/L2/L3 sur disque (si persistentStore configuré). */
   async save() {
     if (!this.persistentStore) return false;
     const snap = this.snapshot();
@@ -529,7 +592,6 @@ export class LayeredMemory {
     return ok;
   }
 
-  /** Charge L1/L2/L3 depuis le disque et reconstruit les index + vecteurs. */
   async load() {
     if (!this.persistentStore) return false;
     const data = await this.persistentStore.load();
