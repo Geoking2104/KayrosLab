@@ -1,11 +1,23 @@
 export class BaseAgent {
-  constructor({ name, systemPrompt, tools = null, memory = null, llm = null } = {}) {
+  /**
+   * @param {Object} [opts]
+   * @param {string} opts.name
+   * @param {string} [opts.systemPrompt]
+   * @param {Object} [opts.tools]
+   * @param {Object} [opts.memory]
+   * @param {Object} [opts.llm]
+   * @param {string} [opts.preferredModel]  // quant-resolved tag from quantGuidance
+   * @param {Object} [opts.quantRec]        // { quant, tier, reason, meta } for inspection
+   */
+  constructor({ name, systemPrompt, tools = null, memory = null, llm = null, preferredModel = null, quantRec = null } = {}) {
     if (!name) throw new Error('BaseAgent: name required');
     this.name = name;
     this.systemPrompt = systemPrompt || `You are ${name}, a specialized strategic ideation agent.`;
     this.tools = tools;
     this.memory = memory;
     this.llm = llm;
+    this.preferredModel = preferredModel || null;
+    this.quantRec = quantRec || null;
     this._contributions = [];
   }
 
@@ -18,6 +30,11 @@ export class BaseAgent {
     return entry;
   }
 
+  /** Model used for this call: explicit override > preferredModel (quant-aware) > undefined. */
+  _resolveModel(model) {
+    return model || this.preferredModel || undefined;
+  }
+
   async execute(task, { goal, context = '', provider, sovereignty, model } = {}) {
     const messages = [
       { role: 'system', content: this.systemPrompt },
@@ -28,7 +45,7 @@ export class BaseAgent {
     let text;
     if (this.llm) {
       const res = await this.llm.complete(
-        { role: this.name, messages, model, temperature: 0.3 },
+        { role: this.name, messages, model: this._resolveModel(model), temperature: 0.3 },
         { provider, sovereignty },
       );
       text = res.text;
@@ -36,7 +53,7 @@ export class BaseAgent {
       text = `[${this.name}] Analysis for: ${task.substring(0, 100)}`;
     }
     await this.addContribution(text);
-    return { agent: this.name, output: text };
+    return { agent: this.name, output: text, model: this._resolveModel(model) || null };
   }
 
   getToolNames() {

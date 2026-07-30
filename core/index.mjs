@@ -37,22 +37,23 @@ import {
 } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
-import { recommendForEngine, resolveModelTag } from './quant-guidance.mjs';
+import { recommendForEngine } from './quant-guidance.mjs';
 
 /**
  * Fabrique un moteur.
  * @param {Object} [opts]
- * @param {string} [opts.memoryPath]          // chemin du fichier de persistance L1/L2/L3
- * @param {string} [opts.offloadRoot]         // dossier L0 offload
+ * @param {string} [opts.memoryPath]
+ * @param {string} [opts.offloadRoot]
  * @param {Object} [opts.fs]
  * @param {Object} [opts.path]
  * @param {string} [opts.quant]               // quant global (ex. 'q4_K_M')
  * @param {Object} [opts.roleQuant]           // { Planner: 'q5_K_M', Critic: 'q5_K_M', ... }
- * @param {boolean} [opts.preferHigherQuant]  // biais vers Q5+ quand possible
+ * @param {boolean} [opts.preferHigherQuant]
  */
 export function createEngine(opts = {}) {
+  const baseModel = opts.model || 'llama3.2';
   const quantGuidance = recommendForEngine({
-    model: opts.model || 'llama3.2',
+    model: baseModel,
     quant: opts.quant || null,
     roleQuant: opts.roleQuant || {},
     preferHigherQuant: !!opts.preferHigherQuant,
@@ -61,7 +62,7 @@ export function createEngine(opts = {}) {
 
   const providers = { mock: new MockProvider() };
   if (opts.sovereignty === 'local') {
-    const defaultModel = quantGuidance.resolvedDefaultModel || opts.model || 'llama3.2';
+    const defaultModel = quantGuidance.resolvedDefaultModel || baseModel;
     providers.ollama = new OllamaProvider({
       endpoint: opts.ollamaEndpoint,
       defaultModel,
@@ -133,7 +134,15 @@ export function createEngine(opts = {}) {
     layered.load().catch(() => {});
   }
 
-  const agents = createAllAgents({ llm, tools, memory });
+  // Wire quant guidance into every agent constructor
+  const agents = createAllAgents({
+    llm,
+    tools,
+    memory,
+    quantGuidance,
+    baseModel,
+  });
+
   const orchestrator = new Orchestrator({
     llm, tools, governance, memory, layered,
     plannerModel: opts.plannerModel, agents,
@@ -142,6 +151,6 @@ export function createEngine(opts = {}) {
   return {
     llm, tools, governance, vectors, embeddings,
     memory, layered, orchestrator, agents,
-    quantGuidance, // expose for inspection / UI
+    quantGuidance,
   };
 }

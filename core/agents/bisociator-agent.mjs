@@ -58,7 +58,12 @@ export class BisociateurAgent extends BaseAgent {
         { role: 'user', content: `Strategic Brief: ${brief}\n\nAnalogy Framework: ${framework.name}\nMechanism: ${framework.mechanism}\n\nGenerate a bisociative collision.` },
       ];
       const res = await this.llm.complete(
-        { role: 'Bisociateur', messages, temperature: 0.7 },
+        {
+          role: 'Bisociateur',
+          messages,
+          temperature: 0.7,
+          model: this._resolveModel(ctx.model),
+        },
         { provider: ctx.provider, sovereignty: ctx.sovereignty },
       );
       collisionOutput = res.text;
