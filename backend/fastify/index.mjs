@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+﻿import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import metricsPlugin from 'fastify-metrics';
@@ -49,6 +49,8 @@ await app.register((await import('./routes/reporting.mjs')).default);
 await app.register((await import('./routes/timer.mjs')).default);
 await app.register((await import('./routes/connectors.mjs')).default);
 await app.register((await import('./routes/positionning.mjs')).default);
+await app.register((await import('./routes/canvas.mjs')).default);
+await app.register((await import('./routes/canvas-stream.mjs')).default);
 
 // --- demarrage ---
 const PORT = Number(ctx.PORT || 8787);

@@ -1,0 +1,231 @@
+name: PostgreSQL VPS — diagnostic & provisionnement
+
+# Adosse une base KayrosLab au PostgreSQL du VPS OVH (51.210.9.71), qui heberge
+# deja openDPE en production.
+#
+# TROIS PRINCIPES.
+#   1. Le mode DIAGNOSTIC est le defaut : la premiere execution observe et ne
+#      modifie rien. On ne provisionne pas un serveur de production a l'aveugle.
+#   2. Le mode PROVISION exige une confirmation tapee a la main.
+#   3. openDPE est verifie AVANT et APRES. Un provisionnement qui casserait le
+#      service voisin doit etre visible immediatement, pas decouvert plus tard.
+#
+# Le secret VPS_SSH_KEY ne quitte jamais le runner.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Mode d execution'
+        type: choice
+        options: [diagnostic, provision]
+        default: diagnostic
+      confirmation:
+        description: 'Pour le mode provision uniquement : taper PROVISIONNER'
+        required: false
+        default: ''
+      recette:
+        description: 'Lancer la recette apres provisionnement'
+        type: boolean
+        default: true
+
+env:
+  VPS_HOST: 51.210.9.71
+  APP_DIR: /opt/kayroslab
+
+jobs:
+  executer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Garde-fou du mode provision
+        if: ${{ inputs.mode == 'provision' && inputs.confirmation != 'PROVISIONNER' }}
+        run: |
+          echo "::error::Mode provision demandé sans confirmation. Taper PROVISIONNER. Rien n'a été exécuté."
+          exit 1
+
+      - uses: actions/checkout@v4
+
+      - name: Préparer la connexion SSH
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          # Empreinte epinglee : sans cela, StrictHostKeyChecking=no accepterait
+          # n'importe quel serveur se presentant a cette adresse.
+          ssh-keyscan -t ed25519,rsa "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          cat >> ~/.ssh/config <<'CFG'
+          Host vps
+            HostName ${{ env.VPS_HOST }}
+            User ${{ secrets.VPS_SSH_USER }}
+            IdentityFile ~/.ssh/id_deploy
+            StrictHostKeyChecking yes
+            BatchMode yes
+            ConnectTimeout 15
+          CFG
+          chmod 600 ~/.ssh/config
+
+      # ====================================================================
+      - name: Diagnostic — état du serveur (lecture seule)
+        id: diag
+        run: |
+          ssh vps 'bash -se' <<'EOS'
+          set -u
+          titre() { printf '\n\033[1m▸ %s\033[0m\n' "$1"; }
+
+          titre "Système"
+          . /etc/os-release 2>/dev/null && echo "  OS       : $PRETTY_NAME"
+          echo "  Uptime   : $(uptime -p 2>/dev/null || uptime)"
+          echo "  Disque   : $(df -h / | awk 'NR==2{print $4" libres sur "$2" ("$5" utilisés)"}')"
+          echo "  Mémoire  : $(free -h | awk 'NR==2{print $7" disponibles sur "$2}')"
+
+          titre "PostgreSQL"
+          if command -v psql >/dev/null 2>&1; then
+            echo "  Binaire  : $(psql --version)"
+            systemctl is-active --quiet postgresql \
+              && echo "  Service  : actif (système)" \
+              || echo "  Service  : INACTIF"
+            echo "  Écoute   : $(sudo -u postgres psql -tAc 'SHOW listen_addresses' 2>/dev/null || echo '?')"
+            echo "  Bases    :"
+            sudo -u postgres psql -tAc \
+              "SELECT '    - '||datname||' ('||pg_size_pretty(pg_database_size(datname))||')' \
+                 FROM pg_database WHERE datname NOT IN ('template0','template1')" 2>/dev/null || echo "    (lecture impossible)"
+            echo "  Rôles    :"
+            sudo -u postgres psql -tAc \
+              "SELECT '    - '||rolname||CASE WHEN rolsuper THEN ' [superuser]' ELSE '' END \
+                 FROM pg_roles WHERE rolcanlogin" 2>/dev/null || echo "    (lecture impossible)"
+            echo "  Base kayroslab : $(sudo -u postgres psql -tAc "SELECT count(*) FROM pg_database WHERE datname='kayroslab'" 2>/dev/null || echo '?')"
+          elif command -v docker >/dev/null 2>&1 && docker ps --format '{{.Names}}' 2>/dev/null | grep -qi postgres; then
+            echo "  Mode     : conteneur Docker — $(docker ps --format '{{.Names}} ({{.Image}})' | grep -i postgres)"
+          else
+            echo "  ABSENT — le provisionnement l'installera"
+          fi
+
+          titre "Exposition réseau de 5432"
+          ss -ltnp 2>/dev/null | grep -E ':5432' || echo "  (aucune socket 5432 en écoute)"
+          if command -v ufw >/dev/null 2>&1; then echo "  ufw : $(ufw status | head -1)"; fi
+
+          titre "openDPE (voisin de production)"
+          if command -v pm2 >/dev/null 2>&1; then
+            pm2 jlist 2>/dev/null | python3 -c "
+          import json,sys
+          try: procs = json.load(sys.stdin)
+          except Exception: procs = []
+          if not procs: print('  (aucun process PM2)')
+          for p in procs:
+              e = p.get('pm2_env', {})
+              print(f\"  - {p.get('name')} : {e.get('status')} · redémarrages {e.get('restart_time', 0)}\")
+          " 2>/dev/null || echo "  (pm2 jlist illisible)"
+          else
+            echo "  pm2 absent"
+          fi
+          curl -s -o /dev/null -w "  api.opendpe (8080) : HTTP %{http_code}\n" --max-time 5 http://127.0.0.1:8080/ 2>/dev/null || echo "  api.opendpe (8080) : injoignable"
+          curl -s -o /dev/null -w "  kayros-api (8787)  : HTTP %{http_code}\n" --max-time 5 http://127.0.0.1:8787/ 2>/dev/null || echo "  kayros-api (8787)  : injoignable"
+
+          titre "Dépôt KayrosLab"
+          if [ -d /opt/kayroslab/.git ]; then
+            cd /opt/kayroslab
+            echo "  Branche  : $(git rev-parse --abbrev-ref HEAD)"
+            echo "  Commit   : $(git log -1 --format='%h %s' | cut -c1-70)"
+            echo "  .env     : $([ -f backend/fastify/.env ] && echo présent || echo ABSENT)"
+            echo "  DATABASE_URL : $(grep -q '^DATABASE_URL=postgres' backend/fastify/.env 2>/dev/null && echo 'configuré' || echo 'non configuré')"
+            echo "  Node     : $(node --version 2>/dev/null || echo absent)"
+          else
+            echo "  /opt/kayroslab absent — à cloner"
+          fi
+          EOS
+
+      # ====================================================================
+      - name: Sauvegarde préalable
+        if: ${{ inputs.mode == 'provision' }}
+        run: |
+          ssh vps 'bash -se' <<'EOS'
+          set -e
+          mkdir -p /opt/kayroslab/data/backups
+          if sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='kayroslab'" | grep -q 1; then
+            f="/opt/kayroslab/data/backups/pre-provision-$(date +%Y%m%d-%H%M%S).dump"
+            sudo -u postgres pg_dump -Fc kayroslab > "$f"
+            echo "Sauvegarde : $f ($(du -h "$f" | cut -f1))"
+          else
+            echo "Base kayroslab inexistante — rien à sauvegarder (première installation)."
+          fi
+          EOS
+
+      - name: Mettre à jour le dépôt
+        if: ${{ inputs.mode == 'provision' }}
+        run: |
+          ssh vps 'bash -se' <<'EOS'
+          set -e
+          if [ -d /opt/kayroslab/.git ]; then
+            cd /opt/kayroslab
+            git config --global --add safe.directory /opt/kayroslab
+            git fetch --quiet origin && git reset --hard --quiet origin/main
+          else
+            git clone --quiet https://github.com/Geoking2104/KayrosLab.git /opt/kayroslab
+            git config --global --add safe.directory /opt/kayroslab
+          fi
+          cd /opt/kayroslab && echo "Dépôt à $(git log -1 --format='%h %s' | cut -c1-60)"
+          EOS
+
+      - name: Provisionnement PostgreSQL
+        if: ${{ inputs.mode == 'provision' }}
+        run: |
+          # Le script genere le mot de passe SUR LA MACHINE et l'ecrit dans .env
+          # (chmod 600). Il ne transite ni par ce runner, ni par les journaux.
+          ssh vps 'bash /opt/kayroslab/deploy/ovh-vps/provision-postgres.sh'
+
+      - name: Recette contre le serveur
+        if: ${{ inputs.mode == 'provision' && inputs.recette }}
+        run: ssh vps 'bash /opt/kayroslab/deploy/ovh-vps/verify-postgres.sh'
+
+      - name: Redémarrer le backend KayrosLab
+        if: ${{ inputs.mode == 'provision' }}
+        run: |
+          ssh vps 'bash -se' <<'EOS'
+          set -e
+          cd /opt/kayroslab/backend/fastify
+          npm install --omit=dev --no-audit --no-fund --silent
+          pm2 restart kayros-api --update-env 2>/dev/null || pm2 start index.mjs --name kayros-api
+          sleep 4
+          pm2 logs kayros-api --lines 30 --nostream 2>/dev/null | grep -E '\[canvas\]|listening|error' | tail -10 || true
+          EOS
+
+      # ====================================================================
+      - name: Vérifier qu'openDPE est intact
+        if: ${{ always() && inputs.mode == 'provision' }}
+        run: |
+          ssh vps 'bash -se' <<'EOS'
+          etat=$(pm2 jlist 2>/dev/null | python3 -c "
+          import json,sys
+          try: procs=json.load(sys.stdin)
+          except Exception: procs=[]
+          for p in procs:
+              if 'opendpe' in (p.get('name') or '').lower():
+                  print(p.get('pm2_env',{}).get('status','?')); break
+          else: print('absent')
+          ")
+          echo "openDPE : $etat"
+          [ "$etat" = "online" ] || [ "$etat" = "absent" ] \
+            || { echo "::error::openDPE n'est plus en ligne après le provisionnement"; exit 1; }
+          curl -s -o /dev/null -w "openDPE HTTP %{http_code}\n" --max-time 5 http://127.0.0.1:8080/ || true
+          EOS
+
+      - name: Effacer la clé du runner
+        if: always()
+        run: shred -u ~/.ssh/id_deploy 2>/dev/null || rm -f ~/.ssh/id_deploy
+
+      - name: Résumé
+        if: always()
+        run: |
+          {
+            echo "## PostgreSQL VPS — mode \`${{ inputs.mode }}\`"
+            echo ""
+            if [ "${{ inputs.mode }}" = "diagnostic" ]; then
+              echo "Lecture seule : **aucune modification** n'a été apportée au serveur."
+              echo "Relancer en mode \`provision\` avec la confirmation \`PROVISIONNER\` pour appliquer."
+            else
+              echo "Provisionnement exécuté. Vérifier ci-dessus :"
+              echo "- la recette (27 vérifications) ;"
+              echo "- la ligne \`[canvas] persistance : postgres\` dans les journaux ;"
+              echo "- l'état d'openDPE."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

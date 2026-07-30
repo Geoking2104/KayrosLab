@@ -1,26 +1,38 @@
-{
-  "name": "kayroslab-backend-fastify",
-  "version": "0.1.0",
-  "description": "Backend Fastify de KayrosLab : proxy LLM securise + endpoint gouverne. A deployer sur VPS/PaaS (Node), pas sur mutualise.",
-  "type": "module",
-  "private": true,
-  "engines": {
-    "node": ">=20"
-  },
-  "scripts": {
-    "start": "node index.mjs"
-  },
-  "dependencies": {
-    "@fastify/cors": "^9.0.1",
-    "@fastify/rate-limit": "^9.1.0",
-    "fastify": "^4.28.1",
-    "fastify-metrics": "^10.6.0",
-    "i18n": "^0.15.3",
-    "nodemailer": "^6.9.16",
-    "zod": "^4.4.3"
-  },
-  "main": "index.mjs",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+﻿{
+    "name":  "kayroslab-backend-fastify",
+    "version":  "0.1.0",
+    "description":  "Backend Fastify de KayrosLab : proxy LLM securise + endpoint gouverne. A deployer sur VPS/PaaS (Node), pas sur mutualise.",
+    "type":  "module",
+    "private":  true,
+    "engines":  {
+                    "node":  "\u003e=20"
+                },
+    "scripts":  {
+                    "start":  "node index.mjs",
+                    "contrat":  "node tests/contrat-api.mjs",
+                    "sinistre":  "node tests/reprise-sinistre.mjs",
+                    "recette:vps":  "node tests/recette-vps.mjs",
+                    "recette":  "node tests/recette-p2.mjs",
+                    "temps-reel":  "node tests/temps-reel.mjs",
+                    "auth":  "node tests/auth-reelle.mjs"
+                },
+    "dependencies":  {
+                         "@fastify/cors":  "^9.0.1",
+                         "@fastify/rate-limit":  "^9.1.0",
+                         "fastify":  "^4.28.1",
+                         "fastify-metrics":  "^10.6.0",
+                         "i18n":  "^0.15.3",
+                         "nodemailer":  "^6.9.16",
+                         "zod":  "^4.4.3",
+                         "pg":  "^8.13.1"
+                     },
+    "main":  "index.mjs",
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "devDependencies":  {
+                            "@electric-sql/pglite":  "^0.5.4"
+                        }
 }

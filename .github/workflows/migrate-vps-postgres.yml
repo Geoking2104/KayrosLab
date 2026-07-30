@@ -1,0 +1,73 @@
+name: Migration PostgreSQL (VPS)
+
+# Applique les migrations du canvas sur le VPS OVH.
+# Volontairement MANUEL : une migration de schema sur une instance partagee avec
+# openDPE ne doit pas partir sur un simple push. On confirme, puis on applique.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Taper MIGRER pour confirmer'
+        required: true
+        default: ''
+      recette:
+        description: 'Lancer la recette apres migration'
+        type: boolean
+        default: true
+
+jobs:
+  migrer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Garde-fou de confirmation
+        if: ${{ github.event.inputs.confirmation != 'MIGRER' }}
+        run: |
+          echo "::error::Confirmation absente ou incorrecte — rien n'a été appliqué."
+          exit 1
+
+      - uses: actions/checkout@v4
+
+      - name: Préparer la clé SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 51.210.9.71 >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Sauvegarder avant migration
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes ${{ secrets.VPS_SSH_USER }}@51.210.9.71 '
+            set -e
+            mkdir -p /opt/kayroslab/data/backups
+            sudo -u postgres pg_dump -Fc kayroslab \
+              > /opt/kayroslab/data/backups/pre-migration-$(date +%Y%m%d-%H%M%S).dump
+            echo "Sauvegarde effectuée."
+          '
+
+      - name: Appliquer les migrations
+        run: |
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.VPS_SSH_USER }}@51.210.9.71 '
+            set -e
+            cd /opt/kayroslab && git pull --ff-only
+            for f in backend/fastify/migrations/*.sql; do
+              echo "→ $f"
+              sudo -u postgres psql -v ON_ERROR_STOP=1 -d kayroslab -f "$f"
+            done
+          '
+
+      - name: Recette contre le serveur
+        if: ${{ github.event.inputs.recette == 'true' }}
+        run: |
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.VPS_SSH_USER }}@51.210.9.71 '
+            cd /opt/kayroslab && bash deploy/ovh-vps/verify-postgres.sh
+          '
+
+      - name: Vérifier qu'\''openDPE est intact
+        run: |
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.VPS_SSH_USER }}@51.210.9.71 '
+            pm2 describe opendpe-backend >/dev/null 2>&1 \
+              && pm2 jlist | grep -q "\"name\":\"opendpe-backend\",\"pm2_env\":{\"status\":\"online\"" \
+              && echo "openDPE toujours en ligne" \
+              || echo "::warning::état d'\''openDPE non confirmé — à vérifier manuellement"
+          '

@@ -1,4 +1,4 @@
-// KayrosLab — Coeur LLM gouverne : point d'assemblage.
+﻿// KayrosLab â€” Coeur LLM gouverne : point d'assemblage.
 export * from './resilience.mjs';
 export * from './kayros-llm.mjs';
 export * from './tool-registry.mjs';
@@ -24,6 +24,7 @@ export * from './orchestrator.mjs';
 export * from './timer.mjs';
 export * from './connectors.mjs';
 export * from './positionning/index.mjs';
+export * from './canvas/index.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';

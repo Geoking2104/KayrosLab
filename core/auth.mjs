@@ -1,7 +1,7 @@
-// KayrosLab — Authentification (cote SERVEUR).
+﻿// KayrosLab â€” Authentification (cote SERVEUR).
 // Primitives : scrypt (mots de passe) + HMAC-SHA256 (jetons), via node:crypto.
 // `node:crypto` est importe DYNAMIQUEMENT pour que l'import de ce module ne casse
-// pas un bundle navigateur (le cœur est aussi consomme cote client).
+// pas un bundle navigateur (le cÅ“ur est aussi consomme cote client).
 //
 // Regles tenues ici :
 //   - aucun mot de passe stocke en clair (scrypt + sel aleatoire par utilisateur)
@@ -221,7 +221,7 @@ export class SessionStore {
   revokeAllForUser(userId, at = Math.floor(Date.now() / 1000)) { this._notBefore.set(userId, at); return this; }
   isBeforeCutoff(userId, iat) {
     const nb = this._notBefore.get(userId);
-    return typeof nb === 'number' && typeof iat === 'number' && iat < nb;
+    return typeof nb === 'number' && typeof iat === 'number' && iat <= nb;
   }
 }
 
