@@ -26,6 +26,7 @@ export * from './timer.mjs';
 export * from './connectors.mjs';
 export * from './positionning/index.mjs';
 export * from './quant-guidance.mjs';
+export * from './quant-schema.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
