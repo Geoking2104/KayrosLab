@@ -30,16 +30,20 @@ import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProv
 import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
-import { InMemoryVectorStore, QdrantVectorStore, LayeredMemory, FileOffloadBackend } from './memory.mjs';
+import {
+  InMemoryVectorStore, QdrantVectorStore, LayeredMemory,
+  FileOffloadBackend, FileLayeredStore,
+} from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
 
 /**
  * Fabrique un moteur.
- * - P0 : mock (défaut, offline).
- * - P1 : sovereignty:'local' => Ollama (LLM + embeddings).
- * - P2 : backendUrl => proxy PHP/Fastify ; embeddingsUrl => embeddings via proxy.
  * @param {Object} [opts]
+ * @param {string} [opts.memoryPath]     // chemin du fichier de persistance L1/L2/L3
+ * @param {string} [opts.offloadRoot]    // dossier L0 offload
+ * @param {Object} [opts.fs]
+ * @param {Object} [opts.path]
  */
 export function createEngine(opts = {}) {
   const providers = { mock: new MockProvider() };
@@ -72,7 +76,6 @@ export function createEngine(opts = {}) {
 
   const memory = new MemoryService({ embeddings, store: vectors });
 
-  // Offload backend optionnel (Node)
   let offloadBackend = null;
   if (opts.offloadRoot || opts.fs) {
     offloadBackend = new FileOffloadBackend({
@@ -82,7 +85,25 @@ export function createEngine(opts = {}) {
     });
   }
 
-  const layered = new LayeredMemory({ memoryService: memory, store: vectors, offloadBackend });
+  let persistentStore = null;
+  if (opts.memoryPath || opts.fs) {
+    persistentStore = new FileLayeredStore({
+      path: opts.memoryPath || './.kayros-memory.json',
+      fs: opts.fs || null,
+    });
+  }
+
+  const layered = new LayeredMemory({
+    memoryService: memory,
+    store: vectors,
+    offloadBackend,
+    persistentStore,
+  });
+
+  // Chargement best-effort au démarrage
+  if (persistentStore) {
+    layered.load().catch(() => {});
+  }
 
   const agents = createAllAgents({ llm, tools, memory });
   const orchestrator = new Orchestrator({
@@ -91,14 +112,7 @@ export function createEngine(opts = {}) {
   });
 
   return {
-    llm,
-    tools,
-    governance,
-    vectors,
-    embeddings,
-    memory,          // MemoryService classique
-    layered,         // LayeredMemory L0–L3
-    orchestrator,
-    agents,
+    llm, tools, governance, vectors, embeddings,
+    memory, layered, orchestrator, agents,
   };
 }

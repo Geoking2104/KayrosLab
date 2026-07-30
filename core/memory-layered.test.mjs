@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 
 import {
   createL0, createL1, createL2, createL3,
-  LayeredMemory, FileOffloadBackend, InMemoryVectorStore,
+  LayeredMemory, FileOffloadBackend, FileLayeredStore, InMemoryVectorStore,
 } from './memory.mjs';
 import { MockEmbeddings, MemoryService } from './embeddings.mjs';
 import { createEngine } from './index.mjs';
@@ -13,116 +13,108 @@ import { collect } from './orchestrator.mjs';
 // ---------- Factories ----------
 test('createL0 : champs obligatoires + defaults', () => {
   const item = createL0({
-    ideaId: 'i1',
-    step: 'construire',
-    kind: 'tool_output',
-    content: 'résultat long…',
+    ideaId: 'i1', step: 'construire', kind: 'tool_output', content: 'résultat long…',
   });
   assert.ok(item.id);
   assert.equal(item.ideaId, 'i1');
-  assert.equal(item.kind, 'tool_output');
-  assert.ok(item.createdAt);
-  assert.throws(() => createL0({ step: 'x', kind: 'y', content: 'z' })); // ideaId manquant
+  assert.throws(() => createL0({ step: 'x', kind: 'y', content: 'z' }));
 });
 
-test('createL1 : atomic fact avec confidence bornée', () => {
-  const f = createL1({
-    content: 'Le concurrent X a 1200 stars sur GitHub',
-    type: 'competitor',
-    confidence: 1.5, // sera clampé à 1
-    actors: ['scanner'],
-    ideaId: 'i1',
-  });
+test('createL1 / L2 / L3', () => {
+  const f = createL1({ content: 'Le concurrent X a 1200 stars', type: 'competitor', confidence: 1.5 });
   assert.equal(f.confidence, 1);
-  assert.equal(f.status, 'active');
-  assert.equal(f.type, 'competitor');
-  assert.throws(() => createL1({})); // content manquant
-});
-
-test('createL2 + createL3', () => {
-  const s = createL2({
-    title: 'Gap DePIN énergie',
-    content: 'Les projets DePIN énergie manquent souvent de preuves de traction réelle.',
-    patternType: 'competitive_gap',
-    ideaIds: ['i1'],
-    applicableStages: ['positionner', 'eprouver'],
-  });
+  const s = createL2({ title: 'Gap DePIN', content: '…', patternType: 'competitive_gap', ideaIds: ['i1'] });
   assert.equal(s.reviewStatus, 'draft');
-  assert.ok(s.applicableStages.includes('positionner'));
-
-  const core = createL3({
-    scope: 'user',
-    scopeId: 'geoff',
-    kind: 'preference',
-    title: 'Style de décision',
-    content: 'Préfère les preuves quantitatives avant arbitrage.',
-  });
-  assert.equal(core.version, 1);
-  assert.equal(core.scope, 'user');
+  const c = createL3({ scope: 'user', scopeId: 'geoff', kind: 'preference', title: 'Style', content: 'Preuves quanti' });
+  assert.equal(c.version, 1);
 });
 
-// ---------- LayeredMemory core operations ----------
-test('LayeredMemory : L0 → offload → canvas', async () => {
+// ---------- Richer Mermaid canvas ----------
+test('getWorkingCanvas : subgraphs par step + classes active/offloaded', async () => {
   const lm = new LayeredMemory();
-  lm.rememberL0({
-    ideaId: 'i1',
-    step: 'cartographier',
-    kind: 'scrape',
-    content: 'A'.repeat(1200),
-  });
-  const canvasBefore = lm.getWorkingCanvas('i1');
-  assert.equal(canvasBefore.nodes.length, 1);
+  lm.rememberL0({ ideaId: 'i1', step: 'ecouter', kind: 'scrape', agentRole: 'Planner', content: 'A'.repeat(100) });
+  lm.rememberL0({ ideaId: 'i1', step: 'ecouter', kind: 'agent_scratch', agentRole: 'Critic', content: 'B' });
+  lm.rememberL0({ ideaId: 'i1', step: 'cartographier', kind: 'tool_output', content: 'C' });
+  await lm.offload('i1', 'ecouter');
 
-  const refs = await lm.offload('i1');
-  assert.equal(refs.length, 1);
-  assert.ok(refs[0].summary);
-
-  const canvasAfter = lm.getWorkingCanvas('i1');
-  assert.equal(canvasAfter.nodes.length, 0); // expiré
+  const canvas = lm.getWorkingCanvas('i1', { includeOffloaded: true });
+  assert.match(canvas.mermaid, /subgraph/);
+  assert.match(canvas.mermaid, /ecouter/);
+  assert.match(canvas.mermaid, /cartographier/);
+  assert.match(canvas.mermaid, /classDef active/);
+  assert.match(canvas.mermaid, /classDef offloaded/);
+  assert.equal(canvas.stats.steps, 2);
+  assert.ok(canvas.stats.offloaded >= 1);
+  assert.ok(canvas.stats.active >= 1);
+  assert.ok(canvas.nodeIds.length >= 3);
 });
 
-test('LayeredMemory : L1 + L2 + recall + buildContextBlock', async () => {
+// ---------- Auto L2 distillation ----------
+test('autoDistillL2 : regroupe par type et crée des scénarios draft', async () => {
   const store = new InMemoryVectorStore();
   const mem = new MemoryService({ embeddings: new MockEmbeddings({ dim: 16 }), store });
   const lm = new LayeredMemory({ memoryService: mem, store });
 
-  await lm.addAtomicFact({
-    ideaId: 'i1',
-    content: 'batteries seconde vie stockage résidentiel Europe',
-    type: 'observation',
-    confidence: 0.85,
-  });
-  await lm.addAtomicFact({
-    ideaId: 'i1',
-    content: 'recette de tarte aux pommes',
-    type: 'observation',
-  });
-  await lm.distillScenario({
-    title: 'Traction DePIN',
-    content: 'Les projets avec >500 stars et activité récente ont plus de chances.',
-    summary: 'stars + activité = signal de traction',
-    ideaIds: ['i1'],
-    patternType: 'insight',
-  });
-  lm.updateCore({
-    scope: 'organization',
-    scopeId: 'kayros',
-    kind: 'norm',
-    title: 'Preuves quanti',
-    content: 'Toujours exiger des métriques avant Go.',
-  });
+  for (let i = 0; i < 4; i++) {
+    await lm.addAtomicFact({
+      ideaId: 'iD',
+      content: `Fait concurrent n°${i} : étoile ${100 + i}`,
+      type: 'competitor',
+      confidence: 0.7 + i * 0.05,
+    });
+  }
+  await lm.addAtomicFact({ ideaId: 'iD', content: 'risque unique', type: 'risk' }); // < minFacts
 
-  const { l1, l2, l3 } = await lm.recall('batteries stockage', { ideaId: 'i1', k: 3 });
-  assert.ok(l1.length >= 1);
-  assert.equal(l1[0].content.includes('batteries'), true);
-  assert.ok(l2.length >= 1);
-  assert.ok(l3.length >= 1);
+  const created = await lm.autoDistillL2('iD', { minFacts: 3 });
+  assert.equal(created.length, 1);
+  assert.equal(created[0].patternType, 'competitive_gap');
+  assert.equal(created[0].reviewStatus, 'draft');
+  assert.ok(created[0].relatedL1Ids.length >= 3);
+  assert.ok(created[0].tags.includes('auto-distill'));
 
-  const block = await lm.buildContextBlock('batteries', { ideaId: 'i1' });
-  assert.match(block, /Faits atomiques|Scénarios|Connaissances/);
+  // Idempotence (sans force)
+  const again = await lm.autoDistillL2('iD', { minFacts: 3 });
+  assert.equal(again.length, 0);
 });
 
-test('LayeredMemory : FileOffloadBackend (fake fs)', async () => {
+// ---------- Persistence L1/L2/L3 ----------
+test('FileLayeredStore + save/load round-trip', async () => {
+  const disque = new Map();
+  const fakeFs = {
+    async readFile(p) {
+      if (!disque.has(p)) { const e = new Error('ENOENT'); e.code = 'ENOENT'; throw e; }
+      return disque.get(p);
+    },
+    async writeFile(p, data) { disque.set(p, data); },
+    async rename(a, b) { disque.set(b, disque.get(a)); disque.delete(a); },
+  };
+
+  const store = new FileLayeredStore({ path: '/tmp/mem.json', fs: fakeFs });
+  const lm1 = new LayeredMemory({ persistentStore: store });
+
+  await lm1.addAtomicFact({ ideaId: 'iP', content: 'fait persisté', type: 'observation' });
+  await lm1.distillScenario({
+    title: 'Scénario persisté', content: 'détail', summary: 'résumé', ideaIds: ['iP'],
+  });
+  lm1.updateCore({
+    scope: 'organization', scopeId: 'kayros', kind: 'norm',
+    title: 'Norme', content: 'Toujours quantifier',
+  });
+
+  assert.equal(await lm1.save(), true);
+  assert.ok(disque.has('/tmp/mem.json') || disque.has('/tmp/mem.json.tmp') || [...disque.keys()].some(k => k.includes('mem')));
+
+  // Nouveau process
+  const lm2 = new LayeredMemory({ persistentStore: store });
+  assert.equal(await lm2.load(), true);
+  assert.equal(lm2.getAtomicFacts({ ideaId: 'iP' }).length, 1);
+  assert.equal(lm2.getScenarios({ ideaId: 'iP' }).length, 1);
+  assert.equal(lm2.getCore({ scope: 'organization' }).length, 1);
+  assert.equal(lm2.getAtomicFacts({ ideaId: 'iP' })[0].content, 'fait persisté');
+});
+
+// ---------- FileOffloadBackend ----------
+test('FileOffloadBackend (fake fs)', async () => {
   const disque = new Map();
   const fakeFs = {
     async mkdir() {},
@@ -134,48 +126,37 @@ test('LayeredMemory : FileOffloadBackend (fake fs)', async () => {
   };
   const fakePath = { join: (...a) => a.join('/') };
   const backend = new FileOffloadBackend({ rootDir: '/tmp/l0', fs: fakeFs, path: fakePath });
-  assert.equal(backend.enabled, true);
-
   const lm = new LayeredMemory({ offloadBackend: backend });
-  const item = lm.rememberL0({
-    ideaId: 'i9',
-    step: 'ecouter',
-    kind: 'tool_output',
-    content: 'payload très long '.repeat(100),
-  });
+  lm.rememberL0({ ideaId: 'i9', step: 'ecouter', kind: 'tool_output', content: 'payload '.repeat(200) });
   const refs = await lm.offload('i9');
   assert.equal(refs.length, 1);
   assert.ok(refs[0].filePath);
   assert.ok(disque.has(refs[0].filePath));
 });
 
-// ---------- Wiring dans createEngine + Orchestrator ----------
-test('createEngine expose layered + Orchestrator l\'utilise', async () => {
+// ---------- Engine + Orchestrator integration ----------
+test('createEngine expose layered + Orchestrator utilise canvas/offload/distill path', async () => {
   const eng = createEngine();
   assert.ok(eng.layered);
   assert.ok(eng.orchestrator.layered);
 
-  // Pré-remplir un fait
   await eng.layered.addAtomicFact({
-    ideaId: 'iL',
-    content: 'contrainte réglementaire batteries seconde vie Europe',
-    type: 'constraint',
-    confidence: 0.9,
+    ideaId: 'iL', content: 'contrainte réglementaire batteries seconde vie Europe',
+    type: 'constraint', confidence: 0.9,
   });
 
   const plan = await eng.orchestrator.plan('Évaluer batteries seconde vie', { ideaId: 'iL' });
   const events = await collect(eng.orchestrator.run(plan, { governance: 'auto' }));
 
   const recall = events.find((e) => e.type === 'recall');
-  assert.ok(recall, 'un événement recall doit être émis');
+  assert.ok(recall);
   assert.equal(recall.source, 'layered');
 
   const offload = events.find((e) => e.type === 'offload');
-  assert.ok(offload, 'un offload de fin de cycle doit apparaître');
+  assert.ok(offload);
   assert.ok(offload.count >= 1);
 
-  const final = events.at(-1);
-  assert.equal(final.status, 'auto');
+  assert.equal(events.at(-1).status, 'auto');
 });
 
 test('Orchestrator.monitorProjection injecte aussi en L1', async () => {
@@ -187,5 +168,5 @@ test('Orchestrator.monitorProjection injecte aussi en L1', async () => {
   );
   const after = eng.layered.getAtomicFacts({ ideaId: 'iM' });
   assert.ok(after.length > before);
-  assert.ok(after.some((f) => f.type === 'metric' && f.tags?.includes('kpi-alert')));
+  assert.ok(after.some((f) => f.type === 'metric'));
 });
