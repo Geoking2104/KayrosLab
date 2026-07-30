@@ -1,5 +1,6 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
 // Ref. specs techniques §3 (EF-15/16) + §6 (EF-17/18). Emet des ReActTrace en flux.
+// Étendu pour LayeredMemory (L0–L3) : recall multi-couches + offload + distillation.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
@@ -32,7 +33,7 @@ export function extractFirstArray(s) {
     else if (c === '[') depth++;
     else if (c === ']') { depth--; if (depth === 0) return s.slice(start, i + 1); }
   }
-  return s.slice(start); // tronque : pas de ] final -> tentative de recuperation
+  return s.slice(start);
 }
 
 /** Recupere les objets {...} complets d'un tableau JSON eventuellement tronque. */
@@ -56,21 +57,17 @@ export function salvageObjects(raw) {
 
 /**
  * Extrait et valide un tableau d'etapes depuis la reponse LLM. Renvoie null si invalide.
- * Robuste aux modeles "thinking" (<think>...</think>), aux fences markdown et au JSON tronque.
  */
 export function parsePlanSteps(text) {
   try {
     let s = String(text ?? '');
-    // 1) retirer les blocs de raisonnement (modeles thinking), fermes ou non.
     s = s.replace(/<think>[\s\S]*?<\/think>/gi, ' ').replace(/<think>[\s\S]*$/i, ' ');
-    // 2) retirer les fences markdown eventuelles.
     s = s.replace(/```(?:json)?/gi, ' ');
-    // 3) extraire le premier tableau JSON equilibre.
     const raw = extractFirstArray(s);
     if (!raw) return null;
     let arr;
     try { arr = JSON.parse(raw); }
-    catch { arr = salvageObjects(raw); } // JSON tronque -> objets complets seulement
+    catch { arr = salvageObjects(raw); }
     if (!Array.isArray(arr) || !arr.length) return null;
     const allowed = new Set(AGENTS);
     const steps = arr
@@ -82,15 +79,33 @@ export function parsePlanSteps(text) {
 }
 
 export class Orchestrator {
-  constructor({ llm, tools = null, memory = null, governance = null, classifier = null, recallK = 3, plannerModel = null, agents = null } = {}) {
+  /**
+   * @param {Object} opts
+   * @param {Object} opts.llm
+   * @param {Object} [opts.tools]
+   * @param {Object} [opts.memory]          // MemoryService classique
+   * @param {Object} [opts.layered]         // LayeredMemory (L0–L3) — optionnel mais recommandé
+   * @param {Object} [opts.governance]
+   * @param {Object} [opts.classifier]
+   * @param {number} [opts.recallK=3]
+   * @param {string} [opts.plannerModel]
+   * @param {Object} [opts.agents]
+   */
+  constructor({ llm, tools = null, memory = null, layered = null, governance = null, classifier = null, recallK = 3, plannerModel = null, agents = null } = {}) {
     if (!llm) throw new Error('Orchestrator: llm (KayrosLLM) requis');
-    this.llm = llm; this.tools = tools; this.memory = memory; this.governance = governance; this.classifier = classifier; this.recallK = recallK;
+    this.llm = llm;
+    this.tools = tools;
+    this.memory = memory;
+    this.layered = layered;                 // NEW
+    this.governance = governance;
+    this.classifier = classifier;
+    this.recallK = recallK;
     this.plannerModel = plannerModel;
-    // Specialized agents (P2) — null = fallback to generic LLM calls (backward compat)
     this.agents = agents || createAllAgents({ llm, tools, memory });
   }
 
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
+  _hasLayered() { return !!this.layered && typeof this.layered.recall === 'function'; }
 
   _fallbackSteps() {
     return [
@@ -101,11 +116,6 @@ export class Orchestrator {
     ];
   }
 
-  /**
-   * Phase PLAN (EF-15) : le Planner LLM genere le plan ; repli deterministe si echec/non-JSON.
-   * @param {string} goal
-   * @param {{ideaId?:string, provider?:string, sovereignty?:'cloud'|'local', model?:string, llmPlan?:boolean}} [ctx]
-   */
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     if (ctx.llmPlan === false) return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps() };
@@ -127,24 +137,40 @@ export class Orchestrator {
   }
 
   /**
-   * Phase SOLVE (ReAct) : rappel memoire -> etapes -> gouvernance de sortie.
-   * @param {{ideaId:string, goal:string, steps:any[]}} plan
-   * @param {{governance?:'auto'|'supervise'|'strict', sovereignty?:'cloud'|'local', provider?:string, maxSteps?:number, recall?:boolean, remember?:boolean}} [opts]
+   * Phase SOLVE (ReAct) : rappel mémoire (classique ou layered) -> étapes -> gouvernance.
    */
   async *run(plan, opts = {}) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
     const doRemember = opts.remember !== false;
+    const doOffload = opts.offload !== false;
 
-    // 1) RAPPEL memoire (EF-18).
+    // 1) RAPPEL mémoire — préfère LayeredMemory si disponible
     let contextBlock = '';
-    if (doRecall && this._hasVectorMemory()) {
-      let recalled = [];
-      try { recalled = await this.memory.recall(plan.ideaId, plan.goal, this.recallK); } catch { recalled = []; }
-      if (recalled.length) {
-        contextBlock = 'Contexte pertinent (memoire de l\'idee) :\n' + recalled.map((r) => `- ${r.text}`).join('\n');
-        yield { type: 'recall', ideaId: plan.ideaId, items: recalled.map((r) => ({ id: r.id, score: r.score, text: r.text })), ts: new Date().toISOString() };
+    if (doRecall) {
+      if (this._hasLayered()) {
+        try {
+          contextBlock = await this.layered.buildContextBlock(plan.goal, { ideaId: plan.ideaId, k: this.recallK });
+          if (contextBlock) {
+            const snap = this.layered.snapshot(plan.ideaId);
+            yield {
+              type: 'recall',
+              ideaId: plan.ideaId,
+              source: 'layered',
+              stats: snap.stats,
+              preview: contextBlock.slice(0, 400),
+              ts: new Date().toISOString(),
+            };
+          }
+        } catch { /* soft */ }
+      } else if (this._hasVectorMemory()) {
+        let recalled = [];
+        try { recalled = await this.memory.recall(plan.ideaId, plan.goal, this.recallK); } catch { recalled = []; }
+        if (recalled.length) {
+          contextBlock = 'Contexte pertinent (memoire de l\'idee) :\n' + recalled.map((r) => `- ${r.text}`).join('\n');
+          yield { type: 'recall', ideaId: plan.ideaId, source: 'vector', items: recalled.map((r) => ({ id: r.id, score: r.score, text: r.text })), ts: new Date().toISOString() };
+        }
       }
     }
 
@@ -153,7 +179,6 @@ export class Orchestrator {
     for (const s of plan.steps) {
       if (count++ >= maxSteps) { yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() }; break; }
 
-      // Use specialized agent if available, else fallback to generic LLM call
       const specialist = this.agents?.[s.agent];
       let observation, actionType = 'llm', actionName = 'complete', usage = { tokensIn: 0, tokensOut: 0 };
 
@@ -178,9 +203,36 @@ export class Orchestrator {
       }
 
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
+
+      // Enregistrement classique
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
       if (doRemember && this._hasVectorMemory()) {
         try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* best-effort */ }
+      }
+
+      // Layered path : L0 working item + best-effort L1 fact
+      if (this._hasLayered()) {
+        try {
+          this.layered.rememberL0({
+            ideaId: plan.ideaId,
+            step: s.id,
+            agentRole: s.agent,
+            kind: 'agent_scratch',
+            content: obsText,
+            summary: obsText.slice(0, 200),
+          });
+          // Distillation légère : si l'observation est courte et assertive → L1
+          if (obsText.length < 400 && obsText.length > 30) {
+            await this.layered.addAtomicFact({
+              ideaId: plan.ideaId,
+              content: obsText.slice(0, 300),
+              type: 'observation',
+              actors: [s.agent],
+              confidence: 0.55,
+              sourceRefs: [{ type: 'agent', id: s.agent }],
+            });
+          }
+        } catch { /* soft */ }
       }
 
       yield {
@@ -194,7 +246,17 @@ export class Orchestrator {
       };
     }
 
-    // Synthesize if Synthesizer agent is available and there were agent outputs
+    // Fin de cycle : offload L0 pour alléger le prochain tour
+    if (doOffload && this._hasLayered()) {
+      try {
+        const refs = await this.layered.offload(plan.ideaId);
+        if (refs.length) {
+          yield { type: 'offload', ideaId: plan.ideaId, count: refs.length, refs: refs.slice(0, 5), ts: new Date().toISOString() };
+        }
+      } catch { /* soft */ }
+    }
+
+    // Synthesize
     const synthAgent = this.agents?.Synthesizer;
     if (synthAgent && synthAgent.synthesize && agentOutputs.length > 0) {
       const synthesis = await synthAgent.synthesize(agentOutputs, opts);
@@ -219,13 +281,6 @@ export class Orchestrator {
     yield { type: 'final', status: 'auto', answer, ts: new Date().toISOString() };
   }
 
-  /**
-   * Phase PROJETER (EF-39 a EF-45) : transforme une decision en trajectoire pilotee.
-   * Deterministe pour les chiffres (outils simulate_trajectory / estimate_resources) ;
-   * branche selon la decision Go / No-Go / Revision.
-   * @param {{status?:'Go'|'No-Go'|'Revision'|'Révision', milestones?:any[], scenarios?:any[], variables?:any[], costHypotheses?:object, raci?:any[], kpis?:any[], risques?:any[], gatesFuturs?:any[], apprentissages?:any[], reactivation?:any, signaux?:any[], motif?:string}} decision
-   * @param {{ideaId?:string, iterations?:number, seed?:number}} [ctx]
-   */
   async project(decision = {}, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     const status = decision.status ?? 'Go';
@@ -245,7 +300,6 @@ export class Orchestrator {
       return { ...base, status: 'Révision', note: decision.motif ?? 'Révision demandée', renvoi: 'Éprouver' };
     }
 
-    // Go : roadmap + ressources/budget + projections probabilistes (chiffres deterministes).
     const milestones = decision.milestones ?? [];
     let ressources = null, projections = null;
     if (hasTool('estimate_resources')) {
@@ -266,23 +320,29 @@ export class Orchestrator {
     return { ...base, status: 'Go', roadmap, projections };
   }
 
-  /**
-   * Boucle Projeter -> Ecouter (EF-43) : evalue les KPIs, re-injecte les alertes comme
-   * signaux dans le corpus d'Ecouter (memoire), et propose un re-arbitrage si seuil franchi.
-   * Un tick unique (a appeler depuis un ordonnanceur : MonitoringLoop, cron, ou tache planifiee).
-   * @param {{kpis?:any[], readings?:any[]}} input
-   * @param {{ideaId?:string}} [ctx]
-   * @returns {Promise<{alerts:any[], signals:any[], reArbitrage:object|null}>}
-   */
   async monitorProjection({ kpis = [], readings = [] } = {}, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     const { alerts } = evaluateKpis(kpis, readings);
     const signals = alertsToSignals(alerts, { ideaId });
-    // Re-injection dans le corpus d'Ecouter.
     if (this._hasVectorMemory()) {
       for (const s of signals) { try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* best-effort */ } }
     } else {
       for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
+    }
+    // Aussi en L1 si layered disponible
+    if (this._hasLayered()) {
+      for (const s of signals) {
+        try {
+          await this.layered.addAtomicFact({
+            ideaId,
+            content: s.contenu,
+            type: 'metric',
+            actors: ['monitor'],
+            confidence: 0.8,
+            tags: ['kpi-alert'],
+          });
+        } catch { /* soft */ }
+      }
     }
     const reArbitrage = alerts.length
       ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId), ts: new Date().toISOString() }

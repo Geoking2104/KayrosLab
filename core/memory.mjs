@@ -20,10 +20,10 @@ export function cosine(a, b) {
 export class SharedMemory {
   constructor(ideaId) {
     this.ideaId = ideaId;
-    this.facts = [];          // désormais des L1AtomicFact-like
+    this.facts = [];
     this.hypotheses = [];
     this.contributions = [];
-    this.activeL0Refs = [];   // ids L0 encore en contexte
+    this.activeL0Refs = [];
     this.lastDistilledAt = null;
   }
 
@@ -88,7 +88,6 @@ export class InMemoryVectorStore {
 
 /**
  * Vector store Qdrant (REST). Même interface upsert/search que InMemoryVectorStore.
- * Note : Qdrant exige des ids entiers ou UUID pour les points.
  */
 export class QdrantVectorStore {
   constructor({ url = 'http://localhost:6333', collection = 'kayroslab', dim = 768, apiKey, fetchImpl } = {}) {
@@ -146,6 +145,59 @@ export class QdrantVectorStore {
   }
 }
 
+// ========== File Offload Backend (Node, optional) ==========
+
+/**
+ * Backend simple pour persister les L0 lourds sur disque.
+ * Injectable (fs + path) pour rester testable et zéro-dépendance forcée.
+ * Si non fourni, l'offload reste purement en mémoire (summary only).
+ */
+export class FileOffloadBackend {
+  /**
+   * @param {Object} opts
+   * @param {string} [opts.rootDir='./.kayros-l0']
+   * @param {Object} [opts.fs]  // { mkdir, writeFile, readFile }
+   * @param {Object} [opts.path] // { join }
+   */
+  constructor({ rootDir = './.kayros-l0', fs = null, path = null } = {}) {
+    this.rootDir = rootDir;
+    this.fs = fs;
+    this.path = path;
+    this.enabled = !!(fs && path && typeof fs.writeFile === 'function');
+  }
+
+  async write(ideaId, item) {
+    if (!this.enabled) return null;
+    try {
+      const dir = this.path.join(this.rootDir, ideaId);
+      await this.fs.mkdir(dir, { recursive: true });
+      const filePath = this.path.join(dir, `${item.id}.json`);
+      const payload = JSON.stringify({
+        id: item.id,
+        kind: item.kind,
+        step: item.step,
+        agentRole: item.agentRole,
+        content: item.content,
+        createdAt: item.createdAt,
+      }, null, 2);
+      await this.fs.writeFile(filePath, payload, 'utf8');
+      return filePath;
+    } catch {
+      return null; // soft-fail
+    }
+  }
+
+  async read(filePath) {
+    if (!this.enabled || !filePath) return null;
+    try {
+      const raw = await this.fs.readFile(filePath, 'utf8');
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  }
+}
+
 // ========== Layered Memory (L0–L3) ==========
 
 /**
@@ -154,39 +206,29 @@ export class QdrantVectorStore {
  * - L1 : atomic facts
  * - L2 : scenarios / insights
  * - L3 : core / persona / skills
- *
- * Peut s'appuyer sur un vector store existant pour le recall hybride.
- * Compatible avec le MemoryService classique (via remember/recall).
  */
 export class LayeredMemory {
   /**
    * @param {Object} [opts]
-   * @param {import('./embeddings.mjs').MemoryService} [opts.memoryService]  // optionnel, pour embeddings
-   * @param {Object} [opts.store]  // InMemoryVectorStore | QdrantVectorStore
+   * @param {import('./embeddings.mjs').MemoryService} [opts.memoryService]
+   * @param {Object} [opts.store]
+   * @param {FileOffloadBackend} [opts.offloadBackend]
    */
-  constructor({ memoryService = null, store = null } = {}) {
+  constructor({ memoryService = null, store = null, offloadBackend = null } = {}) {
     this.memoryService = memoryService;
     this.store = store ?? new InMemoryVectorStore();
+    this.offloadBackend = offloadBackend;
 
-    /** @type {Map<string, import('./memory-types.mjs').L0WorkingItem>} */
     this._l0 = new Map();
-    /** @type {Map<string, import('./memory-types.mjs').L1AtomicFact>} */
     this._l1 = new Map();
-    /** @type {Map<string, import('./memory-types.mjs').L2Scenario>} */
     this._l2 = new Map();
-    /** @type {Map<string, import('./memory-types.mjs').L3CoreMemory>} */
     this._l3 = new Map();
 
-    // index rapide ideaId → set of ids
     this._byIdea = { l0: new Map(), l1: new Map(), l2: new Map() };
   }
 
   // ---------- L0 ----------
 
-  /**
-   * Enregistre un item de contexte de travail (outil, scrape, pensée…).
-   * @param {Parameters<typeof createL0>[0]} p
-   */
   rememberL0(p) {
     const item = createL0(p);
     this._l0.set(item.id, item);
@@ -195,20 +237,43 @@ export class LayeredMemory {
   }
 
   /**
-   * Offload : marque les L0 d'une idée/étape comme expirés et retourne les refs.
-   * En production on écrirait les contenus lourds sur disque (filePath).
+   * Offload : marque les L0 comme expirés, écrit éventuellement sur disque,
+   * et conserve un résumé + filePath pour drill-down.
    */
-  offload(ideaId, step = null) {
+  async offload(ideaId, step = null) {
     const refs = [];
     for (const [id, item] of this._l0) {
       if (item.ideaId !== ideaId) continue;
       if (step && item.step !== step) continue;
+      if (item.expiresAt) continue; // déjà offloadé
+
       item.expiresAt = nowIso();
-      // Simulation d'offload : on garde un résumé, le contenu complet peut être externalisé
-      if (typeof item.content === 'string' && item.content.length > 800 && !item.summary) {
-        item.summary = item.content.slice(0, 400) + '…';
+
+      // Résumé automatique pour le contexte léger
+      if (typeof item.content === 'string' && item.content.length > 600 && !item.summary) {
+        item.summary = item.content.slice(0, 350) + '…';
+      } else if (typeof item.content === 'object' && !item.summary) {
+        item.summary = `[${item.kind}] ${JSON.stringify(item.content).slice(0, 200)}…`;
       }
-      refs.push({ id, mermaidNodeId: item.mermaidNodeId, kind: item.kind, summary: item.summary });
+
+      // Persistance optionnelle
+      if (this.offloadBackend) {
+        const filePath = await this.offloadBackend.write(ideaId, item);
+        if (filePath) item.filePath = filePath;
+      }
+
+      // On peut alléger le contenu en mémoire une fois écrit
+      if (item.filePath && typeof item.content === 'string' && item.content.length > 2000) {
+        item.content = item.summary || '[offloaded]';
+      }
+
+      refs.push({
+        id,
+        mermaidNodeId: item.mermaidNodeId,
+        kind: item.kind,
+        summary: item.summary,
+        filePath: item.filePath || null,
+      });
     }
     return refs;
   }
@@ -218,10 +283,9 @@ export class LayeredMemory {
     for (const item of this._l0.values()) {
       if (item.ideaId === ideaId && !item.expiresAt) nodes.push(item);
     }
-    // Simple Mermaid skeleton (peut être enrichi plus tard)
     const lines = ['flowchart TD'];
     nodes.forEach((n, i) => {
-      const label = (n.summary || n.kind).replace(/["\n]/g, ' ').slice(0, 40);
+      const label = (n.summary || n.kind || 'node').replace(/["\n]/g, ' ').slice(0, 40);
       lines.push(`  N${i}["${label}"]`);
       if (n.mermaidNodeId) lines.push(`  N${i} --- ${n.mermaidNodeId}`);
     });
@@ -230,15 +294,11 @@ export class LayeredMemory {
 
   // ---------- L1 ----------
 
-  /**
-   * @param {Parameters<typeof createL1>[0]} p
-   */
   async addAtomicFact(p) {
     const fact = createL1(p);
     this._l1.set(fact.id, fact);
     if (fact.ideaId) this._indexIdea('l1', fact.ideaId, fact.id);
 
-    // Index vectoriel si possible
     if (this.memoryService && fact.content) {
       try {
         const emb = await this.memoryService.embeddings.embed(fact.content);
@@ -251,7 +311,7 @@ export class LayeredMemory {
           layer: 'l1',
           meta: { type: fact.type, confidence: fact.confidence },
         });
-      } catch (_) { /* soft-fail embeddings */ }
+      } catch (_) { /* soft-fail */ }
     }
     return fact;
   }
@@ -269,9 +329,6 @@ export class LayeredMemory {
 
   // ---------- L2 ----------
 
-  /**
-   * @param {Parameters<typeof createL2>[0]} p
-   */
   async distillScenario(p) {
     const scenario = createL2(p);
     this._l2.set(scenario.id, scenario);
@@ -307,17 +364,13 @@ export class LayeredMemory {
 
   // ---------- L3 ----------
 
-  /**
-   * @param {Parameters<typeof createL3>[0]} p
-   */
   updateCore(p) {
     const core = createL3(p);
-    // Si même scope+kind+title existe déjà → version++
     for (const existing of this._l3.values()) {
       if (existing.scope === core.scope && existing.scopeId === core.scopeId &&
           existing.kind === core.kind && existing.title === core.title) {
         core.version = (existing.version || 1) + 1;
-        core.id = existing.id; // on écrase
+        core.id = existing.id;
         break;
       }
     }
@@ -338,23 +391,13 @@ export class LayeredMemory {
 
   // ---------- Unified Recall ----------
 
-  /**
-   * Recall multi-couches.
-   * @param {string} query
-   * @param {Object} [opts]
-   * @param {string} [opts.ideaId]
-   * @param {('L1'|'L2'|'L3')[]} [opts.layers]
-   * @param {number} [opts.k]
-   */
   async recall(query, { ideaId = null, layers = ['L1', 'L2', 'L3'], k = 5 } = {}) {
     const result = { l1: [], l2: [], l3: [] };
 
-    // L3 : simple filtre (pas encore vectorisé)
     if (layers.includes('L3')) {
       result.l3 = this.getCore().slice(0, k);
     }
 
-    // L1 + L2 via vector store si disponible
     if (this.memoryService && (layers.includes('L1') || layers.includes('L2'))) {
       try {
         const emb = await this.memoryService.embeddings.embed(query);
@@ -372,7 +415,6 @@ export class LayeredMemory {
         result.l1 = result.l1.slice(0, k);
         result.l2 = result.l2.slice(0, k);
       } catch (_) {
-        // fallback non-vectoriel
         if (layers.includes('L1')) result.l1 = this.getAtomicFacts({ ideaId }).slice(0, k);
         if (layers.includes('L2')) result.l2 = this.getScenarios({ ideaId }).slice(0, k);
       }
@@ -384,7 +426,24 @@ export class LayeredMemory {
     return result;
   }
 
-  // ---------- Snapshot / Debug ----------
+  /** Construit un bloc de contexte injectible dans le prompt (léger). */
+  async buildContextBlock(query, { ideaId = null, k = 4 } = {}) {
+    const { l1, l2, l3 } = await this.recall(query, { ideaId, k });
+    const parts = [];
+    if (l3.length) {
+      parts.push('### Connaissances stables (L3)');
+      for (const c of l3) parts.push(`- [${c.kind}] ${c.title}: ${c.content.slice(0, 180)}`);
+    }
+    if (l2.length) {
+      parts.push('### Scénarios / insights (L2)');
+      for (const s of l2) parts.push(`- ${s.title}: ${s.summary || s.content.slice(0, 160)}`);
+    }
+    if (l1.length) {
+      parts.push('### Faits atomiques (L1)');
+      for (const f of l1) parts.push(`- (${f.type}, conf=${f.confidence.toFixed(2)}) ${f.content}`);
+    }
+    return parts.length ? parts.join('\n') : '';
+  }
 
   snapshot(ideaId = null) {
     const filter = (map) => {
@@ -398,16 +457,9 @@ export class LayeredMemory {
       l1: filter(this._l1),
       l2: filter(this._l2),
       l3: [...this._l3.values()],
-      stats: {
-        l0: this._l0.size,
-        l1: this._l1.size,
-        l2: this._l2.size,
-        l3: this._l3.size,
-      },
+      stats: { l0: this._l0.size, l1: this._l1.size, l2: this._l2.size, l3: this._l3.size },
     };
   }
-
-  // ---------- Internal ----------
 
   _indexIdea(layer, ideaId, id) {
     if (!ideaId) return;
@@ -416,5 +468,4 @@ export class LayeredMemory {
   }
 }
 
-// Ré-export des factories pour commodité
 export { createL0, createL1, createL2, createL3 } from './memory-types.mjs';
