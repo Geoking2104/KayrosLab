@@ -4,6 +4,7 @@ export * from './kayros-llm.mjs';
 export * from './tool-registry.mjs';
 export * from './memory.mjs';
 export * from './memory-types.mjs';
+export * from './memory-scope.mjs';
 export * from './embeddings.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
@@ -40,7 +41,7 @@ import {
 } from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
 import { createAllAgents } from './agents/index.mjs';
-import { recommendForEngine, filterGuidanceByAvailable, ROLE_ALIAS, normalizeRole } from './quant-guidance.mjs';
+import { recommendForEngine, filterGuidanceByAvailable, normalizeRole } from './quant-guidance.mjs';
 
 export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
   if (!agents || !quantGuidance) return agents;
@@ -64,7 +65,6 @@ export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
   return agents;
 }
 
-/** Best-effort Node fs/path when memoryPath / offloadRoot set without injection. */
 async function tryLoadNodeIo() {
   try {
     if (typeof process === 'undefined' || !process.versions?.node) return null;
@@ -80,6 +80,16 @@ async function tryLoadNodeIo() {
 
 export function createEngine(opts = {}) {
   const baseModel = opts.model || 'llama3.2';
+
+  // A: L3 scope defaults (tenant / user / team / org)
+  const scopeDefaults = {
+    tenantId: opts.tenantId || null,
+    defaultScope: opts.defaultScope || (opts.tenantId ? 'tenant' : null),
+    defaultScopeId: opts.defaultScopeId || opts.tenantId || null,
+    userId: opts.userId || null,
+    teamId: opts.teamId || null,
+    organizationId: opts.organizationId || null,
+  };
 
   let quantGuidance = recommendForEngine({
     model: baseModel,
@@ -176,6 +186,7 @@ export function createEngine(opts = {}) {
     plannerModel: opts.plannerModel,
     agents,
     quantGuidance,
+    ...scopeDefaults,
   });
 
   const engine = {
@@ -183,9 +194,9 @@ export function createEngine(opts = {}) {
     memory, layered, orchestrator, agents,
     quantGuidance,
     baseModel,
+    scopeDefaults,
   };
 
-  /** Attach Node fs/path when paths were requested without injection. */
   engine.attachNodeFs = async () => {
     if (opts.fs) return true;
     if (!opts.memoryPath && !opts.offloadRoot) return false;
