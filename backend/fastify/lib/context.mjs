@@ -16,7 +16,7 @@ import {
   buildDigest, formatDigest,
   StageTimer, DEFAULT_STAGE_LIMITS,
   ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
-  createEngine, createAllAgents,
+  createEngine,
 } from '../../../core/index.mjs';
 
 /** Point server LLM + governance at the shared engine (memory/quant stay engine-owned). */
@@ -52,7 +52,6 @@ export function orchestratorForRequest(engine, scope = {}) {
     teamId = null,
     organizationId = null,
   } = scope;
-  // Reuse same agents/memory/llm; override scope defaults on a lightweight wrapper
   const orch = engine.orchestrator;
   orch.scopeDefaults = {
     ...orch.scopeDefaults,
@@ -280,7 +279,6 @@ export default async function buildContext() {
   if (engine.persistenceReady) {
     await engine.persistenceReady.catch(() => false);
   }
-  // Soft: sync quant tags if enabled (non-blocking failure)
   if (engine.syncAvailableQuants && typeof engine.syncAvailableQuants.then === 'function') {
     engine.syncAvailableQuants.catch(() => {});
   }
