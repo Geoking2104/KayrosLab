@@ -38,6 +38,7 @@ app.addHook('preHandler', async (req, reply) => {
 await app.register((await import('./routes/health.mjs')).default);
 await app.register((await import('./routes/llm.mjs')).default);
 await app.register((await import('./routes/cycle.mjs')).default);
+await app.register((await import('./routes/memory.mjs')).default);
 await app.register((await import('./routes/demo-report-leads.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
