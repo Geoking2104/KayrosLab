@@ -37,22 +37,26 @@ export default async function positionningRoute(app) {
     });
   }
 
-  // Ontology catalogue (tech + business entities / relationships) — UX Positionner
-  app.get('/v1/positionning/ontology', async (_req, reply) => {
+  // Ontology catalogue + Cytoscape graph payload
+  app.get('/v1/positionning/ontology', async (req, reply) => {
     const {
       ENTITY_TYPES, RELATIONSHIPS, TECH_ENTITY_IDS, BUSINESS_ENTITY_IDS,
     } = await import('../../../core/positionning/ontology.mjs');
+    const group = ['tech', 'business', 'all'].includes(req.query?.group) ? req.query.group : 'all';
+    const { ontologyToCytoscape } = await import('../../../core/positionning/ontology-graph.mjs');
+    const graph = ontologyToCytoscape({ group });
     return {
       entities: ENTITY_TYPES,
       relationships: RELATIONSHIPS,
       techIds: TECH_ENTITY_IDS,
       businessIds: BUSINESS_ENTITY_IDS,
+      graph,
     };
   });
 
   app.post('/v1/positionning/search', async (req, reply) => {
     const parsed = searchSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
+    if (!parsed.success) return reply.code(400).send({ error: 'Field "q" required', issues: parsed.error.issues });
     const { q, limit } = parsed.data;
     const ctx = app.kayrosContext;
     try {
@@ -62,13 +66,13 @@ export default async function positionningRoute(app) {
       return { results, provider: ctx.GOOGLE_API_KEY ? 'google' : 'duckduckgo' };
     } catch (err) {
       app.log.error(err);
-      return reply.code(502).send({ error: 'Echec de la recherche', message: err.message });
+      return reply.code(502).send({ error: 'Search failed', message: err.message });
     }
   });
 
   app.post('/v1/positionning/github', async (req, reply) => {
     const parsed = searchSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
+    if (!parsed.success) return reply.code(400).send({ error: 'Field "q" required', issues: parsed.error.issues });
     const { q, limit } = parsed.data;
     try {
       const { GitHubScanner } = await import('../../../core/positionning/scanner-github.mjs');
@@ -77,13 +81,13 @@ export default async function positionningRoute(app) {
       return { results };
     } catch (err) {
       app.log.error(err);
-      return reply.code(502).send({ error: 'Echec de la recherche GitHub', message: err.message });
+      return reply.code(502).send({ error: 'GitHub search failed', message: err.message });
     }
   });
 
   app.post('/v1/positionning/arxiv', async (req, reply) => {
     const parsed = searchSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
+    if (!parsed.success) return reply.code(400).send({ error: 'Field "q" required', issues: parsed.error.issues });
     const { q, limit } = parsed.data;
     try {
       const { ArXivScanner } = await import('../../../core/positionning/scanner-arxiv.mjs');
@@ -92,20 +96,20 @@ export default async function positionningRoute(app) {
       return { results };
     } catch (err) {
       app.log.error(err);
-      return reply.code(502).send({ error: 'Echec de la recherche ArXiv', message: err.message });
+      return reply.code(502).send({ error: 'ArXiv search failed', message: err.message });
     }
   });
 
   app.post('/v1/positionning/analyze', async (req, reply) => {
     const parsed = analyzeSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'Champ "idea" requis', issues: parsed.error.issues });
+    if (!parsed.success) return reply.code(400).send({ error: 'Field "idea" required', issues: parsed.error.issues });
     const { idea, limit, gapThreshold } = parsed.data;
     try {
       const result = await runMistralAnalysis({ idea, limit, gapThreshold });
       return result;
     } catch (err) {
       app.log.error(err);
-      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: "Echec de l'analyse ontologique Mistral", message: err.message });
+      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: 'Mistral ontology analysis failed', message: err.message });
     }
   });
 
@@ -114,11 +118,11 @@ export default async function positionningRoute(app) {
       || req.ip
       || 'unknown';
     if (!checkPublicAnalyzeRate(ip)) {
-      return reply.code(429).send({ error: `Quota analyse Positionner depasse (${PUBLIC_ANALYZE_MAX_PER_HOUR}/h). Reessayez plus tard.` });
+      return reply.code(429).send({ error: `Positioner quota exceeded (${PUBLIC_ANALYZE_MAX_PER_HOUR}/h). Try later.` });
     }
 
     const parsed = analyzeSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'Champ "idea" requis', issues: parsed.error.issues });
+    if (!parsed.success) return reply.code(400).send({ error: 'Field "idea" required', issues: parsed.error.issues });
     const { idea, limit, gapThreshold } = parsed.data;
 
     try {
@@ -126,7 +130,7 @@ export default async function positionningRoute(app) {
       return result;
     } catch (err) {
       app.log.error(err);
-      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: "Echec de la recherche contextuelle Mistral", message: err.message });
+      return reply.code(err.code === 'NO_KEY' ? 503 : 502).send({ error: 'Mistral contextual search failed', message: err.message });
     }
   });
 
