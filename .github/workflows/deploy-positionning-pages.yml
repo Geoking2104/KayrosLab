@@ -7,8 +7,9 @@ on:
       - 'frontend/positionning-app/**'
       - 'index.html'
       - 'index.fr.html'
-      # (supprimé)
       - 'kayroslab-complete-with-ai-agents.html'
+      - 'cycle-timeline.html'
+      - 'portfolio-dormant.html'
       - 'tokens.css'
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
@@ -33,11 +34,10 @@ jobs:
       - run: |
           mkdir -p deploy/positionner-app
           cp index.html index.fr.html kayroslab-complete-with-ai-agents.html tokens.css livret-blanc-kayroslab.html livret-blanc-positionner.html livret-blanc-ecouter.html whitepaper-*.html deploy/
+          # N — cycle SSE timeline + M dormant portfolio
+          cp cycle-timeline.html portfolio-dormant.html deploy/ 2>/dev/null || true
           cp -r frontend/positionning-app/dist/* deploy/positionner-app/
           touch deploy/.nojekyll
-          # CNAME doit etre republie a chaque deploiement : force_orphan efface
-          # la branche gh-pages, et sans ce fichier GitHub desactive le domaine
-          # personnalise (www.kayroslab.com retombe alors en 404).
           cp CNAME deploy/
 
       - uses: peaceiris/actions-gh-pages@v3
