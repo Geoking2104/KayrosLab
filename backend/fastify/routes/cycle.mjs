@@ -1,10 +1,16 @@
 /**
- * Phase 1 — Live governed cycle
- * POST /v1/cycle/run  — SSE stream of orchestrator events (default)
- *                      or JSON aggregate when stream=false
+ * Phase 1 + 4 — Live governed cycle + idea lifecycle
+ * POST /v1/cycle/run
+ * POST /v1/cycle/reactivate
+ * GET  /v1/cycle/status
  */
 import { z } from 'zod';
 import { orchestratorForRequest } from '../lib/context.mjs';
+import {
+  applyCycleEvent,
+  reactivate as reactivateIdea,
+} from '../../../core/cycle-lifecycle.mjs';
+import { createIdea } from '../../../core/model.mjs';
 
 const cycleRunSchema = z.object({
   query: z.string().min(1).max(8000),
@@ -21,6 +27,20 @@ const cycleRunSchema = z.object({
   userId: z.string().optional(),
   teamId: z.string().optional(),
   organizationId: z.string().optional(),
+  /** When true (default), create/update idea in repository if available */
+  syncIdea: z.boolean().optional().default(true),
+  title: z.string().max(300).optional(),
+});
+
+const reactivateSchema = z.object({
+  ideaId: z.string().min(1),
+  motif: z.string().max(500).optional(),
+  stage: z.string().optional(),
+  run: z.boolean().optional().default(false),
+  query: z.string().max(8000).optional(),
+  governance: z.enum(['auto', 'supervise', 'off']).optional().default('auto'),
+  stream: z.boolean().optional().default(true),
+  tenantId: z.string().optional(),
 });
 
 async function tryAuthSession(app, req) {
@@ -42,6 +62,52 @@ function writeSse(raw, event) {
   } catch { /* closed */ }
 }
 
+async function ensureIdea(app, {
+  ideaId, title, query, tenantId, userId, syncIdea,
+}) {
+  if (!syncIdea) return null;
+  const repo = app.kayrosContext?.ideas;
+  if (!repo || typeof repo.get !== 'function') return null;
+
+  let idea = await repo.get(ideaId).catch(() => null);
+  if (idea) {
+    if (tenantId && (idea.tenantId ?? 'default') !== tenantId) {
+      return { error: 'idea tenant mismatch', status: 403 };
+    }
+    return { idea };
+  }
+
+  idea = createIdea({
+    id: ideaId,
+    title: title || String(query || '').slice(0, 80) || ideaId,
+    author: userId || null,
+    tenantId: tenantId || 'default',
+    stage: 'recueillir',
+    status: 'nouveau',
+  });
+  await repo.save(idea);
+  return { idea, created: true };
+}
+
+async function persistIdeaEvent(app, ideaRef, ev, { by, journal }) {
+  if (!ideaRef?.idea) return ideaRef;
+  const { idea, changed } = applyCycleEvent(ideaRef.idea, ev, { by });
+  if (!changed) return ideaRef;
+  const repo = app.kayrosContext?.ideas;
+  if (repo?.save) await repo.save(idea);
+  try {
+    journal?.({
+      type: 'cycle.idea',
+      ideaId: idea.id,
+      stage: idea.stage,
+      status: idea.status,
+      event: ev.type,
+      agent: ev.agent || null,
+    });
+  } catch { /* soft */ }
+  return { idea };
+}
+
 export default async function cycleRoute(app) {
   app.post('/v1/cycle/run', async (req, reply) => {
     const parsed = cycleRunSchema.safeParse(req.body ?? {});
@@ -60,6 +126,18 @@ export default async function cycleRoute(app) {
     const { engine, journal } = app.kayrosContext;
     if (!engine?.orchestrator) {
       return reply.code(503).send({ error: 'engine non disponible' });
+    }
+
+    let ideaRef = await ensureIdea(app, {
+      ideaId,
+      title: body.title,
+      query: body.query,
+      tenantId,
+      userId,
+      syncIdea: body.syncIdea,
+    });
+    if (ideaRef?.error) {
+      return reply.code(ideaRef.status || 400).send({ error: ideaRef.error });
     }
 
     const orch = orchestratorForRequest(engine, {
@@ -84,7 +162,6 @@ export default async function cycleRoute(app) {
       return reply.code(502).send({ error: String(e.message || e) });
     }
 
-    // SSE never blocks on human gate; JSON aggregate same unless waitGate true
     const runOpts = {
       governance: body.governance,
       sovereignty: body.sovereignty,
@@ -106,8 +183,12 @@ export default async function cycleRoute(app) {
         tenantId,
         userId,
         query: body.query.slice(0, 200),
+        ideaStage: ideaRef?.idea?.stage,
+        ideaStatus: ideaRef?.idea?.status,
       });
     } catch { /* soft */ }
+
+    const by = userId || 'cycle';
 
     if (body.stream !== false) {
       reply.hijack();
@@ -127,6 +208,9 @@ export default async function cycleRoute(app) {
       writeSse(reply.raw, {
         type: 'meta',
         ideaId,
+        idea: ideaRef?.idea
+          ? { id: ideaRef.idea.id, stage: ideaRef.idea.stage, status: ideaRef.idea.status }
+          : null,
         scope: { tenantId, userId, teamId, organizationId },
         stream: true,
         ts: new Date().toISOString(),
@@ -138,10 +222,21 @@ export default async function cycleRoute(app) {
       try {
         for await (const ev of orch.run(plan, runOpts)) {
           if (aborted) break;
-          writeSse(reply.raw, ev);
+          ideaRef = await persistIdeaEvent(app, ideaRef, ev, { by, journal });
+          const enriched = ideaRef?.idea
+            ? { ...ev, idea: { stage: ideaRef.idea.stage, status: ideaRef.idea.status } }
+            : ev;
+          writeSse(reply.raw, enriched);
         }
         if (!aborted) {
-          writeSse(reply.raw, { type: 'done', ideaId, ts: new Date().toISOString() });
+          writeSse(reply.raw, {
+            type: 'done',
+            ideaId,
+            idea: ideaRef?.idea
+              ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status }
+              : null,
+            ts: new Date().toISOString(),
+          });
         }
       } catch (e) {
         app.log.error(e);
@@ -165,7 +260,11 @@ export default async function cycleRoute(app) {
     let gate = null;
     try {
       for await (const ev of orch.run(plan, runOpts)) {
-        events.push(ev);
+        ideaRef = await persistIdeaEvent(app, ideaRef, ev, { by, journal });
+        const enriched = ideaRef?.idea
+          ? { ...ev, idea: { stage: ideaRef.idea.stage, status: ideaRef.idea.status } }
+          : ev;
+        events.push(enriched);
         if (ev.type === 'gate') gate = ev;
         if (ev.type === 'final') final = ev;
       }
@@ -183,6 +282,9 @@ export default async function cycleRoute(app) {
         gateId: gate.gateId,
         gateType: gate.gateType,
         ideaId,
+        idea: ideaRef?.idea
+          ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status }
+          : null,
         scope: { tenantId, userId },
         events,
       });
@@ -192,10 +294,81 @@ export default async function cycleRoute(app) {
       status: final?.status ?? 'ok',
       answer: final?.answer ?? final?.message ?? null,
       ideaId,
+      idea: ideaRef?.idea
+        ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status, history: ideaRef.idea.history?.slice(-5) }
+        : null,
       scope: { tenantId, userId },
       quant: final?.quant ?? null,
       events,
     };
+  });
+
+  /** Reactivate dormant idea; optionally start a new cycle. */
+  app.post('/v1/cycle/reactivate', async (req, reply) => {
+    const parsed = reactivateSchema.safeParse(req.body ?? {});
+    if (!parsed.success) {
+      return reply.code(400).send({ error: 'ideaId requis', issues: parsed.error.issues });
+    }
+    const body = parsed.data;
+    const session = await tryAuthSession(app, req);
+    const tenantId = session?.tenantId || body.tenantId || null;
+    const userId = session?.sub || null;
+    const repo = app.kayrosContext?.ideas;
+
+    if (!repo) {
+      return reply.code(503).send({ error: 'repository idées non disponible' });
+    }
+
+    let idea = await repo.get(body.ideaId);
+    if (!idea) return reply.code(404).send({ error: 'idée introuvable' });
+    if (tenantId && (idea.tenantId ?? 'default') !== tenantId) {
+      return reply.code(404).send({ error: 'idée introuvable' });
+    }
+
+    try {
+      idea = reactivateIdea(idea, {
+        by: userId || 'cycle',
+        motif: body.motif || 'reactivation',
+        stage: body.stage || null,
+      });
+      await repo.save(idea);
+      app.kayrosContext.journal?.({
+        type: 'cycle.reactivate',
+        ideaId: idea.id,
+        stage: idea.stage,
+        status: idea.status,
+        by: userId,
+      });
+    } catch (e) {
+      return reply.code(409).send({ error: String(e.message || e) });
+    }
+
+    if (!body.run) {
+      return { ok: true, idea };
+    }
+
+    const query = body.query || idea.title || idea.intake?.summary || idea.id;
+    // Delegate to same process: client should call /v1/cycle/run with ideaId;
+    // optional inline run when engine present.
+    const { engine } = app.kayrosContext;
+    if (!engine?.orchestrator) {
+      return { ok: true, idea, run: false, hint: 'POST /v1/cycle/run with ideaId' };
+    }
+
+    // Non-stream inline reactivation run (stream clients use /run after this)
+    if (body.stream !== false) {
+      return {
+        ok: true,
+        idea,
+        next: {
+          method: 'POST',
+          path: '/v1/cycle/run',
+          body: { query, ideaId: idea.id, governance: body.governance, stream: true },
+        },
+      };
+    }
+
+    return { ok: true, idea, query };
   });
 
   app.get('/v1/cycle/status', async () => {
