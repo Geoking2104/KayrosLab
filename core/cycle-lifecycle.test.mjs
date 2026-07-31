@@ -1,7 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createIdea } from './model.mjs';
-import { applyCycleEvent, stageForAgent, reactivate } from './cycle-lifecycle.mjs';
+import {
+  applyCycleEvent,
+  stageForAgent,
+  reactivate,
+  applyGateResolution,
+} from './cycle-lifecycle.mjs';
 
 test('stageForAgent maps known agents', () => {
   assert.equal(stageForAgent('Critic'), 'eprouver');
@@ -37,4 +42,36 @@ test('reactivate dormant idea', () => {
   idea = reactivate(idea, { by: 'test', stage: 'ecouter' });
   assert.equal(idea.status, 'en_revue');
   assert.equal(idea.stage, 'ecouter');
+});
+
+test('B. applyGateResolution approve → en_developpement + projeter', () => {
+  const idea = createIdea({ id: 'i1', title: 'T', stage: 'arbitrer', status: 'en_revue' });
+  const { idea: out, changed } = applyGateResolution(idea, { decision: 'approve', by: 'comex' });
+  assert.equal(changed, true);
+  assert.equal(out.status, 'en_developpement');
+  assert.equal(out.stage, 'projeter');
+});
+
+test('B. applyGateResolution reject → non_poursuivi', () => {
+  const idea = createIdea({ id: 'i1', title: 'T', status: 'en_revue' });
+  const { idea: out } = applyGateResolution(idea, { decision: 'reject', reason: 'risque réglementaire' });
+  assert.equal(out.status, 'non_poursuivi');
+});
+
+test('B. applyGateResolution revise → en_revue + eprouver', () => {
+  const idea = createIdea({ id: 'i1', title: 'T', stage: 'arbitrer', status: 'en_revue' });
+  const { idea: out } = applyGateResolution(idea, { decision: 'revise', reason: 'manque de preuves' });
+  assert.equal(out.status, 'en_revue');
+  assert.equal(out.stage, 'eprouver');
+});
+
+test('B. gate_resolved event via applyCycleEvent', () => {
+  const idea = createIdea({ id: 'i1', title: 'T', stage: 'arbitrer', status: 'en_revue' });
+  const { idea: out } = applyCycleEvent(idea, {
+    type: 'gate_resolved',
+    decision: 'approve',
+    by: 'comex@x.com',
+  });
+  assert.equal(out.status, 'en_developpement');
+  assert.equal(out.stage, 'projeter');
 });

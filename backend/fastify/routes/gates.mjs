@@ -1,8 +1,12 @@
 import { z } from 'zod';
+import { applyGateResolution } from '../../../core/cycle-lifecycle.mjs';
 
 const voteSchema = z.object({ score: z.number().min(0).max(100), comment: z.string().optional() });
 const gateOpenSchema = z.object({ type: z.string().optional().default('validation'), requiredRole: z.string().optional().default('comex') });
-const gateResolveSchema = z.object({ decision: z.string().min(1), reason: z.string().optional().default('') });
+const gateResolveSchema = z.object({
+  decision: z.enum(['approve', 'reject', 'revise', 'validated_human', 'blocked_veto', 'accept', 'veto']),
+  reason: z.string().optional().default(''),
+});
 
 export default async function gatesRoute(app) {
   app.post('/v1/ideas/:id/gates', async (req, reply) => {
@@ -29,6 +33,7 @@ export default async function gatesRoute(app) {
         titre: idea?.title ?? g.payload ?? g.ideaId,
         agregat: g.evaluation ?? null, createdAt: g.createdAt,
         tenantId: idea?.tenantId ?? 'default', pourMoi: g.requiredRole === me.role,
+        ideaStage: idea?.stage ?? null, ideaStatus: idea?.status ?? null,
       };
     }));
     return { gates: enrichis.filter((g) => g.tenantId === me.tenantId).map(({ tenantId, ...g }) => g), monRole: me.role };
@@ -42,19 +47,61 @@ export default async function gatesRoute(app) {
     const cible = rec.ideaId ? await ctx.ideas.get(rec.ideaId) : null;
     if (cible && (cible.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
     const parsed = gateResolveSchema.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: 'decision requise', issues: parsed.error.issues });
-    const { decision, reason } = parsed.data;
+    if (!parsed.success) return reply.code(400).send({ error: 'decision requise (approve|reject|revise)', issues: parsed.error.issues });
+    let { decision, reason } = parsed.data;
+
+    // Normalize aliases used by orchestrator final events
+    if (decision === 'validated_human' || decision === 'accept') decision = 'approve';
+    if (decision === 'blocked_veto' || decision === 'veto') decision = 'reject';
+
     try {
-      const resolution = ctx.governance.resolve(req.params.gateId, { decision, by: me.email, role: me.role, reason });
+      const resolution = ctx.governance.resolve(req.params.gateId, {
+        decision,
+        by: me.email,
+        role: me.role,
+        reason,
+      });
+
+      let ideaOut = null;
       if (cible) {
-        const { setStatus, setStage } = await import('../../core/index.mjs');
-        const map = { approve: 'en_developpement', reject: 'non_poursuivi', revise: 'en_revue' };
-        let out = setStatus(cible, map[decision] ?? cible.status, { by: me.email, motif: reason || decision });
-        if (decision === 'approve') out = setStage(out, 'projeter', { by: me.email, motif: 'gate approuve' });
-        if (decision === 'revise') out = setStage(out, 'eprouver', { by: me.email, motif: 'revision demandee' });
-        await ctx.ideas.save(out);
+        const { idea, changed } = applyGateResolution(cible, {
+          decision,
+          by: me.email,
+          reason: reason || decision,
+        });
+        if (changed) {
+          await ctx.ideas.save(idea);
+          ideaOut = {
+            id: idea.id,
+            stage: idea.stage,
+            status: idea.status,
+            updatedAt: idea.updatedAt,
+          };
+          try {
+            ctx.journal?.({
+              type: 'gate.resolved',
+              gateId: resolution.gateId,
+              decision,
+              ideaId: idea.id,
+              stage: idea.stage,
+              status: idea.status,
+              by: me.email,
+            });
+          } catch { /* soft */ }
+        }
       }
-      return { resolution };
-    } catch (e) { return reply.code(403).send({ error: e.message }); }
+
+      return {
+        resolution,
+        idea: ideaOut,
+        mapping: {
+          approve: { status: 'en_developpement', stage: 'projeter' },
+          reject: { status: 'non_poursuivi' },
+          revise: { status: 'en_revue', stage: 'eprouver' },
+        }[decision] || null,
+      };
+    } catch (e) {
+      return reply.code(403).send({ error: e.message });
+    }
   });
 }
