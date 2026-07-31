@@ -37,6 +37,19 @@ export default async function positionningRoute(app) {
     });
   }
 
+  // Ontology catalogue (tech + business entities / relationships) — UX Positionner
+  app.get('/v1/positionning/ontology', async (_req, reply) => {
+    const {
+      ENTITY_TYPES, RELATIONSHIPS, TECH_ENTITY_IDS, BUSINESS_ENTITY_IDS,
+    } = await import('../../../core/positionning/ontology.mjs');
+    return {
+      entities: ENTITY_TYPES,
+      relationships: RELATIONSHIPS,
+      techIds: TECH_ENTITY_IDS,
+      businessIds: BUSINESS_ENTITY_IDS,
+    };
+  });
+
   app.post('/v1/positionning/search', async (req, reply) => {
     const parsed = searchSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'Champ "q" requis', issues: parsed.error.issues });
