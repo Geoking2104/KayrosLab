@@ -36,6 +36,7 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
 .stage-chip{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #e2e8f0;color:#64748b;background:#f8fafc}
 .stage-chip.active{border-color:#0ea5e9;background:#e0f2fe;color:#0369a1;font-weight:700}
 .stage-chip.done{border-color:#86efac;background:#f0fdf4;color:#166534}
+#gate-panel.hidden{display:none}
 </style>
 </head>
 <body class="antialiased">
@@ -50,17 +51,19 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
 </header>
 
 <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-  <!-- LEFT: controls -->
   <section class="lg:col-span-4 space-y-4">
     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <h1 class="font-display text-xl font-bold mb-1">Cycle gouverné live</h1>
-      <p class="text-sm text-slate-500 mb-4">SSE · mémoire L0–L3 · quant · positionnement · lifecycle idée</p>
+      <p class="text-sm text-slate-500 mb-4">SSE · mémoire · gates · reactivate</p>
 
       <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">API base</label>
       <input id="api-base" type="text" value="http://localhost:8787" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" />
 
+      <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Bearer token (gates / reactivate)</label>
+      <input id="auth-token" type="password" placeholder="JWT session" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" />
+
       <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Objectif</label>
-      <textarea id="query" rows="3" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" placeholder="Lancer une offre B2B…">Lancer une offre B2B de maintenance prédictive IoT pour l'industrie européenne</textarea>
+      <textarea id="query" rows="3" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm">Lancer une offre B2B de maintenance prédictive IoT pour l'industrie européenne</textarea>
 
       <div class="grid grid-cols-2 gap-2 mb-3">
         <div>
@@ -68,6 +71,7 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
           <select id="governance" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-sm">
             <option value="auto" selected>auto</option>
             <option value="supervise">supervise</option>
+            <option value="strict">strict</option>
             <option value="off">off</option>
           </select>
         </div>
@@ -90,15 +94,28 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <button id="btn-run" type="button" class="rounded-full bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 text-sm">
-          <i class="fas fa-play mr-1"></i> Lancer
-        </button>
+        <button id="btn-run" type="button" class="rounded-full bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 text-sm"><i class="fas fa-play mr-1"></i> Lancer</button>
         <button id="btn-stop" type="button" disabled class="rounded-full border border-slate-200 text-slate-600 font-semibold px-4 py-2.5 text-sm disabled:opacity-40">Stop</button>
         <button id="btn-clear" type="button" class="rounded-full border border-slate-200 text-slate-500 px-4 py-2.5 text-sm">Effacer</button>
       </div>
     </div>
 
-    <!-- Idea lifecycle -->
+    <!-- F Gate panel -->
+    <div id="gate-panel" class="rounded-2xl border border-red-200 bg-red-50 p-4 shadow-sm hidden">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-red-700 mb-2">Gate · décision humaine</h2>
+      <p class="text-xs text-red-800/80 mb-2 mono">gateId: <span id="gate-id">—</span></p>
+      <p class="text-xs text-slate-600 mb-2">Type: <span id="gate-type">—</span></p>
+      <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Motif (obligatoire reject/revise)</label>
+      <input id="gate-reason" type="text" class="w-full mb-3 rounded-lg border border-red-200 bg-white px-2 py-2 text-sm" placeholder="Raison…" />
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-approve" type="button" class="rounded-full bg-emerald-600 text-white text-xs font-bold px-4 py-2">Approve</button>
+        <button id="btn-revise" type="button" class="rounded-full bg-amber-500 text-white text-xs font-bold px-4 py-2">Revise</button>
+        <button id="btn-reject" type="button" class="rounded-full bg-red-600 text-white text-xs font-bold px-4 py-2">Reject</button>
+      </div>
+      <p id="gate-msg" class="text-xs text-slate-500 mt-2"></p>
+    </div>
+
+    <!-- Idea lifecycle + K reactivate -->
     <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <div class="flex items-center justify-between mb-2">
         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Idée · lifecycle</h2>
@@ -109,21 +126,21 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
         <span id="idea-status-badge" class="badge-status">status: —</span>
       </div>
       <div id="stage-rail" class="stage-rail mb-3"></div>
-      <button id="btn-inspect" type="button" class="text-xs text-sky-600 font-semibold" disabled>Inspecter mémoire idée</button>
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-inspect" type="button" class="text-xs text-sky-600 font-semibold" disabled>Inspecter mémoire</button>
+        <button id="btn-reactivate" type="button" class="text-xs text-amber-700 font-semibold" disabled title="Statuts dormants only">Réactiver (EF-58)</button>
+      </div>
     </div>
 
-    <!-- Memory inspector -->
     <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Mémoire · inspecteur</h2>
-      <div id="mem-counts" class="grid grid-cols-4 gap-1 mb-2 text-center">
+      <div class="grid grid-cols-4 gap-1 mb-2 text-center">
         <div class="rounded-lg bg-slate-50 p-2"><div id="c-l0" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L0</div></div>
         <div class="rounded-lg bg-slate-50 p-2"><div id="c-l1" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L1</div></div>
         <div class="rounded-lg bg-slate-50 p-2"><div id="c-l2" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L2</div></div>
         <div class="rounded-lg bg-slate-50 p-2"><div id="c-l3" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L3</div></div>
       </div>
-      <div id="mem-l2" class="space-y-1 max-h-36 overflow-y-auto text-xs text-slate-600 mb-2">
-        <p class="text-slate-400">Aucun scénario L2.</p>
-      </div>
+      <div id="mem-l2" class="space-y-1 max-h-36 overflow-y-auto text-xs text-slate-600 mb-2"><p class="text-slate-400">Aucun scénario L2.</p></div>
       <div class="flex flex-wrap gap-2">
         <button id="btn-l3-list" type="button" class="text-xs text-sky-600 font-semibold">Liste L3</button>
         <button id="btn-save-mem" type="button" class="text-xs text-slate-500 font-semibold">Save mémoire</button>
@@ -143,14 +160,13 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
     </div>
   </section>
 
-  <!-- RIGHT: timeline -->
   <section class="lg:col-span-8">
     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div class="flex items-center justify-between mb-3">
         <h2 class="font-display font-semibold text-sm">Timeline</h2>
         <span id="event-count" class="text-xs text-slate-400">0 events</span>
       </div>
-      <p class="text-[11px] text-slate-400 mb-3 mono">meta → start → recall → positionning → trace… → distill → synthesis → final</p>
+      <p class="text-[11px] text-slate-400 mb-3 mono">meta → start → recall → positionning → trace… → gate? → final</p>
       <div id="timeline" class="space-y-2">
         <p class="text-sm text-slate-400">Lancez un cycle pour voir le flux live.</p>
       </div>
@@ -162,12 +178,13 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
 (function () {
   const $ = (id) => document.getElementById(id);
   const STAGES = ['recueillir','ecouter','cartographier','construire','eprouver','arbitrer','projeter','realiser'];
+  const DORMANT = ['consideration_future', 'en_pause', 'non_poursuivi'];
   let abortCtrl = null;
   let events = [];
   let currentIdeaId = null;
   let currentStage = null;
   let currentStatus = null;
-  let lastInspect = null;
+  let pendingGateId = null;
 
   function setStatus(label, tone) {
     const el = $('status-pill');
@@ -181,12 +198,16 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   }
 
   function escapeHtml(s) {
-    return String(s ?? '')
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function apiBase() {
-    return $('api-base').value.replace(/\/$/, '');
+  function apiBase() { return $('api-base').value.replace(/\/$/, ''); }
+
+  function authHeaders(extra) {
+    const h = Object.assign({ 'Content-Type': 'application/json' }, extra || {});
+    const t = $('auth-token').value.trim();
+    if (t) h.Authorization = 'Bearer ' + t;
+    return h;
   }
 
   function renderStageRail(stage) {
@@ -213,6 +234,68 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
     if (idea?.status) {
       currentStatus = idea.status;
       $('idea-status-badge').textContent = 'status: ' + idea.status;
+      $('btn-reactivate').disabled = !DORMANT.includes(idea.status);
+    }
+  }
+
+  function showGate(ev) {
+    pendingGateId = ev.gateId || null;
+    $('gate-id').textContent = pendingGateId || '—';
+    $('gate-type').textContent = ev.gateType || '—';
+    $('gate-msg').textContent = '';
+    $('gate-panel').classList.remove('hidden');
+  }
+
+  function hideGate() {
+    pendingGateId = null;
+    $('gate-panel').classList.add('hidden');
+  }
+
+  async function resolveGate(decision) {
+    if (!pendingGateId) return alert('Aucun gate actif');
+    const reason = $('gate-reason').value.trim();
+    if ((decision === 'reject' || decision === 'revise') && !reason) {
+      return alert('Motif obligatoire pour ' + decision);
+    }
+    if (!$('auth-token').value.trim()) {
+      return alert('Bearer token requis (rôle comex pour output_censor)');
+    }
+    try {
+      const r = await fetch(apiBase() + '/v1/gates/' + encodeURIComponent(pendingGateId) + '/resolve', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ decision, reason }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      $('gate-msg').textContent = 'OK · ' + decision + (j.idea ? ' → ' + j.idea.status + ' / ' + j.idea.stage : '');
+      if (j.idea) updateIdeaUI(j.idea, j.idea.id || currentIdeaId);
+      const box = $('timeline');
+      box.insertAdjacentHTML('beforeend',
+        '<article class="ev-card rounded-xl bg-emerald-50 px-3 py-2" data-type="final">'
+        + '<div class="text-[10px] font-bold uppercase text-emerald-700">gate_resolved</div>'
+        + '<div class="text-sm">' + escapeHtml(decision) + (reason ? ' — ' + escapeHtml(reason) : '') + '</div></article>');
+      hideGate();
+    } catch (e) {
+      $('gate-msg').textContent = e.message;
+    }
+  }
+
+  async function reactivateIdea() {
+    if (!currentIdeaId) return;
+    if (!$('auth-token').value.trim()) return alert('Bearer token requis');
+    try {
+      const r = await fetch(apiBase() + '/v1/cycle/reactivate', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ ideaId: currentIdeaId, motif: 'reactivation UI', stage: 'ecouter' }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      if (j.idea) updateIdeaUI(j.idea, j.idea.id);
+      alert('Idée réactivée · status ' + (j.idea?.status || 'en_revue'));
+    } catch (e) {
+      alert('Réactivation: ' + e.message);
     }
   }
 
@@ -226,17 +309,13 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
     if (ev.type === 'start') return 'goal: ' + (ev.goal || '').slice(0, 140);
     if (ev.type === 'recall') return (ev.source || 'memory') + (ev.preview ? ' — ' + String(ev.preview).slice(0, 100) : '');
     if (ev.type === 'positionning') {
-      return 'mode=' + (ev.mode || '?')
-        + (ev.kayrosIndex != null ? ' · KI ' + ev.kayrosIndex : '')
-        + ' · ' + (ev.facts || 0) + ' faits L1'
-        + (ev.competitors != null ? ' · ' + ev.competitors + ' concurrents' : '');
+      return 'mode=' + (ev.mode || '?') + (ev.kayrosIndex != null ? ' · KI ' + ev.kayrosIndex : '') + ' · ' + (ev.facts || 0) + ' faits L1';
     }
-    if (ev.type === 'distill') return (ev.count || 0) + ' scénario(s) ' + (ev.titles || []).slice(0, 3).join(', ');
+    if (ev.type === 'distill') return (ev.count || 0) + ' scénario(s)';
     if (ev.type === 'synthesis') return String(ev.output || '').slice(0, 180);
     if (ev.type === 'gate') return (ev.gateType || '') + ' · ' + (ev.gateId || '');
     if (ev.type === 'final') return (ev.status || '') + (ev.answer ? ' — ' + String(ev.answer).slice(0, 120) : '');
     if (ev.type === 'degraded') return (ev.reason || '') + ' ' + (ev.from || '') + ' → ' + (ev.to || '');
-    if (ev.type === 'offload') return (ev.count || 0) + ' items offloadés';
     if (ev.type === 'error') return ev.error || '';
     if (ev.type === 'meta') return 'idea ' + (ev.ideaId || '');
     if (ev.type === 'done') return 'stream closed';
@@ -244,9 +323,8 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   }
 
   function quantBadge(ev) {
-    const q = ev?.quant?.agent?.quant || ev?.quant?.global?.quant || (typeof ev?.quant === 'string' ? ev.quant : null);
-    if (!q) return '';
-    return '<span class="badge-quant">' + escapeHtml(q) + '</span>';
+    const q = ev?.quant?.agent?.quant || ev?.quant?.global?.quant;
+    return q ? '<span class="badge-quant">' + escapeHtml(q) + '</span>' : '';
   }
 
   function ideaBadges(ev) {
@@ -258,36 +336,21 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   }
 
   function renderEvent(ev) {
-    const deg = ev.degraded
-      ? '<span class="badge-deg">degraded</span>'
-      : (ev.type === 'degraded' ? '<span class="badge-deg">' + escapeHtml(ev.reason || 'degraded') + '</span>' : '');
+    const deg = ev.degraded || ev.type === 'degraded' ? '<span class="badge-deg">degraded</span>' : '';
     const pos = ev.type === 'positionning' ? '<span class="badge-pos">L1</span>' : '';
-    const body = formatLine(ev);
-
     let extra = '';
     if (ev.type === 'trace' && ev.observation) {
-      extra = '<div class="mt-2 mono text-slate-500 max-h-24 overflow-y-auto">'
-        + escapeHtml(String(typeof ev.observation === 'string' ? ev.observation : JSON.stringify(ev.observation)).slice(0, 500))
-        + '</div>';
+      extra = '<div class="mt-2 mono text-slate-500 max-h-24 overflow-y-auto">' + escapeHtml(String(typeof ev.observation === 'string' ? ev.observation : JSON.stringify(ev.observation)).slice(0, 500)) + '</div>';
     }
-    if (ev.type === 'positionning' && Array.isArray(ev.preview) && ev.preview.length) {
-      extra = '<ul class="mt-2 space-y-1 text-xs text-slate-600">'
-        + ev.preview.map((p) => '<li><span class="font-semibold text-fuchsia-700">' + escapeHtml(p.type || '') + '</span> '
-          + escapeHtml((p.content || '').slice(0, 140)) + '</li>').join('')
-        + '</ul>';
+    if (ev.type === 'positionning' && Array.isArray(ev.preview)) {
+      extra = '<ul class="mt-2 space-y-1 text-xs text-slate-600">' + ev.preview.map((p) => '<li><span class="font-semibold text-fuchsia-700">' + escapeHtml(p.type || '') + '</span> ' + escapeHtml((p.content || '').slice(0, 140)) + '</li>').join('') + '</ul>';
     }
-    if (ev.type === 'distill' && Array.isArray(ev.titles)) {
-      extra = '<div class="mt-1 text-xs text-amber-800">' + escapeHtml(ev.titles.join(' · ')) + '</div>';
-    }
-
     return '<article class="ev-card rounded-xl bg-slate-50 px-3 py-2" data-type="' + escapeHtml(ev.type) + '">' +
       '<div class="flex items-center gap-2 flex-wrap">' +
       '<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">' + escapeHtml(ev.type) + '</span>' +
       quantBadge(ev) + pos + deg + ideaBadges(ev) +
       (ev.ts ? '<span class="mono text-slate-400 ml-auto">' + escapeHtml(String(ev.ts).slice(11, 19)) + '</span>' : '') +
-      '</div>' +
-      '<div class="text-sm text-slate-700 mt-0.5">' + escapeHtml(body) + '</div>' + extra +
-      '</article>';
+      '</div><div class="text-sm text-slate-700 mt-0.5">' + escapeHtml(formatLine(ev)) + '</div>' + extra + '</article>';
   }
 
   function pushEvent(ev) {
@@ -304,12 +367,13 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
     if (ev.type === 'meta' && ev.ideaId) updateIdeaUI(ev.idea, ev.ideaId);
     if (ev.type === 'done' && ev.idea) updateIdeaUI(ev.idea, ev.ideaId || currentIdeaId);
 
+    if (ev.type === 'gate' || (ev.type === 'final' && ev.status === 'pending_review')) {
+      showGate(ev);
+    }
     if (ev.type === 'final') {
       $('final-panel').textContent = (ev.status || '') + '\n\n' + (ev.answer || ev.message || '');
     }
-    if (ev.type === 'synthesis' && ev.output) {
-      $('final-panel').textContent = String(ev.output);
-    }
+    if (ev.type === 'synthesis' && ev.output) $('final-panel').textContent = String(ev.output);
     if (ev.type === 'error') {
       setStatus('error', 'err');
       $('final-panel').textContent = 'Erreur: ' + (ev.error || '');
@@ -322,20 +386,17 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   async function refreshStatus() {
     try {
       const r = await fetch(apiBase() + '/v1/cycle/status');
-      const j = await r.json();
-      $('engine-status').textContent = JSON.stringify(j, null, 2);
+      $('engine-status').textContent = JSON.stringify(await r.json(), null, 2);
     } catch (e) {
       $('engine-status').textContent = 'unreachable: ' + e.message;
     }
   }
 
   function renderInspect(data) {
-    lastInspect = data;
     $('c-l0').textContent = data.counts?.l0 ?? 0;
     $('c-l1').textContent = data.counts?.l1 ?? 0;
     $('c-l2').textContent = data.counts?.l2 ?? 0;
     $('c-l3').textContent = data.counts?.l3 ?? 0;
-
     const l2 = data.l2 || [];
     if (!l2.length) {
       $('mem-l2').innerHTML = '<p class="text-slate-400">Aucun scénario L2.</p>';
@@ -345,13 +406,12 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
       const canPromote = s.reviewStatus !== 'validated';
       return '<div class="flex items-start justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 px-2 py-1.5">'
         + '<div class="min-w-0"><div class="font-semibold text-slate-800 truncate">' + escapeHtml(s.title) + '</div>'
-        + '<div class="text-[10px] text-slate-500">' + escapeHtml(s.reviewStatus || '') + ' · ' + escapeHtml(s.patternType || '') + '</div></div>'
+        + '<div class="text-[10px] text-slate-500">' + escapeHtml(s.reviewStatus || '') + '</div></div>'
         + (canPromote
           ? '<button type="button" data-promote="' + escapeHtml(s.id) + '" class="shrink-0 text-[10px] font-bold text-fuchsia-700 hover:underline">Promote L3</button>'
           : '<span class="text-[10px] text-emerald-600 font-semibold">✓ L3</span>')
         + '</div>';
     }).join('');
-
     $('mem-l2').querySelectorAll('[data-promote]').forEach((btn) => {
       btn.addEventListener('click', () => promoteL2(btn.getAttribute('data-promote')));
     });
@@ -363,48 +423,31 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
     try {
       const r = await fetch(apiBase() + '/v1/memory/ideas/' + encodeURIComponent(id));
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      const data = await r.json();
-      renderInspect(data);
+      renderInspect(await r.json());
     } catch (e) {
       $('mem-l2').innerHTML = '<p class="text-red-500">Inspect: ' + escapeHtml(e.message) + '</p>';
     }
   }
 
   async function promoteL2(l2Id) {
-    if (!l2Id) return;
     try {
       const r = await fetch(apiBase() + '/v1/memory/promote', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders(),
         body: JSON.stringify({ l2Id, scope: 'tenant', kind: 'norm' }),
       });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
-      pushEvent({
-        type: 'meta',
-        ideaId: currentIdeaId,
-        ts: new Date().toISOString(),
-        // reuse formatLine via a synthetic note in title path — show as custom
-      });
-      // manual timeline line
-      const box = $('timeline');
-      box.insertAdjacentHTML('beforeend',
-        '<article class="ev-card rounded-xl bg-fuchsia-50 px-3 py-2" data-type="meta">'
-        + '<div class="text-[10px] font-bold uppercase text-fuchsia-700">promote</div>'
-        + '<div class="text-sm text-slate-700">L2 → L3 · ' + escapeHtml(j.core?.title || l2Id) + '</div></article>');
       if (currentIdeaId) await inspectIdea(currentIdeaId);
-    } catch (e) {
-      alert('Promote échoué: ' + e.message);
-    }
+    } catch (e) { alert('Promote: ' + e.message); }
   }
 
   async function listL3() {
     try {
       const r = await fetch(apiBase() + '/v1/memory/l3');
       const j = await r.json();
-      const el = $('mem-extra');
-      el.classList.remove('hidden');
-      el.textContent = JSON.stringify(j.items || j, null, 2);
+      $('mem-extra').classList.remove('hidden');
+      $('mem-extra').textContent = JSON.stringify(j.items || j, null, 2);
     } catch (e) {
       $('mem-extra').classList.remove('hidden');
       $('mem-extra').textContent = e.message;
@@ -413,16 +456,10 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
 
   async function saveMem() {
     try {
-      const r = await fetch(apiBase() + '/v1/memory/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}',
-      });
+      const r = await fetch(apiBase() + '/v1/memory/save', { method: 'POST', headers: authHeaders(), body: '{}' });
       const j = await r.json();
       alert(j.ok ? 'Mémoire persistée' : 'Save soft-fail');
-    } catch (e) {
-      alert(e.message);
-    }
+    } catch (e) { alert(e.message); }
   }
 
   async function parseSseStream(res) {
@@ -438,9 +475,7 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
       for (const chunk of parts) {
         const line = chunk.split('\n').find((l) => l.startsWith('data:'));
         if (!line) continue;
-        try {
-          pushEvent(JSON.parse(line.slice(5).trim()));
-        } catch { /* skip */ }
+        try { pushEvent(JSON.parse(line.slice(5).trim())); } catch { /* */ }
       }
     }
   }
@@ -448,21 +483,18 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   async function runCycle() {
     const query = $('query').value.trim();
     if (!query) { alert('Objectif requis'); return; }
-
     events = [];
     currentIdeaId = null;
-    currentStage = null;
-    currentStatus = null;
+    hideGate();
     $('timeline').innerHTML = '<p class="text-sm text-slate-400">Connexion…</p>';
     $('final-panel').textContent = 'En cours…';
     $('idea-id').textContent = '—';
-    $('idea-stage-badge').textContent = 'stage: —';
-    $('idea-status-badge').textContent = 'status: —';
     renderStageRail(null);
     setStatus('running', 'run');
     $('btn-run').disabled = true;
     $('btn-stop').disabled = false;
     $('btn-inspect').disabled = true;
+    $('btn-reactivate').disabled = true;
 
     const body = {
       query,
@@ -473,25 +505,22 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
       llmPlan: true,
       syncIdea: true,
     };
-    const provider = $('provider').value;
-    if (provider) body.provider = provider;
+    if ($('provider').value) body.provider = $('provider').value;
 
     abortCtrl = new AbortController();
     try {
       const res = await fetch(apiBase() + '/v1/cycle/run', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: body.stream ? 'text/event-stream' : 'application/json' },
+        headers: Object.assign(authHeaders(), { Accept: body.stream ? 'text/event-stream' : 'application/json' }),
         body: JSON.stringify(body),
         signal: abortCtrl.signal,
       });
-
       if (!res.ok) {
         const err = await res.json().catch(() => ({ error: res.statusText }));
         pushEvent({ type: 'error', error: err.error || ('HTTP ' + res.status), ts: new Date().toISOString() });
         setStatus('error', 'err');
         return;
       }
-
       const ct = res.headers.get('content-type') || '';
       if (body.stream && ct.includes('text/event-stream')) {
         await parseSseStream(res);
@@ -524,6 +553,7 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   $('btn-stop').addEventListener('click', () => abortCtrl?.abort());
   $('btn-clear').addEventListener('click', () => {
     events = [];
+    hideGate();
     $('timeline').innerHTML = '<p class="text-sm text-slate-400">Timeline effacée.</p>';
     $('final-panel').textContent = 'En attente…';
     $('event-count').textContent = '0 events';
@@ -531,12 +561,17 @@ body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background
   });
   $('btn-status').addEventListener('click', refreshStatus);
   $('btn-inspect').addEventListener('click', () => inspectIdea(currentIdeaId));
+  $('btn-reactivate').addEventListener('click', reactivateIdea);
   $('btn-l3-list').addEventListener('click', listL3);
   $('btn-save-mem').addEventListener('click', saveMem);
+  $('btn-approve').addEventListener('click', () => resolveGate('approve'));
+  $('btn-revise').addEventListener('click', () => resolveGate('revise'));
+  $('btn-reject').addEventListener('click', () => resolveGate('reject'));
 
   renderStageRail(null);
   const u = new URL(location.href);
   if (u.searchParams.get('api')) $('api-base').value = u.searchParams.get('api');
+  if (u.searchParams.get('token')) $('auth-token').value = u.searchParams.get('token');
   refreshStatus();
 })();
 </script>
