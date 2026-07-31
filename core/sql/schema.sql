@@ -31,3 +31,13 @@ create table if not exists kayros_gates_history (
 
 create index if not exists kayros_gates_history_gate on kayros_gates_history (gate_id);
 create index if not exists kayros_gates_history_tenant on kayros_gates_history (tenant_id);
+
+-- v14 — Slack/Teams account links
+create table if not exists kayros_account_links (
+  platform_id text primary key,
+  tenant_id text not null default 'default',
+  payload jsonb not null,
+  linked_at timestamptz not null default now()
+);
+
+create index if not exists kayros_account_links_tenant on kayros_account_links (tenant_id);
