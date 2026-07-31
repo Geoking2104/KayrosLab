@@ -3,6 +3,12 @@ import {
   platformUserId,
   slackInteractionId,
 } from '../../../core/connectors-slack-deep.mjs';
+import {
+  buildMotifModal,
+  parseMotifSubmission,
+  updateGateMessage,
+  isMotifCallback,
+} from '../../../core/connectors-motif.mjs';
 
 const interactionIds = createIdempotenceStore(4000);
 
@@ -12,7 +18,6 @@ export default async function connectorsRoute(app) {
     const ctx = app.kayrosContext;
     if (!ctx.slackAdapter) return reply.code(200).send('');
 
-    // EF-89 — verify signature when secret is set
     const rawBody = typeof req.rawBody === 'string'
       ? req.rawBody
       : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
@@ -28,7 +33,75 @@ export default async function connectorsRoute(app) {
       try { payload = JSON.parse(body.payload); } catch { payload = body; }
     }
 
-    // EF-92 — idempotence
+    // view_submission for motif modal (v14)
+    if (payload.type === 'view_submission' && isMotifCallback(payload.view?.callback_id)) {
+      const iid = slackInteractionId(payload);
+      if (iid && interactionIds.seen(iid)) {
+        return reply.code(200).send({ response_action: 'clear' });
+      }
+      const parsed = parseMotifSubmission(payload);
+      if (!parsed.decision || !parsed.gateId) {
+        return reply.code(200).send({
+          response_action: 'errors',
+          errors: { motif_block: 'Invalid gate context' },
+        });
+      }
+      if (!parsed.reason || parsed.reason.length < 3) {
+        return reply.code(200).send({
+          response_action: 'errors',
+          errors: { motif_block: 'Motif required (min 3 characters)' },
+        });
+      }
+      const platformId = platformUserId('slack', parsed.userId);
+      const profile = ctx.linkService?.get(platformId);
+      if (!profile) {
+        return reply.code(200).send({
+          response_action: 'errors',
+          errors: { motif_block: 'Account not linked to KayrosLab' },
+        });
+      }
+      try {
+        const evt = {
+          platform: 'slack',
+          actionId: `${parsed.decision}:${parsed.gateId}`,
+          userId: platformId,
+          channelId: parsed.channelId,
+          payload: { reason: parsed.reason },
+          raw: payload,
+        };
+        // Force resolve path with reason (skip second modal)
+        const res = await ctx.connectorService.handleInteraction({
+          ...evt,
+          // marker so _handleGate does not re-open modal
+          _motifConfirmed: true,
+        });
+        // Update original message if possible
+        const rec = ctx.governance?.list?.()?.find?.((g) => g.gateId === parsed.gateId)
+          || ctx.governance?._history?.find?.((g) => g.gateId === parsed.gateId);
+        await updateGateMessage(ctx.slackAdapter, {
+          channelId: parsed.channelId,
+          messageTs: parsed.messageTs,
+          resolution: {
+            decision: parsed.decision,
+            by: profile.email,
+            reason: parsed.reason,
+            resolvedAt: new Date().toISOString(),
+          },
+          ideaTitre: rec?.ideaId || '',
+        });
+        if (res?.type === 'ephemeral' && res.text) {
+          return reply.code(200).send({ response_action: 'clear' });
+        }
+        return reply.code(200).send({ response_action: 'clear' });
+      } catch (e) {
+        return reply.code(200).send({
+          response_action: 'errors',
+          errors: { motif_block: e.message || 'Resolve failed' },
+        });
+      }
+    }
+
+    // EF-92 — idempotence for block_actions
     const iid = slackInteractionId(payload);
     if (iid && interactionIds.seen(iid)) {
       return reply.code(200).send({ response_type: 'ephemeral', text: 'Already processed.' });
@@ -37,15 +110,29 @@ export default async function connectorsRoute(app) {
     const evt = ctx.slackAdapter.parseRequest({ body: payload, headers: req.headers });
     if (!evt) return reply.code(200).send('');
 
-    // Normalize platform user id for AccountLinkService
     if (evt.userId) evt.userId = platformUserId('slack', evt.userId);
 
+    // Capture message ts for later chat.update
+    evt._messageTs = payload.message?.ts || payload.container?.message_ts || null;
+    evt.channelId = evt.channelId || payload.channel?.id || payload.container?.channel_id || null;
+
     const res = await ctx.connectorService.handleInteraction(evt);
-    if (res.type === 'ack') return reply.code(200).send('');
-    if (res.type === 'ephemeral') {
-      return reply.code(200).send({ response_type: 'ephemeral', text: res.text });
-    }
-    if (res.type === 'modal' && res.view) {
+
+    // Button path: reject/revise → push motif modal
+    if (res.type === 'modal') {
+      const action = String(evt.actionId || '');
+      const decision = action.startsWith('reject:') ? 'reject'
+        : action.startsWith('revise:') ? 'revise' : null;
+      const gateId = decision ? action.slice(decision.length + 1) : null;
+      if (decision && gateId) {
+        const view = buildMotifModal({
+          decision,
+          gateId,
+          channelId: evt.channelId || '',
+          messageTs: evt._messageTs || '',
+        });
+        return reply.code(200).send({ response_action: 'push', view });
+      }
       const blocks = ctx.slackAdapter.renderView(res.view);
       return reply.code(200).send({
         response_action: 'push',
@@ -57,6 +144,27 @@ export default async function connectorsRoute(app) {
           submit: { type: 'plain_text', text: 'Confirm' },
         },
       });
+    }
+
+    // Approve: update message in place
+    if (res.type === 'ack' && evt.actionId?.startsWith('approve:')) {
+      await updateGateMessage(ctx.slackAdapter, {
+        channelId: evt.channelId,
+        messageTs: evt._messageTs,
+        resolution: {
+          decision: 'approve',
+          by: ctx.linkService?.get(evt.userId)?.email || evt.userId,
+          reason: evt.payload?.reason || '',
+          resolvedAt: new Date().toISOString(),
+        },
+        ideaTitre: '',
+      });
+      return reply.code(200).send('');
+    }
+
+    if (res.type === 'ack') return reply.code(200).send('');
+    if (res.type === 'ephemeral') {
+      return reply.code(200).send({ response_type: 'ephemeral', text: res.text });
     }
     return reply.code(200).send('');
   });
@@ -80,12 +188,20 @@ export default async function connectorsRoute(app) {
   app.post('/v1/connectors/link/:token', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     try {
-      const result = app.kayrosContext.linkService.link(req.params.token, {
+      const result = await app.kayrosContext.linkService.link(req.params.token, {
         id: me.sub, email: me.email, role: me.role, tenantId: me.tenantId,
       });
       return { ok: true, platformId: result.platformId };
     } catch (e) {
       return reply.code(400).send({ error: e.message });
     }
+  });
+
+  app.get('/v1/connectors/links', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const all = typeof app.kayrosContext.linkService.list === 'function'
+      ? app.kayrosContext.linkService.list()
+      : [];
+    return { links: all.filter((l) => l.tenantId === me.tenantId || l.kayrosUserId === me.sub) };
   });
 }

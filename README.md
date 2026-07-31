@@ -54,9 +54,9 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Governance** — gates, weighted votes, approve / reject / revise → idea stage & status
 - **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
 - **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
-- **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas & gates
-- **Chat connectors** — Slack adapter (signature, idempotence, Block Kit gates); Teams scaffold
-- **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer
+- **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
+- **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); Teams scaffold
+- **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
 
 ---
 
@@ -130,11 +130,12 @@ KayrosLab/
 ├── backend/fastify/      # HTTP API, auth, SSE cycle, connectors
 ├── frontend/             # React Positioner app
 ├── deploy/ovh-vps/       # Deploy, backup, cron helpers
-├── docs/                 # Pitch, v13 notes, design notes
+├── docs/                 # Pitch, v13/v14 notes
 ├── workers/              # Edge / proxy workers
 ├── cycle-timeline.html   # Live SSE cycle UI
 ├── portfolio-board.html  # Portfolio kanban
 ├── ontology-explorer.html
+├── ontology-panel.html   # Embeddable ontology sample (Cytoscape)
 ├── kayroslab-complete-with-ai-agents.html   # Public governed-agent demo
 └── index.html            # Commercial site
 ```
@@ -279,6 +280,8 @@ Path: [`core/`](core/) — ESM, Node 20+, **no npm dependencies** for the engine
 | `memory.mjs` · `memory-scope.mjs` · `memory-rank.mjs` | L0–L3, tenant hierarchy, ranking |
 | `positionning/` | Scanners, ontology, OWL, `to-l1`, graph builder |
 | `connectors.mjs` | Slack / Teams adapters, account link, gate views |
+| `account-link-store.mjs` · `account-link-service.mjs` | Durable Slack/Teams ↔ Kayros links |
+| `connectors-motif.mjs` | Motif modal + post-resolve `chat.update` |
 | `pg-store.mjs` | Optional multi-instance Postgres |
 | `seed-demo.mjs` | Demo idea seed |
 | `quant-guidance.mjs` | Role tiers, soft fallback |
@@ -299,7 +302,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Memory** | `GET\|POST /v1/memory/l3` · `GET /v1/memory/ideas/:id` · `POST /v1/memory/promote` · `POST /v1/memory/save` |
 | **Positioning** | analyze, search, GitHub, ArXiv, OWL, `GET /v1/positionning/ontology` |
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
-| **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens |
+| **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
@@ -321,10 +324,17 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | [`portfolio-board.html`](portfolio-board.html) | Kanban portfolio |
 | [`portfolio-dormant.html`](portfolio-dormant.html) | Dormant ideas + reactivate |
 | [`ontology-explorer.html`](ontology-explorer.html) | Positioner ontology (Cytoscape graph) |
+| [`ontology-panel.html`](ontology-panel.html) | **Embeddable** ontology sample (iframe-friendly) |
 | [`frontend/positionning-app/`](frontend/positionning-app/) | React competitive positioning |
 | [`docs/pitch-seed.md`](docs/pitch-seed.md) | Pitch one-pager + 8-minute demo script |
 
 GitHub Pages: [geoking2104.github.io/KayrosLab](https://geoking2104.github.io/KayrosLab/).
+
+Embed the ontology panel in any page:
+
+```html
+<iframe src="./ontology-panel.html" title="Ontology" style="width:100%;height:380px;border:0;border-radius:1rem"></iframe>
+```
 
 ---
 
@@ -337,6 +347,7 @@ Copy [`backend/fastify/.env.sample`](backend/fastify/.env.sample) to `.env`.
 | `PORT` | API port (default `8787`) |
 | `KAYROS_AUTH_SECRET` | JWT / session secret (required for protected routes) |
 | `KAYROS_USERS_FILE` · `KAYROS_IDEAS_FILE` · `KAYROS_GATES_FILE` · `KAYROS_MEMORY_FILE` | JSON persistence paths |
+| `KAYROS_LINKS_FILE` | Durable Slack/Teams account links (JSON if no Postgres) |
 | `DATABASE_URL` | Optional Postgres (multi-instance) |
 | `OLLAMA_ENDPOINT` · `OLLAMA_MODEL` · `KAYROS_QUANT` | Local model path |
 | `MISTRAL_API_KEY` · `ANTHROPIC_API_KEY` | Cloud LLM providers |
@@ -352,7 +363,7 @@ Copy [`backend/fastify/.env.sample`](backend/fastify/.env.sample) to `.env`.
 | `deploy/ovh-vps/deploy-backend.sh` | npm install, optional `schema.sql`, PM2, nginx |
 | `deploy/ovh-vps/backup-data.sh` | JSON tar + `pg_dump` |
 | `deploy/ovh-vps/install-cron-backup.sh` | Daily 03:00 cron |
-| `core/sql/schema.sql` | Ideas & gates tables |
+| `core/sql/schema.sql` | Ideas, gates & **account_links** tables |
 
 ```bash
 # On the VPS after setting DATABASE_URL in backend/fastify/.env
@@ -379,7 +390,7 @@ Also see [RUNBOOK.md](RUNBOOK.md).
 cd core && node --test
 
 # Targeted suites
-node --test connectors-slack-deep.test.mjs positionning/ontology-graph.test.mjs
+node --test connectors-slack-deep.test.mjs connectors-motif.test.mjs positionning/ontology-graph.test.mjs
 ```
 
 CI workflow: `.github/workflows/core-tests.yml`.
@@ -395,7 +406,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | v11 | SSE cycle · lifecycle · positioning→L1 · memory API · timeline · gate→idea | ✅ |
 | v12 | Postgres multi-instance · ontology UX · portfolio · seed/pitch | ✅ |
 | v13 | Slack deepen (signature, idempotence) · ontology Cytoscape graph | ✅ |
-| v14 | Persist Slack account links · motif modal · message update · main-demo ontology embed | 🔵 |
+| v14 | Persist account links · motif modal · message update · ontology embed panel | ✅ |
+| v15 | Vote slash · KPI drift alerts · Discord adapter | 🔵 |
 
 ---
 
@@ -410,7 +422,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) | Functional requirements |
 | [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) | Technical requirements |
 | [SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) | Slack / Teams / Discord product thesis |
-| [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) | v13 residual marketplace work |
+| [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) | v13 notes |
+| [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) | v14 links · motif · update · embed |
 | [docs/pitch-seed.md](docs/pitch-seed.md) | Demo script |
 
 ---
