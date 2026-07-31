@@ -16,7 +16,54 @@ import {
   buildDigest, formatDigest,
   StageTimer, DEFAULT_STAGE_LIMITS,
   ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
+  createEngine,
 } from '../../../core/index.mjs';
+
+/** Point server LLM + governance at the shared engine (memory/quant stay engine-owned). */
+export function bindEngineToServer(engine, { llm, tools, governance }) {
+  if (!engine) return null;
+  if (llm) {
+    engine.llm = llm;
+    engine.orchestrator.llm = llm;
+    for (const a of Object.values(engine.agents || {})) {
+      if (a) a.llm = llm;
+    }
+  }
+  if (tools) {
+    engine.tools = tools;
+    engine.orchestrator.tools = tools;
+    for (const a of Object.values(engine.agents || {})) {
+      if (a) a.tools = tools;
+    }
+  }
+  if (governance) {
+    engine.governance = governance;
+    engine.orchestrator.governance = governance;
+  }
+  return engine;
+}
+
+/** Build a scoped orchestrator for a request without losing layered memory. */
+export function orchestratorForRequest(engine, scope = {}) {
+  if (!engine) return null;
+  const {
+    tenantId = null,
+    userId = null,
+    teamId = null,
+    organizationId = null,
+  } = scope;
+  const orch = engine.orchestrator;
+  orch.scopeDefaults = {
+    ...orch.scopeDefaults,
+    tenantId: tenantId ?? orch.scopeDefaults?.tenantId ?? null,
+    defaultScope: tenantId ? 'tenant' : (orch.scopeDefaults?.defaultScope ?? null),
+    defaultScopeId: tenantId || orch.scopeDefaults?.defaultScopeId || null,
+    userId: userId ?? orch.scopeDefaults?.userId ?? null,
+    teamId: teamId ?? orch.scopeDefaults?.teamId ?? null,
+    organizationId: organizationId ?? orch.scopeDefaults?.organizationId ?? null,
+  };
+  return orch;
+}
 
 export default async function buildContext() {
   const {
@@ -31,6 +78,15 @@ export default async function buildContext() {
     OLLAMA_MODEL = 'llama3.2',
     EMBED_MODEL = 'nomic-embed-text',
     KAYROS_SECRET = '',
+    KAYROS_MEMORY_FILE = '',
+    KAYROS_OFFLOAD_ROOT = '',
+    KAYROS_PARTITION_TENANT = '',
+    KAYROS_QUANT = 'q4_K_M',
+    KAYROS_SYNC_QUANTS = '',
+    QDRANT_URL = '',
+    QDRANT_COLLECTION = 'kayroslab',
+    QDRANT_DIM = '768',
+    QDRANT_API_KEY = '',
   } = process.env;
 
   const providers = {
@@ -189,12 +245,51 @@ export default async function buildContext() {
   const GITLAB_TOKEN = process.env.GITLAB_TOKEN || '';
   const GITLAB_BASE_URL = process.env.GITLAB_BASE_URL || 'https://gitlab.com';
 
+  let nodeFs = null;
+  let nodePath = null;
+  try {
+    nodeFs = await import('node:fs/promises');
+    nodePath = await import('node:path');
+  } catch { /* browser-safe no-op */ }
+
+  const memoryPath = KAYROS_MEMORY_FILE || (nodeFs ? './.kayros-memory.json' : null);
+  const offloadRoot = KAYROS_OFFLOAD_ROOT || (nodeFs ? './.kayros-l0' : null);
+
+  const engine = createEngine({
+    sovereignty: 'local',
+    model: OLLAMA_MODEL,
+    quant: KAYROS_QUANT || 'q4_K_M',
+    roleQuant: { Planner: 'q5_K_M', Critic: 'q5_K_M', Synthesizer: 'q5_K_M' },
+    ollamaEndpoint: OLLAMA_ENDPOINT,
+    embedModel: EMBED_MODEL,
+    syncAvailableQuants: KAYROS_SYNC_QUANTS === '1' || KAYROS_SYNC_QUANTS === 'true',
+    memoryPath,
+    offloadRoot,
+    partitionByTenant: KAYROS_PARTITION_TENANT === '1' || KAYROS_PARTITION_TENANT === 'true',
+    qdrantUrl: QDRANT_URL || null,
+    qdrantCollection: QDRANT_COLLECTION,
+    qdrantDim: Number(QDRANT_DIM) || 768,
+    qdrantApiKey: QDRANT_API_KEY || null,
+    fs: nodeFs,
+    path: nodePath,
+  });
+
+  bindEngineToServer(engine, { llm, tools, governance });
+  if (engine.persistenceReady) {
+    await engine.persistenceReady.catch(() => false);
+  }
+  if (engine.syncAvailableQuants && typeof engine.syncAvailableQuants.then === 'function') {
+    engine.syncAvailableQuants.catch(() => {});
+  }
+
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, campagnes, activites, journal, stageTimer,
     linkService, slackAdapter, connectorService,
+    engine,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
+    OLLAMA_ENDPOINT, OLLAMA_MODEL,
   };
 }

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { orchestratorForRequest } from '../lib/context.mjs';
 
 const completeSchema = z.object({
   messages: z.array(z.object({ role: z.string(), content: z.any() })).min(1),
@@ -149,8 +150,8 @@ export default async function llmRoute(app) {
   });
 
   /**
-   * C: When Bearer session is present, tenantId/userId come from the token
-   * (never trust client tenant over session). Body tenantId only used when anonymous.
+   * Prefer shared engine (layered memory + quant). Fallback: ephemeral Orchestrator.
+   * Session tenant/sub wins over body when present.
    */
   app.post('/v1/govern/query', async (req, reply) => {
     const parsed = governQuerySchema.safeParse(req.body);
@@ -163,18 +164,22 @@ export default async function llmRoute(app) {
     const teamId = parsed.data.teamId || null;
     const organizationId = parsed.data.organizationId || null;
 
-    // Prefer shared engine-like path when available; else ephemeral orchestrator
-    const core = await import('../../../core/index.mjs');
-    const { llm, tools, governance: govSvc } = app.kayrosContext;
-    const orch = new core.Orchestrator({
-      llm,
-      tools: tools || core.demoTools(),
-      governance: govSvc || new core.GovernanceService(),
-      tenantId,
-      userId,
-      teamId,
-      organizationId,
-    });
+    const { engine, llm, tools, governance: govSvc } = app.kayrosContext;
+    let orch = orchestratorForRequest(engine, { tenantId, userId, teamId, organizationId });
+    if (!orch) {
+      const core = await import('../../../core/index.mjs');
+      orch = new core.Orchestrator({
+        llm,
+        tools: tools || core.demoTools(),
+        governance: govSvc || new core.GovernanceService(),
+        tenantId,
+        userId,
+        teamId,
+        organizationId,
+        layered: engine?.layered || null,
+      });
+    }
+
     const plan = await orch.plan(query, { ideaId });
     const agents = [];
     let final = null, gate = null;
@@ -191,6 +196,11 @@ export default async function llmRoute(app) {
       else if (ev.type === 'gate') { gate = ev; break; }
       else if (ev.type === 'final') final = ev;
     }
+
+    try {
+      await engine?.layered?.save?.({ tenantId });
+    } catch { /* soft */ }
+
     if (gate) {
       return reply.code(202).send({
         status: 'pending_review',
