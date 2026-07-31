@@ -17,6 +17,7 @@
     "fastify-metrics": "^10.6.0",
     "i18n": "^0.15.3",
     "nodemailer": "^6.9.16",
+    "pg": "^8.16.3",
     "zod": "^4.4.3"
   },
   "main": "index.mjs",
