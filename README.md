@@ -1,17 +1,19 @@
 # KayrosLab
 
-[![Site & Offre](https://img.shields.io/badge/🏢_Site_&_Offre-Entreprises-7c3aed?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
-[![Positionnement](https://img.shields.io/badge/🎯_Positionnement-Concurrentiel-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/positionner-app/)
-[![Agents IA](https://img.shields.io/badge/📊_Agents_IA-Application-059669?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
-[![Cycle SSE](https://img.shields.io/badge/⚡_Cycle-SSE_Timeline-0ea5e9?style=for-the-badge)](./cycle-timeline.html)
-[![Open in Browser](https://img.shields.io/badge/▶_App-Live_Demo-2563eb?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
+[![Site & Offer](https://img.shields.io/badge/Site_&_Offer-Enterprise-7c3aed?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/)
+[![Positioning](https://img.shields.io/badge/Positioning-Competitive-f97316?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/positionner-app/)
+[![AI Agents](https://img.shields.io/badge/AI_Agents-Application-059669?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
+[![Cycle SSE](https://img.shields.io/badge/Cycle-SSE_Timeline-0ea5e9?style=for-the-badge)](./cycle-timeline.html)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Kanban-6366f1?style=for-the-badge)](./portfolio-board.html)
+[![Ontology](https://img.shields.io/badge/Positioner-Ontology-a855f7?style=for-the-badge)](./ontology-explorer.html)
+[![Open in Browser](https://img.shields.io/badge/App-Live_Demo-2563eb?style=for-the-badge)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=for-the-badge)](https://www.kayroslab.com)
 
-**Du signal faible à la décision stratégique — gouvernée.**
+**From weak signal to strategic decision — governed.**
 
-KayrosLab est un **atelier d'idéation stratégique gouverné** qui transforme des signaux faibles en décisions robustes, challengées, arbitrées, projetées **puis exécutées et mesurées**. Architecture agentique (Plan-and-Solve + ReAct), mémoire stratifiée L0–L3, calculs déterministes, et Human-in-the-Loop structuré avec censeurs et droit de veto.
+KayrosLab is a **governed strategic ideation workshop** that turns weak signals into robust decisions that are challenged, arbitrated, projected, **then executed and measured**. Agent architecture (Plan-and-Solve + ReAct), layered memory L0–L3, deterministic calculations, and structured Human-in-the-Loop with censors and veto rights.
 
-Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un orchestrateur qui pilote de vrais LLM (Claude via backend, **Ollama local quant-aware**) derrière une couche de gouvernance.
+This is **not** a trained model: it is a **governed LLM** — an orchestrator that drives real LLMs (Claude via backend, **quant-aware local Ollama**) behind a governance layer.
 
 ---
 
@@ -23,15 +25,15 @@ Ce n'est **pas** un modèle entraîné : c'est un **« LLM gouverné »** — un
 flowchart LR
   subgraph CYCLE["KayrosLab strategic cycle"]
     direction LR
-    A[Écouter] --> B[Cartographier]
-    B --> C[Construire]
-    C --> D[Positionner]
-    D --> E[Éprouver]
-    E --> F[Arbitrer]
-    F --> G[Projeter]
-    G --> H[Réaliser]
+    A[Listen] --> B[Map]
+    B --> C[Build]
+    C --> D[Position]
+    D --> E[Challenge]
+    E --> F[Decide]
+    F --> G[Project]
+    G --> H[Execute]
   end
-  H -.->|KPIs · alerts · re-arbitrage| A
+  H -.->|KPIs · alerts · re-arbitration| A
 
   classDef step fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
   class A,B,C,D,E,F,G,H step
@@ -39,17 +41,17 @@ flowchart LR
 
 | # | Step | Role | Output |
 |---|---|---|---|
-| 00 | **Recueillir** | Structured intake canvas | Comparable idea from entry |
-| 01 | **Écouter** | Noise reduction, scoring, clustering | Qualified signals |
-| 02 | **Cartographier** | Trend network, bridges (bisociation) | Graph + strategic bridges |
-| 03 | **Construire** | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
-| 04 | **Positionner** | Web + GitHub/GitLab, ontology, gap analysis → **L1 competitor facts** | Cytoscape + OWL + L1 |
-| 05 | **Éprouver** | Critic + Devil's Advocate + **Red Team** | Attack report, kill shots |
-| 06 | **Arbitrer** | Weighted vote, human gate, veto | Go / No-Go / Revision |
-| 07 | **Projeter** | Roadmap, resources, probabilistic foresight | Trajectory + loop to Écouter |
-| 08 | **Réaliser** | Pilot → Deploy → Review | Tracked milestones, measured impact |
+| 00 | **Intake** (`recueillir`) | Structured intake canvas | Comparable idea from entry |
+| 01 | **Listen** (`ecouter`) | Noise reduction, scoring, clustering | Qualified signals |
+| 02 | **Map** (`cartographier`) | Trend network, bridges (bisociation) | Graph + strategic bridges |
+| 03 | **Build** (`construire`) | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
+| 04 | **Position** (`construire` / Positioner) | Web + GitHub/GitLab, ontology, gap analysis → **L1 competitor facts** | Cytoscape + OWL + L1 |
+| 05 | **Challenge** (`eprouver`) | Critic + Devil's Advocate + **Red Team** | Attack report, kill shots |
+| 06 | **Decide** (`arbitrer`) | Weighted vote, human gate, veto | Go / No-Go / Revision |
+| 07 | **Project** (`projeter`) | Roadmap, resources, probabilistic foresight | Trajectory + loop to Listen |
+| 08 | **Execute** (`realiser`) | Pilot → Deploy → Review | Tracked milestones, measured impact |
 
-**Two orthogonal axes.** *Stage* = where *execution* stands; *status* = where *decision* stands. Dormant states (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** (`POST /v1/cycle/reactivate`).
+**Two orthogonal axes.** *Stage* = where *execution* stands; *status* = where *decision* stands. Domain status codes remain as stored values (`en_pause`, `consideration_future`, `non_poursuivi`) and are **reactivable** via `POST /v1/cycle/reactivate`.
 
 ---
 
@@ -68,7 +70,7 @@ sequenceDiagram
   ORCH-->>UI: meta · start
   ORCH->>MEM: recall L1–L3
   ORCH-->>UI: recall
-  ORCH->>MEM: positionning → L1 competitor facts
+  ORCH->>MEM: positioning → L1 competitor facts
   ORCH-->>UI: positionning
   loop agents
     ORCH-->>UI: trace (+ idea.stage)
@@ -156,7 +158,7 @@ flowchart TB
 
   subgraph L1["L1 — Atomic facts"]
     F[observation · risk · competitor · metric…]
-    POS[Positionning inject]
+    POS[Positioning inject]
     POS --> F
     F --> VEC[(Vector store)]
   end
@@ -186,7 +188,7 @@ flowchart TB
 | Layer | Purpose | Persistence |
 |---|---|---|
 | **L0** | Working context, offload, Mermaid canvas | Optional `offloadRoot` |
-| **L1** | Atomic facts (+ **competitor** from positionning) | JSON + vectors |
+| **L1** | Atomic facts (+ **competitor** from positioning) | JSON + vectors |
 | **L2** | Scenarios (`autoDistill`) | JSON + vectors |
 | **L3** | Persona, norms, skills (scoped tenant/user) | JSON |
 
@@ -249,18 +251,22 @@ Details: **[core/OLLAMA.md](core/OLLAMA.md)** · **[core/README.md](core/README.
 
 ---
 
-## 🚀 Entry points
+## Entry points
 
 | Page | Usage |
 |---|---|
-| **[`index.html`](index.html)** | Commercial site & enterprise offer |
+| **[`index.html`](index.html)** | Commercial site and enterprise offer |
 | **[`kayroslab-complete-with-ai-agents.html`](kayroslab-complete-with-ai-agents.html)** | Reference app: positioning, campaigns, PDF, PWA |
-| **[`cycle-timeline.html`](cycle-timeline.html)** | **Live SSE cycle** — stage rail, positionning, memory inspect, promote L2 |
+| **[`cycle-timeline.html`](cycle-timeline.html)** | **Live SSE cycle** — stage rail, positioning, memory inspect, promote L2 |
+| **[`portfolio-board.html`](portfolio-board.html)** | Kanban portfolio (`/v1/portfolio`) |
+| **[`portfolio-dormant.html`](portfolio-dormant.html)** | Dormant ideas + reactivate |
+| **[`ontology-explorer.html`](ontology-explorer.html)** | Positioner ontology (tech & business entities) |
 | **[`frontend/positionning-app/`](frontend/positionning-app/)** | React competitive positioning |
+| **[`docs/pitch-seed.md`](docs/pitch-seed.md)** | Pitch one-pager + 8-minute demo script |
 
 ---
 
-## 🌟 What sets KayrosLab apart
+## What sets KayrosLab apart
 
 | Criterion | Chat LLM | Innovation platform | **KayrosLab** |
 |---|---|---|---|
@@ -273,17 +279,20 @@ Details: **[core/OLLAMA.md](core/OLLAMA.md)** · **[core/README.md](core/README.
 
 ---
 
-## 🧠 Core `core/`
+## Core `core/`
 
 Zero-dependency engine (ESM, Node 20+). See **[core/README.md](core/README.md)**.
 
 | Module | Role |
 |---|---|
 | `index.mjs` | `createEngine` — providers, memory, quant, orchestrator |
-| `orchestrator.mjs` | plan / run / project — recall, **positionning→L1**, distill, gates |
+| `orchestrator.mjs` | plan / run / project — recall, **positioning→L1**, distill, gates |
 | `cycle-lifecycle.mjs` | Agent→stage, **applyGateResolution**, reactivate |
 | `memory.mjs` · `memory-scope.mjs` · `memory-rank.mjs` | L0–L3, tenant hierarchy, ranking |
 | `positionning/to-l1.mjs` | Gap analysis → competitor L1 facts |
+| `positionning/ontology.mjs` | Tech & business entity catalogue |
+| `pg-store.mjs` | Optional multi-instance Postgres ideas & gates |
+| `seed-demo.mjs` | Demo idea seed (file or Postgres) |
 | `quant-guidance.mjs` | Role tiers, soft fallback |
 | `governance.mjs` | Gates, RBAC, veto |
 | `model.mjs` | Idea stage × status |
@@ -298,7 +307,7 @@ const eng = createEngine({
   syncAvailableQuants: true,
 });
 
-const plan = await eng.orchestrator.plan('Lancer une offre B2B', { ideaId: 'idea-1' });
+const plan = await eng.orchestrator.plan('Launch a B2B offer', { ideaId: 'idea-1' });
 for await (const ev of eng.orchestrator.run(plan, {
   governance: 'auto',
   positionning: true,
@@ -311,11 +320,12 @@ for await (const ev of eng.orchestrator.run(plan, {
 
 ```bash
 cd core && node --test
+node core/seed-demo.mjs
 ```
 
 ---
 
-## 🔌 Backend
+## Backend
 
 `backend/fastify/` reuses `core/`.
 
@@ -323,13 +333,16 @@ cd core && node --test
 |---|---|
 | **Cycle SSE** | `POST /v1/cycle/run` · `POST /v1/cycle/reactivate` · `GET /v1/cycle/status` |
 | **Memory** | `GET\|POST /v1/memory/l3` · `GET /v1/memory/ideas/:id` · `POST /v1/memory/promote` · `POST /v1/memory/save` |
+| **Positioning** | analyze, search, GitHub, ArXiv, OWL export, **`GET /v1/positionning/ontology`** |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` · tools |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
 | Projection & reporting | projection, impact, dashboard |
 
-**Safe by default.** Without `KAYROS_AUTH_SECRET`, protected routes return `503`. `tenantId` from token only.
+**Safe by default.** Without `KAYROS_AUTH_SECRET`, protected routes return `503`. `tenantId` comes from the token only.
+
+**Stores (priority):** Postgres if `DATABASE_URL` + `pg` → else JSON files → else in-memory. Multi-instance safe when Postgres is enabled.
 
 ```bash
 cd backend/fastify && npm install && node index.mjs
@@ -338,46 +351,61 @@ cd backend/fastify && npm install && node index.mjs
 
 ---
 
-## 🛠️ Development
+## Development
 
 ```bash
 cd core && node --test
 node core/quant-ollama-demo.mjs llama3.2
 ```
 
-Persistence: `KAYROS_USERS_FILE`, `KAYROS_IDEAS_FILE`, `KAYROS_GATES_FILE`, `KAYROS_MEMORY_FILE`.  
+Persistence env vars: `KAYROS_USERS_FILE`, `KAYROS_IDEAS_FILE`, `KAYROS_GATES_FILE`, `KAYROS_MEMORY_FILE`, `DATABASE_URL`.  
 See `backend/fastify/.env.sample`.
 
 ---
 
-## 🚢 Deployment
+## Deployment (VPS)
+
+| Path | Role |
+|---|---|
+| `deploy/ovh-vps/deploy-backend.sh` | npm install, optional `schema.sql`, PM2, nginx |
+| `deploy/ovh-vps/backup-data.sh` | JSON tar + `pg_dump` |
+| `deploy/ovh-vps/install-cron-backup.sh` | Daily 03:00 cron |
+| `core/sql/schema.sql` | Ideas & gates tables |
+
+```bash
+# On VPS after setting DATABASE_URL in backend/fastify/.env
+bash deploy/ovh-vps/deploy-backend.sh
+bash deploy/ovh-vps/install-cron-backup.sh
+DATABASE_URL=postgres://… node core/seed-demo.mjs
+```
+
+CI: `.github/workflows/deploy-vps-backend.yml` (SSH + PM2, port **8787**).
 
 | Tier | Description | Status |
 |---|---|---|
 | **P0** | Standalone offline (mock) | ✅ |
 | **P1** | Local sovereign — Ollama quant-aware | ✅ |
-| **P2** | Governed cloud — Fastify proxy | 🔵 |
-
-CI: `.github/workflows/deploy-vps-backend.yml` (SSH + PM2, port 8787).
+| **P2** | Governed cloud — Fastify proxy + optional Postgres | ✅ |
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 | Phase | Goal | Status |
 |---|---|---|
 | v1–v9 | Prototype → collaboration | ✅ |
 | v10 | Layered memory L0–L3 + quant soft-fallback | ✅ |
-| v11 | **SSE cycle · idea lifecycle · positionning→L1 · memory API · timeline UI · gate→idea** | ✅ |
-| v12 | Shared multi-instance store, deeper ontology UX | 🔵 |
+| v11 | SSE cycle · idea lifecycle · positioning→L1 · memory API · timeline UI · gate→idea | ✅ |
+| v12 | Postgres multi-instance · ontology UX · portfolio board · seed/pitch | ✅ |
+| v13 | Deeper Slack connectors, ontology graph in main demo | 🔵 |
 
 ---
 
-## 📬 Contact
+## Contact
 
 **Geoffroy de La Tournelle** — Founder & Director, KayrosLab  
 [geoffroydelatournelle@gmail.com](mailto:geoffroydelatournelle@gmail.com) · [LinkedIn](https://www.linkedin.com/in/gdelatournelle/)
 
 ---
 
-*KayrosLab — Transformer le bruit en stratégie gouvernée.*
+*KayrosLab — Turning noise into governed strategy.*
