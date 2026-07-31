@@ -11,6 +11,7 @@ export * from './projection.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';
+export * from './shared-data.mjs';
 export * from './repository.mjs';
 export * from './intake.mjs';
 export * from './scorecard.mjs';

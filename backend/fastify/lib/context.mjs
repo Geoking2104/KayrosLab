@@ -18,6 +18,7 @@ import {
   ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
   createEngine,
 } from '../../../core/index.mjs';
+import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 
 /** Point server LLM + governance at the shared engine (memory/quant stay engine-owned). */
 export function bindEngineToServer(engine, { llm, tools, governance }) {
@@ -66,6 +67,9 @@ export function orchestratorForRequest(engine, scope = {}) {
 }
 
 export default async function buildContext() {
+  // H — optional shared volume fills unset path env vars
+  const sharedPaths = applySharedDataEnv(process.env);
+
   const {
     PORT = '8787',
     ALLOWED_ORIGIN = '*',
@@ -190,6 +194,7 @@ export default async function buildContext() {
     } catch { console.warn('[kayroslab] SMTP configure mais nodemailer absent'); }
   }
 
+  // G — persistent gates file + restore pending queue on boot
   const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
   const gateStore = GATES_FILE ? new FileGateStore({ path: GATES_FILE }) : new InMemoryGateStore();
 
@@ -207,6 +212,15 @@ export default async function buildContext() {
   });
 
   await governance.restore();
+  const pendingGates = governance.list().length;
+  if (GATES_FILE) {
+    console.info(`[kayroslab] gates store: ${GATES_FILE} · pending restored: ${pendingGates}`);
+  } else {
+    console.info(`[kayroslab] gates store: in-memory · pending: ${pendingGates}`);
+  }
+  if (sharedPaths) {
+    console.info(`[kayroslab] shared data dir: ${sharedPaths.root}`);
+  }
 
   const campagnes = new Map();
   const activites = [];
@@ -287,6 +301,7 @@ export default async function buildContext() {
     governance, gateStore, campagnes, activites, journal, stageTimer,
     linkService, slackAdapter, connectorService,
     engine,
+    sharedPaths,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
