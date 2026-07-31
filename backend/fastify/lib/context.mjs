@@ -20,7 +20,7 @@ import {
 } from '../../../core/index.mjs';
 
 /** Point server LLM + governance at the shared engine (memory/quant stay engine-owned). */
-function bindEngineToServer(engine, { llm, tools, governance }) {
+export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
   if (llm) {
     engine.llm = llm;
@@ -245,7 +245,6 @@ export default async function buildContext() {
   const GITLAB_TOKEN = process.env.GITLAB_TOKEN || '';
   const GITLAB_BASE_URL = process.env.GITLAB_BASE_URL || 'https://gitlab.com';
 
-  // --- Phase 1: shared governed engine (layered memory + quant + orchestrator) ---
   let nodeFs = null;
   let nodePath = null;
   try {
@@ -294,5 +293,3 @@ export default async function buildContext() {
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
   };
 }
-
-export { bindEngineToServer, orchestratorForRequest };
