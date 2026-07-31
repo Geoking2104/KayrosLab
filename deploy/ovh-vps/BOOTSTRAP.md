@@ -11,89 +11,100 @@
 | Port backend | **8080** | **8787** |
 | Process PM2 | `opendpe-backend` | `kayros-api` |
 | nginx | `opendpe.net`, `api.opendpe.net` | `api.kayroslab.com` |
-| Données | PostgreSQL | fichiers JSON dans `/opt/kayroslab/data` |
+| Données | PostgreSQL | JSON `/opt/kayroslab/data` **ou** Postgres (`DATABASE_URL`) |
 
-**Aucun conflit** : ports, dossiers, noms PM2 et serveurs nginx sont distincts. Node, PM2, nginx et certbot sont déjà installés par le bootstrap openDPE — rien à réinstaller.
+**Aucun conflit** : ports, dossiers, noms PM2 et serveurs nginx sont distincts.
 
 ## Étapes (une seule fois, en SSH root)
 
 ```bash
-# 1. Cloner le dépôt
 git clone https://github.com/Geoking2104/KayrosLab.git /opt/kayroslab
 git config --global --add safe.directory /opt/kayroslab
 
-# 2. Configurer l'environnement
 cd /opt/kayroslab/backend/fastify
 cp .env.sample .env
 nano .env
 ```
 
-Renseigner au minimum :
+Minimum :
 
 ```bash
 PORT=8787
-KAYROS_AUTH_SECRET=            # laisser vide : généré au 1er déploiement
-ANTHROPIC_API_KEY=sk-ant-...
+KAYROS_AUTH_SECRET=
 ALLOWED_ORIGIN=https://www.kayroslab.com
 KAYROS_USERS_FILE=/opt/kayroslab/data/users.json
 KAYROS_IDEAS_FILE=/opt/kayroslab/data/ideas.json
 KAYROS_GATES_FILE=/opt/kayroslab/data/gates.json
 ```
 
+### Postgres optionnel (recommandé multi-instance)
+
 ```bash
-# 3. Premier déploiement
+# schéma
+export DATABASE_URL='postgres://kayros:SECRET@127.0.0.1:5432/kayroslab'
+psql "$DATABASE_URL" -f /opt/kayroslab/core/sql/schema.sql
+
+cd /opt/kayroslab/backend/fastify
+npm install pg --save
+# ajouter DATABASE_URL=... dans .env
+```
+
+```bash
 cd /opt/kayroslab
 bash deploy/ovh-vps/deploy-backend.sh
 ```
 
-## Ensuite, tout est automatique
+## Sauvegardes (cron)
 
-| Action | Déclencheur |
-|---|---|
-| Déploiement | Push sur `main` touchant `backend/fastify/`, `core/` ou `deploy/` |
-| HTTPS | Workflow `setup-ssl-vps.yml`, à lancer une fois le DNS en place |
+Deux scripts :
 
-## DNS requis
-
-`api.kayroslab.com` → **A** → `51.210.9.71`
-
-> ⚠️ À ajouter chez IONOS. Le domaine `www.kayroslab.com` pointe vers GitHub Pages
-> (site vitrine) ; seul le sous-domaine `api` vise le VPS.
-
-## Sauvegarde automatique (cron)
-
-Les données JSON (comptes, idées, gates) sont dans `/opt/kayroslab/data`. Ajouter une sauvegarde
-quotidienne dans la crontab :
+| Script | Contenu |
+|--------|--------|
+| `backup-data.sh` | tar.gz du dossier `data/` **+** appelle `backup-pg.sh` si dispo |
+| `backup-pg.sh` | `pg_dump \| gzip` → `kayros-pg-YYYYMMDD-HHMMSS.sql.gz` |
 
 ```bash
+chmod +x /opt/kayroslab/deploy/ovh-vps/backup-data.sh \
+         /opt/kayroslab/deploy/ovh-vps/backup-pg.sh
+
+# test manuel
+bash /opt/kayroslab/deploy/ovh-vps/backup-data.sh
+
+# cron quotidien 03:00
 crontab -e
-# Ajouter la ligne :
-0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh >> /var/log/kayros-backup.log 2>&1
+# 0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh >> /var/log/kayros-backup.log 2>&1
 ```
 
-## Métriques Prometheus
+Variables optionnelles :
 
-Le backend expose un endpoint `/metrics` au format Prometheus. Configurer un scrape dans
-`/etc/prometheus/prometheus.yml` :
-
-```yaml
-scrape_configs:
-  - job_name: 'kayroslab'
-    static_configs:
-      - targets: ['127.0.0.1:8787']
+```bash
+BACKUP_DIR=/opt/kayroslab/backups   # défaut
+RETENTION_DAYS=30                   # défaut
+DATABASE_URL=postgres://...         # ou lu depuis backend/fastify/.env
 ```
+
+### Restauration Postgres
+
+```bash
+gunzip -c /opt/kayroslab/backups/kayros-pg-YYYYMMDD-HHMMSS.sql.gz \
+  | psql "$DATABASE_URL"
+```
+
+### Restauration JSON
+
+```bash
+tar -xzf /opt/kayroslab/backups/kayros-data-YYYYMMDD-HHMMSS.tar.gz -C /opt/kayroslab/
+```
+
+## DNS
+
+`api.kayroslab.com` → **A** → `51.210.9.71`
 
 ## Vérifications
 
 ```bash
-pm2 status                          # kayros-api en ligne
+pm2 status
 pm2 logs kayros-api --lines 30
-curl http://127.0.0.1:8787/health   # local
-curl -I https://api.kayroslab.com/health
+curl http://127.0.0.1:8787/health
+ls -lh /opt/kayroslab/backups/
 ```
-
-## Sécurité
-
-- `/opt/kayroslab/data` en `0700`, `users.json` en `0600` : empreintes de mots de passe.
-- Sans `KAYROS_AUTH_SECRET`, les routes protégées répondent **503** — jamais ouvertes.
-- Le script **interrompt le déploiement si les tests du cœur échouent**.

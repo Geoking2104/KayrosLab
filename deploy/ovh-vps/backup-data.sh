@@ -1,34 +1,36 @@
 #!/usr/bin/env bash
-# backup-data.sh — Sauvegarde des donnees JSON KayrosLab.
-# Usage (en root) : bash deploy/ovh-vps/backup-data.sh
-# A programmer en cron :  0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh
+# backup-data.sh — Sauvegarde JSON + Postgres (si configuré).
+# Usage (root) : bash deploy/ovh-vps/backup-data.sh
+# Cron         : 0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh >> /var/log/kayros-backup.log 2>&1
 set -euo pipefail
 
-DATA_DIR="${DATA_DIR:-/opt/kayroslab/data}"
-BACKUP_DIR="${BACKUP_DIR:-/opt/kayroslab/backups}"
+ROOT="${KAYROS_ROOT:-/opt/kayroslab}"
+DATA_DIR="${DATA_DIR:-${ROOT}/data}"
+BACKUP_DIR="${BACKUP_DIR:-${ROOT}/backups}"
 RETENTION_DAYS="${RETENTION_DAYS:-30}"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 mkdir -p "${BACKUP_DIR}"
 
-# Verifier que le repertoire source existe
-if [[ ! -d "${DATA_DIR}" ]]; then
-  echo "ERREUR : ${DATA_DIR} introuvable." >&2
-  exit 1
+# --- 1. JSON data dir ---
+if [[ -d "${DATA_DIR}" ]]; then
+  BACKUP_FILE="${BACKUP_DIR}/kayros-data-${TIMESTAMP}.tar.gz"
+  tar -czf "${BACKUP_FILE}" -C "$(dirname "${DATA_DIR}")" "$(basename "${DATA_DIR}")" 2>/dev/null || true
+  if [[ -f "${BACKUP_FILE}" ]]; then
+    echo "JSON : ${BACKUP_FILE} ($(du -h "${BACKUP_FILE}" | cut -f1))"
+    tar -tzf "${BACKUP_FILE}" > /dev/null 2>&1 && echo "JSON intégrité OK" || echo "WARN JSON intégrité" >&2
+  fi
+  find "${BACKUP_DIR}" -name 'kayros-data-*.tar.gz' -type f -mtime "+${RETENTION_DAYS}" -delete
+else
+  echo "SKIP JSON : ${DATA_DIR} absent"
 fi
 
-# Compresser les fichiers JSON
-BACKUP_FILE="${BACKUP_DIR}/kayros-data-${TIMESTAMP}.tar.gz"
-tar -czf "${BACKUP_FILE}" -C "$(dirname "${DATA_DIR}")" "$(basename "${DATA_DIR}")" 2>/dev/null
-
-echo "Sauvegarde creee : ${BACKUP_FILE} ($(du -h "${BACKUP_FILE}" | cut -f1))"
-
-# Nettoyer les sauvegardes de plus de RETENTION_DAYS jours
-find "${BACKUP_DIR}" -name "kayros-data-*.tar.gz" -type f -mtime "+${RETENTION_DAYS}" -delete
-echo "Sauvegardes de plus de ${RETENTION_DAYS} jours nettoyees."
-
-# Verifier l'integrite de la sauvegarde la plus recente
-LATEST=$(ls -t "${BACKUP_DIR}"/kayros-data-*.tar.gz 2>/dev/null | head -1)
-if [[ -n "${LATEST}" ]]; then
-  tar -tzf "${LATEST}" > /dev/null 2>&1 && echo "Integrite OK : ${LATEST}" || echo "ERREUR : integrite echouee pour ${LATEST}" >&2
+# --- 2. Postgres (si DATABASE_URL) ---
+if [[ -x "${SCRIPT_DIR}/backup-pg.sh" ]] || [[ -f "${SCRIPT_DIR}/backup-pg.sh" ]]; then
+  bash "${SCRIPT_DIR}/backup-pg.sh" || echo "WARN pg_dump a échoué (non bloquant pour JSON)" >&2
+else
+  echo "SKIP pg : backup-pg.sh introuvable"
 fi
+
+echo "Backup terminé $(date -Iseconds)"
