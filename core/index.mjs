@@ -5,6 +5,7 @@ export * from './tool-registry.mjs';
 export * from './memory.mjs';
 export * from './memory-types.mjs';
 export * from './memory-scope.mjs';
+export * from './memory-rank.mjs';
 export * from './embeddings.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
@@ -81,7 +82,6 @@ async function tryLoadNodeIo() {
 export function createEngine(opts = {}) {
   const baseModel = opts.model || 'llama3.2';
 
-  // A: L3 scope defaults (tenant / user / team / org)
   const scopeDefaults = {
     tenantId: opts.tenantId || null,
     defaultScope: opts.defaultScope || (opts.tenantId ? 'tenant' : null),
@@ -163,6 +163,7 @@ export function createEngine(opts = {}) {
     persistentStore = new FileLayeredStore({
       path: opts.memoryPath || './.kayros-memory.json',
       fs: opts.fs || null,
+      partitionByTenant: !!opts.partitionByTenant,
     });
   }
 
@@ -174,7 +175,7 @@ export function createEngine(opts = {}) {
   });
 
   if (persistentStore?.enabled) {
-    layered.load().catch(() => {});
+    layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
   }
 
   const agents = createAllAgents({
@@ -211,8 +212,9 @@ export function createEngine(opts = {}) {
       layered.persistentStore = new FileLayeredStore({
         path: opts.memoryPath || './.kayros-memory.json',
         fs: io.fs,
+        partitionByTenant: !!opts.partitionByTenant,
       });
-      await layered.load().catch(() => {});
+      await layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
     }
     return true;
   };
