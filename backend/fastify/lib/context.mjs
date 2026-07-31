@@ -20,6 +20,7 @@ import {
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
+import { createLinkService } from './context-links.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
@@ -172,7 +173,6 @@ export default async function buildContext() {
   const USERS_FILE = process.env.KAYROS_USERS_FILE || '';
   const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
 
-  // L — optional Postgres (DATABASE_URL + package pg)
   const pgPool = await createPgPool(process.env);
   let storeBackend = 'memory';
 
@@ -241,7 +241,10 @@ export default async function buildContext() {
   const journal = (evt) => { activites.push({ ...evt, ts: evt.ts ?? new Date().toISOString() }); if (activites.length > 5000) activites.shift(); };
 
   const stageTimer = new StageTimer({ governance });
-  const linkService = new AccountLinkService();
+
+  // v14 durable account links (file / Postgres / memory)
+  const linkService = await createLinkService({ pgPool, env: process.env });
+
   const slackAdapter = process.env.SLACK_BOT_TOKEN
     ? new SlackAdapter({
         signingSecret: process.env.SLACK_SIGNING_SECRET || '',
@@ -254,6 +257,49 @@ export default async function buildContext() {
     adapters: [slackAdapter].filter(Boolean),
     linkService, governance, ideas, users: userStore,
   });
+
+  // v14: honour _motifConfirmed so reject/revise with reason skip second modal
+  const origHandle = connectorService.handleInteraction.bind(connectorService);
+  connectorService.handleInteraction = async (evt) => {
+    if (evt?._motifConfirmed && (evt.actionId?.startsWith('reject:') || evt.actionId?.startsWith('revise:'))) {
+      const decision = evt.actionId.startsWith('reject:') ? 'reject' : 'revise';
+      const gateId = evt.actionId.split(':')[1];
+      const profile = linkService.get(evt.userId);
+      if (!profile) {
+        return new InteractionResponse({
+          ephemeral: true,
+          text: 'Account not linked to KayrosLab.',
+        });
+      }
+      try {
+        const rec = governance.list().find((g) => g.gateId === gateId);
+        if (!rec) return new InteractionResponse({ ephemeral: true, text: 'Gate already resolved or missing' });
+        const resolution = governance.resolve(gateId, {
+          decision,
+          by: profile.email,
+          role: profile.role,
+          reason: evt.payload?.reason ?? '',
+        });
+        if (ideas && rec.ideaId) {
+          const idea = await ideas.get(rec.ideaId);
+          if (idea) {
+            const { setStatus, setStage } = await import('../../../core/model.mjs');
+            const map = { approve: 'en_developpement', reject: 'non_poursuivi', revise: 'en_revue' };
+            let out = setStatus(idea, map[decision] ?? idea.status, {
+              by: profile.email,
+              motif: resolution.reason || decision,
+            });
+            if (decision === 'revise') out = setStage(out, 'eprouver', { by: profile.email, motif: 'revision via chat' });
+            await ideas.save(out);
+          }
+        }
+        return new InteractionResponse({ type: 'ack', text: `Decision "${decision}" recorded.` });
+      } catch (e) {
+        return new InteractionResponse({ ephemeral: true, text: `Error: ${e.message}` });
+      }
+    }
+    return origHandle(evt);
+  };
 
   if (slackAdapter) {
     const origNotifier = governance._notifier;
