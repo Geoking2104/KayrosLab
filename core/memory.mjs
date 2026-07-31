@@ -8,6 +8,7 @@ import {
   uid, nowIso,
 } from './memory-types.mjs';
 import { resolveMemoryScope } from './memory-scope.mjs';
+import { rankCores, l3BelongsToTenant, l1BelongsToTenant } from './memory-rank.mjs';
 
 export function cosine(a, b) {
   if (!a || !b || a.length !== b.length) return 0;
@@ -162,17 +163,34 @@ export class FileOffloadBackend {
   }
 }
 
+/** Resolve filesystem path for a tenant partition. */
+export function memoryPathForTenant(basePath, tenantId) {
+  if (!tenantId) return basePath;
+  const safe = String(tenantId).replace(/[^a-zA-Z0-9._-]/g, '_');
+  if (basePath.endsWith('.json')) {
+    return basePath.replace(/\.json$/i, `.${safe}.json`);
+  }
+  return `${basePath}.${safe}`;
+}
+
 export class FileLayeredStore {
-  constructor({ path = './.kayros-memory.json', fs = null } = {}) {
+  constructor({ path = './.kayros-memory.json', fs = null, partitionByTenant = false } = {}) {
     this.path = path;
     this.fs = fs;
+    this.partitionByTenant = !!partitionByTenant;
     this.enabled = !!(fs && typeof fs.writeFile === 'function');
   }
 
-  async load() {
+  _path(tenantId) {
+    if (this.partitionByTenant && tenantId) return memoryPathForTenant(this.path, tenantId);
+    return this.path;
+  }
+
+  async load({ tenantId = null } = {}) {
     if (!this.enabled) return null;
+    const filePath = this._path(tenantId);
     try {
-      const raw = await this.fs.readFile(this.path, 'utf8');
+      const raw = await this.fs.readFile(filePath, 'utf8');
       return JSON.parse(raw);
     } catch (e) {
       if (e.code === 'ENOENT') return null;
@@ -180,12 +198,14 @@ export class FileLayeredStore {
     }
   }
 
-  async save(snapshot) {
+  async save(snapshot, { tenantId = null } = {}) {
     if (!this.enabled) return false;
+    const filePath = this._path(tenantId);
     try {
-      const tmp = `${this.path}.tmp`;
+      const tmp = `${filePath}.tmp`;
       const payload = JSON.stringify({
         version: 1,
+        tenantId: tenantId || null,
         savedAt: nowIso(),
         l1: snapshot.l1 || [],
         l2: snapshot.l2 || [],
@@ -193,9 +213,9 @@ export class FileLayeredStore {
       }, null, 2);
       await this.fs.writeFile(tmp, payload, 'utf8');
       if (typeof this.fs.rename === 'function') {
-        await this.fs.rename(tmp, this.path);
+        await this.fs.rename(tmp, filePath);
       } else {
-        await this.fs.writeFile(this.path, payload, 'utf8');
+        await this.fs.writeFile(filePath, payload, 'utf8');
       }
       return true;
     } catch {
@@ -403,12 +423,13 @@ export class LayeredMemory {
     return fact;
   }
 
-  getAtomicFacts({ ideaId = null, status = 'active', type = null } = {}) {
+  getAtomicFacts({ ideaId = null, status = 'active', type = null, tenantId = null } = {}) {
     const out = [];
     for (const f of this._l1.values()) {
       if (status && f.status !== status) continue;
       if (ideaId && f.ideaId !== ideaId) continue;
       if (type && f.type !== type) continue;
+      if (tenantId && !l1BelongsToTenant(f, tenantId)) continue;
       out.push(f);
     }
     return out;
@@ -522,7 +543,7 @@ export class LayeredMemory {
     return out;
   }
 
-  updateCore(p) {
+  async updateCore(p) {
     const core = createL3(p);
     for (const existing of this._l3.values()) {
       if (existing.scope === core.scope && existing.scopeId === core.scopeId &&
@@ -531,6 +552,14 @@ export class LayeredMemory {
         core.id = existing.id;
         break;
       }
+    }
+    // Optional embedding for ranking
+    if (this.memoryService && core.content) {
+      try {
+        core.embedding = await this.memoryService.embeddings.embed(
+          `${core.title}\n${core.content}`,
+        );
+      } catch (_) {}
     }
     this._l3.set(core.id, core);
     this._dirty = true;
@@ -549,8 +578,13 @@ export class LayeredMemory {
     return out;
   }
 
-  /** Collect L3 along a resolved scope chain (user → team → org → tenant), deduped. */
-  collectCoreByScopes(scopes, { kind = null, k = Infinity } = {}) {
+  /** Collect L3 along scope chain; optional rank by query. */
+  collectCoreByScopes(scopes, {
+    kind = null,
+    k = Infinity,
+    query = null,
+    queryEmbedding = null,
+  } = {}) {
     const seen = new Set();
     const out = [];
     for (const ref of scopes || []) {
@@ -559,30 +593,42 @@ export class LayeredMemory {
         if (seen.has(c.id)) continue;
         seen.add(c.id);
         out.push(c);
-        if (out.length >= k) return out;
       }
     }
-    return out;
+    if (query) {
+      return rankCores(out, query, { queryEmbedding, k });
+    }
+    return out.slice(0, k);
   }
 
-  async save() {
+  async save({ tenantId = null } = {}) {
     if (!this.persistentStore) return false;
-    const snap = this.snapshot();
-    const ok = await this.persistentStore.save(snap);
+    const snap = this.snapshot(null, { tenantId });
+    const ok = await this.persistentStore.save(snap, { tenantId });
     if (ok) this._dirty = false;
     return ok;
   }
 
-  async load() {
+  async load({ tenantId = null } = {}) {
     if (!this.persistentStore) return false;
-    const data = await this.persistentStore.load();
+    const data = await this.persistentStore.load({ tenantId });
     if (!data) return false;
 
-    this._l1.clear();
-    this._l2.clear();
-    this._l3.clear();
-    this._byIdea.l1.clear();
-    this._byIdea.l2.clear();
+    // When loading a tenant partition, replace only that tenant's L3/L1; full load clears all
+    if (!tenantId) {
+      this._l1.clear();
+      this._l2.clear();
+      this._l3.clear();
+      this._byIdea.l1.clear();
+      this._byIdea.l2.clear();
+    } else {
+      for (const [id, f] of [...this._l1]) {
+        if (l1BelongsToTenant(f, tenantId)) this._l1.delete(id);
+      }
+      for (const [id, c] of [...this._l3]) {
+        if (l3BelongsToTenant(c, tenantId)) this._l3.delete(id);
+      }
+    }
 
     for (const f of data.l1 || []) {
       this._l1.set(f.id, f);
@@ -617,10 +663,6 @@ export class LayeredMemory {
     return true;
   }
 
-  /**
-   * Unified recall. L3 uses resolveMemoryScope — empty chain ⇒ no L3 (safe).
-   * Accepts scope/scopeId/tenantId/userId/teamId/organizationId/scopes[].
-   */
   async recall(query, opts = {}) {
     const {
       ideaId = null,
@@ -632,15 +674,27 @@ export class LayeredMemory {
     const result = { l1: [], l2: [], l3: [] };
     const resolved = resolveMemoryScope(opts);
 
+    let queryEmbedding = null;
+    if (this.memoryService && query) {
+      try {
+        queryEmbedding = await this.memoryService.embeddings.embed(query);
+      } catch (_) {}
+    }
+
     if (layers.includes('L3')) {
       if (resolved.scopes.length) {
-        result.l3 = this.collectCoreByScopes(resolved.scopes, { kind, k });
+        result.l3 = this.collectCoreByScopes(resolved.scopes, {
+          kind,
+          k,
+          query: query || null,
+          queryEmbedding,
+        });
       }
     }
 
     if (this.memoryService && (layers.includes('L1') || layers.includes('L2'))) {
       try {
-        const emb = await this.memoryService.embeddings.embed(query);
+        const emb = queryEmbedding || await this.memoryService.embeddings.embed(query);
         const hits = await this.store.search(emb, k * 2, { ideaId });
 
         for (const h of hits) {
@@ -685,19 +739,42 @@ export class LayeredMemory {
     return parts.length ? parts.join('\n') : '';
   }
 
-  snapshot(ideaId = null) {
-    const filter = (map) => {
+  /**
+   * Snapshot. F: pass tenantId to filter L1 + L3 for that tenant.
+   * @param {string|null} ideaId
+   * @param {{ tenantId?: string|null }} [opts]
+   */
+  snapshot(ideaId = null, { tenantId = null } = {}) {
+    const filterIdea = (map) => {
       if (!ideaId) return [...map.values()];
       return [...map.values()].filter((x) =>
         x.ideaId === ideaId || (x.ideaIds && x.ideaIds.includes(ideaId))
       );
     };
+    let l1 = filterIdea(this._l1);
+    let l2 = filterIdea(this._l2);
+    let l3 = [...this._l3.values()];
+
+    if (tenantId) {
+      l1 = l1.filter((f) => l1BelongsToTenant(f, tenantId));
+      l3 = l3.filter((c) => l3BelongsToTenant(c, tenantId));
+      // L2 has no tenant field; keep idea-filtered only
+    }
+
     return {
-      l0: filter(this._l0),
-      l1: filter(this._l1),
-      l2: filter(this._l2),
-      l3: [...this._l3.values()],
-      stats: { l0: this._l0.size, l1: this._l1.size, l2: this._l2.size, l3: this._l3.size },
+      l0: filterIdea(this._l0),
+      l1,
+      l2,
+      l3,
+      tenantId: tenantId || null,
+      stats: {
+        l0: this._l0.size,
+        l1: this._l1.size,
+        l2: this._l2.size,
+        l3: this._l3.size,
+        filteredL1: l1.length,
+        filteredL3: l3.length,
+      },
       dirty: this._dirty,
     };
   }
@@ -711,3 +788,4 @@ export class LayeredMemory {
 
 export { createL0, createL1, createL2, createL3 } from './memory-types.mjs';
 export { resolveMemoryScope, mergeScopeOpts } from './memory-scope.mjs';
+export { rankCores, lexicalScore, l3BelongsToTenant, l1BelongsToTenant } from './memory-rank.mjs';
