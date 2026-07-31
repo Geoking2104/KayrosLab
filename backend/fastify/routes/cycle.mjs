@@ -9,7 +9,7 @@ import { orchestratorForRequest } from '../lib/context.mjs';
 const cycleRunSchema = z.object({
   query: z.string().min(1).max(8000),
   ideaId: z.string().max(128).optional(),
-  governance: z.enum(['auto', 'supervise', 'off']).optional().default('supervise'),
+  governance: z.enum(['auto', 'supervise', 'off']).optional().default('auto'),
   sovereignty: z.string().optional(),
   provider: z.string().optional(),
   autoDistill: z.boolean().optional().default(true),
@@ -37,12 +37,14 @@ async function tryAuthSession(app, req) {
 }
 
 function writeSse(raw, event) {
-  raw.write(`data: ${JSON.stringify(event)}\n\n`);
+  try {
+    raw.write(`data: ${JSON.stringify(event)}\n\n`);
+  } catch { /* closed */ }
 }
 
 export default async function cycleRoute(app) {
   app.post('/v1/cycle/run', async (req, reply) => {
-    const parsed = cycleRunSchema.safeParse(req.body);
+    const parsed = cycleRunSchema.safeParse(req.body ?? {});
     if (!parsed.success) {
       return reply.code(400).send({ error: 'query requis', issues: parsed.error.issues });
     }
@@ -63,6 +65,9 @@ export default async function cycleRoute(app) {
     const orch = orchestratorForRequest(engine, {
       tenantId, userId, teamId, organizationId,
     });
+    if (!orch) {
+      return reply.code(503).send({ error: 'orchestrator non disponible' });
+    }
 
     const planCtx = {
       ideaId,
@@ -79,6 +84,7 @@ export default async function cycleRoute(app) {
       return reply.code(502).send({ error: String(e.message || e) });
     }
 
+    // SSE never blocks on human gate; JSON aggregate same unless waitGate true
     const runOpts = {
       governance: body.governance,
       sovereignty: body.sovereignty,
@@ -90,25 +96,33 @@ export default async function cycleRoute(app) {
       userId,
       teamId,
       organizationId,
+      waitGate: false,
     };
 
-    journal?.({
-      type: 'cycle.start',
-      ideaId,
-      tenantId,
-      userId,
-      query: body.query.slice(0, 200),
-    });
+    try {
+      journal?.({
+        type: 'cycle.start',
+        ideaId,
+        tenantId,
+        userId,
+        query: body.query.slice(0, 200),
+      });
+    } catch { /* soft */ }
 
-    // ---------- SSE stream ----------
     if (body.stream !== false) {
       reply.hijack();
-      reply.raw.writeHead(200, {
-        'Content-Type': 'text/event-stream; charset=utf-8',
-        'Cache-Control': 'no-cache, no-transform',
-        Connection: 'keep-alive',
-        'X-Accel-Buffering': 'no',
-      });
+      try {
+        reply.raw.writeHead(200, {
+          'Content-Type': 'text/event-stream; charset=utf-8',
+          'Cache-Control': 'no-cache, no-transform',
+          Connection: 'keep-alive',
+          'X-Accel-Buffering': 'no',
+        });
+      } catch (e) {
+        app.log.error(e);
+        try { reply.raw.end(); } catch { /* */ }
+        return;
+      }
 
       writeSse(reply.raw, {
         type: 'meta',
@@ -125,12 +139,6 @@ export default async function cycleRoute(app) {
         for await (const ev of orch.run(plan, runOpts)) {
           if (aborted) break;
           writeSse(reply.raw, ev);
-          if (ev.type === 'gate' || ev.type === 'final') {
-            // persist memory best-effort after terminal-ish events
-            try {
-              await engine.layered?.save?.({ tenantId });
-            } catch { /* soft */ }
-          }
         }
         if (!aborted) {
           writeSse(reply.raw, { type: 'done', ideaId, ts: new Date().toISOString() });
@@ -148,18 +156,17 @@ export default async function cycleRoute(app) {
         await engine.layered?.save?.({ tenantId });
       } catch { /* soft */ }
 
-      reply.raw.end();
+      try { reply.raw.end(); } catch { /* */ }
       return;
     }
 
-    // ---------- JSON aggregate ----------
     const events = [];
     let final = null;
     let gate = null;
     try {
       for await (const ev of orch.run(plan, runOpts)) {
         events.push(ev);
-        if (ev.type === 'gate') { gate = ev; break; }
+        if (ev.type === 'gate') gate = ev;
         if (ev.type === 'final') final = ev;
       }
       try {
@@ -170,7 +177,7 @@ export default async function cycleRoute(app) {
       return reply.code(502).send({ error: String(e.message || e), events });
     }
 
-    if (gate) {
+    if (gate && final?.status === 'pending_review') {
       return reply.code(202).send({
         status: 'pending_review',
         gateId: gate.gateId,
@@ -186,15 +193,17 @@ export default async function cycleRoute(app) {
       answer: final?.answer ?? final?.message ?? null,
       ideaId,
       scope: { tenantId, userId },
-      quant: final?.quant ?? events.find((e) => e.quant)?.quant ?? null,
+      quant: final?.quant ?? null,
       events,
     };
   });
 
-  /** Health slice for engine (memory + quant). */
   app.get('/v1/cycle/status', async () => {
     const { engine, OLLAMA_ENDPOINT, OLLAMA_MODEL } = app.kayrosContext;
-    const snap = engine?.layered?.snapshot?.() || null;
+    let snap = null;
+    try {
+      snap = engine?.layered?.snapshot?.() || null;
+    } catch { snap = null; }
     return {
       engine: !!engine,
       layered: !!engine?.layered,

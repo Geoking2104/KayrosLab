@@ -30,7 +30,6 @@ export class Orchestrator {
     llm, tools = null, memory = null, layered = null, governance = null,
     classifier = null, recallK = 3, plannerModel = null, agents = null,
     quantGuidance = null,
-    // A: engine-level L3 defaults
     tenantId = null,
     defaultScope = null,
     defaultScopeId = null,
@@ -62,7 +61,6 @@ export class Orchestrator {
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
   _hasLayered() { return !!this.layered && typeof this.layered.recall === 'function'; }
 
-  /** Merge run opts over engine scope defaults. */
   _resolveRunScope(opts = {}) {
     return resolveMemoryScope(opts, this.scopeDefaults);
   }
@@ -154,6 +152,7 @@ export class Orchestrator {
     const doRemember = opts.remember !== false;
     const doOffload = opts.offload !== false;
     const doAutoDistill = opts.autoDistill === true;
+    const waitGate = opts.waitGate !== false;
 
     const scopeResolved = this._resolveRunScope(opts);
 
@@ -344,6 +343,10 @@ export class Orchestrator {
     if (gateType && this.governance) {
       const { gateId, promise } = this.governance.open({ ideaId: plan.ideaId, type: gateType, requiredRole: 'comex', payload: answer });
       yield { type: 'gate', gateId, gateType, status: 'pending_review', ts: new Date().toISOString() };
+      if (!waitGate) {
+        yield { type: 'final', status: 'pending_review', gateId, gateType, answer, quant: this._quantSnapshot(), ts: new Date().toISOString() };
+        return;
+      }
       const res = await promise;
       if (res.decision === 'reject') { yield { type: 'final', status: 'blocked_veto', message: `Bloque (veto) : ${res.reason}`, ts: new Date().toISOString() }; return; }
       if (res.decision === 'revise') { yield { type: 'final', status: 'revise', message: res.reason, ts: new Date().toISOString() }; return; }
