@@ -167,17 +167,16 @@ fi
 # --------------------------------------------------------------------------
 log "8. Sauvegarde quotidienne"
 
-cat > /etc/cron.daily/kayroslab-pgdump <<CRON
-#!/bin/sh
-# Sauvegarde KayrosLab — rétention 14 jours.
-set -e
-DEST=/opt/kayroslab/data/backups
-mkdir -p "\$DEST"
-sudo -u postgres pg_dump -Fc $DB_NAME > "\$DEST/kayroslab-\$(date +%Y%m%d).dump"
-find "\$DEST" -name 'kayroslab-*.dump' -mtime +14 -delete
-CRON
-chmod +x /etc/cron.daily/kayroslab-pgdump
-ok "sauvegarde quotidienne installée (rétention 14 jours)"
+# On ne cree PAS de cron dedie : `backup-data.sh` sauvegarde deja les JSON et
+# sait desormais dumper la base. Deux dispositifs concurrents finissent par
+# diverger — l'un tourne, l'autre non, et on decouvre lequel en restaurant.
+if crontab -l 2>/dev/null | grep -q 'backup-data.sh'; then
+  ok "cron de sauvegarde deja en place (backup-data.sh)"
+else
+  warn "cron de sauvegarde ABSENT — a installer :"
+  warn "  (crontab -l 2>/dev/null; echo '0 3 * * * /opt/kayroslab/deploy/ovh-vps/backup-data.sh >> /var/log/kayros-backup.log 2>&1') | crontab -"
+fi
+rm -f /etc/cron.daily/kayroslab-pgdump 2>/dev/null && ok "ancien cron.daily redondant retire" || true
 
 echo
 printf '\033[1m%s\033[0m\n' "Provisionnement terminé."
