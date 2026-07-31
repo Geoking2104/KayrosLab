@@ -6,6 +6,7 @@
  *   KAYROS_IDEAS_FILE=/opt/kayroslab/data/ideas.json node core/seed-demo.mjs
  *   DATABASE_URL=postgres://… node core/seed-demo.mjs
  */
+import { randomUUID } from 'node:crypto';
 import { createIdea, setStage, setStatus } from './model.mjs';
 import { InMemoryIdeaRepository, FileIdeaRepository } from './repository.mjs';
 import { createPgPool, PgIdeaRepository } from './pg-store.mjs';
@@ -69,6 +70,7 @@ async function main() {
   const created = [];
   for (const s of SEED) {
     let idea = createIdea({
+      id: randomUUID(),
       title: s.title,
       intake: s.intake,
       tenantId,
