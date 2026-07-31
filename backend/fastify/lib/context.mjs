@@ -1,3 +1,8 @@
+﻿import { createCanvasStudio } from '../../../core/canvas/index.mjs';
+import { InMemoryVectorStore, QdrantVectorStore } from '../../../core/memory.mjs';
+import { createAllAgents } from '../../../core/agents/index.mjs';
+import { buildCanvasStore } from './canvas-store.mjs';
+import { CanvasHub } from './canvas-hub.mjs';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
@@ -187,10 +192,49 @@ export default async function buildContext() {
   const GOOGLE_CX = process.env.GOOGLE_CX || '';
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 
+  // --- Canvas d ideation (lots v11-v13) ---------------------------------
+  // Le contexte a deja un `journal` (activite) : celui du canvas s appelle
+  // `canvasJournal` pour qu aucune confusion ne passe inapercue.
+  const canvasStore = await buildCanvasStore(process.env);
+  const canvasVectors = process.env.QDRANT_URL
+    ? new QdrantVectorStore({
+        url: process.env.QDRANT_URL,
+        collection: process.env.QDRANT_COLLECTION || 'kayroslab',
+        dim: Number(process.env.QDRANT_DIM || 768),
+        apiKey: process.env.QDRANT_API_KEY,
+      })
+    : new InMemoryVectorStore();
+
+  const canvasEngine = {
+    llm, embeddings, tools,
+    vectors: canvasVectors,
+    agents: createAllAgents({ llm, tools }),
+  };
+
+  const canvas = createCanvasStudio(canvasEngine, {
+    repository: canvasStore.repo,
+    // Palier souverain deduit de la configuration : Ollama present sans cle
+    // cloud => les documents classes sensibles ne sortent pas.
+    ingestion: {
+      sovereignty: (process.env.OLLAMA_ENDPOINT && !ANTHROPIC_API_KEY) ? 'local' : 'cloud',
+    },
+  });
+  canvas.engine = canvasEngine;
+
+  const canvasHub = new CanvasHub({ repo: canvasStore.repo });
+
+  console.log(
+    '[canvas] persistance : ' + canvasStore.mode
+    + (canvasStore.info ? ' (' + canvasStore.info.base + ', ' + canvasStore.info.version + ')' : ''),
+  );
+
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, campagnes, activites, journal, stageTimer,
     linkService, slackAdapter, connectorService,
+    canvas, canvasJournal: canvasStore.journal, canvasAgents: canvasStore.agents,
+    canvasHub, canvasEngine, engine: canvasEngine,
+    pgPool: canvasStore.pool, canvasMode: canvasStore.mode,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
