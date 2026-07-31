@@ -13,6 +13,7 @@ export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';
 export * from './shared-data.mjs';
 export * from './repository.mjs';
+export * from './pg-store.mjs';
 export * from './intake.mjs';
 export * from './scorecard.mjs';
 export * from './evaluation.mjs';
