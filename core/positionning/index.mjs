@@ -9,6 +9,7 @@ export {
 } from './analyzer.mjs';
 export { generateOWL, generateJSON } from './owl-exporter.mjs';
 export { runMistralContextualPositionning } from './mistral-contextual-search.mjs';
+export { factsFromPositionning, heuristicPositionning } from './to-l1.mjs';
 
 export async function runPositionningAnalysis(ideaText, {
   googleApiKey, googleCx,
