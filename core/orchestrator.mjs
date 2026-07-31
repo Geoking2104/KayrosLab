@@ -1,6 +1,7 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
 // Unified plan via PlannerAgent; quant events; autoDistill uses this.llm by default.
 // L3 scope: merges engine defaults (tenantId, userId, …) with run opts.
+// Phase 5: optional positionning → L1 competitor facts before agent loop.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
@@ -8,6 +9,11 @@ import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 import { defaultFallbackSteps } from './agents/planner-agent.mjs';
 import { parsePlanSteps, ensureSynthesizerLast, extractFirstArray, salvageObjects } from './plan-parse.mjs';
 import { resolveMemoryScope } from './memory-scope.mjs';
+import {
+  runPositionningAnalysis,
+  factsFromPositionning,
+  heuristicPositionning,
+} from './positionning/index.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -145,6 +151,76 @@ export class Orchestrator {
     return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
   }
 
+  /**
+   * Phase 5: run scanners (or heuristic) and write competitor L1 facts.
+   * Soft-fails; never blocks the cycle.
+   */
+  async _injectPositionning(plan, opts, scopeResolved) {
+    if (opts.positionning === false) return null;
+    if (!this._hasLayered()) return null;
+
+    const tenantId = scopeResolved.tenantId || opts.tenantId || 'default';
+    let analysis = null;
+    let mode = 'heuristic';
+
+    const keys = opts.positionningKeys || {};
+    const hasScannerKeys = !!(keys.googleApiKey || keys.githubToken || keys.gitlabToken);
+
+    try {
+      if (opts.positionningAnalysis) {
+        analysis = opts.positionningAnalysis;
+        mode = 'provided';
+      } else if (hasScannerKeys) {
+        analysis = await runPositionningAnalysis(plan.goal, {
+          googleApiKey: keys.googleApiKey,
+          googleCx: keys.googleCx,
+          githubToken: keys.githubToken,
+          gitlabToken: keys.gitlabToken,
+          gitlabBaseUrl: keys.gitlabBaseUrl,
+          limit: opts.positionningLimit ?? 5,
+        });
+        mode = 'scanners';
+      } else {
+        analysis = heuristicPositionning(plan.goal);
+        mode = 'heuristic';
+      }
+    } catch {
+      analysis = heuristicPositionning(plan.goal);
+      mode = 'heuristic-fallback';
+    }
+
+    const payloads = factsFromPositionning(analysis, {
+      ideaId: plan.ideaId,
+      tenantId,
+      maxCompetitors: opts.positionningMaxCompetitors ?? 8,
+      maxGaps: opts.positionningMaxGaps ?? 6,
+    });
+
+    const created = [];
+    for (const p of payloads) {
+      try {
+        const fact = await this.layered.addAtomicFact(p);
+        created.push({ id: fact.id, type: fact.type, content: fact.content.slice(0, 120) });
+      } catch { /* soft */ }
+    }
+
+    // Enrich context block for subsequent agents
+    let extraContext = '';
+    if (created.length) {
+      extraContext = '\n### Positionnement concurrentiel (L1)\n'
+        + created.map((f) => `- (${f.type}) ${f.content}`).join('\n');
+    }
+
+    return {
+      mode,
+      kayrosIndex: analysis?.kayrosIndex ?? null,
+      competitors: analysis?.summary?.totalCompetitors ?? analysis?.competitors?.length ?? 0,
+      facts: created.length,
+      preview: created.slice(0, 5),
+      extraContext,
+    };
+  }
+
   async *run(plan, opts = {}) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
@@ -200,6 +276,24 @@ export class Orchestrator {
         }
       }
     }
+
+    // --- Phase 5: positionning → L1 (before specialist agents / Red Team) ---
+    try {
+      const pos = await this._injectPositionning(plan, opts, scopeResolved);
+      if (pos) {
+        if (pos.extraContext) contextBlock = (contextBlock || '') + pos.extraContext;
+        yield {
+          type: 'positionning',
+          ideaId: plan.ideaId,
+          mode: pos.mode,
+          kayrosIndex: pos.kayrosIndex,
+          competitors: pos.competitors,
+          facts: pos.facts,
+          preview: pos.preview,
+          ts: new Date().toISOString(),
+        };
+      }
+    } catch { /* soft */ }
 
     let count = 0;
     const agentOutputs = [];
