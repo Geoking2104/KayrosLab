@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Idées dormantes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['Space Grotesk','sans-serif'],body:['Geist','system-ui','sans-serif']}}}};</script>
+</head>
+<body class="bg-white text-slate-900 antialiased font-body">
+<header class="border-b border-slate-200">
+  <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="./kayroslab-complete-with-ai-agents.html" class="font-display font-bold text-lg">KayrosLab <span class="text-sky-600 text-sm">Dormantes</span></a>
+    <a href="./cycle-timeline.html" class="text-sm text-sky-600 font-semibold">Cycle SSE</a>
+  </div>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-8 space-y-4">
+  <h1 class="font-display text-2xl font-bold">Idées dormantes · réactivation</h1>
+  <p class="text-sm text-slate-500">Statuts <code>en_pause</code>, <code>consideration_future</code>, <code>non_poursuivi</code> — EF-58.</p>
+
+  <div class="rounded-2xl border border-slate-200 p-4 space-y-3">
+    <label class="block text-xs font-bold uppercase text-slate-500">API base</label>
+    <input id="api" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" value="http://localhost:8787" />
+    <label class="block text-xs font-bold uppercase text-slate-500">Bearer token</label>
+    <input id="token" type="password" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" placeholder="JWT" />
+    <button id="btn-load" type="button" class="rounded-full bg-sky-600 text-white font-semibold px-5 py-2 text-sm">Charger le portefeuille</button>
+  </div>
+
+  <div id="list" class="space-y-2 text-sm text-slate-500">Chargez le portefeuille pour lister les idées dormantes.</div>
+</main>
+<script>
+(function () {
+  const DORMANT = ['en_pause', 'consideration_future', 'non_poursuivi'];
+  const $ = (id) => document.getElementById(id);
+
+  function headers() {
+    const h = { Accept: 'application/json' };
+    const t = $('token').value.trim();
+    if (t) h.Authorization = 'Bearer ' + t;
+    return h;
+  }
+
+  function esc(s) {
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  async function load() {
+    const base = $('api').value.replace(/\/$/, '');
+    $('list').textContent = 'Chargement…';
+    try {
+      const r = await fetch(base + '/v1/ideas', { headers: headers() });
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' (auth requise?)');
+      const j = await r.json();
+      const ideas = Array.isArray(j) ? j : (j.ideas || j.items || []);
+      const dormant = ideas.filter((i) => DORMANT.includes(i.status));
+      if (!dormant.length) {
+        $('list').innerHTML = '<p class="text-slate-400">Aucune idée dormante.</p>';
+        return;
+      }
+      $('list').innerHTML = dormant.map((i) =>
+        '<div class="rounded-xl border border-slate-200 bg-slate-50 p-3 flex items-start justify-between gap-3">'
+        + '<div><div class="font-semibold text-slate-800">' + esc(i.title || i.id) + '</div>'
+        + '<div class="text-xs text-slate-500 mono">' + esc(i.id) + ' · ' + esc(i.status) + ' · ' + esc(i.stage) + '</div></div>'
+        + '<button type="button" data-id="' + esc(i.id) + '" class="shrink-0 rounded-full bg-amber-500 text-white text-xs font-bold px-3 py-1.5">Réactiver</button>'
+        + '</div>'
+      ).join('');
+      $('list').querySelectorAll('[data-id]').forEach((btn) => {
+        btn.addEventListener('click', () => reactivate(btn.getAttribute('data-id')));
+      });
+    } catch (e) {
+      $('list').innerHTML = '<p class="text-red-600">' + esc(e.message) + '</p>';
+    }
+  }
+
+  async function reactivate(ideaId) {
+    const base = $('api').value.replace(/\/$/, '');
+    try {
+      const r = await fetch(base + '/v1/cycle/reactivate', {
+        method: 'POST',
+        headers: Object.assign(headers(), { 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ ideaId, motif: 'portfolio UI', stage: 'ecouter' }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      alert('Réactivée · ' + (j.idea?.status || 'ok'));
+      load();
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
+  $('btn-load').addEventListener('click', load);
+  const u = new URL(location.href);
+  if (u.searchParams.get('api')) $('api').value = u.searchParams.get('api');
+})();
+</script>
+</body>
+</html>

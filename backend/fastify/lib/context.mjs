@@ -19,8 +19,8 @@ import {
   createEngine,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
+import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
 
-/** Point server LLM + governance at the shared engine (memory/quant stay engine-owned). */
 export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
   if (llm) {
@@ -44,7 +44,6 @@ export function bindEngineToServer(engine, { llm, tools, governance }) {
   return engine;
 }
 
-/** Build a scoped orchestrator for a request without losing layered memory. */
 export function orchestratorForRequest(engine, scope = {}) {
   if (!engine) return null;
   const {
@@ -67,7 +66,6 @@ export function orchestratorForRequest(engine, scope = {}) {
 }
 
 export default async function buildContext() {
-  // H — optional shared volume fills unset path env vars
   const sharedPaths = applySharedDataEnv(process.env);
 
   const {
@@ -174,10 +172,25 @@ export default async function buildContext() {
   const USERS_FILE = process.env.KAYROS_USERS_FILE || '';
   const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
 
+  // L — optional Postgres (DATABASE_URL + package pg)
+  const pgPool = await createPgPool(process.env);
+  let storeBackend = 'memory';
+
   const userStore = USERS_FILE ? new FileUserStore({ path: USERS_FILE }) : new InMemoryUserStore();
   if (USERS_FILE) await userStore.load();
-  const ideas = IDEAS_FILE ? new FileIdeaRepository({ path: IDEAS_FILE }) : new InMemoryIdeaRepository();
-  if (IDEAS_FILE) await ideas.load();
+
+  let ideas;
+  if (pgPool) {
+    ideas = new PgIdeaRepository(pgPool);
+    storeBackend = 'postgres';
+    console.info('[kayroslab] ideas store: Postgres');
+  } else {
+    ideas = IDEAS_FILE ? new FileIdeaRepository({ path: IDEAS_FILE }) : new InMemoryIdeaRepository();
+    if (IDEAS_FILE) {
+      await ideas.load();
+      storeBackend = 'file';
+    }
+  }
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
   const scorecards = defaultScorecards();
@@ -194,9 +207,14 @@ export default async function buildContext() {
     } catch { console.warn('[kayroslab] SMTP configure mais nodemailer absent'); }
   }
 
-  // G — persistent gates file + restore pending queue on boot
   const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
-  const gateStore = GATES_FILE ? new FileGateStore({ path: GATES_FILE }) : new InMemoryGateStore();
+  let gateStore;
+  if (pgPool) {
+    gateStore = new PgGateStore(pgPool);
+    console.info('[kayroslab] gates store: Postgres');
+  } else {
+    gateStore = GATES_FILE ? new FileGateStore({ path: GATES_FILE }) : new InMemoryGateStore();
+  }
 
   const governance = new GovernanceService({
     store: gateStore,
@@ -213,11 +231,7 @@ export default async function buildContext() {
 
   await governance.restore();
   const pendingGates = governance.list().length;
-  if (GATES_FILE) {
-    console.info(`[kayroslab] gates store: ${GATES_FILE} · pending restored: ${pendingGates}`);
-  } else {
-    console.info(`[kayroslab] gates store: in-memory · pending: ${pendingGates}`);
-  }
+  console.info(`[kayroslab] gates pending restored: ${pendingGates} · backend=${storeBackend}`);
   if (sharedPaths) {
     console.info(`[kayroslab] shared data dir: ${sharedPaths.root}`);
   }
@@ -264,7 +278,7 @@ export default async function buildContext() {
   try {
     nodeFs = await import('node:fs/promises');
     nodePath = await import('node:path');
-  } catch { /* browser-safe no-op */ }
+  } catch { /* */ }
 
   const memoryPath = KAYROS_MEMORY_FILE || (nodeFs ? './.kayros-memory.json' : null);
   const offloadRoot = KAYROS_OFFLOAD_ROOT || (nodeFs ? './.kayros-l0' : null);
@@ -302,6 +316,8 @@ export default async function buildContext() {
     linkService, slackAdapter, connectorService,
     engine,
     sharedPaths,
+    pgPool,
+    storeBackend,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
