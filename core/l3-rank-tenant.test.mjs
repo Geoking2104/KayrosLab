@@ -27,8 +27,8 @@ test('E. rankCores orders by relevance', () => {
 
 test('E. recall ranks L3 by query', async () => {
   const mem = new LayeredMemory();
-  mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'Palette', content: 'couleurs' });
-  mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'COMEX', content: 'No-Go motif écrit obligatoire' });
+  await mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'Palette', content: 'couleurs' });
+  await mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'COMEX', content: 'No-Go motif écrit obligatoire' });
   const r = await mem.recall('COMEX décision No-Go motif', {
     layers: ['L3'], k: 1, tenantId: 'acme',
   });
@@ -37,10 +37,10 @@ test('E. recall ranks L3 by query', async () => {
   assert.ok(typeof r.l3[0].score === 'number');
 });
 
-test('F. snapshot filters L3 by tenantId', () => {
+test('F. snapshot filters L3 by tenantId', async () => {
   const mem = new LayeredMemory();
-  mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'A', content: 'a' });
-  mem.updateCore({ scope: 'tenant', scopeId: 'other', kind: 'norm', title: 'B', content: 'b' });
+  await mem.updateCore({ scope: 'tenant', scopeId: 'acme', kind: 'norm', title: 'A', content: 'a' });
+  await mem.updateCore({ scope: 'tenant', scopeId: 'other', kind: 'norm', title: 'B', content: 'b' });
   const all = mem.snapshot();
   assert.equal(all.l3.length, 2);
   const acme = mem.snapshot(null, { tenantId: 'acme' });
