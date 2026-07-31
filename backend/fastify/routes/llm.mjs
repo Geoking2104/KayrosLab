@@ -25,6 +25,10 @@ const governQuerySchema = z.object({
   sovereignty: z.string().optional(),
   provider: z.string().optional(),
   ideaId: z.string().optional(),
+  tenantId: z.string().optional(),
+  userId: z.string().optional(),
+  teamId: z.string().optional(),
+  organizationId: z.string().optional(),
 });
 
 const monitorSchema = z.object({
@@ -39,7 +43,6 @@ const demoChatSchema = z.object({
   user: z.string().min(1).max(6000),
 });
 
-// Simple IP rate map for public demo (process lifetime)
 const demoRate = new Map();
 const DEMO_MAX_PER_HOUR = 30;
 
@@ -55,6 +58,20 @@ function checkDemoRate(ip) {
   return e.count <= DEMO_MAX_PER_HOUR;
 }
 
+/** Optional Bearer session — does not fail the request if absent. */
+async function tryAuthSession(app, req) {
+  const { auth } = app.kayrosContext || {};
+  if (!auth) return null;
+  const h = req.headers.authorization || '';
+  const token = h.startsWith('Bearer ') ? h.slice(7) : null;
+  if (!token) return null;
+  try {
+    return await auth.verify(token);
+  } catch {
+    return null;
+  }
+}
+
 export default async function llmRoute(app) {
   app.post('/v1/llm', async (req, reply) => {
     const parsed = completeSchema.safeParse(req.body);
@@ -65,11 +82,6 @@ export default async function llmRoute(app) {
     return { text: r.text, provider: r.provider, usage: r.usage, latencyMs: r.latencyMs };
   });
 
-  /**
-   * Public demo for kayroslab-complete-with-ai-agents.html
-   * No X-Kayros-Secret required (exempted in index.mjs).
-   * Uses Mistral when MISTRAL_API_KEY is set, else default routing.
-   */
   app.post('/v1/demo/chat', async (req, reply) => {
     const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
       || req.ip
@@ -136,28 +148,71 @@ export default async function llmRoute(app) {
     } catch (e) { return reply.code(400).send({ error: String(e.message || e) }); }
   });
 
+  /**
+   * C: When Bearer session is present, tenantId/userId come from the token
+   * (never trust client tenant over session). Body tenantId only used when anonymous.
+   */
   app.post('/v1/govern/query', async (req, reply) => {
     const parsed = governQuerySchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'query requis', issues: parsed.error.issues });
     const { query, governance, sovereignty, provider, ideaId } = parsed.data;
-    const { llm, tools } = app.kayrosContext;
-    const orch = new (await import('../../core/index.mjs')).Orchestrator({ llm, tools: demoTools(), governance: new GovernanceService() });
+
+    const session = await tryAuthSession(app, req);
+    const tenantId = session?.tenantId || parsed.data.tenantId || null;
+    const userId = session?.sub || parsed.data.userId || null;
+    const teamId = parsed.data.teamId || null;
+    const organizationId = parsed.data.organizationId || null;
+
+    // Prefer shared engine-like path when available; else ephemeral orchestrator
+    const core = await import('../../../core/index.mjs');
+    const { llm, tools, governance: govSvc } = app.kayrosContext;
+    const orch = new core.Orchestrator({
+      llm,
+      tools: tools || core.demoTools(),
+      governance: govSvc || new core.GovernanceService(),
+      tenantId,
+      userId,
+      teamId,
+      organizationId,
+    });
     const plan = await orch.plan(query, { ideaId });
     const agents = [];
     let final = null, gate = null;
-    for await (const ev of orch.run(plan, { governance, sovereignty, provider })) {
+    for await (const ev of orch.run(plan, {
+      governance,
+      sovereignty,
+      provider,
+      tenantId,
+      userId,
+      teamId,
+      organizationId,
+    })) {
       if (ev.type === 'trace') agents.push(ev.agent);
       else if (ev.type === 'gate') { gate = ev; break; }
       else if (ev.type === 'final') final = ev;
     }
-    if (gate) return reply.code(202).send({ status: 'pending_review', gateId: gate.gateId, gateType: gate.gateType, trace: { agents } });
-    return { status: final.status, answer: final.answer ?? final.message, trace: { agents } };
+    if (gate) {
+      return reply.code(202).send({
+        status: 'pending_review',
+        gateId: gate.gateId,
+        gateType: gate.gateType,
+        trace: { agents },
+        scope: { tenantId, userId },
+      });
+    }
+    return {
+      status: final.status,
+      answer: final.answer ?? final.message,
+      trace: { agents },
+      scope: { tenantId, userId },
+    };
   });
 
   app.post('/v1/projeter/monitor', async (req, reply) => {
     const parsed = monitorSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'kpis[] et readings[] requis', issues: parsed.error.issues });
     const { kpis, readings, ideaId } = parsed.data;
+    const { evaluateKpis, alertsToSignals } = await import('../../../core/index.mjs');
     const { alerts } = evaluateKpis(kpis, readings);
     const signals = alertsToSignals(alerts, { ideaId });
     const reArbitrage = alerts.length ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId) } : null;

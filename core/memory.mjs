@@ -7,6 +7,7 @@ import {
   createL0, createL1, createL2, createL3,
   uid, nowIso,
 } from './memory-types.mjs';
+import { resolveMemoryScope } from './memory-scope.mjs';
 
 export function cosine(a, b) {
   if (!a || !b || a.length !== b.length) return 0;
@@ -16,7 +17,6 @@ export function cosine(a, b) {
   return dot / (Math.sqrt(na) * Math.sqrt(nb));
 }
 
-/** Mémoire partagée par idée (faits, hypothèses, contributions). Évoluée vers L1. */
 export class SharedMemory {
   constructor(ideaId) {
     this.ideaId = ideaId;
@@ -62,7 +62,6 @@ export class SharedMemory {
   }
 }
 
-/** Vector store en mémoire — même interface que Qdrant. */
 export class InMemoryVectorStore {
   constructor() { this._recs = new Map(); }
   async upsert({ id, ideaId, text, embedding, layer = 'l1', meta = {} }) {
@@ -83,7 +82,6 @@ export class InMemoryVectorStore {
   clear() { this._recs.clear(); }
 }
 
-/** Vector store Qdrant (REST). */
 export class QdrantVectorStore {
   constructor({ url = 'http://localhost:6333', collection = 'kayroslab', dim = 768, apiKey, fetchImpl } = {}) {
     this.url = String(url).replace(/\/$/, ''); this.collection = collection; this.dim = dim; this.apiKey = apiKey; this._fetch = fetchImpl;
@@ -132,8 +130,6 @@ export class QdrantVectorStore {
   }
 }
 
-// ========== File Offload Backend (L0) ==========
-
 export class FileOffloadBackend {
   constructor({ rootDir = './.kayros-l0', fs = null, path = null } = {}) {
     this.rootDir = rootDir;
@@ -165,8 +161,6 @@ export class FileOffloadBackend {
     } catch { return null; }
   }
 }
-
-// ========== File Layered Store (L1 / L2 / L3 persistence) ==========
 
 export class FileLayeredStore {
   constructor({ path = './.kayros-memory.json', fs = null } = {}) {
@@ -210,14 +204,11 @@ export class FileLayeredStore {
   }
 }
 
-// ========== LLM distillation helpers ==========
-
 const DISTILL_SYSTEM =
   'Tu es un analyste stratégique. À partir d\'une liste de faits atomiques, produis UN scénario consolidé. ' +
   'Réponds UNIQUEMENT par un objet JSON valide, sans markdown ni texte autour : ' +
   '{"title":"...","summary":"...","content":"...","patternType":"insight|competitive_gap|success_path|failure_mode|process|ontology_update|pattern"}';
 
-/** Extrait le premier objet JSON équilibré d\'une réponse LLM. */
 export function extractFirstObject(s) {
   const start = String(s ?? '').indexOf('{');
   if (start < 0) return null;
@@ -265,8 +256,6 @@ function heuristicDistill(type, group, ideaId) {
   };
 }
 
-// ========== Layered Memory (L0–L3) ==========
-
 export class LayeredMemory {
   constructor({ memoryService = null, store = null, offloadBackend = null, persistentStore = null } = {}) {
     this.memoryService = memoryService;
@@ -290,12 +279,6 @@ export class LayeredMemory {
     return item;
   }
 
-  /**
-   * Offload heavy L0 items only (size threshold). Short scratch stays active.
-   * @param {string} ideaId
-   * @param {string|null} step
-   * @param {{ minContentLength?: number }} [opts]
-   */
   async offload(ideaId, step = null, { minContentLength = 600 } = {}) {
     const refs = [];
     for (const [id, item] of this._l0) {
@@ -307,7 +290,6 @@ export class LayeredMemory {
         ? item.content.length
         : JSON.stringify(item.content ?? '').length;
 
-      // Keep short working items active for subsequent runs / canvas
       if (len < minContentLength && !item.filePath) continue;
 
       item.expiresAt = nowIso();
@@ -567,6 +549,22 @@ export class LayeredMemory {
     return out;
   }
 
+  /** Collect L3 along a resolved scope chain (user → team → org → tenant), deduped. */
+  collectCoreByScopes(scopes, { kind = null, k = Infinity } = {}) {
+    const seen = new Set();
+    const out = [];
+    for (const ref of scopes || []) {
+      if (!ref?.scope || !ref?.scopeId) continue;
+      for (const c of this.getCore({ scope: ref.scope, scopeId: ref.scopeId, kind })) {
+        if (seen.has(c.id)) continue;
+        seen.add(c.id);
+        out.push(c);
+        if (out.length >= k) return out;
+      }
+    }
+    return out;
+  }
+
   async save() {
     if (!this.persistentStore) return false;
     const snap = this.snapshot();
@@ -620,24 +618,24 @@ export class LayeredMemory {
   }
 
   /**
-   * Unified recall. L3 is scoped (scope / scopeId / tenantId) — never dumps all cores.
-   * If no scope is provided, L3 is omitted (safe multi-tenant default).
+   * Unified recall. L3 uses resolveMemoryScope — empty chain ⇒ no L3 (safe).
+   * Accepts scope/scopeId/tenantId/userId/teamId/organizationId/scopes[].
    */
-  async recall(query, {
-    ideaId = null,
-    layers = ['L1', 'L2', 'L3'],
-    k = 5,
-    scope = null,
-    scopeId = null,
-    tenantId = null,
-  } = {}) {
+  async recall(query, opts = {}) {
+    const {
+      ideaId = null,
+      layers = ['L1', 'L2', 'L3'],
+      k = 5,
+      kind = null,
+    } = opts;
+
     const result = { l1: [], l2: [], l3: [] };
+    const resolved = resolveMemoryScope(opts);
 
     if (layers.includes('L3')) {
-      if (scope || scopeId || tenantId) {
-        result.l3 = this.getCore({ scope, scopeId: scopeId || tenantId, tenantId }).slice(0, k);
+      if (resolved.scopes.length) {
+        result.l3 = this.collectCoreByScopes(resolved.scopes, { kind, k });
       }
-      // else: intentionally empty — prevent cross-tenant L3 leakage
     }
 
     if (this.memoryService && (layers.includes('L1') || layers.includes('L2'))) {
@@ -668,14 +666,9 @@ export class LayeredMemory {
     return result;
   }
 
-  async buildContextBlock(query, {
-    ideaId = null,
-    k = 4,
-    scope = null,
-    scopeId = null,
-    tenantId = null,
-  } = {}) {
-    const { l1, l2, l3 } = await this.recall(query, { ideaId, k, scope, scopeId, tenantId });
+  async buildContextBlock(query, opts = {}) {
+    const { ideaId = null, k = 4 } = opts;
+    const { l1, l2, l3 } = await this.recall(query, { ...opts, ideaId, k });
     const parts = [];
     if (l3.length) {
       parts.push('### Connaissances stables (L3)');
@@ -717,3 +710,4 @@ export class LayeredMemory {
 }
 
 export { createL0, createL1, createL2, createL3 } from './memory-types.mjs';
+export { resolveMemoryScope, mergeScopeOpts } from './memory-scope.mjs';

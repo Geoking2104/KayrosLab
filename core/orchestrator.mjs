@@ -1,11 +1,13 @@
 // KayrosLab — Orchestrateur (Plan-and-Solve + ReAct), memory-aware, Planner LLM.
 // Unified plan via PlannerAgent; quant events; autoDistill uses this.llm by default.
+// L3 scope: merges engine defaults (tenantId, userId, …) with run opts.
 
 import { classifySensitive, policyFor } from './governance.mjs';
 import { evaluateKpis, alertsToSignals } from './loop.mjs';
 import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 import { defaultFallbackSteps } from './agents/planner-agent.mjs';
 import { parsePlanSteps, ensureSynthesizerLast, extractFirstArray, salvageObjects } from './plan-parse.mjs';
+import { resolveMemoryScope } from './memory-scope.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -28,6 +30,13 @@ export class Orchestrator {
     llm, tools = null, memory = null, layered = null, governance = null,
     classifier = null, recallK = 3, plannerModel = null, agents = null,
     quantGuidance = null,
+    // A: engine-level L3 defaults
+    tenantId = null,
+    defaultScope = null,
+    defaultScopeId = null,
+    userId = null,
+    teamId = null,
+    organizationId = null,
   } = {}) {
     if (!llm) throw new Error('Orchestrator: llm (KayrosLLM) requis');
     this.llm = llm;
@@ -40,10 +49,23 @@ export class Orchestrator {
     this.plannerModel = plannerModel;
     this.agents = agents || createAllAgents({ llm, tools, memory });
     this.quantGuidance = quantGuidance || null;
+    this.scopeDefaults = {
+      tenantId: tenantId || null,
+      defaultScope: defaultScope || null,
+      defaultScopeId: defaultScopeId || null,
+      userId: userId || null,
+      teamId: teamId || null,
+      organizationId: organizationId || null,
+    };
   }
 
   _hasVectorMemory() { return !!this.memory && typeof this.memory.recall === 'function' && typeof this.memory.remember === 'function'; }
   _hasLayered() { return !!this.layered && typeof this.layered.recall === 'function'; }
+
+  /** Merge run opts over engine scope defaults. */
+  _resolveRunScope(opts = {}) {
+    return resolveMemoryScope(opts, this.scopeDefaults);
+  }
 
   _quantSnapshot() {
     if (!this.quantGuidance && !this.agents) return null;
@@ -64,7 +86,6 @@ export class Orchestrator {
     return defaultFallbackSteps();
   }
 
-  /** Single planning path: prefer PlannerAgent.createPlan, else shared parse + fallback. */
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     if (ctx.llmPlan === false) {
@@ -98,7 +119,6 @@ export class Orchestrator {
         }
       } catch { /* soft → fallback */ }
     } else {
-      // Legacy direct LLM path if no Planner agent
       try {
         const opts = {};
         if (ctx.provider) opts.provider = ctx.provider;
@@ -135,12 +155,15 @@ export class Orchestrator {
     const doOffload = opts.offload !== false;
     const doAutoDistill = opts.autoDistill === true;
 
+    const scopeResolved = this._resolveRunScope(opts);
+
     yield {
       type: 'start',
       ideaId: plan.ideaId,
       goal: plan.goal,
       quant: this._quantSnapshot(),
       degraded: plan.degraded || null,
+      scope: scopeResolved,
       ts: new Date().toISOString(),
     };
 
@@ -151,15 +174,20 @@ export class Orchestrator {
           contextBlock = await this.layered.buildContextBlock(plan.goal, {
             ideaId: plan.ideaId,
             k: this.recallK,
-            scope: opts.scope || null,
-            scopeId: opts.scopeId || opts.tenantId || null,
-            tenantId: opts.tenantId || null,
+            scopes: scopeResolved.scopes,
+            tenantId: scopeResolved.tenantId,
+            scope: scopeResolved.scope,
+            scopeId: scopeResolved.scopeId,
+            userId: opts.userId ?? this.scopeDefaults.userId,
+            teamId: opts.teamId ?? this.scopeDefaults.teamId,
+            organizationId: opts.organizationId ?? this.scopeDefaults.organizationId,
           });
           if (contextBlock) {
             const snap = this.layered.snapshot(plan.ideaId);
             yield {
               type: 'recall', ideaId: plan.ideaId, source: 'layered',
               stats: snap.stats, preview: contextBlock.slice(0, 400),
+              scope: scopeResolved,
               ts: new Date().toISOString(),
             };
           }
@@ -185,7 +213,6 @@ export class Orchestrator {
       let degraded = null;
 
       if (s.tool && this.tools && !specialist) {
-        // Tool-first when no specialist: avoid wasted LLM call
         observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
         actionType = 'tool';
         actionName = s.tool;
@@ -216,7 +243,6 @@ export class Orchestrator {
       const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
 
       this.memory?.addContribution?.({ actor: s.agent, content: obsText });
-      // Prefer layered L1 when available; avoid dual-write noise
       if (doRemember && this._hasVectorMemory() && !this._hasLayered()) {
         try { await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` }); } catch { /* soft */ }
       }
