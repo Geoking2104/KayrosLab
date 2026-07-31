@@ -1,5 +1,5 @@
 /**
- * Phase 1 + 4 — Live governed cycle + idea lifecycle
+ * Phase 1 + 4 + 5 — Live cycle, idea lifecycle, positionning → L1
  * POST /v1/cycle/run
  * POST /v1/cycle/reactivate
  * GET  /v1/cycle/status
@@ -27,9 +27,10 @@ const cycleRunSchema = z.object({
   userId: z.string().optional(),
   teamId: z.string().optional(),
   organizationId: z.string().optional(),
-  /** When true (default), create/update idea in repository if available */
   syncIdea: z.boolean().optional().default(true),
   title: z.string().max(300).optional(),
+  /** Phase 5 — inject competitor L1 facts (default true) */
+  positionning: z.boolean().optional().default(true),
 });
 
 const reactivateSchema = z.object({
@@ -123,7 +124,8 @@ export default async function cycleRoute(app) {
     const organizationId = body.organizationId || null;
     const ideaId = body.ideaId || `idea_${Date.now().toString(36)}`;
 
-    const { engine, journal } = app.kayrosContext;
+    const ctx = app.kayrosContext;
+    const { engine, journal } = ctx;
     if (!engine?.orchestrator) {
       return reply.code(503).send({ error: 'engine non disponible' });
     }
@@ -174,6 +176,14 @@ export default async function cycleRoute(app) {
       teamId,
       organizationId,
       waitGate: false,
+      positionning: body.positionning,
+      positionningKeys: {
+        googleApiKey: ctx.GOOGLE_API_KEY || '',
+        googleCx: ctx.GOOGLE_CX || '',
+        githubToken: ctx.GITHUB_TOKEN || '',
+        gitlabToken: ctx.GITLAB_TOKEN || '',
+        gitlabBaseUrl: ctx.GITLAB_BASE_URL || '',
+      },
     };
 
     try {
@@ -303,7 +313,6 @@ export default async function cycleRoute(app) {
     };
   });
 
-  /** Reactivate dormant idea; optionally start a new cycle. */
   app.post('/v1/cycle/reactivate', async (req, reply) => {
     const parsed = reactivateSchema.safeParse(req.body ?? {});
     if (!parsed.success) {
@@ -348,14 +357,11 @@ export default async function cycleRoute(app) {
     }
 
     const query = body.query || idea.title || idea.intake?.summary || idea.id;
-    // Delegate to same process: client should call /v1/cycle/run with ideaId;
-    // optional inline run when engine present.
     const { engine } = app.kayrosContext;
     if (!engine?.orchestrator) {
       return { ok: true, idea, run: false, hint: 'POST /v1/cycle/run with ideaId' };
     }
 
-    // Non-stream inline reactivation run (stream clients use /run after this)
     if (body.stream !== false) {
       return {
         ok: true,
