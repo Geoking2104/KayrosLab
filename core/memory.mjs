@@ -543,6 +543,79 @@ export class LayeredMemory {
     return out;
   }
 
+  getScenarioById(id) {
+    return this._l2.get(id) || null;
+  }
+
+  /**
+   * Promote a validated L2 scenario into L3 core memory.
+   * Marks L2 reviewStatus = validated when promoting.
+   */
+  async promoteL2ToL3(l2Id, {
+    scope = 'tenant',
+    scopeId = null,
+    kind = 'norm',
+    title = null,
+    content = null,
+  } = {}) {
+    const sc = this._l2.get(l2Id);
+    if (!sc) {
+      const e = new Error(`L2 introuvable: ${l2Id}`);
+      e.code = 'L2_NOT_FOUND';
+      throw e;
+    }
+    if (!scopeId) {
+      const e = new Error('promoteL2ToL3: scopeId requis');
+      e.code = 'SCOPE_REQUIRED';
+      throw e;
+    }
+    sc.reviewStatus = 'validated';
+    sc.updatedAt = nowIso();
+    this._dirty = true;
+
+    const core = await this.updateCore({
+      scope,
+      scopeId,
+      kind,
+      title: title || sc.title,
+      content: content || sc.content || sc.summary,
+      relatedL2Ids: [sc.id, ...(sc.relatedL1Ids ? [] : [])].concat(
+        Array.isArray(sc.relatedL2Ids) ? sc.relatedL2Ids : [],
+      ).filter((x, i, a) => a.indexOf(x) === i),
+      sourceRefs: [{ type: 'l2', id: sc.id, excerpt: (sc.summary || '').slice(0, 120) }],
+    });
+    return { core, scenario: sc };
+  }
+
+  /** Idea-scoped inspector payload (L0 canvas stats + L1 + L2). */
+  inspectIdea(ideaId, { tenantId = null } = {}) {
+    if (!ideaId) throw new Error('inspectIdea: ideaId requis');
+    const l1 = this.getAtomicFacts({ ideaId, tenantId });
+    const l2 = this.getScenarios({ ideaId });
+    const canvas = this.getWorkingCanvas(ideaId);
+    const l3 = tenantId
+      ? this.getCore({ tenantId })
+      : [];
+    return {
+      ideaId,
+      tenantId: tenantId || null,
+      l0: canvas.stats,
+      canvas: { mermaid: canvas.mermaid, stats: canvas.stats },
+      l1: l1.map((f) => ({
+        id: f.id, type: f.type, content: f.content, confidence: f.confidence, status: f.status,
+      })),
+      l2: l2.map((s) => ({
+        id: s.id, title: s.title, summary: s.summary, reviewStatus: s.reviewStatus,
+        patternType: s.patternType, confidence: s.confidence,
+      })),
+      l3: l3.map((c) => ({
+        id: c.id, scope: c.scope, scopeId: c.scopeId, kind: c.kind, title: c.title,
+        content: c.content.slice(0, 200), version: c.version,
+      })),
+      counts: { l0: canvas.stats.total, l1: l1.length, l2: l2.length, l3: l3.length },
+    };
+  }
+
   async updateCore(p) {
     const core = createL3(p);
     for (const existing of this._l3.values()) {
@@ -553,7 +626,6 @@ export class LayeredMemory {
         break;
       }
     }
-    // Optional embedding for ranking
     if (this.memoryService && core.content) {
       try {
         core.embedding = await this.memoryService.embeddings.embed(
@@ -576,6 +648,10 @@ export class LayeredMemory {
       out.push(c);
     }
     return out;
+  }
+
+  getCoreById(id) {
+    return this._l3.get(id) || null;
   }
 
   /** Collect L3 along scope chain; optional rank by query. */
@@ -614,7 +690,6 @@ export class LayeredMemory {
     const data = await this.persistentStore.load({ tenantId });
     if (!data) return false;
 
-    // When loading a tenant partition, replace only that tenant's L3/L1; full load clears all
     if (!tenantId) {
       this._l1.clear();
       this._l2.clear();
@@ -739,11 +814,6 @@ export class LayeredMemory {
     return parts.length ? parts.join('\n') : '';
   }
 
-  /**
-   * Snapshot. F: pass tenantId to filter L1 + L3 for that tenant.
-   * @param {string|null} ideaId
-   * @param {{ tenantId?: string|null }} [opts]
-   */
   snapshot(ideaId = null, { tenantId = null } = {}) {
     const filterIdea = (map) => {
       if (!ideaId) return [...map.values()];
@@ -758,7 +828,6 @@ export class LayeredMemory {
     if (tenantId) {
       l1 = l1.filter((f) => l1BelongsToTenant(f, tenantId));
       l3 = l3.filter((c) => l3BelongsToTenant(c, tenantId));
-      // L2 has no tenant field; keep idea-filtered only
     }
 
     return {
