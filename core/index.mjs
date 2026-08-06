@@ -10,76 +10,259 @@ export * from './embeddings.mjs';
 export * from './embed-select.mjs';
 export * from './novelty.mjs';
 export * from './kpi-drift.mjs';
-export * from './governance.mjs';
-export * from './orchestrator.mjs';
-export * from './cycle-lifecycle.mjs';
-export * from './model.mjs';
-export * from './quant-guidance.mjs';
-export * from './ki.mjs';
-export * from './evaluation.mjs';
-export * from './execution.mjs';
-export * from './impact.mjs';
+export * from './projection.mjs';
 export * from './loop.mjs';
-export * from './notify.mjs';
+export * from './model.mjs';
+export * from './cycle-lifecycle.mjs';
+export * from './shared-data.mjs';
+export * from './repository.mjs';
+export * from './pg-store.mjs';
+export * from './intake.mjs';
+export * from './scorecard.mjs';
+export * from './evaluation.mjs';
+export * from './impact.mjs';
+export * from './execution.mjs';
+export * from './reporting.mjs';
 export * from './campaign.mjs';
 export * from './comments.mjs';
+export * from './notify.mjs';
 export * from './auth.mjs';
+export * from './ki.mjs';
+export * from './governance.mjs';
+export * from './orchestrator.mjs';
+export * from './timer.mjs';
 export * from './connectors.mjs';
-export * from './account-link-store.mjs';
-export * from './account-link-service.mjs';
-export * from './connectors-motif.mjs';
-export * from './connectors-slack-deep.mjs';
-export * from './pg-store.mjs';
 export * from './positionning/index.mjs';
-export * from './agents/index.mjs';
+export * from './quant-guidance.mjs';
+export * from './quant-schema.mjs';
+export * from './quant-ui.mjs';
+export * from './plan-parse.mjs';
 
-import { KayrosLLM } from './kayros-llm.mjs';
-import { ToolRegistry } from './tool-registry.mjs';
-import { Governance } from './governance.mjs';
+import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
+import { demoTools } from './tool-registry.mjs';
+import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
+import {
+  InMemoryVectorStore, QdrantVectorStore, LayeredMemory,
+  FileOffloadBackend, FileLayeredStore,
+} from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
-import { createEmbeddingsWithFallback } from './embed-select.mjs';
-import { QuantGuidance } from './quant-guidance.mjs';
-import { createDefaultAgents } from './agents/index.mjs';
+import { createAllAgents } from './agents/index.mjs';
+import { recommendForEngine, filterGuidanceByAvailable, normalizeRole } from './quant-guidance.mjs';
 
-/**
- * createEngine — assemble le cœur gouverné.
- * @param {object} opts
- */
+export function rebindAgentsQuant(agents, quantGuidance, baseModel) {
+  if (!agents || !quantGuidance) return agents;
+  for (const [name, agent] of Object.entries(agents)) {
+    if (!agent) continue;
+    const roleKey = normalizeRole(name);
+    const quantRec = quantGuidance.byRole?.[roleKey]
+      || quantGuidance.byRole?.[name]
+      || quantGuidance.global
+      || null;
+    let preferredModel = null;
+    if (typeof quantGuidance.resolveForRole === 'function' && baseModel) {
+      preferredModel = quantGuidance.resolveForRole(roleKey, baseModel)
+        || quantGuidance.resolveForRole(name, baseModel);
+    } else if (quantGuidance.resolvedDefaultModel) {
+      preferredModel = quantGuidance.resolvedDefaultModel;
+    }
+    agent.preferredModel = preferredModel;
+    agent.quantRec = quantRec;
+  }
+  return agents;
+}
+
+async function tryLoadNodeIo() {
+  try {
+    if (typeof process === 'undefined' || !process.versions?.node) return null;
+    const [fs, path] = await Promise.all([
+      import('node:fs/promises'),
+      import('node:path'),
+    ]);
+    return { fs, path };
+  } catch {
+    return null;
+  }
+}
+
 export function createEngine(opts = {}) {
-  const sovereignty = opts.sovereignty || 'local';
-  const model = opts.model || 'llama3.1:8b-instruct';
-  const quant = opts.quant || null;
+  const baseModel = opts.model || 'llama3.2';
+
+  const scopeDefaults = {
+    tenantId: opts.tenantId || null,
+    defaultScope: opts.defaultScope || (opts.tenantId ? 'tenant' : null),
+    defaultScopeId: opts.defaultScopeId || opts.tenantId || null,
+    userId: opts.userId || null,
+    teamId: opts.teamId || null,
+    organizationId: opts.organizationId || null,
+  };
+
+  let quantGuidance = recommendForEngine({
+    model: baseModel,
+    quant: opts.quant || null,
+    roleQuant: opts.roleQuant || {},
+    preferHigherQuant: !!opts.preferHigherQuant,
+    sovereignty: opts.sovereignty || null,
+    availableModels: opts.availableModels || null,
+  });
+
+  const providers = { mock: new MockProvider() };
+  let ollamaProvider = null;
+  if (opts.sovereignty === 'local') {
+    const defaultModel = quantGuidance.resolvedDefaultModel || baseModel;
+    ollamaProvider = new OllamaProvider({
+      endpoint: opts.ollamaEndpoint,
+      defaultModel,
+      fetchImpl: opts.fetchImpl,
+    });
+    providers.ollama = ollamaProvider;
+  }
+  if (opts.backendUrl) {
+    providers.backend = new HttpBackendProvider({
+      url: opts.backendUrl, provider: opts.backendProvider, secret: opts.secret, fetchImpl: opts.fetchImpl,
+    });
+  }
+  const defaultProvider = opts.backendUrl ? 'backend' : (opts.sovereignty === 'local' ? 'ollama' : 'mock');
+
+  const policy = new RoutingPolicy({
+    defaultProvider,
+    fallback: 'mock',
+    roleModel: opts.roleModel || {},
+    roleQuant: opts.roleQuant || {},
+    defaultQuant: opts.quant || null,
+    preferHigherQuant: !!opts.preferHigherQuant,
+    availableModels: opts.availableModels || null,
+  });
+
+  const llm = new KayrosLLM(providers, policy);
+  const tools = demoTools();
+  const governance = new GovernanceService();
+
+  let vectors;
+  if (opts.qdrantUrl) {
+    vectors = new QdrantVectorStore({
+      url: opts.qdrantUrl, collection: opts.qdrantCollection || 'kayroslab',
+      dim: opts.qdrantDim || 768, apiKey: opts.qdrantApiKey, fetchImpl: opts.fetchImpl,
+    });
+  } else {
+    vectors = new InMemoryVectorStore();
+  }
 
   let embeddings;
   if (opts.embeddingsUrl) embeddings = new HttpEmbeddings({ url: opts.embeddingsUrl, model: opts.embedModel, secret: opts.secret, fetchImpl: opts.fetchImpl });
-  else if (sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel || 'nomic-embed-text', fetchImpl: opts.fetchImpl });
+  else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel || 'nomic-embed-text', fetchImpl: opts.fetchImpl });
   else embeddings = new MockEmbeddings();
 
-  // Soft-fallback chain when requested
-  if (opts.embedFallback) {
-    embeddings = createEmbeddingsWithFallback({ forceMock: opts.forceMockEmbed, endpoint: opts.ollamaEndpoint, fetchImpl: opts.fetchImpl });
+  const memory = new MemoryService({ embeddings, store: vectors });
+
+  let offloadBackend = null;
+  if (opts.offloadRoot || opts.fs) {
+    offloadBackend = new FileOffloadBackend({
+      rootDir: opts.offloadRoot || './.kayros-l0',
+      fs: opts.fs || null,
+      path: opts.path || null,
+    });
   }
 
-  const vectors = opts.vectors || null;
-  const memory = new MemoryService({ embeddings, store: vectors });
-  const llm = opts.llm || new KayrosLLM({ model, quant, sovereignty, ollamaEndpoint: opts.ollamaEndpoint, fetchImpl: opts.fetchImpl });
-  const tools = opts.tools || new ToolRegistry();
-  const governance = opts.governance || new Governance();
-  const quantGuidance = opts.quantGuidance || new QuantGuidance();
-  const agents = opts.agents || createDefaultAgents({ llm, tools });
+  let persistentStore = null;
+  if (opts.memoryPath || opts.fs) {
+    persistentStore = new FileLayeredStore({
+      path: opts.memoryPath || './.kayros-memory.json',
+      fs: opts.fs || null,
+      partitionByTenant: !!opts.partitionByTenant,
+    });
+  }
+
+  const layered = new LayeredMemory({
+    memoryService: memory,
+    store: vectors,
+    offloadBackend,
+    persistentStore,
+  });
+
+  if (persistentStore?.enabled) {
+    layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
+  }
+
+  const agents = createAllAgents({
+    llm, tools, memory, quantGuidance, baseModel,
+  });
 
   // Inject embeddings into Bisociateur when available (enables real novelty scoring)
   if (agents.Bisociateur && embeddings) {
     agents.Bisociateur.embeddings = embeddings;
   }
 
-  const orchestrator = opts.orchestrator || new Orchestrator({
-    llm, tools, governance, memory, agents, quantGuidance,
+  const orchestrator = new Orchestrator({
+    llm, tools, governance, memory, layered,
+    plannerModel: opts.plannerModel,
+    agents,
+    quantGuidance,
+    ...scopeDefaults,
   });
 
-  return {
+  const engine = {
     llm, tools, governance, vectors, embeddings,
-    memory, quantGuidance, agents, orchestrator,
+    memory, layered, orchestrator, agents,
+    quantGuidance,
+    baseModel,
+    scopeDefaults,
   };
+
+  engine.attachNodeFs = async () => {
+    if (opts.fs) return true;
+    if (!opts.memoryPath && !opts.offloadRoot) return false;
+    const io = await tryLoadNodeIo();
+    if (!io) return false;
+    if (opts.offloadRoot || opts.memoryPath) {
+      layered.offloadBackend = new FileOffloadBackend({
+        rootDir: opts.offloadRoot || './.kayros-l0',
+        fs: io.fs,
+        path: io.path,
+      });
+      layered.persistentStore = new FileLayeredStore({
+        path: opts.memoryPath || './.kayros-memory.json',
+        fs: io.fs,
+        partitionByTenant: !!opts.partitionByTenant,
+      });
+      await layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
+    }
+    return true;
+  };
+
+  if ((opts.memoryPath || opts.offloadRoot) && !opts.fs) {
+    engine.persistenceReady = engine.attachNodeFs().catch(() => false);
+  } else {
+    engine.persistenceReady = Promise.resolve(!!(persistentStore?.enabled));
+  }
+
+  engine.rebindFromAvailable = async (tags) => {
+    if (!Array.isArray(tags) || !tags.length) return quantGuidance;
+    quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
+    engine.quantGuidance = quantGuidance;
+    orchestrator.quantGuidance = quantGuidance;
+    if (policy) policy.availableModels = tags;
+    if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
+      ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
+    }
+    rebindAgentsQuant(agents, quantGuidance, baseModel);
+    return quantGuidance;
+  };
+
+  const maybeSync = async () => {
+    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') {
+      return quantGuidance;
+    }
+    try {
+      const tags = await ollamaProvider.listModels();
+      if (Array.isArray(tags) && tags.length) {
+        return engine.rebindFromAvailable(tags);
+      }
+    } catch { /* soft */ }
+    return quantGuidance;
+  };
+
+  engine.syncAvailableQuants = maybeSync();
+
+  return engine;
 }
