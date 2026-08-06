@@ -3,6 +3,8 @@
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=flat-square)](https://www.kayroslab.com)
 [![Live demo](https://img.shields.io/badge/Demo-Live_app-2563eb?style=flat-square)](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html)
 [![Pages](https://img.shields.io/badge/GitHub_Pages-Site-7c3aed?style=flat-square)](https://geoking2104.github.io/KayrosLab/)
+[![Deploy Pages](https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-positionning-pages.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-positionning-pages.yml)
+[![Core tests](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
 **From weak signal to strategic decision — governed.**
