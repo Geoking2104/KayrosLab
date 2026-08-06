@@ -12,10 +12,17 @@ on:
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
       - 'ontology-explorer.html'
+      - 'ontology-panel.html'
       - 'tokens.css'
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
+      - 'CNAME'
+      - '.github/workflows/deploy-positionning-pages.yml'
   workflow_dispatch:
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -23,25 +30,88 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/positionning-app/package-lock.json
 
-      - run: npm ci
+      - name: Install & build positionning-app
         working-directory: frontend/positionning-app
-      - run: npm run build
-        working-directory: frontend/positionning-app
+        run: |
+          npm ci
+          npm run build
 
-      - run: |
+      - name: Assemble deploy folder
+        run: |
+          set -e
           mkdir -p deploy/positionner-app
-          cp index.html index.fr.html kayroslab-complete-with-ai-agents.html tokens.css livret-blanc-kayroslab.html livret-blanc-positionner.html livret-blanc-ecouter.html whitepaper-*.html deploy/
-          cp cycle-timeline.html portfolio-dormant.html portfolio-board.html ontology-explorer.html deploy/ 2>/dev/null || true
-          cp -r frontend/positionning-app/dist/* deploy/positionner-app/
-          touch deploy/.nojekyll
-          cp CNAME deploy/
 
-      - uses: peaceiris/actions-gh-pages@v3
+          # Core static pages (must exist)
+          for f in index.html index.fr.html tokens.css CNAME; do
+            if [ ! -f "$f" ]; then
+              echo "ERROR: required file missing: $f" >&2
+              exit 1
+            fi
+            cp "$f" deploy/
+          done
+
+          # Main demo — size guard against accidental truncation
+          DEMO="kayroslab-complete-with-ai-agents.html"
+          if [ ! -f "$DEMO" ]; then
+            echo "ERROR: $DEMO is missing" >&2
+            exit 1
+          fi
+          SIZE=$(wc -c < "$DEMO")
+          echo "Demo size: ${SIZE} bytes"
+          if [ "$SIZE" -lt 50000 ]; then
+            echo "ERROR: $DEMO is only ${SIZE} bytes (expected > 50 KB). Possible truncation." >&2
+            exit 1
+          fi
+          cp "$DEMO" deploy/
+
+          # Optional HTML pages
+          for f in \
+            cycle-timeline.html \
+            portfolio-dormant.html \
+            portfolio-board.html \
+            ontology-explorer.html \
+            ontology-panel.html \
+            livret-blanc-kayroslab.html \
+            livret-blanc-positionner.html \
+            livret-blanc-ecouter.html \
+            livret-blanc-hackathon.html \
+            whitepaper-kayroslab.html \
+            whitepaper-position.html \
+            whitepaper-listen.html \
+            whitepaper-hackathon.html
+          do
+            if [ -f "$f" ]; then
+              cp "$f" deploy/
+              echo "copied $f"
+            else
+              echo "skip (missing) $f"
+            fi
+          done
+
+          # Built React app
+          if [ -d frontend/positionning-app/dist ]; then
+            cp -r frontend/positionning-app/dist/* deploy/positionner-app/
+          else
+            echo "ERROR: positionning-app dist/ missing after build" >&2
+            exit 1
+          fi
+
+          touch deploy/.nojekyll
+          echo "Deploy folder contents:"
+          find deploy -type f | sort
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: deploy
