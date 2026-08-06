@@ -1,7 +1,10 @@
 // KayrosLab — Boucle Projeter -> Ecouter (EF-43).
 // Evalue periodiquement les KPIs de suivi ; si un seuil est franchi, produit des signaux
 // a re-injecter dans le corpus d'Ecouter et propose un re-arbitrage.
+// V16: also surfaces KPI drift alerts via kpi-drift.mjs.
 // Ordonnanceur injectable => testable sans timers reels.
+
+import { evaluateKpiDrifts, driftsToSignals } from './kpi-drift.mjs';
 
 /** Compare une valeur a un seuil selon un comparateur. */
 function compare(v, cmp, t) {
@@ -44,6 +47,26 @@ export function alertsToSignals(alerts = [], { ideaId = 'idea', now } = {}) {
     contenu: `Seuil KPI "${a.name}" franchi (${a.value} ${a.comparator} ${a.threshold}) — a re-surveiller.`,
     kpiId: a.kpiId,
   }));
+}
+
+/**
+ * Combined threshold + drift evaluation for a monitoring tick (V16).
+ * @param {Object[]} kpis
+ * @param {{value:number, ts?:string, kpiId?:string}[]} readings
+ * @param {{ideaId?:string}} [opts]
+ * @returns {{ alerts:any[], drifts:any[], signals:any[], ok:any[] }}
+ */
+export function evaluateKpisWithDrift(kpis = [], readings = [], opts = {}) {
+  const { alerts, ok } = evaluateKpis(kpis, readings);
+  const { drifts } = evaluateKpiDrifts(kpis, readings);
+  const thresholdSignals = alertsToSignals(alerts, opts);
+  const driftSignals = driftsToSignals(drifts, opts);
+  return {
+    alerts,
+    drifts,
+    ok,
+    signals: [...thresholdSignals, ...driftSignals],
+  };
 }
 
 const defaultScheduler = {
