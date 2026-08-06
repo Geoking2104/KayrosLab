@@ -1,5 +1,29 @@
 # Changelog
 
+## Unreleased / 2026-08-06
+
+### Added
+- **Embedding-based novelty scoring** for Bisociator collisions (`core/novelty.mjs`)
+  - `buildCollisionEmbedText()` — structured text for embeddings (Framework + Mechanism + Proposal + Bridge)
+  - `scoreNovelty()` — composite novelty from intra-batch diversity, memory distance, and input distance
+  - `scoreCollisions()` — high-level embed + rank helper
+  - `filterDiverse()` — soft near-duplicate filter
+- **Soft-fallback embedding model selection** (`core/embed-select.mjs`)
+  - Priority: `qwen3-embedding:0.6b` → `bge-m3` → `mxbai-embed-large` → `nomic-embed-text` → Mock
+  - Env override via `KAYROS_EMBED_MODEL`
+- **BisociateurAgent upgrades**
+  - Richer structured collisions (`proposal`, `mechanismTransferred`, `firstExperiment`)
+  - 7 analogy frameworks (added Mycelial Network, Phase Transition)
+  - Optional real novelty scoring when embeddings are injected
+  - `runMultiCollision()` — generate & rank multiple collisions by novelty
+- Embeddings instance is now injected into the Bisociateur by `createEngine()` when available
+
+### Notes
+- Heuristic novelty/feasibility scores remain as fallback for offline / mock mode
+- Public demo page (`kayroslab-complete-with-ai-agents.html`) still uses client-side mock flow; engine-side novelty is ready for the next UI iteration
+
+---
+
 ## v0.2.0 (2026-07-23)
 
 ### Added
