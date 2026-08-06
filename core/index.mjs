@@ -7,6 +7,8 @@ export * from './memory-types.mjs';
 export * from './memory-scope.mjs';
 export * from './memory-rank.mjs';
 export * from './embeddings.mjs';
+export * from './embed-select.mjs';
+export * from './novelty.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
@@ -147,7 +149,7 @@ export function createEngine(opts = {}) {
 
   let embeddings;
   if (opts.embeddingsUrl) embeddings = new HttpEmbeddings({ url: opts.embeddingsUrl, model: opts.embedModel, secret: opts.secret, fetchImpl: opts.fetchImpl });
-  else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel, fetchImpl: opts.fetchImpl });
+  else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel || 'nomic-embed-text', fetchImpl: opts.fetchImpl });
   else embeddings = new MockEmbeddings();
 
   const memory = new MemoryService({ embeddings, store: vectors });
@@ -184,6 +186,11 @@ export function createEngine(opts = {}) {
   const agents = createAllAgents({
     llm, tools, memory, quantGuidance, baseModel,
   });
+
+  // Inject embeddings into Bisociateur when available (enables real novelty scoring)
+  if (agents.Bisociateur && embeddings) {
+    agents.Bisociateur.embeddings = embeddings;
+  }
 
   const orchestrator = new Orchestrator({
     llm, tools, governance, memory, layered,

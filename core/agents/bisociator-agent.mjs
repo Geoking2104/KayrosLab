@@ -1,5 +1,5 @@
 import { BaseAgent } from './base-agent.mjs';
-import { buildCollisionEmbedText, scoreCollisions } from '../novelty.mjs';
+import { scoreCollisions } from '../novelty.mjs';
 
 const ANALOGY_FRAMEWORKS = [
   {
@@ -49,10 +49,9 @@ export class BisociateurAgent extends BaseAgent {
     });
     this._toolNames = [];
     this.frameworks = opts.frameworks || ANALOGY_FRAMEWORKS;
-    this.embeddings = opts.embeddings || null; // optional Embeddings instance for real novelty
+    this.embeddings = opts.embeddings || null;
   }
 
-  /** Single LLM path: bisociation on goal+task (no double complete). */
   async execute(task, ctx = {}) {
     const brief = [ctx.goal, task].filter(Boolean).join('\n');
     const collision = await this.runBisociation(brief || task, ctx);
@@ -67,10 +66,6 @@ export class BisociateurAgent extends BaseAgent {
     };
   }
 
-  /**
-   * Generate one or more collisions.
-   * When embeddings are available, computes real embedding-based novelty.
-   */
   async runBisociation(brief, ctx = {}) {
     const framework = this._selectFramework(brief);
     const domain = { name: framework.name, mechanism: framework.mechanism, source: framework.name };
@@ -110,11 +105,18 @@ export class BisociateurAgent extends BaseAgent {
         `Applied to brief "${String(brief).substring(0, 50)}...": novel recombination identified.`;
     }
 
-    const proposal = this._extractSection(collisionOutput, ['proposal', 'proposition', 'idée']) ||
+    const proposal =
+      this._extractSection(collisionOutput, ['proposal', 'proposition', 'idée']) ||
       collisionOutput.slice(0, 280);
-    const mechanismTransferred = this._extractSection(collisionOutput, ['mechanism', 'mécanisme', 'bridge', 'pont']) ||
+    const mechanismTransferred =
+      this._extractSection(collisionOutput, ['mechanism', 'mécanisme', 'bridge', 'pont']) ||
       framework.mechanism;
-    const firstExperiment = this._extractSection(collisionOutput, ['experiment', 'expérience', 'test', 'first experiment']);
+    const firstExperiment = this._extractSection(collisionOutput, [
+      'experiment',
+      'expérience',
+      'test',
+      'first experiment',
+    ]);
 
     let collision = {
       framework: domain,
@@ -122,13 +124,11 @@ export class BisociateurAgent extends BaseAgent {
       proposal,
       mechanismTransferred,
       firstExperiment,
-      // Legacy heuristic scores (kept for backward compatibility)
       noveltyScore: 65 + (String(brief).length % 30),
       feasibilityScore: 40 + (String(brief).split(' ').length % 40),
       degraded,
     };
 
-    // Optional: real embedding-based novelty when embeddings are injected
     const emb = ctx.embeddings || this.embeddings;
     if (emb && typeof emb.embedBatch === 'function') {
       try {
@@ -154,23 +154,15 @@ export class BisociateurAgent extends BaseAgent {
     return collision;
   }
 
-  /** Generate multiple collisions (different frameworks) and rank by novelty. */
   async runMultiCollision(brief, ctx = {}, { k = 3 } = {}) {
     const selected = this._selectFrameworks(brief, k);
     const collisions = [];
 
     for (const fw of selected) {
-      // Temporarily force framework by running with a synthetic brief that biases selection
-      const c = await this.runBisociation(brief, {
-        ...ctx,
-        // We override selection by calling the internal path with fixed framework
-      });
-      // Re-run the generation with explicit framework for diversity
       const forced = await this._generateWithFramework(brief, fw, ctx);
       collisions.push(forced);
     }
 
-    // Score & rank if embeddings available
     const emb = ctx.embeddings || this.embeddings;
     if (emb && collisions.length > 1) {
       try {
@@ -223,8 +215,12 @@ export class BisociateurAgent extends BaseAgent {
     return {
       framework: domain,
       output: collisionOutput,
-      proposal: this._extractSection(collisionOutput, ['proposal', 'proposition']) || collisionOutput.slice(0, 280),
-      mechanismTransferred: this._extractSection(collisionOutput, ['mechanism', 'mécanisme', 'bridge']) || framework.mechanism,
+      proposal:
+        this._extractSection(collisionOutput, ['proposal', 'proposition']) ||
+        collisionOutput.slice(0, 280),
+      mechanismTransferred:
+        this._extractSection(collisionOutput, ['mechanism', 'mécanisme', 'bridge']) ||
+        framework.mechanism,
       firstExperiment: this._extractSection(collisionOutput, ['experiment', 'expérience', 'test']),
       noveltyScore: 60 + Math.floor(Math.random() * 25),
       feasibilityScore: 40 + Math.floor(Math.random() * 35),
@@ -249,14 +245,19 @@ export class BisociateurAgent extends BaseAgent {
 
   _extractSection(text, labels = []) {
     if (!text) return null;
-    const lower = text.toLowerCase();
     for (const label of labels) {
-      const re = new RegExp(?:${label}\\s*[:\\-–]\\s*([^\\n]+), 'i');
+      // Match "Label: value" or "Label - value" on a single line
+      const re = new RegExp(
+        '(?:' + label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\s*[:\\-–]\\s*([^\\n]+)',
+        'i',
+      );
       const m = text.match(re);
       if (m) return m[1].trim().slice(0, 400);
     }
-    // Fallback: first substantial paragraph
-    const paras = text.split(/\n\n+/).map((p) => p.trim()).filter((p) => p.length > 40);
+    const paras = text
+      .split(/\n\n+/)
+      .map((p) => p.trim())
+      .filter((p) => p.length > 40);
     return paras[0] ? paras[0].slice(0, 400) : null;
   }
 }
