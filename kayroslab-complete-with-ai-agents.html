@@ -483,8 +483,12 @@ const translations = {
     api_unavailable:'API indisponible : {error}', api_title:'API indisponible', response_format_title:'Réponse à reformater',
     network_error:'Impossible de joindre le serveur',
     api_help:'Vérifiez que le backend est déployé avec MISTRAL_API_KEY et joignable sur api.kayroslab.com.',
-    no_response:'Aucune réponse.', ontology_note:'[Carte ontologique interactive générée dans l’interface.]',
-    ontology_card:'Carte ontologique', annotation_human:'Annotation humaine', approved:'Approuvé',
+    no_response:'Aucune réponse.', ontology_note:'[Réseau ontologique dérivé de l’idée — sélectionnez des gaps pour orienter la suite.]',
+    ontology_card:'Réseau ontologique (dérivé de l’idée)',
+    ontology_gaps_title:'Gaps actionnables — sélectionnez 1 à 3 pour redéfinir l’idée',
+    ontology_gap_selected:'Gap sélectionné',
+    ontology_no_json:'Aucune ontologie structurée détectée dans la réponse. Analyse narrative conservée.',
+    ontology_select_hint:'Ces gaps seront injectés dans les étapes Challenge et Decide.', annotation_human:'Annotation humaine', approved:'Approuvé',
     note_recorded:'Note enregistrée ({count} car.)', rerunning:'Relance…', rejected:'Rejeté',
     cycle_finished_log:'Cycle terminé', running:'Exécution…', cycle_complete:'Cycle terminé',
     final_summary:'KI final : <strong class="text-sky-600">{ki}</strong> · {count} intervention(s)',
@@ -632,8 +636,12 @@ const translations = {
     api_unavailable:'API unavailable: {error}', api_title:'API unavailable', response_format_title:'Response format issue',
     network_error:'Could not connect to the server',
     api_help:'Check that the backend is deployed with MISTRAL_API_KEY and reachable at api.kayroslab.com.',
-    no_response:'No response.', ontology_note:'[Interactive ontology map generated in the interface.]',
-    ontology_card:'Ontology map', annotation_human:'Human annotation', approved:'Approved',
+    no_response:'No response.', ontology_note:'[Ontology network derived from the idea — select gaps to steer the next steps.]',
+    ontology_card:'Ontology network (derived from the idea)',
+    ontology_gaps_title:'Actionable gaps — select 1 to 3 to redefine the idea',
+    ontology_gap_selected:'Gap selected',
+    ontology_no_json:'No structured ontology detected in the response. Narrative analysis kept.',
+    ontology_select_hint:'These gaps will be injected into the Challenge and Decide steps.', annotation_human:'Human annotation', approved:'Approved',
     note_recorded:'Note saved ({count} chars)', rerunning:'Rerunning…', rejected:'Rejected',
     cycle_finished_log:'Cycle completed', running:'Running…', cycle_complete:'Cycle completed',
     final_summary:'Final KI: <strong class="text-sky-600">{ki}</strong> · {count} intervention(s)',
@@ -714,7 +722,7 @@ const cycleData = [
   { agent:'Scenario Generator', tools:['scenario_simulator()'], gate:{fr:'Expert métier',en:'Domain Expert'},
     system:{fr:'Tu es le Scenario Generator de KayrosLab. Propose 2 à 3 scénarios concrets avec nom, faisabilité et horizon. Réponds en français.',en:'You are KayrosLab’s Scenario Generator. Propose 2–3 concrete scenarios with a name, feasibility, and timeline. Answer in English.'} },
   { agent:'Positioner', tools:['gap_analyzer()','ontological_mapper()'], gate:{fr:'Expert marché',en:'Market Expert'},
-    system:{fr:'Tu es le Positionneur de KayrosLab. Analyse les associations et divergences concurrentielles. Réponds en français.',en:'You are KayrosLab’s Positioner. Analyze competitive associations and divergences. Answer in English.'} },
+    system:{fr:'Tu es le Positionneur de KayrosLab. Analyse les associations et divergences concurrentielles par rapport à l’idée. Structure ta réponse en deux parties : (1) analyse narrative courte (associations, divergences, positionnement) ; (2) un bloc JSON unique et valide, sans markdown, de la forme {"entities":[{"id":"e1","label":"...","type":"competitor|capability|regulation|segment|tech"}],"relations":[{"from":"e1","to":"e2","type":"competes_with|enables|constrains|serves"}],"gaps":[{"id":"g1","label":"...","opportunity":"..."}]}. Maximum 8 entities, 10 relations, 4 gaps. Les gaps doivent être actionnables pour redéfinir l’idée. Réponds en français.',en:'You are KayrosLab’s Positioner. Analyze competitive associations and divergences relative to the idea. Structure your answer in two parts: (1) short narrative analysis (associations, divergences, positioning); (2) a single valid JSON object, no markdown, of the form {"entities":[{"id":"e1","label":"...","type":"competitor|capability|regulation|segment|tech"}],"relations":[{"from":"e1","to":"e2","type":"competes_with|enables|constrains|serves"}],"gaps":[{"id":"g1","label":"...","opportunity":"..."}]}. Max 8 entities, 10 relations, 4 gaps. Gaps must be actionable to redefine the idea. Answer in English.'} },
   { agent:'Red Team', tools:['risk_assessor()','stress_test()'], gate:{fr:'Responsable des risques',en:'Risk Owner'},
     system:{fr:'Tu es la Red Team de KayrosLab. Présente au maximum 3 risques prioritaires avec une critique constructive. Réponds en français.',en:'You are KayrosLab’s Red Team. Present no more than 3 priority risks with constructive criticism. Answer in English.'} },
   { agent:'Synthesizer', tools:['ki_scorer()','vote_aggregator()'], gate:{fr:'COMEX',en:'Executive Committee'},
@@ -740,6 +748,7 @@ const demoState = {
   originalIdea:'', idea:'', conditions:{}, currentStep:-1, history:[], userActions:[],
   semanticMap:null, selectedSemanticIds:[], semanticRunning:false,
   explorationRounds:[], shortlistedIdeaIds:[], selectedIdea:null, explorationRunning:false,
+  ontologyMap:null, selectedOntologyGapIds:[],
   isRunning:false, ki:3.5, kiHistory:[3.5],
   currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null,
   language:currentLang
@@ -1004,6 +1013,100 @@ function semanticShortLabel(value,max){
   const text=String(value||'');
   return text.length>(max||16)?text.slice(0,(max||16)-1)+'…':text;
 }
+
+function normalizeOntologyMap(raw){
+  let parsed;
+  try { parsed = extractJsonObject(raw); }
+  catch(e){
+    // try to find last JSON object in the response
+    const matches = String(raw).match(/\{[\s\S]*\}/g);
+    if(!matches) throw e;
+    parsed = extractJsonObject(matches[matches.length-1]);
+  }
+  const entities = (Array.isArray(parsed.entities)?parsed.entities:[]).slice(0,8).map((e,i)=>({
+    id: String(e.id||('e'+(i+1))),
+    label: String(e.label||'').trim(),
+    type: String(e.type||'concept').trim()
+  })).filter(e=>e.label);
+  const idSet = new Set(entities.map(e=>e.id));
+  const relations = (Array.isArray(parsed.relations)?parsed.relations:[]).slice(0,12).map(r=>({
+    from: String(r.from||''),
+    to: String(r.to||''),
+    type: String(r.type||'related').trim()
+  })).filter(r=>idSet.has(r.from)&&idSet.has(r.to));
+  const gaps = (Array.isArray(parsed.gaps)?parsed.gaps:[]).slice(0,4).map((g,i)=>({
+    id: String(g.id||('g'+(i+1))),
+    label: String(g.label||'').trim(),
+    opportunity: String(g.opportunity||'').trim()
+  })).filter(g=>g.label);
+  if(!entities.length) throw new Error('empty ontology');
+  return { entities, relations, gaps };
+}
+
+function renderOntologyGraph(map){
+  const width=560, height=280, cx=280, cy=130, radius=95;
+  const typeColor = {competitor:'#fb7185', capability:'#34d399', regulation:'#fbbf24', segment:'#38bdf8', tech:'#a78bfa', concept:'#94a3b8'};
+  const n = map.entities.length || 1;
+  const positions = {};
+  map.entities.forEach((ent,i)=>{
+    const angle = -Math.PI/2 + (Math.PI*2*i/n);
+    positions[ent.id] = { x: cx + Math.cos(angle)*radius, y: cy + Math.sin(angle)*radius, color: typeColor[ent.type]||typeColor.concept };
+  });
+  let svg = '<title>'+escapeHtml(t('ontology_card',{},cycleLanguage()))+'</title>';
+  map.relations.forEach(rel=>{
+    const a=positions[rel.from], b=positions[rel.to];
+    if(!a||!b) return;
+    svg += '<line class="edge" x1="'+a.x.toFixed(1)+'" y1="'+a.y.toFixed(1)+'" x2="'+b.x.toFixed(1)+'" y2="'+b.y.toFixed(1)+'"></line>';
+  });
+  map.entities.forEach(ent=>{
+    const p=positions[ent.id];
+    svg += '<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="18" fill="'+p.color+'" opacity="0.9"></circle>';
+    svg += '<text x="'+p.x.toFixed(1)+'" y="'+(p.y+32).toFixed(1)+'" text-anchor="middle" font-size="10" fill="currentColor">'+escapeHtml(ent.label.slice(0,22))+'</text>';
+  });
+  return svg;
+}
+
+function toggleOntologyGap(gapId){
+  const ids = demoState.selectedOntologyGapIds || [];
+  const idx = ids.indexOf(gapId);
+  if(idx>=0) ids.splice(idx,1);
+  else {
+    if(ids.length>=3) return; // max 3
+    ids.push(gapId);
+  }
+  demoState.selectedOntologyGapIds = ids;
+  // refresh visual selection
+  document.querySelectorAll('[data-ontology-gap]').forEach(el=>{
+    const id = el.getAttribute('data-ontology-gap');
+    el.classList.toggle('selected', ids.includes(id));
+  });
+  const note = (demoState.ontologyMap.gaps||[]).find(g=>g.id===gapId);
+  if(note){
+    log((cycleLanguage()==='en'?'Gap':'Gap')+': '+note.label, 'info');
+  }
+}
+
+function buildOntologyPanel(map, lang){
+  let html = '<div class="mt-4 pt-3 border-t border-slate-200">';
+  html += '<p class="text-xs font-semibold text-slate-600 mb-2">'+escapeHtml(t('ontology_card',{},lang))+'</p>';
+  html += '<svg id="ontology-graph" class="semantic-graph w-full h-[280px] rounded-lg border border-slate-200 bg-slate-50" viewBox="0 0 560 280" role="img">'+renderOntologyGraph(map)+'</svg>';
+  if(map.gaps && map.gaps.length){
+    html += '<p class="text-xs font-semibold text-slate-600 mt-3 mb-1">'+escapeHtml(t('ontology_gaps_title',{},lang))+'</p>';
+    html += '<p class="text-[11px] text-slate-500 mb-2">'+escapeHtml(t('ontology_select_hint',{},lang))+'</p>';
+    html += '<div class="flex flex-wrap gap-2">';
+    map.gaps.forEach(g=>{
+      const selected = (demoState.selectedOntologyGapIds||[]).includes(g.id);
+      html += '<button type="button" data-ontology-gap="'+escapeHtml(g.id)+'" onclick="toggleOntologyGap(\\''+escapeHtml(g.id)+'\\')" class="semantic-field text-left text-xs px-3 py-2 rounded-lg border '+(selected?'selected border-violet-400':'border-slate-200')+' bg-white hover:border-violet-300 transition">';
+      html += '<div class="font-semibold text-slate-800">'+escapeHtml(g.label)+'</div>';
+      if(g.opportunity) html += '<div class="text-[11px] text-slate-500 mt-0.5">'+escapeHtml(g.opportunity)+'</div>';
+      html += '</button>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
 function renderSemanticGraph(map){
   const width=560,height=330,cx=280,cy=145,radius=105;
   const colors=['#38bdf8','#34d399','#fb7185','#fbbf24'];
@@ -1392,6 +1495,15 @@ function buildUserPrompt(idea, cond, notes, lang) {
   if(cond.notes) parts.push(t('prompt_notes',{},lang)+' : '+cond.notes);
   if(parts.length) p += t('prompt_constraints',{},lang)+' :\n'+parts.join('\n')+'\n\n';
   if(notes&&notes.length) p += t('prompt_human_notes',{},lang)+' :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
+  // Inject selected ontology gaps so later agents must account for them
+  if(demoState.selectedOntologyGapIds && demoState.selectedOntologyGapIds.length && demoState.ontologyMap){
+    const gaps = (demoState.ontologyMap.gaps||[]).filter(g=>demoState.selectedOntologyGapIds.includes(g.id));
+    if(gaps.length){
+      p += (lang==='en' ? 'Selected market gaps to address (from Positioner ontology)' : 'Gaps de marché sélectionnés à traiter (ontologie Positioner)') + ' :\n';
+      gaps.forEach(g=>{ p += '- '+g.label+(g.opportunity?' → '+g.opportunity:'')+'\n'; });
+      p += '\n';
+    }
+  }
   p += t('prompt_deliverable',{},lang);
   return p;
 }
@@ -1435,7 +1547,16 @@ async function runStep(stepIdx) {
     contentHtml = markdownishToHtml(raw);
     if (stepIdx === 3) {
       outputText += '\n\n'+t('ontology_note',{},lang);
-      contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-600 mb-2">'+escapeHtml(t('ontology_card',{},lang))+'</p><div class="ontology-embed" data-catalogue-id="official/ecommerce" data-catalogue-base-url="https://microsoft.github.io/Ontology-Playground/" data-theme="light" data-height="260px"></div></div>';
+      try {
+        const omap = normalizeOntologyMap(raw);
+        demoState.ontologyMap = omap;
+        demoState.selectedOntologyGapIds = [];
+        contentHtml += buildOntologyPanel(omap, lang);
+        log('Ontology: '+omap.entities.length+' entities, '+omap.relations.length+' relations, '+omap.gaps.length+' gaps', 'success');
+      } catch (oerr) {
+        contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200 text-xs text-amber-700 bg-amber-50 rounded-lg p-3">'+escapeHtml(t('ontology_no_json',{},lang))+'</div>';
+        log('Ontology parse fallback: '+oerr.message, 'warn');
+      }
     }
   } catch (err) {
     const errorMessage=err.message==='Failed to fetch'?t('network_error',{},lang):err.message;
@@ -1448,7 +1569,7 @@ async function runStep(stepIdx) {
   demoState.currentOutputGeneratedAt = new Date().toISOString();
   document.getElementById('generated-content').innerHTML = contentHtml;
   document.getElementById('editable-output').value = '';
-  if (stepIdx === 3 && window.OntologyEmbed) setTimeout(function(){ try { OntologyEmbed.init(); } catch(e){} }, 120);
+  // Ontology is now rendered from Mistral structured JSON (no external catalogue)
   updateKI(demoState.ki + 0.25 + (stepIdx===5?0.35:0), t('step_reason',{step:stepIdx+1},lang));
   setStatus('<div class="flex items-center gap-3 p-3 bg-emerald-50 border border-emerald-100 rounded-xl"><i class="fas fa-check-circle text-emerald-500"></i><div><div class="font-semibold text-sm text-emerald-800">'+escapeHtml(agentLabel(stepIdx,lang))+' OK</div><div class="text-xs text-emerald-600">'+escapeHtml(t('gate_label',{},lang))+' — '+escapeHtml(gate)+'</div></div></div>');
   log(t('waiting_decision',{gate},lang), 'warn');
