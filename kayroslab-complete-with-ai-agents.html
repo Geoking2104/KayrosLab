@@ -96,6 +96,11 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 @media (max-width:39.99rem){.site-nav__inner{padding-inline:var(--space-sm)}.nav-back{display:none}.nav-demo{padding-inline:var(--space-sm)}.comparison-hero{padding-block-start:var(--space-xl)}.comparison-hero h1{font-size:clamp(2.2rem,12vw,3.3rem)}.hypothesis-branches{grid-template-columns:1fr}.governed-row{grid-template-columns:40px minmax(0,1fr) 36px}.change-row{grid-template-columns:1fr;gap:var(--space-xs)}.change-arrow{transform:rotate(90deg)}.change-before{font-size:var(--text-base)}.change-after{font-size:var(--text-lg)}.hero-actions{align-items:stretch}.btn-primary,.btn-secondary{width:100%}.foot-stmt__meta{align-items:flex-start;flex-direction:column}}
 @media (max-width:29.99rem){.nav-demo{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:150ms!important;animation-iteration-count:1!important;transition-duration:150ms!important}.animate-on-scroll{transform:none}}
+.kayros-signature{margin:0 0 var(--space-sm);padding:var(--space-xs) var(--space-sm);border-left:3px solid var(--color-violet);background:color-mix(in oklch,var(--color-violet) 12%,transparent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;color:#e9d5ff;font-size:var(--text-sm);line-height:1.45;font-style:italic}
+.novelty-rank{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;background:color-mix(in oklch,var(--color-violet) 18%,transparent);border:1px solid color-mix(in oklch,var(--color-violet) 35%,transparent);color:#ddd6fe;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.novelty-bar{height:4px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:4px}
+.novelty-bar > span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#8b5cf6,#38bdf8)}
+.idea-lab-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.35);color:#c4b5fd;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
 </style>
 </head>
 <body class="font-body bg-white text-slate-900 antialiased">
@@ -219,6 +224,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
     <div id="idea-lab" class="hidden bg-slate-950 text-white rounded-3xl p-6 sm:p-8 mb-6">
       <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
+          <div class="idea-lab-badge" data-i18n="novelty_engine_badge">Moteur de nouveauté · Bisociation + ranking</div>
           <div class="text-sky-400 text-xs font-bold uppercase tracking-[.16em] mb-2" data-i18n="idea_lab_kicker">Boucle d’exploration</div>
           <h3 class="font-display text-2xl font-bold mb-2" data-i18n="idea_lab_title">Mettre l’idée en mouvement avant de la mettre en projet</h3>
           <p class="text-slate-300 text-sm max-w-3xl" data-i18n="idea_lab_description">Une base, plusieurs variations comparables, un test explicite et une décision humaine : garder, combiner ou relancer.</p>
@@ -441,6 +447,10 @@ const translations = {
     exploration_signals:'Signaux à observer', exploration_risks:'Inconnues critiques',
     exploration_why:'Pourquoi elle mérite un essai', exploration_score:'Potentiel d’essai',
     novelty:'Ouverture', relevance:'Pertinence', testability:'Testabilité',
+    novelty_rank:'Nouveauté',
+    novelty_engine_badge:'Moteur de nouveauté · Bisociation + ranking',
+    kayros_signature:'Signature Kayros',
+    ranked_by_novelty:'Classées par score de nouveauté',
     shortlist:'Présélectionner', choose_direction:'Retenir cette piste',
     shortlist_required:'Sélectionnez au moins deux pistes à combiner.',
     exploration_parse_error:'La réponse d’exploration n’a pas le format attendu. Relancez la boucle.',
@@ -584,6 +594,10 @@ const translations = {
     exploration_signals:'Signals to observe', exploration_risks:'Critical unknowns',
     exploration_why:'Why it deserves a trial', exploration_score:'Trial potential',
     novelty:'Openness', relevance:'Relevance', testability:'Testability',
+    novelty_rank:'Novelty',
+    novelty_engine_badge:'Novelty engine · Bisociation + ranking',
+    kayros_signature:'Kayros Signature',
+    ranked_by_novelty:'Ranked by novelty score',
     shortlist:'Shortlist', choose_direction:'Choose this direction',
     shortlist_required:'Select at least two directions to combine.',
     exploration_parse_error:'The exploration response did not match the expected format. Run the loop again.',
@@ -816,7 +830,7 @@ function collectConditions(){ return { geo:document.getElementById('cond-geo').v
 function computeBaseKI(idea,c){ let s=3.2; if(idea.length>40)s+=.4; if(idea.length>100)s+=.3; if(c.geo)s+=.35; if(c.budget)s+=.3; if(c.time)s+=.25; if(c.must)s+=.4; if(c.notes&&c.notes.length>20)s+=.5; return Math.min(5.8,s); }
 function setStatus(html){ document.getElementById('agent-status').innerHTML=html; }
 function stripHtml(html){ const t=document.createElement('div'); t.innerHTML=html; return (t.textContent||'').trim(); }
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escapeHtml(s){ return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"'); }
 function formatTimestamp(value){
   if(!value) return '—';
   const lang=arguments.length>1?arguments[1]:cycleLanguage();
@@ -1105,7 +1119,7 @@ function explorationSystemPrompt(lang){
     'Use an autoresearch-style loop: preserve a fixed baseline, generate comparable challengers, evaluate all of them with the same rubric, and let the human keep, combine, or discard.',
     'Do not produce a roadmap, backlog, business plan, or polished solution. Challenge who benefits, what form the value takes, and which assumption can be tested.',
     'Return ONLY valid JSON, without Markdown, in this exact shape:',
-    '{"candidates":[{"title":"short distinctive title","reframedIdea":"one precise working hypothesis","opening":"what becomes possible","shiftedAssumption":"the original assumption this changes","falsifiableHypothesis":"a statement that evidence could disprove","firstExperiment":"a small real-world test, not a delivery plan","signals":["2 or 3 observable signals"],"criticalUnknowns":["2 critical unknowns"],"rationale":"concise reason to try this direction","scores":{"novelty":1,"relevance":1,"testability":1}}]}',
+    '{"candidates":[{"title":"short distinctive title","reframedIdea":"one precise working hypothesis","kayrosSignature":"the non-obvious insight or conceptual bridge that makes this option unique","opening":"what becomes possible","shiftedAssumption":"the original assumption this changes","falsifiableHypothesis":"a statement that evidence could disprove","firstExperiment":"a small real-world test, not a delivery plan","signals":["2 or 3 observable signals"],"criticalUnknowns":["2 critical unknowns"],"rationale":"concise reason to try this direction","scores":{"novelty":1,"relevance":1,"testability":1}}]}',
     'Produce exactly 3 genuinely different candidates. Scores are integers from 1 to 10. Do not reveal private reasoning or chain-of-thought; provide only concise decision evidence.'
   ].join('\n');
   return [
@@ -1113,7 +1127,7 @@ function explorationSystemPrompt(lang){
     'Utilise une boucle inspirée d’autoresearch : conserve une base fixe, génère des variantes comparables, évalue-les avec la même grille, puis laisse l’humain garder, combiner ou écarter.',
     'Ne produis ni feuille de route, ni backlog, ni business plan, ni solution déjà finalisée. Interroge le bénéficiaire, la forme de valeur et le postulat qui peut être testé.',
     'Retourne UNIQUEMENT du JSON valide, sans Markdown, exactement sous cette forme :',
-    '{"candidates":[{"title":"titre court et distinctif","reframedIdea":"une hypothèse de travail précise","opening":"ce qui devient possible","shiftedAssumption":"le postulat initial que cette piste déplace","falsifiableHypothesis":"une affirmation que des faits peuvent réfuter","firstExperiment":"un petit test réel, pas un plan de réalisation","signals":["2 ou 3 signaux observables"],"criticalUnknowns":["2 inconnues critiques"],"rationale":"raison concise d’essayer cette piste","scores":{"novelty":1,"relevance":1,"testability":1}}]}',
+    '{"candidates":[{"title":"titre court et distinctif","reframedIdea":"une hypothèse de travail précise","kayrosSignature":"l’insight non-évident ou le pont conceptuel qui rend cette option unique","opening":"ce qui devient possible","shiftedAssumption":"le postulat initial que cette piste déplace","falsifiableHypothesis":"une affirmation que des faits peuvent réfuter","firstExperiment":"un petit test réel, pas un plan de réalisation","signals":["2 ou 3 signaux observables"],"criticalUnknowns":["2 inconnues critiques"],"rationale":"raison concise d’essayer cette piste","scores":{"novelty":1,"relevance":1,"testability":1}}]}',
     'Produis exactement 3 pistes réellement différentes. Les scores sont des entiers de 1 à 10. Ne révèle aucun raisonnement privé ou chaîne de pensée : donne seulement des éléments de décision concis.'
   ].join('\n');
 }
@@ -1168,6 +1182,7 @@ function normalizeIdeaCandidate(value,index,round){
     id:'r'+round+'c'+(index+1),
     title:String(firstPresent(value,['title','titre','name','nom'])||('Direction '+(index+1))).trim(),
     reframedIdea:String(fallbackIdea).trim(),
+    kayrosSignature:String(firstPresent(value,['kayrosSignature','signature','signatureKayros','bridge','insight'])).trim(),
     opening:String(firstPresent(value,['opening','ouverture','opportunity','opportunite','opportunité','whatOpens'])).trim(),
     shiftedAssumption:String(firstPresent(value,['shiftedAssumption','assumption','postulat','postulatDeplace','postulatDéplacé','assumptionShift'])).trim(),
     falsifiableHypothesis:String(fallbackHypothesis||fallbackIdea).trim(),
@@ -1186,6 +1201,7 @@ function normalizeIdeaCandidate(value,index,round){
   if(!candidate.signals.length) candidate.signals=[candidate.falsifiableHypothesis].filter(Boolean);
   if(!candidate.criticalUnknowns.length) candidate.criticalUnknowns=[candidate.shiftedAssumption].filter(Boolean);
   if(!candidate.rationale) candidate.rationale=candidate.opening;
+  if(!candidate.kayrosSignature) candidate.kayrosSignature=candidate.opening||candidate.shiftedAssumption||'';
   candidate.score=Number((candidate.scores.novelty*.3+candidate.scores.relevance*.35+candidate.scores.testability*.35).toFixed(1));
   return candidate;
 }
@@ -1207,12 +1223,22 @@ function renderIdeaCandidates(){
   const round=demoState.explorationRounds[demoState.explorationRounds.length-1];
   if(!round) return;
   const lang=cycleLanguage();
-  document.getElementById('idea-iteration').textContent=t('exploration_iteration',{count:round.iteration},lang);
-  document.getElementById('idea-candidates').innerHTML=round.candidates.map((c,index)=>{
+  // Rank by novelty (then composite score) so the most unique options surface first
+  const ranked=[...round.candidates].sort((a,b)=>{
+    const na=(a.scores&&a.scores.novelty)||0, nb=(b.scores&&b.scores.novelty)||0;
+    if(nb!==na) return nb-na;
+    return (b.score||0)-(a.score||0);
+  });
+  document.getElementById('idea-iteration').textContent=t('exploration_iteration',{count:round.iteration},lang)+' · '+t('ranked_by_novelty',{},lang);
+  document.getElementById('idea-candidates').innerHTML=ranked.map((c,index)=>{
     const shortlisted=demoState.shortlistedIdeaIds.includes(c.id);
+    const noveltyPct=Math.max(0,Math.min(100,((c.scores&&c.scores.novelty)||0)*10));
+    const sig=c.kayrosSignature?('<div class="kayros-signature">'+escapeHtml(c.kayrosSignature)+'</div>'):'';
     return '<article class="idea-card '+(shortlisted?'shortlisted ':'')+'rounded-2xl border border-white/10 bg-white/[.04] p-5 flex flex-col" data-candidate-id="'+c.id+'">'+
-      '<div class="flex items-start justify-between gap-3 mb-3"><div><div class="text-[10px] uppercase tracking-[.13em] text-sky-400">'+String.fromCharCode(65+index)+' · '+escapeHtml(t('exploration_score',{},lang))+'</div><h4 class="font-display font-bold text-lg mt-1">'+escapeHtml(c.title)+'</h4></div><div class="rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-300 px-2.5 py-1 text-sm font-bold">'+c.score+'</div></div>'+
+      '<div class="flex items-start justify-between gap-3 mb-3"><div><div class="flex items-center gap-2 mb-1"><span class="novelty-rank">#'+(index+1)+' · '+escapeHtml(t('novelty_rank',{},lang))+'</span><div class="text-[10px] uppercase tracking-[.13em] text-sky-400">'+String.fromCharCode(65+index)+' · '+escapeHtml(t('exploration_score',{},lang))+'</div></div><h4 class="font-display font-bold text-lg mt-1">'+escapeHtml(c.title)+'</h4></div><div class="rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-300 px-2.5 py-1 text-sm font-bold">'+c.score+'</div></div>'+
+      sig+
       '<p class="text-sm leading-relaxed text-slate-200 mb-4">'+escapeHtml(c.reframedIdea)+'</p>'+
+      '<div class="mb-3"><div class="flex justify-between text-[10px] text-slate-500 mb-0.5"><span>'+escapeHtml(t('novelty',{},lang))+'</span><span>'+((c.scores&&c.scores.novelty)||0)+'/10</span></div><div class="novelty-bar"><span style="width:'+noveltyPct+'%"></span></div></div>'+
       '<div class="grid grid-cols-3 gap-1.5 mb-4">'+renderScorePill(t('novelty',{},lang),c.scores.novelty)+renderScorePill(t('relevance',{},lang),c.scores.relevance)+renderScorePill(t('testability',{},lang),c.scores.testability)+'</div>'+
       '<div class="space-y-3 text-xs text-slate-300 flex-1">'+
         '<div><div class="font-bold text-slate-500 uppercase tracking-wide mb-1">'+escapeHtml(t('exploration_opening',{},lang))+'</div>'+escapeHtml(c.opening||'—')+'</div>'+
