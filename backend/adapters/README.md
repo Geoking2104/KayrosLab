@@ -13,7 +13,6 @@ import { DynamicStructuredTool } from '@langchain/core/tools';
 import { z } from 'zod';
 import { attachLangChainTools } from './langchain-tools.mjs';
 
-// After Fastify app + kayrosContext is ready:
 const searchTool = new DynamicStructuredTool({
   name: 'search_web',
   description: 'Search the public web',
@@ -24,21 +23,31 @@ const searchTool = new DynamicStructuredTool({
 attachLangChainTools(app, [searchTool], {
   // sideEffect: 'read',
   // prefix: 'lc_',
-  // gate: false,
 });
-
-// Tools appear in GET /v1/tools and POST /v1/tools/call
 ```
 
-Core API (no Fastify):
+## LangGraph runner
+
+Optional peer: `@langchain/langgraph` (+ `@langchain/core`).
+
+```bash
+cd backend/fastify && npm install @langchain/langgraph @langchain/core
+```
 
 ```js
-import { demoTools } from '../../core/tool-registry.mjs';
-import { registerLangChainTools } from '../../core/adapters/langchain-tools.mjs';
+import { attachResearchGraph } from './langgraph-runner.mjs';
 
-const reg = demoTools();
-registerLangChainTools(reg, [searchTool]);
-await reg.call('search_web', { q: 'KayrosLab' });
+await attachResearchGraph(app);
+// → app.kayrosContext.researchGraph
+// → app.kayrosContext.runResearch({ idea, constraints })
+
+const result = await app.kayrosContext.runResearch({
+  idea: 'Lancer une offre B2B souveraine',
+  constraints: { market: 'EU' },
+});
+// { summary, signals, artifacts, warnings }
 ```
 
-Write tools (`create`, `send`, `update`…) get `sideEffect: 'write'` and `gate: true` by default so the orchestrator can require human approval.
+Without LangGraph installed, `createResearchGraph()` falls back to a **mock** graph with the same `.invoke()` contract (tests + offline).
+
+Flow: **gather** (ToolRegistry search-like tools) → **synthesize** → Kayros maps to step output → human/auto gate remains in Orchestrator.
