@@ -62,6 +62,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
 - **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); Teams scaffold
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
+- **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
 
 ---
 
@@ -148,11 +149,19 @@ KayrosLab/
 ├── core/                 # Zero-dep engine (ESM) — memory, orchestrator, governance, positionning, novelty
 │   ├── novelty.mjs       # Embedding-based novelty scoring
 │   ├── embed-select.mjs  # Soft-fallback embedding model selection
+│   ├── kpi-drift.mjs     # KPI trend / drift detection
+│   ├── adapters/         # Optional periphery (LangChain tools, LangGraph, search, Langfuse)
+│   │   ├── langchain-tools.mjs
+│   │   ├── langgraph-runner.mjs
+│   │   ├── search-tools.mjs
+│   │   └── langfuse.mjs
 │   └── agents/           # Specialist agents (incl. Bisociateur)
-├── backend/fastify/      # HTTP API, auth, SSE cycle, connectors
+├── backend/
+│   ├── fastify/          # HTTP API, auth, SSE cycle, connectors
+│   └── adapters/         # Fastify attach helpers (same adapters as core/)
 ├── frontend/             # React Positioner app
 ├── deploy/ovh-vps/       # Deploy, backup, cron helpers
-├── docs/                 # Pitch, v13/v14 notes
+├── docs/                 # Pitch, architecture notes, v13/v14
 ├── workers/              # Edge / proxy workers
 ├── cycle-timeline.html   # Live SSE cycle UI
 ├── portfolio-board.html  # Portfolio kanban
@@ -253,9 +262,12 @@ sequenceDiagram
 
 ### Engine architecture
 
+KayrosLab separates a **zero-dependency decision core** from **optional periphery adapters**. Adapters may call into the core (`ToolRegistry`, memory, LLM); they never replace governance, gates, or the strategic cycle.
+
 ```mermaid
 flowchart TB
-  USER([User / Campaign / API]) --> ENG[createEngine]
+  USER([User / Campaign / API / Demo]) --> API[Fastify backend]
+  API --> ENG[createEngine]
   ENG --> ORCH[Orchestrator]
   ENG --> AGENTS[Specialist agents]
   ENG --> MEM[LayeredMemory L0–L3]
@@ -263,18 +275,42 @@ flowchart TB
   ENG --> GOV[Governance]
   ENG --> QG[QuantGuidance]
   ENG --> NOV[Novelty / Embeddings]
+  ENG --> TOOLS[ToolRegistry]
 
   ORCH -->|Plan-and-Solve| AGENTS
   ORCH -->|recall / distill / positionning| MEM
   AGENTS -->|complete| LLM
   AGENTS -->|score collisions| NOV
+  AGENTS -->|tools.call| TOOLS
   ORCH -->|sensitive output| GOV
   QG -.->|preferredModel| AGENTS
 
   LLM --> P1[(Ollama)]
-  LLM --> P2[(Backend proxy)]
+  LLM --> P2[(Mistral / Anthropic proxy)]
   LLM --> P3[(Mock)]
+
+  subgraph PERIPH["Optional adapters (backend/adapters · core/adapters)"]
+    LC[LangChain tools bridge]
+    LG[LangGraph research runner]
+    SRCH[Search tools multi-provider]
+    LF[Langfuse observer]
+  end
+
+  LC -->|register ToolDef| TOOLS
+  SRCH -->|search_web / github / arxiv| TOOLS
+  LG -->|gather → synthesize| TOOLS
+  LG -.->|step output| ORCH
+  LF -.->|spans llm + tools| LLM
+  LF -.->|spans| TOOLS
 ```
+
+| Layer | Responsibility | Replaceable? |
+|---|---|---|
+| **Core** (`createEngine`, orchestrator, governance, L0–L3, novelty) | Decision, audit, sovereignty path | No |
+| **ToolRegistry** | Declarative tools + gates for write side-effects | Extended only |
+| **Adapters** | LangChain tools, LangGraph subgraphs, web search, Langfuse traces | Yes — optional peers |
+
+See [docs/engine-architecture.md](docs/engine-architecture.md) and [backend/adapters/README.md](backend/adapters/README.md).
 
 ### Memory layers
 
@@ -320,6 +356,8 @@ Path: [`core/`](core/) — ESM, Node 20+, **no npm dependencies** for the engine
 | `memory.mjs` · `memory-scope.mjs` · `memory-rank.mjs` | L0–L3, tenant hierarchy, ranking |
 | `novelty.mjs` | Embedding-based novelty scoring & ranking of collisions |
 | `embed-select.mjs` | Soft-fallback embedding model selection |
+| `kpi-drift.mjs` | KPI time-series drift detection |
+| `adapters/*` | Optional: LangChain tools, LangGraph runner, search tools, Langfuse (peers; no core deps) |
 | `positionning/` | Scanners, ontology, OWL, `to-l1`, graph builder |
 | `agents/` | Specialist agents (Planner, Critic, Red Team, **Bisociateur**, …) |
 | `connectors.mjs` | Slack / Teams adapters, account link, gate views |
@@ -379,6 +417,21 @@ Key environment variables:
 | `DATABASE_URL` | Optional Postgres |
 | `OLLAMA_*` | Local quant-aware inference |
 
+### Optional adapters (env)
+
+| Variable | Purpose |
+|---|---|
+| `KAYROS_SEARCH_PROVIDER` | `auto` · `tavily` · `brave` · `google` · `duckduckgo` |
+| `KAYROS_SEARCH_LIMIT` | Max results (default `5`) |
+| `TAVILY_API_KEY` · `BRAVE_API_KEY` | Web search providers |
+| `GOOGLE_API_KEY` · `GOOGLE_CX` | Google Programmable Search |
+| `GITHUB_TOKEN` | GitHub search rate limits / private |
+| `LANGFUSE_PUBLIC_KEY` · `LANGFUSE_SECRET_KEY` | LLM observability (no-op if unset) |
+| `LANGFUSE_BASE_URL` | Cloud or self-hosted Langfuse |
+| `LANGFUSE_RELEASE` | Release tag on traces |
+
+Search tools register at backend boot (`registerSearchToolsFromEnv`). Langfuse attaches via `attachLangfuse(app)` when keys are present.
+
 ---
 
 ## Deployment
@@ -437,7 +490,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | v13 | Slack deepen (signature, idempotence) · ontology Cytoscape graph | ✅ |
 | v14 | Persist account links · motif modal · message update · ontology embed panel | ✅ |
 | **v15** | **Embedding novelty ranking · Kayros Signature · public demo ranking UI** | ✅ |
-| v16 | Wire engine-side novelty into live demo + KPI drift alerts · Discord adapter | 🔵 |
+| **v16** | Engine novelty API · KPI drift · Discord scaffold · **optional adapters** (LangChain tools, LangGraph research, multi-provider search, Langfuse) · demo ontology/Mistral wiring | 🔵 partial |
 
 ---
 
@@ -455,6 +508,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) | v13 notes |
 | [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) | v14 links · motif · update · embed |
 | [docs/pitch-seed.md](docs/pitch-seed.md) | Demo script |
+| [docs/engine-architecture.md](docs/engine-architecture.md) | Core vs adapters (V16) |
+| [backend/adapters/README.md](backend/adapters/README.md) | LangChain · LangGraph · search · Langfuse |
 
 ---
 
