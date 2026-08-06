@@ -32,6 +32,7 @@ export * from './governance.mjs';
 export * from './orchestrator.mjs';
 export * from './timer.mjs';
 export * from './connectors.mjs';
+export * from './connectors-discord.mjs';
 export * from './positionning/index.mjs';
 export * from './quant-guidance.mjs';
 export * from './quant-schema.mjs';
@@ -188,7 +189,6 @@ export function createEngine(opts = {}) {
     llm, tools, memory, quantGuidance, baseModel,
   });
 
-  // Inject embeddings into Bisociateur when available (enables real novelty scoring)
   if (agents.Bisociateur && embeddings) {
     agents.Bisociateur.embeddings = embeddings;
   }
