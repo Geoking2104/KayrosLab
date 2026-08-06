@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased / 2026-08-06 (ontology)
+
+### Fixed
+- **Public demo step 4 (Positioner)** — removed hard-coded Microsoft Ontology Playground catalogue (`official/ecommerce`) that was disconnected from the user idea
+- Ontology network is now **derived from the idea** via Mistral structured JSON (`entities`, `relations`, `gaps`)
+- Actionable **gap selection** (1–3) injected into subsequent Challenge / Decide prompts so the ontology becomes necessary to redefine ideas
+
+### Added
+- `normalizeOntologyMap`, `renderOntologyGraph`, `buildOntologyPanel`, `toggleOntologyGap` in the demo HTML
+- Positioner system prompt now requires a structured ontology block
+
+---
+
 ## Unreleased / 2026-08-06
 
 ### Added
