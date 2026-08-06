@@ -1,13 +1,13 @@
 # KayrosLab
 
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=flat-square)](https://www.kayroslab.com)
-[![Live demo](https://img.shields.io/badge/Demo-Live_app-2563eb?style=flat-square)](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
+[![Live demo](https://img.shields.io/badge/Demo-Live_app-2563eb?style=flat-square)](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html)
 [![Pages](https://img.shields.io/badge/GitHub_Pages-Site-7c3aed?style=flat-square)](https://geoking2104.github.io/KayrosLab/)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
 **From weak signal to strategic decision — governed.**
 
-KayrosLab is a **governed strategic ideation workshop**: multi-agent orchestration (Plan-and-Solve + ReAct), layered memory **L0–L3**, deterministic scoring, and Human-in-the-Loop gates with veto rights.
+KayrosLab is a **governed strategic ideation workshop**: multi-agent orchestration (Plan-and-Solve + ReAct), layered memory **L0–L3**, deterministic scoring, embedding-based novelty ranking, and Human-in-the-Loop gates with veto rights.
 
 It is **not** a trained model. It is a **governed LLM stack** — an orchestrator that drives real models (Ollama quant-aware locally, or Claude / Mistral via the Fastify backend) behind governance, memory, and audit trails.
 
@@ -38,8 +38,9 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 | Criterion | Chat LLM | Innovation platform | **KayrosLab** |
 |---|---|---|---|
 | Structure | Conversation | Stage-gate | **Governed 8-step cycle** |
-| Agents | One model | — | **Multi-agent** + Red Team |
+| Agents | One model | — | **Multi-agent** + Red Team + Bisociator |
 | Memory | Session / flat | Tickets | **Layered L0–L3 + tenant scope** |
+| Novelty | Implicit | Manual | **Embedding-ranked collisions + Kayros Signature** |
 | Numbers | LLM guesses | Manual | **Deterministic** Monte-Carlo |
 | Decision | Informal | Vote | **Vote instructs · veto decides** |
 | Sovereignty | Cloud | Cloud | **Ollama quant-aware** or proxy |
@@ -52,6 +53,8 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **SSE live cycle** — `POST /v1/cycle/run` streams plan/run events to `cycle-timeline.html`
 - **Layered memory L0–L3** — working offload, atomic facts (incl. competitor from Positioner), distilled scenarios, scoped persona/norms
 - **Governance** — gates, weighted votes, approve / reject / revise → idea stage & status
+- **Novelty engine** — embedding-based scoring of Bisociator collisions (intra-batch diversity + memory distance + input distance), ranked output, soft near-duplicate filter
+- **Kayros Signature** — each candidate carries a non-obvious conceptual bridge that makes the option unique (surfaced in the public demo)
 - **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
 - **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
@@ -65,7 +68,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 ### Prerequisites
 
 - **Node.js 20+**
-- Optional: [Ollama](https://ollama.com) for local inference
+- Optional: [Ollama](https://ollama.com) for local inference (and embeddings)
 - Optional: Postgres if you set `DATABASE_URL`
 
 ### 1. Core engine (no install)
@@ -112,7 +115,21 @@ Open the live cycle UI:
 cycle-timeline.html?api=http://localhost:8787
 ```
 
-### 3. Demo seed (optional)
+### 3. Public governed-agent demo
+
+Open the live page (no backend required for the client-side exploration loop):
+
+- Production: [kayroslab.com/kayroslab-complete-with-ai-agents.html](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html)
+- GitHub Pages: [geoking2104.github.io/KayrosLab/…](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
+
+Features of the demo:
+- Semantic map (InfraNodus-inspired) before ideation
+- Bisociation-style exploration with **novelty ranking**
+- **Kayros Signature** on each candidate
+- Full 8-agent governed cycle with human gates
+- PDF / Markdown export + lead capture
+
+### 4. Demo seed (optional)
 
 ```bash
 node core/seed-demo.mjs
@@ -126,7 +143,10 @@ DATABASE_URL=postgres://user:pass@localhost:5432/kayroslab node core/seed-demo.m
 
 ```text
 KayrosLab/
-├── core/                 # Zero-dep engine (ESM) — memory, orchestrator, governance, positionning
+├── core/                 # Zero-dep engine (ESM) — memory, orchestrator, governance, positionning, novelty
+│   ├── novelty.mjs       # Embedding-based novelty scoring
+│   ├── embed-select.mjs  # Soft-fallback embedding model selection
+│   └── agents/           # Specialist agents (incl. Bisociateur)
 ├── backend/fastify/      # HTTP API, auth, SSE cycle, connectors
 ├── frontend/             # React Positioner app
 ├── deploy/ovh-vps/       # Deploy, backup, cron helpers
@@ -136,7 +156,7 @@ KayrosLab/
 ├── portfolio-board.html  # Portfolio kanban
 ├── ontology-explorer.html
 ├── ontology-panel.html   # Embeddable ontology sample (Cytoscape)
-├── kayroslab-complete-with-ai-agents.html   # Public governed-agent demo
+├── kayroslab-complete-with-ai-agents.html   # Public governed-agent demo (novelty + Signature)
 └── index.html            # Commercial site
 ```
 
@@ -177,6 +197,22 @@ flowchart LR
 | 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + impact |
 
 **Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via `POST /v1/cycle/reactivate`.
+
+### Novelty & Bisociation
+
+The Bisociateur agent generates structured collisions (Framework + Mechanism + Proposal + Bridge).  
+When embeddings are available, collisions are scored and ranked:
+
+- **Intra-batch diversity** — distance to other candidates in the same round
+- **Memory distance** — distance to L1/L2 stored knowledge
+- **Input distance** — distance to the original idea / constraints
+
+Preferred embedding model order (soft fallback):
+
+`qwen3-embedding:0.6b` → `bge-m3` → `mxbai-embed-large` → `nomic-embed-text` → Mock
+
+Override with `KAYROS_EMBED_MODEL`.  
+See `core/novelty.mjs` and `core/embed-select.mjs`.
 
 ### Live cycle (SSE)
 
@@ -224,10 +260,12 @@ flowchart TB
   ENG --> LLM[KayrosLLM + RoutingPolicy]
   ENG --> GOV[Governance]
   ENG --> QG[QuantGuidance]
+  ENG --> NOV[Novelty / Embeddings]
 
   ORCH -->|Plan-and-Solve| AGENTS
   ORCH -->|recall / distill / positionning| MEM
   AGENTS -->|complete| LLM
+  AGENTS -->|score collisions| NOV
   ORCH -->|sensitive output| GOV
   QG -.->|preferredModel| AGENTS
 
@@ -274,11 +312,14 @@ Path: [`core/`](core/) — ESM, Node 20+, **no npm dependencies** for the engine
 
 | Module | Role |
 |---|---|
-| `index.mjs` | `createEngine` — providers, memory, quant, orchestrator |
+| `index.mjs` | `createEngine` — providers, memory, quant, orchestrator, novelty injection |
 | `orchestrator.mjs` | plan / run / project — recall, positioning→L1, distill, gates |
 | `cycle-lifecycle.mjs` | Agent→stage, `applyGateResolution`, reactivate |
 | `memory.mjs` · `memory-scope.mjs` · `memory-rank.mjs` | L0–L3, tenant hierarchy, ranking |
+| `novelty.mjs` | Embedding-based novelty scoring & ranking of collisions |
+| `embed-select.mjs` | Soft-fallback embedding model selection |
 | `positionning/` | Scanners, ontology, OWL, `to-l1`, graph builder |
+| `agents/` | Specialist agents (Planner, Critic, Red Team, **Bisociateur**, …) |
 | `connectors.mjs` | Slack / Teams adapters, account link, gate views |
 | `account-link-store.mjs` · `account-link-service.mjs` | Durable Slack/Teams ↔ Kayros links |
 | `connectors-motif.mjs` | Motif modal + post-resolve `chat.update` |
@@ -306,64 +347,50 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
-| Reporting | projection, impact, dashboard |
-
-**Safe by default.** Without `KAYROS_AUTH_SECRET`, protected routes return `503`. `tenantId` is taken from the auth token only.
-
-**Store priority:** Postgres (`DATABASE_URL` + `pg`) → JSON files → in-memory.
+| Reporting | projection, impact |
 
 ---
 
 ## UI entry points
 
-| Page | Purpose |
+| File | Purpose |
 |---|---|
-| [`index.html`](index.html) | Commercial site & enterprise offer |
-| [`kayroslab-complete-with-ai-agents.html`](kayroslab-complete-with-ai-agents.html) | Public governed-agent demo (semantic map → 8 agents → PDF) |
-| [`cycle-timeline.html`](cycle-timeline.html) | **Live SSE cycle** — stage rail, memory, promote L2, gates |
-| [`portfolio-board.html`](portfolio-board.html) | Kanban portfolio |
-| [`portfolio-dormant.html`](portfolio-dormant.html) | Dormant ideas + reactivate |
-| [`ontology-explorer.html`](ontology-explorer.html) | Positioner ontology (Cytoscape graph) |
-| [`ontology-panel.html`](ontology-panel.html) | **Embeddable** ontology sample (iframe-friendly) |
-| [`frontend/positionning-app/`](frontend/positionning-app/) | React competitive positioning |
-| [`docs/pitch-seed.md`](docs/pitch-seed.md) | Pitch one-pager + 8-minute demo script |
-
-GitHub Pages: [geoking2104.github.io/KayrosLab](https://geoking2104.github.io/KayrosLab/).
-
-Embed the ontology panel in any page:
-
-```html
-<iframe src="./ontology-panel.html" title="Ontology" style="width:100%;height:380px;border:0;border-radius:1rem"></iframe>
-```
+| `kayroslab-complete-with-ai-agents.html` | **Public demo** — semantic map → novelty-ranked exploration → Kayros Signature → 8-agent governed cycle → export |
+| `cycle-timeline.html` | Live SSE cycle visualisation |
+| `portfolio-board.html` | Portfolio kanban |
+| `ontology-explorer.html` / `ontology-panel.html` | Ontology graph (Cytoscape) |
+| `index.html` / `index.fr.html` | Commercial landing |
+| `frontend/positionning-app` | React Positioner application |
 
 ---
 
 ## Configuration
 
-Copy [`backend/fastify/.env.sample`](backend/fastify/.env.sample) to `.env`.
+See `backend/fastify/.env.sample` and `core/OLLAMA.md`.
+
+Key environment variables:
 
 | Variable | Role |
 |---|---|
-| `PORT` | API port (default `8787`) |
-| `KAYROS_AUTH_SECRET` | JWT / session secret (required for protected routes) |
-| `KAYROS_USERS_FILE` · `KAYROS_IDEAS_FILE` · `KAYROS_GATES_FILE` · `KAYROS_MEMORY_FILE` | JSON persistence paths |
-| `KAYROS_LINKS_FILE` | Durable Slack/Teams account links (JSON if no Postgres) |
-| `DATABASE_URL` | Optional Postgres (multi-instance) |
-| `OLLAMA_ENDPOINT` · `OLLAMA_MODEL` · `KAYROS_QUANT` | Local model path |
-| `MISTRAL_API_KEY` · `ANTHROPIC_API_KEY` | Cloud LLM providers |
-| `SLACK_BOT_TOKEN` · `SLACK_SIGNING_SECRET` · `SLACK_GATE_CHANNEL` | Slack connector |
-| `KAYROS_NOTIFY_WEBHOOK` · `KAYROS_SMTP_URL` | Outbound notifications |
+| `MISTRAL_API_KEY` | Backend LLM provider |
+| `KAYROS_EMBED_MODEL` | Force embedding model (default: soft fallback chain) |
+| `DATABASE_URL` | Optional Postgres |
+| `OLLAMA_*` | Local quant-aware inference |
 
 ---
 
 ## Deployment
 
-| Path | Role |
-|---|---|
-| `deploy/ovh-vps/deploy-backend.sh` | npm install, optional `schema.sql`, PM2, nginx |
-| `deploy/ovh-vps/backup-data.sh` | JSON tar + `pg_dump` |
-| `deploy/ovh-vps/install-cron-backup.sh` | Daily 03:00 cron |
-| `core/sql/schema.sql` | Ideas, gates & **account_links** tables |
+### GitHub Pages (static demos + Positioner)
+
+Workflow: `.github/workflows/deploy-positionning-pages.yml`
+
+- Triggers on push to `main` for the listed HTML / frontend paths
+- Builds the React Positioner app
+- Copies static demos (with **size guard** on the main demo HTML > 50 KB to prevent truncation)
+- Publishes with `peaceiris/actions-gh-pages` (force orphan)
+
+### OVH VPS (backend)
 
 ```bash
 # On the VPS after setting DATABASE_URL in backend/fastify/.env
@@ -407,7 +434,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | v12 | Postgres multi-instance · ontology UX · portfolio · seed/pitch | ✅ |
 | v13 | Slack deepen (signature, idempotence) · ontology Cytoscape graph | ✅ |
 | v14 | Persist account links · motif modal · message update · ontology embed panel | ✅ |
-| v15 | Vote slash · KPI drift alerts · Discord adapter | 🔵 |
+| **v15** | **Embedding novelty ranking · Kayros Signature · public demo ranking UI** | ✅ |
+| v16 | Wire engine-side novelty into live demo + KPI drift alerts · Discord adapter | 🔵 |
 
 ---
 
