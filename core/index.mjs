@@ -9,6 +9,8 @@ export * from './memory-rank.mjs';
 export * from './embeddings.mjs';
 export * from './embed-select.mjs';
 export * from './novelty.mjs';
+export * from './epistemic.mjs';
+export * from './decision-packet.mjs';
 export * from './kpi-drift.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
@@ -90,7 +92,6 @@ async function tryLoadNodeIo() {
 
 export function createEngine(opts = {}) {
   const baseModel = opts.model || 'llama3.2';
-
   const scopeDefaults = {
     tenantId: opts.tenantId || null,
     defaultScope: opts.defaultScope || (opts.tenantId ? 'tenant' : null),
@@ -99,7 +100,6 @@ export function createEngine(opts = {}) {
     teamId: opts.teamId || null,
     organizationId: opts.organizationId || null,
   };
-
   let quantGuidance = recommendForEngine({
     model: baseModel,
     quant: opts.quant || null,
@@ -108,15 +108,12 @@ export function createEngine(opts = {}) {
     sovereignty: opts.sovereignty || null,
     availableModels: opts.availableModels || null,
   });
-
   const providers = { mock: new MockProvider() };
   let ollamaProvider = null;
   if (opts.sovereignty === 'local') {
     const defaultModel = quantGuidance.resolvedDefaultModel || baseModel;
     ollamaProvider = new OllamaProvider({
-      endpoint: opts.ollamaEndpoint,
-      defaultModel,
-      fetchImpl: opts.fetchImpl,
+      endpoint: opts.ollamaEndpoint, defaultModel, fetchImpl: opts.fetchImpl,
     });
     providers.ollama = ollamaProvider;
   }
@@ -126,21 +123,15 @@ export function createEngine(opts = {}) {
     });
   }
   const defaultProvider = opts.backendUrl ? 'backend' : (opts.sovereignty === 'local' ? 'ollama' : 'mock');
-
   const policy = new RoutingPolicy({
-    defaultProvider,
-    fallback: 'mock',
-    roleModel: opts.roleModel || {},
-    roleQuant: opts.roleQuant || {},
-    defaultQuant: opts.quant || null,
-    preferHigherQuant: !!opts.preferHigherQuant,
+    defaultProvider, fallback: 'mock',
+    roleModel: opts.roleModel || {}, roleQuant: opts.roleQuant || {},
+    defaultQuant: opts.quant || null, preferHigherQuant: !!opts.preferHigherQuant,
     availableModels: opts.availableModels || null,
   });
-
   const llm = new KayrosLLM(providers, policy);
   const tools = demoTools();
   const governance = new GovernanceService();
-
   let vectors;
   if (opts.qdrantUrl) {
     vectors = new QdrantVectorStore({
@@ -150,121 +141,65 @@ export function createEngine(opts = {}) {
   } else {
     vectors = new InMemoryVectorStore();
   }
-
   let embeddings;
   if (opts.embeddingsUrl) embeddings = new HttpEmbeddings({ url: opts.embeddingsUrl, model: opts.embedModel, secret: opts.secret, fetchImpl: opts.fetchImpl });
   else if (opts.sovereignty === 'local') embeddings = new OllamaEmbeddings({ endpoint: opts.ollamaEndpoint, model: opts.embedModel || 'nomic-embed-text', fetchImpl: opts.fetchImpl });
   else embeddings = new MockEmbeddings();
-
   const memory = new MemoryService({ embeddings, store: vectors });
-
   let offloadBackend = null;
   if (opts.offloadRoot || opts.fs) {
-    offloadBackend = new FileOffloadBackend({
-      rootDir: opts.offloadRoot || './.kayros-l0',
-      fs: opts.fs || null,
-      path: opts.path || null,
-    });
+    offloadBackend = new FileOffloadBackend({ rootDir: opts.offloadRoot || './.kayros-l0', fs: opts.fs || null, path: opts.path || null });
   }
-
   let persistentStore = null;
   if (opts.memoryPath || opts.fs) {
-    persistentStore = new FileLayeredStore({
-      path: opts.memoryPath || './.kayros-memory.json',
-      fs: opts.fs || null,
-      partitionByTenant: !!opts.partitionByTenant,
-    });
+    persistentStore = new FileLayeredStore({ path: opts.memoryPath || './.kayros-memory.json', fs: opts.fs || null, partitionByTenant: !!opts.partitionByTenant });
   }
-
-  const layered = new LayeredMemory({
-    memoryService: memory,
-    store: vectors,
-    offloadBackend,
-    persistentStore,
-  });
-
-  if (persistentStore?.enabled) {
-    layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
-  }
-
-  const agents = createAllAgents({
-    llm, tools, memory, quantGuidance, baseModel,
-  });
-
-  if (agents.Bisociateur && embeddings) {
-    agents.Bisociateur.embeddings = embeddings;
-  }
-
+  const layered = new LayeredMemory({ memoryService: memory, store: vectors, offloadBackend, persistentStore });
+  if (persistentStore?.enabled) layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
+  const agents = createAllAgents({ llm, tools, memory, quantGuidance, baseModel });
+  if (agents.Bisociateur && embeddings) agents.Bisociateur.embeddings = embeddings;
   const orchestrator = new Orchestrator({
-    llm, tools, governance, memory, layered,
-    plannerModel: opts.plannerModel,
-    agents,
-    quantGuidance,
-    ...scopeDefaults,
+    llm, tools, governance, memory, layered, plannerModel: opts.plannerModel, agents, quantGuidance, ...scopeDefaults,
   });
-
   const engine = {
-    llm, tools, governance, vectors, embeddings,
-    memory, layered, orchestrator, agents,
-    quantGuidance,
-    baseModel,
-    scopeDefaults,
+    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents,
+    quantGuidance, baseModel, scopeDefaults,
   };
-
   engine.attachNodeFs = async () => {
     if (opts.fs) return true;
     if (!opts.memoryPath && !opts.offloadRoot) return false;
     const io = await tryLoadNodeIo();
     if (!io) return false;
     if (opts.offloadRoot || opts.memoryPath) {
-      layered.offloadBackend = new FileOffloadBackend({
-        rootDir: opts.offloadRoot || './.kayros-l0',
-        fs: io.fs,
-        path: io.path,
-      });
-      layered.persistentStore = new FileLayeredStore({
-        path: opts.memoryPath || './.kayros-memory.json',
-        fs: io.fs,
-        partitionByTenant: !!opts.partitionByTenant,
-      });
+      layered.offloadBackend = new FileOffloadBackend({ rootDir: opts.offloadRoot || './.kayros-l0', fs: io.fs, path: io.path });
+      layered.persistentStore = new FileLayeredStore({ path: opts.memoryPath || './.kayros-memory.json', fs: io.fs, partitionByTenant: !!opts.partitionByTenant });
       await layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
     }
     return true;
   };
-
   if ((opts.memoryPath || opts.offloadRoot) && !opts.fs) {
     engine.persistenceReady = engine.attachNodeFs().catch(() => false);
   } else {
     engine.persistenceReady = Promise.resolve(!!(persistentStore?.enabled));
   }
-
   engine.rebindFromAvailable = async (tags) => {
     if (!Array.isArray(tags) || !tags.length) return quantGuidance;
     quantGuidance = filterGuidanceByAvailable(quantGuidance, tags);
     engine.quantGuidance = quantGuidance;
     orchestrator.quantGuidance = quantGuidance;
     if (policy) policy.availableModels = tags;
-    if (ollamaProvider && quantGuidance.resolvedDefaultModel) {
-      ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
-    }
+    if (ollamaProvider && quantGuidance.resolvedDefaultModel) ollamaProvider.defaultModel = quantGuidance.resolvedDefaultModel;
     rebindAgentsQuant(agents, quantGuidance, baseModel);
     return quantGuidance;
   };
-
   const maybeSync = async () => {
-    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') {
-      return quantGuidance;
-    }
+    if (!opts.syncAvailableQuants || !ollamaProvider || typeof ollamaProvider.listModels !== 'function') return quantGuidance;
     try {
       const tags = await ollamaProvider.listModels();
-      if (Array.isArray(tags) && tags.length) {
-        return engine.rebindFromAvailable(tags);
-      }
+      if (Array.isArray(tags) && tags.length) return engine.rebindFromAvailable(tags);
     } catch { /* soft */ }
     return quantGuidance;
   };
-
   engine.syncAvailableQuants = maybeSync();
-
   return engine;
 }
