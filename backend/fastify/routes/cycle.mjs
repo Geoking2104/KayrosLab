@@ -1,5 +1,6 @@
 /**
  * Phase 1 + 4 + 5 — Live cycle, idea lifecycle, positionning → L1
+ * P2–P4 governed intelligence flags (frame / world / adaptive / novelty / dialectic)
  * POST /v1/cycle/run
  * POST /v1/cycle/reactivate
  * GET  /v1/cycle/status
@@ -31,6 +32,17 @@ const cycleRunSchema = z.object({
   title: z.string().max(300).optional(),
   /** Phase 5 — inject competitor L1 facts (default true) */
   positionning: z.boolean().optional().default(true),
+  /** P2 — cheap frame control */
+  frameControl: z.union([z.boolean(), z.enum(['llm', 'always'])]).optional().default(true),
+  autoPickFrame: z.boolean().optional().default(true),
+  forceFrameGate: z.boolean().optional().default(false),
+  /** P1 — novelty + dialectic */
+  noveltyControl: z.boolean().optional().default(false),
+  dialectic: z.union([z.boolean(), z.enum(['agents'])]).optional().default(false),
+  /** P3 — world model */
+  worldModel: z.union([z.boolean(), z.enum(['llm'])]).optional().default(true),
+  /** P4 — adaptive residual portfolio */
+  adaptive: z.boolean().optional().default(true),
 });
 
 const reactivateSchema = z.object({
@@ -184,6 +196,15 @@ export default async function cycleRoute(app) {
         gitlabToken: ctx.GITLAB_TOKEN || '',
         gitlabBaseUrl: ctx.GITLAB_BASE_URL || '',
       },
+      // P2–P4 governed intelligence
+      frameControl: body.frameControl,
+      autoPickFrame: body.autoPickFrame,
+      forceFrameGate: body.forceFrameGate,
+      waitFrameGate: false,
+      noveltyControl: body.noveltyControl,
+      dialectic: body.dialectic,
+      worldModel: body.worldModel,
+      adaptive: body.adaptive,
     };
 
     try {
@@ -369,7 +390,15 @@ export default async function cycleRoute(app) {
         next: {
           method: 'POST',
           path: '/v1/cycle/run',
-          body: { query, ideaId: idea.id, governance: body.governance, stream: true },
+          body: {
+            query,
+            ideaId: idea.id,
+            governance: body.governance,
+            stream: true,
+            frameControl: true,
+            worldModel: true,
+            adaptive: true,
+          },
         },
       };
     }
