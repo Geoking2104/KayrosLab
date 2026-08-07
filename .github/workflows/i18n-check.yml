@@ -1,0 +1,39 @@
+name: i18n check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "kayroslab-complete-with-ai-agents.html"
+      - "scripts/check-i18n.mjs"
+      - ".github/workflows/i18n-check.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "kayroslab-complete-with-ai-agents.html"
+      - "scripts/check-i18n.mjs"
+      - ".github/workflows/i18n-check.yml"
+  workflow_dispatch:
+
+jobs:
+  check-i18n:
+    name: FR/EN translation parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run i18n checker
+        run: node scripts/check-i18n.mjs ./kayroslab-complete-with-ai-agents.html
+
+      - name: Run i18n checker (strict)
+        if: github.event_name == 'workflow_dispatch'
+        run: node scripts/check-i18n.mjs ./kayroslab-complete-with-ai-agents.html --strict
+        continue-on-error: true
