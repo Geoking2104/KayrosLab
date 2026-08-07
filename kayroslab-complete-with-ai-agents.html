@@ -456,18 +456,6 @@ const translations = {
     shortlist:'Présélectionner', choose_direction:'Retenir cette piste',
     shortlist_required:'Sélectionnez au moins deux pistes à combiner.',
     exploration_parse_error:'La réponse d’exploration n’a pas le format attendu. Relancez la boucle.',
-    auto_retrying:'Format de réponse incomplet — nouvelle tentative automatique…',
-    auto_retry_ok:'Réponse récupérée après reformatage automatique.',
-    auto_retry_fail:'Après plusieurs tentatives, le format reste invalide. Reformulez l’idée ou relancez.',
-    clarify_title:'Affiner la demande avant d’explorer',
-    clarify_hint:'Une idée trop vague produit des pistes floues. Précisez le terrain, le bénéficiaire ou la contrainte.',
-    clarify_continue:'Continuer quand même',
-    clarify_apply:'Utiliser cette reformulation',
-    gate_stakes_0:'Enjeu : qualifier les signaux. Votre note oriente la cartographie (synonymes, périmètre, exclusions).',
-    gate_stakes_1:'Enjeu : valider la carte. Indiquez les clusters à prioriser ou les trous à combler.',
-    gate_stakes_2:'Enjeu : choisir 1–2 scénarios à stress-tester.',
-    gate_stakes_3:'Enjeu : sélectionner les gaps concurrentiels qui infléchissent Challenge/Decide.',
-    gate_stakes_default:'Votre annotation est transmise aux agents suivants — expliquez le pourquoi.',
     idea_selected_notice:'Piste retenue. Vous pouvez la reformuler avant la mise à l’épreuve.',
     original_selected_notice:'Idée initiale retenue comme hypothèse de travail.',
     action_exploration_started:'Exploration démarrée', action_exploration_round:'Nouvelle boucle générée',
@@ -621,18 +609,6 @@ const translations = {
     shortlist:'Shortlist', choose_direction:'Choose this direction',
     shortlist_required:'Select at least two directions to combine.',
     exploration_parse_error:'The exploration response did not match the expected format. Run the loop again.',
-    auto_retrying:'Incomplete response format — automatic retry…',
-    auto_retry_ok:'Response recovered after automatic reformat.',
-    auto_retry_fail:'Format still invalid after several attempts. Reframe the idea or retry.',
-    clarify_title:'Sharpen the request before exploring',
-    clarify_hint:'A vague idea yields fuzzy directions. Specify domain, beneficiary, or constraint.',
-    clarify_continue:'Continue anyway',
-    clarify_apply:'Use this reframe',
-    gate_stakes_0:'Stakes: qualify signals. Your note steers the map.',
-    gate_stakes_1:'Stakes: validate the map. Mark clusters or gaps to bridge.',
-    gate_stakes_2:'Stakes: pick 1–2 scenarios to stress-test.',
-    gate_stakes_3:'Stakes: select competitive gaps that steer Challenge/Decide.',
-    gate_stakes_default:'Your annotation is passed downstream — explain the why.',
     idea_selected_notice:'Direction selected. You can rewrite it before stress-testing.',
     original_selected_notice:'Original idea selected as the working hypothesis.',
     action_exploration_started:'Exploration started', action_exploration_round:'New exploration round generated',
@@ -740,9 +716,9 @@ function t(key,vars,lang){
 
 const cycleData = [
   { agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()'], gate:{fr:'Expert métier',en:'Domain Expert'},
-    system:{fr:'Tu es le Signal Scanner de KayrosLab (étape Écouter). Qualifie les signaux faibles (marché, techno, réglementation, usages). TOUJOURS : (1) reformule l’idée en 1 phrase ; (2) 3–6 synonymes/termes adjacents ; (3) signaux scorés 1–10 ; (4) si vague, 2–3 questions de clarification (bénéficiaire, contrainte, horizon, succès mesurable) en expliquant pourquoi chaque réponse change la suite. Pas de chiffres inventés. Réponds en français, structuré.',en:'You are KayrosLab’s Signal Scanner (Listen). ALWAYS: (1) restate the idea in one sentence; (2) 3–6 synonyms/adjacent terms; (3) scored signals 1–10; (4) if vague, 2–3 clarifying questions (beneficiary, constraint, horizon, measurable success) explaining why each answer changes the cycle. No invented numbers.'} },
+    system:{fr:'Tu es le Signal Scanner de KayrosLab. Qualifie les signaux faibles (marché, technologie, réglementation). Réponds en français, de façon structurée, avec des scores de 1 à 10 si utile.',en:'You are KayrosLab’s Signal Scanner. Qualify weak signals across market, technology, and regulation. Answer in English with a clear structure and 1–10 scores where useful.'} },
   { agent:'Trend Mapper', tools:['trend_network_builder()','bisociation_detector()'], gate:{fr:'Direction stratégique',en:'Strategic Lead'},
-    system:{fr:'Tu es le Trend Mapper de KayrosLab (Cartographier). Style réseau sémantique : (1) 3–5 clusters thématiques nommés ; (2) liens entre clusters ; (3) gaps structurels à connecter ; (4) nœuds-pont ; (5) 2–3 questions d’exploration. Si le brief est ambigu, pose 1–2 questions de cadrage en expliquant l’impact sur les scénarios. Réponds en français, structuré.',en:'You are KayrosLab’s Trend Mapper (Map). Semantic-network style: (1) 3–5 named topical clusters; (2) links between clusters; (3) structural gaps worth bridging; (4) bridge nodes; (5) 2–3 exploration questions. If ambiguous, ask 1–2 framing questions and explain impact on scenarios.'} },
+    system:{fr:'Tu es le Trend Mapper de KayrosLab. Cartographie les tendances et les ponts bisociatifs. Réponds en français.',en:'You are KayrosLab’s Trend Mapper. Map trends and bisociative links. Answer in English.'} },
   { agent:'Scenario Generator', tools:['scenario_simulator()'], gate:{fr:'Expert métier',en:'Domain Expert'},
     system:{fr:'Tu es le Scenario Generator de KayrosLab. Propose 2 à 3 scénarios concrets avec nom, faisabilité et horizon. Réponds en français.',en:'You are KayrosLab’s Scenario Generator. Propose 2–3 concrete scenarios with a name, feasibility, and timeline. Answer in English.'} },
   { agent:'Positioner', tools:['gap_analyzer()','ontological_mapper()'], gate:{fr:'Expert marché',en:'Market Expert'},
@@ -1211,15 +1187,36 @@ async function generateSemanticMap(){
   document.getElementById('semantic-loading').innerHTML='<span class="spinner"></span>'+escapeHtml(t('semantic_running',{},cycleLanguage()));
   document.getElementById('semantic-content').classList.add('hidden');
   try{
-    const raw=await callMistralViaProxy(semanticSystemPrompt(cycleLanguage()),semanticUserPrompt());
-    demoState.semanticMap=normalizeSemanticMap(raw);
+    const lang=cycleLanguage();
+    let map=null;
+    const strictExtra = lang==='en'
+      ? '\nCRITICAL: Return ONLY valid JSON for the semantic map schema. No markdown, no commentary.'
+      : '\nCRITIQUE : renvoie UNIQUEMENT le JSON valide du schema de carte semantique. Pas de markdown, pas de commentaire.';
+    for(let attempt=0; attempt<3; attempt++){
+      try{
+        if(attempt>0){
+          document.getElementById('semantic-loading').innerHTML='<span class="spinner"></span>'+escapeHtml(t('auto_retrying',{},lang));
+          log(t('auto_retrying',{},lang),'warn');
+        }
+        const sys=semanticSystemPrompt(lang)+(attempt>0?strictExtra:'');
+        const usr=semanticUserPrompt()+(attempt>0?strictExtra:'');
+        const raw=await callMistralViaProxy(sys,usr);
+        map=normalizeSemanticMap(raw);
+        if(attempt>0) log(t('auto_retry_ok',{},lang),'success');
+        break;
+      }catch(inner){
+        if(attempt===2) throw inner;
+      }
+    }
+    demoState.semanticMap=map;
     renderSemanticMap();
-    log(t('semantic_map_ready',{},cycleLanguage()),'success');
+    log(t('semantic_map_ready',{},lang),'success');
   }catch(err){
-    const message=err instanceof SyntaxError?t('semantic_parse_error',{},cycleLanguage()):err.message;
-    const title=message===t('semantic_parse_error',{},cycleLanguage())?t('response_format_title',{},cycleLanguage()):t('api_title',{},cycleLanguage());
+    const lang=cycleLanguage();
+    const message=err instanceof SyntaxError?t('semantic_parse_error',{},lang):(err.message||t('semantic_parse_error',{},lang));
+    const title=t('response_format_title',{},lang);
     demoState.semanticMap=null;
-    document.getElementById('semantic-loading').innerHTML='<div class="text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(message)+'</div>';
+    document.getElementById('semantic-loading').innerHTML='<div class="text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(t('auto_retry_fail',{},lang))+'<br><span class="opacity-80">'+escapeHtml(message)+'</span></div>';
     document.getElementById('semantic-content').classList.remove('hidden');
     document.getElementById('semantic-fields').innerHTML='';
     document.getElementById('semantic-continue-btn').disabled=true;
@@ -1443,11 +1440,30 @@ async function generateIdeaRound(mode,sourceCandidates){
   document.getElementById('idea-candidates').innerHTML='<div class="lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 py-12 text-slate-300"><span class="spinner"></span>'+escapeHtml(t('exploration_running',{},cycleLanguage()))+'</div>';
   document.getElementById('idea-controls').classList.add('hidden');
   try{
-    const raw=await callMistralViaProxy(explorationSystemPrompt(cycleLanguage()),explorationUserPrompt(mode,sourceCandidates,feedback));
-    const candidates=parseExplorationResponse(raw,roundNumber);
+    const lang=cycleLanguage();
+    let candidates=null, recovered=false;
+    const strictExtra = lang==='en'
+      ? '\nCRITICAL: Return ONLY a JSON array of exactly 3 objects with keys title,reframedIdea,shiftedAssumption,falsifiableHypothesis,firstExperiment,signals,criticalUnknowns,rationale,scores. No markdown fences, no prose outside JSON.'
+      : '\nCRITIQUE : renvoie UNIQUEMENT un tableau JSON de exactement 3 objets avec les cles title,reframedIdea,shiftedAssumption,falsifiableHypothesis,firstExperiment,signals,criticalUnknowns,rationale,scores. Pas de fences markdown, pas de prose hors JSON.';
+    for(let attempt=0; attempt<3; attempt++){
+      try{
+        if(attempt>0){
+          document.getElementById('idea-candidates').innerHTML='<div class="lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 py-10 text-amber-100 text-sm"><span class="spinner"></span>'+escapeHtml(t('auto_retrying',{},lang))+'</div>';
+          log(t('auto_retrying',{},lang),'warn');
+        }
+        const sys = explorationSystemPrompt(lang) + (attempt>0 ? strictExtra : '');
+        const usr = explorationUserPrompt(mode,sourceCandidates,feedback) + (attempt>0 ? strictExtra : '');
+        const raw=await callMistralViaProxy(sys,usr);
+        candidates=parseExplorationResponse(raw,roundNumber);
+        if(attempt>0){ recovered=true; log(t('auto_retry_ok',{},lang),'success'); }
+        break;
+      }catch(inner){
+        if(attempt===2) throw inner;
+      }
+    }
     demoState.explorationRounds.push({
       iteration:roundNumber,mode:mode||'challenge',feedback,
-      sourceIds:(sourceCandidates||[]).map(c=>c.id),generatedAt:new Date().toISOString(),candidates
+      sourceIds:(sourceCandidates||[]).map(c=>c.id),generatedAt:new Date().toISOString(),candidates,recovered:recovered
     });
     demoState.shortlistedIdeaIds=[];
     if(roundNumber>1) recordUserAction('exploration_round',null,feedback,'detail_exploration_round');
@@ -1455,9 +1471,10 @@ async function generateIdeaRound(mode,sourceCandidates){
     renderIdeaCandidates();
     document.getElementById('idea-feedback').value='';
   }catch(err){
-    const message=err instanceof SyntaxError?t('exploration_parse_error',{},cycleLanguage()):err.message;
-    const title=message===t('exploration_parse_error',{},cycleLanguage())?t('response_format_title',{},cycleLanguage()):t('api_title',{},cycleLanguage());
-    document.getElementById('idea-candidates').innerHTML='<div class="lg:col-span-3 rounded-2xl border border-red-400/30 bg-red-400/10 p-5 text-sm text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(message)+'</div>';
+    const lang=cycleLanguage();
+    const message=err instanceof SyntaxError?t('exploration_parse_error',{},lang):(err.message||t('exploration_parse_error',{},lang));
+    const title=t('response_format_title',{},lang);
+    document.getElementById('idea-candidates').innerHTML='<div class="lg:col-span-3 rounded-2xl border border-red-400/30 bg-red-400/10 p-5 text-sm text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(t('auto_retry_fail',{},lang))+'<br><span class="opacity-80">'+escapeHtml(message)+'</span></div>';
     document.getElementById('idea-controls').classList.remove('hidden');
     document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-triangle-exclamation mr-1.5"></i>'+escapeHtml(message);
   }finally{
