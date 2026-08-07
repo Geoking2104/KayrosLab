@@ -14,8 +14,11 @@ export * from './epistemic.mjs';
 export * from './decision-packet.mjs';
 export * from './dialectic.mjs';
 export * from './frame.mjs';
+export * from './world-model.mjs';
+export * from './adaptive.mjs';
 export * from './run-hooks-p1.mjs';
 export * from './run-hooks-p2.mjs';
+export * from './run-hooks-p3p4.mjs';
 export * from './kpi-drift.mjs';
 export * from './projection.mjs';
 export * from './loop.mjs';
@@ -52,7 +55,9 @@ import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProv
 import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
-import { MemoryService, InMemoryVectorStore, QdrantVectorStore } from './memory.mjs';
+import {
+  InMemoryVectorStore, QdrantVectorStore, MemoryService,
+} from './memory.mjs';
 import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings } from './embeddings.mjs';
 import { LayeredMemory, FileOffloadBackend, FileLayeredStore } from './memory-types.mjs';
 import { createAllAgents } from './agents/index.mjs';
@@ -76,16 +81,16 @@ export function createEngine(opts = {}) {
     organizationId: opts.organizationId || null,
   };
   const baseModel = opts.model || null;
-  let quantGuidance = buildQuantGuidance({
+  let quantGuidance = opts.quantGuidance || buildQuantGuidance({
     baseModel,
-    quant: opts.quant,
-    roleModel: opts.roleModel,
-    roleQuant: opts.roleQuant,
-    preferHigherQuant: opts.preferHigherQuant,
-    availableModels: opts.availableModels,
+    quant: opts.quant || null,
+    roleModel: opts.roleModel || {},
+    roleQuant: opts.roleQuant || {},
+    preferHigherQuant: !!opts.preferHigherQuant,
+    availableModels: opts.availableModels || null,
   });
   const providers = {};
-  let defaultProvider = 'mock';
+  providers.mock = new MockProvider();
   let ollamaProvider = null;
   if (opts.sovereignty === 'local' || opts.ollamaEndpoint) {
     ollamaProvider = new OllamaProvider({
@@ -94,19 +99,16 @@ export function createEngine(opts = {}) {
       fetchImpl: opts.fetchImpl,
     });
     providers.ollama = ollamaProvider;
-    defaultProvider = 'ollama';
   }
-  if (opts.anthropicKey || opts.mistralKey || opts.backendUrl) {
+  if (opts.httpBackendUrl) {
     providers.http = new HttpBackendProvider({
-      url: opts.backendUrl || 'https://api.kayroslab.com',
-      anthropicKey: opts.anthropicKey,
-      mistralKey: opts.mistralKey,
-      secret: opts.secret,
-      fetchImpl: opts.fetchImpl,
+      url: opts.httpBackendUrl, secret: opts.secret, fetchImpl: opts.fetchImpl,
     });
-    if (!providers.ollama) defaultProvider = 'http';
   }
-  providers.mock = new MockProvider();
+  if (opts.anthropicKey) {
+    // optional Anthropic adapter if present in kayros-llm
+  }
+  const defaultProvider = opts.sovereignty === 'local' ? 'ollama' : (opts.httpBackendUrl ? 'http' : 'mock');
   const policy = new RoutingPolicy({
     defaultProvider, fallback: 'mock',
     roleModel: opts.roleModel || {}, roleQuant: opts.roleQuant || {},
