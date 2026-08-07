@@ -1,1 +1,667 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Cycle gouverné (SSE) · P0–P4</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{body:['Geist','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
+<style>
+body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background:#fff;color:#0f172a}
+.ev-card{border-left:3px solid #e2e8f0;transition:border-color .15s}
+.ev-card[data-type="start"]{border-left-color:#0ea5e9}
+.ev-card[data-type="meta"]{border-left-color:#64748b}
+.ev-card[data-type="recall"]{border-left-color:#8b5cf6}
+.ev-card[data-type="positionning"]{border-left-color:#d946ef}
+.ev-card[data-type="trace"]{border-left-color:#10b981}
+.ev-card[data-type="distill"]{border-left-color:#f59e0b}
+.ev-card[data-type="synthesis"]{border-left-color:#0369a1}
+.ev-card[data-type="gate"]{border-left-color:#ef4444}
+.ev-card[data-type="final"]{border-left-color:#059669}
+.ev-card[data-type="degraded"]{border-left-color:#f97316}
+.ev-card[data-type="frame_assess"],.ev-card[data-type="frame_reframes"],.ev-card[data-type="frame_auto_pick"]{border-left-color:#06b6d4}
+.ev-card[data-type="world_model"],.ev-card[data-type="gate_resolution"]{border-left-color:#7c3aed}
+.ev-card[data-type="adaptive_pressure"],.ev-card[data-type="residual_portfolio"]{border-left-color:#ea580c}
+.ev-card[data-type="novelty_control"],.ev-card[data-type="dialectic"]{border-left-color:#14b8a6}
+.ev-card[data-type="packet"]{border-left-color:#2563eb}
+.ev-card[data-type="offload"]{border-left-color:#94a3b8}
+.ev-card[data-type="error"]{border-left-color:#dc2626}
+.ev-card[data-type="done"]{border-left-color:#cbd5e1}
+.badge-quant{font-family:Fira Code,monospace;font-size:10px;background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:999px}
+.badge-deg{font-size:10px;background:#ffedd5;color:#c2410c;padding:2px 6px;border-radius:999px}
+.badge-stage{font-size:10px;background:#f0fdf4;color:#15803d;padding:2px 6px;border-radius:999px;font-weight:600}
+.badge-status{font-size:10px;background:#fef3c7;color:#b45309;padding:2px 6px;border-radius:999px;font-weight:600}
+.badge-pos{font-size:10px;background:#fdf4ff;color:#a21caf;padding:2px 6px;border-radius:999px}
+.badge-p2{font-size:10px;font-weight:700;color:#0891b2;background:#ecfeff;padding:1px 6px;border-radius:999px}
+.badge-p3{font-size:10px;font-weight:700;color:#6d28d9;background:#f5f3ff;padding:1px 6px;border-radius:999px}
+.badge-p4{font-size:10px;font-weight:700;color:#c2410c;background:#fff7ed;padding:1px 6px;border-radius:999px}
+.badge-p1{font-size:10px;font-weight:700;color:#0f766e;background:#f0fdfa;padding:1px 6px;border-radius:999px}
+.badge-pkt{font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;padding:1px 6px;border-radius:999px}
+#timeline{max-height:min(62vh,560px);overflow-y:auto}
+.mono{font-family:Fira Code,monospace;font-size:11px}
+.stage-rail{display:flex;flex-wrap:wrap;gap:4px}
+.stage-chip{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #e2e8f0;color:#64748b;background:#f8fafc}
+.stage-chip.active{border-color:#0ea5e9;background:#e0f2fe;color:#0369a1;font-weight:700}
+.stage-chip.done{border-color:#86efac;background:#f0fdf4;color:#166534}
+#gate-panel.hidden{display:none}
+</style>
+</head>
+<body class="antialiased">
+<header class="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <a href="./kayroslab-complete-with-ai-agents.html" class="font-display font-bold text-lg tracking-tight text-slate-900">KayrosLab <span class="text-sky-600 text-sm font-semibold">Cycle SSE · P0–P4</span></a>
+    <div class="flex items-center gap-2 text-xs">
+      <span id="status-pill" class="rounded-full px-3 py-1 bg-slate-100 text-slate-600">idle</span>
+      <a href="./kayroslab-complete-with-ai-agents.html" class="text-slate-500 hover:text-sky-600">Démo agents</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <section class="lg:col-span-4 space-y-4">
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <h1 class="font-display text-xl font-bold mb-1">Cycle gouverné live</h1>
+      <p class="text-sm text-slate-500 mb-4">SSE · P0 packet · P2 frame · P3 world · P4 adaptive</p>
+
+      <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">API base</label>
+      <input id="api-base" type="text" value="http://localhost:8787" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" />
+
+      <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Bearer token (gates / reactivate)</label>
+      <input id="auth-token" type="password" placeholder="JWT session" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" />
+
+      <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Objectif</label>
+      <textarea id="query" rows="3" class="w-full mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm">Lancer une offre B2B de maintenance prédictive IoT pour l'industrie européenne</textarea>
+
+      <div class="grid grid-cols-2 gap-2 mb-3">
+        <div>
+          <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Gouvernance</label>
+          <select id="governance" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-sm">
+            <option value="auto" selected>auto</option>
+            <option value="supervise">supervise</option>
+            <option value="strict">strict</option>
+            <option value="off">off</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Provider</label>
+          <select id="provider" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-sm">
+            <option value="">défaut serveur</option>
+            <option value="mock">mock</option>
+            <option value="mistral">mistral</option>
+            <option value="anthropic">anthropic</option>
+            <option value="ollama">ollama</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-x-4 gap-y-2 mb-4 text-sm">
+        <label class="flex items-center gap-2 cursor-pointer"><input id="auto-distill" type="checkbox" checked class="accent-sky-600" /> autoDistill</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input id="positionning" type="checkbox" checked class="accent-sky-600" /> positionning→L1</label>
+        <label class="flex items-center gap-2 cursor-pointer" title="P2"><input id="frame-control" type="checkbox" checked class="accent-sky-600" /> frameControl</label>
+        <label class="flex items-center gap-2 cursor-pointer" title="P3"><input id="world-model" type="checkbox" checked class="accent-sky-600" /> worldModel</label>
+        <label class="flex items-center gap-2 cursor-pointer" title="P4"><input id="adaptive" type="checkbox" checked class="accent-sky-600" /> adaptive</label>
+        <label class="flex items-center gap-2 cursor-pointer" title="P1"><input id="novelty-control" type="checkbox" class="accent-sky-600" /> noveltyControl</label>
+        <label class="flex items-center gap-2 cursor-pointer" title="P1"><input id="dialectic" type="checkbox" class="accent-sky-600" /> dialectic</label>
+        <label class="flex items-center gap-2 cursor-pointer"><input id="stream" type="checkbox" checked class="accent-sky-600" /> SSE</label>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-run" type="button" class="rounded-full bg-sky-600 hover:bg-sky-500 text-white font-semibold px-5 py-2.5 text-sm"><i class="fas fa-play mr-1"></i> Lancer</button>
+        <button id="btn-stop" type="button" disabled class="rounded-full border border-slate-200 text-slate-600 font-semibold px-4 py-2.5 text-sm disabled:opacity-40">Stop</button>
+        <button id="btn-clear" type="button" class="rounded-full border border-slate-200 text-slate-500 px-4 py-2.5 text-sm">Effacer</button>
+      </div>
+    </div>
+
+    <div id="gate-panel" class="rounded-2xl border border-red-200 bg-red-50 p-4 shadow-sm hidden">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-red-700 mb-2">Gate · décision humaine</h2>
+      <p class="text-xs text-red-800/80 mb-2 mono">gateId: <span id="gate-id">—</span></p>
+      <p class="text-xs text-slate-600 mb-2">Type: <span id="gate-type">—</span></p>
+      <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Motif (obligatoire reject/revise)</label>
+      <input id="gate-reason" type="text" class="w-full mb-3 rounded-lg border border-red-200 bg-white px-2 py-2 text-sm" placeholder="Raison…" />
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-approve" type="button" class="rounded-full bg-emerald-600 text-white text-xs font-bold px-4 py-2">Approve</button>
+        <button id="btn-revise" type="button" class="rounded-full bg-amber-500 text-white text-xs font-bold px-4 py-2">Revise</button>
+        <button id="btn-reject" type="button" class="rounded-full bg-red-600 text-white text-xs font-bold px-4 py-2">Reject</button>
+      </div>
+      <p id="gate-msg" class="text-xs text-slate-500 mt-2"></p>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Idée · lifecycle</h2>
+        <span id="idea-id" class="mono text-[10px] text-slate-400">—</span>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-3">
+        <span id="idea-stage-badge" class="badge-stage">stage: —</span>
+        <span id="idea-status-badge" class="badge-status">status: —</span>
+      </div>
+      <div id="stage-rail" class="stage-rail mb-3"></div>
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-inspect" type="button" class="text-xs text-sky-600 font-semibold" disabled>Inspecter mémoire</button>
+        <button id="btn-reactivate" type="button" class="text-xs text-amber-700 font-semibold" disabled title="Statuts dormants only">Réactiver (EF-58)</button>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Mémoire · inspecteur</h2>
+      <div class="grid grid-cols-4 gap-1 mb-2 text-center">
+        <div class="rounded-lg bg-slate-50 p-2"><div id="c-l0" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L0</div></div>
+        <div class="rounded-lg bg-slate-50 p-2"><div id="c-l1" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L1</div></div>
+        <div class="rounded-lg bg-slate-50 p-2"><div id="c-l2" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L2</div></div>
+        <div class="rounded-lg bg-slate-50 p-2"><div id="c-l3" class="font-bold text-sm">0</div><div class="text-[9px] uppercase text-slate-400">L3</div></div>
+      </div>
+      <div id="mem-l2" class="space-y-1 max-h-36 overflow-y-auto text-xs text-slate-600 mb-2"><p class="text-slate-400">Aucun scénario L2.</p></div>
+      <div class="flex flex-wrap gap-2">
+        <button id="btn-l3-list" type="button" class="text-xs text-sky-600 font-semibold">Liste L3</button>
+        <button id="btn-save-mem" type="button" class="text-xs text-slate-500 font-semibold">Save mémoire</button>
+      </div>
+      <pre id="mem-extra" class="mono text-slate-500 mt-2 max-h-28 overflow-y-auto whitespace-pre-wrap hidden"></pre>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Engine</h2>
+      <pre id="engine-status" class="mono text-slate-600 whitespace-pre-wrap bg-slate-50 rounded-lg p-3 max-h-28 overflow-y-auto">—</pre>
+      <button id="btn-status" type="button" class="mt-2 text-xs text-sky-600 font-semibold">/v1/cycle/status</button>
+    </div>
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-950 text-slate-200 p-4 shadow-sm">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-sky-400 mb-2">Packet / synthèse</h2>
+      <div id="final-panel" class="text-sm leading-relaxed whitespace-pre-wrap min-h-[3rem] text-slate-300">En attente…</div>
+    </div>
+  </section>
+
+  <section class="lg:col-span-8">
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-display font-semibold text-sm">Timeline</h2>
+        <span id="event-count" class="text-xs text-slate-400">0 events</span>
+      </div>
+      <p class="text-[11px] text-slate-400 mb-3 mono">meta → start → frame → recall → agents → novelty → world → adaptive → packet → gate → done</p>
+      <div id="timeline" class="space-y-2">
+        <p class="text-sm text-slate-400">Lancez un cycle pour voir le flux live (P0–P4).</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const STAGES = ['recueillir','ecouter','cartographier','construire','eprouver','arbitrer','projeter','realiser'];
+  const DORMANT = ['consideration_future', 'en_pause', 'non_poursuivi'];
+  let abortCtrl = null;
+  let events = [];
+  let currentIdeaId = null;
+  let currentStage = null;
+  let currentStatus = null;
+  let pendingGateId = null;
+
+  function setStatus(label, tone) {
+    const el = $('status-pill');
+    el.textContent = label;
+    el.className = 'rounded-full px-3 py-1 text-xs font-semibold ' + ({
+      idle: 'bg-slate-100 text-slate-600',
+      run: 'bg-sky-100 text-sky-700',
+      ok: 'bg-emerald-100 text-emerald-700',
+      err: 'bg-red-100 text-red-700',
+    }[tone] || 'bg-slate-100 text-slate-600');
+  }
+
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function apiBase() { return $('api-base').value.replace(/\/$/, ''); }
+
+  function authHeaders(extra) {
+    const h = Object.assign({ 'Content-Type': 'application/json' }, extra || {});
+    const t = $('auth-token').value.trim();
+    if (t) h.Authorization = 'Bearer ' + t;
+    return h;
+  }
+
+  function renderStageRail(stage) {
+    const idx = STAGES.indexOf(stage);
+    $('stage-rail').innerHTML = STAGES.map((s, i) => {
+      let cls = 'stage-chip';
+      if (s === stage) cls += ' active';
+      else if (idx >= 0 && i < idx) cls += ' done';
+      return '<span class="' + cls + '">' + escapeHtml(s) + '</span>';
+    }).join('');
+  }
+
+  function updateIdeaUI(idea, ideaId) {
+    if (ideaId) {
+      currentIdeaId = ideaId;
+      $('idea-id').textContent = ideaId;
+      $('btn-inspect').disabled = false;
+    }
+    if (idea?.stage) {
+      currentStage = idea.stage;
+      $('idea-stage-badge').textContent = 'stage: ' + idea.stage;
+      renderStageRail(idea.stage);
+    }
+    if (idea?.status) {
+      currentStatus = idea.status;
+      $('idea-status-badge').textContent = 'status: ' + idea.status;
+      $('btn-reactivate').disabled = !DORMANT.includes(idea.status);
+    }
+  }
+
+  function showGate(ev) {
+    pendingGateId = ev.gateId || null;
+    $('gate-id').textContent = pendingGateId || '—';
+    $('gate-type').textContent = ev.gateType || '—';
+    $('gate-msg').textContent = '';
+    $('gate-panel').classList.remove('hidden');
+  }
+
+  function hideGate() {
+    pendingGateId = null;
+    $('gate-panel').classList.add('hidden');
+  }
+
+  async function resolveGate(decision) {
+    if (!pendingGateId) return alert('Aucun gate actif');
+    const reason = $('gate-reason').value.trim();
+    if ((decision === 'reject' || decision === 'revise') && !reason) {
+      return alert('Motif obligatoire pour ' + decision);
+    }
+    if (!$('auth-token').value.trim()) {
+      return alert('Bearer token requis (rôle comex pour output_censor)');
+    }
+    try {
+      const r = await fetch(apiBase() + '/v1/gates/' + encodeURIComponent(pendingGateId) + '/resolve', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ decision, reason }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      $('gate-msg').textContent = 'OK · ' + decision + (j.idea ? ' → ' + j.idea.status + ' / ' + j.idea.stage : '');
+      if (j.idea) updateIdeaUI(j.idea, j.idea.id || currentIdeaId);
+      const box = $('timeline');
+      box.insertAdjacentHTML('beforeend',
+        '<article class="ev-card rounded-xl bg-emerald-50 px-3 py-2" data-type="final">'
+        + '<div class="text-[10px] font-bold uppercase text-emerald-700">gate_resolved</div>'
+        + '<div class="text-sm">' + escapeHtml(decision) + (reason ? ' — ' + escapeHtml(reason) : '') + '</div></article>');
+      hideGate();
+    } catch (e) {
+      $('gate-msg').textContent = e.message;
+    }
+  }
+
+  async function reactivateIdea() {
+    if (!currentIdeaId) return;
+    if (!$('auth-token').value.trim()) return alert('Bearer token requis');
+    try {
+      const r = await fetch(apiBase() + '/v1/cycle/reactivate', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ ideaId: currentIdeaId, motif: 'reactivation UI', stage: 'ecouter' }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      if (j.idea) updateIdeaUI(j.idea, j.idea.id);
+      alert('Idée réactivée · status ' + (j.idea?.status || 'en_revue'));
+    } catch (e) {
+      alert('Réactivation: ' + e.message);
+    }
+  }
+
+  function formatLine(ev) {
+    if (!ev || !ev.type) return '';
+    if (ev.type === 'trace') {
+      const model = ev.quant?.modelUsed || ev.quant?.agent?.preferredModel || '';
+      const quant = ev.quant?.agent?.quant || '';
+      return (ev.agent || '?') + (quant ? ' · ' + quant : '') + (model ? ' · ' + model : '');
+    }
+    if (ev.type === 'start') return 'goal: ' + (ev.goal || '').slice(0, 140);
+    if (ev.type === 'recall') return (ev.source || 'memory') + (ev.preview ? ' — ' + String(ev.preview).slice(0, 100) : '');
+    if (ev.type === 'positionning') {
+      return 'mode=' + (ev.mode || '?') + (ev.kayrosIndex != null ? ' · KI ' + ev.kayrosIndex : '') + ' · ' + (ev.facts || 0) + ' faits L1';
+    }
+    if (ev.type === 'distill') return (ev.count || 0) + ' scénario(s)';
+    if (ev.type === 'synthesis') return String(ev.output || '').slice(0, 180);
+    if (ev.type === 'gate') return (ev.gateType || '') + ' · ' + (ev.gateId || '');
+    if (ev.type === 'final') return (ev.status || '') + (ev.answer ? ' — ' + String(ev.answer).slice(0, 120) : '');
+    if (ev.type === 'degraded') return (ev.reason || '') + ' ' + (ev.from || '') + ' → ' + (ev.to || '');
+    if (ev.type === 'frame_assess') {
+      const q = ev.quality != null ? Number(ev.quality).toFixed(2) : '?';
+      const issues = Array.isArray(ev.issues) ? ev.issues.length : 0;
+      return 'quality=' + q + (ev.needsReframe ? ' · needs reframe' : '') + (issues ? ' · ' + issues + ' issue(s)' : '');
+    }
+    if (ev.type === 'frame_reframes') return (ev.count || (ev.reframes && ev.reframes.length) || 0) + ' reframe(s)';
+    if (ev.type === 'frame_auto_pick') return String(ev.frame || ev.chosen?.frame || '').slice(0, 140);
+    if (ev.type === 'world_model') {
+      return 'stakes=' + (ev.stakes || '?') + ' · horizon=' + (ev.timeHorizon || '?')
+        + (ev.stats ? ' · critical=' + (ev.stats.criticalAssumptions ?? '?') : '');
+    }
+    if (ev.type === 'gate_resolution') return (ev.level || '?') + ' · role=' + (ev.requiredRole || '?');
+    if (ev.type === 'adaptive_pressure') {
+      return 'pressure=' + (ev.pressure != null ? ev.pressure : '?')
+        + (ev.budget?.maxSteps != null ? ' · maxSteps=' + ev.budget.maxSteps : '');
+    }
+    if (ev.type === 'residual_portfolio') {
+      const s = ev.stats || {};
+      return 'risk=' + (s.portfolioRisk ?? '?') + ' · debt=' + (s.decisionDebt ?? '?')
+        + (ev.openCount != null ? ' · open=' + ev.openCount : '');
+    }
+    if (ev.type === 'novelty_control') {
+      return 'survivors=' + (ev.survivors ?? '?') + ' · killed=' + (ev.killed ?? '?');
+    }
+    if (ev.type === 'dialectic') {
+      return 'survivors=' + (Array.isArray(ev.survivors) ? ev.survivors.length : (ev.survivors ?? '?'));
+    }
+    if (ev.type === 'packet') {
+      return (ev.recommendation || '?')
+        + (ev.epistemic?.level ? ' · epi=' + ev.epistemic.level : '')
+        + (ev.gateView?.preferredGateLevel ? ' · gate=' + ev.gateView.preferredGateLevel : '')
+        + (ev.gateView?.decisionDebt != null ? ' · debt=' + ev.gateView.decisionDebt : '');
+    }
+    if (ev.type === 'error') return ev.error || '';
+    if (ev.type === 'meta') return 'idea ' + (ev.ideaId || '');
+    if (ev.type === 'done') return 'stream closed';
+    return ev.type;
+  }
+
+  function quantBadge(ev) {
+    const q = ev?.quant?.agent?.quant || ev?.quant?.global?.quant;
+    return q ? '<span class="badge-quant">' + escapeHtml(q) + '</span>' : '';
+  }
+
+  function ideaBadges(ev) {
+    if (!ev.idea) return '';
+    let h = '';
+    if (ev.idea.stage) h += '<span class="badge-stage">' + escapeHtml(ev.idea.stage) + '</span>';
+    if (ev.idea.status) h += '<span class="badge-status">' + escapeHtml(ev.idea.status) + '</span>';
+    return h;
+  }
+
+  function renderEvent(ev) {
+    const deg = ev.degraded || ev.type === 'degraded' ? '<span class="badge-deg">degraded</span>' : '';
+    const pos = ev.type === 'positionning' ? '<span class="badge-pos">L1</span>' : '';
+    const p2 = /^frame_/.test(ev.type) ? '<span class="badge-p2">P2</span>' : '';
+    const p3 = (ev.type === 'world_model' || ev.type === 'gate_resolution') ? '<span class="badge-p3">P3</span>' : '';
+    const p4 = (ev.type === 'adaptive_pressure' || ev.type === 'residual_portfolio') ? '<span class="badge-p4">P4</span>' : '';
+    const p1 = (ev.type === 'novelty_control' || ev.type === 'dialectic') ? '<span class="badge-p1">P1</span>' : '';
+    const pkt = ev.type === 'packet' ? '<span class="badge-pkt">P0</span>' : '';
+    let extra = '';
+    if (ev.type === 'trace' && ev.observation) {
+      extra = '<div class="mt-2 mono text-slate-500 max-h-24 overflow-y-auto">' + escapeHtml(String(typeof ev.observation === 'string' ? ev.observation : JSON.stringify(ev.observation)).slice(0, 500)) + '</div>';
+    }
+    if (ev.type === 'positionning' && Array.isArray(ev.preview)) {
+      extra = '<ul class="mt-2 space-y-1 text-xs text-slate-600">' + ev.preview.map((p) => '<li><span class="font-semibold text-fuchsia-700">' + escapeHtml(p.type || '') + '</span> ' + escapeHtml((p.content || '').slice(0, 140)) + '</li>').join('') + '</ul>';
+    }
+    if (ev.type === 'world_model' && Array.isArray(ev.criticalAssumptions) && ev.criticalAssumptions.length) {
+      extra = '<ul class="mt-2 space-y-1 text-xs text-slate-600">' + ev.criticalAssumptions.slice(0, 4).map((a) => '<li>• ' + escapeHtml(String(a).slice(0, 160)) + '</li>').join('') + '</ul>';
+    }
+    if (ev.type === 'packet' && ev.gateView) {
+      const gv = ev.gateView;
+      const bits = [];
+      if (gv.recommendation) bits.push('<strong>' + escapeHtml(String(gv.recommendation)) + '</strong>');
+      if (gv.preferredGateLevel) bits.push('gate=' + escapeHtml(String(gv.preferredGateLevel)));
+      if (gv.decisionDebt != null) bits.push('debt=' + escapeHtml(String(gv.decisionDebt)));
+      if (gv.worldModel && gv.worldModel.stakes) bits.push('stakes=' + escapeHtml(String(gv.worldModel.stakes)));
+      if (Array.isArray(gv.criticalAssumptions) && gv.criticalAssumptions.length) {
+        bits.push(gv.criticalAssumptions.length + ' critical assumption(s)');
+      }
+      extra = '<div class="mt-2 text-xs text-slate-600 flex flex-wrap gap-2">' + bits.map((b) => '<span class="rounded-full bg-white border border-slate-200 px-2 py-0.5">' + b + '</span>').join('') + '</div>';
+    }
+    return '<article class="ev-card rounded-xl bg-slate-50 px-3 py-2" data-type="' + escapeHtml(ev.type) + '">' +
+      '<div class="flex items-center gap-2 flex-wrap">' +
+      '<span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">' + escapeHtml(ev.type) + '</span>' +
+      quantBadge(ev) + pos + deg + p2 + p3 + p4 + p1 + pkt + ideaBadges(ev) +
+      (ev.ts ? '<span class="mono text-slate-400 ml-auto">' + escapeHtml(String(ev.ts).slice(11, 19)) + '</span>' : '') +
+      '</div><div class="text-sm text-slate-700 mt-0.5">' + escapeHtml(formatLine(ev)) + '</div>' + extra + '</article>';
+  }
+
+  function pushEvent(ev) {
+    if (!ev || !ev.type) return;
+    events.push(ev);
+    const box = $('timeline');
+    if (events.length === 1) box.innerHTML = '';
+    box.insertAdjacentHTML('beforeend', renderEvent(ev));
+    box.scrollTop = box.scrollHeight;
+    $('event-count').textContent = events.length + ' events';
+
+    if (ev.ideaId) updateIdeaUI(ev.idea, ev.ideaId);
+    if (ev.idea) updateIdeaUI(ev.idea, currentIdeaId);
+    if (ev.type === 'meta' && ev.ideaId) updateIdeaUI(ev.idea, ev.ideaId);
+    if (ev.type === 'done' && ev.idea) updateIdeaUI(ev.idea, ev.ideaId || currentIdeaId);
+
+    if (ev.type === 'gate' || (ev.type === 'final' && ev.status === 'pending_review')) {
+      showGate(ev);
+    }
+    if (ev.type === 'final') {
+      $('final-panel').textContent = (ev.status || '') + '\n\n' + (ev.answer || ev.message || '');
+    }
+    if (ev.type === 'synthesis' && ev.output) $('final-panel').textContent = String(ev.output);
+    if (ev.type === 'packet') {
+      const gv = ev.gateView || {};
+      const lines = [
+        'PACKET · recommendation=' + (ev.recommendation || gv.recommendation || '?'),
+        gv.preferredGateLevel ? 'preferredGate=' + gv.preferredGateLevel : '',
+        gv.decisionDebt != null ? 'decisionDebt=' + gv.decisionDebt : '',
+        gv.worldModel && gv.worldModel.stakes ? 'stakes=' + gv.worldModel.stakes : '',
+        Array.isArray(gv.criticalAssumptions) && gv.criticalAssumptions.length
+          ? 'critical:\n- ' + gv.criticalAssumptions.slice(0, 5).join('\n- ') : '',
+        Array.isArray(gv.revisitTriggers) && gv.revisitTriggers.length
+          ? 'revisit: ' + gv.revisitTriggers.map((x) => x.id || x).join(', ') : '',
+        ev.assertion && ev.assertion.blockers && ev.assertion.blockers.length
+          ? 'blockers: ' + ev.assertion.blockers.join(', ') : '',
+      ].filter(Boolean);
+      $('final-panel').textContent = lines.join('\n');
+    }
+    if (ev.type === 'error') {
+      setStatus('error', 'err');
+      $('final-panel').textContent = 'Erreur: ' + (ev.error || '');
+    }
+    if (ev.type === 'distill' || ev.type === 'done' || ev.type === 'final') {
+      if (currentIdeaId) inspectIdea(currentIdeaId).catch(() => {});
+    }
+  }
+
+  async function refreshStatus() {
+    try {
+      const r = await fetch(apiBase() + '/v1/cycle/status');
+      $('engine-status').textContent = JSON.stringify(await r.json(), null, 2);
+    } catch (e) {
+      $('engine-status').textContent = 'unreachable: ' + e.message;
+    }
+  }
+
+  function renderInspect(data) {
+    $('c-l0').textContent = data.counts?.l0 ?? 0;
+    $('c-l1').textContent = data.counts?.l1 ?? 0;
+    $('c-l2').textContent = data.counts?.l2 ?? 0;
+    $('c-l3').textContent = data.counts?.l3 ?? 0;
+    const l2 = data.l2 || [];
+    if (!l2.length) {
+      $('mem-l2').innerHTML = '<p class="text-slate-400">Aucun scénario L2.</p>';
+      return;
+    }
+    $('mem-l2').innerHTML = l2.map((s) => {
+      const canPromote = s.reviewStatus !== 'validated';
+      return '<div class="flex items-start justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 px-2 py-1.5">'
+        + '<div class="min-w-0"><div class="font-semibold text-slate-800 truncate">' + escapeHtml(s.title) + '</div>'
+        + '<div class="text-[10px] text-slate-500">' + escapeHtml(s.reviewStatus || '') + '</div></div>'
+        + (canPromote
+          ? '<button type="button" data-promote="' + escapeHtml(s.id) + '" class="shrink-0 text-[10px] font-bold text-fuchsia-700 hover:underline">Promote L3</button>'
+          : '<span class="text-[10px] text-emerald-600 font-semibold">✓ L3</span>')
+        + '</div>';
+    }).join('');
+    $('mem-l2').querySelectorAll('[data-promote]').forEach((btn) => {
+      btn.addEventListener('click', () => promoteL2(btn.getAttribute('data-promote')));
+    });
+  }
+
+  async function inspectIdea(ideaId) {
+    const id = ideaId || currentIdeaId;
+    if (!id) return;
+    try {
+      const r = await fetch(apiBase() + '/v1/memory/ideas/' + encodeURIComponent(id));
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      renderInspect(await r.json());
+    } catch (e) {
+      $('mem-l2').innerHTML = '<p class="text-red-500">Inspect: ' + escapeHtml(e.message) + '</p>';
+    }
+  }
+
+  async function promoteL2(l2Id) {
+    try {
+      const r = await fetch(apiBase() + '/v1/memory/promote', {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ l2Id, scope: 'tenant', kind: 'norm' }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+      if (currentIdeaId) await inspectIdea(currentIdeaId);
+    } catch (e) { alert('Promote: ' + e.message); }
+  }
+
+  async function listL3() {
+    try {
+      const r = await fetch(apiBase() + '/v1/memory/l3');
+      const j = await r.json();
+      $('mem-extra').classList.remove('hidden');
+      $('mem-extra').textContent = JSON.stringify(j.items || j, null, 2);
+    } catch (e) {
+      $('mem-extra').classList.remove('hidden');
+      $('mem-extra').textContent = e.message;
+    }
+  }
+
+  async function saveMem() {
+    try {
+      const r = await fetch(apiBase() + '/v1/memory/save', { method: 'POST', headers: authHeaders(), body: '{}' });
+      const j = await r.json();
+      alert(j.ok ? 'Mémoire persistée' : 'Save soft-fail');
+    } catch (e) { alert(e.message); }
+  }
+
+  async function parseSseStream(res) {
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const parts = buf.split('\n\n');
+      buf = parts.pop() || '';
+      for (const chunk of parts) {
+        const line = chunk.split('\n').find((l) => l.startsWith('data:'));
+        if (!line) continue;
+        try { pushEvent(JSON.parse(line.slice(5).trim())); } catch { /* */ }
+      }
+    }
+  }
+
+  async function runCycle() {
+    const query = $('query').value.trim();
+    if (!query) { alert('Objectif requis'); return; }
+    events = [];
+    currentIdeaId = null;
+    hideGate();
+    $('timeline').innerHTML = '<p class="text-sm text-slate-400">Connexion…</p>';
+    $('final-panel').textContent = 'En cours…';
+    $('idea-id').textContent = '—';
+    renderStageRail(null);
+    setStatus('running', 'run');
+    $('btn-run').disabled = true;
+    $('btn-stop').disabled = false;
+    $('btn-inspect').disabled = true;
+    $('btn-reactivate').disabled = true;
+
+    const body = {
+      query,
+      governance: $('governance').value,
+      autoDistill: $('auto-distill').checked,
+      positionning: $('positionning').checked,
+      stream: $('stream').checked,
+      llmPlan: true,
+      syncIdea: true,
+      frameControl: $('frame-control').checked,
+      autoPickFrame: true,
+      worldModel: $('world-model').checked,
+      adaptive: $('adaptive').checked,
+      noveltyControl: $('novelty-control').checked,
+      dialectic: $('dialectic').checked,
+    };
+    if ($('provider').value) body.provider = $('provider').value;
+
+    abortCtrl = new AbortController();
+    try {
+      const res = await fetch(apiBase() + '/v1/cycle/run', {
+        method: 'POST',
+        headers: Object.assign(authHeaders(), { Accept: body.stream ? 'text/event-stream' : 'application/json' }),
+        body: JSON.stringify(body),
+        signal: abortCtrl.signal,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: res.statusText }));
+        pushEvent({ type: 'error', error: err.error || ('HTTP ' + res.status), ts: new Date().toISOString() });
+        setStatus('error', 'err');
+        return;
+      }
+      const ct = res.headers.get('content-type') || '';
+      if (body.stream && ct.includes('text/event-stream')) {
+        await parseSseStream(res);
+        setStatus('done', 'ok');
+      } else {
+        const j = await res.json();
+        if (j.ideaId) updateIdeaUI(j.idea, j.ideaId);
+        (j.events || []).forEach(pushEvent);
+        if (j.answer) $('final-panel').textContent = (j.status || '') + '\n\n' + j.answer;
+        setStatus(j.status || 'ok', 'ok');
+      }
+      refreshStatus();
+      if (currentIdeaId) await inspectIdea(currentIdeaId);
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        setStatus('stopped', 'idle');
+        pushEvent({ type: 'error', error: 'aborted', ts: new Date().toISOString() });
+      } else {
+        setStatus('error', 'err');
+        pushEvent({ type: 'error', error: e.message, ts: new Date().toISOString() });
+      }
+    } finally {
+      $('btn-run').disabled = false;
+      $('btn-stop').disabled = true;
+      abortCtrl = null;
+    }
+  }
+
+  $('btn-run').addEventListener('click', runCycle);
+  $('btn-stop').addEventListener('click', () => abortCtrl?.abort());
+  $('btn-clear').addEventListener('click', () => {
+    events = [];
+    hideGate();
+    $('timeline').innerHTML = '<p class="text-sm text-slate-400">Timeline effacée.</p>';
+    $('final-panel').textContent = 'En attente…';
+    $('event-count').textContent = '0 events';
+    setStatus('idle', 'idle');
+  });
+  $('btn-status').addEventListener('click', refreshStatus);
+  $('btn-inspect').addEventListener('click', () => inspectIdea(currentIdeaId));
+  $('btn-reactivate').addEventListener('click', reactivateIdea);
+  $('btn-l3-list').addEventListener('click', listL3);
+  $('btn-save-mem').addEventListener('click', saveMem);
+  $('btn-approve').addEventListener('click', () => resolveGate('approve'));
+  $('btn-revise').addEventListener('click', () => resolveGate('revise'));
+  $('btn-reject').addEventListener('click', () => resolveGate('reject'));
+
+  renderStageRail(null);
+  const u = new URL(location.href);
+  if (u.searchParams.get('api')) $('api-base').value = u.searchParams.get('api');
+  if (u.searchParams.get('token')) $('auth-token').value = u.searchParams.get('token');
+  refreshStatus();
+})();
+</script>
+</body>
+</html>
