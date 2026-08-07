@@ -1096,7 +1096,7 @@ function buildOntologyPanel(map, lang){
     html += '<div class="flex flex-wrap gap-2">';
     map.gaps.forEach(g=>{
       const selected = (demoState.selectedOntologyGapIds||[]).includes(g.id);
-      html += '<button type="button" data-ontology-gap="'+escapeHtml(g.id)+'" onclick="toggleOntologyGap(\''+escapeHtml(g.id)+'\\')" class="semantic-field text-left text-xs px-3 py-2 rounded-lg border '+(selected?'selected border-violet-400':'border-slate-200')+' bg-white hover:border-violet-300 transition">';
+      html += '<button type="button" data-ontology-gap="'+escapeHtml(g.id)+'" onclick="toggleOntologyGap(\''+escapeHtml(g.id)+\'')" class="semantic-field text-left text-xs px-3 py-2 rounded-lg border '+(selected?'selected border-violet-400':'border-slate-200')+' bg-white hover:border-violet-300 transition">';
       html += '<div class="font-semibold text-slate-800">'+escapeHtml(g.label)+'</div>';
       if(g.opportunity) html += '<div class="text-[11px] text-slate-500 mt-0.5">'+escapeHtml(g.opportunity)+'</div>';
       html += '</button>';
