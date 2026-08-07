@@ -201,7 +201,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 
       <div class="border-t border-slate-100 pt-4">
         <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span data-i18n="scope_conditions">Périmètre et conditions</span> <span class="text-amber-600 font-normal normal-case">(↑ KI)</span></label>
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider"><span data-i18n="scope_conditions">Périmètre et conditions</span> <span class="text-amber-600 font-normal normal-case">(↑ KI)</span></label><p class="text-xs text-slate-500 mt-1 mb-0" data-i18n="scope_hint">Précisez vos conditions afin de circonscrire votre cadre de travail.</p>
           <button type="button" onclick="toggleConditions()" id="cond-toggle" class="text-xs text-sky-600 font-medium" data-i18n="details_open">Détails ▾</button>
         </div>
         <div id="conditions-box" class="hidden space-y-3">
@@ -540,7 +540,20 @@ const translations = {
     audit_report:'Rapport d’audit complet', end_to_end_journey:'Parcours gouverné<br>de bout en bout',
     initial_ki:'KI initial', final_ki:'KI final', human_actions:'Actions humaines',
     initial_context_audit:'Cadre initial et audit utilisateur', result:'Résultat',
-    generated:'Généré', decided:'Décidé', user_action_input:'Action et saisie utilisateur'
+    generated:'Généré', decided:'Décidé', user_action_input:'Action et saisie utilisateur',
+    auto_retrying:'Format de réponse incomplet — nouvelle tentative automatique…',
+    auto_retry_ok:'Réponse récupérée après reformatage automatique.',
+    auto_retry_fail:'Après plusieurs tentatives, le format reste invalide. Reformulez l’idée ou relancez.',
+    scope_hint:'Précisez vos conditions afin de circonscrire votre cadre de travail.',
+    clarify_title:'Affiner la demande avant d’explorer',
+    clarify_hint:'Une idée trop vague produit des pistes floues. Précisez le terrain, le bénéficiaire ou la contrainte.',
+    clarify_continue:'Continuer quand même',
+    clarify_apply:'Utiliser cette reformulation',
+    gate_stakes_0:'Enjeu : qualifier les signaux. Votre note oriente la cartographie (synonymes, périmètre, exclusions).',
+    gate_stakes_1:'Enjeu : valider la carte. Indiquez les clusters à prioriser ou les trous structurels à combler.',
+    gate_stakes_2:'Enjeu : choisir 1–2 scénarios à stress-tester. Expliquez pourquoi les autres sont écartés.',
+    gate_stakes_3:'Enjeu : sélectionner les gaps concurrentiels qui doivent infléchir Challenge et Decide.',
+    gate_stakes_default:'Votre annotation est transmise aux agents suivants — expliquez le pourquoi de la décision.'
   },
   en: {
     language_selector:'Choose language', page_title:'KayrosLab — Governed Agent Platform',
@@ -693,7 +706,20 @@ const translations = {
     audit_report:'Complete audit report', end_to_end_journey:'Governed journey<br>end to end',
     initial_ki:'Initial KI', final_ki:'Final KI', human_actions:'Human actions',
     initial_context_audit:'Initial context and user audit', result:'Result',
-    generated:'Generated', decided:'Decided', user_action_input:'User action and input'
+    generated:'Generated', decided:'Decided', user_action_input:'User action and input',
+    auto_retrying:'Incomplete response format — automatic retry…',
+    auto_retry_ok:'Response recovered after automatic reformat.',
+    auto_retry_fail:'Format still invalid after several attempts. Reframe the idea or retry.',
+    scope_hint:'Specify your conditions to define your working frame.',
+    clarify_title:'Sharpen the request before exploring',
+    clarify_hint:'A vague idea yields fuzzy directions. Specify domain, beneficiary, or constraint.',
+    clarify_continue:'Continue anyway',
+    clarify_apply:'Use this reframe',
+    gate_stakes_0:'Stakes: qualify signals. Your note steers the map (synonyms, scope, exclusions).',
+    gate_stakes_1:'Stakes: validate the map. Mark clusters to prioritise or structural gaps to bridge.',
+    gate_stakes_2:'Stakes: pick 1–2 scenarios to stress-test. Explain why others are dropped.',
+    gate_stakes_3:'Stakes: select competitive gaps that must steer Challenge and Decide.',
+    gate_stakes_default:'Your annotation is passed to downstream agents — explain the why of the decision.'
   }
 };
 
