@@ -90,10 +90,10 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 .change-ledger__inner{max-width:1040px;margin-inline:auto}.change-ledger h2{margin:0 0 var(--space-lg);font-family:var(--font-display);font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.045em;text-align:center}
 .change-row{display:grid;grid-template-columns:minmax(0,1fr) 52px minmax(0,1.25fr);align-items:center;gap:var(--space-md);padding-block:var(--space-md);border-block-start:1px solid var(--color-rule)}.change-row:last-of-type{border-block-end:1px solid var(--color-rule)}
 .change-before{color:var(--color-muted);font-size:var(--text-lg)}.change-after{font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;letter-spacing:-.025em}.change-arrow{inline-size:44px;block-size:44px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent-soft);color:var(--color-accent-strong)}
-.change-ledger__note{margin:var(--space-lg) auto 0;max-width:55ch;text-align:center;color:var(--color-ink-2);font-weight:600}
+.change-ledger__note{margin:var(--space-lg) auto 0;max-width:55ch;text-align:center;color:var(--color-ink-2);font-weight:600;line-height:1.45}.change-ledger__accent{color:var(--color-accent-strong);font-weight:700}
 
 #demo{background:var(--color-paper-2)}#demo>.max-w-6xl{max-width:1120px}.demo-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:var(--space-lg);align-items:end;margin-block-end:var(--space-lg)}.demo-intro p{margin:0;color:var(--color-ink-2);line-height:1.6}.demo-kicker{color:var(--color-accent-strong);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
-.foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:30ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.05;letter-spacing:-.035em}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
+.foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:32ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.12;letter-spacing:-.035em}.foot-stmt__accent{color:var(--color-accent);display:inline-block;margin-block-start:.12em}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
 
 @media (hover:hover) and (pointer:fine){.nav-demo:hover,.btn-secondary:hover{background:color-mix(in oklch,var(--color-accent) 10%,transparent)}.btn-primary:hover,.btn-secondary:hover,.idea-card:hover,.semantic-field:hover{transform:translateY(-1px)}}
 .btn-primary:active,.btn-secondary:active,.nav-demo:active{transform:translateY(1px)}
@@ -174,7 +174,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
     <div class="change-row"><div class="change-before" data-i18n="one_answer">Une réponse</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="many_hypotheses">Plusieurs hypothèses</div></div>
     <div class="change-row"><div class="change-before" data-i18n="black_box">Une boîte noire</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="visible_arbitrations">Des arbitrages visibles</div></div>
     <div class="change-row"><div class="change-before" data-i18n="a_chat">Un chat</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="decision_file">Un dossier de décision</div></div>
-    <p class="change-ledger__note" data-i18n="agents_propose">Les agents proposent. Vous orientez, tranchez et validez.</p>
+    <p class="change-ledger__note"><span data-i18n="agents_propose_1">Les agents proposent.</span><br><span class="change-ledger__accent" data-i18n="agents_propose_2">Vous orientez, tranchez et validez.</span></p>
   </div>
 </section>
 
@@ -370,7 +370,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 
 <footer class="foot-stmt">
   <div class="foot-stmt__inner">
-    <p class="foot-stmt__line" data-i18n="footer_statement">Les agents proposent. La décision reste humaine.</p>
+    <p class="foot-stmt__line"><span data-i18n="footer_statement_1">Les agents proposent.</span><br><span class="foot-stmt__accent" data-i18n="footer_statement_2">La décision reste humaine.</span></p>
     <div class="foot-stmt__meta">
       <span class="wordmark">KayrosLab</span>
       <span data-i18n="footer">KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com</span>
@@ -388,9 +388,9 @@ const translations = {
   fr: {
     language_selector:'Choisir la langue', page_title:'KayrosLab — Plateforme d’agents gouvernés',
     back:'Retour', hero_badge:'Agents gouvernés · Démo publique', main_nav_aria:'Navigation principale', journey_map_aria:'Comparaison entre un LLM classique et KayrosLab', three_hypotheses_aria:'Trois hypothèses',
-    hero_title:'Une idée n’a pas besoin d’être validée. Elle a besoin d’être challengée.',
-    hero_description:'KayrosLab transforme une intuition en options comparables, puis en décisions traçables — sous votre supervision.',
-    launch_demo:'Challenger mon idée', live_demo:'Démo en direct', see_eight_steps:'Voir les 8 étapes',
+    hero_title:'Ne validez plus une idée sur une intuition. Stress-testez-la.',
+    hero_description:'Pour les équipes produit, stratégie et COMEX : 3 options comparées, risques visibles, dossier de décision traçable — sous votre contrôle.',
+    launch_demo:'Challenger mon idée', live_demo:'Essai gratuit · sans inscription', see_eight_steps:'Voir les 8 étapes',
     before_label:'Avant', after_label:'Après', classic_llm:'Avec un LLM classique', governed_agents:'Avec des agents gouvernés',
     initial_idea_label:'Idée initiale, encore vague', classic_prompt_example:'Comment mieux fidéliser nos clients B2B ?',
     single_response:'Une réponse unique', classic_response_example:'Une synthèse plausible, mais une seule direction à examiner.',
@@ -402,11 +402,13 @@ const translations = {
     hypothesis_one:'Onboarding augmenté', hypothesis_two:'Succès client proactif', hypothesis_three:'Offre adaptative',
     human_review:'Revue humaine', three_tests:'3 tests', four_tests:'4 tests', two_tests:'2 tests',
     broadened_field:'Champ élargi', argued_choices:'Choix argumentés', exportable_journey:'Parcours exportable',
-    what_changes:'Ce qui change vraiment', one_answer:'Une réponse', many_hypotheses:'Plusieurs hypothèses',
-    black_box:'Une boîte noire', visible_arbitrations:'Des arbitrages visibles', a_chat:'Un chat',
-    decision_file:'Un dossier de décision', agents_propose:'Les agents proposent. Vous orientez, tranchez et validez.',
-    demo_title:'Mettez votre idée à l’épreuve avec les <span class="kayros-gradient">agents</span>',
-    demo_subtitle:'',
+    what_changes:'Ce que vos équipes gagnent', one_answer:'Une seule réponse LLM', many_hypotheses:'3 pistes comparables à arbitrer',
+    black_box:'Un raisonnement opaque', visible_arbitrations:'Des critères et risques explicites', a_chat:'Un échange informel',
+    decision_file:'Un dossier COMEX prêt à trancher', agents_propose:'Les agents proposent. Vous orientez, tranchez et validez.',
+    agents_propose_1:'Les agents proposent.',
+    agents_propose_2:'Vous orientez, tranchez et validez.',
+    demo_title:'Challenger votre idée en <span class="kayros-gradient">quelques minutes</span>',
+    demo_subtitle:'Sans installation · 8 agents · dossier de décision à la clé',
     security_notice:'',
     idea_label:'Votre idée stratégique',
     idea_placeholder:'Ex. Lancer une plateforme de maintenance prédictive IoT pour l’industrie européenne…',
@@ -415,8 +417,8 @@ const translations = {
     time_placeholder:'Horizon (ex. pilote T2 2027)', must_placeholder:'Exigence (ex. AI Act)',
     notes_placeholder:'Notes, exclusions, priorités…', start_cycle:'Redémarrer la mise à l’épreuve',
     explore_ideas:'Explorer les possibles', idea_lab_kicker:'Boucle d’exploration',
-    idea_lab_title:'Mettre l’idée en mouvement avant de la mettre en projet',
-    idea_lab_description:'Une base, plusieurs variations comparables, un test explicite et une décision humaine : garder, combiner ou relancer.',
+    idea_lab_title:'Explorez avant d’investir',
+    idea_lab_description:'Comparez plusieurs directions, choisissez celle qui tient, puis lancez le cycle gouverné jusqu’au rapport.',
     baseline_idea:'Idée de départ · base fixe', exploration_iteration:'Boucle {count}',
     semantic_kicker:'Cartographie sémantique initiale',
     semantic_title:'Voir les communautés de sens avant de choisir une direction',
@@ -470,7 +472,9 @@ const translations = {
     waiting_hint:'Saisissez une idée, puis démarrez le cycle.', your_intervention:'Votre intervention',
     intervention_placeholder:'Commentaires et corrections transmis aux agents suivants…',
     approve_continue:'Approuver et continuer', rerun:'Relancer', reject:'Rejeter',
-    skip:'Passer à la fin →', footer_statement:'Les agents proposent. La décision reste humaine.', footer:'KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com',
+    skip:'Passer à la fin →', footer_statement:'Les agents proposent. La décision reste humaine.',
+    footer_statement_1:'Les agents proposent.',
+    footer_statement_2:'La décision reste humaine.', footer:'KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com',
     language_locked:'La langue est verrouillée pour ce parcours afin de conserver des réponses et des exports cohérents. Réinitialisez le cycle pour changer de langue.',
     language_locked_short:'Réinitialisez le cycle pour changer de langue',
     start_required:'Entrez une idée stratégique.', stable:'Stable', score_initial:'Score initial',
@@ -554,9 +558,9 @@ const translations = {
   en: {
     language_selector:'Choose language', page_title:'KayrosLab — Governed Agent Platform',
     back:'Back', hero_badge:'Governed agents · Public demo', main_nav_aria:'Main navigation', journey_map_aria:'Comparison between a classic LLM and KayrosLab', three_hypotheses_aria:'Three hypotheses',
-    hero_title:'An idea does not need validation. It needs to be challenged.',
-    hero_description:'KayrosLab turns an intuition into comparable options, then traceable decisions — under your supervision.',
-    launch_demo:'Challenge my idea', live_demo:'Live demo', see_eight_steps:'See the 8 steps',
+    hero_title:'Stop approving ideas on gut feel. Stress-test them.',
+    hero_description:'For product, strategy and executive teams: 3 comparable options, visible risks, a decision pack you can own — under your control.',
+    launch_demo:'Challenge my idea', live_demo:'Free trial · no sign-up', see_eight_steps:'See the 8 steps',
     before_label:'Before', after_label:'After', classic_llm:'With a classic LLM', governed_agents:'With governed agents',
     initial_idea_label:'Initial idea, still vague', classic_prompt_example:'How could we improve B2B customer retention?',
     single_response:'One response', classic_response_example:'A plausible synthesis, but only one direction to examine.',
@@ -568,11 +572,13 @@ const translations = {
     hypothesis_one:'Augmented onboarding', hypothesis_two:'Proactive customer success', hypothesis_three:'Adaptive offer',
     human_review:'Human review', three_tests:'3 tests', four_tests:'4 tests', two_tests:'2 tests',
     broadened_field:'Broader field', argued_choices:'Reasoned choices', exportable_journey:'Exportable journey',
-    what_changes:'What actually changes', one_answer:'One answer', many_hypotheses:'Multiple hypotheses',
-    black_box:'A black box', visible_arbitrations:'Visible trade-offs', a_chat:'A chat',
-    decision_file:'A decision record', agents_propose:'Agents propose. You redirect, decide, and approve.',
-    demo_title:'Stress-test your idea with the <span class="kayros-gradient">agents</span>',
-    demo_subtitle:'',
+    what_changes:'What your teams gain', one_answer:'A single LLM answer', many_hypotheses:'3 comparable options to decide on',
+    black_box:'Opaque reasoning', visible_arbitrations:'Explicit criteria and risks', a_chat:'An informal exchange',
+    decision_file:'An executive-ready decision pack', agents_propose:'Agents propose. You redirect, decide, and approve.',
+    agents_propose_1:'Agents propose.',
+    agents_propose_2:'You redirect, decide, and approve.',
+    demo_title:'Challenge your idea in <span class="kayros-gradient">minutes</span>',
+    demo_subtitle:'No install · 8 agents · decision pack included',
     security_notice:'',
     idea_label:'Your strategic idea',
     idea_placeholder:'E.g. Launch an IoT predictive maintenance platform for European industry…',
@@ -581,8 +587,8 @@ const translations = {
     time_placeholder:'Timeline (e.g. Q2 2027 pilot)', must_placeholder:'Requirement (e.g. AI Act)',
     notes_placeholder:'Notes, exclusions, priorities…', start_cycle:'Restart stress test',
     explore_ideas:'Explore possibilities', idea_lab_kicker:'Exploration loop',
-    idea_lab_title:'Move the idea before turning it into a project',
-    idea_lab_description:'One fixed baseline, several comparable variations, an explicit test, and a human decision: keep, combine, or iterate.',
+    idea_lab_title:'Explore before you invest',
+    idea_lab_description:'Compare directions, pick the one that holds, then run the governed cycle through to a decision report.',
     baseline_idea:'Starting idea · fixed baseline', exploration_iteration:'Round {count}',
     semantic_kicker:'Initial semantic mapping',
     semantic_title:'See meaning communities before choosing a direction',
@@ -636,7 +642,9 @@ const translations = {
     waiting_hint:'Enter an idea, then start the cycle.', your_intervention:'Your input',
     intervention_placeholder:'Comments and corrections passed to the next agents…',
     approve_continue:'Approve and continue', rerun:'Rerun', reject:'Reject',
-    skip:'Skip to end →', footer_statement:'Agents propose. The decision stays human.', footer:'KayrosLab · LLM via api.kayroslab.com (server-side key) · contact@kayroslab.com',
+    skip:'Skip to end →', footer_statement:'Agents propose. The decision stays human.',
+    footer_statement_1:'Agents propose.',
+    footer_statement_2:'The decision stays human.', footer:'KayrosLab · LLM via api.kayroslab.com (server-side key) · contact@kayroslab.com',
     language_locked:'The language is locked for this journey so responses and exports remain consistent. Reset the cycle to change language.',
     language_locked_short:'Reset the cycle to change language',
     start_required:'Enter a strategic idea.', stable:'Stable', score_initial:'Initial score',
