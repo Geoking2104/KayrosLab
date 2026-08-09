@@ -30,38 +30,26 @@ function buildOntologyPanel(map, lang){
     title: t('ontology_card',{},lang) || 'Competitive radar and gap analysis',
     subtitle: 'Read the map like a strategic network: clusters, links, then gaps to connect.',
     howTitle: 'How to read this radar',
-    how: [
-      'Colored nodes = entities (size reflects how connected they are).',
-      'Groups by color = same type (competitors, tech, regulation).',
-      'Solid lines = structural links; dashed lines = tension (compete / constrain / diverge).',
-      'Edge labels name the relationship in plain language.',
-      'Gaps below are missing bridges - select 1 to 3 to steer Challenge and Decide.'
-    ],
+    how: ['Colored nodes = entities (size = connections).','Color groups = entity type.','Solid lines = structural links; dashed violet = tension.','Select 1-3 gaps below to steer Challenge and Decide.'],
     legendTitle: 'Entity types',
     linksTitle: 'Link types present',
     entitiesTitle: 'Entities on the map',
     gapsTitle: t('ontology_gaps_title',{},lang) || 'Topics to connect',
     gapsHint: t('ontology_select_hint',{},lang) || 'Select gaps to inject into the next steps.',
     statsE: 'entities', statsL: 'links', statsG: 'gaps',
-    emptyGaps: 'No structural gap detected - the map is dense; still pick a tension to stress-test.'
+    emptyGaps: 'No structural gap detected - still pick a tension to stress-test.'
   } : {
     title: t('ontology_card',{},lang) || 'Radar concurrentiel et gap analysis',
     subtitle: 'Lisez la carte comme un reseau strategique : clusters, liens, puis gaps a connecter.',
     howTitle: 'Comment lire ce radar',
-    how: [
-      'Noeuds colores = entites (la taille reflete le nombre de liens).',
-      'Groupes par couleur = meme type (concurrents, tech, regulation).',
-      'Traits pleins = liens structurants ; pointilles = tension (rivalite / contrainte / divergence).',
-      'Les libelles sur les arcs nomment la relation en langage clair.',
-      'Les gaps ci-dessous sont des ponts manquants - selectionnez-en 1 a 3 pour orienter Eprouver et Arbitrer.'
-    ],
+    how: ['Noeuds colores = entites (taille = connexions).','Couleur = type d entite.','Traits pleins = liens structurants ; pointilles violet = tension.','Selectionnez 1 a 3 gaps pour orienter Eprouver et Arbitrer.'],
     legendTitle: 'Types d entites',
     linksTitle: 'Types de liens presents',
     entitiesTitle: 'Entites sur la carte',
     gapsTitle: t('ontology_gaps_title',{},lang) || 'Topics to connect - gaps',
     gapsHint: t('ontology_select_hint',{},lang) || 'Ces gaps seront injectes dans Challenge et Decide.',
     statsE: 'entites', statsL: 'liens', statsG: 'gaps',
-    emptyGaps: 'Aucun gap structurel detecte - la carte est dense ; choisissez tout de meme une tension a eprouver.'
+    emptyGaps: 'Aucun gap structurel detecte - choisissez tout de meme une tension a eprouver.'
   };
 
   let html = '<div class="mt-4 rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white overflow-hidden shadow-sm">';
@@ -74,16 +62,30 @@ function buildOntologyPanel(map, lang){
   html += '<span class="px-2 py-0.5 rounded-full bg-violet-100 text-violet-700">'+map.gaps.length+' '+escapeHtml(copy.statsG)+'</span>';
   html += '</div></div>';
 
+  // Color legend strip (always visible)
+  html += '<div class="px-4 py-3 border-b border-slate-100 bg-white">';
+  html += '<p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400 mb-2">'+escapeHtml(isEn?'Color legend':'Legende des couleurs')+'</p>';
+  html += '<div class="flex flex-wrap gap-x-4 gap-y-2">';
+  const legendItems = isEn
+    ? [['competitor','Competitor','#fb7185'],['capability','Capability','#34d399'],['regulation','Regulation','#fbbf24'],['segment','Segment','#38bdf8'],['tech','Tech','#a78bfa'],['concept','Concept','#94a3b8']]
+    : [['competitor','Concurrent','#fb7185'],['capability','Capacite','#34d399'],['regulation','Regulation','#fbbf24'],['segment','Segment','#38bdf8'],['tech','Tech','#a78bfa'],['concept','Concept','#94a3b8']];
+  legendItems.forEach(function(item){
+    html += '<span class="inline-flex items-center gap-1.5 text-[11px] text-slate-700">';
+    html += '<span class="w-3 h-3 rounded-full border border-white shadow-sm flex-shrink-0" style="background:'+item[2]+'"></span>';
+    html += '<span class="font-medium">'+escapeHtml(item[1])+'</span></span>';
+  });
+  html += '</div>';
+  html += '<div class="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-600">';
+  html += '<span class="inline-flex items-center gap-1.5"><svg width="22" height="10" aria-hidden="true"><line x1="0" y1="5" x2="22" y2="5" stroke="#94a3b8" stroke-width="2"/></svg>'+escapeHtml(isEn?'Structural link':'Lien structurant')+'</span>';
+  html += '<span class="inline-flex items-center gap-1.5"><svg width="22" height="10" aria-hidden="true"><line x1="0" y1="5" x2="22" y2="5" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4 3"/></svg>'+escapeHtml(isEn?'Tension (compete / constrain / diverge)':'Tension (rivalite / contrainte / divergence)')+'</span>';
+  html += '<span class="inline-flex items-center gap-1.5"><span class="inline-flex items-end gap-0.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span><span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span><span class="w-3.5 h-3.5 rounded-full bg-sky-400"></span></span>'+escapeHtml(isEn?'Node size = links':'Taille = liens')+'</span>';
+  html += '</div></div>';
+
   html += '<details open class="px-4 py-3 border-b border-slate-100 bg-sky-50/40">';
   html += '<summary class="cursor-pointer text-xs font-semibold text-sky-900 select-none">'+escapeHtml(copy.howTitle)+'</summary>';
   html += '<ol class="mt-2 space-y-1.5 text-[11px] text-slate-600 list-decimal pl-4 leading-relaxed">';
   copy.how.forEach(function(line){ html += '<li>'+escapeHtml(line)+'</li>'; });
-  html += '</ol>';
-  html += '<div class="mt-3 flex flex-wrap gap-3 text-[10px] text-slate-600">';
-  html += '<span class="inline-flex items-center gap-1.5"><svg width="28" height="14" aria-hidden="true"><line x1="0" y1="7" x2="28" y2="7" stroke="#94a3b8" stroke-width="1.5"/></svg>'+escapeHtml(isEn?'Structural link':'Lien structurant')+'</span>';
-  html += '<span class="inline-flex items-center gap-1.5"><svg width="28" height="14" aria-hidden="true"><line x1="0" y1="7" x2="28" y2="7" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3"/></svg>'+escapeHtml(isEn?'Tension / gap-like':'Tension / divergence')+'</span>';
-  html += '<span class="inline-flex items-center gap-1.5"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#38bdf8"/></svg>'+escapeHtml(isEn?'Node = entity':'Noeud = entite')+'</span>';
-  html += '</div></details>';
+  html += '</ol></details>';
 
   html += '<div class="px-4 pt-3">';
   html += '<p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400 mb-2">'+escapeHtml(copy.legendTitle)+'</p>';
@@ -112,7 +114,7 @@ function buildOntologyPanel(map, lang){
   }
 
   html += '<div class="px-3 py-2">';
-  html += '<svg id="ontology-graph" class="semantic-graph w-full rounded-xl border border-slate-100 bg-slate-50/80" viewBox="0 0 640 360" role="img" aria-label="'+escapeHtml(copy.title)+'">'+renderOntologyGraph(map)+'</svg>';
+  html += '<div id="ontology-d3-root" class="w-full min-h-[420px]"></div>';
   html += '</div>';
 
   html += '<div class="px-4 pb-2">';
