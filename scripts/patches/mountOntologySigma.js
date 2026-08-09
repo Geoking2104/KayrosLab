@@ -130,6 +130,25 @@ function mountOntologySigma(map, container){
     return Object.assign({}, data, { color: '#f1f5f9' });
   });
 
+  // Floating color legend on the graph
+  const legend = document.createElement('div');
+  legend.style.cssText = 'position:absolute;left:8px;bottom:8px;z-index:5;background:rgba(255,255,255,0.95);border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;box-shadow:0 4px 12px rgba(15,23,42,0.08);max-width:min(320px,90%);font:11px/1.35 system-ui,sans-serif;color:#334155';
+  const items = isEn
+    ? [['#fb7185','Competitor'],['#34d399','Capability'],['#fbbf24','Regulation'],['#38bdf8','Segment'],['#a78bfa','Tech'],['#94a3b8','Concept']]
+    : [['#fb7185','Concurrent'],['#34d399','Capacite'],['#fbbf24','Regulation'],['#38bdf8','Segment'],['#a78bfa','Tech'],['#94a3b8','Concept']];
+  let legendHtml = '<div style="font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.04em;color:#94a3b8;margin-bottom:6px">'+(isEn?'Colors':'Couleurs')+'</div>';
+  legendHtml += '<div style="display:flex;flex-wrap:wrap;gap:6px 10px">';
+  items.forEach(function(it){
+    legendHtml += '<span style="display:inline-flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:999px;background:'+it[0]+';border:1px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,0.06)"></span>'+it[1]+'</span>';
+  });
+  legendHtml += '</div>';
+  legendHtml += '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:8px;color:#64748b">';
+  legendHtml += '<span style="display:inline-flex;align-items:center;gap:4px"><svg width="16" height="8"><line x1="0" y1="4" x2="16" y2="4" stroke="#94a3b8" stroke-width="2"/></svg>'+(isEn?'link':'lien')+'</span>';
+  legendHtml += '<span style="display:inline-flex;align-items:center;gap:4px"><svg width="16" height="8"><line x1="0" y1="4" x2="16" y2="4" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="3 2"/></svg>'+(isEn?'tension':'tension')+'</span>';
+  legendHtml += '</div>';
+  legend.innerHTML = legendHtml;
+  container.appendChild(legend);
+
   const hint = document.createElement('p');
   hint.className = 'text-[10px] text-slate-500 mt-1 px-1';
   hint.textContent = isEn
