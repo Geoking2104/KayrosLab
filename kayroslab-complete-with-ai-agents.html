@@ -1,1 +1,28 @@
-PLACEHOLDER_TOO_LARGE_USE_LOCAL_PUSH
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Demo (recovery)</title>
+<style>
+  html, body { margin:0; height:100%; background:#0f172a; }
+  iframe { border:0; width:100%; height:100%; display:block; }
+  .banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: #0ea5e9; color: #0f172a; font: 600 12px/1.4 system-ui,sans-serif;
+    text-align: center; padding: 8px 12px;
+  }
+  body.has-banner iframe { height: calc(100% - 36px); margin-top: 36px; }
+</style>
+</head>
+<body class="has-banner">
+  <div class="banner">
+    Mode récupération — version stable rechargée. Appliquez le push local du fichier patché pour finaliser prompts + panneaux.
+  </div>
+  <iframe
+    title="KayrosLab demo"
+    src="https://cdn.jsdelivr.net/gh/Geoking2104/KayrosLab@0cf944b01cd0e4564de05dc8f72ad18c88247b49/kayroslab-complete-with-ai-agents.html"
+    allow="clipboard-write"
+  ></iframe>
+</body>
+</html>
