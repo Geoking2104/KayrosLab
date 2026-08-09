@@ -453,7 +453,10 @@ const translations = {
     ranked_by_novelty:'Classées par score de nouveauté',
     shortlist:'Présélectionner', choose_direction:'Retenir cette piste',
     shortlist_required:'Sélectionnez au moins deux pistes à combiner.',
-    exploration_parse_error:'La réponse d’exploration n’a pas le format attendu. Relancez la boucle.',
+    exploration_parse_error:'Format partiel - poursuite avec pistes de clarification.',
+    exploration_soft_title:'La boucle continue',
+    exploration_soft_body:'Format incomplet: 3 pistes de clarification (beneficiaire, contrainte, succes). Repondez puis relancez.',
+    exploration_soft_fail:'Exploration: bascule clarification.'',
     idea_selected_notice:'Piste retenue. Vous pouvez la reformuler avant la mise à l’épreuve.',
     original_selected_notice:'Idée initiale retenue comme hypothèse de travail.',
     action_exploration_started:'Exploration démarrée', action_exploration_round:'Nouvelle boucle générée',
@@ -553,7 +556,7 @@ const translations = {
     kill_criteria_label:'Kill criteria',
     auto_retrying:'Format de réponse incomplet — nouvelle tentative automatique…',
     auto_retry_ok:'Réponse récupérée après reformatage automatique.',
-    auto_retry_fail:'Après plusieurs tentatives, le format reste invalide. Reformulez l’idée ou relancez.',
+    auto_retry_fail:'Format encore imparfait - la boucle propose des pistes de clarification pour avancer.',
     scope_hint:'Précisez vos conditions afin de circonscrire votre cadre de travail.',
     clarify_title:'Affiner la demande avant d’explorer',
     clarify_hint:'Une idée trop vague produit des pistes floues. Précisez le terrain, le bénéficiaire ou la contrainte.',
@@ -633,7 +636,10 @@ const translations = {
     ranked_by_novelty:'Ranked by novelty score',
     shortlist:'Shortlist', choose_direction:'Choose this direction',
     shortlist_required:'Select at least two directions to combine.',
-    exploration_parse_error:'The exploration response did not match the expected format. Run the loop again.',
+    exploration_parse_error:'Partial format - continuing with clarification paths.',
+    exploration_soft_title:'The loop continues',
+    exploration_soft_body:'Incomplete format: 3 clarification paths (beneficiary, constraint, success). Answer then relaunch.',
+    exploration_soft_fail:'Exploration: switching to clarification mode.',
     idea_selected_notice:'Direction selected. You can rewrite it before stress-testing.',
     original_selected_notice:'Original idea selected as the working hypothesis.',
     action_exploration_started:'Exploration started', action_exploration_round:'New exploration round generated',
@@ -733,7 +739,7 @@ const translations = {
     kill_criteria_label:'Kill criteria',
     auto_retrying:'Incomplete response format — automatic retry…',
     auto_retry_ok:'Response recovered after automatic reformat.',
-    auto_retry_fail:'Format still invalid after several attempts. Reframe the idea or retry.',
+    auto_retry_fail:'Format still imperfect - the loop proposes clarification paths so you can move forward.',
     scope_hint:'Specify your conditions to define your working frame.',
     clarify_title:'Sharpen the request before exploring',
     clarify_hint:'A vague idea yields fuzzy directions. Specify domain, beneficiary, or constraint.',
@@ -1297,7 +1303,7 @@ function explorationSystemPrompt(lang){
     'Do not produce a roadmap, backlog, business plan, or polished solution. Challenge who benefits, what form the value takes, and which assumption can be tested.',
     'Return ONLY valid JSON, without Markdown, in this exact shape:',
     '{"candidates":[{"title":"short distinctive title","reframedIdea":"one precise working hypothesis","kayrosSignature":"the non-obvious insight or conceptual bridge that makes this option unique","opening":"what becomes possible","shiftedAssumption":"the original assumption this changes","falsifiableHypothesis":"a statement that evidence could disprove","firstExperiment":"a small real-world test, not a delivery plan","signals":["2 or 3 observable signals"],"criticalUnknowns":["2 critical unknowns"],"rationale":"concise reason to try this direction","scores":{"novelty":1,"relevance":1,"testability":1}}]}',
-    'Produce exactly 3 genuinely different candidates. Scores are integers from 1 to 10. Do not reveal private reasoning or chain-of-thought; provide only concise decision evidence.'
+    'Produce exactly 3 genuinely different candidates. Scores are integers from 1 to 10. Do not reveal private reasoning or chain-of-thought; provide only concise decision evidence. If the idea is vague, still return 3 sharper rephrasings and put missing inputs into criticalUnknowns. Never refuse; never return empty JSON.'
   ].join('\n');
   return [
     'Tu es l’Explorateur d’hypothèses de KayrosLab. Ton rôle est d’ouvrir le champ des possibles avant toute logique de projet.',
@@ -1393,12 +1399,61 @@ function normalizeIdeaCandidate(value,index,round){
   candidate.noveltyRankScore=candidate.scores.novelty;
   return candidate;
 }
+function buildFallbackExplorationCandidates(round, reason){
+  const lang=cycleLanguage();
+  const idea=demoState.originalIdea||'';
+  const base=idea.slice(0,160);
+  if(lang==='en'){
+    return [
+      normalizeIdeaCandidate({ title:'Clarify the beneficiary', reframedIdea:'Rephrase around one primary beneficiary: who gains what from "'+base+'"?', kayrosSignature:'Ambiguity on the beneficiary blocks ranking.', opening:'A named beneficiary unlocks relevance and testability.', shiftedAssumption:'We assumed the audience was already obvious.', falsifiableHypothesis:'If we cannot name one primary beneficiary in one sentence, the idea is still multi-interpreted.', firstExperiment:'Write: For [persona], this solves [pain] by [mechanism]. Then regenerate.', signals:['One named persona','One quantified pain'], criticalUnknowns:['Primary beneficiary?','What pain is acute enough to change behavior?'], rationale:'Advance by narrowing who it is for.', scores:{novelty:4,relevance:8,testability:8} },0,round),
+      normalizeIdeaCandidate({ title:'Stress the non-negotiable constraint', reframedIdea:'Restate the idea under one hard constraint (budget, regulation, time, sovereignty).', kayrosSignature:'Constraints create distinctive options.', opening:'A hard constraint forces divergent challengers.', shiftedAssumption:'Constraints were optional footnotes.', falsifiableHypothesis:'If no constraint changes the idea shape, we are still in generic ideation.', firstExperiment:'Pick one constraint and rewrite the idea in 2 lines under it.', signals:['Constraint named','Idea shape changed'], criticalUnknowns:['Which constraint is non-negotiable?','What must we drop?'], rationale:'Progress via constraint.', scores:{novelty:6,relevance:7,testability:7} },1,round),
+      normalizeIdeaCandidate({ title:'Define a 90-day success signal', reframedIdea:'Turn the idea into a hypothesis with a 90-day observable success signal for "'+base+'".', kayrosSignature:'Without a success signal, novelty cannot be ranked.', opening:'A measurable signal unlocks later stress-testing.', shiftedAssumption:'Success was left unbounded.', falsifiableHypothesis:'If we cannot state one observable signal at D+90, the idea is not decision-ready.', firstExperiment:'Write: At D+90 we will observe [signal] on [population]. Then relaunch.', signals:['One metric','Defined population'], criticalUnknowns:['What is the D+90 signal?','What forces a no-go?'], rationale:'Keep the loop moving with a testable framing.', scores:{novelty:5,relevance:7,testability:9} },2,round)
+    ];
+  }
+  return [
+    normalizeIdeaCandidate({ title:'Clarifier le beneficiaire', reframedIdea:'Reformuler autour d un seul beneficiaire principal : qui gagne quoi avec "'+base+'" ?', kayrosSignature:'L ambiguite sur le beneficiaire bloque le ranking.', opening:'Un beneficiaire nomme debloque pertinence et testabilite.', shiftedAssumption:'On a suppose que la cible etait evidente.', falsifiableHypothesis:'Si on ne peut pas nommer un beneficiaire principal en une phrase, l idee reste multi-interpretable.', firstExperiment:'Ecrire : Pour [persona], cela resout [douleur] via [mecanisme]. Puis regenerer.', signals:['Une persona nommee','Une douleur quantifiee'], criticalUnknowns:['Beneficiaire principal ?','Quelle douleur est assez aigue ?'], rationale:'Avancer en resserrant le pour-qui.', scores:{novelty:4,relevance:8,testability:8} },0,round),
+    normalizeIdeaCandidate({ title:'Forcer une contrainte non negociable', reframedIdea:'Reformuler l idee sous une contrainte dure (budget, regulation, delai, souverainete).', kayrosSignature:'Les contraintes creent des options distinctives.', opening:'Une contrainte dure force des variantes divergentes.', shiftedAssumption:'Les contraintes etaient optionnelles.', falsifiableHypothesis:'Si aucune contrainte ne change la forme de l idee, on reste generique.', firstExperiment:'Choisir une contrainte et reecrire l idee en 2 lignes sous cette contrainte.', signals:['Contrainte nommee','Forme modifiee'], criticalUnknowns:['Quelle contrainte est non negociable ?','Que faut-il abandonner ?'], rationale:'Progresser par la contrainte.', scores:{novelty:6,relevance:7,testability:7} },1,round),
+    normalizeIdeaCandidate({ title:'Definir un signal de succes a 90 jours', reframedIdea:'Transformer l idee en hypothese avec un signal observable a 90 jours pour "'+base+'".', kayrosSignature:'Sans signal de succes, la nouveaute ne peut pas etre rankee.', opening:'Un signal mesurable permet la suite du cycle.', shiftedAssumption:'Le succes etait non borne.', falsifiableHypothesis:'Si on ne peut pas enoncer un signal a J+90, l idee n est pas arbitrable.', firstExperiment:'Ecrire : A J+90 nous observerons [signal] sur [population]. Puis relancer.', signals:['Une metrique','Population definie'], criticalUnknowns:['Quel signal a J+90 ?','Qu est-ce qui impose un no-go ?'], rationale:'Faire avancer la boucle avec un cadrage testable.', scores:{novelty:5,relevance:7,testability:9} },2,round)
+  ];
+}
 function parseExplorationResponse(raw,round){
   const parsed=extractJsonValue(raw);
-  const values=Array.isArray(parsed)?parsed:(parsed.candidates||parsed.variants||parsed.directions||parsed.hypotheses||parsed.pistes||[]);
-  if(!Array.isArray(values)||values.length<3) throw new Error(t('exploration_parse_error'));
+  let values=Array.isArray(parsed)?parsed:(parsed.candidates||parsed.variants||parsed.directions||parsed.hypotheses||parsed.pistes||parsed.options||[]);
+  if(!Array.isArray(values)) values=[];
+  if(!values.length){
+    const text=String(raw||'');
+    const lines=text.split(/\n+/).map(l=>l.replace(/^[\s\-\*\d\.\)\(]+/,'').trim()).filter(l=>l.length>20 && l.length<280);
+    values=lines.slice(0,3).map(function(line,i){ return { title:'Piste '+(i+1), reframedIdea:line, firstExperiment:'Clarifier cette piste avec l\'utilisateur', falsifiableHypothesis:line }; });
+  }
+  if(!values.length) throw new Error(t('exploration_parse_error'));
   const candidates=values.slice(0,3).map((value,index)=>normalizeIdeaCandidate(value,index,round));
-  if(candidates.some(c=>!c.reframedIdea||!c.falsifiableHypothesis||!c.firstExperiment)) throw new Error(t('exploration_parse_error'));
+  candidates.forEach(function(c,i){
+    if(!c.reframedIdea) c.reframedIdea=c.title||('Direction '+(i+1));
+    if(!c.falsifiableHypothesis) c.falsifiableHypothesis=c.reframedIdea;
+    if(!c.firstExperiment) c.firstExperiment=(cycleLanguage()==='en'
+      ? 'Interview 3 target users to check whether this hypothesis holds'
+      : 'Interviewer 3 utilisateurs cibles pour verifier si cette hypothese tient');
+  });
+  while(candidates.length<3){
+    const n=candidates.length+1;
+    const lang=cycleLanguage();
+    candidates.push(normalizeIdeaCandidate({
+      title: lang==='en' ? ('Clarifying path '+n) : ('Piste de clarification '+n),
+      reframedIdea: lang==='en'
+        ? 'We need a sharper definition of the beneficiary, the constraint, and the success metric before ranking further.'
+        : 'Il faut preciser le beneficiaire, la contrainte et la metrique de succes avant de continuer le ranking.',
+      falsifiableHypothesis: lang==='en'
+        ? 'Without a named beneficiary and measurable success, the idea remains too broad to stress-test.'
+        : 'Sans beneficiaire nomme et succes mesurable, l\'idee reste trop large pour etre eprouvee.',
+      firstExperiment: lang==='en'
+        ? 'Answer the clarification questions below, then regenerate the novelty loop.'
+        : 'Repondre aux questions de clarification ci-dessous, puis relancer la boucle de nouveaute.',
+      criticalUnknowns: lang==='en'
+        ? ['Who is the primary beneficiary?', 'What constraint is non-negotiable?', 'What would count as success in 90 days?']
+        : ['Qui est le beneficiaire principal ?', 'Quelle contrainte est non negociable ?', 'Quel succes mesurable a 90 jours ?'],
+      scores:{ novelty:5, relevance:6, testability:7 }
+    }, candidates.length, round));
+  }
   return candidates;
 }
 function renderScorePill(label,value){
@@ -1521,12 +1576,24 @@ async function generateIdeaRound(mode,sourceCandidates){
     document.getElementById('idea-feedback').value='';
   }catch(err){
     const lang=cycleLanguage();
-    const message=err instanceof SyntaxError?t('exploration_parse_error',{},lang):(err.message||t('exploration_parse_error',{},lang));
-    const title=t('response_format_title',{},lang);
-    document.getElementById('idea-candidates').innerHTML='<div class="lg:col-span-3 rounded-2xl border border-red-400/30 bg-red-400/10 p-5 text-sm text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(t('auto_retry_fail',{},lang))+'<br><span class="opacity-80">'+escapeHtml(message)+'</span></div>';
+    log((t('exploration_soft_fail',{},lang)||'soft-fail')+' '+(err.message||''), 'warn');
+    const candidates=buildFallbackExplorationCandidates(roundNumber, err.message||'parse');
+    demoState.explorationRounds.push({
+      iteration:roundNumber,mode:mode||'challenge',feedback,
+      sourceIds:(sourceCandidates||[]).map(c=>c.id),generatedAt:new Date().toISOString(),
+      candidates, recovered:false, fallback:true, failReason:String(err.message||'parse')
+    });
+    demoState.shortlistedIdeaIds=[];
+    renderIdeaCandidates();
+    const host=document.getElementById('idea-candidates');
+    if(host){
+      const banner=document.createElement('div');
+      banner.className='lg:col-span-3 rounded-2xl border border-amber-400/40 bg-amber-400/10 p-4 text-sm text-amber-50';
+      banner.innerHTML='<strong>'+escapeHtml(t('exploration_soft_title',{},lang)||'Loop continues')+'</strong><br>'+escapeHtml(t('exploration_soft_body',{},lang)||'Clarification paths generated.');
+      host.insertBefore(banner, host.firstChild);
+    }
     document.getElementById('idea-controls').classList.remove('hidden');
-    document.getElementById('demo-start-btn').innerHTML='<i class="fas fa-triangle-exclamation mr-1.5"></i>'+escapeHtml(message);
-  }finally{
+  }}finally{
     demoState.explorationRunning=false;
     const btn=document.getElementById('demo-start-btn');
     if(demoState.explorationRounds.length){
