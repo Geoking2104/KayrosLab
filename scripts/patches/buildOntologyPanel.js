@@ -3,56 +3,146 @@ function buildOntologyPanel(map, lang){
     competitor:'#fb7185', capability:'#34d399', regulation:'#fbbf24',
     segment:'#38bdf8', tech:'#a78bfa', concept:'#94a3b8'
   };
-  const typeLabels = lang==='en'
-    ? {competitor:'Competitor', capability:'Capability', regulation:'Regulation', segment:'Segment', tech:'Tech', concept:'Concept'}
-    : {competitor:'Concurrent', capability:'Capacite', regulation:'Regulation', segment:'Segment', tech:'Tech', concept:'Concept'};
+  const isEn = lang==='en';
+  const typeMeta = isEn ? {
+    competitor:{label:'Competitor', hint:'Players already on the same ground'},
+    capability:{label:'Capability', hint:'Skills or assets you can mobilize'},
+    regulation:{label:'Regulation', hint:'Rules that constrain or enable'},
+    segment:{label:'Segment', hint:'Who is served or targeted'},
+    tech:{label:'Tech', hint:'Technical building blocks'},
+    concept:{label:'Concept', hint:'Other structuring idea'}
+  } : {
+    competitor:{label:'Concurrent', hint:'Acteurs deja presents sur le meme terrain'},
+    capability:{label:'Capacite', hint:'Savoir-faire ou actifs mobilisables'},
+    regulation:{label:'Regulation', hint:'Regles qui contraignent ou autorisent'},
+    segment:{label:'Segment', hint:'Publics servis ou cibles'},
+    tech:{label:'Tech', hint:'Briques techniques mobilisees'},
+    concept:{label:'Concept', hint:'Autre idee structurante'}
+  };
+  const relMeta = isEn ? {
+    competes_with:'Competes with', enables:'Enables', constrains:'Constrains',
+    serves:'Serves', diverges_from:'Diverges from', drives:'Drives', related:'Related'
+  } : {
+    competes_with:'Rivalise avec', enables:'Permet', constrains:'Contraint',
+    serves:'Sert', diverges_from:'Diverge de', drives:'Pousse', related:'Relie a'
+  };
+  const copy = isEn ? {
+    title: t('ontology_card',{},lang) || 'Competitive radar and gap analysis',
+    subtitle: 'Read the map like a strategic network: clusters, links, then gaps to connect.',
+    howTitle: 'How to read this radar',
+    how: [
+      'Colored nodes = entities (size reflects how connected they are).',
+      'Groups by color = same type (competitors, tech, regulation).',
+      'Solid lines = structural links; dashed lines = tension (compete / constrain / diverge).',
+      'Edge labels name the relationship in plain language.',
+      'Gaps below are missing bridges - select 1 to 3 to steer Challenge and Decide.'
+    ],
+    legendTitle: 'Entity types',
+    linksTitle: 'Link types present',
+    entitiesTitle: 'Entities on the map',
+    gapsTitle: t('ontology_gaps_title',{},lang) || 'Topics to connect',
+    gapsHint: t('ontology_select_hint',{},lang) || 'Select gaps to inject into the next steps.',
+    statsE: 'entities', statsL: 'links', statsG: 'gaps',
+    emptyGaps: 'No structural gap detected - the map is dense; still pick a tension to stress-test.'
+  } : {
+    title: t('ontology_card',{},lang) || 'Radar concurrentiel et gap analysis',
+    subtitle: 'Lisez la carte comme un reseau strategique : clusters, liens, puis gaps a connecter.',
+    howTitle: 'Comment lire ce radar',
+    how: [
+      'Noeuds colores = entites (la taille reflete le nombre de liens).',
+      'Groupes par couleur = meme type (concurrents, tech, regulation).',
+      'Traits pleins = liens structurants ; pointilles = tension (rivalite / contrainte / divergence).',
+      'Les libelles sur les arcs nomment la relation en langage clair.',
+      'Les gaps ci-dessous sont des ponts manquants - selectionnez-en 1 a 3 pour orienter Eprouver et Arbitrer.'
+    ],
+    legendTitle: 'Types d entites',
+    linksTitle: 'Types de liens presents',
+    entitiesTitle: 'Entites sur la carte',
+    gapsTitle: t('ontology_gaps_title',{},lang) || 'Topics to connect - gaps',
+    gapsHint: t('ontology_select_hint',{},lang) || 'Ces gaps seront injectes dans Challenge et Decide.',
+    statsE: 'entites', statsL: 'liens', statsG: 'gaps',
+    emptyGaps: 'Aucun gap structurel detecte - la carte est dense ; choisissez tout de meme une tension a eprouver.'
+  };
 
   let html = '<div class="mt-4 rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white overflow-hidden shadow-sm">';
-
-  html += '<div class="px-4 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 bg-white/80">';
-  html += '<div><p class="text-sm font-semibold text-slate-900">'+escapeHtml(t('ontology_card',{},lang))+'</p>';
-  html += '<p class="text-[11px] text-slate-500">'+escapeHtml(t('ontology_note',{},lang)).replace(/^\[|\]$/g,'')+'</p></div>';
+  html += '<div class="px-4 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 bg-white/90">';
+  html += '<div><p class="text-sm font-semibold text-slate-900">'+escapeHtml(copy.title)+'</p>';
+  html += '<p class="text-[11px] text-slate-500 mt-0.5">'+escapeHtml(copy.subtitle)+'</p></div>';
   html += '<div class="flex flex-wrap gap-1.5 text-[10px]">';
-  html += '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">'+map.entities.length+' '+escapeHtml(lang==='en'?'entities':'entites')+'</span>';
-  html += '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">'+map.relations.length+' '+escapeHtml(lang==='en'?'links':'liens')+'</span>';
-  html += '<span class="px-2 py-0.5 rounded-full bg-violet-100 text-violet-700">'+map.gaps.length+' gaps</span>';
+  html += '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">'+map.entities.length+' '+escapeHtml(copy.statsE)+'</span>';
+  html += '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">'+map.relations.length+' '+escapeHtml(copy.statsL)+'</span>';
+  html += '<span class="px-2 py-0.5 rounded-full bg-violet-100 text-violet-700">'+map.gaps.length+' '+escapeHtml(copy.statsG)+'</span>';
   html += '</div></div>';
 
-  html += '<div class="px-4 pt-3 flex flex-wrap gap-2">';
-  Object.keys(typeLabels).forEach(function(k){
-    if(!map.entities.some(function(e){ return (e.type||'concept')===k; }) && k!=='concept') return;
-    html += '<span class="inline-flex items-center gap-1.5 text-[10px] text-slate-600"><span class="w-2.5 h-2.5 rounded-full" style="background:'+typeColor[k]+'"></span>'+escapeHtml(typeLabels[k])+'</span>';
+  html += '<details open class="px-4 py-3 border-b border-slate-100 bg-sky-50/40">';
+  html += '<summary class="cursor-pointer text-xs font-semibold text-sky-900 select-none">'+escapeHtml(copy.howTitle)+'</summary>';
+  html += '<ol class="mt-2 space-y-1.5 text-[11px] text-slate-600 list-decimal pl-4 leading-relaxed">';
+  copy.how.forEach(function(line){ html += '<li>'+escapeHtml(line)+'</li>'; });
+  html += '</ol>';
+  html += '<div class="mt-3 flex flex-wrap gap-3 text-[10px] text-slate-600">';
+  html += '<span class="inline-flex items-center gap-1.5"><svg width="28" height="14" aria-hidden="true"><line x1="0" y1="7" x2="28" y2="7" stroke="#94a3b8" stroke-width="1.5"/></svg>'+escapeHtml(isEn?'Structural link':'Lien structurant')+'</span>';
+  html += '<span class="inline-flex items-center gap-1.5"><svg width="28" height="14" aria-hidden="true"><line x1="0" y1="7" x2="28" y2="7" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 3"/></svg>'+escapeHtml(isEn?'Tension / gap-like':'Tension / divergence')+'</span>';
+  html += '<span class="inline-flex items-center gap-1.5"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#38bdf8"/></svg>'+escapeHtml(isEn?'Node = entity':'Noeud = entite')+'</span>';
+  html += '</div></details>';
+
+  html += '<div class="px-4 pt-3">';
+  html += '<p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400 mb-2">'+escapeHtml(copy.legendTitle)+'</p>';
+  html += '<div class="grid sm:grid-cols-2 gap-1.5 mb-3">';
+  Object.keys(typeMeta).forEach(function(k){
+    const used = map.entities.some(function(e){ return (e.type||'concept')===k; });
+    if(!used && k!=='concept') return;
+    const m = typeMeta[k];
+    html += '<div class="flex items-start gap-2 text-[11px] text-slate-600"><span class="mt-1 w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:'+typeColor[k]+'"></span><span><span class="font-semibold text-slate-800">'+escapeHtml(m.label)+'</span> - '+escapeHtml(m.hint)+'</span></div>';
   });
-  html += '</div>';
+  html += '</div></div>';
 
-  html += '<div class="px-3 py-2">';
-  html += '<svg id="ontology-graph" class="semantic-graph w-full rounded-xl border border-slate-100 bg-slate-50/80" viewBox="0 0 640 360" role="img" aria-label="'+escapeHtml(t('ontology_card',{},lang))+'">'+renderOntologyGraph(map)+'</svg>';
-  html += '</div>';
-
-  html += '<div class="px-4 pb-2 flex flex-wrap gap-1.5">';
-  map.entities.forEach(function(e){
-    const col = typeColor[e.type]||typeColor.concept;
-    html += '<span class="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700"><span class="w-1.5 h-1.5 rounded-full" style="background:'+col+'"></span>'+escapeHtml(e.label)+'</span>';
+  const relTypes = [];
+  map.relations.forEach(function(r){
+    const k = r.type||'related';
+    if(relTypes.indexOf(k)<0) relTypes.push(k);
   });
-  html += '</div>';
-
-  if(map.gaps && map.gaps.length){
-    html += '<div class="px-4 pb-4 pt-1">';
-    html += '<p class="text-xs font-semibold text-violet-800 mb-1">'+escapeHtml(t('ontology_gaps_title',{},lang))+'</p>';
-    html += '<p class="text-[11px] text-slate-500 mb-2">'+escapeHtml(t('ontology_select_hint',{},lang))+'</p>';
-    html += '<div class="grid sm:grid-cols-2 gap-2">';
-    map.gaps.forEach(function(g){
-      const selected = (demoState.selectedOntologyGapIds||[]).includes(g.id);
-      html += '<button type="button" data-ontology-gap="'+escapeHtml(g.id)+'" class="text-left rounded-xl border p-3 transition '+(selected?'border-violet-400 bg-violet-50 ring-1 ring-violet-300':'border-slate-200 bg-white hover:border-violet-300')+'">';
-      html += '<div class="flex items-start gap-2">';
-      html += '<span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center '+(selected?'bg-violet-600 text-white':'bg-slate-100 text-slate-500')+'">'+(selected?'\u2713':'\u25CB')+'</span>';
-      html += '<div><div class="text-xs font-semibold text-slate-900">'+escapeHtml(g.label)+'</div>';
-      if(g.opportunity) html += '<div class="text-[11px] text-slate-500 mt-1 leading-snug">'+escapeHtml(g.opportunity)+'</div>';
-      html += '</div></div></button>';
+  if(relTypes.length){
+    html += '<div class="px-4 pb-2">';
+    html += '<p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400 mb-1.5">'+escapeHtml(copy.linksTitle)+'</p>';
+    html += '<div class="flex flex-wrap gap-1.5">';
+    relTypes.forEach(function(k){
+      html += '<span class="text-[10px] px-2 py-0.5 rounded-full border border-slate-200 bg-white text-slate-600">'+escapeHtml(relMeta[k]||k.replace(/_/g,' '))+'</span>';
     });
     html += '</div></div>';
   }
 
+  html += '<div class="px-3 py-2">';
+  html += '<svg id="ontology-graph" class="semantic-graph w-full rounded-xl border border-slate-100 bg-slate-50/80" viewBox="0 0 640 360" role="img" aria-label="'+escapeHtml(copy.title)+'">'+renderOntologyGraph(map)+'</svg>';
   html += '</div>';
+
+  html += '<div class="px-4 pb-2">';
+  html += '<p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400 mb-1.5">'+escapeHtml(copy.entitiesTitle)+'</p>';
+  html += '<div class="flex flex-wrap gap-1.5">';
+  map.entities.forEach(function(e){
+    const col = typeColor[e.type]||typeColor.concept;
+    const tip = (typeMeta[e.type]||typeMeta.concept).label;
+    html += '<span title="'+escapeHtml(tip)+'" class="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700"><span class="w-1.5 h-1.5 rounded-full" style="background:'+col+'"></span>'+escapeHtml(e.label)+'</span>';
+  });
+  html += '</div></div>';
+
+  html += '<div class="px-4 pb-4 pt-1">';
+  html += '<p class="text-xs font-semibold text-violet-800 mb-1">'+escapeHtml(copy.gapsTitle)+'</p>';
+  html += '<p class="text-[11px] text-slate-500 mb-2">'+escapeHtml(copy.gapsHint)+'</p>';
+  if(map.gaps && map.gaps.length){
+    html += '<div class="grid sm:grid-cols-2 gap-2">';
+    map.gaps.forEach(function(g, gi){
+      const selected = (demoState.selectedOntologyGapIds||[]).includes(g.id);
+      html += '<button type="button" data-ontology-gap="'+escapeHtml(g.id)+'" class="text-left rounded-xl border p-3 transition '+(selected?'border-violet-400 bg-violet-50 ring-1 ring-violet-300':'border-slate-200 bg-white hover:border-violet-300')+'">';
+      html += '<div class="flex items-start gap-2">';
+      html += '<span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center '+(selected?'bg-violet-600 text-white':'bg-slate-100 text-slate-500')+'">'+(selected?'Y':String(gi+1))+'</span>';
+      html += '<div><div class="text-xs font-semibold text-slate-900">'+escapeHtml(g.label)+'</div>';
+      if(g.opportunity) html += '<div class="text-[11px] text-slate-500 mt-1 leading-snug"><span class="font-medium text-violet-700">'+(isEn?'Opportunity':'Opportunite')+' - </span>'+escapeHtml(g.opportunity)+'</div>';
+      html += '</div></div></button>';
+    });
+    html += '</div>';
+  } else {
+    html += '<p class="text-[11px] text-slate-500 italic">'+escapeHtml(copy.emptyGaps)+'</p>';
+  }
+  html += '</div></div>';
   return html;
 }
