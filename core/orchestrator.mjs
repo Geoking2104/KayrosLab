@@ -87,6 +87,76 @@ export class Orchestrator {
 
   _fallbackSteps() { return defaultFallbackSteps(); }
 
+  async project(decision = {}, ctx = {}) {
+    const ideaId = ctx.ideaId ?? 'idea';
+    const status = decision.status ?? 'Go';
+    const base = { ideaId, generatedBy: 'projeter', ts: new Date().toISOString() };
+    const hasTool = (n) => !!(this.tools && typeof this.tools.get === 'function' && this.tools.get(n));
+
+    if (status === 'No-Go') {
+      const capitalisation = {
+        apprentissages: decision.apprentissages ?? [],
+        reactivation: decision.reactivation ?? null,
+        signaux: decision.signaux ?? [],
+      };
+      this.memory?.addContribution?.({ actor: 'Projeter', content: `capitalisation No-Go (${capitalisation.apprentissages.length} apprentissages)` });
+      return { ...base, status: 'No-Go', capitalisation };
+    }
+    if (status === 'Revision' || status === 'Révision') {
+      return { ...base, status: 'Révision', note: decision.motif ?? 'Révision demandée', renvoi: 'Éprouver' };
+    }
+
+    // Go : roadmap + ressources/budget + projections probabilistes (chiffres deterministes).
+    const milestones = decision.milestones ?? [];
+    let ressources = null, projections = null;
+    if (hasTool('estimate_resources')) {
+      try {
+        ressources = await this.tools.call('estimate_resources', { milestones, costHypotheses: decision.costHypotheses ?? {} }, { ideaId });
+      } catch { ressources = null; }
+    }
+    if (hasTool('simulate_trajectory') && Array.isArray(decision.scenarios) && decision.scenarios.length) {
+      try {
+        projections = await this.tools.call('simulate_trajectory', { scenarios: decision.scenarios, variables: decision.variables ?? [], iterations: ctx.iterations, seed: ctx.seed }, { ideaId });
+      } catch { projections = null; }
+    }
+    const roadmap = {
+      jalons: milestones,
+      raci: decision.raci ?? [],
+      ressources,
+      kpis: decision.kpis ?? [],
+      risques: decision.risques ?? [],
+      gatesFuturs: decision.gatesFuturs ?? [],
+    };
+    this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
+    return { ...base, status: 'Go', roadmap, projections };
+  }
+
+  async monitorProjection({ kpis = [], readings = [] } = {}, ctx = {}) {
+    const ideaId = ctx.ideaId ?? 'idea';
+    const { alerts } = evaluateKpis(kpis, readings);
+    const signals = alertsToSignals(alerts, { ideaId });
+    // Re-injection dans le corpus d'Ecouter.
+    if (this._hasLayered()) {
+      for (const s of signals) {
+        try {
+          await this.layered.addAtomicFact({
+            ideaId, content: s.contenu, type: 'metric', actors: ['monitor'], confidence: 0.8, tags: ['kpi-alert'],
+          });
+        } catch { /* best-effort */ }
+      }
+    } else if (this._hasVectorMemory()) {
+      for (const s of signals) {
+        try { await this.memory.remember({ id: s.id, ideaId, text: s.contenu }); } catch { /* best-effort */ }
+      }
+    } else {
+      for (const s of signals) this.memory?.addContribution?.({ actor: 'Ecouter', content: s.contenu });
+    }
+    const reArbitrage = alerts.length
+      ? { type: 're-arbitrage', ideaId, reasons: alerts.map((a) => a.kpiId), ts: new Date().toISOString() }
+      : null;
+    return { alerts, signals, reArbitrage };
+  }
+
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
     if (ctx.llmPlan === false) {
@@ -140,10 +210,8 @@ export class Orchestrator {
     const created = [];
     for (const p of payloads || []) {
       try {
-        if (this.layered?.addFact) {
-          const f = this.layered.addFact(plan.ideaId, p);
-          if (f) created.push(f);
-        }
+        const fact = await this.layered.addAtomicFact(p);
+        created.push({ id: fact.id, type: fact.type, content: fact.content.slice(0, 120) });
       } catch { /* soft */ }
     }
     let extraContext = '';
@@ -235,10 +303,20 @@ export class Orchestrator {
           });
           if (contextBlock) {
             const snap = this.layered.snapshot(plan.ideaId);
+            let items = [];
+            try {
+              const rec = await this.layered.recall(plan.goal, {
+                ideaId: plan.ideaId, k: this.recallK * 2, layers: ['L1', 'L2'],
+              });
+              items = [...(rec.l1 || []), ...(rec.l2 || [])]
+                .filter((f) => f && f.content)
+                .slice(0, this.recallK * 2)
+                .map((f) => ({ id: f.id, score: f.score ?? null, text: f.content }));
+            } catch { /* soft */ }
             yield {
               type: 'recall', ideaId: plan.ideaId, source: 'layered',
               stats: snap.stats, preview: contextBlock.slice(0, 400),
-              scope: scopeResolved, ts: new Date().toISOString(),
+              items, scope: scopeResolved, ts: new Date().toISOString(),
             };
           }
         } catch { /* soft */ }
@@ -272,6 +350,7 @@ export class Orchestrator {
       if (count++ >= maxSteps) { yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() }; break; }
       const specialist = this.agents?.[s.agent];
       let observation, actionType = 'llm', actionName = 'complete';
+      let usage = { tokensIn: 0, tokensOut: 0 };
       let modelUsed = null, degraded = null;
 
       if (s.tool && this.tools && !specialist) {
@@ -284,10 +363,13 @@ export class Orchestrator {
         }
       } else if (specialist && typeof specialist.execute === 'function') {
         try {
-          const res = await specialist.execute(s.input || plan.goal, {
-            ...opts, context: contextBlock, ideaId: plan.ideaId,
+          const res = await specialist.execute(s.input || s.description, {
+            goal: plan.goal, context: contextBlock,
+            provider: opts.provider, sovereignty: opts.sovereignty,
+            model: opts.model,
           });
           observation = res.output || res.text || res;
+          actionType = 'specialized_agent'; actionName = s.agent;
           modelUsed = res.model || specialist.preferredModel || null;
           degraded = res.degraded || null;
         } catch (e) {
@@ -296,15 +378,17 @@ export class Orchestrator {
         }
       } else {
         try {
+          const messages = [];
+          if (contextBlock) messages.push({ role: 'system', content: contextBlock });
+          messages.push({ role: 'user', content: `${s.input || plan.goal}\n\nTache : ${s.description || ''}` });
           const res = await this.llm.complete({
             role: s.agent || 'Planner',
-            messages: [
-              { role: 'system', content: `Tu es l'agent ${s.agent || 'Kayros'}.` },
-              { role: 'user', content: `${contextBlock ? contextBlock + '\n\n' : ''}${s.input || plan.goal}` },
-            ],
+            messages,
+            model: opts.model || specialist?.preferredModel || undefined,
           }, { provider: opts.provider, sovereignty: opts.sovereignty });
           observation = res.text || res.output || '';
-          modelUsed = res.model || null;
+          usage = res.usage || usage;
+          modelUsed = opts.model || specialist?.preferredModel || null;
           degraded = res.degraded || null;
         } catch (e) {
           observation = `LLM error: ${e?.message || e}`;
@@ -312,13 +396,74 @@ export class Orchestrator {
         }
       }
 
+      const obsText = typeof observation === 'string' ? observation : JSON.stringify(observation);
       agentOutputs.push({ agent: s.agent || 'agent', output: observation, degraded, model: modelUsed });
+
+      this.memory?.addContribution?.({ actor: s.agent, content: obsText });
+      if (doRemember && this._hasVectorMemory() && !this._hasLayered()) {
+        try {
+          await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` });
+        } catch { /* soft */ }
+      }
+
+      if (this._hasLayered()) {
+        try {
+          this.layered.rememberL0({
+            ideaId: plan.ideaId, step: s.id, agentRole: s.agent,
+            kind: 'agent_scratch', content: obsText, summary: obsText.slice(0, 200),
+          });
+          if (obsText.length < 400 && obsText.length > 30) {
+            await this.layered.addAtomicFact({
+              ideaId: plan.ideaId, content: obsText.slice(0, 300), type: 'observation',
+              actors: [s.agent], confidence: 0.55,
+              sourceRefs: [{ type: 'agent', id: s.agent }],
+            });
+          }
+        } catch { /* soft */ }
+      }
+
+      if (degraded) {
+        yield {
+          type: 'degraded', stepId: s.id, agent: s.agent,
+          ...degraded, ts: new Date().toISOString(),
+        };
+      }
+
       yield {
-        type: 'step', ideaId: plan.ideaId, agent: s.agent, actionType, actionName,
-        output: typeof observation === 'string' ? observation.slice(0, 500) : observation,
+        type: 'trace', stepId: s.id, agent: s.agent,
+        thought: `[${s.agent}] ${s.description || s.input || ''}`,
+        action: { type: actionType, name: actionName },
+        observation, usedContext: !!contextBlock,
+        tokens: { in: usage.tokensIn, out: usage.tokensOut },
         quant: { modelUsed, agent: agentQuantInfo(specialist) },
         degraded, ts: new Date().toISOString(),
       };
+    }
+
+    if (doOffload && this._hasLayered()) {
+      try {
+        const refs = await this.layered.offload(plan.ideaId, null, {
+          minContentLength: opts.offloadMinLength ?? 600,
+        });
+        if (refs.length) {
+          yield { type: 'offload', ideaId: plan.ideaId, count: refs.length, refs: refs.slice(0, 5), ts: new Date().toISOString() };
+        }
+      } catch { /* soft */ }
+    }
+
+    if (doAutoDistill && this._hasLayered() && typeof this.layered.autoDistillL2 === 'function') {
+      try {
+        const created = await this.layered.autoDistillL2(plan.ideaId, {
+          minFacts: opts.distillMinFacts ?? 3,
+          llm: opts.distillLlm ?? this.llm,
+          distillFn: opts.distillFn || null,
+          force: !!opts.distillForce,
+          llmOpts: { provider: opts.provider, sovereignty: opts.sovereignty },
+        });
+        if (created.length) {
+          yield { type: 'distill', ideaId: plan.ideaId, count: created.length, titles: created.map((s) => s.title), ts: new Date().toISOString() };
+        }
+      } catch { /* soft */ }
     }
 
     // Synthesis
@@ -435,19 +580,56 @@ export class Orchestrator {
         recommendation: packet.recommendation, packet: gateView,
         ts: new Date().toISOString(),
       };
-      if (waitGate) {
-        try {
-          const decision = await promise;
+      if (!waitGate) {
+        yield {
+          type: 'final', status: 'pending_review', gateId, gateType,
+          answer, recommendation: packet.recommendation,
+          epistemic: packet.epistemicStatus, assertion: epistemic.assertion,
+          quant: this._quantSnapshot(), ts: new Date().toISOString(),
+        };
+        return;
+      }
+      try {
+        const decision = await promise;
+        yield {
+          type: 'gate_resolved', gateId, decision,
+          ts: new Date().toISOString(),
+        };
+        if (decision?.decision === 'reject' || decision?.decision === 'veto') {
           yield {
-            type: 'gate_resolved', gateId, decision,
+            type: 'final', status: 'blocked_veto',
+            message: `Bloque (veto) : ${decision.reason ?? 'veto humain'}`,
             ts: new Date().toISOString(),
           };
-        } catch { /* soft */ }
+          return;
+        }
+        if (decision?.decision === 'revise') {
+          yield {
+            type: 'final', status: 'revise',
+            message: decision.reason ?? 'Revoir avant validation',
+            ts: new Date().toISOString(),
+          };
+          return;
+        }
+        yield {
+          type: 'final', status: 'validated_human', answer,
+          recommendation: packet.recommendation, epistemic: packet.epistemicStatus,
+          assertion: epistemic.assertion, quant: this._quantSnapshot(),
+          ts: new Date().toISOString(),
+        };
+        return;
+      } catch {
+        yield {
+          type: 'final', status: 'blocked_veto',
+          message: 'Bloque (veto) : erreur lors de la resolution du gate',
+          ts: new Date().toISOString(),
+        };
+        return;
       }
     }
 
     yield {
-      type: 'done', ideaId: plan.ideaId,
+      type: 'final', status: 'auto', answer,
       recommendation: packet.recommendation,
       epistemic: packet.epistemicStatus,
       assertion: epistemic.assertion,

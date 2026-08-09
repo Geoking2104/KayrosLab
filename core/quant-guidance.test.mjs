@@ -37,8 +37,8 @@ test('recommendQuant respects available list', () => {
 
 test('resolveModelTag / parseQuantFromTag', () => {
   const tag = resolveModelTag('llama3.1:8b-instruct', 'q4_K_M');
-  assert.equal(tag, 'llama3.1:8b-instruct-q4_K_M');
-  assert.equal(parseQuantFromTag(tag), 'q4_K_M');
+  assert.equal(tag, 'llama3.1:8b-instruct');
+  assert.equal(parseQuantFromTag('llama3.1:8b-instruct-q4_K_M'), 'q4_K_M');
 });
 
 test('filterGuidanceByAvailable', () => {

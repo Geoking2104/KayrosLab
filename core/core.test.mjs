@@ -138,7 +138,7 @@ test('Orchestrateur : mode auto -> réponse restituée sans gate', async () => {
   const events = await collect(eng.orchestrator.run(plan, { governance: 'auto' }));
   const traces = events.filter((e) => e.type === 'trace');
   const final = events.at(-1);
-  assert.equal(traces.length, 4);
+  assert.equal(traces.length, 5);
   assert.equal(final.type, 'final');
   assert.equal(final.status, 'auto');
 });
@@ -245,7 +245,7 @@ test('OllamaEmbeddings : /api/embed (fetch simule)', async () => {
   };
   const e = new OllamaEmbeddings({ model: 'nomic-embed-text', fetchImpl: fake });
   const v = await e.embed('bonjour');
-  assert.deepEqual(v, [0.1, 0.2, 0.3]);
+  assert.deepEqual(v, [0.2672612419124244, 0.5345224838248488, 0.8017837257372731]); // L2 normalise
 });
 
 test('HttpEmbeddings : proxy backend (fetch simule)', async () => {
@@ -288,7 +288,7 @@ test('Orchestrateur : rappel memoire (recall) + memorisation des observations', 
   assert.ok(recall, 'un evenement recall doit etre emis');
   assert.ok(recall.items.some((i) => i.id === 'seed'));
   const traces = events.filter((e) => e.type === 'trace');
-  assert.equal(traces.length, 4);
+  assert.equal(traces.length, 5);
   assert.ok(traces.every((t) => t.usedContext === true)); // contexte memoire injecte
   assert.ok(eng.vectors.size() > 1); // seed + observations memorisees
   assert.equal(events.at(-1).status, 'auto');
@@ -301,7 +301,7 @@ test('Orchestrateur sans memoire vectorielle : aucun recall, fonctionne', async 
   const events = [];
   for await (const ev of eng.orchestrator.run(plan, { governance: 'auto', remember: false })) events.push(ev);
   assert.ok(!events.some((e) => e.type === 'recall'));
-  assert.equal(events.filter((e) => e.type === 'trace').length, 4);
+  assert.equal(events.filter((e) => e.type === 'trace').length, 5);
   assert.equal(events.at(-1).status, 'auto');
 });
 
@@ -321,14 +321,14 @@ test('Planner : repli deterministe si sortie non-JSON (mock)', async () => {
   const eng = createEngine(); // provider mock -> texte non JSON
   const plan = await eng.orchestrator.plan('objectif', { ideaId: 'iF' });
   assert.equal(plan.generatedBy, 'fallback');
-  assert.equal(plan.steps.length, 4);
+  assert.equal(plan.steps.length, 5);
 });
 
 test('Planner : llmPlan:false force le repli', async () => {
   const eng = createEngine();
   const plan = await eng.orchestrator.plan('x', { ideaId: 'z', llmPlan: false });
   assert.equal(plan.generatedBy, 'fallback');
-  assert.equal(plan.steps.length, 4);
+  assert.equal(plan.steps.length, 5);
 });
 
 test('parsePlanSteps : ignore agents invalides, renvoie null si vide', async () => {

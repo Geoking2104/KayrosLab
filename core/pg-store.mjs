@@ -1,7 +1,7 @@
 /**
  * Postgres-backed stores (optional dependency `pg`).
  * Multi-instance safe: shared pool, tenant columns, no local file locks.
- * When DATABASE_URL is unset or `pg` is missing → callers keep File*/InMemory.
+ * When DATABASE_URL is unset or `pg` is missing → callers keep File‑/InMemory.
  *
  * Schema: core/sql/schema.sql
  */

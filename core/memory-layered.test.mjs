@@ -208,6 +208,10 @@ test('createEngine expose layered + Orchestrator utilise canvas/offload/distill 
     ideaId: 'iL', content: 'contrainte réglementaire batteries seconde vie Europe',
     type: 'constraint', confidence: 0.9,
   });
+  eng.layered.rememberL0({
+    ideaId: 'iL', step: 'ecouter', kind: 'tool_output', agentRole: 'Ecouter',
+    content: 'donnees marche '.repeat(120), // > minContentLength -> offloadable
+  });
 
   const plan = await eng.orchestrator.plan('Évaluer batteries seconde vie', { ideaId: 'iL' });
   const events = await collect(eng.orchestrator.run(plan, { governance: 'auto' }));

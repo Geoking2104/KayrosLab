@@ -230,6 +230,24 @@ export function estimateQuality(quant) {
   return QUANT_META[q]?.quality ?? 0.9;
 }
 
+export function rebindAgentsQuant(agents = {}, quantGuidance = null, baseModel = null) {
+  for (const agent of Object.values(agents)) {
+    if (!agent || typeof agent !== 'object') continue;
+    const name = agent.constructor?.name || agent.name || '';
+    const roleKey = normalizeRole(name);
+    const quantRec = quantGuidance?.byRole?.[roleKey] || quantGuidance?.byRole?.[name] || quantGuidance?.global || null;
+    let preferredModel = null;
+    if (quantGuidance && typeof quantGuidance.resolveForRole === 'function' && baseModel) {
+      preferredModel = quantGuidance.resolveForRole(roleKey, baseModel) || quantGuidance.resolveForRole(name, baseModel);
+    } else if (quantGuidance?.resolvedDefaultModel) {
+      preferredModel = quantGuidance.resolvedDefaultModel;
+    }
+    if (quantRec) agent.quantRec = quantRec;
+    if (preferredModel) agent.preferredModel = preferredModel;
+  }
+  return agents;
+}
+
 export function recommendForEngine({
   model = 'llama3.2',
   roleQuant = {},

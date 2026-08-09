@@ -310,7 +310,8 @@ export class LayeredMemory {
         ? item.content.length
         : JSON.stringify(item.content ?? '').length;
 
-      if (len < minContentLength && !item.filePath) continue;
+      // An explicit step means "archive this workstep" regardless of length.
+      if (len < minContentLength && !item.filePath && !step) continue;
 
       item.expiresAt = nowIso();
 
@@ -776,9 +777,27 @@ export class LayeredMemory {
           if (h.layer === 'l1' && layers.includes('L1')) {
             const fact = this._l1.get(h.id);
             if (fact) result.l1.push({ ...fact, score: h.score });
+            else if (h.text) {
+              // Raw/legacy vector items (no _l1 entry) → observation bucket.
+              result.l1.push({
+                id: h.id, ideaId: h.ideaId, content: h.text, type: 'observation',
+                confidence: 0.5, status: 'active', actors: [], tags: [],
+                sourceRefs: [], score: h.score,
+              });
+            }
           } else if (h.layer === 'l2' && layers.includes('L2')) {
             const sc = this._l2.get(h.id);
             if (sc) result.l2.push({ ...sc, score: h.score });
+          } else if (!h.layer && layers.includes('L1')) {
+            const fact = this._l1.get(h.id);
+            if (fact) result.l1.push({ ...fact, score: h.score });
+            else if (h.text) {
+              result.l1.push({
+                id: h.id, ideaId: h.ideaId, content: h.text, type: 'observation',
+                confidence: 0.5, status: 'active', actors: [], tags: [],
+                sourceRefs: [], score: h.score,
+              });
+            }
           }
         }
         result.l1 = result.l1.slice(0, k);

@@ -55,13 +55,11 @@ import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProv
 import { demoTools } from './tool-registry.mjs';
 import { GovernanceService } from './governance.mjs';
 import { Orchestrator } from './orchestrator.mjs';
-import {
-  InMemoryVectorStore, QdrantVectorStore, MemoryService,
-} from './memory.mjs';
-import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings } from './embeddings.mjs';
-import { LayeredMemory, FileOffloadBackend, FileLayeredStore } from './memory-types.mjs';
+import { InMemoryVectorStore, QdrantVectorStore } from './memory.mjs';
+import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from './embeddings.mjs';
+import { LayeredMemory, FileOffloadBackend, FileLayeredStore } from './memory.mjs';
 import { createAllAgents } from './agents/index.mjs';
-import { buildQuantGuidance, filterGuidanceByAvailable, rebindAgentsQuant } from './quant-guidance.mjs';
+import { recommendForEngine, filterGuidanceByAvailable, rebindAgentsQuant } from './quant-guidance.mjs';
 
 async function tryLoadNodeIo() {
   try {
@@ -81,12 +79,13 @@ export function createEngine(opts = {}) {
     organizationId: opts.organizationId || null,
   };
   const baseModel = opts.model || null;
-  let quantGuidance = opts.quantGuidance || buildQuantGuidance({
-    baseModel,
+  const roleQuant = { ...(opts.roleModel || {}), ...(opts.roleQuant || {}) };
+  let quantGuidance = opts.quantGuidance || recommendForEngine({
+    model: baseModel || 'llama3.2',
     quant: opts.quant || null,
-    roleModel: opts.roleModel || {},
-    roleQuant: opts.roleQuant || {},
+    roleQuant,
     preferHigherQuant: !!opts.preferHigherQuant,
+    sovereignty: opts.sovereignty,
     availableModels: opts.availableModels || null,
   });
   const providers = {};
@@ -100,15 +99,16 @@ export function createEngine(opts = {}) {
     });
     providers.ollama = ollamaProvider;
   }
-  if (opts.httpBackendUrl) {
+  const backendUrl = opts.httpBackendUrl ?? opts.backendUrl;
+  if (backendUrl) {
     providers.http = new HttpBackendProvider({
-      url: opts.httpBackendUrl, secret: opts.secret, fetchImpl: opts.fetchImpl,
+      url: backendUrl, secret: opts.secret, fetchImpl: opts.fetchImpl,
     });
   }
   if (opts.anthropicKey) {
     // optional Anthropic adapter if present in kayros-llm
   }
-  const defaultProvider = opts.sovereignty === 'local' ? 'ollama' : (opts.httpBackendUrl ? 'http' : 'mock');
+  const defaultProvider = opts.sovereignty === 'local' ? 'ollama' : ((opts.httpBackendUrl || opts.backendUrl) ? 'http' : 'mock');
   const policy = new RoutingPolicy({
     defaultProvider, fallback: 'mock',
     roleModel: opts.roleModel || {}, roleQuant: opts.roleQuant || {},
