@@ -63,6 +63,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 .journey-map{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.1fr) minmax(0,1.48fr);border:1px solid var(--color-rule-dark);border-radius:var(--radius-lg);overflow:hidden;background:color-mix(in oklch,var(--color-ink) 62%,var(--color-ink-deep))}
 .journey-panel{min-width:0;padding:var(--space-md);position:relative}.journey-panel+.journey-panel{border-inline-start:1px solid var(--color-rule-dark)}
 .journey-panel__head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xs);margin-block-end:var(--space-md);font-family:var(--font-display);font-weight:700}
+.journey-panel__illustrative{display:inline-flex;align-items:center;gap:var(--space-2xs);margin-block-end:var(--space-2xs);padding:var(--space-2xs) var(--space-sm);border:1px dashed var(--color-rule-dark);border-radius:999px;color:var(--color-muted);font-family:var(--font-body);font-size:var(--text-2xs);letter-spacing:.01em}
 .journey-label{display:inline-flex;align-items:center;min-height:30px;padding-inline:var(--space-xs);border-radius:var(--radius-pill);background:color-mix(in oklch,var(--color-paper) 9%,transparent);color:var(--color-paper);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .journey-label--accent{background:var(--color-accent);color:var(--color-accent-ink)}
 .classic-flow{display:grid;gap:var(--space-sm)}
@@ -95,7 +96,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 .change-ledger__note{margin:var(--space-lg) auto 0;max-width:55ch;text-align:center;color:var(--color-ink-2);font-weight:600;line-height:1.45}.change-ledger__accent{color:var(--color-accent-strong);font-weight:700}
 
 #demo{background:var(--color-paper-2)}#demo>.max-w-6xl{max-width:1120px}.demo-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:var(--space-lg);align-items:end;margin-block-end:var(--space-lg)}.demo-intro p{margin:0;color:var(--color-ink-2);line-height:1.6}.demo-kicker{color:var(--color-accent-strong);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
-.foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:32ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.12;letter-spacing:-.035em}.foot-stmt__accent{color:var(--color-accent);display:inline-block;margin-block-start:.12em}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
+.foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:32ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.12;letter-spacing:-.035em}.foot-stmt__accent{color:var(--color-accent);display:inline-block;margin-block-start:.12em}.foot-stmt__notice{max-width:64ch;margin-block-start:var(--space-lg);color:var(--color-muted-on-dark);font-size:var(--text-2xs);line-height:1.55}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
 
 @media (hover:hover) and (pointer:fine){.nav-demo:hover,.btn-secondary:hover{background:color-mix(in oklch,var(--color-accent) 10%,transparent)}.btn-primary:hover,.btn-secondary:hover,.idea-card:hover,.semantic-field:hover{transform:translateY(-1px)}}
 .btn-primary:active,.btn-secondary:active,.nav-demo:active{transform:translateY(1px)}
@@ -154,6 +155,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 
       <article class="journey-panel">
         <div class="journey-panel__head"><span class="journey-label" data-i18n="after_label">Après</span><span data-i18n="governed_agents">Avec des agents gouvernés</span></div>
+        <div class="journey-panel__illustrative" data-i18n="illustrative_label">Exemple illustratif — scores de démonstration, pas une analyse réelle.</div>
         <div class="governed-table">
           <div class="governed-row"><span class="hypothesis-id">H1</span><div class="governed-score"><strong>78/100</strong><span data-i18n="hypothesis_one">Onboarding augmenté</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-circle-check" aria-hidden="true"></i><span data-i18n="human_review">Revue humaine</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-flask" aria-hidden="true"></i><span data-i18n="three_tests">3 tests</span></div><i class="fas fa-file-lines" aria-hidden="true"></i></div>
           <div class="governed-row"><span class="hypothesis-id">H2</span><div class="governed-score"><strong>64/100</strong><span data-i18n="hypothesis_two">Succès client proactif</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-clock" aria-hidden="true"></i><span data-i18n="human_review">Revue humaine</span></div><div class="governed-cell governed-cell--optional"><i class="fas fa-flask" aria-hidden="true"></i><span data-i18n="four_tests">4 tests</span></div><i class="fas fa-file-lines" aria-hidden="true"></i></div>
@@ -373,6 +375,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 <footer class="foot-stmt">
   <div class="foot-stmt__inner">
     <p class="foot-stmt__line"><span data-i18n="footer_statement_1">Les agents proposent.</span><br><span class="foot-stmt__accent" data-i18n="footer_statement_2">La décision reste humaine.</span></p>
+    <p class="foot-stmt__notice" data-i18n="security_notice">Démo publique : votre idée est traitée en direct via api.kayroslab.com (clé serveur). Aucune donnée n’est stockée, réutilisée ni revendue. Les dossiers exportés sont générés pour votre usage exclusif.</p>
     <div class="foot-stmt__meta">
       <span class="wordmark">KayrosLab</span>
       <span data-i18n="footer">KayrosLab · LLM via api.kayroslab.com (clé serveur) · contact@kayroslab.com</span>
@@ -411,7 +414,8 @@ const translations = {
     agents_propose_2:'Vous orientez, tranchez et validez.',
     demo_title:'Challenger votre idée en <span class="kayros-gradient">quelques minutes</span>',
     demo_subtitle:'Sans installation · 8 agents · dossier de décision à la clé',
-    security_notice:'',
+    security_notice:'Démo publique : votre idée est traitée en direct via api.kayroslab.com (clé serveur). Aucune donnée n’est stockée, réutilisée ni revendue. Les dossiers exportés sont générés pour votre usage exclusif.',
+    illustrative_label:'Exemple illustratif — scores de démonstration, pas une analyse réelle.',
     idea_label:'Votre idée stratégique',
     idea_placeholder:'Ex. Lancer une plateforme de maintenance prédictive IoT pour l’industrie européenne…',
     scope_conditions:'Périmètre et conditions', details_open:'Détails ▾', details_closed:'Masquer ▴',
@@ -594,7 +598,8 @@ const translations = {
     agents_propose_2:'You redirect, decide, and approve.',
     demo_title:'Challenge your idea in <span class="kayros-gradient">minutes</span>',
     demo_subtitle:'No install · 8 agents · decision pack included',
-    security_notice:'',
+    security_notice:'Public demo: your idea is processed live via api.kayroslab.com (server-side key). No data is stored, reused, or resold. Exported reports are generated for your exclusive use.',
+    illustrative_label:'Illustrative example — demo scores, not an actual analysis.',
     idea_label:'Your strategic idea',
     idea_placeholder:'E.g. Launch an IoT predictive maintenance platform for European industry…',
     scope_conditions:'Scope and conditions', details_open:'Details ▾', details_closed:'Hide ▴',

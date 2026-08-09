@@ -18,6 +18,8 @@
         .comparison-table th { background-color: #0f172a; color: white; font-weight: 600; }
         .comparison-table td { transition: background-color 0.2s ease; }
         .comparison-table tr:hover td { background-color: #f8fafc; }
+        .compliance-table th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
+        .compliance-table tr:hover td { background-color: #f8fafc; }
         .pricing-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .pricing-card.popular { border-color: #0ea5e9; box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25); transform: scale(1.02); }
         .glass { background: rgba(255,255,255, 0.95); backdrop-filter: blur(20px); }
@@ -298,10 +300,9 @@
                         <a href="/" class="flex-1 text-center px-3 py-2.5 transition-colors hover:bg-slate-50 text-slate-600">EN</a>
                         <a href="/index.fr.html" class="flex-1 text-center px-3 py-2.5 transition-colors bg-sky-600 text-white">FR</a>
                     </div>
-                    <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer"
-                       class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
-                        <i class="fa-solid fa-play text-xs"></i>
-                        Demande d&#39;essai
+                    <a href="#contact" class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                        <i class="fa-solid fa-calendar-check text-xs"></i>
+                        Réserver une démo
                     </a>
                 </div>
             </div>
@@ -327,12 +328,12 @@
                         </a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
                             <i class="fa-solid fa-play mr-2"></i>
-                            <span>Demande d&#39;essai</span>
+                            <span>Essayer la démo en direct</span>
                             <span class="text-[10px] px-1.5 py-0.5 bg-white/20 rounded">→ Ouvre directement</span>
                         </a>
                     </div>
                     <div class="mt-8 flex items-center gap-x-4 text-sm text-slate-400">
-                        <span class="text-xs">Déjà adopté par des équipes stratégie &amp;amp; innovation en early access</span>
+                        <span class="text-xs">Bêta encadrée — pilote en cours avec des équipes stratégie &amp; innovation. Testez la démo en direct et jugez le dossier de décision par vous-même.</span>
                     </div>
                 </div>
                 <div class="md:col-span-5">
@@ -488,7 +489,7 @@
     <!-- ===== TOOLS SECTION ===== -->
     <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-3xl mb-10">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp;amp; OUTILS INTÉGRÉS</div>
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp; OUTILS INTÉGRÉS</div>
             <h2 class="section-header tracking-tighter">Des outils spécialisés<br>pour chaque étape du processus.</h2>
             <p class="mt-3 text-slate-600">KayrosLab dispose d'un <strong>Tool Registry</strong> extensible. Les agents (via ReAct) peuvent appeler ces outils de manière autonome ou semi-autonome. Voici les principaux outils associés à chaque étape.</p>
         </div>
@@ -706,7 +707,7 @@
                 <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Une fois la décision arbitrée, KayrosLab transforme le Go en <strong>trajectoire pilotée</strong> : roadmap, KPIs, scénarios probabilisés et boucle de re-arbitrage automatique.</p>
             </div>
 
-            <!-- Mock Dashboard -->
+            <!-- Mock Dashboard — aperçu produit illustratif. Tous les chiffres sont des données simulées. -->
             <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
 
                 <!-- Dashboard Header -->
@@ -717,15 +718,15 @@
                         </div>
                         <div>
                             <div class="font-semibold">Pilotage Stratégique</div>
-                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Mis à jour il y a 2h</div>
+                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Aperçu illustratif</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4 text-sm">
                         <div class="flex items-center gap-x-1.5">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-emerald-300">Boucle active</span>
+                            <span class="text-emerald-300">Exemple de sortie</span>
                         </div>
-                        <div class="px-3 py-1 rounded-full bg-white/10 text-xs font-medium">Kayros Index 78</div>
+                        <div class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-semibold ring-1 ring-inset ring-amber-400/40">Données simulées</div>
                     </div>
                 </div>
 
@@ -1198,7 +1199,7 @@
                     </div>
                 </div>
 
-                <p class="px-6 pb-6 text-center text-sm text-slate-500">Ce tableau de bord est généré automatiquement à l'issue de l'étape <strong>Projeter</strong> et reste vivant grâce à la boucle de rétroaction.</p>
+                <p class="px-6 pb-6 text-center text-sm text-slate-500">Aperçu produit illustratif — tous les chiffres sont des échantillons simulés de ce que produit l'étape <strong>Projeter</strong>, pas un projet réel. Un tableau de bord vivant est généré automatiquement à l'issue de l'étape <strong>Projeter</strong>.</p>
             </div>
         </div>
     </section>
@@ -1321,43 +1322,85 @@
     <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-4xl mx-auto">
             <div class="mb-10">
-                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">CONFORMITÉ &amp;amp; SOUVERAINETÉ</div>
-                <h2 class="section-header tracking-tighter">Une architecture conçue pour les environnements<br>les plus exigeants en matière de conformité.</h2>
-                <p class="mt-3 text-lg text-slate-600">KayrosLab a été pensé dès l&#39;origine pour répondre aux exigences de souveraineté, de traçabilité et de sécurité des organisations régulées et des secteurs stratégiques.</p>
+                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">CONFORMITÉ &amp; SOUVERAINETÉ</div>
+                <h2 class="section-header tracking-tighter">Conçu pour la conformité exigeante.<br>Énoncé honnêtement, par niveau.</h2>
+                <p class="mt-3 text-lg text-slate-600">KayrosLab est conçu pour répondre aux exigences de souveraineté, de traçabilité et de sécurité des organisations régulées. Ce qui est réel aujourd'hui dépend du niveau de déploiement — voici l'état exact.</p>
             </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden mb-6">
+                <div class="overflow-x-auto">
+                    <table class="compliance-table w-full text-sm min-w-[760px]">
+                        <thead>
+                            <tr>
+                                <th class="text-left px-5 py-3 text-slate-500 font-semibold">Propriété</th>
+                                <th class="text-left px-4 py-3 font-semibold">P0 — Autonome</th>
+                                <th class="text-left px-4 py-3 font-semibold">P1 — Souverain</th>
+                                <th class="text-left px-4 py-3 font-semibold">P2 — Cloud</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-5 py-3 font-medium">Données au repos</td>
+                                <td class="px-4 py-3 text-slate-600">Navigateur uniquement ; rien n'est stocké côté serveur</td>
+                                <td class="px-4 py-3 text-slate-600">Votre infrastructure (Ollama + Qdrant, local)</td>
+                                <td class="px-4 py-3 text-slate-600">Stockage serveur (optionnellement Postgres)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">Zéro exfiltration de données</td>
+                                <td class="px-4 py-3 text-emerald-700 font-semibold">Oui (mode mock)</td>
+                                <td class="px-4 py-3 text-emerald-700 font-semibold">Oui</td>
+                                <td class="px-4 py-3 text-amber-700 font-medium">Non — les appels LLM sortent de l'environnement</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">Inférence LLM</td>
+                                <td class="px-4 py-3 text-slate-600">Mock (hors ligne)</td>
+                                <td class="px-4 py-3 text-slate-600">Ollama local (quant-aware), entièrement sur site</td>
+                                <td class="px-4 py-3 text-slate-600">Anthropic Claude via clé côté serveur</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">Posture RGPD</td>
+                                <td class="px-4 py-3 text-slate-600">Aucune donnée personnelle collectée</td>
+                                <td class="px-4 py-3 text-slate-600">Par conception (minimisation, effacement, consentement)</td>
+                                <td class="px-4 py-3 text-slate-600">Fonctions natives + traitements enregistrés</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">HDS (hébergement données de santé)</td>
+                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
+                                <td class="px-4 py-3 text-slate-600">Architecture prévue pour — héberger chez un prestataire certifié HDS pour compléter</td>
+                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">Alignement NIS2 / DORA / EHDS</td>
+                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
+                                <td class="px-4 py-3 text-slate-600">Traçabilité + résilience par conception</td>
+                                <td class="px-4 py-3 text-slate-600">Alignement soutenu par la piste d'audit</td>
+                            </tr>
+                            <tr>
+                                <td class="px-5 py-3 font-medium">ISO 27001 / 27701 / 42001 / SOC 2</td>
+                                <td class="px-4 py-3 text-slate-500">Non revendiqué</td>
+                                <td class="px-4 py-3 text-slate-500">Non revendiqué — en préparation, feuille de route sur demande</td>
+                                <td class="px-4 py-3 text-slate-500">Non revendiqué — en préparation, feuille de route sur demande</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="border border-slate-200 rounded-3xl p-7">
                     <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Souveraineté des données</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Déploiement souverain local (Ollama + Qdrant) sans transfert de données vers l&#39;extérieur</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zéro dépendance aux hyperscalers américains pour le traitement des données stratégiques</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Exploitation et valorisation des données exclusivement par votre organisation</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Déploiement souverain local (Ollama + Qdrant) sans transfert de données vers l'extérieur — <strong>niveau P1</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zéro dépendance aux hyperscalers américains pour le traitement des données stratégiques — <strong>niveau P1 uniquement</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Exploitation et valorisation des données exclusivement par votre organisation — <strong>P0 + P1</strong></span></li>
                     </ul>
                 </div>
                 <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-certificate text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Certifications &amp;amp; Alignements</h4></div>
-                    <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Architecture locale conçue pour faciliter la mise en conformité <strong>HDS</strong> (Hébergeur de Données de Santé)</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Alignement avec le <strong>European Health Data Space (EHDS)</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Compatible avec les exigences de souveraineté numérique française et européenne</span></li>
-                    </ul>
-                </div>
-                <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-balance-scale text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Conformité réglementaire</h4></div>
-                    <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><strong>RGPD</strong> natif (minimisation des données, droit à l'oubli, consentement)</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Aligné sur les exigences <strong>NIS2</strong> et <strong>DORA</strong> (résilience, traçabilité, gouvernance des risques)</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Normes ISO pertinentes : <strong>ISO 27001</strong> (sécurité de l'information), <strong>ISO 27701</strong> (management de la vie privée) et <strong>ISO 42001</strong> (systèmes de management de l'IA)</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Préparation à la <strong>certification SOC 2 Type II</strong> (sécurité, disponibilité, confidentialité et intégrité des données)</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Traçabilité complète des décisions et des traitements pour les audits internes et externes</span></li>
-                    </ul>
-                </div>
-                <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditabilité &amp;amp; Gouvernance</h4></div>
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditabilité &amp; Gouvernance</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Timeline complète et horodatée de toutes les étapes et décisions</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Scoring <strong>Kayros Index (KI)</strong> traçable et exportable</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Logs d&#39;agents IA + décisions humaines pour les audits et comités de risque</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Logs d'agents IA + décisions humaines pour les audits et comités de risque</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Gates humains structurés (veto COMEX, validation experte) avec traçabilité</span></li>
                     </ul>
                 </div>
@@ -1394,28 +1437,28 @@
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp;amp; Agents</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp; Agents</td>
                         <td class="px-4 py-4 text-center text-slate-500">Un seul modèle générique</td>
                         <td class="px-4 py-4 text-center text-slate-500">IA d&#39;assistance limitée</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Multi-agents spécialisés</strong><br><span class="text-xs">(Red Team, Devil's Advocate, Bisociateur…)</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp;amp; Continuité</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp; Continuité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Contexte de session limité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Base d&#39;idées simple</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Recherche sémantique persistante</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp;amp; Résilience</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp; Résilience</td>
                         <td class="px-4 py-4 text-center text-slate-500">Aucune (hallucinations fréquentes)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp;amp; Audit</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp; Audit</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible / conversation éphémère</td>
                         <td class="px-4 py-4 text-center text-slate-500">Historique basique</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Timeline complète + scoring KI + logs agents</strong></td>
@@ -1444,7 +1487,7 @@
                     
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Cas d&#39;usage principal</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp;amp; assistance</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp; assistance</td>
                         <td class="px-4 py-4 text-center text-slate-500">Boîte à idées collaborative</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Idéation stratégique de haut niveau + décisions auditables</strong></td>
                     </tr>
