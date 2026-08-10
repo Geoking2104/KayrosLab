@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.18.3 (2026-08) — EF-42 · Matrice de risques probabilisés
+
+- **`core/risques.mjs`** (nouveau) — `niveauRisque` (score probabilité×impact, niveaux faible→critique), `addRisque`/`updateRisque`/`removeRisque` (enrichissement idempotent), `matriceRisques` (grille 5×5 + distribution), `detectDeclencheurs` (risques actifs ≥ seuil → raisons), `rapportRisques`.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/risques` (add/update/remove, persistance `roadmap.risques`, gate `re_arbitrage` COMEX si déclencheur, événements `risque.add|update|remove|rearbitrage`) ; `GET /v1/ideas/:id/risques` (matrice + déclencheurs).
+- **Tests** — `core/risques.test.mjs` (7) + `backend/fastify/tests/portfolio.risques.test.mjs` (3).
+- **Spécifications** — EF-42 marqué 🟢 (SPECIFICATIONS_FONCTIONNELLES.md + §4.1 TECHNIQUES).
+
 ## v0.18.2 (2026-08) — Étape 7 · Réaliser (boucle monitor EF-43 + lecture exécution)
 
 - **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/execution/monitor` (boucle Projeter → Écouter : relève des KPIs constatés, évaluation seuils + dérive via `core/loop.mjs`/`core/kpi-drift.mjs`, persistance `idea.loop`, ouverture d'un gate `re_arbitrage` COMEX, événements d'audit `loop.monitor`/`loop.alert`) ; `GET /v1/ideas/:id/execution` (execution + progression + rapport d'impact).

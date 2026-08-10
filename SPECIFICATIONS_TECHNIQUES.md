@@ -197,9 +197,10 @@ interface ToolRegistry {
 > **Sécurité.** Les outils `write` peuvent exiger une validation humaine avant exécution (config `gate`).
 > **Déterminisme (EF-41).** `simulate_trajectory` et `estimate_resources` sont des **calculs déterministes** (Monte-Carlo/espérance, arithmétique de coûts) : le LLM ne fournit que les **hypothèses et distributions** en entrée ; l'outil calcule et renvoie les résultats tracés. Aucun chiffre n'est « inventé » par le LLM.
 
-### 4.1 Étape Projeter — boucle cyclique (EF-39/40/41 🟢, EF-43 🟢, EF-42/44/45 🔵 cibles)
+### 4.1 Étape Projeter — boucle cyclique (EF-39/40/41 🟢, EF-42/43 🟢, EF-44/45 🔵 cibles)
 
 - **Roadmap & ressources.** Générées par le Planner (`core/roadmap.mjs` → `buildRoadmap`, `core/projection.mjs` → `simulateTrajectory`/`estimateResources`) ; modèle `Roadmap = { jalons[], raci[], ressources, kpis[], risques[], gatesFuturs[] }` persisté par idée. API `POST /v1/ideas/:id/roadmap` (construction + sauvegarde) et `GET /v1/ideas/:id/roadmap` (lecture + rapport d'impact) ; événement `project.roadmap` tracé par le journal d'audit (EF-32).
+- **Matrice de risques (EF-42).** `core/risques.mjs` — `niveauRisque` (score = probabilité × impact, niveaux faible/moyen/élevé/critique), `matriceRisques` (grille 5×5 + distribution), `detectDeclencheurs` (risques actifs ≥ seuil → gate `re_arbitrage`). API `POST/GET /v1/ideas/:id/risques` (add/update/remove, événements `risque.*`).
 - **Boucle Projeter → Écouter (EF-43).** Moteur `core/loop.mjs` (`evaluateKpis`/`alertsToSignals`/`evaluateKpisWithDrift` + `MonitoringLoop`) + `core/kpi-drift.mjs` ; exposé par `POST /v1/ideas/:id/execution/monitor` : relève les KPIs constatés en Réaliser (`idea.impact.releves`), évalue seuils et dérive, persiste `idea.loop`, journalise `loop.monitor`/`loop.alert` et ouvre un gate `re_arbitrage` COMEX si un signal est produit. La lecture d'exécution passe par `GET /v1/ideas/:id/execution` (execution + progression + rapport d'impact). Rend le processus continu et apprenant.
 - **Portée décisionnelle.** `Go` → roadmap + suivi ; `No-Go` → dossier de capitalisation (`Capitalisation = { apprentissages[], réactivation, signaux[] }`) ; `Révision` → note conditionnelle renvoyée à Éprouver.
 

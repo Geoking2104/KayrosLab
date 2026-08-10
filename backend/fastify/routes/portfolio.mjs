@@ -190,4 +190,57 @@ export default async function portfolioRoute(app) {
       };
     } catch (e) { return reply.code(400).send({ error: e.message }); }
   });
+
+  // Matrice de risques probabilises (EF-42) : add/update/remove + declencheurs.
+  app.post('/v1/ideas/:id/risques', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      action: z.enum(['add', 'update', 'remove']),
+      risque: z.object({ id: z.string().optional(), libelle: z.string().optional(), probabilite: z.number().min(0).max(1), impact: z.number().min(0).max(1), statut: z.enum(['actif', 'traite', 'accepte']).optional(), trigger: z.string().optional() }).optional(),
+      risqueId: z.string().optional(),
+      patch: z.object({ libelle: z.string().optional(), probabilite: z.number().min(0).max(1).optional(), impact: z.number().min(0).max(1).optional(), statut: z.enum(['actif', 'traite', 'accepte']).optional(), trigger: z.string().optional() }).optional(),
+      openGate: z.boolean().optional(),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    try {
+      const { addRisque, updateRisque, removeRisque, rapportRisques, detectDeclencheurs } = await import('../../../core/index.mjs');
+      const base = idea.roadmap?.risques ?? [];
+      let risques;
+      if (parsed.data.action === 'add') risques = addRisque(base, parsed.data.risque);
+      else if (parsed.data.action === 'update') risques = updateRisque(base, parsed.data.risqueId, parsed.data.patch ?? {});
+      else risques = removeRisque(base, parsed.data.risqueId);
+      const rapport = rapportRisques(risques);
+      const d = detectDeclencheurs(rapport.risques);
+      let reArbitrage = null;
+      if (d.necessaire && parsed.data.openGate !== false) {
+        const { gateId } = ctx.governance.open({ ideaId: idea.id, type: 're_arbitrage', requiredRole: 'comex', payload: d.raisons.join(' ; ') });
+        reArbitrage = { type: 're-arbitrage', gateId, raisons: d.raisons };
+      } else if (d.necessaire) {
+        reArbitrage = { type: 're-arbitrage', raisons: d.raisons };
+      }
+      const out = {
+        ...idea,
+        roadmap: { ...idea.roadmap, risques, risquesResume: risques.length },
+        updatedAt: new Date().toISOString(),
+      };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: `risque.${parsed.data.action}`, by: me.email, ideaId: idea.id, risqueId: parsed.data.risque?.id ?? parsed.data.risqueId ?? null });
+      if (d.necessaire) ctx.journal({ type: 'risque.rearbitrage', by: me.email, ideaId: idea.id, raisons: d.raisons, gateId: reArbitrage?.gateId ?? null });
+      return { risques, matrice: rapport.matrice, declencheurs: d, reArbitrage };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/risques', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportRisques } = await import('../../../core/index.mjs');
+    const rapport = rapportRisques(idea.roadmap?.risques ?? []);
+    return { risques: rapport.risques, matrice: rapport.matrice, declencheurs: rapport.declencheurs };
+  });
 }

@@ -352,7 +352,7 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 **Objectif.** Transformer **toute décision** d'Arbitrer (Go / No-Go / Révision) en **trajectoire pilotée et prospective probabilisée**, avec allocation de ressources, puis **reboucler automatiquement** sur Écouter.
 **Agents.** Planner (roadmap/ressources), Synthesizer (récit/projection), Red Team (scénario adverse projeté), Critic (stress de trajectoire). **Censeurs.** COMEX (roadmap, budget, gates), Facilitateur (RACI).
 **Entrées.** Décision + livrable + KI figé + red flags (Arbitrer). **Sorties.** *(Go)* `roadmap{jalons, RACI, ressources, budget, KPIs, risquesProbabilisés, gatesFuturs}` + `projections{scénariosPondérés, P10/P50/P90, valeurAttendue}` ; *(No-Go)* `capitalisation{apprentissages, réactivation, signaux}`.
-**Statut.** 🟡 Partiellement cible — EF-39/40/41 implémentés (API `POST/GET /v1/ideas/:id/roadmap`, calculs déterministes + journal d'audit persistant via EF-32). EF-43 implémenté (boucle monitor `POST /v1/ideas/:id/execution/monitor` : seuils + dérive → signaux + gate `re_arbitrage`). EF-42/44/45 restants ciblés.
+**Statut.** 🟡 Partiellement cible — EF-39/40/41/42/43 implémentés : API `POST/GET /v1/ideas/:id/roadmap` (calculs déterministes + journal d'audit persistant via EF-32), matrice de risques EF-42 (`POST/GET /v1/ideas/:id/risques`), boucle monitor EF-43 (`POST /v1/ideas/:id/execution/monitor`). EF-44/45 restants ciblés.
 
 **Portée selon la décision.** **Go** → roadmap + ressources/budget + suivi + projections probabilistes. **No-Go** → capitalisation (apprentissages archivés, conditions de réactivation, signaux à re-surveiller). **Révision** → note de trajectoire conditionnelle renvoyée à Éprouver.
 
@@ -376,7 +376,7 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 - **EF-39 (🟢)** Générer, sur décision **Go**, une roadmap datée (Now/Next/Later) avec RACI proposé.
 - **EF-40 (🟢)** Estimer **ressources et budget** (ETP, coûts, TCO/ROI projeté) et arbitrer la capacité.
 - **EF-41 (🟢)** Produire des **projections de trajectoire probabilisées** (scénarios pondérés, valeur attendue, P10/P50/P90) via un outil déterministe.
-- **EF-42 (🔵)** Maintenir une **matrice de risques** (probabilité × impact) avec déclencheurs de re-arbitrage.
+- **EF-42 (🟢)** Maintenir une **matrice de risques** (probabilité × impact) avec déclencheurs de re-arbitrage. *Implémentation : `core/risques.mjs` (score déterministe, niveaux faible→critique, matrice 5×5) + `POST/GET /v1/ideas/:id/risques` (add/update/remove, gate `re_arbitrage` si seuil franchi, événements `risque.*` tracés).*
 - **EF-43 (🟢)** **Reboucler automatiquement** vers Écouter : les KPIs de suivi ré-alimentent le corpus via tâche planifiée. *Implémentation : `POST /v1/ideas/:id/execution/monitor` (seuils + dérive KPI, ré-injection signaux, proposition gate `re_arbitrage`, événements `loop.monitor`/`loop.alert` tracés).*
 - **EF-44 (🔵)** Sur décision **No-Go**, produire un **dossier de capitalisation** (apprentissages, conditions de réactivation).
 - **EF-45 (🔵)** Planifier des **jalons de gouvernance futurs** (gates COMEX datés).
