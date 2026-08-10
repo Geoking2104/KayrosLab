@@ -197,9 +197,9 @@ interface ToolRegistry {
 > **Sécurité.** Les outils `write` peuvent exiger une validation humaine avant exécution (config `gate`).
 > **Déterminisme (EF-41).** `simulate_trajectory` et `estimate_resources` sont des **calculs déterministes** (Monte-Carlo/espérance, arithmétique de coûts) : le LLM ne fournit que les **hypothèses et distributions** en entrée ; l'outil calcule et renvoie les résultats tracés. Aucun chiffre n'est « inventé » par le LLM.
 
-### 4.1 Étape Projeter — boucle cyclique (EF-39 à EF-45)
+### 4.1 Étape Projeter — boucle cyclique (EF-39/40/41 🟢 implémentés, EF-42/43/44/45 🔵 cibles)
 
-- **Roadmap & ressources.** Générées par le Planner (`simulate_trajectory`, `estimate_resources`) ; modèle `Roadmap = { jalons[], raci[], budget, kpis[], risques[], gatesFuturs[] }` persisté par idée.
+- **Roadmap & ressources.** Générées par le Planner (`core/roadmap.mjs` → `buildRoadmap`, `core/projection.mjs` → `simulateTrajectory`/`estimateResources`) ; modèle `Roadmap = { jalons[], raci[], ressources, kpis[], risques[], gatesFuturs[] }` persisté par idée. API `POST /v1/ideas/:id/roadmap` (construction + sauvegarde) et `GET /v1/ideas/:id/roadmap` (lecture + rapport d'impact) ; événement `project.roadmap` tracé par le journal d'audit (EF-32).
 - **Boucle Projeter → Écouter (EF-43).** Une **tâche planifiée** (scheduler cron/interval) évalue périodiquement les KPIs de suivi ; si un seuil d'alerte est franchi, elle ré-injecte un signal dans le corpus d'Écouter (`persist` signal) et **propose un re-arbitrage** (ouverture d'un gate COMEX). Rend le processus continu et apprenant.
 - **Portée décisionnelle.** `Go` → roadmap + suivi ; `No-Go` → dossier de capitalisation (`Capitalisation = { apprentissages[], réactivation, signaux[] }`) ; `Révision` → note conditionnelle renvoyée à Éprouver.
 

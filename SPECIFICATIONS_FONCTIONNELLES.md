@@ -347,12 +347,12 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > **US-05.** En tant qu'**arbitre COMEX**, je veux **trancher sur la base d'une synthèse tracée** afin d'**assumer une décision auditable**.
 > **Critères.** *Étant donné* une idée éprouvée, *quand* je vote « No-Go » ou « Révision », *alors* l'idée n'est pas restituée en sortie et la raison est journalisée.
 
-### Étape 6 — Projeter 🔵 *(nouvelle)*
+### Étape 6 — Projeter 🟡 *(API roadmap + projections définitive)*
 
 **Objectif.** Transformer **toute décision** d'Arbitrer (Go / No-Go / Révision) en **trajectoire pilotée et prospective probabilisée**, avec allocation de ressources, puis **reboucler automatiquement** sur Écouter.
 **Agents.** Planner (roadmap/ressources), Synthesizer (récit/projection), Red Team (scénario adverse projeté), Critic (stress de trajectoire). **Censeurs.** COMEX (roadmap, budget, gates), Facilitateur (RACI).
 **Entrées.** Décision + livrable + KI figé + red flags (Arbitrer). **Sorties.** *(Go)* `roadmap{jalons, RACI, ressources, budget, KPIs, risquesProbabilisés, gatesFuturs}` + `projections{scénariosPondérés, P10/P50/P90, valeurAttendue}` ; *(No-Go)* `capitalisation{apprentissages, réactivation, signaux}`.
-**Statut.** 🔵 Cible (à construire).
+**Statut.** 🟡 Partiellement cible — EF-39/40/41 implémentés (API `POST/GET /v1/ideas/:id/roadmap`, calculs déterministes + journal d'audit persistant via EF-32). EF-42/43/44/45 restants ciblés.
 
 **Portée selon la décision.** **Go** → roadmap + ressources/budget + suivi + projections probabilistes. **No-Go** → capitalisation (apprentissages archivés, conditions de réactivation, signaux à re-surveiller). **Révision** → note de trajectoire conditionnelle renvoyée à Éprouver.
 
@@ -373,9 +373,9 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 
 > **Rigueur.** Les probabilités/espérances/quantiles sont calculés par un **outil déterministe** (Monte-Carlo/espérance) : le LLM fournit hypothèses et distributions, l'outil calcule — jamais de chiffres inventés. Tout est tracé (hypothèses → résultat).
 
-- **EF-39 (🔵)** Générer, sur décision **Go**, une roadmap datée (Now/Next/Later) avec RACI proposé.
-- **EF-40 (🔵)** Estimer **ressources et budget** (ETP, coûts, TCO/ROI projeté) et arbitrer la capacité.
-- **EF-41 (🔵)** Produire des **projections de trajectoire probabilisées** (scénarios pondérés, valeur attendue, P10/P50/P90) via un outil déterministe.
+- **EF-39 (🟢)** Générer, sur décision **Go**, une roadmap datée (Now/Next/Later) avec RACI proposé.
+- **EF-40 (🟢)** Estimer **ressources et budget** (ETP, coûts, TCO/ROI projeté) et arbitrer la capacité.
+- **EF-41 (🟢)** Produire des **projections de trajectoire probabilisées** (scénarios pondérés, valeur attendue, P10/P50/P90) via un outil déterministe.
 - **EF-42 (🔵)** Maintenir une **matrice de risques** (probabilité × impact) avec déclencheurs de re-arbitrage.
 - **EF-43 (🔵)** **Reboucler automatiquement** vers Écouter : les KPIs de suivi ré-alimentent le corpus via tâche planifiée.
 - **EF-44 (🔵)** Sur décision **No-Go**, produire un **dossier de capitalisation** (apprentissages, conditions de réactivation).

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.18.1 (2026-08) — Étape 6 · Projeter (API roadmap + projections)
+
+- **`core/roadmap.mjs`** (nouveau) — `buildRoadmap`, `projectFromIdea`, `isProjected`. Construit la `roadmap{jalons,raci,kpis,risques,gatesFuturs,ressources}` et les `projections{scénariosPondérés,valeurAttendue,p10/p50/p90}` (Monte-Carlo déterministe) à partir d'hypothèses fournies. Aucun nombre n'est inventé.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/roadmap` (construction + persistance, événement d'audit `project.roadmap`), `GET /v1/ideas/:id/roadmap` (lecture + rapport d'impact `impactReport`). Schema zod validé.
+- **Tests** — `core/roadmap.test.mjs` (4) + `backend/fastify/tests/portfolio.roadmap.test.mjs` (2).
+- **Spécifications** — EF-39/40/41 marqués 🟢 dans SPECIFICATIONS_FONCTIONNELLES.md; §4.1 SPECIFICATIONS_TECHNIQUES.md renforcé.
+
 ## v0.18.0 (2026-08) — Governed intelligence layers (P0 → P4)
 
 ### P0 — Epistemic tags + Decision packets

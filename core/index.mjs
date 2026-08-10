@@ -21,6 +21,7 @@ export * from './run-hooks-p2.mjs';
 export * from './run-hooks-p3p4.mjs';
 export * from './kpi-drift.mjs';
 export * from './projection.mjs';
+export * from './roadmap.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';

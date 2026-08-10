@@ -204,7 +204,7 @@ flowchart LR
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
 | 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
-| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop |
+| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop | `POST/GET /v1/ideas/:id/roadmap` (EF-39/40/41 🟢 : roadmap + Monte-Carlo déterministe + rapport d'impact tracé) |
 | 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + impact |
 
 **Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via `POST /v1/cycle/reactivate`.

@@ -85,4 +85,53 @@ export default async function portfolioRoute(app) {
       return { execution, progression: progression(execution) };
     } catch (e) { return reply.code(e.code === 'JALONS_OUVERTS' ? 409 : 400).send({ error: e.message, code: e.code ?? null }); }
   });
+
+  app.post('/v1/ideas/:id/roadmap', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const { buildRoadmap } = await import('../../../core/index.mjs');
+    const parsed = z.object({
+      milestones: z.array(z.object({ name: z.string().optional(), effortPersonMonths: z.number().min(0), durationMonths: z.number().positive().optional() })).optional().default([]),
+      raci: z.array(z.any()).optional().default([]),
+      kpis: z.array(z.any()).optional().default([]),
+      risques: z.array(z.any()).optional().default([]),
+      gatesFuturs: z.array(z.any()).optional().default([]),
+      costHypotheses: z.object({ costPerPersonMonth: z.number().optional(), overheadRate: z.number().optional(), expectedRevenue: z.number().optional(), runRateMonthly: z.number().optional(), horizonMonths: z.number().positive().optional() }).optional().default({}),
+      scenarios: z.array(z.object({ name: z.string().optional(), probability: z.number().min(0), value: z.number() })).optional().default([]),
+      variables: z.array(z.object({ name: z.string().optional(), min: z.number(), max: z.number() })).optional().default([]),
+      iterations: z.number().int().positive().optional(),
+      seed: z.number().int().optional(),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'validation failed', issues: parsed.error.issues });
+    try {
+      const { roadmap, ressources, projections } = buildRoadmap({
+        milestones: parsed.data.milestones, raci: parsed.data.raci, kpis: parsed.data.kpis,
+        risques: parsed.data.risques, gatesFuturs: parsed.data.gatesFuturs,
+        costHypotheses: parsed.data.costHypotheses, scenarios: parsed.data.scenarios,
+        variables: parsed.data.variables, iterations: parsed.data.iterations, seed: parsed.data.seed,
+      });
+      const out = {
+        ...idea, roadmap,
+        projection: { scenarios: parsed.data.scenarios, variables: parsed.data.variables, costHypotheses: parsed.data.costHypotheses, iterations: parsed.data.iterations ?? 10000, seed: parsed.data.seed ?? 42 },
+        updatedAt: new Date().toISOString(),
+      };
+      await ctx.ideas.save(out);
+      try { ctx.journal?.({ type: 'project.roadmap', by: me.email, ideaId: idea.id, jalons: roadmap.jalons.length }); } catch (e) {}
+      return { roadmap, ressources, projections };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/roadmap', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { projectFromIdea, impactReport, emptyImpact } = await import('../../../core/index.mjs');
+    const { roadmap, ressources, projections } = projectFromIdea(idea);
+    const rapport = projections ? impactReport(projections, idea.impact ?? emptyImpact()) : { variance: null };
+    return { roadmap, ressources, projections, rapport, phase: idea.execution?.phase ?? 'projeter' };
+  });
 }
