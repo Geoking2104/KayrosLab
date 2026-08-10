@@ -134,4 +134,60 @@ export default async function portfolioRoute(app) {
     const rapport = projections ? impactReport(projections, idea.impact ?? emptyImpact()) : { variance: null };
     return { roadmap, ressources, projections, rapport, phase: idea.execution?.phase ?? 'projeter' };
   });
+
+  app.get('/v1/ideas/:id/execution', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.execution) return reply.code(404).send({ error: 'execution non demarree' });
+    const { progression, impactReport, emptyImpact } = await import('../../../core/index.mjs');
+    return {
+      execution: idea.execution,
+      progression: progression(idea.execution),
+      loop: idea.loop ?? null,
+      impact: impactReport(idea.projection ?? {}, idea.impact ?? emptyImpact()),
+    };
+  });
+
+  // Boucle Projeter -> Ecouter (EF-43) : releves KPI constates en Realiser,
+  // evaluation seuils + derive, re-injection signaux, re-arbitrage propose.
+  app.post('/v1/ideas/:id/execution/monitor', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      readings: z.array(z.object({ kpiId: z.string(), value: z.number(), ts: z.string().optional() })),
+      openGate: z.boolean().optional(),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'readings requis (kpiId + value)', issues: parsed.error.issues });
+    try {
+      const { emptyImpact, recordActual, evaluateKpisWithDrift, progression } = await import('../../../core/index.mjs');
+      const kpis = idea.roadmap?.kpis ?? [];
+      let impact = idea.impact ?? emptyImpact();
+      for (const r of parsed.data.readings) impact = recordActual(impact, { kpiId: r.kpiId, value: r.value, ts: r.ts });
+      const { alerts, drifts, signals, ok } = evaluateKpisWithDrift(kpis, impact.releves, { ideaId: idea.id });
+      let reArbitrage = null;
+      if (signals.length) {
+        const payload = signals.map((s) => s.contenu).join(' ; ');
+        if (parsed.data.openGate !== false) {
+          const { gateId } = ctx.governance.open({ ideaId: idea.id, type: 're_arbitrage', requiredRole: 'comex', payload });
+          reArbitrage = { type: 're-arbitrage', gateId, reasons: [...new Set(signals.map((s) => s.kpiId).filter(Boolean))] };
+        } else {
+          reArbitrage = { type: 're-arbitrage', reasons: [...new Set(signals.map((s) => s.kpiId).filter(Boolean))] };
+        }
+      }
+      let out = { ...idea, impact, updatedAt: new Date().toISOString() };
+      if (signals.length) out.loop = { ts: new Date().toISOString(), alerts, drifts, reArbitrage, by: me.email };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'loop.monitor', by: me.email, ideaId: idea.id, releves: parsed.data.readings.length, alerts: alerts.length, drifts: drifts.length });
+      if (signals.length) ctx.journal({ type: 'loop.alert', by: me.email, ideaId: idea.id, kpis: signals.map((s) => s.kpiId), gateId: reArbitrage?.gateId ?? null });
+      return {
+        alerts, drifts, signals, ok, reArbitrage,
+        progression: idea.execution ? progression(idea.execution) : null,
+      };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
 }

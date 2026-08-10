@@ -343,7 +343,7 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 | Suivi d'exécution des jalons | 🟡 roadmap produite, exécution non suivie | **Haute** | M |
 | Clôture et bilan | 🔴 absent | Moyenne | S |
 
-**Analyse.** Notre étape **Projeter** couvre désormais la *planification* → *trajectoire projetée* (EF-39/40/41 🟢 : roadmap + ressources/budget + projections probabilisées Monte-Carlo, avec rapport d'impact et journal d'audit persistant). Il reste la moitié aval du cycle de vie (Pilote → Déploiement → Bilan réel) — EF-42/43/44/45 — à cibler, incluant la boucle Projeter → Écouter (re-bis). Brightidea va jusqu'au *pilote*, au *déploiement* et au *bilan d'impact*.
+**Analyse.** Notre étape **Projeter** couvre désormais la *planification* → *trajectoire projetée* (EF-39/40/41 🟢 : roadmap + ressources/budget + projections probabilisées Monte-Carlo, avec rapport d'impact et journal d'audit persistant) et la **boucle Projeter → Écouter est fonctionnelle** (EF-43 🟢 : `POST /v1/ideas/:id/execution/monitor` — seuils KPI + dérive → signal → gate `re_arbitrage`, tout est tracé). Il reste la moitié aval du cycle de vie (Pilote → Déploiement → Bilan réel) à compléter — EF-42/44/45 et reporting d'impact en continu.
 
 ---
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.18.2 (2026-08) — Étape 7 · Réaliser (boucle monitor EF-43 + lecture exécution)
+
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/execution/monitor` (boucle Projeter → Écouter : relève des KPIs constatés, évaluation seuils + dérive via `core/loop.mjs`/`core/kpi-drift.mjs`, persistance `idea.loop`, ouverture d'un gate `re_arbitrage` COMEX, événements d'audit `loop.monitor`/`loop.alert`) ; `GET /v1/ideas/:id/execution` (execution + progression + rapport d'impact).
+- **Tests** — `backend/fastify/tests/portfolio.execution.test.mjs` (5) : démarrage pilote, jalons, passage de phase, clôture → `termine`, monitor seuil franchi → signal + re-arbitrage, monitor sans dérive → aucun signal.
+- **Spécifications** — EF-43 marqué 🟢 (SPECIFICATIONS_FONCTIONNELLES.md + §4.1 TECHNIQUES).
+
 ## v0.18.1 (2026-08) — Étape 6 · Projeter (API roadmap + projections)
 
 - **`core/roadmap.mjs`** (nouveau) — `buildRoadmap`, `projectFromIdea`, `isProjected`. Construit la `roadmap{jalons,raci,kpis,risques,gatesFuturs,ressources}` et les `projections{scénariosPondérés,valeurAttendue,p10/p50/p90}` (Monte-Carlo déterministe) à partir d'hypothèses fournies. Aucun nombre n'est inventé.
