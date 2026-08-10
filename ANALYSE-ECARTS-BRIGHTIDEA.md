@@ -328,7 +328,7 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 | Comptes utilisateurs / authentification | 🔴 absent | **Critique** | L |
 | Sessions concurrentes | 🔴 absent | **Critique** | L |
 | Multi-tenant / isolation client | 🔴 absent | Haute | L |
-| Historique d'audit persistant | 🟡 timeline en mémoire de session | **Haute** | M |
+| Historique d'audit persistant | 🟢 `core/audit.mjs` (`FileAuditStore` JSONL + hydratation `ctx.activites`) — `KAYROS_AUDIT_FILE` | **Haute** | M |
 
 **Analyse.** **Verrou racine.** Sans persistance serveur ni comptes, aucune fonctionnalité collaborative (vote, commentaire, notification, portefeuille partagé) n'est réalisable. Tout le reste en dépend.
 

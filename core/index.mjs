@@ -42,6 +42,7 @@ export * from './governance.mjs';
 export * from './orchestrator.mjs';
 export * from './timer.mjs';
 export * from './connectors.mjs';
+export * from './audit.mjs';
 export * from './adapters/langchain-tools.mjs';
 export * from './adapters/langgraph-runner.mjs';
 export * from './connectors-discord.mjs';

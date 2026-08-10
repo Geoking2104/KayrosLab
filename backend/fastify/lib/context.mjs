@@ -17,6 +17,7 @@ import {
   StageTimer, DEFAULT_STAGE_LIMITS,
   ConnectorService, SlackAdapter, DiscordAdapter, TeamsAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
   createEngine,
+  createAuditStore,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
@@ -83,6 +84,8 @@ export default async function buildContext() {
     KAYROS_SECRET = '',
     KAYROS_MEMORY_FILE = '',
     KAYROS_OFFLOAD_ROOT = '',
+    KAYROS_AUDIT_FILE = '',
+    KAYROS_AUDIT_RING = '5000',
     KAYROS_PARTITION_TENANT = '',
     KAYROS_QUANT = 'q4_K_M',
     KAYROS_SYNC_QUANTS = '',
@@ -243,8 +246,18 @@ export default async function buildContext() {
   }
 
   const campagnes = new Map();
+  const auditRing = Number(process.env.KAYROS_AUDIT_RING || 5000) || 5000;
+  const auditStore = createAuditStore({ file: process.env.KAYROS_AUDIT_FILE || '' });
+  if (auditStore.load) { try { await auditStore.load(); } catch {} }
   const activites = [];
-  const journal = (evt) => { activites.push({ ...evt, ts: evt.ts ?? new Date().toISOString() }); if (activites.length > 5000) activites.shift(); };
+  // Rehydrate le journal (timeline) depuis le store persistant au demarrage (EF-32).
+  if (auditStore.events) activites.push(...auditStore.events.slice(-auditRing));
+  const journal = async (evt) => {
+    const e = { ...evt, ts: evt.ts ?? new Date().toISOString() };
+    activites.push(e);
+    if (activites.length > auditRing) activites.shift();
+    try { await auditStore.append(e); } catch {}
+  };
 
   const stageTimer = new StageTimer({ governance });
 
@@ -402,7 +415,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
 
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
-    governance, gateStore, campagnes, activites, journal, stageTimer,
+    governance, gateStore, campagnes, activites, journal, auditStore, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
     engine,
     sharedPaths,

@@ -49,6 +49,12 @@
 - **Engine/adapters split (v0.18)** — `core/` reste zero-dependency ; connecteurs/`core/adapters/` et `backend/adapters/` sont optionnels (LangChain, LangGraph, recherche, Langfuse) ; couches P0–P4 contrôlées gouvernance.
 - **CI GitHub Actions** — workflow `backend-tests.yml` (npm ci + `npm test`) s'ajoute à `core-tests.yml` et `i18n-check.yml`.
 
+### Persistent audit trail (EF-32)
+- **`core/audit.mjs`** — `InMemoryAuditStore` + `FileAuditStore` (JSONL, append-only, hydratation au démarrage, ring buffer configurable). `createAuditStore` selon `KAYROS_AUDIT_FILE`.
+- **`backend/fastify/lib/context.mjs`** — `ctx.journal` persiste chaque événement cycle/gate/commentaire/vote/timeline et réhydrate `ctx.activites` au démarrage (la timeline survive aux redémarrages). Expose `auditStore`.
+- **`.env.sample`** — `KAYROS_AUDIT_FILE` / `KAYROS_AUDIT_RING`.
+- Tests: `audit.test.mjs` (7) — InMemory where/list/ring, FileAuditStore reload/persist/best-effort/missing-file/ring. Suite core 280/280.
+
 ---
 
 ## v0.16.x (2026-08) — Adapters & observability periphery
