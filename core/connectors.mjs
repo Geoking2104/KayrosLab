@@ -10,6 +10,14 @@
 
 import { GateType, HUMAN_ROLES, canResolve } from './governance.mjs';
 import { aggregateVotes } from './evaluation.mjs';
+import {
+  getBearerToken,
+  verifyTeamsToken,
+  fetchJwks,
+  TeamsKeyCache,
+  BOTFRAMEWORK_OPENID_CONFIG,
+  BOTFRAMEWORK_ISSUER,
+} from './connectors-teams-deep.mjs';
 
 // ---- Types abstraits (intentions) ----
 
@@ -336,26 +344,67 @@ export class SlackAdapter extends ChatAdapter {
 
 export class TeamsAdapter extends ChatAdapter {
   /**
-   * @param {{webhookUrl?:string, botId?:string, fetchImpl?:Function, linkService?:AccountLinkService}} opts
+   * @param {{webhookUrl?:string, botId?:string, botPassword?:string, openIdConfigUrl?:string, issuers?:string[], fetchImpl?:Function, linkService?:AccountLinkService}} opts
    */
-  constructor({ webhookUrl = '', botId = '', fetchImpl, linkService } = {}) {
+  constructor({ webhookUrl = '', botId = '', botPassword = '', openIdConfigUrl = BOTFRAMEWORK_OPENID_CONFIG, issuers = [BOTFRAMEWORK_ISSUER], fetchImpl, linkService } = {}) {
     super({ name: 'teams', platform: 'teams', linkService });
     this.webhookUrl = webhookUrl;
     this.botId = botId;
+    this.botPassword = botPassword;
+    this.openIdConfigUrl = openIdConfigUrl;
+    this.issuers = issuers;
     this._fetch = fetchImpl ?? globalThis.fetch;
+    this._keyCache = new TeamsKeyCache();
+    this._tokenCache = { token: null, expiresAt: 0 };
     if (!this._fetch) throw new Error('TeamsAdapter: fetch indisponible');
   }
 
   /**
-   * Verifie la signature JWT d'une requete Teams.
-   * En pratique, Teams utilise Azure Bot Service avec AppId + jeton.
+   * Verifie le JWT RS256 d'une requete Teams (Azure Bot Service).
+   * Controle signature, issuer, audience (App ID) et expiration.
    */
-  verifySignature(req) {
-    const auth = req.headers?.authorization || '';
-    if (!auth.startsWith('Bearer ')) return false;
-    // TODO: Implement real JWT verification using Azure AD public keys
-    // For now, reject all requests as unverified
-    return false;
+  async verifySignature(req) {
+    const auth = req.headers?.authorization || req.headers?.Authorization || '';
+    const token = getBearerToken(auth);
+    if (!token || !this.botId) return false;
+    let keys = this._keyCache.get();
+    if (keys) {
+      const ok = await verifyTeamsToken(token, { appId: this.botId, issuers: this.issuers, keys, nowMs: Date.now() });
+      if (ok) return true;
+    }
+    keys = await fetchJwks({ fetchImpl: this._fetch, openIdConfigUrl: this.openIdConfigUrl });
+    if (!Array.isArray(keys)) return false;
+    this._keyCache.set(keys);
+    return verifyTeamsToken(token, { appId: this.botId, issuers: this.issuers, keys, nowMs: Date.now() });
+  }
+
+  /** Jeton OAuth2 du bot (client_credentials) avec cache court. */
+  async _botAccessToken() {
+    if (!this.botId || !this.botPassword) return null;
+    if (this._tokenCache.token && this._tokenCache.expiresAt > Date.now()) return this._tokenCache.token;
+    const res = await this._fetch('https://login.microsoftonline.com/botframework.com/oauth2/v2.0/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: this.botId,
+        client_secret: this.botPassword,
+        scope: 'https://api.botframework.com/.default',
+      }).toString(),
+    });
+    if (!res.ok) return null;
+    const data = await res.json().catch(() => ({}));
+    if (!data.access_token) return null;
+    const ttl = (Number(data.expires_in) || 3600) - 60;
+    this._tokenCache = { token: data.access_token, expiresAt: Date.now() + ttl * 1000 };
+    return data.access_token;
+  }
+
+  _activityPayload(view) {
+    return {
+      type: 'message',
+      attachments: [{ contentType: 'application/vnd.microsoft.card.adaptive', content: this.renderView(view) }],
+    };
   }
 
   parseRequest(req) {
@@ -388,11 +437,7 @@ export class TeamsAdapter extends ChatAdapter {
   }
 
   async postMessage(channelId, view) {
-    const card = this.renderView(view);
-    const payload = {
-      type: 'message',
-      attachments: [{ contentType: 'application/vnd.microsoft.card.adaptive', content: card }],
-    };
+    const payload = this._activityPayload(view);
     if (this.webhookUrl) {
       const res = await this._fetch(this.webhookUrl, {
         method: 'POST',
@@ -401,21 +446,32 @@ export class TeamsAdapter extends ChatAdapter {
       });
       return { ok: res.ok };
     }
-    return { ok: false, error: 'webhookUrl non configure' };
+    if (channelId && this.botId && this.botPassword) {
+      const token = await this._botAccessToken();
+      if (!token) return { ok: false, error: 'botAccessToken indisponible' };
+      const res = await this._fetch(`https://smba.trafficmanager.net/amer/v3/conversations/${channelId}/activities`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) return { ok: false, error: await res.text().catch(() => '') };
+      const data = await res.json().catch(() => ({}));
+      return { ok: true, messageId: data.id ?? null };
+    }
+    return { ok: false, error: 'webhookUrl ou botId+botPassword requis' };
   }
 
   async updateMessage(channelId, messageId, view) {
-    const card = this.renderView(view);
-    // Teams supporte l'update via activityId (messageId) sur le conversation endpoint
+    if (!channelId || !messageId || !this.botId || !this.botPassword) {
+      return { ok: false, error: 'conversation/token non configure' };
+    }
+    const token = await this._botAccessToken();
+    if (!token) return { ok: false, error: 'botAccessToken indisponible' };
     const url = `https://smba.trafficmanager.net/amer/v3/conversations/${channelId}/activities/${messageId}`;
-    const payload = {
-      type: 'message',
-      attachments: [{ contentType: 'application/vnd.microsoft.card.adaptive', content: card }],
-    };
     const res = await this._fetch(url, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.botId}` },
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify(this._activityPayload(view)),
     });
     return { ok: res.ok };
   }
@@ -429,6 +485,23 @@ export class TeamsAdapter extends ChatAdapter {
     // Teams Task Module : equivalent du modal Slack.
     const card = this.renderView(form);
     return { ok: true, task: { type: 'continue', value: { card: { contentType: 'application/vnd.microsoft.card.adaptive', content: card } } } };
+  }
+
+  /** Carte Task Module avec saisie du motif (EF-20). */
+  renderMotifCard({ title, data }) {
+    const card = {
+      type: 'AdaptiveCard',
+      version: '1.5',
+      $schema: 'https://adaptivecards.io/schemas/adaptive-card.json',
+      body: [
+        { type: 'TextBlock', text: title, weight: 'Bolder', size: 'Medium', wrap: true },
+        { type: 'Input.Text', id: 'reason', isMultiline: true, isRequired: true, placeholder: 'Motif horodaté et conservé dans l\'audit…' },
+      ],
+      actions: [
+        { type: 'Action.Submit', id: data.actionId, title: 'Valider', data: { actionId: data.actionId } },
+      ],
+    };
+    return card;
   }
 
   renderView(view) {

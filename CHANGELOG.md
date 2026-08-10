@@ -39,6 +39,11 @@
 - **Backend** — `POST /v1/connectors/discord/interactive` (PING pong, signature, route gate approve / modal motif / resolve) + `discordAdapter` branche sur env (`DISCORD_PUBLIC_KEY`, `DISCORD_BOT_TOKEN`, `DISCORD_WEBHOOK_URL`, `DISCORD_APPLICATION_ID`, `DISCORD_GATE_CHANNEL`).
 - Tests: `connectors-discord.test.mjs` (23) — signature réelle, parse, rendu, flux gate via `ConnectorService`.
 
+### Teams adapter (completes v17)
+- **`core/connectors.mjs`** — `TeamsAdapter` complet : verification JWT RS256 Azure Bot (issuer `https://api.botframework.com`, audience = App ID, cache JWKS 6 h, fetch de secours via openid config), jeton OAuth2 bot (client_credentials, cache −60 s), envoi proactif (conversations/activities) + webhook, update d'activité, Task Module de motif (EF-20), `buildGateView` / `buildGateResultView`, `renderMotifCard`, `_activityPayload` (Adaptive Card).
+- **Backend** — `POST /v1/connectors/teams/interactive` (JWT obligatoire → 401, idempotence `teamsActivityId`, invoke adaptiveCard → gate approve / Task Module motif / resolve) + `teamsAdapter` branché sur env (`TEAMS_APP_ID`, `TEAMS_BOT_PASSWORD`, `TEAMS_WEBHOOK_URL`, `TEAMS_GATE_CHANNEL`).
+- Tests: `connectors-teams.test.mjs` (27) — signature RS256 (accept/tamper/exp/iss/aud), parse message/invoke, rendu Adaptive Card, post/update bot + webhook, flux gate via `ConnectorService`. Suite complète 273/273.
+
 ---
 
 ## v0.16.x (2026-08) — Adapters & observability periphery

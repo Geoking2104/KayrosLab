@@ -7,6 +7,9 @@ import {
   discordInteractionId,
 } from '../../../core/connectors-discord-deep.mjs';
 import {
+  teamsActivityId,
+} from '../../../core/connectors-teams-deep.mjs';
+import {
   buildMotifModal,
   parseMotifSubmission,
   updateGateMessage,
@@ -15,6 +18,7 @@ import {
 
 const interactionIds = createIdempotenceStore(4000);
 const discordInteractions = createIdempotenceStore(4000);
+const teamsInteractions = createIdempotenceStore(4000);
 
 export default async function connectorsRoute(app) {
   // Slack interactive endpoint (Block actions, modals, slash)
@@ -235,6 +239,56 @@ export default async function connectorsRoute(app) {
     } catch {
       return reply.code(200).send({ type: 4, data: { content: '' } });
     }
+  });
+
+  app.post('/v1/connectors/teams/interactive', async (req, reply) => {
+    const ctx = app.kayrosContext;
+    if (!ctx.teamsAdapter) return reply.code(200).send('');
+
+    const okSig = await ctx.teamsAdapter.verifySignature({ headers: req.headers });
+    if (!okSig) return reply.code(401).send({ error: 'invalid teams token' });
+
+    const body = req.body ?? {};
+
+    // Idempotence sur les activities recues (retries Bot Framework)
+    const iid = teamsActivityId(body);
+    if (iid && teamsInteractions.seen(iid)) {
+      return reply.code(200).send({ statusCode: 200 });
+    }
+
+    let evt = ctx.teamsAdapter.parseRequest({ body, headers: req.headers });
+    if (!evt) return reply.code(200).send({ statusCode: 200 });
+
+    if (evt.userId) evt.userId = platformUserId('teams', evt.userId);
+    evt.channelId = evt.channelId || body.conversation?.id || null;
+
+    // Resoumission du motif (Adaptive Card) → resolve avec raison (EF-20)
+    const callback = String(evt.actionId || '');
+    if (callback.startsWith('gate_motif:')) {
+      const parts = callback.split(':');
+      const decision = parts[1];
+      const gateId = parts.slice(2).join(':');
+      evt.actionId = `${decision}:${gateId}`;
+      evt._motifConfirmed = true;
+      evt.payload = { reason: String(evt.payload?.reason ?? '').trim() };
+    }
+
+    const res = await ctx.connectorService.handleInteraction(evt);
+
+    if (res.type === 'modal') {
+      const action = String(evt.actionId || '');
+      const decision = action.startsWith('reject:') ? 'reject' : action.startsWith('revise:') ? 'revise' : null;
+      const gateId = decision ? action.slice(decision.length + 1) : null;
+      const card = ctx.teamsAdapter.renderMotifCard({
+        title: decision === 'reject' ? 'Motif du refus (obligatoire)' : 'Motif de la revision',
+        data: { actionId: `gate_motif:${decision}:${gateId ?? 'g'}` },
+      });
+      return reply.code(200).send({ statusCode: 200, type: 'application/vnd.microsoft.card.adaptive', value: card });
+    }
+    if (res.type === 'ack' || res.type === 'ephemeral') {
+      return reply.code(200).send({ statusCode: 200 });
+    }
+    return reply.code(200).send({ statusCode: 200 });
   });
 
   app.post('/v1/connectors/link', async (req, reply) => {

@@ -60,7 +60,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
 - **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
-- **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); Teams scaffold
+- **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); **Teams (JWT RS256 Azure Bot, Adaptive Cards, gate/EF-20, envoi proactif + webhook)**; Discord (Ed25519, embeds)
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
 - **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
 
@@ -491,6 +491,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | v14 | Persist account links · motif modal · message update · ontology embed panel | ✅ |
 | **v15** | **Embedding novelty ranking · Kayros Signature · public demo ranking UI** | ✅ |
 | **v16** | Engine novelty API · KPI drift · Discord scaffold · **optional adapters** (LangChain tools, LangGraph research, multi-provider search, Langfuse) · demo ontology/Mistral wiring | ✅ |
+| **v17** | **Teams adapter complet** (JWT RS256 Azure Bot, JWKS cache, Adaptive Cards, gate/EF-20, idempotence, route interactive, envoi proactif bot + webhook) | ✅ |
 
 ---
 
