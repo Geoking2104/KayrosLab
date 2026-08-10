@@ -18,6 +18,7 @@ import {
   ConnectorService, SlackAdapter, DiscordAdapter, TeamsAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
   createEngine,
   createAuditStore,
+  WorkingGroupStore, createWorkingGroupStore,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
@@ -86,6 +87,7 @@ export default async function buildContext() {
     KAYROS_OFFLOAD_ROOT = '',
     KAYROS_AUDIT_FILE = '',
     KAYROS_AUDIT_RING = '5000',
+    KAYROS_WG_FILE = '',
     KAYROS_PARTITION_TENANT = '',
     KAYROS_QUANT = 'q4_K_M',
     KAYROS_SYNC_QUANTS = '',
@@ -249,6 +251,8 @@ export default async function buildContext() {
   const auditRing = Number(process.env.KAYROS_AUDIT_RING || 5000) || 5000;
   const auditStore = createAuditStore({ file: process.env.KAYROS_AUDIT_FILE || '' });
   if (auditStore.load) { try { await auditStore.load(); } catch {} }
+  const workingGroups = createWorkingGroupStore({ file: process.env.KAYROS_WG_FILE || '' });
+  if (workingGroups.load) { try { await workingGroups.load(); } catch {} }
   const activites = [];
   // Rehydrate le journal (timeline) depuis le store persistant au demarrage (EF-32).
   if (auditStore.events) activites.push(...auditStore.events.slice(-auditRing));
@@ -415,7 +419,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
 
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
-    governance, gateStore, campagnes, activites, journal, auditStore, stageTimer,
+    governance, gateStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
     engine,
     sharedPaths,

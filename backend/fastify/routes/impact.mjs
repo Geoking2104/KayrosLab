@@ -35,7 +35,7 @@ export default async function impactRoute(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'validation failed', issues: parsed.error.issues });
     const { scenarios, variables, milestones, costHypotheses, seed } = parsed.data;
     try {
-      const { simulateTrajectory, estimateResources } = await import('../../core/index.mjs');
+      const { simulateTrajectory, estimateResources } = await import('../../../core/index.mjs');
       const projection = scenarios?.length ? simulateTrajectory({ scenarios, variables, seed }) : null;
       const ressources = milestones?.length ? estimateResources({ milestones, costHypotheses }) : null;
       const out = { ...idea, projection, ressources, updatedAt: new Date().toISOString() };
@@ -50,7 +50,7 @@ export default async function impactRoute(app) {
     const parsed = impactSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'type attendu', issues: parsed.error.issues });
     const { type, montant, libelle, kpiId, value } = parsed.data;
-    const { emptyImpact, recordInvestment, recordBenefit, recordActual, impactReport } = await import('../../core/index.mjs');
+    const { emptyImpact, recordInvestment, recordBenefit, recordActual, impactReport } = await import('../../../core/index.mjs');
     let impact = idea.impact ?? emptyImpact();
     try {
       if (type === 'investissement') impact = recordInvestment(impact, { montant, libelle });
@@ -65,7 +65,7 @@ export default async function impactRoute(app) {
   app.get('/v1/ideas/:id/impact', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const idea = await chargerIdee(req, reply, me); if (!idea) return;
-    const { emptyImpact, impactReport } = await import('../../core/index.mjs');
+    const { emptyImpact, impactReport } = await import('../../../core/index.mjs');
     return { projection: idea.projection ?? null, ressources: idea.ressources ?? null, rapport: impactReport(idea.projection ?? {}, idea.impact ?? emptyImpact()) };
   });
 

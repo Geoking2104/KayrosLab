@@ -19,7 +19,7 @@ export default async function ideasRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const { stage, status, category, q, inclureModeration } = req.query || {};
     const list = await app.kayrosContext.ideas.list({ tenantId: me.tenantId, stage, status, category, q });
-    if (inclureModeration !== 'true') { const { estPubliee } = await import('../../core/index.mjs'); return { ideas: list.filter((i) => estPubliee(i)) }; }
+    if (inclureModeration !== 'true') { const { estPubliee } = await import('../../../core/index.mjs'); return { ideas: list.filter((i) => estPubliee(i)) }; }
     return { ideas: list };
   });
 
@@ -33,10 +33,10 @@ export default async function ideasRoute(app) {
       const campagne = campagneId ? ctx.campagnes.get(campagneId) : null;
       if (campagneId && !campagne) return reply.code(404).send({ error: 'campagne introuvable' });
       if (campagne && campagne.tenantId !== me.tenantId) return reply.code(404).send({ error: 'campagne introuvable' });
-      const { estOuverte } = await import('../../core/index.mjs');
+      const { estOuverte } = await import('../../../core/index.mjs');
       const fenetre = estOuverte(campagne);
       if (!fenetre.ouverte) return reply.code(409).send({ error: `campagne ${fenetre.raison}`, code: fenetre.raison });
-      const { processIntake, createIdea, etatInitial } = await import('../../core/index.mjs');
+      const { processIntake, createIdea, etatInitial } = await import('../../../core/index.mjs');
       const derive = intake ? processIntake(intake) : null;
       const idea = {
         ...createIdea({ id: id || `D${Date.now()}`, title, author: me.email, category, intake, tenantId: me.tenantId }),
@@ -66,8 +66,8 @@ export default async function ideasRoute(app) {
     const { stage, status, motif } = parsed.data;
     try {
       let out = idea;
-      if (stage) { const { setStage } = await import('../../core/index.mjs'); out = setStage(out, stage, { by: me.email, motif }); }
-      if (status) { const { setStatus } = await import('../../core/index.mjs'); out = setStatus(out, status, { by: me.email, motif }); }
+      if (stage) { const { setStage } = await import('../../../core/index.mjs'); out = setStage(out, stage, { by: me.email, motif }); }
+      if (status) { const { setStatus } = await import('../../../core/index.mjs'); out = setStatus(out, status, { by: me.email, motif }); }
       await ctx.ideas.save(out);
       if (stage) ctx.journal({ type: 'etape', by: me.email, de: idea.stage, a: stage, ideaId: idea.id, titre: idea.title });
       if (status) ctx.journal({ type: 'statut', by: me.email, de: idea.status, a: status, ideaId: idea.id, titre: idea.title });

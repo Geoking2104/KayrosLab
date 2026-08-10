@@ -6,6 +6,7 @@ import authPlugin from '../plugins/auth.mjs';
 import healthRoute from '../routes/health.mjs';
 import authRoutes from '../routes/auth-routes.mjs';
 import connectorsRoute from '../routes/connectors.mjs';
+import gatesRoute from '../routes/gates.mjs';
 import buildContext from '../lib/context.mjs';
 
 export async function buildTestApp(env = {}) {
@@ -42,6 +43,7 @@ export async function buildTestApp(env = {}) {
   await app.register(healthRoute);
   await app.register(authRoutes);
   await app.register(connectorsRoute);
+  await app.register(gatesRoute);
   return { app, ctx };
 }
 

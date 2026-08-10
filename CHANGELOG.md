@@ -53,7 +53,13 @@
 - **`core/audit.mjs`** — `InMemoryAuditStore` + `FileAuditStore` (JSONL, append-only, hydratation au démarrage, ring buffer configurable). `createAuditStore` selon `KAYROS_AUDIT_FILE`.
 - **`backend/fastify/lib/context.mjs`** — `ctx.journal` persiste chaque événement cycle/gate/commentaire/vote/timeline et réhydrate `ctx.activites` au démarrage (la timeline survive aux redémarrages). Expose `auditStore`.
 - **`.env.sample`** — `KAYROS_AUDIT_FILE` / `KAYROS_AUDIT_RING`.
-- Tests: `audit.test.mjs` (7) — InMemory where/list/ring, FileAuditStore reload/persist/best-effort/missing-file/ring. Suite core 280/280.
+- Tests: `audit.test.mjs` (7) — InMemory where/list/ring, FileAuditStore reload/persist/best-effort/missing-file/ring. Suite core 290/290.
+
+### Working Group + vote multi-criteres (EF-13 / EF-21)
+- **`core/working-group.mjs`** — `WorkingGroupStore` + `FileWorkingGroupStore` (membres, quorum par défaut 50%, agrégation rôle-pivot via `ROLE_WEIGHTS`, statut `vide`/`en_attente`/`quorum_ok`, recommandation Go/Révision/No-Go/Attendre quorum).
+- **`backend/fastify/routes/gates.mjs`** — `POST /v1/ideas/:id/working-group` (création WG), `POST /v1/gates/:gateId/votes` (vote membre, 403 non-membre, idempotence), `GET /v1/gates/:gateId/votes` (agregat + participations). La décision reste une resolution RBAC formelle ; le vote WG est consultatif et alimente l'évaluation du gate.
+- **`lib/context.mjs`** — `workingGroups` (store, `KAYROS_WG_FILE` optionnel) exposé dans le contexte.
+- Tests: `working-group.test.mjs` (10) + backend `gates.working-group.test.mjs` (3).
 
 ---
 

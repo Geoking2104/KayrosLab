@@ -2,7 +2,7 @@ export default async function portfolioRoute(app) {
   app.get('/v1/portfolio', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const ctx = app.kayrosContext;
-    const { portfolio } = await import('../../core/index.mjs');
+    const { portfolio } = await import('../../../core/index.mjs');
     const board = await portfolio(ctx.ideas, { tenantId: me.tenantId });
     const all = await ctx.ideas.list({ tenantId: me.tenantId });
     const byStatus = {};
@@ -29,7 +29,7 @@ export default async function portfolioRoute(app) {
     const ctx = app.kayrosContext;
     const { depuis, jusqua, periode = 'quotidien' } = req.query || {};
     const mesIdees = new Set((await ctx.ideas.list({ tenantId: me.tenantId })).map((i) => i.id));
-    const { buildDigest, formatDigest } = await import('../../core/index.mjs');
+    const { buildDigest, formatDigest } = await import('../../../core/index.mjs');
     const d = buildDigest(ctx.activites.filter((a) => mesIdees.has(a.ideaId)), { depuis, jusqua, periode });
     return { digest: d, message: formatDigest(d, { destinataires: [me.email] }) };
   });
@@ -43,7 +43,7 @@ export default async function portfolioRoute(app) {
     const parsed = z.object({ score: z.number().min(0).max(100), comment: z.string().optional() }).safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'score numerique requis', issues: parsed.error.issues });
     const { score, comment } = parsed.data;
-    const { aggregateVotes } = await import('../../core/index.mjs');
+    const { aggregateVotes } = await import('../../../core/index.mjs');
     const votes = [...(idea.votes ?? []).filter((v) => v.by !== me.email), { by: me.email, role: me.role, score, comment }];
     const out = { ...idea, votes, updatedAt: new Date().toISOString() };
     await ctx.ideas.save(out);
@@ -58,7 +58,7 @@ export default async function portfolioRoute(app) {
     if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
     if (!idea.roadmap?.jalons?.length && !req.body?.roadmap?.jalons?.length) return reply.code(400).send({ error: "aucune roadmap" });
     try {
-      const { startExecution, setStage, progression } = await import('../../core/index.mjs');
+      const { startExecution, setStage, progression } = await import('../../../core/index.mjs');
       const execution = startExecution({ roadmap: req.body?.roadmap ?? idea.roadmap });
       const out = setStage({ ...idea, execution }, 'realiser', { by: me.email, motif: 'demarrage execution' });
       await ctx.ideas.save(out);
@@ -74,7 +74,7 @@ export default async function portfolioRoute(app) {
     if (!idea.execution) return reply.code(400).send({ error: 'execution non demarree' });
     const { jalonId, patch, action, force, verdict, enseignements } = req.body || {};
     try {
-      const { updateJalon, advancePhase, cloturer, progression, setStatus } = await import('../../core/index.mjs');
+      const { updateJalon, advancePhase, cloturer, progression, setStatus } = await import('../../../core/index.mjs');
       let execution = idea.execution;
       if (jalonId) execution = updateJalon(execution, jalonId, patch ?? {}, { by: me.email });
       if (action === 'phase_suivante') execution = advancePhase(execution, { force: !!force, by: me.email });
