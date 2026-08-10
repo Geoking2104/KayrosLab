@@ -198,7 +198,7 @@ flowchart LR
 | # | Step | Domain code | Role | Output |
 |---|---|---|---|---|
 | 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
-| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals |
+| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals | **Étape 1 🟢 définitive** (EF-01/02) : `POST/GET /v1/ideas/:id/signals` (score expliqué 0–100) + `/promote` + `/noise` |
 | 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges |
 | 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |

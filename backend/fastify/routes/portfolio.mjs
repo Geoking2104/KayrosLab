@@ -373,4 +373,85 @@ export default async function portfolioRoute(app) {
     const decisions = decisionsTimeline(idea);
     return { decisions, count: decisions.length, derniere: lastDecision(idea) };
   });
+
+  // Etape 1 — Ecouter (EF-01/EF-02) : signal faible -> qualifie + score explique.
+  app.post('/v1/ideas/:id/signals', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      signal: z.object({
+        contenu: z.string(),
+        source: z.string().optional(),
+        date: z.string().optional(),
+        url: z.string().optional(),
+        tags: z.array(z.string()).optional().default([]),
+      }),
+      scores: z.object({ pertinence: z.number().min(0).max(100).optional(), impact: z.number().min(0).max(100).optional() }).optional().default({}),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'signal requis (contenu)', issues: parsed.error.issues });
+    try {
+      const { normalizeSignal, scoreSignal } = await import('../../../core/index.mjs');
+      const brut = normalizeSignal(parsed.data.signal, { index: (idea.signals ?? []).length });
+      const scored = { ...brut, ...scoreSignal(brut, parsed.data.scores) };
+      const liste = idea.signals ?? [];
+      const idx = liste.findIndex((s) => s.id === scored.id);
+      const signals = idx >= 0 ? [...liste.slice(0, idx), scored, ...liste.slice(idx + 1)] : [...liste, scored];
+      const out = { ...idea, signals, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'ecouter.add', by: me.email, ideaId: idea.id, signalId: scored.id, source: scored.source, note: scored.note ?? null });
+      return { signal: scored };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/signals', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportEcoute } = await import('../../../core/index.mjs');
+    const seuil = req.query?.seuil != null ? Number(req.query.seuil) : (idea.ecouter?.seuil ?? undefined);
+    const rapport = rapportEcoute(idea.signals ?? [], { seuil });
+    return { signals: idea.signals ?? [], ...rapport };
+  });
+
+  app.post('/v1/ideas/:id/signals/promote', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({ signalId: z.string() }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'signalId requis', issues: parsed.error.issues });
+    try {
+      const { promoteSignal } = await import('../../../core/index.mjs');
+      const liste = idea.signals ?? [];
+      const idx = liste.findIndex((s) => s.id === parsed.data.signalId);
+      if (idx < 0) return reply.code(404).send({ error: 'signal introuvable' });
+      const qualifie = promoteSignal(liste[idx], { by: me.email, ideaId: idea.id });
+      const signals = [...liste.slice(0, idx), qualifie, ...liste.slice(idx + 1)];
+      const out = { ...idea, signals, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'ecouter.promote', by: me.email, ideaId: idea.id, signalId: qualifie.id, ts: qualifie.promote.ts });
+      return { signal: qualifie };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.post('/v1/ideas/:id/signals/noise', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({ seuil: z.number().min(0).max(100) }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'seuil 0..100 requis', issues: parsed.error.issues });
+    const { rapportEcoute } = await import('../../../core/index.mjs');
+    const out = { ...idea, ecouter: { seuil: parsed.data.seuil }, updatedAt: new Date().toISOString() };
+    await ctx.ideas.save(out);
+    ctx.journal({ type: 'ecouter.noise', by: me.email, ideaId: idea.id, seuil: parsed.data.seuil });
+    const rapport = rapportEcoute(idea.signals ?? [], { seuil: parsed.data.seuil });
+    return { seuil: parsed.data.seuil, ...rapport };
+  });
 }

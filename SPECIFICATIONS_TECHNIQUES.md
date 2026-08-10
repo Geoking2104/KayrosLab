@@ -213,6 +213,14 @@ interface ToolRegistry {
 - **Décision tracée immuable (EF-14).** `core/arbitrage.mjs` → `recordDecision` ajoute une décision Go/No-Go/Révision horodatée, signée (auteur + rôle) et séquencée au journal append-only `idea.decisions` ; `decisionsTimeline`/`lastDecision` lisent le journal en copies immuables. La résolution d'un gate (`POST /v1/gates/:gateId/resolve`) alimente le journal à chaque décision. API `GET /v1/ideas/:id/decisions` (journal + dernière décision).
 - **Traçabilité.** Les décisions sont simultanément journalisées dans le journal d'audit persistant (`gate.resolved`, EF-32) et portées par l'idée ; la justification (F7) est consignée dans chaque enregistrement (`reason`).
 
+### 4.3 Étape Écouter — signaux faibles (EF-01/EF-02 🟢 implémentés)
+
+- **Ingestion & normalisation (F2).** `core/ecouter.mjs` — `normalizeSignal` (id canonique stable `idSignal(source|contenu)` → déduplication naturelle, date validée, tags dédupliqués), persisté sur l'idée (`idea.signals`). API `POST /v1/ideas/:id/signals` (événement `ecouter.add`).
+- **Scoring expliqué (EF-02/F4).** `scoreSignal` — note 0–100 = moyenne pondérée des dimensions renseignées (pertinence 50% · fraîcheur 25% · impact 25%) ; la fraîcheur est **calculée** par décroissance exponentielle déterministe (demi-vie 90 j), la pertinence/impact sont **importés** du LLM/humain. Aucune dimension absente n'est devinée : `dimensions[]` + `raison` rendent le score traçable.
+- **Réduction de bruit (F5).** `reductionBruit` (signaux sous seuil masqués **mais conservés**, réversibles) + `renderNoiseReduction` (rendu lisible). API `POST /v1/ideas/:id/signals/noise` (seuil persisté sur `idea.ecouter.seuil`).
+- **Promotion (EF-01/F6).** `promoteSignal` — signal qualifié horodaté + signé (auteur), porté par `idea.signals[]` et journalisé (`ecouter.promote`). API `POST /v1/ideas/:id/signals/promote`.
+- **Clustering (F3/F7).** `clusterSignals` — regroupement par tag (ou source) préparant Cartographier ; `rapportEcoute` synthétise réduction + clusters + rendu (API `GET /v1/ideas/:id/signals`).
+
 ---
 
 ## 5. Abstraction LLM (`KayrosLLM`)

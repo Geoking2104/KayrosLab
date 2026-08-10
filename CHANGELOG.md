@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.20.0 (2026-08) — Étape 1 · Écouter (signaux faibles, EF-01/EF-02)
+
+- **`core/ecouter.mjs`** (nouveau) — `normalizeSignal`/`idSignal` (id canonique → déduplication), `freshnessScore` (décroissance exponentielle déterministe, demi-vie 90 j), `scoreSignal` (note 0–100 pondérée : pertinence 50% · fraîcheur 25% · impact 25%, dimensions + raisons traçables), `reductionBruit` (masquage réversible) + `renderNoiseReduction`, `promoteSignal` (qualification horodatée + signée), `clusterSignals` (tags/source) et `rapportEcoute`.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/signals` (ajout + score expliqué, événement `ecouter.add`), `GET /v1/ideas/:id/signals` (réduction + clusters), `POST .../signals/promote` (EF-01, `ecouter.promote`), `POST .../signals/noise` (seuil persisté).
+- **Tests** — `core/ecouter.test.mjs` (10) + `backend/fastify/tests/portfolio.ecouter.test.mjs` (5).
+- **Spécifications** — EF-01/EF-02 marqués 🟢 ; Étape 1 Écouter désormais **🟢 définitive**.
+
 ## v0.19.0 (2026-08) — Étape 5 · Arbitrer (synthèse COMEX + décision tracée EF-13/14)
 
 - **`core/arbitrage.mjs`** (nouveau) — `recordDecision` (journal append-only Go/No-Go/Révision horodaté + signé, séquencé), `decisionsTimeline`, `lastDecision`, `buildSyntheseArbitrage` (dossier F1 composé de données réelles : recommandation WG, red flags de la matrice de risques, projection, gates en attente, journal).

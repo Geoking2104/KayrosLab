@@ -156,6 +156,8 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 
 **Analyse.** KayrosLab démarre sur un corpus de signaux fourni ; il n'a **aucun mécanisme d'alimentation par une organisation**. C'est le premier verrou d'adoption en entreprise : sans collecte, pas de matière.
 
+**Étape 1 Écouter 🟢.** La réduction de bruit est en place (`core/ecouter.mjs`, API `/v1/ideas/:id/signals`) : ingestion multi-source normalisée (id canonique = déduplication naturelle), **scoring expliqué** (EF-02 : fraîcheur calculée par décroissance exponentielle déterministe, pertinence/impact importés du LLM, note 0–100 avec dimensions + raisons), masquage réversible sous seuil, et **promotion en signal qualifié** horodatée et signée (EF-01), persistée et journalisée.
+
 **Recommandation.** Créer une **étape 0 « Recueillir »** (ou une porte d'entrée d'Écouter) : formulaire structuré reprenant le canevas Brightidea (valeur, problème, ressources, parties prenantes, risques, équipe). Ces champs alimenteraient directement les hypothèses de *Construire* et les cibles d'attaque d'*Éprouver* — synergie forte avec l'existant.
 
 ---

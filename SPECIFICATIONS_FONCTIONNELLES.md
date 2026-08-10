@@ -217,12 +217,12 @@ flowchart LR
 
 Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaillées**, agents, censeurs, entrées/sorties, statut, user stories + critères d'acceptation.
 
-### Étape 1 — Écouter
+### Étape 1 — Écouter 🟢 *(définitive)*
 
 **Objectif.** Réduire le bruit et qualifier les signaux faibles.
 **Agents.** Planner (cadrage), Critic (scoring). **Censeurs.** Expert métier (consulté).
 **Entrées.** Corpus de signaux / sources. **Sorties.** Signaux qualifiés & scorés.
-**Statut.** 🟢 Réduction de bruit et promotion de signal existent (`promoteNoiseSignal`, `renderNoiseReduction`). 🔵 Scoring assisté par LLM réel.
+**Statut.** 🟢 Réduction de bruit, promotion de signal qualifié et scoring expliqué existent (`normalizeSignal`, `scoreSignal`, `reductionBruit`, `renderNoiseReduction`, `promoteSignal`, `rapportEcoute`). Les dimensions pertinence/impact restent fournies par le LLM réel (le moteur calcule, jamais il n'invente).
 
 **Fonctionnalités détaillées.**
 
@@ -236,8 +236,8 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 | F6 | Promotion en signal qualifié | Action humaine horodatée, écrite en mémoire vectorielle (`ideaId`). |
 | F7 | Tagging thématique | Tags/clusters proposés pour préparer Cartographier. |
 
-- **EF-01 (🟢)** Le système présente les signaux et permet d'en promouvoir en signaux qualifiés.
-- **EF-02 (🔵)** Chaque signal reçoit un score de pertinence expliqué (source, fraîcheur, impact).
+- **EF-01 (🟢)** Le système présente les signaux et permet d'en promouvoir en signaux qualifiés (action humaine horodatée et signée).
+- **EF-02 (🟢)** Chaque signal reçoit un score de pertinence expliqué (source, fraîcheur, impact) — note 0–100 traçable, dimensions et raisons exposées.
 
 > **US-01.** En tant que **stratège**, je veux **filtrer le bruit et promouvoir les signaux prometteurs** afin de **concentrer l'idéation sur l'essentiel**.
 > **Critères d'acceptation.**

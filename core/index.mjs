@@ -26,6 +26,7 @@ export * from './risques.mjs';
 export * from './capitalisation.mjs';
 export * from './gates-futurs.mjs';
 export * from './arbitrage.mjs';
+export * from './ecouter.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';
