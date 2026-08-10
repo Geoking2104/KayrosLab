@@ -44,6 +44,11 @@
 - **Backend** — `POST /v1/connectors/teams/interactive` (JWT obligatoire → 401, idempotence `teamsActivityId`, invoke adaptiveCard → gate approve / Task Module motif / resolve) + `teamsAdapter` branché sur env (`TEAMS_APP_ID`, `TEAMS_BOT_PASSWORD`, `TEAMS_WEBHOOK_URL`, `TEAMS_GATE_CHANNEL`).
 - Tests: `connectors-teams.test.mjs` (27) — signature RS256 (accept/tamper/exp/iss/aud), parse message/invoke, rendu Adaptive Card, post/update bot + webhook, flux gate via `ConnectorService`. Suite complète 273/273.
 
+### v0.17–v0.18 — Engine/adapters split + CI
+- **Teams adapter (v0.17)** — cf. section ci-dessus.
+- **Engine/adapters split (v0.18)** — `core/` reste zero-dependency ; connecteurs/`core/adapters/` et `backend/adapters/` sont optionnels (LangChain, LangGraph, recherche, Langfuse) ; couches P0–P4 contrôlées gouvernance.
+- **CI GitHub Actions** — workflow `backend-tests.yml` (npm ci + `npm test`) s'ajoute à `core-tests.yml` et `i18n-check.yml`.
+
 ---
 
 ## v0.16.x (2026-08) — Adapters & observability periphery
