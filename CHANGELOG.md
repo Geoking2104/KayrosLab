@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.18.4 (2026-08) — EF-44 · Capitalisation No-Go
+
+- **`core/capitalisation.mjs`** (nouveau) — `buildCapitalisation` (dossier structuré : apprentissages, conditions de réactivation, signaux), `addApprentissage`, `reactivationReady` (conditions satisfaites face aux signaux constatés), `resumeCapitalisation`.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/capitalisation` (réservé aux idées `non_poursuivi`, persistance `idea.capitalisation`, événement `capitalisation.build`) ; `GET /v1/ideas/:id/capitalisation` (dossier + état de réactivation selon `?signaux=`).
+- **Tests** — `core/capitalisation.test.mjs` (6) + `backend/fastify/tests/portfolio.capitalisation.test.mjs` (3).
+- **Spécifications** — EF-44 marqué 🟢 (SPECIFICATIONS_FONCTIONNELLES.md + §4.1 TECHNIQUES).
+
 ## v0.18.3 (2026-08) — EF-42 · Matrice de risques probabilisés
 
 - **`core/risques.mjs`** (nouveau) — `niveauRisque` (score probabilité×impact, niveaux faible→critique), `addRisque`/`updateRisque`/`removeRisque` (enrichissement idempotent), `matriceRisques` (grille 5×5 + distribution), `detectDeclencheurs` (risques actifs ≥ seuil → raisons), `rapportRisques`.

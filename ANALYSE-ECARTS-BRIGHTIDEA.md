@@ -343,7 +343,7 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 | Suivi d'exécution des jalons | 🟡 roadmap produite, exécution non suivie | **Haute** | M |
 | Clôture et bilan | 🔴 absent | Moyenne | S |
 
-**Analyse.** Notre étape **Projeter** couvre désormais la *planification* → *trajectoire projetée* (EF-39/40/41 🟢 : roadmap + ressources/budget + projections probabilisées Monte-Carlo) et le **pilotage du risque est en place** : matrice EF-42 🟢 (`POST/GET /v1/ideas/:id/risques` : probabilité×impact, niveaux, déclencheurs → gate `re_arbitrage`) et boucle EF-43 🟢 (`POST /v1/ideas/:id/execution/monitor` : seuils KPI + dérive → signal → re-arbitrage), le tout tracé. Il reste EF-44 (capitalisation No-Go) et EF-45 (gates futurs) et le reporting d'impact en continu.
+**Analyse.** Notre étape **Projeter** couvre désormais la *planification* → *trajectoire projetée* (EF-39/40/41 🟢 : roadmap + ressources/budget + projections probabilisées Monte-Carlo), le **pilotage du risque** (matrice EF-42 🟢, boucle EF-43 🟢 : seuils KPI + dérive → signal → gate `re_arbitrage`) et la **capitalisation No-Go** (EF-44 🟢 : dossier apprentissages + conditions de réactivation sur idées dormantes reactivables), le tout tracé. Il reste EF-45 (gates futurs datés) et le reporting d'impact en continu.
 
 ---
 

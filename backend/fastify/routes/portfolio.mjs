@@ -243,4 +243,47 @@ export default async function portfolioRoute(app) {
     const rapport = rapportRisques(idea.roadmap?.risques ?? []);
     return { risques: rapport.risques, matrice: rapport.matrice, declencheurs: rapport.declencheurs };
   });
+
+  // Dossier de capitalisation No-Go (EF-44) : apprentissages + conditions de reactivation.
+  app.post('/v1/ideas/:id/capitalisation', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      apprentissages: z.array(z.union([z.string(), z.object({ contenu: z.string(), categorie: z.string().optional() })])).optional().default([]),
+      reactivation: z.union([
+        z.string(),
+        z.object({ condition: z.string().optional(), conditions: z.array(z.string()).optional(), delai: z.string().optional(), signaux: z.array(z.string()).optional() }),
+      ]).optional().default(null),
+      signaux: z.array(z.union([z.string(), z.object({ libelle: z.string() })])).optional().default([]),
+      motif: z.string().optional().nullable().default(null),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    try {
+      if (idea.status !== 'non_poursuivi') return reply.code(409).send({ error: "l'idee doit etre No-Go (status non_poursuivi)" });
+      const { buildCapitalisation, reactivationReady, resumeCapitalisation } = await import('../../../core/index.mjs');
+      const dossier = buildCapitalisation(parsed.data);
+      const out = { ...idea, capitalisation: dossier, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'capitalisation.build', by: me.email, ideaId: idea.id, apprentissages: dossier.apprentissages.length, conditions: dossier.reactivation.conditions.length });
+      return { capitalisation: dossier, resume: resumeCapitalisation(dossier) };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/capitalisation', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.capitalisation) return reply.code(404).send({ error: 'pas de dossier de capitalisation' });
+    const { reactivationReady, resumeCapitalisation } = await import('../../../core/index.mjs');
+    const signaux = (req.query?.signaux ? String(req.query.signaux).split(',') : []).filter(Boolean);
+    return {
+      capitalisation: idea.capitalisation,
+      resume: resumeCapitalisation(idea.capitalisation),
+      reactivation: reactivationReady(idea.capitalisation, { contexteSignaux: signaux }),
+    };
+  });
 }
