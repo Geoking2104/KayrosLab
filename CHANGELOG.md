@@ -32,6 +32,13 @@
 - Packet / gateView surface: `worldModel`, `decisionDebt`, `revisitTriggers`, `preferredGateLevel`, `adaptiveBudget`.
 - Tests: `frame.test.mjs` (7), `world-model.test.mjs` (5), `adaptive.test.mjs` (3).
 
+### Discord scaffold (completes v16)
+- **`core/connectors-discord.mjs`** — `DiscordAdapter` complet : verification Ed25519 (`X-Signature-Ed25519` + timestamp anti-rejeu 5 min), parse des interactions (PING, slash, boutons, modal), rendu embeds + boutons, modal de motif, `buildGateView` / `buildGateResultView`.
+- **`core/connectors-discord-deep.mjs`** — `verifyDiscordSignature`, `discordInteractionId` (idempotence EF-92), `discordEmbedColor`.
+- **`core/connectors.mjs`** — `ConnectorService._handleGate` honore `_motifConfirmed` (resolution reject/revise avec motif horodaté, EF-20).
+- **Backend** — `POST /v1/connectors/discord/interactive` (PING pong, signature, route gate approve / modal motif / resolve) + `discordAdapter` branche sur env (`DISCORD_PUBLIC_KEY`, `DISCORD_BOT_TOKEN`, `DISCORD_WEBHOOK_URL`, `DISCORD_APPLICATION_ID`, `DISCORD_GATE_CHANNEL`).
+- Tests: `connectors-discord.test.mjs` (23) — signature réelle, parse, rendu, flux gate via `ConnectorService`.
+
 ---
 
 ## v0.16.x (2026-08) — Adapters & observability periphery

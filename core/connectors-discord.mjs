@@ -1,9 +1,15 @@
 // KayrosLab — Discord adapter (V16 scaffold)
 import {
   ChatAdapter,
+  AbstractView,
+  AbstractAction,
   InteractionEvent,
   AccountLinkService,
 } from './connectors.mjs';
+import {
+  verifyDiscordSignature,
+  discordEmbedColor,
+} from './connectors-discord-deep.mjs';
 
 // ---- Adaptateur Discord (Interactions + Webhook) — V16 scaffold ----
 
@@ -30,16 +36,20 @@ export class DiscordAdapter extends ChatAdapter {
 
   /**
    * Verifie la signature Ed25519 des interactions Discord.
-   * Headers: X-Signature-Ed25519, X-Signature-Timestamp + raw body.
-   * Full crypto verification requires the public key; without it, returns false.
+   * Headers: X-Signature-Ed25519 + X-Signature-Timestamp (5 min anti-rejeu).
+   * Sans cle publique configuree, on rejette (aucune action sans verification).
    */
-  verifySignature(req) {
+  async verifySignature(req) {
     const sig = req.headers?.['x-signature-ed25519'] || req.headers?.['X-Signature-Ed25519'];
     const ts = req.headers?.['x-signature-timestamp'] || req.headers?.['X-Signature-Timestamp'];
     if (!sig || !ts || !this.publicKey) return false;
-    // Scaffold: real Ed25519 verify should use tweetnacl / Web Crypto against publicKey
-    // Reject when crypto not wired — safer than accepting unsigned traffic.
-    return false;
+    const rawBody = typeof req.rawBody === 'string' ? req.rawBody : JSON.stringify(req.body ?? {});
+    return verifyDiscordSignature({
+      publicKey: this.publicKey,
+      timestamp: ts,
+      rawBody,
+      signature: sig,
+    });
   }
 
   /**
@@ -179,14 +189,38 @@ export class DiscordAdapter extends ChatAdapter {
   }
 
   async openModal(triggerId, form) {
-    const view = this.renderView(form);
     return {
       ok: true,
       deferred: true,
       response: {
         type: 9,
-        data: view,
+        data: this.renderModalData(form),
       },
+    };
+  }
+
+  /** Modal Discord (type 9) a partir d'un AbstractView. */
+  renderModalData(form) {
+    const custom_id = String(form?.custom_id || form?.id || 'kayros_modal').slice(0, 100);
+    const title = String(form?.title || 'KayrosLab').slice(0, 45);
+    const raw = form?.inputs || form?.fields || [];
+    const inputs = raw.length
+      ? raw
+      : [{ id: 'reason', label: 'Motif (obligatoire)', multiline: true, required: true }];
+    return {
+      custom_id,
+      title,
+      components: inputs.map((inp) => ({
+        type: 1,
+        components: [{
+          type: 4,
+          custom_id: String(inp.id || inp.custom_id || `field_${inp.label || 'value'}`).slice(0, 100),
+          label: String(inp.label || inp.name || 'Champ').slice(0, 45),
+          style: inp.multiline ? 2 : 1,
+          required: Boolean(inp.required ?? true),
+          placeholder: inp.placeholder ? String(inp.placeholder).slice(0, 100) : undefined,
+        }],
+      })),
     };
   }
 
@@ -197,7 +231,7 @@ export class DiscordAdapter extends ChatAdapter {
     const content = [title, body].filter(Boolean).join('\n').slice(0, 2000);
 
     const embeds = [];
-    if (view.fields && Array.isArray(view.fields)) {
+    if (Array.isArray(view.fields) && view.fields.length) {
       embeds.push({
         title: title || 'KayrosLab',
         description: body || undefined,
@@ -206,7 +240,7 @@ export class DiscordAdapter extends ChatAdapter {
           value: String(f.value || '—').slice(0, 1024),
           inline: Boolean(f.inline),
         })),
-        color: 0x7c3aed,
+        color: discordEmbedColor(view.color),
       });
     }
 
@@ -249,5 +283,40 @@ export class DiscordAdapter extends ChatAdapter {
 
   pongResponse() {
     return { type: 1 };
+  }
+
+  /** Construit la vue d'arbitrage de gate (meme contrat que Slack/Teams). */
+  buildGateView(evt, { ideaTitre, gateType, agregat } = {}) {
+    const roleLabel = { comex: 'COMEX', red_team: 'Red Team', expert_metier: 'Expert', facilitateur: 'Facilitateur' };
+    const fields = [
+      { label: 'Idée', value: ideaTitre ?? evt.ideaId ?? '—' },
+      { label: 'Type de gate', value: gateType ?? evt.type ?? '—' },
+      { label: 'Rôle requis', value: roleLabel[evt.requiredRole] ?? evt.requiredRole ?? '—' },
+    ];
+    if (agregat) {
+      fields.push({ label: 'Vote', value: `${agregat.moyennePonderee ?? '—'}/100 (${agregat.count ?? 0} évaluateur(s))` });
+    }
+    const actions = [
+      new AbstractAction({ id: `approve:${evt.gateId}`, label: 'Approuver', style: 'primary' }),
+      new AbstractAction({ id: `revise:${evt.gateId}`, label: 'Revoir', style: 'default' }),
+      new AbstractAction({ id: `reject:${evt.gateId}`, label: 'Refuser', style: 'danger', confirm: 'Confirmer le refus ?' }),
+    ];
+    return new AbstractView({
+      title: `Arbitrage requis — ${ideaTitre ?? evt.ideaId ?? 'idée'}`,
+      text: agregat?.count
+        ? `Vote pondéré : *${agregat.moyennePonderee}* /100 — ${agregat.recommandation ?? 'décision'}`
+        : '_Aucun vote préalable : la décision ne sera pas instruite._',
+      fields, actions, color: '#3b82f6',
+    });
+  }
+
+  /** Construit la vue de resultat de gate (apres resolution). */
+  buildGateResultView(resolution, { ideaTitre } = {}) {
+    const decisionLabel = { approve: 'Approuvé', reject: 'Refusé (veto)', revise: 'Révision demandée' };
+    return new AbstractView({
+      title: `${decisionLabel[resolution.decision] ?? resolution.decision} — ${ideaTitre ?? ''}`,
+      text: `Par : ${resolution.by ?? '—'}\nMotif : ${resolution.reason ?? '—'}\nLe : ${resolution.resolvedAt ?? '—'}`,
+      actions: [], color: resolution.decision === 'approve' ? '#22c55e' : '#ef4444',
+    });
   }
 }

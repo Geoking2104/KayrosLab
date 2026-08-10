@@ -490,7 +490,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | v13 | Slack deepen (signature, idempotence) · ontology Cytoscape graph | ✅ |
 | v14 | Persist account links · motif modal · message update · ontology embed panel | ✅ |
 | **v15** | **Embedding novelty ranking · Kayros Signature · public demo ranking UI** | ✅ |
-| **v16** | Engine novelty API · KPI drift · Discord scaffold · **optional adapters** (LangChain tools, LangGraph research, multi-provider search, Langfuse) · demo ontology/Mistral wiring | 🔵 partial |
+| **v16** | Engine novelty API · KPI drift · Discord scaffold · **optional adapters** (LangChain tools, LangGraph research, multi-provider search, Langfuse) · demo ontology/Mistral wiring | ✅ |
 
 ---
 

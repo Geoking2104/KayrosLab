@@ -562,6 +562,26 @@ export class ConnectorService {
         return new InteractionResponse({ ephemeral: true, text: `Action reservee au role ${rec.requiredRole}` });
       }
       if (decision === 'revise' || decision === 'reject') {
+        if (evt._motifConfirmed) {
+          const reason = String(evt.payload?.reason ?? evt.payload?.fields?.reason ?? '').trim();
+          if (reason.length < 3) {
+            return new InteractionResponse({ type: 'ephemeral', ephemeral: true, text: 'Motif obligatoire pour rejeter/réviser (EF-20)' });
+          }
+          const resolution = this.governance.resolve(gateId, {
+            decision, by: profile.email, role: profile.role, reason,
+          });
+          if (this.ideas && rec.ideaId) {
+            const idea = await this.ideas.get(rec.ideaId);
+            if (idea) {
+              const { setStatus, setStage } = await import('./model.mjs');
+              const map = { reject: 'non_poursuivi', revise: 'en_revue' };
+              let out = setStatus(idea, map[decision] ?? idea.status, { by: profile.email, motif: reason });
+              if (decision === 'revise') out = setStage(out, 'eprouver', { by: profile.email, motif: 'revision via chat' });
+              await this.ideas.save(out);
+            }
+          }
+          return new InteractionResponse({ type: 'ack', text: `Décision "${decision}" enregistrée.` });
+        }
         return new InteractionResponse({
           type: 'modal', ephemeral: false,
           text: null, view: new AbstractView({

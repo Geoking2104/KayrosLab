@@ -16,6 +16,7 @@ import {
   buildDigest, formatDigest,
   StageTimer, DEFAULT_STAGE_LIMITS,
   ConnectorService, SlackAdapter, AccountLinkService, AbstractView, AbstractAction, InteractionResponse,
+  DiscordAdapter,
   createEngine,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
@@ -258,8 +259,17 @@ export default async function buildContext() {
         linkService,
       })
     : null;
+  const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT_TOKEN || process.env.DISCORD_WEBHOOK_URL
+    ? new DiscordAdapter({
+        applicationId: process.env.DISCORD_APPLICATION_ID || '',
+        publicKey: process.env.DISCORD_PUBLIC_KEY || '',
+        botToken: process.env.DISCORD_BOT_TOKEN || '',
+        webhookUrl: process.env.DISCORD_WEBHOOK_URL || '',
+        linkService,
+      })
+    : null;
   const connectorService = new ConnectorService({
-    adapters: [slackAdapter].filter(Boolean),
+    adapters: [slackAdapter, discordAdapter].filter(Boolean),
     linkService, governance, ideas, users: userStore,
   });
 
@@ -317,6 +327,18 @@ export default async function buildContext() {
     };
   }
 
+  if (discordAdapter) {
+    const origNotifier = governance._notifier;
+    governance._notifier = async (evt) => {
+      if (origNotifier) try { await origNotifier(evt); } catch { }
+      try {
+        const idea = evt.ideaId ? await ideas.get(evt.ideaId) : null;
+        const view = discordAdapter.buildGateView(evt, { ideaTitre: idea?.title ?? null, gateType: evt.type ?? evt.gateType ?? null, agregat: evt.evaluation ?? null });
+        await discordAdapter.postMessage(process.env.DISCORD_GATE_CHANNEL || 'general', view);
+      } catch { }
+    };
+  }
+
   const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
   const GOOGLE_CX = process.env.GOOGLE_CX || '';
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
@@ -363,7 +385,7 @@ export default async function buildContext() {
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, campagnes, activites, journal, stageTimer,
-    linkService, slackAdapter, connectorService,
+    linkService, slackAdapter, discordAdapter, connectorService,
     engine,
     sharedPaths,
     pgPool,

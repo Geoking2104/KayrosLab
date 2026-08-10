@@ -4,6 +4,9 @@ import {
   slackInteractionId,
 } from '../../../core/connectors-slack-deep.mjs';
 import {
+  discordInteractionId,
+} from '../../../core/connectors-discord-deep.mjs';
+import {
   buildMotifModal,
   parseMotifSubmission,
   updateGateMessage,
@@ -11,6 +14,7 @@ import {
 } from '../../../core/connectors-motif.mjs';
 
 const interactionIds = createIdempotenceStore(4000);
+const discordInteractions = createIdempotenceStore(4000);
 
 export default async function connectorsRoute(app) {
   // Slack interactive endpoint (Block actions, modals, slash)
@@ -167,6 +171,70 @@ export default async function connectorsRoute(app) {
       return reply.code(200).send({ response_type: 'ephemeral', text: res.text });
     }
     return reply.code(200).send('');
+  });
+
+  // Discord interactive endpoint (Interactions API: PING, slash, buttons, modal)
+  app.post('/v1/connectors/discord/interactive', async (req, reply) => {
+    const ctx = app.kayrosContext;
+    if (!ctx.discordAdapter) return reply.code(200).send('');
+
+    const rawBody = typeof req.rawBody === 'string'
+      ? req.rawBody
+      : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
+    const okSig = await ctx.discordAdapter.verifySignature({ headers: req.headers, rawBody });
+    if (!okSig) return reply.code(401).send({ error: 'invalid discord signature' });
+
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
+
+    // Interactions framework: PING must always be answered with a pong (type 1)
+    if (body.type === 1) return reply.code(200).send({ type: 1 });
+
+    const iid = discordInteractionId(body);
+    if (iid && discordInteractions.seen(iid)) {
+      return reply.code(200).send({ type: 4, data: { content: 'Déjà traité.', flags: 64 } });
+    }
+
+    let evt = ctx.discordAdapter.parseRequest({ body, headers: req.headers });
+    if (!evt) return reply.code(200).send('');
+
+    if (evt.userId) evt.userId = platformUserId('discord', evt.userId);
+    evt.channelId = evt.channelId || body.channel?.id || null;
+
+    // Modal submit for a gate motif → resolve with reason (EF-20)
+    const callback = String(evt.actionId || '');
+    if (body.type === 5 && callback.startsWith('gate_motif:')) {
+      const parts = callback.split(':');
+      const decision = parts[1];
+      const gateId = parts.slice(2).join(':');
+      evt.actionId = `${decision}:${gateId}`;
+      evt._motifConfirmed = true;
+      evt.payload = { reason: String(evt.payload.fields?.reason ?? '').trim() };
+    }
+
+    const res = await ctx.connectorService.handleInteraction(evt);
+
+    if (res.type === 'modal') {
+      const action = String(evt.actionId || '');
+      const decision = action.startsWith('reject:') ? 'reject' : action.startsWith('revise:') ? 'revise' : null;
+      const gateId = decision ? action.slice(decision.length + 1) : null;
+      const modal = ctx.discordAdapter.renderModalData({
+        title: decision === 'reject' ? 'Motif du refus (obligatoire)' : 'Motif de la revision',
+        custom_id: `gate_motif:${decision}:${gateId ?? 'g'}`,
+        fields: [{ id: 'reason', label: 'Motif (obligatoire)', multiline: true, required: true }],
+      });
+      return reply.code(200).send({ type: 9, data: modal });
+    }
+    if (res.type === 'ack') return reply.code(200).send({ type: 4, data: { content: res.text ?? 'OK' } });
+    if (res.type === 'ephemeral') {
+      return reply.code(200).send({ type: 4, data: { content: res.text ?? '', flags: 64 } });
+    }
+
+    try {
+      const om = await ctx.discordAdapter.openModal(evt.payload?.interactionToken || '', res.view);
+      return reply.code(200).send(om.response ?? { type: 4, data: { content: '' } });
+    } catch {
+      return reply.code(200).send({ type: 4, data: { content: '' } });
+    }
   });
 
   app.post('/v1/connectors/link', async (req, reply) => {
