@@ -644,4 +644,79 @@ export default async function portfolioRoute(app) {
       return { supprimé: true };
     } catch (e) { return reply.code(400).send({ error: e.message }); }
   });
+
+  // Etape 3 — Construire Collision Mode (EF-06/F3-F7) : bisociation gouvernee.
+  app.post('/v1/ideas/:id/collision', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      concepts: z.array(z.object({
+        id: z.string().optional(), nom: z.string().optional(), tags: z.array(z.string()).optional().default([]),
+      })).optional().default([]),
+      plancher: z.number().min(0).max(100).optional(),
+      scores: z.array(z.object({
+        de: z.string(), vers: z.string(), proposition: z.string().optional(), faisabilite: z.number().min(0).max(100).optional(),
+      })).optional().default([]),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    try {
+      const { runCollisionMode, rapportCollision } = await import('../../../core/index.mjs');
+      let concepts = parsed.data.concepts;
+      if (!concepts.length) concepts = (idea.construire?.canvas?.noeuds ?? idea.construire?.noeuds ?? []).map((n) => ({ id: n.id, nom: n.nom, tags: [] }));
+      if (!concepts.length) concepts = (idea.cartographie?.tendances ?? []).map((t) => ({ id: t.id, nom: t.nom, tags: t.tags }));
+      if (!concepts.length) return reply.code(400).send({ error: 'concepts requis : fournir des concepts ou composer un canvas/sélection Cartographier' });
+      const historique = idea.construire?.collisions ?? [];
+      const { collisions, totalCollisions, ts } = runCollisionMode(concepts, {
+        reseau: idea.cartographie ? { noeuds: idea.cartographie.tendances, aretes: idea.cartographie.aretes } : null,
+        historique,
+        plancher: parsed.data.plancher,
+        proposant: me.email,
+        ts: new Date().toISOString(),
+      });
+      // Apport LLM/humain (Synthesizer/Bisociateur) : proposition + faisabilite importees.
+      for (const sc of parsed.data.scores) {
+        const c = collisions.find((x) => x.concepts.includes(sc.de) && x.concepts.includes(sc.vers));
+        if (!c) continue;
+        if (sc.proposition != null) c.proposition = sc.proposition;
+        if (sc.faisabilite != null) {
+          const { scoreCollision } = await import('../../../core/index.mjs');
+          Object.assign(c, scoreCollision({ ...c, faisabilite: sc.faisabilite }, { distance: c.nouveaute }));
+        }
+      }
+      collisions.sort((a, b) => (b.score ?? b.nouveaute) - (a.score ?? a.nouveaute));
+      const out = { ...idea, construire: { ...(idea.construire ?? { noeuds: [], ponts: [], scenarios: [] }), collisions: [...historique, ...collisions] }, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'construire.collision', by: me.email, ideaId: idea.id, paires: collisions.length });
+      return { collisions, totalCollisions, totalDistantes: concepts.length, ts, ...rapportCollision(out.construire.collisions ?? []) };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/collision', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportCollision } = await import('../../../core/index.mjs');
+    return rapportCollision(idea.construire?.collisions ?? []);
+  });
+
+  app.post('/v1/ideas/:id/collision/selection', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({ collisionIds: z.array(z.string()) }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'collisionIds requis', issues: parsed.error.issues });
+    const historique = idea.construire?.collisions ?? [];
+    const candidates = historique.filter((c) => parsed.data.collisionIds.includes(c.id));
+    if (!candidates.length) return reply.code(400).send({ error: 'aucune collision sélectionnée' });
+    const out = { ...idea, construire: { ...(idea.construire ?? { noeuds: [], ponts: [], scenarios: [] }), selectionCollisions: candidates.map((c) => c.id) }, updatedAt: new Date().toISOString() };
+    await ctx.ideas.save(out);
+    ctx.journal({ type: 'construire.collision.select', by: me.email, ideaId: idea.id, collisionIds: candidates.map((c) => c.id) });
+    return { selection: candidates.map((c) => c.id) };
+  });
 }

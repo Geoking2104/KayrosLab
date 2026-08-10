@@ -269,11 +269,11 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > **Critères.** *Étant donné* un réseau, *quand* je sélectionne des nœuds, *alors* je peux les envoyer à l'étape Construire.
 > *Étant donné* des clusters distants, *quand* les ponts sont suggérés, *alors* chaque pont expose nouveauté (déterministe) + justification, et son score n'est calculé (nouveauté × plausibilité) que si la plausibilité est fournie.
 
-### Étape 3 — Construire 🟢 *(EF-05 définitif — canvas)*
+### Étape 3 — Construire 🟢 *(EF-05/EF-06 définitifs — canvas + collision mode)*
 
 **Objectif.** Générer des scénarios candidats et un brief structuré.
 **Agents.** Planner, Synthesizer, Bisociateur (Collision Mode). **Censeurs.** Expert métier (**consulté / veto conditionnel**).
-**Statut.** 🟢 Canvas de scénario éditable (`construire.mjs` : `canvasConstruire`, `addScenario`, `updateScenario`, `removeScenario`, `rapportConstruire` — initialisé depuis la sélection Cartographier F6). 🟠 Collision Mode (démo). 🔵 Génération assistée LLM réel.
+**Statut.** 🟢 Canvas de scénario éditable (`construire.mjs` : `canvasConstruire`, `addScenario`, `updateScenario`, `removeScenario`, `rapportConstruire` — initialisé depuis la sélection Cartographier F6). 🟢 Collision Mode (`collision.mjs` : paires de concepts distants, score nouveauté × faisabilité). 🔵 Génération assistée LLM réel.
 
 **Fonctionnalités détaillées.**
 
@@ -288,12 +288,13 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 | F7 | Traçabilité | Chaque idée bisociative ajoutée ⇒ timeline horodatée + mémoire. |
 
 - **EF-05 (🟢)** Composer un scénario à partir de signaux/tendances (canvas éditable).
-- **EF-06 (🟠→🔵)** Lancer un **Collision Mode** produisant des idées originales par bisociation.
+- **EF-06 (🟢)** Lancer un **Collision Mode** produisant des idées originales par bisociation.
 - **EF-07 (🔵)** Produire un **brief structuré** exportable.
 
 > **US-03.** En tant que **stratège**, je veux **assembler des scénarios et déclencher une collision créative** afin d'**obtenir des options non triviales**.
 > **Critères.** *Étant donné* un canvas non vide, *quand* je lance Collision Mode, *alors* au moins une idée bisociative est ajoutée à la timeline et tracée.
 > *Étant donné* la sélection Cartographier (nœuds/ponts), *quand* j'initialise le canvas, *alors* les nœuds/ponts y sont reportés ; je peux composer (POST), éditer (PATCH) et retirer (DELETE) des scénarios typés (rupture/prudente/optimiste), chaque opération étant horodatée et journalisée.
+> *Étant donné* des concepts (canvas ou tendances), *quand* je lance Collision Mode, *alors* les paires **distantes** (≥ plancher, jamais déjà liées par le réseau ou l'historique) sont proposées triées par nouveauté ; chaque paire expose `nouveaute` (déterministe) et son score (nouveauté × faisabilité) n'est calculé **que si la faisabilité est fournie** (LLM/humain, jamais devinée) ; la **sélection** des collisions est mémorisée et journalisée (`construire.collision.select`).
 
 ### Étape 4 — Éprouver
 
@@ -1136,7 +1137,7 @@ KayrosLab est installable comme une application de bureau.
 |---|---|---|---|
 | EF-01/02 | Écouter / scoring signaux | 🟢 / 🔵 | Scoring LLM expliqué |
 | EF-03/04 | Cartographier / ponts | 🟢 / 🟢 | Ponts auto (bisociation) |
-| EF-05/06/07 | Construire / collision / brief | 🟢 / 🟠 / 🔵 | Génération LLM + brief export |
+| EF-05/06/07 | Construire / collision / brief | 🟢 / 🟢 / 🔵 | Génération LLM + brief export |
 | EF-08→11 | Éprouver / délégation / Red Team / KI | 🟠 / 🟢 | Red Team réelle + rapport |
 | EF-12→14 | Arbitrer / PDF / vote / décision | 🟢 / 🔵 | Vote multi-critères tracé |
 | EF-15/16 | Orchestration | ❌ | Plan-and-Solve + ReAct |

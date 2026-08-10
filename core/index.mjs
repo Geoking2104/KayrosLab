@@ -29,6 +29,7 @@ export * from './arbitrage.mjs';
 export * from './ecouter.mjs';
 export * from './cartographier.mjs';
 export * from './construire.mjs';
+export * from './collision.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';

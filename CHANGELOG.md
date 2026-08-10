@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.23.0 (2026-08) — Étape 3 · Construire (Collision Mode EF-06)
+
+- **`core/collision.mjs`** (nouveau) — `distanceConcepts` (distance réelle par partage de tags, jaccard), `idCollision` (id stable par paire triée), `normalizeCollision` (2 concepts requis, faisabilité clampée 0–100), `scoreCollision` (**nouveauté × faisabilité / 100, `null` sans faisabilité**), `runCollisionMode` (paires ≥ plancher 60, ignore arêtes du réseau + historique déjà collisionné, tri par score, `generer()` importe proposition/faisabilité), `addCollision` (timeline append-only horodatée + signée, dédup), `rapportCollision` (comptages réels). La faisabilité est **importée** (LLM/humain), jamais devinée.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/collision` (concepts depuis body ou canvas/`cartographie.tendances`, plancher, `scores[]` d'apport, persiste `construire.collisions`, `construire.collision`), `GET .../collision` (rapport), `POST .../collision/selection` (mémorise `construire.selectionCollisions`, `construire.collision.select`).
+- **Tests** — `core/collision.test.mjs` (8) + `backend/fastify/tests/portfolio.collision.test.mjs` (5).
+- **Spécifications** — EF-06 🟢 implémenté (§4.5 TECHNIQUES, US-03 enrichi) ; Étape 3 Construire désormais **🟢 définitive**.
+
 ## v0.22.0 (2026-08) — Étape 3 · Construire (canvas de scénario EF-05)
 
 - **`core/construire.mjs`** (nouveau) — `canvasConstruire` (init depuis la sélection Cartographier F6 : noeuds/ponts/ts), `addScenario`/`updateScenario`/`removeScenario` (CRUD immuable, dédup par `idScenario`, re-normalisation au merge), `rapportConstruire` (comptages réels par type rupture/prudente/optimiste). Le moteur valide et aggrège ; le contenu reste fourni par l'utilisateur ou le Synthesizer LLM.

@@ -200,7 +200,7 @@ flowchart LR
 | 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
 | 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals | **Étape 1 🟢 définitive** (EF-01/02) : `POST/GET /v1/ideas/:id/signals` (score expliqué 0–100) + `/promote` + `/noise` |
 | 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges | **Étape 2 🟢 définitive** (EF-03/04) : `POST/GET /v1/ideas/:id/tendances` (réseau + centralité + tensions) + `/ponts` (nouveauté × plausibilité, jamais inventée) + `/selection` → Construire |
-| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses | **Étape 3 EF-05 🟢** : canvas éditable `POST/GET /v1/ideas/:id/scenarios` + `/canvas` + `PATCH/DELETE .../scenarios/:id` (init depuis la sélection Cartographier) |
+| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses | **Étape 3 🟢 définitive** (EF-05/06) : canvas éditable `POST/GET /v1/ideas/:id/scenarios` + `/canvas` + `PATCH/DELETE .../scenarios/:id` (init depuis la sélection Cartographier) + Collision Mode `POST/GET /v1/ideas/:id/collision` (+ `/selection`) : paires distantes, score nouveauté × faisabilité jamais inventée |
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
 | 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision | **Étape 5 🟢 définitive** (EF-13/14) : WG vote (`/working-group`, `/gates/:id/votes`) + synthèse COMEX `GET /v1/ideas/:id/arbitrage` + journal immuable `GET /v1/ideas/:id/decisions` |
