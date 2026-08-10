@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.21.0 (2026-08) — Étape 2 · Cartographier (réseau & ponts de bisociation, EF-03/EF-04)
+
+- **`core/cartographier.mjs`** (nouveau) — `normalizeTendance`/`idTendance` (id stable → déduplication), `buildReseau` (nœuds + arêtes typées corrélation/causalité/opposition dédupliquées), `centralite` (pivots F3), `zonesTension` (F4), `horizonEffectif` court/moyen/long (F5, jamais deviné), `distanceClusters` (distance réelle par partage de tags), `dejaLie`, `suggestPonts` (EF-04 : paires distantes non reliées, nouveauté déterministe + justification), `scorePont` (nouveauté × plausibilité / 100, **`null` sans plausibilité**), `sendNetworkSelectionToScenario` (F6) et `rapportCartographie`.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST/GET /v1/ideas/:id/tendances` (construction du réseau + rapport ; sans liste, depuis les signaux qualifiés d'Écouter ; événement `carto.build`), `POST .../tendances/ponts` (suggestions EF-04 + scoring sur plausibilité, `carto.ponts`), `POST .../tendances/selection` (payload → Construire F6, `carto.selection`).
+- **Tests** — `core/cartographier.test.mjs` (11) + `backend/fastify/tests/portfolio.cartographier.test.mjs` (6).
+- **Spécifications** — EF-03/EF-04 marqués 🟢 ; Étape 2 Cartographier désormais **🟢 définitive**.
+
 ## v0.20.0 (2026-08) — Étape 1 · Écouter (signaux faibles, EF-01/EF-02)
 
 - **`core/ecouter.mjs`** (nouveau) — `normalizeSignal`/`idSignal` (id canonique → déduplication), `freshnessScore` (décroissance exponentielle déterministe, demi-vie 90 j), `scoreSignal` (note 0–100 pondérée : pertinence 50% · fraîcheur 25% · impact 25%, dimensions + raisons traçables), `reductionBruit` (masquage réversible) + `renderNoiseReduction`, `promoteSignal` (qualification horodatée + signée), `clusterSignals` (tags/source) et `rapportEcoute`.

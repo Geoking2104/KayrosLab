@@ -244,11 +244,11 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > *Étant donné* une liste de signaux, *quand* j'en promeus un, *alors* il rejoint la liste des signaux qualifiés avec horodatage.
 > *Étant donné* un signal qualifié, *quand* le scoring LLM est activé, *alors* un score et sa justification s'affichent.
 
-### Étape 2 — Cartographier
+### Étape 2 — Cartographier 🟢 *(définitive)*
 
 **Objectif.** Construire le réseau de tendances et repérer les ponts stratégiques.
 **Agents.** Planner, Bisociateur (ponts). **Censeurs.** Expert métier (consulté).
-**Statut.** 🟢 Réseau de tendances (`renderTrendNetwork`), sélection et envoi vers le scénario (`sendNetworkSelectionToScenario`).
+**Statut.** 🟢 Réseau de tendances (`buildReseau`, `centralite`, `zonesTension`, `horizonEffectif`), ponts de bisociation (`suggestPonts`, `scorePont` = nouveauté × plausibilité, jamais inventée), sélection et envoi vers le scénario (`sendNetworkSelectionToScenario`). La nouveauté d'un pont est calculée depuis la distance réelle des clusters ; la plausibilité reste fournie par le LLM/humain. Agent Bisociateur existant (`bisociator-agent`, collision mode) fournit la plausibilité.
 
 **Fonctionnalités détaillées.**
 
@@ -263,10 +263,11 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 | F7 | Recall mémoire | Réutilise les signaux qualifiés d'Écouter via recall vectoriel (`ideaId`). |
 
 - **EF-03 (🟢)** Visualiser les relations entre tendances et sélectionner des nœuds.
-- **EF-04 (🔵)** Suggestion automatique de ponts non-évidents (bisociation) entre clusters distants.
+- **EF-04 (🟢)** Suggestion automatique de ponts non-évidents (bisociation) entre clusters distants.
 
 > **US-02.** En tant que **facilitateur**, je veux **visualiser les liens entre tendances** afin d'**identifier des opportunités de croisement**.
 > **Critères.** *Étant donné* un réseau, *quand* je sélectionne des nœuds, *alors* je peux les envoyer à l'étape Construire.
+> *Étant donné* des clusters distants, *quand* les ponts sont suggérés, *alors* chaque pont expose nouveauté (déterministe) + justification, et son score n'est calculé (nouveauté × plausibilité) que si la plausibilité est fournie.
 
 ### Étape 3 — Construire
 
@@ -1133,7 +1134,7 @@ KayrosLab est installable comme une application de bureau.
 | EF | Fonction | Existant | Cible |
 |---|---|---|---|
 | EF-01/02 | Écouter / scoring signaux | 🟢 / 🔵 | Scoring LLM expliqué |
-| EF-03/04 | Cartographier / ponts | 🟢 / 🔵 | Ponts auto (bisociation) |
+| EF-03/04 | Cartographier / ponts | 🟢 / 🟢 | Ponts auto (bisociation) |
 | EF-05/06/07 | Construire / collision / brief | 🟢 / 🟠 / 🔵 | Génération LLM + brief export |
 | EF-08→11 | Éprouver / délégation / Red Team / KI | 🟠 / 🟢 | Red Team réelle + rapport |
 | EF-12→14 | Arbitrer / PDF / vote / décision | 🟢 / 🔵 | Vote multi-critères tracé |

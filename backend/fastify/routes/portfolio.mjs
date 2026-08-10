@@ -454,4 +454,102 @@ export default async function portfolioRoute(app) {
     const rapport = rapportEcoute(idea.signals ?? [], { seuil: parsed.data.seuil });
     return { seuil: parsed.data.seuil, ...rapport };
   });
+
+  // Etape 2 — Cartographier (EF-03/EF-04) : reseau de tendances + ponts de bisociation.
+  app.post('/v1/ideas/:id/tendances', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      tendances: z.array(z.object({
+        nom: z.string(), description: z.string().optional(), horizon: z.enum(['court', 'moyen', 'long']).optional(), tags: z.array(z.string()).optional().default([]),
+      })).optional().default([]),
+      aretes: z.array(z.object({ de: z.string(), vers: z.string(), type: z.string().optional().default('correlation') })).optional().default([]),
+      ponts: z.array(z.object({ de: z.string(), vers: z.string(), plausibilite: z.number().min(0).max(100).optional() })).optional().default([]),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'tendances requises', issues: parsed.error.issues });
+    try {
+      const { buildReseau, suggestPonts, rapportCartographie, scorePont } = await import('../../../core/index.mjs');
+      let tendances = parsed.data.tendances;
+      if (!tendances.length) {
+        tendances = (idea.signals ?? []).filter((s) => s.qualifie).map((s, i) => ({
+          nom: s.contenu.length > 80 ? `${s.contenu.slice(0, 80)}…` : s.contenu,
+          tags: s.tags,
+          source: `signal:${s.id}`,
+        }));
+      }
+      const reseau = buildReseau(tendances, parsed.data.aretes);
+      const suggestions = suggestPonts(reseau.noeuds, { reseau });
+      const pontsImportes = parsed.data.ponts.map((p) => {
+        const s = suggestions.find((x) => (x.de === p.de && x.vers === p.vers) || (x.de === p.vers && x.vers === p.de));
+        if (!s) return null;
+        return scorePont(s, { plausibilite: p.plausibilite });
+      }).filter(Boolean);
+      const rapport = rapportCartographie(reseau, { ponts: [...pontsImportes, ...suggestions] });
+      const out = { ...idea, cartographie: { tendances: reseau.noeuds, aretes: reseau.aretes, ponts: rapport.ponts }, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'carto.build', by: me.email, ideaId: idea.id, noeuds: reseau.noeuds.length, aretes: reseau.aretes.length, ponts: rapport.ponts.length });
+      return { ...rapport, rendu: `Réseau : ${rapport.totalNoeuds} tendance(s), ${rapport.totalAretes} lien(s), ${rapport.ponts.length} pont(s) de bisociation.` };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/tendances', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportCartographie } = await import('../../../core/index.mjs');
+    if (!idea.cartographie) return { reseau: { noeuds: [], aretes: [] }, centralite: { degres: {}, pivots: [] }, zonesTension: [], ponts: [], totalNoeuds: 0, totalAretes: 0 };
+    const reseau = { noeuds: idea.cartographie.tendances, aretes: idea.cartographie.aretes };
+    return rapportCartographie(reseau, { ponts: idea.cartographie.ponts });
+  });
+
+  app.post('/v1/ideas/:id/tendances/ponts', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.cartographie) return reply.code(404).send({ error: 'réseau non construit' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      plausibilite: z.array(z.object({ de: z.string(), vers: z.string(), valeur: z.number().min(0).max(100) })).optional().default([]),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    const { suggestPonts, scorePont } = await import('../../../core/index.mjs');
+    const reseau = { noeuds: idea.cartographie.tendances, aretes: idea.cartographie.aretes };
+    let ponts = suggestPonts(reseau.noeuds, { reseau, plausibilite: null });
+    for (const p of parsed.data.plausibilite) {
+      const idx = ponts.findIndex((x) => (x.de === p.de && x.vers === p.vers) || (x.de === p.vers && x.vers === p.de));
+      if (idx >= 0) ponts[idx] = scorePont(ponts[idx], { plausibilite: p.valeur });
+    }
+    ponts = ponts.sort((a, b) => (b.score ?? b.nouveaute) - (a.score ?? a.nouveaute));
+    const out = { ...idea, cartographie: { ...idea.cartographie, ponts }, updatedAt: new Date().toISOString() };
+    await ctx.ideas.save(out);
+    ctx.journal({ type: 'carto.ponts', by: me.email, ideaId: idea.id, ponts: ponts.length });
+    return { ponts, rendu: `${ponts.length} pont(s) de bisociation — fournir la plausibilité pour scorer (nouveauté × plausibilité).` };
+  });
+
+  app.post('/v1/ideas/:id/tendances/selection', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.cartographie) return reply.code(404).send({ error: 'réseau non construit' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      noeuds: z.array(z.string()).optional().default([]),
+      ponts: z.array(z.string()).optional().default([]),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    const { sendNetworkSelectionToScenario } = await import('../../../core/index.mjs');
+    const noeuds = idea.cartographie.tendances.filter((t) => parsed.data.noeuds.includes(t.id));
+    const ponts = idea.cartographie.ponts.filter((p) => parsed.data.ponts.includes(p.id));
+    const { payload } = sendNetworkSelectionToScenario({ noeuds, ponts });
+    const out = { ...idea, cartographie: { ...idea.cartographie, selection: payload }, updatedAt: new Date().toISOString() };
+    await ctx.ideas.save(out);
+    ctx.journal({ type: 'carto.selection', by: me.email, ideaId: idea.id, noeuds: noeuds.length, ponts: ponts.length });
+    return { selection: payload };
+  });
 }

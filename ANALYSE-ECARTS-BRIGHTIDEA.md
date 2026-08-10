@@ -158,6 +158,8 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 
 **Étape 1 Écouter 🟢.** La réduction de bruit est en place (`core/ecouter.mjs`, API `/v1/ideas/:id/signals`) : ingestion multi-source normalisée (id canonique = déduplication naturelle), **scoring expliqué** (EF-02 : fraîcheur calculée par décroissance exponentielle déterministe, pertinence/impact importés du LLM, note 0–100 avec dimensions + raisons), masquage réversible sous seuil, et **promotion en signal qualifié** horodatée et signée (EF-01), persistée et journalisée.
 
+**Étape 2 Cartographier 🟢.** Le réseau de tendances est en place (`core/cartographier.mjs`, API `/v1/ideas/:id/tendances`) : construction du réseau (nœuds normalisés + arêtes typées corrélation/causalité/opposition dédupliquées), **centralité** (pivots à fort pouvoir structurant), **zones de tension** (oppositions → fertiles pour l'idéation), **horizon temporel** court/moyen/long (jamais deviné), et **ponts de bisociation** (EF-04 : paires de clusters distants non reliées, nouveauté déterministe + justification ; le score nouveauté × plausibilité n'est calculé **que si la plausibilité est fournie** par le LLM/humain). La **sélection de nœuds/ponts** est transmissible à Construire (EF-03/F6, payload structuré).
+
 **Recommandation.** Créer une **étape 0 « Recueillir »** (ou une porte d'entrée d'Écouter) : formulaire structuré reprenant le canevas Brightidea (valeur, problème, ressources, parties prenantes, risques, équipe). Ces champs alimenteraient directement les hypothèses de *Construire* et les cibles d'attaque d'*Éprouver* — synergie forte avec l'existant.
 
 ---

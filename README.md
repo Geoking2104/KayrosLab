@@ -199,7 +199,7 @@ flowchart LR
 |---|---|---|---|---|
 | 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
 | 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals | **Étape 1 🟢 définitive** (EF-01/02) : `POST/GET /v1/ideas/:id/signals` (score expliqué 0–100) + `/promote` + `/noise` |
-| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges |
+| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges | **Étape 2 🟢 définitive** (EF-03/04) : `POST/GET /v1/ideas/:id/tendances` (réseau + centralité + tensions) + `/ponts` (nouveauté × plausibilité, jamais inventée) + `/selection` → Construire |
 | 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |

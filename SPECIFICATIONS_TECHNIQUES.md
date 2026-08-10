@@ -221,6 +221,13 @@ interface ToolRegistry {
 - **Promotion (EF-01/F6).** `promoteSignal` — signal qualifié horodaté + signé (auteur), porté par `idea.signals[]` et journalisé (`ecouter.promote`). API `POST /v1/ideas/:id/signals/promote`.
 - **Clustering (F3/F7).** `clusterSignals` — regroupement par tag (ou source) préparant Cartographier ; `rapportEcoute` synthétise réduction + clusters + rendu (API `GET /v1/ideas/:id/signals`).
 
+### 4.4 Étape Cartographier — réseau & ponts de bisociation (EF-03/EF-04 🟢 implémentés)
+
+- **Réseau de tendances (F1/EF-03).** `core/cartographier.mjs` — `normalizeTendance`/`idTendance` (id stable par nom → déduplication), `buildReseau` (nœuds normalisés + arêtes typées `correlation|causalite|opposition` validées et dédupliquées par id canonique `de|type|vers`), `centralite` (degré + pivots), `zonesTension` (arêtes d'opposition), `horizonEffectif` (renseigné > dérivé d'une date > `null`). API `POST /v1/ideas/:id/tendances` (construit + persiste `idea.cartographie` + journalise `carto.build` ; sans liste, construit depuis les signaux qualifiés d'Écouter) et `GET /v1/ideas/:id/tendances` (rapport agrégé).
+- **Ponts de bisociation (EF-04/F2).** `suggestPonts` — paires de clusters **distants** (`distanceClusters`, partage de tags réel, seuil `plancher`), jamais déjà reliées (`dejaLie`) ; `nouveaute` = distance déterministe, `justification` explicite, `plausibilite` importée du LLM/humain. `scorePont` calcule nouveauté × plausibilité / 100, **`null` si la plausibilité est absente** (jamais inventée). API `POST /v1/ideas/:id/tendances/ponts` (suggestions ; avec `plausibilite[]` → scoring + persistance + `carto.ponts`).
+- **Sélection → Construire (F6).** `sendNetworkSelectionToScenario` — payload structuré `{ destination: 'construire', noeuds[], ponts[], ts }`. API `POST /v1/ideas/:id/tendances/selection` (persiste `idea.cartographie.selection` + `carto.selection`).
+- **Plausibilité LLM.** L'agent Bisociateur existant (`core/agents/bisociator-agent.mjs`, collision mode, sortie `structured.collision`) est le fournisseur naturel de la plausibilité des ponts ; sans son apport, les ponts restent affichés non scorés.
+
 ---
 
 ## 5. Abstraction LLM (`KayrosLLM`)
