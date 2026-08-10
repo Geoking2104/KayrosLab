@@ -1,0 +1,43 @@
+name: Backend tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/fastify/tests/**'
+      - 'backend/fastify/lib/**'
+      - 'backend/fastify/routes/**'
+      - 'backend/fastify/plugins/**'
+      - 'backend/fastify/package.json'
+      - 'backend/fastify/package-lock.json'
+      - 'core/connectors.mjs'
+      - 'core/connectors-teams-deep.mjs'
+      - 'core/connectors-discord-deep.mjs'
+      - 'core/connectors-slack-deep.mjs'
+      - 'core/governance.mjs'
+      - 'core/auth.mjs'
+      - '.github/workflows/backend-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/fastify/tests/**'
+      - 'backend/fastify/lib/**'
+      - 'backend/fastify/routes/**'
+      - 'backend/fastify/plugins/**'
+      - 'backend/fastify/package.json'
+      - '.github/workflows/backend-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install backend dependencies
+        working-directory: backend/fastify
+        run: npm ci
+      - name: Run backend test suite
+        working-directory: backend/fastify
+        run: npm test
