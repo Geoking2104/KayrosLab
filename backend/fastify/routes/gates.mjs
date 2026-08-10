@@ -137,7 +137,15 @@ export default async function gatesRoute(app) {
           reason: reason || decision,
         });
         if (changed) {
-          await ctx.ideas.save(idea);
+          const { recordDecision } = await import('../../../core/index.mjs');
+          const avecDecision = recordDecision(idea, {
+            decision,
+            by: me.email,
+            role: me.role,
+            reason: reason || decision,
+            gateId: resolution.gateId,
+          });
+          await ctx.ideas.save(avecDecision);
           ideaOut = {
             id: idea.id,
             stage: idea.stage,

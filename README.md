@@ -203,7 +203,7 @@ flowchart LR
 | 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
-| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
+| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision | **Étape 5 🟢 définitive** (EF-13/14) : WG vote (`/working-group`, `/gates/:id/votes`) + synthèse COMEX `GET /v1/ideas/:id/arbitrage` + journal immuable `GET /v1/ideas/:id/decisions` |
 | 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop | **Étape 6 🟢 complète** (EF-39→45) : `POST/GET /v1/ideas/:id/roadmap`, `.../risques`, `.../capitalisation`, `.../gates-futurs` (+`/materialise`) |
 | 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + impact | `POST/PATCH/GET /v1/ideas/:id/execution` (EF-80→83 🟢) + `POST .../execution/monitor` (EF-43 🟢 : seuils KPI + dérive → signal → gate `re_arbitrage`) |
 

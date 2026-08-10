@@ -206,6 +206,13 @@ interface ToolRegistry {
 - **Boucle Projeter → Écouter (EF-43).** Moteur `core/loop.mjs` (`evaluateKpis`/`alertsToSignals`/`evaluateKpisWithDrift` + `MonitoringLoop`) + `core/kpi-drift.mjs` ; exposé par `POST /v1/ideas/:id/execution/monitor` : relève les KPIs constatés en Réaliser (`idea.impact.releves`), évalue seuils et dérive, persiste `idea.loop`, journalise `loop.monitor`/`loop.alert` et ouvre un gate `re_arbitrage` COMEX si un signal est produit. La lecture d'exécution passe par `GET /v1/ideas/:id/execution` (execution + progression + rapport d'impact). Rend le processus continu et apprenant.
 - **Portée décisionnelle.** `Go` → roadmap + suivi ; `No-Go` → dossier de capitalisation (`Capitalisation = { apprentissages[], réactivation, signaux[] }`) ; `Révision` → note conditionnelle renvoyée à Éprouver.
 
+### 4.2 Étape Arbitrer — synthèse & décision tracée (EF-13/14 🟢 implémentés)
+
+- **Vote multi-critères (EF-13).** `core/working-group.mjs` — `createWorkingGroup` (membres + quorum), `wgAggregateVotes` (agrégation pondérée par rôle via `evaluation.aggregateVotes`, recommandation Go/No-Go/Révision), `wgDecision`. Le vote du Working Group est un **conseil instructif** ; la décision finale reste une résolution formelle via `GovernanceService` (RBAC, veto). API `POST /v1/ideas/:id/working-group` + `POST/GET /v1/gates/:gateId/votes`.
+- **Synthèse d'arbitrage (F1).** `core/arbitrage.mjs` → `buildSyntheseArbitrage` compose un dossier pour l'arbitre COMEX à partir de **données réelles uniquement** : recommandation du groupe de travail (ou `null`), red flags dérivés de la matrice de risques (niveaux critique/élevé), projection Monte-Carlo existante, gates en attente et journal des décisions. API `GET /v1/ideas/:id/arbitrage`.
+- **Décision tracée immuable (EF-14).** `core/arbitrage.mjs` → `recordDecision` ajoute une décision Go/No-Go/Révision horodatée, signée (auteur + rôle) et séquencée au journal append-only `idea.decisions` ; `decisionsTimeline`/`lastDecision` lisent le journal en copies immuables. La résolution d'un gate (`POST /v1/gates/:gateId/resolve`) alimente le journal à chaque décision. API `GET /v1/ideas/:id/decisions` (journal + dernière décision).
+- **Traçabilité.** Les décisions sont simultanément journalisées dans le journal d'audit persistant (`gate.resolved`, EF-32) et portées par l'idée ; la justification (F7) est consignée dans chaque enregistrement (`reason`).
+
 ---
 
 ## 5. Abstraction LLM (`KayrosLLM`)

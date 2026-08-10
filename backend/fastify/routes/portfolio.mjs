@@ -342,4 +342,35 @@ export default async function portfolioRoute(app) {
       return { materialises, status: gatesFutursStatus(roadmap.gatesFuturs) };
     } catch (e) { return reply.code(400).send({ error: e.message }); }
   });
+
+  // Synthese d'arbitrage (Etape 5, F1) : dossier consolide pour l'arbitre COMEX.
+  app.get('/v1/ideas/:id/arbitrage', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { buildSyntheseArbitrage } = await import('../../../core/index.mjs');
+    const wg = ctx.workingGroups.get(idea.id);
+    const wgAggregat = wg ? ctx.workingGroups.aggregate(idea.id) : null;
+    const enAttente = ctx.governance.list().filter((g) => g.ideaId === idea.id && !g.resolvedAt);
+    const synthèse = buildSyntheseArbitrage({
+      idea,
+      wgAggregat,
+      risques: idea.roadmap?.risques ?? [],
+      projection: idea.projection ?? null,
+      pendingGates: enAttente,
+    });
+    return synthèse;
+  });
+
+  // Journal des decisions Go/No-Go/Revision (EF-14) : immuable, horodate, signe.
+  app.get('/v1/ideas/:id/decisions', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { decisionsTimeline, lastDecision } = await import('../../../core/index.mjs');
+    const decisions = decisionsTimeline(idea);
+    return { decisions, count: decisions.length, derniere: lastDecision(idea) };
+  });
 }

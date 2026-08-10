@@ -322,11 +322,11 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > **Critères.** *Étant donné* une idée en Étape 4, *quand* une attaque est marquée « critique », *alors* la transition vers Étape 5 est **bloquée** jusqu'à correction ou levée de veto.
 > *Étant donné* une délégation externe, *quand* la réponse arrive, *alors* l'appel est historisé (modèle, tokens in/out, coût).
 
-### Étape 5 — Arbitrer
+### Étape 5 — Arbitrer 🟢 *(définitive)*
 
 **Objectif.** Challenge humain final, décision, livrable (Gantt, PDF).
 **Agents.** Synthesizer. **Censeurs.** **Arbitre / COMEX (approbateur + veto)**.
-**Statut.** 🟢 Livrables + génération PDF + ROI + délivrance (`generateIdeaPdf`, `openDeliveryModal`, `updateRoiCalculations`). 🔵 Vote multi-critères formalisé + décision tracée.
+**Statut.** 🟢 Livrables + génération PDF + ROI + délivrance (`generateIdeaPdf`, `openDeliveryModal`, `updateRoiCalculations`) + vote multi-critères formalisé + décision tracée (synthèse d'arbitrage + journal append-only).
 
 **Fonctionnalités détaillées.**
 
@@ -341,8 +341,8 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 | F7 | Justification | Motif de décision consigné. |
 
 - **EF-12 (🟢)** Générer un livrable (PDF) et un récapitulatif ROI de l'idée.
-- **EF-13 (🔵)** Vote multi-critères (Working Group) débouchant sur une décision **Go / No-Go / Révision**.
-- **EF-14 (🔵)** La décision et son auteur humain sont horodatés et immuables dans la timeline.
+- **EF-13 (🟢)** Vote multi-critères (Working Group) débouchant sur une décision **Go / No-Go / Révision**.
+- **EF-14 (🟢)** La décision et son auteur humain sont horodatés et immuables dans la timeline (journal append-only `idea.decisions` + audit `gate.resolved`).
 
 > **US-05.** En tant qu'**arbitre COMEX**, je veux **trancher sur la base d'une synthèse tracée** afin d'**assumer une décision auditable**.
 > **Critères.** *Étant donné* une idée éprouvée, *quand* je vote « No-Go » ou « Révision », *alors* l'idée n'est pas restituée en sortie et la raison est journalisée.

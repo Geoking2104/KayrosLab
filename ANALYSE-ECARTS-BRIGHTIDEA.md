@@ -345,6 +345,8 @@ Le menu *Setup* révèle la profondeur de la plateforme :
 
 **Analyse.** Notre étape **Projeter** est désormais **complète** (EF-39→45 🟢) : roadmap + ressources/budget + projections probabilisées Monte-Carlo, matrice de risques (EF-42), boucle Projeter → Écouter (EF-43 : seuils KPI + dérive → signal → gate `re_arbitrage`), capitalisation No-Go (EF-44, idées dormantes reactivables) et jalons de gouvernance futurs (EF-45 : gates COMEX datés, matérialisés à échéance) — le tout tracé par le journal d'audit persistant (EF-32). Le différenciateur « projeté → réalisé » est en place ; reste le reporting d'impact en continu côté connecteurs.
 
+**Étape 5 Arbitrer 🟢.** La **synthèse d'arbitrage** (F1) compose désormais un dossier COMEX à partir de données réelles uniquement (`GET /v1/ideas/:id/arbitrage` : recommandation du groupe de travail, red flags de la matrice de risques, projection, gates en attente), le **vote multi-critères** est formalisé (EF-13, Working Group quorum + pondération par rôle, consultatif) et la **décision est tracée et immuable** (EF-14 : journal append-only `idea.decisions` horodaté et signé par l'auteur, alimenté à chaque résolution de gate, exposé par `GET /v1/ideas/:id/decisions`).
+
 ---
 
 ### O. Engagement & vie sociale 🔴

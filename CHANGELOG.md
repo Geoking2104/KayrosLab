@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.19.0 (2026-08) — Étape 5 · Arbitrer (synthèse COMEX + décision tracée EF-13/14)
+
+- **`core/arbitrage.mjs`** (nouveau) — `recordDecision` (journal append-only Go/No-Go/Révision horodaté + signé, séquencé), `decisionsTimeline`, `lastDecision`, `buildSyntheseArbitrage` (dossier F1 composé de données réelles : recommandation WG, red flags de la matrice de risques, projection, gates en attente, journal).
+- **`backend/fastify/routes/portfolio.mjs`** — `GET /v1/ideas/:id/arbitrage` (synthèse d'arbitrage F1) + `GET /v1/ideas/:id/decisions` (journal EF-14).
+- **`backend/fastify/routes/gates.mjs`** — la résolution de gate (`POST /v1/gates/:gateId/resolve`) alimente désormais le journal `idea.decisions` (décision + auteur + rôle + motif + gateId + horodatage) en plus de l'audit `gate.resolved`.
+- **Tests** — `core/arbitrage.test.mjs` (8) + `backend/fastify/tests/portfolio.arbitrage.test.mjs` (4).
+- **Spécifications** — EF-13/EF-14 marqués 🟢 ; Étape 5 Arbitrer désormais **🟢 définitive**.
+
 ## v0.18.5 (2026-08) — EF-45 · Jalons de gouvernance futurs (gates COMEX datés)
 
 - **`core/gates-futurs.mjs`** (nouveau) — `normalizeFuturGate`, `setGatesFuturs`, `gatesFutursStatus` (à venir / dus / matérialisés), `dueGates`, `materialiserGate`.
