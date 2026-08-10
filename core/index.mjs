@@ -24,6 +24,7 @@ export * from './projection.mjs';
 export * from './roadmap.mjs';
 export * from './risques.mjs';
 export * from './capitalisation.mjs';
+export * from './gates-futurs.mjs';
 export * from './loop.mjs';
 export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';

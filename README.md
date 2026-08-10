@@ -204,7 +204,7 @@ flowchart LR
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
 | 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
-| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop | `POST/GET /v1/ideas/:id/roadmap` (EF-39/40/41 🟢 : roadmap + Monte-Carlo déterministe + rapport d'impact tracé) + `POST/GET /v1/ideas/:id/risques` (EF-42 🟢 : matrice 5×5 + gate `re_arbitrage`) + `POST/GET /v1/ideas/:id/capitalisation` (EF-44 🟢 : dossier No-Go + réactivation) |
+| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop | **Étape 6 🟢 complète** (EF-39→45) : `POST/GET /v1/ideas/:id/roadmap`, `.../risques`, `.../capitalisation`, `.../gates-futurs` (+`/materialise`) |
 | 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + impact | `POST/PATCH/GET /v1/ideas/:id/execution` (EF-80→83 🟢) + `POST .../execution/monitor` (EF-43 🟢 : seuils KPI + dérive → signal → gate `re_arbitrage`) |
 
 **Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via `POST /v1/cycle/reactivate`.

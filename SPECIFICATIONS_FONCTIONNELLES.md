@@ -347,12 +347,12 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > **US-05.** En tant qu'**arbitre COMEX**, je veux **trancher sur la base d'une synthèse tracée** afin d'**assumer une décision auditable**.
 > **Critères.** *Étant donné* une idée éprouvée, *quand* je vote « No-Go » ou « Révision », *alors* l'idée n'est pas restituée en sortie et la raison est journalisée.
 
-### Étape 6 — Projeter 🟡 *(API roadmap + projections définitive)*
+### Étape 6 — Projeter 🟢 *(définitive)*
 
 **Objectif.** Transformer **toute décision** d'Arbitrer (Go / No-Go / Révision) en **trajectoire pilotée et prospective probabilisée**, avec allocation de ressources, puis **reboucler automatiquement** sur Écouter.
 **Agents.** Planner (roadmap/ressources), Synthesizer (récit/projection), Red Team (scénario adverse projeté), Critic (stress de trajectoire). **Censeurs.** COMEX (roadmap, budget, gates), Facilitateur (RACI).
 **Entrées.** Décision + livrable + KI figé + red flags (Arbitrer). **Sorties.** *(Go)* `roadmap{jalons, RACI, ressources, budget, KPIs, risquesProbabilisés, gatesFuturs}` + `projections{scénariosPondérés, P10/P50/P90, valeurAttendue}` ; *(No-Go)* `capitalisation{apprentissages, réactivation, signaux}`.
-**Statut.** 🟡 Partiellement cible — EF-39/40/41/42/43/44 implémentés : API `POST/GET /v1/ideas/:id/roadmap` (calculs déterministes + journal d'audit persistant via EF-32), matrice de risques EF-42 (`POST/GET /v1/ideas/:id/risques`), boucle monitor EF-43 (`POST /v1/ideas/:id/execution/monitor`), capitalisation No-Go EF-44 (`POST/GET /v1/ideas/:id/capitalisation`). EF-45 restant ciblé.
+**Statut.** 🟢 Définitive — EF-39/40/41 (roadmap + projections déterministes), EF-42 (matrice de risques), EF-43 (boucle monitor), EF-44 (capitalisation No-Go), EF-45 (gates futurs) tous implémentés et couverts par les tests, journal d'audit persistant via EF-32.
 
 **Portée selon la décision.** **Go** → roadmap + ressources/budget + suivi + projections probabilistes. **No-Go** → capitalisation (apprentissages archivés, conditions de réactivation, signaux à re-surveiller). **Révision** → note de trajectoire conditionnelle renvoyée à Éprouver.
 
@@ -379,7 +379,7 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 - **EF-42 (🟢)** Maintenir une **matrice de risques** (probabilité × impact) avec déclencheurs de re-arbitrage. *Implémentation : `core/risques.mjs` (score déterministe, niveaux faible→critique, matrice 5×5) + `POST/GET /v1/ideas/:id/risques` (add/update/remove, gate `re_arbitrage` si seuil franchi, événements `risque.*` tracés).*
 - **EF-43 (🟢)** **Reboucler automatiquement** vers Écouter : les KPIs de suivi ré-alimentent le corpus via tâche planifiée. *Implémentation : `POST /v1/ideas/:id/execution/monitor` (seuils + dérive KPI, ré-injection signaux, proposition gate `re_arbitrage`, événements `loop.monitor`/`loop.alert` tracés).*
 - **EF-44 (🟢)** Sur décision **No-Go**, produire un **dossier de capitalisation** (apprentissages, conditions de réactivation). *Implémentation : `core/capitalisation.mjs` (dossier structuré + vérif. conditions de réactivation) + `POST/GET /v1/ideas/:id/capitalisation` (persistance sur idée `non_poursuivi`, événement `capitalisation.build` tracé).*
-- **EF-45 (🔵)** Planifier des **jalons de gouvernance futurs** (gates COMEX datés).
+- **EF-45 (🟢)** Planifier des **jalons de gouvernance futurs** (gates COMEX datés). *Implémentation : `core/gates-futurs.mjs` (planification datée, statut du/à venir/materialisé) + `POST/GET /v1/ideas/:id/gates-futurs` + `POST .../gates-futurs/materialise` (ouverture de vrais gates COMEX à échéance, événements `gatesfuturs.*` tracés).*
 
 > **US-06.** En tant que **porteur de projet**, je veux **transformer une décision en trajectoire pilotée et probabilisée** afin de **piloter l'exécution et déclencher un re-arbitrage au bon moment**.
 > **Critères.**

@@ -286,4 +286,60 @@ export default async function portfolioRoute(app) {
       reactivation: reactivationReady(idea.capitalisation, { contexteSignaux: signaux }),
     };
   });
+
+  // Jalons de gouvernance futurs (EF-45) : gates COMEX dates.
+  app.post('/v1/ideas/:id/gates-futurs', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      gates: z.array(z.object({
+        id: z.string().optional(), libelle: z.string(), date: z.string(),
+        type: z.string().optional(), requiredRole: z.string().optional(), questions: z.array(z.string()).optional(),
+      })),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'gates futurs requis (libelle + date)', issues: parsed.error.issues });
+    try {
+      const { setGatesFuturs, gatesFutursStatus } = await import('../../../core/index.mjs');
+      const roadmap = setGatesFuturs(idea.roadmap ?? {}, parsed.data.gates);
+      const out = { ...idea, roadmap, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'gatesfuturs.plan', by: me.email, ideaId: idea.id, gates: roadmap.gatesFuturs.length });
+      const status = gatesFutursStatus(roadmap.gatesFuturs);
+      return { gatesFuturs: roadmap.gatesFuturs, status };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/gates-futurs', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { gatesFutursStatus } = await import('../../../core/index.mjs');
+    return { gatesFuturs: idea.roadmap?.gatesFuturs ?? [], status: gatesFutursStatus(idea.roadmap?.gatesFuturs ?? []) };
+  });
+
+  app.post('/v1/ideas/:id/gates-futurs/materialise', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    try {
+      const { dueGates, materialiserGate, gatesFutursStatus } = await import('../../../core/index.mjs');
+      const gates = idea.roadmap?.gatesFuturs ?? [];
+      const dus = dueGates(gates);
+      const materialises = dus.map((g) => {
+        const { gateId } = ctx.governance.open({ ideaId: idea.id, type: g.type, requiredRole: g.requiredRole, payload: g.questions.length ? `${g.libelle} — ${g.questions.join(' ; ')}` : g.libelle });
+        return materialiserGate(g, { gateId });
+      });
+      const byId = new Map(materialises.map((m) => [m.id, m]));
+      const roadmap = { ...(idea.roadmap ?? {}), gatesFuturs: gates.map((g) => byId.get(g.id) ?? g) };
+      const out = { ...idea, roadmap, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      if (materialises.length) ctx.journal({ type: 'gatesfuturs.materialise', by: me.email, ideaId: idea.id, gates: materialises.map((m) => m.id), gateIds: materialises.map((m) => m.materialise.gateId) });
+      return { materialises, status: gatesFutursStatus(roadmap.gatesFuturs) };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
 }

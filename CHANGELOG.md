@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.18.5 (2026-08) — EF-45 · Jalons de gouvernance futurs (gates COMEX datés)
+
+- **`core/gates-futurs.mjs`** (nouveau) — `normalizeFuturGate`, `setGatesFuturs`, `gatesFutursStatus` (à venir / dus / matérialisés), `dueGates`, `materialiserGate`.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST/GET /v1/ideas/:id/gates-futurs` (planification datée dans la roadmap) + `POST .../gates-futurs/materialise` (ouvre de vrais gates COMEX à échéance via GovernanceService, événements `gatesfuturs.plan|materialise`).
+- **Tests** — `core/gates-futurs.test.mjs` (5) + `backend/fastify/tests/portfolio.gates-futurs.test.mjs` (3).
+- **Spécifications** — EF-45 marqué 🟢 ; Étape 6 Projeter désormais **🟢 définitive** (EF-39→45 tous implémentés).
+
 ## v0.18.4 (2026-08) — EF-44 · Capitalisation No-Go
 
 - **`core/capitalisation.mjs`** (nouveau) — `buildCapitalisation` (dossier structuré : apprentissages, conditions de réactivation, signaux), `addApprentissage`, `reactivationReady` (conditions satisfaites face aux signaux constatés), `resumeCapitalisation`.
