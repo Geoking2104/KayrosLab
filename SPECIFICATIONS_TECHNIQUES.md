@@ -228,6 +228,11 @@ interface ToolRegistry {
 - **Sélection → Construire (F6).** `sendNetworkSelectionToScenario` — payload structuré `{ destination: 'construire', noeuds[], ponts[], ts }`. API `POST /v1/ideas/:id/tendances/selection` (persiste `idea.cartographie.selection` + `carto.selection`).
 - **Plausibilité LLM.** L'agent Bisociateur existant (`core/agents/bisociator-agent.mjs`, collision mode, sortie `structured.collision`) est le fournisseur naturel de la plausibilité des ponts ; sans son apport, les ponts restent affichés non scorés.
 
+### 4.5 Étape Construire — canvas de scénario (EF-05/F1 🟢 implémenté)
+
+- **Canvas éditable (EF-05/F1).** `core/construire.mjs` — `canvasConstruire` (initialise le canvas depuis le payload de sélection Cartographier F6 `{ noeuds[], ponts[], ts }`), `addScenario`/`updateScenario`/`removeScenario` (CRUD immuable, déduplication par `idScenario` stable au nom, re-normalisation au merge), `rapportConstruire` (comptages réels : noeuds/ponts/scénarios + répartition par type). Types de scénarios : `rupture|prudente|optimiste`. Le moteur valide et aggrège ; le contenu (texte, type) reste fourni par l'utilisateur ou le Synthesizer LLM.
+- **API.** `POST /v1/ideas/:id/scenarios/canvas` (init depuis `idea.cartographie.selection`, événement `construire.canvas`), `GET /v1/ideas/:id/scenarios` (rapport), `POST /v1/ideas/:id/scenarios` (composer, `construire.add`), `PATCH .../scenarios/:scenarioId` (éditer, `construire.update`), `DELETE .../scenarios/:scenarioId` (retirer, `construire.remove`). État persisté sur l'idée (`idea.construire`).
+
 ---
 
 ## 5. Abstraction LLM (`KayrosLLM`)

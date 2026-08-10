@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.22.0 (2026-08) — Étape 3 · Construire (canvas de scénario EF-05)
+
+- **`core/construire.mjs`** (nouveau) — `canvasConstruire` (init depuis la sélection Cartographier F6 : noeuds/ponts/ts), `addScenario`/`updateScenario`/`removeScenario` (CRUD immuable, dédup par `idScenario`, re-normalisation au merge), `rapportConstruire` (comptages réels par type rupture/prudente/optimiste). Le moteur valide et aggrège ; le contenu reste fourni par l'utilisateur ou le Synthesizer LLM.
+- **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/scenarios/canvas` (init depuis `cartographie.selection`, `construire.canvas`), `GET .../scenarios` (rapport), `POST .../scenarios` (composer, `construire.add`), `PATCH .../scenarios/:scenarioId` (éditer, `construire.update`), `DELETE .../scenarios/:scenarioId` (retirer, `construire.remove`). État persisté sur `idea.construire`.
+- **Tests** — `core/construire.test.mjs` (7) + `backend/fastify/tests/portfolio.construire.test.mjs` (6).
+- **Spécifications** — EF-05 🟢 implémenté (§4.5 TECHNIQUES, US-03 enrichi).
+
 ## v0.21.0 (2026-08) — Étape 2 · Cartographier (réseau & ponts de bisociation, EF-03/EF-04)
 
 - **`core/cartographier.mjs`** (nouveau) — `normalizeTendance`/`idTendance` (id stable → déduplication), `buildReseau` (nœuds + arêtes typées corrélation/causalité/opposition dédupliquées), `centralite` (pivots F3), `zonesTension` (F4), `horizonEffectif` court/moyen/long (F5, jamais deviné), `distanceClusters` (distance réelle par partage de tags), `dejaLie`, `suggestPonts` (EF-04 : paires distantes non reliées, nouveauté déterministe + justification), `scorePont` (nouveauté × plausibilité / 100, **`null` sans plausibilité**), `sendNetworkSelectionToScenario` (F6) et `rapportCartographie`.

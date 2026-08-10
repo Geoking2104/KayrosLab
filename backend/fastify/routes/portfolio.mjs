@@ -552,4 +552,96 @@ export default async function portfolioRoute(app) {
     ctx.journal({ type: 'carto.selection', by: me.email, ideaId: idea.id, noeuds: noeuds.length, ponts: ponts.length });
     return { selection: payload };
   });
+
+  // Etape 3 — Construire (EF-05 / F1) : canvas de scenario editable.
+  app.post('/v1/ideas/:id/scenarios/canvas', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      noeuds: z.array(z.any()).optional().default([]),
+      ponts: z.array(z.any()).optional().default([]),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    const { canvasConstruire, rapportConstruire } = await import('../../../core/index.mjs');
+    const selection = idea.cartographie?.selection ?? null;
+    const canvas = { ...canvasConstruire(selection, { noeuds: parsed.data.noeuds, ponts: parsed.data.ponts }), scenarios: idea.construire?.scenarios ?? [] };
+    const out = { ...idea, construire: canvas, updatedAt: new Date().toISOString() };
+    await ctx.ideas.save(out);
+    ctx.journal({ type: 'construire.canvas', by: me.email, ideaId: idea.id, noeuds: canvas.noeuds.length, ponts: canvas.ponts.length });
+    return { ...rapportConstruire(out.construire), rendu: `Canvas initialisé depuis ${selection ? 'la sélection Cartographier' : 'les entrées fournies'}.` };
+  });
+
+  app.get('/v1/ideas/:id/scenarios', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportConstruire } = await import('../../../core/index.mjs');
+    if (!idea.construire) return { canvas: { noeuds: [], ponts: [] }, scenarios: [], totalScenarios: 0, totalNoeuds: 0, totalPonts: 0, types: [], rendu: 'Canvas vide : composer un scénario ou initialiser le canvas.' };
+    return rapportConstruire(idea.construire);
+  });
+
+  app.post('/v1/ideas/:id/scenarios', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const parsed = z.object({
+      scenario: z.object({
+        nom: z.string(), type: z.enum(['rupture', 'prudente', 'optimiste']).optional(),
+        description: z.string().optional(), probleme: z.string().optional(), proposition: z.string().optional(), cible: z.string().optional(),
+        hypotheses: z.array(z.string()).optional().default([]), metriques: z.array(z.string()).optional().default([]),
+        noeuds: z.array(z.string()).optional().default([]), ponts: z.array(z.string()).optional().default([]),
+      }),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'scenario requis (nom)', issues: parsed.error.issues });
+    try {
+      const { canvasConstruire, addScenario, rapportConstruire } = await import('../../../core/index.mjs');
+      const base = idea.construire ?? { ...canvasConstruire(idea.cartographie?.selection ?? null), scenarios: [] };
+      const { canvas, scenario } = addScenario(base, parsed.data.scenario);
+      const out = { ...idea, construire: canvas, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'construire.add', by: me.email, ideaId: idea.id, scenarioId: scenario.id, scenarioType: scenario.type ?? null });
+      return { scenario, ...rapportConstruire(canvas) };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.patch('/v1/ideas/:id/scenarios/:scenarioId', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.construire) return reply.code(404).send({ error: 'canvas non initialisé' });
+    const { z } = await import('zod');
+    const parsed = z.object({ scenario: z.object({}).passthrough() }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'patch scenario requis', issues: parsed.error.issues });
+    try {
+      const { updateScenario } = await import('../../../core/index.mjs');
+      const { canvas, scenario } = updateScenario(idea.construire, req.params.scenarioId, parsed.data.scenario);
+      const out = { ...idea, construire: canvas, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'construire.update', by: me.email, ideaId: idea.id, scenarioId: scenario.id });
+      return { scenario };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.delete('/v1/ideas/:id/scenarios/:scenarioId', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    if (!idea.construire) return reply.code(404).send({ error: 'canvas non initialisé' });
+    try {
+      const { removeScenario } = await import('../../../core/index.mjs');
+      const { canvas } = removeScenario(idea.construire, req.params.scenarioId);
+      const out = { ...idea, construire: canvas, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'construire.remove', by: me.email, ideaId: idea.id, scenarioId: req.params.scenarioId });
+      return { supprimé: true };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
 }

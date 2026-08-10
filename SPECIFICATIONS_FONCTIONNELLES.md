@@ -269,11 +269,11 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 > **Critères.** *Étant donné* un réseau, *quand* je sélectionne des nœuds, *alors* je peux les envoyer à l'étape Construire.
 > *Étant donné* des clusters distants, *quand* les ponts sont suggérés, *alors* chaque pont expose nouveauté (déterministe) + justification, et son score n'est calculé (nouveauté × plausibilité) que si la plausibilité est fournie.
 
-### Étape 3 — Construire
+### Étape 3 — Construire 🟢 *(EF-05 définitif — canvas)*
 
 **Objectif.** Générer des scénarios candidats et un brief structuré.
 **Agents.** Planner, Synthesizer, Bisociateur (Collision Mode). **Censeurs.** Expert métier (**consulté / veto conditionnel**).
-**Statut.** 🟢 Scenario builder, canvas, collider (`renderScenarioBuilder`, `runShowcaseCollision`, `sendScenarioToCollider`). 🟠 Collision Mode (démo). 🔵 Génération assistée LLM réel.
+**Statut.** 🟢 Canvas de scénario éditable (`construire.mjs` : `canvasConstruire`, `addScenario`, `updateScenario`, `removeScenario`, `rapportConstruire` — initialisé depuis la sélection Cartographier F6). 🟠 Collision Mode (démo). 🔵 Génération assistée LLM réel.
 
 **Fonctionnalités détaillées.**
 
@@ -293,6 +293,7 @@ Chaque étape est spécifiée ci-dessous : objectif, **fonctionnalités détaill
 
 > **US-03.** En tant que **stratège**, je veux **assembler des scénarios et déclencher une collision créative** afin d'**obtenir des options non triviales**.
 > **Critères.** *Étant donné* un canvas non vide, *quand* je lance Collision Mode, *alors* au moins une idée bisociative est ajoutée à la timeline et tracée.
+> *Étant donné* la sélection Cartographier (nœuds/ponts), *quand* j'initialise le canvas, *alors* les nœuds/ponts y sont reportés ; je peux composer (POST), éditer (PATCH) et retirer (DELETE) des scénarios typés (rupture/prudente/optimiste), chaque opération étant horodatée et journalisée.
 
 ### Étape 4 — Éprouver
 
