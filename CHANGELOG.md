@@ -59,7 +59,8 @@
 - **`core/working-group.mjs`** — `WorkingGroupStore` + `FileWorkingGroupStore` (membres, quorum par défaut 50%, agrégation rôle-pivot via `ROLE_WEIGHTS`, statut `vide`/`en_attente`/`quorum_ok`, recommandation Go/Révision/No-Go/Attendre quorum).
 - **`backend/fastify/routes/gates.mjs`** — `POST /v1/ideas/:id/working-group` (création WG), `POST /v1/gates/:gateId/votes` (vote membre, 403 non-membre, idempotence), `GET /v1/gates/:gateId/votes` (agregat + participations). La décision reste une resolution RBAC formelle ; le vote WG est consultatif et alimente l'évaluation du gate.
 - **`lib/context.mjs`** — `workingGroups` (store, `KAYROS_WG_FILE` optionnel) exposé dans le contexte.
-- Tests: `working-group.test.mjs` (10) + backend `gates.working-group.test.mjs` (3).
+- Tests: `working-group.test.mjs` (10) + backend `gates.working-group.test.mjs` (5).
+- **Audit WG** — chaque vote WG est journalisé (`wg.vote`) et `POST /v1/gates/:gateId/resolve` journalise `gate.resolved`; `GET /v1/gates/:gateId` expose l'agregat du groupe de travail (participants, quorum, recommandation).
 
 ---
 

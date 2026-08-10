@@ -58,4 +58,21 @@ describe('backend working-group + gate vote flow', () => {
     assert.equal(res.json().participants, 2);
     assert.equal(res.json().eligible, 2);
   });
+
+  it('wg votes are journaled into the audit trail', async () => {
+    const wgVotes = ctx.activites.filter((a) => a.type === 'wg.vote');
+    assert.ok(wgVotes.length >= 2);
+    assert.equal(wgVotes[0].ideaId, ideaId);
+    assert.equal(wgVotes[0].gateId, g1);
+  });
+
+  it('GET /v1/gates/:gateId surfaces the WG agregat', async () => {
+    const res = await app.inject({ method: 'GET', url: `/v1/gates/${g1}`, headers: auth(t1) });
+    assert.equal(res.statusCode, 200);
+    const j = res.json();
+    assert.equal(j.gateId, g1);
+    assert.equal(j.agregat.participants, 2);
+    assert.equal(j.agregat.quorum, true);
+    assert.equal(j.monRole, 'comex');
+  });
 });

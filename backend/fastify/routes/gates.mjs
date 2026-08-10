@@ -85,6 +85,27 @@ export default async function gatesRoute(app) {
     return { ...res, members: ctx.workingGroups.get(rec.ideaId).members.length, participations: ctx.workingGroups.getVotes(rec.ideaId) };
   });
 
+  app.get('/v1/gates/:gateId', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const rec = ctx.governance.list().find((g) => g.gateId === req.params.gateId);
+    if (!rec) return reply.code(404).send({ error: 'gate introuvable' });
+    const idea = rec.ideaId ? await ctx.ideas.get(rec.ideaId) : null;
+    if (idea && (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const wg = ctx.workingGroups.get(rec.ideaId);
+    let agregat = null;
+    if (wg) {
+      const a = ctx.workingGroups.aggregate(rec.ideaId);
+      agregat = a ? { ...a, members: wg.members.length, participations: ctx.workingGroups.getVotes(rec.ideaId) } : null;
+    }
+    return {
+      gateId: rec.gateId, type: rec.type, requiredRole: rec.requiredRole, ideaId: rec.ideaId ?? null,
+      titre: idea?.title ?? rec.payload ?? rec.ideaId, agregat, createdAt: rec.createdAt,
+      ideaStage: idea?.stage ?? null, ideaStatus: idea?.status ?? null,
+      monRole: me.role, pourMoi: rec.requiredRole === me.role,
+    };
+  });
+
   app.post('/v1/gates/:gateId/resolve', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const ctx = app.kayrosContext;
