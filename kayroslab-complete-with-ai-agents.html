@@ -550,8 +550,10 @@ const translations = {
     initial_ki:'KI initial', final_ki:'KI final', human_actions:'Actions humaines',
     initial_context_audit:'Cadre initial et audit utilisateur', result:'Résultat',
     generated:'Généré', decided:'Décidé', user_action_input:'Action et saisie utilisateur',
-    panel_scenarios:'Scenarios a arbitrer',
-    panel_scenarios_hint:'Gardez 1 ou 2 scenarios pour la suite.',
+    panel_scenarios:'Canvas de scénarios',
+    panel_scenarios_hint:'Sélectionnez un scénario, puis éditez ses hypothèses avant de poursuivre.',
+    scenario_name:'Nom', scenario_thesis:'Thèse', scenario_feasibility:'Faisabilité',
+    scenario_horizon:'Horizon', scenario_hypothesis:'Hypothèse réfutable', scenario_first_test:'Premier test',
     panel_risks:'Risques prioritaires (Red Team)',
     panel_risks_hint:'Les kill criteria alimentent le gate humain.',
     panel_decision:'Dossier d arbitrage',
@@ -734,8 +736,10 @@ const translations = {
     initial_ki:'Initial KI', final_ki:'Final KI', human_actions:'Human actions',
     initial_context_audit:'Initial context and user audit', result:'Result',
     generated:'Generated', decided:'Decided', user_action_input:'User action and input',
-    panel_scenarios:'Scenarios to decide on',
-    panel_scenarios_hint:'Keep 1 or 2 scenarios for the next steps.',
+    panel_scenarios:'Scenario canvas',
+    panel_scenarios_hint:'Select a scenario, then edit its assumptions before continuing.',
+    scenario_name:'Name', scenario_thesis:'Thesis', scenario_feasibility:'Feasibility',
+    scenario_horizon:'Timeline', scenario_hypothesis:'Falsifiable hypothesis', scenario_first_test:'First test',
     panel_risks:'Priority risks (Red Team)',
     panel_risks_hint:'Kill criteria feed the human gate.',
     panel_decision:'Arbitration pack',
@@ -783,7 +787,7 @@ const cycleData = [
   { agent:'Trend Mapper', tools:['trend_network_builder()','bisociation_detector()'], gate:{fr:'Direction strategique',en:'Strategic Lead'},
     system:{ fr:'Tu es le Trend Mapper (Cartographier). Style reseau: 3-5 clusters, liens, gaps structurels, noeuds-pont, 2-3 questions. Reponds en francais.', en:'You are Trend Mapper (Map). Network style: 3-5 clusters, links, structural gaps, bridge nodes, 2-3 questions. Answer in English.' } },
   { agent:'Scenario Generator', tools:['scenario_simulator()'], gate:{fr:'Expert metier',en:'Domain Expert'},
-    system:{ fr:'Tu es le Scenario Generator (Construire). 2-3 scenarios GENUNIQUEMENT distincts: nom, these, faisabilite 1-10, horizon, hypothese refutable, premier test. JSON optionnel scenarios[]. Reponds en francais.', en:'You are Scenario Generator (Build). 2-3 GENUINELY distinct scenarios: name, thesis, feasibility 1-10, horizon, falsifiable hypothesis, first test. Optional JSON scenarios[]. Answer in English.' } },
+    system:{ fr:'Tu es le Scenario Generator (Construire). Produis 2-3 scénarios RÉELLEMENT distincts. Retourne UNIQUEMENT un objet JSON valide avec scenarios[] ; chaque scénario contient id, name, thesis, feasibility (entier 1-10), horizon, falsifiable_hypothesis et first_test. Échappe tout guillemet présent dans une valeur JSON. Aucun texte, commentaire ou fence Markdown hors du JSON. Réponds en français.', en:'You are Scenario Generator (Build). Produce 2-3 GENUINELY distinct scenarios. Return ONLY one valid JSON object with scenarios[]; every scenario contains id, name, thesis, feasibility (integer 1-10), horizon, falsifiable_hypothesis, and first_test. Escape any quotation mark inside JSON values. No prose, commentary, or Markdown fences outside the JSON. Answer in English.' } },
   { agent:'Positioner', tools:['gap_analyzer()','ontological_mapper()'], gate:{fr:'Expert marche',en:'Market Expert'},
     system:{ fr:'Tu es le Positionneur. (1) analyse narrative courte ; (2) JSON unique entities/relations/gaps sans markdown. Max 8/10/4. Reponds en francais.', en:'You are Positioner. (1) short narrative; (2) single JSON entities/relations/gaps no markdown. Max 8/10/4. Answer in English.' } },
   { agent:'Red Team', tools:['risk_assessor()','stress_test()'], gate:{fr:'Responsable des risques',en:'Risk Owner'},
@@ -810,7 +814,7 @@ const demoState = {
   originalIdea:'', idea:'', conditions:{}, currentStep:-1, history:[], userActions:[],
   semanticMap:null, selectedSemanticIds:[], semanticRunning:false,
   explorationRounds:[], shortlistedIdeaIds:[], selectedIdea:null, explorationRunning:false,
-  ontologyMap:null, selectedOntologyGapIds:[],
+  ontologyMap:null, selectedOntologyGapIds:[], scenariosMap:null,
   isRunning:false, ki:3.5, kiHistory:[3.5],
   currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null,
   language:currentLang
@@ -935,10 +939,13 @@ function recordUserAction(action, stepIdx, note, detailsKey){
 }
 function saveStepResult(decision, humanNote, kiBefore, kiAfter){
   const stepIdx=demoState.currentStep, meta=stepMeta[stepIdx];
-  const output=(demoState.currentOutput||stripHtml(document.getElementById('generated-content').innerHTML)||'').trim();
+  const scenariosMap=stepIdx===2&&demoState.scenariosMap
+    ?JSON.parse(JSON.stringify(demoState.scenariosMap)):null;
+  const output=(scenariosMap?JSON.stringify(scenariosMap):demoState.currentOutput||stripHtml(document.getElementById('generated-content').innerHTML)||'').trim();
   demoState.history.push({
     stepIdx, step:stepLabel(stepIdx,cycleLanguage()), agent:agentLabel(stepIdx,cycleLanguage()), decision,
     output, summary:output.replace(/\s+/g,' ').substring(0,180),
+    scenariosMap,
     humanNote:humanNote||null,
     generatedAt:demoState.currentOutputGeneratedAt,
     decidedAt:new Date().toISOString(),
@@ -1003,13 +1010,61 @@ function tryParseJson(text){
   try { return {ok:true,value:JSON.parse(text)}; }
   catch(error){ return {ok:false,error}; }
 }
+function repairMalformedJson(text){
+  let repaired='', inString=false, escaped=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(!inString){
+      repaired+=ch;
+      if(ch==='"') inString=true;
+      continue;
+    }
+    if(escaped){ repaired+=ch; escaped=false; continue; }
+    if(ch==='\\'){ repaired+=ch; escaped=true; continue; }
+    if(ch==='\n'){ repaired+='\\n'; continue; }
+    if(ch.charCodeAt(0)===13){ repaired+=String.fromCharCode(92)+'r'; continue; }
+    if(ch==='\t'){ repaired+='\\t'; continue; }
+    if(ch==='"'){
+      let next=i+1;
+      while(next<text.length&&/\s/.test(text[next])) next++;
+      let structuralEnd=next>=text.length||':}]'.includes(text[next]);
+      if(text[next]===','){
+        let afterComma=next+1;
+        while(afterComma<text.length&&/\s/.test(text[afterComma])) afterComma++;
+        const tail=text.slice(afterComma);
+        const literal=tail.match(/^(?:true|false|null)/);
+        let literalEnd=false;
+        if(literal){
+          let afterLiteral=afterComma+literal[0].length;
+          while(afterLiteral<text.length&&/\s/.test(text[afterLiteral])) afterLiteral++;
+          literalEnd=afterLiteral>=text.length||',}]'.includes(text[afterLiteral]);
+        }
+        structuralEnd=afterComma>=text.length||'"{['.includes(text[afterComma])||/[-0-9]/.test(text[afterComma])||literalEnd;
+      }
+      if(!structuralEnd){
+        repaired+='\\"';
+        continue;
+      }
+      inString=false;
+    }
+    repaired+=ch;
+  }
+  return repaired;
+}
 function extractJsonValue(raw){
   const text=stripJsonFences(raw);
   const direct=tryParseJson(text);
   if(direct.ok) return direct.value;
+  const repairedDirect=tryParseJson(repairMalformedJson(text));
+  if(repairedDirect.ok) return repairedDirect.value;
   const starts=[];
   for(let i=0;i<text.length;i++) if(text[i]==='{'||text[i]==='[') starts.push(i);
   for(const start of starts){
+    const close=text[start]==='{'?'}':']';
+    for(let end=text.lastIndexOf(close);end>start;end=text.lastIndexOf(close,end-1)){
+      const candidate=tryParseJson(repairMalformedJson(text.slice(start,end+1)));
+      if(candidate.ok) return candidate.value;
+    }
     const stack=[], pairs={ '{':'}','[':']' };
     let inString=false, escaped=false;
     for(let i=start;i<text.length;i++){
@@ -2031,31 +2086,67 @@ const STEP_JSON_HINT = {
 function withJsonHint(systemPrompt, stepIdx, lang){
   const hint = STEP_JSON_HINT[stepIdx];
   if(!hint) return systemPrompt;
+  const strict=stepIdx===2;
   const extra = lang==='en'
-    ? '\nIf helpful, end with a single valid JSON object matching: '+hint+'. No markdown fences.'
-    : '\nSi utile, termine par un objet JSON unique valide du schema : '+hint+'. Pas de fences markdown.';
+    ? (strict?'\nMANDATORY OUTPUT: return ONLY one valid JSON object matching: ':'\nIf helpful, end with a single valid JSON object matching: ')+hint+'. No markdown fences.'
+    : (strict?'\nSORTIE OBLIGATOIRE : retourne UNIQUEMENT un objet JSON valide conforme au schéma : ':'\nSi utile, termine par un objet JSON unique valide du schema : ')+hint+'. Pas de fences markdown.';
   return systemPrompt + extra;
 }
 function normalizeScenariosMap(raw){
   const parsed = extractJsonValue(raw);
   const list = Array.isArray(parsed) ? parsed : (parsed.scenarios || parsed.variants || []);
   if(!Array.isArray(list) || list.length < 2) throw new Error('scenarios');
-  return { scenarios: list.slice(0,3).map(function(s,i){
-    return { id:String(s.id||('s'+(i+1))), name:String(s.name||s.title||('Scenario '+(i+1))).trim(),
+  const scenarios=list.slice(0,3).map(function(s,i){
+    return { id:'s'+(i+1), name:String(s.name||s.title||('Scenario '+(i+1))).trim(),
       thesis:String(s.thesis||s.summary||'').trim(), feasibility:Math.max(1,Math.min(10,Number(s.feasibility||s.score||5))),
       horizon:String(s.horizon||'').trim(), falsifiable_hypothesis:String(s.falsifiable_hypothesis||s.hypothesis||'').trim(),
       first_test:String(s.first_test||s.test||'').trim() };
-  })};
+  }).filter(function(s){ return s.name; });
+  if(scenarios.length<2) throw new Error('scenarios');
+  return { scenarios, selectedScenarioId:scenarios[0].id };
 }
 function buildScenariosPanel(map, lang){
-  var h = '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-700 mb-1">'+escapeHtml(t('panel_scenarios',{},lang))+'</p>';
+  var selectedId=map.selectedScenarioId||map.scenarios[0].id;
+  var selected=map.scenarios.find(function(s){return s.id===selectedId;})||map.scenarios[0];
+  map.selectedScenarioId=selected.id;
+  var h = '<div id="scenario-canvas" class="space-y-3" aria-live="polite"><div><p class="text-sm font-semibold text-slate-800">'+escapeHtml(t('panel_scenarios',{},lang))+'</p><p class="text-xs text-slate-500">'+escapeHtml(t('panel_scenarios_hint',{},lang))+'</p></div>';
   h += '<div class="grid sm:grid-cols-3 gap-3">';
   map.scenarios.forEach(function(s){
-    h += '<div class="rounded-xl border border-slate-200 bg-white p-3 text-sm"><div class="flex justify-between mb-1"><span class="font-semibold">'+escapeHtml(s.name)+'</span><span class="text-[10px] font-bold text-sky-700">'+s.feasibility+'/10</span></div>';
-    if(s.thesis) h += '<p class="text-xs text-slate-600">'+escapeHtml(s.thesis)+'</p>';
-    h += '</div>';
+    var active=s.id===selected.id;
+    h += '<button type="button" aria-pressed="'+active+'" data-scenario-id="'+s.id+'" onclick="selectScenario(\''+s.id+'\')" class="rounded-xl border '+(active?'border-sky-500 ring-2 ring-sky-100':'border-slate-200')+' bg-white p-3 text-sm text-left hover:border-sky-300 transition"><div class="flex justify-between gap-2 mb-1"><span data-scenario-name="'+s.id+'" class="font-semibold">'+escapeHtml(s.name)+'</span><span data-scenario-score="'+s.id+'" class="text-[10px] font-bold text-sky-700">'+s.feasibility+'/10</span></div>';
+    h += '<p data-scenario-thesis="'+s.id+'" class="text-xs text-slate-600">'+escapeHtml(s.thesis)+'</p>';
+    h += '</button>';
   });
-  return h+'</div></div>';
+  h += '</div><div data-scenario-editor class="rounded-xl border border-sky-100 bg-sky-50/40 p-4">';
+  h += '<div class="grid sm:grid-cols-[1fr_140px_120px] gap-3">';
+  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_name',{},lang))+'<input value="'+escapeHtml(selected.name)+'" oninput="updateScenarioField(\''+selected.id+'\',\'name\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold"></label>';
+  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_horizon',{},lang))+'<input value="'+escapeHtml(selected.horizon)+'" oninput="updateScenarioField(\''+selected.id+'\',\'horizon\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"></label>';
+  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_feasibility',{},lang))+' <span data-scenario-score-editor>'+selected.feasibility+'/10</span><input type="range" min="1" max="10" value="'+selected.feasibility+'" oninput="updateScenarioField(\''+selected.id+'\',\'feasibility\',this.value)" class="mt-3 w-full accent-sky-600"></label></div>';
+  h += '<label class="block mt-3 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_thesis',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'thesis\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.thesis)+'</textarea></label>';
+  h += '<div class="grid sm:grid-cols-2 gap-3 mt-3"><label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_hypothesis',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'falsifiable_hypothesis\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.falsifiable_hypothesis)+'</textarea></label>';
+  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_first_test',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'first_test\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.first_test)+'</textarea></label></div></div></div>';
+  return h;
+}
+function selectScenario(id){
+  const map=demoState.scenariosMap;
+  if(!map||!map.scenarios.some(function(s){return s.id===id;})) return;
+  map.selectedScenarioId=id;
+  const canvas=document.getElementById('scenario-canvas');
+  if(canvas) canvas.outerHTML=buildScenariosPanel(map,cycleLanguage());
+}
+function updateScenarioField(id,field,value){
+  const map=demoState.scenariosMap;
+  const allowed=['name','thesis','feasibility','horizon','falsifiable_hypothesis','first_test'];
+  if(!map||!allowed.includes(field)) return;
+  const scenario=map.scenarios.find(function(s){return s.id===id;});
+  if(!scenario) return;
+  scenario[field]=field==='feasibility'?Math.max(1,Math.min(10,Number(value)||1)):String(value);
+  if(field==='name'||field==='thesis'){
+    document.querySelectorAll('[data-scenario-'+field+'="'+id+'"]').forEach(function(el){el.textContent=scenario[field];});
+  }
+  if(field==='feasibility'){
+    document.querySelectorAll('[data-scenario-score="'+id+'"], [data-scenario-score-editor]').forEach(function(el){el.textContent=scenario.feasibility+'/10';});
+  }
 }
 function normalizeRiskMap(raw){
   const parsed = extractJsonValue(raw);
@@ -2110,6 +2201,12 @@ function buildUserPrompt(idea, cond, notes, lang) {
   if(cond.notes) parts.push(t('prompt_notes',{},lang)+' : '+cond.notes);
   if(parts.length) p += t('prompt_constraints',{},lang)+' :\n'+parts.join('\n')+'\n\n';
   if(notes&&notes.length) p += t('prompt_human_notes',{},lang)+' :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
+  if(demoState.currentStep>2&&demoState.scenariosMap){
+    p += (lang==='en'
+      ? 'Scenario context selected and edited during Build'
+      : 'Contexte de scénarios sélectionné et édité pendant la phase Construire')+' :\n';
+    p += JSON.stringify(demoState.scenariosMap)+'\n\n';
+  }
   // Inject selected ontology gaps so later agents must account for them
   if(demoState.selectedOntologyGapIds && demoState.selectedOntologyGapIds.length && demoState.ontologyMap){
     const gaps = (demoState.ontologyMap.gaps||[]).filter(g=>demoState.selectedOntologyGapIds.includes(g.id));
@@ -2138,6 +2235,7 @@ async function runStep(stepIdx) {
   if (demoState.isRunning) return;
   demoState.isRunning = true;
   demoState.currentStep = stepIdx;
+  if (stepIdx === 2) demoState.scenariosMap = null;
   const meta = stepMeta[stepIdx], data = cycleData[stepIdx];
   const lang=cycleLanguage(), gate=data.gate[lang]||data.gate.fr;
 
@@ -2165,7 +2263,7 @@ async function runStep(stepIdx) {
       try {
         const smap = normalizeScenariosMap(raw);
         demoState.scenariosMap = smap;
-        contentHtml += buildScenariosPanel(smap, lang);
+        contentHtml = buildScenariosPanel(smap, lang);
         log('Scenarios: '+smap.scenarios.length, 'success');
       } catch (serr) {
         contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200 text-xs text-amber-700 bg-amber-50 rounded-lg p-3">'+escapeHtml(t('panel_no_json',{},lang))+'</div>';
