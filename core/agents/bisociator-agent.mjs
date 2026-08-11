@@ -32,6 +32,15 @@ const ANALOGY_FRAMEWORKS = [
   },
 ];
 
+function correlationFrom(ctx) {
+  return {
+    runId: ctx.runId || ctx.run_id,
+    run_id: ctx.runId || ctx.run_id,
+    traceId: ctx.traceId || ctx.trace_id,
+    trace_id: ctx.traceId || ctx.trace_id,
+  };
+}
+
 export class BisociateurAgent extends BaseAgent {
   constructor(opts = {}) {
     super({
@@ -67,6 +76,7 @@ export class BisociateurAgent extends BaseAgent {
   }
 
   async runBisociation(brief, ctx = {}) {
+    const correlation = correlationFrom(ctx);
     const framework = this._selectFramework(brief);
     const domain = { name: framework.name, mechanism: framework.mechanism, source: framework.name };
 
@@ -93,8 +103,9 @@ export class BisociateurAgent extends BaseAgent {
           messages,
           temperature: 0.7,
           model: this._resolveModel(ctx.model),
+          ...correlation,
         },
-        { provider: ctx.provider, sovereignty: ctx.sovereignty },
+        { provider: ctx.provider, sovereignty: ctx.sovereignty, ...correlation },
       );
       collisionOutput = res.text;
       degraded = res.degraded || null;
@@ -181,6 +192,7 @@ export class BisociateurAgent extends BaseAgent {
   }
 
   async _generateWithFramework(brief, framework, ctx = {}) {
+    const correlation = correlationFrom(ctx);
     const domain = { name: framework.name, mechanism: framework.mechanism, source: framework.name };
     let collisionOutput;
     let degraded = null;
@@ -203,8 +215,9 @@ export class BisociateurAgent extends BaseAgent {
           messages,
           temperature: 0.75,
           model: this._resolveModel(ctx.model),
+          ...correlation,
         },
-        { provider: ctx.provider, sovereignty: ctx.sovereignty },
+        { provider: ctx.provider, sovereignty: ctx.sovereignty, ...correlation },
       );
       collisionOutput = res.text;
       degraded = res.degraded || null;

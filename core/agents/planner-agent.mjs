@@ -28,8 +28,16 @@ export class PlannerAgent extends BaseAgent {
     this._toolNames = [];
   }
 
-  async createPlan(goal, { provider, sovereignty, model, llmPlan } = {}) {
+  async createPlan(goal, {
+    provider, sovereignty, model, llmPlan, runId, run_id, traceId, trace_id,
+  } = {}) {
     if (llmPlan === false) return this._fallbackPlan();
+    const correlation = {
+      runId: runId || run_id,
+      run_id: runId || run_id,
+      traceId: traceId || trace_id,
+      trace_id: traceId || trace_id,
+    };
 
     const messages = [
       { role: 'system', content: this.systemPrompt },
@@ -45,8 +53,9 @@ export class PlannerAgent extends BaseAgent {
           temperature: 0.2,
           think: false,
           model: this._resolveModel(model),
+          ...correlation,
         },
-        { provider, sovereignty },
+        { provider, sovereignty, ...correlation },
       );
       // Planner itself is rarely a step agent; allow specialist set + optional Planner
       const steps = parsePlanSteps(res.text, {

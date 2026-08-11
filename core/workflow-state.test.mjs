@@ -5,6 +5,10 @@ import * as coreApi from './index.mjs';
 import { collect } from './orchestrator.mjs';
 import { runP1Hooks } from './run-hooks-p1.mjs';
 import {
+  BisociateurAgent, CriticAgent, DevilsAdvocateAgent, PlannerAgent,
+  RedTeamAgent, SynthesizerAgent,
+} from './agents/index.mjs';
+import {
   applyWorkflowEvent,
   createWorkflowState,
   validateWorkflowState,
@@ -281,6 +285,53 @@ test('Orchestrator passes the same correlation identifiers to every agent call',
     assert.equal(received[role].traceId, plan.traceId, role);
     assert.equal(received[role].run_id, plan.run_id, role);
     assert.equal(received[role].trace_id, plan.trace_id, role);
+  }
+});
+
+test('Planner, specialist and synthesizer forward correlation to their LLM calls', async () => {
+  const calls = [];
+  const llm = {
+    async complete(request, options) {
+      calls.push({ request, options });
+      if (request.role === 'Planner') {
+        return { text: '[{"agent":"Critic","description":"Review"},{"agent":"Synthesizer","description":"Synthesize"}]' };
+      }
+      return { text: request.role === 'Synthesizer' ? 'Decision: Revise' : 'Critical analysis' };
+    },
+  };
+  const correlation = {
+    runId: 'run-llm-boundary', run_id: 'run-llm-boundary',
+    traceId: 'trace-llm-boundary', trace_id: 'trace-llm-boundary',
+  };
+  const snakeCaseOnly = {
+    run_id: correlation.run_id,
+    trace_id: correlation.trace_id,
+  };
+
+  await new PlannerAgent({ llm }).createPlan('Planifier', snakeCaseOnly);
+  for (const Agent of [CriticAgent, DevilsAdvocateAgent, RedTeamAgent]) {
+    await new Agent({ llm }).execute('Analyser', { goal: 'Tester', ...snakeCaseOnly });
+  }
+  const bisociator = new BisociateurAgent({ llm });
+  await bisociator.execute('Créer une collision', { goal: 'Tester', ...snakeCaseOnly });
+  await bisociator.runMultiCollision('Tester', snakeCaseOnly, { k: 2 });
+  await new SynthesizerAgent({ llm }).synthesize([
+    { agent: 'Critic', output: 'Observation' },
+  ], snakeCaseOnly);
+
+  assert.deepEqual(calls.map(({ request }) => request.role), [
+    'Planner', 'Critic', 'DevilsAdvocate', 'RedTeam',
+    'Bisociateur', 'Bisociateur', 'Bisociateur', 'Synthesizer',
+  ]);
+  for (const call of calls) {
+    assert.deepEqual({
+      runId: call.request.runId, run_id: call.request.run_id,
+      traceId: call.request.traceId, trace_id: call.request.trace_id,
+    }, correlation);
+    assert.deepEqual({
+      runId: call.options.runId, run_id: call.options.run_id,
+      traceId: call.options.traceId, trace_id: call.options.trace_id,
+    }, correlation);
   }
 });
 

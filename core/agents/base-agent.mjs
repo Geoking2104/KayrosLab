@@ -35,7 +35,15 @@ export class BaseAgent {
     return model || this.preferredModel || undefined;
   }
 
-  async execute(task, { goal, context = '', provider, sovereignty, model } = {}) {
+  async execute(task, {
+    goal, context = '', provider, sovereignty, model, runId, run_id, traceId, trace_id,
+  } = {}) {
+    const correlation = {
+      runId: runId || run_id,
+      run_id: runId || run_id,
+      traceId: traceId || trace_id,
+      trace_id: traceId || trace_id,
+    };
     const messages = [
       { role: 'system', content: this.systemPrompt },
     ];
@@ -46,8 +54,11 @@ export class BaseAgent {
     let degraded = null;
     if (this.llm) {
       const res = await this.llm.complete(
-        { role: this.name, messages, model: this._resolveModel(model), temperature: 0.3 },
-        { provider, sovereignty },
+        {
+          role: this.name, messages, model: this._resolveModel(model), temperature: 0.3,
+          ...correlation,
+        },
+        { provider, sovereignty, ...correlation },
       );
       text = res.text;
       degraded = res.degraded || null;

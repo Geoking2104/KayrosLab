@@ -37,7 +37,7 @@ jobs:
           node-version: '20'
       - name: Install backend dependencies
         working-directory: backend/fastify
-        run: npm ci
+        run: npm install --no-package-lock --ignore-scripts
       - name: Run backend test suite
         working-directory: backend/fastify
         run: npm test

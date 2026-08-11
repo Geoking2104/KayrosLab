@@ -26,11 +26,28 @@ fi
 
 # ── Dependances (inclut pg) ──────────────────────────────────────────────────
 cd "${BACKEND_DIR}"
-if [[ -f package-lock.json ]]; then
-  npm ci --omit=dev
-else
-  npm install --omit=dev
+worktree=""
+if ! worktree=$(git -C "${APP_DIR}" rev-parse --is-inside-work-tree 2>/dev/null) || [[ "${worktree}" != "true" ]]; then
+  echo "ERREUR : ${APP_DIR} n'est pas un dépôt Git lisible; installation interrompue." >&2
+  exit 1
 fi
+lock_status=0
+git -C "${APP_DIR}" ls-files --error-unmatch backend/fastify/package-lock.json >/dev/null 2>&1 || lock_status=$?
+case "${lock_status}" in
+  0)
+    npm ci --omit=dev
+    ;;
+  1)
+    # Le dépôt ne versionne pas de lockfile Fastify. Supprimer une ancienne copie
+    # locale afin qu'elle ne rende pas npm install incohérent sur le VPS.
+    rm -f package-lock.json
+    npm install --omit=dev --no-package-lock
+    ;;
+  *)
+    echo "ERREUR : impossible de déterminer si package-lock.json est versionné (git=${lock_status})." >&2
+    exit "${lock_status}"
+    ;;
+esac
 
 # ── Postgres schema (idempotent) si DATABASE_URL present ─────────────────────
 DB_URL=""

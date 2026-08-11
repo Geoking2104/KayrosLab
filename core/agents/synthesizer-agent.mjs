@@ -18,6 +18,12 @@ export class SynthesizerAgent extends BaseAgent {
   }
 
   async synthesize(agentOutputs = [], ctx = {}) {
+    const correlation = {
+      runId: ctx.runId || ctx.run_id,
+      run_id: ctx.runId || ctx.run_id,
+      traceId: ctx.traceId || ctx.trace_id,
+      trace_id: ctx.traceId || ctx.trace_id,
+    };
     const contributions = agentOutputs.map((o) => `[${o.agent}]\n${o.output}`).join('\n\n---\n\n');
     const task = `Synthesize the following multi-agent analyses into a decision-ready recommendation:\n\n${contributions}`;
 
@@ -34,8 +40,9 @@ export class SynthesizerAgent extends BaseAgent {
           messages,
           temperature: 0.2,
           model: this._resolveModel(ctx.model),
+          ...correlation,
         },
-        { provider: ctx.provider, sovereignty: ctx.sovereignty },
+        { provider: ctx.provider, sovereignty: ctx.sovereignty, ...correlation },
       );
       text = res.text;
       degraded = res.degraded || null;
