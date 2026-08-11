@@ -28,7 +28,8 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--color-accent-soft);border-top-color:var(--color-accent);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 .step-progress{transition:transform var(--dur-short) var(--ease-out),opacity var(--dur-short) var(--ease-out)}.step-progress.done{background:var(--color-accent);color:var(--color-accent-ink);border-color:var(--color-accent)}.step-progress.active{background:var(--color-accent-soft);color:var(--color-accent-strong);border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in oklch,var(--color-accent) 18%,transparent)}.step-progress.pending{background:var(--color-paper);color:var(--color-muted);border-color:var(--color-rule)}
 .agent-log{font-family:var(--font-mono);font-size:11px;line-height:1.5}
-.generated-content{max-height:420px;overflow-y:auto}
+.generated-content{max-height:420px;min-width:0;max-width:100%;overflow-y:auto;overflow-x:hidden;overflow-wrap:anywhere}
+.generated-content>*{min-width:0;max-width:100%}
 .editable-output:focus{border-color:var(--color-accent);box-shadow:0 0 0 3px color-mix(in oklch,var(--color-accent) 15%,transparent)}
 .ki-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--color-accent) calc(var(--ki)*1%),var(--color-rule) 0);display:flex;align-items:center;justify-content:center}
 .ki-ring-inner{width:58px;height:58px;border-radius:50%;background:var(--color-paper);display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -559,6 +560,10 @@ const translations = {
     panel_decision:'Dossier d arbitrage',
     panel_decision_hint:'La recommandation aide - le COMEX tranche.',
     panel_no_json:'Sortie non structuree - le texte reste la reference.',
+    readable_title:'Synthèse lisible', readable_hint:'Sélectionnez jusqu’à 3 éléments utiles, puis combinez-les pour guider la suite.',
+    readable_choices:'Éléments à retenir', readable_combine:'Combiner la sélection',
+    readable_combined:'Combinaison retenue', readable_select_two:'Sélectionnez au moins 2 éléments à combiner.',
+    scenario_edit_details:'Modifier le scénario actif',
     ki_label:'Score KI',
     recommendation_label:'Recommandation',
     kill_criteria_label:'Kill criteria',
@@ -745,6 +750,10 @@ const translations = {
     panel_decision:'Arbitration pack',
     panel_decision_hint:'The recommendation supports - executives decide.',
     panel_no_json:'Unstructured output - the text remains the reference.',
+    readable_title:'Readable summary', readable_hint:'Select up to 3 useful items, then combine them to steer the next steps.',
+    readable_choices:'Items to retain', readable_combine:'Combine selection',
+    readable_combined:'Selected combination', readable_select_two:'Select at least 2 items to combine.',
+    scenario_edit_details:'Edit active scenario',
     ki_label:'KI score',
     recommendation_label:'Recommendation',
     kill_criteria_label:'Kill criteria',
@@ -814,7 +823,7 @@ const demoState = {
   originalIdea:'', idea:'', conditions:{}, currentStep:-1, history:[], userActions:[],
   semanticMap:null, selectedSemanticIds:[], semanticRunning:false,
   explorationRounds:[], shortlistedIdeaIds:[], selectedIdea:null, explorationRunning:false,
-  ontologyMap:null, selectedOntologyGapIds:[], scenariosMap:null,
+  ontologyMap:null, selectedOntologyGapIds:[], scenariosMap:null, stepChoiceMaps:{},
   isRunning:false, ki:3.5, kiHistory:[3.5],
   currentOutput:'', currentOutputGeneratedAt:null, startedAt:null, completedAt:null,
   language:currentLang
@@ -941,11 +950,17 @@ function saveStepResult(decision, humanNote, kiBefore, kiAfter){
   const stepIdx=demoState.currentStep, meta=stepMeta[stepIdx];
   const scenariosMap=stepIdx===2&&demoState.scenariosMap
     ?JSON.parse(JSON.stringify(demoState.scenariosMap)):null;
-  const output=(scenariosMap?JSON.stringify(scenariosMap):demoState.currentOutput||stripHtml(document.getElementById('generated-content').innerHTML)||'').trim();
+  const stepChoiceMap=(demoState.stepChoiceMaps||{})[stepIdx]
+    ?JSON.parse(JSON.stringify(demoState.stepChoiceMaps[stepIdx])):null;
+  const rawOutput=(scenariosMap?JSON.stringify(scenariosMap):demoState.currentOutput||'').trim();
+  const renderedOutput=stripHtml(document.getElementById('generated-content').innerHTML||'').trim();
+  const selectedScenario=scenariosMap&&scenariosMap.scenarios.find(function(s){return s.id===scenariosMap.selectedScenarioId;});
+  const scenarioSummary=selectedScenario?(selectedScenario.name+(selectedScenario.thesis?' — '+selectedScenario.thesis:'')):'';
+  const output=((stepChoiceMap&&stepChoiceMap.combinedText)||scenarioSummary||(stepChoiceMap&&stepChoiceMap.readableText)||renderedOutput||rawOutput).trim();
   demoState.history.push({
     stepIdx, step:stepLabel(stepIdx,cycleLanguage()), agent:agentLabel(stepIdx,cycleLanguage()), decision,
-    output, summary:output.replace(/\s+/g,' ').substring(0,180),
-    scenariosMap,
+    output, rawOutput, summary:output.replace(/\s+/g,' ').substring(0,180),
+    scenariosMap, stepChoiceMap,
     humanNote:humanNote||null,
     generatedAt:demoState.currentOutputGeneratedAt,
     decidedAt:new Date().toISOString(),
@@ -2051,7 +2066,7 @@ function startIdeaExploration(){
   demoState.originalIdea=idea;
   demoState.idea='';
   demoState.conditions=collectConditions();
-  demoState.currentStep=-1; demoState.history=[]; demoState.userActions=[];
+  demoState.currentStep=-1; demoState.history=[]; demoState.userActions=[]; demoState.stepChoiceMaps={};
   demoState.semanticMap=null; demoState.selectedSemanticIds=[]; demoState.semanticRunning=false;
   demoState.explorationRounds=[]; demoState.shortlistedIdeaIds=[]; demoState.selectedIdea=null;
   demoState.kiHistory=[]; demoState.completedAt=null;
@@ -2103,34 +2118,47 @@ function normalizeScenariosMap(raw){
       first_test:String(s.first_test||s.test||'').trim() };
   }).filter(function(s){ return s.name; });
   if(scenarios.length<2) throw new Error('scenarios');
-  return { scenarios, selectedScenarioId:scenarios[0].id };
+  return { scenarios, selectedScenarioId:scenarios[0].id, selectedScenarioIds:[scenarios[0].id] };
 }
 function buildScenariosPanel(map, lang){
   var selectedId=map.selectedScenarioId||map.scenarios[0].id;
   var selected=map.scenarios.find(function(s){return s.id===selectedId;})||map.scenarios[0];
   map.selectedScenarioId=selected.id;
-  var h = '<div id="scenario-canvas" class="space-y-3" aria-live="polite"><div><p class="text-sm font-semibold text-slate-800">'+escapeHtml(t('panel_scenarios',{},lang))+'</p><p class="text-xs text-slate-500">'+escapeHtml(t('panel_scenarios_hint',{},lang))+'</p></div>';
-  h += '<div class="grid sm:grid-cols-3 gap-3">';
-  map.scenarios.forEach(function(s){
-    var active=s.id===selected.id;
-    h += '<button type="button" aria-pressed="'+active+'" data-scenario-id="'+s.id+'" onclick="selectScenario(\''+s.id+'\')" class="rounded-xl border '+(active?'border-sky-500 ring-2 ring-sky-100':'border-slate-200')+' bg-white p-3 text-sm text-left hover:border-sky-300 transition"><div class="flex justify-between gap-2 mb-1"><span data-scenario-name="'+s.id+'" class="font-semibold">'+escapeHtml(s.name)+'</span><span data-scenario-score="'+s.id+'" class="text-[10px] font-bold text-sky-700">'+s.feasibility+'/10</span></div>';
-    h += '<p data-scenario-thesis="'+s.id+'" class="text-xs text-slate-600">'+escapeHtml(s.thesis)+'</p>';
+  if(!Array.isArray(map.selectedScenarioIds)||!map.selectedScenarioIds.length) map.selectedScenarioIds=[selected.id];
+  var h = '<div id="scenario-canvas" class="min-w-0 max-w-full overflow-hidden space-y-3" aria-live="polite"><div><p class="text-sm font-semibold text-slate-800">'+escapeHtml(t('panel_scenarios',{},lang))+'</p><p class="text-xs leading-relaxed text-slate-500">'+escapeHtml(t('panel_scenarios_hint',{},lang))+'</p></div>';
+  h += '<div class="grid grid-cols-1 gap-2">';
+  map.scenarios.forEach(function(s,index){
+    var active=map.selectedScenarioIds.includes(s.id), choiceText=s.name+(s.thesis?' — '+s.thesis:''), safeId=escapeHtml(s.id);
+    h += '<button type="button" aria-pressed="'+active+'" data-scenario-id="'+safeId+'" data-step-choice="2-'+index+'" data-choice-text="'+escapeHtml(choiceText)+'" onclick="selectScenario(this.dataset.scenarioId)" class="min-w-0 max-w-full overflow-hidden rounded-xl border '+(active?'border-sky-500 ring-2 ring-sky-100':'border-slate-200')+' bg-white p-3 text-sm text-left hover:border-sky-300 transition"><div class="flex min-w-0 items-start justify-between gap-3 mb-1"><span data-scenario-name="'+safeId+'" class="min-w-0 break-words font-semibold leading-snug">'+escapeHtml(s.name)+'</span><span data-scenario-score="'+safeId+'" class="flex-shrink-0 text-[10px] font-bold text-sky-700">'+s.feasibility+'/10</span></div>';
+    h += '<p data-scenario-thesis="'+safeId+'" class="break-words text-xs leading-relaxed text-slate-600">'+escapeHtml(s.thesis)+'</p>';
     h += '</button>';
   });
-  h += '</div><div data-scenario-editor class="rounded-xl border border-sky-100 bg-sky-50/40 p-4">';
-  h += '<div class="grid sm:grid-cols-[1fr_140px_120px] gap-3">';
-  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_name',{},lang))+'<input value="'+escapeHtml(selected.name)+'" oninput="updateScenarioField(\''+selected.id+'\',\'name\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold"></label>';
-  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_horizon',{},lang))+'<input value="'+escapeHtml(selected.horizon)+'" oninput="updateScenarioField(\''+selected.id+'\',\'horizon\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"></label>';
-  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_feasibility',{},lang))+' <span data-scenario-score-editor>'+selected.feasibility+'/10</span><input type="range" min="1" max="10" value="'+selected.feasibility+'" oninput="updateScenarioField(\''+selected.id+'\',\'feasibility\',this.value)" class="mt-3 w-full accent-sky-600"></label></div>';
-  h += '<label class="block mt-3 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_thesis',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'thesis\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.thesis)+'</textarea></label>';
-  h += '<div class="grid sm:grid-cols-2 gap-3 mt-3"><label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_hypothesis',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'falsifiable_hypothesis\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.falsifiable_hypothesis)+'</textarea></label>';
-  h += '<label class="text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_first_test',{},lang))+'<textarea rows="3" oninput="updateScenarioField(\''+selected.id+'\',\'first_test\',this.value)" class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.first_test)+'</textarea></label></div></div></div>';
+  h += '</div><details data-scenario-editor class="min-w-0 max-w-full overflow-hidden rounded-xl border border-sky-100 bg-sky-50/40">';
+  h += '<summary class="cursor-pointer px-4 py-3 text-xs font-semibold text-sky-900">'+escapeHtml(t('scenario_edit_details',{},lang))+'</summary><div class="min-w-0 border-t border-sky-100 p-4">';
+  h += '<div class="grid min-w-0 grid-cols-1 gap-3 lg:grid-cols-[minmax(0,1fr)_140px_120px]">';
+  var selectedSafeId=escapeHtml(selected.id), fieldHandler=' oninput="updateScenarioField(this.dataset.scenarioId,this.dataset.scenarioField,this.value)"';
+  h += '<label class="min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_name',{},lang))+'<input value="'+escapeHtml(selected.name)+'" data-scenario-id="'+selectedSafeId+'" data-scenario-field="name"'+fieldHandler+' class="mt-1 w-full max-w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold"></label>';
+  h += '<label class="min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_horizon',{},lang))+'<input value="'+escapeHtml(selected.horizon)+'" data-scenario-id="'+selectedSafeId+'" data-scenario-field="horizon"'+fieldHandler+' class="mt-1 w-full max-w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"></label>';
+  h += '<label class="min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_feasibility',{},lang))+' <span data-scenario-score-editor>'+selected.feasibility+'/10</span><input type="range" min="1" max="10" value="'+selected.feasibility+'" data-scenario-id="'+selectedSafeId+'" data-scenario-field="feasibility"'+fieldHandler+' class="mt-3 w-full max-w-full accent-sky-600"></label></div>';
+  h += '<label class="mt-3 block min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_thesis',{},lang))+'<textarea rows="3" data-scenario-id="'+selectedSafeId+'" data-scenario-field="thesis"'+fieldHandler+' class="mt-1 w-full max-w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.thesis)+'</textarea></label>';
+  h += '<div class="mt-3 grid min-w-0 grid-cols-1 gap-3 lg:grid-cols-2"><label class="min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_hypothesis',{},lang))+'<textarea rows="3" data-scenario-id="'+selectedSafeId+'" data-scenario-field="falsifiable_hypothesis"'+fieldHandler+' class="mt-1 w-full max-w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.falsifiable_hypothesis)+'</textarea></label>';
+  h += '<label class="min-w-0 text-xs font-semibold text-slate-600">'+escapeHtml(t('scenario_first_test',{},lang))+'<textarea rows="3" data-scenario-id="'+selectedSafeId+'" data-scenario-field="first_test"'+fieldHandler+' class="mt-1 w-full max-w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">'+escapeHtml(selected.first_test)+'</textarea></label></div></div></details>';
+  h += '<div class="rounded-xl border border-sky-100 bg-sky-50/50 p-3"><button type="button" data-step-combine="2" onclick="combineStepChoices(2)" class="rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white">'+escapeHtml(t('readable_combine',{},lang))+'</button><p data-step-combined="2" role="status" aria-live="polite" class="mt-2 hidden break-words text-xs leading-relaxed text-sky-900"></p></div></div>';
   return h;
 }
 function selectScenario(id){
   const map=demoState.scenariosMap;
   if(!map||!map.scenarios.some(function(s){return s.id===id;})) return;
-  map.selectedScenarioId=id;
+  if(!Array.isArray(map.selectedScenarioIds)||!map.selectedScenarioIds.length) map.selectedScenarioIds=[map.scenarios[0].id];
+  const selectedIndex=map.selectedScenarioIds.indexOf(id);
+  if(selectedIndex>=0&&map.selectedScenarioIds.length>1) map.selectedScenarioIds.splice(selectedIndex,1);
+  else if(selectedIndex<0&&map.selectedScenarioIds.length<3) map.selectedScenarioIds.push(id);
+  map.selectedScenarioId=map.selectedScenarioIds.includes(id)?id:map.selectedScenarioIds[0];
+  if(!demoState.stepChoiceMaps) demoState.stepChoiceMaps={};
+  demoState.stepChoiceMaps[2]={
+    selectedIds:map.selectedScenarioIds.map(function(selectedId){return '2-'+map.scenarios.findIndex(function(s){return s.id===selectedId;});}),
+    combinedText:''
+  };
   const canvas=document.getElementById('scenario-canvas');
   if(canvas) canvas.outerHTML=buildScenariosPanel(map,cycleLanguage());
 }
@@ -2142,11 +2170,18 @@ function updateScenarioField(id,field,value){
   if(!scenario) return;
   scenario[field]=field==='feasibility'?Math.max(1,Math.min(10,Number(value)||1)):String(value);
   if(field==='name'||field==='thesis'){
-    document.querySelectorAll('[data-scenario-'+field+'="'+id+'"]').forEach(function(el){el.textContent=scenario[field];});
+    document.querySelectorAll('[data-scenario-'+field+']').forEach(function(el){if(el.getAttribute('data-scenario-'+field)===id) el.textContent=scenario[field];});
+    const choiceButton=Array.from(document.querySelectorAll('[data-scenario-id]')).find(function(el){return el.getAttribute('data-scenario-id')===id&&el.hasAttribute('data-step-choice');});
+    if(choiceButton) choiceButton.setAttribute('data-choice-text',scenario.name+(scenario.thesis?' — '+scenario.thesis:''));
   }
   if(field==='feasibility'){
-    document.querySelectorAll('[data-scenario-score="'+id+'"], [data-scenario-score-editor]').forEach(function(el){el.textContent=scenario.feasibility+'/10';});
+    document.querySelectorAll('[data-scenario-score]').forEach(function(el){if(el.getAttribute('data-scenario-score')===id) el.textContent=scenario.feasibility+'/10';});
+    document.querySelectorAll('[data-scenario-score-editor]').forEach(function(el){el.textContent=scenario.feasibility+'/10';});
   }
+  const choiceState=(demoState.stepChoiceMaps||{})[2];
+  if(choiceState) choiceState.combinedText='';
+  const combinedOutput=document.querySelector('[data-step-combined="2"]');
+  if(combinedOutput){combinedOutput.textContent='';combinedOutput.classList.add('hidden');}
 }
 function normalizeRiskMap(raw){
   const parsed = extractJsonValue(raw);
@@ -2155,19 +2190,26 @@ function normalizeRiskMap(raw){
   return {
     risks: list.slice(0,5).map(function(r,i){ return { id:String(r.id||('r'+(i+1))), label:String(r.label||r.title||'').trim(), severity:Math.max(1,Math.min(10,Number(r.severity||5))), likelihood:Math.max(1,Math.min(10,Number(r.likelihood||5))), ki_impact:String(r.ki_impact||'').trim(), mitigation:String(r.mitigation||'').trim() }; }).filter(function(r){return r.label;}),
     kill_criteria: Array.isArray(parsed.kill_criteria)?parsed.kill_criteria.map(String).filter(Boolean).slice(0,4):[],
-    decisive_attack: String(parsed.decisive_attack||'').trim()
+    decisive_attack: String(parsed.decisive_attack||'').trim(),
+    noise_attacks: Array.isArray(parsed.noise_attacks)?parsed.noise_attacks.map(String).filter(Boolean).slice(0,6):[]
   };
 }
+function buildStepCombineFooter(stepIdx,lang){
+  return '<div class="mt-3 rounded-xl border border-sky-100 bg-sky-50/50 p-3"><button type="button" data-step-combine="'+stepIdx+'" onclick="combineStepChoices('+stepIdx+')" class="rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white">'+escapeHtml(t('readable_combine',{},lang))+'</button><p data-step-combined="'+stepIdx+'" role="status" aria-live="polite" class="mt-2 hidden break-words text-xs leading-relaxed text-sky-900"></p></div>';
+}
 function buildRiskPanel(map, lang){
-  var h = '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-700 mb-1">'+escapeHtml(t('panel_risks',{},lang))+'</p><div class="space-y-2">';
-  map.risks.forEach(function(r){
-    h += '<div class="rounded-xl border border-rose-100 bg-rose-50/40 p-3 text-sm"><div class="flex justify-between"><span class="font-semibold">'+escapeHtml(r.label)+'</span><span class="text-[10px] text-rose-700">S'+r.severity+' / L'+r.likelihood+'</span></div>';
-    if(r.mitigation) h += '<p class="text-[11px] text-emerald-800 mt-1">'+escapeHtml(r.mitigation)+'</p>';
-    h += '</div>';
+  var h = '<div data-readable-output class="min-w-0 max-w-full overflow-hidden space-y-3"><div><p class="text-sm font-semibold text-slate-900">'+escapeHtml(t('panel_risks',{},lang))+'</p><p class="text-xs leading-relaxed text-slate-500">'+escapeHtml(t('readable_hint',{},lang))+'</p></div><div class="grid grid-cols-1 gap-2">';
+  map.risks.forEach(function(r,index){
+    var id='4-'+index, text=r.label+(r.mitigation?' — '+r.mitigation:'');
+    h += '<button type="button" data-step-choice="'+id+'" data-choice-text="'+escapeHtml(text)+'" aria-pressed="false" onclick="toggleStepChoice(4,\''+id+'\')" class="min-w-0 max-w-full overflow-hidden rounded-xl border border-rose-100 bg-rose-50/40 p-3 text-left text-sm"><div class="flex min-w-0 items-start justify-between gap-3"><span class="min-w-0 break-words font-semibold">'+escapeHtml(r.label)+'</span><span class="flex-shrink-0 text-[10px] text-rose-700">S'+r.severity+' / L'+r.likelihood+'</span></div>';
+    if(r.mitigation) h += '<span class="mt-1 block break-words text-xs leading-relaxed text-emerald-800">'+escapeHtml(r.mitigation)+'</span>';
+    h += '</button>';
   });
   h += '</div>';
   if(map.kill_criteria.length){ h += '<p class="text-xs font-semibold text-rose-800 mt-2">'+escapeHtml(t('kill_criteria_label',{},lang))+'</p><ul class="list-disc pl-5 text-xs">'; map.kill_criteria.forEach(function(k){ h+='<li>'+escapeHtml(k)+'</li>'; }); h+='</ul>'; }
-  return h+'</div>';
+  if(map.decisive_attack) h += '<div class="rounded-xl border border-sky-100 bg-sky-50/40 p-3"><p class="text-xs font-semibold text-sky-900">'+escapeHtml(lang==='en'?'Decisive test':'Test décisif')+'</p><p class="mt-1 break-words text-xs leading-relaxed text-slate-700">'+escapeHtml(map.decisive_attack)+'</p></div>';
+  if(map.noise_attacks.length) h += '<details class="rounded-xl border border-slate-200 bg-white p-3"><summary class="cursor-pointer text-xs font-semibold text-slate-800">'+escapeHtml(lang==='en'?'Secondary tests':'Tests secondaires')+'</summary><ul class="mt-2 list-disc pl-5 text-xs leading-relaxed text-slate-700">'+map.noise_attacks.map(function(attack){return '<li>'+escapeHtml(attack)+'</li>';}).join('')+'</ul></details>';
+  return h+buildStepCombineFooter(4,lang)+'</div>';
 }
 function normalizeDecisionMap(raw){
   const parsed = extractJsonValue(raw);
@@ -2183,13 +2225,19 @@ function normalizeDecisionMap(raw){
     open_questions_for_human:Array.isArray(parsed.open_questions_for_human)?parsed.open_questions_for_human.map(String).filter(Boolean):[] };
 }
 function buildDecisionPanel(map, lang){
-  var recLabel = map.recommendation==='go'?'GO':(map.recommendation==='no_go'?'NO-GO':'GO conditionnel');
+  var recLabel = map.recommendation==='go'?'GO':(map.recommendation==='no_go'?'NO-GO':(lang==='en'?'Conditional GO':'GO conditionnel'));
   var recClass = map.recommendation==='go'?'bg-emerald-100 text-emerald-800':(map.recommendation==='no_go'?'bg-rose-100 text-rose-800':'bg-amber-100 text-amber-900');
-  var h = '<div class="mt-4 pt-3 border-t border-slate-200"><p class="text-xs font-semibold text-slate-700 mb-1">'+escapeHtml(t('panel_decision',{},lang))+'</p>';
+  var h = '<div data-readable-output class="min-w-0 max-w-full overflow-hidden space-y-3"><p class="text-sm font-semibold text-slate-900">'+escapeHtml(t('panel_decision',{},lang))+'</p>';
   h += '<div class="flex gap-3 mb-2"><div class="rounded-xl border px-4 py-3"><div class="text-[10px] text-slate-500">'+escapeHtml(t('ki_label',{},lang))+'</div><div class="text-2xl font-bold">'+map.ki_score+'<span class="text-sm text-slate-400">/10</span></div></div>';
   h += '<div class="rounded-xl border px-4 py-3"><div class="text-[10px] text-slate-500">'+escapeHtml(t('recommendation_label',{},lang))+'</div><div class="mt-1 inline-flex text-sm font-bold px-2 py-1 rounded-full '+recClass+'">'+escapeHtml(recLabel)+'</div></div></div>';
-  if(map.ki_rationale) h += '<p class="text-xs text-slate-600">'+escapeHtml(map.ki_rationale)+'</p>';
-  return h+'</div>';
+  if(map.ki_rationale) h += '<p class="break-words text-xs leading-relaxed text-slate-600">'+escapeHtml(map.ki_rationale)+'</p>';
+  var options=[].concat(map.go_conditions||[],map.no_go_conditions||[],map.open_questions_for_human||[]);
+  if(map.main_counterargument) options.push(map.main_counterargument);
+  if(!options.length) options.push(recLabel+(map.ki_rationale?' — '+map.ki_rationale:''));
+  h += '<div class="grid grid-cols-1 gap-2">';
+  options.slice(0,8).forEach(function(option,index){ var id='5-'+index; h+='<button type="button" data-step-choice="'+id+'" data-choice-text="'+escapeHtml(option)+'" aria-pressed="false" onclick="toggleStepChoice(5,\''+id+'\')" class="min-w-0 max-w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-3 text-left"><span class="block break-words text-sm leading-relaxed text-slate-700">'+escapeHtml(option)+'</span></button>'; });
+  h += '</div>';
+  return h+buildStepCombineFooter(5,lang)+'</div>';
 }
 function buildUserPrompt(idea, cond, notes, lang) {
   let p = t('prompt_idea',{},lang)+' :\n"' + idea + '"\n\n';
@@ -2201,6 +2249,10 @@ function buildUserPrompt(idea, cond, notes, lang) {
   if(cond.notes) parts.push(t('prompt_notes',{},lang)+' : '+cond.notes);
   if(parts.length) p += t('prompt_constraints',{},lang)+' :\n'+parts.join('\n')+'\n\n';
   if(notes&&notes.length) p += t('prompt_human_notes',{},lang)+' :\n'+notes.map(n=>'- '+n).join('\n')+'\n\n';
+  Object.keys(demoState.stepChoiceMaps||{}).map(Number).filter(function(index){return index<demoState.currentStep;}).sort(function(a,b){return a-b;}).forEach(function(index){
+    const choice=demoState.stepChoiceMaps[index];
+    if(choice&&choice.combinedText) p += (lang==='en'?'Combined human selection from step ':'Combinaison humaine retenue à l étape ')+(index+1)+' :\n'+choice.combinedText+'\n\n';
+  });
   if(demoState.currentStep>2&&demoState.scenariosMap){
     p += (lang==='en'
       ? 'Scenario context selected and edited during Build'
@@ -2231,11 +2283,120 @@ function markdownishToHtml(text) {
   return '<div class="space-y-1"><p>'+html+'</p></div>';
 }
 
+function buildReadableStepPanel(raw, stepIdx, lang){
+  const humanize=function(value){
+    const labels=lang==='en'
+      ?{options:'Options',scenarios:'Scenarios',entities:'Entities',relations:'Relationships',gaps:'Opportunities',risks:'Risks',kill_criteria:'Stop criteria',decisive_attack:'Decisive test',noise_attacks:'Secondary tests',ki_score:'KI score',ki_rationale:'Rationale',recommendation:'Recommendation',go_conditions:'GO conditions',no_go_conditions:'NO-GO conditions',main_counterargument:'Main counterargument',open_questions_for_human:'Open questions',roadmap:'Roadmap',actions:'Actions',milestones:'Milestones',kpis:'Indicators',owner:'Owner',horizon:'Horizon',feasibility:'Feasibility',thesis:'Thesis',hypothesis:'Hypothesis',falsifiable_hypothesis:'Falsifiable hypothesis',first_test:'First test',severity:'Severity',likelihood:'Likelihood',mitigation:'Mitigation',opportunity:'Opportunity'}
+      :{options:'Options',scenarios:'Scénarios',entities:'Entités',relations:'Relations',gaps:'Opportunités',risks:'Risques',kill_criteria:'Critères d arrêt',decisive_attack:'Test décisif',noise_attacks:'Tests secondaires',ki_score:'Score KI',ki_rationale:'Justification',recommendation:'Recommandation',go_conditions:'Conditions GO',no_go_conditions:'Conditions NO-GO',main_counterargument:'Contre-argument principal',open_questions_for_human:'Questions ouvertes',roadmap:'Feuille de route',actions:'Actions',milestones:'Jalons',kpis:'Indicateurs',owner:'Responsable',horizon:'Horizon',feasibility:'Faisabilité',thesis:'Thèse',hypothesis:'Hypothèse',falsifiable_hypothesis:'Hypothèse réfutable',first_test:'Premier test',severity:'Gravité',likelihood:'Probabilité',mitigation:'Atténuation',opportunity:'Opportunité'};
+    return labels[String(value||'')]||(lang==='en'?'Detail':'Détail');
+  };
+  const scalar=function(value){
+    if(value===null||value===undefined) return '';
+    if(typeof value==='boolean') return value?(lang==='en'?'Yes':'Oui'):(lang==='en'?'No':'Non');
+    if(typeof value==='object'){
+      return Object.entries(value).map(function(entry){
+        const v=Array.isArray(entry[1])?entry[1].join(' · '):entry[1];
+        return humanize(entry[0])+' : '+String(v===undefined?'':v);
+      }).join(' — ');
+    }
+    return String(value);
+  };
+  let parsed=null, narrative='', choices=[];
+  try { parsed=extractJsonValue(raw); } catch(error){ narrative=String(raw||'').trim(); }
+  if(parsed!==null){
+    if(Array.isArray(parsed)) parsed={options:parsed};
+    if(typeof parsed==='object'){
+      Object.entries(parsed).forEach(function(entry){
+        const key=entry[0], value=entry[1], values=Array.isArray(value)?value:[value];
+        values.forEach(function(item,index){
+          if(item===null||item===undefined||item==='') return;
+          let title='', body='';
+          if(typeof item==='object'&&!Array.isArray(item)){
+            title=String(item.label||item.name||item.title||item.id||humanize(key)+' '+(index+1));
+            body=Object.entries(item).filter(function(pair){return !['label','name','title','id'].includes(pair[0]);}).map(function(pair){return humanize(pair[0])+' : '+scalar(pair[1]);}).filter(Boolean).join(' — ');
+          } else {
+            title=scalar(item);
+            body=humanize(key);
+          }
+          if(title) choices.push({title:title,body:body});
+        });
+      });
+    } else if(String(parsed).trim()) choices.push({title:String(parsed).trim(),body:''});
+  } else {
+    const lines=narrative.split('\n').map(function(line){return line.trim();}).filter(Boolean);
+    lines.forEach(function(line){
+      if(/^#{1,6}\s/.test(line)) return;
+      const cleaned=line.replace(/^###?\s*/,'').replace(/^(?:[-*•]|[0-9]+[.)])\s*/,'').trim();
+      if(cleaned&&cleaned.length>2) choices.push({title:cleaned,body:''});
+    });
+    if(!choices.length&&narrative) choices.push({title:narrative,body:''});
+  }
+  choices=choices.slice(0,12);
+  const choiceState=demoState.stepChoiceMaps[stepIdx]||{selectedIds:[],combinedText:''};
+  choiceState.readableText=choices.map(function(item){return item.body?item.title+': '+item.body:item.title;}).join('\n');
+  demoState.stepChoiceMaps[stepIdx]=choiceState;
+  let html='<div data-readable-output class="min-w-0 max-w-full overflow-hidden space-y-4">';
+  html+='<div><p class="text-sm font-semibold text-slate-900">'+escapeHtml(t('readable_title',{},lang))+'</p><p class="text-xs leading-relaxed text-slate-500">'+escapeHtml(t('readable_hint',{},lang))+'</p></div>';
+  if(narrative){
+    html+='<div class="min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white p-4 text-sm leading-7 text-slate-700 break-words">'+markdownishToHtml(narrative)+'</div>';
+  }
+  html+='<div><p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">'+escapeHtml(t('readable_choices',{},lang))+'</p><div class="grid grid-cols-1 gap-2">';
+  choices.forEach(function(item,index){
+    const id=stepIdx+'-'+index, combined=item.body?item.title+' — '+item.body:item.title;
+    html+='<button type="button" data-step-choice="'+id+'" data-choice-text="'+escapeHtml(combined)+'" aria-pressed="false" onclick="toggleStepChoice('+stepIdx+',\''+id+'\')" class="min-w-0 max-w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-3 text-left transition hover:border-sky-300">';
+    html+='<span class="block break-words text-sm font-semibold leading-snug text-slate-900">'+escapeHtml(item.title)+'</span>';
+    if(item.body) html+='<span class="mt-1 block break-words text-xs leading-relaxed text-slate-600">'+escapeHtml(item.body)+'</span>';
+    html+='</button>';
+  });
+  html+='</div></div><div class="rounded-xl border border-sky-100 bg-sky-50/50 p-3">';
+  html+='<button type="button" data-step-combine="'+stepIdx+'" onclick="combineStepChoices('+stepIdx+')" class="rounded-full bg-sky-600 px-4 py-2 text-xs font-semibold text-white">'+escapeHtml(t('readable_combine',{},lang))+'</button>';
+  html+='<p data-step-combined="'+stepIdx+'" role="status" aria-live="polite" class="mt-2 hidden break-words text-xs leading-relaxed text-sky-900"></p></div></div>';
+  return html;
+}
+function toggleStepChoice(stepIdx,id){
+  const state=demoState.stepChoiceMaps[stepIdx]||{selectedIds:[],combinedText:''};
+  const index=state.selectedIds.indexOf(id);
+  if(index>=0) state.selectedIds.splice(index,1);
+  else if(state.selectedIds.length<3) state.selectedIds.push(id);
+  state.combinedText='';
+  demoState.stepChoiceMaps[stepIdx]=state;
+  const output=document.querySelector('[data-step-combined="'+stepIdx+'"]');
+  if(output){output.textContent='';output.classList.add('hidden');}
+  document.querySelectorAll('[data-step-choice^="'+stepIdx+'-"]').forEach(function(button){
+    const active=state.selectedIds.includes(button.getAttribute('data-step-choice'));
+    button.setAttribute('aria-pressed',String(active));
+    button.classList.toggle('border-sky-500',active);
+    button.classList.toggle('bg-sky-50',active);
+    button.classList.toggle('ring-1',active);
+    button.classList.toggle('ring-sky-200',active);
+  });
+}
+function combineStepChoices(stepIdx){
+  const state=demoState.stepChoiceMaps[stepIdx]||{selectedIds:[],combinedText:''};
+  const output=document.querySelector('[data-step-combined="'+stepIdx+'"]');
+  if(!output) return;
+  if(state.selectedIds.length<2){
+    output.textContent=t('readable_select_two',{},cycleLanguage());
+    output.classList.remove('hidden');
+    return;
+  }
+  const texts=state.selectedIds.map(function(id){
+    const button=document.querySelector('[data-step-choice="'+id+'"]');
+    return button?button.getAttribute('data-choice-text'):'';
+  }).filter(Boolean);
+  state.combinedText=texts.join(' + ');
+  demoState.stepChoiceMaps[stepIdx]=state;
+  output.textContent=t('readable_combined',{},cycleLanguage())+' : '+state.combinedText;
+  output.classList.remove('hidden');
+}
+
 async function runStep(stepIdx) {
   if (demoState.isRunning) return;
   demoState.isRunning = true;
   demoState.currentStep = stepIdx;
   if (stepIdx === 2) demoState.scenariosMap = null;
+  if(!demoState.stepChoiceMaps) demoState.stepChoiceMaps={};
+  demoState.stepChoiceMaps[stepIdx]={selectedIds:[],combinedText:''};
   const meta = stepMeta[stepIdx], data = cycleData[stepIdx];
   const lang=cycleLanguage(), gate=data.gate[lang]||data.gate.fr;
 
@@ -2258,28 +2419,45 @@ async function runStep(stepIdx) {
     const raw = await callMistralViaProxy(sys, buildUserPrompt(demoState.idea, demoState.conditions, notes, lang));
     log('← '+t('response_received',{count:raw.length},lang), 'success');
     outputText = raw;
-    contentHtml = markdownishToHtml(raw);
-        if (stepIdx === 2) {
+    contentHtml = buildReadableStepPanel(raw, stepIdx, lang);
+    if (stepIdx === 2) {
       try {
         const smap = normalizeScenariosMap(raw);
         demoState.scenariosMap = smap;
         contentHtml = buildScenariosPanel(smap, lang);
         log('Scenarios: '+smap.scenarios.length, 'success');
       } catch (serr) {
-        contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200 text-xs text-amber-700 bg-amber-50 rounded-lg p-3">'+escapeHtml(t('panel_no_json',{},lang))+'</div>';
         log('Scenarios parse fallback: '+serr.message, 'warn');
       }
-    }if (stepIdx === 3) {
+    }
+    if (stepIdx === 3) {
       outputText += '\n\n'+t('ontology_note',{},lang);
       try {
         const omap = normalizeOntologyMap(raw);
         demoState.ontologyMap = omap;
         demoState.selectedOntologyGapIds = [];
-        contentHtml += buildOntologyPanel(omap, lang);
+        contentHtml = buildReadableStepPanel(raw, stepIdx, lang);
         log('Ontology: '+omap.entities.length+' entities, '+omap.relations.length+' relations, '+omap.gaps.length+' gaps', 'success');
       } catch (oerr) {
-        contentHtml += '<div class="mt-4 pt-3 border-t border-slate-200 text-xs text-amber-700 bg-amber-50 rounded-lg p-3">'+escapeHtml(t('ontology_no_json',{},lang))+'</div>';
         log('Ontology parse fallback: '+oerr.message, 'warn');
+      }
+    }
+    if (stepIdx === 4) {
+      try {
+        const riskMap=normalizeRiskMap(raw);
+        contentHtml = buildRiskPanel(riskMap, lang);
+        log('Risks: '+riskMap.risks.length, 'success');
+      } catch (riskError) {
+        log('Risks readable fallback: '+riskError.message, 'warn');
+      }
+    }
+    if (stepIdx === 5) {
+      try {
+        const decisionMap=normalizeDecisionMap(raw);
+        contentHtml = buildDecisionPanel(decisionMap, lang);
+        log('Decision: '+decisionMap.recommendation, 'success');
+      } catch (decisionError) {
+        log('Decision readable fallback: '+decisionError.message, 'warn');
       }
     }
   } catch (err) {
@@ -2402,7 +2580,7 @@ function finishCycle(){
 }
 function resetDemo(){
   demoState.originalIdea=''; demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1;
-  demoState.history=[]; demoState.userActions=[]; demoState.explorationRounds=[];
+  demoState.history=[]; demoState.userActions=[]; demoState.explorationRounds=[]; demoState.stepChoiceMaps={};
   demoState.semanticMap=null; demoState.selectedSemanticIds=[]; demoState.semanticRunning=false;
   demoState.shortlistedIdeaIds=[]; demoState.selectedIdea=null; demoState.explorationRunning=false;
   demoState.isRunning=false; demoState.ki=3.5; demoState.kiHistory=[3.5];
