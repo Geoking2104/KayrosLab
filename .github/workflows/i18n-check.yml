@@ -6,12 +6,14 @@ on:
     paths:
       - "kayroslab-complete-with-ai-agents.html"
       - "scripts/check-i18n.mjs"
+      - "tests/demo-html.test.mjs"
       - ".github/workflows/i18n-check.yml"
   pull_request:
     branches: [main]
     paths:
       - "kayroslab-complete-with-ai-agents.html"
       - "scripts/check-i18n.mjs"
+      - "tests/demo-html.test.mjs"
       - ".github/workflows/i18n-check.yml"
   workflow_dispatch:
 
@@ -29,6 +31,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Validate public demo JavaScript and CTA wiring
+        run: node --test tests/demo-html.test.mjs
 
       - name: Run i18n checker
         run: node scripts/check-i18n.mjs ./kayroslab-complete-with-ai-agents.html
