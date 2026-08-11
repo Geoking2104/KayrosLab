@@ -12,6 +12,9 @@ import {
   reactivate as reactivateIdea,
 } from '../../../core/cycle-lifecycle.mjs';
 import { createIdea } from '../../../core/model.mjs';
+import {
+  applyWorkflowEvent, createWorkflowState, validateWorkflowState,
+} from '../../../core/workflow-state.mjs';
 
 const cycleRunSchema = z.object({
   query: z.string().min(1).max(8000),
@@ -75,6 +78,52 @@ function writeSse(raw, event) {
   } catch { /* closed */ }
 }
 
+function correlateEvent(event, plan) {
+  return {
+    ...event,
+    runId: plan.runId,
+    traceId: plan.traceId,
+    run_id: plan.run_id,
+    trace_id: plan.trace_id,
+  };
+}
+
+function eventForTransport(event) {
+  if (!event?.workflowState) return event;
+  const { workflowState: _workflowState, ...transportEvent } = event;
+  return transportEvent;
+}
+
+function reduceWorkflowState(state, event) {
+  const candidate = event?.workflowState;
+  if (candidate
+    && candidate.runId === state.runId
+    && candidate.run_id === state.run_id
+    && candidate.traceId === state.traceId
+    && candidate.trace_id === state.trace_id) {
+    try {
+      validateWorkflowState(candidate);
+      return candidate;
+    } catch { /* reduce the trusted event over the canonical state instead */ }
+  }
+  return applyWorkflowEvent(state, event);
+}
+
+async function journalCycleError(journal, correlation, ideaId, error) {
+  try {
+    await journal?.({
+      type: 'cycle.error',
+      runId: correlation.runId,
+      traceId: correlation.traceId,
+      run_id: correlation.run_id,
+      trace_id: correlation.trace_id,
+      ideaId,
+      error: String(error?.message || error),
+      ts: new Date().toISOString(),
+    });
+  } catch { /* best-effort */ }
+}
+
 async function ensureIdea(app, {
   ideaId, title, query, tenantId, userId, syncIdea,
 }) {
@@ -111,6 +160,10 @@ async function persistIdeaEvent(app, ideaRef, ev, { by, journal }) {
   try {
     journal?.({
       type: 'cycle.idea',
+      runId: ev.runId,
+      traceId: ev.traceId,
+      run_id: ev.run_id,
+      trace_id: ev.trace_id,
       ideaId: idea.id,
       stage: idea.stage,
       status: idea.status,
@@ -161,11 +214,19 @@ export default async function cycleRoute(app) {
       return reply.code(503).send({ error: 'orchestrator non disponible' });
     }
 
+    const requestCorrelation = createWorkflowState({
+      ideaId,
+      input: { request: body.query },
+    });
     const planCtx = {
       ideaId,
       llmPlan: body.llmPlan,
       provider: body.provider,
       sovereignty: body.sovereignty,
+      runId: requestCorrelation.runId,
+      traceId: requestCorrelation.traceId,
+      run_id: requestCorrelation.run_id,
+      trace_id: requestCorrelation.trace_id,
     };
 
     let plan;
@@ -173,8 +234,33 @@ export default async function cycleRoute(app) {
       plan = await orch.plan(body.query, planCtx);
     } catch (e) {
       app.log.error(e);
-      return reply.code(502).send({ error: String(e.message || e) });
+      await journalCycleError(journal, requestCorrelation, ideaId, e);
+      const workflowState = applyWorkflowEvent(requestCorrelation, {
+        type: 'error', error: String(e.message || e),
+      });
+      return reply.code(502).send({
+        error: String(e.message || e),
+        runId: requestCorrelation.runId,
+        traceId: requestCorrelation.traceId,
+        run_id: requestCorrelation.run_id,
+        trace_id: requestCorrelation.trace_id,
+        workflowState,
+      });
     }
+    // Accept older/custom orchestrators while exposing one canonical pair in both conventions.
+    const correlation = createWorkflowState({
+      runId: plan.runId || plan.run_id || requestCorrelation.runId,
+      traceId: plan.traceId || plan.trace_id || requestCorrelation.traceId,
+      ideaId,
+      input: { request: body.query },
+    });
+    plan = {
+      ...plan,
+      runId: correlation.runId,
+      traceId: correlation.traceId,
+      run_id: correlation.run_id,
+      trace_id: correlation.trace_id,
+    };
 
     const runOpts = {
       governance: body.governance,
@@ -210,6 +296,10 @@ export default async function cycleRoute(app) {
     try {
       journal?.({
         type: 'cycle.start',
+        runId: plan.runId,
+        traceId: plan.traceId,
+        run_id: plan.run_id,
+        trace_id: plan.trace_id,
         ideaId,
         tenantId,
         userId,
@@ -238,6 +328,10 @@ export default async function cycleRoute(app) {
 
       writeSse(reply.raw, {
         type: 'meta',
+        runId: plan.runId,
+        traceId: plan.traceId,
+        run_id: plan.run_id,
+        trace_id: plan.trace_id,
         ideaId,
         idea: ideaRef?.idea
           ? { id: ideaRef.idea.id, stage: ideaRef.idea.stage, status: ideaRef.idea.status }
@@ -248,20 +342,28 @@ export default async function cycleRoute(app) {
       });
 
       let aborted = false;
+      let workflowState = correlation;
       req.raw.on('close', () => { aborted = true; });
 
       try {
-        for await (const ev of orch.run(plan, runOpts)) {
+        for await (const rawEvent of orch.run(plan, runOpts)) {
           if (aborted) break;
+          const ev = correlateEvent(rawEvent, plan);
+          workflowState = reduceWorkflowState(workflowState, ev);
           ideaRef = await persistIdeaEvent(app, ideaRef, ev, { by, journal });
           const enriched = ideaRef?.idea
             ? { ...ev, idea: { stage: ideaRef.idea.stage, status: ideaRef.idea.status } }
             : ev;
-          writeSse(reply.raw, enriched);
+          writeSse(reply.raw, eventForTransport(enriched));
         }
         if (!aborted) {
           writeSse(reply.raw, {
             type: 'done',
+            runId: plan.runId,
+            traceId: plan.traceId,
+            run_id: plan.run_id,
+            trace_id: plan.trace_id,
+            workflowState,
             ideaId,
             idea: ideaRef?.idea
               ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status }
@@ -271,8 +373,17 @@ export default async function cycleRoute(app) {
         }
       } catch (e) {
         app.log.error(e);
+        await journalCycleError(journal, correlation, ideaId, e);
+        workflowState = applyWorkflowEvent(workflowState, {
+          type: 'error', error: String(e.message || e),
+        });
         writeSse(reply.raw, {
           type: 'error',
+          runId: plan.runId,
+          traceId: plan.traceId,
+          run_id: plan.run_id,
+          trace_id: plan.trace_id,
+          workflowState,
           error: String(e.message || e),
           ts: new Date().toISOString(),
         });
@@ -289,13 +400,16 @@ export default async function cycleRoute(app) {
     const events = [];
     let final = null;
     let gate = null;
+    let workflowState = correlation;
     try {
-      for await (const ev of orch.run(plan, runOpts)) {
+      for await (const rawEvent of orch.run(plan, runOpts)) {
+        const ev = correlateEvent(rawEvent, plan);
+        workflowState = reduceWorkflowState(workflowState, ev);
         ideaRef = await persistIdeaEvent(app, ideaRef, ev, { by, journal });
         const enriched = ideaRef?.idea
           ? { ...ev, idea: { stage: ideaRef.idea.stage, status: ideaRef.idea.status } }
           : ev;
-        events.push(enriched);
+        events.push(eventForTransport(enriched));
         if (ev.type === 'gate') gate = ev;
         if (ev.type === 'final') final = ev;
       }
@@ -304,7 +418,19 @@ export default async function cycleRoute(app) {
       } catch { /* soft */ }
     } catch (e) {
       app.log.error(e);
-      return reply.code(502).send({ error: String(e.message || e), events });
+      await journalCycleError(journal, correlation, ideaId, e);
+      workflowState = applyWorkflowEvent(workflowState, {
+        type: 'error', error: String(e.message || e),
+      });
+      return reply.code(502).send({
+        error: String(e.message || e),
+        runId: plan.runId,
+        traceId: plan.traceId,
+        run_id: plan.run_id,
+        trace_id: plan.trace_id,
+        workflowState,
+        events,
+      });
     }
 
     if (gate && final?.status === 'pending_review') {
@@ -312,6 +438,11 @@ export default async function cycleRoute(app) {
         status: 'pending_review',
         gateId: gate.gateId,
         gateType: gate.gateType,
+        runId: plan.runId,
+        traceId: plan.traceId,
+        run_id: plan.run_id,
+        trace_id: plan.trace_id,
+        workflowState,
         ideaId,
         idea: ideaRef?.idea
           ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status }
@@ -324,6 +455,11 @@ export default async function cycleRoute(app) {
     return {
       status: final?.status ?? 'ok',
       answer: final?.answer ?? final?.message ?? null,
+      runId: plan.runId,
+      traceId: plan.traceId,
+      run_id: plan.run_id,
+      trace_id: plan.trace_id,
+      workflowState,
       ideaId,
       idea: ideaRef?.idea
         ? { stage: ideaRef.idea.stage, status: ideaRef.idea.status, history: ideaRef.idea.history?.slice(-5) }

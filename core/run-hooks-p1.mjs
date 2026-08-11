@@ -50,6 +50,10 @@ export async function runP1Hooks({ plan, opts, agentOutputs, contextBlock, agent
           context: contextBlock,
           provider: opts.provider,
           sovereignty: opts.sovereignty,
+          runId: opts.runId,
+          traceId: opts.traceId,
+          run_id: opts.run_id,
+          trace_id: opts.trace_id,
         });
         events.push({
           type: 'dialectic',

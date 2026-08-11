@@ -20,6 +20,7 @@ import { compilePacket, applyEpistemicPolicy, renderPacketForGate, policyForPack
 import { runP1Hooks } from './run-hooks-p1.mjs';
 import { runP2Hooks } from './run-hooks-p2.mjs';
 import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
+import { applyWorkflowEvent, createWorkflowState } from './workflow-state.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -159,8 +160,21 @@ export class Orchestrator {
 
   async plan(goal, ctx = {}) {
     const ideaId = ctx.ideaId ?? 'idea';
+    const correlation = createWorkflowState({
+      runId: ctx.runId || ctx.run_id,
+      traceId: ctx.traceId || ctx.trace_id,
+      ideaId,
+      input: { request: goal, context: ctx.context || {} },
+    });
+    const correlated = (value) => ({
+      ...value,
+      runId: correlation.runId,
+      traceId: correlation.traceId,
+      run_id: correlation.runId,
+      trace_id: correlation.traceId,
+    });
     if (ctx.llmPlan === false) {
-      return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
+      return correlated({ ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() });
     }
     const plannerAgent = this.agents?.Planner;
     const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
@@ -168,18 +182,20 @@ export class Orchestrator {
       try {
         const result = await plannerAgent.createPlan(goal, {
           provider: ctx.provider, sovereignty: ctx.sovereignty, model, llmPlan: ctx.llmPlan,
+          runId: correlation.runId, traceId: correlation.traceId,
+          run_id: correlation.run_id, trace_id: correlation.trace_id,
         });
         if (result?.steps?.length) {
-          return {
+          return correlated({
             ideaId, goal, generatedBy: result.generatedBy || 'llm',
             steps: ensureSynthesizerLast(result.steps),
             quant: { modelUsed: model || null, agent: agentQuantInfo(plannerAgent), snapshot: this._quantSnapshot() },
             degraded: result.degraded || null,
-          };
+          });
         }
       } catch { /* soft */ }
     }
-    return { ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() };
+    return correlated({ ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() });
   }
 
   async _injectPositionning(plan, opts, scopeResolved) {
@@ -231,6 +247,37 @@ export class Orchestrator {
   }
 
   async *run(plan, opts = {}) {
+    let workflowState = createWorkflowState({
+      runId: plan.runId || plan.run_id || opts.runId || opts.run_id,
+      traceId: plan.traceId || plan.trace_id || opts.traceId || opts.trace_id,
+      ideaId: plan.ideaId,
+      input: { request: plan.goal, context: opts.context || {} },
+      plan: {
+        steps: plan.steps || [],
+        successCriteria: plan.successCriteria || opts.successCriteria || [],
+      },
+    });
+    const correlatedOpts = {
+      ...opts,
+      runId: workflowState.runId,
+      traceId: workflowState.traceId,
+      run_id: workflowState.run_id,
+      trace_id: workflowState.trace_id,
+    };
+    for await (const event of this._runInternal(plan, correlatedOpts)) {
+      workflowState = applyWorkflowEvent(workflowState, event);
+      yield {
+        ...event,
+        runId: workflowState.runId,
+        traceId: workflowState.traceId,
+        run_id: workflowState.run_id,
+        trace_id: workflowState.trace_id,
+        workflowState,
+      };
+    }
+  }
+
+  async *_runInternal(plan, opts = {}) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
@@ -355,7 +402,11 @@ export class Orchestrator {
 
       if (s.tool && this.tools && !specialist) {
         try {
-          observation = await this.tools.call(s.tool, s.toolInput ?? {}, { ideaId: plan.ideaId });
+          observation = await this.tools.call(s.tool, s.toolInput ?? {}, {
+            ideaId: plan.ideaId,
+            runId: opts.runId, traceId: opts.traceId,
+            run_id: opts.run_id, trace_id: opts.trace_id,
+          });
           actionType = 'tool'; actionName = s.tool;
         } catch (e) {
           observation = { error: String(e?.message || e) };
@@ -367,6 +418,8 @@ export class Orchestrator {
             goal: plan.goal, context: contextBlock,
             provider: opts.provider, sovereignty: opts.sovereignty,
             model: opts.model,
+            runId: opts.runId, traceId: opts.traceId,
+            run_id: opts.run_id, trace_id: opts.trace_id,
           });
           observation = res.output || res.text || res;
           actionType = 'specialized_agent'; actionName = s.agent;
@@ -385,7 +438,13 @@ export class Orchestrator {
             role: s.agent || 'Planner',
             messages,
             model: opts.model || specialist?.preferredModel || undefined,
-          }, { provider: opts.provider, sovereignty: opts.sovereignty });
+            runId: opts.runId, traceId: opts.traceId,
+            run_id: opts.run_id, trace_id: opts.trace_id,
+          }, {
+            provider: opts.provider, sovereignty: opts.sovereignty,
+            runId: opts.runId, traceId: opts.traceId,
+            run_id: opts.run_id, trace_id: opts.trace_id,
+          });
           observation = res.text || res.output || '';
           usage = res.usage || usage;
           modelUsed = opts.model || specialist?.preferredModel || null;
