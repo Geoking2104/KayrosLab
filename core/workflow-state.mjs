@@ -269,7 +269,14 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
   }
 
   const channel = CHANNEL_EVENTS[event.type];
-  if (channel) {
+  if (event.type === 'artifacts') {
+    // Append-only: the audit trail is never rewritten, only extended.
+    if (event.nodeId) next.node = String(event.nodeId);
+    if (event.agent !== undefined) next.agent = event.agent == null ? null : String(event.agent);
+    next.status = 'running';
+    const added = Array.isArray(event.artifacts) ? event.artifacts : [];
+    next.artifacts = [...next.artifacts, ...clone(added, [])];
+  } else if (channel) {
     // Channel events also move the cursor: they are emitted by the node that
     // owns the channel, and routing conditions read both.
     if (event.nodeId) next.node = String(event.nodeId);

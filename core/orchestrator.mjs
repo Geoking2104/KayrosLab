@@ -22,7 +22,7 @@ import { runP2Hooks } from './run-hooks-p2.mjs';
 import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
 import { applyWorkflowEvent, createWorkflowState, freezeWorkflowState } from './workflow-state.mjs';
 import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
-import { assertToolAllowed } from './workflow-permissions.mjs';
+import { assertToolAllowed, assertChannelWritable } from './workflow-permissions.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -527,7 +527,7 @@ export class Orchestrator {
       const deadline = { ms: stepTimeoutMs, signal, label: `node ${node.id}` };
       let observation, actionType = 'llm', actionName = 'complete';
       let usage = { tokensIn: 0, tokensOut: 0 };
-      let modelUsed = null, degraded = null;
+      let modelUsed = null, degraded = null, channelEvent = null;
 
       if (s.tool && this.tools && !specialist) {
         try {
@@ -555,8 +555,18 @@ export class Orchestrator {
         }
       } else if (specialist && typeof specialist.execute === 'function') {
         try {
+          // The node reads the channels written upstream. This is what makes
+          // the pipeline a pipeline: the Verifier sees the Writer's draft and
+          // the plan's criteria rather than a blob of free text.
+          const live = typeof getWorkflowState === 'function' ? getWorkflowState() : null;
           const res = await withDeadline(specialist.execute(s.input || s.description, {
             goal: plan.goal, context: contextBlock,
+            ideaId: plan.ideaId,
+            successCriteria: plan.successCriteria || opts.successCriteria || [],
+            research: live?.research ?? null,
+            simulation: live?.simulation ?? null,
+            draft: live?.draft ?? null,
+            review: live?.review ?? null,
             provider: opts.provider, sovereignty: opts.sovereignty,
             model: opts.model, signal,
             runId: opts.runId, traceId: opts.traceId,
@@ -566,6 +576,7 @@ export class Orchestrator {
           actionType = 'specialized_agent'; actionName = s.agent;
           modelUsed = res.model || specialist.preferredModel || null;
           degraded = res.degraded || null;
+          channelEvent = res.channel || null;
         } catch (e) {
           observation = `Agent ${s.agent} error: ${e?.message || e}`;
           degraded = { reason: degradedReasonFor(e, 'agent_error') };
@@ -621,6 +632,25 @@ export class Orchestrator {
             });
           }
         } catch (e) { yield softErrorEvent('memory_layered', e, { nodeId: node.id }); }
+      }
+
+      // A node may write a state channel only if the graph granted it that
+      // write. This is the enforcement point that turns the declared
+      // permission boundary into a real one for state, as assertToolAllowed
+      // does for tools.
+      if (channelEvent && typeof channelEvent === 'object' && channelEvent.type) {
+        try {
+          assertChannelWritable(node, channelEvent.type);
+          yield {
+            ...channelEvent,
+            nodeId: node.id,
+            agent: s.agent,
+            ideaId: plan.ideaId,
+            ts: new Date().toISOString(),
+          };
+        } catch (e) {
+          degraded = { reason: 'permission_denied', message: String(e?.message || e) };
+        }
       }
 
       if (degraded) {

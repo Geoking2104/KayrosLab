@@ -18,6 +18,9 @@ export class BaseAgent {
     this.llm = llm;
     this.preferredModel = preferredModel || null;
     this.quantRec = quantRec || null;
+    // The state channel this agent owns, or null when it only produces text.
+    // Declared here so every agent answers the question the same way.
+    this.channel = null;
     this._contributions = [];
   }
 

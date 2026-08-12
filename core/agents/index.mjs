@@ -5,6 +5,14 @@ import { DevilsAdvocateAgent as _DevilsAdvocateAgent } from './devils-advocate-a
 import { RedTeamAgent as _RedTeamAgent } from './red-team-agent.mjs';
 import { BisociateurAgent as _BisociateurAgent } from './bisociator-agent.mjs';
 import { SynthesizerAgent as _SynthesizerAgent } from './synthesizer-agent.mjs';
+import {
+  ResearcherAgent as _ResearcherAgent,
+  SimulatorAgent as _SimulatorAgent,
+  WriterAgent as _WriterAgent,
+  VerifierAgent as _VerifierAgent,
+  LoggerAgent as _LoggerAgent,
+  HumanGateAgent as _HumanGateAgent,
+} from './pipeline-agents.mjs';
 import { normalizeRole } from '../quant-guidance.mjs';
 
 export const BaseAgent = _BaseAgent;
@@ -14,8 +22,23 @@ export const DevilsAdvocateAgent = _DevilsAdvocateAgent;
 export const RedTeamAgent = _RedTeamAgent;
 export const BisociateurAgent = _BisociateurAgent;
 export const SynthesizerAgent = _SynthesizerAgent;
+export const ResearcherAgent = _ResearcherAgent;
+export const SimulatorAgent = _SimulatorAgent;
+export const WriterAgent = _WriterAgent;
+export const VerifierAgent = _VerifierAgent;
+export const LoggerAgent = _LoggerAgent;
+export const HumanGateAgent = _HumanGateAgent;
 
-export const AGENT_TYPES = ['Planner', 'Critic', 'DevilsAdvocate', 'RedTeam', 'Bisociateur', 'Synthesizer'];
+/**
+ * Two rosters on one engine: the dialectical family (Critic, DevilsAdvocate,
+ * RedTeam, Bisociateur, Synthesizer) and the produce-then-verify family of
+ * the Graph Engineering spec (Researcher, Simulator, Writer, Verifier,
+ * Logger). Planner is shared.
+ */
+export const AGENT_TYPES = [
+  'Planner', 'Critic', 'DevilsAdvocate', 'RedTeam', 'Bisociateur', 'Synthesizer',
+  'Researcher', 'Simulator', 'Writer', 'Verifier', 'Logger', 'HumanGate',
+];
 
 export function createAgent(name, { llm, tools, memory, quantGuidance = null, baseModel = null } = {}) {
   const factories = {
@@ -25,6 +48,12 @@ export function createAgent(name, { llm, tools, memory, quantGuidance = null, ba
     RedTeam: (o) => new _RedTeamAgent(o),
     Bisociateur: (o) => new _BisociateurAgent(o),
     Synthesizer: (o) => new _SynthesizerAgent(o),
+    Researcher: (o) => new _ResearcherAgent(o),
+    Simulator: (o) => new _SimulatorAgent(o),
+    Writer: (o) => new _WriterAgent(o),
+    Verifier: (o) => new _VerifierAgent(o),
+    Logger: (o) => new _LoggerAgent(o),
+    HumanGate: (o) => new _HumanGateAgent(o),
   };
   const factory = factories[name];
   if (!factory) throw new Error(`Unknown agent type: ${name}`);
