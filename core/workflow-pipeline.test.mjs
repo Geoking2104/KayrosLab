@@ -34,6 +34,22 @@ function runOpts(extra = {}) {
   return { ...QUIET, graphConditions: REFERENCE_CONDITIONS, ...extra };
 }
 
+/**
+ * The escalation node declares a human gate, so a run that reaches it blocks
+ * until someone resolves it -- which is the point. Tests that are not about
+ * gating install an auto-approving governance so the run can finish.
+ */
+function autoApprove(engine) {
+  let n = 0;
+  engine.orchestrator.governance = {
+    open: () => {
+      n += 1;
+      return { gateId: `g${n}`, promise: Promise.resolve({ decision: 'approve', by: 'test' }) };
+    },
+  };
+  return engine;
+}
+
 // ------------------------------------------------------- agent roster
 
 test('every agent named by the reference preset actually exists', () => {
@@ -60,7 +76,7 @@ test('channel-owning agents declare the channel they write', () => {
 // --------------------------------------------------- channel emission
 
 test('a node that owns a channel emits the matching event', async () => {
-  const engine = createEngine();
+  const engine = autoApprove(createEngine());
   const events = await collect(engine.orchestrator.run(referencePlan(), runOpts()));
 
   const types = events.map((event) => event.type);
@@ -74,7 +90,7 @@ test('a node that owns a channel emits the matching event', async () => {
 });
 
 test('a node without the write permission cannot emit a channel', async () => {
-  const engine = createEngine();
+  const engine = autoApprove(createEngine());
   // The verifier owns `review`; make it try to overwrite the draft instead.
   engine.agents.Verifier.execute = async () => ({
     output: 'tentative', channel: { type: 'draft', content: 'forge', format: 'markdown' },
@@ -89,7 +105,7 @@ test('a node without the write permission cannot emit a channel', async () => {
 // ------------------------------------------------ real revision loop
 
 test('a KO review really loops back to the writer then escalates', async () => {
-  const engine = createEngine();
+  const engine = autoApprove(createEngine());
   const visits = [];
   engine.agents.Writer.execute = async () => {
     visits.push('writer');
@@ -110,7 +126,7 @@ test('a KO review really loops back to the writer then escalates', async () => {
 });
 
 test('an OK review reaches the logger and never revisits the writer', async () => {
-  const engine = createEngine();
+  const engine = autoApprove(createEngine());
   const visits = [];
   engine.agents.Writer.execute = async () => {
     visits.push('writer');
@@ -129,7 +145,7 @@ test('an OK review reaches the logger and never revisits the writer', async () =
 });
 
 test('the verifier checks the draft against the plan success criteria', async () => {
-  const engine = createEngine();
+  const engine = autoApprove(createEngine());
   const seen = {};
   engine.agents.Verifier.execute = async (task, ctx) => {
     seen.criteria = ctx.successCriteria;

@@ -30,7 +30,7 @@ const DEFAULT_STEP_BUDGET_FACTOR = 8;
 const MIN_STEP_BUDGET = 64;
 
 const GRAPH_FIELDS = new Set(['version', 'start', 'end', 'nodes', 'edges']);
-const NODE_FIELDS = new Set(['id', 'kind', 'agent', 'step', 'maxAttempts', 'permissions']);
+const NODE_FIELDS = new Set(['id', 'kind', 'agent', 'step', 'maxAttempts', 'permissions', 'gate']);
 const EDGE_FIELDS = new Set(['id', 'from', 'to', 'kind', 'condition']);
 const STEP_FIELDS = new Set(['id', 'agent', 'description', 'input', 'tool', 'toolInput']);
 
@@ -129,6 +129,31 @@ function normalizeMaxAttempts(value, nodeId) {
   return value;
 }
 
+/**
+ * A gate declaration makes the human checkpoint part of the topology instead
+ * of a branch hard-wired after the walk (spec section 5). `type` is what the
+ * governance layer opens; `requiredRole` is who may resolve it.
+ */
+function normalizeGate(value, nodeId) {
+  if (value === undefined || value === null) return null;
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Workflow graph: gate on ${nodeId} must be an object`);
+  }
+  for (const key of Object.keys(value)) {
+    if (key !== 'type' && key !== 'requiredRole') {
+      throw new Error(`Workflow graph: unknown gate field ${key} on ${nodeId}`);
+    }
+  }
+  if (typeof value.type !== 'string' || !value.type.trim()) {
+    throw new Error(`Workflow graph: gate type on ${nodeId} must be a non-blank string`);
+  }
+  if (value.requiredRole !== undefined
+    && (typeof value.requiredRole !== 'string' || !value.requiredRole.trim())) {
+    throw new Error(`Workflow graph: gate requiredRole on ${nodeId} must be a non-blank string`);
+  }
+  return Object.freeze({ type: value.type, requiredRole: value.requiredRole || 'comex' });
+}
+
 function deepFreeze(value, seen = new WeakSet()) {
   if (!value || typeof value !== 'object' || seen.has(value)) return value;
   seen.add(value);
@@ -156,6 +181,7 @@ export function declareWorkflowGraph(steps = []) {
       // that could re-enter it.
       maxAttempts: 1,
       permissions: { tools: step.tool ? [step.tool] : [], writes: [] },
+      gate: null,
     };
   });
   const route = [GRAPH_START, ...nodes.map(({ id }) => id), GRAPH_END];
@@ -201,6 +227,7 @@ export function upgradeWorkflowGraph(input) {
     }
     node.maxAttempts = 1;
     node.permissions = { tools: node.step?.tool ? [node.step.tool] : [], writes: [] };
+    node.gate = null;
   }
   safeInput.version = WORKFLOW_GRAPH_VERSION;
   return safeInput;
@@ -242,6 +269,7 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
     assertKnownFields(node, NODE_FIELDS, 'node');
     node.maxAttempts = normalizeMaxAttempts(node.maxAttempts, node.id ?? 'node');
     node.permissions = normalizePermissions(node.permissions);
+    node.gate = normalizeGate(node.gate, node.id ?? 'node');
   }
 
   const definition = freezeDefinition(safeInput);

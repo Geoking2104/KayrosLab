@@ -23,6 +23,8 @@ import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
 import { applyWorkflowEvent, createWorkflowState, freezeWorkflowState } from './workflow-state.mjs';
 import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
 import { assertToolAllowed, assertChannelWritable } from './workflow-permissions.mjs';
+import { resolveLogSink } from './log-sink.mjs';
+import { buildRoleContext } from './role-context.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -98,7 +100,7 @@ export class Orchestrator {
   constructor({
     llm, tools = null, memory = null, layered = null, governance = null,
     classifier = null, recallK = 3, plannerModel = null, agents = null,
-    quantGuidance = null,
+    quantGuidance = null, logSink = null,
     tenantId = null, defaultScope = null, defaultScopeId = null,
     userId = null, teamId = null, organizationId = null,
   } = {}) {
@@ -113,6 +115,7 @@ export class Orchestrator {
     this.plannerModel = plannerModel;
     this.agents = agents || createAllAgents({ llm, tools, memory });
     this.quantGuidance = quantGuidance || null;
+    this.logSink = logSink || null;
     this.scopeDefaults = {
       tenantId: tenantId || null,
       defaultScope: defaultScope || null,
@@ -353,13 +356,36 @@ export class Orchestrator {
       run_id: workflowState.run_id,
       trace_id: workflowState.trace_id,
     };
+    // The audit trail is streamed as it is produced: a crashed run still
+    // leaves on disk everything it had time to emit.
+    const sink = resolveLogSink(opts.logSink ?? this.logSink);
+    let sinkFailed = false;
+
     for await (const event of this._runInternal(
       executionPlan,
       correlatedOpts,
       compiledGraph,
       () => workflowState,
     )) {
+      const previousLogs = workflowState.logs.length;
       workflowState = applyWorkflowEvent(workflowState, event);
+
+      let sinkError = null;
+      if (sink && !sinkFailed) {
+        // Only the entries this event actually appended, so a record is
+        // never written twice.
+        for (const entry of workflowState.logs.slice(previousLogs)) {
+          try {
+            await sink.append(entry);
+          } catch (e) {
+            // An audit sink must never take the run down with it.
+            sinkFailed = true;
+            sinkError = e;
+            break;
+          }
+        }
+      }
+
       // Expose only a detached deep-frozen snapshot: the live canonical
       // state used for conditional routing must stay private so consumers
       // cannot tamper with edge selection between events.
@@ -371,6 +397,22 @@ export class Orchestrator {
         trace_id: workflowState.trace_id,
         workflowState: freezeWorkflowState(workflowState),
       };
+
+      if (sinkError) {
+        const soft = softErrorEvent('log_sink', sinkError, { ideaId: plan.ideaId });
+        workflowState = applyWorkflowEvent(workflowState, soft);
+        yield {
+          ...soft,
+          runId: workflowState.runId,
+          traceId: workflowState.traceId,
+          run_id: workflowState.run_id,
+          trace_id: workflowState.trace_id,
+          workflowState: freezeWorkflowState(workflowState),
+        };
+      }
+    }
+    if (sink && !sinkFailed) {
+      try { await sink.flush?.(); } catch { /* the trail is already written */ }
     }
   }
 
@@ -523,18 +565,123 @@ export class Orchestrator {
         yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() };
         return;
       }
+      // --- Human gate declared on the node itself (spec section 5) ---
+      // The checkpoint now belongs to the topology: it is opened before the
+      // node runs, not hard-wired after the walk.
+      if (node.gate) {
+        if (!this.governance) {
+          yield {
+            type: 'degraded', stepId: s.id, nodeId: node.id, agent: s.agent,
+            reason: 'gate_unavailable',
+            message: `node ${node.id} declares gate ${node.gate.type} but no governance is wired`,
+            ts: new Date().toISOString(),
+          };
+          yield {
+            type: 'final', status: 'blocked_veto',
+            message: `Bloque : gate ${node.gate.type} impossible a ouvrir`,
+            ts: new Date().toISOString(),
+          };
+          return;
+        }
+        const live = typeof getWorkflowState === 'function' ? getWorkflowState() : null;
+        const { gateId, promise } = this.governance.open({
+          ideaId: plan.ideaId,
+          type: node.gate.type,
+          requiredRole: node.gate.requiredRole,
+          payload: { nodeId: node.id, agent: s.agent, description: s.description || null },
+          evaluation: { review: live?.review ?? null, attempts: live?.nodeAttempts ?? {} },
+        });
+        yield {
+          type: 'gate', gateId, gateType: node.gate.type, nodeId: node.id,
+          status: 'pending_review', requiredRole: node.gate.requiredRole,
+          ts: new Date().toISOString(),
+        };
+        if (!waitGate) {
+          yield {
+            type: 'final', status: 'pending_review', gateId, gateType: node.gate.type,
+            nodeId: node.id, ts: new Date().toISOString(),
+          };
+          return;
+        }
+        let decision = null;
+        try {
+          decision = await promise;
+        } catch (e) {
+          yield {
+            type: 'final', status: 'blocked_veto',
+            message: `Bloque : erreur de resolution du gate ${node.gate.type} (${e?.message || e})`,
+            ts: new Date().toISOString(),
+          };
+          return;
+        }
+        yield { type: 'gate_resolved', gateId, nodeId: node.id, decision, ts: new Date().toISOString() };
+        if (decision?.decision === 'reject' || decision?.decision === 'veto') {
+          yield {
+            type: 'final', status: 'blocked_veto',
+            message: `Bloque (veto) : ${decision.reason ?? 'veto humain'}`,
+            ts: new Date().toISOString(),
+          };
+          return;
+        }
+      }
+
       const specialist = this.agents?.[s.agent];
       const deadline = { ms: stepTimeoutMs, signal, label: `node ${node.id}` };
       let observation, actionType = 'llm', actionName = 'complete';
       let usage = { tokensIn: 0, tokensOut: 0 };
       let modelUsed = null, degraded = null, channelEvent = null;
+      let toolGateApproved = false;
+
+      // --- Risky tool: a gate is opened systematically (spec section 5) ---
+      // `tool.gate` used to be inert metadata; then v2 refused the call
+      // outright. Neither is right: the point of a gate is that a human can
+      // authorise the action.
+      if (s.tool && this.tools && !specialist) {
+        const declaredTool = this.tools.get?.(s.tool) || null;
+        if (declaredTool?.gate === true) {
+          if (!this.governance) {
+            yield {
+              type: 'degraded', stepId: s.id, nodeId: node.id, agent: s.agent,
+              reason: 'permission_denied',
+              message: `tool ${s.tool} requires a human gate but no governance is wired`,
+              ts: new Date().toISOString(),
+            };
+          } else {
+            const { gateId, promise } = this.governance.open({
+              ideaId: plan.ideaId,
+              type: 'tool_execution',
+              requiredRole: opts.toolGateRole || 'comex',
+              payload: { tool: s.tool, nodeId: node.id, toolInput: s.toolInput ?? {} },
+              evaluation: { sideEffect: declaredTool.sideEffect || 'none' },
+            });
+            yield {
+              type: 'gate', gateId, gateType: 'tool_execution', nodeId: node.id,
+              tool: s.tool, status: 'pending_review', ts: new Date().toISOString(),
+            };
+            let decision = null;
+            try { decision = await promise; } catch { decision = null; }
+            yield { type: 'gate_resolved', gateId, nodeId: node.id, decision, ts: new Date().toISOString() };
+            toolGateApproved = decision?.decision === 'approve' || decision?.decision === 'validate';
+            if (!toolGateApproved) {
+              yield {
+                type: 'degraded', stepId: s.id, nodeId: node.id, agent: s.agent,
+                reason: 'permission_denied',
+                message: `tool ${s.tool} was not approved`,
+                ts: new Date().toISOString(),
+              };
+            }
+          }
+        }
+      }
 
       if (s.tool && this.tools && !specialist) {
         try {
           // v2: the node's declared permission boundary is enforced here.
           // ToolRegistry metadata (sideEffect / gate) was inert before.
           const toolDef = this.tools.get?.(s.tool) || { name: s.tool, sideEffect: 'write' };
-          assertToolAllowed(node, toolDef, { gateApproved: opts.toolGateApproved === true });
+          assertToolAllowed(node, toolDef, {
+            gateApproved: toolGateApproved || opts.toolGateApproved === true,
+          });
           observation = await withDeadline(this.tools.call(s.tool, s.toolInput ?? {}, {
             ideaId: plan.ideaId,
             nodeId: node.id,
@@ -555,18 +702,21 @@ export class Orchestrator {
         }
       } else if (specialist && typeof specialist.execute === 'function') {
         try {
-          // The node reads the channels written upstream. This is what makes
-          // the pipeline a pipeline: the Verifier sees the Writer's draft and
-          // the plan's criteria rather than a blob of free text.
+          // Minimum required context (spec section 6): the role policy masks
+          // every channel this role may not read. A Researcher that saw the
+          // draft would confirm it instead of researching; a Verifier that
+          // saw the memory block would judge against recalled material
+          // instead of the declared criteria.
           const live = typeof getWorkflowState === 'function' ? getWorkflowState() : null;
-          const res = await withDeadline(specialist.execute(s.input || s.description, {
-            goal: plan.goal, context: contextBlock,
-            ideaId: plan.ideaId,
+          const scoped = buildRoleContext(s.agent, {
+            state: live,
+            contextBlock,
             successCriteria: plan.successCriteria || opts.successCriteria || [],
-            research: live?.research ?? null,
-            simulation: live?.simulation ?? null,
-            draft: live?.draft ?? null,
-            review: live?.review ?? null,
+          });
+          const res = await withDeadline(specialist.execute(s.input || s.description, {
+            goal: plan.goal,
+            ideaId: plan.ideaId,
+            ...scoped,
             provider: opts.provider, sovereignty: opts.sovereignty,
             model: opts.model, signal,
             runId: opts.runId, traceId: opts.traceId,

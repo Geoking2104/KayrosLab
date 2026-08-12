@@ -22,6 +22,7 @@ function agentNode(id, agent, {
   maxAttempts = 1,
   tools = [],
   writes = [],
+  gate = null,
 } = {}) {
   return {
     id,
@@ -30,6 +31,7 @@ function agentNode(id, agent, {
     step: { id, agent, description },
     maxAttempts,
     permissions: { tools, writes },
+    gate,
   };
 }
 
@@ -72,6 +74,7 @@ export function referencePipelineGraph({
   simulatorAttempts = 2,
   researchTools = [],
   simulationTools = [],
+  escalationRole = 'comex',
 } = {}) {
   const verifierAttempts = writerAttempts + 1;
   return graph(
@@ -103,6 +106,9 @@ export function referencePipelineGraph({
       }),
       agentNode('escalate', 'HumanGate', {
         description: 'Hand over to a human after the revision budget is spent',
+        // The checkpoint is part of the topology: reaching this node opens a
+        // governance gate before anything else happens (spec section 5).
+        gate: { type: 'human_escalation', requiredRole: escalationRole },
       }),
       agentNode('logger', 'Logger', {
         description: 'Persist decisions, traces and artifacts',
