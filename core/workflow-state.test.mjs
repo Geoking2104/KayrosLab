@@ -156,8 +156,10 @@ test('applyWorkflowEvent records gates, failures and final status', () => {
     type: 'gate', gateId: 'gate-1', gateType: 'output_censor', status: 'pending_review',
   });
   assert.equal(gated.status, 'pending_review');
+  // nodeId is null here: a terminal gate guards the run, not a graph node.
+  // A gate declared on a node carries its id so the run can be resumed.
   assert.deepEqual(gated.gate, {
-    id: 'gate-1', type: 'output_censor', status: 'pending_review',
+    id: 'gate-1', type: 'output_censor', nodeId: null, status: 'pending_review',
   });
 
   const failed = applyWorkflowEvent(gated, {

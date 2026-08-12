@@ -1,9 +1,45 @@
 # Le depot est edite sous Windows mais execute sous Linux.
 # Forcer LF sur tout ce qui est interprete par bash ou par le serveur :
 # un "\r" invisible fait echouer un script shell avec un message incomprehensible.
+#
+# Defaut : git normalise en LF dans l'index pour tout ce qu'il detecte comme
+# texte. Sans cette ligne, un editeur qui reecrit un fichier en CRLF produit un
+# diff entier la ou une seule ligne a change -- c'est arrive trois fois sur des
+# fichiers non listes plus bas (.env.sample notamment), et seule une
+# verification manuelle l'a rattrape. La normalisation appartient a git.
+* text=auto eol=lf
+
+# Extensions explicitement forcees : la detection automatique ne doit pas
+# pouvoir se tromper sur ce qui est execute cote serveur.
 *.sh    text eol=lf
 *.mjs   text eol=lf
 *.cjs   text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
 *.conf  text eol=lf
 *.yml   text eol=lf
+*.yaml  text eol=lf
 *.json  text eol=lf
+*.md    text eol=lf
+*.css   text eol=lf
+*.html  text eol=lf
+*.sql   text eol=lf
+*.php   text eol=lf
+*.ejs   text eol=lf
+*.env.sample text eol=lf
+.env.sample  text eol=lf
+.gitignore   text eol=lf
+.gitattributes text eol=lf
+
+# Scripts PowerShell : CRLF assume, ils ne sont lus que sous Windows.
+*.ps1   text eol=crlf
+
+# Binaires : jamais de conversion.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary

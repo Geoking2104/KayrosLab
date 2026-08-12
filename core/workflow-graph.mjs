@@ -475,7 +475,7 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
    * number of distinct nodes: with cycles allowed, the node count is no
    * longer an upper bound on the traversal length.
    */
-  function* walk({ maxSteps = stepBudget, state = {} } = {}) {
+  function* walk({ maxSteps = stepBudget, state = {}, from = null } = {}) {
     // A conditional graph routes on live state. Walking it with a frozen
     // snapshot -- or with nothing at all -- silently collapses every
     // condition to false and takes the `always` edge, so the same graph
@@ -485,6 +485,15 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
     }
     let current = definition.start;
     let visited = 0;
+    // Resuming: the node the run stopped at never executed, so it is yielded
+    // first and traversal continues from there.
+    if (from !== null && from !== undefined) {
+      const entry = nodes.get(from);
+      if (!entry) throw new Error(`Workflow graph: unknown node ${from}`);
+      visited += 1;
+      yield { node: entry, edge: null };
+      current = entry.id;
+    }
     for (;;) {
       const currentState = typeof state === 'function' ? state() : state;
       const edge = select(current, currentState);

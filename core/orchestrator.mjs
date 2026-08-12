@@ -20,7 +20,9 @@ import { compilePacket, applyEpistemicPolicy, renderPacketForGate, policyForPack
 import { runP1Hooks } from './run-hooks-p1.mjs';
 import { runP2Hooks } from './run-hooks-p2.mjs';
 import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
-import { applyWorkflowEvent, createWorkflowState, freezeWorkflowState } from './workflow-state.mjs';
+import {
+  applyWorkflowEvent, createWorkflowState, freezeWorkflowState, migrateWorkflowState,
+} from './workflow-state.mjs';
 import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
 import { assertToolAllowed, assertChannelWritable } from './workflow-permissions.mjs';
 import { resolveLogSink } from './log-sink.mjs';
@@ -327,6 +329,93 @@ export class Orchestrator {
     };
   }
 
+  /**
+   * Continues a run suspended on a human gate.
+   *
+   * A gate that suspends is only useful if the decision can put the run back
+   * in motion. `resume` takes the snapshot the suspended run yielded plus the
+   * human decision, and re-enters the guarded node -- which never executed --
+   * without replaying anything upstream.
+   *
+   * @param {object} snapshot  workflowState from the suspended run
+   * @param {object} opts      run options plus `decision`
+   */
+  async *resume(snapshot, opts = {}) {
+    const state = migrateWorkflowState(snapshot);
+    if (state.status !== 'pending_review') {
+      throw new Error('Orchestrator.resume: state is not suspended on a gate');
+    }
+    const gate = state.gate;
+    if (!gate?.nodeId) {
+      throw new Error('Orchestrator.resume: state carries no gate node to resume from');
+    }
+    const decision = opts.decision;
+    if (!decision || typeof decision !== 'object' || typeof decision.decision !== 'string') {
+      throw new Error('Orchestrator.resume: a decision { decision } is required');
+    }
+    if (!state.plan?.graph) {
+      throw new Error('Orchestrator.resume: state carries no graph to resume');
+    }
+
+    let workflowState = state;
+    const emit = (event) => {
+      workflowState = applyWorkflowEvent(workflowState, event);
+      return {
+        ...event,
+        runId: workflowState.runId,
+        traceId: workflowState.traceId,
+        run_id: workflowState.run_id,
+        trace_id: workflowState.trace_id,
+        workflowState: freezeWorkflowState(workflowState),
+      };
+    };
+
+    yield emit({
+      type: 'gate_resolved', gateId: gate.id, nodeId: gate.nodeId, decision,
+      ts: new Date().toISOString(),
+    });
+
+    if (decision.decision === 'reject' || decision.decision === 'veto') {
+      yield emit({
+        type: 'final', status: 'blocked_veto',
+        message: `Bloque (veto) : ${decision.reason ?? 'veto humain'}`,
+        ts: new Date().toISOString(),
+      });
+      return;
+    }
+
+    const compiledGraph = compileWorkflowGraph(state.plan.graph, {
+      conditions: opts.graphConditions || {},
+    });
+    const executionPlan = {
+      ideaId: state.ideaId,
+      goal: state.input.request,
+      steps: compiledGraph.definition.nodes.map(({ step }) => step),
+      successCriteria: state.plan.successCriteria || [],
+      graph: compiledGraph.definition,
+      runId: state.runId,
+      traceId: state.traceId,
+    };
+    // The gate has just been approved: re-entering the node must not open it
+    // again, and the phases already executed before the suspension are not
+    // replayed.
+    const resumeOpts = {
+      ...opts,
+      runId: state.runId, traceId: state.traceId,
+      run_id: state.run_id, trace_id: state.trace_id,
+      recall: false, positionning: false, frameControl: false,
+      _resumeFrom: gate.nodeId,
+      _resumeGateApproved: true,
+    };
+
+    for await (const event of this._runInternal(
+      executionPlan, resumeOpts, compiledGraph, () => workflowState,
+    )) {
+      if (event.type === 'start') continue; // the run already started
+      yield emit(event);
+    }
+  }
+
   async *run(plan, opts = {}) {
     const compiledGraph = compileWorkflowGraph(
       plan.graph || declareWorkflowGraph(plan.steps || []),
@@ -558,7 +647,11 @@ export class Orchestrator {
     // The walk budget is a backstop only: it must sit strictly above the
     // orchestrator's own guard so the graceful `halt` event fires first and
     // consumers never see a raw traversal exception.
-    for (const { node } of graph.walk({ state: getWorkflowState || {}, maxSteps: maxSteps + 1 })) {
+    for (const { node } of graph.walk({
+      state: getWorkflowState || {},
+      maxSteps: maxSteps + 1,
+      from: opts._resumeFrom || null,
+    })) {
       const s = node.step;
       if (signal?.aborted) {
         yield { type: 'cancelled', reason: 'signal', ts: new Date().toISOString() };
@@ -577,7 +670,10 @@ export class Orchestrator {
       // an HTTP request, a scheduled job, the SSE route -- hangs forever.
       // So the run emits the gate, returns a resumable `pending_review`, and
       // hands control back. `waitNodeGate: true` opts into blocking.
-      if (node.gate) {
+      // A resumed node's gate was just approved by a human: reopening it here
+      // would suspend the run again on the very decision that released it.
+      const gateAlreadyApproved = opts._resumeGateApproved === true && node.id === opts._resumeFrom;
+      if (node.gate && !gateAlreadyApproved) {
         if (!this.governance) {
           yield {
             type: 'degraded', stepId: s.id, nodeId: node.id, agent: s.agent,

@@ -300,6 +300,9 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
     next.gate = {
       id: event.gateId || null,
       type: event.gateType || null,
+      // The node the gate guards. Without it a suspended run cannot say
+      // where to resume, and `resumable` is an empty word.
+      nodeId: event.nodeId || null,
       status: event.status || 'pending_review',
     };
   } else if (event.type === 'gate_resolved') {
