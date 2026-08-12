@@ -719,4 +719,49 @@ export default async function portfolioRoute(app) {
     ctx.journal({ type: 'construire.collision.select', by: me.email, ideaId: idea.id, collisionIds: candidates.map((c) => c.id) });
     return { selection: candidates.map((c) => c.id) };
   });
+
+  // Etape 4 — Eprouver (EF-08/F1-F5) : Future Proofing multi-agents.
+  app.post('/v1/ideas/:id/eprouver', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { z } = await import('zod');
+    const attaqueSchema = z.object({
+      type: z.string().optional(), hypothese: z.string().optional().nullable(),
+      argument: z.string(), preuve: z.string().optional().nullable(), severite: z.number().min(0).max(1).optional(),
+    });
+    const parsed = z.object({
+      apport: z.object({
+        critic: z.array(attaqueSchema).optional(),
+        devil_advocate: z.array(attaqueSchema).optional(),
+        red_team: z.array(attaqueSchema).optional(),
+      }).optional(),
+      scenarioIds: z.array(z.string()).optional(),
+    }).safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'schema invalide', issues: parsed.error.issues });
+    try {
+      const { buildContexteEprouver, runFutureProofing, rapportEprouver } = await import('../../../core/index.mjs');
+      let contexte = buildContexteEprouver(idea);
+      if (parsed.data.scenarioIds?.length) {
+        const scenarios = (idea.construire?.scenarios ?? []).filter((s) => parsed.data.scenarioIds.includes(s.id));
+        contexte = { ...contexte, proposition: scenarios.map((s) => s.proposition).find(Boolean) ?? contexte.proposition, cible: scenarios.map((s) => s.cible).find(Boolean) ?? contexte.cible, hypotheses: [...new Set(scenarios.flatMap((s) => s.hypotheses ?? []))] };
+      }
+      const run = await runFutureProofing(contexte, { apport: parsed.data.apport, ts: new Date().toISOString() });
+      const timeline = [...(idea.eprouver?.runs ?? []), { ...run, declenchePar: { by: me.email, ideaId: idea.id } }];
+      const out = { ...idea, eprouver: { ...(idea.eprouver ?? {}), runs: timeline }, updatedAt: new Date().toISOString() };
+      await ctx.ideas.save(out);
+      ctx.journal({ type: 'eprouver.run', by: me.email, ideaId: idea.id, attaques: run.totalAttaques, critiques: run.critiques });
+      return { run, ...rapportEprouver(out.eprouver.runs) };
+    } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  app.get('/v1/ideas/:id/eprouver', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    const idea = await ctx.ideas.get(req.params.id);
+    if (!idea || (idea.tenantId ?? 'default') !== me.tenantId) return reply.code(404).send({ error: 'introuvable' });
+    const { rapportEprouver } = await import('../../../core/index.mjs');
+    return rapportEprouver(idea.eprouver?.runs ?? []);
+  });
 }
