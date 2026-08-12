@@ -4,3 +4,7 @@ dist/
 *.log
 .env
 .env.local
+
+# Artefacts generes par les suites de tests (memoire de travail du core).
+.kayros-memory.json
+.kayros-memory.json.tmp

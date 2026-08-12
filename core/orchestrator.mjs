@@ -22,6 +22,7 @@ import { runP2Hooks } from './run-hooks-p2.mjs';
 import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
 import { applyWorkflowEvent, createWorkflowState, freezeWorkflowState } from './workflow-state.mjs';
 import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
+import { assertToolAllowed } from './workflow-permissions.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -419,7 +420,10 @@ export class Orchestrator {
 
     let count = 0;
     const agentOutputs = [];
-    for (const { node } of graph.walk({ state: getWorkflowState || {} })) {
+    // The walk budget is a backstop only: it must sit strictly above the
+    // orchestrator's own guard so the graceful `halt` event fires first and
+    // consumers never see a raw traversal exception.
+    for (const { node } of graph.walk({ state: getWorkflowState || {}, maxSteps: maxSteps + 1 })) {
       const s = node.step;
       if (count++ >= maxSteps) {
         yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() };
@@ -432,15 +436,23 @@ export class Orchestrator {
 
       if (s.tool && this.tools && !specialist) {
         try {
+          // v2: the node's declared permission boundary is enforced here.
+          // ToolRegistry metadata (sideEffect / gate) was inert before.
+          const toolDef = this.tools.get?.(s.tool) || { name: s.tool, sideEffect: 'write' };
+          assertToolAllowed(node, toolDef, { gateApproved: opts.toolGateApproved === true });
           observation = await this.tools.call(s.tool, s.toolInput ?? {}, {
             ideaId: plan.ideaId,
+            nodeId: node.id,
             runId: opts.runId, traceId: opts.traceId,
             run_id: opts.run_id, trace_id: opts.trace_id,
           });
           actionType = 'tool'; actionName = s.tool;
         } catch (e) {
-          observation = { error: String(e?.message || e) };
-          degraded = { reason: 'tool_error' };
+          const message = String(e?.message || e);
+          observation = { error: message };
+          degraded = {
+            reason: message.startsWith('Workflow permissions:') ? 'permission_denied' : 'tool_error',
+          };
         }
       } else if (specialist && typeof specialist.execute === 'function') {
         try {
@@ -513,13 +525,13 @@ export class Orchestrator {
 
       if (degraded) {
         yield {
-          type: 'degraded', stepId: s.id, agent: s.agent,
+          type: 'degraded', stepId: s.id, nodeId: node.id, agent: s.agent,
           ...degraded, ts: new Date().toISOString(),
         };
       }
 
       yield {
-        type: 'trace', stepId: s.id, agent: s.agent,
+        type: 'trace', stepId: s.id, nodeId: node.id, agent: s.agent,
         thought: `[${s.agent}] ${s.description || s.input || ''}`,
         action: { type: actionType, name: actionName },
         observation, usedContext: !!contextBlock,

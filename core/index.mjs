@@ -36,6 +36,8 @@ export * from './model.mjs';
 export * from './cycle-lifecycle.mjs';
 export * from './workflow-state.mjs';
 export * from './workflow-graph.mjs';
+export * from './workflow-permissions.mjs';
+export * from './workflow-presets.mjs';
 export * from './shared-data.mjs';
 export * from './repository.mjs';
 export * from './pg-store.mjs';

@@ -1,11 +1,34 @@
-// KayrosLab — Canonical execution state shared across workflow nodes.
+// KayrosLab -- Canonical execution state shared across workflow nodes (v2).
+//
+// v2 changes:
+//   * `node` holds the graph node id, `agent` holds the role. v1 conflated
+//     them, which made per-node retry budgets and id-based routing impossible.
+//   * research / simulation / draft / review are real channels written by
+//     dedicated events. In v1 they were declared and never populated, so the
+//     spec's `review.status == 'OK'` routing could never fire.
+//   * log entries carry the node id, the agent and the correlation ids.
 
-export const WORKFLOW_SCHEMA_VERSION = 1;
+import { WRITABLE_CHANNELS } from './workflow-permissions.mjs';
+
+export { WRITABLE_CHANNELS };
+
+export const WORKFLOW_SCHEMA_VERSION = 2;
 export const WORKFLOW_LOG_LIMIT = 500;
+export const WORKFLOW_START_NODE = '__start__';
+export const DRAFT_FORMATS = Object.freeze(['markdown', 'json']);
+export const REVIEW_STATUSES = Object.freeze(['OK', 'KO']);
 export const WORKFLOW_STATUSES = Object.freeze([
   'created', 'running', 'pending_review', 'revision_required',
   'completed', 'blocked', 'failed', 'cancelled',
 ]);
+
+/** Events that write a state channel, mapped to the channel they own. */
+export const CHANNEL_EVENTS = Object.freeze({
+  research: 'research',
+  simulation: 'simulation',
+  draft: 'draft',
+  review: 'review',
+});
 
 function defaultIdFactory(kind) {
   const uuid = globalThis.crypto?.randomUUID?.();
@@ -35,9 +58,74 @@ function isStructuredLogEntry(entry) {
     && Boolean(entry.type.trim())
     && typeof entry.node === 'string'
     && Boolean(entry.node.trim())
+    && (entry.agent === null || (typeof entry.agent === 'string' && Boolean(entry.agent.trim())))
+    && typeof entry.runId === 'string'
+    && Boolean(entry.runId.trim())
+    && typeof entry.traceId === 'string'
+    && Boolean(entry.traceId.trim())
     && (entry.attempt === null || (Number.isInteger(entry.attempt) && entry.attempt >= 0))
     && WORKFLOW_STATUSES.includes(entry.status);
 }
+
+function assertStringArray(value, label) {
+  if (!Array.isArray(value) || !value.every((item) => typeof item === 'string')) {
+    throw new Error(`WorkflowState.${label} must be an array of strings`);
+  }
+  return [...value];
+}
+
+// -------------------------------------------------------------- channels
+
+function buildResearch(event) {
+  return {
+    facts: assertStringArray(event.facts ?? [], 'research.facts'),
+    sources: assertStringArray(event.sources ?? [], 'research.sources'),
+  };
+}
+
+function buildSimulation(event) {
+  const metrics = event.metrics ?? {};
+  if (!metrics || typeof metrics !== 'object' || Array.isArray(metrics)) {
+    throw new Error('WorkflowState.simulation.metrics must be an object');
+  }
+  for (const [key, value] of Object.entries(metrics)) {
+    if (typeof value !== 'number' || !Number.isFinite(value)) {
+      throw new Error(`WorkflowState.simulation.metrics.${key} must be a finite number`);
+    }
+  }
+  return {
+    metrics: { ...metrics },
+    warnings: assertStringArray(event.warnings ?? [], 'simulation.warnings'),
+  };
+}
+
+function buildDraft(event) {
+  const format = event.format ?? 'markdown';
+  if (!DRAFT_FORMATS.includes(format)) {
+    throw new Error(`WorkflowState.draft format must be one of ${DRAFT_FORMATS.join(', ')}`);
+  }
+  if (typeof event.content !== 'string') {
+    throw new Error('WorkflowState.draft.content must be a string');
+  }
+  return { content: event.content, format };
+}
+
+function buildReview(event) {
+  if (!REVIEW_STATUSES.includes(event.status)) {
+    throw new Error(`WorkflowState.review status must be one of ${REVIEW_STATUSES.join(', ')}`);
+  }
+  return {
+    status: event.status,
+    comments: assertStringArray(event.comments ?? [], 'review.comments'),
+  };
+}
+
+const CHANNEL_BUILDERS = Object.freeze({
+  research: buildResearch,
+  simulation: buildSimulation,
+  draft: buildDraft,
+  review: buildReview,
+});
 
 /**
  * Creates the canonical, serializable state carried by a workflow run.
@@ -65,7 +153,9 @@ export function createWorkflowState(input = {}, deps = {}) {
     ideaId: String(input.ideaId || 'idea'),
     input: { request, context },
     plan: { steps, successCriteria, graph },
-    node: String(input.node || 'planner'),
+    // v2: node is the graph node id, agent is the role executing it.
+    node: String(input.node || WORKFLOW_START_NODE),
+    agent: input.agent == null ? null : String(input.agent),
     nodeAttempts: clone(input.nodeAttempts, {}),
     research: clone(input.research, null),
     simulation: clone(input.simulation, null),
@@ -83,41 +173,58 @@ export function createWorkflowState(input = {}, deps = {}) {
   return state;
 }
 
+function pushLog(next, event) {
+  if (!event.type) return;
+  next.logs.push({
+    ts: next.updatedAt,
+    type: String(event.type),
+    node: next.node,
+    agent: next.agent,
+    attempt: next.nodeAttempts[next.node] || null,
+    status: next.status,
+    runId: next.runId,
+    traceId: next.traceId,
+  });
+  if (next.logs.length > WORKFLOW_LOG_LIMIT) {
+    next.logs.splice(0, next.logs.length - WORKFLOW_LOG_LIMIT);
+  }
+}
+
 /** Applies an orchestrator event immutably to the canonical workflow state. */
 export function applyWorkflowEvent(state, event = {}, deps = {}) {
   validateWorkflowState(state);
   const now = deps.now || (() => new Date().toISOString());
   const next = clone(state, {});
-  next.plan.graph = deepFreeze(next.plan.graph);
+  next.plan.graph = state.plan.graph ?? null;
   next.updatedAt = now();
 
   if (['completed', 'blocked', 'revision_required', 'failed', 'cancelled'].includes(next.status)) {
-    if (event.type) {
-      next.logs.push({
-        ts: next.updatedAt,
-        type: String(event.type),
-        node: next.node,
-        attempt: next.nodeAttempts[next.node] || null,
-        status: next.status,
-      });
-      if (next.logs.length > WORKFLOW_LOG_LIMIT) {
-        next.logs.splice(0, next.logs.length - WORKFLOW_LOG_LIMIT);
-      }
-    }
+    pushLog(next, event);
     validateWorkflowState(next);
     return next;
   }
 
-  if (event.type === 'start') {
-    next.node = 'start';
+  const channel = CHANNEL_EVENTS[event.type];
+  if (channel) {
+    // Channel events also move the cursor: they are emitted by the node that
+    // owns the channel, and routing conditions read both.
+    if (event.nodeId) next.node = String(event.nodeId);
+    if (event.agent !== undefined) next.agent = event.agent == null ? null : String(event.agent);
+    next.status = 'running';
+    next[channel] = CHANNEL_BUILDERS[channel](event);
+  } else if (event.type === 'start') {
+    next.node = WORKFLOW_START_NODE;
+    next.agent = null;
     next.status = 'running';
   } else if (event.type === 'trace') {
-    const node = String(event.agent || event.node || 'agent');
-    next.node = node;
+    const nodeId = String(event.nodeId || event.node || event.agent || 'agent');
+    next.node = nodeId;
+    next.agent = event.agent == null ? null : String(event.agent);
     next.status = 'running';
-    next.nodeAttempts[node] = (next.nodeAttempts[node] || 0) + 1;
+    next.nodeAttempts[nodeId] = (next.nodeAttempts[nodeId] || 0) + 1;
   } else if (event.type === 'gate') {
     next.node = 'human_gate';
+    next.agent = null;
     next.status = 'pending_review';
     next.gate = {
       id: event.gateId || null,
@@ -126,6 +233,7 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
     };
   } else if (event.type === 'gate_resolved') {
     next.node = 'human_gate';
+    next.agent = null;
     next.status = 'running';
     next.gate = {
       ...(next.gate || {}),
@@ -133,10 +241,11 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
       decision: clone(event.decision, null),
     };
   } else if (event.type === 'error') {
-    next.node = String(event.node || next.node || 'unknown');
+    next.node = String(event.nodeId || event.node || next.node || 'unknown');
     next.status = 'failed';
     next.errors.push({
       node: next.node,
+      agent: next.agent,
       code: event.code || null,
       message: String(event.error || event.message || 'workflow error'),
       ts: next.updatedAt,
@@ -164,22 +273,10 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
       next.status = 'completed';
     }
   } else if (event.type) {
-    next.node = String(event.node || event.type);
+    next.node = String(event.nodeId || event.node || event.type);
   }
 
-  if (event.type) {
-    next.logs.push({
-      ts: next.updatedAt,
-      type: String(event.type),
-      node: next.node,
-      attempt: next.nodeAttempts[next.node] || null,
-      status: next.status,
-    });
-    if (next.logs.length > WORKFLOW_LOG_LIMIT) {
-      next.logs.splice(0, next.logs.length - WORKFLOW_LOG_LIMIT);
-    }
-  }
-
+  pushLog(next, event);
   validateWorkflowState(next);
   return next;
 }
@@ -193,9 +290,42 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
 export function freezeWorkflowState(state) {
   validateWorkflowState(state);
   const snapshot = clone(state, {});
+  // plan.graph is already deep-frozen and immutable; sharing the reference
+  // avoids re-serializing the whole graph on every event.
   snapshot.plan.graph = state.plan.graph ?? null;
   validateWorkflowState(snapshot);
   return deepFreeze(snapshot);
+}
+
+function validateChannels(state) {
+  if (state.research !== null) {
+    if (!state.research || typeof state.research !== 'object' || Array.isArray(state.research)
+      || !Array.isArray(state.research.facts) || !Array.isArray(state.research.sources)) {
+      throw new Error('WorkflowState.research is invalid');
+    }
+  }
+  if (state.simulation !== null) {
+    if (!state.simulation || typeof state.simulation !== 'object' || Array.isArray(state.simulation)
+      || !state.simulation.metrics || typeof state.simulation.metrics !== 'object'
+      || Array.isArray(state.simulation.metrics)
+      || !Array.isArray(state.simulation.warnings)) {
+      throw new Error('WorkflowState.simulation is invalid');
+    }
+  }
+  if (state.draft !== null) {
+    if (!state.draft || typeof state.draft !== 'object' || Array.isArray(state.draft)
+      || typeof state.draft.content !== 'string'
+      || !DRAFT_FORMATS.includes(state.draft.format)) {
+      throw new Error('WorkflowState.draft is invalid');
+    }
+  }
+  if (state.review !== null) {
+    if (!state.review || typeof state.review !== 'object' || Array.isArray(state.review)
+      || !REVIEW_STATUSES.includes(state.review.status)
+      || !Array.isArray(state.review.comments)) {
+      throw new Error('WorkflowState.review is invalid');
+    }
+  }
 }
 
 /** Throws on an invalid state and returns true otherwise. */
@@ -210,6 +340,9 @@ export function validateWorkflowState(state) {
     if (typeof state[key] !== 'string' || !state[key].trim()) {
       throw new Error(`WorkflowState.${key} is required`);
     }
+  }
+  if (state.agent !== null && (typeof state.agent !== 'string' || !state.agent.trim())) {
+    throw new Error('WorkflowState.agent must be a non-blank string or null');
   }
   if (state.run_id !== state.runId) {
     throw new Error('WorkflowState.run_id must equal runId');
@@ -236,6 +369,7 @@ export function validateWorkflowState(state) {
   if (!Array.isArray(state.errors) || !Array.isArray(state.artifacts) || !Array.isArray(state.logs)) {
     throw new Error('WorkflowState errors/artifacts/logs must be arrays');
   }
+  validateChannels(state);
   if (state.logs.length > WORKFLOW_LOG_LIMIT
     || !state.logs.every(isStructuredLogEntry)) {
     throw new Error(`WorkflowState.logs must contain at most ${WORKFLOW_LOG_LIMIT} structured entries`);

@@ -51,7 +51,11 @@ test('compiler rejects duplicate nodes and ambiguous or dangling edges', () => {
   assert.throws(() => declareWorkflowGraph([null]), /step definition/i);
   assert.throws(() => compileWorkflowGraph(null), /graph definition/i);
   assert.throws(
-    () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 2 }),
+    () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 3 }),
+    /unsupported version/i,
+  );
+  assert.throws(
+    () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 1 }),
     /unsupported version/i,
   );
   assert.throws(
@@ -279,7 +283,7 @@ test('yielded workflow state is frozen and cannot tamper conditional routing', a
   for await (const event of engine.orchestrator.run({
     ideaId: 'idea-frozen-state', goal: 'Resist routing tamper', steps, graph,
   }, {
-    graphConditions: { redCompleted: (state) => state.node === 'RedTeam' },
+    graphConditions: { redCompleted: (state) => state.agent === 'RedTeam' },
     governance: 'auto', positionning: false, recall: false, remember: false,
     offload: false, autoDistill: false, frameControl: false,
     worldModel: false, adaptive: false,
@@ -382,7 +386,7 @@ test('Orchestrator resolves conditional edges against evolving WorkflowState', a
   await collect(engine.orchestrator.run({
     ideaId: 'idea-conditional-graph', goal: 'Route from state', steps, graph,
   }, {
-    graphConditions: { redCompleted: (state) => state.node === 'RedTeam' },
+    graphConditions: { redCompleted: (state) => state.agent === 'RedTeam' },
     governance: 'auto', positionning: false, recall: false, remember: false,
     offload: false, autoDistill: false, frameControl: false,
     worldModel: false, adaptive: false,
@@ -400,7 +404,7 @@ test('Orchestrator.plan publishes the declared graph through the core API', asyn
     ideaId: 'idea-declared-graph', llmPlan: false,
   });
 
-  assert.equal(plan.graph.version, 1);
+  assert.equal(plan.graph.version, 2);
   assert.deepEqual(
     plan.graph.nodes.map(({ id }) => id),
     plan.steps.map(({ id }) => id),

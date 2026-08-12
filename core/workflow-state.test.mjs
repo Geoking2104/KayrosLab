@@ -33,7 +33,7 @@ test('freezeWorkflowState yields a detached deep-frozen snapshot', () => {
   assert.throws(() => { snapshot.node = 'attacker'; }, TypeError);
   // Mutating the snapshot must never leak back into the live state.
   live.node = 'still-live';
-  assert.equal(snapshot.node, 'planner');
+  assert.equal(snapshot.node, '__start__');
 });
 
 test('createWorkflowState builds a valid canonical state with correlation identifiers', () => {
@@ -49,7 +49,7 @@ test('createWorkflowState builds a valid canonical state with correlation identi
     now: () => '2026-08-11T07:30:00.000Z',
   });
 
-  assert.equal(state.schemaVersion, 1);
+  assert.equal(state.schemaVersion, 2);
   assert.equal(state.runId, 'run-fixed');
   assert.equal(state.traceId, 'trace-fixed');
   assert.equal(state.run_id, 'run-fixed');
@@ -61,7 +61,8 @@ test('createWorkflowState builds a valid canonical state with correlation identi
   });
   assert.equal(state.plan.steps[0].agent, 'Critic');
   assert.deepEqual(state.plan.successCriteria, ['Décision traçable']);
-  assert.equal(state.node, 'planner');
+  assert.equal(state.node, '__start__');
+  assert.equal(state.agent, null);
   assert.equal(state.status, 'created');
   assert.deepEqual(state.nodeAttempts, {});
   assert.deepEqual(state.errors, []);
@@ -80,8 +81,12 @@ test('workflow state API is exposed from the core entry point', () => {
 
 test('validateWorkflowState rejects a state without correlation identifiers', () => {
   assert.throws(
-    () => validateWorkflowState({ schemaVersion: 1, traceId: 'trace-1' }),
+    () => validateWorkflowState({ schemaVersion: 2, traceId: 'trace-1' }),
     /runId/,
+  );
+  assert.throws(
+    () => validateWorkflowState({ schemaVersion: 1, runId: 'r', traceId: 't' }),
+    /schemaVersion must be 2/,
   );
 });
 
@@ -223,7 +228,8 @@ test('applyWorkflowEvent bounds embedded structured logs', () => {
 test('createWorkflowState bounds preloaded structured logs', () => {
   const logs = Array.from({ length: 505 }, (_, index) => ({
     ts: new Date(index).toISOString(), type: 'trace', node: 'restore',
-    attempt: null, status: 'created', index,
+    agent: null, attempt: null, status: 'created', index,
+    runId: 'run-preloaded-logs', traceId: 'trace-preloaded-logs',
   }));
   const state = createWorkflowState({
     runId: 'run-preloaded-logs', traceId: 'trace-preloaded-logs',
@@ -266,8 +272,12 @@ test('Orchestrator emits one correlated WorkflowState across the complete run', 
   assert.ok(events.every((event) => validateWorkflowState(event.workflowState)));
   assert.equal(events.at(-1).workflowState.status, 'completed');
   assert.equal(events.at(-1).workflowState.node, 'end');
-  assert.equal(events.at(-1).workflowState.nodeAttempts.Critic, 1);
-  assert.equal(events.at(-1).workflowState.nodeAttempts.Synthesizer, 1);
+  // v2: attempts are keyed by graph node id, never by agent role, so two
+  // nodes sharing an agent keep independent budgets.
+  assert.equal(events.at(-1).workflowState.nodeAttempts.s1, 1);
+  assert.equal(events.at(-1).workflowState.nodeAttempts.s5, 1);
+  assert.equal(events.at(-1).workflowState.nodeAttempts.Critic, undefined);
+  assert.equal(events.at(-1).workflowState.nodeAttempts.Synthesizer, undefined);
 });
 
 test('Orchestrator passes the same correlation identifiers to every agent call', async () => {
