@@ -19,7 +19,7 @@ import {
   createEngine,
   createAuditStore,
   WorkingGroupStore, createWorkingGroupStore,
-  InMemoryRunStore, FileRunStore, REFERENCE_CONDITIONS,
+  InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
@@ -424,8 +424,10 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     engine.orchestrator.runStore = runStore;
     // Registre des resolveurs de condition, cote serveur : un graphe reprend
     // en les retrouvant par nom, sans que le client ait a les fournir.
+    // UNIFIED_CONDITIONS contient deja celles du pipeline de reference : un
+    // graphe unifie comme un graphe reduit se recompilent tous deux ici.
     engine.orchestrator.graphConditions = {
-      ...REFERENCE_CONDITIONS,
+      ...UNIFIED_CONDITIONS,
       ...(engine.orchestrator.graphConditions || {}),
     };
   }

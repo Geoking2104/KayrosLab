@@ -166,7 +166,134 @@ export function kayrosCycleGraph({ bisociator = true } = {}) {
 /** No conditional edges in the dialectical cycle. */
 export const KAYROS_CYCLE_CONDITIONS = Object.freeze({});
 
+// -------------------------------------------------------- unified graph
+
+/** Reads the decision a human left on the arbitrage gate. */
+const decisionOf = (state) => state?.gate?.decision?.decision ?? null;
+
+/**
+ * Conditions of {@link unifiedGraph}. Arbitrage routes on the human decision
+ * carried by the gate; the deliverable phase routes on the review channel.
+ */
+export const UNIFIED_CONDITIONS = Object.freeze({
+  ...REFERENCE_CONDITIONS,
+  arbitrageGo: (state) => ['approve', 'validate', 'go'].includes(decisionOf(state)),
+  arbitrageRevise: (state) => decisionOf(state) === 'revise',
+});
+
+/**
+ * The two rosters are two phases of one workflow, not two designs.
+ *
+ *   [start] -> planner -> researcher
+ *           -> critic -> devils-advocate -> red-team -> bisociateur
+ *           -> synthesizer -> decision-gate        (human arbitrage)
+ *   decision-gate --Go------> simulator -> writer -> verifier
+ *   decision-gate --revise--> critic               (bounded: the idea is
+ *                                                   re-attacked, not reworded)
+ *   decision-gate --else----> escalate
+ *   verifier --OK--> logger -> [end]
+ *   verifier --KO--> writer                        (bounded)
+ *   verifier --else-> escalate -> [end]
+ *
+ * An idea is attacked until it holds, a human arbitrates the resulting
+ * decision packet, and only then is a deliverable produced and checked.
+ * Nothing is written before that arbitration: a veto costs no production.
+ *
+ * Both budgets are finite, and both exhaustions land on the same human
+ * escalation -- a graph that cannot decide must hand over, not spin.
+ */
+export function unifiedGraph({
+  reviseRounds = 2,
+  writerAttempts = 3,
+  simulatorAttempts = 2,
+  arbitrageRole = 'comex',
+  escalationRole = 'comex',
+  researchTools = [],
+  simulationTools = [],
+} = {}) {
+  // Every node of the revise loop shares the same budget: one attempt per
+  // round, plus the initial pass.
+  const rounds = Math.max(1, reviseRounds) + 1;
+  const adversarial = (id, agent, description) => agentNode(id, agent, {
+    description, maxAttempts: rounds,
+  });
+
+  return graph(
+    [
+      agentNode('planner', 'Planner', {
+        description: 'Decompose the request and set success criteria',
+        maxAttempts: rounds,
+      }),
+      agentNode('researcher', 'Researcher', {
+        description: 'Collect external facts and sources',
+        maxAttempts: rounds, tools: researchTools, writes: ['research'],
+      }),
+      adversarial('critic', 'Critic', 'Attack the assumptions'),
+      adversarial('devils-advocate', 'DevilsAdvocate', 'Argue the opposite case'),
+      adversarial('red-team', 'RedTeam', 'Look for failure modes'),
+      adversarial('bisociateur', 'Bisociateur', 'Bridge distant domains'),
+      agentNode('synthesizer', 'Synthesizer', {
+        description: 'Arbitrate the attacks into a governed recommendation',
+        maxAttempts: rounds,
+      }),
+      agentNode('decision-gate', 'HumanGate', {
+        description: 'Human arbitrage of the decision packet',
+        maxAttempts: rounds,
+        gate: { type: 'decision_arbitrage', requiredRole: arbitrageRole },
+      }),
+      agentNode('simulator', 'Simulator', {
+        description: 'Run the domain computation',
+        maxAttempts: simulatorAttempts, tools: simulationTools, writes: ['simulation'],
+      }),
+      agentNode('writer', 'Writer', {
+        description: 'Produce the report',
+        maxAttempts: writerAttempts, writes: ['draft'],
+      }),
+      agentNode('verifier', 'Verifier', {
+        description: 'Check the draft against the success criteria',
+        maxAttempts: writerAttempts + 1, writes: ['review'],
+      }),
+      agentNode('escalate', 'HumanGate', {
+        description: 'Hand over to a human once a budget is spent',
+        gate: { type: 'human_escalation', requiredRole: escalationRole },
+      }),
+      agentNode('logger', 'Logger', {
+        description: 'Persist decisions, traces and artifacts',
+        writes: ['artifacts'],
+      }),
+    ],
+    [
+      { id: 'start->planner', from: GRAPH_START, to: 'planner', kind: 'always' },
+      { id: 'planner->researcher', from: 'planner', to: 'researcher', kind: 'always' },
+      { id: 'researcher->critic', from: 'researcher', to: 'critic', kind: 'always' },
+      { id: 'critic->devils', from: 'critic', to: 'devils-advocate', kind: 'always' },
+      { id: 'devils->red', from: 'devils-advocate', to: 'red-team', kind: 'always' },
+      { id: 'red->biso', from: 'red-team', to: 'bisociateur', kind: 'always' },
+      { id: 'biso->synth', from: 'bisociateur', to: 'synthesizer', kind: 'always' },
+      { id: 'synth->arbitrage', from: 'synthesizer', to: 'decision-gate', kind: 'always' },
+
+      { id: 'arbitrage->simulator', from: 'decision-gate', to: 'simulator', kind: 'conditional', condition: 'arbitrageGo' },
+      { id: 'arbitrage->critic', from: 'decision-gate', to: 'critic', kind: 'conditional', condition: 'arbitrageRevise' },
+      { id: 'arbitrage->escalate', from: 'decision-gate', to: 'escalate', kind: 'always' },
+
+      { id: 'simulator->writer', from: 'simulator', to: 'writer', kind: 'always' },
+      { id: 'writer->verifier', from: 'writer', to: 'verifier', kind: 'always' },
+      { id: 'verifier->logger', from: 'verifier', to: 'logger', kind: 'conditional', condition: 'reviewOk' },
+      { id: 'verifier->writer', from: 'verifier', to: 'writer', kind: 'conditional', condition: 'reviewKo' },
+      { id: 'verifier->escalate', from: 'verifier', to: 'escalate', kind: 'always' },
+
+      { id: 'logger->end', from: 'logger', to: GRAPH_END, kind: 'always' },
+      { id: 'escalate->end', from: 'escalate', to: GRAPH_END, kind: 'always' },
+    ],
+  );
+}
+
 export const WORKFLOW_PRESETS = Object.freeze({
+  unified: {
+    build: unifiedGraph,
+    conditions: UNIFIED_CONDITIONS,
+    description: 'Adversarial phase, human arbitrage, then produce-then-verify pipeline',
+  },
   reference: {
     build: referencePipelineGraph,
     conditions: REFERENCE_CONDITIONS,
@@ -179,8 +306,15 @@ export const WORKFLOW_PRESETS = Object.freeze({
   },
 });
 
+/**
+ * The unified graph is the default: it is the only one that produces both a
+ * governed recommendation and a verified report. `kayros` and `reference`
+ * stay available for a short cycle or an MVP (spec section 8, "mode light").
+ */
+export const DEFAULT_PRESET = 'unified';
+
 /** Returns `{ graph, conditions }` for a named preset. */
-export function buildPreset(name, options = {}) {
+export function buildPreset(name = DEFAULT_PRESET, options = {}) {
   const preset = Object.prototype.hasOwnProperty.call(WORKFLOW_PRESETS, name)
     ? WORKFLOW_PRESETS[name]
     : null;

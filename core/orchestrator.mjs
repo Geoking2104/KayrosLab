@@ -684,6 +684,8 @@ export class Orchestrator {
     } catch (e) { yield softErrorEvent('positionning', e, { ideaId: plan.ideaId }); }
 
     let count = 0;
+    // One-shot waiver for the node a resume re-enters (see the gate block).
+    let resumeGateWaiver = opts._resumeGateApproved === true;
     const agentOutputs = [];
     // The walk budget is a backstop only: it must sit strictly above the
     // orchestrator's own guard so the graceful `halt` event fires first and
@@ -713,7 +715,10 @@ export class Orchestrator {
       // hands control back. `waitNodeGate: true` opts into blocking.
       // A resumed node's gate was just approved by a human: reopening it here
       // would suspend the run again on the very decision that released it.
-      const gateAlreadyApproved = opts._resumeGateApproved === true && node.id === opts._resumeFrom;
+      // The waiver is consumed once -- a revise loop that comes back to the
+      // same node must face a fresh gate, not ride the earlier approval.
+      const gateAlreadyApproved = resumeGateWaiver && node.id === opts._resumeFrom;
+      if (gateAlreadyApproved) resumeGateWaiver = false;
       if (node.gate && !gateAlreadyApproved) {
         if (!this.governance) {
           yield {
