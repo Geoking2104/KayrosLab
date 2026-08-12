@@ -428,6 +428,9 @@ export class Orchestrator {
     const doOffload = opts.offload !== false;
     const doAutoDistill = opts.autoDistill === true;
     const waitGate = opts.waitGate !== false;
+    // Node and tool gates never block unless the caller explicitly asks for
+    // it. Opting in is only safe when the caller owns the run's lifetime.
+    const waitNodeGate = opts.waitNodeGate === true;
     const scopeResolved = this._resolveRunScope(opts);
     const graph = compiledGraph || compileWorkflowGraph(plan.graph || declareWorkflowGraph(plan.steps || []));
     // R3: cooperative cancellation and a per-step deadline.
@@ -566,8 +569,14 @@ export class Orchestrator {
         return;
       }
       // --- Human gate declared on the node itself (spec section 5) ---
-      // The checkpoint now belongs to the topology: it is opened before the
-      // node runs, not hard-wired after the walk.
+      // The checkpoint belongs to the topology: it is opened before the node
+      // runs, not hard-wired after the walk.
+      //
+      // Default is SUSPEND, not BLOCK. Awaiting a human decision inside the
+      // run only works for a caller that holds the run open; anything else --
+      // an HTTP request, a scheduled job, the SSE route -- hangs forever.
+      // So the run emits the gate, returns a resumable `pending_review`, and
+      // hands control back. `waitNodeGate: true` opts into blocking.
       if (node.gate) {
         if (!this.governance) {
           yield {
@@ -596,10 +605,11 @@ export class Orchestrator {
           status: 'pending_review', requiredRole: node.gate.requiredRole,
           ts: new Date().toISOString(),
         };
-        if (!waitGate) {
+        if (!waitNodeGate) {
           yield {
             type: 'final', status: 'pending_review', gateId, gateType: node.gate.type,
-            nodeId: node.id, ts: new Date().toISOString(),
+            nodeId: node.id, requiredRole: node.gate.requiredRole,
+            ts: new Date().toISOString(),
           };
           return;
         }
@@ -658,6 +668,15 @@ export class Orchestrator {
               type: 'gate', gateId, gateType: 'tool_execution', nodeId: node.id,
               tool: s.tool, status: 'pending_review', ts: new Date().toISOString(),
             };
+            if (!waitNodeGate) {
+              // Same rule as node gates: suspend, never hang. The risky call
+              // has not happened and the run is resumable from this gate.
+              yield {
+                type: 'final', status: 'pending_review', gateId, gateType: 'tool_execution',
+                nodeId: node.id, tool: s.tool, ts: new Date().toISOString(),
+              };
+              return;
+            }
             let decision = null;
             try { decision = await promise; } catch { decision = null; }
             yield { type: 'gate_resolved', gateId, nodeId: node.id, decision, ts: new Date().toISOString() };

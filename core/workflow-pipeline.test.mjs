@@ -116,7 +116,11 @@ test('a KO review really loops back to the writer then escalates', async () => {
     channel: { type: 'review', status: 'KO', comments: ['incomplet'] },
   });
 
-  const events = await collect(engine.orchestrator.run(referencePlan(), runOpts()));
+  // waitNodeGate: this test is about the revision loop, so it opts into
+  // blocking on the escalation gate rather than suspending at it.
+  const events = await collect(engine.orchestrator.run(
+    referencePlan(), runOpts({ waitNodeGate: true }),
+  ));
   const nodes = events.filter((event) => event.type === 'trace').map((event) => event.nodeId);
 
   // writerAttempts = 2: the writer runs twice, then the budget forces escalation.

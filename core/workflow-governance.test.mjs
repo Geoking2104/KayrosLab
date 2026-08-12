@@ -72,7 +72,7 @@ test('reaching a gate node opens a governance gate before the node runs', async 
     output: 'ko', channel: { type: 'review', status: 'KO', comments: ['incomplet'] },
   });
 
-  const events = await collect(engine.orchestrator.run(referencePlan(), runOpts()));
+  const events = await collect(engine.orchestrator.run(referencePlan(), runOpts({ waitNodeGate: true })));
   const nodeGate = opened.find((g) => g.type === 'human_escalation');
   assert.ok(nodeGate, 'the gate node opened a governance gate');
   assert.equal(nodeGate.requiredRole, 'comex');
@@ -94,7 +94,7 @@ test('a vetoed gate node blocks the run instead of executing', async () => {
     output: 'ko', channel: { type: 'review', status: 'KO', comments: ['incomplet'] },
   });
 
-  const events = await collect(engine.orchestrator.run(referencePlan(), runOpts()));
+  const events = await collect(engine.orchestrator.run(referencePlan(), runOpts({ waitNodeGate: true })));
   assert.equal(ran, false, 'a vetoed node must not execute');
   const final = events.at(-1);
   assert.equal(final.type, 'final');
@@ -124,7 +124,7 @@ test('a gated tool systematically opens a governance gate instead of being denie
   };
   const events = await collect(engine.orchestrator.run(
     { ideaId: 'idea-tool', goal: 'Publier', steps: graph.nodes.map((n) => n.step), graph },
-    runOpts({ graphConditions: {} }),
+    runOpts({ graphConditions: {}, waitNodeGate: true }),
   ));
 
   const toolGate = opened.find((g) => g.type === 'tool_execution');
