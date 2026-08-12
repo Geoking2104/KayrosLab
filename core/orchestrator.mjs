@@ -26,6 +26,7 @@ import {
 import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
 import { assertToolAllowed, assertChannelWritable } from './workflow-permissions.mjs';
 import { resolveLogSink } from './log-sink.mjs';
+import { resolveRunStore } from './run-store.mjs';
 import { buildRoleContext } from './role-context.mjs';
 
 const AGENTS = AGENT_TYPES;
@@ -102,7 +103,7 @@ export class Orchestrator {
   constructor({
     llm, tools = null, memory = null, layered = null, governance = null,
     classifier = null, recallK = 3, plannerModel = null, agents = null,
-    quantGuidance = null, logSink = null,
+    quantGuidance = null, logSink = null, runStore = null, graphConditions = null,
     tenantId = null, defaultScope = null, defaultScopeId = null,
     userId = null, teamId = null, organizationId = null,
   } = {}) {
@@ -118,6 +119,12 @@ export class Orchestrator {
     this.agents = agents || createAllAgents({ llm, tools, memory });
     this.quantGuidance = quantGuidance || null;
     this.logSink = logSink || null;
+    this.runStore = runStore || null;
+    // Registry of named condition resolvers. A graph references a condition
+    // by name; the resolver is a function, so it cannot travel in a snapshot
+    // or come from an HTTP body. It lives here, server-side, and a resumed
+    // run looks it up by name.
+    this.graphConditions = graphConditions || {};
     this.scopeDefaults = {
       tenantId: tenantId || null,
       defaultScope: defaultScope || null,
@@ -381,11 +388,15 @@ export class Orchestrator {
         message: `Bloque (veto) : ${decision.reason ?? 'veto humain'}`,
         ts: new Date().toISOString(),
       });
+      // A vetoed run is over: it must leave the resumable store.
+      yield* this._settleRunStore(workflowState, opts);
       return;
     }
 
+    // Resolvers are code: they come from the registry, never from the
+    // snapshot (which is JSON) nor from the caller's payload.
     const compiledGraph = compileWorkflowGraph(state.plan.graph, {
-      conditions: opts.graphConditions || {},
+      conditions: { ...this.graphConditions, ...(opts.graphConditions || {}) },
     });
     const executionPlan = {
       ideaId: state.ideaId,
@@ -414,12 +425,13 @@ export class Orchestrator {
       if (event.type === 'start') continue; // the run already started
       yield emit(event);
     }
+    yield* this._settleRunStore(workflowState, opts);
   }
 
   async *run(plan, opts = {}) {
     const compiledGraph = compileWorkflowGraph(
       plan.graph || declareWorkflowGraph(plan.steps || []),
-      { conditions: opts.graphConditions || {} },
+      { conditions: { ...this.graphConditions, ...(opts.graphConditions || {}) } },
     );
     const graph = compiledGraph.definition;
     const executionPlan = {
@@ -502,6 +514,35 @@ export class Orchestrator {
     }
     if (sink && !sinkFailed) {
       try { await sink.flush?.(); } catch { /* the trail is already written */ }
+    }
+    yield* this._settleRunStore(workflowState, opts);
+  }
+
+  /**
+   * Persists a suspended run so a human decision can pick it up later, and
+   * clears it once the run has actually finished. Without this the snapshot
+   * dies with the request and `resume` is unreachable.
+   */
+  async *_settleRunStore(workflowState, opts = {}) {
+    const store = resolveRunStore(opts.runStore ?? this.runStore);
+    if (!store) return;
+    try {
+      if (workflowState.status === 'pending_review') {
+        await store.save(workflowState, { tenantId: opts.tenantId });
+      } else {
+        await store.delete(workflowState.runId, { tenantId: opts.tenantId });
+      }
+    } catch (e) {
+      // A store failure must not rewrite the run's outcome, but it must not
+      // be silent either: the run is finished and possibly unresumable.
+      yield {
+        ...softErrorEvent('run_store', e, { runId: workflowState.runId }),
+        runId: workflowState.runId,
+        traceId: workflowState.traceId,
+        run_id: workflowState.run_id,
+        trace_id: workflowState.trace_id,
+        workflowState: freezeWorkflowState(workflowState),
+      };
     }
   }
 

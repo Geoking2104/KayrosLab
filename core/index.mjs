@@ -39,6 +39,7 @@ export * from './workflow-graph.mjs';
 export * from './workflow-permissions.mjs';
 export * from './workflow-presets.mjs';
 export * from './log-sink.mjs';
+export * from './run-store.mjs';
 export * from './role-context.mjs';
 export * from './shared-data.mjs';
 export * from './repository.mjs';

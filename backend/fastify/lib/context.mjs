@@ -19,6 +19,7 @@ import {
   createEngine,
   createAuditStore,
   WorkingGroupStore, createWorkingGroupStore,
+  InMemoryRunStore, FileRunStore, REFERENCE_CONDITIONS,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
@@ -218,6 +219,15 @@ export default async function buildContext() {
     } catch { console.warn('[kayroslab] SMTP configure mais nodemailer absent'); }
   }
 
+  // Runs suspendus sur un gate humain. Sans ce store le snapshot meurt avec
+  // la requete et /v1/runs/:runId/resume n'a rien a reprendre.
+  // FileRunStore importe node:fs/promises paresseusement : pas de dependance
+  // sur nodeFs, qui n'est resolu que plus bas dans cette fonction.
+  const RUNS_FILE = process.env.KAYROS_RUNS_FILE || '';
+  const runStore = RUNS_FILE
+    ? new FileRunStore({ path: RUNS_FILE })
+    : new InMemoryRunStore();
+
   const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
   let gateStore;
   if (pgPool) {
@@ -408,6 +418,17 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     fs: nodeFs,
     path: nodePath,
   });
+  // L'orchestrateur enregistre lui-meme un run suspendu et le purge a la
+  // terminaison : la route de reprise n'a plus qu'a lire le store.
+  if (engine?.orchestrator) {
+    engine.orchestrator.runStore = runStore;
+    // Registre des resolveurs de condition, cote serveur : un graphe reprend
+    // en les retrouvant par nom, sans que le client ait a les fournir.
+    engine.orchestrator.graphConditions = {
+      ...REFERENCE_CONDITIONS,
+      ...(engine.orchestrator.graphConditions || {}),
+    };
+  }
 
   bindEngineToServer(engine, { llm, tools, governance });
   if (engine.persistenceReady) {
@@ -419,7 +440,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
 
   return {
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
-    governance, gateStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
+    governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
     engine,
     sharedPaths,
