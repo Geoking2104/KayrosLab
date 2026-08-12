@@ -11,8 +11,30 @@ import {
 import {
   applyWorkflowEvent,
   createWorkflowState,
+  freezeWorkflowState,
   validateWorkflowState,
 } from './workflow-state.mjs';
+
+test('freezeWorkflowState yields a detached deep-frozen snapshot', () => {
+  const live = createWorkflowState({
+    ideaId: 'idea-freeze',
+    input: { request: 'Snapshot', context: { market: 'EU' } },
+    plan: { steps: [{ id: 's1', agent: 'Critic' }], successCriteria: [] },
+  });
+  const snapshot = freezeWorkflowState(live);
+
+  assert.notEqual(snapshot, live);
+  assert.equal(validateWorkflowState(snapshot), true);
+  assert.deepEqual({ ...snapshot, plan: undefined }, { ...live, plan: undefined });
+  assert.ok(Object.isFrozen(snapshot));
+  assert.ok(Object.isFrozen(snapshot.input.context));
+  assert.ok(Object.isFrozen(snapshot.nodeAttempts));
+  assert.ok(Object.isFrozen(snapshot.plan.steps[0]));
+  assert.throws(() => { snapshot.node = 'attacker'; }, TypeError);
+  // Mutating the snapshot must never leak back into the live state.
+  live.node = 'still-live';
+  assert.equal(snapshot.node, 'planner');
+});
 
 test('createWorkflowState builds a valid canonical state with correlation identifiers', () => {
   const state = createWorkflowState({

@@ -18,6 +18,13 @@ function clone(value, fallback) {
   return JSON.parse(JSON.stringify(value));
 }
 
+function deepFreeze(value, seen = new WeakSet()) {
+  if (!value || typeof value !== 'object' || seen.has(value)) return value;
+  seen.add(value);
+  for (const child of Object.values(value)) deepFreeze(child, seen);
+  return Object.freeze(value);
+}
+
 function isStructuredLogEntry(entry) {
   return Boolean(entry)
     && typeof entry === 'object'
@@ -44,6 +51,7 @@ export function createWorkflowState(input = {}, deps = {}) {
   const context = clone(input.input?.context ?? input.context, {});
   const steps = clone(input.plan?.steps, []);
   const successCriteria = clone(input.plan?.successCriteria, []);
+  const graph = deepFreeze(clone(input.plan?.graph, null));
   const logs = clone(input.logs, []);
   const runId = String(input.runId || input.run_id || idFactory('run'));
   const traceId = String(input.traceId || input.trace_id || idFactory('trace'));
@@ -56,7 +64,7 @@ export function createWorkflowState(input = {}, deps = {}) {
     trace_id: traceId,
     ideaId: String(input.ideaId || 'idea'),
     input: { request, context },
-    plan: { steps, successCriteria },
+    plan: { steps, successCriteria, graph },
     node: String(input.node || 'planner'),
     nodeAttempts: clone(input.nodeAttempts, {}),
     research: clone(input.research, null),
@@ -80,6 +88,7 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
   validateWorkflowState(state);
   const now = deps.now || (() => new Date().toISOString());
   const next = clone(state, {});
+  next.plan.graph = deepFreeze(next.plan.graph);
   next.updatedAt = now();
 
   if (['completed', 'blocked', 'revision_required', 'failed', 'cancelled'].includes(next.status)) {
@@ -173,6 +182,20 @@ export function applyWorkflowEvent(state, event = {}, deps = {}) {
 
   validateWorkflowState(next);
   return next;
+}
+
+/**
+ * Returns a detached, deep-frozen snapshot of the canonical workflow state.
+ * The orchestrator keeps the live state private for conditional routing and
+ * exposes only these snapshots on yielded events, so consumers can never
+ * mutate routing-relevant state by reference.
+ */
+export function freezeWorkflowState(state) {
+  validateWorkflowState(state);
+  const snapshot = clone(state, {});
+  snapshot.plan.graph = state.plan.graph ?? null;
+  validateWorkflowState(snapshot);
+  return deepFreeze(snapshot);
 }
 
 /** Throws on an invalid state and returns true otherwise. */

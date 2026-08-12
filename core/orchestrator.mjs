@@ -20,7 +20,8 @@ import { compilePacket, applyEpistemicPolicy, renderPacketForGate, policyForPack
 import { runP1Hooks } from './run-hooks-p1.mjs';
 import { runP2Hooks } from './run-hooks-p2.mjs';
 import { runP3P4Hooks } from './run-hooks-p3p4.mjs';
-import { applyWorkflowEvent, createWorkflowState } from './workflow-state.mjs';
+import { applyWorkflowEvent, createWorkflowState, freezeWorkflowState } from './workflow-state.mjs';
+import { compileWorkflowGraph, declareWorkflowGraph } from './workflow-graph.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -166,13 +167,17 @@ export class Orchestrator {
       ideaId,
       input: { request: goal, context: ctx.context || {} },
     });
-    const correlated = (value) => ({
-      ...value,
-      runId: correlation.runId,
-      traceId: correlation.traceId,
-      run_id: correlation.runId,
-      trace_id: correlation.traceId,
-    });
+    const correlated = (value) => {
+      const graph = value.graph || declareWorkflowGraph(value.steps || []);
+      return {
+        ...value,
+        graph,
+        runId: correlation.runId,
+        traceId: correlation.traceId,
+        run_id: correlation.runId,
+        trace_id: correlation.traceId,
+      };
+    };
     if (ctx.llmPlan === false) {
       return correlated({ ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() });
     }
@@ -247,14 +252,25 @@ export class Orchestrator {
   }
 
   async *run(plan, opts = {}) {
+    const compiledGraph = compileWorkflowGraph(
+      plan.graph || declareWorkflowGraph(plan.steps || []),
+      { conditions: opts.graphConditions || {} },
+    );
+    const graph = compiledGraph.definition;
+    const executionPlan = {
+      ...plan,
+      steps: graph.nodes.map(({ step }) => step),
+      graph,
+    };
     let workflowState = createWorkflowState({
       runId: plan.runId || plan.run_id || opts.runId || opts.run_id,
       traceId: plan.traceId || plan.trace_id || opts.traceId || opts.trace_id,
       ideaId: plan.ideaId,
       input: { request: plan.goal, context: opts.context || {} },
       plan: {
-        steps: plan.steps || [],
+        steps: executionPlan.steps,
         successCriteria: plan.successCriteria || opts.successCriteria || [],
+        graph,
       },
     });
     const correlatedOpts = {
@@ -264,20 +280,28 @@ export class Orchestrator {
       run_id: workflowState.run_id,
       trace_id: workflowState.trace_id,
     };
-    for await (const event of this._runInternal(plan, correlatedOpts)) {
+    for await (const event of this._runInternal(
+      executionPlan,
+      correlatedOpts,
+      compiledGraph,
+      () => workflowState,
+    )) {
       workflowState = applyWorkflowEvent(workflowState, event);
+      // Expose only a detached deep-frozen snapshot: the live canonical
+      // state used for conditional routing must stay private so consumers
+      // cannot tamper with edge selection between events.
       yield {
         ...event,
         runId: workflowState.runId,
         traceId: workflowState.traceId,
         run_id: workflowState.run_id,
         trace_id: workflowState.trace_id,
-        workflowState,
+        workflowState: freezeWorkflowState(workflowState),
       };
     }
   }
 
-  async *_runInternal(plan, opts = {}) {
+  async *_runInternal(plan, opts = {}, compiledGraph = null, getWorkflowState = null) {
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
@@ -286,9 +310,11 @@ export class Orchestrator {
     const doAutoDistill = opts.autoDistill === true;
     const waitGate = opts.waitGate !== false;
     const scopeResolved = this._resolveRunScope(opts);
+    const graph = compiledGraph || compileWorkflowGraph(plan.graph || declareWorkflowGraph(plan.steps || []));
 
     yield {
       type: 'start', ideaId: plan.ideaId, goal: plan.goal,
+      graph: graph.definition,
       quant: this._quantSnapshot(), degraded: plan.degraded || null,
       scope: scopeResolved, ts: new Date().toISOString(),
     };
@@ -393,8 +419,12 @@ export class Orchestrator {
 
     let count = 0;
     const agentOutputs = [];
-    for (const s of plan.steps || []) {
-      if (count++ >= maxSteps) { yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() }; break; }
+    for (const { node } of graph.walk({ state: getWorkflowState || {} })) {
+      const s = node.step;
+      if (count++ >= maxSteps) {
+        yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() };
+        return;
+      }
       const specialist = this.agents?.[s.agent];
       let observation, actionType = 'llm', actionName = 'complete';
       let usage = { tokensIn: 0, tokensOut: 0 };
