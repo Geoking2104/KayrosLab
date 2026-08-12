@@ -28,6 +28,60 @@ const AGENTS = AGENT_TYPES;
 
 export { parsePlanSteps, extractFirstArray, salvageObjects, ensureSynthesizerLast };
 
+/**
+ * R2: an optional phase that fails must be visible. Before this, twenty-one
+ * `catch {}` blocks made a failed recall, positionning or distillation
+ * indistinguishable from a successful one.
+ */
+function softErrorEvent(phase, error, extra = {}) {
+  return {
+    type: 'soft_error',
+    phase,
+    message: String(error?.message || error || 'soft failure'),
+    ...extra,
+    ts: new Date().toISOString(),
+  };
+}
+
+/**
+ * R3: bounds a step by a deadline and an abort signal. Without this a hanging
+ * LLM call hung the whole run, with no timeout and no way to cancel.
+ */
+function withDeadline(promise, { ms = null, signal = null, label = 'step' } = {}) {
+  if (!ms && !signal) return promise;
+  return new Promise((resolve, reject) => {
+    let timer = null;
+    let settled = false;
+    const cleanup = () => {
+      if (timer) clearTimeout(timer);
+      if (signal) signal.removeEventListener('abort', onAbort);
+    };
+    const fail = (message, code) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(Object.assign(new Error(message), { code }));
+    };
+    function onAbort() { fail(`${label} aborted`, 'ABORTED'); }
+    if (signal) {
+      if (signal.aborted) { onAbort(); return; }
+      signal.addEventListener('abort', onAbort, { once: true });
+    }
+    if (ms) timer = setTimeout(() => fail(`${label} timed out after ${ms}ms`, 'TIMEOUT'), ms);
+    Promise.resolve(promise).then(
+      (value) => { if (settled) return; settled = true; cleanup(); resolve(value); },
+      (error) => { if (settled) return; settled = true; cleanup(); reject(error); },
+    );
+  });
+}
+
+/** Maps a bounded-step rejection onto the orchestrator's degraded vocabulary. */
+function degradedReasonFor(error, fallback) {
+  if (error?.code === 'TIMEOUT') return 'timeout';
+  if (error?.code === 'ABORTED') return 'aborted';
+  return fallback;
+}
+
 function agentQuantInfo(agent) {
   if (!agent) return null;
   const rec = agent.quantRec || null;
@@ -184,6 +238,7 @@ export class Orchestrator {
     }
     const plannerAgent = this.agents?.Planner;
     const model = ctx.model ?? plannerAgent?.preferredModel ?? this.plannerModel ?? undefined;
+    let lastPlannerError = null;
     if (plannerAgent && typeof plannerAgent.createPlan === 'function') {
       try {
         const result = await plannerAgent.createPlan(goal, {
@@ -199,9 +254,20 @@ export class Orchestrator {
             degraded: result.degraded || null,
           });
         }
-      } catch { /* soft */ }
+      } catch (e) {
+        // plan() is not a generator, so the failure is recorded on the plan
+        // itself rather than emitted: the caller sees why it fell back.
+        lastPlannerError = e;
+      }
     }
-    return correlated({ ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() });
+    return correlated({
+      ideaId, goal, generatedBy: 'fallback',
+      steps: this._fallbackSteps(),
+      quant: this._quantSnapshot(),
+      degraded: lastPlannerError
+        ? { reason: 'planner_error', message: String(lastPlannerError?.message || lastPlannerError) }
+        : null,
+    });
   }
 
   async _injectPositionning(plan, opts, scopeResolved) {
@@ -230,11 +296,16 @@ export class Orchestrator {
       maxGaps: opts.positionningMaxGaps ?? 5,
     });
     const created = [];
+    const failures = [];
     for (const p of payloads || []) {
       try {
         const fact = await this.layered.addAtomicFact(p);
         created.push({ id: fact.id, type: fact.type, content: fact.content.slice(0, 120) });
-      } catch { /* soft */ }
+      } catch (e) {
+        // Not a generator: failures are counted and surfaced on the returned
+        // summary, which _runInternal turns into a soft_error event.
+        failures.push(String(e?.message || e));
+      }
     }
     let extraContext = '';
     if (created.length) {
@@ -248,6 +319,7 @@ export class Orchestrator {
       gapCount: analysis?.gaps?.length ?? 0,
       facts: created.length,
       preview: created.slice(0, 5),
+      failures,
       extraContext,
     };
   }
@@ -302,7 +374,11 @@ export class Orchestrator {
     }
   }
 
-  async *_runInternal(plan, opts = {}, compiledGraph = null, getWorkflowState = null) {
+  async *_runInternal(plan, callerOpts = {}, compiledGraph = null, getWorkflowState = null) {
+    // R1: every write below lands on this private copy. The caller's object
+    // and the Orchestrator instance stay free of run-scoped state, so two
+    // concurrent runs on a shared instance cannot corrupt each other.
+    const opts = { ...callerOpts };
     const level = opts.governance ?? 'supervise';
     const maxSteps = opts.maxSteps ?? 20;
     const doRecall = opts.recall !== false;
@@ -312,6 +388,16 @@ export class Orchestrator {
     const waitGate = opts.waitGate !== false;
     const scopeResolved = this._resolveRunScope(opts);
     const graph = compiledGraph || compileWorkflowGraph(plan.graph || declareWorkflowGraph(plan.steps || []));
+    // R3: cooperative cancellation and a per-step deadline.
+    const signal = opts.signal || null;
+    const stepTimeoutMs = Number.isInteger(opts.stepTimeoutMs) && opts.stepTimeoutMs > 0
+      ? opts.stepTimeoutMs
+      : null;
+
+    if (signal?.aborted) {
+      yield { type: 'cancelled', reason: 'signal', ts: new Date().toISOString() };
+      return;
+    }
 
     yield {
       type: 'start', ideaId: plan.ideaId, goal: plan.goal,
@@ -357,11 +443,11 @@ export class Orchestrator {
               const decision = await promise;
               if (decision?.frame) opts.frame = decision.frame;
               else if (decision?.status === 'accept_suggested' && p2.chosen) opts.frame = p2.chosen.frame;
-            } catch { /* soft */ }
+            } catch (e) { yield softErrorEvent('recall_layered_items', e); }
           }
         }
       }
-    } catch { /* soft */ }
+    } catch (e) { yield softErrorEvent('frame_control', e); }
 
     let contextBlock = '';
     if (doRecall) {
@@ -386,14 +472,14 @@ export class Orchestrator {
                 .filter((f) => f && f.content)
                 .slice(0, this.recallK * 2)
                 .map((f) => ({ id: f.id, score: f.score ?? null, text: f.content }));
-            } catch { /* soft */ }
+            } catch (e) { yield softErrorEvent('recall_layered', e); }
             yield {
               type: 'recall', ideaId: plan.ideaId, source: 'layered',
               stats: snap.stats, preview: contextBlock.slice(0, 400),
               items, scope: scopeResolved, ts: new Date().toISOString(),
             };
           }
-        } catch { /* soft */ }
+        } catch (e) { yield softErrorEvent('recall_context', e); }
       } else if (this._hasVectorMemory()) {
         let recalled = [];
         try { recalled = await this.memory.recall(plan.ideaId, plan.goal, this.recallK); } catch { recalled = []; }
@@ -405,9 +491,13 @@ export class Orchestrator {
     }
 
     try {
+      // R1: the result stays on the private per-run copy. It used to be
+      // stashed on `this`, which two concurrent runs would overwrite.
       const pos = await this._injectPositionning(plan, opts, scopeResolved);
-      this._lastPositionning = pos;
       opts._lastPositionning = pos;
+      for (const failure of pos?.failures || []) {
+        yield softErrorEvent('positionning_fact', failure, { ideaId: plan.ideaId });
+      }
       if (pos) {
         if (pos.extraContext) contextBlock = (contextBlock || '') + pos.extraContext;
         yield {
@@ -416,7 +506,7 @@ export class Orchestrator {
           facts: pos.facts, preview: pos.preview, ts: new Date().toISOString(),
         };
       }
-    } catch { /* soft */ }
+    } catch (e) { yield softErrorEvent('positionning', e, { ideaId: plan.ideaId }); }
 
     let count = 0;
     const agentOutputs = [];
@@ -425,11 +515,16 @@ export class Orchestrator {
     // consumers never see a raw traversal exception.
     for (const { node } of graph.walk({ state: getWorkflowState || {}, maxSteps: maxSteps + 1 })) {
       const s = node.step;
+      if (signal?.aborted) {
+        yield { type: 'cancelled', reason: 'signal', ts: new Date().toISOString() };
+        return;
+      }
       if (count++ >= maxSteps) {
         yield { type: 'halt', reason: 'maxSteps', ts: new Date().toISOString() };
         return;
       }
       const specialist = this.agents?.[s.agent];
+      const deadline = { ms: stepTimeoutMs, signal, label: `node ${node.id}` };
       let observation, actionType = 'llm', actionName = 'complete';
       let usage = { tokensIn: 0, tokensOut: 0 };
       let modelUsed = null, degraded = null;
@@ -440,43 +535,47 @@ export class Orchestrator {
           // ToolRegistry metadata (sideEffect / gate) was inert before.
           const toolDef = this.tools.get?.(s.tool) || { name: s.tool, sideEffect: 'write' };
           assertToolAllowed(node, toolDef, { gateApproved: opts.toolGateApproved === true });
-          observation = await this.tools.call(s.tool, s.toolInput ?? {}, {
+          observation = await withDeadline(this.tools.call(s.tool, s.toolInput ?? {}, {
             ideaId: plan.ideaId,
             nodeId: node.id,
+            signal,
             runId: opts.runId, traceId: opts.traceId,
             run_id: opts.run_id, trace_id: opts.trace_id,
-          });
+          }), deadline);
           actionType = 'tool'; actionName = s.tool;
         } catch (e) {
           const message = String(e?.message || e);
           observation = { error: message };
           degraded = {
-            reason: message.startsWith('Workflow permissions:') ? 'permission_denied' : 'tool_error',
+            reason: degradedReasonFor(
+              e,
+              message.startsWith('Workflow permissions:') ? 'permission_denied' : 'tool_error',
+            ),
           };
         }
       } else if (specialist && typeof specialist.execute === 'function') {
         try {
-          const res = await specialist.execute(s.input || s.description, {
+          const res = await withDeadline(specialist.execute(s.input || s.description, {
             goal: plan.goal, context: contextBlock,
             provider: opts.provider, sovereignty: opts.sovereignty,
-            model: opts.model,
+            model: opts.model, signal,
             runId: opts.runId, traceId: opts.traceId,
             run_id: opts.run_id, trace_id: opts.trace_id,
-          });
+          }), deadline);
           observation = res.output || res.text || res;
           actionType = 'specialized_agent'; actionName = s.agent;
           modelUsed = res.model || specialist.preferredModel || null;
           degraded = res.degraded || null;
         } catch (e) {
           observation = `Agent ${s.agent} error: ${e?.message || e}`;
-          degraded = { reason: 'agent_error' };
+          degraded = { reason: degradedReasonFor(e, 'agent_error') };
         }
       } else {
         try {
           const messages = [];
           if (contextBlock) messages.push({ role: 'system', content: contextBlock });
           messages.push({ role: 'user', content: `${s.input || plan.goal}\n\nTache : ${s.description || ''}` });
-          const res = await this.llm.complete({
+          const res = await withDeadline(this.llm.complete({
             role: s.agent || 'Planner',
             messages,
             model: opts.model || specialist?.preferredModel || undefined,
@@ -484,16 +583,17 @@ export class Orchestrator {
             run_id: opts.run_id, trace_id: opts.trace_id,
           }, {
             provider: opts.provider, sovereignty: opts.sovereignty,
+            signal,
             runId: opts.runId, traceId: opts.traceId,
             run_id: opts.run_id, trace_id: opts.trace_id,
-          });
+          }), deadline);
           observation = res.text || res.output || '';
           usage = res.usage || usage;
           modelUsed = opts.model || specialist?.preferredModel || null;
           degraded = res.degraded || null;
         } catch (e) {
           observation = `LLM error: ${e?.message || e}`;
-          degraded = { reason: 'llm_error' };
+          degraded = { reason: degradedReasonFor(e, 'llm_error') };
         }
       }
 
@@ -504,7 +604,7 @@ export class Orchestrator {
       if (doRemember && this._hasVectorMemory() && !this._hasLayered()) {
         try {
           await this.memory.remember({ id: `${plan.ideaId}:${s.id}:${count}`, ideaId: plan.ideaId, text: `[${s.agent}] ${obsText}` });
-        } catch { /* soft */ }
+        } catch (e) { yield softErrorEvent('memory_remember', e, { nodeId: node.id }); }
       }
 
       if (this._hasLayered()) {
@@ -520,7 +620,7 @@ export class Orchestrator {
               sourceRefs: [{ type: 'agent', id: s.agent }],
             });
           }
-        } catch { /* soft */ }
+        } catch (e) { yield softErrorEvent('memory_layered', e, { nodeId: node.id }); }
       }
 
       if (degraded) {
@@ -549,7 +649,7 @@ export class Orchestrator {
         if (refs.length) {
           yield { type: 'offload', ideaId: plan.ideaId, count: refs.length, refs: refs.slice(0, 5), ts: new Date().toISOString() };
         }
-      } catch { /* soft */ }
+      } catch (e) { yield softErrorEvent('offload', e, { ideaId: plan.ideaId }); }
     }
 
     if (doAutoDistill && this._hasLayered() && typeof this.layered.autoDistillL2 === 'function') {
@@ -564,7 +664,7 @@ export class Orchestrator {
         if (created.length) {
           yield { type: 'distill', ideaId: plan.ideaId, count: created.length, titles: created.map((s) => s.title), ts: new Date().toISOString() };
         }
-      } catch { /* soft */ }
+      } catch (e) { yield softErrorEvent('distill', e); }
     }
 
     // Synthesis
@@ -580,7 +680,7 @@ export class Orchestrator {
           quant: { modelUsed: synthesis.model || synthAgent.preferredModel || null, agent: agentQuantInfo(synthAgent) },
           degraded: synthesis.degraded || null, ts: new Date().toISOString(),
         };
-      } catch { /* soft */ }
+      } catch (e) { yield softErrorEvent('synthesis', e); }
     }
 
     // --- P1 hooks ---
@@ -595,7 +695,7 @@ export class Orchestrator {
       if (p1.survivingOptions) survivingOptions = p1.survivingOptions;
       if (p1.killedOptions) killedOptions = p1.killedOptions;
       if (p1.residualRisks) residualRisks = p1.residualRisks;
-    } catch { /* soft */ }
+    } catch (e) { yield softErrorEvent('hooks_p1', e); }
 
     // --- P3 + P4 ---
     let p34 = null;
@@ -609,7 +709,7 @@ export class Orchestrator {
       if (p34.residualRisks) residualRisks = p34.residualRisks;
       if (p34.criticalAssumptions && !opts.criticalAssumptions) opts.criticalAssumptions = p34.criticalAssumptions;
       if (p34.falsifiers && !opts.falsifiers) opts.falsifiers = p34.falsifiers;
-    } catch { /* soft */ }
+    } catch (e) { yield softErrorEvent('hooks_p3p4', e); }
 
     // --- P0 packet ---
     let packet = compilePacket({

@@ -54,8 +54,10 @@ test('compiler rejects duplicate nodes and ambiguous or dangling edges', () => {
     () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 3 }),
     /unsupported version/i,
   );
+  // v1 is deliberately still supported (see workflow-compat.test.mjs);
+  // anything outside the supported set is not.
   assert.throws(
-    () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 1 }),
+    () => compileWorkflowGraph({ ...declareWorkflowGraph([]), version: 0 }),
     /unsupported version/i,
   );
   assert.throws(

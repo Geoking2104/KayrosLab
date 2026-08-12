@@ -15,6 +15,14 @@ export const GRAPH_START = '__start__';
 export const GRAPH_END = '__end__';
 export const WORKFLOW_GRAPH_VERSION = 2;
 
+/**
+ * v1 payloads are still accepted: they are promoted to v2 with validated
+ * defaults, then held to the full v2 invariants. Compatibility is explicit,
+ * never silent -- a v1 node that already carries v2 fields is refused rather
+ * than half-trusted.
+ */
+export const SUPPORTED_GRAPH_VERSIONS = Object.freeze([1, 2]);
+
 const MAX_GRAPH_NODES = 256;
 const MAX_GRAPH_EDGES = 1024;
 const MAX_JSON_DEPTH = 64;
@@ -166,6 +174,38 @@ export function declareWorkflowGraph(steps = []) {
   });
 }
 
+/**
+ * Promotes a v1 graph to the v2 shape. v1 nodes ran exactly once along a
+ * linear route, so the promoted attempt budget is 1; a v1 tool node is
+ * allowlisted for exactly the tool its step names, and nothing else.
+ * Idempotent on a v2 graph.
+ */
+export function upgradeWorkflowGraph(input) {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) {
+    throw new Error('Workflow graph: graph definition must be an object');
+  }
+  if (!SUPPORTED_GRAPH_VERSIONS.includes(input.version)) {
+    throw new Error(`Workflow graph: unsupported version ${input.version}`);
+  }
+  const safeInput = snapshotJsonSafe(input);
+  if (safeInput.version === WORKFLOW_GRAPH_VERSION) return safeInput;
+
+  for (const node of safeInput.nodes || []) {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) {
+      throw new Error('Workflow graph: invalid node definition');
+    }
+    if (node.maxAttempts !== undefined || node.permissions !== undefined) {
+      throw new Error(
+        `Workflow graph: v1 node ${node.id} must not declare v2 fields (maxAttempts, permissions)`,
+      );
+    }
+    node.maxAttempts = 1;
+    node.permissions = { tools: node.step?.tool ? [node.step.tool] : [], writes: [] };
+  }
+  safeInput.version = WORKFLOW_GRAPH_VERSION;
+  return safeInput;
+}
+
 export function compileWorkflowGraph(input, { conditions = {} } = {}) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) {
     throw new Error('Workflow graph: graph definition must be an object');
@@ -176,8 +216,10 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
   if (Array.isArray(input.edges) && input.edges.length > MAX_GRAPH_EDGES) {
     throw new Error('Workflow graph: too many edges');
   }
-  // Single read of caller-owned data into a detached, validated snapshot.
-  const safeInput = snapshotJsonSafe(input);
+  const sourceVersion = input.version;
+  // Single read of caller-owned data into a detached, validated snapshot,
+  // promoting a v1 payload to the v2 shape along the way.
+  const safeInput = upgradeWorkflowGraph(input);
   assertKnownFields(safeInput, GRAPH_FIELDS, 'graph');
   if (safeInput.version !== WORKFLOW_GRAPH_VERSION) {
     throw new Error(`Workflow graph: unsupported version ${safeInput.version}`);
@@ -325,7 +367,15 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
   }
 
   // --- Cycles are legal only when every node in them is bounded ---
-  for (const id of findCyclicNodes(nodes, outgoing, definition)) {
+  const cyclicNodes = findCyclicNodes(nodes, outgoing, definition);
+  if (sourceVersion === 1 && cyclicNodes.size) {
+    // A v1 graph was acyclic by construction. Promoting it must not silently
+    // grant it a revision loop it was never validated for.
+    throw new Error(
+      `Workflow graph: a v1 graph must stay acyclic (cycle at ${[...cyclicNodes][0]})`,
+    );
+  }
+  for (const id of cyclicNodes) {
     if (nodes.get(id).maxAttempts === null) {
       throw new Error(
         `Workflow graph: unbounded cycle at ${id} -- every node in a cycle must declare maxAttempts`,
@@ -334,6 +384,7 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
   }
 
   const stepBudget = Math.max(nodes.size * DEFAULT_STEP_BUDGET_FACTOR, MIN_STEP_BUDGET);
+  const hasConditionalEdges = definition.edges.some((edge) => edge.kind === 'conditional');
 
   function attemptsFor(state, nodeId) {
     const attempts = state?.nodeAttempts?.[nodeId];
@@ -397,6 +448,13 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
    * longer an upper bound on the traversal length.
    */
   function* walk({ maxSteps = stepBudget, state = {} } = {}) {
+    // A conditional graph routes on live state. Walking it with a frozen
+    // snapshot -- or with nothing at all -- silently collapses every
+    // condition to false and takes the `always` edge, so the same graph
+    // would route differently depending on the caller. Refuse instead.
+    if (hasConditionalEdges && typeof state !== 'function') {
+      throw new Error('Workflow graph: a conditional graph requires a state provider function');
+    }
     let current = definition.start;
     let visited = 0;
     for (;;) {
@@ -413,7 +471,9 @@ export function compileWorkflowGraph(input, { conditions = {} } = {}) {
 
   function nodeById(id) { return nodes.get(id) || null; }
 
-  return Object.freeze({ definition, next, walk, nodeById, stepBudget });
+  return Object.freeze({
+    definition, next, walk, nodeById, stepBudget, hasConditionalEdges, sourceVersion,
+  });
 }
 
 /**
