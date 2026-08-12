@@ -44,7 +44,17 @@ jobs:
             set -e
             git config --global --add safe.directory /opt/kayroslab
             cd /opt/kayroslab
-            git pull origin main
+            # Le VPS est une cible de deploiement, pas un poste de travail :
+            # son arbre doit refleter origin/main, pas fusionner avec lui.
+            # Un `git pull` echouait des qu'un artefact suivi avait ete
+            # regenere sur place (rencontre avec frontend/.../dist/index.html
+            # lors de son detrackage).
+            git fetch origin main
+            git reset --hard origin/main
+            # Les fichiers non suivis restants (builds, caches) ne bloquent
+            # plus le deploiement mais ne sont pas effaces : node_modules et
+            # les donnees de /opt/kayroslab/data doivent survivre.
+            git status --porcelain
             if [ -z "${MISTRAL_API_KEY:-}" ]; then
               echo "ERREUR : le secret MISTRAL_API_KEY est vide." >&2
               exit 1
