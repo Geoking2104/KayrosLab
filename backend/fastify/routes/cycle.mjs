@@ -27,6 +27,21 @@ const cycleRunSchema = z.object({
   offload: z.boolean().optional().default(true),
   stream: z.boolean().optional().default(true),
   llmPlan: z.boolean().optional().default(true),
+  /**
+   * Graphe prereegle. Absent = comportement historique (plan genere par le
+   * Planner). Un preset court-circuite le planner : sa topologie, ses budgets,
+   * ses permissions et ses gates sont deja decides.
+   * `unified` suspend sur un arbitrage humain : le run repart via
+   * POST /v1/runs/:runId/resume.
+   */
+  preset: z.enum(['unified', 'reference', 'kayros']).optional(),
+  presetOptions: z.object({
+    reviseRounds: z.number().int().min(0).max(10).optional(),
+    writerAttempts: z.number().int().min(1).max(10).optional(),
+    simulatorAttempts: z.number().int().min(1).max(10).optional(),
+    arbitrageRole: z.string().max(64).optional(),
+    escalationRole: z.string().max(64).optional(),
+  }).optional(),
   tenantId: z.string().optional(),
   userId: z.string().optional(),
   teamId: z.string().optional(),
@@ -221,6 +236,8 @@ export default async function cycleRoute(app) {
     const planCtx = {
       ideaId,
       llmPlan: body.llmPlan,
+      preset: body.preset,
+      presetOptions: body.presetOptions,
       provider: body.provider,
       sovereignty: body.sovereignty,
       runId: requestCorrelation.runId,

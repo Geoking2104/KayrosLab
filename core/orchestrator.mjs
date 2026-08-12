@@ -28,6 +28,7 @@ import { assertToolAllowed, assertChannelWritable } from './workflow-permissions
 import { resolveLogSink } from './log-sink.mjs';
 import { resolveRunStore } from './run-store.mjs';
 import { buildRoleContext } from './role-context.mjs';
+import { buildPreset } from './workflow-presets.mjs';
 
 const AGENTS = AGENT_TYPES;
 
@@ -245,6 +246,19 @@ export class Orchestrator {
         trace_id: correlation.traceId,
       };
     };
+    // A preset IS the plan: its topology, budgets, permissions and gates are
+    // already decided, so there is nothing left for the planner to infer.
+    // Selecting one short-circuits the LLM entirely.
+    if (ctx.preset) {
+      const { graph } = buildPreset(ctx.preset, ctx.presetOptions || {});
+      return correlated({
+        ideaId, goal,
+        generatedBy: `preset:${ctx.preset}`,
+        steps: graph.nodes.map(({ step }) => step),
+        graph,
+        quant: this._quantSnapshot(),
+      });
+    }
     if (ctx.llmPlan === false) {
       return correlated({ ideaId, goal, generatedBy: 'fallback', steps: this._fallbackSteps(), quant: this._quantSnapshot() });
     }
