@@ -57,9 +57,24 @@ elif grep -qE '^KAYROS_DATABASE_URL=.+' "${BACKEND_DIR}/.env" 2>/dev/null; then
   DB_URL=$(grep -E '^KAYROS_DATABASE_URL=' "${BACKEND_DIR}/.env" | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")
 fi
 if [[ -n "${DB_URL}" ]]; then
+  # Verifier la joignabilite AVANT de demarrer : une base hebergee ailleurs
+  # (cluster mutualise OVH par exemple) filtre souvent par IP source, et le
+  # symptome serait sinon un backend qui demarre en apparence sain puis
+  # retombe silencieusement sur le store fichier.
   if command -v psql >/dev/null 2>&1; then
-    echo "Application schema Postgres…"
-    psql "${DB_URL}" -f "${APP_DIR}/core/sql/schema.sql" || echo "AVERTISSEMENT : schema.sql a echoue (tables deja ok ?)." >&2
+    echo "Verification de la connexion Postgres…"
+    if psql "${DB_URL}" -c 'select 1' >/dev/null 2>&1; then
+      echo "Postgres joignable. Application du schema…"
+      psql "${DB_URL}" -f "${APP_DIR}/core/sql/schema.sql" \
+        || echo "AVERTISSEMENT : schema.sql a echoue (droits DDL ?)." >&2
+    else
+      # Non fatal : le backend demarre sur le store fichier. Mais l'operateur
+      # doit savoir que Postgres a ete demande et n'a pas repondu, plutot que
+      # de le decouvrir a la premiere decision perdue.
+      echo "AVERTISSEMENT : DATABASE_URL defini mais la base est injoignable." >&2
+      echo "  Verifier que l'IP du VPS est autorisee cote hebergeur." >&2
+      echo "  Le backend demarrera sur le store fichier." >&2
+    fi
   else
     echo "AVERTISSEMENT : psql absent — installer postgresql-client pour auto-schema." >&2
   fi

@@ -29,6 +29,10 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          # Chaine de connexion Postgres complete, y compris le mot de passe :
+          # elle ne doit exister que comme secret GitHub, jamais dans le depot.
+          # Absente, le backend retombe sur le store fichier.
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           POSITIONNER_GITHUB_TOKEN: ${{ secrets.POSITIONNER_GITHUB_TOKEN }}
           POSITIONNER_GITLAB_TOKEN: ${{ secrets.POSITIONNER_GITLAB_TOKEN }}
           POSITIONNER_GOOGLE_API_KEY: ${{ secrets.POSITIONNER_GOOGLE_API_KEY }}
@@ -39,7 +43,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: MISTRAL_API_KEY,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX
+          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -73,6 +77,10 @@ jobs:
               KAYROS_RUNS_FILE: '/opt/kayroslab/data/runs.json',
             };
             const optionalSources = {
+              // Ecrit seulement si le secret existe : une ligne DATABASE_URL
+              // vide desactiverait Postgres au prochain deploiement sans
+              // qu'on l'ait demande.
+              DATABASE_URL: process.env.DATABASE_URL,
               GITHUB_TOKEN: process.env.POSITIONNER_GITHUB_TOKEN,
               GITLAB_TOKEN: process.env.POSITIONNER_GITLAB_TOKEN,
               GOOGLE_API_KEY: process.env.POSITIONNER_GOOGLE_API_KEY,
