@@ -10,7 +10,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { PgRunStore } from './pg-store.mjs';
+import { PgRunStore, applySchema } from './pg-store.mjs';
 import { createWorkflowState, applyWorkflowEvent } from './workflow-state.mjs';
 
 function fakePool(rowsFor = () => ({ rows: [], rowCount: 0 })) {
@@ -110,6 +110,30 @@ test('delete signale s’il a réellement supprimé quelque chose', async () => 
   assert.equal(await absent.delete('run-1', { tenantId: 't1' }), false);
   const present = new PgRunStore(fakePool(() => ({ rowCount: 1 })));
   assert.equal(await present.delete('run-1', { tenantId: 't1' }), true);
+});
+
+test('applySchema execute le fichier et reste anodin a rejouer', async () => {
+  const pool = fakePool();
+  const logs = [];
+  const logger = { info: (m) => logs.push(m), warn: (m) => logs.push(m) };
+  assert.equal(await applySchema(pool, { logger }), true);
+  assert.equal(await applySchema(pool, { logger }), true, 'rejouable a chaque demarrage');
+  assert.equal(pool.calls.length, 2);
+  assert.match(pool.calls[0].sql, /create table if not exists kayros_runs_suspended/);
+  // Idempotence : chaque objet est cree conditionnellement.
+  const creations = pool.calls[0].sql.match(/create (table|index)/g) || [];
+  const conditionnelles = pool.calls[0].sql.match(/create (table|index) if not exists/g) || [];
+  assert.equal(creations.length, conditionnelles.length, 'aucune creation inconditionnelle');
+});
+
+test('un schema non applicable ne bloque pas le demarrage', async () => {
+  // La base peut etre geree par un DBA, ou les droits DDL refuses : l'echec
+  // est signale, pas fatal. La premiere ecriture dira le reste.
+  const pool = { async query() { throw new Error('permission denied for schema public'); } };
+  const warns = [];
+  assert.equal(await applySchema(pool, { logger: { warn: (...a) => warns.push(a.join(' ')) } }), false);
+  assert.match(warns.join(' '), /permission denied/);
+  assert.equal(await applySchema(null), false, 'sans pool, rien a faire');
 });
 
 test('le schéma déclare la table et ses index', async () => {

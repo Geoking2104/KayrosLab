@@ -151,8 +151,19 @@ by name. They never travel in a JSON snapshot nor come from an HTTP body.
 
 | Concern | Module | Default |
 |---------|--------|---------|
-| Suspended runs | `run-store.mjs` — `InMemoryRunStore`, `FileRunStore` | `KAYROS_RUNS_FILE` or `./.kayros-runs.json` |
+| Suspended runs | `run-store.mjs` — `InMemoryRunStore`, `FileRunStore`; `pg-store.mjs` — `PgRunStore` | Postgres when `DATABASE_URL` is set, otherwise `KAYROS_RUNS_FILE` or `./.kayros-runs.json`; `memory` forces the volatile store |
 | Audit trail | `log-sink.mjs` — JSONL, one file per run, append-only | `logs/<runId>.jsonl` |
+
+A file store assumes a single writer: it rewrites the whole file on every
+change, so two instances behind a load balancer overwrite each other and a
+human decision can disappear. `PgRunStore` is selected automatically as soon as
+`DATABASE_URL` is present.
+
+`applySchema(pool)` runs `core/sql/schema.sql` at startup. The VPS deploy
+script did it too, but only there — an instance started anywhere else found an
+empty database and failed on its first write. The schema is entirely
+`create ... if not exists`, so replaying it costs one query. A failure is
+reported, not fatal: the database may be DBA-managed or DDL rights refused.
 
 The run store is keyed by `runId` and **scoped by tenant**: the store filters on
 tenant itself, so a cross-tenant read is impossible by construction rather than

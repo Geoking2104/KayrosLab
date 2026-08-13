@@ -1,0 +1,76 @@
+name: Postgres integration
+
+# Les tests unitaires de PgRunStore observent le SQL emis avec un pool simule :
+# ils ne prouvent ni que le schema s'applique, ni que jsonb se comporte comme
+# attendu. Ce workflow fournit un vrai Postgres pour que core/pg-integration
+# s'execute reellement au lieu d'etre ignore.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'core/pg-store.mjs'
+      - 'core/pg-integration.test.mjs'
+      - 'core/pg-run-store.test.mjs'
+      - 'core/sql/schema.sql'
+      - 'backend/fastify/lib/context.mjs'
+      - '.github/workflows/pg-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'core/pg-store.mjs'
+      - 'core/pg-integration.test.mjs'
+      - 'core/sql/schema.sql'
+      - '.github/workflows/pg-tests.yml'
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: kayros
+          POSTGRES_PASSWORD: kayros
+          POSTGRES_DB: kayroslab_test
+        ports:
+          - 5432:5432
+        # Sans ce healthcheck le job demarre avant que la base accepte les
+        # connexions, et l'echec ressemble a un bug du store.
+        options: >-
+          --health-cmd "pg_isready -U kayros"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # `pg` est une dependance du backend ; le test vit dans core/, qui n'a
+      # aucune dependance npm. On installe donc cote backend et on resout
+      # depuis la.
+      - name: Install pg client
+        working-directory: backend/fastify
+        run: npm install --no-package-lock --ignore-scripts
+
+      - name: Verify the suite is not silently skipped
+        env:
+          DATABASE_URL: postgres://kayros:kayros@localhost:5432/kayroslab_test
+          NODE_PATH: backend/fastify/node_modules
+        run: |
+          # Un test ignore passe au vert : sans ce garde-fou, une variable mal
+          # nommee rendrait ce workflow inutile sans jamais le signaler.
+          output=$(node --test --test-reporter=tap core/pg-integration.test.mjs)
+          echo "$output"
+          if echo "$output" | grep -q "# skipped 6"; then
+            echo "ERREUR : toute la suite d'integration a ete ignoree." >&2
+            exit 1
+          fi
+          echo "$output" | grep -q "# fail 0" || { echo "ERREUR : des tests ont echoue." >&2; exit 1; }
+
+      - name: Unit suite against the simulated pool
+        run: node --test core/pg-run-store.test.mjs

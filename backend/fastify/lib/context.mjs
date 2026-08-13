@@ -23,7 +23,7 @@ import {
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
-  createPgPool, PgIdeaRepository, PgGateStore, PgRunStore,
+  createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore,
 } from '../../../core/pg-store.mjs';
 import { createLinkService } from './context-links.mjs';
 
@@ -188,6 +188,11 @@ export default async function buildContext() {
   const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
 
   const pgPool = await createPgPool(process.env);
+  // Le schema est applique au demarrage, pas seulement par le script de
+  // deploiement VPS : une instance lancee ailleurs (conteneur, second noeud,
+  // poste de dev) trouvait sinon une base vide et echouait a la premiere
+  // ecriture. `create table if not exists` rend l'operation idempotente.
+  if (pgPool) await applySchema(pgPool);
   let storeBackend = 'memory';
 
   const userStore = USERS_FILE ? new FileUserStore({ path: USERS_FILE }) : new InMemoryUserStore();

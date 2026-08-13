@@ -35,6 +35,38 @@ export async function createPgPool(env = process.env) {
   }
 }
 
+/**
+ * Applique core/sql/schema.sql sur la base.
+ *
+ * Le script de deploiement VPS le faisait deja, mais lui seul : une instance
+ * demarree ailleurs (conteneur, second noeud, poste de dev) trouvait une base
+ * vide et echouait a la premiere ecriture. Le schema est en
+ * `create table if not exists`, donc l'appliquer a chaque demarrage est
+ * idempotent et coute une requete.
+ *
+ * @param {import('pg').Pool} pool
+ * @param {{ fs?: object, url?: URL, logger?: object }} [deps]
+ * @returns {Promise<boolean>} true si le schema a ete applique
+ */
+export async function applySchema(pool, { fs = null, url = null, logger = console } = {}) {
+  if (!pool) return false;
+  try {
+    const nodeFs = fs || await import('node:fs/promises');
+    const target = url || new URL('./sql/schema.sql', import.meta.url);
+    const sql = await nodeFs.readFile(target, 'utf8');
+    if (!sql.trim()) return false;
+    await pool.query(sql);
+    logger?.info?.('[kayroslab] schema Postgres applique');
+    return true;
+  } catch (e) {
+    // Un schema non applicable ne doit pas empecher le demarrage : la base
+    // peut etre geree par un DBA, ou les droits DDL refuses. L'echec est
+    // signale, la premiere ecriture dira le reste.
+    logger?.warn?.('[kayroslab] schema Postgres non applique:', e.message);
+    return false;
+  }
+}
+
 /** Idea repository — same surface as FileIdeaRepository / InMemoryIdeaRepository. */
 export class PgIdeaRepository {
   constructor(pool) {
