@@ -50,27 +50,36 @@ jobs:
         with:
           node-version: '20'
 
-      # `pg` est une dependance du backend ; le test vit dans core/, qui n'a
-      # aucune dependance npm. On installe donc cote backend et on resout
-      # depuis la.
-      - name: Install pg client
-        working-directory: backend/fastify
-        run: npm install --no-package-lock --ignore-scripts
+      # core/ n'a aucune dependance npm, mais core/pg-store.mjs fait
+      # `await import('pg')`. NODE_PATH ne sert a rien ici : la resolution ESM
+      # l'ignore, contrairement au require CommonJS. Le paquet doit donc etre
+      # installe a la racine, d'ou core/ remonte naturellement.
+      - name: Install pg client at repository root
+        run: npm install pg@^8 --no-save --no-package-lock --ignore-scripts
 
-      - name: Verify the suite is not silently skipped
+      - name: Run the Postgres integration suite
         env:
           DATABASE_URL: postgres://kayros:kayros@localhost:5432/kayroslab_test
-          NODE_PATH: backend/fastify/node_modules
         run: |
+          # La sortie est capturee sans `set -e` puis affichee AVANT tout
+          # verdict : un garde-fou qui avorte a l'affectation masque l'erreur
+          # qu'il existe pour reveler.
+          set +e
+          output=$(node --test --test-reporter=tap core/pg-integration.test.mjs 2>&1)
+          code=$?
+          set -e
+          echo "$output"
+
           # Un test ignore passe au vert : sans ce garde-fou, une variable mal
           # nommee rendrait ce workflow inutile sans jamais le signaler.
-          output=$(node --test --test-reporter=tap core/pg-integration.test.mjs)
-          echo "$output"
           if echo "$output" | grep -q "# skipped 6"; then
             echo "ERREUR : toute la suite d'integration a ete ignoree." >&2
             exit 1
           fi
-          echo "$output" | grep -q "# fail 0" || { echo "ERREUR : des tests ont echoue." >&2; exit 1; }
+          if [ "$code" -ne 0 ]; then
+            echo "ERREUR : la suite d'integration a echoue (code $code)." >&2
+            exit 1
+          fi
 
       - name: Unit suite against the simulated pool
         run: node --test core/pg-run-store.test.mjs
