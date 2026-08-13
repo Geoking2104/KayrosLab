@@ -23,11 +23,11 @@ import { UNIFIED_CONDITIONS } from '../../../core/workflow-presets.mjs';
 
 const demoCycleSchema = z.object({
   query: z.string().min(3).max(2000),
-  // `kayros` par defaut : le cycle dialectique se termine sans gate humaine,
-  // donc il produit un resultat complet en une requete. `unified` suspend sur
-  // l'arbitrage, ce qui est le comportement voulu en production mais deroutant
-  // pour un visiteur qui decouvre le produit.
-  preset: z.enum(['kayros', 'reference', 'unified']).optional().default('kayros'),
+  // `cycle8` par defaut : ses huit nœuds sont les huit etapes affichees par la
+  // demo, donc la projection est bijective et le visiteur voit le meme cycle
+  // des deux cotes. `unified` suspend sur l'arbitrage — juste en production,
+  // deroutant pour qui decouvre le produit en un clic.
+  preset: z.enum(['cycle8', 'kayros', 'reference', 'unified']).optional().default('cycle8'),
   stream: z.boolean().optional().default(true),
   lang: z.enum(['fr', 'en']).optional().default('fr'),
 });
@@ -100,7 +100,14 @@ export default async function demoCycleRoute(app) {
 
     let plan;
     try {
-      plan = await orch.plan(body.query, { ideaId: `demo-${Date.now()}`, preset: body.preset });
+      plan = await orch.plan(body.query, {
+        ideaId: `demo-${Date.now()}`,
+        preset: body.preset,
+        // La demo desactive la gate d'arbitrage : sans cela le cycle
+        // s'arreterait a la sixieme etape sur une decision que le visiteur ne
+        // peut pas prendre. La gate reste active par defaut hors demo.
+        presetOptions: body.preset === 'cycle8' ? { arbitrageGate: false } : undefined,
+      });
     } catch (e) {
       app.log.error(e);
       return reply.code(502).send({ error: String(e?.message || e) });

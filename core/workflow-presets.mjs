@@ -288,7 +288,65 @@ export function unifiedGraph({
   );
 }
 
+// ------------------------------------------------------------ cycle 8
+
+/**
+ * Les huit etapes du cycle KayrosLab, une par nœud.
+ *
+ * La demo publique montrait huit etapes pedagogiques d'un cote et un graphe
+ * moteur de l'autre : deux representations du meme cycle qui ne se
+ * correspondaient pas. Ce preset supprime l'ecart en faisant des huit etapes
+ * les nœuds eux-memes. La projection est donc bijective par construction, pas
+ * par une table de correspondance qu'il faudrait maintenir a jour.
+ *
+ * L'ordre et les identifiants sont le contrat : la demo s'y adosse.
+ */
+export const CYCLE8_STEPS = Object.freeze([
+  Object.freeze({ id: 'ecouter', agent: 'Researcher', writes: ['research'], description: 'Collecter les signaux faibles et les faits verifiables' }),
+  Object.freeze({ id: 'cartographier', agent: 'Bisociateur', writes: [], description: 'Relier les tendances et reperer les ponts entre domaines' }),
+  Object.freeze({ id: 'construire', agent: 'Writer', writes: ['draft'], description: 'Construire les scenarios a partir des signaux' }),
+  Object.freeze({ id: 'positionner', agent: 'Simulator', writes: ['simulation'], description: 'Chiffrer le positionnement et les ecarts concurrentiels' }),
+  Object.freeze({ id: 'eprouver', agent: 'RedTeam', writes: [], description: 'Attaquer la proposition et chercher les modes de defaillance' }),
+  Object.freeze({ id: 'arbitrer', agent: 'Synthesizer', writes: [], description: 'Arbitrer les attaques en recommandation gouvernee' }),
+  Object.freeze({ id: 'projeter', agent: 'Planner', writes: [], description: 'Projeter la trajectoire : jalons, ressources, KPI' }),
+  Object.freeze({ id: 'realiser', agent: 'Logger', writes: ['artifacts'], description: 'Tracer l execution et boucler le retour d experience' }),
+]);
+
+/**
+ * @param {object} [opts]
+ * @param {boolean} [opts.arbitrageGate] gate humaine sur l'etape Arbitrer.
+ *   Vrai par defaut : c'est le comportement de production, le COMEX tranche
+ *   avant projection. La demo publique le desactive explicitement, sinon le
+ *   visiteur verrait le cycle s'arreter a la sixieme etape sans pouvoir la
+ *   resoudre.
+ */
+export function cycle8Graph({ arbitrageGate = true, arbitrageRole = 'comex' } = {}) {
+  const nodes = CYCLE8_STEPS.map((step) => agentNode(step.id, step.agent, {
+    description: step.description,
+    writes: [...step.writes],
+    gate: step.id === 'arbitrer' && arbitrageGate
+      ? { type: 'decision_arbitrage', requiredRole: arbitrageRole }
+      : null,
+  }));
+  const route = [GRAPH_START, ...nodes.map(({ id }) => id), GRAPH_END];
+  const edges = route.slice(0, -1).map((from, index) => ({
+    id: `${from}->${route[index + 1]}`,
+    from,
+    to: route[index + 1],
+    kind: 'always',
+  }));
+  return graph(nodes, edges);
+}
+
+/** Le cycle 8 est lineaire : aucune arete conditionnelle. */
+export const CYCLE8_CONDITIONS = Object.freeze({});
+
 export const WORKFLOW_PRESETS = Object.freeze({
+  cycle8: {
+    build: cycle8Graph,
+    conditions: CYCLE8_CONDITIONS,
+    description: 'Les huit etapes du cycle KayrosLab, une par nœud',
+  },
   unified: {
     build: unifiedGraph,
     conditions: UNIFIED_CONDITIONS,

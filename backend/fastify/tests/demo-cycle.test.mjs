@@ -28,7 +28,8 @@ describe('backend demo publique sur le moteur', () => {
     assert.equal(res.statusCode, 200, res.body);
     const body = res.json();
     assert.ok(Array.isArray(body.events) && body.events.length > 0);
-    assert.equal(body.preset, 'kayros');
+    // cycle8 : ses nœuds sont les huit etapes affichees par la demo.
+    assert.equal(body.preset, 'cycle8');
   });
 
   it('execute reellement le graphe, pas une suite de prompts', async () => {
@@ -39,12 +40,31 @@ describe('backend demo publique sur le moteur', () => {
     const events = res.json().events;
     const start = events.find((e) => e.type === 'start');
     assert.ok(start?.graph, 'la topologie du graphe est exposee');
-    assert.ok(start.graph.nodes.length >= 4);
-    // Les agents dialectiques ont bien tourne, avec leurs identifiants de noeud.
+    // Un nœud par etape du cycle, ni plus ni moins : c'est ce qui rend la
+    // projection vers l'affichage bijective.
+    assert.equal(start.graph.nodes.length, 8);
     const nodes = events.filter((e) => e.type === 'trace').map((e) => e.nodeId);
-    assert.ok(nodes.includes('critic'), 'le Critic a tourne');
-    assert.ok(nodes.includes('synthesizer'), 'le Synthesizer a tourne');
+    assert.deepEqual(nodes, [
+      'ecouter', 'cartographier', 'construire', 'positionner',
+      'eprouver', 'arbitrer', 'projeter', 'realiser',
+    ], 'les huit etapes sont jouees dans l’ordre du cycle');
     assert.ok(events.some((e) => e.type === 'final'));
+  });
+
+  it('la demo desactive la gate d’arbitrage pour aller au bout', async () => {
+    // Avec la gate, le cycle s'arreterait a la sixieme etape sur une decision
+    // que le visiteur ne peut pas prendre. Hors demo elle reste active.
+    const res = await app.inject({
+      method: 'POST', url: '/v1/demo/cycle/run', headers: json,
+      payload: { query: 'Evaluer une offre', stream: false },
+    });
+    const events = res.json().events;
+    assert.equal(events.some((e) => e.type === 'gate'), false, 'aucune gate en demo');
+    assert.equal(res.json().final.status !== 'pending_review', true);
+
+    const { cycle8Graph } = await import('../../../core/workflow-presets.mjs');
+    assert.equal(cycle8Graph().nodes.find((n) => n.id === 'arbitrer').gate.type,
+      'decision_arbitrage', 'la gate reste le defaut du preset');
   });
 
   it('n’expose ni l’etat complet ni les rouages internes', async () => {

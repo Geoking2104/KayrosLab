@@ -301,7 +301,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
       <div class="flex items-start justify-between gap-3 flex-wrap mb-3">
         <div>
           <div class="text-[11px] font-bold uppercase tracking-wider text-sky-700">Moteur live</div>
-          <p class="text-sm text-slate-600">Cycle execute par l'orchestrateur, pas simule dans le navigateur.</p>
+          <p class="text-sm text-slate-600">Les huit etapes ci-dessous sont les nœuds du graphe, executes par l'orchestrateur — pas simules dans le navigateur.</p>
         </div>
         <span id="engine-status" class="text-xs font-semibold text-sky-700"></span>
       </div>
@@ -2503,37 +2503,79 @@ async function runStep(stepIdx) {
  */
 const ENGINE_URL = window.KAYROS_ENGINE_URL || PROXY_URL.replace(/\/chat$/, '/cycle/run');
 
+/* Projection 1:1 entre les nœuds du graphe et les huit etapes affichees.
+ * Elle n'est pas une convention d'affichage : le preset `cycle8` du moteur
+ * declare exactement ces identifiants, dans cet ordre. Toute divergence est
+ * donc un bug du moteur ou de la page, et le test la detecte. */
+const ENGINE_STEP_IDS = ['ecouter', 'cartographier', 'construire', 'positionner',
+  'eprouver', 'arbitrer', 'projeter', 'realiser'];
+
+function engineStepIndex(nodeId) {
+  const i = ENGINE_STEP_IDS.indexOf(nodeId);
+  return i >= 0 ? i : null;
+}
+
 function engineEl(id) { return document.getElementById(id); }
 
 function renderEngineGraph(graph) {
   if (!graph || !graph.nodes) return '';
-  const agents = graph.nodes.map((n) => escapeHtml(n.agent || n.id)).join(' → ');
   const gates = graph.nodes.filter((n) => n.gate).length;
+  const couverts = graph.nodes.filter((n) => engineStepIndex(n.id) !== null).length;
   return 'Graphe · ' + graph.nodes.length + ' nœuds · ' + graph.edges.length + ' arêtes'
     + (gates ? ' · ' + gates + ' gate(s) humain(s)' : '')
-    + '<div class="mt-1 text-slate-400">' + agents + '</div>';
+    + '<div class="mt-1 text-slate-400">' + couverts + '/' + ENGINE_STEP_IDS.length
+    + ' étapes du cycle couvertes par le graphe</div>';
 }
 
-function renderEngineEvent(ev) {
-  if (ev.type === 'trace') {
-    return '<li class="flex gap-2"><span class="text-sky-600 font-semibold">'
-      + escapeHtml(ev.agent || ev.nodeId) + '</span><span class="text-slate-400">'
-      + escapeHtml(ev.nodeId) + '</span></li>';
+/* Une ligne par etape du cycle, dans l'ordre du cycle — pas dans l'ordre
+ * d'arrivee des evenements. Une etape que le moteur n'a pas atteinte reste
+ * visible et marquee comme telle : masquer ce qui n'a pas tourne donnerait
+ * l'illusion d'un cycle complet. */
+function renderEngineSteps(events, lang) {
+  const parEtape = ENGINE_STEP_IDS.map(() => ({ trace: null, extras: [] }));
+  for (const ev of events) {
+    const idx = engineStepIndex(ev.nodeId);
+    if (idx === null) continue;
+    if (ev.type === 'trace') parEtape[idx].trace = ev;
+    else if (ev.type !== 'start') parEtape[idx].extras.push(ev);
   }
-  if (ev.type === 'review') {
-    const ok = ev.status === 'OK';
-    return '<li class="' + (ok ? 'text-emerald-700' : 'text-amber-700') + '">Revue · '
-      + escapeHtml(ev.status) + (ev.comments && ev.comments.length
-        ? ' — ' + escapeHtml(ev.comments.join(' ; ')) : '') + '</li>';
-  }
-  if (ev.type === 'gate') {
-    return '<li class="text-amber-700 font-semibold">Gate humain · '
-      + escapeHtml(ev.gateType || '') + ' — le run se suspend</li>';
-  }
-  if (ev.type === 'soft_error') {
-    return '<li class="text-slate-400">Phase degradee · ' + escapeHtml(ev.phase || '') + '</li>';
-  }
-  return '';
+  return parEtape.map((slot, idx) => {
+    const meta = stepMeta[idx] || {};
+    const nom = (meta.short && (meta.short[lang] || meta.short.fr)) || ENGINE_STEP_IDS[idx];
+    const agent = slot.trace ? (slot.trace.agent || '') : '';
+    const joue = Boolean(slot.trace);
+    const detail = slot.extras.map((ev) => {
+      if (ev.type === 'review') {
+        return '<span class="' + (ev.status === 'OK' ? 'text-emerald-700' : 'text-amber-700')
+          + '">revue ' + escapeHtml(ev.status) + '</span>';
+      }
+      if (ev.type === 'gate') {
+        return '<span class="text-amber-700 font-semibold">gate '
+          + escapeHtml(ev.gateType || '') + ' — le run se suspend</span>';
+      }
+      if (ev.type === 'research') return '<span class="text-slate-500">' + (ev.facts || []).length + ' fait(s)</span>';
+      if (ev.type === 'simulation') return '<span class="text-slate-500">' + Object.keys(ev.metrics || {}).length + ' métrique(s)</span>';
+      if (ev.type === 'draft') return '<span class="text-slate-500">livrable ' + String(ev.content || '').length + ' car.</span>';
+      return '';
+    }).filter(Boolean).join(' · ');
+    return '<li class="flex items-start gap-2 ' + (joue ? '' : 'opacity-40') + '">'
+      + '<span class="w-5 text-right text-slate-400">' + (idx + 1) + '</span>'
+      + '<span class="' + (joue ? 'text-sky-700 font-semibold' : 'text-slate-500') + '">'
+      + escapeHtml(nom) + '</span>'
+      + (agent ? '<span class="text-slate-400">' + escapeHtml(agent) + '</span>' : '')
+      + (joue ? '' : '<span class="text-slate-400">non atteinte</span>')
+      + (detail ? '<span class="ml-1">' + detail + '</span>' : '')
+      + '</li>';
+  }).join('');
+}
+
+function renderEngineSoftErrors(events) {
+  const soft = events.filter((e) => e.type === 'soft_error');
+  if (!soft.length) return '';
+  // Une phase degradee n'est pas un echec du cycle, mais la taire reviendrait
+  // a presenter un resultat comme plus solide qu'il ne l'est.
+  return '<p class="mt-2 text-xs text-slate-400">Phases dégradées · '
+    + soft.map((e) => escapeHtml(e.phase || '')).join(', ') + '</p>';
 }
 
 function renderEngineFinal(final) {
@@ -2563,16 +2605,18 @@ async function runLiveEngine(idea) {
     const res = await fetch(ENGINE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: idea, preset: 'kayros', stream: false, lang: cycleLanguage() })
+      body: JSON.stringify({ query: idea, preset: 'cycle8', stream: false, lang: cycleLanguage() })
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
     const events = data.events || [];
+    const lang = cycleLanguage();
     const start = events.find((e) => e.type === 'start');
     if (start) engineEl('engine-graph').innerHTML = renderEngineGraph(start.graph);
-    engineEl('engine-trace').innerHTML = events.map(renderEngineEvent).join('');
-    engineEl('engine-final').innerHTML = renderEngineFinal(data.final);
-    engineEl('engine-status').textContent = 'Termine · ' + events.length + ' evenements';
+    engineEl('engine-trace').innerHTML = renderEngineSteps(events, lang);
+    engineEl('engine-final').innerHTML = renderEngineFinal(data.final) + renderEngineSoftErrors(events);
+    const jouees = events.filter((e) => e.type === 'trace' && engineStepIndex(e.nodeId) !== null).length;
+    engineEl('engine-status').textContent = jouees + '/' + ENGINE_STEP_IDS.length + ' étapes exécutées';
   } catch (e) {
     // Degrade, jamais bloquant : les huit etapes continuent de fonctionner.
     engineEl('engine-status').textContent = 'Moteur injoignable';

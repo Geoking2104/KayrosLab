@@ -113,6 +113,55 @@ test('kayros dialectical cycle stays linear and permissionless', () => {
   assert.deepEqual(compiled.nodeById('synthesizer').permissions.writes, ['draft']);
 });
 
+test('cycle8 has exactly one node per step of the KayrosLab cycle', async () => {
+  const { CYCLE8_STEPS, cycle8Graph } = await import('./workflow-presets.mjs');
+  const graph = cycle8Graph({ arbitrageGate: false });
+  assert.equal(graph.nodes.length, 8);
+  assert.deepEqual(graph.nodes.map((n) => n.id), CYCLE8_STEPS.map((s) => s.id));
+  // L'ordre est le contrat : la demo indexe ses huit etapes dessus.
+  assert.deepEqual(graph.nodes.map((n) => n.id), [
+    'ecouter', 'cartographier', 'construire', 'positionner',
+    'eprouver', 'arbitrer', 'projeter', 'realiser',
+  ]);
+  assert.equal(new Set(graph.nodes.map((n) => n.id)).size, 8, 'aucun identifiant duplique');
+});
+
+test('cycle8 traverses its eight steps in order', () => {
+  const compiled = compileWorkflowGraph(
+    // eslint-disable-next-line no-undef
+    WORKFLOW_PRESETS.cycle8.build({ arbitrageGate: false }),
+    { conditions: {} },
+  );
+  const seen = [...compiled.walk({})].map(({ node }) => node.id);
+  assert.equal(seen.length, 8, 'les huit etapes sont parcourues');
+  assert.equal(seen[0], 'ecouter');
+  assert.equal(seen.at(-1), 'realiser');
+});
+
+test('cycle8 gates arbitration by default and only there', async () => {
+  const { cycle8Graph } = await import('./workflow-presets.mjs');
+  const gated = cycle8Graph();
+  const avecGate = gated.nodes.filter((n) => n.gate);
+  assert.equal(avecGate.length, 1, 'une seule gate');
+  assert.equal(avecGate[0].id, 'arbitrer');
+  assert.equal(avecGate[0].gate.type, 'decision_arbitrage');
+  // La demo publique la desactive explicitement : le visiteur ne peut pas
+  // resoudre une gate, le cycle s'arreterait a la sixieme etape.
+  assert.equal(cycle8Graph({ arbitrageGate: false }).nodes.every((n) => !n.gate), true);
+});
+
+test('cycle8 keeps each channel with the step that owns it', async () => {
+  const { cycle8Graph } = await import('./workflow-presets.mjs');
+  const byId = Object.fromEntries(cycle8Graph().nodes.map((n) => [n.id, n]));
+  assert.deepEqual(byId.ecouter.permissions.writes, ['research']);
+  assert.deepEqual(byId.construire.permissions.writes, ['draft']);
+  assert.deepEqual(byId.positionner.permissions.writes, ['simulation']);
+  assert.deepEqual(byId.realiser.permissions.writes, ['artifacts']);
+  // Les etapes adversariales ne produisent que du texte.
+  assert.deepEqual(byId.eprouver.permissions.writes, []);
+  assert.deepEqual(byId.cartographier.permissions.writes, []);
+});
+
 test('kayros cycle can drop the bisociator without breaking the graph', () => {
   const compiled = compileWorkflowGraph(kayrosCycleGraph({ bisociator: false }), { conditions: {} });
   assert.equal(compiled.nodeById('bisociateur'), null);

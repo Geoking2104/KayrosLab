@@ -26,7 +26,45 @@ test('la demo appelle le moteur, pas seulement le proxy LLM', async () => {
   assert.match(source, /ENGINE_URL/, 'une URL de moteur existe');
   assert.match(source, /\/cycle\/run/, 'elle pointe vers la route de cycle');
   assert.match(source, /async function runLiveEngine\(/);
-  assert.match(source, /preset: 'kayros'/, 'un preset reel est demande');
+  assert.match(source, /preset: 'cycle8'/, 'le preset dont les nœuds sont les huit etapes');
+});
+
+test('la projection nœud → etape est bijective', async () => {
+  const { source } = await demoScripts();
+  const { CYCLE8_STEPS } = await import('../core/workflow-presets.mjs');
+
+  // Ce que la page declare.
+  const bloc = source.slice(source.indexOf('const ENGINE_STEP_IDS'));
+  const ids = JSON.parse(
+    bloc.slice(bloc.indexOf('['), bloc.indexOf(']') + 1).replace(/'/g, '"').replace(/\s+/g, ' '),
+  );
+  // Ce que le moteur declare.
+  const moteur = CYCLE8_STEPS.map((s) => s.id);
+
+  assert.deepEqual(ids, moteur, 'meme identifiants, meme ordre des deux cotes');
+  assert.equal(new Set(ids).size, ids.length, 'aucun doublon : la projection est injective');
+
+  // Et le meme nombre d'etapes que l'affichage pedagogique.
+  const meta = source.slice(source.indexOf('const stepMeta = ['));
+  const nbEtapes = (meta.slice(0, meta.indexOf('\n];')).match(/\{ icon:/g) || []).length;
+  assert.equal(ids.length, nbEtapes, 'une etape affichee par nœud, sans reste');
+  assert.equal(ids.length, 8);
+});
+
+test('une etape non atteinte reste visible et signalee', async () => {
+  const { source } = await demoScripts();
+  const fn = source.slice(source.indexOf('function renderEngineSteps('));
+  // Masquer les etapes non jouees donnerait l'illusion d'un cycle complet.
+  assert.match(fn, /non atteinte/);
+  assert.match(fn, /opacity-40/, 'elle est visuellement distinguee');
+  assert.match(fn, /ENGINE_STEP_IDS\.map\(\)|parEtape = ENGINE_STEP_IDS\.map/,
+    'le rendu part des huit etapes, pas des evenements recus');
+});
+
+test('les phases degradees sont dites, pas tues', async () => {
+  const { source } = await demoScripts();
+  assert.match(source, /function renderEngineSoftErrors\(/);
+  assert.match(source, /Phases dégradées/);
 });
 
 test('le moteur est lance au demarrage du cycle', async () => {
@@ -49,10 +87,16 @@ test('un moteur injoignable degrade sans casser la demonstration', async () => {
 
 test('tout ce qui vient du moteur est echappe avant affichage', async () => {
   const { source } = await demoScripts();
-  for (const champ of ['ev.agent || ev.nodeId', 'ev.nodeId', 'ev.status',
-    'final.recommendation', 'final.message']) {
+  // Chaque valeur issue de l'API et inseree en HTML doit passer par esc.
+  for (const champ of ['nom', 'agent', 'ev.status', "ev.gateType || ''",
+    "e.phase || ''", 'final.recommendation', 'final.message', 'status']) {
     assert.ok(source.includes(`escapeHtml(${champ})`), `${champ} doit etre echappe`);
   }
+  // Et rien n'est concatene brut depuis un evenement.
+  const rendu = source.slice(source.indexOf('function renderEngineSteps('),
+    source.indexOf('function renderEngineFinal('));
+  assert.equal(/\+ ev\.(agent|nodeId|status|gateType)\b/.test(rendu), false,
+    'aucune valeur d’evenement concatenee sans echappement');
 });
 
 test('la topologie reelle du graphe est montree au visiteur', async () => {
@@ -60,9 +104,10 @@ test('la topologie reelle du graphe est montree au visiteur', async () => {
   assert.match(source, /function renderEngineGraph\(/);
   assert.match(source, /nœuds/, 'le nombre de nœuds est affiche');
   assert.match(source, /gate\(s\) humain\(s\)/, 'les gates sont visibles');
+  assert.match(source, /étapes du cycle couvertes par le graphe/, 'la couverture est chiffree');
   assert.match(html, /id="engine-panel"/);
   assert.match(html, /id="engine-trace"/);
-  assert.match(html, /Cycle execute par l'orchestrateur, pas simule dans le navigateur/);
+  assert.match(html, /Les huit etapes ci-dessous sont les nœuds du graphe/);
 });
 
 test('un run suspendu est presente comme tel, pas comme un echec', async () => {
