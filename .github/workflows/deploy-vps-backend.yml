@@ -66,6 +66,11 @@ jobs:
             const replacements = {
               ANTHROPIC_API_KEY: '',
               MISTRAL_API_KEY: process.env.MISTRAL_API_KEY,
+              // Runs suspendus sur un gate humain : le chemin est fixe ici
+              // plutot que laisse au defaut implicite du code. Sans ligne
+              // explicite, un changement de defaut deplacerait silencieusement
+              // les runs en attente d'une decision.
+              KAYROS_RUNS_FILE: '/opt/kayroslab/data/runs.json',
             };
             const optionalSources = {
               GITHUB_TOKEN: process.env.POSITIONNER_GITHUB_TOKEN,

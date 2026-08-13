@@ -21,13 +21,14 @@ describe('backend cablage du run store', () => {
     }
   });
 
-  it('la persistance fichier est active par defaut', async () => {
-    const path = './.kayros-runs-test-default.json';
-    paths.push(path);
-    const { app, ctx } = await buildTestApp({ KAYROS_RUNS_FILE: path });
+  it('sans variable, la persistance fichier est le defaut', async () => {
+    // Chaine vide = variable non fournie : on exerce la branche par defaut
+    // de la production, que le harnais neutralise autrement pour isoler les
+    // tests. Aucun run n'est sauvegarde ici, donc aucun fichier n'est ecrit.
+    const { app, ctx } = await buildTestApp({ KAYROS_RUNS_FILE: '' });
     try {
       assert.ok(ctx.runStore instanceof FileRunStore, 'store fichier par defaut');
-      assert.equal(ctx.runStore.path, path);
+      assert.equal(ctx.runStore.path, './.kayros-runs.json');
       // L'orchestrateur le voit : c'est lui qui enregistre a la suspension.
       assert.equal(ctx.engine.orchestrator.runStore, ctx.runStore);
     } finally { await app.close(); }

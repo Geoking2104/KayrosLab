@@ -13,6 +13,10 @@ export async function buildTestApp(env = {}) {
   const defaults = {
     KAYROS_AUTH_SECRET: 'test-aes-256-secret',
     KAYROS_SECRET: '',            // desactive le preHandler x-kayros-secret
+    // Store des runs volatil par defaut : depuis que la persistance fichier
+    // est le defaut en production, un harnais qui ne le neutralise pas
+    // partage un vrai fichier entre executions et les tests se polluent.
+    KAYROS_RUNS_FILE: 'memory',
     ANTHROPIC_API_KEY: '', OLLAMA_ENDPOINT: '', MISTRAL_API_KEY: '',
     DATABASE_URL: '', GOOGLE_API_KEY: '', GITHUB_TOKEN: '', GITLAB_TOKEN: '',
     TEAMS_APP_ID: '8f3b2a1c-0000-1111-2222-333344445555',

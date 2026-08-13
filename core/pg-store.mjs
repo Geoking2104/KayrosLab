@@ -184,3 +184,95 @@ export class PgGateStore {
     return rows.map((r) => r.payload);
   }
 }
+
+/**
+ * Store Postgres des runs suspendus.
+ *
+ * FileRunStore suppose un seul processus ecrivain : il reecrit tout le fichier
+ * a chaque changement, donc deux instances derriere un load balancer se
+ * marchent dessus et une decision humaine peut disparaitre. Cette table est
+ * la source de verite partagee.
+ *
+ * Le filtrage tenant est fait dans la requete, pas apres : une lecture
+ * inter-tenant doit etre impossible par construction, pas par vigilance de
+ * l'appelant.
+ */
+export class PgRunStore {
+  constructor(pool) {
+    this.pool = pool;
+  }
+
+  async load() { return this; }
+
+  async save(state, { tenantId } = {}) {
+    if (!state || typeof state !== 'object') throw new Error('PgRunStore: state requis');
+    if (!state.runId) throw new Error('PgRunStore: a run snapshot needs a runId');
+    const scope = String(tenantId ?? state?.input?.context?.tenantId ?? 'default');
+    await this.pool.query(
+      `insert into kayros_runs_suspended (run_id, tenant_id, idea_id, status, payload, updated_at)
+       values ($1, $2, $3, $4, $5::jsonb, now())
+       on conflict (run_id) do update set
+         tenant_id = excluded.tenant_id,
+         idea_id = excluded.idea_id,
+         status = excluded.status,
+         payload = excluded.payload,
+         updated_at = now()`,
+      [state.runId, scope, state.ideaId ?? null, state.status, JSON.stringify(state)],
+    );
+    return {
+      runId: state.runId, traceId: state.traceId, ideaId: state.ideaId,
+      tenantId: scope, status: state.status, gate: state.gate ?? null,
+      updatedAt: state.updatedAt,
+    };
+  }
+
+  async get(runId, { tenantId } = {}) {
+    const params = [String(runId)];
+    let sql = 'select payload from kayros_runs_suspended where run_id = $1';
+    if (tenantId !== undefined) {
+      sql += ' and tenant_id = $2';
+      params.push(String(tenantId));
+    }
+    const { rows } = await this.pool.query(sql, params);
+    return rows.length ? rows[0].payload : null;
+  }
+
+  /** Listing leger : ni le brouillon ni les logs ne remontent. */
+  async list({ tenantId, ideaId, status } = {}) {
+    const params = [];
+    const where = [];
+    if (tenantId !== undefined) { params.push(String(tenantId)); where.push(`tenant_id = $${params.length}`); }
+    if (ideaId !== undefined) { params.push(String(ideaId)); where.push(`idea_id = $${params.length}`); }
+    if (status !== undefined) { params.push(String(status)); where.push(`status = $${params.length}`); }
+    const clause = where.length ? ` where ${where.join(' and ')}` : '';
+    const { rows } = await this.pool.query(
+      `select run_id, tenant_id, idea_id, status,
+              payload->>'traceId' as trace_id,
+              payload->'gate' as gate,
+              payload->>'updatedAt' as updated_at
+       from kayros_runs_suspended${clause}
+       order by updated_at desc limit 1000`,
+      params,
+    );
+    return rows.map((r) => ({
+      runId: r.run_id,
+      traceId: r.trace_id,
+      ideaId: r.idea_id,
+      tenantId: r.tenant_id,
+      status: r.status,
+      gate: r.gate,
+      updatedAt: r.updated_at,
+    }));
+  }
+
+  async delete(runId, { tenantId } = {}) {
+    const params = [String(runId)];
+    let sql = 'delete from kayros_runs_suspended where run_id = $1';
+    if (tenantId !== undefined) {
+      sql += ' and tenant_id = $2';
+      params.push(String(tenantId));
+    }
+    const res = await this.pool.query(sql, params);
+    return (res.rowCount ?? 0) > 0;
+  }
+}

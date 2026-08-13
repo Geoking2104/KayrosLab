@@ -22,7 +22,9 @@ import {
   InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
-import { createPgPool, PgIdeaRepository, PgGateStore } from '../../../core/pg-store.mjs';
+import {
+  createPgPool, PgIdeaRepository, PgGateStore, PgRunStore,
+} from '../../../core/pg-store.mjs';
 import { createLinkService } from './context-links.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
@@ -221,15 +223,22 @@ export default async function buildContext() {
 
   // Runs suspendus sur un gate humain. Sans ce store le snapshot meurt avec
   // la requete et /v1/runs/:runId/resume n'a rien a reprendre.
-  // La persistance fichier est le defaut : un redemarrage ne doit pas perdre
-  // les runs en attente d'une decision humaine. Meme convention que
-  // memoryPath / offloadRoot plus bas. FileRunStore importe node:fs/promises
-  // paresseusement, donc pas de dependance sur nodeFs (resolu plus loin).
-  // KAYROS_RUNS_FILE=memory force explicitement le store volatil.
+  // Persistance des runs suspendus. Postgres des qu'il est la : un fichier
+  // suppose un seul processus ecrivain, donc deux instances derriere un load
+  // balancer perdraient des decisions. A defaut, fichier -- meme convention
+  // que memoryPath / offloadRoot plus bas ; FileRunStore importe
+  // node:fs/promises paresseusement, donc pas de dependance sur nodeFs
+  // (resolu plus loin). KAYROS_RUNS_FILE=memory force le store volatil.
   const RUNS_FILE = process.env.KAYROS_RUNS_FILE || './.kayros-runs.json';
-  const runStore = RUNS_FILE === 'memory'
-    ? new InMemoryRunStore()
-    : new FileRunStore({ path: RUNS_FILE });
+  let runStore;
+  if (pgPool) {
+    runStore = new PgRunStore(pgPool);
+    console.info('[kayroslab] runs store: Postgres');
+  } else if (RUNS_FILE === 'memory') {
+    runStore = new InMemoryRunStore();
+  } else {
+    runStore = new FileRunStore({ path: RUNS_FILE });
+  }
 
   const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
   let gateStore;

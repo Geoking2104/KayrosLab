@@ -66,16 +66,50 @@
     el.innerHTML = '<p class="text-sm ' + color + '">' + esc(message) + '</p>';
   }
 
-  async function call(path, options) {
-    var res = await fetch(base() + path, Object.assign({ headers: headers() }, options || {}));
-    var body = null;
-    try { body = await res.json(); } catch (e) { body = null; }
-    if (!res.ok) {
-      var reason = body && body.error ? body.error : ('HTTP ' + res.status);
-      throw new Error(reason);
+  // Le client HTTP est isole de la page : les tests l'exercent avec un fetch
+  // simule pour verifier le contrat reel (URL, methode, en-tetes, corps)
+  // plutot que de relire le fichier a coups d'expressions regulieres.
+  function createClient(deps) {
+    var doFetch = deps.fetch;
+    var getBase = deps.base;
+    var getHeaders = deps.headers;
+
+    async function call(path, options) {
+      var res = await doFetch(getBase() + path, Object.assign({ headers: getHeaders() }, options || {}));
+      var body = null;
+      try { body = await res.json(); } catch (e) { body = null; }
+      if (!res.ok) {
+        throw new Error(body && body.error ? body.error : ('HTTP ' + res.status));
+      }
+      return body;
     }
-    return body;
+
+    return {
+      call: call,
+      listSuspended: function () { return call('/v1/runs/suspended'); },
+      detail: function (runId) { return call('/v1/runs/' + encodeURIComponent(runId)); },
+      resume: function (runId, decision, reason) {
+        return call('/v1/runs/' + encodeURIComponent(runId) + '/resume', {
+          method: 'POST',
+          body: JSON.stringify({ decision: decision, reason: reason, stream: false })
+        });
+      }
+    };
   }
+
+  // Une revision ou un veto sans motif est ingerable a l'audit : la page le
+  // refuse avant d'appeler l'API.
+  function needsReason(decision) {
+    return decision === 'veto' || decision === 'revise';
+  }
+
+  var client = createClient({
+    fetch: function (url, options) { return fetch(url, options); },
+    base: base,
+    headers: headers
+  });
+
+  function call(path, options) { return client.call(path, options); }
 
   var GATE_LABELS = {
     decision_arbitrage: 'Arbitrage du packet de décision',
@@ -219,17 +253,14 @@
     if (!card) return;
     var result = card.querySelector('.js-result');
     var reason = card.querySelector('.js-reason').value.trim();
-    if ((decision === 'veto' || decision === 'revise') && !reason) {
+    if (needsReason(decision) && !reason) {
       say(result, 'Un motif est requis pour une révision ou un veto.', 'error');
       return;
     }
     setBusy(card, true);
     say(result, 'Envoi de la décision…');
     try {
-      var payload = await call('/v1/runs/' + encodeURIComponent(runId) + '/resume', {
-        method: 'POST',
-        body: JSON.stringify({ decision: decision, reason: reason, stream: false })
-      });
+      var payload = await client.resume(runId, decision, reason);
       result.innerHTML = resultRows(payload);
       await loadRuns();
     } catch (e) {
@@ -252,6 +283,21 @@
     var detailBtn = event.target.closest('.js-detail');
     if (detailBtn) showDetail(detailBtn.dataset.run);
   });
+
+  // Surface testable : les memes fonctions que la page utilise, exposees pour
+  // etre exercees avec des donnees hostiles et un fetch simule. Rien n'est
+  // reimplemente cote test, sinon le test ne prouverait rien.
+  if (typeof window !== 'undefined') {
+    window.KAYROS_ARBITRAGE = {
+      esc: esc,
+      gateLabel: gateLabel,
+      runCard: runCard,
+      detailRows: detailRows,
+      resultRows: resultRows,
+      needsReason: needsReason,
+      createClient: createClient
+    };
+  }
 })();
 </script>
 </body>
