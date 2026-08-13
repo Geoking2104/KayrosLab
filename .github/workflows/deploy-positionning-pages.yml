@@ -80,6 +80,7 @@ jobs:
 
           # Optional HTML pages
           for f in \
+            arbitrage.html \
             cycle-timeline.html \
             portfolio-dormant.html \
             portfolio-board.html \

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Arbitrage</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['Space Grotesk','sans-serif'],body:['Geist','system-ui','sans-serif']}}}};</script>
+</head>
+<body class="bg-white text-slate-900 antialiased font-body">
+<header class="border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3 flex-wrap">
+    <a href="./kayroslab-complete-with-ai-agents.html" class="font-display font-bold text-lg">KayrosLab <span class="text-sky-600 text-sm">Arbitrage</span></a>
+    <div class="flex gap-3 text-sm">
+      <a href="./portfolio-board.html" class="text-sky-600 font-semibold">Portfolio</a>
+      <a href="./cycle-timeline.html" class="text-sky-600 font-semibold">Cycle SSE</a>
+      <a href="./ontology-explorer.html" class="text-sky-600 font-semibold">Ontologie</a>
+    </div>
+  </div>
+</header>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-4">
+  <h1 class="font-display text-2xl font-bold">Runs en attente de décision</h1>
+  <p class="text-sm text-slate-500">Un run suspendu sur un gate humain ne reprend que sur votre décision · auth Bearer requise.</p>
+
+  <div class="rounded-2xl border border-slate-200 p-4 grid sm:grid-cols-3 gap-3">
+    <div><label class="text-xs font-bold uppercase text-slate-500" for="api">API</label>
+      <input id="api" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" value="http://localhost:8787" /></div>
+    <div><label class="text-xs font-bold uppercase text-slate-500" for="token">Bearer</label>
+      <input id="token" type="password" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" placeholder="JWT" /></div>
+    <div class="flex items-end"><button id="btn-load" type="button" class="rounded-full bg-sky-600 text-white font-semibold px-5 py-2 text-sm w-full sm:w-auto">Charger</button></div>
+  </div>
+
+  <div id="stats" class="text-xs text-slate-500"></div>
+  <div id="runs" class="space-y-3"><p class="text-slate-400 text-sm">Chargez les runs suspendus.</p></div>
+
+  <section id="detail-card" class="hidden rounded-2xl border border-slate-200 p-4 space-y-4">
+    <div class="flex items-start justify-between gap-3 flex-wrap">
+      <div>
+        <h2 class="font-display text-lg font-bold">Décision</h2>
+        <p id="detail-sub" class="text-xs text-slate-500"></p>
+      </div>
+      <button id="btn-close" type="button" class="text-xs text-slate-500 underline">Fermer</button>
+    </div>
+    <div id="detail" class="text-sm space-y-2"></div>
+
+    <div>
+      <label class="text-xs font-bold uppercase text-slate-500" for="reason">Motif</label>
+      <textarea id="reason" rows="2" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" placeholder="Obligatoire pour un veto ou une révision"></textarea>
+    </div>
+
+    <div class="flex gap-3 flex-wrap">
+      <button id="btn-go" type="button" data-decision="approve" class="rounded-full bg-emerald-600 text-white font-semibold px-5 py-2 text-sm">Go — produire le livrable</button>
+      <button id="btn-revise" type="button" data-decision="revise" class="rounded-full bg-amber-500 text-white font-semibold px-5 py-2 text-sm">Réviser — ré-attaquer l'idée</button>
+      <button id="btn-veto" type="button" data-decision="veto" class="rounded-full bg-rose-600 text-white font-semibold px-5 py-2 text-sm">Veto — arrêter</button>
+    </div>
+    <p class="text-xs text-slate-500">Un veto ne coûte aucune production : rien n'est fabriqué avant votre Go.</p>
+
+    <div id="result" class="text-sm"></div>
+  </section>
+</main>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Tout ce qui vient de l'API est echappe avant insertion : les motifs et
+  // les commentaires de revue sont du texte saisi par des humains.
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function headers() {
+    var h = { 'Content-Type': 'application/json' };
+    var t = $('token').value.trim();
+    if (t) h.Authorization = 'Bearer ' + t;
+    return h;
+  }
+
+  function base() { return $('api').value.replace(/\/+$/, ''); }
+
+  function say(el, message, tone) {
+    var color = tone === 'error' ? 'text-rose-600' : 'text-slate-500';
+    el.innerHTML = '<p class="text-sm ' + color + '">' + esc(message) + '</p>';
+  }
+
+  async function call(path, options) {
+    var res = await fetch(base() + path, Object.assign({ headers: headers() }, options || {}));
+    var body = null;
+    try { body = await res.json(); } catch (e) { body = null; }
+    if (!res.ok) {
+      var reason = body && body.error ? body.error : ('HTTP ' + res.status);
+      throw new Error(reason);
+    }
+    return body;
+  }
+
+  // --- liste -------------------------------------------------------------
+
+  var GATE_LABELS = {
+    decision_arbitrage: 'Arbitrage du packet de décision',
+    human_escalation: 'Escalade : budget de révision épuisé',
+    tool_execution: 'Action à risque en attente'
+  };
+
+  function gateLabel(type) {
+    return Object.prototype.hasOwnProperty.call(GATE_LABELS, type)
+      ? GATE_LABELS[type]
+      : (type || 'gate');
+  }
+
+  function runRow(run) {
+    var gate = run.gate || {};
+    // Aucun identifiant genere n'entre dans du JavaScript inline : il passe
+    // par un data-attribut, lu par la delegation d'evenements.
+    return '<article class="rounded-2xl border border-slate-200 p-4 flex items-start justify-between gap-3 flex-wrap">'
+      + '<div>'
+      + '<p class="font-semibold">' + esc(gateLabel(gate.type)) + '</p>'
+      + '<p class="text-xs text-slate-500">idée ' + esc(run.ideaId) + ' · nœud ' + esc(gate.nodeId) + '</p>'
+      + '<p class="text-xs text-slate-400">' + esc(run.runId) + ' · ' + esc(run.updatedAt) + '</p>'
+      + '</div>'
+      + '<button type="button" data-run="' + esc(run.runId) + '" '
+      + 'class="js-open rounded-full bg-slate-900 text-white font-semibold px-4 py-2 text-sm">Ouvrir</button>'
+      + '</article>';
+  }
+
+  async function loadRuns() {
+    var host = $('runs');
+    say(host, 'Chargement…');
+    try {
+      var data = await call('/v1/runs/suspended');
+      var runs = (data && data.runs) || [];
+      $('stats').textContent = runs.length + ' run(s) en attente';
+      if (!runs.length) {
+        say(host, 'Aucun run en attente de décision.');
+        return;
+      }
+      host.innerHTML = runs.map(runRow).join('');
+    } catch (e) {
+      $('stats').textContent = '';
+      say(host, e.message, 'error');
+    }
+  }
+
+  // --- detail ------------------------------------------------------------
+
+  var current = null;
+
+  function detailRows(run) {
+    var gate = run.gate || {};
+    var review = run.review;
+    var rows = [];
+    rows.push('<p><span class="text-slate-500">Gate</span> · ' + esc(gateLabel(gate.type))
+      + ' <span class="text-xs text-slate-400">(rôle requis : ' + esc(gate.requiredRole || 'comex') + ')</span></p>');
+    rows.push('<p><span class="text-slate-500">Idée</span> · ' + esc(run.ideaId) + '</p>');
+    if (review) {
+      rows.push('<p><span class="text-slate-500">Revue</span> · ' + esc(review.status) + '</p>');
+      var comments = review.comments || [];
+      if (comments.length) {
+        rows.push('<ul class="list-disc pl-5 text-slate-600">'
+          + comments.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>');
+      }
+    }
+    if (run.draft) {
+      rows.push('<p><span class="text-slate-500">Livrable</span> · ' + esc(run.draft.format)
+        + ', ' + esc(run.draft.bytes) + ' octets</p>');
+    } else {
+      rows.push('<p class="text-slate-500">Aucun livrable produit à ce stade.</p>');
+    }
+    var attempts = run.nodeAttempts || {};
+    var spent = Object.keys(attempts).map(function (k) { return esc(k) + '×' + esc(attempts[k]); });
+    if (spent.length) {
+      rows.push('<p class="text-xs text-slate-400">Passages · ' + spent.join(' · ') + '</p>');
+    }
+    return rows.join('');
+  }
+
+  async function openRun(runId) {
+    current = runId;
+    $('detail-card').classList.remove('hidden');
+    $('result').innerHTML = '';
+    $('reason').value = '';
+    $('detail-sub').textContent = runId;
+    say($('detail'), 'Chargement…');
+    try {
+      var run = await call('/v1/runs/' + encodeURIComponent(runId));
+      $('detail').innerHTML = detailRows(run);
+    } catch (e) {
+      say($('detail'), e.message, 'error');
+    }
+  }
+
+  function closeDetail() {
+    current = null;
+    $('detail-card').classList.add('hidden');
+  }
+
+  // --- decision ----------------------------------------------------------
+
+  function resultRows(payload) {
+    var events = (payload && payload.events) || [];
+    var traced = events.filter(function (e) { return e.type === 'trace'; })
+      .map(function (e) { return esc(e.nodeId); });
+    var final = payload && payload.final;
+    var status = final ? final.status : 'inconnu';
+    var tone = status === 'blocked_veto' ? 'text-rose-600'
+      : status === 'pending_review' ? 'text-amber-600' : 'text-emerald-600';
+    var out = '<p class="' + tone + ' font-semibold">Statut · ' + esc(status) + '</p>';
+    if (final && final.message) out += '<p class="text-slate-600">' + esc(final.message) + '</p>';
+    if (traced.length) {
+      out += '<p class="text-xs text-slate-500">Nœuds exécutés · ' + traced.join(' → ') + '</p>';
+    }
+    if (status === 'pending_review') {
+      out += '<p class="text-xs text-slate-500">Le run s\'est de nouveau suspendu : rechargez la liste.</p>';
+    }
+    return out;
+  }
+
+  async function decide(decision) {
+    if (!current) return;
+    var reason = $('reason').value.trim();
+    if ((decision === 'veto' || decision === 'revise') && !reason) {
+      say($('result'), 'Un motif est requis pour une révision ou un veto.', 'error');
+      return;
+    }
+    say($('result'), 'Envoi de la décision…');
+    try {
+      var payload = await call('/v1/runs/' + encodeURIComponent(current) + '/resume', {
+        method: 'POST',
+        body: JSON.stringify({ decision: decision, reason: reason, stream: false })
+      });
+      $('result').innerHTML = resultRows(payload);
+      await loadRuns();
+    } catch (e) {
+      say($('result'), e.message, 'error');
+    }
+  }
+
+  // --- cablage -----------------------------------------------------------
+
+  $('btn-load').addEventListener('click', loadRuns);
+  $('btn-close').addEventListener('click', closeDetail);
+
+  // Delegation : les boutons de la liste sont reconstruits a chaque chargement.
+  $('runs').addEventListener('click', function (event) {
+    var button = event.target.closest('.js-open');
+    if (!button) return;
+    openRun(button.dataset.run);
+  });
+
+  ['btn-go', 'btn-revise', 'btn-veto'].forEach(function (id) {
+    $(id).addEventListener('click', function (event) {
+      decide(event.currentTarget.dataset.decision);
+    });
+  });
+})();
+</script>
+</body>
+</html>
