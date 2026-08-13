@@ -47,6 +47,7 @@ await app.register((await import('./routes/portfolio.mjs')).default);
 await app.register((await import('./routes/impact.mjs')).default);
 await app.register((await import('./routes/gates.mjs')).default);
 await app.register((await import('./routes/resume.mjs')).default);
+await app.register((await import('./routes/demo-cycle.mjs')).default);
 await app.register((await import('./routes/campaigns.mjs')).default);
 await app.register((await import('./routes/comments.mjs')).default);
 await app.register((await import('./routes/reporting.mjs')).default);
