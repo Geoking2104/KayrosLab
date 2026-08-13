@@ -69,8 +69,43 @@ test('les trois decisions du graphe unifie sont proposees', async () => {
     assert.ok(html.includes(`data-decision="${decision}"`), `decision ${decision} exposee`);
   }
   // Le vocabulaire doit dire ce que la decision fait, pas son nom technique.
+  // L'apostrophe est echappee dans la chaine JavaScript qui construit la carte.
   assert.match(html, /produire le livrable/i);
-  assert.match(html, /ré-attaquer l'idée/i);
+  assert.match(html, /ré-attaquer l\\?'idée/i);
+});
+
+test('la question est posee sur chaque run, pas derriere un clic', async () => {
+  const { scripts } = await loadPage();
+  const source = scripts.join('\n');
+  // Un run qu'on n'ouvre pas est un run qu'on oublie, et un run oublie
+  // reste suspendu indefiniment : les trois decisions appartiennent a la
+  // carte, pas a un panneau de detail qu'il faut penser a ouvrir.
+  const card = source.slice(source.indexOf('function runCard('), source.indexOf('function cardOf('));
+  assert.ok(card.length > 0, 'chaque run est rendu par une carte');
+  for (const decision of ['approve', 'revise', 'veto']) {
+    assert.ok(card.includes(`data-decision="${decision}"`), `${decision} est dans la carte du run`);
+  }
+  assert.ok(card.includes('js-reason'), 'le motif est saisissable sans ouvrir le detail');
+  // Le detail reste disponible mais n'est jamais un prealable a la decision.
+  assert.match(source, /js-detail/, 'le detail est accessible a la demande');
+});
+
+test('les runs en attente sont signales de facon non ignorable', async () => {
+  const { html, scripts } = await loadPage();
+  const source = scripts.join('\n');
+  assert.match(html, /id="banner"/, 'une banniere annonce les decisions en attente');
+  assert.match(source, /banner-text/);
+  assert.match(source, /décision\(s\) en attente/);
+  assert.match(html, /Rien ne repart tant qu'elle n'est pas prise/i);
+});
+
+test('une decision en cours desactive les boutons de sa carte', async () => {
+  const { scripts } = await loadPage();
+  const source = scripts.join('\n');
+  // Sans cela un double clic envoie deux decisions sur le meme run ; la
+  // seconde echoue en 404 et l'utilisateur croit a une panne.
+  assert.match(source, /function setBusy\(/);
+  assert.match(source, /disabled = busy/);
 });
 
 test('un motif est exige pour une revision ou un veto', async () => {

@@ -221,12 +221,15 @@ export default async function buildContext() {
 
   // Runs suspendus sur un gate humain. Sans ce store le snapshot meurt avec
   // la requete et /v1/runs/:runId/resume n'a rien a reprendre.
-  // FileRunStore importe node:fs/promises paresseusement : pas de dependance
-  // sur nodeFs, qui n'est resolu que plus bas dans cette fonction.
-  const RUNS_FILE = process.env.KAYROS_RUNS_FILE || '';
-  const runStore = RUNS_FILE
-    ? new FileRunStore({ path: RUNS_FILE })
-    : new InMemoryRunStore();
+  // La persistance fichier est le defaut : un redemarrage ne doit pas perdre
+  // les runs en attente d'une decision humaine. Meme convention que
+  // memoryPath / offloadRoot plus bas. FileRunStore importe node:fs/promises
+  // paresseusement, donc pas de dependance sur nodeFs (resolu plus loin).
+  // KAYROS_RUNS_FILE=memory force explicitement le store volatil.
+  const RUNS_FILE = process.env.KAYROS_RUNS_FILE || './.kayros-runs.json';
+  const runStore = RUNS_FILE === 'memory'
+    ? new InMemoryRunStore()
+    : new FileRunStore({ path: RUNS_FILE });
 
   const GATES_FILE = process.env.KAYROS_GATES_FILE || '';
   let gateStore;

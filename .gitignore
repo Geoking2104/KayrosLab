@@ -8,6 +8,10 @@ dist/
 # Artefacts generes par les suites de tests (memoire de travail du core).
 .kayros-memory.json
 .kayros-memory.json.tmp
+.kayros-runs.json
+.kayros-runs.json.tmp
+.kayros-runs-test-*.json
+.kayros-runs-test-*.json.tmp
 
 # Traces d'audit JSONL ecrites par le sink (core/log-sink.mjs).
 logs/

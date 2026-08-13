@@ -140,6 +140,12 @@ export class FileRunStore extends BaseRunStore {
     const fs = await this._getFs();
     const payload = JSON.stringify([...this._runs.values()], null, 2);
     const tmp = `${this.path}.tmp`;
+    // The parent directory may not exist yet: a store pointed at ./data/ on a
+    // fresh machine must create it rather than lose the first suspended run.
+    const dir = this.path.replace(/[\\/][^\\/]*$/, '');
+    if (dir && dir !== this.path && typeof fs.mkdir === 'function') {
+      await fs.mkdir(dir, { recursive: true });
+    }
     // Write-then-rename: a crash mid-write must not truncate the store.
     await fs.writeFile(tmp, payload, 'utf8');
     await fs.rename(tmp, this.path);

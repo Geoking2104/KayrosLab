@@ -77,6 +77,21 @@ test('the store refuses an invalid snapshot', async () => {
   await assert.rejects(() => store.save({ schemaVersion: 2 }), /WorkflowState/);
 });
 
+test('the file store creates its parent directory rather than losing the first run', async () => {
+  const files = new Map();
+  const made = [];
+  const fakeFs = {
+    readFile: async () => { const e = new Error('ENOENT'); e.code = 'ENOENT'; throw e; },
+    mkdir: async (p, opts) => { made.push({ p, opts }); },
+    writeFile: async (p, data) => { files.set(p, data); },
+    rename: async (from, to) => { files.set(to, files.get(from)); files.delete(from); },
+  };
+  const store = new FileRunStore({ path: './data/runs.json', fs: fakeFs });
+  await store.save(suspendedState(), { tenantId: 't1' });
+  assert.deepEqual(made, [{ p: './data', opts: { recursive: true } }]);
+  assert.ok(files.has('./data/runs.json'));
+});
+
 test('the file store persists across instances and survives a missing file', async () => {
   const files = new Map();
   const fakeFs = {
@@ -84,6 +99,7 @@ test('the file store persists across instances and survives a missing file', asy
       if (!files.has(p)) { const e = new Error('ENOENT'); e.code = 'ENOENT'; throw e; }
       return files.get(p);
     },
+    mkdir: async () => {},
     writeFile: async (p, data) => { files.set(p, data); },
     rename: async (from, to) => { files.set(to, files.get(from)); files.delete(from); },
   };
