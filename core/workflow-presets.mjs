@@ -302,14 +302,14 @@ export function unifiedGraph({
  * L'ordre et les identifiants sont le contrat : la demo s'y adosse.
  */
 export const CYCLE8_STEPS = Object.freeze([
-  Object.freeze({ id: 'ecouter', agent: 'Researcher', writes: ['research'], description: 'Collecter les signaux faibles et les faits verifiables' }),
-  Object.freeze({ id: 'cartographier', agent: 'Bisociateur', writes: [], description: 'Relier les tendances et reperer les ponts entre domaines' }),
-  Object.freeze({ id: 'construire', agent: 'Writer', writes: ['draft'], description: 'Construire les scenarios a partir des signaux' }),
-  Object.freeze({ id: 'positionner', agent: 'Simulator', writes: ['simulation'], description: 'Chiffrer le positionnement et les ecarts concurrentiels' }),
-  Object.freeze({ id: 'eprouver', agent: 'RedTeam', writes: [], description: 'Attaquer la proposition et chercher les modes de defaillance' }),
-  Object.freeze({ id: 'arbitrer', agent: 'Synthesizer', writes: [], description: 'Arbitrer les attaques en recommandation gouvernee' }),
-  Object.freeze({ id: 'projeter', agent: 'Planner', writes: [], description: 'Projeter la trajectoire : jalons, ressources, KPI' }),
-  Object.freeze({ id: 'realiser', agent: 'Logger', writes: ['artifacts'], description: 'Tracer l execution et boucler le retour d experience' }),
+  Object.freeze({ id: 'ecouter', agent: 'SignalScanner', label: 'Eclaireur de signaux', writes: ['research'], description: 'Collecter les signaux faibles et les faits verifiables' }),
+  Object.freeze({ id: 'cartographier', agent: 'TrendMapper', label: 'Cartographe des tendances', writes: [], description: 'Relier les tendances et reperer les ponts entre domaines' }),
+  Object.freeze({ id: 'construire', agent: 'ScenarioGenerator', label: 'Generateur de scenarios', writes: ['draft'], description: 'Construire les scenarios a partir des signaux' }),
+  Object.freeze({ id: 'positionner', agent: 'Positioner', label: 'Positionneur', writes: ['simulation'], description: 'Chiffrer le positionnement et les ecarts concurrentiels' }),
+  Object.freeze({ id: 'eprouver', agent: 'RedTeam', label: 'Equipe contradictoire', writes: [], description: 'Attaquer la proposition et chercher les modes de defaillance' }),
+  Object.freeze({ id: 'arbitrer', agent: 'Synthesizer', label: 'Synthetiseur', writes: [], description: 'Arbitrer les attaques en recommandation gouvernee' }),
+  Object.freeze({ id: 'projeter', agent: 'ProjectionAgent', label: 'Agent de projection', writes: [], description: 'Projeter la trajectoire : jalons, ressources, KPI' }),
+  Object.freeze({ id: 'realiser', agent: 'ExecutionTracker', label: 'Suivi d execution', writes: ['artifacts'], description: 'Tracer l execution et boucler le retour d experience' }),
 ]);
 
 /**

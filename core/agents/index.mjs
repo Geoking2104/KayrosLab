@@ -13,6 +13,14 @@ import {
   LoggerAgent as _LoggerAgent,
   HumanGateAgent as _HumanGateAgent,
 } from './pipeline-agents.mjs';
+import {
+  SignalScannerAgent as _SignalScannerAgent,
+  TrendMapperAgent as _TrendMapperAgent,
+  ScenarioGeneratorAgent as _ScenarioGeneratorAgent,
+  PositionerAgent as _PositionerAgent,
+  ProjectionAgentAgent as _ProjectionAgentAgent,
+  ExecutionTrackerAgent as _ExecutionTrackerAgent,
+} from './cycle-agents.mjs';
 import { normalizeRole } from '../quant-guidance.mjs';
 
 export const BaseAgent = _BaseAgent;
@@ -28,6 +36,12 @@ export const WriterAgent = _WriterAgent;
 export const VerifierAgent = _VerifierAgent;
 export const LoggerAgent = _LoggerAgent;
 export const HumanGateAgent = _HumanGateAgent;
+export const SignalScannerAgent = _SignalScannerAgent;
+export const TrendMapperAgent = _TrendMapperAgent;
+export const ScenarioGeneratorAgent = _ScenarioGeneratorAgent;
+export const PositionerAgent = _PositionerAgent;
+export const ProjectionAgentAgent = _ProjectionAgentAgent;
+export const ExecutionTrackerAgent = _ExecutionTrackerAgent;
 
 /**
  * Two rosters on one engine: the dialectical family (Critic, DevilsAdvocate,
@@ -38,6 +52,9 @@ export const HumanGateAgent = _HumanGateAgent;
 export const AGENT_TYPES = [
   'Planner', 'Critic', 'DevilsAdvocate', 'RedTeam', 'Bisociateur', 'Synthesizer',
   'Researcher', 'Simulator', 'Writer', 'Verifier', 'Logger', 'HumanGate',
+  // Roster du cycle KayrosLab : les noms que le metier emploie, un par etape.
+  'SignalScanner', 'TrendMapper', 'ScenarioGenerator', 'Positioner',
+  'ProjectionAgent', 'ExecutionTracker',
 ];
 
 export function createAgent(name, { llm, tools, memory, quantGuidance = null, baseModel = null } = {}) {
@@ -54,6 +71,12 @@ export function createAgent(name, { llm, tools, memory, quantGuidance = null, ba
     Verifier: (o) => new _VerifierAgent(o),
     Logger: (o) => new _LoggerAgent(o),
     HumanGate: (o) => new _HumanGateAgent(o),
+    SignalScanner: (o) => new _SignalScannerAgent(o),
+    TrendMapper: (o) => new _TrendMapperAgent(o),
+    ScenarioGenerator: (o) => new _ScenarioGeneratorAgent(o),
+    Positioner: (o) => new _PositionerAgent(o),
+    ProjectionAgent: (o) => new _ProjectionAgentAgent(o),
+    ExecutionTracker: (o) => new _ExecutionTrackerAgent(o),
   };
   const factory = factories[name];
   if (!factory) throw new Error(`Unknown agent type: ${name}`);
