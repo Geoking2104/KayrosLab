@@ -159,6 +159,15 @@ change, so two instances behind a load balancer overwrite each other and a
 human decision can disappear. `PgRunStore` is selected automatically as soon as
 `DATABASE_URL` is present.
 
+On the VPS, `deploy/ovh-vps/setup-postgres-local.sh` provisions that database on
+the machine itself. The backend runs as a single instance, so a remote database
+would add network latency, an IP allowlist to maintain and a secret to
+circulate, without buying anything until there are several instances. The
+password is generated on the VPS, written to the backend `.env` in mode 600, and
+never appears in a log, a workflow variable or a GitHub secret. The script is
+idempotent and never overwrites an existing `DATABASE_URL` — a remote database
+stays in charge if one is configured.
+
 `applySchema(pool)` runs `core/sql/schema.sql` at startup. The VPS deploy
 script did it too, but only there — an instance started anywhere else found an
 empty database and failed on its first write. The schema is entirely

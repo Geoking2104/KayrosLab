@@ -29,9 +29,10 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-          # Chaine de connexion Postgres complete, y compris le mot de passe :
-          # elle ne doit exister que comme secret GitHub, jamais dans le depot.
-          # Absente, le backend retombe sur le store fichier.
+          # Override optionnel vers une base distante. Absent — le cas normal —
+          # le VPS provisionne son propre Postgres local et genere lui-meme le
+          # mot de passe. Ce secret n'existe que si l'on veut deleguer la base
+          # a un hebergeur, et il prime alors sur le provisionnement local.
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           POSITIONNER_GITHUB_TOKEN: ${{ secrets.POSITIONNER_GITHUB_TOKEN }}
           POSITIONNER_GITLAB_TOKEN: ${{ secrets.POSITIONNER_GITLAB_TOKEN }}
@@ -101,5 +102,9 @@ jobs:
             # Les scripts sont edites sous Windows : neutraliser les CRLF,
             # sinon bash echoue sur un "\r" invisible (piege rencontre sur openDPE).
             find deploy/ovh-vps -name "*.sh" -exec sed -i 's/\r$//' {} \;
-            bash deploy/ovh-vps/deploy-backend.sh
+            # Postgres local : le backend tourne sur une seule instance, donc
+            # une base sur la meme machine evite latence, filtrage IP et
+            # circulation d'un secret. Le mot de passe est genere sur le VPS
+            # et n'en sort pas.
+            KAYROS_LOCAL_PG=1 bash deploy/ovh-vps/deploy-backend.sh
             echo "Deployed at $(date)"

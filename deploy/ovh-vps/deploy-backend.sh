@@ -49,6 +49,14 @@ case "${lock_status}" in
     ;;
 esac
 
+# ── Postgres local (idempotent, opt-in) ──────────────────────────────────────
+# Provisionne une base sur cette machine si demande. Le script s'abstient si une
+# DATABASE_URL est deja presente : il ne remplace jamais une base existante.
+if [[ "${KAYROS_LOCAL_PG:-0}" == "1" ]]; then
+  bash "${APP_DIR}/deploy/ovh-vps/setup-postgres-local.sh" \
+    || echo "AVERTISSEMENT : provisionnement Postgres local en echec." >&2
+fi
+
 # ── Postgres schema (idempotent) si DATABASE_URL present ─────────────────────
 DB_URL=""
 if grep -qE '^DATABASE_URL=.+' "${BACKEND_DIR}/.env" 2>/dev/null; then
