@@ -38,13 +38,15 @@ jobs:
           POSITIONNER_GITLAB_TOKEN: ${{ secrets.POSITIONNER_GITLAB_TOKEN }}
           POSITIONNER_GOOGLE_API_KEY: ${{ secrets.POSITIONNER_GOOGLE_API_KEY }}
           POSITIONNER_GOOGLE_CX: ${{ secrets.POSITIONNER_GOOGLE_CX }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          CRYSTALKNOWS_API_TOKEN: ${{ secrets.CRYSTALKNOWS_API_TOKEN }}
         with:
           host: 51.210.9.71
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX
+          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -86,6 +88,8 @@ jobs:
               GITLAB_TOKEN: process.env.POSITIONNER_GITLAB_TOKEN,
               GOOGLE_API_KEY: process.env.POSITIONNER_GOOGLE_API_KEY,
               GOOGLE_CX: process.env.POSITIONNER_GOOGLE_CX,
+              LINKEDIN_ACCESS_TOKEN: process.env.LINKEDIN_ACCESS_TOKEN,
+              CRYSTALKNOWS_API_TOKEN: process.env.CRYSTALKNOWS_API_TOKEN,
             };
             for (const [name, value] of Object.entries(optionalSources)) {
               if (value) replacements[name] = value;

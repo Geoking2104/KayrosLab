@@ -22,6 +22,7 @@ import {
   ExecutionTrackerAgent as _ExecutionTrackerAgent,
 } from './cycle-agents.mjs';
 import { normalizeRole } from '../quant-guidance.mjs';
+import { SpecializedDecisionAgent as _SpecializedDecisionAgent } from './specialized-agent.mjs';
 
 export const BaseAgent = _BaseAgent;
 export const PlannerAgent = _PlannerAgent;
@@ -42,6 +43,7 @@ export const ScenarioGeneratorAgent = _ScenarioGeneratorAgent;
 export const PositionerAgent = _PositionerAgent;
 export const ProjectionAgentAgent = _ProjectionAgentAgent;
 export const ExecutionTrackerAgent = _ExecutionTrackerAgent;
+export const SpecializedDecisionAgent = _SpecializedDecisionAgent;
 
 /**
  * Two rosters on one engine: the dialectical family (Critic, DevilsAdvocate,

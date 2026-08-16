@@ -67,6 +67,23 @@ test('the Explorer les possibles CTA is wired to its handler', async () => {
   );
 });
 
+test('the public demo exposes the mixed swarm composer and authorized profile flow', async () => {
+  const { html, scripts } = await loadDemo();
+  const source = scripts.join('\n');
+
+  assert.match(html, /id="swarm-composer"/);
+  assert.match(html, /id="swarm-system-agents"/);
+  assert.match(html, /id="swarm-add-custom"[^>]*onclick="addCustomSwarmAgent\(\)"/);
+  assert.match(html, /id="swarm-apply-hybrid"[^>]*onclick="assignHybridSwarmProfile\(\)"/);
+  assert.match(html, /id="swarm-profile-consent"[^>]*type="checkbox"/);
+  assert.match(source, /function\s+buildSwarmDemoConfig\s*\(/);
+  assert.match(source, /personality_simulation_enabled/);
+  assert.match(source, /agent_rule_overrides/);
+  assert.match(source, /linkedin\.com/);
+  assert.match(source, /crystalknows\.com/);
+  assert.match(html, /Aucune page LinkedIn n’est aspirée/);
+});
+
 test('Sigma uses its browser bundle rather than the CommonJS entry point', async () => {
   const { html } = await loadDemo();
   assert.match(

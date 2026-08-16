@@ -98,6 +98,8 @@ export default async function buildContext() {
     QDRANT_COLLECTION = 'kayroslab',
     QDRANT_DIM = '768',
     QDRANT_API_KEY = '',
+    CRYSTALKNOWS_API_TOKEN = '',
+    LINKEDIN_ACCESS_TOKEN = '',
   } = process.env;
 
   const providers = {
@@ -432,6 +434,10 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     qdrantCollection: QDRANT_COLLECTION,
     qdrantDim: Number(QDRANT_DIM) || 768,
     qdrantApiKey: QDRANT_API_KEY || null,
+    crystalKnowsApiToken: CRYSTALKNOWS_API_TOKEN || null,
+    // Official LinkedIn Profile API: authenticated member only. Never exposed
+    // to clients and never used to scrape arbitrary public profile URLs.
+    linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
     fs: nodeFs,
     path: nodePath,
   });

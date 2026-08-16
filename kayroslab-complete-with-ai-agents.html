@@ -96,13 +96,26 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
 .change-before{color:var(--color-muted);font-size:var(--text-lg)}.change-after{font-family:var(--font-display);font-size:var(--text-xl);font-weight:700;letter-spacing:-.025em}.change-arrow{inline-size:44px;block-size:44px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent-soft);color:var(--color-accent-strong)}
 .change-ledger__note{margin:var(--space-lg) auto 0;max-width:55ch;text-align:center;color:var(--color-ink-2);font-weight:600;line-height:1.45}.change-ledger__accent{color:var(--color-accent-strong);font-weight:700}
 
+.swarm-composer{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg));background:var(--color-ink-deep);color:var(--color-paper)}
+.swarm-composer__inner{max-width:1120px;margin-inline:auto}.swarm-composer__intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--space-lg);align-items:end;margin-block-end:var(--space-lg)}
+.swarm-composer__intro h2{margin:0;font-family:var(--font-display);font-size:clamp(2rem,4vw,3.25rem);line-height:1.05;letter-spacing:-.045em}.swarm-composer__intro p{margin:0;color:var(--color-muted-on-dark);line-height:1.6}
+.swarm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:var(--space-md);align-items:start}.swarm-panel{min-width:0;padding:var(--space-md);border:1px solid var(--color-rule-dark);border-radius:var(--radius-lg);background:color-mix(in oklch,var(--color-ink) 72%,var(--color-ink-deep))}
+.swarm-panel h3{margin:0 0 var(--space-2xs);font-family:var(--font-display);font-size:var(--text-lg)}.swarm-panel__hint{margin:0 0 var(--space-sm);color:var(--color-muted-on-dark);font-size:var(--text-xs);line-height:1.5}
+.swarm-agent-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-xs)}.swarm-agent{width:100%;min-height:88px;padding:var(--space-sm);border:1px solid var(--color-rule-dark);border-radius:var(--radius-md);background:color-mix(in oklch,var(--color-paper) 5%,transparent);color:var(--color-paper);text-align:left;white-space:normal;transition:border-color var(--dur-short) var(--ease-out),background var(--dur-short) var(--ease-out),transform var(--dur-micro) var(--ease-out)}
+.swarm-agent[aria-pressed="true"]{border-color:var(--color-accent);background:color-mix(in oklch,var(--color-accent) 13%,transparent)}.swarm-agent__head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xs);margin-block-end:var(--space-2xs)}.swarm-agent__name{font-weight:700}.swarm-agent__role{display:block;color:var(--color-muted-on-dark);font-size:var(--text-xs);line-height:1.35}
+.swarm-badge{display:inline-flex;align-items:center;min-height:24px;padding-inline:8px;border-radius:999px;background:color-mix(in oklch,var(--color-paper) 9%,transparent);color:var(--color-muted-on-dark);font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}.swarm-badge--custom{background:color-mix(in oklch,var(--color-violet) 22%,transparent);color:#ddd6fe}.swarm-badge--hybrid{background:color-mix(in oklch,var(--color-warning) 18%,transparent);color:#fde68a}
+.swarm-form{display:grid;gap:var(--space-xs);margin-block-start:var(--space-sm);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark)}.swarm-form__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xs)}.swarm-form label{display:grid;gap:5px;color:var(--color-muted-on-dark);font-size:var(--text-xs);font-weight:600}.swarm-form input,.swarm-form select{width:100%;min-height:42px;padding:8px 10px;border:1px solid var(--color-rule-dark);border-radius:var(--radius-sm);background:var(--color-ink-deep);color:var(--color-paper)}.swarm-form input::placeholder{color:var(--color-muted)}
+.swarm-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding-inline:var(--space-sm);border:1px solid var(--color-accent);border-radius:var(--radius-pill);background:var(--color-accent);color:var(--color-accent-ink);font-size:var(--text-xs);font-weight:700}.swarm-action--ghost{background:transparent;color:var(--color-accent)}.swarm-consent{display:flex!important;grid-column:1/-1;grid-template-columns:18px 1fr!important;align-items:start;gap:8px!important;color:var(--color-muted-on-dark)!important;font-weight:400!important;line-height:1.45}.swarm-consent input{width:18px;height:18px;min-height:0;margin-top:1px;padding:0}
+.swarm-preview{position:sticky;top:84px}.swarm-preview__count{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2xs);margin-block:var(--space-sm)}.swarm-metric{padding:var(--space-xs);border-radius:var(--radius-sm);background:color-mix(in oklch,var(--color-paper) 7%,transparent);text-align:center}.swarm-metric strong{display:block;color:var(--color-accent);font-family:var(--font-display);font-size:var(--text-xl)}.swarm-metric span{color:var(--color-muted-on-dark);font-size:9px;text-transform:uppercase;letter-spacing:.04em}
+.swarm-roster{display:grid;gap:var(--space-2xs);margin-block:var(--space-sm)}.swarm-roster__item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-xs);padding:9px 10px;border:1px solid var(--color-rule-dark);border-radius:var(--radius-sm);font-size:var(--text-xs)}.swarm-roster__item span:first-child{min-width:0;overflow-wrap:anywhere}.swarm-config{max-height:240px;overflow:auto;margin:var(--space-sm) 0 0;padding:var(--space-sm);border-radius:var(--radius-sm);background:#020617;color:#bae6fd;font-family:var(--font-mono);font-size:10px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}.swarm-message{min-height:20px;margin:var(--space-xs) 0 0;color:#fde68a;font-size:var(--text-xs);line-height:1.45}.swarm-privacy{display:flex;gap:8px;margin-block-start:var(--space-sm);padding:var(--space-xs);border:1px solid color-mix(in oklch,var(--color-positive) 30%,var(--color-rule-dark));border-radius:var(--radius-sm);color:var(--color-muted-on-dark);font-size:var(--text-xs);line-height:1.45}.swarm-privacy i{color:var(--color-positive);margin-top:2px}
+
 #demo{background:var(--color-paper-2)}#demo>.max-w-6xl{max-width:1120px}.demo-intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:var(--space-lg);align-items:end;margin-block-end:var(--space-lg)}.demo-intro p{margin:0;color:var(--color-ink-2);line-height:1.6}.demo-kicker{color:var(--color-accent-strong);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em}
 .foot-stmt{padding:var(--space-2xl) clamp(var(--space-sm),4vw,var(--space-lg)) var(--space-xl);background:var(--color-ink-deep);color:var(--color-paper)}.foot-stmt__inner{max-width:1200px;margin-inline:auto}.foot-stmt__line{margin:0;max-width:32ch;font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3.25rem);line-height:1.12;letter-spacing:-.035em}.foot-stmt__accent{color:var(--color-accent);display:inline-block;margin-block-start:.12em}.foot-stmt__notice{max-width:64ch;margin-block-start:var(--space-lg);color:var(--color-muted-on-dark);font-size:var(--text-2xs);line-height:1.55}.foot-stmt__meta{display:flex;justify-content:space-between;align-items:center;gap:var(--space-md);margin-block-start:var(--space-xl);padding-block-start:var(--space-sm);border-block-start:1px solid var(--color-rule-dark);color:var(--color-muted-on-dark);font-size:var(--text-xs)}.foot-stmt .wordmark{color:var(--color-paper)}
 
 @media (hover:hover) and (pointer:fine){.nav-demo:hover,.btn-secondary:hover{background:color-mix(in oklch,var(--color-accent) 10%,transparent)}.btn-primary:hover,.btn-secondary:hover,.idea-card:hover,.semantic-field:hover{transform:translateY(-1px)}}
 .btn-primary:active,.btn-secondary:active,.nav-demo:active{transform:translateY(1px)}
-@media (max-width:59.99rem){.journey-map{grid-template-columns:1fr}.journey-panel+.journey-panel{border-inline-start:0;border-block-start:1px solid var(--color-rule-dark)}.demo-intro{grid-template-columns:1fr}.governed-row{grid-template-columns:44px minmax(0,1fr) 42px}.governed-cell--optional{display:none}}
-@media (max-width:39.99rem){.site-nav__inner{padding-inline:var(--space-sm)}.nav-back{display:none}.nav-demo{padding-inline:var(--space-sm)}.comparison-hero{padding-block-start:var(--space-xl)}.comparison-hero h1{font-size:clamp(2.2rem,12vw,3.3rem)}.hypothesis-branches{grid-template-columns:1fr}.governed-row{grid-template-columns:40px minmax(0,1fr) 36px}.change-row{grid-template-columns:1fr;gap:var(--space-xs)}.change-arrow{transform:rotate(90deg)}.change-before{font-size:var(--text-base)}.change-after{font-size:var(--text-lg)}.hero-actions{align-items:stretch}.btn-primary,.btn-secondary{width:100%}.foot-stmt__meta{align-items:flex-start;flex-direction:column}}
+@media (max-width:59.99rem){.journey-map{grid-template-columns:1fr}.journey-panel+.journey-panel{border-inline-start:0;border-block-start:1px solid var(--color-rule-dark)}.demo-intro,.swarm-composer__intro,.swarm-grid{grid-template-columns:1fr}.swarm-preview{position:static}.governed-row{grid-template-columns:44px minmax(0,1fr) 42px}.governed-cell--optional{display:none}}
+@media (max-width:39.99rem){.site-nav__inner{padding-inline:var(--space-sm)}.nav-back{display:none}.nav-demo{padding-inline:var(--space-sm)}.comparison-hero{padding-block-start:var(--space-xl)}.comparison-hero h1{font-size:clamp(2.2rem,12vw,3.3rem)}.hypothesis-branches,.swarm-agent-list,.swarm-form__row{grid-template-columns:1fr}.governed-row{grid-template-columns:40px minmax(0,1fr) 36px}.change-row{grid-template-columns:1fr;gap:var(--space-xs)}.change-arrow{transform:rotate(90deg)}.change-before{font-size:var(--text-base)}.change-after{font-size:var(--text-lg)}.hero-actions{align-items:stretch}.btn-primary,.btn-secondary{width:100%}.foot-stmt__meta{align-items:flex-start;flex-direction:column}}
 @media (max-width:29.99rem){.nav-demo{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:150ms!important;animation-iteration-count:1!important;transition-duration:150ms!important}.animate-on-scroll{transform:none}}
 </style>
@@ -167,7 +180,7 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
     </div>
 
     <div class="hero-actions">
-      <button type="button" onclick="scrollToSection('demo')" class="btn-primary"><span data-i18n="launch_demo">Challenger mon idée</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+      <button type="button" onclick="scrollToSection('swarm-composer')" class="btn-primary"><span data-i18n="compose_swarm">Composer mon swarm</span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
       <a href="#demo" class="btn-secondary"><span data-i18n="see_eight_steps">Voir les 8 étapes</span></a>
     </div>
   </div>
@@ -180,6 +193,72 @@ h1,h2{overflow-wrap:anywhere;min-width:0}button,a,input,textarea{font:inherit}bu
     <div class="change-row"><div class="change-before" data-i18n="black_box">Une boîte noire</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="visible_arbitrations">Des arbitrages visibles</div></div>
     <div class="change-row"><div class="change-before" data-i18n="a_chat">Un chat</div><div class="change-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div><div class="change-after" data-i18n="decision_file">Un dossier de décision</div></div>
     <p class="change-ledger__note"><span data-i18n="agents_propose_1">Les agents proposent.</span><br><span class="change-ledger__accent" data-i18n="agents_propose_2">Vous orientez, tranchez et validez.</span></p>
+  </div>
+</section>
+
+<section id="swarm-composer" class="swarm-composer" aria-labelledby="swarm-composer-title">
+  <div class="swarm-composer__inner">
+    <div class="swarm-composer__intro">
+      <div>
+        <div class="demo-kicker mb-3" data-i18n="swarm_kicker">Nouveau · Swarms spécialisés</div>
+        <h2 id="swarm-composer-title" data-i18n-html="swarm_title">Composez le panel qui va <span class="kayros-gradient">challenger votre décision</span></h2>
+      </div>
+      <p data-i18n="swarm_intro">Mélangez agents système, experts créés par vos équipes et agents hybrides inspirés de parties prenantes réelles — avec consentement et sans scraping.</p>
+    </div>
+
+    <div class="swarm-grid">
+      <div class="space-y-4">
+        <article class="swarm-panel">
+          <h3 data-i18n="swarm_system_title">1. Choisissez les agents système</h3>
+          <p class="swarm-panel__hint" data-i18n="swarm_system_hint">Activez les points de vue nécessaires. Les règles métier restent visibles et gouvernées.</p>
+          <div id="swarm-system-agents" class="swarm-agent-list"></div>
+        </article>
+
+        <article class="swarm-panel">
+          <h3 data-i18n="swarm_custom_title">2. Ajoutez votre propre expert</h3>
+          <p class="swarm-panel__hint" data-i18n="swarm_custom_hint">Définissez un rôle et sa mission ; il rejoint le même protocole de vote que les agents intégrés.</p>
+          <div class="swarm-form">
+            <div class="swarm-form__row">
+              <label><span data-i18n="swarm_agent_name">Nom de l’agent</span><input id="swarm-custom-name" type="text" maxlength="60" data-i18n-placeholder="swarm_agent_name_placeholder" placeholder="Ex. Cyber Risk Lead"></label>
+              <label><span data-i18n="swarm_agent_role">Rôle métier</span><input id="swarm-custom-role" type="text" maxlength="80" data-i18n-placeholder="swarm_agent_role_placeholder" placeholder="Ex. Responsable cybersécurité"></label>
+            </div>
+            <label><span data-i18n="swarm_agent_mission">Mission</span><input id="swarm-custom-mission" type="text" maxlength="180" data-i18n-placeholder="swarm_agent_mission_placeholder" placeholder="Ex. Bloquer tout lancement sans plan de remédiation critique"></label>
+            <div><button id="swarm-add-custom" type="button" class="swarm-action swarm-action--ghost" onclick="addCustomSwarmAgent()"><i class="fas fa-plus" aria-hidden="true"></i><span data-i18n="swarm_add_agent">Ajouter au swarm</span></button></div>
+          </div>
+        </article>
+
+        <article class="swarm-panel">
+          <h3 data-i18n="swarm_hybrid_title">3. Créez un agent hybride</h3>
+          <p class="swarm-panel__hint" data-i18n="swarm_hybrid_hint">Associez un agent actif à un profil autorisé LinkedIn ou Crystal Knows. Cette démo prépare l’import ; les APIs officielles sont utilisées côté serveur.</p>
+          <div class="swarm-form">
+            <div class="swarm-form__row">
+              <label><span data-i18n="swarm_agent_to_enrich">Agent à enrichir</span><select id="swarm-hybrid-agent"></select></label>
+              <label><span data-i18n="swarm_person_name">Personne assignée</span><input id="swarm-person-name" type="text" maxlength="80" data-i18n-placeholder="swarm_person_name_placeholder" placeholder="Ex. Jean Dupont"></label>
+            </div>
+            <div class="swarm-form__row">
+              <label><span>LinkedIn</span><input id="swarm-linkedin-url" type="text" inputmode="url" data-i18n-placeholder="swarm_linkedin_placeholder" placeholder="https://www.linkedin.com/in/…"></label>
+              <label><span>Crystal Knows</span><input id="swarm-crystal-url" type="text" inputmode="url" data-i18n-placeholder="swarm_crystal_placeholder" placeholder="https://www.crystalknows.com/p/…"></label>
+            </div>
+            <div class="swarm-form__row">
+              <label><span data-i18n="swarm_disc">Profil DISC</span><select id="swarm-disc"><option value="">—</option><option>D</option><option>Di</option><option>DC</option><option>I</option><option>Is</option><option>S</option><option>SC</option><option>C</option><option>CS</option></select></label>
+              <label><span data-i18n="swarm_archetype">Archétype comportemental</span><input id="swarm-archetype" type="text" maxlength="80" data-i18n-placeholder="swarm_archetype_placeholder" placeholder="Ex. Challenger analytique"></label>
+            </div>
+            <label class="swarm-consent"><input id="swarm-profile-consent" type="checkbox"><span data-i18n="swarm_consent">Je confirme disposer du consentement nécessaire pour utiliser ces données professionnelles dans une simulation.</span></label>
+            <div><button id="swarm-apply-hybrid" type="button" class="swarm-action" onclick="assignHybridSwarmProfile()"><i class="fas fa-user-gear" aria-hidden="true"></i><span data-i18n="swarm_prepare_import">Préparer l’import autorisé</span></button></div>
+            <p id="swarm-message" class="swarm-message" role="status" aria-live="polite"></p>
+          </div>
+        </article>
+      </div>
+
+      <aside class="swarm-panel swarm-preview" aria-labelledby="swarm-preview-title">
+        <h3 id="swarm-preview-title" data-i18n="swarm_preview_title">Votre swarm</h3>
+        <p class="swarm-panel__hint" data-i18n="swarm_preview_hint">La composition reste modifiable jusqu’au lancement. L’arbitrage final appartient au COMEX.</p>
+        <div id="swarm-metrics" class="swarm-preview__count"></div>
+        <div id="swarm-roster" class="swarm-roster"></div>
+        <pre id="swarm-config-preview" class="swarm-config" aria-label="Configuration JSON du swarm"></pre>
+        <div class="swarm-privacy"><i class="fas fa-shield-halved" aria-hidden="true"></i><span data-i18n="swarm_privacy">Aucune page LinkedIn n’est aspirée. Les profils externes exigent un consentement explicite et un connecteur officiel ou un export autorisé.</span></div>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -411,7 +490,7 @@ const translations = {
     back:'Retour', hero_badge:'Agents gouvernés · Démo publique', main_nav_aria:'Navigation principale', journey_map_aria:'Comparaison entre un LLM classique et KayrosLab', three_hypotheses_aria:'Trois hypothèses',
     hero_title:'Ne validez plus une idée sur une intuition. Stress-testez-la.',
     hero_description:'Pour les équipes produit, stratégie et COMEX : 3 options comparées, risques visibles, dossier de décision traçable — sous votre contrôle.',
-    launch_demo:'Challenger mon idée', live_demo:'Essai gratuit · sans inscription', see_eight_steps:'Voir les 8 étapes',
+    launch_demo:'Challenger mon idée', compose_swarm:'Composer mon swarm', live_demo:'Essai gratuit · sans inscription', see_eight_steps:'Voir les 8 étapes',
     before_label:'Avant', after_label:'Après', classic_llm:'Avec un LLM classique', governed_agents:'Avec des agents gouvernés',
     initial_idea_label:'Idée initiale, encore vague', classic_prompt_example:'Comment mieux fidéliser nos clients B2B ?',
     single_response:'Une réponse unique', classic_response_example:'Une synthèse plausible, mais une seule direction à examiner.',
@@ -428,6 +507,23 @@ const translations = {
     decision_file:'Un dossier COMEX prêt à trancher', agents_propose:'Les agents proposent. Vous orientez, tranchez et validez.',
     agents_propose_1:'Les agents proposent.',
     agents_propose_2:'Vous orientez, tranchez et validez.',
+    swarm_kicker:'Nouveau · Swarms spécialisés',
+    swarm_title:'Composez le panel qui va <span class="kayros-gradient">challenger votre décision</span>',
+    swarm_intro:'Mélangez agents système, experts créés par vos équipes et agents hybrides inspirés de parties prenantes réelles — avec consentement et sans scraping.',
+    swarm_system_title:'1. Choisissez les agents système', swarm_system_hint:'Activez les points de vue nécessaires. Les règles métier restent visibles et gouvernées.',
+    swarm_custom_title:'2. Ajoutez votre propre expert', swarm_custom_hint:'Définissez un rôle et sa mission ; il rejoint le même protocole de vote que les agents intégrés.',
+    swarm_hybrid_title:'3. Créez un agent hybride', swarm_hybrid_hint:'Associez un agent actif à un profil autorisé LinkedIn ou Crystal Knows. Cette démo prépare l’import ; les APIs officielles sont utilisées côté serveur.',
+    swarm_agent_name:'Nom de l’agent', swarm_agent_name_placeholder:'Ex. Cyber Risk Lead', swarm_agent_role:'Rôle métier', swarm_agent_role_placeholder:'Ex. Responsable cybersécurité',
+    swarm_agent_mission:'Mission', swarm_agent_mission_placeholder:'Ex. Bloquer tout lancement sans plan de remédiation critique', swarm_add_agent:'Ajouter au swarm',
+    swarm_agent_to_enrich:'Agent à enrichir', swarm_person_name:'Personne assignée', swarm_person_name_placeholder:'Ex. Jean Dupont',
+    swarm_linkedin_placeholder:'https://www.linkedin.com/in/…', swarm_crystal_placeholder:'https://www.crystalknows.com/p/…', swarm_disc:'Profil DISC', swarm_archetype:'Archétype comportemental', swarm_archetype_placeholder:'Ex. Challenger analytique',
+    swarm_consent:'Je confirme disposer du consentement nécessaire pour utiliser ces données professionnelles dans une simulation.', swarm_prepare_import:'Préparer l’import autorisé',
+    swarm_preview_title:'Votre swarm', swarm_preview_hint:'La composition reste modifiable jusqu’au lancement. L’arbitrage final appartient au COMEX.',
+    swarm_privacy:'Aucune page LinkedIn n’est aspirée. Les profils externes exigent un consentement explicite et un connecteur officiel ou un export autorisé.',
+    swarm_system_badge:'Système', swarm_custom_badge:'Personnalisé', swarm_hybrid_badge:'Hybride', swarm_system_count:'système', swarm_custom_count:'créés', swarm_hybrid_count:'hybrides',
+    swarm_custom_required:'Renseignez le nom, le rôle et la mission de votre agent.', swarm_custom_added:'Agent personnalisé ajouté au panel.',
+    swarm_profile_required:'Choisissez un agent et indiquez au moins un nom, un lien de profil ou un type DISC.', swarm_consent_required:'Le consentement explicite est requis avant de préparer cet import.',
+    swarm_url_invalid:'Utilisez une URL HTTPS LinkedIn ou Crystal Knows valide.', swarm_profile_ready:'Profil autorisé associé. L’agent est maintenant hybride.', swarm_no_agents:'Activez au moins un agent.',
     demo_title:'Challenger votre idée en <span class="kayros-gradient">quelques minutes</span>',
     demo_subtitle:'Sans installation · 8 agents · dossier de décision à la clé',
     security_notice:'Démo publique : votre idée est traitée en direct via api.kayroslab.com (clé serveur). Aucune donnée n’est stockée, réutilisée ni revendue. Les dossiers exportés sont générés pour votre usage exclusif.',
@@ -601,7 +697,7 @@ const translations = {
     back:'Back', hero_badge:'Governed agents · Public demo', main_nav_aria:'Main navigation', journey_map_aria:'Comparison between a classic LLM and KayrosLab', three_hypotheses_aria:'Three hypotheses',
     hero_title:'Stop approving ideas on gut feel. Stress-test them.',
     hero_description:'For product, strategy and executive teams: 3 comparable options, visible risks, a decision pack you can own — under your control.',
-    launch_demo:'Challenge my idea', live_demo:'Free trial · no sign-up', see_eight_steps:'See the 8 steps',
+    launch_demo:'Challenge my idea', compose_swarm:'Compose my swarm', live_demo:'Free trial · no sign-up', see_eight_steps:'See the 8 steps',
     before_label:'Before', after_label:'After', classic_llm:'With a classic LLM', governed_agents:'With governed agents',
     initial_idea_label:'Initial idea, still vague', classic_prompt_example:'How could we improve B2B customer retention?',
     single_response:'One response', classic_response_example:'A plausible synthesis, but only one direction to examine.',
@@ -618,6 +714,23 @@ const translations = {
     decision_file:'An executive-ready decision pack', agents_propose:'Agents propose. You redirect, decide, and approve.',
     agents_propose_1:'Agents propose.',
     agents_propose_2:'You redirect, decide, and approve.',
+    swarm_kicker:'New · Specialized swarms',
+    swarm_title:'Compose the panel that will <span class="kayros-gradient">challenge your decision</span>',
+    swarm_intro:'Combine built-in system agents, experts created by your teams, and hybrid agents modeled on real stakeholders — with consent and no scraping.',
+    swarm_system_title:'1. Choose system agents', swarm_system_hint:'Activate the viewpoints you need. Business rules remain visible and governed.',
+    swarm_custom_title:'2. Add your own expert', swarm_custom_hint:'Define a role and mission; it joins the same voting protocol as built-in agents.',
+    swarm_hybrid_title:'3. Create a hybrid agent', swarm_hybrid_hint:'Link an active agent to an authorized LinkedIn or Crystal Knows profile. This demo prepares the import; official APIs are used server-side.',
+    swarm_agent_name:'Agent name', swarm_agent_name_placeholder:'E.g. Cyber Risk Lead', swarm_agent_role:'Business role', swarm_agent_role_placeholder:'E.g. Head of Cybersecurity',
+    swarm_agent_mission:'Mission', swarm_agent_mission_placeholder:'E.g. Block any launch without a critical remediation plan', swarm_add_agent:'Add to swarm',
+    swarm_agent_to_enrich:'Agent to enrich', swarm_person_name:'Assigned person', swarm_person_name_placeholder:'E.g. Jean Dupont',
+    swarm_linkedin_placeholder:'https://www.linkedin.com/in/…', swarm_crystal_placeholder:'https://www.crystalknows.com/p/…', swarm_disc:'DISC profile', swarm_archetype:'Behavioral archetype', swarm_archetype_placeholder:'E.g. Analytical challenger',
+    swarm_consent:'I confirm that I have the necessary consent to use this professional data in a simulation.', swarm_prepare_import:'Prepare authorized import',
+    swarm_preview_title:'Your swarm', swarm_preview_hint:'The composition remains editable until launch. Final arbitration belongs to the executive committee.',
+    swarm_privacy:'No LinkedIn page is scraped. External profiles require explicit consent and an official connector or authorized export.',
+    swarm_system_badge:'System', swarm_custom_badge:'Custom', swarm_hybrid_badge:'Hybrid', swarm_system_count:'system', swarm_custom_count:'created', swarm_hybrid_count:'hybrid',
+    swarm_custom_required:'Enter the name, role, and mission of your agent.', swarm_custom_added:'Custom agent added to the panel.',
+    swarm_profile_required:'Choose an agent and provide at least a name, profile link, or DISC type.', swarm_consent_required:'Explicit consent is required before preparing this import.',
+    swarm_url_invalid:'Use a valid HTTPS LinkedIn or Crystal Knows URL.', swarm_profile_ready:'Authorized profile linked. The agent is now hybrid.', swarm_no_agents:'Activate at least one agent.',
     demo_title:'Challenge your idea in <span class="kayros-gradient">minutes</span>',
     demo_subtitle:'No install · 8 agents · decision pack included',
     security_notice:'Public demo: your idea is processed live via api.kayroslab.com (server-side key). No data is stored, reused, or resold. Exported reports are generated for your exclusive use.',
@@ -805,6 +918,121 @@ function t(key,vars,lang){
   return value;
 }
 
+const swarmSystemAgents = [
+  {id:'cfo',name:{fr:'Directeur financier',en:'Chief Financial Officer'},role:{fr:'Rentabilité, cash et conditions de GO',en:'Profitability, cash, and GO conditions'},selected:true},
+  {id:'cto',name:{fr:'Directeur technique',en:'Chief Technology Officer'},role:{fr:'Architecture, faisabilité et dette technique',en:'Architecture, feasibility, and technical debt'},selected:true},
+  {id:'legal_counsel',name:{fr:'Conseil juridique',en:'Legal Counsel'},role:{fr:'Conformité, responsabilité et clauses bloquantes',en:'Compliance, liability, and blocking clauses'},selected:true},
+  {id:'marketing_director',name:{fr:'Direction marketing',en:'Marketing Director'},role:{fr:'Marché, adoption et différenciation',en:'Market, adoption, and differentiation'},selected:false},
+  {id:'operations_director',name:{fr:'Direction des opérations',en:'Operations Director'},role:{fr:'Déploiement, capacité et continuité',en:'Delivery, capacity, and continuity'},selected:false},
+  {id:'data_privacy_officer',name:{fr:'Délégué à la protection des données',en:'Data Protection Officer'},role:{fr:'Vie privée, minimisation et souveraineté',en:'Privacy, minimization, and sovereignty'},selected:false}
+];
+const swarmDemoState = {customAgents:[],profiles:{},nextCustomId:1};
+
+function activeSwarmAgents(){
+  return swarmSystemAgents.filter(agent=>agent.selected).map(agent=>({...agent,kind:'system'}))
+    .concat(swarmDemoState.customAgents.map(agent=>({...agent,kind:'custom'})));
+}
+function unwrapSwarmProfileUrl(value){
+  const raw=String(value||'').trim();
+  const markdown=raw.match(/^\[[^\]]+\]\((https:\/\/[^\s)]+)\)$/i);
+  return markdown?markdown[1]:raw;
+}
+function validSwarmProfileUrl(value,domain){
+  if(!String(value||'').trim()) return '';
+  try {
+    const parsed=new URL(unwrapSwarmProfileUrl(value));
+    const hostname=parsed.hostname.toLowerCase();
+    if(parsed.protocol!=='https:'||!(hostname===domain||hostname.endsWith('.'+domain))) return null;
+    parsed.hash='';
+    return parsed.toString();
+  } catch(error){ return null; }
+}
+function toggleSystemSwarmAgent(agentId){
+  const agent=swarmSystemAgents.find(item=>item.id===agentId);
+  if(!agent) return;
+  agent.selected=!agent.selected;
+  renderSwarmComposer();
+}
+function addCustomSwarmAgent(){
+  const name=document.getElementById('swarm-custom-name').value.trim();
+  const role=document.getElementById('swarm-custom-role').value.trim();
+  const mission=document.getElementById('swarm-custom-mission').value.trim();
+  const message=document.getElementById('swarm-message');
+  if(!name||!role||!mission){ message.textContent=t('swarm_custom_required'); return; }
+  const id='custom_'+swarmDemoState.nextCustomId++;
+  swarmDemoState.customAgents.push({id,name:{fr:name,en:name},role:{fr:role,en:role},mission});
+  document.getElementById('swarm-custom-name').value='';
+  document.getElementById('swarm-custom-role').value='';
+  document.getElementById('swarm-custom-mission').value='';
+  message.textContent=t('swarm_custom_added');
+  renderSwarmComposer({preserveMessage:true});
+}
+function assignHybridSwarmProfile(){
+  const agentId=document.getElementById('swarm-hybrid-agent').value;
+  const assignedName=document.getElementById('swarm-person-name').value.trim();
+  const linkedin=validSwarmProfileUrl(document.getElementById('swarm-linkedin-url').value,'linkedin.com');
+  const crystal=validSwarmProfileUrl(document.getElementById('swarm-crystal-url').value,'crystalknows.com');
+  const disc=document.getElementById('swarm-disc').value;
+  const archetype=document.getElementById('swarm-archetype').value.trim();
+  const consent=document.getElementById('swarm-profile-consent').checked;
+  const message=document.getElementById('swarm-message');
+  if(linkedin===null||crystal===null){ message.textContent=t('swarm_url_invalid'); return; }
+  if(!agentId||(!assignedName&&!linkedin&&!crystal&&!disc&&!archetype)){ message.textContent=t('swarm_profile_required'); return; }
+  if(!consent){ message.textContent=t('swarm_consent_required'); return; }
+  swarmDemoState.profiles[agentId]={
+    assigned_human:assignedName||undefined, linkedin_profile:linkedin||undefined,
+    crystalknows_url:crystal||undefined, disc_type:disc||undefined,
+    behavioral_archetype:archetype||undefined, consent_confirmed:true
+  };
+  message.textContent=t('swarm_profile_ready');
+  renderSwarmComposer({preserveMessage:true});
+}
+function buildSwarmDemoConfig(){
+  const active=activeSwarmAgents();
+  const overrides={};
+  active.forEach(agent=>{ if(swarmDemoState.profiles[agent.id]) overrides[agent.id]=swarmDemoState.profiles[agent.id]; });
+  return {
+    agent_creation_requests:swarmDemoState.customAgents.map(agent=>({
+      agent_id:agent.id, role_name:agent.name[currentLang]||agent.name.fr,
+      department:agent.role[currentLang]||agent.role.fr, seniority:'senior', primary_focus:agent.mission
+    })),
+    configuration:{
+      swarm_name:currentLang==='fr'?'Panel décision stratégique':'Strategic decision panel',
+      active_agents:active.map(agent=>agent.id), voting_threshold:'veto_power_csuite',
+      personality_simulation_enabled:Object.keys(overrides).length>0,
+      agent_rule_overrides:overrides
+    }
+  };
+}
+function renderSwarmComposer(options){
+  const systemContainer=document.getElementById('swarm-system-agents');
+  if(!systemContainer) return;
+  systemContainer.innerHTML=swarmSystemAgents.map(agent=>{
+    const hybrid=Boolean(swarmDemoState.profiles[agent.id]);
+    const badge=hybrid?t('swarm_hybrid_badge'):t('swarm_system_badge');
+    return '<button type="button" class="swarm-agent" aria-pressed="'+agent.selected+'" onclick="toggleSystemSwarmAgent(\''+agent.id+'\')"><span class="swarm-agent__head"><span class="swarm-agent__name">'+escapeHtml(agent.name[currentLang]||agent.name.fr)+'</span><span class="swarm-badge '+(hybrid?'swarm-badge--hybrid':'')+'">'+escapeHtml(badge)+'</span></span><span class="swarm-agent__role">'+escapeHtml(agent.role[currentLang]||agent.role.fr)+'</span></button>';
+  }).join('');
+  const active=activeSwarmAgents();
+  const select=document.getElementById('swarm-hybrid-agent');
+  const selectedValue=select.value;
+  select.innerHTML='<option value="">—</option>'+active.map(agent=>'<option value="'+escapeHtml(agent.id)+'">'+escapeHtml(agent.name[currentLang]||agent.name.fr)+'</option>').join('');
+  if(active.some(agent=>agent.id===selectedValue)) select.value=selectedValue;
+  const counts={system:0,custom:0,hybrid:0};
+  active.forEach(agent=>{ if(swarmDemoState.profiles[agent.id]) counts.hybrid++; else counts[agent.kind]++; });
+  document.getElementById('swarm-metrics').innerHTML=[
+    [counts.system,t('swarm_system_count')],[counts.custom,t('swarm_custom_count')],[counts.hybrid,t('swarm_hybrid_count')]
+  ].map(metric=>'<div class="swarm-metric"><strong>'+metric[0]+'</strong><span>'+escapeHtml(metric[1])+'</span></div>').join('');
+  document.getElementById('swarm-roster').innerHTML=active.length?active.map(agent=>{
+    const profile=swarmDemoState.profiles[agent.id];
+    const type=profile?'hybrid':agent.kind;
+    const badgeKey=type==='hybrid'?'swarm_hybrid_badge':type==='custom'?'swarm_custom_badge':'swarm_system_badge';
+    const detail=profile?(profile.assigned_human||'')+(profile.disc_type?' · DISC '+profile.disc_type:''):'';
+    return '<div class="swarm-roster__item"><span><strong>'+escapeHtml(agent.name[currentLang]||agent.name.fr)+'</strong>'+(detail?'<br><small>'+escapeHtml(detail)+'</small>':'')+'</span><span class="swarm-badge swarm-badge--'+type+'">'+escapeHtml(t(badgeKey))+'</span></div>';
+  }).join(''):'<p class="swarm-panel__hint">'+escapeHtml(t('swarm_no_agents'))+'</p>';
+  document.getElementById('swarm-config-preview').textContent=JSON.stringify(buildSwarmDemoConfig(),null,2);
+  if(!options?.preserveMessage) document.getElementById('swarm-message').textContent='';
+}
+
 const cycleData = [
   { agent:'Signal Scanner', tools:['search_competitors()','trend_network_builder()'], gate:{fr:'Expert metier',en:'Domain Expert'},
     system:{ fr:'Tu es le Signal Scanner de KayrosLab (etape Ecouter). Qualifie les signaux faibles. TOUJOURS : (1) reformule l\'idee en 1 phrase ; (2) 3-6 synonymes ; (3) 4-8 signaux score 1-10 + confiance ; (4) si vague, 2-3 questions de clarification. Interdit : chiffres inventes. Reponds en francais.', en:'You are KayrosLab Signal Scanner (Listen). Qualify weak signals. ALWAYS: (1) restate idea in one sentence; (2) 3-6 synonyms; (3) 4-8 signals score 1-10 + confidence; (4) if vague, 2-3 clarifying questions. Forbidden: invented numbers. Answer in English.' } },
@@ -878,6 +1106,7 @@ function applyTranslations(){
   updateLanguageButtons();
   updateProgress();
   updateHistory();
+  renderSwarmComposer({preserveMessage:true});
   if(!document.getElementById('final-state').classList.contains('hidden')) renderFinalState();
 }
 function setLanguage(lang){

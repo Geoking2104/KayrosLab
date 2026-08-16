@@ -16,6 +16,8 @@ Ce n'est **pas** un modèle entraîné : c'est un orchestrateur gouverné.
 | `embeddings.mjs` | Ollama / Mock / Http embeddings + `MemoryService`. |
 | `governance.mjs` | Gates, RBAC, veto, sensibilité. |
 | `agents/` | Planner, Critic, RedTeam, Bisociateur, Synthesizer… (`preferredModel`). |
+| `swarm.mjs` | Agents métiers dynamiques, règles superposées, consensus GO/NO-GO et arbitrage HITL. |
+| `personality.mjs` | Profils humains consentis, agents hybrides, imports officiels LinkedIn/Crystal et provenance. |
 
 ## Démarrage rapide
 
@@ -65,6 +67,55 @@ for await (const ev of eng.orchestrator.run(plan, {
 | `availableModels` | Liste explicite de tags installés |
 
 Voir aussi `OLLAMA.md` et `quant-schema.mjs`.
+
+## Swarms d'agents spécialisés
+
+`createEngine()` expose `engine.swarm`. Le service permet de créer des agents
+utilisateur, de désactiver/remplacer/ajouter des règles, puis d'exécuter un
+panel décisionnel. Chaque agent doit rendre `GO`, `NO_GO` ou
+`CONDITIONAL_GO`; le consensus reste `pending_human_arbitration` jusqu'à une
+décision humaine explicite.
+
+```js
+const config = eng.swarm.createConfiguration({
+  swarm_name: 'Launch audit',
+  active_agents: ['cfo', 'cto', 'legal_counsel'],
+  voting_threshold: 'unanimous',
+  agent_rule_overrides: {
+    cfo: { disabled_rules: ['RULE_CFO_02'] },
+  },
+});
+
+const run = await eng.swarm.run(config.swarm_id, {
+  question: 'Should we launch?',
+  context: 'Grounded project and market evidence…',
+});
+```
+
+Le backend expose la même logique sous `/v1/swarm/*`; l'arbitrage final exige
+une session authentifiée avec le rôle `comex`.
+
+### Profils humains et agents hybrides
+
+Un agent système enrichi par une personnalité devient `hybrid_modified` et
+conserve son `base_agent_id`. Un agent utilisateur peut recevoir le même
+profil. La simulation est activée au niveau de la configuration avec
+`personality_simulation_enabled: true`.
+
+```js
+await eng.swarm.importAndAssignPersonality('cfo', {
+  consent_confirmed: true,
+  imports: [
+    { source: 'linkedin', profile_data: linkedInAuthorizedExport },
+    { source: 'crystalknows', profile_data: crystalAuthorizedExport },
+  ],
+}, { tenantId: 'acme', by: 'user-1' });
+```
+
+Les imports réseau utilisent uniquement les APIs officielles lorsque les
+jetons serveur correspondants sont configurés. LinkedIn est limité au membre
+authentifié ; aucun scraping de profil public n'est implémenté. Un export
+structuré autorisé peut être fourni à défaut de connecteur.
 
 ## Tests
 
