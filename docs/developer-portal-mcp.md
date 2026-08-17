@@ -68,7 +68,7 @@ export KAYROS_MCP_URL=https://api.kayroslab.com/mcp
 export KAYROS_MCP_TOKEN=kmcp_...
 ```
 
-Never commit the token. Ready-to-copy templates live in [`docs/mcp-configs/`](mcp-configs/).
+Never commit the token. The repository already includes project configurations for Claude Code (`.mcp.json`), Cursor (`.cursor/mcp.json`) and VS Code (`.vscode/mcp.json`). Portable templates also live in [`docs/mcp-configs/`](mcp-configs/).
 
 ### Codex
 
@@ -84,15 +84,15 @@ Equivalent TOML: [`mcp-configs/codex.config.toml`](mcp-configs/codex.config.toml
 
 ### Claude Code
 
-Copy [`mcp-configs/claude-code.mcp.json`](mcp-configs/claude-code.mcp.json) to the project root as `.mcp.json`, then approve the project-scoped server in Claude Code.
+Open the repository and approve the project-scoped server declared in `.mcp.json`. The configuration reads `KAYROS_MCP_TOKEN` from the environment.
 
 ### Cursor
 
-Copy [`mcp-configs/cursor.mcp.json`](mcp-configs/cursor.mcp.json) to `.cursor/mcp.json`. The template resolves URL and token from environment variables.
+Open the repository in Cursor; `.cursor/mcp.json` resolves the token from `KAYROS_MCP_TOKEN`.
 
 ### VS Code / GitHub Copilot
 
-Copy [`mcp-configs/vscode.mcp.json`](mcp-configs/vscode.mcp.json) to `.vscode/mcp.json`. VS Code prompts for the URL and stores the token as a password input instead of committing it.
+Open the repository in VS Code and start the server declared in `.vscode/mcp.json`. VS Code prompts for the token as a password input instead of committing it.
 
 ## First agentic workflow
 
