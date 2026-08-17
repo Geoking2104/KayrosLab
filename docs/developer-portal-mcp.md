@@ -92,7 +92,7 @@ Open the repository in Cursor; `.cursor/mcp.json` resolves the token from `KAYRO
 
 ### VS Code / GitHub Copilot
 
-Open the repository in VS Code and start the server declared in `.vscode/mcp.json`. VS Code prompts for the token as a password input instead of committing it.
+Restart VS Code so it inherits `KAYROS_MCP_TOKEN`, then open the repository and start the server declared in `.vscode/mcp.json`.
 
 ## First agentic workflow
 

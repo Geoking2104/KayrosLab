@@ -4,16 +4,8 @@
       "type": "http",
       "url": "https://api.kayroslab.com/mcp",
       "headers": {
-        "Authorization": "Bearer ${input:kayros-mcp-token}"
+        "Authorization": "Bearer ${env:KAYROS_MCP_TOKEN}"
       }
     }
-  },
-  "inputs": [
-    {
-      "id": "kayros-mcp-token",
-      "type": "promptString",
-      "description": "Tenant-scoped KayrosLab MCP token",
-      "password": true
-    }
-  ]
+  }
 }
