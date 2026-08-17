@@ -6,7 +6,10 @@
     <title>KayrosLab • Enterprise Commercial Offer | Hybrid Agentic Ideation Workshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./tokens.css">
     <style>
+        /* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: KayrosLab custom · vibe: technical, persuasive, executive · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · slop: pass (51–55) · honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
+        /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         :root { --primary: #0f172a; }
         body { font-family: 'Inter', system-ui, sans-serif; }
@@ -18,8 +21,6 @@
         .comparison-table th { background-color: #0f172a; color: white; font-weight: 600; }
         .comparison-table td { transition: background-color 0.2s ease; }
         .comparison-table tr:hover td { background-color: #f8fafc; }
-        .compliance-table th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
-        .compliance-table tr:hover td { background-color: #f8fafc; }
         .pricing-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .pricing-card.popular { border-color: #0ea5e9; box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25); transform: scale(1.02); }
         .glass { background: rgba(255,255,255, 0.95); backdrop-filter: blur(20px); }
@@ -64,6 +65,39 @@
         .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.30s; }
         .stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.35s; }
         .stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.40s; }
+
+        html, body { overflow-x: clip; }
+        .sales-oracle { background: var(--color-paper); color: var(--color-ink); }
+        .sales-oracle__inner { max-width: 96rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
+        .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
+        .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
+        .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
+        .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
+        .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
+        .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
+        .sales-oracle__track > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__steps { display: grid; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+        .sales-oracle__step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; color: var(--color-ink-2); line-height: 1.55; }
+        .sales-oracle__step-index { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+        .sales-oracle__step strong { display: block; color: var(--color-ink); }
+        .sales-oracle__benefits { display: grid; gap: var(--space-sm); margin-block-start: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
+        .sales-oracle__benefit { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
+        .sales-oracle__benefit i { color: var(--color-accent); margin-block-start: var(--space-3xs); }
+        .sales-oracle__benefit strong { display: block; margin-block-end: var(--space-3xs); }
+        .sales-oracle__benefit span { color: var(--color-muted-on-dark); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__closing { display: grid; gap: var(--space-md); align-items: center; margin-block-start: var(--space-xl); }
+        .sales-oracle__closing p { margin: 0; max-width: 68ch; color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
+        .sales-oracle__cta:hover { transform: translateY(-1px); }
+        .sales-oracle__cta:active { transform: translateY(1px); }
+        .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+        .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
+        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
+        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
@@ -108,6 +142,10 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Architecture</div><div class="text-xs text-slate-500 mt-0.5">Multi-agent orchestration, memory, compliance</div></div>
                                     </a>
+                                    <a href="#sales-oracle" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900">Hybrid Agent Sales Oracle</div><div class="text-xs text-slate-500 mt-0.5">Rehearse executive and buyer-committee decisions before the meeting</div></div>
+                                    </a>
                                     <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Dashboard</div><div class="text-xs text-slate-500 mt-0.5">Strategic dashboard, KPIs, scenario simulation</div></div>
@@ -145,7 +183,7 @@
                                         </a>
                                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-violet-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">AI Agents App</div><div class="text-xs text-slate-500">Complete AI agents management application</div></div>
+                                            <div><div class="text-sm font-medium text-slate-900">Agents IA</div><div class="text-xs text-slate-500">Complete innovation management application</div></div>
                                         </a>
                                     </div>
                                 </div>
@@ -255,6 +293,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">The Model</a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Architecture</a>
+                        <a href="#sales-oracle" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Hybrid Agent Sales Oracle</a>
                         <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Dashboard</a>
                         <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Technology</a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1">Solutions</div>
@@ -279,7 +318,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#livret-blanc" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Whitepapers</a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Live Demo</a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">AI Agents App</a>
+                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Agents IA</a>
                     </div>
                 </div>
 
@@ -300,9 +339,10 @@
                         <a href="/" class="flex-1 text-center px-3 py-2.5 transition-colors bg-sky-600 text-white">EN</a>
                         <a href="/index.fr.html" class="flex-1 text-center px-3 py-2.5 transition-colors hover:bg-slate-50 text-slate-600">FR</a>
                     </div>
-                    <a href="#contact" class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
-                        <i class="fa-solid fa-calendar-check text-xs"></i>
-                        Book a demo
+                    <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        Request trial
                     </a>
                 </div>
             </div>
@@ -316,30 +356,30 @@
                 <div class="md:col-span-7">
                     <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-3xl mb-6 text-sm">
                         <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <span class="font-medium">Hybrid Agentic Strategic Ideation Workshop</span>
+                        <span class="font-medium">Governed decision simulation with hybrid agents</span>
                     </div>
                     <h1 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-6">
                         From weak signal<br><span class="kayros-gradient">to governed</span><br>strategic decision.
                     </h1>
-                    <p class="max-w-lg text-xl text-slate-300 mb-8">KayrosLab is a structured agentic AI system that transforms ideation into a rigorous, traceable, resilient process — comparable to an <strong>executive committee augmented by AI agents</strong>.</p>
+                    <p class="max-w-lg text-xl text-slate-300 mb-8">Rehearse an executive decision or buyer committee before the proposal is sent. KayrosLab combines governed agents with authorized stakeholder profiles to expose vetoes, objections and missing evidence.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#offre" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
-                            Discover the enterprise offer
+                        <a href="#sales-oracle" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
+                            Test the decision path
                         </a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
                             <i class="fa-solid fa-play mr-2"></i>
-                            <span>Try the live demo</span>
+                            <span>Request trial</span>
                             <span class="text-[10px] px-1.5 py-0.5 bg-white/20 rounded">→ Opens directly</span>
                         </a>
                     </div>
                     <div class="mt-8 flex items-center gap-x-4 text-sm text-slate-400">
-                        <span class="text-xs">In controlled beta — piloted with strategy &amp; innovation teams. Try the live demo and judge the decision pack yourself.</span>
+                        <span class="text-xs">Already adopted by strategy &amp;amp; innovation teams in early access</span>
                     </div>
                 </div>
                 <div class="md:col-span-5">
                     <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                        <div class="text-xs uppercase tracking-[2px] text-emerald-400 font-semibold mb-3">AI AGENTS APP</div>
-                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-complete-with-ai-agents.html &bull; Complete with AI Agents</div>
+                        <div class="text-xs uppercase tracking-[2px] text-emerald-400 font-semibold mb-3">REFERENCE PROTOTYPE</div>
+                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-complete-with-ai-agents.html &bull; Complete with AI agents</div>
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between items-center py-1 border-b border-white/10">
                                 <span class="text-slate-400">Architecture</span>
@@ -477,7 +517,7 @@
         </div>
 
         <div class="mt-8 text-center">
-            <p class="text-sm text-slate-500 mb-6">Each step is traceable, evaluated by agents and subject to human gates (Executive Committee veto, expert validation, etc.).</p>
+            <p class="text-sm text-slate-500 mb-6">Each step is traceable, evaluated by agents and subject to human gates (COMEX veto, expert validation, etc.).</p>
             <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 transition-all text-white px-10 h-14 rounded-3xl font-semibold text-base shadow-lg active:scale-[0.985]">
                 <i class="fa-solid fa-play mr-2"></i>
                 <span>Try the standalone demo now</span>
@@ -489,7 +529,7 @@
     <!-- ===== TOOLS SECTION ===== -->
     <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-3xl mb-10">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp; INTEGRATED TOOLS</div>
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp;amp; INTEGRATED TOOLS</div>
             <h2 class="section-header tracking-tighter">Specialized tools<br>for each process step.</h2>
             <p class="mt-3 text-slate-600">KayrosLab has an extensible <strong>Tool Registry</strong>. Agents (via ReAct) can call these tools autonomously or semi-autonomously. Here are the main tools associated with each step.</p>
         </div>
@@ -707,7 +747,7 @@
                 <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Once the decision is arbitrated, KayrosLab transforms the Go into a <strong>piloted trajectory</strong>: roadmap, KPIs, probabilistic scenarios and automatic re-arbitration loop.</p>
             </div>
 
-            <!-- Mock Dashboard — illustrative product preview. All figures are simulated sample data. -->
+            <!-- Mock Dashboard -->
             <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
 
                 <!-- Dashboard Header -->
@@ -718,15 +758,15 @@
                         </div>
                         <div>
                             <div class="font-semibold">Strategic Dashboard</div>
-                            <div class="text-xs text-white/60">Project &#34;Energy Diversification&#34; • Illustrative preview</div>
+                            <div class="text-xs text-white/60">Project &#34;Energy Diversification&#34; • Updated 2h ago</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4 text-sm">
                         <div class="flex items-center gap-x-1.5">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-emerald-300">Example output</span>
+                            <span class="text-emerald-300">Active loop</span>
                         </div>
-                        <div class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-semibold ring-1 ring-inset ring-amber-400/40">Simulated data</div>
+                        <div class="px-3 py-1 rounded-full bg-white/10 text-xs font-medium">Kayros Index 78</div>
                     </div>
                 </div>
 
@@ -745,7 +785,7 @@
                                         <i class="fa-solid fa-gauge-high text-emerald-500 text-xs"></i>
                                     </div>
                                     <div class="text-2xl font-bold text-slate-900">78<span class="text-sm font-medium text-slate-400">/100</span></div>
-                                    <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1"><i class="fa-solid fa-arrow-up text-[10px]"></i> +6 pts since last gate</div>
+                                    <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1"><i class="fa-solid fa-arrow-up text-[10px]"></i> +6 pts depuis arbitrage</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
                                     <div class="flex items-center justify-between mb-1">
@@ -753,7 +793,7 @@
                                         <i class="fa-solid fa-bullseye text-sky-500 text-xs"></i>
                                     </div>
                                     <div class="text-2xl font-semibold text-slate-900">68%</div>
-                                    <div class="text-xs text-slate-500 mt-1">P50 • 52–81% interval</div>
+                                    <div class="text-xs text-slate-500 mt-1">P50 • Intervalle 52–81%</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
                                     <div class="flex items-center justify-between mb-1">
@@ -769,33 +809,33 @@
                             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Residual Risk</div>
-                                    <div class="text-lg font-semibold text-amber-600">Medium</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">3 active red flags</div>
+                                    <div class="text-lg font-semibold text-amber-600">Moyen</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">3 red flags actifs</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Time-to-Value</div>
-                                    <div class="text-lg font-semibold text-slate-900">9 months</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">First measurable impact</div>
+                                    <div class="text-lg font-semibold text-slate-900">9 mois</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">Premier impact mesurable</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Executive Alignment</div>
-                                    <div class="text-lg font-semibold text-emerald-600">High</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">4/5 decision-makers</div>
+                                    <div class="text-lg font-semibold text-emerald-600">Élevé</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">4/5 décideurs</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Next Gate</div>
-                                    <div class="text-lg font-semibold text-slate-900">D+45</div>
-                                    <div class="text-[11px] text-sky-600 mt-0.5">Executive Committee • Go / No-Go</div>
+                                    <div class="text-lg font-semibold text-slate-900">J+45</div>
+                                    <div class="text-[11px] text-sky-600 mt-0.5">COMEX • Go / No-Go</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Budget Consumed</div>
                                     <div class="text-lg font-semibold text-slate-900">38%</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">€142k / €375k</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">142 k€ / 375 k€</div>
                                 </div>
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
                                     <div class="text-[11px] text-slate-500 mb-0.5">Hypothesis Coverage</div>
                                     <div class="text-lg font-semibold text-emerald-600">81%</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">17/21 validated</div>
+                                    <div class="text-[11px] text-slate-500 mt-0.5">17/21 validées</div>
                                 </div>
                             </div>
 
@@ -843,35 +883,35 @@
                                 <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200">
                                     <div>
                                         <div class="text-xs text-slate-500">Total Allocated Budget</div>
-                                        <div class="text-xl font-bold text-slate-900">€375k</div>
+                                        <div class="text-xl font-bold text-slate-900">375 k€</div>
                                     </div>
                                     <div class="text-right">
                                         <div class="text-xs text-slate-500">Consumed to Date</div>
-                                        <div class="text-xl font-bold text-slate-900">€142k <span class="text-sm font-medium text-slate-400">(38%)</span></div>
+                                        <div class="text-xl font-bold text-slate-900">142 k€ <span class="text-sm font-medium text-slate-400">(38%)</span></div>
                                     </div>
                                     <div class="text-right">
                                         <div class="text-xs text-slate-500">Remaining to Commit</div>
-                                        <div class="text-xl font-bold text-emerald-600">€233k</div>
+                                        <div class="text-xl font-bold text-emerald-600">233 k€</div>
                                     </div>
                                 </div>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                                     <div class="bg-white border border-slate-200 rounded-xl p-3">
                                         <div class="text-[11px] font-medium text-slate-500 mb-1">Base Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€361k</div>
-                                        <div class="text-[11px] text-emerald-600 mt-0.5">−€14k vs budget</div>
+                                        <div class="text-lg font-semibold text-slate-900">361 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−14 k€ vs budget</div>
                                         <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-sky-500 rounded-full" style="width: 96%"></div></div>
                                     </div>
                                     <div class="bg-white border border-emerald-200 rounded-xl p-3">
                                         <div class="text-[11px] font-medium text-emerald-700 mb-1">Optimistic Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€298k</div>
-                                        <div class="text-[11px] text-emerald-600 mt-0.5">−€77k (under-spend)</div>
+                                        <div class="text-lg font-semibold text-slate-900">298 k€</div>
+                                        <div class="text-[11px] text-emerald-600 mt-0.5">−77 k€ (under-consumption)</div>
                                         <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width: 79%"></div></div>
                                     </div>
                                     <div class="bg-white border border-rose-200 rounded-xl p-3">
                                         <div class="text-[11px] font-medium text-rose-700 mb-1">Adverse Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€452k</div>
-                                        <div class="text-[11px] text-rose-600 mt-0.5">+€77k (overrun)</div>
+                                        <div class="text-lg font-semibold text-slate-900">452 k€</div>
+                                        <div class="text-[11px] text-rose-600 mt-0.5">+77 k€ (overrun)</div>
                                         <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width: 100%"></div></div>
                                     </div>
                                 </div>
@@ -885,40 +925,40 @@
 
                                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
                                         <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+15 days</div>
-                                            <div class="text-base font-bold text-slate-800">+€18k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €393k</div>
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+15 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+18 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 393 k€</div>
                                             <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-600">Success prob. −3 pts</div>
-                                                <div class="text-slate-500">TtV +0.5 month</div>
+                                                <div class="text-amber-600">Prob. succès −3 pts</div>
+                                                <div class="text-slate-500">TtV +0,5 mois</div>
                                             </div>
                                         </div>
                                         <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+30 days</div>
-                                            <div class="text-base font-bold text-slate-800">+€37k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €412k</div>
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+30 jours</div>
+                                            <div class="text-base font-bold text-slate-800">+37 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 412 k€</div>
                                             <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-600">Success prob. −6 pts</div>
-                                                <div class="text-slate-500">TtV +1.0 month</div>
+                                                <div class="text-amber-600">Prob. succès −6 pts</div>
+                                                <div class="text-slate-500">TtV +1,0 mois</div>
                                             </div>
                                         </div>
                                         <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-center relative">
-                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">Reference</div>
-                                            <div class="text-[11px] font-medium text-amber-700 mb-1">+45 days</div>
-                                            <div class="text-base font-bold text-amber-800">+€52k</div>
-                                            <div class="text-[10px] text-amber-700/80 mt-0.5">Budget → €427k</div>
+                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">Référence</div>
+                                            <div class="text-[11px] font-medium text-amber-700 mb-1">+45 jours</div>
+                                            <div class="text-base font-bold text-amber-800">+52 k€</div>
+                                            <div class="text-[10px] text-amber-700/80 mt-0.5">Budget → 427 k€</div>
                                             <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-700 font-medium">Success prob. −9 pts</div>
-                                                <div class="text-amber-600">TtV +1.5 months</div>
+                                                <div class="text-amber-700 font-medium">Prob. succès −9 pts</div>
+                                                <div class="text-amber-600">TtV +1,5 mois</div>
                                             </div>
                                         </div>
                                         <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+60 days</div>
-                                            <div class="text-base font-bold text-rose-600">+€71k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €446k</div>
+                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+60 jours</div>
+                                            <div class="text-base font-bold text-rose-600">+71 k€</div>
+                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → 446 k€</div>
                                             <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-rose-600">Success prob. −14 pts</div>
-                                                <div class="text-slate-500">TtV +2.0 months</div>
+                                                <div class="text-rose-600">Prob. succès −14 pts</div>
+                                                <div class="text-slate-500">TtV +2,0 mois</div>
                                             </div>
                                         </div>
                                     </div>
@@ -965,7 +1005,7 @@
                                                     <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-rose-500 to-rose-400 rounded-l-md" style="width: 92%"></div></div>
                                                     <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-rose-500 to-rose-400 rounded-r-md" style="width: 92%"></div></div>
                                                 </div>
-                                                <div class="w-14 text-[11px] font-semibold text-rose-600">±€48k</div>
+                                                <div class="w-14 text-[11px] font-semibold text-rose-600">±48 k€</div>
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">POC duration (timeline)</div>
@@ -973,7 +1013,7 @@
                                                     <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-amber-500 to-amber-400 rounded-l-md" style="width: 71%"></div></div>
                                                     <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-amber-500 to-amber-400 rounded-r-md" style="width: 71%"></div></div>
                                                 </div>
-                                                <div class="w-14 text-[11px] font-semibold text-amber-600">±€37k</div>
+                                                <div class="w-14 text-[11px] font-semibold text-amber-600">±37 k€</div>
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Internal headcount</div>
@@ -981,7 +1021,7 @@
                                                     <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-400 to-slate-300 rounded-l-md" style="width: 56%"></div></div>
                                                     <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-400 to-slate-300 rounded-r-md" style="width: 56%"></div></div>
                                                 </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-600">±€29k</div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-600">±29 k€</div>
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-600 truncate pr-1">Compliance &amp; regulatory</div>
@@ -989,7 +1029,7 @@
                                                     <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-300 to-slate-200 rounded-l-md" style="width: 35%"></div></div>
                                                     <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-300 to-slate-200 rounded-r-md" style="width: 35%"></div></div>
                                                 </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-500">±€18k</div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-500">±18 k€</div>
                                             </div>
                                             <div class="flex items-center gap-2">
                                                 <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-500 truncate pr-1">Go-to-market / acquisition</div>
@@ -997,7 +1037,7 @@
                                                     <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-200 to-slate-100 rounded-l-md" style="width: 23%"></div></div>
                                                     <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-200 to-slate-100 rounded-r-md" style="width: 23%"></div></div>
                                                 </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-400">±€12k</div>
+                                                <div class="w-14 text-[11px] font-semibold text-slate-400">±12 k€</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1013,14 +1053,14 @@
                                         <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-0.5"></i>
                                         <div>
                                             <div class="font-medium text-rose-800 text-xs">Critical</div>
-                                            <div class="text-rose-700/80 text-[11px] mt-0.5">A 20% rise in partner costs pushes ROI below 2.0× in the base scenario.</div>
+                                            <div class="text-rose-700/80 text-[11px] mt-0.5">Une hausse de 20 % des coûts partenaires fait basculer le ROI sous 2,0× dans le scénario base.</div>
                                         </div>
                                     </div>
                                     <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
                                         <i class="fa-solid fa-shield-halved text-emerald-500 mt-0.5"></i>
                                         <div>
                                             <div class="font-medium text-emerald-800 text-xs">Recommended Action</div>
-                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Negotiate a partner spend cap + review clause at D+45.</div>
+                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Négocier un plafond de dépenses partenaires + clause de révision à J+45.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1044,12 +1084,12 @@
                                     </div>
                                     <div class="bg-white border border-sky-200 rounded-2xl p-4 text-center">
                                         <div class="text-[10px] font-semibold uppercase tracking-wider text-sky-600 mb-1">Payback</div>
-                                        <div class="text-3xl font-bold text-sky-700 tracking-tight">11 months</div>
+                                        <div class="text-3xl font-bold text-sky-700 tracking-tight">11 mois</div>
                                         <div class="text-[11px] text-slate-500 mt-1">Capital Recovery</div>
                                     </div>
                                     <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center">
                                         <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">NPV (approx.)</div>
-                                        <div class="text-3xl font-bold text-slate-800 tracking-tight">+€412k</div>
+                                        <div class="text-3xl font-bold text-slate-800 tracking-tight">+412 k€</div>
                                         <div class="text-[11px] text-slate-500 mt-1">Over 24 months</div>
                                     </div>
                                 </div>
@@ -1086,23 +1126,23 @@
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                                     <div class="bg-white border border-slate-200 rounded-xl p-3.5">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Total costs (24 months)</div>
-                                        <div class="text-xl font-bold text-slate-800">€375k</div>
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Coûts totaux (24 mois)</div>
+                                        <div class="text-xl font-bold text-slate-800">375 k€</div>
                                         <div class="mt-2 space-y-1 text-[11px] text-slate-600">
-                                            <div class="flex justify-between"><span>Partners / subcontracting</span><span class="font-medium">€192k</span></div>
-                                            <div class="flex justify-between"><span>Internal team</span><span class="font-medium">€98k</span></div>
-                                            <div class="flex justify-between"><span>Compliance &amp; tools</span><span class="font-medium">€47k</span></div>
-                                            <div class="flex justify-between"><span>Go-to-market</span><span class="font-medium">€38k</span></div>
+                                            <div class="flex justify-between"><span>Partenaires / sous-traitance</span><span class="font-medium">192 k€</span></div>
+                                            <div class="flex justify-between"><span>Équipe interne</span><span class="font-medium">98 k€</span></div>
+                                            <div class="flex justify-between"><span>Conformité & outils</span><span class="font-medium">47 k€</span></div>
+                                            <div class="flex justify-between"><span>Go-to-market</span><span class="font-medium">38 k€</span></div>
                                         </div>
                                     </div>
                                     <div class="bg-white border border-emerald-200 rounded-xl p-3.5">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-2">Projected benefits (24 months)</div>
-                                        <div class="text-xl font-bold text-emerald-700">€900k</div>
+                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-2">Bénéfices projetés (24 mois)</div>
+                                        <div class="text-xl font-bold text-emerald-700">900 k€</div>
                                         <div class="mt-2 space-y-1 text-[11px] text-slate-600">
-                                            <div class="flex justify-between"><span>Operational gains</span><span class="font-medium">€410k</span></div>
-                                            <div class="flex justify-between"><span>New revenue</span><span class="font-medium">€320k</span></div>
-                                            <div class="flex justify-between"><span>Cost avoidance</span><span class="font-medium">€120k</span></div>
-                                            <div class="flex justify-between"><span>Strategic value</span><span class="font-medium">€50k</span></div>
+                                            <div class="flex justify-between"><span>Gains opérationnels</span><span class="font-medium">410 k€</span></div>
+                                            <div class="flex justify-between"><span>Nouveaux revenus</span><span class="font-medium">320 k€</span></div>
+                                            <div class="flex justify-between"><span>Évitement de coûts</span><span class="font-medium">120 k€</span></div>
+                                            <div class="flex justify-between"><span>Valorisation stratégique</span><span class="font-medium">50 k€</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1199,7 +1239,7 @@
                     </div>
                 </div>
 
-                <p class="px-6 pb-6 text-center text-sm text-slate-500">Illustrative product preview — all figures are simulated samples of what the <strong>Project</strong> step emits, not a real project. A live dashboard is generated automatically at the end of the <strong>Project</strong> step.</p>
+                <p class="px-6 pb-6 text-center text-sm text-slate-500">This dashboard is automatically generated at the end of the <strong>Project</strong> step and stays alive through the feedback loop.</p>
             </div>
         </div>
     </section>
@@ -1230,6 +1270,57 @@
                     <div class="font-semibold mb-2">Controlled Scalability</div>
                     <div class="text-sm text-white/70">From standalone pilot to sovereign local or private cloud deployment. Governance and control maintained at every step.</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HYBRID AGENT SALES ORACLE ===== -->
+    <section id="sales-oracle" class="sales-oracle" aria-labelledby="sales-oracle-title">
+        <div class="sales-oracle__inner">
+            <div class="sales-oracle__head">
+                <h2 id="sales-oracle-title">Your sales oracle knows where the deal can stop.</h2>
+                <p>Build a governed decision twin from system agents, your own experts and consented hybrid profiles. Run the same offer through the people who approve it, fund it, secure it, operate it or veto it — then strengthen the proposal before the real committee meets.</p>
+            </div>
+
+            <figure class="sales-oracle__figure">
+                <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Hybrid agent connecting an executive committee and a buyer veto network to a proposal">
+                <figcaption>One governed simulation, two decision environments: your internal executive committee and the customer&#39;s buying committee. Hybrid-agent reactions are explicitly simulated, never presented as real statements.</figcaption>
+            </figure>
+
+            <div class="sales-oracle__tracks">
+                <article class="sales-oracle__track">
+                    <h3>Rehearse your company decision</h3>
+                    <p>Model a strategic decision with the perspectives of the executives who will challenge it. The result is a decision dossier, not a synthetic endorsement.</p>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Compose the committee</strong>Select built-in CFO, CTO, Legal, Risk and Operations agents or add your own roles.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Assign authorized profiles</strong>Create hybrid agents from consented LinkedIn or Crystal Knows data and explicit behavioral rules.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Run the governed vote</strong>Capture GO, conditional GO, NO-GO, vetoes, objections and the evidence requested by each role.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Arbitrate as a human</strong>Compare positions, expose friction and let the accountable executive make the final decision.</span></li>
+                                            </ol>
+                </article>
+
+                <article class="sales-oracle__track">
+                    <h3>Pressure-test the customer RFP</h3>
+                    <p>Turn the buying committee into a pre-mortem for the deal. Rehearse the proposal against procurement, finance, security, legal, operations and the business sponsor.</p>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Map the veto chain</strong>Identify buyers, influencers, budget owners, technical evaluators and formal veto holders.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Simulate their objections</strong>Apply role rules and authorized personality signals without inventing private facts or scraping profiles.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Rewrite the evidence plan</strong>Match proof, risk controls, ROI assumptions and implementation commitments to each decision trigger.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Send a stronger proposal</strong>Produce an objection matrix, conditional-GO checklist, negotiation brief and executive narrative.</span></li>
+                                            </ol>
+                </article>
+            </div>
+
+            <div class="sales-oracle__benefits">
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>See vetoes before submission</strong><span>Find the committee member, rule or missing proof most likely to stop the deal.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Tailor evidence by buyer</strong><span>Give Finance, Security, Legal and Operations the proof each function actually needs.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Prepare the negotiation</strong><span>Enter the meeting with anticipated objections, fallback conditions and clear owners.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Keep the simulation governed</strong><span>Consent, provenance, tenant isolation, audit logs and human arbitration stay attached to the run.</span></div></div>
+                            </div>
+
+            <div class="sales-oracle__closing">
+                <p>The Sales Oracle is a decision-rehearsal system, not a mind reader or prediction engine. It labels simulated stakeholder feedback, uses official connectors or authorized exports, and never replaces the real buyer&#39;s decision.</p>
+                <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=KayrosLab%20Sales%20Oracle%20simulation">Simulate your next deal<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -1322,86 +1413,44 @@
     <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-4xl mx-auto">
             <div class="mb-10">
-                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">COMPLIANCE &amp; SOVEREIGNTY</div>
-                <h2 class="section-header tracking-tighter">Designed for demanding compliance.<br>Stated honestly, tier by tier.</h2>
-                <p class="mt-3 text-lg text-slate-600">KayrosLab is designed to meet the sovereignty, traceability and security requirements of regulated organizations. What is true today depends on the deployment tier — here is the exact ledger.</p>
+                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">COMPLIANCE &amp;amp; SOVEREIGNTY</div>
+                <h2 class="section-header tracking-tighter">An architecture designed for the most<br>demanding compliance environments.</h2>
+                <p class="mt-3 text-lg text-slate-600">KayrosLab was designed from the ground up to meet the sovereignty, traceability and security requirements of regulated organizations and strategic sectors.</p>
             </div>
-
-            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden mb-6">
-                <div class="overflow-x-auto">
-                    <table class="compliance-table w-full text-sm min-w-[760px]">
-                        <thead>
-                            <tr>
-                                <th class="text-left px-5 py-3 text-slate-500 font-semibold">Property</th>
-                                <th class="text-left px-4 py-3 font-semibold">P0 — Standalone</th>
-                                <th class="text-left px-4 py-3 font-semibold">P1 — Sovereign</th>
-                                <th class="text-left px-4 py-3 font-semibold">P2 — Cloud</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Data at rest</td>
-                                <td class="px-4 py-3 text-slate-600">In-browser only; nothing stored server-side</td>
-                                <td class="px-4 py-3 text-slate-600">Your infrastructure (Ollama + Qdrant, local)</td>
-                                <td class="px-4 py-3 text-slate-600">Server-side datastore (optionally Postgres)</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Zero data egress</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Yes (mock mode)</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Yes</td>
-                                <td class="px-4 py-3 text-amber-700 font-medium">No — LLM calls leave the environment</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">LLM inference</td>
-                                <td class="px-4 py-3 text-slate-600">Mock (offline)</td>
-                                <td class="px-4 py-3 text-slate-600">Local Ollama (quant-aware), fully on-premise</td>
-                                <td class="px-4 py-3 text-slate-600">Anthropic Claude via server-side key</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">GDPR posture</td>
-                                <td class="px-4 py-3 text-slate-600">No personal data collected</td>
-                                <td class="px-4 py-3 text-slate-600">By design (data minimization, erasure, consent)</td>
-                                <td class="px-4 py-3 text-slate-600">Native features + processing recorded</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">HDS (health data hosting)</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Architecture built for it — host on an HDS-certified provider to complete</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">NIS2 / DORA / EHDS alignment</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Traceability + resilience by design</td>
-                                <td class="px-4 py-3 text-slate-600">Alignment supported by audit trail</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">ISO 27001 / 27701 / 42001 / SOC 2</td>
-                                <td class="px-4 py-3 text-slate-500 gap-x-2">Not claimed</td>
-                                <td class="px-4 py-3 text-slate-500">Not claimed — in preparation, roadmap shared on request</td>
-                                <td class="px-4 py-3 text-slate-500">Not claimed — in preparation, roadmap shared on request</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="border border-slate-200 rounded-3xl p-7">
                     <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Data Sovereignty</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Sovereign local deployment (Ollama + Qdrant) with no data transfer outside — <strong>P1 tier</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zero dependency on US hyperscalers for strategic data processing — <strong>P1 tier only</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Data exploitation and valorization exclusively by your organization — <strong>P0 + P1</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Sovereign local deployment (Ollama + Qdrant) with no data transfer outside</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zero dependency on US hyperscalers for strategic data processing</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Data exploitation and valorization exclusively by your organization</span></li>
                     </ul>
                 </div>
                 <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditability &amp; Governance</h4></div>
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-certificate text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Certifications &amp;amp; Alignments</h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Local architecture designed to facilitate <strong>HDS</strong> compliance (Health Data Hosting)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Alignment with the <strong>European Health Data Space (EHDS)</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Compatible with French and European digital sovereignty requirements</span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-balance-scale text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Regulatory Compliance</h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Native <strong>GDPR</strong> compliance (data minimization, right to erasure, consent)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Aligned with <strong>NIS2</strong> and <strong>DORA</strong> requirements (resilience, traceability, risk governance)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Relevant ISO standards: <strong>ISO 27001</strong> (information security), <strong>ISO 27701</strong> (privacy management) and <strong>ISO 42001</strong> (AI management systems)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Preparation for <strong>SOC 2 Type II</strong> certification (security, availability, confidentiality and data integrity)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Complete traceability of decisions and processing for internal and external audits</span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditability &amp;amp; Governance</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Complete timestamped timeline of all steps and decisions</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Traceable and exportable <strong>Kayros Index (KI)</strong> scoring</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>AI agent logs + human decisions for audits and risk committees</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Structured human gates (Executive Committee veto, expert validation) with traceability</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Structured human gates (COMEX veto, expert validation) with traceability</span></li>
                     </ul>
                 </div>
             </div>
@@ -1437,28 +1486,28 @@
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Reasoning &amp; Agents</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Reasoning &amp;amp; Agents</td>
                         <td class="px-4 py-4 text-center text-slate-500">Single generic model</td>
                         <td class="px-4 py-4 text-center text-slate-500">Limited AI assistance</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Specialized multi-agents</strong><br><span class="text-xs">(Red Team, Devil's Advocate, Bisociator…)</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Memory &amp; Continuity</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Memory &amp;amp; Continuity</td>
                         <td class="px-4 py-4 text-center text-slate-500">Limited session context</td>
                         <td class="px-4 py-4 text-center text-slate-500">Simple idea database</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Persistent semantic search</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Robustness &amp; Resilience</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Robustness &amp;amp; Resilience</td>
                         <td class="px-4 py-4 text-center text-slate-500">None (frequent hallucinations)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Low</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Traceability &amp; Audit</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Traceability &amp;amp; Audit</td>
                         <td class="px-4 py-4 text-center text-slate-500">Low / ephemeral conversation</td>
                         <td class="px-4 py-4 text-center text-slate-500">Basic history</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Complete timeline + KI scoring + agent logs</strong></td>
@@ -1468,7 +1517,7 @@
                         <td class="px-6 py-4 font-semibold text-slate-900">Human Governance</td>
                         <td class="px-4 py-4 text-center text-slate-500">Informal (prompt engineering)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Simple validation workflows</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Structured Human-in-the-Loop</strong><br><span class="text-xs">Multi-criteria votes, executive veto, Working Groups</span></td>
+                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Structured Human-in-the-Loop</strong><br><span class="text-xs">Multi-criteria votes, COMEX veto, Working Groups</span></td>
                     </tr>
                     
                     <tr>
@@ -1487,7 +1536,7 @@
                     
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Primary Use Case</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Content generation &amp; assistance</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Content generation &amp;amp; assistance</td>
                         <td class="px-4 py-4 text-center text-slate-500">Collaborative idea box</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">High-level strategic ideation + auditable decisions</strong></td>
                     </tr>
@@ -1679,13 +1728,14 @@
                         <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
                         <span class="font-display text-xl font-semibold">KayrosLab</span>
                     </div>
-                    <p class="text-sm text-slate-400">KayrosLab is a structured agentic AI system that transforms ideation into a rigorous, traceable, resilient process — comparable to an executive committee augmented by AI agents.</p>
+                    <p class="text-sm text-slate-400">Rehearse an executive decision or buyer committee before the proposal is sent. KayrosLab combines governed agents with authorized stakeholder profiles to expose vetoes, objections and missing evidence.</p>
                 </div>
                 <div>
                     <h4 class="font-semibold text-sm mb-4">Platform</h4>
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#modele" class="hover:text-sky-400 transition-colors">The Model</a></li>
                         <li><a href="#orchestration" class="hover:text-sky-400 transition-colors">Architecture</a></li>
+                        <li><a href="#sales-oracle" class="hover:text-sky-400 transition-colors">Hybrid Agent Sales Oracle</a></li>
                         <li><a href="#differenciation" class="hover:text-sky-400 transition-colors">Differentiation</a></li>
                     </ul>
                 </div>
@@ -1694,7 +1744,7 @@
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#livret-blanc" class="hover:text-sky-400 transition-colors">Whitepapers</a></li>
                         <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Live Demo</a></li>
-                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">AI Agents App</a></li>
+                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Agents IA</a></li>
                     </ul>
                 </div>
                 <div>

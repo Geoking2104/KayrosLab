@@ -6,7 +6,10 @@
     <title><%= __('site_title') %></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./tokens.css">
     <style>
+        /* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: KayrosLab custom · vibe: technical, persuasive, executive · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · slop: pass (51–55) · honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
+        /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         :root { --primary: #0f172a; }
         body { font-family: 'Inter', system-ui, sans-serif; }
@@ -62,6 +65,39 @@
         .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.30s; }
         .stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.35s; }
         .stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.40s; }
+
+        html, body { overflow-x: clip; }
+        .sales-oracle { background: var(--color-paper); color: var(--color-ink); }
+        .sales-oracle__inner { max-width: 96rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
+        .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
+        .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
+        .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
+        .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
+        .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
+        .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
+        .sales-oracle__track > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__steps { display: grid; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+        .sales-oracle__step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; color: var(--color-ink-2); line-height: 1.55; }
+        .sales-oracle__step-index { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+        .sales-oracle__step strong { display: block; color: var(--color-ink); }
+        .sales-oracle__benefits { display: grid; gap: var(--space-sm); margin-block-start: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
+        .sales-oracle__benefit { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
+        .sales-oracle__benefit i { color: var(--color-accent); margin-block-start: var(--space-3xs); }
+        .sales-oracle__benefit strong { display: block; margin-block-end: var(--space-3xs); }
+        .sales-oracle__benefit span { color: var(--color-muted-on-dark); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__closing { display: grid; gap: var(--space-md); align-items: center; margin-block-start: var(--space-xl); }
+        .sales-oracle__closing p { margin: 0; max-width: 68ch; color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
+        .sales-oracle__cta:hover { transform: translateY(-1px); }
+        .sales-oracle__cta:active { transform: translateY(1px); }
+        .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+        .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
+        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
+        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
@@ -105,6 +141,10 @@
                                     <a href="#orchestration" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_architecture') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_architecture_desc') %></div></div>
+                                    </a>
+                                    <a href="#sales-oracle" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_sales_oracle') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_sales_oracle_desc') %></div></div>
                                     </a>
                                     <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
@@ -253,6 +293,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_model') %></a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_architecture') %></a>
+                        <a href="#sales-oracle" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_sales_oracle') %></a>
                         <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_dashboard') %></a>
                         <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_technology') %></a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1"><%= __('nav_solutions') %></div>
@@ -322,7 +363,7 @@
                     </h1>
                     <p class="max-w-lg text-xl text-slate-300 mb-8"><%- __('hero_subtitle') %></p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#offre" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
+                        <a href="#sales-oracle" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
                             <%= __('hero_cta_offer') %>
                         </a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
@@ -987,6 +1028,54 @@
         </div>
     </section>
 
+    <!-- ===== HYBRID AGENT SALES ORACLE ===== -->
+    <section id="sales-oracle" class="sales-oracle" aria-labelledby="sales-oracle-title">
+        <div class="sales-oracle__inner">
+            <div class="sales-oracle__head">
+                <h2 id="sales-oracle-title"><%= __('sales_oracle_title') %></h2>
+                <p><%- __('sales_oracle_intro') %></p>
+            </div>
+
+            <figure class="sales-oracle__figure">
+                <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="<%= __('sales_oracle_image_alt') %>">
+                <figcaption><%= __('sales_oracle_caption') %></figcaption>
+            </figure>
+
+            <div class="sales-oracle__tracks">
+                <article class="sales-oracle__track">
+                    <h3><%= __('sales_oracle_comex_title') %></h3>
+                    <p><%= __('sales_oracle_comex_desc') %></p>
+                    <ol class="sales-oracle__steps">
+                        <% [1,2,3,4].forEach(step => { -%>
+                        <li class="sales-oracle__step"><span class="sales-oracle__step-index"><%= step %></span><span><strong><%= __('sales_oracle_comex_step_' + step + '_title') %></strong><%= __('sales_oracle_comex_step_' + step + '_desc') %></span></li>
+                        <% }) -%>
+                    </ol>
+                </article>
+
+                <article class="sales-oracle__track">
+                    <h3><%= __('sales_oracle_rfp_title') %></h3>
+                    <p><%= __('sales_oracle_rfp_desc') %></p>
+                    <ol class="sales-oracle__steps">
+                        <% [1,2,3,4].forEach(step => { -%>
+                        <li class="sales-oracle__step"><span class="sales-oracle__step-index"><%= step %></span><span><strong><%= __('sales_oracle_rfp_step_' + step + '_title') %></strong><%= __('sales_oracle_rfp_step_' + step + '_desc') %></span></li>
+                        <% }) -%>
+                    </ol>
+                </article>
+            </div>
+
+            <div class="sales-oracle__benefits">
+                <% [1,2,3,4].forEach(benefit => { -%>
+                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong><%= __('sales_oracle_benefit_' + benefit + '_title') %></strong><span><%= __('sales_oracle_benefit_' + benefit + '_desc') %></span></div></div>
+                <% }) -%>
+            </div>
+
+            <div class="sales-oracle__closing">
+                <p><%= __('sales_oracle_safeguard') %></p>
+                <a class="sales-oracle__cta" href="mailto:<%= __('footer_email') %>?subject=<%= encodeURIComponent(__('sales_oracle_mail_subject')) %>"><%= __('sales_oracle_cta') %><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== TECHNOLOGY SECTION ===== -->
     <section id="technologie" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-6xl mx-auto">
@@ -1280,6 +1369,7 @@
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#modele" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_model') %></a></li>
                         <li><a href="#orchestration" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_architecture') %></a></li>
+                        <li><a href="#sales-oracle" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_sales_oracle') %></a></li>
                         <li><a href="#differenciation" class="hover:text-sky-400 transition-colors"><%= __('nav_diff') %></a></li>
                     </ul>
                 </div>

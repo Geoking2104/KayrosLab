@@ -13,25 +13,30 @@ KayrosLab is a **governed strategic ideation workshop**: multi-agent orchestrati
 
 It is **not** a trained model. It is a **governed LLM stack** — an orchestrator that drives real models (Ollama quant-aware locally, or Claude / Mistral via the Fastify backend) behind governance, memory, and audit trails.
 
+![KayrosLab Hybrid Agent Sales Oracle — governed simulation of an executive committee and buyer veto network](backend/web/public/assets/hybrid-agent-sales-oracle.png)
+
+> **Hybrid agents turn KayrosLab into a Sales Oracle:** rehearse an internal executive decision, pressure-test an RFP against the customer’s buying committee, and strengthen the evidence before the real meeting. Simulated stakeholder feedback is always labelled as simulation — never as a real statement or prediction.
+
 ---
 
 ## Table of contents
 
 1. [Why KayrosLab](#why-kayroslab)
 2. [Features](#features)
-3. [Quick start](#quick-start)
-4. [Repository layout](#repository-layout)
-5. [How it works](#how-it-works)
-6. [Core engine](#core-engine)
-7. [Backend API](#backend-api)
-8. [UI entry points](#ui-entry-points)
-9. [Configuration](#configuration)
-10. [Deployment](#deployment)
-11. [Development & tests](#development--tests)
-12. [Roadmap](#roadmap)
-13. [Further documentation](#further-documentation)
-14. [Contact](#contact)
-15. [License](#license)
+3. [Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle)
+4. [Quick start](#quick-start)
+5. [Repository layout](#repository-layout)
+6. [How it works](#how-it-works)
+7. [Core engine](#core-engine)
+8. [Backend API](#backend-api)
+9. [UI entry points](#ui-entry-points)
+10. [Configuration](#configuration)
+11. [Deployment](#deployment)
+12. [Development & tests](#development--tests)
+13. [Roadmap](#roadmap)
+14. [Further documentation](#further-documentation)
+15. [Contact](#contact)
+16. [License](#license)
 
 ---
 
@@ -59,10 +64,49 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Kayros Signature** — each candidate carries a non-obvious conceptual bridge that makes the option unique (surfaced in the public demo)
 - **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
 - **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
+- **Specialized swarms** — compose built-in system agents, user-defined experts, or modified hybrid agents with layered rules and veto powers
+- **Consent-aware personality simulation** — optional LinkedIn self-profile / Crystal Knows imports through official APIs or authorized structured exports, with provenance and explicit consent
+- **Sales Oracle** — simulate internal executive decisions or customer buying committees to reveal veto paths, objections, evidence gaps and conditional-GO requirements before a proposal is sent
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
 - **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); **Teams (JWT RS256 Azure Bot, Adaptive Cards, gate/EF-20, envoi proactif + webhook)**; Discord (Ed25519, embeds)
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
 - **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
+
+---
+
+## Hybrid Agent Sales Oracle
+
+A hybrid agent combines a governed business role with an authorized stakeholder profile. The role supplies explicit decision rules; the profile can supply consented communication preferences, DISC traits, decision triggers and objection patterns. Personality simulation is opt-in per swarm and never changes the requirement for human arbitration.
+
+### Rehearse an executive decision
+
+1. Compose a panel from built-in CFO, CTO, Legal, Risk and Operations agents, custom experts, or hybrids.
+2. Assign consented profiles to the relevant roles.
+3. Run the proposal through `GO`, `CONDITIONAL_GO`, `NO_GO` and veto rules.
+4. Review the friction map, requested evidence and simulated stakeholder reactions before the accountable executive decides.
+
+### Pressure-test a customer RFP
+
+1. Map the buying committee: sponsor, procurement, finance, security, legal, operations and technical evaluators.
+2. Represent each function with explicit role rules; enrich only with authorized profile data.
+3. Red-team the offer against each veto holder’s criteria and decision triggers.
+4. Generate an objection matrix, conditional-GO checklist, evidence plan, negotiation brief and executive narrative.
+
+```mermaid
+flowchart LR
+  OFFER[Proposal / RFP response] --> ORACLE[Hybrid Agent Sales Oracle]
+  ORACLE --> COMEX[Internal executive committee]
+  ORACLE --> BUYERS[Customer buying committee]
+  COMEX --> VETO1{GO / conditions / veto}
+  BUYERS --> VETO2{Sponsor / Finance / Security / Legal / Procurement}
+  VETO1 --> PACK[Governed decision dossier]
+  VETO2 --> PACK
+  PACK --> HUMAN[Human arbitration and stronger proposal]
+```
+
+**Safeguards:** official connectors or authorized exports only; no LinkedIn scraping; explicit consent and provenance; tenant isolation; no private-fact fabrication; simulated feedback is labelled and cannot be presented as a real quote, endorsement or behavioral prediction.
+
+See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for schemas, endpoints and examples.
 
 ---
 
@@ -126,6 +170,8 @@ Open the live page (no backend required for the client-side exploration loop):
 - GitHub Pages: [geoking2104.github.io/KayrosLab/…](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
 
 Features of the demo:
+- Interactive swarm composer for system, custom and hybrid agents
+- Consent-aware LinkedIn / Crystal Knows profile-link workflow
 - Semantic map (InfraNodus-inspired) before ideation
 - Bisociation-style exploration with **novelty ranking**
 - **Kayros Signature** on each candidate
@@ -383,6 +429,8 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Memory** | `GET\|POST /v1/memory/l3` · `GET /v1/memory/ideas/:id` · `POST /v1/memory/promote` · `POST /v1/memory/save` |
 | **Positioning** | analyze, search, GitHub, ArXiv, OWL, `GET /v1/positionning/ontology` |
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
+| **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/run` · `POST /v1/swarm/runs/:id/arbitrate` |
+| **Hybrid profiles** | `POST /v1/swarm/agents/:agentId/personality/import` |
 | **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
@@ -413,6 +461,8 @@ Key environment variables:
 | Variable | Role |
 |---|---|
 | `MISTRAL_API_KEY` | Backend LLM provider |
+| `LINKEDIN_ACCESS_TOKEN` | Optional official LinkedIn authenticated-member profile import |
+| `CRYSTALKNOWS_API_TOKEN` | Optional Crystal Knows profile import on eligible plans |
 | `KAYROS_EMBED_MODEL` | Force embedding model (default: soft fallback chain) |
 | `DATABASE_URL` | Optional Postgres |
 | `OLLAMA_*` | Local quant-aware inference |
@@ -493,6 +543,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | **v16** | Engine novelty API · KPI drift · Discord scaffold · **optional adapters** (LangChain tools, LangGraph research, multi-provider search, Langfuse) · demo ontology/Mistral wiring | ✅ |
 | **v17** | **Teams adapter complet** (JWT RS256 Azure Bot, JWKS cache, Adaptive Cards, gate/EF-20, idempotence, route interactive, envoi proactif bot + webhook) | ✅ |
 | **v18** | **Engine/adapters split + governed intelligence layers** (zero-dep `core/`, optional `core/adapters/` + `backend/adapters/`, P0–P4 control layers, decision packet surface) · CI GitHub Actions (core + backend + i18n) | ✅ |
+| **v19** | **Specialized swarms + Hybrid Agent Sales Oracle** — system/custom/hybrid composition, personality simulation, official profile imports, veto-aware executive and buyer-committee rehearsal | ✅ |
 
 ---
 
@@ -511,6 +562,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) | v14 links · motif · update · embed |
 | [docs/pitch-seed.md](docs/pitch-seed.md) | Demo script |
 | [docs/engine-architecture.md](docs/engine-architecture.md) | Core vs adapters (V16) |
+| [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) | Swarm composition, personality profiles, consent and Sales Oracle scenarios |
 | [backend/adapters/README.md](backend/adapters/README.md) | LangChain · LangGraph · search · Langfuse |
 
 ---

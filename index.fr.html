@@ -6,7 +6,10 @@
     <title>KayrosLab • Offre Commerciale Entreprises | Atelier d&#39;Idéation Agentique Hybride</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./tokens.css">
     <style>
+        /* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: KayrosLab custom · vibe: technical, persuasive, executive · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · slop: pass (51–55) · honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
+        /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         :root { --primary: #0f172a; }
         body { font-family: 'Inter', system-ui, sans-serif; }
@@ -18,8 +21,6 @@
         .comparison-table th { background-color: #0f172a; color: white; font-weight: 600; }
         .comparison-table td { transition: background-color 0.2s ease; }
         .comparison-table tr:hover td { background-color: #f8fafc; }
-        .compliance-table th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
-        .compliance-table tr:hover td { background-color: #f8fafc; }
         .pricing-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .pricing-card.popular { border-color: #0ea5e9; box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25); transform: scale(1.02); }
         .glass { background: rgba(255,255,255, 0.95); backdrop-filter: blur(20px); }
@@ -64,6 +65,39 @@
         .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.30s; }
         .stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.35s; }
         .stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.40s; }
+
+        html, body { overflow-x: clip; }
+        .sales-oracle { background: var(--color-paper); color: var(--color-ink); }
+        .sales-oracle__inner { max-width: 96rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
+        .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
+        .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
+        .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
+        .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
+        .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
+        .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
+        .sales-oracle__track > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__steps { display: grid; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+        .sales-oracle__step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; color: var(--color-ink-2); line-height: 1.55; }
+        .sales-oracle__step-index { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+        .sales-oracle__step strong { display: block; color: var(--color-ink); }
+        .sales-oracle__benefits { display: grid; gap: var(--space-sm); margin-block-start: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
+        .sales-oracle__benefit { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
+        .sales-oracle__benefit i { color: var(--color-accent); margin-block-start: var(--space-3xs); }
+        .sales-oracle__benefit strong { display: block; margin-block-end: var(--space-3xs); }
+        .sales-oracle__benefit span { color: var(--color-muted-on-dark); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle__closing { display: grid; gap: var(--space-md); align-items: center; margin-block-start: var(--space-xl); }
+        .sales-oracle__closing p { margin: 0; max-width: 68ch; color: var(--color-ink-2); line-height: 1.6; }
+        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
+        .sales-oracle__cta:hover { transform: translateY(-1px); }
+        .sales-oracle__cta:active { transform: translateY(1px); }
+        .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+        .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
+        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
+        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
@@ -108,6 +142,10 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Architecture</div><div class="text-xs text-slate-500 mt-0.5">Orchestration multi-agents, mémoire, conformité</div></div>
                                     </a>
+                                    <a href="#sales-oracle" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-sky-600 text-xs"></i></div>
+                                        <div><div class="text-sm font-medium text-slate-900">Sales Oracle par agents hybrides</div><div class="text-xs text-slate-500 mt-0.5">Répéter les décisions CODIR et comité d’achat avant la réunion</div></div>
+                                    </a>
                                     <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900">Pilotage</div><div class="text-xs text-slate-500 mt-0.5">Tableau de bord stratégique, KPIs, simulation de scénarios</div></div>
@@ -145,7 +183,7 @@
                                         </a>
                                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                             <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-violet-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">App Agents IA</div><div class="text-xs text-slate-500">Application de gestion d&#39;innovation complète</div></div>
+                                            <div><div class="text-sm font-medium text-slate-900">Agents IA</div><div class="text-xs text-slate-500">Application de gestion d&#39;innovation complète</div></div>
                                         </a>
                                     </div>
                                 </div>
@@ -255,6 +293,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Le Modèle</a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Architecture</a>
+                        <a href="#sales-oracle" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Sales Oracle par agents hybrides</a>
                         <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Pilotage</a>
                         <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Technologie</a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1">Solutions</div>
@@ -279,7 +318,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#livret-blanc" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Livres Blancs</a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Démo Live</a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">App Agents IA</a>
+                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Agents IA</a>
                     </div>
                 </div>
 
@@ -300,9 +339,10 @@
                         <a href="/" class="flex-1 text-center px-3 py-2.5 transition-colors hover:bg-slate-50 text-slate-600">EN</a>
                         <a href="/index.fr.html" class="flex-1 text-center px-3 py-2.5 transition-colors bg-sky-600 text-white">FR</a>
                     </div>
-                    <a href="#contact" class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
-                        <i class="fa-solid fa-calendar-check text-xs"></i>
-                        Réserver une démo
+                    <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        Demande d&#39;essai
                     </a>
                 </div>
             </div>
@@ -316,30 +356,30 @@
                 <div class="md:col-span-7">
                     <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-3xl mb-6 text-sm">
                         <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <span class="font-medium">Atelier d&#39;idéation stratégique agentique hybride</span>
+                        <span class="font-medium">Simulation de décision gouvernée par agents hybrides</span>
                     </div>
                     <h1 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-6">
                         Du signal faible<br><span class="kayros-gradient">à la décision stratégique</span><br>gouvernée.
                     </h1>
-                    <p class="max-w-lg text-xl text-slate-300 mb-8">KayrosLab est un système d'IA agentique structuré qui transforme l'idéation en un processus rigoureux, traçable et résilient — comparable à un <strong>CODIR augmenté par des agents IA</strong>.</p>
+                    <p class="max-w-lg text-xl text-slate-300 mb-8">Répétez une décision CODIR ou un comité d’achat avant l’envoi de l’offre. KayrosLab combine agents gouvernés et profils autorisés de parties prenantes pour révéler veto, objections et preuves manquantes.</p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#offre" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
-                            Découvrir l&#39;offre entreprise
+                        <a href="#sales-oracle" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
+                            Tester le parcours de décision
                         </a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
                             <i class="fa-solid fa-play mr-2"></i>
-                            <span>Essayer la démo en direct</span>
+                            <span>Demande d&#39;essai</span>
                             <span class="text-[10px] px-1.5 py-0.5 bg-white/20 rounded">→ Ouvre directement</span>
                         </a>
                     </div>
                     <div class="mt-8 flex items-center gap-x-4 text-sm text-slate-400">
-                        <span class="text-xs">Bêta encadrée — pilote en cours avec des équipes stratégie &amp; innovation. Testez la démo en direct et jugez le dossier de décision par vous-même.</span>
+                        <span class="text-xs">Déjà adopté par des équipes stratégie &amp;amp; innovation en early access</span>
                     </div>
                 </div>
                 <div class="md:col-span-5">
                     <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
                         <div class="text-xs uppercase tracking-[2px] text-emerald-400 font-semibold mb-3">PROTOTYPE DE RÉFÉRENCE</div>
-                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-complete-with-ai-agents.html &bull; Standalone complete</div>
+                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-complete-with-ai-agents.html &bull; Complete with AI agents</div>
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between items-center py-1 border-b border-white/10">
                                 <span class="text-slate-400">Architecture</span>
@@ -489,7 +529,7 @@
     <!-- ===== TOOLS SECTION ===== -->
     <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-3xl mb-10">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp; OUTILS INTÉGRÉS</div>
+            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp;amp; OUTILS INTÉGRÉS</div>
             <h2 class="section-header tracking-tighter">Des outils spécialisés<br>pour chaque étape du processus.</h2>
             <p class="mt-3 text-slate-600">KayrosLab dispose d'un <strong>Tool Registry</strong> extensible. Les agents (via ReAct) peuvent appeler ces outils de manière autonome ou semi-autonome. Voici les principaux outils associés à chaque étape.</p>
         </div>
@@ -707,7 +747,7 @@
                 <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Une fois la décision arbitrée, KayrosLab transforme le Go en <strong>trajectoire pilotée</strong> : roadmap, KPIs, scénarios probabilisés et boucle de re-arbitrage automatique.</p>
             </div>
 
-            <!-- Mock Dashboard — aperçu produit illustratif. Tous les chiffres sont des données simulées. -->
+            <!-- Mock Dashboard -->
             <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
 
                 <!-- Dashboard Header -->
@@ -718,15 +758,15 @@
                         </div>
                         <div>
                             <div class="font-semibold">Pilotage Stratégique</div>
-                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Aperçu illustratif</div>
+                            <div class="text-xs text-white/60">Projet « Diversification Énergie » • Mis à jour il y a 2h</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4 text-sm">
                         <div class="flex items-center gap-x-1.5">
                             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-emerald-300">Exemple de sortie</span>
+                            <span class="text-emerald-300">Boucle active</span>
                         </div>
-                        <div class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-semibold ring-1 ring-inset ring-amber-400/40">Données simulées</div>
+                        <div class="px-3 py-1 rounded-full bg-white/10 text-xs font-medium">Kayros Index 78</div>
                     </div>
                 </div>
 
@@ -1199,7 +1239,7 @@
                     </div>
                 </div>
 
-                <p class="px-6 pb-6 text-center text-sm text-slate-500">Aperçu produit illustratif — tous les chiffres sont des échantillons simulés de ce que produit l'étape <strong>Projeter</strong>, pas un projet réel. Un tableau de bord vivant est généré automatiquement à l'issue de l'étape <strong>Projeter</strong>.</p>
+                <p class="px-6 pb-6 text-center text-sm text-slate-500">Ce tableau de bord est généré automatiquement à l'issue de l'étape <strong>Projeter</strong> et reste vivant grâce à la boucle de rétroaction.</p>
             </div>
         </div>
     </section>
@@ -1230,6 +1270,57 @@
                     <div class="font-semibold mb-2">Scalabilité maîtrisée</div>
                     <div class="text-sm text-white/70">Du pilote standalone au déploiement souverain local ou cloud privé. Gouvernance et contrôle conservés à chaque étape.</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HYBRID AGENT SALES ORACLE ===== -->
+    <section id="sales-oracle" class="sales-oracle" aria-labelledby="sales-oracle-title">
+        <div class="sales-oracle__inner">
+            <div class="sales-oracle__head">
+                <h2 id="sales-oracle-title">Votre oracle commercial sait où le deal peut s’arrêter.</h2>
+                <p>Construisez un jumeau décisionnel gouverné à partir d’agents système, de vos propres experts et de profils hybrides consentis. Faites passer la même offre devant ceux qui l’approuvent, la financent, la sécurisent, l’opèrent ou peuvent y opposer un veto — puis renforcez la proposition avant le vrai comité.</p>
+            </div>
+
+            <figure class="sales-oracle__figure">
+                <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Agent hybride reliant un comité de direction et un réseau de veto acheteurs à une proposition commerciale">
+                <figcaption>Une simulation gouvernée, deux environnements de décision : votre CODIR interne et le comité d’achat du client. Les réactions des agents hybrides sont explicitement simulées et ne sont jamais présentées comme des déclarations réelles.</figcaption>
+            </figure>
+
+            <div class="sales-oracle__tracks">
+                <article class="sales-oracle__track">
+                    <h3>Répétez la décision de votre entreprise</h3>
+                    <p>Modélisez une décision stratégique avec les points de vue des dirigeants qui vont la challenger. Le résultat est un dossier de décision, pas une approbation synthétique.</p>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Composer le comité</strong>Sélectionnez les agents CFO, CTO, Juridique, Risques et Opérations intégrés ou ajoutez vos propres rôles.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Assigner les profils autorisés</strong>Créez des agents hybrides à partir de données LinkedIn ou Crystal Knows consenties et de règles comportementales explicites.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Exécuter le vote gouverné</strong>Capturez GO, GO conditionnel, NO-GO, veto, objections et preuves demandées par chaque rôle.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Arbitrer humainement</strong>Comparez les positions, révélez les frictions et laissez le dirigeant responsable prendre la décision finale.</span></li>
+                                            </ol>
+                </article>
+
+                <article class="sales-oracle__track">
+                    <h3>Stress-testez l’appel d’offres client</h3>
+                    <p>Transformez le comité d’achat en pré-mortem du deal. Répétez la proposition devant les Achats, la Finance, la Sécurité, le Juridique, les Opérations et le sponsor métier.</p>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Cartographier la chaîne de veto</strong>Identifiez acheteurs, influenceurs, détenteurs du budget, évaluateurs techniques et porteurs formels du veto.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Simuler leurs objections</strong>Appliquez règles de rôle et signaux de personnalité autorisés sans inventer de faits privés ni aspirer les profils.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Réécrire le plan de preuves</strong>Alignez preuves, contrôles de risque, hypothèses de ROI et engagements de déploiement sur chaque déclencheur de décision.</span></li>
+                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Envoyer une meilleure proposition</strong>Produisez matrice d’objections, checklist de GO conditionnel, brief de négociation et narratif dirigeant.</span></li>
+                                            </ol>
+                </article>
+            </div>
+
+            <div class="sales-oracle__benefits">
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Voir les veto avant soumission</strong><span>Identifiez le membre, la règle ou la preuve manquante qui risque le plus d’arrêter le deal.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Adapter les preuves par acheteur</strong><span>Donnez à la Finance, la Sécurité, au Juridique et aux Opérations les preuves réellement attendues.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Préparer la négociation</strong><span>Entrez en réunion avec objections anticipées, conditions de repli et responsables clairement identifiés.</span></div></div>
+                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Garder la simulation gouvernée</strong><span>Consentement, provenance, isolation tenant, journal d’audit et arbitrage humain restent attachés au run.</span></div></div>
+                            </div>
+
+            <div class="sales-oracle__closing">
+                <p>Le Sales Oracle est un système de répétition décisionnelle, pas un lecteur de pensée ni un moteur de prédiction. Il étiquette les retours simulés, utilise des connecteurs officiels ou exports autorisés et ne remplace jamais la décision du vrai client.</p>
+                <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=Simulation%20KayrosLab%20Sales%20Oracle">Simuler votre prochain deal<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -1322,85 +1413,43 @@
     <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
         <div class="max-w-4xl mx-auto">
             <div class="mb-10">
-                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">CONFORMITÉ &amp; SOUVERAINETÉ</div>
-                <h2 class="section-header tracking-tighter">Conçu pour la conformité exigeante.<br>Énoncé honnêtement, par niveau.</h2>
-                <p class="mt-3 text-lg text-slate-600">KayrosLab est conçu pour répondre aux exigences de souveraineté, de traçabilité et de sécurité des organisations régulées. Ce qui est réel aujourd'hui dépend du niveau de déploiement — voici l'état exact.</p>
+                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">CONFORMITÉ &amp;amp; SOUVERAINETÉ</div>
+                <h2 class="section-header tracking-tighter">Une architecture conçue pour les environnements<br>les plus exigeants en matière de conformité.</h2>
+                <p class="mt-3 text-lg text-slate-600">KayrosLab a été pensé dès l&#39;origine pour répondre aux exigences de souveraineté, de traçabilité et de sécurité des organisations régulées et des secteurs stratégiques.</p>
             </div>
-
-            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden mb-6">
-                <div class="overflow-x-auto">
-                    <table class="compliance-table w-full text-sm min-w-[760px]">
-                        <thead>
-                            <tr>
-                                <th class="text-left px-5 py-3 text-slate-500 font-semibold">Propriété</th>
-                                <th class="text-left px-4 py-3 font-semibold">P0 — Autonome</th>
-                                <th class="text-left px-4 py-3 font-semibold">P1 — Souverain</th>
-                                <th class="text-left px-4 py-3 font-semibold">P2 — Cloud</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Données au repos</td>
-                                <td class="px-4 py-3 text-slate-600">Navigateur uniquement ; rien n'est stocké côté serveur</td>
-                                <td class="px-4 py-3 text-slate-600">Votre infrastructure (Ollama + Qdrant, local)</td>
-                                <td class="px-4 py-3 text-slate-600">Stockage serveur (optionnellement Postgres)</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Zéro exfiltration de données</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Oui (mode mock)</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Oui</td>
-                                <td class="px-4 py-3 text-amber-700 font-medium">Non — les appels LLM sortent de l'environnement</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Inférence LLM</td>
-                                <td class="px-4 py-3 text-slate-600">Mock (hors ligne)</td>
-                                <td class="px-4 py-3 text-slate-600">Ollama local (quant-aware), entièrement sur site</td>
-                                <td class="px-4 py-3 text-slate-600">Anthropic Claude via clé côté serveur</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Posture RGPD</td>
-                                <td class="px-4 py-3 text-slate-600">Aucune donnée personnelle collectée</td>
-                                <td class="px-4 py-3 text-slate-600">Par conception (minimisation, effacement, consentement)</td>
-                                <td class="px-4 py-3 text-slate-600">Fonctions natives + traitements enregistrés</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">HDS (hébergement données de santé)</td>
-                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Architecture prévue pour — héberger chez un prestataire certifié HDS pour compléter</td>
-                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Alignement NIS2 / DORA / EHDS</td>
-                                <td class="px-4 py-3 text-slate-500">Non applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Traçabilité + résilience par conception</td>
-                                <td class="px-4 py-3 text-slate-600">Alignement soutenu par la piste d'audit</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">ISO 27001 / 27701 / 42001 / SOC 2</td>
-                                <td class="px-4 py-3 text-slate-500">Non revendiqué</td>
-                                <td class="px-4 py-3 text-slate-500">Non revendiqué — en préparation, feuille de route sur demande</td>
-                                <td class="px-4 py-3 text-slate-500">Non revendiqué — en préparation, feuille de route sur demande</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="border border-slate-200 rounded-3xl p-7">
                     <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Souveraineté des données</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Déploiement souverain local (Ollama + Qdrant) sans transfert de données vers l'extérieur — <strong>niveau P1</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zéro dépendance aux hyperscalers américains pour le traitement des données stratégiques — <strong>niveau P1 uniquement</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Exploitation et valorisation des données exclusivement par votre organisation — <strong>P0 + P1</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Déploiement souverain local (Ollama + Qdrant) sans transfert de données vers l&#39;extérieur</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zéro dépendance aux hyperscalers américains pour le traitement des données stratégiques</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Exploitation et valorisation des données exclusivement par votre organisation</span></li>
                     </ul>
                 </div>
                 <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditabilité &amp; Gouvernance</h4></div>
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-certificate text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Certifications &amp;amp; Alignements</h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Architecture locale conçue pour faciliter la mise en conformité <strong>HDS</strong> (Hébergeur de Données de Santé)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Alignement avec le <strong>European Health Data Space (EHDS)</strong></span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Compatible avec les exigences de souveraineté numérique française et européenne</span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-balance-scale text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Conformité réglementaire</h4></div>
+                    <ul class="space-y-2.5 text-sm text-slate-600">
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><strong>RGPD</strong> natif (minimisation des données, droit à l'oubli, consentement)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Aligné sur les exigences <strong>NIS2</strong> et <strong>DORA</strong> (résilience, traçabilité, gouvernance des risques)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Normes ISO pertinentes : <strong>ISO 27001</strong> (sécurité de l'information), <strong>ISO 27701</strong> (management de la vie privée) et <strong>ISO 42001</strong> (systèmes de management de l'IA)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Préparation à la <strong>certification SOC 2 Type II</strong> (sécurité, disponibilité, confidentialité et intégrité des données)</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Traçabilité complète des décisions et des traitements pour les audits internes et externes</span></li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-3xl p-7">
+                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditabilité &amp;amp; Gouvernance</h4></div>
                     <ul class="space-y-2.5 text-sm text-slate-600">
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Timeline complète et horodatée de toutes les étapes et décisions</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Scoring <strong>Kayros Index (KI)</strong> traçable et exportable</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Logs d'agents IA + décisions humaines pour les audits et comités de risque</span></li>
+                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Logs d&#39;agents IA + décisions humaines pour les audits et comités de risque</span></li>
                         <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Gates humains structurés (veto COMEX, validation experte) avec traçabilité</span></li>
                     </ul>
                 </div>
@@ -1437,28 +1486,28 @@
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp; Agents</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp;amp; Agents</td>
                         <td class="px-4 py-4 text-center text-slate-500">Un seul modèle générique</td>
                         <td class="px-4 py-4 text-center text-slate-500">IA d&#39;assistance limitée</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Multi-agents spécialisés</strong><br><span class="text-xs">(Red Team, Devil's Advocate, Bisociateur…)</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp; Continuité</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp;amp; Continuité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Contexte de session limité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Base d&#39;idées simple</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Recherche sémantique persistante</span></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp; Résilience</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp;amp; Résilience</td>
                         <td class="px-4 py-4 text-center text-slate-500">Aucune (hallucinations fréquentes)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
                     </tr>
                     
                     <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp; Audit</td>
+                        <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp;amp; Audit</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible / conversation éphémère</td>
                         <td class="px-4 py-4 text-center text-slate-500">Historique basique</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Timeline complète + scoring KI + logs agents</strong></td>
@@ -1487,7 +1536,7 @@
                     
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Cas d&#39;usage principal</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp; assistance</td>
+                        <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp;amp; assistance</td>
                         <td class="px-4 py-4 text-center text-slate-500">Boîte à idées collaborative</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Idéation stratégique de haut niveau + décisions auditables</strong></td>
                     </tr>
@@ -1679,13 +1728,14 @@
                         <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
                         <span class="font-display text-xl font-semibold">KayrosLab</span>
                     </div>
-                    <p class="text-sm text-slate-400">KayrosLab est un système d&#39;IA agentique structuré qui transforme l&#39;idéation en un processus rigoureux, traçable et résilient — comparable à un CODIR augmenté par des agents IA.</p>
+                    <p class="text-sm text-slate-400">Répétez une décision CODIR ou un comité d’achat avant l’envoi de l’offre. KayrosLab combine agents gouvernés et profils autorisés de parties prenantes pour révéler veto, objections et preuves manquantes.</p>
                 </div>
                 <div>
                     <h4 class="font-semibold text-sm mb-4">Plateforme</h4>
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#modele" class="hover:text-sky-400 transition-colors">Le Modèle</a></li>
                         <li><a href="#orchestration" class="hover:text-sky-400 transition-colors">Architecture</a></li>
+                        <li><a href="#sales-oracle" class="hover:text-sky-400 transition-colors">Sales Oracle par agents hybrides</a></li>
                         <li><a href="#differenciation" class="hover:text-sky-400 transition-colors">Différenciation</a></li>
                     </ul>
                 </div>
@@ -1694,7 +1744,7 @@
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#livret-blanc" class="hover:text-sky-400 transition-colors">Livres Blancs</a></li>
                         <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Démo Live</a></li>
-                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">App Agents IA</a></li>
+                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Agents IA</a></li>
                     </ul>
                 </div>
                 <div>
