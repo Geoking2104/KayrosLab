@@ -67,6 +67,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Specialized swarms** — compose built-in system agents, user-defined experts, or modified hybrid agents with layered rules and veto powers
 - **Consent-aware personality simulation** — optional LinkedIn self-profile / Crystal Knows imports through official APIs or authorized structured exports, with provenance and explicit consent
 - **Sales Oracle** — simulate internal executive decisions or customer buying committees to reveal veto paths, objections, evidence gaps and conditional-GO requirements before a proposal is sent
+- **Developer Portal MCP** — connect Codex, Claude Code, Cursor or VS Code to a tenant-scoped, least-privilege agentic API catalog with governed swarm execution
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
 - **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); **Teams (JWT RS256 Azure Bot, Adaptive Cards, gate/EF-20, envoi proactif + webhook)**; Discord (Ed25519, embeds)
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
@@ -431,6 +432,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
 | **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/run` · `POST /v1/swarm/runs/:id/arbitrate` |
 | **Hybrid profiles** | `POST /v1/swarm/agents/:agentId/personality/import` |
+| **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
 | **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
@@ -463,6 +465,7 @@ Key environment variables:
 | `MISTRAL_API_KEY` | Backend LLM provider |
 | `LINKEDIN_ACCESS_TOKEN` | Optional official LinkedIn authenticated-member profile import |
 | `CRYSTALKNOWS_API_TOKEN` | Optional Crystal Knows profile import on eligible plans |
+| `KAYROS_MCP_CLIENTS_JSON` | SHA-256 token digests, tenant bindings, scopes and optional expiries for MCP clients |
 | `KAYROS_EMBED_MODEL` | Force embedding model (default: soft fallback chain) |
 | `DATABASE_URL` | Optional Postgres |
 | `OLLAMA_*` | Local quant-aware inference |
@@ -563,6 +566,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | [docs/pitch-seed.md](docs/pitch-seed.md) | Demo script |
 | [docs/engine-architecture.md](docs/engine-architecture.md) | Core vs adapters (V16) |
 | [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) | Swarm composition, personality profiles, consent and Sales Oracle scenarios |
+| [docs/developer-portal-mcp.md](docs/developer-portal-mcp.md) | Secure Developer Portal MCP and AI coding-tool configuration |
 | [backend/adapters/README.md](backend/adapters/README.md) | LangChain · LangGraph · search · Langfuse |
 
 ---

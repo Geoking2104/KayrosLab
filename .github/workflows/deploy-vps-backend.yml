@@ -40,13 +40,14 @@ jobs:
           POSITIONNER_GOOGLE_CX: ${{ secrets.POSITIONNER_GOOGLE_CX }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           CRYSTALKNOWS_API_TOKEN: ${{ secrets.CRYSTALKNOWS_API_TOKEN }}
+          KAYROS_MCP_CLIENTS_JSON: ${{ secrets.KAYROS_MCP_CLIENTS_JSON }}
         with:
           host: 51.210.9.71
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN
+          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN,KAYROS_MCP_CLIENTS_JSON
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -90,6 +91,7 @@ jobs:
               GOOGLE_CX: process.env.POSITIONNER_GOOGLE_CX,
               LINKEDIN_ACCESS_TOKEN: process.env.LINKEDIN_ACCESS_TOKEN,
               CRYSTALKNOWS_API_TOKEN: process.env.CRYSTALKNOWS_API_TOKEN,
+              KAYROS_MCP_CLIENTS_JSON: process.env.KAYROS_MCP_CLIENTS_JSON,
             };
             for (const [name, value] of Object.entries(optionalSources)) {
               if (value) replacements[name] = value;

@@ -1,0 +1,25 @@
+{
+  "servers": {
+    "kayroslab-developer-portal": {
+      "type": "http",
+      "url": "${input:kayros-mcp-url}",
+      "headers": {
+        "Authorization": "Bearer ${input:kayros-mcp-token}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "kayros-mcp-url",
+      "type": "promptString",
+      "description": "KayrosLab MCP URL",
+      "default": "https://api.kayroslab.com/mcp"
+    },
+    {
+      "id": "kayros-mcp-token",
+      "type": "promptString",
+      "description": "Tenant-scoped KayrosLab MCP token",
+      "password": true
+    }
+  ]
+}

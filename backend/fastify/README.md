@@ -13,6 +13,12 @@ node --env-file=.env index.mjs    # Node 20+ ; ou exporter les variables puis: n
 
 Le serveur écoute sur `PORT` (défaut 8787).
 
+## Developer Portal MCP
+
+Le endpoint `POST /mcp` expose le catalogue et les workflows swarm aux outils de développement IA via MCP Streamable HTTP. L'accès utilise des jetons Bearer hachés, limités à un tenant, des scopes et une date d'expiration optionnelle.
+
+Voir [`../../docs/developer-portal-mcp.md`](../../docs/developer-portal-mcp.md) pour générer un jeton, configurer Codex / Claude Code / Cursor / VS Code et exploiter les outils disponibles.
+
 ## Endpoints
 
 - `GET  /health` → état + providers + modèle.
@@ -23,6 +29,7 @@ Le serveur écoute sur `PORT` (défaut 8787).
 - `POST /v1/govern/query` → orchestrateur complet `{ query, governance, sovereignty, provider }`.
   - Réponse `200 { status, answer, trace }` en mode `auto` / non sensible.
   - Réponse `202 { status:'pending_review', gateId, gateType }` si un gate humain est requis.
+- `POST /mcp` → Developer Portal MCP stateless (Bearer tenant-scoped, catalogue + swarms + dossiers).
 
 ## Tester
 

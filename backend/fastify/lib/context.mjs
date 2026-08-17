@@ -26,6 +26,7 @@ import {
   createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore,
 } from '../../../core/pg-store.mjs';
 import { createLinkService } from './context-links.mjs';
+import { createMcpClientRegistry } from './mcp-auth.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
@@ -100,7 +101,15 @@ export default async function buildContext() {
     QDRANT_API_KEY = '',
     CRYSTALKNOWS_API_TOKEN = '',
     LINKEDIN_ACCESS_TOKEN = '',
+    KAYROS_MCP_CLIENTS_JSON = '',
+    KAYROS_MCP_ALLOWED_ORIGINS = '',
+    KAYROS_MCP_RATE_LIMIT = '60',
   } = process.env;
+
+  const mcpClients = createMcpClientRegistry(KAYROS_MCP_CLIENTS_JSON);
+  const MCP_ALLOWED_ORIGINS = String(KAYROS_MCP_ALLOWED_ORIGINS || '')
+    .split(',').map((value) => value.trim()).filter(Boolean);
+  const MCP_RATE_LIMIT = Math.max(1, Number(KAYROS_MCP_RATE_LIMIT) || 60);
 
   const providers = {
     mock: new MockProvider(),
@@ -475,5 +484,6 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
+    mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
   };
 }

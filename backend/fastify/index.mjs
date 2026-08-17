@@ -31,6 +31,7 @@ app.addHook('preHandler', async (req, reply) => {
   if (req.method === 'GET') return;
   const path = (req.url || '').split('?')[0];
   if (path.startsWith('/v1/demo/')) return;
+  if (path === '/mcp') return; // dedicated scoped Bearer authentication
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });
 
@@ -55,6 +56,7 @@ await app.register((await import('./routes/timer.mjs')).default);
 await app.register((await import('./routes/connectors.mjs')).default);
 await app.register((await import('./routes/positionning.mjs')).default);
 await app.register((await import('./routes/swarm.mjs')).default);
+await app.register((await import('./routes/mcp.mjs')).default);
 
 // --- demarrage ---
 const PORT = Number(ctx.PORT || 8787);

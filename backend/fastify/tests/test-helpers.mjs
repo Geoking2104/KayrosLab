@@ -8,6 +8,7 @@ import authRoutes from '../routes/auth-routes.mjs';
 import connectorsRoute from '../routes/connectors.mjs';
 import gatesRoute from '../routes/gates.mjs';
 import swarmRoute from '../routes/swarm.mjs';
+import mcpRoute from '../routes/mcp.mjs';
 import buildContext from '../lib/context.mjs';
 
 export async function buildTestApp(env = {}) {
@@ -20,6 +21,7 @@ export async function buildTestApp(env = {}) {
     KAYROS_RUNS_FILE: 'memory',
     ANTHROPIC_API_KEY: '', OLLAMA_ENDPOINT: '', MISTRAL_API_KEY: '',
     LINKEDIN_ACCESS_TOKEN: '', CRYSTALKNOWS_API_TOKEN: '',
+    KAYROS_MCP_CLIENTS_JSON: '', KAYROS_MCP_ALLOWED_ORIGINS: '', KAYROS_MCP_RATE_LIMIT: '60',
     DATABASE_URL: '', GOOGLE_API_KEY: '', GITHUB_TOKEN: '', GITLAB_TOKEN: '',
     TEAMS_APP_ID: '8f3b2a1c-0000-1111-2222-333344445555',
     TEAMS_BOT_PASSWORD: 'test-bot-secret', TEAMS_WEBHOOK_URL: 'https://webhook.test/teams',
@@ -40,6 +42,7 @@ export async function buildTestApp(env = {}) {
       if (req.method === 'GET') return;
       const p = (req.url || '').split('?')[0];
       if (p.startsWith('/v1/demo/')) return;
+      if (p === '/mcp') return;
       if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) {
         return reply.code(401).send({ error: 'non autorise' });
       }
@@ -51,6 +54,7 @@ export async function buildTestApp(env = {}) {
   await app.register(connectorsRoute);
   await app.register(gatesRoute);
   await app.register(swarmRoute);
+  await app.register(mcpRoute);
   return { app, ctx };
 }
 
