@@ -72,9 +72,8 @@
         .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
         .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
         .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
-        .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__figure { width: 64%; margin: 0 auto; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
         .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
-        .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
         .sales-oracle-tool { margin-block-start: var(--space-xl); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: #fff; box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, .08); }
         .sales-oracle-tool__header { display: grid; gap: var(--space-sm); padding: var(--space-lg); color: var(--color-paper); background: var(--color-ink-deep); }
         .sales-oracle-tool__eyebrow { display: flex; align-items: center; gap: var(--space-xs); color: #7dd3fc; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
@@ -1314,7 +1313,6 @@
 
             <figure class="sales-oracle__figure">
                 <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Hybrid agent connecting an executive committee and a buyer veto network to a proposal">
-                <figcaption>One governed simulation, two decision environments: your internal executive committee and the customer&#39;s buying committee. Hybrid-agent reactions are explicitly simulated, never presented as real statements.</figcaption>
             </figure>
 
             <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
