@@ -81,21 +81,22 @@ A hybrid agent combines a governed business role with an authorized stakeholder 
 
 ### Rehearse an executive decision
 
-1. Compose a panel from built-in CFO, CTO, Legal, Risk and Operations agents, custom experts, or hybrids.
-2. Assign consented profiles to the relevant roles.
-3. Run the proposal through `GO`, `CONDITIONAL_GO`, `NO_GO` and veto rules.
+1. Upload the proposal, business case, metrics and constraints; every extracted claim keeps its source.
+2. Compose a panel from built-in CFO, CTO, Legal, Risk and Operations agents, custom experts, or consented hybrids.
+3. Run the cited corpus through `GO`, `CONDITIONAL_GO`, `NO_GO` and veto rules.
 4. Review the friction map, requested evidence and simulated stakeholder reactions before the accountable executive decides.
 
 ### Pressure-test a customer RFP
 
-1. Map the buying committee: sponsor, procurement, finance, security, legal, operations and technical evaluators.
-2. Represent each function with explicit role rules; enrich only with authorized profile data.
-3. Red-team the offer against each veto holder’s criteria and decision triggers.
+1. Upload the RFP, response, pricing, security, contractual and delivery evidence into one controlled corpus.
+2. Map the buying committee: sponsor, procurement, finance, security, legal, operations and technical evaluators.
+3. Red-team the cited offer against each veto holder’s explicit role rules and authorized decision triggers.
 4. Generate an objection matrix, conditional-GO checklist, evidence plan, negotiation brief and executive narrative.
 
 ```mermaid
 flowchart LR
-  OFFER[Proposal / RFP response] --> ORACLE[Hybrid Agent Sales Oracle]
+  DOCS[Proposal, RFP, business case and constraints] --> EVIDENCE[Cited, tenant-scoped evidence corpus]
+  EVIDENCE --> ORACLE[Hybrid Agent Sales Oracle]
   ORACLE --> COMEX[Internal executive committee]
   ORACLE --> BUYERS[Customer buying committee]
   COMEX --> VETO1{GO / conditions / veto}
@@ -432,6 +433,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
 | **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/run` · `POST /v1/swarm/runs/:id/arbitrate` |
 | **Hybrid profiles** | `POST /v1/swarm/agents/:agentId/personality/import` |
+| **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
 | **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |

@@ -142,10 +142,6 @@
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_architecture') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_architecture_desc') %></div></div>
                                     </a>
-                                    <a href="#sales-oracle" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-sky-600 text-xs"></i></div>
-                                        <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_sales_oracle') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_sales_oracle_desc') %></div></div>
-                                    </a>
                                     <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
                                         <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_dashboard') %></div><div class="text-xs text-slate-500 mt-0.5"><%= __('nav_platform_dashboard_desc') %></div></div>
@@ -181,9 +177,9 @@
                                             <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
                                             <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_demo') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_demo_desc') %></div></div>
                                         </a>
-                                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-violet-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">Agents IA</div><div class="text-xs text-slate-500"><%= __('nav_resources_portfolio_desc') %></div></div>
+                                        <a href="#sales-oracle" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-violet-600 text-xs"></i></div>
+                                            <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_sales_oracle') %></div><div class="text-xs text-slate-500"><%= __('nav_platform_sales_oracle_desc') %></div></div>
                                         </a>
                                     </div>
                                 </div>
@@ -235,6 +231,10 @@
                                 <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
                                     <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
                                     <div><div class="text-sm font-medium text-slate-900"><%= __('nav_resources_demo') %></div><div class="text-xs text-slate-500"><%= __('nav_resources_demo_desc') %></div></div>
+                                </a>
+                                <a href="#sales-oracle" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
+                                    <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-tie text-violet-600 text-xs"></i></div>
+                                    <div><div class="text-sm font-medium text-slate-900"><%= __('nav_platform_sales_oracle') %></div><div class="text-xs text-slate-500"><%= __('nav_platform_sales_oracle_desc') %></div></div>
                                 </a>
                             </div>
                         </div>
@@ -293,7 +293,6 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_model') %></a>
                         <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_architecture') %></a>
-                        <a href="#sales-oracle" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_sales_oracle') %></a>
                         <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_dashboard') %></a>
                         <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_technology') %></a>
                         <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1"><%= __('nav_solutions') %></div>
@@ -318,7 +317,7 @@
                     <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
                         <a href="#livret-blanc" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_whitepapers') %></a>
                         <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_resources_demo') %></a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Agents IA</a>
+                        <a href="#sales-oracle" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors"><%= __('nav_platform_sales_oracle') %></a>
                     </div>
                 </div>
 
@@ -1369,7 +1368,6 @@
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#modele" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_model') %></a></li>
                         <li><a href="#orchestration" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_architecture') %></a></li>
-                        <li><a href="#sales-oracle" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_sales_oracle') %></a></li>
                         <li><a href="#differenciation" class="hover:text-sky-400 transition-colors"><%= __('nav_diff') %></a></li>
                     </ul>
                 </div>
@@ -1378,7 +1376,7 @@
                     <ul class="space-y-2 text-sm text-slate-400">
                         <li><a href="#livret-blanc" class="hover:text-sky-400 transition-colors"><%= __('nav_whitepapers') %></a></li>
                         <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors"><%= __('nav_resources_demo') %></a></li>
-                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Agents IA</a></li>
+                        <li><a href="#sales-oracle" class="hover:text-sky-400 transition-colors"><%= __('nav_platform_sales_oracle') %></a></li>
                     </ul>
                 </div>
                 <div>

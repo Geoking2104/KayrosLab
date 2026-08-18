@@ -56,6 +56,7 @@ await app.register((await import('./routes/timer.mjs')).default);
 await app.register((await import('./routes/connectors.mjs')).default);
 await app.register((await import('./routes/positionning.mjs')).default);
 await app.register((await import('./routes/swarm.mjs')).default);
+await app.register((await import('./routes/sales-oracle.mjs')).default);
 await app.register((await import('./routes/mcp.mjs')).default);
 
 // --- demarrage ---

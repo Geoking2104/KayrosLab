@@ -30,6 +30,12 @@ Voir [`../../docs/developer-portal-mcp.md`](../../docs/developer-portal-mcp.md) 
   - Réponse `200 { status, answer, trace }` en mode `auto` / non sensible.
   - Réponse `202 { status:'pending_review', gateId, gateType }` si un gate humain est requis.
 - `POST /mcp` → Developer Portal MCP stateless (Bearer tenant-scoped, catalogue + swarms + dossiers).
+- `POST|GET /v1/sales-oracle/cases` → créer ou lister les dossiers d'analyse du tenant.
+- `POST /v1/sales-oracle/cases/:caseId/documents/uploads` → valider les quotas et obtenir une URL `PUT` S3 signée (15 min par défaut).
+- `POST /v1/sales-oracle/cases/:caseId/documents/:documentId/complete` → vérifier taille/checksum puis mettre l'ingestion en file.
+- `GET /v1/sales-oracle/cases/:caseId/documents` et `GET /v1/sales-oracle/documents/:documentId/status` → suivre le corpus.
+
+Les octets ne transitent pas par Fastify : ils sont envoyés directement vers un stockage S3-compatible. Configurez les variables `KAYROS_S3_*` de `.env.sample`; les secrets restent exclusivement côté serveur et `.env` est ignoré par Git.
 
 ## Tester
 

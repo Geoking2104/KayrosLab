@@ -41,13 +41,18 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           CRYSTALKNOWS_API_TOKEN: ${{ secrets.CRYSTALKNOWS_API_TOKEN }}
           KAYROS_MCP_CLIENTS_JSON: ${{ secrets.KAYROS_MCP_CLIENTS_JSON }}
+          KAYROS_S3_BUCKET: ${{ secrets.KAYROS_S3_BUCKET }}
+          KAYROS_S3_REGION: ${{ secrets.KAYROS_S3_REGION }}
+          KAYROS_S3_ENDPOINT: ${{ secrets.KAYROS_S3_ENDPOINT }}
+          KAYROS_S3_ACCESS_KEY_ID: ${{ secrets.KAYROS_S3_ACCESS_KEY_ID }}
+          KAYROS_S3_SECRET_ACCESS_KEY: ${{ secrets.KAYROS_S3_SECRET_ACCESS_KEY }}
         with:
           host: 51.210.9.71
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 10m
-          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN,KAYROS_MCP_CLIENTS_JSON
+          envs: MISTRAL_API_KEY,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN,KAYROS_MCP_CLIENTS_JSON,KAYROS_S3_BUCKET,KAYROS_S3_REGION,KAYROS_S3_ENDPOINT,KAYROS_S3_ACCESS_KEY_ID,KAYROS_S3_SECRET_ACCESS_KEY
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -92,6 +97,11 @@ jobs:
               LINKEDIN_ACCESS_TOKEN: process.env.LINKEDIN_ACCESS_TOKEN,
               CRYSTALKNOWS_API_TOKEN: process.env.CRYSTALKNOWS_API_TOKEN,
               KAYROS_MCP_CLIENTS_JSON: process.env.KAYROS_MCP_CLIENTS_JSON,
+              KAYROS_S3_BUCKET: process.env.KAYROS_S3_BUCKET,
+              KAYROS_S3_REGION: process.env.KAYROS_S3_REGION,
+              KAYROS_S3_ENDPOINT: process.env.KAYROS_S3_ENDPOINT,
+              KAYROS_S3_ACCESS_KEY_ID: process.env.KAYROS_S3_ACCESS_KEY_ID,
+              KAYROS_S3_SECRET_ACCESS_KEY: process.env.KAYROS_S3_SECRET_ACCESS_KEY,
             };
             for (const [name, value] of Object.entries(optionalSources)) {
               if (value) replacements[name] = value;

@@ -20,11 +20,13 @@ import {
   createAuditStore,
   WorkingGroupStore, createWorkingGroupStore,
   InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
+  InMemorySalesOracleRepository, SalesOracleService,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
-  createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore,
+  createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore, PgSalesOracleRepository,
 } from '../../../core/pg-store.mjs';
+import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
 import { createMcpClientRegistry } from './mcp-auth.mjs';
 
@@ -224,6 +226,9 @@ export default async function buildContext() {
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
   const scorecards = defaultScorecards();
+  const salesOracleRepository = pgPool ? new PgSalesOracleRepository(pgPool) : new InMemorySalesOracleRepository();
+  const objectStorage = await createObjectStorageFromEnv(process.env);
+  const salesOracle = new SalesOracleService({ repository: salesOracleRepository, objectStorage });
 
   const canaux = [new ConsoleNotifier({ logger: console })];
   if (process.env.KAYROS_NOTIFY_WEBHOOK) canaux.push(new WebhookNotifier({ url: process.env.KAYROS_NOTIFY_WEBHOOK }));
@@ -476,7 +481,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
-    engine,
+    engine, salesOracle, salesOracleRepository, objectStorage,
     sharedPaths,
     pgPool,
     storeBackend,

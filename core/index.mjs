@@ -71,6 +71,7 @@ export * from './quant-ui.mjs';
 export * from './plan-parse.mjs';
 export * from './swarm.mjs';
 export * from './personality.mjs';
+export * from './sales-oracle.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
