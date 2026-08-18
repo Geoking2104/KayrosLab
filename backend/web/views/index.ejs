@@ -93,7 +93,6 @@
         .sales-oracle-tool__field input, .sales-oracle-tool__field select, .sales-oracle-tool__field textarea { width: 100%; min-height: 2.8rem; padding: .7rem .8rem; border: var(--rule-hair) solid #cbd5e1; border-radius: .75rem; background: #fff; color: var(--color-ink); font: inherit; font-weight: 400; }
         .sales-oracle-tool__field textarea { min-height: 6.5rem; resize: vertical; line-height: 1.45; }
         .sales-oracle-tool__field input:focus-visible, .sales-oracle-tool__field select:focus-visible, .sales-oracle-tool__field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-color: transparent; }
-        .sales-oracle-tool__fields:disabled { opacity: .55; }
         .sales-oracle-tool__button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.9rem; padding-inline: 1rem; border: 0; border-radius: .75rem; background: var(--color-ink-deep); color: #fff; font-weight: 700; cursor: pointer; }
         .sales-oracle-tool__button:hover { background: #1e293b; }
         .sales-oracle-tool__button:disabled { cursor: wait; opacity: .6; }
@@ -1117,9 +1116,9 @@
                         <div class="sales-oracle-tool__step">02 · <%= __('sales_oracle_tool_case') %></div>
                         <h4><%= __('sales_oracle_tool_case_title') %></h4>
                         <p><%= __('sales_oracle_tool_case_desc') %></p>
-                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields" disabled>
+                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields">
                             <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_existing_case') %><select id="so-case-select"><option><%= __('sales_oracle_tool_no_cases') %></option></select></label>
-                            <form id="so-case-form" class="sales-oracle-tool__form">
+                            <form id="so-case-form" class="sales-oracle-tool__form" novalidate>
                                 <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_case_name') %><input name="name" maxlength="300" required></label>
                                 <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_use_case') %><select name="use_case"><option value="rfp"><%= __('sales_oracle_tool_use_rfp') %></option><option value="comex_decision"><%= __('sales_oracle_tool_use_comex') %></option><option value="renewal"><%= __('sales_oracle_tool_use_renewal') %></option><option value="negotiation"><%= __('sales_oracle_tool_use_negotiation') %></option></select></label>
                                 <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_question') %><textarea name="decision_question" maxlength="12000" required></textarea></label>
@@ -1132,8 +1131,8 @@
                         <div class="sales-oracle-tool__step">03 · <%= __('sales_oracle_tool_corpus') %></div>
                         <h4><%= __('sales_oracle_tool_corpus_title') %></h4>
                         <p><%= __('sales_oracle_tool_corpus_desc') %></p>
-                        <form id="so-upload-form" class="sales-oracle-tool__form">
-                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields" disabled>
+                        <form id="so-upload-form" class="sales-oracle-tool__form" novalidate>
+                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields">
                                 <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_source_type') %><select name="source_type"><option value="rfp"><%= __('sales_oracle_tool_source_rfp') %></option><option value="proposal"><%= __('sales_oracle_tool_source_proposal') %></option><option value="contract"><%= __('sales_oracle_tool_source_contract') %></option><option value="security"><%= __('sales_oracle_tool_source_security') %></option><option value="financial"><%= __('sales_oracle_tool_source_financial') %></option><option value="meeting_notes"><%= __('sales_oracle_tool_source_notes') %></option><option value="organization"><%= __('sales_oracle_tool_source_organization') %></option><option value="personality_profile"><%= __('sales_oracle_tool_source_profile') %></option><option value="other"><%= __('sales_oracle_tool_source_other') %></option></select></label>
                                 <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_files') %><input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
                                 <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><%= __('sales_oracle_tool_upload') %></button>

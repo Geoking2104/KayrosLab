@@ -93,7 +93,6 @@
         .sales-oracle-tool__field input, .sales-oracle-tool__field select, .sales-oracle-tool__field textarea { width: 100%; min-height: 2.8rem; padding: .7rem .8rem; border: var(--rule-hair) solid #cbd5e1; border-radius: .75rem; background: #fff; color: var(--color-ink); font: inherit; font-weight: 400; }
         .sales-oracle-tool__field textarea { min-height: 6.5rem; resize: vertical; line-height: 1.45; }
         .sales-oracle-tool__field input:focus-visible, .sales-oracle-tool__field select:focus-visible, .sales-oracle-tool__field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-color: transparent; }
-        .sales-oracle-tool__fields:disabled { opacity: .55; }
         .sales-oracle-tool__button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.9rem; padding-inline: 1rem; border: 0; border-radius: .75rem; background: var(--color-ink-deep); color: #fff; font-weight: 700; cursor: pointer; }
         .sales-oracle-tool__button:hover { background: #1e293b; }
         .sales-oracle-tool__button:disabled { cursor: wait; opacity: .6; }
@@ -1363,9 +1362,9 @@
                         <div class="sales-oracle-tool__step">02 · Decision case</div>
                         <h4>Frame the decision</h4>
                         <p>Reuse an existing case or create the precise decision question the hybrid committee must test.</p>
-                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields" disabled>
+                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields">
                             <label class="sales-oracle-tool__field">Existing cases<select id="so-case-select"><option>No existing case — create one below</option></select></label>
-                            <form id="so-case-form" class="sales-oracle-tool__form">
+                            <form id="so-case-form" class="sales-oracle-tool__form" novalidate>
                                 <label class="sales-oracle-tool__field">Case name<input name="name" maxlength="300" required></label>
                                 <label class="sales-oracle-tool__field">Simulation<select name="use_case"><option value="rfp">Customer RFP</option><option value="comex_decision">Executive decision</option><option value="renewal">Contract renewal</option><option value="negotiation">Negotiation</option></select></label>
                                 <label class="sales-oracle-tool__field">Decision question<textarea name="decision_question" maxlength="12000" required></textarea></label>
@@ -1378,8 +1377,8 @@
                         <div class="sales-oracle-tool__step">03 · Evidence</div>
                         <h4>Upload the corpus</h4>
                         <p>Files are fingerprinted locally, uploaded through a short-lived signed URL and verified before ingestion.</p>
-                        <form id="so-upload-form" class="sales-oracle-tool__form">
-                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields" disabled>
+                        <form id="so-upload-form" class="sales-oracle-tool__form" novalidate>
+                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields">
                                 <label class="sales-oracle-tool__field">Document role<select name="source_type"><option value="rfp">RFP / requirements</option><option value="proposal">Proposal / response</option><option value="contract">Contract</option><option value="security">Security</option><option value="financial">Financial / ROI</option><option value="meeting_notes">Meeting notes</option><option value="organization">Organization / committee</option><option value="personality_profile">Authorized personality profile</option><option value="other">Other evidence</option></select></label>
                                 <label class="sales-oracle-tool__field">Documents<input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
                                 <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>Verify and upload</button>

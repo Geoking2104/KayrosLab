@@ -17,6 +17,12 @@ export async function sha256Hex(file) {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
+export function salesOracleActionRequirement(action, { authenticated = false, currentCase = null } = {}) {
+  if (!authenticated) return 'login';
+  if (action === 'upload' && !currentCase) return 'case';
+  return null;
+}
+
 function messageFromPayload(payload, fallback) {
   if (typeof payload?.error === 'string') return payload.error;
   return payload?.error?.message || payload?.message || fallback;
@@ -94,8 +100,6 @@ function initSalesOracleTool() {
   const loginForm = byId('so-login-form');
   const caseForm = byId('so-case-form');
   const uploadForm = byId('so-upload-form');
-  const caseFields = byId('so-case-fields');
-  const uploadFields = byId('so-upload-fields');
   const caseSelect = byId('so-case-select');
   const logoutButton = byId('so-logout');
   const status = byId('so-tool-status');
@@ -111,7 +115,6 @@ function initSalesOracleTool() {
   };
   const setCurrentCase = async (record) => {
     currentCase = record || null;
-    uploadFields.disabled = !currentCase;
     if (!currentCase) return;
     setStatus(`${copy.caseSelected}: ${currentCase.name}`, 'success');
     const result = await client.listDocuments(currentCase.case_id);
@@ -140,7 +143,20 @@ function initSalesOracleTool() {
       const option = document.createElement('option'); option.value = item.case_id;
       option.textContent = `${item.name} · ${item.status}`; caseSelect.append(option);
     });
-    caseSelect.disabled = !cases.length;
+    caseSelect.disabled = false;
+  };
+  const guideToRequirement = (requirement) => {
+    if (requirement === 'login') {
+      setStatus(copy.loginRequired, 'error');
+      const email = loginForm.querySelector('input[name="email"]');
+      email.scrollIntoView({ behavior: 'smooth', block: 'center' }); email.focus(); return true;
+    }
+    if (requirement === 'case') {
+      setStatus(copy.caseRequired, 'error');
+      const name = caseForm.querySelector('input[name="name"]');
+      name.scrollIntoView({ behavior: 'smooth', block: 'center' }); name.focus(); return true;
+    }
+    return false;
   };
 
   loginForm.addEventListener('submit', async (event) => {
@@ -150,7 +166,7 @@ function initSalesOracleTool() {
       const data = new FormData(loginForm);
       await client.login(data.get('email'), data.get('password'));
       loginForm.querySelectorAll('input').forEach((input) => { input.disabled = true; });
-      button.hidden = true; logoutButton.hidden = false; caseFields.disabled = false;
+      button.hidden = true; logoutButton.hidden = false;
       await loadCases(); setStatus(copy.connected, 'success');
     } catch (error) { setStatus(error.message || copy.error, 'error'); }
     finally { setButtonBusy(button, false); }
@@ -160,7 +176,7 @@ function initSalesOracleTool() {
     await client.logout().catch(() => {}); currentCase = null; cases = [];
     loginForm.reset(); loginForm.querySelectorAll('input').forEach((input) => { input.disabled = false; });
     loginForm.querySelector('button[type="submit"]').hidden = false; logoutButton.hidden = true;
-    caseFields.disabled = true; uploadFields.disabled = true; caseSelect.replaceChildren(); renderDocuments([]);
+    caseSelect.replaceChildren(); renderDocuments([]);
     setStatus(copy.loggedOut);
   });
 
@@ -170,7 +186,10 @@ function initSalesOracleTool() {
   });
 
   caseForm.addEventListener('submit', async (event) => {
-    event.preventDefault(); const button = caseForm.querySelector('button[type="submit"]');
+    event.preventDefault();
+    if (guideToRequirement(salesOracleActionRequirement('case', { authenticated: !!client.token, currentCase }))) return;
+    if (!caseForm.reportValidity()) return;
+    const button = caseForm.querySelector('button[type="submit"]');
     setButtonBusy(button, true); setStatus(copy.creatingCase);
     try {
       const data = new FormData(caseForm);
@@ -184,7 +203,7 @@ function initSalesOracleTool() {
 
   uploadForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!currentCase) { setStatus(copy.caseRequired, 'error'); return; }
+    if (guideToRequirement(salesOracleActionRequirement('upload', { authenticated: !!client.token, currentCase }))) return;
     const files = [...byId('so-files').files];
     if (!files.length) { setStatus(copy.filesRequired, 'error'); return; }
     const button = uploadForm.querySelector('button[type="submit"]');

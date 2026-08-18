@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { SalesOracleClient, resolvedMimeType, sha256Hex } from '../../web/public/assets/sales-oracle-tool.js';
+import { SalesOracleClient, resolvedMimeType, salesOracleActionRequirement, sha256Hex } from '../../web/public/assets/sales-oracle-tool.js';
 
 const jsonResponse = (payload, status = 200) => ({
   ok: status >= 200 && status < 300, status,
@@ -12,6 +12,13 @@ test('Sales Oracle web client hashes locally and infers safe MIME types', async 
   assert.equal(await sha256Hex({ arrayBuffer: async () => bytes.buffer }), 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
   assert.equal(resolvedMimeType({ name: 'brief.md', type: '' }), 'text/markdown');
   assert.equal(resolvedMimeType({ name: 'payload.exe', type: '' }), 'application/octet-stream');
+});
+
+test('Sales Oracle actions stay clickable and report the missing prerequisite', () => {
+  assert.equal(salesOracleActionRequirement('case', { authenticated: false }), 'login');
+  assert.equal(salesOracleActionRequirement('case', { authenticated: true }), null);
+  assert.equal(salesOracleActionRequirement('upload', { authenticated: true }), 'case');
+  assert.equal(salesOracleActionRequirement('upload', { authenticated: true, currentCase: { case_id: 'case-1' } }), null);
 });
 
 test('Sales Oracle web client keeps the bearer token in memory and completes the signed upload cycle', async () => {
