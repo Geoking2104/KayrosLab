@@ -108,6 +108,33 @@ flowchart LR
 
 **Safeguards:** official connectors or authorized exports only; no LinkedIn scraping; explicit consent and provenance; tenant isolation; no private-fact fabrication; simulated feedback is labelled and cannot be presented as a real quote, endorsement or behavioral prediction.
 
+### Integrated web tool
+
+The [Hybrid Agent Sales Oracle workspace](https://www.kayroslab.com/#sales-oracle) is embedded directly in the public site for provisioned customers:
+
+1. Connect with an authorized KayrosLab account. The bearer token stays in browser memory only; it is never persisted to `localStorage`, cookies or the repository.
+2. Select an existing tenant-scoped case or create an RFP, executive-decision, renewal or negotiation case.
+3. Select PDF, DOCX, TXT, Markdown or CSV evidence. The browser computes SHA-256 locally, requests a short-lived signed URL, uploads directly to object storage, then asks the API to verify and queue ingestion.
+4. Follow the active corpus and document states without exposing another tenant's cases.
+
+The browser client is implemented in [`backend/web/public/assets/sales-oracle-tool.js`](backend/web/public/assets/sales-oracle-tool.js); API metadata and upload lifecycle remain in [`backend/fastify/routes/sales-oracle.mjs`](backend/fastify/routes/sales-oracle.mjs).
+
+Direct browser uploads require the private S3-compatible bucket to allow `PUT` requests from the production origin. Example CORS policy:
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://www.kayroslab.com"],
+    "AllowedMethods": ["PUT"],
+    "AllowedHeaders": ["content-type", "x-amz-checksum-sha256", "x-amz-meta-sha256"],
+    "ExposeHeaders": ["etag", "x-amz-checksum-sha256"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+Configure the server-only `KAYROS_S3_*` variables from [`backend/fastify/.env.sample`](backend/fastify/.env.sample). The real `.env` remains ignored by Git.
+
 See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for schemas, endpoints and examples.
 
 ---

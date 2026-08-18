@@ -75,6 +75,37 @@
         .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
         .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
         .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle-tool { margin-block-start: var(--space-xl); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: #fff; box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, .08); }
+        .sales-oracle-tool__header { display: grid; gap: var(--space-sm); padding: var(--space-lg); color: var(--color-paper); background: var(--color-ink-deep); }
+        .sales-oracle-tool__eyebrow { display: flex; align-items: center; gap: var(--space-xs); color: #7dd3fc; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+        .sales-oracle-tool__live { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 .25rem rgba(52, 211, 153, .16); }
+        .sales-oracle-tool__header h3 { margin: 0; max-width: 22ch; font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.08; letter-spacing: -.03em; }
+        .sales-oracle-tool__header p { margin: 0; max-width: 68ch; color: var(--color-muted-on-dark); line-height: 1.6; }
+        .sales-oracle-tool__status { margin: 0; padding: .85rem var(--space-lg); border-block-end: var(--rule-hair) solid var(--color-rule); background: #f8fafc; color: var(--color-ink-2); font-size: var(--text-sm); }
+        .sales-oracle-tool__status[data-tone="success"] { background: #ecfdf5; color: #047857; }
+        .sales-oracle-tool__status[data-tone="error"] { background: #fff1f2; color: #be123c; }
+        .sales-oracle-tool__grid { display: grid; }
+        .sales-oracle-tool__panel { min-width: 0; padding: var(--space-lg); border-block-end: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle-tool__step { display: flex; align-items: center; gap: var(--space-xs); margin-block-end: var(--space-xs); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+        .sales-oracle-tool__panel h4 { margin: 0 0 var(--space-xs); font-family: var(--font-display); font-size: var(--text-lg); }
+        .sales-oracle-tool__panel > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle-tool__form, .sales-oracle-tool__fields { display: grid; gap: var(--space-sm); margin: 0; padding: 0; border: 0; }
+        .sales-oracle-tool__field { display: grid; gap: .35rem; min-width: 0; color: var(--color-ink); font-size: var(--text-sm); font-weight: 650; }
+        .sales-oracle-tool__field input, .sales-oracle-tool__field select, .sales-oracle-tool__field textarea { width: 100%; min-height: 2.8rem; padding: .7rem .8rem; border: var(--rule-hair) solid #cbd5e1; border-radius: .75rem; background: #fff; color: var(--color-ink); font: inherit; font-weight: 400; }
+        .sales-oracle-tool__field textarea { min-height: 6.5rem; resize: vertical; line-height: 1.45; }
+        .sales-oracle-tool__field input:focus-visible, .sales-oracle-tool__field select:focus-visible, .sales-oracle-tool__field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-color: transparent; }
+        .sales-oracle-tool__fields:disabled { opacity: .55; }
+        .sales-oracle-tool__button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.9rem; padding-inline: 1rem; border: 0; border-radius: .75rem; background: var(--color-ink-deep); color: #fff; font-weight: 700; cursor: pointer; }
+        .sales-oracle-tool__button:hover { background: #1e293b; }
+        .sales-oracle-tool__button:disabled { cursor: wait; opacity: .6; }
+        .sales-oracle-tool__button--secondary { border: var(--rule-hair) solid #cbd5e1; background: #fff; color: var(--color-ink); }
+        .sales-oracle-tool__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+        .sales-oracle-tool__link { color: var(--color-accent-strong); font-size: var(--text-sm); font-weight: 700; }
+        .sales-oracle-tool__privacy { margin: var(--space-sm) 0 0; color: var(--color-ink-2); font-size: var(--text-xs); line-height: 1.5; }
+        .sales-oracle-tool__documents { margin: 0; padding: var(--space-md) var(--space-lg); list-style: none; background: #f8fafc; }
+        .sales-oracle-tool__document, .sales-oracle-tool__empty { display: flex; justify-content: space-between; gap: var(--space-sm); padding-block: .65rem; border-block-end: var(--rule-hair) solid #e2e8f0; color: var(--color-ink-2); font-size: var(--text-sm); overflow-wrap: anywhere; }
+        .sales-oracle-tool__document:last-child, .sales-oracle-tool__empty:last-child { border-block-end: 0; }
+        .sales-oracle-tool__document-state { flex: 0 0 auto; color: #047857; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; }
         .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
         .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
         .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
@@ -96,7 +127,7 @@
         .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
         .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
         @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
         @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
@@ -1286,6 +1317,82 @@
                 <figcaption>Une simulation gouvernée, deux environnements de décision : votre CODIR interne et le comité d’achat du client. Les réactions des agents hybrides sont explicitement simulées et ne sont jamais présentées comme des déclarations réelles.</figcaption>
             </figure>
 
+            <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
+                data-login-required="Connectez votre espace autorisé pour commencer."
+                data-connecting="Connexion sécurisée en cours…"
+                data-connected="Espace connecté. Sélectionnez ou créez un dossier."
+                data-logged-out="Session fermée. Aucun jeton d’accès n’a été conservé dans le navigateur."
+                data-creating-case="Création du dossier gouverné…"
+                data-case-selected="Dossier actif"
+                data-choose-case="Sélectionner un dossier existant"
+                data-no-cases="Aucun dossier — créez-en un ci-dessous"
+                data-no-documents="Le corpus actif ne contient encore aucun document."
+                data-case-required="Sélectionnez ou créez un dossier avant l’upload."
+                data-files-required="Sélectionnez au moins un document."
+                data-upload-complete="Documents vérifiés et placés en file pour l’analyse swarm augmentée."
+                data-error="L’opération n’a pas pu aboutir."
+                data-stage-hashing="empreinte SHA-256 locale"
+                data-stage-signing="autorisation d’upload sécurisée"
+                data-stage-uploading="upload direct chiffré"
+                data-stage-verifying="vérification d’intégrité"
+                data-stage-queued="mise en file d’ingestion">
+                <div class="sales-oracle-tool__header">
+                    <div>
+                        <div class="sales-oracle-tool__eyebrow"><span class="sales-oracle-tool__live" aria-hidden="true"></span>Espace sécurisé actif</div>
+                        <h3>Démarrer un dossier Sales Oracle</h3>
+                    </div>
+                    <p>L’outil est désormais intégré ici : connectez votre tenant, définissez la décision à tester et uploadez le corpus de preuves directement vers l’API gouvernée.</p>
+                </div>
+                <p id="so-tool-status" class="sales-oracle-tool__status" role="status" aria-live="polite"></p>
+                <div class="sales-oracle-tool__grid">
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">01 · Espace</div>
+                        <h4>Se connecter en sécurité</h4>
+                        <p>Utilisez le compte provisionné pour votre organisation. Les accès restent isolés dans votre tenant.</p>
+                        <form id="so-login-form" class="sales-oracle-tool__form">
+                            <label class="sales-oracle-tool__field">E-mail professionnel<input name="email" type="email" autocomplete="username" required></label>
+                            <label class="sales-oracle-tool__field">Mot de passe<input name="password" type="password" autocomplete="current-password" required></label>
+                            <div class="sales-oracle-tool__actions">
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-lock" aria-hidden="true"></i>Se connecter</button>
+                                <button id="so-logout" class="sales-oracle-tool__button sales-oracle-tool__button--secondary" type="button" hidden>Se déconnecter</button>
+                                <a class="sales-oracle-tool__link" href="mailto:contact@kayroslab.com?subject=Acc%C3%A8s%20KayrosLab%20Sales%20Oracle">Demander un accès</a>
+                            </div>
+                        </form>
+                        <p class="sales-oracle-tool__privacy"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Le jeton de session reste uniquement en mémoire et disparaît au rafraîchissement ou à la fermeture de la page.</p>
+                    </article>
+
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">02 · Dossier de décision</div>
+                        <h4>Cadrer la décision</h4>
+                        <p>Réutilisez un dossier ou créez la question précise que le comité hybride devra éprouver.</p>
+                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields" disabled>
+                            <label class="sales-oracle-tool__field">Dossiers existants<select id="so-case-select"><option>Aucun dossier — créez-en un ci-dessous</option></select></label>
+                            <form id="so-case-form" class="sales-oracle-tool__form">
+                                <label class="sales-oracle-tool__field">Nom du dossier<input name="name" maxlength="300" required></label>
+                                <label class="sales-oracle-tool__field">Simulation<select name="use_case"><option value="rfp">Appel d’offres client</option><option value="comex_decision">Décision CODIR</option><option value="renewal">Renouvellement de contrat</option><option value="negotiation">Négociation</option></select></label>
+                                <label class="sales-oracle-tool__field">Question de décision<textarea name="decision_question" maxlength="12000" required></textarea></label>
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-folder-plus" aria-hidden="true"></i>Créer le dossier</button>
+                            </form>
+                        </fieldset>
+                    </article>
+
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">03 · Preuves</div>
+                        <h4>Uploader le corpus</h4>
+                        <p>Les fichiers sont empreintés localement, envoyés par URL signée à durée limitée puis vérifiés avant ingestion.</p>
+                        <form id="so-upload-form" class="sales-oracle-tool__form">
+                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields" disabled>
+                                <label class="sales-oracle-tool__field">Rôle du document<select name="source_type"><option value="rfp">RFP / exigences</option><option value="proposal">Proposition / réponse</option><option value="contract">Contrat</option><option value="security">Sécurité</option><option value="financial">Finance / ROI</option><option value="meeting_notes">Notes de réunion</option><option value="organization">Organisation / comité</option><option value="personality_profile">Profil de personnalité autorisé</option><option value="other">Autre preuve</option></select></label>
+                                <label class="sales-oracle-tool__field">Documents<input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>Vérifier et uploader</button>
+                            </fieldset>
+                        </form>
+                        <p class="sales-oracle-tool__privacy">PDF, DOCX, TXT, Markdown ou CSV · 50 Mo/document · 20 documents/dossier · 250 Mo/dossier.</p>
+                    </article>
+                </div>
+                <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="Corpus Sales Oracle actif"></ul>
+            </div>
+
             <div class="sales-oracle__tracks">
                 <article class="sales-oracle__track">
                     <h3>Répétez la décision de votre entreprise</h3>
@@ -1764,6 +1871,7 @@
         </div>
     </footer>
 
+    <script type="module" src="./assets/sales-oracle-tool.js"></script>
     <script>
         (function() {
             var nav = document.getElementById('nav');

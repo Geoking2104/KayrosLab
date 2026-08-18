@@ -75,6 +75,37 @@
         .sales-oracle__figure { margin: 0; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
         .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
         .sales-oracle__figure figcaption { padding: var(--space-sm); color: var(--color-muted-on-dark); background: var(--color-ink-deep); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle-tool { margin-block-start: var(--space-xl); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: #fff; box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, .08); }
+        .sales-oracle-tool__header { display: grid; gap: var(--space-sm); padding: var(--space-lg); color: var(--color-paper); background: var(--color-ink-deep); }
+        .sales-oracle-tool__eyebrow { display: flex; align-items: center; gap: var(--space-xs); color: #7dd3fc; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+        .sales-oracle-tool__live { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 .25rem rgba(52, 211, 153, .16); }
+        .sales-oracle-tool__header h3 { margin: 0; max-width: 22ch; font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.08; letter-spacing: -.03em; }
+        .sales-oracle-tool__header p { margin: 0; max-width: 68ch; color: var(--color-muted-on-dark); line-height: 1.6; }
+        .sales-oracle-tool__status { margin: 0; padding: .85rem var(--space-lg); border-block-end: var(--rule-hair) solid var(--color-rule); background: #f8fafc; color: var(--color-ink-2); font-size: var(--text-sm); }
+        .sales-oracle-tool__status[data-tone="success"] { background: #ecfdf5; color: #047857; }
+        .sales-oracle-tool__status[data-tone="error"] { background: #fff1f2; color: #be123c; }
+        .sales-oracle-tool__grid { display: grid; }
+        .sales-oracle-tool__panel { min-width: 0; padding: var(--space-lg); border-block-end: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle-tool__step { display: flex; align-items: center; gap: var(--space-xs); margin-block-end: var(--space-xs); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+        .sales-oracle-tool__panel h4 { margin: 0 0 var(--space-xs); font-family: var(--font-display); font-size: var(--text-lg); }
+        .sales-oracle-tool__panel > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.55; }
+        .sales-oracle-tool__form, .sales-oracle-tool__fields { display: grid; gap: var(--space-sm); margin: 0; padding: 0; border: 0; }
+        .sales-oracle-tool__field { display: grid; gap: .35rem; min-width: 0; color: var(--color-ink); font-size: var(--text-sm); font-weight: 650; }
+        .sales-oracle-tool__field input, .sales-oracle-tool__field select, .sales-oracle-tool__field textarea { width: 100%; min-height: 2.8rem; padding: .7rem .8rem; border: var(--rule-hair) solid #cbd5e1; border-radius: .75rem; background: #fff; color: var(--color-ink); font: inherit; font-weight: 400; }
+        .sales-oracle-tool__field textarea { min-height: 6.5rem; resize: vertical; line-height: 1.45; }
+        .sales-oracle-tool__field input:focus-visible, .sales-oracle-tool__field select:focus-visible, .sales-oracle-tool__field textarea:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-color: transparent; }
+        .sales-oracle-tool__fields:disabled { opacity: .55; }
+        .sales-oracle-tool__button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.9rem; padding-inline: 1rem; border: 0; border-radius: .75rem; background: var(--color-ink-deep); color: #fff; font-weight: 700; cursor: pointer; }
+        .sales-oracle-tool__button:hover { background: #1e293b; }
+        .sales-oracle-tool__button:disabled { cursor: wait; opacity: .6; }
+        .sales-oracle-tool__button--secondary { border: var(--rule-hair) solid #cbd5e1; background: #fff; color: var(--color-ink); }
+        .sales-oracle-tool__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); }
+        .sales-oracle-tool__link { color: var(--color-accent-strong); font-size: var(--text-sm); font-weight: 700; }
+        .sales-oracle-tool__privacy { margin: var(--space-sm) 0 0; color: var(--color-ink-2); font-size: var(--text-xs); line-height: 1.5; }
+        .sales-oracle-tool__documents { margin: 0; padding: var(--space-md) var(--space-lg); list-style: none; background: #f8fafc; }
+        .sales-oracle-tool__document, .sales-oracle-tool__empty { display: flex; justify-content: space-between; gap: var(--space-sm); padding-block: .65rem; border-block-end: var(--rule-hair) solid #e2e8f0; color: var(--color-ink-2); font-size: var(--text-sm); overflow-wrap: anywhere; }
+        .sales-oracle-tool__document:last-child, .sales-oracle-tool__empty:last-child { border-block-end: 0; }
+        .sales-oracle-tool__document-state { flex: 0 0 auto; color: #047857; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; }
         .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
         .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
         .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
@@ -96,7 +127,7 @@
         .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
         .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
         @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
         @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
@@ -1040,6 +1071,82 @@
                 <figcaption><%= __('sales_oracle_caption') %></figcaption>
             </figure>
 
+            <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
+                data-login-required="<%= __('sales_oracle_tool_login_required') %>"
+                data-connecting="<%= __('sales_oracle_tool_connecting') %>"
+                data-connected="<%= __('sales_oracle_tool_connected') %>"
+                data-logged-out="<%= __('sales_oracle_tool_logged_out') %>"
+                data-creating-case="<%= __('sales_oracle_tool_creating_case') %>"
+                data-case-selected="<%= __('sales_oracle_tool_case_selected') %>"
+                data-choose-case="<%= __('sales_oracle_tool_choose_case') %>"
+                data-no-cases="<%= __('sales_oracle_tool_no_cases') %>"
+                data-no-documents="<%= __('sales_oracle_tool_no_documents') %>"
+                data-case-required="<%= __('sales_oracle_tool_case_required') %>"
+                data-files-required="<%= __('sales_oracle_tool_files_required') %>"
+                data-upload-complete="<%= __('sales_oracle_tool_upload_complete') %>"
+                data-error="<%= __('sales_oracle_tool_error') %>"
+                data-stage-hashing="<%= __('sales_oracle_tool_stage_hashing') %>"
+                data-stage-signing="<%= __('sales_oracle_tool_stage_signing') %>"
+                data-stage-uploading="<%= __('sales_oracle_tool_stage_uploading') %>"
+                data-stage-verifying="<%= __('sales_oracle_tool_stage_verifying') %>"
+                data-stage-queued="<%= __('sales_oracle_tool_stage_queued') %>">
+                <div class="sales-oracle-tool__header">
+                    <div>
+                        <div class="sales-oracle-tool__eyebrow"><span class="sales-oracle-tool__live" aria-hidden="true"></span><%= __('sales_oracle_tool_eyebrow') %></div>
+                        <h3><%= __('sales_oracle_tool_title') %></h3>
+                    </div>
+                    <p><%= __('sales_oracle_tool_intro') %></p>
+                </div>
+                <p id="so-tool-status" class="sales-oracle-tool__status" role="status" aria-live="polite"></p>
+                <div class="sales-oracle-tool__grid">
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">01 · <%= __('sales_oracle_tool_session') %></div>
+                        <h4><%= __('sales_oracle_tool_session_title') %></h4>
+                        <p><%= __('sales_oracle_tool_session_desc') %></p>
+                        <form id="so-login-form" class="sales-oracle-tool__form">
+                            <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_email') %><input name="email" type="email" autocomplete="username" required></label>
+                            <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_password') %><input name="password" type="password" autocomplete="current-password" required></label>
+                            <div class="sales-oracle-tool__actions">
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-lock" aria-hidden="true"></i><%= __('sales_oracle_tool_connect') %></button>
+                                <button id="so-logout" class="sales-oracle-tool__button sales-oracle-tool__button--secondary" type="button" hidden><%= __('sales_oracle_tool_disconnect') %></button>
+                                <a class="sales-oracle-tool__link" href="mailto:<%= __('footer_email') %>?subject=<%= encodeURIComponent(__('sales_oracle_tool_access_subject')) %>"><%= __('sales_oracle_tool_request_access') %></a>
+                            </div>
+                        </form>
+                        <p class="sales-oracle-tool__privacy"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <%= __('sales_oracle_tool_session_privacy') %></p>
+                    </article>
+
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">02 · <%= __('sales_oracle_tool_case') %></div>
+                        <h4><%= __('sales_oracle_tool_case_title') %></h4>
+                        <p><%= __('sales_oracle_tool_case_desc') %></p>
+                        <fieldset id="so-case-fields" class="sales-oracle-tool__fields" disabled>
+                            <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_existing_case') %><select id="so-case-select"><option><%= __('sales_oracle_tool_no_cases') %></option></select></label>
+                            <form id="so-case-form" class="sales-oracle-tool__form">
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_case_name') %><input name="name" maxlength="300" required></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_use_case') %><select name="use_case"><option value="rfp"><%= __('sales_oracle_tool_use_rfp') %></option><option value="comex_decision"><%= __('sales_oracle_tool_use_comex') %></option><option value="renewal"><%= __('sales_oracle_tool_use_renewal') %></option><option value="negotiation"><%= __('sales_oracle_tool_use_negotiation') %></option></select></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_question') %><textarea name="decision_question" maxlength="12000" required></textarea></label>
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-folder-plus" aria-hidden="true"></i><%= __('sales_oracle_tool_create_case') %></button>
+                            </form>
+                        </fieldset>
+                    </article>
+
+                    <article class="sales-oracle-tool__panel">
+                        <div class="sales-oracle-tool__step">03 · <%= __('sales_oracle_tool_corpus') %></div>
+                        <h4><%= __('sales_oracle_tool_corpus_title') %></h4>
+                        <p><%= __('sales_oracle_tool_corpus_desc') %></p>
+                        <form id="so-upload-form" class="sales-oracle-tool__form">
+                            <fieldset id="so-upload-fields" class="sales-oracle-tool__fields" disabled>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_source_type') %><select name="source_type"><option value="rfp"><%= __('sales_oracle_tool_source_rfp') %></option><option value="proposal"><%= __('sales_oracle_tool_source_proposal') %></option><option value="contract"><%= __('sales_oracle_tool_source_contract') %></option><option value="security"><%= __('sales_oracle_tool_source_security') %></option><option value="financial"><%= __('sales_oracle_tool_source_financial') %></option><option value="meeting_notes"><%= __('sales_oracle_tool_source_notes') %></option><option value="organization"><%= __('sales_oracle_tool_source_organization') %></option><option value="personality_profile"><%= __('sales_oracle_tool_source_profile') %></option><option value="other"><%= __('sales_oracle_tool_source_other') %></option></select></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_files') %><input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
+                                <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><%= __('sales_oracle_tool_upload') %></button>
+                            </fieldset>
+                        </form>
+                        <p class="sales-oracle-tool__privacy"><%= __('sales_oracle_tool_limits') %></p>
+                    </article>
+                </div>
+                <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="<%= __('sales_oracle_tool_documents') %>"></ul>
+            </div>
+
             <div class="sales-oracle__tracks">
                 <article class="sales-oracle__track">
                     <h3><%= __('sales_oracle_comex_title') %></h3>
@@ -1398,6 +1505,7 @@
         </div>
     </footer>
 
+    <script type="module" src="./assets/sales-oracle-tool.js"></script>
     <script>
         (function() {
             var nav = document.getElementById('nav');
