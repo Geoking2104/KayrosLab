@@ -1,1837 +1,1008 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KayrosLab • Enterprise Commercial Offer | Hybrid Agentic Ideation Workshop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        :root { --primary: #0f172a; }
-        body { font-family: 'Inter', system-ui, sans-serif; }
-        .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
-        .section-header { font-size: 2.25rem; line-height: 2.5rem; font-weight: 700; letter-spacing: -0.025em; }
-        .nav-active { color: #0ea5e9; font-weight: 600; }
-        .step-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .step-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-        .comparison-table th { background-color: #0f172a; color: white; font-weight: 600; }
-        .comparison-table td { transition: background-color 0.2s ease; }
-        .comparison-table tr:hover td { background-color: #f8fafc; }
-        .compliance-table th { background-color: #f8fafc; color: #0f172a; font-weight: 600; }
-        .compliance-table tr:hover td { background-color: #f8fafc; }
-        .pricing-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .pricing-card.popular { border-color: #0ea5e9; box-shadow: 0 25px 50px -12px rgb(14 165 233 / 0.25); transform: scale(1.02); }
-        .glass { background: rgba(255,255,255, 0.95); backdrop-filter: blur(20px); }
-        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .nav-scrolled { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05); }
-        .modern-table { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 10px -3px rgb(0 0 0 / 0.05); }
-        .feature-check { color: #10b981; }
-        .kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Mega-menu styles */
-        .mega-menu { display: none; position: absolute; left: 0; top: 100%; min-width: 280px; }
-        .mega-menu-wide { display: none; position: absolute; left: 50%; transform: translateX(-50%); top: 100%; width: 90vw; max-width: 1100px; }
-        .group:hover > .mega-menu { display: block; }
-        .group:hover > .mega-menu-wide { display: block; }
-        .mega-menu a, .mega-menu-wide a { transition: all 0.2s ease; }
-        /* Mobile tap support for dropdowns */
-        .dropdown-toggle.active + .mega-menu, .dropdown-toggle.active + .mega-menu-wide { display: block; }
-        .dropdown-toggle.active i.fa-chevron-down { transform: rotate(180deg); }
-        @media (max-width: 1023px) {
-            .mega-menu, .mega-menu-wide { position: static !important; left: auto !important; transform: none !important; width: 100% !important; max-width: 100% !important; min-width: auto !important; }
-            .group:hover > .mega-menu, .group:hover > .mega-menu-wide { display: none; }
-            .dropdown-toggle.active + .mega-menu, .dropdown-toggle.active + .mega-menu-wide { display: block !important; }
-        }
-        /* Mobile menu scroll */
-        #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; }
-        #mobile-menu.open { max-height: 80vh !important; opacity: 1 !important; overflow-y: auto; }
-        
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
-        
-        .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-        .stagger-children > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-        .stagger-children.is-visible > * { opacity: 1; transform: translateY(0); }
-        .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
-        .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.10s; }
-        .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.15s; }
-        .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.20s; }
-        .stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.25s; }
-        .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.30s; }
-        .stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.35s; }
-        .stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.40s; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filenymous — P2P File Transfer Demo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --indigo: #6366f1;
+    --violet: #8b5cf6;
+    --indigo-dark: #4338ca;
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --surface3: #22222f;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0f0f8;
+    --muted: #8888aa;
+    --dim: #44445a;
+    --ok: #34d399;
+    --warn: #fbbf24;
+    --err: #f87171;
+    --r: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Grid bg ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* ── Glow orbs ── */
+  body::after {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  /* ── Header ── */
+  header {
+    width: 100%; max-width: 880px;
+    padding: 28px 24px 0;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 1;
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(99,102,241,0.15);
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.3);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Main ── */
+  main {
+    width: 100%; max-width: 560px;
+    padding: 40px 16px 60px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── Tagline ── */
+  .tagline {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .tagline h1 {
+    font-size: 26px; font-weight: 600;
+    letter-spacing: -0.03em; line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .tagline p {
+    font-size: 14px; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ── Nav tabs ── */
+  .tabs {
+    display: flex; gap: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 20px;
+  }
+
+  .tab {
+    flex: 1; padding: 9px;
+    text-align: center;
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 7px;
+    transition: all 0.15s;
+    border: none; background: none;
+  }
+
+  .tab.active {
+    background: var(--surface3);
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: none;
+  }
+  .card.active { display: block; }
+
+  /* ── Drop zone ── */
+  .dropzone {
+    border: 1.5px dashed var(--border2);
+    border-radius: var(--r);
+    padding: 32px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dropzone:hover, .dropzone.over {
+    border-color: var(--indigo);
+    background: rgba(99,102,241,0.06);
+  }
+  .dropzone input[type=file] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  }
+  .drop-icon {
+    font-size: 32px; margin-bottom: 10px;
+    display: block;
+  }
+  .drop-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .drop-sub { font-size: 12px; color: var(--muted); }
+
+  /* ── File list ── */
+  .file-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .file-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .file-icon { font-size: 20px; flex-shrink: 0; }
+  .file-info { flex: 1; min-width: 0; }
+  .file-name { font-weight: 500; truncate: true; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-size { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .file-remove { cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; flex-shrink: 0; padding: 2px 4px; }
+  .file-remove:hover { color: var(--err); }
+
+  /* ── Fields ── */
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px; font-family: 'Space Grotesk', sans-serif;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  }
+  .field input::placeholder { color: var(--dim); }
+  .field select option { background: var(--surface2); }
+
+  /* ── Options row ── */
+  .options-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-bottom: 20px;
+  }
+
+  /* ── Toggle ── */
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle {
+    width: 36px; height: 20px;
+    background: var(--dim);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    top: 3px; left: 3px;
+    transition: transform 0.2s;
+  }
+  .toggle.on { background: var(--indigo); }
+  .toggle.on::after { transform: translateX(16px); }
+
+  /* ── Buttons ── */
+  .btn {
+    width: 100%; padding: 13px;
+    border: none; border-radius: var(--r); cursor: pointer;
+    font-size: 15px; font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--indigo), var(--violet));
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--indigo); background: rgba(99,102,241,0.08); }
+
+  /* ── Progress ── */
+  .progress-screen { display: none; }
+  .progress-screen.active { display: block; }
+
+  .progress-title {
+    font-size: 15px; font-weight: 600;
+    margin-bottom: 4px; text-align: center;
+  }
+  .progress-sub {
+    font-size: 13px; color: var(--muted);
+    text-align: center; margin-bottom: 24px;
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .step {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    transition: all 0.3s;
+  }
+  .step.done { border-color: rgba(52,211,153,0.3); }
+  .step.active { border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.06); }
+  .step-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .step.done .step-icon { background: rgba(52,211,153,0.15); border-color: rgba(52,211,153,0.4); }
+  .step.active .step-icon { background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.5); }
+  .step-label { flex: 1; font-weight: 500; }
+  .step-detail { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--surface3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--indigo), var(--violet));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Success ── */
+  .success-screen { display: none; }
+  .success-screen.active { display: block; }
+
+  .success-icon {
+    width: 56px; height: 56px;
+    background: rgba(52,211,153,0.15);
+    border: 1px solid rgba(52,211,153,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+  }
+  .success-title { text-align: center; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .success-sub { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+  .link-box {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .link-text {
+    flex: 1; min-width: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: #a5b4fc;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .copy-btn {
+    padding: 6px 12px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 6px;
+    color: #a5b4fc;
+    font-size: 12px; font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .copy-btn:hover { background: rgba(99,102,241,0.25); }
+
+  .meta-row {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px; margin-bottom: 20px;
+  }
+  .meta-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .meta-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+  .meta-value { font-size: 13px; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+
+  /* ── Receive screen ── */
+  .receive-hero {
+    text-align: center; padding: 8px 0 24px;
+  }
+  .receive-icon {
+    width: 56px; height: 56px;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 14px;
+  }
+  .file-preview-card {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .preview-icon {
+    width: 44px; height: 44px;
+    background: rgba(99,102,241,0.12);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .preview-info { flex: 1; }
+  .preview-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .preview-meta { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .e2e-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px;
+    background: rgba(52,211,153,0.1);
+    border: 1px solid rgba(52,211,153,0.25);
+    border-radius: 20px;
+    font-size: 11px; color: #34d399;
+    margin-bottom: 16px;
+  }
+
+  /* ── History ── */
+  .history-list { display: flex; flex-direction: column; gap: 10px; }
+  .history-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .history-item:hover { border-color: var(--border2); }
+  .h-icon { font-size: 20px; flex-shrink: 0; }
+  .h-info { flex: 1; min-width: 0; }
+  .h-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .h-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .h-status {
+    font-size: 11px; font-weight: 500; font-family: 'JetBrains Mono', monospace;
+    padding: 3px 8px; border-radius: 20px;
+  }
+  .h-status.sent { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+  .h-status.downloaded { background: rgba(52,211,153,0.12); color: #34d399; }
+  .h-status.expired { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+  /* ── Security info ── */
+  .security-bar {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 24px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--muted);
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot.green { background: var(--ok); box-shadow: 0 0 6px rgba(52,211,153,0.6); }
+  .dot.blue  { background: var(--indigo); box-shadow: 0 0 6px rgba(99,102,241,0.6); }
+  .dot.amber { background: var(--warn); box-shadow: 0 0 6px rgba(251,191,36,0.6); }
+
+  /* ── Spinner ── */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+  .pulse { animation: pulse 1.4s ease-in-out infinite; }
+
+  /* ── Download progress ── */
+  .dl-progress {
+    margin: 16px 0;
+    display: none;
+  }
+  .dl-progress.active { display: block; }
+  .dl-bar {
+    height: 6px;
+    background: var(--surface3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .dl-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--indigo), var(--violet));
+    border-radius: 3px;
+    width: 0%; transition: width 0.1s linear;
+  }
+  .dl-label { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    font-size: 11px; color: var(--dim);
+    padding: 0 0 32px;
+    position: relative; z-index: 1;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+</style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
-    
-    <!-- ===== NAVIGATION (Blueway-inspired mega-menu) ===== -->
-    <nav id="nav" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all">
-        <div class="max-w-screen-2xl mx-auto">
-            <div class="px-5 md:px-8 py-4 flex items-center justify-between">
-                
-                <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <a href="/" class="flex items-center gap-x-2.5">
-                        <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-brain text-white text-lg"></i>
-                        </div>
-                        <div>
-                            <span class="font-display text-2xl font-semibold tracking-tighter">KayrosLab</span>
-                        </div>
-                    </a>
-                    
-                </div>
+<body>
 
-                <!-- Desktop Navigation - Mega Menu Style (visible lg+) -->
-                <div class="hidden lg:flex items-center relative">
-                    
-                    <!-- Platform (mega menu wide) -->
-                    <div class="group px-1">
-                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
-                            Platform
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="mega-menu-wide bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="grid md:grid-cols-3 gap-6">
-                                <div>
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Platform</div>
-                                    <div class="text-xs text-slate-500 mb-4">The governed ideation platform for strategic decision-making</div>
-                                    <a href="#modele" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-layer-group text-sky-600 text-xs"></i></div>
-                                        <div><div class="text-sm font-medium text-slate-900">The Model</div><div class="text-xs text-slate-500 mt-0.5">8-step cyclical process with hybrid AI + Human governance</div></div>
-                                    </a>
-                                    <a href="#orchestration" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-diagram-project text-sky-600 text-xs"></i></div>
-                                        <div><div class="text-sm font-medium text-slate-900">Architecture</div><div class="text-xs text-slate-500 mt-0.5">Multi-agent orchestration, memory, compliance</div></div>
-                                    </a>
-                                    <a href="#dashboard" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-gauge-high text-sky-600 text-xs"></i></div>
-                                        <div><div class="text-sm font-medium text-slate-900">Dashboard</div><div class="text-xs text-slate-500 mt-0.5">Strategic dashboard, KPIs, scenario simulation</div></div>
-                                    </a>
-                                    <a href="#technologie" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                        <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-microchip text-sky-600 text-xs"></i></div>
-                                        <div><div class="text-sm font-medium text-slate-900">Technology</div><div class="text-xs text-slate-500 mt-0.5">Zero-dependency core, multi-agent orchestration, governance</div></div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Solutions</div>
-                                    <div class="text-xs text-slate-500 mb-4">By Sector</div>
-                                    <div class="space-y-1">
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors">Pharmaceutical Industry</a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors">Banking &amp; Insurance</a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors">Industry &amp; Construction</a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors">Retail &amp; e-commerce</a>
-                                        <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-1.5 rounded-lg hover:bg-sky-50 transition-colors">Public Sector</a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Resources</div>
-                                    <div class="space-y-1">
-                                        <a href="#livret-blanc" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                            <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-file-pdf text-emerald-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">Whitepapers &amp; Guides</div><div class="text-xs text-slate-500">Methodologies, analyses and best practices</div></div>
-                                        </a>
-                                        <a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                            <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-brands fa-linkedin text-sky-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">LinkedIn</div><div class="text-xs text-slate-500">Interviews, advice and insights on strategic ideation</div></div>
-                                        </a>
-                                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                            <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">Live Demo</div><div class="text-xs text-slate-500">Experience the standalone prototype</div></div>
-                                        </a>
-                                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-violet-600 text-xs"></i></div>
-                                            <div><div class="text-sm font-medium text-slate-900">AI Agents App</div><div class="text-xs text-slate-500">Complete AI agents management application</div></div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<header>
+  <a href="#" class="logo">
+    <div class="logo-mark">F</div>
+    Filenymous
+  </a>
+  <span class="badge">DEMO v0.1</span>
+</header>
 
-                    <!-- Solutions -->
-                    <div class="group relative px-1">
-                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
-                            Solutions
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="space-y-1">
-                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">By Sector</div>
-                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Pharmaceutical Industry</a>
-                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Banking &amp; Insurance</a>
-                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Industry &amp; Construction</a>
-                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Retail &amp; e-commerce</a>
-                                <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Public Sector</a>
-                                <div class="border-t border-slate-100 my-2 pt-2">
-                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">By Use Case</div>
-                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">R&amp;D portfolio prioritization</a>
-                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Regulatory monitoring &amp; compliance</a>
-                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Technology roadmap &amp; competitive positioning</a>
-                                    <a href="#business-cases" class="block text-sm text-slate-700 hover:text-sky-600 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors">Customer experience design</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<main>
+  <div class="tagline">
+    <h1>Private file transfer,<br>peer-to-peer</h1>
+    <p>End-to-end encrypted · No account · No server stores your files</p>
+  </div>
 
-                    <!-- Resources -->
-                    <div class="group relative px-1">
-                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
-                            Resources
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="space-y-1">
-                                <a href="#livret-blanc" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-file-pdf text-emerald-600 text-xs"></i></div>
-                                    <div><div class="text-sm font-medium text-slate-900">Whitepapers &amp; Guides</div><div class="text-xs text-slate-500">Methodologies, analyses and best practices</div></div>
-                                </a>
-                                <a href="#business-cases" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-briefcase text-sky-600 text-xs"></i></div>
-                                    <div><div class="text-sm font-medium text-slate-900">Business Cases</div><div class="text-xs text-slate-500">Interviews, advice and insights on strategic ideation</div></div>
-                                </a>
-                                <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-play text-amber-600 text-xs"></i></div>
-                                    <div><div class="text-sm font-medium text-slate-900">Live Demo</div><div class="text-xs text-slate-500">Experience the standalone prototype</div></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('send')">Send</button>
+    <button class="tab" onclick="switchTab('receive')">Receive</button>
+    <button class="tab" onclick="switchTab('history')">History</button>
+  </div>
 
-                    <!-- Company -->
-                    <div class="group relative px-1">
-                        <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
-                            Company
-                            <i class="fa-solid fa-chevron-down text-[10px] ml-1 text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div class="mega-menu bg-white border border-slate-200 rounded-2xl shadow-xl p-6 mt-2">
-                            <div class="space-y-1">
-                                <a href="#contact" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-building text-sky-600 text-xs"></i></div>
-                                    <div><div class="text-sm font-medium text-slate-900">About Us</div><div class="text-xs text-slate-500">Vision, team and expertise</div></div>
-                                </a>
-                                <a href="#contact" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 transition-colors">
-                                    <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-envelope text-sky-600 text-xs"></i></div>
-                                    <div><div class="text-sm font-medium text-slate-900">Contact</div><div class="text-xs text-slate-500">Get in touch with our team</div></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+  <!-- ── SEND ── -->
+  <div class="card active" id="tab-send">
 
-                    <!-- Direct links -->
-                    <a href="#differenciation" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">Differentiation</a>
-                    <a href="#offre" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50">Offer</a>
-                </div>
+    <!-- Form view -->
+    <div id="send-form">
+      <div class="dropzone" id="dropzone" ondragover="dzOver(event)" ondragleave="dzLeave()" ondrop="dzDrop(event)">
+        <input type="file" multiple onchange="addFiles(this.files)">
+        <span class="drop-icon">⬆</span>
+        <div class="drop-title">Drop files here or click to browse</div>
+        <div class="drop-sub">Up to 5 GB per transfer · any file type</div>
+      </div>
 
-                <!-- Right side -->
-                <div class="flex items-center gap-x-2">
-                    
-                    <!-- Language Switcher -->
-                    <div class="hidden sm:flex items-center border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
-                        <a href="/" class="px-2.5 py-1.5 transition-colors bg-sky-600 text-white">EN</a>
-                        <a href="/index.fr.html" class="px-2.5 py-1.5 transition-colors hover:bg-slate-50 text-slate-600">FR</a>
-                    </div>
-                    <!-- Burger -->
-                    <button id="burger-btn" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 transition-colors" aria-label="Menu">
-                        <i id="burger-icon" class="fa-solid fa-bars text-lg"></i>
-                    </button>
-                </div>
-            </div>
+      <div class="file-list" id="file-list"></div>
+
+      <div class="field">
+        <label>Recipient</label>
+        <input type="text" id="recipient" placeholder="email@example.com or +33612345678">
+      </div>
+
+      <div class="options-row">
+        <div class="field" style="margin-bottom:0">
+          <label>Expires in</label>
+          <select id="expiry">
+            <option value="24h">24 hours</option>
+            <option value="7d" selected>7 days</option>
+            <option value="30d">30 days</option>
+            <option value="never">Never</option>
+          </select>
         </div>
-
-        <!-- Mobile Menu (lg hidden) -->
-        <div id="mobile-menu" class="lg:hidden border-t border-slate-100 bg-white">
-            <div class="px-5 py-4 space-y-1">
-                <!-- Platform mobile dropdown -->
-                <div class="mobile-dropdown border-b border-slate-50 pb-1">
-                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
-                        <span>Platform</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
-                        <a href="#modele" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">The Model</a>
-                        <a href="#orchestration" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Architecture</a>
-                        <a href="#dashboard" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Dashboard</a>
-                        <a href="#technologie" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Technology</a>
-                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 pt-2 pb-1">Solutions</div>
-                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Pharmaceutical Industry</a>
-                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Banking &amp; Insurance</a>
-                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Industry &amp; Construction</a>
-                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Retail &amp; e-commerce</a>
-                        <a href="#business-cases" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Public Sector</a>
-                    </div>
-                </div>
-
-                <a href="#differenciation" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Differentiation</a>
-                <a href="#offre" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Offer</a>
-                <a href="#business-cases" class="block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">Business Cases</a>
-
-                <!-- Resources mobile dropdown -->
-                <div class="mobile-dropdown border-t border-slate-50 pt-1">
-                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
-                        <span>Resources</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
-                        <a href="#livret-blanc" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Whitepapers</a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Live Demo</a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">AI Agents App</a>
-                    </div>
-                </div>
-
-                <!-- Company mobile dropdown -->
-                <div class="mobile-dropdown">
-                    <button class="mobile-dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
-                        <span>Company</span>
-                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 pb-2 space-y-1">
-                        <a href="#contact" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">About Us</a>
-                        <a href="#contact" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Contact</a>
-                    </div>
-                </div>
-                
-                <div class="pt-3 mt-2 border-t border-slate-100 space-y-2">
-                    <div class="flex border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
-                        <a href="/" class="flex-1 text-center px-3 py-2.5 transition-colors bg-sky-600 text-white">EN</a>
-                        <a href="/index.fr.html" class="flex-1 text-center px-3 py-2.5 transition-colors hover:bg-slate-50 text-slate-600">FR</a>
-                    </div>
-                    <a href="#contact" class="flex items-center justify-center gap-x-2 w-full px-4 py-3 rounded-xl bg-slate-900 text-white text-sm font-semibold">
-                        <i class="fa-solid fa-calendar-check text-xs"></i>
-                        Book a demo
-                    </a>
-                </div>
-            </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Max downloads</label>
+          <select id="max-dl">
+            <option value="1" selected>1 (once)</option>
+            <option value="3">3</option>
+            <option value="10">10</option>
+            <option value="0">Unlimited</option>
+          </select>
         </div>
-    </nav>
+      </div>
 
-    <!-- ===== HERO ===== -->
-    <header class="hero-bg text-white">
-        <div class="max-w-screen-2xl mx-auto px-8 pt-16 pb-20">
-            <div class="grid md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-7">
-                    <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-3xl mb-6 text-sm">
-                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                        <span class="font-medium">Hybrid Agentic Strategic Ideation Workshop</span>
-                    </div>
-                    <h1 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-6">
-                        From weak signal<br><span class="kayros-gradient">to governed</span><br>strategic decision.
-                    </h1>
-                    <p class="max-w-lg text-xl text-slate-300 mb-8">KayrosLab is a structured agentic AI system that transforms ideation into a rigorous, traceable, resilient process — comparable to an <strong>executive committee augmented by AI agents</strong>.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#offre" class="inline-flex items-center justify-center gap-x-3 bg-white text-slate-900 hover:bg-slate-100 transition-all px-8 h-14 rounded-3xl font-semibold text-base active:scale-[0.985]">
-                            Discover the enterprise offer
-                        </a>
-                        <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-white/10 hover:bg-white/20 border border-white/60 hover:border-white transition-all px-8 h-14 rounded-3xl font-semibold text-base backdrop-blur-sm">
-                            <i class="fa-solid fa-play mr-2"></i>
-                            <span>Try the live demo</span>
-                            <span class="text-[10px] px-1.5 py-0.5 bg-white/20 rounded">→ Opens directly</span>
-                        </a>
-                    </div>
-                    <div class="mt-8 flex items-center gap-x-4 text-sm text-slate-400">
-                        <span class="text-xs">In controlled beta — piloted with strategy &amp; innovation teams. Try the live demo and judge the decision pack yourself.</span>
-                    </div>
-                </div>
-                <div class="md:col-span-5">
-                    <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                        <div class="text-xs uppercase tracking-[2px] text-emerald-400 font-semibold mb-3">AI AGENTS APP</div>
-                        <div class="font-mono text-xs text-emerald-300 mb-4">kayroslab-complete-with-ai-agents.html &bull; Complete with AI Agents</div>
-                        <div class="space-y-3 text-sm">
-                            <div class="flex justify-between items-center py-1 border-b border-white/10">
-                                <span class="text-slate-400">Architecture</span>
-                                <span class="font-medium">Plan-and-Solve + ReAct</span>
-                            </div>
-                            <div class="flex justify-between items-center py-1 border-b border-white/10">
-                                <span class="text-slate-400">Specialized Agents</span>
-                                <span class="font-medium">6+ (Red Team, Devil&#39;s Advocate…)</span>
-                            </div>
-                            <div class="flex justify-between items-center py-1 border-b border-white/10">
-                                <span class="text-slate-400">Memory</span>
-                                <span class="font-medium">Shared + Vector</span>
-                            </div>
-                            <div class="flex justify-between items-center py-1">
-                                <span class="text-slate-400">Deployment</span>
-                                <span class="font-medium text-emerald-400">P0 Standalone → P2 Cloud</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="toggle-row" style="margin-bottom:20px" onclick="togglePwd()">
+        <span>Password protection</span>
+        <div class="toggle" id="pwd-toggle"></div>
+      </div>
+
+      <div class="field" id="pwd-field" style="display:none">
+        <label>Password</label>
+        <input type="password" id="pwd-input" placeholder="Enter a passphrase">
+      </div>
+
+      <button class="btn btn-primary" id="send-btn" onclick="startSend()">
+        Send file →
+      </button>
+    </div>
+
+    <!-- Progress view -->
+    <div class="progress-screen" id="send-progress">
+      <div class="progress-title pulse" id="progress-title">Encrypting & distributing…</div>
+      <div class="progress-sub" id="progress-sub">Do not close this tab</div>
+
+      <div class="steps" id="steps">
+        <div class="step" id="step-0">
+          <div class="step-icon">🔑</div>
+          <div class="step-label">Generating AES-256 key</div>
+          <div class="step-detail" id="step-detail-0"></div>
         </div>
-    </header>
-
-    <!-- ===== THE MODEL (8 STEPS) ===== -->
-    <section id="modele" class="max-w-screen-2xl mx-auto px-8 py-20 border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-3xl mb-12">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">THE KAYROSLAB MODEL</div>
-            <h2 class="section-header tracking-tighter">A structured 8-step process.<br>Hybrid AI + Human governance.</h2>
-            <p class="mt-4 text-lg text-slate-600">Unlike free-form LLM conversations, KayrosLab follows a <strong>cyclical</strong> workflow inspired by best practices in strategy and foresight, industrialized by specialized AI agents and formalized Human-in-the-Loop. The 4<sup>th</sup> step <strong>Position</strong> confronts the idea with the market through automated competitive analysis, the 7<sup>th</sup> <strong>Project</strong> transforms the decision into a piloted trajectory, the 8<sup>th</sup> <strong>Realize</strong> ensures execution and measurement, then the cycle loops back to Listen.</p>
+        <div class="step" id="step-1">
+          <div class="step-icon">🔒</div>
+          <div class="step-label">Encrypting chunks</div>
+          <div class="step-detail" id="step-detail-1"></div>
         </div>
-
-        <div class="grid md:grid-cols-4 lg:grid-cols-8 gap-4 stagger-children">
-            
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
-                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-sky-700">01</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Listen</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Noise reduction, qualification and scoring of weak signals.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Qualified Signals</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
-                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-sky-700">02</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Map</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Trend network, bisociative bridges and strategic relationships.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Network + Bridges</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
-                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-sky-700">03</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Build</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Scenarios, Collision Mode and structured collaborative briefs.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Scenarios + Brief</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5 border-orange-300 ring-2 ring-orange-100  ">
-                <div class="w-9 h-9 rounded-2xl bg-orange-500 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-white">04</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Position</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Ontological competitive analysis: Cytoscape.js graph, property inspector, query playground, OWL export.</p>
-                <div class="mt-3 text-xs text-orange-600 font-medium">→ Ontology + Gap Analysis</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
-                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-sky-700">05</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Test</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Multi-agent future-proofing: Critic, Devil&#39;s Advocate, Red Team.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Challenged Ideas</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
-                <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-sky-700">06</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Arbitrate</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Multi-criteria votes, Working Groups and structured final decision.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Decision + Deliverable</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5  border-emerald-300 ring-2 ring-emerald-100 ">
-                <div class="w-9 h-9 rounded-2xl bg-emerald-500 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-white">07</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Project</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Trajectory, roadmap, probabilistic simulation and learning loop.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Roadmap + KPIs</div>
-            </div>
-            
-            <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   border-violet-300 ring-2 ring-violet-100">
-                <div class="w-9 h-9 rounded-2xl bg-violet-500 flex items-center justify-center mb-3">
-                    <span class="font-mono font-bold text-lg text-white">08</span>
-                </div>
-                <h4 class="font-semibold text-lg mb-1.5">Realize</h4>
-                <p class="text-sm text-slate-600 leading-relaxed">Pilot, deployment, review: tracked milestones and actual impact vs projected.</p>
-                <div class="mt-3 text-xs text-sky-600 font-medium">→ Actual vs Projected → loop</div>
-            </div>
-            
+        <div class="step" id="step-2">
+          <div class="step-icon">📡</div>
+          <div class="step-label">Publishing to DHT</div>
+          <div class="step-detail" id="step-detail-2"></div>
         </div>
-
-        <!-- Positionner detail -->
-        <div id="positionner" class="mt-10 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-3xl p-8">
-            <div class="flex flex-col md:flex-row md:items-start gap-6">
-                <div class="flex-shrink-0">
-                    <div class="w-14 h-14 rounded-2xl bg-orange-500 flex items-center justify-center">
-                        <span class="font-mono text-white font-bold text-xl">04</span>
-                    </div>
-                </div>
-                <div class="flex-1">
-                    <div class="flex flex-wrap items-center gap-3 mb-2">
-                        <h3 class="text-2xl font-bold tracking-tight">Position</h3>
-                        <span class="text-xs px-2.5 py-1 bg-orange-200 text-orange-800 rounded-full font-semibold">NEW</span>
-                    </div>
-                    <p class="text-slate-700 mb-3"><strong>Ontological</strong> competitive analysis: <strong>web scraping + GitHub/GitLab KPIs</strong> (stars, forks, contributors, commits, freshness, issues) to position the idea in a <strong>14 entity-type ontology</strong> (7 tech, 7 business) connected by <strong>oriented relationships</strong> — all visualized in a <strong>Cytoscape.js graph</strong> with property inspector, <strong>natural language query playground</strong> and <strong>OWL RDF/XML</strong> export compliant with the <a href="https://microsoft.github.io/Ontology-Playground/" class="text-orange-700 underline hover:text-orange-800" target="_blank">Microsoft Ontology Playground</a>. The differentiation gap directly feeds the <strong>Kayros Index</strong> and prepares the <strong>Red Team</strong>.</p>
-                    <div class="flex flex-wrap gap-4 text-sm text-slate-600">
-                        <span><i class="fa-solid fa-robot mr-1.5 text-orange-500"></i> Agents: Positioner, Ontology Designer, Query Engine</span>
-                        <span><i class="fa-solid fa-chart-bar mr-1.5 text-orange-500"></i> Deliverable: Ontology + Graph + Gap Analysis + OWL Export</span>
-                    </div>
-                    <div class="mt-5 pt-4 border-t border-orange-200 flex flex-wrap gap-3">
-                        <a href="/positionner-app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-2xl font-semibold text-sm transition-all">
-                            <i class="fa-solid fa-external-link-alt"></i> Launch positioning analysis
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="step" id="step-3">
+          <div class="step-icon">✉</div>
+          <div class="step-label">Notifying recipient</div>
+          <div class="step-detail" id="step-detail-3"></div>
         </div>
+      </div>
 
-        <div class="mt-8 text-center">
-            <p class="text-sm text-slate-500 mb-6">Each step is traceable, evaluated by agents and subject to human gates (Executive Committee veto, expert validation, etc.).</p>
-            <a href="/kayroslab-complete-with-ai-agents.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 transition-all text-white px-10 h-14 rounded-3xl font-semibold text-base shadow-lg active:scale-[0.985]">
-                <i class="fa-solid fa-play mr-2"></i>
-                <span>Try the standalone demo now</span>
-                <span class="ml-2 text-xs bg-white/20 px-2.5 py-0.5 rounded-full">No installation • Opens in browser</span>
-            </a>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Success view -->
+    <div class="success-screen" id="send-success">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Transfer ready</div>
+      <div class="success-sub" id="success-sub">Link sent to recipient by email</div>
+
+      <div class="link-box">
+        <div class="link-text" id="generated-link"></div>
+        <button class="copy-btn" onclick="copyLink()">Copy</button>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-card">
+          <div class="meta-label">Expires</div>
+          <div class="meta-value" id="meta-expiry">7d</div>
         </div>
-    </section>
-
-    <!-- ===== TOOLS SECTION ===== -->
-    <section id="outils" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-3xl mb-10">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TOOL REGISTRY &amp; INTEGRATED TOOLS</div>
-            <h2 class="section-header tracking-tighter">Specialized tools<br>for each process step.</h2>
-            <p class="mt-3 text-slate-600">KayrosLab has an extensible <strong>Tool Registry</strong>. Agents (via ReAct) can call these tools autonomously or semi-autonomously. Here are the main tools associated with each step.</p>
+        <div class="meta-card">
+          <div class="meta-label">Downloads</div>
+          <div class="meta-value" id="meta-dl">0 / 1</div>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">01</span>
-                    <span class="font-semibold text-sm">Listen</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>signal_scoring</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>context_enrichment</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>search_regulatory_risks</strong></li>
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">02</span>
-                    <span class="font-semibold text-sm">Map</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>trend_network_builder</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>bisociation_detector</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>weak_signal_mapper</strong></li>
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">03</span>
-                    <span class="font-semibold text-sm">Build</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>scenario_generator</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>brief_structurer</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>collision_mode</strong></li>
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">04</span>
-                    <span class="font-semibold text-sm">Position</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>search_competitors</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>analyze_github_landscape</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>ontology_builder</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>graph_explorer</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>nl_query_playground</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>gap_analyzer</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>owl_exporter</strong></li>
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">05</span>
-                    <span class="font-semibold text-sm">Test</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>red_team_attack</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>calculate_ki_impact</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>risk_assessor</strong></li>
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">06</span>
-                    <span class="font-semibold text-sm">Arbitrate</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>ki_scorer</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>pdf_livrable_generator</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>vote_aggregator</strong></li>
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">07</span>
-                    <span class="font-semibold text-sm">Project</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>roadmap_builder</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>scenario_simulator</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>kpi_tracker</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>feedback_loop</strong></li>
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
-                <div class="flex items-center gap-x-2 mb-3">
-                    <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">08</span>
-                    <span class="font-semibold text-sm">Realize</span>
-                </div>
-                <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>milestone_tracker</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>impact_recorder</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>variance_analyzer</strong></li>
-                    
-                    
-                    <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>closure_report</strong></li>
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-            
+        <div class="meta-card">
+          <div class="meta-label">Chunks</div>
+          <div class="meta-value" id="meta-chunks">—</div>
         </div>
-        <div class="mt-8 text-center text-xs text-slate-500">All tools are declared in the <strong>Tool Registry</strong> and exposed to agents via function calling. The registry is extensible (you can add your own business tools).</div>
-    </section>
+      </div>
 
-    <!-- ===== DASHBOARD SECTION ===== -->
-    <section id="dashboard" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-50 border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-4">
-                    <i class="fa-solid fa-gauge-high"></i>
-                    Output from Step 06 • Project
-                </div>
-                <h2 class="section-header tracking-tighter">Strategic Dashboard</h2>
-                <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Once the decision is arbitrated, KayrosLab transforms the Go into a <strong>piloted trajectory</strong>: roadmap, KPIs, probabilistic scenarios and automatic re-arbitration loop.</p>
-            </div>
+      <button class="btn btn-ghost" onclick="resetSend()" style="margin-bottom:8px">Send another file</button>
 
-            <!-- Mock Dashboard — illustrative product preview. All figures are simulated sample data. -->
-            <div class="bg-white border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
+      <div class="security-bar">
+        <span class="dot green"></span> E2E encrypted
+        <span class="dot blue"></span> P2P DHT
+        <span class="dot amber"></span> Auto-deletes on expiry
+      </div>
+    </div>
+  </div>
 
-                <!-- Dashboard Header -->
-                <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div class="flex items-center gap-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                            <i class="fa-solid fa-chart-pie text-emerald-400"></i>
-                        </div>
-                        <div>
-                            <div class="font-semibold">Strategic Dashboard</div>
-                            <div class="text-xs text-white/60">Project &#34;Energy Diversification&#34; • Illustrative preview</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-x-4 text-sm">
-                        <div class="flex items-center gap-x-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-emerald-300">Example output</span>
-                        </div>
-                        <div class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-semibold ring-1 ring-inset ring-amber-400/40">Simulated data</div>
-                    </div>
-                </div>
+  <!-- ── RECEIVE ── -->
+  <div class="card" id="tab-receive">
+    <div id="receive-form">
+      <div class="receive-hero">
+        <div class="receive-icon">⬇</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:6px">Open a transfer link</div>
+        <div style="font-size:13px;color:var(--muted)">Paste the link you received by email or SMS</div>
+      </div>
 
-                <div class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="field">
+        <label>Transfer link</label>
+        <input type="text" id="receive-link" placeholder="https://filenymous.app/?r=abc123…#key">
+      </div>
 
-                    <!-- Left Column : KPIs + Scenarios -->
-                    <div class="lg:col-span-2 space-y-6">
+      <button class="btn btn-primary" onclick="startReceive()">Open link →</button>
 
-                        <!-- KPI Cards -->
-                        <div>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Strategic Steering Indicators</div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
-                                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 rounded-2xl p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <div class="text-xs text-emerald-700 font-medium">Kayros Index</div>
-                                        <i class="fa-solid fa-gauge-high text-emerald-500 text-xs"></i>
-                                    </div>
-                                    <div class="text-2xl font-bold text-slate-900">78<span class="text-sm font-medium text-slate-400">/100</span></div>
-                                    <div class="text-xs text-emerald-600 mt-1 flex items-center gap-1"><i class="fa-solid fa-arrow-up text-[10px]"></i> +6 pts since last gate</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <div class="text-xs text-slate-500">Success Probability</div>
-                                        <i class="fa-solid fa-bullseye text-sky-500 text-xs"></i>
-                                    </div>
-                                    <div class="text-2xl font-semibold text-slate-900">68%</div>
-                                    <div class="text-xs text-slate-500 mt-1">P50 • 52–81% interval</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <div class="text-xs text-slate-500">Projected ROI (P50)</div>
-                                        <i class="fa-solid fa-chart-line text-emerald-500 text-xs"></i>
-                                    </div>
-                                    <div class="text-2xl font-semibold text-slate-900">2.4×</div>
-                                    <div class="text-xs text-emerald-600 mt-1">P90 : 3.1× • P10 : 1.3×</div>
-                                </div>
-                            </div>
+      <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--dim)">
+        — or try a demo transfer —
+      </div>
+      <button class="btn btn-ghost" style="margin-top:10px" onclick="loadDemoReceive()">
+        Load demo file
+      </button>
+    </div>
 
-                            <!-- Secondary KPIs -->
-                            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Residual Risk</div>
-                                    <div class="text-lg font-semibold text-amber-600">Medium</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">3 active red flags</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Time-to-Value</div>
-                                    <div class="text-lg font-semibold text-slate-900">9 months</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">First measurable impact</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Executive Alignment</div>
-                                    <div class="text-lg font-semibold text-emerald-600">High</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">4/5 decision-makers</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Next Gate</div>
-                                    <div class="text-lg font-semibold text-slate-900">D+45</div>
-                                    <div class="text-[11px] text-sky-600 mt-0.5">Executive Committee • Go / No-Go</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Budget Consumed</div>
-                                    <div class="text-lg font-semibold text-slate-900">38%</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">€142k / €375k</div>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5">
-                                    <div class="text-[11px] text-slate-500 mb-0.5">Hypothesis Coverage</div>
-                                    <div class="text-lg font-semibold text-emerald-600">81%</div>
-                                    <div class="text-[11px] text-slate-500 mt-0.5">17/21 validated</div>
-                                </div>
-                            </div>
+    <div id="receive-file" style="display:none">
+      <div class="e2e-badge">
+        <span style="font-size:14px">🔒</span>
+        AES-256-GCM · decrypted locally
+      </div>
 
-                            <!-- Legend -->
-                            <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-slate-400">
-                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Leading</span>
-                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Lagging</span>
-                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Risk</span>
-                                <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-violet-400"></span> Budget / Hypotheses</span>
-                            </div>
-                        </div>
-
-                        <!-- Scenario Simulation -->
-                        <div>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Probabilistic Simulation (P10 / P50 / P90)</div>
-                            <div class="space-y-3">
-                                <div>
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="font-medium text-slate-700">Base Scenario</span>
-                                        <span class="text-slate-500">Expected Value</span>
-                                    </div>
-                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-sky-500 rounded-full" style="width: 68%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="font-medium text-emerald-700">Optimistic Scenario</span>
-                                        <span class="text-emerald-600">P90</span>
-                                    </div>
-                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width: 89%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-xs mb-1">
-                                        <span class="font-medium text-rose-700">Adverse Scenario</span>
-                                        <span class="text-rose-600">P10</span>
-                                    </div>
-                                    <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width: 34%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Budget Impact Simulation -->
-                        <div>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Budget Impact Simulation</div>
-                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-                                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200">
-                                    <div>
-                                        <div class="text-xs text-slate-500">Total Allocated Budget</div>
-                                        <div class="text-xl font-bold text-slate-900">€375k</div>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-xs text-slate-500">Consumed to Date</div>
-                                        <div class="text-xl font-bold text-slate-900">€142k <span class="text-sm font-medium text-slate-400">(38%)</span></div>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-xs text-slate-500">Remaining to Commit</div>
-                                        <div class="text-xl font-bold text-emerald-600">€233k</div>
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                                    <div class="bg-white border border-slate-200 rounded-xl p-3">
-                                        <div class="text-[11px] font-medium text-slate-500 mb-1">Base Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€361k</div>
-                                        <div class="text-[11px] text-emerald-600 mt-0.5">−€14k vs budget</div>
-                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-sky-500 rounded-full" style="width: 96%"></div></div>
-                                    </div>
-                                    <div class="bg-white border border-emerald-200 rounded-xl p-3">
-                                        <div class="text-[11px] font-medium text-emerald-700 mb-1">Optimistic Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€298k</div>
-                                        <div class="text-[11px] text-emerald-600 mt-0.5">−€77k (under-spend)</div>
-                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 rounded-full" style="width: 79%"></div></div>
-                                    </div>
-                                    <div class="bg-white border border-rose-200 rounded-xl p-3">
-                                        <div class="text-[11px] font-medium text-rose-700 mb-1">Adverse Scenario</div>
-                                        <div class="text-lg font-semibold text-slate-900">€452k</div>
-                                        <div class="text-[11px] text-rose-600 mt-0.5">+€77k (overrun)</div>
-                                        <div class="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width: 100%"></div></div>
-                                    </div>
-                                </div>
-
-                                <!-- Delay simulation -->
-                                <div class="mt-5 pt-4 border-t border-slate-200">
-                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Delay Impact Simulation (POC)</div>
-                                        <div class="text-[10px] text-slate-400">Hypothesis: marginal daily cost + opportunity loss</div>
-                                    </div>
-
-                                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 mb-4">
-                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+15 days</div>
-                                            <div class="text-base font-bold text-slate-800">+€18k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €393k</div>
-                                            <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-600">Success prob. −3 pts</div>
-                                                <div class="text-slate-500">TtV +0.5 month</div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+30 days</div>
-                                            <div class="text-base font-bold text-slate-800">+€37k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €412k</div>
-                                            <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-600">Success prob. −6 pts</div>
-                                                <div class="text-slate-500">TtV +1.0 month</div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-center relative">
-                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">Reference</div>
-                                            <div class="text-[11px] font-medium text-amber-700 mb-1">+45 days</div>
-                                            <div class="text-base font-bold text-amber-800">+€52k</div>
-                                            <div class="text-[10px] text-amber-700/80 mt-0.5">Budget → €427k</div>
-                                            <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-amber-700 font-medium">Success prob. −9 pts</div>
-                                                <div class="text-amber-600">TtV +1.5 months</div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-white border border-slate-200 rounded-xl p-3 text-center">
-                                            <div class="text-[11px] font-medium text-slate-500 mb-1">+60 days</div>
-                                            <div class="text-base font-bold text-rose-600">+€71k</div>
-                                            <div class="text-[10px] text-slate-500 mt-0.5">Budget → €446k</div>
-                                            <div class="mt-2 space-y-0.5 text-[10px]">
-                                                <div class="text-rose-600">Success prob. −14 pts</div>
-                                                <div class="text-slate-500">TtV +2.0 months</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-col sm:flex-row gap-3 text-xs">
-                                        <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
-                                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
-                                            <div>
-                                                <div class="font-medium text-amber-800">Alert Threshold</div>
-                                                <div class="text-amber-700/80 mt-0.5">Beyond +45 days, ROI drops below 2.0× and the adverse scenario becomes the most likely.</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex-1 flex items-start gap-2 bg-sky-50 border border-sky-200 rounded-xl px-3 py-2.5">
-                                            <i class="fa-solid fa-lightbulb text-sky-500 mt-0.5"></i>
-                                            <div>
-                                                <div class="font-medium text-sky-800">Mitigation Lever</div>
-                                                <div class="text-sky-700/80 mt-0.5">Partner mutualization + phasing → −18 % CAPEX and reduced delay risk.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Sensitivity Analysis + Tornado -->
-                        <div>
-                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Cost Sensitivity Analysis</div>
-                                <div class="text-[10px] text-slate-400">Tornado Chart — ±20 % impact on total budget</div>
-                            </div>
-                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-                                <div class="mb-5">
-                                    <div class="text-[10px] font-medium text-slate-500 mb-3 flex items-center justify-between">
-                                        <span>Negative Impact (−)</span>
-                                        <span class="text-slate-400">Base</span>
-                                        <span>Positive Impact (+)</span>
-                                    </div>
-                                    <div class="relative">
-                                        <div class="absolute left-1/2 top-0 bottom-0 w-px bg-slate-300 -translate-x-1/2 z-0"></div>
-                                        <div class="space-y-2.5 relative z-10">
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Partners / subcontracting</div>
-                                                <div class="flex-1 flex items-center h-6">
-                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-rose-500 to-rose-400 rounded-l-md" style="width: 92%"></div></div>
-                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-rose-500 to-rose-400 rounded-r-md" style="width: 92%"></div></div>
-                                                </div>
-                                                <div class="w-14 text-[11px] font-semibold text-rose-600">±€48k</div>
-                                            </div>
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">POC duration (timeline)</div>
-                                                <div class="flex-1 flex items-center h-6">
-                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-amber-500 to-amber-400 rounded-l-md" style="width: 71%"></div></div>
-                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-amber-500 to-amber-400 rounded-r-md" style="width: 71%"></div></div>
-                                                </div>
-                                                <div class="w-14 text-[11px] font-semibold text-amber-600">±€37k</div>
-                                            </div>
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-700 truncate pr-1">Internal headcount</div>
-                                                <div class="flex-1 flex items-center h-6">
-                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-400 to-slate-300 rounded-l-md" style="width: 56%"></div></div>
-                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-400 to-slate-300 rounded-r-md" style="width: 56%"></div></div>
-                                                </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-600">±€29k</div>
-                                            </div>
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-600 truncate pr-1">Compliance &amp; regulatory</div>
-                                                <div class="flex-1 flex items-center h-6">
-                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-300 to-slate-200 rounded-l-md" style="width: 35%"></div></div>
-                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-300 to-slate-200 rounded-r-md" style="width: 35%"></div></div>
-                                                </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-500">±€18k</div>
-                                            </div>
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-36 sm:w-44 text-right text-[11px] font-medium text-slate-500 truncate pr-1">Go-to-market / acquisition</div>
-                                                <div class="flex-1 flex items-center h-6">
-                                                    <div class="w-1/2 flex justify-end"><div class="h-5 bg-gradient-to-l from-slate-200 to-slate-100 rounded-l-md" style="width: 23%"></div></div>
-                                                    <div class="w-1/2 flex justify-start"><div class="h-5 bg-gradient-to-r from-slate-200 to-slate-100 rounded-r-md" style="width: 23%"></div></div>
-                                                </div>
-                                                <div class="w-14 text-[11px] font-semibold text-slate-400">±€12k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 flex items-center justify-center gap-4 text-[10px] text-slate-400">
-                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-rose-500"></span> Critical</span>
-                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-amber-500"></span> High</span>
-                                        <span class="flex items-center gap-1.5"><span class="w-3 h-2 rounded-sm bg-slate-400"></span> Medium / Low</span>
-                                    </div>
-                                </div>
-
-                                <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
-                                    <div class="flex-1 flex items-start gap-2 bg-rose-50 border border-rose-200 rounded-xl px-3 py-2.5">
-                                        <i class="fa-solid fa-triangle-exclamation text-rose-500 mt-0.5"></i>
-                                        <div>
-                                            <div class="font-medium text-rose-800 text-xs">Critical</div>
-                                            <div class="text-rose-700/80 text-[11px] mt-0.5">A 20% rise in partner costs pushes ROI below 2.0× in the base scenario.</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
-                                        <i class="fa-solid fa-shield-halved text-emerald-500 mt-0.5"></i>
-                                        <div>
-                                            <div class="font-medium text-emerald-800 text-xs">Recommended Action</div>
-                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">Negotiate a partner spend cap + review clause at D+45.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ROI Analysis -->
-                        <div>
-                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Return on Investment Analysis</div>
-                                <div class="text-[10px] text-slate-400">24-month horizon • Base vs ranges</div>
-                            </div>
-
-                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-5">
-                                <!-- ROI Headline -->
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    <div class="bg-white border border-emerald-200 rounded-2xl p-4 text-center">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-1">Base ROI</div>
-                                        <div class="text-3xl font-bold text-emerald-700 tracking-tight">2.4×</div>
-                                        <div class="text-[11px] text-slate-500 mt-1">+140 % net</div>
-                                    </div>
-                                    <div class="bg-white border border-sky-200 rounded-2xl p-4 text-center">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-sky-600 mb-1">Payback</div>
-                                        <div class="text-3xl font-bold text-sky-700 tracking-tight">11 months</div>
-                                        <div class="text-[11px] text-slate-500 mt-1">Capital Recovery</div>
-                                    </div>
-                                    <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">NPV (approx.)</div>
-                                        <div class="text-3xl font-bold text-slate-800 tracking-tight">+€412k</div>
-                                        <div class="text-[11px] text-slate-500 mt-1">Over 24 months</div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div class="text-[11px] font-medium text-slate-500 mb-2.5">ROI by Probabilistic Scenario</div>
-                                    <div class="space-y-2.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-20 text-[11px] font-medium text-emerald-700">Optimistic Scenario</div>
-                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
-                                                <div class="absolute inset-y-0 left-0 bg-emerald-500 rounded-full" style="width: 92%"></div>
-                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">3.1×</span></div>
-                                            </div>
-                                            <div class="w-16 text-right text-[11px] text-slate-500">P90</div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-20 text-[11px] font-medium text-sky-700">Base Scenario</div>
-                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
-                                                <div class="absolute inset-y-0 left-0 bg-sky-500 rounded-full" style="width: 72%"></div>
-                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">2.4×</span></div>
-                                            </div>
-                                            <div class="w-16 text-right text-[11px] text-slate-500">P50</div>
-                                        </div>
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-20 text-[11px] font-medium text-rose-700">Adverse Scenario</div>
-                                            <div class="flex-1 h-7 bg-slate-200 rounded-full overflow-hidden relative">
-                                                <div class="absolute inset-y-0 left-0 bg-rose-400 rounded-full" style="width: 38%"></div>
-                                                <div class="absolute inset-0 flex items-center justify-end pr-2"><span class="text-[11px] font-bold text-white drop-shadow">1.3×</span></div>
-                                            </div>
-                                            <div class="w-16 text-right text-[11px] text-slate-500">P10</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                                    <div class="bg-white border border-slate-200 rounded-xl p-3.5">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Total costs (24 months)</div>
-                                        <div class="text-xl font-bold text-slate-800">€375k</div>
-                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
-                                            <div class="flex justify-between"><span>Partners / subcontracting</span><span class="font-medium">€192k</span></div>
-                                            <div class="flex justify-between"><span>Internal team</span><span class="font-medium">€98k</span></div>
-                                            <div class="flex justify-between"><span>Compliance &amp; tools</span><span class="font-medium">€47k</span></div>
-                                            <div class="flex justify-between"><span>Go-to-market</span><span class="font-medium">€38k</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white border border-emerald-200 rounded-xl p-3.5">
-                                        <div class="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 mb-2">Projected benefits (24 months)</div>
-                                        <div class="text-xl font-bold text-emerald-700">€900k</div>
-                                        <div class="mt-2 space-y-1 text-[11px] text-slate-600">
-                                            <div class="flex justify-between"><span>Operational gains</span><span class="font-medium">€410k</span></div>
-                                            <div class="flex justify-between"><span>New revenue</span><span class="font-medium">€320k</span></div>
-                                            <div class="flex justify-between"><span>Cost avoidance</span><span class="font-medium">€120k</span></div>
-                                            <div class="flex justify-between"><span>Strategic value</span><span class="font-medium">€50k</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="pt-2 border-t border-slate-200 flex flex-col sm:flex-row gap-2.5">
-                                    <div class="flex-1 flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
-                                        <i class="fa-solid fa-chart-line text-emerald-500 mt-0.5"></i>
-                                        <div>
-                                            <div class="font-medium text-emerald-800 text-xs">Breakeven Point</div>
-                                            <div class="text-emerald-700/80 text-[11px] mt-0.5">The project becomes profitable from month 11. Beyond 18 months, ROI exceeds 2.8× in the base scenario.</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
-                                        <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
-                                        <div>
-                                            <div class="font-medium text-amber-800 text-xs">Watch Point</div>
-                                            <div class="text-amber-700/80 text-[11px] mt-0.5">In the adverse scenario (P10), ROI remains positive (1.3×) but payback extends to 19 months.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Roadmap -->
-                        <div>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">Execution Roadmap (Now / Next / Later)</div>
-                            <div class="flex flex-col sm:flex-row gap-3">
-                                <div class="flex-1 bg-sky-50 border border-sky-200 rounded-2xl p-4">
-                                    <div class="text-[10px] font-bold text-sky-600 uppercase tracking-wider mb-2">Now</div>
-                                    <div class="text-sm font-medium text-slate-800">Team &amp; budget structuring</div>
-                                    <div class="text-xs text-slate-500 mt-1">D+0 → D+30</div>
-                                </div>
-                                <div class="flex-1 bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
-                                    <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-2">Next</div>
-                                    <div class="text-sm font-medium text-slate-800">Market POC &amp; partners</div>
-                                    <div class="text-xs text-slate-500 mt-1">D+30 → D+90</div>
-                                </div>
-                                <div class="flex-1 bg-slate-100 border border-slate-200 rounded-2xl p-4">
-                                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Later</div>
-                                    <div class="text-sm font-medium text-slate-800">Scale &amp; industrialization</div>
-                                    <div class="text-xs text-slate-500 mt-1">D+90 → D+180</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column : Risk + Feedback -->
-                    <div class="space-y-6">
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Risk Matrix</div>
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-slate-700">Supplier Dependency</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-medium">High</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-slate-700">Regulatory</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-medium">Medium</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-slate-700">Market Adoption</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">Low</span>
-                                </div>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-500">
-                                <i class="fa-solid fa-bell text-amber-500 mr-1"></i> 1 active re-arbitration trigger
-                            </div>
-                        </div>
-
-                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
-                            <div class="flex items-center gap-x-2 mb-3">
-                                <i class="fa-solid fa-sync text-emerald-600"></i>
-                                <span class="text-sm font-semibold text-emerald-800">Feedback Loop</span>
-                            </div>
-                            <p class="text-xs text-emerald-900/80 leading-relaxed">KPIs and signals are automatically reinjected into the <strong>Listen</strong> step. A breached threshold triggers a formal re-arbitration.</p>
-                            <div class="mt-4 flex items-center gap-x-2 text-xs text-emerald-700">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                Next injection: D+7
-                            </div>
-                        </div>
-
-                        <div class="space-y-2">
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Generated Deliverables</div>
-                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
-                                <i class="fa-solid fa-file-pdf text-rose-500"></i> Project Sheet + Roadmap
-                            </div>
-                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
-                                <i class="fa-solid fa-chart-gantt text-sky-500"></i> Gantt &amp; RACI
-                            </div>
-                            <div class="flex items-center gap-x-2 text-sm text-slate-700 bg-white border border-slate-200 rounded-xl px-3 py-2">
-                                <i class="fa-solid fa-table text-emerald-500"></i> KPI Table
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="px-6 pb-6 text-center text-sm text-slate-500">Illustrative product preview — all figures are simulated samples of what the <strong>Project</strong> step emits, not a real project. A live dashboard is generated automatically at the end of the <strong>Project</strong> step.</p>
-            </div>
+      <div class="file-preview-card">
+        <div class="preview-icon" id="receive-file-icon">📄</div>
+        <div class="preview-info">
+          <div class="preview-name" id="receive-file-name">document.pdf</div>
+          <div class="preview-meta" id="receive-file-meta">2.4 MB · from alice@example.com</div>
         </div>
-    </section>
+      </div>
 
-    <!-- ===== ORCHESTRATION SECTION ===== -->
-    <section id="orchestration" class="max-w-screen-2xl mx-auto px-8 py-16 bg-slate-900 text-white animate-on-scroll">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-10">
-                <div>
-                    <div class="uppercase tracking-[3px] text-emerald-400 text-xs font-semibold mb-2">TECHNOLOGY CORE</div>
-                    <h2 class="text-4xl font-semibold tracking-tighter">Governed Agentic<br>Orchestration</h2>
-                </div>
-                <div class="text-sm text-emerald-300 max-w-xs">The orchestrator transforms a simple conversation into a <strong>structured, cyclical, resilient strategic decision system</strong> across 8 steps.</div>
-            </div>
-            <div class="grid md:grid-cols-3 gap-5">
-                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
-                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-shield-alt text-xl"></i></div>
-                    <div class="font-semibold mb-2">Risk Reduction</div>
-                    <div class="text-sm text-white/70">Systematic challenge via Red Team agents + mandatory human gates. Fewer blind spots and reinforced protection against classic LLM biases and hallucinations.</div>
-                </div>
-                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
-                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-clipboard-check text-xl"></i></div>
-                    <div class="font-semibold mb-2">Full Auditability</div>
-                    <div class="text-sm text-white/70">Complete timeline, KI scoring, agent logs and human decisions. Compliant with Board, NIS2, DORA and GDPR requirements.</div>
-                </div>
-                <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
-                    <div class="text-emerald-400 mb-3"><i class="fa-solid fa-expand-arrows-alt text-xl"></i></div>
-                    <div class="font-semibold mb-2">Controlled Scalability</div>
-                    <div class="text-sm text-white/70">From standalone pilot to sovereign local or private cloud deployment. Governance and control maintained at every step.</div>
-                </div>
-            </div>
+      <div class="field" id="pwd-receive-field" style="display:none">
+        <label>Password required</label>
+        <input type="password" id="pwd-receive" placeholder="Enter the passphrase">
+      </div>
+
+      <button class="btn btn-primary" id="download-btn" onclick="startDownload()">
+        Download & decrypt
+      </button>
+
+      <div class="dl-progress" id="dl-progress">
+        <div class="dl-bar"><div class="dl-fill" id="dl-fill"></div></div>
+        <div class="dl-label" id="dl-label">Retrieving chunks from DHT…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HISTORY ── -->
+  <div class="card" id="tab-history">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div style="font-size:14px;font-weight:500">Recent transfers</div>
+      <div style="font-size:12px;color:var(--muted)">stored on source chain</div>
+    </div>
+    <div class="history-list" id="history-list">
+      <div class="history-item" onclick="loadFromHistory('report_q1.pdf','1.8 MB','bob@acme.com','downloaded')">
+        <span class="h-icon">📊</span>
+        <div class="h-info">
+          <div class="h-name">report_q1.pdf</div>
+          <div class="h-meta">→ bob@acme.com · 1.8 MB · 2h ago</div>
         </div>
-    </section>
-
-    <!-- ===== TECHNOLOGY SECTION ===== -->
-    <section id="technologie" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-12">
-                <div>
-                    <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">TECHNOLOGY ARCHITECTURE</div>
-                    <h2 class="section-header tracking-tighter">A zero-dependency engine.<br>A governed architecture.</h2>
-                </div>
-                <div class="text-sm text-slate-600 max-w-md">KayrosLab is built around a <strong>pure Node.js core (ESM, zero-dependency)</strong> that orchestrates AI agents, applies Human-in-the-Loop governance, and computes trajectories deterministically — without ever inventing numbers.</div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center mb-4"><i class="fa-solid fa-cube text-sky-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Zero-Dependency Core</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Pure Node 20+ ESM engine — zero npm dependencies. 81+ unit tests. Usable client-side (browser imports) and server-side (Fastify).</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-diagram-project text-emerald-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Multi-Agent Orchestration</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Plan-and-Solve + ReAct. 6 specialized agents: Planner, Critic, Devil&#39;s Advocate, Red Team, Bisociator, Synthesizer — each with a defined role in the ideation pipeline.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><i class="fa-solid fa-gavel text-amber-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Human-in-the-Loop Governance</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">4 gate types (expert_review, red_team_veto, comex_arbitrage, output_censor) and 4 human roles. Absolute veto with mandatory justification. Gates persisted to disk.</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center mb-4"><i class="fa-solid fa-calculator text-violet-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Deterministic Calculations</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Monte-Carlo (seeded PRNG), Kayros Index scoring (5 strategic × 6 technical dimensions), ROI, TCO, NPV — all computed, never hallucinated. The LLM provides hypotheses; the engine calculates.</p>
-                </div>
-                <!-- Card 5 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4"><i class="fa-solid fa-microchip text-rose-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Pluggable LLM Providers</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Mock (offline), Ollama (sovereign), Anthropic Claude (proxy), HTTP Backend. RoutingPolicy with automatic failover and Circuit Breaker per provider (3 strikes, 30s cooldown). Client never sees API keys.</p>
-                </div>
-                <!-- Card 6 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center mb-4"><i class="fa-solid fa-database text-cyan-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Vector Memory</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">InMemory or Qdrant. Semantic recall via cosine similarity with ideaId filtering. Used for agent context (ReAct loop) and the Monitor/Listen feedback loop.</p>
-                </div>
-                <!-- Card 7 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center mb-4"><i class="fa-solid fa-shield-halved text-orange-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Resilience &amp; Circuit Breaker</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Exponential backoff with full jitter. 3-state Circuit Breaker (CLOSED/OPEN/HALF_OPEN). withResilience() composes retry + breaker + fallback. Everything is non-blocking.</p>
-                </div>
-                <!-- Card 8 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center mb-4"><i class="fa-solid fa-sitemap text-indigo-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Ontological Positioning</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">14 entity types, typed properties, oriented relationships. Web + GitHub scraping. OWL RDF/XML export. Cytoscape.js graph with inspector, query playground, competitive gap analysis.</p>
-                </div>
-                <!-- Card 9 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center mb-4"><i class="fa-solid fa-comments text-teal-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Conversational Connectors</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Slack (Block Kit, modals, slash commands), Teams/Discord (Adaptive Cards). Abstract View/Action translated to native formats. Account linking via single-use cryptographic tokens.</p>
-                </div>
-                <!-- Card 10 -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-lg hover:border-sky-200 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-4"><i class="fa-solid fa-chart-gantt text-emerald-600 text-lg"></i></div>
-                    <h3 class="font-semibold text-sm mb-2">Strategic Steering &amp; KPIs</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">Kanban with gates, per-stage configurable scorecards, weighted votes, impact tracking (projected vs actual), leaderboards, campaigns with moderation, CSV export, funnel analysis.</p>
-                </div>
-            </div>
-
-            <div class="mt-10 text-center">
-                <a href="https://github.com/Geoking2104/KayrosLab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-x-3 bg-slate-900 hover:bg-slate-800 text-white px-6 h-12 rounded-2xl font-semibold text-sm transition-all shadow-lg">
-                    <i class="fa-brands fa-github text-lg"></i>
-                    Explore the source code
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
-                </a>
-            </div>
+        <span class="h-status downloaded">downloaded</span>
+      </div>
+      <div class="history-item" onclick="loadFromHistory('design_mockup.figma','14.2 MB','sarah@studio.io','sent')">
+        <span class="h-icon">🎨</span>
+        <div class="h-info">
+          <div class="h-name">design_mockup.figma</div>
+          <div class="h-meta">→ sarah@studio.io · 14.2 MB · 1d ago</div>
         </div>
-    </section>
-
-    <!-- ===== COMPLIANCE SECTION ===== -->
-    <section id="conformite" class="max-w-screen-2xl mx-auto px-8 py-16 bg-white border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-10">
-                <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-2">COMPLIANCE &amp; SOVEREIGNTY</div>
-                <h2 class="section-header tracking-tighter">Designed for demanding compliance.<br>Stated honestly, tier by tier.</h2>
-                <p class="mt-3 text-lg text-slate-600">KayrosLab is designed to meet the sovereignty, traceability and security requirements of regulated organizations. What is true today depends on the deployment tier — here is the exact ledger.</p>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden mb-6">
-                <div class="overflow-x-auto">
-                    <table class="compliance-table w-full text-sm min-w-[760px]">
-                        <thead>
-                            <tr>
-                                <th class="text-left px-5 py-3 text-slate-500 font-semibold">Property</th>
-                                <th class="text-left px-4 py-3 font-semibold">P0 — Standalone</th>
-                                <th class="text-left px-4 py-3 font-semibold">P1 — Sovereign</th>
-                                <th class="text-left px-4 py-3 font-semibold">P2 — Cloud</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Data at rest</td>
-                                <td class="px-4 py-3 text-slate-600">In-browser only; nothing stored server-side</td>
-                                <td class="px-4 py-3 text-slate-600">Your infrastructure (Ollama + Qdrant, local)</td>
-                                <td class="px-4 py-3 text-slate-600">Server-side datastore (optionally Postgres)</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">Zero data egress</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Yes (mock mode)</td>
-                                <td class="px-4 py-3 text-emerald-700 font-semibold">Yes</td>
-                                <td class="px-4 py-3 text-amber-700 font-medium">No — LLM calls leave the environment</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">LLM inference</td>
-                                <td class="px-4 py-3 text-slate-600">Mock (offline)</td>
-                                <td class="px-4 py-3 text-slate-600">Local Ollama (quant-aware), fully on-premise</td>
-                                <td class="px-4 py-3 text-slate-600">Anthropic Claude via server-side key</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">GDPR posture</td>
-                                <td class="px-4 py-3 text-slate-600">No personal data collected</td>
-                                <td class="px-4 py-3 text-slate-600">By design (data minimization, erasure, consent)</td>
-                                <td class="px-4 py-3 text-slate-600">Native features + processing recorded</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">HDS (health data hosting)</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Architecture built for it — host on an HDS-certified provider to complete</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">NIS2 / DORA / EHDS alignment</td>
-                                <td class="px-4 py-3 text-slate-500">Not applicable</td>
-                                <td class="px-4 py-3 text-slate-600">Traceability + resilience by design</td>
-                                <td class="px-4 py-3 text-slate-600">Alignment supported by audit trail</td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-3 font-medium">ISO 27001 / 27701 / 42001 / SOC 2</td>
-                                <td class="px-4 py-3 text-slate-500 gap-x-2">Not claimed</td>
-                                <td class="px-4 py-3 text-slate-500">Not claimed — in preparation, roadmap shared on request</td>
-                                <td class="px-4 py-3 text-slate-500">Not claimed — in preparation, roadmap shared on request</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-globe-europe text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Data Sovereignty</h4></div>
-                    <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Sovereign local deployment (Ollama + Qdrant) with no data transfer outside — <strong>P1 tier</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Zero dependency on US hyperscalers for strategic data processing — <strong>P1 tier only</strong></span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Data exploitation and valorization exclusively by your organization — <strong>P0 + P1</strong></span></li>
-                    </ul>
-                </div>
-                <div class="border border-slate-200 rounded-3xl p-7">
-                    <div class="flex items-center gap-x-3 mb-4"><i class="fa-solid fa-search text-2xl text-emerald-600"></i><h4 class="font-semibold text-xl">Auditability &amp; Governance</h4></div>
-                    <ul class="space-y-2.5 text-sm text-slate-600">
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Complete timestamped timeline of all steps and decisions</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Traceable and exportable <strong>Kayros Index (KI)</strong> scoring</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>AI agent logs + human decisions for audits and risk committees</span></li>
-                        <li class="flex gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>Structured human gates (Executive Committee veto, expert validation) with traceability</span></li>
-                    </ul>
-                </div>
-            </div>
+        <span class="h-status sent">pending</span>
+      </div>
+      <div class="history-item">
+        <span class="h-icon">🗜</span>
+        <div class="h-info">
+          <div class="h-name">backup_2026_04.zip</div>
+          <div class="h-meta">→ self · 342 MB · 6d ago</div>
         </div>
-    </section>
+        <span class="h-status expired">expired</span>
+      </div>
+    </div>
 
-    <!-- ===== DIFFERENTIATION TABLE ===== -->
-    <section id="differenciation" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
-        <div class="max-w-3xl mb-10">
-            <div class="uppercase text-sky-600 text-xs tracking-[3px] font-semibold mb-3">WHY KAYROSLAB IS UNIQUE</div>
-            <h2 class="section-header tracking-tighter">Not just another chatbot.<br> A governed ideation system.</h2>
-            <p class="mt-3 text-lg text-slate-600">Classic LLMs excel at text generation. KayrosLab industrializes a complete strategic decision-making process where AI is a controlled, traceable and arbitrated collaborator.</p>
-        </div>
+    <div class="security-bar" style="margin-top:16px">
+      <span class="dot green"></span> Local source chain only — no central log
+    </div>
+  </div>
 
-        <div class="modern-table overflow-x-auto">
-            <table class="comparison-table w-full min-w-[900px] text-sm">
-                <thead>
-                    <tr>
-                        <th class="text-left px-6 py-4 w-56">Criteria</th>
-                        <th class="text-center px-4 py-4">ChatGPT / Claude<br>Enterprise / Gemini</th>
-                        <th class="text-center px-4 py-4">Innovation Platforms<br>(IdeaScale, Viima…)</th>
-                        <th class="text-center px-4 py-4 bg-sky-900 text-white">KayrosLab</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-sm">
-                    
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Process Structure</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Free linear conversation</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Idea collection + voting</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">8-step cyclical process</strong></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Reasoning &amp; Agents</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Single generic model</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Limited AI assistance</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Specialized multi-agents</strong><br><span class="text-xs">(Red Team, Devil's Advocate, Bisociator…)</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Memory &amp; Continuity</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Limited session context</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Simple idea database</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Persistent semantic search</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Robustness &amp; Resilience</td>
-                        <td class="px-4 py-4 text-center text-slate-500">None (frequent hallucinations)</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Low</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Traceability &amp; Audit</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Low / ephemeral conversation</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Basic history</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Complete timeline + KI scoring + agent logs</strong></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Human Governance</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Informal (prompt engineering)</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Simple validation workflows</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Structured Human-in-the-Loop</strong><br><span class="text-xs">Multi-criteria votes, executive veto, Working Groups</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Data Sovereignty</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Cloud only (dependency)</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Cloud SaaS generally</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Local LLM-ready (Ollama)</strong><br><span class="text-xs">P1 sovereign mode: zero data egress</span></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Deployment</td>
-                        <td class="px-4 py-4 text-center text-slate-500">SaaS only</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Cloud SaaS</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Standalone (1 HTML file) → Local → Cloud</strong></td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="px-6 py-4 font-semibold text-slate-900">Primary Use Case</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Content generation &amp; assistance</td>
-                        <td class="px-4 py-4 text-center text-slate-500">Collaborative idea box</td>
-                        <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">High-level strategic ideation + auditable decisions</strong></td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-        </div>
-    </section>
+</main>
 
-    <!-- ===== OFFER / PRICING ===== -->
-    <section id="offre" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-50 border-b border-slate-200 animate-on-scroll">
-        <div class="text-center mb-12">
-            <h2 class="section-header tracking-tighter mb-4">Equip your strategy and innovation teams<br>with a next-generation ideation workshop.</h2>
-            <p class="text-lg text-slate-600 max-w-3xl mx-auto">KayrosLab is deployed in 3 tiers adapted to your context. No vendor lock-in: <strong>all tiers share the same core</strong>.</p>
-        </div>
+<footer>
+  <p style="margin-bottom:4px">This is a UI demo — no real files are transferred or stored.</p>
+  <p><a href="https://github.com/Geoking2104/Filenymous" target="_blank">github.com/Geoking2104/Filenymous</a> · MIT</p>
+</footer>
 
-        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            
-            <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-slate-200">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P0 — Standalone</div>
-                <div class="text-3xl font-bold mb-4">Free</div>
-                <p class="text-sm text-slate-600 mb-6">Complete ideation workshop in a single HTML file.</p>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>8-step cyclical workflow</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>6 specialized agents</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Mock mode (zero setup, zero cost)</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Vector memory emulated</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Local PDF export</span></li>
-                    
-                </ul>
-            </div>
-            
-            <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-sky-300 popular">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P1 — Sovereign</div>
-                <div class="text-3xl font-bold mb-4">On request</div>
-                <p class="text-sm text-slate-600 mb-6">Local deployment on your infrastructure.</p>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Ollama LLM + embeddings (local)</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Qdrant vector memory (local)</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Zero data egress</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>HDS compliant architecture</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Full governance: real humans gates</span></li>
-                    
-                </ul>
-            </div>
-            
-            <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-slate-200">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P2 — Cloud</div>
-                <div class="text-3xl font-bold mb-4">Subscription</div>
-                <p class="text-sm text-slate-600 mb-6">Cloud deployment with maximized AI capabilities.</p>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Anthropic Claude (API key on server)</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Consolidated vector memory</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>User authentication + multi-tenant</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Collaboration: campaigns, comments, moderation</span></li>
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Reporting, dashboard, impact tracking</span></li>
-                    
-                    <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Extensibility: Slack/Teams connectors</span></li>
-                    
-                </ul>
-            </div>
-            
-        </div>
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+let files = [];
+let pwdEnabled = false;
 
-        <div class="text-center mt-8">
-            <a href="#contact" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 text-white px-8 h-14 rounded-3xl font-semibold text-base transition-all shadow-lg">
-                Request a personalized demo
-            </a>
-            <p class="mt-3 text-sm text-slate-500">Or contact us directly</p>
-        </div>
-    </section>
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const tabs = ['send','receive','history'];
+    t.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
 
-    <!-- ===== BUSINESS CASES ===== -->
-    <section id="business-cases" class="max-w-screen-2xl mx-auto px-8 py-20 bg-white border-b border-slate-200 animate-on-scroll">
-        <div class="text-center mb-12">
-            <h2 class="section-header tracking-tighter">Concrete results your teams can achieve.</h2>
-            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">KayrosLab is deployed on real strategic challenges. Each business case illustrates a typical use case by sector.</p>
-        </div>
+// ── Drop zone ─────────────────────────────────────────────────────────────────
+function dzOver(e) { e.preventDefault(); document.getElementById('dropzone').classList.add('over'); }
+function dzLeave() { document.getElementById('dropzone').classList.remove('over'); }
+function dzDrop(e) {
+  e.preventDefault();
+  dzLeave();
+  addFiles(e.dataTransfer.files);
+}
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Pharmaceutical Industry</div>
-                <h4 class="font-semibold text-lg mb-2">R&amp;D portfolio prioritization</h4>
-                <p class="text-sm text-slate-600 mb-4">Analyze 150+ research projects, apply multi-criteria scoring (KI), identify 12 high-potential programs and prepare 4 complete files for the investment committee.</p>
-                <div class="space-y-2">
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> −60% analysis time</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> +85 files processed simultaneously</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 3 hidden risks detected (Red Team)</div>
-                </div>
-            </div>
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Banking &amp; Insurance</div>
-                <h4 class="font-semibold text-lg mb-2">Regulatory innovation monitoring</h4>
-                <p class="text-sm text-slate-600 mb-4">Deploy a cyclical weak signal monitoring system to anticipate regulatory developments (BCBS 239, DORA, Solvabilité II) and transform them into strategic innovation programs.</p>
-                <div class="space-y-2">
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 48 signals qualified per month</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 3 regulatory watch alerts anticipated</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> +22% innovation rate in compliance</div>
-                </div>
-            </div>
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Industry &amp; Construction</div>
-                <h4 class="font-semibold text-lg mb-2">Industry 4.0 technology roadmap</h4>
-                <p class="text-sm text-slate-600 mb-4">Build a 3-year strategic roadmap integrating IoT, digital twin, predictive maintenance and ESG tracking. Position competitors, test scenarios and prepare investment files.</p>
-                <div class="space-y-2">
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 5 technology roadmaps explored</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 2 competitor gaps identified (Positioner)</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> Budget variance &lt; 8% (Project)</div>
-                </div>
-            </div>
-            
-            <div class="bg-white border border-slate-200 rounded-3xl p-6">
-                <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Retail &amp; e-commerce</div>
-                <h4 class="font-semibold text-lg mb-2">New generation customer experience</h4>
-                <p class="text-sm text-slate-600 mb-4">Design and test a generative AI-powered hyper-personalized customer experience concept. From idea generation to business case construction and execution monitoring.</p>
-                <div class="space-y-2">
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 3 concepts tested in 2 weeks</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> −75% ideation-to-business case cost</div>
-                    <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> ROI 3.4× at 18 months (simulated)</div>
-                </div>
-            </div>
-            
-        </div>
-    </section>
+function addFiles(fileList) {
+  for (const f of fileList) files.push(f);
+  renderFiles();
+}
 
-    <!-- ===== WHITEPAPERS / PROJECTS ===== -->
-    <section id="livret-blanc" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-50 border-b border-slate-200 animate-on-scroll">
-        <div class="text-center mb-12">
-            <h2 class="section-header tracking-tighter">Whitepapers</h2>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
-                <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-ear-listen text-sky-600 text-xl"></i></div>
-                <h3 class="font-semibold text-lg mb-2">White Paper — Listen: From Weak Signal to Strategic Decision</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-1">How to detect, qualify and amplify weak signals using hybrid AI-human governance.</p>
-                <a href="/whitepaper-listen.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm">Read the white paper →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
-                <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-bullseye text-orange-600 text-xl"></i></div>
-                <h3 class="font-semibold text-lg mb-2">White Paper — Position: Ontological Competitive Analysis</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-1">Position your innovation through automated ontological analysis of the competitive landscape.</p>
-                <a href="/whitepaper-position.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm">Read the white paper →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-book text-emerald-600 text-xl"></i></div>
-                <h3 class="font-semibold text-lg mb-2">KayrosLab — Complete White Paper</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-1">The governed ideation methodology: from weak signal to strategic decision.</p>
-                <a href="/whitepaper-kayroslab.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm">Read the white paper →</a>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-7 text-center flex flex-col">
-                <div class="w-14 h-14 rounded-2xl bg-violet-100 flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-rocket text-violet-600 text-xl"></i></div>
-                <h3 class="font-semibold text-lg mb-2">Augmented Hackathon — From Idea to Market in 8 Governed Steps</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-1">How KayrosLab transforms hackathons into structured innovation pipelines: ideation, validation, governance, and accelerated go-to-market.</p>
-                <a href="/whitepaper-hackathon.html" class="inline-flex items-center gap-x-2 text-sky-600 hover:text-sky-700 font-medium text-sm">Read the white paper →</a>
-            </div>
-        </div>
-    </section>
+function removeFile(i) {
+  files.splice(i, 1);
+  renderFiles();
+}
 
-    <!-- ===== CONTACT ===== -->
-    <section id="contact" class="hero-bg text-white">
-        <div class="max-w-screen-2xl mx-auto px-8 py-20">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter mb-4">Transform weak signals into governed strategic decisions.</h2>
-                <p class="text-xl text-slate-300 mb-8">Ready to equip your teams with a next-generation ideation workshop?</p>
-                <a href="mailto:contact@kayroslab.com" class="inline-flex items-center justify-center gap-x-3 bg-sky-600 hover:bg-sky-700 text-white px-8 h-14 rounded-3xl font-semibold text-base transition-all shadow-lg">
-                    <i class="fa-solid fa-envelope"></i>
-                    Request a personalized demo
-                </a>
-                <p class="mt-6 text-sm text-slate-400">
-                    Or contact us directly:<br>
-                    <a href="mailto:contact@kayroslab.com" class="text-sky-400 hover:text-sky-300 underline">contact@kayroslab.com</a>
-                </p>
-                <p class="mt-4 text-sm text-slate-500">Geoffroy de La Tournelle — Founder &amp; Director</p>
-            </div>
-        </div>
-    </section>
+function renderFiles() {
+  const list = document.getElementById('file-list');
+  list.innerHTML = files.map((f, i) => `
+    <div class="file-item">
+      <span class="file-icon">${fileIcon(f.name)}</span>
+      <div class="file-info">
+        <div class="file-name">${f.name}</div>
+        <div class="file-size">${fmtSize(f.size)}</div>
+      </div>
+      <span class="file-remove" onclick="removeFile(${i})">×</span>
+    </div>
+  `).join('');
+}
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-slate-900 text-white border-t border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-8 py-12">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center gap-x-2.5 mb-4">
-                        <div class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center"><i class="fa-solid fa-brain text-white text-lg"></i></div>
-                        <span class="font-display text-xl font-semibold">KayrosLab</span>
-                    </div>
-                    <p class="text-sm text-slate-400">KayrosLab is a structured agentic AI system that transforms ideation into a rigorous, traceable, resilient process — comparable to an executive committee augmented by AI agents.</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-sm mb-4">Platform</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#modele" class="hover:text-sky-400 transition-colors">The Model</a></li>
-                        <li><a href="#orchestration" class="hover:text-sky-400 transition-colors">Architecture</a></li>
-                        <li><a href="#differenciation" class="hover:text-sky-400 transition-colors">Differentiation</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-sm mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#livret-blanc" class="hover:text-sky-400 transition-colors">Whitepapers</a></li>
-                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">Live Demo</a></li>
-                        <li><a href="/kayroslab-complete-with-ai-agents.html" target="_blank" class="hover:text-sky-400 transition-colors">AI Agents App</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-sm mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#contact" class="hover:text-sky-400 transition-colors">About Us</a></li>
-                        <li><a href="#contact" class="hover:text-sky-400 transition-colors">Contact</a></li>
-                        <li><a href="https://www.linkedin.com/in/gdelatournelle/" target="_blank" class="hover:text-sky-400 transition-colors">LinkedIn</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-                <p>© 2026 KayrosLab. All rights reserved.</p>
-                <div class="flex items-center gap-x-4">
-                    <a href="/" class="hover:text-sky-400 transition-colors text-sky-400">EN</a>
-                    <a href="/index.fr.html" class="hover:text-sky-400 transition-colors ">FR</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+function fileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  const map = { pdf:'📄', zip:'🗜', png:'🖼', jpg:'🖼', jpeg:'🖼', gif:'🖼', webp:'🖼',
+    mp4:'🎬', mov:'🎬', avi:'🎬', mp3:'🎵', wav:'🎵',
+    doc:'📝', docx:'📝', xls:'📊', xlsx:'📊', ppt:'📊', pptx:'📊',
+    figma:'🎨', sketch:'🎨', ai:'🎨', json:'🧩', ts:'🧩', js:'🧩', py:'🧩' };
+  return map[ext] || '📁';
+}
 
-    <script>
-        (function() {
-            var nav = document.getElementById('nav');
-            
-            // Nav scroll effect
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) {
-                    nav.classList.add('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
-                } else {
-                    nav.classList.remove('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
-                }
-            });
-            
-            // ---- Desktop mega-menu: click support for touch devices ----
-            document.querySelectorAll('.group .dropdown-toggle').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    var isActive = this.classList.contains('active');
-                    // Close all other open dropdowns
-                    document.querySelectorAll('.group .dropdown-toggle.active').forEach(function(other) {
-                        if (other !== btn) other.classList.remove('active');
-                    });
-                    if (!isActive) {
-                        this.classList.add('active');
-                    } else {
-                        this.classList.remove('active');
-                    }
-                });
-            });
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function() {
-                document.querySelectorAll('.group .dropdown-toggle.active').forEach(function(btn) {
-                    btn.classList.remove('active');
-                });
-            });
-            
-            // ---- Mobile burger menu ----
-            var burgerBtn = document.getElementById('burger-btn');
-            var mobileMenu = document.getElementById('mobile-menu');
-            var burgerIcon = document.getElementById('burger-icon');
-            
-            function closeMobileMenu() {
-                mobileMenu.classList.remove('open');
-                if (burgerIcon) {
-                    burgerIcon.classList.remove('fa-xmark');
-                    burgerIcon.classList.add('fa-bars');
-                }
-            }
-            
-            function openMobileMenu() {
-                mobileMenu.classList.add('open');
-                if (burgerIcon) {
-                    burgerIcon.classList.remove('fa-bars');
-                    burgerIcon.classList.add('fa-xmark');
-                }
-            }
-            
-            if (burgerBtn && mobileMenu) {
-                burgerBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (mobileMenu.classList.contains('open')) {
-                        closeMobileMenu();
-                    } else {
-                        openMobileMenu();
-                    }
-                });
-            }
-            
-            // ---- Mobile dropdown toggles ----
-            document.querySelectorAll('.mobile-dropdown-toggle').forEach(function(toggle) {
-                toggle.addEventListener('click', function() {
-                    var content = this.nextElementSibling;
-                    var icon = this.querySelector('.fa-chevron-down');
-                    if (content.classList.contains('hidden')) {
-                        content.classList.remove('hidden');
-                        if (icon) icon.style.transform = 'rotate(180deg)';
-                    } else {
-                        content.classList.add('hidden');
-                        if (icon) icon.style.transform = 'rotate(0deg)';
-                    }
-                });
-            });
-            
-            // Close mobile menu on link click
-            if (mobileMenu) {
-                mobileMenu.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        closeMobileMenu();
-                    });
-                });
-            }
-            
-            // ---- Smooth scroll for anchor links ----
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', function(e) {
-                    var target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-            
-            // ---- Intersection Observer for scroll animations ----
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-            
-            document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(function(el) {
-                observer.observe(el);
-            });
-        })();
-    </script>
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  if (bytes < 1024*1024*1024) return (bytes/1024/1024).toFixed(1) + ' MB';
+  return (bytes/1024/1024/1024).toFixed(2) + ' GB';
+}
+
+// ── Password toggle ───────────────────────────────────────────────────────────
+function togglePwd() {
+  pwdEnabled = !pwdEnabled;
+  document.getElementById('pwd-toggle').classList.toggle('on', pwdEnabled);
+  document.getElementById('pwd-field').style.display = pwdEnabled ? 'block' : 'none';
+}
+
+// ── Send flow ─────────────────────────────────────────────────────────────────
+function startSend() {
+  const recipient = document.getElementById('recipient').value.trim();
+  if (files.length === 0) { shake('dropzone'); return; }
+  if (!recipient) { shake('recipient'); return; }
+
+  document.getElementById('send-form').style.display = 'none';
+  document.getElementById('send-progress').classList.add('active');
+
+  const totalSize = files.reduce((a, f) => a + f.size, 0);
+  const chunks = Math.max(1, Math.ceil(totalSize / (256 * 1024)));
+
+  runSteps(recipient, chunks, document.getElementById('expiry').value,
+           parseInt(document.getElementById('max-dl').value) || 1);
+}
+
+function runSteps(recipient, chunks, expiry, maxDl) {
+  const fill = document.getElementById('progress-fill');
+  const steps = [
+    { delay: 600,  pct: 20,  detail: () => randomHex(32) },
+    { delay: 1400, pct: 55,  detail: () => chunks + ' chunks · AES-256-GCM' },
+    { delay: 2400, pct: 80,  detail: () => 'N=5 nodes · ' + chunks + ' entries' },
+    { delay: 3200, pct: 100, detail: () => recipient },
+  ];
+
+  steps.forEach((s, i) => {
+    setTimeout(() => {
+      // Mark previous done
+      if (i > 0) {
+        const prev = document.getElementById('step-' + (i-1));
+        prev.classList.remove('active'); prev.classList.add('done');
+        prev.querySelector('.step-icon').textContent = '✓';
+      }
+      // Mark current active
+      const cur = document.getElementById('step-' + i);
+      cur.classList.add('active');
+      document.getElementById('step-detail-' + i).textContent = s.detail();
+      fill.style.width = s.pct + '%';
+    }, s.delay);
+  });
+
+  setTimeout(() => {
+    document.getElementById('step-3').classList.remove('active');
+    document.getElementById('step-3').classList.add('done');
+    document.getElementById('step-3').querySelector('.step-icon').textContent = '✓';
+    showSuccess(recipient, chunks, expiry, maxDl);
+  }, 4000);
+}
+
+function showSuccess(recipient, chunks, expiry, maxDl) {
+  document.getElementById('send-progress').classList.remove('active');
+  const screen = document.getElementById('send-success');
+  screen.classList.add('active');
+
+  const tid = randomHex(8);
+  const key = randomHex(32);
+  const link = `https://filenymous.app/?r=${tid}#${key}`;
+  document.getElementById('generated-link').textContent = link;
+  document.getElementById('generated-link').dataset.url = link;
+  document.getElementById('success-sub').textContent = `Link sent to ${recipient}`;
+  document.getElementById('meta-expiry').textContent = expiry;
+  document.getElementById('meta-dl').textContent = `0 / ${maxDl || '∞'}`;
+  document.getElementById('meta-chunks').textContent = chunks;
+}
+
+function copyLink() {
+  const url = document.getElementById('generated-link').dataset.url;
+  navigator.clipboard.writeText(url).catch(() => {});
+  const btn = document.querySelector('.copy-btn');
+  const orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(() => { btn.textContent = orig; }, 1500);
+}
+
+function resetSend() {
+  files = [];
+  renderFiles();
+  document.getElementById('send-form').style.display = 'block';
+  document.getElementById('send-progress').classList.remove('active');
+  document.getElementById('send-success').classList.remove('active');
+  document.getElementById('recipient').value = '';
+  for (let i = 0; i < 4; i++) {
+    const s = document.getElementById('step-' + i);
+    s.className = 'step';
+    s.querySelector('.step-icon').textContent = ['🔑','🔒','📡','✉'][i];
+    document.getElementById('step-detail-' + i).textContent = '';
+  }
+  document.getElementById('progress-fill').style.width = '0%';
+}
+
+// ── Receive flow ──────────────────────────────────────────────────────────────
+function startReceive() {
+  const link = document.getElementById('receive-link').value.trim();
+  if (!link) { shake('receive-link'); return; }
+  openReceive('transfer.zip', '4.2 MB', 'sender@example.com', false);
+}
+
+function loadDemoReceive() {
+  openReceive('demo_filenymous.pdf', '1.1 MB', 'alice@demo.com', false);
+}
+
+function loadFromHistory(name, size, from, status) {
+  switchTab('receive');
+  openReceive(name, size, from, false);
+}
+
+function openReceive(name, size, from, passwordRequired) {
+  document.getElementById('receive-form').style.display = 'none';
+  const rf = document.getElementById('receive-file');
+  rf.style.display = 'block';
+  document.getElementById('receive-file-icon').textContent = fileIcon(name);
+  document.getElementById('receive-file-name').textContent = name;
+  document.getElementById('receive-file-meta').textContent = `${size} · from ${from}`;
+  document.getElementById('pwd-receive-field').style.display = passwordRequired ? 'block' : 'none';
+}
+
+function startDownload() {
+  const dlProgress = document.getElementById('dl-progress');
+  const dlFill = document.getElementById('dl-fill');
+  const dlLabel = document.getElementById('dl-label');
+  const btn = document.getElementById('download-btn');
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Retrieving…';
+  dlProgress.classList.add('active');
+
+  const phases = [
+    { pct: 15, label: 'Resolving ChunkManifest from DHT…' },
+    { pct: 35, label: 'Retrieving chunk 1/4…' },
+    { pct: 55, label: 'Retrieving chunk 2/4…' },
+    { pct: 72, label: 'Retrieving chunk 3/4…' },
+    { pct: 88, label: 'Retrieving chunk 4/4…' },
+    { pct: 95, label: 'Decrypting AES-256-GCM locally…' },
+    { pct: 100, label: 'Reassembling file…' },
+  ];
+
+  let i = 0;
+  const tick = setInterval(() => {
+    if (i >= phases.length) {
+      clearInterval(tick);
+      dlLabel.textContent = '✓ File ready — download started';
+      dlLabel.style.color = '#34d399';
+      btn.innerHTML = '✓ Downloaded';
+      btn.style.background = 'rgba(52,211,153,0.15)';
+      btn.style.borderColor = 'rgba(52,211,153,0.4)';
+      btn.style.color = '#34d399';
+      return;
+    }
+    dlFill.style.width = phases[i].pct + '%';
+    dlLabel.textContent = phases[i].label;
+    i++;
+  }, 420);
+}
+
+// ── Utils ─────────────────────────────────────────────────────────────────────
+function randomHex(n) {
+  return Array.from({length: n}, () => Math.floor(Math.random()*16).toString(16)).join('');
+}
+
+function shake(id) {
+  const el = document.getElementById(id);
+  el.style.animation = 'none';
+  el.style.borderColor = 'var(--err)';
+  setTimeout(() => { el.style.borderColor = ''; }, 1000);
+}
+</script>
 </body>
 </html>
