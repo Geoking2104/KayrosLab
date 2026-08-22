@@ -20,12 +20,15 @@ import {
   createAuditStore,
   WorkingGroupStore, createWorkingGroupStore,
   InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
+  InMemorySalesOracleRepository, SalesOracleService,
 } from '../../../core/index.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
-  createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore,
+  createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore, PgSalesOracleRepository,
 } from '../../../core/pg-store.mjs';
+import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
+import { createMcpClientRegistry } from './mcp-auth.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
@@ -98,7 +101,17 @@ export default async function buildContext() {
     QDRANT_COLLECTION = 'kayroslab',
     QDRANT_DIM = '768',
     QDRANT_API_KEY = '',
+    CRYSTALKNOWS_API_TOKEN = '',
+    LINKEDIN_ACCESS_TOKEN = '',
+    KAYROS_MCP_CLIENTS_JSON = '',
+    KAYROS_MCP_ALLOWED_ORIGINS = '',
+    KAYROS_MCP_RATE_LIMIT = '60',
   } = process.env;
+
+  const mcpClients = createMcpClientRegistry(KAYROS_MCP_CLIENTS_JSON);
+  const MCP_ALLOWED_ORIGINS = String(KAYROS_MCP_ALLOWED_ORIGINS || '')
+    .split(',').map((value) => value.trim()).filter(Boolean);
+  const MCP_RATE_LIMIT = Math.max(1, Number(KAYROS_MCP_RATE_LIMIT) || 60);
 
   const providers = {
     mock: new MockProvider(),
@@ -213,6 +226,9 @@ export default async function buildContext() {
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
   const scorecards = defaultScorecards();
+  const salesOracleRepository = pgPool ? new PgSalesOracleRepository(pgPool) : new InMemorySalesOracleRepository();
+  const objectStorage = await createObjectStorageFromEnv(process.env);
+  const salesOracle = new SalesOracleService({ repository: salesOracleRepository, objectStorage });
 
   const canaux = [new ConsoleNotifier({ logger: console })];
   if (process.env.KAYROS_NOTIFY_WEBHOOK) canaux.push(new WebhookNotifier({ url: process.env.KAYROS_NOTIFY_WEBHOOK }));
@@ -432,6 +448,10 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     qdrantCollection: QDRANT_COLLECTION,
     qdrantDim: Number(QDRANT_DIM) || 768,
     qdrantApiKey: QDRANT_API_KEY || null,
+    crystalKnowsApiToken: CRYSTALKNOWS_API_TOKEN || null,
+    // Official LinkedIn Profile API: authenticated member only. Never exposed
+    // to clients and never used to scrape arbitrary public profile URLs.
+    linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
     fs: nodeFs,
     path: nodePath,
   });
@@ -461,7 +481,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
-    engine,
+    engine, salesOracle, salesOracleRepository, objectStorage,
     sharedPaths,
     pgPool,
     storeBackend,
@@ -469,5 +489,6 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
+    mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
   };
 }

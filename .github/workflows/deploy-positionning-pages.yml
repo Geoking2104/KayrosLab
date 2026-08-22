@@ -7,8 +7,12 @@ on:
       - 'frontend/positionning-app/**'
       - 'index.html'
       - 'index.fr.html'
+      - 'backend/web/views/index.ejs'
+      - 'backend/web/locales/**'
+      - 'backend/web/public/assets/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
+      - 'tests/sales-oracle-site.test.mjs'
       - 'cycle-timeline.html'
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
@@ -42,7 +46,7 @@ jobs:
           cache-dependency-path: frontend/positionning-app/package-lock.json
 
       - name: Validate public demo JavaScript and CTA wiring
-        run: node --test tests/demo-html.test.mjs
+        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs
 
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
@@ -54,6 +58,7 @@ jobs:
         run: |
           set -e
           mkdir -p deploy/positionner-app
+          mkdir -p deploy/assets
 
           # Core static pages (must exist)
           for f in index.html index.fr.html tokens.css CNAME; do
@@ -63,6 +68,14 @@ jobs:
             fi
             cp "$f" deploy/
           done
+
+          # Website editorial assets
+          if [ -d backend/web/public/assets ]; then
+            cp -r backend/web/public/assets/. deploy/assets/
+          else
+            echo "ERROR: backend/web/public/assets is missing" >&2
+            exit 1
+          fi
 
           # Main demo — size guard against accidental truncation
           DEMO="kayroslab-complete-with-ai-agents.html"

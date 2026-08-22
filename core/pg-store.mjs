@@ -308,3 +308,108 @@ export class PgRunStore {
     return (res.rowCount ?? 0) > 0;
   }
 }
+
+/** PostgreSQL metadata repository for the Sales Oracle document-ingestion MVP. */
+const normalizeSalesOracleDocument = (row) => row ? { ...row, size_bytes: Number(row.size_bytes) } : null;
+
+export class PgSalesOracleRepository {
+  constructor(pool) { this.pool = pool; }
+
+  async saveCase(record) {
+    const { rows } = await this.pool.query(
+      `insert into sales_oracle_cases
+       (case_id, tenant_id, name, use_case, decision_question, client_reference, committee_date,
+        status, corpus_version, retention_until, created_by, created_at, updated_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+       on conflict (case_id) do update set
+         name=excluded.name, use_case=excluded.use_case, decision_question=excluded.decision_question,
+         client_reference=excluded.client_reference, committee_date=excluded.committee_date,
+         status=excluded.status, corpus_version=excluded.corpus_version,
+         retention_until=excluded.retention_until, updated_at=excluded.updated_at
+       returning *`,
+      [record.case_id, record.tenant_id, record.name, record.use_case, record.decision_question,
+        record.client_reference, record.committee_date, record.status, record.corpus_version,
+        record.retention_until, record.created_by, record.created_at, record.updated_at],
+    );
+    return rows[0];
+  }
+
+  async getCase(caseId, { tenantId } = {}) {
+    const { rows } = await this.pool.query(
+      'select * from sales_oracle_cases where case_id=$1 and tenant_id=$2',
+      [String(caseId), String(tenantId || 'default')],
+    );
+    return rows[0] || null;
+  }
+
+  async listCases({ tenantId, status } = {}) {
+    const params = [String(tenantId || 'default')];
+    let sql = 'select * from sales_oracle_cases where tenant_id=$1';
+    if (status) { params.push(String(status)); sql += ' and status=$2'; }
+    const { rows } = await this.pool.query(`${sql} order by updated_at desc limit 500`, params);
+    return rows;
+  }
+
+  async saveDocument(record) {
+    const { rows } = await this.pool.query(
+      `insert into sales_oracle_documents
+       (document_id, tenant_id, case_id, source_type, original_filename, mime_type, size_bytes,
+        sha256, object_key, sensitivity, status, language, page_count, extraction_error,
+        storage_etag, uploaded_by, uploaded_at, processed_at, deleted_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
+       on conflict (document_id) do update set
+         status=excluded.status, language=excluded.language, page_count=excluded.page_count,
+         extraction_error=excluded.extraction_error, storage_etag=excluded.storage_etag,
+         processed_at=excluded.processed_at, deleted_at=excluded.deleted_at
+       returning *`,
+      [record.document_id, record.tenant_id, record.case_id, record.source_type,
+        record.original_filename, record.mime_type, record.size_bytes, record.sha256,
+        record.object_key, record.sensitivity, record.status, record.language, record.page_count,
+        record.extraction_error, record.storage_etag || null, record.uploaded_by,
+        record.uploaded_at, record.processed_at, record.deleted_at],
+    );
+    return normalizeSalesOracleDocument(rows[0]);
+  }
+
+  async getDocument(documentId, { tenantId } = {}) {
+    const { rows } = await this.pool.query(
+      'select * from sales_oracle_documents where document_id=$1 and tenant_id=$2',
+      [String(documentId), String(tenantId || 'default')],
+    );
+    return normalizeSalesOracleDocument(rows[0] || null);
+  }
+
+  async listDocuments(caseId, { tenantId } = {}) {
+    const { rows } = await this.pool.query(
+      `select * from sales_oracle_documents
+       where case_id=$1 and tenant_id=$2 and status <> 'deleted'
+       order by uploaded_at desc`,
+      [String(caseId), String(tenantId || 'default')],
+    );
+    return rows.map(normalizeSalesOracleDocument);
+  }
+
+  async findDocumentBySha(caseId, sha256, { tenantId } = {}) {
+    const { rows } = await this.pool.query(
+      `select * from sales_oracle_documents
+       where case_id=$1 and tenant_id=$2 and sha256=$3 and status <> 'deleted' limit 1`,
+      [String(caseId), String(tenantId || 'default'), String(sha256)],
+    );
+    return normalizeSalesOracleDocument(rows[0] || null);
+  }
+
+  async saveJob(record) {
+    const { rows } = await this.pool.query(
+      `insert into sales_oracle_ingestion_jobs
+       (job_id, tenant_id, document_id, job_type, status, attempt_count, available_at,
+        locked_at, locked_by, error, created_by, created_at, completed_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb,$11,$12,$13)
+       returning *`,
+      [record.job_id, record.tenant_id, record.document_id, record.job_type, record.status,
+        record.attempt_count, record.available_at, record.locked_at, record.locked_by,
+        record.error == null ? null : JSON.stringify(record.error), record.created_by,
+        record.created_at, record.completed_at],
+    );
+    return rows[0];
+  }
+}

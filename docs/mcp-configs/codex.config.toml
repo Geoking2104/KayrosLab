@@ -1,0 +1,5 @@
+# Merge this block into ~/.codex/config.toml.
+# The token remains in KAYROS_MCP_TOKEN and is never written here.
+[mcp_servers.kayroslab_developer_portal]
+url = "https://api.kayroslab.com/mcp"
+bearer_token_env_var = "KAYROS_MCP_TOKEN"

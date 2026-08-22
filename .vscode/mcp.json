@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "kayroslab-developer-portal": {
+      "type": "http",
+      "url": "https://api.kayroslab.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:KAYROS_MCP_TOKEN}"
+      }
+    }
+  }
+}

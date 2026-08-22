@@ -69,6 +69,9 @@ export * from './quant-guidance.mjs';
 export * from './quant-schema.mjs';
 export * from './quant-ui.mjs';
 export * from './plan-parse.mjs';
+export * from './swarm.mjs';
+export * from './personality.mjs';
+export * from './sales-oracle.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
@@ -79,6 +82,12 @@ import { OllamaEmbeddings, MockEmbeddings, HttpEmbeddings, MemoryService } from 
 import { LayeredMemory, FileOffloadBackend, FileLayeredStore } from './memory.mjs';
 import { createAllAgents } from './agents/index.mjs';
 import { recommendForEngine, filterGuidanceByAvailable, rebindAgentsQuant } from './quant-guidance.mjs';
+import { SwarmService } from './swarm.mjs';
+import {
+  CrystalKnowsProfileAdapter,
+  LinkedInSelfProfileAdapter,
+  ProfileImportService,
+} from './personality.mjs';
 
 async function tryLoadNodeIo() {
   try {
@@ -162,12 +171,23 @@ export function createEngine(opts = {}) {
   const layered = new LayeredMemory({ memoryService: memory, store: vectors, offloadBackend, persistentStore });
   if (persistentStore?.enabled) layered.load({ tenantId: opts.tenantId || null }).catch(() => {});
   const agents = createAllAgents({ llm, tools, memory, quantGuidance, baseModel });
+  const profileImporter = opts.profileImporter || new ProfileImportService({
+    linkedinAdapter: opts.linkedinProfileAdapter || (opts.linkedinAccessToken
+      ? new LinkedInSelfProfileAdapter({ accessToken: opts.linkedinAccessToken, fetchImpl: opts.fetchImpl }) : null),
+    crystalKnowsAdapter: opts.crystalKnowsProfileAdapter || (opts.crystalKnowsApiToken
+      ? new CrystalKnowsProfileAdapter({ apiToken: opts.crystalKnowsApiToken, fetchImpl: opts.fetchImpl }) : null),
+  });
+  const swarm = new SwarmService({
+    llm, memory, systemAgents: opts.systemAgents,
+    auditSink: opts.swarmAuditSink || opts.auditSink || null,
+    profileImporter,
+  });
   if (agents.Bisociateur && embeddings) agents.Bisociateur.embeddings = embeddings;
   const orchestrator = new Orchestrator({
     llm, tools, governance, memory, layered, plannerModel: opts.plannerModel, agents, quantGuidance, ...scopeDefaults,
   });
   const engine = {
-    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents,
+    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents, swarm, profileImporter,
     quantGuidance, baseModel, scopeDefaults,
   };
   engine.attachNodeFs = async () => {
