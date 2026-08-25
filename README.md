@@ -23,20 +23,21 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 
 1. [Why KayrosLab](#why-kayroslab)
 2. [Features](#features)
-3. [Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle)
-4. [Quick start](#quick-start)
-5. [Repository layout](#repository-layout)
-6. [How it works](#how-it-works)
-7. [Core engine](#core-engine)
-8. [Backend API](#backend-api)
-9. [UI entry points](#ui-entry-points)
-10. [Configuration](#configuration)
-11. [Deployment](#deployment)
-12. [Development & tests](#development--tests)
-13. [Roadmap](#roadmap)
-14. [Further documentation](#further-documentation)
-15. [Contact](#contact)
-16. [License](#license)
+3. [Complete agent operations](#complete-agent-operations)
+4. [Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle)
+5. [Quick start](#quick-start)
+6. [Repository layout](#repository-layout)
+7. [How it works](#how-it-works)
+8. [Core engine](#core-engine)
+9. [Backend API](#backend-api)
+10. [UI entry points](#ui-entry-points)
+11. [Configuration](#configuration)
+12. [Deployment](#deployment)
+13. [Development & tests](#development--tests)
+14. [Roadmap](#roadmap)
+15. [Further documentation](#further-documentation)
+16. [Contact](#contact)
+17. [License](#license)
 
 ---
 
@@ -73,6 +74,54 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
 - **TimesFM 2.5 forecasting** — optional, isolated KPI forecasts with P10–P90 uncertainty, tenant-scoped persistence and mandatory `SIMULATION` labelling; deterministic projections remain the baseline
 - **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
+
+---
+
+## Complete agent operations
+
+KayrosLab does not hand one prompt to one model. It turns a decision into a governed operation: evidence is collected, agents receive bounded roles, tools add verifiable facts or calculations, opposing views are reconciled, and a human approves the result before action.
+
+```mermaid
+flowchart TB
+  REQUEST[Business question or weak signal] --> INTAKE[Structured intake and permissions]
+  INTAKE --> PLAN[Orchestrator builds the plan]
+  PLAN --> CONTEXT[Recall tenant-scoped memory L0–L3]
+  CONTEXT --> SWARM[Run specialist agents on shared evidence]
+
+  SWARM --> RESEARCH[Positioner and search tools]
+  SWARM --> IDEAS[Planner, Bisociator and domain experts]
+  SWARM --> ORACLE[Sales Oracle stakeholder rehearsal]
+  SWARM --> NUMBERS[Deterministic simulation]
+  SWARM --> FORECAST[Optional TimesFM KPI forecast]
+
+  RESEARCH --> SYNTHESIS[Evidence-backed synthesis]
+  IDEAS --> SYNTHESIS
+  ORACLE --> SYNTHESIS
+  NUMBERS --> SYNTHESIS
+  FORECAST --> SYNTHESIS
+
+  SYNTHESIS --> CHALLENGE[Critic, Devil's Advocate and Red Team]
+  CHALLENGE --> GATE{Human gate}
+  GATE -->|Revise| PLAN
+  GATE -->|Reject| ARCHIVE[Record the decision and rationale]
+  GATE -->|Approve| EXECUTE[Roadmap, execution and connectors]
+  EXECUTE --> MEASURE[Observed KPIs and impact]
+  MEASURE --> MEMORY[Audit trail and memory update]
+  MEMORY -->|Drift or new signal| INTAKE
+```
+
+| Operation | What the agents do | Control that remains human | Durable output |
+|---|---|---|---|
+| **Frame** | Convert the request into objectives, constraints, roles and a runnable plan | Confirm scope, permissions and sensitive actions | Intake record + execution plan |
+| **Ground** | Recall authorized memory and gather external or uploaded evidence | Approve sources and profile use | Cited, tenant-scoped corpus |
+| **Explore** | Generate options, map competitors and rank novel combinations | Select or reject candidate directions | Scenarios + positioning graph |
+| **Rehearse** | Sales Oracle agents expose objections, veto paths and missing proof | Judge whether simulated feedback is useful | Objection matrix + evidence plan |
+| **Quantify** | Run deterministic trajectories; optionally forecast observed KPI series with TimesFM | Choose assumptions and review high uncertainty | Scenarios + `SIMULATION` forecast bands |
+| **Challenge** | Critic and Red Team attack claims, feasibility and risk | Resolve disagreements and vetoes | Attack report + decision packet |
+| **Decide** | Aggregate votes and conditions without overriding governance | Approve, reject or request revision | Signed gate decision + rationale |
+| **Execute and learn** | Build the roadmap, monitor KPIs and surface drift | Own delivery and re-arbitration | Milestones, impact readings and audit log |
+
+TimesFM is deliberately one tool inside this loop. It forecasts statistically plausible KPI trajectories from at least 20 ordered observations; it does not replace deterministic business scenarios, agent judgment or the human gate.
 
 ---
 
@@ -226,7 +275,8 @@ KayrosLab/
 │   ├── novelty.mjs       # Embedding-based novelty scoring
 │   ├── embed-select.mjs  # Soft-fallback embedding model selection
 │   ├── kpi-drift.mjs     # KPI trend / drift detection
-│   ├── adapters/         # Optional periphery (LangChain tools, LangGraph, search, Langfuse)
+│   ├── adapters/         # Portable optional tool contracts
+│   │   ├── timesfm-forecast.mjs
 │   │   ├── langchain-tools.mjs
 │   │   ├── langgraph-runner.mjs
 │   │   ├── search-tools.mjs
@@ -234,7 +284,8 @@ KayrosLab/
 │   └── agents/           # Specialist agents (incl. Bisociateur)
 ├── backend/
 │   ├── fastify/          # HTTP API, auth, SSE cycle, connectors
-│   └── adapters/         # Fastify attach helpers (same adapters as core/)
+│   ├── adapters/         # Runtime adapters, including the TimesFM client/cache
+│   └── timesfm-service/  # Isolated Python/PyTorch inference service
 ├── frontend/             # React Positioner app
 ├── deploy/ovh-vps/       # Deploy, backup, cron helpers
 ├── docs/                 # Pitch, architecture notes, v13/v14
@@ -274,14 +325,14 @@ flowchart LR
 | # | Step | Domain code | Role | Output |
 |---|---|---|---|---|
 | 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
-| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals | **Étape 1 🟢 définitive** (EF-01/02) : `POST/GET /v1/ideas/:id/signals` (score expliqué 0–100) + `/promote` + `/noise` |
-| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges | **Étape 2 🟢 définitive** (EF-03/04) : `POST/GET /v1/ideas/:id/tendances` (réseau + centralité + tensions) + `/ponts` (nouveauté × plausibilité, jamais inventée) + `/selection` → Construire |
-| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses | **Étape 3 🟢 définitive** (EF-05/06) : canvas éditable `POST/GET /v1/ideas/:id/scenarios` + `/canvas` + `PATCH/DELETE .../scenarios/:id` (init depuis la sélection Cartographier) + Collision Mode `POST/GET /v1/ideas/:id/collision` (+ `/selection`) : paires distantes, score nouveauté × faisabilité jamais inventée |
+| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals |
+| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges |
+| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
 | 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
 | 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
-| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision | **Étape 5 🟢 définitive** (EF-13/14) : WG vote (`/working-group`, `/gates/:id/votes`) + synthèse COMEX `GET /v1/ideas/:id/arbitrage` + journal immuable `GET /v1/ideas/:id/decisions` |
-| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + loop | **Étape 6 🟢 complète** (EF-39→45) : `POST/GET /v1/ideas/:id/roadmap`, `.../risques`, `.../capitalisation`, `.../gates-futurs` (+`/materialise`) |
-| 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + impact | `POST/PATCH/GET /v1/ideas/:id/execution` (EF-80→83 🟢) + `POST .../execution/monitor` (EF-43 🟢 : seuils KPI + dérive → signal → gate `re_arbitrage`) |
+| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
+| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + feedback loop |
+| 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + measured impact |
 
 **Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via `POST /v1/cycle/reactivate`.
 
@@ -433,7 +484,8 @@ Path: [`core/`](core/) — ESM, Node 20+, **no npm dependencies** for the engine
 | `novelty.mjs` | Embedding-based novelty scoring & ranking of collisions |
 | `embed-select.mjs` | Soft-fallback embedding model selection |
 | `kpi-drift.mjs` | KPI time-series drift detection |
-| `adapters/*` | Optional: LangChain tools, LangGraph runner, search tools, Langfuse (peers; no core deps) |
+| `adapters/timesfm-forecast.mjs` | Zero-dependency TimesFM contract, validation and uncertainty policy |
+| `adapters/*` | Optional: TimesFM, LangChain tools, LangGraph runner, search tools, Langfuse (peers; no core deps) |
 | `positionning/` | Scanners, ontology, OWL, `to-l1`, graph builder |
 | `agents/` | Specialist agents (Planner, Critic, Red Team, **Bisociateur**, …) |
 | `connectors.mjs` | Slack / Teams adapters, account link, gate views |
@@ -480,6 +532,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/run` · `POST /v1/swarm/runs/:id/arbitrate` |
 | **Hybrid profiles** | `POST /v1/swarm/agents/:agentId/personality/import` |
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
+| **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
 | **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
@@ -517,6 +570,9 @@ Key environment variables:
 | `KAYROS_EMBED_MODEL` | Force embedding model (default: soft fallback chain) |
 | `DATABASE_URL` | Optional Postgres |
 | `OLLAMA_*` | Local quant-aware inference |
+| `KAYROS_TIMESFM_ENABLED` | Enables the optional TimesFM adapter and deployment path |
+| `KAYROS_TIMESFM_ENDPOINT` · `KAYROS_TIMESFM_TOKEN` | Loopback inference endpoint and shared service token |
+| `TIMESFM_MODEL_ID` | TimesFM model identifier (default: `google/timesfm-2.5-200m-pytorch`) |
 
 ### Optional adapters (env)
 
@@ -595,6 +651,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | **v17** | **Teams adapter complet** (JWT RS256 Azure Bot, JWKS cache, Adaptive Cards, gate/EF-20, idempotence, route interactive, envoi proactif bot + webhook) | ✅ |
 | **v18** | **Engine/adapters split + governed intelligence layers** (zero-dep `core/`, optional `core/adapters/` + `backend/adapters/`, P0–P4 control layers, decision packet surface) · CI GitHub Actions (core + backend + i18n) | ✅ |
 | **v19** | **Specialized swarms + Hybrid Agent Sales Oracle** — system/custom/hybrid composition, personality simulation, official profile imports, veto-aware executive and buyer-committee rehearsal | ✅ |
+| **v20** | **Governed TimesFM forecasting** — isolated model service, P10–P90 uncertainty, tenant-scoped snapshots and mandatory human review for wide intervals | ✅ |
 
 ---
 
@@ -615,6 +672,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | [docs/engine-architecture.md](docs/engine-architecture.md) | Core vs adapters (V16) |
 | [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) | Swarm composition, personality profiles, consent and Sales Oracle scenarios |
 | [docs/developer-portal-mcp.md](docs/developer-portal-mcp.md) | Secure Developer Portal MCP and AI coding-tool configuration |
+| [docs/TIMESFM_FORECASTING.md](docs/TIMESFM_FORECASTING.md) | TimesFM architecture, safeguards, deployment and verification |
 | [backend/adapters/README.md](backend/adapters/README.md) | LangChain · LangGraph · search · Langfuse |
 
 ---

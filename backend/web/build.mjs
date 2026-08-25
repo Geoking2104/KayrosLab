@@ -39,7 +39,9 @@ async function renderTemplate(templateName, locale) {
 		new: Date,
 	});
 	
-	return html;
+	// EJS control-flow lines can leave indentation-only output behind. Keep the
+	// generated pages deterministic and free of trailing whitespace.
+	return html.replace(/[ \t]+$/gm, '');
 }
 
 async function build() {

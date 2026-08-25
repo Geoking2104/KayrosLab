@@ -18,15 +18,24 @@ test('Sales Oracle translations stay complete and aligned', () => {
   }
 });
 
-test('source template exposes both governed rehearsal tracks', () => {
+test('source template leads with a plain-language three-step rehearsal', () => {
   const template = read('backend/web/views/index.ejs');
 
   assert.match(template, /id="sales-oracle"/);
   assert.match(template, /assets\/hybrid-agent-sales-oracle\.png/);
-  assert.match(template, /sales_oracle_comex_title/);
-  assert.match(template, /sales_oracle_rfp_title/);
+  assert.match(template, /sales_oracle_how_title/);
+  assert.match(template, /\[1,2,3\]\.forEach\(step/);
+  assert.match(template, /sales_oracle_outputs_title/);
   assert.match(template, /sales_oracle_safeguard/);
   assert.match(template, /prefers-reduced-motion/);
+});
+
+test('secure customer workspace is available without dominating the public explanation', () => {
+  const template = read('backend/web/views/index.ejs');
+
+  assert.match(template, /<details class="sales-oracle__workspace">/);
+  assert.match(template, /sales_oracle_workspace_title/);
+  assert.match(template, /data-sales-oracle-tool/);
 });
 
 test('generated static pages contain the Sales Oracle and its illustration', () => {

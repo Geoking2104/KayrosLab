@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./tokens.css">
     <style>
-        /* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: KayrosLab custom · vibe: technical, persuasive, executive · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · slop: pass (51–55) · honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
+        /* Hallmark · genre: modern-minimal · macrostructure: Long Document (Sales Oracle scope) · theme: KayrosLab custom · vibe: plain-language, executive, restrained · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · honest: pass (56) · chrome: pass (57) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
         /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         :root { --primary: #0f172a; }
@@ -68,13 +68,37 @@
 
         html, body { overflow-x: clip; }
         .sales-oracle { background: var(--color-paper); color: var(--color-ink); }
-        .sales-oracle__inner { max-width: 96rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
-        .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
-        .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
-        .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
-        .sales-oracle__figure { width: 64%; margin: 0 auto; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__inner { max-width: 78rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
+        .sales-oracle__head { display: grid; gap: var(--space-lg); margin-block-end: var(--space-xl); }
+        .sales-oracle__head h2 { margin: 0; max-width: 15ch; color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-display-s); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
+        .sales-oracle__head-copy { display: grid; gap: var(--space-md); align-content: end; }
+        .sales-oracle__head-copy p { margin: 0; max-width: 58ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
+        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-ink-deep); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
+        .sales-oracle__cta:hover { transform: translateY(-1px); }
+        .sales-oracle__cta:active { transform: translateY(1px); }
+        .sales-oracle__cta:focus-visible, .sales-oracle__workspace summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+        .sales-oracle__overview { display: grid; gap: var(--space-lg); align-items: start; padding-block: var(--space-xl); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__figure { margin: 0; overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-ink-deep); }
         .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
-        .sales-oracle-tool { margin-block-start: var(--space-xl); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: #fff; box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, .08); }
+        .sales-oracle__explanation { display: grid; gap: var(--space-lg); }
+        .sales-oracle__explanation h3, .sales-oracle__outputs h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
+        .sales-oracle__steps { display: grid; gap: var(--space-md); list-style: none; margin: 0; padding: 0; counter-reset: oracle-step; }
+        .sales-oracle__step { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-sm); color: var(--color-ink-2); line-height: 1.55; counter-increment: oracle-step; }
+        .sales-oracle__step::before { content: counter(oracle-step); display: grid; place-items: center; width: 2rem; height: 2rem; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+        .sales-oracle__step strong { display: block; margin-block-end: var(--space-3xs); color: var(--color-ink); }
+        .sales-oracle__outputs { display: grid; gap: var(--space-md); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
+        .sales-oracle__output-list { display: grid; gap: var(--space-sm); margin: 0; padding: 0; list-style: none; }
+        .sales-oracle__output-list li { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); color: var(--color-muted-on-dark); line-height: 1.5; }
+        .sales-oracle__output-list i { margin-block-start: var(--space-3xs); color: var(--color-positive); }
+        .sales-oracle__note { margin: 0; max-width: 70ch; color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.6; }
+        .sales-oracle__workspace { margin-block-start: var(--space-xl); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__workspace summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-sm); align-items: center; padding-block: var(--space-md); cursor: pointer; list-style: none; font-weight: 700; }
+        .sales-oracle__workspace summary::-webkit-details-marker { display: none; }
+        .sales-oracle__workspace summary { white-space: nowrap; }
+        .sales-oracle__workspace summary i { transition: transform var(--dur-short) var(--ease-out); }
+        .sales-oracle__workspace[open] summary i { transform: rotate(45deg); }
+        .sales-oracle__workspace-intro { margin: 0 0 var(--space-md); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.5; }
+        .sales-oracle-tool { margin-block-end: var(--space-lg); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: var(--color-paper); }
         .sales-oracle-tool__header { display: grid; gap: var(--space-sm); padding: var(--space-lg); color: var(--color-paper); background: var(--color-ink-deep); }
         .sales-oracle-tool__eyebrow { display: flex; align-items: center; gap: var(--space-xs); color: #7dd3fc; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
         .sales-oracle-tool__live { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 .25rem rgba(52, 211, 153, .16); }
@@ -104,29 +128,10 @@
         .sales-oracle-tool__document, .sales-oracle-tool__empty { display: flex; justify-content: space-between; gap: var(--space-sm); padding-block: .65rem; border-block-end: var(--rule-hair) solid #e2e8f0; color: var(--color-ink-2); font-size: var(--text-sm); overflow-wrap: anywhere; }
         .sales-oracle-tool__document:last-child, .sales-oracle-tool__empty:last-child { border-block-end: 0; }
         .sales-oracle-tool__document-state { flex: 0 0 auto; color: #047857; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; }
-        .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
-        .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
-        .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
-        .sales-oracle__track > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); line-height: 1.6; }
-        .sales-oracle__steps { display: grid; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
-        .sales-oracle__step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; color: var(--color-ink-2); line-height: 1.55; }
-        .sales-oracle__step-index { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
-        .sales-oracle__step strong { display: block; color: var(--color-ink); }
-        .sales-oracle__benefits { display: grid; gap: var(--space-sm); margin-block-start: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
-        .sales-oracle__benefit { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
-        .sales-oracle__benefit i { color: var(--color-accent); margin-block-start: var(--space-3xs); }
-        .sales-oracle__benefit strong { display: block; margin-block-end: var(--space-3xs); }
-        .sales-oracle__benefit span { color: var(--color-muted-on-dark); font-size: var(--text-sm); line-height: 1.55; }
-        .sales-oracle__closing { display: grid; gap: var(--space-md); align-items: center; margin-block-start: var(--space-xl); }
-        .sales-oracle__closing p { margin: 0; max-width: 68ch; color: var(--color-ink-2); line-height: 1.6; }
-        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
-        .sales-oracle__cta:hover { transform: translateY(-1px); }
-        .sales-oracle__cta:active { transform: translateY(1px); }
-        .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
         .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
-        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
-        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
+        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); } .sales-oracle__overview { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); } .sales-oracle__outputs { grid-column: 1 / -1; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); } .sales-oracle__output-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } }
+        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta, .sales-oracle__workspace summary i { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
@@ -1306,13 +1311,43 @@
     <section id="sales-oracle" class="sales-oracle" aria-labelledby="sales-oracle-title">
         <div class="sales-oracle__inner">
             <div class="sales-oracle__head">
-                <h2 id="sales-oracle-title">See what the buying committee will actually decide.</h2>
-                <p>Upload the RFP and your proposal. KayrosLab builds a governed twin of the buying committee — Finance, Security, Legal, Operations, Sponsor. It runs your offer past them. You anticipate objections, expectations and missing evidence. You strengthen. Then you submit with a clear advantage.</p>
+                <h2 id="sales-oracle-title">Know what could stop the deal.</h2>
+                <div class="sales-oracle__head-copy">
+                    <p>Before you submit, let Finance, Security, Legal, Operations and your sponsor challenge the proposal. Sales Oracle shows the objections to answer and the proof still missing.</p>
+                    <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=KayrosLab%20Sales%20Oracle%20simulation">Rehearse my proposal<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
             </div>
 
-            <figure class="sales-oracle__figure">
-                <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Hybrid agent connecting an executive committee and a buyer veto network to a proposal">
-            </figure>
+            <div class="sales-oracle__overview">
+                <figure class="sales-oracle__figure">
+                    <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Hybrid agent connecting an executive committee and a buyer veto network to a proposal">
+                </figure>
+
+                <div class="sales-oracle__explanation">
+                    <h3>From proposal to rehearsal in three steps</h3>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span><strong>Add the deal documents</strong>Bring together the RFP, your response, pricing and supporting evidence.</span></li>
+                                                <li class="sales-oracle__step"><span><strong>Rehearse the buying committee</strong>Specialist agents review the same material from each decision-maker’s point of view.</span></li>
+                                                <li class="sales-oracle__step"><span><strong>Fix the weak points</strong>Answer the likely objections, add missing proof and prepare the negotiation.</span></li>
+                                            </ol>
+                </div>
+
+                <aside class="sales-oracle__outputs">
+                    <h3>What you receive</h3>
+                    <ul class="sales-oracle__output-list">
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>The objections most likely to block approval</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>A list of missing evidence, linked to its source</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Conditions and fallback positions for negotiation</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>A concise brief for the final meeting</li>
+                                            </ul>
+                </aside>
+
+                <p class="sales-oracle__note">This is a rehearsal, not a prediction. Every simulated response is labelled, grounded in the documents and left for a human to judge.</p>
+            </div>
+
+            <details class="sales-oracle__workspace">
+                <summary>Open the secure workspace<i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                <p class="sales-oracle__workspace-intro">Connect, create a case and add documents without leaving this page.</p>
 
             <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
                 data-login-required="Connect your authorized workspace to begin."
@@ -1389,42 +1424,7 @@
                 </div>
                 <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="Active Sales Oracle corpus"></ul>
             </div>
-
-            <div class="sales-oracle__tracks">
-                <article class="sales-oracle__track">
-                    <h3>Rehearse your company decision</h3>
-                    <p>Model a strategic decision with the perspectives of the executives who will challenge it. The result is a decision dossier, not a synthetic endorsement.</p>
-                    <ol class="sales-oracle__steps">
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Upload the decision corpus</strong>Add the proposal, business case, metrics and constraints; every fact keeps its source.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Compose the augmented committee</strong>Select system or custom agents and assign consented LinkedIn or Crystal Knows hybrid profiles.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Run the cited swarm</strong>Each role evaluates the same evidence and captures GO, conditional GO, NO-GO, vetoes and missing proof.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Arbitrate as a human</strong>Compare positions, expose friction and let the accountable executive make the final decision.</span></li>
-                                            </ol>
-                </article>
-
-                <article class="sales-oracle__track">
-                    <h3>Pressure-test the customer RFP</h3>
-                    <p>Turn the buying committee into a pre-mortem for the deal. Rehearse the proposal against procurement, finance, security, legal, operations and the business sponsor.</p>
-                    <ol class="sales-oracle__steps">
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Upload the RFP and proposal</strong>Build one controlled corpus from requirements, response, pricing, security, contractual and delivery evidence.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Map the veto chain</strong>Identify buyers, influencers, budget owners, technical evaluators and veto holders; apply only authorized personality signals.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Simulate objections and evidence gaps</strong>Make every objection traceable to source evidence, a role rule or an explicitly labelled assumption.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Rewrite and negotiate</strong>Produce a stronger proposal, objection matrix, conditional-GO checklist and negotiation brief.</span></li>
-                                            </ol>
-                </article>
-            </div>
-
-            <div class="sales-oracle__benefits">
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Anticipate each role’s real expectations</strong><span>Finance, Security, Legal, Ops, Sponsor: see what each will actually look for and demand.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Strengthen the offer with the right evidence</strong><span>Spot missing proof and adapt the dossier to what truly matters for every decision-maker.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Enter negotiation with a clear advantage</strong><span>Anticipated objections, fallback conditions and already-tested arguments: you arrive prepared.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Keep a governed and auditable simulation</strong><span>Consent, source provenance, tenant isolation and human arbitration stay attached to every run.</span></div></div>
-                            </div>
-
-            <div class="sales-oracle__closing">
-                <p>The Sales Oracle is a decision-rehearsal system, not a mind reader or prediction engine. It labels simulated stakeholder feedback, uses official connectors or authorized exports, and never replaces the real buyer&#39;s decision.</p>
-                <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=KayrosLab%20Sales%20Oracle%20simulation">Simulate my buying committee<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            </div>
+            </details>
         </div>
     </section>
 

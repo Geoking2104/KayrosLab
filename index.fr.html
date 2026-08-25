@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./tokens.css">
     <style>
-        /* Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: KayrosLab custom · vibe: technical, persuasive, executive · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · slop: pass (51–55) · honest: pass (56) · chrome: pass (57) · tokens: pass (58) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
+        /* Hallmark · genre: modern-minimal · macrostructure: Long Document (Sales Oracle scope) · theme: KayrosLab custom · vibe: plain-language, executive, restrained · anchor: cyan · enrichment: Tier C generated editorial still · nav: N9 · footer: Ft5 · contrast: pass (46–50) · honest: pass (56) · chrome: pass (57) · responsive: pass (59) · icons: pass (60) · mobile: pass (36, 59, 61–69) */
         /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         :root { --primary: #0f172a; }
@@ -29,7 +29,7 @@
         .modern-table { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 10px -3px rgb(0 0 0 / 0.05); }
         .feature-check { color: #10b981; }
         .kayros-gradient { background: linear-gradient(90deg, #0ea5e9, #0284c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
+
         /* Mega-menu styles */
         .mega-menu { display: none; position: absolute; left: 0; top: 100%; min-width: 280px; }
         .mega-menu-wide { display: none; position: absolute; left: 50%; transform: translateX(-50%); top: 100%; width: 90vw; max-width: 1100px; }
@@ -47,12 +47,12 @@
         /* Mobile menu scroll */
         #mobile-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; }
         #mobile-menu.open { max-height: 80vh !important; opacity: 1 !important; overflow-y: auto; }
-        
+
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
-        
+
         .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .stagger-children > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -68,13 +68,37 @@
 
         html, body { overflow-x: clip; }
         .sales-oracle { background: var(--color-paper); color: var(--color-ink); }
-        .sales-oracle__inner { max-width: 96rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
-        .sales-oracle__head { display: grid; gap: var(--space-md); align-items: end; margin-block-end: var(--space-xl); }
-        .sales-oracle__head h2 { margin: 0; max-width: 18ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(2.35rem, 5vw, 4.7rem); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
-        .sales-oracle__head p { margin: 0; max-width: 62ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
-        .sales-oracle__figure { width: 64%; margin: 0 auto; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-ink-deep); }
+        .sales-oracle__inner { max-width: 78rem; margin-inline: auto; padding: var(--space-2xl) var(--space-sm); }
+        .sales-oracle__head { display: grid; gap: var(--space-lg); margin-block-end: var(--space-xl); }
+        .sales-oracle__head h2 { margin: 0; max-width: 15ch; color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-display-s); font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; overflow-wrap: anywhere; min-width: 0; }
+        .sales-oracle__head-copy { display: grid; gap: var(--space-md); align-content: end; }
+        .sales-oracle__head-copy p { margin: 0; max-width: 58ch; color: var(--color-ink-2); font-size: var(--text-md); line-height: 1.65; }
+        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-ink-deep); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
+        .sales-oracle__cta:hover { transform: translateY(-1px); }
+        .sales-oracle__cta:active { transform: translateY(1px); }
+        .sales-oracle__cta:focus-visible, .sales-oracle__workspace summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+        .sales-oracle__overview { display: grid; gap: var(--space-lg); align-items: start; padding-block: var(--space-xl); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__figure { margin: 0; overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-ink-deep); }
         .sales-oracle__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1680 / 935; object-fit: cover; }
-        .sales-oracle-tool { margin-block-start: var(--space-xl); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: #fff; box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, .08); }
+        .sales-oracle__explanation { display: grid; gap: var(--space-lg); }
+        .sales-oracle__explanation h3, .sales-oracle__outputs h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
+        .sales-oracle__steps { display: grid; gap: var(--space-md); list-style: none; margin: 0; padding: 0; counter-reset: oracle-step; }
+        .sales-oracle__step { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: var(--space-sm); color: var(--color-ink-2); line-height: 1.55; counter-increment: oracle-step; }
+        .sales-oracle__step::before { content: counter(oracle-step); display: grid; place-items: center; width: 2rem; height: 2rem; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+        .sales-oracle__step strong { display: block; margin-block-end: var(--space-3xs); color: var(--color-ink); }
+        .sales-oracle__outputs { display: grid; gap: var(--space-md); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
+        .sales-oracle__output-list { display: grid; gap: var(--space-sm); margin: 0; padding: 0; list-style: none; }
+        .sales-oracle__output-list li { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); color: var(--color-muted-on-dark); line-height: 1.5; }
+        .sales-oracle__output-list i { margin-block-start: var(--space-3xs); color: var(--color-positive); }
+        .sales-oracle__note { margin: 0; max-width: 70ch; color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.6; }
+        .sales-oracle__workspace { margin-block-start: var(--space-xl); border-block: var(--rule-hair) solid var(--color-rule); }
+        .sales-oracle__workspace summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-sm); align-items: center; padding-block: var(--space-md); cursor: pointer; list-style: none; font-weight: 700; }
+        .sales-oracle__workspace summary::-webkit-details-marker { display: none; }
+        .sales-oracle__workspace summary { white-space: nowrap; }
+        .sales-oracle__workspace summary i { transition: transform var(--dur-short) var(--ease-out); }
+        .sales-oracle__workspace[open] summary i { transform: rotate(45deg); }
+        .sales-oracle__workspace-intro { margin: 0 0 var(--space-md); color: var(--color-ink-2); font-size: var(--text-sm); line-height: 1.5; }
+        .sales-oracle-tool { margin-block-end: var(--space-lg); overflow: hidden; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-lg); background: var(--color-paper); }
         .sales-oracle-tool__header { display: grid; gap: var(--space-sm); padding: var(--space-lg); color: var(--color-paper); background: var(--color-ink-deep); }
         .sales-oracle-tool__eyebrow { display: flex; align-items: center; gap: var(--space-xs); color: #7dd3fc; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
         .sales-oracle-tool__live { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 .25rem rgba(52, 211, 153, .16); }
@@ -104,38 +128,19 @@
         .sales-oracle-tool__document, .sales-oracle-tool__empty { display: flex; justify-content: space-between; gap: var(--space-sm); padding-block: .65rem; border-block-end: var(--rule-hair) solid #e2e8f0; color: var(--color-ink-2); font-size: var(--text-sm); overflow-wrap: anywhere; }
         .sales-oracle-tool__document:last-child, .sales-oracle-tool__empty:last-child { border-block-end: 0; }
         .sales-oracle-tool__document-state { flex: 0 0 auto; color: #047857; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; }
-        .sales-oracle__tracks { display: grid; gap: var(--space-lg); margin-block-start: var(--space-xl); }
-        .sales-oracle__track { min-width: 0; padding-block: var(--space-lg); border-block: var(--rule-hair) solid var(--color-rule); }
-        .sales-oracle__track h3 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; letter-spacing: -0.025em; }
-        .sales-oracle__track > p { margin: 0 0 var(--space-md); color: var(--color-ink-2); line-height: 1.6; }
-        .sales-oracle__steps { display: grid; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
-        .sales-oracle__step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: var(--space-sm); align-items: start; color: var(--color-ink-2); line-height: 1.55; }
-        .sales-oracle__step-index { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); color: var(--color-accent-strong); font-family: var(--font-mono); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
-        .sales-oracle__step strong { display: block; color: var(--color-ink); }
-        .sales-oracle__benefits { display: grid; gap: var(--space-sm); margin-block-start: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-md); background: var(--color-ink-deep); color: var(--color-paper); }
-        .sales-oracle__benefit { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--space-xs); align-items: start; }
-        .sales-oracle__benefit i { color: var(--color-accent); margin-block-start: var(--space-3xs); }
-        .sales-oracle__benefit strong { display: block; margin-block-end: var(--space-3xs); }
-        .sales-oracle__benefit span { color: var(--color-muted-on-dark); font-size: var(--text-sm); line-height: 1.55; }
-        .sales-oracle__closing { display: grid; gap: var(--space-md); align-items: center; margin-block-start: var(--space-xl); }
-        .sales-oracle__closing p { margin: 0; max-width: 68ch; color: var(--color-ink-2); line-height: 1.6; }
-        .sales-oracle__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 3.25rem; width: max-content; max-width: 100%; padding-inline: var(--space-lg); border: var(--rule-hair) solid var(--color-accent); border-radius: var(--radius-pill); background: var(--color-ink-deep); color: var(--color-paper); font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), opacity var(--dur-micro) var(--ease-out); }
-        .sales-oracle__cta:hover { transform: translateY(-1px); }
-        .sales-oracle__cta:active { transform: translateY(1px); }
-        .sales-oracle__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
         .sales-oracle__cta[aria-disabled="true"] { opacity: .55; cursor: not-allowed; pointer-events: none; transform: none; }
-        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } .sales-oracle__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } .sales-oracle__tracks { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); } .sales-oracle__closing { grid-template-columns: minmax(0, 1fr) auto; } }
-        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
+        @media (min-width: 40rem) { .sales-oracle__inner { padding-inline: var(--space-lg); } }
+        @media (min-width: 60rem) { .sales-oracle__head { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); } .sales-oracle__overview { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); } .sales-oracle__outputs { grid-column: 1 / -1; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); } .sales-oracle__output-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sales-oracle-tool__header { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: end; } .sales-oracle-tool__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sales-oracle-tool__panel { border-inline-end: var(--rule-hair) solid var(--color-rule); } .sales-oracle-tool__panel:last-child { border-inline-end: 0; } }
+        @media (prefers-reduced-motion: reduce) { .sales-oracle__cta, .sales-oracle__workspace summary i { transition-duration: 150ms; } .sales-oracle__cta:hover { transform: none; } }
     </style>
 </head>
 <body class="bg-white text-slate-900 antialiased">
-    
+
     <!-- ===== NAVIGATION (Blueway-inspired mega-menu) ===== -->
     <nav id="nav" class="bg-white border-b border-slate-200 sticky top-0 z-50 transition-all">
         <div class="max-w-screen-2xl mx-auto">
             <div class="px-5 md:px-8 py-4 flex items-center justify-between">
-                
+
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
                     <a href="/" class="flex items-center gap-x-2.5">
@@ -146,12 +151,12 @@
                             <span class="font-display text-2xl font-semibold tracking-tighter">KayrosLab</span>
                         </div>
                     </a>
-                    
+
                 </div>
 
                 <!-- Desktop Navigation - Mega Menu Style (visible lg+) -->
                 <div class="hidden lg:flex items-center relative">
-                    
+
                     <!-- Platform (mega menu wide) -->
                     <div class="group px-1">
                         <button class="dropdown-toggle flex items-center gap-x-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors rounded-xl hover:bg-slate-50 cursor-pointer">
@@ -296,7 +301,7 @@
 
                 <!-- Right side -->
                 <div class="flex items-center gap-x-2">
-                    
+
                     <!-- Language Switcher -->
                     <div class="hidden sm:flex items-center border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
                         <a href="/" class="px-2.5 py-1.5 transition-colors hover:bg-slate-50 text-slate-600">EN</a>
@@ -361,7 +366,7 @@
                         <a href="#contact" class="block px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-sky-50 transition-colors">Contact</a>
                     </div>
                 </div>
-                
+
                 <div class="pt-3 mt-2 border-t border-slate-100 space-y-2">
                     <div class="flex border border-slate-200 rounded-xl overflow-hidden text-xs font-medium">
                         <a href="/" class="flex-1 text-center px-3 py-2.5 transition-colors hover:bg-slate-50 text-slate-600">EN</a>
@@ -441,8 +446,8 @@
         </div>
 
         <div class="grid md:grid-cols-4 lg:grid-cols-8 gap-4 stagger-children">
-            
-            
+
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
                 <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-sky-700">01</span>
@@ -451,7 +456,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Réduction du bruit, qualification et scoring des signaux faibles.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Signaux qualifiés</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
                 <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-sky-700">02</span>
@@ -460,7 +465,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Réseau de tendances, ponts bisociatifs et relations stratégiques.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Réseau + ponts</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
                 <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-sky-700">03</span>
@@ -469,7 +474,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Scénarios, Collision Mode et briefs structurés collaboratifs.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Scénarios + brief</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5 border-orange-300 ring-2 ring-orange-100  ">
                 <div class="w-9 h-9 rounded-2xl bg-orange-500 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-white">04</span>
@@ -478,7 +483,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Analyse concurrentielle ontologique : graphe Cytoscape.js, inspecteur de propriétés, query playground, export OWL.</p>
                 <div class="mt-3 text-xs text-orange-600 font-medium">→ Ontologie + Gap Analysis</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
                 <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-sky-700">05</span>
@@ -487,7 +492,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Future-proofing multi-agents : Critic, Devil’s Advocate, Red Team.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Idées challengées</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   ">
                 <div class="w-9 h-9 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-sky-700">06</span>
@@ -496,7 +501,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Votes multi-critères, Working Groups et décision finale structurée.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Décision + livrable</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5  border-emerald-300 ring-2 ring-emerald-100 ">
                 <div class="w-9 h-9 rounded-2xl bg-emerald-500 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-white">07</span>
@@ -505,7 +510,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Trajectoire, roadmap, scénarios déterministes et prévisions KPI TimesFM optionnelles.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Roadmap + KPIs + prévisions</div>
             </div>
-            
+
             <div class="step-card bg-white border border-slate-200 rounded-3xl p-5   border-violet-300 ring-2 ring-violet-100">
                 <div class="w-9 h-9 rounded-2xl bg-violet-500 flex items-center justify-center mb-3">
                     <span class="font-mono font-bold text-lg text-white">08</span>
@@ -514,7 +519,7 @@
                 <p class="text-sm text-slate-600 leading-relaxed">Pilote, déploiement, bilan : jalons suivis et impact réel confronté au projeté.</p>
                 <div class="mt-3 text-xs text-sky-600 font-medium">→ Réalisé vs projeté → boucle</div>
             </div>
-            
+
         </div>
 
         <!-- Positionner detail -->
@@ -562,203 +567,203 @@
             <p class="mt-3 text-slate-600">KayrosLab dispose d'un <strong>Tool Registry</strong> extensible. Les agents (via ReAct) peuvent appeler ces outils de manière autonome ou semi-autonome. Voici les principaux outils associés à chaque étape.</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">01</span>
                     <span class="font-semibold text-sm">Écouter</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>signal_scoring</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>context_enrichment</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>search_regulatory_risks</strong></li>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">02</span>
                     <span class="font-semibold text-sm">Cartographier</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>trend_network_builder</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>bisociation_detector</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>weak_signal_mapper</strong></li>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">03</span>
                     <span class="font-semibold text-sm">Construire</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>scenario_generator</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>brief_structurer</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>collision_mode</strong></li>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">04</span>
                     <span class="font-semibold text-sm">Positionner</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>search_competitors</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>analyze_github_landscape</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>ontology_builder</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>graph_explorer</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>nl_query_playground</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>gap_analyzer</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>owl_exporter</strong></li>
-                    
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">05</span>
                     <span class="font-semibold text-sm">Éprouver</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>red_team_attack</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>calculate_ki_impact</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>risk_assessor</strong></li>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">06</span>
                     <span class="font-semibold text-sm">Arbitrer</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>ki_scorer</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>pdf_livrable_generator</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>vote_aggregator</strong></li>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">07</span>
                     <span class="font-semibold text-sm">Projeter</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>roadmap_builder</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>scenario_simulator</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>kpi_tracker</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>feedback_loop</strong></li>
-                    
-                    
-                    
-                    
+
+
+
+
                 </ul>
             </div>
-            
+
             <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5">
                 <div class="flex items-center gap-x-2 mb-3">
                     <span class="font-mono text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-bold">08</span>
                     <span class="font-semibold text-sm">Réaliser</span>
                 </div>
                 <ul class="text-xs space-y-1.5 text-slate-600">
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>milestone_tracker</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>impact_recorder</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>variance_analyzer</strong></li>
-                    
-                    
+
+
                     <li><i class="fa-solid fa-search w-3.5 mr-1.5 text-sky-500"></i> <strong>closure_report</strong></li>
-                    
-                    
-                    
-                    
+
+
+
+
                 </ul>
             </div>
-            
+
         </div>
         <div class="mt-8 text-center text-xs text-slate-500">Tous les outils sont déclarés dans le <strong>Tool Registry</strong> et exposés aux agents via function calling. Le registry est extensible (vous pouvez ajouter vos propres outils métier).</div>
     </section>
@@ -1306,13 +1311,43 @@
     <section id="sales-oracle" class="sales-oracle" aria-labelledby="sales-oracle-title">
         <div class="sales-oracle__inner">
             <div class="sales-oracle__head">
-                <h2 id="sales-oracle-title">Voyez ce que le comité d’achat va vraiment décider.</h2>
-                <p>Uploadez le RFP et votre offre. KayrosLab construit le jumeau gouverné du comité d’achat — Finance, Sécurité, Juridique, Opérations, Sponsor. Il fait tourner votre proposition devant eux. Vous anticipez les objections, les attentes et les preuves manquantes. Vous renforcez. Puis vous soumettez avec une longueur d’avance.</p>
+                <h2 id="sales-oracle-title">Sachez ce qui peut bloquer le deal.</h2>
+                <div class="sales-oracle__head-copy">
+                    <p>Avant l’envoi, confrontez votre offre aux attentes de la Finance, de la Sécurité, du Juridique, des Opérations et du sponsor. Sales Oracle montre les objections à traiter et les preuves encore manquantes.</p>
+                    <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=Simulation%20KayrosLab%20Sales%20Oracle">Répéter mon offre<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
             </div>
 
-            <figure class="sales-oracle__figure">
-                <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Agent hybride reliant un comité de direction et un réseau de veto acheteurs à une proposition commerciale">
-            </figure>
+            <div class="sales-oracle__overview">
+                <figure class="sales-oracle__figure">
+                    <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Agent hybride reliant un comité de direction et un réseau de veto acheteurs à une proposition commerciale">
+                </figure>
+
+                <div class="sales-oracle__explanation">
+                    <h3>De l’offre à la répétition en trois étapes</h3>
+                    <ol class="sales-oracle__steps">
+                                                <li class="sales-oracle__step"><span><strong>Ajoutez les documents du deal</strong>Réunissez l’appel d’offres, votre réponse, le prix et les preuves utiles.</span></li>
+                                                <li class="sales-oracle__step"><span><strong>Répétez le comité d’achat</strong>Des agents spécialistes relisent le même dossier du point de vue de chaque décideur.</span></li>
+                                                <li class="sales-oracle__step"><span><strong>Corrigez les points faibles</strong>Répondez aux objections probables, ajoutez les preuves et préparez la négociation.</span></li>
+                                            </ol>
+                </div>
+
+                <aside class="sales-oracle__outputs">
+                    <h3>Ce que vous recevez</h3>
+                    <ul class="sales-oracle__output-list">
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Les objections les plus susceptibles de bloquer l’accord</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>La liste des preuves manquantes, reliées à leur source</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Les conditions et positions de repli pour négocier</li>
+                                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Un brief concis pour la réunion finale</li>
+                                            </ul>
+                </aside>
+
+                <p class="sales-oracle__note">C’est une répétition, pas une prédiction. Chaque réponse simulée est signalée, fondée sur les documents et laissée au jugement humain.</p>
+            </div>
+
+            <details class="sales-oracle__workspace">
+                <summary>Ouvrir l’espace sécurisé<i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                <p class="sales-oracle__workspace-intro">Connectez-vous, créez un dossier et ajoutez les documents sans quitter la page.</p>
 
             <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
                 data-login-required="Connectez votre espace autorisé pour commencer."
@@ -1389,42 +1424,7 @@
                 </div>
                 <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="Corpus Sales Oracle actif"></ul>
             </div>
-
-            <div class="sales-oracle__tracks">
-                <article class="sales-oracle__track">
-                    <h3>Répétez la décision de votre entreprise</h3>
-                    <p>Modélisez une décision stratégique avec les points de vue des dirigeants qui vont la challenger. Le résultat est un dossier de décision, pas une approbation synthétique.</p>
-                    <ol class="sales-oracle__steps">
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Uploader le corpus de décision</strong>Ajoutez proposition, business case, métriques et contraintes ; chaque fait conserve sa source.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Composer le comité augmenté</strong>Sélectionnez des agents système ou personnalisés et assignez des profils hybrides LinkedIn ou Crystal Knows consentis.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Exécuter le swarm cité</strong>Chaque rôle évalue les mêmes preuves et capture GO, GO conditionnel, NO-GO, veto et preuves manquantes.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Arbitrer humainement</strong>Comparez les positions, révélez les frictions et laissez le dirigeant responsable prendre la décision finale.</span></li>
-                                            </ol>
-                </article>
-
-                <article class="sales-oracle__track">
-                    <h3>Stress-testez l’appel d’offres client</h3>
-                    <p>Transformez le comité d’achat en pré-mortem du deal. Répétez la proposition devant les Achats, la Finance, la Sécurité, le Juridique, les Opérations et le sponsor métier.</p>
-                    <ol class="sales-oracle__steps">
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">1</span><span><strong>Uploader le RFP et la proposition</strong>Réunissez exigences, réponse, prix, sécurité, contrat et preuves de delivery dans un corpus contrôlé.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">2</span><span><strong>Cartographier la chaîne de veto</strong>Identifiez acheteurs, influenceurs, détenteurs du budget, évaluateurs et porteurs du veto ; n’appliquez que les signaux de personnalité autorisés.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">3</span><span><strong>Simuler objections et preuves manquantes</strong>Reliez chaque objection à une preuve source, une règle de rôle ou une hypothèse explicitement étiquetée.</span></li>
-                                                <li class="sales-oracle__step"><span class="sales-oracle__step-index">4</span><span><strong>Réécrire et négocier</strong>Produisez une meilleure offre, la matrice d’objections, la checklist de GO conditionnel et le brief de négociation.</span></li>
-                                            </ol>
-                </article>
-            </div>
-
-            <div class="sales-oracle__benefits">
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Anticipez les attentes de chaque rôle</strong><span>Finance, Sécurité, Juridique, Ops, Sponsor : voyez ce que chacun va réellement regarder et exiger.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Renforcez l’offre avec les bonnes preuves</strong><span>Identifiez les preuves manquantes et adaptez le dossier à ce qui compte vraiment pour chaque décideur.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Entrez en négociation avec une longueur d’avance</strong><span>Objections anticipées, conditions de repli et arguments déjà testés : vous arrivez préparé.</span></div></div>
-                                <div class="sales-oracle__benefit"><i class="fa-solid fa-check" aria-hidden="true"></i><div><strong>Gardez une simulation gouvernée et traçable</strong><span>Consentement, provenance des sources, isolation tenant et arbitrage humain restent attachés à chaque run.</span></div></div>
-                            </div>
-
-            <div class="sales-oracle__closing">
-                <p>Le Sales Oracle est un système de répétition décisionnelle, pas un lecteur de pensée ni un moteur de prédiction. Il étiquette les retours simulés, utilise des connecteurs officiels ou exports autorisés et ne remplace jamais la décision du vrai client.</p>
-                <a class="sales-oracle__cta" href="mailto:contact@kayroslab.com?subject=Simulation%20KayrosLab%20Sales%20Oracle">Simuler mon comité d’achat<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            </div>
+            </details>
         </div>
     </section>
 
@@ -1579,71 +1579,71 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-sm">
-                    
-                    
+
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Structure du processus</td>
                         <td class="px-4 py-4 text-center text-slate-500">Conversation linéaire libre</td>
                         <td class="px-4 py-4 text-center text-slate-500">Collecte + vote d&#39;idées</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Processus cyclique 8 étapes</strong></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Raisonnement &amp;amp; Agents</td>
                         <td class="px-4 py-4 text-center text-slate-500">Un seul modèle générique</td>
                         <td class="px-4 py-4 text-center text-slate-500">IA d&#39;assistance limitée</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Multi-agents spécialisés</strong><br><span class="text-xs">(Red Team, Devil's Advocate, Bisociateur…)</span></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Mémoire &amp;amp; Continuité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Contexte de session limité</td>
                         <td class="px-4 py-4 text-center text-slate-500">Base d&#39;idées simple</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Shared Memory + Vector Memory</strong><br><span class="text-xs">Recherche sémantique persistante</span></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Robustesse &amp;amp; Résilience</td>
                         <td class="px-4 py-4 text-center text-slate-500">Aucune (hallucinations fréquentes)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Retry + Circuit Breaker + Fallback</strong></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Traçabilité &amp;amp; Audit</td>
                         <td class="px-4 py-4 text-center text-slate-500">Faible / conversation éphémère</td>
                         <td class="px-4 py-4 text-center text-slate-500">Historique basique</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Timeline complète + scoring KI + logs agents</strong></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Gouvernance Humaine</td>
                         <td class="px-4 py-4 text-center text-slate-500">Informelle (prompt engineering)</td>
                         <td class="px-4 py-4 text-center text-slate-500">Workflows de validation simples</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Human-in-the-Loop structuré</strong><br><span class="text-xs">Votes multi-critères, veto COMEX, Working Groups</span></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Souveraineté des données</td>
                         <td class="px-4 py-4 text-center text-slate-500">Cloud uniquement (dépendance)</td>
                         <td class="px-4 py-4 text-center text-slate-500">SaaS cloud généralement</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">LLM-ready local (Ollama)</strong><br><span class="text-xs">Mode souverain P1 : zéro egress de données</span></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Déploiement</td>
                         <td class="px-4 py-4 text-center text-slate-500">SaaS uniquement</td>
                         <td class="px-4 py-4 text-center text-slate-500">SaaS cloud</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Standalone (1 fichier HTML) → Local → Cloud</strong></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="px-6 py-4 font-semibold text-slate-900">Cas d&#39;usage principal</td>
                         <td class="px-4 py-4 text-center text-slate-500">Génération de contenu &amp;amp; assistance</td>
                         <td class="px-4 py-4 text-center text-slate-500">Boîte à idées collaborative</td>
                         <td class="px-4 py-4 text-center bg-sky-50"><strong class="text-sky-700">Idéation stratégique de haut niveau + décisions auditables</strong></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -1657,8 +1657,8 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            
+
+
             <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-slate-200">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P0 — Standalone</div>
                 <div class="text-3xl font-bold mb-4">Gratuit</div>
@@ -1669,10 +1669,10 @@
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Mode Mock (zéro setup, zéro coût)</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Mémoire vectorielle émulée</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Export PDF local</span></li>
-                    
+
                 </ul>
             </div>
-            
+
             <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-sky-300 popular">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P1 — Souverain</div>
                 <div class="text-3xl font-bold mb-4">Sur devis</div>
@@ -1683,10 +1683,10 @@
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Zéro sortie de données</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Architecture compatible HDS</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Gouvernance complète : gates humains réels</span></li>
-                    
+
                 </ul>
             </div>
-            
+
             <div class="pricing-card bg-white border-2 rounded-3xl p-7 border-slate-200">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">P2 — Cloud</div>
                 <div class="text-3xl font-bold mb-4">Abonnement</div>
@@ -1697,12 +1697,12 @@
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Authentification utilisateur + multi-tenant</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Collaboration : campagnes, commentaires, modération</span></li>
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Reporting, tableau de bord, suivi d&#39;impact</span></li>
-                    
+
                     <li class="flex items-start gap-x-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span>Extensibilité : connecteurs Slack/Teams</span></li>
-                    
+
                 </ul>
             </div>
-            
+
         </div>
 
         <div class="text-center mt-8">
@@ -1721,8 +1721,8 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            
-            
+
+
             <div class="bg-white border border-slate-200 rounded-3xl p-6">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Industrie Pharmaceutique</div>
                 <h4 class="font-semibold text-lg mb-2">Priorisation de portefeuille R&amp;D</h4>
@@ -1733,7 +1733,7 @@
                     <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> 3 risques cachés détectés (Red Team)</div>
                 </div>
             </div>
-            
+
             <div class="bg-white border border-slate-200 rounded-3xl p-6">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Banque &amp; Assurance</div>
                 <h4 class="font-semibold text-lg mb-2">Veille réglementaire innovante</h4>
@@ -1744,7 +1744,7 @@
                     <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> +22% de taux d&#39;innovation en conformité</div>
                 </div>
             </div>
-            
+
             <div class="bg-white border border-slate-200 rounded-3xl p-6">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Industrie &amp; Construction</div>
                 <h4 class="font-semibold text-lg mb-2">Roadmap technologique Industrie 4.0</h4>
@@ -1755,7 +1755,7 @@
                     <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> Écart budgétaire &lt; 8% (Projeter)</div>
                 </div>
             </div>
-            
+
             <div class="bg-white border border-slate-200 rounded-3xl p-6">
                 <div class="text-xs font-semibold uppercase tracking-wider text-sky-600 mb-2">Retail &amp; e-commerce</div>
                 <h4 class="font-semibold text-lg mb-2">Expérience client nouvelle génération</h4>
@@ -1766,7 +1766,7 @@
                     <div class="flex items-center gap-x-2 text-xs bg-emerald-50 text-emerald-700 rounded-lg px-3 py-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> ROI 3,4× à 18 mois (simulé)</div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
@@ -1872,7 +1872,7 @@
     <script>
         (function() {
             var nav = document.getElementById('nav');
-            
+
             // Nav scroll effect
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 20) {
@@ -1881,7 +1881,7 @@
                     nav.classList.remove('nav-scrolled', 'bg-white/95', 'backdrop-blur-lg');
                 }
             });
-            
+
             // ---- Desktop mega-menu: click support for touch devices ----
             document.querySelectorAll('.group .dropdown-toggle').forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
@@ -1904,12 +1904,12 @@
                     btn.classList.remove('active');
                 });
             });
-            
+
             // ---- Mobile burger menu ----
             var burgerBtn = document.getElementById('burger-btn');
             var mobileMenu = document.getElementById('mobile-menu');
             var burgerIcon = document.getElementById('burger-icon');
-            
+
             function closeMobileMenu() {
                 mobileMenu.classList.remove('open');
                 if (burgerIcon) {
@@ -1917,7 +1917,7 @@
                     burgerIcon.classList.add('fa-bars');
                 }
             }
-            
+
             function openMobileMenu() {
                 mobileMenu.classList.add('open');
                 if (burgerIcon) {
@@ -1925,7 +1925,7 @@
                     burgerIcon.classList.add('fa-xmark');
                 }
             }
-            
+
             if (burgerBtn && mobileMenu) {
                 burgerBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1936,7 +1936,7 @@
                     }
                 });
             }
-            
+
             // ---- Mobile dropdown toggles ----
             document.querySelectorAll('.mobile-dropdown-toggle').forEach(function(toggle) {
                 toggle.addEventListener('click', function() {
@@ -1951,7 +1951,7 @@
                     }
                 });
             });
-            
+
             // Close mobile menu on link click
             if (mobileMenu) {
                 mobileMenu.querySelectorAll('a').forEach(function(link) {
@@ -1960,7 +1960,7 @@
                     });
                 });
             }
-            
+
             // ---- Smooth scroll for anchor links ----
             document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
                 anchor.addEventListener('click', function(e) {
@@ -1971,7 +1971,7 @@
                     }
                 });
             });
-            
+
             // ---- Intersection Observer for scroll animations ----
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
@@ -1980,7 +1980,7 @@
                     }
                 });
             }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-            
+
             document.querySelectorAll('.animate-on-scroll, .stagger-children').forEach(function(el) {
                 observer.observe(el);
             });
