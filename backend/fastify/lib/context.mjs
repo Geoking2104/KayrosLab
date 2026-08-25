@@ -206,6 +206,14 @@ export default async function buildContext() {
   // poste de dev) trouvait sinon une base vide et echouait a la premiere
   // ecriture. `create table if not exists` rend l'operation idempotente.
   if (pgPool) await applySchema(pgPool);
+  let timesfm = { enabled: false, available: false, reason: 'disabled' };
+  try {
+    const { registerTimesFMFromEnv } = await import('../../adapters/timesfm/index.mjs');
+    timesfm = registerTimesFMFromEnv(tools, { env: process.env, pgPool, logger: console });
+  } catch (e) {
+    console.warn('[kayros] TimesFM tool not registered:', e?.message || e);
+    timesfm = { enabled: false, available: false, reason: 'registration_failed' };
+  }
   let storeBackend = 'memory';
 
   const userStore = USERS_FILE ? new FileUserStore({ path: USERS_FILE }) : new InMemoryUserStore();
@@ -481,7 +489,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
-    engine, salesOracle, salesOracleRepository, objectStorage,
+    engine, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,
     storeBackend,

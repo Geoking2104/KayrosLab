@@ -13,6 +13,7 @@ on:
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
       - 'tests/sales-oracle-site.test.mjs'
+      - 'tests/timesfm-site.test.mjs'
       - 'cycle-timeline.html'
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
@@ -46,7 +47,7 @@ jobs:
           cache-dependency-path: frontend/positionning-app/package-lock.json
 
       - name: Validate public demo JavaScript and CTA wiring
-        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs
+        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs
 
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app

@@ -63,6 +63,7 @@ export * from './audit.mjs';
 export * from './working-group.mjs';
 export * from './adapters/langchain-tools.mjs';
 export * from './adapters/langgraph-runner.mjs';
+export * from './adapters/timesfm-forecast.mjs';
 export * from './connectors-discord.mjs';
 export * from './positionning/index.mjs';
 export * from './quant-guidance.mjs';

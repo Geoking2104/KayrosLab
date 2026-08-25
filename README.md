@@ -71,6 +71,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
 - **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); **Teams (JWT RS256 Azure Bot, Adaptive Cards, gate/EF-20, envoi proactif + webhook)**; Discord (Ed25519, embeds)
 - **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
+- **TimesFM 2.5 forecasting** — optional, isolated KPI forecasts with P10–P90 uncertainty, tenant-scoped persistence and mandatory `SIMULATION` labelling; deterministic projections remain the baseline
 - **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
 
 ---
@@ -449,6 +450,24 @@ See **[core/README.md](core/README.md)** for API-level docs.
 ---
 
 ## Backend API
+
+### Optional TimesFM KPI forecasts
+
+When an idea has at least 20 ordered observations for one KPI, the authenticated
+API can request a TimesFM 2.5 trajectory without adding Python dependencies to
+`core/`:
+
+```bash
+curl -X POST https://api.kayroslab.com/v1/ideas/IDEA_ID/forecast \
+  -H "Authorization: Bearer $KAYROS_JWT" \
+  -H "Content-Type: application/json" \
+  -d '{"kpi":"adoption","horizon":12}'
+```
+
+The response includes point forecasts, P10–P90 quantiles, an uncertainty ratio,
+model provenance and a human-review flag. It is always a simulation. See
+[`docs/TIMESFM_FORECASTING.md`](docs/TIMESFM_FORECASTING.md) for architecture,
+deployment and limitations.
 
 Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 

@@ -126,3 +126,36 @@ create table if not exists sales_oracle_ingestion_jobs (
 
 create index if not exists sales_oracle_jobs_ready on sales_oracle_ingestion_jobs (status, available_at) where status = 'queued';
 create index if not exists sales_oracle_jobs_tenant on sales_oracle_ingestion_jobs (tenant_id, created_at desc);
+
+-- TimesFM 2.5 — tenant-scoped KPI history and latest forecast snapshots.
+-- The model output remains a simulation and is never mixed with observed KPI
+-- readings. Reapplying this schema is safe on every backend start.
+create table if not exists kayros_kpi_history (
+  id bigserial primary key,
+  tenant_id text not null default 'default',
+  idea_id text not null,
+  kpi text not null,
+  ts timestamptz not null default now(),
+  value double precision not null,
+  source text not null default 'monitor'
+);
+
+create index if not exists kayros_kpi_history_lookup
+  on kayros_kpi_history (tenant_id, idea_id, kpi, ts desc, id desc);
+
+create table if not exists kayros_forecasts (
+  tenant_id text not null default 'default',
+  idea_id text not null,
+  kpi text not null default 'impact_score',
+  horizon integer not null check (horizon between 1 and 1000),
+  point_forecast jsonb not null,
+  quantile_forecast jsonb not null,
+  model_id text not null,
+  meta jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  primary key (tenant_id, idea_id, kpi, horizon)
+);
+
+create index if not exists kayros_forecasts_recent
+  on kayros_forecasts (tenant_id, idea_id, updated_at desc);

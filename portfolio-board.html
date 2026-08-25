@@ -8,6 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./tokens.css">
 <script>tailwind.config={theme:{extend:{fontFamily:{display:['Space Grotesk','sans-serif'],body:['Geist','system-ui','sans-serif']}}}};</script>
+<style>
+  .forecast-point{fill:none;stroke:#0284c7;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .forecast-band{fill:#bae6fd;fill-opacity:.55;stroke:none}
+  .forecast-grid{stroke:#e2e8f0;stroke-width:1}
+</style>
 </head>
 <body class="bg-white text-slate-900 antialiased font-body">
 <header class="border-b border-slate-200">
@@ -33,11 +38,50 @@
   </div>
   <div id="stats" class="text-xs text-slate-500"></div>
   <div id="board" class="overflow-x-auto"><p class="text-slate-400 text-sm">Chargez le portfolio.</p></div>
+  <section class="rounded-2xl border border-sky-200 bg-sky-50/40 p-5 space-y-4" aria-labelledby="forecast-title">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="text-[10px] font-bold uppercase tracking-[.18em] text-sky-700">TimesFM 2.5 · simulation</div>
+        <h2 id="forecast-title" class="font-display text-xl font-bold mt-1">Prévision de trajectoire KPI</h2>
+        <p class="text-sm text-slate-600 mt-1">Sélectionnez une idée disposant d’au moins 20 relevés. P10–P90 mesure l’incertitude, pas une garantie.</p>
+      </div>
+      <span id="forecast-service" class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-500">service non vérifié</span>
+    </div>
+    <div class="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_8rem_auto] gap-3 items-end">
+      <div>
+        <label class="text-xs font-bold uppercase text-slate-500">Idée</label>
+        <div id="forecast-idea" class="min-h-10 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-500">Aucune sélection</div>
+      </div>
+      <div>
+        <label for="forecast-kpi" class="text-xs font-bold uppercase text-slate-500">KPI</label>
+        <input id="forecast-kpi" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm" value="impact_score" maxlength="128" />
+      </div>
+      <div>
+        <label for="forecast-horizon" class="text-xs font-bold uppercase text-slate-500">Horizon</label>
+        <input id="forecast-horizon" type="number" min="1" max="256" value="12" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm" />
+      </div>
+      <button id="btn-forecast" type="button" disabled class="rounded-full bg-sky-600 text-white font-semibold px-5 py-2 text-sm disabled:opacity-40">Prévoir</button>
+    </div>
+    <div id="forecast-result" class="hidden rounded-xl border border-slate-200 bg-white p-4">
+      <div class="flex flex-wrap items-center gap-2 text-xs mb-3">
+        <span class="rounded-full bg-amber-100 text-amber-800 font-bold px-2 py-1">SIMULATION</span>
+        <span id="forecast-meta" class="text-slate-500"></span>
+      </div>
+      <svg id="forecast-chart" class="w-full h-64" viewBox="0 0 720 260" role="img" aria-label="Prévision TimesFM avec intervalle P10 à P90"></svg>
+      <div class="flex items-center gap-4 text-xs text-slate-500 mt-2">
+        <span><i class="inline-block w-5 h-0.5 bg-sky-600 align-middle mr-1"></i>prévision ponctuelle</span>
+        <span><i class="inline-block w-5 h-3 bg-sky-200 align-middle mr-1"></i>P10–P90</span>
+      </div>
+    </div>
+    <p id="forecast-message" class="text-sm text-slate-500" aria-live="polite">Chargez le portfolio puis choisissez « Prévoir » sur une idée.</p>
+  </section>
 </main>
 <script>
 (function () {
   const $ = (id) => document.getElementById(id);
-  function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  let selectedIdeaId = null;
+  let selectedIdeaTitle = null;
+  function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
   function headers() {
     const h = { Accept: 'application/json' };
     const t = $('token').value.trim();
@@ -60,15 +104,96 @@
         + (c.ideas || []).map((i) =>
           '<div class="mb-2 rounded-xl bg-white border border-slate-200 p-2 text-xs">'
           + '<div class="font-semibold text-slate-800 line-clamp-2">' + esc(i.title || i.id) + '</div>'
-          + '<div class="text-slate-400 mt-1">' + esc(i.status) + '</div></div>'
+          + '<div class="flex items-center justify-between gap-2 mt-1"><span class="text-slate-400">' + esc(i.status) + '</span>'
+          + '<button type="button" data-forecast-idea="' + esc(i.id) + '" data-forecast-title="' + esc(i.title || i.id) + '" class="text-sky-700 font-semibold hover:underline">Prévoir</button></div></div>'
         ).join('') + '</div>'
       ).join('') + '</div>';
+      $('board').querySelectorAll('[data-forecast-idea]').forEach((button) => {
+        button.addEventListener('click', () => selectIdea(
+          button.getAttribute('data-forecast-idea'),
+          button.getAttribute('data-forecast-title'),
+        ));
+      });
+      checkForecastService();
     } catch (e) {
       $('board').innerHTML = '<p class="text-red-600 text-sm">' + esc(e.message) + '</p>';
     }
   }
+  function selectIdea(id, title) {
+    selectedIdeaId = id;
+    selectedIdeaTitle = title || id;
+    $('forecast-idea').textContent = selectedIdeaTitle + ' · ' + selectedIdeaId;
+    $('btn-forecast').disabled = false;
+    $('forecast-message').textContent = 'Prêt à calculer une simulation TimesFM.';
+    $('forecast-result').classList.add('hidden');
+    $('forecast-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  async function checkForecastService() {
+    try {
+      const response = await fetch($('api').value.replace(/\/$/, '') + '/v1/forecast/status', { headers: headers() });
+      const data = await response.json().catch(() => ({}));
+      $('forecast-service').textContent = data.available ? 'service prêt' : (data.enabled ? 'service indisponible' : 'service désactivé');
+      $('forecast-service').className = 'rounded-full border px-3 py-1 text-xs ' + (data.available
+        ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+        : 'border-amber-200 bg-amber-50 text-amber-700');
+    } catch (_) {
+      $('forecast-service').textContent = 'service inaccessible';
+    }
+  }
+  function renderForecast(data) {
+    const point = data.point_forecast || [];
+    const rows = data.quantile_forecast || [];
+    const low = rows.map((row) => Number(row[0]));
+    const high = rows.map((row) => Number(row[8]));
+    const values = point.concat(low, high).filter(Number.isFinite);
+    if (!point.length || rows.length !== point.length || !values.length) throw new Error('Réponse de prévision invalide');
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const span = max - min || 1;
+    const x = (index) => 40 + (point.length === 1 ? 320 : index * 640 / (point.length - 1));
+    const y = (value) => 220 - ((value - min) / span) * 180;
+    const upper = high.map((value, index) => x(index) + ',' + y(value));
+    const lower = low.map((value, index) => x(index) + ',' + y(value)).reverse();
+    const line = point.map((value, index) => x(index) + ',' + y(value)).join(' ');
+    const grid = [40, 100, 160, 220].map((gy) => '<line class="forecast-grid" x1="40" y1="' + gy + '" x2="680" y2="' + gy + '" />').join('');
+    $('forecast-chart').innerHTML = '<title>Prévision ' + esc(data.kpi) + ', intervalle P10 à P90</title>'
+      + grid + '<polygon class="forecast-band" points="' + upper.concat(lower).join(' ') + '" />'
+      + '<polyline class="forecast-point" points="' + line + '" />'
+      + '<text x="40" y="245" font-size="11" fill="#64748b">t+1</text>'
+      + '<text x="650" y="245" font-size="11" fill="#64748b">t+' + point.length + '</text>';
+    const uncertainty = Number(data.uncertainty?.ratio || 0);
+    $('forecast-meta').textContent = data.history_points + ' observations · horizon ' + data.horizon
+      + ' · incertitude ' + uncertainty.toFixed(2)
+      + (data.requires_human_review ? ' · revue humaine requise' : '')
+      + (data.cached ? ' · cache' : '');
+    $('forecast-result').classList.remove('hidden');
+  }
+  async function forecast() {
+    if (!selectedIdeaId) return;
+    const kpi = $('forecast-kpi').value.trim();
+    const horizon = Number($('forecast-horizon').value);
+    $('btn-forecast').disabled = true;
+    $('forecast-message').textContent = 'Calcul de la simulation…';
+    try {
+      const response = await fetch($('api').value.replace(/\/$/, '') + '/v1/ideas/' + encodeURIComponent(selectedIdeaId) + '/forecast', {
+        method: 'POST', headers: Object.assign(headers(), { 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ kpi, horizon }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || ('HTTP ' + response.status));
+      renderForecast(data);
+      $('forecast-message').textContent = data.governance_label || 'SIMULATION';
+    } catch (error) {
+      $('forecast-result').classList.add('hidden');
+      $('forecast-message').textContent = error.message;
+    } finally {
+      $('btn-forecast').disabled = false;
+    }
+  }
   $('btn-load').addEventListener('click', load);
+  $('btn-forecast').addEventListener('click', forecast);
   const u = new URL(location.href);
+  $('api').value = location.hostname.endsWith('kayroslab.com') ? 'https://api.kayroslab.com' : 'http://localhost:8787';
   if (u.searchParams.get('api')) $('api').value = u.searchParams.get('api');
 })();
 </script>

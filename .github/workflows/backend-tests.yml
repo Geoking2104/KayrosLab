@@ -8,6 +8,8 @@ on:
       - 'backend/fastify/lib/**'
       - 'backend/fastify/routes/**'
       - 'backend/fastify/plugins/**'
+      - 'backend/adapters/timesfm/**'
+      - 'backend/timesfm-service/**'
       - 'backend/fastify/package.json'
       - 'backend/fastify/package-lock.json'
       - 'core/connectors.mjs'
@@ -16,6 +18,7 @@ on:
       - 'core/connectors-slack-deep.mjs'
       - 'core/governance.mjs'
       - 'core/auth.mjs'
+      - 'core/adapters/timesfm-forecast.mjs'
       - '.github/workflows/backend-tests.yml'
   pull_request:
     branches: [main]
@@ -24,7 +27,10 @@ on:
       - 'backend/fastify/lib/**'
       - 'backend/fastify/routes/**'
       - 'backend/fastify/plugins/**'
+      - 'backend/adapters/timesfm/**'
+      - 'backend/timesfm-service/**'
       - 'backend/fastify/package.json'
+      - 'core/adapters/timesfm-forecast.mjs'
       - '.github/workflows/backend-tests.yml'
 
 jobs:
@@ -35,9 +41,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Install backend dependencies
         working-directory: backend/fastify
         run: npm install --no-package-lock --ignore-scripts
       - name: Run backend test suite
         working-directory: backend/fastify
         run: npm test
+      - name: Compile-check isolated TimesFM service
+        run: python -m py_compile backend/timesfm-service/timesfm_service.py

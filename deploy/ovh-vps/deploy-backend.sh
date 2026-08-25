@@ -95,6 +95,13 @@ if [[ -d "${APP_DIR}/core" ]]; then
   ( cd "${APP_DIR}/core" && node --test ) || { echo "ERREUR : tests du coeur en echec, deploiement interrompu." >&2; exit 1; }
 fi
 
+# ── TimesFM 2.5 (optional, isolated, loopback-only) ──────────────────────────
+if grep -qiE '^KAYROS_TIMESFM_ENABLED=(1|true|yes|on)$' "${BACKEND_DIR}/.env"; then
+  APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-timesfm.sh"
+else
+  echo "TimesFM disabled — deterministic projection remains available."
+fi
+
 pm2 startOrReload "${BACKEND_DIR}/ecosystem.config.cjs" --env production
 pm2 save
 

@@ -168,6 +168,19 @@ export default async function portfolioRoute(app) {
       const kpis = idea.roadmap?.kpis ?? [];
       let impact = idea.impact ?? emptyImpact();
       for (const r of parsed.data.readings) impact = recordActual(impact, { kpiId: r.kpiId, value: r.value, ts: r.ts });
+      if (ctx.pgPool) {
+        try {
+          const { persistKpiReadings } = await import('../../adapters/timesfm/index.mjs');
+          await persistKpiReadings(ctx.pgPool, {
+            tenantId: me.tenantId,
+            ideaId: idea.id,
+            readings: parsed.data.readings,
+            source: 'execution-monitor',
+          });
+        } catch (error) {
+          app.log?.warn?.(`[TimesFM] KPI history persistence failed: ${error.message}`);
+        }
+      }
       const { alerts, drifts, signals, ok } = evaluateKpisWithDrift(kpis, impact.releves, { ideaId: idea.id });
       let reArbitrage = null;
       if (signals.length) {

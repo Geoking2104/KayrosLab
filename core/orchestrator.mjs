@@ -11,6 +11,7 @@ import { createAllAgents, AGENT_TYPES } from './agents/index.mjs';
 import { defaultFallbackSteps } from './agents/planner-agent.mjs';
 import { parsePlanSteps, ensureSynthesizerLast, extractFirstArray, salvageObjects } from './plan-parse.mjs';
 import { resolveMemoryScope } from './memory-scope.mjs';
+import { summarizeForecastForMemory } from './adapters/timesfm-forecast.mjs';
 import {
   runPositionningAnalysis,
   factsFromPositionning,
@@ -178,7 +179,7 @@ export class Orchestrator {
 
     // Go : roadmap + ressources/budget + projections probabilistes (chiffres deterministes).
     const milestones = decision.milestones ?? [];
-    let ressources = null, projections = null;
+    let ressources = null, projections = null, forecast = null;
     if (hasTool('estimate_resources')) {
       try {
         ressources = await this.tools.call('estimate_resources', { milestones, costHypotheses: decision.costHypotheses ?? {} }, { ideaId });
@@ -189,6 +190,36 @@ export class Orchestrator {
         projections = await this.tools.call('simulate_trajectory', { scenarios: decision.scenarios, variables: decision.variables ?? [], iterations: ctx.iterations, seed: ctx.seed }, { ideaId });
       } catch { projections = null; }
     }
+    const forecastSeries = Array.isArray(decision.kpiHistory)
+      ? decision.kpiHistory
+      : (Array.isArray(decision.metrics) ? decision.metrics : null);
+    if (hasTool('projection.forecast') && forecastSeries?.length >= 20) {
+      const kpi = decision.forecastKpi || 'impact_score';
+      const horizon = Number.isInteger(ctx.projectionHorizon) ? ctx.projectionHorizon : 12;
+      try {
+        const batch = await this.tools.call('projection.forecast', {
+          inputs: [forecastSeries], ideaIds: [ideaId], kpi, horizon,
+        }, { ideaId, tenantId: ctx.tenantId || null });
+        forecast = {
+          point_forecast: batch.point_forecast[0],
+          quantile_forecast: batch.quantile_forecast[0],
+          quantiles: batch.quantiles,
+          uncertainty: batch.meta[0]?.uncertainty || null,
+          requires_human_review: batch.meta[0]?.requiresHumanReview === true,
+          model_id: batch.model_id,
+          simulated: true,
+          governance_label: batch.governance_label,
+        };
+        if (!batch.cached && this._hasLayered() && typeof this.layered.distillScenario === 'function') {
+          await this.layered.distillScenario(summarizeForecastForMemory({
+            ideaId, kpi, horizon, point: forecast.point_forecast,
+            uncertainty: forecast.uncertainty, modelId: forecast.model_id,
+          }));
+        }
+      } catch {
+        forecast = null;
+      }
+    }
     const roadmap = {
       jalons: milestones,
       raci: decision.raci ?? [],
@@ -198,7 +229,7 @@ export class Orchestrator {
       gatesFuturs: decision.gatesFuturs ?? [],
     };
     this.memory?.addContribution?.({ actor: 'Projeter', content: `roadmap Go (${milestones.length} jalons)` });
-    return { ...base, status: 'Go', roadmap, projections };
+    return { ...base, status: 'Go', roadmap, projections, forecast };
   }
 
   async monitorProjection({ kpis = [], readings = [] } = {}, ctx = {}) {

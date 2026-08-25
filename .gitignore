@@ -4,6 +4,10 @@ dist/
 *.log
 .env
 .env.local
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
 
 # Artefacts generes par les suites de tests (memoire de travail du core).
 .kayros-memory.json

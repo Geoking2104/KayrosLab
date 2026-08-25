@@ -447,6 +447,30 @@ test('Orchestrator.project : Go -> roadmap + ressources + projections', async ()
   assert.equal(out.projections.valeurAttendue, 50);
 });
 
+test('Orchestrator.project batches an optional TimesFM KPI history without replacing deterministic projections', async () => {
+  const eng = createEngine();
+  eng.tools.register({
+    name: 'projection.forecast', inputKeys: ['inputs'], sideEffect: 'read',
+    handler: async ({ inputs, horizon }) => ({
+      point_forecast: [Array.from({ length: horizon }, (_, index) => inputs[0].at(-1) + index + 1)],
+      quantile_forecast: [Array.from({ length: horizon }, () => [10, 11, 12, 13, 14, 15, 16, 17, 18])],
+      quantiles: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+      meta: [{ uncertainty: { ratio: 0.2, high: false }, requiresHumanReview: false }],
+      model_id: 'timesfm-test', governance_label: 'SIMULATION', cached: false,
+    }),
+  });
+  eng.orchestrator.tools = eng.tools;
+  const out = await eng.orchestrator.project({
+    status: 'Go',
+    scenarios: [{ probability: 1, value: 50 }],
+    kpiHistory: Array.from({ length: 20 }, (_, index) => index + 1),
+  }, { ideaId: 'forecast-1', projectionHorizon: 3 });
+  assert.equal(out.projections.valeurAttendue, 50);
+  assert.deepEqual(out.forecast.point_forecast, [21, 22, 23]);
+  assert.equal(out.forecast.simulated, true);
+  assert.equal(eng.layered.getScenarios({ ideaId: 'forecast-1' }).length, 1);
+});
+
 test('Orchestrator.project : No-Go -> capitalisation ; Revision -> renvoi Eprouver', async () => {
   const eng = createEngine();
   const nogo = await eng.orchestrator.project({ status: 'No-Go', apprentissages: ['a', 'b'] }, { ideaId: 'p2' });
