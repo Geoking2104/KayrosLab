@@ -25,6 +25,9 @@ i18n.configure({
 app.use(i18n.init);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/tokens.css', (_req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'tokens.css'));
+});
 
 // Make i18n available in all views
 app.use((req, res, next) => {
@@ -39,14 +42,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // --- Routes ---
 app.get('/', (req, res) => {
-	res.render('index', {
+	res.render('homepage', {
 		locale: req.getLocale(),
 		path: req.path,
 	});
 });
 
 app.get('/index.html', (req, res) => {
-	res.render('index', {
+	res.render('homepage', {
 		locale: req.getLocale(),
 		path: req.path,
 	});
@@ -96,7 +99,7 @@ app.get('/whitepaper-hackathon.html', (req, res) => {
 
 // --- Serve French version at /index.fr.html (for static build compatibility) ---
 app.get('/index.fr.html', (req, res) => {
-	res.render('index', { locale: 'fr' });
+	res.render('homepage', { locale: 'fr' });
 });
 
 // --- Language switch redirect ---

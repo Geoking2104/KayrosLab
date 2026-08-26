@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<%= locale %>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>KayrosLab • Offre Commerciale Entreprises | Atelier d&#39;Idéation Agentique Hybride</title>
-    <meta name="description" content="Répétez une décision de comité exécutif ou d’achat avec des agents hybrides gouvernés avant la réunion.">
+    <title><%= __('site_title') %></title>
+    <meta name="description" content="<%= __('simple_meta_description') %>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600&family=Geist:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -549,31 +549,31 @@
     </style>
 </head>
 <body>
-    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <a class="skip-link" href="#main"><%= __('simple_skip') %></a>
 
     <div class="nav-wrap">
-        <nav class="nav-pill" aria-label="Navigation principale">
+        <nav class="nav-pill" aria-label="<%= __('simple_nav_label') %>">
             <a class="wordmark" href="/">KayrosLab</a>
             <div class="nav-links">
-                <a href="#how-it-works">Produit</a>
-                <a href="#use-cases">Cas d’usage</a>
-                <a href="#trust">Confiance</a>
-                <a href="/whitepaper-kayroslab.html">Ressources</a>
+                <a href="#how-it-works"><%= __('simple_nav_product') %></a>
+                <a href="#use-cases"><%= __('simple_nav_use_cases') %></a>
+                <a href="#trust"><%= __('simple_nav_trust') %></a>
+                <a href="/whitepaper-kayroslab.html"><%= __('simple_nav_resources') %></a>
             </div>
-            <div class="language-links" aria-label="Langue">
-                <a href="/" >EN</a>
-                <a href="/index.fr.html" aria-current=&#34;page&#34;>FR</a>
+            <div class="language-links" aria-label="<%= __('simple_language_label') %>">
+                <a href="/" <%= locale === 'en' ? 'aria-current="page"' : '' %>>EN</a>
+                <a href="/index.fr.html" <%= locale === 'fr' ? 'aria-current="page"' : '' %>>FR</a>
             </div>
-            <a class="button nav-cta" href="mailto:contact@kayroslab.com?subject=R%C3%A9p%C3%A9tition%20de%20d%C3%A9cision%20KayrosLab">Réserver</a>
+            <a class="button nav-cta" href="mailto:<%= __('footer_email') %>?subject=<%= encodeURIComponent(__('simple_book_subject')) %>"><%= __('simple_nav_book') %></a>
             <details class="mobile-nav">
-                <summary aria-label="Ouvrir le menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></summary>
+                <summary aria-label="<%= __('simple_menu') %>"><i class="fa-solid fa-bars" aria-hidden="true"></i></summary>
                 <div class="mobile-nav__panel">
-                    <a href="#how-it-works">Produit</a>
-                    <a href="#use-cases">Cas d’usage</a>
-                    <a href="#trust">Confiance</a>
-                    <a href="/whitepaper-kayroslab.html">Ressources</a>
-                    <a href="/">Anglais</a>
-                    <a href="/index.fr.html">Français</a>
+                    <a href="#how-it-works"><%= __('simple_nav_product') %></a>
+                    <a href="#use-cases"><%= __('simple_nav_use_cases') %></a>
+                    <a href="#trust"><%= __('simple_nav_trust') %></a>
+                    <a href="/whitepaper-kayroslab.html"><%= __('simple_nav_resources') %></a>
+                    <a href="/"><%= __('simple_language_en') %></a>
+                    <a href="/index.fr.html"><%= __('simple_language_fr') %></a>
                 </div>
             </details>
         </nav>
@@ -582,51 +582,51 @@
     <main id="main">
         <header class="site-frame hero">
             <div class="hero-copy">
-                <h1>Répétez la décision avant la réunion.</h1>
-                <p>Construisez un jumeau gouverné de votre comité exécutif ou d’achat avec des agents hybrides. Faites émerger les veto, objections et preuves manquantes avant qu’ils ne coûtent du temps ou une affaire.</p>
+                <h1><%= __('simple_hero_title') %></h1>
+                <p><%= __('simple_hero_copy') %></p>
                 <div class="hero-actions">
-                    <a class="button button--primary" href="/kayroslab-complete-with-ai-agents.html">Lancer une répétition<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                    <a class="button" href="#sample-dossier">Voir un dossier exemple</a>
+                    <a class="button button--primary" href="/kayroslab-complete-with-ai-agents.html"><%= __('simple_hero_primary') %><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="button" href="#sample-dossier"><%= __('simple_hero_secondary') %></a>
                 </div>
             </div>
 
-            <aside class="dossier-preview" aria-label="Résumé d’un dossier de décision exemple">
+            <aside class="dossier-preview" aria-label="<%= __('simple_preview_aria') %>">
                 <div class="dossier-preview__head">
-                    <span class="dossier-preview__status">SIMULATION</span>
-                    <span>Proposition client</span>
+                    <span class="dossier-preview__status"><%= __('simple_preview_status') %></span>
+                    <span><%= __('simple_preview_case') %></span>
                 </div>
-                <h2>Dossier de décision</h2>
+                <h2><%= __('simple_preview_title') %></h2>
                 <dl>
-                    <div class="dossier-preview__row"><dt>Carte du comité</dt><dd>Sponsor · Finance · Sécurité · Juridique · Opérations</dd></div>
-                    <div class="dossier-preview__row"><dt>Veto probable</dt><dd>Les preuves de sécurité sont incomplètes</dd></div>
-                    <div class="dossier-preview__row"><dt>Preuves manquantes</dt><dd>Rétention des données · reprise · responsable de livraison</dd></div>
-                    <div class="dossier-preview__row"><dt>Action recommandée</dt><dd>Ajouter les preuves, nommer les responsables, répéter la négociation</dd></div>
+                    <div class="dossier-preview__row"><dt><%= __('simple_preview_map_label') %></dt><dd><%= __('simple_preview_map_value') %></dd></div>
+                    <div class="dossier-preview__row"><dt><%= __('simple_preview_veto_label') %></dt><dd><%= __('simple_preview_veto_value') %></dd></div>
+                    <div class="dossier-preview__row"><dt><%= __('simple_preview_evidence_label') %></dt><dd><%= __('simple_preview_evidence_value') %></dd></div>
+                    <div class="dossier-preview__row"><dt><%= __('simple_preview_action_label') %></dt><dd><%= __('simple_preview_action_value') %></dd></div>
                 </dl>
             </aside>
         </header>
 
         <section id="use-cases" class="site-frame use-cases" aria-labelledby="use-cases-title">
             <div class="use-cases__head">
-                <h2 id="use-cases-title" class="section-title">Une répétition. Deux moments décisifs.</h2>
-                <p class="section-copy">Utilisez le même processus gouverné pour une décision interne de comité exécutif ou un comité d’achat client. Les rôles changent ; les preuves, la traçabilité et le jugement humain restent constants.</p>
+                <h2 id="use-cases-title" class="section-title"><%= __('simple_use_cases_title') %></h2>
+                <p class="section-copy"><%= __('simple_use_cases_copy') %></p>
             </div>
             <div class="use-case-grid">
                 <article class="use-case">
-                    <h3>Répétition de décision COMEX</h3>
-                    <p>Testez une option stratégique avant la réunion réelle.</p>
+                    <h3><%= __('simple_comex_title') %></h3>
+                    <p><%= __('simple_comex_copy') %></p>
                     <ul class="plain-list">
-                        <li>Combinez agents système, experts personnalisés et profils exécutifs autorisés.</li>
-                        <li>Faites émerger objections, dépendances et critères de décision.</li>
-                        <li>Laissez la décision finale au responsable humain.</li>
+                        <li><%= __('simple_comex_point_1') %></li>
+                        <li><%= __('simple_comex_point_2') %></li>
+                        <li><%= __('simple_comex_point_3') %></li>
                     </ul>
                 </article>
                 <article class="use-case use-case--dark">
-                    <h3>Sales Oracle / répétition d’appel d’offres</h3>
-                    <p>Mettez l’offre à l’épreuve avant qu’elle n’arrive chez le véritable acheteur.</p>
+                    <h3><%= __('simple_rfp_title') %></h3>
+                    <p><%= __('simple_rfp_copy') %></p>
                     <ul class="plain-list">
-                        <li>Cartographiez les préoccupations Finance, Sécurité, Juridique, Opérations et Sponsor.</li>
-                        <li>Reliez chaque objection à une preuve, une règle de rôle ou une hypothèse signalée.</li>
-                        <li>Renforcez la proposition et la position de négociation avant l’envoi.</li>
+                        <li><%= __('simple_rfp_point_1') %></li>
+                        <li><%= __('simple_rfp_point_2') %></li>
+                        <li><%= __('simple_rfp_point_3') %></li>
                     </ul>
                 </article>
             </div>
@@ -634,30 +634,30 @@
 
         <section id="how-it-works" class="site-frame method" aria-labelledby="method-title">
             <div>
-                <h2 id="method-title" class="section-title">Des preuves à un dossier prêt à décider.</h2>
-                <p class="section-copy">La méthode KayrosLab complète reste disponible pour aller plus loin. Le parcours d’accueil est volontairement plus court.</p>
-                <a class="text-link" href="/kayroslab-complete-with-ai-agents.html">Explorer la méthode complète<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                <h2 id="method-title" class="section-title"><%= __('simple_method_title') %></h2>
+                <p class="section-copy"><%= __('simple_method_copy') %></p>
+                <a class="text-link" href="/kayroslab-complete-with-ai-agents.html"><%= __('simple_method_link') %><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
             <ol class="method-steps">
-                <li class="method-step"><div><h3>Composer</h3><p>Combinez agents système, agents personnalisés et profils hybrides consentis autour d’une décision.</p></div></li>
-                <li class="method-step"><div><h3>Simuler</h3><p>Lancez des défis structurés, objections, veto et arbitrages sur les mêmes preuves.</p></div></li>
-                <li class="method-step"><div><h3>Décider</h3><p>Recevez un dossier gouverné avec les preuves manquantes, conditions et actions recommandées pour l’arbitrage humain.</p></div></li>
+                <li class="method-step"><div><h3><%= __('simple_step_1_title') %></h3><p><%= __('simple_step_1_copy') %></p></div></li>
+                <li class="method-step"><div><h3><%= __('simple_step_2_title') %></h3><p><%= __('simple_step_2_copy') %></p></div></li>
+                <li class="method-step"><div><h3><%= __('simple_step_3_title') %></h3><p><%= __('simple_step_3_copy') %></p></div></li>
             </ol>
         </section>
 
         <section id="sample-dossier" class="sample" aria-labelledby="sample-title">
             <div class="site-frame sample-grid">
                 <figure>
-                    <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="Schéma Sales Oracle reliant une proposition aux perspectives d’un comité exécutif et d’achat">
+                    <img src="./assets/hybrid-agent-sales-oracle.png" width="1680" height="935" loading="lazy" decoding="async" alt="<%= __('simple_sample_alt') %>">
                 </figure>
                 <div>
-                    <h2 id="sample-title" class="section-title">Voyez la décision, pas un catalogue de fonctions.</h2>
-                    <p class="section-copy">Le dossier transforme une exécution multi-agents en quatre éléments directement utiles pour la prochaine réunion.</p>
+                    <h2 id="sample-title" class="section-title"><%= __('simple_sample_title') %></h2>
+                    <p class="section-copy"><%= __('simple_sample_copy') %></p>
                     <ol class="annotation-list">
-                        <li><span><strong>Carte des parties prenantes</strong>Qui influence, approuve ou peut opposer un veto.</span></li>
-                        <li><span><strong>Carte des objections</strong>Quelles préoccupations sont décisives et lesquelles sont secondaires.</span></li>
-                        <li><span><strong>Liste des preuves</strong>Ce qui manque et la source de chaque affirmation.</span></li>
-                        <li><span><strong>Gate humain</strong>Qui approuve, rejette ou demande une révision—avec une piste d’audit conservée.</span></li>
+                        <li><span><strong><%= __('simple_output_1_title') %></strong><%= __('simple_output_1_copy') %></span></li>
+                        <li><span><strong><%= __('simple_output_2_title') %></strong><%= __('simple_output_2_copy') %></span></li>
+                        <li><span><strong><%= __('simple_output_3_title') %></strong><%= __('simple_output_3_copy') %></span></li>
+                        <li><span><strong><%= __('simple_output_4_title') %></strong><%= __('simple_output_4_copy') %></span></li>
                     </ol>
                 </div>
             </div>
@@ -665,108 +665,106 @@
 
         <section id="trust" class="site-frame trust" aria-labelledby="trust-title">
             <div>
-                <h2 id="trust-title" class="section-title">Une simulation aux limites explicites.</h2>
-                <p class="section-copy">KayrosLab répète une décision ; il ne prétend ni lire dans les pensées ni prédire ce qu’une personne réelle dira.</p>
+                <h2 id="trust-title" class="section-title"><%= __('simple_trust_title') %></h2>
+                <p class="section-copy"><%= __('simple_trust_copy') %></p>
                 <div class="trust-links">
-                    <a class="text-link" href="https://github.com/Geoking2104/KayrosLab">Examiner l’architecture<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                    <a class="text-link" href="/whitepaper-kayroslab.html">Lire la note de gouvernance<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="text-link" href="https://github.com/Geoking2104/KayrosLab"><%= __('simple_trust_architecture') %><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                    <a class="text-link" href="/whitepaper-kayroslab.html"><%= __('simple_trust_resources') %><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
             <ul class="trust-list">
-                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Seuls des profils consentis et autorisés sont utilisés.</li>
-                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Les déclarations simulées sont clairement signalées.</li>
-                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Les gates d’approbation humaine restent contraignantes.</li>
-                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Les sources, hypothèses et actions restent auditables.</li>
-                                <li><i class="fa-solid fa-check" aria-hidden="true"></i>Un déploiement souverain ou cloud est disponible.</li>
-                            </ul>
+                <% for (let item = 1; item <= 5; item++) { -%>
+                <li><i class="fa-solid fa-check" aria-hidden="true"></i><%= __('simple_trust_' + item) %></li>
+                <% } -%>
+            </ul>
         </section>
 
         <section class="site-frame closing" aria-labelledby="closing-title">
             <div class="closing-card">
                 <div>
-                    <h2 id="closing-title">Quelle décision ou affaire devez-vous répéter ?</h2>
-                    <p>Apportez une décision réelle. En 30 minutes, nous cadrerons le comité, les preuves et le premier parcours de répétition.</p>
+                    <h2 id="closing-title"><%= __('simple_closing_title') %></h2>
+                    <p><%= __('simple_closing_copy') %></p>
                 </div>
                 <div class="closing-card__action">
-                    <a class="button button--primary" href="mailto:contact@kayroslab.com?subject=R%C3%A9p%C3%A9tition%20de%20d%C3%A9cision%20KayrosLab">Réserver 30 minutes<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="button button--primary" href="mailto:<%= __('footer_email') %>?subject=<%= encodeURIComponent(__('simple_book_subject')) %>"><%= __('simple_closing_cta') %><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <details id="secure-workspace" class="workspace">
-                <summary>Ouvrir l’espace sécurisé<i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
-                <p class="workspace-intro">Connectez-vous, créez un dossier et ajoutez les documents sans quitter la page.</p>
+                <summary><%= __('sales_oracle_workspace_title') %><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+                <p class="workspace-intro"><%= __('sales_oracle_workspace_desc') %></p>
                 <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
-                    data-login-required="Connectez votre espace autorisé pour commencer."
-                    data-connecting="Connexion sécurisée en cours…"
-                    data-connected="Espace connecté. Sélectionnez ou créez un dossier."
-                    data-logged-out="Session fermée. Aucun jeton d’accès n’a été conservé dans le navigateur."
-                    data-creating-case="Création du dossier gouverné…"
-                    data-case-selected="Dossier actif"
-                    data-choose-case="Sélectionner un dossier existant"
-                    data-no-cases="Aucun dossier — créez-en un ci-dessous"
-                    data-no-documents="Le corpus actif ne contient encore aucun document."
-                    data-case-required="Sélectionnez ou créez un dossier avant l’upload."
-                    data-files-required="Sélectionnez au moins un document."
-                    data-upload-complete="Documents vérifiés et placés en file pour l’analyse swarm augmentée."
-                    data-error="L’opération n’a pas pu aboutir."
-                    data-stage-hashing="empreinte SHA-256 locale"
-                    data-stage-signing="autorisation d’upload sécurisée"
-                    data-stage-uploading="upload direct chiffré"
-                    data-stage-verifying="vérification d’intégrité"
-                    data-stage-queued="mise en file d’ingestion">
+                    data-login-required="<%= __('sales_oracle_tool_login_required') %>"
+                    data-connecting="<%= __('sales_oracle_tool_connecting') %>"
+                    data-connected="<%= __('sales_oracle_tool_connected') %>"
+                    data-logged-out="<%= __('sales_oracle_tool_logged_out') %>"
+                    data-creating-case="<%= __('sales_oracle_tool_creating_case') %>"
+                    data-case-selected="<%= __('sales_oracle_tool_case_selected') %>"
+                    data-choose-case="<%= __('sales_oracle_tool_choose_case') %>"
+                    data-no-cases="<%= __('sales_oracle_tool_no_cases') %>"
+                    data-no-documents="<%= __('sales_oracle_tool_no_documents') %>"
+                    data-case-required="<%= __('sales_oracle_tool_case_required') %>"
+                    data-files-required="<%= __('sales_oracle_tool_files_required') %>"
+                    data-upload-complete="<%= __('sales_oracle_tool_upload_complete') %>"
+                    data-error="<%= __('sales_oracle_tool_error') %>"
+                    data-stage-hashing="<%= __('sales_oracle_tool_stage_hashing') %>"
+                    data-stage-signing="<%= __('sales_oracle_tool_stage_signing') %>"
+                    data-stage-uploading="<%= __('sales_oracle_tool_stage_uploading') %>"
+                    data-stage-verifying="<%= __('sales_oracle_tool_stage_verifying') %>"
+                    data-stage-queued="<%= __('sales_oracle_tool_stage_queued') %>">
                     <div class="sales-oracle-tool__header">
                         <div>
-                            <div class="sales-oracle-tool__eyebrow"><span class="sales-oracle-tool__live" aria-hidden="true"></span>Espace sécurisé actif</div>
-                            <h3>Démarrer un dossier Sales Oracle</h3>
+                            <div class="sales-oracle-tool__eyebrow"><span class="sales-oracle-tool__live" aria-hidden="true"></span><%= __('sales_oracle_tool_eyebrow') %></div>
+                            <h3><%= __('sales_oracle_tool_title') %></h3>
                         </div>
-                        <p>L’outil est désormais intégré ici : connectez votre tenant, définissez la décision à tester et uploadez le corpus de preuves directement vers l’API gouvernée.</p>
+                        <p><%= __('sales_oracle_tool_intro') %></p>
                     </div>
                     <p id="so-tool-status" class="sales-oracle-tool__status" role="status" aria-live="polite"></p>
                     <div class="sales-oracle-tool__grid">
                         <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">01 · Espace</div>
-                            <h4>Se connecter en sécurité</h4>
-                            <p>Utilisez le compte provisionné pour votre organisation. Les accès restent isolés dans votre tenant.</p>
+                            <div class="sales-oracle-tool__step">01 · <%= __('sales_oracle_tool_session') %></div>
+                            <h4><%= __('sales_oracle_tool_session_title') %></h4>
+                            <p><%= __('sales_oracle_tool_session_desc') %></p>
                             <form id="so-login-form" class="sales-oracle-tool__form">
-                                <label class="sales-oracle-tool__field">E-mail professionnel<input name="email" type="email" autocomplete="username" required></label>
-                                <label class="sales-oracle-tool__field">Mot de passe<input name="password" type="password" autocomplete="current-password" required></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_email') %><input name="email" type="email" autocomplete="username" required></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_password') %><input name="password" type="password" autocomplete="current-password" required></label>
                                 <div class="sales-oracle-tool__actions">
-                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-lock" aria-hidden="true"></i>Se connecter</button>
-                                    <button id="so-logout" class="sales-oracle-tool__button sales-oracle-tool__button--secondary" type="button" hidden>Se déconnecter</button>
-                                    <a class="sales-oracle-tool__link" href="mailto:contact@kayroslab.com?subject=Acc%C3%A8s%20KayrosLab%20Sales%20Oracle">Demander un accès</a>
+                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-lock" aria-hidden="true"></i><%= __('sales_oracle_tool_connect') %></button>
+                                    <button id="so-logout" class="sales-oracle-tool__button sales-oracle-tool__button--secondary" type="button" hidden><%= __('sales_oracle_tool_disconnect') %></button>
+                                    <a class="sales-oracle-tool__link" href="mailto:<%= __('footer_email') %>?subject=<%= encodeURIComponent(__('sales_oracle_tool_access_subject')) %>"><%= __('sales_oracle_tool_request_access') %></a>
                                 </div>
                             </form>
-                            <p class="sales-oracle-tool__privacy">Le jeton de session reste uniquement en mémoire et disparaît au rafraîchissement ou à la fermeture de la page.</p>
+                            <p class="sales-oracle-tool__privacy"><%= __('sales_oracle_tool_session_privacy') %></p>
                         </article>
                         <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">02 · Dossier de décision</div>
-                            <h4>Cadrer la décision</h4>
-                            <p>Réutilisez un dossier ou créez la question précise que le comité hybride devra éprouver.</p>
+                            <div class="sales-oracle-tool__step">02 · <%= __('sales_oracle_tool_case') %></div>
+                            <h4><%= __('sales_oracle_tool_case_title') %></h4>
+                            <p><%= __('sales_oracle_tool_case_desc') %></p>
                             <fieldset id="so-case-fields" class="sales-oracle-tool__fields">
-                                <label class="sales-oracle-tool__field">Dossiers existants<select id="so-case-select"><option>Aucun dossier — créez-en un ci-dessous</option></select></label>
+                                <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_existing_case') %><select id="so-case-select"><option><%= __('sales_oracle_tool_no_cases') %></option></select></label>
                                 <form id="so-case-form" class="sales-oracle-tool__form" novalidate>
-                                    <label class="sales-oracle-tool__field">Nom du dossier<input name="name" maxlength="300" required></label>
-                                    <label class="sales-oracle-tool__field">Simulation<select name="use_case"><option value="rfp">Appel d’offres client</option><option value="comex_decision">Décision CODIR</option><option value="renewal">Renouvellement de contrat</option><option value="negotiation">Négociation</option></select></label>
-                                    <label class="sales-oracle-tool__field">Question de décision<textarea name="decision_question" maxlength="12000" required></textarea></label>
-                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-folder-plus" aria-hidden="true"></i>Créer le dossier</button>
+                                    <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_case_name') %><input name="name" maxlength="300" required></label>
+                                    <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_use_case') %><select name="use_case"><option value="rfp"><%= __('sales_oracle_tool_use_rfp') %></option><option value="comex_decision"><%= __('sales_oracle_tool_use_comex') %></option><option value="renewal"><%= __('sales_oracle_tool_use_renewal') %></option><option value="negotiation"><%= __('sales_oracle_tool_use_negotiation') %></option></select></label>
+                                    <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_question') %><textarea name="decision_question" maxlength="12000" required></textarea></label>
+                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-folder-plus" aria-hidden="true"></i><%= __('sales_oracle_tool_create_case') %></button>
                                 </form>
                             </fieldset>
                         </article>
                         <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">03 · Preuves</div>
-                            <h4>Uploader le corpus</h4>
-                            <p>Les fichiers sont empreintés localement, envoyés par URL signée à durée limitée puis vérifiés avant ingestion.</p>
+                            <div class="sales-oracle-tool__step">03 · <%= __('sales_oracle_tool_corpus') %></div>
+                            <h4><%= __('sales_oracle_tool_corpus_title') %></h4>
+                            <p><%= __('sales_oracle_tool_corpus_desc') %></p>
                             <form id="so-upload-form" class="sales-oracle-tool__form" novalidate>
                                 <fieldset id="so-upload-fields" class="sales-oracle-tool__fields">
-                                    <label class="sales-oracle-tool__field">Rôle du document<select name="source_type"><option value="rfp">RFP / exigences</option><option value="proposal">Proposition / réponse</option><option value="contract">Contrat</option><option value="security">Sécurité</option><option value="financial">Finance / ROI</option><option value="meeting_notes">Notes de réunion</option><option value="organization">Organisation / comité</option><option value="personality_profile">Profil de personnalité autorisé</option><option value="other">Autre preuve</option></select></label>
-                                    <label class="sales-oracle-tool__field">Documents<input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
-                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>Vérifier et uploader</button>
+                                    <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_source_type') %><select name="source_type"><option value="rfp"><%= __('sales_oracle_tool_source_rfp') %></option><option value="proposal"><%= __('sales_oracle_tool_source_proposal') %></option><option value="contract"><%= __('sales_oracle_tool_source_contract') %></option><option value="security"><%= __('sales_oracle_tool_source_security') %></option><option value="financial"><%= __('sales_oracle_tool_source_financial') %></option><option value="meeting_notes"><%= __('sales_oracle_tool_source_notes') %></option><option value="organization"><%= __('sales_oracle_tool_source_organization') %></option><option value="personality_profile"><%= __('sales_oracle_tool_source_profile') %></option><option value="other"><%= __('sales_oracle_tool_source_other') %></option></select></label>
+                                    <label class="sales-oracle-tool__field"><%= __('sales_oracle_tool_files') %><input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
+                                    <button class="sales-oracle-tool__button" type="submit"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i><%= __('sales_oracle_tool_upload') %></button>
                                 </fieldset>
                             </form>
-                            <p class="sales-oracle-tool__privacy">PDF, DOCX, TXT, Markdown ou CSV · 50 Mo/document · 20 documents/dossier · 250 Mo/dossier.</p>
+                            <p class="sales-oracle-tool__privacy"><%= __('sales_oracle_tool_limits') %></p>
                         </article>
                     </div>
-                    <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="Corpus Sales Oracle actif"></ul>
+                    <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="<%= __('sales_oracle_tool_documents') %>"></ul>
                 </div>
             </details>
         </section>
@@ -774,12 +772,12 @@
 
     <footer class="site-frame site-footer">
         <div class="site-footer__line">
-            <span><strong>KayrosLab</strong> · © 2026 KayrosLab. Tous droits réservés.</span>
-            <nav class="footer-links" aria-label="Navigation de pied de page">
-                <a href="/whitepaper-kayroslab.html">Ressources</a>
+            <span><strong>KayrosLab</strong> · <%- __('footer_rights', new Date().getFullYear()) %></span>
+            <nav class="footer-links" aria-label="<%= __('simple_footer_label') %>">
+                <a href="/whitepaper-kayroslab.html"><%= __('simple_nav_resources') %></a>
                 <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
                 <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
-                <a href="mailto:contact@kayroslab.com">Contact</a>
+                <a href="mailto:<%= __('footer_email') %>"><%= __('simple_contact') %></a>
             </nav>
         </div>
     </footer>

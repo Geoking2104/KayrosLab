@@ -8,6 +8,7 @@ on:
       - 'index.html'
       - 'index.fr.html'
       - 'backend/web/views/index.ejs'
+      - 'backend/web/views/homepage.ejs'
       - 'backend/web/locales/**'
       - 'backend/web/public/assets/**'
       - 'kayroslab-complete-with-ai-agents.html'
