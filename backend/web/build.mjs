@@ -48,13 +48,13 @@ async function build() {
 	console.log('Building static HTML files...');
 	
 	// Build EN version → index.html (default)
-	const enIndex = await renderTemplate('homepage', 'en');
+	const enIndex = await renderTemplate('homepage-studio', 'en');
 	const indexOutput = path.join(outputDir, 'index.html');
 	fs.writeFileSync(indexOutput, enIndex, 'utf-8');
 	console.log(`  ✓ index.html (EN) — ${enIndex.length} bytes`);
 	
 	// Build FR version → index.fr.html
-	const frIndex = await renderTemplate('homepage', 'fr');
+	const frIndex = await renderTemplate('homepage-studio', 'fr');
 	const frOutput = path.join(outputDir, 'index.fr.html');
 	fs.writeFileSync(frOutput, frIndex, 'utf-8');
 	console.log(`  ✓ index.fr.html (FR) — ${frIndex.length} bytes`);

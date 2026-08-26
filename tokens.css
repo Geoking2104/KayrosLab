@@ -1,29 +1,29 @@
-/* KayrosLab design tokens · Hallmark custom system */
+/* KayrosLab simulation-studio tokens · Hallmark custom system */
 :root {
-  --color-paper: oklch(98% 0.007 240);
-  --color-paper-2: oklch(95% 0.012 240);
-  --color-paper-3: oklch(91% 0.018 240);
-  --color-ink: oklch(18% 0.03 252);
-  --color-ink-deep: oklch(13% 0.035 252);
-  --color-ink-2: oklch(39% 0.025 248);
-  --color-muted: oklch(57% 0.022 245);
-  --color-muted-on-dark: oklch(78% 0.018 242);
-  --color-rule: oklch(84% 0.018 240);
-  --color-rule-dark: oklch(30% 0.028 248);
-  --color-accent: oklch(65% 0.17 235);
-  --color-accent-strong: oklch(54% 0.18 240);
-  --color-accent-soft: oklch(92% 0.055 235);
-  --color-accent-ink: oklch(99% 0.004 240);
-  --color-focus: oklch(56% 0.2 225);
-  --color-positive: oklch(69% 0.15 155);
-  --color-positive-soft: oklch(94% 0.045 155);
-  --color-warning: oklch(76% 0.15 76);
-  --color-violet: oklch(68% 0.16 300);
-  --color-danger: oklch(60% 0.2 28);
+  --color-paper: oklch(13% 0.018 245);
+  --color-paper-2: oklch(17% 0.022 245);
+  --color-paper-3: oklch(22% 0.024 245);
+  --color-ink: oklch(95% 0.01 225);
+  --color-ink-deep: oklch(99% 0.005 225);
+  --color-ink-2: oklch(78% 0.014 230);
+  --color-muted: oklch(64% 0.014 235);
+  --color-muted-on-dark: oklch(78% 0.014 230);
+  --color-rule: oklch(30% 0.024 245);
+  --color-rule-dark: oklch(37% 0.028 245);
+  --color-accent: oklch(76% 0.14 210);
+  --color-accent-strong: oklch(69% 0.16 215);
+  --color-accent-soft: oklch(24% 0.055 215);
+  --color-accent-ink: oklch(14% 0.025 235);
+  --color-focus: oklch(84% 0.15 210);
+  --color-positive: oklch(74% 0.13 155);
+  --color-positive-soft: oklch(22% 0.045 155);
+  --color-warning: oklch(79% 0.13 78);
+  --color-violet: oklch(61% 0.12 292);
+  --color-danger: oklch(70% 0.17 28);
 
-  --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-display: "Tomorrow", ui-sans-serif, sans-serif;
   --font-body: "Geist", ui-sans-serif, sans-serif;
-  --font-mono: "Fira Code", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;

@@ -42,14 +42,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // --- Routes ---
 app.get('/', (req, res) => {
-	res.render('homepage', {
+	res.render('homepage-studio', {
 		locale: req.getLocale(),
 		path: req.path,
 	});
 });
 
 app.get('/index.html', (req, res) => {
-	res.render('homepage', {
+	res.render('homepage-studio', {
 		locale: req.getLocale(),
 		path: req.path,
 	});
@@ -99,7 +99,7 @@ app.get('/whitepaper-hackathon.html', (req, res) => {
 
 // --- Serve French version at /index.fr.html (for static build compatibility) ---
 app.get('/index.fr.html', (req, res) => {
-	res.render('homepage', { locale: 'fr' });
+	res.render('homepage-studio', { locale: 'fr' });
 });
 
 // --- Language switch redirect ---

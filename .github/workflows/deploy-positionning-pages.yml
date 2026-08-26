@@ -9,6 +9,7 @@ on:
       - 'index.fr.html'
       - 'backend/web/views/index.ejs'
       - 'backend/web/views/homepage.ejs'
+      - 'backend/web/views/homepage-studio.ejs'
       - 'backend/web/locales/**'
       - 'backend/web/public/assets/**'
       - 'kayroslab-complete-with-ai-agents.html'
@@ -21,6 +22,7 @@ on:
       - 'ontology-explorer.html'
       - 'ontology-panel.html'
       - 'tokens.css'
+      - 'studio.css'
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
       - 'CNAME'
@@ -63,7 +65,7 @@ jobs:
           mkdir -p deploy/assets
 
           # Core static pages (must exist)
-          for f in index.html index.fr.html tokens.css CNAME; do
+          for f in index.html index.fr.html tokens.css studio.css CNAME; do
             if [ ! -f "$f" ]; then
               echo "ERROR: required file missing: $f" >&2
               exit 1
