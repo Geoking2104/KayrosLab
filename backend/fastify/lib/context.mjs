@@ -25,6 +25,7 @@ import {
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
   createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore, PgSalesOracleRepository,
+  PgSwarmStore, PgCollaborationStore,
 } from '../../../core/pg-store.mjs';
 import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
@@ -201,11 +202,19 @@ export default async function buildContext() {
   const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
 
   const pgPool = await createPgPool(process.env);
+  const requirePostgres = /^(1|true|yes)$/i.test(String(process.env.KAYROS_REQUIRE_POSTGRES || ''));
+  if (requirePostgres && !pgPool) {
+    throw new Error('PostgreSQL est requis (KAYROS_REQUIRE_POSTGRES=true), mais DATABASE_URL est absente ou inaccessible');
+  }
   // Le schema est applique au demarrage, pas seulement par le script de
   // deploiement VPS : une instance lancee ailleurs (conteneur, second noeud,
   // poste de dev) trouvait sinon une base vide et echouait a la premiere
   // ecriture. `create table if not exists` rend l'operation idempotente.
   if (pgPool) await applySchema(pgPool);
+  const swarmStore = pgPool ? new PgSwarmStore(pgPool) : null;
+  const collaborationStore = pgPool ? new PgCollaborationStore(pgPool, {
+    messageLeaseSeconds: Number(process.env.KAYROS_COLLAB_MESSAGE_LEASE_SECONDS) || 300,
+  }) : null;
   let timesfm = { enabled: false, available: false, reason: 'disabled' };
   try {
     const { registerTimesFMFromEnv } = await import('../../adapters/timesfm/index.mjs');
@@ -460,6 +469,8 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     // Official LinkedIn Profile API: authenticated member only. Never exposed
     // to clients and never used to scrape arbitrary public profile URLs.
     linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
+    swarmStore,
+    collaborationStore,
     fs: nodeFs,
     path: nodePath,
   });
@@ -478,6 +489,9 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
 
   bindEngineToServer(engine, { llm, tools, governance });
+  for (const adapter of [slackAdapter, discordAdapter, teamsAdapter].filter(Boolean)) {
+    engine.hybridGateway.setAdapter(adapter);
+  }
   if (engine.persistenceReady) {
     await engine.persistenceReady.catch(() => false);
   }
@@ -489,10 +503,10 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
-    engine, salesOracle, salesOracleRepository, objectStorage, timesfm,
+    engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,
-    storeBackend,
+    storeBackend, swarmStore, collaborationStore, requirePostgres,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,

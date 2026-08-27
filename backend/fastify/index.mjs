@@ -7,6 +7,15 @@ import authPlugin from './plugins/auth.mjs';
 
 const app = Fastify({ logger: true, bodyLimit: 1048576 });
 
+// Slack and Discord sign the exact request bytes. Preserve them while still
+// exposing the usual parsed JSON body to routes.
+app.removeContentTypeParser('application/json');
+app.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, done) => {
+  req.rawBody = body;
+  try { done(null, JSON.parse(body)); }
+  catch (error) { done(error); }
+});
+
 // --- initialisation du contexte partage ---
 const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
@@ -55,6 +64,7 @@ await app.register((await import('./routes/comments.mjs')).default);
 await app.register((await import('./routes/reporting.mjs')).default);
 await app.register((await import('./routes/timer.mjs')).default);
 await app.register((await import('./routes/connectors.mjs')).default);
+await app.register((await import('./routes/console.mjs')).default);
 await app.register((await import('./routes/positionning.mjs')).default);
 await app.register((await import('./routes/swarm.mjs')).default);
 await app.register((await import('./routes/sales-oracle.mjs')).default);

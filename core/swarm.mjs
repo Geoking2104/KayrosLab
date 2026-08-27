@@ -259,6 +259,16 @@ export class AgentRegistry {
     registry.set(agentId, validated);
     return clone(validated);
   }
+
+  /** Restore a previously validated tenant definition from shared storage. */
+  upsert(input, { tenantId = null } = {}) {
+    const definition = validateAgentDefinition(input);
+    if (definition.human_profile && definition.human_profile.consent_confirmed !== true) {
+      throw new Error('human_profile: consentement explicite requis');
+    }
+    this._registry(tenantId).set(definition.agent_id, definition);
+    return clone(definition);
+  }
 }
 
 export function normalizeSwarmVerdict(raw) {
@@ -364,14 +374,16 @@ export function aggregateSwarmConsensus(analyses, threshold = 'majority') {
 }
 
 export class SwarmService {
-  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null } = {}) {
+  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null, store = null } = {}) {
     this.llm = llm;
     this.memory = memory;
     this.registry = registry || new AgentRegistry({ systemAgents });
     this.auditSink = auditSink;
     this.profileImporter = profileImporter || new ProfileImportService();
+    this.store = store;
     this.configurations = new Map();
     this.runs = new Map();
+    this.pendingPersistence = new Set();
   }
 
   _key(tenantId, id) { return `${tenantKey(tenantId)}:${id}`; }
@@ -379,6 +391,36 @@ export class SwarmService {
     const entry = { ...event, ts: event.ts || now() };
     try { this.auditSink?.(entry); } catch { /* audit must not break a decision run */ }
     return entry;
+  }
+
+  _persist(operation) {
+    if (!operation || typeof operation.then !== 'function') return;
+    const tracked = Promise.resolve(operation).then(
+      () => ({ ok: true }),
+      (error) => ({ ok: false, error }),
+    );
+    this.pendingPersistence.add(tracked);
+    tracked.then(() => this.pendingPersistence.delete(tracked));
+  }
+
+  async flush() {
+    if (!this.pendingPersistence.size) return true;
+    const results = await Promise.all([...this.pendingPersistence]);
+    const failure = results.find((result) => !result.ok);
+    if (failure) throw failure.error;
+    return true;
+  }
+
+  async hydrateTenant(tenantId = null) {
+    if (!this.store?.loadTenant) return false;
+    const scope = tenantKey(tenantId);
+    const snapshot = await this.store.loadTenant(scope);
+    for (const agent of snapshot.agents || []) this.registry.upsert(agent, { tenantId: scope });
+    for (const config of snapshot.configurations || []) {
+      this.configurations.set(this._key(scope, config.swarm_id), clone(config));
+    }
+    for (const run of snapshot.runs || []) this.runs.set(this._key(scope, run.run_id), clone(run));
+    return true;
   }
 
   createAgent(input, { tenantId = null, by = null } = {}) {
@@ -393,12 +435,14 @@ export class SwarmService {
       });
     }
     const agent = this.registry.create(payload, { tenantId });
+    this._persist(this.store?.saveAgent?.(agent, { tenantId: tenantKey(tenantId) }));
     this._audit({ type: 'swarm.agent.created', agent_id: agent.agent_id, tenant_id: tenantKey(tenantId), by });
     return agent;
   }
 
   updateAgentRules(agentId, patch, { tenantId = null, by = null } = {}) {
     const agent = this.registry.updateRules(agentId, patch, { tenantId });
+    this._persist(this.store?.saveAgent?.(agent, { tenantId: tenantKey(tenantId) }));
     this._audit({
       type: 'swarm.agent.rules_updated', agent_id: agentId, tenant_id: tenantKey(tenantId), by,
       disabled_rules: strings(patch?.disabled_rules),
@@ -420,6 +464,7 @@ export class SwarmService {
       });
     }
     const agent = this.registry.assignHumanProfile(agentId, profile, { tenantId });
+    this._persist(this.store?.saveAgent?.(agent, { tenantId: tenantKey(tenantId) }));
     this._audit({
       type: 'swarm.agent.personality_assigned', agent_id: agentId,
       tenant_id: tenantKey(tenantId), by,
@@ -473,7 +518,21 @@ export class SwarmService {
       created_by: by, created_at: now(), updated_at: now(),
     };
     this.configurations.set(this._key(tenantId, swarm_id), config);
+    this._persist(this.store?.saveConfiguration?.(config, { tenantId: tenantKey(tenantId) }));
     this._audit({ type: 'swarm.configuration.created', swarm_id, tenant_id: tenantKey(tenantId), by });
+    return clone(config);
+  }
+
+  /** Rehydrate a shared configuration without creating a second logical swarm. */
+  restoreConfiguration(input, { tenantId = null } = {}) {
+    const config = clone(input || {});
+    if (!config.swarm_id || !config.swarm_name || !Array.isArray(config.active_agents) || !config.active_agents.length) {
+      throw new Error('configuration persistée invalide');
+    }
+    for (const agentId of config.active_agents) {
+      if (!this.registry.get(agentId, { tenantId })) throw new Error(`agent actif introuvable: ${agentId}`);
+    }
+    this.configurations.set(this._key(tenantId, config.swarm_id), config);
     return clone(config);
   }
 
@@ -526,6 +585,7 @@ export class SwarmService {
       created_at: now(), updated_at: now(),
     };
     this.runs.set(this._key(tenantId, run_id), run);
+    if (this.store?.saveRun) await this.store.saveRun(run, { tenantId: tenantKey(tenantId) });
     return clone(run);
   }
 
@@ -554,6 +614,7 @@ export class SwarmService {
     run.human_decision = human_decision;
     run.updated_at = now();
     run.audit.push(this._audit({ type: 'swarm.run.arbitrated', run_id: runId, tenant_id: tenantKey(tenantId), ...human_decision }));
+    this._persist(this.store?.saveRun?.(run, { tenantId: tenantKey(tenantId) }));
     return clone(run);
   }
 }

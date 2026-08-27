@@ -73,6 +73,8 @@ export * from './plan-parse.mjs';
 export * from './swarm.mjs';
 export * from './personality.mjs';
 export * from './sales-oracle.mjs';
+export * from './hybrid-agent-gateway.mjs';
+export * from './collaboration-store.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';
@@ -84,6 +86,7 @@ import { LayeredMemory, FileOffloadBackend, FileLayeredStore } from './memory.mj
 import { createAllAgents } from './agents/index.mjs';
 import { recommendForEngine, filterGuidanceByAvailable, rebindAgentsQuant } from './quant-guidance.mjs';
 import { SwarmService } from './swarm.mjs';
+import { HybridAgentGateway } from './hybrid-agent-gateway.mjs';
 import {
   CrystalKnowsProfileAdapter,
   LinkedInSelfProfileAdapter,
@@ -182,13 +185,20 @@ export function createEngine(opts = {}) {
     llm, memory, systemAgents: opts.systemAgents,
     auditSink: opts.swarmAuditSink || opts.auditSink || null,
     profileImporter,
+    store: opts.swarmStore || null,
+  });
+  const hybridGateway = new HybridAgentGateway({
+    swarm,
+    adapters: opts.collaborationAdapters || [],
+    auditSink: opts.collaborationAuditSink || opts.auditSink || null,
+    store: opts.collaborationStore || null,
   });
   if (agents.Bisociateur && embeddings) agents.Bisociateur.embeddings = embeddings;
   const orchestrator = new Orchestrator({
     llm, tools, governance, memory, layered, plannerModel: opts.plannerModel, agents, quantGuidance, ...scopeDefaults,
   });
   const engine = {
-    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents, swarm, profileImporter,
+    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents, swarm, hybridGateway, profileImporter,
     quantGuidance, baseModel, scopeDefaults,
   };
   engine.attachNodeFs = async () => {

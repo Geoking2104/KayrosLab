@@ -281,12 +281,13 @@ KayrosLab/
 │   │   ├── langgraph-runner.mjs
 │   │   ├── search-tools.mjs
 │   │   └── langfuse.mjs
-│   └── agents/           # Specialist agents (incl. Bisociateur)
+│   ├── agents/           # Specialist agents (incl. Bisociateur)
+│   └── hybrid-agent-gateway.mjs # Rooms + shared Slack/Discord/Teams execution runtime
 ├── backend/
 │   ├── fastify/          # HTTP API, auth, SSE cycle, connectors
 │   ├── adapters/         # Runtime adapters, including the TimesFM client/cache
 │   └── timesfm-service/  # Isolated Python/PyTorch inference service
-├── frontend/             # React Positioner app
+├── frontend/             # React Positioner app + customer collaboration console
 ├── deploy/ovh-vps/       # Deploy, backup, cron helpers
 ├── docs/                 # Pitch, architecture notes, v13/v14
 ├── workers/              # Edge / proxy workers
@@ -534,7 +535,8 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
-| **Connectors** | `POST /v1/connectors/slack/interactive` · link tokens · `GET /v1/connectors/links` |
+| **Agent Console** | `GET /v1/console/overview` · room creation · shared activity · test missions |
+| **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
@@ -552,6 +554,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | `ontology-explorer.html` / `ontology-panel.html` | Ontology graph (Cytoscape) |
 | `index.html` / `index.fr.html` | Commercial landing |
 | `frontend/positionning-app` | React Positioner application |
+| `frontend/console-app` | Customer console — rooms, hybrid agents, connectors and decision activity; served at `/console/` |
 
 ---
 
