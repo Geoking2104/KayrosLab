@@ -24,3 +24,14 @@ test('la console prefixe les routes avec la base API du build', async () => {
   assert.match(source, /import\.meta\.env\.VITE_API_BASE_URL/);
   assert.match(source, /fetch\(apiUrl\(path\)/);
 });
+
+test('le formulaire propose une inscription puis ouvre la console', async () => {
+  const [app, api] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+  ]);
+  assert.match(app, /S’inscrire pour découvrir la console/);
+  assert.match(app, /await api\.register\(name, email, password\)/);
+  assert.match(app, /const result = await api\.login\(email, password\)/);
+  assert.match(api, /register:.*request\('\/v1\/auth\/register'/);
+});

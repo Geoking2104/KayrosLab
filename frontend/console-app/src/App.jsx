@@ -15,13 +15,20 @@ function Mark({ name }) {
 }
 
 function Login({ onLogin }) {
+  const [mode, setMode] = useState('login');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [state, setState] = useState('idle');
   const [error, setError] = useState('');
+  const isRegistration = mode === 'register';
+  function switchMode(nextMode) {
+    setMode(nextMode); setState('idle'); setError('');
+  }
   async function submit(event) {
     event.preventDefault(); setState('loading'); setError('');
     try {
+      if (isRegistration) await api.register(name, email, password);
       const result = await api.login(email, password);
       setToken(result.token); setState('success'); onLogin();
     } catch (err) { setState('error'); setError(err.message); }
@@ -33,13 +40,20 @@ function Login({ onLogin }) {
       <p>Connectez un salon, composez le collectif hybride, puis gardez chaque verdict sous arbitrage humain.</p>
     </section>
     <form className="login-form" onSubmit={submit} aria-busy={state === 'loading'}>
-      <h2>Ouvrir la console</h2>
+      <h2>{isRegistration ? 'Créer votre espace' : 'Ouvrir la console'}</h2>
+      {isRegistration && <label>Nom<input type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} required /></label>}
       <label>Adresse e-mail<input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
-      <label>Mot de passe<input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
-      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error ? `Connexion refusée. ${error}` : '\u00a0'}</p>
+      <label>Mot de passe<input type="password" autoComplete={isRegistration ? 'new-password' : 'current-password'} value={password} onChange={(e) => setPassword(e.target.value)} minLength={4} required /></label>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error ? `${isRegistration ? 'Inscription' : 'Connexion'} refusée. ${error}` : '\u00a0'}</p>
       <button className="button primary" data-state={state} disabled={state === 'loading'}>
-        {state === 'loading' ? 'Connexion…' : 'Se connecter'}
+        {state === 'loading' ? (isRegistration ? 'Création…' : 'Connexion…') : (isRegistration ? 'Créer mon compte' : 'Se connecter')}
       </button>
+      <p className="auth-switch">
+        {isRegistration ? 'Déjà inscrit ? ' : 'Pas encore de compte ? '}
+        <button type="button" className="auth-link" onClick={() => switchMode(isRegistration ? 'login' : 'register')}>
+          {isRegistration ? 'Se connecter' : 'S’inscrire pour découvrir la console'}
+        </button>
+      </p>
     </form>
   </main>;
 }

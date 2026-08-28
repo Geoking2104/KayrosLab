@@ -31,6 +31,7 @@ async function request(path, options = {}) {
 }
 
 export const api = {
+  register: (name, email, password) => request('/v1/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password }) }),
   login: (email, password) => request('/v1/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
   overview: () => request('/v1/console/overview'),
   createRoom: (room) => request('/v1/console/rooms', { method: 'POST', body: JSON.stringify(room) }),

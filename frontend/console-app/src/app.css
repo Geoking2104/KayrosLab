@@ -40,6 +40,10 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 .form-error, .inline-error { color: var(--color-danger); line-height: 1.5; }
 .form-error { min-height: 1.5em; }
 .form-error.is-empty { visibility: hidden; }
+.auth-switch { text-align: center; color: var(--color-muted); font-size: var(--text-sm); line-height: 1.5; }
+.auth-link { min-height: 44px; border: 0; background: transparent; color: var(--color-accent); padding: var(--space-xs); cursor: pointer; text-decoration: underline; text-decoration-thickness: .08em; text-underline-offset: .2em; }
+.auth-link:hover { text-decoration-thickness: .14em; }
+.auth-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
 
 .app-shell { min-height: 100dvh; display: grid; grid-template-columns: 15.5rem minmax(0, 1fr); }
 .sidebar { position: sticky; top: 0; height: 100dvh; padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-xl); background: var(--color-surface); border-right: var(--rule-thin) solid var(--color-rule); }
