@@ -153,6 +153,7 @@ export default async function swarmRoutes(app) {
     const session = await sessionFor(app, req);
     if (!session?.sub) return reply.code(401).send({ error: 'session humaine authentifiée requise' });
     req.swarmSession = session;
+    await app.kayrosContext?.engine?.swarm?.hydrateTenant?.(session.tenantId || null);
   });
 
   app.get('/v1/swarm/agents', async (req, reply) => {
@@ -172,7 +173,11 @@ export default async function swarmRoutes(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'agent invalide', issues: parsed.error.issues });
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req, parsed.data);
-    try { return reply.code(201).send(service.createAgent(parsed.data, scope)); }
+    try {
+      const agent = service.createAgent(parsed.data, scope);
+      await service.flush?.();
+      return reply.code(201).send(agent);
+    }
     catch (error) { return fail(reply, error, /existant/.test(error.message) ? 409 : 400); }
   });
 
@@ -181,7 +186,11 @@ export default async function swarmRoutes(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'override invalide', issues: parsed.error.issues });
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req, parsed.data);
-    try { return service.updateAgentRules(req.params.agentId, parsed.data, scope); }
+    try {
+      const agent = service.updateAgentRules(req.params.agentId, parsed.data, scope);
+      await service.flush?.();
+      return agent;
+    }
     catch (error) { return fail(reply, error, /introuvable/.test(error.message) ? 404 : 400); }
   });
 
@@ -192,6 +201,7 @@ export default async function swarmRoutes(app) {
     const scope = await actorScope(app, req, parsed.data);
     try {
       const agent = await service.importAndAssignPersonality(req.params.agentId, parsed.data, scope);
+      await service.flush?.();
       return reply.code(201).send(agent);
     } catch (error) {
       return fail(reply, error, /introuvable/.test(error.message) ? 404 : 400);
@@ -203,7 +213,11 @@ export default async function swarmRoutes(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'configuration invalide', issues: parsed.error.issues });
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req, parsed.data);
-    try { return reply.code(201).send(service.createConfiguration(parsed.data, scope)); }
+    try {
+      const configuration = service.createConfiguration(parsed.data, scope);
+      await service.flush?.();
+      return reply.code(201).send(configuration);
+    }
     catch (error) { return fail(reply, error); }
   });
 
@@ -248,7 +262,11 @@ export default async function swarmRoutes(app) {
     if (!session?.sub) return reply.code(401).send({ error: 'session humaine authentifiée requise' });
     if (session.role !== 'comex') return reply.code(403).send({ error: 'rôle comex requis pour arbitrer un swarm' });
     const scope = { tenantId: session.tenantId || null, by: session.sub };
-    try { return service.arbitrate(req.params.runId, { ...parsed.data, ...scope }); }
+    try {
+      const run = service.arbitrate(req.params.runId, { ...parsed.data, ...scope });
+      await service.flush?.();
+      return run;
+    }
     catch (error) { return fail(reply, error, /introuvable/.test(error.message) ? 404 : 409); }
   });
 }

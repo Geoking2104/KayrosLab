@@ -13,7 +13,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { createPgPool, applySchema, PgRunStore } from './pg-store.mjs';
+import {
+  createPgPool,
+  applySchema,
+  PgRunStore,
+  PgSwarmStore,
+  PgCollaborationStore,
+} from './pg-store.mjs';
 import { createWorkflowState, applyWorkflowEvent } from './workflow-state.mjs';
 
 const DB = process.env.DATABASE_URL || process.env.KAYROS_DATABASE_URL || '';
@@ -152,4 +158,147 @@ test('delete dit la verite sur ce qu il a supprime', { skip }, async () => {
     assert.equal(await store.delete(runId, { tenantId: 't1' }), false, 'deuxieme suppression sans effet');
     assert.equal(await store.get(runId, { tenantId: 't1' }), null);
   } finally { await pool.end(); }
+});
+
+test('les agents, configurations et runs swarm font un aller-retour par tenant', { skip }, async () => {
+  const pool = await createPgPool({ DATABASE_URL: DB });
+  await applySchema(pool);
+  const store = new PgSwarmStore(pool);
+  const tenantId = uniq('swarm-tenant');
+  const agentId = uniq('agent');
+  const swarmId = uniq('swarm');
+  const runId = uniq('swarm-run');
+  try {
+    const agent = { agent_id: agentId, role: 'critic', rules: ['challenge assumptions'] };
+    const configuration = {
+      swarm_id: swarmId,
+      tenant_id: tenantId,
+      swarm_name: 'Postgres integration swarm',
+      active_agents: [agentId],
+    };
+    const run = {
+      run_id: runId,
+      swarm_id: swarmId,
+      tenant_id: tenantId,
+      status: 'pending_human_arbitration',
+      consensus: { verdict: 'CONDITIONAL_GO' },
+    };
+
+    await store.saveAgent(agent, { tenantId });
+    await store.saveConfiguration(configuration, { tenantId });
+    await store.saveRun(run, { tenantId });
+
+    const snapshot = await store.loadTenant(tenantId);
+    assert.deepEqual(snapshot.agents, [agent]);
+    assert.deepEqual(snapshot.configurations, [configuration]);
+    assert.deepEqual(snapshot.runs, [run]);
+    assert.equal(await store.countPendingRuns(tenantId), 1);
+    assert.deepEqual(await store.loadTenant(`${tenantId}-other`), {
+      agents: [], configurations: [], runs: [],
+    });
+  } finally {
+    await pool.query('delete from kayros_swarm_runs where tenant_id = $1', [tenantId]);
+    await pool.query('delete from kayros_swarm_configurations where tenant_id = $1', [tenantId]);
+    await pool.query('delete from kayros_swarm_agents where tenant_id = $1', [tenantId]);
+    await pool.end();
+  }
+});
+
+test('les salons, evenements et claims restent partages et idempotents', { skip }, async () => {
+  const pool = await createPgPool({ DATABASE_URL: DB });
+  await applySchema(pool);
+  const store = new PgCollaborationStore(pool, { messageLeaseSeconds: 30 });
+  const tenantId = uniq('collab-tenant');
+  const roomId = uniq('room');
+  const externalRoomId = uniq('external-room');
+  const messageId = uniq('message');
+  const timestamp = new Date().toISOString();
+  const room = {
+    room_id: roomId,
+    tenant_id: tenantId,
+    name: 'Integration room',
+    platform: 'slack',
+    external_room_id: externalRoomId,
+    status: 'active',
+    created_at: timestamp,
+    updated_at: timestamp,
+  };
+  try {
+    await store.createRoom(room, { configuration: { swarm_id: 'swarm-integration' } });
+    assert.equal((await store.getRoom(roomId, { tenantId })).room.name, 'Integration room');
+    assert.equal(await store.getRoom(roomId, { tenantId: `${tenantId}-other` }), null);
+    assert.equal((await store.findRoom('slack', externalRoomId)).room.room_id, roomId);
+
+    const firstEvent = await store.appendEvent({
+      tenant_id: tenantId, room_id: roomId, type: 'integration.first', ts: timestamp,
+    });
+    const secondEvent = await store.appendEvent({
+      tenant_id: tenantId, room_id: roomId, type: 'integration.second', ts: timestamp,
+    });
+    const activity = await store.activity({ tenantId, roomId, after: firstEvent.sequence - 1 });
+    assert.deepEqual(activity.map((event) => event.type), ['integration.first', 'integration.second']);
+    assert.ok(secondEvent.sequence > firstEvent.sequence);
+
+    assert.deepEqual(
+      await store.claimMessage({ platform: 'slack', messageId, tenantId, roomId }),
+      { claimed: true, result: null },
+    );
+    assert.deepEqual(
+      await store.claimMessage({ platform: 'slack', messageId, tenantId, roomId }),
+      { claimed: false, completed: false, result: null },
+    );
+    const result = { run_id: 'run-integration', verdict: 'GO' };
+    await store.completeMessage('slack', messageId, result, tenantId);
+    assert.deepEqual(
+      await store.claimMessage({ platform: 'slack', messageId, tenantId, roomId }),
+      { claimed: false, completed: true, result },
+      'un message termine ne doit jamais etre repris lorsque son bail est expire',
+    );
+
+    await pool.query(
+      `update kayros_collaboration_messages
+       set status = 'processing', result = null, lease_until = now() - interval '1 second'
+       where tenant_id = $1 and platform = 'slack' and message_id = $2`,
+      [tenantId, messageId],
+    );
+    assert.deepEqual(
+      await store.claimMessage({ platform: 'slack', messageId, tenantId, roomId }),
+      { claimed: true, result: null },
+      'un traitement abandonne doit etre repris apres expiration du bail',
+    );
+  } finally {
+    await pool.query('delete from kayros_collaboration_messages where tenant_id = $1', [tenantId]);
+    await pool.query('delete from kayros_collaboration_events where tenant_id = $1', [tenantId]);
+    await pool.query('delete from kayros_collaboration_rooms where tenant_id = $1', [tenantId]);
+    await pool.end();
+  }
+});
+
+test('le verrou advisory serialise deux noeuds sur le meme salon', { skip }, async () => {
+  const pool = await createPgPool({ DATABASE_URL: DB });
+  const storeA = new PgCollaborationStore(pool);
+  const storeB = new PgCollaborationStore(pool);
+  const roomId = uniq('locked-room');
+  let releaseFirst;
+  let signalFirstEntered;
+  let secondEntered = false;
+  const firstEntered = new Promise((resolve) => { signalFirstEntered = resolve; });
+  const holdFirst = new Promise((resolve) => { releaseFirst = resolve; });
+  try {
+    const first = storeA.withRoomLock(roomId, async () => {
+      signalFirstEntered();
+      await holdFirst;
+    });
+    await firstEntered;
+    const second = storeB.withRoomLock(roomId, async () => { secondEntered = true; });
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    assert.equal(secondEntered, false, 'le second noeud attend le verrou du premier');
+    releaseFirst();
+    await Promise.all([first, second]);
+    assert.equal(secondEntered, true, 'le second noeud reprend apres liberation');
+  } finally {
+    releaseFirst?.();
+    await pool.end();
+  }
 });

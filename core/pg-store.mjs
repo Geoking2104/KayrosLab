@@ -309,6 +309,210 @@ export class PgRunStore {
   }
 }
 
+/** Shared persistence for hybrid agent definitions, swarm configs and verdicts. */
+export class PgSwarmStore {
+  constructor(pool) { this.pool = pool; }
+
+  async loadTenant(tenantId = 'default') {
+    const scope = String(tenantId || 'default');
+    const [agents, configurations, runs] = await Promise.all([
+      this.pool.query('select payload from kayros_swarm_agents where tenant_id = $1', [scope]),
+      this.pool.query('select payload from kayros_swarm_configurations where tenant_id = $1', [scope]),
+      this.pool.query('select payload from kayros_swarm_runs where tenant_id = $1 order by updated_at desc limit 1000', [scope]),
+    ]);
+    return {
+      agents: agents.rows.map((row) => row.payload),
+      configurations: configurations.rows.map((row) => row.payload),
+      runs: runs.rows.map((row) => row.payload),
+    };
+  }
+
+  async saveAgent(agent, { tenantId = null } = {}) {
+    const scope = String(tenantId || 'default');
+    await this.pool.query(
+      `insert into kayros_swarm_agents (tenant_id, agent_id, payload, updated_at)
+       values ($1, $2, $3::jsonb, now())
+       on conflict (tenant_id, agent_id) do update set payload = excluded.payload, updated_at = now()`,
+      [scope, agent.agent_id, JSON.stringify(agent)],
+    );
+    return agent;
+  }
+
+  async saveConfiguration(configuration, { tenantId = null } = {}) {
+    const scope = String(tenantId || configuration?.tenant_id || 'default');
+    await this.pool.query(
+      `insert into kayros_swarm_configurations (tenant_id, swarm_id, payload, updated_at)
+       values ($1, $2, $3::jsonb, now())
+       on conflict (tenant_id, swarm_id) do update set payload = excluded.payload, updated_at = now()`,
+      [scope, configuration.swarm_id, JSON.stringify(configuration)],
+    );
+    return configuration;
+  }
+
+  async saveRun(run, { tenantId = null } = {}) {
+    const scope = String(tenantId || run?.tenant_id || 'default');
+    await this.pool.query(
+      `insert into kayros_swarm_runs (tenant_id, run_id, swarm_id, status, payload, updated_at)
+       values ($1, $2, $3, $4, $5::jsonb, now())
+       on conflict (tenant_id, run_id) do update set
+         swarm_id = excluded.swarm_id, status = excluded.status,
+         payload = excluded.payload, updated_at = now()`,
+      [scope, run.run_id, run.swarm_id, run.status, JSON.stringify(run)],
+    );
+    return run;
+  }
+
+  async countPendingRuns(tenantId = 'default') {
+    const { rows } = await this.pool.query(
+      `select count(*)::int as n from kayros_swarm_runs
+       where tenant_id = $1 and status = 'pending_human_arbitration'`,
+      [String(tenantId || 'default')],
+    );
+    return rows[0]?.n || 0;
+  }
+}
+
+/** Shared rooms, event stream, webhook claims and distributed room locks. */
+export class PgCollaborationStore {
+  constructor(pool, { messageLeaseSeconds = 300 } = {}) {
+    this.pool = pool;
+    this.messageLeaseSeconds = Math.max(30, Number(messageLeaseSeconds) || 300);
+  }
+
+  async createRoom(room, runtimeBundle) {
+    const payload = { room, runtime_bundle: runtimeBundle };
+    const { rows } = await this.pool.query(
+      `insert into kayros_collaboration_rooms
+       (room_id, tenant_id, platform, external_room_id, status, payload, created_at, updated_at)
+       values ($1, $2, $3, $4, $5, $6::jsonb, $7, $8)
+       returning payload`,
+      [room.room_id, room.tenant_id, room.platform, room.external_room_id, room.status,
+        JSON.stringify(payload), room.created_at, room.updated_at],
+    );
+    return rows[0]?.payload || payload;
+  }
+
+  async getRoom(roomId, { tenantId = null } = {}) {
+    const params = [String(roomId)];
+    let sql = 'select payload from kayros_collaboration_rooms where room_id = $1';
+    if (tenantId != null) { params.push(String(tenantId)); sql += ' and tenant_id = $2'; }
+    const { rows } = await this.pool.query(sql, params);
+    return rows[0]?.payload || null;
+  }
+
+  async findRoom(platform, externalRoomId) {
+    const { rows } = await this.pool.query(
+      `select payload from kayros_collaboration_rooms
+       where platform = $1 and external_room_id = $2 and status = 'active'`,
+      [String(platform), String(externalRoomId)],
+    );
+    return rows[0]?.payload || null;
+  }
+
+  async listRooms({ tenantId = null, platform = null } = {}) {
+    const params = [];
+    const where = [];
+    if (tenantId != null) { params.push(String(tenantId)); where.push(`tenant_id = $${params.length}`); }
+    if (platform) { params.push(String(platform)); where.push(`platform = $${params.length}`); }
+    const clause = where.length ? ` where ${where.join(' and ')}` : '';
+    const { rows } = await this.pool.query(
+      `select payload from kayros_collaboration_rooms${clause} order by updated_at desc limit 1000`,
+      params,
+    );
+    return rows.map((row) => row.payload);
+  }
+
+  async updateRoomActivity(roomId, timestamp) {
+    await this.pool.query(
+      `update kayros_collaboration_rooms set
+         payload = jsonb_set(jsonb_set(payload, '{room,last_activity_at}', to_jsonb($2::text)), '{room,updated_at}', to_jsonb($2::text)),
+         updated_at = $2::timestamptz
+       where room_id = $1`,
+      [String(roomId), String(timestamp)],
+    );
+  }
+
+  async appendEvent(event) {
+    const payload = { ...event };
+    delete payload.sequence;
+    const { rows } = await this.pool.query(
+      `insert into kayros_collaboration_events (tenant_id, room_id, type, payload, created_at)
+       values ($1, $2, $3, $4::jsonb, $5)
+       returning sequence`,
+      [String(event.tenant_id || 'default'), event.room_id || null, event.type, JSON.stringify(payload), event.ts],
+    );
+    return { ...event, sequence: Number(rows[0].sequence) };
+  }
+
+  async activity({ tenantId = null, roomId = null, after = 0, limit = 100 } = {}) {
+    const params = [Number(after || 0)];
+    const where = ['sequence > $1'];
+    if (tenantId != null) { params.push(String(tenantId)); where.push(`tenant_id = $${params.length}`); }
+    if (roomId) { params.push(String(roomId)); where.push(`room_id = $${params.length}`); }
+    params.push(Math.max(1, Math.min(250, Number(limit) || 100)));
+    const { rows } = await this.pool.query(
+      `select sequence, payload from kayros_collaboration_events
+       where ${where.join(' and ')} order by sequence desc limit $${params.length}`,
+      params,
+    );
+    return rows.reverse().map((row) => ({ ...row.payload, sequence: Number(row.sequence) }));
+  }
+
+  async claimMessage({ platform, messageId, tenantId, roomId }) {
+    const { rows } = await this.pool.query(
+      `insert into kayros_collaboration_messages
+       (platform, message_id, tenant_id, room_id, status, lease_until, updated_at)
+       values ($1, $2, $3, $4, 'processing', now() + ($5 * interval '1 second'), now())
+       on conflict (tenant_id, platform, message_id) do update set
+         room_id = excluded.room_id,
+         status = 'processing',
+         lease_until = excluded.lease_until,
+         result = null,
+         updated_at = now()
+       where kayros_collaboration_messages.status = 'failed'
+          or (kayros_collaboration_messages.status = 'processing'
+              and kayros_collaboration_messages.lease_until < now())
+       returning status, result`,
+      [platform, messageId, String(tenantId || 'default'), roomId, this.messageLeaseSeconds],
+    );
+    if (rows.length) return { claimed: true, result: null };
+    const existing = await this.pool.query(
+      'select status, result from kayros_collaboration_messages where tenant_id = $1 and platform = $2 and message_id = $3',
+      [String(tenantId || 'default'), platform, messageId],
+    );
+    return { claimed: false, completed: existing.rows[0]?.status === 'completed', result: existing.rows[0]?.result || null };
+  }
+
+  async completeMessage(platform, messageId, result, tenantId = null) {
+    await this.pool.query(
+      `update kayros_collaboration_messages
+       set status = 'completed', result = $3::jsonb, lease_until = now(), updated_at = now()
+       where platform = $1 and message_id = $2 and tenant_id = $4`,
+      [platform, messageId, JSON.stringify(result), String(tenantId || 'default')],
+    );
+  }
+
+  async failMessage(platform, messageId, tenantId = null) {
+    await this.pool.query(
+      `update kayros_collaboration_messages
+       set status = 'failed', lease_until = now(), updated_at = now()
+       where platform = $1 and message_id = $2 and tenant_id = $3`,
+      [platform, messageId, String(tenantId || 'default')],
+    );
+  }
+
+  async withRoomLock(roomId, fn) {
+    const client = await this.pool.connect();
+    try {
+      await client.query('select pg_advisory_lock(hashtextextended($1, 0))', [String(roomId)]);
+      return await fn();
+    } finally {
+      try { await client.query('select pg_advisory_unlock(hashtextextended($1, 0))', [String(roomId)]); }
+      finally { client.release(); }
+    }
+  }
+}
+
 /** PostgreSQL metadata repository for the Sales Oracle document-ingestion MVP. */
 const normalizeSalesOracleDocument = (row) => row ? { ...row, size_bytes: Number(row.size_bytes) } : null;
 

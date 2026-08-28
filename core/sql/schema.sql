@@ -58,6 +58,84 @@ create index if not exists kayros_runs_suspended_tenant on kayros_runs_suspended
 create index if not exists kayros_runs_suspended_idea on kayros_runs_suspended (idea_id);
 create index if not exists kayros_runs_suspended_updated on kayros_runs_suspended (updated_at desc);
 
+-- Hybrid collaboration console — shared state for horizontally scaled nodes.
+create table if not exists kayros_swarm_agents (
+  tenant_id text not null default 'default',
+  agent_id text not null,
+  payload jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (tenant_id, agent_id)
+);
+
+create table if not exists kayros_swarm_configurations (
+  tenant_id text not null default 'default',
+  swarm_id text not null,
+  payload jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (tenant_id, swarm_id)
+);
+
+create table if not exists kayros_swarm_runs (
+  tenant_id text not null default 'default',
+  run_id text not null,
+  swarm_id text not null,
+  status text not null,
+  payload jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (tenant_id, run_id)
+);
+
+create index if not exists kayros_swarm_runs_pending
+  on kayros_swarm_runs (tenant_id, updated_at desc)
+  where status = 'pending_human_arbitration';
+
+create table if not exists kayros_collaboration_rooms (
+  room_id text primary key,
+  tenant_id text not null default 'default',
+  platform text not null,
+  external_room_id text not null,
+  status text not null default 'active',
+  payload jsonb not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (platform, external_room_id)
+);
+
+create index if not exists kayros_collaboration_rooms_tenant
+  on kayros_collaboration_rooms (tenant_id, updated_at desc);
+
+create table if not exists kayros_collaboration_events (
+  sequence bigserial primary key,
+  tenant_id text not null default 'default',
+  room_id text,
+  type text not null,
+  payload jsonb not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists kayros_collaboration_events_stream
+  on kayros_collaboration_events (tenant_id, sequence desc);
+create index if not exists kayros_collaboration_events_room
+  on kayros_collaboration_events (tenant_id, room_id, sequence desc);
+
+-- A claim absorbs webhook retries across processes. Expired processing claims
+-- can be taken over by another node after a crash.
+create table if not exists kayros_collaboration_messages (
+  platform text not null,
+  message_id text not null,
+  tenant_id text not null default 'default',
+  room_id text not null,
+  status text not null default 'processing',
+  lease_until timestamptz not null,
+  result jsonb,
+  updated_at timestamptz not null default now(),
+  primary key (tenant_id, platform, message_id)
+);
+
+create index if not exists kayros_collaboration_messages_expiry
+  on kayros_collaboration_messages (lease_until)
+  where status = 'processing';
+
 -- Sales Oracle MVP — tenant-scoped cases, document metadata and ingestion jobs.
 -- Raw file bytes live in S3-compatible object storage, never in Postgres.
 create table if not exists sales_oracle_cases (
