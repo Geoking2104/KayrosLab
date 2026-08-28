@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'frontend/positionning-app/**'
+      - 'frontend/console-app/**'
       - 'index.html'
       - 'index.fr.html'
       - 'backend/web/views/index.ejs'
@@ -16,6 +17,7 @@ on:
       - 'tests/demo-html.test.mjs'
       - 'tests/sales-oracle-site.test.mjs'
       - 'tests/timesfm-site.test.mjs'
+      - 'tests/console-pages-deploy.test.mjs'
       - 'cycle-timeline.html'
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
@@ -47,13 +49,23 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: frontend/positionning-app/package-lock.json
+          cache-dependency-path: |
+            frontend/positionning-app/package-lock.json
+            frontend/console-app/package-lock.json
 
       - name: Validate public demo JavaScript and CTA wiring
-        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs
+        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
 
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install & build console-app
+        working-directory: frontend/console-app
+        env:
+          VITE_API_BASE_URL: https://api.kayroslab.com
         run: |
           npm ci
           npm run build
@@ -62,6 +74,7 @@ jobs:
         run: |
           set -e
           mkdir -p deploy/positionner-app
+          mkdir -p deploy/console
           mkdir -p deploy/assets
 
           # Core static pages (must exist)
@@ -125,6 +138,14 @@ jobs:
             cp -r frontend/positionning-app/dist/* deploy/positionner-app/
           else
             echo "ERROR: positionning-app dist/ missing after build" >&2
+            exit 1
+          fi
+
+          # Hybrid agent console built by Vite into the backend public tree.
+          if [ -f backend/web/public/console/index.html ]; then
+            cp -r backend/web/public/console/. deploy/console/
+          else
+            echo "ERROR: console-app build missing after build" >&2
             exit 1
           fi
 

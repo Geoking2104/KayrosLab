@@ -1,4 +1,9 @@
 const TOKEN_KEY = 'kayros_console_token';
+const API_BASE = String(import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+
+function apiUrl(path) {
+  return `${API_BASE}${path}`;
+}
 
 export function getToken() { return sessionStorage.getItem(TOKEN_KEY) || ''; }
 export function setToken(token) {
@@ -8,7 +13,7 @@ export function setToken(token) {
 
 async function request(path, options = {}) {
   const token = getToken();
-  const response = await fetch(path, {
+  const response = await fetch(apiUrl(path), {
     ...options,
     headers: {
       'content-type': 'application/json',
