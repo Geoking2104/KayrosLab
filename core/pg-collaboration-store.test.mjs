@@ -39,6 +39,7 @@ test('PgCollaborationStore revendique un message avec un bail recuperable', asyn
   assert.deepEqual(claim, { claimed: true, result: null });
   assert.match(pool.calls[0].sql, /on conflict \(tenant_id, platform, message_id\)/);
   assert.match(pool.calls[0].sql, /lease_until < now\(\)/);
+  assert.match(pool.calls[0].sql, /status = 'processing'[\s\S]+lease_until < now\(\)/);
   assert.match(pool.calls[0].sql, /status = 'failed'/);
   assert.deepEqual(pool.calls[0].params, ['slack', 'm-1', 't-1', 'r-1', 90]);
 });

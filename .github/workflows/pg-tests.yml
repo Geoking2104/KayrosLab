@@ -7,10 +7,13 @@ name: Postgres integration
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'codex/**'
     paths:
       - 'core/pg-store.mjs'
       - 'core/pg-integration.test.mjs'
+      - 'core/pg-collaboration-store.test.mjs'
       - 'core/pg-run-store.test.mjs'
       - 'core/sql/schema.sql'
       - 'backend/fastify/lib/context.mjs'
@@ -72,7 +75,7 @@ jobs:
 
           # Un test ignore passe au vert : sans ce garde-fou, une variable mal
           # nommee rendrait ce workflow inutile sans jamais le signaler.
-          if echo "$output" | grep -q "# skipped 6"; then
+          if echo "$output" | grep -Eq "# skipped [1-9][0-9]*"; then
             echo "ERREUR : toute la suite d'integration a ete ignoree." >&2
             exit 1
           fi

@@ -470,7 +470,8 @@ export class PgCollaborationStore {
          result = null,
          updated_at = now()
        where kayros_collaboration_messages.status = 'failed'
-          or kayros_collaboration_messages.lease_until < now()
+          or (kayros_collaboration_messages.status = 'processing'
+              and kayros_collaboration_messages.lease_until < now())
        returning status, result`,
       [platform, messageId, String(tenantId || 'default'), roomId, this.messageLeaseSeconds],
     );
