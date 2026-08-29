@@ -206,7 +206,11 @@ export default async function buildContext() {
   const PASSWORD_RESET_TTL_SEC = Math.max(300, Number(process.env.KAYROS_PASSWORD_RESET_TTL_SEC) || 1800);
   const CONSOLE_URL = String(process.env.KAYROS_CONSOLE_URL || 'https://www.kayroslab.com/console/').replace(/\/$/, '');
 
-  const pgPool = await createPgPool(process.env);
+  // `pg` est une dependance du backend Fastify. L'injecter ici garantit sa
+  // resolution depuis backend/fastify/node_modules, y compris lorsque le core
+  // partage se trouve dans un repertoire frere sur le VPS.
+  const { default: pgDriver } = await import('pg');
+  const pgPool = await createPgPool(process.env, { pg: pgDriver });
   const requirePostgres = /^(1|true|yes)$/i.test(String(process.env.KAYROS_REQUIRE_POSTGRES || ''));
   if (requirePostgres && !pgPool) {
     throw new Error('PostgreSQL est requis (KAYROS_REQUIRE_POSTGRES=true), mais DATABASE_URL est absente ou inaccessible');

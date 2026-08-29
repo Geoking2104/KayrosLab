@@ -13,11 +13,11 @@ export function hasDatabaseUrl(env = process.env) {
 /**
  * @returns {Promise<import('pg').Pool|null>}
  */
-export async function createPgPool(env = process.env) {
+export async function createPgPool(env = process.env, { pg: injectedPg = null } = {}) {
   const url = env.DATABASE_URL || env.KAYROS_DATABASE_URL;
   if (!url) return null;
   try {
-    const { default: pg } = await import('pg');
+    const pg = injectedPg ?? (await import('pg')).default;
     const max = Number(env.KAYROS_PG_POOL_MAX) || 10;
     const pool = new pg.Pool({
       connectionString: url,
