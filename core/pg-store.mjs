@@ -522,7 +522,10 @@ export class PgCollaborationStore {
         JSON.stringify(message), message.created_at],
     );
     if (!rows[0]) throw new Error('fil introuvable');
-    await this.pool.query('update kayros_decision_threads set updated_at=$2, payload=jsonb_set(payload, \'{updated_at}\', to_jsonb($2::text)) where thread_id=$1', [String(threadId), message.created_at]);
+    await this.pool.query(
+      'update kayros_decision_threads set updated_at=$2::timestamptz, payload=jsonb_set(payload, \'{updated_at}\', to_jsonb(($2::timestamptz)::text)) where thread_id=$1',
+      [String(threadId), message.created_at],
+    );
     return { ...message, message_id: String(rows[0].message_id) };
   }
 
