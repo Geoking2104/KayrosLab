@@ -458,6 +458,74 @@ export class PgCollaborationStore {
     return rows.reverse().map((row) => ({ ...row.payload, sequence: Number(row.sequence) }));
   }
 
+  async createThread(thread) {
+    const { rows } = await this.pool.query(
+      `insert into kayros_decision_threads
+       (thread_id, tenant_id, room_id, root_run_id, current_run_id, status, question, payload, created_at, updated_at)
+       values ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10) returning payload`,
+      [thread.thread_id, thread.tenant_id, thread.room_id, thread.root_run_id, thread.current_run_id,
+        thread.status, thread.question, JSON.stringify(thread), thread.created_at, thread.updated_at],
+    );
+    return rows[0]?.payload || thread;
+  }
+
+  async getThread(threadId, { tenantId = null } = {}) {
+    const params = [String(threadId)];
+    let where = 'thread_id = $1';
+    if (tenantId != null) { params.push(String(tenantId)); where += ' and tenant_id = $2'; }
+    const { rows } = await this.pool.query(`select payload from kayros_decision_threads where ${where}`, params);
+    if (!rows[0]) return null;
+    const messages = await this.pool.query(
+      `select message_id, payload from kayros_decision_thread_messages
+       where thread_id = $1 order by message_id asc`, [String(threadId)],
+    );
+    return { ...rows[0].payload, messages: messages.rows.map((row) => ({ ...row.payload, message_id: String(row.message_id) })) };
+  }
+
+  async listThreads({ tenantId = null, roomId = null, limit = 100 } = {}) {
+    const params = [];
+    const where = [];
+    if (tenantId != null) { params.push(String(tenantId)); where.push(`tenant_id = $${params.length}`); }
+    if (roomId) { params.push(String(roomId)); where.push(`room_id = $${params.length}`); }
+    params.push(Math.max(1, Math.min(250, Number(limit) || 100)));
+    const clause = where.length ? `where ${where.join(' and ')}` : '';
+    const { rows } = await this.pool.query(
+      `select payload from kayros_decision_threads ${clause} order by updated_at desc limit $${params.length}`, params,
+    );
+    return Promise.all(rows.map((row) => this.getThread(row.payload.thread_id, { tenantId })));
+  }
+
+  async updateThread(threadId, patch, { tenantId = null } = {}) {
+    const current = await this.getThread(threadId, { tenantId });
+    if (!current) return null;
+    delete current.messages;
+    const next = { ...current, ...patch, thread_id: current.thread_id, tenant_id: current.tenant_id };
+    const { rows } = await this.pool.query(
+      `update kayros_decision_threads set
+         root_run_id=$3, current_run_id=$4, status=$5, question=$6, payload=$7::jsonb,
+         updated_at=$8 where thread_id=$1 and tenant_id=$2 returning payload`,
+      [next.thread_id, next.tenant_id, next.root_run_id, next.current_run_id, next.status,
+        next.question, JSON.stringify(next), next.updated_at],
+    );
+    return rows[0]?.payload || null;
+  }
+
+  async appendThreadMessage(threadId, message, { tenantId = null } = {}) {
+    const scope = String(tenantId || message.tenant_id || 'default');
+    const { rows } = await this.pool.query(
+      `insert into kayros_decision_thread_messages
+       (thread_id, tenant_id, role, kind, author_id, payload, created_at)
+       select $1,$2,$3,$4,$5,$6::jsonb,$7
+       where exists (select 1 from kayros_decision_threads where thread_id=$1 and tenant_id=$2)
+       returning message_id`,
+      [String(threadId), scope, message.role, message.kind, message.author_id || null,
+        JSON.stringify(message), message.created_at],
+    );
+    if (!rows[0]) throw new Error('fil introuvable');
+    await this.pool.query('update kayros_decision_threads set updated_at=$2, payload=jsonb_set(payload, \'{updated_at}\', to_jsonb($2::text)) where thread_id=$1', [String(threadId), message.created_at]);
+    return { ...message, message_id: String(rows[0].message_id) };
+  }
+
   async claimMessage({ platform, messageId, tenantId, roomId }) {
     const { rows } = await this.pool.query(
       `insert into kayros_collaboration_messages

@@ -31,6 +31,24 @@ function wasInvoked(text, explicit = false) {
 }
 function publicRoom(record) { return clone(record?.room || null); }
 
+function clarificationQuestions(run) {
+  const analyses = run?.analyses || [];
+  const assumptions = [...new Set(analyses.flatMap((item) => item.unverified_assumptions || []))];
+  const ambiguous = run?.consensus?.verdict === 'CONDITIONAL_GO' || assumptions.length > 0;
+  if (!ambiguous) return [];
+  const conditions = [...new Set(analyses.flatMap((item) => item.required_mitigations || []))];
+  const risks = [...new Set(analyses.flatMap((item) => item.critical_risks || []))];
+  const candidates = [
+    ...assumptions.map((item) => `Pouvez-vous confirmer ou corriger cette hypothèse : ${item}`),
+    ...conditions.map((item) => `Quel est l’état, le responsable et l’échéance de cette condition : ${item}`),
+    ...risks.map((item) => `Quelle preuve ou mesure disponible permet d’évaluer ce risque : ${item}`),
+  ];
+  if (!candidates.length && run?.consensus?.verdict === 'CONDITIONAL_GO') {
+    candidates.push('Quels paramètres, seuils ou contraintes doivent être précisés avant une décision ferme ?');
+  }
+  return candidates.slice(0, 4);
+}
+
 export function summarizeSwarmRun(run) {
   const verdict = run?.consensus?.verdict || 'CONDITIONAL_GO';
   const risks = (run?.analyses || []).flatMap((analysis) => analysis.critical_risks || []).slice(0, 3);
@@ -55,6 +73,7 @@ export class HybridAgentGateway {
     this.auditSink = auditSink;
     this.store = store || new InMemoryCollaborationStore({ maxEvents });
     this.adapters = new Map();
+    this.tenantAdapters = new Map();
     for (const adapter of adapters || []) this.setAdapter(adapter);
   }
 
@@ -62,6 +81,17 @@ export class HybridAgentGateway {
     if (!adapter?.platform) return false;
     this.adapters.set(normalizePlatform(adapter.platform), adapter);
     return true;
+  }
+
+  setTenantAdapter(tenantId, adapter) {
+    if (!adapter?.platform) return false;
+    this.tenantAdapters.set(`${String(tenantId || 'default')}:${normalizePlatform(adapter.platform)}`, adapter);
+    return true;
+  }
+
+  adapterFor(platform, tenantId = null) {
+    return this.tenantAdapters.get(`${String(tenantId || 'default')}:${normalizePlatform(platform)}`)
+      || this.adapters.get(normalizePlatform(platform)) || null;
   }
 
   async connections({ tenantId = null } = {}) {
@@ -155,6 +185,102 @@ export class HybridAgentGateway {
     )).length;
   }
 
+  async getThread(threadId, { tenantId = null } = {}) {
+    return this.store.getThread?.(threadId, { tenantId }) || null;
+  }
+
+  async listThreads({ tenantId = null, roomId = null, limit = 100 } = {}) {
+    return this.store.listThreads?.({ tenantId, roomId, limit }) || [];
+  }
+
+  async _createDecisionThread({ room, run, question, by = null }) {
+    const createdAt = now();
+    const questions = clarificationQuestions(run);
+    const needsClarification = run.consensus?.verdict === 'CONDITIONAL_GO'
+      || (run.analyses || []).some((analysis) => (analysis.unverified_assumptions || []).length > 0);
+    const thread = {
+      thread_id: makeId('thread'), tenant_id: room.tenant_id, room_id: room.room_id,
+      root_run_id: run.run_id, current_run_id: run.run_id,
+      status: needsClarification ? 'needs_clarification' : 'awaiting_arbitration',
+      question, clarification_questions: questions,
+      created_by: by, created_at: createdAt, updated_at: createdAt,
+    };
+    await this.store.createThread(thread);
+    await this.store.appendThreadMessage(thread.thread_id, {
+      role: 'human', kind: 'question', author_id: by, text: question, created_at: createdAt,
+    }, { tenantId: room.tenant_id });
+    await this.store.appendThreadMessage(thread.thread_id, {
+      role: 'collective', kind: 'run', author_id: 'kayros-swarm', run, created_at: now(),
+    }, { tenantId: room.tenant_id });
+    if (questions.length) {
+      await this.store.appendThreadMessage(thread.thread_id, {
+        role: 'assistant', kind: 'clarification_request', author_id: 'kayros-swarm',
+        text: 'Le collectif a besoin de précisions ciblées avant de conclure.',
+        questions, created_at: now(),
+      }, { tenantId: room.tenant_id });
+    }
+    return this.store.getThread(thread.thread_id, { tenantId: room.tenant_id });
+  }
+
+  async continueThread(threadId, { tenantId = null, text, by = null } = {}) {
+    const scope = String(tenantId || 'default');
+    const thread = await this.store.getThread(threadId, { tenantId: scope });
+    if (!thread) throw new Error('fil introuvable');
+    if (thread.status === 'resolved') throw new Error('fil déjà arbitré');
+    const answer = required(text, 'réponse humaine');
+    const roomRecord = await this.store.getRoom(thread.room_id, { tenantId: scope });
+    const room = await this._hydrateRuntime(roomRecord);
+    if (!room) throw new Error('salon introuvable');
+    await this.store.appendThreadMessage(threadId, {
+      role: 'human', kind: 'clarification', author_id: by, text: answer, created_at: now(),
+    }, { tenantId: scope });
+    const history = (thread.messages || []).map((message) => {
+      if (message.kind === 'run') return `Verdict précédent: ${message.run?.consensus?.verdict || 'inconnu'} — ${message.run?.consensus?.rationale || ''}`;
+      return `${message.role}: ${message.text || (message.questions || []).join(' | ')}`;
+    }).join('\n');
+    const run = await this.swarm.run(room.swarm_id, {
+      tenantId: scope,
+      question: thread.question,
+      context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
+      by,
+    });
+    const questions = clarificationQuestions(run);
+    const status = run.consensus?.verdict === 'CONDITIONAL_GO' || questions.length
+      ? 'needs_clarification' : 'awaiting_arbitration';
+    await this.store.appendThreadMessage(threadId, {
+      role: 'collective', kind: 'run', author_id: 'kayros-swarm', run, created_at: now(),
+    }, { tenantId: scope });
+    if (status === 'needs_clarification' && questions.length) {
+      await this.store.appendThreadMessage(threadId, {
+        role: 'assistant', kind: 'clarification_request', author_id: 'kayros-swarm',
+        text: 'Des informations restent nécessaires.', questions, created_at: now(),
+      }, { tenantId: scope });
+    }
+    await this.store.updateThread(threadId, {
+      current_run_id: run.run_id, status, clarification_questions: questions, updated_at: now(),
+    }, { tenantId: scope });
+    await this._record('collaboration.thread.rerun', {
+      room_id: room.room_id, tenant_id: scope, thread_id: threadId, run_id: run.run_id, by,
+    });
+    return this.store.getThread(threadId, { tenantId: scope });
+  }
+
+  async arbitrateThread(threadId, input = {}, { tenantId = null, by = null } = {}) {
+    const scope = String(tenantId || 'default');
+    const thread = await this.store.getThread(threadId, { tenantId: scope });
+    if (!thread) throw new Error('fil introuvable');
+    const run = this.swarm.arbitrate(thread.current_run_id, { ...input, tenantId: scope, by });
+    await this.swarm.flush?.();
+    await this.store.appendThreadMessage(threadId, {
+      role: 'human', kind: 'arbitration', author_id: by, decision: run.human_decision, created_at: now(),
+    }, { tenantId: scope });
+    await this.store.updateThread(threadId, {
+      status: input.action === 'reevaluate' ? 'reevaluation_requested' : 'resolved',
+      updated_at: now(),
+    }, { tenantId: scope });
+    return this.store.getThread(threadId, { tenantId: scope });
+  }
+
   async handleMessage(input = {}) {
     const platform = normalizePlatform(input.platform || 'console');
     const record = input.room_id
@@ -192,15 +318,16 @@ export class HybridAgentGateway {
           provider: input.provider, sovereignty: input.sovereignty, model: input.model,
           by: input.by || input.user_id || `${platform}:anonymous`,
         });
-        const summary = summarizeSwarmRun(run);
-        const result = { ignored: false, duplicate: false, room, run, summary };
+        const thread = await this._createDecisionThread({ room, run, question, by: input.by || input.user_id || `${platform}:anonymous` });
+        const summary = { ...summarizeSwarmRun(run), thread_id: thread.thread_id, clarification_questions: thread.clarification_questions || [] };
+        const result = { ignored: false, duplicate: false, room, run, thread, summary };
         await this.store.updateRoomActivity(room.room_id, now());
         await this._record('collaboration.run.completed', {
           room_id: room.room_id, tenant_id: room.tenant_id, platform,
           message_id: messageId, run_id: run.run_id, verdict: summary.verdict,
         });
         if (input.publish === true) {
-          const adapter = this.adapters.get(platform);
+          const adapter = this.adapterFor(platform, room.tenant_id);
           if (!adapter) throw new Error(`connecteur ${platform} non configuré`);
           await adapter.postMessage(room.external_room_id, new AbstractView({
             title: summary.title, text: summary.text,

@@ -93,6 +93,19 @@ export class InMemoryUserStore {
   }
   async findByEmail(email) { return this._byEmail.get(String(email).toLowerCase()) ?? null; }
   async findById(id) { return this._byId.get(id) ?? null; }
+  async update(id, patch = {}) {
+    const current = await this.findById(id);
+    if (!current) throw new Error('utilisateur introuvable');
+    const previousEmail = String(current.email).toLowerCase();
+    const next = {
+      ...current,
+      ...patch,
+      id: current.id,
+      email: String(patch.email ?? current.email).toLowerCase(),
+    };
+    if (next.email !== previousEmail) this._byEmail.delete(previousEmail);
+    return this._put(next);
+  }
   async list({ tenantId } = {}) {
     const all = [...this._byId.values()];
     return tenantId ? all.filter((u) => u.tenantId === tenantId) : all;
@@ -116,7 +129,7 @@ export class AuthService {
     if (!ROLES.includes(role)) throw new Error(`role invalide: ${role}`);
     const passwordHash = await hashPassword(password);
     const id = globalThis.crypto?.randomUUID?.() ?? `u_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-    const user = await this.users.create({ id, email: String(email).toLowerCase(), name, role, tenantId, passwordHash, createdAt: new Date().toISOString() });
+    const user = await this.users.create({ id, email: String(email).toLowerCase(), name, role, tenantId, passwordHash, sessionVersion: 0, createdAt: new Date().toISOString() });
     return publicUser(user);
   }
 
@@ -136,7 +149,7 @@ export class AuthService {
     this.throttle.reset(key);
     const jti = globalThis.crypto?.randomUUID?.() ?? `j_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const token = await issueToken(
-      { sub: user.id, email: user.email, role: user.role, tenantId: user.tenantId, jti },
+      { sub: user.id, email: user.email, role: user.role, tenantId: user.tenantId, jti, sessionVersion: Number(user.sessionVersion || 0) },
       this.secret, { ttlSec: this.ttlSec },
     );
     return { token, user: publicUser(user) };
@@ -147,9 +160,48 @@ export class AuthService {
     const r = await verifyToken(token, this.secret);
     if (!r.valid) { const e = new Error(`jeton invalide (${r.reason})`); e.code = 'AUTH_TOKEN'; throw e; }
     const p = r.payload;
+    if (p.purpose) { const e = new Error('jeton invalide'); e.code = 'AUTH_TOKEN'; throw e; }
     if (this.sessions.isRevoked(p.jti)) { const e = new Error('jeton revoque'); e.code = 'AUTH_REVOKED'; throw e; }
     if (this.sessions.isBeforeCutoff(p.sub, p.iat)) { const e = new Error('session invalidee'); e.code = 'AUTH_REVOKED'; throw e; }
+    const user = await this.users.findById(p.sub);
+    if (!user || Number(user.sessionVersion || 0) !== Number(p.sessionVersion || 0)) {
+      const e = new Error('session invalidee'); e.code = 'AUTH_REVOKED'; throw e;
+    }
     return p;
+  }
+
+  /** Cree un jeton de verification d'adresse, sans reveler si le compte existe. */
+  async createPasswordReset({ email, ttlSec = 1800 } = {}) {
+    const user = await this.users.findByEmail(email ?? '');
+    const subject = user ?? { id: 'unknown', email: String(email || '').toLowerCase(), passwordHash: 'unknown' };
+    const passwordMarker = await sign(`password:${subject.id}:${subject.passwordHash}`, this.secret);
+    const token = await issueToken({
+      sub: subject.id,
+      email: subject.email,
+      purpose: 'password_reset',
+      passwordMarker,
+    }, this.secret, { ttlSec });
+    if (!user) return null;
+    return { token, user: publicUser(user) };
+  }
+
+  /** Consomme le lien verifie, change le mot de passe et invalide les sessions. */
+  async resetPassword({ token, password } = {}) {
+    const checked = await verifyToken(token, this.secret);
+    const invalid = () => { const e = new Error('lien de réinitialisation invalide ou expiré'); e.code = 'AUTH_RESET_INVALID'; return e; };
+    if (!checked.valid || checked.payload?.purpose !== 'password_reset') throw invalid();
+    const user = await this.users.findById(checked.payload.sub);
+    if (!user || user.email !== checked.payload.email) throw invalid();
+    const expectedMarker = await sign(`password:${user.id}:${user.passwordHash}`, this.secret);
+    if (expectedMarker !== checked.payload.passwordMarker) throw invalid();
+    const passwordHash = await hashPassword(password);
+    await this.users.update(user.id, {
+      passwordHash,
+      sessionVersion: Number(user.sessionVersion || 0) + 1,
+      passwordChangedAt: new Date().toISOString(),
+    });
+    this.revokeAllSessions(user.id);
+    return true;
   }
 
   /** Deconnexion : revoque ce jeton precis. */
@@ -263,13 +315,5 @@ export class FileUserStore extends InMemoryUserStore {
   async create(user) { const u = await super.create(user); await this.flush(); return u; }
 
   /** Met a jour un utilisateur existant (ex. rotation de mot de passe). */
-  async update(id, patch = {}) {
-    const u = await this.findById(id);
-    if (!u) throw new Error('utilisateur introuvable');
-    if (patch.email && String(patch.email).toLowerCase() !== u.email) {
-      this._byEmail.delete(u.email);
-    }
-    const next = { ...u, ...patch, id: u.id, email: String(patch.email ?? u.email).toLowerCase() };
-    this._put(next); await this.flush(); return next;
-  }
+  async update(id, patch = {}) { const u = await super.update(id, patch); await this.flush(); return u; }
 }

@@ -3,12 +3,17 @@ import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import consoleRoute from '../routes/console.mjs';
 import { HybridAgentGateway, SwarmService } from '../../../core/index.mjs';
+import { ConnectorConfigurationService, InMemoryConnectorConfigStore } from '../../../core/connector-config.mjs';
 
 async function buildApp() {
   const swarm = new SwarmService();
   const hybridGateway = new HybridAgentGateway({ swarm });
+  const connectorConfig = new ConnectorConfigurationService({ store: new InMemoryConnectorConfigStore() });
   const app = Fastify();
-  app.decorate('kayrosContext', { hybridGateway, engine: { swarm } });
+  app.decorate('kayrosContext', {
+    hybridGateway, connectorConfig, engine: { swarm },
+    crystalKnowsConfigured: false, connectorEncryptionConfigured: false,
+  });
   app.decorate('requireAuth', async () => ({ sub: 'u1', email: 'owner@kayros.test', role: 'comex', tenantId: 'tenant-a' }));
   await app.register(consoleRoute);
   return { app, swarm, hybridGateway };
@@ -43,4 +48,20 @@ test('console creates a room and executes a test mission', async (t) => {
   const response = await app.inject({ method: 'POST', url: `/v1/console/rooms/${roomId}/messages`, payload: { text: 'Lancer maintenant ?' } });
   assert.equal(response.statusCode, 200);
   assert.equal(response.json().summary.verdict, 'GO');
+  assert.ok(response.json().thread.thread_id);
+});
+
+test('console creates and updates a fully described agent', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const created = await app.inject({ method: 'POST', url: '/v1/console/agents', payload: {
+    agent_id: 'product_lead', role_name: 'Product Lead', department: 'Product', seniority: 'senior',
+    primary_focus: 'Challenge product-market fit.', mission: 'Verify the launch evidence.',
+    instructions: 'Be explicit.', constraints: ['No invented metrics'], provider: 'mock',
+    tools: ['portfolio'], connectors: ['console'], enabled: true,
+  } });
+  assert.equal(created.statusCode, 201);
+  const updated = await app.inject({ method: 'PATCH', url: '/v1/console/agents/product_lead', payload: { enabled: false, model: 'test-model' } });
+  assert.equal(updated.statusCode, 200);
+  assert.equal(updated.json().agent.enabled, false);
+  assert.equal(updated.json().agent.model, 'test-model');
 });

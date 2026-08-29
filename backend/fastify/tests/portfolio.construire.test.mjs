@@ -81,7 +81,10 @@ describe('backend Construire (Étape 3, EF-05/F1)', () => {
   });
 
   it('DELETE scenarios supprime + journal', async () => {
-    const res = await app.inject({ method: 'DELETE', url: `/v1/ideas/${ideaId}/scenarios/${idScenario('Retail augmenté')}`, headers: auth() });
+    const res = await app.inject({
+      method: 'DELETE', url: `/v1/ideas/${ideaId}/scenarios/${idScenario('Retail augmenté')}`,
+      headers: { authorization: `Bearer ${t}` },
+    });
     assert.equal(res.statusCode, 200, res.body);
     const idea = await ctx.ideas.get(ideaId);
     assert.equal(idea.construire.scenarios.length, 0);

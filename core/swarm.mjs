@@ -66,6 +66,9 @@ function makeId(prefix) {
 function strings(value) {
   return Array.isArray(value) ? value.map((x) => String(x ?? '').trim()).filter(Boolean) : [];
 }
+function plainObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? clone(value) : {};
+}
 function assertOneOf(value, allowed, label) {
   if (!allowed.includes(value)) throw new Error(`${label}: valeur inconnue "${value}"`);
 }
@@ -87,6 +90,17 @@ export function validateAgentDefinition(input, { forceType = null } = {}) {
   d.department = String(d.department || '').trim();
   d.seniority = d.seniority || 'senior';
   d.primary_focus = String(d.primary_focus || '').trim();
+  d.display_name = String(d.display_name || d.role_name || '').trim();
+  d.mission = String(d.mission || d.primary_focus || '').trim();
+  d.instructions = String(d.instructions || '').trim();
+  d.constraints = strings(d.constraints);
+  d.provider = String(d.provider || '').trim() || null;
+  d.model = String(d.model || '').trim() || null;
+  d.tools = strings(d.tools);
+  d.connectors = strings(d.connectors);
+  d.metadata = plainObject(d.metadata);
+  d.behavioral_profile = plainObject(d.behavioral_profile);
+  d.enabled = d.enabled !== false;
   assertOneOf(d.seniority, AGENT_SENIORITIES, 'seniority');
   if (!d.role_name || !d.department || !d.primary_focus) {
     throw new Error('role_name, department et primary_focus sont requis');
@@ -201,9 +215,17 @@ export function resolveEffectiveRules(definition) {
 export function compileEffectiveAgentContext(definition) {
   const d = validateAgentDefinition(definition);
   const rules = resolveEffectiveRules(d);
-  return rules.length
-    ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
-    : '- No active evaluation rule; explicitly flag this governance gap.';
+  const sections = [
+    `Mission: ${d.mission}`,
+    d.instructions ? `Instructions: ${d.instructions}` : null,
+    d.constraints.length ? `Contraintes:\n${d.constraints.map((item) => `- ${item}`).join('\n')}` : null,
+    d.tools.length ? `Outils autorisés: ${d.tools.join(', ')}` : null,
+    d.connectors.length ? `Connecteurs autorisés: ${d.connectors.join(', ')}` : null,
+    `Règles de décision:\n${rules.length
+      ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
+      : '- Aucune règle active; signaler explicitement cette lacune de gouvernance.'}`,
+  ];
+  return sections.filter(Boolean).join('\n\n');
 }
 
 export class AgentRegistry {
@@ -241,6 +263,19 @@ export class AgentRegistry {
     const updated = applyRulePatchToDefinition(current, patch);
     registry.set(agentId, updated);
     return clone(updated);
+  }
+
+  update(agentId, patch, { tenantId = null } = {}) {
+    const registry = this._registry(tenantId);
+    const current = registry.get(agentId);
+    if (!current) throw new Error(`agent introuvable: ${agentId}`);
+    if (patch.agent_id && patch.agent_id !== agentId) throw new Error('agent_id est immuable');
+    const next = validateAgentDefinition({ ...current, ...clone(patch), agent_id: agentId });
+    if (next.human_profile && next.human_profile.consent_confirmed !== true) {
+      throw new Error('human_profile: consentement explicite requis');
+    }
+    registry.set(agentId, next);
+    return clone(next);
   }
 
   assignHumanProfile(agentId, humanProfile, { tenantId = null } = {}) {
@@ -452,6 +487,16 @@ export class SwarmService {
     return agent;
   }
 
+  updateAgent(agentId, patch, { tenantId = null, by = null } = {}) {
+    const agent = this.registry.update(agentId, patch, { tenantId });
+    this._persist(this.store?.saveAgent?.(agent, { tenantId: tenantKey(tenantId) }));
+    this._audit({
+      type: 'swarm.agent.updated', agent_id: agentId, tenant_id: tenantKey(tenantId), by,
+      enabled: agent.enabled,
+    });
+    return agent;
+  }
+
   assignPersonality(agentId, humanProfile, { tenantId = null, by = null } = {}) {
     let profile = normalizeHumanProfile(humanProfile);
     if (!(profile.profile_sources || []).length) {
@@ -505,7 +550,11 @@ export class SwarmService {
     if (this.configurations.has(this._key(tenantId, swarm_id))) throw new Error(`swarm déjà existant: ${swarm_id}`);
     if (!active_agents.length) throw new Error('active_agents: au moins un agent requis');
     assertOneOf(voting_threshold, VOTING_THRESHOLDS, 'voting_threshold');
-    for (const id of active_agents) if (!this.registry.get(id, { tenantId })) throw new Error(`agent actif introuvable: ${id}`);
+    for (const id of active_agents) {
+      const agent = this.registry.get(id, { tenantId });
+      if (!agent) throw new Error(`agent actif introuvable: ${id}`);
+      if (agent.enabled === false) throw new Error(`agent désactivé: ${id}`);
+    }
     const overrides = clone(input?.agent_rule_overrides || {});
     for (const [id, patch] of Object.entries(overrides)) {
       const definition = this.registry.get(id, { tenantId });
@@ -548,6 +597,7 @@ export class SwarmService {
     const run_id = makeId('swarmrun');
     const definitions = config.active_agents.map((id) => {
       const base = this.registry.get(id, { tenantId });
+      if (!base || base.enabled === false) throw new Error(`agent indisponible ou désactivé: ${id}`);
       return applyAgentPatchToDefinition(base, config.agent_rule_overrides?.[id] || {}, {
         personalityEnabled: config.personality_simulation_enabled,
       });
@@ -561,7 +611,13 @@ export class SwarmService {
           personalityEnabled: config.personality_simulation_enabled,
           llm: this.llm, memory: this.memory,
         });
-        raw = await agent.executeDecision({ question, context, provider, sovereignty, model, runId: run_id, traceId: run_id });
+        raw = await agent.executeDecision({
+          question, context,
+          provider: definition.provider || provider,
+          sovereignty,
+          model: definition.model || model,
+          runId: run_id, traceId: run_id,
+        });
       }
       return {
         ...normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled }),

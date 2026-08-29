@@ -22,6 +22,7 @@ import {
   InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
   InMemorySalesOracleRepository, SalesOracleService,
 } from '../../../core/index.mjs';
+import { ConnectorConfigurationService, InMemoryConnectorConfigStore, PgConnectorConfigStore } from '../../../core/connector-config.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
   createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore, PgSalesOracleRepository,
@@ -107,6 +108,8 @@ export default async function buildContext() {
     KAYROS_MCP_CLIENTS_JSON = '',
     KAYROS_MCP_ALLOWED_ORIGINS = '',
     KAYROS_MCP_RATE_LIMIT = '60',
+    KAYROS_CONNECTOR_ENCRYPTION_KEY = '',
+    KAYROS_PUBLIC_API_URL = '',
   } = process.env;
 
   const mcpClients = createMcpClientRegistry(KAYROS_MCP_CLIENTS_JSON);
@@ -200,6 +203,8 @@ export default async function buildContext() {
   const AUTH_SECRET = process.env.KAYROS_AUTH_SECRET || '';
   const USERS_FILE = process.env.KAYROS_USERS_FILE || '';
   const IDEAS_FILE = process.env.KAYROS_IDEAS_FILE || '';
+  const PASSWORD_RESET_TTL_SEC = Math.max(300, Number(process.env.KAYROS_PASSWORD_RESET_TTL_SEC) || 1800);
+  const CONSOLE_URL = String(process.env.KAYROS_CONSOLE_URL || 'https://www.kayroslab.com/console/').replace(/\/$/, '');
 
   const pgPool = await createPgPool(process.env);
   const requirePostgres = /^(1|true|yes)$/i.test(String(process.env.KAYROS_REQUIRE_POSTGRES || ''));
@@ -242,6 +247,26 @@ export default async function buildContext() {
   }
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
+  let passwordResetMailer = null;
+  if (process.env.KAYROS_SMTP_URL) {
+    try {
+      const { createTransport } = await import('nodemailer');
+      const transport = createTransport(process.env.KAYROS_SMTP_URL);
+      const from = process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost';
+      passwordResetMailer = {
+        async send({ email, token }) {
+          const resetUrl = `${CONSOLE_URL}/#reset-password?token=${encodeURIComponent(token)}`;
+          await transport.sendMail({
+            to: email,
+            from,
+            subject: 'Réinitialisez votre mot de passe KayrosLab',
+            text: `Une demande de réinitialisation a été reçue pour votre compte KayrosLab.\n\nOuvrez ce lien dans les ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} prochaines minutes :\n${resetUrl}\n\nSi vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail. Votre mot de passe reste inchangé.`,
+            html: `<p>Une demande de réinitialisation a été reçue pour votre compte KayrosLab.</p><p><a href="${resetUrl}">Réinitialiser mon mot de passe</a></p><p>Ce lien expire dans ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} minutes et ne peut être utilisé qu'une fois.</p><p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.</p>`,
+          });
+        },
+      };
+    } catch { console.warn('[kayroslab] SMTP configuré mais transport de réinitialisation indisponible'); }
+  }
   const scorecards = defaultScorecards();
   const salesOracleRepository = pgPool ? new PgSalesOracleRepository(pgPool) : new InMemorySalesOracleRepository();
   const objectStorage = await createObjectStorageFromEnv(process.env);
@@ -326,6 +351,12 @@ export default async function buildContext() {
   const stageTimer = new StageTimer({ governance });
 
   const linkService = await createLinkService({ pgPool, env: process.env });
+  const connectorConfig = new ConnectorConfigurationService({
+    store: pgPool ? new PgConnectorConfigStore(pgPool) : new InMemoryConnectorConfigStore(),
+    encryptionKey: KAYROS_CONNECTOR_ENCRYPTION_KEY || null,
+    linkService,
+    publicApiUrl: KAYROS_PUBLIC_API_URL,
+  });
 
   const slackAdapter = process.env.SLACK_BOT_TOKEN
     ? new SlackAdapter({
@@ -500,9 +531,9 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
 
   return {
-    providers, llm, embeddings, tools, auth, userStore, ideas, scorecards,
+    providers, llm, embeddings, tools, auth, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
-    linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService,
+    linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig,
     engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,
@@ -511,6 +542,8 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
+    crystalKnowsConfigured: !!CRYSTALKNOWS_API_TOKEN,
+    connectorEncryptionConfigured: !!KAYROS_CONNECTOR_ENCRYPTION_KEY,
     mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
   };
 }
