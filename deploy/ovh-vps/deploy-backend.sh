@@ -137,13 +137,19 @@ sleep 2
 HEALTH_JSON=$(curl -fsS "http://127.0.0.1:8787/health")
 echo "${HEALTH_JSON}"
 if [[ -n "${DB_URL}" ]]; then
-  HEALTH_JSON="${HEALTH_JSON}" node -e '
+  if ! HEALTH_JSON="${HEALTH_JSON}" node -e '
     const health = JSON.parse(process.env.HEALTH_JSON || "{}");
     if (health.persistence !== "postgres" || health.multiInstanceReady !== true) {
       console.error("ERREUR : PostgreSQL est configure mais /health ne confirme pas son activation.");
       process.exit(1);
     }
-  '
+  '; then
+    echo "Dernieres erreurs PostgreSQL du processus :" >&2
+    tail -n 120 /var/log/pm2/kayros-api.err.log 2>/dev/null \
+      | grep -Ei 'postgres|database|connect|ECONN|authentication' \
+      | tail -n 20 >&2 || true
+    exit 1
+  fi
 fi
 echo " -> health OK"
 
