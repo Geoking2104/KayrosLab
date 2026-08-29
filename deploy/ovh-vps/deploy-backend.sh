@@ -102,7 +102,12 @@ else
   echo "TimesFM disabled — deterministic projection remains available."
 fi
 
-pm2 startOrReload "${BACKEND_DIR}/ecosystem.config.cjs" --env production
+# La variable vide transmise par un runner CI ne doit jamais masquer la valeur
+# persistante du fichier .env. DB_URL a deja ete lue et validee ci-dessus.
+if [[ -n "${DB_URL}" ]]; then
+  export DATABASE_URL="${DB_URL}"
+fi
+pm2 startOrReload "${BACKEND_DIR}/ecosystem.config.cjs" --env production --update-env
 pm2 save
 
 NGINX_CONF="${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-api.conf"
@@ -120,7 +125,18 @@ if [[ -f "${NGINX_CONF}" ]]; then
 fi
 
 sleep 2
-curl -fsS "http://127.0.0.1:8787/health" && echo " -> health OK"
+HEALTH_JSON=$(curl -fsS "http://127.0.0.1:8787/health")
+echo "${HEALTH_JSON}"
+if [[ -n "${DB_URL}" ]]; then
+  HEALTH_JSON="${HEALTH_JSON}" node -e '
+    const health = JSON.parse(process.env.HEALTH_JSON || "{}");
+    if (health.persistence !== "postgres" || health.multiInstanceReady !== true) {
+      console.error("ERREUR : PostgreSQL est configure mais /health ne confirme pas son activation.");
+      process.exit(1);
+    }
+  '
+fi
+echo " -> health OK"
 
 echo ""
 echo "Deploiement termine. Backups : bash ${APP_DIR}/deploy/ovh-vps/install-cron-backup.sh"
