@@ -4,6 +4,12 @@ import rateLimit from '@fastify/rate-limit';
 import metricsPlugin from 'fastify-metrics';
 import buildContext from './lib/context.mjs';
 import authPlugin from './plugins/auth.mjs';
+import { applyEnvFileDefaults } from './lib/env-file.mjs';
+
+// PM2 peut conserver une ancienne variable vide entre deux reloads. Recharger
+// les defauts du fichier serveur avant de construire le contexte, sans jamais
+// ecraser une valeur non vide injectee par l'environnement de production.
+applyEnvFileDefaults();
 
 const app = Fastify({ logger: true, bodyLimit: 1048576 });
 
