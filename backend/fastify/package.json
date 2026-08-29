@@ -15,15 +15,16 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1112.0",
     "@aws-sdk/s3-request-presigner": "^3.1112.0",
-    "@fastify/cors": "^9.0.1",
-    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/rate-limit": "^11.2.0",
     "@modelcontextprotocol/sdk": "^1.30.0",
-    "fastify": "^4.28.1",
-    "fastify-metrics": "^10.6.0",
+    "@platformatic/prom-client": "^1.0.0",
+    "fastify": "^5.12.1",
+    "fastify-metrics": "^13.2.1",
     "i18n": "^0.15.3",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^9.0.6",
     "pg": "^8.16.3",
-    "zod": "^4.4.3"
+    "zod": "^4.5.2"
   },
   "main": "index.mjs",
   "keywords": [],

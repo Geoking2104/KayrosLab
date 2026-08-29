@@ -43,8 +43,32 @@ test('runs only when mentioned and deduplicates platform retries', async () => {
   const retry = await gateway.handleMessage(input);
   assert.equal(first.run.question, 'faut-il lancer maintenant ?');
   assert.equal(first.summary.verdict, 'CONDITIONAL_GO');
+  assert.ok(first.thread.thread_id);
+  assert.equal(first.thread.status, 'needs_clarification');
+  assert.equal(first.thread.messages.some((message) => message.kind === 'clarification_request'), true);
   assert.equal(retry.duplicate, true);
   assert.equal((await gateway.activity({ roomId: room.room_id })).filter((e) => e.type === 'collaboration.run.completed').length, 1);
+});
+
+test('human clarification reruns the same room collective with durable context', async () => {
+  const { gateway } = gatewayWithDeterministicAgents();
+  await gateway.createRoom({ platform: 'console', external_room_id: 'local-1', name: 'Launch' }, { tenantId: 'tenant-a' });
+  let calls = 0;
+  gateway.swarm.run = async (_id, options) => {
+    calls += 1;
+    return {
+      run_id: `run-${calls}`, swarm_name: 'Launch', question: options.question,
+      analyses: [{ agent_id: 'cfo', role_name: 'CFO', verdict: calls === 1 ? 'CONDITIONAL_GO' : 'GO',
+        primary_reason: 'Budget evidence', critical_risks: calls === 1 ? ['Budget inconnu'] : [],
+        required_mitigations: calls === 1 ? ['Confirmer le budget'] : [], unverified_assumptions: [] }],
+      consensus: { verdict: calls === 1 ? 'CONDITIONAL_GO' : 'GO', rationale: 'review', requires_human_arbitration: true },
+    };
+  };
+  const first = await gateway.handleMessage({ platform: 'console', external_room_id: 'local-1', text: 'Lancer ?', explicit: true, tenantId: 'tenant-a' });
+  const continued = await gateway.continueThread(first.thread.thread_id, { tenantId: 'tenant-a', text: 'Budget validé à 120 k€', by: 'owner@test' });
+  assert.equal(calls, 2);
+  assert.equal(continued.current_run_id, 'run-2');
+  assert.equal(continued.messages.filter((message) => message.kind === 'run').length, 2);
 });
 
 test('serializes agent work inside one room', async () => {

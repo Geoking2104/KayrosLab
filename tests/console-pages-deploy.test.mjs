@@ -30,8 +30,42 @@ test('le formulaire propose une inscription puis ouvre la console', async () => 
     read('frontend/console-app/src/App.jsx'),
     read('frontend/console-app/src/api.js'),
   ]);
-  assert.match(app, /S’inscrire pour découvrir la console/);
+  assert.match(app, /Créer un espace de découverte/);
   assert.match(app, /await api\.register\(name, email, password\)/);
   assert.match(app, /const result = await api\.login\(email, password\)/);
   assert.match(api, /register:.*request\('\/v1\/auth\/register'/);
+});
+
+test('la console v2 expose les parcours agents, reglages et decision durable', async () => {
+  const [app, api, css] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+    read('frontend/console-app/src/app.css'),
+  ]);
+  assert.match(app, /Agents/);
+  assert.match(app, /Réglages/);
+  assert.match(app, /Profil comportemental/);
+  assert.match(app, /consentement explicite/i);
+  assert.match(app, /Slack/);
+  assert.match(app, /Discord/);
+  assert.match(app, /Microsoft Teams/);
+  assert.match(app, /Contributions individuelles/);
+  assert.match(app, /Arbitrage humain/);
+  assert.match(api, /\/v1\/console\/agents/);
+  assert.match(api, /\/v1\/console\/connectors/);
+  assert.match(api, /\/v1\/console\/threads/);
+  assert.match(css, /@media \(max-width: 840px\)/);
+  assert.match(css, /@media \(max-width: 560px\)/);
+});
+
+test('la connexion expose un parcours complet de mot de passe oublie', async () => {
+  const [app, api] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+  ]);
+  assert.match(app, /Mot de passe oublié/);
+  assert.match(app, /Envoyer le lien de vérification/);
+  assert.match(app, /Confirmer le mot de passe/);
+  assert.match(api, /\/v1\/auth\/password\/forgot/);
+  assert.match(api, /\/v1\/auth\/password\/reset/);
 });

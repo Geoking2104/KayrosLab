@@ -40,6 +40,7 @@ app.addHook('preHandler', async (req, reply) => {
   if (req.method === 'GET') return;
   const path = (req.url || '').split('?')[0];
   if (path.startsWith('/v1/demo/')) return;
+  if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
   if (path === '/mcp') return; // dedicated scoped Bearer authentication
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });

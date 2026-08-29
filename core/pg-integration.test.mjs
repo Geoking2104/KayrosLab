@@ -12,6 +12,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { randomBytes } from 'node:crypto';
 
 import {
   createPgPool,
@@ -21,6 +22,7 @@ import {
   PgCollaborationStore,
 } from './pg-store.mjs';
 import { createWorkflowState, applyWorkflowEvent } from './workflow-state.mjs';
+import { ConnectorConfigurationService, PgConnectorConfigStore } from './connector-config.mjs';
 
 const DB = process.env.DATABASE_URL || process.env.KAYROS_DATABASE_URL || '';
 const skip = DB ? false : 'DATABASE_URL absent : integration Postgres ignoree';
@@ -299,6 +301,51 @@ test('le verrou advisory serialise deux noeuds sur le meme salon', { skip }, asy
     assert.equal(secondEntered, true, 'le second noeud reprend apres liberation');
   } finally {
     releaseFirst?.();
+    await pool.end();
+  }
+});
+
+test('les fils de decision et secrets connecteurs font un aller-retour PostgreSQL', { skip }, async () => {
+  const pool = await createPgPool({ DATABASE_URL: DB });
+  await applySchema(pool);
+  const tenantId = uniq('console-v2');
+  const roomId = uniq('room');
+  const threadId = uniq('thread');
+  const timestamp = new Date().toISOString();
+  const collaboration = new PgCollaborationStore(pool);
+  const connectorStore = new PgConnectorConfigStore(pool);
+  const connectors = new ConnectorConfigurationService({
+    store: connectorStore,
+    encryptionKey: randomBytes(32).toString('base64'),
+    publicApiUrl: 'https://api.example.test',
+  });
+  try {
+    await collaboration.createRoom({
+      room_id: roomId, tenant_id: tenantId, name: 'Console V2', platform: 'console',
+      external_room_id: roomId, status: 'active', created_at: timestamp, updated_at: timestamp,
+    }, {});
+    await collaboration.createThread({
+      thread_id: threadId, tenant_id: tenantId, room_id: roomId, root_run_id: 'run-1',
+      current_run_id: 'run-1', status: 'needs_clarification', question: 'Quel budget ?',
+      created_at: timestamp, updated_at: timestamp,
+    });
+    await collaboration.appendThreadMessage(threadId, {
+      role: 'human', kind: 'answer', author_id: 'u1', text: '50 k€', created_at: timestamp,
+    }, { tenantId });
+    const thread = await collaboration.getThread(threadId, { tenantId });
+    assert.equal(thread.messages[0].text, '50 k€');
+    assert.equal((await collaboration.listThreads({ tenantId })).length, 1);
+
+    const publicView = await connectors.configure(tenantId, 'slack', {
+      secrets: { bot_token: 'xoxb-postgres-secret', signing_secret: 'signing-secret' },
+    });
+    assert.equal(JSON.stringify(publicView).includes('xoxb-postgres-secret'), false);
+    const { rows } = await pool.query('select encrypted_secrets from kayros_connector_configurations where tenant_id=$1', [tenantId]);
+    assert.equal(rows[0].encrypted_secrets.includes('xoxb-postgres-secret'), false);
+    assert.equal((await connectorStore.getByConnectionId(publicView.connection_id)).tenant_id, tenantId);
+  } finally {
+    await pool.query('delete from kayros_connector_configurations where tenant_id=$1', [tenantId]);
+    await pool.query('delete from kayros_collaboration_rooms where tenant_id=$1', [tenantId]);
     await pool.end();
   }
 });

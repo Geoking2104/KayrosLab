@@ -16,6 +16,11 @@ on:
       - 'core/connectors-teams-deep.mjs'
       - 'core/connectors-discord-deep.mjs'
       - 'core/connectors-slack-deep.mjs'
+      - 'core/connector-config.mjs'
+      - 'core/connector-config.test.mjs'
+      - 'core/swarm.mjs'
+      - 'core/hybrid-agent-gateway.mjs'
+      - 'core/collaboration-store.mjs'
       - 'core/governance.mjs'
       - 'core/auth.mjs'
       - 'core/adapters/timesfm-forecast.mjs'
@@ -30,7 +35,13 @@ on:
       - 'backend/adapters/timesfm/**'
       - 'backend/timesfm-service/**'
       - 'backend/fastify/package.json'
+      - 'backend/fastify/package-lock.json'
       - 'core/adapters/timesfm-forecast.mjs'
+      - 'core/connector-config.mjs'
+      - 'core/connector-config.test.mjs'
+      - 'core/swarm.mjs'
+      - 'core/hybrid-agent-gateway.mjs'
+      - 'core/collaboration-store.mjs'
       - '.github/workflows/backend-tests.yml'
 
 jobs:
@@ -46,9 +57,11 @@ jobs:
           python-version: '3.11'
       - name: Install backend dependencies
         working-directory: backend/fastify
-        run: npm install --no-package-lock --ignore-scripts
+        run: npm ci --ignore-scripts
       - name: Run backend test suite
         working-directory: backend/fastify
         run: npm test
+      - name: Run console core security and decision-thread tests
+        run: node --test core/connector-config.test.mjs tests/hybrid-agent-gateway.test.mjs tests/console-pages-deploy.test.mjs
       - name: Compile-check isolated TimesFM service
         run: python -m py_compile backend/timesfm-service/timesfm_service.py

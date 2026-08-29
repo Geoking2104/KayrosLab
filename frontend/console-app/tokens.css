@@ -20,7 +20,7 @@
   --color-shadow: oklch(5% 0.01 242 / 0.28);
 
   --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
-  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
   --font-mono: "Fira Code", "Cascadia Code", monospace;
 
   --space-3xs: 0.125rem;
@@ -52,4 +52,5 @@
   --radius-md: 0.75rem;
   --radius-pill: 999px;
   --rule-thin: 1px;
+  --z-modal: 400;
 }

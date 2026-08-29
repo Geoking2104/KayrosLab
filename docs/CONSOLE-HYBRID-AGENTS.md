@@ -1,5 +1,7 @@
 # KayrosLab Console and hybrid collaboration rooms
 
+> La spécification de production V2 (agents administrables, coffre connecteurs et fils de décision) se trouve dans [PRODUCTION-CONSOLE-V2.md](./PRODUCTION-CONSOLE-V2.md).
+
 This architecture adopts the useful collaboration patterns of agent workspaces — rooms, agent presence, one execution slot per room and a shared activity stream — without copying third-party console code.
 
 ## Product model
