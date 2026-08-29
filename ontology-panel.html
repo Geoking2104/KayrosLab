@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Ontology panel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { font-family: Geist, system-ui, sans-serif; margin: 0; }
+  #cy { width: 100%; height: 320px; background: #f8fafc; border-radius: 1rem; }
+</style>
+</head>
+<body class="bg-white text-slate-900 p-4">
+  <div class="flex items-center justify-between mb-3 gap-2 flex-wrap">
+    <div>
+      <h1 class="font-semibold text-lg" style="font-family:Space Grotesk,sans-serif">Positioner ontology</h1>
+      <p class="text-xs text-slate-500">Embedded sample · full explorer for filters &amp; cards</p>
+    </div>
+    <a href="./ontology-explorer.html" class="text-sm font-semibold text-sky-600">Open explorer →</a>
+  </div>
+  <div id="cy" class="border border-slate-200"></div>
+  <p id="st" class="text-xs text-slate-400 mt-2"></p>
+<script>
+(function () {
+  // Minimal static sample (mirrors ENTITY_TYPES subset) — works offline without API
+  const nodes = [
+    { data: { id: 'product', label: 'Product', group: 'business', color: '#0ea5e9' } },
+    { data: { id: 'market', label: 'Market', group: 'business', color: '#8b5cf6' } },
+    { data: { id: 'competitor', label: 'Competitor', group: 'business', color: '#f97316' } },
+    { data: { id: 'tech_stack', label: 'Tech stack', group: 'tech', color: '#22c55e' } },
+    { data: { id: 'capability', label: 'Capability', group: 'tech', color: '#06b6d4' } },
+  ];
+  const edges = [
+    { data: { id: 'e1', source: 'product', target: 'market', label: 'serves' } },
+    { data: { id: 'e2', source: 'competitor', target: 'market', label: 'competes_in' } },
+    { data: { id: 'e3', source: 'product', target: 'tech_stack', label: 'built_on' } },
+    { data: { id: 'e4', source: 'tech_stack', target: 'capability', label: 'enables' } },
+  ];
+  const qs = new URLSearchParams(location.search);
+  const api = (qs.get('api') || '').replace(/\/$/, '');
+  const st = document.getElementById('st');
+
+  function paint(elements) {
+    if (typeof cytoscape === 'undefined') { st.textContent = 'Cytoscape CDN unavailable'; return; }
+    cytoscape({
+      container: document.getElementById('cy'),
+      elements,
+      style: [
+        { selector: 'node', style: {
+          'background-color': 'data(color)', label: 'data(label)', 'font-size': 11,
+          'text-valign': 'bottom', 'text-margin-y': 6, width: 26, height: 26,
+          'border-width': 2, 'border-color': '#fff', color: '#0f172a', 'font-weight': 600,
+        }},
+        { selector: 'edge', style: {
+          width: 1.5, 'line-color': '#cbd5e1', 'target-arrow-shape': 'triangle',
+          'target-arrow-color': '#94a3b8', 'curve-style': 'bezier', label: 'data(label)',
+          'font-size': 9, color: '#64748b', 'text-rotation': 'autorotate',
+        }},
+      ],
+      layout: { name: 'cose', animate: false, padding: 24 },
+    });
+  }
+
+  async function load() {
+    if (!api) {
+      paint([...nodes, ...edges]);
+      st.textContent = 'Offline sample graph · pass ?api= to load live ontology';
+      return;
+    }
+    try {
+      const r = await fetch(api + '/v1/positionning/ontology');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      const els = data.graph?.elements || [];
+      paint(els.length ? els : [...nodes, ...edges]);
+      st.textContent = (data.graph?.nodes?.length || 0) + ' nodes · ' + (data.graph?.edges?.length || 0) + ' edges';
+    } catch (e) {
+      paint([...nodes, ...edges]);
+      st.textContent = 'Fallback sample (' + e.message + ')';
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>

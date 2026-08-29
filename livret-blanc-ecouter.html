@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livret Blanc — Écouter : Réduction du Bruit et Perception des Signaux Faibles | KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+
+.section{margin-bottom:6mm}
+
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.comparison__col{padding:2.5mm;border-radius:3px}
+.comparison__col--bad{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15)}
+.comparison__col--good{background:rgba(47,185,168,0.05);border:1px solid rgba(47,185,168,0.15)}
+.comparison__col h4{margin-bottom:1.5mm}
+.comparison__col ul{list-style:none}
+.comparison__col ul li{font-size:0.78rem;color:#d1d5db;padding:0.4mm 0;padding-left:3mm;position:relative}
+.comparison__col--bad ul li::before{content:'✕';color:#ef4444;position:absolute;left:0}
+.comparison__col--good ul li::before{content:'✓';color:#2FB9A8;position:absolute;left:0}
+
+.kpi-row{display:flex;gap:2.5mm;margin:3mm 0;justify-content:space-between}
+.kpi{flex:1;text-align:center;padding:2mm 1.5mm;background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:3px}
+.kpi__value{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:#2FB9A8}
+.kpi__label{font-size:0.6rem;color:#6b7280;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.3mm}
+
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2,.comparison{grid-template-columns:1fr}.kpi-row{flex-wrap:wrap}.kpi{min-width:45%}}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Livret Blanc — Juillet 2026</div>
+  <h1 class="cover__title">
+    <em>Écouter</em>&nbsp;:<br>
+    Réduction du Bruit<br>
+    et Perception des <em>Signaux Faibles</em>
+  </h1>
+  <p class="cover__subtitle">
+    Comment l'étape d'écoute augmentée du framework KayrosLab transforme<br>
+    le bruit ambiant en intelligence stratégique actionnable.
+  </p>
+  <div class="cover__meta">
+    Par <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0
+  </div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
+
+<!-- ===== PAGE 2: SOMMAIRE ===== -->
+<div class="page">
+  <h1>Sommaire</h1>
+  <div style="margin-top: 8mm;">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction : Le problème du bruit stratégique</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>La nature des signaux faibles</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>Architecture d'Écouter : le pipeline bruit → signal → intelligence</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>L'agent Signal Scanner</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Scoring des signaux : le pré-Kayros Index</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Context Enrichment : du signal à l'intelligence actionnable</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Détection amont des risques réglementaires</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>La boucle de rétroaction : quand Réaliser ré-alimente Écouter</span> <span class="page-num" style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
+
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Le problème du bruit stratégique.</span>
+  </p>
+  <p>
+    Les organisations n'ont jamais eu accès à autant de données. Capteurs, médias sociaux,
+    publications brevets, rapports d'analystes, retours terrains, flux réglementaires — le volume
+    d'informations disponibles croît exponentiellement. Pourtant, <strong>la qualité des décisions
+    stratégiques ne suit pas</strong>.
+  </p>
+  <p>
+    Ce paradoxe a un nom : le <strong>bruit stratégique</strong>. La surabondance d'informations
+    non filtrées, non contextualisées et non priorisées noie les signaux réellement porteurs
+    sous un flot de données anecdotiques, redondantes ou trompeuses. Plus le volume augmente,
+    plus le rapport signal/bruit se dégrade — et plus le risque de manquer une rupture
+    concurrentielle s'accroît.
+  </p>
+
+  <div class="callout callout--red">
+    <p><strong>Le paradoxe :</strong> 74 % des décideurs stratégiques déclarent disposer de
+    « plus de données que jamais », mais seuls 31 % estiment que ces données améliorent
+    réellement leurs décisions (source : MIT Sloan Management Review, 2025).</p>
+  </div>
+
+  <p>
+    Le coût du bruit n'est pas abstrait. Chaque signal faible noyé dans le bruit, chaque alerte
+    précoce ignorée, chaque tendance émergente détectée trop tard se traduit en <strong>coûts
+    d'opportunité</strong>, <strong>réactions en urgence</strong> et <strong>décisions
+    sous-optimales</strong>.
+  </p>
+  <p>
+    <strong>Écouter</strong> — la première étape du cycle KayrosLab — a été conçue pour résoudre
+    ce problème. Ce livret blanc détaille comment son pipeline de réduction de bruit, son agent
+    Signal Scanner et son système de scoring transforment le flux informationnel brut en
+    <strong>intelligence stratégique actionnable</strong>.
+  </p>
+
+  <h2 style="margin-top: 5mm;">Écouter dans le <span class="highlight">cycle</span> KayrosLab</h2>
+  <div class="flow" style="margin-top: 3mm;">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label" style="color:#f59e0b;font-weight:700;">Écouter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Cartographier</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Positionner</div></div>
+  </div>
+  <div class="flow" style="margin-top: 1mm;">
+    <div class="flow__step"><div class="num">08</div><div class="label">Réaliser</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Projeter</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
+  </div>
+  <p style="margin-top: 2mm; font-size:0.8rem; color:#6b7280; text-align:center;">
+    Écouter est la porte d'entrée du cycle. Toute idée, tout signal, toute alerte y est filtré,
+    scoré et contextualisé avant de poursuivre.
+  </p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: NATURE DES SIGNAUX FAIBLES ===== -->
+<div class="page">
+  <h1>2. <span class="highlight">La nature des signaux faibles</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Pourquoi les vrais signaux sont les plus difficiles à voir.</span>
+  </p>
+  <p>
+    Un <strong>signal faible</strong> est une information fragmentaire, souvent ambiguë,
+    qui émerge en marge des flux dominants. Il précède une tendance, annonce une rupture,
+    signale un risque naissant. Par définition, il n'est pas encore validé, pas encore mesurable
+    à grande échelle — et donc <strong>facile à ignorer</strong>.
+  </p>
+
+  <h2>Les <span class="highlight">5 caractéristiques</span> du signal faible</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card__title">01. Fragilité</div>
+      <p>Le signal faible est ténu. Une mention dans un blog spécialisé, un brevet déposé dans
+      une classification inhabituelle, une startup qui lève des fonds sur un segment inattendu.
+      Il ne s'impose pas — il se devine.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">02. Ambiguïté</div>
+      <p>Sa signification n'est pas immédiate. Est-ce une anomalie statistique ou le premier
+      indicateur d'une tendance lourde ? Le signal faible exige une interprétation, ce qui le
+      rend vulnérable aux biais cognitifs de confirmation.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">03. Interstitialité</div>
+      <p>Le signal faible se niche aux intersections — entre secteurs, entre technologies,
+      entre disciplines. Il échappe aux radars spécialisés parce qu'il n'appartient à aucun
+      périmètre défini.</p>
+    </div>
+    <div class="card">
+      <div class="card__title">04. Temporalité courte</div>
+      <p>La fenêtre de détection d'un signal faible est limitée. Soit il est capté tôt et
+      devient un avantage concurrentiel, soit il disparaît dans le bruit ou émerge trop tard
+      chez un concurrent.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Exemple concret :</strong> En 2022, le décret chinois sur les « algorithmes
+    de recommandation » a été mentionné dans deux publications académiques et un post LinkedIn
+    avant d'être formellement publié. Les entreprises qui ont <strong>écouté</strong> ces signaux
+    faibles ont adapté leur conformité en amont. Les autres ont subi des blocages marché
+    six mois plus tard.</p>
+  </div>
+
+  <h2 style="margin-top: 4mm;">Pourquoi le <span class="highlight">cerveau humain</span> les sous-estime</h2>
+  <p>Le biais de confirmation, le biais de disponibilité, l'ancrage — la psychologie cognitive
+  identifie plusieurs mécanismes qui conduisent les équipes à privilégier les signaux forts
+  et familiers au détriment des signaux faibles et émergents. Ce n'est pas une question de
+  compétence : c'est une <strong>architecture cognitive</strong> qui n'a pas évolué pour traiter
+  le volume et la complexité informationnelle du XXIe siècle.</p>
+  <p>C'est précisément là qu'<strong>Écouter</strong> intervient : non pour remplacer l'intuition
+  humaine, mais pour la <strong>compléter par un filtre systématique, objectif et traçable</strong>.</p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: ARCHITECTURE D'ÉCOUTER ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">Architecture d'Écouter</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Le pipeline bruit → signal → intelligence.</span>
+  </p>
+  <p>
+    Écouter n'est pas un filtre passif ni un simple agrégateur de flux RSS. C'est un <strong>pipeline
+    actif en 3 étapes</strong> qui transforme le flux informationnel brut en signaux qualifiés,
+    prêts à alimenter l'étape Cartographier du cycle KayrosLab.
+  </p>
+
+  <div class="flow" style="margin-top: 4mm;">
+    <div class="flow__step"><div class="num">ÉTAPE 1</div><div class="label">Screener</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">ÉTAPE 2</div><div class="label">Enricher</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">ÉTAPE 3</div><div class="label">Scorer</div></div>
+  </div>
+
+  <h2 style="margin-top: 4mm;">Étape 1 — <span class="highlight">Screener</span> : le tri rapide</h2>
+  <p>Le Screener reçoit l'ensemble des flux bruts configurés par l'organisation : flux RSS,
+  APIs de veille, formulaires de soumission d'idées, alertes brevets, notifications réglementaires,
+  rapports d'analystes. Il applique un premier filtre pour éliminer le bruit évident :
+  redondances, hors-périmètre, sources non fiables.</p>
+  <p>Le résultat est un ensemble de <strong>signaux potentiels</strong> — des candidats qui
+  méritent un examen plus approfondi. Le taux de réjection à ce stade est typiquement de 60 à 80 %.</p>
+
+  <h2>Étape 2 — <span class="highlight">Enricher</span> : la mise en contexte</h2>
+  <p>Chaque signal potentiel est ensuite enrichi par l'agent <strong>Signal Scanner</strong> :
+  recherche de sources complémentaires, extraction d'entités (acteurs, technologies, marchés),
+  analyse de sentiment, détection de corrélations avec des signaux passés stockés dans la
+  mémoire vectorielle.</p>
+  <p>À l'issue de cette étape, le signal dispose d'une <strong>fiche de contexte</strong>
+  structurée qui permet de l'évaluer.</p>
+
+  <h2>Étape 3 — <span class="highlight">Scorer</span> : le pré-Kayros Index</h2>
+  <p>Le signal contextualisé est scoré selon 3 critères (fit stratégique, désirabilité,
+  faisabilité) sur une échelle de 10. Ce score — appelé <strong>pré-KI</strong> — est un
+  indicateur provisoire qui détermine la suite du parcours :</p>
+  <ul class="bullet-list">
+    <li><strong>Score &ge; 7</strong> : signal promu vers l'étape Cartographier</li>
+    <li><strong>Score 4-6</strong> : signal mis en surveillance, réévalué à chaque cycle</li>
+    <li><strong>Score &lt; 4</strong> : signal archivé avec justification, traçable pour audit</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Contrainte temporelle :</strong> Le cycle complet (Screener → Enricher → Scorer)
+    ne doit pas dépasser 12 heures. Cette limite garantit que la veille reste <strong>en temps
+    réel</strong> et ne devient pas un goulot d'étranglement dans le cycle d'idéation.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: AGENT SIGNAL SCANNER ===== -->
+<div class="page">
+  <h1>4. <span class="highlight">L'agent Signal Scanner</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Le coeur intelligent de l'étape Écouter.</span>
+  </p>
+  <p>
+    Le <strong>Signal Scanner</strong> est l'agent spécialisé qui pilote l'étape Écouter.
+    Contrairement à un algorithme de filtrage passif (qui applique des règles statiques),
+    le Signal Scanner utilise un raisonnement <strong>ReAct</strong> (Reasoning + Acting)
+    pour analyser, contextualiser et scorer chaque signal de manière dynamique.
+  </p>
+
+  <h2>Fonctionnement <span class="highlight">ReAct</span> du Signal Scanner</h2>
+  <p>Pour chaque signal potentiel, l'agent exécute un cycle de raisonnement :</p>
+  <div class="flow" style="margin-top: 3mm;">
+    <div class="flow__step"><div class="num">THOUGHT</div><div class="label">Analyse</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">ACTION</div><div class="label">Tool Call</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">OBSERVATION</div><div class="label">Résultat</div></div>
+  </div>
+  <p style="margin-top: 2mm;">
+    1. <strong>Thought</strong> — Le Signal Scanner évalue le signal : « Ce brevet déposé par
+    un acteur non identifié sur le segment X pourrait-il indiquer une entrée sur le marché ? »
+  </p>
+  <p>
+    2. <strong>Action</strong> — Il appelle les outils appropriés : <code>signal_scoring</code>
+    pour le calcul du score pré-KI, <code>context_enrichment</code> pour la recherche de sources
+    complémentaires, <code>search_regulatory_risks</code> pour la détection de risques normatifs.
+  </p>
+  <p>
+    3. <strong>Observation</strong> — Il analyse les résultats et met à jour la fiche signal.
+    Si les données sont insuffisantes, il itère avec des outils supplémentaires.
+  </p>
+
+  <h2 style="margin-top: 4mm;">Les <span class="highlight">outils</span> du Signal Scanner</h2>
+  <table>
+    <tr><th>Outil</th><th>Fonction</th><th>Usage</th></tr>
+    <tr><td><code>signal_scoring</code></td><td>Calcule le score pré-KI sur 10</td><td>Chaque signal</td></tr>
+    <tr><td><code>context_enrichment</code></td><td>Recherche sources complémentaires, extrait entités</td><td>Signaux &ge; seuil</td></tr>
+    <tr><td><code>search_regulatory_risks</code></td><td>Détecte risques NIS2, DORA, AI Act, RGPD</td><td>Signaux réglementaires</td></tr>
+  </table>
+
+  <h2 style="margin-top: 4mm;">Le <span class="highlight">gate humain</span> : validation des signaux</h2>
+  <p>Le Signal Scanner ne décide pas seul. À l'issue de son analyse, il soumet sa fiche de signal
+  à un <strong>gate humain de validation</strong> — un expert métier qui peut :</p>
+  <ul class="bullet-list">
+    <li><strong>Valider</strong> le signal et le promouvoir vers Cartographier</li>
+    <li><strong>Ajuster</strong> le score pré-KI en fonction de son expertise sectorielle</li>
+    <li><strong>Rejeter</strong> le signal avec une justification tracée dans la timeline</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Principe :</strong> L'IA propose, l'humain dispose. Le Signal Scanner garantit
+    qu'aucun signal ne passe sans être analysé. L'expert garantit qu'aucun signal n'est promu
+    sans jugement humain.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: SCORING PRÉ-KI ===== -->
+<div class="page">
+  <h1>5. <span class="highlight">Scoring des signaux</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Le pré-Kayros Index : un score provisoire, objectif et traçable.</span>
+  </p>
+  <p>
+    Le <strong>pré-Kayros Index</strong> (pré-KI) est le système de scoring appliqué à chaque
+    signal à l'étape Écouter. Il constitue une <strong>pré-évaluation</strong> — un filtre
+    objectif qui détermine si un signal mérite d'entrer dans le cycle d'idéation complet.
+  </p>
+
+  <h2>Grille de <span class="highlight">3 critères</span> sur échelle de 10</h2>
+  <table>
+    <tr><th>Critère</th><th>Question</th><th>Pondération</th></tr>
+    <tr><td><strong>Fit stratégique</strong></td><td>Le signal est-il aligné avec les objectifs et le périmètre de l'organisation ?</td><td>40 %</td></tr>
+    <tr><td><strong>Désirabilité</strong></td><td>Le signal répond-il à un besoin réel, exprimé ou latent, du marché ou des parties prenantes ?</td><td>35 %</td></tr>
+    <tr><td><strong>Faisabilité</strong></td><td>L'organisation a-t-elle les capacités (techniques, financières, humaines) pour exploiter ce signal ?</td><td>25 %</td></tr>
+  </table>
+
+  <p>Chaque critère est noté sur 10 par le Signal Scanner, avec une <strong>justification
+  détaillée</strong> qui permet à l'expert humain de comprendre et, le cas échéant, de contester
+  le score.</p>
+
+  <div class="kpi-row" style="margin-top: 4mm;">
+    <div class="kpi">
+      <div class="kpi__value">7/10</div>
+      <div class="kpi__label">Seuil de promotion</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi__value">4-6/10</div>
+      <div class="kpi__label">Mise en surveillance</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi__value">&lt;4/10</div>
+      <div class="kpi__label">Archivé</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 4mm;">Score brut vs score <span class="highlight">contextualisé</span></h2>
+  <p>Le Signal Scanner distingue deux niveaux de score :</p>
+  <ul class="bullet-list">
+    <li><strong>Score brut</strong> — calculé automatiquement par l'agent à partir des données
+    disponibles dans la fiche signal et de la mémoire vectorielle des signaux passés</li>
+    <li><strong>Score contextualisé</strong> — ajusté par l'expert humain lors du gate de validation,
+    intégrant son expertise sectorielle et sa connaissance des priorités internes</li>
+  </ul>
+  <p>Les deux scores sont conservés dans la timeline, garantissant une <strong>traçabilité
+  complète</strong> de l'évolution du jugement.</p>
+
+  <div class="callout callout--gold">
+    <p><strong>Avantage concurrentiel :</strong> Contrairement aux systèmes de scoring
+    « boîte noire » des veilles automatisées, le pré-KI est <strong>intégralement
+    transparent</strong>. Chaque score est décomposable, justifié et challengeable — par
+    l'humain comme par les agents des étapes suivantes (Red Team, Devil's Advocate).</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: CONTEXT ENRICHMENT ===== -->
+<div class="page">
+  <h1>6. <span class="highlight">Context Enrichment</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Du signal brut à l'intelligence actionnable.</span>
+  </p>
+  <p>
+    Un signal brut — « Brevet EP4251093 déposé par une entité inconnue sur le segment X » —
+    n'est pas une information stratégique. C'est une <strong>donnée</strong>. Pour qu'elle
+    devienne une <strong>intelligence actionnable</strong>, elle doit être contextualisée :
+    mise en relation avec d'autres données, enrichie par des sources complémentaires, et
+    interprétée à la lumière du référentiel stratégique de l'organisation.
+  </p>
+
+  <h2>Le processus <span class="highlight">d'enrichissement</span></h2>
+  <p>L'outil <code>context_enrichment</code> du Signal Scanner exécute automatiquement une série
+  d'opérations sur chaque signal promu :</p>
+  <ol class="num-list">
+    <li><strong>Extraction d'entités</strong> — identification des acteurs, technologies,
+    marchés, brevets, régulations mentionnés dans le signal</li>
+    <li><strong>Recherche de sources croisées</strong> — exploration de bases de données
+    publiques, flux d'actualités, dépôts de brevets, publications académiques associées
+    aux entités extraites</li>
+    <li><strong>Analyse de corrélation</strong> — comparaison avec les signaux historiques
+    stockés dans la mémoire vectorielle pour détecter des répétitions, des convergences
+    ou des contradictions</li>
+    <li><strong>Estimation d'impact</strong> — évaluation qualitative de l'impact potentiel
+    du signal sur l'organisation (marché, concurrence, régulation, réputation)</li>
+    <li><strong>Génération de la fiche signal</strong> — synthèse structurée prête pour
+    le gate humain de validation</li>
+  </ol>
+
+  <h2 style="margin-top: 4mm;">La <span class="highlight">fiche signal</span> type</h2>
+  <table>
+    <tr><th>Champ</th><th>Description</th></tr>
+    <tr><td>ID signal</td><td>Identifiant unique horodaté</td></tr>
+    <tr><td>Source</td><td>Flux d'origine (RSS, API, formulaire, alerte)</td></tr>
+    <tr><td>Entités extraites</td><td>Acteurs, technologies, marchés, brevets, régulations</td></tr>
+    <tr><td>Score pré-KI</td><td>Score brut + score contextualisé (si ajusté)</td></tr>
+    <tr><td>Corrélations</td><td>Signaux historiques similaires ou complémentaires</td></tr>
+    <tr><td>Impact estimé</td><td>Qualitatif (faible, moyen, fort) avec justification</td></tr>
+    <tr><td>Décision</td><td>Promu, en surveillance, archivé — avec motif</td></tr>
+    <tr><td>Timeline</td><td>Horodatage de chaque opération du pipeline</td></tr>
+  </table>
+
+  <div class="callout callout--gold">
+    <p><strong>Cas réel :</strong> Un signal brut « Nouveau concurrent identifié sur le segment
+    SaaS » a été enrichi par le Signal Scanner en une fiche de 12 pages identifiant la structure
+    capitalistique, le stack technologique, les 3 brevets déposés, et une corrélation avec une
+    levée de fonds annoncée 48 heures plus tard. L'expert a validé le signal en 6 minutes.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: DÉTECTION AMONT RISQUES + BOUCLE RÉTROACTION ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Détection amont</span> des risques réglementaires</h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">La conformité proactive intégrée à l'écoute.</span>
+  </p>
+  <p>
+    L'une des innovations d'Écouter est l'intégration native de la <strong>détection des risques
+    réglementaires</strong> dès la première étape du cycle. Via l'outil <code>search_regulatory_risks</code>,
+    le Signal Scanner croise chaque signal avec les bases réglementaires (NIS2, DORA, RGPD, AI Act)
+    pour identifier les risques de conformité <strong>avant</strong> qu'ils ne deviennent des
+    obstacles.
+  </p>
+
+  <table>
+    <tr><th>Régulation</th><th>Détection Écouter</th><th>Bénéfice</th></tr>
+    <tr><td><strong>NIS2</strong></td><td>Identification des signaux liés à la cybersécurité,
+    dépendances critiques, incidents signalés</td><td>Anticipation des obligations de
+    notification et de résilience</td></tr>
+    <tr><td><strong>DORA</strong></td><td>Détection des risques TIC émergents, vulnérabilités
+    fournisseurs, tests de résilience</td><td>Conformité financière intégrée au processus
+    d'innovation</td></tr>
+    <tr><td><strong>RGPD</strong></td><td>Scoring des signaux impliquant des données personnelles,
+    transferts internationaux, sous-traitance</td><td>Minimisation des risques de sanction
+    (jusqu'à 4 % du CA mondial)</td></tr>
+    <tr><td><strong>AI Act</strong></td><td>Catégorisation des signaux IA par niveau de risque,
+    identification des usages prohibés</td><td>Conformité dès la conception des projets
+    innovants</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><strong>Principe :</strong> Un risque réglementaire détecté à l'étape Écouter est
+    un risque maîtrisé. Un risque détecté à l'étape Arbitrer est un échec de processus.
+    Écouter est conçu pour que chaque type de risque soit identifié le plus en amont possible.</p>
+  </div>
+
+  <h1 style="margin-top: 8mm;">8. <span class="highlight">La boucle de rétroaction</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Quand Réaliser ré-alimente Écouter.</span>
+  </p>
+  <p>
+    L'une des caractéristiques les plus puissantes d'Écouter est sa <strong>boucle de
+    rétroaction</strong> avec l'étape Réaliser. Les KPIs collectés pendant l'exécution d'une
+    décision — variance budgétaire, dérive temporelle, écart de performance, signaux de marché
+    — sont automatiquement <strong>réinjectés dans Écouter</strong> comme nouveaux signaux.
+  </p>
+  <p>Ce mécanisme crée un <strong>cycle vertueux</strong> :</p>
+  <ol class="num-list">
+    <li>Un projet est arbitré et exécuté (étapes 06 → 08)</li>
+    <li>Les KPIs de suivi sont évalués par le Monitoring Loop</li>
+    <li>Les alertes et écarts significatifs sont transformés en signaux</li>
+    <li>Ces signaux sont réinjectés dans Écouter via la mémoire vectorielle</li>
+    <li>Le Signal Scanner les traite comme tout autre signal — scoring, enrichissement, gate humain</li>
+    <li>Si le score justifie un re-arbitrage, le cycle est relancé</li>
+  </ol>
+
+  <div class="callout callout--orange">
+    <p><strong>Seuil de re-arbitrage :</strong> Paramétrable par l'organisation. Exemple typique :
+    un dépassement budgétaire > 15 % ou un retard > 30 jours déclenche automatiquement la
+    réinjection du signal dans Écouter et une notification au COMEX pour re-arbitrage.</p>
+  </div>
+
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: COMPARAISON + CONCLUSION ===== -->
+<div class="page">
+  <h1>9. <span class="highlight">Comparaison</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Veille traditionnelle vs Écouter KayrosLab.</span>
+  </p>
+
+  <table>
+    <tr><th>Critère</th><th>Veille traditionnelle</th><th>Écouter KayrosLab</th></tr>
+    <tr><td>Filtrage</td><td>Règles statiques, mots-clés prédéfinis</td><td>Pipeline ReAct adaptatif, scores dynamiques</td></tr>
+    <tr><td>Contextualisation</td><td>Manuelle (analyste lit, résume, transmet)</td><td>Automatique (extraction entités, corrélation, sources croisées)</td></tr>
+    <tr><td>Scoring</td><td>Subjectif, implicite, non tracé</td><td>Objectif (pré-KI), justifié, intégralement tracé</td></tr>
+    <tr><td>Boucle d'apprentissage</td><td>Aucune (chaque cycle repart de zéro)</td><td>Mémoire vectorielle, capitalisation sur tous les signaux passés</td></tr>
+    <tr><td>Temps de traitement</td><td>2 à 5 jours par cycle de veille</td><td>&lt; 12 heures, temps réel possible</td></tr>
+    <tr><td>Intégration au cycle d'idéation</td><td>Aucune (veille déconnectée de la décision)</td><td>Première étape du cycle KayrosLab, liée à Cartographier et à la boucle Réaliser</td></tr>
+    <tr><td>Traçabilité</td><td>Faible (email, fichiers Excel)</td><td>Timeline complète, logs agents, décisions humaines horodatées</td></tr>
+    <tr><td>Détection réglementaire</td><td>Silo séparé (service conformité)</td><td>Intégrée au pipeline (<code>search_regulatory_risks</code>)</td></tr>
+  </table>
+
+  <h1 style="margin-top: 8mm;">10. <span class="highlight">Conclusion</span></h1>
+  <p class="lead" style="margin-top: 4mm;">
+    <span class="accent-text">Écouter comme compétence stratégique.</span>
+  </p>
+  <p>
+    Dans un monde où le volume informationnel croît plus vite que notre capacité à le traiter,
+    la capacité à <strong>écouter</strong> — vraiment écouter — n'est plus un avantage
+    concurrentiel. C'est une <strong>condition de survie</strong>.
+  </p>
+  <p>
+    Écouter n'est pas un outil de veille de plus. C'est la <strong>première étape</strong>
+    d'un système d'idéation qui transforme le bruit ambiant en intelligence stratégique
+    actionnable. En combinant un pipeline de réduction de bruit systématique, un agent
+    spécialisé (Signal Scanner), un scoring objectif (pré-KI) et une boucle de rétroaction
+    avec l'exécution, Écouter apporte une réponse concrète au paradoxe de l'innovation
+    à l'ère de l'IA.
+  </p>
+
+  <div class="callout" style="margin-top: 4mm;">
+    <p><strong>Les 4 piliers d'une écoute augmentée :</strong></p>
+    <p>
+      1. <strong>Systématique</strong> — Aucun signal n'échappe au pipeline, aucun bruit n'est laissé au hasard<br>
+      2. <strong>Objectif</strong> — Le scoring pré-KI garantit une évaluation transparente et challengeable<br>
+      3. <strong>Continu</strong> — La boucle de rétroaction avec Réaliser crée un apprentissage permanent<br>
+      4. <strong>Intégré</strong> — Écouter est la porte d'entrée d'un cycle complet qui va du signal à la décision
+    </p>
+  </div>
+
+  <p style="margin-top: 4mm;">
+    Les organisations qui maîtriseront cette <strong>écoute augmentée</strong> — où l'IA filtre,
+    contextualise et score, et où l'humain valide, arbitre et décide — seront celles qui
+    <strong>percevront les ruptures avant leurs concurrents</strong>.
+  </p>
+  <p style="margin-top: 2mm;">
+    <strong>Écouter n'est pas le début de l'innovation. C'est le début de la décision.</strong>
+  </p>
+
+  <p style="margin-top: 5mm; font-size:0.8rem; color:#6b7280;">
+    <strong>Contact :</strong> contact@kayroslab.com — <strong>LinkedIn :</strong> /in/gdelatournelle/<br>
+    <strong>Téléphone :</strong> +33 6 69 28 29 16
+  </p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
+</body>
+</html>

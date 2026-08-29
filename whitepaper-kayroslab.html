@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Complete White Paper &bull; KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+.section{margin-bottom:6mm}
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Whitepaper &mdash; July 2026</div>
+  <h1 class="cover__title">
+    <em>KayrosLab</em>:<br>
+    The Governed Agentic<br>
+    <em>Ideation System</em>
+  </h1>
+  <p class="cover__subtitle">A complete presentation of the KayrosLab methodology: from weak signal detection to governed strategic decisions through an 8-step agentic pipeline with human oversight.</p>
+  <div class="cover__meta">By <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0</div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
+
+<!-- ===== PAGE 2: TABLE OF CONTENTS ===== -->
+<div class="page">
+  <h1>Table of Contents</h1>
+  <div style="margin-top:8mm">
+    <div class="toc">
+      <ol>
+        <li><span>The Strategic Ideation Challenge</span> <span style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>Why Raw LLMs Are Not Enough</span> <span style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>The Dangers of Ungoverned AI</span> <span style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>The KayrosLab Framework</span> <span style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Agentic Orchestration &amp; Memory</span> <span style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Human-AI Hybridization</span> <span style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Compliance &amp; Sovereignty</span> <span style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion</span> <span style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
+
+<!-- ===== PAGE 3: CHALLENGE ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">The Strategic Ideation Challenge</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">The innovation paradox in the age of AI.</span></p>
+  <p>Organizations today face a paradox: more data than ever, yet less certainty about the future. Traditional strategic planning methods are too slow, too rigid, and too dependent on linear thinking. AI-powered chatbots can generate ideas but lack structure, governance, and accountability.</p>
+  <p>The result is a <strong>gap between ideation and execution</strong> that costs organizations billions in unrealized innovation value. Ideas flow freely, but few survive the journey from whiteboard to market.</p>
+  <p>KayrosLab bridges this gap by providing a <strong>governed, agentic ideation system</strong> that combines the creative power of AI with the rigor of structured decision-making. It is not a chatbot, not a project management tool, and not a brainstorming app — it is a complete methodology for transforming weak signals into auditable strategic decisions.</p>
+
+  <h2 style="margin-top:5mm">The <span class="highlight">KayrosLab</span> Cycle</h2>
+  <div class="flow" style="margin-top:3mm">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label" style="color:#f59e0b;font-weight:700;">Listen</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Map</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Build</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Position</div></div>
+  </div>
+  <div class="flow" style="margin-top:1mm">
+    <div class="flow__step"><div class="num">08</div><div class="label">Realize</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Project</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrate</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Test</div></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: WHY NOT RAW LLM ===== -->
+<div class="page">
+  <h1>2. <span class="highlight">Why Raw LLMs Fail</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">"Prompt and pray" is not a methodology.</span></p>
+  <p>Many organizations have experimented with using raw LLMs (ChatGPT, Claude, Gemini) for strategic ideation. The results are consistently disappointing — not because the technology is incapable, but because it is deployed without structure, governance, or methodology.</p>
+
+  <h2>5 fundamental <span class="highlight">limitations</span></h2>
+  <ol class="num-list">
+    <li><strong>No traceability</strong> — Chat sessions are ephemeral. There is no record of why a particular idea was generated, what assumptions it rests on, or how it evolved.</li>
+    <li><strong>No governance</strong> — Anyone can prompt the model with any question. There is no gate, no validation step, no accountability for the output.</li>
+    <li><strong>No consistency</strong> — The same prompt produces different results each time. The process is not reproducible or auditable.</li>
+    <li><strong>No context memory</strong> — Each session starts from zero. The model does not learn from previous ideation cycles or organizational history.</li>
+    <li><strong>No multi-perspective</strong> — A single model provides a single viewpoint. There is no built-in challenge mechanism, devil's advocacy, or multi-criteria evaluation.</li>
+  </ol>
+
+  <div class="callout callout--red" style="margin-top:4mm">
+    <p><strong>The cost:</strong> Organizations using raw LLMs for strategic ideation report that 85% of generated ideas are never actioned — because they lack context, validation, and organizational buy-in.</p>
+  </div>
+
+  <div style="margin-top:4mm">
+    <h2>Raw LLM vs <span class="highlight">Governed System</span></h2>
+    <table>
+      <thead><tr><th>Dimension</th><th>Raw LLM</th><th>KayrosLab Governed</th></tr></thead>
+      <tbody>
+        <tr><td>Traceability</td><td>None</td><td>Full timestamped audit trail</td></tr>
+        <tr><td>Governance</td><td>None</td><td>8 structured gates</td></tr>
+        <tr><td>Memory</td><td>Per-session only</td><td>Shared vector memory across cycles</td></tr>
+        <tr><td>Multi-perspective</td><td>Single model</td><td>Multi-agent (Critic, Devil's Advocate, Red Team)</td></tr>
+        <tr><td>Validation</td><td>User judgment</td><td>Multi-criteria scoring + human gates</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: DANGERS ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">Dangers of Ungoverned AI</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Why governance is not optional.</span></p>
+  <p>Without structured governance, AI-powered ideation introduces risks that can outweigh the benefits. KayrosLab's governance framework addresses each risk proactively:</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead><tr><th>Risk</th><th>Description</th><th>KayrosLab Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Cognitive bias amplification</td><td>AI reinforces existing assumptions</td><td>Multi-agent challenge with Devil's Advocate</td></tr>
+        <tr><td>Factual hallucinations</td><td>Plausible-sounding but false outputs</td><td>Source verification + evidence traceability</td></tr>
+        <tr><td>Data leakage</td><td>Sensitive information exposed to third-party APIs</td><td>Sovereign deployment (Ollama + Qdrant)</td></tr>
+        <tr><td>False decision confidence</td><td>AI output treated as authoritative</td><td>Human gates + confidence scoring</td></tr>
+        <tr><td>Loss of sovereignty</td><td>Vendor lock-in and data dependency</td><td>Multi-model support + open architecture</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--red" style="margin-top:3mm">
+    <p><strong>Regulatory reality:</strong> Under the EU AI Act, high-risk AI systems require human oversight, transparency, and documented risk management. KayrosLab's governance framework was designed with these requirements in mind — not as an afterthought, but as a foundational principle.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: FRAMEWORK ===== -->
+<div class="page">
+  <h1>4. <span class="highlight">The KayrosLab Framework</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">8 steps from signal to strategic decision.</span></p>
+  <p>The KayrosLab process is organized around 8 cyclical steps, each with specific agents, tools, and governance gates. The cycle transforms raw signals into structured, auditable, and actionable strategic decisions.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">01. Listen</div><p>Weak signal detection and qualification. AI agents scan markets, patents, regulations, and social feeds to surface emerging signals.</p></div>
+    <div class="card"><div class="card__title">02. Map</div><p>Trend network construction and bisociation. Connect unrelated domains to generate novel combinations and insights.</p></div>
+    <div class="card"><div class="card__title">03. Build</div><p>Scenario generation and collaborative briefs. AI generates multiple future scenarios with structured briefs and strategic options.</p></div>
+    <div class="card"><div class="card__title">04. Position</div><p>Ontological competitive analysis. A 14-entity ontology maps the competitive landscape and identifies white spaces.</p></div>
+    <div class="card"><div class="card__title">05. Test</div><p>Multi-agent challenge. Critic, Devil's Advocate, and Red Team agents stress-test ideas from different perspectives.</p></div>
+    <div class="card"><div class="card__title">06. Arbitrate</div><p>Multi-criteria voting and human decision. Structured gates with weighted criteria and COMEX validation.</p></div>
+    <div class="card"><div class="card__title">07. Project</div><p>Probabilistic trajectory and roadmap. Timeline with confidence intervals, resource plans, and KPI tracking.</p></div>
+    <div class="card"><div class="card__title">08. Realize</div><p>Execution, tracking, and impact measurement. Continuous monitoring with automated feedback to step 01.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Continuous improvement:</strong> The cycle is not linear. Outputs from Realize feed back into Listen, creating a learning engine that improves with every iteration. Each cycle produces richer signals, better scenarios, and more accurate projections.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: ORCHESTRATION ===== -->
+<div class="page">
+  <h1>5. <span class="highlight">Agentic Orchestration</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Plan-and-Solve + ReAct with shared memory.</span></p>
+  <p>KayrosLab's agentic architecture combines two proven AI patterns — Plan-and-Solve and ReAct (Reasoning + Acting) — with shared vector memory and a tool registry.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">Plan-and-Solve</div><p>At each step, the orchestrator creates a dynamic plan, assigns subtasks to specialized agents, monitors progress, and adjusts the plan based on results.</p></div>
+    <div class="card"><div class="card__title">ReAct Loop</div><p>Each agent operates in a continuous observe-reason-act-refine loop, using tools to gather information and validate hypotheses.</p></div>
+    <div class="card"><div class="card__title">Shared Vector Memory</div><p>All agents share a persistent vector memory (Qdrant) that stores past signals, decisions, scenarios, and outcomes. No information is lost between cycles.</p></div>
+    <div class="card"><div class="card__title">Tool Registry</div><p>An extensible set of tools (web search, patent database, regulatory feed, internal knowledge base) that agents can use. Tools can be enabled or disabled by administrators.</p></div>
+  </div>
+
+  <h2 style="margin-top:4mm">The <span class="highlight">Kayros Index</span> (KI)</h2>
+  <p>Every decision in KayrosLab is scored using the Kayros Index — a multi-criteria scoring system that evaluates ideas across five dimensions: novelty, impact, urgency, feasibility, and strategic alignment. The KI provides a normalized score (0-10) that enables direct comparison across ideas, domains, and timeframes.</p>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Memory as a competitive advantage:</strong> Unlike raw LLMs that start from zero each session, KayrosLab's vector memory means that every ideation cycle builds on the accumulated knowledge of all previous cycles. The system gets smarter over time.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: HYBRIDIZATION ===== -->
+<div class="page">
+  <h1>6. <span class="highlight">Human-AI Hybridization</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Why humans remain central — and how AI augments them.</span></p>
+  <p>KayrosLab is designed on a foundational principle: <strong>AI augments human judgment, it does not replace it</strong>. Every step in the cycle includes a structured human gate where AI recommendations are reviewed, validated, or rejected by authorized decision-makers.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">What AI Brings</div><p>Tireless scanning, pattern recognition across vast datasets, multi-perspective challenge, objective scoring, and perfect memory.</p></div>
+    <div class="card"><div class="card__title">What Humans Bring</div><p>Strategic intuition, organizational context, risk appetite calibration, ethical judgment, and final decision authority.</p></div>
+  </div>
+
+  <h2 style="margin-top:4mm">The <span class="highlight">double-cycle</span> decision model</h2>
+  <p>Each step follows a double-cycle pattern: the AI cycle prepares, analyzes, and recommends; the human cycle validates, adjusts, and decides. This ensures that every decision benefits from both AI's analytical power and human's contextual wisdom.</p>
+
+  <div class="callout callout--gold" style="margin-top:3mm">
+    <p><strong>Extended team model:</strong> KayrosLab enables what we call the "extended team" — organizations can augment their strategy teams with a scalable pool of specialized AI agents without increasing headcount. A team of 3 strategists augmented by KayrosLab can operate with the analytical capacity of a team of 15.</p>
+  </div>
+
+  <table style="margin-top:3mm">
+    <thead><tr><th>Gate</th><th>Role</th><th>Participants</th></tr></thead>
+    <tbody>
+      <tr><td>Gate 1 — Concept</td><td>Validate initial concept viability</td><td>Product owner + Strategy lead</td></tr>
+      <tr><td>Gate 2 — Strategic</td><td>Confirm strategic alignment</td><td>COMEX / Executive committee</td></tr>
+      <tr><td>Gate 3 — Investment</td><td>Approve resource allocation</td><td>CFO + Sponsor</td></tr>
+      <tr><td>Gate 4 — Production</td><td>Authorize market launch</td><td>COMEX + Compliance</td></tr>
+    </tbody>
+  </table>
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: COMPLIANCE ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Compliance &amp; Sovereignty</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Built for regulated environments.</span></p>
+  <p>KayrosLab was designed from the ground up for organizations operating in regulated environments. Every architectural decision — from deployment model to data storage to access control — is driven by compliance requirements.</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">Sovereign Deployment</div><p>KayrosLab can be deployed entirely on your infrastructure using Ollama (local LLM) and Qdrant (local vector database). Zero data leaves your network.</p></div>
+    <div class="card"><div class="card__title">Full Auditability</div><p>Every AI recommendation, human decision, score, and adjustment is timestamped and logged. Complete decision timeline for regulatory review.</p></div>
+    <div class="card"><div class="card__title">GDPR / NIS2 / DORA</div><p>Data minimization, right to explanation, purpose limitation. KayrosLab's architecture supports compliance by design, not by retrofit.</p></div>
+    <div class="card"><div class="card__title">HDS &amp; AI Act Ready</div><p>Healthcare data hosting (HDS) compatible architecture. EU AI Act high-risk AI system requirements are built into the governance framework.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:3mm">
+    <p><strong>Sovereignty by design:</strong> Unlike cloud-only AI solutions that require sending your strategic data to third-party servers, KayrosLab's sovereign deployment option ensures your most sensitive strategic information never leaves your control.</p>
+  </div>
+
+  <h2 style="margin-top:4mm">Deployment <span class="highlight">tiers</span></h2>
+  <div style="margin-top:3mm">
+    <table>
+      <thead><tr><th>Tier</th><th>Model</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>P0 Standalone</strong></td><td>Single HTML file, no install</td><td>Discovery, individual exploration</td></tr>
+        <tr><td><strong>P1 Sovereign</strong></td><td>Local Ollama + Qdrant</td><td>Regulated industries, defense, healthcare</td></tr>
+        <tr><td><strong>P2 Cloud</strong></td><td>Cloud LLMs + managed vector DB</td><td>Scale, performance, global teams</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: CONCLUSION ===== -->
+<div class="page">
+  <h1>8. <span class="highlight">Conclusion</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">A new paradigm for strategic ideation.</span></p>
+  <p>KayrosLab represents a new paradigm in strategic ideation: a governed, agentic system that transforms weak signals into auditable strategic decisions. It is not a replacement for human creativity or strategic thinking — it is an <strong>amplifier</strong> that makes them more effective, more traceable, and more scalable.</p>
+
+  <h2 style="margin-top:5mm">The <span class="highlight">4 pillars</span> of the KayrosLab paradigm</h2>
+  <ul class="num-list">
+    <li><strong>Governed agentic AI</strong> — Specialized AI agents operating within a structured governance framework with human oversight</li>
+    <li><strong>Cyclical methodology</strong> — 8-step process from signal to decision, with continuous improvement loops</li>
+    <li><strong>Full traceability</strong> — Every decision, assumption, and trade-off is logged and auditable</li>
+    <li><strong>Sovereign by design</strong> — Deploy on your infrastructure, keep your data under your control</li>
+  </ul>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>KayrosLab enables organizations to innovate faster, decide better, and execute with confidence.</strong> Not by replacing human judgment, but by augmenting it with tireless AI agents, structured governance, and a clear trace from signal to decision.</p>
+  </div>
+
+  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#6b7280">Ready to transform your strategic ideation?<br>Contact us at <span class="accent-text">contact@kayroslab.com</span></p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Positioner Ontology Graph</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['Space Grotesk','sans-serif'],body:['Geist','system-ui','sans-serif']}}}};</script>
+<style>
+  #cy { width: 100%; height: 480px; border-radius: 1rem; background: #f8fafc; }
+  .cy-tip { position: absolute; z-index: 20; max-width: 260px; padding: .5rem .75rem; border-radius: .75rem; background: #0f172a; color: #f8fafc; font-size: 11px; pointer-events: none; display: none; }
+</style>
+</head>
+<body class="bg-white text-slate-900 antialiased font-body">
+<header class="border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3 flex-wrap">
+    <a href="./kayroslab-complete-with-ai-agents.html" class="font-display font-bold text-lg">KayrosLab <span class="text-sky-600 text-sm">Ontology</span></a>
+    <div class="flex gap-3 text-sm">
+      <a href="./portfolio-board.html" class="text-sky-600 font-semibold">Portfolio</a>
+      <a href="./cycle-timeline.html" class="text-sky-600 font-semibold">Cycle SSE</a>
+      <a href="./kayroslab-complete-with-ai-agents.html" class="text-sky-600 font-semibold">Main demo</a>
+    </div>
+  </div>
+</header>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <div>
+    <h1 class="font-display text-2xl font-bold">Positioner ontology graph</h1>
+    <p class="text-sm text-slate-500 mt-1">Tech &amp; business entities + relationships — source <code>core/positionning/ontology.mjs</code>.</p>
+  </div>
+  <div class="rounded-2xl border border-slate-200 p-4 flex flex-wrap gap-3 items-end">
+    <div class="flex-1 min-w-[200px]">
+      <label class="block text-xs font-bold uppercase text-slate-500 mb-1">API base</label>
+      <input id="api" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" value="https://api.kayroslab.com" />
+    </div>
+    <button id="btn-load" type="button" class="rounded-full bg-sky-600 text-white font-semibold px-5 py-2 text-sm">Load</button>
+  </div>
+  <div class="flex gap-2 text-xs">
+    <button type="button" data-filter="all" class="filter-btn rounded-full border border-sky-600 bg-sky-50 text-sky-700 px-3 py-1 font-semibold">All</button>
+    <button type="button" data-filter="tech" class="filter-btn rounded-full border border-slate-200 px-3 py-1">Tech</button>
+    <button type="button" data-filter="business" class="filter-btn rounded-full border border-slate-200 px-3 py-1">Business</button>
+  </div>
+  <div class="relative rounded-2xl border border-slate-200 overflow-hidden">
+    <div id="cy"></div>
+    <div id="tip" class="cy-tip"></div>
+  </div>
+  <div id="entities" class="grid sm:grid-cols-2 gap-3"></div>
+  <h2 class="font-display font-bold text-lg">Relationships</h2>
+  <div id="rels" class="space-y-2 text-sm"></div>
+  <p id="status" class="text-xs text-slate-400"></p>
+</main>
+<script>
+(function () {
+  let data = null;
+  let filter = 'all';
+  let cy = null;
+  const $ = (id) => document.getElementById(id);
+  function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function elementsForFilter() {
+    if (!data) return [];
+    if (data.graph && data.graph.elements) {
+      if (filter === 'all') return data.graph.elements;
+      const nodes = (data.graph.nodes || []).filter((n) => n.data.group === filter);
+      const ids = new Set(nodes.map((n) => n.data.id));
+      const edges = (data.graph.edges || []).filter((e) => ids.has(e.data.source) && ids.has(e.data.target));
+      return [...nodes, ...edges];
+    }
+    // fallback from entities / relationships
+    const ents = (data.entities || []).filter((e) => filter === 'all' || e.group === filter);
+    const ids = new Set(ents.map((e) => e.id));
+    const nodes = ents.map((e) => ({ data: { id: e.id, label: e.name, group: e.group, color: e.color, description: e.description } }));
+    const edges = (data.relationships || []).filter((r) => ids.has(r.from) && ids.has(r.to))
+      .map((r) => ({ data: { id: r.id, source: r.from, target: r.to, label: r.name } }));
+    return [...nodes, ...edges];
+  }
+
+  function renderGraph() {
+    const elements = elementsForFilter();
+    if (cy) { cy.destroy(); cy = null; }
+    if (typeof cytoscape === 'undefined') return;
+    cy = cytoscape({
+      container: $('cy'),
+      elements,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'background-color': 'data(color)',
+            'label': 'data(label)',
+            'color': '#0f172a',
+            'font-size': 11,
+            'font-weight': 600,
+            'text-valign': 'bottom',
+            'text-margin-y': 6,
+            'width': 28,
+            'height': 28,
+            'border-width': 2,
+            'border-color': '#fff',
+          },
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 1.5,
+            'line-color': '#cbd5e1',
+            'target-arrow-color': '#94a3b8',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+            'label': 'data(label)',
+            'font-size': 9,
+            'color': '#64748b',
+            'text-rotation': 'autorotate',
+          },
+        },
+        {
+          selector: 'node:selected',
+          style: { 'border-color': '#0ea5e9', 'border-width': 3 },
+        },
+      ],
+      layout: { name: 'cose', animate: false, padding: 30, nodeRepulsion: 6000 },
+    });
+    const tip = $('tip');
+    cy.on('mouseover', 'node', (ev) => {
+      const d = ev.target.data();
+      tip.style.display = 'block';
+      tip.innerHTML = '<strong>' + esc(d.label) + '</strong><br>' + esc(d.description || '');
+    });
+    cy.on('mousemove', (ev) => {
+      if (tip.style.display === 'block') {
+        tip.style.left = (ev.originalEvent.offsetX + 12) + 'px';
+        tip.style.top = (ev.originalEvent.offsetY + 12) + 'px';
+      }
+    });
+    cy.on('mouseout', 'node', () => { tip.style.display = 'none'; });
+  }
+
+  function renderLists() {
+    if (!data) return;
+    const ents = (data.entities || []).filter((e) => filter === 'all' || e.group === filter);
+    $('entities').innerHTML = ents.map((e) =>
+      '<article class="rounded-xl border border-slate-200 p-4 bg-slate-50">'
+      + '<div class="flex items-center gap-2 mb-1"><span class="text-xl">' + esc(e.icon) + '</span>'
+      + '<strong class="font-display">' + esc(e.name) + '</strong>'
+      + '<span class="text-[10px] uppercase text-slate-400 ml-auto">' + esc(e.group) + '</span></div>'
+      + '<p class="text-xs text-slate-600 mb-2">' + esc(e.description) + '</p>'
+      + '<div class="flex flex-wrap gap-1">' + (e.properties || []).map((p) =>
+        '<span class="text-[10px] rounded-full bg-white border border-slate-200 px-2 py-0.5">' + esc(p.name) + '</span>'
+      ).join('') + '</div></article>'
+    ).join('');
+    $('rels').innerHTML = (data.relationships || []).map((r) =>
+      '<div class="rounded-lg border border-slate-100 bg-white px-3 py-2 flex flex-wrap gap-2 items-center">'
+      + '<code class="text-sky-700 text-xs">' + esc(r.from) + '</code>'
+      + '<span class="text-slate-400">→</span>'
+      + '<strong class="text-xs">' + esc(r.name) + '</strong>'
+      + '<span class="text-slate-400">→</span>'
+      + '<code class="text-violet-700 text-xs">' + esc(r.to) + '</code>'
+      + '<span class="text-[10px] text-slate-400 ml-auto">' + esc(r.cardinality) + '</span></div>'
+    ).join('');
+  }
+
+  function render() {
+    renderGraph();
+    renderLists();
+  }
+
+  async function load() {
+    const base = $('api').value.replace(/\/$/, '');
+    $('status').textContent = 'Loading…';
+    try {
+      const r = await fetch(base + '/v1/positionning/ontology');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      data = await r.json();
+      const n = data.graph?.nodes?.length || data.entities?.length || 0;
+      const e = data.graph?.edges?.length || data.relationships?.length || 0;
+      $('status').textContent = n + ' entities · ' + e + ' relationships';
+      render();
+    } catch (err) {
+      $('status').textContent = err.message;
+      $('entities').innerHTML = '';
+      $('rels').innerHTML = '';
+      if (cy) { cy.destroy(); cy = null; }
+    }
+  }
+
+  document.querySelectorAll('.filter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.filter-btn').forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle('border-sky-600', on);
+        b.classList.toggle('bg-sky-50', on);
+        b.classList.toggle('text-sky-700', on);
+        b.classList.toggle('font-semibold', on);
+      });
+      render();
+    });
+  });
+
+  $('btn-load').addEventListener('click', load);
+  const u = new URL(location.href);
+  if (u.searchParams.get('api')) $('api').value = u.searchParams.get('api');
+  load();
+})();
+</script>
+</body>
+</html>
