@@ -13,6 +13,13 @@ module.exports = {
     error_file: '/var/log/pm2/kayros-api.err.log',
     merge_logs: true,
     time: true,
-    env_production: { NODE_ENV: 'production' },
+    env_production: {
+      NODE_ENV: 'production',
+      // PM2 conserve son propre environnement entre deux reloads. Repasser
+      // explicitement la valeur validee par deploy-backend.sh evite qu'une
+      // ancienne variable vide masque le fichier .env du serveur.
+      ...(process.env.DATABASE_URL ? { DATABASE_URL: process.env.DATABASE_URL } : {}),
+      ...(process.env.KAYROS_DATABASE_URL ? { KAYROS_DATABASE_URL: process.env.KAYROS_DATABASE_URL } : {}),
+    },
   }],
 };
