@@ -109,6 +109,15 @@ if [[ -n "${DB_URL}" ]]; then
 fi
 pm2 startOrReload "${BACKEND_DIR}/ecosystem.config.cjs" --env production --update-env
 pm2 save
+pm2 jlist | node -e '
+  let input = "";
+  process.stdin.on("data", (chunk) => { input += chunk; });
+  process.stdin.on("end", () => {
+    const app = JSON.parse(input).find((item) => item.name === "kayros-api");
+    const value = app?.pm2_env?.DATABASE_URL || app?.pm2_env?.KAYROS_DATABASE_URL || "";
+    console.log(`PM2 database environment: configured=${Boolean(value)} length=${value.length}`);
+  });
+'
 
 NGINX_CONF="${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-api.conf"
 if [[ -f "${NGINX_CONF}" ]]; then
