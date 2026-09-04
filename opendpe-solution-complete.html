@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KayrosLab · Opendpe — Solution complète [DONE]</title>
+<!--
+  Site web complet de démonstration — Opendpe (gestion énergétique des bâtiments & copropriétés),
+  présenté dans l'écosystème KayrosLab. Fichier unique autonome (aucune dépendance, localStorage).
+  Contenu : accueil + application complète (M1→M10) + planning + réglages import/export + flux temps réel
+  (architecture inspirée d'OpenEMS — surcouche propriétaire Opendpe). Données de démonstration.
+  Spec complète : opendpe/spec/ (dépôt Qinode-Web). Console API : opendpe-console.html (même dépôt).
+-->
+<style>
+  :root {
+    --bg: #f5f5f7; --surface: rgba(255, 255, 255, 0.8); --solid: #ffffff; --fg: #1d1d1f; --muted: #6e6e73;
+    --border: rgba(0, 0, 0, 0.08); --accent: #17694b; --accent-soft: rgba(23, 105, 75, 0.1);
+    --on-accent: #ffffff; --danger: #b3261e; --warn: #9a6700; --ecran-texte: #e8f0ec;
+    --radius: 18px; --radius-sm: 10px;
+    --font: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    --display: "Charter", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; }
+  h1, h2 { font-family: var(--display); font-weight: 600; }
+  h3, h4 { font-family: var(--font); font-weight: 650; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+  .topnav { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 74%, transparent); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); }
+  .navin { max-width: 1180px; margin: 0 auto; padding: 11px 26px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .brand { font-weight: 700; font-size: 16.5px; }
+  .brand em { font-style: normal; color: var(--accent); }
+  .who { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .tabs { max-width: 1180px; margin: 0 auto; padding: 0 26px; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  .tab { border: 0; background: none; padding: 9px 13px; border-radius: 980px; font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .tab[aria-current="true"] { background: var(--fg); color: var(--bg); font-weight: 600; }
+  .tab:hover { color: var(--fg); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 26px 26px 90px; }
+  .pagehead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  .pagehead h1 { font-size: 30px; }
+  .pagehead .sub { color: var(--muted); font-size: 14px; margin: 6px 0 0; max-width: 72ch; }
+  .eyebrow { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 8px; }
+
+  .card { background: var(--surface); backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); padding: 18px 20px; }
+  .grid { display: grid; gap: 14px; } .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+  .tile { background: var(--surface); backdrop-filter: blur(20px) saturate(180%); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px 18px; }
+  .stat-num { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 27px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat-label { color: var(--muted); font-size: 12.5px; margin: 4px 0 0; }
+
+  .btn { cursor: pointer; border: 1px solid var(--border); background: var(--solid); color: var(--fg); border-radius: 980px; padding: 8px 15px; font-size: 13px; font-weight: 500; }
+  .btn:hover { background: color-mix(in srgb, var(--fg) 5%, var(--solid)); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: color-mix(in srgb, var(--accent) 86%, black); }
+  .btn-sm { padding: 5px 11px; font-size: 12px; }
+  .btn-ghost { background: none; border-color: transparent; color: var(--muted); }
+  .btn-ghost:hover { color: var(--fg); background: none; }
+  .link { background: none; border: none; padding: 0; color: var(--fg); text-decoration: underline; cursor: pointer; font-size: inherit; }
+
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 980px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); color: var(--muted); background: var(--solid); }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.ok, .pill.accent { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .pill.warn { background: color-mix(in srgb, var(--warn) 10%, var(--solid)); border-color: transparent; color: var(--warn); }
+  .pill.crit { background: color-mix(in srgb, var(--danger) 9%, var(--solid)); border-color: transparent; color: var(--danger); }
+  .pill.off { opacity: 0.75; }
+  .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--muted); text-transform: uppercase; }
+  .conf { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; white-space: nowrap; }
+  .conf.haute { background: var(--accent-soft); color: var(--accent); }
+  .conf.moyenne { background: color-mix(in srgb, var(--warn) 10%, var(--solid)); color: var(--warn); }
+  .conf.basse { background: color-mix(in srgb, var(--danger) 8%, var(--solid)); color: var(--danger); }
+
+  table { width: 100%; border-collapse: collapse; background: var(--solid); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 11px 15px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; overflow-wrap: anywhere; }
+  th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); background: color-mix(in srgb, var(--bg) 55%, var(--solid)); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  td.target { font-family: var(--mono); color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+  .log-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 14px; padding: 12px 4px; border-bottom: 1px solid var(--border); align-items: start; }
+  .log-row:last-child { border-bottom: none; }
+  .meta { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  .field { margin-bottom: 13px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
+  .field .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .input { width: 100%; padding: 9px 13px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--solid); font-size: 14px; }
+  select.input { width: auto; min-width: 150px; }
+  .input[aria-invalid="true"] { border-color: var(--danger); }
+  .err { color: var(--danger); font-size: 12px; margin-top: 4px; }
+  .banniere { border: 1px solid color-mix(in srgb, var(--warn) 30%, var(--border)); background: color-mix(in srgb, var(--warn) 8%, var(--solid)); border-radius: 14px; padding: 11px 16px; font-size: 13.5px; margin-bottom: 16px; }
+
+  .steps { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+  .step { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border: 1px solid var(--border); border-radius: 980px; padding: 5px 12px; background: var(--solid); }
+  .step.on { border-color: var(--fg); color: var(--fg); }
+  .checkbox { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .checkbox:last-child { border-bottom: none; }
+  .checkbox input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--accent); }
+
+  .voile { position: fixed; inset: 0; background: color-mix(in srgb, var(--fg) 34%, transparent); display: none; align-items: flex-start; justify-content: center; padding: 6vh 18px; z-index: 60; }
+  .voile.on { display: flex; }
+  .modal { background: var(--solid); border-radius: 22px; box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22); max-width: 740px; width: 100%; max-height: 84vh; overflow: auto; padding: 24px 26px; }
+  .modal h2 { font-size: 20px; }
+  .skeleton { border-radius: 7px; height: 13px; margin: 10px 0; background: linear-gradient(90deg, color-mix(in srgb, var(--muted) 10%, var(--solid)) 25%, color-mix(in srgb, var(--muted) 18%, var(--solid)) 45%, color-mix(in srgb, var(--muted) 10%, var(--solid)) 65%); background-size: 200% 100%; animation: pulse 1.1s infinite linear; }
+  @keyframes pulse { from { background-position: 180% 0; } to { background-position: -20% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } .fleuve { animation: none; } }
+  #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--fg); color: var(--bg); border-radius: 12px; padding: 10px 18px; font-size: 13.5px; z-index: 80; max-width: 88vw; display: none; }
+  #toast.on { display: block; }
+
+  .vide { text-align: center; padding: 40px 18px; color: var(--muted); }
+  .vide h3 { color: var(--fg); font-size: 16px; margin-bottom: 6px; }
+  .vide p { max-width: 46ch; margin: 0 auto 16px; font-size: 13.5px; }
+
+  /* Accueil */
+  .hero { padding: 40px 0 26px; }
+  .hero h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.06; max-width: 22ch; }
+  .hero p.accroche { font-size: 17.5px; color: var(--muted); max-width: 62ch; }
+  .hero .cta { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+  .carte-module { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+  .module-num { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); display: inline-flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 600; font-size: 12px; }
+
+  /* Flux temps réel */
+  .live-strip { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .flux-valeur { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12px; fill: var(--fg); }
+  .flux-nom { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; fill: var(--muted); text-transform: uppercase; }
+  @keyframes flux { to { stroke-dashoffset: -18; } }
+  .fleuve { stroke-dasharray: 5 7; animation: flux 1.1s linear infinite; }
+  .bars { display: flex; align-items: flex-end; gap: 4px; height: 100px; }
+  .bar { flex: 1; background: color-mix(in srgb, var(--fg) 16%, transparent); border-radius: 3px 3px 0 0; }
+
+  footer.pagefoot { border-top: 1px solid var(--border); max-width: 1180px; margin: 0 auto; padding: 16px 26px 46px; color: var(--muted); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .rappro { color: var(--muted); font-size: 13.5px; }
+
+  @media (max-width: 920px) {
+    .navin, .tabs, main, footer.pagefoot { padding-left: 15px; padding-right: 15px; }
+    .tiles, .g2, .g3, .g4, .live-strip { grid-template-columns: 1fr; }
+    .log-row { grid-template-columns: 1fr; gap: 6px; }
+    .pagehead h1, .hero h1 { font-size: 25px; }
+  }
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="navin">
+    <span class="brand">KayrosLab<em>·</em>Opendpe <span class="tag">site de démonstration complet</span></span>
+    <div class="who">
+      <label class="tag" for="role" style="textTransform:none">Rôle</label>
+      <select id="role" class="input" style="width:auto;padding:6px 10px" onchange="changerRole(this.value)">
+        <option value="gestionnaire">Gestionnaire — Syndic Horizon</option>
+        <option value="particulier">Particulier — Appartement A12</option>
+      </select>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Navigation principale"></nav>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer class="pagefoot">
+  <span>KayrosLab × Opendpe · solution complète de démonstration</span>
+  <span>Socle temps réel inspiré d'OpenEMS · spec : opendpe/spec/ · données fictives</span>
+</footer>
+
+<div class="voile" id="voile" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* ---------- Utilitaires ---------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmtEur = (n) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+const fmtNb = (n) => new Intl.NumberFormat("fr-FR").format(n);
+const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" });
+const AUJOURDHUI = "2026-09-04";
+const jRestants = (e) => Math.round((new Date(e + "T00:00:00") - new Date(AUJOURDHUI + "T00:00:00")) / 86400000);
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 3400); }
+const ETAT_LBL = { conforme: "conforme", a_planifier: "à planifier", critique: "critique", en_retard: "en retard", exempt: "exempt" };
+
+/* ---------- Données de démonstration ---------- */
+const CLE = "kayroslab-opendpe-v1";
+function graine() {
+  return {
+    role: "gestionnaire",
+    copro: { nom: "Résidence Les Tilleuls", adresse: "24 rue des Écoles, 45000 Orléans", rnb: "RNB#452340012X", lots: 48, annee: 1968, dpec: "D", dpecDate: "2023-04-11" },
+    descriptif: {
+      version: 3,
+      champs: {
+        "identite|annee": { section: "Identité", libelle: "Année de construction", valeur: "1968", conf: "haute", source: "DPEc 2023" },
+        "identite|surface": { section: "Identité", libelle: "Surface habitable", valeur: "3 240 m²", conf: "haute", source: "DPEc 2023" },
+        "enveloppe|murs": { section: "Enveloppe", libelle: "Murs", valeur: "Parpaing + isolation intérieure laine de verre (1978)", conf: "moyenne", source: "DTG 2019" },
+        "enveloppe|toiture": { section: "Enveloppe", libelle: "Toiture", valeur: "Combles isolés en 2003 — 24 cm de laine soufflée", conf: "moyenne", source: "corrigé v3" },
+        "enveloppe|plancher": { section: "Enveloppe", libelle: "Plancher bas", valeur: "Non isolé (sous-sol semi-enterré)", conf: "basse", source: "estimation IA — à confirmer" },
+        "enveloppe|menuiseries": { section: "Enveloppe", libelle: "Menuiseries", valeur: "Double vitrage 4/16/4 argon posé en 2011", conf: "haute", source: "corrigé v2" },
+        "systemes|chauffage": { section: "Systèmes", libelle: "Chauffage collectif", valeur: "Chaudière gaz condensation 320 kW (2015)", conf: "haute", source: "DPEc 2023" },
+        "systemes|ecs": { section: "Systèmes", libelle: "Eau chaude sanitaire", valeur: "Ballon 3 000 L, bouclage permanent 24 h/24", conf: "haute", source: "DPEc 2023" },
+        "systemes|vmc": { section: "Systèmes", libelle: "Ventilation", valeur: "VMC autoréglable (2004), non régulée", conf: "moyenne", source: "DTG 2019" },
+        "systemes|regulation": { section: "Systèmes", libelle: "Régulation", valeur: "Sonde extérieure simple — absence de GTB", conf: "moyenne", source: "schéma chauffagiste 2015" },
+        "systemes|comptage": { section: "Systèmes", libelle: "Comptage", valeur: "Compteurs calorifiques individuels (2016) + sous-comptage ECS", conf: "haute", source: "arrêté de comptage" },
+        "systemes|photovoltaique": { section: "Systèmes", libelle: "Photovoltaïque", valeur: "36 kWc sur toiture B (2026) — suivi temps réel", conf: "haute", source: "note de travaux 2026" }
+      },
+      historique: [
+        { v: 3, date: "2026-08-21", auteur: "Claire Vasseur (syndic)", changes: ["Toiture : isolation confirmée à 24 cm d'après DTG 2019"] },
+        { v: 2, date: "2026-06-14", auteur: "Geoffroy D. (copropriétaire A12)", changes: ["Menuiseries : « inconnu » → double vitrage 4/16/4 argon 2011 (facture fournie)"] },
+        { v: 1, date: "2026-06-02", auteur: "Opendpe (import DPEc + DTG)", changes: ["Création du descriptif depuis DPEc 2023 et DTG 2019"] }
+      ]
+    },
+    equipements: [
+      { id: "e1", nom: "Chaudière gaz condensation 320 kW", type: "chaudière gaz", energie: "gaz naturel", annee: 2015, puissance: 320, emplacement: "Chaufferie sous-sol A", statut: "en service" },
+      { id: "e2", nom: "Ballon ECS 3 000 L + bouclage", type: "ballon ECS", energie: "gaz naturel", annee: 2015, puissance: null, emplacement: "Chaufferie sous-sol A", statut: "en service" },
+      { id: "e3", nom: "VMC autoréglable — colonnes communes", type: "VMC", energie: "électricité", annee: 2004, puissance: null, emplacement: "Toitures A et B", statut: "en service" },
+      { id: "e4", nom: "Compteurs calorifiques individuels + répartition", type: "comptage", energie: "—", annee: 2016, puissance: null, emplacement: "48 lots", statut: "en service" },
+      { id: "e5", nom: "Photovoltaïque toiture B — 36 kWc + onduleur", type: "photovoltaïque", energie: "solaire", annee: 2026, puissance: 36, emplacement: "Toiture B", statut: "en service" },
+      { id: "e6", nom: "Stockage batterie 30 kWh (effacement de pointe)", type: "stockage", energie: "électricité", annee: 2026, puissance: 25, emplacement: "Local technique", statut: "en service" }
+    ],
+    documents: [
+      { id: "d1", titre: "DPE collectif — Résidence Les Tilleuls", type: "DPEc", date: "2023-04-11", version: 1, entite: "Immeuble", extraction: null },
+      { id: "d2", titre: "Diagnostic technique global (DTG)", type: "DTG", date: "2019-10-02", version: 1, entite: "Immeuble", extraction: null },
+      { id: "d3", titre: "Contrat gaz — fournisseur ÉnerVia (chaufferie)", type: "contrat énergie", date: "2024-12-01", version: 2, entite: "Immeuble", extraction: { fournisseur: "ÉnerVia", energie: "gaz naturel", point: "PRM 30001651234567", tarif: "0,0894 €/kWh + 1 842 €/mois, indexation PCH", echeance: "2026-11-30", preavis: "2 mois (action avant le 30/09/2026)", reconduction: "tacite, 12 mois" } },
+      { id: "d4", titre: "Plan chauffagiste — niveau 1/3", type: "plan technique", date: "2015-06-30", version: 1, entite: "Chaufferie", extraction: null },
+      { id: "d5", titre: "PV d'entretien annuel chaudière", type: "maintenance", date: "2025-09-18", version: 1, entite: "Chaudière 320 kW", extraction: null }
+    ],
+    obligations: [
+      { code: "DPEC", libelle: "DPE collectif — à jour", base: "loi TECV ; C&R art. 5 (méthode 3CL)", echeance: "2033-04-11", etat: "conforme", preuve: "DPEc 2023 (d1)" },
+      { code: "RNIC", libelle: "Registre des copropriétés — données énergie + RNB", base: "décret 2025-831 du 19/08/2025", echeance: "2027-02-21", etat: "critique", preuve: "aucune preuve liée" },
+      { code: "PPT", libelle: "Plan pluriannuel de travaux — item d'AG", base: "C&R art. 171 ; décrets 2022-1672 et 2022-663", echeance: "2027-03-15", etat: "a_planifier", preuve: "PPT 2024 (actualisation 2034)" },
+      { code: "AUDIT", libelle: "Audit énergétique réglementaire", base: "C&R art. 2 (copro totales > 50 lots)", echeance: "2033-01-01", etat: "exempt", preuve: "48 lots < 50 — non applicable" },
+      { code: "LOC_F", libelle: "Interdiction de location — lots étiquette F", base: "C&R art. 7 (échéance 01/01/2028)", echeance: "2028-01-01", etat: "a_planifier", preuve: "6 lots concernés" },
+      { code: "INDIV", libelle: "Individualisation des frais de chauffage", base: "loi 74-908 ; arrêté 22/05/2017", echeance: "2026-12-31", etat: "conforme", preuve: "compteurs calorifiques 2016" },
+      { code: "ONPE", libelle: "Transmission annuelle des consommations (ONPE)", base: "loi ELAN art. 160 ; décret 2020-7", echeance: "2027-06-30", etat: "conforme", preuve: "transmise le 18/05/2026" }
+    ],
+    opportunites: [
+      { id: "o1", titre: "Courbe ECS décalée — la nuit consomme 34 % du total", preuve: "Comptage ECS : 34 % de la consommation journalière entre 23 h et 5 h (capteur, 30 derniers jours)", economie: 2400, capex: 800, roi: "4 mois", aides: "Aucune requise — réglage d'horloge du bouclage", statut: "nouvelle" },
+      { id: "o2", titre: "Chaudière 2015 sans régulation climatique d'ambiance", preuve: "Descriptif : sonde extérieure simple, absence de GTB — écart théorie/réel +18 % (DJU)", economie: 1800, capex: 6500, roi: "3,6 ans", aides: "CEE copropriété mobilisable (montant à chiffrer)", statut: "nouvelle" },
+      { id: "o3", titre: "Contrat gaz : fenêtre de renégociation ouverte", preuve: "Extraction du contrat ÉnerVia : échéance 30/11/2026, préavis 2 mois — action avant le 30/09/2026", economie: 3100, capex: 0, roi: "immédiat", aides: "Sans objet", statut: "nouvelle" },
+      { id: "o4", titre: "6 lots en étiquette F — menuiseries avant 2028", preuve: "DPE 2024 : 6 lots classés F — interdiction de location au 01/01/2028 (C&R art. 7)", economie: 1150, capex: 42000, roi: "long terme", aides: "MaPrimeRénov' Copropriété + éco-PTZ", statut: "nouvelle" }
+    ],
+    alertes: [
+      { id: "a1", cat: "technique", severite: "critique", titre: "Capteur T° départ chaufferie hors ligne", detail: "Aucune mesure depuis 72 h (hub e-hub-1). Vérifier l'alimentation ou le lien radio.", date: "2026-09-01", acquit: false },
+      { id: "a2", cat: "reglementaire", severite: "critique", titre: "Registre des copropriétés — déclaration à préparer (J-170)", detail: "Échéance 21/02/2027 (décret 2025-831) : données énergie, DPEc, audit, PPT et RNB à télédéclarer.", date: "2026-09-04", acquit: false },
+      { id: "a3", cat: "climat", severite: "avertissement", titre: "Vigilance canicule orange — Orléans", detail: "Météo-France : pic annoncé. Plan canicule proposé (protections, décalage bouclage ECS, communication).", date: "2026-09-03", acquit: false },
+      { id: "a4", cat: "marche", severite: "avertissement", titre: "Contrat gaz : préavis à respecter avant le 30/09/2026", detail: "Sans action, reconduction tacite 12 mois (ÉnerVia).", date: "2026-08-28", acquit: false }
+    ],
+    planning: [
+      { id: "p1", titre: "Entretien annuel chaudière (contrat maintenance)", type: "maintenance", date: "2026-09-18", source: "PV d'entretien 2025 (d5)" },
+      { id: "p2", titre: "Préavis contrat gaz ÉnerVia — renégociation", type: "marché", date: "2026-09-30", source: "extraction contrat (d3)" },
+      { id: "p3", titre: "Télédéclaration RNIC (données énergie + RNB)", type: "réglementaire", date: "2027-02-21", source: "décret 2025-831" },
+      { id: "p4", titre: "AG ordinaire — item PPT + résolutions travaux", type: "AG", date: "2027-03-15", source: "obligation PPT" }
+    ],
+    lot: { numero: "A12", etage: 1, surface: 62, classe: "D", conso: [18, 17, 15, 11, 8, 6, 5, 6, 9, 13, 16, 19] },
+    reglages: { seuilKw: 55 },
+    dashboard: { ordre: ["flux", "puissance", "conformite", "alertes", "economies", "capteurs"], masques: [] }
+  };
+}
+let S;
+try { S = JSON.parse(localStorage.getItem(CLE)) || graine(); } catch (e) { S = graine(); }
+function save() { try { localStorage.setItem(CLE, JSON.stringify(S)); } catch (e) { /* démo */ } }
+
+/* ---------- Simulation temps réel (inspirée OpenEMS) ---------- */
+function instant(d) {
+  d = d || new Date();
+  const h = d.getHours() + d.getMinutes() / 60;
+  const pt = (c, a, l) => a * Math.exp(-((h - c) ** 2) / l);
+  const conso = 34 + pt(8, 16, 3) + pt(19.5, 22, 6) + 2 * Math.sin(d.getTime() / 9e5);
+  const pv = Math.max(0, 36 * Math.exp(-((h - 13.5) ** 2) / 8));
+  const brut = pv - conso;
+  const batterie = Math.max(-25, Math.min(25, brut));
+  const soc = Math.max(18, Math.min(95, 62 + 22 * Math.sin(d.getTime() / 1.4e7)));
+  const r1 = (x) => Math.round(x * 10) / 10;
+  return { ts: d.getTime(), conso: r1(conso), pv: r1(pv), batterie: r1(batterie), soc: r1(soc), reseau: r1(conso - pv - batterie) };
+}
+
+/* ---------- Navigation ---------- */
+const ONGLETS = {
+  gestionnaire: [["accueil", "Accueil"], ["dashboard", "Tableau de bord"], ["conformite", "Conformité"], ["planning", "Planning"], ["descriptif", "Descriptif"], ["equipements", "Équipements"], ["documents", "Documents"], ["opportunites", "Opportunités"], ["alertes", "Alertes"], ["ajouter", "Ajouter un bien"], ["reglages", "Réglages"]],
+  particulier: [["accueil", "Accueil"], ["lot", "Mon lot"], ["alertes", "Alertes"], ["reglages", "Réglages"]]
+};
+let vue = "accueil";
+function aller(v) { vue = v; rendre(); }
+function changerRole(r) { S.role = r; save(); vue = r === "gestionnaire" ? "accueil" : "lot"; rendre(); toast(r === "gestionnaire" ? "Vue gestionnaire — immeuble et parc." : "Vue particulier — votre appartement A12."); }
+
+function rendre() {
+  $("#role").value = S.role;
+  $("#tabs").innerHTML = ONGLETS[S.role].map(([k, l]) => `<button class="tab" aria-current="${k === vue}" onclick="aller('${k}')">${l}</button>`).join("");
+  const vues = { accueil: vAccueil, dashboard: vDashboard, conformite: vConformite, planning: vPlanning, descriptif: vDescriptif, equipements: vEquipements, documents: vDocuments, opportunites: vOpportunites, alertes: vAlertes, ajouter: vAjouter, reglages: vReglages, lot: vLot };
+  $("#app").innerHTML = (vues[vue] || vAccueil)();
+  if (vue === "dashboard") demarrerLive();
+  $("#app").focus({ preventScroll: true });
+}
+
+function entete(titre, sous, action) {
+  return `<div class="pagehead"><div><h1 tabindex="-1">${titre}</h1><p class="sub">${sous}</p></div>${action || ""}</div>`;
+}
+
+/* ---------- Accueil ---------- */
+function vAccueil() {
+  const eco = S.opportunites.reduce((t, o) => t + o.economie, 0);
+  return `
+  <div class="hero">
+    <p class="eyebrow">KayrosLab présente · Opendpe</p>
+    <h1>Le dossier énergétique vivant des bâtiments et copropriétés.</h1>
+    <p class="accroche">Une adresse, un bâtiment, un appartement — et tout le reste suit : descriptif depuis le DPE, équipements, documents, capteurs, obligations légales, opportunités détectées par l'IA et alertes (grands froids, canicules, échéances). Tout est testable ici, en données de démonstration.</p>
+    <div class="cta">
+      <button class="btn btn-primary" onclick="aller('dashboard')">Ouvrir l'application</button>
+      <button class="btn" onclick="aller('conformite')">Voir la conformité 2024-2034</button>
+      <button class="btn btn-ghost" onclick="aller('reglages')">Réglages &amp; import/export</button>
+    </div>
+  </div>
+  <div class="tiles">
+    <div class="tile"><p class="eyebrow">Modules</p><div class="stat-num">10</div><p class="stat-label">M1 intégration par adresse → M10 rapports &amp; déclarations</p></div>
+    <div class="tile"><p class="eyebrow">Conformité pilotée</p><div class="stat-num">2024→2034</div><p class="stat-label">DPEc, PPT, DTG, audit réglementaire, RNIC (21/02/2027), interdictions locatives</p></div>
+    <div class="tile"><p class="eyebrow">Économies détectées</p><div class="stat-num">${fmtEur(eco)}</div><p class="stat-label">par an sur l'immeuble de démonstration</p></div>
+    <div class="tile"><p class="eyebrow">Temps réel</p><div class="stat-num">2 s</div><p class="stat-label">rafraîchissement du flux d'énergie (réseau · PV · batterie · conso)</p></div>
+  </div>
+  <p class="eyebrow">Comment tester — trois parcours</p>
+  <div class="grid g3">
+    <div class="card"><h3 style="font-size:15px;margin-bottom:6px">Parcourir l'application</h3><p class="rappro">Onglets au-dessus : tableau de bord temps réel, conformité, planning, descriptif éditable, équipements, documents avec dépôt et confirmation IA, opportunités, alertes. Basculez le rôle en haut à droite (gestionnaire ↔ particulier).</p></div>
+    <div class="card"><h3 style="font-size:15px;margin-bottom:6px">Déposer un document</h3><p class="rappro">Onglet Documents → « Déposer un document » : l'analyse propose des éléments techniques, des plans et des événements de planning — rien n'est intégré sans votre confirmation.</p></div>
+    <div class="card"><h3 style="font-size:15px;margin-bottom:6px">Tester l'API réelle</h3><p class="rappro">Le dépôt contient la console <span class="num">opendpe-console.html</span> et le backend Rust (<span class="num">server/</span>) : auth JWT/OIDC + RBAC, TimescaleDB, ingestion MQTT, OCR/LLM, connecteur Enedis.</p></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <p class="eyebrow">Pourquoi maintenant — le calendrier qui structure le produit</p>
+    <table><thead><tr><th>Obligation</th><th>Échéance</th></tr></thead><tbody>
+      <tr><td>DPE collectif (copropriétés avec chauffage/refroidissement collectif)</td><td class="target">2024 &gt;200 lots · 2025 50-200 · 2026 &lt;50</td></tr>
+      <tr><td>Plan pluriannuel de travaux (copropriétés &gt; 15 ans)</td><td class="target">2023→2025 selon taille · MAJ 10 ans</td></tr>
+      <tr><td>Interdiction de location</td><td class="target">G 2025 · F 2028 · E 2034</td></tr>
+      <tr><td>Registre des copropriétés — données énergie + RNB</td><td class="target">dès 21/02/2027</td></tr>
+      <tr><td>Audit énergétique réglementaire (copro totales &gt; 50 lots)</td><td class="target">F/G 2025 · E 2028 · D 2033</td></tr>
+    </tbody></table>
+  </div>`;
+}
+
+/* ---------- Tableau de bord temps réel ---------- */
+let liveTimer = null, hist = [];
+function vDashboard() {
+  const compte = { critique: 0, a_planifier: 0, conforme: 0, exempt: 0 };
+  S.obligations.forEach((o) => compte[o.etat]++);
+  const eco = S.opportunites.reduce((t, o) => t + o.economie, 0);
+  const enLigne = 11, totalCap = 12;
+  return `
+  ${entete("Tableau de bord temps réel", `${S.copro.nom} · ${S.copro.adresse} · <span class="num">${S.copro.rnb}</span> · DPEc ${S.copro.dpec} · simulation 2 s (architecture inspirée d'OpenEMS, surcouche Opendpe)`)}
+  <div class="live-strip">
+    <div class="card"><p class="eyebrow">Flux d'énergie en direct</p><div id="flux-zone"></div></div>
+    <div class="card"><p class="eyebrow">Puissance instantanée</p><div class="stat-num"><span id="live-conso">—</span> <span style="font-size:13px">kW</span></div><p class="stat-label">seuil d'alerte ${S.reglages.seuilKw} kW · <span id="live-reseau">—</span> kW réseau</p><svg viewBox="0 0 100 36" preserveAspectRatio="none" style="width:100%;height:48px;margin-top:8px" aria-hidden="true"><polyline id="spark" fill="none" stroke="var(--accent)" stroke-width="2" points=""/></svg><p class="stat-label" id="live-note">fenêtre glissante 2 min</p></div>
+    <div class="card"><p class="eyebrow">Capteurs &amp; hub</p><div class="stat-num">${enLigne}<span style="font-size:14px">/${totalCap}</span></div><p class="stat-label">en ligne · hub e-hub-1 (MQTT/TLS)</p><div class="log-row" style="grid-template-columns:1fr auto;padding:6px 2px"><span style="font-size:13px">T° départ chaufferie</span><span class="pill crit"><span class="dot"></span>hors ligne</span></div><div class="log-row" style="grid-template-columns:1fr auto;padding:6px 2px"><span style="font-size:13px">CO₂ salle commune</span><span class="pill warn"><span class="dot"></span>batterie 47 %</span></div></div>
+  </div>
+  <div class="tiles">
+    <div class="tile"><p class="eyebrow">Consommation 2025</p><div class="stat-num">178 <span style="font-size:13px">MWh</span></div><p class="stat-label">réel · 151 MWh au DPEc (+18 %, DJU)</p></div>
+    <div class="tile"><p class="eyebrow">Conformité</p><div class="stat-num">${compte.critique + compte.a_planifier}</div><p class="stat-label">à traiter (${compte.critique} critique) · ${compte.conforme} conformes</p></div>
+    <div class="tile"><p class="eyebrow">Économies identifiées</p><div class="stat-num">${fmtEur(eco)}</div><p class="stat-label">par an · ${S.opportunites.length} opportunités IA</p></div>
+    <div class="tile"><p class="eyebrow">Étiquette DPEc</p><div class="stat-num">${S.copro.dpec}</div><p class="stat-label">valable jusqu'au ${fmtDate(S.obligations[0].echeance)}</p></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><p class="eyebrow">Dernières alertes</p>
+      ${S.alertes.filter((a) => !a.acquit).slice(0, 3).map((a) => `<div class="log-row" style="grid-template-columns:1fr auto"><div><b>${a.titre}</b><div class="meta">${a.cat} · ${fmtDate(a.date)}</div></div><span class="pill ${a.severite === "critique" ? "crit" : a.severite === "avertissement" ? "warn" : "off"}"><span class="dot"></span>${a.severite}</span></div>`).join("") || '<div class="vide"><h3>Toutes les alertes sont traitées</h3></div>'}
+      <div style="margin-top:10px"><button class="btn btn-sm" onclick="aller('alertes')">Centre d'alertes</button></div>
+    </div>
+    <div class="card"><p class="eyebrow">Ce que l'IA a détecté</p>
+      ${S.opportunites.slice(0, 2).map((o) => `<div class="log-row" style="grid-template-columns:1fr auto"><div><b>${o.titre}</b><div class="meta">${fmtEur(o.economie)}/an · ROI ${o.roi}</div></div></div>`).join("")}
+      <div style="margin-top:10px"><button class="btn btn-sm" onclick="aller('opportunites')">Toutes les opportunités</button></div>
+    </div>
+  </div>`;
+}
+function demarrerLive() {
+  hist = Array.from({ length: 60 }, (_, i) => instant(new Date(Date.now() - (60 - i) * 2000)));
+  if (liveTimer) clearInterval(liveTimer);
+  const dessiner = () => {
+    if (document.hidden || vue !== "dashboard") return;
+    const v = instant();
+    hist.push(v); hist = hist.slice(-90);
+    const zone = $("#flux-zone");
+    if (zone) zone.innerHTML = fluxSvg(v);
+    const c = $("#live-conso"); if (c) c.textContent = v.conso;
+    const rn = $("#live-reseau"); if (rn) rn.textContent = v.reseau;
+    const sp = $("#spark"); if (sp) { const vals = hist.map((h) => h.conso); const mn = Math.min(...vals), mx = Math.max(...vals, S.reglages.seuilKw), span = Math.max(mx - mn, 6); sp.setAttribute("points", vals.map((x, i) => `${(i / (vals.length - 1)) * 100},${34 - ((x - mn) / span) * 30}`).join(" ")); }
+    const note = $("#live-note"); if (note) note.textContent = v.conso > S.reglages.seuilKw ? "seuil dépassé — voir Réglages" : "fenêtre glissante 2 min · échelle ajustée";
+  };
+  dessiner();
+  liveTimer = setInterval(dessiner, 2000);
+}
+function fluxSvg(v) {
+  const vers = Math.abs(v.reseau) < 0.3 ? "" : v.reseau > 0 ? "" : " (export)";
+  return `<svg viewBox="0 0 340 216" role="img" aria-label="Flux en direct : consommation ${v.conso} kilowatts, photovoltaïque ${v.pv} kilowatts, batterie ${Math.abs(v.batterie)} kilowatts, réseau ${Math.abs(v.reseau)} kilowatts" style="width:100%;height:auto">
+    <line x1="52" y1="107" x2="140" y2="107" stroke="var(--border)" stroke-width="3" class="${Math.abs(v.reseau) > 0.3 ? "fleuve" : ""}" />
+    <line x1="170" y1="44" x2="170" y2="86" stroke="var(--border)" stroke-width="3" class="${v.pv > 0.3 ? "fleuve" : ""}" />
+    <line x1="170" y1="128" x2="170" y2="168" stroke="var(--border)" stroke-width="3" class="${Math.abs(v.batterie) > 0.3 ? "fleuve" : ""}" />
+    <rect x="140" y="86" width="60" height="42" rx="12" fill="var(--accent)" />
+    <text x="170" y="112" textAnchor="middle" class="flux-valeur" fill="var(--on-accent)" style="font-weight:700">${v.conso} kW</text>
+    <rect x="128" y="20" width="84" height="26" rx="9" fill="var(--solid)" stroke="var(--border)" />
+    <text x="170" y="37" textAnchor="middle" class="flux-valeur">${v.pv} kW</text>
+    <text x="170" y="12" textAnchor="middle" class="flux-nom">Photovoltaïque</text>
+    <rect x="118" y="170" width="104" height="26" rx="9" fill="var(--solid)" stroke="var(--border)" />
+    <text x="170" y="187" textAnchor="middle" class="flux-valeur">${Math.abs(v.batterie)} kW</text>
+    <text x="170" y="211" textAnchor="middle" class="flux-nom">Batterie · ${v.soc} % ${v.batterie >= 0 ? "charge" : "décharge"}</text>
+    <rect x="6" y="94" width="92" height="26" rx="9" fill="var(--solid)" stroke="var(--border)" />
+    <text x="52" y="111" textAnchor="middle" class="flux-valeur">${Math.abs(v.reseau)} kW${vers}</text>
+    <text x="52" y="88" textAnchor="middle" class="flux-nom">Réseau</text>
+  </svg>
+  <div style="height:6px;border-radius:4px;background:var(--border);overflow:hidden;margin-top:6px" aria-hidden="true"><div style="width:${v.soc}%;height:100%;background:var(--accent)"></div></div>`;
+}
+
+/* ---------- Conformité (M7) ---------- */
+let filtreConf = "tous";
+function vConformite() {
+  const liste = S.obligations.filter((o) => filtreConf === "tous" || o.etat === filtreConf);
+  const kind = (e) => (e === "conforme" ? "ok" : e === "critique" || e === "en_retard" ? "crit" : e === "exempt" ? "off" : "warn");
+  return `
+  ${entete("Calendrier de conformité", "Obligations calculées depuis le profil de la copropriété. Preuve documentaire exigée pour tout « conforme » — alertes J-180/J-90/J-30.")}
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    ${["tous", "critique", "a_planifier", "conforme", "exempt"].map((f) => `<button class="btn btn-sm ${f === filtreConf ? "btn-primary" : ""}" onclick="filtrerConf('${f}')">${f === "tous" ? "Toutes" : ETAT_LBL[f]}</button>`).join("")}
+  </div>
+  ${liste.length === 0 ? `<div class="vide"><h3>Aucune obligation dans cet état</h3><p>Le filtre ne renvoie rien. Revenez à « Toutes ».</p><button class="btn" onclick="filtrerConf('tous')">Tout voir</button></div>` : `
+  <table><thead><tr><th>Obligation</th><th>Base légale</th><th>Échéance</th><th>État</th><th>Preuve / action</th></tr></thead><tbody>
+  ${liste.map((o) => { const j = jRestants(o.echeance); return `<tr><td><b>${o.libelle}</b></td><td class="rappro">${o.base}</td><td class="num">${fmtDate(o.echeance)}<div class="meta">${o.etat === "exempt" ? "—" : j >= 0 ? "J-" + j : "en retard de " + Math.abs(j) + " j"}</div></td><td><span class="pill ${kind(o.etat)}"><span class="dot"></span>${ETAT_LBL[o.etat]}</span></td><td>${o.code === "RNIC" && o.etat === "critique" ? `<button class="btn btn-sm btn-primary" onclick="ouvrirRNIC()">Préparer la déclaration</button>` : `<span class="rappro">${o.preuve}</span>`}</td></tr>`; }).join("")}
+  </tbody></table>`}`;
+}
+function filtrerConf(f) { filtreConf = f; rendre(); }
+function ouvrirRNIC() {
+  modal(`<h2 id="modal-titre" tabindex="-1">Déclaration RNIC — pré-remplie</h2><p class="rappro" style="margin:6px 0 14px">Télédéclaration du syndic (décret 2025-831 — applicable au 21/02/2027). Champs extraits du dossier, à vérifier avant envoi.</p>
+  <table><tbody>
+  <tr><td>Identifiant RNIC</td><td class="num">SI 4501234567</td></tr>
+  <tr><td>Identifiant bâtiment (RNB)</td><td class="num">${S.copro.rnb}</td></tr>
+  <tr><td>Nombre de lots principaux</td><td class="num">${S.copro.lots}</td></tr>
+  <tr><td>Chauffage / refroidissement collectif</td><td>Oui — gaz (chaudière 2015) / non</td></tr>
+  <tr><td>DPE collectif</td><td>Classe ${S.copro.dpec} — ${fmtDate(S.copro.dpecDate)}</td></tr>
+  <tr><td>Audit énergétique réglementaire</td><td>Non applicable (48 lots &lt; 50)</td></tr>
+  <tr><td>Plan pluriannuel de travaux</td><td>Établi 2024 — actualisation 2034</td></tr>
+  </tbody></table>
+  <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px"><button class="btn" onclick="fermerModal()">Vérifier plus tard</button><button class="btn btn-primary" onclick="fermerModal(); toast('Export JSON de la déclaration copié (démo).')">Exporter la déclaration</button></div>`);
+}
+
+/* ---------- Planning ---------- */
+function vPlanning() {
+  const liste = [...S.planning].sort((a, b) => a.date.localeCompare(b.date));
+  const kind = { maintenance: "warn", "réglementaire": "crit", AG: "accent", marché: "off", chantier: "accent" };
+  return `
+  ${entete("Planning de la copropriété", "Événements techniques, réglementaires et de marché — alimentés par les obligations, les contrats et les analyses de documents confirmées.")}
+  ${liste.length === 0 ? `<div class="vide"><h3>Planning vide</h3><p>Les événements apparaissent ici après confirmation des analyses de documents.</p></div>` : `
+  <div class="card" style="padding:6px 18px">${liste.map((p) => `<div class="log-row"><span class="meta">${fmtDate(p.date)}</span><div><b>${esc(p.titre)}</b><div class="meta">source : ${esc(p.source)}</div></div><span class="pill ${kind[p.type] || "off"}">${p.type}</span></div>`).join("")}</div>`}`;
+}
+
+/* ---------- Descriptif (M2) ---------- */
+let editionCle = null;
+function vDescriptif() {
+  const d = S.descriptif;
+  const sections = ["Identité", "Enveloppe", "Systèmes"];
+  const champ = (cle) => {
+    const c = d.champs[cle]; const perso = cle.includes("|perso-");
+    return editionCle === cle ? `<div style="grid-column:1/-1">
+      <div class="field"><label for="ed-valeur">${c.libelle}</label><input id="ed-valeur" class="input" value="${esc(c.valeur)}" maxlength="200"><div class="err" id="ed-err" role="alert" hidden></div>
+      <div class="hint">Motif optionnel — tracé dans l'historique.</div><input id="ed-motif" class="input" placeholder="Motif (ex. : facture fournie)" maxlength="160"></div>
+      <div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-primary btn-sm" onclick="validerChamp('${cle}')">Enregistrer v${d.version + 1}</button><button class="btn btn-sm" onclick="editionCle=null;rendre()">Annuler</button></div></div>`
+      : `<div class="log-row" style="grid-template-columns:1fr auto" data-champ="${esc(cle)}"><div><b>${c.libelle}</b> <span class="conf ${c.conf}">${c.conf === "basse" ? "à confirmer" : c.conf}</span><div>${esc(c.valeur)}</div><div class="meta">source : ${esc(c.source)}</div></div>
+      <div style="display:flex;gap:6px">${perso ? `<button class="btn btn-sm" onclick="supprimerChamp('${cle}')">Supprimer</button>` : ""}<button class="btn btn-sm" onclick="editionCle='${cle}';rendre()">Corriger</button></div></div>`;
+  };
+  return `
+  ${entete("Descriptif technique — version " + d.version, "Construit depuis le DPEc et le DTG. Chaque élément est corrigeable ; ajout et suppression d'éléments personnalisés ; versions tracées (RG2-4).")}
+  <div class="banniere">Les corrections recalculent les indicateurs à titre <b>indicatif</b> — seul un diagnostiqueur certifié peut refaire un DPE réglementaire (RG2-6).</div>
+  ${sections.map((sec) => {
+    const cles = Object.keys(d.champs).filter((k) => d.champs[k].section === sec);
+    return `<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;align-items:baseline"><p class="eyebrow">${sec}</p><button class="btn btn-sm btn-ghost" onclick="ajouterDans('${sec}')">+ Ajouter un élément</button></div>
+    ${cleAjout && cleAjout.section === sec ? formAjout(sec) : ""}
+    ${cles.length === 0 && !(cleAjout && cleAjout.section === sec) ? '<div class="vide"><h3>Section vide</h3><p>Ajoutez un premier élément.</p></div>' : cles.map(champ).join("")}</div>`;
+  }).join("")}
+  <div class="card"><p class="eyebrow">Historique des versions</p>
+    ${d.historique.map((h) => `<div class="log-row" style="grid-template-columns:56px 150px 1fr"><span class="num">v${h.v}</span><span class="meta">${fmtDate(h.date)}<br>${esc(h.auteur)}</span><div>${h.changes.map((c) => "· " + esc(c)).join("<br>")}</div></div>`).join("")}
+  </div>`;
+}
+let cleAjout = null;
+function ajouterDans(section) { cleAjout = cleAjout && cleAjout.section === section ? null : { section }; rendre(); }
+function formAjout(section) {
+  return `<div style="background:var(--bg);border-radius:14px;padding:12px 14px;margin-bottom:12px">
+    <div class="grid g2"><div class="field"><label for="aj-lib">Nom de l'élément</label><input id="aj-lib" class="input" maxlength="120" placeholder="Ex. : Protections solaires"></div>
+    <div class="field"><label for="aj-val">Valeur</label><input id="aj-val" class="input" maxlength="200" placeholder="Ex. : Volets bois majoritaires"></div></div>
+    <div class="field"><label for="aj-conf">Confiance</label><select id="aj-conf" class="input"><option value="moyenne">Moyenne (déduite)</option><option value="haute">Haute (constaté)</option><option value="basse">Basse — à confirmer</option></select></div>
+    <button class="btn btn-primary btn-sm" onclick="validerAjout('${section}')">Ajouter au descriptif</button></div>`;
+}
+function validerAjout(section) {
+  const lib = $("#aj-lib").value.trim(), val = $("#aj-val").value.trim(), conf = $("#aj-conf").value;
+  if (!lib || !val) { toast("Nom et valeur obligatoires."); return; }
+  const cle = section.toLowerCase() + "|perso-" + Date.now();
+  const version = S.descriptif.version + 1;
+  S.descriptif.champs[cle] = { section, libelle: lib, valeur: val, conf, source: "ajouté manuellement v" + version };
+  S.descriptif.version = version;
+  S.descriptif.historique.unshift({ v: version, date: AUJOURDHUI, auteur: auteur(), changes: ["Ajout : " + lib + " = " + val] });
+  cleAjout = null; save(); toast("Élément ajouté — version " + version + "."); rendre();
+}
+function validerChamp(cle) {
+  const v = $("#ed-valeur").value.trim(), err = $("#ed-err");
+  if (!v) { err.textContent = "La valeur ne peut pas être vide — corrigez ou annulez."; err.hidden = false; return; }
+  const c = S.descriptif.champs[cle]; const version = S.descriptif.version + 1;
+  const motif = ($("#ed-motif").value || "").trim();
+  S.descriptif.champs[cle] = { ...c, valeur: v, conf: "haute", source: "corrigé manuellement v" + version };
+  S.descriptif.version = version;
+  S.descriptif.historique.unshift({ v: version, date: AUJOURDHUI, auteur: auteur(), changes: [c.libelle + " : « " + c.valeur + " » → « " + v + " »" + (motif ? " — " + motif : "")] });
+  editionCle = null; save(); toast("Descriptif mis à jour — version " + version + "."); rendre();
+}
+function supprimerChamp(cle) {
+  const c = S.descriptif.champs[cle]; const version = S.descriptif.version + 1;
+  delete S.descriptif.champs[cle]; S.descriptif.version = version;
+  S.descriptif.historique.unshift({ v: version, date: AUJOURDHUI, auteur: auteur(), changes: ["Suppression : " + c.libelle] });
+  save(); toast("Élément « " + c.libelle + " » supprimé."); rendre();
+}
+function auteur() { return S.role === "gestionnaire" ? "Claire Vasseur (syndic)" : "Geoffroy D. (copropriétaire A12)"; }
+
+/* ---------- Équipements (M6) ---------- */
+function vEquipements() {
+  return `
+  ${entete("Registre des équipements techniques", "Inventaire issu du DPEc, du DTG et des documents confirmés — éditable et journalisé (RG6-1).")}
+  <table><thead><tr><th>Équipement</th><th>Type</th><th>Année</th><th>Puissance</th><th>Emplacement</th><th>Statut</th></tr></thead><tbody>
+  ${S.equipements.map((e) => `<tr><td><b>${esc(e.nom)}</b></td><td>${e.type}</td><td class="num">${e.annee}</td><td class="num">${e.puissance ? e.puissance + " kW" : "—"}</td><td>${esc(e.emplacement)}</td><td><span class="pill ${e.statut === "en service" ? "ok" : e.statut === "à valider" ? "warn" : "off"}"><span class="dot"></span>${e.statut}</span></td></tr>`).join("")}
+  </tbody></table>
+  <p class="stat-label" style="margin-top:12px">Les éléments issus d'une analyse de document arrivent en statut « à valider » jusqu'à confirmation du gestionnaire.</p>`;
+}
+
+/* ---------- Documents (M5) avec dépôt + confirmation ---------- */
+let filtreDoc = "tous";
+function vDocuments() {
+  const types = ["tous", "DPEc", "DTG", "contrat énergie", "plan technique", "maintenance"];
+  const liste = S.documents.filter((d) => filtreDoc === "tous" || d.type === filtreDoc);
+  return `
+  ${entete("Documents techniques", "Bibliothèque versionnée. Le dépôt déclenche une analyse dont les résultats — éléments techniques, plans, événements — ne sont intégrés qu'après votre confirmation.",
+    `<button class="btn btn-primary" onclick="ouvrirDepot()">Déposer un document</button>`)}
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    ${types.map((t) => `<button class="btn btn-sm ${t === filtreDoc ? "btn-primary" : ""}" onclick="filtrerDoc('${t}')">${t === "tous" ? "Tous" : t}</button>`).join("")}
+  </div>
+  ${liste.length === 0 ? `<div class="vide"><h3>Aucun document pour ce filtre</h3><p>Le filtre « ${filtreDoc} » ne renvoie rien.</p><button class="btn" onclick="filtrerDoc('tous')">Tout voir</button></div>` : `
+  <div class="card" style="padding:6px 18px">${liste.map((d) => `<div class="log-row"><span class="meta">${fmtDate(d.date)}<br>v${d.version}</span><div><b>${esc(d.titre)}</b><div class="meta">${d.type} · ${d.entite}</div></div><span>${d.extraction ? `<button class="btn btn-sm" onclick="voirExtraction('${d.id}')">Voir l'extraction</button>` : `<span class="tag">${d.type === "plan technique" ? "plan lié au descriptif" : "analyse au dépôt"}</span>`}</span></div>`).join("")}</div>`}`;
+}
+function filtrerDoc(t) { filtreDoc = t; rendre(); }
+function voirExtraction(id) {
+  const d = S.documents.find((x) => x.id === id); const x = d.extraction;
+  modal(`<h2 id="modal-titre" tabindex="-1">Extraction contractuelle — ${esc(d.titre)}</h2><p class="rappro" style="margin:6px 0 14px">Extraction assistée OCR + IA, à valider (RG5-2). L'échéance calculée alimente les alertes de marché.</p>
+  <table><tbody>
+  <tr><td>Fournisseur</td><td>${esc(x.fournisseur)}</td></tr>
+  <tr><td>Énergie / point de livraison</td><td>${esc(x.energie)} · <span class="num">${esc(x.point)}</span></td></tr>
+  <tr><td>Structure tarifaire</td><td>${esc(x.tarif)}</td></tr>
+  <tr><td>Échéance</td><td class="num">${fmtDate(x.echeance)} (préavis : ${esc(x.preavis)})</td></tr>
+  <tr><td>Reconduction</td><td>${esc(x.reconduction)}</td></tr>
+  </tbody></table>
+  <div style="display:flex;justify-content:flex-end;margin-top:16px"><button class="btn btn-primary" onclick="fermerModal()">Fermer</button></div>`);
+}
+
+/* Dépôt : 3 étapes — saisie → analyse (chargement) → confirmation obligatoire */
+function ouvrirDepot() {
+  const types = ["plan technique", "DPEc", "DTG", "audit", "contrat énergie", "maintenance"];
+  modal(`<h2 id="modal-titre" tabindex="-1">Déposer un document</h2>
+  <div class="steps"><span class="step on">1 · Dépôt</span><span class="step">2 · Analyse IA</span><span class="step">3 · Confirmation</span></div>
+  <div class="field"><label for="dep-titre">Titre</label><input id="dep-titre" class="input" value="Plan chauffagiste rev. B — niveau 2/3" maxlength="140"></div>
+  <div class="grid g2"><div class="field"><label for="dep-type">Type</label><select id="dep-type" class="input">${types.map((t) => `<option>${t}</option>`).join("")}</select></div>
+  <div class="field"><label for="dep-fichier">Fichier (démo : non transmis)</label><input id="dep-fichier" class="input" type="file" accept=".pdf,.txt,.md,.dwg"></div></div>
+  <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn" onclick="fermerModal()">Annuler</button><button class="btn btn-primary" onclick="analyserDepot()">Analyser avec l'IA</button></div>`);
+}
+function analyserDepot() {
+  $("#voile .steps").innerHTML = '<span class="step">1 · Dépôt</span><span class="step on">2 · Analyse IA</span><span class="step">3 · Confirmation</span>';
+  $("#modal").innerHTML += '<div aria-busy="true" role="status"><p class="meta" style="margin-top:12px">Extraction OCR + IA : éléments techniques, plans, événements de planning…</p><div class="skeleton" style="width:88%"></div><div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:80%"></div><div class="skeleton" style="width:62%"></div></div>';
+  setTimeout(() => afficherConfirmation(), 1600);
+}
+function resultatsDepot() {
+  return [
+    { titre: "Éléments techniques → registre d'équipements", items: [
+      { defaut: true, titre: "Sous-station réseau de chaleur — échangeur 250 kW (2024)", detail: "Type : sous-station · emplacement : local technique B → registre « à valider ».", genre: "equipement", donnees: { nom: "Sous-station réseau de chaleur — échangeur 250 kW", type: "sous-station", energie: "réseau de chaleur", annee: 2024, puissance: 250, emplacement: "Local technique B" } },
+      { defaut: true, titre: "Surpresseur de bouclage ECS (2024)", detail: "Type : pompe · énergie : électricité.", genre: "equipement", donnees: { nom: "Surpresseur de bouclage ECS", type: "pompe", energie: "électricité", annee: 2024, puissance: null, emplacement: "Chaufferie" } }
+    ] },
+    { titre: "Plans → bibliothèque documentaire", items: [
+      { defaut: true, titre: "Plan chauffagiste — niveau 2/3 (rev. B)", detail: "Lié à l'entité « Chaufferie », indexé plein texte.", genre: "plan", donnees: { titre: "Plan chauffagiste — niveau 2/3 (rev. B)", entite: "Chaufferie" } },
+      { defaut: true, titre: "Schéma fluide ECS — mise à jour 2024", detail: "Lié à l'entité « Chaufferie ».", genre: "plan", donnees: { titre: "Schéma fluide ECS — mise à jour 2024", entite: "Chaufferie" } }
+    ] },
+    { titre: "Événements → planning", items: [
+      { defaut: true, titre: "Entretien annuel chaudière — 18/09/2026", detail: "Type : maintenance · calendrier du contrat figurant sur le plan.", genre: "evenement", donnees: { titre: "Entretien annuel chaudière (plan rev. B)", type: "maintenance", date: "2026-09-18" } },
+      { defaut: true, titre: "Contrôle réglementaire VMC — 03/2027", detail: "Type : maintenance.", genre: "evenement", donnees: { titre: "Contrôle réglementaire VMC", type: "maintenance", date: "2027-03-03" } }
+    ] }
+  ];
+}
+let depotCoches = {};
+function afficherConfirmation() {
+  const groupes = resultatsDepot();
+  depotCoches = {};
+  const total = groupes.reduce((t, g) => t + g.items.length, 0);
+  $("#voile .steps").innerHTML = '<span class="step">1 · Dépôt</span><span class="step">2 · Analyse IA</span><span class="step on">3 · Confirmation</span>';
+  $("#modal").innerHTML = `<h2 id="modal-titre" tabindex="-1">Confirmer les éléments extraits</h2>
+  <p class="rappro" style="margin:6px 0 14px">L'IA a extrait <b>${total} éléments</b>. <b>Rien n'est ajouté sans votre confirmation</b> — décochez ce que vous ne souhaitez pas intégrer.</p>
+  ${groupes.map((g, gi) => `<section class="card" style="margin-bottom:12px;padding:12px 16px"><p class="eyebrow">${g.titre}</p>
+    ${g.items.map((it, ii) => { const cle = gi + "-" + ii; depotCoches[cle] = true; return `<label class="checkbox"><input type="checkbox" id="ck-${cle}" checked onchange="depotCoches['${cle}']=this.checked"><span><b>${it.titre}</b><div class="meta">${it.detail}</div></span></label>`; }).join("")}
+  </section>`).join("")}
+  <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn" onclick="fermerModal()">Annuler</button><button class="btn btn-primary" onclick="appliquerDepot()">Ajouter les éléments confirmés</button></div>`;
+}
+function appliquerDepot() {
+  const groupes = resultatsDepot();
+  const selections = [];
+  groupes.forEach((g, gi) => g.items.forEach((it, ii) => { if (depotCoches[gi + "-" + ii]) selections.push(it); }));
+  selections.forEach((it) => {
+    if (it.genre === "equipement") S.equipements.push({ id: "e" + Date.now() + Math.random().toString(36).slice(2, 5), statut: "à valider", ...it.donnees });
+    else if (it.genre === "plan") S.documents.push({ id: "d" + Date.now() + Math.random().toString(36).slice(2, 5), type: "plan technique", date: AUJOURDHUI, version: 1, extraction: null, ...it.donnees });
+    else if (it.genre === "evenement") S.planning.push({ id: "p" + Date.now() + Math.random().toString(36).slice(2, 5), source: "document confirmé", ...it.donnees });
+  });
+  S.documents.push({ id: "d" + Date.now(), titre: "Plan chauffagiste rev. B — niveau 2/3", type: "plan technique", date: AUJOURDHUI, version: 1, entite: "Chaufferie", extraction: null, statut: "analysé" });
+  save(); fermerModal();
+  toast(selections.length + " élément(s) ajouté(s) après votre confirmation — voir Planning et Équipements.");
+  aller("planning");
+}
+
+/* ---------- Opportunités (M8) ---------- */
+function vOpportunites() {
+  return `
+  ${entete("Opportunités détectées", "Chaque recommandation porte sa preuve, son chiffrage et la date de validité de ses hypothèses (RG8-1). Sans données suffisantes : hypothèse à vérifier.")}
+  <div class="grid g2">${S.opportunites.map((o) => `<section class="card" data-od-id="opp-${o.id}">
+    <p class="eyebrow">Opportunité · ${o.statut === "utile" ? "validée" : o.statut === "ecartee" ? "écartée" : "détectée par l'IA"}</p>
+    <h3 style="font-size:15.5px;margin-bottom:8px">${esc(o.titre)}</h3>
+    <p class="rappro" style="margin:0 0 10px"><b style="color:var(--fg)">Preuve :</b> ${esc(o.preuve)}</p>
+    <div class="grid g3" style="gap:8px;margin-bottom:10px">
+      <div><div class="stat-num" style="font-size:19px">${fmtEur(o.economie)}</div><p class="stat-label">économie / an</p></div>
+      <div><div class="stat-num" style="font-size:19px">${o.capex ? fmtEur(o.capex) : "0 €"}</div><p class="stat-label">CAPEX</p></div>
+      <div><div class="stat-num" style="font-size:19px">${o.roi}</div><p class="stat-label">retour</p></div>
+    </div>
+    <p class="stat-label"><b style="color:var(--fg)">Aides :</b> ${esc(o.aides)}</p>
+    ${o.statut === "nouvelle" ? `<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-sm btn-primary" onclick="feedbackOpp('${o.id}','utile')">C'est utile</button><button class="btn btn-sm" onclick="feedbackOpp('${o.id}','ecartee')">Non pertinent</button></div>` : '<p class="stat-label" style="margin-top:10px">Feedback enregistré (RG8-3).</p>'}
+  </section>`).join("")}</div>`;
+}
+function feedbackOpp(id, statut) { S.opportunites.find((o) => o.id === id).statut = statut; save(); toast(statut === "utile" ? "Opportunité validée." : "Recommandation écartée."); rendre(); }
+
+/* ---------- Alertes (M9) ---------- */
+let filtreAlerte = "ouvertes";
+function vAlertes() {
+  const liste = S.alertes.filter((a) => (filtreAlerte === "toutes" ? true : !a.acquit));
+  const kind = (s) => (s === "critique" ? "crit" : s === "avertissement" ? "warn" : "off");
+  return `
+  ${entete("Centre d'alertes", "Climat (vigilances Météo-France), technique, marché, réglementaire — acquittement tracé (RG9-3).",
+    `<button class="btn" onclick="filtreAlerte=filtreAlerte==='toutes'?'ouvertes':'toutes';rendre()">${filtreAlerte === "toutes" ? "Voir les ouvertes" : "Voir l'historique"}</button>`)}
+  ${liste.length === 0 ? `<div class="vide"><h3>Toutes les alertes sont traitées</h3><p>Le système vous préviendra dès qu'un événement sera détecté.</p><button class="btn" onclick="filtreAlerte='toutes';rendre()">Voir l'historique</button></div>` : `
+  <div class="card" style="padding:6px 18px">${liste.map((a) => `<div class="log-row"><span class="meta">${fmtDate(a.date)}<br>${a.cat}</span><div><b>${esc(a.titre)}</b> <span class="pill ${kind(a.severite)}"><span class="dot"></span>${a.severite}</span><div class="rappro" style="margin-top:4px">${esc(a.detail)}</div></div><span>${a.acquit ? '<span class="tag">acquittée</span>' : `<button class="btn btn-sm" onclick="acquitter('${a.id}')">Acquitter</button>`}</span></div>`).join("")}</div>`}`;
+}
+function acquitter(id) { S.alertes.find((x) => x.id === id).acquit = true; save(); toast("Alerte acquittée — action tracée."); rendre(); }
+
+/* ---------- Ajouter un bien (M1) ---------- */
+const SUGGESTIONS = ["12 rue des Lilas, 45000 Orléans", "8 avenue de la Libération, 45100 Orléans", "3 impasse du Clos Neuf, 45160 Olivet", "27 rue Marcel Pagnol, 45400 Fleury-les-Aubrais"];
+let wizard = null;
+function vAjouter() {
+  if (!wizard) wizard = { etape: 1, adresse: "", batiment: "A" };
+  const w = wizard;
+  return `
+  ${entete("Intégrer un bien", "Adresse → bâtiment → lot, en moins de deux minutes (M1). Géocodage BAN + RNB simulés ; rattachement vérifié par le gestionnaire (RG1-4).")}
+  <div class="steps">${[1, 2, 3].map((i) => `<span class="step ${w.etape === i ? "on" : ""}">Étape ${i} — ${["Adresse", "Bâtiment", "Lot"][i - 1]}</span>`).join("")}</div>
+  ${w.etape === 1 ? `<div class="card" style="max-width:640px"><div class="field"><label for="w-adr">Adresse du bien</label><input id="w-adr" class="input" value="${esc(w.adresse)}" maxlength="160" placeholder="Ex. : 12 rue des Lilas, 45000 Orléans"></div>
+    <div class="grid" style="gap:8px">${SUGGESTIONS.map((s) => `<button class="btn" style="text-align:left" onclick="wizard.adresse='${s}';rendre()">${s}</button>`).join("")}</div>
+    <div style="margin-top:14px"><button class="btn btn-primary" onclick="etapeAdresse()">Continuer</button></div></div>`
+    : w.etape === 2 ? `<div class="card" style="max-width:640px"><div class="field"><label for="w-bat">Bâtiment</label><select id="w-bat" class="input"><option value="A">Bâtiment A</option><option value="B">Bâtiment B</option></select><div class="hint">Numéro obligatoire si la copropriété en déclare plusieurs (RG1-2).</div></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary" onclick="wizard.batiment=$('#w-bat').value.replace('Bâtiment ','');wizard.etape=3;rendre()">Continuer</button><button class="btn" onclick="wizard.etape=1;rendre()">Retour</button></div></div>`
+    : `<div class="card" style="max-width:640px"><div class="grid g2">
+    <div class="field"><label for="w-type">Type de lot</label><select id="w-type" class="input"><option>appartement</option><option>cave</option><option>parking</option><option>commerce</option></select></div>
+    <div class="field"><label for="w-etage">Étage</label><input id="w-etage" class="input" type="number" min="-2" max="30"></div></div>
+    <div class="grid g2"><div class="field"><label for="w-num">Numéro de lot / d'appartement</label><input id="w-num" class="input" maxlength="20" placeholder="Ex. : A12"></div>
+    <div class="field"><label for="w-surf">Surface (m², optionnel)</label><input id="w-surf" class="input" type="number" min="2" max="2000"></div></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-primary" onclick="integrerBien()">Intégrer le bien</button><button class="btn" onclick="wizard.etape=2;rendre()">Retour</button></div></div>`}`;
+}
+function etapeAdresse() { const v = $("#w-adr").value.trim(); if (v.length < 8) { toast("Sélectionnez une adresse suggérée ou saisissez une adresse complète."); return; } wizard.adresse = v; wizard.etape = 2; rendre(); }
+function integrerBien() {
+  const numero = $("#w-num").value.trim();
+  if (!numero) { toast("Le numéro de lot est obligatoire (RG1-3)."); return; }
+  toast(`Bien intégré : ${wizard.batiment} · ${numero} (${wizard.adresse}) — rattachement à faire valider par le gestionnaire.`);
+  wizard = null; aller("dashboard");
+}
+
+/* ---------- Mon lot (particulier) ---------- */
+function vLot() {
+  const L = S.lot; const max = Math.max(...L.conso);
+  return `
+  ${entete("Mon appartement — " + L.numero, "Bâtiment A · étage " + L.etage + " · " + L.surface + " m² · étiquette " + L.classe + " · partie de la " + S.copro.nom)}
+  <div class="grid g2">
+    <div class="card"><p class="eyebrow">Ma consommation 2025 (kWh, mois par mois)</p>
+      <div class="bars" role="img" aria-label="Consommation mensuelle 2025">${L.conso.map((x) => `<div class="bar" style="height:${Math.round((x / max) * 100)}%"></div>`).join("")}</div>
+      <p class="stat-label" style="margin-top:8px">Total ${fmtNb(L.conso.reduce((a, b) => a + b, 0) * 10)} kWh — chauffage collectif compté par calorifique.</p></div>
+    <div class="card"><p class="eyebrow">Mon descriptif (hérite de l'immeuble)</p>
+      <div class="log-row" style="grid-template-columns:1fr"><div><b>Menuiseries</b> <span class="conf moyenne">hérité</span><div>Double vitrage 4/16/4 argon (2011)</div></div></div>
+      <div class="log-row" style="grid-template-columns:1fr"><div><b>Chauffage / ECS</b> <span class="conf haute">hérité</span><div>Collectif gaz — compteur calorifique individuel</div></div></div>
+      <div class="log-row" style="grid-template-columns:1fr"><div><b>Mes éco-gestes</b><div class="rappro">Purger les radiateurs avant l'hiver · ne pas couvrir le compteur calorifique · signaler toute surchauffe (&gt; 23 °C).</div></div></div></div>
+  </div>`;
+}
+
+/* ---------- Réglages (import/export, seuil) ---------- */
+function vReglages() {
+  return `
+  ${entete("Réglages", "Import/export des données de démonstration, seuil d'alerte et réinitialisation.")}
+  <div class="grid g2">
+    <section class="card" aria-label="Données"><p class="eyebrow">Données — import &amp; export</p>
+      <p class="stat-label" style="margin-bottom:12px">Export JSON de l'état complet (copropriété, descriptif, équipements, documents, obligations, planning, réglages). L'import remplace les données après confirmation.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="exporterJSON()">Exporter (JSON)</button>
+        <button class="btn" onclick="exporterCSV()">Exporter mesures (CSV)</button>
+        <button class="btn" onclick="ouvrirImport()">Importer (JSON)</button>
+        <input id="imp-fichier" type="file" accept=".json" style="display:none" onchange="importerJSON(this)">
+        <button class="btn btn-ghost" onclick="reinitialiser()">Réinitialiser la démo</button>
+      </div>
+      <div id="imp-message"></div>
+    </section>
+    <section class="card" aria-label="Alertes"><p class="eyebrow">Alertes &amp; seuils</p>
+      <div class="field"><label for="rg-seuil">Seuil de puissance instantanée (kW)</label><input id="rg-seuil" class="input" type="number" min="5" max="500" value="${S.reglages.seuilKw}"><div class="hint">Bandeau d'alerte sur le tableau de bord au dépassement.</div></div>
+      <button class="btn btn-primary btn-sm" onclick="enregistrerSeuil()">Enregistrer le seuil</button>
+      <p class="stat-label" style="margin-top:12px">Langue : français · autres langues prévues en V2.</p>
+    </section>
+  </div>
+  <section class="card" style="margin-top:14px" aria-label="À propos"><p class="eyebrow">À propos</p>
+    <p class="stat-label">KayrosLab × Opendpe — solution complète de démonstration · front React disponible dans <span class="num">app/</span>, backend Rust dans <span class="num">server/</span> · console API : <span class="num">opendpe-console.html</span> · spécification : <span class="num">opendpe/spec/</span>.</p>
+  </section>`;
+}
+function telecharger(blob, nom) { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nom; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1500); }
+function ouvrirImport() { $("#imp-fichier").click(); }
+function exporterJSON() { telecharger(new Blob([JSON.stringify({ format: "opendpe-export-v1", exporteLe: AUJOURDHUI, data: S }, null, 2)], { type: "application/json" }), "opendpe-export-" + AUJOURDHUI + ".json"); toast("Export JSON téléchargé."); }
+function exporterCSV() {
+  const L = S.lot; let csv = "mois,consommation_kwh\n";
+  ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"].forEach((m, i) => { csv += `${m},${L.conso[i] * 10}\n`; });
+  telecharger(new Blob([csv], { type: "text/csv;charset=utf-8" }), "opendpe-mesures-lot.csv"); toast("Export CSV téléchargé.");
+}
+function importerJSON(input) {
+  const f = input.files?.[0]; if (!f) return;
+  const lect = new FileReader();
+  lect.onload = () => {
+    try {
+      const obj = JSON.parse(lect.result);
+      if (obj.format !== "opendpe-export-v1" || !obj.data || !obj.data.copro || !obj.data.descriptif) { $("#imp-message").innerHTML = '<div class="banniere" role="alert"><b>Import refusé.</b> Format non reconnu — attendu un export Opendpe (opendpe-export-v1). Rien n’a été modifié.</div>'; return; }
+      modal(`<h2 id="modal-titre" tabindex="-1">Confirmer l'import</h2><p class="rappro" style="margin:6px 0 12px">L'import <b>remplace les données actuelles</b> de la démonstration.</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn" onclick="fermerModal()">Annuler</button><button class="btn btn-primary" onclick="appliquerImport()">Remplacer mes données</button></div>`);
+      window._importEnAttente = obj.data;
+    } catch (e) { $("#imp-message").innerHTML = '<div class="banniere" role="alert"><b>Import refusé.</b> Fichier illisible (JSON invalide) : ' + esc(e.message) + ' — rien n’a été modifié.</div>'; }
+  };
+  lect.readAsText(f);
+}
+function appliquerImport() {
+  S = window._importEnAttente; save(); fermerModal(); vue = "dashboard"; rendre(); toast("Import appliqué — vos données remplacent la démo.");
+}
+function reinitialiser() { try { localStorage.removeItem(CLE); } catch (e) {} S = graine(); wizard = null; vue = "accueil"; rendre(); toast("Démonstration réinitialisée."); }
+function enregistrerSeuil() {
+  const x = Number($("#rg-seuil").value);
+  if (!x || x < 5 || x > 500) { toast("Seuil attendu entre 5 et 500 kW."); return; }
+  S.reglages.seuilKw = x; save(); toast("Seuil d'alerte enregistré : " + x + " kW.");
+}
+
+/* ---------- Analyse DTG (M4) — modal avec chargement ---------- */
+function ouvrirAnalyse() {
+  modal(`<h2 id="modal-titre" tabindex="-1">Analyse du DTG &amp; du DPE collectif</h2><p class="rappro" style="margin:6px 0 12px">Extraction structurée puis croisement avec les données de l'immeuble et les obligations (M4). Traitement simulé.</p>
+  <div id="ana" aria-busy="true" role="status"><p class="meta">Chargement — forces, faiblesses, chantiers, valorisation, calendrier…</p><div class="skeleton" style="width:88%"></div><div class="skeleton" style="width:72%"></div><div class="skeleton" style="width:80%"></div><div class="skeleton" style="width:64%"></div></div>`);
+  setTimeout(() => {
+    const c = $("#ana"); if (!c) return; c.removeAttribute("aria-busy");
+    c.innerHTML = `<p class="eyebrow" style="margin-top:10px">Forces</p><ul style="margin:0 0 12px;padding-left:18px;font-size:14px"><li>Chaudière gaz condensation récente (2015)</li><li>Comptage calorifique individuel conforme (2016)</li></ul>
+    <p class="eyebrow">Faiblesses</p><ul style="margin:0 0 12px;padding-left:18px;font-size:14px"><li>Absence de GTB — écart théorie/réel +18 % (DJU)</li><li>Bouclage ECS permanent non optimisé</li><li>Plancher bas non isolé (à confirmer)</li></ul>
+    <p class="eyebrow">Chantiers proposés</p><table style="margin-bottom:12px"><thead><tr><th>Chantier</th><th>CAPEX</th><th>Économie/an</th><th>ROI</th></tr></thead><tbody>
+    <tr><td>Régulation climatique + optimisation bouclage ECS</td><td class="num">${fmtEur(7300)}</td><td class="num">${fmtEur(4200)}</td><td class="num">1,7 an</td></tr>
+    <tr><td>Menuiseries — 6 lots en F (sortie passoire 2028)</td><td class="num">${fmtEur(42000)}</td><td class="num">${fmtEur(1150)}</td><td class="num">long terme</td></tr>
+    <tr><td>Renégociation contrat gaz (avant 30/09/2026)</td><td class="num">${fmtEur(0)}</td><td class="num">${fmtEur(3100)}</td><td class="num">immédiat</td></tr></tbody></table>
+    <p class="eyebrow">Valorisation &amp; calendrier</p><ul style="margin:0;padding-left:18px;font-size:14px"><li>Étiquette DPEc D maintenue ; trajectoire B à 10 ans</li><li>Résolutions à l'AG de mars 2027, cohérentes avec le PPT et la déclaration RNIC du 21/02/2027</li></ul>
+    <p class="rappro" style="margin-top:12px">Hypothèses datées du ${fmtDate(AUJOURDHUI)} — éditables (RG4-3).</p>
+    <div style="text-align:right;margin-top:12px"><button class="btn btn-primary" onclick="fermerModal()">Fermer</button></div>`;
+  }, 1500);
+}
+
+/* ---------- Modal & toast ---------- */
+function modal(html) { $("#modal").innerHTML = html; $("#voile").classList.add("on"); const h = $("#modal-titre"); if (h) h.focus(); }
+function fermerModal() { $("#voile").classList.remove("on"); $("#modal").innerHTML = ""; }
+$("#voile").addEventListener("mousedown", (e) => { if (e.target === $("#voile")) fermerModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && $("#voile").classList.contains("on")) fermerModal(); });
+
+/* ---------- Démarrage ---------- */
+$("#role").value = S.role;
+rendre();
+</script>
+</body>
+</html>
