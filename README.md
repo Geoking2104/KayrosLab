@@ -206,7 +206,7 @@ See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for sch
 
 ## Agent console
 
-The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed decisions run day to day — in production, with self-service workspaces.
+The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed decisions run day to day — in production, with self-service workspaces. The playable **board-first workbench** (kanban, inbox, 5-minute guide) lives in [`frontend/console-workbench`](frontend/console-workbench) — see [`docs/CONSOLE-WORKBENCH.md`](docs/CONSOLE-WORKBENCH.md). Do not merge it over the production console.
 
 **Flow:** connect your channels → bind rooms to a collective → instruct the question → the collective answers → humans arbitrate → resume with new evidence.
 

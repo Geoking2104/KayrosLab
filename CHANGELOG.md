@@ -1,6 +1,15 @@
 # Changelog
 
+## v0.24.0 (2026-09) — Console workbench · tableau d'abord
+
+- **`frontend/console-workbench/`** (nouveau) — workbench jouable, distinct de `frontend/console-app` (console Fastify de production). Maison = kanban à 4 colonnes (**À traiter → En cycle → À arbitrer → Mesuré**), rail court (Tableau / Inbox / Essaims / Guide), Atelier et Système repliés.
+- **Guide 5 minutes** — setup adapté de Multica (sign in / connect computer / create agent) vers KayrosLab (atelier / essaim / idée / cycle / porte). Comparaison d'architecture dans `docs/CONSOLE-WORKBENCH.md`. On copie la simplicité du tableau, pas le daemon ni les 26 CLI.
+- **Inbox** — portes humaines + runs d'essaim en `pending_human_arbitration`. Motif obligatoire. Vote instruit, veto décide.
+- **Moteur client** — cycle 00–08, KI, novelty 0.40/0.40/0.20, consensus `majority|unanimous|veto_power_csuite`, persist `kayros-console-v4`. Toute simulation reste labellisée `SIMULATION`.
+- **Ne pas fusionner** par-dessus `frontend/console-app`. Porter le UX (board, inbox, guide, nav courte) dans la console de production.
+
 ## v0.23.0 (2026-08) — Étape 3 · Construire (Collision Mode EF-06)
+
 
 - **`core/collision.mjs`** (nouveau) — `distanceConcepts` (distance réelle par partage de tags, jaccard), `idCollision` (id stable par paire triée), `normalizeCollision` (2 concepts requis, faisabilité clampée 0–100), `scoreCollision` (**nouveauté × faisabilité / 100, `null` sans faisabilité**), `runCollisionMode` (paires ≥ plancher 60, ignore arêtes du réseau + historique déjà collisionné, tri par score, `generer()` importe proposition/faisabilité), `addCollision` (timeline append-only horodatée + signée, dédup), `rapportCollision` (comptages réels). La faisabilité est **importée** (LLM/humain), jamais devinée.
 - **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/collision` (concepts depuis body ou canvas/`cartographie.tendances`, plancher, `scores[]` d'apport, persiste `construire.collisions`, `construire.collision`), `GET .../collision` (rapport), `POST .../collision/selection` (mémorise `construire.selectionCollisions`, `construire.collision.select`).
