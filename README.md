@@ -577,6 +577,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Agent Console** | `GET /v1/console/overview` · agents CRUD + Crystal import · connectors (configure / test) · rooms · threads · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
+| Contact | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
 | Reporting | projection, impact |

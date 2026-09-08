@@ -46,6 +46,7 @@ app.addHook('preHandler', async (req, reply) => {
   if (req.method === 'GET') return;
   const path = (req.url || '').split('?')[0];
   if (path.startsWith('/v1/demo/')) return;
+  if (path === '/v1/contact') return; // formulaire de contact public du site
   if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
   if (path === '/mcp') return; // dedicated scoped Bearer authentication
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
@@ -58,6 +59,7 @@ await app.register((await import('./routes/novelty.mjs')).default);
 await app.register((await import('./routes/cycle.mjs')).default);
 await app.register((await import('./routes/memory.mjs')).default);
 await app.register((await import('./routes/demo-report-leads.mjs')).default);
+await app.register((await import('./routes/contact.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);
