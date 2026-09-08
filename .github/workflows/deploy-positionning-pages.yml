@@ -8,6 +8,7 @@ on:
       - 'frontend/console-app/**'
       - 'index.html'
       - 'index.fr.html'
+      - 'validation-proposition.html'
       - 'backend/web/views/index.ejs'
       - 'backend/web/views/homepage.ejs'
       - 'backend/web/views/homepage-studio.ejs'
@@ -112,6 +113,7 @@ jobs:
           for f in \
             arbitrage.html \
             cycle-timeline.html \
+            validation-proposition.html \
             portfolio-dormant.html \
             portfolio-board.html \
             ontology-explorer.html \
