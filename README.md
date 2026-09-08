@@ -13,6 +13,8 @@ KayrosLab is a **governed strategic ideation workshop**: multi-agent orchestrati
 
 It is **not** a trained model. It is a **governed LLM stack** — an orchestrator that drives real models (Ollama quant-aware locally, or Claude / Mistral via the Fastify backend) behind governance, memory, and audit trails.
 
+The production **agent console** turns Slack, Microsoft Teams or Discord channels into governed decision rooms: every question opens a durable decision dossier — individual analyses, consolidated objections, consensus verdict — closed by explicit human arbitration.
+
 ![KayrosLab Hybrid Agent Sales Oracle — governed simulation of an executive committee and buyer veto network](backend/web/public/assets/hybrid-agent-sales-oracle.png)
 
 > **Hybrid agents turn KayrosLab into a Sales Oracle:** rehearse an internal executive decision, pressure-test an RFP against the customer’s buying committee, and strengthen the evidence before the real meeting. Simulated stakeholder feedback is always labelled as simulation — never as a real statement or prediction.
@@ -25,19 +27,20 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 2. [Features](#features)
 3. [Complete agent operations](#complete-agent-operations)
 4. [Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle)
-5. [Quick start](#quick-start)
-6. [Repository layout](#repository-layout)
-7. [How it works](#how-it-works)
-8. [Core engine](#core-engine)
-9. [Backend API](#backend-api)
-10. [UI entry points](#ui-entry-points)
-11. [Configuration](#configuration)
-12. [Deployment](#deployment)
-13. [Development & tests](#development--tests)
-14. [Roadmap](#roadmap)
-15. [Further documentation](#further-documentation)
-16. [Contact](#contact)
-17. [License](#license)
+5. [Agent console](#agent-console)
+6. [Quick start](#quick-start)
+7. [Repository layout](#repository-layout)
+8. [How it works](#how-it-works)
+9. [Core engine](#core-engine)
+10. [Backend API](#backend-api)
+11. [UI entry points](#ui-entry-points)
+12. [Configuration](#configuration)
+13. [Deployment](#deployment)
+14. [Development & tests](#development--tests)
+15. [Roadmap](#roadmap)
+16. [Further documentation](#further-documentation)
+17. [Contact](#contact)
+18. [License](#license)
 
 ---
 
@@ -53,6 +56,17 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 | Decision | Informal | Vote | **Vote instructs · veto decides** |
 | Sovereignty | Cloud | Cloud | **Ollama quant-aware** or proxy |
 
+### Named landscape
+
+| Category | Representative players | Where they excel | The gap KayrosLab fills |
+|---|---|---|---|
+| Innovation management suites | Brightidea · HYPE Innovation · ITONICS · Qmarkets · IdeaScale | Idea collection at scale, campaigns, stage-gate pipelines, impact tracking | Intelligence is organizational (workflow, scorecards), not governed multi-agent deliberation — no buyer-committee rehearsal, no veto mapping |
+| Decision intelligence | Cloverpop and similar | Decision process structure, human+AI agents, decisions captured as a system of record | No adversarial rehearsal, no consented stakeholder simulation, no local sovereign deployment path |
+| Chat LLM assistants | ChatGPT · Claude · Gemini | Fast drafting and one-model analysis | Session-only memory, no role boundaries, no evidence discipline, no gates or veto, no audit trail |
+| Agent frameworks | LangChain / LangGraph · CrewAI · AutoGen | Build-your-own orchestration for dev teams | Governance, gates, console, memory and audit remain to be built; KayrosLab ships them — and hosts these frameworks as optional adapters |
+
+**Position.** KayrosLab occupies the governed deliberation layer between conversation (chat LLMs), collection (innovation suites) and custom builds (agent frameworks): role-bound agents, layered memory L0–L3, deterministic numbers, human gates with veto — inspectable, deployable local or cloud.
+
 ---
 
 ## Features
@@ -66,6 +80,7 @@ It is **not** a trained model. It is a **governed LLM stack** — an orchestrato
 - **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
 - **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
 - **Specialized swarms** — compose built-in system agents, user-defined experts, or modified hybrid agents with layered rules and veto powers
+- **Governed agent console (production)** — self-service signup with verified e-mail, tenant-scoped workspace, Slack/Teams/Discord room binding per collective, durable Postgres-backed decision threads, consensus dossiers (GO / CONDITIONAL_GO / NO_GO) with consolidated objections & conditions, human arbitration (accept · conditional · override veto · re-evaluate), encrypted server-side connector secrets
 - **Consent-aware personality simulation** — optional LinkedIn self-profile / Crystal Knows imports through official APIs or authorized structured exports, with provenance and explicit consent
 - **Sales Oracle** — simulate internal executive decisions or customer buying committees to reveal veto paths, objections, evidence gaps and conditional-GO requirements before a proposal is sent
 - **Developer Portal MCP** — connect Codex, Claude Code, Cursor or VS Code to a tenant-scoped, least-privilege agentic API catalog with governed swarm execution
@@ -186,6 +201,30 @@ Direct browser uploads require the private S3-compatible bucket to allow `PUT` r
 Configure the server-only `KAYROS_S3_*` variables from [`backend/fastify/.env.sample`](backend/fastify/.env.sample). The real `.env` remains ignored by Git.
 
 See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for schemas, endpoints and examples.
+
+---
+
+## Agent console
+
+The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed decisions run day to day — in production, with self-service workspaces.
+
+**Flow:** connect your channels → bind rooms to a collective → instruct the question → the collective answers → humans arbitrate → resume with new evidence.
+
+1. **Create a workspace in self service** — signup with verified e-mail (30-minute reset links), tenant-scoped space and per-tenant agent registry.
+2. **Connect and bind rooms** — Slack, Microsoft Teams or Discord credentials stored encrypted server-side (`KAYROS_CONNECTOR_ENCRYPTION_KEY` required), connectivity test included; each channel is bound to a stable collective in mention-only or always-on mode.
+3. **Run the collective** — every question triggers individual agent analyses (verdict, strengths and opportunities, objections, required conditions, metrics) aggregated into a consensus dossier: `GO`, `CONDITIONAL_GO` or `NO_GO`.
+4. **Arbitrate** — the verdict stays consultative until a human accepts the consensus, passes it under conditions, overrides a veto with justification, or requests re-evaluation; every action is recorded in the durable thread.
+5. **Resume** — reply with new evidence or parameters to relaunch the same collective on the same dossier; Postgres-backed threads survive restarts and remain tenant-scoped.
+
+| Console page | What it does |
+|---|---|
+| **Vue d'ensemble** (Overview) | Connection status, live metrics (rooms, active agents, hybrid profiles, pending arbitrations), quick mission launcher |
+| **Salons** (Rooms) | Channels bound to collectives — mode, collective id, latest decision threads |
+| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power, consented Crystal Knows profile import |
+| **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
+| **Réglages** (Settings) | Connector secrets encrypted at rest, connectivity tests, Crystal Knows capability state |
+
+The console shares the governed runtime with the API and chat connectors: a decision opened in Slack and continued in the console is one thread and one audit trail.
 
 ---
 
@@ -535,7 +574,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
-| **Agent Console** | `GET /v1/console/overview` · room creation · shared activity · test missions |
+| **Agent Console** | `GET /v1/console/overview` · agents CRUD + Crystal import · connectors (configure / test) · rooms · threads · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |
@@ -554,7 +593,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | `ontology-explorer.html` / `ontology-panel.html` | Ontology graph (Cytoscape) |
 | `index.html` / `index.fr.html` | Commercial landing |
 | `frontend/positionning-app` | React Positioner application |
-| `frontend/console-app` | Customer console — rooms, hybrid agents, connectors and decision activity; served at `/console/` |
+| `frontend/console-app` | **Production agent console** (served at `/console/`) — self-service signup, Slack/Teams/Discord room binding, agent registry with veto & hybrid profiles, durable decision dossiers, human arbitration |
 
 ---
 
@@ -655,6 +694,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | **v18** | **Engine/adapters split + governed intelligence layers** (zero-dep `core/`, optional `core/adapters/` + `backend/adapters/`, P0–P4 control layers, decision packet surface) · CI GitHub Actions (core + backend + i18n) | ✅ |
 | **v19** | **Specialized swarms + Hybrid Agent Sales Oracle** — system/custom/hybrid composition, personality simulation, official profile imports, veto-aware executive and buyer-committee rehearsal | ✅ |
 | **v20** | **Governed TimesFM forecasting** — isolated model service, P10–P90 uncertainty, tenant-scoped snapshots and mandatory human review for wide intervals | ✅ |
+| **v21** | **Governed agent console in production** — self-service signup, encrypted connector secrets, Slack/Teams/Discord room binding, Postgres-backed durable decision threads with human arbitration | ✅ |
 
 ---
 
