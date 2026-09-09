@@ -19,6 +19,25 @@ export const SOURCES_DIRECTORY = Object.freeze([
 
 const UA = 'KayrosLab/1.0 (literary personality corpus; +https://www.kayroslab.com)';
 
+const gutenbergYearCache = new Map();
+async function gutenbergYear(id) {
+  if (gutenbergYearCache.has(id)) return gutenbergYearCache.get(id);
+  let year = '';
+  try {
+    const response = await fetch(`https://www.gutenberg.org/cache/epub/${id}/pg${id}.txt`, { headers: { 'user-agent': UA, accept: 'text/plain', range: 'bytes=0-4095' }, signal: AbortSignal.timeout(12_000) });
+    if (response.ok || response.status === 206) {
+      const buffer = await response.arrayBuffer();
+      const charset = (response.headers.get('content-type') || '').match(/charset=([\w-]+)/i)?.[1]?.toLowerCase() || 'utf-8';
+      let head;
+      try { head = new TextDecoder(charset).decode(buffer); } catch { head = new TextDecoder('utf-8').decode(buffer); }
+      const match = head.match(/Release date:\s*\w+ \d+,\s*(\d{4})/i);
+      if (match) year = match[1];
+    }
+  } catch { }
+  gutenbergYearCache.set(id, year);
+  return year;
+}
+
 async function fetchText(url, { timeoutMs = 20_000, maxBytes = 6_000_000 } = {}) {
   const response = await fetch(url, { headers: { 'user-agent': UA, accept: 'text/html,text/plain,application/epub+zip,*/*' }, signal: AbortSignal.timeout(timeoutMs) });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -84,7 +103,13 @@ async function searchGutenberg(query, limit) {
         const authorName = (book.authors || []).map((a) => a.name).join(', ') || 'anonyme';
         return { title: book.title, author: authorName, lang: (book.languages || ['?'])[0], page: `https://www.gutenberg.org/ebooks/${book.id}`, url: txt || null, ingestable: !!txt, source: 'gutenberg' };
       }).filter((item) => item.url);
-      if (results.length) return results;
+      if (results.length) {
+        await Promise.allSettled(results.map(async (item) => {
+          const id = (item.page || '').match(/\/ebooks\/(\d+)/)?.[1];
+          if (id) item.year = await gutenbergYear(id);
+        }));
+        return results;
+      }
     }
   } catch { /* repli ci-dessous */ }
   const html = (await fetchText(`https://www.gutenberg.org/ebooks/search/?query=${encodeURIComponent(query)}`, { timeoutMs: 15_000 })).text;
@@ -95,6 +120,10 @@ async function searchGutenberg(query, limit) {
     results.push({ title: match[2].trim(), author: authorName, lang: '?', page: `https://www.gutenberg.org/ebooks/${id}`, url: `https://www.gutenberg.org/cache/epub/${id}/pg${id}.txt`, ingestable: true, source: 'gutenberg' });
     if (results.length >= limit) break;
   }
+  await Promise.allSettled(results.map(async (item) => {
+    const id = (item.page || '').match(/\/ebooks\/(\d+)/)?.[1];
+    if (id) item.year = await gutenbergYear(id);
+  }));
   return results;
 }
 
@@ -145,10 +174,13 @@ async function searchElg(query, limit) {
   for (const block of blocks) {
     const authorName = block.match(/^([^<]{2,80})<\/span>/i)?.[1]?.trim() || '';
     const title = block.match(/<span style="font-weight: bold">([^<]{2,160})<\/span>/i)?.[1]?.trim() || '';
-    const id = block.match(/newsendbook\.php\?id=(\d+)&format=html/i)?.[1] || null;
+    const htmlId = block.match(/newsendbook\.php\?id=(\d+)&format=html/i)?.[1] || null;
+    const pdfId = block.match(/newsendbook\.php\?id=(\d+)&format=pdf/i)?.[1] || null;
+    const id = htmlId || pdfId;
     if (!id || !title) continue;
     if (!`${authorName} ${title}`.toLowerCase().includes(needle)) continue;
-    results.push({ title, author: authorName, lang: 'fr', page: `https://www.ebooksgratuits.org/newsendbook.php?id=${id}&format=html`, url: `https://www.ebooksgratuits.org/newsendbook.php?id=${id}&format=html`, ingestable: true, source: 'elg' });
+    const format = htmlId ? 'html' : 'pdf';
+    results.push({ title, author: authorName, lang: 'fr', year: '', page: `https://www.ebooksgratuits.org/newsendbook.php?id=${id}&format=${format}`, url: `https://www.ebooksgratuits.org/newsendbook.php?id=${id}&format=${format}`, ingestable: !!htmlId, source: 'elg' });
     if (results.length >= limit) break;
   }
   return results;

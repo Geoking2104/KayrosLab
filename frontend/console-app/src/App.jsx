@@ -234,7 +234,36 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
 }
 
 const pendingRoomRef = { roomId: null };
+function levenshtein(a, b) {
+  const m = a.length; const n = b.length;
+  if (!m) return n; if (!n) return m;
+  let previous = Array.from({ length: n + 1 }, (_, i) => i);
+  for (let i = 1; i <= m; i += 1) {
+    const current = [i];
+    for (let j = 1; j <= n; j += 1) {
+      current[j] = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    previous = current;
+  }
+  return previous[n];
+}
+function nameSimilarity(query, name) {
+  const q = String(query || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const target = String(name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (!q || !target) return 0;
+  let bestToken = 0;
+  for (const qt of q.split(/[^a-z0-9]+/).filter(Boolean)) {
+    for (const nt of target.split(/[^a-z0-9]+/).filter(Boolean)) {
+      const distance = levenshtein(qt, nt);
+      const similarity = 1 - distance / Math.max(qt.length, nt.length);
+      if (similarity > bestToken) bestToken = similarity;
+    }
+  }
+  const globalSimilarity = 1 - levenshtein(q, target) / Math.max(q.length, target.length);
+  return Math.max(bestToken, globalSimilarity);
+}
 const MAX_PERSONALITY_BOOKS = 15;
+const MIN_PERSONALITY_BOOKS = 5;
 const authorAvatarCache = new Map();
 function fetchAuthorAvatar(wikipedia) {
   if (!authorAvatarCache.has(wikipedia)) {
@@ -245,13 +274,16 @@ function fetchAuthorAvatar(wikipedia) {
   }
   return authorAvatarCache.get(wikipedia);
 }
+function normBookTitle(value) {
+  return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
 
 function AuthorPickerDialog({ onClose, onCreated }) {
   const [query, setQuery] = useState('');
   const [searchBusy, setSearchBusy] = useState(false);
-  const [avatars, setAvatars] = useState({});
   const [authors, setAuthors] = useState([]);
   const [live, setLive] = useState(null);
+  const [avatars, setAvatars] = useState({});
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [liveWorks, setLiveWorks] = useState([]);
   const [liveBusy, setLiveBusy] = useState(false);
@@ -263,13 +295,15 @@ function AuthorPickerDialog({ onClose, onCreated }) {
   const [busy, setBusy] = useState('');
   const [createdAgents, setCreatedAgents] = useState([]);
   const [lastCreated, setLastCreated] = useState(null);
+  const [progress, setProgress] = useState(null);
+  const [suggestion, setSuggestion] = useState('');
 
   useEffect(() => {
     const q = query.trim();
-    if (q.length < 2) { setAuthors([]); setLive(null); return; }
+    if (q.length < 2) { setAuthors([]); setLive(null); setSuggestion(''); return; }
     let alive = true;
     const timer = setTimeout(async () => {
-      setSearchBusy(true); setError('');
+      setSearchBusy(true); setError(''); setSuggestion('');
       try {
         const [catalog, sources] = await Promise.all([
           api.listAuthors(q).then((result) => result.authors || []).catch(() => []),
@@ -278,6 +312,15 @@ function AuthorPickerDialog({ onClose, onCreated }) {
         if (!alive) return;
         setAuthors(catalog);
         setLive(sources);
+        if (!catalog.length && q.length >= 3) {
+          const all = await api.listAuthors('').then((result) => result.authors || []).catch(() => []);
+          let best = null; let bestSim = 0;
+          for (const author of all) {
+            const similarity = nameSimilarity(q, author.name);
+            if (similarity > bestSim) { bestSim = similarity; best = author; }
+          }
+          if (best && bestSim >= 0.6) setSuggestion(best.name);
+        }
       } catch (err) { if (alive) setError(err.message); }
       finally { if (alive) setSearchBusy(false); }
     }, 450);
@@ -296,18 +339,20 @@ function AuthorPickerDialog({ onClose, onCreated }) {
       const merged = [...current];
       for (const book of incoming) {
         if (merged.length >= MAX_PERSONALITY_BOOKS) break;
-        if (!merged.some((item) => item.url === book.url)) merged.push(book);
+        if (merged.some((item) => normBookTitle(item.title) === normBookTitle(book.title) && item.url === book.url)) continue;
+        merged.push(book);
       }
       return merged;
     });
   }
+  function removeBook(url) { setBooks((current) => current.filter((item) => item.url !== url)); }
 
   function addAuthor(author) {
     setSelectedAuthor(author);
     if (!name.trim()) setName(author.name);
     setError('');
     setLiveWorks([]);
-    mergeBooks(author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié' })));
+    mergeBooks(author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié', year: '' })));
     setLiveBusy(true);
     api.searchSources(author.name).then((result) => {
       const found = [];
@@ -316,19 +361,26 @@ function AuthorPickerDialog({ onClose, onCreated }) {
           if (!work.ingestable) continue;
           const surname = author.name.split(/[ ,]+/).pop().toLowerCase();
           if (!`${work.title} ${work.author}`.toLowerCase().includes(surname)) continue;
-          if (books.some((item) => item.url === work.url)) continue;
           if (found.some((item) => item.url === work.url)) continue;
-          found.push({ title: work.title, url: work.url, author: work.author || author.name, source: group.source });
+          found.push({ title: work.title, url: work.url, author: work.author || author.name, source: group.source, year: work.year || '' });
         }
       }
       setLiveWorks(found.slice(0, 12));
+      // auto-complétion : au moins 5 œuvres intégrées à la personnalité
+      setBooks((current) => {
+        const merged = [...current];
+        for (const work of found) {
+          if (merged.length >= MIN_PERSONALITY_BOOKS || merged.length >= MAX_PERSONALITY_BOOKS) break;
+          if (merged.some((item) => item.url === work.url)) continue;
+          merged.push({ title: work.title, url: work.url, author: work.author || author.name, source: work.source, year: work.year || '' });
+        }
+        return merged;
+      });
     }).catch(() => setLiveWorks([])).finally(() => setLiveBusy(false));
   }
 
-  function removeBook(url) { setBooks((current) => current.filter((item) => item.url !== url)); }
-
   function addLiveWork(work) {
-    mergeBooks([{ title: work.title, url: work.url, author: work.author || selectedAuthor?.name || name, source: work.source || 'recherche en ligne' }]);
+    mergeBooks([{ title: work.title, url: work.url, author: work.author || selectedAuthor?.name || name, source: work.source || 'recherche en ligne', year: work.year || '' }]);
   }
 
   function addUpload(event) {
@@ -336,19 +388,35 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     const title = uploadTitle.trim(); const url = uploadUrl.trim();
     if (!title || !url) { setError('Titre et URL requis pour le livre ajouté.'); return; }
     setError('');
-    mergeBooks([{ title, url, author: selectedAuthor?.name || name, source: 'ajout manuel' }]);
+    mergeBooks([{ title, url, author: selectedAuthor?.name || name, source: 'ajout manuel', year: '' }]);
     setUploadTitle(''); setUploadUrl('');
   }
 
+  const shortfall = Math.max(0, MIN_PERSONALITY_BOOKS - books.length);
+  const canCreate = books.length >= 1 && name.trim().length > 0 && (books.length >= MIN_PERSONALITY_BOOKS || (liveWorks.length === 0 && shortfall > 0));
+
   async function createAgent() {
     if (!name.trim()) { setError('Donnez un nom à votre agent.'); return; }
-    if (!books.length) { setError('Ajoutez au moins un livre à la personnalité (recherche ou upload).'); return; }
+    if (!books.length) { setError('Ajoutez au moins un livre à la personnalité.'); return; }
+    if (books.length < MIN_PERSONALITY_BOOKS && liveWorks.length > 0) { setError(`Atteignez ${MIN_PERSONALITY_BOOKS} livres : ${liveWorks.length} œuvre(s) trouvée(s) en ligne restent à cocher, ou ajoutez-les par URL.`); return; }
     setBusy('create'); setError('');
+    const attributions = [];
     try {
-      const result = await api.createWorksAgent({ display_name: name.trim(), works: books.slice(0, MAX_PERSONALITY_BOOKS) });
-      setCreatedAgents((current) => [...current, result.agent]);
-      setLastCreated(result.agent);
-      setBooks([]); setSelectedAuthor(null); setLiveWorks([]); setName('');
+      setProgress({ done: 0, total: books.length, label: books[0].title, state: 'lecture' });
+      const result = await api.createWorksAgent({ display_name: name.trim(), works: [books[0]] });
+      const agent = result.agent;
+      setCreatedAgents((current) => [...current, agent]);
+      await onCreated();
+      setProgress({ done: 1, total: books.length, label: books[0].title, state: 'mémoire' });
+      for (let index = 1; index < books.length; index += 1) {
+        const book = books[index];
+        setProgress({ done: index, total: books.length, label: book.title, state: 'lecture' });
+        const added = await api.addManualBooks(agent.agent_id, [book]);
+        if (added.results?.[0]) attributions.push(added.results[0]);
+        setProgress({ done: index + 1, total: books.length, label: book.title, state: 'mémoire' });
+      }
+      setLastCreated({ agent, worksCount: books.length, attributions, completed: result.ingestion?.completed_from_sources || 0 });
+      setBooks([]); setSelectedAuthor(null); setLiveWorks([]); setName(''); setProgress(null);
       await onCreated();
     } catch (err) { setError(err.message); }
     finally { setBusy(false); }
@@ -359,19 +427,8 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     setBusy('conversation'); setError('');
     try {
       const ids = createdAgents.slice(-3).map((agent) => agent.agent_id);
-      let roomId;
-      try {
-        const room = await api.createRoom({ name: 'Salon des auteurs', platform: 'console', external_room_id: AUTHORS_SALON_EXTERNAL_ID, mode: 'mention_only', swarm_name: 'Salon des auteurs — conseil littéraire', active_agents: ids });
-        roomId = room.room.room_id;
-      } catch (err) {
-        if (!/déjà connecté/.test(String(err.message))) throw err;
-        const overview = await api.overview();
-        const existing = overview.rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID);
-        if (!existing) throw err;
-        await api.updateRoomAgents(existing.room_id, { add_agent_ids: ids });
-        roomId = existing.room_id;
-      }
-      pendingRoomRef.roomId = roomId;
+      const room = await api.createRoom({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: ids });
+      pendingRoomRef.roomId = room.room.room_id;
       location.hash = 'overview';
       onClose();
       await onCreated();
@@ -379,24 +436,24 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     finally { setBusy(false); }
   }
 
-  const bookList = (items, removable) => <ul className="so-booklist">{items.map((book) => <li key={book.url}>
-    <div className="so-book-meta"><strong>{book.title}</strong><small>{book.author ? `${book.author} · ` : ''}{book.source || 'livre'}</small></div>
-    {removable ? <button className="text-button" onClick={() => removeBook(book.url)}>retirer</button> : <a className="text-button" href={book.url} target="_blank" rel="noreferrer">source</a>}
-  </li>)}</ul>;
+  const bookRow = (book, checked, onToggle) => <li key={book.url}>
+    <label className="so-bookrow">
+      <input type="checkbox" checked={checked} onChange={onToggle} />
+      <span className="so-book-meta"><strong>{book.title}</strong><small>{[book.author, book.source, book.year ? `éd. ${book.year}` : ''].filter(Boolean).join(' · ')}</small></span>
+    </label>
+    {!checked ? null : null}
+  </li>;
 
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog author-dialog" role="dialog" aria-modal="true">
-    <header><div><h2>Ajouter un agent auteur</h2><p>Cherchez un écrivain ou un philosophe : ses œuvres du domaine public sont téléchargées en temps réel et composent la personnalité de l'agent (plafond {MAX_PERSONALITY_BOOKS} livres, plancher 3 recommandé).</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    <header><div><h2>Ajouter un agent auteur</h2><p>Cherchez un écrivain ou un philosophe : au moins {MIN_PERSONALITY_BOOKS} de ses œuvres du domaine public sont téléchargées en temps réel et composent la personnalité de l'agent (plafond {MAX_PERSONALITY_BOOKS}).</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     {error && <p className="form-error">{error}</p>}
+    {suggestion && <p className="so-suggest">Vouliez-vous dire : <button className="text-button" onClick={() => { setQuery(suggestion); setSuggestion(''); }}>{suggestion}</button> ?</p>}
     <input className="so-search" placeholder="Rechercher un écrivain, un philosophe, un livre…" value={query} onChange={(event) => setQuery(event.target.value)} />
     {searchBusy && <p className="muted so-note">Recherche en cours…</p>}
 
-    {selectedAuthor && <section className="so-author-selected">
-      <h3>Personnalité : {selectedAuthor.name} <small>({selectedAuthor.kind} · {selectedAuthor.era})</small></h3>
-      {liveBusy ? <p className="muted so-note">Recherche des œuvres en ligne pour cet auteur…</p> : null}
-      {liveWorks.length > 0 && <><h4 className="so-kicker">Trouvées en ligne (ajout facultatif)</h4><ul className="so-booklist">{liveWorks.map((work) => <li key={work.url}>
-        <div className="so-book-meta"><strong>{work.title}</strong><small>{work.author ? `${work.author} · ` : ''}{work.source}</small></div>
-        {books.some((item) => item.url === work.url) ? <button className="text-button" onClick={() => removeBook(work.url)}>retirer</button> : <button className="text-button" onClick={() => addLiveWork(work)}>ajouter</button>}
-      </li>)}</ul></>}
+    {lastCreated && <section className="so-author so-created-card">
+      <img className="so-avatar" src={lastCreated.agent.metadata?.literary?.avatar_url || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
+      <div className="so-author-meta"><strong>{lastCreated.agent.display_name}</strong><small>agent auteur · {lastCreated.worksCount} livre(s) intégré(s){lastCreated.completed ? ` · dont ${lastCreated.completed} complété(s) en ligne` : ''}</small><p>Personnalité créée et prête — les livres sont dans la mémoire de l'agent, registre d'ingestion à jour.</p></div>
     </section>}
 
     {(authors || []).length > 0 && <section className="so-authors-results">
@@ -404,15 +461,25 @@ function AuthorPickerDialog({ onClose, onCreated }) {
       {authors.map((author) => <article key={author.id} className="so-author">
         <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
         <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small><p>{author.blurb}</p></div>
-        <button className="button secondary" onClick={() => addAuthor(author)}>{selectedAuthor?.id === author.id ? 'Sélectionné' : 'Ajouter l’agent'}</button>
+        <button className="button secondary" onClick={() => addAuthor(author)}>{selectedAuthor?.id === author.id ? 'Œuvres ajoutées' : 'Ajouter l’agent'}</button>
       </article>)}
     </section>}
 
-    {(live?.sources || []).some((group) => group.results.length > 0) && query.trim().length >= 2 && !selectedAuthor && <section className="so-books-results">
+    {selectedAuthor && <section className="so-author-selected">
+      <h3>Personnalité : {selectedAuthor.name} <small>({selectedAuthor.kind} · {selectedAuthor.era})</small></h3>
+      {liveBusy ? <p className="muted so-note">Recherche des œuvres en ligne pour compléter la personnalité…</p> : null}
+      {shortfall > 0 && books.length > 0 && <p className="muted so-note">{books.length}/{MIN_PERSONALITY_BOOKS} livres — {liveWorks.length ? 'cochez des œuvres ci-dessous pour compléter.' : liveBusy ? '' : `seulement ${books.length} trouvée(s) : complétez par upload d'URL si besoin.`}</p>}
+      {liveWorks.length > 0 && <ul className="so-booklist">{liveWorks.map((work) => bookRow(work, books.some((item) => item.url === work.url), () => books.some((item) => item.url === work.url) ? removeBook(work.url) : mergeBooks([work])))}</ul>}
+    </section>}
+
+    {!selectedAuthor && (live?.sources || []).some((group) => group.results.length > 0) && query.trim().length >= 2 && <section className="so-books-results">
       <h4 className="so-kicker">Livres trouvés en ligne</h4>
       {(live?.sources || []).map((group) => group.results.map((work) => <div key={work.url || work.page} className="so-result">
-        <div className="so-result-meta"><strong>{work.title}</strong><small>{work.author ? `${work.author} · ` : ''}{work.source} · {work.ingestable ? 'texte intégral' : 'adresse de téléchargement'}</small></div>
-        <button className="button secondary" onClick={() => addLiveWork(work)}>Ajouter ce livre</button>
+        <label className="so-bookrow">
+          <input type="checkbox" checked={books.some((item) => item.url === work.url)} onChange={(event) => event.target.checked ? addLiveWork(work) : removeBook(work.url)} />
+          <span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span>
+        </label>
+        <a className="text-button" href={work.page} target="_blank" rel="noreferrer">voir</a>
       </div>))}
     </section>}
 
@@ -427,13 +494,23 @@ function AuthorPickerDialog({ onClose, onCreated }) {
 
     {books.length > 0 && <section className="so-personality">
       <h4 className="so-kicker">Livres de la personnalité ({books.length}/{MAX_PERSONALITY_BOOKS})</h4>
-      {bookList(books, true)}
+      <ul className="so-booklist">{books.map((book) => <li key={book.url}>
+        <label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{book.title}</strong><small>{[book.author, book.source, book.year ? `éd. ${book.year}` : ''].filter(Boolean).join(' · ')}</small></span></label>
+        <button className="text-button" onClick={() => removeBook(book.url)}>retirer</button>
+      </li>)}</ul>
+      {books.length < MIN_PERSONALITY_BOOKS && <p className="muted so-note">Minimum recommandé : {MIN_PERSONALITY_BOOKS} livres — complétez via la recherche ou l'URL si l'auteur en propose davantage.</p>}
+    </section>}
+
+    {progress && <section className="so-progress">
+      <div className="so-progress-head"><strong>Lecture et intégration en mémoire</strong><span>{progress.done}/{progress.total}</span></div>
+      <div className="so-progress-bar"><span style={{ width: `${Math.round((progress.done / progress.total) * 100)}%` }} /></div>
+      <p className="muted so-note">{progress.done < progress.total ? `En cours : ${progress.label}` : `Intégré : ${progress.label}`}</p>
     </section>}
 
     <section className="so-create">
       <label>Nom de l’agent<input value={name} onChange={(event) => setName(event.target.value)} maxLength={160} placeholder="Ex. Victor Hugo" /></label>
-      <button className="button primary" disabled={busy === 'create' || !books.length} onClick={createAgent}>{busy === 'create' ? 'Téléchargement et construction…' : `Créer l’agent avec ${books.length} livre(s)`}</button>
-      {createdAgents.length > 0 && <div className="so-created">
+      <button className="button primary" disabled={busy === 'create' || !books.length || (books.length < MIN_PERSONALITY_BOOKS && liveWorks.length > 0)} onClick={createAgent}>{busy === 'create' ? 'Lecture et intégration…' : `Créer l’agent avec ${books.length} livre(s)`}</button>
+      {createdAgents.length > 0 && !progress && <div className="so-created">
         <p className="muted so-note">Agent(s) prêt(s) : {createdAgents.map((agent) => agent.display_name).join(' · ')}</p>
         <div className="connector-actions">
           <button className="button primary" disabled={busy === 'conversation'} onClick={startConversation}>{busy === 'conversation' ? 'Ouverture…' : 'Créer une conversation avec ces auteurs'}</button>
@@ -444,173 +521,39 @@ function AuthorPickerDialog({ onClose, onCreated }) {
   </section></div>;
 }
 
-const AUTHORS_SALON_EXTERNAL_ID = 'console-auteurs';
-
-/** Choisit le salon de destination pour les auteurs : salon dédié, salon existant ou nouveau salon. */
-function SalonPickerDialog({ entries, rooms, onClose, onDone }) {
-  const authorsSalon = rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID) || null;
-  const consoleRooms = rooms.filter((room) => room.platform === 'console' && room.room_id !== authorsSalon?.room_id);
-  const [target, setTarget] = useState(authorsSalon?.room_id || '__auteurs__');
-  const [newName, setNewName] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-
-  async function ensureAgents() {
-    const ready = [];
-    for (const entry of entries) {
-      if (!entry.authorId) { ready.push(entry.agentId); continue; }
-      try { await api.createAuthorAgent(entry.authorId); ready.push(entry.agentId); }
-      catch (err) { if (err.status === 409) ready.push(entry.agentId); else throw err; }
-    }
-    return ready;
-  }
-
-  async function submit(event) {
-    event.preventDefault();
-    setBusy(true); setError('');
-    try {
-      const ready = await ensureAgents();
-      let roomId;
-      if (target === '__new__') {
-        const name = newName.trim() || 'Salon des auteurs';
-        const room = await api.createRoom({ name, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', swarm_name: `${name} — conseil littéraire`, active_agents: ready });
-        roomId = room.room.room_id;
-      } else if (target === '__auteurs__') {
-        try {
-          const room = await api.createRoom({ name: 'Salon des auteurs', platform: 'console', external_room_id: AUTHORS_SALON_EXTERNAL_ID, mode: 'mention_only', swarm_name: 'Salon des auteurs — conseil littéraire', active_agents: ready });
-          roomId = room.room.room_id;
-        } catch (err) {
-          if (!/déjà connecté/.test(String(err.message))) throw err;
-          const overview = await api.overview();
-          const existing = overview.rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID);
-          if (!existing) throw err;
-          await api.updateRoomAgents(existing.room_id, { add_agent_ids: ready });
-          roomId = existing.room_id;
-        }
-      } else {
-        await api.updateRoomAgents(target, { add_agent_ids: ready });
-        roomId = target;
-      }
-      onDone(roomId);
-    } catch (err) { setError(err.message); }
-    finally { setBusy(false); }
-  }
-
-  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog" role="dialog" aria-modal="true">
-    <header><div><h2>Ajouter au salon des auteurs</h2><p>Un espace d’échange dédié aux agents auteurs, tenu à l’écart du processus de décision global de la console.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
-    <form onSubmit={submit}>
-      <fieldset><legend>Destination — {entries.length} agent(s) auteur sélectionné(s)</legend>
-        <div className="so-destinations">
-          <label className="radio"><input type="radio" name="target" checked={authorsSalon ? target === authorsSalon.room_id : target === '__auteurs__'} onChange={() => setTarget(authorsSalon?.room_id || '__auteurs__')} /><span><strong>Salon des auteurs</strong><small>{authorsSalon ? 'Salon dédié déjà rattaché — les sélectionnés y seront ajoutés' : 'Créer le salon dédié (rattaché une seule fois, réutilisé ensuite)'}</small></span></label>
-          {consoleRooms.map((room) => <label key={room.room_id} className="radio"><input type="radio" name="target" checked={target === room.room_id} onChange={() => setTarget(room.room_id)} /><span><strong>{room.name}</strong><small>Salon console existant · collectif {room.swarm_id}</small></span></label>)}
-          <label className="radio"><input type="radio" name="target" checked={target === '__new__'} onChange={() => setTarget('__new__')} /><span><strong>Nouveau salon…</strong><small>Créer un autre salon dédié aux auteurs</small></span></label>
-        </div>
-      </fieldset>
-      {target === '__new__' && <label>Nom du nouveau salon<input value={newName} onChange={(event) => setNewName(event.target.value)} placeholder="Ex. Cercle des philosophes" maxLength={120} /></label>}
-      <p className="muted so-note">Rappel version en ligne : 3 agents auteurs maximum par salon, 3 salons par utilisateur. Les salons dédiés aux auteurs restent séparés de vos dossiers de décision.</p>
-      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>
-      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={busy || !entries.length}>{busy ? 'Ajout…' : 'Ajouter au salon'}</button></footer>
-    </form>
-  </section></div>;
-}
-
-/** Page de présentation des auteurs du domaine public, avec sélection pour le salon dédié. */
 function AuthorsPage({ data, refresh }) {
-  const [catalog, setCatalog] = useState(null);
-  const [filter, setFilter] = useState('');
-  const [avatars, setAvatars] = useState({});
-  const [selection, setSelection] = useState([]);
-  const [busyAuthor, setBusyAuthor] = useState('');
   const [picker, setPicker] = useState(false);
-  const [salon, setSalon] = useState(false);
+  const [conversationBusy, setConversationBusy] = useState('');
   const [error, setError] = useState('');
+  const authors = (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false);
 
-  const literaryAgents = useMemo(() => data.agents.filter((agent) => agent.metadata?.literary), [data.agents]);
-  const agentByAuthorId = useMemo(() => {
-    const map = new Map();
-    for (const agent of literaryAgents) {
-      const authorId = agent.metadata.literary.author_id || String(agent.agent_id).replace(/^auteur_c_[a-z0-9_]*$/, '').replace(/^auteur_/, '');
-      if (authorId && !map.has(authorId)) map.set(authorId, agent);
-    }
-    return map;
-  }, [literaryAgents]);
-
-  useEffect(() => {
-    let alive = true;
-    api.listAuthors('').then((result) => { if (alive) setCatalog(result.authors || []); }).catch((err) => { if (alive) setError(err.message); });
-    return () => { alive = false; };
-  }, []);
-
-  useEffect(() => {
-    (catalog || []).forEach((author) => {
-      if (!author.wikipedia || avatars[author.id] !== undefined) return;
-      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
-    });
-  }, [catalog, avatars]);
-
-  const needle = filter.trim().toLowerCase();
-  const visible = (catalog || []).filter((author) => !needle || [author.name, author.kind, author.era, author.blurb].join(' ').toLowerCase().includes(needle));
-  const catalogAgentId = (author) => agentByAuthorId.get(author.id)?.agent_id || `auteur_${author.id}`;
-
-  function toggleAuthor(author) {
-    const agentId = catalogAgentId(author);
-    setSelection((current) => current.some((entry) => entry.agentId === agentId)
-      ? current.filter((entry) => entry.agentId !== agentId)
-      : [...current, agentByAuthorId.has(author.id) ? { agentId } : { agentId, authorId: author.id }]);
-  }
-  function toggleAgent(agent) {
-    setSelection((current) => current.some((entry) => entry.agentId === agent.agent_id)
-      ? current.filter((entry) => entry.agentId !== agent.agent_id)
-      : [...current, { agentId: agent.agent_id }]);
-  }
-  async function createAgent(author) {
-    setBusyAuthor(author.id); setError('');
-    try { await api.createAuthorAgent(author.id); await refresh(); }
-    catch (err) { setError(err.status === 409 ? `${author.name} dispose déjà d’un agent dans cet espace.` : err.message); }
-    finally { setBusyAuthor(''); }
-  }
-  function onSalonDone(roomId) {
-    setSalon(false); setSelection([]);
-    pendingRoomRef.roomId = roomId;
-    refresh();
-    location.hash = 'overview';
+  async function createConversation(agent) {
+    setConversationBusy(agent.agent_id); setError('');
+    try {
+      const room = await api.createRoom({ name: `Échange — ${agent.display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: [agent.agent_id] });
+      pendingRoomRef.roomId = room.room.room_id;
+      location.hash = 'overview';
+      await refresh();
+    } catch (err) { setError(err.message); }
+    finally { setConversationBusy(''); }
   }
 
   return <section className="page">
-    <header className="page-header"><div><p className="context-line">Bibliothèque du domaine public</p><h1>Auteurs</h1><p>Sélectionnez des personnalités du catalogue vérifié, créez leurs agents, puis réunissez-les dans un salon dédié — séparé du processus de décision global.</p></div>
-      <div className="header-actions"><button className="button secondary" onClick={() => setPicker(true)}>Créer / importer un auteur</button><button className="button primary" disabled={!selection.length} onClick={() => setSalon(true)}>Ajouter au salon ({selection.length})</button></div></header>
-    {error && <p className="inline-error" role="alert">{error}</p>}
-    <div className="authors-layout">
-      <section className="authors-main">
-        <input className="so-search" placeholder="Filtrer par nom, époque, sensibilité…" value={filter} onChange={(event) => setFilter(event.target.value)} />
-        {!catalog && <p className="muted">Chargement du catalogue…</p>}
-        <div className="authors-grid">{visible.map((author) => {
-          const agent = agentByAuthorId.get(author.id);
-          const agentId = catalogAgentId(author);
-          const isSelected = selection.some((entry) => entry.agentId === agentId);
-          return <article key={author.id} className={`author-card ${isSelected ? 'is-selected' : ''}`}>
-            <header><img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} /><div><h3>{author.name}</h3><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small></div></header>
-            <p>{author.blurb}</p>
-            <footer>
-              <label className="check"><input type="checkbox" checked={isSelected} onChange={() => toggleAuthor(author)} />Sélectionner</label>
-              {agent ? <span className="author-badge">Agent prêt</span> : <button className="text-button" disabled={busyAuthor === author.id} onClick={() => createAgent(author)}>{busyAuthor === author.id ? 'Création…' : 'Créer l’agent'}</button>}
-            </footer>
-          </article>;
-        })}</div>
-        {catalog && !visible.length && <p className="muted">Aucun auteur ne correspond à ce filtre.</p>}
-      </section>
-      <aside className="authors-aside">
-        <h3 className="so-kicker">Vos agents auteurs ({literaryAgents.length})</h3>
-        {literaryAgents.map((agent) => <article key={agent.agent_id}>
-          {agent.metadata.literary.avatar_url ? <img className="so-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : <span className="so-avatar so-avatar-initials">{(agent.display_name || agent.agent_id).slice(0, 2).toUpperCase()}</span>}
-          <div><strong>{agent.display_name || agent.role_name}</strong><small>{agent.metadata.literary.works_count || 0} œuvre(s) · {agent.enabled === false ? 'inactif' : 'actif'}</small></div>
-          <label className="check"><input type="checkbox" checked={selection.some((entry) => entry.agentId === agent.agent_id)} onChange={() => toggleAgent(agent)} />Salon</label>
-        </article>)}
-        {!literaryAgents.length && <p className="muted so-note">Aucun agent auteur créé pour l’instant — sélectionnez un auteur du catalogue ou passez par « Créer / importer un auteur ».</p>}
-      </aside>
-    </div>
+    <header className="page-header"><div><p className="context-line">Personnalités littéraires</p><h1>Auteurs</h1><p>Agents construits sur la somme des œuvres du domaine public — au moins 5 livres intégrés par personnalité, registre d'ingestion à l'appui.</p></div><button className="button primary" onClick={() => setPicker(true)}>Ajouter un agent auteur</button></header>
+    {error && <p className="inline-error">{error}</p>}
+    {authors.length === 0 && <p className="muted">Aucun agent auteur pour le moment — cliquez sur « Ajouter un agent auteur ».</p>}
+    <div className="agent-table">{authors.map((agent) => {
+      const lit = agent.metadata.literary;
+      const works = (lit.works || []).filter((work) => work.ok);
+      return <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}>
+        <header><div><small>{agent.agent_id} · {agent.department}</small><h2>{lit.avatar_url ? <img className="agent-avatar" src={lit.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</h2></div></header>
+        <p>{agent.mission || agent.primary_focus}</p>
+        <dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Profil</dt><dd>auteur du domaine public</dd></div><div><dt>Livres</dt><dd>{works.length} intégré(s) — plafond 15, minimum 5</dd></div></dl>
+        <details><summary>Livres de la personnalité</summary><ul className="so-booklist">{works.map((work) => <li key={work.url}><label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span></label></li>)}</ul></details>
+        <footer><span>{lit.era || ''}</span><button className="button secondary" disabled={conversationBusy === agent.agent_id} onClick={() => createConversation(agent)}>{conversationBusy === agent.agent_id ? 'Ouverture…' : 'Créer une conversation'}</button></footer>
+      </article>;
+    })}</div>
     {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
-    {salon && <SalonPickerDialog entries={selection} rooms={data.rooms} onClose={() => setSalon(false)} onDone={onSalonDone} />}
   </section>;
 }
 

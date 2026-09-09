@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { promises as fsPromises } from 'node:fs';
 import path from 'node:path';
-import { findAuthor, searchAuthors, stripGutenbergBoilerplate, literaryFingerprint } from '../lib/literary-catalog.mjs';
+import { findAuthor, findAuthorByName, searchAuthors, stripGutenbergBoilerplate, literaryFingerprint, normTitleLite } from '../lib/literary-catalog.mjs';
 import { searchAllSources, workTextFromUrl, SOURCES_DIRECTORY } from '../lib/literary-sources.mjs';
 import { applyBookPolicy, scoreWorkAgainstAgent, pickBestAgentForWork, appendLedgerEntry, readLedgerEntries } from '../lib/literary-ledger.mjs';
 
@@ -11,6 +11,7 @@ const TOTAL_CHAR_LIMIT = 4_500_000;
 const FETCH_TIMEOUT_MS = 30_000;
 const MAX_BOOKS_PER_AGENT = Number(process.env.KAYROS_AUTHOR_MAX_BOOKS || 15);
 const MIN_BOOKS_PER_AGENT = Number(process.env.KAYROS_AUTHOR_MIN_BOOKS || 3);
+const AUTHOR_TARGET_BOOKS = Number(process.env.KAYROS_AUTHOR_TARGET_BOOKS || 5);
 const LEDGER_FILE = path.join(process.cwd(), 'data', 'literary', 'ledger.jsonl');
 
 const createAgentSchema = z.object({
@@ -179,7 +180,6 @@ export default async function literaryRoute(app) {
   // Création d'un agent auteur du catalogue : somme des œuvres trouvées en ligne + politique 15/3 + registre.
   app.post('/v1/literary/authors/:authorId/agent', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    if (!['comex', 'admin'].includes(me.role)) return reply.code(403).send({ error: 'rôle comex ou admin requis' });
     const parsed = createAgentSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'corps invalide', issues: parsed.error.issues });
 
@@ -194,7 +194,7 @@ export default async function literaryRoute(app) {
     const pool = author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié' }));
     const surname = (author.name.split(/[ ,]+/).filter((word) => word.length > 3).pop() || author.name).toLowerCase();
     try {
-      const live = await searchAllSources(author.name, { limitPerSource: 8 });
+      const live = await searchAllSources(author.name, { limitPerSource: 12 });
       for (const group of live.sources) {
         for (const result of group.results || []) {
           if (!result.ingestable) continue;
@@ -207,7 +207,7 @@ export default async function literaryRoute(app) {
     } catch { /* l'enrichissement temps réel reste au mieux : les œuvres du catalogue suffisent */ }
 
     // 2. Politique 15/3 (cap / plancher / repli manuel).
-    const policy = applyBookPolicy(pool.length, { max: MAX_BOOKS_PER_AGENT, min: MIN_BOOKS_PER_AGENT });
+    const policy = applyBookPolicy(pool.length, { max: MAX_BOOKS_PER_AGENT, min: AUTHOR_TARGET_BOOKS });
     const assignedWorks = pool.slice(0, policy.assign);
 
     // 3. Ingestion des œuvres assignées.
@@ -306,14 +306,39 @@ export default async function literaryRoute(app) {
   // Création d'un agent auteur à partir d'œuvres choisies en ligne (téléchargement temps réel)
   app.post('/v1/literary/agents', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    if (!['comex', 'admin'].includes(me.role)) return reply.code(403).send({ error: 'rôle comex ou admin requis' });
     const parsed = worksAgentSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'demande invalide', issues: parsed.error.issues });
 
     const { display_name, works } = parsed.data;
-    const ingestion = await ingestSelectedWorks(works);
+    let ingestion = await ingestSelectedWorks(works);
     if (!ingestion.texts.length) {
       return reply.code(422).send({ error: 'aucune œuvre n’a pu être convertie en texte (formats txt, html ou epub requis)', works: ingestion.manifest });
+    }
+    // Complétion : au moins 5 œuvres intégrées quand l’agent porte le nom d’un auteur du domaine public.
+    let completedFromSources = 0;
+    const okCount = () => ingestion.manifest.filter((work) => work.ok).length;
+    if (okCount() < AUTHOR_TARGET_BOOKS) {
+      const catalogAuthor = findAuthorByName(display_name);
+      if (catalogAuthor) {
+        try {
+          const live = await searchAllSources(catalogAuthor.name, { limitPerSource: 12 });
+          const additions = [];
+          const surname = (catalogAuthor.name.split(/[ ,]+/).filter((word) => word.length > 3).pop() || catalogAuthor.name).toLowerCase();
+          for (const group of live.sources) {
+            for (const result of group.results || []) {
+              if (!result.ingestable || additions.length >= AUTHOR_TARGET_BOOKS - okCount()) continue;
+              if (ingestion.manifest.some((work) => normTitleLite(work.title) === normTitleLite(result.title))) continue;
+              if (!`${result.title} ${result.author}`.toLowerCase().includes(surname)) continue;
+              additions.push({ title: result.title, url: result.url, author: result.author || catalogAuthor.name, source: group.source });
+            }
+          }
+          if (additions.length) {
+            const more = await ingestSelectedWorks(additions);
+            ingestion = { manifest: [...ingestion.manifest, ...more.manifest], texts: [...ingestion.texts, ...more.texts], loaded: [...ingestion.loaded, ...more.loaded], total: ingestion.total + more.total };
+            completedFromSources = more.manifest.filter((work) => work.ok).length;
+          }
+        } catch { /* la complétion reste au mieux */ }
+      }
     }
     const stats = literaryFingerprint(ingestion.texts);
     const voiceSample = extractVoiceSample(ingestion.texts[0]);
@@ -374,7 +399,7 @@ export default async function literaryRoute(app) {
       }
       return reply.code(201).send({
         agent: agentLite(agent),
-        ingestion: { works: ingestion.manifest, assigned: ingestion.manifest.filter((work) => work.ok).length, chars: ingestion.total, avatar_url: avatarUrl },
+        ingestion: { works: ingestion.manifest, assigned: ingestion.manifest.filter((work) => work.ok).length, chars: ingestion.total, avatar_url: avatarUrl, completed_from_sources: completedFromSources },
       });
     } catch (error) {
       return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: error.message });
@@ -384,7 +409,6 @@ export default async function literaryRoute(app) {
   // Ajout manuel d'œuvres : ingestion + attribution IA selon les caractéristiques de l'agent + registre.
   app.post('/v1/literary/agents/:agentId/books', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    if (!['comex', 'admin'].includes(me.role)) return reply.code(403).send({ error: 'rôle comex ou admin requis' });
     const parsed = addBooksSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'demande invalide', issues: parsed.error.issues });
 

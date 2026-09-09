@@ -263,6 +263,19 @@ export const LITERARY_AUTHORS = Object.freeze([
   },
 ]);
 
+export function findAuthorByName(name) {
+  const needle = normTitleLite(name);
+  if (!needle) return null;
+  return LITERARY_AUTHORS.find((author) => {
+    const hay = normTitleLite(author.name);
+    return hay.includes(needle) || needle.includes(hay);
+  }) || null;
+}
+
+export function normTitleLite(value) {
+  return String(value || '').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
 export function findAuthor(id) {
   return LITERARY_AUTHORS.find((author) => author.id === String(id || '').toLowerCase()) || null;
 }

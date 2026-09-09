@@ -439,3 +439,15 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-manager { display: grid; gap: var(--space-md); }
 .so-manager form { display: grid; gap: var(--space-sm); }
 .so-manager section { display: grid; gap: var(--space-2xs); }
+
+/* --- Constructeur v3 : cases a cocher, annee, progression, suggestion --- */
+.so-bookrow { display: flex; gap: var(--space-2xs); align-items: flex-start; min-width: 0; cursor: pointer; }
+.so-bookrow input[type='checkbox'] { margin-top: 3px; accent-color: var(--color-accent); width: 15px; height: 15px; flex: none; }
+.so-bookrow .so-book-meta { display: grid; gap: 1px; min-width: 0; }
+.so-progress { border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-paper-2); padding: var(--space-sm); display: grid; gap: var(--space-2xs); }
+.so-progress-head { display: flex; justify-content: space-between; gap: var(--space-sm); font-size: var(--text-sm); }
+.so-progress-head span { color: var(--color-muted); }
+.so-progress-bar { height: 8px; border-radius: 999px; background: var(--color-rule); overflow: hidden; }
+.so-progress-bar span { display: block; height: 100%; border-radius: 999px; background: var(--color-accent); transition: width var(--dur-long) var(--ease-out); }
+.so-suggest { margin: 0; font-size: var(--text-sm); color: var(--color-ink-2); }
+.so-created-card { border: 1px solid var(--color-positive); background: var(--color-positive-soft); }
