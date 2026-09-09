@@ -194,83 +194,6 @@
                 <a class="button button--primary" href="mailto:contact@kayroslab.com?subject=KayrosLab%20decision%20rehearsal">Book a 30-minute framing</a>
             </div>
 
-            <details id="secure-workspace" class="workspace">
-                <summary>Open the secure workspace</summary>
-                <p class="workspace-intro">Connect, create a case and add documents without leaving this page.</p>
-                <div class="sales-oracle-tool" data-sales-oracle-tool data-api-base="https://api.kayroslab.com"
-                    data-login-required="Connect your authorized workspace to begin."
-                    data-connecting="Secure connection in progress…"
-                    data-connected="Workspace connected. Select or create a case."
-                    data-logged-out="Session closed. No access token was stored in the browser."
-                    data-creating-case="Creating the governed case…"
-                    data-case-selected="Active case"
-                    data-choose-case="Select an existing case"
-                    data-no-cases="No existing case — create one below"
-                    data-no-documents="The active corpus does not contain any documents yet."
-                    data-case-required="Select or create a case before uploading documents."
-                    data-files-required="Select at least one document."
-                    data-upload-complete="Documents verified and queued for augmented-swarm analysis."
-                    data-error="The operation could not be completed."
-                    data-stage-hashing="local SHA-256 fingerprint"
-                    data-stage-signing="secure upload authorization"
-                    data-stage-uploading="encrypted direct upload"
-                    data-stage-verifying="integrity verification"
-                    data-stage-queued="queued for ingestion">
-                    <div class="sales-oracle-tool__header">
-                        <div>
-                            <div class="sales-oracle-tool__eyebrow"><span class="sales-oracle-tool__live" aria-hidden="true"></span>Live secure workspace</div>
-                            <h3>Start a Sales Oracle case</h3>
-                        </div>
-                        <p>The tool is now embedded here: connect to your tenant, define the decision to test and upload the evidence corpus directly to the governed API.</p>
-                    </div>
-                    <p id="so-tool-status" class="sales-oracle-tool__status" role="status" aria-live="polite"></p>
-                    <div class="sales-oracle-tool__grid">
-                        <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">01 · Workspace</div>
-                            <h4>Connect securely</h4>
-                            <p>Use the account provisioned for your organization. Access remains isolated to your tenant.</p>
-                            <form id="so-login-form" class="sales-oracle-tool__form">
-                                <label class="sales-oracle-tool__field">Professional email<input name="email" type="email" autocomplete="username" required></label>
-                                <label class="sales-oracle-tool__field">Password<input name="password" type="password" autocomplete="current-password" required></label>
-                                <div class="sales-oracle-tool__actions">
-                                    <button class="sales-oracle-tool__button" type="submit">Connect</button>
-                                    <button id="so-logout" class="sales-oracle-tool__button sales-oracle-tool__button--secondary" type="button" hidden>Disconnect</button>
-                                    <a class="sales-oracle-tool__link" href="mailto:contact@kayroslab.com?subject=KayrosLab%20Sales%20Oracle%20access">Request access</a>
-                                </div>
-                            </form>
-                            <p class="sales-oracle-tool__privacy">The session token remains in memory only and disappears when the page is refreshed or closed.</p>
-                        </article>
-                        <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">02 · Decision case</div>
-                            <h4>Frame the decision</h4>
-                            <p>Reuse an existing case or create the precise decision question the hybrid committee must test.</p>
-                            <fieldset id="so-case-fields" class="sales-oracle-tool__fields">
-                                <label class="sales-oracle-tool__field">Existing cases<select id="so-case-select"><option>No existing case — create one below</option></select></label>
-                                <form id="so-case-form" class="sales-oracle-tool__form" novalidate>
-                                    <label class="sales-oracle-tool__field">Case name<input name="name" maxlength="300" required></label>
-                                    <label class="sales-oracle-tool__field">Simulation<select name="use_case"><option value="rfp">Customer RFP</option><option value="comex_decision">Executive decision</option><option value="renewal">Contract renewal</option><option value="negotiation">Negotiation</option></select></label>
-                                    <label class="sales-oracle-tool__field">Decision question<textarea name="decision_question" maxlength="12000" required></textarea></label>
-                                    <button class="sales-oracle-tool__button" type="submit">Create case</button>
-                                </form>
-                            </fieldset>
-                        </article>
-                        <article class="sales-oracle-tool__panel">
-                            <div class="sales-oracle-tool__step">03 · Evidence</div>
-                            <h4>Upload the corpus</h4>
-                            <p>Files are fingerprinted locally, uploaded through a short-lived signed URL and verified before ingestion.</p>
-                            <form id="so-upload-form" class="sales-oracle-tool__form" novalidate>
-                                <fieldset id="so-upload-fields" class="sales-oracle-tool__fields">
-                                    <label class="sales-oracle-tool__field">Document role<select name="source_type"><option value="rfp">RFP / requirements</option><option value="proposal">Proposal / response</option><option value="contract">Contract</option><option value="security">Security</option><option value="financial">Financial / ROI</option><option value="meeting_notes">Meeting notes</option><option value="organization">Organization / committee</option><option value="personality_profile">Authorized personality profile</option><option value="other">Other evidence</option></select></label>
-                                    <label class="sales-oracle-tool__field">Documents<input id="so-files" name="files" type="file" accept=".pdf,.docx,.txt,.md,.csv" multiple required></label>
-                                    <button class="sales-oracle-tool__button" type="submit">Verify and upload</button>
-                                </fieldset>
-                            </form>
-                            <p class="sales-oracle-tool__privacy">PDF, DOCX, TXT, Markdown or CSV · 50 MB/document · 20 documents/case · 250 MB/case.</p>
-                        </article>
-                    </div>
-                    <ul id="so-document-list" class="sales-oracle-tool__documents" aria-label="Active Sales Oracle corpus"></ul>
-                </div>
-            </details>
         </section>
     </main>
 
@@ -349,6 +272,5 @@
     })();
     </script>
 
-    <script type="module" src="./assets/sales-oracle-tool.js"></script>
 </body>
 </html>

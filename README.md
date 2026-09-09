@@ -175,9 +175,9 @@ flowchart LR
 
 ### Integrated web tool
 
-The [Hybrid Agent Sales Oracle workspace](https://www.kayroslab.com/#sales-oracle) is embedded directly in the public site for provisioned customers:
+The [Hybrid Agent Sales Oracle workspace](https://www.kayroslab.com/console/) is embedded in the agent console for provisioned customers — no second login, it reuses the console session:
 
-1. Connect with an authorized KayrosLab account. The bearer token stays in browser memory only; it is never persisted to `localStorage`, cookies or the repository.
+1. Open the **Sales Oracle** tab in the [console](https://www.kayroslab.com/console/). The bearer token stays in browser memory only; it is never persisted to `localStorage`, cookies or the repository.
 2. Select an existing tenant-scoped case or create an RFP, executive-decision, renewal or negotiation case.
 3. Select PDF, DOCX, TXT, Markdown or CSV evidence. The browser computes SHA-256 locally, requests a short-lived signed URL, uploads directly to object storage, then asks the API to verify and queue ingestion.
 4. Follow the active corpus and document states without exposing another tenant's cases.

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, getToken, setToken } from './api.js';
 
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Vue d’ensemble'], ['rooms', 'Salons'], ['agents', 'Agents'], ['activity', 'Décisions'], ['settings', 'Réglages'],
+  ['overview', 'Vue d’ensemble'], ['rooms', 'Salons'], ['agents', 'Agents'], ['activity', 'Décisions'], ['salesoracle', 'Sales Oracle'], ['settings', 'Réglages'],
 ];
 const connectorFields = {
   slack: [['bot_token', 'Jeton du bot', true], ['signing_secret', 'Secret de signature', true], ['webhook_url', 'Webhook sortant (facultatif)', true]],
@@ -17,7 +17,7 @@ function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
 
 function Mark({ name }) {
-  const labels = { overview: '▦', rooms: '▤', agents: '◉', activity: '✓', settings: '⚙' };
+  const labels = { overview: '▦', rooms: '▤', agents: '◉', activity: '✓', salesoracle: '◈', settings: '⚙' };
   return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
@@ -209,6 +209,121 @@ function DecisionsPage({ data, selected, onSelect, onChanged }) {
   return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{thread.status.replaceAll('_', ' ')}</span></button>)}</div></section>;
 }
 
+const SALES_ORACLE_TOOL_URL = '/assets/sales-oracle-tool.js';
+const SALES_ORACLE_USE_CASES = [['rfp', 'Appel d’offres client'], ['comex_decision', 'Décision CODIR'], ['renewal', 'Renouvellement de contrat'], ['negotiation', 'Négociation']];
+const SALES_ORACLE_SOURCE_TYPES = [['rfp', 'RFP / exigences'], ['proposal', 'Proposition / réponse'], ['contract', 'Contrat'], ['security', 'Sécurité'], ['financial', 'Finance / ROI'], ['meeting_notes', 'Notes de réunion'], ['organization', 'Organisation / comité'], ['personality_profile', 'Profil de personnalité autorisé'], ['other', 'Autre preuve']];
+const SALES_ORACLE_STAGES = { hashing: 'empreinte SHA-256 locale', signing: 'autorisation d’upload sécurisée', uploading: 'upload direct chiffré', verifying: 'vérification d’intégrité', queued: 'mise en file d’ingestion' };
+
+function SalesOraclePage() {
+  const clientRef = useRef(null);
+  const [ready, setReady] = useState(false);
+  const [toolError, setToolError] = useState('');
+  const [cases, setCases] = useState([]);
+  const [currentCase, setCurrentCase] = useState(null);
+  const [documents, setDocuments] = useState([]);
+  const [status, setStatus] = useState({ text: 'Ouverture de l’espace sécurisé…', tone: 'neutral' });
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    import(/* @vite-ignore */ SALES_ORACLE_TOOL_URL).then((mod) => {
+      if (!alive) return;
+      const client = new mod.SalesOracleClient();
+      client.setToken(getToken());
+      clientRef.current = client;
+      setReady(true);
+      setStatus({ text: 'Espace sécurisé connecté avec votre session console.', tone: 'success' });
+      client.listCases().then((result) => setCases(result.cases || [])).catch((error) => setStatus({ text: error.message || 'Chargement des dossiers impossible.', tone: 'error' }));
+    }).catch(() => {
+      if (!alive) return;
+      setToolError('Module Sales Oracle non chargé : il est servi avec le site principal (assets du site).');
+      setStatus({ text: 'Module non disponible dans ce contexte.', tone: 'error' });
+    });
+    return () => { alive = false; };
+  }, []);
+
+  const openCase = async (client, record) => {
+    setCurrentCase(record);
+    if (!record) { setDocuments([]); return; }
+    const result = await client.listDocuments(record.case_id);
+    setDocuments(result.documents || []);
+  };
+
+  const selectCase = async (event) => {
+    const client = clientRef.current; if (!client) return;
+    const record = cases.find((item) => item.case_id === event.target.value) || null;
+    setBusy(true);
+    try { await openCase(client, record); setStatus({ text: record ? `Dossier actif : ${record.name}` : 'Aucun dossier sélectionné.', tone: 'success' }); }
+    catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
+    finally { setBusy(false); }
+  };
+
+  const createCase = async (event) => {
+    event.preventDefault();
+    const client = clientRef.current; if (!client) return;
+    const formElement = event.currentTarget;
+    const data = new FormData(formElement);
+    setBusy(true); setStatus({ text: 'Création du dossier gouverné…', tone: 'neutral' });
+    try {
+      const created = await client.createCase({ name: data.get('name'), use_case: data.get('use_case'), decision_question: data.get('decision_question') });
+      const result = await client.listCases(); setCases(result.cases || []);
+      await openCase(client, created);
+      formElement.reset();
+      setStatus({ text: `Dossier « ${created.name || created.case_id} » créé et actif.`, tone: 'success' });
+    } catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
+    finally { setBusy(false); }
+  };
+
+  const upload = async (event) => {
+    event.preventDefault();
+    const client = clientRef.current; if (!client || !currentCase) return;
+    const formElement = event.currentTarget;
+    const files = [...formElement.elements.files.files];
+    if (!files.length) { setStatus({ text: 'Sélectionnez au moins un document.', tone: 'error' }); return; }
+    const sourceType = new FormData(formElement).get('source_type');
+    setBusy(true);
+    try {
+      for (const file of files) {
+        await client.uploadDocument(currentCase.case_id, file, { sourceType, onStage: (stage) => setStatus({ text: `${file.name} · ${SALES_ORACLE_STAGES[stage] || stage}`, tone: 'neutral' }) });
+      }
+      const result = await client.listDocuments(currentCase.case_id);
+      setDocuments(result.documents || []); formElement.reset();
+      setStatus({ text: `${files.length} document(s) vérifié(s) et mis en file d’ingestion.`, tone: 'success' });
+    } catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
+    finally { setBusy(false); }
+  };
+
+  return <section className="page">
+    <header className="page-header"><div><p className="context-line">Espace client sécurisé</p><h1>Sales Oracle</h1><p>Cadrez le dossier, chargez les preuves : le corpus reste isolé par client et alimente le collectif d’analyse. La session console est réutilisée, aucun second login.</p></div></header>
+    {toolError && <p className="inline-error">{toolError}</p>}
+    <p className={`form-error ${status.tone === 'error' ? '' : 'is-empty'}`} role="status" aria-live="polite">{status.text}</p>
+    <div className="sales-oracle-grid">
+      <section className="so-panel">
+        <h2>Dossier de décision</h2>
+        <label>Dossiers existants<select value={currentCase?.case_id || ''} onChange={selectCase} disabled={!ready || busy}>{cases.length ? <option value="">Sélectionner…</option> : <option value="">Aucun dossier — créez-en un ci-dessous</option>}{cases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {item.status}</option>)}</select></label>
+        <form onSubmit={createCase}>
+          <label>Nom du dossier<input name="name" required maxLength={300} /></label>
+          <label>Simulation<select name="use_case">{SALES_ORACLE_USE_CASES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+          <label>Question de décision<textarea name="decision_question" required maxLength={12000} rows={4} /></label>
+          <button className="button primary" disabled={!ready || busy}>Créer le dossier</button>
+        </form>
+      </section>
+      <section className="so-panel">
+        <h2>Preuves</h2>
+        {currentCase ? <form onSubmit={upload}>
+          <p className="muted">Dossier actif : <strong>{currentCase.name}</strong></p>
+          <label>Rôle du document<select name="source_type">{SALES_ORACLE_SOURCE_TYPES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+          <label>Documents<input name="files" type="file" multiple accept=".pdf,.docx,.txt,.md,.csv" /></label>
+          <button className="button primary" disabled={busy}>Vérifier et uploader</button>
+        </form> : <p className="muted">Sélectionnez ou créez un dossier pour charger les preuves.</p>}
+        <h3 className="so-kicker">Corpus actif</h3>
+        <ul className="so-documents">{documents.length ? documents.map((item) => <li key={item.document_id}><span>{item.original_filename}</span><span className="so-state">{item.status}</span></li>) : <li className="muted">Aucun document dans le corpus actif.</li>}</ul>
+        <p className="muted so-privacy">PDF, DOCX, TXT, Markdown ou CSV · 50 Mo/document · 20 documents/dossier · 250 Mo/dossier. Empreinte SHA-256 calculée localement, envoi par URL signée à durée limitée.</p>
+      </section>
+    </div>
+  </section>;
+}
+
 function Console() {
   const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
   const [roomPlatform, setRoomPlatform] = useState(null); const [selectedThread, setSelectedThread] = useState(null);
@@ -222,7 +337,7 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'rooms' && <RoomsPage data={data} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} openRoom={setRoomPlatform} />}</main>
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'rooms' && <RoomsPage data={data} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'salesoracle' && <SalesOraclePage />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} openRoom={setRoomPlatform} />}</main>
     {roomPlatform && <CreateRoom agents={data.agents} defaultPlatform={roomPlatform} onClose={() => setRoomPlatform(null)} onCreated={refresh} />}
   </div>;
 }

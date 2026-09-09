@@ -56,15 +56,26 @@ test('secure customer workspace is available without dominating the public expla
   assert.match(template, /data-sales-oracle-tool/);
 });
 
-test('generated static pages contain the studio narrative and secure Sales Oracle', () => {
+test('generated static pages keep the narrative and leave the Sales Oracle to the console', () => {
   for (const file of ['index.html', 'index.fr.html']) {
     const html = read(file);
-    assert.match(html, /id="secure-workspace"/);
     assert.match(html, /id="timesfm"/);
     assert.match(html, /href="\.\/studio\.css"/);
+    assert.doesNotMatch(html, /id="secure-workspace"/);
+    assert.doesNotMatch(html, /data-sales-oracle-tool/);
+    assert.doesNotMatch(html, /sales-oracle-tool\.js/);
     assert.doesNotMatch(html, /sales_oracle_[a-z_]+/);
     assert.doesNotMatch(html, /studio_[a-z_]+/);
   }
+});
+
+test('agent console embeds the Sales Oracle workspace with the console session', () => {
+  const app = read('frontend/console-app/src/App.jsx');
+  assert.match(app, /Sales Oracle/);
+  assert.match(app, /assets\/sales-oracle-tool\.js/);
+  assert.match(app, /SalesOracleClient/);
+  const tool = read('backend/web/public/assets/sales-oracle-tool.js');
+  assert.match(tool, /SALES_ORACLE_API_BASE/);
 });
 
 test('simulation studio translations stay aligned', () => {

@@ -321,3 +321,18 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
   .arbitration { align-items: stretch; flex-direction: column; }
   .arbitration .button { width: 100%; }
 }
+
+/* --- Sales Oracle page --- */
+.sales-oracle-grid { display: grid; gap: var(--space-lg); align-items: start; }
+@media (min-width: 64rem) { .sales-oracle-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.so-panel { display: grid; gap: var(--space-md); align-content: start; border: 1px solid var(--color-rule); background: var(--color-paper-2); padding: var(--space-md); }
+.so-panel h2 { margin: 0; font-size: var(--text-md); letter-spacing: -.02em; }
+.so-panel label { display: grid; gap: var(--space-2xs); font-size: var(--text-sm); color: var(--color-muted); }
+.so-panel input, .so-panel select, .so-panel textarea { min-height: 2.5rem; border: 1px solid var(--color-rule-dark); background: var(--color-paper); color: var(--color-ink); padding-inline: var(--space-2xs); font: inherit; }
+.so-panel textarea { min-height: 6rem; padding-block: var(--space-2xs); }
+.so-panel form { display: grid; gap: var(--space-md); }
+.so-kicker { margin: 0; font-size: var(--text-sm); text-transform: uppercase; letter-spacing: .12em; color: var(--color-muted); }
+.so-documents { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2xs); }
+.so-documents li { display: flex; justify-content: space-between; gap: var(--space-sm); border-bottom: 1px solid var(--color-rule); padding-block: var(--space-2xs); font-size: var(--text-sm); }
+.so-state { color: var(--color-muted); }
+.so-privacy { font-size: var(--text-xs); }
