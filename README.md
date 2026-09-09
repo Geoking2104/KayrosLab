@@ -1,4 +1,14 @@
+<div align="center">
+
 # KayrosLab
+
+**Crash-test your strategic decisions before the real world does.**
+
+KayrosLab is a governed decision workshop: AI agents with opposing duties — finance, engineering,
+legal, sales — investigate one real decision, consolidate their objections into a verdict, and a
+human arbitrates with the evidence in hand. Ask from the web console, Slack, Microsoft Teams, or
+Discord; every decision stays in a durable, audited dossier. Run it local or cloud — no scraped
+profiles, no black box.
 
 [![Website](https://img.shields.io/badge/Website-kayroslab.com-0ea5e9?style=flat-square)](https://www.kayroslab.com)
 [![Live demo](https://img.shields.io/badge/Demo-Live_app-2563eb?style=flat-square)](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html)
@@ -7,44 +17,79 @@
 [![Core tests](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
-**From weak signal to strategic decision — governed.**
+[Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
 
-KayrosLab is a **governed strategic ideation workshop**: multi-agent orchestration (Plan-and-Solve + ReAct), layered memory **L0–L3**, deterministic scoring, embedding-based novelty ranking, and Human-in-the-Loop gates with veto rights.
+</div>
 
-It is **not** a trained model. It is a **governed LLM stack** — an orchestrator that drives real models (Ollama quant-aware locally, or Claude / Mistral via the Fastify backend) behind governance, memory, and audit trails.
+<p align="center">
+  <img src="assets/console-overview.png" alt="The KayrosLab agent console: connected channels, live metrics and a decision under review" width="100%">
+</p>
 
-The production **agent console** turns Slack, Microsoft Teams or Discord channels into governed decision rooms: every question opens a durable decision dossier — individual analyses, consolidated objections, consensus verdict — closed by explicit human arbitration.
-
-![KayrosLab Hybrid Agent Sales Oracle — governed simulation of an executive committee and buyer veto network](backend/web/public/assets/hybrid-agent-sales-oracle.png)
-
-> **Hybrid agents turn KayrosLab into a Sales Oracle:** rehearse an internal executive decision, pressure-test an RFP against the customer’s buying committee, and strengthen the evidence before the real meeting. Simulated stakeholder feedback is always labelled as simulation — never as a real statement or prediction.
-
----
-
-## Table of contents
-
-1. [Why KayrosLab](#why-kayroslab)
-2. [Features](#features)
-3. [Complete agent operations](#complete-agent-operations)
-4. [Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle)
-5. [Agent console](#agent-console)
-6. [Quick start](#quick-start)
-7. [Repository layout](#repository-layout)
-8. [How it works](#how-it-works)
-9. [Core engine](#core-engine)
-10. [Backend API](#backend-api)
-11. [UI entry points](#ui-entry-points)
-12. [Configuration](#configuration)
-13. [Deployment](#deployment)
-14. [Development & tests](#development--tests)
-15. [Roadmap](#roadmap)
-16. [Further documentation](#further-documentation)
-17. [Contact](#contact)
-18. [License](#license)
+<p align="center">
+  <sub><em>Verdicts stay consultative until a human arbitrates — every analysis, objection and condition stays in the dossier.</em></sub>
+</p>
 
 ---
 
-## Why KayrosLab
+## What is KayrosLab?
+
+A strategy can sound coherent in the meeting and still fail its first serious objection. Meetings
+compress uncertainty into opinions, the strongest voice wins, and the numbers get retrofitted
+afterwards. Nobody reconstructs why the decision was made — until it is too late to change it.
+
+KayrosLab turns one decision into a governed operation. You state the question; a committee of
+agents with opposing duties — a CFO, an engineer, a lawyer, a sales lead — investigates the
+evidence, attacks each other's assumptions, and consolidates objections, conditions and a verdict:
+**GO, conditional GO, or NO-GO**. The verdict stays consultative until the accountable human accepts
+it, attaches conditions, or overrides a veto — and the whole dossier (claims, sources, numbers,
+justifications) remains inspectable afterwards.
+
+It is not a trained model, and it does not sell you a crystal ball. It is a **governed LLM stack**:
+an orchestrator that drives real models — Ollama quant-aware on your machine, or Mistral / Claude
+through the Fastify backend — behind layered memory, deterministic Monte-Carlo numbers, and human
+gates with veto rights.
+
+---
+
+## Compose the committee.
+
+*You don't pick one voice. You hear all of them.*
+
+- **[Specialized agents](#complete-agent-operations) →** System agents (CFO, CTO, Legal…), custom experts and hybrid agents with consented stakeholder profiles — veto power included.
+- **[Hybrid Agent Sales Oracle](#hybrid-agent-sales-oracle) →** Rehearse an executive decision or pressure-test a customer RFP against the buying committee before you answer.
+- **[Novelty engine](#novelty--bisociation) →** Bisociation collisions ranked by embeddings, with a non-obvious Kayros Signature on each candidate.
+- **[Positioner](#core-engine) →** Web, GitHub, GitLab and ArXiv scanning, ontology graph, competitor facts written to memory.
+
+## Decide where the team works.
+
+*Slack, Teams, Discord or the console — every channel becomes a decision room.*
+
+- **[Agent console](#agent-console) →** Self-service workspace: rooms, agent registry, decision dossiers and Sales Oracle — no second login.
+- **[Chat connectors](#backend-api) →** Slack (signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519).
+- **[Durable dossiers](#agent-console) →** Postgres-backed decision threads you can resume with new evidence, from the same collective.
+- **[Human arbitration](#how-it-works) →** Accept the consensus, pass under conditions, or override a veto — every action recorded.
+
+## Keep the numbers honest.
+
+*A forecast is a range — never a verdict.*
+
+- **[Deterministic Monte-Carlo](#how-it-works) →** P10/P50/P90 from stated hypotheses; no number is invented.
+- **[TimesFM 2.5](#backend-api) →** Optional KPI forecasting with uncertainty bands, tenant-scoped and labelled simulation.
+- **[Epistemic tags](#core-engine) →** Observed, assumed or unknown — uncertainty travels with the claim.
+- **[KPI drift](#core-engine) →** Reality diverging from the plan re-opens arbitration on its own.
+
+## Stay inspectable.
+
+*Your machines, your models, your audit trail.*
+
+- **[Zero-dependency core](#core-engine) →** The decision engine runs on Node 20 with no npm dependencies.
+- **[Layered memory](#memory-layers) →** L0–L3: working context, atomic facts, distilled scenarios, tenant norms.
+- **[Governance](#gate--idea) →** Gates, RBAC, weighted votes and vetoes over an append-only audit trail.
+- **[Local or cloud](#deployment) →** Ollama quant-aware locally, or governed cloud; JSON files or Postgres, per tenant.
+
+---
+
+## Where KayrosLab fits
 
 | Criterion | Chat LLM | Innovation platform | **KayrosLab** |
 |---|---|---|---|
@@ -56,8 +101,6 @@ The production **agent console** turns Slack, Microsoft Teams or Discord channel
 | Decision | Informal | Vote | **Vote instructs · veto decides** |
 | Sovereignty | Cloud | Cloud | **Ollama quant-aware** or proxy |
 
-### Named landscape
-
 | Category | Representative players | Where they excel | The gap KayrosLab fills |
 |---|---|---|---|
 | Innovation management suites | Brightidea · HYPE Innovation · ITONICS · Qmarkets · IdeaScale | Idea collection at scale, campaigns, stage-gate pipelines, impact tracking | Intelligence is organizational (workflow, scorecards), not governed multi-agent deliberation — no buyer-committee rehearsal, no veto mapping |
@@ -65,36 +108,128 @@ The production **agent console** turns Slack, Microsoft Teams or Discord channel
 | Chat LLM assistants | ChatGPT · Claude · Gemini | Fast drafting and one-model analysis | Session-only memory, no role boundaries, no evidence discipline, no gates or veto, no audit trail |
 | Agent frameworks | LangChain / LangGraph · CrewAI · AutoGen | Build-your-own orchestration for dev teams | Governance, gates, console, memory and audit remain to be built; KayrosLab ships them — and hosts these frameworks as optional adapters |
 
-**Position.** KayrosLab occupies the governed deliberation layer between conversation (chat LLMs), collection (innovation suites) and custom builds (agent frameworks): role-bound agents, layered memory L0–L3, deterministic numbers, human gates with veto — inspectable, deployable local or cloud.
+**Position.** KayrosLab occupies the governed deliberation layer between conversation (chat LLMs),
+collection (innovation suites) and custom builds (agent frameworks): role-bound agents, layered
+memory L0–L3, deterministic numbers, human gates with veto — inspectable, deployable local or cloud.
 
 ---
 
-## Features
+## Get started
 
-- **8-step strategic cycle** — Intake → Listen → Map → Build → Position → Challenge → Decide → Project → Execute, with KPI feedback into Listen
-- **SSE live cycle** — `POST /v1/cycle/run` streams plan/run events to `cycle-timeline.html`
-- **Layered memory L0–L3** — working offload, atomic facts (incl. competitor from Positioner), distilled scenarios, scoped persona/norms
-- **Governance** — gates, weighted votes, approve / reject / revise → idea stage & status
-- **Novelty engine** — embedding-based scoring of Bisociator collisions (intra-batch diversity + memory distance + input distance), ranked output, soft near-duplicate filter
-- **Kayros Signature** — each candidate carries a non-obvious conceptual bridge that makes the option unique (surfaced in the public demo)
-- **Positioner** — web / GitHub / GitLab / ArXiv, ontology graph, OWL export, L1 competitor injection
-- **Quant-aware local LLM** — role-tiered Ollama tags + soft fallback (strip quant → mock)
-- **Specialized swarms** — compose built-in system agents, user-defined experts, or modified hybrid agents with layered rules and veto powers
-- **Governed agent console (production)** — self-service signup with verified e-mail, tenant-scoped workspace, Slack/Teams/Discord room binding per collective, durable Postgres-backed decision threads, consensus dossiers (GO / CONDITIONAL_GO / NO_GO) with consolidated objections & conditions, human arbitration (accept · conditional · override veto · re-evaluate), encrypted server-side connector secrets
-- **Consent-aware personality simulation** — optional LinkedIn self-profile / Crystal Knows imports through official APIs or authorized structured exports, with provenance and explicit consent
-- **Sales Oracle** — simulate internal executive decisions or customer buying committees to reveal veto paths, objections, evidence gaps and conditional-GO requirements before a proposal is sent
-- **Developer Portal MCP** — connect Codex, Claude Code, Cursor or VS Code to a tenant-scoped, least-privilege agentic API catalog with governed swarm execution
-- **Multi-tenant stores** — JSON files or Postgres (`DATABASE_URL`) for ideas, gates & **account links**
-- **Chat connectors** — Slack (signature, idempotence, Block Kit gates, **motif modal**, **chat.update**); **Teams (JWT RS256 Azure Bot, Adaptive Cards, gate/EF-20, envoi proactif + webhook)**; Discord (Ed25519, embeds)
-- **Portfolio UX** — kanban board, dormant ideas + reactivate, ontology Cytoscape explorer + embed panel
-- **TimesFM 2.5 forecasting** — optional, isolated KPI forecasts with P10–P90 uncertainty, tenant-scoped persistence and mandatory `SIMULATION` labelling; deterministic projections remain the baseline
-- **Optional adapters (V16)** — LangChain tools bridge, LangGraph research runner, multi-provider search tools, Langfuse observability (all peripheral; `core/` stays zero-dep)
+No heavy setup: create your workspace at **[kayroslab.com/console](https://www.kayroslab.com/console/)** —
+self-service — and run your first committee from the browser. Or explore the
+[public governed demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) without an
+account: semantic map, novelty-ranked exploration, full 8-agent cycle, PDF export.
+
+<details>
+<summary><b>Run the engine and the backend locally</b></summary>
+
+<br/>
+
+```bash
+git clone https://github.com/Geoking2104/KayrosLab.git
+cd KayrosLab/core && node --test          # zero-dependency decision core
+node quant-ollama-demo.mjs llama3.2       # optional, needs Ollama
+
+cd ../backend/fastify
+cp .env.sample .env && npm install && node index.mjs   # http://localhost:8787
+```
+
+```js
+import { createEngine } from './core/index.mjs';
+
+const eng = createEngine({
+  sovereignty: 'local',
+  model: 'llama3.1:8b-instruct',
+  quant: 'q4_K_M',
+  syncAvailableQuants: true,
+});
+
+const plan = await eng.orchestrator.plan('Launch a B2B offer', { ideaId: 'idea-1' });
+for await (const ev of eng.orchestrator.run(plan, {
+  governance: 'auto',
+  positionning: true,
+  autoDistill: true,
+  waitGate: false,
+})) {
+  console.log(ev.type, ev.idea ?? '');
+}
+```
+
+Open `cycle-timeline.html?api=http://localhost:8787` for the live cycle view, seed a demo idea with
+`node core/seed-demo.mjs`, and point the console at your backend.
+
+</details>
+
+Prerequisites: Node.js 20+. Optional: [Ollama](https://ollama.com) for local inference and
+embeddings, Postgres for multi-instance persistence.
+
+---
+
+## Your first decision in ten minutes
+
+**1. Open the console.** [kayroslab.com/console](https://www.kayroslab.com/console/) — create your
+workspace; signup is self-service with a verified e-mail.
+
+**2. Connect a channel (optional).** In **Réglages**, add Slack, Microsoft Teams or Discord
+credentials (stored encrypted server-side) and bind a channel to a collective in mention-only or
+always-on mode.
+
+**3. Compose the committee.** In **Agents**, start from the system agents — CFO, CTO, Legal — and
+add custom experts or consented hybrid profiles. Grant veto power where a blocking opinion matters.
+
+**4. Ask, then arbitrate.** From **Mission rapide** or a bound channel, ask the real question. Each
+agent answers with a verdict, strengths, objections, conditions and metrics; the collective returns
+a consensus dossier. Accept it, pass it under conditions, or override a veto — the dossier keeps
+the whole story.
+
+Deeper walkthrough: [pitch-seed](docs/pitch-seed.md) · [specialized swarms](docs/specialized-agent-swarms.md)
+
+---
+
+## The strategic cycle
+
+```mermaid
+flowchart LR
+  subgraph CYCLE["KayrosLab strategic cycle"]
+    direction LR
+    A[Listen] --> B[Map]
+    B --> C[Build]
+    C --> D[Position]
+    D --> E[Challenge]
+    E --> F[Decide]
+    F --> G[Project]
+    G --> H[Execute]
+  end
+  H -.->|KPIs · alerts · re-arbitration| A
+
+  classDef step fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
+  class A,B,C,D,E,F,G,H step
+```
+
+| # | Step | Domain code | Role | Output |
+|---|---|---|---|---|
+| 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
+| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals |
+| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges |
+| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
+| 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
+| 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
+| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
+| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + feedback loop |
+| 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + measured impact |
+
+**Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses
+(`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via
+`POST /v1/cycle/reactivate`.
 
 ---
 
 ## Complete agent operations
 
-KayrosLab does not hand one prompt to one model. It turns a decision into a governed operation: evidence is collected, agents receive bounded roles, tools add verifiable facts or calculations, opposing views are reconciled, and a human approves the result before action.
+KayrosLab does not hand one prompt to one model. It turns a decision into a governed operation:
+evidence is collected, agents receive bounded roles, tools add verifiable facts or calculations,
+opposing views are reconciled, and a human approves the result before action.
 
 ```mermaid
 flowchart TB
@@ -136,26 +271,33 @@ flowchart TB
 | **Decide** | Aggregate votes and conditions without overriding governance | Approve, reject or request revision | Signed gate decision + rationale |
 | **Execute and learn** | Build the roadmap, monitor KPIs and surface drift | Own delivery and re-arbitration | Milestones, impact readings and audit log |
 
-TimesFM is deliberately one tool inside this loop. It forecasts statistically plausible KPI trajectories from at least 20 ordered observations; it does not replace deterministic business scenarios, agent judgment or the human gate.
+TimesFM is deliberately one tool inside this loop. It forecasts statistically plausible KPI
+trajectories from at least 20 ordered observations; it does not replace deterministic business
+scenarios, agent judgment or the human gate.
 
 ---
 
 ## Hybrid Agent Sales Oracle
 
-A hybrid agent combines a governed business role with an authorized stakeholder profile. The role supplies explicit decision rules; the profile can supply consented communication preferences, DISC traits, decision triggers and objection patterns. Personality simulation is opt-in per swarm and never changes the requirement for human arbitration.
+A hybrid agent combines a governed business role with an authorized stakeholder profile. The role
+supplies explicit decision rules; the profile can supply consented communication preferences, DISC
+traits, decision triggers and objection patterns. Personality simulation is opt-in per swarm and
+never changes the requirement for human arbitration.
+
+![KayrosLab Hybrid Agent Sales Oracle — governed simulation of an executive committee and buyer veto network](backend/web/public/assets/hybrid-agent-sales-oracle.png)
 
 ### Rehearse an executive decision
 
 1. Upload the proposal, business case, metrics and constraints; every extracted claim keeps its source.
 2. Compose a panel from built-in CFO, CTO, Legal, Risk and Operations agents, custom experts, or consented hybrids.
-3. Run the cited corpus through `GO`, `CONDITIONAL_GO`, `NO_GO` and veto rules.
+3. Run the cited corpus through `GO`, `CONDITIONAL_GO` and veto rules.
 4. Review the friction map, requested evidence and simulated stakeholder reactions before the accountable executive decides.
 
 ### Pressure-test a customer RFP
 
 1. Upload the RFP, response, pricing, security, contractual and delivery evidence into one controlled corpus.
 2. Map the buying committee: sponsor, procurement, finance, security, legal, operations and technical evaluators.
-3. Red-team the cited offer against each veto holder’s explicit role rules and authorized decision triggers.
+3. Red-team the cited offer against each veto holder's explicit role rules and authorized decision triggers.
 4. Generate an objection matrix, conditional-GO checklist, evidence plan, negotiation brief and executive narrative.
 
 ```mermaid
@@ -171,11 +313,14 @@ flowchart LR
   PACK --> HUMAN[Human arbitration and stronger proposal]
 ```
 
-**Safeguards:** official connectors or authorized exports only; no LinkedIn scraping; explicit consent and provenance; tenant isolation; no private-fact fabrication; simulated feedback is labelled and cannot be presented as a real quote, endorsement or behavioral prediction.
+**Safeguards:** official connectors or authorized exports only; no LinkedIn scraping; explicit
+consent and provenance; tenant isolation; no private-fact fabrication; simulated feedback is
+labelled and cannot be presented as a real quote, endorsement or behavioral prediction.
 
 ### Integrated web tool
 
-The [Hybrid Agent Sales Oracle workspace](https://www.kayroslab.com/console/) is embedded in the agent console for provisioned customers — no second login, it reuses the console session:
+The [Hybrid Agent Sales Oracle workspace](https://www.kayroslab.com/console/) is embedded in the
+agent console for provisioned customers — no second login, it reuses the console session:
 
 1. Open the **Sales Oracle** tab in the [console](https://www.kayroslab.com/console/). The bearer token stays in browser memory only; it is never persisted to `localStorage`, cookies or the repository.
 2. Select an existing tenant-scoped case or create an RFP, executive-decision, renewal or negotiation case.
@@ -206,9 +351,11 @@ See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for sch
 
 ## Agent console
 
-The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed decisions run day to day — in production, with self-service workspaces.
+The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed
+decisions run day to day — in production, with self-service workspaces.
 
-**Flow:** connect your channels → bind rooms to a collective → instruct the question → the collective answers → humans arbitrate → resume with new evidence.
+**Flow:** connect your channels → bind rooms to a collective → instruct the question → the
+collective answers → humans arbitrate → resume with new evidence.
 
 1. **Create a workspace in self service** — signup with verified e-mail (30-minute reset links), tenant-scoped space and per-tenant agent registry.
 2. **Connect and bind rooms** — Slack, Microsoft Teams or Discord credentials stored encrypted server-side (`KAYROS_CONNECTOR_ENCRYPTION_KEY` required), connectivity test included; each channel is bound to a stable collective in mention-only or always-on mode.
@@ -222,121 +369,11 @@ The [agent console](https://www.kayroslab.com/console/) is the operational surfa
 | **Salons** (Rooms) | Channels bound to collectives — mode, collective id, latest decision threads |
 | **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power, consented Crystal Knows profile import |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
+| **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
 | **Réglages** (Settings) | Connector secrets encrypted at rest, connectivity tests, Crystal Knows capability state |
 
-The console shares the governed runtime with the API and chat connectors: a decision opened in Slack and continued in the console is one thread and one audit trail.
-
----
-
-## Quick start
-
-### Prerequisites
-
-- **Node.js 20+**
-- Optional: [Ollama](https://ollama.com) for local inference (and embeddings)
-- Optional: Postgres if you set `DATABASE_URL`
-
-### 1. Core engine (no install)
-
-```bash
-cd core
-node --test
-node quant-ollama-demo.mjs llama3.2   # optional, needs Ollama
-```
-
-```js
-import { createEngine } from './core/index.mjs';
-
-const eng = createEngine({
-  sovereignty: 'local',
-  model: 'llama3.1:8b-instruct',
-  quant: 'q4_K_M',
-  syncAvailableQuants: true,
-});
-
-const plan = await eng.orchestrator.plan('Launch a B2B offer', { ideaId: 'idea-1' });
-for await (const ev of eng.orchestrator.run(plan, {
-  governance: 'auto',
-  positionning: true,
-  autoDistill: true,
-  waitGate: false,
-})) {
-  console.log(ev.type, ev.idea ?? '');
-}
-```
-
-### 2. Backend API
-
-```bash
-cd backend/fastify
-cp .env.sample .env          # edit secrets as needed
-npm install
-node index.mjs               # http://localhost:8787
-```
-
-Open the live cycle UI:
-
-```text
-cycle-timeline.html?api=http://localhost:8787
-```
-
-### 3. Public governed-agent demo
-
-Open the live page (no backend required for the client-side exploration loop):
-
-- Production: [kayroslab.com/kayroslab-complete-with-ai-agents.html](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html)
-- GitHub Pages: [geoking2104.github.io/KayrosLab/…](https://geoking2104.github.io/KayrosLab/kayroslab-complete-with-ai-agents.html)
-
-Features of the demo:
-- Interactive swarm composer for system, custom and hybrid agents
-- Consent-aware LinkedIn / Crystal Knows profile-link workflow
-- Semantic map (InfraNodus-inspired) before ideation
-- Bisociation-style exploration with **novelty ranking**
-- **Kayros Signature** on each candidate
-- Full 8-agent governed cycle with human gates
-- PDF / Markdown export + lead capture
-
-### 4. Demo seed (optional)
-
-```bash
-node core/seed-demo.mjs
-# or with Postgres:
-DATABASE_URL=postgres://user:pass@localhost:5432/kayroslab node core/seed-demo.mjs
-```
-
----
-
-## Repository layout
-
-```text
-KayrosLab/
-├── core/                 # Zero-dep engine (ESM) — memory, orchestrator, governance, positionning, novelty
-│   ├── novelty.mjs       # Embedding-based novelty scoring
-│   ├── embed-select.mjs  # Soft-fallback embedding model selection
-│   ├── kpi-drift.mjs     # KPI trend / drift detection
-│   ├── adapters/         # Portable optional tool contracts
-│   │   ├── timesfm-forecast.mjs
-│   │   ├── langchain-tools.mjs
-│   │   ├── langgraph-runner.mjs
-│   │   ├── search-tools.mjs
-│   │   └── langfuse.mjs
-│   ├── agents/           # Specialist agents (incl. Bisociateur)
-│   └── hybrid-agent-gateway.mjs # Rooms + shared Slack/Discord/Teams execution runtime
-├── backend/
-│   ├── fastify/          # HTTP API, auth, SSE cycle, connectors
-│   ├── adapters/         # Runtime adapters, including the TimesFM client/cache
-│   └── timesfm-service/  # Isolated Python/PyTorch inference service
-├── frontend/             # React Positioner app + customer collaboration console
-├── deploy/ovh-vps/       # Deploy, backup, cron helpers
-├── docs/                 # Pitch, architecture notes, v13/v14
-├── workers/              # Edge / proxy workers
-├── cycle-timeline.html   # Live SSE cycle UI
-├── portfolio-board.html  # Portfolio kanban
-├── ontology-explorer.html
-├── ontology-panel.html   # Embeddable ontology sample (Cytoscape)
-├── kayroslab-complete-with-ai-agents.html   # Public governed-agent demo (novelty + Signature)
-└── index.html            # Commercial site
-```
+The console shares the governed runtime with the API and chat connectors: a decision opened in
+Slack and continued in the console is one thread and one audit trail.
 
 ---
 
@@ -344,41 +381,12 @@ KayrosLab/
 
 ### Strategic cycle
 
-```mermaid
-flowchart LR
-  subgraph CYCLE["KayrosLab strategic cycle"]
-    direction LR
-    A[Listen] --> B[Map]
-    B --> C[Build]
-    C --> D[Position]
-    D --> E[Challenge]
-    E --> F[Decide]
-    F --> G[Project]
-    G --> H[Execute]
-  end
-  H -.->|KPIs · alerts · re-arbitration| A
-
-  classDef step fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
-  class A,B,C,D,E,F,G,H step
-```
-
-| # | Step | Domain code | Role | Output |
-|---|---|---|---|---|
-| 00 | **Intake** | `recueillir` | Structured intake canvas | Comparable idea |
-| 01 | **Listen** | `ecouter` | Noise reduction, scoring, clustering | Qualified signals |
-| 02 | **Map** | `cartographier` | Trend network, bisociation bridges | Graph + bridges |
-| 03 | **Build** | `construire` | Scenarios, Collision Mode, brief | Scenarios + hypotheses |
-| 04 | **Position** | Positioner | Web + GitHub/GitLab, ontology, gaps → **L1 facts** | Graph + OWL + L1 |
-| 05 | **Challenge** | `eprouver` | Critic + Devil's Advocate + **Red Team** | Attack report |
-| 06 | **Decide** | `arbitrer` | Weighted vote, human gate, veto | Go / No-Go / Revision |
-| 07 | **Project** | `projeter` | Roadmap, resources, foresight | Trajectory + feedback loop |
-| 08 | **Execute** | `realiser` | Pilot → Deploy → Review | Milestones + measured impact |
-
-**Two orthogonal axes:** *stage* = execution progress; *status* = decision state. Dormant statuses (`en_pause`, `consideration_future`, `non_poursuivi`) are **reactivable** via `POST /v1/cycle/reactivate`.
+See [The strategic cycle](#the-strategic-cycle) above — eight steps, two orthogonal axes
+(stage × status), KPI feedback looping Execute back into Listen.
 
 ### Novelty & Bisociation
 
-The Bisociateur agent generates structured collisions (Framework + Mechanism + Proposal + Bridge).  
+The Bisociator agent generates structured collisions (Framework + Mechanism + Proposal + Bridge).
 When embeddings are available, collisions are scored and ranked:
 
 - **Intra-batch diversity** — distance to other candidates in the same round
@@ -389,7 +397,7 @@ Preferred embedding model order (soft fallback):
 
 `qwen3-embedding:0.6b` → `bge-m3` → `mxbai-embed-large` → `nomic-embed-text` → Mock
 
-Override with `KAYROS_EMBED_MODEL`.  
+Override with `KAYROS_EMBED_MODEL`.
 See `core/novelty.mjs` and `core/embed-select.mjs`.
 
 ### Live cycle (SSE)
@@ -429,7 +437,9 @@ sequenceDiagram
 
 ### Engine architecture
 
-KayrosLab separates a **zero-dependency decision core** from **optional periphery adapters**. Adapters may call into the core (`ToolRegistry`, memory, LLM); they never replace governance, gates, or the strategic cycle.
+KayrosLab separates a **zero-dependency decision core** from **optional periphery adapters**.
+Adapters may call into the core (`ToolRegistry`, memory, LLM); they never replace governance,
+gates, or the strategic cycle.
 
 ```mermaid
 flowchart TB
@@ -506,7 +516,7 @@ flowchart LR
 
 ### Quant-aware Ollama
 
-Request → tagged model → Ollama. On failure: strip quant suffix and retry → mock fallback (response marked `degraded`).  
+Request → tagged model → Ollama. On failure: strip quant suffix and retry → mock fallback (response marked `degraded`).
 Details: [core/OLLAMA.md](core/OLLAMA.md) · [core/README.md](core/README.md).
 
 ---
@@ -517,7 +527,7 @@ Path: [`core/`](core/) — ESM, Node 20+, **no npm dependencies** for the engine
 
 | Module | Role |
 |---|---|
-| `index.mjs` | `createEngine` — providers, memory, quant, orchestrator, novelty injection |
+| `index.mjs` | `createEngine` — providers, memory, orchestrator, novelty injection |
 | `orchestrator.mjs` | plan / run / project — recall, positioning→L1, distill, gates |
 | `cycle-lifecycle.mjs` | Agent→stage, `applyGateResolution`, reactivate |
 | `memory.mjs` · `memory-scope.mjs` · `memory-rank.mjs` | L0–L3, tenant hierarchy, ranking |
@@ -543,6 +553,8 @@ See **[core/README.md](core/README.md)** for API-level docs.
 
 ## Backend API
 
+Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
+
 ### Optional TimesFM KPI forecasts
 
 When an idea has at least 20 ordered observations for one KPI, the authenticated
@@ -561,8 +573,6 @@ model provenance and a human-review flag. It is always a simulation. See
 [`docs/TIMESFM_FORECASTING.md`](docs/TIMESFM_FORECASTING.md) for architecture,
 deployment and limitations.
 
-Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
-
 | Domain | Endpoints |
 |---|---|
 | **Cycle SSE** | `POST /v1/cycle/run` · `POST /v1/cycle/reactivate` · `GET /v1/cycle/status` |
@@ -575,9 +585,9 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
 | **Agent Console** | `GET /v1/console/overview` · agents CRUD + Crystal import · connectors (configure / test) · rooms · threads · `POST /v1/console/threads/:threadId/arbitrate` |
+| **Contact** | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
-| Contact | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | Auth | register / login / logout / me |
 | Portfolio | ideas, portfolio, campaigns |
 | Reporting | projection, impact |
@@ -594,7 +604,7 @@ Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
 | `ontology-explorer.html` / `ontology-panel.html` | Ontology graph (Cytoscape) |
 | `index.html` / `index.fr.html` | Commercial landing |
 | `frontend/positionning-app` | React Positioner application |
-| `frontend/console-app` | **Production agent console** (served at `/console/`) — self-service signup, Slack/Teams/Discord room binding, agent registry with veto & hybrid profiles, durable decision dossiers, human arbitration |
+| `frontend/console-app` | **Production agent console** (served at `/console/`) — self-service signup, Slack/Teams/Discord room binding, agent registry with veto & hybrid profiles, durable decision dossiers, Sales Oracle tab, human arbitration |
 
 ---
 
@@ -699,31 +709,43 @@ CI workflow: `.github/workflows/core-tests.yml`.
 
 ---
 
-## Further documentation
+## Documentation
 
-| Document | Topic |
+| I want to… | Start here |
 |---|---|
-| [core/README.md](core/README.md) | Engine modules |
-| [core/OLLAMA.md](core/OLLAMA.md) | Local quant path |
-| [RUNBOOK.md](RUNBOOK.md) | Ops procedures |
-| [CHANGELOG.md](CHANGELOG.md) | Release notes |
-| [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) | Functional requirements |
-| [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) | Technical requirements |
-| [SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) | Slack / Teams / Discord product thesis |
-| [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) | v13 notes |
-| [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) | v14 links · motif · update · embed |
-| [docs/pitch-seed.md](docs/pitch-seed.md) | Demo script |
-| [docs/engine-architecture.md](docs/engine-architecture.md) | Core vs adapters (V16) |
-| [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) | Swarm composition, personality profiles, consent and Sales Oracle scenarios |
-| [docs/developer-portal-mcp.md](docs/developer-portal-mcp.md) | Secure Developer Portal MCP and AI coding-tool configuration |
-| [docs/TIMESFM_FORECASTING.md](docs/TIMESFM_FORECASTING.md) | TimesFM architecture, safeguards, deployment and verification |
-| [backend/adapters/README.md](backend/adapters/README.md) | LangChain · LangGraph · search · Langfuse |
+| Understand the engine modules and API | [core/README.md](core/README.md) · [engine architecture](docs/engine-architecture.md) |
+| Run local, quant-aware inference | [core/OLLAMA.md](core/OLLAMA.md) |
+| Operate in production | [RUNBOOK.md](RUNBOOK.md) |
+| Compose swarms, hybrid agents and Sales Oracle cases | [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) |
+| Connect Codex, Claude Code or Cursor | [Developer Portal MCP](docs/developer-portal-mcp.md) |
+| Read the functional and technical specs | [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) · [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) |
+| Follow the Slack / Teams / Discord product thesis | [SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) |
+| Use the optional adapters | [backend/adapters/README.md](backend/adapters/README.md) |
+| Understand TimesFM forecasting | [docs/TIMESFM_FORECASTING.md](docs/TIMESFM_FORECASTING.md) |
+| Run the demo end to end | [docs/pitch-seed.md](docs/pitch-seed.md) |
+| Track releases | [CHANGELOG.md](CHANGELOG.md) |
+| Dig into past iterations | [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) · [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) |
+
+---
+
+## Why "KayrosLab"?
+
+**Kairos** (καιρός) is ancient Greek for the opportune moment — not the time on the clock, but the
+fleeting instant when conditions align and acting makes the difference. Chronos tells you it is
+Tuesday; kairos tells you it is time.
+
+Most organisations decide on chronos: the quarterly committee, the roadmap review, the loudest
+opinion. KayrosLab exists to find the kairos in your evidence — and to tell you, with objections and
+numbers attached, whether the moment is now, now under conditions, or not yet. The lab in the name
+is the governed workshop where that question gets rehearsed before reality runs the experiment.
+
+The longer narrative lives in the [whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html).
 
 ---
 
 ## Contact
 
-**Geoffroy de La Tournelle** — Founder & Director, KayrosLab  
+**Geoffroy de La Tournelle** — Founder & Director, KayrosLab
 [geoffroydelatournelle@gmail.com](mailto:geoffroydelatournelle@gmail.com) · [LinkedIn](https://www.linkedin.com/in/gdelatournelle/)
 
 ---
