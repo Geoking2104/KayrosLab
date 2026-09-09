@@ -175,6 +175,44 @@ export class HybridAgentGateway {
     const normalized = platform ? normalizePlatform(platform) : null;
     return (await this.store.listRooms({ tenantId, platform: normalized })).map(publicRoom);
   }
+
+  /** Ajoute ou retire des agents du collectif actif d'un salon existant, sans recréer le salon. */
+  async updateRoomAgents(roomId, { addAgentIds = [], removeAgentIds = [], maxBuiltAgents = null, tenantId = null, by = null } = {}) {
+    const scope = String(tenantId || 'default');
+    const record = await this.store.getRoom(roomId, { tenantId: scope });
+    const room = publicRoom(record);
+    if (!room) throw new Error('salon introuvable');
+    await this._hydrateRuntime(record);
+    const current = this.swarm.getConfiguration(room.swarm_id, { tenantId: scope });
+    if (!current) throw new Error(`configuration du salon introuvable: ${room.swarm_id}`);
+    const removes = (Array.isArray(removeAgentIds) ? removeAgentIds : []).map((id) => String(id || '').trim()).filter(Boolean);
+    const adds = (Array.isArray(addAgentIds) ? addAgentIds : []).map((id) => String(id || '').trim()).filter(Boolean);
+    const prospective = current.active_agents.filter((id) => !removes.includes(id));
+    for (const id of adds) if (!prospective.includes(id)) prospective.push(id);
+    if (!prospective.length) throw new Error('le collectif du salon doit conserver au moins un agent actif');
+    if (maxBuiltAgents != null) {
+      const built = prospective.filter((id) => this.swarm.registry.get(id, { tenantId: scope })?.metadata?.literary).length;
+      if (built > Number(maxBuiltAgents)) {
+        throw new Error(`Limite de la version en ligne atteinte : ${maxBuiltAgents} agents construits maximum par salon.`);
+      }
+    }
+    const configuration = this.swarm.updateConfigurationAgents(room.swarm_id, { addAgentIds: adds, removeAgentIds: removes }, { tenantId: scope, by });
+    const bundle = {
+      configuration,
+      agents: configuration.active_agents.map((id) => this.swarm.registry.get(id, { tenantId: scope })).filter(Boolean),
+    };
+    const updated = await this.store.updateRoom?.(room.room_id, (currentRecord) => {
+      currentRecord.runtime_bundle = bundle;
+      currentRecord.room.updated_at = now();
+      return currentRecord;
+    }, { tenantId: scope });
+    await this._record('collaboration.room.collective.updated', {
+      room_id: room.room_id, tenant_id: scope, platform: room.platform,
+      added: adds, removed: removes, active_agents: configuration.active_agents, by,
+    });
+    return publicRoom(updated || await this.store.getRoom(room.room_id, { tenantId: scope }));
+  }
+
   async activity(options = {}) { return this.store.activity(options); }
 
   async pendingDecisionCount(tenantId = null) {

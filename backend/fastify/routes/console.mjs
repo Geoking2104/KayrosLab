@@ -32,6 +32,10 @@ const crystalImportSchema = z.object({ consent_confirmed: z.literal(true), email
 const connectorSchema = z.object({ enabled: z.boolean().optional().default(true), settings: z.record(z.string(), z.unknown()).optional().default({}), secrets: z.record(z.string(), z.string().max(4000)).optional().default({}) });
 const connectorStateSchema = z.object({ enabled: z.boolean() });
 const replySchema = z.object({ text: z.string().min(1).max(12000) });
+const roomAgentsSchema = z.object({
+  add_agent_ids: z.array(z.string().min(1).max(80)).max(30).optional().default([]),
+  remove_agent_ids: z.array(z.string().min(1).max(80)).max(30).optional().default([]),
+}).refine((value) => value.add_agent_ids.length > 0 || value.remove_agent_ids.length > 0, { message: 'aucun changement de collectif demandé' });
 const arbitrationSchema = z.object({ action: z.enum(['accept_consensus', 'override_veto', 'reevaluate']), justification: z.string().max(4000).optional(), decision: z.enum(['GO', 'CONDITIONAL_GO']).optional() });
 
 // Limites de la version en ligne (surchargeables par environnement).
@@ -153,6 +157,23 @@ export default async function consoleRoute(app) {
       const room = await app.kayrosContext.hybridGateway.createRoom(parsed.data, { tenantId: me.tenantId, by: me.email }); return reply.code(201).send({ room });
     }
     catch (error) { return reply.code(400).send({ error: error.message }); }
+  });
+  app.patch('/v1/console/rooms/:roomId/agents', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const parsed = roomAgentsSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'collectif du salon invalide', issues: parsed.error.issues });
+    try {
+      const room = await app.kayrosContext.hybridGateway.updateRoomAgents(req.params.roomId, {
+        addAgentIds: parsed.data.add_agent_ids, removeAgentIds: parsed.data.remove_agent_ids,
+        maxBuiltAgents: MAX_BUILT_AGENTS_PER_ROOM, tenantId: me.tenantId, by: me.email,
+      });
+      return { room };
+    }
+    catch (error) {
+      const message = String(error?.message || error);
+      const status = /salon introuvable/.test(message) ? 404 : /Limite/.test(message) ? 403 : 400;
+      return reply.code(status).send({ error: message });
+    }
   });
   app.get('/v1/console/activity', async (req, reply) => { const me = await app.requireAuth(req, reply); if (!me) return; return { events: await app.kayrosContext.hybridGateway.activity({ tenantId: me.tenantId, roomId: req.query?.room_id || null, after: req.query?.after || 0, limit: req.query?.limit || 100 }) }; });
   app.post('/v1/console/rooms/:roomId/messages', async (req, reply) => {

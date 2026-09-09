@@ -45,8 +45,9 @@ export const api = {
   setConnectorEnabled: (platform, enabled) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PATCH', body: JSON.stringify({ enabled }) }),
   testConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/test`, { method: 'POST', body: '{}' }),
   createRoom: (room) => request('/v1/console/rooms', { method: 'POST', body: JSON.stringify(room) }),
-  sendMessage: (roomId, text) => request(`/v1/console/rooms/${encodeURIComponent(roomId)}/messages`, {
-    method: 'POST', body: JSON.stringify({ text }),
+  updateRoomAgents: (roomId, body) => request(`/v1/console/rooms/${encodeURIComponent(roomId)}/agents`, { method: 'PATCH', body: JSON.stringify(body) }),
+  sendMessage: (roomId, text, context) => request(`/v1/console/rooms/${encodeURIComponent(roomId)}/messages`, {
+    method: 'POST', body: JSON.stringify(context ? { text, context } : { text }),
   }),
   thread: (threadId) => request(`/v1/console/threads/${encodeURIComponent(threadId)}`),
   replyThread: (threadId, text) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/messages`, { method: 'POST', body: JSON.stringify({ text }) }),

@@ -50,6 +50,15 @@ export class InMemoryCollaborationStore {
     return true;
   }
 
+  /** Lecture-modification-écriture du record complet d'un salon (room + runtime_bundle). */
+  async updateRoom(roomId, updater, { tenantId = null } = {}) {
+    const record = this.rooms.get(String(roomId || ''));
+    if (!record || (tenantId != null && record.room.tenant_id !== String(tenantId))) return null;
+    const next = updater(clone(record)) || record;
+    this.rooms.set(String(roomId), next);
+    return clone(next);
+  }
+
   async appendEvent(event) {
     const stored = { ...clone(event), sequence: (this.events.at(-1)?.sequence || 0) + 1 };
     this.events.push(stored);

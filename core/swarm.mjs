@@ -586,6 +586,28 @@ export class SwarmService {
   }
 
   getConfiguration(id, { tenantId = null } = {}) { return clone(this.configurations.get(this._key(tenantId, id)) || null); }
+
+  /** Met à jour le collectif actif d'une configuration existante (ajouts/retraits d'agents) avec validation et persistance. */
+  updateConfigurationAgents(swarmId, { addAgentIds = [], removeAgentIds = [] } = {}, { tenantId = null, by = null } = {}) {
+    const key = this._key(tenantId, swarmId);
+    const config = this.configurations.get(key);
+    if (!config) throw new Error(`swarm introuvable: ${swarmId}`);
+    const adds = strings(addAgentIds);
+    const removes = strings(removeAgentIds);
+    const next = config.active_agents.filter((id) => !removes.includes(id));
+    for (const id of adds) if (!next.includes(id)) next.push(id);
+    if (!next.length) throw new Error('active_agents: au moins un agent requis');
+    for (const id of next) {
+      const agent = this.registry.get(id, { tenantId });
+      if (!agent) throw new Error(`agent actif introuvable: ${id}`);
+      if (agent.enabled === false) throw new Error(`agent désactivé: ${id}`);
+    }
+    const updated = { ...clone(config), active_agents: next, updated_at: now() };
+    this.configurations.set(key, updated);
+    this._persist(this.store?.saveConfiguration?.(updated, { tenantId: tenantKey(tenantId) }));
+    this._audit({ type: 'swarm.configuration.updated', swarm_id: swarmId, tenant_id: tenantKey(tenantId), added: adds, removed: removes, by });
+    return clone(updated);
+  }
   getRun(id, { tenantId = null } = {}) { return clone(this.runs.get(this._key(tenantId, id)) || null); }
 
   async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null } = {}) {

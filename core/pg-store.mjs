@@ -432,6 +432,19 @@ export class PgCollaborationStore {
     );
   }
 
+  /** Lecture-modification-écriture du record complet d'un salon (room + runtime_bundle). */
+  async updateRoom(roomId, updater, { tenantId = null } = {}) {
+    const current = await this.getRoom(roomId, { tenantId });
+    if (!current) return null;
+    const next = updater(JSON.parse(JSON.stringify(current)));
+    if (!next) return current;
+    const params = [String(roomId), JSON.stringify(next)];
+    let sql = 'update kayros_collaboration_rooms set payload = $2::jsonb, updated_at = now() where room_id = $1';
+    if (tenantId != null) { params.push(String(tenantId)); sql += ` and tenant_id = $${params.length}`; }
+    await this.pool.query(sql, params);
+    return next;
+  }
+
   async appendEvent(event) {
     const payload = { ...event };
     delete payload.sequence;

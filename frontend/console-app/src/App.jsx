@@ -3,7 +3,7 @@ import { api, getToken, setToken } from './api.js';
 
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Vue d’ensemble'], ['rooms', 'Salons'], ['agents', 'Agents'], ['activity', 'Décisions'], ['salesoracle', 'Sales Oracle'], ['settings', 'Réglages'],
+  ['overview', 'Vue d’ensemble'], ['rooms', 'Salons'], ['agents', 'Agents'], ['auteurs', 'Auteurs'], ['activity', 'Décisions'], ['settings', 'Réglages'],
 ];
 const connectorFields = {
   slack: [['bot_token', 'Jeton du bot', true], ['signing_secret', 'Secret de signature', true], ['webhook_url', 'Webhook sortant (facultatif)', true]],
@@ -17,7 +17,7 @@ function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
 
 function Mark({ name }) {
-  const labels = { overview: '▦', rooms: '▤', agents: '◉', activity: '✓', salesoracle: '◈', settings: '⚙' };
+  const labels = { overview: '▦', rooms: '▤', agents: '◉', auteurs: '✒', activity: '✓', settings: '⚙' };
   return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
@@ -139,14 +139,65 @@ function Overview({ data, refresh, openRoom, onThread }) {
       return data.rooms[0]?.room_id || '';
     });
   }, [data.rooms]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const soClientRef = useRef(null);
+  const [soReady, setSoReady] = useState(false);
+  const [soCases, setSoCases] = useState([]);
+  const [soCaseId, setSoCaseId] = useState('');
+  const [soDocs, setSoDocs] = useState([]);
+  const [soManage, setSoManage] = useState(false);
+  const [soStatus, setSoStatus] = useState(null);
+  const soCase = soCases.find((item) => item.case_id === soCaseId) || null;
+  useEffect(() => {
+    let alive = true;
+    import(/* @vite-ignore */ SALES_ORACLE_TOOL_URL).then((mod) => {
+      if (!alive) return;
+      const client = new mod.SalesOracleClient();
+      client.setToken(getToken());
+      soClientRef.current = client;
+      setSoReady(true);
+      client.listCases().then((result) => { if (alive) setSoCases(result.cases || []); }).catch(() => {});
+    }).catch(() => { /* module indisponible : la mission rapide fonctionne sans dossier client */ });
+    return () => { alive = false; };
+  }, []);
+  useEffect(() => {
+    const client = soClientRef.current;
+    if (!client || !soCaseId) { setSoDocs([]); return; }
+    let alive = true;
+    client.listDocuments(soCaseId).then((result) => { if (alive) setSoDocs(result.documents || []); }).catch(() => { if (alive) setSoDocs([]); });
+    return () => { alive = false; };
+  }, [soCaseId, soReady]);
   const room = data.rooms.find((item) => item.room_id === selectedRoom);
-  async function run(event) { event.preventDefault(); if (!room) return; setState('loading'); setError(''); try { const result = await api.sendMessage(room.room_id, question); setQuestion(''); setState('success'); onThread(result.thread); await refresh(); } catch (err) { setState('error'); setError(err.message); } }
+  async function run(event) {
+    event.preventDefault(); if (!room) return; setState('loading'); setError('');
+    try {
+      let context;
+      if (soCase) {
+        const lines = soDocs.map((doc) => `- ${doc.original_filename} (${soSourceTypeLabel(doc.source_type)} · ${doc.status})`);
+        context = [
+          `Dossier Sales Oracle « ${soCase.name} » — ${soUseCaseLabel(soCase.use_case)}`,
+          `Question du dossier : ${soCase.decision_question}`,
+          lines.length ? `Corpus joint (${lines.length} document(s)) :\n${lines.join('\n')}` : 'Corpus : aucun document chargé pour ce dossier.',
+        ].join('\n').slice(0, SALES_ORACLE_CONTEXT_LIMIT);
+      }
+      const result = await api.sendMessage(room.room_id, question, context);
+      setQuestion(''); setState('success'); onThread(result.thread); await refresh();
+    } catch (err) { setState('error'); setError(err.message); }
+  }
   return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console des agents</h1><p>Configurez les participants, instruisez la question, puis arbitrez sur preuves.</p></div><button className="button primary" onClick={openRoom}>Rattacher un salon</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
     <section className="metric-row"><div><strong>{data.summary.rooms}</strong><span>Salons actifs</span></div><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.hybrid_agents}</strong><span>Profils hybrides</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
     <div className="mission-workbench"><section><header><div><h2>Mission rapide</h2><p>Le résultat ouvre un fil durable, pas une simple notification.</p></div></header>
       <label>Salon<select value={selectedRoom || ''} onChange={(event) => setSelectedRoom(event.target.value)}><option value="">Sélectionner…</option>{data.rooms.map((item) => <option value={item.room_id} key={item.room_id}>{item.name} · {platformNames[item.platform]}</option>)}</select></label>
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!room || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>{error && <p className="inline-error">{error}</p>}
+      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!room || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>
+      <section className="so-strip">
+        <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
+        <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
+        {soCase && <p className="muted so-note">Corpus : {soDocs.length} document(s) — la question du dossier et la liste des preuves sont injectées dans le contexte du collectif.</p>}
+        <button type="button" className="text-button" onClick={() => setSoManage((current) => !current)}>{soManage ? 'Masquer la gestion des dossiers' : 'Créer un dossier / charger des preuves'}</button>
+        {soManage && <SalesOracleManager ready={soReady} clientRef={soClientRef} currentCase={soCase} documents={soDocs} onCases={setSoCases} onDocs={setSoDocs} onStatus={setSoStatus} />}
+        {soStatus && <p className={`form-error ${soStatus.tone === 'error' ? '' : 'is-empty'}`} role="status">{soStatus.text || '\u00a0'}</p>}
+      </section>
+      {error && <p className="inline-error">{error}</p>}
     </section><section><header><div><h2>Décisions ouvertes</h2><p>Reprendre une discussion avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
       <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)}><strong>{item.question}</strong><small>{item.status.replaceAll('_', ' ')} · {item.current_run_id}</small></button>)}{!data.threads.length && <p className="muted">Aucun dossier lancé.</p>}</div>
     </section></div>
@@ -308,8 +359,19 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     setBusy('conversation'); setError('');
     try {
       const ids = createdAgents.slice(-3).map((agent) => agent.agent_id);
-      const room = await api.createRoom({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: ids });
-      pendingRoomRef.roomId = room.room.room_id;
+      let roomId;
+      try {
+        const room = await api.createRoom({ name: 'Salon des auteurs', platform: 'console', external_room_id: AUTHORS_SALON_EXTERNAL_ID, mode: 'mention_only', swarm_name: 'Salon des auteurs — conseil littéraire', active_agents: ids });
+        roomId = room.room.room_id;
+      } catch (err) {
+        if (!/déjà connecté/.test(String(err.message))) throw err;
+        const overview = await api.overview();
+        const existing = overview.rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID);
+        if (!existing) throw err;
+        await api.updateRoomAgents(existing.room_id, { add_agent_ids: ids });
+        roomId = existing.room_id;
+      }
+      pendingRoomRef.roomId = roomId;
       location.hash = 'overview';
       onClose();
       await onCreated();
@@ -382,6 +444,176 @@ function AuthorPickerDialog({ onClose, onCreated }) {
   </section></div>;
 }
 
+const AUTHORS_SALON_EXTERNAL_ID = 'console-auteurs';
+
+/** Choisit le salon de destination pour les auteurs : salon dédié, salon existant ou nouveau salon. */
+function SalonPickerDialog({ entries, rooms, onClose, onDone }) {
+  const authorsSalon = rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID) || null;
+  const consoleRooms = rooms.filter((room) => room.platform === 'console' && room.room_id !== authorsSalon?.room_id);
+  const [target, setTarget] = useState(authorsSalon?.room_id || '__auteurs__');
+  const [newName, setNewName] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+
+  async function ensureAgents() {
+    const ready = [];
+    for (const entry of entries) {
+      if (!entry.authorId) { ready.push(entry.agentId); continue; }
+      try { await api.createAuthorAgent(entry.authorId); ready.push(entry.agentId); }
+      catch (err) { if (err.status === 409) ready.push(entry.agentId); else throw err; }
+    }
+    return ready;
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    setBusy(true); setError('');
+    try {
+      const ready = await ensureAgents();
+      let roomId;
+      if (target === '__new__') {
+        const name = newName.trim() || 'Salon des auteurs';
+        const room = await api.createRoom({ name, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', swarm_name: `${name} — conseil littéraire`, active_agents: ready });
+        roomId = room.room.room_id;
+      } else if (target === '__auteurs__') {
+        try {
+          const room = await api.createRoom({ name: 'Salon des auteurs', platform: 'console', external_room_id: AUTHORS_SALON_EXTERNAL_ID, mode: 'mention_only', swarm_name: 'Salon des auteurs — conseil littéraire', active_agents: ready });
+          roomId = room.room.room_id;
+        } catch (err) {
+          if (!/déjà connecté/.test(String(err.message))) throw err;
+          const overview = await api.overview();
+          const existing = overview.rooms.find((room) => room.platform === 'console' && room.external_room_id === AUTHORS_SALON_EXTERNAL_ID);
+          if (!existing) throw err;
+          await api.updateRoomAgents(existing.room_id, { add_agent_ids: ready });
+          roomId = existing.room_id;
+        }
+      } else {
+        await api.updateRoomAgents(target, { add_agent_ids: ready });
+        roomId = target;
+      }
+      onDone(roomId);
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog" role="dialog" aria-modal="true">
+    <header><div><h2>Ajouter au salon des auteurs</h2><p>Un espace d’échange dédié aux agents auteurs, tenu à l’écart du processus de décision global de la console.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    <form onSubmit={submit}>
+      <fieldset><legend>Destination — {entries.length} agent(s) auteur sélectionné(s)</legend>
+        <div className="so-destinations">
+          <label className="radio"><input type="radio" name="target" checked={authorsSalon ? target === authorsSalon.room_id : target === '__auteurs__'} onChange={() => setTarget(authorsSalon?.room_id || '__auteurs__')} /><span><strong>Salon des auteurs</strong><small>{authorsSalon ? 'Salon dédié déjà rattaché — les sélectionnés y seront ajoutés' : 'Créer le salon dédié (rattaché une seule fois, réutilisé ensuite)'}</small></span></label>
+          {consoleRooms.map((room) => <label key={room.room_id} className="radio"><input type="radio" name="target" checked={target === room.room_id} onChange={() => setTarget(room.room_id)} /><span><strong>{room.name}</strong><small>Salon console existant · collectif {room.swarm_id}</small></span></label>)}
+          <label className="radio"><input type="radio" name="target" checked={target === '__new__'} onChange={() => setTarget('__new__')} /><span><strong>Nouveau salon…</strong><small>Créer un autre salon dédié aux auteurs</small></span></label>
+        </div>
+      </fieldset>
+      {target === '__new__' && <label>Nom du nouveau salon<input value={newName} onChange={(event) => setNewName(event.target.value)} placeholder="Ex. Cercle des philosophes" maxLength={120} /></label>}
+      <p className="muted so-note">Rappel version en ligne : 3 agents auteurs maximum par salon, 3 salons par utilisateur. Les salons dédiés aux auteurs restent séparés de vos dossiers de décision.</p>
+      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>
+      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={busy || !entries.length}>{busy ? 'Ajout…' : 'Ajouter au salon'}</button></footer>
+    </form>
+  </section></div>;
+}
+
+/** Page de présentation des auteurs du domaine public, avec sélection pour le salon dédié. */
+function AuthorsPage({ data, refresh }) {
+  const [catalog, setCatalog] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [avatars, setAvatars] = useState({});
+  const [selection, setSelection] = useState([]);
+  const [busyAuthor, setBusyAuthor] = useState('');
+  const [picker, setPicker] = useState(false);
+  const [salon, setSalon] = useState(false);
+  const [error, setError] = useState('');
+
+  const literaryAgents = useMemo(() => data.agents.filter((agent) => agent.metadata?.literary), [data.agents]);
+  const agentByAuthorId = useMemo(() => {
+    const map = new Map();
+    for (const agent of literaryAgents) {
+      const authorId = agent.metadata.literary.author_id || String(agent.agent_id).replace(/^auteur_c_[a-z0-9_]*$/, '').replace(/^auteur_/, '');
+      if (authorId && !map.has(authorId)) map.set(authorId, agent);
+    }
+    return map;
+  }, [literaryAgents]);
+
+  useEffect(() => {
+    let alive = true;
+    api.listAuthors('').then((result) => { if (alive) setCatalog(result.authors || []); }).catch((err) => { if (alive) setError(err.message); });
+    return () => { alive = false; };
+  }, []);
+
+  useEffect(() => {
+    (catalog || []).forEach((author) => {
+      if (!author.wikipedia || avatars[author.id] !== undefined) return;
+      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
+    });
+  }, [catalog, avatars]);
+
+  const needle = filter.trim().toLowerCase();
+  const visible = (catalog || []).filter((author) => !needle || [author.name, author.kind, author.era, author.blurb].join(' ').toLowerCase().includes(needle));
+  const catalogAgentId = (author) => agentByAuthorId.get(author.id)?.agent_id || `auteur_${author.id}`;
+
+  function toggleAuthor(author) {
+    const agentId = catalogAgentId(author);
+    setSelection((current) => current.some((entry) => entry.agentId === agentId)
+      ? current.filter((entry) => entry.agentId !== agentId)
+      : [...current, agentByAuthorId.has(author.id) ? { agentId } : { agentId, authorId: author.id }]);
+  }
+  function toggleAgent(agent) {
+    setSelection((current) => current.some((entry) => entry.agentId === agent.agent_id)
+      ? current.filter((entry) => entry.agentId !== agent.agent_id)
+      : [...current, { agentId: agent.agent_id }]);
+  }
+  async function createAgent(author) {
+    setBusyAuthor(author.id); setError('');
+    try { await api.createAuthorAgent(author.id); await refresh(); }
+    catch (err) { setError(err.status === 409 ? `${author.name} dispose déjà d’un agent dans cet espace.` : err.message); }
+    finally { setBusyAuthor(''); }
+  }
+  function onSalonDone(roomId) {
+    setSalon(false); setSelection([]);
+    pendingRoomRef.roomId = roomId;
+    refresh();
+    location.hash = 'overview';
+  }
+
+  return <section className="page">
+    <header className="page-header"><div><p className="context-line">Bibliothèque du domaine public</p><h1>Auteurs</h1><p>Sélectionnez des personnalités du catalogue vérifié, créez leurs agents, puis réunissez-les dans un salon dédié — séparé du processus de décision global.</p></div>
+      <div className="header-actions"><button className="button secondary" onClick={() => setPicker(true)}>Créer / importer un auteur</button><button className="button primary" disabled={!selection.length} onClick={() => setSalon(true)}>Ajouter au salon ({selection.length})</button></div></header>
+    {error && <p className="inline-error" role="alert">{error}</p>}
+    <div className="authors-layout">
+      <section className="authors-main">
+        <input className="so-search" placeholder="Filtrer par nom, époque, sensibilité…" value={filter} onChange={(event) => setFilter(event.target.value)} />
+        {!catalog && <p className="muted">Chargement du catalogue…</p>}
+        <div className="authors-grid">{visible.map((author) => {
+          const agent = agentByAuthorId.get(author.id);
+          const agentId = catalogAgentId(author);
+          const isSelected = selection.some((entry) => entry.agentId === agentId);
+          return <article key={author.id} className={`author-card ${isSelected ? 'is-selected' : ''}`}>
+            <header><img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} /><div><h3>{author.name}</h3><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small></div></header>
+            <p>{author.blurb}</p>
+            <footer>
+              <label className="check"><input type="checkbox" checked={isSelected} onChange={() => toggleAuthor(author)} />Sélectionner</label>
+              {agent ? <span className="author-badge">Agent prêt</span> : <button className="text-button" disabled={busyAuthor === author.id} onClick={() => createAgent(author)}>{busyAuthor === author.id ? 'Création…' : 'Créer l’agent'}</button>}
+            </footer>
+          </article>;
+        })}</div>
+        {catalog && !visible.length && <p className="muted">Aucun auteur ne correspond à ce filtre.</p>}
+      </section>
+      <aside className="authors-aside">
+        <h3 className="so-kicker">Vos agents auteurs ({literaryAgents.length})</h3>
+        {literaryAgents.map((agent) => <article key={agent.agent_id}>
+          {agent.metadata.literary.avatar_url ? <img className="so-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : <span className="so-avatar so-avatar-initials">{(agent.display_name || agent.agent_id).slice(0, 2).toUpperCase()}</span>}
+          <div><strong>{agent.display_name || agent.role_name}</strong><small>{agent.metadata.literary.works_count || 0} œuvre(s) · {agent.enabled === false ? 'inactif' : 'actif'}</small></div>
+          <label className="check"><input type="checkbox" checked={selection.some((entry) => entry.agentId === agent.agent_id)} onChange={() => toggleAgent(agent)} />Salon</label>
+        </article>)}
+        {!literaryAgents.length && <p className="muted so-note">Aucun agent auteur créé pour l’instant — sélectionnez un auteur du catalogue ou passez par « Créer / importer un auteur ».</p>}
+      </aside>
+    </div>
+    {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
+    {salon && <SalonPickerDialog entries={selection} rooms={data.rooms} onClose={() => setSalon(false)} onDone={onSalonDone} />}
+  </section>;
+}
+
 function AgentsPage({ data, refresh }) {
   const [editing, setEditing] = useState(undefined);
   const [authorPicker, setAuthorPicker] = useState(false);
@@ -427,116 +659,66 @@ const SALES_ORACLE_TOOL_URL = '/assets/sales-oracle-tool.js';
 const SALES_ORACLE_USE_CASES = [['rfp', 'Appel d’offres client'], ['comex_decision', 'Décision CODIR'], ['renewal', 'Renouvellement de contrat'], ['negotiation', 'Négociation']];
 const SALES_ORACLE_SOURCE_TYPES = [['rfp', 'RFP / exigences'], ['proposal', 'Proposition / réponse'], ['contract', 'Contrat'], ['security', 'Sécurité'], ['financial', 'Finance / ROI'], ['meeting_notes', 'Notes de réunion'], ['organization', 'Organisation / comité'], ['personality_profile', 'Profil de personnalité autorisé'], ['other', 'Autre preuve']];
 const SALES_ORACLE_STAGES = { hashing: 'empreinte SHA-256 locale', signing: 'autorisation d’upload sécurisée', uploading: 'upload direct chiffré', verifying: 'vérification d’intégrité', queued: 'mise en file d’ingestion' };
+const SALES_ORACLE_CONTEXT_LIMIT = 24000;
+const soUseCaseLabel = (value) => SALES_ORACLE_USE_CASES.find(([id]) => id === value)?.[1] || String(value || '—');
+const soSourceTypeLabel = (value) => SALES_ORACLE_SOURCE_TYPES.find(([id]) => id === value)?.[1] || String(value || 'preuve');
 
-function SalesOraclePage() {
-  const clientRef = useRef(null);
-  const [ready, setReady] = useState(false);
-  const [toolError, setToolError] = useState('');
-  const [cases, setCases] = useState([]);
-  const [currentCase, setCurrentCase] = useState(null);
-  const [documents, setDocuments] = useState([]);
-  const [status, setStatus] = useState({ text: 'Ouverture de l’espace sécurisé…', tone: 'neutral' });
+/** Gestion des dossiers Sales Oracle (création + preuves), intégrée au processus global de la console. */
+function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases, onDocs, onStatus }) {
   const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    let alive = true;
-    import(/* @vite-ignore */ SALES_ORACLE_TOOL_URL).then((mod) => {
-      if (!alive) return;
-      const client = new mod.SalesOracleClient();
-      client.setToken(getToken());
-      clientRef.current = client;
-      setReady(true);
-      setStatus({ text: 'Espace sécurisé connecté avec votre session console.', tone: 'success' });
-      client.listCases().then((result) => setCases(result.cases || [])).catch((error) => setStatus({ text: error.message || 'Chargement des dossiers impossible.', tone: 'error' }));
-    }).catch(() => {
-      if (!alive) return;
-      setToolError('Module Sales Oracle non chargé : il est servi avec le site principal (assets du site).');
-      setStatus({ text: 'Module non disponible dans ce contexte.', tone: 'error' });
-    });
-    return () => { alive = false; };
-  }, []);
-
-  const openCase = async (client, record) => {
-    setCurrentCase(record);
-    if (!record) { setDocuments([]); return; }
-    const result = await client.listDocuments(record.case_id);
-    setDocuments(result.documents || []);
-  };
-
-  const selectCase = async (event) => {
-    const client = clientRef.current; if (!client) return;
-    const record = cases.find((item) => item.case_id === event.target.value) || null;
-    setBusy(true);
-    try { await openCase(client, record); setStatus({ text: record ? `Dossier actif : ${record.name}` : 'Aucun dossier sélectionné.', tone: 'success' }); }
-    catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
-    finally { setBusy(false); }
-  };
-
-  const createCase = async (event) => {
+  async function createCase(event) {
     event.preventDefault();
     const client = clientRef.current; if (!client) return;
     const formElement = event.currentTarget;
     const data = new FormData(formElement);
-    setBusy(true); setStatus({ text: 'Création du dossier gouverné…', tone: 'neutral' });
+    setBusy(true); onStatus({ text: 'Création du dossier gouverné…', tone: 'neutral' });
     try {
       const created = await client.createCase({ name: data.get('name'), use_case: data.get('use_case'), decision_question: data.get('decision_question') });
-      const result = await client.listCases(); setCases(result.cases || []);
-      await openCase(client, created);
+      const result = await client.listCases(); onCases(result.cases || []);
       formElement.reset();
-      setStatus({ text: `Dossier « ${created.name || created.case_id} » créé et actif.`, tone: 'success' });
-    } catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
+      onStatus({ text: `Dossier « ${created.name || created.case_id} » créé — sélectionnez-le ci-dessus pour l’instruire.`, tone: 'success' });
+    } catch (error) { onStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
     finally { setBusy(false); }
-  };
-
-  const upload = async (event) => {
+  }
+  async function upload(event) {
     event.preventDefault();
     const client = clientRef.current; if (!client || !currentCase) return;
     const formElement = event.currentTarget;
     const files = [...formElement.elements.files.files];
-    if (!files.length) { setStatus({ text: 'Sélectionnez au moins un document.', tone: 'error' }); return; }
+    if (!files.length) { onStatus({ text: 'Sélectionnez au moins un document.', tone: 'error' }); return; }
     const sourceType = new FormData(formElement).get('source_type');
     setBusy(true);
     try {
       for (const file of files) {
-        await client.uploadDocument(currentCase.case_id, file, { sourceType, onStage: (stage) => setStatus({ text: `${file.name} · ${SALES_ORACLE_STAGES[stage] || stage}`, tone: 'neutral' }) });
+        await client.uploadDocument(currentCase.case_id, file, { sourceType, onStage: (stage) => onStatus({ text: `${file.name} · ${SALES_ORACLE_STAGES[stage] || stage}`, tone: 'neutral' }) });
       }
       const result = await client.listDocuments(currentCase.case_id);
-      setDocuments(result.documents || []); formElement.reset();
-      setStatus({ text: `${files.length} document(s) vérifié(s) et mis en file d’ingestion.`, tone: 'success' });
-    } catch (error) { setStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
+      onDocs(result.documents || []); formElement.reset();
+      onStatus({ text: `${files.length} document(s) vérifié(s) et mis en file d’ingestion.`, tone: 'success' });
+    } catch (error) { onStatus({ text: error.message || 'Erreur.', tone: 'error' }); }
     finally { setBusy(false); }
-  };
-
-  return <section className="page">
-    <header className="page-header"><div><p className="context-line">Espace client sécurisé</p><h1>Sales Oracle</h1><p>Cadrez le dossier, chargez les preuves : le corpus reste isolé par client et alimente le collectif d’analyse. La session console est réutilisée, aucun second login.</p></div></header>
-    {toolError && <p className="inline-error">{toolError}</p>}
-    <p className={`form-error ${status.tone === 'error' ? '' : 'is-empty'}`} role="status" aria-live="polite">{status.text}</p>
-    <div className="sales-oracle-grid">
-      <section className="so-panel">
-        <h2>Dossier de décision</h2>
-        <label>Dossiers existants<select value={currentCase?.case_id || ''} onChange={selectCase} disabled={!ready || busy}>{cases.length ? <option value="">Sélectionner…</option> : <option value="">Aucun dossier — créez-en un ci-dessous</option>}{cases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {item.status}</option>)}</select></label>
-        <form onSubmit={createCase}>
-          <label>Nom du dossier<input name="name" required maxLength={300} /></label>
-          <label>Simulation<select name="use_case">{SALES_ORACLE_USE_CASES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-          <label>Question de décision<textarea name="decision_question" required maxLength={12000} rows={4} /></label>
-          <button className="button primary" disabled={!ready || busy}>Créer le dossier</button>
-        </form>
-      </section>
-      <section className="so-panel">
-        <h2>Preuves</h2>
-        {currentCase ? <form onSubmit={upload}>
-          <p className="muted">Dossier actif : <strong>{currentCase.name}</strong></p>
-          <label>Rôle du document<select name="source_type">{SALES_ORACLE_SOURCE_TYPES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-          <label>Documents<input name="files" type="file" multiple accept=".pdf,.docx,.txt,.md,.csv" /></label>
-          <button className="button primary" disabled={busy}>Vérifier et uploader</button>
-        </form> : <p className="muted">Sélectionnez ou créez un dossier pour charger les preuves.</p>}
-        <h3 className="so-kicker">Corpus actif</h3>
-        <ul className="so-documents">{documents.length ? documents.map((item) => <li key={item.document_id}><span>{item.original_filename}</span><span className="so-state">{item.status}</span></li>) : <li className="muted">Aucun document dans le corpus actif.</li>}</ul>
-        <p className="muted so-privacy">PDF, DOCX, TXT, Markdown ou CSV · 50 Mo/document · 20 documents/dossier · 250 Mo/dossier. Empreinte SHA-256 calculée localement, envoi par URL signée à durée limitée.</p>
-      </section>
-    </div>
-  </section>;
+  }
+  return <div className="so-manager">
+    <form onSubmit={createCase}>
+      <label>Nom du dossier<input name="name" required maxLength={300} /></label>
+      <label>Simulation<select name="use_case">{SALES_ORACLE_USE_CASES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+      <label>Question de décision<textarea name="decision_question" required maxLength={12000} rows={3} /></label>
+      <button className="button secondary" disabled={!ready || busy}>Créer le dossier</button>
+    </form>
+    <section>
+      <h4 className="so-kicker">Preuves du dossier actif</h4>
+      {currentCase ? <form onSubmit={upload}>
+        <p className="muted so-note">Dossier actif : <strong>{currentCase.name}</strong></p>
+        <label>Rôle du document<select name="source_type">{SALES_ORACLE_SOURCE_TYPES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
+        <label>Documents<input name="files" type="file" multiple accept=".pdf,.docx,.txt,.md,.csv" /></label>
+        <button className="button secondary" disabled={busy}>Vérifier et uploader</button>
+      </form> : <p className="muted so-note">Sélectionnez un dossier pour charger les preuves.</p>}
+      <ul className="so-documents">{documents.length ? documents.map((item) => <li key={item.document_id}><span>{item.original_filename}</span><span className="so-state">{item.status}</span></li>) : <li className="muted">Aucun document dans le corpus actif.</li>}</ul>
+      <p className="muted so-privacy">PDF, DOCX, TXT, Markdown ou CSV · 50 Mo/document · 20 documents/dossier · 250 Mo/dossier. Empreinte SHA-256 calculée localement, envoi par URL signée à durée limitée.</p>
+    </section>
+  </div>;
 }
+
 
 function Console() {
   const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
@@ -551,7 +733,7 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'rooms' && <RoomsPage data={data} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'salesoracle' && <SalesOraclePage />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} openRoom={setRoomPlatform} />}</main>
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'rooms' && <RoomsPage data={data} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'auteurs' && <AuthorsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} openRoom={setRoomPlatform} />}</main>
     {roomPlatform && <CreateRoom agents={data.agents} defaultPlatform={roomPlatform} onClose={() => setRoomPlatform(null)} onCreated={refresh} />}
   </div>;
 }
