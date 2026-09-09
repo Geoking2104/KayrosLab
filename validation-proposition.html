@@ -9,28 +9,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=JetBrains+Mono:wght@500&family=Tomorrow:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-/* KayrosLab simulation-studio tokens · Hallmark custom system */
+/* KayrosLab design tokens · light "enterprise" system
+ * Salesforce-Lightning-inspired palette (blue accent, card surfaces, soft shadows)
+ * + Takram soft-tech execution: rounded cards, gentle shadows, restrained navy headings.
+ * Palette strictly emulated — no official Salesforce assets. */
 :root {
-  --color-paper: oklch(13% 0.018 245);
-  --color-paper-2: oklch(17% 0.022 245);
-  --color-paper-3: oklch(22% 0.024 245);
-  --color-ink: oklch(95% 0.01 225);
-  --color-ink-deep: oklch(99% 0.005 225);
-  --color-ink-2: oklch(78% 0.014 230);
-  --color-muted: oklch(64% 0.014 235);
-  --color-muted-on-dark: oklch(78% 0.014 230);
-  --color-rule: oklch(30% 0.024 245);
-  --color-rule-dark: oklch(37% 0.028 245);
-  --color-accent: oklch(76% 0.14 210);
-  --color-accent-strong: oklch(69% 0.16 215);
-  --color-accent-soft: oklch(24% 0.055 215);
-  --color-accent-ink: oklch(14% 0.025 235);
-  --color-focus: oklch(84% 0.15 210);
-  --color-positive: oklch(74% 0.13 155);
-  --color-positive-soft: oklch(22% 0.045 155);
-  --color-warning: oklch(79% 0.13 78);
-  --color-violet: oklch(61% 0.12 292);
-  --color-danger: oklch(70% 0.17 28);
+  --color-paper: #f3f6fb;
+  --color-paper-2: #ffffff;
+  --color-paper-3: #e9f2fd;
+  --color-ink: #233043;
+  --color-ink-deep: #032d60;
+  --color-ink-2: #46505e;
+  --color-muted: #6b7686;
+  --color-muted-on-dark: #d7e1ec;
+  --color-rule: #e4eaf1;
+  --color-rule-dark: #c7d2de;
+  --color-accent: #0176d3;
+  --color-accent-strong: #0b5cab;
+  --color-accent-soft: #eaf5fe;
+  --color-accent-ink: #ffffff;
+  --color-focus: #0176d3;
+  --color-positive: #2e844a;
+  --color-positive-soft: #e9f7ee;
+  --color-warning: #fe9339;
+  --color-violet: #9050e9;
+  --color-danger: #ea001e;
 
   --font-display: "Tomorrow", ui-sans-serif, sans-serif;
   --font-body: "Geist", ui-sans-serif, sans-serif;
@@ -63,12 +66,15 @@
   --dur-short: 220ms;
   --dur-long: 420ms;
 
-  --radius-sm: 0.6rem;
-  --radius-md: 0.9rem;
-  --radius-lg: 1.25rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.35rem;
   --radius-xl: 1.75rem;
   --radius-pill: 999px;
   --rule-hair: 1px;
+
+  --shadow-soft: 0 1px 2px rgba(12, 45, 96, 0.10);
+  --shadow-card: 0 1px 2px rgba(12, 45, 96, 0.06), 0 10px 30px rgba(12, 45, 96, 0.10);
 }
 
 /* Hallmark · genre: atmospheric · macrostructure: Narrative Workflow · H9 hero: Tier-B hand-SVG, dominant, no loop
@@ -96,7 +102,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: color-mix(in oklch, var(--color-violet) 5%, transparent);
+  background: color-mix(in oklch, var(--color-accent) 5%, transparent);
   clip-path: polygon(54% 0, 100% 0, 100% 48%, 80% 38%);
 }
 a { color: inherit; }
@@ -463,6 +469,43 @@ button, summary { -webkit-tap-highlight-color: transparent; }
 @media (min-width: 40rem) {
   .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-grid label:nth-child(5) { grid-column: 1 / -1; }
+}
+
+/* Narrative Workflow � light enterprise restyle (Salesforce Lightning-inspired; no official assets) */
+h1, h2, h3 { color: var(--color-ink-deep); }
+nav.site-nav { background: var(--color-paper-2); box-shadow: var(--shadow-soft); }
+.site-footer { background: var(--color-paper-2); }
+main .frame {
+  background: var(--color-paper-2);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+}
+main > .section { border-block-start: 0; padding-block: var(--space-xl); }
+main .frame.hero {
+  padding: var(--space-2xl) var(--space-xl);
+  background: linear-gradient(165deg, var(--color-paper-3) 0%, var(--color-paper-2) 62%);
+  border: 1px solid var(--color-rule);
+}
+.hero { min-height: auto; }
+.hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.6rem); line-height: 1.04; letter-spacing: -.04em; }
+.section h2 { font-size: clamp(1.9rem, 3.8vw, 3.2rem); line-height: 1.06; letter-spacing: -.04em; max-width: 22ch; }
+.section { padding-block: var(--space-xl); }
+.workflow { background: transparent; }
+.closing-callout {
+  background: linear-gradient(165deg, var(--color-accent-soft) 0%, var(--color-paper-2) 70%);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+.closing-callout h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: none; line-height: 1.12; }
+.contact-dialog { box-shadow: var(--shadow-card); }
+.contact-dialog::backdrop { background: rgba(16, 36, 66, 0.55); }
+@media (max-width: 47.99rem) {
+  main .frame { padding: var(--space-md); }
+  main .frame.hero { padding: var(--space-lg) var(--space-md); }
+  .closing-callout { padding: var(--space-md); }
 }
 
 
