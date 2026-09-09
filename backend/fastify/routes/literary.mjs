@@ -149,6 +149,33 @@ function agentLite(agent) {
   return { agent_id: agent.agent_id, display_name: agent.display_name, role_name: agent.role_name, department: agent.department, metadata: agent.metadata, enabled: agent.enabled };
 }
 
+const authorWorksCache = new Map();
+const AUTHOR_WORKS_TTL = 10 * 60 * 1000;
+
+/** Œuvres d'un auteur du catalogue : catalogue vérifié + complétion temps réel jusqu'à AUTHOR_TARGET_BOOKS. */
+async function authorWorks(authorId) {
+  const cached = authorWorksCache.get(authorId);
+  if (cached && Date.now() - cached.ts < AUTHOR_WORKS_TTL) return cached.works;
+  const author = findAuthor(authorId);
+  if (!author) return null;
+  const works = author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié', year: '', ingestable: true }));
+  try {
+    const live = await searchAllSources(author.name, { limitPerSource: 12 });
+    const surname = (author.name.split(/[ ,]+/).filter((word) => word.length > 3).pop() || author.name).toLowerCase();
+    for (const group of live.sources) {
+      for (const result of group.results || []) {
+        if (works.length >= AUTHOR_TARGET_BOOKS) break;
+        if (!`${result.title} ${result.author}`.toLowerCase().includes(surname)) continue;
+        if (result.lang && result.lang !== '?' && result.lang !== author.lang) continue;
+        if (works.some((work) => normTitleLite(work.title) === normTitleLite(result.title))) continue;
+        works.push({ title: result.title, url: result.url, author: result.author || author.name, source: group.source, year: result.year || '', ingestable: result.ingestable });
+      }
+    }
+  } catch { /* le catalogue vérifié reste suffisant */ }
+  authorWorksCache.set(authorId, { ts: Date.now(), works });
+  return works;
+}
+
 export default async function literaryRoute(app) {
   // Catalogue public des auteurs du domaine public (consulté depuis la console).
   app.get('/v1/literary/authors', async (req, reply) => {
@@ -166,6 +193,14 @@ export default async function literaryRoute(app) {
       ingestable_formats: ['txt', 'html', 'epub'],
       limits: { books_per_agent_max: MAX_BOOKS_PER_AGENT, books_per_agent_min: MIN_BOOKS_PER_AGENT, rooms_per_user: Number(process.env.KAYROS_MAX_ROOMS_PER_USER || 3), built_agents_per_room: Number(process.env.KAYROS_MAX_BUILT_AGENTS_PER_ROOM || 3) },
     };
+  });
+
+  // Œuvres présélectionnées d'un auteur du catalogue (5 minimum, complétion temps réel)
+  app.get('/v1/literary/authors/:authorId/works', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const works = await authorWorks(req.params.authorId);
+    if (!works) return reply.code(404).send({ error: 'auteur introuvable dans le catalogue du domaine public' });
+    return { author_id: req.params.authorId, works, target: AUTHOR_TARGET_BOOKS };
   });
 
   // Recherche temps réel dans les sources en ligne
@@ -200,6 +235,7 @@ export default async function literaryRoute(app) {
           if (!result.ingestable) continue;
           const hay = `${result.title} ${result.author}`.toLowerCase();
           if (!hay.includes(surname)) continue;
+          if (result.lang && result.lang !== '?' && result.lang !== author.lang) continue;
           if (pool.some((work) => normTitle(work.title) === normTitle(result.title))) continue;
           pool.push({ title: result.title, url: result.url, author: result.author || author.name, source: group.source });
         }
@@ -329,6 +365,7 @@ export default async function literaryRoute(app) {
               if (!result.ingestable || additions.length >= AUTHOR_TARGET_BOOKS - okCount()) continue;
               if (ingestion.manifest.some((work) => normTitleLite(work.title) === normTitleLite(result.title))) continue;
               if (!`${result.title} ${result.author}`.toLowerCase().includes(surname)) continue;
+              if (result.lang && result.lang !== '?' && result.lang !== catalogAuthor.lang) continue;
               additions.push({ title: result.title, url: result.url, author: result.author || catalogAuthor.name, source: group.source });
             }
           }
