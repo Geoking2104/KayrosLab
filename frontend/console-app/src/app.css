@@ -383,3 +383,23 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-manual { display: grid; gap: var(--space-sm); border: 1px dashed var(--color-rule-dark); padding: var(--space-sm); }
 .so-manual label { display: grid; gap: var(--space-3xs); font-size: var(--text-xs); color: var(--color-muted); }
 .so-manual input { min-height: 2.5rem; border: 1px solid var(--color-rule-dark); background: var(--color-paper); color: var(--color-ink); padding-inline: var(--space-2xs); font: inherit; }
+
+/* --- Constructeur d'agent auteur (flux unifie) --- */
+.so-author-selected, .so-books-results, .so-upload, .so-personality, .so-create { border-top: 1px solid var(--color-rule); padding-block-start: var(--space-md); display: grid; gap: var(--space-sm); }
+.so-author-selected { border-top: 0; padding-block-start: 0; }
+.so-author-selected h3, .so-create label { margin: 0; }
+.so-author-selected h3 small { color: var(--color-muted); font-weight: 400; }
+.so-authors-results .so-author { display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; gap: var(--space-sm); align-items: center; }
+.so-avatar { width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; border: 1px solid var(--color-rule); }
+.so-author-meta { display: grid; gap: 2px; min-width: 0; }
+.so-author-meta small { color: var(--color-muted); font-size: var(--text-xs); }
+.so-author-meta p { margin: 0; color: var(--color-ink-2); font-size: var(--text-xs); line-height: 1.45; }
+.so-kicker { margin: 0 0 var(--space-2xs); font-size: var(--text-sm); letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); }
+.so-booklist { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-3xs); }
+.so-booklist li { display: flex; justify-content: space-between; gap: var(--space-sm); align-items: center; border-bottom: 1px solid var(--color-rule); padding-block: var(--space-3xs); font-size: var(--text-sm); }
+.so-book-meta { display: grid; min-width: 0; }
+.so-book-meta small { color: var(--color-muted); font-size: var(--text-xs); }
+.so-upload-form { display: grid; gap: var(--space-2xs); }
+.so-upload-form input { min-height: 2.5rem; border: 1px solid var(--color-rule-dark); background: var(--color-paper); color: var(--color-ink); padding-inline: var(--space-2xs); font: inherit; }
+.so-created { border: 1px dashed var(--color-rule-dark); padding: var(--space-sm); }
+.so-note { font-size: var(--text-xs); }

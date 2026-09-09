@@ -24,7 +24,7 @@ const worksAgentSchema = z.object({
     url: z.string().url().max(1000),
     author: z.string().trim().max(200).optional(),
     source: z.string().trim().max(80).optional(),
-  })).min(1).max(6),
+  })).min(1).max(15),
 }).optional().default({});
 
 const addBooksSchema = z.object({

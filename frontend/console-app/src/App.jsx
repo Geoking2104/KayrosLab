@@ -126,7 +126,19 @@ function DecisionThread({ thread, onChanged }) {
 }
 
 function Overview({ data, refresh, openRoom, onThread }) {
-  const [selectedRoom, setSelectedRoom] = useState(data.rooms[0]?.room_id || null); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(() => {
+    const preselected = pendingRoomRef.roomId;
+    if (preselected && data.rooms.some((room) => room.room_id === preselected)) { pendingRoomRef.roomId = null; return preselected; }
+    return data.rooms[0]?.room_id || null;
+  });
+  useEffect(() => {
+    setSelectedRoom((current) => {
+      if (current && data.rooms.some((room) => room.room_id === current)) return current;
+      const pending = pendingRoomRef.roomId;
+      if (pending && data.rooms.some((room) => room.room_id === pending)) { pendingRoomRef.roomId = null; return pending; }
+      return data.rooms[0]?.room_id || '';
+    });
+  }, [data.rooms]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const room = data.rooms.find((item) => item.room_id === selectedRoom);
   async function run(event) { event.preventDefault(); if (!room) return; setState('loading'); setError(''); try { const result = await api.sendMessage(room.room_id, question); setQuestion(''); setState('success'); onThread(result.thread); await refresh(); } catch (err) { setState('error'); setError(err.message); } }
   return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console des agents</h1><p>Configurez les participants, instruisez la question, puis arbitrez sur preuves.</p></div><button className="button primary" onClick={openRoom}>Rattacher un salon</button></header>
@@ -170,6 +182,8 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
   </section></div>;
 }
 
+const pendingRoomRef = { roomId: null };
+const MAX_PERSONALITY_BOOKS = 15;
 const authorAvatarCache = new Map();
 function fetchAuthorAvatar(wikipedia) {
   if (!authorAvatarCache.has(wikipedia)) {
@@ -182,121 +196,189 @@ function fetchAuthorAvatar(wikipedia) {
 }
 
 function AuthorPickerDialog({ onClose, onCreated }) {
-  const [mode, setMode] = useState('catalogue');
-  const [search, setSearch] = useState('');
-  const [authors, setAuthors] = useState(null);
+  const [query, setQuery] = useState('');
+  const [searchBusy, setSearchBusy] = useState(false);
   const [avatars, setAvatars] = useState({});
-  const [busy, setBusy] = useState('');
-  const [error, setError] = useState('');
-  const [liveQuery, setLiveQuery] = useState('');
+  const [authors, setAuthors] = useState([]);
   const [live, setLive] = useState(null);
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [liveWorks, setLiveWorks] = useState([]);
   const [liveBusy, setLiveBusy] = useState(false);
-  const [selected, setSelected] = useState([]);
+  const [books, setBooks] = useState([]);
   const [name, setName] = useState('');
-  const [creation, setCreation] = useState(null);
+  const [uploadTitle, setUploadTitle] = useState('');
+  const [uploadUrl, setUploadUrl] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState('');
+  const [createdAgents, setCreatedAgents] = useState([]);
+  const [lastCreated, setLastCreated] = useState(null);
+
   useEffect(() => {
+    const q = query.trim();
+    if (q.length < 2) { setAuthors([]); setLive(null); return; }
     let alive = true;
-    api.listAuthors(search).then((result) => { if (alive) setAuthors(result.authors || []); }).catch((err) => { if (alive) setError(err.message); });
-    return () => { alive = false; };
-  }, [search]);
+    const timer = setTimeout(async () => {
+      setSearchBusy(true); setError('');
+      try {
+        const [catalog, sources] = await Promise.all([
+          api.listAuthors(q).then((result) => result.authors || []).catch(() => []),
+          api.searchSources(q).catch(() => ({ sources: [] })),
+        ]);
+        if (!alive) return;
+        setAuthors(catalog);
+        setLive(sources);
+      } catch (err) { if (alive) setError(err.message); }
+      finally { if (alive) setSearchBusy(false); }
+    }, 450);
+    return () => { alive = false; clearTimeout(timer); };
+  }, [query]);
+
   useEffect(() => {
     (authors || []).forEach((author) => {
-      if (avatars[author.id] !== undefined || !author.wikipedia) return;
+      if (!author.wikipedia || avatars[author.id] !== undefined) return;
       fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
     });
   }, [authors, avatars]);
-  async function create(author) {
-    setBusy(author.id); setError('');
-    try {
-      const result = await api.createAuthorAgent(author.id);
-      setCreation({ author, agent: result.agent, ingestion: result.ingestion, policy: result.policy, proposal: result.proposal || null, attributions: [] });
-      await onCreated();
-    }
-    catch (err) { setError(err.message); }
-    finally { setBusy(''); }
+
+  function mergeBooks(incoming) {
+    setBooks((current) => {
+      const merged = [...current];
+      for (const book of incoming) {
+        if (merged.length >= MAX_PERSONALITY_BOOKS) break;
+        if (!merged.some((item) => item.url === book.url)) merged.push(book);
+      }
+      return merged;
+    });
   }
-  async function addManualBooks(event) {
+
+  function addAuthor(author) {
+    setSelectedAuthor(author);
+    if (!name.trim()) setName(author.name);
+    setError('');
+    setLiveWorks([]);
+    mergeBooks(author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié' })));
+    setLiveBusy(true);
+    api.searchSources(author.name).then((result) => {
+      const found = [];
+      for (const group of result.sources || []) {
+        for (const work of group.results || []) {
+          if (!work.ingestable) continue;
+          const surname = author.name.split(/[ ,]+/).pop().toLowerCase();
+          if (!`${work.title} ${work.author}`.toLowerCase().includes(surname)) continue;
+          if (books.some((item) => item.url === work.url)) continue;
+          if (found.some((item) => item.url === work.url)) continue;
+          found.push({ title: work.title, url: work.url, author: work.author || author.name, source: group.source });
+        }
+      }
+      setLiveWorks(found.slice(0, 12));
+    }).catch(() => setLiveWorks([])).finally(() => setLiveBusy(false));
+  }
+
+  function removeBook(url) { setBooks((current) => current.filter((item) => item.url !== url)); }
+
+  function addLiveWork(work) {
+    mergeBooks([{ title: work.title, url: work.url, author: work.author || selectedAuthor?.name || name, source: work.source || 'recherche en ligne' }]);
+  }
+
+  function addUpload(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const title = String(data.get('title') || '').trim();
-    const url = String(data.get('url') || '').trim();
-    if (!title || !url) { setError('Titre et URL requis.'); return; }
-    setBusy('manual'); setError('');
-    try {
-      const result = await api.addManualBooks(creation.agent.agent_id, [{ title, url, author: creation.author?.name || '' }]);
-      setCreation((current) => ({
-        ...current,
-        attributions: [...(current.attributions || []), ...result.results],
-        worksCount: result.works_count,
-        proposal: result.works_count < 3 ? current.proposal : { manual_required: false, message: null },
-      }));
-      event.currentTarget.reset();
-    }
-    catch (err) { setError(err.message); }
-    finally { setBusy(''); }
+    const title = uploadTitle.trim(); const url = uploadUrl.trim();
+    if (!title || !url) { setError('Titre et URL requis pour le livre ajouté.'); return; }
+    setError('');
+    mergeBooks([{ title, url, author: selectedAuthor?.name || name, source: 'ajout manuel' }]);
+    setUploadTitle(''); setUploadUrl('');
   }
-  async function runSearch() {
-    if (liveQuery.trim().length < 2) { setError('Requête trop courte (2 caractères minimum).'); return; }
-    setLiveBusy(true); setError('');
-    try { setLive(await api.searchSources(liveQuery.trim())); }
-    catch (err) { setError(err.message); }
-    finally { setLiveBusy(false); }
-  }
-  function toggleWork(work) {
-    setSelected((current) => current.some((item) => item.url === work.url)
-      ? current.filter((item) => item.url !== work.url)
-      : [...current, { title: work.title, url: work.url, author: work.author || '', source: work.source || '' }].slice(0, 6));
-  }
-  async function createWorks() {
+
+  async function createAgent() {
     if (!name.trim()) { setError('Donnez un nom à votre agent.'); return; }
-    if (!selected.length) { setError('Sélectionnez au moins une œuvre issue de la recherche en ligne.'); return; }
-    setBusy('works'); setError('');
-    try { await api.createWorksAgent({ display_name: name.trim(), works: selected }); await onCreated(); onClose(); }
-    catch (err) { setError(err.message); }
-    finally { setBusy(''); }
+    if (!books.length) { setError('Ajoutez au moins un livre à la personnalité (recherche ou upload).'); return; }
+    setBusy('create'); setError('');
+    try {
+      const result = await api.createWorksAgent({ display_name: name.trim(), works: books.slice(0, MAX_PERSONALITY_BOOKS) });
+      setCreatedAgents((current) => [...current, result.agent]);
+      setLastCreated(result.agent);
+      setBooks([]); setSelectedAuthor(null); setLiveWorks([]); setName('');
+      await onCreated();
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
   }
+
+  async function startConversation() {
+    if (!createdAgents.length) return;
+    setBusy('conversation'); setError('');
+    try {
+      const ids = createdAgents.slice(-3).map((agent) => agent.agent_id);
+      const room = await api.createRoom({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: ids });
+      pendingRoomRef.roomId = room.room.room_id;
+      location.hash = 'overview';
+      onClose();
+      await onCreated();
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+
+  const bookList = (items, removable) => <ul className="so-booklist">{items.map((book) => <li key={book.url}>
+    <div className="so-book-meta"><strong>{book.title}</strong><small>{book.author ? `${book.author} · ` : ''}{book.source || 'livre'}</small></div>
+    {removable ? <button className="text-button" onClick={() => removeBook(book.url)}>retirer</button> : <a className="text-button" href={book.url} target="_blank" rel="noreferrer">source</a>}
+  </li>)}</ul>;
+
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog author-dialog" role="dialog" aria-modal="true">
-    <header><div><h2>Ajouter un auteur du domaine public</h2><p>L’agent est construit sur la somme des œuvres libres choisies — téléchargées en temps réel et intégrées à sa mémoire. Un portrait le représente quand il est disponible.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
-    <div className="so-tabs"><button className={mode === 'catalogue' ? 'button primary' : 'button'} onClick={() => setMode('catalogue')}>Catalogue vérifié</button><button className={mode === 'recherche' ? 'button primary' : 'button'} onClick={() => setMode('recherche')}>Recherche en ligne</button></div>
-    {creation && <section className="so-creation">
-      <h3>{creation.agent.display_name} — {creation.worksCount ?? creation.ingestion?.assigned ?? 0} œuvre(s) intégrée(s)</h3>
-      <p className="muted">Plafond 15 œuvres par agent · plancher 3. Chaque décision (cap, plancher, ajout manuel, attribution) est inscrite au registre d'ingestion.</p>
-      {(creation.attributions || []).length > 0 && <ul className="so-attributions">{creation.attributions.map((entry) => <li key={entry.url}><strong>{entry.work}</strong> — {entry.justification}</li>)}</ul>}
-      {creation.proposal?.manual_required ? <>
-        <p className="form-error">{creation.proposal.message}</p>
-        <form onSubmit={addManualBooks} className="so-manual">
-          <label>Titre du livre<input name="title" required maxLength={240} /></label>
-          <label>URL du texte ou du téléchargement<input name="url" type="url" required maxLength={1000} placeholder="https://… (.txt, .html ou .epub)" /></label>
-          <button className="button primary" disabled={busy === 'manual'}>{busy === 'manual' ? 'Ingestion et attribution…' : 'Ajouter et laisser l’IA attribuer'}</button>
-        </form>
-      </> : null}
-      <button className="button secondary" onClick={onClose}>Terminer</button>
-    </section>}
+    <header><div><h2>Ajouter un agent auteur</h2><p>Cherchez un écrivain ou un philosophe : ses œuvres du domaine public sont téléchargées en temps réel et composent la personnalité de l'agent (plafond {MAX_PERSONALITY_BOOKS} livres, plancher 3 recommandé).</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     {error && <p className="form-error">{error}</p>}
-    {mode === 'catalogue' && <>
-      <input className="so-search" placeholder="Rechercher un écrivain ou un philosophe…" value={search} onChange={(event) => setSearch(event.target.value)} />
-      <div className="so-author-list">{(authors || []).map((author) => <article key={author.id} className="so-author">
+    <input className="so-search" placeholder="Rechercher un écrivain, un philosophe, un livre…" value={query} onChange={(event) => setQuery(event.target.value)} />
+    {searchBusy && <p className="muted so-note">Recherche en cours…</p>}
+
+    {selectedAuthor && <section className="so-author-selected">
+      <h3>Personnalité : {selectedAuthor.name} <small>({selectedAuthor.kind} · {selectedAuthor.era})</small></h3>
+      {liveBusy ? <p className="muted so-note">Recherche des œuvres en ligne pour cet auteur…</p> : null}
+      {liveWorks.length > 0 && <><h4 className="so-kicker">Trouvées en ligne (ajout facultatif)</h4><ul className="so-booklist">{liveWorks.map((work) => <li key={work.url}>
+        <div className="so-book-meta"><strong>{work.title}</strong><small>{work.author ? `${work.author} · ` : ''}{work.source}</small></div>
+        {books.some((item) => item.url === work.url) ? <button className="text-button" onClick={() => removeBook(work.url)}>retirer</button> : <button className="text-button" onClick={() => addLiveWork(work)}>ajouter</button>}
+      </li>)}</ul></>}
+    </section>}
+
+    {(authors || []).length > 0 && <section className="so-authors-results">
+      <h4 className="so-kicker">Auteurs du catalogue vérifié</h4>
+      {authors.map((author) => <article key={author.id} className="so-author">
         <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
         <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small><p>{author.blurb}</p></div>
-        <button className="button primary" disabled={busy === author.id} onClick={() => create(author)}>{busy === author.id ? 'Téléchargement…' : 'Créer l’agent'}</button>
-      </article>)}</div>
-      {authors && !authors.length && <p className="muted">Aucun auteur ne correspond à cette recherche.</p>}
-    </>}
-    {mode === 'recherche' && <>
-      <div className="so-livesearch"><input placeholder="Titre, auteur, thème…" value={liveQuery} onChange={(event) => setLiveQuery(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') runSearch(); }} /><button className="button primary" disabled={liveBusy} onClick={runSearch}>{liveBusy ? 'Recherche…' : 'Chercher'}</button></div>
-      <p className="muted so-note">Sources interrogées en temps réel : Project Gutenberg, NosLivres/efele, Ebooks libres et gratuits, Wikisource (fr/en). Annuaire : {live?.annuaire?.length || '—'} bibliothèques listées.</p>
-      {selected.length > 0 && <div className="so-selected"><strong>Œuvres sélectionnées ({selected.length}/6) :</strong><ul>{selected.map((work) => <li key={work.url}><span>{work.title}</span><button className="text-button" onClick={() => toggleWork(work)}>retirer</button></li>)}</ul></div>}
-      <label>Nom de l’agent<input value={name} onChange={(event) => setName(event.target.value)} maxLength={160} placeholder="Ex. Victor Hugo, ou « Le comité Voltaire »" /></label>
-      <button className="button primary" disabled={busy === 'works' || !selected.length} onClick={createWorks}>{busy === 'works' ? 'Téléchargement et construction…' : `Créer l’agent avec ${selected.length} œuvre(s)`}</button>
-      {(live?.sources || []).map((group) => <section key={group.source} className="so-source">
-        <h3>{group.source} {group.ok ? <small>({group.results.length} résultat(s))</small> : <small className="so-err">indisponible</small>}</h3>
-        {(group.results || []).map((result) => <div key={result.url || result.page} className="so-result">
-          <div className="so-result-meta"><strong>{result.title}</strong><small>{result.author ? `${result.author} · ` : ''}{result.source} · {result.ingestable ? 'texte intégral' : 'adresse de téléchargement'}</small></div>
-          <div className="so-result-actions"><a className="text-button" href={result.page} target="_blank" rel="noreferrer">voir</a><button className="button secondary" onClick={() => toggleWork(result)}>{selected.some((item) => item.url === result.url) ? 'Retirer' : 'Ajouter'}</button></div>
-        </div>)}
-      </section>)}
-      {live && <div className="so-annuaire"><h3>Annuaire de bibliothèques libres</h3><ul>{(live.annuaire || []).map((entry) => <li key={entry.id}><a href={entry.url} target="_blank" rel="noreferrer">{entry.name}</a> — <span className="muted">{entry.note}</span></li>)}</ul></div>}
-    </>}
+        <button className="button secondary" onClick={() => addAuthor(author)}>{selectedAuthor?.id === author.id ? 'Sélectionné' : 'Ajouter l’agent'}</button>
+      </article>)}
+    </section>}
+
+    {(live?.sources || []).some((group) => group.results.length > 0) && query.trim().length >= 2 && !selectedAuthor && <section className="so-books-results">
+      <h4 className="so-kicker">Livres trouvés en ligne</h4>
+      {(live?.sources || []).map((group) => group.results.map((work) => <div key={work.url || work.page} className="so-result">
+        <div className="so-result-meta"><strong>{work.title}</strong><small>{work.author ? `${work.author} · ` : ''}{work.source} · {work.ingestable ? 'texte intégral' : 'adresse de téléchargement'}</small></div>
+        <button className="button secondary" onClick={() => addLiveWork(work)}>Ajouter ce livre</button>
+      </div>))}
+    </section>}
+
+    <section className="so-upload">
+      <h4 className="so-kicker">Ajouter un livre par URL</h4>
+      <form onSubmit={addUpload} className="so-upload-form">
+        <input placeholder="Titre du livre" value={uploadTitle} onChange={(event) => setUploadTitle(event.target.value)} maxLength={240} />
+        <input placeholder="https://… (.txt, .html ou .epub)" value={uploadUrl} onChange={(event) => setUploadUrl(event.target.value)} maxLength={1000} />
+        <button className="button secondary" type="submit">Ajouter ce livre</button>
+      </form>
+    </section>
+
+    {books.length > 0 && <section className="so-personality">
+      <h4 className="so-kicker">Livres de la personnalité ({books.length}/{MAX_PERSONALITY_BOOKS})</h4>
+      {bookList(books, true)}
+    </section>}
+
+    <section className="so-create">
+      <label>Nom de l’agent<input value={name} onChange={(event) => setName(event.target.value)} maxLength={160} placeholder="Ex. Victor Hugo" /></label>
+      <button className="button primary" disabled={busy === 'create' || !books.length} onClick={createAgent}>{busy === 'create' ? 'Téléchargement et construction…' : `Créer l’agent avec ${books.length} livre(s)`}</button>
+      {createdAgents.length > 0 && <div className="so-created">
+        <p className="muted so-note">Agent(s) prêt(s) : {createdAgents.map((agent) => agent.display_name).join(' · ')}</p>
+        <div className="connector-actions">
+          <button className="button primary" disabled={busy === 'conversation'} onClick={startConversation}>{busy === 'conversation' ? 'Ouverture…' : 'Créer une conversation avec ces auteurs'}</button>
+          <button className="button secondary" onClick={onClose}>Fermer</button>
+        </div>
+      </div>}
+    </section>
   </section></div>;
 }
 
