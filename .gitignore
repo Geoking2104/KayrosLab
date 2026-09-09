@@ -20,3 +20,4 @@ __pycache__/
 # Traces d'audit JSONL ecrites par le sink (core/log-sink.mjs).
 logs/
 .tmp-logs/
+backend/fastify/data/

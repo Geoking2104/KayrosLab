@@ -88,7 +88,7 @@ function CreateRoom({ agents, defaultPlatform = 'slack', onClose, onCreated }) {
     <form onSubmit={submit}><div className="form-grid"><label>Nom<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} required /></label>
       <label>Plateforme<select value={form.platform} onChange={(event) => setForm({ ...form, platform: event.target.value })}>{Object.entries(platformNames).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label></div>
       <label>Identifiant du canal<input value={form.external_room_id} onChange={(event) => setForm({ ...form, external_room_id: event.target.value })} placeholder="C012345, channel ID ou conversation ID" required /></label>
-      <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} /><span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
+      <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} />{agent.metadata?.literary?.avatar_url ? <img className="agent-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : null}<span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
       <label>Mode<select value={form.mode} onChange={(event) => setForm({ ...form, mode: event.target.value })}><option value="mention_only">Sur mention</option><option value="always">Tous les messages</option></select></label>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Création…' : 'Rattacher'}</button></footer>
     </form>
@@ -170,12 +170,144 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
   </section></div>;
 }
 
+const authorAvatarCache = new Map();
+function fetchAuthorAvatar(wikipedia) {
+  if (!authorAvatarCache.has(wikipedia)) {
+    authorAvatarCache.set(wikipedia, fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(String(wikipedia).replace(/ /g, '_'))}`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => data?.thumbnail?.source || data?.originalimage?.source || '')
+      .catch(() => ''));
+  }
+  return authorAvatarCache.get(wikipedia);
+}
+
+function AuthorPickerDialog({ onClose, onCreated }) {
+  const [mode, setMode] = useState('catalogue');
+  const [search, setSearch] = useState('');
+  const [authors, setAuthors] = useState(null);
+  const [avatars, setAvatars] = useState({});
+  const [busy, setBusy] = useState('');
+  const [error, setError] = useState('');
+  const [liveQuery, setLiveQuery] = useState('');
+  const [live, setLive] = useState(null);
+  const [liveBusy, setLiveBusy] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const [name, setName] = useState('');
+  const [creation, setCreation] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    api.listAuthors(search).then((result) => { if (alive) setAuthors(result.authors || []); }).catch((err) => { if (alive) setError(err.message); });
+    return () => { alive = false; };
+  }, [search]);
+  useEffect(() => {
+    (authors || []).forEach((author) => {
+      if (avatars[author.id] !== undefined || !author.wikipedia) return;
+      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
+    });
+  }, [authors, avatars]);
+  async function create(author) {
+    setBusy(author.id); setError('');
+    try {
+      const result = await api.createAuthorAgent(author.id);
+      setCreation({ author, agent: result.agent, ingestion: result.ingestion, policy: result.policy, proposal: result.proposal || null, attributions: [] });
+      await onCreated();
+    }
+    catch (err) { setError(err.message); }
+    finally { setBusy(''); }
+  }
+  async function addManualBooks(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const title = String(data.get('title') || '').trim();
+    const url = String(data.get('url') || '').trim();
+    if (!title || !url) { setError('Titre et URL requis.'); return; }
+    setBusy('manual'); setError('');
+    try {
+      const result = await api.addManualBooks(creation.agent.agent_id, [{ title, url, author: creation.author?.name || '' }]);
+      setCreation((current) => ({
+        ...current,
+        attributions: [...(current.attributions || []), ...result.results],
+        worksCount: result.works_count,
+        proposal: result.works_count < 3 ? current.proposal : { manual_required: false, message: null },
+      }));
+      event.currentTarget.reset();
+    }
+    catch (err) { setError(err.message); }
+    finally { setBusy(''); }
+  }
+  async function runSearch() {
+    if (liveQuery.trim().length < 2) { setError('Requête trop courte (2 caractères minimum).'); return; }
+    setLiveBusy(true); setError('');
+    try { setLive(await api.searchSources(liveQuery.trim())); }
+    catch (err) { setError(err.message); }
+    finally { setLiveBusy(false); }
+  }
+  function toggleWork(work) {
+    setSelected((current) => current.some((item) => item.url === work.url)
+      ? current.filter((item) => item.url !== work.url)
+      : [...current, { title: work.title, url: work.url, author: work.author || '', source: work.source || '' }].slice(0, 6));
+  }
+  async function createWorks() {
+    if (!name.trim()) { setError('Donnez un nom à votre agent.'); return; }
+    if (!selected.length) { setError('Sélectionnez au moins une œuvre issue de la recherche en ligne.'); return; }
+    setBusy('works'); setError('');
+    try { await api.createWorksAgent({ display_name: name.trim(), works: selected }); await onCreated(); onClose(); }
+    catch (err) { setError(err.message); }
+    finally { setBusy(''); }
+  }
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog author-dialog" role="dialog" aria-modal="true">
+    <header><div><h2>Ajouter un auteur du domaine public</h2><p>L’agent est construit sur la somme des œuvres libres choisies — téléchargées en temps réel et intégrées à sa mémoire. Un portrait le représente quand il est disponible.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    <div className="so-tabs"><button className={mode === 'catalogue' ? 'button primary' : 'button'} onClick={() => setMode('catalogue')}>Catalogue vérifié</button><button className={mode === 'recherche' ? 'button primary' : 'button'} onClick={() => setMode('recherche')}>Recherche en ligne</button></div>
+    {creation && <section className="so-creation">
+      <h3>{creation.agent.display_name} — {creation.worksCount ?? creation.ingestion?.assigned ?? 0} œuvre(s) intégrée(s)</h3>
+      <p className="muted">Plafond 15 œuvres par agent · plancher 3. Chaque décision (cap, plancher, ajout manuel, attribution) est inscrite au registre d'ingestion.</p>
+      {(creation.attributions || []).length > 0 && <ul className="so-attributions">{creation.attributions.map((entry) => <li key={entry.url}><strong>{entry.work}</strong> — {entry.justification}</li>)}</ul>}
+      {creation.proposal?.manual_required ? <>
+        <p className="form-error">{creation.proposal.message}</p>
+        <form onSubmit={addManualBooks} className="so-manual">
+          <label>Titre du livre<input name="title" required maxLength={240} /></label>
+          <label>URL du texte ou du téléchargement<input name="url" type="url" required maxLength={1000} placeholder="https://… (.txt, .html ou .epub)" /></label>
+          <button className="button primary" disabled={busy === 'manual'}>{busy === 'manual' ? 'Ingestion et attribution…' : 'Ajouter et laisser l’IA attribuer'}</button>
+        </form>
+      </> : null}
+      <button className="button secondary" onClick={onClose}>Terminer</button>
+    </section>}
+    {error && <p className="form-error">{error}</p>}
+    {mode === 'catalogue' && <>
+      <input className="so-search" placeholder="Rechercher un écrivain ou un philosophe…" value={search} onChange={(event) => setSearch(event.target.value)} />
+      <div className="so-author-list">{(authors || []).map((author) => <article key={author.id} className="so-author">
+        <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
+        <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small><p>{author.blurb}</p></div>
+        <button className="button primary" disabled={busy === author.id} onClick={() => create(author)}>{busy === author.id ? 'Téléchargement…' : 'Créer l’agent'}</button>
+      </article>)}</div>
+      {authors && !authors.length && <p className="muted">Aucun auteur ne correspond à cette recherche.</p>}
+    </>}
+    {mode === 'recherche' && <>
+      <div className="so-livesearch"><input placeholder="Titre, auteur, thème…" value={liveQuery} onChange={(event) => setLiveQuery(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') runSearch(); }} /><button className="button primary" disabled={liveBusy} onClick={runSearch}>{liveBusy ? 'Recherche…' : 'Chercher'}</button></div>
+      <p className="muted so-note">Sources interrogées en temps réel : Project Gutenberg, NosLivres/efele, Ebooks libres et gratuits, Wikisource (fr/en). Annuaire : {live?.annuaire?.length || '—'} bibliothèques listées.</p>
+      {selected.length > 0 && <div className="so-selected"><strong>Œuvres sélectionnées ({selected.length}/6) :</strong><ul>{selected.map((work) => <li key={work.url}><span>{work.title}</span><button className="text-button" onClick={() => toggleWork(work)}>retirer</button></li>)}</ul></div>}
+      <label>Nom de l’agent<input value={name} onChange={(event) => setName(event.target.value)} maxLength={160} placeholder="Ex. Victor Hugo, ou « Le comité Voltaire »" /></label>
+      <button className="button primary" disabled={busy === 'works' || !selected.length} onClick={createWorks}>{busy === 'works' ? 'Téléchargement et construction…' : `Créer l’agent avec ${selected.length} œuvre(s)`}</button>
+      {(live?.sources || []).map((group) => <section key={group.source} className="so-source">
+        <h3>{group.source} {group.ok ? <small>({group.results.length} résultat(s))</small> : <small className="so-err">indisponible</small>}</h3>
+        {(group.results || []).map((result) => <div key={result.url || result.page} className="so-result">
+          <div className="so-result-meta"><strong>{result.title}</strong><small>{result.author ? `${result.author} · ` : ''}{result.source} · {result.ingestable ? 'texte intégral' : 'adresse de téléchargement'}</small></div>
+          <div className="so-result-actions"><a className="text-button" href={result.page} target="_blank" rel="noreferrer">voir</a><button className="button secondary" onClick={() => toggleWork(result)}>{selected.some((item) => item.url === result.url) ? 'Retirer' : 'Ajouter'}</button></div>
+        </div>)}
+      </section>)}
+      {live && <div className="so-annuaire"><h3>Annuaire de bibliothèques libres</h3><ul>{(live.annuaire || []).map((entry) => <li key={entry.id}><a href={entry.url} target="_blank" rel="noreferrer">{entry.name}</a> — <span className="muted">{entry.note}</span></li>)}</ul></div>}
+    </>}
+  </section></div>;
+}
+
 function AgentsPage({ data, refresh }) {
   const [editing, setEditing] = useState(undefined);
+  const [authorPicker, setAuthorPicker] = useState(false);
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils et comportement sont inspectables et modifiables.</p></div><button className="button primary" onClick={() => setEditing(null)}>Ajouter un agent</button></header>
-    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils et comportement sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setAuthorPicker(true)}>Ajouter un auteur</button><button className="button primary" onClick={() => setEditing(null)}>Ajouter un agent</button></div></header>
+    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.metadata?.literary?.avatar_url ? <img className="agent-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.metadata?.literary ? 'auteur du domaine public' : agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
     {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
+    {authorPicker && <AuthorPickerDialog onClose={() => setAuthorPicker(false)} onCreated={refresh} />}
   </section>;
 }
 

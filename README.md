@@ -367,13 +367,18 @@ collective answers → humans arbitrate → resume with new evidence.
 |---|---|
 | **Vue d'ensemble** (Overview) | Connection status, live metrics (rooms, active agents, hybrid profiles, pending arbitrations), quick mission launcher |
 | **Salons** (Rooms) | Channels bound to collectives — mode, collective id, latest decision threads |
-| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power, consented Crystal Knows profile import |
+| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power, consented Crystal Knows profile import. Literary personalities from public-domain authors (writers, philosophers) can be added from a curated, source-verified catalog |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
 | **Réglages** (Settings) | Connector secrets encrypted at rest, connectivity tests, Crystal Knows capability state |
 
 The console shares the governed runtime with the API and chat connectors: a decision opened in
 Slack and continued in the console is one thread and one audit trail.
+
+**Version en ligne : 3 salons par utilisateur et 3 agents construits par salon.** Les agents
+d'auteur (personnalités bâties sur la somme des œuvres du domaine public) comptent dans cette
+limite ; les sources intégrées sont Project Gutenberg, NosLivres/efele, Ebooks libres et gratuits,
+Wikisource et l'annuaire Bookatomy.
 
 ---
 
@@ -586,6 +591,7 @@ deployment and limitations.
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
 | **Agent Console** | `GET /v1/console/overview` · agents CRUD + Crystal import · connectors (configure / test) · rooms · threads · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Contact** | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
+| **Auteurs du domaine public** | `GET /v1/literary/authors` · `GET /v1/literary/sources` · `GET /v1/literary/search?q=` — recherche temps réel (Gutenberg, NosLivres/efele, EbooksGratuits, Wikisource) · `POST /v1/literary/authors/:authorId/agent` · `POST /v1/literary/agents` — personnalité d'agent construite depuis la somme des œuvres du domaine public (txt/html/epub) + portrait |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
 | Auth | register / login / logout / me |

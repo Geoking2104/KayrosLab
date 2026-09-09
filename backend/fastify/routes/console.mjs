@@ -34,6 +34,10 @@ const connectorStateSchema = z.object({ enabled: z.boolean() });
 const replySchema = z.object({ text: z.string().min(1).max(12000) });
 const arbitrationSchema = z.object({ action: z.enum(['accept_consensus', 'override_veto', 'reevaluate']), justification: z.string().max(4000).optional(), decision: z.enum(['GO', 'CONDITIONAL_GO']).optional() });
 
+// Limites de la version en ligne (surchargeables par environnement).
+const MAX_ROOMS_PER_USER = Number(process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
+const MAX_BUILT_AGENTS_PER_ROOM = Number(process.env.KAYROS_MAX_BUILT_AGENTS_PER_ROOM || 3);
+
 function agentView(agent) { return { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) }; }
 function manager(me, reply) { if (['comex', 'admin'].includes(me.role)) return true; reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false; }
 async function connections(app, tenantId, rooms) {
@@ -132,7 +136,22 @@ export default async function consoleRoute(app) {
   app.post('/v1/console/rooms', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return; const parsed = roomSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'configuration du salon invalide', issues: parsed.error.issues });
-    try { const room = await app.kayrosContext.hybridGateway.createRoom(parsed.data, { tenantId: me.tenantId, by: me.email }); return reply.code(201).send({ room }); }
+    // Limites de la version en ligne : 3 salons par utilisateur, 3 agents construits par salon.
+    try {
+      const existing = await app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId });
+      if (existing.length >= MAX_ROOMS_PER_USER) {
+        return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_ROOMS_PER_USER} salons maximum par utilisateur.` });
+      }
+      const active = parsed.data.active_agents || [];
+      if (active.length) {
+        const agents = app.kayrosContext.engine.swarm.registry.list({ tenantId: me.tenantId });
+        const built = agents.filter((agent) => active.includes(agent.agent_id) && !!agent.metadata?.literary).length;
+        if (built > MAX_BUILT_AGENTS_PER_ROOM) {
+          return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_BUILT_AGENTS_PER_ROOM} agents construits maximum par salon.` });
+        }
+      }
+      const room = await app.kayrosContext.hybridGateway.createRoom(parsed.data, { tenantId: me.tenantId, by: me.email }); return reply.code(201).send({ room });
+    }
     catch (error) { return reply.code(400).send({ error: error.message }); }
   });
   app.get('/v1/console/activity', async (req, reply) => { const me = await app.requireAuth(req, reply); if (!me) return; return { events: await app.kayrosContext.hybridGateway.activity({ tenantId: me.tenantId, roomId: req.query?.room_id || null, after: req.query?.after || 0, limit: req.query?.limit || 100 }) }; });

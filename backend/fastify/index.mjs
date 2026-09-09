@@ -60,6 +60,7 @@ await app.register((await import('./routes/cycle.mjs')).default);
 await app.register((await import('./routes/memory.mjs')).default);
 await app.register((await import('./routes/demo-report-leads.mjs')).default);
 await app.register((await import('./routes/contact.mjs')).default);
+await app.register((await import('./routes/literary.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);

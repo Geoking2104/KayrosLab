@@ -51,4 +51,10 @@ export const api = {
   thread: (threadId) => request(`/v1/console/threads/${encodeURIComponent(threadId)}`),
   replyThread: (threadId, text) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/messages`, { method: 'POST', body: JSON.stringify({ text }) }),
   arbitrateThread: (threadId, decision) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/arbitrate`, { method: 'POST', body: JSON.stringify(decision) }),
+  listAuthors: (search = '') => request(`/v1/literary/authors${search ? `?search=${encodeURIComponent(search)}` : ''}`),
+  createAuthorAgent: (authorId) => request(`/v1/literary/authors/${encodeURIComponent(authorId)}/agent`, { method: 'POST', body: '{}' }),
+  searchSources: (query) => request(`/v1/literary/search?q=${encodeURIComponent(query)}`),
+  createWorksAgent: (body) => request('/v1/literary/agents', { method: 'POST', body: JSON.stringify(body) }),
+  addManualBooks: (agentId, works) => request(`/v1/literary/agents/${encodeURIComponent(agentId)}/books`, { method: 'POST', body: JSON.stringify({ works }) }),
+  literaryLedger: (limit = 50) => request(`/v1/literary/ledger?limit=${limit}`),
 };
