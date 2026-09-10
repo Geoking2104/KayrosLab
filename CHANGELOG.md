@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.12 (2026-09) — Salon : page Auteurs restaurée
+
+- `#agents` affiche le catalogue (54 fiches, recherche, ajout, configuration).
+- Le script ne plante plus (`esc`, `renderAgents`).
+
 ## v0.25.11 (2026-09) — Salon : grilles nommées
+
 
 - Cercles, fil et convives : `grid-template-areas`.
 - `auto-fit` + `minmax(0, 1fr)` : plus de colonne qui écrase le texte.

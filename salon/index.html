@@ -253,6 +253,14 @@
     .picked { color: var(--ink-2); margin: 0 0 0.5rem; }
     .stream, .people, .msg, .who, .open-form, .form { min-width: 0; }
     .msg p, .cards p, .who span { overflow-wrap: break-word; }
+
+    .lib-head { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: end; }
+    .lib-head h2 { margin: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; min-width: 0; }
+    .filters input, .filters select { min-height: 44px; width: auto; min-width: min(14rem, 100%); }
+    .create-box { display: grid; gap: 0.75rem; max-width: 40rem; padding: 1rem 0; border-top: 1px solid var(--rule); }
+    .create-box[hidden] { display: none !important; }
+    .create-note { margin: 0; color: var(--ink-2); max-width: 52ch; }
     @media (max-width: 719px) {
       header.mast { align-items: flex-start; }
       footer p { font-size: 1.15rem; max-width: none; }
@@ -288,6 +296,12 @@
   </header>
 
   <main>
+    <p class="views" role="tablist">
+      <button type="button" class="is-on" data-pane="cercle" data-i18n="nav.circles">Cercles</button>
+      <button type="button" data-pane="agents" data-i18n="nav.agents">Auteurs</button>
+    </p>
+
+    <div id="cercle" class="pane">
     <section>
       <p class="kicker" data-i18n="hero.kicker">Cercles littéraires et philosophiques</p>
       <h1 data-i18n="hero.title">Ils prennent la peau d’un livre.</h1>
@@ -296,11 +310,6 @@
       </p>
       <p class="lead" data-i18n="circle.how">
         Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.
-      </p>
-      <p class="views" role="tablist">
-        <button type="button" class="is-on" data-pane="cercle" data-i18n="circles">Cercles</button>
-        <button type="button" data-pane="fiche" data-i18n="fiche.of" data-i18n-name="Voltaire">Fiche Voltaire</button>
-        <button type="button" data-pane="agents" data-i18n="nav.agents">Auteurs</button>
       </p>
     </section>
 
@@ -323,7 +332,7 @@
       </form>
     </section>
 
-    <div id="cercle" class="pane channel">
+    <div class="channel">
       <aside class="rail" data-i18n-aria="circles" aria-label="Cercles">
         <p class="kicker" data-i18n="circles">Cercles</p>
         <ul class="channels">
@@ -446,8 +455,10 @@
       </aside>
     </div>
 
+    </div>
+
     <div id="fiche" class="pane" hidden>
-      <p><a href="#cercle" data-pane="cercle" data-i18n="back.agents">← Auteurs</a></p>
+      <p><a href="#agents" data-pane="agents" data-i18n="back.agents">← Auteurs</a></p>
       <header class="fiche-head">
         <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="88" height="88" /></span>
         <div>
@@ -504,7 +515,38 @@
       <p><button class="btn ghost" type="button" data-i18n="reset">Revenir au catalogue</button></p>
     </div>
 
-    <ul id="agents" class="pane cards" hidden></ul>
+    <div id="agents" class="pane" hidden>
+      <section>
+        <p class="kicker" data-i18n="agents.kicker">Auteurs</p>
+        <h1 data-i18n="agents.h1">Configurer la personnalité.</h1>
+        <p class="lead" data-i18n="agents.lead">Le catalogue donne les livres. Ici vous réglez le convive : son @, sa mémoire, sa méthode et une instruction de table.</p>
+        <p>
+          <button class="btn" type="button" id="add-author" data-i18n="create.add">Ajouter un auteur</button>
+        </p>
+        <form class="create-box" id="create-author" hidden>
+          <h2 data-i18n="create.title">Nouvel auteur</h2>
+          <label><span data-i18n="create.name">Nom</span><input name="name" required maxlength="80" /></label>
+          <label><span data-i18n="handle">Identifiant @</span><input name="handle" required maxlength="24" spellcheck="false" /></label>
+          <label><span data-i18n="create.era">Époque</span><input name="era" maxlength="80" /></label>
+          <label><span data-i18n="blurb">Résumé de personnalité</span><textarea name="blurb" maxlength="400"></textarea></label>
+          <p class="create-note" data-i18n="create.needFive">Cinq œuvres libres au moins — sinon la profondeur de personnalité sera trop faible.</p>
+          <div class="row">
+            <button class="btn" type="submit" data-i18n="create.save">Convier</button>
+            <button class="btn ghost" type="button" id="create-cancel" data-i18n="create.cancel">Annuler</button>
+          </div>
+        </form>
+      </section>
+      <div class="lib-head">
+        <h2 data-i18n="agents.fiches">Les auteurs</h2>
+        <div class="filters">
+          <input id="agent-q" type="search" data-i18n-placeholder="agents.searchShort" placeholder="Chercher un auteur…" />
+          <select id="agent-kind" aria-label="Genre">
+            <option value="" data-i18n="agents.all">Tous</option>
+          </select>
+        </div>
+      </div>
+      <ul id="agent-list" class="cards"></ul>
+    </div>
   </main>
 
   <footer>
@@ -573,6 +615,19 @@
         "reset": "Revenir au catalogue",
         "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
 
+        "agents.kicker": "Auteurs",
+        "agents.h1": "Configurer la personnalité.",
+        "agents.lead": "Le catalogue donne les livres. Ici vous réglez le convive : son @, sa mémoire, sa méthode et une instruction de table.",
+        "create.add": "Ajouter un auteur",
+        "create.title": "Nouvel auteur",
+        "create.name": "Nom",
+        "create.era": "Époque",
+        "create.needFive": "Cinq œuvres libres au moins — sinon la profondeur de personnalité sera trop faible.",
+        "create.save": "Convier",
+        "create.cancel": "Annuler",
+        "agents.searchShort": "Chercher un auteur…",
+        "agents.all": "Tous",
+        "agents.configure": "Configurer",
         "kind.dramaturge": "Dramaturge",
         "kind.poète": "Poète",
         "kind.savant": "Savant",
@@ -642,6 +697,19 @@
         "reset": "Revert to catalogue",
         "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
 
+        "agents.kicker": "Authors",
+        "agents.h1": "Configure the personality.",
+        "agents.lead": "The catalogue supplies the books. Here you set the guest: their @, their memory, their method, and a table instruction.",
+        "create.add": "Add an author",
+        "create.title": "New author",
+        "create.name": "Name",
+        "create.era": "Era",
+        "create.needFive": "At least five public-domain works — otherwise the personality will be too thin.",
+        "create.save": "Invite",
+        "create.cancel": "Cancel",
+        "agents.searchShort": "Search for an author…",
+        "agents.all": "All",
+        "agents.configure": "Configure",
         "kind.dramaturge": "Playwright",
         "kind.poète": "Poet",
         "kind.savant": "Scholar",
@@ -688,6 +756,9 @@
       document.querySelectorAll("[data-i18n-value]").forEach((el) => {
         el.value = msg(el.getAttribute("data-i18n-value"));
       });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        el.setAttribute("placeholder", msg(el.getAttribute("data-i18n-placeholder")));
+      });
       if (typeof renderGuests === "function") renderGuests();
       if (typeof renderAgents === "function") renderAgents();
       renderCount();
@@ -696,12 +767,14 @@
     const seeded = new Set(["voltaire", "rousseau", "montaigne"]);
     const pick = document.getElementById("guest-pick");
     const count = document.getElementById("guest-count");
-    const agentsEl = document.getElementById("agents");
+    const agentsPane = document.getElementById("agents");
     function selectedIds() {
       return [...pick.querySelectorAll("input:checked")].map((el) => el.value);
     }
     function esc(s) {
-      return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" }[c]));
+      const n = document.createElement("span");
+      n.textContent = s == null ? "" : String(s);
+      return n.innerHTML;
     }
     function authorName(a) { return locale === "en" ? a.nameEn : a.name; }
     function authorBlurb(a) { return locale === "en" ? a.blurbEn : a.blurb; }
@@ -711,19 +784,73 @@
       return `<span class="avatar ${cls||""}">${esc(a.monogram)}</span>`;
     }
     function renderGuests() {
+      if (!pick) return;
       const chosen = new Set(selectedIds().length ? selectedIds() : [...seeded]);
-      }
+      pick.innerHTML = authors.map((author) =>
+        "<li><label title=\"" + esc(authorName(author)) + "\"><input type=\"checkbox\" value=\"" + esc(author.id) + "\"" +
+        (chosen.has(author.id) ? " checked" : "") + " /><span>" + esc(authorName(author)) + "</span></label></li>"
+      ).join("");
+    }
+    function filteredAuthors() {
+      const qEl = document.getElementById("agent-q");
+      const kEl = document.getElementById("agent-kind");
+      const q = (qEl && qEl.value ? qEl.value : "").trim().toLowerCase();
+      const kind = kEl && kEl.value ? kEl.value : "";
+      return authors.filter((a) => {
+        if (kind && a.kind !== kind) return false;
+        if (!q) return true;
+        return [a.name, a.nameEn, a.id, a.blurb, a.blurbEn].concat(a.works || []).join(" ").toLowerCase().indexOf(q) >= 0;
+      });
+    }
     function renderAgents() {
-      agentsEl.innerHTML = `<li class="agents-head" style="border:0;padding:0;grid-column:1/-1"><h2>${esc(msg("agents.fiches"))}</h2></li>` +
-        authors.map((a) => `
-          <li>
-            <a class="card" href="#fiche" data-pane="fiche" data-author="${esc(a.id)}">
-              ${avatarHtml(a, "big")}
-              <span><strong>${esc(authorName(a))}</strong><small>@${esc(a.id)} · ${esc(msg("kind." + a.kind))} · ${esc(msg("method." + a.method))}</small></span>
-            </a>
-            <p>${esc(authorBlurb(a))}</p>
-            <ol class="books">${a.works.map((w) => `<li>${esc(w)}</li>`).join("")}</ol>
-          </li>`).join("");
+      const list = document.getElementById("agent-list");
+      const kindSel = document.getElementById("agent-kind");
+      if (kindSel && kindSel.options.length <= 1) {
+        const seen = {};
+        authors.forEach((a) => {
+          if (seen[a.kind]) return;
+          seen[a.kind] = true;
+          const opt = document.createElement("option");
+          opt.value = a.kind;
+          opt.textContent = msg("kind." + a.kind);
+          kindSel.appendChild(opt);
+        });
+      }
+      if (!list) return;
+      list.innerHTML = filteredAuthors().map((a) =>
+        "<li>" +
+          "<a class=\"card\" href=\"#fiche\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
+            avatarHtml(a, "big") +
+            "<span><strong>" + esc(authorName(a)) + "</strong><small>@" + esc(a.id) + " · " +
+            esc(msg("kind." + a.kind)) + " · " + esc(msg("method." + a.method)) + "</small></span>" +
+          "</a>" +
+          "<p>" + esc(authorBlurb(a)) + "</p>" +
+          "<ol class=\"books\">" + (a.works || []).map((w) => "<li>" + esc(w) + "</li>").join("") + "</ol>" +
+          "<p><button class=\"btn ghost\" type=\"button\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
+            esc(msg("agents.configure")) + "</button></p>" +
+        "</li>"
+      ).join("");
+    }
+    function fillFiche(id) {
+      const a = authors.find((x) => x.id === id) || authors.find((x) => x.id === "voltaire");
+      if (!a) return;
+      const root = document.getElementById("fiche");
+      const img = root.querySelector(".fiche-head img");
+      if (img) img.src = a.avatar || "";
+      const h1 = root.querySelector(".fiche-head h1");
+      if (h1) h1.textContent = authorName(a);
+      const era = root.querySelector(".fiche-head .kicker");
+      if (era) era.textContent = msg("kind." + a.kind) + " · " + authorEra(a);
+      const handle = root.querySelector(".form input[spellcheck]");
+      if (handle) handle.value = a.id;
+      const blurb = root.querySelector(".form textarea");
+      if (blurb) blurb.value = authorBlurb(a);
+      const works = root.querySelector(".works");
+      if (works) {
+        works.innerHTML = (a.works || []).map((w) =>
+          "<li><label><input type=\"checkbox\" checked /> " + esc(w) + "</label></li>"
+        ).join("");
+      }
     }
     function renderCount() {
       const n = selectedIds().length;
@@ -760,12 +887,6 @@
       if (location.hash === "#fiche") return "fiche";
       return "cercle";
     }
-    function show(name) {
-      Object.entries(panes).forEach(([key, el]) => { el.hidden = key !== name; });
-      views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
-      const hash = name === "cercle" ? "" : "#" + name;
-      if (location.hash !== hash) history.replaceState(null, "", (location.pathname.replace(/\/agents\/?$/, "/") || "/salon/") + location.search + hash);
-    }
     views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
     document.addEventListener("click", (e) => {
       const el = e.target.closest("[data-pane]");
@@ -773,6 +894,56 @@
       const name = el.getAttribute("data-pane");
       if (name && panes[name]) { e.preventDefault(); show(name); }
     });
+    function show(name) {
+      Object.entries(panes).forEach(([key, el]) => { if (el) el.hidden = key !== name; });
+      views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
+      const hash = name === "cercle" ? "" : "#" + name;
+      if (location.hash !== hash) {
+        history.replaceState(null, "", "/salon/" + location.search + hash);
+      }
+    }
+    document.getElementById("agent-q")?.addEventListener("input", renderAgents);
+    document.getElementById("agent-kind")?.addEventListener("change", renderAgents);
+    document.getElementById("add-author")?.addEventListener("click", () => {
+      const box = document.getElementById("create-author");
+      box.hidden = !box.hidden;
+    });
+    document.getElementById("create-cancel")?.addEventListener("click", () => {
+      document.getElementById("create-author").hidden = true;
+    });
+    document.getElementById("create-author")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(e.currentTarget);
+      const name = String(data.get("name") || "").trim();
+      const handle = String(data.get("handle") || "").trim().toLowerCase().replace(/[^a-z0-9_]/g, "");
+      if (!name || !handle) return;
+      authors.push({
+        id: handle,
+        name,
+        nameEn: name,
+        kind: "écrivain",
+        blurb: String(data.get("blurb") || ""),
+        blurbEn: String(data.get("blurb") || ""),
+        era: String(data.get("era") || "—"),
+        eraEn: String(data.get("era") || "—"),
+        avatar: "",
+        monogram: name.slice(0, 1).toUpperCase(),
+        method: "auto",
+        works: [],
+      });
+      e.currentTarget.reset();
+      e.currentTarget.hidden = true;
+      renderGuests();
+      renderAgents();
+      fillFiche(handle);
+      show("fiche");
+    });
+    document.addEventListener("click", (e) => {
+      const el = e.target.closest("[data-author]");
+      if (el) fillFiche(el.getAttribute("data-author"));
+    });
+    renderGuests();
+    renderAgents();
     show(paneFromLocation());
     window.addEventListener("hashchange", () => show(paneFromLocation()));
     const draft = document.getElementById("draft");

@@ -56,7 +56,9 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.match(page, /\/salon\/agents\//);
     assert.match(page, /"circle\.lumieres": "Enlightenment"/);
     assert.match(page, /"nameEn": "Aristotle"/);
-    assert.match(page, /function renderAgents/);
+    assert.match(page, /id="agent-list"/);
+    assert.match(page, /"agents\.h1": "Configure the personality."/);
+    assert.match(page, /id="add-author"/);
     assert.equal((page.match(/"nameEn":/g) || []).length, 54);
     assert.doesNotMatch(page, /Les \{n\} fiches|28 fiches/);
   }
