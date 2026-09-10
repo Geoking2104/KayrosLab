@@ -156,15 +156,26 @@
     }
     .suggest span { color: var(--ink-2); }
 
-    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
-    .cards li { display: grid; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
-    .cards li.is-on { border-top-color: var(--accent); }
+    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr)); border-top: 1px solid var(--rule); }
+    .cards li { min-width: 0; border-bottom: 1px solid var(--rule); }
+    .cards li.is-on { border-top: 1px solid var(--accent); }
     .cards a.card {
-      display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.75rem; align-items: center; color: inherit; min-height: 44px;
+      display: grid;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      grid-template-areas: "av body";
+      gap: 0.65rem 0.9rem;
+      align-items: start;
+      padding: 0.9rem 0.75rem 0.9rem 0;
+      color: inherit;
+      min-height: 44px;
     }
-    .cards .big { width: 4.5rem; height: 4.5rem; }
-    .cards small { display: block; color: var(--muted); font-size: 0.78rem; }
-    .cards p { margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.45; }
+    .cards .big { grid-area: av; width: 3.5rem; height: 3.5rem; }
+    .cards .card-body { grid-area: body; display: grid; gap: 0.2rem; min-width: 0; }
+    .cards strong { font-family: var(--display); font-size: 1.15rem; font-weight: 550; letter-spacing: -0.02em; }
+    .cards small { display: block; color: var(--muted); font-size: 0.78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cards p { margin: 0; color: var(--ink-2); font-size: 0.9rem; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .cards .n-works { color: var(--muted); font-size: 0.78rem; }
 
     .fiche-head { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1.5rem; align-items: center; }
     .fiche-head .avatar { width: 5.5rem; height: 5.5rem; }
@@ -537,7 +548,7 @@
         </form>
       </section>
       <div class="lib-head">
-        <h2 data-i18n="agents.fiches">Les auteurs</h2>
+        <h2><span data-i18n="agents.fiches">Les auteurs</span> <small id="agent-n" class="n-works"></small></h2>
         <div class="filters">
           <input id="agent-q" type="search" data-i18n-placeholder="agents.searchShort" placeholder="Chercher un auteur…" />
           <select id="agent-kind" aria-label="Genre">
@@ -611,6 +622,8 @@
         "books.kept": "{n} retenus",
         "books.ok": " — cinq ou plus, rendu déterministe.",
         "works.count": "{n} œuvres",
+        "works.count.one": "1 œuvre",
+        "agents.missing": "Auteur introuvable",
         "passages": "@{handle} · {n} passages en mémoire",
         "reset": "Revenir au catalogue",
         "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
@@ -693,6 +706,8 @@
         "books.kept": "{n} kept",
         "books.ok": " — five or more, a deterministic voice.",
         "works.count": "{n} works",
+        "works.count.one": "1 work",
+        "agents.missing": "Author not found",
         "passages": "@{handle} · {n} passages in memory",
         "reset": "Revert to catalogue",
         "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
@@ -780,8 +795,10 @@
     function authorBlurb(a) { return locale === "en" ? a.blurbEn : a.blurb; }
     function authorEra(a) { return locale === "en" ? a.eraEn : a.era; }
     function avatarHtml(a, cls) {
-      if (a.avatar) return `<span class="avatar ${cls||""}"><img src="${esc(a.avatar)}" alt="" /></span>`;
-      return `<span class="avatar ${cls||""}">${esc(a.monogram)}</span>`;
+      if (a.avatar) {
+        return "<span class=\"avatar " + (cls || "") + "\"><img src=\"" + esc(a.avatar) + "\" alt=\"\" width=\"56\" height=\"56\" loading=\"lazy\" decoding=\"async\" /></span>";
+      }
+      return "<span class=\"avatar " + (cls || "") + "\">" + esc(a.monogram) + "</span>";
     }
     function renderGuests() {
       if (!pick) return;
@@ -796,40 +813,62 @@
       const kEl = document.getElementById("agent-kind");
       const q = (qEl && qEl.value ? qEl.value : "").trim().toLowerCase();
       const kind = kEl && kEl.value ? kEl.value : "";
-      return authors.filter((a) => {
+      const list = authors.filter((a) => {
         if (kind && a.kind !== kind) return false;
         if (!q) return true;
         return [a.name, a.nameEn, a.id, a.blurb, a.blurbEn].concat(a.works || []).join(" ").toLowerCase().indexOf(q) >= 0;
       });
+      list.sort((a, b) => authorName(a).localeCompare(authorName(b), locale, { sensitivity: "base" }));
+      return list;
     }
+    let kindsReady = false;
     function renderAgents() {
       const list = document.getElementById("agent-list");
       const kindSel = document.getElementById("agent-kind");
-      if (kindSel && kindSel.options.length <= 1) {
+      if (kindSel && !kindsReady) {
         const seen = {};
         authors.forEach((a) => {
           if (seen[a.kind]) return;
           seen[a.kind] = true;
           const opt = document.createElement("option");
           opt.value = a.kind;
+          opt.setAttribute("data-kind", a.kind);
           opt.textContent = msg("kind." + a.kind);
           kindSel.appendChild(opt);
         });
+        kindsReady = true;
+      } else if (kindSel) {
+        kindSel.querySelectorAll("option[data-kind]").forEach((opt) => {
+          opt.textContent = msg("kind." + opt.getAttribute("data-kind"));
+        });
       }
       if (!list) return;
-      list.innerHTML = filteredAuthors().map((a) =>
-        "<li>" +
-          "<a class=\"card\" href=\"#fiche\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
-            avatarHtml(a, "big") +
-            "<span><strong>" + esc(authorName(a)) + "</strong><small>@" + esc(a.id) + " · " +
-            esc(msg("kind." + a.kind)) + " · " + esc(msg("method." + a.method)) + "</small></span>" +
-          "</a>" +
-          "<p>" + esc(authorBlurb(a)) + "</p>" +
-          "<ol class=\"books\">" + (a.works || []).map((w) => "<li>" + esc(w) + "</li>").join("") + "</ol>" +
-          "<p><button class=\"btn ghost\" type=\"button\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
-            esc(msg("agents.configure")) + "</button></p>" +
-        "</li>"
-      ).join("");
+      const rows = filteredAuthors();
+      const nEl = document.getElementById("agent-n");
+      if (nEl) nEl.textContent = String(rows.length);
+      if (!rows.length) {
+        list.innerHTML = "<li class=\"empty\"><p>" + esc(msg("agents.missing")) + "</p></li>";
+        return;
+      }
+      const html = [];
+      for (let i = 0; i < rows.length; i++) {
+        const a = rows[i];
+        const n = (a.works || []).length;
+        html.push(
+          "<li>" +
+            "<a class=\"card\" href=\"#fiche\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
+              avatarHtml(a, "big") +
+              "<span class=\"card-body\">" +
+                "<strong>" + esc(authorName(a)) + "</strong>" +
+                "<small>@" + esc(a.id) + " · " + esc(msg("kind." + a.kind)) + " · " + esc(authorEra(a)) + "</small>" +
+                "<p>" + esc(authorBlurb(a)) + "</p>" +
+                "<span class=\"n-works\">" + esc(n === 1 ? msg("works.count.one") : msg("works.count", { n: n })) + "</span>" +
+              "</span>" +
+            "</a>" +
+          "</li>"
+        );
+      }
+      list.innerHTML = html.join("");
     }
     function fillFiche(id) {
       const a = authors.find((x) => x.id === id) || authors.find((x) => x.id === "voltaire");
@@ -902,7 +941,10 @@
         history.replaceState(null, "", "/salon/" + location.search + hash);
       }
     }
-    document.getElementById("agent-q")?.addEventListener("input", renderAgents);
+    document.getElementById("agent-q")?.addEventListener("input", () => {
+      clearTimeout(window.__salonQ);
+      window.__salonQ = setTimeout(renderAgents, 120);
+    });
     document.getElementById("agent-kind")?.addEventListener("change", renderAgents);
     document.getElementById("add-author")?.addEventListener("click", () => {
       const box = document.getElementById("create-author");

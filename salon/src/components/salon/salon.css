@@ -283,62 +283,76 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--space-lg);
-  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
-}
-
-.salon-authors li {
-  display: grid;
-  gap: var(--space-sm);
-  padding-top: var(--space-sm);
+  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
   border-top: 1px solid var(--rule);
 }
 
-.salon-authors button {
+.salon-authors li {
+  min-width: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.salon-authors a {
   display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  gap: var(--space-sm);
-  align-items: center;
-  text-align: left;
-  background: none;
-  border: 0;
-  padding: 0;
-  min-height: 44px;
-  font: inherit;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 0.65rem 0.9rem;
+  align-items: start;
+  padding: 0.9rem 0.75rem 0.9rem 0;
+  text-decoration: none;
   color: inherit;
-  cursor: pointer;
+  min-height: 44px;
+}
+
+.salon-card-body {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.salon-authors strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 550;
+  letter-spacing: -0.02em;
 }
 
 .salon-authors small {
   display: block;
   color: var(--muted);
   font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .salon-authors p {
   margin: 0;
   color: var(--ink-2);
-  font-size: 0.92rem;
-  line-height: 1.45;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.salon-authors ol,
-.salon-books {
-  margin: 0;
-  padding-left: 1.1rem;
+.salon-n-works {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
 }
 
 .salon-authors li.is-on {
-  border-top-color: var(--accent);
+  box-shadow: inset 0 1px 0 var(--accent);
 }
+
+.salon-authors .salon-avatar { width: 3.5rem; height: 3.5rem; }
 
 .salon-avatar {
   display: grid;
   place-items: center;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   overflow: hidden;
   border-radius: 50%;
   background: var(--paper-2);
@@ -709,16 +723,6 @@
 }
 button:not(:disabled),
 [role="button"]:not(:disabled) { cursor: pointer; }
-
-.salon-authors a {
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  gap: var(--space-sm);
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  min-height: 44px;
-}
 
 .salon-fiche-head {
   display: grid;

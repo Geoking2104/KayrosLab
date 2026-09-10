@@ -11,7 +11,7 @@ test('Salon HTML : viewport, grilles fluides, breakpoints', async () => {
     assert.match(page, /viewport-fit=cover/);
     assert.match(page, /--pad-x: clamp/);
     assert.match(page, /safe-area-inset-left/);
-    assert.match(page, /repeat\(auto-fit, minmax\(min\(16rem, 100%\), 1fr\)\)/);
+    assert.match(page, /repeat\(auto-fill, minmax\(min\(22rem, 100%\), 1fr\)\)/);
     assert.match(page, /repeat\(auto-fit, minmax\(min\(14rem, 100%\), 1fr\)\)/);
     assert.match(page, /grid-template-areas: "channels stream people"/);
     assert.match(page, /grid-template-areas: "n title" "n status"/);

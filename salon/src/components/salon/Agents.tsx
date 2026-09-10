@@ -62,24 +62,24 @@ export function Agents() {
                 <Link to="/salon/agents/$authorId" params={{ authorId: author.id }}>
                   <span className="salon-avatar" data-kind={author.kind}>
                     {author.avatar ? (
-                      <img src={author.avatar} alt="" width={72} height={72} />
+                      <img src={author.avatar} alt="" width={56} height={56} loading="lazy" decoding="async" />
                     ) : (
                       <em>{author.monogram}</em>
                     )}
                   </span>
-                  <span>
+                  <span className="salon-card-body">
                     <strong>{copy.name}</strong>
                     <small>
-                      @{resolved.handle} · {t(`kind.${author.kind}` as MsgKey)} · {t(`method.${resolved.method}`)}
+                      @{resolved.handle} · {t(`kind.${author.kind}` as MsgKey)} · {copy.era}
                     </small>
+                    <p>{copy.blurb}</p>
+                    <span className="salon-n-works">
+                      {resolved.works.length === 1
+                        ? t("works.count.one")
+                        : t("works.count", { n: resolved.works.length })}
+                    </span>
                   </span>
                 </Link>
-                <p>{locale === "en" && author.blurbEn ? author.blurbEn : resolved.blurb}</p>
-                <ol>
-                  {resolved.works.slice(0, 5).map((work) => (
-                    <li key={work.url}>{work.title}</li>
-                  ))}
-                </ol>
               </li>
             );
           })}

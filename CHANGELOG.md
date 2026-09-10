@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.13 (2026-09) — Salon : fiches auteurs plus légères
+
+- Catalogue : portrait, nom, @, ère, blurb (2 lignes), nombre d’œuvres.
+- Plus de liste d’ouvrages ni bouton redondant. Images `lazy`, recherche 120 ms.
+
 ## v0.25.12 (2026-09) — Salon : page Auteurs restaurée
+
 
 - `#agents` affiche le catalogue (54 fiches, recherche, ajout, configuration).
 - Le script ne plante plus (`esc`, `renderAgents`).
