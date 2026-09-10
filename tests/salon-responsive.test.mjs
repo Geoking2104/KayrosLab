@@ -12,7 +12,9 @@ test('Salon HTML : viewport, grilles fluides, breakpoints', async () => {
     assert.match(page, /--pad-x: clamp/);
     assert.match(page, /safe-area-inset-left/);
     assert.match(page, /minmax\(min\(16rem, 100%\), 1fr\)/);
-    assert.match(page, /minmax\(min\(13rem, 100%\), 1fr\)/);
+    assert.match(page, /minmax\(min\(16\.5rem, 100%\), 1fr\)/);
+    assert.match(page, /guest-pick input\[type="checkbox"\]/);
+    assert.match(page, /white-space: nowrap/);
     assert.match(page, /@media \(max-width: 719px\)/);
     assert.match(page, /@media \(max-width: 479px\)/);
     assert.match(page, /@media \(min-width: 1100px\)/);

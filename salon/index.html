@@ -164,21 +164,52 @@
     .lang { display: inline-flex; gap: 0.35rem; align-items: center; }
     .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
     .lang button.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
-    .open-form { display: grid; gap: 1rem; max-width: 42rem; }
-    .open-form label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
-    .open-form input, .open-form textarea {
+    .open-form { display: grid; gap: 1rem; max-width: min(56rem, 100%); }
+    .open-form > label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
+    .open-form > label input,
+    .open-form > label textarea {
       min-height: 44px; border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink);
-      padding: 0.5rem 0.75rem; font: inherit; border-radius: 2px;
+      padding: 0.5rem 0.75rem; font: inherit; font-size: 1rem; border-radius: 2px; width: 100%;
     }
     .open-form textarea { min-height: 5.5rem; resize: vertical; }
     .guest-pick {
-      list-style: none; margin: 0; padding: 0.5rem 0; display: grid; gap: 0.15rem 1rem;
-      grid-template-columns: repeat(auto-fill, minmax(min(13rem, 100%), 1fr));
+      list-style: none; margin: 0; padding: 0.5rem 0; display: grid; gap: 0 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(16.5rem, 100%), 1fr));
       max-height: min(40vh, 22rem); overflow: auto; -webkit-overflow-scrolling: touch;
       border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
     }
-    .guest-pick label { display: flex; gap: 0.5rem; align-items: center; min-height: 44px; color: var(--ink); }
-    .guest-pick input { width: auto; accent-color: var(--accent); flex: 0 0 auto; }
+    .guest-pick li { min-width: 0; }
+    .guest-pick label {
+      display: grid;
+      grid-template-columns: 1.15rem minmax(0, 1fr);
+      align-items: center;
+      column-gap: 0.55rem;
+      min-height: 44px;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+    .guest-pick input[type="checkbox"] {
+      -webkit-appearance: checkbox;
+      appearance: auto;
+      width: 1.05rem;
+      height: 1.05rem;
+      min-width: 1.05rem;
+      min-height: 1.05rem;
+      max-width: 1.05rem;
+      margin: 0;
+      padding: 0;
+      justify-self: start;
+      align-self: center;
+      accent-color: var(--accent);
+    }
+    .guest-pick span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+      color: var(--ink);
+    }
     .picked { color: var(--ink-2); margin: 0 0 0.5rem; }
     .stream, .people, .msg, .who, .open-form, .form { min-width: 0; }
     .msg p, .cards p, .who span { overflow-wrap: anywhere; }
@@ -726,7 +757,7 @@
       count.textContent = n === 1 ? table["index.seated.one"] : table["index.seated"].replace("{n}", String(n));
     }
     pick.innerHTML = authors.map((author) => `
-      <li><label><input type="checkbox" value="${author.id}" ${seeded.has(author.id) ? "checked" : ""} /> ${author.name}</label></li>
+      <li><label title="${author.name}"><input type="checkbox" value="${author.id}" ${seeded.has(author.id) ? "checked" : ""} /><span>${author.name}</span></label></li>
     `).join("");
     pick.addEventListener("change", renderCount);
     document.querySelectorAll("[data-lang]").forEach((btn) => {

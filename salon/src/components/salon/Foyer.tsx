@@ -106,13 +106,13 @@ export function Foyer() {
                 const on = picked.includes(author.id);
                 return (
                   <li key={author.id}>
-                    <label>
+                    <label title={author.name}>
                       <input
                         type="checkbox"
                         checked={on}
                         onChange={() => toggle(author.id)}
                       />
-                      {author.name}
+                      <span>{author.name}</span>
                     </label>
                   </li>
                 );

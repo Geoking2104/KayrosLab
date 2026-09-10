@@ -1,6 +1,11 @@
 # Changelog
 
+## v0.25.8 (2026-09) — Salon : cases à cocher
+
+- Cases à taille fixe, nom sur une ligne, ellipsis. Plus de carrés qui s’étirent.
+
 ## v0.25.7 (2026-09) — Salon : responsive
+
 
 - Paddings `clamp`, safe-area, grilles `minmax(min(…, 100%), 1fr)`.
 - Breakpoints 479 / 719 / 1100. Plus de débordement à 320 px.

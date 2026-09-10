@@ -172,11 +172,11 @@
 .salon-compose {
   display: grid;
   gap: var(--space-md);
-  max-width: 40rem;
+  max-width: min(56rem, 100%);
 }
 
-.salon-create label,
-.salon-compose label,
+.salon-create form > label,
+.salon-compose > label,
 .salon-invite label {
   display: grid;
   gap: 0.35rem;
@@ -823,27 +823,46 @@ button:not(:disabled),
 .salon-guest-pick {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
-  gap: 0.15rem 1rem;
-  max-height: 16rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(16.5rem, 100%), 1fr));
+  gap: 0 1.25rem;
+  max-height: min(40vh, 22rem);
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
-  padding: 0.5rem 0;
 }
+.salon-guest-pick li { min-width: 0; }
 .salon-guest-pick label {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.15rem minmax(0, 1fr);
   align-items: center;
-  gap: 0.5rem;
+  column-gap: 0.55rem;
   min-height: 44px;
   color: var(--ink);
   font-size: 0.95rem;
 }
-.salon-guest-pick input {
-  width: auto;
+.salon-guest-pick input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  appearance: auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  min-width: 1.05rem;
+  min-height: 1.05rem;
+  max-width: 1.05rem;
+  margin: 0;
+  padding: 0;
+  justify-self: start;
+  align-self: center;
   accent-color: var(--accent);
+}
+.salon-guest-pick span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
 }
 .salon-author-head {
   display: grid;
