@@ -73,7 +73,7 @@ function Login({ onLogin }) {
     sessionStorage.removeItem('kayros_sso');
     if (payload.state !== returnedState) { setError('État SSO invalide.'); return; }
     setState('loading');
-    api.ssoAuth0({
+    api.ssoCallback({
       code,
       codeVerifier: payload.verifier,
       redirectUri: payload.redirectUri,
@@ -116,7 +116,7 @@ function Login({ onLogin }) {
       {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
       {showSso && <button type="button" className="button secondary sso-button" onClick={startSso} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : 'Continuer avec SSO'}</button>}
-      {showSso && <p className="auth-or">ou l’adresse de l’espace</p>}
+      {showSso && <p className="auth-or">OpenID Connect · hébergé ici</p>}
       {registration && <label>Nom<input value={name} onChange={(event) => setName(event.target.value)} required /></label>}
       {!resetting && <label>Adresse e-mail<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>}
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}

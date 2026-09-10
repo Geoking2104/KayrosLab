@@ -161,7 +161,7 @@ export class AuthService {
    */
   async loginWithFederated({ email, name = null, issuer, subject, tenantId = 'default' } = {}) {
     if (!email || !String(email).includes('@')) {
-      const e = new Error('email SSO invalide'); e.code = 'AUTH0_EMAIL'; throw e;
+      const e = new Error('email SSO invalide'); e.code = 'OIDC_EMAIL'; throw e;
     }
     const normalised = String(email).toLowerCase();
     let user = await this.users.findByEmail(normalised);

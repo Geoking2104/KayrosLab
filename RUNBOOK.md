@@ -8,6 +8,7 @@ Domaine        → api.kayroslab.com (443)     www.kayroslab.com (80/443)
 VPS OVH        → 51.210.9.71
 Process PM2    → kayros-api (port 8787 interne)
 Site statique  → /var/www/kayroslab  (accueil, /salon/, /console/)
+SSO (OIDC)     → Authelia 127.0.0.1:9091  (sso.kayroslab.com)
 Données        → /opt/kayroslab/data/*.json
 Backups        → /opt/kayroslab/backups/
 ```
@@ -149,7 +150,7 @@ pm2 restart kayros-api
 | `backend/fastify/.env` | Configuration sensible (hors git) |
 | `deploy/ovh-vps/nginx-kayroslab-api.conf` | Reverse proxy API |
 | `deploy/ovh-vps/nginx-kayroslab-www.conf` | Site statique www |
-| `deploy/ovh-vps/deploy-www.sh` | Assemble `/var/www/kayroslab` + vhost |
+| `deploy/ovh-vps/deploy-sso.sh` | Authelia (OIDC Apache-2.0) |
 | `deploy/ovh-vps/deploy-backend.sh` | Script de déploiement |
 | `deploy/ovh-vps/backup-data.sh` | Sauvegarde des données |
 | `deploy/ovh-vps/BOOTSTRAP.md` | Procédure d'installation initiale |

@@ -825,8 +825,8 @@ test('auth : SSO fédéré crée puis relie un compte sans mot de passe', async 
   const first = await auth.loginWithFederated({
     email: 'Sso@Example.com',
     name: 'Sso',
-    issuer: 'https://dev-1mveynszu4lngakl.us.auth0.com/',
-    subject: 'auth0|1',
+    issuer: 'https://sso.kayroslab.com',
+    subject: 'authelia|1',
   });
   assert.equal(first.user.email, 'sso@example.com');
   assert.equal(first.user.role, 'contributeur');
@@ -836,8 +836,8 @@ test('auth : SSO fédéré crée puis relie un compte sans mot de passe', async 
   const again = await auth.loginWithFederated({
     email: 'sso@example.com',
     name: 'Sso',
-    issuer: 'https://dev-1mveynszu4lngakl.us.auth0.com/',
-    subject: 'auth0|1',
+    issuer: 'https://sso.kayroslab.com',
+    subject: 'authelia|1',
   });
   assert.equal(again.user.id, first.user.id);
 });

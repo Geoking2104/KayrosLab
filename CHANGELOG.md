@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.3 (2026-09) — SSO OpenID Connect auto-hébergé
+
+- **Plus d’Auth0.** Client OIDC générique (découverte `.well-known`, PKCE). Tout IdP ouvert (Authelia, Keycloak, Dex, Authentik) peut prendre la place.
+- **Authelia 4.39** (Apache-2.0) sur le VPS, `sso.kayroslab.com`. Compte initial dans `/opt/kayroslab/data/authelia/INITIAL_PASSWORD.txt`.
+- Console : **Continuer avec SSO**. Voir `docs/SSO.md`.
+
 ## v0.25.2 (2026-09) — SSO Auth0 sur la console
+
 
 - **Continuer avec SSO.** Universal Login du tenant `dev-1mveynszu4lngakl` (PKCE). Le backend vérifie l’`id_token` (JWKS) et émet le jeton KayrosLab.
 - Compte `contributeur` créé à la première visite, ou relais par e-mail d’un compte déjà inscrit.

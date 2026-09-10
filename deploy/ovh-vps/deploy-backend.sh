@@ -157,5 +157,10 @@ if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-www.sh" ]]; then
   APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-www.sh"
 fi
 
+if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-sso.sh" ]]; then
+  APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-sso.sh" \
+    || echo "AVERTISSEMENT : SSO Authelia non demarre." >&2
+fi
+
 echo ""
 echo "Deploiement termine. Backups : bash ${APP_DIR}/deploy/ovh-vps/install-cron-backup.sh"

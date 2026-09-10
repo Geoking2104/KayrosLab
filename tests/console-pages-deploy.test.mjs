@@ -48,7 +48,7 @@ test('le formulaire propose une inscription puis ouvre la console', async () => 
   ]);
   assert.match(app, /Créer un espace de découverte/);
   assert.match(app, /Continuer avec SSO/);
-  assert.match(api, /\/v1\/auth\/sso/);
+  assert.match(api, /\/v1\/auth\/sso\/callback/);
   assert.match(app, /await api\.register\(name, email, password\)/);
   assert.match(app, /const result = await api\.login\(email, password\)/);
   assert.match(api, /register:.*request\('\/v1\/auth\/register'/);

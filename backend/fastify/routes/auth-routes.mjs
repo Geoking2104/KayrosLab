@@ -4,9 +4,10 @@ import {
   exchangeAuthorizationCode,
   fetchJwks,
   isAllowedRedirect,
+  loadDiscovery,
   publicSsoConfig,
   verifyIdToken,
-} from '../lib/auth0.mjs';
+} from '../lib/oidc.mjs';
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -43,6 +44,23 @@ const ssoCallbackSchema = z.object({
 
 const RESET_ACCEPTED = 'Si un compte correspond à cette adresse, un lien de réinitialisation lui a été envoyé.';
 
+async function resolvedOidc(ctx) {
+  if (ctx.oidcDiscovered) return ctx.oidcDiscovered;
+  if (ctx.oidcDiscovery) {
+    const doc = ctx.oidcDiscovery;
+    ctx.oidcDiscovered = {
+      ...ctx.oidc,
+      issuer: String(doc.issuer || ctx.oidc.issuer).replace(/\/$/, ''),
+      authorizationEndpoint: doc.authorization_endpoint,
+      tokenEndpoint: doc.token_endpoint,
+      jwksUri: doc.jwks_uri,
+    };
+    return ctx.oidcDiscovered;
+  }
+  ctx.oidcDiscovered = await loadDiscovery(ctx.oidc, { fetchImpl: ctx.oidcFetch || fetch });
+  return ctx.oidcDiscovered;
+}
+
 export default async function authRoutes(app) {
   app.post('/v1/auth/register', async (req, reply) => {
     const ctx = app.kayrosContext;
@@ -74,46 +92,50 @@ export default async function authRoutes(app) {
     }
   });
 
-  app.get('/v1/auth/sso', async () => publicSsoConfig(app.kayrosContext.auth0));
+  app.get('/v1/auth/sso', async () => publicSsoConfig(app.kayrosContext.oidc));
 
-  app.post('/v1/auth/sso/auth0/start', {
+  app.post('/v1/auth/sso/start', {
     config: { rateLimit: { max: 20, timeWindow: '1 minute' } },
   }, async (req, reply) => {
     const ctx = app.kayrosContext;
-    if (!ctx.auth0?.enabled) return reply.code(503).send({ error: 'SSO Auth0 non configure' });
+    if (!ctx.oidc?.enabled) return reply.code(503).send({ error: 'SSO OpenID non configure' });
     const parsed = ssoStartSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'requete SSO invalide' });
     if (!isAllowedRedirect(parsed.data.redirectUri, ctx.consoleUrl)) {
       return reply.code(400).send({ error: 'redirect_uri SSO refusé' });
     }
-    return {
-      url: authorizeUrl(ctx.auth0, parsed.data),
-    };
+    try {
+      const oidc = await resolvedOidc(ctx);
+      return { url: authorizeUrl(oidc, parsed.data) };
+    } catch (e) {
+      return reply.code(503).send({ error: e.message });
+    }
   });
 
-  app.post('/v1/auth/sso/auth0', {
+  app.post('/v1/auth/sso/callback', {
     config: { rateLimit: { max: 20, timeWindow: '1 minute' } },
   }, async (req, reply) => {
     const ctx = app.kayrosContext;
     if (!ctx.auth) return reply.code(503).send({ error: 'authentification non configuree' });
-    if (!ctx.auth0?.enabled) return reply.code(503).send({ error: 'SSO Auth0 non configure' });
+    if (!ctx.oidc?.enabled) return reply.code(503).send({ error: 'SSO OpenID non configure' });
     const parsed = ssoCallbackSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'callback SSO invalide' });
     if (!isAllowedRedirect(parsed.data.redirectUri, ctx.consoleUrl)) {
       return reply.code(400).send({ error: 'redirect_uri SSO refusé' });
     }
     try {
-      const fetchImpl = ctx.auth0Fetch || fetch;
-      const tokens = await exchangeAuthorizationCode(ctx.auth0, { ...parsed.data, fetchImpl });
-      const jwks = ctx.auth0Jwks || await fetchJwks(ctx.auth0.domain, { fetchImpl });
+      const fetchImpl = ctx.oidcFetch || fetch;
+      const oidc = await resolvedOidc(ctx);
+      const tokens = await exchangeAuthorizationCode(oidc, { ...parsed.data, fetchImpl });
+      const jwks = ctx.oidcJwks || await fetchJwks(oidc.jwksUri, { fetchImpl });
       const identity = verifyIdToken(tokens.id_token, {
-        issuer: ctx.auth0.issuer,
-        audience: ctx.auth0.clientId,
+        issuer: oidc.issuer,
+        audience: oidc.audience || oidc.clientId,
         jwks,
         nonce: parsed.data.nonce,
       });
       if (identity.email_verified === false) {
-        return reply.code(403).send({ error: 'adresse e-mail Auth0 non vérifiée' });
+        return reply.code(403).send({ error: 'adresse e-mail SSO non vérifiée' });
       }
       const email = identity.email || identity.preferred_username;
       return await ctx.auth.loginWithFederated({
@@ -123,8 +145,8 @@ export default async function authRoutes(app) {
         subject: identity.sub,
       });
     } catch (e) {
-      if (e.code === 'AUTH0_EMAIL') return reply.code(400).send({ error: e.message });
-      if (e.code === 'AUTH0_EXCHANGE' || e.code === 'AUTH0_TOKEN') {
+      if (e.code === 'OIDC_EMAIL') return reply.code(400).send({ error: e.message });
+      if (e.code === 'OIDC_EXCHANGE' || e.code === 'OIDC_TOKEN' || e.code === 'OIDC_DISCOVERY') {
         return reply.code(401).send({ error: e.message });
       }
       return reply.code(401).send({ error: e.message });
