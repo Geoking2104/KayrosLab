@@ -275,7 +275,7 @@
   padding: 0;
   display: grid;
   gap: var(--space-lg);
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
 }
 
 .salon-authors li {
@@ -825,7 +825,7 @@ button:not(:disabled),
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(14rem, 100%), 1fr));
   gap: 0.15rem 1rem;
   max-height: 16rem;
   overflow: auto;
@@ -851,3 +851,47 @@ button:not(:disabled),
   gap: var(--space-sm);
   align-items: center;
 }
+
+.salon-root {
+  overflow-x: clip;
+}
+.salon-masthead,
+.salon-stage,
+.salon-foot {
+  padding-left: max(var(--space-xl), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--space-xl), env(safe-area-inset-right, 0px));
+}
+.salon-channel,
+.salon-stream,
+.salon-people,
+.salon-msg,
+.salon-create {
+  min-width: 0;
+}
+
+@media (max-width: 719px) {
+  .salon-masthead,
+  .salon-stage,
+  .salon-foot {
+    padding: 1rem max(1rem, env(safe-area-inset-right, 0px));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  }
+  .salon-masthead { align-items: flex-start; }
+  .salon-foot p { font-size: 1.15rem; max-width: none; }
+  .salon-ingest form { grid-template-columns: 1fr; }
+  .salon-fiche-head { grid-template-columns: 4rem minmax(0, 1fr); }
+  .salon-fiche-head .salon-avatar { width: 4rem; height: 4rem; }
+  .salon-create .salon-btn:not(.ghost),
+  .salon-compose .salon-btn:not(.ghost) { width: 100%; }
+  .salon-guest-pick { max-height: min(40vh, 22rem); }
+}
+
+@media (max-width: 479px) {
+  .salon-index li,
+  .salon-roster li { grid-template-columns: 1fr; }
+  .salon-roster-actions { flex-direction: row; align-items: center; gap: 1rem; }
+  .salon-wordmark { font-size: 1.4rem; }
+  .salon-authors a,
+  .salon-author-head { grid-template-columns: 3.5rem minmax(0, 1fr); }
+}
+

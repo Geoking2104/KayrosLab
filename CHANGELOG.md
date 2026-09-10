@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.7 (2026-09) — Salon : responsive
+
+- Paddings `clamp`, safe-area, grilles `minmax(min(…, 100%), 1fr)`.
+- Breakpoints 479 / 719 / 1100. Plus de débordement à 320 px.
+
 ## v0.25.6 (2026-09) — Salon : « Les auteurs », i18n EN
+
 
 - Plus de « 28 fiches » : le titre est **Les auteurs** / **The authors**.
 - Chrome du spécimen (fiche, méthode, convives, envoi) passé par i18n EN.
