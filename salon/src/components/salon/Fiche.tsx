@@ -149,10 +149,8 @@ export function Fiche({ authorId }: { authorId: string }) {
                 <li key={room.id}>
                   <Link to="/salon/$circleId" params={{ circleId: room.id }}>
                     <span className="n">{String(index + 1).padStart(2, "0")}</span>
-                    <div>
-                      <em>{room.name}</em>
-                      <p>{inRoom ? t("seated") : t("outside")}</p>
-                    </div>
+                    <em>{room.name}</em>
+                    <p>{inRoom ? t("seated") : t("outside")}</p>
                   </Link>
                   {inRoom ? (
                     <button

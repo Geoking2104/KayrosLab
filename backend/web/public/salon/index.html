@@ -61,12 +61,31 @@
 
     .channel {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "channels"
+        "stream"
+        "people";
       gap: clamp(1.25rem, 3vw, 2.5rem);
       align-items: start;
       min-width: 0;
     }
+    .channel > .rail { grid-area: channels; min-width: 0; }
+    .channel > .stream { grid-area: stream; min-width: 0; }
+    .channel > .people { grid-area: people; min-width: 0; }
+    @media (min-width: 720px) and (max-width: 1099px) {
+      .channel {
+        grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+        grid-template-areas:
+          "channels stream"
+          "people people";
+      }
+    }
     @media (min-width: 1100px) {
-      .channel { grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr) minmax(13rem, 17rem); }
+      .channel {
+        grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr) minmax(14rem, 16rem);
+        grid-template-areas: "channels stream people";
+      }
     }
     .channels, .roster, .msgs, .suggest { list-style: none; margin: 0; padding: 0; display: grid; }
     .channels { gap: 0.15rem; }
@@ -77,7 +96,9 @@
     .channels a span { font-size: 0.78rem; color: var(--muted); }
     .channels a.is-on em { color: var(--accent); }
     .stream { display: grid; gap: 1rem; min-width: 0; }
-    .protocol p { margin: 0; color: var(--ink-2); }
+    .protocol { min-width: 0; }
+    .protocol h1 { overflow-wrap: break-word; }
+    .protocol p { margin: 0; color: var(--ink-2); overflow-wrap: break-word; }
     .msgs { gap: 1rem; }
     .msg {
       display: grid;
@@ -135,7 +156,7 @@
     }
     .suggest span { color: var(--ink-2); }
 
-    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr)); }
+    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
     .cards li { display: grid; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
     .cards li.is-on { border-top-color: var(--accent); }
     .cards a.card {
@@ -155,11 +176,30 @@
     .works label { color: var(--ink-2); align-items: flex-start; }
     .form { display: grid; gap: 1rem; max-width: 40rem; }
     .circles { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
-    .circles li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--rule); min-width: 0; }
-    .circles a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.35rem 1rem; padding: 1rem 0; color: inherit; min-width: 0; }
-    .circles .n { font-family: var(--display); color: var(--accent); }
-    .circles em { font-style: normal; font-family: var(--display); font-size: 1.25rem; display: block; min-width: 0; overflow-wrap: break-word; }
-    .circles p { margin: 0.25rem 0 0; color: var(--ink-2); min-width: 0; overflow-wrap: break-word; hyphens: none; }
+    .circles li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "row action";
+      gap: 0.5rem;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+      min-width: 0;
+    }
+    .circles a {
+      grid-area: row;
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-areas: "n title" "n status";
+      column-gap: 1rem;
+      row-gap: 0.15rem;
+      padding: 1rem 0;
+      color: inherit;
+      min-width: 0;
+    }
+    .circles .n { grid-area: n; font-family: var(--display); color: var(--accent); }
+    .circles em { grid-area: title; font-style: normal; font-family: var(--display); font-size: 1.25rem; min-width: 0; overflow-wrap: break-word; }
+    .circles p { grid-area: status; margin: 0; color: var(--ink-2); min-width: 0; overflow-wrap: break-word; }
+    .circles .btn { grid-area: action; }
     h2 { font-family: var(--display); font-weight: 550; font-size: clamp(1.35rem, 4vw, 1.8rem); letter-spacing: -0.03em; margin: 0 0 1rem; text-wrap: balance; }
     .lang { display: inline-flex; gap: 0.35rem; align-items: center; }
     .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
@@ -174,7 +214,7 @@
     .open-form textarea { min-height: 5.5rem; resize: vertical; }
     .guest-pick {
       list-style: none; margin: 0; padding: 0.5rem 0; display: grid; gap: 0 1.25rem;
-      grid-template-columns: repeat(auto-fill, minmax(min(16.5rem, 100%), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
       max-height: min(40vh, 22rem); overflow: auto; -webkit-overflow-scrolling: touch;
       border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
     }
@@ -284,7 +324,7 @@
     </section>
 
     <div id="cercle" class="pane channel">
-      <aside data-i18n-aria="circles" aria-label="Cercles">
+      <aside class="rail" data-i18n-aria="circles" aria-label="Cercles">
         <p class="kicker" data-i18n="circles">Cercles</p>
         <ul class="channels">
           <li><a href="#lumieres" class="is-on"><em data-i18n="circle.lumieres">Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
@@ -448,15 +488,15 @@
         <h2 data-i18n="circles">Cercles</h2>
         <ul class="circles">
           <li>
-            <a href="/salon/lumieres"><span class="n">01</span><div><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></div></a>
+            <a href="/salon/lumieres"><span class="n">01</span><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></a>
             <button class="btn ghost" type="button" data-i18n="out">Sortir</button>
           </li>
           <li>
-            <a href="/salon/pouvoir"><span class="n">02</span><div><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></div></a>
+            <a href="/salon/pouvoir"><span class="n">02</span><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
           <li>
-            <a href="/salon/academie"><span class="n">03</span><div><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></div></a>
+            <a href="/salon/academie"><span class="n">03</span><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
         </ul>

@@ -66,16 +66,17 @@ export function Foyer() {
             {rooms.map((room, index) => (
               <Link key={room.id} to="/salon/$circleId" params={{ circleId: room.id }}>
                 <span className="n">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <em>{room.name}</em>
-                  <p>{room.question}</p>
-                </div>
+                <em>{room.name}</em>
                 <span className="meta">
                   {room.authorIds
-                    .map((id) => allAuthors().find((a) => a.id === id)?.name)
+                    .map((id) => {
+                      const author = allAuthors().find((a) => a.id === id);
+                      return author ? authorCopy(author, locale).name : null;
+                    })
                     .filter(Boolean)
                     .join(" · ")}
                 </span>
+                <p>{room.question}</p>
               </Link>
             ))}
           </div>

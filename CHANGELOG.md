@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.11 (2026-09) — Salon : grilles nommées
+
+- Cercles, fil et convives : `grid-template-areas`.
+- `auto-fit` + `minmax(0, 1fr)` : plus de colonne qui écrase le texte.
+
 ## v0.25.10 (2026-09) — Salon : 404 auteurs, titre EN, bloc cercle
+
 
 - `/salon/agents/` ne 404 plus (Pages + hash `#agents`).
 - Liste des cercles : plus de colonne `auto` qui écrase la question.
