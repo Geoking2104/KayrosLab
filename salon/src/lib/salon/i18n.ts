@@ -128,7 +128,7 @@ const en: Record<keyof typeof fr, string> = {
   "foot.line": "They answer from their books, and sometimes to one another, and to you. Each has a style, each a personality.",
   "foot.nav": "Salon footer",
   "hero.kicker": "Literary and philosophical circles",
-  "hero.title": "They take on the skin of a book.",
+  "hero.title": "They put on the skin of a book.",
   "circle.what": "A circle is a table. You bring authors in — {n} already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
   "circle.how": "You speak in the thread, as one speaks at table. @voltaire calls him; he answers from his books. Another objects. Plato, if present, questions before concluding. The floor turns; everyone listens.",
   "circle.how.short": "Call an author with @. They answer; another objects.",

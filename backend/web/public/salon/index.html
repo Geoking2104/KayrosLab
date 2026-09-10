@@ -155,11 +155,11 @@
     .works label { color: var(--ink-2); align-items: flex-start; }
     .form { display: grid; gap: 1rem; max-width: 40rem; }
     .circles { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
-    .circles li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--rule); }
-    .circles a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; color: inherit; }
+    .circles li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--rule); min-width: 0; }
+    .circles a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.35rem 1rem; padding: 1rem 0; color: inherit; min-width: 0; }
     .circles .n { font-family: var(--display); color: var(--accent); }
-    .circles em { font-style: normal; font-family: var(--display); font-size: 1.25rem; }
-    .circles p { margin: 0.25rem 0 0; color: var(--ink-2); }
+    .circles em { font-style: normal; font-family: var(--display); font-size: 1.25rem; display: block; min-width: 0; overflow-wrap: break-word; }
+    .circles p { margin: 0.25rem 0 0; color: var(--ink-2); min-width: 0; overflow-wrap: break-word; hyphens: none; }
     h2 { font-family: var(--display); font-weight: 550; font-size: clamp(1.35rem, 4vw, 1.8rem); letter-spacing: -0.03em; margin: 0 0 1rem; text-wrap: balance; }
     .lang { display: inline-flex; gap: 0.35rem; align-items: center; }
     .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
@@ -212,7 +212,7 @@
     }
     .picked { color: var(--ink-2); margin: 0 0 0.5rem; }
     .stream, .people, .msg, .who, .open-form, .form { min-width: 0; }
-    .msg p, .cards p, .who span { overflow-wrap: anywhere; }
+    .msg p, .cards p, .who span { overflow-wrap: break-word; }
     @media (max-width: 719px) {
       header.mast { align-items: flex-start; }
       footer p { font-size: 1.15rem; max-width: none; }
@@ -236,10 +236,10 @@
 </head>
 <body>
   <header class="mast">
-    <a class="word" href="/salon">Salon<small data-i18n="wordmark.sub">cercles littéraires</small></a>
+    <a class="word" href="/salon/">Salon<small data-i18n="wordmark.sub">cercles littéraires</small></a>
     <nav data-i18n-aria="nav.salon" aria-label="Salon">
-      <a href="/salon" data-i18n="nav.circles">Cercles</a>
-      <a href="/salon/agents" data-i18n="nav.agents">Auteurs</a>
+      <a href="/salon/" data-pane="cercle" data-i18n="nav.circles">Cercles</a>
+      <a href="/salon/agents/" data-pane="agents" data-i18n="nav.agents">Auteurs</a>
       <span class="lang" role="group" data-i18n-aria="nav.lang" aria-label="Langue">
         <button type="button" data-lang="fr" class="is-on">FR</button>
         <button type="button" data-lang="en">EN</button>
@@ -470,8 +470,8 @@
   <footer>
     <p data-i18n="foot.line">Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.</p>
     <nav>
-      <a href="/salon">Salon</a>
-      <a href="/salon/agents" data-i18n="nav.agents">Auteurs</a>
+      <a href="/salon/">Salon</a>
+      <a href="/salon/agents/" data-pane="agents" data-i18n="nav.agents">Auteurs</a>
     </nav>
   </footer>
 
@@ -553,7 +553,7 @@
         "nav.agents": "Authors",
         "nav.lang": "Language",
         "hero.kicker": "Literary and philosophical circles",
-        "hero.title": "They take on the skin of a book.",
+        "hero.title": "They put on the skin of a book.",
         "circle.what": "A circle is a table. You bring authors in — 54 already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
         "circle.how": "You speak in the thread, as one speaks at table. @voltaire calls him; he answers from his books. Another objects. Plato, if present, questions before concluding. The floor turns; everyone listens.",
         "circles": "Circles",
@@ -714,9 +714,17 @@
       fiche: document.getElementById("fiche"),
       agents: document.getElementById("agents"),
     };
+    function paneFromLocation() {
+      const path = location.pathname.replace(/\/+$/, "");
+      if (location.hash === "#agents" || /\/agents$/.test(path)) return "agents";
+      if (location.hash === "#fiche") return "fiche";
+      return "cercle";
+    }
     function show(name) {
       Object.entries(panes).forEach(([key, el]) => { el.hidden = key !== name; });
       views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
+      const hash = name === "cercle" ? "" : "#" + name;
+      if (location.hash !== hash) history.replaceState(null, "", (location.pathname.replace(/\/agents\/?$/, "/") || "/salon/") + location.search + hash);
     }
     views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
     document.addEventListener("click", (e) => {
@@ -725,6 +733,8 @@
       const name = el.getAttribute("data-pane");
       if (name && panes[name]) { e.preventDefault(); show(name); }
     });
+    show(paneFromLocation());
+    window.addEventListener("hashchange", () => show(paneFromLocation()));
     const draft = document.getElementById("draft");
     const suggest = document.getElementById("suggest");
     draft.addEventListener("input", () => {

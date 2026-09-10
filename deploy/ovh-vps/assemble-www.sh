@@ -27,7 +27,7 @@ copy_if() {
   fi
 }
 
-for f in index.html index.fr.html tokens.css studio.css; do
+for f in index.html index.fr.html tokens.css studio.css 404.html; do
   copy_if "${APP_DIR}/${f}" "${stage}/${f}"
 done
 

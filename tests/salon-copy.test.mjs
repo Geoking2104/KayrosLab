@@ -52,7 +52,8 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.match(page, /"agents\.fiches": "The authors"/);
     assert.match(page, /"kind\.philosophe": "Philosopher"/);
     assert.match(page, /"send": "Send"/);
-    assert.match(page, /"handle": "Handle @"/);
+    assert.match(page, /"hero.title": "They put on the skin of a book."/);
+    assert.match(page, /\/salon\/agents\//);
     assert.match(page, /"circle\.lumieres": "Enlightenment"/);
     assert.match(page, /"nameEn": "Aristotle"/);
     assert.match(page, /function renderAgents/);

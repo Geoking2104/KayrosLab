@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.10 (2026-09) — Salon : 404 auteurs, titre EN, bloc cercle
+
+- `/salon/agents/` ne 404 plus (Pages + hash `#agents`).
+- Liste des cercles : plus de colonne `auto` qui écrase la question.
+- Titre EN : *They put on the skin of a book.*
+
 ## v0.25.9 (2026-09) — Salon : 54 auteurs, i18n EN complète
+
 
 - Onglet Auteurs : les 54 fiches, plus seulement six.
 - Noms, ères et résumés en anglais (Aristote → Aristotle, etc.).

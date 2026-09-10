@@ -81,7 +81,7 @@ jobs:
           mkdir -p deploy/assets
 
           # Core static pages (must exist)
-          for f in index.html index.fr.html tokens.css studio.css CNAME; do
+          for f in index.html index.fr.html tokens.css studio.css CNAME 404.html; do
             if [ ! -f "$f" ]; then
               echo "ERROR: required file missing: $f" >&2
               exit 1
