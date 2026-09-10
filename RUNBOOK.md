@@ -10,6 +10,7 @@ Process PM2    → kayros-api (port 8787 interne)
 Site statique  → /var/www/kayroslab  (accueil, /salon/, /console/)
 SSO (OIDC)     → Authelia 127.0.0.1:9091  (sso.kayroslab.com)
 Données        → /opt/kayroslab/data/*.json
+Salon          → /opt/kayroslab/data/salon/<user>.json
 Backups        → /opt/kayroslab/backups/
 ```
 

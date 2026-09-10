@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.16 (2026-09) — Salon : SSO, mémoire, anglais sans français
+
+- Entrer / Partir : OpenID (Authelia), même client que la console, `redirect_uri` `/salon/`.
+- `GET` / `PUT /v1/salon/state` : cercles et tours de parole liés au compte ; l’invité reste dans le navigateur.
+- Anglais : fil spécimen, cercles-semence, fiches, « à » / “to”, plus de Lumières ni de question française une fois EN choisi.
+
 ## v0.25.15 (2026-09) — Salon : mémoires vérifiées, livres de l’auteur
 
 - Chaque œuvre Gutenberg a été relue sur la ligne `Author:` (ou le titre pour les écritures).

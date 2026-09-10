@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { allAuthors, authorById, authorCopy, buildPersona, passagesFor } from "@/lib/salon/catalog";
 import { planRound } from "@/lib/salon/flows";
-import { useT, type MsgKey } from "@/lib/salon/i18n";
+import { useT, roomCopy, type MsgKey } from "@/lib/salon/i18n";
 import { handleOf, insertMention, parseMentions, suggestMentions } from "@/lib/salon/mentions";
 import { speakAsAuthor } from "@/lib/salon/speak";
 import { useSalon } from "@/lib/salon/store";
@@ -12,10 +12,11 @@ import { retrieveMemory } from "@/lib/salon/wasm";
 import { SalonChrome } from "./Chrome";
 import { CreateAuthor } from "./CreateAuthor";
 
-function Avatar({ author, size = 48 }: { author: LiteraryAuthor; size?: number }) {
+function Avatar({ author, locale, size = 48 }: { author: LiteraryAuthor; locale: "fr" | "en"; size?: number }) {
+  const copy = authorCopy(author, locale);
   return (
     <span className="salon-avatar" data-kind={author.kind} style={{ width: size, height: size }}>
-      {author.avatar ? <img src={author.avatar} alt={author.name} width={size} height={size} /> : <em>{author.monogram}</em>}
+      {author.avatar ? <img src={author.avatar} alt={copy.name} width={size} height={size} /> : <em>{author.monogram}</em>}
     </span>
   );
 }
@@ -38,7 +39,8 @@ export function Seance({ circleId }: { circleId: string }) {
   function labelOf(id: string) {
     if (id === "user") return t("to.host");
     if (id === "table") return t("to.table");
-    return authorById(id)?.name ?? id;
+    const who = authorById(id);
+    return who ? authorCopy(who, locale).name : id;
   }
 
   function clock(iso: string) {
@@ -180,20 +182,25 @@ export function Seance({ circleId }: { circleId: string }) {
     );
   }
 
+  const seatedCopy = roomCopy(room, locale);
+
   return (
     <SalonChrome current="seance">
       <main className="salon-stage salon-channel">
         <aside className="salon-channels" aria-label={t("circles")}>
           <p className="salon-kicker">{t("circles")}</p>
           <ul>
-            {rooms.map((item) => (
+            {rooms.map((item) => {
+              const copy = roomCopy(item, locale);
+              return (
               <li key={item.id}>
                 <Link to="/salon/$circleId" params={{ circleId: item.id }} aria-current={item.id === room.id ? "page" : undefined}>
-                  <em>{item.name}</em>
+                  <em>{copy.name}</em>
                   <span>{t("n.seated", { n: item.authorIds.length })}</span>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
           <Link to="/salon" className="salon-back">
             {t("open.circle")}
@@ -202,8 +209,8 @@ export function Seance({ circleId }: { circleId: string }) {
 
         <section className="salon-stream">
           <header className="salon-protocol">
-            <h1>{room.name}</h1>
-            <p>{room.question}</p>
+            <h1>{seatedCopy.name}</h1>
+            <p>{seatedCopy.question}</p>
             <p className="salon-how">{t("circle.how.short")}</p>
           </header>
           {room.turns.length === 0 && (
@@ -214,22 +221,25 @@ export function Seance({ circleId }: { circleId: string }) {
           <ol className="salon-messages">
             {room.turns.map((turn) => {
               const author = turn.origin === "agent" ? authorById(turn.authorId) : null;
+              const who = author ? authorCopy(author, locale).name : t("host");
+              const mark = locale === "en" ? "“" : "« ";
+              const end = locale === "en" ? "”" : " »";
               return (
                 <li key={turn.id} className={turn.origin === "user" ? "salon-msg is-invited" : "salon-msg"}>
-                  {author ? <Avatar author={author} size={40} /> : <span className="salon-avatar salon-host">H</span>}
+                  {author ? <Avatar author={author} locale={locale} size={40} /> : <span className="salon-avatar salon-host">H</span>}
                   <div>
                     <header>
-                      <strong>{author?.name ?? t("host")}</strong>
+                      <strong>{who}</strong>
                       {author ? <span className="salon-handle">@{handleOf(author, patches[author.id])}</span> : null}
                       <span>
-                        {t(`act.${turn.act ?? "reponse"}` as MsgKey)} · {locale === "en" ? "to" : "à"} {labelOf(turn.to ?? "table")}
+                        {t(`act.${turn.act ?? "reponse"}` as MsgKey)} · {t("act.to")} {labelOf(turn.to ?? "table")}
                       </span>
                       {turn.createdAt ? <time>{clock(turn.createdAt)}</time> : null}
                     </header>
                     <p>{turn.text}</p>
                     {turn.citations[0] ? (
                       <blockquote className="salon-cite">
-                        « {turn.citations[0].text} »
+                        {mark}{turn.citations[0].text}{end}
                         <cite>{turn.citations[0].work}</cite>
                       </blockquote>
                     ) : null}
@@ -302,7 +312,7 @@ export function Seance({ circleId }: { circleId: string }) {
                   className="salon-addr-pick"
                   onClick={() => setDraft(insertMention(draft, author, patches[author.id]))}
                 >
-                  <Avatar author={author} size={40} />
+                  <Avatar author={author} locale={locale} size={40} />
                   <div>
                     <strong>{copy.name}</strong>
                     <span>

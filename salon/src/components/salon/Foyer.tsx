@@ -1,16 +1,17 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState, type FormEvent } from "react";
 import { allAuthors, LITERARY_KINDS, authorCopy, searchAuthors } from "@/lib/salon/catalog";
-import { useT, type MsgKey } from "@/lib/salon/i18n";
+import { useT, roomCopy, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import type { LiteraryAuthor } from "@/lib/salon/types";
 import { SalonChrome } from "./Chrome";
 
-function Avatar({ author }: { author: LiteraryAuthor }) {
+function Avatar({ author, locale }: { author: LiteraryAuthor; locale: "fr" | "en" }) {
+  const copy = authorCopy(author, locale);
   return (
     <span className="salon-avatar" data-kind={author.kind}>
       {author.avatar ? (
-        <img src={author.avatar} alt={author.name} width={72} height={72} />
+        <img src={author.avatar} alt={copy.name} width={72} height={72} />
       ) : (
         <em>{author.monogram}</em>
       )}
@@ -63,10 +64,12 @@ export function Foyer() {
 
         {rooms.length > 0 && (
           <div className="salon-index">
-            {rooms.map((room, index) => (
+            {rooms.map((room, index) => {
+              const copy = roomCopy(room, locale);
+              return (
               <Link key={room.id} to="/salon/$circleId" params={{ circleId: room.id }}>
                 <span className="n">{String(index + 1).padStart(2, "0")}</span>
-                <em>{room.name}</em>
+                <em>{copy.name}</em>
                 <span className="meta">
                   {room.authorIds
                     .map((id) => {
@@ -76,9 +79,10 @@ export function Foyer() {
                     .filter(Boolean)
                     .join(" · ")}
                 </span>
-                <p>{room.question}</p>
+                <p>{copy.question}</p>
               </Link>
-            ))}
+              );
+            })}
           </div>
         )}
 
@@ -87,15 +91,16 @@ export function Foyer() {
           <form onSubmit={onCreate}>
             <label>
               {t("index.step1")}
-              <input name="name" defaultValue="Lumières" required maxLength={80} />
+              <input key={locale + "-name"} name="name" defaultValue={t("circle.lumieres")} required maxLength={80} />
             </label>
             <label>
               {t("index.step2")}
               <textarea
+                key={locale + "-q"}
                 name="question"
                 required
                 maxLength={400}
-                defaultValue="Que reste-t-il de la liberté une fois qu’on a tout expliqué ?"
+                defaultValue={t("index.question.sample")}
               />
             </label>
             <p className="salon-kicker">{t("index.step3")}</p>
@@ -153,7 +158,7 @@ export function Foyer() {
               return (
               <li key={author.id} className={picked.includes(author.id) ? "is-on" : undefined}>
                 <div className="salon-author-head">
-                  <Avatar author={author} />
+                  <Avatar author={author} locale={locale} />
                   <span>
                     <strong>{copy.name}</strong>
                     <small>

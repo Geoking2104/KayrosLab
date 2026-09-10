@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { AgentPatch, LiteraryAuthor, LiteraryWork, Passage, SalonRoom, SalonTurn } from "./types";
 import type { Locale } from "./i18n";
+import { mergeSalonState, type SalonSnapshot, type SalonUser } from "./sso";
 
 function uid(prefix: string) {
   return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`;
@@ -49,6 +50,16 @@ interface SalonState {
   extraPassages: Record<string, Passage[]>;
   addCustomAuthor: (author: LiteraryAuthor, passages: Passage[]) => void;
   addWork: (authorId: string, work: LiteraryWork, passages: Passage[]) => void;
+  user: SalonUser | null;
+  setUser: (user: SalonUser | null) => void;
+  applyRemote: (incoming: SalonSnapshot) => void;
+  snapshot: () => SalonSnapshot;
+}
+
+function withSeeds(rooms: SalonRoom[]) {
+  const have = new Set(rooms.map((r) => r.id));
+  const missing = SEED_ROOMS.filter((s) => !have.has(s.id));
+  return [...missing, ...rooms];
 }
 
 export const useSalon = create<SalonState>()(
@@ -61,6 +72,8 @@ export const useSalon = create<SalonState>()(
       extraWorks: {},
       extraPassages: {},
       hydrated: false,
+      user: null,
+      setUser: (user) => set({ user }),
       setHydrated: (v) => set({ hydrated: v }),
       addTurn: (roomId, turn) => {
         const next: SalonTurn = {
@@ -143,6 +156,29 @@ export const useSalon = create<SalonState>()(
         );
         set({ extraWorks, extraPassages, customs });
       },
+      snapshot: () => {
+        const s = get();
+        return {
+          version: 1,
+          locale: s.locale,
+          rooms: s.rooms,
+          patches: s.patches,
+          customs: s.customs,
+          extraWorks: s.extraWorks,
+          extraPassages: s.extraPassages,
+        };
+      },
+      applyRemote: (incoming) => {
+        const merged = mergeSalonState(incoming, get().snapshot());
+        set({
+          rooms: withSeeds(merged.rooms ?? []),
+          patches: merged.patches ?? {},
+          locale: merged.locale ?? get().locale,
+          customs: merged.customs ?? [],
+          extraWorks: merged.extraWorks ?? {},
+          extraPassages: merged.extraPassages ?? {},
+        });
+      },
     }),
     {
       name: "kayros-salon-v2",
@@ -166,11 +202,9 @@ export const useSalon = create<SalonState>()(
           extraPassages?: Record<string, Passage[]>;
         } | undefined;
         const rooms = incoming?.rooms ?? current.rooms;
-        const have = new Set(rooms.map((r) => r.id));
-        const missing = SEED_ROOMS.filter((s) => !have.has(s.id));
         return {
           ...current,
-          rooms: [...missing, ...rooms],
+          rooms: withSeeds(rooms),
           patches: { ...current.patches, ...(incoming?.patches ?? {}) },
           locale: incoming?.locale ?? current.locale,
           customs: incoming?.customs ?? current.customs,

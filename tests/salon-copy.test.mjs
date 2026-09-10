@@ -8,6 +8,45 @@ async function read(rel) {
   return readFile(new URL(rel, root), 'utf8');
 }
 
+test('version EN : plus de copie française dans le chrome ni le spécimen', async () => {
+  const html = await read('salon/index.html');
+  const published = await read('backend/web/public/salon/index.html');
+  const i18n = await read('salon/src/lib/salon/i18n.ts');
+  const foyer = await read('salon/src/components/salon/Foyer.tsx');
+  const chrome = await read('salon/src/components/salon/Chrome.tsx');
+  for (const page of [html, published]) {
+    const start = page.indexOf('\n      en: {');
+    const end = page.indexOf('\n    };', start);
+    assert.ok(start > 0 && end > start, 'bloc I18N.en');
+    const en = page.slice(start, end);
+    assert.match(en, /"hero.title": "They put on the skin of a book."/);
+    assert.match(en, /"spec.host": "@voltaire is optimism/);
+    assert.match(en, /"circle.lumieres": "Enlightenment"/);
+    assert.match(en, /"auth.enter": "Enter"/);
+    assert.match(en, /"auth.out": "Leave"/);
+    assert.doesNotMatch(en, /Ils prennent la peau/);
+    assert.doesNotMatch(en, /Que reste-t-il de la liberté/);
+    assert.doesNotMatch(en, /"circle.lumieres": "Lumières"/);
+    assert.doesNotMatch(en, /politesse faite au malheur/);
+    assert.doesNotMatch(en, /cultiver son jardin/);
+    assert.match(page, /id="salon-auth"/);
+    assert.match(page, /\/v1\/salon\/state/);
+    assert.match(page, /kayros-salon-token/);
+    assert.match(page, /data-i18n="spec.host"/);
+    assert.match(page, /data-author-blurb="voltaire"/);
+  }
+  const enTs = i18n.slice(i18n.indexOf('const en:'));
+  assert.match(enTs, /They put on the skin of a book/);
+  assert.match(enTs, /"auth.enter": "Enter"/);
+  assert.doesNotMatch(enTs, /Ils prennent la peau/);
+  assert.doesNotMatch(enTs, /Que reste-t-il de la liberté/);
+  assert.doesNotMatch(enTs, /"circle.lumieres": "Lumières"/);
+  assert.doesNotMatch(foyer, /defaultValue="Lumières"/);
+  assert.match(foyer, /t\("circle.lumieres"\)/);
+  assert.match(chrome, /startSalonSso/);
+  assert.match(chrome, /t\("auth.enter"\)/);
+});
+
 test('Salon i18n : cercle, convier, personnalité, auteurs', async () => {
   const i18n = await read('salon/src/lib/salon/i18n.ts');
   assert.match(i18n, /tout le monde écoute/);

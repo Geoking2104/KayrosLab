@@ -825,6 +825,39 @@ button:not(:disabled),
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
+.salon-account {
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.salon-account small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  max-width: 16ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.salon-account button {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 44px;
+  color: var(--ink-2);
+  font: inherit;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.salon-account button:hover {
+  color: var(--accent);
+}
+.salon-auth-error {
+  margin: 0;
+  padding: 0.5rem var(--space-xl);
+  color: var(--accent);
+  font-size: 0.9rem;
+}
 .salon-how {
   margin: 0.45rem 0 0;
   color: var(--muted);

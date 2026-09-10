@@ -58,9 +58,13 @@ describe('SSO OpenID Connect', () => {
     assert.match(url, /scope=openid\+profile\+email/);
   });
 
-  it('n’accepte que les redirect_uri de la console', () => {
+  it('n’accepte que les redirect_uri de la console et du salon', () => {
     assert.equal(isAllowedRedirect('https://www.kayroslab.com/console/', 'https://www.kayroslab.com/console'), true);
+    assert.equal(isAllowedRedirect('https://www.kayroslab.com/salon/', 'https://www.kayroslab.com/console'), true);
+    assert.equal(isAllowedRedirect('https://www.kayroslab.com/salon/index.html', 'https://www.kayroslab.com/console'), true);
+    assert.equal(isAllowedRedirect('http://localhost:4174/salon/', 'https://www.kayroslab.com/console'), true);
     assert.equal(isAllowedRedirect('https://evil.example/console/', 'https://www.kayroslab.com/console'), false);
+    assert.equal(isAllowedRedirect('https://evil.example/salon/', 'https://www.kayroslab.com/console'), false);
   });
 
   it('vérifie un id_token RS256', () => {

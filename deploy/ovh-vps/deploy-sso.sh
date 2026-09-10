@@ -117,13 +117,15 @@ ${OIDC_PEM_INDENTED}
       allowed_origins_from_client_redirect_uris: true
     clients:
       - client_id: 'kayroslab-console'
-        client_name: 'KayrosLab console'
+        client_name: 'KayrosLab'
         public: true
         authorization_policy: 'one_factor'
         consent_mode: implicit
         redirect_uris:
           - 'https://www.kayroslab.com/console/'
+          - 'https://www.kayroslab.com/salon/'
           - 'http://localhost:4174/console/'
+          - 'http://localhost:4174/salon/'
         scopes:
           - openid
           - profile

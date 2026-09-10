@@ -174,8 +174,12 @@ export function isAllowedRedirect(uri, consoleUrl) {
   };
   add(consoleUrl);
   add('https://www.kayroslab.com/console/');
+  add('https://www.kayroslab.com/salon/');
+  add('https://www.kayroslab.com/salon/index.html');
   add('http://localhost:4174/console/');
+  add('http://localhost:4174/salon/');
   add('http://127.0.0.1:4174/console/');
+  add('http://127.0.0.1:4174/salon/');
   const got = `${parsed.origin}${parsed.pathname}`;
   return candidates.has(got) || candidates.has(`${got.replace(/\/+$/, '')}/`);
 }

@@ -50,6 +50,7 @@ app.addHook('preHandler', async (req, reply) => {
   if (path === '/v1/auth/login' || path === '/v1/auth/register') return;
   if (path.startsWith('/v1/auth/password/')) return;
   if (path.startsWith('/v1/auth/sso')) return;
+  if (path.startsWith('/v1/salon/')) return;
   if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
   if (path === '/mcp') return; // dedicated scoped Bearer authentication
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
@@ -65,6 +66,7 @@ await app.register((await import('./routes/demo-report-leads.mjs')).default);
 await app.register((await import('./routes/contact.mjs')).default);
 await app.register((await import('./routes/literary.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
+await app.register((await import('./routes/salon.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);
 await app.register((await import('./routes/forecasts.mjs')).default);

@@ -1,7 +1,7 @@
-import { authorById } from "./catalog";
+import { authorById, authorCopy } from "./catalog";
 import { handleOf } from "./mentions";
 import type { Locale } from "./i18n";
-import { translate } from "./i18n";
+import { translate, roomCopy } from "./i18n";
 import type { SalonRoom } from "./types";
 
 function escapeHtml(value: string) {
@@ -23,11 +23,15 @@ export function keepSeancePdf(room: SalonRoom, locale: Locale) {
     year: "numeric",
   });
 
+  const copy = roomCopy(room, locale);
+  const mark = locale === "en" ? "“" : "« ";
+  const end = locale === "en" ? "”" : " »";
+
   const cover = `
     <section class="leaf cover">
       <p class="kicker">Salon</p>
-      <h1>${escapeHtml(room.name)}</h1>
-      <blockquote>${escapeHtml(room.question)}</blockquote>
+      <h1>${escapeHtml(copy.name)}</h1>
+      <blockquote>${escapeHtml(copy.question)}</blockquote>
       <p class="meta">${escapeHtml(date)} · ${authors.length} · ${room.turns.length}</p>
     </section>`;
 
@@ -39,7 +43,7 @@ export function keepSeancePdf(room: SalonRoom, locale: Locale) {
         ${authors
           .map(
             (author) => `<li>
-              <strong>${escapeHtml(author.name)}</strong>
+              <strong>${escapeHtml(authorCopy(author, locale).name)}</strong>
               <span>@${escapeHtml(handleOf(author))} · ${escapeHtml(t(`kind.${author.kind}` as Parameters<typeof translate>[1]))}</span>
               <ul>${author.works
                 .slice(0, 5)
@@ -58,7 +62,8 @@ export function keepSeancePdf(room: SalonRoom, locale: Locale) {
       <ol>
         ${room.turns
           .map((turn, i) => {
-            const name = turn.origin === "user" ? t("host") : (authorById(turn.authorId)?.name ?? turn.authorId);
+            const who = authorById(turn.authorId);
+            const name = turn.origin === "user" ? t("host") : (who ? authorCopy(who, locale).name : turn.authorId);
             const act = t(`act.${turn.act ?? "reponse"}` as Parameters<typeof translate>[1]);
             return `<li><span>${String(i + 1).padStart(2, "0")}</span> ${escapeHtml(name)} — ${escapeHtml(act)}</li>`;
           })
@@ -70,10 +75,11 @@ export function keepSeancePdf(room: SalonRoom, locale: Locale) {
     <section class="leaf fil">
       ${room.turns
         .map((turn) => {
-          const name = turn.origin === "user" ? t("host") : (authorById(turn.authorId)?.name ?? turn.authorId);
+          const who = authorById(turn.authorId);
+          const name = turn.origin === "user" ? t("host") : (who ? authorCopy(who, locale).name : turn.authorId);
           const act = t(`act.${turn.act ?? "reponse"}` as Parameters<typeof translate>[1]);
           const cite = turn.citations[0]
-            ? `<blockquote>« ${escapeHtml(turn.citations[0].text)} »<cite>${escapeHtml(turn.citations[0].work)}</cite></blockquote>`
+            ? `<blockquote>${mark}${escapeHtml(turn.citations[0].text)}${end}<cite>${escapeHtml(turn.citations[0].work)}</cite></blockquote>`
             : "";
           return `<article>
             <header><strong>${escapeHtml(name)}</strong> <span>${escapeHtml(act)}</span></header>
@@ -88,7 +94,7 @@ export function keepSeancePdf(room: SalonRoom, locale: Locale) {
 <html lang="${locale}">
 <head>
   <meta charset="utf-8" />
-  <title>${escapeHtml(room.name)} — Salon</title>
+  <title>${escapeHtml(copy.name)} — Salon</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {

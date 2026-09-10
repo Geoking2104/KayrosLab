@@ -99,6 +99,7 @@ const fr = {
   "act.adresse": "adresse",
   "act.reponse": "réponse",
   "act.objection": "objection",
+  "act.to": "à",
   "to.table": "la table",
   "to.host": "l’hôte",
   "host": "Vous",
@@ -116,7 +117,21 @@ const fr = {
   "circle.academie": "Académie",
   "circle.pouvoir": "Le pouvoir tel qu’il est",
   "index.question.sample": "Que reste-t-il de la liberté une fois qu’on a tout expliqué ?",
+  "circle.pouvoir.q": "Faut-il paraître vertueux pour gouverner, ou seulement l’être ?",
+  "circle.academie.q": "Qu’est-ce qu’une chose juste, si le plus fort l’appelle ainsi ?",
   "note.candide": "Ne parler que depuis Candide.",
+  "auth.enter": "Entrer",
+  "auth.out": "Partir",
+  "auth.busy": "Redirection…",
+  "auth.error": "La porte n’a pas cédé.",
+  "doc.title": "Salon",
+  "spec.host": "@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?",
+  "spec.voltaire": "Politesse ? C’est pis : un système. Pangloss nomme providence ce qui crève l’œil. Le malheur n’a pas besoin qu’on lui fasse la révérence — il suffit de le regarder, et de cultiver son jardin.",
+  "spec.voltaire.cite": "« On se mit à table ; et, après un excellent dîner, on entra dans la bibliothèque. »",
+  "spec.voltaire.work": "Candide, ou l’optimisme",
+  "spec.rousseau": "Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.",
+  "spec.rousseau.cite": "“We are now in the world of morals, the door to vice is open.”",
+  "spec.rousseau.work": "Émile ou De l’éducation",
 } as const;
 
 const en: Record<keyof typeof fr, string> = {
@@ -216,6 +231,7 @@ const en: Record<keyof typeof fr, string> = {
   "act.adresse": "address",
   "act.reponse": "reply",
   "act.objection": "objection",
+  "act.to": "to",
   "to.table": "the table",
   "to.host": "the host",
   "host": "You",
@@ -233,7 +249,21 @@ const en: Record<keyof typeof fr, string> = {
   "circle.academie": "Academy",
   "circle.pouvoir": "Power as it is",
   "index.question.sample": "What remains of freedom once everything has been explained?",
+  "circle.pouvoir.q": "Must one appear virtuous to govern, or only be so?",
+  "circle.academie.q": "What is a just thing, if the stronger calls it so?",
   "note.candide": "Speak only from Candide.",
+  "auth.enter": "Enter",
+  "auth.out": "Leave",
+  "auth.busy": "Redirecting…",
+  "auth.error": "The door did not yield.",
+  "doc.title": "Salon",
+  "spec.host": "@voltaire is optimism merely a courtesy paid to misfortune?",
+  "spec.voltaire": "Courtesy? It is worse: a system. Pangloss names providence what stares us in the face. Misfortune needs no bow — look at it, and cultivate your garden.",
+  "spec.voltaire.cite": "“They sat down to table; and after an excellent dinner, they went into the library.”",
+  "spec.voltaire.work": "Candide, or Optimism",
+  "spec.rousseau": "So be it. But that garden — who closes it? You mock optimism, and you leave man alone with his misfortune. The courtesy I fear is not Pangloss’s — it is society’s, which names virtue whatever suits it.",
+  "spec.rousseau.cite": "“We are now in the world of morals, the door to vice is open.”",
+  "spec.rousseau.work": "Emile, or On Education",
 };
 
 export type MsgKey = keyof typeof fr;
@@ -252,6 +282,18 @@ export function translate(locale: Locale, key: MsgKey, vars?: Record<string, str
 
 export function guestsLabel(locale: Locale, n: number) {
   return n === 1 ? translate(locale, "index.seated.one", { n }) : translate(locale, "index.seated", { n });
+}
+
+export const SEED_KEYS: Record<string, { name: MsgKey; question: MsgKey }> = {
+  lumieres: { name: "circle.lumieres", question: "index.question.sample" },
+  pouvoir: { name: "circle.pouvoir", question: "circle.pouvoir.q" },
+  academie: { name: "circle.academie", question: "circle.academie.q" },
+};
+
+export function roomCopy(room: { id: string; name: string; question: string }, locale: Locale) {
+  const seed = SEED_KEYS[room.id];
+  if (!seed) return { name: room.name, question: room.question };
+  return { name: translate(locale, seed.name), question: translate(locale, seed.question) };
 }
 
 export function useT() {
