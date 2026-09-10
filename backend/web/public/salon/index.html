@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salon · KayrosLab</title>
+  <meta name="description" content="Cercles littéraires et philosophiques. Un texte, des rôles, une minute. On ne vote pas.">
+  <meta name="theme-color" content="#f4eee3">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,550&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./salon.css">
+</head>
+<body>
+  <!-- Hallmark · genre: editorial · macrostructure: Specimen · theme: Newsprint · tone: intimate-rigorous · anchor: oxblood · nav: N6 masthead · footer: Ft5 statement · H1 typographic -->
+  <div class="salon-root">
+    <header class="salon-masthead">
+      <a class="salon-wordmark" href="./" aria-current="page">
+        Salon
+        <small>un service KayrosLab</small>
+      </a>
+      <nav class="salon-nav" aria-label="Salon">
+        <a href="./" aria-current="page">Cercles</a>
+        <a href="/">KayrosLab</a>
+        <a href="/console/">Console</a>
+      </nav>
+    </header>
+
+    <main class="salon-stage">
+      <section class="salon-hero">
+        <p class="salon-kicker">Cercles de lecture</p>
+        <h1>Lire ensemble, jusqu’à la minute.</h1>
+        <p>
+          Un salon n’est pas un canal. C’est un texte, des rôles, et l’obligation de se
+          répondre. L’hôte clôt. Le secrétaire écrit. Personne ne vote.
+        </p>
+      </section>
+
+      <nav class="salon-index" id="salon-index" aria-label="Cercles"></nav>
+
+      <section class="salon-create">
+        <h2>Ouvrir un cercle</h2>
+        <p>
+          Un passage, un hôte, un objecteur. Le protocole — écrit en Rust — dit ensuite
+          à qui la parole.
+        </p>
+        <button class="salon-btn" type="button" id="salon-open-form">Convoquer un cercle</button>
+        <form id="salon-create-form" hidden>
+          <label>Nom du cercle <input name="name" required placeholder="Cercle du jeudi"></label>
+          <label>Lieu <input name="place" placeholder="Nantes"></label>
+          <label>Tradition
+            <select name="tradition">
+              <option value="philosophie">Philosophie</option>
+              <option value="lettres">Lettres</option>
+            </select>
+          </label>
+          <label>Hôte <input name="host" placeholder="Votre nom"></label>
+          <label>Intention <input name="statement" placeholder="Ce que ce cercle refuse de bâcler."></label>
+          <label>Œuvre <input name="title" required placeholder="Titre"></label>
+          <label>Auteur <input name="author" required placeholder="Nom"></label>
+          <label>Année <input name="year" placeholder="1580"></label>
+          <label>Passage <textarea name="excerpt" required placeholder="Le texte qu’on lit ce soir."></textarea></label>
+          <label>Source <input name="source" placeholder="Essais, I, 31"></label>
+          <div class="row" style="display:flex;gap:0.75rem">
+            <button class="salon-btn" type="submit">Convoquer</button>
+            <button class="salon-btn ghost" type="button" id="salon-cancel-form">Annuler</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="salon-foot">
+      <p>On ne se réunit pas pour produire. On se réunit pour ne pas s’en tirer trop vite.</p>
+      <nav aria-label="Pied de Salon">
+        <a href="/">KayrosLab</a>
+        <a href="/console/">Console</a>
+        <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
+        <a href="mailto:contact@kayroslab.com">Contact</a>
+      </nav>
+    </footer>
+  </div>
+  <script src="./salon.js"></script>
+  <script>Salon.renderFoyer();</script>
+</body>
+</html>

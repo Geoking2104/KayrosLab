@@ -1,6 +1,14 @@
 # Changelog
 
+## v0.24.0 (2026-09) — Salon, produit autonome (cercles littéraires)
+
+- **Salon n’est pas un salon Slack.** Nouveau service : cercles de lecture littéraires et philosophiques (rôles hôte / lecteur / objecteur / secrétaire / invité ; tours lecture → objection → défense → concession → synthèse → minute ; verdicts **tenir · relire · laisser**, jamais GO/NO_GO).
+- **`crates/salon-core`** — protocole en Rust (`evaluate`, 4 tests hôtes). Compilé en `salon_core.wasm` (ABI C : `salon_heap`, `salon_eval`, `salon_out_off`). Fallback JS aux mêmes règles.
+- **Pages `/salon/`** — foyer + séance Hallmark (Specimen / Newsprint / oxblood) dans `backend/web/public/salon/`. Lien depuis le pied de `index.html` et `index.fr.html`.
+- **Console de production inchangée.** Cette livraison ne touche pas `frontend/console-app`. Ne pas fusionner un workbench par-dessus.
+
 ## v0.23.0 (2026-08) — Étape 3 · Construire (Collision Mode EF-06)
+
 
 - **`core/collision.mjs`** (nouveau) — `distanceConcepts` (distance réelle par partage de tags, jaccard), `idCollision` (id stable par paire triée), `normalizeCollision` (2 concepts requis, faisabilité clampée 0–100), `scoreCollision` (**nouveauté × faisabilité / 100, `null` sans faisabilité**), `runCollisionMode` (paires ≥ plancher 60, ignore arêtes du réseau + historique déjà collisionné, tri par score, `generer()` importe proposition/faisabilité), `addCollision` (timeline append-only horodatée + signée, dédup), `rapportCollision` (comptages réels). La faisabilité est **importée** (LLM/humain), jamais devinée.
 - **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/collision` (concepts depuis body ou canvas/`cartographie.tendances`, plancher, `scores[]` d'apport, persiste `construire.collisions`, `construire.collision`), `GET .../collision` (rapport), `POST .../collision/selection` (mémorise `construire.selectionCollisions`, `construire.collision.select`).
