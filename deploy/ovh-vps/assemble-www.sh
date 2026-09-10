@@ -85,11 +85,16 @@ if [[ -f "${APP_DIR}/frontend/positionning-app/dist/index.html" ]]; then
 fi
 
 mkdir -p "${WWW_ROOT}"
+chmod 755 "${WWW_ROOT}"
 if command -v rsync >/dev/null 2>&1; then
   rsync -a --delete "${stage}/" "${WWW_ROOT}/"
 else
   find "${WWW_ROOT}" -mindepth 1 -delete
   cp -a "${stage}/." "${WWW_ROOT}/"
 fi
+# umask root 077 → dossiers 700, nginx (www-data) lit 403.
+find "${WWW_ROOT}" -type d -exec chmod 755 {} +
+find "${WWW_ROOT}" -type f -exec chmod 644 {} +
+chmod 755 /var/www 2>/dev/null || true
 
 echo "Site statique assemble dans ${WWW_ROOT} ($(find "${WWW_ROOT}" -type f | wc -l) fichiers)."

@@ -26,7 +26,7 @@ test('le vhost www sert le site statique et laisse passer ACME', async () => {
   assert.match(locations, /try_files \$uri \$uri\/ \/salon\/index\.html/);
   assert.match(locations, /location \/console\/ \{/);
   assert.match(locations, /try_files \$uri \$uri\/ \/console\/index\.html/);
-  assert.match(locations, /application\/wasm wasm/);
+  assert.match(locations, /default_type application\/wasm/);
   assert.match(deployWww, /assemble-www\.sh/);
   assert.match(deployWww, /sites-available\/www\.kayroslab\.com/);
   assert.match(deployBackend, /deploy-www\.sh/);
