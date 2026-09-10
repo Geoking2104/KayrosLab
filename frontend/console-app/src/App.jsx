@@ -21,10 +21,31 @@ function Mark({ name }) {
   return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
+function randomUrlToken(bytes = 32) {
+  const buf = new Uint8Array(bytes);
+  crypto.getRandomValues(buf);
+  let bin = '';
+  buf.forEach((b) => { bin += String.fromCharCode(b); });
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+async function pkceChallenge(verifier) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
+  const bytes = Array.from(new Uint8Array(digest));
+  return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function ssoRedirectUri() {
+  const path = location.pathname.replace(/index\.html$/, '');
+  const normalized = `${path.endsWith('/') ? path : `${path}/`}` || '/console/';
+  return `${location.origin}${normalized.startsWith('/console') ? normalized : '/console/'}`;
+}
+
 function Login({ onLogin }) {
   const resetToken = new URLSearchParams(String(location.hash).split('?')[1] || '').get('token') || '';
   const [mode, setMode] = useState(resetToken ? 'reset' : 'login'); const [name, setName] = useState(''); const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); const [confirmation, setConfirmation] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const [sso, setSso] = useState(null);
   const registration = mode === 'register'; const forgotten = mode === 'forgot'; const resetting = mode === 'reset';
   useEffect(() => {
     const syncResetLink = () => {
@@ -34,6 +55,47 @@ function Login({ onLogin }) {
     addEventListener('hashchange', syncResetLink); syncResetLink();
     return () => removeEventListener('hashchange', syncResetLink);
   }, []);
+  useEffect(() => {
+    let cancelled = false;
+    api.ssoConfig().then((config) => { if (!cancelled) setSso(config); }).catch(() => { if (!cancelled) setSso({ enabled: false }); });
+    return () => { cancelled = true; };
+  }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const code = params.get('code');
+    const returnedState = params.get('state');
+    if (!code || !returnedState) return;
+    const stored = sessionStorage.getItem('kayros_sso');
+    history.replaceState({}, '', location.pathname);
+    if (!stored) { setError('Session SSO expirée. Recommencez.'); return; }
+    let payload;
+    try { payload = JSON.parse(stored); } catch { setError('Session SSO illisible.'); return; }
+    sessionStorage.removeItem('kayros_sso');
+    if (payload.state !== returnedState) { setError('État SSO invalide.'); return; }
+    setState('loading');
+    api.ssoAuth0({
+      code,
+      codeVerifier: payload.verifier,
+      redirectUri: payload.redirectUri,
+      nonce: payload.nonce,
+    }).then((result) => {
+      setToken(result.token);
+      onLogin();
+    }).catch((err) => { setState('error'); setError(err.message); });
+  }, [onLogin]);
+  async function startSso() {
+    setState('loading'); setError('');
+    try {
+      const verifier = randomUrlToken(48);
+      const state = randomUrlToken(16);
+      const nonce = randomUrlToken(16);
+      const challenge = await pkceChallenge(verifier);
+      const redirectUri = ssoRedirectUri();
+      sessionStorage.setItem('kayros_sso', JSON.stringify({ verifier, state, nonce, redirectUri }));
+      const started = await api.ssoStart({ redirectUri, state, challenge, nonce });
+      location.assign(started.url);
+    } catch (err) { setState('error'); setError(err.message); }
+  }
   async function submit(event) {
     event.preventDefault(); setState('loading'); setError('');
     try {
@@ -47,11 +109,14 @@ function Login({ onLogin }) {
     }
     catch (err) { setState('error'); setError(err.message); }
   }
+  const showSso = sso?.enabled && !forgotten && !resetting && state !== 'sent' && state !== 'reset';
   return <main className="login-shell">
     <section className="login-copy"><a className="wordmark" href="/">KayrosLab</a><h1>Décider avec un collectif explicite.</h1><p>Configurez les agents, reliez les salons et gardez chaque verdict sous arbitrage humain.</p></section>
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
       {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
+      {showSso && <button type="button" className="button secondary sso-button" onClick={startSso} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : 'Continuer avec SSO'}</button>}
+      {showSso && <p className="auth-or">ou l’adresse de l’espace</p>}
       {registration && <label>Nom<input value={name} onChange={(event) => setName(event.target.value)} required /></label>}
       {!resetting && <label>Adresse e-mail<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>}
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}

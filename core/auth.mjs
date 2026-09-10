@@ -155,6 +155,44 @@ export class AuthService {
     return { token, user: publicUser(user) };
   }
 
+  /**
+   * Connexion fédérée (Auth0). Crée le compte à la première visite,
+   * relie l'identité si l'e-mail existe déjà. Pas de mot de passe local.
+   */
+  async loginWithFederated({ email, name = null, issuer, subject, tenantId = 'default' } = {}) {
+    if (!email || !String(email).includes('@')) {
+      const e = new Error('email SSO invalide'); e.code = 'AUTH0_EMAIL'; throw e;
+    }
+    const normalised = String(email).toLowerCase();
+    let user = await this.users.findByEmail(normalised);
+    if (!user) {
+      const id = globalThis.crypto?.randomUUID?.() ?? `u_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+      user = await this.users.create({
+        id,
+        email: normalised,
+        name: name || null,
+        role: 'contributeur',
+        tenantId,
+        passwordHash: null,
+        federated: { issuer, subject },
+        sessionVersion: 0,
+        createdAt: new Date().toISOString(),
+      });
+    } else {
+      const federated = { ...(user.federated || {}), issuer, subject };
+      user = await this.users.update(user.id, {
+        federated,
+        name: user.name || name || null,
+      });
+    }
+    const jti = globalThis.crypto?.randomUUID?.() ?? `j_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    const token = await issueToken(
+      { sub: user.id, email: user.email, role: user.role, tenantId: user.tenantId, jti, sessionVersion: Number(user.sessionVersion || 0) },
+      this.secret, { ttlSec: this.ttlSec },
+    );
+    return { token, user: publicUser(user) };
+  }
+
   /** Verifie un jeton : signature, expiration, revocation unitaire et globale. */
   async verify(token) {
     const r = await verifyToken(token, this.secret);

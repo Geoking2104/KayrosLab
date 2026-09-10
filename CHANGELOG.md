@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.2 (2026-09) — SSO Auth0 sur la console
+
+- **Continuer avec SSO.** Universal Login du tenant `dev-1mveynszu4lngakl` (PKCE). Le backend vérifie l’`id_token` (JWKS) et émet le jeton KayrosLab.
+- Compte `contributeur` créé à la première visite, ou relais par e-mail d’un compte déjà inscrit.
+- Secrets `AUTH0_CLIENT_ID` (et optionnels `AUTH0_DOMAIN`, `AUTH0_CLIENT_SECRET`). Voir `docs/AUTH0.md`.
+
 ## v0.25.1 (2026-09) — Site statique sur le VPS (nginx)
+
 
 - **`www.kayroslab.com`** — vhost nginx (`deploy/ovh-vps/nginx-kayroslab-www.conf`) : accueil, `/salon/`, `/console/`, WASM. ACME sur le 80, HTTPS dès que le certificat existe.
 - **`deploy-www.sh`** assemble `/var/www/kayroslab` et recharge nginx. Appelé en fin de `deploy-backend.sh`.

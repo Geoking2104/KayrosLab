@@ -9,6 +9,7 @@ export default async function healthRoute(app) {
       anthropicConfigured: !!ctx.ANTHROPIC_API_KEY,
       persistence: ctx.storeBackend,
       multiInstanceReady: ctx.storeBackend === 'postgres' && !!ctx.collaborationStore && !!ctx.swarmStore,
+      sso: { auth0: Boolean(ctx.auth0?.enabled) },
     };
   });
 }

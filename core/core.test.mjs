@@ -819,6 +819,29 @@ test('auth : rotation de mot de passe + invalidation des sessions', async () => 
   assert.ok((await auth.login({ email: 'rot@x.com', password: 'nouveau-mot-de-passe-2026' })).token);
 });
 
+test('auth : SSO fédéré crée puis relie un compte sans mot de passe', async () => {
+  const { AuthService } = await import('./auth.mjs');
+  const auth = new AuthService({ secret: 'secret-de-test-uniquement' });
+  const first = await auth.loginWithFederated({
+    email: 'Sso@Example.com',
+    name: 'Sso',
+    issuer: 'https://dev-1mveynszu4lngakl.us.auth0.com/',
+    subject: 'auth0|1',
+  });
+  assert.equal(first.user.email, 'sso@example.com');
+  assert.equal(first.user.role, 'contributeur');
+  assert.ok(first.token);
+  await assert.rejects(() => auth.login({ email: 'sso@example.com', password: 'nimporte-quoi-2026' }));
+
+  const again = await auth.loginWithFederated({
+    email: 'sso@example.com',
+    name: 'Sso',
+    issuer: 'https://dev-1mveynszu4lngakl.us.auth0.com/',
+    subject: 'auth0|1',
+  });
+  assert.equal(again.user.id, first.user.id);
+});
+
 // ---------- Canaux de notification (circuit reellement branche) ----------
 test('notify : webhook envoie une charge utile exploitable', async () => {
   const { WebhookNotifier, formatGateEvent } = await import('./notify.mjs');

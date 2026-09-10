@@ -31,6 +31,7 @@ import {
 import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
 import { createMcpClientRegistry } from './mcp-auth.mjs';
+import { auth0ConfigFromEnv } from './auth0.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
   if (!engine) return null;
@@ -251,6 +252,7 @@ export default async function buildContext() {
   }
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
+  const auth0 = auth0ConfigFromEnv(process.env);
   let passwordResetMailer = null;
   if (process.env.KAYROS_SMTP_URL) {
     try {
@@ -535,7 +537,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
 
   return {
-    providers, llm, embeddings, tools, auth, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
+    providers, llm, embeddings, tools, auth, auth0, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig,
     engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,

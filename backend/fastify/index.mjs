@@ -47,6 +47,9 @@ app.addHook('preHandler', async (req, reply) => {
   const path = (req.url || '').split('?')[0];
   if (path.startsWith('/v1/demo/')) return;
   if (path === '/v1/contact') return; // formulaire de contact public du site
+  if (path === '/v1/auth/login' || path === '/v1/auth/register') return;
+  if (path.startsWith('/v1/auth/password/')) return;
+  if (path.startsWith('/v1/auth/sso')) return;
   if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
   if (path === '/mcp') return; // dedicated scoped Bearer authentication
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
