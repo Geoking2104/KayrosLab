@@ -81,8 +81,35 @@ test('le catalogue élargi tient Shakespeare, vingt philosophes et les tradition
     assert.ok(author, id);
     assert.equal(author.kind, 'tradition');
     assert.match(author.avatar, /\.svg$/);
-    assert.ok(author.works.length >= 4, id);
+    assert.ok(author.works.length >= 1, id);
     assert.ok(author.nameEn);
     assert.ok(author.blurbEn);
   }
+  assert.ok(catalog.authors.find((a) => a.id === 'christianisme').works.length >= 4);
+  assert.ok(catalog.authors.find((a) => a.id === 'judaisme').works.length >= 4);
+  assert.ok(catalog.authors.find((a) => a.id === 'hindouisme').works.length >= 4);
+});
+
+test('chaque œuvre du catalogue est un texte de l’auteur, sans doublon ni parasite', async () => {
+  const catalog = JSON.parse(await read('salon/src/lib/salon/catalog.json'));
+  const forbidden =
+    /expositor.?s bible|baird lecture|imitation of christ|gospel of buddha|proclus|montaigne and shakspere|quotes and images|linked index|life and letters of charles darwin/i;
+  const byId = Object.fromEntries(catalog.authors.map((a) => [a.id, a]));
+  for (const author of catalog.authors) {
+    const titles = author.works.map((w) => w.title);
+    assert.equal(titles.length, new Set(titles).size, author.id);
+    for (const work of author.works) {
+      assert.equal(work.ok, true, `${author.id} ${work.title}`);
+      assert.match(work.url, /gutenberg\.org/, `${author.id} ${work.title}`);
+      assert.doesNotMatch(work.title, forbidden, `${author.id} ${work.title}`);
+    }
+    assert.ok(author.works.length >= 1, author.id);
+  }
+  assert.ok(byId.platon.works.every((w) => !/proclus/i.test(w.title)));
+  assert.ok(byId.epicure.works.some((w) => /menoeceus/i.test(w.title)));
+  assert.ok(byId.diderot.works.length >= 4);
+  assert.ok(byId.smith.works.every((w) => /wealth|moral sentiments|essays of adam smith/i.test(w.title)));
+  assert.equal(byId.suntzu.works.length, 1);
+  assert.equal(byId.marcaurele.works.length, 1);
+  assert.equal(byId.islam.works.length, 1);
 });

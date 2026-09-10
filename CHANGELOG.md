@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.25.15 (2026-09) — Salon : mémoires vérifiées, livres de l’auteur
+
+- Chaque œuvre Gutenberg a été relue sur la ligne `Author:` (ou le titre pour les écritures).
+- Plus de Proclus chez Platon, d’Expositor’s Bible chez Smith, d’Imitation chez le christianisme, ni d’Évangile de Bouddha.
+- Cinq livres distincts quand ils existent ; sinon la mémoire reste mince (Marc Aurèle, Sun Tzu, le Coran…).
+- Épicure : lettres et maximes tirées du livre X de Diogène Laërce.
+
 ## v0.25.14 (2026-09) — Salon : portrait pour chaque auteur
 
 - 48 portraits (Wikimedia) ; 6 pictogrammes de tradition.
