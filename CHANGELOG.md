@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.6 (2026-09) — Salon : « Les auteurs », i18n EN
+
+- Plus de « 28 fiches » : le titre est **Les auteurs** / **The authors**.
+- Chrome du spécimen (fiche, méthode, convives, envoi) passé par i18n EN.
+
 ## v0.25.5 (2026-09) — Salon : Gutenberg, Atramenta, traditions
+
 
 - « Ajouter une œuvre » : plus de « Chercher au domaine public ». Recherche Gutenberg + Atramenta.
 - Catalogue : 54 convives. Shakespeare conservé ; 20 philosophes ajoutés ; Bible, Torah, Coran, Gîtâ, Dhammapada, Tao-Tö-King (symboles en portrait).

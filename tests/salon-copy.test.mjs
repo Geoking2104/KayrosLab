@@ -31,7 +31,10 @@ test('Salon i18n : cercle, convier, personnalité, auteurs', async () => {
   assert.match(i18n, /"nav\.agents": "Authors"/);
   assert.doesNotMatch(i18n, /Chercher au domaine public/);
   assert.doesNotMatch(i18n, /Search the public domain/);
-  assert.match(i18n, /kind\.tradition/);
+  assert.match(i18n, /"agents\.fiches": "Les auteurs"/);
+  assert.match(i18n, /"agents\.fiches": "The authors"/);
+  assert.doesNotMatch(i18n, /Les \{n\} fiches/);
+  assert.doesNotMatch(i18n, /The \{n\} profiles/);
 });
 
 test('Salon spécimen HTML suit la même copie', async () => {
@@ -46,7 +49,11 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.doesNotMatch(page, /Faire entrer/);
     assert.doesNotMatch(page, /personne ne vote/);
     assert.doesNotMatch(page, /3\/6/);
-    assert.match(page, /54 déjà/);
+    assert.match(page, /data-i18n="agents\.fiches"/);
+    assert.match(page, /"kind\.philosophe": "Philosopher"/);
+    assert.match(page, /"send": "Send"/);
+    assert.match(page, /"handle": "Handle @"/);
+    assert.doesNotMatch(page, /Les \{n\} fiches|28 fiches/);
   }
 });
 

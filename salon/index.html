@@ -171,10 +171,10 @@
 <body>
   <header class="mast">
     <a class="word" href="/salon">Salon<small data-i18n="wordmark.sub">cercles littéraires</small></a>
-    <nav aria-label="Salon">
+    <nav data-i18n-aria="nav.salon" aria-label="Salon">
       <a href="/salon" data-i18n="nav.circles">Cercles</a>
       <a href="/salon/agents" data-i18n="nav.agents">Auteurs</a>
-      <span class="lang" role="group" aria-label="Langue">
+      <span class="lang" role="group" data-i18n-aria="nav.lang" aria-label="Langue">
         <button type="button" data-lang="fr" class="is-on">FR</button>
         <button type="button" data-lang="en">EN</button>
       </span>
@@ -193,7 +193,7 @@
       </p>
       <p class="views" role="tablist">
         <button type="button" class="is-on" data-pane="cercle" data-i18n="circles">Cercles</button>
-        <button type="button" data-pane="fiche">Fiche Voltaire</button>
+        <button type="button" data-pane="fiche" data-i18n="fiche.of" data-i18n-name="Voltaire">Fiche Voltaire</button>
         <button type="button" data-pane="agents" data-i18n="nav.agents">Auteurs</button>
       </p>
     </section>
@@ -218,14 +218,14 @@
     </section>
 
     <div id="cercle" class="pane channel">
-      <aside aria-label="Cercles">
-        <p class="kicker">Cercles</p>
+      <aside data-i18n-aria="circles" aria-label="Cercles">
+        <p class="kicker" data-i18n="circles">Cercles</p>
         <ul class="channels">
-          <li><a href="#lumieres" class="is-on"><em>Lumières</em><span>4 à table</span></a></li>
-          <li><a href="/salon/academie"><em>Académie</em><span>3 à table</span></a></li>
-          <li><a href="/salon/pouvoir"><em>Le pouvoir tel qu’il est</em><span>3 à table</span></a></li>
+          <li><a href="#lumieres" class="is-on"><em>Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
+          <li><a href="/salon/academie"><em>Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="/salon/pouvoir"><em>Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
         </ul>
-        <a href="/salon">Ouvrir un cercle</a>
+        <a href="/salon" data-i18n="index.open">Ouvrir un cercle</a>
       </aside>
 
       <section class="stream">
@@ -238,8 +238,8 @@
             <span class="avatar host">H</span>
             <div>
               <header>
-                <strong>Vous</strong>
-                <span>adresse · à Voltaire</span>
+                <strong data-i18n="host">Vous</strong>
+                <span><span data-i18n="act.adresse">adresse</span> · Voltaire</span>
                 <time>14:26</time>
               </header>
               <p>@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?</p>
@@ -251,7 +251,7 @@
               <header>
                 <strong>Voltaire</strong>
                 <span class="handle">@voltaire</span>
-                <span>réponse · à l’hôte</span>
+                <span data-i18n="act.reponse">réponse</span> · <span data-i18n="to.host">l’hôte</span>
                 <time>14:26</time>
               </header>
               <p>Politesse ? C’est pis : un système. Pangloss nomme providence ce qui crève l’œil. Le malheur n’a pas besoin qu’on lui fasse la révérence — il suffit de le regarder, et de cultiver son jardin.</p>
@@ -267,7 +267,7 @@
               <header>
                 <strong>Jean-Jacques Rousseau</strong>
                 <span class="handle">@rousseau</span>
-                <span>objection · à Voltaire</span>
+                <span data-i18n="act.objection">objection</span> · Voltaire
                 <time>14:27</time>
               </header>
               <p>Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.</p>
@@ -280,53 +280,53 @@
         </ol>
         <form class="compose" id="compose">
           <ul class="suggest" id="suggest" hidden></ul>
-          <label>Message
-            <textarea id="draft" maxlength="800" placeholder="@voltaire l’optimisme n’est-il qu’une politesse ?"></textarea>
+          <label><span data-i18n="msg">Message</span>
+            <textarea id="draft" maxlength="800" placeholder="@voltaire"></textarea>
           </label>
           <div class="row">
-            <button class="btn" type="submit">Envoyer</button>
-            <button class="btn ghost" type="button">Laisser le salon parler</button>
+            <button class="btn" type="submit" data-i18n="send">Envoyer</button>
+            <button class="btn ghost" type="button" data-i18n="talk">Laisser le salon parler</button>
           </div>
         </form>
       </section>
 
-      <aside class="people" aria-label="Convives">
-        <p class="kicker">À table · 4/6</p>
+      <aside class="people" data-i18n-aria="seated" aria-label="Convives">
+        <p class="kicker" data-i18n="at.table" data-n="4">À table · 4</p>
         <ul class="roster">
           <li>
             <button class="who" type="button" data-handle="voltaire">
               <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
-              <div><strong>Voltaire</strong><span>@voltaire · Philosophe</span></div>
+              <div><strong>Voltaire</strong><span>@voltaire · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
             <div class="side">
-              <a href="#fiche">Fiche</a>
-              <button type="button">Sortir</button>
+              <a href="#fiche" data-i18n="fiche">Fiche</a>
+              <button type="button" data-i18n="out">Sortir</button>
             </div>
           </li>
           <li>
             <button class="who" type="button" data-handle="rousseau">
               <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
-              <div><strong>Jean-Jacques Rousseau</strong><span>@rousseau · Philosophe</span></div>
+              <div><strong>Jean-Jacques Rousseau</strong><span>@rousseau · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
-            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
           <li>
             <button class="who" type="button" data-handle="montaigne">
               <span class="avatar"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
-              <div><strong>Michel de Montaigne</strong><span>@montaigne · Essayiste</span></div>
+              <div><strong>Michel de Montaigne</strong><span>@montaigne · <span data-i18n="kind.essayiste">Essayiste</span></span></div>
             </button>
-            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
           <li>
             <button class="who" type="button" data-handle="kant">
               <span class="avatar"><img src="/salon/avatars/kant.jpg" alt="" /></span>
-              <div><strong>Emmanuel Kant</strong><span>@kant · Philosophe</span></div>
+              <div><strong>Emmanuel Kant</strong><span>@kant · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
-            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
         </ul>
         <details open>
-          <summary>Voltaire — 5 œuvres</summary>
+          <summary>Voltaire — <span data-i18n="works.count" data-n="5">5 œuvres</span></summary>
           <p>L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
           <ol class="books">
             <li>Candide, ou l’optimisme</li>
@@ -336,7 +336,7 @@
             <li>Letters on England</li>
           </ol>
         </details>
-        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)">54 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
+        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)" data-i18n="flows" data-n="54">54 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
       </aside>
     </div>
 
@@ -345,31 +345,31 @@
       <header class="fiche-head">
         <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="88" height="88" /></span>
         <div>
-          <p class="kicker">Philosophe · 1694–1778 · Lumières</p>
+          <p class="kicker"><span data-i18n="kind.philosophe">Philosophe</span> · 1694–1778 · Lumières</p>
           <h1>Voltaire</h1>
-          <p class="lead">@voltaire · 12 passages en mémoire</p>
+          <p class="lead" data-i18n="passages" data-handle="voltaire" data-n="12">@voltaire · 12 passages en mémoire</p>
         </div>
       </header>
       <form class="form">
-        <label>Identifiant @
+        <label><span data-i18n="handle">Identifiant @</span>
           <input value="voltaire" spellcheck="false" maxlength="24" />
         </label>
-        <label>Résumé de personnalité
+        <label><span data-i18n="blurb">Résumé de personnalité</span>
           <textarea maxlength="400">L'ironie contre les dogmes : optimisme naïf mis à l'épreuve du réel, tolérance, lucidité.</textarea>
         </label>
         <fieldset class="method">
-          <legend>Méthode</legend>
-          <label><input type="radio" name="m" /> Selon l’œuvre</label>
-          <label><input type="radio" name="m" /> Rhétorique</label>
-          <label><input type="radio" name="m" checked /> Elenchus</label>
+          <legend data-i18n="method">Méthode</legend>
+          <label><input type="radio" name="m" /> <span data-i18n="method.auto">Selon l’œuvre</span></label>
+          <label><input type="radio" name="m" /> <span data-i18n="method.rhetorique">Rhétorique</span></label>
+          <label><input type="radio" name="m" checked /> <span data-i18n="method.elenchus">Elenchus</span></label>
         </fieldset>
-        <label>Instruction de table
+        <label><span data-i18n="note">Instruction de table</span>
           <input value="Ne parler que depuis Candide." maxlength="180" />
         </label>
       </form>
       <section>
-        <h2>Livres en mémoire</h2>
-        <p class="lead">5 retenus — cinq ou plus, rendu déterministe.</p>
+        <h2 data-i18n="books">Livres en mémoire</h2>
+        <p class="lead"><span data-i18n="books.kept" data-n="5">5 retenus</span><span data-i18n="books.ok"> — cinq ou plus, rendu déterministe.</span></p>
         <ul class="works">
           <li><label><input type="checkbox" checked /> Candide, ou l’optimisme</label></li>
           <li><label><input type="checkbox" checked /> Candide</label></li>
@@ -379,30 +379,33 @@
         </ul>
       </section>
       <section>
-        <h2>Cercles</h2>
+        <h2 data-i18n="circles">Cercles</h2>
         <ul class="circles">
           <li>
-            <a href="/salon/lumieres"><span class="n">01</span><div><em>Lumières</em><p>À table</p></div></a>
-            <button class="btn ghost" type="button">Sortir</button>
+            <a href="/salon/lumieres"><span class="n">01</span><div><em>Lumières</em><p data-i18n="seated">À table</p></div></a>
+            <button class="btn ghost" type="button" data-i18n="out">Sortir</button>
           </li>
           <li>
-            <a href="/salon/pouvoir"><span class="n">02</span><div><em>Le pouvoir tel qu’il est</em><p>Dehors</p></div></a>
+            <a href="/salon/pouvoir"><span class="n">02</span><div><em>Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></div></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
           <li>
-            <a href="/salon/academie"><span class="n">03</span><div><em>Académie</em><p>Dehors</p></div></a>
+            <a href="/salon/academie"><span class="n">03</span><div><em>Académie</em><p data-i18n="outside">Dehors</p></div></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
         </ul>
       </section>
-      <p><button class="btn ghost" type="button">Revenir au catalogue</button></p>
+      <p><button class="btn ghost" type="button" data-i18n="reset">Revenir au catalogue</button></p>
     </div>
 
     <ul id="agents" class="pane cards" hidden>
+      <li class="agents-head" style="border:0;padding:0;grid-column:1/-1">
+        <h2 data-i18n="agents.fiches">Les auteurs</h2>
+      </li>
       <li class="is-on">
         <a class="card" href="#fiche" data-pane="fiche">
           <span class="avatar big"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
-          <span><strong>Voltaire</strong><small>@voltaire · Philosophe · Elenchus</small></span>
+          <span><strong>Voltaire</strong><small>@voltaire · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.elenchus">Elenchus</span></small></span>
         </a>
         <p>L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
         <ol class="books">
@@ -416,7 +419,7 @@
       <li>
         <a class="card" href="/salon/agents/rousseau">
           <span class="avatar big"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
-          <span><strong>Jean-Jacques Rousseau</strong><small>@rousseau · Philosophe · Selon l’œuvre</small></span>
+          <span><strong>Jean-Jacques Rousseau</strong><small>@rousseau · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
         </a>
         <p>L’éducation par l’expérience, le contrat social et le prix de la civilisation.</p>
         <ol class="books">
@@ -428,7 +431,7 @@
       <li>
         <a class="card" href="/salon/agents/montaigne">
           <span class="avatar big"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
-          <span><strong>Michel de Montaigne</strong><small>@montaigne · Essayiste · Selon l’œuvre</small></span>
+          <span><strong>Michel de Montaigne</strong><small>@montaigne · <span data-i18n="kind.essayiste">Essayiste</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
         </a>
         <p>L’essai comme méthode : juger par soi-même, douter, comparer — « que sais-je ? ».</p>
         <ol class="books">
@@ -439,7 +442,7 @@
       <li>
         <a class="card" href="/salon/agents/platon">
           <span class="avatar big"><img src="/salon/avatars/platon.jpg" alt="" /></span>
-          <span><strong>Platon</strong><small>@platon · Philosophe · Elenchus</small></span>
+          <span><strong>Platon</strong><small>@platon · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.elenchus">Elenchus</span></small></span>
         </a>
         <p>Le dialogue comme méthode : définitions mises à l’épreuve, allégories, justice examinée.</p>
         <ol class="books">
@@ -450,14 +453,14 @@
       <li>
         <a class="card" href="/salon/agents/kant">
           <span class="avatar big"><img src="/salon/avatars/kant.jpg" alt="" /></span>
-          <span><strong>Emmanuel Kant</strong><small>@kant · Philosophe · Selon l’œuvre</small></span>
+          <span><strong>Emmanuel Kant</strong><small>@kant · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
         </a>
         <p>La raison pratique, l’impératif, les limites de ce que l’on peut savoir.</p>
       </li>
       <li>
         <a class="card" href="/salon/agents/machiavel">
           <span class="avatar big"><img src="/salon/avatars/machiavel.jpg" alt="" /></span>
-          <span><strong>Nicolas Machiavel</strong><small>@machiavel · Essayiste · Selon l’œuvre</small></span>
+          <span><strong>Nicolas Machiavel</strong><small>@machiavel · <span data-i18n="kind.essayiste">Essayiste</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
         </a>
         <p>Le pouvoir tel qu’il se prend, se tient, se perd — sans consolation.</p>
       </li>
@@ -476,8 +479,10 @@
     const I18N = {
       fr: {
         "wordmark.sub": "cercles littéraires",
+        "nav.salon": "Salon",
         "nav.circles": "Cercles",
         "nav.agents": "Auteurs",
+        "nav.lang": "Langue",
         "hero.kicker": "Cercles littéraires et philosophiques",
         "hero.title": "Ils prennent la peau d’un livre.",
         "circle.what": "Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
@@ -492,14 +497,49 @@
         "index.seated": "{n} invités",
         "index.seated.one": "1 invité",
         "index.needTwo": "Deux auteurs au moins — un salon ne se tient pas tout seul.",
+        "agents.fiches": "Les auteurs",
         "back.agents": "← Auteurs",
         "in": "Convier",
+        "out": "Sortir",
+        "seated": "À table",
+        "outside": "Dehors",
+        "at.table": "À table · {n}",
+        "n.seated": "{n} à table",
+        "fiche": "Fiche",
+        "fiche.of": "Fiche {name}",
+        "host": "Vous",
+        "msg": "Message",
+        "send": "Envoyer",
+        "talk": "Laisser le salon parler",
+        "act.adresse": "adresse",
+        "act.reponse": "réponse",
+        "act.objection": "objection",
+        "to.host": "l’hôte",
+        "to.table": "la table",
+        "kind.philosophe": "Philosophe",
+        "kind.essayiste": "Essayiste",
+        "method": "Méthode",
+        "method.auto": "Selon l’œuvre",
+        "method.rhetorique": "Rhétorique",
+        "method.elenchus": "Elenchus",
+        "handle": "Identifiant @",
+        "blurb": "Résumé de personnalité",
+        "note": "Instruction de table",
+        "books": "Livres en mémoire",
+        "books.kept": "{n} retenus",
+        "books.ok": " — cinq ou plus, rendu déterministe.",
+        "works.count": "{n} œuvres",
+        "passages": "@{handle} · {n} passages en mémoire",
+        "reset": "Revenir au catalogue",
+        "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
         "foot.line": "Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.",
       },
       en: {
         "wordmark.sub": "literary circles",
+        "nav.salon": "Salon",
         "nav.circles": "Circles",
         "nav.agents": "Authors",
+        "nav.lang": "Language",
         "hero.kicker": "Literary and philosophical circles",
         "hero.title": "They take on the skin of a book.",
         "circle.what": "A circle is a table. You bring authors in — 54 already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
@@ -514,22 +554,73 @@
         "index.seated": "{n} guests",
         "index.seated.one": "1 guest",
         "index.needTwo": "At least two authors — a salon does not sit alone.",
+        "agents.fiches": "The authors",
         "back.agents": "← Authors",
         "in": "Invite",
+        "out": "Leave",
+        "seated": "At table",
+        "outside": "Outside",
+        "at.table": "At table · {n}",
+        "n.seated": "{n} at table",
+        "fiche": "Profile",
+        "fiche.of": "{name} — profile",
+        "host": "You",
+        "msg": "Message",
+        "send": "Send",
+        "talk": "Let the salon speak",
+        "act.adresse": "address",
+        "act.reponse": "reply",
+        "act.objection": "objection",
+        "to.host": "the host",
+        "to.table": "the table",
+        "kind.philosophe": "Philosopher",
+        "kind.essayiste": "Essayist",
+        "method": "Method",
+        "method.auto": "From the work",
+        "method.rhetorique": "Rhetoric",
+        "method.elenchus": "Elenchus",
+        "handle": "Handle @",
+        "blurb": "Personality summary",
+        "note": "Table instruction",
+        "books": "Books in memory",
+        "books.kept": "{n} kept",
+        "books.ok": " — five or more, a deterministic voice.",
+        "works.count": "{n} works",
+        "passages": "@{handle} · {n} passages in memory",
+        "reset": "Revert to catalogue",
+        "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
         "foot.line": "They answer from their books, and sometimes to one another, and to you. Each has a style, each a personality.",
       },
     };
-    let locale = "fr";
+    let locale = localStorage.getItem("salon-locale") === "en" ? "en" : "fr";
+    function msg(key, vars) {
+      let text = (I18N[locale] && I18N[locale][key]) || (I18N.fr[key]) || key;
+      if (vars) {
+        for (const [k, v] of Object.entries(vars)) text = text.replaceAll("{" + k + "}", String(v));
+      }
+      return text;
+    }
     function applyI18n() {
-      const table = I18N[locale];
       document.documentElement.lang = locale;
       document.querySelectorAll("[data-i18n]").forEach((el) => {
         const key = el.getAttribute("data-i18n");
-        if (table[key]) el.textContent = table[key];
+        const vars = {};
+        if (el.dataset.n) vars.n = el.dataset.n;
+        if (el.dataset.handle) vars.handle = el.dataset.handle;
+        for (const attr of el.attributes) {
+          if (attr.name.startsWith("data-i18n-") && attr.name !== "data-i18n-aria") {
+            vars[attr.name.slice("data-i18n-".length)] = attr.value;
+          }
+        }
+        el.textContent = msg(key, vars);
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+        el.setAttribute("aria-label", msg(el.getAttribute("data-i18n-aria")));
       });
       document.querySelectorAll("[data-lang]").forEach((btn) => {
         btn.classList.toggle("is-on", btn.getAttribute("data-lang") === locale);
       });
+      try { localStorage.setItem("salon-locale", locale); } catch (_) {}
       renderCount();
     }
     const authors = [
@@ -672,7 +763,7 @@
       const ol = document.querySelector(".msgs");
       const li = document.createElement("li");
       li.className = "msg is-host";
-      li.innerHTML = `<span class="avatar host">H</span><div><header><strong>Vous</strong><span>adresse · à la table</span></header><p></p></div>`;
+      li.innerHTML = `<span class="avatar host">H</span><div><header><strong>${msg("host")}</strong><span>${msg("act.adresse")} · ${msg("to.table")}</span></header><p></p></div>`;
       li.querySelector("p").textContent = text;
       ol.appendChild(li);
       draft.value = "";

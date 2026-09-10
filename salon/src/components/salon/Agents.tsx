@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { resolveAuthor } from "@/lib/salon/agents";
-import { allAuthors, LITERARY_KINDS, searchAuthors } from "@/lib/salon/catalog";
+import { LITERARY_KINDS, searchAuthors } from "@/lib/salon/catalog";
 import { useT, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import { CreateAuthor } from "./CreateAuthor";
@@ -33,7 +33,7 @@ export function Agents() {
           </p>
         )}
         <div className="salon-lib-head">
-          <h2>{t("agents.fiches", { n: allAuthors().length })}</h2>
+          <h2>{t("agents.fiches")}</h2>
           <div className="salon-filters">
             <input
               value={query}

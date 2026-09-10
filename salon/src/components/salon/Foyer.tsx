@@ -127,7 +127,7 @@ export function Foyer() {
 
         <section className="salon-library" aria-labelledby="auteurs">
           <div className="salon-lib-head">
-            <h2 id="auteurs">{t("agents.title", { n: allAuthors().length })}</h2>
+            <h2 id="auteurs">{t("agents.title")}</h2>
             <div className="salon-filters">
               <input
                 value={query}
