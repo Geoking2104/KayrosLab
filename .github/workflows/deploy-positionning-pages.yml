@@ -14,6 +14,8 @@ on:
       - 'backend/web/views/homepage-studio.ejs'
       - 'backend/web/locales/**'
       - 'backend/web/public/assets/**'
+      - 'backend/web/public/salon/**'
+      - 'crates/salon-core/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
       - 'tests/sales-oracle-site.test.mjs'
@@ -148,6 +150,15 @@ jobs:
             cp -r backend/web/public/console/. deploy/console/
           else
             echo "ERROR: console-app build missing after build" >&2
+            exit 1
+          fi
+
+          # Salon — autonomous literary circles (static). Footer /salon/ must not 404.
+          if [ -f backend/web/public/salon/index.html ]; then
+            mkdir -p deploy/salon
+            cp -r backend/web/public/salon/. deploy/salon/
+          else
+            echo "ERROR: salon static missing (footer would 404)" >&2
             exit 1
           fi
 

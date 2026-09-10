@@ -1,6 +1,30 @@
 # Changelog
 
+## v0.25.0 (2026-09) — Salon, les auteurs prennent la peau d’un livre
+
+- **Agents, pas protocole.** Vingt-huit auteurs du domaine public (cinq œuvres parsées chacun). Le moteur prend la peau d’un agent et répond dans le cercle ; les agents se parlent, ou l’hôte les appelle par `@`.
+- **Fiches.** `@`, résumé, méthode (œuvre / rhétorique / elenchus), instruction de table. Ajout d’œuvres par Gutenberg, PDF ou TXT — à tous les agents.
+- **Ajouter un agent.** Cinq œuvres libres au minimum. Moins de cinq : la profondeur de personnalité est trop faible.
+- **Ouvrir un cercle.** 1. nom 2. question 3. invités, puis **Faire entrer**.
+- **Conserver en PDF.** Couverture, page de garde des auteurs, index, fil.
+- **FR / EN.** Interface bilingue. Les livres restent dans leur langue.
+- **Pages `/salon/`** — spécimen HTML (Hallmark, oxblood) + source React (`salon/src`) + crate Rust (`crates/salon-core`). La console de production n’est pas touchée.
+
+## v0.24.1 (2026-09) — Salon, le protocole WASM s’évalue vraiment
+
+- Le chargeur lisait le retour de `salon_eval` comme un pointeur dans la mémoire linéaire alors que le crate renvoyait un **décalage dans le tas** (`OUT_OFF = 24576`). Le module s’instanciait, l’UI disait Rust, l’évaluation tombait silencieusement en JavaScript.
+- `salon_eval` retourne désormais le pointeur absolu (`heap + OUT_OFF`). Le JS lit toujours `salon_heap() + salon_out_off()`.
+- Sonde au chargement (cercle vide → lecteur / lecture). Le fallback JS ne se fait plus passer pour Rust.
+
+## v0.24.0 (2026-09) — Salon, produit autonome (cercles littéraires)
+
+- **Salon n’est pas un salon Slack.** Nouveau service : cercles de lecture littéraires et philosophiques (rôles hôte / lecteur / objecteur / secrétaire / invité ; tours lecture → objection → défense → concession → synthèse → minute ; verdicts **tenir · relire · laisser**, jamais GO/NO_GO).
+- **`crates/salon-core`** — protocole en Rust (`evaluate`, 4 tests hôtes). Compilé en `salon_core.wasm` (ABI C : `salon_heap`, `salon_eval`, `salon_out_off`). Fallback JS aux mêmes règles.
+- **Pages `/salon/`** — foyer + séance Hallmark (Specimen / Newsprint / oxblood) dans `backend/web/public/salon/`. Lien depuis le pied de `index.html` et `index.fr.html`.
+- **Console de production inchangée.** Cette livraison ne touche pas `frontend/console-app`. Ne pas fusionner un workbench par-dessus.
+
 ## v0.23.0 (2026-08) — Étape 3 · Construire (Collision Mode EF-06)
+
 
 - **`core/collision.mjs`** (nouveau) — `distanceConcepts` (distance réelle par partage de tags, jaccard), `idCollision` (id stable par paire triée), `normalizeCollision` (2 concepts requis, faisabilité clampée 0–100), `scoreCollision` (**nouveauté × faisabilité / 100, `null` sans faisabilité**), `runCollisionMode` (paires ≥ plancher 60, ignore arêtes du réseau + historique déjà collisionné, tri par score, `generer()` importe proposition/faisabilité), `addCollision` (timeline append-only horodatée + signée, dédup), `rapportCollision` (comptages réels). La faisabilité est **importée** (LLM/humain), jamais devinée.
 - **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/collision` (concepts depuis body ou canvas/`cartographie.tendances`, plancher, `scores[]` d'apport, persiste `construire.collisions`, `construire.collision`), `GET .../collision` (rapport), `POST .../collision/selection` (mémorise `construire.selectionCollisions`, `construire.collision.select`).

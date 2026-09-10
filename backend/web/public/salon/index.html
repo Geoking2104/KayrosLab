@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salon · rendu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: oklch(96.4% 0.016 85);
+      --paper-2: oklch(93.5% 0.022 80);
+      --ink: oklch(22% 0.028 48);
+      --ink-2: oklch(40% 0.02 50);
+      --muted: oklch(48% 0.018 55);
+      --rule: oklch(84% 0.02 80);
+      --accent: oklch(42% 0.12 25);
+      --accent-ink: oklch(97% 0.01 85);
+      --display: "Fraunces", "Iowan Old Style", Palatino, serif;
+      --body: "Source Sans 3", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); }
+    body { min-height: 100dvh; display: flex; flex-direction: column; }
+    a { color: var(--accent); text-decoration: none; }
+    header.mast, footer {
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: end;
+    }
+    header.mast { border-bottom: 1px solid var(--rule); }
+    footer { border-top: 1px solid var(--rule); margin-top: auto; display: grid; gap: 0.75rem; }
+    footer p { margin: 0; max-width: 36ch; font-family: var(--display); font-size: 1.35rem; line-height: 1.25; font-weight: 500; }
+    footer nav, header.mast nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+    header.mast nav a, footer nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink-2); }
+    header.mast nav a.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .word { font-family: var(--display); font-size: 1.65rem; font-weight: 550; letter-spacing: -0.03em; color: var(--ink); }
+    .word small { display: block; margin-top: 0.35rem; font-family: var(--body); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    main { padding: 2.5rem; display: grid; gap: 2.5rem; flex: 1; }
+    .kicker { margin: 0; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.72rem; font-weight: 600; }
+    h1 { font-family: var(--display); font-weight: 550; letter-spacing: -0.03em; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.12; margin: 0.2rem 0 0.5rem; max-width: 18ch; }
+    .lead { margin: 0; color: var(--ink-2); max-width: 52ch; line-height: 1.55; }
+    .views { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+    .views button {
+      background: none; border: 0; padding: 0; min-height: 44px; font: inherit; color: var(--ink-2); cursor: pointer; text-underline-offset: 0.2em;
+    }
+    .views button.is-on { color: var(--accent); text-decoration: underline; }
+    .pane[hidden] { display: none !important; }
+
+    .channel {
+      display: grid;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 960px) {
+      .channel { grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr) minmax(13rem, 17rem); }
+    }
+    .channels, .roster, .msgs, .suggest { list-style: none; margin: 0; padding: 0; display: grid; }
+    .channels { gap: 0.15rem; }
+    .channels a {
+      display: grid; gap: 0.15rem; padding: 0.45rem 0; min-height: 44px; color: var(--ink-2); border-bottom: 1px solid var(--rule);
+    }
+    .channels a em { font-style: normal; font-family: var(--display); color: var(--ink); font-size: 1.15rem; }
+    .channels a span { font-size: 0.78rem; color: var(--muted); }
+    .channels a.is-on em { color: var(--accent); }
+    .stream { display: grid; gap: 1rem; min-width: 0; }
+    .protocol p { margin: 0; color: var(--ink-2); }
+    .msgs { gap: 1rem; }
+    .msg {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      gap: 0.5rem 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .msg header { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: baseline; color: var(--muted); font-size: 0.82rem; }
+    .msg header strong { color: var(--ink); font-size: 1rem; }
+    .handle { color: var(--accent); }
+    .msg p { margin: 0.25rem 0 0; max-width: 58ch; line-height: 1.55; }
+    .msg.is-host p { color: var(--ink-2); }
+    .cite { margin: 0.35rem 0 0; max-width: 48ch; color: var(--muted); font-family: var(--display); font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+    .cite cite { display: block; margin-top: 0.25rem; font-style: normal; font-family: var(--body); font-size: 0.78rem; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--paper-2);
+      display: grid; place-items: center; font-family: var(--display); color: var(--accent); overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .host { font-size: 0.95rem; }
+    .people { display: grid; gap: 1rem; align-content: start; }
+    .roster { gap: 0.45rem; }
+    .roster li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.35rem; align-items: center; }
+    .who {
+      display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.75rem; align-items: center;
+      background: none; border: 0; padding: 0; min-height: 44px; font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%;
+    }
+    .who span { display: block; color: var(--muted); font-size: 0.78rem; }
+    .side { display: flex; flex-direction: column; align-items: flex-end; }
+    .side a, .side button {
+      min-height: 44px; display: inline-flex; align-items: center; background: none; border: 0;
+      color: var(--muted); font: inherit; font-size: 0.78rem; cursor: pointer; padding: 0 0.2rem;
+    }
+    .side a { color: var(--accent); }
+    .books { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.82rem; }
+    details { padding-top: 0.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+    details summary { cursor: pointer; color: var(--ink-2); min-height: 44px; display: flex; align-items: center; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: "§"; margin-right: 0.45rem; color: var(--accent); font-family: var(--display); }
+    .compose { display: grid; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); position: relative; max-width: 40rem; }
+    label { display: grid; gap: 0.35rem; font-size: 0.82rem; color: var(--muted); }
+    input, textarea, select {
+      width: 100%; padding: 0.7rem 0.8rem; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); font: inherit;
+    }
+    textarea { min-height: 6.5rem; resize: vertical; }
+    input:focus, textarea:focus, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { min-height: 44px; padding: 0 1.1rem; border: 0; background: var(--accent); color: var(--accent-ink); font: inherit; cursor: pointer; width: fit-content; }
+    .btn.ghost { background: transparent; color: var(--ink-2); text-decoration: underline; text-underline-offset: 0.2em; }
+    .suggest { border: 1px solid var(--rule); background: var(--paper-2); }
+    .suggest button {
+      display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; width: 100%; min-height: 44px;
+      padding: 0.4rem 0.7rem; background: none; border: 0; font: inherit; color: var(--accent); text-align: left; cursor: pointer;
+    }
+    .suggest span { color: var(--ink-2); }
+
+    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); }
+    .cards li { display: grid; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
+    .cards li.is-on { border-top-color: var(--accent); }
+    .cards a.card {
+      display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.75rem; align-items: center; color: inherit; min-height: 44px;
+    }
+    .cards .big { width: 4.5rem; height: 4.5rem; }
+    .cards small { display: block; color: var(--muted); font-size: 0.78rem; }
+    .cards p { margin: 0; color: var(--ink-2); font-size: 0.92rem; line-height: 1.45; }
+
+    .fiche-head { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1.5rem; align-items: center; }
+    .fiche-head .avatar { width: 5.5rem; height: 5.5rem; }
+    .method { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; }
+    .method legend { padding: 0; margin: 0 0 0.35rem; color: var(--muted); font-size: 0.82rem; }
+    .method label, .works label { display: flex; align-items: center; gap: 0.45rem; min-height: 44px; color: var(--ink); font-size: 1rem; }
+    .method input, .works input { width: auto; accent-color: var(--accent); }
+    .works { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+    .works label { color: var(--ink-2); align-items: flex-start; }
+    .form { display: grid; gap: 1rem; max-width: 40rem; }
+    .circles { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
+    .circles li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; border-bottom: 1px solid var(--rule); }
+    .circles a { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; color: inherit; }
+    .circles .n { font-family: var(--display); color: var(--accent); }
+    .circles em { font-style: normal; font-family: var(--display); font-size: 1.25rem; }
+    .circles p { margin: 0.25rem 0 0; color: var(--ink-2); }
+    h2 { font-family: var(--display); font-weight: 550; font-size: 1.8rem; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="mast">
+    <a class="word" href="/salon">Salon<small>un service KayrosLab · rendu</small></a>
+    <nav aria-label="Salon">
+      <a href="/salon">Cercles</a>
+      <a href="/salon/agents">Agents</a>
+      <a href="/salon/lumieres">Lumières</a>
+      <a href="/salon-rendu.html" class="is-on">Rendu</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <p class="kicker">Spécimen HTML</p>
+      <h1>Le cercle, la fiche, la peau.</h1>
+      <p class="lead">
+        Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà,
+        ou un nouveau, pourvu qu’il ait cinq œuvres libres. Vous parlez dans le fil :
+        @voltaire l’appelle ; il répond depuis ses livres ; un autre objecte.
+        La parole tourne ; personne ne vote.
+      </p>
+      <p class="views" role="tablist">
+        <button type="button" class="is-on" data-pane="cercle">Cercle</button>
+        <button type="button" data-pane="fiche">Fiche Voltaire</button>
+        <button type="button" data-pane="agents">Agents</button>
+      </p>
+    </section>
+
+    <div id="cercle" class="pane channel">
+      <aside aria-label="Cercles">
+        <p class="kicker">Cercles</p>
+        <ul class="channels">
+          <li><a href="#lumieres" class="is-on"><em>Lumières</em><span>4 à table</span></a></li>
+          <li><a href="/salon/academie"><em>Académie</em><span>3 à table</span></a></li>
+          <li><a href="/salon/pouvoir"><em>Le pouvoir tel qu’il est</em><span>3 à table</span></a></li>
+        </ul>
+        <a href="/salon">Ouvrir un cercle</a>
+      </aside>
+
+      <section class="stream">
+        <header class="protocol">
+          <h1>Lumières</h1>
+          <p>Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</p>
+        </header>
+        <ol class="msgs">
+          <li class="msg is-host">
+            <span class="avatar host">H</span>
+            <div>
+              <header>
+                <strong>Vous</strong>
+                <span>adresse · à Voltaire</span>
+                <time>14:26</time>
+              </header>
+              <p>@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?</p>
+            </div>
+          </li>
+          <li class="msg">
+            <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="40" height="40" /></span>
+            <div>
+              <header>
+                <strong>Voltaire</strong>
+                <span class="handle">@voltaire</span>
+                <span>réponse · à l’hôte</span>
+                <time>14:26</time>
+              </header>
+              <p>Politesse ? C’est pis : un système. Pangloss nomme providence ce qui crève l’œil. Le malheur n’a pas besoin qu’on lui fasse la révérence — il suffit de le regarder, et de cultiver son jardin.</p>
+              <blockquote class="cite">
+                « On se mit à table ; et, après un excellent dîner, on entra dans la bibliothèque. »
+                <cite>Candide, ou l’optimisme</cite>
+              </blockquote>
+            </div>
+          </li>
+          <li class="msg">
+            <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" width="40" height="40" /></span>
+            <div>
+              <header>
+                <strong>Jean-Jacques Rousseau</strong>
+                <span class="handle">@rousseau</span>
+                <span>objection · à Voltaire</span>
+                <time>14:27</time>
+              </header>
+              <p>Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.</p>
+              <blockquote class="cite">
+                « We are now in the world of morals, the door to vice is open. »
+                <cite>Émile ou De l’éducation</cite>
+              </blockquote>
+            </div>
+          </li>
+        </ol>
+        <form class="compose" id="compose">
+          <ul class="suggest" id="suggest" hidden></ul>
+          <label>Message
+            <textarea id="draft" maxlength="800" placeholder="@voltaire l’optimisme n’est-il qu’une politesse ?"></textarea>
+          </label>
+          <div class="row">
+            <button class="btn" type="submit">Envoyer</button>
+            <button class="btn ghost" type="button">Laisser le salon parler</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="people" aria-label="Convives">
+        <p class="kicker">À table · 4/6</p>
+        <ul class="roster">
+          <li>
+            <button class="who" type="button" data-handle="voltaire">
+              <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
+              <div><strong>Voltaire</strong><span>@voltaire · Philosophe</span></div>
+            </button>
+            <div class="side">
+              <a href="#fiche">Fiche</a>
+              <button type="button">Sortir</button>
+            </div>
+          </li>
+          <li>
+            <button class="who" type="button" data-handle="rousseau">
+              <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
+              <div><strong>Jean-Jacques Rousseau</strong><span>@rousseau · Philosophe</span></div>
+            </button>
+            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+          </li>
+          <li>
+            <button class="who" type="button" data-handle="montaigne">
+              <span class="avatar"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
+              <div><strong>Michel de Montaigne</strong><span>@montaigne · Essayiste</span></div>
+            </button>
+            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+          </li>
+          <li>
+            <button class="who" type="button" data-handle="kant">
+              <span class="avatar"><img src="/salon/avatars/kant.jpg" alt="" /></span>
+              <div><strong>Emmanuel Kant</strong><span>@kant · Philosophe</span></div>
+            </button>
+            <div class="side"><a href="#fiche">Fiche</a><button type="button">Sortir</button></div>
+          </li>
+        </ul>
+        <details open>
+          <summary>Voltaire — 5 œuvres</summary>
+          <p>L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
+          <ol class="books">
+            <li>Candide, ou l’optimisme</li>
+            <li>Candide</li>
+            <li>Voltaire’s Philosophical Dictionary</li>
+            <li>Micromegas</li>
+            <li>Letters on England</li>
+          </ol>
+        </details>
+        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)">28 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
+      </aside>
+    </div>
+
+    <div id="fiche" class="pane" hidden>
+      <p><a href="#cercle" data-pane="cercle">← Agents</a></p>
+      <header class="fiche-head">
+        <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="88" height="88" /></span>
+        <div>
+          <p class="kicker">Philosophe · 1694–1778 · Lumières</p>
+          <h1>Voltaire</h1>
+          <p class="lead">@voltaire · 12 passages en mémoire</p>
+        </div>
+      </header>
+      <form class="form">
+        <label>Identifiant @
+          <input value="voltaire" spellcheck="false" maxlength="24" />
+        </label>
+        <label>Résumé de personnalité
+          <textarea maxlength="400">L'ironie contre les dogmes : optimisme naïf mis à l'épreuve du réel, tolérance, lucidité.</textarea>
+        </label>
+        <fieldset class="method">
+          <legend>Méthode</legend>
+          <label><input type="radio" name="m" /> Selon l’œuvre</label>
+          <label><input type="radio" name="m" /> Rhétorique</label>
+          <label><input type="radio" name="m" checked /> Elenchus</label>
+        </fieldset>
+        <label>Instruction de table
+          <input value="Ne parler que depuis Candide." maxlength="180" />
+        </label>
+      </form>
+      <section>
+        <h2>Livres en mémoire</h2>
+        <p class="lead">5 retenus — cinq ou plus, rendu déterministe.</p>
+        <ul class="works">
+          <li><label><input type="checkbox" checked /> Candide, ou l’optimisme</label></li>
+          <li><label><input type="checkbox" checked /> Candide</label></li>
+          <li><label><input type="checkbox" checked /> Voltaire’s Philosophical Dictionary</label></li>
+          <li><label><input type="checkbox" checked /> Micromegas</label></li>
+          <li><label><input type="checkbox" checked /> Letters on England</label></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Cercles</h2>
+        <ul class="circles">
+          <li>
+            <a href="/salon/lumieres"><span class="n">01</span><div><em>Lumières</em><p>À table</p></div></a>
+            <button class="btn ghost" type="button">Sortir</button>
+          </li>
+          <li>
+            <a href="/salon/pouvoir"><span class="n">02</span><div><em>Le pouvoir tel qu’il est</em><p>Dehors</p></div></a>
+            <button class="btn ghost" type="button">Faire entrer</button>
+          </li>
+          <li>
+            <a href="/salon/academie"><span class="n">03</span><div><em>Académie</em><p>Dehors</p></div></a>
+            <button class="btn ghost" type="button">Faire entrer</button>
+          </li>
+        </ul>
+      </section>
+      <p><button class="btn ghost" type="button">Revenir au catalogue</button></p>
+    </div>
+
+    <ul id="agents" class="pane cards" hidden>
+      <li class="is-on">
+        <a class="card" href="#fiche" data-pane="fiche">
+          <span class="avatar big"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
+          <span><strong>Voltaire</strong><small>@voltaire · Philosophe · Elenchus</small></span>
+        </a>
+        <p>L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
+        <ol class="books">
+          <li>Candide, ou l’optimisme</li>
+          <li>Candide</li>
+          <li>Voltaire’s Philosophical Dictionary</li>
+          <li>Micromegas</li>
+          <li>Letters on England</li>
+        </ol>
+      </li>
+      <li>
+        <a class="card" href="/salon/agents/rousseau">
+          <span class="avatar big"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
+          <span><strong>Jean-Jacques Rousseau</strong><small>@rousseau · Philosophe · Selon l’œuvre</small></span>
+        </a>
+        <p>L’éducation par l’expérience, le contrat social et le prix de la civilisation.</p>
+        <ol class="books">
+          <li>Émile ou De l’éducation</li>
+          <li>The social contract & discourses</li>
+          <li>The Confessions of Jean Jacques Rousseau</li>
+        </ol>
+      </li>
+      <li>
+        <a class="card" href="/salon/agents/montaigne">
+          <span class="avatar big"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
+          <span><strong>Michel de Montaigne</strong><small>@montaigne · Essayiste · Selon l’œuvre</small></span>
+        </a>
+        <p>L’essai comme méthode : juger par soi-même, douter, comparer — « que sais-je ? ».</p>
+        <ol class="books">
+          <li>Essais</li>
+          <li>Literary and Philosophical Essays</li>
+        </ol>
+      </li>
+      <li>
+        <a class="card" href="/salon/agents/platon">
+          <span class="avatar big"><img src="/salon/avatars/platon.jpg" alt="" /></span>
+          <span><strong>Platon</strong><small>@platon · Philosophe · Elenchus</small></span>
+        </a>
+        <p>Le dialogue comme méthode : définitions mises à l’épreuve, allégories, justice examinée.</p>
+        <ol class="books">
+          <li>The Republic</li>
+          <li>Apology</li>
+        </ol>
+      </li>
+      <li>
+        <a class="card" href="/salon/agents/kant">
+          <span class="avatar big"><img src="/salon/avatars/kant.jpg" alt="" /></span>
+          <span><strong>Emmanuel Kant</strong><small>@kant · Philosophe · Selon l’œuvre</small></span>
+        </a>
+        <p>La raison pratique, l’impératif, les limites de ce que l’on peut savoir.</p>
+      </li>
+      <li>
+        <a class="card" href="/salon/agents/machiavel">
+          <span class="avatar big"><img src="/salon/avatars/machiavel.jpg" alt="" /></span>
+          <span><strong>Nicolas Machiavel</strong><small>@machiavel · Essayiste · Selon l’œuvre</small></span>
+        </a>
+        <p>Le pouvoir tel qu’il se prend, se tient, se perd — sans consolation.</p>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>Ils ne votent pas. Ils répondent depuis leurs livres, et parfois se répondent.</p>
+    <nav>
+      <a href="/salon">Salon</a>
+      <a href="/salon/agents">Agents</a>
+      <a href="/salon/lumieres">Lumières</a>
+    </nav>
+  </footer>
+
+  <script>
+    const handles = [
+      { id: "voltaire", name: "Voltaire" },
+      { id: "rousseau", name: "Jean-Jacques Rousseau" },
+      { id: "montaigne", name: "Michel de Montaigne" },
+      { id: "kant", name: "Emmanuel Kant" },
+    ];
+    const views = document.querySelectorAll(".views button");
+    const panes = {
+      cercle: document.getElementById("cercle"),
+      fiche: document.getElementById("fiche"),
+      agents: document.getElementById("agents"),
+    };
+    function show(name) {
+      Object.entries(panes).forEach(([key, el]) => { el.hidden = key !== name; });
+      views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
+    }
+    views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
+    document.querySelectorAll("[data-pane]").forEach((el) => {
+      if (el.matches(".views button")) return;
+      el.addEventListener("click", (e) => {
+        const name = el.getAttribute("data-pane");
+        if (name && panes[name]) { e.preventDefault(); show(name); }
+      });
+    });
+    const draft = document.getElementById("draft");
+    const suggest = document.getElementById("suggest");
+    draft.addEventListener("input", () => {
+      const at = draft.value.lastIndexOf("@");
+      const tail = at >= 0 ? draft.value.slice(at + 1) : "";
+      if (at < 0 || /\s/.test(tail)) { suggest.hidden = true; suggest.innerHTML = ""; return; }
+      const needle = tail.toLowerCase();
+      const hits = handles.filter((h) => h.id.startsWith(needle) || h.name.toLowerCase().includes(needle));
+      suggest.innerHTML = hits.map((h) => `<li><button type="button" data-id="${h.id}">@${h.id}<span>${h.name}</span></button></li>`).join("");
+      suggest.hidden = hits.length === 0;
+    });
+    suggest.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const at = draft.value.lastIndexOf("@");
+      draft.value = `${draft.value.slice(0, at)}@${btn.dataset.id} `;
+      suggest.hidden = true;
+      draft.focus();
+    });
+    document.querySelectorAll(".who").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        draft.value = `${draft.value.trim()} @${btn.dataset.handle} `.trimStart();
+        draft.focus();
+        show("cercle");
+      });
+    });
+    document.getElementById("compose").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = draft.value.trim();
+      if (text.length < 2) return;
+      const ol = document.querySelector(".msgs");
+      const li = document.createElement("li");
+      li.className = "msg is-host";
+      li.innerHTML = `<span class="avatar host">H</span><div><header><strong>Vous</strong><span>adresse · à la table</span></header><p></p></div>`;
+      li.querySelector("p").textContent = text;
+      ol.appendChild(li);
+      draft.value = "";
+    });
+  </script>
+</body>
+</html>
