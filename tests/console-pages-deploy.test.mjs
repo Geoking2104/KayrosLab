@@ -31,8 +31,8 @@ test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () =
   assert.match(workflow, /backend\/web\/public\/salon\/\. deploy\/salon\//);
   assert.match(english, /href="\/salon\/">Salon</);
   assert.match(french, /href="\/salon\/">Salon</);
-  assert.match(foyer, /Lire ensemble, jusqu’à la minute/);
-  assert.match(foyer, /Un salon n’est pas un canal/);
+  assert.match(foyer, /Un cercle est une table/);
+  assert.match(foyer, /@voltaire/);
 });
 
 test('la console prefixe les routes avec la base API du build', async () => {
