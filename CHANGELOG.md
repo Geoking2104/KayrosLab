@@ -1,6 +1,12 @@
 # Changelog
 
+## v0.25.14 (2026-09) — Salon : portrait pour chaque auteur
+
+- 48 portraits (Wikimedia) ; 6 pictogrammes de tradition.
+- Plus d’initiales à la place d’un visage.
+
 ## v0.25.13 (2026-09) — Salon : fiches auteurs plus légères
+
 
 - Catalogue : portrait, nom, @, ère, blurb (2 lignes), nombre d’œuvres.
 - Plus de liste d’ouvrages ni bouton redondant. Images `lazy`, recherche 120 ms.

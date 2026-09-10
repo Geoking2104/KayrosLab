@@ -10,7 +10,7 @@ function Avatar({ author }: { author: LiteraryAuthor }) {
   return (
     <span className="salon-avatar" data-kind={author.kind}>
       {author.avatar ? (
-        <img src={author.avatar} alt="" width={72} height={72} />
+        <img src={author.avatar} alt={author.name} width={72} height={72} />
       ) : (
         <em>{author.monogram}</em>
       )}

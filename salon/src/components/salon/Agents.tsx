@@ -62,7 +62,7 @@ export function Agents() {
                 <Link to="/salon/agents/$authorId" params={{ authorId: author.id }}>
                   <span className="salon-avatar" data-kind={author.kind}>
                     {author.avatar ? (
-                      <img src={author.avatar} alt="" width={56} height={56} loading="lazy" decoding="async" />
+                      <img src={author.avatar} alt={copy.name} width={56} height={56} loading="lazy" decoding="async" />
                     ) : (
                       <em>{author.monogram}</em>
                     )}

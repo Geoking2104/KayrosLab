@@ -73,6 +73,8 @@ test('le catalogue élargi tient Shakespeare, vingt philosophes et les tradition
   assert.ok(ids.has('shakespeare'));
   for (const id of ['seneca', 'ciceron', 'pascal', 'diderot', 'hume', 'mill']) {
     assert.ok(ids.has(id), id);
+    const author = catalog.authors.find((a) => a.id === id);
+    assert.match(author.avatar, /\.jpg$/);
   }
   for (const id of ['christianisme', 'judaisme', 'islam', 'hindouisme', 'bouddhisme', 'taoisme']) {
     const author = catalog.authors.find((a) => a.id === id);

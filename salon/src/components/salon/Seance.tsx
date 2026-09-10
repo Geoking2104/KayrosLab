@@ -15,7 +15,7 @@ import { CreateAuthor } from "./CreateAuthor";
 function Avatar({ author, size = 48 }: { author: LiteraryAuthor; size?: number }) {
   return (
     <span className="salon-avatar" data-kind={author.kind} style={{ width: size, height: size }}>
-      {author.avatar ? <img src={author.avatar} alt="" width={size} height={size} /> : <em>{author.monogram}</em>}
+      {author.avatar ? <img src={author.avatar} alt={author.name} width={size} height={size} /> : <em>{author.monogram}</em>}
     </span>
   );
 }
