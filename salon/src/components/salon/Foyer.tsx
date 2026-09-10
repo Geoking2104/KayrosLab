@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState, type FormEvent } from "react";
-import { allAuthors, LITERARY_KINDS, searchAuthors } from "@/lib/salon/catalog";
+import { allAuthors, LITERARY_KINDS, authorCopy, searchAuthors } from "@/lib/salon/catalog";
 import { useT, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import type { LiteraryAuthor } from "@/lib/salon/types";
@@ -19,7 +19,7 @@ function Avatar({ author }: { author: LiteraryAuthor }) {
 }
 
 export function Foyer() {
-  const { t, guests } = useT();
+  const { t, guests, locale } = useT();
   const rooms = useSalon((s) => s.rooms);
   const createRoom = useSalon((s) => s.createRoom);
   const navigate = useNavigate();
@@ -104,15 +104,16 @@ export function Foyer() {
             <ul className="salon-guest-pick">
               {allAuthors().map((author) => {
                 const on = picked.includes(author.id);
+                const copy = authorCopy(author, locale);
                 return (
                   <li key={author.id}>
-                    <label title={author.name}>
+                    <label title={copy.name}>
                       <input
                         type="checkbox"
                         checked={on}
                         onChange={() => toggle(author.id)}
                       />
-                      <span>{author.name}</span>
+                      <span>{copy.name}</span>
                     </label>
                   </li>
                 );
@@ -146,18 +147,20 @@ export function Foyer() {
             </div>
           </div>
           <ul className="salon-authors">
-            {authors.map((author) => (
+            {authors.map((author) => {
+              const copy = authorCopy(author, locale);
+              return (
               <li key={author.id} className={picked.includes(author.id) ? "is-on" : undefined}>
                 <div className="salon-author-head">
                   <Avatar author={author} />
                   <span>
-                    <strong>{author.name}</strong>
+                    <strong>{copy.name}</strong>
                     <small>
-                      {t(`kind.${author.kind}` as MsgKey)} · {author.era}
+                      {t(`kind.${author.kind}` as MsgKey)} · {copy.era}
                     </small>
                   </span>
                 </div>
-                <p>{author.blurb}</p>
+                <p>{copy.blurb}</p>
                 <ol>
                   {author.works.slice(0, 5).map((work) => (
                     <li key={work.url}>{work.title}</li>
@@ -167,7 +170,8 @@ export function Foyer() {
                   {t("agents.configure")}
                 </Link>
               </li>
-            ))}
+            );
+            })}
           </ul>
         </section>
       </main>

@@ -21,10 +21,13 @@ export interface LiteraryWork {
 export interface LiteraryAuthor {
   id: string;
   name: string;
+  nameEn?: string;
   kind: LiteraryKind;
   lang: string;
   era: string;
+  eraEn?: string;
   blurb: string;
+  blurbEn?: string;
   wikipedia: string;
   avatar: string | null;
   monogram: string;

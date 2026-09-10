@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { cleanHandle, resolveAuthor } from "@/lib/salon/agents";
-import { authorById, passagesFor } from "@/lib/salon/catalog";
+import { authorById, authorCopy, passagesFor } from "@/lib/salon/catalog";
 import { useT, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import type { SpeechMethodPref } from "@/lib/salon/types";
@@ -8,7 +8,7 @@ import { SalonChrome } from "./Chrome";
 import { WorkIngest } from "./WorkIngest";
 
 export function Fiche({ authorId }: { authorId: string }) {
-  const { t } = useT();
+  const { t, locale } = useT();
   const base = authorById(authorId);
   const patch = useSalon((s) => s.patches[authorId]);
   const patchAgent = useSalon((s) => s.patchAgent);
@@ -34,6 +34,8 @@ export function Fiche({ authorId }: { authorId: string }) {
 
   const memory = passagesFor(authorId, resolved.workTitles);
   const methods: SpeechMethodPref[] = ["auto", "rhetorique", "elenchus"];
+  const copy = authorCopy(base, locale);
+  const blurbValue = patch?.blurb?.trim() ? resolved.blurb : copy.blurb;
 
   function toggleWork(title: string) {
     const current = resolved!.workTitles;
@@ -54,9 +56,9 @@ export function Fiche({ authorId }: { authorId: string }) {
           </span>
           <div>
             <p className="salon-kicker">
-              {t(`kind.${base.kind}` as MsgKey)} · {base.era}
+              {t(`kind.${base.kind}` as MsgKey)} · {copy.era}
             </p>
-            <h1>{base.name}</h1>
+            <h1>{copy.name}</h1>
             <p>{t("passages", { handle: resolved.handle, n: memory.length })}</p>
           </div>
         </header>
@@ -79,7 +81,7 @@ export function Fiche({ authorId }: { authorId: string }) {
           <label>
             {t("blurb")}
             <textarea
-              value={resolved.blurb}
+              value={blurbValue}
               onChange={(e) => patchAgent(authorId, { blurb: e.target.value })}
               maxLength={400}
             />

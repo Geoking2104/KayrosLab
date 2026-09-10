@@ -58,12 +58,31 @@ export function passagesFor(authorId: string, workTitles?: string[]): Passage[] 
     .map((p) => ({ ...p, terms: p.terms.length ? p.terms : termsOf(p.text) }));
 }
 
+export function authorCopy(author: LiteraryAuthor, locale: "fr" | "en") {
+  const en = locale === "en";
+  return {
+    name: en && author.nameEn ? author.nameEn : author.name,
+    blurb: en && author.blurbEn ? author.blurbEn : author.blurb,
+    era: en && author.eraEn ? author.eraEn : author.era,
+  };
+}
+
 export function searchAuthors(query: string, kind: string) {
   const needle = query.trim().toLowerCase();
   return allAuthors().filter((author) => {
     if (kind && author.kind !== kind) return false;
     if (!needle) return true;
-    return [author.name, author.kind, author.era, author.blurb, ...author.works.map((w) => w.title)]
+    return [
+      author.name,
+      author.nameEn,
+      author.kind,
+      author.era,
+      author.eraEn,
+      author.blurb,
+      author.blurbEn,
+      ...author.works.map((w) => w.title),
+    ]
+      .filter(Boolean)
       .join(" ")
       .toLowerCase()
       .includes(needle);

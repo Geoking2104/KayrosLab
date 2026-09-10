@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { allAuthors, authorById, buildPersona, passagesFor } from "@/lib/salon/catalog";
+import { allAuthors, authorById, authorCopy, buildPersona, passagesFor } from "@/lib/salon/catalog";
 import { planRound } from "@/lib/salon/flows";
 import { useT, type MsgKey } from "@/lib/salon/i18n";
 import { handleOf, insertMention, parseMentions, suggestMentions } from "@/lib/salon/mentions";
@@ -74,16 +74,19 @@ export function Seance({ circleId }: { circleId: string }) {
         patches,
       })
     ).filter((m) => m.id !== "user");
-    const history = latest.turns.map((t) => ({
-      name: t.authorId === "user" ? "Hôte" : (authorById(t.authorId)?.name ?? t.authorId),
-      text: t.text,
-    }));
+    const history = latest.turns.map((turn) => {
+      const who = authorById(turn.authorId);
+      return {
+        name: turn.authorId === "user" ? t("host.short") : who ? authorCopy(who, locale).name : turn.authorId,
+        text: turn.text,
+      };
+    });
     let previous = query;
     let pending: string | null = null;
     for (const move of moves) {
       const author = authorById(move.id);
       if (!author) continue;
-      setBusy(author.name);
+      setBusy(authorCopy(author, locale).name);
       const retrieveQuery =
         pending === "elenchus" || move.act === "objection" ? `${previous} ${latest.question}` : query;
       const passages = passagesFor(move.id, patches[move.id]?.workTitles);
@@ -110,7 +113,7 @@ export function Seance({ circleId }: { circleId: string }) {
       });
       const text = spoken.text?.trim();
       if (!text) {
-        setError(spoken.error || "Pas de voix");
+        setError(spoken.error || t("no.voice"));
         continue;
       }
       addTurn(room.id, {
@@ -122,7 +125,7 @@ export function Seance({ circleId }: { circleId: string }) {
         act: move.act as SpeechAct,
         to: move.to,
       });
-      history.push({ name: author.name, text });
+      history.push({ name: authorCopy(author, locale).name, text });
       previous = text;
       pending = move.method === "elenchus" ? "elenchus" : null;
     }
@@ -253,7 +256,7 @@ export function Seance({ circleId }: { circleId: string }) {
                       onClick={() => setDraft(insertMention(draft, author, patches[author.id]))}
                     >
                       @{handleOf(author, patches[author.id])}
-                      <span>{author.name}</span>
+                      <span>{authorCopy(author, locale).name}</span>
                     </button>
                   </li>
                 ))}
@@ -290,7 +293,9 @@ export function Seance({ circleId }: { circleId: string }) {
         <aside className="salon-people" aria-label={t("seated")}>
           <p className="salon-kicker">{t("at.table", { n: seated.length })}</p>
           <ul className="salon-roster">
-            {seated.map((author) => (
+            {seated.map((author) => {
+              const copy = authorCopy(author, locale);
+              return (
               <li key={author.id}>
                 <button
                   type="button"
@@ -299,7 +304,7 @@ export function Seance({ circleId }: { circleId: string }) {
                 >
                   <Avatar author={author} size={40} />
                   <div>
-                    <strong>{author.name}</strong>
+                    <strong>{copy.name}</strong>
                     <span>
                       @{handleOf(author, patches[author.id])} · {t(`kind.${author.kind}` as MsgKey)}
                     </span>
@@ -314,28 +319,32 @@ export function Seance({ circleId }: { circleId: string }) {
                       type="button"
                       className="salon-dismiss"
                       onClick={() => dismissAuthor(room.id, author.id)}
-                      aria-label={`${t("out")} ${author.name}`}
+                      aria-label={`${t("out")} ${copy.name}`}
                     >
                       {t("out")}
                     </button>
                   ) : null}
                 </div>
               </li>
-            ))}
+            );
+            })}
           </ul>
-          {seated.map((author) => (
+          {seated.map((author) => {
+            const copy = authorCopy(author, locale);
+            return (
             <details key={author.id} className="salon-engine-card">
               <summary>
-                {author.name} — {author.works_count}
+                {copy.name} — {t("works.count", { n: author.works_count })}
               </summary>
-              <p>{author.blurb}</p>
+              <p>{copy.blurb}</p>
               <ol className="salon-books">
                 {author.works.slice(0, 5).map((work) => (
                   <li key={work.url}>{work.title}</li>
                 ))}
               </ol>
             </details>
-          ))}
+            );
+          })}
           <div className="salon-invite">
               {creating ? (
                 <CreateAuthor
@@ -362,7 +371,7 @@ export function Seance({ circleId }: { circleId: string }) {
                       <option value="">{t("invite.choose")}</option>
                       {guests.map((author) => (
                         <option key={author.id} value={author.id}>
-                          @{handleOf(author, patches[author.id])} — {author.name}
+                          @{handleOf(author, patches[author.id])} — {authorCopy(author, locale).name}
                         </option>
                       ))}
                     </select>

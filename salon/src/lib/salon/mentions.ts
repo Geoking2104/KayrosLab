@@ -15,11 +15,15 @@ export function handleOf(author: Pick<LiteraryAuthor, "id" | "name">, patch?: Ag
   return resolved?.handle ?? author.id;
 }
 
-export function mentionKeys(author: Pick<LiteraryAuthor, "id" | "name">, patch?: AgentPatch | null) {
+export function mentionKeys(author: Pick<LiteraryAuthor, "id" | "name" | "nameEn">, patch?: AgentPatch | null) {
   const resolved = resolveAuthor(author.id, patch);
-  const parts = author.name.split(/\s+/).filter(Boolean);
-  const last = parts.at(-1) ?? author.name;
-  return [author.id, author.name, last, parts[0], resolved?.handle].map((k) => fold(k ?? "")).filter(Boolean);
+  const names = [author.name, author.nameEn].filter(Boolean) as string[];
+  const keys = [author.id, resolved?.handle];
+  for (const name of names) {
+    const parts = name.split(/\s+/).filter(Boolean);
+    keys.push(name, parts.at(-1), parts[0]);
+  }
+  return keys.map((k) => fold(k ?? "")).filter(Boolean);
 }
 
 export function parseMentions(text: string, seatedIds: string[], patches: Record<string, AgentPatch> = {}) {

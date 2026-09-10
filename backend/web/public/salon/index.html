@@ -269,11 +269,11 @@
       <form class="open-form" id="open-circle">
         <label>
           <span data-i18n="index.step1">1 — Nom du cercle</span>
-          <input name="name" value="Lumières" required maxlength="80" />
+          <input name="name" data-i18n-value="circle.lumieres" value="Lumières" required maxlength="80" />
         </label>
         <label>
           <span data-i18n="index.step2">2 — Question posée à la table</span>
-          <textarea name="question" required maxlength="400">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</textarea>
+          <textarea name="question" data-i18n-value="index.question.sample" required maxlength="400">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</textarea>
         </label>
         <p class="kicker" data-i18n="index.step3">3 — Invités</p>
         <p class="picked" id="guest-count">3 invités</p>
@@ -287,17 +287,17 @@
       <aside data-i18n-aria="circles" aria-label="Cercles">
         <p class="kicker" data-i18n="circles">Cercles</p>
         <ul class="channels">
-          <li><a href="#lumieres" class="is-on"><em>Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
-          <li><a href="/salon/academie"><em>Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
-          <li><a href="/salon/pouvoir"><em>Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="#lumieres" class="is-on"><em data-i18n="circle.lumieres">Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
+          <li><a href="/salon/academie"><em data-i18n="circle.academie">Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="/salon/pouvoir"><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
         </ul>
         <a href="/salon" data-i18n="index.open">Ouvrir un cercle</a>
       </aside>
 
       <section class="stream">
         <header class="protocol">
-          <h1>Lumières</h1>
-          <p>Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</p>
+          <h1 data-i18n="circle.lumieres">Lumières</h1>
+          <p data-i18n="index.question.sample">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</p>
         </header>
         <ol class="msgs">
           <li class="msg is-host">
@@ -430,7 +430,7 @@
           <label><input type="radio" name="m" checked /> <span data-i18n="method.elenchus">Elenchus</span></label>
         </fieldset>
         <label><span data-i18n="note">Instruction de table</span>
-          <input value="Ne parler que depuis Candide." maxlength="180" />
+          <input data-i18n-value="note.candide" value="Ne parler que depuis Candide." maxlength="180" />
         </label>
       </form>
       <section>
@@ -448,15 +448,15 @@
         <h2 data-i18n="circles">Cercles</h2>
         <ul class="circles">
           <li>
-            <a href="/salon/lumieres"><span class="n">01</span><div><em>Lumières</em><p data-i18n="seated">À table</p></div></a>
+            <a href="/salon/lumieres"><span class="n">01</span><div><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></div></a>
             <button class="btn ghost" type="button" data-i18n="out">Sortir</button>
           </li>
           <li>
-            <a href="/salon/pouvoir"><span class="n">02</span><div><em>Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></div></a>
+            <a href="/salon/pouvoir"><span class="n">02</span><div><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></div></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
           <li>
-            <a href="/salon/academie"><span class="n">03</span><div><em>Académie</em><p data-i18n="outside">Dehors</p></div></a>
+            <a href="/salon/academie"><span class="n">03</span><div><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></div></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
         </ul>
@@ -464,73 +464,7 @@
       <p><button class="btn ghost" type="button" data-i18n="reset">Revenir au catalogue</button></p>
     </div>
 
-    <ul id="agents" class="pane cards" hidden>
-      <li class="agents-head" style="border:0;padding:0;grid-column:1/-1">
-        <h2 data-i18n="agents.fiches">Les auteurs</h2>
-      </li>
-      <li class="is-on">
-        <a class="card" href="#fiche" data-pane="fiche">
-          <span class="avatar big"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
-          <span><strong>Voltaire</strong><small>@voltaire · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.elenchus">Elenchus</span></small></span>
-        </a>
-        <p>L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
-        <ol class="books">
-          <li>Candide, ou l’optimisme</li>
-          <li>Candide</li>
-          <li>Voltaire’s Philosophical Dictionary</li>
-          <li>Micromegas</li>
-          <li>Letters on England</li>
-        </ol>
-      </li>
-      <li>
-        <a class="card" href="/salon/agents/rousseau">
-          <span class="avatar big"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
-          <span><strong>Jean-Jacques Rousseau</strong><small>@rousseau · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
-        </a>
-        <p>L’éducation par l’expérience, le contrat social et le prix de la civilisation.</p>
-        <ol class="books">
-          <li>Émile ou De l’éducation</li>
-          <li>The social contract & discourses</li>
-          <li>The Confessions of Jean Jacques Rousseau</li>
-        </ol>
-      </li>
-      <li>
-        <a class="card" href="/salon/agents/montaigne">
-          <span class="avatar big"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
-          <span><strong>Michel de Montaigne</strong><small>@montaigne · <span data-i18n="kind.essayiste">Essayiste</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
-        </a>
-        <p>L’essai comme méthode : juger par soi-même, douter, comparer — « que sais-je ? ».</p>
-        <ol class="books">
-          <li>Essais</li>
-          <li>Literary and Philosophical Essays</li>
-        </ol>
-      </li>
-      <li>
-        <a class="card" href="/salon/agents/platon">
-          <span class="avatar big"><img src="/salon/avatars/platon.jpg" alt="" /></span>
-          <span><strong>Platon</strong><small>@platon · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.elenchus">Elenchus</span></small></span>
-        </a>
-        <p>Le dialogue comme méthode : définitions mises à l’épreuve, allégories, justice examinée.</p>
-        <ol class="books">
-          <li>The Republic</li>
-          <li>Apology</li>
-        </ol>
-      </li>
-      <li>
-        <a class="card" href="/salon/agents/kant">
-          <span class="avatar big"><img src="/salon/avatars/kant.jpg" alt="" /></span>
-          <span><strong>Emmanuel Kant</strong><small>@kant · <span data-i18n="kind.philosophe">Philosophe</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
-        </a>
-        <p>La raison pratique, l’impératif, les limites de ce que l’on peut savoir.</p>
-      </li>
-      <li>
-        <a class="card" href="/salon/agents/machiavel">
-          <span class="avatar big"><img src="/salon/avatars/machiavel.jpg" alt="" /></span>
-          <span><strong>Nicolas Machiavel</strong><small>@machiavel · <span data-i18n="kind.essayiste">Essayiste</span> · <span data-i18n="method.auto">Selon l’œuvre</span></small></span>
-        </a>
-        <p>Le pouvoir tel qu’il se prend, se tient, se perd — sans consolation.</p>
-      </li>
-    </ul>
+    <ul id="agents" class="pane cards" hidden></ul>
   </main>
 
   <footer>
@@ -598,6 +532,18 @@
         "passages": "@{handle} · {n} passages en mémoire",
         "reset": "Revenir au catalogue",
         "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
+
+        "kind.dramaturge": "Dramaturge",
+        "kind.poète": "Poète",
+        "kind.savant": "Savant",
+        "kind.économiste": "Économiste",
+        "kind.tradition": "Tradition",
+        "circle.lumieres": "Lumières",
+        "circle.academie": "Académie",
+        "circle.pouvoir": "Le pouvoir tel qu’il est",
+        "index.question.sample": "Que reste-t-il de la liberté une fois qu’on a tout expliqué ?",
+        "note.candide": "Ne parler que depuis Candide.",
+        "host.short": "Hôte",
         "foot.line": "Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.",
       },
       en: {
@@ -655,6 +601,18 @@
         "passages": "@{handle} · {n} passages in memory",
         "reset": "Revert to catalogue",
         "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
+
+        "kind.dramaturge": "Playwright",
+        "kind.poète": "Poet",
+        "kind.savant": "Scholar",
+        "kind.économiste": "Economist",
+        "kind.tradition": "Tradition",
+        "circle.lumieres": "Enlightenment",
+        "circle.academie": "Academy",
+        "circle.pouvoir": "Power as it is",
+        "index.question.sample": "What remains of freedom once everything has been explained?",
+        "note.candide": "Speak only from Candide.",
+        "host.short": "Host",
         "foot.line": "They answer from their books, and sometimes to one another, and to you. Each has a style, each a personality.",
       },
     };
@@ -687,78 +645,50 @@
         btn.classList.toggle("is-on", btn.getAttribute("data-lang") === locale);
       });
       try { localStorage.setItem("salon-locale", locale); } catch (_) {}
+      document.querySelectorAll("[data-i18n-value]").forEach((el) => {
+        el.value = msg(el.getAttribute("data-i18n-value"));
+      });
+      if (typeof renderGuests === "function") renderGuests();
+      if (typeof renderAgents === "function") renderAgents();
       renderCount();
     }
-    const authors = [
-      { id: "smith", name: "Adam Smith" },
-      { id: "aristote", name: "Aristote" },
-      { id: "schopenhauer", name: "Arthur Schopenhauer" },
-      { id: "augustin", name: "Augustin d’Hippone" },
-      { id: "spinoza", name: "Baruch Spinoza" },
-      { id: "pascal", name: "Blaise Pascal" },
-      { id: "boece", name: "Boèce" },
-      { id: "darwin", name: "Charles Darwin" },
-      { id: "ciceron", name: "Cicéron" },
-      { id: "confucius", name: "Confucius" },
-      { id: "hume", name: "David Hume" },
-      { id: "diderot", name: "Denis Diderot" },
-      { id: "poe", name: "Edgar Allan Poe" },
-      { id: "kant", name: "Emmanuel Kant" },
-      { id: "dostoevski", name: "Fiodor Dostoïevski" },
-      { id: "kafka", name: "Franz Kafka" },
-      { id: "nietzsche", name: "Friedrich Nietzsche" },
-      { id: "hegel", name: "Georg Wilhelm Friedrich Hegel" },
-      { id: "berkeley", name: "George Berkeley" },
-      { id: "leibniz", name: "Gottfried Wilhelm Leibniz" },
-      { id: "balzac", name: "Honoré de Balzac" },
-      { id: "austen", name: "Jane Austen" },
-      { id: "rousseau", name: "Jean-Jacques Rousseau" },
-      { id: "locke", name: "John Locke" },
-      { id: "mill", name: "John Stuart Mill" },
-      { id: "verne", name: "Jules Verne" },
-      { id: "marx", name: "Karl Marx" },
-      { id: "hindouisme", name: "La Bhagavad-Gîtâ" },
-      { id: "christianisme", name: "La Bible" },
-      { id: "judaisme", name: "La Torah" },
-      { id: "islam", name: "Le Coran" },
-      { id: "bouddhisme", name: "Le Dhammapada" },
-      { id: "taoisme", name: "Le Tao-Tö-King" },
-      { id: "tolstoi", name: "Léon Tolstoï" },
-      { id: "marcaurele", name: "Marc Aurèle" },
-      { id: "montaigne", name: "Michel de Montaigne" },
-      { id: "cervantes", name: "Miguel de Cervantès" },
-      { id: "machiavel", name: "Nicolas Machiavel" },
-      { id: "wilde", name: "Oscar Wilde" },
-      { id: "platon", name: "Platon" },
-      { id: "emerson", name: "Ralph Waldo Emerson" },
-      { id: "descartes", name: "René Descartes" },
-      { id: "stendhal", name: "Stendhal" },
-      { id: "suntzu", name: "Sun Tzu" },
-      { id: "seneca", name: "Sénèque" },
-      { id: "kierkegaard", name: "Søren Kierkegaard" },
-      { id: "aquinas", name: "Thomas d’Aquin" },
-      { id: "hobbes", name: "Thomas Hobbes" },
-      { id: "hugo", name: "Victor Hugo" },
-      { id: "voltaire", name: "Voltaire" },
-      { id: "james", name: "William James" },
-      { id: "shakespeare", name: "William Shakespeare" },
-      { id: "epictete", name: "Épictète" },
-      { id: "epicure", name: "Épicure" }
-    ];
+    const authors = [{"id": "smith", "name": "Adam Smith", "nameEn": "Adam Smith", "kind": "économiste", "blurb": "Marchés, division du travail et incidence : ce que l'échange produit et ce qu'il dégrade.", "blurbEn": "Markets, the division of labour, and incidence: what exchange produces and what it wears down.", "era": "1723–1790 · économie politique", "eraEn": "1723–1790 · political economy", "avatar": "/salon/avatars/smith.jpg", "monogram": "AS", "method": "auto", "works": ["The Wealth of Nations", "The Theory of Moral Sentiments", "An Inquiry Into the Nature and Causes of the Wealth of Nations"]}, {"id": "aristote", "name": "Aristote", "nameEn": "Aristotle", "kind": "philosophe", "blurb": "La vertu comme milieu, la prudence pratique et la classification rigoureuse des causes.", "blurbEn": "Virtue as a mean, practical prudence, and a strict classification of what can be known.", "era": "–322 av. J.-C. · antique", "eraEn": "d. 322 BCE · antiquity", "avatar": "/salon/avatars/aristote.jpg", "monogram": "A", "method": "auto", "works": ["Politics", "The Nicomachean Ethics", "The Poetics of Aristotle", "The Athenian Constitution", "Aristotle"]}, {"id": "schopenhauer", "name": "Arthur Schopenhauer", "nameEn": "Arthur Schopenhauer", "kind": "philosophe", "blurb": "Le monde comme représentation, puis comme volonté. La pitié, la musique, le renoncement.", "blurbEn": "The world as representation, then as will. Pity, music, renunciation.", "era": "1788–1860 · volonté", "eraEn": "1788–1860 · the will", "avatar": "/salon/avatars/schopenhauer.svg", "monogram": "AS", "method": "auto", "works": ["The World as Will and Idea (Vol. 1)", "The World as Will and Idea (Vol. 2)", "Studies in Pessimism", "The Art of Literature", "The Essays of Arthur Schopenhauer"]}, {"id": "augustin", "name": "Augustin d’Hippone", "nameEn": "Augustine of Hippo", "kind": "philosophe", "blurb": "La mémoire, le temps, la grâce : un homme qui s’examine jusqu’à Dieu.", "blurbEn": "Memory, time, grace: a man who examines himself as far as God.", "era": "354–430 · patristique", "eraEn": "354–430 · patristics", "avatar": "/salon/avatars/augustin.svg", "monogram": "AH", "method": "auto", "works": ["The Confessions", "The City of God, Volume I", "The City of God, Volume II", "On Christian Doctrine", "The Enchiridion"]}, {"id": "spinoza", "name": "Baruch Spinoza", "nameEn": "Baruch Spinoza", "kind": "philosophe", "blurb": "Comprendre pour cesser de subir : causes, nécessité, joie active contre les passions tristes.", "blurbEn": "Understand in order to stop suffering: causes, necessity, active joy against the passions.", "era": "1632–1677 · rationalisme", "eraEn": "1632–1677 · rationalism", "avatar": "/salon/avatars/spinoza.jpg", "monogram": "BS", "method": "auto", "works": ["Ethics", "On the Improvement of the Understanding", "Theologico-Political Treatise — Part 1", "The Philosophy of Spinoza", "Ethics — Part 1"]}, {"id": "pascal", "name": "Blaise Pascal", "nameEn": "Blaise Pascal", "kind": "philosophe", "blurb": "Le roseau pensant, le pari, les deux infinis. Une clarté qui tremble.", "blurbEn": "The thinking reed, the wager, the two infinities. A clarity that trembles.", "era": "1623–1662 · Port-Royal", "eraEn": "1623–1662 · Port-Royal", "avatar": "/salon/avatars/pascal.svg", "monogram": "BP", "method": "auto", "works": ["Pensées", "Les Provinciales", "Pascal's Pensées", "Thoughts of Blaise Pascal"]}, {"id": "boece", "name": "Boèce", "nameEn": "Boethius", "kind": "philosophe", "blurb": "Fortune, liberté, bien souverain : la philosophie visite la prison.", "blurbEn": "Fortune, freedom, the sovereign good: philosophy visits the prison.", "era": "480–524 · consolation", "eraEn": "480–524 · consolation", "avatar": "/salon/avatars/boece.svg", "monogram": "BO", "method": "auto", "works": ["The Consolation of Philosophy", "Theological Tractates", "The Consolation of Philosophy (tr. James)", "De Consolatione Philosophiae"]}, {"id": "darwin", "name": "Charles Darwin", "nameEn": "Charles Darwin", "kind": "savant", "blurb": "La sélection par l'épreuve : variations, contraintes du milieu, survie sans garantie.", "blurbEn": "Selection by ordeal: variation, the constraints of a milieu, survival without a guarantee.", "era": "1809–1882 · sciences", "eraEn": "1809–1882 · natural science", "avatar": "/salon/avatars/darwin.jpg", "monogram": "CD", "method": "auto", "works": ["On the Origin of Species", "On the Origin of Species By Means of Natural Selection", "The Voyage of the Beagle", "The Descent of Man, and Selection in Relation to Sex", "Life and Letters of Charles Darwin — Volume 1"]}, {"id": "ciceron", "name": "Cicéron", "nameEn": "Cicero", "kind": "philosophe", "blurb": "L’éloquence comme devoir civique : amitié, devoirs, et la res publica.", "blurbEn": "Eloquence as a civic duty: friendship, offices, and the res publica.", "era": "106–43 av. J.-C. · République", "eraEn": "106–43 BCE · the Republic", "avatar": "/salon/avatars/ciceron.svg", "monogram": "CI", "method": "auto", "works": ["De Officiis", "Laelius on Friendship", "Tusculan Disputations", "On the Commonwealth", "On Old Age"]}, {"id": "confucius", "name": "Confucius", "nameEn": "Confucius", "kind": "philosophe", "blurb": "Le rapport de confiance, l'exemplarité du responsable et la constance avant la performance.", "blurbEn": "Trust, the example set by those in charge, and constancy before force.", "era": "–479 av. J.-C. · antique", "eraEn": "d. 479 BCE · antiquity", "avatar": "/salon/avatars/confucius.jpg", "monogram": "C", "method": "auto", "works": ["The Analects of Confucius", "The Sayings of Confucius", "Chinese literature", "論語", "Les quatre livres de philosophie morale et politique de la Chine"]}, {"id": "hume", "name": "David Hume", "nameEn": "David Hume", "kind": "philosophe", "blurb": "Coutume, causalité, sympathie : le scepticisme qui continue de vivre.", "blurbEn": "Custom, causality, sympathy: a scepticism that goes on living.", "era": "1711–1776 · Lumières écossaises", "eraEn": "1711–1776 · Scottish Enlightenment", "avatar": "/salon/avatars/hume.svg", "monogram": "DH", "method": "auto", "works": ["An Enquiry Concerning Human Understanding", "A Treatise of Human Nature", "An Enquiry Concerning the Principles of Morals", "Dialogues Concerning Natural Religion", "Essays Moral, Political, and Literary"]}, {"id": "diderot", "name": "Denis Diderot", "nameEn": "Denis Diderot", "kind": "philosophe", "blurb": "Le dialogue qui dérange, le matérialisme gai, l’atelier des savoirs.", "blurbEn": "The dialogue that unsettles, cheerful materialism, the workshop of knowledges.", "era": "1713–1784 · Encyclopédie", "eraEn": "1713–1784 · the Encyclopédie", "avatar": "/salon/avatars/diderot.svg", "monogram": "DD", "method": "auto", "works": ["Le Neveu de Rameau", "Lettre sur les aveugles", "Jacques the Fatalist", "Rameau's Nephew"]}, {"id": "poe", "name": "Edgar Allan Poe", "nameEn": "Edgar Allan Poe", "kind": "écrivain", "blurb": "La logique poussée jusqu'à l'obsession : ce qui peut mal tourner finit par mal tourner.", "blurbEn": "Logic driven to obsession: what can go wrong does, and the mind watches itself fail.", "era": "1809–1849 · fantastique", "eraEn": "1809–1849 · the fantastic", "avatar": "/salon/avatars/poe.jpg", "monogram": "EA", "method": "auto", "works": ["The Works of Edgar Allan Poe, Volume 1", "The Works of Edgar Allan Poe — Volume 2", "The Works of Edgar Allan Poe — Volume 3", "The Cask of Amontillado", "The Works of Edgar Allan Poe, The Raven Edition"]}, {"id": "kant", "name": "Emmanuel Kant", "nameEn": "Emmanuel Kant", "kind": "philosophe", "blurb": "L'impératif catégorique : ne traiter personne comme un simple moyen, universaliser la règle.", "blurbEn": "The categorical imperative: treat no one as a mere means; universalise the maxim.", "era": "1724–1804 · idéalisme", "eraEn": "1724–1804 · idealism", "avatar": "/salon/avatars/kant.jpg", "monogram": "EK", "method": "auto", "works": ["The Critique of Pure Reason", "Fundamental Principles of the Metaphysic of Morals", "The Metaphysical Elements of Ethics", "The Critique of Practical Reason", "Kant's Critique of Judgement"]}, {"id": "epictete", "name": "Épictète", "nameEn": "Epictetus", "kind": "philosophe", "blurb": "Ce qui dépend de toi, ce qui n’en dépend pas. Une distinction, puis l’usage.", "blurbEn": "What depends on you, what does not. A distinction, then the use of it.", "era": "50–135 · stoïcisme", "eraEn": "50–135 · Stoicism", "avatar": "/salon/avatars/epictete.svg", "monogram": "ÉP", "method": "auto", "works": ["The Enchiridion", "A Selection from the Discourses", "The Golden Sayings of Epictetus", "The Teaching of Epictetus", "The Discourses"]}, {"id": "epicure", "name": "Épicure", "nameEn": "Epicurus", "kind": "philosophe", "blurb": "Le plaisir comme absence de trouble. Les atomes, l’amitié, la mort qui n’est rien.", "blurbEn": "Pleasure as the absence of trouble. Atoms, friendship, death that is nothing to us.", "era": "341–270 av. J.-C. · Jardin", "eraEn": "341–270 BCE · the Garden", "avatar": "/salon/avatars/epicure.svg", "monogram": "ÉC", "method": "auto", "works": ["Lives of the Eminent Philosophers", "Epicurus — Extant Remains", "Letter to Menoeceus"]}, {"id": "kafka", "name": "Franz Kafka", "nameEn": "Franz Kafka", "kind": "écrivain", "blurb": "Les procédures qui absorbent les gens : signaux d'alerte sur la bureaucratie et l'opacité.", "blurbEn": "Procedures that absorb people: warning signals about bureaucracy and the unread letter.", "era": "1883–1924 · modernité", "eraEn": "1883–1924 · modernity", "avatar": "/salon/avatars/kafka.jpg", "monogram": "FK", "method": "auto", "works": ["Metamorphosis", "The Trial", "Die Verwandlung", "Der Prozess: Roman", "Das Urteil: Eine Geschichte"]}, {"id": "nietzsche", "name": "Friedrich Nietzsche", "nameEn": "Friedrich Nietzsche", "kind": "philosophe", "blurb": "Soupçonner les valeurs installées : volonté, courage de penser contre, création de sens.", "blurbEn": "Suspect the values already installed: will, the courage to think against, creation after the no.", "era": "1844–1900 · modernité", "eraEn": "1844–1900 · modernity", "avatar": "/salon/avatars/nietzsche.jpg", "monogram": "FN", "method": "auto", "works": ["Thus Spake Zarathustra", "Beyond Good and Evil", "Also sprach Zarathustra: Ein Buch für Alle und Keinen", "Ecce Homo", "The Birth of Tragedy; or, Hellenism and Pessimism"]}, {"id": "dostoevski", "name": "Fiodor Dostoïevski", "nameEn": "Fyodor Dostoevsky", "kind": "écrivain", "blurb": "Ce que l'idée fixe fait à celui qui la porte : culpabilité, transgression, compensation.", "blurbEn": "What a fixed idea does to the one who carries it: guilt, transgression, compassion.", "era": "1821–1881 · roman psychologique", "eraEn": "1821–1881 · psychological novel", "avatar": "/salon/avatars/dostoevski.jpg", "monogram": "FD", "method": "auto", "works": ["Crime and Punishment", "The Brothers Karamazov", "Notes from the Underground", "The Idiot", "The possessed"]}, {"id": "hegel", "name": "Georg Wilhelm Friedrich Hegel", "nameEn": "Georg Wilhelm Friedrich Hegel", "kind": "philosophe", "blurb": "Le concept se meut. Histoire, droit, esprit : ce qui se nie pour se reprendre.", "blurbEn": "The concept moves. History, right, spirit: what negates itself in order to take itself up.", "era": "1770–1831 · dialectique", "eraEn": "1770–1831 · dialectic", "avatar": "/salon/avatars/hegel.svg", "monogram": "GH", "method": "auto", "works": ["The Philosophy of History", "The Logic of Hegel", "Philosophy of Right", "The Phenomenology of Mind"]}, {"id": "berkeley", "name": "George Berkeley", "nameEn": "George Berkeley", "kind": "philosophe", "blurb": "Être, c’est être perçu. Les idées, Dieu, et le monde qui ne s’effondre pas.", "blurbEn": "To be is to be perceived. Ideas, God, and a world that does not collapse.", "era": "1685–1753 · immatérialisme", "eraEn": "1685–1753 · immaterialism", "avatar": "/salon/avatars/berkeley.svg", "monogram": "GB", "method": "auto", "works": ["A Treatise Concerning the Principles of Human Knowledge", "Three Dialogues between Hylas and Philonous", "An Essay Towards a New Theory of Vision", "Alciphron"]}, {"id": "leibniz", "name": "Gottfried Wilhelm Leibniz", "nameEn": "Gottfried Wilhelm Leibniz", "kind": "philosophe", "blurb": "Monades, harmonie, raison suffisante : le meilleur des mondes, à éprouver.", "blurbEn": "Monads, harmony, sufficient reason: the best of worlds, to be put to the test.", "era": "1646–1716 · monadologie", "eraEn": "1646–1716 · monadology", "avatar": "/salon/avatars/leibniz.svg", "monogram": "GL", "method": "auto", "works": ["Theodicy", "The Monadology", "Discourse on Metaphysics"]}, {"id": "balzac", "name": "Honoré de Balzac", "nameEn": "Honoré de Balzac", "kind": "écrivain", "blurb": "L'observateur impitoyable des appétits, de l'argent et des ambitions de la société.", "blurbEn": "The pitiless observer of appetite, money, and social ambition.", "era": "1799–1850 · réalisme", "eraEn": "1799–1850 · realism", "avatar": "/salon/avatars/balzac.jpg", "monogram": "HD", "method": "auto", "works": ["La Comédie humaine (volume I)", "At the Sign of the Cat and Racket", "Father Goriot", "Eugenie Grandet"]}, {"id": "austen", "name": "Jane Austen", "nameEn": "Jane Austen", "kind": "écrivain", "blurb": "Les intérêts dissimulés sous les convenances : lire les gens, leurs calculs et leurs orgueils.", "blurbEn": "Interests hidden under manners: reading people, their calculations, and their pride.", "era": "1775–1817 · roman de mœurs", "eraEn": "1775–1817 · novel of manners", "avatar": "/salon/avatars/austen.jpg", "monogram": "JA", "method": "auto", "works": ["Pride and Prejudice", "Sense and Sensibility", "Mansfield Park", "Persuasion", "Emma"]}, {"id": "rousseau", "name": "Jean-Jacques Rousseau", "nameEn": "Jean-Jacques Rousseau", "kind": "philosophe", "blurb": "L'éducation par l'expérience, le contrat social et le prix de la civilisation.", "blurbEn": "Education by experience, the social contract, and the price of civilisation.", "era": "1712–1778 · Lumières", "eraEn": "1712–1778 · Enlightenment", "avatar": "/salon/avatars/rousseau.jpg", "monogram": "JR", "method": "auto", "works": ["Émile ou De l'éducation", "Eloisa", "The Confessions of Jean Jacques Rousseau — Complete", "The social contract & discourses", "A Discourse Upon the Origin and the Foundation of the Inequality Among Mankind"]}, {"id": "locke", "name": "John Locke", "nameEn": "John Locke", "kind": "philosophe", "blurb": "L’entendement, la propriété, la tolérance : ce que l’expérience autorise.", "blurbEn": "Understanding, property, toleration: what experience authorises.", "era": "1632–1704 · empirisme", "eraEn": "1632–1704 · empiricism", "avatar": "/salon/avatars/locke.svg", "monogram": "JL", "method": "auto", "works": ["Two Treatises of Government", "An Essay Concerning Humane Understanding", "A Letter Concerning Toleration", "Some Thoughts Concerning Education", "Further Considerations Concerning Raising the Value of Money"]}, {"id": "mill", "name": "John Stuart Mill", "nameEn": "John Stuart Mill", "kind": "philosophe", "blurb": "Harm to others, utilité, liberté de penser. Le particulier contre la tyrannie de la majorité.", "blurbEn": "Harm to others, utility, freedom of thought. The particular against the tyranny of the majority.", "era": "1806–1873 · libéralisme", "eraEn": "1806–1873 · liberalism", "avatar": "/salon/avatars/mill.svg", "monogram": "JM", "method": "auto", "works": ["On Liberty", "Utilitarianism", "The Subjection of Women", "Considerations on Representative Government", "A System of Logic"]}, {"id": "verne", "name": "Jules Verne", "nameEn": "Jules Verne", "kind": "écrivain", "blurb": "La technique au service de l'exploration : ingénierie, risques et terres inconnues.", "blurbEn": "Technique in the service of exploration: engineering, risk, and unknown lands.", "era": "1828–1905 · aventure scientifique", "eraEn": "1828–1905 · scientific adventure", "avatar": "/salon/avatars/verne.jpg", "monogram": "JV", "method": "auto", "works": ["Vingt mille lieues sous les mers", "Off on a Comet! a Journey through Planetary Space", "Twenty Thousand Leagues under the Sea", "From the Earth to the moon; and, round the moon", "The Mysterious Island"]}, {"id": "marx", "name": "Karl Marx", "nameEn": "Karl Marx", "kind": "philosophe", "blurb": "Rapports de force et de travail : qui porte le coût réel, qui capte la valeur.", "blurbEn": "Relations of force and labour: who bears the real cost, who captures the value.", "era": "1818–1883 · critique sociale", "eraEn": "1818–1883 · social critique", "avatar": "/salon/avatars/marx.jpg", "monogram": "KM", "method": "auto", "works": ["The Communist Manifesto", "A Contribution to the Critique of Political Economy", "The Eighteenth Brumaire of Louis Bonaparte", "Manifesto of the Communist Party", "Der Briefwechsel zwischen Friedrich Engels und Karl Marx 1844 bis 1883, Erster Band"]}, {"id": "tolstoi", "name": "Léon Tolstoï", "nameEn": "Leo Tolstoy", "kind": "écrivain", "blurb": "La guerre et la paix des grandes décisions : les plans d'un côté, le réel de l'autre.", "blurbEn": "War and the peace of great decisions: plans on one side, the real on the other.", "era": "1828–1910 · réalisme", "eraEn": "1828–1910 · realism", "avatar": "/salon/avatars/tolstoi.jpg", "monogram": "LT", "method": "auto", "works": ["War and Peace", "Anna Karenina", "Deux générations", "What Is Art?", "What Men Live By, and Other Tales"]}, {"id": "marcaurele", "name": "Marc Aurèle", "nameEn": "Marcus Aurelius", "kind": "philosophe", "blurb": "Le stoïcisme du dirigeant : distinguer ce qui dépend de toi, agir sans bruit, accepter la perte.", "blurbEn": "The stoicism of the one who governs: distinguish what depends on you, act without noise.", "era": "121–180 · stoïcisme", "eraEn": "121–180 · Stoicism", "avatar": "/salon/avatars/marcaurele.jpg", "monogram": "MA", "method": "auto", "works": ["Meditations", "Thoughts of Marcus Aurelius Antoninus", "The Meditations of the Emperor Marcus Aurelius Antoninus", "Thoughts of Marcus Aurelius", "Selbstbetrachtungen"]}, {"id": "montaigne", "name": "Michel de Montaigne", "nameEn": "Michel de Montaigne", "kind": "essayiste", "blurb": "L'essai comme méthode : juger par soi-même, douter, comparer — « que sais-je ? ».", "blurbEn": "The essay as method: judge for yourself, doubt, compare — “what do I know?”", "era": "1533–1592 · humanisme (trad. anglaise)", "eraEn": "1533–1592 · humanism", "avatar": "/salon/avatars/montaigne.jpg", "monogram": "MD", "method": "auto", "works": ["Essays of Michel de Montaigne — Complete (trad. anglaise)", "Essais de Montaigne (self-édition) - Volume I", "Literary and Philosophical Essays: French, German and Italian"]}, {"id": "cervantes", "name": "Miguel de Cervantès", "nameEn": "Miguel de Cervantes", "kind": "écrivain", "blurb": "L'écart entre le projet et le monde : l'idéaliste jugé par les faits, et vice versa.", "blurbEn": "The gap between the project and the world: the idealist judged by facts, and vice versa.", "era": "1547–1616 · roman moderne", "eraEn": "1547–1616 · the modern novel", "avatar": "/salon/avatars/cervantes.jpg", "monogram": "MD", "method": "auto", "works": ["Don Quixote", "The History of Don Quixote, Volume 1, Complete", "The History of Don Quixote, Volume 2, Complete", "The Exemplary Novels of Cervantes", "Wit and Wisdom of Don Quixote"]}, {"id": "machiavel", "name": "Nicolas Machiavel", "nameEn": "Niccolò Machiavelli", "kind": "philosophe", "blurb": "Le pouvoir tel qu'il est : fortuna, occasion, crédibilité — ni cynisme de façade ni idéalisme.", "blurbEn": "Power as it is: fortuna, occasion, credibility — neither cheap cynicism nor consolation.", "era": "1469–1527 · Renaissance", "eraEn": "1469–1527 · Renaissance", "avatar": "/salon/avatars/machiavel.jpg", "monogram": "NM", "method": "auto", "works": ["The Prince", "Discourses on the First Decade of Titus Livius", "The Prince", "Machiavelli, Volume I", "History of Florence and of the Affairs of Italy"]}, {"id": "wilde", "name": "Oscar Wilde", "nameEn": "Oscar Wilde", "kind": "écrivain", "blurb": "L'esprit qui démêle la vanité du désir : le prix de l'apparence et de la volonté.", "blurbEn": "Wit that unpicks vanity from desire: the price of appearance and of the will.", "era": "1854–1900 · esthétisme", "eraEn": "1854–1900 · aestheticism", "avatar": "/salon/avatars/wilde.jpg", "monogram": "OW", "method": "auto", "works": ["The Picture of Dorian Gray", "An ideal husband", "Lord Arthur Savile's Crime; The Portrait of Mr. W.H., and Other Stories", "De Profundis", "The Importance of Being Earnest: A Trivial Comedy for Serious People"]}, {"id": "platon", "name": "Platon", "nameEn": "Plato", "kind": "philosophe", "blurb": "Le dialogue comme méthode : définitions mises à l'épreuve, allégories, justice examinée.", "blurbEn": "Dialogue as method: definitions put to the test, allegories, justice examined.", "era": "–348 av. J.-C. · antique", "eraEn": "d. 348 BCE · antiquity", "avatar": "/salon/avatars/platon.jpg", "monogram": "P", "method": "elenchus", "works": ["The Republic", "Apology", "The six books of Proclus, the Platonic successor, on the theology of Plato (vol. 1 of 2)"]}, {"id": "emerson", "name": "Ralph Waldo Emerson", "nameEn": "Ralph Waldo Emerson", "kind": "philosophe", "blurb": "Self-reliance, nature, l’âme en plein air. Une maxime, puis le risque de la vivre.", "blurbEn": "Self-reliance, nature, the soul in the open air. A maxim, then the risk of living it.", "era": "1803–1882 · transcendantalisme", "eraEn": "1803–1882 · transcendentalism", "avatar": "/salon/avatars/emerson.svg", "monogram": "RE", "method": "auto", "works": ["Essays — First Series", "Essays — Second Series", "Nature", "The Conduct of Life"]}, {"id": "descartes", "name": "René Descartes", "nameEn": "René Descartes", "kind": "philosophe", "blurb": "Le doute méthodique : diviser le problème, examiner les preuves, ne conclure que sur le clair.", "blurbEn": "Methodical doubt: divide the problem, examine the proofs, conclude only on what is clear.", "era": "1596–1650 · rationalisme", "eraEn": "1596–1650 · rationalism", "avatar": "/salon/avatars/descartes.jpg", "monogram": "RD", "method": "auto", "works": ["Discours de la méthode", "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences", "Selections from the Principles of Philosophy", "Six metaphysical meditations", "Meditationes de prima philosophia"]}, {"id": "seneca", "name": "Sénèque", "nameEn": "Seneca", "kind": "philosophe", "blurb": "Le temps, la colère, la constance : un exercice quotidien, sans consolation facile.", "blurbEn": "Time, anger, constancy: a daily exercise, without cheap consolation.", "era": "4 av. J.-C.–65 · stoïcisme", "eraEn": "4 BCE–65 · Stoicism", "avatar": "/salon/avatars/seneca.svg", "monogram": "SÉ", "method": "auto", "works": ["Moral letters to Lucilius", "On Benefits", "On the Shortness of Life"]}, {"id": "stendhal", "name": "Stendhal", "nameEn": "Stendhal", "kind": "écrivain", "blurb": "Le calcul du cœur et de l'ambition : l'ascension sociale vue de l'intérieur.", "blurbEn": "The calculus of the heart and of ambition: social ascent seen from inside.", "era": "1783–1842 · réalisme", "eraEn": "1783–1842 · realism", "avatar": "/salon/avatars/stendhal.jpg", "monogram": "S", "method": "auto", "works": ["Le Rouge et le Noir", "The Red and the Black: A Chronicle of 1830", "On Love", "Rome, Naples et Florence, en 1817", "La Chartreuse De Parme"]}, {"id": "suntzu", "name": "Sun Tzu", "nameEn": "Sun Tzu", "kind": "philosophe", "blurb": "Gagner sans combattre : position, timing, information — le conflit comme dernier recours.", "blurbEn": "Win without fighting: position, timing, information — conflict as a last resort.", "era": "VIe s. av. J.-C. · stratégies", "eraEn": "6th c. BCE · strategy", "avatar": "/salon/avatars/suntzu.jpg", "monogram": "ST", "method": "auto", "works": ["The Art of War", "Sun Tzŭ on the Art of War: The Oldest Military Treatise in the World", "The Book of War: The Military Classic of the Far East", "孫子兵法", "兵法 (Bīng Fǎ)"]}, {"id": "kierkegaard", "name": "Søren Kierkegaard", "nameEn": "Søren Kierkegaard", "kind": "philosophe", "blurb": "L’angoisse, le saut, le particulier face à l’universel. Pas de système qui tienne.", "blurbEn": "Anxiety, the leap, the particular facing the universal. No system holds.", "era": "1813–1855 · existence", "eraEn": "1813–1855 · existence", "avatar": "/salon/avatars/kierkegaard.svg", "monogram": "SK", "method": "elenchus", "works": ["Fear and Trembling", "Selections from the Writings of Kierkegaard", "The Sickness Unto Death"]}, {"id": "hindouisme", "name": "La Bhagavad-Gîtâ", "nameEn": "The Bhagavad Gita", "kind": "tradition", "blurb": "Le champ, le devoir, le yoga. Krishna parle à Arjuna. Le symbole : Om.", "blurbEn": "The field, duty, yoga. Krishna speaks to Arjuna. The sign: Om.", "era": "Écritures · hindouisme", "eraEn": "Scripture · Hinduism", "avatar": "/salon/avatars/hindouisme.svg", "monogram": "ॐ", "method": "auto", "works": ["The Bhagavadgita", "The Bhagavad Gita", "The Upanishads", "The Vedanta-Sutras", "Hindu Literature"]}, {"id": "christianisme", "name": "La Bible", "nameEn": "The Bible", "kind": "tradition", "blurb": "Alliance, évangile, psalmiste : une parole qui se relit. Le symbole : la croix.", "blurbEn": "Covenant, gospel, psalmist: a word that is read again. The sign: the cross.", "era": "Écritures · christianisme", "eraEn": "Scripture · Christianity", "avatar": "/salon/avatars/christianisme.svg", "monogram": "✝", "method": "auto", "works": ["The King James Bible", "The Douay-Rheims Bible", "The New Testament", "The Imitation of Christ", "The Book of Psalms"]}, {"id": "bouddhisme", "name": "Le Dhammapada", "nameEn": "The Dhammapada", "kind": "tradition", "blurb": "L’esprit précède tout. Une strophe, une voie. Le symbole : la roue du Dharma.", "blurbEn": "Mind precedes all. A stanza, a path. The sign: the dharma wheel.", "era": "Écritures · bouddhisme", "eraEn": "Scripture · Buddhism", "avatar": "/salon/avatars/bouddhisme.svg", "monogram": "☸", "method": "auto", "works": ["The Dhammapada", "Buddhist Suttas", "The Gospel of Buddha", "Buddhism and Buddhists", "The Buddha's Way of Virtue"]}, {"id": "islam", "name": "Le Coran", "nameEn": "The Quran", "kind": "tradition", "blurb": "Une récitation, une loi, une miséricorde. Le symbole : le croissant.", "blurbEn": "A recitation, a law, a mercy. The sign: the crescent.", "era": "Écritures · islam", "eraEn": "Scripture · Islam", "avatar": "/salon/avatars/islam.svg", "monogram": "☪", "method": "auto", "works": ["The Qur'ân (Palmer)", "The Koran (Rodwell)", "The Koran (Sale)", "The Qur'an (Wherry)"]}, {"id": "taoisme", "name": "Le Tao-Tö-King", "nameEn": "The Tao Te Ching", "kind": "tradition", "blurb": "La voie qui ne se nomme pas. Souple, obscure, exacte. Le symbole : yin et yang.", "blurbEn": "The way that is not named. Supple, obscure, exact. The sign: yin and yang.", "era": "Écritures · taoïsme", "eraEn": "Scripture · Taoism", "avatar": "/salon/avatars/taoisme.svg", "monogram": "☯", "method": "auto", "works": ["Tao Te Ching", "The Tao Teh King", "The Writings of Chuang Tzu", "The Sayings of Lao Tzu", "Taoist Teachings from the Book of Lieh Tzü"]}, {"id": "judaisme", "name": "La Torah", "nameEn": "The Torah", "kind": "tradition", "blurb": "Loi, prophètes, ketouvim : une alliance lue et relue. Le symbole : l’étoile de David.", "blurbEn": "Law, prophets, ketuvim: a covenant read and reread. The sign: the Star of David.", "era": "Écritures · judaïsme", "eraEn": "Scripture · Judaism", "avatar": "/salon/avatars/judaisme.svg", "monogram": "✡", "method": "auto", "works": ["The Holy Scriptures (JPS 1917)", "The Pentateuch", "The Book of Psalms", "Proverbs", "Isaiah"]}, {"id": "aquinas", "name": "Thomas d’Aquin", "nameEn": "Thomas Aquinas", "kind": "philosophe", "blurb": "Distinguer pour unir : l’acte, la puissance, et ce que la raison peut dire de Dieu.", "blurbEn": "Distinguish in order to unite: act, potency, and what reason can say of God.", "era": "1225–1274 · scolastique", "eraEn": "1225–1274 · scholasticism", "avatar": "/salon/avatars/aquinas.svg", "monogram": "TA", "method": "auto", "works": ["Summa Contra Gentiles", "On the Governance of Rulers", "Aquinas Ethicus", "Of God and His Creatures", "The Summa Theologica"]}, {"id": "hobbes", "name": "Thomas Hobbes", "nameEn": "Thomas Hobbes", "kind": "philosophe", "blurb": "La peur, le pacte, le Léviathan : la paix comme artifice.", "blurbEn": "Fear, the pact, Leviathan: peace as an artifice.", "era": "1588–1679 · contrat", "eraEn": "1588–1679 · the social contract", "avatar": "/salon/avatars/hobbes.svg", "monogram": "TH", "method": "auto", "works": ["Leviathan", "Behemoth", "The Elements of Law", "De Cive"]}, {"id": "hugo", "name": "Victor Hugo", "nameEn": "Victor Hugo", "kind": "écrivain", "blurb": "La fresque sociale et la voix des humbles : misère, justice, révolte et espérance.", "blurbEn": "The social fresco and the voice of the humble: misery, justice, revolt, and hope.", "era": "1802–1885 · romantisme", "eraEn": "1802–1885 · Romanticism", "avatar": "/salon/avatars/hugo.jpg", "monogram": "VH", "method": "auto", "works": ["Les Misérables (tome I : Fantine)", "Notre-Dame de Paris", "Les Misérables", "Los miserables - Tomo 2 (de 2)", "Les misérables Tome V: Jean Valjean"]}, {"id": "voltaire", "name": "Voltaire", "nameEn": "Voltaire", "kind": "philosophe", "blurb": "L'ironie contre les dogmes : optimisme naïf mis à l'épreuve du réel, tolérance, lucidité.", "blurbEn": "Irony against dogma: naïve optimism tried by the real, tolerance, lucidity.", "era": "1694–1778 · Lumières", "eraEn": "1694–1778 · Enlightenment", "avatar": "/salon/avatars/voltaire.jpg", "monogram": "V", "method": "elenchus", "works": ["Candide, ou l'optimisme", "Candide", "Voltaire's Philosophical Dictionary", "Micromegas", "Letters on England"]}, {"id": "james", "name": "William James", "nameEn": "William James", "kind": "philosophe", "blurb": "La vérité se vérifie à l’usage. L’expérience religieuse, la volonté de croire.", "blurbEn": "Truth verifies itself in use. Religious experience, the will to believe.", "era": "1842–1910 · pragmatisme", "eraEn": "1842–1910 · pragmatism", "avatar": "/salon/avatars/james.svg", "monogram": "WJ", "method": "auto", "works": ["Pragmatism", "The Varieties of Religious Experience", "The Will to Believe", "Psychology", "Essays in Radical Empiricism"]}, {"id": "shakespeare", "name": "William Shakespeare", "nameEn": "William Shakespeare", "kind": "dramaturge", "blurb": "Ambition, trahison et destins qui basculent : toute décision a son monologue et sa chute.", "blurbEn": "Ambition, betrayal, and fates that turn: every decision has its soliloquy and its price.", "era": "1564–1616 · Renaissance", "eraEn": "1564–1616 · Renaissance", "avatar": "/salon/avatars/shakespeare.jpg", "monogram": "WS", "method": "auto", "works": ["The Complete Works of William Shakespeare", "A Midsummer Night's Dream", "Hamlet", "Macbeth", "Romeo and Juliet"]}];
     const seeded = new Set(["voltaire", "rousseau", "montaigne"]);
     const pick = document.getElementById("guest-pick");
     const count = document.getElementById("guest-count");
+    const agentsEl = document.getElementById("agents");
     function selectedIds() {
       return [...pick.querySelectorAll("input:checked")].map((el) => el.value);
     }
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" }[c]));
+    }
+    function authorName(a) { return locale === "en" ? a.nameEn : a.name; }
+    function authorBlurb(a) { return locale === "en" ? a.blurbEn : a.blurb; }
+    function authorEra(a) { return locale === "en" ? a.eraEn : a.era; }
+    function avatarHtml(a, cls) {
+      if (a.avatar) return `<span class="avatar ${cls||""}"><img src="${esc(a.avatar)}" alt="" /></span>`;
+      return `<span class="avatar ${cls||""}">${esc(a.monogram)}</span>`;
+    }
+    function renderGuests() {
+      const chosen = new Set(selectedIds().length ? selectedIds() : [...seeded]);
+      }
+    function renderAgents() {
+      agentsEl.innerHTML = `<li class="agents-head" style="border:0;padding:0;grid-column:1/-1"><h2>${esc(msg("agents.fiches"))}</h2></li>` +
+        authors.map((a) => `
+          <li>
+            <a class="card" href="#fiche" data-pane="fiche" data-author="${esc(a.id)}">
+              ${avatarHtml(a, "big")}
+              <span><strong>${esc(authorName(a))}</strong><small>@${esc(a.id)} · ${esc(msg("kind." + a.kind))} · ${esc(msg("method." + a.method))}</small></span>
+            </a>
+            <p>${esc(authorBlurb(a))}</p>
+            <ol class="books">${a.works.map((w) => `<li>${esc(w)}</li>`).join("")}</ol>
+          </li>`).join("");
+    }
     function renderCount() {
       const n = selectedIds().length;
-      const table = I18N[locale];
-      count.textContent = n === 1 ? table["index.seated.one"] : table["index.seated"].replace("{n}", String(n));
+      count.textContent = n === 1 ? msg("index.seated.one") : msg("index.seated", { n });
     }
-    pick.innerHTML = authors.map((author) => `
-      <li><label title="${author.name}"><input type="checkbox" value="${author.id}" ${seeded.has(author.id) ? "checked" : ""} /><span>${author.name}</span></label></li>
-    `).join("");
     pick.addEventListener("change", renderCount);
     document.querySelectorAll("[data-lang]").forEach((btn) => {
       btn.addEventListener("click", () => { locale = btn.getAttribute("data-lang"); applyI18n(); });
@@ -789,12 +719,11 @@
       views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
     }
     views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
-    document.querySelectorAll("[data-pane]").forEach((el) => {
-      if (el.matches(".views button")) return;
-      el.addEventListener("click", (e) => {
-        const name = el.getAttribute("data-pane");
-        if (name && panes[name]) { e.preventDefault(); show(name); }
-      });
+    document.addEventListener("click", (e) => {
+      const el = e.target.closest("[data-pane]");
+      if (!el || el.matches(".views button")) return;
+      const name = el.getAttribute("data-pane");
+      if (name && panes[name]) { e.preventDefault(); show(name); }
     });
     const draft = document.getElementById("draft");
     const suggest = document.getElementById("suggest");

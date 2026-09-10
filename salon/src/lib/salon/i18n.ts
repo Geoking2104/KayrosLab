@@ -102,12 +102,20 @@ const fr = {
   "to.table": "la table",
   "to.host": "l’hôte",
   "host": "Vous",
+  "host.short": "Hôte",
+  "no.voice": "Pas de voix",
   "fiche": "Fiche",
   "writing": "{name} écrit…",
   "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
   "contact": "Contact",
   "pdf.keep": "Conserver en PDF",
   "pdf.empty": "La table n’a pas encore parlé.",
+  "works.count": "{n} œuvres",
+  "circle.lumieres": "Lumières",
+  "circle.academie": "Académie",
+  "circle.pouvoir": "Le pouvoir tel qu’il est",
+  "index.question.sample": "Que reste-t-il de la liberté une fois qu’on a tout expliqué ?",
+  "note.candide": "Ne parler que depuis Candide.",
 } as const;
 
 const en: Record<keyof typeof fr, string> = {
@@ -210,12 +218,20 @@ const en: Record<keyof typeof fr, string> = {
   "to.table": "the table",
   "to.host": "the host",
   "host": "You",
+  "host.short": "Host",
+  "no.voice": "No voice",
   "fiche": "Profile",
   "writing": "{name} is writing…",
   "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
   "contact": "Contact",
   "pdf.keep": "Save as PDF",
   "pdf.empty": "The table has not spoken yet.",
+  "works.count": "{n} works",
+  "circle.lumieres": "Enlightenment",
+  "circle.academie": "Academy",
+  "circle.pouvoir": "Power as it is",
+  "index.question.sample": "What remains of freedom once everything has been explained?",
+  "note.candide": "Speak only from Candide.",
 };
 
 export type MsgKey = keyof typeof fr;

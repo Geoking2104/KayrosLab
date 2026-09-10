@@ -1,14 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { resolveAuthor } from "@/lib/salon/agents";
-import { LITERARY_KINDS, searchAuthors } from "@/lib/salon/catalog";
+import { LITERARY_KINDS, authorCopy, searchAuthors } from "@/lib/salon/catalog";
 import { useT, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import { CreateAuthor } from "./CreateAuthor";
 import { SalonChrome } from "./Chrome";
 
 export function Agents() {
-  const { t } = useT();
+  const { t, locale } = useT();
   const patches = useSalon((s) => s.patches);
   const [kind, setKind] = useState("");
   const [query, setQuery] = useState("");
@@ -56,6 +56,7 @@ export function Agents() {
             const resolved = resolveAuthor(author.id, patches[author.id]);
             if (!resolved) return null;
             const tuned = Boolean(patches[author.id]);
+            const copy = authorCopy(author, locale);
             return (
               <li key={author.id} className={tuned ? "is-on" : undefined}>
                 <Link to="/salon/agents/$authorId" params={{ authorId: author.id }}>
@@ -67,13 +68,13 @@ export function Agents() {
                     )}
                   </span>
                   <span>
-                    <strong>{author.name}</strong>
+                    <strong>{copy.name}</strong>
                     <small>
                       @{resolved.handle} · {t(`kind.${author.kind}` as MsgKey)} · {t(`method.${resolved.method}`)}
                     </small>
                   </span>
                 </Link>
-                <p>{resolved.blurb}</p>
+                <p>{locale === "en" && author.blurbEn ? author.blurbEn : resolved.blurb}</p>
                 <ol>
                   {resolved.works.slice(0, 5).map((work) => (
                     <li key={work.url}>{work.title}</li>

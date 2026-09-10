@@ -49,10 +49,14 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.doesNotMatch(page, /Faire entrer/);
     assert.doesNotMatch(page, /personne ne vote/);
     assert.doesNotMatch(page, /3\/6/);
-    assert.match(page, /data-i18n="agents\.fiches"/);
+    assert.match(page, /"agents\.fiches": "The authors"/);
     assert.match(page, /"kind\.philosophe": "Philosopher"/);
     assert.match(page, /"send": "Send"/);
     assert.match(page, /"handle": "Handle @"/);
+    assert.match(page, /"circle\.lumieres": "Enlightenment"/);
+    assert.match(page, /"nameEn": "Aristotle"/);
+    assert.match(page, /function renderAgents/);
+    assert.equal((page.match(/"nameEn":/g) || []).length, 54);
     assert.doesNotMatch(page, /Les \{n\} fiches|28 fiches/);
   }
 });
@@ -71,5 +75,7 @@ test('le catalogue élargi tient Shakespeare, vingt philosophes et les tradition
     assert.equal(author.kind, 'tradition');
     assert.match(author.avatar, /\.svg$/);
     assert.ok(author.works.length >= 4, id);
+    assert.ok(author.nameEn);
+    assert.ok(author.blurbEn);
   }
 });

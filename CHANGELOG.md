@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.9 (2026-09) — Salon : 54 auteurs, i18n EN complète
+
+- Onglet Auteurs : les 54 fiches, plus seulement six.
+- Noms, ères et résumés en anglais (Aristote → Aristotle, etc.).
+- Cercles : Lumières / Enlightenment, question de table traduite.
+
 ## v0.25.8 (2026-09) — Salon : cases à cocher
+
 
 - Cases à taille fixe, nom sur une ligne, ellipsis. Plus de carrés qui s’étirent.
 
