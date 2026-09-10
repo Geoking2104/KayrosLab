@@ -133,9 +133,9 @@ function Overview({ data, refresh, openRoom, onThread }) {
   });
   useEffect(() => {
     setSelectedRoom((current) => {
-      if (current && data.rooms.some((room) => room.room_id === current)) return current;
       const pending = pendingRoomRef.roomId;
       if (pending && data.rooms.some((room) => room.room_id === pending)) { pendingRoomRef.roomId = null; return pending; }
+      if (current && data.rooms.some((room) => room.room_id === current)) return current;
       return data.rooms[0]?.room_id || '';
     });
   }, [data.rooms]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
@@ -167,6 +167,7 @@ function Overview({ data, refresh, openRoom, onThread }) {
     return () => { alive = false; };
   }, [soCaseId, soReady]);
   const room = data.rooms.find((item) => item.room_id === selectedRoom);
+  const roomAgents = (room?.active_agents || []).map((agentId) => data.agents.find((agent) => agent.agent_id === agentId)).filter(Boolean);
   async function run(event) {
     event.preventDefault(); if (!room) return; setState('loading'); setError('');
     try {
@@ -188,6 +189,7 @@ function Overview({ data, refresh, openRoom, onThread }) {
     <section className="metric-row"><div><strong>{data.summary.rooms}</strong><span>Salons actifs</span></div><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.hybrid_agents}</strong><span>Profils hybrides</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
     <div className="mission-workbench"><section><header><div><h2>Mission rapide</h2><p>Le résultat ouvre un fil durable, pas une simple notification.</p></div></header>
       <label>Salon<select value={selectedRoom || ''} onChange={(event) => setSelectedRoom(event.target.value)}><option value="">Sélectionner…</option>{data.rooms.map((item) => <option value={item.room_id} key={item.room_id}>{item.name} · {platformNames[item.platform]}</option>)}</select></label>
+      {room && <div className="room-collective" aria-live="polite"><span>Agents préselectionnés dans ce salon</span><div>{roomAgents.map((agent) => <span className="room-agent" key={agent.agent_id}>{agent.metadata?.literary?.avatar_url ? <img src={agent.metadata.literary.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</span>)}{!roomAgents.length && <small>Collectif en cours de chargement…</small>}</div></div>}
       <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!room || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
@@ -234,6 +236,8 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
 }
 
 const pendingRoomRef = { roomId: null };
+const AUTHORS_SALON_EXTERNAL_PREFIX = 'console-auteurs-';
+const MAX_AUTHORS_PER_ROOM = 3;
 function levenshtein(a, b) {
   const m = a.length; const n = b.length;
   if (!m) return n; if (!n) return m;
@@ -521,39 +525,120 @@ function AuthorPickerDialog({ onClose, onCreated }) {
   </section></div>;
 }
 
-function AuthorsPage({ data, refresh }) {
-  const [picker, setPicker] = useState(false);
-  const [conversationBusy, setConversationBusy] = useState('');
+/** Choisit où réunir les auteurs préselectionnés, puis ouvre ce salon dans la mission rapide. */
+function SalonPickerDialog({ entries, rooms, tenantId, allAuthorIds, onClose, onDone }) {
+  const dedicatedExternalId = `${AUTHORS_SALON_EXTERNAL_PREFIX}${tenantId}`.slice(0, 240);
+  const authorsSalon = rooms.find((room) => room.platform === 'console' && room.external_room_id === dedicatedExternalId) || null;
+  const consoleRooms = rooms.filter((room) => room.platform === 'console' && room.room_id !== authorsSalon?.room_id);
+  const [target, setTarget] = useState(authorsSalon?.room_id || '__auteurs__');
+  const [newName, setNewName] = useState('');
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const authors = (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false);
 
-  async function createConversation(agent) {
-    setConversationBusy(agent.agent_id); setError('');
+  async function submit(event) {
+    event.preventDefault();
+    setBusy(true); setError('');
     try {
-      const room = await api.createRoom({ name: `Échange — ${agent.display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: [agent.agent_id] });
-      pendingRoomRef.roomId = room.room.room_id;
-      location.hash = 'overview';
-      await refresh();
+      const ready = entries.map((entry) => entry.agentId);
+      let roomId;
+      if (target === '__new__') {
+        const name = newName.trim() || 'Salon des auteurs';
+        const created = await api.createRoom({ name, platform: 'console', external_room_id: `${AUTHORS_SALON_EXTERNAL_PREFIX}${Date.now()}`, mode: 'mention_only', swarm_name: `${name} — conseil littéraire`, active_agents: ready });
+        roomId = created.room.room_id;
+      } else if (target === '__auteurs__') {
+        const created = await api.createRoom({ name: 'Salon des auteurs', platform: 'console', external_room_id: dedicatedExternalId, mode: 'mention_only', swarm_name: 'Salon des auteurs — conseil littéraire', active_agents: ready });
+        roomId = created.room.room_id;
+      } else {
+        const selectedRoom = rooms.find((room) => room.room_id === target);
+        const removeAgentIds = selectedRoom?.room_id === authorsSalon?.room_id
+          ? (selectedRoom.active_agents || []).filter((agentId) => allAuthorIds.includes(agentId) && !ready.includes(agentId))
+          : [];
+        await api.updateRoomAgents(target, { add_agent_ids: ready, remove_agent_ids: removeAgentIds });
+        roomId = target;
+      }
+      await onDone(roomId);
     } catch (err) { setError(err.message); }
-    finally { setConversationBusy(''); }
+    finally { setBusy(false); }
   }
 
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog" role="dialog" aria-modal="true" aria-labelledby="authors-room-title">
+    <header><div><h2 id="authors-room-title">Démarrer un salon d’auteurs</h2><p>Les auteurs sélectionnés répondront ensemble aux prompts saisis dans ce salon.</p></div><button className="icon-button" type="button" onClick={onClose} aria-label="Fermer">×</button></header>
+    <form onSubmit={submit}>
+      <fieldset><legend>Destination — {entries.length} agent(s) auteur préselectionné(s)</legend>
+        <div className="so-destinations">
+          <label className="radio"><input type="radio" name="target" checked={authorsSalon ? target === authorsSalon.room_id : target === '__auteurs__'} onChange={() => setTarget(authorsSalon?.room_id || '__auteurs__')} /><span><strong>Salon des auteurs</strong><small>{authorsSalon ? 'Salon dédié existant — son collectif d’auteurs sera actualisé' : 'Créer le salon dédié à cet espace'}</small></span></label>
+          {consoleRooms.map((room) => <label key={room.room_id} className="radio"><input type="radio" name="target" checked={target === room.room_id} onChange={() => setTarget(room.room_id)} /><span><strong>{room.name}</strong><small>Salon console existant · les auteurs seront ajoutés au collectif</small></span></label>)}
+          <label className="radio"><input type="radio" name="target" checked={target === '__new__'} onChange={() => setTarget('__new__')} /><span><strong>Nouveau salon…</strong><small>Créer une conversation distincte avec cette sélection</small></span></label>
+        </div>
+      </fieldset>
+      {target === '__new__' && <label>Nom du nouveau salon<input value={newName} onChange={(event) => setNewName(event.target.value)} placeholder="Ex. Cercle des philosophes" maxLength={120} /></label>}
+      <p className="muted so-note">La version en ligne accepte jusqu’à {MAX_AUTHORS_PER_ROOM} agents auteurs par salon. Après l’ouverture, saisissez votre prompt dans « Mission rapide ».</p>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
+      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={busy || !entries.length}>{busy ? 'Ouverture…' : 'Ouvrir le salon'}</button></footer>
+    </form>
+  </section></div>;
+}
+
+function AuthorsPage({ data, refresh }) {
+  const authors = useMemo(() => (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false), [data.agents]);
+  const authorIdsKey = authors.map((agent) => agent.agent_id).join('|');
+  const [selection, setSelection] = useState(() => authors.slice(0, MAX_AUTHORS_PER_ROOM).map((agent) => ({ agentId: agent.agent_id })));
+  const [picker, setPicker] = useState(false);
+  const [salon, setSalon] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const availableIds = new Set(authors.map((agent) => agent.agent_id));
+    setSelection((current) => {
+      const valid = current.filter((entry) => availableIds.has(entry.agentId)).slice(0, MAX_AUTHORS_PER_ROOM);
+      return valid.length ? valid : authors.slice(0, MAX_AUTHORS_PER_ROOM).map((agent) => ({ agentId: agent.agent_id }));
+    });
+  }, [authorIdsKey]);
+
+  function toggleAgent(agent) {
+    const selected = selection.some((entry) => entry.agentId === agent.agent_id);
+    if (!selected && selection.length >= MAX_AUTHORS_PER_ROOM) {
+      setError(`Sélectionnez au maximum ${MAX_AUTHORS_PER_ROOM} agents auteurs par salon.`);
+      return;
+    }
+    setError('');
+    setSelection((current) => selected
+      ? current.filter((entry) => entry.agentId !== agent.agent_id)
+      : [...current, { agentId: agent.agent_id }]);
+  }
+
+  async function onSalonDone(roomId) {
+    setSalon(false);
+    pendingRoomRef.roomId = roomId;
+    location.hash = 'overview';
+    await refresh();
+  }
+
+  const selectedAgents = selection.map((entry) => authors.find((agent) => agent.agent_id === entry.agentId)).filter(Boolean);
   return <section className="page">
-    <header className="page-header"><div><p className="context-line">Personnalités littéraires</p><h1>Auteurs</h1><p>Agents construits sur la somme des œuvres du domaine public — au moins 5 livres intégrés par personnalité, registre d'ingestion à l'appui.</p></div><button className="button primary" onClick={() => setPicker(true)}>Ajouter un agent auteur</button></header>
-    {error && <p className="inline-error">{error}</p>}
+    <header className="page-header"><div><p className="context-line">Personnalités littéraires</p><h1>Auteurs</h1><p>Préselectionnez jusqu’à {MAX_AUTHORS_PER_ROOM} agents auteurs, réunissez-les dans un salon, puis confrontez-les au prompt de votre choix.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setPicker(true)}>Ajouter un agent auteur</button><button className="button primary" disabled={!selection.length} onClick={() => setSalon(true)}>Démarrer un salon ({selection.length})</button></div></header>
+    {error && <p className="inline-error" role="alert">{error}</p>}
     {authors.length === 0 && <p className="muted">Aucun agent auteur pour le moment — cliquez sur « Ajouter un agent auteur ».</p>}
-    <div className="agent-table">{authors.map((agent) => {
-      const lit = agent.metadata.literary;
-      const works = (lit.works || []).filter((work) => work.ok);
-      return <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}>
-        <header><div><small>{agent.agent_id} · {agent.department}</small><h2>{lit.avatar_url ? <img className="agent-avatar" src={lit.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</h2></div></header>
-        <p>{agent.mission || agent.primary_focus}</p>
-        <dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Profil</dt><dd>auteur du domaine public</dd></div><div><dt>Livres</dt><dd>{works.length} intégré(s) — plafond 15, minimum 5</dd></div></dl>
-        <details><summary>Livres de la personnalité</summary><ul className="so-booklist">{works.map((work) => <li key={work.url}><label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span></label></li>)}</ul></details>
-        <footer><span>{lit.era || ''}</span><button className="button secondary" disabled={conversationBusy === agent.agent_id} onClick={() => createConversation(agent)}>{conversationBusy === agent.agent_id ? 'Ouverture…' : 'Créer une conversation'}</button></footer>
-      </article>;
-    })}</div>
+    {authors.length > 0 && <div className="authors-layout">
+      <section className="authors-main"><div className="authors-grid">{authors.map((agent) => {
+        const lit = agent.metadata.literary;
+        const works = (lit.works || []).filter((work) => work.ok);
+        const isSelected = selection.some((entry) => entry.agentId === agent.agent_id);
+        return <article key={agent.agent_id} className={`author-card ${isSelected ? 'is-selected' : ''}`}>
+          <header>{lit.avatar_url ? <img className="so-avatar" src={lit.avatar_url} alt="" /> : <span className="so-avatar so-avatar-initials">{(agent.display_name || agent.agent_id).slice(0, 2).toUpperCase()}</span>}<div><h3>{agent.display_name || agent.role_name}</h3><small>{lit.era || agent.department} · {works.length} livre(s) intégré(s)</small></div></header>
+          <p>{agent.mission || agent.primary_focus}</p>
+          <details><summary>Livres de la personnalité</summary><ul className="so-booklist">{works.map((work) => <li key={work.url || work.title}><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span></li>)}</ul></details>
+          <footer><label className="check"><input type="checkbox" checked={isSelected} onChange={() => toggleAgent(agent)} />Préselectionner</label><span className="author-badge">Agent prêt</span></footer>
+        </article>;
+      })}</div></section>
+      <aside className="authors-aside"><h3 className="so-kicker">Préselection du salon ({selection.length}/{MAX_AUTHORS_PER_ROOM})</h3>
+        {selectedAgents.map((agent) => <article key={agent.agent_id}>{agent.metadata.literary.avatar_url ? <img className="so-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : <span className="so-avatar so-avatar-initials">{(agent.display_name || agent.agent_id).slice(0, 2).toUpperCase()}</span>}<div><strong>{agent.display_name || agent.role_name}</strong><small>Participera à la conversation</small></div><label className="check"><input type="checkbox" checked onChange={() => toggleAgent(agent)} />Retirer</label></article>)}
+        {!selectedAgents.length && <p className="muted so-note">Cochez au moins un auteur pour composer le salon.</p>}
+        <button className="button primary" disabled={!selection.length} onClick={() => setSalon(true)}>Démarrer la conversation</button>
+      </aside>
+    </div>}
     {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
+    {salon && <SalonPickerDialog entries={selection} rooms={data.rooms} tenantId={data.user.tenantId} allAuthorIds={(data.agents || []).filter((agent) => agent.metadata?.literary).map((agent) => agent.agent_id)} onClose={() => setSalon(false)} onDone={onSalonDone} />}
   </section>;
 }
 
