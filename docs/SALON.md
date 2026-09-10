@@ -2,23 +2,22 @@
 
 Salon is not a Slack room, not a console tab, and not a chat channel.
 
-It is a **literary and philosophical reading circle**: one passage, named roles,
-turns that must answer each other, and a minute. Nobody votes. The verdict is
-**tenir**, **relire**, or **laisser** — never GO / NO-GO.
+It is a **literary and philosophical circle**. Authors sit at a table. Each
+agent wears a skin made of at least five public-domain works, an icon, a
+handle, and a voice. You call them with `@`. They answer from their books.
+They object to each other. Nobody votes.
 
 KayrosLab keeps the governed decision committee in the **console**. Salon is a
 **separate service**, linked from the main site footer.
 
 Live on GitHub Pages after merge: [kayroslab.com/salon/](https://www.kayroslab.com/salon/).
 
-> **Do not merge this (or the kanban workbench) over `frontend/console-app`.**
+> **Do not merge this over `frontend/console-app`.**
 > Production console stays where it is.
 
 ---
 
 ## Hallmark stamp
-
-Emitted before any screen:
 
 | Axis | Choice |
 |---|---|
@@ -31,88 +30,55 @@ Emitted before any screen:
 | Footer | Ft5 statement |
 | Hierarchy | H1 typographic |
 
-Pre-emit: P5 H5 E4 S5 R5 V5. Paper, not dashboard. Paired fonts (Fraunces + Source Sans 3). One hue. Four-point space. Ease-out. Asymmetric hero. Restraint: no purple gradient, no Inter-both, no icon-tile cards, no AI-nav.
+Paper, not dashboard. Fraunces + Source Sans 3. One hue.
 
 ---
 
-## Roles, kinds, verdicts
+## What a circle is
 
-**Roles.** `hote` · `lecteur` · `objecteur` · `secretaire` · `invite`
+A circle is a table.
 
-**Kinds.** `lecture` → `objection` → `defense` → `concession` → `synthese` → `minute`
+1. You name it.
+2. You pose a question.
+3. You seat guests — from the 28 preloaded authors, or a new one.
+4. You speak in the thread. `@voltaire` calls him; he answers from *Candide*.
+   Another objects. Plato, if seated, questions before he concludes.
 
-**Verdicts.** `tenir` | `relire` | `laisser`
-
-An objection without a place in the text (`« »` / `" "` / `p.` / `§` / `fr.` / `fragment` + number) is marked *sans lieu*. The protocol still advances; fidelity drops.
-
-If the circle has no `invite`, the engine skips concession and asks the host for a synthesis.
+**Faire entrer** seats them. **Conserver en PDF** keeps the sitting:
+cover, title page of authors, index, then the thread.
 
 ---
 
-## Rust owns the protocol
+## Agents
 
-Canonical engine: [`crates/salon-core`](../crates/salon-core).
+Each agent has:
 
-```bash
-cargo test --manifest-path crates/salon-core/Cargo.toml
-# wasm32 (optional)
-cargo build --manifest-path crates/salon-core/Cargo.toml \
-  --release --target wasm32-unknown-unknown
-```
+- a handle (`@voltaire`)
+- a personality summary
+- at least five parsed works in memory (deterministic voice)
+- a method: from the work, rhetoric, or Socratic elenchus
+- an optional table instruction
 
-`evaluate()` is covered by four host tests (empty session, objection after lecture, *tenir* with polyphony + minute, *relire* without citations).
+You may add works to any agent (Project Gutenberg, PDF, TXT).
 
-### WASM ABI (`salon_core.wasm`)
+You may add an agent. Five public-domain works, or the skin will be too thin:
+the voice will speak short, and repeat.
 
-Compiled `cdylib`, no JS glue. Linear memory, C exports:
+---
 
-| Export | Contract |
+## Layout in this repository
+
+| Path | What |
 |---|---|
-| `salon_heap() -> i32` | Pointer to a 48 KiB HEAP |
-| `salon_out_off() -> i32` | `24576` — output region |
-| `salon_eval(in_len: i32) -> i32` | Lit UTF-8 JSON en `HEAP[0 .. in_len]`, écrit `u32` LE + JSON à `HEAP[OUT_OFF]`, **retourne le pointeur absolu** `heap + OUT_OFF` |
-
-Le chargeur JS **ne doit pas** traiter la valeur de retour comme un décalage dans la mémoire linéaire. Il lit toujours :
-
-```
-outPtr = salon_heap() + salon_out_off()
-len    = u32 LE at outPtr
-json   = bytes at outPtr+4 .. outPtr+4+len
-```
-
-Une sonde (cercle vide → `lecteur` / `lecture`) s’exécute à l’instanciation. Si elle échoue, l’UI n’affiche pas « Rust ».
-
-Input:
-
-```json
-{
-  "members": [{ "role": "lecteur" }],
-  "turns": [{ "role": "lecteur", "kind": "lecture", "text": "…", "has_citation": true }]
-}
-```
-
-Output: `polyphony`, `tension`, `fidelity`, `closure`, `next_kind`, `next_role`, `verdict`, `note`.
-
-The static site (`backend/web/public/salon/`) instantiates `./salon_core.wasm` and falls back to the same rules in JavaScript if WASM cannot load.
+| `salon/index.html` | Playable specimen (GitHub Pages `/salon/`) |
+| `salon/avatars/` | Author portraits |
+| `salon/salon_core.wasm` | Rust floor / retrieval |
+| `salon/src/` | React engine (fiches, cercle, i18n, ingest, PDF) |
+| `crates/salon-core/` | Rust crate (`salon_eval`) |
+| `backend/web/public/salon/` | Mirror for the static host |
 
 ---
 
-## What this is not
+## i18n
 
-- Not `frontend/console-app` rooms (those remain Slack / Teams / Discord decision channels).
-- Not Sales Oracle. Not Auteurs. Both stay out of the console product surface of this change.
-- Not a Fastify service and not an account. Circles persist in `localStorage` (`kayros-salon-v1`) on the public site.
-
----
-
-## Repository map
-
-| Path | Role |
-|---|---|
-| `crates/salon-core/` | Protocol crate (source + `Cargo.lock`; never commit `target/`) |
-| `backend/web/public/salon/` | GitHub Pages app at `/salon/` (foyer, séance, CSS, WASM) |
-| `docs/SALON.md` | This note |
-| `index.html` / `index.fr.html` | Footer link `<a href="/salon/">Salon</a>` |
-| `.github/workflows/deploy-positionning-pages.yml` | Copies `backend/web/public/salon/` → `deploy/salon/` |
-
-Pages assemble step must copy Salon. A footer without that copy is a 404.
+Interface: FR · EN. Books stay in the language they were written in.

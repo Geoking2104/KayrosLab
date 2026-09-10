@@ -1,14 +1,12 @@
-//! Salon — protocole d’un cercle de lecture.
+//! Salon — moteur de parole des agents auteurs.
 //!
-//! Pas un salon Slack. Un cercle : un texte, des rôles, des tours, une minute.
-//! Le verdict n’est pas GO/NO_GO. On tient, on relit, ou on laisse.
+//! Qui parle, et depuis quels passages. Le texte de la réplique n’est pas
+//! ici : il est écrit par le modèle, collé à la mémoire des œuvres.
 //!
 //! ABI WASM (wasm32-unknown-unknown, C, sans import) :
-//!   salon_heap()     → pointeur du tas (48 KiB) dans la mémoire linéaire
-//!   salon_out_off()  → décalage de la réponse dans le tas (24 KiB)
-//!   salon_eval(len)  → lit UTF-8 JSON en heap[0..len], écrit u32 LE + JSON
-//!                      en heap[out_off..], retourne le *pointeur absolu*
-//!                      de cette réponse (heap + out_off)
+//!   salon_heap()     → pointeur du tas (48 KiB)
+//!   salon_out_off()  → décalage de la réponse (24 KiB)
+//!   salon_eval(len)  → JSON in heap[0..len] → u32 LE + JSON en heap[out]
 
 use serde::{Deserialize, Serialize};
 
@@ -18,225 +16,297 @@ const OUT_OFF: usize = 24 * 1024;
 static mut HEAP: [u8; HEAP_CAP] = [0; HEAP_CAP];
 
 fn heap_ptr() -> *mut u8 {
-    // SAFETY: wasm32 single-threadé ; salon_eval n’est pas réentrant.
     core::ptr::addr_of_mut!(HEAP) as *mut u8
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum Role {
-    Hote,
-    Lecteur,
-    Objecteur,
-    Secretaire,
-    Invite,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum Kind {
-    Lecture,
-    Objection,
-    Defense,
-    Concession,
-    Synthese,
-    Minute,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum Verdict {
-    Tenir,
-    Relire,
-    Laisser,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct EvalInput {
-    pub members: Vec<MemberIn>,
-    pub turns: Vec<TurnIn>,
+    #[serde(default)]
+    pub op: String,
+    #[serde(default)]
+    pub query: String,
+    #[serde(default)]
+    pub passages: Vec<PassageIn>,
+    #[serde(default)]
+    pub seated: Vec<String>,
+    #[serde(default)]
+    pub last: Option<String>,
+    #[serde(default)]
+    pub recent: Vec<String>,
+    #[serde(default)]
+    pub mode: String,
+    #[serde(default)]
+    pub addressed: Option<String>,
+    #[serde(default)]
+    pub kinds: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct MemberIn {
-    pub role: Role,
+pub struct PassageIn {
+    pub id: String,
+    #[serde(default)]
+    pub terms: Vec<String>,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct TurnIn {
-    pub role: Role,
-    pub kind: Kind,
-    pub text: String,
-    pub has_citation: bool,
+#[derive(Debug, Serialize, Clone)]
+pub struct Move {
+    pub id: String,
+    pub act: String,
+    pub to: String,
+    pub figure: String,
+    pub method: String,
 }
 
 #[derive(Debug, Serialize)]
 pub struct EvalOutput {
-    pub polyphony: f32,
-    pub tension: f32,
-    pub fidelity: f32,
-    pub closure: f32,
-    pub next_kind: Kind,
-    pub next_role: Role,
-    pub verdict: Option<Verdict>,
+    pub hits: Vec<Hit>,
+    pub speakers: Vec<String>,
+    pub moves: Vec<Move>,
     pub note: String,
 }
 
-impl Role {
-    #[allow(dead_code)]
-    fn expected_kind(self) -> Kind {
-        match self {
-            Role::Lecteur => Kind::Lecture,
-            Role::Objecteur => Kind::Objection,
-            Role::Hote => Kind::Synthese,
-            Role::Secretaire => Kind::Minute,
-            Role::Invite => Kind::Concession,
-        }
-    }
+#[derive(Debug, Serialize)]
+pub struct Hit {
+    pub id: String,
+    pub score: f32,
 }
 
-fn next_after(kind: Kind) -> (Role, Kind) {
-    match kind {
-        Kind::Lecture => (Role::Objecteur, Kind::Objection),
-        Kind::Objection => (Role::Lecteur, Kind::Defense),
-        Kind::Defense => (Role::Invite, Kind::Concession),
-        Kind::Concession => (Role::Hote, Kind::Synthese),
-        Kind::Synthese => (Role::Secretaire, Kind::Minute),
-        Kind::Minute => (Role::Hote, Kind::Synthese),
-    }
+fn tokenize(text: &str) -> Vec<String> {
+    text.to_lowercase()
+        .split(|c: char| !c.is_alphabetic())
+        .filter(|w| w.chars().count() >= 4)
+        .map(|w| w.to_string())
+        .collect()
 }
 
-fn has_role(members: &[MemberIn], role: Role) -> bool {
-    members.iter().any(|m| m.role == role)
-}
-
-fn adjust_next(members: &[MemberIn], role: Role, kind: Kind) -> (Role, Kind) {
-    if has_role(members, role) {
-        return (role, kind);
+pub fn retrieve(query: &str, passages: &[PassageIn]) -> Vec<Hit> {
+    let q = tokenize(query);
+    if q.is_empty() || passages.is_empty() {
+        return passages
+            .iter()
+            .take(3)
+            .map(|p| Hit {
+                id: p.id.clone(),
+                score: 0.1,
+            })
+            .collect();
     }
-    match role {
-        Role::Invite => {
-            if has_role(members, Role::Hote) {
-                (Role::Hote, Kind::Synthese)
-            } else {
-                (Role::Lecteur, Kind::Defense)
+    let mut hits: Vec<Hit> = passages
+        .iter()
+        .map(|p| {
+            let mut score = 0.0;
+            for term in &p.terms {
+                let t = term.to_lowercase();
+                if q.iter().any(|w| *w == t || t.contains(w) || w.contains(&t)) {
+                    score += 1.0;
+                }
             }
+            let den = (p.terms.len().max(1) as f32).sqrt();
+            Hit {
+                id: p.id.clone(),
+                score: score / den,
+            }
+        })
+        .collect();
+    hits.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+    hits.truncate(4);
+    hits
+}
+
+pub fn figure(kind: &str, act: &str, query: &str) -> &'static str {
+    if act == "objection" {
+        return "concessio";
+    }
+    let q = query.to_lowercase();
+    if kind == "philosophe" {
+        if q.contains("dieu")
+            || q.contains("providence")
+            || q.contains("optimisme")
+            || q.contains("vertu")
+        {
+            return "ironia";
         }
-        Role::Objecteur => (Role::Hote, Kind::Objection),
-        Role::Secretaire => (Role::Hote, Kind::Minute),
-        other => (other, kind),
+        if q.contains('?') || q.contains("pourquoi") || q.contains("comment") || q.contains("faut")
+        {
+            return "interrogatio";
+        }
+        return "distinctio";
+    }
+    match kind {
+        "essayiste" => "sententia",
+        "écrivain" | "dramaturge" | "poète" => "hypotypose",
+        "savant" | "économiste" => "exemplum",
+        _ => "exemplum",
     }
 }
 
-/// Évalue l’état d’une séance. Cœur du produit — tests sur l’hôte natif.
+fn kind_of<'a>(id: &str, seated: &[String], kinds: &'a [String]) -> &'a str {
+    seated
+        .iter()
+        .position(|s| s == id)
+        .and_then(|i| kinds.get(i))
+        .map(|s| s.as_str())
+        .unwrap_or("")
+}
+
+fn is_socratic(id: &str) -> bool {
+    id == "platon" || id == "socrate"
+}
+
+fn with_craft(mut moves: Vec<Move>, seated: &[String], kinds: &[String], query: &str) -> Vec<Move> {
+    for m in &mut moves {
+        if is_socratic(&m.id) {
+            m.method = "elenchus".into();
+            m.figure = "interrogatio".into();
+        } else {
+            m.method = "rhetorique".into();
+            m.figure = figure(kind_of(&m.id, seated, kinds), &m.act, query).into();
+        }
+    }
+    if moves.len() >= 2 && moves[0].method == "elenchus" {
+        let first_id = moves[0].id.clone();
+        let second_id = moves[1].id.clone();
+        moves[1].act = "reponse".into();
+        moves[1].to = first_id;
+        if !is_socratic(&second_id) {
+            moves[1].method = "rhetorique".into();
+            moves[1].figure = figure(kind_of(&second_id, seated, kinds), "reponse", query).into();
+        }
+    }
+    moves
+}
+
+pub fn floor(
+    seated: &[String],
+    last: Option<&str>,
+    recent: &[String],
+    mode: &str,
+    addressed: Option<&str>,
+    kinds: &[String],
+    query: &str,
+) -> Vec<Move> {
+    if seated.is_empty() {
+        return vec![];
+    }
+    let mut spoken: std::collections::BTreeMap<&str, usize> = std::collections::BTreeMap::new();
+    for id in seated {
+        spoken.insert(id.as_str(), 0);
+    }
+    for id in recent {
+        if let Some(n) = spoken.get_mut(id.as_str()) {
+            *n += 1;
+        }
+    }
+    let mut ranked: Vec<&String> = seated.iter().collect();
+    ranked.sort_by(|a, b| {
+        let ca = spoken.get(a.as_str()).copied().unwrap_or(0);
+        let cb = spoken.get(b.as_str()).copied().unwrap_or(0);
+        ca.cmp(&cb).then_with(|| a.cmp(b))
+    });
+
+    let reply_to = last.filter(|id| *id != "user").unwrap_or("user");
+
+    if mode == "talk" {
+        let id = ranked
+            .iter()
+            .find(|id| last != Some(id.as_str()))
+            .map(|id| (*id).clone())
+            .unwrap_or_else(|| seated[0].clone());
+        return with_craft(
+            vec![Move {
+                id,
+                act: "reponse".into(),
+                to: reply_to.into(),
+                figure: String::new(),
+                method: String::new(),
+            }],
+            seated,
+            kinds,
+            query,
+        );
+    }
+
+    let first = addressed
+        .filter(|id| seated.iter().any(|s| s == id))
+        .map(|id| id.to_string())
+        .or_else(|| {
+            ranked
+                .iter()
+                .find(|id| last != Some(id.as_str()))
+                .map(|id| (*id).clone())
+        })
+        .unwrap_or_else(|| seated[0].clone());
+
+    let mut moves = vec![Move {
+        id: first.clone(),
+        act: "reponse".into(),
+        to: if last == Some("user") || last.is_none() {
+            "user".into()
+        } else {
+            reply_to.into()
+        },
+        figure: String::new(),
+        method: String::new(),
+    }];
+
+    if let Some(second) = ranked.iter().find(|id| id.as_str() != first && last != Some(id.as_str())) {
+        moves.push(Move {
+            id: (*second).clone(),
+            act: "objection".into(),
+            to: first,
+            figure: String::new(),
+            method: String::new(),
+        });
+    }
+    with_craft(moves, seated, kinds, query)
+}
+
 pub fn evaluate(input: &EvalInput) -> EvalOutput {
-    let n_members = input.members.len().max(1) as f32;
-    let spoken: Vec<Role> = {
-        let mut v: Vec<Role> = input.turns.iter().map(|t| t.role).collect();
-        v.sort_by_key(|r| *r as u8);
-        v.dedup();
-        v
-    };
-    let polyphony = (spoken.len() as f32 / n_members).clamp(0.0, 1.0);
-
-    let objections = input
-        .turns
-        .iter()
-        .filter(|t| t.kind == Kind::Objection)
-        .count();
-    let defenses = input
-        .turns
-        .iter()
-        .filter(|t| matches!(t.kind, Kind::Defense | Kind::Concession | Kind::Synthese))
-        .count();
-    let tension = if objections == 0 {
-        0.12
-    } else {
-        (objections as f32 / (objections + defenses).max(1) as f32).clamp(0.0, 1.0)
-    };
-
-    let cited = input.turns.iter().filter(|t| t.has_citation).count();
-    let fidelity = if input.turns.is_empty() {
-        0.0
-    } else {
-        (cited as f32 / input.turns.len() as f32).clamp(0.0, 1.0)
-    };
-
-    let has_synthese = input.turns.iter().any(|t| t.kind == Kind::Synthese);
-    let has_minute = input.turns.iter().any(|t| t.kind == Kind::Minute);
-    let closure = match (has_synthese, has_minute) {
-        (true, true) => 0.92,
-        (true, false) => 0.55,
-        (false, true) => 0.4,
-        (false, false) => (input.turns.len() as f32 / 8.0).clamp(0.0, 0.35),
-    };
-
-    let (next_role, next_kind) = if let Some(last) = input.turns.last() {
-        let (r, k) = next_after(last.kind);
-        adjust_next(&input.members, r, k)
-    } else {
-        adjust_next(&input.members, Role::Lecteur, Kind::Lecture)
-    };
-
-    let verdict = if input.turns.len() < 3 {
-        None
-    } else if has_minute && polyphony >= 0.66 && tension <= 0.45 && fidelity >= 0.4 {
-        Some(Verdict::Tenir)
-    } else if tension >= 0.7 || fidelity < 0.25 {
-        Some(Verdict::Relire)
-    } else if has_synthese && polyphony < 0.5 {
-        Some(Verdict::Laisser)
-    } else if has_minute {
-        Some(Verdict::Relire)
-    } else {
-        None
-    };
-
-    let note = match (&verdict, next_kind) {
-        (Some(Verdict::Tenir), _) => {
-            "Le cercle peut tenir cette lecture. La minute la consigne."
-        }
-        (Some(Verdict::Relire), _) => {
-            "Trop d’objections ou trop peu de citations : on relit le passage."
-        }
-        (Some(Verdict::Laisser), _) => {
-            "La synthèse est venue trop tôt. On laisse ce texte pour une autre séance."
-        }
-        (_, Kind::Lecture) => "Le lecteur ouvre — le texte d’abord, le commentaire ensuite.",
-        (_, Kind::Objection) => "L’objecteur doit citer. Une objection sans lieu dans le texte ne compte pas.",
-        (_, Kind::Defense) => "Le lecteur (ou l’hôte) répond sans diluer l’objection.",
-        (_, Kind::Concession) => "Un invité peut accorder, nuancer, ou ouvrir un second front.",
-        (_, Kind::Synthese) => "L’hôte clôt : ce que le cercle retient, en une seule tenue.",
-        (_, Kind::Minute) => "Le secrétaire écrit ce qui a été dit, non ce qu’on aurait voulu dire.",
+    let op = input.op.as_str();
+    if op == "floor" {
+        let moves = floor(
+            &input.seated,
+            input.last.as_deref(),
+            &input.recent,
+            if input.mode.is_empty() { "ask" } else { &input.mode },
+            input.addressed.as_deref(),
+            &input.kinds,
+            &input.query,
+        );
+        let speakers: Vec<String> = moves.iter().map(|m| m.id.clone()).collect();
+        return EvalOutput {
+            hits: vec![],
+            speakers,
+            moves,
+            note: "parole".into(),
+        };
     }
-    .to_string();
-
+    let hits = retrieve(&input.query, &input.passages);
     EvalOutput {
-        polyphony,
-        tension,
-        fidelity,
-        closure,
-        next_kind,
-        next_role,
-        verdict,
-        note,
+        hits,
+        speakers: vec![],
+        moves: vec![],
+        note: "mémoire".into(),
     }
 }
+
 
 fn write_out(bytes: &[u8]) -> i32 {
-    let len = bytes.len().min(HEAP_CAP - OUT_OFF - 4);
+    let heap = heap_ptr();
+    let cap = HEAP_CAP - OUT_OFF;
+    let n = bytes.len().min(cap.saturating_sub(4));
     unsafe {
-        let out = heap_ptr().add(OUT_OFF);
-        let n = (len as u32).to_le_bytes();
-        core::ptr::copy_nonoverlapping(n.as_ptr(), out, 4);
-        core::ptr::copy_nonoverlapping(bytes.as_ptr(), out.add(4), len);
+        let out = heap.add(OUT_OFF);
+        let len = (n as u32).to_le_bytes();
+        core::ptr::copy_nonoverlapping(len.as_ptr(), out, 4);
+        core::ptr::copy_nonoverlapping(bytes.as_ptr(), out.add(4), n);
         out as i32
     }
 }
 
 #[no_mangle]
-pub extern "C" fn salon_heap() -> i32 {
-    heap_ptr() as i32
+pub extern "C" fn salon_heap() -> *mut u8 {
+    heap_ptr()
 }
 
 #[no_mangle]
@@ -244,115 +314,142 @@ pub extern "C" fn salon_out_off() -> i32 {
     OUT_OFF as i32
 }
 
-/// Lit JSON en `HEAP[0 .. in_len]`, écrit le résultat à `HEAP[OUT_OFF]`.
-/// Retourne le pointeur absolu de la réponse (heap + OUT_OFF).
 #[no_mangle]
 pub extern "C" fn salon_eval(in_len: i32) -> i32 {
-    let n = in_len.max(0) as usize;
-    let n = n.min(OUT_OFF);
-    let parsed: Result<EvalInput, _> =
-        unsafe { serde_json::from_slice(core::slice::from_raw_parts(heap_ptr(), n)) };
-    match parsed {
-        Ok(input) => {
-            let out = evaluate(&input);
-            let bytes = serde_json::to_vec(&out).unwrap_or_else(|_| b"{}".to_vec());
-            write_out(&bytes)
-        }
-        Err(_) => {
-            let fallback = serde_json::to_vec(&EvalOutput {
-                polyphony: 0.0,
-                tension: 0.0,
-                fidelity: 0.0,
-                closure: 0.0,
-                next_kind: Kind::Lecture,
-                next_role: Role::Lecteur,
-                verdict: None,
-                note: "Le protocole n'a pas pu lire cette séance.".into(),
-            })
-            .unwrap_or_else(|_| b"{}".to_vec());
-            write_out(&fallback)
-        }
-    }
+    let heap = heap_ptr();
+    let len = (in_len as usize).min(OUT_OFF);
+    let slice = unsafe { core::slice::from_raw_parts(heap, len) };
+    let parsed: Result<EvalInput, _> = serde_json::from_slice(slice);
+    let out = match parsed {
+        Ok(input) => evaluate(&input),
+        Err(_) => EvalOutput {
+            hits: vec![],
+            speakers: vec![],
+            moves: vec![],
+            note: "json".into(),
+        },
+    };
+    let bytes = serde_json::to_vec(&out).unwrap_or_else(|_| b"{}".to_vec());
+    write_out(&bytes)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn member(role: Role) -> MemberIn {
-        MemberIn { role }
-    }
-    fn turn(role: Role, kind: Kind, text: &str, cite: bool) -> TurnIn {
-        TurnIn {
-            role,
-            kind,
-            text: text.into(),
-            has_citation: cite,
-        }
-    }
-
     #[test]
-    fn empty_session_asks_the_reader() {
-        let out = evaluate(&EvalInput {
-            members: vec![member(Role::Lecteur), member(Role::Objecteur)],
-            turns: vec![],
-        });
-        assert_eq!(out.next_role, Role::Lecteur);
-        assert_eq!(out.next_kind, Kind::Lecture);
-        assert!(out.verdict.is_none());
-    }
-
-    #[test]
-    fn objection_follows_reading() {
-        let out = evaluate(&EvalInput {
-            members: vec![
-                member(Role::Lecteur),
-                member(Role::Objecteur),
-                member(Role::Hote),
-            ],
-            turns: vec![turn(
-                Role::Lecteur,
-                Kind::Lecture,
-                "Pascal ouvre le fragment.",
-                true,
-            )],
-        });
-        assert_eq!(out.next_role, Role::Objecteur);
-        assert_eq!(out.next_kind, Kind::Objection);
-        assert!(out.fidelity > 0.9);
-    }
-
-    #[test]
-    fn holding_requires_polyphony_and_minute() {
-        let members = vec![
-            member(Role::Lecteur),
-            member(Role::Objecteur),
-            member(Role::Hote),
-            member(Role::Secretaire),
+    fn retrieve_ranks_matching_terms() {
+        let passages = vec![
+            PassageIn {
+                id: "a".into(),
+                terms: vec!["liberte".into(), "contrat".into()],
+            },
+            PassageIn {
+                id: "b".into(),
+                terms: vec!["lune".into(), "maree".into()],
+            },
         ];
-        let turns = vec![
-            turn(Role::Lecteur, Kind::Lecture, "Lire le fragment.", true),
-            turn(Role::Objecteur, Kind::Objection, "Le cœur n'est pas une preuve.", true),
-            turn(Role::Lecteur, Kind::Defense, "Ce n'est pas une preuve, c'est une tenue.", true),
-            turn(Role::Hote, Kind::Synthese, "On tient : raison et cœur ne se substituent pas.", true),
-            turn(Role::Secretaire, Kind::Minute, "Séance close. Tenir le fragment 277.", true),
-        ];
-        let out = evaluate(&EvalInput { members, turns });
-        assert_eq!(out.verdict, Some(Verdict::Tenir));
-        assert!(out.polyphony >= 0.66);
+        let hits = retrieve("contrat social liberte", &passages);
+        assert_eq!(hits[0].id, "a");
+        assert!(hits[0].score > hits[1].score);
     }
 
     #[test]
-    fn unread_citation_pushes_reread() {
+    fn floor_rotates_and_skips_last() {
+        let seated = vec!["voltaire".into(), "rousseau".into(), "montaigne".into()];
+        let kinds = vec!["philosophe".into(), "philosophe".into(), "essayiste".into()];
+        let moves = floor(
+            &seated,
+            Some("voltaire"),
+            &["voltaire".into()],
+            "ask",
+            None,
+            &kinds,
+            "",
+        );
+        assert!(!moves.iter().any(|m| m.id == "voltaire"));
+        assert_eq!(moves[0].act, "reponse");
+        assert_eq!(moves.get(1).map(|m| m.act.as_str()), Some("objection"));
+        assert_eq!(moves.get(1).map(|m| m.to.as_str()), Some(moves[0].id.as_str()));
+    }
+
+    #[test]
+    fn floor_honours_address() {
+        let seated = vec!["voltaire".into(), "rousseau".into(), "montaigne".into()];
+        let kinds = vec!["philosophe".into(), "philosophe".into(), "essayiste".into()];
+        let moves = floor(
+            &seated,
+            Some("user"),
+            &[],
+            "ask",
+            Some("voltaire"),
+            &kinds,
+            "l'optimisme n'est-il qu'une politesse ?",
+        );
+        assert_eq!(moves[0].id, "voltaire");
+        assert_eq!(moves[0].to, "user");
+        assert_eq!(moves[0].figure, "ironia");
+        assert_eq!(moves[1].act, "objection");
+        assert_eq!(moves[1].to, "voltaire");
+        assert_eq!(moves[1].figure, "concessio");
+    }
+
+    #[test]
+    fn floor_talk_is_one_reply() {
+        let seated = vec!["voltaire".into(), "rousseau".into(), "montaigne".into()];
+        let kinds = vec!["philosophe".into(), "philosophe".into(), "essayiste".into()];
+        let moves = floor(
+            &seated,
+            Some("rousseau"),
+            &["rousseau".into()],
+            "talk",
+            None,
+            &kinds,
+            "la liberté",
+        );
+        assert_eq!(moves.len(), 1);
+        assert_ne!(moves[0].id, "rousseau");
+        assert_eq!(moves[0].to, "rousseau");
+    }
+
+    #[test]
+    fn floor_socratic_elenchus() {
+        let seated = vec!["platon".into(), "aristote".into(), "montaigne".into()];
+        let kinds = vec!["philosophe".into(), "philosophe".into(), "essayiste".into()];
+        let moves = floor(
+            &seated,
+            Some("user"),
+            &[],
+            "ask",
+            Some("platon"),
+            &kinds,
+            "qu'est-ce qu'une chose juste ?",
+        );
+        assert_eq!(moves[0].id, "platon");
+        assert_eq!(moves[0].method, "elenchus");
+        assert_eq!(moves[0].figure, "interrogatio");
+        assert_eq!(moves[1].act, "reponse");
+        assert_eq!(moves[1].to, "platon");
+        assert_ne!(moves[1].method, "elenchus");
+    }
+
+    #[test]
+    fn evaluate_retrieve_op() {
         let out = evaluate(&EvalInput {
-            members: vec![member(Role::Lecteur), member(Role::Objecteur), member(Role::Hote)],
-            turns: vec![
-                turn(Role::Lecteur, Kind::Lecture, "Je trouve cela beau.", false),
-                turn(Role::Objecteur, Kind::Objection, "C'est trop commode.", false),
-                turn(Role::Hote, Kind::Synthese, "Passons.", false),
-                turn(Role::Hote, Kind::Minute, "Rien.", false),
-            ],
+            op: "retrieve".into(),
+            query: "justice".into(),
+            passages: vec![PassageIn {
+                id: "p1".into(),
+                terms: vec!["justice".into()],
+            }],
+            seated: vec![],
+            last: None,
+            recent: vec![],
+            mode: String::new(),
+            addressed: None,
+            kinds: vec![],
         });
-        assert_eq!(out.verdict, Some(Verdict::Relire));
+        assert_eq!(out.hits[0].id, "p1");
+        assert_eq!(out.note, "mémoire");
     }
 }

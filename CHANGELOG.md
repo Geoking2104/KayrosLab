@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.25.0 (2026-09) — Salon, les auteurs prennent la peau d’un livre
+
+- **Agents, pas protocole.** Vingt-huit auteurs du domaine public (cinq œuvres parsées chacun). Le moteur prend la peau d’un agent et répond dans le cercle ; les agents se parlent, ou l’hôte les appelle par `@`.
+- **Fiches.** `@`, résumé, méthode (œuvre / rhétorique / elenchus), instruction de table. Ajout d’œuvres par Gutenberg, PDF ou TXT — à tous les agents.
+- **Ajouter un agent.** Cinq œuvres libres au minimum. Moins de cinq : la profondeur de personnalité est trop faible.
+- **Ouvrir un cercle.** 1. nom 2. question 3. invités, puis **Faire entrer**.
+- **Conserver en PDF.** Couverture, page de garde des auteurs, index, fil.
+- **FR / EN.** Interface bilingue. Les livres restent dans leur langue.
+- **Pages `/salon/`** — spécimen HTML (Hallmark, oxblood) + source React (`salon/src`) + crate Rust (`crates/salon-core`). La console de production n’est pas touchée.
+
 ## v0.24.1 (2026-09) — Salon, le protocole WASM s’évalue vraiment
 
 - Le chargeur lisait le retour de `salon_eval` comme un pointeur dans la mémoire linéaire alors que le crate renvoyait un **décalage dans le tas** (`OUT_OFF = 24576`). Le module s’instanciait, l’UI disait Rust, l’évaluation tombait silencieusement en JavaScript.
