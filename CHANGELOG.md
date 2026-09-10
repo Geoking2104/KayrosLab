@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.24.1 (2026-09) — Salon, le protocole WASM s’évalue vraiment
+
+- Le chargeur lisait le retour de `salon_eval` comme un pointeur dans la mémoire linéaire alors que le crate renvoyait un **décalage dans le tas** (`OUT_OFF = 24576`). Le module s’instanciait, l’UI disait Rust, l’évaluation tombait silencieusement en JavaScript.
+- `salon_eval` retourne désormais le pointeur absolu (`heap + OUT_OFF`). Le JS lit toujours `salon_heap() + salon_out_off()`.
+- Sonde au chargement (cercle vide → lecteur / lecture). Le fallback JS ne se fait plus passer pour Rust.
+
 ## v0.24.0 (2026-09) — Salon, produit autonome (cercles littéraires)
 
 - **Salon n’est pas un salon Slack.** Nouveau service : cercles de lecture littéraires et philosophiques (rôles hôte / lecteur / objecteur / secrétaire / invité ; tours lecture → objection → défense → concession → synthèse → minute ; verdicts **tenir · relire · laisser**, jamais GO/NO_GO).

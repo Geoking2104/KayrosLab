@@ -2,6 +2,13 @@
 //!
 //! Pas un salon Slack. Un cercle : un texte, des rôles, des tours, une minute.
 //! Le verdict n’est pas GO/NO_GO. On tient, on relit, ou on laisse.
+//!
+//! ABI WASM (wasm32-unknown-unknown, C, sans import) :
+//!   salon_heap()     → pointeur du tas (48 KiB) dans la mémoire linéaire
+//!   salon_out_off()  → décalage de la réponse dans le tas (24 KiB)
+//!   salon_eval(len)  → lit UTF-8 JSON en heap[0..len], écrit u32 LE + JSON
+//!                      en heap[out_off..], retourne le *pointeur absolu*
+//!                      de cette réponse (heap + out_off)
 
 use serde::{Deserialize, Serialize};
 
@@ -9,6 +16,11 @@ const HEAP_CAP: usize = 48 * 1024;
 const OUT_OFF: usize = 24 * 1024;
 
 static mut HEAP: [u8; HEAP_CAP] = [0; HEAP_CAP];
+
+fn heap_ptr() -> *mut u8 {
+    // SAFETY: wasm32 single-threadé ; salon_eval n’est pas réentrant.
+    core::ptr::addr_of_mut!(HEAP) as *mut u8
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -71,6 +83,7 @@ pub struct EvalOutput {
 }
 
 impl Role {
+    #[allow(dead_code)]
     fn expected_kind(self) -> Kind {
         match self {
             Role::Lecteur => Kind::Lecture,
@@ -213,15 +226,17 @@ pub fn evaluate(input: &EvalInput) -> EvalOutput {
 fn write_out(bytes: &[u8]) -> i32 {
     let len = bytes.len().min(HEAP_CAP - OUT_OFF - 4);
     unsafe {
-        HEAP[OUT_OFF..OUT_OFF + 4].copy_from_slice(&(len as u32).to_le_bytes());
-        HEAP[OUT_OFF + 4..OUT_OFF + 4 + len].copy_from_slice(&bytes[..len]);
+        let out = heap_ptr().add(OUT_OFF);
+        let n = (len as u32).to_le_bytes();
+        core::ptr::copy_nonoverlapping(n.as_ptr(), out, 4);
+        core::ptr::copy_nonoverlapping(bytes.as_ptr(), out.add(4), len);
+        out as i32
     }
-    OUT_OFF as i32
 }
 
 #[no_mangle]
 pub extern "C" fn salon_heap() -> i32 {
-    unsafe { HEAP.as_mut_ptr() as i32 }
+    heap_ptr() as i32
 }
 
 #[no_mangle]
@@ -229,13 +244,14 @@ pub extern "C" fn salon_out_off() -> i32 {
     OUT_OFF as i32
 }
 
-/// Lit JSON en `HEAP[0 .. in_len]`, écrit le résultat à `OUT_OFF`.
+/// Lit JSON en `HEAP[0 .. in_len]`, écrit le résultat à `HEAP[OUT_OFF]`.
+/// Retourne le pointeur absolu de la réponse (heap + OUT_OFF).
 #[no_mangle]
 pub extern "C" fn salon_eval(in_len: i32) -> i32 {
     let n = in_len.max(0) as usize;
     let n = n.min(OUT_OFF);
-    let slice = unsafe { &HEAP[..n] };
-    let parsed: Result<EvalInput, _> = serde_json::from_slice(slice);
+    let parsed: Result<EvalInput, _> =
+        unsafe { serde_json::from_slice(core::slice::from_raw_parts(heap_ptr(), n)) };
     match parsed {
         Ok(input) => {
             let out = evaluate(&input);

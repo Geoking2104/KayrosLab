@@ -283,12 +283,42 @@
         const buf = await res.arrayBuffer();
         ({ instance } = await WebAssembly.instantiate(buf, {}));
       }
-      wasm = instance.exports;
+      const exports = instance.exports;
+      if (
+        !exports.memory ||
+        typeof exports.salon_heap !== "function" ||
+        typeof exports.salon_out_off !== "function" ||
+        typeof exports.salon_eval !== "function"
+      ) {
+        return null;
+      }
+      evalWith(exports, {
+        members: [{ role: "lecteur" }, { role: "objecteur" }],
+        turns: [],
+      });
+      wasm = exports;
       return wasm;
     } catch (_) {
       wasm = null;
       return null;
     }
+  }
+
+  function evalWith(instance, input) {
+    const json = new TextEncoder().encode(JSON.stringify(input));
+    const heapPtr = instance.salon_heap();
+    const outOff = instance.salon_out_off();
+    if (json.length > outOff) throw new Error("tas");
+    new Uint8Array(instance.memory.buffer).set(json, heapPtr);
+    const returned = instance.salon_eval(json.length);
+    const absPtr = returned > outOff ? returned : heapPtr + outOff;
+    const view = new DataView(instance.memory.buffer);
+    const len = view.getUint32(absPtr, true);
+    if (len < 2 || len > 24 * 1024) throw new Error("vide");
+    const bytes = new Uint8Array(instance.memory.buffer, absPtr + 4, len);
+    const parsed = JSON.parse(new TextDecoder().decode(bytes));
+    if (!parsed.next_kind || !parsed.next_role) throw new Error("incomplet");
+    return parsed;
   }
 
   function circleToInput(circle) {
@@ -308,18 +338,7 @@
     await loadWasm();
     if (!wasm) return { evaled: evaluateFallback(input), engine: "local" };
     try {
-      const json = new TextEncoder().encode(JSON.stringify(input));
-      const heapPtr = wasm.salon_heap();
-      const mem = new Uint8Array(wasm.memory.buffer);
-      mem.set(json, heapPtr);
-      const outPtr = wasm.salon_eval(json.length);
-      const view = new DataView(wasm.memory.buffer);
-      const len = view.getUint32(outPtr, true);
-      const bytes = new Uint8Array(wasm.memory.buffer, outPtr + 4, len);
-      return {
-        evaled: JSON.parse(new TextDecoder().decode(bytes)),
-        engine: "rust",
-      };
+      return { evaled: evalWith(wasm, input), engine: "rust" };
     } catch (_) {
       return { evaled: evaluateFallback(input), engine: "local" };
     }

@@ -70,7 +70,17 @@ Compiled `cdylib`, no JS glue. Linear memory, C exports:
 |---|---|
 | `salon_heap() -> i32` | Pointer to a 48 KiB HEAP |
 | `salon_out_off() -> i32` | `24576` — output region |
-| `salon_eval(in_len: i32) -> i32` | Read UTF-8 JSON from `HEAP[0 .. in_len]`, write `u32` LE length then JSON at `OUT_OFF` |
+| `salon_eval(in_len: i32) -> i32` | Lit UTF-8 JSON en `HEAP[0 .. in_len]`, écrit `u32` LE + JSON à `HEAP[OUT_OFF]`, **retourne le pointeur absolu** `heap + OUT_OFF` |
+
+Le chargeur JS **ne doit pas** traiter la valeur de retour comme un décalage dans la mémoire linéaire. Il lit toujours :
+
+```
+outPtr = salon_heap() + salon_out_off()
+len    = u32 LE at outPtr
+json   = bytes at outPtr+4 .. outPtr+4+len
+```
+
+Une sonde (cercle vide → `lecteur` / `lecture`) s’exécute à l’instanciation. Si elle échoue, l’UI n’affiche pas « Rust ».
 
 Input:
 
