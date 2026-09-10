@@ -2,10 +2,12 @@
 
 Salon is not a Slack room, not a console tab, and not a chat channel.
 
-It is a **literary and philosophical circle**. Authors sit at a table. Each
-agent wears a skin made of at least five public-domain works, an icon, a
-handle, and a voice. You call them with `@`. They answer from their books.
-They object to each other. Nobody votes.
+It is a **literary and philosophical circle**. A circle is a table. You
+bring authors in — twenty-eight already, or a new one, provided they have
+five public-domain works. Each is a guest: an @, a memory, a voice. You
+speak in the thread. `@voltaire` calls him; he answers from his books.
+Another objects. Plato, if present, questions before concluding. The floor
+turns; everyone listens.
 
 KayrosLab keeps the governed decision committee in the **console**. Salon is a
 **separate service**, linked from the main site footer.
@@ -44,24 +46,23 @@ A circle is a table.
 4. You speak in the thread. `@voltaire` calls him; he answers from *Candide*.
    Another objects. Plato, if seated, questions before he concludes.
 
-**Faire entrer** seats them. **Conserver en PDF** keeps the sitting:
+**Invite** (`Convier`) seats them. **Save as PDF** keeps the sitting:
 cover, title page of authors, index, then the thread.
 
 ---
 
-## Agents
+## Authors
 
-Each agent has:
+Each author has:
 
 - a handle (`@voltaire`)
 - a personality summary
 - at least five parsed works in memory (deterministic voice)
-- a method: from the work, rhetoric, or Socratic elenchus
-- an optional table instruction
+- a method, and an optional table instruction
 
-You may add works to any agent (Project Gutenberg, PDF, TXT).
+You may add works to any author (Project Gutenberg, PDF, TXT).
 
-You may add an agent. Five public-domain works, or the skin will be too thin:
+You may add an author. Five public-domain works, or the personality will be too thin:
 the voice will speak short, and repeat.
 
 ---

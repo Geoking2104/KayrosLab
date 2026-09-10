@@ -336,8 +336,7 @@ export function Seance({ circleId }: { circleId: string }) {
               </ol>
             </details>
           ))}
-          {room.authorIds.length < 6 && (
-            <div className="salon-invite">
+          <div className="salon-invite">
               {creating ? (
                 <CreateAuthor
                   seat
@@ -374,7 +373,6 @@ export function Seance({ circleId }: { circleId: string }) {
                 </>
               )}
             </div>
-          )}
           <p className="salon-engine">{t("flows", { n: allAuthors().length })}</p>
         </aside>
       </main>

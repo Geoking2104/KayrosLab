@@ -152,35 +152,69 @@
     .circles em { font-style: normal; font-family: var(--display); font-size: 1.25rem; }
     .circles p { margin: 0.25rem 0 0; color: var(--ink-2); }
     h2 { font-family: var(--display); font-weight: 550; font-size: 1.8rem; letter-spacing: -0.03em; margin: 0 0 1rem; }
+    .lang { display: inline-flex; gap: 0.35rem; align-items: center; }
+    .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
+    .lang button.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .open-form { display: grid; gap: 1rem; max-width: 42rem; }
+    .open-form label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
+    .open-form input, .open-form textarea {
+      min-height: 44px; border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink);
+      padding: 0.5rem 0.75rem; font: inherit; border-radius: 2px;
+    }
+    .open-form textarea { min-height: 5.5rem; resize: vertical; }
+    .guest-pick { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem 1rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+    .guest-pick label { display: flex; gap: 0.5rem; align-items: center; min-height: 44px; color: var(--ink); }
+    .picked { color: var(--ink-2); margin: 0 0 0.5rem; }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
 </head>
 <body>
   <header class="mast">
-    <a class="word" href="/salon">Salon<small>un service KayrosLab · rendu</small></a>
+    <a class="word" href="/salon">Salon<small data-i18n="wordmark.sub">cercles littéraires</small></a>
     <nav aria-label="Salon">
-      <a href="/salon">Cercles</a>
-      <a href="/salon/agents">Agents</a>
-      <a href="/salon/lumieres">Lumières</a>
-      <a href="/salon-rendu.html" class="is-on">Rendu</a>
+      <a href="/salon" data-i18n="nav.circles">Cercles</a>
+      <a href="/salon/agents" data-i18n="nav.agents">Auteurs</a>
+      <span class="lang" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" class="is-on">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </span>
     </nav>
   </header>
 
   <main>
     <section>
-      <p class="kicker">Spécimen HTML</p>
-      <h1>Le cercle, la fiche, la peau.</h1>
-      <p class="lead">
-        Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà,
-        ou un nouveau, pourvu qu’il ait cinq œuvres libres. Vous parlez dans le fil :
-        @voltaire l’appelle ; il répond depuis ses livres ; un autre objecte.
-        La parole tourne ; personne ne vote.
+      <p class="kicker" data-i18n="hero.kicker">Cercles littéraires et philosophiques</p>
+      <h1 data-i18n="hero.title">Ils prennent la peau d’un livre.</h1>
+      <p class="lead" data-i18n="circle.what">
+        Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.
+      </p>
+      <p class="lead" data-i18n="circle.how">
+        Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.
       </p>
       <p class="views" role="tablist">
-        <button type="button" class="is-on" data-pane="cercle">Cercle</button>
+        <button type="button" class="is-on" data-pane="cercle" data-i18n="circles">Cercles</button>
         <button type="button" data-pane="fiche">Fiche Voltaire</button>
-        <button type="button" data-pane="agents">Agents</button>
+        <button type="button" data-pane="agents" data-i18n="nav.agents">Auteurs</button>
       </p>
+    </section>
+
+    <section class="salon-create" aria-labelledby="ouvrir">
+      <h2 id="ouvrir" data-i18n="index.open">Ouvrir un cercle</h2>
+      <form class="open-form" id="open-circle">
+        <label>
+          <span data-i18n="index.step1">1 — Nom du cercle</span>
+          <input name="name" value="Lumières" required maxlength="80" />
+        </label>
+        <label>
+          <span data-i18n="index.step2">2 — Question posée à la table</span>
+          <textarea name="question" required maxlength="400">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</textarea>
+        </label>
+        <p class="kicker" data-i18n="index.step3">3 — Invités</p>
+        <p class="picked" id="guest-count">3 invités</p>
+        <ul class="guest-pick" id="guest-pick"></ul>
+        <p class="lead" data-i18n="index.pick">Cochez les convives, puis validez.</p>
+        <button class="btn" type="submit" data-i18n="index.enter">Convier</button>
+      </form>
     </section>
 
     <div id="cercle" class="pane channel">
@@ -307,7 +341,7 @@
     </div>
 
     <div id="fiche" class="pane" hidden>
-      <p><a href="#cercle" data-pane="cercle">← Agents</a></p>
+      <p><a href="#cercle" data-pane="cercle" data-i18n="back.agents">← Auteurs</a></p>
       <header class="fiche-head">
         <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="88" height="88" /></span>
         <div>
@@ -353,11 +387,11 @@
           </li>
           <li>
             <a href="/salon/pouvoir"><span class="n">02</span><div><em>Le pouvoir tel qu’il est</em><p>Dehors</p></div></a>
-            <button class="btn ghost" type="button">Faire entrer</button>
+            <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
           <li>
             <a href="/salon/academie"><span class="n">03</span><div><em>Académie</em><p>Dehors</p></div></a>
-            <button class="btn ghost" type="button">Faire entrer</button>
+            <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
         </ul>
       </section>
@@ -431,15 +465,130 @@
   </main>
 
   <footer>
-    <p>Ils ne votent pas. Ils répondent depuis leurs livres, et parfois se répondent.</p>
+    <p data-i18n="foot.line">Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.</p>
     <nav>
       <a href="/salon">Salon</a>
-      <a href="/salon/agents">Agents</a>
-      <a href="/salon/lumieres">Lumières</a>
+      <a href="/salon/agents" data-i18n="nav.agents">Auteurs</a>
     </nav>
   </footer>
 
   <script>
+    const I18N = {
+      fr: {
+        "wordmark.sub": "cercles littéraires",
+        "nav.circles": "Cercles",
+        "nav.agents": "Auteurs",
+        "hero.kicker": "Cercles littéraires et philosophiques",
+        "hero.title": "Ils prennent la peau d’un livre.",
+        "circle.what": "Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
+        "circle.how": "Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.",
+        "circles": "Cercles",
+        "index.open": "Ouvrir un cercle",
+        "index.step1": "1 — Nom du cercle",
+        "index.step2": "2 — Question posée à la table",
+        "index.step3": "3 — Invités",
+        "index.pick": "Cochez les convives, puis validez.",
+        "index.enter": "Convier",
+        "index.seated": "{n} invités",
+        "index.seated.one": "1 invité",
+        "index.needTwo": "Deux auteurs au moins — un salon ne se tient pas tout seul.",
+        "back.agents": "← Auteurs",
+        "in": "Convier",
+        "foot.line": "Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.",
+      },
+      en: {
+        "wordmark.sub": "literary circles",
+        "nav.circles": "Circles",
+        "nav.agents": "Authors",
+        "hero.kicker": "Literary and philosophical circles",
+        "hero.title": "They take on the skin of a book.",
+        "circle.what": "A circle is a table. You bring authors in — twenty-eight already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
+        "circle.how": "You speak in the thread, as one speaks at table. @voltaire calls him; he answers from his books. Another objects. Plato, if present, questions before concluding. The floor turns; everyone listens.",
+        "circles": "Circles",
+        "index.open": "Open a circle",
+        "index.step1": "1 — Circle name",
+        "index.step2": "2 — Question for the table",
+        "index.step3": "3 — Guests",
+        "index.pick": "Select the guests, then confirm.",
+        "index.enter": "Invite",
+        "index.seated": "{n} guests",
+        "index.seated.one": "1 guest",
+        "index.needTwo": "At least two authors — a salon does not sit alone.",
+        "back.agents": "← Authors",
+        "in": "Invite",
+        "foot.line": "They answer from their books, and sometimes to one another, and to you. Each has a style, each a personality.",
+      },
+    };
+    let locale = "fr";
+    function applyI18n() {
+      const table = I18N[locale];
+      document.documentElement.lang = locale;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (table[key]) el.textContent = table[key];
+      });
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.classList.toggle("is-on", btn.getAttribute("data-lang") === locale);
+      });
+      renderCount();
+    }
+    const authors = [
+      { id: "smith", name: "Adam Smith" },
+      { id: "aristote", name: "Aristote" },
+      { id: "spinoza", name: "Baruch Spinoza" },
+      { id: "darwin", name: "Charles Darwin" },
+      { id: "confucius", name: "Confucius" },
+      { id: "poe", name: "Edgar Allan Poe" },
+      { id: "kant", name: "Emmanuel Kant" },
+      { id: "dostoevski", name: "Fiodor Dostoïevski" },
+      { id: "kafka", name: "Franz Kafka" },
+      { id: "nietzsche", name: "Friedrich Nietzsche" },
+      { id: "balzac", name: "Honoré de Balzac" },
+      { id: "austen", name: "Jane Austen" },
+      { id: "rousseau", name: "Jean-Jacques Rousseau" },
+      { id: "verne", name: "Jules Verne" },
+      { id: "marx", name: "Karl Marx" },
+      { id: "tolstoi", name: "Léon Tolstoï" },
+      { id: "marcaurele", name: "Marc Aurèle" },
+      { id: "montaigne", name: "Michel de Montaigne" },
+      { id: "cervantes", name: "Miguel de Cervantès" },
+      { id: "machiavel", name: "Nicolas Machiavel" },
+      { id: "wilde", name: "Oscar Wilde" },
+      { id: "platon", name: "Platon" },
+      { id: "descartes", name: "René Descartes" },
+      { id: "stendhal", name: "Stendhal" },
+      { id: "suntzu", name: "Sun Tzu" },
+      { id: "hugo", name: "Victor Hugo" },
+      { id: "voltaire", name: "Voltaire" },
+      { id: "shakespeare", name: "William Shakespeare" },
+    ];
+    const seeded = new Set(["voltaire", "rousseau", "montaigne"]);
+    const pick = document.getElementById("guest-pick");
+    const count = document.getElementById("guest-count");
+    function selectedIds() {
+      return [...pick.querySelectorAll("input:checked")].map((el) => el.value);
+    }
+    function renderCount() {
+      const n = selectedIds().length;
+      const table = I18N[locale];
+      count.textContent = n === 1 ? table["index.seated.one"] : table["index.seated"].replace("{n}", String(n));
+    }
+    pick.innerHTML = authors.map((author) => `
+      <li><label><input type="checkbox" value="${author.id}" ${seeded.has(author.id) ? "checked" : ""} /> ${author.name}</label></li>
+    `).join("");
+    pick.addEventListener("change", renderCount);
+    document.querySelectorAll("[data-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => { locale = btn.getAttribute("data-lang"); applyI18n(); });
+    });
+    document.getElementById("open-circle").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (selectedIds().length < 2) {
+        alert(I18N[locale]["index.needTwo"]);
+        return;
+      }
+      show("cercle");
+    });
+    applyI18n();
     const handles = [
       { id: "voltaire", name: "Voltaire" },
       { id: "rousseau", name: "Jean-Jacques Rousseau" },

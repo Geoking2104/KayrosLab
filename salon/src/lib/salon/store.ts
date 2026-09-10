@@ -90,7 +90,7 @@ export const useSalon = create<SalonState>()(
         set({
           rooms: get().rooms.map((room) => {
             if (room.id !== roomId) return room;
-            if (room.authorIds.includes(authorId) || room.authorIds.length >= 6) return room;
+            if (room.authorIds.includes(authorId)) return room;
             return { ...room, authorIds: [...room.authorIds, authorId] };
           }),
         });

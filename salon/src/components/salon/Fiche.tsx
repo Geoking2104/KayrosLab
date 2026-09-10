@@ -166,7 +166,6 @@ export function Fiche({ authorId }: { authorId: string }) {
                       type="button"
                       className="salon-btn ghost"
                       onClick={() => inviteAuthor(room.id, authorId)}
-                      disabled={room.authorIds.length >= 6}
                     >
                       {t("in")}
                     </button>

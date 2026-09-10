@@ -19,7 +19,7 @@ function Avatar({ author }: { author: LiteraryAuthor }) {
 }
 
 export function Foyer() {
-  const { t } = useT();
+  const { t, guests } = useT();
   const rooms = useSalon((s) => s.rooms);
   const createRoom = useSalon((s) => s.createRoom);
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ export function Foyer() {
   function toggle(id: string) {
     setPicked((current) => {
       if (current.includes(id)) return current.filter((x) => x !== id);
-      if (current.length >= 6) return current;
       return [...current, id];
     });
   }
@@ -85,14 +84,12 @@ export function Foyer() {
         <section className="salon-create" aria-labelledby="ouvrir">
           <h2 id="ouvrir">{t("index.open")}</h2>
           <form onSubmit={onCreate}>
-            <p className="salon-kicker">{t("index.step1")}</p>
             <label>
-              {t("index.name")}
+              {t("index.step1")}
               <input name="name" defaultValue="Lumières" required maxLength={80} />
             </label>
-            <p className="salon-kicker">{t("index.step2")}</p>
             <label>
-              {t("index.question")}
+              {t("index.step2")}
               <textarea
                 name="question"
                 required
@@ -102,7 +99,7 @@ export function Foyer() {
             </label>
             <p className="salon-kicker">{t("index.step3")}</p>
             <p className="salon-picked">
-              {t("index.seated", { n: picked.length })} — {t("index.pick")}
+              {guests(picked.length)} — {t("index.pick")}
             </p>
             <ul className="salon-guest-pick">
               {allAuthors().map((author) => {

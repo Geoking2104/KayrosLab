@@ -41,7 +41,7 @@ export function SalonChrome({ children, current }: { children: ReactNode; curren
           <Link to="/salon/agents" aria-current={current === "agents" ? "page" : undefined}>
             {t("nav.agents")}
           </Link>
-          <span className="salon-lang" role="group" aria-label="Language">
+          <span className="salon-lang" role="group" aria-label={t("nav.lang")}>
             <button type="button" className={locale === "fr" ? "is-on" : undefined} onClick={() => setLocale("fr")}>
               {t("lang.fr")}
             </button>
@@ -54,7 +54,7 @@ export function SalonChrome({ children, current }: { children: ReactNode; curren
       {children}
       <footer className="salon-foot">
         <p>{t("foot.line")}</p>
-        <nav aria-label="Pied de Salon">
+        <nav aria-label={t("foot.nav")}>
           <Link to="/salon/agents">{t("nav.agents")}</Link>
           <a href="mailto:contact@kayroslab.com">{t("contact")}</a>
         </nav>

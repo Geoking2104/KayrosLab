@@ -1,6 +1,14 @@
 # Changelog
 
+## v0.25.4 (2026-09) — Salon : copie, convier, i18n
+
+- Cercle : « tout le monde écoute ». Pied : ils répondent aux livres, entre eux, et à vous.
+- Ouvrir un cercle : libellés une seule fois ; compteur d’invités dynamique ; **Convier**.
+- **Configurer la personnalité.** **Ajouter un auteur.** Plus de plafond 6.
+- Anglais relu (calques, pluriels, Authors / Invite / Profile).
+
 ## v0.25.3 (2026-09) — SSO OpenID Connect auto-hébergé
+
 
 - **Plus d’Auth0.** Client OIDC générique (découverte `.well-known`, PKCE). Tout IdP ouvert (Authelia, Keycloak, Dex, Authentik) peut prendre la place.
 - **Authelia 4.39** (Apache-2.0) sur le VPS, `sso.kayroslab.com`. Compte initial dans `/opt/kayroslab/data/authelia/INITIAL_PASSWORD.txt`.
