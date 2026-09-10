@@ -186,7 +186,7 @@
       <p class="kicker" data-i18n="hero.kicker">Cercles littéraires et philosophiques</p>
       <h1 data-i18n="hero.title">Ils prennent la peau d’un livre.</h1>
       <p class="lead" data-i18n="circle.what">
-        Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.
+        Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.
       </p>
       <p class="lead" data-i18n="circle.how">
         Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.
@@ -336,7 +336,7 @@
             <li>Letters on England</li>
           </ol>
         </details>
-        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)">28 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
+        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)">54 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
       </aside>
     </div>
 
@@ -480,7 +480,7 @@
         "nav.agents": "Auteurs",
         "hero.kicker": "Cercles littéraires et philosophiques",
         "hero.title": "Ils prennent la peau d’un livre.",
-        "circle.what": "Un cercle est une table. Vous y faites entrer des auteurs — vingt-huit déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
+        "circle.what": "Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
         "circle.how": "Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.",
         "circles": "Cercles",
         "index.open": "Ouvrir un cercle",
@@ -502,7 +502,7 @@
         "nav.agents": "Authors",
         "hero.kicker": "Literary and philosophical circles",
         "hero.title": "They take on the skin of a book.",
-        "circle.what": "A circle is a table. You bring authors in — twenty-eight already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
+        "circle.what": "A circle is a table. You bring authors in — 54 already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
         "circle.how": "You speak in the thread, as one speaks at table. @voltaire calls him; he answers from his books. Another objects. Plato, if present, questions before concluding. The floor turns; everyone listens.",
         "circles": "Circles",
         "index.open": "Open a circle",
@@ -535,19 +535,37 @@
     const authors = [
       { id: "smith", name: "Adam Smith" },
       { id: "aristote", name: "Aristote" },
+      { id: "schopenhauer", name: "Arthur Schopenhauer" },
+      { id: "augustin", name: "Augustin d’Hippone" },
       { id: "spinoza", name: "Baruch Spinoza" },
+      { id: "pascal", name: "Blaise Pascal" },
+      { id: "boece", name: "Boèce" },
       { id: "darwin", name: "Charles Darwin" },
+      { id: "ciceron", name: "Cicéron" },
       { id: "confucius", name: "Confucius" },
+      { id: "hume", name: "David Hume" },
+      { id: "diderot", name: "Denis Diderot" },
       { id: "poe", name: "Edgar Allan Poe" },
       { id: "kant", name: "Emmanuel Kant" },
       { id: "dostoevski", name: "Fiodor Dostoïevski" },
       { id: "kafka", name: "Franz Kafka" },
       { id: "nietzsche", name: "Friedrich Nietzsche" },
+      { id: "hegel", name: "Georg Wilhelm Friedrich Hegel" },
+      { id: "berkeley", name: "George Berkeley" },
+      { id: "leibniz", name: "Gottfried Wilhelm Leibniz" },
       { id: "balzac", name: "Honoré de Balzac" },
       { id: "austen", name: "Jane Austen" },
       { id: "rousseau", name: "Jean-Jacques Rousseau" },
+      { id: "locke", name: "John Locke" },
+      { id: "mill", name: "John Stuart Mill" },
       { id: "verne", name: "Jules Verne" },
       { id: "marx", name: "Karl Marx" },
+      { id: "hindouisme", name: "La Bhagavad-Gîtâ" },
+      { id: "christianisme", name: "La Bible" },
+      { id: "judaisme", name: "La Torah" },
+      { id: "islam", name: "Le Coran" },
+      { id: "bouddhisme", name: "Le Dhammapada" },
+      { id: "taoisme", name: "Le Tao-Tö-King" },
       { id: "tolstoi", name: "Léon Tolstoï" },
       { id: "marcaurele", name: "Marc Aurèle" },
       { id: "montaigne", name: "Michel de Montaigne" },
@@ -555,12 +573,20 @@
       { id: "machiavel", name: "Nicolas Machiavel" },
       { id: "wilde", name: "Oscar Wilde" },
       { id: "platon", name: "Platon" },
+      { id: "emerson", name: "Ralph Waldo Emerson" },
       { id: "descartes", name: "René Descartes" },
       { id: "stendhal", name: "Stendhal" },
       { id: "suntzu", name: "Sun Tzu" },
+      { id: "seneca", name: "Sénèque" },
+      { id: "kierkegaard", name: "Søren Kierkegaard" },
+      { id: "aquinas", name: "Thomas d’Aquin" },
+      { id: "hobbes", name: "Thomas Hobbes" },
       { id: "hugo", name: "Victor Hugo" },
       { id: "voltaire", name: "Voltaire" },
+      { id: "james", name: "William James" },
       { id: "shakespeare", name: "William Shakespeare" },
+      { id: "epictete", name: "Épictète" },
+      { id: "epicure", name: "Épicure" }
     ];
     const seeded = new Set(["voltaire", "rousseau", "montaigne"]);
     const pick = document.getElementById("guest-pick");

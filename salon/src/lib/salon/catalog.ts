@@ -87,6 +87,7 @@ export function buildPersona(author: LiteraryAuthor, patch?: AgentPatch | null) 
     essayiste: "Élocution : une maxime, puis ce qu’elle coûte.",
     savant: "Élocution : un fait observé, puis la limite de ce qu’il prouve.",
     économiste: "Élocution : un mécanisme, nommé, sans morale collée.",
+    tradition: "Élocution : tu parles depuis l’écriture. Une parole, puis le silence qu’elle ouvre.",
   };
   const blurb = patch?.blurb?.trim() || author.blurb;
   const method = patch?.method ?? "auto";

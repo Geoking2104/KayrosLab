@@ -29,6 +29,9 @@ test('Salon i18n : cercle, convier, personnalité, auteurs', async () => {
   assert.doesNotMatch(i18n, /They do not vote/);
   assert.match(i18n, /"nav\.agents": "Auteurs"/);
   assert.match(i18n, /"nav\.agents": "Authors"/);
+  assert.doesNotMatch(i18n, /Chercher au domaine public/);
+  assert.doesNotMatch(i18n, /Search the public domain/);
+  assert.match(i18n, /kind\.tradition/);
 });
 
 test('Salon spécimen HTML suit la même copie', async () => {
@@ -39,9 +42,27 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.match(page, /tout le monde écoute/);
     assert.match(page, /1 — Nom du cercle/);
     assert.match(page, /3 — Invités/);
-    assert.match(page, /Ajouter un auteur|Auteurs/);
+    assert.match(page, /Auteurs/);
     assert.doesNotMatch(page, /Faire entrer/);
     assert.doesNotMatch(page, /personne ne vote/);
     assert.doesNotMatch(page, /3\/6/);
+    assert.match(page, /54 déjà/);
+  }
+});
+
+test('le catalogue élargi tient Shakespeare, vingt philosophes et les traditions', async () => {
+  const catalog = JSON.parse(await read('salon/src/lib/salon/catalog.json'));
+  const ids = new Set(catalog.authors.map((a) => a.id));
+  assert.equal(catalog.authors.length, 54);
+  assert.ok(ids.has('shakespeare'));
+  for (const id of ['seneca', 'ciceron', 'pascal', 'diderot', 'hume', 'mill']) {
+    assert.ok(ids.has(id), id);
+  }
+  for (const id of ['christianisme', 'judaisme', 'islam', 'hindouisme', 'bouddhisme', 'taoisme']) {
+    const author = catalog.authors.find((a) => a.id === id);
+    assert.ok(author, id);
+    assert.equal(author.kind, 'tradition');
+    assert.match(author.avatar, /\.svg$/);
+    assert.ok(author.works.length >= 4, id);
   }
 });

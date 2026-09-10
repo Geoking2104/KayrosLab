@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.5 (2026-09) — Salon : Gutenberg, Atramenta, traditions
+
+- « Ajouter une œuvre » : plus de « Chercher au domaine public ». Recherche Gutenberg + Atramenta.
+- Catalogue : 54 convives. Shakespeare conservé ; 20 philosophes ajoutés ; Bible, Torah, Coran, Gîtâ, Dhammapada, Tao-Tö-King (symboles en portrait).
+- Mémoires puisées sur Project Gutenberg (Atramenta à l’ajout d’œuvre, quand le catalogue répond).
+
 ## v0.25.4 (2026-09) — Salon : copie, convier, i18n
+
 
 - Cercle : « tout le monde écoute ». Pied : ils répondent aux livres, entre eux, et à vous.
 - Ouvrir un cercle : libellés une seule fois ; compteur d’invités dynamique ; **Convier**.

@@ -57,7 +57,7 @@ export function Foyer() {
         <section className="salon-hero">
           <p className="salon-kicker">{t("hero.kicker")}</p>
           <h1>{t("hero.title")}</h1>
-          <p>{t("circle.what")}</p>
+          <p>{t("circle.what", { n: allAuthors().length })}</p>
           <p>{t("circle.how")}</p>
         </section>
 

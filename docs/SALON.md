@@ -3,7 +3,7 @@
 Salon is not a Slack room, not a console tab, and not a chat channel.
 
 It is a **literary and philosophical circle**. A circle is a table. You
-bring authors in — twenty-eight already, or a new one, provided they have
+bring authors in — the catalogue already seated, or a new one, provided they have
 five public-domain works. Each is a guest: an @, a memory, a voice. You
 speak in the thread. `@voltaire` calls him; he answers from his books.
 Another objects. Plato, if present, questions before concluding. The floor

@@ -11,7 +11,7 @@ export function WorkIngest({
 }) {
   const { t } = useT();
   const [query, setQuery] = useState("");
-  const [hits, setHits] = useState<{ id: number; title: string; authors: string }[]>([]);
+  const [hits, setHits] = useState<{ key: string; title: string; authors: string; source: string; gutenbergId?: number; url?: string }[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
@@ -28,11 +28,18 @@ export function WorkIngest({
     }
   }
 
-  async function pick(id: number, title: string) {
+  async function pick(hit: { title: string; source: string; gutenbergId?: number; url?: string }) {
     setBusy(true);
     setError("");
     try {
-      const result = await ingestPublicWork({ data: { id, title } });
+      const result = await ingestPublicWork({
+        data: {
+          title: hit.title,
+          source: hit.source,
+          gutenbergId: hit.gutenbergId,
+          url: hit.url,
+        },
+      });
       if (!result.ok) {
         setError(t("books.error"));
         return;
@@ -76,25 +83,23 @@ export function WorkIngest({
           void search();
         }}
       >
-        <label>
-          {t("books.search")}
-          <input
+        <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("books.search.ph")}
+            aria-label={t("books.search")}
           />
-        </label>
         <button className="salon-btn ghost" type="submit" disabled={busy || query.trim().length < 2}>
-          {t("books.search")}
+          {t("books.add")}
         </button>
       </form>
       {hits.length > 0 && (
         <ul className="salon-suggest">
           {hits.map((hit) => (
-            <li key={hit.id}>
-              <button type="button" onClick={() => void pick(hit.id, hit.title)} disabled={busy}>
+            <li key={hit.key}>
+              <button type="button" onClick={() => void pick(hit)} disabled={busy}>
                 {hit.title}
-                <span>{hit.authors}</span>
+                <span>{hit.source} · {hit.authors}</span>
               </button>
             </li>
           ))}

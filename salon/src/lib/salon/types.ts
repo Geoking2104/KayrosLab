@@ -5,7 +5,8 @@ export type LiteraryKind =
   | "poète"
   | "essayiste"
   | "savant"
-  | "économiste";
+  | "économiste"
+  | "tradition";
 
 export interface LiteraryWork {
   title: string;
@@ -124,4 +125,5 @@ export const KIND_FR: Record<LiteraryKind, string> = {
   essayiste: "Essayiste",
   savant: "Savant",
   économiste: "Économiste",
+  tradition: "Tradition",
 };

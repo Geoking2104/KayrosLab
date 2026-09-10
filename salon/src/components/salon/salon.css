@@ -807,6 +807,17 @@ button:not(:disabled),
 .salon-ingest form {
   display: grid;
   gap: var(--space-sm);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+.salon-ingest input[type="text"],
+.salon-ingest form input {
+  min-height: 44px;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  color: var(--ink);
+  padding: 0.5rem 0.75rem;
+  font: inherit;
 }
 
 .salon-guest-pick {
