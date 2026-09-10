@@ -21,6 +21,15 @@ on:
       - 'deploy/ovh-vps/**'
       - 'deploy/timesfm.compose.yaml'
       - '.github/workflows/deploy-vps-backend.yml'
+      - 'index.html'
+      - 'index.fr.html'
+      - 'tokens.css'
+      - 'studio.css'
+      - 'backend/web/public/salon/**'
+      - 'backend/web/public/console/**'
+      - 'backend/web/public/assets/**'
+      - 'kayroslab-complete-with-ai-agents.html'
+      - 'whitepaper-*.html'
   workflow_dispatch:
 
 jobs:

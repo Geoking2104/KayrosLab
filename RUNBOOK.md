@@ -3,10 +3,11 @@
 ## Architecture
 
 ```
-Domaine        → api.kayroslab.com (443)
-                      ↓ (nginx reverse proxy)
+Domaine        → api.kayroslab.com (443)     www.kayroslab.com (80/443)
+                      ↓ nginx                      ↓ nginx (fichiers)
 VPS OVH        → 51.210.9.71
 Process PM2    → kayros-api (port 8787 interne)
+Site statique  → /var/www/kayroslab  (accueil, /salon/, /console/)
 Données        → /opt/kayroslab/data/*.json
 Backups        → /opt/kayroslab/backups/
 ```
@@ -139,14 +140,16 @@ pm2 restart kayros-api
 | Process crash | `pm2 restart kayros-api && pm2 logs` |
 | OOM (8 Go RAM) | Vérifier Ollama (`ollama stop`), redémarrer PM2 avec `--max-memory-restart 6G` |
 | Erreur TLS | `certbot renew --dry-run` puis `systemctl reload nginx` |
-| Fuite DNS | Vérifier `api.kayroslab.com` → A → `51.210.9.71` chez IONOS |
+| Fuite DNS | Vérifier `api.kayroslab.com` et `www.kayroslab.com` → A → `51.210.9.71` chez IONOS |
 
 ## Références
 
 | Fichier | Rôle |
 |---------|------|
 | `backend/fastify/.env` | Configuration sensible (hors git) |
-| `deploy/ovh-vps/nginx-kayroslab-api.conf` | Reverse proxy nginx |
+| `deploy/ovh-vps/nginx-kayroslab-api.conf` | Reverse proxy API |
+| `deploy/ovh-vps/nginx-kayroslab-www.conf` | Site statique www |
+| `deploy/ovh-vps/deploy-www.sh` | Assemble `/var/www/kayroslab` + vhost |
 | `deploy/ovh-vps/deploy-backend.sh` | Script de déploiement |
 | `deploy/ovh-vps/backup-data.sh` | Sauvegarde des données |
 | `deploy/ovh-vps/BOOTSTRAP.md` | Procédure d'installation initiale |

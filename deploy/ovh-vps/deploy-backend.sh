@@ -153,5 +153,9 @@ if [[ -n "${DB_URL}" ]]; then
 fi
 echo " -> health OK"
 
+if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-www.sh" ]]; then
+  APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-www.sh"
+fi
+
 echo ""
 echo "Deploiement termine. Backups : bash ${APP_DIR}/deploy/ovh-vps/install-cron-backup.sh"

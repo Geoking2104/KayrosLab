@@ -1,6 +1,13 @@
 # Changelog
 
+## v0.25.1 (2026-09) — Site statique sur le VPS (nginx)
+
+- **`www.kayroslab.com`** — vhost nginx (`deploy/ovh-vps/nginx-kayroslab-www.conf`) : accueil, `/salon/`, `/console/`, WASM. ACME sur le 80, HTTPS dès que le certificat existe.
+- **`deploy-www.sh`** assemble `/var/www/kayroslab` et recharge nginx. Appelé en fin de `deploy-backend.sh`.
+- **SSL** — workflow `setup-ssl-www.yml` (dispatch), après le DNS A vers `51.210.9.71`.
+
 ## v0.25.0 (2026-09) — Salon, les auteurs prennent la peau d’un livre
+
 
 - **Agents, pas protocole.** Vingt-huit auteurs du domaine public (cinq œuvres parsées chacun). Le moteur prend la peau d’un agent et répond dans le cercle ; les agents se parlent, ou l’hôte les appelle par `@`.
 - **Fiches.** `@`, résumé, méthode (œuvre / rhétorique / elenchus), instruction de table. Ajout d’œuvres par Gutenberg, PDF ou TXT — à tous les agents.

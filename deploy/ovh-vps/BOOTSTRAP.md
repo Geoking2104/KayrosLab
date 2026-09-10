@@ -10,7 +10,7 @@
 | Dossier | `/opt/opendpe` | `/opt/kayroslab` |
 | Port backend | **8080** | **8787** |
 | Process PM2 | `opendpe-backend` | `kayros-api` |
-| nginx | `opendpe.net`, `api.opendpe.net` | `api.kayroslab.com` |
+| nginx | `opendpe.net`, `api.opendpe.net` | `api.kayroslab.com`, `www.kayroslab.com` |
 | Données | PostgreSQL | JSON `/opt/kayroslab/data` **ou** Postgres (`DATABASE_URL`) |
 
 **Aucun conflit** : ports, dossiers, noms PM2 et serveurs nginx sont distincts.
@@ -99,6 +99,20 @@ tar -xzf /opt/kayroslab/backups/kayros-data-YYYYMMDD-HHMMSS.tar.gz -C /opt/kayro
 ## DNS
 
 `api.kayroslab.com` → **A** → `51.210.9.71`
+
+Site public (après bascule hors GitHub Pages) :
+
+`www.kayroslab.com` → **A** → `51.210.9.71`  
+`kayroslab.com` → **A** → `51.210.9.71`
+
+Puis lancer le workflow **Setup SSL (Let's Encrypt) - www.kayroslab.com**.
+
+Le vhost HTTP est déjà posé par `deploy-www.sh` : on peut tester avant le DNS :
+
+```bash
+curl -sS -H 'Host: www.kayroslab.com' http://127.0.0.1/ | head
+curl -sS -H 'Host: www.kayroslab.com' http://127.0.0.1/salon/ | head
+```
 
 ## Vérifications
 
