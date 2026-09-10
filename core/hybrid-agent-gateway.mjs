@@ -29,7 +29,12 @@ function wasInvoked(text, explicit = false) {
   return explicit || /^\s*\/kayros\b/i.test(String(text || ''))
     || /@(?:kayros(?:lab)?|agent)\b/i.test(String(text || '')) || /<@[A-Z0-9]+>/i.test(String(text || ''));
 }
-function publicRoom(record) { return clone(record?.room || null); }
+function publicRoom(record) {
+  const room = clone(record?.room || null);
+  if (!room) return null;
+  room.active_agents = clone(record?.runtime_bundle?.configuration?.active_agents || []);
+  return room;
+}
 
 function clarificationQuestions(run) {
   const analyses = run?.analyses || [];
@@ -163,11 +168,12 @@ export class HybridAgentGateway {
       name, platform, external_room_id, mode, swarm_id, status: 'active',
       created_by: by, created_at: now(), updated_at: now(), last_activity_at: null,
     };
-    await this.store.createRoom(room, this._runtimeBundle(configuration, scope));
+    const runtimeBundle = this._runtimeBundle(configuration, scope);
+    await this.store.createRoom(room, runtimeBundle);
     await this._record('collaboration.room.connected', {
       room_id: room.room_id, tenant_id: scope, platform, external_room_id, swarm_id, by,
     });
-    return clone(room);
+    return publicRoom({ room, runtime_bundle: runtimeBundle });
   }
 
   async getRoom(roomId, { tenantId = null } = {}) { return publicRoom(await this.store.getRoom(roomId, { tenantId })); }

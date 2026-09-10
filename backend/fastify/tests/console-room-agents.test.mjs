@@ -31,6 +31,7 @@ test('room collective accepts new agents without recreating the salon', async (t
     name: 'COMEX', platform: 'console', external_room_id: 'local-comex', active_agents: ['cfo', 'cto'],
   } });
   assert.equal(created.statusCode, 201);
+  assert.deepEqual(created.json().room.active_agents, ['cfo', 'cto']);
   const roomId = created.json().room.room_id;
 
   const patched = await app.inject({ method: 'PATCH', url: `/v1/console/rooms/${roomId}/agents`, payload: { add_agent_ids: ['auteur_hugo'] } });
@@ -38,6 +39,11 @@ test('room collective accepts new agents without recreating the salon', async (t
   const configuration = patched.json().room;
   const swarmConfig = swarm.getConfiguration(configuration.swarm_id, { tenantId: 'tenant-a' });
   assert.deepEqual(swarmConfig.active_agents, ['cfo', 'cto', 'auteur_hugo']);
+  assert.deepEqual(configuration.active_agents, ['cfo', 'cto', 'auteur_hugo']);
+
+  const listed = await app.inject({ method: 'GET', url: '/v1/console/rooms' });
+  assert.equal(listed.statusCode, 200);
+  assert.deepEqual(listed.json().rooms[0].active_agents, ['cfo', 'cto', 'auteur_hugo']);
 
   // Le salon hydrate son collectif depuis le runtime_bundle mis à jour : la mission voit le nouvel agent.
   swarm.run = async (_swarmId, options) => ({
