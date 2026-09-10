@@ -44,10 +44,11 @@ OIDC_PEM=$(cat "${CONF_DIR}/oidc.pem")
 
 if [[ ! -s "${CONF_DIR}/users.yml" ]]; then
   INITIAL=$(openssl rand -base64 18 | tr -d '/+=' | head -c 20)
-  HASH=$(docker run --rm "${IMAGE}" authelia crypto hash generate argon2 --password "${INITIAL}" \
-    | awk '/Password hash:/ {print $3}')
+  HASH_OUT=$(docker run --rm "${IMAGE}" authelia crypto hash generate argon2 --password "${INITIAL}" 2>&1 || true)
+  HASH=$(printf '%s\n' "${HASH_OUT}" | grep -Eo '\$argon2[id]+\$[^[:space:]]+' | tail -1)
   if [[ -z "${HASH}" ]]; then
     echo "ERREUR : hash Authelia impossible." >&2
+    printf '%s\n' "${HASH_OUT}" >&2
     exit 1
   fi
   cat > "${CONF_DIR}/users.yml" <<YAML
