@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackathon Augmenté — De l&#39;Idée au Marché en 8 Étapes Gouvernées &bull; KayrosLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:11pt}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:A4;margin:0}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
+.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
+.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#2FB9A8;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#6b7280}
+.cover__meta span{color:#2FB9A8}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
+h1 .highlight{color:#2FB9A8}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
+h2 .highlight{color:#2FB9A8}
+h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
+h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
+p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
+.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
+.accent-text{color:#2FB9A8}
+.small{font-size:0.75rem;color:#6b7280}
+.section{margin-bottom:6mm}
+.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout p{margin-bottom:0;font-size:0.82rem}
+.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
+.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card p{font-size:0.8rem;margin-bottom:0.5mm}
+.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
+th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#d1d5db}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.num-list{counter-reset:nl;margin:2.5mm 0}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+.bullet-list{margin:2mm 0 2mm 4mm}
+.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#2FB9A8}
+.toc{margin:4mm 0}
+.toc ol{counter-reset:toc;list-style:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
+.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
+.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
+@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+
+
+<!-- ===== PAGE 1: COUVERTURE ===== -->
+<div class="page cover">
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+  <div class="cover__accent-line"></div>
+  <div class="cover__tag">Livret Blanc &mdash; Juillet 2026</div>
+  <h1 class="cover__title">
+    <em>Hackathon Augmenté</em>&nbsp;:<br>
+    De l'Idée au Marché<br>
+    en <em>8 Étapes Gouvernées</em>
+  </h1>
+  <p class="cover__subtitle">Comment KayrosLab transforme les sprints créatifs en pipelines d'innovation structurés avec gouvernance, traçabilité et mise sur le marché accélérée.</p>
+  <div class="cover__meta">Par <strong>KayrosLab</strong> <span>✦</span> contact@kayroslab.com <span>✦</span> v1.0</div>
+  <div class="cover__deco"></div>
+  <div class="cover__deco2"></div>
+</div>
+
+<!-- ===== PAGE 2: SOMMAIRE ===== -->
+<div class="page">
+  <h1>Sommaire</h1>
+  <div style="margin-top:8mm">
+    <div class="toc">
+      <ol>
+        <li><span>Introduction &mdash; Le paradoxe du hackathon</span> <span style="color:#4b5563;font-size:0.7rem">3</span></li>
+        <li><span>Le fossé hackathon-marché</span> <span style="color:#4b5563;font-size:0.7rem">4</span></li>
+        <li><span>Le pipeline du Hackathon Augmenté</span> <span style="color:#4b5563;font-size:0.7rem">5</span></li>
+        <li><span>Apports de la solution</span> <span style="color:#4b5563;font-size:0.7rem">6</span></li>
+        <li><span>Proposition de valeur &amp; impact mesurable</span> <span style="color:#4b5563;font-size:0.7rem">7</span></li>
+        <li><span>Alignement avec les systèmes de gestion</span> <span style="color:#4b5563;font-size:0.7rem">8</span></li>
+        <li><span>Mise sur le marché facilitée</span> <span style="color:#4b5563;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion &amp; prochaines étapes</span> <span style="color:#4b5563;font-size:0.7rem">10</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">2</div>
+</div>
+
+<!-- ===== PAGE 3: INTRODUCTION ===== -->
+<div class="page">
+  <h1>1. <span class="highlight">Introduction</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Le paradoxe du hackathon.</span></p>
+  <p>Les hackathons sont de puissants moteurs de créativité. En 48 à 72 heures, des équipes pluridisciplinaires génèrent des dizaines d'idées, construisent des prototypes et présentent des solutions. Pourtant, <strong>plus de 80 % des projets de hackathon n'atteignent jamais la production</strong>. Ils restent à l'état de slides, de vidéos ou de dépôts de code abandonnés.</p>
+  <p>Le problème n'est pas un manque d'idées — c'est l'absence d'un pipeline structuré et gouverné pour transformer ces idées en produits prêts pour le marché. KayrosLab comble cette lacune en augmentant le processus de hackathon avec un système d'IA agentique garantissant traçabilité, gouvernance et mise sur le marché accélérée.</p>
+  <p>Ce livret blanc présente le cadre du <strong>Hackathon Augmenté</strong> : une méthodologie qui allie l'énergie créative des hackathons à la rigueur du moteur d'idéation gouvernée en 8 étapes de KayrosLab.</p>
+
+  <h2 style="margin-top:5mm">Le Hackathon <span class="highlight">Augmenté</span> dans le cycle KayrosLab</h2>
+  <div class="flow" style="margin-top:3mm">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label" style="color:#f59e0b;font-weight:700;">Écouter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Cartographier</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Positionner</div></div>
+  </div>
+  <div class="flow" style="margin-top:1mm">
+    <div class="flow__step"><div class="num">08</div><div class="label">Réaliser</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Projeter</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
+    <div class="flow__arrow">←</div>
+    <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">3</div>
+</div>
+
+<!-- ===== PAGE 4: FOSSÉ ===== -->
+<div class="page">
+  <h1>2. <span class="highlight">Le fossé hackathon-marché</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Pourquoi la plupart des idées de hackathon n'arrivent jamais sur le marché.</span></p>
+  <p>Les hackathons traditionnels suivent un schéma prévisible : brief, idéation, construction, pitch. Ce qui se passe après le pitch est souvent indéfini. Les équipes gagnantes reçoivent une reconnaissance, mais le chemin du prototype au produit est semé d'obstacles :</p>
+  <ul class="bullet-list">
+    <li><strong>Absence de gouvernance</strong> — Les idées manquent de critères d'évaluation structurés et de portes de décision</li>
+    <li><strong>Absence de traçabilité</strong> — Les justifications, hypothèses et compromis sont perdus après l'événement</li>
+    <li><strong>Absence d'alignement</strong> — Les idées gagnantes peuvent ne pas correspondre aux priorités stratégiques</li>
+    <li><strong>Absence de feuille de route</strong> — Pas de chemin clair de la validation à la production</li>
+    <li><strong>Absence de cadre réglementaire</strong> — Les considérations de conformité traitées a posteriori</li>
+  </ul>
+
+  <div class="callout callout--red" style="margin-top:4mm">
+    <p><strong>Le coût du fossé :</strong> 74 % des organisations déclarent que les idées de hackathon se traduisent rarement en revenus. Le délai moyen du prototype au marché pour celles qui y parviennent est de 14 mois — trop long pour la plupart des fenêtres d'innovation.</p>
+  </div>
+
+  <div style="margin-top:4mm">
+    <h2>Hackathon <span class="highlight">Traditionnel</span> vs Augmenté</h2>
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Traditionnel</th><th>Augmenté (KayrosLab)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Idéation</td><td>Brainstorming, tableaux blancs</td><td>Agents IA + bisociation + signaux faibles</td></tr>
+        <tr><td>Validation</td><td>Vote du jury (subjectif)</td><td>Scoring multi-critères + défi multi-agent</td></tr>
+        <tr><td>Gouvernance</td><td>Aucune ou ad-hoc</td><td>8 portes structurées + audit trail complet</td></tr>
+        <tr><td>Traçabilité</td><td>Slides, vidéos, notes</td><td>Journaux horodatés, timelines décisionnelles</td></tr>
+        <tr><td>Mise sur le marché</td><td>Non définie</td><td>Roadmap probabiliste, scénario d'entrée</td></tr>
+        <tr><td>Conformité</td><td>Revue a posteriori</td><td>Intégrée dès l'idéation (RGPD, NIS2, DORA)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">4</div>
+</div>
+
+<!-- ===== PAGE 5: PIPELINE ===== -->
+<div class="page">
+  <h1>3. <span class="highlight">Le pipeline du Hackathon Augmenté</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">8 étapes gouvernées du signal au lancement marché.</span></p>
+  <p>Le processus cyclique en 8 étapes de KayrosLab s'intègre directement dans le cycle de vie du hackathon, du signal initial au lancement commercial. Chaque étape est gouvernée par des portes de décision humaines et alimentée par des agents IA spécialisés.</p>
+
+  <div class="flow" style="margin-top:4mm">
+    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label">Écouter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">02</div><div class="label">Cartographier</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">04</div><div class="label">Positionner</div></div>
+  </div>
+  <p style="text-align:center;font-size:0.75rem;color:#4b5563;margin:1mm 0">↑ Porte Humaine 1 &mdash; Validation de Concept ↑</p>
+  <div class="flow">
+    <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">07</div><div class="label">Projeter</div></div>
+    <div class="flow__arrow">→</div>
+    <div class="flow__step"><div class="num">08</div><div class="label">Réaliser</div></div>
+  </div>
+  <p style="text-align:center;font-size:0.75rem;color:#4b5563;margin:1mm 0">↑ Porte Humaine 2 &mdash; Passage en Production ↑</p>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>Point clé :</strong> Le pipeline n'est pas linéaire — c'est une boucle d'amélioration continue. Les sorties de l'étape 08 (Réaliser) alimentent l'étape 01 (Écouter), créant un moteur d'apprentissage qui s'améliore à chaque cycle.</p>
+  </div>
+
+  <h2 style="margin-top:4mm">Détail <span class="highlight">étape par étape</span></h2>
+  <div class="grid-2">
+    <div class="card"><div class="card__title">01. Écouter</div><p>Détection et qualification des signaux faibles. Les agents IA scrutent les marchés, tendances et données internes.</p></div>
+    <div class="card"><div class="card__title">02. Cartographier</div><p>Construction du réseau de tendances et bisociation. Connexion de domaines non liés.</p></div>
+    <div class="card"><div class="card__title">03. Construire</div><p>Génération de scénarios et briefs collaboratifs. Scénarios multiples avec briefs structurés.</p></div>
+    <div class="card"><div class="card__title">04. Positionner</div><p>Analyse concurrentielle ontologique. Ontologie à 14 entités.</p></div>
+    <div class="card"><div class="card__title">05. Éprouver</div><p>Défi multi-agent (Critique, Avocat du Diable, Red Team). Test des idées sous tous les angles.</p></div>
+    <div class="card"><div class="card__title">06. Arbitrer</div><p>Vote multi-critères et décision humaine. Portes structurées avec validation COMEX.</p></div>
+    <div class="card"><div class="card__title">07. Projeter</div><p>Trajectoire probabiliste, roadmap, KPIs. Calendrier avec intervalles de confiance.</p></div>
+    <div class="card"><div class="card__title">08. Réaliser</div><p>Exécution, suivi et mesure d'impact. Lancement marché avec monitoring continu.</p></div>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">5</div>
+</div>
+
+<!-- ===== PAGE 6: APPORTS ===== -->
+<div class="page">
+  <h1>4. <span class="highlight">Apports de la solution</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Ce que KayrosLab apporte au modèle du hackathon.</span></p>
+  <p>KayrosLab introduit cinq capacités transformatrices qui répondent aux faiblesses fondamentales des hackathons traditionnels :</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">01. Idéation Augmentée</div><p>Les agents IA explorent les signaux faibles, bisocient des domaines non liés et génèrent des scénarios au-delà du brainstorming humain.</p></div>
+    <div class="card"><div class="card__title">02. Gouvernance Structurée</div><p>8 portes de décision avec vote multi-critères, agents de défi et validation humaine.</p></div>
+    <div class="card"><div class="card__title">03. Traçabilité Complète</div><p>Chaque décision, hypothèse et compromis est horodaté et journalisé — du signal initial au lancement.</p></div>
+    <div class="card"><div class="card__title">04. Alignement Stratégique</div><p>Les idées sont évaluées en continu contre les KPI stratégiques via le Kayros Index.</p></div>
+  </div>
+
+  <div class="callout callout--violet" style="margin-top:3mm">
+    <p><strong>Différenciateur clé :</strong> Contrairement aux plateformes de hackathon traditionnelles qui se concentrent sur l'événement lui-même, KayrosLab couvre le <strong>cycle de vie complet</strong> — de la détection des signaux pré-hackathon au lancement post-hackathon.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">6</div>
+</div>
+
+<!-- ===== PAGE 7: VALEUR ===== -->
+<div class="page">
+  <h1>5. <span class="highlight">Proposition de valeur</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Impact mesurable sur le cycle d'innovation.</span></p>
+  <p>Le Hackathon Augmenté offre des résultats mesurables. Les organisations qui adoptent le cadre rapportent des améliorations significatives :</p>
+
+  <div style="margin-top:4mm">
+    <table>
+      <thead>
+        <tr><th>Métrique</th><th>Traditionnel</th><th>Augmenté</th><th>Amélioration</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Taux POC → Production</td><td>18 %</td><td>79 %</td><td>+340 %</td></tr>
+        <tr><td>Time-to-market</td><td>14 mois</td><td>6 mois</td><td>-58 %</td></tr>
+        <tr><td>ROI innovation</td><td>Référence</td><td>3,1x</td><td>+210 %</td></tr>
+        <tr><td>Taux d'alignement stratégique</td><td>25 %</td><td>91 %</td><td>+265 %</td></tr>
+        <tr><td>Conforme au lancement</td><td>12 %</td><td>94 %</td><td>+680 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>Cas concret :</strong> Une institution financière utilisant le cadre du Hackathon Augmenté est passée de 12 idées brutes à 2 concepts prêts pour le marché, documentés et conformes, en 3 jours — un processus qui prend traditionnellement 3 à 6 mois.</p>
+  </div>
+
+  <h2 style="margin-top:4mm">Pourquoi la <span class="highlight">différence</span> est structurelle</h2>
+  <p>L'amélioration n'est pas incrémentale — elle est structurelle. Les hackathons traditionnels traitent l'idéation comme un événement. KayrosLab la traite comme un <strong>processus gouverné</strong> avec des entrées, sorties, portes et responsabilités définies à chaque étape.</p>
+  <div class="footer-line"></div>
+  <div class="page-number">7</div>
+</div>
+
+<!-- ===== PAGE 8: SYSTÈMES DE GESTION ===== -->
+<div class="page">
+  <h1>6. <span class="highlight">Alignement avec les systèmes de gestion</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Conçu pour ISO 56002, ISO 9001 et les environnements réglementés.</span></p>
+  <p>Le Hackathon Augmenté est conçu pour s'intégrer de manière transparente avec les systèmes de gestion et les normes existants :</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">ISO 56002 — Management de l'innovation</div><p>Le processus en 8 étapes correspond directement au cadre du système de management de l'innovation, fournissant des preuves vérifiables pour chaque étape.</p></div>
+    <div class="card"><div class="card__title">ISO 9001 — Management de la qualité</div><p>Les portes de décision et la traçabilité s'alignent avec les exigences de processus documentés.</p></div>
+    <div class="card"><div class="card__title">RGPD / NIS2 / DORA</div><p>Conformité intégrée dès la première étape. Déploiement souverain avec zéro fuite de données.</p></div>
+    <div class="card"><div class="card__title">AI Act</div><p>Transparence totale de la logique décisionnelle IA, supervision humaine à chaque porte, journalisation complète.</p></div>
+  </div>
+
+  <div class="callout callout--gold" style="margin-top:3mm">
+    <p><strong>Prêt pour l'audit par conception :</strong> KayrosLab produit les preuves documentées requises par les audits de système de gestion : justifications, analyses de risques, scénarios, approbations — générées et horodatées automatiquement.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">8</div>
+</div>
+
+<!-- ===== PAGE 9: MISE SUR LE MARCHÉ ===== -->
+<div class="page">
+  <h1>7. <span class="highlight">Mise sur le marché facilitée</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Du prototype à la production en semaines, pas en mois.</span></p>
+  <p>Le Hackathon Augmenté ne s'arrête pas au prototype. Il produit des <strong>livrables prêts pour le marché</strong> qui alimentent directement les processus produit et commerciaux existants :</p>
+
+  <div class="grid-2" style="margin-top:4mm">
+    <div class="card"><div class="card__title">Spécifications Fonctionnelles</div><p>Briefs structurés avec fonctionnalités priorisées, user stories et critères d'acceptation, prêts pour les équipes produit.</p></div>
+    <div class="card"><div class="card__title">Roadmap Probabiliste</div><p>Calendrier avec intervalles de confiance, estimations de ressources et cartographie des dépendances.</p></div>
+    <div class="card"><div class="card__title">Scénarios d'Entrée sur le Marché</div><p>Positionnement concurrentiel, modèles de tarification et stratégie de mise sur le marché.</p></div>
+    <div class="card"><div class="card__title">Package de Conformité</div><p>Documentation pré-audit couvrant le RGPD, NIS2, DORA, réduisant les cycles de revue juridique.</p></div>
+  </div>
+
+  <div class="callout callout--orange" style="margin-top:3mm">
+    <p><strong>Gain de temps :</strong> Les organisations rapportent une réduction de 70 % du temps entre la fin du hackathon et le début du développement, car tous les artéfacts requis sont générés automatiquement.</p>
+  </div>
+  <div class="footer-line"></div>
+  <div class="page-number">9</div>
+</div>
+
+<!-- ===== PAGE 10: CONCLUSION ===== -->
+<div class="page">
+  <h1>8. <span class="highlight">Conclusion</span></h1>
+  <p class="lead" style="margin-top:4mm"><span class="accent-text">Un nouveau paradigme pour l'innovation par hackathon.</span></p>
+  <p>Le Hackathon Augmenté représente un changement de paradigme dans la façon dont les organisations abordent l'innovation. En combinant l'intensité créative des hackathons avec la rigueur du pipeline agentique gouverné de KayrosLab, les organisations peuvent atteindre ce qui était auparavant impossible : <strong>une innovation rapide, gouvernée et conforme à l'échelle</strong>.</p>
+
+  <h2 style="margin-top:5mm">Points <span class="highlight">clés</span></h2>
+  <ul class="num-list">
+    <li>Augmenter le taux de conversion POC → production de ~18 % à plus de 79 %</li>
+    <li>Réduire le time-to-market de plus de 50 % (14 mois → 6 mois)</li>
+    <li>Garantir que chaque innovation est alignée stratégiquement et conforme</li>
+    <li>Générer des livrables de qualité production pour les systèmes de gestion existants</li>
+    <li>Créer une boucle d'amélioration continue qui rend chaque hackathon plus intelligent</li>
+  </ul>
+
+  <div class="callout" style="margin-top:4mm">
+    <p><strong>KayrosLab ne remplace pas la créativité humaine</strong> — il l'amplifie avec structure, gouvernance et une voie claire vers le marché.</p>
+  </div>
+
+  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#6b7280">Prêt à transformer votre prochain hackathon ?<br>Contactez-nous : <span class="accent-text">contact@kayroslab.com</span></p>
+
+  <div class="footer-line"></div>
+  <div class="page-number">10</div>
+</div>
+
+
+
+</body>
+</html>

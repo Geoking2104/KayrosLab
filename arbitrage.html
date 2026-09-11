@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KayrosLab — Arbitrage</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./tokens.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{display:['Space Grotesk','sans-serif'],body:['Geist','system-ui','sans-serif']}}}};</script>
+</head>
+<body class="bg-white text-slate-900 antialiased font-body">
+<header class="border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3 flex-wrap">
+    <a href="./kayroslab-complete-with-ai-agents.html" class="font-display font-bold text-lg">KayrosLab <span class="text-sky-600 text-sm">Arbitrage</span></a>
+    <div class="flex gap-3 text-sm">
+      <a href="./portfolio-board.html" class="text-sky-600 font-semibold">Portfolio</a>
+      <a href="./cycle-timeline.html" class="text-sky-600 font-semibold">Cycle SSE</a>
+      <a href="./ontology-explorer.html" class="text-sky-600 font-semibold">Ontologie</a>
+    </div>
+  </div>
+</header>
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-4">
+  <h1 class="font-display text-2xl font-bold">Runs en attente de décision</h1>
+  <p class="text-sm text-slate-500">Un run suspendu sur un gate humain ne reprend que sur votre décision · auth Bearer requise.</p>
+
+  <div class="rounded-2xl border border-slate-200 p-4 grid sm:grid-cols-3 gap-3">
+    <div><label class="text-xs font-bold uppercase text-slate-500" for="api">API</label>
+      <input id="api" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" value="http://localhost:8787" /></div>
+    <div><label class="text-xs font-bold uppercase text-slate-500" for="token">Bearer</label>
+      <input id="token" type="password" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" placeholder="JWT" /></div>
+    <div class="flex items-end"><button id="btn-load" type="button" class="rounded-full bg-sky-600 text-white font-semibold px-5 py-2 text-sm w-full sm:w-auto">Charger</button></div>
+  </div>
+
+  <div id="banner" class="hidden rounded-2xl border-2 border-amber-300 bg-amber-50 px-4 py-3">
+    <p id="banner-text" class="text-sm font-semibold text-amber-900"></p>
+    <p class="text-xs text-amber-800">Chaque run ci-dessous attend une décision explicite. Rien ne repart tant qu'elle n'est pas prise.</p>
+  </div>
+
+  <div id="stats" class="text-xs text-slate-500"></div>
+  <div id="runs" class="space-y-4"><p class="text-slate-400 text-sm">Chargez les runs suspendus.</p></div>
+</main>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Tout ce qui vient de l'API est echappe avant insertion : les motifs et
+  // les commentaires de revue sont du texte saisi par des humains.
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function headers() {
+    var h = { 'Content-Type': 'application/json' };
+    var t = $('token').value.trim();
+    if (t) h.Authorization = 'Bearer ' + t;
+    return h;
+  }
+
+  function base() { return $('api').value.replace(/\/+$/, ''); }
+
+  function say(el, message, tone) {
+    var color = tone === 'error' ? 'text-rose-600' : 'text-slate-500';
+    el.innerHTML = '<p class="text-sm ' + color + '">' + esc(message) + '</p>';
+  }
+
+  // Le client HTTP est isole de la page : les tests l'exercent avec un fetch
+  // simule pour verifier le contrat reel (URL, methode, en-tetes, corps)
+  // plutot que de relire le fichier a coups d'expressions regulieres.
+  function createClient(deps) {
+    var doFetch = deps.fetch;
+    var getBase = deps.base;
+    var getHeaders = deps.headers;
+
+    async function call(path, options) {
+      var res = await doFetch(getBase() + path, Object.assign({ headers: getHeaders() }, options || {}));
+      var body = null;
+      try { body = await res.json(); } catch (e) { body = null; }
+      if (!res.ok) {
+        throw new Error(body && body.error ? body.error : ('HTTP ' + res.status));
+      }
+      return body;
+    }
+
+    return {
+      call: call,
+      listSuspended: function () { return call('/v1/runs/suspended'); },
+      detail: function (runId) { return call('/v1/runs/' + encodeURIComponent(runId)); },
+      resume: function (runId, decision, reason) {
+        return call('/v1/runs/' + encodeURIComponent(runId) + '/resume', {
+          method: 'POST',
+          body: JSON.stringify({ decision: decision, reason: reason, stream: false })
+        });
+      }
+    };
+  }
+
+  // Une revision ou un veto sans motif est ingerable a l'audit : la page le
+  // refuse avant d'appeler l'API.
+  function needsReason(decision) {
+    return decision === 'veto' || decision === 'revise';
+  }
+
+  var client = createClient({
+    fetch: function (url, options) { return fetch(url, options); },
+    base: base,
+    headers: headers
+  });
+
+  function call(path, options) { return client.call(path, options); }
+
+  var GATE_LABELS = {
+    decision_arbitrage: 'Arbitrage du packet de décision',
+    human_escalation: 'Escalade : budget de révision épuisé',
+    tool_execution: 'Action à risque en attente'
+  };
+
+  function gateLabel(type) {
+    return Object.prototype.hasOwnProperty.call(GATE_LABELS, type)
+      ? GATE_LABELS[type]
+      : (type || 'gate');
+  }
+
+  // --- une carte par run, question posee d'emblee -------------------------
+
+  // La question Go / reviser / veto est portee par chaque carte, pas cachee
+  // derriere un clic : un run qu'on n'ouvre pas est un run qu'on oublie, et
+  // un run oublie reste suspendu indefiniment.
+  function runCard(run) {
+    var gate = run.gate || {};
+    var id = esc(run.runId);
+    return '<article class="rounded-2xl border border-slate-200 p-4 space-y-3" data-card="' + id + '">'
+      + '<div class="flex items-start justify-between gap-3 flex-wrap">'
+      + '<div>'
+      + '<p class="font-semibold">' + esc(gateLabel(gate.type)) + '</p>'
+      + '<p class="text-xs text-slate-500">idée ' + esc(run.ideaId) + ' · nœud ' + esc(gate.nodeId) + '</p>'
+      + '<p class="text-xs text-slate-400">' + id + ' · ' + esc(run.updatedAt) + '</p>'
+      + '</div>'
+      + '<button type="button" data-run="' + id + '" class="js-detail text-xs text-sky-600 underline">Voir le détail</button>'
+      + '</div>'
+
+      + '<div class="js-detail-host text-sm space-y-1 text-slate-600"></div>'
+
+      + '<div>'
+      + '<label class="text-xs font-bold uppercase text-slate-500" for="reason-' + id + '">Motif</label>'
+      + '<textarea id="reason-' + id + '" data-reason="' + id + '" rows="2" '
+      + 'class="js-reason w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm" '
+      + 'placeholder="Obligatoire pour une révision ou un veto"></textarea>'
+      + '</div>'
+
+      + '<div class="flex gap-2 flex-wrap">'
+      + '<button type="button" data-run="' + id + '" data-decision="approve" class="js-decide rounded-full bg-emerald-600 text-white font-semibold px-4 py-2 text-sm">Go — produire le livrable</button>'
+      + '<button type="button" data-run="' + id + '" data-decision="revise" class="js-decide rounded-full bg-amber-500 text-white font-semibold px-4 py-2 text-sm">Réviser — ré-attaquer l\'idée</button>'
+      + '<button type="button" data-run="' + id + '" data-decision="veto" class="js-decide rounded-full bg-rose-600 text-white font-semibold px-4 py-2 text-sm">Veto — arrêter</button>'
+      + '</div>'
+      + '<p class="text-xs text-slate-500">Un veto ne coûte aucune production : rien n\'est fabriqué avant votre Go.</p>'
+      + '<div class="js-result text-sm"></div>'
+      + '</article>';
+  }
+
+  function cardOf(runId) {
+    return $('runs').querySelector('[data-card="' + CSS.escape(runId) + '"]');
+  }
+
+  async function loadRuns() {
+    var host = $('runs');
+    say(host, 'Chargement…');
+    $('banner').classList.add('hidden');
+    try {
+      var data = await call('/v1/runs/suspended');
+      var runs = (data && data.runs) || [];
+      $('stats').textContent = runs.length + ' run(s) en attente';
+      if (!runs.length) {
+        say(host, 'Aucun run en attente de décision.');
+        return;
+      }
+      $('banner-text').textContent = runs.length + ' décision(s) en attente';
+      $('banner').classList.remove('hidden');
+      host.innerHTML = runs.map(runCard).join('');
+    } catch (e) {
+      $('stats').textContent = '';
+      $('banner').classList.add('hidden');
+      say(host, e.message, 'error');
+    }
+  }
+
+  // --- detail a la demande, la decision reste possible sans lui -----------
+
+  function detailRows(run) {
+    var gate = run.gate || {};
+    var review = run.review;
+    var rows = [];
+    rows.push('<p>Rôle requis · ' + esc(gate.requiredRole || 'comex') + '</p>');
+    if (review) {
+      rows.push('<p>Revue · ' + esc(review.status) + '</p>');
+      var comments = review.comments || [];
+      if (comments.length) {
+        rows.push('<ul class="list-disc pl-5">'
+          + comments.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>');
+      }
+    }
+    if (run.draft) {
+      rows.push('<p>Livrable · ' + esc(run.draft.format) + ', ' + esc(run.draft.bytes) + ' octets</p>');
+    } else {
+      rows.push('<p>Aucun livrable produit à ce stade.</p>');
+    }
+    var attempts = run.nodeAttempts || {};
+    var spent = Object.keys(attempts).map(function (k) { return esc(k) + '×' + esc(attempts[k]); });
+    if (spent.length) rows.push('<p class="text-xs text-slate-400">Passages · ' + spent.join(' · ') + '</p>');
+    return rows.join('');
+  }
+
+  async function showDetail(runId) {
+    var card = cardOf(runId);
+    if (!card) return;
+    var host = card.querySelector('.js-detail-host');
+    say(host, 'Chargement…');
+    try {
+      var run = await call('/v1/runs/' + encodeURIComponent(runId));
+      host.innerHTML = detailRows(run);
+    } catch (e) {
+      say(host, e.message, 'error');
+    }
+  }
+
+  // --- decision -----------------------------------------------------------
+
+  function resultRows(payload) {
+    var events = (payload && payload.events) || [];
+    var traced = events.filter(function (e) { return e.type === 'trace'; })
+      .map(function (e) { return esc(e.nodeId); });
+    var final = payload && payload.final;
+    var status = final ? final.status : 'inconnu';
+    var tone = status === 'blocked_veto' ? 'text-rose-600'
+      : status === 'pending_review' ? 'text-amber-600' : 'text-emerald-600';
+    var out = '<p class="' + tone + ' font-semibold">Statut · ' + esc(status) + '</p>';
+    if (final && final.message) out += '<p class="text-slate-600">' + esc(final.message) + '</p>';
+    if (traced.length) out += '<p class="text-xs text-slate-500">Nœuds exécutés · ' + traced.join(' → ') + '</p>';
+    if (status === 'pending_review') {
+      out += '<p class="text-xs text-slate-500">Le run s\'est de nouveau suspendu : rechargez la liste.</p>';
+    }
+    return out;
+  }
+
+  function setBusy(card, busy) {
+    card.querySelectorAll('.js-decide').forEach(function (b) { b.disabled = busy; });
+  }
+
+  async function decide(runId, decision) {
+    var card = cardOf(runId);
+    if (!card) return;
+    var result = card.querySelector('.js-result');
+    var reason = card.querySelector('.js-reason').value.trim();
+    if (needsReason(decision) && !reason) {
+      say(result, 'Un motif est requis pour une révision ou un veto.', 'error');
+      return;
+    }
+    setBusy(card, true);
+    say(result, 'Envoi de la décision…');
+    try {
+      var payload = await client.resume(runId, decision, reason);
+      result.innerHTML = resultRows(payload);
+      await loadRuns();
+    } catch (e) {
+      say(result, e.message, 'error');
+      setBusy(card, false);
+    }
+  }
+
+  // --- cablage ------------------------------------------------------------
+
+  $('btn-load').addEventListener('click', loadRuns);
+
+  // Delegation : les cartes sont reconstruites a chaque chargement.
+  $('runs').addEventListener('click', function (event) {
+    var decideBtn = event.target.closest('.js-decide');
+    if (decideBtn) {
+      decide(decideBtn.dataset.run, decideBtn.dataset.decision);
+      return;
+    }
+    var detailBtn = event.target.closest('.js-detail');
+    if (detailBtn) showDetail(detailBtn.dataset.run);
+  });
+
+  // Surface testable : les memes fonctions que la page utilise, exposees pour
+  // etre exercees avec des donnees hostiles et un fetch simule. Rien n'est
+  // reimplemente cote test, sinon le test ne prouverait rien.
+  if (typeof window !== 'undefined') {
+    window.KAYROS_ARBITRAGE = {
+      esc: esc,
+      gateLabel: gateLabel,
+      runCard: runCard,
+      detailRows: detailRows,
+      resultRows: resultRows,
+      needsReason: needsReason,
+      createClient: createClient
+    };
+  }
+})();
+</script>
+</body>
+</html>

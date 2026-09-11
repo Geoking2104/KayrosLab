@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>KayrosLab</title>
+  <script>
+    (function () {
+      var path = location.pathname.replace(/\/+$/, "");
+      if (path.indexOf("/salon") === 0) {
+        var hash = /\/agents$/.test(path) ? "#agents" : "";
+        location.replace("/salon/" + location.search + hash);
+        return;
+      }
+      location.replace("/" + location.search + location.hash);
+    })();
+  </script>
+</head>
+<body>
+  <p><a href="/">KayrosLab</a></p>
+</body>
+</html>

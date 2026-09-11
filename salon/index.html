@@ -1,0 +1,1648 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <!-- Google Tag Manager -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TXNT5J6M');
+  </script>
+  <!-- End Google Tag Manager -->
+  <script src="/legal/ga4.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Salon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: oklch(96.4% 0.016 85);
+      --paper-2: oklch(93.5% 0.022 80);
+      --ink: oklch(22% 0.028 48);
+      --ink-2: oklch(40% 0.02 50);
+      --muted: oklch(48% 0.018 55);
+      --rule: oklch(84% 0.02 80);
+      --accent: oklch(42% 0.12 25);
+      --accent-ink: oklch(97% 0.01 85);
+      --display: "Fraunces", "Iowan Old Style", Palatino, serif;
+      --body: "Source Sans 3", "Segoe UI", sans-serif;
+      --pad-x: clamp(1rem, 4.2vw, 2.5rem);
+      --pad-y: clamp(1rem, 3vw, 2.5rem);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); }
+    body { min-height: 100dvh; display: flex; flex-direction: column; overflow-x: clip; }
+    a { color: var(--accent); text-decoration: none; }
+    header.mast, footer {
+      padding: var(--pad-y) max(var(--pad-x), env(safe-area-inset-right, 0px));
+      padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+      flex-wrap: wrap;
+      align-items: end;
+    }
+    header.mast { border-bottom: 1px solid var(--rule); }
+    footer { border-top: 1px solid var(--rule); margin-top: auto; display: grid; gap: 0.75rem; }
+    footer p { margin: 0; max-width: 36ch; font-family: var(--display); font-size: 1.35rem; line-height: 1.25; font-weight: 500; }
+    footer nav, header.mast nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+    header.mast nav a, footer nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink-2); }
+    header.mast nav a.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .word { font-family: var(--display); font-size: 1.65rem; font-weight: 550; letter-spacing: -0.03em; color: var(--ink); }
+    .word small { display: block; margin-top: 0.35rem; font-family: var(--body); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    main {
+      padding: var(--pad-y) max(var(--pad-x), env(safe-area-inset-right, 0px));
+      padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+      display: grid; gap: clamp(1.25rem, 3vw, 2.5rem); flex: 1; min-width: 0;
+    }
+    .kicker { margin: 0; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.72rem; font-weight: 600; }
+    h1 { font-family: var(--display); font-weight: 550; letter-spacing: -0.03em; font-size: clamp(1.55rem, 6vw, 2.6rem); line-height: 1.12; margin: 0.2rem 0 0.5rem; max-width: 18ch; text-wrap: balance; }
+    .lead { margin: 0; color: var(--ink-2); max-width: 52ch; line-height: 1.55; overflow-wrap: break-word; }
+    .views { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+    .views button {
+      background: none; border: 0; padding: 0; min-height: 44px; font: inherit; color: var(--ink-2); cursor: pointer; text-underline-offset: 0.2em;
+    }
+    .views button.is-on { color: var(--accent); text-decoration: underline; }
+    .pane[hidden] { display: none !important; }
+    .pane:target { display: block !important; }
+    body:has(#agents:target) #cercle,
+    body:has(#contact:target) #cercle,
+    body:has(#fiche:target) #cercle { display: none !important; }
+
+    .channel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "channels"
+        "stream"
+        "people";
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      align-items: start;
+      min-width: 0;
+    }
+    .channel > .rail { grid-area: channels; min-width: 0; }
+    .channel > .stream { grid-area: stream; min-width: 0; }
+    .channel > .people { grid-area: people; min-width: 0; }
+    @media (min-width: 720px) and (max-width: 1099px) {
+      .channel {
+        grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+        grid-template-areas:
+          "channels stream"
+          "people people";
+      }
+    }
+    @media (min-width: 1100px) {
+      .channel {
+        grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr) minmax(14rem, 16rem);
+        grid-template-areas: "channels stream people";
+      }
+    }
+    .channels, .roster, .msgs, .suggest { list-style: none; margin: 0; padding: 0; display: grid; }
+    .channels { gap: 0.15rem; }
+    .channels a {
+      display: grid; gap: 0.15rem; padding: 0.45rem 0; min-height: 44px; color: var(--ink-2); border-bottom: 1px solid var(--rule);
+    }
+    .channels a em { font-style: normal; font-family: var(--display); color: var(--ink); font-size: 1.15rem; }
+    .channels a span { font-size: 0.78rem; color: var(--muted); }
+    .channels a.is-on em { color: var(--accent); }
+    .stream { display: grid; gap: 1rem; min-width: 0; }
+    .protocol { min-width: 0; }
+    .protocol h1 { overflow-wrap: break-word; }
+    .protocol p { margin: 0; color: var(--ink-2); overflow-wrap: break-word; }
+    .msgs { gap: 1rem; }
+    .msg {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      gap: 0.5rem 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .msg header { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: baseline; color: var(--muted); font-size: 0.82rem; }
+    .msg header strong { color: var(--ink); font-size: 1rem; }
+    .handle { color: var(--accent); }
+    .msg p { margin: 0.25rem 0 0; max-width: 58ch; line-height: 1.55; }
+    .msg.is-host p { color: var(--ink-2); }
+    .cite { margin: 0.35rem 0 0; max-width: 48ch; color: var(--muted); font-family: var(--display); font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+    .cite cite { display: block; margin-top: 0.25rem; font-style: normal; font-family: var(--body); font-size: 0.78rem; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--paper-2);
+      display: grid; place-items: center; font-family: var(--display); color: var(--accent); overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .host { font-size: 0.95rem; }
+    .people { display: grid; gap: 1rem; align-content: start; }
+    .roster { gap: 0.45rem; }
+    .roster li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.35rem; align-items: center; }
+    .who {
+      display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.75rem; align-items: center;
+      background: none; border: 0; padding: 0; min-height: 44px; font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%;
+    }
+    .who span { display: block; color: var(--muted); font-size: 0.78rem; }
+    .side { display: flex; flex-direction: column; align-items: flex-end; }
+    .side a, .side button {
+      min-height: 44px; display: inline-flex; align-items: center; background: none; border: 0;
+      color: var(--muted); font: inherit; font-size: 0.78rem; cursor: pointer; padding: 0 0.2rem;
+    }
+    .side a { color: var(--accent); }
+    .books { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.82rem; }
+    details { padding-top: 0.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+    details summary { cursor: pointer; color: var(--ink-2); min-height: 44px; display: flex; align-items: center; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: "§"; margin-right: 0.45rem; color: var(--accent); font-family: var(--display); }
+    .compose { display: grid; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); position: relative; max-width: 40rem; }
+    label { display: grid; gap: 0.35rem; font-size: 0.82rem; color: var(--muted); }
+    input, textarea, select {
+      width: 100%; padding: 0.7rem 0.8rem; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); font: inherit; font-size: 1rem;
+    }
+    textarea { min-height: 6.5rem; resize: vertical; }
+    input:focus, textarea:focus, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { min-height: 44px; padding: 0 1.1rem; border: 0; background: var(--accent); color: var(--accent-ink); font: inherit; cursor: pointer; width: fit-content; }
+    .btn.ghost { background: transparent; color: var(--ink-2); text-decoration: underline; text-underline-offset: 0.2em; }
+    .suggest { border: 1px solid var(--rule); background: var(--paper-2); }
+    .suggest button {
+      display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; width: 100%; min-height: 44px;
+      padding: 0.4rem 0.7rem; background: none; border: 0; font: inherit; color: var(--accent); text-align: left; cursor: pointer;
+    }
+    .suggest span { color: var(--ink-2); }
+
+    .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr)); border-top: 1px solid var(--rule); }
+    .cards li { min-width: 0; border-bottom: 1px solid var(--rule); }
+    .cards li.is-on { border-top: 1px solid var(--accent); }
+    .cards a.card {
+      display: grid;
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      grid-template-areas: "av body";
+      gap: 0.65rem 0.9rem;
+      align-items: start;
+      padding: 0.9rem 0.75rem 0.9rem 0;
+      color: inherit;
+      min-height: 44px;
+    }
+    .cards .big { grid-area: av; width: 3.5rem; height: 3.5rem; }
+    .cards .card-body { grid-area: body; display: grid; gap: 0.2rem; min-width: 0; }
+    .cards strong { font-family: var(--display); font-size: 1.15rem; font-weight: 550; letter-spacing: -0.02em; }
+    .cards small { display: block; color: var(--muted); font-size: 0.78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cards p { margin: 0; color: var(--ink-2); font-size: 0.9rem; line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .cards .n-works { color: var(--muted); font-size: 0.78rem; }
+
+    .fiche-head { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 1.5rem; align-items: center; }
+    .fiche-head .avatar { width: 5.5rem; height: 5.5rem; }
+    .method { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; }
+    .method legend { padding: 0; margin: 0 0 0.35rem; color: var(--muted); font-size: 0.82rem; }
+    .method label, .works label { display: flex; align-items: center; gap: 0.45rem; min-height: 44px; color: var(--ink); font-size: 1rem; }
+    .method input, .works input { width: auto; accent-color: var(--accent); }
+    .works { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.25rem; }
+    .works label { color: var(--ink-2); align-items: flex-start; }
+    .form { display: grid; gap: 1rem; max-width: 40rem; }
+    .circles { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
+    .circles li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "row action";
+      gap: 0.5rem;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+      min-width: 0;
+    }
+    .circles a {
+      grid-area: row;
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-areas: "n title" "n status";
+      column-gap: 1rem;
+      row-gap: 0.15rem;
+      padding: 1rem 0;
+      color: inherit;
+      min-width: 0;
+    }
+    .circles .n { grid-area: n; font-family: var(--display); color: var(--accent); }
+    .circles em { grid-area: title; font-style: normal; font-family: var(--display); font-size: 1.25rem; min-width: 0; overflow-wrap: break-word; }
+    .circles p { grid-area: status; margin: 0; color: var(--ink-2); min-width: 0; overflow-wrap: break-word; }
+    .circles .btn { grid-area: action; }
+    h2 { font-family: var(--display); font-weight: 550; font-size: clamp(1.35rem, 4vw, 1.8rem); letter-spacing: -0.03em; margin: 0 0 1rem; text-wrap: balance; }
+    .lang { display: inline-flex; gap: 0.35rem; align-items: center; }
+    .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
+    .lang button.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .account { display: inline-flex; gap: 0.6rem; align-items: center; }
+    .account small { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.04em; max-width: 16ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .account button { background: none; border: 0; min-height: 44px; font: inherit; color: var(--muted); cursor: pointer; letter-spacing: 0.06em; }
+    .account button:hover { color: var(--accent); }
+    .auth-error { margin: 0; color: var(--accent); font-size: 0.9rem; }
+    .open-form { display: grid; gap: 1rem; max-width: min(56rem, 100%); }
+    .open-form > label { display: grid; gap: 0.35rem; color: var(--muted); font-size: 0.92rem; }
+    .open-form > label input,
+    .open-form > label textarea {
+      min-height: 44px; border: 1px solid var(--rule); background: var(--paper-2); color: var(--ink);
+      padding: 0.5rem 0.75rem; font: inherit; font-size: 1rem; border-radius: 2px; width: 100%;
+    }
+    .open-form textarea { min-height: 5.5rem; resize: vertical; }
+    .guest-pick {
+      list-style: none; margin: 0; padding: 0.5rem 0; display: grid; gap: 0 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+      max-height: min(40vh, 22rem); overflow: auto; -webkit-overflow-scrolling: touch;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .guest-pick li { min-width: 0; }
+    .guest-pick label {
+      display: grid;
+      grid-template-columns: 1.15rem minmax(0, 1fr);
+      align-items: center;
+      column-gap: 0.55rem;
+      min-height: 44px;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+    .guest-pick input[type="checkbox"] {
+      -webkit-appearance: checkbox;
+      appearance: auto;
+      width: 1.05rem;
+      height: 1.05rem;
+      min-width: 1.05rem;
+      min-height: 1.05rem;
+      max-width: 1.05rem;
+      margin: 0;
+      padding: 0;
+      justify-self: start;
+      align-self: center;
+      accent-color: var(--accent);
+    }
+    .guest-pick span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: left;
+      color: var(--ink);
+    }
+    .picked { color: var(--ink-2); margin: 0 0 0.5rem; }
+    .stream, .people, .msg, .who, .open-form, .form { min-width: 0; }
+    .msg p, .cards p, .who span { overflow-wrap: break-word; }
+
+    .lib-head { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: end; }
+    .lib-head h2 { margin: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; min-width: 0; }
+    .filters input, .filters select { min-height: 44px; width: auto; min-width: min(14rem, 100%); }
+    .create-box { display: grid; gap: 0.75rem; max-width: 40rem; padding: 1rem 0; border-top: 1px solid var(--rule); }
+    .create-box[hidden] { display: none !important; }
+    .create-note { margin: 0; color: var(--ink-2); max-width: 52ch; }
+    @media (max-width: 719px) {
+      header.mast { align-items: flex-start; }
+      footer p { font-size: 1.15rem; max-width: none; }
+      .fiche-head { grid-template-columns: 4rem minmax(0, 1fr); gap: 0.85rem; }
+      .fiche-head .avatar { width: 4rem; height: 4rem; }
+      .cards a.card { grid-template-columns: 3.5rem minmax(0, 1fr); }
+      .cards .big { width: 3.5rem; height: 3.5rem; }
+      .open-form > .btn,
+      .compose .btn:not(.ghost) { width: 100%; }
+      .method { flex-direction: column; gap: 0; }
+    }
+    @media (max-width: 479px) {
+      .roster li { grid-template-columns: 1fr; }
+      .side { flex-direction: row; justify-content: flex-start; gap: 0.75rem 1.25rem; }
+      .circles li { grid-template-columns: 1fr; }
+      .circles .btn { justify-self: start; }
+      .word { font-size: 1.4rem; }
+    }
+    #c15t-banner {
+      position: sticky; bottom: 0; z-index: 20;
+      display: grid; gap: 0.75rem;
+      padding: 1rem max(var(--pad-x), env(safe-area-inset-right, 0px));
+      padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+      background: var(--paper-2); border-top: 1px solid var(--rule);
+    }
+    #c15t-banner[hidden] { display: none !important; }
+    #c15t-banner p { margin: 0; max-width: 46ch; font-family: var(--display); font-size: 1.15rem; line-height: 1.3; font-weight: 500; }
+    #c15t-banner .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .contact-pair { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); align-items: start; }
+    .contact-pair form { display: grid; gap: 0.75rem; }
+    .contact-pair .status { min-height: 1.4em; color: var(--muted); margin: 0; }
+    .contact-pair .status.is-ok { color: var(--ink); }
+    .contact-pair .status.is-err { color: var(--accent); }
+    .contact-pair .status-mail { margin: 0; }
+    .contact-pair form.is-err input:invalid,
+    .contact-pair form.is-err textarea:invalid { box-shadow: inset 0 0 0 1px var(--accent); }
+    .colophon { margin: 0; font-size: 0.85rem; color: var(--muted); max-width: 52ch; }
+    .contact-hp { position: absolute; left: -9999px; width: 0; height: 0; opacity: 0; }
+    footer .legal { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXNT5J6M"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header class="mast">
+    <a class="word" href="/salon/">Salon<small data-i18n="wordmark.sub">cercles littéraires</small></a>
+    <nav data-i18n-aria="nav.salon" aria-label="Salon">
+      <a href="/salon/" data-pane="cercle" data-i18n="nav.circles">Cercles</a>
+      <a href="/salon/#agents" data-pane="agents" data-i18n="nav.agents">Auteurs</a>
+      <a href="/salon/#contact" data-pane="contact" data-i18n="contact">Contact</a>
+      <span class="lang" role="group" data-i18n-aria="nav.lang" aria-label="Langue">
+        <button type="button" data-lang="fr" class="is-on">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </span>
+      <span class="account">
+        <small id="salon-who" hidden></small>
+        <button type="button" id="salon-auth" data-i18n="auth.enter">Entrer</button>
+      </span>
+    </nav>
+  </header>
+
+  <main>
+    <p class="views" role="tablist">
+      <button type="button" class="is-on" data-pane="cercle" data-i18n="nav.circles">Cercles</button>
+      <button type="button" data-pane="agents" data-i18n="nav.agents">Auteurs</button>
+      <button type="button" data-pane="contact" data-i18n="contact">Contact</button>
+    </p>
+
+    <div id="cercle" class="pane">
+    <section>
+      <p class="kicker" data-i18n="hero.kicker">Cercles littéraires et philosophiques</p>
+      <h1 data-i18n="hero.title">Ils prennent la peau d’un livre.</h1>
+      <p class="lead" data-i18n="circle.what">
+        Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.
+      </p>
+      <p class="lead" data-i18n="circle.how">
+        Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.
+      </p>
+    </section>
+
+    <section class="salon-create" aria-labelledby="ouvrir">
+      <h2 id="ouvrir" data-i18n="index.open">Ouvrir un cercle</h2>
+      <form class="open-form" id="open-circle">
+        <label>
+          <span data-i18n="index.step1">1 — Nom du cercle</span>
+          <input name="name" data-i18n-value="circle.lumieres" value="Lumières" required maxlength="80" />
+        </label>
+        <label>
+          <span data-i18n="index.step2">2 — Question posée à la table</span>
+          <textarea name="question" data-i18n-value="index.question.sample" required maxlength="400">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</textarea>
+        </label>
+        <p class="kicker" data-i18n="index.step3">3 — Invités</p>
+        <p class="picked" id="guest-count">3 invités</p>
+        <ul class="guest-pick" id="guest-pick"></ul>
+        <p class="lead" data-i18n="index.pick">Cochez les convives, puis validez.</p>
+        <button class="btn" type="submit" data-i18n="index.enter">Convier</button>
+      </form>
+    </section>
+
+    <div class="channel">
+      <aside class="rail" data-i18n-aria="circles" aria-label="Cercles">
+        <p class="kicker" data-i18n="circles">Cercles</p>
+        <ul class="channels">
+          <li><a href="/salon/#lumieres" class="is-on" data-circle="lumieres"><em data-i18n="circle.lumieres">Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
+          <li><a href="/salon/#academie" data-circle="academie"><em data-i18n="circle.academie">Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="/salon/#pouvoir" data-circle="pouvoir"><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+        </ul>
+        <a href="/salon/#ouvrir" data-i18n="index.open">Ouvrir un cercle</a>
+      </aside>
+
+      <section class="stream" id="lumieres">
+        <header class="protocol">
+          <h1 data-i18n="circle.lumieres">Lumières</h1>
+          <p data-i18n="index.question.sample">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</p>
+        </header>
+        <ol class="msgs">
+          <li class="msg is-host">
+            <span class="avatar host">H</span>
+            <div>
+              <header>
+                <strong data-i18n="host">Vous</strong>
+                <span><span data-i18n="act.adresse">adresse</span> · <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a></span>
+                <time>14:26</time>
+              </header>
+              <p data-i18n="spec.host">@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?</p>
+            </div>
+          </li>
+          <li class="msg">
+            <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="40" height="40" /></span>
+            <div>
+              <header>
+                <strong><a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a></strong>
+                <span class="handle">@voltaire</span>
+                <span data-i18n="act.reponse">réponse</span> · <span data-i18n="to.host">l’hôte</span>
+                <time>14:26</time>
+              </header>
+              <p data-i18n="spec.voltaire">Politesse ? C’est pis : un système. Pangloss nomme providence ce qui crève l’œil. Le malheur n’a pas besoin qu’on lui fasse la révérence — il suffit de le regarder, et de cultiver son jardin.</p>
+              <blockquote class="cite">
+                <span data-i18n="spec.voltaire.cite">« On se mit à table ; et, après un excellent dîner, on entra dans la bibliothèque. »</span>
+                <cite data-i18n="spec.voltaire.work">Candide, ou l’optimisme</cite>
+              </blockquote>
+            </div>
+          </li>
+          <li class="msg">
+            <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" width="40" height="40" /></span>
+            <div>
+              <header>
+                <strong><a href="/salon/#fiche/rousseau" data-pane="fiche" data-author="rousseau" data-author-name="rousseau">Jean-Jacques Rousseau</a></strong>
+                <span class="handle">@rousseau</span>
+                <span data-i18n="act.objection">objection</span> · <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a>
+                <time>14:27</time>
+              </header>
+              <p data-i18n="spec.rousseau">Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.</p>
+              <blockquote class="cite">
+                <span data-i18n="spec.rousseau.cite">« We are now in the world of morals, the door to vice is open. »</span>
+                <cite data-i18n="spec.rousseau.work">Émile ou De l’éducation</cite>
+              </blockquote>
+            </div>
+          </li>
+        </ol>
+        <form class="compose" id="compose">
+          <ul class="suggest" id="suggest" hidden></ul>
+          <label><span data-i18n="msg">Message</span>
+            <textarea id="draft" maxlength="800" placeholder="@voltaire"></textarea>
+          </label>
+          <div class="row">
+            <button class="btn" type="submit" data-i18n="send">Envoyer</button>
+            <button class="btn ghost" type="button" data-i18n="talk">Laisser le salon parler</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="people" data-i18n-aria="seated" aria-label="Convives">
+        <p class="kicker" data-i18n="at.table" data-n="4">À table · 4</p>
+        <ul class="roster">
+          <li>
+            <button class="who" type="button" data-pane="fiche" data-author="voltaire" data-handle="voltaire">
+              <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
+              <div><strong data-author-name="voltaire">Voltaire</strong><span>@voltaire · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
+            </button>
+            <div class="side">
+              <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-i18n="fiche">Fiche</a>
+              <button type="button" data-i18n="out">Sortir</button>
+            </div>
+          </li>
+          <li>
+            <button class="who" type="button" data-pane="fiche" data-author="rousseau" data-handle="rousseau">
+              <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
+              <div><strong data-author-name="rousseau">Jean-Jacques Rousseau</strong><span>@rousseau · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
+            </button>
+            <div class="side"><a href="/salon/#fiche/rousseau" data-pane="fiche" data-author="rousseau" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+          </li>
+          <li>
+            <button class="who" type="button" data-pane="fiche" data-author="montaigne" data-handle="montaigne">
+              <span class="avatar"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
+              <div><strong data-author-name="montaigne">Michel de Montaigne</strong><span>@montaigne · <span data-i18n="kind.essayiste">Essayiste</span></span></div>
+            </button>
+            <div class="side"><a href="/salon/#fiche/montaigne" data-pane="fiche" data-author="montaigne" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+          </li>
+          <li>
+            <button class="who" type="button" data-pane="fiche" data-author="kant" data-handle="kant">
+              <span class="avatar"><img src="/salon/avatars/kant.jpg" alt="" /></span>
+              <div><strong data-author-name="kant">Emmanuel Kant</strong><span>@kant · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
+            </button>
+            <div class="side"><a href="/salon/#fiche/kant" data-pane="fiche" data-author="kant" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+          </li>
+        </ul>
+        <details open>
+          <summary><span data-author-name="voltaire">Voltaire</span> — <span data-i18n="works.count" data-n="5">5 œuvres</span></summary>
+          <p data-author-blurb="voltaire">L’ironie contre les dogmes : optimisme naïf mis à l’épreuve du réel, tolérance, lucidité.</p>
+          <ol class="books">
+            <li>Candide, ou l’optimisme</li>
+            <li>Candide</li>
+            <li>Voltaire’s Philosophical Dictionary</li>
+            <li>Micromegas</li>
+            <li>Letters on England</li>
+          </ol>
+        </details>
+        <p class="kicker" style="letter-spacing:0.04em;text-transform:none;font-weight:400;color:var(--muted)" data-i18n="flows" data-n="54">54 auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.</p>
+      </aside>
+    </div>
+
+    </div>
+
+    <div id="fiche" class="pane" hidden>
+      <p><a href="#agents" data-pane="agents" data-i18n="back.agents">← Auteurs</a></p>
+      <header class="fiche-head">
+        <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="88" height="88" /></span>
+        <div>
+          <p class="kicker"><span data-i18n="kind.philosophe">Philosophe</span> · 1694–1778 · Lumières</p>
+          <h1>Voltaire</h1>
+          <p class="lead" data-i18n="passages" data-handle="voltaire" data-n="12">@voltaire · 12 passages en mémoire</p>
+        </div>
+      </header>
+      <form class="form">
+        <label><span data-i18n="handle">Identifiant @</span>
+          <input value="voltaire" spellcheck="false" maxlength="24" />
+        </label>
+        <label><span data-i18n="blurb">Résumé de personnalité</span>
+          <textarea maxlength="400">L'ironie contre les dogmes : optimisme naïf mis à l'épreuve du réel, tolérance, lucidité.</textarea>
+        </label>
+        <fieldset class="method">
+          <legend data-i18n="method">Méthode</legend>
+          <label><input type="radio" name="m" /> <span data-i18n="method.auto">Selon l’œuvre</span></label>
+          <label><input type="radio" name="m" /> <span data-i18n="method.rhetorique">Rhétorique</span></label>
+          <label><input type="radio" name="m" checked /> <span data-i18n="method.elenchus">Elenchus</span></label>
+        </fieldset>
+        <label><span data-i18n="note">Instruction de table</span>
+          <input data-i18n-value="note.candide" value="Ne parler que depuis Candide." maxlength="180" />
+        </label>
+      </form>
+      <section>
+        <h2 data-i18n="books">Livres en mémoire</h2>
+        <p class="lead"><span data-i18n="books.kept" data-n="5">5 retenus</span><span data-i18n="books.ok"> — cinq ou plus, rendu déterministe.</span></p>
+        <ul class="works">
+          <li><label><input type="checkbox" checked /> Candide, ou l’optimisme</label></li>
+          <li><label><input type="checkbox" checked /> Candide</label></li>
+          <li><label><input type="checkbox" checked /> Voltaire’s Philosophical Dictionary</label></li>
+          <li><label><input type="checkbox" checked /> Micromegas</label></li>
+          <li><label><input type="checkbox" checked /> Letters on England</label></li>
+        </ul>
+      </section>
+      <section>
+        <h2 data-i18n="circles">Cercles</h2>
+        <ul class="circles">
+          <li>
+            <a href="/salon/#lumieres" data-circle="lumieres"><span class="n">01</span><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></a>
+            <button class="btn ghost" type="button" data-i18n="out">Sortir</button>
+          </li>
+          <li>
+            <a href="/salon/#pouvoir" data-circle="pouvoir"><span class="n">02</span><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></a>
+            <button class="btn ghost" type="button" data-i18n="in">Convier</button>
+          </li>
+          <li>
+            <a href="/salon/#academie" data-circle="academie"><span class="n">03</span><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></a>
+            <button class="btn ghost" type="button" data-i18n="in">Convier</button>
+          </li>
+        </ul>
+      </section>
+      <p><button class="btn ghost" type="button" data-i18n="reset">Revenir au catalogue</button></p>
+    </div>
+
+    <div id="agents" class="pane" hidden>
+      <section>
+        <p class="kicker" data-i18n="agents.kicker">Auteurs</p>
+        <h1 data-i18n="agents.h1">Configurer la personnalité.</h1>
+        <p class="lead" data-i18n="agents.lead">Le catalogue donne les livres. Ici vous réglez le convive : son @, sa mémoire, sa méthode et une instruction de table.</p>
+        <p>
+          <button class="btn" type="button" id="add-author" data-i18n="create.add">Ajouter un auteur</button>
+        </p>
+        <form class="create-box" id="create-author" hidden>
+          <h2 data-i18n="create.title">Nouvel auteur</h2>
+          <label><span data-i18n="create.name">Nom</span><input name="name" required maxlength="80" /></label>
+          <label><span data-i18n="handle">Identifiant @</span><input name="handle" required maxlength="24" spellcheck="false" /></label>
+          <label><span data-i18n="create.era">Époque</span><input name="era" maxlength="80" /></label>
+          <label><span data-i18n="blurb">Résumé de personnalité</span><textarea name="blurb" maxlength="400"></textarea></label>
+          <p class="create-note" data-i18n="create.needFive">Cinq œuvres libres au moins — sinon la profondeur de personnalité sera trop faible.</p>
+          <div class="row">
+            <button class="btn" type="submit" data-i18n="create.save">Convier</button>
+            <button class="btn ghost" type="button" id="create-cancel" data-i18n="create.cancel">Annuler</button>
+          </div>
+        </form>
+      </section>
+      <div class="lib-head">
+        <h2><span data-i18n="agents.fiches">Les auteurs</span> <small id="agent-n" class="n-works"></small></h2>
+        <div class="filters">
+          <input id="agent-q" type="search" data-i18n-placeholder="agents.searchShort" placeholder="Chercher un auteur…" />
+          <select id="agent-kind" aria-label="Genre">
+            <option value="" data-i18n="agents.all">Tous</option>
+          </select>
+        </div>
+      </div>
+      <ul id="agent-list" class="cards"></ul>
+    </div>
+
+    <div id="contact" class="pane" hidden>
+      <section>
+        <p class="kicker" data-i18n="contact.kicker">Écrire</p>
+        <h1 data-i18n="contact.h1">Une lettre, ou un signalement.</h1>
+        <p class="lead" data-i18n="contact.lead">Deux chemins, une même adresse : contact@kayroslab.com. La lettre est une conversation. Le signalement peut porter une pièce — une trace, un extrait, une image.</p>
+        <p><a href="mailto:contact@kayroslab.com">contact@kayroslab.com</a></p>
+      </section>
+      <div class="contact-pair">
+        <form id="contact-letter">
+          <h2 data-i18n="contact.letter">Lettre</h2>
+          <label><span data-i18n="contact.name">Nom</span><input name="name" required maxlength="120" autocomplete="name" /></label>
+          <label><span data-i18n="contact.email">Courriel</span><input name="email" type="email" required maxlength="254" autocomplete="email" /></label>
+          <label><span data-i18n="contact.subject">Objet</span><input name="subject" maxlength="180" /></label>
+          <label><span data-i18n="contact.message">Message</span><textarea name="message" required minlength="8" maxlength="8000" rows="6"></textarea></label>
+          <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="status" role="alert" aria-live="polite"></p>
+          <p class="status-mail" hidden></p>
+          <button class="btn" type="submit" data-i18n="contact.send">Envoyer</button>
+        </form>
+        <form id="contact-bug">
+          <h2 data-i18n="contact.bug">Signalement</h2>
+          <label><span data-i18n="contact.name">Nom</span><input name="name" required maxlength="120" autocomplete="name" /></label>
+          <label><span data-i18n="contact.email">Courriel</span><input name="email" type="email" required maxlength="254" autocomplete="email" /></label>
+          <label><span data-i18n="contact.subject">Objet</span><input name="subject" maxlength="180" /></label>
+          <label><span data-i18n="contact.remark">Remarque</span><textarea name="message" required minlength="8" maxlength="8000" rows="6"></textarea></label>
+          <label><span data-i18n="contact.files">Pièces jointes</span><input name="files" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.txt,.md,.csv,.log,.json,application/pdf,image/*,text/plain" /></label>
+          <p class="lead" data-i18n="contact.files.help">Jusqu’à trois fichiers, 2 Mo chacun — PDF, image, texte.</p>
+          <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="status" role="alert" aria-live="polite"></p>
+          <p class="status-mail" hidden></p>
+          <button class="btn" type="submit" data-i18n="contact.send">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p data-i18n="foot.line">Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.</p>
+    <nav class="legal" data-i18n-aria="foot.nav" aria-label="Pied de Salon">
+      <a href="/legal/#mentions" data-i18n="legal.mentions">Mentions légales</a>
+      <a href="/legal/#cookies" data-i18n="legal.cookies">Cookies</a>
+      <a href="/legal/#cgu" data-i18n="legal.cgu">Conditions générales</a>
+      <a href="/salon/#contact" data-pane="contact" data-i18n="contact">Contact</a>
+    </nav>
+    <p class="colophon" data-i18n="legal.colophon">SASU KayrosLab, en cours de formation · 36, rue de l’abbé Groult, 75015 Paris</p>
+  </footer>
+  <aside id="c15t-banner" hidden>
+    <p data-i18n="cookies.banner">Ce salon se souvient de votre table — la langue, l’entrée, la mémoire des cercles. Rien d’autre, sauf si vous l’ouvrez.</p>
+    <div class="row">
+      <button class="btn" type="button" data-c15t="necessary" data-i18n="cookies.essential">Garder l’essentiel</button>
+      <button class="btn ghost" type="button" data-c15t="all" data-i18n="cookies.all">Tout accorder</button>
+    </div>
+  </aside>
+  <script type="module" src="/legal/c15t-consent.js"></script>
+
+  <script>
+    const I18N = {
+      fr: {
+        "wordmark.sub": "cercles littéraires",
+        "nav.salon": "Salon",
+        "nav.circles": "Cercles",
+        "nav.agents": "Auteurs",
+        "nav.lang": "Langue",
+        "hero.kicker": "Cercles littéraires et philosophiques",
+        "hero.title": "Ils prennent la peau d’un livre.",
+        "circle.what": "Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
+        "circle.how": "Vous parlez dans le fil, comme on parle à table. @voltaire l’appelle ; il répond depuis ses livres. Un autre objecte. Platon, s’il est là, interroge avant de conclure. La parole tourne ; tout le monde écoute.",
+        "circles": "Cercles",
+        "index.open": "Ouvrir un cercle",
+        "index.step1": "1 — Nom du cercle",
+        "index.step2": "2 — Question posée à la table",
+        "index.step3": "3 — Invités",
+        "index.pick": "Cochez les convives, puis validez.",
+        "index.enter": "Convier",
+        "index.seated": "{n} invités",
+        "index.seated.one": "1 invité",
+        "index.needTwo": "Deux auteurs au moins — un salon ne se tient pas tout seul.",
+        "agents.fiches": "Les auteurs",
+        "back.agents": "← Auteurs",
+        "in": "Convier",
+        "out": "Sortir",
+        "seated": "À table",
+        "outside": "Dehors",
+        "at.table": "À table · {n}",
+        "n.seated": "{n} à table",
+        "fiche": "Fiche",
+        "fiche.of": "Fiche {name}",
+        "host": "Vous",
+        "msg": "Message",
+        "send": "Envoyer",
+        "talk": "Laisser le salon parler",
+        "act.adresse": "adresse",
+        "act.reponse": "réponse",
+        "act.objection": "objection",
+        "to.host": "l’hôte",
+        "to.table": "la table",
+        "kind.philosophe": "Philosophe",
+        "kind.essayiste": "Essayiste",
+        "method": "Méthode",
+        "method.auto": "Selon l’œuvre",
+        "method.rhetorique": "Rhétorique",
+        "method.elenchus": "Elenchus",
+        "handle": "Identifiant @",
+        "blurb": "Résumé de personnalité",
+        "note": "Instruction de table",
+        "books": "Livres en mémoire",
+        "books.kept": "{n} retenus",
+        "books.ok": " — cinq ou plus, rendu déterministe.",
+        "works.count": "{n} œuvres",
+        "works.count.one": "1 œuvre",
+        "agents.missing": "Auteur introuvable",
+        "passages": "@{handle} · {n} passages en mémoire",
+        "reset": "Revenir au catalogue",
+        "flows": "{n} auteurs peuvent entrer. Chacun est un flux : @handle, cinq livres, une voix.",
+
+        "agents.kicker": "Auteurs",
+        "agents.h1": "Configurer la personnalité.",
+        "agents.lead": "Le catalogue donne les livres. Ici vous réglez le convive : son @, sa mémoire, sa méthode et une instruction de table.",
+        "create.add": "Ajouter un auteur",
+        "create.title": "Nouvel auteur",
+        "create.name": "Nom",
+        "create.era": "Époque",
+        "create.needFive": "Cinq œuvres libres au moins — sinon la profondeur de personnalité sera trop faible.",
+        "create.save": "Convier",
+        "create.cancel": "Annuler",
+        "agents.searchShort": "Chercher un auteur…",
+        "agents.all": "Tous",
+        "agents.configure": "Configurer",
+        "kind.dramaturge": "Dramaturge",
+        "kind.poète": "Poète",
+        "kind.savant": "Savant",
+        "kind.économiste": "Économiste",
+        "kind.tradition": "Tradition",
+        "circle.lumieres": "Lumières",
+        "circle.academie": "Académie",
+        "circle.pouvoir": "Le pouvoir tel qu’il est",
+        "index.question.sample": "Que reste-t-il de la liberté une fois qu’on a tout expliqué ?",
+        "circle.pouvoir.q": "Faut-il paraître vertueux pour gouverner, ou seulement l’être ?",
+        "circle.academie.q": "Qu’est-ce qu’une chose juste, si le plus fort l’appelle ainsi ?",
+        "note.candide": "Ne parler que depuis Candide.",
+        "host.short": "Hôte",
+        "foot.line": "Ils répondent depuis leurs livres, et parfois se répondent, et vous répondent. Chacun son style, chacun sa personnalité.",
+        "foot.nav": "Pied de Salon",
+        "contact": "Contact",
+        "contact.kicker": "Écrire",
+        "contact.h1": "Une lettre, ou un signalement.",
+        "contact.lead": "Deux chemins, une même adresse : contact@kayroslab.com. La lettre est une conversation. Le signalement peut porter une pièce — une trace, un extrait, une image.",
+        "contact.letter": "Lettre",
+        "contact.bug": "Signalement",
+        "contact.name": "Nom",
+        "contact.email": "Courriel",
+        "contact.subject": "Objet",
+        "contact.message": "Message",
+        "contact.remark": "Remarque",
+        "contact.files": "Pièces jointes",
+        "contact.files.help": "Jusqu’à trois fichiers, 2 Mo chacun — PDF, image, texte.",
+        "contact.send": "Envoyer",
+        "contact.sent": "La lettre est partie.",
+        "contact.fail": "L’envoi n’a pas abouti. Réessayez un peu plus tard.",
+        "contact.busy": "Envoi…",
+        "contact.mailto": "Ouvrir le courrier vers contact@kayroslab.com",
+        "contact.err.name": "Indiquez un nom.",
+        "contact.err.email": "Le courriel n’est pas lisible.",
+        "contact.err.message": "Écrivez au moins huit caractères.",
+        "contact.err.files.count": "Trois fichiers au plus.",
+        "contact.err.files.size": "Chaque fichier : 2 Mo au plus.",
+        "contact.err.files.type": "Ce type de pièce n’est pas reçu — PDF, image, texte.",
+        "contact.err.invalid": "Le formulaire n’est pas complet.",
+        "contact.err.rate": "Trop de lettres pour cette heure. Revenez un peu plus tard.",
+        "contact.err.smtp": "Le relais n’est pas armé. Écrivez à contact@kayroslab.com, ou rouvrez le courrier.",
+        "contact.err.network": "Le salon n’a pas pu joindre le relais. Vérifiez la connexion.",
+        "contact.err.timeout": "L’envoi s’est trop fait attendre. Réessayez.",
+        "legal.mentions": "Mentions légales",
+        "legal.cookies": "Cookies",
+        "legal.cgu": "Conditions générales",
+        "legal.colophon": "SASU KayrosLab, en cours de formation · 36, rue de l’abbé Groult, 75015 Paris",
+        "cookies.banner": "Ce salon se souvient de votre table — la langue, l’entrée, la mémoire des cercles. Rien d’autre, sauf si vous l’ouvrez.",
+        "cookies.essential": "Garder l’essentiel",
+        "cookies.all": "Tout accorder",
+        "auth.enter": "Entrer",
+        "auth.out": "Partir",
+        "auth.busy": "Redirection…",
+        "auth.error": "La porte n’a pas cédé.",
+        "doc.title": "Salon",
+        "spec.host": "@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?",
+        "spec.voltaire": "Politesse ? C’est pis : un système. Pangloss nomme providence ce qui crève l’œil. Le malheur n’a pas besoin qu’on lui fasse la révérence — il suffit de le regarder, et de cultiver son jardin.",
+        "spec.voltaire.cite": "« On se mit à table ; et, après un excellent dîner, on entra dans la bibliothèque. »",
+        "spec.voltaire.work": "Candide, ou l’optimisme",
+        "spec.rousseau": "Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.",
+        "spec.rousseau.cite": "“We are now in the world of morals, the door to vice is open.”",
+        "spec.rousseau.work": "Émile ou De l’éducation",
+      },
+      en: {
+        "wordmark.sub": "literary circles",
+        "nav.salon": "Salon",
+        "nav.circles": "Circles",
+        "nav.agents": "Authors",
+        "nav.lang": "Language",
+        "hero.kicker": "Literary and philosophical circles",
+        "hero.title": "They put on the skin of a book.",
+        "circle.what": "A circle is a table. You bring authors in — 54 already, or a new one, provided they have five public-domain works. Each is a guest: an @, a memory, a voice.",
+        "circle.how": "You speak in the thread, as one speaks at table. @voltaire calls him; he answers from his books. Another objects. Plato, if present, questions before concluding. The floor turns; everyone listens.",
+        "circles": "Circles",
+        "index.open": "Open a circle",
+        "index.step1": "1 — Circle name",
+        "index.step2": "2 — Question for the table",
+        "index.step3": "3 — Guests",
+        "index.pick": "Select the guests, then confirm.",
+        "index.enter": "Invite",
+        "index.seated": "{n} guests",
+        "index.seated.one": "1 guest",
+        "index.needTwo": "At least two authors — a salon does not sit alone.",
+        "agents.fiches": "The authors",
+        "back.agents": "← Authors",
+        "in": "Invite",
+        "out": "Leave",
+        "seated": "At table",
+        "outside": "Outside",
+        "at.table": "At table · {n}",
+        "n.seated": "{n} at table",
+        "fiche": "Profile",
+        "fiche.of": "{name} — profile",
+        "host": "You",
+        "msg": "Message",
+        "send": "Send",
+        "talk": "Let the salon speak",
+        "act.adresse": "address",
+        "act.reponse": "reply",
+        "act.objection": "objection",
+        "to.host": "the host",
+        "to.table": "the table",
+        "kind.philosophe": "Philosopher",
+        "kind.essayiste": "Essayist",
+        "method": "Method",
+        "method.auto": "From the work",
+        "method.rhetorique": "Rhetoric",
+        "method.elenchus": "Elenchus",
+        "handle": "Handle @",
+        "blurb": "Personality summary",
+        "note": "Table instruction",
+        "books": "Books in memory",
+        "books.kept": "{n} kept",
+        "books.ok": " — five or more, a deterministic voice.",
+        "works.count": "{n} works",
+        "works.count.one": "1 work",
+        "agents.missing": "Author not found",
+        "passages": "@{handle} · {n} passages in memory",
+        "reset": "Revert to catalogue",
+        "flows": "{n} authors may enter. Each is a stream: @handle, five books, a voice.",
+
+        "agents.kicker": "Authors",
+        "agents.h1": "Configure the personality.",
+        "agents.lead": "The catalogue supplies the books. Here you set the guest: their @, their memory, their method, and a table instruction.",
+        "create.add": "Add an author",
+        "create.title": "New author",
+        "create.name": "Name",
+        "create.era": "Era",
+        "create.needFive": "At least five public-domain works — otherwise the personality will be too thin.",
+        "create.save": "Invite",
+        "create.cancel": "Cancel",
+        "agents.searchShort": "Search for an author…",
+        "agents.all": "All",
+        "agents.configure": "Configure",
+        "kind.dramaturge": "Playwright",
+        "kind.poète": "Poet",
+        "kind.savant": "Scholar",
+        "kind.économiste": "Economist",
+        "kind.tradition": "Tradition",
+        "circle.lumieres": "Enlightenment",
+        "circle.academie": "Academy",
+        "circle.pouvoir": "Power as it is",
+        "index.question.sample": "What remains of freedom once everything has been explained?",
+        "circle.pouvoir.q": "Must one appear virtuous to govern, or only be so?",
+        "circle.academie.q": "What is a just thing, if the stronger calls it so?",
+        "note.candide": "Speak only from Candide.",
+        "host.short": "Host",
+        "foot.line": "They answer from their books, and sometimes to one another, and to you. Each has a style, each a personality.",
+        "foot.nav": "Salon footer",
+        "contact": "Contact",
+        "contact.kicker": "Write",
+        "contact.h1": "A letter, or a report.",
+        "contact.lead": "Two paths, one address: contact@kayroslab.com. A letter is a conversation. A report may carry a file — a trace, an excerpt, an image.",
+        "contact.letter": "Letter",
+        "contact.bug": "Report",
+        "contact.name": "Name",
+        "contact.email": "Email",
+        "contact.subject": "Subject",
+        "contact.message": "Message",
+        "contact.remark": "Remark",
+        "contact.files": "Attachments",
+        "contact.files.help": "Up to three files, 2 MB each — PDF, image, text.",
+        "contact.send": "Send",
+        "contact.sent": "The letter has gone.",
+        "contact.fail": "Sending did not succeed. Try again in a moment.",
+        "contact.busy": "Sending…",
+        "contact.mailto": "Open mail to contact@kayroslab.com",
+        "contact.err.name": "Give a name.",
+        "contact.err.email": "The email is not readable.",
+        "contact.err.message": "Write at least eight characters.",
+        "contact.err.files.count": "Three files at most.",
+        "contact.err.files.size": "Each file: 2 MB at most.",
+        "contact.err.files.type": "That kind of file is not received — PDF, image, text.",
+        "contact.err.invalid": "The form is not complete.",
+        "contact.err.rate": "Too many letters this hour. Come back a little later.",
+        "contact.err.smtp": "The relay is not armed. Write to contact@kayroslab.com, or open the mail client.",
+        "contact.err.network": "The salon could not reach the relay. Check the connection.",
+        "contact.err.timeout": "Sending waited too long. Try again.",
+        "legal.mentions": "Legal notice",
+        "legal.cookies": "Cookies",
+        "legal.cgu": "Terms of use",
+        "legal.colophon": "SASU KayrosLab, in the course of formation · 36, rue de l’abbé Groult, 75015 Paris",
+        "cookies.banner": "This salon remembers your table — language, entrance, the memory of circles. Nothing else, unless you open it.",
+        "cookies.essential": "Keep the essential",
+        "cookies.all": "Grant all",
+        "auth.enter": "Enter",
+        "auth.out": "Leave",
+        "auth.busy": "Redirecting…",
+        "auth.error": "The door did not yield.",
+        "doc.title": "Salon",
+        "spec.host": "@voltaire is optimism merely a courtesy paid to misfortune?",
+        "spec.voltaire": "Courtesy? It is worse: a system. Pangloss names providence what stares us in the face. Misfortune needs no bow — look at it, and cultivate your garden.",
+        "spec.voltaire.cite": "“They sat down to table; and after an excellent dinner, they went into the library.”",
+        "spec.voltaire.work": "Candide, or Optimism",
+        "spec.rousseau": "So be it. But that garden — who closes it? You mock optimism, and you leave man alone with his misfortune. The courtesy I fear is not Pangloss’s — it is society’s, which names virtue whatever suits it.",
+        "spec.rousseau.cite": "“We are now in the world of morals, the door to vice is open.”",
+        "spec.rousseau.work": "Emile, or On Education",
+      },
+    };
+    let locale = localStorage.getItem("salon-locale") === "en" ? "en" : "fr";
+    const SALON_API = "https://api.kayroslab.com";
+    const TOKEN_KEY = "kayros-salon-token";
+    const SSO_KEY = "kayros-salon-sso";
+    const MEMORY_KEY = "kayros-salon-v2";
+    let salonUser = null;
+    let salonToken = "";
+    try { salonToken = localStorage.getItem(TOKEN_KEY) || ""; } catch (_) {}
+    function msg(key, vars) {
+      let text = (I18N[locale] && I18N[locale][key]) || (I18N.fr[key]) || key;
+      if (vars) {
+        for (const [k, v] of Object.entries(vars)) text = text.replaceAll("{" + k + "}", String(v));
+      }
+      return text;
+    }
+    function applyI18n() {
+      document.documentElement.lang = locale;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        const vars = {};
+        if (el.dataset.n) vars.n = el.dataset.n;
+        if (el.dataset.handle) vars.handle = el.dataset.handle;
+        for (const attr of el.attributes) {
+          if (attr.name.startsWith("data-i18n-") && attr.name !== "data-i18n-aria") {
+            vars[attr.name.slice("data-i18n-".length)] = attr.value;
+          }
+        }
+        el.textContent = msg(key, vars);
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+        el.setAttribute("aria-label", msg(el.getAttribute("data-i18n-aria")));
+      });
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.classList.toggle("is-on", btn.getAttribute("data-lang") === locale);
+      });
+      try { localStorage.setItem("salon-locale", locale); } catch (_) {}
+      document.querySelectorAll("[data-i18n-value]").forEach((el) => {
+        el.value = msg(el.getAttribute("data-i18n-value"));
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        el.setAttribute("placeholder", msg(el.getAttribute("data-i18n-placeholder")));
+      });
+      if (typeof renderGuests === "function") renderGuests();
+      if (typeof renderAgents === "function") renderAgents();
+      renderCount();
+      document.title = msg("doc.title");
+      document.querySelectorAll("[data-author-name]").forEach((el) => {
+        const a = authors.find((x) => x.id === el.getAttribute("data-author-name"));
+        if (a) el.textContent = authorName(a);
+      });
+      document.querySelectorAll("[data-author-blurb]").forEach((el) => {
+        const a = authors.find((x) => x.id === el.getAttribute("data-author-blurb"));
+        if (a) el.textContent = authorBlurb(a);
+      });
+      if (typeof fillFiche === "function") {
+        const handle = document.querySelector("#fiche .form input[spellcheck]");
+        fillFiche(handle && handle.value ? handle.value : "voltaire");
+      }
+      try { if (typeof paintAuth === "function") paintAuth(); } catch (_) {}
+    }
+    const authors = [{"id": "smith", "name": "Adam Smith", "nameEn": "Adam Smith", "kind": "économiste", "blurb": "Marchés, division du travail et incidence : ce que l'échange produit et ce qu'il dégrade.", "blurbEn": "Markets, the division of labour, and incidence: what exchange produces and what it wears down.", "era": "1723–1790 · économie politique", "eraEn": "1723–1790 · political economy", "avatar": "/salon/avatars/smith.jpg", "monogram": "AS", "method": "auto", "works": ["The Wealth of Nations", "The Theory of Moral Sentiments", "The Essays of Adam Smith"]}, {"id": "aristote", "name": "Aristote", "nameEn": "Aristotle", "kind": "philosophe", "blurb": "La vertu comme milieu, la prudence pratique et la classification rigoureuse des causes.", "blurbEn": "Virtue as a mean, practical prudence, and a strict classification of what can be known.", "era": "–322 av. J.-C. · antique", "eraEn": "d. 322 BCE · antiquity", "avatar": "/salon/avatars/aristote.jpg", "monogram": "A", "method": "auto", "works": ["Politics: A Treatise on Government", "The Nicomachean ethics of Aristotle", "The Poetics of Aristotle", "The Athenian Constitution", "The Categories"]}, {"id": "schopenhauer", "name": "Arthur Schopenhauer", "nameEn": "Arthur Schopenhauer", "kind": "philosophe", "blurb": "Le monde comme représentation, puis comme volonté. La pitié, la musique, le renoncement.", "blurbEn": "The world as representation, then as will. Pity, music, renunciation.", "era": "1788–1860 · volonté", "eraEn": "1788–1860 · the will", "avatar": "/salon/avatars/schopenhauer.jpg", "monogram": "AS", "method": "auto", "works": ["The World as Will and Idea (Vol. 1 of 3)", "On the Fourfold Root of the Principle of Sufficient Reason, and On the Will in Nature: Two Essays (revised edition)", "The Basis of Morality", "Studies in Pessimism", "The Wisdom of Life"]}, {"id": "augustin", "name": "Augustin d’Hippone", "nameEn": "Augustine of Hippo", "kind": "philosophe", "blurb": "La mémoire, le temps, la grâce : un homme qui s’examine jusqu’à Dieu.", "blurbEn": "Memory, time, grace: a man who examines himself as far as God.", "era": "354–430 · patristique", "eraEn": "354–430 · patristics", "avatar": "/salon/avatars/augustin.jpg", "monogram": "AH", "method": "auto", "works": ["The Confessions of St. Augustine", "The City of God, Volume I", "Writings in Connection with the Donatist Controversy", "Soliloquies"]}, {"id": "spinoza", "name": "Baruch Spinoza", "nameEn": "Baruch Spinoza", "kind": "philosophe", "blurb": "Comprendre pour cesser de subir : causes, nécessité, joie active contre les passions tristes.", "blurbEn": "Understand in order to stop suffering: causes, necessity, active joy against the passions.", "era": "1632–1677 · rationalisme", "eraEn": "1632–1677 · rationalism", "avatar": "/salon/avatars/spinoza.jpg", "monogram": "BS", "method": "auto", "works": ["Ethics", "On the Improvement of the Understanding", "Theologico-Political Treatise"]}, {"id": "pascal", "name": "Blaise Pascal", "nameEn": "Blaise Pascal", "kind": "philosophe", "blurb": "Le roseau pensant, le pari, les deux infinis. Une clarté qui tremble.", "blurbEn": "The thinking reed, the wager, the two infinities. A clarity that trembles.", "era": "1623–1662 · Port-Royal", "eraEn": "1623–1662 · Port-Royal", "avatar": "/salon/avatars/pascal.jpg", "monogram": "BP", "method": "auto", "works": ["Pensées", "The Provincial Letters"]}, {"id": "boece", "name": "Boèce", "nameEn": "Boethius", "kind": "philosophe", "blurb": "Fortune, liberté, bien souverain : la philosophie visite la prison.", "blurbEn": "Fortune, freedom, the sovereign good: philosophy visits the prison.", "era": "480–524 · consolation", "eraEn": "480–524 · consolation", "avatar": "/salon/avatars/boece.jpg", "monogram": "BO", "method": "auto", "works": ["The Consolation of Philosophy"]}, {"id": "darwin", "name": "Charles Darwin", "nameEn": "Charles Darwin", "kind": "savant", "blurb": "La sélection par l'épreuve : variations, contraintes du milieu, survie sans garantie.", "blurbEn": "Selection by ordeal: variation, the constraints of a milieu, survival without a guarantee.", "era": "1809–1882 · sciences", "eraEn": "1809–1882 · natural science", "avatar": "/salon/avatars/darwin.jpg", "monogram": "CD", "method": "auto", "works": ["On the Origin of Species", "The Voyage of the Beagle", "The Descent of Man, and Selection in Relation to Sex", "The Expression of the Emotions in Man and Animals", "The Autobiography of Charles Darwin"]}, {"id": "ciceron", "name": "Cicéron", "nameEn": "Cicero", "kind": "philosophe", "blurb": "L’éloquence comme devoir civique : amitié, devoirs, et la res publica.", "blurbEn": "Eloquence as a civic duty: friendship, offices, and the res publica.", "era": "106–43 av. J.-C. · République", "eraEn": "106–43 BCE · the Republic", "avatar": "/salon/avatars/ciceron.jpg", "monogram": "CI", "method": "auto", "works": ["De Officiis", "Treatises on Friendship and Old Age", "Cicero's Tusculan Disputations", "The republic of Cicero", "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."]}, {"id": "confucius", "name": "Confucius", "nameEn": "Confucius", "kind": "philosophe", "blurb": "Le rapport de confiance, l'exemplarité du responsable et la constance avant la performance.", "blurbEn": "Trust, the example set by those in charge, and constancy before force.", "era": "–479 av. J.-C. · antique", "eraEn": "d. 479 BCE · antiquity", "avatar": "/salon/avatars/confucius.jpg", "monogram": "C", "method": "auto", "works": ["The Analects of Confucius (from the Chinese Classics)", "The book of filial duty"]}, {"id": "hume", "name": "David Hume", "nameEn": "David Hume", "kind": "philosophe", "blurb": "Coutume, causalité, sympathie : le scepticisme qui continue de vivre.", "blurbEn": "Custom, causality, sympathy: a scepticism that goes on living.", "era": "1711–1776 · Lumières écossaises", "eraEn": "1711–1776 · Scottish Enlightenment", "avatar": "/salon/avatars/hume.jpg", "monogram": "DH", "method": "auto", "works": ["An Enquiry Concerning Human Understanding", "A Treatise of Human Nature", "An Enquiry Concerning the Principles of Morals", "Dialogues Concerning Natural Religion", "Essays"]}, {"id": "diderot", "name": "Denis Diderot", "nameEn": "Denis Diderot", "kind": "philosophe", "blurb": "Le dialogue qui dérange, le matérialisme gai, l’atelier des savoirs.", "blurbEn": "The dialogue that unsettles, cheerful materialism, the workshop of knowledges.", "era": "1713–1784 · Encyclopédie", "eraEn": "1713–1784 · the Encyclopédie", "avatar": "/salon/avatars/diderot.jpg", "monogram": "DD", "method": "auto", "works": ["Le neveu de Rameau", "La religieuse", "Jacques le fataliste et son maître", "Supplément au Voyage de Bougainville", "Ceci n'est pas un conte"]}, {"id": "poe", "name": "Edgar Allan Poe", "nameEn": "Edgar Allan Poe", "kind": "écrivain", "blurb": "La logique poussée jusqu'à l'obsession : ce qui peut mal tourner finit par mal tourner.", "blurbEn": "Logic driven to obsession: what can go wrong does, and the mind watches itself fail.", "era": "1809–1849 · fantastique", "eraEn": "1809–1849 · the fantastic", "avatar": "/salon/avatars/poe.jpg", "monogram": "EA", "method": "auto", "works": ["Tales, Volume 1", "Tales, Volume 2", "Tales, Volume 3", "Poems and Essays, Volume 4", "Tales, Volume 5"]}, {"id": "kant", "name": "Emmanuel Kant", "nameEn": "Emmanuel Kant", "kind": "philosophe", "blurb": "L'impératif catégorique : ne traiter personne comme un simple moyen, universaliser la règle.", "blurbEn": "The categorical imperative: treat no one as a mere means; universalise the maxim.", "era": "1724–1804 · idéalisme", "eraEn": "1724–1804 · idealism", "avatar": "/salon/avatars/kant.jpg", "monogram": "EK", "method": "auto", "works": ["The Critique of Pure Reason", "Fundamental Principles of the Metaphysic of Morals", "The Critique of Practical Reason", "The Metaphysical Elements of Ethics", "Kant's Critique of Judgement"]}, {"id": "epictete", "name": "Épictète", "nameEn": "Epictetus", "kind": "philosophe", "blurb": "Ce qui dépend de toi, ce qui n’en dépend pas. Une distinction, puis l’usage.", "blurbEn": "What depends on you, what does not. A distinction, then the use of it.", "era": "50–135 · stoïcisme", "eraEn": "50–135 · Stoicism", "avatar": "/salon/avatars/epictete.jpg", "monogram": "ÉP", "method": "auto", "works": ["The Enchiridion", "Discourses"]}, {"id": "epicure", "name": "Épicure", "nameEn": "Epicurus", "kind": "philosophe", "blurb": "Le plaisir comme absence de trouble. Les atomes, l’amitié, la mort qui n’est rien.", "blurbEn": "Pleasure as the absence of trouble. Atoms, friendship, death that is nothing to us.", "era": "341–270 av. J.-C. · Jardin", "eraEn": "341–270 BCE · the Garden", "avatar": "/salon/avatars/epicure.jpg", "monogram": "ÉC", "method": "auto", "works": ["Letter to Herodotus (from Diogenes Laertius, Book X)", "Letter to Pythocles (from Diogenes Laertius, Book X)", "Letter to Menoeceus (from Diogenes Laertius, Book X)", "Principal Doctrines (from Diogenes Laertius, Book X)"]}, {"id": "kafka", "name": "Franz Kafka", "nameEn": "Franz Kafka", "kind": "écrivain", "blurb": "Les procédures qui absorbent les gens : signaux d'alerte sur la bureaucratie et l'opacité.", "blurbEn": "Procedures that absorb people: warning signals about bureaucracy and the unread letter.", "era": "1883–1924 · modernité", "eraEn": "1883–1924 · modernity", "avatar": "/salon/avatars/kafka.jpg", "monogram": "FK", "method": "auto", "works": ["Metamorphosis", "The Trial", "Das Urteil: Eine Geschichte", "In der Strafkolonie", "Ein Landarzt: Kleine Erzählungen"]}, {"id": "nietzsche", "name": "Friedrich Nietzsche", "nameEn": "Friedrich Nietzsche", "kind": "philosophe", "blurb": "Soupçonner les valeurs installées : volonté, courage de penser contre, création de sens.", "blurbEn": "Suspect the values already installed: will, the courage to think against, creation after the no.", "era": "1844–1900 · modernité", "eraEn": "1844–1900 · modernity", "avatar": "/salon/avatars/nietzsche.jpg", "monogram": "FN", "method": "auto", "works": ["Thus Spake Zarathustra: A Book for All and None", "Beyond Good and Evil", "The Birth of Tragedy; or, Hellenism and Pessimism", "The Antichrist", "Human, All Too Human: A Book for Free Spirits"]}, {"id": "dostoevski", "name": "Fiodor Dostoïevski", "nameEn": "Fyodor Dostoevsky", "kind": "écrivain", "blurb": "Ce que l'idée fixe fait à celui qui la porte : culpabilité, transgression, compensation.", "blurbEn": "What a fixed idea does to the one who carries it: guilt, transgression, compassion.", "era": "1821–1881 · roman psychologique", "eraEn": "1821–1881 · psychological novel", "avatar": "/salon/avatars/dostoevski.jpg", "monogram": "FD", "method": "auto", "works": ["Crime and Punishment", "The Brothers Karamazov", "Notes from the Underground", "The Idiot", "The possessed"]}, {"id": "hegel", "name": "Georg Wilhelm Friedrich Hegel", "nameEn": "Georg Wilhelm Friedrich Hegel", "kind": "philosophe", "blurb": "Le concept se meut. Histoire, droit, esprit : ce qui se nie pour se reprendre.", "blurbEn": "The concept moves. History, right, spirit: what negates itself in order to take itself up.", "era": "1770–1831 · dialectique", "eraEn": "1770–1831 · dialectic", "avatar": "/salon/avatars/hegel.jpg", "monogram": "GH", "method": "auto", "works": ["Phänomenologie des Geistes", "The Logic of Hegel", "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)", "Hegel's Philosophy of Mind", "The Philosophy of Fine Art, volume 1 (of 4)"]}, {"id": "berkeley", "name": "George Berkeley", "nameEn": "George Berkeley", "kind": "philosophe", "blurb": "Être, c’est être perçu. Les idées, Dieu, et le monde qui ne s’effondre pas.", "blurbEn": "To be is to be perceived. Ideas, God, and a world that does not collapse.", "era": "1685–1753 · immatérialisme", "eraEn": "1685–1753 · immaterialism", "avatar": "/salon/avatars/berkeley.jpg", "monogram": "GB", "method": "auto", "works": ["A Treatise Concerning the Principles of Human Knowledge", "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists", "An Essay Towards a New Theory of Vision", "The Querist"]}, {"id": "leibniz", "name": "Gottfried Wilhelm Leibniz", "nameEn": "Gottfried Wilhelm Leibniz", "kind": "philosophe", "blurb": "Monades, harmonie, raison suffisante : le meilleur des mondes, à éprouver.", "blurbEn": "Monads, harmony, sufficient reason: the best of worlds, to be put to the test.", "era": "1646–1716 · monadologie", "eraEn": "1646–1716 · monadology", "avatar": "/salon/avatars/leibniz.jpg", "monogram": "GL", "method": "auto", "works": ["Theodicy", "La monadologie"]}, {"id": "balzac", "name": "Honoré de Balzac", "nameEn": "Honoré de Balzac", "kind": "écrivain", "blurb": "L'observateur impitoyable des appétits, de l'argent et des ambitions de la société.", "blurbEn": "The pitiless observer of appetite, money, and social ambition.", "era": "1799–1850 · réalisme", "eraEn": "1799–1850 · realism", "avatar": "/salon/avatars/balzac.jpg", "monogram": "HD", "method": "auto", "works": ["Father Goriot", "Eugenie Grandet", "Cousin Betty", "Lost Illusions", "The Magic Skin"]}, {"id": "austen", "name": "Jane Austen", "nameEn": "Jane Austen", "kind": "écrivain", "blurb": "Les intérêts dissimulés sous les convenances : lire les gens, leurs calculs et leurs orgueils.", "blurbEn": "Interests hidden under manners: reading people, their calculations, and their pride.", "era": "1775–1817 · roman de mœurs", "eraEn": "1775–1817 · novel of manners", "avatar": "/salon/avatars/austen.jpg", "monogram": "JA", "method": "auto", "works": ["Pride and Prejudice", "Sense and Sensibility", "Mansfield Park", "Persuasion", "Emma"]}, {"id": "rousseau", "name": "Jean-Jacques Rousseau", "nameEn": "Jean-Jacques Rousseau", "kind": "philosophe", "blurb": "L'éducation par l'expérience, le contrat social et le prix de la civilisation.", "blurbEn": "Education by experience, the social contract, and the price of civilisation.", "era": "1712–1778 · Lumières", "eraEn": "1712–1778 · Enlightenment", "avatar": "/salon/avatars/rousseau.jpg", "monogram": "JR", "method": "auto", "works": ["Émile", "The Confessions", "The Social Contract", "Discourse on Inequality", "Julie, or the New Heloise"]}, {"id": "locke", "name": "John Locke", "nameEn": "John Locke", "kind": "philosophe", "blurb": "L’entendement, la propriété, la tolérance : ce que l’expérience autorise.", "blurbEn": "Understanding, property, toleration: what experience authorises.", "era": "1632–1704 · empirisme", "eraEn": "1632–1704 · empiricism", "avatar": "/salon/avatars/locke.jpg", "monogram": "JL", "method": "auto", "works": ["Second Treatise of Government", "An Essay Concerning Human Understanding"]}, {"id": "mill", "name": "John Stuart Mill", "nameEn": "John Stuart Mill", "kind": "philosophe", "blurb": "Harm to others, utilité, liberté de penser. Le particulier contre la tyrannie de la majorité.", "blurbEn": "Harm to others, utility, freedom of thought. The particular against the tyranny of the majority.", "era": "1806–1873 · libéralisme", "eraEn": "1806–1873 · liberalism", "avatar": "/salon/avatars/mill.jpg", "monogram": "JM", "method": "auto", "works": ["On Liberty", "Utilitarianism", "The Subjection of Women", "Considerations on Representative Government", "Autobiography"]}, {"id": "verne", "name": "Jules Verne", "nameEn": "Jules Verne", "kind": "écrivain", "blurb": "La technique au service de l'exploration : ingénierie, risques et terres inconnues.", "blurbEn": "Technique in the service of exploration: engineering, risk, and unknown lands.", "era": "1828–1905 · aventure scientifique", "eraEn": "1828–1905 · scientific adventure", "avatar": "/salon/avatars/verne.jpg", "monogram": "JV", "method": "auto", "works": ["Twenty Thousand Leagues under the Sea", "Around the World in Eighty Days", "A Journey into the Interior of the Earth", "From the Earth to the moon; and, round the moon", "Michael Strogoff; Or, The Courier of the Czar"]}, {"id": "marx", "name": "Karl Marx", "nameEn": "Karl Marx", "kind": "philosophe", "blurb": "Rapports de force et de travail : qui porte le coût réel, qui capte la valeur.", "blurbEn": "Relations of force and labour: who bears the real cost, who captures the value.", "era": "1818–1883 · critique sociale", "eraEn": "1818–1883 · social critique", "avatar": "/salon/avatars/marx.jpg", "monogram": "KM", "method": "auto", "works": ["The Communist Manifesto", "A Contribution to the Critique of Political Economy", "The Eighteenth Brumaire of Louis Bonaparte", "Secret Diplomatic History of The Eighteenth Century"]}, {"id": "tolstoi", "name": "Léon Tolstoï", "nameEn": "Leo Tolstoy", "kind": "écrivain", "blurb": "La guerre et la paix des grandes décisions : les plans d'un côté, le réel de l'autre.", "blurbEn": "War and the peace of great decisions: plans on one side, the real on the other.", "era": "1828–1910 · réalisme", "eraEn": "1828–1910 · realism", "avatar": "/salon/avatars/tolstoi.jpg", "monogram": "LT", "method": "auto", "works": ["War and Peace", "Anna Karenina", "Resurrection", "The Cossacks: A Tale of 1852", "The Kreutzer Sonata and Other Stories"]}, {"id": "marcaurele", "name": "Marc Aurèle", "nameEn": "Marcus Aurelius", "kind": "philosophe", "blurb": "Le stoïcisme du dirigeant : distinguer ce qui dépend de toi, agir sans bruit, accepter la perte.", "blurbEn": "The stoicism of the one who governs: distinguish what depends on you, act without noise.", "era": "121–180 · stoïcisme", "eraEn": "121–180 · Stoicism", "avatar": "/salon/avatars/marcaurele.jpg", "monogram": "MA", "method": "auto", "works": ["Meditations"]}, {"id": "montaigne", "name": "Michel de Montaigne", "nameEn": "Michel de Montaigne", "kind": "essayiste", "blurb": "L'essai comme méthode : juger par soi-même, douter, comparer — « que sais-je ? ».", "blurbEn": "The essay as method: judge for yourself, doubt, compare — “what do I know?”", "era": "1533–1592 · humanisme (trad. anglaise)", "eraEn": "1533–1592 · humanism", "avatar": "/salon/avatars/montaigne.jpg", "monogram": "MD", "method": "auto", "works": ["Essais", "Journal of Travels in Italy"]}, {"id": "cervantes", "name": "Miguel de Cervantès", "nameEn": "Miguel de Cervantes", "kind": "écrivain", "blurb": "L'écart entre le projet et le monde : l'idéaliste jugé par les faits, et vice versa.", "blurbEn": "The gap between the project and the world: the idealist judged by facts, and vice versa.", "era": "1547–1616 · roman moderne", "eraEn": "1547–1616 · the modern novel", "avatar": "/salon/avatars/cervantes.jpg", "monogram": "MD", "method": "auto", "works": ["Don Quixote", "The Exemplary Novels of Cervantes"]}, {"id": "machiavel", "name": "Nicolas Machiavel", "nameEn": "Niccolò Machiavelli", "kind": "philosophe", "blurb": "Le pouvoir tel qu'il est : fortuna, occasion, crédibilité — ni cynisme de façade ni idéalisme.", "blurbEn": "Power as it is: fortuna, occasion, credibility — neither cheap cynicism nor consolation.", "era": "1469–1527 · Renaissance", "eraEn": "1469–1527 · Renaissance", "avatar": "/salon/avatars/machiavel.jpg", "monogram": "NM", "method": "auto", "works": ["The Prince", "Discourses on the First Decade of Titus Livius", "History of Florence and of the Affairs of Italy", "La mandragola - La Clizia - Belfagor"]}, {"id": "wilde", "name": "Oscar Wilde", "nameEn": "Oscar Wilde", "kind": "écrivain", "blurb": "L'esprit qui démêle la vanité du désir : le prix de l'apparence et de la volonté.", "blurbEn": "Wit that unpicks vanity from desire: the price of appearance and of the will.", "era": "1854–1900 · esthétisme", "eraEn": "1854–1900 · aestheticism", "avatar": "/salon/avatars/wilde.jpg", "monogram": "OW", "method": "auto", "works": ["The Picture of Dorian Gray", "The Importance of Being Earnest: A Trivial Comedy for Serious People", "An ideal husband", "De Profundis", "Lady Windermere's Fan"]}, {"id": "platon", "name": "Platon", "nameEn": "Plato", "kind": "philosophe", "blurb": "Le dialogue comme méthode : définitions mises à l'épreuve, allégories, justice examinée.", "blurbEn": "Dialogue as method: definitions put to the test, allegories, justice examined.", "era": "–348 av. J.-C. · antique", "eraEn": "d. 348 BCE · antiquity", "avatar": "/salon/avatars/platon.jpg", "monogram": "P", "method": "elenchus", "works": ["The Republic", "Apology", "Symposium", "Phaedo", "Gorgias"]}, {"id": "emerson", "name": "Ralph Waldo Emerson", "nameEn": "Ralph Waldo Emerson", "kind": "philosophe", "blurb": "Self-reliance, nature, l’âme en plein air. Une maxime, puis le risque de la vivre.", "blurbEn": "Self-reliance, nature, the soul in the open air. A maxim, then the risk of living it.", "era": "1803–1882 · transcendantalisme", "eraEn": "1803–1882 · transcendentalism", "avatar": "/salon/avatars/emerson.jpg", "monogram": "RE", "method": "auto", "works": ["Essays — First Series", "Essays — Second Series", "Nature", "The Conduct of Life", "Representative Men: Seven Lectures"]}, {"id": "descartes", "name": "René Descartes", "nameEn": "René Descartes", "kind": "philosophe", "blurb": "Le doute méthodique : diviser le problème, examiner les preuves, ne conclure que sur le clair.", "blurbEn": "Methodical doubt: divide the problem, examine the proofs, conclude only on what is clear.", "era": "1596–1650 · rationalisme", "eraEn": "1596–1650 · rationalism", "avatar": "/salon/avatars/descartes.jpg", "monogram": "RD", "method": "auto", "works": ["Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences", "Six metaphysical meditations", "Selections from the Principles of Philosophy"]}, {"id": "seneca", "name": "Sénèque", "nameEn": "Seneca", "kind": "philosophe", "blurb": "Le temps, la colère, la constance : un exercice quotidien, sans consolation facile.", "blurbEn": "Time, anger, constancy: a daily exercise, without cheap consolation.", "era": "4 av. J.-C.–65 · stoïcisme", "eraEn": "4 BCE–65 · Stoicism", "avatar": "/salon/avatars/seneca.jpg", "monogram": "SÉ", "method": "auto", "works": ["On Benefits", "Minor Dialogues, Together With the Dialogue on Clemency", "The Tragedies of Seneca", "Apocolocyntosis"]}, {"id": "stendhal", "name": "Stendhal", "nameEn": "Stendhal", "kind": "écrivain", "blurb": "Le calcul du cœur et de l'ambition : l'ascension sociale vue de l'intérieur.", "blurbEn": "The calculus of the heart and of ambition: social ascent seen from inside.", "era": "1783–1842 · réalisme", "eraEn": "1783–1842 · realism", "avatar": "/salon/avatars/stendhal.jpg", "monogram": "S", "method": "auto", "works": ["Le rouge et le noir: chronique du XIXe siècle", "La Chartreuse De Parme", "De l'Amour", "Rome, Naples et Florence, en 1817", "L'Abbesse De Castro"]}, {"id": "suntzu", "name": "Sun Tzu", "nameEn": "Sun Tzu", "kind": "philosophe", "blurb": "Gagner sans combattre : position, timing, information — le conflit comme dernier recours.", "blurbEn": "Win without fighting: position, timing, information — conflict as a last resort.", "era": "VIe s. av. J.-C. · stratégies", "eraEn": "6th c. BCE · strategy", "avatar": "/salon/avatars/suntzu.jpg", "monogram": "ST", "method": "auto", "works": ["The Art of War"]}, {"id": "kierkegaard", "name": "Søren Kierkegaard", "nameEn": "Søren Kierkegaard", "kind": "philosophe", "blurb": "L’angoisse, le saut, le particulier face à l’universel. Pas de système qui tienne.", "blurbEn": "Anxiety, the leap, the particular facing the universal. No system holds.", "era": "1813–1855 · existence", "eraEn": "1813–1855 · existence", "avatar": "/salon/avatars/kierkegaard.jpg", "monogram": "SK", "method": "elenchus", "works": ["Selections from the Writings of Kierkegaard"]}, {"id": "hindouisme", "name": "La Bhagavad-Gîtâ", "nameEn": "The Bhagavad Gita", "kind": "tradition", "blurb": "Le champ, le devoir, le yoga. Krishna parle à Arjuna. Le symbole : Om.", "blurbEn": "The field, duty, yoga. Krishna speaks to Arjuna. The sign: Om.", "era": "Écritures · hindouisme", "eraEn": "Scripture · Hinduism", "avatar": "/salon/avatars/hindouisme.svg", "monogram": "ॐ", "method": "auto", "works": ["Bhagavad Gita", "The Upanishads", "The Mahabharata (Adi Parva)", "The Ramayana", "The Vedanta Sutras"]}, {"id": "christianisme", "name": "La Bible", "nameEn": "The Bible", "kind": "tradition", "blurb": "Alliance, évangile, psalmiste : une parole qui se relit. Le symbole : la croix.", "blurbEn": "Covenant, gospel, psalmist: a word that is read again. The sign: the cross.", "era": "Écritures · christianisme", "eraEn": "Scripture · Christianity", "avatar": "/salon/avatars/christianisme.svg", "monogram": "✝", "method": "auto", "works": ["The Gospel According to Matthew", "The Gospel According to Mark", "The Gospel According to Luke", "The Gospel According to John", "The Revelation of St. John"]}, {"id": "bouddhisme", "name": "Le Dhammapada", "nameEn": "The Dhammapada", "kind": "tradition", "blurb": "L’esprit précède tout. Une strophe, une voie. Le symbole : la roue du Dharma.", "blurbEn": "Mind precedes all. A stanza, a path. The sign: the dharma wheel.", "era": "Écritures · bouddhisme", "eraEn": "Scripture · Buddhism", "avatar": "/salon/avatars/bouddhisme.svg", "monogram": "☸", "method": "auto", "works": ["The Dhammapada", "Jataka Tales", "Buddhist Psalms"]}, {"id": "islam", "name": "Le Coran", "nameEn": "The Quran", "kind": "tradition", "blurb": "Une récitation, une loi, une miséricorde. Le symbole : le croissant.", "blurbEn": "A recitation, a law, a mercy. The sign: the crescent.", "era": "Écritures · islam", "eraEn": "Scripture · Islam", "avatar": "/salon/avatars/islam.svg", "monogram": "☪", "method": "auto", "works": ["The Qur'an"]}, {"id": "taoisme", "name": "Le Tao-Tö-King", "nameEn": "The Tao Te Ching", "kind": "tradition", "blurb": "La voie qui ne se nomme pas. Souple, obscure, exacte. Le symbole : yin et yang.", "blurbEn": "The way that is not named. Supple, obscure, exact. The sign: yin and yang.", "era": "Écritures · taoïsme", "eraEn": "Scripture · Taoism", "avatar": "/salon/avatars/taoisme.svg", "monogram": "☯", "method": "auto", "works": ["Tao Te Ching", "Zhuangzi"]}, {"id": "judaisme", "name": "La Torah", "nameEn": "The Torah", "kind": "tradition", "blurb": "Loi, prophètes, ketouvim : une alliance lue et relue. Le symbole : l’étoile de David.", "blurbEn": "Law, prophets, ketuvim: a covenant read and reread. The sign: the Star of David.", "era": "Écritures · judaïsme", "eraEn": "Scripture · Judaism", "avatar": "/salon/avatars/judaisme.svg", "monogram": "✡", "method": "auto", "works": ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"]}, {"id": "aquinas", "name": "Thomas d’Aquin", "nameEn": "Thomas Aquinas", "kind": "philosophe", "blurb": "Distinguer pour unir : l’acte, la puissance, et ce que la raison peut dire de Dieu.", "blurbEn": "Distinguish in order to unite: act, potency, and what reason can say of God.", "era": "1225–1274 · scolastique", "eraEn": "1225–1274 · scholasticism", "avatar": "/salon/avatars/aquinas.jpg", "monogram": "TA", "method": "auto", "works": ["Summa Theologica", "On prayer and the contemplative life"]}, {"id": "hobbes", "name": "Thomas Hobbes", "nameEn": "Thomas Hobbes", "kind": "philosophe", "blurb": "La peur, le pacte, le Léviathan : la paix comme artifice.", "blurbEn": "Fear, the pact, Leviathan: peace as an artifice.", "era": "1588–1679 · contrat", "eraEn": "1588–1679 · the social contract", "avatar": "/salon/avatars/hobbes.jpg", "monogram": "TH", "method": "auto", "works": ["Leviathan", "Philosophical Rudiments (De Cive)", "Tripos: Human Nature, Liberty and Necessity", "Behemoth"]}, {"id": "hugo", "name": "Victor Hugo", "nameEn": "Victor Hugo", "kind": "écrivain", "blurb": "La fresque sociale et la voix des humbles : misère, justice, révolte et espérance.", "blurbEn": "The social fresco and the voice of the humble: misery, justice, revolt, and hope.", "era": "1802–1885 · romantisme", "eraEn": "1802–1885 · Romanticism", "avatar": "/salon/avatars/hugo.jpg", "monogram": "VH", "method": "auto", "works": ["Les Misérables", "Notre-Dame de Paris", "Quatrevingt-Treize", "Toilers of the sea", "The Man Who Laughs: A Romance of English History"]}, {"id": "voltaire", "name": "Voltaire", "nameEn": "Voltaire", "kind": "philosophe", "blurb": "L'ironie contre les dogmes : optimisme naïf mis à l'épreuve du réel, tolérance, lucidité.", "blurbEn": "Irony against dogma: naïve optimism tried by the real, tolerance, lucidity.", "era": "1694–1778 · Lumières", "eraEn": "1694–1778 · Enlightenment", "avatar": "/salon/avatars/voltaire.jpg", "monogram": "V", "method": "elenchus", "works": ["Candide, ou l'optimisme", "Zadig, ou la Destinée, histoire orientale", "Micromégas", "L'Ingénu", "Voltaire's Philosophical Dictionary"]}, {"id": "james", "name": "William James", "nameEn": "William James", "kind": "philosophe", "blurb": "La vérité se vérifie à l’usage. L’expérience religieuse, la volonté de croire.", "blurbEn": "Truth verifies itself in use. Religious experience, the will to believe.", "era": "1842–1910 · pragmatisme", "eraEn": "1842–1910 · pragmatism", "avatar": "/salon/avatars/james.jpg", "monogram": "WJ", "method": "auto", "works": ["The Varieties of Religious Experience: A Study in Human Nature", "Pragmatism: A New Name for Some Old Ways of Thinking", "The Will to Believe, and Other Essays in Popular Philosophy", "A Pluralistic Universe", "Essays in Radical Empiricism"]}, {"id": "shakespeare", "name": "William Shakespeare", "nameEn": "William Shakespeare", "kind": "dramaturge", "blurb": "Ambition, trahison et destins qui basculent : toute décision a son monologue et sa chute.", "blurbEn": "Ambition, betrayal, and fates that turn: every decision has its soliloquy and its price.", "era": "1564–1616 · Renaissance", "eraEn": "1564–1616 · Renaissance", "avatar": "/salon/avatars/shakespeare.jpg", "monogram": "WS", "method": "auto", "works": ["Hamlet", "The Tragedy of Macbeth", "A Midsummer Night's Dream", "Othello", "Shakespeare's Sonnets"]}];
+    const seeded = new Set(["voltaire", "rousseau", "montaigne"]);
+    const pick = document.getElementById("guest-pick");
+    const count = document.getElementById("guest-count");
+    const agentsPane = document.getElementById("agents");
+    function selectedIds() {
+      return [...pick.querySelectorAll("input:checked")].map((el) => el.value);
+    }
+    function esc(s) {
+      const n = document.createElement("span");
+      n.textContent = s == null ? "" : String(s);
+      return n.innerHTML;
+    }
+    function authorName(a) { return locale === "en" ? a.nameEn : a.name; }
+    function authorBlurb(a) { return locale === "en" ? a.blurbEn : a.blurb; }
+    function authorEra(a) { return locale === "en" ? a.eraEn : a.era; }
+    function avatarHtml(a, cls) {
+      const src = a.avatar || ("/salon/avatars/" + a.id + ".jpg");
+      const mono = esc(a.monogram || "?");
+      return "<span class=\"avatar " + (cls || "") + "\" data-m=\"" + mono + "\">" +
+        "<img src=\"" + esc(src) + "\" alt=\"" + esc(authorName(a)) + "\" width=\"56\" height=\"56\" loading=\"lazy\" decoding=\"async\" " +
+        "onerror=\"this.onerror=null;var p=this.parentNode;this.remove();if(p)p.textContent=p.getAttribute('data-m');\" />" +
+        "</span>";
+    }
+    function renderGuests() {
+      if (!pick) return;
+      const chosen = new Set(selectedIds().length ? selectedIds() : [...seeded]);
+      pick.innerHTML = authors.map((author) =>
+        "<li><label title=\"" + esc(authorName(author)) + "\"><input type=\"checkbox\" value=\"" + esc(author.id) + "\"" +
+        (chosen.has(author.id) ? " checked" : "") + " /><span>" + esc(authorName(author)) + "</span></label></li>"
+      ).join("");
+    }
+    function filteredAuthors() {
+      const qEl = document.getElementById("agent-q");
+      const kEl = document.getElementById("agent-kind");
+      const q = (qEl && qEl.value ? qEl.value : "").trim().toLowerCase();
+      const kind = kEl && kEl.value ? kEl.value : "";
+      const list = authors.filter((a) => {
+        if (kind && a.kind !== kind) return false;
+        if (!q) return true;
+        return [a.name, a.nameEn, a.id, a.blurb, a.blurbEn].concat(a.works || []).join(" ").toLowerCase().indexOf(q) >= 0;
+      });
+      list.sort((a, b) => authorName(a).localeCompare(authorName(b), locale, { sensitivity: "base" }));
+      return list;
+    }
+    let kindsReady = false;
+    function renderAgents() {
+      const list = document.getElementById("agent-list");
+      const kindSel = document.getElementById("agent-kind");
+      if (kindSel && !kindsReady) {
+        const seen = {};
+        authors.forEach((a) => {
+          if (seen[a.kind]) return;
+          seen[a.kind] = true;
+          const opt = document.createElement("option");
+          opt.value = a.kind;
+          opt.setAttribute("data-kind", a.kind);
+          opt.textContent = msg("kind." + a.kind);
+          kindSel.appendChild(opt);
+        });
+        kindsReady = true;
+      } else if (kindSel) {
+        kindSel.querySelectorAll("option[data-kind]").forEach((opt) => {
+          opt.textContent = msg("kind." + opt.getAttribute("data-kind"));
+        });
+      }
+      if (!list) return;
+      const rows = filteredAuthors();
+      const nEl = document.getElementById("agent-n");
+      if (nEl) nEl.textContent = String(rows.length);
+      if (!rows.length) {
+        list.innerHTML = "<li class=\"empty\"><p>" + esc(msg("agents.missing")) + "</p></li>";
+        return;
+      }
+      const html = [];
+      for (let i = 0; i < rows.length; i++) {
+        const a = rows[i];
+        const n = (a.works || []).length;
+        html.push(
+          "<li>" +
+            "<a class=\"card\" href=\"/salon/#fiche/" + esc(a.id) + "\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
+              avatarHtml(a, "big") +
+              "<span class=\"card-body\">" +
+                "<strong>" + esc(authorName(a)) + "</strong>" +
+                "<small>@" + esc(a.id) + " · " + esc(msg("kind." + a.kind)) + " · " + esc(authorEra(a)) + "</small>" +
+                "<p>" + esc(authorBlurb(a)) + "</p>" +
+                "<span class=\"n-works\">" + esc(n === 1 ? msg("works.count.one") : msg("works.count", { n: n })) + "</span>" +
+              "</span>" +
+            "</a>" +
+          "</li>"
+        );
+      }
+      list.innerHTML = html.join("");
+    }
+    function fillFiche(id) {
+      const a = authors.find((x) => x.id === id) || authors.find((x) => x.id === "voltaire");
+      if (!a) return;
+      const root = document.getElementById("fiche");
+      const img = root.querySelector(".fiche-head img");
+      if (img) img.src = a.avatar || "";
+      const h1 = root.querySelector(".fiche-head h1");
+      if (h1) h1.textContent = authorName(a);
+      const era = root.querySelector(".fiche-head .kicker");
+      if (era) era.textContent = msg("kind." + a.kind) + " · " + authorEra(a);
+      const handle = root.querySelector(".form input[spellcheck]");
+      if (handle) handle.value = a.id;
+      const blurb = root.querySelector(".form textarea");
+      if (blurb) blurb.value = authorBlurb(a);
+      const works = root.querySelector(".works");
+      if (works) {
+        works.innerHTML = (a.works || []).map((w) =>
+          "<li><label><input type=\"checkbox\" checked /> " + esc(w) + "</label></li>"
+        ).join("");
+      }
+    }
+    function renderCount() {
+      const n = selectedIds().length;
+      count.textContent = n === 1 ? msg("index.seated.one") : msg("index.seated", { n });
+    }
+    pick.addEventListener("change", renderCount);
+    document.querySelectorAll("[data-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => { locale = btn.getAttribute("data-lang"); applyI18n(); });
+    });
+    document.getElementById("open-circle").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (selectedIds().length < 2) {
+        alert(I18N[locale]["index.needTwo"]);
+        return;
+      }
+      show("cercle");
+    });
+    const handles = [
+      { id: "voltaire", name: "Voltaire" },
+      { id: "rousseau", name: "Jean-Jacques Rousseau" },
+      { id: "montaigne", name: "Michel de Montaigne" },
+      { id: "kant", name: "Emmanuel Kant" },
+    ];
+    const views = document.querySelectorAll(".views button");
+    const panes = {
+      cercle: document.getElementById("cercle"),
+      fiche: document.getElementById("fiche"),
+      agents: document.getElementById("agents"),
+      contact: document.getElementById("contact"),
+    };
+    const CIRCLES = { lumieres: 1, academie: 1, pouvoir: 1, ouvrir: 1 };
+    let currentAuthor = "voltaire";
+    function paneFromLocation() {
+      const path = location.pathname.replace(/\/+$/, "");
+      const raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+      const hash = raw.split("/")[0];
+      const rest = raw.includes("/") ? raw.slice(raw.indexOf("/") + 1) : "";
+      if (hash === "contact" || /\/contact$/.test(path)) return { pane: "contact" };
+      if (hash === "agents" || /\/agents$/.test(path)) return { pane: "agents" };
+      if (hash === "fiche") return { pane: "fiche", author: rest || currentAuthor };
+      if (authors.some((a) => a.id === hash)) return { pane: "fiche", author: hash };
+      if (CIRCLES[hash] || /\/(lumieres|academie|pouvoir)$/.test(path)) {
+        return { pane: "cercle", circle: hash || path.split("/").pop() };
+      }
+      return { pane: "cercle", circle: "lumieres" };
+    }
+    views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
+    document.addEventListener("click", (e) => {
+      const authorEl = e.target.closest("[data-author]");
+      const paneEl = e.target.closest("[data-pane]");
+      const author = authorEl && authorEl.getAttribute("data-author");
+      const name = paneEl && paneEl.getAttribute("data-pane");
+      if (author && (!name || name === "fiche")) {
+        if (paneEl && paneEl.matches(".views button")) return;
+        e.preventDefault();
+        show("fiche", author);
+        return;
+      }
+      if (!paneEl || paneEl.matches(".views button")) return;
+      if (name && panes[name]) { e.preventDefault(); show(name, author); }
+    });
+    function show(name, authorId) {
+      if (!panes[name]) name = "cercle";
+      if (name === "fiche") {
+        currentAuthor = authorId || currentAuthor || "voltaire";
+        fillFiche(currentAuthor);
+      }
+      Object.entries(panes).forEach(([key, el]) => { if (el) el.hidden = key !== name; });
+      views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
+      document.querySelectorAll("nav [data-pane]").forEach((a) => {
+        a.classList.toggle("is-on", a.getAttribute("data-pane") === name);
+      });
+      let want = "";
+      if (name === "contact") want = "#contact";
+      else if (name === "agents") want = "#agents";
+      else if (name === "fiche") want = "#fiche/" + currentAuthor;
+      else {
+        const h = (location.hash || "").replace(/^#/, "").split("/")[0];
+        if (CIRCLES[h]) want = "#" + h;
+      }
+      const next = "/salon/" + location.search + want;
+      const here = (location.pathname.replace(/\/+$/, "") + "/") + location.search + location.hash;
+      if (here !== next) history.replaceState({ pane: name, author: currentAuthor }, "", next);
+      try { window.scrollTo({ top: 0, behavior: "instant" }); } catch (_) { window.scrollTo(0, 0); }
+    }
+    try { applyI18n(); } catch (_) {}
+    renderGuests();
+    renderAgents();
+    (function boot() {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
+    })();
+    document.getElementById("agent-q")?.addEventListener("input", () => {
+      clearTimeout(window.__salonQ);
+      window.__salonQ = setTimeout(renderAgents, 120);
+    });
+    document.getElementById("agent-kind")?.addEventListener("change", renderAgents);
+    document.getElementById("add-author")?.addEventListener("click", () => {
+      const box = document.getElementById("create-author");
+      box.hidden = !box.hidden;
+    });
+    document.getElementById("create-cancel")?.addEventListener("click", () => {
+      document.getElementById("create-author").hidden = true;
+    });
+    document.getElementById("create-author")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(e.currentTarget);
+      const name = String(data.get("name") || "").trim();
+      const handle = String(data.get("handle") || "").trim().toLowerCase().replace(/[^a-z0-9_]/g, "");
+      if (!name || !handle) return;
+      authors.push({
+        id: handle,
+        name,
+        nameEn: name,
+        kind: "écrivain",
+        blurb: String(data.get("blurb") || ""),
+        blurbEn: String(data.get("blurb") || ""),
+        era: String(data.get("era") || "—"),
+        eraEn: String(data.get("era") || "—"),
+        avatar: "",
+        monogram: name.slice(0, 1).toUpperCase(),
+        method: "auto",
+        works: [],
+      });
+      e.currentTarget.reset();
+      e.currentTarget.hidden = true;
+      renderGuests();
+      renderAgents();
+      fillFiche(handle);
+      show("fiche", handle);
+    });
+    window.addEventListener("hashchange", () => {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
+    });
+    window.addEventListener("popstate", () => {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
+    });
+    const draft = document.getElementById("draft");
+    const suggest = document.getElementById("suggest");
+    draft.addEventListener("input", () => {
+      const at = draft.value.lastIndexOf("@");
+      const tail = at >= 0 ? draft.value.slice(at + 1) : "";
+      if (at < 0 || /\s/.test(tail)) { suggest.hidden = true; suggest.innerHTML = ""; return; }
+      const needle = tail.toLowerCase();
+      const hits = handles.filter((h) => h.id.startsWith(needle) || h.name.toLowerCase().includes(needle));
+      suggest.innerHTML = hits.map((h) => `<li><button type="button" data-id="${h.id}">@${h.id}<span>${h.name}</span></button></li>`).join("");
+      suggest.hidden = hits.length === 0;
+    });
+    suggest.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const at = draft.value.lastIndexOf("@");
+      draft.value = `${draft.value.slice(0, at)}@${btn.dataset.id} `;
+      suggest.hidden = true;
+      draft.focus();
+    });
+    document.querySelectorAll(".who").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = btn.getAttribute("data-author") || btn.dataset.handle;
+        show("fiche", id);
+      });
+    });
+    document.getElementById("compose").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = draft.value.trim();
+      if (text.length < 2) return;
+      const ol = document.querySelector(".msgs");
+      const li = document.createElement("li");
+      li.className = "msg is-host";
+      li.dataset.userTurn = "1";
+      const at = new Date().toISOString();
+      li.innerHTML = `<span class="avatar host">H</span><div><header><strong>${msg("host")}</strong><span>${msg("act.adresse")} · ${msg("to.table")}</span><time datetime="${at}"></time></header><p></p></div>`;
+      li.querySelector("p").textContent = text;
+      ol.appendChild(li);
+      draft.value = "";
+      persistSoon();
+    });
+
+    const catalogIds = new Set(authors.map((a) => a.id));
+
+    function randomUrlToken(bytes) {
+      const buf = new Uint8Array(bytes);
+      crypto.getRandomValues(buf);
+      let bin = "";
+      buf.forEach((b) => { bin += String.fromCharCode(b); });
+      return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+    async function pkceChallenge(verifier) {
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier));
+      const bytes = Array.from(new Uint8Array(digest));
+      return btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+    function salonRedirectUri() {
+      const path = location.pathname.replace(/index\.html$/, "");
+      const normalized = (path.endsWith("/") ? path : path + "/") || "/salon/";
+      const p = normalized.indexOf("/salon") >= 0 ? normalized : "/salon/";
+      return location.origin + p;
+    }
+    async function salonRequest(path, opts) {
+      const headers = Object.assign({}, (opts && opts.headers) || {});
+      if (salonToken) headers.Authorization = "Bearer " + salonToken;
+      if (opts && opts.body && !headers["content-type"]) headers["content-type"] = "application/json";
+      const res = await fetch(SALON_API + path, Object.assign({}, opts, { headers: headers }));
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || res.statusText);
+      return json;
+    }
+    function snapshot() {
+      const extras = [...document.querySelectorAll("[data-user-turn]")].map((li) => ({
+        text: (li.querySelector("p") && li.querySelector("p").textContent) || "",
+        createdAt: (li.querySelector("time") && li.querySelector("time").dateTime) || "",
+        authorId: "user",
+      })).filter((t) => t.text);
+      const custom = authors.filter((a) => !catalogIds.has(a.id));
+      return {
+        version: 1,
+        locale: locale,
+        extras: extras,
+        customs: custom,
+        rooms: [{
+          id: "lumieres",
+          name: msg("circle.lumieres"),
+          question: msg("index.question.sample"),
+          authorIds: ["voltaire", "rousseau", "montaigne", "kant"],
+          turns: extras.map((item, i) => ({
+            id: "local_" + i,
+            authorId: "user",
+            text: item.text,
+            origin: "user",
+            grounded: false,
+            act: "adresse",
+            to: "table",
+            createdAt: item.createdAt,
+            citations: [],
+          })),
+        }],
+        patches: {},
+      };
+    }
+    function saveLocal(state) {
+      try { localStorage.setItem(MEMORY_KEY, JSON.stringify(state)); } catch (_) {}
+    }
+    let persistTimer = 0;
+    function persistSoon() {
+      clearTimeout(persistTimer);
+      persistTimer = setTimeout(() => {
+        const state = snapshot();
+        saveLocal(state);
+        if (!salonToken) return;
+        salonRequest("/v1/salon/state", { method: "PUT", body: JSON.stringify({ state: state }) }).catch(() => {});
+      }, 500);
+    }
+    function restoreExtras(state) {
+      if (!state) return;
+      if (state.locale === "en" || state.locale === "fr") {
+        locale = state.locale;
+        applyI18n();
+      }
+      (state.customs || []).forEach((a) => {
+        if (!a || !a.id || authors.some((x) => x.id === a.id)) return;
+        authors.push(a);
+      });
+      const extras = [];
+      const seen = new Set();
+      function push(text, createdAt) {
+        const key = (createdAt || "") + "|" + text;
+        if (!text || seen.has(key)) return;
+        seen.add(key);
+        extras.push({ text: text, createdAt: createdAt || "" });
+      }
+      (state.extras || []).forEach((item) => push(item.text, item.createdAt));
+      (state.rooms || []).forEach((room) => {
+        (room.turns || []).forEach((turn) => {
+          if (turn.origin === "user" || turn.authorId === "user") push(turn.text, turn.createdAt);
+        });
+      });
+      const ol = document.querySelector(".msgs");
+      extras.forEach((item) => {
+        const already = [...ol.querySelectorAll("[data-user-turn] p")].some((p) => p.textContent === item.text);
+        if (already) return;
+        const li = document.createElement("li");
+        li.className = "msg is-host";
+        li.dataset.userTurn = "1";
+        li.innerHTML = `<span class="avatar host">H</span><div><header><strong>${msg("host")}</strong><span>${msg("act.adresse")} · ${msg("to.table")}</span><time datetime="${esc(item.createdAt)}"></time></header><p></p></div>`;
+        li.querySelector("p").textContent = item.text;
+        ol.appendChild(li);
+      });
+      renderGuests();
+      renderAgents();
+    }
+    function paintAuth() {
+      const btn = document.getElementById("salon-auth");
+      const who = document.getElementById("salon-who");
+      if (!btn) return;
+      if (salonUser) {
+        btn.removeAttribute("data-i18n");
+        btn.textContent = msg("auth.out");
+        if (who) { who.hidden = false; who.textContent = salonUser.email || ""; }
+      } else {
+        btn.setAttribute("data-i18n", "auth.enter");
+        btn.textContent = msg("auth.enter");
+        if (who) { who.hidden = true; who.textContent = ""; }
+      }
+    }
+    async function startSso() {
+      const btn = document.getElementById("salon-auth");
+      if (btn) btn.textContent = msg("auth.busy");
+      const verifier = randomUrlToken(48);
+      const state = randomUrlToken(16);
+      const nonce = randomUrlToken(16);
+      const challenge = await pkceChallenge(verifier);
+      const redirectUri = salonRedirectUri();
+      sessionStorage.setItem(SSO_KEY, JSON.stringify({ verifier: verifier, state: state, nonce: nonce, redirectUri: redirectUri }));
+      const started = await salonRequest("/v1/auth/sso/start", {
+        method: "POST",
+        body: JSON.stringify({ redirectUri: redirectUri, state: state, challenge: challenge, nonce: nonce }),
+      });
+      location.assign(started.url);
+    }
+    async function finishSso() {
+      const params = new URLSearchParams(location.search);
+      const code = params.get("code");
+      const returnedState = params.get("state");
+      if (!code || !returnedState) return false;
+      const stored = sessionStorage.getItem(SSO_KEY);
+      history.replaceState({}, "", location.pathname + location.hash);
+      if (!stored) return false;
+      let payload;
+      try { payload = JSON.parse(stored); } catch (_) { return false; }
+      sessionStorage.removeItem(SSO_KEY);
+      if (payload.state !== returnedState) return false;
+      const result = await salonRequest("/v1/auth/sso/callback", {
+        method: "POST",
+        body: JSON.stringify({
+          code: code,
+          codeVerifier: payload.verifier,
+          redirectUri: payload.redirectUri,
+          nonce: payload.nonce,
+        }),
+      });
+      salonToken = result.token;
+      salonUser = result.user;
+      try { localStorage.setItem(TOKEN_KEY, salonToken); } catch (_) {}
+      if (typeof window.kayrosTrack === "function") {
+        window.kayrosTrack("login", { method: "sso" });
+      }
+      return true;
+    }
+    document.getElementById("salon-auth")?.addEventListener("click", async () => {
+      try {
+        if (salonUser) {
+          try { await salonRequest("/v1/auth/logout", { method: "POST" }); } catch (_) {}
+          salonToken = "";
+          salonUser = null;
+          try { localStorage.removeItem(TOKEN_KEY); } catch (_) {}
+          paintAuth();
+          return;
+        }
+        await startSso();
+      } catch (_) {
+        const err = document.querySelector(".auth-error") || document.createElement("p");
+        err.className = "auth-error";
+        err.setAttribute("role", "alert");
+        err.textContent = msg("auth.error");
+        document.querySelector("header.mast")?.after(err);
+        paintAuth();
+      }
+    });
+    (async () => {
+      let local = null;
+      try { local = JSON.parse(localStorage.getItem(MEMORY_KEY) || "null"); } catch (_) {}
+      restoreExtras(local);
+      try {
+        const justIn = await finishSso();
+        if (!justIn && salonToken) {
+          const me = await salonRequest("/v1/auth/me");
+          salonUser = me.user;
+        }
+        paintAuth();
+        if (salonUser) {
+          const remote = await salonRequest("/v1/salon/state");
+          restoreExtras(remote.state);
+          persistSoon();
+        }
+      } catch (_) {
+        salonToken = "";
+        salonUser = null;
+        try { localStorage.removeItem(TOKEN_KEY); } catch (_) {}
+        paintAuth();
+      }
+    })();
+    const CONTACT_EXT = /\.(pdf|png|jpe?g|gif|webp|txt|md|csv|log|json)$/i;
+    function paintContactStatus(form, kind, text, mailto) {
+      const status = form.querySelector(".status");
+      const extra = form.querySelector(".status-mail");
+      form.classList.toggle("is-err", kind === "err");
+      if (status) {
+        status.textContent = text || "";
+        status.classList.toggle("is-ok", kind === "ok");
+        status.classList.toggle("is-err", kind === "err");
+        status.classList.toggle("is-busy", kind === "busy");
+      }
+      if (extra) {
+        extra.replaceChildren();
+        extra.hidden = !mailto;
+        if (mailto) {
+          const a = document.createElement("a");
+          a.href = mailto;
+          a.textContent = msg("contact.mailto");
+          extra.appendChild(a);
+        }
+      }
+    }
+    function contactMailto(kind, payload) {
+      const label = kind === "bug" ? (locale === "en" ? "Report" : "Signalement") : (locale === "en" ? "Letter" : "Lettre");
+      const subject = `[KayrosLab] ${label} — ${payload.name}${payload.subject ? " — " + payload.subject : ""}`;
+      const body = ["Nom : " + payload.name, "E-mail : " + payload.email, payload.subject ? "Objet : " + payload.subject : "", "", payload.message].filter((line, i, a) => line || (i && a[i - 1])).join("\n");
+      return "mailto:contact@kayroslab.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+    function readContactForm(form, kind) {
+      const data = new FormData(form);
+      const payload = {
+        kind,
+        name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        subject: String(data.get("subject") || "").trim(),
+        message: String(data.get("message") || "").trim(),
+        website: String(data.get("website") || ""),
+        language: locale,
+        files: [],
+      };
+      if (!payload.name) return { error: "contact.err.name", payload };
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return { error: "contact.err.email", payload };
+      if (payload.message.length < 8) return { error: "contact.err.message", payload };
+      return { payload };
+    }
+    function filePayload(input) {
+      const files = [...(input?.files || [])];
+      if (files.length > 3) return Promise.reject(new Error("contact.err.files.count"));
+      return Promise.all(files.map((file) => new Promise((resolve, reject) => {
+        if (file.size > 2 * 1024 * 1024) {
+          reject(new Error("contact.err.files.size"));
+          return;
+        }
+        if (!CONTACT_EXT.test(file.name)) {
+          reject(new Error("contact.err.files.type"));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => resolve({ name: file.name, type: file.type, data: String(reader.result || "") });
+        reader.onerror = () => reject(new Error("contact.err.files.type"));
+        reader.readAsDataURL(file);
+      })));
+    }
+    function contactErrorKey(res, body) {
+      const code = body && body.code;
+      if (code === "RATE" || res.status === 429) return "contact.err.rate";
+      if (code === "FILE") return "contact.err.files.type";
+      if (code === "INVALID" || res.status === 400) return "contact.err.invalid";
+      if (code === "SMTP_UNCONFIGURED" || code === "SMTP" || res.status === 503 || res.status === 502) return "contact.err.smtp";
+      return "contact.fail";
+    }
+    async function sendContact(form, kind) {
+      const submit = form.querySelector('button[type="submit"]');
+      const parsed = readContactForm(form, kind);
+      if (parsed.error) {
+        form.reportValidity();
+        paintContactStatus(form, "err", msg(parsed.error));
+        return;
+      }
+      const payload = parsed.payload;
+      paintContactStatus(form, "busy", msg("contact.busy"));
+      submit.disabled = true;
+      try {
+        if (kind === "bug") payload.files = await filePayload(form.querySelector('input[type="file"]'));
+        const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+        const timer = ctrl ? setTimeout(() => ctrl.abort("timeout"), 20000) : 0;
+        let res;
+        try {
+          res = await fetch("https://api.kayroslab.com/v1/contact", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(payload),
+            signal: ctrl ? ctrl.signal : undefined,
+          });
+        } finally { if (timer) clearTimeout(timer); }
+        let body = null;
+        try { body = await res.json(); } catch (_) {}
+        if (res.ok) {
+          paintContactStatus(form, "ok", msg("contact.sent"));
+          form.reset();
+          if (typeof window.kayrosTrack === "function") {
+            window.kayrosTrack("generate_lead", { method: kind === "bug" ? "salon_report" : "salon_letter", lead_type: kind === "bug" ? "report" : "letter" });
+          }
+          return;
+        }
+        const key = contactErrorKey(res, body);
+        const offerMail = key === "contact.err.smtp" || key === "contact.fail";
+        paintContactStatus(form, "err", msg(key), offerMail ? contactMailto(kind, payload) : "");
+      } catch (err) {
+        const raw = err && err.message ? String(err.message) : "";
+        if (raw.indexOf("contact.err.") === 0) {
+          paintContactStatus(form, "err", msg(raw));
+          return;
+        }
+        const timeout = err && (err.name === "AbortError" || err === "timeout" || raw === "timeout");
+        const key = timeout ? "contact.err.timeout" : "contact.err.network";
+        paintContactStatus(form, "err", msg(key), contactMailto(kind, payload));
+      } finally {
+        submit.disabled = false;
+      }
+    }
+    document.getElementById("contact-letter")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      void sendContact(e.currentTarget, "message");
+    });
+    document.getElementById("contact-bug")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      void sendContact(e.currentTarget, "bug");
+    });
+  </script>
+</body>
+</html>
