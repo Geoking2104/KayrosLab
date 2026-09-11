@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.21 (2026-09) — Navigation, fiches, contact
+
+- Un auteur (table, fil, cartes) ouvre sa fiche (`#fiche/voltaire`).
+- Plus de 404 : Académie, Pouvoir, Lumières, Contact redirigent vers le Salon.
+- Contact : le volet s’ouvre ; si le SMTP n’est pas armé, la lettre part en `mailto:`.
+
 ## v0.25.20 (2026-09) — `#agents` ouvre les auteurs
 
 - Le script mourait sur `salonUser` avant d’avoir lu le hash : le volet restait caché.

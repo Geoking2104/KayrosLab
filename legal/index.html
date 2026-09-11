@@ -51,6 +51,9 @@
     .views a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink-2); }
     .views a.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
     .pane[hidden] { display: none !important; }
+    .pane:target { display: block !important; }
+    body:has(#cookies:target) #mentions,
+    body:has(#cgu:target) #mentions { display: none !important; }
     .colophon { margin: 0; font-size: 0.85rem; color: var(--muted); max-width: 52ch; }
     #c15t-banner {
       position: sticky; bottom: 0; z-index: 20;
@@ -185,6 +188,10 @@
     });
     const initial = (location.hash || '#mentions').replace('#', '');
     show(['mentions', 'cookies', 'cgu'].includes(initial) ? initial : 'mentions');
+    window.addEventListener('hashchange', () => {
+      const name = (location.hash || '#mentions').replace('#', '');
+      show(['mentions', 'cookies', 'cgu'].includes(name) ? name : 'mentions');
+    });
   </script>
 </body>
 </html>

@@ -186,12 +186,17 @@ test('#agents ouvre le volet auteurs', async () => {
   for (const page of [html, published]) {
     const user = page.indexOf('let salonUser = null');
     const apply = page.indexOf('try { applyI18n(); }');
-    const show = page.indexOf('show(paneFromLocation())');
+    const show = page.indexOf('show(loc.pane, loc.author)');
     assert.ok(user > 0 && user < apply, 'salonUser déclaré avant applyI18n');
     assert.ok(apply > 0 && apply < show, 'hash lu après i18n');
     assert.match(page, /href="\/salon\/#agents"/);
     assert.match(page, /\.pane:target/);
     assert.match(page, /hash === "agents"/);
     assert.match(page, /id="agents"/);
+    assert.match(page, /href="\/salon\/#fiche\//);
+    assert.match(page, /data-author="voltaire"/);
+    assert.match(page, /href="\/salon\/#academie"/);
+    assert.match(page, /href="\/salon\/#pouvoir"/);
+    assert.match(page, /mailto:contact@kayroslab.com/);
   }
 });

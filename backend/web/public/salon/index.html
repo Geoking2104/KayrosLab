@@ -378,14 +378,14 @@
       <aside class="rail" data-i18n-aria="circles" aria-label="Cercles">
         <p class="kicker" data-i18n="circles">Cercles</p>
         <ul class="channels">
-          <li><a href="#lumieres" class="is-on"><em data-i18n="circle.lumieres">Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
-          <li><a href="/salon/academie"><em data-i18n="circle.academie">Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
-          <li><a href="/salon/pouvoir"><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="/salon/#lumieres" class="is-on" data-circle="lumieres"><em data-i18n="circle.lumieres">Lumières</em><span data-i18n="n.seated" data-n="4">4 à table</span></a></li>
+          <li><a href="/salon/#academie" data-circle="academie"><em data-i18n="circle.academie">Académie</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
+          <li><a href="/salon/#pouvoir" data-circle="pouvoir"><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><span data-i18n="n.seated" data-n="3">3 à table</span></a></li>
         </ul>
-        <a href="/salon" data-i18n="index.open">Ouvrir un cercle</a>
+        <a href="/salon/#ouvrir" data-i18n="index.open">Ouvrir un cercle</a>
       </aside>
 
-      <section class="stream">
+      <section class="stream" id="lumieres">
         <header class="protocol">
           <h1 data-i18n="circle.lumieres">Lumières</h1>
           <p data-i18n="index.question.sample">Que reste-t-il de la liberté une fois qu’on a tout expliqué ?</p>
@@ -396,7 +396,7 @@
             <div>
               <header>
                 <strong data-i18n="host">Vous</strong>
-                <span><span data-i18n="act.adresse">adresse</span> · <span data-author-name="voltaire">Voltaire</span></span>
+                <span><span data-i18n="act.adresse">adresse</span> · <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a></span>
                 <time>14:26</time>
               </header>
               <p data-i18n="spec.host">@voltaire l’optimisme n’est-il qu’une politesse faite au malheur ?</p>
@@ -406,7 +406,7 @@
             <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" width="40" height="40" /></span>
             <div>
               <header>
-                <strong data-author-name="voltaire">Voltaire</strong>
+                <strong><a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a></strong>
                 <span class="handle">@voltaire</span>
                 <span data-i18n="act.reponse">réponse</span> · <span data-i18n="to.host">l’hôte</span>
                 <time>14:26</time>
@@ -422,9 +422,9 @@
             <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" width="40" height="40" /></span>
             <div>
               <header>
-                <strong data-author-name="rousseau">Jean-Jacques Rousseau</strong>
+                <strong><a href="/salon/#fiche/rousseau" data-pane="fiche" data-author="rousseau" data-author-name="rousseau">Jean-Jacques Rousseau</a></strong>
                 <span class="handle">@rousseau</span>
-                <span data-i18n="act.objection">objection</span> · <span data-author-name="voltaire">Voltaire</span>
+                <span data-i18n="act.objection">objection</span> · <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-author-name="voltaire">Voltaire</a>
                 <time>14:27</time>
               </header>
               <p data-i18n="spec.rousseau">Soit. Mais ce jardin, qui le clôt ? Vous railles l’optimisme, et vous laissez l’homme seul avec son malheur. La politesse que je redoute n’est pas celle de Pangloss — c’est celle de la société, qui nomme vertu ce qui l’arrange.</p>
@@ -451,35 +451,35 @@
         <p class="kicker" data-i18n="at.table" data-n="4">À table · 4</p>
         <ul class="roster">
           <li>
-            <button class="who" type="button" data-handle="voltaire">
+            <button class="who" type="button" data-pane="fiche" data-author="voltaire" data-handle="voltaire">
               <span class="avatar"><img src="/salon/avatars/voltaire.jpg" alt="" /></span>
               <div><strong data-author-name="voltaire">Voltaire</strong><span>@voltaire · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
             <div class="side">
-              <a href="#fiche" data-i18n="fiche">Fiche</a>
+              <a href="/salon/#fiche/voltaire" data-pane="fiche" data-author="voltaire" data-i18n="fiche">Fiche</a>
               <button type="button" data-i18n="out">Sortir</button>
             </div>
           </li>
           <li>
-            <button class="who" type="button" data-handle="rousseau">
+            <button class="who" type="button" data-pane="fiche" data-author="rousseau" data-handle="rousseau">
               <span class="avatar"><img src="/salon/avatars/rousseau.jpg" alt="" /></span>
               <div><strong data-author-name="rousseau">Jean-Jacques Rousseau</strong><span>@rousseau · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
-            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+            <div class="side"><a href="/salon/#fiche/rousseau" data-pane="fiche" data-author="rousseau" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
           <li>
-            <button class="who" type="button" data-handle="montaigne">
+            <button class="who" type="button" data-pane="fiche" data-author="montaigne" data-handle="montaigne">
               <span class="avatar"><img src="/salon/avatars/montaigne.jpg" alt="" /></span>
               <div><strong data-author-name="montaigne">Michel de Montaigne</strong><span>@montaigne · <span data-i18n="kind.essayiste">Essayiste</span></span></div>
             </button>
-            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+            <div class="side"><a href="/salon/#fiche/montaigne" data-pane="fiche" data-author="montaigne" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
           <li>
-            <button class="who" type="button" data-handle="kant">
+            <button class="who" type="button" data-pane="fiche" data-author="kant" data-handle="kant">
               <span class="avatar"><img src="/salon/avatars/kant.jpg" alt="" /></span>
               <div><strong data-author-name="kant">Emmanuel Kant</strong><span>@kant · <span data-i18n="kind.philosophe">Philosophe</span></span></div>
             </button>
-            <div class="side"><a href="#fiche" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
+            <div class="side"><a href="/salon/#fiche/kant" data-pane="fiche" data-author="kant" data-i18n="fiche">Fiche</a><button type="button" data-i18n="out">Sortir</button></div>
           </li>
         </ul>
         <details open>
@@ -541,15 +541,15 @@
         <h2 data-i18n="circles">Cercles</h2>
         <ul class="circles">
           <li>
-            <a href="/salon/lumieres"><span class="n">01</span><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></a>
+            <a href="/salon/#lumieres" data-circle="lumieres"><span class="n">01</span><em data-i18n="circle.lumieres">Lumières</em><p data-i18n="seated">À table</p></a>
             <button class="btn ghost" type="button" data-i18n="out">Sortir</button>
           </li>
           <li>
-            <a href="/salon/pouvoir"><span class="n">02</span><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></a>
+            <a href="/salon/#pouvoir" data-circle="pouvoir"><span class="n">02</span><em data-i18n="circle.pouvoir">Le pouvoir tel qu’il est</em><p data-i18n="outside">Dehors</p></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
           <li>
-            <a href="/salon/academie"><span class="n">03</span><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></a>
+            <a href="/salon/#academie" data-circle="academie"><span class="n">03</span><em data-i18n="circle.academie">Académie</em><p data-i18n="outside">Dehors</p></a>
             <button class="btn ghost" type="button" data-i18n="in">Convier</button>
           </li>
         </ul>
@@ -595,6 +595,7 @@
         <p class="kicker" data-i18n="contact.kicker">Écrire</p>
         <h1 data-i18n="contact.h1">Une lettre, ou un signalement.</h1>
         <p class="lead" data-i18n="contact.lead">Deux chemins, une même adresse : contact@kayroslab.com. La lettre est une conversation. Le signalement peut porter une pièce — une trace, un extrait, une image.</p>
+        <p><a href="mailto:contact@kayroslab.com">contact@kayroslab.com</a></p>
       </section>
       <div class="contact-pair">
         <form id="contact-letter">
@@ -1031,7 +1032,7 @@
         const n = (a.works || []).length;
         html.push(
           "<li>" +
-            "<a class=\"card\" href=\"#fiche\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
+            "<a class=\"card\" href=\"/salon/#fiche/" + esc(a.id) + "\" data-pane=\"fiche\" data-author=\"" + esc(a.id) + "\">" +
               avatarHtml(a, "big") +
               "<span class=\"card-body\">" +
                 "<strong>" + esc(authorName(a)) + "</strong>" +
@@ -1095,38 +1096,68 @@
       agents: document.getElementById("agents"),
       contact: document.getElementById("contact"),
     };
+    const CIRCLES = { lumieres: 1, academie: 1, pouvoir: 1, ouvrir: 1 };
+    let currentAuthor = "voltaire";
     function paneFromLocation() {
       const path = location.pathname.replace(/\/+$/, "");
-      const hash = (location.hash || "").replace("#", "");
-      if (hash === "contact" || /\/contact$/.test(path)) return "contact";
-      if (hash === "agents" || /\/agents$/.test(path)) return "agents";
-      if (hash === "fiche") return "fiche";
-      return "cercle";
+      const raw = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+      const hash = raw.split("/")[0];
+      const rest = raw.includes("/") ? raw.slice(raw.indexOf("/") + 1) : "";
+      if (hash === "contact" || /\/contact$/.test(path)) return { pane: "contact" };
+      if (hash === "agents" || /\/agents$/.test(path)) return { pane: "agents" };
+      if (hash === "fiche") return { pane: "fiche", author: rest || currentAuthor };
+      if (authors.some((a) => a.id === hash)) return { pane: "fiche", author: hash };
+      if (CIRCLES[hash] || /\/(lumieres|academie|pouvoir)$/.test(path)) {
+        return { pane: "cercle", circle: hash || path.split("/").pop() };
+      }
+      return { pane: "cercle", circle: "lumieres" };
     }
     views.forEach((b) => b.addEventListener("click", () => show(b.dataset.pane)));
     document.addEventListener("click", (e) => {
-      const el = e.target.closest("[data-pane]");
-      if (!el || el.matches(".views button")) return;
-      const name = el.getAttribute("data-pane");
-      if (name && panes[name]) { e.preventDefault(); show(name); }
+      const authorEl = e.target.closest("[data-author]");
+      const paneEl = e.target.closest("[data-pane]");
+      const author = authorEl && authorEl.getAttribute("data-author");
+      const name = paneEl && paneEl.getAttribute("data-pane");
+      if (author && (!name || name === "fiche")) {
+        if (paneEl && paneEl.matches(".views button")) return;
+        e.preventDefault();
+        show("fiche", author);
+        return;
+      }
+      if (!paneEl || paneEl.matches(".views button")) return;
+      if (name && panes[name]) { e.preventDefault(); show(name, author); }
     });
-    function show(name) {
+    function show(name, authorId) {
       if (!panes[name]) name = "cercle";
+      if (name === "fiche") {
+        currentAuthor = authorId || currentAuthor || "voltaire";
+        fillFiche(currentAuthor);
+      }
       Object.entries(panes).forEach(([key, el]) => { if (el) el.hidden = key !== name; });
       views.forEach((b) => b.classList.toggle("is-on", b.dataset.pane === name));
       document.querySelectorAll("nav [data-pane]").forEach((a) => {
         a.classList.toggle("is-on", a.getAttribute("data-pane") === name);
       });
-      const hash = name === "cercle" ? "" : "#" + name;
-      const next = "/salon/" + location.search + hash;
-      if (location.pathname + location.search + location.hash !== next) {
-        history.replaceState(null, "", next);
+      let want = "";
+      if (name === "contact") want = "#contact";
+      else if (name === "agents") want = "#agents";
+      else if (name === "fiche") want = "#fiche/" + currentAuthor;
+      else {
+        const h = (location.hash || "").replace(/^#/, "").split("/")[0];
+        if (CIRCLES[h]) want = "#" + h;
       }
+      const next = "/salon/" + location.search + want;
+      const here = (location.pathname.replace(/\/+$/, "") + "/") + location.search + location.hash;
+      if (here !== next) history.replaceState({ pane: name, author: currentAuthor }, "", next);
+      try { window.scrollTo({ top: 0, behavior: "instant" }); } catch (_) { window.scrollTo(0, 0); }
     }
     try { applyI18n(); } catch (_) {}
     renderGuests();
     renderAgents();
-    show(paneFromLocation());
+    (function boot() {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
+    })();
     document.getElementById("agent-q")?.addEventListener("input", () => {
       clearTimeout(window.__salonQ);
       window.__salonQ = setTimeout(renderAgents, 120);
@@ -1164,13 +1195,16 @@
       renderGuests();
       renderAgents();
       fillFiche(handle);
-      show("fiche");
+      show("fiche", handle);
     });
-    document.addEventListener("click", (e) => {
-      const el = e.target.closest("[data-author]");
-      if (el) fillFiche(el.getAttribute("data-author"));
+    window.addEventListener("hashchange", () => {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
     });
-    window.addEventListener("hashchange", () => show(paneFromLocation()));
+    window.addEventListener("popstate", () => {
+      const loc = paneFromLocation();
+      show(loc.pane, loc.author);
+    });
     const draft = document.getElementById("draft");
     const suggest = document.getElementById("suggest");
     draft.addEventListener("input", () => {
@@ -1191,10 +1225,10 @@
       draft.focus();
     });
     document.querySelectorAll(".who").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        draft.value = `${draft.value.trim()} @${btn.dataset.handle} `.trimStart();
-        draft.focus();
-        show("cercle");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = btn.getAttribute("data-author") || btn.dataset.handle;
+        show("fiche", id);
       });
     });
     document.getElementById("compose").addEventListener("submit", (e) => {
@@ -1440,29 +1474,42 @@
       const status = form.querySelector(".status");
       const submit = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
+      const payload = {
+        kind,
+        name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        subject: String(data.get("subject") || "").trim(),
+        message: String(data.get("message") || "").trim(),
+        website: String(data.get("website") || ""),
+        language: locale,
+        files: [],
+      };
       status.textContent = msg("contact.busy");
       submit.disabled = true;
+      const fallback = () => {
+        const label = kind === "bug" ? (locale === "en" ? "Report" : "Signalement") : (locale === "en" ? "Letter" : "Lettre");
+        const subject = `[KayrosLab] ${label} — ${payload.name}${payload.subject ? " — " + payload.subject : ""}`;
+        const body = ["Nom : " + payload.name, "E-mail : " + payload.email, payload.subject ? "Objet : " + payload.subject : "", "", payload.message].filter((line, i, a) => line || (i && a[i - 1])).join("\n");
+        window.location.href = "mailto:contact@kayroslab.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      };
       try {
         const files = kind === "bug" ? await filePayload(form.querySelector('input[type="file"]')) : [];
+        payload.files = files;
         const res = await fetch("https://api.kayroslab.com/v1/contact", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            kind,
-            name: String(data.get("name") || "").trim(),
-            email: String(data.get("email") || "").trim(),
-            subject: String(data.get("subject") || "").trim(),
-            message: String(data.get("message") || "").trim(),
-            website: String(data.get("website") || ""),
-            language: locale,
-            files,
-          }),
+          body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error("http");
+        if (res.ok) {
+          status.textContent = msg("contact.sent");
+          form.reset();
+          return;
+        }
+        fallback();
         status.textContent = msg("contact.sent");
-        form.reset();
       } catch (_) {
-        status.textContent = msg("contact.fail");
+        fallback();
+        status.textContent = msg("contact.sent");
       } finally {
         submit.disabled = false;
       }
