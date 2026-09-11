@@ -311,7 +311,12 @@
     #c15t-banner .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .contact-pair { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); align-items: start; }
     .contact-pair form { display: grid; gap: 0.75rem; }
-    .contact-pair .status { min-height: 1.4em; color: var(--accent); margin: 0; }
+    .contact-pair .status { min-height: 1.4em; color: var(--muted); margin: 0; }
+    .contact-pair .status.is-ok { color: var(--ink); }
+    .contact-pair .status.is-err { color: var(--accent); }
+    .contact-pair .status-mail { margin: 0; }
+    .contact-pair form.is-err input:invalid,
+    .contact-pair form.is-err textarea:invalid { box-shadow: inset 0 0 0 1px var(--accent); }
     .colophon { margin: 0; font-size: 0.85rem; color: var(--muted); max-width: 52ch; }
     .contact-hp { position: absolute; left: -9999px; width: 0; height: 0; opacity: 0; }
     footer .legal { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
@@ -605,7 +610,8 @@
           <label><span data-i18n="contact.subject">Objet</span><input name="subject" maxlength="180" /></label>
           <label><span data-i18n="contact.message">Message</span><textarea name="message" required minlength="8" maxlength="8000" rows="6"></textarea></label>
           <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <p class="status" role="status"></p>
+          <p class="status" role="alert" aria-live="polite"></p>
+          <p class="status-mail" hidden></p>
           <button class="btn" type="submit" data-i18n="contact.send">Envoyer</button>
         </form>
         <form id="contact-bug">
@@ -617,7 +623,8 @@
           <label><span data-i18n="contact.files">Pièces jointes</span><input name="files" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.txt,.md,.csv,.log,.json,application/pdf,image/*,text/plain" /></label>
           <p class="lead" data-i18n="contact.files.help">Jusqu’à trois fichiers, 2 Mo chacun — PDF, image, texte.</p>
           <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <p class="status" role="status"></p>
+          <p class="status" role="alert" aria-live="polite"></p>
+          <p class="status-mail" hidden></p>
           <button class="btn" type="submit" data-i18n="contact.send">Envoyer</button>
         </form>
       </div>
@@ -748,6 +755,18 @@
         "contact.sent": "La lettre est partie.",
         "contact.fail": "L’envoi n’a pas abouti. Réessayez un peu plus tard.",
         "contact.busy": "Envoi…",
+        "contact.mailto": "Ouvrir le courrier vers contact@kayroslab.com",
+        "contact.err.name": "Indiquez un nom.",
+        "contact.err.email": "Le courriel n’est pas lisible.",
+        "contact.err.message": "Écrivez au moins huit caractères.",
+        "contact.err.files.count": "Trois fichiers au plus.",
+        "contact.err.files.size": "Chaque fichier : 2 Mo au plus.",
+        "contact.err.files.type": "Ce type de pièce n’est pas reçu — PDF, image, texte.",
+        "contact.err.invalid": "Le formulaire n’est pas complet.",
+        "contact.err.rate": "Trop de lettres pour cette heure. Revenez un peu plus tard.",
+        "contact.err.smtp": "Le relais n’est pas armé. Écrivez à contact@kayroslab.com, ou rouvrez le courrier.",
+        "contact.err.network": "Le salon n’a pas pu joindre le relais. Vérifiez la connexion.",
+        "contact.err.timeout": "L’envoi s’est trop fait attendre. Réessayez.",
         "legal.mentions": "Mentions légales",
         "legal.cookies": "Cookies",
         "legal.cgu": "Conditions générales",
@@ -871,6 +890,18 @@
         "contact.sent": "The letter has gone.",
         "contact.fail": "Sending did not succeed. Try again in a moment.",
         "contact.busy": "Sending…",
+        "contact.mailto": "Open mail to contact@kayroslab.com",
+        "contact.err.name": "Give a name.",
+        "contact.err.email": "The email is not readable.",
+        "contact.err.message": "Write at least eight characters.",
+        "contact.err.files.count": "Three files at most.",
+        "contact.err.files.size": "Each file: 2 MB at most.",
+        "contact.err.files.type": "That kind of file is not received — PDF, image, text.",
+        "contact.err.invalid": "The form is not complete.",
+        "contact.err.rate": "Too many letters this hour. Come back a little later.",
+        "contact.err.smtp": "The relay is not armed. Write to contact@kayroslab.com, or open the mail client.",
+        "contact.err.network": "The salon could not reach the relay. Check the connection.",
+        "contact.err.timeout": "Sending waited too long. Try again.",
         "legal.mentions": "Legal notice",
         "legal.cookies": "Cookies",
         "legal.cgu": "Terms of use",
@@ -1457,22 +1488,35 @@
         paintAuth();
       }
     })();
-    function filePayload(input) {
-      const files = [...(input?.files || [])].slice(0, 3);
-      return Promise.all(files.map((file) => new Promise((resolve, reject) => {
-        if (file.size > 2 * 1024 * 1024) {
-          reject(new Error(msg("contact.files.help")));
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = () => resolve({ name: file.name, type: file.type, data: String(reader.result || "") });
-        reader.onerror = () => reject(reader.error);
-        reader.readAsDataURL(file);
-      })));
-    }
-    async function sendContact(form, kind) {
+    const CONTACT_EXT = /\.(pdf|png|jpe?g|gif|webp|txt|md|csv|log|json)$/i;
+    function paintContactStatus(form, kind, text, mailto) {
       const status = form.querySelector(".status");
-      const submit = form.querySelector('button[type="submit"]');
+      const extra = form.querySelector(".status-mail");
+      form.classList.toggle("is-err", kind === "err");
+      if (status) {
+        status.textContent = text || "";
+        status.classList.toggle("is-ok", kind === "ok");
+        status.classList.toggle("is-err", kind === "err");
+        status.classList.toggle("is-busy", kind === "busy");
+      }
+      if (extra) {
+        extra.replaceChildren();
+        extra.hidden = !mailto;
+        if (mailto) {
+          const a = document.createElement("a");
+          a.href = mailto;
+          a.textContent = msg("contact.mailto");
+          extra.appendChild(a);
+        }
+      }
+    }
+    function contactMailto(kind, payload) {
+      const label = kind === "bug" ? (locale === "en" ? "Report" : "Signalement") : (locale === "en" ? "Letter" : "Lettre");
+      const subject = `[KayrosLab] ${label} — ${payload.name}${payload.subject ? " — " + payload.subject : ""}`;
+      const body = ["Nom : " + payload.name, "E-mail : " + payload.email, payload.subject ? "Objet : " + payload.subject : "", "", payload.message].filter((line, i, a) => line || (i && a[i - 1])).join("\n");
+      return "mailto:contact@kayroslab.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+    function readContactForm(form, kind) {
       const data = new FormData(form);
       const payload = {
         kind,
@@ -1484,32 +1528,80 @@
         language: locale,
         files: [],
       };
-      status.textContent = msg("contact.busy");
+      if (!payload.name) return { error: "contact.err.name", payload };
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) return { error: "contact.err.email", payload };
+      if (payload.message.length < 8) return { error: "contact.err.message", payload };
+      return { payload };
+    }
+    function filePayload(input) {
+      const files = [...(input?.files || [])];
+      if (files.length > 3) return Promise.reject(new Error("contact.err.files.count"));
+      return Promise.all(files.map((file) => new Promise((resolve, reject) => {
+        if (file.size > 2 * 1024 * 1024) {
+          reject(new Error("contact.err.files.size"));
+          return;
+        }
+        if (!CONTACT_EXT.test(file.name)) {
+          reject(new Error("contact.err.files.type"));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => resolve({ name: file.name, type: file.type, data: String(reader.result || "") });
+        reader.onerror = () => reject(new Error("contact.err.files.type"));
+        reader.readAsDataURL(file);
+      })));
+    }
+    function contactErrorKey(res, body) {
+      const code = body && body.code;
+      if (code === "RATE" || res.status === 429) return "contact.err.rate";
+      if (code === "FILE") return "contact.err.files.type";
+      if (code === "INVALID" || res.status === 400) return "contact.err.invalid";
+      if (code === "SMTP_UNCONFIGURED" || code === "SMTP" || res.status === 503 || res.status === 502) return "contact.err.smtp";
+      return "contact.fail";
+    }
+    async function sendContact(form, kind) {
+      const submit = form.querySelector('button[type="submit"]');
+      const parsed = readContactForm(form, kind);
+      if (parsed.error) {
+        form.reportValidity();
+        paintContactStatus(form, "err", msg(parsed.error));
+        return;
+      }
+      const payload = parsed.payload;
+      paintContactStatus(form, "busy", msg("contact.busy"));
       submit.disabled = true;
-      const fallback = () => {
-        const label = kind === "bug" ? (locale === "en" ? "Report" : "Signalement") : (locale === "en" ? "Letter" : "Lettre");
-        const subject = `[KayrosLab] ${label} — ${payload.name}${payload.subject ? " — " + payload.subject : ""}`;
-        const body = ["Nom : " + payload.name, "E-mail : " + payload.email, payload.subject ? "Objet : " + payload.subject : "", "", payload.message].filter((line, i, a) => line || (i && a[i - 1])).join("\n");
-        window.location.href = "mailto:contact@kayroslab.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      };
       try {
-        const files = kind === "bug" ? await filePayload(form.querySelector('input[type="file"]')) : [];
-        payload.files = files;
-        const res = await fetch("https://api.kayroslab.com/v1/contact", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+        if (kind === "bug") payload.files = await filePayload(form.querySelector('input[type="file"]'));
+        const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+        const timer = ctrl ? setTimeout(() => ctrl.abort("timeout"), 20000) : 0;
+        let res;
+        try {
+          res = await fetch("https://api.kayroslab.com/v1/contact", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(payload),
+            signal: ctrl ? ctrl.signal : undefined,
+          });
+        } finally { if (timer) clearTimeout(timer); }
+        let body = null;
+        try { body = await res.json(); } catch (_) {}
         if (res.ok) {
-          status.textContent = msg("contact.sent");
+          paintContactStatus(form, "ok", msg("contact.sent"));
           form.reset();
           return;
         }
-        fallback();
-        status.textContent = msg("contact.sent");
-      } catch (_) {
-        fallback();
-        status.textContent = msg("contact.sent");
+        const key = contactErrorKey(res, body);
+        const offerMail = key === "contact.err.smtp" || key === "contact.fail";
+        paintContactStatus(form, "err", msg(key), offerMail ? contactMailto(kind, payload) : "");
+      } catch (err) {
+        const raw = err && err.message ? String(err.message) : "";
+        if (raw.indexOf("contact.err.") === 0) {
+          paintContactStatus(form, "err", msg(raw));
+          return;
+        }
+        const timeout = err && (err.name === "AbortError" || err === "timeout" || raw === "timeout");
+        const key = timeout ? "contact.err.timeout" : "contact.err.network";
+        paintContactStatus(form, "err", msg(key), contactMailto(kind, payload));
       } finally {
         submit.disabled = false;
       }

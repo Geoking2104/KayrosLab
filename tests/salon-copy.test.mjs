@@ -198,5 +198,8 @@ test('#agents ouvre le volet auteurs', async () => {
     assert.match(page, /href="\/salon\/#academie"/);
     assert.match(page, /href="\/salon\/#pouvoir"/);
     assert.match(page, /mailto:contact@kayroslab.com/);
+    assert.match(page, /contact\.err\.smtp/);
+    assert.match(page, /role="alert"/);
+    assert.match(page, /paintContactStatus/);
   }
 });

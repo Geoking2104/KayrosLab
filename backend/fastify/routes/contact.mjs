@@ -92,14 +92,11 @@ export default async function contactRoute(app) {
     const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
       || req.ip
       || 'unknown';
-    if (!checkContactRate(ip)) {
-      return reply.code(429).send({ error: `Quota d'envoi dépassé (${CONTACT_MAX_PER_HOUR}/h). Réessayez plus tard.` });
-    }
 
     const isNote = req.body && (req.body.kind === 'message' || req.body.kind === 'bug');
     const parsed = isNote ? noteSchema.safeParse(req.body) : leadSchema.safeParse(req.body);
     if (!parsed.success) {
-      return reply.code(400).send({ error: 'formulaire invalide', issues: parsed.error.issues });
+      return reply.code(400).send({ error: 'formulaire invalide', code: 'INVALID', issues: parsed.error.issues });
     }
 
     const data = parsed.data;
@@ -111,14 +108,18 @@ export default async function contactRoute(app) {
     if (isNote && data.files?.length) {
       try { attachments = data.files.map(decodeAttachment); }
       catch (error) {
-        if (error.code === 'CONTACT_FILE') return reply.code(400).send({ error: error.message });
+        if (error.code === 'CONTACT_FILE') return reply.code(400).send({ error: error.message, code: 'FILE' });
         throw error;
       }
     }
 
+    if (!checkContactRate(ip)) {
+      return reply.code(429).send({ error: `Quota d'envoi dépassé (${CONTACT_MAX_PER_HOUR}/h). Réessayez plus tard.`, code: 'RATE' });
+    }
+
     const transport = app.kayrosContext.contactMailer || await smtpTransport();
     if (!transport) {
-      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (mot de passe d’application Gmail).' });
+      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (mot de passe d’application Gmail).', code: 'SMTP_UNCONFIGURED' });
     }
 
     const to = splitEmails(process.env.KAYROS_CONTACT_TO || DEFAULT_TO);
@@ -170,7 +171,7 @@ export default async function contactRoute(app) {
       return { ok: true, delivered: true };
     } catch (error) {
       app.log.error(error);
-      return reply.code(502).send({ error: `Erreur SMTP : ${error.message || error}` });
+      return reply.code(502).send({ error: `Erreur SMTP : ${error.message || error}`, code: 'SMTP' });
     }
   });
 }

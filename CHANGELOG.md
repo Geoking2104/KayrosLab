@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.22 (2026-09) — Erreurs du formulaire contact
+
+- Validation côté table : nom, courriel, message, pièces (nombre, poids, type).
+- L’API renvoie un `code` (INVALID, FILE, RATE, SMTP, SMTP_UNCONFIGURED).
+- L’échec ne se fait plus passer pour un envoi : message distinct, `mailto:` en recours.
+
 ## v0.25.21 (2026-09) — Navigation, fiches, contact
 
 - Un auteur (table, fil, cartes) ouvre sa fiche (`#fiche/voltaire`).

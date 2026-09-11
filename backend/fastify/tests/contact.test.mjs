@@ -73,6 +73,7 @@ describe('Contact public', () => {
       },
     });
     assert.equal(res.statusCode, 400);
+    assert.equal(res.json().code, 'FILE');
     assert.equal(sent.length, 0);
   });
 
@@ -107,5 +108,34 @@ describe('Contact public', () => {
     });
     assert.equal(res.statusCode, 200, res.body);
     assert.match(sent[0].subject, /Anne Dupont/);
+  });
+
+  it('signale un formulaire incomplet', async () => {
+    const res = await app.inject({
+      method: 'POST',
+      url: '/v1/contact',
+      payload: { kind: 'message', name: '', email: 'pas-un-mail', message: 'court' },
+    });
+    assert.equal(res.statusCode, 400);
+    const body = res.json();
+    assert.equal(body.code, 'INVALID');
+    assert.equal(sent.length, 0);
+  });
+
+  it('signale l’absence de relais SMTP', async () => {
+    ctx.contactMailer = null;
+    const res = await app.inject({
+      method: 'POST',
+      url: '/v1/contact',
+      payload: {
+        kind: 'message',
+        name: 'Hôte',
+        email: 'hote@example.com',
+        message: 'Une question pour la table, assez longue.',
+      },
+    });
+    assert.equal(res.statusCode, 503);
+    assert.equal(res.json().code, 'SMTP_UNCONFIGURED');
+    assert.equal(sent.length, 0);
   });
 });
