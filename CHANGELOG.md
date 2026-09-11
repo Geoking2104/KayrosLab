@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.17 (2026-09) — Mentions, cookies, CGU, contact
+
+- Pied de Salon : mentions légales, cookies (c15t), conditions générales, onglet Contact.
+- SASU KayrosLab en cours de formation, 36 rue de l’abbé Groult, 75015 Paris — Geoffroy de La Tournelle.
+- Lettre et signalement (pièces jointes) vers contact@kayroslab.com.
+
 ## v0.25.16 (2026-09) — Salon : SSO, mémoire, anglais sans français
 
 - Entrer / Partir : OpenID (Authelia), même client que la console, `redirect_uri` `/salon/`.

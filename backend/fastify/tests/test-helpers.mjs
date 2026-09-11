@@ -10,6 +10,7 @@ import connectorsRoute from '../routes/connectors.mjs';
 import gatesRoute from '../routes/gates.mjs';
 import swarmRoute from '../routes/swarm.mjs';
 import salesOracleRoute from '../routes/sales-oracle.mjs';
+import contactRoute from '../routes/contact.mjs';
 import mcpRoute from '../routes/mcp.mjs';
 import buildContext from '../lib/context.mjs';
 
@@ -44,6 +45,7 @@ export async function buildTestApp(env = {}) {
     app.addHook('preHandler', async (req, reply) => {
       if (req.method === 'GET') return;
       const p = (req.url || '').split('?')[0];
+      if (p === '/v1/contact') return;
       if (p.startsWith('/v1/demo/')) return;
       if (p === '/v1/auth/login' || p === '/v1/auth/register') return;
       if (p.startsWith('/v1/auth/password/')) return;
@@ -63,6 +65,7 @@ export async function buildTestApp(env = {}) {
   await app.register(gatesRoute);
   await app.register(swarmRoute);
   await app.register(salesOracleRoute);
+  await app.register(contactRoute);
   await app.register(mcpRoute);
   return { app, ctx };
 }

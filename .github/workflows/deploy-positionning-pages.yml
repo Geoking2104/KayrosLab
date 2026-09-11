@@ -15,6 +15,7 @@ on:
       - 'backend/web/locales/**'
       - 'backend/web/public/assets/**'
       - 'backend/web/public/salon/**'
+      - 'legal/**'
       - 'crates/salon-core/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
@@ -160,6 +161,11 @@ jobs:
           else
             echo "ERROR: salon static missing (footer would 404)" >&2
             exit 1
+          fi
+
+          if [ -d legal ]; then
+            mkdir -p deploy/legal
+            cp -r legal/. deploy/legal/
           fi
 
           touch deploy/.nojekyll

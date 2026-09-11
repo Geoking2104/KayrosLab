@@ -47,14 +47,18 @@ test('assemble-www copie accueil, salon et console', async () => {
       },
     );
     assert.equal(result.status, 0, result.stderr || result.stdout);
-    const [home, salon, consoleIndex] = await Promise.all([
+    const [home, salon, consoleIndex, legal] = await Promise.all([
       readFile(join(dest, 'index.fr.html'), 'utf8'),
       readFile(join(dest, 'salon/index.html'), 'utf8'),
       readFile(join(dest, 'console/index.html'), 'utf8'),
+      readFile(join(dest, 'legal/index.html'), 'utf8'),
     ]);
     assert.match(home, /href="\/salon\/">Salon</);
+    assert.match(home, /\/legal\/#mentions/);
     assert.match(salon, /Un cercle est une table/);
+    assert.match(salon, /id="contact"/);
     assert.match(consoleIndex, /<div id="root">/);
+    assert.match(legal, /SASU KayrosLab/);
   } finally {
     await rm(dest, { recursive: true, force: true });
   }

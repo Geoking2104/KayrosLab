@@ -47,6 +47,33 @@ test('version EN : plus de copie française dans le chrome ni le spécimen', asy
   assert.match(chrome, /t\("auth.enter"\)/);
 });
 
+test('pied de Salon : mentions, cookies c15t, CGU, contact', async () => {
+  const html = await read('salon/index.html');
+  const published = await read('backend/web/public/salon/index.html');
+  const legal = await read('legal/index.html');
+  const consent = await read('legal/c15t-consent.js');
+  for (const page of [html, published]) {
+    assert.match(page, /id="contact"/);
+    assert.match(page, /id="contact-letter"/);
+    assert.match(page, /id="contact-bug"/);
+    assert.match(page, /type="file"/);
+    assert.match(page, /\/legal\/#mentions/);
+    assert.match(page, /\/legal\/#cookies/);
+    assert.match(page, /\/legal\/#cgu/);
+    assert.match(page, /id="c15t-banner"/);
+    assert.match(page, /\/legal\/c15t-consent\.js/);
+    assert.match(page, /36, rue de l’abbé Groult/);
+    assert.match(page, /contact@kayroslab.com/);
+  }
+  assert.match(legal, /SASU KayrosLab/);
+  assert.match(legal, /Geoffroy de La Tournelle/);
+  assert.match(legal, /00 33 6 69 28 29 16/);
+  assert.match(legal, /OVH SAS/);
+  assert.match(legal, /github.com\/c15t\/c15t/);
+  assert.match(consent, /github.com\/c15t\/c15t/);
+  assert.match(consent, /getOrCreateConsentRuntime/);
+});
+
 test('Salon i18n : cercle, convier, personnalité, auteurs', async () => {
   const i18n = await read('salon/src/lib/salon/i18n.ts');
   assert.match(i18n, /tout le monde écoute/);

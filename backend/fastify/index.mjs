@@ -11,7 +11,7 @@ import { applyEnvFileDefaults } from './lib/env-file.mjs';
 // ecraser une valeur non vide injectee par l'environnement de production.
 applyEnvFileDefaults();
 
-const app = Fastify({ logger: true, bodyLimit: 1048576 });
+const app = Fastify({ logger: true, bodyLimit: 5 * 1024 * 1024 });
 
 // Slack and Discord sign the exact request bytes. Preserve them while still
 // exposing the usual parsed JSON body to routes.

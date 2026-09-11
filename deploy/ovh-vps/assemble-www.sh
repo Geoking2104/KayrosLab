@@ -79,6 +79,11 @@ fi
 mkdir -p "${stage}/salon"
 cp -a "${APP_DIR}/backend/web/public/salon/." "${stage}/salon/"
 
+if [[ -d "${APP_DIR}/legal" ]]; then
+  mkdir -p "${stage}/legal"
+  cp -a "${APP_DIR}/legal/." "${stage}/legal/"
+fi
+
 if [[ -f "${APP_DIR}/frontend/positionning-app/dist/index.html" ]]; then
   mkdir -p "${stage}/positionner-app"
   cp -a "${APP_DIR}/frontend/positionning-app/dist/." "${stage}/positionner-app/"

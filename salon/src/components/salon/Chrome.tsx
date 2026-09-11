@@ -12,9 +12,10 @@ import {
   signOutSalon,
   startSalonSso,
 } from "@/lib/salon/sso";
+import { ConsentBanner } from "./ConsentBanner";
 import "./salon.css";
 
-export function SalonChrome({ children, current }: { children: ReactNode; current?: "foyer" | "seance" | "agents" }) {
+export function SalonChrome({ children, current }: { children: ReactNode; current?: "foyer" | "seance" | "agents" | "contact" }) {
   const setHydrated = useSalon((s) => s.setHydrated);
   const customs = useSalon((s) => s.customs);
   const extraWorks = useSalon((s) => s.extraWorks);
@@ -109,6 +110,9 @@ export function SalonChrome({ children, current }: { children: ReactNode; curren
           <Link to="/salon/agents" aria-current={current === "agents" ? "page" : undefined}>
             {t("nav.agents")}
           </Link>
+          <Link to="/salon/contact" aria-current={current === "contact" ? "page" : undefined}>
+            {t("contact")}
+          </Link>
           <span className="salon-lang" role="group" aria-label={t("nav.lang")}>
             <button type="button" className={locale === "fr" ? "is-on" : undefined} onClick={() => setLocale("fr")}>
               {t("lang.fr")}
@@ -130,10 +134,14 @@ export function SalonChrome({ children, current }: { children: ReactNode; curren
       <footer className="salon-foot">
         <p>{t("foot.line")}</p>
         <nav aria-label={t("foot.nav")}>
-          <Link to="/salon/agents">{t("nav.agents")}</Link>
-          <a href="mailto:contact@kayroslab.com">{t("contact")}</a>
+          <a href="/legal/#mentions">{t("legal.mentions")}</a>
+          <a href="/legal/#cookies">{t("legal.cookies")}</a>
+          <a href="/legal/#cgu">{t("legal.cgu")}</a>
+          <Link to="/salon/contact">{t("contact")}</Link>
         </nav>
+        <p className="salon-colophon">{t("legal.colophon")}</p>
       </footer>
+      <ConsentBanner />
     </div>
   );
 }

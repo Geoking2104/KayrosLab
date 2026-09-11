@@ -26,6 +26,7 @@ on:
       - 'tokens.css'
       - 'studio.css'
       - 'backend/web/public/salon/**'
+      - 'legal/**'
       - 'backend/web/public/console/**'
       - 'backend/web/public/assets/**'
       - 'kayroslab-complete-with-ai-agents.html'

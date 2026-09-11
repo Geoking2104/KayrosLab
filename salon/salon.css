@@ -858,6 +858,64 @@ button:not(:disabled),
   color: var(--accent);
   font-size: 0.9rem;
 }
+.salon-colophon {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 52ch;
+}
+.c15t-banner {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem max(var(--space-xl), env(safe-area-inset-right, 0px));
+  padding-left: max(var(--space-xl), env(safe-area-inset-left, 0px));
+  background: var(--paper-2);
+  border-top: 1px solid var(--rule);
+}
+.c15t-banner p {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+.c15t-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.salon-contact-pair {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  align-items: start;
+}
+.salon-contact-form {
+  display: grid;
+  gap: 0.75rem;
+}
+.salon-contact-form > label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.salon-contact-status {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--accent);
+}
+.salon-hp {
+  position: absolute;
+  left: -9999px;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
 .salon-how {
   margin: 0.45rem 0 0;
   color: var(--muted);

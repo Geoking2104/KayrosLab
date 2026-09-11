@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mentions légales · KayrosLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: oklch(96.4% 0.016 85);
+      --paper-2: oklch(93.5% 0.022 80);
+      --ink: oklch(22% 0.028 48);
+      --ink-2: oklch(40% 0.02 50);
+      --muted: oklch(48% 0.018 55);
+      --rule: oklch(84% 0.02 80);
+      --accent: oklch(42% 0.12 25);
+      --display: "Fraunces", "Iowan Old Style", Palatino, serif;
+      --body: "Source Sans 3", "Segoe UI", sans-serif;
+      --pad-x: clamp(1rem, 4.2vw, 2.5rem);
+      --pad-y: clamp(1rem, 3vw, 2.5rem);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); }
+    body { min-height: 100dvh; display: flex; flex-direction: column; }
+    a { color: var(--accent); text-decoration: none; }
+    header.mast, footer {
+      padding: var(--pad-y) max(var(--pad-x), env(safe-area-inset-right, 0px));
+      padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+      display: flex; justify-content: space-between; gap: 1rem 1.5rem; flex-wrap: wrap; align-items: end;
+    }
+    header.mast { border-bottom: 1px solid var(--rule); }
+    footer { border-top: 1px solid var(--rule); margin-top: auto; display: grid; gap: 0.75rem; }
+    header.mast nav, footer nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+    header.mast nav a, footer nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink-2); }
+    header.mast nav a.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .word { font-family: var(--display); font-size: 1.65rem; font-weight: 550; letter-spacing: -0.03em; color: var(--ink); }
+    .word small { display: block; margin-top: 0.35rem; font-family: var(--body); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .lang button { background: none; border: 0; min-height: 44px; min-width: 44px; font: inherit; color: var(--muted); cursor: pointer; }
+    .lang button.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    main { padding: var(--pad-y) max(var(--pad-x), env(safe-area-inset-right, 0px)); padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); display: grid; gap: 1.5rem; flex: 1; max-width: 46rem; }
+    .kicker { margin: 0; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.72rem; font-weight: 600; }
+    h1 { font-family: var(--display); font-weight: 550; letter-spacing: -0.03em; font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1.12; margin: 0.2rem 0 0.5rem; max-width: 16ch; }
+    h2 { font-family: var(--display); font-weight: 550; font-size: 1.35rem; margin: 1.5rem 0 0.4rem; }
+    .lead, article p, article li { color: var(--ink-2); line-height: 1.55; }
+    article p { margin: 0 0 0.75rem; }
+    article ul { margin: 0 0 0.75rem; padding-left: 1.1rem; }
+    .views { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+    .views a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink-2); }
+    .views a.is-on { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+    .pane[hidden] { display: none !important; }
+    .colophon { margin: 0; font-size: 0.85rem; color: var(--muted); max-width: 52ch; }
+    #c15t-banner {
+      position: sticky; bottom: 0; z-index: 20;
+      display: grid; gap: 0.75rem;
+      padding: 1rem max(var(--pad-x), env(safe-area-inset-right, 0px));
+      padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px));
+      background: var(--paper-2); border-top: 1px solid var(--rule);
+    }
+    #c15t-banner[hidden] { display: none !important; }
+    #c15t-banner p { margin: 0; max-width: 46ch; font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
+    #c15t-banner .row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn { min-height: 44px; padding: 0 1rem; border: 1px solid var(--accent); background: var(--accent); color: var(--paper); font: inherit; cursor: pointer; }
+    .btn.ghost { background: transparent; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="mast">
+    <a class="word" href="/">KayrosLab<small data-i18n="legal.sub">mentions</small></a>
+    <nav aria-label="KayrosLab">
+      <a href="/salon/">Salon</a>
+      <a href="/salon/#contact" data-i18n="contact">Contact</a>
+      <span class="lang" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" class="is-on">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </span>
+    </nav>
+  </header>
+  <main>
+    <p class="views" role="tablist">
+      <a href="#mentions" data-doc="mentions" class="is-on" data-i18n="legal.mentions">Mentions légales</a>
+      <a href="#cookies" data-doc="cookies" data-i18n="legal.cookies">Cookies</a>
+      <a href="#cgu" data-doc="cgu" data-i18n="legal.cgu">Conditions générales</a>
+    </p>
+
+    <article id="mentions" class="pane">
+      <p class="kicker" data-i18n="legal.mentions">Mentions légales</p>
+      <h1 data-i18n="mentions.h1">Qui tient cette maison.</h1>
+      <div data-i18n-html="mentions.body"></div>
+    </article>
+    <article id="cookies" class="pane" hidden>
+      <p class="kicker" data-i18n="legal.cookies">Cookies</p>
+      <h1 data-i18n="cookies.h1">Ce que le salon retient.</h1>
+      <div data-i18n-html="cookies.body"></div>
+      <p><button class="btn ghost" type="button" data-c15t="review" data-i18n="cookies.review">Revoir le consentement</button></p>
+    </article>
+    <article id="cgu" class="pane" hidden>
+      <p class="kicker" data-i18n="legal.cgu">Conditions générales</p>
+      <h1 data-i18n="cgu.h1">La table, et ses règles.</h1>
+      <div data-i18n-html="cgu.body"></div>
+    </article>
+  </main>
+  <footer>
+    <p class="colophon" data-i18n="legal.colophon">SASU KayrosLab, en cours de formation · 36, rue de l’abbé Groult, 75015 Paris</p>
+    <nav aria-label="Pied">
+      <a href="/legal/#mentions" data-i18n="legal.mentions">Mentions légales</a>
+      <a href="/legal/#cookies" data-i18n="legal.cookies">Cookies</a>
+      <a href="/legal/#cgu" data-i18n="legal.cgu">Conditions générales</a>
+      <a href="/salon/#contact" data-i18n="contact">Contact</a>
+    </nav>
+  </footer>
+  <aside id="c15t-banner" hidden>
+    <p data-i18n="cookies.banner">Ce salon se souvient de votre table — la langue, l’entrée, la mémoire des cercles. Rien d’autre, sauf si vous l’ouvrez.</p>
+    <div class="row">
+      <button class="btn" type="button" data-c15t="necessary" data-i18n="cookies.essential">Garder l’essentiel</button>
+      <button class="btn ghost" type="button" data-c15t="all" data-i18n="cookies.all">Tout accorder</button>
+    </div>
+  </aside>
+  <script type="module" src="/legal/c15t-consent.js"></script>
+  <script>
+    const I18N = {
+      fr: {
+        "legal.sub": "mentions",
+        "legal.mentions": "Mentions légales",
+        "legal.cookies": "Cookies",
+        "legal.cgu": "Conditions générales",
+        "contact": "Contact",
+        "legal.colophon": "SASU KayrosLab, en cours de formation · 36, rue de l’abbé Groult, 75015 Paris",
+        "mentions.h1": "Qui tient cette maison.",
+        "cookies.h1": "Ce que le salon retient.",
+        "cgu.h1": "La table, et ses règles.",
+        "cookies.banner": "Ce salon se souvient de votre table — la langue, l’entrée, la mémoire des cercles. Rien d’autre, sauf si vous l’ouvrez.",
+        "cookies.essential": "Garder l’essentiel",
+        "cookies.all": "Tout accorder",
+        "cookies.review": "Revoir le consentement",
+        "mentions.body": "<h2>Éditeur</h2><p>Le site <strong>kayroslab.com</strong> (dont le Salon) est édité par <strong>SASU KayrosLab</strong>, société par actions simplifiée unipersonnelle <em>en cours de formation</em>.</p><p>Siège : 36, rue de l’abbé Groult, 75015 Paris, France.</p><p>Directeur de la publication : <strong>Geoffroy de La Tournelle</strong>.</p><p>Téléphone : 00 33 6 69 28 29 16 · Courriel : <a href=\"mailto:contact@kayroslab.com\">contact@kayroslab.com</a>.</p><p>Le numéro SIREN / RCS sera porté ici dès l’immatriculation.</p><h2>Hébergement</h2><p>OVH SAS, 2 rue Kellermann, 59100 Roubaix, France · RCS Lille Métropole 424 761 419 · <a href=\"https://www.ovhcloud.com\">ovhcloud.com</a>.</p><h2>Données personnelles</h2><p>Responsable de traitement : Geoffroy de La Tournelle, pour SASU KayrosLab. Finalités : compte (SSO), mémoire des cercles, lettres et signalements. Base : exécution du service, intérêt légitime, consentement pour la mesure. Pas de cession commerciale. Durée : compte tant qu’il est actif ; contact trois ans ; consentement cookies treize mois. Droits d’accès, rectification, effacement, opposition : <a href=\"mailto:contact@kayroslab.com\">contact@kayroslab.com</a>. Réclamation : CNIL.</p>",
+        "cookies.body": "<p>Le consentement est tenu par <a href=\"https://github.com/c15t/c15t\">c15t</a>, en mode local : rien n’est envoyé à un tiers pour décider à votre place.</p><h2>Nécessaires</h2><p>Langue, entrée au salon, mémoire des cercles, jeton de session. Sans eux la table ne se souvient pas. Ils ne mesurent personne.</p><h2>Mesure</h2><p>Aucun script de mesure n’est chargé aujourd’hui. Si vous accordez cette catégorie, elle pourra servir, plus tard, à compter les visites — jamais à vendre un profil.</p><p>Vous pouvez revoir ce choix à tout moment.</p>",
+        "cgu.body": "<h2>Objet</h2><p>KayrosLab met à disposition un salon littéraire et philosophique : des auteurs du domaine public y parlent depuis leurs livres. Le service est gratuit, fourni en l’état, sans conseil juridique, médical ou financier.</p><h2>Compte</h2><p>L’entrée (SSO) conserve votre mémoire de conversation. Vous restez responsable de ce que vous écrivez à la table.</p><h2>Contenus</h2><p>Les œuvres convoquées sont du domaine public. L’interface, la marque KayrosLab et le Salon sont la propriété de l’éditeur. Toute reproduction de l’interface hors usage personnel est soumise à autorisation.</p><h2>Signalement</h2><p>Un abus, un défaut, une remarque : l’onglet Contact. Nous pouvons retirer un propos ou suspendre un compte qui nuirait à la table.</p><h2>Responsabilité</h2><p>Les réponses des convives sont des reconstitutions à partir de textes. Elles n’engagent pas les auteurs disparus, ni l’éditeur au-delà de la loi. L’éditeur ne garantit ni l’absence d’interruption, ni l’exactitude d’une réplique.</p><h2>Droit</h2><p>Droit français. Tribunal judiciaire de Paris, sous réserve des règles d’ordre public applicables au consommateur.</p><p>SASU KayrosLab, en cours de formation — 36, rue de l’abbé Groult, 75015 Paris.</p>",
+      },
+      en: {
+        "legal.sub": "legal notice",
+        "legal.mentions": "Legal notice",
+        "legal.cookies": "Cookies",
+        "legal.cgu": "Terms of use",
+        "contact": "Contact",
+        "legal.colophon": "SASU KayrosLab, in the course of formation · 36, rue de l’abbé Groult, 75015 Paris",
+        "mentions.h1": "Who keeps this house.",
+        "cookies.h1": "What the salon keeps.",
+        "cgu.h1": "The table, and its rules.",
+        "cookies.banner": "This salon remembers your table — language, entrance, the memory of circles. Nothing else, unless you open it.",
+        "cookies.essential": "Keep the essential",
+        "cookies.all": "Grant all",
+        "cookies.review": "Review consent",
+        "mentions.body": "<h2>Publisher</h2><p>The site <strong>kayroslab.com</strong> (including the Salon) is published by <strong>SASU KayrosLab</strong>, a simplified joint-stock company <em>in the course of formation</em>.</p><p>Registered office: 36, rue de l’abbé Groult, 75015 Paris, France.</p><p>Publication director: <strong>Geoffroy de La Tournelle</strong>.</p><p>Telephone: 00 33 6 69 28 29 16 · Email: <a href=\"mailto:contact@kayroslab.com\">contact@kayroslab.com</a>.</p><p>The SIREN / RCS number will be added upon registration.</p><h2>Hosting</h2><p>OVH SAS, 2 rue Kellermann, 59100 Roubaix, France · RCS Lille Métropole 424 761 419 · <a href=\"https://www.ovhcloud.com\">ovhcloud.com</a>.</p><h2>Personal data</h2><p>Controller: Geoffroy de La Tournelle, for SASU KayrosLab. Purposes: account (SSO), circle memory, letters and reports. Basis: performance of the service, legitimate interest, consent for measurement. No commercial sale. Retention: account while active; contact three years; cookie consent thirteen months. Access, rectification, erasure, objection: <a href=\"mailto:contact@kayroslab.com\">contact@kayroslab.com</a>. Complaint: CNIL.</p>",
+        "cookies.body": "<p>Consent is held by <a href=\"https://github.com/c15t/c15t\">c15t</a>, offline: nothing is sent to a third party to decide for you.</p><h2>Necessary</h2><p>Language, entrance to the salon, memory of the circles, session token. Without them the table does not remember. They measure no one.</p><h2>Measurement</h2><p>No measurement script is loaded today. If you grant this category, it may later count visits — never sell a profile.</p><p>You may review this choice at any time.</p>",
+        "cgu.body": "<h2>Purpose</h2><p>KayrosLab offers a literary and philosophical salon: public-domain authors speak from their books. The service is free, provided as is, and is not legal, medical or financial advice.</p><h2>Account</h2><p>Entering (SSO) keeps your conversation memory. You remain responsible for what you write at the table.</p><h2>Content</h2><p>The works summoned are in the public domain. The interface, the KayrosLab mark and the Salon belong to the publisher. Reproduction of the interface beyond personal use requires permission.</p><h2>Reports</h2><p>Abuse, a defect, a remark: the Contact tab. We may remove a remark or suspend an account that would harm the table.</p><h2>Liability</h2><p>The guests’ replies are reconstitutions from texts. They do not bind the dead authors, nor the publisher beyond the law. Continuity and the accuracy of a replica are not warranted.</p><h2>Law</h2><p>French law. Tribunal judiciaire de Paris, subject to mandatory consumer protections.</p><p>SASU KayrosLab, in the course of formation — 36, rue de l’abbé Groult, 75015 Paris.</p>",
+      },
+    };
+    let locale = localStorage.getItem('salon-locale') === 'en' ? 'en' : 'fr';
+    function msg(key) { return (I18N[locale] && I18N[locale][key]) || I18N.fr[key] || key; }
+    function apply() {
+      document.documentElement.lang = locale;
+      document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = msg(el.getAttribute('data-i18n')); });
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => { el.innerHTML = msg(el.getAttribute('data-i18n-html')); });
+      document.querySelectorAll('[data-lang]').forEach((btn) => btn.classList.toggle('is-on', btn.getAttribute('data-lang') === locale));
+      const titles = { mentions: msg('legal.mentions'), cookies: msg('legal.cookies'), cgu: msg('legal.cgu') };
+      const current = (location.hash || '#mentions').slice(1);
+      document.title = (titles[current] || titles.mentions) + ' · KayrosLab';
+      try { localStorage.setItem('salon-locale', locale); } catch (_) {}
+    }
+    function show(name) {
+      document.querySelectorAll('.pane').forEach((el) => { el.hidden = el.id !== name; });
+      document.querySelectorAll('.views a').forEach((a) => a.classList.toggle('is-on', a.getAttribute('data-doc') === name));
+      const hash = '#' + name;
+      if (location.hash !== hash) history.replaceState(null, '', '/legal/' + hash);
+      apply();
+    }
+    document.querySelectorAll('[data-lang]').forEach((btn) => {
+      btn.addEventListener('click', () => { locale = btn.getAttribute('data-lang'); apply(); });
+    });
+    document.querySelectorAll('[data-doc]').forEach((a) => {
+      a.addEventListener('click', (e) => { e.preventDefault(); show(a.getAttribute('data-doc')); });
+    });
+    const initial = (location.hash || '#mentions').replace('#', '');
+    show(['mentions', 'cookies', 'cgu'].includes(initial) ? initial : 'mentions');
+  </script>
+</body>
+</html>
