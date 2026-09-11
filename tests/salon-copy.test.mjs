@@ -72,6 +72,12 @@ test('pied de Salon : mentions, cookies c15t, CGU, contact', async () => {
   assert.match(legal, /github.com\/c15t\/c15t/);
   assert.match(consent, /github.com\/c15t\/c15t/);
   assert.match(consent, /getOrCreateConsentRuntime/);
+  assert.match(consent, /GTM-TXNT5J6M|applyGtmConsent/);
+  for (const page of [html, published, legal]) {
+    assert.match(page, /GTM-TXNT5J6M/);
+    assert.match(page, /googletagmanager.com\/gtm.js/);
+    assert.match(page, /googletagmanager.com\/ns.html/);
+  }
 });
 
 test('Salon i18n : cercle, convier, personnalité, auteurs', async () => {

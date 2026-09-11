@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.25.23 (2026-09) — Google Tag Manager
+
+- Conteneur `GTM-TXNT5J6M` en tête et `noscript` dans le corps (accueil, Salon, mentions).
+- Consent Mode : mesure refusée tant que c15t n’accorde pas la catégorie.
+
 ## v0.25.22 (2026-09) — Erreurs du formulaire contact
 
 - Validation côté table : nom, courriel, message, pièces (nombre, poids, type).

@@ -36,6 +36,19 @@ function persist(consents) {
   });
   try { localStorage.setItem(KEY, payload); } catch (_) {}
   cookieSet(KEY, payload);
+  applyGtmConsent(Boolean(consents.measurement));
+}
+
+function applyGtmConsent(measurement) {
+  window.dataLayer = window.dataLayer || [];
+  const gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+  window.gtag = gtag;
+  gtag('consent', 'update', {
+    analytics_storage: measurement ? 'granted' : 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
 }
 
 function localRuntime() {
@@ -132,8 +145,14 @@ function bindBanner(store) {
 loadC15t().then(({ consentStore }) => {
   window.__c15t = consentStore;
   bindBanner(consentStore);
+  const state = consentStore.getState();
+  applyGtmConsent(Boolean(state.consents && state.consents.measurement));
+  consentStore.subscribe((next) => {
+    applyGtmConsent(Boolean(next.consents && next.consents.measurement));
+  });
 }).catch(() => {
   const { consentStore } = localRuntime();
   window.__c15t = consentStore;
   bindBanner(consentStore);
+  applyGtmConsent(false);
 });
