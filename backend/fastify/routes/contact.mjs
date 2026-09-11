@@ -52,13 +52,14 @@ function checkContactRate(ip) {
   return entry.count <= CONTACT_MAX_PER_HOUR;
 }
 
+import { smtpFromEnv, createSmtpTransport } from '../lib/smtp.mjs';
+
 let transportPromise = null;
 async function smtpTransport() {
-  const smtpUrl = process.env.KAYROS_SMTP_URL || '';
-  if (!smtpUrl) return null;
-  if (!transportPromise) {
-    transportPromise = import('nodemailer').then(({ createTransport }) => createTransport(smtpUrl));
-  }
+  if (transportPromise) return transportPromise;
+  const smtp = smtpFromEnv();
+  if (!smtp.enabled) return null;
+  transportPromise = createSmtpTransport(smtp);
   return transportPromise;
 }
 
@@ -117,11 +118,13 @@ export default async function contactRoute(app) {
 
     const transport = app.kayrosContext.contactMailer || await smtpTransport();
     if (!transport) {
-      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_URL pour envoyer les demandes de contact.' });
+      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (boîte IONOS contact@kayroslab.com).' });
     }
 
     const to = splitEmails(process.env.KAYROS_CONTACT_TO || DEFAULT_TO);
-    const from = process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost';
+    const from = process.env.KAYROS_MAIL_FROM
+      || app.kayrosContext.smtp?.from
+      || 'KayrosLab <contact@kayroslab.com>';
     let subject;
     let text;
     if (isNote) {

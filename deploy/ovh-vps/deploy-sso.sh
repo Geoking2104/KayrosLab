@@ -139,6 +139,12 @@ ${OIDC_PEM_INDENTED}
 YAML
 chmod 600 "${CONF_DIR}/configuration.yml"
 
+if [[ -f "${BACKEND_ENV}" ]]; then
+  node "${APP_DIR}/deploy/ovh-vps/patch-authelia-smtp.mjs" \
+    "${BACKEND_ENV}" "${CONF_DIR}/configuration.yml" \
+    || echo "AVERTISSEMENT : notifier Authelia non mis à jour." >&2
+fi
+
 export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
 docker compose -f "${COMPOSE}" pull
 docker compose -f "${COMPOSE}" up -d

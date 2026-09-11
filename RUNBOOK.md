@@ -113,11 +113,23 @@ Solution : définir la variable dans `.env`, redémarrer.
 
 ### Les notifications email ne partent pas
 
-Cause : `nodemailer` non installé ou `KAYROS_SMTP_URL` invalide.
+Le domaine est chez IONOS (`mx00.ionos.fr`, SPF `_spf-eu.ionos.com`). KayrosLab n’envoie pas depuis le VPS : il s’authentifie sur `smtp.ionos.fr:465` avec la boîte `contact@kayroslab.com`.
+
+Secret GitHub à renseigner : **`KAYROS_SMTP_PASS`** (mot de passe de cette boîte). Puis relancer le déploiement VPS.
+
+```
+KAYROS_SMTP_HOST=smtp.ionos.fr
+KAYROS_SMTP_USER=contact@kayroslab.com
+KAYROS_SMTP_PASS=…          # secret, jamais dans git
+KAYROS_MAIL_FROM=KayrosLab <contact@kayroslab.com>
+```
+
 Vérifier :
 ```bash
-# Tester le transport SMTP
-node -e "const {createTransport}=await import('nodemailer'); const t=createTransport('$KAYROS_SMTP_URL'); console.log(await t.verify())"
+curl -s https://api.kayroslab.com/health | grep smtp
+# Tester le transport
+cd /opt/kayroslab/backend/fastify
+node --input-type=module -e 'import { smtpFromEnv, createSmtpTransport } from "./lib/smtp.mjs"; const s=smtpFromEnv(); const t=await createSmtpTransport(s); console.log(s.host, await t.verify());'
 ```
 
 ### Rate limit atteint (429)

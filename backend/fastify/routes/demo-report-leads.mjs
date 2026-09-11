@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { smtpFromEnv, createSmtpTransport } from '../lib/smtp.mjs';
 
 const DEFAULT_BCC = 'geoffroydelatournelle@gmail.com';
 const REPORT_MAX_PER_HOUR = 12;
@@ -65,12 +66,12 @@ function checkReportRate(ip) {
 }
 
 let transportPromise = null;
-async function smtpTransport() {
-  const smtpUrl = process.env.KAYROS_SMTP_URL || '';
-  if (!smtpUrl) return null;
-  if (!transportPromise) {
-    transportPromise = import('nodemailer').then(({ createTransport }) => createTransport(smtpUrl));
-  }
+async function smtpTransport(app) {
+  if (app?.kayrosContext?.contactMailer) return app.kayrosContext.contactMailer;
+  if (transportPromise) return transportPromise;
+  const smtp = smtpFromEnv();
+  if (!smtp.enabled) return null;
+  transportPromise = createSmtpTransport(smtp);
   return transportPromise;
 }
 
@@ -140,14 +141,16 @@ export default async function demoReportLeadsRoute(app) {
       return reply.code(400).send({ error: 'formulaire ou document invalide', issues: parsed.error.issues });
     }
 
-    const transport = await smtpTransport();
+    const transport = await smtpTransport(app);
     if (!transport) {
-      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_URL pour envoyer les rapports.' });
+      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (boîte IONOS contact@kayroslab.com) pour envoyer les rapports.' });
     }
 
     const data = parsed.data;
     const bcc = splitEmails(process.env.KAYROS_REPORT_LEAD_BCC || DEFAULT_BCC);
-    const from = process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost';
+    const from = process.env.KAYROS_MAIL_FROM
+      || app.kayrosContext.smtp?.from
+      || 'KayrosLab <contact@kayroslab.com>';
     const format = formatRequested(data.requestedFormat, data.report.language);
     const subject = data.report.language === 'en'
       ? `[KayrosLab] Your ${format} report`

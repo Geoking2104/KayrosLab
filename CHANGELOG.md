@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.18 (2026-09) — SMTP IONOS
+
+- Courrier sortant via `smtp.ionos.fr` (boîte `contact@kayroslab.com`), déjà autorisée par le SPF.
+- Secret unique : `KAYROS_SMTP_PASS`. Contact, rapports, reset de mot de passe, Authelia.
+- `/health` indique si le relais est armé, sans exposer le secret.
+
 ## v0.25.17 (2026-09) — Mentions, cookies, CGU, contact
 
 - Pied de Salon : mentions légales, cookies (c15t), conditions générales, onglet Contact.

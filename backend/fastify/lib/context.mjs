@@ -32,6 +32,7 @@ import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
 import { createMcpClientRegistry } from './mcp-auth.mjs';
 import { oidcConfigFromEnv } from './oidc.mjs';
+import { smtpFromEnv, createSmtpTransport } from './smtp.mjs';
 import { SalonStateStore } from './salon-state.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance }) {
@@ -254,28 +255,31 @@ export default async function buildContext() {
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
   const oidc = oidcConfigFromEnv(process.env);
+  const smtp = smtpFromEnv(process.env);
+  let smtpTransport = null;
+  if (smtp.enabled) {
+    try { smtpTransport = await createSmtpTransport(smtp); }
+    catch { console.warn('[kayroslab] SMTP configuré mais nodemailer indisponible'); }
+  }
+  const contactMailer = smtpTransport;
   const SALON_DIR = process.env.KAYROS_SALON_DIR
     || (sharedPaths?.root ? `${sharedPaths.root}/salon` : '');
   const salonState = new SalonStateStore({ dir: SALON_DIR || null });
   let passwordResetMailer = null;
-  if (process.env.KAYROS_SMTP_URL) {
-    try {
-      const { createTransport } = await import('nodemailer');
-      const transport = createTransport(process.env.KAYROS_SMTP_URL);
-      const from = process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost';
-      passwordResetMailer = {
-        async send({ email, token }) {
-          const resetUrl = `${CONSOLE_URL}/#reset-password?token=${encodeURIComponent(token)}`;
-          await transport.sendMail({
-            to: email,
-            from,
-            subject: 'Réinitialisez votre mot de passe KayrosLab',
-            text: `Une demande de réinitialisation a été reçue pour votre compte KayrosLab.\n\nOuvrez ce lien dans les ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} prochaines minutes :\n${resetUrl}\n\nSi vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail. Votre mot de passe reste inchangé.`,
-            html: `<p>Une demande de réinitialisation a été reçue pour votre compte KayrosLab.</p><p><a href="${resetUrl}">Réinitialiser mon mot de passe</a></p><p>Ce lien expire dans ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} minutes et ne peut être utilisé qu'une fois.</p><p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.</p>`,
-          });
-        },
-      };
-    } catch { console.warn('[kayroslab] SMTP configuré mais transport de réinitialisation indisponible'); }
+  if (smtpTransport) {
+    const from = smtp.from;
+    passwordResetMailer = {
+      async send({ email, token }) {
+        const resetUrl = `${CONSOLE_URL}/#reset-password?token=${encodeURIComponent(token)}`;
+        await smtpTransport.sendMail({
+          to: email,
+          from,
+          subject: 'Réinitialisez votre mot de passe KayrosLab',
+          text: `Une demande de réinitialisation a été reçue pour votre compte KayrosLab.\n\nOuvrez ce lien dans les ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} prochaines minutes :\n${resetUrl}\n\nSi vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail. Votre mot de passe reste inchangé.`,
+          html: `<p>Une demande de réinitialisation a été reçue pour votre compte KayrosLab.</p><p><a href="${resetUrl}">Réinitialiser mon mot de passe</a></p><p>Ce lien expire dans ${Math.round(PASSWORD_RESET_TTL_SEC / 60)} minutes et ne peut être utilisé qu'une fois.</p><p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.</p>`,
+        });
+      },
+    };
   }
   const scorecards = defaultScorecards();
   const salesOracleRepository = pgPool ? new PgSalesOracleRepository(pgPool) : new InMemorySalesOracleRepository();
@@ -284,14 +288,11 @@ export default async function buildContext() {
 
   const canaux = [new ConsoleNotifier({ logger: console })];
   if (process.env.KAYROS_NOTIFY_WEBHOOK) canaux.push(new WebhookNotifier({ url: process.env.KAYROS_NOTIFY_WEBHOOK }));
-  if (process.env.KAYROS_SMTP_URL) {
-    try {
-      const { createTransport } = await import('nodemailer');
-      canaux.push(new EmailNotifier({
-        from: process.env.KAYROS_MAIL_FROM || 'kayroslab@localhost',
-        send: ({ to, from, subject, text }) => createTransport(process.env.KAYROS_SMTP_URL).sendMail({ to: to.join(','), from, subject, text }),
-      }));
-    } catch { console.warn('[kayroslab] SMTP configure mais nodemailer absent'); }
+  if (smtpTransport) {
+    canaux.push(new EmailNotifier({
+      from: smtp.from,
+      send: ({ to, from, subject, text }) => smtpTransport.sendMail({ to: to.join(','), from, subject, text }),
+    }));
   }
 
   // Runs suspendus sur un gate humain. Sans ce store le snapshot meurt avec
@@ -541,7 +542,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
 
   return {
-    providers, llm, embeddings, tools, auth, oidc, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
+    providers, llm, embeddings, tools, auth, oidc, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig,
