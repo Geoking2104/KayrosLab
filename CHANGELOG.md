@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.25.20 (2026-09) — `#agents` ouvre les auteurs
+
+- Le script mourait sur `salonUser` avant d’avoir lu le hash : le volet restait caché.
+- Lien « Auteurs » : `/salon/#agents`. Filet CSS `:target` si le JS rate.
+
 ## v0.25.19 (2026-09) — SMTP via Gmail
 
 - `contact@kayroslab.com` est une redirection IONOS, pas une boîte d’envoi.

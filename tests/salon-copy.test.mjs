@@ -119,7 +119,7 @@ test('Salon spécimen HTML suit la même copie', async () => {
     assert.match(page, /"kind\.philosophe": "Philosopher"/);
     assert.match(page, /"send": "Send"/);
     assert.match(page, /"hero.title": "They put on the skin of a book."/);
-    assert.match(page, /\/salon\/agents\//);
+    assert.match(page, /\/salon\/#agents/);
     assert.match(page, /"circle\.lumieres": "Enlightenment"/);
     assert.match(page, /"nameEn": "Aristotle"/);
     assert.match(page, /id="agent-list"/);
@@ -178,4 +178,20 @@ test('chaque œuvre du catalogue est un texte de l’auteur, sans doublon ni par
   assert.equal(byId.suntzu.works.length, 1);
   assert.equal(byId.marcaurele.works.length, 1);
   assert.equal(byId.islam.works.length, 1);
+});
+
+test('#agents ouvre le volet auteurs', async () => {
+  const html = await read('salon/index.html');
+  const published = await read('backend/web/public/salon/index.html');
+  for (const page of [html, published]) {
+    const user = page.indexOf('let salonUser = null');
+    const apply = page.indexOf('try { applyI18n(); }');
+    const show = page.indexOf('show(paneFromLocation())');
+    assert.ok(user > 0 && user < apply, 'salonUser déclaré avant applyI18n');
+    assert.ok(apply > 0 && apply < show, 'hash lu après i18n');
+    assert.match(page, /href="\/salon\/#agents"/);
+    assert.match(page, /\.pane:target/);
+    assert.match(page, /hash === "agents"/);
+    assert.match(page, /id="agents"/);
+  }
 });
