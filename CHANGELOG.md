@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.19 (2026-09) — SMTP via Gmail
+
+- `contact@kayroslab.com` est une redirection IONOS, pas une boîte d’envoi.
+- Relais : `smtp.gmail.com`, compte Gmail. Destination publique inchangée (IONOS redirige).
+- Secret : mot de passe d’application Google (`KAYROS_SMTP_PASS`).
+
 ## v0.25.18 (2026-09) — SMTP IONOS
 
 - Courrier sortant via `smtp.ionos.fr` (boîte `contact@kayroslab.com`), déjà autorisée par le SPF.

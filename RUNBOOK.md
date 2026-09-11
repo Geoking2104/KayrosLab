@@ -113,15 +113,18 @@ Solution : définir la variable dans `.env`, redémarrer.
 
 ### Les notifications email ne partent pas
 
-Le domaine est chez IONOS (`mx00.ionos.fr`, SPF `_spf-eu.ionos.com`). KayrosLab n’envoie pas depuis le VPS : il s’authentifie sur `smtp.ionos.fr:465` avec la boîte `contact@kayroslab.com`.
+`contact@kayroslab.com` est une **redirection IONOS** vers Gmail, pas une boîte SMTP. L’envoi passe par `smtp.gmail.com` avec le compte Gmail.
 
-Secret GitHub à renseigner : **`KAYROS_SMTP_PASS`** (mot de passe de cette boîte). Puis relancer le déploiement VPS.
+1. Activer la validation en deux étapes du compte Google.
+2. Créer un [mot de passe d’application](https://myaccount.google.com/apppasswords) (16 caractères).
+3. Secret GitHub **`KAYROS_SMTP_PASS`** = ce mot de passe (pas le mot de passe du compte). Relancer le déploiement VPS.
 
 ```
-KAYROS_SMTP_HOST=smtp.ionos.fr
-KAYROS_SMTP_USER=contact@kayroslab.com
+KAYROS_SMTP_HOST=smtp.gmail.com
+KAYROS_SMTP_USER=geoffroydelatournelle@gmail.com
 KAYROS_SMTP_PASS=…          # secret, jamais dans git
-KAYROS_MAIL_FROM=KayrosLab <contact@kayroslab.com>
+KAYROS_MAIL_FROM=KayrosLab <geoffroydelatournelle@gmail.com>
+KAYROS_CONTACT_TO=contact@kayroslab.com   # IONOS redirige vers Gmail
 ```
 
 Vérifier :
@@ -129,7 +132,7 @@ Vérifier :
 curl -s https://api.kayroslab.com/health | grep smtp
 # Tester le transport
 cd /opt/kayroslab/backend/fastify
-node --input-type=module -e 'import { smtpFromEnv, createSmtpTransport } from "./lib/smtp.mjs"; const s=smtpFromEnv(); const t=await createSmtpTransport(s); console.log(s.host, await t.verify());'
+node --input-type=module -e 'import { smtpFromEnv, createSmtpTransport } from "./lib/smtp.mjs"; const s=smtpFromEnv(); const t=await createSmtpTransport(s); console.log(s.host, s.user, await t.verify());'
 ```
 
 ### Rate limit atteint (429)

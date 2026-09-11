@@ -49,6 +49,6 @@ curl -s -X POST localhost:8787/v1/llm -H 'content-type: application/json' \
 
 - Servir derrière un reverse proxy HTTPS (nginx/caddy), restreindre `ALLOWED_ORIGIN`.
 - Gérer le process avec pm2/systemd. Clés via variables d'environnement (jamais dans le dépôt).
-- Pour l'envoi des rapports, du contact et des resets : `KAYROS_SMTP_PASS` (boîte IONOS `contact@kayroslab.com`), `KAYROS_MAIL_FROM` et `KAYROS_REPORT_LEAD_BCC` (par défaut : `geoffroydelatournelle@gmail.com`).
+- Pour l'envoi des rapports, du contact et des resets : `KAYROS_SMTP_PASS` (mot de passe d'application Gmail), `KAYROS_MAIL_FROM` et `KAYROS_REPORT_LEAD_BCC` (par défaut : `geoffroydelatournelle@gmail.com`). `contact@kayroslab.com` reste l'adresse publique (redirection IONOS).
 - Pour Positionner, renseigner `MISTRAL_API_KEY`; `GITHUB_TOKEN`, `GITLAB_TOKEN`, `GOOGLE_API_KEY` et `GOOGLE_CX` améliorent la collecte GitHub/GitLab/web utilisée comme base de comparaison.
 - Résolution des gates entre requêtes (HITL asynchrone) = lot ultérieur (store partagé).

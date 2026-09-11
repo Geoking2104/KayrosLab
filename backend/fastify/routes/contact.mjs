@@ -118,13 +118,13 @@ export default async function contactRoute(app) {
 
     const transport = app.kayrosContext.contactMailer || await smtpTransport();
     if (!transport) {
-      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (boîte IONOS contact@kayroslab.com).' });
+      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (mot de passe d’application Gmail).' });
     }
 
     const to = splitEmails(process.env.KAYROS_CONTACT_TO || DEFAULT_TO);
     const from = process.env.KAYROS_MAIL_FROM
       || app.kayrosContext.smtp?.from
-      || 'KayrosLab <contact@kayroslab.com>';
+      || 'KayrosLab <geoffroydelatournelle@gmail.com>';
     let subject;
     let text;
     if (isNote) {

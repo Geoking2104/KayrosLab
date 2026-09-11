@@ -110,12 +110,12 @@ jobs:
               KAYROS_RUNS_FILE: '/opt/kayroslab/data/runs.json',
               KAYROS_CONSOLE_URL: 'https://www.kayroslab.com/console/',
               KAYROS_PASSWORD_RESET_TTL_SEC: '1800',
-              KAYROS_MAIL_FROM: process.env.KAYROS_MAIL_FROM || 'KayrosLab <contact@kayroslab.com>',
+              KAYROS_MAIL_FROM: process.env.KAYROS_MAIL_FROM || 'KayrosLab <geoffroydelatournelle@gmail.com>',
               KAYROS_CONTACT_TO: process.env.KAYROS_CONTACT_TO || 'contact@kayroslab.com',
-              KAYROS_SMTP_HOST: process.env.KAYROS_SMTP_HOST || 'smtp.ionos.fr',
+              KAYROS_SMTP_HOST: process.env.KAYROS_SMTP_HOST || 'smtp.gmail.com',
               KAYROS_SMTP_PORT: '465',
               KAYROS_SMTP_SECURE: '1',
-              KAYROS_SMTP_USER: process.env.KAYROS_SMTP_USER || 'contact@kayroslab.com',
+              KAYROS_SMTP_USER: process.env.KAYROS_SMTP_USER || 'geoffroydelatournelle@gmail.com',
             };
             const optionalSources = {
               // Ecrit seulement si le secret existe : une ligne DATABASE_URL

@@ -143,14 +143,14 @@ export default async function demoReportLeadsRoute(app) {
 
     const transport = await smtpTransport(app);
     if (!transport) {
-      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (boîte IONOS contact@kayroslab.com) pour envoyer les rapports.' });
+      return reply.code(503).send({ error: 'SMTP non configuré : renseigner KAYROS_SMTP_PASS (mot de passe d’application Gmail) pour envoyer les rapports.' });
     }
 
     const data = parsed.data;
     const bcc = splitEmails(process.env.KAYROS_REPORT_LEAD_BCC || DEFAULT_BCC);
     const from = process.env.KAYROS_MAIL_FROM
       || app.kayrosContext.smtp?.from
-      || 'KayrosLab <contact@kayroslab.com>';
+      || 'KayrosLab <geoffroydelatournelle@gmail.com>';
     const format = formatRequested(data.requestedFormat, data.report.language);
     const subject = data.report.language === 'en'
       ? `[KayrosLab] Your ${format} report`

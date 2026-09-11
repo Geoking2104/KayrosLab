@@ -1,18 +1,18 @@
 /**
  * Transport SMTP KayrosLab.
  *
- * Le domaine kayroslab.com est chez IONOS (MX mx00.ionos.fr, SPF _spf-eu.ionos.com).
- * On n’ouvre pas de relais sur le VPS : nodemailer et Authelia s’authentifient
- * auprès de smtp.ionos.fr, ce que le SPF autorise déjà.
+ * Réception : contact@kayroslab.com est une redirection IONOS vers
+ * geoffroydelatournelle@gmail.com — ce n’est pas une boîte SMTP.
+ * Envoi : Gmail (smtp.gmail.com), compte authentifié, From = ce compte
+ * (Gmail refuse d’envoyer « en tant que » contact@ sans alias Send as).
  *
- * Deux formes :
- *   KAYROS_SMTP_URL=smtps://user:pass@smtp.ionos.fr:465
- *   KAYROS_SMTP_USER + KAYROS_SMTP_PASS  (hôte IONOS par défaut)
+ * Secret : KAYROS_SMTP_PASS = mot de passe d’application Google
+ * (https://myaccount.google.com/apppasswords), jamais le mot de passe du compte.
  */
 
-const IONOS_HOST = 'smtp.ionos.fr';
-const DEFAULT_FROM = 'KayrosLab <contact@kayroslab.com>';
-const DEFAULT_USER = 'contact@kayroslab.com';
+const GMAIL_HOST = 'smtp.gmail.com';
+const DEFAULT_FROM = 'KayrosLab <geoffroydelatournelle@gmail.com>';
+const DEFAULT_USER = 'geoffroydelatournelle@gmail.com';
 
 function truthy(value) {
   return /^(1|true|yes|on)$/i.test(String(value || '').trim());
@@ -20,6 +20,11 @@ function truthy(value) {
 
 function yamlQuote(value) {
   return `'${String(value ?? '').replaceAll('\\', '\\\\').replaceAll("'", "''")}'`;
+}
+
+function cleanPass(value) {
+  // Les mots de passe d’application Google s’affichent par groupes de 4.
+  return String(value || '').replace(/\s+/g, '');
 }
 
 export function parseSmtpUrl(url) {
@@ -46,7 +51,7 @@ export function smtpFromEnv(env = process.env) {
   const from = String(env.KAYROS_MAIL_FROM || DEFAULT_FROM).trim() || DEFAULT_FROM;
   const url = String(env.KAYROS_SMTP_URL || '').trim();
   const user = String(env.KAYROS_SMTP_USER || '').trim();
-  const pass = String(env.KAYROS_SMTP_PASS || env.KAYROS_SMTP_PASSWORD || '').trim();
+  const pass = cleanPass(env.KAYROS_SMTP_PASS || env.KAYROS_SMTP_PASSWORD);
   const hostOverride = String(env.KAYROS_SMTP_HOST || '').trim();
   const portOverride = Number(env.KAYROS_SMTP_PORT || 0);
 
@@ -62,18 +67,16 @@ export function smtpFromEnv(env = process.env) {
     port = parsed.port;
     secure = parsed.secure;
     authUser = authUser || parsed.user;
-    authPass = authPass || parsed.pass;
-  } else if (authUser && authPass) {
-    host = hostOverride || IONOS_HOST;
+    authPass = authPass || cleanPass(parsed.pass);
   } else if (authPass) {
-    host = hostOverride || IONOS_HOST;
-    authUser = DEFAULT_USER;
+    host = hostOverride || GMAIL_HOST;
+    authUser = authUser || DEFAULT_USER;
   }
 
   if (hostOverride) host = hostOverride;
   if (portOverride) port = portOverride;
-  if (!port) port = secure || host === IONOS_HOST ? 465 : 587;
-  if (!url && (port === 465 || host === IONOS_HOST)) secure = true;
+  if (!port) port = host === GMAIL_HOST || secure ? 465 : 587;
+  if (port === 465) secure = true;
   if (truthy(env.KAYROS_SMTP_SECURE)) secure = true;
 
   const enabled = Boolean(host && authUser && authPass);
@@ -161,4 +164,4 @@ export function parseEnvFile(text, base = {}) {
   return env;
 }
 
-export { IONOS_HOST, DEFAULT_FROM, DEFAULT_USER };
+export { GMAIL_HOST, DEFAULT_FROM, DEFAULT_USER };
