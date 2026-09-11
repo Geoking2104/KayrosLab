@@ -73,6 +73,17 @@ test('pied de Salon : mentions, cookies c15t, CGU, contact', async () => {
   assert.match(consent, /github.com\/c15t\/c15t/);
   assert.match(consent, /getOrCreateConsentRuntime/);
   assert.match(consent, /GTM-TXNT5J6M|applyGtmConsent/);
+  const ga4 = await read('legal/ga4.js');
+  assert.match(ga4, /kayrosTrack/);
+  assert.match(ga4, /demo_start/);
+  assert.match(html, /kayrosTrack\("generate_lead"/);
+  const home = await read('index.html');
+  assert.match(home, /kayrosTrack\('generate_lead'/);
+  const gtm = JSON.parse(await read('legal/gtm-ga4-conversions.json'));
+  assert.equal(gtm.containerVersion.container.publicId, 'GTM-TXNT5J6M');
+  const tagNames = gtm.containerVersion.tag.map((t) => t.name).join(' ');
+  assert.match(tagNames, /generate_lead/);
+  assert.match(tagNames, /demo_start/);
   for (const page of [html, published, legal]) {
     assert.match(page, /GTM-TXNT5J6M/);
     assert.match(page, /googletagmanager.com\/gtm.js/);

@@ -20,6 +20,7 @@
     })(window,document,'script','dataLayer','GTM-TXNT5J6M');
     </script>
     <!-- End Google Tag Manager -->
+    <script src="/legal/ga4.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>KayrosLab · Prenez de meilleures décisions stratégiques avec un comité d&#39;experts IA</title>
     <meta name="description" content="Instruisez vos décisions stratégiques avec des agents IA qui s&#39;opposent et chiffrent — puis arbitrez avec les preuves. Dans la console, Slack, Teams ou Discord.">
@@ -299,6 +300,9 @@
         }).then(function () {
           status.textContent = 'Merci ! Votre demande est envoyée — nous revenons vers vous rapidement.';
           form.reset();
+          if (typeof window.kayrosTrack === 'function') {
+            window.kayrosTrack('generate_lead', { method: 'contact_form', lead_type: 'commercial' });
+          }
         }).catch(function () {
           status.textContent = 'L\'envoi a échoué. Réessayez dans un instant.';
         }).finally(function () {

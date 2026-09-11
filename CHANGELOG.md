@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.25.24 (2026-09) — Conversions GA4
+
+- `dataLayer` : `generate_lead` (contact), `demo_start` (démo), `login` (SSO).
+- Import GTM : `legal/gtm-ga4-conversions.json` (Google tag + 3 événements).
+- À coller dans la variable **GA4 Measurement ID**, puis publier, puis marquer les conversions dans GA4.
+
 ## v0.25.23 (2026-09) — Google Tag Manager
 
 - Conteneur `GTM-TXNT5J6M` en tête et `noscript` dans le corps (accueil, Salon, mentions).

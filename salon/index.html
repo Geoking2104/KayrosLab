@@ -20,6 +20,7 @@
   })(window,document,'script','dataLayer','GTM-TXNT5J6M');
   </script>
   <!-- End Google Tag Manager -->
+  <script src="/legal/ga4.js" defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Salon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1465,6 +1466,9 @@
       salonToken = result.token;
       salonUser = result.user;
       try { localStorage.setItem(TOKEN_KEY, salonToken); } catch (_) {}
+      if (typeof window.kayrosTrack === "function") {
+        window.kayrosTrack("login", { method: "sso" });
+      }
       return true;
     }
     document.getElementById("salon-auth")?.addEventListener("click", async () => {
@@ -1610,6 +1614,9 @@
         if (res.ok) {
           paintContactStatus(form, "ok", msg("contact.sent"));
           form.reset();
+          if (typeof window.kayrosTrack === "function") {
+            window.kayrosTrack("generate_lead", { method: kind === "bug" ? "salon_report" : "salon_letter", lead_type: kind === "bug" ? "report" : "letter" });
+          }
           return;
         }
         const key = contactErrorKey(res, body);
