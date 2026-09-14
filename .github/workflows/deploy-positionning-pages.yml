@@ -103,7 +103,7 @@ jobs:
           if [ "$SALON_SIZE" -lt 50000 ]; then git show "$SPECIMEN_SHA:salon/index.html" > deploy/salon/index.html; fi
           if [ -f backend/web/public/salon/agents-import.js ]; then cp backend/web/public/salon/agents-import.js deploy/salon/agents-import.js; fi
           if [ -f backend/web/public/salon/circle-run.js ]; then cp backend/web/public/salon/circle-run.js deploy/salon/circle-run.js; fi
-          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run)\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260914j\" defer></script><script src=\"/salon/circle-run.js?v=20260914j\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
+          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run)\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260914k\" defer></script><script src=\"/salon/circle-run.js?v=20260914k\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
