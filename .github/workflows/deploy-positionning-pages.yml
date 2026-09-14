@@ -99,11 +99,15 @@ jobs:
           set -e
           mkdir -p deploy/salon
           SPECIMEN_SHA=f42a6b6b5e1af1847e974a1954132e889ed9854d
+          GOOD_RUN=95f56521e8904af25e36f218a22c62b64b9ad718
           SALON_SIZE=$(wc -c < deploy/salon/index.html)
           if [ "$SALON_SIZE" -lt 50000 ]; then git show "$SPECIMEN_SHA:salon/index.html" > deploy/salon/index.html; fi
           if [ -f backend/web/public/salon/agents-import.js ]; then cp backend/web/public/salon/agents-import.js deploy/salon/agents-import.js; fi
-          if [ -f backend/web/public/salon/circle-run.js ]; then cp backend/web/public/salon/circle-run.js deploy/salon/circle-run.js; fi
-          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run)\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260914l\" defer></script><script src=\"/salon/circle-run.js?v=20260914l\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
+          RUN_SIZE=0
+          if [ -f backend/web/public/salon/circle-run.js ]; then RUN_SIZE=$(wc -c < backend/web/public/salon/circle-run.js); fi
+          if [ "$RUN_SIZE" -lt 5000 ]; then git show "$GOOD_RUN:backend/web/public/salon/circle-run.js" > deploy/salon/circle-run.js; else cp backend/web/public/salon/circle-run.js deploy/salon/circle-run.js; fi
+          if [ -f backend/web/public/salon/circle-ui.js ]; then cp backend/web/public/salon/circle-ui.js deploy/salon/circle-ui.js; fi
+          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run|circle-ui)\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260914m\" defer></script><script src=\"/salon/circle-run.js?v=20260914m\" defer></script><script src=\"/salon/circle-ui.js?v=20260914m\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
