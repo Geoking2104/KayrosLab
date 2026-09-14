@@ -1,7 +1,6 @@
-/* Salon — mémoire contextuelle compacte. */
+/* Salon — mémoire contextuelle compacte, sans tokens. */
 (function () {
   var MEM_KEY = "salon-thread-memory-v2";
-  var BUDGET = 900;
   var KEEP_RECENT = 2;
   var mem = loadMem();
   window.salonMemory = mem;
@@ -40,7 +39,6 @@
     var cut = t.split(/(?<=[.!?])\s+/)[0] || t;
     return clip(cut, 140);
   }
-  function tokens(s) { return Math.ceil(String(s || "").length / 4); }
   function compact() {
     mem.host = mem.host.slice(-4);
     if (mem.host.length > 1) mem.host = [mem.host[0]].concat(mem.host.slice(-2));
@@ -51,8 +49,7 @@
       var fresh = arr.slice(-KEEP_RECENT);
       var prev = mem.digest[id] || "";
       var added = old.map(function (t) { return claim(t.text); }).filter(Boolean);
-      var merged = (prev ? prev + " · " : "") + added.join(" · ");
-      mem.digest[id] = clip(merged, 280);
+      mem.digest[id] = clip((prev ? prev + " · " : "") + added.join(" · "), 280);
       mem.byAuthor[id] = fresh;
     });
     mem.turns = mem.turns.slice(-12);
@@ -106,9 +103,7 @@
     var parts = [];
     var push = function (label, val, cap) {
       if (!val) return;
-      var bit = label + val;
-      if (tokens(parts.join(" ") + bit) > BUDGET) bit = clip(bit, cap || 120);
-      if (tokens(parts.join(" ") + bit) <= BUDGET) parts.push(bit);
+      parts.push(label + clip(val, cap || 220));
     };
     var anchor = mem.host[0] || "";
     var lastH = mem.host[mem.host.length - 1] || "";
@@ -121,10 +116,6 @@
     if (others.length) push("Table : ", others.map(function (t) { return "@" + t.id + " " + t.claim; }).join(" · "), 260);
     if (mem.open.length) push("Ouvert : ", mem.open.slice(-3).join(" | "), 180);
     return parts.join("\n") || "(mémoire vide)";
-  }
-  function dossier(id) {
-    var packed = pack(id);
-    return { packed: packed, mine: (mem.digest[id] || "") + " " + ((mem.byAuthor[id] || []).slice(-1)[0] || {}).claim || "", others: mem.turns.filter(function (t) { return t.id !== id; }).slice(-3).map(function (t) { return "@" + t.id + " " + t.claim; }).join(" · "), host: mem.host.slice(-1)[0] || "" };
   }
   function followUpPrompt() {
     var lastHost = mem.host[mem.host.length - 1] || "";
@@ -146,7 +137,6 @@
     if (!box) return;
     var n = mem.turns.length + Object.keys(mem.digest).length;
     box.hidden = n === 0 && !mem.host.length;
-    var used = tokens(pack(seatedIds()[0] || ""));
     var lines = seatedIds().map(function (id) {
       var arr = mem.byAuthor[id] || [];
       var d = mem.digest[id];
@@ -154,7 +144,7 @@
       if (!d && !last) return "";
       return "<li><strong>@" + id + "</strong> · " + (d ? "digest + " : "") + arr.length + " récent" + (arr.length > 1 ? "s" : "") + " — " + clip((last && last.claim) || d || "", 100) + "</li>";
     }).join("");
-    box.innerHTML = "<h2>Mémoire du cercle</h2><p class=\"cp-now\">" + used + " / " + BUDGET + " tokens estimés · " + mem.open.length + " question" + (mem.open.length > 1 ? "s" : "") + " ouverte" + (mem.open.length > 1 ? "s" : "") + "</p><ol>" + lines + "</ol>";
+    box.innerHTML = "<h2>Mémoire du cercle</h2><p class=\"cp-now\">" + mem.turns.length + " prise" + (mem.turns.length > 1 ? "s" : "") + " · " + mem.open.length + " question" + (mem.open.length > 1 ? "s" : "") + " ouverte" + (mem.open.length > 1 ? "s" : "") + "</p><ol>" + lines + "</ol>";
   }
   function wrapFetch() {
     if (window.fetch && window.fetch.__salonMem) return;
@@ -172,9 +162,8 @@
           var name = m[1];
           who = seatedIds().find(function (id) { return nameOf(id).indexOf(name) === 0 || name.indexOf(nameOf(id)) === 0; }) || "";
         }
-        var packed = pack(who);
         body.system = clip(sys, 280) + " Contexte compact. Ne répète pas tes claims. Ajoute un élément et tranche une question ouverte.";
-        body.user = clip(body.user || "", 220) + "\n\n" + packed;
+        body.user = clip(body.user || "", 220) + "\n\n" + pack(who);
         opts = Object.assign({}, opts, { body: JSON.stringify(body) });
       } catch (e) {}
       return orig(url, opts);
