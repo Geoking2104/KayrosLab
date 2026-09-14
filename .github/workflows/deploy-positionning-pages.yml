@@ -47,7 +47,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -56,16 +57,13 @@ jobs:
           cache-dependency-path: |
             frontend/positionning-app/package-lock.json
             frontend/console-app/package-lock.json
-
       - name: Validate public demo JavaScript and CTA wiring
         run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
-
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
         run: |
           npm ci
           npm run build
-
       - name: Install & build console-app
         working-directory: frontend/console-app
         env:
@@ -73,105 +71,42 @@ jobs:
         run: |
           npm ci
           npm run build
-
       - name: Assemble deploy folder
         run: |
           set -e
-          mkdir -p deploy/positionner-app
-          mkdir -p deploy/console
-          mkdir -p deploy/assets
-
-          # Core static pages (must exist)
+          mkdir -p deploy/positionner-app deploy/console deploy/assets
           for f in index.html index.fr.html tokens.css studio.css CNAME 404.html; do
-            if [ ! -f "$f" ]; then
-              echo "ERROR: required file missing: $f" >&2
-              exit 1
-            fi
+            if [ ! -f "$f" ]; then echo "ERROR: required file missing: $f" >&2; exit 1; fi
             cp "$f" deploy/
           done
-
-          # Website editorial assets
-          if [ -d backend/web/public/assets ]; then
-            cp -r backend/web/public/assets/. deploy/assets/
-          else
-            echo "ERROR: backend/web/public/assets is missing" >&2
-            exit 1
-          fi
-
-          # Main demo — size guard against accidental truncation
+          if [ -d backend/web/public/assets ]; then cp -r backend/web/public/assets/. deploy/assets/; else echo "ERROR: assets missing" >&2; exit 1; fi
           DEMO="kayroslab-complete-with-ai-agents.html"
-          if [ ! -f "$DEMO" ]; then
-            echo "ERROR: $DEMO is missing" >&2
-            exit 1
-          fi
+          if [ ! -f "$DEMO" ]; then echo "ERROR: $DEMO missing" >&2; exit 1; fi
           SIZE=$(wc -c < "$DEMO")
-          echo "Demo size: ${SIZE} bytes"
-          if [ "$SIZE" -lt 50000 ]; then
-            echo "ERROR: $DEMO is only ${SIZE} bytes (expected > 50 KB). Possible truncation." >&2
-            exit 1
-          fi
+          if [ "$SIZE" -lt 50000 ]; then echo "ERROR: demo truncated" >&2; exit 1; fi
           cp "$DEMO" deploy/
-
-          # Optional HTML pages
-          for f in \
-            arbitrage.html \
-            cycle-timeline.html \
-            validation-proposition.html \
-            portfolio-dormant.html \
-            portfolio-board.html \
-            ontology-explorer.html \
-            ontology-panel.html \
-            livret-blanc-kayroslab.html \
-            livret-blanc-positionner.html \
-            livret-blanc-ecouter.html \
-            livret-blanc-hackathon.html \
-            whitepaper-kayroslab.html \
-            whitepaper-position.html \
-            whitepaper-listen.html \
-            whitepaper-hackathon.html
-          do
-            if [ -f "$f" ]; then
-              cp "$f" deploy/
-              echo "copied $f"
-            else
-              echo "skip (missing) $f"
-            fi
+          for f in arbitrage.html cycle-timeline.html validation-proposition.html portfolio-dormant.html portfolio-board.html ontology-explorer.html ontology-panel.html livret-blanc-kayroslab.html livret-blanc-positionner.html livret-blanc-ecouter.html livret-blanc-hackathon.html whitepaper-kayroslab.html whitepaper-position.html whitepaper-listen.html whitepaper-hackathon.html; do
+            if [ -f "$f" ]; then cp "$f" deploy/; fi
           done
-
-          # Built React app
-          if [ -d frontend/positionning-app/dist ]; then
-            cp -r frontend/positionning-app/dist/* deploy/positionner-app/
-          else
-            echo "ERROR: positionning-app dist/ missing after build" >&2
-            exit 1
+          if [ -d frontend/positionning-app/dist ]; then cp -r frontend/positionning-app/dist/* deploy/positionner-app/; else echo "ERROR: positionning dist missing" >&2; exit 1; fi
+          if [ -f backend/web/public/console/index.html ]; then cp -r backend/web/public/console/. deploy/console/; else echo "ERROR: console missing" >&2; exit 1; fi
+          mkdir -p deploy/salon
+          if [ -f backend/web/public/salon/index.html ]; then cp -r backend/web/public/salon/. deploy/salon/; fi
+          SPECIMEN_SHA=f42a6b6b5e1af1847e974a1954132e889ed9854d
+          SALON_SIZE=$(wc -c < deploy/salon/index.html || echo 0)
+          echo "Salon index size: ${SALON_SIZE} bytes"
+          if [ "${SALON_SIZE:-0}" -lt 50000 ]; then
+            echo "Restoring full salon specimen from ${SPECIMEN_SHA}"
+            git show ${SPECIMEN_SHA}:salon/index.html > deploy/salon/index.html
           fi
-
-          # Hybrid agent console built by Vite into the backend public tree.
-          if [ -f backend/web/public/console/index.html ]; then
-            cp -r backend/web/public/console/. deploy/console/
-          else
-            echo "ERROR: console-app build missing after build" >&2
-            exit 1
+          if [ -f backend/web/public/salon/agents-import.js ]; then cp backend/web/public/salon/agents-import.js deploy/salon/agents-import.js; fi
+          if [ -f deploy/salon/agents-import.js ] && ! grep -q 'agents-import.js' deploy/salon/index.html; then
+            python3 -c 'from pathlib import Path; p=Path("deploy/salon/index.html"); s=p.read_text(encoding="utf-8");
+s = s if "agents-import.js" in s else s.replace("</body>", "<script src=\"/salon/agents-import.js\" defer></script>\n</body>"); p.write_text(s, encoding="utf-8")'
           fi
-
-          # Salon — autonomous literary circles (static). Footer /salon/ must not 404.
-          if [ -f backend/web/public/salon/index.html ]; then
-            mkdir -p deploy/salon
-            cp -r backend/web/public/salon/. deploy/salon/
-          else
-            echo "ERROR: salon static missing (footer would 404)" >&2
-            exit 1
-          fi
-
-          if [ -d legal ]; then
-            mkdir -p deploy/legal
-            cp -r legal/. deploy/legal/
-          fi
-
+          if [ -d legal ]; then mkdir -p deploy/legal; cp -r legal/. deploy/legal/; fi
           touch deploy/.nojekyll
-          echo "Deploy folder contents:"
           find deploy -type f | sort
-
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
