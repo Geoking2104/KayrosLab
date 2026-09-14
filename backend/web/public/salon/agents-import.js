@@ -58,14 +58,14 @@
   function ensureVisualField(form) {
     if (form.querySelector('[name="avatar"]')) return;
     var box = document.createElement("div"); box.className = "portrait-edit"; box.id = "create-visual";
-    box.innerHTML = "<span class=\"portrait-label\">Visuel du profil</span><div class=\"portrait-row\"><div class=\"portrait-frame\"><img id=\"create-portrait-img\" alt=\"Proposition de portrait\" /></div><label class=\"portrait-url\"><span>Source</span><input name=\"avatar\" type=\"url\" maxlength=\"400\" placeholder=\"URL proposée — vous pouvez la changer\" /></label></div><p class=\"import-meta\" id=\"create-propose-note\" hidden>Proposition automatique à relire avant de publier.</p>";
+    box.innerHTML = "<span class=\"portrait-label\">Visuel du profil</span><div class=\"portrait-row\"><div class=\"portrait-frame\"><img id=\"create-portrait-img\" alt=\"Proposition de portrait\" /></div><label class=\"portrait-url\"><span>Source</span><input name=\"avatar\" type=\"url\" maxlength=\"400\" placeholder=\"URL proposee\" /></label></div><p class=\"import-meta\" id=\"create-propose-note\" hidden>Proposition automatique a relire avant de publier.</p>";
     var note = form.querySelector(".create-note"); if (note) form.insertBefore(box, note); else form.insertBefore(box, form.querySelector(".row"));
     var img = box.querySelector("img"); var input = box.querySelector("input");
     input.addEventListener("input", function () { if (input.value.trim()) img.src = input.value.trim(); });
   }
   function injectImportBox(form) {
     var box = document.createElement("div"); box.className = "import-box"; box.id = "import-author";
-    box.innerHTML = "<h2>Importer un auteur du domaine public</h2><p class=\"hint\">Base ouverte Project Gutenberg. Choisissez un auteur, puis exactement cinq œuvres — elles complètent le catalogue et deviennent la mémoire de l’agent. L’identité (nom, @, époque, résumé, visuel) est ensuite proposée automatiquement : vous la corrigez et vous la validez.</p><form id=\"import-search\" class=\"row\"><input id=\"import-q\" type=\"search\" minlength=\"2\" required placeholder=\"Hugo, Austen, Montesquieu…\" /><button class=\"btn\" type=\"submit\">Chercher</button></form><p class=\"import-meta\" id=\"import-status\" hidden></p><p class=\"err\" id=\"import-error\" hidden></p><ul class=\"import-hits\" id=\"import-authors\" hidden></ul><div id=\"import-pick\" hidden><p class=\"import-meta\" id=\"import-pick-head\"></p><ul class=\"import-works\" id=\"import-works\"></ul><div class=\"row\" style=\"margin-top:0.7rem\"><button class=\"btn\" type=\"button\" id=\"import-commit\" disabled>Proposer la fiche</button></div></div>";
+    box.innerHTML = "<h2>Importer un auteur du domaine public</h2><p class=\"hint\">Base ouverte Project Gutenberg. Choisissez un auteur, puis exactement cinq oeuvres. Elles completent le catalogue et deviennent la memoire de l'agent. L'identite (nom, @, epoque, resume, visuel) est ensuite proposee automatiquement : vous la corrigez et vous la validez.</p><form id=\"import-search\" class=\"row\"><input id=\"import-q\" type=\"search\" minlength=\"2\" required placeholder=\"Hugo, Austen, Montesquieu\" /><button class=\"btn\" type=\"submit\">Chercher</button></form><p class=\"import-meta\" id=\"import-status\" hidden></p><p class=\"err\" id=\"import-error\" hidden></p><ul class=\"import-hits\" id=\"import-authors\" hidden></ul><div id=\"import-pick\" hidden><p class=\"import-meta\" id=\"import-pick-head\"></p><ul class=\"import-works\" id=\"import-works\"></ul><div class=\"row\" style=\"margin-top:0.7rem\"><button class=\"btn\" type=\"button\" id=\"import-commit\" disabled>Proposer la fiche</button></div></div>";
     var style = document.createElement("style");
     style.textContent = ".import-box{margin:0 0 1.15rem;padding:1rem 1.1rem 1.15rem;border:1px solid color-mix(in oklch,var(--ink) 14%,transparent);background:color-mix(in oklch,var(--paper) 92%,var(--accent));}.import-box h2{margin:0 0 .35rem;font-size:1.15rem}.import-box .hint,.import-meta{color:var(--muted);font-size:.92rem}.import-box .row,.portrait-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}.import-box input[type=search]{flex:1;min-width:12rem}.import-hits,.import-works{list-style:none;margin:.7rem 0 0;padding:0;display:grid;gap:.28rem}.import-hits button{width:100%;text-align:left;background:transparent;border:1px solid color-mix(in oklch,var(--ink) 12%,transparent);padding:.45rem .6rem;cursor:pointer;color:inherit;font:inherit}.import-hits button.is-on,.import-hits button:hover{border-color:var(--accent)}.import-hits button span,.import-works small{display:block;color:var(--muted);font-size:.82rem}.import-works label{display:flex;gap:.55rem;align-items:flex-start;padding:.28rem 0}.import-box .err{color:#8b1e1e;margin:.5rem 0 0}#add-author{display:none!important}#create-author{display:grid!important}#create-cancel{display:none!important}.portrait-edit{margin:.85rem 0 .4rem}.portrait-label{display:block;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}.portrait-frame{width:72px;height:72px;border-radius:50%;overflow:hidden;background:color-mix(in oklch,var(--ink) 8%,var(--paper));flex:0 0 72px}.portrait-frame img{width:100%;height:100%;object-fit:cover;display:block}.portrait-url{flex:1;min-width:12rem}";
     document.head.appendChild(style);
@@ -75,16 +75,16 @@
   function displayName(gutenbergName) { return String(gutenbergName || "").replace(/^([^,]+),\s*(.+)$/, "$2 $1").trim(); }
   function slugHandle(name) { return String(name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "").slice(0, 18) || "auteur"; }
   function uniqueHandle(base) { var id = base, n = 2; while (authors.some(function (a) { return a.id === id; })) { id = base + n; n += 1; } return id; }
-  function escLocal(s) { return typeof esc === "function" ? esc(s) : String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&", "<": "<", ">": ">", '"': """ })[c]; }); }
+  function escLocal(s) { if (typeof esc === "function") return esc(s); return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;"); }
   function textUrlOf(book) { var f = book.formats || {}; return f["text/plain; charset=utf-8"] || f["text/plain"] || (Object.entries(f).find(function (kv) { return kv[0].indexOf("text/plain") === 0; }) || [])[1] || ""; }
   function setErr(t) { var el = document.getElementById("import-error"); if (!el) return; el.hidden = !t; el.textContent = t || ""; }
   function setSt(t) { var el = document.getElementById("import-status"); if (!el) return; el.hidden = !t; el.textContent = t || ""; }
   function firstSentences(text, maxLen) {
     var clean = String(text || "").replace(/\r/g, "\n").replace(/^\s*(\*\*\*|---+|The Project Gutenberg).*$/gim, "").replace(/\[[0-9]+\]/g, "").replace(/\s+/g, " ").trim();
     if (!clean) return "";
-    var parts = clean.split(/(?<=[.!?])\s+/).filter(function (s) { return s.length > 40 && !/gutenberg|ebook|copyright/i.test(s); });
+    var parts = clean.split(/[.!?]\s+/).filter(function (s) { return s.length > 40 && !/gutenberg|ebook|copyright/i.test(s); });
     var out = (parts.slice(0, 2).join(" ") || clean).slice(0, maxLen);
-    return out.replace(/\s+\S*$/, "") + (out.length >= maxLen ? "…" : "");
+    return out.replace(/\s+\S*$/, "") + (out.length >= maxLen ? "..." : "");
   }
   function wikiLookup(name) {
     var titles = [name, name.replace(/^([^,]+),\s*(.+)$/, "$2 $1")]; var langs = ["fr", "en"]; var chain = Promise.resolve(null);
@@ -109,17 +109,17 @@
     if (avatar) avatar.value = proposal.avatar || "";
     if (img) { if (proposal.avatar) img.src = proposal.avatar; else img.removeAttribute("src"); }
     var note = document.getElementById("create-propose-note");
-    if (note) { note.hidden = false; note.textContent = "Proposition automatique (Gutenberg + notice). Corrigez puis validez avec Convier."; }
-    var title = form.querySelector("h2"); if (title) title.textContent = "Valider la fiche proposée";
+    if (note) { note.hidden = false; note.textContent = "Proposition automatique. Corrigez puis validez avec Convier."; }
+    var title = form.querySelector("h2"); if (title) title.textContent = "Valider la fiche proposee";
     form.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   function bindImport() {
     if (bindImport.done) return; bindImport.done = true;
     var state = { authors: [], selected: null, works: [] };
-    document.getElementById("import-search")?.addEventListener("submit", function (e) {
+    document.getElementById("import-search").addEventListener("submit", function (e) {
       e.preventDefault();
       var q = String((document.getElementById("import-q") || {}).value || "").trim(); if (q.length < 2) return;
-      setErr(""); setSt("Recherche…");
+      setErr(""); setSt("Recherche...");
       var list = document.getElementById("import-authors"); var pick = document.getElementById("import-pick");
       if (list) list.hidden = true; if (pick) pick.hidden = true;
       fetch("https://gutendex.com/books?search=" + encodeURIComponent(q) + "&copyright=false")
@@ -133,18 +133,18 @@
             if (textUrlOf(book) && !row.books.some(function (b) { return b.id === book.id; })) row.books.push({ id: book.id, title: book.title, url: textUrlOf(book) });
           }); });
           state.authors = Array.from(by.values()).filter(function (a) { return a.books.length >= 1; }).sort(function (a, b) { return b.books.length - a.books.length; });
-          if (!state.authors.length) { setSt("Aucun auteur libre trouvé."); return; }
-          setSt(state.authors.length + " auteurs trouvés — choisissez-en un, puis cinq œuvres.");
+          if (!state.authors.length) { setSt("Aucun auteur libre trouve."); return; }
+          setSt(state.authors.length + " auteurs trouves.");
           list.innerHTML = state.authors.map(function (a, i) {
-            var era = [a.birth, a.death].filter(Boolean).join("–") || "domaine public";
-            return "<li><button type=\"button\" data-i=\"" + i + "\">" + escLocal(a.name) + "<span>" + escLocal(era) + " · " + a.books.length + " œuvre(s)</span></button></li>";
+            var era = [a.birth, a.death].filter(Boolean).join("-") || "domaine public";
+            return "<li><button type=\"button\" data-i=\"" + i + "\">" + escLocal(a.name) + "<span>" + escLocal(era) + " / " + a.books.length + " oeuvre(s)</span></button></li>";
           }).join(""); list.hidden = false;
-        }).catch(function () { setSt(""); setErr("La base ouverte n’a pas répondu."); });
+        }).catch(function () { setSt(""); setErr("La base ouverte n a pas repondu."); });
     });
-    document.getElementById("import-authors")?.addEventListener("click", function (e) {
+    document.getElementById("import-authors").addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-i]"); if (!btn) return;
       document.querySelectorAll("#import-authors button").forEach(function (b) { b.classList.toggle("is-on", b === btn); });
-      var picked = state.authors[Number(btn.dataset.i)]; if (!picked) return; state.selected = picked; setSt("Recherche des œuvres…");
+      var picked = state.authors[Number(btn.dataset.i)]; if (!picked) return; state.selected = picked; setSt("Recherche des oeuvres...");
       fetch("https://gutendex.com/books?search=" + encodeURIComponent(picked.name) + "&copyright=false")
         .then(function (res) { return res.ok ? res.json() : { results: [] }; })
         .then(function (json) {
@@ -160,21 +160,21 @@
           document.getElementById("import-works").innerHTML = state.works.map(function (w, i) {
             return "<li><label><input type=\"checkbox\" data-i=\"" + i + "\" /><span>" + escLocal(w.title) + "<small>Gutenberg #" + w.id + "</small></span></label></li>";
           }).join("");
-          document.getElementById("import-pick-head").textContent = "Œuvres de " + picked.name + " — cochez 5, puis proposez la fiche";
+          document.getElementById("import-pick-head").textContent = "Oeuvres de " + picked.name + " — cochez 5, puis proposez la fiche";
           document.getElementById("import-pick").hidden = false; document.getElementById("import-commit").disabled = true; setSt("");
-        }).catch(function () { setErr("La base ouverte n’a pas répondu."); });
+        }).catch(function () { setErr("La base ouverte n a pas repondu."); });
     });
-    document.getElementById("import-works")?.addEventListener("change", function () {
+    document.getElementById("import-works").addEventListener("change", function () {
       var boxes = Array.prototype.slice.call(document.querySelectorAll("#import-works input[type=checkbox]"));
       var checked = boxes.filter(function (b) { return b.checked; });
       if (checked.length > 5) checked.slice(5).forEach(function (b) { b.checked = false; });
       document.getElementById("import-commit").disabled = document.querySelectorAll("#import-works input[type=checkbox]:checked").length !== 5;
     });
-    document.getElementById("import-commit")?.addEventListener("click", function () {
+    document.getElementById("import-commit").addEventListener("click", function () {
       var picked = state.selected; if (!picked) return;
       var works = Array.prototype.slice.call(document.querySelectorAll("#import-works input[type=checkbox]:checked")).map(function (b) { return state.works[Number(b.dataset.i)]; }).filter(Boolean);
-      if (works.length !== 5) { setErr("Choisissez exactement cinq œuvres."); return; }
-      setErr(""); setSt("Lecture des textes et proposition de la fiche…");
+      if (works.length !== 5) { setErr("Choisissez exactement cinq oeuvres."); return; }
+      setErr(""); setSt("Lecture des textes et proposition de la fiche...");
       var memory = []; var chain = Promise.resolve();
       works.forEach(function (work) {
         chain = chain.then(function () {
@@ -186,15 +186,15 @@
         });
       });
       chain.then(function () {
-        var name = displayName(picked.name); var era = [picked.birth, picked.death].filter(Boolean).join("–") || "domaine public"; var titles = works.map(function (w) { return w.title; });
+        var name = displayName(picked.name); var era = [picked.birth, picked.death].filter(Boolean).join("-") || "domaine public"; var titles = works.map(function (w) { return w.title; });
         return wikiLookup(name).then(function (wiki) {
           var voice = firstSentences(memory.map(function (m) { return m.sample; }).join(" "), 220);
-          var blurb = wiki && wiki.extract ? wiki.extract.slice(0, 360) : (name + " (" + era + "). Voix constituée à partir de " + titles.slice(0, 3).join(", ") + (titles[3] ? "…" : "") + ". " + voice).slice(0, 400);
+          var blurb = wiki && wiki.extract ? wiki.extract.slice(0, 360) : (name + " (" + era + "). Voix constituee a partir de " + titles.slice(0, 3).join(", ") + ". " + voice).slice(0, 400);
           draft = { name: name, nameEn: picked.name, handle: uniqueHandle(slugHandle(picked.name.split(",")[0])), era: era, blurb: blurb, avatar: (wiki && wiki.thumb) || "", works: titles, memory: memory };
           proposeIntoForm(draft);
-          setSt("Fiche proposée — relisez nom, @, époque, résumé et visuel, puis publiez.");
+          setSt("Fiche proposee — relisez nom, @, epoque, resume et visuel, puis publiez.");
         });
-      }).catch(function () { setErr("La proposition n’a pas pu être constituée."); setSt(""); });
+      }).catch(function () { setErr("La proposition n a pas pu etre constitutee."); setSt(""); });
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
