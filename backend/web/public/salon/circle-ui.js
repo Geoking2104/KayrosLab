@@ -1,12 +1,12 @@
-/* Salon — mémoire contextuelle compacte, sans tokens. */
+/* Salon — mémoire JSON v3. */
 (function () {
-  var MEM_KEY = "salon-thread-memory-v2";
+  var MEM_KEY = "salon-thread-memory-v3";
   var KEEP_RECENT = 2;
   var mem = loadMem();
   window.salonMemory = mem;
 
   function blank() {
-    return { host: [], turns: [], byAuthor: {}, digest: {}, open: [] };
+    return { v: 3, host: [], turns: [], byAuthor: {}, digest: {}, open: [] };
   }
   function loadMem() {
     try {
@@ -15,6 +15,7 @@
         var m = JSON.parse(raw);
         if (!m.digest) m.digest = {};
         if (!m.open) m.open = [];
+        m.v = 3;
         return m;
       }
     } catch (e) {}
@@ -48,7 +49,7 @@
       var old = arr.slice(0, -KEEP_RECENT);
       var fresh = arr.slice(-KEEP_RECENT);
       var prev = mem.digest[id] || "";
-      var added = old.map(function (t) { return claim(t.text); }).filter(Boolean);
+      var added = old.map(function (t) { return t.claim || claim(t.text); }).filter(Boolean);
       mem.digest[id] = clip((prev ? prev + " · " : "") + added.join(" · "), 280);
       mem.byAuthor[id] = fresh;
     });
@@ -99,37 +100,41 @@
     extractOpen(text);
     saveMem(); paintMem();
   }
-  function pack(id) {
-    var parts = [];
-    var push = function (label, val, cap) {
-      if (!val) return;
-      parts.push(label + clip(val, cap || 220));
-    };
+  function contextJSON(id) {
     var anchor = mem.host[0] || "";
     var lastH = mem.host[mem.host.length - 1] || "";
-    push("Ancre : ", clip(anchor, 160), 160);
-    if (lastH && lastH !== anchor) push("Hôte : ", clip(lastH, 160), 160);
-    if (mem.digest[id]) push("Ton fil : ", mem.digest[id], 200);
-    var mine = (mem.byAuthor[id] || []).slice(-KEEP_RECENT);
-    if (mine.length) push("Toi à l'instant : ", mine.map(function (t) { return "(" + t.role + ") " + t.claim; }).join(" · "), 220);
-    var others = mem.turns.filter(function (t) { return t.id !== id; }).slice(-4);
-    if (others.length) push("Table : ", others.map(function (t) { return "@" + t.id + " " + t.claim; }).join(" · "), 260);
-    if (mem.open.length) push("Ouvert : ", mem.open.slice(-3).join(" | "), 180);
-    return parts.join("\n") || "(mémoire vide)";
+    var recent = (mem.byAuthor[id] || []).slice(-KEEP_RECENT).map(function (t) {
+      return { role: t.role, claim: t.claim };
+    });
+    var table = mem.turns.filter(function (t) { return t.id !== id; }).slice(-4).map(function (t) {
+      return { id: t.id, role: t.role, claim: t.claim };
+    });
+    return {
+      v: 3,
+      speaker: id || null,
+      anchor: clip(anchor, 160) || null,
+      host: lastH && lastH !== anchor ? clip(lastH, 160) : null,
+      self: {
+        digest: mem.digest[id] || null,
+        recent: recent
+      },
+      table: table,
+      open: mem.open.slice(-3)
+    };
   }
   function followUpPrompt() {
-    var lastHost = mem.host[mem.host.length - 1] || "";
-    var claims = seatedIds().map(function (id) {
+    var ctx = contextJSON("");
+    var claims = (ctx.table || []).map(function (t) { return "@" + t.id + " : " + t.claim; });
+    seatedIds().forEach(function (id) {
       var last = (mem.byAuthor[id] || []).slice(-1)[0];
-      var d = mem.digest[id];
-      if (!last && !d) return null;
-      return "@" + id + " : " + clip((last && last.claim) || d, 110);
-    }).filter(Boolean);
-    var open = mem.open.slice(-2).join(" ");
-    var s = "Relance. Garde tes apports antérieurs. Ajoute un élément. Réponds à une objection déjà dite.";
-    if (lastHost) s += " Hôte : " + clip(lastHost, 140);
+      if (last) claims.push("@" + id + " : " + last.claim);
+    });
+    var seen = {};
+    claims = claims.filter(function (c) { if (seen[c]) return false; seen[c] = 1; return true; });
+    var s = "Relance. Garde tes apports. Ajoute un élément. Réponds à une objection déjà dite.";
+    if (ctx.host || ctx.anchor) s += " Hôte : " + clip(ctx.host || ctx.anchor, 140);
     if (claims.length) s += " Claims : " + claims.join(" · ");
-    if (open) s += " Encore ouvert : " + open;
+    if (ctx.open.length) s += " Encore ouvert : " + ctx.open.join(" | ");
     return clip(s, 520);
   }
   function paintMem() {
@@ -162,8 +167,10 @@
           var name = m[1];
           who = seatedIds().find(function (id) { return nameOf(id).indexOf(name) === 0 || name.indexOf(nameOf(id)) === 0; }) || "";
         }
-        body.system = clip(sys, 280) + " Contexte compact. Ne répète pas tes claims. Ajoute un élément et tranche une question ouverte.";
-        body.user = clip(body.user || "", 220) + "\n\n" + pack(who);
+        var ctx = contextJSON(who);
+        body.system = clip(sys, 280);
+        body.user = clip(String(body.user || "").replace(/\n+M[eé]moire[\s\S]*$/, ""), 280);
+        body.context = ctx;
         opts = Object.assign({}, opts, { body: JSON.stringify(body) });
       } catch (e) {}
       return orig(url, opts);
@@ -222,7 +229,7 @@
     if (document.getElementById("circle-next")) return document.getElementById("circle-next");
     var nxt = document.createElement("div");
     nxt.id = "circle-next"; nxt.hidden = true;
-    nxt.innerHTML = "<h2>Fin de discussion</h2><p>Relance sur claims + questions ouvertes, pas sur le texte brut.</p><div class=\"nx-row\"><button type=\"button\" class=\"btn\" data-nx=\"go\">Continuer la conversation</button><label>Intervenir comme <select class=\"next-role\" id=\"next-role\"><option value=\"hote\">hôte</option><option value=\"lecteur\">lecteur</option><option value=\"objecteur\">objecteur</option><option value=\"defenseur\">défenseur</option><option value=\"secretaire\">secrétaire</option></select></label><button type=\"button\" class=\"btn ghost\" data-nx=\"in\">Intervenir</button></div>";
+    nxt.innerHTML = "<h2>Fin de discussion</h2><p>Relance sur claims + questions ouvertes.</p><div class=\"nx-row\"><button type=\"button\" class=\"btn\" data-nx=\"go\">Continuer la conversation</button><label>Intervenir comme <select class=\"next-role\" id=\"next-role\"><option value=\"hote\">hôte</option><option value=\"lecteur\">lecteur</option><option value=\"objecteur\">objecteur</option><option value=\"defenseur\">défenseur</option><option value=\"secretaire\">secrétaire</option></select></label><button type=\"button\" class=\"btn ghost\" data-nx=\"in\">Intervenir</button></div>";
     var compose = document.getElementById("compose");
     if (compose) compose.insertAdjacentElement("beforebegin", nxt);
     nxt.addEventListener("click", function (e) {
