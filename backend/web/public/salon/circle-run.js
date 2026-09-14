@@ -1,8 +1,14 @@
-/* Salon — cercle: seuls les auteurs assis a la creation peuvent etre invoques. */
+/* Salon — roles uniques, conflits arbitrés, convives figés à la création. */
 (function () {
   var running = false;
   var seated = ["voltaire", "rousseau", "montaigne", "kant"];
   var DEMO = "https://api.kayroslab.com/v1/demo/chat";
+  var ROLE_ORDER = [
+    { role: "lecteur", act: "lit", brief: "Tu ouvres. Tu poses la lecture." },
+    { role: "objecteur", act: "objecte", brief: "Tu objectes a la lecture, sans la reprendre." },
+    { role: "defenseur", act: "defend", brief: "Tu defendes ou precises contre l'objection." },
+    { role: "secretaire", act: "minute", brief: "Tu clos par une minute. Pas de nouveau debat." }
+  ];
   function boot() {
     if (typeof authors === "undefined" || !document.getElementById("open-circle")) { setTimeout(boot, 40); return; }
     injectUi(); hookMentions(); hookOpen(); hookCompose(); hookTalk();
@@ -45,6 +51,34 @@
     return found;
   }
   function speakersFor(text) { var m = mentionedSeated(text); return m.length ? m : guestIds(); }
+  function assignRoles(question, ids) {
+    var allowed = guestIds();
+    var mentioned = mentionedSeated(question);
+    var order = [];
+    mentioned.forEach(function (id) { if (allowed.indexOf(id) >= 0 && order.indexOf(id) < 0) order.push(id); });
+    (ids || allowed).forEach(function (id) { if (allowed.indexOf(id) >= 0 && order.indexOf(id) < 0) order.push(id); });
+    var taken = {}; var seats = []; var conflicts = [];
+    order.forEach(function (id, i) {
+      if (i >= ROLE_ORDER.length) {
+        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Tu es invite. Une phrase seulement." });
+        return;
+      }
+      var slot = ROLE_ORDER[i];
+      if (taken[slot.role]) {
+        conflicts.push("@" + id + " visait aussi " + slot.role + " — reste invite");
+        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Role deja pris. Une phrase." });
+        return;
+      }
+      if (mentioned.length >= 2 && i === 0) {
+        conflicts.push("@" + mentioned[0] + " et @" + mentioned[1] + " visaient la lecture — @" + mentioned[0] + " lit, @" + mentioned[1] + " objecte");
+      }
+      taken[slot.role] = id;
+      seats.push({ id: id, role: slot.role, act: slot.act, brief: slot.brief });
+    });
+    var seenC = {};
+    conflicts = conflicts.filter(function (c) { if (seenC[c]) return false; seenC[c] = 1; return true; });
+    return { seats: seats, conflicts: conflicts };
+  }
   function hookMentions() {
     var draft = document.getElementById("draft"); var suggest = document.getElementById("suggest");
     if (!draft || !suggest || draft.dataset.seatedHook) return;
@@ -153,9 +187,9 @@
     var core = blurb || (userLang() === "en" ? "The table advances by reading." : "La table n avance que si l on relit.");
     return { text: (name + " / " + work + " \u2014 " + q + " \u2014 " + core).slice(0, 520), proof: proofFromAuthor(author) };
   }
-  function askVoice(author, question) {
+  function askVoice(author, question, seat) {
     var lang = userLang();
-    var system = "Tu es " + authorNameSafe(author) + ". " + localizedBlurb(author) + (lang === "en" ? " Answer in English, 70-130 words." : " Reponds en francais, 70 a 130 mots.");
+    var system = "Tu es " + authorNameSafe(author) + ". " + localizedBlurb(author) + " Role: " + ((seat && seat.role) || "invite") + ". " + ((seat && seat.brief) || "") + (lang === "en" ? " Answer in English, 70-130 words." : " Reponds en francais, 70 a 130 mots.");
     logStep("Recherche de la voix de " + authorNameSafe(author) + "...", true);
     return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: question }) })
       .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
@@ -169,24 +203,29 @@
     if (running) return Promise.resolve();
     question = String(question || "").trim();
     if (question.length < 2) { logStep("Rien a poser a la table."); return Promise.resolve(); }
-    var allowed = guestIds();
-    var guests = (ids || allowed).filter(function (id) { return allowed.indexOf(id) >= 0; }).map(findAuthor).filter(Boolean);
+    var plan = assignRoles(question, ids);
+    var guests = plan.seats.map(function (seat) {
+      var a = findAuthor(seat.id); if (!a) return null;
+      a = Object.assign({}, a); a._seat = seat; return a;
+    }).filter(Boolean);
     if (guests.length < 1) { logStep("Aucun convive a table."); return Promise.resolve(); }
     running = true; showProgress();
     logStep("Question recue : " + question.slice(0, 90));
-    logStep(guests.length + " convive(s) du cercle vont parler.");
+    plan.conflicts.forEach(function (c) { logStep("Conflit de roles : " + c); });
+    logStep(guests.map(function (a) { return a._seat.role + " @" + a.id; }).join(" \u00b7 "));
     var chain = Promise.resolve();
     guests.forEach(function (author, i) {
       chain = chain.then(function () {
-        logStep((i + 1) + "/" + guests.length + " \u2014 " + authorNameSafe(author), true);
-        var wait = appendBubble({ authorId: author.id, name: authorNameSafe(author), act: "cherche dans ses livres", wait: true, text: "Recherche en cours..." });
-        return askVoice(author, question).then(function (out) {
+        var seat = author._seat || { role: "invite", act: "prend la parole", brief: "" };
+        logStep((i + 1) + "/" + guests.length + " — " + seat.role + " \u00b7 " + authorNameSafe(author), true);
+        var wait = appendBubble({ authorId: author.id, name: authorNameSafe(author), act: seat.role + " — cherche", wait: true, text: "Recherche en cours..." });
+        return askVoice(author, question, seat).then(function (out) {
           var text = typeof out === "string" ? out : (out && out.text) || "";
           var proof = (out && out.proof) || proofFromAuthor(author);
           return localizeProof(author, proof).then(function (localized) {
             if (wait) {
               wait.classList.remove("is-wait");
-              var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = "prend la parole";
+              var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = seat.act;
               wait.querySelector("p").textContent = text;
               fillProof(wait, localized);
             }
