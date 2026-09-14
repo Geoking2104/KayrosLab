@@ -1,4 +1,4 @@
-/* Salon — mémoire JSON v3. */
+/* Salon — mémoire JSON v3 + validation. */
 (function () {
   var MEM_KEY = "salon-thread-memory-v3";
   var KEEP_RECENT = 2;
@@ -39,6 +39,48 @@
     var t = String(text || "").replace(/\s+/g, " ").trim();
     var cut = t.split(/(?<=[.!?])\s+/)[0] || t;
     return clip(cut, 140);
+  }
+  function strOrNull(v, n) {
+    if (v == null || v === "") return null;
+    v = clip(String(v), n);
+    return v || null;
+  }
+  function idOk(v) {
+    v = String(v || "").toLowerCase();
+    return /^[a-z0-9_]{1,40}$/.test(v) ? v : null;
+  }
+  function sanitizeContext(raw) {
+    raw = raw && typeof raw === "object" ? raw : {};
+    var recent = raw.self && Array.isArray(raw.self.recent) ? raw.self.recent : [];
+    var table = Array.isArray(raw.table) ? raw.table : [];
+    var open = Array.isArray(raw.open) ? raw.open : [];
+    return {
+      v: 3,
+      speaker: idOk(raw.speaker),
+      anchor: strOrNull(raw.anchor, 160),
+      host: strOrNull(raw.host, 160),
+      self: {
+        digest: strOrNull(raw.self && raw.self.digest, 280),
+        recent: recent.slice(0, 2).map(function (t) {
+          return { role: clip((t && t.role) || "invite", 40), claim: clip((t && t.claim) || "", 140) };
+        }).filter(function (t) { return !!t.claim; })
+      },
+      table: table.slice(0, 4).map(function (t) {
+        return { id: idOk(t && t.id) || "inconnu", role: clip((t && t.role) || "", 40), claim: clip((t && t.claim) || "", 140) };
+      }).filter(function (t) { return !!t.claim; }),
+      open: open.slice(0, 3).map(function (q) { return clip(q, 90); }).filter(Boolean)
+    };
+  }
+  function validContext(ctx) {
+    try {
+      if (!ctx || ctx.v !== 3) return false;
+      if (!ctx.self || !Array.isArray(ctx.self.recent)) return false;
+      if (!Array.isArray(ctx.table) || !Array.isArray(ctx.open)) return false;
+      if (ctx.speaker != null && !idOk(ctx.speaker)) return false;
+      if (ctx.self.recent.length > 2 || ctx.table.length > 4 || ctx.open.length > 3) return false;
+      JSON.parse(JSON.stringify(ctx));
+      return true;
+    } catch (e) { return false; }
   }
   function compact() {
     mem.host = mem.host.slice(-4);
@@ -90,7 +132,7 @@
       extractOpen(text);
       saveMem(); paintMem(); return;
     }
-    var id = li.dataset.author || "inconnu";
+    var id = idOk(li.dataset.author) || "inconnu";
     var sig = id + "|" + clip(text, 60);
     if (mem.turns.some(function (t) { return t.sig === sig; })) return;
     var rec = { id: id, role: clip(role, 40), text: clip(text, 360), claim: claim(text), proof: clip(proof, 120), sig: sig };
@@ -103,32 +145,26 @@
   function contextJSON(id) {
     var anchor = mem.host[0] || "";
     var lastH = mem.host[mem.host.length - 1] || "";
-    var recent = (mem.byAuthor[id] || []).slice(-KEEP_RECENT).map(function (t) {
-      return { role: t.role, claim: t.claim };
-    });
-    var table = mem.turns.filter(function (t) { return t.id !== id; }).slice(-4).map(function (t) {
-      return { id: t.id, role: t.role, claim: t.claim };
-    });
-    return {
+    return sanitizeContext({
       v: 3,
       speaker: id || null,
       anchor: clip(anchor, 160) || null,
       host: lastH && lastH !== anchor ? clip(lastH, 160) : null,
       self: {
         digest: mem.digest[id] || null,
-        recent: recent
+        recent: (mem.byAuthor[id] || []).slice(-KEEP_RECENT).map(function (t) {
+          return { role: t.role, claim: t.claim };
+        })
       },
-      table: table,
+      table: mem.turns.filter(function (t) { return t.id !== id; }).slice(-4).map(function (t) {
+        return { id: t.id, role: t.role, claim: t.claim };
+      }),
       open: mem.open.slice(-3)
-    };
+    });
   }
   function followUpPrompt() {
     var ctx = contextJSON("");
     var claims = (ctx.table || []).map(function (t) { return "@" + t.id + " : " + t.claim; });
-    seatedIds().forEach(function (id) {
-      var last = (mem.byAuthor[id] || []).slice(-1)[0];
-      if (last) claims.push("@" + id + " : " + last.claim);
-    });
     var seen = {};
     claims = claims.filter(function (c) { if (seen[c]) return false; seen[c] = 1; return true; });
     var s = "Relance. Garde tes apports. Ajoute un élément. Réponds à une objection déjà dite.";
@@ -142,6 +178,7 @@
     if (!box) return;
     var n = mem.turns.length + Object.keys(mem.digest).length;
     box.hidden = n === 0 && !mem.host.length;
+    var ok = validContext(contextJSON(seatedIds()[0] || ""));
     var lines = seatedIds().map(function (id) {
       var arr = mem.byAuthor[id] || [];
       var d = mem.digest[id];
@@ -149,7 +186,7 @@
       if (!d && !last) return "";
       return "<li><strong>@" + id + "</strong> · " + (d ? "digest + " : "") + arr.length + " récent" + (arr.length > 1 ? "s" : "") + " — " + clip((last && last.claim) || d || "", 100) + "</li>";
     }).join("");
-    box.innerHTML = "<h2>Mémoire du cercle</h2><p class=\"cp-now\">" + mem.turns.length + " prise" + (mem.turns.length > 1 ? "s" : "") + " · " + mem.open.length + " question" + (mem.open.length > 1 ? "s" : "") + " ouverte" + (mem.open.length > 1 ? "s" : "") + "</p><ol>" + lines + "</ol>";
+    box.innerHTML = "<h2>Mémoire du cercle</h2><p class=\"cp-now\">schéma v3 " + (ok ? "valide" : "corrigé") + " · " + mem.turns.length + " prise" + (mem.turns.length > 1 ? "s" : "") + " · " + mem.open.length + " ouverte" + (mem.open.length > 1 ? "s" : "") + "</p><ol>" + lines + "</ol>";
   }
   function wrapFetch() {
     if (window.fetch && window.fetch.__salonMem) return;
@@ -168,6 +205,7 @@
           who = seatedIds().find(function (id) { return nameOf(id).indexOf(name) === 0 || name.indexOf(nameOf(id)) === 0; }) || "";
         }
         var ctx = contextJSON(who);
+        if (!validContext(ctx)) ctx = sanitizeContext({});
         body.system = clip(sys, 280);
         body.user = clip(String(body.user || "").replace(/\n+M[eé]moire[\s\S]*$/, ""), 280);
         body.context = ctx;
