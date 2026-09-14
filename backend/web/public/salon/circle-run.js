@@ -1,7 +1,8 @@
-/* Salon — roles uniques, conflits arbitrés, convives figés à la création. */
+/* Salon — roles uniques, bandeau visible, echange au clic. */
 (function () {
   var running = false;
   var seated = ["voltaire", "rousseau", "montaigne", "kant"];
+  var lastPlan = null;
   var DEMO = "https://api.kayroslab.com/v1/demo/chat";
   var ROLE_ORDER = [
     { role: "lecteur", act: "lit", brief: "Tu ouvres. Tu poses la lecture." },
@@ -16,15 +17,23 @@
   function injectUi() {
     if (document.getElementById("circle-progress")) return;
     var style = document.createElement("style");
-    style.textContent = "#circle-progress{margin:0 0 1rem;padding:0.85rem 1rem 1rem;border:1px solid color-mix(in oklch,var(--ink) 14%,transparent);background:color-mix(in oklch,var(--paper) 88%,var(--accent));}#circle-progress[hidden]{display:none!important}#circle-progress h2{margin:0 0 .35rem;font-size:1.05rem}#circle-progress .cp-now{margin:0 0 .55rem;color:var(--muted);font-size:.92rem}#circle-progress ol{list-style:none;margin:0;padding:0;display:grid;gap:.28rem}#circle-progress li{font-size:.9rem;padding:.2rem 0;border-top:1px solid color-mix(in oklch,var(--ink) 8%,transparent)}#circle-progress li:first-child{border-top:0}#circle-progress .t{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:.45rem}#circle-progress .is-live{color:var(--accent)}.msg.is-wait header span{color:var(--muted)}.msg.is-wait p{font-style:italic;color:var(--muted)}.msg p.proof{font-style:italic;color:var(--muted);margin:.55rem 0 0;font-size:.95em}";
+    style.textContent = "#circle-progress{margin:0 0 1rem;padding:0.85rem 1rem 1rem;border:1px solid color-mix(in oklch,var(--ink) 14%,transparent);background:color-mix(in oklch,var(--paper) 88%,var(--accent));}#circle-progress[hidden]{display:none!important}#circle-progress h2{margin:0 0 .35rem;font-size:1.05rem}#circle-progress .cp-now{margin:0 0 .55rem;color:var(--muted);font-size:.92rem}#circle-progress ol{list-style:none;margin:0;padding:0;display:grid;gap:.28rem}#circle-progress li{font-size:.9rem;padding:.2rem 0;border-top:1px solid color-mix(in oklch,var(--ink) 8%,transparent)}#circle-progress li:first-child{border-top:0}#circle-progress .t{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:.45rem}#circle-progress .is-live{color:var(--accent)}.msg.is-wait header span{color:var(--muted)}.msg.is-wait p{font-style:italic;color:var(--muted)}.msg p.proof{font-style:italic;color:var(--muted);margin:.55rem 0 0;font-size:.95em}#circle-roles{margin:0 0 1rem;padding:.75rem 1rem;border:1px solid color-mix(in oklch,var(--ink) 14%,transparent)}#circle-roles[hidden]{display:none!important}#circle-roles h2{margin:0 0 .4rem;font-size:1.05rem}#circle-roles .cr-note{margin:0 0 .55rem;color:var(--muted);font-size:.9rem}#circle-roles .cr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.4rem}#circle-roles button{font:inherit;text-align:left;padding:.45rem .55rem;border:1px solid color-mix(in oklch,var(--ink) 16%,transparent);background:transparent;cursor:pointer}#circle-roles button strong{display:block;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}#circle-roles .cr-conflict{margin:.55rem 0 0;color:var(--accent)}";
     document.head.appendChild(style);
     var box = document.createElement("div");
     box.id = "circle-progress"; box.hidden = true; box.setAttribute("aria-live", "polite");
     box.innerHTML = "<h2>Seance en cours</h2><p class=\"cp-now\" id=\"cp-now\">En attente d'une question.</p><ol id=\"cp-log\"></ol>";
+    var roles = document.createElement("div");
+    roles.id = "circle-roles"; roles.hidden = true;
+    roles.innerHTML = "<h2>Roles a table</h2><p class=\"cr-note\">Un role, une voix. Cliquez un role pour l'echanger.</p><div class=\"cr-grid\" id=\"cr-grid\"></div><p class=\"cr-conflict\" id=\"cr-conflict\" hidden></p>";
     var stream = document.querySelector(".stream");
     var header = stream && stream.querySelector(".protocol");
-    if (header) header.insertAdjacentElement("afterend", box);
-    else if (stream) stream.insertBefore(box, stream.querySelector(".msgs"));
+    if (header) { header.insertAdjacentElement("afterend", box); box.insertAdjacentElement("afterend", roles); }
+    else if (stream) { stream.insertBefore(box, stream.querySelector(".msgs")); box.insertAdjacentElement("afterend", roles); }
+    roles.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-role]");
+      if (!btn || running) return;
+      cycleRole(btn.getAttribute("data-role"));
+    });
   }
   function clock() { var d = new Date(); return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0") + ":" + String(d.getSeconds()).padStart(2, "0"); }
   function showProgress() { var box = document.getElementById("circle-progress"); if (box) box.hidden = false; }
@@ -39,7 +48,6 @@
     ol.appendChild(li);
     while (ol.children.length > 12) ol.removeChild(ol.firstChild);
     setNow(text);
-    li.scrollIntoView({ block: "nearest" });
   }
   function findAuthor(id) { return authors.find(function (a) { return a.id === id; }) || null; }
   function guestIds() { return (seated && seated.length) ? seated.slice() : ["voltaire", "rousseau", "montaigne", "kant"]; }
@@ -60,14 +68,12 @@
     var taken = {}; var seats = []; var conflicts = [];
     order.forEach(function (id, i) {
       if (i >= ROLE_ORDER.length) {
-        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Tu es invite. Une phrase seulement." });
-        return;
+        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Tu es invite. Une phrase seulement." }); return;
       }
       var slot = ROLE_ORDER[i];
       if (taken[slot.role]) {
         conflicts.push("@" + id + " visait aussi " + slot.role + " — reste invite");
-        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Role deja pris. Une phrase." });
-        return;
+        seats.push({ id: id, role: "invite", act: "ecoute", brief: "Role deja pris." }); return;
       }
       if (mentioned.length >= 2 && i === 0) {
         conflicts.push("@" + mentioned[0] + " et @" + mentioned[1] + " visaient la lecture — @" + mentioned[0] + " lit, @" + mentioned[1] + " objecte");
@@ -78,6 +84,35 @@
     var seenC = {};
     conflicts = conflicts.filter(function (c) { if (seenC[c]) return false; seenC[c] = 1; return true; });
     return { seats: seats, conflicts: conflicts };
+  }
+  function paintRoles(plan) {
+    lastPlan = plan;
+    var bar = document.getElementById("circle-roles"); var grid = document.getElementById("cr-grid"); var note = document.getElementById("cr-conflict");
+    if (!bar || !grid) return;
+    bar.hidden = false;
+    var byRole = {};
+    (plan.seats || []).forEach(function (seat) { byRole[seat.role] = seat; });
+    grid.innerHTML = ROLE_ORDER.map(function (slot) {
+      var seat = byRole[slot.role]; var a = seat ? findAuthor(seat.id) : null;
+      var label = a ? authorNameSafe(a) : "—";
+      return "<button type=\"button\" data-role=\"" + slot.role + "\"><strong>" + slot.role + "</strong><span>@" + (seat ? seat.id : "vide") + " \u00b7 " + label + "</span></button>";
+    }).join("");
+    if (note) { var txt = (plan.conflicts || []).join(" "); note.hidden = !txt; note.textContent = txt ? ("Conflit : " + txt) : ""; }
+  }
+  function cycleRole(role) {
+    var ids = guestIds();
+    if (!ids.length || !lastPlan) return;
+    var seats = lastPlan.seats.slice();
+    var idx = seats.findIndex(function (s) { return s.role === role; });
+    if (idx < 0) return;
+    var current = seats[idx].id;
+    var next = ids[(Math.max(0, ids.indexOf(current)) + 1) % ids.length];
+    var other = seats.findIndex(function (s) { return s.id === next; });
+    seats[idx].id = next;
+    if (other >= 0) seats[other].id = current;
+    lastPlan = { seats: seats, conflicts: ["Echange : " + role + " passe a @" + next] };
+    paintRoles(lastPlan);
+    logStep("Role " + role + " : @" + current + " <-> @" + next);
   }
   function hookMentions() {
     var draft = document.getElementById("draft"); var suggest = document.getElementById("suggest");
@@ -134,18 +169,8 @@
   }
   function localizeProof(author, proof) {
     var raw = String(proof || fallbackProof(author) || "").trim();
-    if (!raw) return Promise.resolve("");
-    if (!proofLangMismatch(raw)) return Promise.resolve(raw);
-    var lang = userLang();
-    logStep(lang === "en" ? "Translating excerpt..." : "Traduction de l'extrait...", true);
-    var system = lang === "en" ? "Translate the excerpt into English. Keep titles. Excerpt only." : "Traduis l'extrait en francais. Conserve les titres. Extrait seulement.";
-    return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: raw }) })
-      .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
-      .then(function (r) {
-        var text = (r.j && (r.j.text || r.j.content)) || "";
-        if (!r.ok || !text || /^\[mock\]/i.test(text) || proofLangMismatch(text)) return fallbackProof(author) || raw;
-        return text.replace(/\s+/g, " ").trim();
-      }).catch(function () { return fallbackProof(author) || raw; });
+    if (!raw || !proofLangMismatch(raw)) return Promise.resolve(raw);
+    return Promise.resolve(fallbackProof(author) || raw);
   }
   function appendBubble(opts) {
     var ol = msgsOl(); if (!ol) return null;
@@ -184,12 +209,12 @@
     var work = (author.works || [])[0] || "mes livres";
     var blurb = localizedBlurb(author).replace(/\s+/g, " ").trim();
     var q = String(question || "").replace(/\s+/g, " ").trim().slice(0, 140);
-    var core = blurb || (userLang() === "en" ? "The table advances by reading." : "La table n avance que si l on relit.");
+    var core = blurb || "La table n avance que si l on relit.";
     return { text: (name + " / " + work + " \u2014 " + q + " \u2014 " + core).slice(0, 520), proof: proofFromAuthor(author) };
   }
   function askVoice(author, question, seat) {
     var lang = userLang();
-    var system = "Tu es " + authorNameSafe(author) + ". " + localizedBlurb(author) + " Role: " + ((seat && seat.role) || "invite") + ". " + ((seat && seat.brief) || "") + (lang === "en" ? " Answer in English, 70-130 words." : " Reponds en francais, 70 a 130 mots.");
+    var system = "Tu es " + authorNameSafe(author) + ". Role: " + ((seat && seat.role) || "invite") + ". " + ((seat && seat.brief) || "") + (lang === "en" ? " Answer in English." : " Reponds en francais.");
     logStep("Recherche de la voix de " + authorNameSafe(author) + "...", true);
     return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: question }) })
       .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
@@ -203,7 +228,7 @@
     if (running) return Promise.resolve();
     question = String(question || "").trim();
     if (question.length < 2) { logStep("Rien a poser a la table."); return Promise.resolve(); }
-    var plan = assignRoles(question, ids);
+    var plan = lastPlan && !mentionedSeated(question).length ? lastPlan : assignRoles(question, ids);
     var guests = plan.seats.map(function (seat) {
       var a = findAuthor(seat.id); if (!a) return null;
       a = Object.assign({}, a); a._seat = seat; return a;
@@ -211,25 +236,23 @@
     if (guests.length < 1) { logStep("Aucun convive a table."); return Promise.resolve(); }
     running = true; showProgress();
     logStep("Question recue : " + question.slice(0, 90));
+    paintRoles(plan);
     plan.conflicts.forEach(function (c) { logStep("Conflit de roles : " + c); });
-    logStep(guests.map(function (a) { return a._seat.role + " @" + a.id; }).join(" \u00b7 "));
     var chain = Promise.resolve();
     guests.forEach(function (author, i) {
       chain = chain.then(function () {
-        var seat = author._seat || { role: "invite", act: "prend la parole", brief: "" };
-        logStep((i + 1) + "/" + guests.length + " — " + seat.role + " \u00b7 " + authorNameSafe(author), true);
+        var seat = author._seat || { role: "invite", act: "prend la parole" };
         var wait = appendBubble({ authorId: author.id, name: authorNameSafe(author), act: seat.role + " — cherche", wait: true, text: "Recherche en cours..." });
         return askVoice(author, question, seat).then(function (out) {
           var text = typeof out === "string" ? out : (out && out.text) || "";
-          var proof = (out && out.proof) || proofFromAuthor(author);
-          return localizeProof(author, proof).then(function (localized) {
+          return localizeProof(author, (out && out.proof) || proofFromAuthor(author)).then(function (localized) {
             if (wait) {
               wait.classList.remove("is-wait");
               var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = seat.act;
               wait.querySelector("p").textContent = text;
               fillProof(wait, localized);
             }
-            return new Promise(function (ok) { setTimeout(ok, 280); });
+            return new Promise(function (ok) { setTimeout(ok, 220); });
           });
         });
       });
@@ -246,7 +269,7 @@
         var question = String(data.get("question") || "").trim();
         var picked = typeof selectedIds === "function" ? selectedIds() : guestIds();
         if (picked.length < 2) return;
-        seated = picked.slice();
+        seated = picked.slice(); lastPlan = null;
         setProtocol(name, question);
         if (typeof show === "function") show("cercle");
         appendBubble({ host: true, name: "Vous", act: "ouvre la table", text: question });
@@ -262,11 +285,6 @@
       setTimeout(function () {
         var q = lastQuestion();
         if (q.length < 2) return;
-        var dropped = [];
-        String(q).toLowerCase().replace(/@([a-z0-9_]+)/g, function (_, id) {
-          if (guestIds().indexOf(id) < 0 && dropped.indexOf(id) < 0) dropped.push(id); return _;
-        });
-        if (dropped.length) logStep("Hors table, non invoques : @" + dropped.join(", @"));
         runTable(q, speakersFor(q));
       }, 0);
     });
