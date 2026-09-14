@@ -4,18 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Salon</title>
-  <script>
-  (function () {
-    var SRC = "https://cdn.jsdelivr.net/gh/Geoking2104/KayrosLab@f42a6b6b5e1af1847e974a1954132e889ed9854d/salon/index.html";
-    fetch(SRC, { cache: "force-cache" }).then(function (r) { return r.text(); }).then(function (html) {
-      html = html.replace(" — 54 déjà, ", " — {n} déjà, ");
-      html = html.replace(" — 54 already, ", " — {n} already, ");
-      html = html.replace('<p class="lead" data-i18n="circle.what">', '<p class="lead" data-i18n="circle.what" data-n="54">');
-      document.open(); document.write(html); document.close();
-      var s = document.createElement('script'); s.src = '/salon/catalog-count.js'; document.body.appendChild(s);
-    });
-  })();
-  </script>
 </head>
-<body><p>Ouverture du salon…</p></body>
+<body>
+  <p>Un cercle est une table. Vous y faites entrer des auteurs. @voltaire</p>
+  <p>Ouverture du salon…</p>
+</body>
 </html>
