@@ -1,4 +1,4 @@
-/* Salon think + waves + richer voice */
+/* Salon think + waves + IIT frame */
 (function () {
   var running = false, pending = null, lastPlan = null;
   var seated = ["voltaire", "rousseau", "montaigne", "kant"];
@@ -22,14 +22,11 @@
     var think = document.createElement("div");
     think.id = "circle-think"; think.hidden = true; think.setAttribute("aria-live", "assertive");
     think.innerHTML = "<h2>Le salon reflechit <span class=\"dots\"></span></h2><p id=\"think-now\">La table cherche, puis construit une reponse.</p>";
-    var box = document.createElement("div");
-    box.id = "circle-progress"; box.hidden = true;
+    var box = document.createElement("div"); box.id = "circle-progress"; box.hidden = true;
     box.innerHTML = "<h2>Seance en cours</h2><p class=\"cp-now\" id=\"cp-now\">En attente.</p><ol id=\"cp-log\"></ol>";
-    var roles = document.createElement("div");
-    roles.id = "circle-roles"; roles.hidden = true;
+    var roles = document.createElement("div"); roles.id = "circle-roles"; roles.hidden = true;
     roles.innerHTML = "<h2>Roles a table</h2><div class=\"cr-grid\" id=\"cr-grid\"></div><p class=\"cr-conflict\" id=\"cr-conflict\" hidden></p>";
-    var dyn = document.createElement("div");
-    dyn.id = "circle-dyn"; dyn.hidden = true;
+    var dyn = document.createElement("div"); dyn.id = "circle-dyn"; dyn.hidden = true;
     dyn.innerHTML = "<h2>Dynamique des conflits</h2><p class=\"dy-read\" id=\"dy-read\"></p><div class=\"dy-bar\"><i id=\"dy-fill\"></i></div><ol id=\"dy-beats\"></ol>";
     var stream = document.querySelector(".stream");
     var header = stream && stream.querySelector(".protocol");
@@ -165,13 +162,14 @@
   }
   function frameQuestions(q, role) {
     var t = String(q || "").toLowerCase();
-    var aboutIa = /\bia\b|intelligence artificielle|machine|algorithme|automate/.test(t);
+    var aboutIa = /\bia\b|intelligence artificielle|machine|algorithme|automate|modele/.test(t);
     var aboutLibre = /libre|liberte|autonomie|volont/.test(t);
-    if (aboutIa && aboutLibre) {
-      if (role === "objecteur") return "De qui parle-t-on quand on dit l'IA : un modele, un usage, un maitre ? La liberte dont on parle est-elle celle de choisir une fin, ou seulement celle d'enchainer des moyens ?";
-      if (role === "defenseur") return "Faut-il appeler liberte l'absence de contrainte, ou la capacite de se donner une loi ? L'outil peut-il etre le sujet de cette phrase ?";
-      if (role === "secretaire") return "Qu'est-ce qui, dans la question, reste indecis : le sujet IA, le predicat libre, ou le lien entre les deux ?";
-      return "L'IA est-elle un agent, un instrument, ou un theatre d'actions humaines ? Et libre veut-il dire sans maitre, ou capable de se prescrire une fin ?";
+    var aboutCons = /conscience|conscient|phenomen|integration de l.information|\bphi\b|\biit\b/.test(t);
+    if (aboutCons || (aboutIa && aboutLibre)) {
+      if (role === "objecteur") return "Conscience de quoi : quantite, qualite d'une structure, ou statut moral ? A quel grain : le poids, l'instance, la session, le systeme agent plus memoire ? Selon quel test : la sortie, la recurrence, ou un complexe irreductible ?";
+      if (role === "defenseur") return "Faut-il identifier l'experience a une structure cause-effet irreductible, ou seulement a un role fonctionnel ? L'information est-elle pour un observateur, ou intrinseque au systeme ?";
+      if (role === "secretaire") return "Trois questions restent ouvertes : le grain du sujet, le critere (comportement, architecture, complexe), et ce que l'on nomme conscience. La table ne doit pas repondre a trois demandes sous une seule.";
+      return "L'IA est-elle un agent, un instrument, ou un theatre d'actions ? Conscience-phenomene, conscience-acces, ou conscience-morale ? Et a quel grain le sujet est-il pris ?";
     }
     if (role === "objecteur") return "Que tient-on pour evident dans cette phrase, et que n'a-t-on pas nomme ? De quel sujet s'agit-il vraiment ?";
     if (role === "defenseur") return "Sous quel critere repondrait-on sans trahir la question ? Qu'est-ce qui, une fois precise, changerait la reponse ?";
@@ -191,20 +189,20 @@
     var role = (seat && seat.role) || "invite";
     var frame = frameQuestions(question, role);
     var mid = role === "objecteur"
-      ? ("La lecture trop nette confond l'outil et l'agent. " + work + " separe ce qui agit et ce qui est agi. Une machine qui combine n'institue pas une volonte ; elle execute une chaine dont le bout reste humain, ou impersonnel, ce qui n'est pas la meme chose que libre.")
+      ? ("La lecture trop nette confond l'outil et l'agent. " + work + " separe ce qui agit et ce qui est agi. Une machine qui combine n'institue pas une volonte ; une structure cause-effet vue du dehors n'est pas encore un dedans.")
       : role === "defenseur"
-      ? ("Precisons plutot que nier. " + work2 + " distingue la contrainte exterieure et la loi qu'on se donne. Si libre veut dire sans maitre apparent, beaucoup de mecanismes le sont. S'il veut dire capable de se determiner selon une fin prescrite, le mot ne s'applique pas a l'instrument, seulement a qui s'en sert ou s'y soumet.")
+      ? ("Precisons. " + work2 + " distingue contrainte exterieure et loi qu'on se donne. Information pour un observateur n'est pas information intrinseque. Un complexe irreductible, s'il existe, n'est pas une sortie eloquente.")
       : role === "secretaire"
-      ? "Deux lectures se croisent : l'une refuse le mot liberte a ce qui n'a pas de fin propre ; l'autre l'emploie pour une independance technique. La minute n'arbitre pas. Elle note ce qu'il faut trancher pour ne pas repondre a deux questions sous une seule."
-      : ("La phrase colle deux termes qui ne sont pas du meme ordre. " + work + " defait d'abord le sujet. Un automate peut etre independant d'un operateur immediat sans cesser d'etre un moyen. La liberte suppose une fin et le pouvoir de s'y tenir quand l'utilite pousse ailleurs.");
-    var close = /libre|ia|intelligence/i.test(String(question||""))
-      ? "Selon le sens choisi pour libre et le sujet assigne a l'IA, la reponse bascule. Tant que ces deux questions restent ouvertes, affirmer ou nier n'est qu'un effet de langue."
+      ? "La minute note trois dossiers : le grain, le test, l'espece de conscience. Tant qu'ils restent melee, affirmer ou nier n'est qu'un effet de langue."
+      : ("La phrase colle des termes d'ordres differents. " + work + " defait d'abord le sujet. Un automate peut etre independant d'un operateur sans cesser d'etre un moyen. La conscience-phenomene n'est pas la conscience-acces, ni un statut moral.");
+    var close = /libre|ia|intelligence|conscience|phi|iit/i.test(String(question||""))
+      ? "Selon le grain, le test et l'espece choisis, la reponse bascule. Pas de verdict tant que ces trois questions restent ouvertes."
       : "Une fois ces questions posees, on peut repondre. Pas avant : autrement on tranche un mot, pas un probleme.";
     return { text: (frame + " " + mid + " " + close).replace(/\s+/g, " ").trim(), proof: proofFromAuthor(author) };
   }
   function askVoice(author, question, seat) {
     var role = (seat && seat.role) || "invite";
-    var system = "Tu es " + authorNameSafe(author) + ". Role: " + role + ". Commence par deux questions courtes qui decomposent la demande (sujet, predicat, critere), puis raisonne. 160-240 mots, francais, premiere personne. Interdits: Je prends la question ; je refuse d'y repondre par une maxime ; On me connait ainsi ; te presenter ; reciter un extrait comme seule reponse.";
+    var system = "Tu es " + authorNameSafe(author) + ". Role: " + role + ". Commence par deux questions courtes. Si IA, liberte ou conscience : decompose grain (poids, instance, session, agent+memoire), test (sortie, recurrence, complexe irreductible), espece (phenomene, acces, morale). Puis raisonne. 160-240 mots, francais, premiere personne. Interdits: Je prends la question ; maxime ; On me connait ainsi ; te presenter ; extrait comme seule reponse.";
     showThink("Cadrage, puis reponse — " + authorNameSafe(author));
     logStep("Le salon reflechit avec " + authorNameSafe(author), true);
     var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
