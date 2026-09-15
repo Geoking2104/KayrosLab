@@ -4,7 +4,7 @@ Statut : implémenté sur `codex/production-console`, prêt à migrer et déploy
 
 ## Objectif et périmètre
 
-La console est le poste de travail d’un tenant KayrosLab. Elle rend opérants trois parcours qui étaient auparavant absents ou de démonstration : administrer les agents, configurer les connecteurs de messagerie et poursuivre une décision ambiguë dans un fil durable. Les fonctions existantes de salons, essaims, règles, consentement et arbitrage sont conservées.
+La console est le poste de travail d’un tenant KayrosLab. Elle rend opérants trois parcours qui étaient auparavant absents ou de démonstration : administrer les agents, configurer les connecteurs de messagerie et poursuivre une décision ambiguë dans un fil durable. Les fonctions existantes de sessions, essaims, règles, consentement et arbitrage sont conservées.
 
 Un administrateur ou membre `comex` peut créer et modifier un agent, expliciter son rôle, département, séniorité, focus, mission, instructions, contraintes, provider/modèle, outils, connecteurs, règles, métadonnées, profil comportemental, veto et état actif. Un agent désactivé ne peut plus être ajouté à un nouvel essaim ni exécuté.
 
@@ -22,7 +22,7 @@ React /console (hash routes)
        │    └─ coffre AES-256-GCM côté serveur
        └─ PostgreSQL
             ├─ registre/essaims/runs existants
-            ├─ collaboration rooms/events/messages existants
+            ├─ harness sessions/events/messages existants
             ├─ kayros_decision_threads (+ messages)
             └─ kayros_connector_configurations
 ```
@@ -33,7 +33,7 @@ Le frontend ne reçoit jamais les secrets. Fastify chiffre l’objet d’identif
 
 La migration additive et transactionnelle est `core/sql/migrations/20260828_console_v2.sql`. Le schéma idempotent de démarrage `core/sql/schema.sql` contient les mêmes objets :
 
-- `kayros_decision_threads` : tenant, salon, run racine/courant, statut, question et snapshot JSONB ;
+- `kayros_decision_threads` : tenant, session, run racine/courant, statut, question et snapshot JSONB ;
 - `kayros_decision_thread_messages` : flux ordonné de questions, runs, demandes de précision, réponses et arbitrages ;
 - `kayros_connector_configurations` : une connexion par tenant/plateforme, paramètres non secrets, secret opaque chiffré, état et résultat du dernier test.
 
@@ -45,7 +45,11 @@ Toutes les routes console exigent l’authentification du tenant. Les mutations 
 
 | Méthode | Route | Résultat |
 |---|---|---|
-| `GET` | `/v1/console/overview` | résumé, capacités, agents, salons, connecteurs et fils |
+| `GET` | `/v1/console/overview` | résumé, capacités, agents, sessions, connecteurs et fils |
+| `GET/POST` | `/v1/console/sessions` | liste/ouverture d’une session de harness liée à un collectif |
+| `GET` | `/v1/console/sessions/:sessionId` | détail de la session, exécutions et journal |
+| `PATCH` | `/v1/console/sessions/:sessionId/collective` | ajout/retrait d’agents du collectif |
+| `POST` | `/v1/console/sessions/:sessionId/run` | exécution d’une mission gouvernée |
 | `GET/POST` | `/v1/console/agents` | liste/création d’agents |
 | `PATCH` | `/v1/console/agents/:agentId` | modification complète ou activation |
 | `POST` | `/v1/console/agents/:agentId/crystal` | import consenti d’un profil Crystal |
@@ -77,9 +81,9 @@ Le profil est facultatif et réservé à l’adaptation de communication, au dé
 ## Parcours UX et états
 
 - **Agents** : liste, état actif, création/édition dans un panneau, champs structurés et aperçu des règles effectives ; import Crystal distinct et consenti.
-- **Réglages** : carte par plateforme avec `à configurer`, `à tester`, `connecté`, `erreur` ou `désactivé`; sauvegarde masquée, test explicite, URL webhook copiable et rappel de rattachement du salon.
-- **Salons** : création à partir des seuls agents actifs et identifiant externe explicite.
-- **Mission rapide** : sélection du salon, question et contexte ; ouverture automatique du dossier/fils.
+- **Réglages** : carte par plateforme avec `à configurer`, `à tester`, `connecté`, `erreur` ou `désactivé`; sauvegarde masquée, test explicite et URL webhook copiable.
+- **Sessions** : ouverture à partir des seuls agents actifs, avec seuil de consensus explicite ; le collectif reste modifiable sans recréer la session.
+- **Mission gouvernée** : sélection de la session, question et contexte ; ouverture automatique du dossier et du fil.
 - **Décisions** : timeline durable, contributions et objections visibles, questions ciblées, réponse humaine, nouvelle exécution du même collectif, puis arbitrage.
 
 La mise en page reste un workbench sobre, clavier-compatible, avec rail latéral sur grand écran et grille/commandes empilées sous 840 et 560 px. La largeur minimale supportée est 320 px.
@@ -101,8 +105,8 @@ Les anciens secrets `SLACK_*`, `DISCORD_*` et `TEAMS_*` restent supportés comme
 
 1. Un admin crée, modifie et désactive un agent ; les champs sont persistés et un agent désactivé n’est plus exécutable.
 2. Aucun secret de connecteur n’apparaît dans une réponse API, un log applicatif, le bundle frontend ou le dépôt ; la sauvegarde échoue fermée sans clé de coffre.
-3. Chaque connecteur peut être sauvegardé, testé, activé/désactivé, associé à un salon et reçoit ses événements via une URL signée propre à la connexion.
-4. Un verdict conditionnel produit un fil durable lié au salon et au dossier avec questions ciblées, historique, réponse humaine et relance du même essaim.
+3. Chaque connecteur peut être sauvegardé, testé et activé/désactivé ; le rattachement des canaux relève de l’application de conversation séparée.
+4. Un verdict conditionnel produit un fil durable lié à la session et au dossier avec questions ciblées, historique, réponse humaine et relance du même collectif.
 5. Les contributions, preuves, objections, conditions, synthèse, verdict et arbitrage restent lisibles après rechargement et redémarrage avec PostgreSQL.
 6. L’import Crystal est impossible sans token serveur et consentement ; aucun scraping ni appel réel n’est effectué par les tests.
 7. Les tests unitaires, Fastify, PostgreSQL, le contrat UI et le build Vite réussissent ; le workflow Pages publie `/console/`.
@@ -112,7 +116,7 @@ Les anciens secrets `SLACK_*`, `DISCORD_*` et `TEAMS_*` restent supportés comme
 1. Sauvegarder PostgreSQL, appliquer `core/sql/migrations/20260828_console_v2.sql`, puis déployer une seule instance canari.
 2. Fournir les variables via le coffre de production et vérifier `/health` (`persistence=postgres`, `multiInstanceReady=true`).
 3. Construire la console avec `npm ci && npm run build` dans `frontend/console-app`; le résultat va dans `backend/web/public/console`.
-4. Créer/tester les connexions dans Réglages, reporter leurs URLs dans les consoles officielles, puis rattacher les identifiants de salons.
+4. Créer/tester les connexions dans Réglages et reporter leurs URLs dans les consoles officielles des fournisseurs.
 5. Tester une mission conditionnelle, répondre dans le fil, relancer puis arbitrer ; étendre ensuite à toutes les instances.
 
 Les seules étapes non automatisables sans autorisation externe sont l’obtention/rotation des credentials Slack, Discord, Teams et Crystal, la configuration de leurs consoles officielles et le déploiement sur l’infrastructure de production.

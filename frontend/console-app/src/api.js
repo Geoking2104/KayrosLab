@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'kayros_console_token';
+const TOKEN_KEY = 'kayros…oken';
 const API_BASE = String(import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 function apiUrl(path) {
@@ -30,6 +30,8 @@ async function request(path, options = {}) {
   return body;
 }
 
+// La console est un harness d'agents : elle parle de collectifs, de sessions et
+// de missions. Aucune surface d'application tierce n'est exposée ici.
 export const api = {
   register: (name, email, password) => request('/v1/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password }) }),
   login: (email, password) => request('/v1/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
@@ -44,11 +46,14 @@ export const api = {
   configureConnector: (platform, input) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PUT', body: JSON.stringify(input) }),
   setConnectorEnabled: (platform, enabled) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PATCH', body: JSON.stringify({ enabled }) }),
   testConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/test`, { method: 'POST', body: '{}' }),
-  createRoom: (room) => request('/v1/console/rooms', { method: 'POST', body: JSON.stringify(room) }),
-  updateRoomAgents: (roomId, body) => request(`/v1/console/rooms/${encodeURIComponent(roomId)}/agents`, { method: 'PATCH', body: JSON.stringify(body) }),
-  sendMessage: (roomId, text, context) => request(`/v1/console/rooms/${encodeURIComponent(roomId)}/messages`, {
-    method: 'POST', body: JSON.stringify(context ? { text, context } : { text }),
+  sessions: () => request('/v1/console/sessions'),
+  session: (sessionId) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}`),
+  createSession: (session) => request('/v1/console/sessions', { method: 'POST', body: JSON.stringify(session) }),
+  updateSessionCollective: (sessionId, body) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/collective`, { method: 'PATCH', body: JSON.stringify(body) }),
+  runMission: (sessionId, question, context) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, {
+    method: 'POST', body: JSON.stringify(context ? { question, context } : { question }),
   }),
+  activity: (sessionId = '') => request(`/v1/console/activity${sessionId ? `?session_id=${encodeURIComponent(sessionId)}` : ''}`),
   thread: (threadId) => request(`/v1/console/threads/${encodeURIComponent(threadId)}`),
   replyThread: (threadId, text) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/messages`, { method: 'POST', body: JSON.stringify({ text }) }),
   arbitrateThread: (threadId, decision) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/arbitrate`, { method: 'POST', body: JSON.stringify(decision) }),
@@ -58,4 +63,5 @@ export const api = {
   createWorksAgent: (body) => request('/v1/literary/agents', { method: 'POST', body: JSON.stringify(body) }),
   addManualBooks: (agentId, works) => request(`/v1/literary/agents/${encodeURIComponent(agentId)}/books`, { method: 'POST', body: JSON.stringify({ works }) }),
   literaryLedger: (limit = 50) => request(`/v1/literary/ledger?limit=${limit}`),
+  getAuthorWorks: (authorId) => request(`/v1/literary/authors/${encodeURIComponent(authorId)}/works`),
 };

@@ -1,10 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { api, getToken, setToken } from './api.js';
 
+// La console est un harness d'agents : registre d'agents, collectifs, sessions
+// gouvernées, missions, dossiers et arbitrage humain. Le produit de conversation
+// dérivé vit dans une application séparée : aucune de ses surfaces n'apparaît ici.
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Vue d’ensemble'], ['rooms', 'Salons'], ['agents', 'Agents'], ['auteurs', 'Auteurs'], ['activity', 'Décisions'], ['settings', 'Réglages'],
+  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['auteurs', 'Auteurs'], ['activity', 'Décisions'], ['settings', 'Réglages'],
 ];
+const votingThresholds = [['majority', 'Majorité'], ['unanimous', 'Unanimité'], ['veto_power_csuite', 'Veto comité exécutif']];
+const votingLabel = (value) => votingThresholds.find(([id]) => id === value)?.[1] || 'Majorité';
 const connectorFields = {
   slack: [['bot_token', 'Jeton du bot', true], ['signing_secret', 'Secret de signature', true], ['webhook_url', 'Webhook sortant (facultatif)', true]],
   discord: [['application_id', 'Application ID', false], ['bot_token', 'Jeton du bot', true], ['public_key', 'Clé publique Ed25519', true], ['webhook_url', 'Webhook sortant (facultatif)', true]],
@@ -16,8 +21,10 @@ function splitCsv(value) { return String(value || '').split(',').map((item) => i
 function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'); } catch { return fallback; } }
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
 
+const pendingSessionRef = { sessionId: null };
+
 function Mark({ name }) {
-  const labels = { overview: '▦', rooms: '▤', agents: '◉', auteurs: '✒', activity: '✓', settings: '⚙' };
+  const labels = { overview: '▦', sessions: '▤', agents: '◉', auteurs: '✒', activity: '✓', settings: '⚙' };
   return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
@@ -48,7 +55,7 @@ function Login({ onLogin }) {
     catch (err) { setState('error'); setError(err.message); }
   }
   return <main className="login-shell">
-    <section className="login-copy"><a className="wordmark" href="/">KayrosLab</a><h1>Décider avec un collectif explicite.</h1><p>Configurez les agents, reliez les salons et gardez chaque verdict sous arbitrage humain.</p></section>
+    <section className="login-copy"><a className="wordmark" href="/">KayrosLab</a><h1>Décider avec un collectif explicite.</h1><p>Composez des collectifs d'agents, lancez des missions gouvernées et gardez chaque verdict sous arbitrage humain.</p></section>
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
       {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
@@ -72,27 +79,45 @@ function Login({ onLogin }) {
 function Connection({ connection }) {
   const connected = connection.status === 'connected';
   return <div className="connection"><span className={`status-dot ${connected ? 'is-on' : connection.status === 'error' ? 'is-error' : ''}`} />
-    <div><strong>{platformNames[connection.platform]}</strong><small>{connection.rooms} salon{connection.rooms === 1 ? '' : 's'} · {connection.source === 'environment' ? 'variables serveur' : 'console'}</small></div>
+    <div><strong>{platformNames[connection.platform]}</strong><small>{connection.source === 'environment' ? 'variables serveur' : 'console'}</small></div>
     <span className="connection-state">{connected ? 'Connecté' : connection.status === 'configured' ? 'À tester' : connection.status === 'disabled' ? 'Désactivé' : connection.status === 'error' ? 'Erreur' : 'À configurer'}</span>
   </div>;
 }
 
-function CreateRoom({ agents, defaultPlatform = 'slack', onClose, onCreated }) {
+function AgentChips({ agents }) {
+  if (!agents?.length) return null;
+  return <div className="collective-chips">{agents.map((agent) => <span className="collective-chip" key={agent.agent_id}>
+    {agent.avatar_url ? <img className="agent-avatar" src={agent.avatar_url} alt="" /> : null}
+    <span><strong>{agent.display_name}</strong><small>{agent.department}</small></span>
+    {agent.veto_power ? <em title="Pouvoir de veto">veto</em> : null}
+  </span>)}</div>;
+}
+
+function CreateSession({ agents, onClose, onCreated }) {
   const active = agents.filter((agent) => agent.enabled !== false);
-  const [form, setForm] = useState({ name: '', platform: defaultPlatform, external_room_id: '', mode: 'mention_only', active_agents: active.slice(0, 3).map((agent) => agent.agent_id) });
+  const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority' });
   const [state, setState] = useState('idle'); const [error, setError] = useState('');
   function toggle(id) { setForm((current) => ({ ...current, active_agents: current.active_agents.includes(id) ? current.active_agents.filter((item) => item !== id) : [...current.active_agents, id] })); }
-  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createRoom(form); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
+  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createSession(form); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
-    <header><div><h2>Rattacher un salon</h2><p>Le canal et ce collectif partageront le même dossier de décision.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
-    <form onSubmit={submit}><div className="form-grid"><label>Nom<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} required /></label>
-      <label>Plateforme<select value={form.platform} onChange={(event) => setForm({ ...form, platform: event.target.value })}>{Object.entries(platformNames).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label></div>
-      <label>Identifiant du canal<input value={form.external_room_id} onChange={(event) => setForm({ ...form, external_room_id: event.target.value })} placeholder="C012345, channel ID ou conversation ID" required /></label>
+    <header><div><h2>Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
       <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} />{agent.metadata?.literary?.avatar_url ? <img className="agent-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : null}<span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
-      <label>Mode<select value={form.mode} onChange={(event) => setForm({ ...form, mode: event.target.value })}><option value="mention_only">Sur mention</option><option value="always">Tous les messages</option></select></label>
-      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Création…' : 'Rattacher'}</button></footer>
+      <label>Seuil de consensus<select value={form.voting_threshold} onChange={(event) => setForm({ ...form, voting_threshold: event.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
+      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Ouverture…' : 'Ouvrir la session'}</button></footer>
     </form>
   </section></div>;
+}
+
+/** Trace d'exécution : une mission = instruction humaine → une étape par agent → consensus → arbitrage. */
+function RunTrace({ run }) {
+  const steps = [];
+  for (const entry of run?.audit || []) {
+    if (entry.type === 'swarm.agent.verdict') steps.push({ key: `agent-${entry.agent_id}`, label: `Analyse · ${entry.agent_id}`, value: verdictLabel(entry.verdict) });
+    else if (entry.type === 'swarm.run.completed') steps.push({ key: 'consensus', label: 'Agrégation du consensus', value: verdictLabel(entry.consensus) });
+  }
+  if (!steps.length) return null;
+  return <div className="harness-trace"><p className="section-kicker">Trace du harness</p><ol>{steps.map((step, index) => <li key={step.key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step.label}</strong><em>{step.value}</em></li>)}</ol></div>;
 }
 
 function RunDossier({ run }) {
@@ -101,6 +126,7 @@ function RunDossier({ run }) {
   const conditions = [...new Set((run.analyses || []).flatMap((item) => item.required_mitigations || []))];
   return <article className="dossier"><header><div><small>Dossier {run.run_id}</small><h3>{run.swarm_name}</h3></div><span className={`verdict is-${String(run.consensus?.verdict || '').toLowerCase()}`}>{verdictLabel(run.consensus?.verdict)}</span></header>
     <p className="synthesis">{run.consensus?.rationale}</p>
+    <RunTrace run={run} />
     <h4 className="section-kicker">Contributions individuelles</h4><div className="analysis-grid">{(run.analyses || []).map((analysis) => <section key={analysis.agent_id} className="analysis-card"><header><strong>{analysis.role_name || analysis.agent_id}</strong><span>{verdictLabel(analysis.verdict)}</span></header><p>{analysis.primary_reason}</p>
       {!!analysis.strengths_opportunities?.length && <div><small>Preuves et opportunités</small><ul>{analysis.strengths_opportunities.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {!!analysis.critical_risks?.length && <div><small>Objections</small><ul>{analysis.critical_risks.map((item) => <li key={item}>{item}</li>)}</ul></div>}
@@ -115,7 +141,7 @@ function DecisionThread({ thread, onChanged }) {
   const [reply, setReply] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   async function answer(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = await api.replyThread(thread.thread_id, reply); setReply(''); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
   async function arbitrate(action, decision) { setState('loading'); setError(''); try { const result = await api.arbitrateThread(thread.thread_id, { action, decision, justification: action === 'override_veto' ? 'Arbitrage explicite depuis la console.' : '' }); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
-  return <section className="thread-view"><header><div><small>Fil {thread.thread_id} · salon {thread.room_id}</small><h2>{thread.question}</h2></div><span className="thread-status">{thread.status.replaceAll('_', ' ')}</span></header>
+  return <section className="thread-view"><header><div><small>Fil {thread.thread_id} · session {thread.room_id}</small><h2>{thread.question}</h2></div><span className="thread-status">{thread.status.replaceAll('_', ' ')}</span></header>
     <div className="timeline">{(thread.messages || []).map((message) => <div className={`thread-message is-${message.role}`} key={message.message_id || `${message.kind}-${message.created_at}`}>
       {message.kind === 'run' ? <RunDossier run={message.run} /> : <><small>{message.role === 'human' ? message.author_id || 'Décideur' : 'Collectif Kayros'} · {message.kind}</small>{message.text && <p>{message.text}</p>}{message.questions?.length > 0 && <ol>{message.questions.map((question) => <li key={question}>{question}</li>)}</ol>}{message.decision && <p>Arbitrage : {message.decision.action} · {verdictLabel(message.decision.verdict)}</p>}</>}
     </div>)}</div>
@@ -125,20 +151,20 @@ function DecisionThread({ thread, onChanged }) {
   </section>;
 }
 
-function Overview({ data, refresh, openRoom, onThread }) {
-  const [selectedRoom, setSelectedRoom] = useState(() => {
-    const preselected = pendingRoomRef.roomId;
-    if (preselected && data.rooms.some((room) => room.room_id === preselected)) { pendingRoomRef.roomId = null; return preselected; }
-    return data.rooms[0]?.room_id || null;
+function Overview({ data, refresh, openSession, onThread }) {
+  const [selectedSession, setSelectedSession] = useState(() => {
+    const preselected = pendingSessionRef.sessionId;
+    if (preselected && data.sessions.some((session) => session.session_id === preselected)) { pendingSessionRef.sessionId = null; return preselected; }
+    return data.sessions[0]?.session_id || null;
   });
   useEffect(() => {
-    setSelectedRoom((current) => {
-      if (current && data.rooms.some((room) => room.room_id === current)) return current;
-      const pending = pendingRoomRef.roomId;
-      if (pending && data.rooms.some((room) => room.room_id === pending)) { pendingRoomRef.roomId = null; return pending; }
-      return data.rooms[0]?.room_id || '';
+    setSelectedSession((current) => {
+      if (current && data.sessions.some((session) => session.session_id === current)) return current;
+      const pending = pendingSessionRef.sessionId;
+      if (pending && data.sessions.some((session) => session.session_id === pending)) { pendingSessionRef.sessionId = null; return pending; }
+      return data.sessions[0]?.session_id || '';
     });
-  }, [data.rooms]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  }, [data.sessions]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
   const [soCases, setSoCases] = useState([]);
@@ -166,9 +192,9 @@ function Overview({ data, refresh, openRoom, onThread }) {
     client.listDocuments(soCaseId).then((result) => { if (alive) setSoDocs(result.documents || []); }).catch(() => { if (alive) setSoDocs([]); });
     return () => { alive = false; };
   }, [soCaseId, soReady]);
-  const room = data.rooms.find((item) => item.room_id === selectedRoom);
+  const session = data.sessions.find((item) => item.session_id === selectedSession);
   async function run(event) {
-    event.preventDefault(); if (!room) return; setState('loading'); setError('');
+    event.preventDefault(); if (!session) return; setState('loading'); setError('');
     try {
       let context;
       if (soCase) {
@@ -179,16 +205,18 @@ function Overview({ data, refresh, openRoom, onThread }) {
           lines.length ? `Corpus joint (${lines.length} document(s)) :\n${lines.join('\n')}` : 'Corpus : aucun document chargé pour ce dossier.',
         ].join('\n').slice(0, SALES_ORACLE_CONTEXT_LIMIT);
       }
-      const result = await api.sendMessage(room.room_id, question, context);
+      const result = await api.runMission(session.session_id, question, context);
       setQuestion(''); setState('success'); onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
-  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console des agents</h1><p>Configurez les participants, instruisez la question, puis arbitrez sur preuves.</p></div><button className="button primary" onClick={openRoom}>Rattacher un salon</button></header>
+  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console harness</h1><p>Composez un collectif, lancez une mission gouvernée, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
-    <section className="metric-row"><div><strong>{data.summary.rooms}</strong><span>Salons actifs</span></div><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.hybrid_agents}</strong><span>Profils hybrides</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
-    <div className="mission-workbench"><section><header><div><h2>Mission rapide</h2><p>Le résultat ouvre un fil durable, pas une simple notification.</p></div></header>
-      <label>Salon<select value={selectedRoom || ''} onChange={(event) => setSelectedRoom(event.target.value)}><option value="">Sélectionner…</option>{data.rooms.map((item) => <option value={item.room_id} key={item.room_id}>{item.name} · {platformNames[item.platform]}</option>)}</select></label>
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!room || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>
+    <section className="metric-row"><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.sessions}</strong><span>Sessions</span></div><div><strong>{data.summary.executions}</strong><span>Exécutions</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
+    <div className="mission-workbench"><section><header><div><h2>Mission gouvernée</h2><p>Instruction → une étape par agent → consensus → dossier durable → arbitrage.</p></div></header>
+      <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
+      {session && <AgentChips agents={session.collective.agents} />}
+      {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour lancer une mission.</p>}
+      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
         <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
@@ -198,8 +226,8 @@ function Overview({ data, refresh, openRoom, onThread }) {
         {soStatus && <p className={`form-error ${soStatus.tone === 'error' ? '' : 'is-empty'}`} role="status">{soStatus.text || '\u00a0'}</p>}
       </section>
       {error && <p className="inline-error">{error}</p>}
-    </section><section><header><div><h2>Décisions ouvertes</h2><p>Reprendre une discussion avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
-      <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)}><strong>{item.question}</strong><small>{item.status.replaceAll('_', ' ')} · {item.current_run_id}</small></button>)}{!data.threads.length && <p className="muted">Aucun dossier lancé.</p>}</div>
+    </section><section><header><div><h2>Exécutions récentes</h2><p>Reprendre une mission avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
+      <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)}><strong>{item.question}</strong><small>{item.status.replaceAll('_', ' ')} · {item.current_run_id}</small></button>)}{!data.threads.length && <p className="muted">Aucune mission lancée.</p>}</div>
     </section></div>
   </>;
 }
@@ -224,7 +252,7 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
       <label>Mission<textarea value={form.mission} onChange={(event) => setForm({ ...form, mission: event.target.value, primary_focus: event.target.value })} required /></label><label>Instructions<textarea value={form.instructions} onChange={(event) => setForm({ ...form, instructions: event.target.value })} /></label>
       <div className="form-grid"><label>Contraintes · une par ligne<textarea value={form.constraints} onChange={(event) => setForm({ ...form, constraints: event.target.value })} /></label><label>Règles de décision · une par ligne<textarea value={form.rules} onChange={(event) => setForm({ ...form, rules: event.target.value })} /></label></div>
       <div className="form-grid"><label>Modèle<input value={form.model || ''} onChange={(event) => setForm({ ...form, model: event.target.value })} placeholder="Optionnel" /></label><label>Outils · séparés par des virgules<input value={form.tools} onChange={(event) => setForm({ ...form, tools: event.target.value })} /></label></div>
-      <fieldset><legend>Connecteurs autorisés</legend><div className="inline-checks">{Object.keys(platformNames).map((id) => <label key={id}><input type="checkbox" checked={form.connectors.includes(id)} onChange={() => toggleConnector(id)} />{platformNames[id]}</label>)}</div></fieldset>
+      <fieldset><legend>Canaux autorisés</legend><div className="inline-checks">{Object.keys(platformNames).map((id) => <label key={id}><input type="checkbox" checked={form.connectors.includes(id)} onChange={() => toggleConnector(id)} />{platformNames[id]}</label>)}</div></fieldset>
       <div className="form-grid"><label>Métadonnées JSON<textarea className="code-input" value={form.metadata} onChange={(event) => setForm({ ...form, metadata: event.target.value })} /></label><label>Profil comportemental JSON<textarea className="code-input" value={form.behavioral} onChange={(event) => setForm({ ...form, behavioral: event.target.value })} /></label></div>
       <div className="inline-checks"><label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label><label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
@@ -233,7 +261,6 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
   </section></div>;
 }
 
-const pendingRoomRef = { roomId: null };
 function levenshtein(a, b) {
   const m = a.length; const n = b.length;
   if (!m) return n; if (!n) return m;
@@ -327,6 +354,9 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     return () => { alive = false; clearTimeout(timer); };
   }, [query]);
 
+  useEffect(() => {
+    api.listAuthors('').then((result) => setAuthors((current) => current.length ? current : (result.authors || []))).catch(() => { });
+  }, []);
   useEffect(() => {
     (authors || []).forEach((author) => {
       if (!author.wikipedia || avatars[author.id] !== undefined) return;
@@ -422,13 +452,13 @@ function AuthorPickerDialog({ onClose, onCreated }) {
     finally { setBusy(false); }
   }
 
-  async function startConversation() {
+  async function startSession() {
     if (!createdAgents.length) return;
-    setBusy('conversation'); setError('');
+    setBusy('session'); setError('');
     try {
       const ids = createdAgents.slice(-3).map((agent) => agent.agent_id);
-      const room = await api.createRoom({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: ids });
-      pendingRoomRef.roomId = room.room.room_id;
+      const result = await api.createSession({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, active_agents: ids });
+      pendingSessionRef.sessionId = result.session.session_id;
       location.hash = 'overview';
       onClose();
       await onCreated();
@@ -513,7 +543,7 @@ function AuthorPickerDialog({ onClose, onCreated }) {
       {createdAgents.length > 0 && !progress && <div className="so-created">
         <p className="muted so-note">Agent(s) prêt(s) : {createdAgents.map((agent) => agent.display_name).join(' · ')}</p>
         <div className="connector-actions">
-          <button className="button primary" disabled={busy === 'conversation'} onClick={startConversation}>{busy === 'conversation' ? 'Ouverture…' : 'Créer une conversation avec ces auteurs'}</button>
+          <button className="button primary" disabled={busy === 'session'} onClick={startSession}>{busy === 'session' ? 'Ouverture…' : 'Ouvrir une session avec ces auteurs'}</button>
           <button className="button secondary" onClick={onClose}>Fermer</button>
         </div>
       </div>}
@@ -523,15 +553,45 @@ function AuthorPickerDialog({ onClose, onCreated }) {
 
 function AuthorsPage({ data, refresh }) {
   const [picker, setPicker] = useState(false);
+  const [catalog, setCatalog] = useState([]);
+  const [catalogWorks, setCatalogWorks] = useState({});
+  const [catalogBusy, setCatalogBusy] = useState('');
+  const [catalogError, setCatalogError] = useState('');
+  const [avatars, setAvatars] = useState({});
+  useEffect(() => {
+    let alive = true;
+    api.listAuthors('').then((result) => { if (alive) setCatalog(result.authors || []); }).catch(() => { });
+    return () => { alive = false; };
+  }, []);
+  useEffect(() => {
+    (catalog || []).forEach((author) => {
+      if (!author.wikipedia || avatars[author.id] !== undefined) return;
+      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
+    });
+  }, [catalog, avatars]);
+  const authors = (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false);
+  const createdAuthorIds = new Set(authors.map((agent) => agent.metadata?.literary?.author_id || ''));
+  async function loadWorks(authorId) {
+    if (catalogWorks[authorId]) return;
+    setCatalogWorks((current) => ({ ...current, [authorId]: { loading: true } }));
+    try {
+      const result = await api.getAuthorWorks(authorId);
+      setCatalogWorks((current) => ({ ...current, [authorId]: { works: result.works || [] } }));
+    } catch (err) { setCatalogWorks((current) => ({ ...current, [authorId]: { error: err.message } })); }
+  }
+  async function createCatalogAgent(author) {
+    setCatalogBusy(author.id); setCatalogError('');
+    try { await api.createAuthorAgent(author.id); await refresh(); } catch (err) { setCatalogError(err.message); }
+    finally { setCatalogBusy(''); }
+  }
   const [conversationBusy, setConversationBusy] = useState('');
   const [error, setError] = useState('');
-  const authors = (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false);
 
-  async function createConversation(agent) {
+  async function openSession(agent) {
     setConversationBusy(agent.agent_id); setError('');
     try {
-      const room = await api.createRoom({ name: `Échange — ${agent.display_name}`, platform: 'console', external_room_id: `console-auteurs-${Date.now()}`, mode: 'mention_only', active_agents: [agent.agent_id] });
-      pendingRoomRef.roomId = room.room.room_id;
+      const result = await api.createSession({ name: `Échange — ${agent.display_name}`, active_agents: [agent.agent_id] });
+      pendingSessionRef.sessionId = result.session.session_id;
       location.hash = 'overview';
       await refresh();
     } catch (err) { setError(err.message); }
@@ -550,9 +610,33 @@ function AuthorsPage({ data, refresh }) {
         <p>{agent.mission || agent.primary_focus}</p>
         <dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Profil</dt><dd>auteur du domaine public</dd></div><div><dt>Livres</dt><dd>{works.length} intégré(s) — plafond 15, minimum 5</dd></div></dl>
         <details><summary>Livres de la personnalité</summary><ul className="so-booklist">{works.map((work) => <li key={work.url}><label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span></label></li>)}</ul></details>
-        <footer><span>{lit.era || ''}</span><button className="button secondary" disabled={conversationBusy === agent.agent_id} onClick={() => createConversation(agent)}>{conversationBusy === agent.agent_id ? 'Ouverture…' : 'Créer une conversation'}</button></footer>
+        <footer><span>{lit.era || ''}</span><button className="button secondary" disabled={conversationBusy === agent.agent_id} onClick={() => openSession(agent)}>{conversationBusy === agent.agent_id ? 'Ouverture…' : 'Ouvrir une session'}</button></footer>
       </article>;
     })}</div>
+    {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
+    <section className="so-catalog-section">
+      <h2>Auteurs présélectionnés</h2>
+      <p className="muted">Catalogue vérifié du domaine public — au moins 5 œuvres par auteur, complétées en temps réel puis intégrées à la personnalité de l'agent créé.</p>
+      {catalogError && <p className="inline-error">{catalogError}</p>}
+      <div className="so-catalog">{catalog.map((author) => {
+        const state = catalogWorks[author.id];
+        const works = state?.works || [];
+        const already = createdAuthorIds.has(author.id);
+        return <article key={author.id} className="so-catalog-card">
+          <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
+          <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era}</small><p>{author.blurb}</p></div>
+          <div className="so-catalog-actions">
+            {already ? <span className="so-badge">Agent créé ✓</span> : <button className="button secondary" onClick={() => loadWorks(author.id)}>Voir les 5 œuvres</button>}
+            {!already && <button className="button primary" disabled={catalogBusy === author.id || !works.length} onClick={() => createCatalogAgent(author)}>{catalogBusy === author.id ? 'Téléchargement…' : 'Créer l’agent'}</button>}
+          </div>
+          {state?.loading && <p className="muted so-note">Recherche des œuvres en ligne…</p>}
+          {state?.error && <p className="form-error">{state.error}</p>}
+          {works.length > 0 && <ul className="so-booklist">{works.map((work) => <li key={work.url}>
+            <label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : '', work.ingestable ? 'texte intégral' : 'adresse seule'].filter(Boolean).join(' · ')}</small></span></label>
+          </li>)}</ul>}
+        </article>;
+      })}</div>
+    </section>
     {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
   </section>;
 }
@@ -568,29 +652,37 @@ function AgentsPage({ data, refresh }) {
   </section>;
 }
 
-function ConnectorCard({ connector, secure, refresh, openRoom }) {
+function ConnectorCard({ connector, secure, refresh }) {
   const [secrets, setSecrets] = useState({}); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   async function save(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.configureConnector(connector.platform, { secrets, enabled: true, settings: {} }); setSecrets({}); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); } }
   async function test() { setState('loading'); setError(''); try { await api.testConnector(connector.platform); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); await refresh(); } }
   async function toggle() { try { await api.setConnectorEnabled(connector.platform, !connector.enabled); await refresh(); } catch (err) { setError(err.message); } }
-  return <article className="connector-card"><header><div><span className={`status-dot ${connector.status === 'connected' ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')} · {connector.rooms} salon{connector.rooms === 1 ? '' : 's'}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
+  return <article className="connector-card"><header><div><span className={`status-dot ${connector.status === 'connected' ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
     <form onSubmit={save}>{connectorFields[connector.platform].map(([id, label, secret]) => <label key={id}>{label}<input type={secret ? 'password' : 'text'} value={secrets[id] || ''} onChange={(event) => setSecrets({ ...secrets, [id]: event.target.value })} placeholder={connector.configured_secret_fields.includes(id) ? 'Déjà configuré — laisser vide pour conserver' : ''} /></label>)}
-      <div className="connector-actions"><button className="button secondary" disabled={!secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button><button type="button" className="button secondary" disabled={!connector.connection_id || state === 'loading'} onClick={test}>Tester</button><button type="button" className="button primary" disabled={connector.status !== 'connected'} onClick={() => openRoom(connector.platform)}>Rattacher un salon</button></div></form>
+      <div className="connector-actions"><button className="button secondary" disabled={!secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button><button type="button" className="button secondary" disabled={!connector.connection_id || state === 'loading'} onClick={test}>Tester</button></div></form>
     {connector.webhook_url && <label>URL à déclarer chez le fournisseur<input readOnly value={connector.webhook_url} onFocus={(event) => event.target.select()} /></label>}
     <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>{connector.last_tested_at && <small>Dernier test : {new Date(connector.last_tested_at).toLocaleString('fr-FR')}</small>}
   </article>;
 }
 
-function SettingsPage({ data, refresh, openRoom }) {
-  return <section className="page"><header className="page-header"><div><p className="context-line">Secrets côté serveur</p><h1>Réglages</h1><p>Validez les identifiants, testez la connectivité, puis rattachez les salons.</p></div></header>
+function SettingsPage({ data, refresh }) {
+  return <section className="page"><header className="page-header"><div><p className="context-line">Secrets côté serveur</p><h1>Réglages</h1><p>Validez les identifiants des canaux externes et testez la connectivité. Les jetons restent chiffrés côté serveur.</p></div></header>
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
-    <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} openRoom={openRoom} />)}</div>
+    <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
     <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }
 
-function RoomsPage({ data, openRoom, onThread }) {
-  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux et collectifs</p><h1>Salons</h1><p>Chaque canal pointe vers un collectif stable et son historique de décisions.</p></div><button className="button primary" onClick={openRoom}>Rattacher un salon</button></header><div className="rooms-grid">{data.rooms.map((room) => <article key={room.room_id}><small>{platformNames[room.platform]} · {room.external_room_id}</small><h2>{room.name}</h2><p>{room.mode === 'always' ? 'Réponse à chaque message' : 'Réponse sur mention'} · collectif {room.swarm_id}</p><div>{data.threads.filter((thread) => thread.room_id === room.room_id).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}</button>)}</div></article>)}</div></section>;
+function SessionsPage({ data, onCreate, onThread }) {
+  return <section className="page"><header className="page-header"><div><p className="context-line">Collectifs exécutables</p><h1>Sessions</h1><p>Chaque session est un collectif stable : son journal d'exécution et ses dossiers restent attachés.</p></div><button className="button primary" onClick={onCreate}>Nouvelle session</button></header>
+    {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour composer un collectif et lancer une mission.</p>}
+    <div className="session-grid">{data.sessions.map((session) => <article key={session.session_id}>
+      <small>{session.collective.active_agents.length} agent(s) · {session.executions?.length || 0} exécution(s) · {votingLabel(session.collective.voting_threshold)}</small>
+      <h2>{session.name}</h2>
+      <AgentChips agents={session.collective.agents} />
+      <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
+    </article>)}</div>
+  </section>;
 }
 
 function DecisionsPage({ data, selected, onSelect, onChanged }) {
@@ -665,7 +757,7 @@ function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases,
 
 function Console() {
   const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
-  const [roomPlatform, setRoomPlatform] = useState(null); const [selectedThread, setSelectedThread] = useState(null);
+  const [creatingSession, setCreatingSession] = useState(false); const [selectedThread, setSelectedThread] = useState(null);
   async function refresh() { try { setData(await api.overview()); setError(''); } catch (err) { setError(err.message); if (err.status === 401) { setToken(''); location.reload(); } } }
   useEffect(() => { refresh(); const change = () => setPage(location.hash.slice(1) || 'overview'); addEventListener('hashchange', change); const timer = setInterval(refresh, 20000); return () => { removeEventListener('hashchange', change); clearInterval(timer); }; }, []);
   async function openThread(thread) {
@@ -676,8 +768,8 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'rooms' && <RoomsPage data={data} openRoom={() => setRoomPlatform('slack')} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'auteurs' && <AuthorsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} openRoom={setRoomPlatform} />}</main>
-    {roomPlatform && <CreateRoom agents={data.agents} defaultPlatform={roomPlatform} onClose={() => setRoomPlatform(null)} onCreated={refresh} />}
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'auteurs' && <AuthorsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
+    {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
 }
 

@@ -19,7 +19,7 @@ async function buildApp() {
   return { app, swarm, hybridGateway };
 }
 
-test('room collective accepts new agents without recreating the salon', async (t) => {
+test('session collective accepts new agents without recreating the session', async (t) => {
   const { app, swarm } = await buildApp();
   t.after(() => app.close());
   await swarm.createAgent({
@@ -27,40 +27,41 @@ test('room collective accepts new agents without recreating the salon', async (t
     seniority: 'executive', primary_focus: 'Incarner Victor Hugo.', connectors: ['console'], enabled: true,
     metadata: { literary: { author_id: 'hugo', name: 'Victor Hugo' } },
   }, { tenantId: 'tenant-a', by: 'test' });
-  const created = await app.inject({ method: 'POST', url: '/v1/console/rooms', payload: {
-    name: 'COMEX', platform: 'console', external_room_id: 'local-comex', active_agents: ['cfo', 'cto'],
+  const created = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: {
+    name: 'COMEX', active_agents: ['cfo', 'cto'],
   } });
   assert.equal(created.statusCode, 201);
-  const roomId = created.json().room.room_id;
+  const sessionId = created.json().session.session_id;
 
-  const patched = await app.inject({ method: 'PATCH', url: `/v1/console/rooms/${roomId}/agents`, payload: { add_agent_ids: ['auteur_hugo'] } });
+  const patched = await app.inject({ method: 'PATCH', url: `/v1/console/sessions/${sessionId}/collective`, payload: { add_agent_ids: ['auteur_hugo'] } });
   assert.equal(patched.statusCode, 200);
-  const configuration = patched.json().room;
+  const configuration = patched.json().session.collective;
   const swarmConfig = swarm.getConfiguration(configuration.swarm_id, { tenantId: 'tenant-a' });
   assert.deepEqual(swarmConfig.active_agents, ['cfo', 'cto', 'auteur_hugo']);
 
-  // Le salon hydrate son collectif depuis le runtime_bundle mis à jour : la mission voit le nouvel agent.
+  // La session hydrate son collectif depuis le runtime_bundle mis à jour : la mission voit le nouvel agent.
   swarm.run = async (_swarmId, options) => ({
     run_id: 'run-console', swarm_name: options.question, question: options.question, analyses: [],
     consensus: { verdict: 'GO', rationale: 'OK.', requires_human_arbitration: true },
   });
-  const mission = await app.inject({ method: 'POST', url: `/v1/console/rooms/${roomId}/messages`, payload: { text: 'Lancer maintenant ?' } });
+  const mission = await app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/run`, payload: { question: 'Lancer maintenant ?' } });
   assert.equal(mission.statusCode, 200);
 
   // Refus d'un collectif vide.
-  const emptied = await app.inject({ method: 'PATCH', url: `/v1/console/rooms/${roomId}/agents`, payload: { remove_agent_ids: ['cfo', 'cto', 'auteur_hugo'] } });
+  const emptied = await app.inject({ method: 'PATCH', url: `/v1/console/sessions/${sessionId}/collective`, payload: { remove_agent_ids: ['cfo', 'cto', 'auteur_hugo'] } });
   assert.equal(emptied.statusCode, 400);
 
   // Agent inconnu refusé.
-  const unknown = await app.inject({ method: 'PATCH', url: `/v1/console/rooms/${roomId}/agents`, payload: { add_agent_ids: ['auteur_inconnu'] } });
+  const unknown = await app.inject({ method: 'PATCH', url: `/v1/console/sessions/${sessionId}/collective`, payload: { add_agent_ids: ['auteur_inconnu'] } });
   assert.equal(unknown.statusCode, 400);
 
-  // Salon inexistant -> 404.
-  const missing = await app.inject({ method: 'PATCH', url: '/v1/console/rooms/room_absent/agents', payload: { add_agent_ids: ['cfo'] } });
+  // Session inexistante -> 404, sans vocabulaire d'application tierce.
+  const missing = await app.inject({ method: 'PATCH', url: '/v1/console/sessions/session_absent/collective', payload: { add_agent_ids: ['cfo'] } });
   assert.equal(missing.statusCode, 404);
+  assert.ok(!/salon/i.test(missing.json().error));
 });
 
-test('built-agents per-room limit is enforced when adding literary agents', async (t) => {
+test('built-agents per-session limit is enforced when adding literary agents', async (t) => {
   const { app, swarm } = await buildApp();
   t.after(() => app.close());
   for (const id of ['auteur_a', 'auteur_b', 'auteur_c', 'auteur_d']) {
@@ -70,12 +71,12 @@ test('built-agents per-room limit is enforced when adding literary agents', asyn
       metadata: { literary: { name: id } },
     }, { tenantId: 'tenant-a', by: 'test' });
   }
-  const created = await app.inject({ method: 'POST', url: '/v1/console/rooms', payload: {
-    name: 'Salon des auteurs', platform: 'console', external_room_id: 'console-auteurs', active_agents: ['auteur_a', 'auteur_b', 'auteur_c'],
+  const created = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: {
+    name: 'Atelier des auteurs', active_agents: ['auteur_a', 'auteur_b', 'auteur_c'],
   } });
   assert.equal(created.statusCode, 201);
-  const roomId = created.json().room.room_id;
-  const limited = await app.inject({ method: 'PATCH', url: `/v1/console/rooms/${roomId}/agents`, payload: { add_agent_ids: ['auteur_d'] } });
+  const sessionId = created.json().session.session_id;
+  const limited = await app.inject({ method: 'PATCH', url: `/v1/console/sessions/${sessionId}/collective`, payload: { add_agent_ids: ['auteur_d'] } });
   assert.equal(limited.statusCode, 403);
   assert.match(limited.json().error, /Limite de la version en ligne/);
 });

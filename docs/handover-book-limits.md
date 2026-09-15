@@ -27,12 +27,13 @@ la politique [`applyBookPolicy`](backend/fastify/lib/literary-ledger.mjs) :
 |---|---|---|
 | `KAYROS_AUTHOR_MAX_BOOKS` | `15` | Plafond d'œuvres par agent |
 | `KAYROS_AUTHOR_MIN_BOOKS` | `3` | Plancher déclenchant la proposition d'ajout manuel |
-| `KAYROS_MAX_ROOMS_PER_USER` | `3` | Salons maximum par utilisateur (version en ligne) |
-| `KAYROS_MAX_BUILT_AGENTS_PER_ROOM` | `3` | Agents construits (personnalité littéraire) maximum par salon |
+| `KAYROS_MAX_SESSIONS_PER_USER` | `3` | Sessions maximum par utilisateur (version en ligne) |
+| `KAYROS_MAX_BUILT_AGENTS_PER_SESSION` | `3` | Agents construits (personnalité littéraire) maximum par session |
 
 Toutes sont surchargeables dans `backend/fastify/.env` (production : variables PM2 sur le VPS).
-Les limites salons/agents-construits sont appliquées dans `POST /v1/console/rooms`
-([routes/console.mjs](backend/fastify/routes/console.mjs)).
+Les limites sessions/agents-construits sont appliquées dans `POST /v1/console/sessions`
+([routes/console.mjs](backend/fastify/routes/console.mjs)). Les anciens noms `KAYROS_MAX_ROOMS_PER_USER`
+et `KAYROS_MAX_BUILT_AGENTS_PER_ROOM` restent acceptés comme repli.
 
 ## 3. Ajout manuel & attribution IA
 
@@ -88,7 +89,7 @@ téléchargement** référencées (non convertis en texte dans cette version).
 ## 7. Comptes & tests
 
 - Création d'agents auteurs réservée aux rôles **comex/admin** (même RBAC que le reste du back office).
-- Tests : `npm test` (backend, 127 tests — dont 9 nouveaux sur catalogue/sources/politique/registre)
+- Tests : `npm test` (backend, 130 tests — dont 9 nouveaux sur catalogue/sources/politique/registre)
   · tests site : `node --test tests/*.test.mjs` depuis la racine (36).
 - Le compte de démonstration local est provisionné dans `data/test-users.json` (comex) —
   ce dossier est ignoré par Git.
