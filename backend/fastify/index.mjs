@@ -6,15 +6,10 @@ import buildContext from './lib/context.mjs';
 import authPlugin from './plugins/auth.mjs';
 import { applyEnvFileDefaults } from './lib/env-file.mjs';
 
-// PM2 peut conserver une ancienne variable vide entre deux reloads. Recharger
-// les defauts du fichier serveur avant de construire le contexte, sans jamais
-// ecraser une valeur non vide injectee par l'environnement de production.
 applyEnvFileDefaults();
 
 const app = Fastify({ logger: true, bodyLimit: 5 * 1024 * 1024 });
 
-// Slack and Discord sign the exact request bytes. Preserve them while still
-// exposing the usual parsed JSON body to routes.
 app.removeContentTypeParser('application/json');
 app.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, done) => {
   req.rawBody = body;
@@ -22,13 +17,9 @@ app.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, 
   catch (error) { done(error); }
 });
 
-// --- initialisation du contexte partage ---
 const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
 
-// --- plugins globaux ---
-// Keep the production site whitelisted and allow the standalone HTML demo
-// when it is opened directly from disk (browsers send `Origin: null`).
 await app.register(cors, { origin: [ctx.ALLOWED_ORIGIN, 'null'] });
 await app.register(metricsPlugin, { endpoint: '/metrics' });
 await app.register(rateLimit, {
@@ -39,24 +30,21 @@ await app.register(rateLimit, {
 });
 await app.register(authPlugin);
 
-// --- middleware secret partage ---
-// Routes /v1/demo/* are public (HTML demo, no client-side key).
 app.addHook('preHandler', async (req, reply) => {
   if (!ctx.KAYROS_SECRET) return;
   if (req.method === 'GET') return;
   const path = (req.url || '').split('?')[0];
   if (path.startsWith('/v1/demo/')) return;
-  if (path === '/v1/contact') return; // formulaire de contact public du site
+  if (path === '/v1/contact') return;
   if (path === '/v1/auth/login' || path === '/v1/auth/register') return;
   if (path.startsWith('/v1/auth/password/')) return;
   if (path.startsWith('/v1/auth/sso')) return;
   if (path.startsWith('/v1/salon/')) return;
   if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
-  if (path === '/mcp') return; // dedicated scoped Bearer authentication
+  if (path === '/mcp') return;
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });
 
-// --- routes ---
 await app.register((await import('./routes/health.mjs')).default);
 await app.register((await import('./routes/llm.mjs')).default);
 await app.register((await import('./routes/novelty.mjs')).default);
@@ -67,6 +55,7 @@ await app.register((await import('./routes/contact.mjs')).default);
 await app.register((await import('./routes/literary.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
 await app.register((await import('./routes/salon.mjs')).default);
+await app.register((await import('./routes/salon-whatsapp.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);
 await app.register((await import('./routes/forecasts.mjs')).default);
@@ -85,7 +74,6 @@ await app.register((await import('./routes/swarm.mjs')).default);
 await app.register((await import('./routes/sales-oracle.mjs')).default);
 await app.register((await import('./routes/mcp.mjs')).default);
 
-// --- demarrage ---
 const PORT = Number(ctx.PORT || 8787);
 app.listen({ port: PORT, host: '0.0.0.0' })
   .then((addr) => app.log.info(`KayrosLab backend sur ${addr}`))
