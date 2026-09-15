@@ -21,6 +21,12 @@ function Avatar({ author, locale, size = 48 }: { author: LiteraryAuthor; locale:
   );
 }
 
+function roomHasContent(item: { id: string; turns: unknown[] }) {
+  if (item.turns.length > 0) return true;
+  if (item.id === "lumieres") return true;
+  return !["academie", "pouvoir"].includes(item.id);
+}
+
 export function Seance({ circleId }: { circleId: string }) {
   const { t, locale } = useT();
   const rooms = useSalon((s) => s.rooms);
@@ -190,7 +196,7 @@ export function Seance({ circleId }: { circleId: string }) {
         <aside className="salon-channels" aria-label={t("circles")}>
           <p className="salon-kicker">{t("circles")}</p>
           <ul>
-            {rooms.map((item) => {
+            {rooms.filter(roomHasContent).map((item) => {
               const copy = roomCopy(item, locale);
               return (
               <li key={item.id}>
@@ -222,8 +228,8 @@ export function Seance({ circleId }: { circleId: string }) {
             {room.turns.map((turn) => {
               const author = turn.origin === "agent" ? authorById(turn.authorId) : null;
               const who = author ? authorCopy(author, locale).name : t("host");
-              const mark = locale === "en" ? "“" : "« ";
-              const end = locale === "en" ? "”" : " »";
+              const mark = locale === "en" ? "\u201c" : "\u00ab ";
+              const end = locale === "en" ? "\u201d" : " \u00bb";
               return (
                 <li key={turn.id} className={turn.origin === "user" ? "salon-msg is-invited" : "salon-msg"}>
                   {author ? <Avatar author={author} locale={locale} size={40} /> : <span className="salon-avatar salon-host">H</span>}
@@ -232,7 +238,7 @@ export function Seance({ circleId }: { circleId: string }) {
                       <strong>{who}</strong>
                       {author ? <span className="salon-handle">@{handleOf(author, patches[author.id])}</span> : null}
                       <span>
-                        {t(`act.${turn.act ?? "reponse"}` as MsgKey)} · {t("act.to")} {labelOf(turn.to ?? "table")}
+                        {t(`act.${turn.act ?? "reponse"}` as MsgKey)} \u00b7 {t("act.to")} {labelOf(turn.to ?? "table")}
                       </span>
                       {turn.createdAt ? <time>{clock(turn.createdAt)}</time> : null}
                     </header>
@@ -278,7 +284,7 @@ export function Seance({ circleId }: { circleId: string }) {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 maxLength={800}
-                placeholder="@voltaire l’optimisme n’est-il qu’une politesse ?"
+                placeholder="@voltaire l\u2019optimisme n\u2019est-il qu\u2019une politesse ?"
               />
             </label>
             <div className="row">
@@ -316,7 +322,7 @@ export function Seance({ circleId }: { circleId: string }) {
                   <div>
                     <strong>{copy.name}</strong>
                     <span>
-                      @{handleOf(author, patches[author.id])} · {t(`kind.${author.kind}` as MsgKey)}
+                      @{handleOf(author, patches[author.id])} \u00b7 {t(`kind.${author.kind}` as MsgKey)}
                     </span>
                   </div>
                 </button>
@@ -344,7 +350,7 @@ export function Seance({ circleId }: { circleId: string }) {
             return (
             <details key={author.id} className="salon-engine-card">
               <summary>
-                {copy.name} — {t("works.count", { n: author.works_count })}
+                {copy.name} \u2014 {t("works.count", { n: author.works_count })}
               </summary>
               <p>{copy.blurb}</p>
               <ol className="salon-books">
@@ -381,7 +387,7 @@ export function Seance({ circleId }: { circleId: string }) {
                       <option value="">{t("invite.choose")}</option>
                       {guests.map((author) => (
                         <option key={author.id} value={author.id}>
-                          @{handleOf(author, patches[author.id])} — {authorCopy(author, locale).name}
+                          @{handleOf(author, patches[author.id])} \u2014 {authorCopy(author, locale).name}
                         </option>
                       ))}
                     </select>
