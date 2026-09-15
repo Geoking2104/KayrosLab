@@ -24,3 +24,10 @@ backend/fastify/data/
 
 # Rust build artifacts (crates/salon-core, etc.)
 target/
+
+# local verification artifacts
+.cdp_*
+.ov_*
+.ovt_*
+.ov_profile_*
+

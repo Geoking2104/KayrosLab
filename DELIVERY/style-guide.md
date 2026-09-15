@@ -66,6 +66,13 @@ Every page, the buttons, links and the focus ring follow automatically. No page 
 - Keyboard focus is always visible (2px `--color-focus` ring).
 - Body text contrast ≥ WCAG AA on `--color-paper`.
 
+## Verification (latest run)
+
+- Responsive sweep `scripts/overflow-shot.ps1`: **57/57 renders ok, 0 horizontal overflow** (19 pages × 375/834/1440). Detector validated with a positive control (intentional overflow flagged).
+- Contrast (WCAG): ink/paper 17.1, muted/paper 7.7, accent‑ink/accent 9.9, accent/paper 10.7, danger 7.4, success 10.4, warning 11.2 — all ≥ AA.
+- Palette/font sweep: **0** legacy hexes, **0** foreign font families across the 19 pages.
+- Screenshots: `DELIVERY/screenshots/{before,after,after-tablet,after-mobile}` (76) + `reference-console-1440.png`.
+
 ## Regenerate assets / re-apply
 
 - Brand PNGs: `powershell -File scripts/make-brand-png.ps1`

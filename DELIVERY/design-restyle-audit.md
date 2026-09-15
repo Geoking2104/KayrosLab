@@ -1,6 +1,10 @@
 # KayrosLab — Restyle to the console design language
 
-Reference (single source of truth): **https://www.kayroslab.com/console/** — the agent harness console.
+- Reference (single source of truth): **https://www.kayroslab.com/console/** — the agent harness console.
+- Reference baseline capture: [`screenshots/reference-console-1440.png`](./screenshots/reference-console-1440.png) (public entry of the console).
+- Responsive verification: `DELIVERY/overflow-report.json` — **57/57 renders** (19 pages × 375 / 834 / 1440 px), **0 horizontal overflow**. Detector validated by a positive control (an intentionally overflowing block was flagged: 1827 probe pixels).
+- Screenshots: `screenshots/before` (19 @1440), `screenshots/after` (19 @1440), `screenshots/after-tablet` (19 @834), `screenshots/after-mobile` (19 @375).
+
 Goal: roll the console's stylesheet, fonts, colors, logo and buttons across the whole public website,
 with **one token file** driving every page.
 
