@@ -3,7 +3,7 @@ import { useMemo, useState, type FormEvent } from "react";
 import { allAuthors, LITERARY_KINDS, authorCopy, searchAuthors } from "@/lib/salon/catalog";
 import { useT, roomCopy, type MsgKey } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
-import type { LiteraryAuthor } from "@/lib/salon/types";
+import type { LiteraryAuthor, SalonRoom } from "@/lib/salon/types";
 import { SalonChrome } from "./Chrome";
 
 function Avatar({ author, locale }: { author: LiteraryAuthor; locale: "fr" | "en" }) {
@@ -19,6 +19,12 @@ function Avatar({ author, locale }: { author: LiteraryAuthor; locale: "fr" | "en
   );
 }
 
+function roomHasContent(room: SalonRoom) {
+  if (room.turns.length > 0) return true;
+  if (room.id === "lumieres") return true;
+  return !["academie", "pouvoir"].includes(room.id);
+}
+
 export function Foyer() {
   const { t, guests, locale } = useT();
   const rooms = useSalon((s) => s.rooms);
@@ -29,6 +35,7 @@ export function Foyer() {
   const [picked, setPicked] = useState<string[]>(["voltaire", "rousseau", "montaigne"]);
   const [error, setError] = useState("");
   const authors = useMemo(() => searchAuthors(query, kind), [query, kind]);
+  const listed = rooms.filter(roomHasContent);
 
   function toggle(id: string) {
     setPicked((current) => {
@@ -62,9 +69,35 @@ export function Foyer() {
           <p>{t("circle.how")}</p>
         </section>
 
-        {rooms.length > 0 && (
+        <section className="peau-steps" aria-labelledby="peau-titre">
+          <p className="salon-kicker">{t("peau.kicker")}</p>
+          <h2 id="peau-titre">{t("peau.title")}</h2>
+          <p>{t("peau.lead")}</p>
+          <ol className="peau-plates">
+            <li>
+              <span className="n">I</span>
+              <h3>{t("peau.1.title")}</h3>
+              <p>{t("peau.1.body")}</p>
+              <em>{t("peau.1.goal")}</em>
+            </li>
+            <li>
+              <span className="n">II</span>
+              <h3>{t("peau.2.title")}</h3>
+              <p>{t("peau.2.body")}</p>
+              <em>{t("peau.2.goal")}</em>
+            </li>
+            <li>
+              <span className="n">III</span>
+              <h3>{t("peau.3.title")}</h3>
+              <p>{t("peau.3.body")}</p>
+              <em>{t("peau.3.goal")}</em>
+            </li>
+          </ol>
+        </section>
+
+        {listed.length > 0 && (
           <div className="salon-index">
-            {rooms.map((room, index) => {
+            {listed.map((room, index) => {
               const copy = roomCopy(room, locale);
               return (
               <Link key={room.id} to="/salon/$circleId" params={{ circleId: room.id }}>
