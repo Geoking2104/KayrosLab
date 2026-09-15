@@ -14,6 +14,7 @@ import {
 } from "@/lib/salon/sso";
 import { ConsentBanner } from "./ConsentBanner";
 import "./salon.css";
+import "./peau.css";
 
 export function SalonChrome({ children, current }: { children: ReactNode; current?: "foyer" | "seance" | "agents" | "contact" }) {
   const setHydrated = useSalon((s) => s.setHydrated);
