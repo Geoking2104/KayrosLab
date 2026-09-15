@@ -5,10 +5,12 @@ import Fastify from 'fastify';
 import authPlugin from '../plugins/auth.mjs';
 import healthRoute from '../routes/health.mjs';
 import authRoutes from '../routes/auth-routes.mjs';
+import salonRoute from '../routes/salon.mjs';
 import connectorsRoute from '../routes/connectors.mjs';
 import gatesRoute from '../routes/gates.mjs';
 import swarmRoute from '../routes/swarm.mjs';
 import salesOracleRoute from '../routes/sales-oracle.mjs';
+import contactRoute from '../routes/contact.mjs';
 import mcpRoute from '../routes/mcp.mjs';
 import buildContext from '../lib/context.mjs';
 
@@ -43,7 +45,12 @@ export async function buildTestApp(env = {}) {
     app.addHook('preHandler', async (req, reply) => {
       if (req.method === 'GET') return;
       const p = (req.url || '').split('?')[0];
+      if (p === '/v1/contact') return;
       if (p.startsWith('/v1/demo/')) return;
+      if (p === '/v1/auth/login' || p === '/v1/auth/register') return;
+      if (p.startsWith('/v1/auth/password/')) return;
+      if (p.startsWith('/v1/auth/sso')) return;
+      if (p.startsWith('/v1/salon/')) return;
       if (p === '/mcp') return;
       if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) {
         return reply.code(401).send({ error: 'non autorise' });
@@ -53,10 +60,12 @@ export async function buildTestApp(env = {}) {
 
   await app.register(healthRoute);
   await app.register(authRoutes);
+  await app.register(salonRoute);
   await app.register(connectorsRoute);
   await app.register(gatesRoute);
   await app.register(swarmRoute);
   await app.register(salesOracleRoute);
+  await app.register(contactRoute);
   await app.register(mcpRoute);
   return { app, ctx };
 }

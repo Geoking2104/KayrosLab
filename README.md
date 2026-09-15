@@ -17,7 +17,7 @@ profiles, no black box.
 [![Core tests](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
-[Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
+[Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [Salon](https://www.kayroslab.com/salon/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
 
 </div>
 
@@ -48,6 +48,12 @@ It is not a trained model, and it does not sell you a crystal ball. It is a **go
 an orchestrator that drives real models — Ollama quant-aware on your machine, or Mistral / Claude
 through the Fastify backend — behind layered memory, deterministic Monte-Carlo numbers, and human
 gates with veto rights.
+
+**Salon** is a separate product, not a console tab: literary and philosophical reading circles
+(a text, roles, a minute — verdicts *tenir / relire / laisser*, never GO/NO-GO). Protocol in
+Rust (`crates/salon-core`), public foyer at [kayroslab.com/salon/](https://www.kayroslab.com/salon/).
+See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
+`frontend/console-app`** — that directory is the production agent console.
 
 ---
 
@@ -610,7 +616,9 @@ deployment and limitations.
 | `ontology-explorer.html` / `ontology-panel.html` | Ontology graph (Cytoscape) |
 | `index.html` / `index.fr.html` | Commercial landing |
 | `frontend/positionning-app` | React Positioner application |
-| `frontend/console-app` | **Production agent console** (served at `/console/`) — self-service signup, Slack/Teams/Discord room binding, agent registry with veto & hybrid profiles, durable decision dossiers, Sales Oracle tab, human arbitration |
+| `frontend/console-app` | **Production agent console** (served at `/console/`) — self-service signup, Slack/Teams/Discord room binding, agent registry with veto & hybrid profiles, durable decision dossiers, Sales Oracle tab, human arbitration. Do not overwrite. |
+| `backend/web/public/salon/` | **Salon** (served at `/salon/`) — literary/philosophical circles. Not Slack rooms. |
+| `crates/salon-core` | Rust protocol for Salon (`evaluate` → WASM) |
 
 ---
 

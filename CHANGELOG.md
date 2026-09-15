@@ -1,6 +1,180 @@
 # Changelog
 
+## v0.25.24 (2026-09) — Conversions GA4
+
+- `dataLayer` : `generate_lead` (contact), `demo_start` (démo), `login` (SSO).
+- Import GTM : `legal/gtm-ga4-conversions.json` (Google tag + 3 événements).
+- À coller dans la variable **GA4 Measurement ID**, puis publier, puis marquer les conversions dans GA4.
+
+## v0.25.23 (2026-09) — Google Tag Manager
+
+- Conteneur `GTM-TXNT5J6M` en tête et `noscript` dans le corps (accueil, Salon, mentions).
+- Consent Mode : mesure refusée tant que c15t n’accorde pas la catégorie.
+
+## v0.25.22 (2026-09) — Erreurs du formulaire contact
+
+- Validation côté table : nom, courriel, message, pièces (nombre, poids, type).
+- L’API renvoie un `code` (INVALID, FILE, RATE, SMTP, SMTP_UNCONFIGURED).
+- L’échec ne se fait plus passer pour un envoi : message distinct, `mailto:` en recours.
+
+## v0.25.21 (2026-09) — Navigation, fiches, contact
+
+- Un auteur (table, fil, cartes) ouvre sa fiche (`#fiche/voltaire`).
+- Plus de 404 : Académie, Pouvoir, Lumières, Contact redirigent vers le Salon.
+- Contact : le volet s’ouvre ; si le SMTP n’est pas armé, la lettre part en `mailto:`.
+
+## v0.25.20 (2026-09) — `#agents` ouvre les auteurs
+
+- Le script mourait sur `salonUser` avant d’avoir lu le hash : le volet restait caché.
+- Lien « Auteurs » : `/salon/#agents`. Filet CSS `:target` si le JS rate.
+
+## v0.25.19 (2026-09) — SMTP via Gmail
+
+- `contact@kayroslab.com` est une redirection IONOS, pas une boîte d’envoi.
+- Relais : `smtp.gmail.com`, compte Gmail. Destination publique inchangée (IONOS redirige).
+- Secret : mot de passe d’application Google (`KAYROS_SMTP_PASS`).
+
+## v0.25.18 (2026-09) — SMTP IONOS
+
+- Courrier sortant via `smtp.ionos.fr` (boîte `contact@kayroslab.com`), déjà autorisée par le SPF.
+- Secret unique : `KAYROS_SMTP_PASS`. Contact, rapports, reset de mot de passe, Authelia.
+- `/health` indique si le relais est armé, sans exposer le secret.
+
+## v0.25.17 (2026-09) — Mentions, cookies, CGU, contact
+
+- Pied de Salon : mentions légales, cookies (c15t), conditions générales, onglet Contact.
+- SASU KayrosLab en cours de formation, 36 rue de l’abbé Groult, 75015 Paris — Geoffroy de La Tournelle.
+- Lettre et signalement (pièces jointes) vers contact@kayroslab.com.
+
+## v0.25.16 (2026-09) — Salon : SSO, mémoire, anglais sans français
+
+- Entrer / Partir : OpenID (Authelia), même client que la console, `redirect_uri` `/salon/`.
+- `GET` / `PUT /v1/salon/state` : cercles et tours de parole liés au compte ; l’invité reste dans le navigateur.
+- Anglais : fil spécimen, cercles-semence, fiches, « à » / “to”, plus de Lumières ni de question française une fois EN choisi.
+
+## v0.25.15 (2026-09) — Salon : mémoires vérifiées, livres de l’auteur
+
+- Chaque œuvre Gutenberg a été relue sur la ligne `Author:` (ou le titre pour les écritures).
+- Plus de Proclus chez Platon, d’Expositor’s Bible chez Smith, d’Imitation chez le christianisme, ni d’Évangile de Bouddha.
+- Cinq livres distincts quand ils existent ; sinon la mémoire reste mince (Marc Aurèle, Sun Tzu, le Coran…).
+- Épicure : lettres et maximes tirées du livre X de Diogène Laërce.
+
+## v0.25.14 (2026-09) — Salon : portrait pour chaque auteur
+
+- 48 portraits (Wikimedia) ; 6 pictogrammes de tradition.
+- Plus d’initiales à la place d’un visage.
+
+## v0.25.13 (2026-09) — Salon : fiches auteurs plus légères
+
+
+- Catalogue : portrait, nom, @, ère, blurb (2 lignes), nombre d’œuvres.
+- Plus de liste d’ouvrages ni bouton redondant. Images `lazy`, recherche 120 ms.
+
+## v0.25.12 (2026-09) — Salon : page Auteurs restaurée
+
+
+- `#agents` affiche le catalogue (54 fiches, recherche, ajout, configuration).
+- Le script ne plante plus (`esc`, `renderAgents`).
+
+## v0.25.11 (2026-09) — Salon : grilles nommées
+
+
+- Cercles, fil et convives : `grid-template-areas`.
+- `auto-fit` + `minmax(0, 1fr)` : plus de colonne qui écrase le texte.
+
+## v0.25.10 (2026-09) — Salon : 404 auteurs, titre EN, bloc cercle
+
+
+- `/salon/agents/` ne 404 plus (Pages + hash `#agents`).
+- Liste des cercles : plus de colonne `auto` qui écrase la question.
+- Titre EN : *They put on the skin of a book.*
+
+## v0.25.9 (2026-09) — Salon : 54 auteurs, i18n EN complète
+
+
+- Onglet Auteurs : les 54 fiches, plus seulement six.
+- Noms, ères et résumés en anglais (Aristote → Aristotle, etc.).
+- Cercles : Lumières / Enlightenment, question de table traduite.
+
+## v0.25.8 (2026-09) — Salon : cases à cocher
+
+
+- Cases à taille fixe, nom sur une ligne, ellipsis. Plus de carrés qui s’étirent.
+
+## v0.25.7 (2026-09) — Salon : responsive
+
+
+- Paddings `clamp`, safe-area, grilles `minmax(min(…, 100%), 1fr)`.
+- Breakpoints 479 / 719 / 1100. Plus de débordement à 320 px.
+
+## v0.25.6 (2026-09) — Salon : « Les auteurs », i18n EN
+
+
+- Plus de « 28 fiches » : le titre est **Les auteurs** / **The authors**.
+- Chrome du spécimen (fiche, méthode, convives, envoi) passé par i18n EN.
+
+## v0.25.5 (2026-09) — Salon : Gutenberg, Atramenta, traditions
+
+
+- « Ajouter une œuvre » : plus de « Chercher au domaine public ». Recherche Gutenberg + Atramenta.
+- Catalogue : 54 convives. Shakespeare conservé ; 20 philosophes ajoutés ; Bible, Torah, Coran, Gîtâ, Dhammapada, Tao-Tö-King (symboles en portrait).
+- Mémoires puisées sur Project Gutenberg (Atramenta à l’ajout d’œuvre, quand le catalogue répond).
+
+## v0.25.4 (2026-09) — Salon : copie, convier, i18n
+
+
+- Cercle : « tout le monde écoute ». Pied : ils répondent aux livres, entre eux, et à vous.
+- Ouvrir un cercle : libellés une seule fois ; compteur d’invités dynamique ; **Convier**.
+- **Configurer la personnalité.** **Ajouter un auteur.** Plus de plafond 6.
+- Anglais relu (calques, pluriels, Authors / Invite / Profile).
+
+## v0.25.3 (2026-09) — SSO OpenID Connect auto-hébergé
+
+
+- **Plus d’Auth0.** Client OIDC générique (découverte `.well-known`, PKCE). Tout IdP ouvert (Authelia, Keycloak, Dex, Authentik) peut prendre la place.
+- **Authelia 4.39** (Apache-2.0) sur le VPS, `sso.kayroslab.com`. Compte initial dans `/opt/kayroslab/data/authelia/INITIAL_PASSWORD.txt`.
+- Console : **Continuer avec SSO**. Voir `docs/SSO.md`.
+
+## v0.25.2 (2026-09) — SSO Auth0 sur la console
+
+
+- **Continuer avec SSO.** Universal Login du tenant `dev-1mveynszu4lngakl` (PKCE). Le backend vérifie l’`id_token` (JWKS) et émet le jeton KayrosLab.
+- Compte `contributeur` créé à la première visite, ou relais par e-mail d’un compte déjà inscrit.
+- Secrets `AUTH0_CLIENT_ID` (et optionnels `AUTH0_DOMAIN`, `AUTH0_CLIENT_SECRET`). Voir `docs/AUTH0.md`.
+
+## v0.25.1 (2026-09) — Site statique sur le VPS (nginx)
+
+
+- **`www.kayroslab.com`** — vhost nginx (`deploy/ovh-vps/nginx-kayroslab-www.conf`) : accueil, `/salon/`, `/console/`, WASM. ACME sur le 80, HTTPS dès que le certificat existe.
+- **`deploy-www.sh`** assemble `/var/www/kayroslab` et recharge nginx. Appelé en fin de `deploy-backend.sh`.
+- **SSL** — workflow `setup-ssl-www.yml` (dispatch), après le DNS A vers `51.210.9.71`.
+
+## v0.25.0 (2026-09) — Salon, les auteurs prennent la peau d’un livre
+
+
+- **Agents, pas protocole.** Vingt-huit auteurs du domaine public (cinq œuvres parsées chacun). Le moteur prend la peau d’un agent et répond dans le cercle ; les agents se parlent, ou l’hôte les appelle par `@`.
+- **Fiches.** `@`, résumé, méthode (œuvre / rhétorique / elenchus), instruction de table. Ajout d’œuvres par Gutenberg, PDF ou TXT — à tous les agents.
+- **Ajouter un agent.** Cinq œuvres libres au minimum. Moins de cinq : la profondeur de personnalité est trop faible.
+- **Ouvrir un cercle.** 1. nom 2. question 3. invités, puis **Faire entrer**.
+- **Conserver en PDF.** Couverture, page de garde des auteurs, index, fil.
+- **FR / EN.** Interface bilingue. Les livres restent dans leur langue.
+- **Pages `/salon/`** — spécimen HTML (Hallmark, oxblood) + source React (`salon/src`) + crate Rust (`crates/salon-core`). La console de production n’est pas touchée.
+
+## v0.24.1 (2026-09) — Salon, le protocole WASM s’évalue vraiment
+
+- Le chargeur lisait le retour de `salon_eval` comme un pointeur dans la mémoire linéaire alors que le crate renvoyait un **décalage dans le tas** (`OUT_OFF = 24576`). Le module s’instanciait, l’UI disait Rust, l’évaluation tombait silencieusement en JavaScript.
+- `salon_eval` retourne désormais le pointeur absolu (`heap + OUT_OFF`). Le JS lit toujours `salon_heap() + salon_out_off()`.
+- Sonde au chargement (cercle vide → lecteur / lecture). Le fallback JS ne se fait plus passer pour Rust.
+
+## v0.24.0 (2026-09) — Salon, produit autonome (cercles littéraires)
+
+- **Salon n’est pas un salon Slack.** Nouveau service : cercles de lecture littéraires et philosophiques (rôles hôte / lecteur / objecteur / secrétaire / invité ; tours lecture → objection → défense → concession → synthèse → minute ; verdicts **tenir · relire · laisser**, jamais GO/NO_GO).
+- **`crates/salon-core`** — protocole en Rust (`evaluate`, 4 tests hôtes). Compilé en `salon_core.wasm` (ABI C : `salon_heap`, `salon_eval`, `salon_out_off`). Fallback JS aux mêmes règles.
+- **Pages `/salon/`** — foyer + séance Hallmark (Specimen / Newsprint / oxblood) dans `backend/web/public/salon/`. Lien depuis le pied de `index.html` et `index.fr.html`.
+- **Console de production inchangée.** Cette livraison ne touche pas `frontend/console-app`. Ne pas fusionner un workbench par-dessus.
+
 ## v0.23.0 (2026-08) — Étape 3 · Construire (Collision Mode EF-06)
+
 
 - **`core/collision.mjs`** (nouveau) — `distanceConcepts` (distance réelle par partage de tags, jaccard), `idCollision` (id stable par paire triée), `normalizeCollision` (2 concepts requis, faisabilité clampée 0–100), `scoreCollision` (**nouveauté × faisabilité / 100, `null` sans faisabilité**), `runCollisionMode` (paires ≥ plancher 60, ignore arêtes du réseau + historique déjà collisionné, tri par score, `generer()` importe proposition/faisabilité), `addCollision` (timeline append-only horodatée + signée, dédup), `rapportCollision` (comptages réels). La faisabilité est **importée** (LLM/humain), jamais devinée.
 - **`backend/fastify/routes/portfolio.mjs`** — `POST /v1/ideas/:id/collision` (concepts depuis body ou canvas/`cartographie.tendances`, plancher, `scores[]` d'apport, persiste `construire.collisions`, `construire.collision`), `GET .../collision` (rapport), `POST .../collision/selection` (mémorise `construire.selectionCollisions`, `construire.collision.select`).

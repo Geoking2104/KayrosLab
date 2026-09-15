@@ -21,3 +21,6 @@ __pycache__/
 logs/
 .tmp-logs/
 backend/fastify/data/
+
+# Rust build artifacts (crates/salon-core, etc.)
+target/

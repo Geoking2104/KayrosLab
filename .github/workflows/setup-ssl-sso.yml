@@ -1,0 +1,37 @@
+name: Setup SSL (Let's Encrypt) - sso.kayroslab.com
+
+# Après le DNS A sso.kayroslab.com → 51.210.9.71.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-ssl-sso:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure HTTPS for sso.kayroslab.com
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 8m
+          script: |
+            set -e
+            git config --global --add safe.directory /opt/kayroslab
+            cd /opt/kayroslab
+            git fetch origin main
+            git reset --hard origin/main
+            find deploy/ovh-vps -name "*.sh" -exec sed -i 's/\r$//' {} \;
+            apt-get update -qq
+            apt-get install -y -qq certbot python3-certbot-nginx
+            APP_DIR=/opt/kayroslab bash deploy/ovh-vps/deploy-sso.sh
+            certbot --nginx \
+              -d sso.kayroslab.com \
+              --non-interactive \
+              --agree-tos \
+              --email contact@kayroslab.com \
+              --redirect
+            APP_DIR=/opt/kayroslab bash deploy/ovh-vps/deploy-sso.sh
+            nginx -t && systemctl reload nginx
+            echo "SSL configure pour sso.kayroslab.com"

@@ -31,6 +31,9 @@ if ! worktree=$(git -C "${APP_DIR}" rev-parse --is-inside-work-tree 2>/dev/null)
   echo "ERREUR : ${APP_DIR} n'est pas un dépôt Git lisible; installation interrompue." >&2
   exit 1
 fi
+# npm ci / install racent parfois ENOTEMPTY si un déploiement précédent
+# a été interrompu (deux runners SSH simultanés, ou rmdir partiel).
+rm -rf "${BACKEND_DIR}/node_modules"
 lock_status=0
 git -C "${APP_DIR}" ls-files --error-unmatch backend/fastify/package-lock.json >/dev/null 2>&1 || lock_status=$?
 case "${lock_status}" in
@@ -49,7 +52,7 @@ case "${lock_status}" in
     ;;
 esac
 
-# ── Postgres local (idempotent, opt-in) ──────────────────────────────────────
+# ── Postgres local (idempotent, opt-in) ─────────────────────────────────────
 # Provisionne une base sur cette machine si demande. Le script s'abstient si une
 # DATABASE_URL est deja presente : il ne remplace jamais une base existante.
 if [[ "${KAYROS_LOCAL_PG:-0}" == "1" ]]; then
@@ -57,7 +60,7 @@ if [[ "${KAYROS_LOCAL_PG:-0}" == "1" ]]; then
     || echo "AVERTISSEMENT : provisionnement Postgres local en echec." >&2
 fi
 
-# ── Postgres schema (idempotent) si DATABASE_URL present ─────────────────────
+# ── Postgres schema (idempotent) si DATABASE_URL present ─────────────────
 DB_URL=""
 if grep -qE '^DATABASE_URL=.+' "${BACKEND_DIR}/.env" 2>/dev/null; then
   DB_URL=$(grep -E '^DATABASE_URL=' "${BACKEND_DIR}/.env" | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")
@@ -90,7 +93,7 @@ else
   echo "DATABASE_URL non defini — stores fichier/memoire."
 fi
 
-# ── Tests du coeur ───────────────────────────────────────────────────────────
+# ── Tests du coeur ───────────────────────────────────────────
 if [[ -d "${APP_DIR}/core" ]]; then
   ( cd "${APP_DIR}/core" && node --test ) || { echo "ERREUR : tests du coeur en echec, deploiement interrompu." >&2; exit 1; }
 fi
@@ -152,6 +155,15 @@ if [[ -n "${DB_URL}" ]]; then
   fi
 fi
 echo " -> health OK"
+
+if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-www.sh" ]]; then
+  APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-www.sh"
+fi
+
+if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-sso.sh" ]]; then
+  APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-sso.sh" \
+    || echo "AVERTISSEMENT : SSO Authelia non demarre." >&2
+fi
 
 echo ""
 echo "Deploiement termine. Backups : bash ${APP_DIR}/deploy/ovh-vps/install-cron-backup.sh"

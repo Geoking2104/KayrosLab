@@ -2,6 +2,25 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <!-- Google Tag Manager -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TXNT5J6M');
+    </script>
+    <!-- End Google Tag Manager -->
+    <script src="/legal/ga4.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>KayrosLab · Prenez de meilleures décisions stratégiques avec un comité d&#39;experts IA</title>
     <meta name="description" content="Instruisez vos décisions stratégiques avec des agents IA qui s&#39;opposent et chiffrent — puis arbitrez avec les preuves. Dans la console, Slack, Teams ou Discord.">
@@ -12,6 +31,10 @@
     <link rel="stylesheet" href="./studio.css">
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXNT5J6M"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main">Aller au contenu principal</a>
 
     <nav class="frame site-nav" aria-label="Navigation principale">
@@ -205,10 +228,24 @@
                 <a href="/whitepaper-kayroslab.html">Whitepaper</a>
                 <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
                 <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
+                <a href="/salon/">Salon</a>
+                <a href="/legal/#mentions">Mentions légales</a>
+                <a href="/legal/#cookies">Cookies</a>
+                <a href="/legal/#cgu">Conditions générales</a>
                 <a href="/#contact" data-contact-open>Contact</a>
             </nav>
         </div>
+        <p class="footer-colophon">SASU KayrosLab, en cours de formation · 36, rue de l’abbé Groult, 75015 Paris</p>
     </footer>
+
+    <aside id="c15t-banner" class="c15t-banner" hidden>
+        <p>Ce salon se souvient de votre table — la langue, l’entrée, la mémoire des cercles. Rien d’autre, sauf si vous l’ouvrez.</p>
+        <div class="c15t-row">
+            <button type="button" class="button button--primary" data-c15t="necessary">Garder l’essentiel</button>
+            <button type="button" class="button" data-c15t="all">Tout accorder</button>
+        </div>
+    </aside>
+    <script type="module" src="/legal/c15t-consent.js"></script>
 
     <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-dialog-title">
         <form id="contact-form" class="contact-form" novalidate>
@@ -263,6 +300,9 @@
         }).then(function () {
           status.textContent = 'Merci ! Votre demande est envoyée — nous revenons vers vous rapidement.';
           form.reset();
+          if (typeof window.kayrosTrack === 'function') {
+            window.kayrosTrack('generate_lead', { method: 'contact_form', lead_type: 'commercial' });
+          }
         }).catch(function () {
           status.textContent = 'L\'envoi a échoué. Réessayez dans un instant.';
         }).finally(function () {

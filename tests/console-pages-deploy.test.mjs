@@ -19,6 +19,22 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
+test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () => {
+  const [workflow, english, french, foyer] = await Promise.all([
+    read('.github/workflows/deploy-positionning-pages.yml'),
+    read('index.html'),
+    read('index.fr.html'),
+    read('backend/web/public/salon/index.html'),
+  ]);
+  assert.match(workflow, /backend\/web\/public\/salon\/\*\*/);
+  assert.match(workflow, /mkdir -p deploy\/salon/);
+  assert.match(workflow, /backend\/web\/public\/salon\/\. deploy\/salon\//);
+  assert.match(english, /href="\/salon\/">Salon</);
+  assert.match(french, /href="\/salon\/">Salon</);
+  assert.match(foyer, /Un cercle est une table/);
+  assert.match(foyer, /@voltaire/);
+});
+
 test('la console prefixe les routes avec la base API du build', async () => {
   const source = await read('frontend/console-app/src/api.js');
   assert.match(source, /import\.meta\.env\.VITE_API_BASE_URL/);
@@ -31,6 +47,8 @@ test('le formulaire propose une inscription puis ouvre la console', async () => 
     read('frontend/console-app/src/api.js'),
   ]);
   assert.match(app, /Créer un espace de découverte/);
+  assert.match(app, /Continuer avec SSO/);
+  assert.match(api, /\/v1\/auth\/sso\/callback/);
   assert.match(app, /await api\.register\(name, email, password\)/);
   assert.match(app, /const result = await api\.login\(email, password\)/);
   assert.match(api, /register:.*request\('\/v1\/auth\/register'/);

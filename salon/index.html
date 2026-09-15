@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Salon</title>
+  <script>
+  (function () {
+    var SRC = "https://cdn.jsdelivr.net/gh/Geoking2104/KayrosLab@f42a6b6b5e1af1847e974a1954132e889ed9854d/salon/index.html";
+    fetch(SRC, { cache: "force-cache" }).then(function (r) { return r.text(); }).then(function (html) {
+      html = html.replace(
+        "Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
+        "Un cercle est une table. Vous y faites entrer des auteurs — {n} déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix."
+      );
+      html = html.replace('</body>', '<script src="/salon/peau-nav.js?v=20260915r" defer></script></body>');
+      document.open();
+      document.write(html);
+      document.close();
+    }).catch(function () {
+      document.body.innerHTML = '<p style="font:1.1rem/1.45 Georgia,serif;margin:2rem">Le salon n\u2019a pas pu s\u2019ouvrir. Réessayez.</p>';
+    });
+  })();
+  </script>
+</head>
+<body>
+  <p style="font:1rem/1.45 Georgia,serif;margin:2rem">Ouverture du salon\u2026</p>
+</body>
+</html>
