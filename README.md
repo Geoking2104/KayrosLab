@@ -70,7 +70,7 @@ See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
 
 *Slack, Teams, Discord or the console — every channel becomes a decision room.*
 
-- **[Agent console](#agent-console) →** Self-service workspace: rooms, agent registry, decision dossiers and Sales Oracle — no second login.
+- **[Agent console](#agent-console) →** Self-service workspace: harness sessions, agent registry (custom and hybrid), one-click channel connection, decision dossiers and Sales Oracle — no second login.
 - **[Chat connectors](#backend-api) →** Slack (signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519).
 - **[Durable dossiers](#agent-console) →** Postgres-backed decision threads you can resume with new evidence, from the same collective.
 - **[Human arbitration](#how-it-works) →** Accept the consensus, pass under conditions, or override a veto — every action recorded.
@@ -177,14 +177,15 @@ embeddings, Postgres for multi-instance persistence.
 **1. Open the console.** [kayroslab.com/console](https://www.kayroslab.com/console/) — create your
 workspace; signup is self-service with a verified e-mail.
 
-**2. Connect a channel (optional).** In **Réglages**, add Slack, Microsoft Teams or Discord
-credentials (stored encrypted server-side) and bind a channel to a collective in mention-only or
-always-on mode.
+**2. Connect a channel (optional).** In **Réglages**, connect Slack, Microsoft Teams or Discord
+in one click (server-side application credentials) — or fall back to manual tokens. Secrets are
+stored encrypted server-side; channel-to-collective binding belongs to the separate conversational application.
 
 **3. Compose the committee.** In **Agents**, start from the system agents — CFO, CTO, Legal — and
-add custom experts or consented hybrid profiles. Grant veto power where a blocking opinion matters.
+add custom experts or **hybrid agents** built from a consented Crystal Knows / LinkedIn profile
+(API import, authorized export upload or manual entry). Grant veto power where a blocking opinion matters.
 
-**4. Ask, then arbitrate.** From **Mission rapide** or a bound channel, ask the real question. Each
+**4. Ask, then arbitrate.** From the **governed mission** workbench or a bound channel, ask the real question. Each
 agent answers with a verdict, strengths, objections, conditions and metrics; the collective returns
 a consensus dossier. Accept it, pass it under conditions, or override a veto — the dossier keeps
 the whole story.
@@ -360,7 +361,7 @@ See [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) for sch
 The [agent console](https://www.kayroslab.com/console/) is the operational surface where governed
 decisions run day to day — in production, with self-service workspaces.
 
-**Flow:** connect your channels → bind rooms to a collective → instruct the question → the
+**Flow:** connect a channel → open a session and compose a collective → instruct the question → the
 collective answers → humans arbitrate → resume with new evidence.
 
 1. **Create a workspace in self service** — signup with verified e-mail (30-minute reset links), tenant-scoped space and per-tenant agent registry.
@@ -373,10 +374,10 @@ collective answers → humans arbitrate → resume with new evidence.
 |---|---|
 | **Vue d'ensemble** (Overview) | Connection status, live metrics (sessions, active agents, executions, pending arbitrations), governed mission launcher |
 | **Sessions** | Harness sessions: a stable collective, its execution log and its decision dossiers |
-| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power, consented Crystal Knows profile import. Literary personalities from public-domain authors (writers, philosophers) can be added from a curated, source-verified catalog |
+| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power. **Hybrid agents** combine an explicit mission with a consented human profile imported from Crystal Knows / LinkedIn, an authorized export upload, or manual entry |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
-| **Réglages** (Settings) | Connector secrets encrypted at rest, connectivity tests, Crystal Knows capability state |
+| **Réglages** (Settings) | One-click channel connection (Slack / Teams / Discord) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
 
 The console runs on the same governed runtime exposed by the API: a session, its dossiers, its
 replies and its arbitrations form one durable, tenant-scoped audit trail.
@@ -595,7 +596,7 @@ deployment and limitations.
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
-| **Agent Console** | `GET /v1/console/overview` · agents CRUD + Crystal import · connectors (configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` · threads · `POST /v1/console/threads/:threadId/arbitrate` |
+| **Agent Console** | `GET /v1/console/overview` · agents CRUD (+ human profile import/upload) · connectors (one-click connect / configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` · threads · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Contact** | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | **Auteurs du domaine public** | `GET /v1/literary/authors` · `GET /v1/literary/sources` · `GET /v1/literary/search?q=` — recherche temps réel (Gutenberg, NosLivres/efele, EbooksGratuits, Wikisource) · `POST /v1/literary/authors/:authorId/agent` · `POST /v1/literary/agents` — personnalité d'agent construite depuis la somme des œuvres du domaine public (txt/html/epub) + portrait |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |

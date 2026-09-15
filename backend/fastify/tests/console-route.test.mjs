@@ -2,8 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import consoleRoute from '../routes/console.mjs';
-import { HybridAgentGateway, SwarmService } from '../../../core/index.mjs';
+import { HybridAgentGateway, SwarmService, ConnectorOAuthService } from '../../../core/index.mjs';
 import { ConnectorConfigurationService, InMemoryConnectorConfigStore } from '../../../core/connector-config.mjs';
+
+function oauth() {
+  return new ConnectorOAuthService({
+    config: {
+      slack: { clientId: 'cid', clientSecret: 'sec', signingSecret: 'sig', scopes: 'app_mentions:read,chat:write' },
+      discord: { clientId: '', clientSecret: '', botToken: '', publicKey: '', permissions: '0', scopes: 'bot' },
+      teams: { appId: '', botPassword: '', tenant: 'organizations' },
+    },
+    fetchImpl: async () => ({ ok: true, json: async () => ({ ok: true, access_token: 'tok', team: { id: 'T1', name: 'Team' } }) }),
+  });
+}
 
 async function buildApp() {
   const swarm = new SwarmService();
@@ -11,7 +22,9 @@ async function buildApp() {
   const connectorConfig = new ConnectorConfigurationService({ store: new InMemoryConnectorConfigStore() });
   const app = Fastify();
   app.decorate('kayrosContext', {
-    hybridGateway, connectorConfig, engine: { swarm },
+    hybridGateway, connectorConfig, engine: { swarm }, connectorOAuth: oauth(),
+    connectorOAuthConfigured: { slack: true, discord: false, teams: false },
+    publicApiUrl: 'https://api.kayros.test', consoleUrl: 'https://console.kayros.test/console/',
     crystalKnowsConfigured: false, connectorEncryptionConfigured: false,
   });
   app.decorate('requireAuth', async () => ({ sub: 'u1', email: 'owner@kayros.test', role: 'comex', tenantId: 'tenant-a' }));
@@ -79,4 +92,50 @@ test('console creates and updates a fully described agent', async (t) => {
   assert.equal(updated.statusCode, 200);
   assert.equal(updated.json().agent.enabled, false);
   assert.equal(updated.json().agent.model, 'test-model');
+});
+
+test('console creates a hybrid agent and attaches a consented human profile', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const created = await app.inject({ method: 'POST', url: '/v1/console/agents', payload: {
+    agent_id: 'client_cfo', role_name: 'CFO client', department: 'Comité de direction', seniority: 'executive',
+    primary_focus: 'Rejouer le point de vue du client.', connectors: ['console'], enabled: true,
+  } });
+  assert.equal(created.statusCode, 201);
+  const imported = await app.inject({ method: 'POST', url: '/v1/console/agents/client_cfo/personality', payload: {
+    consent_confirmed: true,
+    manual_profile: { assigned_name: 'Alex Martin', disc_type: 'D/C', consent_confirmed: true, communication_style: { tone: 'direct' } },
+  } });
+  assert.equal(imported.statusCode, 200);
+  assert.equal(imported.json().agent.human_profile.assigned_name, 'Alex Martin');
+  assert.equal(imported.json().agent.human_profile.consent_confirmed, true);
+  assert.ok((imported.json().agent.human_profile.profile_sources || []).length > 0);
+});
+
+test('console rejects a human profile without explicit consent', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  await app.inject({ method: 'POST', url: '/v1/console/agents', payload: {
+    agent_id: 'no_consent', role_name: 'R', department: 'D', seniority: 'senior', primary_focus: 'F', connectors: ['console'], enabled: true,
+  } });
+  const refused = await app.inject({ method: 'PUT', url: '/v1/console/agents/no_consent/human-profile', payload: { assigned_name: 'X' } });
+  assert.equal(refused.statusCode, 400);
+  assert.match(refused.json().error, /consentement/);
+});
+
+test('console exposes one-click connector connection and reports unavailable platforms', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const slack = await app.inject({ method: 'POST', url: '/v1/console/connectors/slack/connect' });
+  assert.equal(slack.statusCode, 200);
+  const body = slack.json();
+  assert.equal(body.mode, 'oauth');
+  assert.match(body.url, /^https:\/\/slack\.com\/oauth\/v2\/authorize\?/);
+  assert.match(body.url, /state=/);
+  assert.equal(body.redirect_uri, 'https://api.kayros.test/v1/connectors/slack/oauth/callback');
+
+  const teams = await app.inject({ method: 'POST', url: '/v1/console/connectors/teams/connect' });
+  assert.equal(teams.statusCode, 409);
+  assert.match(teams.json().error, /indisponible/);
+
+  const overview = await app.inject({ method: 'GET', url: '/v1/console/overview' });
+  assert.equal(overview.json().capabilities.connector_oauth.slack, true);
+  assert.equal(overview.json().capabilities.connector_oauth.teams, false);
 });

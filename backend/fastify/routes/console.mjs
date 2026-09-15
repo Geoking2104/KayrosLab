@@ -18,6 +18,24 @@ const ruleConfigurationSchema = z.object({
   user_added_rules: z.array(z.union([z.string().min(1).max(2000), z.object({ rule_id: z.string().max(120).optional(), rule_text: z.string().min(1).max(2000) })])).optional(),
   user_modified_rules: z.array(z.object({ replaces_rule_id: z.string().min(1).max(120), modified_text: z.string().min(1).max(2000) })).optional(),
 }).optional();
+const humanProfileSchema = z.object({
+  assigned_name: z.string().max(200).optional(), linkedin_url: z.string().max(1000).optional(), crystalknows_report_url: z.string().max(1000).optional(),
+  disc_type: z.string().max(80).optional(), enneagram_type: z.string().max(80).optional(), myers_briggs_type: z.string().max(80).optional(),
+  behavioral_archetype: z.string().max(160).optional(), core_motivators: z.array(z.string().max(500)).max(30).optional(),
+  skepticism_factor: z.string().max(500).optional(), profile_summary: z.array(z.string().max(1000)).max(30).optional(),
+  professional_context: z.object({ headline: z.string().max(500).optional(), current_role: z.string().max(300).optional(), company: z.string().max(300).optional(), location: z.string().max(300).optional(), skills: z.array(z.string().max(300)).max(100).optional(), qualities: z.array(z.string().max(300)).max(100).optional() }).optional(),
+  communication_style: z.object({ tone: z.string().max(160).optional(), preferred_format: z.string().max(300).optional(), decision_triggers: z.array(z.string().max(500)).max(30).optional(), stress_triggers: z.array(z.string().max(500)).max(30).optional(), objection_patterns: z.array(z.string().max(500)).max(30).optional(), communication_directives: z.array(z.string().max(500)).max(30).optional() }).optional(),
+  consent_confirmed: z.boolean().optional(),
+}).optional();
+const personalityImportSchema = z.object({
+  consent_confirmed: z.literal(true),
+  imports: z.array(z.object({
+    source: z.enum(['linkedin', 'crystalknows']),
+    profile_url: z.string().max(1000).optional(), linkedin_url: z.string().max(1000).optional(),
+    email: z.string().email().max(320).optional(), profile_data: z.record(z.string(), z.unknown()).optional(),
+  })).max(4).optional().default([]),
+  manual_profile: humanProfileSchema,
+}).refine((value) => value.imports.length > 0 || !!value.manual_profile, { message: 'au moins un import ou un profil manuel requis' });
 const agentFields = {
   agent_id: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), display_name: z.string().min(1).max(160).optional(),
   role_name: z.string().min(1).max(160), department: z.string().min(1).max(160),
@@ -27,6 +45,7 @@ const agentFields = {
   model: z.string().max(200).nullable().optional(), tools: z.array(z.string().min(1).max(160)).max(100).optional(),
   connectors: z.array(z.enum(['slack', 'discord', 'teams', 'console'])).max(4).optional(), veto_power: z.boolean().optional(), enabled: z.boolean().optional(),
   metadata: z.record(z.string(), z.unknown()).optional(), behavioral_profile: z.record(z.string(), z.unknown()).optional(), rule_configuration: ruleConfigurationSchema,
+  human_profile: humanProfileSchema,
 };
 const agentCreateSchema = z.object(agentFields);
 const agentPatchSchema = z.object(agentFields).partial().omit({ agent_id: true });
@@ -66,8 +85,7 @@ function collectiveView(swarm, configuration, tenantId) {
     agents: active.map((id) => swarm.registry.get(id, { tenantId })).filter(Boolean).map((agent) => ({
       agent_id: agent.agent_id, role_name: agent.role_name, display_name: agent.display_name || agent.role_name,
       department: agent.department, tools: agent.tools || [], provider: agent.provider || null, model: agent.model || null,
-      veto_power: agent.veto_power === true,
-      avatar_url: agent.metadata?.literary?.avatar_url || null,
+      veto_power: agent.veto_power === true, hybrid: !!agent.human_profile,
     })),
   };
 }
@@ -97,7 +115,8 @@ async function connections(app, tenantId) {
   return configured.map((item) => {
     const fallback = runtime.find((entry) => entry.platform === item.platform);
     const usingEnvironment = fallback?.status === 'connected' && item.status === 'not_configured';
-    return { ...item, status: usingEnvironment ? 'connected' : item.status, source: usingEnvironment ? 'environment' : 'console' };
+    const oauth = app.kayrosContext.connectorOAuth;
+    return { ...item, status: usingEnvironment ? 'connected' : item.status, source: usingEnvironment ? 'environment' : 'console', one_click: oauth?.available(item.platform) === true, connect_mode: oauth?.mode(item.platform) || null };
   });
 }
 
@@ -122,7 +141,7 @@ export default async function consoleRoute(app) {
         pending_human_decisions: threads.filter((thread) => thread.status !== 'resolved').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,
-      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic'] },
+      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
     };
   });
 
@@ -153,6 +172,25 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
+  // Profil humain d'un agent hybride : import Crystal/LinkedIn ou export autorisé.
+  app.post('/v1/console/agents/:agentId/personality', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const parsed = personalityImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import de profil invalide', issues: parsed.error.issues });
+    try {
+      const agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
+      await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
+    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+  });
+  // Profil humain fourni directement (saisie ou export de fichier), sans API tierce.
+  app.put('/v1/console/agents/:agentId/human-profile', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const parsed = humanProfileSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'profil humain invalide', issues: parsed.error.issues });
+    if (parsed.data?.consent_confirmed !== true) return reply.code(400).send({ error: 'consentement explicite requis pour un profil humain' });
+    try {
+      const agent = app.kayrosContext.engine.swarm.assignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
+      await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
+    } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 400).send({ error: surface(error.message) }); }
+  });
 
   // --- Connecteurs de canaux externes ------------------------------------
   app.get('/v1/console/connectors', async (req, reply) => {
@@ -175,6 +213,21 @@ export default async function consoleRoute(app) {
       const connector = await app.kayrosContext.connectorConfig.setEnabled(me.tenantId, req.params.platform, parsed.data.enabled);
       if (connector.enabled) { const adapter = await app.kayrosContext.connectorConfig.adapterFor(me.tenantId, req.params.platform); if (adapter) app.kayrosContext.hybridGateway.setTenantAdapter(me.tenantId, adapter); }
       return { connector };
+    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+  });
+  app.post('/v1/console/connectors/:platform/connect', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const platform = String(req.params.platform || '').toLowerCase();
+    if (!['slack', 'discord', 'teams'].includes(platform)) return reply.code(404).send({ error: 'plateforme inconnue' });
+    const oauth = app.kayrosContext.connectorOAuth;
+    if (!oauth?.available(platform)) {
+      return reply.code(409).send({ error: `Connexion simplifiée ${platform} indisponible : identifiants d’application côté serveur manquants.` });
+    }
+    if (!app.kayrosContext.publicApiUrl) return reply.code(409).send({ error: 'KAYROS_PUBLIC_API_URL requis pour la connexion simplifiée.' });
+    const redirectUri = `${app.kayrosContext.publicApiUrl}/v1/connectors/${platform}/oauth/callback`;
+    try {
+      const started = oauth.start(platform, { tenantId: me.tenantId, redirectUri });
+      return { platform, mode: started.mode, url: started.url, redirect_uri: redirectUri };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/connectors/:platform/test', async (req, reply) => {

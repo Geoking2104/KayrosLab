@@ -75,6 +75,7 @@ export * from './personality.mjs';
 export * from './sales-oracle.mjs';
 export * from './hybrid-agent-gateway.mjs';
 export * from './collaboration-store.mjs';
+export * from './connector-oauth.mjs';
 
 import { KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, HttpBackendProvider } from './kayros-llm.mjs';
 import { demoTools } from './tool-registry.mjs';

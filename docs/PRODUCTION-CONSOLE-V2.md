@@ -80,8 +80,8 @@ Le profil est facultatif et réservé à l’adaptation de communication, au dé
 
 ## Parcours UX et états
 
-- **Agents** : liste, état actif, création/édition dans un panneau, champs structurés et aperçu des règles effectives ; import Crystal distinct et consenti.
-- **Réglages** : carte par plateforme avec `à configurer`, `à tester`, `connecté`, `erreur` ou `désactivé`; sauvegarde masquée, test explicite et URL webhook copiable.
+- **Agents** : liste, état actif, création/édition dans un panneau, champs structurés et aperçu des règles effectives ; **création d'un agent hybride** avec profil humain consenti (import Crystal Knows / LinkedIn, export autorisé ou saisie manuelle).
+- **Réglages** : **connexion « un bouton »** de Slack / Teams / Discord lorsque les identifiants d'application sont côté serveur ; cartes d'état (`à configurer`, `à tester`, `connecté`, `erreur`, `désactivé`) et repli sur la configuration avancée manuelle.
 - **Sessions** : ouverture à partir des seuls agents actifs, avec seuil de consensus explicite ; le collectif reste modifiable sans recréer la session.
 - **Mission gouvernée** : sélection de la session, question et contexte ; ouverture automatique du dossier et du fil.
 - **Décisions** : timeline durable, contributions et objections visibles, questions ciblées, réponse humaine, nouvelle exécution du même collectif, puis arbitrage.

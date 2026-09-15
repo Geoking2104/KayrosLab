@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { api, getToken, setToken } from './api.js';
 
-// La console est un harness d'agents : registre d'agents, collectifs, sessions
-// gouvernées, missions, dossiers et arbitrage humain. Le produit de conversation
-// dérivé vit dans une application séparée : aucune de ses surfaces n'apparaît ici.
+// La console est un harness d'agents : registre d'agents (métier ou hybride),
+// collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
+// L'expérience littéraire vit dans une application séparée, hors de cette surface.
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['auteurs', 'Auteurs'], ['activity', 'Décisions'], ['settings', 'Réglages'],
+  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['settings', 'Réglages'],
 ];
 const votingThresholds = [['majority', 'Majorité'], ['unanimous', 'Unanimité'], ['veto_power_csuite', 'Veto comité exécutif']];
 const votingLabel = (value) => votingThresholds.find(([id]) => id === value)?.[1] || 'Majorité';
@@ -15,18 +15,13 @@ const connectorFields = {
   discord: [['application_id', 'Application ID', false], ['bot_token', 'Jeton du bot', true], ['public_key', 'Clé publique Ed25519', true], ['webhook_url', 'Webhook sortant (facultatif)', true]],
   teams: [['app_id', 'Microsoft App ID', false], ['bot_password', 'Secret client', true], ['webhook_url', 'Webhook entrant (facultatif)', true]],
 };
+const connectLabel = { slack: 'Connecter Slack', discord: 'Ajouter le bot Discord', teams: 'Autoriser Microsoft Teams' };
 
 function splitLines(value) { return String(value || '').split(/\r?\n/).map((item) => item.trim()).filter(Boolean); }
 function splitCsv(value) { return String(value || '').split(',').map((item) => item.trim()).filter(Boolean); }
 function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'); } catch { return fallback; } }
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
-
-const pendingSessionRef = { sessionId: null };
-
-function Mark({ name }) {
-  const labels = { overview: '▦', sessions: '▤', agents: '◉', auteurs: '✒', activity: '✓', settings: '⚙' };
-  return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
-}
+function readFileText(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '')); reader.onerror = () => reject(new Error('Lecture du fichier impossible.')); reader.readAsText(file); }); }
 
 function randomUrlToken(bytes = 32) {
   const buf = new Uint8Array(bytes);
@@ -35,17 +30,20 @@ function randomUrlToken(bytes = 32) {
   buf.forEach((b) => { bin += String.fromCharCode(b); });
   return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
-
 async function pkceChallenge(verifier) {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
   const bytes = Array.from(new Uint8Array(digest));
   return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
-
 function ssoRedirectUri() {
   const path = location.pathname.replace(/index\.html$/, '');
   const normalized = `${path.endsWith('/') ? path : `${path}/`}` || '/console/';
   return `${location.origin}${normalized.startsWith('/console') ? normalized : '/console/'}`;
+}
+
+function Mark({ name }) {
+  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', settings: '⚙' };
+  return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
 function Login({ onLogin }) {
@@ -152,8 +150,8 @@ function Connection({ connection }) {
 function AgentChips({ agents }) {
   if (!agents?.length) return null;
   return <div className="collective-chips">{agents.map((agent) => <span className="collective-chip" key={agent.agent_id}>
-    {agent.avatar_url ? <img className="agent-avatar" src={agent.avatar_url} alt="" /> : null}
     <span><strong>{agent.display_name}</strong><small>{agent.department}</small></span>
+    {agent.hybrid ? <em title="Profil hybride conssenti">hybride</em> : null}
     {agent.veto_power ? <em title="Pouvoir de veto">veto</em> : null}
   </span>)}</div>;
 }
@@ -167,7 +165,7 @@ function CreateSession({ agents, onClose, onCreated }) {
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
     <header><div><h2>Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
-      <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} />{agent.metadata?.literary?.avatar_url ? <img className="agent-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : null}<span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
+      <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} /><span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
       <label>Seuil de consensus<select value={form.voting_threshold} onChange={(event) => setForm({ ...form, voting_threshold: event.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Ouverture…' : 'Ouvrir la session'}</button></footer>
     </form>
@@ -217,19 +215,11 @@ function DecisionThread({ thread, onChanged }) {
 }
 
 function Overview({ data, refresh, openSession, onThread }) {
-  const [selectedSession, setSelectedSession] = useState(() => {
-    const preselected = pendingSessionRef.sessionId;
-    if (preselected && data.sessions.some((session) => session.session_id === preselected)) { pendingSessionRef.sessionId = null; return preselected; }
-    return data.sessions[0]?.session_id || null;
-  });
+  const [selectedSession, setSelectedSession] = useState(() => data.sessions[0]?.session_id || null);
   useEffect(() => {
-    setSelectedSession((current) => {
-      if (current && data.sessions.some((session) => session.session_id === current)) return current;
-      const pending = pendingSessionRef.sessionId;
-      if (pending && data.sessions.some((session) => session.session_id === pending)) { pendingSessionRef.sessionId = null; return pending; }
-      return data.sessions[0]?.session_id || '';
-    });
-  }, [data.sessions]); const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+    setSelectedSession((current) => (current && data.sessions.some((session) => session.session_id === current) ? current : (data.sessions[0]?.session_id || '')));
+  }, [data.sessions]);
+  const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
   const [soCases, setSoCases] = useState([]);
@@ -247,7 +237,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       soClientRef.current = client;
       setSoReady(true);
       client.listCases().then((result) => { if (alive) setSoCases(result.cases || []); }).catch(() => {});
-    }).catch(() => { /* module indisponible : la mission rapide fonctionne sans dossier client */ });
+    }).catch(() => { /* module indisponible : la mission gouvernée fonctionne sans dossier client */ });
     return () => { alive = false; };
   }, []);
   useEffect(() => {
@@ -297,12 +287,89 @@ function Overview({ data, refresh, openSession, onThread }) {
   </>;
 }
 
+/** Panneau de profil humain : import Crystal Knows / LinkedIn, export autorisé ou saisie manuelle. */
+function HumanProfilePanel({ onImported, disabled }) {
+  const [source, setSource] = useState('crystalknows');
+  const [email, setEmail] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [exportSource, setExportSource] = useState('crystalknows');
+  const [file, setFile] = useState(null);
+  const [manual, setManual] = useState({ assigned_name: '', disc_type: '', tone: '', motivators: '', directives: '', summary: '' });
+  const [consent, setConsent] = useState(false);
+  const [state, setState] = useState('idle'); const [error, setError] = useState('');
+
+  function payload() {
+    if (source === 'manual') {
+      const manual_profile = {
+        assigned_name: manual.assigned_name || undefined,
+        disc_type: manual.disc_type || undefined,
+        core_motivators: splitCsv(manual.motivators),
+        profile_summary: splitLines(manual.summary),
+        communication_style: { tone: manual.tone || undefined, communication_directives: splitCsv(manual.directives) },
+        consent_confirmed: true,
+      };
+      return { consent_confirmed: true, manual_profile };
+    }
+    if (source === 'upload') {
+      if (!file) throw new Error('Sélectionnez un fichier de profil (JSON ou texte).');
+      return { consent_confirmed: true, imports: [{ source: exportSource, profile_data: jsonValue(file.text, null) || { name: file.text } }] };
+    }
+    if (source === 'linkedin') {
+      if (!linkedin.trim()) throw new Error('URL LinkedIn requise.');
+      return { consent_confirmed: true, imports: [{ source: 'linkedin', linkedin_url: linkedin.trim() }] };
+    }
+    if (!email.trim() && !linkedin.trim()) throw new Error('E-mail ou URL LinkedIn requis pour Crystal Knows.');
+    return { consent_confirmed: true, imports: [{ source: 'crystalknows', email: email.trim() || undefined, linkedin_url: linkedin.trim() || undefined }] };
+  }
+
+  async function pickFile(event) {
+    const chosen = event.target.files?.[0]; if (!chosen) return;
+    try { setFile({ name: chosen.name, text: await readFileText(chosen) }); setError(''); }
+    catch (err) { setError(err.message); }
+  }
+
+  async function submit(event) {
+    event.preventDefault(); setError('');
+    if (!consent) { setError('Consentement explicite requis avant tout import de profil.'); return; }
+    setState('loading');
+    try { const body = payload(); await onImported(body); setState('success'); }
+    catch (err) { setState('error'); setError(err.message); }
+  }
+
+  return <section className="profile-panel">
+    <h3 className="so-kicker">Profil humain (facultatif)</h3>
+    <p className="muted so-note">Un agent hybride combine une mission explicite et un profil de communication consenti. Importez un profil Crystal Knows / LinkedIn, chargez un export autorisé, ou saisissez-le.</p>
+    <label>Source du profil<select value={source} onChange={(event) => { setSource(event.target.value); setError(''); }} disabled={disabled}>
+      <option value="crystalknows">Crystal Knows (e-mail / LinkedIn)</option>
+      <option value="linkedin">LinkedIn (profil autorisé)</option>
+      <option value="upload">Export autorisé (fichier)</option>
+      <option value="manual">Saisie manuelle</option>
+    </select></label>
+    {(source === 'crystalknows' || source === 'linkedin') && <>
+      <div className="form-grid"><label>E-mail professionnel<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Optionnel" /></label><label>URL LinkedIn<input value={linkedin} onChange={(event) => setLinkedin(event.target.value)} placeholder="https://www.linkedin.com/in/…" /></label></div>
+    </>}
+    {source === 'upload' && <>
+      <label>Type d'export<select value={exportSource} onChange={(event) => setExportSource(event.target.value)}><option value="crystalknows">Crystal Knows</option><option value="linkedin">LinkedIn</option></select></label>
+      <label>Fichier de profil (.json / .txt)<input type="file" accept=".json,.txt,.md" onChange={pickFile} />{file ? <small>{file.name}</small> : null}</label>
+    </>}
+    {source === 'manual' && <>
+      <div className="form-grid"><label>Nom du profil<input value={manual.assigned_name} onChange={(event) => setManual({ ...manual, assigned_name: event.target.value })} /></label><label>Profil DISC<input value={manual.disc_type} onChange={(event) => setManual({ ...manual, disc_type: event.target.value })} placeholder="Ex. D/C" /></label></div>
+      <label>Ton préféré<input value={manual.tone} onChange={(event) => setManual({ ...manual, tone: event.target.value })} /></label>
+      <label>Motivateurs · séparés par des virgules<input value={manual.motivators} onChange={(event) => setManual({ ...manual, motivators: event.target.value })} /></label>
+      <label>Directives de communication · séparées par des virgules<input value={manual.directives} onChange={(event) => setManual({ ...manual, directives: event.target.value })} /></label>
+      <label>Résumé · une ligne par élément<textarea value={manual.summary} onChange={(event) => setManual({ ...manual, summary: event.target.value })} /></label>
+    </>}
+    <label className="consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />La personne a consenti à cet usage de profil pour la communication et la collaboration. Pas de recrutement, crédit ou décision à impact matériel.</label>
+    <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
+    <div className="connector-actions"><button type="button" className="button secondary" onClick={submit} disabled={disabled || state === 'loading'}>{state === 'loading' ? 'Import…' : 'Importer le profil'}</button></div>
+  </section>;
+}
+
 const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false };
 function agentForm(agent) { return agent ? { ...agent, constraints: (agent.constraints || []).join('\n'), tools: (agent.tools || []).join(', '), connectors: agent.connectors || ['console'], rules: (agent.rule_configuration?.user_added_rules || []).map((rule) => rule.rule_text).join('\n'), metadata: JSON.stringify(agent.metadata || {}, null, 2), behavioral: JSON.stringify(agent.behavioral_profile || {}, null, 2) } : emptyAgent; }
 
 function AgentEditor({ agent, capabilities, onSaved, onClose }) {
   const editing = !!agent; const [form, setForm] = useState(() => agentForm(agent)); const [state, setState] = useState('idle'); const [error, setError] = useState('');
-  const [crystal, setCrystal] = useState({ email: '', linkedin_url: '', consent_confirmed: false });
   function toggleConnector(id) { setForm((current) => ({ ...current, connectors: current.connectors.includes(id) ? current.connectors.filter((item) => item !== id) : [...current.connectors, id] })); }
   function payload() {
     const base = { display_name: form.display_name, role_name: form.role_name, department: form.department, seniority: form.seniority, primary_focus: form.primary_focus || form.mission, mission: form.mission, instructions: form.instructions, constraints: splitLines(form.constraints), provider: form.provider || null, model: form.model || null, tools: splitCsv(form.tools), connectors: form.connectors, enabled: form.enabled, veto_power: form.veto_power, metadata: jsonValue(form.metadata), behavioral_profile: jsonValue(form.behavioral) };
@@ -311,7 +378,8 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
     return editing ? base : { ...base, agent_id: form.agent_id };
   }
   async function save(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = editing ? await api.updateAgent(agent.agent_id, payload()) : await api.createAgent(payload()); setState('success'); await onSaved(result.agent); } catch (err) { setState('error'); setError(err.message); } }
-  async function importCrystal() { setState('loading'); setError(''); try { const result = await api.importCrystal(agent.agent_id, crystal); setState('success'); await onSaved(result.agent); } catch (err) { setState('error'); setError(err.message); } }
+  async function importProfile(body) { const result = await api.importPersonality(agent.agent_id, body); await onSaved(result.agent); }
+  const profile = agent?.human_profile;
   return <div className="dialog-backdrop"><section className="dialog agent-dialog" role="dialog" aria-modal="true"><header><div><h2>{editing ? `Configurer ${agent.agent_id}` : 'Ajouter un agent'}</h2><p>Chaque paramètre devient explicite dans le contexte d’exécution.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     <form onSubmit={save}><div className="form-grid three"><label>Identifiant<input value={form.agent_id} disabled={editing} onChange={(event) => setForm({ ...form, agent_id: event.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })} required /></label><label>Nom affiché<input value={form.display_name} onChange={(event) => setForm({ ...form, display_name: event.target.value })} /></label><label>Rôle<input value={form.role_name} onChange={(event) => setForm({ ...form, role_name: event.target.value })} required /></label><label>Département<input value={form.department} onChange={(event) => setForm({ ...form, department: event.target.value })} required /></label><label>Séniorité<select value={form.seniority} onChange={(event) => setForm({ ...form, seniority: event.target.value })}>{['intern', 'junior', 'senior', 'executive'].map((item) => <option key={item}>{item}</option>)}</select></label><label>Provider<select value={form.provider || ''} onChange={(event) => setForm({ ...form, provider: event.target.value })}><option value="">Routage par défaut</option>{capabilities.providers.map((item) => <option key={item}>{item}</option>)}</select></label></div>
       <label>Mission<textarea value={form.mission} onChange={(event) => setForm({ ...form, mission: event.target.value, primary_focus: event.target.value })} required /></label><label>Instructions<textarea value={form.instructions} onChange={(event) => setForm({ ...form, instructions: event.target.value })} /></label>
@@ -322,398 +390,59 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
       <div className="inline-checks"><label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label><label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
     </form>
-    {editing && <section className="crystal-box"><header><div><h3>Profil Crystal Knows</h3><p>Import facultatif depuis l’API officielle, après consentement explicite.</p></div><span>{capabilities.crystal_knows ? 'Disponible' : 'Identifiants serveur requis'}</span></header><div className="form-grid"><label>E-mail professionnel<input type="email" value={crystal.email} onChange={(event) => setCrystal({ ...crystal, email: event.target.value })} /></label><label>URL LinkedIn autorisée<input value={crystal.linkedin_url} onChange={(event) => setCrystal({ ...crystal, linkedin_url: event.target.value })} /></label></div><label className="consent"><input type="checkbox" checked={crystal.consent_confirmed} onChange={(event) => setCrystal({ ...crystal, consent_confirmed: event.target.checked })} />La personne a consenti à cet usage de profil pour la communication et la collaboration. Pas de recrutement, crédit ou décision à impact matériel.</label><button className="button secondary" disabled={!capabilities.crystal_knows || !crystal.consent_confirmed || (!crystal.email && !crystal.linkedin_url)} onClick={importCrystal}>Importer via Crystal</button></section>}
+    {editing && <section className="crystal-box"><header><div><h3>Agent hybride</h3><p>{profile ? 'Profil humain consenti attaché à cet agent.' : 'Aucun profil humain pour l’instant.'}</p></div><span>{profile ? 'Hybride' : 'Agent métier'}</span></header>
+      {profile && <dl className="profile-summary"><div><dt>Nom</dt><dd>{profile.assigned_name || '—'}</dd></div><div><dt>DISC</dt><dd>{profile.disc_type || '—'}</dd></div><div><dt>Ton</dt><dd>{profile.communication_style?.tone || '—'}</dd></div><div><dt>Sources</dt><dd>{(profile.profile_sources || []).map((item) => item.source).join(', ') || '—'}</dd></div></dl>}
+      <HumanProfilePanel disabled={state === 'loading'} onImported={importProfile} />
+    </section>}
   </section></div>;
 }
 
-function levenshtein(a, b) {
-  const m = a.length; const n = b.length;
-  if (!m) return n; if (!n) return m;
-  let previous = Array.from({ length: n + 1 }, (_, i) => i);
-  for (let i = 1; i <= m; i += 1) {
-    const current = [i];
-    for (let j = 1; j <= n; j += 1) {
-      current[j] = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
-    }
-    previous = current;
-  }
-  return previous[n];
-}
-function nameSimilarity(query, name) {
-  const q = String(query || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  const target = String(name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  if (!q || !target) return 0;
-  let bestToken = 0;
-  for (const qt of q.split(/[^a-z0-9]+/).filter(Boolean)) {
-    for (const nt of target.split(/[^a-z0-9]+/).filter(Boolean)) {
-      const distance = levenshtein(qt, nt);
-      const similarity = 1 - distance / Math.max(qt.length, nt.length);
-      if (similarity > bestToken) bestToken = similarity;
-    }
-  }
-  const globalSimilarity = 1 - levenshtein(q, target) / Math.max(q.length, target.length);
-  return Math.max(bestToken, globalSimilarity);
-}
-const MAX_PERSONALITY_BOOKS = 15;
-const MIN_PERSONALITY_BOOKS = 5;
-const authorAvatarCache = new Map();
-function fetchAuthorAvatar(wikipedia) {
-  if (!authorAvatarCache.has(wikipedia)) {
-    authorAvatarCache.set(wikipedia, fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(String(wikipedia).replace(/ /g, '_'))}`)
-      .then((response) => (response.ok ? response.json() : null))
-      .then((data) => data?.thumbnail?.source || data?.originalimage?.source || '')
-      .catch(() => ''));
-  }
-  return authorAvatarCache.get(wikipedia);
-}
-function normBookTitle(value) {
-  return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-}
-
-function AuthorPickerDialog({ onClose, onCreated }) {
-  const [query, setQuery] = useState('');
-  const [searchBusy, setSearchBusy] = useState(false);
-  const [authors, setAuthors] = useState([]);
-  const [live, setLive] = useState(null);
-  const [avatars, setAvatars] = useState({});
-  const [selectedAuthor, setSelectedAuthor] = useState(null);
-  const [liveWorks, setLiveWorks] = useState([]);
-  const [liveBusy, setLiveBusy] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [name, setName] = useState('');
-  const [uploadTitle, setUploadTitle] = useState('');
-  const [uploadUrl, setUploadUrl] = useState('');
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState('');
-  const [createdAgents, setCreatedAgents] = useState([]);
-  const [lastCreated, setLastCreated] = useState(null);
-  const [progress, setProgress] = useState(null);
-  const [suggestion, setSuggestion] = useState('');
-
-  useEffect(() => {
-    const q = query.trim();
-    if (q.length < 2) { setAuthors([]); setLive(null); setSuggestion(''); return; }
-    let alive = true;
-    const timer = setTimeout(async () => {
-      setSearchBusy(true); setError(''); setSuggestion('');
-      try {
-        const [catalog, sources] = await Promise.all([
-          api.listAuthors(q).then((result) => result.authors || []).catch(() => []),
-          api.searchSources(q).catch(() => ({ sources: [] })),
-        ]);
-        if (!alive) return;
-        setAuthors(catalog);
-        setLive(sources);
-        if (!catalog.length && q.length >= 3) {
-          const all = await api.listAuthors('').then((result) => result.authors || []).catch(() => []);
-          let best = null; let bestSim = 0;
-          for (const author of all) {
-            const similarity = nameSimilarity(q, author.name);
-            if (similarity > bestSim) { bestSim = similarity; best = author; }
-          }
-          if (best && bestSim >= 0.6) setSuggestion(best.name);
-        }
-      } catch (err) { if (alive) setError(err.message); }
-      finally { if (alive) setSearchBusy(false); }
-    }, 450);
-    return () => { alive = false; clearTimeout(timer); };
-  }, [query]);
-
-  useEffect(() => {
-    api.listAuthors('').then((result) => setAuthors((current) => current.length ? current : (result.authors || []))).catch(() => { });
-  }, []);
-  useEffect(() => {
-    (authors || []).forEach((author) => {
-      if (!author.wikipedia || avatars[author.id] !== undefined) return;
-      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
-    });
-  }, [authors, avatars]);
-
-  function mergeBooks(incoming) {
-    setBooks((current) => {
-      const merged = [...current];
-      for (const book of incoming) {
-        if (merged.length >= MAX_PERSONALITY_BOOKS) break;
-        if (merged.some((item) => normBookTitle(item.title) === normBookTitle(book.title) && item.url === book.url)) continue;
-        merged.push(book);
-      }
-      return merged;
-    });
-  }
-  function removeBook(url) { setBooks((current) => current.filter((item) => item.url !== url)); }
-
-  function addAuthor(author) {
-    setSelectedAuthor(author);
-    if (!name.trim()) setName(author.name);
-    setError('');
-    setLiveWorks([]);
-    mergeBooks(author.works.map((work) => ({ title: work.title, url: work.url, author: author.name, source: 'catalogue vérifié', year: '' })));
-    setLiveBusy(true);
-    api.searchSources(author.name).then((result) => {
-      const found = [];
-      for (const group of result.sources || []) {
-        for (const work of group.results || []) {
-          if (!work.ingestable) continue;
-          const surname = author.name.split(/[ ,]+/).pop().toLowerCase();
-          if (!`${work.title} ${work.author}`.toLowerCase().includes(surname)) continue;
-          if (found.some((item) => item.url === work.url)) continue;
-          found.push({ title: work.title, url: work.url, author: work.author || author.name, source: group.source, year: work.year || '' });
-        }
-      }
-      setLiveWorks(found.slice(0, 12));
-      // auto-complétion : au moins 5 œuvres intégrées à la personnalité
-      setBooks((current) => {
-        const merged = [...current];
-        for (const work of found) {
-          if (merged.length >= MIN_PERSONALITY_BOOKS || merged.length >= MAX_PERSONALITY_BOOKS) break;
-          if (merged.some((item) => item.url === work.url)) continue;
-          merged.push({ title: work.title, url: work.url, author: work.author || author.name, source: work.source, year: work.year || '' });
-        }
-        return merged;
+/** Création d'un agent hybride : identité + mission + profil humain consenti, en un seul passage. */
+function HybridAgentDialog({ onClose, onCreated }) {
+  const [form, setForm] = useState({ agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', mission: '', veto_power: false });
+  const [state, setState] = useState('idle'); const [error, setError] = useState(''); const [created, setCreated] = useState(null);
+  async function createHybrid(event) {
+    event.preventDefault(); setState('loading'); setError('');
+    try {
+      const result = await api.createAgent({
+        agent_id: form.agent_id, display_name: form.display_name || undefined, role_name: form.role_name,
+        department: form.department, seniority: form.seniority, primary_focus: form.mission, mission: form.mission,
+        connectors: ['console'], enabled: true, veto_power: form.veto_power,
       });
-    }).catch(() => setLiveWorks([])).finally(() => setLiveBusy(false));
+      setCreated(result.agent); await onCreated(result.agent);
+    } catch (err) { setState('error'); setError(err.message); }
+    finally { setState((current) => (current === 'loading' ? 'idle' : current)); }
   }
-
-  function addLiveWork(work) {
-    mergeBooks([{ title: work.title, url: work.url, author: work.author || selectedAuthor?.name || name, source: work.source || 'recherche en ligne', year: work.year || '' }]);
+  async function importProfile(body) {
+    const result = await api.importPersonality(created.agent_id, body);
+    setCreated(result.agent); await onCreated(result.agent); setState('success');
   }
-
-  function addUpload(event) {
-    event.preventDefault();
-    const title = uploadTitle.trim(); const url = uploadUrl.trim();
-    if (!title || !url) { setError('Titre et URL requis pour le livre ajouté.'); return; }
-    setError('');
-    mergeBooks([{ title, url, author: selectedAuthor?.name || name, source: 'ajout manuel', year: '' }]);
-    setUploadTitle(''); setUploadUrl('');
-  }
-
-  const shortfall = Math.max(0, MIN_PERSONALITY_BOOKS - books.length);
-  const canCreate = books.length >= 1 && name.trim().length > 0 && (books.length >= MIN_PERSONALITY_BOOKS || (liveWorks.length === 0 && shortfall > 0));
-
-  async function createAgent() {
-    if (!name.trim()) { setError('Donnez un nom à votre agent.'); return; }
-    if (!books.length) { setError('Ajoutez au moins un livre à la personnalité.'); return; }
-    if (books.length < MIN_PERSONALITY_BOOKS && liveWorks.length > 0) { setError(`Atteignez ${MIN_PERSONALITY_BOOKS} livres : ${liveWorks.length} œuvre(s) trouvée(s) en ligne restent à cocher, ou ajoutez-les par URL.`); return; }
-    setBusy('create'); setError('');
-    const attributions = [];
-    try {
-      setProgress({ done: 0, total: books.length, label: books[0].title, state: 'lecture' });
-      const result = await api.createWorksAgent({ display_name: name.trim(), works: [books[0]] });
-      const agent = result.agent;
-      setCreatedAgents((current) => [...current, agent]);
-      await onCreated();
-      setProgress({ done: 1, total: books.length, label: books[0].title, state: 'mémoire' });
-      for (let index = 1; index < books.length; index += 1) {
-        const book = books[index];
-        setProgress({ done: index, total: books.length, label: book.title, state: 'lecture' });
-        const added = await api.addManualBooks(agent.agent_id, [book]);
-        if (added.results?.[0]) attributions.push(added.results[0]);
-        setProgress({ done: index + 1, total: books.length, label: book.title, state: 'mémoire' });
-      }
-      setLastCreated({ agent, worksCount: books.length, attributions, completed: result.ingestion?.completed_from_sources || 0 });
-      setBooks([]); setSelectedAuthor(null); setLiveWorks([]); setName(''); setProgress(null);
-      await onCreated();
-    } catch (err) { setError(err.message); }
-    finally { setBusy(false); }
-  }
-
-  async function startSession() {
-    if (!createdAgents.length) return;
-    setBusy('session'); setError('');
-    try {
-      const ids = createdAgents.slice(-3).map((agent) => agent.agent_id);
-      const result = await api.createSession({ name: `Échange — ${createdAgents[createdAgents.length - 1].display_name}`, active_agents: ids });
-      pendingSessionRef.sessionId = result.session.session_id;
-      location.hash = 'overview';
-      onClose();
-      await onCreated();
-    } catch (err) { setError(err.message); }
-    finally { setBusy(false); }
-  }
-
-  const bookRow = (book, checked, onToggle) => <li key={book.url}>
-    <label className="so-bookrow">
-      <input type="checkbox" checked={checked} onChange={onToggle} />
-      <span className="so-book-meta"><strong>{book.title}</strong><small>{[book.author, book.source, book.year ? `éd. ${book.year}` : ''].filter(Boolean).join(' · ')}</small></span>
-    </label>
-    {!checked ? null : null}
-  </li>;
-
-  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog author-dialog" role="dialog" aria-modal="true">
-    <header><div><h2>Ajouter un agent auteur</h2><p>Cherchez un écrivain ou un philosophe : au moins {MIN_PERSONALITY_BOOKS} de ses œuvres du domaine public sont téléchargées en temps réel et composent la personnalité de l'agent (plafond {MAX_PERSONALITY_BOOKS}).</p></div><button className="icon-button" onClick={onClose}>×</button></header>
-    {error && <p className="form-error">{error}</p>}
-    {suggestion && <p className="so-suggest">Vouliez-vous dire : <button className="text-button" onClick={() => { setQuery(suggestion); setSuggestion(''); }}>{suggestion}</button> ?</p>}
-    <input className="so-search" placeholder="Rechercher un écrivain, un philosophe, un livre…" value={query} onChange={(event) => setQuery(event.target.value)} />
-    {searchBusy && <p className="muted so-note">Recherche en cours…</p>}
-
-    {lastCreated && <section className="so-author so-created-card">
-      <img className="so-avatar" src={lastCreated.agent.metadata?.literary?.avatar_url || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
-      <div className="so-author-meta"><strong>{lastCreated.agent.display_name}</strong><small>agent auteur · {lastCreated.worksCount} livre(s) intégré(s){lastCreated.completed ? ` · dont ${lastCreated.completed} complété(s) en ligne` : ''}</small><p>Personnalité créée et prête — les livres sont dans la mémoire de l'agent, registre d'ingestion à jour.</p></div>
-    </section>}
-
-    {(authors || []).length > 0 && <section className="so-authors-results">
-      <h4 className="so-kicker">Auteurs du catalogue vérifié</h4>
-      {authors.map((author) => <article key={author.id} className="so-author">
-        <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
-        <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era} · {author.works.length} œuvre(s) libre(s)</small><p>{author.blurb}</p></div>
-        <button className="button secondary" onClick={() => addAuthor(author)}>{selectedAuthor?.id === author.id ? 'Œuvres ajoutées' : 'Ajouter l’agent'}</button>
-      </article>)}
-    </section>}
-
-    {selectedAuthor && <section className="so-author-selected">
-      <h3>Personnalité : {selectedAuthor.name} <small>({selectedAuthor.kind} · {selectedAuthor.era})</small></h3>
-      {liveBusy ? <p className="muted so-note">Recherche des œuvres en ligne pour compléter la personnalité…</p> : null}
-      {shortfall > 0 && books.length > 0 && <p className="muted so-note">{books.length}/{MIN_PERSONALITY_BOOKS} livres — {liveWorks.length ? 'cochez des œuvres ci-dessous pour compléter.' : liveBusy ? '' : `seulement ${books.length} trouvée(s) : complétez par upload d'URL si besoin.`}</p>}
-      {liveWorks.length > 0 && <ul className="so-booklist">{liveWorks.map((work) => bookRow(work, books.some((item) => item.url === work.url), () => books.some((item) => item.url === work.url) ? removeBook(work.url) : mergeBooks([work])))}</ul>}
-    </section>}
-
-    {!selectedAuthor && (live?.sources || []).some((group) => group.results.length > 0) && query.trim().length >= 2 && <section className="so-books-results">
-      <h4 className="so-kicker">Livres trouvés en ligne</h4>
-      {(live?.sources || []).map((group) => group.results.map((work) => <div key={work.url || work.page} className="so-result">
-        <label className="so-bookrow">
-          <input type="checkbox" checked={books.some((item) => item.url === work.url)} onChange={(event) => event.target.checked ? addLiveWork(work) : removeBook(work.url)} />
-          <span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span>
-        </label>
-        <a className="text-button" href={work.page} target="_blank" rel="noreferrer">voir</a>
-      </div>))}
-    </section>}
-
-    <section className="so-upload">
-      <h4 className="so-kicker">Ajouter un livre par URL</h4>
-      <form onSubmit={addUpload} className="so-upload-form">
-        <input placeholder="Titre du livre" value={uploadTitle} onChange={(event) => setUploadTitle(event.target.value)} maxLength={240} />
-        <input placeholder="https://… (.txt, .html ou .epub)" value={uploadUrl} onChange={(event) => setUploadUrl(event.target.value)} maxLength={1000} />
-        <button className="button secondary" type="submit">Ajouter ce livre</button>
-      </form>
-    </section>
-
-    {books.length > 0 && <section className="so-personality">
-      <h4 className="so-kicker">Livres de la personnalité ({books.length}/{MAX_PERSONALITY_BOOKS})</h4>
-      <ul className="so-booklist">{books.map((book) => <li key={book.url}>
-        <label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{book.title}</strong><small>{[book.author, book.source, book.year ? `éd. ${book.year}` : ''].filter(Boolean).join(' · ')}</small></span></label>
-        <button className="text-button" onClick={() => removeBook(book.url)}>retirer</button>
-      </li>)}</ul>
-      {books.length < MIN_PERSONALITY_BOOKS && <p className="muted so-note">Minimum recommandé : {MIN_PERSONALITY_BOOKS} livres — complétez via la recherche ou l'URL si l'auteur en propose davantage.</p>}
-    </section>}
-
-    {progress && <section className="so-progress">
-      <div className="so-progress-head"><strong>Lecture et intégration en mémoire</strong><span>{progress.done}/{progress.total}</span></div>
-      <div className="so-progress-bar"><span style={{ width: `${Math.round((progress.done / progress.total) * 100)}%` }} /></div>
-      <p className="muted so-note">{progress.done < progress.total ? `En cours : ${progress.label}` : `Intégré : ${progress.label}`}</p>
-    </section>}
-
-    <section className="so-create">
-      <label>Nom de l’agent<input value={name} onChange={(event) => setName(event.target.value)} maxLength={160} placeholder="Ex. Victor Hugo" /></label>
-      <button className="button primary" disabled={busy === 'create' || !books.length || (books.length < MIN_PERSONALITY_BOOKS && liveWorks.length > 0)} onClick={createAgent}>{busy === 'create' ? 'Lecture et intégration…' : `Créer l’agent avec ${books.length} livre(s)`}</button>
-      {createdAgents.length > 0 && !progress && <div className="so-created">
-        <p className="muted so-note">Agent(s) prêt(s) : {createdAgents.map((agent) => agent.display_name).join(' · ')}</p>
-        <div className="connector-actions">
-          <button className="button primary" disabled={busy === 'session'} onClick={startSession}>{busy === 'session' ? 'Ouverture…' : 'Ouvrir une session avec ces auteurs'}</button>
-          <button className="button secondary" onClick={onClose}>Fermer</button>
-        </div>
-      </div>}
-    </section>
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
+    <header><div><h2>Ajouter un agent hybride</h2><p>Un agent hybride porte une mission explicite et un profil de communication consenti.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    {!created ? <form onSubmit={createHybrid}>
+      <div className="form-grid three"><label>Identifiant<input value={form.agent_id} onChange={(event) => setForm({ ...form, agent_id: event.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })} placeholder="ex. client_cfo" required /></label><label>Nom affiché<input value={form.display_name} onChange={(event) => setForm({ ...form, display_name: event.target.value })} /></label><label>Rôle<input value={form.role_name} onChange={(event) => setForm({ ...form, role_name: event.target.value })} required /></label></div>
+      <div className="form-grid three"><label>Département<input value={form.department} onChange={(event) => setForm({ ...form, department: event.target.value })} required /></label><label>Séniorité<select value={form.seniority} onChange={(event) => setForm({ ...form, seniority: event.target.value })}>{['intern', 'junior', 'senior', 'executive'].map((item) => <option key={item}>{item}</option>)}</select></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
+      <label>Mission<textarea value={form.mission} onChange={(event) => setForm({ ...form, mission: event.target.value })} required /></label>
+      <div className="hybrid-steps"><span className="step is-on">1 · Identité</span><span className={`step ${created ? 'is-on' : ''}`}>2 · Profil humain</span></div>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
+      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Création…' : 'Créer puis importer le profil'}</button></footer>
+    </form> : <>
+      <p className="auth-success" role="status">Agent « {created.display_name || created.agent_id} » créé. Importez maintenant son profil humain (facultatif).</p>
+      <HumanProfilePanel disabled={state === 'loading'} onImported={importProfile} />
+      <footer><button type="button" className="button primary" onClick={onClose}>Terminer</button></footer>
+    </>}
   </section></div>;
-}
-
-function AuthorsPage({ data, refresh }) {
-  const [picker, setPicker] = useState(false);
-  const [catalog, setCatalog] = useState([]);
-  const [catalogWorks, setCatalogWorks] = useState({});
-  const [catalogBusy, setCatalogBusy] = useState('');
-  const [catalogError, setCatalogError] = useState('');
-  const [avatars, setAvatars] = useState({});
-  useEffect(() => {
-    let alive = true;
-    api.listAuthors('').then((result) => { if (alive) setCatalog(result.authors || []); }).catch(() => { });
-    return () => { alive = false; };
-  }, []);
-  useEffect(() => {
-    (catalog || []).forEach((author) => {
-      if (!author.wikipedia || avatars[author.id] !== undefined) return;
-      fetchAuthorAvatar(author.wikipedia).then((url) => setAvatars((current) => ({ ...current, [author.id]: url })));
-    });
-  }, [catalog, avatars]);
-  const authors = (data.agents || []).filter((agent) => agent.metadata?.literary && agent.enabled !== false);
-  const createdAuthorIds = new Set(authors.map((agent) => agent.metadata?.literary?.author_id || ''));
-  async function loadWorks(authorId) {
-    if (catalogWorks[authorId]) return;
-    setCatalogWorks((current) => ({ ...current, [authorId]: { loading: true } }));
-    try {
-      const result = await api.getAuthorWorks(authorId);
-      setCatalogWorks((current) => ({ ...current, [authorId]: { works: result.works || [] } }));
-    } catch (err) { setCatalogWorks((current) => ({ ...current, [authorId]: { error: err.message } })); }
-  }
-  async function createCatalogAgent(author) {
-    setCatalogBusy(author.id); setCatalogError('');
-    try { await api.createAuthorAgent(author.id); await refresh(); } catch (err) { setCatalogError(err.message); }
-    finally { setCatalogBusy(''); }
-  }
-  const [conversationBusy, setConversationBusy] = useState('');
-  const [error, setError] = useState('');
-
-  async function openSession(agent) {
-    setConversationBusy(agent.agent_id); setError('');
-    try {
-      const result = await api.createSession({ name: `Échange — ${agent.display_name}`, active_agents: [agent.agent_id] });
-      pendingSessionRef.sessionId = result.session.session_id;
-      location.hash = 'overview';
-      await refresh();
-    } catch (err) { setError(err.message); }
-    finally { setConversationBusy(''); }
-  }
-
-  return <section className="page">
-    <header className="page-header"><div><p className="context-line">Personnalités littéraires</p><h1>Auteurs</h1><p>Agents construits sur la somme des œuvres du domaine public — au moins 5 livres intégrés par personnalité, registre d'ingestion à l'appui.</p></div><button className="button primary" onClick={() => setPicker(true)}>Ajouter un agent auteur</button></header>
-    {error && <p className="inline-error">{error}</p>}
-    {authors.length === 0 && <p className="muted">Aucun agent auteur pour le moment — cliquez sur « Ajouter un agent auteur ».</p>}
-    <div className="agent-table">{authors.map((agent) => {
-      const lit = agent.metadata.literary;
-      const works = (lit.works || []).filter((work) => work.ok);
-      return <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}>
-        <header><div><small>{agent.agent_id} · {agent.department}</small><h2>{lit.avatar_url ? <img className="agent-avatar" src={lit.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</h2></div></header>
-        <p>{agent.mission || agent.primary_focus}</p>
-        <dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Profil</dt><dd>auteur du domaine public</dd></div><div><dt>Livres</dt><dd>{works.length} intégré(s) — plafond 15, minimum 5</dd></div></dl>
-        <details><summary>Livres de la personnalité</summary><ul className="so-booklist">{works.map((work) => <li key={work.url}><label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : ''].filter(Boolean).join(' · ')}</small></span></label></li>)}</ul></details>
-        <footer><span>{lit.era || ''}</span><button className="button secondary" disabled={conversationBusy === agent.agent_id} onClick={() => openSession(agent)}>{conversationBusy === agent.agent_id ? 'Ouverture…' : 'Ouvrir une session'}</button></footer>
-      </article>;
-    })}</div>
-    {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
-    <section className="so-catalog-section">
-      <h2>Auteurs présélectionnés</h2>
-      <p className="muted">Catalogue vérifié du domaine public — au moins 5 œuvres par auteur, complétées en temps réel puis intégrées à la personnalité de l'agent créé.</p>
-      {catalogError && <p className="inline-error">{catalogError}</p>}
-      <div className="so-catalog">{catalog.map((author) => {
-        const state = catalogWorks[author.id];
-        const works = state?.works || [];
-        const already = createdAuthorIds.has(author.id);
-        return <article key={author.id} className="so-catalog-card">
-          <img className="so-avatar" src={avatars[author.id] || ''} alt="" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} />
-          <div className="so-author-meta"><strong>{author.name}</strong><small>{author.kind} · {author.era}</small><p>{author.blurb}</p></div>
-          <div className="so-catalog-actions">
-            {already ? <span className="so-badge">Agent créé ✓</span> : <button className="button secondary" onClick={() => loadWorks(author.id)}>Voir les 5 œuvres</button>}
-            {!already && <button className="button primary" disabled={catalogBusy === author.id || !works.length} onClick={() => createCatalogAgent(author)}>{catalogBusy === author.id ? 'Téléchargement…' : 'Créer l’agent'}</button>}
-          </div>
-          {state?.loading && <p className="muted so-note">Recherche des œuvres en ligne…</p>}
-          {state?.error && <p className="form-error">{state.error}</p>}
-          {works.length > 0 && <ul className="so-booklist">{works.map((work) => <li key={work.url}>
-            <label className="so-bookrow"><input type="checkbox" checked readOnly /><span className="so-book-meta"><strong>{work.title}</strong><small>{[work.author, work.source, work.year ? `éd. ${work.year}` : '', work.ingestable ? 'texte intégral' : 'adresse seule'].filter(Boolean).join(' · ')}</small></span></label>
-          </li>)}</ul>}
-        </article>;
-      })}</div>
-    </section>
-    {picker && <AuthorPickerDialog onClose={() => setPicker(false)} onCreated={refresh} />}
-  </section>;
 }
 
 function AgentsPage({ data, refresh }) {
   const [editing, setEditing] = useState(undefined);
-  const [authorPicker, setAuthorPicker] = useState(false);
+  const [hybrid, setHybrid] = useState(false);
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils et comportement sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setAuthorPicker(true)}>Ajouter un auteur</button><button className="button primary" onClick={() => setEditing(null)}>Ajouter un agent</button></div></header>
-    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.metadata?.literary?.avatar_url ? <img className="agent-avatar" src={agent.metadata.literary.avatar_url} alt="" /> : null}{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.metadata?.literary ? 'auteur du domaine public' : agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils et profil hybride consenti sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button primary" onClick={() => setHybrid(true)}>Ajouter un agent hybride</button></div></header>
+    {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
+    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
     {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
-    {authorPicker && <AuthorPickerDialog onClose={() => setAuthorPicker(false)} onCreated={refresh} />}
+    {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
   </section>;
 }
 
@@ -722,19 +451,31 @@ function ConnectorCard({ connector, secure, refresh }) {
   async function save(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.configureConnector(connector.platform, { secrets, enabled: true, settings: {} }); setSecrets({}); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); } }
   async function test() { setState('loading'); setError(''); try { await api.testConnector(connector.platform); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); await refresh(); } }
   async function toggle() { try { await api.setConnectorEnabled(connector.platform, !connector.enabled); await refresh(); } catch (err) { setError(err.message); } }
-  return <article className="connector-card"><header><div><span className={`status-dot ${connector.status === 'connected' ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
-    <form onSubmit={save}>{connectorFields[connector.platform].map(([id, label, secret]) => <label key={id}>{label}<input type={secret ? 'password' : 'text'} value={secrets[id] || ''} onChange={(event) => setSecrets({ ...secrets, [id]: event.target.value })} placeholder={connector.configured_secret_fields.includes(id) ? 'Déjà configuré — laisser vide pour conserver' : ''} /></label>)}
-      <div className="connector-actions"><button className="button secondary" disabled={!secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button><button type="button" className="button secondary" disabled={!connector.connection_id || state === 'loading'} onClick={test}>Tester</button></div></form>
-    {connector.webhook_url && <label>URL à déclarer chez le fournisseur<input readOnly value={connector.webhook_url} onFocus={(event) => event.target.select()} /></label>}
+  async function connect() { setState('loading'); setError(''); try { const result = await api.connectConnector(connector.platform); location.assign(result.url); } catch (err) { setState('error'); setError(err.message); } }
+  const connected = connector.status === 'connected';
+  return <article className="connector-card"><header><div><span className={`status-dot ${connected ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
+    {connector.one_click && !connected && <button className="button primary" onClick={connect} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : connectLabel[connector.platform]}</button>}
+    {!connector.one_click && !connected && <p className="muted so-note">Connexion simplifiée indisponible : les identifiants d’application du fournisseur doivent être configurés côté serveur. En attendant, utilisez la configuration avancée ci-dessous.</p>}
+    {connected && <div className="connector-actions"><button type="button" className="button secondary" disabled={state === 'loading'} onClick={test}>Tester</button>{connector.webhook_url && <span className="muted so-note">Webhook : <code>{connector.webhook_url}</code></span>}</div>}
+    <details className="connector-advanced"><summary>Configuration avancée (jetons)</summary>
+      <form onSubmit={save}>{connectorFields[connector.platform].map(([id, label, secret]) => <label key={id}>{label}<input type={secret ? 'password' : 'text'} value={secrets[id] || ''} onChange={(event) => setSecrets({ ...secrets, [id]: event.target.value })} placeholder={connector.configured_secret_fields.includes(id) ? 'Déjà configuré — laisser vide pour conserver' : ''} /></label>)}
+        <div className="connector-actions"><button className="button secondary" disabled={!secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button></div></form>
+      {connector.webhook_url && <label>URL à déclarer chez le fournisseur<input readOnly value={connector.webhook_url} onFocus={(event) => event.target.select()} /></label>}
+    </details>
     <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>{connector.last_tested_at && <small>Dernier test : {new Date(connector.last_tested_at).toLocaleString('fr-FR')}</small>}
   </article>;
 }
 
 function SettingsPage({ data, refresh }) {
-  return <section className="page"><header className="page-header"><div><p className="context-line">Secrets côté serveur</p><h1>Réglages</h1><p>Validez les identifiants des canaux externes et testez la connectivité. Les jetons restent chiffrés côté serveur.</p></div></header>
+  const params = new URLSearchParams(String(location.hash).split('?')[1] || '');
+  const connected = params.get('connected');
+  const connectError = params.get('connect_error');
+  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p></div></header>
+    {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
+    {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
     <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
-    <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
+    <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent hybride, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }
 
@@ -819,7 +560,6 @@ function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases,
   </div>;
 }
 
-
 function Console() {
   const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
   const [creatingSession, setCreatingSession] = useState(false); const [selectedThread, setSelectedThread] = useState(null);
@@ -833,7 +573,7 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'auteurs' && <AuthorsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
     {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
 }

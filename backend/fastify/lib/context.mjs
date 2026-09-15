@@ -23,6 +23,7 @@ import {
   InMemorySalesOracleRepository, SalesOracleService,
 } from '../../../core/index.mjs';
 import { ConnectorConfigurationService, InMemoryConnectorConfigStore, PgConnectorConfigStore } from '../../../core/connector-config.mjs';
+import { ConnectorOAuthService } from '../../../core/connector-oauth.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
   createPgPool, applySchema, PgIdeaRepository, PgGateStore, PgRunStore, PgSalesOracleRepository,
@@ -368,6 +369,8 @@ export default async function buildContext() {
     linkService,
     publicApiUrl: KAYROS_PUBLIC_API_URL,
   });
+  // Connexion « un bouton » : le serveur porte les identifiants d'application.
+  const connectorOAuth = new ConnectorOAuthService();
 
   const slackAdapter = process.env.SLACK_BOT_TOKEN
     ? new SlackAdapter({
@@ -545,7 +548,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, oidc, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
-    linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig,
+    linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig, connectorOAuth, connectorOAuthConfigured: { slack: connectorOAuth.available('slack'), discord: connectorOAuth.available('discord'), teams: connectorOAuth.available('teams') }, connectorOAuthModes: connectorOAuth.describe(), publicApiUrl: KAYROS_PUBLIC_API_URL,
     engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,

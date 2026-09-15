@@ -42,12 +42,20 @@ Authenticated console endpoints:
 | `GET` | `/v1/console/sessions/:sessionId` | Session detail with its executions and activity log |
 | `PATCH` | `/v1/console/sessions/:sessionId/collective` | Add or remove agents from the active collective |
 | `POST` | `/v1/console/sessions/:sessionId/run` | Run a governed mission from the console |
+| `POST` | `/v1/console/agents/:agentId/personality` | Import d'un profil humain consenti (Crystal Knows / LinkedIn / export autorisé / saisie) |
+| `PUT` | `/v1/console/agents/:agentId/human-profile` | Profil humain fourni directement (consentement explicite requis) |
+| `POST` | `/v1/console/connectors/:platform/connect` | Démarre la connexion « un bouton » d'un canal (Slack / Teams / Discord) |
 | `GET` | `/v1/console/activity` | Read the ordered execution stream |
 | `GET` | `/v1/console/threads/:threadId` | Durable decision thread |
 | `POST` | `/v1/console/threads/:threadId/arbitrate` | Human arbitration |
 
-Connectors expose the external channel credentials trusted by the platform. The console stores and
-tests them; binding a channel to a collective belongs to the separate conversational application.
+Connectors expose the external channel credentials trusted by the platform. The console stores,
+tests them and starts a **one-click connection** when the server holds the provider application
+credentials (`SLACK_CLIENT_ID/SECRET` for Slack OAuth v2, `TEAMS_APP_ID/BOT_PASSWORD` for admin
+consent, `DISCORD_CLIENT_ID/BOT_TOKEN/PUBLIC_KEY` for the bot invite). The public callback
+`GET /v1/connectors/:platform/oauth/callback` completes the exchange with a single-use `state` and
+never exposes a secret to the browser; manual token entry remains available as an advanced fallback.
+Binding a channel to a collective belongs to the separate conversational application.
 
 ## Console build
 

@@ -83,7 +83,7 @@ export default async function connectorsRoute(app) {
       });
       return reply.send({ type: 4, data: { content: compactChatReply(result.summary) } });
     } catch (error) {
-      return reply.send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce salon : ${error.message}`, flags: 64 } });
+      return reply.send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce canal : ${error.message}`, flags: 64 } });
     }
   });
 
@@ -101,7 +101,7 @@ export default async function connectorsRoute(app) {
       });
       return reply.send({ type: 'message', text: compactChatReply(result.summary) });
     } catch (error) {
-      return reply.send({ type: 'message', text: `Kayros n’a pas pu traiter ce salon : ${error.message}` });
+      return reply.send({ type: 'message', text: `Kayros n’a pas pu traiter ce canal : ${error.message}` });
     }
   });
 
@@ -322,7 +322,7 @@ export default async function connectorsRoute(app) {
         });
         return reply.code(200).send({ type: 4, data: { content: compactChatReply(result.summary) } });
       } catch (error) {
-        return reply.code(200).send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce salon : ${error.message}`, flags: 64 } });
+        return reply.code(200).send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce canal : ${error.message}`, flags: 64 } });
       }
     }
 
@@ -400,7 +400,7 @@ export default async function connectorsRoute(app) {
         });
         return reply.code(200).send({ type: 'message', text: compactChatReply(result.summary) });
       } catch (error) {
-        return reply.code(200).send({ type: 'message', text: `Kayros n’a pas pu traiter ce salon : ${error.message}` });
+        return reply.code(200).send({ type: 'message', text: `Kayros n’a pas pu traiter ce canal : ${error.message}` });
       }
     }
 
@@ -480,4 +480,24 @@ export default async function connectorsRoute(app) {
       : [];
     return { links: all.filter((l) => l.tenantId === me.tenantId || l.kayrosUserId === me.sub) };
   });
+
+  // Retour OAuth public des connecteurs : « un bouton » côté console.
+  // L'état (state) est à usage unique et expire ; aucun secret ne transite par le navigateur.
+  for (const platform of ['slack', 'discord', 'teams']) {
+    app.get(`/v1/connectors/${platform}/oauth/callback`, async (req, reply) => {
+      const ctx = app.kayrosContext;
+      const consoleUrl = String(ctx.consoleUrl || 'https://www.kayroslab.com/console').replace(/\/$/, '');
+      try {
+        if (!ctx.connectorOAuth) throw new Error('connexion simplifiée indisponible');
+        const result = await ctx.connectorOAuth.complete(platform, { state: req.query?.state, query: req.query || {} });
+        await ctx.connectorConfig.configure(result.tenantId, platform, { secrets: result.secrets, settings: result.settings, enabled: true });
+        const adapter = await ctx.connectorConfig.adapterFor(result.tenantId, platform);
+        if (adapter) ctx.hybridGateway.setTenantAdapter(result.tenantId, adapter);
+        return reply.redirect(`${consoleUrl}/#settings?connected=${platform}`);
+      } catch (error) {
+        req.log.warn({ err: error, platform }, 'connector oauth callback failed');
+        return reply.redirect(`${consoleUrl}/#settings?connect_error=${encodeURIComponent(error.message)}`);
+      }
+    });
+  }
 }
