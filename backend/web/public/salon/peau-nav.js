@@ -14,18 +14,50 @@
     ".peau-plates em{display:block;margin-top:.7rem;font-style:italic;color:var(--accent);font-size:.88rem}"
   ].join("");
 
-  var HTML = [
-    '<section class="peau-steps" aria-labelledby="peau-titre">',
-    '  <p class="kicker">Mode d’emploi du salon</p>',
-    '  <h2 id="peau-titre">Ils prennent la peau de leurs ouvrages.</h2>',
-    '  <p class="lead">Trois gestes, un seul objet : faire parler les livres à table, et penser avec eux — non à leur place.</p>',
-    '  <ol class="peau-plates">',
-    '    <li><span class="n">I</span><h3>Convier</h3><p>Vous dressez la table. Un nom, une question, deux voix au moins. L’auteur n’entre pas comme une opinion : il porte cinq œuvres.</p><em>Objectif — constituer un cercle.</em></li>',
-    '    <li><span class="n">II</span><h3>Adresser</h3><p>Vous parlez dans le fil. @voltaire l’appelle. La mention n’est pas un étiquetage : c’est une révérence qui désigne le convive.</p><em>Objectif — poser une question à un ouvrage vivant.</em></li>',
-    '    <li><span class="n">III</span><h3>Écouter</h3><p>Ils prennent la peau de leurs livres. L’un répond, l’autre objecte. « Laisser le salon parler » : la parole tourne sans vous.</p><em>Objectif — les entendre se répondre, puis retenir la séance.</em></li>',
-    '  </ol>',
-    '</section>'
-  ].join("");
+  var COPY = {
+    fr: {
+      kicker: "Mode d’emploi du salon",
+      title: "Ils prennent la peau de leurs ouvrages.",
+      lead: "Trois gestes, un seul objet : faire parler les livres à table, et penser avec eux — non à leur place.",
+      steps: [
+        { n: "I", title: "Convier", body: "Vous dressez la table. Un nom, une question, deux voix au moins. L’auteur n’entre pas comme une opinion : il porte cinq œuvres.", goal: "Objectif — constituer un cercle." },
+        { n: "II", title: "Adresser", body: "Vous parlez dans le fil. @voltaire l’appelle. La mention n’est pas un étiquetage : c’est une révérence qui désigne le convive.", goal: "Objectif — poser une question à un ouvrage vivant." },
+        { n: "III", title: "Écouter", body: "Ils prennent la peau de leurs livres. L’un répond, l’autre objecte. « Laisser le salon parler » : la parole tourne sans vous.", goal: "Objectif — les entendre se répondre, puis retenir la séance." }
+      ]
+    },
+    en: {
+      kicker: "How the salon works",
+      title: "They put on the skin of their works.",
+      lead: "Three gestures, one aim: let the books speak at table, and think with them — not in their place.",
+      steps: [
+        { n: "I", title: "Invite", body: "You set the table. A name, a question, two voices at least. An author does not enter as an opinion: they carry five works.", goal: "Aim — constitute a circle." },
+        { n: "II", title: "Address", body: "You speak in the thread. @voltaire calls him. The mention is not a tag: it is a courtesy that names the guest.", goal: "Aim — put a question to a living work." },
+        { n: "III", title: "Listen", body: "They put on the skin of their books. One answers, another objects. \u201cLet the salon speak\u201d: the floor turns without you.", goal: "Aim — hear them answer one another, then keep the sitting." }
+      ]
+    }
+  };
+
+  function locale() {
+    try {
+      if (localStorage.getItem("salon-locale") === "en") return "en";
+    } catch (e) {}
+    return document.documentElement.lang === "en" ? "en" : "fr";
+  }
+
+  function htmlFor(lang) {
+    var c = COPY[lang] || COPY.fr;
+    var steps = c.steps.map(function (s) {
+      return "<li><span class=\"n\">" + s.n + "</span><h3>" + s.title + "</h3><p>" + s.body + "</p><em>" + s.goal + "</em></li>";
+    }).join("");
+    return [
+      '<section class="peau-steps" aria-labelledby="peau-titre">',
+      '  <p class="kicker">' + c.kicker + "</p>",
+      '  <h2 id="peau-titre">' + c.title + "</h2>",
+      '  <p class="lead">' + c.lead + "</p>",
+      '  <ol class="peau-plates">' + steps + "</ol>",
+      "</section>"
+    ].join("");
+  }
 
   function prune() {
     document.querySelectorAll('.channels a[data-circle="academie"], .channels a[data-circle="pouvoir"]').forEach(function (a) {
@@ -34,14 +66,18 @@
     });
   }
 
-  function inject() {
-    if (document.getElementById("peau-titre")) return;
+  function paint() {
+    var existing = document.querySelector(".peau-steps");
+    var wrap = document.createElement("div");
+    wrap.innerHTML = htmlFor(locale());
+    var node = wrap.firstElementChild;
+    if (existing) {
+      existing.replaceWith(node);
+      return;
+    }
     var hero = document.querySelector("#cercle > section") || document.querySelector(".salon-hero") || document.querySelector("#cercle section");
     var open = document.querySelector(".salon-create") || document.getElementById("ouvrir");
     if (!hero) return;
-    var wrap = document.createElement("div");
-    wrap.innerHTML = HTML;
-    var node = wrap.firstElementChild;
     if (open && open.parentNode === hero.parentNode) {
       hero.parentNode.insertBefore(node, open);
     } else {
@@ -57,10 +93,21 @@
     document.head.appendChild(el);
   }
 
+  function bindLang() {
+    if (window.__peauLangBound) return;
+    window.__peauLangBound = true;
+    document.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest(".salon-lang button, [data-lang], button[lang]") : null;
+      if (!btn) return;
+      setTimeout(paint, 30);
+    });
+  }
+
   function run() {
     style();
     prune();
-    inject();
+    paint();
+    bindLang();
   }
 
   if (document.readyState === "loading") {
