@@ -25,6 +25,59 @@ function roomHasContent(room: SalonRoom) {
   return !["academie", "pouvoir"].includes(room.id);
 }
 
+const PEAU = {
+  fr: {
+    kicker: "Mode d’emploi du salon",
+    title: "Ils prennent la peau de leurs ouvrages.",
+    lead: "Trois gestes, un seul objet : faire parler les livres à table, et penser avec eux — non à leur place.",
+    steps: [
+      {
+        n: "I",
+        title: "Convier",
+        body: "Vous dressez la table. Un nom, une question, deux voix au moins. L’auteur n’entre pas comme une opinion : il porte cinq œuvres.",
+        goal: "Objectif — constituer un cercle.",
+      },
+      {
+        n: "II",
+        title: "Adresser",
+        body: "Vous parlez dans le fil. @voltaire l’appelle. La mention n’est pas un étiquetage : c’est une révérence qui désigne le convive.",
+        goal: "Objectif — poser une question à un ouvrage vivant.",
+      },
+      {
+        n: "III",
+        title: "Écouter",
+        body: "Ils prennent la peau de leurs livres. L’un répond, l’autre objecte. « Laisser le salon parler » : la parole tourne sans vous.",
+        goal: "Objectif — les entendre se répondre, puis retenir la séance.",
+      },
+    ],
+  },
+  en: {
+    kicker: "How the salon works",
+    title: "They put on the skin of their works.",
+    lead: "Three gestures, one aim: let the books speak at table, and think with them — not in their place.",
+    steps: [
+      {
+        n: "I",
+        title: "Invite",
+        body: "You set the table. A name, a question, two voices at least. An author does not enter as an opinion: they carry five works.",
+        goal: "Aim — constitute a circle.",
+      },
+      {
+        n: "II",
+        title: "Address",
+        body: "You speak in the thread. @voltaire calls him. The mention is not a tag: it is a courtesy that names the guest.",
+        goal: "Aim — put a question to a living work.",
+      },
+      {
+        n: "III",
+        title: "Listen",
+        body: "They put on the skin of their books. One answers, another objects. “Let the salon speak”: the floor turns without you.",
+        goal: "Aim — hear them answer one another, then keep the sitting.",
+      },
+    ],
+  },
+} as const;
+
 export function Foyer() {
   const { t, guests, locale } = useT();
   const rooms = useSalon((s) => s.rooms);
@@ -36,6 +89,7 @@ export function Foyer() {
   const [error, setError] = useState("");
   const authors = useMemo(() => searchAuthors(query, kind), [query, kind]);
   const listed = rooms.filter(roomHasContent);
+  const peau = PEAU[locale];
 
   function toggle(id: string) {
     setPicked((current) => {
@@ -70,28 +124,18 @@ export function Foyer() {
         </section>
 
         <section className="peau-steps" aria-labelledby="peau-titre">
-          <p className="salon-kicker">{t("peau.kicker")}</p>
-          <h2 id="peau-titre">{t("peau.title")}</h2>
-          <p>{t("peau.lead")}</p>
+          <p className="salon-kicker">{peau.kicker}</p>
+          <h2 id="peau-titre">{peau.title}</h2>
+          <p>{peau.lead}</p>
           <ol className="peau-plates">
-            <li>
-              <span className="n">I</span>
-              <h3>{t("peau.1.title")}</h3>
-              <p>{t("peau.1.body")}</p>
-              <em>{t("peau.1.goal")}</em>
-            </li>
-            <li>
-              <span className="n">II</span>
-              <h3>{t("peau.2.title")}</h3>
-              <p>{t("peau.2.body")}</p>
-              <em>{t("peau.2.goal")}</em>
-            </li>
-            <li>
-              <span className="n">III</span>
-              <h3>{t("peau.3.title")}</h3>
-              <p>{t("peau.3.body")}</p>
-              <em>{t("peau.3.goal")}</em>
-            </li>
+            {peau.steps.map((step) => (
+              <li key={step.n}>
+                <span className="n">{step.n}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+                <em>{step.goal}</em>
+              </li>
+            ))}
           </ol>
         </section>
 
@@ -147,11 +191,7 @@ export function Foyer() {
                 return (
                   <li key={author.id}>
                     <label title={copy.name}>
-                      <input
-                        type="checkbox"
-                        checked={on}
-                        onChange={() => toggle(author.id)}
-                      />
+                      <input type="checkbox" checked={on} onChange={() => toggle(author.id)} />
                       <span>{copy.name}</span>
                     </label>
                   </li>
