@@ -1,0 +1,91 @@
+/* KayrosLab design tokens — SINGLE SOURCE OF TRUTH
+ * Reference: https://www.kayroslab.com/console/ (the agent harness console).
+ * Everything else on the site consumes these variables; change a value here and
+ * the whole website follows. Do not hard-code colors, fonts or spacing anywhere else.
+ *
+ * Palette: console "workbench" dark theme (oklch, hue 242 neutrals, cyan accent 205).
+ * Type: Space Grotesk (display) · IBM Plex Sans (body) · Fira Code (mono).
+ */
+
+:root {
+  /* --- Core console palette (verbatim from the console reference) --- */
+  --color-paper: oklch(15% 0.018 242);
+  --color-surface: oklch(19% 0.02 242);
+  --color-surface-raised: oklch(23% 0.022 242);
+  --color-rule: oklch(33% 0.024 242);
+  --color-rule-strong: oklch(46% 0.035 242);
+  --color-muted: oklch(71% 0.025 242);
+  --color-ink: oklch(95% 0.012 220);
+  --color-accent: oklch(79% 0.14 205);
+  --color-accent-ink: oklch(19% 0.04 220);
+  --color-focus: oklch(82% 0.16 205);
+  --color-danger: oklch(72% 0.16 25);
+  --color-warning: oklch(82% 0.13 83);
+  --color-success: oklch(78% 0.14 155);
+  --color-overlay: oklch(8% 0.018 242 / 0.72);
+  --color-shadow: oklch(5% 0.01 242 / 0.28);
+
+  /* --- Legacy aliases kept for existing pages (all derived from the console set) --- */
+  --color-paper-2: var(--color-surface);
+  --color-paper-3: var(--color-surface-raised);
+  --color-ink-deep: oklch(86% 0.012 230);
+  --color-ink-2: oklch(86% 0.012 230);
+  --color-muted-on-dark: var(--color-muted);
+  --color-rule-dark: oklch(40% 0.028 242);
+  --color-accent-strong: oklch(70% 0.13 205);
+  --color-accent-soft: oklch(79% 0.14 205 / 0.12);
+  --color-positive: var(--color-success);
+  --color-positive-soft: oklch(78% 0.14 155 / 0.14);
+  --color-violet: var(--color-accent);
+
+  /* --- Typography --- */
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "Fira Code", "Cascadia Code", monospace;
+
+  /* Type scale (console) */
+  --text-xs: 0.72rem;
+  --text-sm: 0.84rem;
+  --text-base: 1rem;
+  --text-md: 1.18rem;
+  --text-lg: 1.45rem;
+  --text-xl: 1.9rem;
+  --text-2xl: 2.3rem;
+  --text-3xl: 2.9rem;
+  --text-display-s: clamp(2.35rem, 5vw, 3.8rem);
+  --text-display: clamp(2rem, 4vw, 3.8rem);
+
+  /* --- Spacing rhythm (console scale) --- */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* --- Radii / rules --- */
+  --radius-sm: 0.45rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.3rem;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+  --rule-thin: 1px;
+
+  /* --- Elevation --- */
+  --shadow-soft: 0 1px 2px oklch(5% 0.01 242 / 0.4);
+  --shadow-card: 0 1px 2px oklch(5% 0.01 242 / 0.35), 0 12px 34px oklch(5% 0.01 242 / 0.45);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --z-modal: 400;
+}
