@@ -6,71 +6,82 @@
 <title>White Paper — Listen: From Weak Signal to Strategic Decision &bull; KayrosLab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:11pt}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#050d1a;color:#f9fafb;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--font-body),system-ui,sans-serif;background:#050c12;color:#e6f1f4;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 @page{size:A4;margin:0}
-.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050d1a;overflow:hidden;page-break-after:always}
-.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(47,185,168,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(196,176,152,0.06) 0px, transparent 50%);pointer-events:none}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050c12;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(0,211,229,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(148,164,176,0.06) 0px, transparent 50%);pointer-events:none}
 .cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#2FB9A8,transparent);margin-bottom:10mm}
-.cover__tag{font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#2FB9A8;margin-bottom:5mm}
-.cover__title{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
-.cover__title em{color:#2FB9A8;font-style:normal}
-.cover__subtitle{font-size:1rem;color:#9ca3af;max-width:140mm;margin-bottom:8mm;line-height:1.6}
-.cover__meta{font-size:0.75rem;color:#6b7280}
-.cover__meta span{color:#2FB9A8}
-.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(47,185,168,0.08);border-radius:50%;top:-20mm;right:-20mm}
-.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(47,185,168,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
-h1{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#f9fafb}
-h1 .highlight{color:#2FB9A8}
-h2{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#f9fafb;padding-bottom:1.5mm;border-bottom:1px solid rgba(47,185,168,0.2)}
-h2 .highlight{color:#2FB9A8}
-h3{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#2FB9A8}
-h4{font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#c4b098}
-p{margin-bottom:2mm;font-size:0.88rem;color:#d1d5db}
-.lead{font-size:1rem;color:#f9fafb;font-weight:400;line-height:1.8}
-.accent-text{color:#2FB9A8}
-.small{font-size:0.75rem;color:#6b7280}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#00d3e5,transparent);margin-bottom:10mm}
+.cover__tag{font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#00d3e5;margin-bottom:5mm}
+.cover__title{font-family:var(--font-display),sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
+.cover__title em{color:#00d3e5;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#94a4b0;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#7f8e99}
+.cover__meta span{color:#00d3e5}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(0,211,229,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(0,211,229,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+h1{font-family:var(--font-display),sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#e6f1f4}
+h1 .highlight{color:#00d3e5}
+h2{font-family:var(--font-display),sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#e6f1f4;padding-bottom:1.5mm;border-bottom:1px solid rgba(0,211,229,0.2)}
+h2 .highlight{color:#00d3e5}
+h3{font-family:var(--font-display),sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#00d3e5}
+h4{font-family:var(--font-display),sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#94a4b0}
+p{margin-bottom:2mm;font-size:0.88rem;color:#c9d6da}
+.lead{font-size:1rem;color:#e6f1f4;font-weight:400;line-height:1.8}
+.accent-text{color:#00d3e5}
+.small{font-size:0.75rem;color:#7f8e99}
 .section{margin-bottom:6mm}
-.callout{background:rgba(47,185,168,0.06);border-left:3px solid #2FB9A8;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout{background:rgba(0,211,229,0.06);border-left:3px solid #00d3e5;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
 .callout p{margin-bottom:0;font-size:0.82rem}
-.callout--gold{border-left-color:#c4b098;background:rgba(196,176,152,0.06)}
-.callout--orange{border-left-color:#f59e0b;background:rgba(245,158,11,0.06)}
-.callout--violet{border-left-color:#a78bfa;background:rgba(167,139,250,0.06)}
-.callout--red{border-left-color:#ef4444;background:rgba(239,68,68,0.06)}
+.callout--gold{border-left-color:#94a4b0;background:rgba(148,164,176,0.06)}
+.callout--orange{border-left-color:#edbc58;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#00d3e5;background:rgba(167,139,250,0.06)}
+.callout--red{border-left-color:#f97770;background:rgba(239,68,68,0.06)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
-.card{background:rgba(15,23,42,0.6);border:1px solid rgba(47,185,168,0.12);border-radius:4px;padding:2.5mm}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(0,211,229,0.12);border-radius:4px;padding:2.5mm}
 .card p{font-size:0.8rem;margin-bottom:0.5mm}
-.card__title{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;color:#2FB9A8;margin-bottom:1mm}
+.card__title{font-family:var(--font-display),sans-serif;font-size:0.82rem;font-weight:600;color:#00d3e5;margin-bottom:1mm}
 table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
-th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(47,185,168,0.1)}
-th{background:rgba(47,185,168,0.08);color:#2FB9A8;font-weight:600;font-family:'Outfit',sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
-td{color:#d1d5db}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(0,211,229,0.1)}
+th{background:rgba(0,211,229,0.08);color:#00d3e5;font-weight:600;font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#c9d6da}
 tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
 .num-list{counter-reset:nl;margin:2.5mm 0}
-.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#d1d5db}
-.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:'Outfit',sans-serif;font-weight:700;color:#2FB9A8;font-size:0.7rem}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#c9d6da}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:var(--font-display),sans-serif;font-weight:700;color:#00d3e5;font-size:0.7rem}
 .bullet-list{margin:2mm 0 2mm 4mm}
-.bullet-list li{font-size:0.82rem;color:#d1d5db;margin-bottom:0.8mm}
-.bullet-list li::marker{color:#2FB9A8}
+.bullet-list li{font-size:0.82rem;color:#c9d6da;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#00d3e5}
 .toc{margin:4mm 0}
 .toc ol{counter-reset:toc;list-style:none}
-.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(47,185,168,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#d1d5db}
-.toc ol li::before{content:counter(toc);font-family:'Outfit',sans-serif;font-weight:600;color:#2FB9A8;margin-right:2mm}
-.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#4b5563;font-family:'Fira Code',monospace}
-.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(47,185,168,0.15),transparent)}
-.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;color:#2FB9A8;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(0,211,229,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#c9d6da}
+.toc ol li::before{content:counter(toc);font-family:var(--font-display),sans-serif;font-weight:600;color:#00d3e5;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#2b3741;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(0,211,229,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:var(--font-display),sans-serif;font-size:0.6rem;font-weight:700;color:#00d3e5;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
 .flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
-.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(47,185,168,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
-.flow__step .num{font-family:'Outfit',sans-serif;font-size:0.55rem;color:#2FB9A8;letter-spacing:0.15em}
-.flow__step .label{font-size:0.7rem;color:#f9fafb;font-weight:500}
-.flow__arrow{color:#2FB9A8;font-size:0.7rem;opacity:0.5}
-@media print{body{background:#050d1a}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(0,211,229,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:var(--font-display),sans-serif;font-size:0.55rem;color:#00d3e5;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#e6f1f4;font-weight:500}
+.flow__arrow{color:#00d3e5;font-size:0.7rem;opacity:0.5}
+@media print{body{background:#050c12}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
 @media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2{grid-template-columns:1fr}}
 </style>
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./site.css">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#050c12">
+  <meta property="og:image" content="https://www.kayroslab.com/assets/og-image.png">
 </head>
 <body>
 
@@ -97,14 +108,14 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
   <div style="margin-top:8mm">
     <div class="toc">
       <ol>
-        <li><span>Introduction &mdash; The Strategic Noise Problem</span> <span style="color:#4b5563;font-size:0.7rem">3</span></li>
-        <li><span>The Nature of Weak Signals</span> <span style="color:#4b5563;font-size:0.7rem">4</span></li>
-        <li><span>Architecture of Listen</span> <span style="color:#4b5563;font-size:0.7rem">5</span></li>
-        <li><span>The Signal Scanner Agent</span> <span style="color:#4b5563;font-size:0.7rem">6</span></li>
-        <li><span>Signal Scoring &amp; the Pre-Kayros Index</span> <span style="color:#4b5563;font-size:0.7rem">7</span></li>
-        <li><span>Context Enrichment</span> <span style="color:#4b5563;font-size:0.7rem">8</span></li>
-        <li><span>Regulatory Risk Detection</span> <span style="color:#4b5563;font-size:0.7rem">9</span></li>
-        <li><span>Conclusion</span> <span style="color:#4b5563;font-size:0.7rem">10</span></li>
+        <li><span>Introduction &mdash; The Strategic Noise Problem</span> <span style="color:#2b3741;font-size:0.7rem">3</span></li>
+        <li><span>The Nature of Weak Signals</span> <span style="color:#2b3741;font-size:0.7rem">4</span></li>
+        <li><span>Architecture of Listen</span> <span style="color:#2b3741;font-size:0.7rem">5</span></li>
+        <li><span>The Signal Scanner Agent</span> <span style="color:#2b3741;font-size:0.7rem">6</span></li>
+        <li><span>Signal Scoring &amp; the Pre-Kayros Index</span> <span style="color:#2b3741;font-size:0.7rem">7</span></li>
+        <li><span>Context Enrichment</span> <span style="color:#2b3741;font-size:0.7rem">8</span></li>
+        <li><span>Regulatory Risk Detection</span> <span style="color:#2b3741;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion</span> <span style="color:#2b3741;font-size:0.7rem">10</span></li>
       </ol>
     </div>
   </div>
@@ -127,7 +138,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
 
   <h2 style="margin-top:5mm">Listen in the <span class="highlight">KayrosLab</span> Cycle</h2>
   <div class="flow" style="margin-top:3mm">
-    <div class="flow__step" style="border-color:#f59e0b;"><div class="num" style="color:#f59e0b;">01</div><div class="label" style="color:#f59e0b;font-weight:700;">Listen</div></div>
+    <div class="flow__step" style="border-color:#edbc58;"><div class="num" style="color:#edbc58;">01</div><div class="label" style="color:#edbc58;font-weight:700;">Listen</div></div>
     <div class="flow__arrow">→</div>
     <div class="flow__step"><div class="num">02</div><div class="label">Map</div></div>
     <div class="flow__arrow">→</div>
@@ -309,7 +320,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
     <p><strong>Listen is not a tool — it is a capability.</strong> One that turns the overwhelming complexity of the information environment into a structured, governed, and actionable strategic advantage.</p>
   </div>
 
-  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#6b7280">Ready to transform noise into intelligence?<br>Contact us at <span class="accent-text">contact@kayroslab.com</span></p>
+  <p style="margin-top:5mm;text-align:center;font-size:0.9rem;color:#7f8e99">Ready to transform noise into intelligence?<br>Contact us at <span class="accent-text">contact@kayroslab.com</span></p>
 
   <div class="footer-line"></div>
   <div class="page-number">10</div>

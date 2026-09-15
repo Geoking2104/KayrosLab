@@ -6,64 +6,74 @@
 <title>KayrosLab — Cycle gouverné (SSE)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./tokens.css">
-<script>tailwind.config={theme:{extend:{fontFamily:{body:['Geist','system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{body:[var(--font-body),'system-ui','sans-serif'],display:['Space Grotesk','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
-body{margin:0;font-family:var(--font-body,Geist,system-ui,sans-serif);background:#fff;color:#0f172a}
-.ev-card{border-left:3px solid #e2e8f0;transition:border-color .15s}
-.ev-card[data-type="start"]{border-left-color:#0ea5e9}
-.ev-card[data-type="meta"]{border-left-color:#64748b}
-.ev-card[data-type="recall"]{border-left-color:#8b5cf6}
+body{margin:0;font-family:var(--font-body,var(--font-body),system-ui,sans-serif);background:#fff;color:#141e26}
+.ev-card{border-left:3px solid #c9d6da;transition:border-color .15s}
+.ev-card[data-type="start"]{border-left-color:#00d3e5}
+.ev-card[data-type="meta"]{border-left-color:#7f8e99}
+.ev-card[data-type="recall"]{border-left-color:#00d3e5}
 .ev-card[data-type="positionning"]{border-left-color:#d946ef}
 .ev-card[data-type="trace"]{border-left-color:#10b981}
-.ev-card[data-type="distill"]{border-left-color:#f59e0b}
-.ev-card[data-type="synthesis"]{border-left-color:#0369a1}
-.ev-card[data-type="gate"]{border-left-color:#ef4444}
+.ev-card[data-type="distill"]{border-left-color:#edbc58}
+.ev-card[data-type="synthesis"]{border-left-color:#00b4c4}
+.ev-card[data-type="gate"]{border-left-color:#f97770}
 .ev-card[data-type="final"]{border-left-color:#059669}
-.ev-card[data-type="degraded"]{border-left-color:#f97316}
-.ev-card[data-type="frame_assess"],.ev-card[data-type="frame_reframes"],.ev-card[data-type="frame_auto_pick"]{border-left-color:#06b6d4}
-.ev-card[data-type="world_model"],.ev-card[data-type="gate_resolution"]{border-left-color:#7c3aed}
+.ev-card[data-type="degraded"]{border-left-color:#edbc58}
+.ev-card[data-type="frame_assess"],.ev-card[data-type="frame_reframes"],.ev-card[data-type="frame_auto_pick"]{border-left-color:#00d3e5}
+.ev-card[data-type="world_model"],.ev-card[data-type="gate_resolution"]{border-left-color:#00b4c4}
 .ev-card[data-type="adaptive_pressure"],.ev-card[data-type="residual_portfolio"]{border-left-color:#ea580c}
 .ev-card[data-type="novelty_control"],.ev-card[data-type="dialectic"]{border-left-color:#14b8a6}
 .ev-card[data-type="packet"]{border-left-color:#2563eb}
 .badge-p2{font-size:10px;font-weight:700;color:#0891b2;background:#ecfeff;padding:1px 6px;border-radius:999px}
-.badge-p3{font-size:10px;font-weight:700;color:#6d28d9;background:#f5f3ff;padding:1px 6px;border-radius:999px}
-.badge-p4{font-size:10px;font-weight:700;color:#c2410c;background:#fff7ed;padding:1px 6px;border-radius:999px}
+.badge-p3{font-size:10px;font-weight:700;color:#00b4c4;background:#f5f3ff;padding:1px 6px;border-radius:999px}
+.badge-p4{font-size:10px;font-weight:700;color:#edbc58;background:#2a2114;padding:1px 6px;border-radius:999px}
 .badge-p1{font-size:10px;font-weight:700;color:#0f766e;background:#f0fdfa;padding:1px 6px;border-radius:999px}
 .badge-pkt{font-size:10px;font-weight:700;color:#1d4ed8;background:#eff6ff;padding:1px 6px;border-radius:999px}
-.ev-card[data-type="offload"]{border-left-color:#94a3b8}
-.ev-card[data-type="error"]{border-left-color:#dc2626}
-.ev-card[data-type="done"]{border-left-color:#cbd5e1}
-.badge-quant{font-family:Fira Code,monospace;font-size:10px;background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:999px}
-.badge-deg{font-size:10px;background:#ffedd5;color:#c2410c;padding:2px 6px;border-radius:999px}
-.badge-stage{font-size:10px;background:#f0fdf4;color:#15803d;padding:2px 6px;border-radius:999px;font-weight:600}
-.badge-status{font-size:10px;background:#fef3c7;color:#b45309;padding:2px 6px;border-radius:999px;font-weight:600}
+.ev-card[data-type="offload"]{border-left-color:#94a4b0}
+.ev-card[data-type="error"]{border-left-color:#f97770}
+.ev-card[data-type="done"]{border-left-color:#c9d6da}
+.badge-quant{font-family:Fira Code,monospace;font-size:10px;background:#0d2027;color:#00b4c4;padding:2px 6px;border-radius:999px}
+.badge-deg{font-size:10px;background:#ffedd5;color:#edbc58;padding:2px 6px;border-radius:999px}
+.badge-stage{font-size:10px;background:#12241a;color:#15803d;padding:2px 6px;border-radius:999px;font-weight:600}
+.badge-status{font-size:10px;background:#2a2114;color:#b45309;padding:2px 6px;border-radius:999px;font-weight:600}
 .badge-pos{font-size:10px;background:#fdf4ff;color:#a21caf;padding:2px 6px;border-radius:999px}
 #timeline{max-height:min(62vh,560px);overflow-y:auto}
 .mono{font-family:Fira Code,monospace;font-size:11px}
 .stage-rail{display:flex;flex-wrap:wrap;gap:4px}
-.stage-chip{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #e2e8f0;color:#64748b;background:#f8fafc}
-.stage-chip.active{border-color:#0ea5e9;background:#e0f2fe;color:#0369a1;font-weight:700}
-.stage-chip.done{border-color:#86efac;background:#f0fdf4;color:#166534}
+.stage-chip{font-size:10px;padding:3px 8px;border-radius:999px;border:1px solid #c9d6da;color:#7f8e99;background:#e6f1f4}
+.stage-chip.active{border-color:#00d3e5;background:#0d2027;color:#00b4c4;font-weight:700}
+.stage-chip.done{border-color:#86efac;background:#12241a;color:#166534}
 #gate-panel.hidden{display:none}
 /* Light client-side frame + packet panel */
-.gov-lite{border:1px solid #e2e8f0;border-radius:1rem;background:#fff;padding:1rem}
-.gov-lite h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin:0 0 .65rem}
-.gov-meter{height:6px;border-radius:999px;background:#e2e8f0;overflow:hidden}
-.gov-meter>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#06b6d4,#0ea5e9);transition:width .25s}
-.gov-meter.weak>span{background:linear-gradient(90deg,#f97316,#ef4444)}
+.gov-lite{border:1px solid #c9d6da;border-radius:1rem;background:#fff;padding:1rem}
+.gov-lite h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7f8e99;margin:0 0 .65rem}
+.gov-meter{height:6px;border-radius:999px;background:#c9d6da;overflow:hidden}
+.gov-meter>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#00d3e5,#00d3e5);transition:width .25s}
+.gov-meter.weak>span{background:linear-gradient(90deg,#edbc58,#f97770)}
 .gov-meter.ok>span{background:linear-gradient(90deg,#10b981,#059669)}
-.gov-chip{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;border:1px solid #e2e8f0;background:#f8fafc;color:#475569}
-.gov-chip.warn{border-color:#fed7aa;background:#fff7ed;color:#c2410c}
-.gov-chip.ok{border-color:#bbf7d0;background:#f0fdf4;color:#15803d}
-.gov-chip.info{border-color:#bae6fd;background:#f0f9ff;color:#0369a1}
-.gov-chip.debt{border-color:#fdba74;background:#fff7ed;color:#9a3412}
-.gov-list{margin:.3rem 0 0;padding-left:1rem;font-size:11px;color:#64748b;line-height:1.4}
+.gov-chip{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;border:1px solid #c9d6da;background:#e6f1f4;color:#3c4b56}
+.gov-chip.warn{border-color:#fed7aa;background:#2a2114;color:#edbc58}
+.gov-chip.ok{border-color:#bbf7d0;background:#12241a;color:#15803d}
+.gov-chip.info{border-color:#0d2027;background:#f0f9ff;color:#00b4c4}
+.gov-chip.debt{border-color:#fdba74;background:#2a2114;color:#9a3412}
+.gov-list{margin:.3rem 0 0;padding-left:1rem;font-size:11px;color:#7f8e99;line-height:1.4}
 .gov-list li{margin:.1rem 0}
-.gov-reframe{font-size:11px;color:#0f172a;background:#f0f9ff;border:1px solid #bae6fd;border-radius:.6rem;padding:.45rem .55rem;margin-top:.45rem}
-.gov-packet{font-size:11px;color:#1e293b;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:.65rem;padding:.5rem .6rem;margin-top:.5rem;white-space:pre-wrap;font-family:Fira Code,ui-monospace,monospace;line-height:1.4}
+.gov-reframe{font-size:11px;color:#141e26;background:#f0f9ff;border:1px solid #0d2027;border-radius:.6rem;padding:.45rem .55rem;margin-top:.45rem}
+.gov-packet{font-size:11px;color:#1e293b;background:#e6f1f4;border:1px dashed #c9d6da;border-radius:.65rem;padding:.5rem .6rem;margin-top:.5rem;white-space:pre-wrap;font-family:Fira Code,ui-monospace,monospace;line-height:1.4}
 </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./site.css">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#050c12">
+  <meta property="og:image" content="https://www.kayroslab.com/assets/og-image.png">
 </head>
 <body class="antialiased">
 <header class="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
