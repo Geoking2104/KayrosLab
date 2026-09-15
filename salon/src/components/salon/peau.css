@@ -1,0 +1,62 @@
+.peau-steps {
+  margin: 0;
+  padding-top: var(--space-lg, 1.5rem);
+  border-top: 1px solid var(--rule, #d7c9b8);
+  max-width: 58rem;
+  display: grid;
+  gap: var(--space-sm, 0.75rem);
+}
+.peau-steps h2 {
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+  line-height: 1.15;
+  margin: 0;
+  max-width: 22ch;
+}
+.peau-steps > p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--ink-2, #5c4d3f);
+  line-height: 1.5;
+}
+.peau-plates {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 860px) {
+  .peau-plates { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+}
+.peau-plates li {
+  padding: 1rem 1rem 1.05rem;
+  border: 1px solid var(--rule, #d7c9b8);
+  background: color-mix(in oklch, var(--paper, #f7f1e6) 88%, var(--accent, #7a2e24));
+  min-width: 0;
+}
+.peau-plates .n {
+  display: block;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent, #7a2e24);
+  margin-bottom: 0.45rem;
+}
+.peau-plates h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.28rem;
+  font-weight: 550;
+}
+.peau-plates p {
+  margin: 0;
+  color: var(--ink-2, #5c4d3f);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.peau-plates em {
+  display: block;
+  margin-top: 0.7rem;
+  font-style: italic;
+  color: var(--accent, #7a2e24);
+  font-size: 0.88rem;
+}
