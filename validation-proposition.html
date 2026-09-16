@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
 /* KayrosLab design tokens · light "enterprise" system
  * Salesforce-Lightning-inspired palette (blue accent, card surfaces, soft shadows)
@@ -15,7 +15,7 @@
  * Palette strictly emulated — no official Salesforce assets. */
 :root {
   --color-paper: #f3f6fb;
-  --color-paper-2: #e6f1f4;
+  --color-paper-2: #181818;
   --color-paper-3: #e9f2fd;
   --color-ink: #233043;
   --color-ink-deep: #032d60;
@@ -27,7 +27,7 @@
   --color-accent: #0176d3;
   --color-accent-strong: #0b5cab;
   --color-accent-soft: #eaf5fe;
-  --color-accent-ink: #e6f1f4;
+  --color-accent-ink: #181818;
   --color-focus: #0176d3;
   --color-positive: #2e844a;
   --color-positive-soft: #e9f7ee;
@@ -510,25 +510,25 @@ main .frame.hero {
 
 
 /* ---- validation preview scaffold (not part of the site design) ---- */
-.pv-bar { background: #0b1220; color: #c9d6da; font-family: ui-monospace, var(--font-mono), monospace; font-size: 13px; line-height: 1.5; }
+.pv-bar { background: #0b1220; color: #3e3e3c; font-family: ui-monospace, var(--font-mono), monospace; font-size: 13px; line-height: 1.5; }
 .pv-bar-inner { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
-.pv-badge { background: #00d3e5; color: #04121f; font-weight: 700; letter-spacing: .08em; padding: 3px 10px; border-radius: 2px; font-size: 11px; }
-.pv-toggle { display: inline-flex; border: 1px solid #2b3741; border-radius: 3px; overflow: hidden; }
-.pv-btn { appearance: none; border: 0; background: transparent; color: #c9d6da; font: inherit; padding: 6px 16px; cursor: pointer; }
-.pv-btn.pv-active { background: #c9d6da; color: #0b1220; font-weight: 700; }
+.pv-badge { background: #0176d3; color: #04121f; font-weight: 700; letter-spacing: .08em; padding: 3px 10px; border-radius: 2px; font-size: 11px; }
+.pv-toggle { display: inline-flex; border: 1px solid #c9c9c9; border-radius: 3px; overflow: hidden; }
+.pv-btn { appearance: none; border: 0; background: transparent; color: #3e3e3c; font: inherit; padding: 6px 16px; cursor: pointer; }
+.pv-btn.pv-active { background: #3e3e3c; color: #0b1220; font-weight: 700; }
 .lang-view[hidden] { display: none; }
 
     </style>
   <link rel="stylesheet" href="./tokens.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./tokens.css">
   <link rel="stylesheet" href="./site.css">
-  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/logo-kayroslab.png" type="image/png">
   <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#050c12">
+  <meta name="theme-color" content="#f3f2f2">
   <meta property="og:image" content="https://www.kayroslab.com/assets/og-image.png">
 </head>
 <body>
@@ -546,7 +546,7 @@ main .frame.hero {
 <a class="skip-link" href="#fr-main">Aller au contenu principal</a>
 
     <nav class="frame site-nav" aria-label="Navigation principale">
-        <a class="wordmark" href="/"><img class="brand__mark" src="./assets/logo-mark.svg" alt="" width="34" height="34">KayrosLab</a>
+        <a class="wordmark" href="/"><img class="brand__mark" src="./assets/logo-kayroslab.png" alt="" width="34" height="34">KayrosLab</a>
         <div class="nav-actions">
             <div class="language-links" aria-label="Langue">
                 <a href="/" >EN</a>
@@ -807,7 +807,7 @@ main .frame.hero {
 <a class="skip-link" href="#main">Skip to main content</a>
 
     <nav class="frame site-nav" aria-label="Primary navigation">
-        <a class="wordmark" href="/"><img class="brand__mark" src="./assets/logo-mark.svg" alt="" width="34" height="34">KayrosLab</a>
+        <a class="wordmark" href="/"><img class="brand__mark" src="./assets/logo-kayroslab.png" alt="" width="34" height="34">KayrosLab</a>
         <div class="nav-actions">
             <div class="language-links" aria-label="Language">
                 <a href="/" aria-current=&#34;page&#34;>EN</a>

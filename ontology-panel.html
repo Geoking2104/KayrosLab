@@ -6,27 +6,27 @@
 <title>KayrosLab — Ontology panel</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
   body { font-family: var(--font-body), system-ui, sans-serif; margin: 0; }
-  #cy { width: 100%; height: 320px; background: #e6f1f4; border-radius: 1rem; }
+  #cy { width: 100%; height: 320px; background: #181818; border-radius: 1rem; }
 </style>
   <link rel="stylesheet" href="./tokens.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./tokens.css">
   <link rel="stylesheet" href="./site.css">
-  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/logo-kayroslab.png" type="image/png">
   <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#050c12">
+  <meta name="theme-color" content="#f3f2f2">
   <meta property="og:image" content="https://www.kayroslab.com/assets/og-image.png">
 </head>
 <body class="bg-white text-slate-900 p-4">
   <div class="flex items-center justify-between mb-3 gap-2 flex-wrap">
     <div>
-      <h1 class="font-semibold text-lg" style="font-family:Space Grotesk,sans-serif">Positioner ontology</h1>
+      <h1 class="font-semibold text-lg" style="font-family:var(--font-display),sans-serif">Positioner ontology</h1>
       <p class="text-xs text-slate-500">Embedded sample · full explorer for filters &amp; cards</p>
     </div>
     <a href="./ontology-explorer.html" class="text-sm font-semibold text-sky-600">Open explorer →</a>
@@ -37,11 +37,11 @@
 (function () {
   // Minimal static sample (mirrors ENTITY_TYPES subset) — works offline without API
   const nodes = [
-    { data: { id: 'product', label: 'Product', group: 'business', color: '#00d3e5' } },
-    { data: { id: 'market', label: 'Market', group: 'business', color: '#00d3e5' } },
-    { data: { id: 'competitor', label: 'Competitor', group: 'business', color: '#edbc58' } },
-    { data: { id: 'tech_stack', label: 'Tech stack', group: 'tech', color: '#63d18f' } },
-    { data: { id: 'capability', label: 'Capability', group: 'tech', color: '#00d3e5' } },
+    { data: { id: 'product', label: 'Product', group: 'business', color: '#0176d3' } },
+    { data: { id: 'market', label: 'Market', group: 'business', color: '#0176d3' } },
+    { data: { id: 'competitor', label: 'Competitor', group: 'business', color: '#fe9339' } },
+    { data: { id: 'tech_stack', label: 'Tech stack', group: 'tech', color: '#2e844a' } },
+    { data: { id: 'capability', label: 'Capability', group: 'tech', color: '#0176d3' } },
   ];
   const edges = [
     { data: { id: 'e1', source: 'product', target: 'market', label: 'serves' } },
@@ -62,12 +62,12 @@
         { selector: 'node', style: {
           'background-color': 'data(color)', label: 'data(label)', 'font-size': 11,
           'text-valign': 'bottom', 'text-margin-y': 6, width: 26, height: 26,
-          'border-width': 2, 'border-color': '#fff', color: '#141e26', 'font-weight': 600,
+          'border-width': 2, 'border-color': '#fff', color: '#fafaf9', 'font-weight': 600,
         }},
         { selector: 'edge', style: {
-          width: 1.5, 'line-color': '#c9d6da', 'target-arrow-shape': 'triangle',
-          'target-arrow-color': '#94a4b0', 'curve-style': 'bezier', label: 'data(label)',
-          'font-size': 9, color: '#7f8e99', 'text-rotation': 'autorotate',
+          width: 1.5, 'line-color': '#3e3e3c', 'target-arrow-shape': 'triangle',
+          'target-arrow-color': '#706e6b', 'curve-style': 'bezier', label: 'data(label)',
+          'font-size': 9, color: '#5c5c5c', 'text-rotation': 'autorotate',
         }},
       ],
       layout: { name: 'cose', animate: false, padding: 24 },

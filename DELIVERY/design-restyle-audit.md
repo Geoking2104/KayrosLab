@@ -1,132 +1,86 @@
-# KayrosLab — Restyle to the console design language
+# KayrosLab — Site design foundation (SLDS light)
 
-- Reference (single source of truth): **https://www.kayroslab.com/console/** — the agent harness console.
-- Reference baseline capture: [`screenshots/reference-console-1440.png`](./screenshots/reference-console-1440.png) (public entry of the console).
-- Responsive verification: `DELIVERY/overflow-report.json` — **57/57 renders** (19 pages × 375 / 834 / 1440 px), **0 horizontal overflow**. Detector validated by a positive control (an intentionally overflowing block was flagged: 1827 probe pixels).
-- Screenshots: `screenshots/before` (19 @1440), `screenshots/after` (19 @1440), `screenshots/after-tablet` (19 @834), `screenshots/after-mobile` (19 @375).
+Reference: **Salesforce Lightning Design System — Patterns**
+<https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns>
+SLDS Color: "the foundational colors are white and light grays, with dark grays and dark blue to
+create contrast for text and interactive elements."
 
-Goal: roll the console's stylesheet, fonts, colors, logo and buttons across the whole public website,
-with **one token file** driving every page.
+Supersedes the earlier dark console pass. The whole public website now runs on a **light SLDS
+foundation** with one token source.
 
-- Tokens (one source): [`tokens.css`](../tokens.css)
-- Shared layer: [`site.css`](../site.css)
-- Logo assets: [`assets/logo-*.svg`](../assets), `assets/favicon.svg`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`, `assets/icon-512.png`, `assets/og-image.png`
+- Tokens (single source): [`tokens.css`](../tokens.css)
+- Shared layer (SLDS patterns): [`site.css`](../site.css)
+- Logo: [`assets/logo-kayroslab.png`](../assets/logo-kayroslab.png) + `favicon-32.png`, `apple-touch-icon.png`, `icon-512.png`, `og-image.png`
 - Handover: [`STYLE-GUIDE.md`](./STYLE-GUIDE.md)
 
----
+## 1. Token audit (SLDS light)
 
-## 1. Reference audit — visual tokens measured on the console
-
-### 1.1 Color (console palette, exact `oklch`, with sRGB equivalents)
-
-| Token | oklch | ≈ hex | Role |
-|---|---|---|---|
-| `--color-paper` | `oklch(15% 0.018 242)` | `#050c12` | page background |
-| `--color-surface` | `oklch(19% 0.02 242)` | `#0c151c` | cards, panels |
-| `--color-surface-raised` | `oklch(23% 0.022 242)` | `#141e26` | raised rows |
-| `--color-rule` | `oklch(33% 0.024 242)` | `#2b3741` | borders, dividers |
-| `--color-rule-strong` | `oklch(46% 0.035 242)` | `#475b6a` | strong borders |
-| `--color-muted` | `oklch(71% 0.025 242)` | `#94a4b0` | secondary text |
-| `--color-ink` | `oklch(95% 0.012 220)` | `#e6f1f4` | primary text |
-| `--color-accent` | `oklch(79% 0.14 205)` | `#00d3e5` | brand accent (cyan) |
-| `--color-accent-ink` | `oklch(19% 0.04 220)` | `#001820` | text on accent |
-| `--color-focus` | `oklch(82% 0.16 205)` | `#00e0f5` | focus ring |
-| `--color-danger` | `oklch(72% 0.16 25)` | `#f97770` | errors |
-| `--color-warning` | `oklch(82% 0.13 83)` | `#edbc58` | warnings |
-| `--color-success` | `oklch(78% 0.14 155)` | `#63d18f` | success |
-
-Contrast: `--color-ink` on `--color-paper` ≈ 15:1 (AAA); `--color-muted` on paper ≈ 7:1 (AA/AAA for large). Body text passes WCAG AA.
-
-### 1.2 Typography (console)
-
-| Token | Family | Usage |
+| Token | Value | SLDS role |
 |---|---|---|
-| `--font-display` | **Space Grotesk** (600/700) | headings, wordmark, eyebrows |
-| `--font-body` | **IBM Plex Sans** (400/500/600) | body, UI, buttons |
-| `--font-mono` | **Fira Code** (400/500) | code, metrics |
+| `--color-paper` | `#f3f2f2` | page background (gray 1) |
+| `--color-surface` | `#ffffff` | cards / panels |
+| `--color-surface-raised` | `#fafaf9` | subtle fills |
+| `--color-rule` | `#c9c9c9` | border |
+| `--color-rule-strong` | `#747474` | strong border |
+| `--color-muted` | `#706e6b` | weak text |
+| `--color-ink` | `#181818` | default text |
+| `--color-ink-deep` | `#032d60` | dark-blue headings |
+| `--color-accent` | `#0176d3` | brand / action (fills) |
+| `--color-link` | `#0b5cab` | link & label text on light (AA) |
+| `--color-accent-strong` | `#014486` | brand hover |
+| `--color-accent-soft` | `#eaf5fe` | brand tint |
+| `--color-focus` | `#0176d3` | focus ring |
+| `--color-success` | `#2e844a` | success |
+| `--color-warning` | `#fe9339` | warning |
+| `--color-danger` | `#ea001e` | error |
+| `--radius-sm/-md` | `0.25rem` | SLDS border radius |
+| `--shadow-card` | `0 2px 2px 0 rgb(0 0 0 / .05)` | SLDS elevation |
+| spacing | 4px grid (`--space-xs .5rem … --space-3xl 4.5rem`) | SLDS spacing |
+| `--font-body/-display` | Salesforce Sans → **Inter** (open substitute) + system stack | SLDS type |
+| `--font-mono` | Fira Code | code |
 
-Type scale: `xs .72` · `sm .84` · `base 1` · `md 1.18` · `lg 1.45` · `xl 1.9` · display `clamp(2rem,4vw,3.8rem)`.
-Headings: letter-spacing `-0.02em`, tight display rhythm.
+SLDS 2 global styling hooks are exposed as aliases: `--slds-g-color-brand-base-50`,
+`--slds-g-spacing-1..8`, `--slds-g-radius-border-1/2`.
 
-### 1.3 Space, radii, motion
+## 2. Patterns implemented in `site.css`
 
-- Spacing scale: `3xs .125` · `2xs .25` · `xs .5` · `sm .75` · `md 1` · `lg 1.5` · `xl 2.5` · `2xl 4` · `3xl 6` (rem).
-- Radii: `sm .45` · `md .75` · `pill 999` (px-based radii are avoided).
-- Motion: `ease-out cubic-bezier(.16,1,.3,1)`; durations `micro 120ms` · `short 220ms` · `long 420ms`.
+- **Page header** — title + actions strip with a hairline rule.
+- **Card** — white surface, `#c9c9c9` border, `0.25rem` radius, SLDS elevation.
+- **Button** — neutral (white/`#0176d3`), brand (primary), ghost/link, destructive; hover/focus/
+  active/disabled/loading; 2rem min-height, 0.8125rem, `0.25rem` radius, visible focus ring.
+- **Tag / badge**, **Table** (zebra rows, uppercase header on gray).
 
-### 1.4 Logo
+## 3. Migration (dark → light)
 
-- Mark: rounded square (`rx 12/64`), fill `#15191d`, glyph **K** in `#f2f0e9`.
-- Lockup: mark + "KayrosLab" in Space Grotesk 700, letter-spacing `-0.04em`.
-- Clear space: ≥ 0.25 × mark height on all sides. Minimum size: 24 px (mark), 96 px (lockup).
-- Light/dark variants: `logo-mark.svg` (on dark), `logo-mark-light.svg` (on light surfaces).
-- Favicon: `favicon.svg` (+ `favicon-32.png`, `apple-touch-icon.png` 180, `icon-512.png`).
+| Dark (previous pass) | SLDS light |
+|---|---|
+| `#050c12` | `#f3f2f2` |
+| `#0c151c` | `#ffffff` |
+| `#141e26` | `#fafaf9` |
+| `#2b3741` / `#3c4b56` / `#475b6a` | `#c9c9c9` / `#939393` / `#747474` |
+| `#e6f1f4` | `#181818` |
+| `#94a4b0` / `#7f8e99` / `#c9d6da` | `#706e6b` / `#5c5c5c` / `#3e3e3c` |
+| `#00d3e5` / `#00b4c4` / `#001820` | `#0176d3` / `#014486` / `#ffffff` |
+| `#63d18f` / `#edbc58` / `#f97770` | `#2e844a` / `#fe9339` / `#ea001e` |
+| Space Grotesk / IBM Plex Sans | Inter (SLDS stack) |
 
-### 1.5 Buttons (console action system)
+## 4. Logo
 
-| State | Primary | Secondary / ghost |
-|---|---|---|
-| base | accent bg, accent-ink text, radius `sm`, border accent | transparent bg, rule-strong border, ink text |
-| hover | accent-strong bg | accent border + accent-soft bg, accent text |
-| active | `translateY(1px)` | same |
-| focus-visible | 2px `--color-focus` ring, offset 2px | same |
-| disabled | `opacity .5`, `pointer-events none` | same |
-| loading | `cursor wait`, `opacity .8` | same |
+New mark adopted from the client-supplied artwork: a blue rounded-square app tile
+(`≈#0a7ae0`) with a white custom **K** whose stem is a cloud. 1:1. Applied as the header
+lockup, back-cover slot, favicon (PNG), apple-touch icon, 512 app icon and OG image.
 
----
+## 5. Verification
 
-## 2. Migration mapping (legacy → console)
+- Responsive sweep (`scripts/overflow-shot.ps1`): **57/57 renders ok, 0 horizontal overflow**
+  (19 pages × 375 / 834 / 1440), detector validated by a positive control.
+- Palette sweep: **0** dark-palette hexes, **0** legacy font families left in the 19 pages.
+- Contrast: ink `#181818` on paper `#f3f2f2` = **15.89:1** (AAA); muted `#706e6b` = **4.55:1** (AA);
+  white on brand `#0176d3` = **4.63:1** (AA); link text `#0b5cab` on paper = **6.00:1** (AA+).
+- Screenshots: `screenshots/{before-original,before,after,after-tablet,after-mobile}` + `reference-console-1440.png`.
 
-Pages that were already token-driven (`index`, `index.fr`, `arbitrage`, `cycle-timeline`, `ontology-*`,
-`portfolio-*`, `kayroslab-complete-*`) were restyled by changing values in `tokens.css` only.
-Standalone documents (whitepapers, livrets, `validation-proposition`) carried hard-coded hexes and
-foreign fonts; they were rewritten to the console equivalents:
+## 6. Page inventory (19/19 updated)
 
-| Legacy | Console | Role |
-|---|---|---|
-| `#050d1a` / `#0a1628` | `#050c12` / `#0c151c` | backgrounds |
-| `#0f172a` | `#141e26` | raised |
-| `#f9fafb` / `#e2e8f0` / `#d1d5db` | `#e6f1f4` / `#c9d6da` | text |
-| `#9ca3af` / `#94a3b8` / `#6b7280` | `#94a4b0` / `#7f8e99` | muted |
-| `#4b5563` / `#334155` / `#475569` | `#2b3741` / `#3c4b56` | rules |
-| `#2fb9a8` (teal) | `#00d3e5` | accent |
-| `#34d399` | `#63d18f` | success |
-| `#f59e0b` / `#fbbf24` | `#edbc58` | warning |
-| `#ef4444` / `#fb7185` | `#f97770` | danger |
-| blue / violet accents | `#00d3e5` / `#00b4c4` | unified to accent |
-| `Outfit` / `Tomorrow` | `var(--font-display)` | display |
-| `Plus Jakarta Sans` / `Geist` | `var(--font-body)` | body |
-| `JetBrains Mono` | `var(--font-mono)` | mono |
-
-Light-tint chips (e.g. `#e0f2fe`) were mapped to dark console tints so paired dark text
-(also remapped) keeps AA contrast.
-
----
-
-## 3. Page inventory
-
-All 19 in-scope pages updated. Evidence: `DELIVERY/screenshots/{before,after,after-mobile}/`.
-
-| Page | Tokens+site.css | Fonts | Palette | Logo/favicon |
-|---|---|---|---|---|
-| index.html | ✔ | ✔ | ✔ | ✔ |
-| index.fr.html | ✔ | ✔ | ✔ | ✔ |
-| 404.html | ✔ | ✔ | ✔ | ✔ |
-| arbitrage.html | ✔ | ✔ | ✔ | ✔ |
-| cycle-timeline.html | ✔ | ✔ | ✔ | ✔ |
-| kayroslab-complete-with-ai-agents.html | ✔ | ✔ | ✔ | ✔ |
-| livret-blanc-ecouter.html | ✔ | ✔ | ✔ | ✔ |
-| livret-blanc-hackathon.html | ✔ | ✔ | ✔ | ✔ |
-| livret-blanc-kayroslab.html | ✔ | ✔ | ✔ | ✔ |
-| livret-blanc-positionner.html | ✔ | ✔ | ✔ | ✔ |
-| ontology-explorer.html | ✔ | ✔ | ✔ | ✔ |
-| ontology-panel.html | ✔ | ✔ | ✔ | ✔ |
-| portfolio-board.html | ✔ | ✔ | ✔ | ✔ |
-| portfolio-dormant.html | ✔ | ✔ | ✔ | ✔ |
-| validation-proposition.html | ✔ | ✔ | ✔ | ✔ |
-| whitepaper-hackathon.html | ✔ | ✔ | ✔ | ✔ |
-| whitepaper-kayroslab.html | ✔ | ✔ | ✔ | ✔ |
-| whitepaper-listen.html | ✔ | ✔ | ✔ | ✔ |
-| whitepaper-position.html | ✔ | ✔ | ✔ | ✔ |
-
-Console (reference) is a separate build (`frontend/console-app`) and keeps its own copy of the tokens.
+index · index.fr · 404 · arbitrage · cycle-timeline · kayroslab-complete-with-ai-agents ·
+livret-blanc-{ecouter,hackathon,kayroslab,positionner} · ontology-{explorer,panel} ·
+portfolio-{board,dormant} · validation-proposition · whitepaper-{hackathon,kayroslab,listen,position}

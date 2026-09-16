@@ -6,108 +6,108 @@
 <title>Livret Blanc — Positionner : L'Analyse Concurrentielle Ontologique Augmentée | KayrosLab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:11pt}
-body{font-family:var(--font-body),system-ui,sans-serif;background:#050c12;color:#e6f1f4;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--font-body),system-ui,sans-serif;background:#f3f2f2;color:#181818;line-height:1.7;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 @page{size:A4;margin:0}
 
-.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#050c12;overflow:hidden;page-break-after:always}
-.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(0,211,229,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(148,164,176,0.06) 0px, transparent 50%);pointer-events:none}
+.page{width:210mm;min-height:297mm;padding:20mm 25mm;margin:0 auto;position:relative;background:#f3f2f2;overflow:hidden;page-break-after:always}
+.page::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(at 2% 8%, rgba(1,118,211,0.10) 0px, transparent 50%),radial-gradient(at 98% 92%, rgba(148,164,176,0.06) 0px, transparent 50%);pointer-events:none}
 
 .cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#00d3e5,transparent);margin-bottom:10mm}
-.cover__tag{font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#00d3e5;margin-bottom:5mm}
+.cover__accent-line{width:60mm;height:2px;background:linear-gradient(90deg,transparent,#0176d3,transparent);margin-bottom:10mm}
+.cover__tag{font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#0176d3;margin-bottom:5mm}
 .cover__title{font-family:var(--font-display),sans-serif;font-size:2.4rem;font-weight:800;line-height:1.15;margin-bottom:5mm;max-width:160mm}
-.cover__title em{color:#00d3e5;font-style:normal}
-.cover__subtitle{font-size:1rem;color:#94a4b0;max-width:140mm;margin-bottom:8mm;line-height:1.6}
-.cover__meta{font-size:0.75rem;color:#7f8e99}
-.cover__meta span{color:#00d3e5}
-.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(0,211,229,0.08);border-radius:50%;top:-20mm;right:-20mm}
-.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(0,211,229,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
+.cover__title em{color:#0176d3;font-style:normal}
+.cover__subtitle{font-size:1rem;color:#706e6b;max-width:140mm;margin-bottom:8mm;line-height:1.6}
+.cover__meta{font-size:0.75rem;color:#5c5c5c}
+.cover__meta span{color:#0176d3}
+.cover__deco{position:absolute;width:80mm;height:80mm;border:1px solid rgba(1,118,211,0.08);border-radius:50%;top:-20mm;right:-20mm}
+.cover__deco2{position:absolute;width:120mm;height:120mm;border:1px solid rgba(1,118,211,0.05);border-radius:50%;bottom:-40mm;left:-40mm}
 
-h1{font-family:var(--font-display),sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#e6f1f4}
-h1 .highlight{color:#00d3e5}
-h2{font-family:var(--font-display),sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#e6f1f4;padding-bottom:1.5mm;border-bottom:1px solid rgba(0,211,229,0.2)}
-h2 .highlight{color:#00d3e5}
-h3{font-family:var(--font-display),sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#00d3e5}
-h4{font-family:var(--font-display),sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#94a4b0}
-p{margin-bottom:2mm;font-size:0.88rem;color:#c9d6da}
+h1{font-family:var(--font-display),sans-serif;font-size:1.7rem;font-weight:700;margin-bottom:4mm;color:#181818}
+h1 .highlight{color:#0176d3}
+h2{font-family:var(--font-display),sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:3mm;color:#181818;padding-bottom:1.5mm;border-bottom:1px solid rgba(1,118,211,0.2)}
+h2 .highlight{color:#0176d3}
+h3{font-family:var(--font-display),sans-serif;font-size:0.95rem;font-weight:600;margin-bottom:2mm;color:#0176d3}
+h4{font-family:var(--font-display),sans-serif;font-size:0.8rem;font-weight:600;margin-bottom:1mm;color:#706e6b}
+p{margin-bottom:2mm;font-size:0.88rem;color:#3e3e3c}
 
-.lead{font-size:1rem;color:#e6f1f4;font-weight:400;line-height:1.8}
-.accent-text{color:#00d3e5}
-.small{font-size:0.75rem;color:#7f8e99}
+.lead{font-size:1rem;color:#181818;font-weight:400;line-height:1.8}
+.accent-text{color:#0176d3}
+.small{font-size:0.75rem;color:#5c5c5c}
 
 .section{margin-bottom:6mm}
 
-.callout{background:rgba(0,211,229,0.06);border-left:3px solid #00d3e5;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
+.callout{background:rgba(1,118,211,0.06);border-left:3px solid #0176d3;padding:2.5mm 3.5mm;margin:3mm 0;border-radius:0 2px 2px 0}
 .callout p{margin-bottom:0;font-size:0.82rem}
-.callout--gold{border-left-color:#94a4b0;background:rgba(148,164,176,0.06)}
-.callout--orange{border-left-color:#edbc58;background:rgba(245,158,11,0.06)}
-.callout--violet{border-left-color:#00d3e5;background:rgba(167,139,250,0.06)}
+.callout--gold{border-left-color:#706e6b;background:rgba(148,164,176,0.06)}
+.callout--orange{border-left-color:#fe9339;background:rgba(245,158,11,0.06)}
+.callout--violet{border-left-color:#0176d3;background:rgba(167,139,250,0.06)}
 
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
-.card{background:rgba(15,23,42,0.6);border:1px solid rgba(0,211,229,0.12);border-radius:4px;padding:2.5mm}
+.card{background:rgba(15,23,42,0.6);border:1px solid rgba(1,118,211,0.12);border-radius:4px;padding:2.5mm}
 .card p{font-size:0.8rem;margin-bottom:0.5mm}
-.card__title{font-family:var(--font-display),sans-serif;font-size:0.82rem;font-weight:600;color:#00d3e5;margin-bottom:1mm}
+.card__title{font-family:var(--font-display),sans-serif;font-size:0.82rem;font-weight:600;color:#0176d3;margin-bottom:1mm}
 
 table{width:100%;border-collapse:collapse;margin:3mm 0;font-size:0.75rem}
-th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(0,211,229,0.1)}
-th{background:rgba(0,211,229,0.08);color:#00d3e5;font-weight:600;font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
-td{color:#c9d6da}
+th,td{padding:1.2mm 1.8mm;text-align:left;border-bottom:1px solid rgba(1,118,211,0.1)}
+th{background:rgba(1,118,211,0.08);color:#0176d3;font-weight:600;font-family:var(--font-display),sans-serif;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase}
+td{color:#3e3e3c}
 tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
 
 .num-list{counter-reset:nl;margin:2.5mm 0}
-.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#c9d6da}
-.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:var(--font-display),sans-serif;font-weight:700;color:#00d3e5;font-size:0.7rem}
+.num-list li{list-style:none;counter-increment:nl;padding-left:5mm;position:relative;margin-bottom:1.2mm;font-size:0.82rem;color:#3e3e3c}
+.num-list li::before{content:counter(nl);position:absolute;left:0;top:0;font-family:var(--font-display),sans-serif;font-weight:700;color:#0176d3;font-size:0.7rem}
 
 .bullet-list{margin:2mm 0 2mm 4mm}
-.bullet-list li{font-size:0.82rem;color:#c9d6da;margin-bottom:0.8mm}
-.bullet-list li::marker{color:#00d3e5}
+.bullet-list li{font-size:0.82rem;color:#3e3e3c;margin-bottom:0.8mm}
+.bullet-list li::marker{color:#0176d3}
 
 .comparison{display:grid;grid-template-columns:1fr 1fr;gap:3.5mm;margin:3mm 0}
 .comparison__col{padding:2.5mm;border-radius:3px}
 .comparison__col--bad{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15)}
-.comparison__col--good{background:rgba(0,211,229,0.05);border:1px solid rgba(0,211,229,0.15)}
+.comparison__col--good{background:rgba(1,118,211,0.05);border:1px solid rgba(1,118,211,0.15)}
 .comparison__col h4{margin-bottom:1.5mm}
 .comparison__col ul{list-style:none}
-.comparison__col ul li{font-size:0.78rem;color:#c9d6da;padding:0.4mm 0;padding-left:3mm;position:relative}
-.comparison__col--bad ul li::before{content:'✕';color:#f97770;position:absolute;left:0}
-.comparison__col--good ul li::before{content:'✓';color:#00d3e5;position:absolute;left:0}
+.comparison__col ul li{font-size:0.78rem;color:#3e3e3c;padding:0.4mm 0;padding-left:3mm;position:relative}
+.comparison__col--bad ul li::before{content:'✕';color:#ea001e;position:absolute;left:0}
+.comparison__col--good ul li::before{content:'✓';color:#0176d3;position:absolute;left:0}
 
 .kpi-row{display:flex;gap:2.5mm;margin:3mm 0;justify-content:space-between}
-.kpi{flex:1;text-align:center;padding:2mm 1.5mm;background:rgba(15,23,42,0.6);border:1px solid rgba(0,211,229,0.12);border-radius:3px}
-.kpi__value{font-family:var(--font-display),sans-serif;font-size:1.3rem;font-weight:700;color:#00d3e5}
-.kpi__label{font-size:0.6rem;color:#7f8e99;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.3mm}
+.kpi{flex:1;text-align:center;padding:2mm 1.5mm;background:rgba(15,23,42,0.6);border:1px solid rgba(1,118,211,0.12);border-radius:3px}
+.kpi__value{font-family:var(--font-display),sans-serif;font-size:1.3rem;font-weight:700;color:#0176d3}
+.kpi__label{font-size:0.6rem;color:#5c5c5c;letter-spacing:0.05em;text-transform:uppercase;margin-top:0.3mm}
 
 .toc{margin:4mm 0}
 .toc ol{counter-reset:toc;list-style:none}
-.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(0,211,229,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#c9d6da}
-.toc ol li::before{content:counter(toc);font-family:var(--font-display),sans-serif;font-weight:600;color:#00d3e5;margin-right:2mm}
-.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#2b3741;font-family:'Fira Code',monospace}
-.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(0,211,229,0.15),transparent)}
-.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:var(--font-display),sans-serif;font-size:0.6rem;font-weight:700;color:#00d3e5;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
+.toc ol li{counter-increment:toc;padding:1.2mm 0;border-bottom:1px dotted rgba(1,118,211,0.1);display:flex;justify-content:space-between;font-size:0.82rem;color:#3e3e3c}
+.toc ol li::before{content:counter(toc);font-family:var(--font-display),sans-serif;font-weight:600;color:#0176d3;margin-right:2mm}
+.page-number{position:absolute;bottom:8mm;right:12mm;font-size:0.62rem;color:#c9c9c9;font-family:'Fira Code',monospace}
+.footer-line{position:absolute;bottom:12mm;left:25mm;right:25mm;height:1px;background:linear-gradient(90deg,transparent,rgba(1,118,211,0.15),transparent)}
+.page:not(.cover)::after{content:'KayrosLab';position:absolute;top:5mm;left:25mm;font-family:var(--font-display),sans-serif;font-size:0.6rem;font-weight:700;color:#0176d3;letter-spacing:0.04em;opacity:0.5;z-index:1;pointer-events:none}
 
 .flow{display:flex;align-items:center;justify-content:center;gap:1.5mm;margin:3mm 0;flex-wrap:wrap}
-.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(0,211,229,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
-.flow__step .num{font-family:var(--font-display),sans-serif;font-size:0.55rem;color:#00d3e5;letter-spacing:0.15em}
-.flow__step .label{font-size:0.7rem;color:#e6f1f4;font-weight:500}
-.flow__arrow{color:#00d3e5;font-size:0.7rem;opacity:0.5}
+.flow__step{background:rgba(15,23,42,0.8);border:1px solid rgba(1,118,211,0.2);border-radius:3px;padding:1.5mm 2.5mm;text-align:center;min-width:20mm}
+.flow__step .num{font-family:var(--font-display),sans-serif;font-size:0.55rem;color:#0176d3;letter-spacing:0.15em}
+.flow__step .label{font-size:0.7rem;color:#181818;font-weight:500}
+.flow__arrow{color:#0176d3;font-size:0.7rem;opacity:0.5}
 
-@media print{body{background:#050c12}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
+@media print{body{background:#f3f2f2}.page{margin:0;box-shadow:none;width:210mm;min-height:297mm}}
 @media screen and (max-width:800px){.page{width:100%;min-height:auto;padding:10mm 15mm}.cover__title{font-size:1.6rem}.grid-2,.comparison{grid-template-columns:1fr}.kpi-row{flex-wrap:wrap}.kpi{min-width:45%}}
 </style>
   <link rel="stylesheet" href="./tokens.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./tokens.css">
   <link rel="stylesheet" href="./site.css">
-  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/logo-kayroslab.png" type="image/png">
   <link rel="icon" href="./assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#050c12">
+  <meta name="theme-color" content="#f3f2f2">
   <meta property="og:image" content="https://www.kayroslab.com/assets/og-image.png">
 </head>
 <body>
@@ -140,14 +140,14 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
   <div style="margin-top: 8mm;">
     <div class="toc">
       <ol>
-        <li><span>Introduction : Pourquoi le positionnement est le maillon faible de l'idéation</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">3</span></li>
-        <li><span>L'analyse concurrentielle traditionnelle : limites et angles morts</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">4</span></li>
-        <li><span>Positionner : une ontologie vivante à 14 entités</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">5</span></li>
-        <li><span>L'interaction dynamique homme-machine sur les axes</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">6</span></li>
-        <li><span>Graphe Cytoscape.js et Query Playground : l'exploration libre</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">7</span></li>
-        <li><span>Gains mesurables sur le processus d'idéation</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">8</span></li>
-        <li><span>Références croisées : ce que disent BCG, McKinsey et Bain</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">9</span></li>
-        <li><span>Conclusion : Vers un positionnement continu</span> <span class="page-num" style="color:#2b3741;font-size:0.7rem">10</span></li>
+        <li><span>Introduction : Pourquoi le positionnement est le maillon faible de l'idéation</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">3</span></li>
+        <li><span>L'analyse concurrentielle traditionnelle : limites et angles morts</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">4</span></li>
+        <li><span>Positionner : une ontologie vivante à 14 entités</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">5</span></li>
+        <li><span>L'interaction dynamique homme-machine sur les axes</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">6</span></li>
+        <li><span>Graphe Cytoscape.js et Query Playground : l'exploration libre</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">7</span></li>
+        <li><span>Gains mesurables sur le processus d'idéation</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">8</span></li>
+        <li><span>Références croisées : ce que disent BCG, McKinsey et Bain</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">9</span></li>
+        <li><span>Conclusion : Vers un positionnement continu</span> <span class="page-num" style="color:#c9c9c9;font-size:0.7rem">10</span></li>
       </ol>
     </div>
   </div>
@@ -193,13 +193,13 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
     <div class="flow__arrow">→</div>
     <div class="flow__step"><div class="num">03</div><div class="label">Construire</div></div>
     <div class="flow__arrow">→</div>
-    <div class="flow__step" style="border-color:#edbc58;"><div class="num" style="color:#edbc58;">04</div><div class="label" style="color:#edbc58;font-weight:700;">Positionner</div></div>
+    <div class="flow__step" style="border-color:#fe9339;"><div class="num" style="color:#fe9339;">04</div><div class="label" style="color:#fe9339;font-weight:700;">Positionner</div></div>
     <div class="flow__arrow">→</div>
     <div class="flow__step"><div class="num">05</div><div class="label">Éprouver</div></div>
     <div class="flow__arrow">→</div>
     <div class="flow__step"><div class="num">06</div><div class="label">Arbitrer</div></div>
   </div>
-  <p style="margin-top: 2mm; font-size:0.8rem; color:#7f8e99; text-align:center;">
+  <p style="margin-top: 2mm; font-size:0.8rem; color:#5c5c5c; text-align:center;">
     Positionner est le pont entre la génération d'idées (Écouter → Construire) et leur validation (Éprouver → Arbitrer).
   </p>
 
@@ -227,7 +227,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
 
   <div class="comparison" style="margin-top: 4mm;">
     <div class="comparison__col comparison__col--bad">
-      <h4 style="color:#f97770;">Analyse traditionnelle</h4>
+      <h4 style="color:#ea001e;">Analyse traditionnelle</h4>
       <ul>
         <li>Statique : figée au moment de la rédaction</li>
         <li>Linéaire : un rapport, pas de dialogue</li>
@@ -238,7 +238,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
       </ul>
     </div>
     <div class="comparison__col comparison__col--good">
-      <h4 style="color:#00d3e5;">Positionner (KayrosLab)</h4>
+      <h4 style="color:#0176d3;">Positionner (KayrosLab)</h4>
       <ul>
         <li>Vivante : mise à jour automatique et continue</li>
         <li>Interactive : exploration libre via le query playground</li>
@@ -290,7 +290,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
   </p>
 
   <div class="grid-2" style="margin-top: 3mm;">
-    <div class="card" style="border-color:rgba(0,211,229,0.2);">
+    <div class="card" style="border-color:rgba(1,118,211,0.2);">
       <div class="card__title">Entités technologiques (7)</div>
       <ul class="bullet-list" style="font-size:0.78rem;">
         <li><strong>Produit</strong> — offre logicielle, platforme, service</li>
@@ -358,13 +358,13 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
   <p>L'interaction suit un cycle continu en 4 phases :</p>
 
   <div class="flow" style="margin-top: 3mm;">
-    <div class="flow__step" style="border-color:#edbc58;"><div class="num" style="color:#edbc58;">IA</div><div class="label">Scrape & Analyse</div></div>
+    <div class="flow__step" style="border-color:#fe9339;"><div class="num" style="color:#fe9339;">IA</div><div class="label">Scrape & Analyse</div></div>
     <div class="flow__arrow">→</div>
-    <div class="flow__step" style="border-color:#94a4b0;"><div class="num" style="color:#94a4b0;">HUMAIN</div><div class="label">Questionne</div></div>
+    <div class="flow__step" style="border-color:#706e6b;"><div class="num" style="color:#706e6b;">HUMAIN</div><div class="label">Questionne</div></div>
     <div class="flow__arrow">→</div>
-    <div class="flow__step" style="border-color:#edbc58;"><div class="num" style="color:#edbc58;">IA</div><div class="label">Affine</div></div>
+    <div class="flow__step" style="border-color:#fe9339;"><div class="num" style="color:#fe9339;">IA</div><div class="label">Affine</div></div>
     <div class="flow__arrow">→</div>
-    <div class="flow__step" style="border-color:#94a4b0;"><div class="num" style="color:#94a4b0;">HUMAIN</div><div class="label">Arbitre</div></div>
+    <div class="flow__step" style="border-color:#706e6b;"><div class="num" style="color:#706e6b;">HUMAIN</div><div class="label">Arbitre</div></div>
   </div>
 
   <p style="margin-top: 2mm;">Concrètement, l'utilisateur peut :</p>
@@ -529,11 +529,11 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
       <tr><th>Métrique</th><th>Avant Positionner</th><th>Avec Positionner</th><th>Gain</th></tr>
     </thead>
     <tbody>
-      <tr><td>Temps d'analyse</td><td>2-6 semaines</td><td>2-3 jours</td><td style="color:#63d18f;">-80 %</td></tr>
-      <tr><td>Entités couvertes</td><td>5-10 max</td><td>14 types × N occurrences</td><td style="color:#63d18f;">×5 à ×20</td></tr>
-      <tr><td>Fréquence de mise à jour</td><td>Jamais (étude figée)</td><td>Continue (temps réel)</td><td style="color:#63d18f;">∞</td></tr>
-      <tr><td>Coût par analyse</td><td>40-80 k€</td><td>Inclus (abonnement)</td><td style="color:#63d18f;">-95 %</td></tr>
-      <tr><td>Capitalisation</td><td>Aucune</td><td>Cumulative</td><td style="color:#63d18f;">×N</td></tr>
+      <tr><td>Temps d'analyse</td><td>2-6 semaines</td><td>2-3 jours</td><td style="color:#2e844a;">-80 %</td></tr>
+      <tr><td>Entités couvertes</td><td>5-10 max</td><td>14 types × N occurrences</td><td style="color:#2e844a;">×5 à ×20</td></tr>
+      <tr><td>Fréquence de mise à jour</td><td>Jamais (étude figée)</td><td>Continue (temps réel)</td><td style="color:#2e844a;">∞</td></tr>
+      <tr><td>Coût par analyse</td><td>40-80 k€</td><td>Inclus (abonnement)</td><td style="color:#2e844a;">-95 %</td></tr>
+      <tr><td>Capitalisation</td><td>Aucune</td><td>Cumulative</td><td style="color:#2e844a;">×N</td></tr>
     </tbody>
   </table>
 
@@ -553,7 +553,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
     que Positionner adresse directement.
   </p>
 
-  <div class="card" style="margin-top: 3mm; border-color:rgba(0,211,229,0.2);">
+  <div class="card" style="margin-top: 3mm; border-color:rgba(1,118,211,0.2);">
     <div class="card__title">BCG — « Driving Innovation with GenAI and Doubt » (2024)</div>
     <p>BCG démontre que les équipes qui intègrent le <strong>doute méthodique</strong> dans leur processus
     d'innovation explorent 3× plus d'options et prennent de meilleures décisions. Positionner
@@ -676,7 +676,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
     <strong>Positionner n'est pas un outil de plus. C'est une nouvelle façon de voir le marché.</strong>
   </p>
 
-  <p style="margin-top: 5mm; font-size:0.8rem; color:#7f8e99;">
+  <p style="margin-top: 5mm; font-size:0.8rem; color:#5c5c5c;">
     <strong>Contact :</strong> contact@kayroslab.com — <strong>LinkedIn :</strong> /in/gdelatournelle/<br>
     <strong>Téléphone :</strong> +33 6 69 28 29 16
   </p>

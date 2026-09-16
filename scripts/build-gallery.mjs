@@ -39,14 +39,14 @@ const html = `<!DOCTYPE html>
   <header class="frame" style="padding-block: var(--space-xl);">
     <a class="brand" href="./index.html"><img src="../assets/logo-mark.svg" alt="" width="56" height="56"><span class="brand__name">KayrosLab</span></a>
     <h1 style="margin-top: var(--space-lg);">Site restyle — console design language</h1>
-    <p style="color: var(--color-muted); max-width: 60ch;">Every public page now consumes the console reference tokens (${pages.length} pages). Before is the previous build; after is the restyle. Evidence captured with headless Chrome at 1440, 834 and 375px (57 renders), 0 horizontal overflow.</p>
+    <p style="color: var(--color-muted); max-width: 60ch;">Every public page now runs on the SLDS light foundation (${pages.length} pages). Before is the previous dark build; after is the light restyle. Evidence captured with headless Chrome at 1440, 834 and 375px (57 renders), 0 horizontal overflow.</p>
     <p><a class="button button--primary" href="../index.html">View homepage</a> <a class="button" href="./STYLE-GUIDE.md">Style guide</a> <a class="button button--ghost" href="./DESIGN-RESTYLE-AUDIT.md">Audit</a></p>
   </header>
   <main class="frame grid">
     <section class="card">
-      <h2>Palette (from the console)</h2>
+      <h2>Palette (SLDS light)</h2>
       <div class="swatches">
-        ${['paper', 'surface', 'surface-raised', 'rule', 'rule-strong', 'muted', 'ink', 'accent', 'accent-ink', 'focus', 'danger', 'warning', 'success'].map((t) => `<div class="sw"><i style="background: var(--color-${t})"></i><span>--color-${t}</span></div>`).join('\n        ')}
+        ${['paper', 'surface', 'surface-raised', 'rule', 'rule-strong', 'muted', 'ink', 'ink-deep', 'accent', 'accent-strong', 'accent-soft', 'danger', 'warning', 'success'].map((t) => `<div class="sw"><i style="background: var(--color-${t})"></i><span>--color-${t}</span></div>`).join('\n        ')}
       </div>
       <h2 style="margin-top: var(--space-lg);">Buttons</h2>
       <p><a class="button button--primary">Primary</a> <a class="button">Secondary</a> <a class="button button--ghost">Ghost</a> <button class="button" disabled>Disabled</button> <button class="button" data-state="loading">Loading…</button></p>
