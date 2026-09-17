@@ -9,6 +9,7 @@ import {
   normalizeHumanProfile,
   profileFromAgentOverride,
 } from './personality.mjs';
+import { impersonatorContext, impersonatorGuardrails, impersonatorOf, normalizeImpersonator } from './impersonator.mjs';
 
 export const AGENT_TYPES = Object.freeze(['system_predefined', 'user_defined', 'hybrid_modified']);
 export const AGENT_SENIORITIES = Object.freeze(['intern', 'junior', 'senior', 'executive']);
@@ -99,6 +100,7 @@ export function validateAgentDefinition(input, { forceType = null } = {}) {
   d.tools = strings(d.tools);
   d.connectors = strings(d.connectors);
   d.metadata = plainObject(d.metadata);
+  if (d.metadata.impersonator) d.metadata.impersonator = normalizeImpersonator(d.metadata.impersonator);
   d.behavioral_profile = plainObject(d.behavioral_profile);
   d.enabled = d.enabled !== false;
   assertOneOf(d.seniority, AGENT_SENIORITIES, 'seniority');
@@ -209,6 +211,10 @@ export function resolveEffectiveRules(definition) {
     });
   }
   for (const rule of d.rule_configuration.user_added_rules) rules.push({ ...rule, origin: 'user_added' });
+  const impersonator = impersonatorOf(d);
+  if (impersonator) {
+    for (const guardrail of impersonatorGuardrails(impersonator)) rules.push({ ...guardrail, origin: 'impersonator' });
+  }
   return rules;
 }
 
@@ -224,6 +230,7 @@ export function compileEffectiveAgentContext(definition) {
     `Règles de décision:\n${rules.length
       ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
       : '- Aucune règle active; signaler explicitement cette lacune de gouvernance.'}`,
+    impersonatorContext(d) || null,
   ];
   return sections.filter(Boolean).join('\n\n');
 }

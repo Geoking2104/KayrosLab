@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
+import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
 // missions gouvernées et arbitre les verdicts. Les surfaces du produit de
@@ -59,6 +60,23 @@ const collectiveSchema = z.object({
   remove_agent_ids: z.array(z.string().min(1).max(80)).max(30).optional().default([]),
 }).refine((value) => value.add_agent_ids.length > 0 || value.remove_agent_ids.length > 0, { message: 'aucun changement de collectif demandé' });
 const arbitrationSchema = z.object({ action: z.enum(['accept_consensus', 'override_veto', 'reevaluate']), justification: z.string().max(4000).optional(), decision: z.enum(['GO', 'CONDITIONAL_GO']).optional() });
+const impersonatorSchema = z.object({
+  agent_id: z.string().max(64).optional(),
+  name: z.string().min(1).max(200),
+  role: z.string().max(200).optional(),
+  company: z.string().max(200).optional(),
+  source: z.enum(['linkedin', 'crystalknows', 'export', 'manual']),
+  linkedin_url: z.string().max(1000).optional(),
+  report_url: z.string().max(1000).optional(),
+  email: z.string().email().max(320).optional(),
+  profile_data: z.record(z.string(), z.unknown()).optional(),
+  export_source: z.enum(['linkedin', 'crystalknows']).optional(),
+  clues: z.array(z.string().max(500)).max(30).optional(),
+  purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
+  veto_power: z.boolean().optional(),
+  consent_reference: z.string().max(300).optional(),
+  consent_confirmed: z.literal(true),
+});
 
 // Limites de la version en ligne (surchargeables par environnement).
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
@@ -85,7 +103,7 @@ function collectiveView(swarm, configuration, tenantId) {
     agents: active.map((id) => swarm.registry.get(id, { tenantId })).filter(Boolean).map((agent) => ({
       agent_id: agent.agent_id, role_name: agent.role_name, display_name: agent.display_name || agent.role_name,
       department: agent.department, tools: agent.tools || [], provider: agent.provider || null, model: agent.model || null,
-      veto_power: agent.veto_power === true, hybrid: !!agent.human_profile,
+      veto_power: agent.veto_power === true, hybrid: !!agent.human_profile, impersonator: !!agent.metadata?.impersonator,
     })),
   };
 }
@@ -190,6 +208,46 @@ export default async function consoleRoute(app) {
       const agent = app.kayrosContext.engine.swarm.assignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
       await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
     } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---
+  app.post('/v1/console/impersonators', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const parsed = impersonatorSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'agent impersonateur invalide', issues: parsed.error.issues });
+    const d = parsed.data;
+    try {
+      await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
+      const impersonator = {
+        persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
+        source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
+        consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [],
+      };
+      const definition = impersonatorAgentDefinition({
+        agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
+        human_profile: { assigned_name: d.name, professional_context: { current_role: d.role || null, company: d.company || null } },
+      });
+      let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
+      const imports = [];
+      if (d.source === 'linkedin' && d.linkedin_url) imports.push({ source: 'linkedin', linkedin_url: d.linkedin_url });
+      if (d.source === 'crystalknows' && (d.email || d.linkedin_url || d.report_url)) {
+        imports.push({ source: 'crystalknows', email: d.email || undefined, linkedin_url: d.linkedin_url || undefined, profile_url: d.report_url || undefined });
+      }
+      if (d.source === 'export' && d.profile_data) imports.push({ source: d.export_source || 'crystalknows', profile_data: d.profile_data });
+      let enrichmentError = null;
+      if (imports.length) {
+        try {
+          agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(agent.agent_id, { consent_confirmed: true, imports }, { tenantId: me.tenantId, by: me.email });
+        } catch (error) { enrichmentError = error.message; }
+      }
+      try {
+        agent = app.kayrosContext.engine.swarm.updateAgent(agent.agent_id, {
+          metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) },
+        }, { tenantId: me.tenantId, by: me.email });
+      } catch { /* la persona de base reste valide */ }
+      await app.kayrosContext.engine.swarm.flush?.();
+      return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error: enrichmentError });
+    } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
 
   // --- Connecteurs de canaux externes ------------------------------------

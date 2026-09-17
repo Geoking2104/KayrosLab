@@ -139,3 +139,27 @@ test('console exposes one-click connector connection and reports unavailable pla
   assert.equal(overview.json().capabilities.connector_oauth.slack, true);
   assert.equal(overview.json().capabilities.connector_oauth.teams, false);
 });
+
+test('console builds an impersonator agent from clues and wires its guardrails', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const created = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: {
+    name: 'Camille Dubois', role: 'VP Procurement', company: 'Northwind', source: 'manual',
+    clues: ['décide vite', 'exige des preuves chiffrées'], purpose: 'idea_test', consent_confirmed: true,
+  } });
+  assert.equal(created.statusCode, 201);
+  const body = created.json();
+  assert.equal(body.agent.agent_id, 'imposteur_camille_dubois');
+  assert.equal(body.agent.metadata.impersonator.persona_name, 'Camille Dubois');
+  assert.equal(body.agent.human_profile.consent_confirmed, true);
+  assert.equal(body.guardrails.length, 5);
+  assert.match(body.agent.effective_context, /PERSONA SIMULATION/);
+  assert.ok(body.agent.effective_rules.some((rule) => rule.origin === 'impersonator'));
+  const overview = await app.inject({ method: 'GET', url: '/v1/console/overview' });
+  assert.ok(overview.json().agents.some((agent) => agent.agent_id === 'imposteur_camille_dubois'));
+});
+
+test('console rejects an impersonator without explicit consent', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const bad = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: { name: 'X', source: 'manual' } });
+  assert.equal(bad.statusCode, 400);
+});

@@ -43,6 +43,7 @@ Authenticated console endpoints:
 | `PATCH` | `/v1/console/sessions/:sessionId/collective` | Add or remove agents from the active collective |
 | `POST` | `/v1/console/sessions/:sessionId/run` | Run a governed mission from the console |
 | `POST` | `/v1/console/agents/:agentId/personality` | Import d'un profil humain consenti (Crystal Knows / LinkedIn / export autorisé / saisie) |
+| `POST` | `/v1/console/impersonators` | Crée un **agent impersonator** : persona reconstruite depuis des indices (LinkedIn / Crystal Knows / export / manuel) + garde-fous |
 | `PUT` | `/v1/console/agents/:agentId/human-profile` | Profil humain fourni directement (consentement explicite requis) |
 | `POST` | `/v1/console/connectors/:platform/connect` | Démarre la connexion « un bouton » d'un canal (Slack / Teams / Discord) |
 | `GET` | `/v1/console/activity` | Read the ordered execution stream |

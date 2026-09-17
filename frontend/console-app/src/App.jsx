@@ -152,6 +152,7 @@ function AgentChips({ agents }) {
   return <div className="collective-chips">{agents.map((agent) => <span className="collective-chip" key={agent.agent_id}>
     <span><strong>{agent.display_name}</strong><small>{agent.department}</small></span>
     {agent.hybrid ? <em title="Profil hybride conssenti">hybride</em> : null}
+    {agent.impersonator ? <em title="Persona simulée (impersonator)">persona</em> : null}
     {agent.veto_power ? <em title="Pouvoir de veto">veto</em> : null}
   </span>)}</div>;
 }
@@ -366,6 +367,57 @@ function HumanProfilePanel({ onImported, disabled }) {
 }
 
 const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false };
+
+/** Agent impersonateur : persona reconstruite depuis des indices (LinkedIn / Crystal Knows) pour éprouver une idée. */
+function ImpersonatorDialog({ onClose, onCreated }) {
+  const [form, setForm] = useState({ name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', report_url: '', email: '', purpose: 'idea_test', clues: '', veto_power: true, agent_id: '' });
+  const [exportSource, setExportSource] = useState('crystalknows');
+  const [file, setFile] = useState(null);
+  const [consent, setConsent] = useState(false);
+  const [state, setState] = useState('idle'); const [error, setError] = useState(''); const [result, setResult] = useState(null);
+  async function pickFile(event) { const chosen = event.target.files?.[0]; if (!chosen) return; try { setFile({ name: chosen.name, text: await readFileText(chosen) }); setError(''); } catch (err) { setError(err.message); } }
+  async function submit(event) {
+    event.preventDefault(); setError('');
+    if (!consent) { setError('Consentement explicite requis avant de reconstruire une persona.'); return; }
+    setState('loading');
+    try {
+      const body = {
+        name: form.name.trim(), role: form.role.trim() || undefined, company: form.company.trim() || undefined,
+        source: form.source, purpose: form.purpose, veto_power: form.veto_power,
+        clues: splitLines(form.clues), agent_id: form.agent_id.trim() || undefined,
+        consent_confirmed: true,
+      };
+      if (form.source === 'linkedin') body.linkedin_url = form.linkedin_url.trim() || undefined;
+      if (form.source === 'crystalknows') { body.email = form.email.trim() || undefined; body.linkedin_url = form.linkedin_url.trim() || undefined; body.report_url = form.report_url.trim() || undefined; }
+      if (form.source === 'export') { if (!file) throw new Error('Sélectionnez un export autorisé (JSON).'); body.export_source = exportSource; body.profile_data = jsonValue(file.text, null) || { name: form.name, summary: file.text }; }
+      const response = await api.createImpersonator(body);
+      setResult(response); setState('success'); await onCreated(response.agent);
+    } catch (err) { setState('error'); setError(err.message); }
+  }
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
+    <header><div><h2>Ajouter un agent impersonator</h2><p>Reconstruire la persona d'une partie prenante à partir d'indices autorisés (LinkedIn, rapport Crystal Knows, export) pour éprouver une idée.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    {!result ? <form onSubmit={submit}>
+      <div className="form-grid three"><label>Personne simulée<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required placeholder="Ex. Directrice achats" /></label><label>Fonction<input value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Ex. VP Procurement" /></label><label>Organisation<input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} /></label></div>
+      <div className="form-grid"><label>Source des indices<select value={form.source} onChange={(e) => { setForm({ ...form, source: e.target.value }); setError(''); }}><option value="linkedin">Profil LinkedIn (indices)</option><option value="crystalknows">Rapport Crystal Knows</option><option value="export">Export autorisé (fichier)</option><option value="manual">Indices manuels</option></select></label><label>Objectif<select value={form.purpose} onChange={(e) => setForm({ ...form, purpose: e.target.value })}><option value="idea_test">Éprouver une idée</option><option value="objection_rehearsal">Répétition des objections</option><option value="pitch_review">Revue de pitch</option></select></label></div>
+      {(form.source === 'linkedin' || form.source === 'crystalknows') && <div className="form-grid"><label>URL LinkedIn<input value={form.linkedin_url} onChange={(e) => setForm({ ...form, linkedin_url: e.target.value })} placeholder="https://www.linkedin.com/in/…" /></label><label>E-mail (Crystal Knows)<input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Optionnel" /></label></div>}
+      {form.source === 'crystalknows' && <label>URL du rapport Crystal Knows<input value={form.report_url} onChange={(e) => setForm({ ...form, report_url: e.target.value })} placeholder="https://…crystalknows.com/…" /></label>}
+      {form.source === 'export' && <div className="form-grid"><label>Type d'export<select value={exportSource} onChange={(e) => setExportSource(e.target.value)}><option value="crystalknows">Crystal Knows</option><option value="linkedin">LinkedIn</option></select></label><label>Fichier (.json)<input type="file" accept=".json,.txt" onChange={pickFile} />{file ? <small>{file.name}</small> : null}</label></div>}
+      {form.source === 'manual' && <label>Indices · une ligne par élément<textarea value={form.clues} onChange={(e) => setForm({ ...form, clues: e.target.value })} placeholder="Ex. décide vite, exige des preuves chiffrées, sceptique sur le TCO…" /></label>}
+      <div className="form-grid"><label>Identifiant (optionnel)<input value={form.agent_id} onChange={(e) => setForm({ ...form, agent_id: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })} placeholder="auto" /></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Pouvoir de veto (objection bloquante)</label></div>
+      <label className="consent"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />La personne concernée a consenti à cette simulation pour éprouver l'idée. Aucun usage pour une décision à effet matériel.</label>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
+      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Reconstruction…' : 'Créer l\'agent impersonator'}</button></footer>
+    </form> : <>
+      <p className="auth-success" role="status">Agent « {result.agent.display_name} » créé ({result.agent.agent_id}). Personnalité intégrée au registre : ajoutez-le à un collectif pour éprouver l'idée.</p>
+      <h3 className="so-kicker">Persona reconstruite</h3>
+      <dl className="profile-summary"><div><dt>DISC</dt><dd>{result.persona?.disc || '—'}</dd></div><div><dt>Archétype</dt><dd>{result.persona?.archetype || '—'}</dd></div><div><dt>Ton</dt><dd>{result.persona?.tone || '—'}</dd></div><div><dt>Motivateurs</dt><dd>{(result.persona?.motivators || []).join(', ') || '—'}</dd></div></dl>
+      <h3 className="so-kicker">Garde-fous appliqués</h3>
+      <ul className="so-booklist">{(result.guardrails || []).map((g) => <li key={g.rule_id}><span className="so-book-meta"><strong>{g.rule_id}</strong><small>{g.rule_text}</small></span></li>)}</ul>
+      {result.enrichment_error && <p className="inline-error">Enrichissement du profil partiel : {result.enrichment_error}</p>}
+      <footer><button type="button" className="button primary" onClick={onClose}>Terminer</button></footer>
+    </>}
+  </section></div>;
+}
 function agentForm(agent) { return agent ? { ...agent, constraints: (agent.constraints || []).join('\n'), tools: (agent.tools || []).join(', '), connectors: agent.connectors || ['console'], rules: (agent.rule_configuration?.user_added_rules || []).map((rule) => rule.rule_text).join('\n'), metadata: JSON.stringify(agent.metadata || {}, null, 2), behavioral: JSON.stringify(agent.behavioral_profile || {}, null, 2) } : emptyAgent; }
 
 function AgentEditor({ agent, capabilities, onSaved, onClose }) {
@@ -437,12 +489,14 @@ function HybridAgentDialog({ onClose, onCreated }) {
 function AgentsPage({ data, refresh }) {
   const [editing, setEditing] = useState(undefined);
   const [hybrid, setHybrid] = useState(false);
+  const [impersonator, setImpersonator] = useState(false);
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils et profil hybride consenti sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button primary" onClick={() => setHybrid(true)}>Ajouter un agent hybride</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button></div></header>
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
-    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
+    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
     {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
+    {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
   </section>;
 }
 
