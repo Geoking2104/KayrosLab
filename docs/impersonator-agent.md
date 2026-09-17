@@ -131,15 +131,53 @@ Response `201`:
 Related endpoints: `POST /v1/console/agents/:id/personality` (enrich an existing agent),
 `PUT /v1/console/agents/:id/human-profile` (direct consented profile).
 
+### 9.b Impersonator teams (a panel of personas)
+
+Several impersonators can be created **and opened as one session** in a single call, so an idea is
+tested against a whole stakeholder panel at once.
+
+`POST /v1/console/impersonator-teams` (auth; `comex`/`admin`)
+
+```jsonc
+{
+  "name": "Panel achats 2026",
+  "purpose": "idea_test",                 // shared by every member
+  "voting_threshold": "majority",        // unanimous | majority | veto_power_csuite
+  "veto_power": true,                     // each persona blocks consensus until arbitration
+  "consent_confirmed": true,              // one consent gate for the whole team
+  "members": [
+    { "name": "Camille Dubois", "role": "VP Procurement", "company": "Northwind", "source": "crystalknows", "email": "camille@northwind.example" },
+    { "name": "Marc Petit",     "role": "DSI",            "company": "Northwind", "source": "manual", "clues": ["prudent", "exige un plan de migration"] }
+  ]
+}
+```
+
+Response `201`:
+
+```jsonc
+{
+  "session": { "session_id": "…", "name": "Panel achats 2026", "collective": { "active_agents": ["imposteur_camille_dubois", "imposteur_marc_petit"], "voting_threshold": "majority" } },
+  "agents": [ { "agent_id": "imposteur_camille_dubois", "effective_rules": [ /* incl. IMP_* */ ], "…": "…" } ],
+  "personas": [ { "agent_id": "…", "name": "Camille Dubois", "disc": "D/C", "tone": "direct", "…": "…" } ],
+  "errors": []                             // per-member enrichment failures (the base persona is still created)
+}
+```
+
+Rules: 2–12 members; every member becomes an impersonator agent (guardrails included) and joins the
+session's collective; the session counts against the per-user session limit; a member whose upstream
+profile lookup fails is still created (reported in `errors`).
+
 ## 10. Console UX
 
-Agents → **Ajouter un agent impersonator**:
+Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'impersonators** (panel) :
 
 1. identity (person / role / organisation);
 2. clue source (LinkedIn / Crystal Knows / export / manual) + objective;
 3. explicit consent checkbox (mandatory);
 4. creation → **persona summary** (DISC, archétype, ton, motivateurs) + the applied **guardrails**;
 5. the agent appears in the register (badge *persona*) and can be added to a session to run the idea test.
+6. **Team flow**: name the team, add 2–12 personas (name/role/org + source), one consent, then create —
+   the console opens a session whose collective is exactly that panel, ready for the idea test.
 
 ## 11. Limits / non-goals
 

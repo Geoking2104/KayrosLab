@@ -48,6 +48,7 @@ export const api = {
   importPersonality: (agentId, input) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/personality`, { method: 'POST', body: JSON.stringify(input) }),
   setHumanProfile: (agentId, profile) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/human-profile`, { method: 'PUT', body: JSON.stringify(profile) }),
   createImpersonator: (input) => request('/v1/console/impersonators', { method: 'POST', body: JSON.stringify(input) }),
+  createImpersonatorTeam: (input) => request('/v1/console/impersonator-teams', { method: 'POST', body: JSON.stringify(input) }),
   connectConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/connect`, { method: 'POST', body: '{}' }),
   connectors: () => request('/v1/console/connectors'),
   configureConnector: (platform, input) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PUT', body: JSON.stringify(input) }),

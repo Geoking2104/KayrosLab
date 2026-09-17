@@ -163,3 +163,30 @@ test('console rejects an impersonator without explicit consent', async (t) => {
   const bad = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: { name: 'X', source: 'manual' } });
   assert.equal(bad.statusCode, 400);
 });
+
+test('console creates an impersonator TEAM session with several personas', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const created = await app.inject({ method: 'POST', url: '/v1/console/impersonator-teams', payload: {
+    name: 'Panel achats 2026', consent_confirmed: true, voting_threshold: 'majority', veto_power: true,
+    members: [
+      { name: 'Camille Dubois', role: 'VP Procurement', company: 'Northwind', source: 'manual', clues: ['décide vite'] },
+      { name: 'Marc Petit', role: 'DSI', company: 'Northwind', source: 'manual' },
+    ],
+  } });
+  assert.equal(created.statusCode, 201);
+  const body = created.json();
+  assert.equal(body.agents.length, 2);
+  assert.deepEqual(body.agents.map((agent) => agent.agent_id), ['imposteur_camille_dubois', 'imposteur_marc_petit']);
+  assert.deepEqual(body.agents.map((agent) => agent.metadata.impersonator.persona_name), ['Camille Dubois', 'Marc Petit']);
+  assert.equal(body.session.name, 'Panel achats 2026');
+  assert.equal(body.session.collective.active_agents.length, 2);
+  assert.equal(body.session.collective.voting_threshold, 'majority');
+  // The team is a real session: it appears in the sessions list.
+  const sessions = await app.inject({ method: 'GET', url: '/v1/console/sessions' });
+  assert.ok(sessions.json().sessions.some((session) => session.session_id === body.session.session_id));
+
+  const few = await app.inject({ method: 'POST', url: '/v1/console/impersonator-teams', payload: {
+    name: 'Trop petit', consent_confirmed: true, members: [{ name: 'Seul', source: 'manual' }],
+  } });
+  assert.equal(few.statusCode, 400);
+});

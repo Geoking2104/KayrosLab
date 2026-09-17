@@ -449,6 +449,65 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
   </section></div>;
 }
 
+/** Équipe d'impersonators : plusieurs personas simulées réunies dans une session pour éprouver une idée. */
+function ImpersonatorTeamDialog({ onClose, onCreated }) {
+  const blank = { name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', email: '', clues: '' };
+  const [form, setForm] = useState({ name: '', purpose: 'idea_test', voting_threshold: 'majority', veto_power: true });
+  const [members, setMembers] = useState([{ ...blank }, { ...blank }, { ...blank }]);
+  const [consent, setConsent] = useState(false);
+  const [state, setState] = useState('idle'); const [error, setError] = useState(''); const [result, setResult] = useState(null);
+  function updateMember(index, patch) { setMembers((current) => current.map((member, i) => (i === index ? { ...member, ...patch } : member))); }
+  function addMember() { setMembers((current) => (current.length >= 12 ? current : [...current, { ...blank }])); }
+  function removeMember(index) { setMembers((current) => (current.length <= 2 ? current : current.filter((_, i) => i !== index))); }
+  function payloadMember(member) {
+    const body = { name: member.name.trim(), role: member.role.trim() || undefined, company: member.company.trim() || undefined, source: member.source };
+    if (member.source === 'linkedin') body.linkedin_url = member.linkedin_url.trim() || undefined;
+    if (member.source === 'crystalknows') { body.email = member.email.trim() || undefined; body.linkedin_url = member.linkedin_url.trim() || undefined; }
+    if (member.source === 'manual') body.clues = splitLines(member.clues);
+    return body;
+  }
+  async function submit(event) {
+    event.preventDefault(); setError('');
+    if (!consent) { setError('Consentement explicite requis pour chaque persona simulée.'); return; }
+    const filled = members.filter((member) => member.name.trim());
+    if (filled.length < 2) { setError('Renseignez au moins deux personas (nom requis).'); return; }
+    setState('loading');
+    try {
+      const body = {
+        name: form.name.trim(), purpose: form.purpose, voting_threshold: form.voting_threshold,
+        veto_power: form.veto_power, consent_confirmed: true, members: filled.map(payloadMember),
+      };
+      const response = await api.createImpersonatorTeam(body);
+      setResult(response); setState('success'); await onCreated(response);
+    } catch (err) { setState('error'); setError(err.message); }
+  }
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
+    <header><div><h2>Créer une équipe d'impersonators</h2><p>Réunissez plusieurs personas simulées dans un collectif (session) pour éprouver une idée face à plusieurs parties prenantes.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+    {!result ? <form onSubmit={submit}>
+      <div className="form-grid"><label>Nom de l'équipe<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ex. Panel achats 2026" required /></label><label>Objectif<select value={form.purpose} onChange={(e) => setForm({ ...form, purpose: e.target.value })}><option value="idea_test">Éprouver une idée</option><option value="objection_rehearsal">Répétition des objections</option><option value="pitch_review">Revue de pitch</option></select></label></div>
+      <div className="form-grid"><label>Seuil de consensus<select value={form.voting_threshold} onChange={(e) => setForm({ ...form, voting_threshold: e.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Chaque persona a un pouvoir de veto</label></div>
+      <fieldset><legend>Personas simulées ({members.length}/12 · minimum 2)</legend><div className="so-manager">
+        {members.map((member, index) => <section key={index} className="analysis-card">
+          <div className="form-grid three"><label>Personne<input value={member.name} onChange={(e) => updateMember(index, { name: e.target.value })} placeholder="Nom" /></label><label>Fonction<input value={member.role} onChange={(e) => updateMember(index, { role: e.target.value })} /></label><label>Organisation<input value={member.company} onChange={(e) => updateMember(index, { company: e.target.value })} /></label></div>
+          <div className="form-grid"><label>Source<select value={member.source} onChange={(e) => updateMember(index, { source: e.target.value })}><option value="linkedin">Profil LinkedIn</option><option value="crystalknows">Rapport Crystal Knows</option><option value="manual">Indices manuels</option></select></label><label>{member.source === 'crystalknows' ? 'E-mail (Crystal Knows)' : 'URL LinkedIn'}{member.source === 'manual' ? '' : <input value={member.source === 'crystalknows' ? member.email : member.linkedin_url} onChange={(e) => updateMember(index, member.source === 'crystalknows' ? { email: e.target.value } : { linkedin_url: e.target.value })} />}</label></div>
+          {member.source === 'manual' && <label>Indices · une ligne par élément<textarea value={member.clues} onChange={(e) => updateMember(index, { clues: e.target.value })} /></label>}
+          {members.length > 2 && <button type="button" className="text-button" onClick={() => removeMember(index)}>Retirer cette persona</button>}
+        </section>)}
+      </div></fieldset>
+      <div className="connector-actions"><button type="button" className="button secondary" onClick={addMember} disabled={members.length >= 12}>Ajouter une persona</button></div>
+      <label className="consent"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />Chaque personne concernée a consenti à cette simulation pour éprouver l'idée. Aucun usage pour une décision à effet matériel.</label>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
+      <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Création du panel…' : 'Créer l\'équipe et la session'}</button></footer>
+    </form> : <>
+      <p className="auth-success" role="status">Session « {result.session.name} » ouverte avec {result.session.collective.active_agents.length} persona(s) simulée(s) : {result.agents.map((a) => a.display_name).join(' · ')}.</p>
+      <h3 className="so-kicker">Persona reconstruites</h3>
+      <ul className="so-booklist">{(result.personas || []).map((p) => <li key={p.agent_id}><span className="so-book-meta"><strong>{p.name} · {p.disc || 'DISC —'}</strong><small>{[p.role, p.company, p.tone].filter(Boolean).join(' · ') || 'indices limités'}</small></span></li>)}</ul>
+      {(result.errors || []).length > 0 && <p className="inline-error">Certaines personas n'ont pas été enrichies : {result.errors.map((e) => `${e.member} (${e.error})`).join(' ; ')}</p>}
+      <footer><button type="button" className="button primary" onClick={onClose}>Terminer</button></footer>
+    </>}
+  </section></div>;
+}
+
 /** Création d'un agent hybride : identité + mission + profil humain consenti, en un seul passage. */
 function HybridAgentDialog({ onClose, onCreated }) {
   const [form, setForm] = useState({ agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', mission: '', veto_power: false });
@@ -490,13 +549,15 @@ function AgentsPage({ data, refresh }) {
   const [editing, setEditing] = useState(undefined);
   const [hybrid, setHybrid] = useState(false);
   const [impersonator, setImpersonator] = useState(false);
+  const [team, setTeam] = useState(false);
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
     {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
     {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
+    {team && <ImpersonatorTeamDialog onClose={() => setTeam(false)} onCreated={async () => { await refresh(); }} />}
   </section>;
 }
 

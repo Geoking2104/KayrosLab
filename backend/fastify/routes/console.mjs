@@ -77,6 +77,15 @@ const impersonatorSchema = z.object({
   consent_reference: z.string().max(300).optional(),
   consent_confirmed: z.literal(true),
 });
+const impersonatorMemberSchema = impersonatorSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true });
+const impersonatorTeamSchema = z.object({
+  name: z.string().min(1).max(120),
+  members: z.array(impersonatorMemberSchema).min(2).max(12),
+  purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
+  voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
+  veto_power: z.boolean().optional(),
+  consent_confirmed: z.literal(true),
+});
 
 // Limites de la version en ligne (surchargeables par environnement).
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
@@ -92,6 +101,38 @@ function surface(message) {
     .replace(/salon/gi, 'session');
 }
 function makeSessionId() { return `session_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`; }
+
+/** Crée un agent impersonator (persona + garde-fous) et renvoie l'agent, la persona et une éventuelle erreur d'enrichissement. */
+async function buildImpersonatorAgent(app, me, d) {
+  const impersonator = {
+    persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
+    source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
+    consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [],
+  };
+  const definition = impersonatorAgentDefinition({
+    agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
+    human_profile: { assigned_name: d.name, professional_context: { current_role: d.role || null, company: d.company || null } },
+  });
+  let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
+  const imports = [];
+  if (d.source === 'linkedin' && d.linkedin_url) imports.push({ source: 'linkedin', linkedin_url: d.linkedin_url });
+  if (d.source === 'crystalknows' && (d.email || d.linkedin_url || d.report_url)) {
+    imports.push({ source: 'crystalknows', email: d.email || undefined, linkedin_url: d.linkedin_url || undefined, profile_url: d.report_url || undefined });
+  }
+  if (d.source === 'export' && d.profile_data) imports.push({ source: d.export_source || 'crystalknows', profile_data: d.profile_data });
+  let enrichment_error = null;
+  if (imports.length) {
+    try {
+      agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(agent.agent_id, { consent_confirmed: true, imports }, { tenantId: me.tenantId, by: me.email });
+    } catch (error) { enrichment_error = error.message; }
+  }
+  try {
+    agent = app.kayrosContext.engine.swarm.updateAgent(agent.agent_id, {
+      metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) },
+    }, { tenantId: me.tenantId, by: me.email });
+  } catch { /* la persona de base reste valide */ }
+  return { agent, impersonator, enrichment_error };
+}
 
 function collectiveView(swarm, configuration, tenantId) {
   const active = configuration?.active_agents || [];
@@ -247,6 +288,39 @@ export default async function consoleRoute(app) {
       } catch { /* la persona de base reste valide */ }
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error: enrichmentError });
+    } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // --- Équipe d'impersonators : panel de personas pour éprouver une idée ---
+  app.post('/v1/console/impersonator-teams', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const parsed = impersonatorTeamSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'équipe impersonator invalide', issues: parsed.error.issues });
+    const d = parsed.data;
+    try {
+      await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
+      const existing = await app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
+      if (existing.length >= MAX_SESSIONS_PER_USER) {
+        return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_SESSIONS_PER_USER} sessions maximum par utilisateur.` });
+      }
+      const created = []; const personas = []; const errors = [];
+      for (const member of d.members) {
+        try {
+          const result = await buildImpersonatorAgent(app, me, { ...member, purpose: d.purpose, veto_power: d.veto_power === true });
+          created.push(result.agent);
+          personas.push({ agent_id: result.agent.agent_id, name: member.name, ...personaClues(result.agent.human_profile) });
+          if (result.enrichment_error) errors.push({ member: member.name, error: result.enrichment_error });
+        } catch (error) { errors.push({ member: member.name, error: surface(error.message) }); }
+      }
+      if (!created.length) return reply.code(400).send({ error: 'aucun agent impersonator créé', errors });
+      const room = await app.kayrosContext.hybridGateway.createRoom({
+        name: d.name, platform: 'console', external_room_id: makeSessionId(), mode: 'always',
+        swarm_name: `${d.name} — panel de personas`,
+        active_agents: created.map((agent) => agent.agent_id),
+        voting_threshold: d.voting_threshold || 'majority',
+      }, { tenantId: me.tenantId, by: me.email });
+      await app.kayrosContext.engine.swarm.flush?.();
+      return reply.code(201).send({ session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId), agents: created.map(agentView), personas, errors });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
 
