@@ -27,6 +27,8 @@ on:
       - 'index.html'
       - 'index.fr.html'
       - 'tokens.css'
+      - 'site.css'
+      - 'assets/**'
       - 'studio.css'
       - 'backend/web/public/salon/**'
       - 'legal/**'

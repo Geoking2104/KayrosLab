@@ -59,6 +59,19 @@ test('assemble-www copie accueil, salon et console', async () => {
     assert.match(salon, /id="contact"/);
     assert.match(consoleIndex, /<div id="root">/);
     assert.match(legal, /SASU KayrosLab/);
+    // New brand layer must be deployed with the site (site.css + logo assets).
+    const homeHtml = await readFile(join(dest, 'index.html'), 'utf8');
+    assert.match(homeHtml, /assets\/logo-kayroslab\.png/);
+    assert.match(homeHtml, /href="\.\/site\.css"/);
+    const site = await readFile(join(dest, 'site.css'), 'utf8');
+    assert.match(site, /--color-accent/);
+    const [logoSvg, favicon32, touch, og] = await Promise.all([
+      readFile(join(dest, 'assets/logo-kayroslab.png')),
+      readFile(join(dest, 'assets/favicon-32.png')),
+      readFile(join(dest, 'assets/apple-touch-icon.png')),
+      readFile(join(dest, 'assets/og-image.png')),
+    ]);
+    for (const buf of [logoSvg, favicon32, touch, og]) assert.ok(buf.length > 100, 'brand asset is empty');
   } finally {
     await rm(dest, { recursive: true, force: true });
   }
