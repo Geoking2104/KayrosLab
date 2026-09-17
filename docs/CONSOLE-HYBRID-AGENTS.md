@@ -52,7 +52,7 @@ Authenticated console endpoints:
 | `POST` | `/v1/console/threads/:threadId/arbitrate` | Human arbitration |
 
 Connectors expose the external channel credentials trusted by the platform. The console stores,
-tests them and starts a **one-click connection** when the server holds the provider application
+tests them and starts a **one-click SSO connection** when the server holds the provider application
 credentials (`SLACK_CLIENT_ID/SECRET` for Slack OAuth v2, `TEAMS_APP_ID/BOT_PASSWORD` for admin
 consent, `DISCORD_CLIENT_ID/BOT_TOKEN/PUBLIC_KEY` for the bot invite). The public callback
 `GET /v1/connectors/:platform/oauth/callback` completes the exchange with a single-use `state` and

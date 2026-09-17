@@ -378,7 +378,7 @@ collective answers → humans arbitrate → resume with new evidence.
 | **Impersonators** | **Persona simulation** agents rebuilt from authorised clues (LinkedIn profile, Crystal Knows report, authorised export or manual clues) with a **real portrait**, mandatory consent and five guardrails (labelled “Simulation”, never speak for the person, clues-only, idea-test purpose, no material decision). Create one agent, or **create a team of 2–12 impersonators** and open it as a session to test an idea against a whole stakeholder panel. |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
-| **Réglages** (Settings) | One-click channel connection (Slack / Teams / Discord) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
+| **Réglages** (Settings) | **One-click SSO connect** (Slack OAuth v2, Microsoft Teams admin consent, Discord bot invite) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
 
 The console runs on the same governed runtime exposed by the API: a session, its dossiers, its
 replies and its arbitrations form one durable, tenant-scoped audit trail.

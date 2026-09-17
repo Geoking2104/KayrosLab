@@ -439,3 +439,10 @@ main .frame.hero {
   main .frame.hero { padding: var(--space-lg) var(--space-md); }
   .closing-callout { padding: var(--space-md); }
 }
+
+/* --- One-click connect band (SLDS light) --- */
+.connector-band { display: grid; gap: var(--space-sm); justify-items: start; margin-block-start: var(--space-xl); padding: var(--space-lg); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.connector-list { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.connector-chip { display: inline-flex; align-items: center; padding: var(--space-2xs) var(--space-sm); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); background: var(--color-surface-raised); color: var(--color-ink); font-size: var(--text-sm); font-weight: 600; }
+.connector-band .button { margin-block-start: var(--space-2xs); }
+.scenario-shot img { width: 100%; height: auto; }
