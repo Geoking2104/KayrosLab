@@ -9,6 +9,7 @@ import {
 } from './impersonator.mjs';
 import { SwarmService } from './swarm.mjs';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from './swarm.mjs';
+import { profileFromCrystalData, profileFromLinkedInData } from './personality.mjs';
 
 const impersonator = {
   persona_name: 'Camille Dubois',
@@ -71,4 +72,21 @@ test('an agent without impersonation metadata is unchanged', () => {
   const agent = swarm.createAgent({ agent_id: 'plain', role_name: 'R', department: 'D', seniority: 'senior', primary_focus: 'F', connectors: ['console'] }, { tenantId: 't1' });
   assert.equal(impersonatorContext(agent), '');
   assert.ok(!resolveEffectiveRules(agent).some((r) => r.origin === 'impersonator'));
+});
+
+test('impersonator portrait is validated and carried into metadata + profile', () => {
+  assert.throws(() => normalizeImpersonator({ persona_name: 'X', source: 'manual', consent_confirmed: true, portrait_url: 'ftp://nope/x.jpg' }), /portrait_url/);
+  const withPortrait = { ...impersonator, portrait_url: 'https://cdn.example/camille.jpg' };
+  const definition = impersonatorAgentDefinition({ impersonator: withPortrait, human_profile: { assigned_name: 'Camille Dubois' } });
+  assert.equal(definition.metadata.impersonator.portrait_url, 'https://cdn.example/camille.jpg');
+  assert.equal(definition.human_profile.avatar_url, 'https://cdn.example/camille.jpg');
+  assert.equal(personaClues(definition.human_profile).portrait_url, 'https://cdn.example/camille.jpg');
+  const mono = impersonatorAgentDefinition({ impersonator, human_profile: { assigned_name: 'Camille Dubois' } });
+  assert.equal(mono.metadata.impersonator.portrait_url, null);
+});
+
+test('authorised exports expose the portrait when the source provides one', () => {
+  assert.equal(profileFromLinkedInData({ name: 'Camille Dubois', picture: 'https://li.example/p.jpg' }).avatar_url, 'https://li.example/p.jpg');
+  assert.equal(profileFromCrystalData({ first_name: 'Camille', picture: 'https://ck.example/p.jpg' }).avatar_url, 'https://ck.example/p.jpg');
+  assert.equal(profileFromCrystalData({ first_name: 'Camille' }).avatar_url ?? null, null);
 });

@@ -33,8 +33,13 @@ export function normalizeImpersonator(input = {}) {
   const purpose = str(input.purpose || 'idea_test').toLowerCase();
   if (!IMPERSONATOR_PURPOSES.includes(purpose)) throw new Error(`impersonator: purpose inconnu ${purpose}`);
   if (input.consent_confirmed !== true) throw new Error('impersonator: consentement explicite requis');
+  const portrait_url = str(input.portrait_url) || null;
+  if (portrait_url && !/^https:\/\//i.test(portrait_url) && !/^data:image\//i.test(portrait_url)) {
+    throw new Error('impersonator: portrait_url doit être une URL https ou une image en data-URI');
+  }
   return {
     persona_name,
+    portrait_url,
     persona_role: str(input.persona_role) || null,
     persona_company: str(input.persona_company) || null,
     source,
@@ -65,6 +70,7 @@ export function personaClues(profile) {
   const ctx = p.professional_context || {};
   return {
     display: p.assigned_name || null,
+    portrait_url: p.avatar_url || null,
     role: ctx.current_role || null,
     company: ctx.company || null,
     disc: p.disc_type || null,
@@ -126,7 +132,7 @@ export function impersonatorContext(agent) {
 /** Build the impersonator agent definition from a request + an imported profile. */
 export function impersonatorAgentDefinition({ agent_id, display_name, role_name, department, seniority = 'executive', mission, impersonator, human_profile, veto_power = true } = {}) {
   const i = normalizeImpersonator(impersonator);
-  const profile = normalizeHumanProfile({ ...(human_profile || {}), consent_confirmed: true, assigned_name: (human_profile || {}).assigned_name || i.persona_name });
+  const profile = normalizeHumanProfile({ ...(human_profile || {}), consent_confirmed: true, assigned_name: (human_profile || {}).assigned_name || i.persona_name, avatar_url: (human_profile || {}).avatar_url || i.portrait_url || null });
   const id = slug(agent_id || `imposteur_${i.persona_name}`);
   const role = str(role_name) || [i.persona_role, i.persona_company].filter(Boolean).join(' · ') || `Persona ${i.persona_name}`;
   const focus = str(mission) || `Simuler la partie prenante « ${i.persona_name} » pour éprouver une idée (objections, conditions, déclencheurs).`;

@@ -72,6 +72,7 @@ const impersonatorSchema = z.object({
   profile_data: z.record(z.string(), z.unknown()).optional(),
   export_source: z.enum(['linkedin', 'crystalknows']).optional(),
   clues: z.array(z.string().max(500)).max(30).optional(),
+  portrait_url: z.string().max(3000000).regex(/^(https:\/\/|data:image\/)/i, 'portrait_url doit être une URL https ou une image data-URI').optional(),
   purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
   veto_power: z.boolean().optional(),
   consent_reference: z.string().max(300).optional(),
@@ -107,11 +108,11 @@ async function buildImpersonatorAgent(app, me, d) {
   const impersonator = {
     persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
     source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
-    consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [],
+    consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [], portrait_url: d.portrait_url || null,
   };
   const definition = impersonatorAgentDefinition({
     agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
-    human_profile: { assigned_name: d.name, professional_context: { current_role: d.role || null, company: d.company || null } },
+    human_profile: { assigned_name: d.name, avatar_url: d.portrait_url || null, professional_context: { current_role: d.role || null, company: d.company || null } },
   });
   let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
   const imports = [];
@@ -259,35 +260,9 @@ export default async function consoleRoute(app) {
     const d = parsed.data;
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
-      const impersonator = {
-        persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
-        source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
-        consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [],
-      };
-      const definition = impersonatorAgentDefinition({
-        agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
-        human_profile: { assigned_name: d.name, professional_context: { current_role: d.role || null, company: d.company || null } },
-      });
-      let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
-      const imports = [];
-      if (d.source === 'linkedin' && d.linkedin_url) imports.push({ source: 'linkedin', linkedin_url: d.linkedin_url });
-      if (d.source === 'crystalknows' && (d.email || d.linkedin_url || d.report_url)) {
-        imports.push({ source: 'crystalknows', email: d.email || undefined, linkedin_url: d.linkedin_url || undefined, profile_url: d.report_url || undefined });
-      }
-      if (d.source === 'export' && d.profile_data) imports.push({ source: d.export_source || 'crystalknows', profile_data: d.profile_data });
-      let enrichmentError = null;
-      if (imports.length) {
-        try {
-          agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(agent.agent_id, { consent_confirmed: true, imports }, { tenantId: me.tenantId, by: me.email });
-        } catch (error) { enrichmentError = error.message; }
-      }
-      try {
-        agent = app.kayrosContext.engine.swarm.updateAgent(agent.agent_id, {
-          metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) },
-        }, { tenantId: me.tenantId, by: me.email });
-      } catch { /* la persona de base reste valide */ }
+      const { agent, impersonator, enrichment_error } = await buildImpersonatorAgent(app, me, d);
       await app.kayrosContext.engine.swarm.flush?.();
-      return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error: enrichmentError });
+      return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
 

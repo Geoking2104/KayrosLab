@@ -33,7 +33,7 @@ feeds a materially impactful decision about them.
 |---|---|---|
 | `linkedin` | Identity/professional context via the official LinkedIn Profile API (authenticated member) or user-supplied authorised export. | No scraping. Only the member's own profile through the standard API. |
 | `crystalknows` | Crystal Profiles API lookup by LinkedIn URL or email (eligible plans) → DISC, archétype, motivateurs, triggers, objection patterns. | Server-side token only. |
-| `export` | An authorised structured export (JSON) parsed client-side then sent as `profile_data`. | The user certifies the export is authorised. |
+| `export` | An authorised structured export (JSON) parsed client-side then sent as `profile_data`. | The user certifies the export is authorised. Portrait taken from the export when present. |
 | `manual` | Free-text clues entered by the operator. | Lowest fidelity; still gated by consent + guardrails. |
 
 ## 4. Consent, legal and ethics (mandatory)
@@ -93,6 +93,19 @@ Each impersonator contribution must:
 | `IMP_03_CLUES_ONLY` | Use only supplied clues; invent no private fact; flag gaps. |
 | `IMP_04_IDEA_TEST` | Usage limited to the declared purpose (idea test / objection rehearsal / pitch review). |
 | `IMP_05_NO_MATERIAL_DECISION` | Never contribute to a materially impactful decision about the person. |
+
+### 8.b Portrait (real picture)
+
+Every impersonator carries a portrait so the console shows the real face next to the simulated verdict.
+
+| Aspect | Rule |
+|---|---|
+| Source | Only from an **authorised** origin: the Crystal Knows report image, the LinkedIn OpenID `picture` claim / Profile API `profilePicture` of the member, or an operator-supplied image file. |
+| No scraping | LinkedIn is never scraped; a portrait that the source does not return stays absent. |
+| Validation | `portrait_url` must be `https://…` or an `image/*` data-URI (a local upload is inlined); anything else is rejected (HTTP 400). |
+| Storage | `metadata.impersonator.portrait_url` and mirrored in `human_profile.avatar_url`; surfaced in `persona.portrait_url`. |
+| Fallback | When no portrait is available the UI renders a **monogram** (initials) — never a stand-in photo of someone else. |
+| Usage | The portrait identifies the simulated persona in the UI only; it is never presented as the person endorsing the output. |
 
 ## 9. API
 

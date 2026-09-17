@@ -145,11 +145,15 @@ test('console builds an impersonator agent from clues and wires its guardrails',
   const created = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: {
     name: 'Camille Dubois', role: 'VP Procurement', company: 'Northwind', source: 'manual',
     clues: ['décide vite', 'exige des preuves chiffrées'], purpose: 'idea_test', consent_confirmed: true,
+    portrait_url: 'https://cdn.example/camille.jpg',
   } });
   assert.equal(created.statusCode, 201);
   const body = created.json();
   assert.equal(body.agent.agent_id, 'imposteur_camille_dubois');
   assert.equal(body.agent.metadata.impersonator.persona_name, 'Camille Dubois');
+  assert.equal(body.agent.metadata.impersonator.portrait_url, 'https://cdn.example/camille.jpg');
+  assert.equal(body.agent.human_profile.avatar_url, 'https://cdn.example/camille.jpg');
+  assert.equal(body.persona.portrait_url, 'https://cdn.example/camille.jpg');
   assert.equal(body.agent.human_profile.consent_confirmed, true);
   assert.equal(body.guardrails.length, 5);
   assert.match(body.agent.effective_context, /PERSONA SIMULATION/);
@@ -161,6 +165,14 @@ test('console builds an impersonator agent from clues and wires its guardrails',
 test('console rejects an impersonator without explicit consent', async (t) => {
   const { app } = await buildApp(); t.after(() => app.close());
   const bad = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: { name: 'X', source: 'manual' } });
+  assert.equal(bad.statusCode, 400);
+});
+
+test('console rejects an impersonator portrait that is not https or an image data-URI', async (t) => {
+  const { app } = await buildApp(); t.after(() => app.close());
+  const bad = await app.inject({ method: 'POST', url: '/v1/console/impersonators', payload: {
+    name: 'Camille Dubois', source: 'manual', consent_confirmed: true, portrait_url: 'http://insecure.example/p.jpg',
+  } });
   assert.equal(bad.statusCode, 400);
 });
 

@@ -22,6 +22,23 @@ function splitCsv(value) { return String(value || '').split(',').map((item) => i
 function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'); } catch { return fallback; } }
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
 function readFileText(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '')); reader.onerror = () => reject(new Error('Lecture du fichier impossible.')); reader.readAsText(file); }); }
+function readFileDataUrl(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '')); reader.onerror = () => reject(new Error('Lecture de l\'image impossible.')); reader.readAsDataURL(file); }); }
+
+// Portrait d'une persona : image réelle fournie par la source autorisée, sinon monogramme.
+function agentPortrait(agent) {
+  return agent?.metadata?.impersonator?.portrait_url || agent?.human_profile?.avatar_url || agent?.metadata?.persona_clues?.portrait_url || '';
+}
+function initialsOf(value) {
+  return String(value || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0].toUpperCase()).join('') || '?';
+}
+function Portrait({ agent, name, size = 28 }) {
+  const url = agentPortrait(agent);
+  const label = name || agent?.display_name || agent?.role_name || '';
+  return <span className="persona-avatar" style={{ width: size, height: size, fontSize: Math.max(10, Math.round(size * 0.36)) }} title={label}>
+    <span className="persona-avatar__mono" aria-hidden="true">{initialsOf(label)}</span>
+    {url ? <img src={url} alt="" loading="lazy" onError={(event) => { event.currentTarget.remove(); }} /> : null}
+  </span>;
+}
 
 function randomUrlToken(bytes = 32) {
   const buf = new Uint8Array(bytes);
@@ -150,6 +167,7 @@ function Connection({ connection }) {
 function AgentChips({ agents }) {
   if (!agents?.length) return null;
   return <div className="collective-chips">{agents.map((agent) => <span className="collective-chip" key={agent.agent_id}>
+    <Portrait agent={agent} name={agent.display_name} size={22} />
     <span><strong>{agent.display_name}</strong><small>{agent.department}</small></span>
     {agent.hybrid ? <em title="Profil hybride conssenti">hybride</em> : null}
     {agent.impersonator ? <em title="Persona simulée (impersonator)">persona</em> : null}
@@ -370,7 +388,7 @@ const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: 
 
 /** Agent impersonateur : persona reconstruite depuis des indices (LinkedIn / Crystal Knows) pour éprouver une idée. */
 function ImpersonatorDialog({ onClose, onCreated }) {
-  const [form, setForm] = useState({ name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', report_url: '', email: '', purpose: 'idea_test', clues: '', veto_power: true, agent_id: '' });
+  const [form, setForm] = useState({ name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', report_url: '', email: '', purpose: 'idea_test', clues: '', portrait_url: '', veto_power: true, agent_id: '' });
   const [exportSource, setExportSource] = useState('crystalknows');
   const [file, setFile] = useState(null);
   const [consent, setConsent] = useState(false);
@@ -385,6 +403,7 @@ function ImpersonatorDialog({ onClose, onCreated }) {
         name: form.name.trim(), role: form.role.trim() || undefined, company: form.company.trim() || undefined,
         source: form.source, purpose: form.purpose, veto_power: form.veto_power,
         clues: splitLines(form.clues), agent_id: form.agent_id.trim() || undefined,
+        portrait_url: form.portrait_url.trim() || undefined,
         consent_confirmed: true,
       };
       if (form.source === 'linkedin') body.linkedin_url = form.linkedin_url.trim() || undefined;
@@ -403,12 +422,14 @@ function ImpersonatorDialog({ onClose, onCreated }) {
       {form.source === 'crystalknows' && <label>URL du rapport Crystal Knows<input value={form.report_url} onChange={(e) => setForm({ ...form, report_url: e.target.value })} placeholder="https://…crystalknows.com/…" /></label>}
       {form.source === 'export' && <div className="form-grid"><label>Type d'export<select value={exportSource} onChange={(e) => setExportSource(e.target.value)}><option value="crystalknows">Crystal Knows</option><option value="linkedin">LinkedIn</option></select></label><label>Fichier (.json)<input type="file" accept=".json,.txt" onChange={pickFile} />{file ? <small>{file.name}</small> : null}</label></div>}
       {form.source === 'manual' && <label>Indices · une ligne par élément<textarea value={form.clues} onChange={(e) => setForm({ ...form, clues: e.target.value })} placeholder="Ex. décide vite, exige des preuves chiffrées, sceptique sur le TCO…" /></label>}
+      <div className="form-grid"><label>Portrait (URL LinkedIn / autorisée)<input value={form.portrait_url} onChange={(e) => setForm({ ...form, portrait_url: e.target.value })} placeholder="https://…/photo.jpg" /></label><label>Ou fichier image<input type="file" accept="image/*" onChange={async (event) => { const chosen = event.target.files?.[0]; if (!chosen) return; try { setForm((current) => ({ ...current, portrait_url: '' })); const url = await readFileDataUrl(chosen); setForm((current) => ({ ...current, portrait_url: url })); setError(''); } catch (err) { setError(err.message); } }} />{form.portrait_url?.startsWith('data:') ? <small>image locale prête</small> : null}</label></div>
       <div className="form-grid"><label>Identifiant (optionnel)<input value={form.agent_id} onChange={(e) => setForm({ ...form, agent_id: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })} placeholder="auto" /></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Pouvoir de veto (objection bloquante)</label></div>
       <label className="consent"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />La personne concernée a consenti à cette simulation pour éprouver l'idée. Aucun usage pour une décision à effet matériel.</label>
       <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
       <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Reconstruction…' : 'Créer l\'agent impersonator'}</button></footer>
     </form> : <>
       <p className="auth-success" role="status">Agent « {result.agent.display_name} » créé ({result.agent.agent_id}). Personnalité intégrée au registre : ajoutez-le à un collectif pour éprouver l'idée.</p>
+      <div className="persona-head"><Portrait agent={result.agent} name={result.agent.display_name} size={56} /><div><strong>{result.agent.display_name}</strong><small>{result.agent.role_name}</small></div></div>
       <h3 className="so-kicker">Persona reconstruite</h3>
       <dl className="profile-summary"><div><dt>DISC</dt><dd>{result.persona?.disc || '—'}</dd></div><div><dt>Archétype</dt><dd>{result.persona?.archetype || '—'}</dd></div><div><dt>Ton</dt><dd>{result.persona?.tone || '—'}</dd></div><div><dt>Motivateurs</dt><dd>{(result.persona?.motivators || []).join(', ') || '—'}</dd></div></dl>
       <h3 className="so-kicker">Garde-fous appliqués</h3>
@@ -451,7 +472,7 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
 
 /** Équipe d'impersonators : plusieurs personas simulées réunies dans une session pour éprouver une idée. */
 function ImpersonatorTeamDialog({ onClose, onCreated }) {
-  const blank = { name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', email: '', clues: '' };
+  const blank = { name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', email: '', clues: '', portrait_url: '' };
   const [form, setForm] = useState({ name: '', purpose: 'idea_test', voting_threshold: 'majority', veto_power: true });
   const [members, setMembers] = useState([{ ...blank }, { ...blank }, { ...blank }]);
   const [consent, setConsent] = useState(false);
@@ -464,6 +485,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
     if (member.source === 'linkedin') body.linkedin_url = member.linkedin_url.trim() || undefined;
     if (member.source === 'crystalknows') { body.email = member.email.trim() || undefined; body.linkedin_url = member.linkedin_url.trim() || undefined; }
     if (member.source === 'manual') body.clues = splitLines(member.clues);
+    body.portrait_url = member.portrait_url.trim() || undefined;
     return body;
   }
   async function submit(event) {
@@ -491,6 +513,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
           <div className="form-grid three"><label>Personne<input value={member.name} onChange={(e) => updateMember(index, { name: e.target.value })} placeholder="Nom" /></label><label>Fonction<input value={member.role} onChange={(e) => updateMember(index, { role: e.target.value })} /></label><label>Organisation<input value={member.company} onChange={(e) => updateMember(index, { company: e.target.value })} /></label></div>
           <div className="form-grid"><label>Source<select value={member.source} onChange={(e) => updateMember(index, { source: e.target.value })}><option value="linkedin">Profil LinkedIn</option><option value="crystalknows">Rapport Crystal Knows</option><option value="manual">Indices manuels</option></select></label><label>{member.source === 'crystalknows' ? 'E-mail (Crystal Knows)' : 'URL LinkedIn'}{member.source === 'manual' ? '' : <input value={member.source === 'crystalknows' ? member.email : member.linkedin_url} onChange={(e) => updateMember(index, member.source === 'crystalknows' ? { email: e.target.value } : { linkedin_url: e.target.value })} />}</label></div>
           {member.source === 'manual' && <label>Indices · une ligne par élément<textarea value={member.clues} onChange={(e) => updateMember(index, { clues: e.target.value })} /></label>}
+          <label>Portrait (URL autorisée)<input value={member.portrait_url} onChange={(e) => updateMember(index, { portrait_url: e.target.value })} placeholder="https://…/photo.jpg" /></label>
           {members.length > 2 && <button type="button" className="text-button" onClick={() => removeMember(index)}>Retirer cette persona</button>}
         </section>)}
       </div></fieldset>
@@ -501,7 +524,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
     </form> : <>
       <p className="auth-success" role="status">Session « {result.session.name} » ouverte avec {result.session.collective.active_agents.length} persona(s) simulée(s) : {result.agents.map((a) => a.display_name).join(' · ')}.</p>
       <h3 className="so-kicker">Persona reconstruites</h3>
-      <ul className="so-booklist">{(result.personas || []).map((p) => <li key={p.agent_id}><span className="so-book-meta"><strong>{p.name} · {p.disc || 'DISC —'}</strong><small>{[p.role, p.company, p.tone].filter(Boolean).join(' · ') || 'indices limités'}</small></span></li>)}</ul>
+      <ul className="so-booklist">{(result.personas || []).map((p, index) => <li key={p.agent_id}><Portrait agent={result.agents[index]} name={p.name} size={28} /><span className="so-book-meta"><strong>{p.name} · {p.disc || 'DISC —'}</strong><small>{[p.role, p.company, p.tone].filter(Boolean).join(' · ') || 'indices limités'}</small></span></li>)}</ul>
       {(result.errors || []).length > 0 && <p className="inline-error">Certaines personas n'ont pas été enrichies : {result.errors.map((e) => `${e.member} (${e.error})`).join(' ; ')}</p>}
       <footer><button type="button" className="button primary" onClick={onClose}>Terminer</button></footer>
     </>}
@@ -553,7 +576,7 @@ function AgentsPage({ data, refresh }) {
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
   return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
-    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2>{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
+    <div className="agent-table">{data.agents.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
     {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
     {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}

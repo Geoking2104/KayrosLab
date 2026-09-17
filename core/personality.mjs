@@ -66,6 +66,7 @@ export function normalizeHumanProfile(input = {}) {
   }) : [];
   return compact({
     assigned_name: String(input.assigned_name || '').trim() || null,
+    avatar_url: String(input.avatar_url || '').trim() || null,
     linkedin_url: linkedin,
     crystalknows_report_url: crystal,
     disc_type: String(input.disc_type || '').trim() || null,
@@ -169,6 +170,8 @@ export function profileFromLinkedInData(data = {}, meta = {}) {
   const linkedin_url = meta.profile_url || data.linkedin_url || (vanity ? `https://www.linkedin.com/in/${vanity}` : null);
   const profile = normalizeHumanProfile({
     assigned_name, linkedin_url,
+    avatar_url: meta.avatar_url || data.picture || data.avatar_url || data.profile_picture
+      || (() => { const display = data.profilePicture?.display || data.profilePicture || {}; for (const value of Object.values(display)) { const url = value?.elements?.[0]?.identifiers?.[0]?.identifier; if (url) return url; } return null; })(),
     professional_context: {
       headline: data.localizedHeadline || data.headline || null,
       current_role: data.current_role || data.role || null,
@@ -196,6 +199,7 @@ export function profileFromCrystalData(response = {}, meta = {}) {
   const assigned_name = [data.first_name, data.last_name].filter(Boolean).join(' ') || data.name || null;
   const profile = normalizeHumanProfile({
     assigned_name,
+    avatar_url: meta.avatar_url || data.picture || data.avatar || data.profile_picture || data.image || null,
     linkedin_url: meta.linkedin_url || data.linkedin_url || null,
     crystalknows_report_url: data.url || meta.profile_url || null,
     disc_type: personalities.disc_type || data.disc_type || null,
