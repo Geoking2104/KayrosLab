@@ -198,6 +198,7 @@ export default async function consoleRoute(app) {
         agents: agents.filter((agent) => agent.enabled !== false).length,
         sessions: sessions.length,
         executions: threads.length,
+        impersonators: agents.filter((agent) => !!agent.metadata?.impersonator).length,
         pending_human_decisions: threads.filter((thread) => thread.status !== 'resolved').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,

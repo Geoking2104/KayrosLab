@@ -504,3 +504,8 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .persona-head strong { display: block; }
 .persona-head small { color: var(--color-muted); }
 .collective-chip .persona-avatar { margin-right: var(--space-2xs); }
+
+/* --- Agents : filtres par type (métier / hybride / impersonator) --- */
+.so-filters { flex-wrap: wrap; gap: var(--space-sm); margin-block: var(--space-md); }
+.so-filters .text-button { color: var(--color-muted); }
+.so-filters .text-button.is-active { color: var(--color-accent); font-weight: 600; text-decoration: underline; }

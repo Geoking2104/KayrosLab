@@ -70,7 +70,7 @@ See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
 
 *Slack, Teams, Discord or the console — every channel becomes a decision room.*
 
-- **[Agent console](#agent-console) →** Self-service workspace: harness sessions, agent registry (custom and hybrid), one-click channel connection, decision dossiers and Sales Oracle — no second login.
+- **[Agent console](#agent-console) →** Self-service workspace: harness sessions, agent registry (custom, hybrid and impersonator), persona teams, one-click channel connection, decision dossiers and Sales Oracle — no second login.
 - **[Chat connectors](#backend-api) →** Slack (signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519).
 - **[Durable dossiers](#agent-console) →** Postgres-backed decision threads you can resume with new evidence, from the same collective.
 - **[Human arbitration](#how-it-works) →** Accept the consensus, pass under conditions, or override a veto — every action recorded.
@@ -374,7 +374,8 @@ collective answers → humans arbitrate → resume with new evidence.
 |---|---|
 | **Vue d'ensemble** (Overview) | Connection status, live metrics (sessions, active agents, executions, pending arbitrations), governed mission launcher |
 | **Sessions** | Harness sessions: a stable collective, its execution log and its decision dossiers |
-| **Agents** | Registry of system, custom and hybrid agents: mission, constraints, decision rules, provider/model, tools, veto power. **Hybrid agents** combine an explicit mission with a consented human profile imported from Crystal Knows / LinkedIn, an authorized export upload, or manual entry |
+| **Agents** | Registry of system, custom, hybrid and **impersonator** agents: mission, constraints, decision rules, provider/model, tools, veto power. Filter by type (business / hybrid / impersonator). |
+| **Impersonators** | **Persona simulation** agents rebuilt from authorised clues (LinkedIn profile, Crystal Knows report, authorised export or manual clues) with a **real portrait**, mandatory consent and five guardrails (labelled “Simulation”, never speak for the person, clues-only, idea-test purpose, no material decision). Create one agent, or **create a team of 2–12 impersonators** and open it as a session to test an idea against a whole stakeholder panel. |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
 | **Réglages** (Settings) | One-click channel connection (Slack / Teams / Discord) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
@@ -596,7 +597,7 @@ deployment and limitations.
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
-| **Agent Console** | `GET /v1/console/overview` · agents CRUD (+ human profile import/upload) · connectors (one-click connect / configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` · threads · `POST /v1/console/threads/:threadId/arbitrate` |
+| **Agent Console** | `GET /v1/console/overview` · agents CRUD (+ human profile import/upload) · **impersonator agents** (`POST /v1/console/impersonators`) and **impersonator teams** (`POST /v1/console/impersonator-teams`) · connectors (one-click connect / configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` · threads · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Contact** | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | **Auteurs du domaine public** | `GET /v1/literary/authors` · `GET /v1/literary/sources` · `GET /v1/literary/search?q=` — recherche temps réel (Gutenberg, NosLivres/efele, EbooksGratuits, Wikisource) · `POST /v1/literary/authors/:authorId/agent` · `POST /v1/literary/agents` — personnalité d'agent construite depuis la somme des œuvres du domaine public (txt/html/epub) + portrait |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |

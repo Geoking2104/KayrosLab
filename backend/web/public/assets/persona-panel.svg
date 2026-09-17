@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-label="Panel of simulated personas: three stakeholder cards with portraits or monograms, each labelled Simulation, feeding one governed decision">
+  <title>Impersonator panel — simulated stakeholders in one collective</title>
+  <rect width="760" height="420" fill="#f3f2f2"/>
+  <text x="40" y="52" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" letter-spacing="2.4" fill="#0176d3">[ PERSONA SIMULATION — IDÉE SOUS ÉPREUVE ]</text>
+  <text x="40" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="27" font-weight="700" fill="#032d60">Trois parties prenantes simulées, un seul verdict argué</text>
+
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <g transform="translate(40,130)">
+      <rect width="210" height="150" rx="4" fill="#ffffff" stroke="#c9c9c9"/>
+      <circle cx="44" cy="46" r="24" fill="#0176d3"/>
+      <text x="44" y="53" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">CD</text>
+      <text x="80" y="40" font-size="15" font-weight="700" fill="#181818">Camille Dubois</text>
+      <text x="80" y="60" font-size="12" fill="#706e6b">VP Procurement · Northwind</text>
+      <rect x="16" y="86" width="86" height="20" rx="10" fill="#eaf5fe"/>
+      <text x="59" y="100" font-size="11" fill="#0b5cab" text-anchor="middle">Simulation</text>
+      <text x="16" y="128" font-size="12" fill="#3e3e3c">D/C · exige des preuves chiffrées</text>
+    </g>
+    <g transform="translate(275,130)">
+      <rect width="210" height="150" rx="4" fill="#ffffff" stroke="#c9c9c9"/>
+      <circle cx="44" cy="46" r="24" fill="#0176d3"/>
+      <text x="44" y="53" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">MP</text>
+      <text x="80" y="40" font-size="15" font-weight="700" fill="#181818">Marc Petit</text>
+      <text x="80" y="60" font-size="12" fill="#706e6b">DSI · Northwind</text>
+      <rect x="16" y="86" width="86" height="20" rx="10" fill="#eaf5fe"/>
+      <text x="59" y="100" font-size="11" fill="#0b5cab" text-anchor="middle">Simulation</text>
+      <text x="16" y="128" font-size="12" fill="#3e3e3c">prudent · plan de migration</text>
+    </g>
+    <g transform="translate(510,130)">
+      <rect width="210" height="150" rx="4" fill="#ffffff" stroke="#c9c9c9"/>
+      <circle cx="44" cy="46" r="24" fill="#0176d3"/>
+      <text x="44" y="53" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">SL</text>
+      <text x="80" y="40" font-size="15" font-weight="700" fill="#181818">Sofia Lambert</text>
+      <text x="80" y="60" font-size="12" fill="#706e6b">Directrice juridique</text>
+      <rect x="16" y="86" width="86" height="20" rx="10" fill="#fdeeee"/>
+      <text x="59" y="100" font-size="11" fill="#ea001e" text-anchor="middle">Veto</text>
+      <text x="16" y="128" font-size="12" fill="#3e3e3c">conformité · clause de sortie</text>
+    </g>
+  </g>
+
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <path d="M330 306v22M330 328h100" stroke="#c9c9c9" stroke-width="1" fill="none"/>
+    <rect x="230" y="328" width="300" height="46" rx="4" fill="#ffffff" stroke="#c9c9c9"/>
+    <text x="380" y="357" font-size="14" font-weight="700" fill="#032d60" text-anchor="middle">Dossier de décision — arbitrage humain</text>
+    <text x="40" y="404" font-size="11.5" fill="#706e6b">Indices issus d'une source autorisée (LinkedIn / Crystal Knows / export) · consentement explicite · sortie étiquetée « Simulation ».</text>
+  </g>
+</svg>
