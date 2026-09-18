@@ -1,4 +1,4 @@
-/* Gazette — Entrer / Lier X fonctionnent hors index Salon. */
+/* Gazette — Entrer / Lier X. Les erreurs restent hors du bandeau. */
 (function () {
   var API = "https://api.kayroslab.com";
   var TOKEN_KEY = "kayros-salon-token";
@@ -7,6 +7,21 @@
 
   function token() {
     try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
+  }
+  function note(msg) {
+    var el = document.getElementById("gz-sso-note");
+    if (!el) {
+      el = document.createElement("p");
+      el.id = "gz-sso-note";
+      el.style.cssText = "font-style:italic;color:#5a4e40;margin:.4rem 0 0;text-transform:none;letter-spacing:0;font-size:.88rem";
+      var acc = document.querySelector("header.mast .account");
+      if (acc && acc.parentNode) acc.parentNode.appendChild(el);
+    }
+    el.textContent = msg || "";
+    el.hidden = !msg;
+  }
+  function label(btn, text) {
+    if (btn) btn.textContent = text;
   }
   function b64url(buf) {
     var bin = "", bytes = new Uint8Array(buf);
@@ -35,7 +50,11 @@
       body: JSON.stringify({ redirectUri: redirectUri, state: state, challenge: challenge, nonce: nonce })
     });
     var j = await res.json().catch(function () { return {}; });
-    if (!res.ok || !j.url) throw new Error(j.error || "SSO refusé");
+    if (!res.ok || !j.url) {
+      var err = new Error(j.error || "sso");
+      err.status = res.status;
+      throw err;
+    }
     location.assign(j.url);
   }
   async function finishSalonSso() {
@@ -64,7 +83,7 @@
     return h;
   }
   function startX(btn) {
-    if (btn) btn.textContent = "Vers X…";
+    label(btn, "Vers X");
     fetch(API + "/v1/salon/x/oauth/start", {
       method: "POST",
       headers: headers(),
@@ -73,22 +92,34 @@
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (pack) {
         if (pack.j && pack.j.url) { location.href = pack.j.url; return; }
-        if (btn) btn.textContent = pack.j && pack.j.error ? pack.j.error : "Lier X";
+        label(btn, "Lier X");
+        note(pack.j && pack.j.error === "X_CLIENT_ID manquant"
+          ? "X n’est pas encore configuré sur l’API."
+          : "La liaison X n’a pas abouti.");
       })
-      .catch(function () { if (btn) btn.textContent = "Lier X"; });
+      .catch(function () {
+        label(btn, "Lier X");
+        note("L’API X est injoignable.");
+      });
+  }
+  function onSsoFail(btn, fallback) {
+    label(btn, fallback);
+    note("L’entrée SSO ne répond pas. Ouvrez Cercles pour entrer, puis revenez.");
   }
   function hookBind() {
     var b = document.querySelector("[data-fx-bind]");
     if (!b || b.getAttribute("data-sso-hook")) return;
     var n = b.cloneNode(true);
     n.setAttribute("data-sso-hook", "1");
+    label(n, token() && n.getAttribute("data-bound") ? n.textContent : "Lier X");
     b.parentNode.replaceChild(n, b);
     n.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
+      note("");
       if (!token()) {
-        n.textContent = "Entrée…";
-        startSalonSso(true).catch(function (err) { n.textContent = err.message || "Lier X"; });
+        label(n, "Entrée");
+        startSalonSso(true).catch(function () { onSsoFail(n, "Lier X"); });
         return;
       }
       if (n.getAttribute("data-bound")) return;
@@ -99,16 +130,17 @@
     var btn = document.getElementById("salon-auth");
     if (!btn || btn.getAttribute("data-sso")) return;
     btn.setAttribute("data-sso", "1");
-    if (token()) btn.textContent = "Sortir";
+    label(btn, token() ? "Sortir" : "Entrer");
     btn.addEventListener("click", function (e) {
       e.preventDefault();
+      note("");
       if (token()) {
         try { localStorage.removeItem(TOKEN_KEY); } catch (err) {}
         location.reload();
         return;
       }
-      btn.textContent = "Entrée…";
-      startSalonSso(false).catch(function (err) { btn.textContent = err.message || "Entrer"; });
+      label(btn, "Entrée");
+      startSalonSso(false).catch(function () { onSsoFail(btn, "Entrer"); });
     });
   }
   function boot() {
