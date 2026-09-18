@@ -1,45 +1,106 @@
-/* Overlay: contrat de parole PRISE / REPLIQUE sur le foyer public */
+/* Overlay foyer : fil sémantique + titres français */
 (function () {
-  var orig = window.fetch;
-  if (!orig) return;
+  var TITLES = window.SALON_TITLES || {};
+  var KEYS = Object.keys(TITLES).sort(function (a, b) { return b.length - a.length; });
+  function rewriteTitles(s) {
+    var out = String(s || "");
+    for (var i = 0; i < KEYS.length; i++) {
+      var src = KEYS[i];
+      if (out.indexOf(src) >= 0) out = out.split(src).join(TITLES[src]);
+    }
+    return out;
+  }
+  function tableQuestion() {
+    var p = document.querySelector(".protocol p");
+    return p ? String(p.textContent || "").replace(/\s+/g, " ").trim() : "";
+  }
+  function thread() {
+    var q = tableQuestion();
+    var items = [].slice.call(document.querySelectorAll("ol.msgs li.msg"));
+    var lines = [];
+    items.slice(-8).forEach(function (li) {
+      var name = ((li.querySelector("header strong") || {}).textContent || "").trim();
+      var body = ((li.querySelector("p") || {}).textContent || "").replace(/\s+/g, " ").trim();
+      var proof = ((li.querySelector("p.proof") || {}).textContent || "").trim();
+      if (!body || /salon reflechit/i.test(body)) return;
+      var prise = "";
+      var m = proof.match(/Prise\s*[—\-]\s*(.+)/i);
+      if (m) prise = m[1].replace(/\s{2,}.*$/, "").trim();
+      lines.push({ name: name || (li.classList.contains("is-host") ? "Hôte" : "Convive"), text: body, prise: prise, host: li.classList.contains("is-host") });
+    });
+    var lastGuest = null;
+    for (var i = lines.length - 1; i >= 0; i--) {
+      if (!lines[i].host) { lastGuest = lines[i]; break; }
+    }
+    return { q: q, lines: lines, lastGuest: lastGuest };
+  }
+  function roleOf(system) {
+    var s = String(system || "").toLowerCase();
+    if (/objecteur/.test(s)) return "objecteur";
+    if (/defenseur/.test(s)) return "defenseur";
+    if (/secretaire/.test(s)) return "secretaire";
+    if (/lecteur/.test(s)) return "lecteur";
+    return "invite";
+  }
   function firstSentence(text) {
     var t = String(text || "").replace(/\s+/g, " ").trim();
     if (!t) return "";
-    var parts = t.split(/(?<=[.!?\u2026])\s+/);
+    var parts = t.split(/(?<=[.!?…])\s+/);
     var i = 0;
     while (i < parts.length && parts[i].length < 24) i++;
     var s = (parts[i] || parts[0] || "").trim();
-    if (s && !/[.!?\u2026]$/.test(s)) s += ".";
+    if (s && !/[.!?…]$/.test(s)) s += ".";
     return s.slice(0, 240);
   }
   function parsePrise(raw) {
-    var src = String(raw || "").replace(/\r\n/g, "\n").trim();
+    var src = rewriteTitles(String(raw || "").replace(/\r\n/g, "\n").trim());
     var pm = src.match(/^\s*PRISE\s*:\s*(.+)$/im);
     var bm = src.match(/REPLIQUE\s*:\s*([\s\S]+)/i);
     var prise = pm ? pm[1].replace(/^[\u00ab"]+|[\u00bb"]+$/g, "").trim() : "";
     var text = bm ? bm[1].trim() : src.replace(/^\s*PRISE\s*:.*$/im, "").replace(/^\s*REPLIQUE\s*:\s*/im, "").trim();
     text = String(text || "").replace(/\s+/g, " ").trim();
-    if (text && !/[.!?\u2026\u00bb"]$/.test(text)) {
+    if (text && !/[.!?…\u00bb"]$/.test(text)) {
       var last = text.lastIndexOf(".");
       text = last > 40 ? text.slice(0, last + 1) : text + ".";
     }
-    if (!prise) prise = firstSentence(text);
+    text = rewriteTitles(text);
+    prise = rewriteTitles(prise || firstSentence(text));
     return { prise: prise.slice(0, 220), text: text };
   }
+  function userBlock(system, asked) {
+    var th = thread();
+    var role = roleOf(system);
+    var last = th.lastGuest;
+    var duty =
+      role === "objecteur" && last
+        ? "Tu objectes à la prise précédente. Tu n'ouvres pas un autre sujet."
+        : role === "defenseur" && last
+          ? "Tu précises contre l'objection, toujours sur la question de table."
+          : role === "secretaire"
+            ? "Tu minutes le conflit : question, thèses tenues, ce qui reste ouvert."
+            : "Tu réponds d'abord à la question de table. Une thèse, puis l'ancrage.";
+    var fil = th.lines.map(function (l) {
+      return (l.name || "?") + (l.prise ? " [prise : " + l.prise + "]" : "") + " : " + l.text;
+    }).join("\n");
+    return [
+      "Question de table (fil directeur) : " + (th.q || asked),
+      last ? "Dernier tour : " + last.name + (last.prise ? " — prise : " + last.prise : "") + ". " + last.text : "Tu ouvres.",
+      duty,
+      "Chaque phrase enchaîne la précédente. Pas de dossier nouveau.",
+      "Titres : uniquement le titre français reçu.",
+      fil ? "Fil récent :\n" + fil : "",
+      "Question de l'hôte : " + asked
+    ].filter(Boolean).join("\n\n");
+  }
+  var orig = window.fetch;
+  if (!orig) return;
   window.fetch = function (url, opts) {
     var u = String(url || "");
     if (u.indexOf("/v1/demo/chat") === -1 || !opts || !opts.body) return orig.apply(this, arguments);
     try {
       var body = JSON.parse(opts.body);
-      var extra = [
-        "Tu reflechis en quatre temps sans les nommer: ecoute; memoire; jugement; parole.",
-        "Format exact:",
-        "PRISE: <these d'une phrase>",
-        "REPLIQUE:",
-        "<90 a 170 mots, phrases completes, premiere personne, un destinataire>",
-        "Interdit: phrase tronquee; collage d'extrait hors sujet; liste; Je prends la question; On me connait ainsi."
-      ].join(" ");
-      body.system = String(body.system || "") + "\n\n" + extra;
+      body.system = String(body.system || "") + "\n\nTu réfléchis : écoute la question et la dernière prise ; ancre-toi seulement si le lieu répond à CETTE question ; PRISE puis 3 à 7 phrases closes. Interdit : titre étranger ; phrase tronquée ; collage hors sujet.";
+      body.user = userBlock(body.system, String(body.user || "").replace(/^Question de l'hote:\s*/i, ""));
       opts = Object.assign({}, opts, { body: JSON.stringify(body) });
     } catch (e) {}
     return orig.call(this, url, opts).then(function (res) {
