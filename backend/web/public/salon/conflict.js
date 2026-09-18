@@ -1,7 +1,8 @@
-/* ConflictState + graphe des prises */
+/* ConflictState + graphe + sentiment dans le temps */
 (function () {
   var KIND_FR = { ouvre: "ouvre", accorde: "accorde", distingue: "distingue", contredit: "contredit", precise: "précise", compose: "compose" };
   var KIND_COL = { ouvre: "#6b5b4a", accorde: "#3d6b4f", distingue: "#8a5a12", contredit: "#7a2e24", precise: "#2c4a6b", compose: "#4a3d6b" };
+  var KIND_SENT = { ouvre: 0.12, accorde: 0.38, distingue: -0.22, contredit: -0.48, precise: 0.1, compose: 0.42 };
   function empty(dossier) {
     return { dossier: String(dossier || "").trim(), prises: [], liens: [], ouverts: [] };
   }
@@ -26,6 +27,23 @@
     for (var i = 0; i < pairs.length; i++) if (pairs[i][0].test(src) && out.indexOf(pairs[i][1]) < 0) out.push(pairs[i][1]);
     return out.slice(0, 3);
   }
+  function lexicalBias(text) {
+    var t = String(text || "").toLowerCase();
+    var p = (t.match(/j['’]accorde|oui|juste|exact|bien dit|d['’]accord/g) || []).length;
+    var n = (t.match(/je refuse|ce n['’]est pas|hélas|erreur|impossible|à l['’]inverse/g) || []).length;
+    return Math.max(-0.2, Math.min(0.2, (p - n) * 0.08));
+  }
+  function sentimentSeries(state) {
+    var map = {};
+    state.liens.forEach(function (l) { map[l.from] = l.kind; });
+    var acc = 0;
+    return state.prises.map(function (p, i) {
+      var kind = map[p.id] || (i === 0 ? "ouvre" : "precise");
+      acc += (KIND_SENT[kind] || 0) + lexicalBias(p.text);
+      if (acc > 1) acc = 1; if (acc < -1) acc = -1;
+      return { tour: p.tour, author: p.author, kind: kind, value: Math.round(acc * 100) / 100 };
+    });
+  }
   function unresolved(state) {
     var composed = {};
     state.liens.forEach(function (l) { if (l.kind === "compose") composed[l.to] = 1; });
@@ -34,23 +52,27 @@
   function tensionOf(state) {
     var open = unresolved(state), c = 0, d = 0;
     open.forEach(function (l) { if (l.kind === "contredit") c++; else d++; });
-    var t = 12 + c * 28 + d * 14 + state.ouverts.length * 6;
-    return Math.max(8, Math.min(100, t));
+    return Math.max(8, Math.min(100, 12 + c * 28 + d * 14 + state.ouverts.length * 6));
   }
   function phaseOf(t) {
     return t >= 70 ? "opposition vive" : t >= 40 ? "tension ouverte" : t >= 20 ? "discussion" : "apaisement";
+  }
+  function moodOf(v) {
+    return v >= 0.25 ? "accord croissant" : v <= -0.25 ? "dissonance" : "équilibre tendu";
   }
   function byId(state) {
     var m = {}; state.prises.forEach(function (p) { m[p.id] = p; }); return m;
   }
   function describe(state) {
     var last = state.liens[state.liens.length - 1], t = tensionOf(state);
+    var ser = sentimentSeries(state);
+    var now = ser.length ? ser[ser.length - 1].value : 0;
     if (!last) {
       return state.prises[0] ? "@" + state.prises[0].author + " ouvre — « " + state.prises[0].text + " »" : "Pas encore de prise. Ouvrez un cercle.";
     }
     var map = byId(state), from = map[last.from], to = map[last.to];
     var open = state.ouverts.length ? " — ouvert : " + state.ouverts.join(", ") : "";
-    return "@" + (from ? from.author : "?") + " " + KIND_FR[last.kind] + " " + (to ? "@" + to.author : "la table") + open + " · " + phaseOf(t) + " (" + t + ").";
+    return "@" + (from ? from.author : "?") + " " + KIND_FR[last.kind] + " " + (to ? "@" + to.author : "la table") + open + " · " + phaseOf(t) + " (" + t + ") · " + moodOf(now) + " (" + now + ").";
   }
   function esc(s) {
     return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
@@ -68,6 +90,7 @@
       st.textContent = [
         "#salon-conflict-viz{margin:1rem 0 1.25rem;padding:1rem 1.1rem 1.15rem;border:1px solid color-mix(in oklch,var(--ink) 16%,transparent);background:color-mix(in oklch,var(--paper) 92%,white)}",
         "#salon-conflict-viz h2{margin:0 0 .35rem;font-family:Fraunces,serif;font-size:1.15rem}",
+        "#salon-conflict-viz h3{margin:.9rem 0 .35rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}",
         "#salon-conflict-viz .cf-read{margin:0 0 .7rem;color:var(--muted);font-size:.92rem}",
         "#salon-conflict-viz .cf-bar{height:.35rem;background:color-mix(in oklch,var(--ink) 10%,transparent);margin:0 0 .85rem}",
         "#salon-conflict-viz .cf-fill{height:100%;background:var(--accent,#7a2e24);width:8%;transition:width .35s ease}",
@@ -97,9 +120,7 @@
     }
     var pad = 48, span = Math.max(1, n - 1);
     var pts = state.prises.map(function (p, i) {
-      var x = pad + (i / span) * (w - pad * 2);
-      var y = 78 + (i % 2 === 0 ? -18 : 18);
-      return { p: p, x: x, y: y };
+      return { p: p, x: pad + (i / span) * (w - pad * 2), y: 78 + (i % 2 === 0 ? -18 : 18) };
     });
     var pos = {};
     pts.forEach(function (o) { pos[o.p.id] = o; });
@@ -115,6 +136,24 @@
     }).join("");
     return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">' + edges + dots + "</svg>";
   }
+  function sentimentSvg(state) {
+    var ser = sentimentSeries(state);
+    var w = 640, h = 120, pad = 36;
+    if (!ser.length) {
+      return '<svg viewBox="0 0 640 80" role="img"><text x="24" y="44" fill="#6b5b4a" font-size="13" font-family="Source Sans 3,sans-serif">Le sentiment s’accumule tour à tour : accord monte, contradiction descend.</text></svg>';
+    }
+    var span = Math.max(1, ser.length - 1);
+    function x(i) { return pad + (i / span) * (w - pad * 2); }
+    function y(v) { return 16 + (1 - (v + 1) / 2) * (h - 40); }
+    var mid = y(0);
+    var pts = ser.map(function (s, i) { return x(i) + "," + y(s.value); }).join(" ");
+    var last = ser[ser.length - 1];
+    var dots = ser.map(function (s, i) {
+      var col = s.value >= 0.2 ? "#3d6b4f" : s.value <= -0.2 ? "#7a2e24" : "#8a5a12";
+      return '<circle cx="' + x(i) + '" cy="' + y(s.value) + '" r="4" fill="' + col + '"><title>t' + s.tour + " @" + esc(s.author) + " " + esc(KIND_FR[s.kind] || s.kind) + " · " + s.value + "</title></circle>";
+    }).join("");
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img"><line x1="' + pad + '" x2="' + (w - pad) + '" y1="' + mid + '" y2="' + mid + '" stroke="#c9b8a8" stroke-dasharray="3 4"/><text x="8" y="22" font-size="10" fill="#3d6b4f">+</text><text x="8" y="' + (h - 18) + '" font-size="10" fill="#7a2e24">−</text><polyline fill="none" stroke="#2c2118" stroke-width="1.7" points="' + pts + '"/>' + dots + '<text x="' + (w - pad) + '" y="14" text-anchor="end" font-size="11" fill="#2c2118" font-family="Source Sans 3,sans-serif">' + esc(moodOf(last.value)) + " · " + last.value + '</text></svg>';
+  }
   var state = empty("");
   function paint() {
     var box = ensureBox();
@@ -123,7 +162,7 @@
     var legend = Object.keys(KIND_FR).map(function (k) {
       return "<li><i style=\"background:" + KIND_COL[k] + "\"></i>" + KIND_FR[k] + "</li>";
     }).join("");
-    box.innerHTML = "<h2>Dynamique des conflits</h2><p class=\"cf-read\">" + esc(describe(state)) + "</p><div class=\"cf-bar\" aria-hidden=\"true\"><div class=\"cf-fill\" style=\"width:" + t + "%\"></div></div>" + graphSvg(state) + (chips ? "<ul class=\"cf-chips\">" + chips + "</ul>" : "") + "<ul class=\"cf-legend\">" + legend + "</ul>";
+    box.innerHTML = "<h2>Dynamique des conflits</h2><p class=\"cf-read\">" + esc(describe(state)) + "</p><div class=\"cf-bar\" aria-hidden=\"true\"><div class=\"cf-fill\" style=\"width:" + t + "%\"></div></div>" + graphSvg(state) + "<h3>Sentiment au fil des tours</h3>" + sentimentSvg(state) + (chips ? "<ul class=\"cf-chips\">" + chips + "</ul>" : "") + "<ul class=\"cf-legend\">" + legend + "</ul>";
     var dyn = document.getElementById("circle-dyn");
     if (dyn) {
       dyn.hidden = false;
@@ -161,7 +200,7 @@
     paint();
     return state;
   }
-  window.SalonConflict = { reset: reset, record: record, state: function () { return state; }, tension: function () { return tensionOf(state); }, paint: paint };
+  window.SalonConflict = { reset: reset, record: record, state: function () { return state; }, tension: function () { return tensionOf(state); }, sentiment: function () { return sentimentSeries(state); }, paint: paint };
   function ready(fn) {
     if (document.querySelector(".stream") || document.getElementById("circle-dyn") || document.body) { fn(); return; }
     setTimeout(function () { ready(fn); }, 40);
