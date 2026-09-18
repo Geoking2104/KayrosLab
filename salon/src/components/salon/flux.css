@@ -1,0 +1,36 @@
+.flux-desk { max-width: 72rem; }
+.flux-hero h1 { font-family: Fraunces, Georgia, serif; font-weight: 500; letter-spacing: -0.02em; }
+.flux-account { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.flux-grid { display: grid; grid-template-columns: minmax(16rem, 22rem) 1fr; gap: 1.6rem; align-items: start; }
+.flux-source label, .flux-card label { display: flex; flex-direction: column; gap: 0.35rem; margin: 0.7rem 0; font-size: 0.92rem; }
+.flux-source input, .flux-source textarea, .flux-card textarea {
+  font: inherit; width: 100%; border: 1px solid #c9b8a8; background: #fbf6ee; color: #1a1412; padding: 0.45rem 0.55rem;
+}
+.flux-post { border-left: 3px solid #6b2a2a; padding: 0.4rem 0.8rem; margin: 1rem 0; background: #f3ebe0; }
+.flux-post header { font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: #5c534e; }
+.flux-authors { list-style: none; padding: 0; margin: 0 0 1rem; }
+.flux-authors li { margin: 0.25rem 0; }
+.flux-authors em { color: #5c534e; font-style: normal; font-size: 0.85em; }
+.flux-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr)); gap: 1rem; }
+.flux-card { border: 1px solid #c9b8a8; background: #fbf6ee; padding: 0.85rem; }
+.flux-card header { display: grid; grid-template-columns: 40px 1fr auto; gap: 0.55rem; align-items: center; }
+.flux-card header img, .flux-card header em {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: grid; place-items: center;
+  background: #3d1c1c; color: #f7f1e8; font-style: normal;
+}
+.flux-card header span { display: block; color: #5c534e; font-size: 0.82rem; }
+.flux-card header b { font-weight: 500; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6b2a2a; }
+.flux-card.is-infirmation header b { color: #3d1c1c; }
+.flux-prise { font-family: Fraunces, Georgia, serif; font-style: italic; margin: 0.7rem 0; }
+.flux-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.6rem; }
+.flux-pills span { font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid #c9b8a8; padding: 0.1rem 0.35rem; }
+.flux-pills .is-warn { border-color: #6b2a2a; color: #6b2a2a; }
+.flux-tabs { display: flex; gap: 0.4rem; margin-bottom: 0.4rem; }
+.flux-tabs button { border: 0; background: transparent; padding: 0.2rem 0; color: #5c534e; cursor: pointer; }
+.flux-tabs .is-on { color: #6b2a2a; box-shadow: inset 0 -2px 0 #6b2a2a; }
+.flux-count, .flux-note { font-size: 0.8rem; color: #5c534e; }
+.flux-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.flux-gate { max-width: 36rem; }
+@media (max-width: 860px) {
+  .flux-grid { grid-template-columns: 1fr; }
+}
