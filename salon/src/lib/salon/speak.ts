@@ -4,6 +4,7 @@ import type { AgentPatch } from "./types";
 import { ANSWER_ELENCHUS, ELENCHUS } from "./dialectic";
 import { asFigure, COMPOSITION, FIGURE_BRIEF, URBANITE } from "./rhetoric";
 import { composeFromMemory, firstSentences, parseSpeech, pickGrounding } from "./reflect";
+import { rewriteTitlesInText, workTitleFr } from "./titles-fr";
 
 export const speakAsAuthor = createServerFn({ method: "POST" })
   .validator((input: {
@@ -27,10 +28,12 @@ export const speakAsAuthor = createServerFn({ method: "POST" })
 
     const apiKey = process.env.XAI_API_KEY;
     const cleaned = data.passages.slice(0, 3).map((p) => ({
-      work: p.work,
+      work: workTitleFr(p.work),
       text: firstSentences(p.text, 2),
     }));
-    const ground = pickGrounding(`${data.question} ${data.history.at(-1)?.text ?? ""}`, cleaned);
+    const last = data.history.at(-1);
+    const groundQuery = `${data.question} ${last?.prise ?? ""} ${last?.text ?? ""}`;
+    const ground = pickGrounding(groundQuery, cleaned);
     const groundedBlock = cleaned.map((p) => `« ${p.work} »\n${p.text}`).join("\n\n");
     const recent = data.history
       .slice(-8)
@@ -42,10 +45,10 @@ export const speakAsAuthor = createServerFn({ method: "POST" })
 
     const actLine =
       data.act === "objection"
-        ? `Acte : objection. Tu t’adresses à ${data.toName}. Nomme-le une fois. Ne parle pas à tout le salon.`
+        ? `Acte : objection. Tu t’adresses à ${data.toName}. Nomme-le une fois. Tu objectes à SA PRISE, pas à un autre problème.`
         : data.toward === "user"
-          ? `Acte : réponse. Tu t’adresses à l’hôte (${data.toName}). Réponds à sa réplique, pas à un autre auteur.`
-          : `Acte : réponse. Tu t’adresses à ${data.toName}. Réponds à ce qu’il vient de dire. Nomme-le une fois.`;
+          ? `Acte : réponse à l’hôte (${data.toName}). Tu réponds à la question de table telle qu’il l’a posée.`
+          : `Acte : réponse. Tu t’adresses à ${data.toName}. Tu fais avancer SA dernière prise d’un cran, toujours sur la question de table.`;
 
     const craft = elenchus
       ? [ELENCHUS]
@@ -55,14 +58,23 @@ export const speakAsAuthor = createServerFn({ method: "POST" })
 
     const format = [
       "Tu écris exactement dans cet ordre, rien avant, rien après :",
-      "PRISE: <une phrase : la thèse que ce tour ajoute, dans la langue de la question>",
+      "PRISE: <une phrase : la thèse que CE tour ajoute à la question de table>",
       "REPLIQUE:",
-      "<90 à 170 mots, phrases complètes, première personne, sans listes, sans titre, sans nommer la figure>",
+      "<90 à 170 mots, phrases complètes, première personne, sans listes, sans titre de section>",
+    ].join("\n");
+
+    const thread = [
+      `Question de table (fil directeur — ne la quitte pas) : ${data.question}`,
+      last
+        ? `Dernier tour à enchaîner : ${last.name}${last.prise ? ` — prise : ${last.prise}` : ""}. ${last.text}`
+        : "Tu ouvres la table : ressaisis la question, puis prends position.",
+      "Cohérence : chaque phrase doit pouvoir se lire comme la suite de la précédente. Pas de nouveau dossier.",
+      "Titres : cite uniquement le titre français reçu de l’œuvre.",
     ].join("\n");
 
     const memoryNote = ground.weak
-      ? "Les passages ci-dessous sont fragiles ou hors sujet. Ne les cite pas tels quels. Dis le manque, puis argumente depuis tes œuvres nommées."
-      : "Ancre-toi à un seul de ces passages, par une phrase entière tissée, œuvre nommée.";
+      ? "Les passages ci-dessous sont fragiles ou hors sujet. Ne les cite pas. Argumente depuis tes œuvres nommées (titre français), sur la question de table."
+      : "Ancre-toi à un seul de ces passages, œuvre nommée en français, seulement s’il répond à la question.";
 
     const fallbackMove = {
       id: data.authorId,
@@ -92,18 +104,18 @@ export const speakAsAuthor = createServerFn({ method: "POST" })
       body: JSON.stringify({
         model: "grok-4.5",
         max_tokens: 420,
-        temperature: 0.4,
+        temperature: 0.35,
         messages: [
           { role: "system", content: persona },
           {
             role: "user",
             content: [
               actLine,
+              thread,
               ...craft,
               format,
-              `Question de table : ${data.question}`,
-              recent ? `Fil récent (la chaîne des prises montre l’évolution) :\n${recent}` : "",
-              groundedBlock ? `${memoryNote}\n${groundedBlock}` : "Aucun passage pertinent — dis-le, puis relance depuis tes œuvres chargées.",
+              recent ? `Fil récent :\n${recent}` : "",
+              groundedBlock ? `${memoryNote}\n${groundedBlock}` : "Aucun passage pertinent — dis-le, puis relance depuis tes œuvres, sur la question.",
             ].filter(Boolean).join("\n\n"),
           },
         ],
@@ -118,5 +130,11 @@ export const speakAsAuthor = createServerFn({ method: "POST" })
     if (!spoken.text) {
       return { ok: true as const, text: fallback.text, prise: fallback.prise, grounded: Boolean(cleaned[0]) && !ground.weak, fallback: true };
     }
-    return { ok: true as const, text: spoken.text, prise: spoken.prise, grounded: data.passages.length > 0 && !ground.weak, fallback: false };
+    return {
+      ok: true as const,
+      text: rewriteTitlesInText(spoken.text),
+      prise: rewriteTitlesInText(spoken.prise),
+      grounded: data.passages.length > 0 && !ground.weak,
+      fallback: false,
+    };
   });
