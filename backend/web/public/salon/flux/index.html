@@ -38,7 +38,7 @@
     .acts { display:flex; gap:.8rem; font-size:.82rem; }
     .acts button { background:none; border:0; padding:0; font:inherit; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
     .empty { font-style:italic; color:var(--fade); }
-    .account button, .fx-bind { background:none; border:0; font:inherit; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+    .account a, .account button, .fx-bind { background:none; border:0; font:inherit; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
   </style>
 </head>
 <body>
@@ -50,7 +50,7 @@
         <a href="/salon/flux/" data-flux-x="1" class="is-on">Gazette</a>
         <a href="/salon/#agents">Auteurs</a>
         <a href="/salon/#contact">Contact</a>
-        <span class="account"><small id="salon-who" hidden></small><button type="button" id="salon-auth">Entrer</button></span>
+        <span class="account"><a id="fx-open-x" href="https://x.com/" target="_blank" rel="noopener noreferrer">Lier X</a></span>
       </nav>
     </header>
     <p class="dateline"><span id="gz-date"></span><span>Feuille du dehors · N° de séance</span></p>
@@ -67,8 +67,8 @@
     </section>
     <div class="folio" id="fx-gazette"></div>
   </div>
-  <script src="/salon/flux-x.js?v=20260918s2"></script>
-  <script src="/salon/gazette-desk.js?v=20260918s2"></script>
-  <script src="/salon/flux-sso.js?v=20260918s2"></script>
+  <script src="/salon/flux-x.js?v=20260918x3"></script>
+  <script src="/salon/gazette-desk.js?v=20260918x3"></script>
+  <script src="/salon/flux-sso.js?v=20260918x3"></script>
 </body>
 </html>
