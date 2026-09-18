@@ -65,6 +65,10 @@ You may add works to any author (Project Gutenberg, PDF, TXT).
 You may add an author. Five public-domain works, or the personality will be too thin:
 the voice will speak short, and repeat.
 
+Each turn of an author agent produces a **prise** (the claim added) and a **réplique**
+of complete sentences grounded in a named work. The chain of prises is the evolution
+of the argument. See [`SALON-AGENT-AUTEUR.md`](./SALON-AGENT-AUTEUR.md).
+
 ---
 
 ## Layout in this repository
@@ -74,7 +78,8 @@ the voice will speak short, and repeat.
 | `salon/index.html` | Playable specimen (GitHub Pages `/salon/`) |
 | `salon/avatars/` | Author portraits |
 | `salon/salon_core.wasm` | Rust floor / retrieval |
-| `salon/src/` | React engine (fiches, cercle, i18n, ingest, PDF) |
+| `salon/src/` | React engine (fiches, cercle, i18n, ingest, PDF, parole) |
+| `docs/SALON-AGENT-AUTEUR.md` | Contrat de parole de l’agent auteur |
 | `crates/salon-core/` | Rust crate (`salon_eval`) |
 | `backend/web/public/salon/` | Mirror for the static host |
 
