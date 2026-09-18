@@ -6,13 +6,15 @@
   <title>Salon</title>
   <script>
   (function () {
-    var SRC = "https://cdn.jsdelivr.net/gh/Geoking2104/KayrosLab@f42a6b6b5e1af1847e974a1954132e889ed9854d/salon/index.html";
+    var SPECIMEN = "f42a6b6b5e1af1847e974a1954132e889ed9854d";
+    var CODE = "7ddce9be2886ce01906a62d4d4cb3f0eab015a0e";
+    var SRC = "https://cdn.jsdelivr.net/gh/Geoking2104/KayrosLab@" + SPECIMEN + "/salon/index.html";
     fetch(SRC, { cache: "force-cache" }).then(function (r) { return r.text(); }).then(function (html) {
       html = html.replace(
         "Un cercle est une table. Vous y faites entrer des auteurs — 54 déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix.",
         "Un cercle est une table. Vous y faites entrer des auteurs — {n} déjà, ou un nouveau, pourvu qu’il ait cinq œuvres libres. Chacun est un convive : un @, une mémoire, une voix."
       );
-      html = html.replace('</body>', '<script src="/salon/peau-nav.js?v=20260915r" defer></script></body>');
+      html = html.replace('</body>', '<script src="/salon/peau-nav.js?v=20260918a" defer></script><script src="/salon/circle-run.js?v=20260918a" defer></script></body>');
       document.open();
       document.write(html);
       document.close();
