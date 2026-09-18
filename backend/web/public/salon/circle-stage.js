@@ -14,7 +14,7 @@
       ".salon-stage{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:1.25rem;align-items:start;max-width:1180px;margin:0 auto;padding:1rem 1.1rem 3rem}",
       "@media(max-width:860px){.salon-stage{grid-template-columns:1fr}}",
       "#salon-rail{position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow:auto;padding-right:.2rem}",
-      "#salon-rail #circle-dyn,#salon-rail #salon-conflict-viz,#salon-rail #circle-mem{margin:0 0 .85rem;font-size:.88rem}",
+      "#salon-rail #circle-dyn,#salon-rail #salon-conflict-viz,#salon-rail #circle-mem,#salon-rail #salon-kg{margin:0 0 .85rem;font-size:.88rem}",
       "#salon-rail #salon-conflict-viz svg{max-height:140px}",
       "#salon-center{min-width:0}",
       "#salon-center .stream{margin:0}",
@@ -55,7 +55,7 @@
     wrap.className = "salon-stage";
     var rail = document.createElement("aside");
     rail.id = "salon-rail";
-    rail.setAttribute("aria-label", "Dynamique des conflits");
+    rail.setAttribute("aria-label", "Dynamique et connaissances");
     var center = document.createElement("section");
     center.id = "salon-center";
     var back = document.createElement("p");
@@ -91,7 +91,7 @@
   function dock() {
     var rail = document.getElementById("salon-rail");
     if (!rail) return;
-    ["circle-dyn", "salon-conflict-viz", "circle-mem"].forEach(function (id) {
+    ["circle-dyn", "salon-conflict-viz", "salon-kg", "circle-mem"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el && el.parentNode !== rail) rail.appendChild(el);
     });
@@ -212,7 +212,6 @@
     if (busy) return;
     var ol = msgsOl();
     if (!ol) return;
-    var last = ol.querySelector("li.msg:last-of-type, .turn-break:last-of-type");
     var hasTurn = !!ol.querySelector(".turn-break") || (ol.querySelectorAll("li.msg:not(.is-host)").length >= 2);
     if (hasTurn && !ol.querySelector(".msg.is-thinking")) showRelance();
   }
@@ -291,6 +290,7 @@
       window.SalonConflict.paint = function () {
         origDock();
         dock();
+        if (window.SalonGraph && window.SalonGraph.paint) window.SalonGraph.paint();
       };
     }
   });
