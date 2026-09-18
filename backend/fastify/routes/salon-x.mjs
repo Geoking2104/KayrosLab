@@ -11,6 +11,7 @@ import {
   publicBinding,
   randomToken,
   seal,
+  SalonXStore,
 } from '../lib/salon-x.mjs';
 
 const READ = ['tweet.read', 'users.read', 'offline.access'];
@@ -23,7 +24,15 @@ function scopesOf(list) {
 }
 
 export default async function salonXRoutes(app) {
-  const store = () => app.kayrosContext.salonX;
+  const store = () => {
+    const ctx = app.kayrosContext;
+    if (!ctx.salonX) {
+      ctx.salonX = new SalonXStore({
+        dir: process.env.KAYROS_SALON_X_DIR || null,
+      });
+    }
+    return ctx.salonX;
+  };
   const client = () => app.kayrosContext.xClient || createXClient();
 
   app.post('/v1/salon/x/oauth/start', {
@@ -31,7 +40,6 @@ export default async function salonXRoutes(app) {
   }, async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     if (!configuredX()) return reply.code(503).send({ error: 'X_CLIENT_ID manquant' });
     const redirectUri = String(req.body?.redirectUri || process.env.X_OAUTH_REDIRECT || 'https://www.kayroslab.com/salon/flux/callback').slice(0, 300);
     if (!/^https?:\/\/.+\/salon\/flux\/callback\/?$/.test(redirectUri)) {
@@ -50,7 +58,6 @@ export default async function salonXRoutes(app) {
   }, async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const code = String(req.body?.code || '');
     const state = String(req.body?.state || '');
     const pending = store().takePending(state);
@@ -85,7 +92,6 @@ export default async function salonXRoutes(app) {
   app.get('/v1/salon/x/binding', async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const binding = await store().getBinding(me.sub);
     return { binding: publicBinding(binding) };
   });
@@ -93,7 +99,6 @@ export default async function salonXRoutes(app) {
   app.patch('/v1/salon/x/binding', async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const binding = await store().getBinding(me.sub);
     if (!binding) return reply.code(404).send({ error: 'compte X non lié' });
     const engagement = req.body?.engagement;
@@ -108,7 +113,6 @@ export default async function salonXRoutes(app) {
   app.delete('/v1/salon/x/binding', async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const binding = await store().getBinding(me.sub);
     if (binding?.refreshSealed) {
       try { await client().revoke(openSeal(binding.refreshSealed)); } catch { /* */ }
@@ -122,7 +126,6 @@ export default async function salonXRoutes(app) {
   }, async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const binding = await store().getBinding(me.sub);
     if (!binding?.handle) return reply.code(403).send({ error: 'compte X non lié' });
     if (!binding.scopes?.includes('tweet.write')) {
@@ -172,7 +175,6 @@ export default async function salonXRoutes(app) {
   app.delete('/v1/salon/x/tweets/:id', async (req, reply) => {
     const me = await app.requireAuth(req, reply);
     if (!me) return;
-    if (!store()) return reply.code(503).send({ error: 'salon x indisponible' });
     const id = String(req.params.id || '');
     const mine = await store().findTweet(me.sub, id);
     if (!mine) return reply.code(404).send({ error: 'tweet Salon introuvable' });
