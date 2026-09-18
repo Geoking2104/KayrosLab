@@ -1,4 +1,4 @@
-/* Overlay foyer : fil sémantique + titres français */
+/* Overlay foyer : fil sémantique + titres français + ConflictState */
 (function () {
   var TITLES = window.SALON_TITLES || {};
   var KEYS = Object.keys(TITLES).sort(function (a, b) { return b.length - a.length; });
@@ -26,7 +26,7 @@
       var prise = "";
       var m = proof.match(/Prise\s*[—\-]\s*(.+)/i);
       if (m) prise = m[1].replace(/\s{2,}.*$/, "").trim();
-      lines.push({ name: name || (li.classList.contains("is-host") ? "Hôte" : "Convive"), text: body, prise: prise, host: li.classList.contains("is-host") });
+      lines.push({ name: name || (li.classList.contains("is-host") ? "Hôte" : "Convive"), text: body, prise: prise, host: li.classList.contains("is-host"), authorId: li.getAttribute("data-author") || "" });
     });
     var lastGuest = null;
     for (var i = lines.length - 1; i >= 0; i--) {
@@ -41,6 +41,10 @@
     if (/secretaire/.test(s)) return "secretaire";
     if (/lecteur/.test(s)) return "lecteur";
     return "invite";
+  }
+  function authorOf(system) {
+    var m = String(system || "").match(/Tu incarnes\s+([^.(]+)/i) || String(system || "").match(/Tu es\s+([^.(]+)/i);
+    return m ? m[1].trim().toLowerCase().replace(/\s+/g, "") : "convive";
   }
   function firstSentence(text) {
     var t = String(text || "").replace(/\s+/g, " ").trim();
@@ -71,14 +75,16 @@
     var th = thread();
     var role = roleOf(system);
     var last = th.lastGuest;
+    var conflict = window.SalonConflict && window.SalonConflict.state ? window.SalonConflict.state() : null;
+    var open = conflict && conflict.ouverts && conflict.ouverts.length ? "Nœuds ouverts : " + conflict.ouverts.join(", ") + "." : "";
     var duty =
       role === "objecteur" && last
-        ? "Tu objectes à la prise précédente. Tu n'ouvres pas un autre sujet."
+        ? "Tu objectes à la prise précédente. Nomme-la. Tu n'ouvres pas un autre sujet. Lien : distingue ou contredit."
         : role === "defenseur" && last
-          ? "Tu précises contre l'objection, toujours sur la question de table."
+          ? "Tu précises contre l'objection, toujours sur la question de table. Lien : précise."
           : role === "secretaire"
-            ? "Tu minutes le conflit : question, thèses tenues, ce qui reste ouvert."
-            : "Tu réponds d'abord à la question de table. Une thèse, puis l'ancrage.";
+            ? "Tu minutes : question, prises tenues, nœuds encore ouverts. Lien : compose. Pas de verdict hors fil."
+            : "Tu réponds d'abord à la question de table. Une thèse, puis l'ancrage. Lien : ouvre.";
     var fil = th.lines.map(function (l) {
       return (l.name || "?") + (l.prise ? " [prise : " + l.prise + "]" : "") + " : " + l.text;
     }).join("\n");
@@ -86,21 +92,35 @@
       "Question de table (fil directeur) : " + (th.q || asked),
       last ? "Dernier tour : " + last.name + (last.prise ? " — prise : " + last.prise : "") + ". " + last.text : "Tu ouvres.",
       duty,
+      open,
       "Chaque phrase enchaîne la précédente. Pas de dossier nouveau.",
       "Titres : uniquement le titre français reçu.",
       fil ? "Fil récent :\n" + fil : "",
       "Question de l'hôte : " + asked
     ].filter(Boolean).join("\n\n");
   }
+  function remember(system, spoken) {
+    if (!window.SalonConflict || !spoken || !spoken.prise) return;
+    try {
+      window.SalonConflict.record({
+        author: authorOf(system),
+        prise: spoken.prise,
+        text: spoken.text,
+        role: roleOf(system)
+      });
+    } catch (e) {}
+  }
   var orig = window.fetch;
   if (!orig) return;
   window.fetch = function (url, opts) {
     var u = String(url || "");
     if (u.indexOf("/v1/demo/chat") === -1 || !opts || !opts.body) return orig.apply(this, arguments);
+    var system = "";
     try {
       var body = JSON.parse(opts.body);
-      body.system = String(body.system || "") + "\n\nTu réfléchis : écoute la question et la dernière prise ; ancre-toi seulement si le lieu répond à CETTE question ; PRISE puis 3 à 7 phrases closes. Interdit : titre étranger ; phrase tronquée ; collage hors sujet.";
-      body.user = userBlock(body.system, String(body.user || "").replace(/^Question de l'hote:\s*/i, ""));
+      system = String(body.system || "");
+      body.system = system + "\n\nTu réfléchis : écoute la question et la dernière prise ; ancre-toi seulement si le lieu répond à CETTE question ; PRISE puis 3 à 7 phrases closes. Interdit : titre étranger ; phrase tronquée ; collage hors sujet.";
+      body.user = userBlock(system, String(body.user || "").replace(/^Question de l'hote:\s*/i, ""));
       opts = Object.assign({}, opts, { body: JSON.stringify(body) });
     } catch (e) {}
     return orig.call(this, url, opts).then(function (res) {
@@ -109,6 +129,7 @@
         var raw = (j && (j.text || j.content)) || "";
         var spoken = parsePrise(raw);
         if (spoken.text) {
+          remember(system, spoken);
           j.text = spoken.text;
           j.content = spoken.text;
           j.prise = spoken.prise;
