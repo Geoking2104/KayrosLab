@@ -1,8 +1,6 @@
 name: Setup SSL (Let's Encrypt) - www.kayroslab.com
 
-# A lancer UNE FOIS, apres que le DNS A de kayroslab.com et www.kayroslab.com
-# pointe vers 51.210.9.71. Le vhost HTTP est pose par deploy-www.sh ;
-# ce workflow ne fait que demander le certificat puis reapplique le vhost HTTPS.
+# www.kayroslab.com -> 51.210.9.71. L'apex kayroslab.com reste GitHub Pages.
 
 on:
   workflow_dispatch:
@@ -33,7 +31,6 @@ jobs:
 
             certbot --nginx \
               -d www.kayroslab.com \
-              -d kayroslab.com \
               --non-interactive \
               --agree-tos \
               --email contact@kayroslab.com \
