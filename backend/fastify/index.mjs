@@ -56,6 +56,7 @@ await app.register((await import('./routes/literary.mjs')).default);
 await app.register((await import('./routes/auth-routes.mjs')).default);
 await app.register((await import('./routes/salon.mjs')).default);
 await app.register((await import('./routes/salon-whatsapp.mjs')).default);
+await app.register((await import('./routes/salon-x.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);
 await app.register((await import('./routes/forecasts.mjs')).default);
