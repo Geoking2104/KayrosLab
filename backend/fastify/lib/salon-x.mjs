@@ -87,6 +87,14 @@ export function createXClient(fetchImpl = globalThis.fetch) {
     return body;
   }
 
+  function tokenHeaders() {
+    const headers = { 'content-type': 'application/x-www-form-urlencoded' };
+    if (clientSecret()) {
+      headers.authorization = `Basic ${Buffer.from(`${clientId()}:${clientSecret()}`).toString('base64')}`;
+    }
+    return headers;
+  }
+
   return {
     async exchangeCode({ code, verifier, redirectUri }) {
       const params = new URLSearchParams({
@@ -96,11 +104,15 @@ export function createXClient(fetchImpl = globalThis.fetch) {
         code_verifier: verifier,
         client_id: clientId(),
       });
-      const headers = { 'content-type': 'application/x-www-form-urlencoded' };
-      if (clientSecret()) {
-        headers.authorization = `Basic ${Buffer.from(`${clientId()}:${clientSecret()}`).toString('base64')}`;
-      }
-      return request(TOKEN_URL, { method: 'POST', headers, body: params });
+      return request(TOKEN_URL, { method: 'POST', headers: tokenHeaders(), body: params });
+    },
+    async refresh(refreshToken) {
+      const params = new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+        client_id: clientId(),
+      });
+      return request(TOKEN_URL, { method: 'POST', headers: tokenHeaders(), body: params });
     },
     async me(accessToken) {
       return request(`${API}/users/me?user.fields=name,username`, {
@@ -138,7 +150,7 @@ export function createXClient(fetchImpl = globalThis.fetch) {
       try {
         await request('https://api.x.com/2/oauth2/revoke', {
           method: 'POST',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          headers: tokenHeaders(),
           body: params,
         });
       } catch {
