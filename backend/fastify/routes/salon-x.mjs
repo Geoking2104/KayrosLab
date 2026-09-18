@@ -13,6 +13,7 @@ import {
   seal,
   SalonXStore,
 } from '../lib/salon-x.mjs';
+import { withAccess } from '../lib/salon-x-access.mjs';
 
 const READ = ['tweet.read', 'users.read', 'offline.access'];
 const WRITE = ['tweet.read', 'users.read', 'tweet.write', 'offline.access'];
@@ -81,6 +82,7 @@ export default async function salonXRoutes(app) {
         linkedAt: new Date().toISOString(),
         accessSealed: seal(tokens.access_token),
         refreshSealed: seal(tokens.refresh_token || ''),
+        expiresAt: new Date(Date.now() + (Number(tokens.expires_in) > 0 ? Number(tokens.expires_in) : 7200) * 1000).toISOString(),
       };
       await store().putBinding(me.sub, binding);
       return { binding: publicBinding(binding) };
@@ -145,16 +147,19 @@ export default async function salonXRoutes(app) {
       return reply.code(429).send({ error: 'délai minimal de 45 s entre deux publications.' });
     }
 
-    const access = openSeal(binding.accessSealed);
     try {
-      const source = await client().getTweet(access, replyTo);
-      const sourceText = source.data?.text || '';
-      if (!mentionMatches(sourceText, binding.handle)) {
-        return reply.code(403).send({ error: 'API reply refusée : le compte de l’hôte n’est pas convoqué sur ce post.' });
-      }
-      const posted = await client().postTweet(access, {
-        text,
-        reply: { in_reply_to_tweet_id: replyTo },
+      const posted = await withAccess(store(), client(), me.sub, binding, async (access) => {
+        const source = await client().getTweet(access, replyTo);
+        const sourceText = source.data?.text || '';
+        if (!mentionMatches(sourceText, binding.handle)) {
+          const err = new Error('API reply refusée : le compte de l’hôte n’est pas convoqué sur ce post.');
+          err.status = 403;
+          throw err;
+        }
+        return client().postTweet(access, {
+          text,
+          reply: { in_reply_to_tweet_id: replyTo },
+        });
       });
       const id = posted.data?.id;
       if (!id) return reply.code(502).send({ error: 'X sans identifiant' });
@@ -184,9 +189,9 @@ export default async function salonXRoutes(app) {
     }
     const binding = await store().getBinding(me.sub);
     try {
-      if (binding?.accessSealed) await client().deleteTweet(openSeal(binding.accessSealed), id);
+      if (binding?.accessSealed) await withAccess(store(), client(), me.sub, binding, (access) => client().deleteTweet(access, id));
     } catch (err) {
-      return reply.code(502).send({ error: err.message || 'retrait X refusé' });
+      return reply.code(502).send({ error: err.message || 'retrait X refusée' });
     }
     await store().dropTweet(me.sub, id);
     return { ok: true };
