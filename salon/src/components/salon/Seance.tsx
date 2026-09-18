@@ -9,6 +9,7 @@ import { useSalon } from "@/lib/salon/store";
 import type { LiteraryAuthor, SpeechAct } from "@/lib/salon/types";
 import { keepSeancePdf } from "@/lib/salon/seancePdf";
 import { retrieveMemory } from "@/lib/salon/wasm";
+import { FluxLink } from "./FluxLink";
 import { SalonChrome } from "./Chrome";
 import { CreateAuthor } from "./CreateAuthor";
 
@@ -218,6 +219,7 @@ export function Seance({ circleId }: { circleId: string }) {
             <h1>{seatedCopy.name}</h1>
             <p>{seatedCopy.question}</p>
             <p className="salon-how">{t("circle.how.short")}</p>
+            <p><FluxLink circleId={room.id} locale={locale} /></p>
           </header>
           {room.turns.length === 0 && (
             <p className="salon-empty">
