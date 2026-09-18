@@ -98,7 +98,7 @@ jobs:
       - name: Restore full Salon specimen and attach scripts
         run: |
           set -e
-          mkdir -p deploy/salon
+          mkdir -p deploy/salon deploy/salon/flux
           SPECIMEN_SHA=f42a6b6b5e1af1847e974a1954132e889ed9854d
           GOOD_RUN=95f56521e8904af25e36f218a22c62b64b9ad718
           SALON_SIZE=$(wc -c < deploy/salon/index.html)
@@ -115,7 +115,9 @@ jobs:
           if [ -f backend/web/public/salon/knowledge.js ]; then cp backend/web/public/salon/knowledge.js deploy/salon/knowledge.js; fi
           if [ -f backend/web/public/salon/circle-stage.js ]; then cp backend/web/public/salon/circle-stage.js deploy/salon/circle-stage.js; fi
           if [ -f backend/web/public/salon/circle-place.js ]; then cp backend/web/public/salon/circle-place.js deploy/salon/circle-place.js; fi
-          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run|circle-ui|peau-nav|circle-speech|titles-fr|conflict|knowledge|circle-stage|circle-place)\\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/titles-fr.js?v=20260918g\"></script><script src=\"/salon/conflict.js?v=20260918g\"></script><script src=\"/salon/knowledge.js?v=20260918g\"></script><script src=\"/salon/agents-import.js?v=20260918g\" defer></script><script src=\"/salon/circle-run.js?v=20260918g\" defer></script><script src=\"/salon/circle-ui.js?v=20260918g\" defer></script><script src=\"/salon/circle-speech.js?v=20260918g\" defer></script><script src=\"/salon/circle-stage.js?v=20260918g\" defer></script><script src=\"/salon/circle-place.js?v=20260918g\" defer></script><script src=\"/salon/peau-nav.js?v=20260918g\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
+          if [ -f backend/web/public/salon/flux-x.js ]; then cp backend/web/public/salon/flux-x.js deploy/salon/flux-x.js; fi
+          if [ -f backend/web/public/salon/flux/index.html ]; then cp backend/web/public/salon/flux/index.html deploy/salon/flux/index.html; fi
+          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run|circle-ui|peau-nav|circle-speech|titles-fr|conflict|knowledge|circle-stage|circle-place|flux-x)\\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/titles-fr.js?v=20260918x\"></script><script src=\"/salon/conflict.js?v=20260918x\"></script><script src=\"/salon/knowledge.js?v=20260918x\"></script><script src=\"/salon/agents-import.js?v=20260918x\" defer></script><script src=\"/salon/circle-run.js?v=20260918x\" defer></script><script src=\"/salon/circle-ui.js?v=20260918x\" defer></script><script src=\"/salon/circle-speech.js?v=20260918x\" defer></script><script src=\"/salon/circle-stage.js?v=20260918x\" defer></script><script src=\"/salon/circle-place.js?v=20260918x\" defer></script><script src=\"/salon/peau-nav.js?v=20260918x\" defer></script><script src=\"/salon/flux-x.js?v=20260918x\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
