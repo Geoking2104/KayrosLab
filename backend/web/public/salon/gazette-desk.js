@@ -1,4 +1,4 @@
-/* Gazette — plusieurs réponses à chaque composition, auteur + ouvrage. */
+/* Gazette — propos tiré de l’URL, plusieurs répliques auteur + ouvrage. */
 (function () {
   var FALLBACK = [
     { id: "voltaire", name: "Voltaire", blurb: "L'ironie contre les dogmes.", works: ["Candide, ou l'optimisme", "Zadig", "Micromégas"], kind: "philosophe" },
@@ -20,12 +20,14 @@
   ];
   var DEFAULT_IDS = ["voltaire", "rousseau", "montaigne", "kant"];
   var spin = 0;
+  var lastFetched = "";
 
   function parseStatus(raw) {
     raw = String(raw || "").trim();
-    if (/^\d{5,19}$/.test(raw)) return { id: raw };
-    var m = raw.match(/(?:x\.com|twitter\.com)\/(?:i\/web\/status|[^/\s]+\/status)\/(\d{5,19})/i);
-    return m ? { id: m[1] } : null;
+    if (/^\d{5,19}$/.test(raw)) return { id: raw, url: "https://x.com/i/web/status/" + raw };
+    var m = raw.match(/(?:x\.com|twitter\.com)\/(?:i\/web\/status|([^/\s]+)\/status)\/(\d{5,19})/i);
+    if (!m) return null;
+    return { id: m[2], handle: m[1] && m[1] !== "i" ? m[1] : "", url: raw.split(/\s/)[0] };
   }
   function customs() {
     var out = [];
@@ -66,17 +68,12 @@
       cb();
     }).catch(function () { cb(); });
   }
-  function worksOf(a) {
-    var w = (a.works && a.works.length) ? a.works.slice(0, 5) : ["l’œuvre"];
-    return w;
-  }
+  function worksOf(a) { return (a.works && a.works.length) ? a.works.slice(0, 5) : ["l’œuvre"]; }
   function clip(s, n) {
     s = String(s || "").replace(/\s+/g, " ").trim();
     return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, "") + "…";
   }
-  function sign(author, work) {
-    return " — " + author.name + ", " + work;
-  }
+  function sign(author, work) { return " — " + author.name + ", " + work; }
   function replies(author, thesis) {
     var works = worksOf(author);
     var idea = clip(author.blurb.replace(/[:.].*/, ""), 70);
@@ -95,10 +92,8 @@
     var n = Math.max(3, Math.min(5, works.length + 1));
     for (var i = 0; i < n; i++) {
       var w = works[(i + spin) % works.length];
-      var c = moldsC[(i + spin) % moldsC.length](w);
-      var o = moldsO[(i + spin + 1) % moldsO.length](w);
-      out.push({ stance: "confirmation", text: clip(c, 270), work: w });
-      out.push({ stance: "infirmation", text: clip(o, 270), work: w });
+      out.push({ stance: "confirmation", text: clip(moldsC[(i + spin) % moldsC.length](w), 270), work: w });
+      out.push({ stance: "infirmation", text: clip(moldsO[(i + spin + 1) % moldsO.length](w), 270), work: w });
     }
     return out;
   }
@@ -106,6 +101,58 @@
     var u = "https://x.com/intent/tweet?text=" + encodeURIComponent(text);
     if (statusId) u += "&in_reply_to=" + encodeURIComponent(statusId);
     return u;
+  }
+  function decodeEntities(html) {
+    var t = document.createElement("textarea");
+    t.innerHTML = html || "";
+    return t.value;
+  }
+  function textFromOembed(html) {
+    var m = String(html || "").match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    if (!m) return "";
+    return decodeEntities(m[1].replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+  }
+  function fillThesis(handle, text) {
+    var box = document.getElementById("gz-text");
+    if (!box || !text) return;
+    var line = (handle ? "@" + handle.replace(/^@/, "") + " — " : "") + text;
+    box.value = clip(line, 480);
+    box.placeholder = "Propos repris du post.";
+  }
+  function fetchPost(parsed) {
+    if (!parsed || !parsed.id || lastFetched === parsed.id) return Promise.resolve(false);
+    lastFetched = parsed.id;
+    var box = document.getElementById("gz-text");
+    if (box && !box.value) box.placeholder = "On relève le propos…";
+    var fx = fetch("https://api.fxtwitter.com/status/" + parsed.id, { headers: { accept: "application/json" } })
+      .then(function (r) { if (!r.ok) throw new Error("fx"); return r.json(); })
+      .then(function (data) {
+        var tw = data.tweet || data;
+        var text = tw.text || tw.full_text || "";
+        var handle = (tw.author && (tw.author.screen_name || tw.author.username)) || parsed.handle || "";
+        if (!text) throw new Error("empty");
+        fillThesis(handle, text);
+        return true;
+      });
+    return fx.catch(function () {
+      var twUrl = "https://twitter.com/i/web/status/" + parsed.id;
+      return fetch("https://publish.twitter.com/oembed?omit_script=true&hide_thread=true&url=" + encodeURIComponent(twUrl))
+        .then(function (r) { if (!r.ok) throw new Error("oem"); return r.json(); })
+        .then(function (data) {
+          var text = textFromOembed(data.html);
+          if (!text) throw new Error("empty");
+          fillThesis(data.author_name || parsed.handle, text);
+          return true;
+        });
+    }).catch(function () {
+      if (parsed.handle) fillThesis(parsed.handle, "(propos à coller si le post reste privé)");
+      return false;
+    });
+  }
+  function ingestThenCompose() {
+    var parsed = parseStatus(document.getElementById("gz-url").value);
+    if (!parsed) return;
+    fetchPost(parsed).then(function () { compose(); });
   }
   function paintVoices(list) {
     var box = document.getElementById("gz-voices"); if (!box) return;
@@ -145,8 +192,8 @@
     var parsed = parseStatus(document.getElementById("gz-url").value);
     var folio = document.getElementById("fx-gazette");
     folio.innerHTML = "";
-    if (!thesis && !parsed) { folio.innerHTML = '<p class="empty">Portez d’abord une missive — un lien, un propos.</p>'; return; }
-    if (!thesis && parsed) thesis = "ce que dit le post " + parsed.id;
+    if (!thesis && !parsed) { folio.innerHTML = '<p class="empty">Portez d’abord une missive — un lien.</p>'; return; }
+    if (!thesis && parsed) thesis = parsed.handle ? "@" + parsed.handle : "ce post";
     selected(catalog()).forEach(function (a) {
       replies(a, thesis).forEach(function (row) {
         folio.appendChild(article(a, row, parsed && parsed.id));
@@ -160,7 +207,19 @@
     var run = document.getElementById("gz-run");
     if (run && !run.getAttribute("data-bound")) {
       run.setAttribute("data-bound", "1");
-      run.addEventListener("click", compose);
+      run.addEventListener("click", ingestThenCompose);
+    }
+    var url = document.getElementById("gz-url");
+    if (url && !url.getAttribute("data-ingest")) {
+      url.setAttribute("data-ingest", "1");
+      var timer = 0;
+      function schedule() {
+        clearTimeout(timer);
+        timer = setTimeout(ingestThenCompose, 280);
+      }
+      url.addEventListener("paste", function () { setTimeout(ingestThenCompose, 40); });
+      url.addEventListener("input", schedule);
+      url.addEventListener("change", ingestThenCompose);
     }
   }
   if (!/\/salon\/flux\/?$/.test(location.pathname.replace(/index\.html$/, ""))) return;
