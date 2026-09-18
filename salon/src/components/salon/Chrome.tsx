@@ -4,6 +4,7 @@ import { bindLibrary } from "@/lib/salon/catalog";
 import { useT } from "@/lib/salon/i18n";
 import { useSalon } from "@/lib/salon/store";
 import { loadSalonCore } from "@/lib/salon/wasm";
+import { fluxT } from "@/lib/salon/x/copy";
 import {
   consumeSalonCallback,
   fetchSalonState,
@@ -16,7 +17,7 @@ import { ConsentBanner } from "./ConsentBanner";
 import "./salon.css";
 import "./peau.css";
 
-export function SalonChrome({ children, current }: { children: ReactNode; current?: "foyer" | "seance" | "agents" | "contact" }) {
+export function SalonChrome({ children, current }: { children: ReactNode; current?: "foyer" | "seance" | "agents" | "contact" | "flux" }) {
   const setHydrated = useSalon((s) => s.setHydrated);
   const customs = useSalon((s) => s.customs);
   const extraWorks = useSalon((s) => s.extraWorks);
@@ -107,6 +108,9 @@ export function SalonChrome({ children, current }: { children: ReactNode; curren
         <nav className="salon-nav" aria-label="Salon">
           <Link to="/salon" aria-current={current === "foyer" ? "page" : undefined}>
             {t("nav.circles")}
+          </Link>
+          <Link to="/salon/flux" aria-current={current === "flux" ? "page" : undefined}>
+            {fluxT(locale, "nav")}
           </Link>
           <Link to="/salon/agents" aria-current={current === "agents" ? "page" : undefined}>
             {t("nav.agents")}
