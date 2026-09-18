@@ -176,8 +176,11 @@ export function isAllowedRedirect(uri, consoleUrl) {
   add('https://www.kayroslab.com/console/');
   add('https://www.kayroslab.com/salon/');
   add('https://www.kayroslab.com/salon/index.html');
+  add('https://www.kayroslab.com/salon/flux/');
+  add('https://www.kayroslab.com/salon/flux/callback/');
   add('http://localhost:4174/console/');
   add('http://localhost:4174/salon/');
+  add('http://localhost:4174/salon/flux/');
   add('http://127.0.0.1:4174/console/');
   add('http://127.0.0.1:4174/salon/');
   const got = `${parsed.origin}${parsed.pathname}`;
