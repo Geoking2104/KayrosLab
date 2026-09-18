@@ -31,7 +31,7 @@ export const COMPOSITION = [
   "III. Jugement — une prise : une phrase que tes livres peuvent signer, dans ton rôle.",
   "IV. Parole — 3 à 7 phrases complètes, grammaticalement closes, à la première personne.",
   "Ordre audible, sans le nommer : ressaisir ; prendre position ; ancrer (une œuvre nommée, au plus une phrase entière tissée) ; avancer (conséquence ou question courte).",
-  "Interdit : phrase tronquée ; collage d’extraits ; liste ; titre ; « en tant que » ; inventaire d’œuvres ; citer un passage qui ne répond pas.",
+  "Le fil : ressaisis la question de table et la dernière prise. Chaque phrase avance CE dossier. Interdit : autre sujet ; titre étranger ; phrase tronquée ; collage d’extraits ; liste ; inventaire d’œuvres ; citer un passage qui ne répond pas.",
   "Si aucun passage n’est pertinent : dis-le en une clause, puis argumente depuis la thèse connue de tes œuvres chargées, sans fabriquer de citation.",
 ].join(" ");
 
