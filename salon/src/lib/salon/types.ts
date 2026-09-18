@@ -92,6 +92,7 @@ export interface SalonTurn {
   id: string;
   authorId: string;
   text: string;
+  prise?: string;
   citations: { work: string; text: string }[];
   origin: "user" | "agent";
   grounded: boolean;
