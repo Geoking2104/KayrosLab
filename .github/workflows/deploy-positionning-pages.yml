@@ -109,7 +109,8 @@ jobs:
           if [ "$RUN_SIZE" -lt 5000 ]; then git show "$GOOD_RUN:backend/web/public/salon/circle-run.js" > deploy/salon/circle-run.js; else cp backend/web/public/salon/circle-run.js deploy/salon/circle-run.js; fi
           if [ -f backend/web/public/salon/circle-ui.js ]; then cp backend/web/public/salon/circle-ui.js deploy/salon/circle-ui.js; fi
           if [ -f backend/web/public/salon/peau-nav.js ]; then cp backend/web/public/salon/peau-nav.js deploy/salon/peau-nav.js; fi
-          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run|circle-ui|peau-nav)\\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260915r\" defer></script><script src=\"/salon/circle-run.js?v=20260915r\" defer></script><script src=\"/salon/circle-ui.js?v=20260915r\" defer></script><script src=\"/salon/peau-nav.js?v=20260915r\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
+          if [ -f backend/web/public/salon/circle-speech.js ]; then cp backend/web/public/salon/circle-speech.js deploy/salon/circle-speech.js; fi
+          python3 -c "from pathlib import Path; import re; p=Path('deploy/salon/index.html'); s=p.read_text(encoding='utf-8'); s=re.sub(r'<script src=\"/salon/(agents-import|circle-run|circle-ui|peau-nav|circle-speech)\\.js[^\"]*\" defer></script>', '', s); s=s.replace('</body>', '<script src=\"/salon/agents-import.js?v=20260918a\" defer></script><script src=\"/salon/circle-run.js?v=20260918a\" defer></script><script src=\"/salon/circle-ui.js?v=20260918a\" defer></script><script src=\"/salon/circle-speech.js?v=20260918a\" defer></script><script src=\"/salon/peau-nav.js?v=20260918a\" defer></script></body>'); p.write_text(s, encoding='utf-8')"
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
