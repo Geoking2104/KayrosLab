@@ -1,0 +1,842 @@
+/* Hallmark · genre: editorial · macrostructure: Specimen · theme: Newsprint · tone: intimate-rigorous · anchor: oxblood · nav: N6 masthead · footer: Ft5 statement · H1 typographic */
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
+/* Hallmark · axes: light-paper / high-contrast-serif / warm · accent ~4% */
+
+.salon-root {
+  --paper: oklch(96.4% 0.016 85);
+  --paper-2: oklch(93.5% 0.022 80);
+  --ink: oklch(22% 0.028 48);
+  --ink-2: oklch(40% 0.02 50);
+  --muted: oklch(48% 0.018 55);
+  --rule: oklch(84% 0.02 80);
+  --rule-strong: oklch(72% 0.03 55);
+  --accent: oklch(42% 0.12 25);
+  --accent-ink: oklch(97% 0.01 85);
+  --focus: oklch(42% 0.12 25);
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 220ms;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.salon-root h1,
+.salon-root h2,
+.salon-root .salon-wordmark {
+  font-family: var(--font-display);
+  font-weight: 550;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.salon-masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl) var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+
+.salon-wordmark {
+  font-size: 1.65rem;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.salon-wordmark small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.salon-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.salon-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.salon-nav a[aria-current="page"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.salon-stage {
+  padding: var(--space-xl);
+  display: grid;
+  gap: var(--space-xl);
+  flex: 1;
+}
+
+.salon-kicker {
+  margin: 0;
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.salon-hero h1,
+.salon-stage > h1,
+.salon-fiche-head h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  line-height: 1.12;
+  margin: 0.35rem 0 0.75rem;
+  max-width: 16ch;
+}
+
+.salon-fiche-head h1 { margin: 0.2rem 0; }
+
+.salon-hero p,
+.salon-lead-plain {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.salon-index {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.salon-index a {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule);
+  color: inherit;
+  text-decoration: none;
+}
+
+.salon-index .n {
+  font-family: var(--font-display);
+  color: var(--accent);
+}
+
+.salon-index em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.salon-index p {
+  margin: 0.25rem 0 0;
+  color: var(--ink-2);
+}
+
+.salon-index .meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.salon-create h2,
+.salon-lib-head h2,
+.salon-fiche h2 {
+  font-size: 1.8rem;
+  margin: 0 0 var(--space-md);
+}
+
+.salon-create form,
+.salon-compose {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 40rem;
+}
+
+.salon-create label,
+.salon-compose label,
+.salon-invite label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.salon-root input,
+.salon-root textarea,
+.salon-root select {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  border-radius: 0;
+}
+
+.salon-root textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.salon-root input:focus,
+.salon-root textarea:focus,
+.salon-root select:focus,
+.salon-root button:focus-visible,
+.salon-root a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.salon-btn {
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 0;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.salon-btn.ghost {
+  background: transparent;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.salon-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.salon-library {
+  margin-top: var(--space-2xl);
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.salon-lib-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-md);
+  align-items: end;
+}
+
+.salon-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  min-width: min(100%, 22rem);
+}
+
+.salon-filters input,
+.salon-filters select {
+  flex: 1;
+}
+
+.salon-picked {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+
+.salon-form-error {
+  color: var(--accent);
+  margin: 0;
+}
+
+.salon-authors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+
+.salon-authors li {
+  display: grid;
+  gap: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--rule);
+}
+
+.salon-authors button {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: center;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 44px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.salon-authors small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.salon-authors p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.salon-authors ol,
+.salon-books {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.salon-authors li.is-on {
+  border-top-color: var(--accent);
+}
+
+.salon-avatar {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--accent);
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.salon-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.salon-avatar em { font-style: normal; }
+
+.salon-seance {
+  grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 859px) {
+  .salon-seance { grid-template-columns: 1fr; }
+}
+
+.salon-passage {
+  display: grid;
+  gap: var(--space-md);
+  position: sticky;
+  top: var(--space-md);
+}
+
+.salon-passage blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.salon-members {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+
+.salon-members strong { color: var(--ink); font-weight: 600; }
+.salon-members li { display: grid; gap: var(--space-sm); align-items: center; }
+.salon-members span { display: block; color: var(--muted); font-size: 0.78rem; }
+
+.salon-engine {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.salon-engine-card {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.salon-engine-card summary {
+  cursor: pointer;
+  color: var(--ink-2);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.salon-engine-card summary::-webkit-details-marker { display: none; }
+.salon-engine-card summary::before {
+  content: "§";
+  margin-right: 0.45rem;
+  color: var(--accent);
+  font-family: var(--font-display);
+}
+.salon-engine-card[open] summary { color: var(--accent); }
+.salon-engine-card p { margin: 0 0 var(--space-sm); }
+
+.salon-thread { display: grid; gap: var(--space-md); min-width: 0; }
+.salon-protocol h1 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  max-width: 20ch;
+  margin: 0 0 0.35rem;
+}
+.salon-protocol p { margin: 0; color: var(--ink-2); }
+.salon-empty, .salon-busy { color: var(--muted); }
+
+.salon-turn {
+  display: grid;
+  gap: 0.35rem;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+.salon-turn header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.salon-turn header strong { color: var(--ink); font-size: 1rem; }
+.salon-turn p { margin: 0; max-width: 58ch; line-height: 1.55; }
+.salon-turn.is-invited p { color: var(--ink-2); }
+
+.salon-compose {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.salon-compose .row { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+.salon-address {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+  margin: 0;
+}
+.salon-address button,
+.salon-addr-pick {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 44px;
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+  text-underline-offset: 0.2em;
+}
+.salon-address button.is-on,
+.salon-addr-pick[aria-pressed="true"] strong {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.salon-cite {
+  margin: 0.35rem 0 0;
+  max-width: 48ch;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.salon-cite cite {
+  display: block;
+  margin-top: 0.25rem;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+}
+
+.salon-members .salon-addr-pick {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: center;
+  text-align: left;
+  width: 100%;
+}
+
+.salon-back {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.salon-banc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+.salon-banc li {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: 0.5rem 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.92rem;
+}
+.salon-banc strong { font-family: var(--font-display); color: var(--accent); font-weight: 550; }
+.salon-banc li.ko strong { color: var(--ink); }
+.salon-banc em { font-style: normal; font-weight: 600; }
+.salon-banc span { grid-column: 2; color: var(--muted); font-size: 0.82rem; }
+
+.salon-banc-page .salon-banc-grid { display: grid; gap: var(--space-2xl); }
+@media (min-width: 960px) {
+  .salon-banc-page .salon-banc-grid {
+    grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+.salon-banc-play { display: grid; gap: var(--space-md); }
+.salon-banc-play > blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 28ch;
+}
+
+.salon-foot {
+  margin-top: auto;
+  padding: var(--space-xl);
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: var(--space-md);
+}
+.salon-foot p {
+  max-width: 36ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+.salon-foot nav { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-lg); }
+.salon-foot a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.salon-channel {
+  grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr) minmax(13rem, 17rem);
+  align-items: start;
+  gap: var(--space-xl);
+}
+@media (max-width: 959px) {
+  .salon-channel { grid-template-columns: 1fr; }
+}
+
+.salon-channels ul,
+.salon-roster,
+.salon-messages,
+.salon-suggest {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+.salon-channels a {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.45rem 0;
+  min-height: 44px;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.salon-channels a em {
+  font-style: normal;
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 1.15rem;
+}
+.salon-channels a span { font-size: 0.78rem; color: var(--muted); }
+.salon-channels a[aria-current="page"] em { color: var(--accent); }
+
+.salon-stream { display: grid; gap: var(--space-md); min-width: 0; }
+.salon-messages { gap: var(--space-md); }
+.salon-msg {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-sm) var(--space-md);
+  align-items: start;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+.salon-msg header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.salon-msg header strong { color: var(--ink); font-size: 1rem; }
+.salon-handle { color: var(--accent); }
+.salon-msg p { margin: 0.25rem 0 0; max-width: 58ch; line-height: 1.55; }
+.salon-msg.is-invited p { color: var(--ink-2); }
+.salon-host { width: 40px; height: 40px; font-size: 0.95rem; }
+
+.salon-roster { gap: 0.45rem; }
+.salon-roster li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-xs);
+  align-items: center;
+}
+.salon-roster .salon-addr-pick {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: center;
+  text-align: left;
+  width: 100%;
+}
+.salon-dismiss {
+  background: none;
+  border: 0;
+  padding: 0 0.2rem;
+  min-height: 44px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.salon-suggest { border: 1px solid var(--rule); background: var(--paper-2); }
+.salon-suggest button {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.4rem 0.7rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--accent);
+  text-align: left;
+  cursor: pointer;
+}
+.salon-suggest span { color: var(--ink-2); }
+.salon-invite {
+  display: grid;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule);
+}
+.salon-people { display: grid; gap: var(--space-md); align-content: start; }
+
+@media (prefers-reduced-motion: reduce) {
+  .salon-root * { transition: none !important; }
+}
+button:not(:disabled),
+[role="button"]:not(:disabled) { cursor: pointer; }
+
+.salon-authors a {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+}
+
+.salon-fiche-head {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.salon-fiche-head .salon-avatar {
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+.salon-method {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.salon-method legend {
+  padding: 0;
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.salon-method label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  color: var(--ink);
+}
+
+.salon-method input,
+.salon-work-toggle input {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+.salon-work-toggle {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.salon-work-toggle label {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  min-height: 44px;
+  color: var(--ink-2);
+}
+
+.salon-index li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-sm);
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+.salon-roster-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.salon-roster-actions a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+.salon-lang {
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.salon-lang button {
+  background: none;
+  border: 0;
+  padding: 0;
+  min-height: 44px;
+  color: var(--ink-2);
+  font: inherit;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.salon-lang button.is-on {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.salon-how {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 52ch;
+}
+.salon-ingest {
+  display: grid;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--rule);
+}
+.salon-ingest form {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.salon-guest-pick {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.15rem 1rem;
+  max-height: 16rem;
+  overflow: auto;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.5rem 0;
+}
+.salon-guest-pick label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+.salon-guest-pick input {
+  width: auto;
+  accent-color: var(--accent);
+}
+.salon-author-head {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-sm);
+  align-items: center;
+}

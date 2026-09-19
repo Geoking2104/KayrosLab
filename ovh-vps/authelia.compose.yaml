@@ -1,0 +1,13 @@
+# Authelia — IdP OpenID Connect Apache-2.0, boucle locale.
+# License: Apache-2.0. Remplace Auth0. ~50 Mo RAM.
+services:
+  authelia:
+    image: authelia/authelia:4.39.20
+    container_name: kayros-authelia
+    restart: unless-stopped
+    user: "0:0"
+    volumes:
+      - ${KAYROS_AUTHELIA_DIR:-/opt/kayroslab/data/authelia}:/config
+    ports:
+      - "127.0.0.1:9091:9091"
+    command: ['authelia', '--config', '/config/configuration.yml']
