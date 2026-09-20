@@ -60,7 +60,7 @@ test('generated static pages keep the narrative and leave the Sales Oracle to th
   for (const file of ['index.html', 'index.fr.html']) {
     const html = read(file);
     assert.match(html, /id="timesfm"/);
-    assert.match(html, /href="\.\/studio\.css"/);
+    assert.match(html, /class="lang-opt"/);   // EN/FR language selector
     assert.doesNotMatch(html, /id="secure-workspace"/);
     assert.doesNotMatch(html, /data-sales-oracle-tool/);
     assert.doesNotMatch(html, /sales-oracle-tool\.js/);

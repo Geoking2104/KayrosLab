@@ -5,9 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KayrosLab — Governed decision workshop for teams and agents</title>
 <meta name="description" content="KayrosLab turns one decision into a governed operation: agents with opposing duties investigate the evidence, consolidate objections and return a verdict — GO, conditional GO or NO-GO — and a human arbitrates. Run it local or cloud.">
+<link rel="canonical" href="https://www.kayroslab.com/">
+<link rel="alternate" hreflang="en" href="https://www.kayroslab.com/">
+<link rel="alternate" hreflang="fr" href="https://www.kayroslab.com/index.fr.html">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="fr">
 <meta property="og:title" content="KayrosLab — Crash-test your strategic decisions">
 <meta property="og:description" content="A governed decision workshop: agents with opposing duties, deterministic numbers, human arbitration with veto.">
 <meta property="og:image" content="assets/og-image.png">
@@ -17,10 +22,7 @@
     --ink:#0e0f11; --body:#3d4149; --muted:#6b7079; --faint:#9aa0a8;
     --line:#e6e6e8; --line-2:#eef0f1; --bg:#ffffff; --soft:#f7f8f8; --soft-2:#f1f3f3;
     --accent:#0f766e; --accent-strong:#0b5a54; --accent-soft:#e8f3f1; --accent-ink:#06423d;
-    --gold:#8a6d1a; --gold-soft:#f6f0df;
-    --go:#157347; --go-soft:#e7f4ec;
-    --cond:#8a6d1a; --cond-soft:#f8f1dc;
-    --no:#b42318; --no-soft:#fbe9e7;
+    --go:#157347; --go-soft:#e7f4ec; --cond:#8a6d1a; --cond-soft:#f8f1dc; --no:#b42318; --no-soft:#fbe9e7;
     --radius:16px; --radius-sm:11px; --radius-lg:24px;
     --shadow-sm:0 1px 2px rgba(16,20,24,.05), 0 1px 3px rgba(16,20,24,.05);
     --shadow-md:0 10px 30px -12px rgba(14,15,17,.18), 0 4px 10px -6px rgba(14,15,17,.10);
@@ -38,23 +40,25 @@
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
   .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  .muted{color:var(--muted)}
   .center{text-align:center}
 
-  /* ---------- header ---------- */
   header.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.82);
     backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
     border-bottom:1px solid transparent;transition:border-color .25s ease,box-shadow .25s ease}
   header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(14,15,17,.02)}
-  .nav-in{display:flex;align-items:center;gap:26px;height:64px}
+  .nav-in{display:flex;align-items:center;gap:22px;height:64px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);font-size:17.5px;letter-spacing:-.02em}
   .brand img{width:28px;height:28px;border-radius:7px}
   .nav-links{display:flex;gap:4px;margin-left:8px}
   .nav-links a{padding:8px 12px;border-radius:9px;font-size:14.5px;color:var(--body);font-weight:500;transition:background .15s,color .15s}
   .nav-links a:hover{background:var(--soft-2);color:var(--ink)}
-  .nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
   .nav-right .signin{font-size:14.5px;font-weight:600;color:var(--ink);padding:8px 10px;border-radius:9px}
   .nav-right .signin:hover{background:var(--soft-2)}
+  .lang{display:inline-flex;align-items:center;gap:1px;border:1px solid var(--line);border-radius:9px;padding:2px;background:#fff}
+  .lang-opt{font-size:12.5px;font-weight:700;letter-spacing:.03em;padding:5px 9px;border-radius:7px;color:var(--muted);line-height:1}
+  .lang-opt.active{background:var(--ink);color:#fff}
+  a.lang-opt:hover{background:var(--soft-2);color:var(--ink)}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14.5px;
     border-radius:10px;padding:10px 16px;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .12s ease,background .15s,border-color .15s,box-shadow .15s}
   .btn:active{transform:translateY(1px)}
@@ -65,11 +69,12 @@
   .btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
   .btn-ghost:hover{border-color:#cfd3d4;background:var(--soft)}
   .btn-lg{padding:13px 22px;font-size:15.5px;border-radius:12px}
+  .btn-light{background:#fff;color:var(--ink)}
+  .btn-light:hover{background:#eceff0}
   .hamb{display:none;margin-left:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px;cursor:pointer}
   .hamb span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px}
   .hamb span+span{margin-top:4px}
 
-  /* ---------- hero ---------- */
   .hero{padding:74px 0 26px;position:relative;overflow:hidden}
   .hero .glow{position:absolute;inset:auto -10% 30% -10%;height:520px;pointer-events:none;
     background:radial-gradient(46% 60% at 50% 40%,rgba(15,118,110,.10),transparent 70%);z-index:-1}
@@ -90,16 +95,14 @@
   .shot img{width:100%}
   .shot .cap{padding:16px 20px;border-top:1px solid var(--line-2);font-size:13.5px;color:var(--muted);text-align:center;background:#fff}
 
-  /* ---------- trust strip ---------- */
   .trust{padding:52px 0 8px}
-  .trust p{text-align:center;font-size:14px;color:var(--muted);letter-spacing:.01em}
+  .trust p{text-align:center;font-size:14px;color:var(--muted)}
   .chips{display:flex;flex-wrap:wrap;gap:12px 14px;justify-content:center;margin-top:22px}
   .chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;
     padding:9px 15px;font-size:14px;font-weight:600;color:var(--body);background:#fff;box-shadow:var(--shadow-sm)}
   .chip svg{width:16px;height:16px;color:var(--accent)}
   .chip.plus{color:var(--muted);font-weight:500;border-style:dashed}
 
-  /* ---------- generic section ---------- */
   section{padding:86px 0}
   .sec-head{max-width:760px}
   .sec-head.center{margin:0 auto;text-align:center}
@@ -107,7 +110,6 @@
   .sec-head p{font-size:18px;color:var(--muted);margin-top:16px;line-height:1.6}
   .soft{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 
-  /* ---------- verdict cards ---------- */
   .verdicts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
   .vcard{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
   .vcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
@@ -117,7 +119,6 @@
   .vcard h3{font-size:18px;margin:14px 0 6px}
   .vcard p{font-size:14.5px;color:var(--muted)}
 
-  /* ---------- split ---------- */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:48px}
   .panel{border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px;background:#fff;box-shadow:var(--shadow-sm)}
   .panel.hl{background:linear-gradient(180deg,#0e0f11,#191b1f);border-color:#0e0f11;color:#c7cdd2}
@@ -136,7 +137,6 @@
   .code pre{margin:0;padding:14px 16px;color:#cfd6dc;overflow-x:auto}
   .code .k{color:#7fd0c7}.code .s{color:#e6c07b}.code .c{color:#5f666d}.code .f{color:#8ab4f8}
 
-  /* ---------- feature grid ---------- */
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
   .card{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:#fff;transition:transform .18s ease,box-shadow .18s ease,border-color .18s}
   .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d9dcdd}
@@ -146,7 +146,6 @@
   .card h3{font-size:17.5px;margin-bottom:7px}
   .card p{font-size:14.6px;color:var(--muted)}
 
-  /* ---------- feature row with image ---------- */
   .feat{display:grid;grid-template-columns:1.02fr 1fr;gap:52px;align-items:center;margin-top:48px}
   .feat.rev .feat-media{order:-1}
   .feat h3{font-size:clamp(23px,2.7vw,30px);margin:14px 0 14px}
@@ -157,27 +156,23 @@
   .media.tall{max-height:560px;overflow:hidden;position:relative}
   .media.tall::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(transparent,#fff)}
 
-  /* ---------- governance cards ---------- */
   .gov{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
   .gcard{border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:#fff}
   .gcard .ico{margin-bottom:14px}
   .gcard h4{font-size:16px;margin-bottom:6px}
   .gcard p{font-size:14.2px;color:var(--muted)}
 
-  /* ---------- cycle ---------- */
   .cycle{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:38px}
   .step{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 16px;box-shadow:var(--shadow-sm)}
   .step .n{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:3px 7px}
   .step .t{font-weight:600;color:var(--ink);font-size:14.5px}
   .arrow{align-self:center;color:#c6cbcd;font-weight:700}
 
-  /* ---------- metrics strip ---------- */
   .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:44px}
   .metric{background:#fff;padding:28px 24px;text-align:center}
   .metric .big{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
   .metric .lab{font-size:13.5px;color:var(--muted);margin-top:6px}
 
-  /* ---------- faq ---------- */
   .faq{max-width:820px;margin:44px auto 0;border-top:1px solid var(--line)}
   details{border-bottom:1px solid var(--line)}
   summary{list-style:none;cursor:pointer;padding:20px 44px 20px 0;font-size:16.5px;font-weight:600;color:var(--ink);position:relative}
@@ -186,7 +181,6 @@
   details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
   details .ans{padding:0 44px 22px 0;font-size:15.2px;color:var(--muted);line-height:1.65}
 
-  /* ---------- final cta ---------- */
   .final{background:linear-gradient(180deg,#0e0f11,#141618);color:#c9ced3;border-radius:var(--radius-lg);
     padding:64px 40px;text-align:center;position:relative;overflow:hidden}
   .final::after{content:"";position:absolute;inset:-40% 20% 40% 20%;background:radial-gradient(closest-side,rgba(54,201,184,.20),transparent);pointer-events:none}
@@ -194,18 +188,15 @@
   .final p{color:#a7afb5;font-size:18px;max-width:620px;margin:16px auto 0}
   .final .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;position:relative;z-index:1}
   .final .micro{font-size:13.5px;color:#7d858b;margin-top:16px}
-  .btn-light{background:#fff;color:var(--ink)}
-  .btn-light:hover{background:#eceff0}
 
-  /* ---------- footer ---------- */
-  footer{padding:66px 0 40px;border-top:1px solid var(--line);margin-top:0}
+  footer{padding:66px 0 40px;border-top:1px solid var(--line)}
   .fgrid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:30px}
   .fbrand p{font-size:14.3px;color:var(--muted);margin-top:14px;max-width:280px}
   .fcol h5{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 14px;font-weight:700}
   .fcol a{display:block;font-size:14.3px;color:var(--body);padding:5px 0}
   .fcol a:hover{color:var(--accent)}
   .fbot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:52px;padding-top:24px;border-top:1px solid var(--line);font-size:13.4px;color:var(--faint)}
-  .fbot .soc{display:flex;gap:16px}
+  .fbot .soc{display:flex;gap:16px;flex-wrap:wrap}
   .fbot a{color:var(--muted)} .fbot a:hover{color:var(--accent)}
 
   .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -223,11 +214,13 @@
     .verdicts,.grid3,.gov,.metrics,.fgrid{grid-template-columns:1fr}
     section{padding:64px 0} .wrap{padding:0 18px}
     .final{padding:46px 22px}
+    .nav-right .signin{display:none}
   }
   .mnav{display:none}
   @media (max-width:980px){
     .mnav.open{display:block;border-top:1px solid var(--line);background:#fff}
     .mnav.open a{display:block;padding:14px 24px;border-bottom:1px solid var(--line-2);font-weight:600;color:var(--ink)}
+    .mnav.open .lang{margin:14px 24px}
   }
 </style>
 <script>document.documentElement.classList.add('js');</script>
@@ -236,7 +229,7 @@
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top"><img src="assets/logo-kayroslab.png" alt="KayrosLab logo">KayrosLab</a>
+    <a class="brand" href="index.html"><img src="assets/logo-kayroslab.png" alt="KayrosLab logo">KayrosLab</a>
     <nav class="nav-links">
       <a href="#platform">Platform</a>
       <a href="#oracle">Sales Oracle</a>
@@ -245,8 +238,12 @@
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
-      <a class="signin" href="https://www.kayroslab.com/console/">Sign in</a>
-      <a class="btn btn-primary" href="https://www.kayroslab.com/console/">Open the console</a>
+      <span class="lang" role="group" aria-label="Language selector">
+        <span class="lang-opt active" aria-current="true" lang="en">EN</span>
+        <a class="lang-opt" href="/index.fr.html" hreflang="fr" lang="fr">FR</a>
+      </span>
+      <a class="signin" href="/console/">Sign in</a>
+      <a class="btn btn-primary" href="/console/">Open console</a>
     </div>
     <button class="hamb" id="hamb" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -256,11 +253,13 @@
     <a href="#governance">Governance</a>
     <a href="#builders">Builders</a>
     <a href="#faq">FAQ</a>
-    <a href="https://www.kayroslab.com/console/">Open the console</a>
+    <a href="/console/">Open console</a>
+    <span class="lang" role="group" aria-label="Language selector">
+      <span class="lang-opt active" aria-current="true" lang="en">EN</span>
+      <a class="lang-opt" href="/index.fr.html" hreflang="fr" lang="fr">FR</a>
+    </span>
   </div>
 </header>
-
-<a id="top"></a>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -270,12 +269,11 @@
     <h1>Crash-test your strategic decisions before the real world does.</h1>
     <p class="lead">KayrosLab turns one decision into a governed operation. Agents with opposing duties — finance, engineering, legal, sales — investigate the evidence, attack each other's assumptions, and consolidate their objections into a verdict. A human arbitrates with the evidence in hand.</p>
     <div class="cta">
-      <a class="btn btn-accent btn-lg" href="https://www.kayroslab.com/console/">Open the console</a>
-      <a class="btn btn-ghost btn-lg" href="https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html">See the live demo</a>
+      <a class="btn btn-accent btn-lg" href="/console/">Open console</a>
+      <a class="btn btn-ghost btn-lg" href="/kayroslab-complete-with-ai-agents.html">See the live demo</a>
     </div>
     <p class="micro"><b>No black box. No scraped profiles.</b> Run it local or cloud, in ten minutes.</p>
   </div>
-
   <div class="wrap">
     <div class="shot reveal">
       <div class="bar"><i></i><i></i><i></i><span class="u">kayroslab.com/console</span></div>
@@ -299,7 +297,7 @@
   </div>
 </div>
 
-<!-- ============ HONESTY / VERDICTS ============ -->
+<!-- ============ VERDICTS ============ -->
 <section id="platform" class="soft">
   <div class="wrap">
     <div class="sec-head center">
@@ -307,7 +305,6 @@
       <h2>Confident opinions are easy. Governed decisions are not.</h2>
       <p>Meetings compress uncertainty into opinions, the strongest voice wins, and the numbers get retrofitted afterwards. KayrosLab keeps the whole chain inspectable — claims, sources, numbers and objections — until reality runs the experiment.</p>
     </div>
-
     <div class="verdicts">
       <div class="vcard go reveal">
         <span class="vtag">GO</span>
@@ -325,14 +322,13 @@
         <p>A veto holder blocks it. The dossier records the objection and the rationale — for good, not forever.</p>
       </div>
     </div>
-
     <div class="sec-head center" style="margin-top:34px">
       <p style="font-size:15px"><b style="color:var(--ink)">Vote instructs · veto decides.</b> The verdict never overrides governance: it stays consultative until a human accepts, attaches conditions, or overrides a veto.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ SPLIT: OPERATE / BUILD ============ -->
+<!-- ============ SPLIT ============ -->
 <section>
   <div class="wrap">
     <div class="sec-head center">
@@ -340,7 +336,6 @@
       <h2>Run the committee, or plug it into your channels.</h2>
       <p>Start from the console with a whole committee of agents, or drive the same governed runtime from Slack, Teams, Discord and your own API.</p>
     </div>
-
     <div class="split">
       <div class="panel reveal">
         <span class="plabel">For teams &amp; operators</span>
@@ -351,9 +346,8 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Durable dossiers.</b> Postgres-backed decision threads you can resume with new evidence, tenant-scoped.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Human arbitration.</b> Accept the consensus, pass under conditions, or override a veto — every action recorded.</span></li>
         </ul>
-        <div style="margin-top:22px"><a class="btn btn-accent" href="https://www.kayroslab.com/console/">Open the console</a></div>
+        <div style="margin-top:22px"><a class="btn btn-accent" href="/console/">Open console</a></div>
       </div>
-
       <div class="panel hl reveal" id="builders">
         <span class="plabel">For developers &amp; builders</span>
         <h3>Drive the governed engine directly</h3>
@@ -375,7 +369,7 @@
         </div>
         <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
           <a class="btn btn-light" href="https://github.com/Geoking2104/KayrosLab">Read the docs</a>
-          <a class="btn" style="background:transparent;border:1px solid #333;color:#e6eaec" href="https://www.kayroslab.com/whitepaper-kayroslab.html">Whitepaper</a>
+          <a class="btn" style="background:transparent;border:1px solid #333;color:#e6eaec" href="/whitepaper-kayroslab.html">Whitepaper</a>
         </div>
       </div>
     </div>
@@ -416,7 +410,7 @@
         <h3>Gates, RBAC &amp; veto</h3>
         <p>Sensitive syntheses open a human gate. Weighted votes aggregate opinion; a veto holder can block — over an append-only audit trail.</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="timesfm">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 7h18v10H3z"/><path d="M3 12h18M8 7V5M16 7V5"/></svg></div>
         <h3>Optional TimesFM forecast</h3>
         <p>Statistically plausible KPI trajectories with P10–P90 bands and a mandatory human review — one tool inside the loop, never a replacement.</p>
@@ -442,10 +436,9 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Leave with artifacts.</b> An objection matrix, a conditional-GO checklist, an evidence plan and an executive narrative.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Guard-railed by design.</b> Official connectors or authorized exports only, no scraping, explicit consent and provenance, labelled simulation.</span></li>
         </ul>
-        <div style="margin-top:22px"><a class="btn btn-accent" href="https://www.kayroslab.com/console/">Try the Sales Oracle</a></div>
+        <div style="margin-top:22px"><a class="btn btn-accent" href="/console/">Try the Sales Oracle</a></div>
       </div>
     </div>
-
     <div class="feat rev" style="margin-top:70px">
       <div class="feat-media reveal">
         <div class="media tall"><img src="assets/console-impersonator-swarm.png" alt="A simulated stakeholder panel of impersonator agents, each labelled Simulation with mandatory consent"></div>
@@ -493,7 +486,6 @@
         <p>Ollama quant-aware on your machine, or a governed cloud. JSON files or Postgres, per tenant.</p>
       </div>
     </div>
-
     <div class="metrics">
       <div class="metric"><div class="big">8</div><div class="lab">governed cycle steps</div></div>
       <div class="metric"><div class="big">L0–L3</div><div class="lab">layered memory</div></div>
@@ -524,7 +516,7 @@
   </div>
 </section>
 
-<!-- ============ DEEP DIVE CARDS ============ -->
+<!-- ============ WHERE IT FITS ============ -->
 <section class="soft">
   <div class="wrap">
     <div class="sec-head center">
@@ -587,7 +579,7 @@
       <h2>Governed decisions, in minutes.</h2>
       <p>Compose a committee, ask the real question, and arbitrate with the evidence in hand. Start self-service, or run the engine locally.</p>
       <div class="cta">
-        <a class="btn btn-light btn-lg" href="https://www.kayroslab.com/console/">Open the console</a>
+        <a class="btn btn-light btn-lg" href="/console/">Open console</a>
         <a class="btn btn-lg" style="background:transparent;border:1px solid #3a3f45;color:#eef1f2" href="https://github.com/Geoking2104/KayrosLab">View on GitHub</a>
       </div>
       <p class="micro">Self-service signup with a verified e-mail. No second login for the Sales Oracle.</p>
@@ -600,16 +592,16 @@
   <div class="wrap">
     <div class="fgrid">
       <div class="fbrand">
-        <a class="brand" href="#top"><img src="assets/logo-kayroslab.png" alt="KayrosLab logo">KayrosLab</a>
+        <a class="brand" href="index.html"><img src="assets/logo-kayroslab.png" alt="KayrosLab logo">KayrosLab</a>
         <p>Turning noise into governed strategy. Kairos is the opportune moment — KayrosLab finds it in your evidence, with objections and numbers attached.</p>
       </div>
       <div class="fcol">
         <h5>Product</h5>
-        <a href="https://www.kayroslab.com/console/">Console</a>
-        <a href="https://www.kayroslab.com/salon/">Salon</a>
+        <a href="/console/">Console</a>
+        <a href="/salon/">Salon</a>
         <a href="#oracle">Sales Oracle</a>
         <a href="#platform">Strategic cycle</a>
-        <a href="https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html">Live demo</a>
+        <a href="/kayroslab-complete-with-ai-agents.html">Live demo</a>
       </div>
       <div class="fcol">
         <h5>Build</h5>
@@ -617,7 +609,7 @@
         <a href="https://github.com/Geoking2104/KayrosLab#backend-api">API</a>
         <a href="https://github.com/Geoking2104/KayrosLab#memory-layers">Memory L0–L3</a>
         <a href="https://github.com/Geoking2104/KayrosLab#core-engine">Engine core</a>
-        <a href="https://www.kayroslab.com/whitepaper-kayroslab.html">Whitepaper</a>
+        <a href="/whitepaper-kayroslab.html">Whitepaper</a>
       </div>
       <div class="fcol">
         <h5>Trust</h5>
@@ -628,7 +620,7 @@
       </div>
       <div class="fcol">
         <h5>Company</h5>
-        <a href="https://www.kayroslab.com">Website</a>
+        <a href="/">Website</a>
         <a href="mailto:contact@kayroslab.com">Contact</a>
         <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
       </div>
@@ -636,7 +628,8 @@
     <div class="fbot">
       <span>© 2026 KayrosLab · Geoffroy de La Tournelle. All rights reserved.</span>
       <span class="soc">
-        <a href="https://www.kayroslab.com">kayroslab.com</a>
+        <a href="/legal/#mentions">Legal notice</a>
+        <a href="/index.fr.html" hreflang="fr" lang="fr">Français</a>
         <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
         <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
       </span>

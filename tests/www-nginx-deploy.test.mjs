@@ -62,7 +62,7 @@ test('assemble-www copie accueil, salon et console', async () => {
     // New brand layer must be deployed with the site (site.css + logo assets).
     const homeHtml = await readFile(join(dest, 'index.html'), 'utf8');
     assert.match(homeHtml, /assets\/logo-kayroslab\.png/);
-    assert.match(homeHtml, /href="\.\/site\.css"/);
+    assert.match(homeHtml, /class="lang-opt"/);   // EN/FR language selector
     const site = await readFile(join(dest, 'site.css'), 'utf8');
     assert.match(site, /--color-accent/);
     const [logoSvg, favicon32, touch, og] = await Promise.all([
