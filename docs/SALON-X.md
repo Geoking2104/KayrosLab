@@ -37,3 +37,7 @@ Redirect acceptÃ© : `https://<hÃ´te>/salon/flux/callback`.
 - `X_TOKEN_SECRET` ou `KAYROS_AUTH_SECRET` (sceau AES-256-GCM)
 - `X_OAUTH_REDIRECT` (optionnel)
 - `KAYROS_SALON_X_DIR` (fichiers `*.x.json` mode 0600)
+
+## Usage des données et de l'API X
+
+Description complète (questionnaire de revue de l'app X, en anglais) : [docs/SALON-X-API-USAGE.md](SALON-X-API-USAGE.md).
