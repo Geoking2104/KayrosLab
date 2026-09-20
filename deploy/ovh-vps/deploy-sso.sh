@@ -149,7 +149,7 @@ fi
 
 export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
 docker compose -f "${COMPOSE}" pull
-docker compose -f "${COMPOSE}" up -d
+docker compose -f "${COMPOSE}" up -d --force-recreate
 
 if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
   CERT_DIR=""
