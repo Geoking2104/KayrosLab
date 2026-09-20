@@ -124,8 +124,10 @@ ${OIDC_PEM_INDENTED}
         redirect_uris:
           - 'https://www.kayroslab.com/console/'
           - 'https://www.kayroslab.com/salon/'
+          - 'https://www.kayroslab.com/salon/flux/'
           - 'http://localhost:4174/console/'
           - 'http://localhost:4174/salon/'
+          - 'http://localhost:4174/salon/flux/'
         scopes:
           - openid
           - profile
