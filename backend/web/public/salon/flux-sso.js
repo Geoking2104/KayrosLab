@@ -5,7 +5,8 @@
   var API = "https://api.kayroslab.com";
   var TOKEN_KEY = "kayros-salon-token";
   var SSO_KEY = "kayros-salon-sso-x";
-  var X_REDIRECT = location.origin + "/salon/flux/callback/";
+  var X_BASE = /(^|\.)kayroslab\.com$/i.test(location.hostname) ? "https://www.kayroslab.com" : location.origin;
+  var X_REDIRECT = X_BASE + "/salon/flux/callback";
   var X_SCOPES = ["tweet.read", "tweet.write", "users.read", "offline.access"];
   var LINK_LABEL = "Lier X";
 

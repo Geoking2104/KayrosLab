@@ -2,7 +2,7 @@
 (function () {
   var API = "https://api.kayroslab.com";
   var TOKEN_KEY = "kayros-salon-token";
-  var REDIRECT = location.origin + "/salon/flux/callback/";
+  var REDIRECT = (/(^|\.)kayroslab\.com$/i.test(location.hostname) ? "https://www.kayroslab.com" : location.origin) + "/salon/flux/callback";
 
   var COPY = {
     fr: {
