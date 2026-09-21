@@ -9,6 +9,7 @@ BACKEND_ENV="${APP_DIR}/backend/fastify/.env"
 COMPOSE="${APP_DIR}/deploy/ovh-vps/authelia.compose.yaml"
 SITE_AVAILABLE="/etc/nginx/sites-available/sso.kayroslab.com"
 IMAGE="authelia/authelia:4.39.20"
+PEAU_DIR="${APP_DIR}/backend/web/public/salon"
 
 if [[ ! -f "${COMPOSE}" ]]; then
   echo "ERREUR : ${COMPOSE} introuvable." >&2
@@ -65,9 +66,10 @@ YAML
   chmod 600 "${CONF_DIR}/INITIAL_PASSWORD.txt"
 fi
 
-OIDC_PEM_INDENTED=$(sed 's/^/          /' "${CONF_DIR}/oidc.pem")
-
-cat > "${CONF_DIR}/configuration.yml" <<YAML
+# Ne réécrit la conf que si elle n'existe pas — évite de tuer un Authelia sain.
+if [[ ! -s "${CONF_DIR}/configuration.yml" ]]; then
+  OIDC_PEM_INDENTED=$(sed 's/^/          /' "${CONF_DIR}/oidc.pem")
+  cat > "${CONF_DIR}/configuration.yml" <<YAML
 theme: auto
 server:
   address: 'tcp://0.0.0.0:9091/'
@@ -138,17 +140,20 @@ ${OIDC_PEM_INDENTED}
         token_endpoint_auth_method: 'none'
         pkce_challenge_method: 'S256'
 YAML
-chmod 600 "${CONF_DIR}/configuration.yml"
+  chmod 600 "${CONF_DIR}/configuration.yml"
+fi
 
 if [[ -f "${BACKEND_ENV}" ]]; then
   node "${APP_DIR}/deploy/ovh-vps/patch-authelia-smtp.mjs" \
     "${BACKEND_ENV}" "${CONF_DIR}/configuration.yml" \
-    || echo "AVERTISSEMENT : notifier Authelia non mis à jour." >&2
+    || true
 fi
 
 export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
-docker compose -f "${COMPOSE}" up -d --force-recreate
-sleep 3
+docker compose -f "${COMPOSE}" up -d
+
+PEAU_CSS="${PEAU_DIR}/sso-peau.css"
+PEAU_JS="${PEAU_DIR}/sso-peau.js"
 
 if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
   CERT_DIR=""
@@ -174,6 +179,16 @@ server {
   ssl_certificate_key ${CERT_DIR}/privkey.pem;
 ${SSL_OPTIONS}
 ${SSL_DH}
+  location = /sso-peau.css {
+    alias ${PEAU_CSS};
+    default_type text/css;
+    add_header Cache-Control "no-cache";
+  }
+  location = /sso-peau.js {
+    alias ${PEAU_JS};
+    default_type application/javascript;
+    add_header Cache-Control "no-cache";
+  }
   location / {
     proxy_pass http://127.0.0.1:9091;
     proxy_http_version 1.1;
@@ -182,6 +197,11 @@ ${SSL_DH}
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto \$scheme;
     proxy_set_header X-Forwarded-Host \$http_host;
+    proxy_set_header Accept-Encoding "";
+    sub_filter '</head>' '<link rel="stylesheet" href="/sso-peau.css"></head>';
+    sub_filter '</body>' '<script src="/sso-peau.js" defer></script></body>';
+    sub_filter_once off;
+    sub_filter_types text/html;
   }
 }
 NGINX
@@ -191,36 +211,10 @@ NGINX
   ln -sf "${SITE_AVAILABLE}" /etc/nginx/sites-enabled/sso.kayroslab.com
   if nginx -t; then
     systemctl reload nginx
-    echo "nginx recharge — sso.kayroslab.com -> Authelia"
+    echo "nginx recharge — sso.kayroslab.com peau Salon"
   else
     echo "AVERTISSEMENT : nginx -t a echoue pour le vhost SSO." >&2
   fi
 fi
 
-if [[ -f "${BACKEND_ENV}" ]]; then
-  python3 - <<'PY'
-from pathlib import Path
-import re
-path = Path("/opt/kayroslab/backend/fastify/.env")
-text = path.read_text() if path.exists() else ""
-replacements = {
-    "OIDC_ISSUER": "https://sso.kayroslab.com",
-    "OIDC_CLIENT_ID": "kayroslab-console",
-    "AUTHELIA_USERS_FILE": "/opt/kayroslab/data/authelia/users.yml",
-}
-for name, value in replacements.items():
-    line = f"{name}={value}"
-    if re.search(rf"^{name}=.*$", text, re.M):
-        text = re.sub(rf"^{name}=.*$", line, text, flags=re.M)
-    else:
-        text = text.rstrip() + "\n" + line + "\n"
-path.write_text(text)
-path.chmod(0o600)
-PY
-fi
-
-echo "SSO OpenID pret."
-
-if command -v pm2 >/dev/null 2>&1; then
-  pm2 restart kayros-api --update-env >/dev/null || true
-fi
+echo "SSO pret."
