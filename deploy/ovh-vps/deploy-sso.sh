@@ -9,6 +9,8 @@ BACKEND_ENV="${APP_DIR}/backend/fastify/.env"
 COMPOSE="${APP_DIR}/deploy/ovh-vps/authelia.compose.yaml"
 SITE_AVAILABLE="/etc/nginx/sites-available/sso.kayroslab.com"
 IMAGE="authelia/authelia:4.39.20"
+ASSETS_SRC="${APP_DIR}/deploy/ovh-vps/authelia-assets"
+PEAU_DIR="${APP_DIR}/backend/web/public/salon"
 
 if [[ ! -f "${COMPOSE}" ]]; then
   echo "ERREUR : ${COMPOSE} introuvable." >&2
@@ -19,8 +21,11 @@ if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>
   exit 0
 fi
 
-mkdir -p "${CONF_DIR}"
+mkdir -p "${CONF_DIR}/assets"
 chmod 700 "${CONF_DIR}"
+if [[ -d "${ASSETS_SRC}" ]]; then
+  cp -a "${ASSETS_SRC}/." "${CONF_DIR}/assets/"
+fi
 
 secret_file() {
   local path="$1" bytes="${2:-48}"
@@ -70,9 +75,10 @@ fi
 OIDC_PEM_INDENTED=$(sed 's/^/          /' "${CONF_DIR}/oidc.pem")
 
 cat > "${CONF_DIR}/configuration.yml" <<YAML
-theme: auto
+theme: light
 server:
   address: 'tcp://0.0.0.0:9091/'
+  asset_path: '/config/assets'
 log:
   level: info
 identity_validation:
@@ -125,6 +131,7 @@ ${OIDC_PEM_INDENTED}
           - 'https://www.kayroslab.com/console/'
           - 'https://www.kayroslab.com/salon/'
           - 'https://www.kayroslab.com/salon/flux/'
+          - 'https://www.kayroslab.com/salon/entrer/'
           - 'http://localhost:4174/console/'
           - 'http://localhost:4174/salon/'
           - 'http://localhost:4174/salon/flux/'
@@ -151,6 +158,41 @@ export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
 docker compose -f "${COMPOSE}" pull
 docker compose -f "${COMPOSE}" up -d --force-recreate
 
+PEAU_CSS="${PEAU_DIR}/sso-peau.css"
+PEAU_JS="${PEAU_DIR}/sso-peau.js"
+
+write_vhost() {
+  local ssl_block="$1"
+  cat > "${SITE_AVAILABLE}" <<NGINX
+${ssl_block}
+  location = /sso-peau.css {
+    alias ${PEAU_CSS};
+    add_header Cache-Control "no-cache";
+    types { text/css css; }
+  }
+  location = /sso-peau.js {
+    alias ${PEAU_JS};
+    add_header Cache-Control "no-cache";
+    types { application/javascript js; }
+  }
+  location / {
+    proxy_pass http://127.0.0.1:9091;
+    proxy_http_version 1.1;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_set_header X-Forwarded-Host \$http_host;
+    proxy_set_header Accept-Encoding "";
+    sub_filter '</head>' '<link rel="stylesheet" href="/sso-peau.css"></head>';
+    sub_filter '</body>' '<script src="/sso-peau.js" defer></script></body>';
+    sub_filter_once off;
+    sub_filter_types text/html;
+  }
+}
+NGINX
+}
+
 if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
   CERT_DIR=""
   for d in /etc/letsencrypt/live/sso.kayroslab.com; do
@@ -161,8 +203,7 @@ if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
     SSL_DH=""
     [[ -f /etc/letsencrypt/options-ssl-nginx.conf ]] && SSL_OPTIONS="  include /etc/letsencrypt/options-ssl-nginx.conf;"
     [[ -f /etc/letsencrypt/ssl-dhparams.pem ]] && SSL_DH="  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;"
-    cat > "${SITE_AVAILABLE}" <<NGINX
-server {
+    write_vhost "server {
   listen 80;
   server_name sso.kayroslab.com;
   location /.well-known/acme-challenge/ { root /var/www/html; }
@@ -174,25 +215,17 @@ server {
   ssl_certificate ${CERT_DIR}/fullchain.pem;
   ssl_certificate_key ${CERT_DIR}/privkey.pem;
 ${SSL_OPTIONS}
-${SSL_DH}
-  location / {
-    proxy_pass http://127.0.0.1:9091;
-    proxy_http_version 1.1;
-    proxy_set_header Host \$host;
-    proxy_set_header X-Real-IP \$remote_addr;
-    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto \$scheme;
-    proxy_set_header X-Forwarded-Host \$http_host;
-  }
-}
-NGINX
+${SSL_DH}"
   else
-    cp "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" "${SITE_AVAILABLE}"
+    write_vhost "server {
+  listen 80;
+  server_name sso.kayroslab.com;
+  location /.well-known/acme-challenge/ { root /var/www/html; }"
   fi
   ln -sf "${SITE_AVAILABLE}" /etc/nginx/sites-enabled/sso.kayroslab.com
   if nginx -t; then
     systemctl reload nginx
-    echo "nginx recharge — sso.kayroslab.com -> Authelia"
+    echo "nginx recharge — sso.kayroslab.com -> Authelia + peau Salon"
   else
     echo "AVERTISSEMENT : nginx -t a echoue pour le vhost SSO." >&2
   fi
