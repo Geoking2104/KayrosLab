@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { syncAutheliaUser } from '../lib/authelia-sync.mjs';
 import {
   authorizeUrl,
   exchangeAuthorizationCode,
@@ -61,6 +62,15 @@ async function resolvedOidc(ctx) {
   return ctx.oidcDiscovered;
 }
 
+async function pushAuthelia(req, payload) {
+  try {
+    const sync = await syncAutheliaUser(payload);
+    if (sync?.username) req.log.info({ username: sync.username }, 'authelia sync');
+  } catch (error) {
+    req.log.error({ err: error }, 'authelia sync failed');
+  }
+}
+
 export default async function authRoutes(app) {
   app.post('/v1/auth/register', async (req, reply) => {
     const ctx = app.kayrosContext;
@@ -74,7 +84,9 @@ export default async function authRoutes(app) {
         const caller = await app.requireAuth(req, reply); if (!caller) return;
         if (caller.role !== 'comex') return reply.code(403).send({ error: 'seul un COMEX peut creer ce role' });
       }
-      return { user: await ctx.auth.register({ email, password, name, role: asked, tenantId }) };
+      const user = await ctx.auth.register({ email, password, name, role: asked, tenantId });
+      await pushAuthelia(req, { email, password, name: name || user?.name });
+      return { user };
     } catch (e) { return reply.code(400).send({ error: e.message }); }
   });
 
@@ -177,7 +189,9 @@ export default async function authRoutes(app) {
     const parsed = resetPasswordSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'lien ou mot de passe invalide', issues: parsed.error.issues });
     try {
-      await ctx.auth.resetPassword(parsed.data);
+      const result = await ctx.auth.resetPassword(parsed.data);
+      const email = result?.user?.email || result?.email;
+      if (email) await pushAuthelia(req, { email, password: parsed.data.password, name: result?.user?.name });
       return { ok: true, message: 'Votre mot de passe a été réinitialisé. Vous pouvez maintenant vous connecter.' };
     } catch (error) {
       if (error.code === 'AUTH_RESET_INVALID') return reply.code(400).send({ error: error.message });
