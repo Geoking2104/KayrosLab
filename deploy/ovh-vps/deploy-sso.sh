@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# deploy-sso.sh — IdP Authelia (OpenID Connect, Apache-2.0) + vhost sso.kayroslab.com.
+# deploy-sso.sh — IdP Authelia + vhost sso.kayroslab.com.
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/opt/kayroslab}"
@@ -9,8 +9,6 @@ BACKEND_ENV="${APP_DIR}/backend/fastify/.env"
 COMPOSE="${APP_DIR}/deploy/ovh-vps/authelia.compose.yaml"
 SITE_AVAILABLE="/etc/nginx/sites-available/sso.kayroslab.com"
 IMAGE="authelia/authelia:4.39.20"
-ASSETS_SRC="${APP_DIR}/deploy/ovh-vps/authelia-assets"
-PEAU_DIR="${APP_DIR}/backend/web/public/salon"
 
 if [[ ! -f "${COMPOSE}" ]]; then
   echo "ERREUR : ${COMPOSE} introuvable." >&2
@@ -21,11 +19,8 @@ if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>
   exit 0
 fi
 
-mkdir -p "${CONF_DIR}/assets"
+mkdir -p "${CONF_DIR}"
 chmod 700 "${CONF_DIR}"
-if [[ -d "${ASSETS_SRC}" ]]; then
-  cp -a "${ASSETS_SRC}/." "${CONF_DIR}/assets/"
-fi
 
 secret_file() {
   local path="$1" bytes="${2:-48}"
@@ -45,7 +40,6 @@ if [[ ! -s "${CONF_DIR}/oidc.pem" ]]; then
   openssl genrsa -out "${CONF_DIR}/oidc.pem" 2048
   chmod 600 "${CONF_DIR}/oidc.pem"
 fi
-OIDC_PEM=$(cat "${CONF_DIR}/oidc.pem")
 
 if [[ ! -s "${CONF_DIR}/users.yml" ]]; then
   INITIAL=$(openssl rand -base64 18 | tr -d '/+=' | head -c 20)
@@ -69,16 +63,14 @@ YAML
   chmod 600 "${CONF_DIR}/users.yml"
   printf '%s\n' "${INITIAL}" > "${CONF_DIR}/INITIAL_PASSWORD.txt"
   chmod 600 "${CONF_DIR}/INITIAL_PASSWORD.txt"
-  echo "SSO Authelia : mot de passe initial dans ${CONF_DIR}/INITIAL_PASSWORD.txt (contact@kayroslab.com)."
 fi
 
 OIDC_PEM_INDENTED=$(sed 's/^/          /' "${CONF_DIR}/oidc.pem")
 
 cat > "${CONF_DIR}/configuration.yml" <<YAML
-theme: light
+theme: auto
 server:
   address: 'tcp://0.0.0.0:9091/'
-  asset_path: '/config/assets'
 log:
   level: info
 identity_validation:
@@ -155,43 +147,8 @@ if [[ -f "${BACKEND_ENV}" ]]; then
 fi
 
 export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
-docker compose -f "${COMPOSE}" pull
 docker compose -f "${COMPOSE}" up -d --force-recreate
-
-PEAU_CSS="${PEAU_DIR}/sso-peau.css"
-PEAU_JS="${PEAU_DIR}/sso-peau.js"
-
-write_vhost() {
-  local ssl_block="$1"
-  cat > "${SITE_AVAILABLE}" <<NGINX
-${ssl_block}
-  location = /sso-peau.css {
-    alias ${PEAU_CSS};
-    add_header Cache-Control "no-cache";
-    types { text/css css; }
-  }
-  location = /sso-peau.js {
-    alias ${PEAU_JS};
-    add_header Cache-Control "no-cache";
-    types { application/javascript js; }
-  }
-  location / {
-    proxy_pass http://127.0.0.1:9091;
-    proxy_http_version 1.1;
-    proxy_set_header Host \$host;
-    proxy_set_header X-Real-IP \$remote_addr;
-    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto \$scheme;
-    proxy_set_header X-Forwarded-Host \$http_host;
-    proxy_set_header Accept-Encoding "";
-    sub_filter '</head>' '<link rel="stylesheet" href="/sso-peau.css"></head>';
-    sub_filter '</body>' '<script src="/sso-peau.js" defer></script></body>';
-    sub_filter_once off;
-    sub_filter_types text/html;
-  }
-}
-NGINX
-}
+sleep 3
 
 if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
   CERT_DIR=""
@@ -203,7 +160,8 @@ if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
     SSL_DH=""
     [[ -f /etc/letsencrypt/options-ssl-nginx.conf ]] && SSL_OPTIONS="  include /etc/letsencrypt/options-ssl-nginx.conf;"
     [[ -f /etc/letsencrypt/ssl-dhparams.pem ]] && SSL_DH="  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;"
-    write_vhost "server {
+    cat > "${SITE_AVAILABLE}" <<NGINX
+server {
   listen 80;
   server_name sso.kayroslab.com;
   location /.well-known/acme-challenge/ { root /var/www/html; }
@@ -215,17 +173,25 @@ server {
   ssl_certificate ${CERT_DIR}/fullchain.pem;
   ssl_certificate_key ${CERT_DIR}/privkey.pem;
 ${SSL_OPTIONS}
-${SSL_DH}"
+${SSL_DH}
+  location / {
+    proxy_pass http://127.0.0.1:9091;
+    proxy_http_version 1.1;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_set_header X-Forwarded-Host \$http_host;
+  }
+}
+NGINX
   else
-    write_vhost "server {
-  listen 80;
-  server_name sso.kayroslab.com;
-  location /.well-known/acme-challenge/ { root /var/www/html; }"
+    cp "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" "${SITE_AVAILABLE}"
   fi
   ln -sf "${SITE_AVAILABLE}" /etc/nginx/sites-enabled/sso.kayroslab.com
   if nginx -t; then
     systemctl reload nginx
-    echo "nginx recharge — sso.kayroslab.com -> Authelia + peau Salon"
+    echo "nginx recharge — sso.kayroslab.com -> Authelia"
   else
     echo "AVERTISSEMENT : nginx -t a echoue pour le vhost SSO." >&2
   fi
@@ -234,15 +200,16 @@ fi
 if [[ -f "${BACKEND_ENV}" ]]; then
   python3 - <<'PY'
 from pathlib import Path
+import re
 path = Path("/opt/kayroslab/backend/fastify/.env")
 text = path.read_text() if path.exists() else ""
 replacements = {
     "OIDC_ISSUER": "https://sso.kayroslab.com",
     "OIDC_CLIENT_ID": "kayroslab-console",
+    "AUTHELIA_USERS_FILE": "/opt/kayroslab/data/authelia/users.yml",
 }
 for name, value in replacements.items():
     line = f"{name}={value}"
-    import re
     if re.search(rf"^{name}=.*$", text, re.M):
         text = re.sub(rf"^{name}=.*$", line, text, flags=re.M)
     else:
@@ -252,7 +219,7 @@ path.chmod(0o600)
 PY
 fi
 
-echo "SSO OpenID pret (Authelia Apache-2.0). DNS A sso.kayroslab.com -> 51.210.9.71 puis certbot."
+echo "SSO OpenID pret."
 
 if command -v pm2 >/dev/null 2>&1; then
   pm2 restart kayros-api --update-env >/dev/null || true
