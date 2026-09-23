@@ -119,8 +119,16 @@
     try {
       var body = JSON.parse(opts.body);
       system = String(body.system || "");
-      body.system = system + "\n\nTu réfléchis : écoute la question et la dernière prise ; ancre-toi seulement si le lieu répond à CETTE question ; PRISE puis 3 à 7 phrases closes. Interdit : titre étranger ; phrase tronquée ; collage hors sujet.";
-      body.user = userBlock(system, String(body.user || "").replace(/^Question de l'hote:\s*/i, ""));
+      /* Ne pas écraser le prompt du moteur : il porte déjà question, cadrage,
+       * fil et passages (voir salon-engine.js). On n\'ajoute le contrat et le fil
+       * que si l\'appel est encore l\'ancien. */
+      if (system.indexOf("Contrat :") === -1) {
+        body.system = system + "\n\nTu réfléchis : écoute la question et la dernière prise ; ancre-toi seulement si le lieu répond à CETTE question ; PRISE puis 3 à 7 phrases closes. Interdit : titre étranger ; phrase tronquée ; collage hors sujet.";
+      }
+      var usr = String(body.user || "");
+      if (usr.indexOf("fil directeur") === -1) {
+        body.user = userBlock(system, usr.replace(/^Question de l'hote:\s*/i, ""));
+      }
       opts = Object.assign({}, opts, { body: JSON.stringify(body) });
     } catch (e) {}
     return orig.call(this, url, opts).then(function (res) {

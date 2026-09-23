@@ -61,7 +61,7 @@ jobs:
             frontend/console-app/package-lock.json
       - name: Validate public demo JavaScript and CTA wiring
         continue-on-error: true
-        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
+        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs tests/salon-engine.test.mjs tests/salon-copy.test.mjs tests/salon-responsive.test.mjs
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
         run: |
@@ -104,8 +104,9 @@ jobs:
           if [ "$SIZE" -lt 50000 ]; then echo "ERROR: salon specimen truncated ($SIZE bytes)" >&2; exit 1; fi
           grep -q 'id="open-circle"' deploy/salon/index.html || { echo "ERROR: ouvrir un cercle missing" >&2; exit 1; }
           grep -q 'id="accueil"' deploy/salon/index.html || { echo "ERROR: accueil pane missing" >&2; exit 1; }
-          for f in circle-run.js circle-ui.js circle-stage.js circle-speech.js knowledge.js conflict.js agents-import.js titles-fr.js flux-x.js; do
-            if [ ! -f "deploy/salon/$f" ]; then echo "ERROR: salon script missing: $f" >&2; exit 1; fi
+          grep -q 'salon-engine.js' deploy/salon/index.html || { echo "ERROR: salon-engine not wired" >&2; exit 1; }
+          for f in salon-engine.js corpus.json circle-run.js circle-ui.js circle-stage.js circle-speech.js knowledge.js conflict.js agents-import.js titles-fr.js flux-x.js; do
+            if [ ! -f "deploy/salon/$f" ]; then echo "ERROR: salon asset missing: $f" >&2; exit 1; fi
           done
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

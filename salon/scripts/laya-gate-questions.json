@@ -1,0 +1,26 @@
+{
+  "passage_answers_question": {
+    "type": "noul",
+    "instructions": "The passage is offered as grounding for the table question. Does it actually answer THIS question, or is it off-topic (a dinner, an editor's note, a frontispiece)?",
+    "criteria": {
+      "true": "the passage bears on the question's subject and demand",
+      "false": "the passage is off-topic",
+      "unknown": "cannot tell from the passage alone"
+    }
+  },
+  "relevant_work": {
+    "type": "choice",
+    "instructions": "Among this author's works, which one is the right place to ground this table question?",
+    "criteria": {
+      "work_0": "first candidate work title",
+      "work_1": "second candidate work title",
+      "work_2": "third candidate work title",
+      "none": "no work of this author answers the question"
+    }
+  },
+  "off_table": {
+    "type": "score",
+    "instructions": "How far does this turn drift from the table question?",
+    "criteria": ["on the table question", "adjacent but useful", "off the question"]
+  }
+}

@@ -10,6 +10,29 @@
     { role: "defenseur", act: "defend", brief: "Tu precises contre l'objection." },
     { role: "secretaire", act: "minute", brief: "Tu resumes le conflit et ce qui reste ouvert." }
   ];
+  /* Mémoire livrée (passages des œuvres) + fil de discussion conservé entre les
+   * tours. Le moteur déterministe (salon-engine.js) cadre la question et ancre
+   * chaque réplique dans la mémoire du convive. */
+  var CORPUS = null, CORPUS_READY = null, threadHistory = [];
+  function loadCorpus() {
+    if (CORPUS_READY) return CORPUS_READY;
+    CORPUS_READY = fetch("/salon/corpus.json", { cache: "force-cache" })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (j) { CORPUS = j || {}; return CORPUS; })
+      .catch(function () { CORPUS = {}; return CORPUS; });
+    return CORPUS_READY;
+  }
+  function engine() { return (typeof window !== "undefined" && window.SalonEngine) || null; }
+  function currentLang() { return (typeof locale !== "undefined" && locale === "en") ? "en" : "fr"; }
+  function actOf(seat) { return (seat && seat.role === "objecteur") ? "objection" : "reponse"; }
+  function seam(author, question, seat) {
+    var E = engine();
+    if (!E) return null;
+    var sc = E.scope(question);
+    var found = E.retrieve((CORPUS && CORPUS[author.id]) || [], sc, 3).filter(function (p) { return !p.weak; });
+    return { E: E, sc: sc, passages: found };
+  }
+
   function boot() {
     if (typeof authors === "undefined" || !document.getElementById("open-circle")) { setTimeout(boot, 40); return; }
     injectUi(); hookMentions(); hookOpen(); hookCompose(); hookTalk();
@@ -185,37 +208,50 @@
     return t.trim();
   }
   function localVoice(author, question, seat) {
-    var works = author.works || [], work = works[0] || "mes livres", work2 = works[1] || work;
-    var role = (seat && seat.role) || "invite";
-    var frame = frameQuestions(question, role);
-    var mid = role === "objecteur"
-      ? ("La lecture trop nette confond l'outil et l'agent. " + work + " separe ce qui agit et ce qui est agi. Une machine qui combine n'institue pas une volonte ; une structure cause-effet vue du dehors n'est pas encore un dedans.")
-      : role === "defenseur"
-      ? ("Precisons. " + work2 + " distingue contrainte exterieure et loi qu'on se donne. Information pour un observateur n'est pas information intrinseque. Un complexe irreductible, s'il existe, n'est pas une sortie eloquente.")
-      : role === "secretaire"
-      ? "La minute note trois dossiers : le grain, le test, l'espece de conscience. Tant qu'ils restent melee, affirmer ou nier n'est qu'un effet de langue."
-      : ("La phrase colle des termes d'ordres differents. " + work + " defait d'abord le sujet. Un automate peut etre independant d'un operateur sans cesser d'etre un moyen. La conscience-phenomene n'est pas la conscience-acces, ni un statut moral.");
-    var close = /libre|ia|intelligence|conscience|phi|iit/i.test(String(question||""))
-      ? "Selon le grain, le test et l'espece choisis, la reponse bascule. Pas de verdict tant que ces trois questions restent ouvertes."
-      : "Une fois ces questions posees, on peut repondre. Pas avant : autrement on tranche un mot, pas un probleme.";
-    return { text: (frame + " " + mid + " " + close).replace(/\s+/g, " ").trim(), proof: proofFromAuthor(author) };
+    try {
+      var s = seam(author, question, seat);
+      if (!s) return { text: "", prise: "", proof: proofFromAuthor(author) };
+      var out = s.E.answer({ author: author, question: question, scope: s.sc, passages: s.passages, corpus: (CORPUS && CORPUS[author.id]) || [], history: threadHistory, act: actOf(seat), lang: currentLang() });
+      return { text: out.text, prise: out.prise, proof: proofFromAuthor(author) };
+    } catch (e) {
+      return { text: "", prise: "", proof: proofFromAuthor(author) };
+    }
   }
   function askVoice(author, question, seat) {
     var role = (seat && seat.role) || "invite";
-    var system = "Tu es " + authorNameSafe(author) + ". Role: " + role + ". Commence par deux questions courtes. Si IA, liberte ou conscience : decompose grain (poids, instance, session, agent+memoire), test (sortie, recurrence, complexe irreductible), espece (phenomene, acces, morale). Puis raisonne. 160-240 mots, francais, premiere personne. Interdits: Je prends la question ; maxime ; On me connait ainsi ; te presenter ; extrait comme seule reponse.";
-    showThink("Cadrage, puis reponse — " + authorNameSafe(author));
-    logStep("Le salon reflechit avec " + authorNameSafe(author), true);
-    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-    var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 7000);
-    return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: "Question de l'hote: " + question }), signal: ctrl ? ctrl.signal : undefined })
-      .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
-      .then(function (r) {
-        var text = stripPreamble((r.j && (r.j.text || r.j.content)) || "");
-        if (!r.ok || !text || /^\[mock\]/i.test(text) || text.length < 90) return localVoice(author, question, seat);
-        return { text: text, proof: proofFromAuthor(author) };
-      })
-      .catch(function () { return localVoice(author, question, seat); })
-      .finally(function () { clearTimeout(timer); });
+    return loadCorpus().then(function () {
+      var s = seam(author, question, seat);
+      var E = s && s.E;
+      var system, user;
+      if (E) {
+        try {
+          var fp = E.floorPrompt({
+            author: author, question: question, scope: s.sc, passages: s.passages,
+            history: threadHistory, act: actOf(seat), toName: "l’hôte", lang: currentLang(),
+          });
+          system = fp.system; user = fp.user;
+        } catch (e) { E = null; }
+      }
+      if (!E) {
+        system = "Tu es " + authorNameSafe(author) + ". Réponds à la question de table depuis tes œuvres.";
+        user = "Question de table : " + question;
+      }
+      showThink("Cadrage, puis reponse — " + authorNameSafe(author));
+      logStep("Le salon reflechit avec " + authorNameSafe(author), true);
+      var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 7000);
+      return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: user }), signal: ctrl ? ctrl.signal : undefined })
+        .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
+        .then(function (r) {
+          var text = stripPreamble((r.j && (r.j.text || r.j.content)) || "");
+          var prise = (r.j && r.j.prise) || "";
+          if (E && !prise && text) prise = E.firstSentences(text, 1).slice(0, 220);
+          if (!r.ok || !text || /^\[mock\]/i.test(text) || text.length < 60) return localVoice(author, question, seat);
+          return { text: text, prise: prise, proof: proofFromAuthor(author) };
+        })
+        .catch(function () { return localVoice(author, question, seat); })
+        .finally(function () { clearTimeout(timer); });
+    });
   }
   function runTable(question, ids, opts) {
     opts = opts || {}; question = String(question || "").trim();
@@ -236,6 +272,8 @@
         return askVoice(author, question, seat).then(function (out) {
           var text = (out && out.text) || "";
           if (wait) { wait.classList.remove("is-wait"); var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = seat.act; wait.querySelector("p").textContent = text; fillProof(wait, (out && out.proof) || proofFromAuthor(author)); }
+          threadHistory.push({ name: authorNameSafe(author), text: text, prise: (out && out.prise) || "" });
+          if (threadHistory.length > 12) threadHistory.shift();
           recordBeat(author, seat, guests);
           return new Promise(function (ok) { setTimeout(ok, 260); });
         });
@@ -250,6 +288,7 @@
     var form = document.getElementById("open-circle"); if (!form || form.dataset.circleHook) return; form.dataset.circleHook = "1";
     form.addEventListener("submit", function () {
       setTimeout(function () {
+        threadHistory = [];
         var data = new FormData(form), name = String(data.get("name") || "Cercle").trim(), question = String(data.get("question") || "").trim();
         var picked = typeof selectedIds === "function" ? selectedIds() : guestIds();
         if (picked.length < 2) { showThink("Cochez au moins deux convives."); return; }
