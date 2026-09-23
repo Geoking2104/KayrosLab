@@ -128,8 +128,11 @@ déploiement VPS (`deploy-vps-backend.yml`) écrit la clé dans le `.env` du ser
    - `curl -s https://api.kayroslab.com/health` → `"llm":{"provider":"mistral","live":true,…}` ;
    - surtout : `curl -s -X POST https://api.kayroslab.com/v1/llm -H 'content-type: application/json' \
      -d '{"messages":[{"role":"user","content":"ping"}],"provider":"mistral"}'`
-     → `"provider":"mistral"` (s'il renvoie `"provider":"mock"` avec `"degraded"`, la clé n'est pas
-     acceptée par Mistral et le routeur est retombé sur le mock).
+     → `"provider":"mistral"` (s'il renvoie `"provider":"mock"` avec `"degraded"`, voir ci-dessous).
+   - si `degraded.error` = `mistral http 429` : la clé est **acceptée** mais le
+     quota Mistral est atteint (plan/crédits). Renseigner alors `ANTHROPIC_API_KEY`
+     (secret) : le backend bascule dessus automatiquement. Idem `mistral http 401`
+     → clé invalide.
 
 Tant que la clé est absente, le déploiement **n'échoue plus** : il avertit et le
 salon reste sur le moteur déterministe (`provider: "mock"`). Côté navigateur, rien
