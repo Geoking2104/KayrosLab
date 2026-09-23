@@ -52,6 +52,7 @@
   function msgsOl() { return document.querySelector(".stream ol.msgs") || document.querySelector("ol.msgs"); }
   function isMobile() { return window.matchMedia && window.matchMedia("(max-width:860px)").matches; }
 
+  function activate() { if (!msgsOl()) return; stageOn(); watch(); dock(); }
   function stageOn() {
     css();
     if (document.getElementById("salon-stage")) {
@@ -317,13 +318,8 @@
     hookFetch();
     hookOpen();
     window.addEventListener("resize", function () { dock(); });
-    if (msgsOl() && msgsOl().children.length) { stageOn(); watch(); }
-    else {
-      var t = setInterval(function () {
-        if (msgsOl()) { stageOn(); watch(); hookOpen(); clearInterval(t); }
-      }, 80);
-      setTimeout(function () { clearInterval(t); }, 8000);
-    }
+    window.addEventListener("salon:table", function () { setTimeout(activate, 30); });
+    if (document.body.classList.contains("salon-table")) setTimeout(activate, 30);
     var origDock = window.SalonConflict && window.SalonConflict.paint;
     if (origDock) {
       window.SalonConflict.paint = function () {
