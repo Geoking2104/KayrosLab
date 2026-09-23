@@ -211,7 +211,7 @@
     try {
       var s = seam(author, question, seat);
       if (!s) return { text: "", prise: "", proof: proofFromAuthor(author) };
-      var out = s.E.answer({ author: author, question: question, scope: s.sc, passages: s.passages, corpus: (CORPUS && CORPUS[author.id]) || [], history: threadHistory, act: actOf(seat), lang: currentLang() });
+      var out = s.E.answer({ author: author, question: question, scope: s.sc, passages: s.passages, corpus: (CORPUS && CORPUS[author.id]) || [], history: threadHistory, role: (seat && seat.role) || "invite", lang: currentLang() });
       return { text: out.text, prise: out.prise, proof: proofFromAuthor(author) };
     } catch (e) {
       return { text: "", prise: "", proof: proofFromAuthor(author) };
@@ -227,7 +227,7 @@
         try {
           var fp = E.floorPrompt({
             author: author, question: question, scope: s.sc, passages: s.passages,
-            history: threadHistory, act: actOf(seat), toName: "l’hôte", lang: currentLang(),
+            history: threadHistory, role: (seat && seat.role) || "invite", lang: currentLang(),
           });
           system = fp.system; user = fp.user;
         } catch (e) { E = null; }

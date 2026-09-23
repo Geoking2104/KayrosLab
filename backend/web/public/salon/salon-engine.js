@@ -311,75 +311,136 @@
     temps: { definition: "le temps ne se possède pas ; il se dépense" },
     generique: {},
   };
+  /* Thèse : d'abord celle de l'AUTEUR (sa mémoire), cadrée par la demande ;
+   * le domaine ne sert que de repli. C'est ce qui distingue les voix. */
+  function authorThesis(author) {
+    var blurb = String((author && (author.blurb || author.blurbEn)) || "").replace(/\s+/g, " ").trim();
+    if (!blurb) return "";
+    var idx = blurb.search(/[.:—]/);
+    var head = idx > 18 ? blurb.slice(idx + 1) : blurb;
+    head = head.replace(/\.\s*$/, "").trim();
+    if (head.length < 12) head = blurb.replace(/\.\s*$/, "");
+    return head;
+  }
   function thesisFor(sc, author) {
+    var own = authorThesis(author);
+    if (own) return own;
     var table = THESES[sc.domain] || {};
     if (table[sc.demand]) return table[sc.demand];
     if (table.definition) return table.definition;
     if (sc.these) return sc.these;
-    var blurb = author && (author.blurb || "");
-    if (blurb) return blurb.replace(/\s+/g, " ").replace(/\.\s*$/, "");
     return "\"" + (sc.label || "la question") + "\" demande d'abord d'être circonscrite";
+  }
+  /* La demande colore l'énoncé de la thèse (norme, définition, cause…). */
+  function phraseFor(sc, author) {
+    var base = thesisFor(sc, author);
+    var d = sc.demand;
+    if (d === "norme") return "sur ce qu'il faut faire, ma règle est simple : " + base;
+    if (d === "definition") return "je réponds par une définition : " + base;
+    if (d === "cause") return "la cause, à mon sens, se dit ainsi : " + base;
+    if (d === "maniere") return "cela se fait par degrés : " + base;
+    if (d === "verite") return "la réponse tient à ceci : " + base;
+    return base;
+  }
+  /* On cite le point de l'autre sans son habillage de demande. */
+  function stripWrapper(s) {
+    return String(s || "").replace(/^(sur ce qu'il faut faire, ma règle est simple : |je réponds par une définition : |la cause, à mon sens, se dit ainsi : |cela se fait par degrés : |la réponse tient à ceci : )/i, "");
+  }
+
+  /* Planificateur dialectique : qui parle, à qui, sur quel point, avec quel acte.
+   * C'est ce qui donne une LOGIQUE aux rapports entre auteurs (objection ciblée,
+   * défense contre l'objection, minute finale), au lieu d'un ordre positionnel. */
+  function lastGuest(history) {
+    var h = history || [];
+    for (var i = h.length - 1; i >= 0; i--) { if (!h[i].host && h[i].name) return h[i]; }
+    return null;
+  }
+  function planTurn(input) {
+    input = input || {};
+    var role = input.role || "invite";
+    var prev = lastGuest(input.history);
+    var host = input.lang === "en" ? "the host" : "l’hôte";
+    var toName = prev ? prev.name : host;
+    var point = prev ? (prev.prise || prev.text || "") : "";
+    var move = "ouvre", act = "reponse";
+    if (role === "objecteur") { move = "objecte"; act = "objection"; }
+    else if (role === "defenseur") { move = "precise"; act = "reponse"; }
+    else if (role === "secretaire") { move = "minute"; act = "reponse"; }
+    else if (prev) { move = "ajoute"; act = "reponse"; }
+    return { move: move, act: act, toName: toName, point: point };
   }
 
   function compose(input) {
     var author = input.author || {};
     var sc = input.scope || scope(input.question || "");
     var lang = input.lang || sc.lang || "fr";
-    var act = input.act || (input.move && input.move.act) || "reponse";
-    var method = (input.method || author.method || "auto");
+    var act = input.act || "reponse";
+    var method = input.method || author.method || "auto";
     var passage = input.passage;
     var last = input.lastTurn;
-    var toName = input.toName || (last && last.name) || (lang === "en" ? "the host" : "l’hôte");
+    var move = input.move || (act === "objection" ? "objecte" : "ouvre");
     var question = input.question || sc.raw || "";
+    var subject = sc.label || sc.subject || "la question";
+    var qc = compactQuestion(question);
+    var toName = input.toName || (last && last.name) || (lang === "en" ? "the host" : "l’hôte");
+    var point = input.point || (last && last.prise) || "";
 
     var work = passage && passage.work ? passage.work : "";
     var sentence = passage && passage.sentence ? passage.sentence : "";
     var grounded = Boolean(work && sentence) && !(passage && passage.weak);
 
-    var qc = compactQuestion(question);
-    var subject = sc.label || sc.subject || "la question";
-
     var prise = "";
     var clauses = [];
+    var toLow = function (s) { return stripWrapper(compactQuestion(s, 110)).replace(/^[A-ZÀ-Ý]/, function (c) { return c.toLowerCase(); }); };
 
-    /* 1. Ressaisir — ce que l'autre vient de soutenir, et la question de table. */
-    if (act === "objection" && last) {
-      clauses.push("Tu tiens que " + compactQuestion(last.prise || last.text || subject, 110).replace(/^[A-Za-zÀ-ÿ]/, function (c) { return c.toLowerCase(); }) + ".");
+    /* 1. Ressaisir — nommer à qui l'on parle et le point qu'il a posé. */
+    if (move === "objecte") {
+      clauses.push(toName + ", tu soutiens que " + toLow(point || subject) + " — je ne l’accorde pas encore.");
+    } else if (move === "precise") {
+      clauses.push(toName + ", ton objection portait sur ce point : " + toLow(point || subject) + ". Je précise.");
+    } else if (move === "minute") {
+      clauses.push("Je reprends la table pour la minute : la question reste « " + qc + " ».");
     } else if (last && last.prise) {
-      clauses.push("Tu avances que " + compactQuestion(last.prise, 110).replace(/^[A-Za-zÀ-ÿ]/, function (c) { return c.toLowerCase(); }) + ".");
+      clauses.push(toName + ", je reprends ton point : " + toLow(last.prise) + ".");
     } else {
-      clauses.push("La question de table est celle-ci : " + qc + ".");
+      clauses.push("L’hôte demande : " + qc + ".");
     }
-    clauses.push("Je la garde pour fil — non un autre dossier, mais " + subject + ".");
+    if (move !== "minute") clauses.push("Je le garde pour fil : il s’agit de " + subject + ", non d’un autre dossier.");
 
     /* 2. Position — la thèse du convive (elenchus : définir, ne pas conclure). */
     if (method === "elenchus") {
       prise = "Je ne tiens pas encore la définition que tu mets sous ces mots.";
-      clauses.push("Avant de conclure, je te demande ce que tu mets sous \"" + subject + "\" : une seule chose, ou plusieurs que l'on confond ?");
+      clauses.push("Avant de conclure, dis-moi ce que tu mets sous « " + subject + " » : une seule chose, ou plusieurs que l’on confond ?");
     } else {
       var th = thesisFor(sc, author);
       prise = closeSentence(th);
-      clauses.push("Ma prise est simple : " + th + ".");
+      clauses.push("Ma prise, sur ce point : " + th + ".");
     }
 
-    /* 3. Ancrer — une seule œuvre nommée, au plus une phrase entière. */
+    /* 3. Ancrer — une œuvre nommée, une phrase entière, ou l'aveu du manque. */
     if (grounded) {
-      clauses.push("Je m'appuie sur « " + work + " » : " + sentence);
+      clauses.push("Mon lieu est « " + work + " » : " + sentence);
     } else {
-      var wl = (author.works && author.works.length) ? author.works[0].title || author.works[0] : "";
+      var wl = (author.works && author.works.length) ? (author.works[0].title || author.works[0]) : "";
       clauses.push(wl
-        ? "Le passage le plus proche ne tranche pas cette question ; je m'en tiens donc à ce que je peux signer depuis « " + wl + " », sans citer à faux."
+        ? "Le passage le plus proche ne tranche pas cette question ; je m’en tiens donc à ce que je peux signer depuis « " + wl + " », sans citer à faux."
         : "Aucun de mes livres ne tranche ici : je ne fabrique pas de citation.");
     }
 
-    /* 4. Avancer — une conséquence, ou une question courte à celui à qui l'on parle. */
+    /* 4. Avancer — conséquence ou question courte, adressée à celui à qui l'on parle. */
     var suite = String(sc.suite || "").replace(/^(il )?reste à /, "");
     if (method === "elenchus") {
       clauses.push("Tiens-tu cette définition jusqu’au bout, ou la vois-tu déjà se défaire ?");
-    } else if (act === "objection") {
+    } else if (move === "objecte") {
       clauses.push("Ce n’est pas ta personne que je presse, " + toName + " : c’est ce que ta phrase ne peut plus soutenir.");
+    } else if (move === "precise") {
+      clauses.push("Tiens-tu ton objection jusqu’au bout, " + toName + ", ou faut-il distinguer davantage ?");
+    } else if (move === "minute") {
+      clauses.push("Voilà les nœuds encore ouverts ; à la table de trancher.");
     } else if (suite) {
       clauses.push("Ce qui reste à décider : " + suite + ".");
+    } else if (last) {
+      clauses.push("Voilà ce que je signe sur ton point, " + toName + "; la suite est à qui voudra la reprendre.");
     } else {
       clauses.push("Voilà ce que je signe ; la suite est à qui voudra objecter.");
     }
@@ -393,11 +454,13 @@
     var passages = input.passages || retrieve(input.corpus || [], sc, 3);
     var best = passages[0];
     var last = (input.history && input.history.length) ? input.history[input.history.length - 1] : null;
-    var act = input.act || "reponse";
-    if (input.history && input.history.length && act !== "adresse") act = input.act || "reponse";
+    var plan = (input.move || input.toName)
+      ? { move: input.move || "ouvre", act: input.act || "reponse", toName: input.toName, point: input.point }
+      : planTurn({ role: input.role, history: input.history, lang: input.lang });
     var out = compose({
       author: author, scope: sc, passage: best, lastTurn: last,
-      act: act, method: input.method || author.method, lang: input.lang,
+      act: plan.act, move: plan.move, toName: plan.toName, point: plan.point,
+      method: input.method || author.method, lang: input.lang,
     });
     return { text: out.text, prise: out.prise, grounded: out.grounded, scope: sc, passage: best || null };
   }
@@ -443,8 +506,11 @@
     var lang = input.lang || sc.lang || "fr";
     var en = lang === "en";
     var author = input.author;
-    var act = input.act || "reponse";
-    var toName = input.toName || (en ? "the host" : "l’hôte");
+    var _plan = input.move ? { move: input.move, act: input.act || "reponse", toName: input.toName, point: input.point } : planTurn({ role: input.role, history: input.history, lang: lang });
+    var act = _plan.act || input.act || "reponse";
+    var move = _plan.move || "ouvre";
+    var toName = input.toName || _plan.toName || (en ? "the host" : "l’hôte");
+    var point = input.point || _plan.point || "";
     var last = (input.history && input.history.length) ? input.history[input.history.length - 1] : null;
     var fig = figureFor((author && author.id) + "|" + sc.domain + "|" + sc.demand);
     var passages = input.passages || [];
@@ -470,9 +536,13 @@
       last
         ? (en ? "Previous turn to build on: " : "Dernier tour à enchaîner : ") + nameOf(last.author ? { name: last.author } : { name: last.name }, lang) + (last.prise ? " — " + (en ? "thesis: " : "prise : ") + last.prise : "") + ". " + (last.text || "")
         : (en ? "You open the table: restate the question, then take a stand." : "Tu ouvres la table : ressaisis la question, puis prends position."),
-      act === "objection"
-        ? (en ? "Act: objection. Address " : "Acte : objection. Tu t’adresses à ") + toName + (en ? "; object to their THESIS, not to another problem." : " ; objecte à SA PRISE, pas à un autre problème.")
-        : (en ? "Act: reply. Address " : "Acte : réponse. Tu t’adresses à ") + toName + ".",
+      (en ? "Move: " : "Acte : ") + move + (en ? ". Address " : ". Tu t’adresses à ") + toName +
+        (point ? ((en ? "; answer their point: " : " ; réponds à son point : ") + compactQuestion(point, 110)) : "") +
+        (move === "objecte"
+          ? (en ? "; object to their THESIS, not to another problem." : " ; objecte à SA PRISE, pas à un autre problème.")
+          : move === "minute"
+            ? (en ? "; summarise question, theses, open knots." : " ; minute : question, prises tenues, nœuds ouverts.")
+            : "."),
       passages.length
         ? (en ? "Passages (use at most one, only if it answers):\n" : "Passages (au plus un, seulement s’il répond) :\n") +
           passages.slice(0, 3).map(function (p) { return "« " + p.work + " »\n" + (p.sentence || firstSentences(p.text, 1)); }).join("\n\n")
@@ -514,6 +584,8 @@
     firstSentences: firstSentences,
     compose: compose,
     answer: answer,
+    planTurn: planTurn,
+    lastGuest: lastGuest,
     persona: persona,
     floorPrompt: floorPrompt,
     figureFor: figureFor,

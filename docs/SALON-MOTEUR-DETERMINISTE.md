@@ -41,6 +41,15 @@ cumulés coupaient le fil de la question :
 parsait `PRISE`/`REPLIQUE`, mais **sans mémoire ni passages**, et il écrasait le
 `user` du moteur — il neutralisait donc, à son insu, toute amélioration du prompt.
 
+### 1 bis. Aucun modèle n'est branché en production
+
+`POST /v1/demo/chat` répond aujourd'hui `[mock] (demo-agent) reponse simulee a: …` :
+dans `backend/fastify/lib/context.mjs`, le fournisseur par défaut est
+`MISTRAL_API_KEY ? 'mistral' : (ANTHROPIC_API_KEY ? 'anthropic' : 'mock')`. Sans clé,
+c'est `mock` (`core/kayros-llm.mjs`). Le client rejette `[mock]` et retombe donc sur
+le texte déterministe. **Intégrer une vraie LLM aiderait — mais il n'y en a pas
+encore ; et elle ne suffira pas seule à donner une logique aux relations.**
+
 ## 2. Le moteur déterministe livré
 
 `backend/web/public/salon/salon-engine.js` — fonction pure, sans aléa ni `Date`,
@@ -52,6 +61,7 @@ utilisable navigateur (`window.SalonEngine`) et Node (`module.exports`).
 | `retrieve(passages, scope, k)` | Classe la mémoire de l'auteur par pertinence (recouvrement de termes, requête élargie au vocabulaire du domaine) ; extrait pour chaque passage une **phrase entière** (`bestSentence`), sans résidu d'OCR ni note d'éditeur. |
 | `compose({author, scope, passage, lastTurn, act, method})` | Compose **PRISE + RÉPLIQUE** : ressaisir la prise précédente → position (thèse du domaine/demande ou `blurb` de l'auteur) → ancrage (une œuvre nommée, une phrase entière, **ou l'aveu du manque**) → avancer. Elenchus : définir et interroger, sans conclure. |
 | `answer({author, question, history, …})` | Tour complet : `scope` → `retrieve` → `compose`. C'est le repli **et** la source de vérité d'ancrage. |
+| `planTurn({role, history})` | **Planificateur dialectique** : qui parle, à qui (`toName`), sur quel point (`point` = prise précédente), avec quel acte (`ouvre` / `objecte` / `precise` / `minute` / `ajoute`). C'est ce qui donne une **logique aux rapports** — au lieu d'un ordre positionnel. |
 | `persona(author, lang)` | Mémoire de l'auteur (nom, genre, époque, thèse/`blurb`, méthode, œuvres) — pour le prompt LLM. |
 | `floorPrompt({…})` | `system` + `user` qui portent **question (fil directeur), cadrage, fil récent, passages**. |
 | `parseSpeech`, `firstSentences`, `relevance`, … | Utilitaires (contrat PRISE/REPLIQUE). |
@@ -69,10 +79,12 @@ utilisable navigateur (`window.SalonEngine`) et Node (`module.exports`).
 ### Effet
 
 Deux questions différentes produisent deux tours différents ; la réplique nomme le
-sujet de la question et reste dans le domaine ; le fil s'accroche à la prise
-précédente ; l'agent **cite une phrase entière** quand sa mémoire répond, sinon il
-dit qu'il ne peut pas citer — au lieu d'inventer ou de coller un fragment.
-Vérifié par `tests/salon-engine.test.mjs` (8 tests, déterministes).
+sujet de la question et reste dans le domaine ; **la thèse vient de la mémoire propre
+de l'auteur** (son `blurb`), donc les voix diffèrent ; le fil s'accroche à la prise
+précédente **en nommant l'interlocuteur** ; l'agent cite une phrase entière quand sa
+mémoire répond, sinon il dit qu'il ne peut pas citer.
+Vérifié par `tests/salon-engine.test.mjs` (10 tests, déterministes) et par un tour à
+quatre convives (`lecteur → objecteur → défenseur → secrétaire`).
 
 ## 3. `laya-onnx` : où il aide, où il ne faut pas l'employer
 

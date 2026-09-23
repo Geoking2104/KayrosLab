@@ -106,6 +106,32 @@ test('ancrage : cite une phrase entière quand la mémoire répond, sinon s’ab
   }
 });
 
+test('planTurn : les rapports entre auteurs ont une logique', () => {
+  const host = { name: 'Vous', text: qLiberte, host: true };
+  const v = { name: 'Voltaire', prise: 'la liberté est une loi qu’on se donne', text: '…' };
+
+  const t1 = E.planTurn({ role: 'lecteur', history: [] });
+  assert.equal(t1.move, 'ouvre');
+  assert.equal(t1.toName, 'l’hôte');
+
+  const t2 = E.planTurn({ role: 'objecteur', history: [host, v] });
+  assert.equal(t2.move, 'objecte');
+  assert.equal(t2.act, 'objection');
+  assert.equal(t2.toName, 'Voltaire');
+  assert.match(t2.point, /liberté/);
+
+  const t3 = E.planTurn({ role: 'defenseur', history: [host, v] });
+  assert.equal(t3.move, 'precise');
+  assert.equal(E.planTurn({ role: 'secretaire', history: [host, v] }).move, 'minute');
+});
+
+test('answer : une objection nomme l’auteur visé et son point', () => {
+  const history = [{ name: 'Vous', text: qLiberte, host: true }, { name: 'Voltaire', prise: 'la liberté est une loi qu’on se donne', text: '…' }];
+  const out = E.answer({ author: rousseau, question: qLiberte, corpus: corpus.rousseau || [], history, role: 'objecteur', lang: 'fr' });
+  assert.match(out.text, /Voltaire/);
+  assert.match(out.text, /loi qu’on se donne|loi qu'on se donne/);
+});
+
 test('parseSpeech : lit PRISE et REPLIQUE', () => {
   const r = E.parseSpeech('PRISE: la liberté est une loi qu’on se donne\nREPLIQUE:\nJe le soutiens.  Voilà.');
   assert.equal(r.prise, 'la liberté est une loi qu’on se donne');
