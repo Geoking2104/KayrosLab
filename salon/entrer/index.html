@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demander une entrée — Salon</title>
+  <link rel="canonical" href="https://www.kayroslab.com/salon/entrer/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#1c1610; --fade:#5a4e40; --rule:#2a2218; --sheet:#f3e6c8; --accent:#6b2a2a; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; background:#cbb892; color:var(--ink); font:16px/1.45 "Libre Baskerville", Georgia, serif; }
+    .sheet { max-width:36rem; margin:1.1rem auto 3rem; padding:1.1rem 1.25rem 2.4rem; background:var(--sheet); box-shadow:0 1px 0 #fff8e4 inset, 0 18px 40px rgba(40,24,8,.22); border:1px solid #b9a178; }
+    .mast { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding-bottom:.45rem; border-bottom:3px double var(--rule); font-family:Cinzel,serif; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; }
+    .mast a { color:inherit; text-decoration:none; }
+    .mast nav a { margin-left:.75rem; }
+    .word small { display:block; font-size:.58rem; letter-spacing:.2em; color:var(--accent); }
+    h1.banner { font-family:Cinzel,serif; font-weight:700; font-size:clamp(1.8rem,6vw,2.8rem); letter-spacing:.08em; text-align:center; margin:.55rem 0 .15rem; line-height:1; }
+    .banner-sub { text-align:center; font-style:italic; color:var(--fade); margin:0 0 .9rem; }
+    form { border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:.7rem 0 1rem; }
+    label { display:block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; margin:.55rem 0 .2rem; }
+    input { width:100%; border:0; border-bottom:1px solid var(--rule); background:transparent; font:italic 1rem/1.4 "Libre Baskerville", Georgia, serif; color:inherit; padding:.3rem 0; }
+    .compose { font-family:Cinzel,serif; letter-spacing:.16em; text-transform:uppercase; background:var(--ink); color:var(--sheet); border:0; padding:.45rem .9rem; cursor:pointer; margin-top:1rem; }
+    .note, .err, .ok { font-style:italic; color:var(--fade); margin:.7rem 0 0; }
+    .err { color:var(--accent); }
+    .ok { color:#2a3a22; }
+    .back { display:block; text-align:center; margin-top:1.2rem; color:var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="mast">
+      <a class="word" href="/salon/">Salon<small>cercles littéraires</small></a>
+      <nav>
+        <a href="/salon/">Cercles</a>
+        <a href="/salon/flux/">Gazette</a>
+        <a href="https://sso.kayroslab.com/">Entrer</a>
+      </nav>
+    </header>
+    <h1 class="banner">Entrée</h1>
+    <p class="banner-sub">Pas encore de fauteuil à la table ? Laissez votre nom.</p>
+    <form id="entrer-form">
+      <label for="name">Nom à la table</label>
+      <input id="name" name="name" autocomplete="name" />
+      <label for="email">Adresse</label>
+      <input id="email" name="email" type="email" required autocomplete="email" />
+      <label for="password">Mot de passe</label>
+      <input id="password" name="password" type="password" required minlength="8" autocomplete="new-password" />
+      <button type="submit" class="compose">Demander l’entrée</button>
+      <p class="note" id="entrer-msg">Le compte ouvre ensuite la porte SSO du Salon.</p>
+    </form>
+    <a class="back" href="https://sso.kayroslab.com/">Déjà un fauteuil — entrer</a>
+  </div>
+  <script>
+    (function () {
+      var form = document.getElementById("entrer-form");
+      var msg = document.getElementById("entrer-msg");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        msg.className = "note";
+        msg.textContent = "On porte la demande…";
+        fetch("https://api.kayroslab.com/v1/auth/register", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            password: document.getElementById("password").value,
+            role: "contributeur"
+          })
+        }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (pack) {
+            if (pack.ok && pack.j && pack.j.user) {
+              msg.className = "ok";
+              msg.textContent = "Le fauteuil est dressé. Entrez maintenant par la porte SSO.";
+              setTimeout(function () { location.href = "https://sso.kayroslab.com/"; }, 1200);
+              return;
+            }
+            msg.className = "err";
+            msg.textContent = (pack.j && pack.j.error) || "La demande n’a pas abouti.";
+          })
+          .catch(function () {
+            msg.className = "err";
+            msg.textContent = "L’api n’a pas répondu. Réessayez dans un instant.";
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

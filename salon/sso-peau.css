@@ -1,0 +1,56 @@
+/* Peau Salon sur Authelia — même encre que la Gazette. */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
+html, body, #root {
+  background: #cbb892 !important;
+  color: #1c1610 !important;
+  font-family: "Libre Baskerville", Georgia, serif !important;
+}
+body {
+  background-image: none !important;
+}
+#first-factor-stage .MuiContainer-root,
+#root .MuiContainer-root {
+  background: #f3e6c8 !important;
+  border: 1px solid #b9a178 !important;
+  box-shadow: 0 1px 0 #fff8e4 inset, 0 18px 40px rgba(40,24,8,.22) !important;
+  padding: 1.4rem 1.3rem 1.6rem !important;
+  border-radius: 0 !important;
+}
+#UserSvg { display: none !important; }
+#first-factor-stage h4,
+#first-factor-stage .MuiTypography-h4,
+#first-factor-stage .MuiTypography-h5 {
+  font-family: Cinzel, serif !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: #1c1610 !important;
+}
+.MuiButton-containedPrimary,
+button[type="submit"] {
+  background: #1c1610 !important;
+  color: #f3e6c8 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  font-family: Cinzel, serif !important;
+  letter-spacing: .16em !important;
+}
+.MuiButton-containedPrimary:hover,
+button[type="submit"]:hover {
+  background: #6b2a2a !important;
+}
+a, .MuiLink-root {
+  color: #6b2a2a !important;
+  font-family: "Libre Baskerville", Georgia, serif !important;
+}
+#salon-creer {
+  text-align: center;
+  margin: 1rem 0 0;
+  font-style: italic;
+  font-size: .95rem;
+}
+#salon-creer a {
+  color: #6b2a2a;
+  text-underline-offset: 3px;
+}
+.MuiAppBar-root { background: transparent !important; color: #1c1610 !important; }
