@@ -124,11 +124,23 @@ déploiement VPS (`deploy-vps-backend.yml`) écrit la clé dans le `.env` du ser
 1. GitHub → Settings → Secrets and variables → Actions → **New secret** :
    `MISTRAL_API_KEY` = votre clé Mistral ; (option) `MISTRAL_MODEL` = `mistral-small-latest`.
 2. Relancer **Deploy KayrosLab backend - OVH VPS** (Actions → Run workflow).
-3. Vérifier : `curl -s https://api.kayroslab.com/health` → `"llm":{"provider":"mistral","live":true,…}`.
+3. Vérifier :
+   - `curl -s https://api.kayroslab.com/health` → `"llm":{"provider":"mistral","live":true,…}` ;
+   - surtout : `curl -s -X POST https://api.kayroslab.com/v1/llm -H 'content-type: application/json' \
+     -d '{"messages":[{"role":"user","content":"ping"}],"provider":"mistral"}'`
+     → `"provider":"mistral"` (s'il renvoie `"provider":"mock"` avec `"degraded"`, la clé n'est pas
+     acceptée par Mistral et le routeur est retombé sur le mock).
 
 Tant que la clé est absente, le déploiement **n'échoue plus** : il avertit et le
 salon reste sur le moteur déterministe (`provider: "mock"`). Côté navigateur, rien
 à changer : le `floorPrompt` porte déjà persona + question + cadrage + fil + passages.
+
+> Piège corrigé : le script de déploiement écrivait `MISTRAL_API_KEY=undefined`
+> (la chaîne « undefined ») quand le secret était absent — `context.mjs` la voyait
+> donc comme « configurée », et chaque appel Mistral échouait (401) puis **retombait
+> silencieusement sur `mock`**. Le script n'écrit plus `undefined` (chaîne vide), et
+> les routes `/v1/llm` et `/v1/demo/chat` exposent désormais `degraded` — un repli
+> n'est plus invisible.
 
 ### 4.2 Mémoire par auteur
 

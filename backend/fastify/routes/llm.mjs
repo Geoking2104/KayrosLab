@@ -80,7 +80,7 @@ export default async function llmRoute(app) {
     const { messages, model, provider, role, temperature } = parsed.data;
     const opts = provider ? { provider } : {};
     const r = await app.kayrosContext.llm.complete({ messages, model, role, temperature }, opts);
-    return { text: r.text, provider: r.provider, usage: r.usage, latencyMs: r.latencyMs };
+    return { text: r.text, provider: r.provider, usage: r.usage, latencyMs: r.latencyMs, degraded: r.degraded || null };
   });
 
   app.post('/v1/demo/chat', async (req, reply) => {
@@ -109,10 +109,11 @@ export default async function llmRoute(app) {
       return {
         content: r.text,
         text: r.text,
-        model: app.kayrosContext.MISTRAL_MODEL || r.provider,
+        model: r.model || app.kayrosContext.MISTRAL_MODEL || r.provider,
         provider: r.provider,
         usage: r.usage,
         latencyMs: r.latencyMs,
+        degraded: r.degraded || null,
       };
     } catch (e) {
       app.log.error(e);

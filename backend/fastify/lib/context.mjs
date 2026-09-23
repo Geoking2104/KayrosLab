@@ -162,7 +162,7 @@ export default async function buildContext() {
             Authorization: 'Bearer ' + MISTRAL_API_KEY,
           },
           body: JSON.stringify({
-            model: req.model || MISTRAL_MODEL,
+            model: req.model || MISTRAL_MODEL || 'mistral-small-latest',
             messages,
             temperature: typeof req.temperature === 'number' ? req.temperature : 0.4,
             max_tokens: 1200,

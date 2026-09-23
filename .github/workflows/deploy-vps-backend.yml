@@ -157,7 +157,8 @@ jobs:
               if (value) replacements[name] = value;
             }
             for (const [name, value] of Object.entries(replacements)) {
-              const line = `${name}=${value}`;
+              const safe = value === undefined || value === null ? '' : value;
+              const line = `${name}=${safe}`;
               const pattern = new RegExp(`^${name}=.*$`, 'm');
               contents = pattern.test(contents)
                 ? contents.replace(pattern, line)
