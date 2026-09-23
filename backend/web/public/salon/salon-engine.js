@@ -151,22 +151,22 @@
   /* Termes d'expansion par domaine : la mémoire est interrogée non seulement
    * avec les mots de la question, mais avec le vocabulaire du dossier. */
   var DOMAIN_KEYS = {
-    liberte: "libre liberte autonom independance volonté contrainte servitude emancipation",
-    pouvoir: "pouvoir gouverner souverain autorite obeissance domination legitime tyrannie",
-    justice: "justice juste injuste droit loi equite egalite punition chatiement tort",
-    verite: "verite vrai faux erreur savoir connaissance preuve evidence opinion doute",
-    conscience: "conscience esprit pensee perception experience sujet matiere",
-    vertu: "vertu morale devoir obligation honneur sagesse prudence courage temperance",
-    bonheur: "bonheur plaisir joie desir souffrance malheur trouble tranquillite",
-    education: "education elever enfant instruction apprentissage formation jugement",
-    travail: "travail labeur salaire argent richesse valeur echange propriete capital",
-    nature: "nature vivant espece animal climat milieu environnement",
-    religion: "dieu providence foi croyance religion sacre divin grace ecriture",
-    amour: "amour aimer desir passion jalousie mariage attachement",
-    art: "oeuvre art beaute poesie recit roman theatre image imitation",
-    guerre: "guerre paix arme combat ennemi strategie victoire defaite violence",
-    temps: "temps mort duree souvenir memoire avenir eternite vieillesse",
-    generique: "question sujet these raison consequence",
+    liberte: "libre liberte autonom independance volonté contrainte servitude emancipation freedom free liberty autonomy constraint servitude",
+    pouvoir: "pouvoir gouverner souverain autorite obeissance domination legitime tyrannie power govern sovereign authority obedience domination tyranny state",
+    justice: "justice juste injuste droit loi equite egalite punition chatiement tort justice just injustice right law equity equality punishment wrong",
+    verite: "verite vrai faux erreur savoir connaissance preuve evidence opinion doute truth true false error knowledge proof evidence opinion doubt science reason understanding",
+    conscience: "conscience esprit pensee perception experience sujet matiere conscience mind spirit thought perception experience subject matter",
+    vertu: "vertu morale devoir obligation honneur sagesse prudence courage temperance virtue moral duty obligation honour honesty wisdom prudence courage",
+    bonheur: "bonheur plaisir joie desir souffrance malheur trouble tranquillite happiness pleasure joy desire suffering misery trouble tranquillity",
+    education: "education elever enfant instruction apprentissage formation jugement education child school teaching learning training judgement",
+    travail: "travail labeur salaire argent richesse valeur echange propriete capital production commerce work labour wage money wealth value exchange property capital commerce",
+    nature: "nature vivant espece animal climat milieu environnement nature life species animal climate environment",
+    religion: "dieu providence foi croyance religion sacre divin grace ecriture god providence faith belief religion sacred divine grace scripture",
+    amour: "amour aimer desir passion jalousie mariage attachement love desire passion jealousy marriage attachment",
+    art: "oeuvre art beaute poesie recit roman theatre image imitation art beauty poetry story novel theatre image imitation",
+    guerre: "guerre paix arme combat ennemi strategie victoire defaite violence war peace weapon combat enemy strategy victory defeat violence",
+    temps: "temps mort duree souvenir memoire avenir eternite vieillesse time death duration memory future eternity old age",
+    generique: "question sujet these raison consequence question subject thesis reason consequence",
   };
 
   function scope(question) {
@@ -264,12 +264,15 @@
     var qGate = [sc.raw, sc.label || ""].join(" ");
     var ranked = (passages || []).map(function (p, i) {
       var work = p.w || p.work || "";
-      var text = p.t || p.text || "";
-      return { work: work, text: text, sentence: p.s || bestSentence(text), score: relevance(qRank, work + " " + text), i: i };
+      var text = p.t || p.text || p.s || "";
+      var sent = p.s || bestSentence(text);
+      var sGate = relevance(qGate, (work || "") + " " + sent);
+      var sRank = relevance(qRank, work + " " + text);
+      return { work: work, text: text, sentence: sent, score: sGate * 2 + sRank, gate: sGate, i: i };
     });
     ranked.sort(function (a, b) { return (b.score - a.score) || (a.i - b.i); });
     ranked = ranked.slice(0, Math.max(1, k || 3));
-    ranked.forEach(function (p) { p.weak = !p.sentence || relevance(qGate, (p.work || "") + " " + p.sentence) < 0.10; });
+    ranked.forEach(function (p) { p.weak = !p.sentence || (p.gate != null ? p.gate : relevance(qGate, (p.work || "") + " " + p.sentence)) < 0.10; });
     return ranked;
   }
 
@@ -378,6 +381,8 @@
     var method = input.method || author.method || "auto";
     var passage = input.passage;
     var last = input.lastTurn;
+    var self = input.self || [];
+    var selfLast = self.length ? (self[self.length - 1].prise || "") : "";
     var move = input.move || (act === "objection" ? "objecte" : "ouvre");
     var question = input.question || sc.raw || "";
     var subject = sc.label || sc.subject || "la question";
@@ -414,7 +419,7 @@
     } else {
       var th = thesisFor(sc, author);
       prise = closeSentence(th);
-      clauses.push("Ma prise, sur ce point : " + th + ".");
+      clauses.push((selfLast ? "Comme je le tenais déjà : " : "Ma prise, sur ce point : ") + th + ".");
     }
 
     /* 3. Ancrer — une œuvre nommée, une phrase entière, ou l'aveu du manque. */
@@ -460,7 +465,7 @@
     var out = compose({
       author: author, scope: sc, passage: best, lastTurn: last,
       act: plan.act, move: plan.move, toName: plan.toName, point: plan.point,
-      method: input.method || author.method, lang: input.lang,
+      self: input.self, method: input.method || author.method, lang: input.lang,
     });
     return { text: out.text, prise: out.prise, grounded: out.grounded, scope: sc, passage: best || null };
   }
@@ -547,6 +552,9 @@
         ? (en ? "Passages (use at most one, only if it answers):\n" : "Passages (au plus un, seulement s’il répond) :\n") +
           passages.slice(0, 3).map(function (p) { return "« " + p.work + " »\n" + (p.sentence || firstSentences(p.text, 1)); }).join("\n\n")
         : (en ? "No relevant passage — say so, then argue from your named works." : "Aucun passage pertinent — dis-le, puis argumente depuis tes œuvres nommées."),
+      (input.self && input.self.length)
+        ? (en ? "Your own previous turns (stay consistent; do not repeat yourself):\n" : "Ta mémoire — tes tours précédents (reste cohérent, ne te répète pas) :\n") + input.self.slice(-4).map(function (h) { return (h.prise ? "[" + (en ? "thesis: " : "prise : ") + h.prise + "] " : "") + (h.text || ""); }).join("\n")
+        : "",
       (input.history && input.history.length > 1)
         ? (en ? "Recent thread:\n" : "Fil récent :\n") + input.history.slice(-6).map(function (h) {
             return nameOf({ name: h.name, nameEn: h.nameEn }, lang) + (h.prise ? " [" + (en ? "thesis: " : "prise : ") + h.prise + "]" : "") + " : " + h.text;
@@ -580,6 +588,7 @@
     retrieve: retrieve,
     relevance: relevance,
     bestSentence: bestSentence,
+    cleanSentence: cleanSentence,
     sentencesOf: sentencesOf,
     firstSentences: firstSentences,
     compose: compose,

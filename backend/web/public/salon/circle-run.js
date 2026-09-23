@@ -13,7 +13,7 @@
   /* Mémoire livrée (passages des œuvres) + fil de discussion conservé entre les
    * tours. Le moteur déterministe (salon-engine.js) cadre la question et ancre
    * chaque réplique dans la mémoire du convive. */
-  var CORPUS = null, CORPUS_READY = null, threadHistory = [];
+  var CORPUS = null, CORPUS_READY = null, threadHistory = [], selfByAuthor = {};
   function loadCorpus() {
     if (CORPUS_READY) return CORPUS_READY;
     CORPUS_READY = fetch("/salon/corpus.json", { cache: "force-cache" })
@@ -211,7 +211,7 @@
     try {
       var s = seam(author, question, seat);
       if (!s) return { text: "", prise: "", proof: proofFromAuthor(author) };
-      var out = s.E.answer({ author: author, question: question, scope: s.sc, passages: s.passages, corpus: (CORPUS && CORPUS[author.id]) || [], history: threadHistory, role: (seat && seat.role) || "invite", lang: currentLang() });
+      var out = s.E.answer({ author: author, question: question, scope: s.sc, passages: s.passages, corpus: (CORPUS && CORPUS[author.id]) || [], history: threadHistory, self: selfByAuthor[author.id] || [], role: (seat && seat.role) || "invite", lang: currentLang() });
       return { text: out.text, prise: out.prise, proof: proofFromAuthor(author) };
     } catch (e) {
       return { text: "", prise: "", proof: proofFromAuthor(author) };
@@ -227,7 +227,7 @@
         try {
           var fp = E.floorPrompt({
             author: author, question: question, scope: s.sc, passages: s.passages,
-            history: threadHistory, role: (seat && seat.role) || "invite", lang: currentLang(),
+            history: threadHistory, self: selfByAuthor[author.id] || [], role: (seat && seat.role) || "invite", lang: currentLang(),
           });
           system = fp.system; user = fp.user;
         } catch (e) { E = null; }
@@ -274,6 +274,9 @@
           if (wait) { wait.classList.remove("is-wait"); var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = seat.act; wait.querySelector("p").textContent = text; fillProof(wait, (out && out.proof) || proofFromAuthor(author)); }
           threadHistory.push({ name: authorNameSafe(author), text: text, prise: (out && out.prise) || "" });
           if (threadHistory.length > 12) threadHistory.shift();
+          var mine = (selfByAuthor[author.id] = selfByAuthor[author.id] || []);
+          mine.push({ text: text, prise: (out && out.prise) || "" });
+          if (mine.length > 8) mine.shift();
           recordBeat(author, seat, guests);
           return new Promise(function (ok) { setTimeout(ok, 260); });
         });
@@ -288,7 +291,7 @@
     var form = document.getElementById("open-circle"); if (!form || form.dataset.circleHook) return; form.dataset.circleHook = "1";
     form.addEventListener("submit", function () {
       setTimeout(function () {
-        threadHistory = [];
+        threadHistory = []; selfByAuthor = {};
         var data = new FormData(form), name = String(data.get("name") || "Cercle").trim(), question = String(data.get("question") || "").trim();
         var picked = typeof selectedIds === "function" ? selectedIds() : guestIds();
         if (picked.length < 2) { showThink("Cochez au moins deux convives."); return; }

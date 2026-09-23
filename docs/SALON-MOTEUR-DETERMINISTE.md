@@ -113,14 +113,55 @@ Schéma prêt : [`salon/scripts/laya-gate-questions.json`](../salon/scripts/laya
 Le garde s'insère dans `speak.ts` (app serveur, où l'API XAI est déjà choisie) et
 **pas** dans la page ; le navigateur garde `salon-engine.js`, sans dépendance.
 
-## 4. Étapes suivantes
+## 4. Brancher la LLM, mémoire par auteur, corpus plus riche
 
-1. **Corpus** : compléter les œuvres trop maigres (certains auteurs n'ont que 1–2
-   passages) ; viser ~50 phrases citables par auteur. C'est la vraie contrainte
-   d'ancrage, pas le moteur.
-2. **Prompt serveur** : porter le même contrat dans `speak.ts` (il y est déjà) et
+### 4.1 Brancher la LLM (une clé, un redéploiement)
+
+Le câblage est automatique : `backend/fastify/lib/context.mjs` choisit
+`MISTRAL_API_KEY ? 'mistral' : (ANTHROPIC_API_KEY ? 'anthropic' : 'mock')`, et le
+déploiement VPS (`deploy-vps-backend.yml`) écrit la clé dans le `.env` du serveur.
+
+1. GitHub → Settings → Secrets and variables → Actions → **New secret** :
+   `MISTRAL_API_KEY` = votre clé Mistral ; (option) `MISTRAL_MODEL` = `mistral-small-latest`.
+2. Relancer **Deploy KayrosLab backend - OVH VPS** (Actions → Run workflow).
+3. Vérifier : `curl -s https://api.kayroslab.com/health` → `"llm":{"provider":"mistral","live":true,…}`.
+
+Tant que la clé est absente, le déploiement **n'échoue plus** : il avertit et le
+salon reste sur le moteur déterministe (`provider: "mock"`). Côté navigateur, rien
+à changer : le `floorPrompt` porte déjà persona + question + cadrage + fil + passages.
+
+### 4.2 Mémoire par auteur
+
+Chaque convive relit désormais **ses propres tours** (`selfByAuthor` dans
+`circle-run.js`, borné à 8), en plus du fil partagé :
+
+- `floorPrompt` reçoit un bloc « Ta mémoire — tes tours précédents (reste cohérent,
+  ne te répète pas) » ;
+- `compose` reformule sa prise en « Comme je le tenais déjà : … » quand il a déjà
+  parlé — la voix reste la même, sans se répéter.
+
+### 4.3 Corpus plus riche
+
+`salon/scripts/harvest_corpus.mjs` reconstruit la mémoire depuis le **catalogue**
+(chaque œuvre porte son URL Gutenberg) : phrases entières et propres (en-tête/pied
+Gutenberg, préfaces, notices éditoriales et lignes d'imprimeur écartés), échantillon
+régulier par œuvre. Résultat : **54 auteurs, ~2 000 phrases citables** (min. 18 par
+auteur) contre 683 extraits coupés auparavant.
+
+```bash
+node salon/scripts/harvest_corpus.mjs --works 3 --max 40 --workmax 20
+```
+
+Les clés de domaine de `salon-engine.js` incluent aussi les termes **anglais**
+(`freedom`, `power`, `justice`, `truth`, `pleasure`, `war`…), car le corpus est
+surtout anglophone alors que les questions sont en français.
+
+## 5. Étapes suivantes
+
+1. **Prompt serveur** : porter le même contrat dans `speak.ts` (il y est déjà) et
    aligner les deux implémentations, pour supprimer la double logique.
-3. **Laya (option)** : brancher le garde `noul` de récupération derrière un drapeau,
+2. **Laya (option)** : brancher le garde `noul` de récupération derrière un drapeau,
    mesurer précision/latence, puis décider.
-4. **Tests** : ajouter le rendu de la `PRISE` sous la réplique (déjà dans le DOM via
-   `.proof`) et un test de non-régression « deux questions ⇒ deux tours ».
+3. **Traduction/sémantique** : le repli déterministe reste lexical ; pour ancrer en
+   français sur un texte anglais, une embedding locale (ou l'embed du backend,
+   `/v1/embed`) affinerait la récupération.

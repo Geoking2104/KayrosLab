@@ -132,6 +132,16 @@ test('answer : une objection nomme l’auteur visé et son point', () => {
   assert.match(out.text, /loi qu’on se donne|loi qu'on se donne/);
 });
 
+test('mémoire par auteur : un convive reste cohérent avec ses tours précédents', () => {
+  const self = [{ prise: 'la liberté est une loi qu’on se donne', text: '…' }];
+  const out = E.answer({ author: rousseau, question: qLiberte, corpus: corpus.rousseau || [], self, lang: 'fr' });
+  assert.match(out.text, /Comme je le tenais déjà/);
+
+  const fp = E.floorPrompt({ author: rousseau, question: qLiberte, passages: [], self, lang: 'fr' });
+  assert.match(fp.user, /Ta mémoire/);
+  assert.match(fp.user, /loi qu’on se donne|loi qu'on se donne/);
+});
+
 test('parseSpeech : lit PRISE et REPLIQUE', () => {
   const r = E.parseSpeech('PRISE: la liberté est une loi qu’on se donne\nREPLIQUE:\nJe le soutiens.  Voilà.');
   assert.equal(r.prise, 'la liberté est une loi qu’on se donne');

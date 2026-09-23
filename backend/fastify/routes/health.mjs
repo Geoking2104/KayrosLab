@@ -4,6 +4,13 @@ export default async function healthRoute(app) {
     return {
       ok: true,
       providers: Object.keys(ctx.providers),
+      // Fournisseur LLM effectif : mistral/anthropic si la clé est là, sinon mock.
+      llm: {
+        provider: ctx.MISTRAL_API_KEY ? 'mistral' : (ctx.ANTHROPIC_API_KEY ? 'anthropic' : 'mock'),
+        live: Boolean(ctx.MISTRAL_API_KEY || ctx.ANTHROPIC_API_KEY),
+        model: ctx.MISTRAL_API_KEY ? ctx.MISTRAL_MODEL : ctx.ANTHROPIC_MODEL,
+      },
+      mistralConfigured: !!ctx.MISTRAL_API_KEY,
       model: ctx.ANTHROPIC_MODEL,
       embedModel: ctx.EMBED_MODEL,
       anthropicConfigured: !!ctx.ANTHROPIC_API_KEY,
