@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T21:23:12.803Z",
+  "generatedAt": "2026-10-03T22:22:14.127Z",
   "generator": "salon/scripts/kb_export.mjs",
   "authors": {
     "smith": {
@@ -273,6 +273,32 @@
         {
           "id": "aristote.f.v0001",
           "kind": "verbatim",
+          "text": "Hence the necessity that he should have been well trained in habits, who is to study, with any tolerable chance of profit, the principles of nobleness and justice and moral philosophy generally.",
+          "work": "The Nicomachean ethics of Aristotle",
+          "lang": "en",
+          "src": {
+            "work": "The Nicomachean ethics of Aristotle"
+          },
+          "quality": {
+            "chars": 194
+          }
+        },
+        {
+          "id": "aristote.f.v0002",
+          "kind": "verbatim",
+          "text": "Poetry, therefore, is a more philosophical and a higher thing than history: for poetry tends to express the universal, history the particular.",
+          "work": "The Poetics of Aristotle",
+          "lang": "en",
+          "src": {
+            "work": "The Poetics of Aristotle"
+          },
+          "quality": {
+            "chars": 142
+          }
+        },
+        {
+          "id": "aristote.f.v0003",
+          "kind": "verbatim",
           "text": "Which custom of barter is still preserved amongst many barbarous nations, who procure one necessary with another, but never sell anything; as giving and receiving wine for corn and the like.",
           "work": "Politics: A Treatise on Government",
           "lang": "en",
@@ -284,7 +310,7 @@
           }
         },
         {
-          "id": "aristote.f.v0002",
+          "id": "aristote.f.v0004",
           "kind": "verbatim",
           "text": "There will also great danger arise from the manner of electing the senate, when those who are elected themselves are afterwards to elect others; for by this means, if a certain number choose to combine together, though not very considerable, the election will always fall according to their pleasure.",
           "work": "Politics: A Treatise on Government",
@@ -297,7 +323,7 @@
           }
         },
         {
-          "id": "aristote.f.v0003",
+          "id": "aristote.f.v0005",
           "kind": "verbatim",
           "text": "What has been said seems a sufficient solution of this difficulty; but there is another that follows: for it seems absurd that the power of the state should be lodged with those who are but of indifferent morals, instead of those who are of excellent characters.",
           "work": "Politics: A Treatise on Government",
@@ -310,7 +336,7 @@
           }
         },
         {
-          "id": "aristote.f.v0004",
+          "id": "aristote.f.v0006",
           "kind": "verbatim",
           "text": "This subject has been already treated of by one of those writers who have gone before me, though his sentiments are not the same as mine: for he thought, that of all excellent constitutions, as a good oligarchy or the like, a democracy was the worst, but of all bad ones, the best.",
           "work": "Politics: A Treatise on Government",
@@ -323,7 +349,7 @@
           }
         },
         {
-          "id": "aristote.f.v0005",
+          "id": "aristote.f.v0007",
           "kind": "verbatim",
           "text": "I mean by this, that it may happen, that although one form of government may be better than another, yet there is no reason to prevent another from being preferable thereunto in particular circumstances and for particular purposes.",
           "work": "Politics: A Treatise on Government",
@@ -336,7 +362,7 @@
           }
         },
         {
-          "id": "aristote.f.v0006",
+          "id": "aristote.f.v0008",
           "kind": "verbatim",
           "text": "Now, what they aim at may be either just or unjust; just, when those who are inferior are seditious, that they may be equal; unjust, when those who are equal are so, that they may be superior.",
           "work": "Politics: A Treatise on Government",
@@ -349,7 +375,7 @@
           }
         },
         {
-          "id": "aristote.f.v0007",
+          "id": "aristote.f.v0009",
           "kind": "verbatim",
           "text": "In oligarchies, on the contrary, it is wrong to support those who are in administration against the people.",
           "work": "Politics: A Treatise on Government",
@@ -362,7 +388,7 @@
           }
         },
         {
-          "id": "aristote.f.v0008",
+          "id": "aristote.f.v0010",
           "kind": "verbatim",
           "text": "In the first place, it is evident that in this as in other things, its beginning or production arises from some principle, and its end also arises from another principle, which is itself an end.",
           "work": "Politics: A Treatise on Government",
@@ -375,7 +401,7 @@
           }
         },
         {
-          "id": "aristote.f.v0009",
+          "id": "aristote.f.v0011",
           "kind": "verbatim",
           "text": "It is manifest then that the goods may be so called in two senses, the one class for their own sakes, the other because of these.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -388,7 +414,7 @@
           }
         },
         {
-          "id": "aristote.f.v0010",
+          "id": "aristote.f.v0012",
           "kind": "verbatim",
           "text": "A good illustration of this is furnished by the old regal constitutions which Homer drew from, in which the Kings would announce to the commonalty what they had determined before.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -401,7 +427,20 @@
           }
         },
         {
-          "id": "aristote.f.v0011",
+          "id": "aristote.f.v0013",
+          "kind": "verbatim",
+          "text": "Here the extreme characters appear to be opposed, because the mean has no name appropriated to it.",
+          "work": "The Nicomachean ethics of Aristotle",
+          "lang": "en",
+          "src": {
+            "work": "The Nicomachean ethics of Aristotle"
+          },
+          "quality": {
+            "chars": 98
+          }
+        },
+        {
+          "id": "aristote.f.v0014",
           "kind": "verbatim",
           "text": "In the first, B is named twice; and so, if, as in the second, B is actually written twice, the proportionals will be four): and the Just likewise implies four terms at the least, and the ratio between the two pair of terms is the same, because the persons and the things are divided similarly.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -414,7 +453,7 @@
           }
         },
         {
-          "id": "aristote.f.v0012",
+          "id": "aristote.f.v0015",
           "kind": "verbatim",
           "text": "Nor can it be Science which takes in these, because the Scientific Man must in some cases depend on demonstrative Reasoning.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -427,7 +466,7 @@
           }
         },
         {
-          "id": "aristote.f.v0013",
+          "id": "aristote.f.v0016",
           "kind": "verbatim",
           "text": "These secondary Friendships, however, do not combine very well; that is to say, the same persons do not become friends by reason of advantage and by reason of the pleasurable, for these matters of result are not often combined.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -440,7 +479,7 @@
           }
         },
         {
-          "id": "aristote.f.v0014",
+          "id": "aristote.f.v0017",
           "kind": "verbatim",
           "text": "On the other hand, the advantages of friends in our prosperity are the pleasurable intercourse and the consciousness that they are pleased at our good fortune.",
           "work": "The Nicomachean ethics of Aristotle",
@@ -453,7 +492,7 @@
           }
         },
         {
-          "id": "aristote.f.v0015",
+          "id": "aristote.f.v0018",
           "kind": "verbatim",
           "text": "This, then, is a second point of difference; though at first the same freedom was admitted in Tragedy as in Epic poetry.",
           "work": "The Poetics of Aristotle",
@@ -466,7 +505,7 @@
           }
         },
         {
-          "id": "aristote.f.v0016",
+          "id": "aristote.f.v0019",
           "kind": "verbatim",
           "text": "Bad poets compose such pieces by their own fault, good poets, to please the players; for, as they write show pieces for competition, they stretch the plot beyond its capacity, and are often forced to break the natural continuity.",
           "work": "The Poetics of Aristotle",
@@ -479,7 +518,7 @@
           }
         },
         {
-          "id": "aristote.f.v0017",
+          "id": "aristote.f.v0020",
           "kind": "verbatim",
           "text": "There remains, then, the character between these two extremes,--that of a man who is not eminently good and just,-yet whose misfortune is brought about not by vice or depravity, but by some error or frailty.",
           "work": "The Poetics of Aristotle",
@@ -492,7 +531,7 @@
           }
         },
         {
-          "id": "aristote.f.v0018",
+          "id": "aristote.f.v0021",
           "kind": "verbatim",
           "text": "Incidents extraneous to the action are frequently combined with a portion of the action proper, to form the Complication; the rest is the Unravelling.",
           "work": "The Poetics of Aristotle",
@@ -505,7 +544,7 @@
           }
         },
         {
-          "id": "aristote.f.v0019",
+          "id": "aristote.f.v0022",
           "kind": "verbatim",
           "text": "These are distinguished according to the form assumed by the mouth and the place where they are produced; according as they are aspirated or smooth, long or short; as they are acute, grave, or of an intermediate tone; which inquiry belongs in detail to the writers on metre.",
           "work": "The Poetics of Aristotle",
@@ -518,7 +557,7 @@
           }
         },
         {
-          "id": "aristote.f.v0020",
+          "id": "aristote.f.v0023",
           "kind": "verbatim",
           "text": "The critics, therefore, are in error who censure these licenses of speech, and hold the author up to ridicule.",
           "work": "The Poetics of Aristotle",
@@ -531,7 +570,7 @@
           }
         },
         {
-          "id": "aristote.f.v0021",
+          "id": "aristote.f.v0024",
           "kind": "verbatim",
           "text": "The Epic has here an advantage, and one that conduces to grandeur of effect, to diverting the mind of the hearer, and relieving the story with varying episodes.",
           "work": "The Poetics of Aristotle",
@@ -544,7 +583,7 @@
           }
         },
         {
-          "id": "aristote.f.v0022",
+          "id": "aristote.f.v0025",
           "kind": "verbatim",
           "text": "These are the points of view from which we should consider and answer the objections raised by the critics.",
           "work": "The Poetics of Aristotle",
@@ -557,7 +596,7 @@
           }
         },
         {
-          "id": "aristote.f.v0023",
+          "id": "aristote.f.v0026",
           "kind": "verbatim",
           "text": "It also tried those who conspired for the overthrow of the state, Solon having enacted a process of impeachment to deal with such offenders.",
           "work": "The Athenian Constitution",
@@ -570,7 +609,7 @@
           }
         },
         {
-          "id": "aristote.f.v0024",
+          "id": "aristote.f.v0027",
           "kind": "verbatim",
           "text": "Some persons advised the people to make a distribution of the money among themselves, but this was prevented by Themistocles.",
           "work": "The Athenian Constitution",
@@ -583,7 +622,7 @@
           }
         },
         {
-          "id": "aristote.f.v0025",
+          "id": "aristote.f.v0028",
           "kind": "verbatim",
           "text": "The chief promoters of the revolution were Pisander, Antiphon, and Theramenes, all of them men of good birth and with high reputations for ability and judgement.",
           "work": "The Athenian Constitution",
@@ -596,7 +635,7 @@
           }
         },
         {
-          "id": "aristote.f.v0026",
+          "id": "aristote.f.v0029",
           "kind": "verbatim",
           "text": "The secessionists should pay their share to the fund for the common defence out of their revenues, just like all the other Athenians.",
           "work": "The Athenian Constitution",
@@ -609,7 +648,7 @@
           }
         },
         {
-          "id": "aristote.f.v0027",
+          "id": "aristote.f.v0030",
           "kind": "verbatim",
           "text": "Part 43 All the magistrates that are concerned with the ordinary routine of administration are elected by lot, except the Military Treasurer, the Commissioners of the Theoric fund, and the Superintendent of Springs.",
           "work": "The Athenian Constitution",
@@ -622,7 +661,7 @@
           }
         },
         {
-          "id": "aristote.f.v0028",
+          "id": "aristote.f.v0031",
           "kind": "verbatim",
           "text": "He also leases the houses of orphans and wards of state until they reach the age of fourteen, and takes mortgages on them; and if the guardians fail to provide the necessary food for the children under their charge, he exacts it from them.",
           "work": "The Athenian Constitution",
@@ -635,7 +674,7 @@
           }
         },
         {
-          "id": "aristote.f.v0029",
+          "id": "aristote.f.v0032",
           "kind": "verbatim",
           "text": "They have the same powers as the Generals have in respect of the infantry, and their appointments are also subject to confirmation.",
           "work": "The Athenian Constitution",
@@ -648,7 +687,7 @@
           }
         },
         {
-          "id": "aristote.f.v0030",
+          "id": "aristote.f.v0033",
           "kind": "verbatim",
           "text": "To sum up, it is a distinctive mark of substance, that, while remaining numerically one and the same, it is capable of admitting contrary qualities, the modification taking place through a change in the substance itself.",
           "work": "The Categories",
@@ -661,7 +700,7 @@
           }
         },
         {
-          "id": "aristote.f.v0031",
+          "id": "aristote.f.v0034",
           "kind": "verbatim",
           "text": "Again, if he knows that a thing is more beautiful, it follows necessarily that he will forthwith definitely know that also than which it is more beautiful.",
           "work": "The Categories",
@@ -674,7 +713,7 @@
           }
         },
         {
-          "id": "aristote.f.v0032",
+          "id": "aristote.f.v0035",
           "kind": "verbatim",
           "text": "Knowledge, again, is the opposite of the thing known, in the same sense; and the thing known also is explained by its relation to its opposite, knowledge.",
           "work": "The Categories",
@@ -687,7 +726,7 @@
           }
         },
         {
-          "id": "aristote.f.v0033",
+          "id": "aristote.f.v0036",
           "kind": "verbatim",
           "text": "Secondly, one thing is said to be 'prior' to another when the sequence of their being cannot be reversed.",
           "work": "The Categories",
@@ -2026,97 +2065,6 @@
         {
           "id": "kant.f.v0001",
           "kind": "verbatim",
-          "text": "It is clear that we cannot make the special conditions of sensibility into conditions of the possibility of things, but only of the possibility of their existence as far as they are phenomena.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 192
-          }
-        },
-        {
-          "id": "kant.f.v0002",
-          "kind": "verbatim",
-          "text": "In truth, if I cognize in all its inner determinations a drop of water as a thing in itself, I cannot look upon one drop as different from another, if the conception of the one is completely identical with that of the other.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 224
-          }
-        },
-        {
-          "id": "kant.f.v0003",
-          "kind": "verbatim",
-          "text": "We now come to a conception which was not inserted in the general list of transcendental conceptions, and yet must be reckoned with them, but at the same time without in the least altering, or indicating a deficiency in that table.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 231
-          }
-        },
-        {
-          "id": "kant.f.v0004",
-          "kind": "verbatim",
-          "text": "As space is not a composite of substances (and not even of real accidents), if I abstract all composition therein—nothing, not even a point, remains; for a point is possible only as the limit of a space—consequently of a composite.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 231
-          }
-        },
-        {
-          "id": "kant.f.v0005",
-          "kind": "verbatim",
-          "text": "Nothing seems to be clearer than that, if one maintains: “The world has a beginning,” and another: “The world has no beginning,” one of the two must be right.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 158
-          }
-        },
-        {
-          "id": "kant.f.v0006",
-          "kind": "verbatim",
-          "text": "The second asserts that reason is capable of presenting us, from the analogy with nature, with a more definite conception of this being, and that its operations, as the cause of all things, are the results of intelligence and free will.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 236
-          }
-        },
-        {
-          "id": "kant.f.v0007",
-          "kind": "verbatim",
-          "text": "They are, on the contrary, regarded as jealous enemies of our insatiable desire for knowledge; and it almost requires an apology to induce us to tolerate, much less to prize and to respect them.",
-          "work": "The Critique of Pure Reason",
-          "lang": "en",
-          "src": {
-            "work": "The Critique of Pure Reason"
-          },
-          "quality": {
-            "chars": 194
-          }
-        },
-        {
-          "id": "kant.f.v0008",
-          "kind": "verbatim",
           "text": "In a word, nature would have taken care that reason should not break forth into practical exercise, nor have the presumption, with its weak insight, to think out for itself the plan of happiness, and of the means of attaining it.",
           "work": "Fundamental Principles of the Metaphysic of Morals",
           "lang": "en",
@@ -2128,72 +2076,20 @@
           }
         },
         {
-          "id": "kant.f.v0009",
+          "id": "kant.f.v0002",
           "kind": "verbatim",
-          "text": "It is only what is connected with my will as a principle, by no means as an effect- what does not subserve my inclination, but overpowers it, or at least in case of choice excludes it from its calculation- in other words, simply the law of itself, which can be an object of respect, and hence a command.",
-          "work": "Fundamental Principles of the Metaphysic of Morals",
+          "text": "Now if this as a pleasant sensation were to be distinguished from the notion of good, then there would be nothing primarily good at all, but the good would have to be sought only in the means to something else, namely, some pleasantness.",
+          "work": "The Critique of Practical Reason",
           "lang": "en",
           "src": {
-            "work": "Fundamental Principles of the Metaphysic of Morals"
+            "work": "The Critique of Practical Reason"
           },
           "quality": {
-            "chars": 303
+            "chars": 237
           }
         },
         {
-          "id": "kant.f.v0010",
-          "kind": "verbatim",
-          "text": "We are not to present it as necessary for an uncertain and merely possible purpose, but for a purpose which we may presuppose with certainty and a priori in every man, because it belongs to his being.",
-          "work": "Fundamental Principles of the Metaphysic of Morals",
-          "lang": "en",
-          "src": {
-            "work": "Fundamental Principles of the Metaphysic of Morals"
-          },
-          "quality": {
-            "chars": 200
-          }
-        },
-        {
-          "id": "kant.f.v0011",
-          "kind": "verbatim",
-          "text": "Secondly, in the case of this categorical imperative or law of morality, the difficulty (of discerning its possibility) is a very profound one.",
-          "work": "Fundamental Principles of the Metaphysic of Morals",
-          "lang": "en",
-          "src": {
-            "work": "Fundamental Principles of the Metaphysic of Morals"
-          },
-          "quality": {
-            "chars": 143
-          }
-        },
-        {
-          "id": "kant.f.v0012",
-          "kind": "verbatim",
-          "text": "With the view of attaining to this, it is of extreme importance to remember that we must not allow ourselves to think of deducing the reality of this principle from the particular attributes of human nature.",
-          "work": "Fundamental Principles of the Metaphysic of Morals",
-          "lang": "en",
-          "src": {
-            "work": "Fundamental Principles of the Metaphysic of Morals"
-          },
-          "quality": {
-            "chars": 207
-          }
-        },
-        {
-          "id": "kant.f.v0013",
-          "kind": "verbatim",
-          "text": "This estimation therefore shows that the worth of such a disposition is dignity, and places it infinitely above all value, with which it cannot for a moment be brought into comparison or competition without as it were violating its sanctity.",
-          "work": "Fundamental Principles of the Metaphysic of Morals",
-          "lang": "en",
-          "src": {
-            "work": "Fundamental Principles of the Metaphysic of Morals"
-          },
-          "quality": {
-            "chars": 241
-          }
-        },
-        {
-          "id": "kant.f.v0014",
+          "id": "kant.f.v0003",
           "kind": "verbatim",
           "text": "The positive concept of freedom furnishes this third cognition, which cannot, as with physical causes, be the nature of the sensible world (in the concept of which we find conjoined the concept of something in relation as cause to something else as effect).",
           "work": "Fundamental Principles of the Metaphysic of Morals",
@@ -2206,7 +2102,7 @@
           }
         },
         {
-          "id": "kant.f.v0015",
+          "id": "kant.f.v0004",
           "kind": "verbatim",
           "text": "Punishment, then, is a physical evil, which, though it be not connected with moral evil as a natural consequence, ought to be connected with it as a consequence by the principles of a moral legislation.",
           "work": "The Critique of Practical Reason",
@@ -2219,16 +2115,159 @@
           }
         },
         {
-          "id": "kant.f.v0016",
+          "id": "kant.f.v0005",
           "kind": "verbatim",
-          "text": "Now if this as a pleasant sensation were to be distinguished from the notion of good, then there would be nothing primarily good at all, but the good would have to be sought only in the means to something else, namely, some pleasantness.",
-          "work": "The Critique of Practical Reason",
+          "text": "This estimation therefore shows that the worth of such a disposition is dignity, and places it infinitely above all value, with which it cannot for a moment be brought into comparison or competition without as it were violating its sanctity.",
+          "work": "Fundamental Principles of the Metaphysic of Morals",
           "lang": "en",
           "src": {
-            "work": "The Critique of Practical Reason"
+            "work": "Fundamental Principles of the Metaphysic of Morals"
           },
           "quality": {
-            "chars": 237
+            "chars": 241
+          }
+        },
+        {
+          "id": "kant.f.v0006",
+          "kind": "verbatim",
+          "text": "It is clear that we cannot make the special conditions of sensibility into conditions of the possibility of things, but only of the possibility of their existence as far as they are phenomena.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 192
+          }
+        },
+        {
+          "id": "kant.f.v0007",
+          "kind": "verbatim",
+          "text": "In truth, if I cognize in all its inner determinations a drop of water as a thing in itself, I cannot look upon one drop as different from another, if the conception of the one is completely identical with that of the other.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 224
+          }
+        },
+        {
+          "id": "kant.f.v0008",
+          "kind": "verbatim",
+          "text": "We now come to a conception which was not inserted in the general list of transcendental conceptions, and yet must be reckoned with them, but at the same time without in the least altering, or indicating a deficiency in that table.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 231
+          }
+        },
+        {
+          "id": "kant.f.v0009",
+          "kind": "verbatim",
+          "text": "As space is not a composite of substances (and not even of real accidents), if I abstract all composition therein—nothing, not even a point, remains; for a point is possible only as the limit of a space—consequently of a composite.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 231
+          }
+        },
+        {
+          "id": "kant.f.v0010",
+          "kind": "verbatim",
+          "text": "Nothing seems to be clearer than that, if one maintains: “The world has a beginning,” and another: “The world has no beginning,” one of the two must be right.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 158
+          }
+        },
+        {
+          "id": "kant.f.v0011",
+          "kind": "verbatim",
+          "text": "The second asserts that reason is capable of presenting us, from the analogy with nature, with a more definite conception of this being, and that its operations, as the cause of all things, are the results of intelligence and free will.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 236
+          }
+        },
+        {
+          "id": "kant.f.v0012",
+          "kind": "verbatim",
+          "text": "They are, on the contrary, regarded as jealous enemies of our insatiable desire for knowledge; and it almost requires an apology to induce us to tolerate, much less to prize and to respect them.",
+          "work": "The Critique of Pure Reason",
+          "lang": "en",
+          "src": {
+            "work": "The Critique of Pure Reason"
+          },
+          "quality": {
+            "chars": 194
+          }
+        },
+        {
+          "id": "kant.f.v0013",
+          "kind": "verbatim",
+          "text": "It is only what is connected with my will as a principle, by no means as an effect- what does not subserve my inclination, but overpowers it, or at least in case of choice excludes it from its calculation- in other words, simply the law of itself, which can be an object of respect, and hence a command.",
+          "work": "Fundamental Principles of the Metaphysic of Morals",
+          "lang": "en",
+          "src": {
+            "work": "Fundamental Principles of the Metaphysic of Morals"
+          },
+          "quality": {
+            "chars": 303
+          }
+        },
+        {
+          "id": "kant.f.v0014",
+          "kind": "verbatim",
+          "text": "We are not to present it as necessary for an uncertain and merely possible purpose, but for a purpose which we may presuppose with certainty and a priori in every man, because it belongs to his being.",
+          "work": "Fundamental Principles of the Metaphysic of Morals",
+          "lang": "en",
+          "src": {
+            "work": "Fundamental Principles of the Metaphysic of Morals"
+          },
+          "quality": {
+            "chars": 200
+          }
+        },
+        {
+          "id": "kant.f.v0015",
+          "kind": "verbatim",
+          "text": "Secondly, in the case of this categorical imperative or law of morality, the difficulty (of discerning its possibility) is a very profound one.",
+          "work": "Fundamental Principles of the Metaphysic of Morals",
+          "lang": "en",
+          "src": {
+            "work": "Fundamental Principles of the Metaphysic of Morals"
+          },
+          "quality": {
+            "chars": 143
+          }
+        },
+        {
+          "id": "kant.f.v0016",
+          "kind": "verbatim",
+          "text": "With the view of attaining to this, it is of extreme importance to remember that we must not allow ourselves to think of deducing the reality of this principle from the particular attributes of human nature.",
+          "work": "Fundamental Principles of the Metaphysic of Morals",
+          "lang": "en",
+          "src": {
+            "work": "Fundamental Principles of the Metaphysic of Morals"
+          },
+          "quality": {
+            "chars": 207
           }
         },
         {
@@ -4642,253 +4681,6 @@
         {
           "id": "rousseau.f.v0001",
           "kind": "verbatim",
-          "text": "My young scientist is very proud of himself and is beginning to chatter, but I check him at once and take him home overwhelmed with praise.",
-          "work": "Émile",
-          "lang": "en",
-          "src": {
-            "work": "Émile"
-          },
-          "quality": {
-            "chars": 139
-          }
-        },
-        {
-          "id": "rousseau.f.v0002",
-          "kind": "verbatim",
-          "text": "Their sayings even help us to understand them; for comparing what they say and what they do, we see not only what they are but what they would appear; the more they disguise themselves the more thoroughly they stand revealed.",
-          "work": "Émile",
-          "lang": "en",
-          "src": {
-            "work": "Émile"
-          },
-          "quality": {
-            "chars": 225
-          }
-        },
-        {
-          "id": "rousseau.f.v0003",
-          "kind": "verbatim",
-          "text": "Tell me, my friend, when they talk to you of a blind force diffused throughout nature, do they present any real idea to your mind?",
-          "work": "Émile",
-          "lang": "en",
-          "src": {
-            "work": "Émile"
-          },
-          "quality": {
-            "chars": 130
-          }
-        },
-        {
-          "id": "rousseau.f.v0004",
-          "kind": "verbatim",
-          "text": "People make a great mystery of the ways of society, as if, at the age when these ways are acquired, we did not take to them quite naturally, and as if the first laws of politeness were not to be found in a kindly heart.",
-          "work": "Émile",
-          "lang": "en",
-          "src": {
-            "work": "Émile"
-          },
-          "quality": {
-            "chars": 219
-          }
-        },
-        {
-          "id": "rousseau.f.v0005",
-          "kind": "verbatim",
-          "text": "Do not be afraid to educate your women as women; teach them a woman's business, that they be modest, that they may know how to manage their house and look after their family; the grand toilet will soon disappear, and they will be more tastefully dressed.",
-          "work": "Émile",
-          "lang": "en",
-          "src": {
-            "work": "Émile"
-          },
-          "quality": {
-            "chars": 254
-          }
-        },
-        {
-          "id": "rousseau.f.v0006",
-          "kind": "verbatim",
-          "text": "In the next place, he had studied, I had not; this gave a degree of method to his arguments which I could not follow; and whenever he found himself pressed by an unforeseen objection he put it off to the next conference, pretending I rambled from the question in dispute.",
-          "work": "The Confessions",
-          "lang": "en",
-          "src": {
-            "work": "The Confessions"
-          },
-          "quality": {
-            "chars": 271
-          }
-        },
-        {
-          "id": "rousseau.f.v0007",
-          "kind": "verbatim",
-          "text": "Reflection, assisted by practice, gives clear ideas, and enables you to devise shorter methods, these inventions flatter our self-complacency, while their exactitude satisfies our understanding, and renders a study pleasant, which is, of itself, heavy and unentertaining.",
-          "work": "The Confessions",
-          "lang": "en",
-          "src": {
-            "work": "The Confessions"
-          },
-          "quality": {
-            "chars": 271
-          }
-        },
-        {
-          "id": "rousseau.f.v0008",
-          "kind": "verbatim",
-          "text": "The exercise this naturally obliged me to take, with the relaxation it procured me from books and study, was serviceable to my health.",
-          "work": "The Confessions",
-          "lang": "en",
-          "src": {
-            "work": "The Confessions"
-          },
-          "quality": {
-            "chars": 134
-          }
-        },
-        {
-          "id": "rousseau.f.v0009",
-          "kind": "verbatim",
-          "text": "At length, fatigued with his importunities, I resolved upon letting him have the Paix Perpetuelle, which I gave him for twelve louis.",
-          "work": "The Confessions",
-          "lang": "en",
-          "src": {
-            "work": "The Confessions"
-          },
-          "quality": {
-            "chars": 133
-          }
-        },
-        {
-          "id": "rousseau.f.v0010",
-          "kind": "verbatim",
-          "text": "The great mind of this worthy man, haughty and republican, could stoop to no other yoke than that of friendship, but to this it was so obedient, that with very different maxims he saw nothing but Frederic the moment he became attached to him.",
-          "work": "The Confessions",
-          "lang": "en",
-          "src": {
-            "work": "The Confessions"
-          },
-          "quality": {
-            "chars": 242
-          }
-        },
-        {
-          "id": "rousseau.f.v0011",
-          "kind": "verbatim",
-          "text": "In fact, each individual, as a man, may have a particular will contrary or dissimilar to the general will which he has as a citizen.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 132
-          }
-        },
-        {
-          "id": "rousseau.f.v0012",
-          "kind": "verbatim",
-          "text": "The same laws cannot suit so many diverse provinces with different customs, situated in the most various climates, and incapable of enduring a uniform government.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 162
-          }
-        },
-        {
-          "id": "rousseau.f.v0013",
-          "kind": "verbatim",
-          "text": "It has not been taken into account that, in so exposing ourselves to the risks this possibility entails, we are setting almost all the chances against us.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 154
-          }
-        },
-        {
-          "id": "rousseau.f.v0014",
-          "kind": "verbatim",
-          "text": "Indeed, of the hundred and ninety-three centuries into which the six classes of the whole Roman people were divided, the first class contained ninety-eight; and, as voting went solely by centuries, this class alone had a majority over all the rest.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 248
-          }
-        },
-        {
-          "id": "rousseau.f.v0015",
-          "kind": "verbatim",
-          "text": "The monarchy of Cyrus was conquered by thirty thousand men, led by a prince poorer than the meanest of Persian Satraps: in like manner the Scythians, the poorest of all nations, were able to resist the most powerful monarchs of the universe.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 241
-          }
-        },
-        {
-          "id": "rousseau.f.v0016",
-          "kind": "verbatim",
-          "text": "In spite of the endeavours of the wisest legislators, the political state remained imperfect, because it was little more than the work of chance; and, as it had begun ill, though time revealed its defects and suggested remedies, the original faults were never repaired.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 269
-          }
-        },
-        {
-          "id": "rousseau.f.v0017",
-          "kind": "verbatim",
-          "text": "The rules of the former are found only in the writings of those philosophers who venture to proclaim the rights of humanity.",
-          "work": "The Social Contract",
-          "lang": "en",
-          "src": {
-            "work": "The Social Contract"
-          },
-          "quality": {
-            "chars": 124
-          }
-        },
-        {
-          "id": "rousseau.f.v0018",
-          "kind": "verbatim",
-          "text": "To this we may add that no animal naturally makes war upon man, except in the case of self-defence or extreme hunger; nor ever expresses against him any of these violent antipathies, which seem to indicate that some particular species are intended by nature for the food of others.",
-          "work": "Discourse on Inequality",
-          "lang": "en",
-          "src": {
-            "work": "Discourse on Inequality"
-          },
-          "quality": {
-            "chars": 281
-          }
-        },
-        {
-          "id": "rousseau.f.v0019",
-          "kind": "verbatim",
-          "text": "The first language of man, the most universal and most energetic of all languages, in short, the only language he had occasion for, before there was a necessity of persuading assembled multitudes, was the cry of nature.",
-          "work": "Discourse on Inequality",
-          "lang": "en",
-          "src": {
-            "work": "Discourse on Inequality"
-          },
-          "quality": {
-            "chars": 219
-          }
-        },
-        {
-          "id": "rousseau.f.v0020",
-          "kind": "verbatim",
           "text": "Hobbes very plainly saw the flaws in all the modern definitions of natural right: but the consequences, which he draws from his own definition, show that it is, in the sense he understands it, equally exceptionable.",
           "work": "Discourse on Inequality",
           "lang": "en",
@@ -4900,33 +4692,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0021",
-          "kind": "verbatim",
-          "text": "It is in a word, in this natural sentiment, rather than in fine-spun arguments, that we must look for the cause of that reluctance which every man would experience to do evil, even independently of the maxims of education.",
-          "work": "Discourse on Inequality",
-          "lang": "en",
-          "src": {
-            "work": "Discourse on Inequality"
-          },
-          "quality": {
-            "chars": 222
-          }
-        },
-        {
-          "id": "rousseau.f.v0022",
-          "kind": "verbatim",
-          "text": "My pen straightened by the rapidity of time, the abundance of things I have to say, and the almost insensible progress of the first improvements, flies like an arrow over numberless ages, for the slower the succession of events, the quicker I may allow myself to be in relating them.",
-          "work": "Discourse on Inequality",
-          "lang": "en",
-          "src": {
-            "work": "Discourse on Inequality"
-          },
-          "quality": {
-            "chars": 283
-          }
-        },
-        {
-          "id": "rousseau.f.v0023",
+          "id": "rousseau.f.v0002",
           "kind": "verbatim",
           "text": "From these first preferences there proceeded on one side vanity and contempt, on the other envy and shame; and the fermentation raised by these new leavens at length produced combinations fatal to happiness and innocence.",
           "work": "Discourse on Inequality",
@@ -4939,7 +4705,293 @@
           }
         },
         {
+          "id": "rousseau.f.v0003",
+          "kind": "verbatim",
+          "text": "Shall the organ of truth, the most worthy organ of man, the only one whose use distinguishes him from the brutes, shall this be prostituted to no better purposes than those, which are answered as well by the inarticulate sounds of other animals?",
+          "work": "Julie, or the New Heloise",
+          "lang": "en",
+          "src": {
+            "work": "Julie, or the New Heloise"
+          },
+          "quality": {
+            "chars": 245
+          }
+        },
+        {
+          "id": "rousseau.f.v0004",
+          "kind": "verbatim",
+          "text": "The monarchy of Cyrus was conquered by thirty thousand men, led by a prince poorer than the meanest of Persian Satraps: in like manner the Scythians, the poorest of all nations, were able to resist the most powerful monarchs of the universe.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 241
+          }
+        },
+        {
+          "id": "rousseau.f.v0005",
+          "kind": "verbatim",
+          "text": "It is in a word, in this natural sentiment, rather than in fine-spun arguments, that we must look for the cause of that reluctance which every man would experience to do evil, even independently of the maxims of education.",
+          "work": "Discourse on Inequality",
+          "lang": "en",
+          "src": {
+            "work": "Discourse on Inequality"
+          },
+          "quality": {
+            "chars": 222
+          }
+        },
+        {
+          "id": "rousseau.f.v0006",
+          "kind": "verbatim",
+          "text": "My young scientist is very proud of himself and is beginning to chatter, but I check him at once and take him home overwhelmed with praise.",
+          "work": "Émile",
+          "lang": "en",
+          "src": {
+            "work": "Émile"
+          },
+          "quality": {
+            "chars": 139
+          }
+        },
+        {
+          "id": "rousseau.f.v0007",
+          "kind": "verbatim",
+          "text": "Their sayings even help us to understand them; for comparing what they say and what they do, we see not only what they are but what they would appear; the more they disguise themselves the more thoroughly they stand revealed.",
+          "work": "Émile",
+          "lang": "en",
+          "src": {
+            "work": "Émile"
+          },
+          "quality": {
+            "chars": 225
+          }
+        },
+        {
+          "id": "rousseau.f.v0008",
+          "kind": "verbatim",
+          "text": "Tell me, my friend, when they talk to you of a blind force diffused throughout nature, do they present any real idea to your mind?",
+          "work": "Émile",
+          "lang": "en",
+          "src": {
+            "work": "Émile"
+          },
+          "quality": {
+            "chars": 130
+          }
+        },
+        {
+          "id": "rousseau.f.v0009",
+          "kind": "verbatim",
+          "text": "People make a great mystery of the ways of society, as if, at the age when these ways are acquired, we did not take to them quite naturally, and as if the first laws of politeness were not to be found in a kindly heart.",
+          "work": "Émile",
+          "lang": "en",
+          "src": {
+            "work": "Émile"
+          },
+          "quality": {
+            "chars": 219
+          }
+        },
+        {
+          "id": "rousseau.f.v0010",
+          "kind": "verbatim",
+          "text": "Do not be afraid to educate your women as women; teach them a woman's business, that they be modest, that they may know how to manage their house and look after their family; the grand toilet will soon disappear, and they will be more tastefully dressed.",
+          "work": "Émile",
+          "lang": "en",
+          "src": {
+            "work": "Émile"
+          },
+          "quality": {
+            "chars": 254
+          }
+        },
+        {
+          "id": "rousseau.f.v0011",
+          "kind": "verbatim",
+          "text": "In the next place, he had studied, I had not; this gave a degree of method to his arguments which I could not follow; and whenever he found himself pressed by an unforeseen objection he put it off to the next conference, pretending I rambled from the question in dispute.",
+          "work": "The Confessions",
+          "lang": "en",
+          "src": {
+            "work": "The Confessions"
+          },
+          "quality": {
+            "chars": 271
+          }
+        },
+        {
+          "id": "rousseau.f.v0012",
+          "kind": "verbatim",
+          "text": "Reflection, assisted by practice, gives clear ideas, and enables you to devise shorter methods, these inventions flatter our self-complacency, while their exactitude satisfies our understanding, and renders a study pleasant, which is, of itself, heavy and unentertaining.",
+          "work": "The Confessions",
+          "lang": "en",
+          "src": {
+            "work": "The Confessions"
+          },
+          "quality": {
+            "chars": 271
+          }
+        },
+        {
+          "id": "rousseau.f.v0013",
+          "kind": "verbatim",
+          "text": "The exercise this naturally obliged me to take, with the relaxation it procured me from books and study, was serviceable to my health.",
+          "work": "The Confessions",
+          "lang": "en",
+          "src": {
+            "work": "The Confessions"
+          },
+          "quality": {
+            "chars": 134
+          }
+        },
+        {
+          "id": "rousseau.f.v0014",
+          "kind": "verbatim",
+          "text": "At length, fatigued with his importunities, I resolved upon letting him have the Paix Perpetuelle, which I gave him for twelve louis.",
+          "work": "The Confessions",
+          "lang": "en",
+          "src": {
+            "work": "The Confessions"
+          },
+          "quality": {
+            "chars": 133
+          }
+        },
+        {
+          "id": "rousseau.f.v0015",
+          "kind": "verbatim",
+          "text": "The great mind of this worthy man, haughty and republican, could stoop to no other yoke than that of friendship, but to this it was so obedient, that with very different maxims he saw nothing but Frederic the moment he became attached to him.",
+          "work": "The Confessions",
+          "lang": "en",
+          "src": {
+            "work": "The Confessions"
+          },
+          "quality": {
+            "chars": 242
+          }
+        },
+        {
+          "id": "rousseau.f.v0016",
+          "kind": "verbatim",
+          "text": "In fact, each individual, as a man, may have a particular will contrary or dissimilar to the general will which he has as a citizen.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 132
+          }
+        },
+        {
+          "id": "rousseau.f.v0017",
+          "kind": "verbatim",
+          "text": "The same laws cannot suit so many diverse provinces with different customs, situated in the most various climates, and incapable of enduring a uniform government.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 162
+          }
+        },
+        {
+          "id": "rousseau.f.v0018",
+          "kind": "verbatim",
+          "text": "It has not been taken into account that, in so exposing ourselves to the risks this possibility entails, we are setting almost all the chances against us.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 154
+          }
+        },
+        {
+          "id": "rousseau.f.v0019",
+          "kind": "verbatim",
+          "text": "Indeed, of the hundred and ninety-three centuries into which the six classes of the whole Roman people were divided, the first class contained ninety-eight; and, as voting went solely by centuries, this class alone had a majority over all the rest.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 248
+          }
+        },
+        {
+          "id": "rousseau.f.v0020",
+          "kind": "verbatim",
+          "text": "In spite of the endeavours of the wisest legislators, the political state remained imperfect, because it was little more than the work of chance; and, as it had begun ill, though time revealed its defects and suggested remedies, the original faults were never repaired.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 269
+          }
+        },
+        {
+          "id": "rousseau.f.v0021",
+          "kind": "verbatim",
+          "text": "The rules of the former are found only in the writings of those philosophers who venture to proclaim the rights of humanity.",
+          "work": "The Social Contract",
+          "lang": "en",
+          "src": {
+            "work": "The Social Contract"
+          },
+          "quality": {
+            "chars": 124
+          }
+        },
+        {
+          "id": "rousseau.f.v0022",
+          "kind": "verbatim",
+          "text": "To this we may add that no animal naturally makes war upon man, except in the case of self-defence or extreme hunger; nor ever expresses against him any of these violent antipathies, which seem to indicate that some particular species are intended by nature for the food of others.",
+          "work": "Discourse on Inequality",
+          "lang": "en",
+          "src": {
+            "work": "Discourse on Inequality"
+          },
+          "quality": {
+            "chars": 281
+          }
+        },
+        {
+          "id": "rousseau.f.v0023",
+          "kind": "verbatim",
+          "text": "The first language of man, the most universal and most energetic of all languages, in short, the only language he had occasion for, before there was a necessity of persuading assembled multitudes, was the cry of nature.",
+          "work": "Discourse on Inequality",
+          "lang": "en",
+          "src": {
+            "work": "Discourse on Inequality"
+          },
+          "quality": {
+            "chars": 219
+          }
+        },
+        {
           "id": "rousseau.f.v0024",
+          "kind": "verbatim",
+          "text": "My pen straightened by the rapidity of time, the abundance of things I have to say, and the almost insensible progress of the first improvements, flies like an arrow over numberless ages, for the slower the succession of events, the quicker I may allow myself to be in relating them.",
+          "work": "Discourse on Inequality",
+          "lang": "en",
+          "src": {
+            "work": "Discourse on Inequality"
+          },
+          "quality": {
+            "chars": 283
+          }
+        },
+        {
+          "id": "rousseau.f.v0025",
           "kind": "verbatim",
           "text": "I shall not stop to describe the successive inventions of other arts, the progress of language, the trial and employments of talents, the inequality of fortunes, the use or abuse of riches, nor all the details which follow these, and which every one may easily supply.",
           "work": "Discourse on Inequality",
@@ -4952,7 +5004,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0025",
+          "id": "rousseau.f.v0026",
           "kind": "verbatim",
           "text": "Societies once formed in this manner, soon multiplied or spread to such a degree, as to cover the face of the earth; and not to leave a corner in the whole universe, where a man could throw off the yoke, and withdraw his head from under the often ill-conducted sword which he saw perpetually hanging over it.",
           "work": "Discourse on Inequality",
@@ -4965,7 +5017,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0026",
+          "id": "rousseau.f.v0027",
           "kind": "verbatim",
           "text": "The father's goods, which he can indeed dispose of as he pleases, are the ties which hold his children to their dependence upon him, and he may divide his substance among them in proportion as they shall have deserved his attention by a continual deference to his commands.",
           "work": "Discourse on Inequality",
@@ -4978,7 +5030,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0027",
+          "id": "rousseau.f.v0028",
           "kind": "verbatim",
           "text": "I feel myself unable to support your absence; I feel, my dear friend, that I can never live without you, and this is a fresh subject to me of continual apprehensions.",
           "work": "Julie, or the New Heloise",
@@ -4991,7 +5043,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0028",
+          "id": "rousseau.f.v0029",
           "kind": "verbatim",
           "text": "Esteem and friendship are already in your possession, and all of that more tender sentiment of which my heart is capable is also yours.",
           "work": "Julie, or the New Heloise",
@@ -5004,7 +5056,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0029",
+          "id": "rousseau.f.v0030",
           "kind": "verbatim",
           "text": "You were afraid they would laugh at you, a momentary hiss struck you with fear, and you had rather expose yourself to the bitterness of remorse than the tartness of raillery.",
           "work": "Julie, or the New Heloise",
@@ -5017,7 +5069,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0030",
+          "id": "rousseau.f.v0031",
           "kind": "verbatim",
           "text": "I have seen, in the rivers of Mexico and Peru, the same scenes as at Brazil; I have seen the few wretched inhabitants, the sad remains of two powerful nations, loaded with irons, ignominy and misery, weeping in the midst of their precious metals, and reproaching heaven for having lavished such treasures among them.",
           "work": "Julie, or the New Heloise",
@@ -5030,7 +5082,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0031",
+          "id": "rousseau.f.v0032",
           "kind": "verbatim",
           "text": "They began by subverting, or rather by preventing, in a plain and perspicuous manner, and by affecting instances, that servile and criminal practice, that mutual toleration at the master’s cost, which a worthless servant never fails to inculcate to a good one, under the mask of a charitable maxim.",
           "work": "Julie, or the New Heloise",
@@ -5043,7 +5095,7 @@
           }
         },
         {
-          "id": "rousseau.f.v0032",
+          "id": "rousseau.f.v0033",
           "kind": "verbatim",
           "text": "I always wished to re-visit that lovely retreat, which served me as an asylum in the midst of ice, and where my heart loved to converse, in idea, with the object of all others most dear to its affections.",
           "work": "Julie, or the New Heloise",
@@ -5053,19 +5105,6 @@
           },
           "quality": {
             "chars": 204
-          }
-        },
-        {
-          "id": "rousseau.f.v0033",
-          "kind": "verbatim",
-          "text": "Shall the organ of truth, the most worthy organ of man, the only one whose use distinguishes him from the brutes, shall this be prostituted to no better purposes than those, which are answered as well by the inarticulate sounds of other animals?",
-          "work": "Julie, or the New Heloise",
-          "lang": "en",
-          "src": {
-            "work": "Julie, or the New Heloise"
-          },
-          "quality": {
-            "chars": 245
           }
         }
       ]
@@ -6287,6 +6326,58 @@
         {
           "id": "marcaurele.f.v0001",
           "kind": "verbatim",
+          "text": "Death hangs over thee: whilst yet thou livest, whilst thou mayest, be good.",
+          "work": "Meditations",
+          "lang": "en",
+          "src": {
+            "work": "Meditations"
+          },
+          "quality": {
+            "chars": 75
+          }
+        },
+        {
+          "id": "marcaurele.f.v0002",
+          "kind": "verbatim",
+          "text": "Make it not any longer a matter of dispute or discourse, what are the signs and proprieties of a good man, but really and actually to be such.",
+          "work": "Meditations",
+          "lang": "en",
+          "src": {
+            "work": "Meditations"
+          },
+          "quality": {
+            "chars": 142
+          }
+        },
+        {
+          "id": "marcaurele.f.v0003",
+          "kind": "verbatim",
+          "text": "This thou must ever be mindful of, as of this also, that a man's true happiness doth consist in very few things.",
+          "work": "Meditations",
+          "lang": "en",
+          "src": {
+            "work": "Meditations"
+          },
+          "quality": {
+            "chars": 112
+          }
+        },
+        {
+          "id": "marcaurele.f.v0004",
+          "kind": "verbatim",
+          "text": "I accept it, with reference unto the Gods, and their providence; the fountain of all things, from which whatsoever comes to pass, doth hang and depend.",
+          "work": "Meditations",
+          "lang": "en",
+          "src": {
+            "work": "Meditations"
+          },
+          "quality": {
+            "chars": 151
+          }
+        },
+        {
+          "id": "marcaurele.f.v0005",
+          "kind": "verbatim",
           "text": "His accurate examination of things in consultations, and patient hearing of others.",
           "work": "Meditations",
           "lang": "en",
@@ -6298,7 +6389,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0002",
+          "id": "marcaurele.f.v0006",
           "kind": "verbatim",
           "text": "And that being it which we part with whensoever we die, it doth manifestly appear, that it can be but a moment of time, that we then part with.",
           "work": "Meditations",
@@ -6311,7 +6402,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0003",
+          "id": "marcaurele.f.v0007",
           "kind": "verbatim",
           "text": "Trouble not thyself any more henceforth, reduce thyself unto perfect simplicity.",
           "work": "Meditations",
@@ -6324,7 +6415,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0004",
+          "id": "marcaurele.f.v0008",
           "kind": "verbatim",
           "text": "The most compendious, is that which is according to nature: that is, in all both words and deeds, ever to follow that which is most sound and perfect.",
           "work": "Meditations",
@@ -6337,7 +6428,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0005",
+          "id": "marcaurele.f.v0009",
           "kind": "verbatim",
           "text": "Yea even then, though thou dost thy best to save thyself from him, yet not from him as an enemy.",
           "work": "Meditations",
@@ -6350,7 +6441,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0006",
+          "id": "marcaurele.f.v0010",
           "kind": "verbatim",
           "text": "These penetrated into the true nature of things; into all causes, and all subjects: and upon these did they exercise their power and authority.",
           "work": "Meditations",
@@ -6363,7 +6454,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0007",
+          "id": "marcaurele.f.v0011",
           "kind": "verbatim",
           "text": "As nothing can happen either to an ox, a vine, or to a stone, which is not incidental unto them; unto every one in his own kind.",
           "work": "Meditations",
@@ -6376,7 +6467,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0008",
+          "id": "marcaurele.f.v0012",
           "kind": "verbatim",
           "text": "Thou must not in matter of death carry thyself scornfully, but as one that is well pleased with it, as being one of those things that nature hath appointed.",
           "work": "Meditations",
@@ -6389,7 +6480,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0009",
+          "id": "marcaurele.f.v0013",
           "kind": "verbatim",
           "text": "But here contrariwise, man (if he make that good use of them that he should) is rather the better and the more praiseworthy for any of those kind of hindrances, than otherwise.",
           "work": "Meditations",
@@ -6402,7 +6493,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0010",
+          "id": "marcaurele.f.v0014",
           "kind": "verbatim",
           "text": "To righteousness, in speaking the truth freely, and without ambiguity; and in doing all things justly and discreetly.",
           "work": "Meditations",
@@ -6415,7 +6506,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0011",
+          "id": "marcaurele.f.v0015",
           "kind": "verbatim",
           "text": "There is but one common soul, though divided into innumerable particular essences and natures.",
           "work": "Meditations",
@@ -6428,7 +6519,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0012",
+          "id": "marcaurele.f.v0016",
           "kind": "verbatim",
           "text": "Gratia and I will have to fight for it; I doubt I shall not get the better of her.",
           "work": "Meditations",
@@ -6441,7 +6532,7 @@
           }
         },
         {
-          "id": "marcaurele.f.v0013",
+          "id": "marcaurele.f.v0017",
           "kind": "verbatim",
           "text": "After returning, before turning on my side to snore, I do my task and give an account of the day to my delightful master, whom if I could long for a little more, I should not mind growing a trifle thinner.",
           "work": "Meditations",
@@ -6461,19 +6552,6 @@
         {
           "id": "montaigne.f.v0001",
           "kind": "verbatim",
-          "text": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
-          "work": "Essais",
-          "lang": "en",
-          "src": {
-            "work": "Essais"
-          },
-          "quality": {
-            "chars": 247
-          }
-        },
-        {
-          "id": "montaigne.f.v0002",
-          "kind": "verbatim",
           "text": "In those other ordinary friendships, you are to walk with bridle in your hand, with prudence and circumspection, for in them the knot is not so sure that a man may not half suspect it will slip.",
           "work": "Essais",
           "lang": "en",
@@ -6485,33 +6563,20 @@
           }
         },
         {
+          "id": "montaigne.f.v0002",
+          "kind": "verbatim",
+          "text": "Is it not to build a wall without stone or brick, or some such thing, to write books without learning and without art?",
+          "work": "Essais",
+          "lang": "en",
+          "src": {
+            "work": "Essais"
+          },
+          "quality": {
+            "chars": 118
+          }
+        },
+        {
           "id": "montaigne.f.v0003",
-          "kind": "verbatim",
-          "text": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
-          "work": "Essais",
-          "lang": "en",
-          "src": {
-            "work": "Essais"
-          },
-          "quality": {
-            "chars": 232
-          }
-        },
-        {
-          "id": "montaigne.f.v0004",
-          "kind": "verbatim",
-          "text": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
-          "work": "Essais",
-          "lang": "en",
-          "src": {
-            "work": "Essais"
-          },
-          "quality": {
-            "chars": 124
-          }
-        },
-        {
-          "id": "montaigne.f.v0005",
           "kind": "verbatim",
           "text": "Even so in virtue itself, of two like effects, we notwithstanding look upon that as the fairest and most worthy, wherein the most trouble and hazard are set before us.",
           "work": "Essais",
@@ -6524,7 +6589,46 @@
           }
         },
         {
+          "id": "montaigne.f.v0004",
+          "kind": "verbatim",
+          "text": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
+          "work": "Essais",
+          "lang": "en",
+          "src": {
+            "work": "Essais"
+          },
+          "quality": {
+            "chars": 247
+          }
+        },
+        {
+          "id": "montaigne.f.v0005",
+          "kind": "verbatim",
+          "text": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
+          "work": "Essais",
+          "lang": "en",
+          "src": {
+            "work": "Essais"
+          },
+          "quality": {
+            "chars": 232
+          }
+        },
+        {
           "id": "montaigne.f.v0006",
+          "kind": "verbatim",
+          "text": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
+          "work": "Essais",
+          "lang": "en",
+          "src": {
+            "work": "Essais"
+          },
+          "quality": {
+            "chars": 124
+          }
+        },
+        {
+          "id": "montaigne.f.v0007",
           "kind": "verbatim",
           "text": "Such as have had to do with testy and obstinate women, may have experimented into what a rage it puts them to oppose silence and coldness to their fury, and that a man disdains to nourish their anger.",
           "work": "Essais",
@@ -6537,7 +6641,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0007",
+          "id": "montaigne.f.v0008",
           "kind": "verbatim",
           "text": "We have, peradventure, reason to blame ourselves for being guilty of so foolish a production as man, and to call the act, and the parts that are employed in the act, shameful (mine, truly, are now shameful and pitiful).",
           "work": "Essais",
@@ -6550,7 +6654,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0008",
+          "id": "montaigne.f.v0009",
           "kind": "verbatim",
           "text": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
           "work": "Journal of Travels in Italy",
@@ -6563,7 +6667,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0009",
+          "id": "montaigne.f.v0010",
           "kind": "verbatim",
           "text": "This seizure lasted four hours, and while it was on him he felt plainly the working and the movement of the stone in the urethra and the lower part of the stomach.",
           "work": "Journal of Travels in Italy",
@@ -6576,7 +6680,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0010",
+          "id": "montaigne.f.v0011",
           "kind": "verbatim",
           "text": "The body-servants dine either at their master’s table or at one close by, one valet being enough to attend to the high table, seeing that each gentleman has always his own goblet or silver cup beside him, wherefore the servant only needs to fill this as soon as it may be empty, without moving it.",
           "work": "Journal of Travels in Italy",
@@ -6589,7 +6693,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0011",
+          "id": "montaigne.f.v0012",
           "kind": "verbatim",
           "text": "The duke shortly before his death had allied himself with certain of the cantons, an alliance which our king had resisted, alleging that the cantons, being already pledged to him, could incur no fresh obligations without his leave.",
           "work": "Journal of Travels in Italy",
@@ -6602,7 +6706,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0012",
+          "id": "montaigne.f.v0013",
           "kind": "verbatim",
           "text": "Here we again crossed the Rhine by a wooden bridge and, still keeping beside the river on the left, we passed by another small town allied to the Catholic cantons.",
           "work": "Journal of Travels in Italy",
@@ -6615,7 +6719,7 @@
           }
         },
         {
-          "id": "montaigne.f.v0013",
+          "id": "montaigne.f.v0014",
           "kind": "verbatim",
           "text": "We saw more houses belonging to the Foulcres in other parts of the city, which is beholden to this family for the great outlay of money they spend in its adornment.",
           "work": "Journal of Travels in Italy",
@@ -6809,6 +6913,58 @@
         {
           "id": "machiavel.f.v0001",
           "kind": "verbatim",
+          "text": "For this reason the best possible fortress is—not to be hated by the people, because, although you may hold the fortresses, yet they will not save you if the people hate you, for there will never be wanting foreigners to assist a people who have taken arms against you.",
+          "work": "The Prince",
+          "lang": "en",
+          "src": {
+            "work": "The Prince"
+          },
+          "quality": {
+            "chars": 269
+          }
+        },
+        {
+          "id": "machiavel.f.v0002",
+          "kind": "verbatim",
+          "text": "With us there is great justice, because that war is just which is necessary, and arms are hallowed when there is no other hope but in them.",
+          "work": "The Prince",
+          "lang": "en",
+          "src": {
+            "work": "The Prince"
+          },
+          "quality": {
+            "chars": 139
+          }
+        },
+        {
+          "id": "machiavel.f.v0003",
+          "kind": "verbatim",
+          "text": "Princes and commonwealths that would save themselves from growing corrupted, should before all things keep uncorrupted the rites and ceremonies of religion, and always hold them in reverence; since we can have no surer sign of the decay of a province than to see Divine worship held therein in contempt.",
+          "work": "Discourses on the First Decade of Titus Livius",
+          "lang": "en",
+          "src": {
+            "work": "Discourses on the First Decade of Titus Livius"
+          },
+          "quality": {
+            "chars": 303
+          }
+        },
+        {
+          "id": "machiavel.f.v0004",
+          "kind": "verbatim",
+          "text": "Now, though the wicked life of Appius merited every punishment, still it was impolitic to violate the laws, more particularly a law which had only just been passed; for nothing, I think, is of worse example in a republic, than to make a law and not to keep it; and most of all, when he who breaks is he that made it.",
+          "work": "Discourses on the First Decade of Titus Livius",
+          "lang": "en",
+          "src": {
+            "work": "Discourses on the First Decade of Titus Livius"
+          },
+          "quality": {
+            "chars": 316
+          }
+        },
+        {
+          "id": "machiavel.f.v0005",
+          "kind": "verbatim",
           "text": "Such dominions thus acquired are either accustomed to live under a prince, or to live in freedom; and are acquired either by the arms of the prince himself, or of others, or else by fortune or by ability.",
           "work": "The Prince",
           "lang": "en",
@@ -6820,7 +6976,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0002",
+          "id": "machiavel.f.v0006",
           "kind": "verbatim",
           "text": "And when fighting afterwards amongst themselves, each one was able to attach to himself his own parts of the country, according to the authority he had assumed there; and the family of the former lord being exterminated, none other than the Romans were acknowledged.",
           "work": "The Prince",
@@ -6833,7 +6989,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0003",
+          "id": "machiavel.f.v0007",
           "kind": "verbatim",
           "text": "It was his intention to secure himself against them, and this he would have quickly accomplished had Alexander lived.",
           "work": "The Prince",
@@ -6846,7 +7002,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0004",
+          "id": "machiavel.f.v0008",
           "kind": "verbatim",
           "text": "Every one admits how praiseworthy it is in a prince to keep faith, and to live with integrity and not with craft.",
           "work": "The Prince",
@@ -6859,7 +7015,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0005",
+          "id": "machiavel.f.v0009",
           "kind": "verbatim",
           "text": "Fortresses, therefore, are useful or not according to circumstances; if they do you good in one way they injure you in another.",
           "work": "The Prince",
@@ -6872,7 +7028,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0006",
+          "id": "machiavel.f.v0010",
           "kind": "verbatim",
           "text": "And if you will consider Italy, which is the seat of these changes, and which has given to them their impulse, you will see it to be an open country without barriers and without any defence.",
           "work": "The Prince",
@@ -6885,7 +7041,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0007",
+          "id": "machiavel.f.v0011",
           "kind": "verbatim",
           "text": "When the night came which had been agreed upon with Uguccione, who had occupied the plain between the mountains and Pisa with many men, the signal was given, and without being observed Uguccione approached the gate of San Piero and set fire to the portcullis.",
           "work": "The Prince",
@@ -6898,7 +7054,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0008",
+          "id": "machiavel.f.v0012",
           "kind": "verbatim",
           "text": "Contrary to his expectations, he found the rebellion at an end, yet he posted his men in the most advantageous places throughout the city.",
           "work": "The Prince",
@@ -6911,7 +7067,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0009",
+          "id": "machiavel.f.v0013",
           "kind": "verbatim",
           "text": "He agreed with the Florentines to receive from them a yearly tribute of two hundred thousand florins, and he sent his son Carlo to Florence with four thousand horsemen.",
           "work": "The Prince",
@@ -6924,7 +7080,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0010",
+          "id": "machiavel.f.v0014",
           "kind": "verbatim",
           "text": "At the siege of Lucca the Florentine army was commanded by Messer Giovanni Guicciardini, as its commissary, through whose bad generalship or ill-fortune the town was not taken.",
           "work": "Discourses on the First Decade of Titus Livius",
@@ -6937,7 +7093,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0011",
+          "id": "machiavel.f.v0015",
           "kind": "verbatim",
           "text": "Had the Romans chosen to make war with gold rather than with iron all the treasures of the earth would not have sufficed them having regard to the greatness of their enterprises and the difficulties they had to overcome in carrying them out.",
           "work": "Discourses on the First Decade of Titus Livius",
@@ -6950,7 +7106,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0012",
+          "id": "machiavel.f.v0016",
           "kind": "verbatim",
           "text": "Now, as I have said already, we find that conspiracies are attended by danger at three stages: before during, and after their execution; for which reason very few of them have had a happy issue; it being next to impossible to surmount all these different dangers successfully.",
           "work": "Discourses on the First Decade of Titus Livius",
@@ -6963,7 +7119,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0013",
+          "id": "machiavel.f.v0017",
           "kind": "verbatim",
           "text": "Now the government of Rome was of this nature, and the expulsion of the Tarquins took place in this way.",
           "work": "Discourses on the First Decade of Titus Livius",
@@ -6976,7 +7132,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0014",
+          "id": "machiavel.f.v0018",
           "kind": "verbatim",
           "text": "In consequence of this, many battles were fought in Lombardy, and the Visconti became lords of Parma.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -6989,7 +7145,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0015",
+          "id": "machiavel.f.v0019",
           "kind": "verbatim",
           "text": "The Signory, notwithstanding many had foreseen the ruin of their country, were much disturbed at this demand; and although they were aware of the dangerous position in which they stood, that they might not be wanting in their duty, resolutely refused to comply.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7002,7 +7158,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0016",
+          "id": "machiavel.f.v0020",
           "kind": "verbatim",
           "text": "When the Bianchi were overcome, the city was not long free from factions; for either, in favor of the emigrants, or on account of the animosity between the nobility and the people, we were still constantly at war.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7015,7 +7171,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0017",
+          "id": "machiavel.f.v0021",
           "kind": "verbatim",
           "text": "Hence many conflicts took place between the different parties or with the forces of the palace; for the Signory sometimes yielding, and at other times resisting, adopted such remedies as they could for these numerous evils.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7028,7 +7184,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0018",
+          "id": "machiavel.f.v0022",
           "kind": "verbatim",
           "text": "Upon the restoration of peace he was discharged; but when the affair of Volterra took place, being encamped with his people at Fucecchio, the commissaries availed themselves both of himself and his forces.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7041,7 +7197,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0019",
+          "id": "machiavel.f.v0023",
           "kind": "verbatim",
           "text": "The affairs of Florence being in this condition, Giovanna, queen of Naples, died, and by her will appointed René of Anjou to be her successor.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7054,7 +7210,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0020",
+          "id": "machiavel.f.v0024",
           "kind": "verbatim",
           "text": "The patriarch's followers at first began to use threats, but being informed of the pope's directions they were appeased.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7067,7 +7223,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0021",
+          "id": "machiavel.f.v0025",
           "kind": "verbatim",
           "text": "With the remainder of his sick troops he retired to the Siennese territory, and thence to his kingdom, incensed against the Florentines, and threatening them with new wars upon the return of spring.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7080,7 +7236,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0022",
+          "id": "machiavel.f.v0026",
           "kind": "verbatim",
           "text": "At the same time, King René coming with a fleet to the assistance of his son, and hoping to recover Genoa by means of the castelletto, upon landing his forces was so completely routed, that he was compelled to return in disgrace to Provence.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7093,7 +7249,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0023",
+          "id": "machiavel.f.v0027",
           "kind": "verbatim",
           "text": "Giuliano and Lorenzo were both aware of the animosity of the Pazzi, and their desire to deprive them of the government; but they felt assured that any design would be attempted openly, and in conjunction with the civil authority.",
           "work": "History of Florence and of the Affairs of Italy",
@@ -7106,7 +7262,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0024",
+          "id": "machiavel.f.v0028",
           "kind": "verbatim",
           "text": "E quando e' fussi uom che non è, da ricercare se tu se' o non se' medico, la brevità del tempo, la cosa in sé farà che non ne ragionerà, o che non sarà a tempo a guastarci el disegno, quando bene e' ne ragionassi.",
           "work": "La mandragola - La Clizia - Belfagor",
@@ -7119,7 +7275,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0025",
+          "id": "machiavel.f.v0029",
           "kind": "verbatim",
           "text": "Questo vostro dottore, Bramando aver figliuoli, Crederia ch'un asin voli; E qualunque altro ben posto ha in oblio E solo in questo ha posto il suo desìo.",
           "work": "La mandragola - La Clizia - Belfagor",
@@ -7132,7 +7288,7 @@
           }
         },
         {
-          "id": "machiavel.f.v0026",
+          "id": "machiavel.f.v0030",
           "kind": "verbatim",
           "text": "Io scemo ad ognora dieci libbre pensando dove io sono ora, e dove io potrei essere di qui a due ore, temendo che non nasca qualche cosa che interrompa el mio disegno.",
           "work": "La mandragola - La Clizia - Belfagor",
@@ -7586,6 +7742,45 @@
         {
           "id": "platon.f.v0001",
           "kind": "verbatim",
+          "text": "For a young person cannot judge what is allegorical and what is literal; anything that he receives into his mind at that age is likely to become indelible and unalterable; and therefore it is most important that the tales which the young first hear should be models of virtuous thoughts.",
+          "work": "The Republic",
+          "lang": "en",
+          "src": {
+            "work": "The Republic"
+          },
+          "quality": {
+            "chars": 287
+          }
+        },
+        {
+          "id": "platon.f.v0002",
+          "kind": "verbatim",
+          "text": "Whereas the truth is that the State in which the rulers are most reluctant to govern is always the best and most quietly governed, and the State in which they are most eager, the worst.",
+          "work": "The Republic",
+          "lang": "en",
+          "src": {
+            "work": "The Republic"
+          },
+          "quality": {
+            "chars": 185
+          }
+        },
+        {
+          "id": "platon.f.v0003",
+          "kind": "verbatim",
+          "text": "I tell you that virtue is not given by money, but that from virtue comes money and every other good of man, public as well as private.",
+          "work": "Apology",
+          "lang": "en",
+          "src": {
+            "work": "Apology"
+          },
+          "quality": {
+            "chars": 134
+          }
+        },
+        {
+          "id": "platon.f.v0004",
+          "kind": "verbatim",
           "text": "I went down yesterday to the Piraeus with Glaucon the son of Ariston, that I might offer up my prayers to the goddess (Bendis, the Thracian Artemis.); and also because I wanted to see in what manner they would celebrate the festival, which was a new thing.",
           "work": "The Republic",
           "lang": "en",
@@ -7597,7 +7792,7 @@
           }
         },
         {
-          "id": "platon.f.v0002",
+          "id": "platon.f.v0005",
           "kind": "verbatim",
           "text": "Glaucon and the rest entreated me by all means not to let the question drop, but to proceed in the investigation.",
           "work": "The Republic",
@@ -7610,7 +7805,7 @@
           }
         },
         {
-          "id": "platon.f.v0003",
+          "id": "platon.f.v0006",
           "kind": "verbatim",
           "text": "Neither will we believe or acknowledge Achilles himself to have been such a lover of money that he took Agamemnon’s gifts, or that when he had received payment he restored the dead body of Hector, but that without payment he was unwilling to do so.",
           "work": "The Republic",
@@ -7623,7 +7818,7 @@
           }
         },
         {
-          "id": "platon.f.v0004",
+          "id": "platon.f.v0007",
           "kind": "verbatim",
           "text": "My meaning was, that if one term of a relation is taken alone, the other is taken alone; if one term is qualified, the other is also qualified.",
           "work": "The Republic",
@@ -7636,7 +7831,7 @@
           }
         },
         {
-          "id": "platon.f.v0005",
+          "id": "platon.f.v0008",
           "kind": "verbatim",
           "text": "Yes, Socrates; and that is a way of speaking to which you are not at all accustomed, I suppose.",
           "work": "The Republic",
@@ -7649,7 +7844,7 @@
           }
         },
         {
-          "id": "platon.f.v0006",
+          "id": "platon.f.v0009",
           "kind": "verbatim",
           "text": "Yes, he said, and he also praises tyranny as godlike; and many other things of the same kind are said by him and by the other poets.",
           "work": "The Republic",
@@ -7662,7 +7857,7 @@
           }
         },
         {
-          "id": "platon.f.v0007",
+          "id": "platon.f.v0010",
           "kind": "verbatim",
           "text": "Is not the noble that which subjects the beast to the man, or rather to the god in man; and the ignoble that which subjects the man to the beast?’ He can hardly avoid saying Yes—can he now?",
           "work": "The Republic",
@@ -7675,7 +7870,7 @@
           }
         },
         {
-          "id": "platon.f.v0008",
+          "id": "platon.f.v0011",
           "kind": "verbatim",
           "text": "How you, O Athenians, have been affected by my accusers, I cannot tell; but I know that they almost made me forget who I was—so persuasively did they speak; and yet they have hardly uttered a word of truth.",
           "work": "Apology",
@@ -7688,7 +7883,7 @@
           }
         },
         {
-          "id": "platon.f.v0009",
+          "id": "platon.f.v0012",
           "kind": "verbatim",
           "text": "Speak then, you who have heard me, and tell your neighbours whether any of you have ever known me hold forth in few words or in many upon such matters...You hear their answer.",
           "work": "Apology",
@@ -7701,7 +7896,7 @@
           }
         },
         {
-          "id": "platon.f.v0010",
+          "id": "platon.f.v0013",
           "kind": "verbatim",
           "text": "For he certainly does appear to me to contradict himself in the indictment as much as if he said that Socrates is guilty of not believing in the gods, and yet of believing in them—but this is not like a person who is in earnest.",
           "work": "Apology",
@@ -7714,7 +7909,7 @@
           }
         },
         {
-          "id": "platon.f.v0011",
+          "id": "platon.f.v0014",
           "kind": "verbatim",
           "text": "I can give you convincing evidence of what I say, not words only, but what you value far more—actions.",
           "work": "Apology",
@@ -7727,7 +7922,7 @@
           }
         },
         {
-          "id": "platon.f.v0012",
+          "id": "platon.f.v0015",
           "kind": "verbatim",
           "text": "Why, indeed, except for the sake of truth and justice, and because they know that I am speaking the truth, and that Meletus is a liar.",
           "work": "Apology",
@@ -7740,7 +7935,7 @@
           }
         },
         {
-          "id": "platon.f.v0013",
+          "id": "platon.f.v0016",
           "kind": "verbatim",
           "text": "What return shall be made to the man who has never had the wit to be idle during his whole life; but has been careless of what the many care for—wealth, and family interests, and military offices, and speaking in the assembly, and magistracies, and plots, and parties.",
           "work": "Apology",
@@ -7753,7 +7948,7 @@
           }
         },
         {
-          "id": "platon.f.v0014",
+          "id": "platon.f.v0017",
           "kind": "verbatim",
           "text": "Friends, who would have acquitted me, I would like also to talk with you about the thing which has come to pass, while the magistrates are busy, and before I go to the place at which I must die.",
           "work": "Apology",
@@ -7766,7 +7961,7 @@
           }
         },
         {
-          "id": "platon.f.v0015",
+          "id": "platon.f.v0018",
           "kind": "verbatim",
           "text": "Concerning the things about which you ask to be informed I believe that I am not ill-prepared with an answer.",
           "work": "Symposium",
@@ -7779,7 +7974,7 @@
           }
         },
         {
-          "id": "platon.f.v0016",
+          "id": "platon.f.v0019",
           "kind": "verbatim",
           "text": "The servant then assisted him to wash, and he lay down, and presently another servant came in and reported that our friend Socrates had retired into the portico of the neighbouring house.",
           "work": "Symposium",
@@ -7792,7 +7987,7 @@
           }
         },
         {
-          "id": "platon.f.v0017",
+          "id": "platon.f.v0020",
           "kind": "verbatim",
           "text": "Such is the entire liberty which gods and men have allowed the lover, according to the custom which prevails in our part of the world.",
           "work": "Symposium",
@@ -7805,7 +8000,7 @@
           }
         },
         {
-          "id": "platon.f.v0018",
+          "id": "platon.f.v0021",
           "kind": "verbatim",
           "text": "Eryximachus said: Beware, friend Aristophanes, although you are going to speak, you are making fun of me; and I shall have to watch and see whether I cannot have a laugh at your expense, when you might speak in peace.",
           "work": "Symposium",
@@ -7818,7 +8013,7 @@
           }
         },
         {
-          "id": "platon.f.v0019",
+          "id": "platon.f.v0022",
           "kind": "verbatim",
           "text": "This, Eryximachus, is my discourse of love, which, although different to yours, I must beg you to leave unassailed by the shafts of your ridicule, in order that each may have his turn; each, or rather either, for Agathon and Socrates are the only ones left.",
           "work": "Symposium",
@@ -7831,7 +8026,7 @@
           }
         },
         {
-          "id": "platon.f.v0020",
+          "id": "platon.f.v0023",
           "kind": "verbatim",
           "text": "Lead me to Agathon,' and at length, supported by the flute-girl and some of his attendants, he found his way to them.",
           "work": "Symposium",
@@ -7844,7 +8039,7 @@
           }
         },
         {
-          "id": "platon.f.v0021",
+          "id": "platon.f.v0024",
           "kind": "verbatim",
           "text": "Moreover I have felt the serpent's sting; and he who has suffered, as they say, is willing to tell his fellow-sufferers only, as they alone will be likely to understand him, and will not be extreme in judging of the sayings or doings which have been wrung from his agony.",
           "work": "Symposium",
@@ -7857,7 +8052,7 @@
           }
         },
         {
-          "id": "platon.f.v0022",
+          "id": "platon.f.v0025",
           "kind": "verbatim",
           "text": "Were you yourself, Phaedo, in the prison with Socrates on the day when he drank the poison?",
           "work": "Phaedo",
@@ -7870,7 +8065,7 @@
           }
         },
         {
-          "id": "platon.f.v0023",
+          "id": "platon.f.v0026",
           "kind": "verbatim",
           "text": "Now if it be true that the living come from the dead, then our souls must exist in the other world, for if not, how could they have been born again?",
           "work": "Phaedo",
@@ -7883,7 +8078,7 @@
           }
         },
         {
-          "id": "platon.f.v0024",
+          "id": "platon.f.v0027",
           "kind": "verbatim",
           "text": "And when the recollection is derived from like things, then another consideration is sure to arise, which is--whether the likeness in any degree falls short or not of that which is recollected?",
           "work": "Phaedo",
@@ -7896,7 +8091,7 @@
           }
         },
         {
-          "id": "platon.f.v0025",
+          "id": "platon.f.v0028",
           "kind": "verbatim",
           "text": "No one who has not studied philosophy and who is not entirely pure at the time of his departure is allowed to enter the company of the Gods, but the lover of knowledge only.",
           "work": "Phaedo",
@@ -7909,7 +8104,7 @@
           }
         },
         {
-          "id": "platon.f.v0026",
+          "id": "platon.f.v0029",
           "kind": "verbatim",
           "text": "That the soul is a harmony is a doctrine which has always had a wonderful attraction for me, and, when mentioned, came back to me at once, as my own original conviction.",
           "work": "Phaedo",
@@ -7922,7 +8117,7 @@
           }
         },
         {
-          "id": "platon.f.v0027",
+          "id": "platon.f.v0030",
           "kind": "verbatim",
           "text": "GORGIAS: That good, Socrates, which is truly the greatest, being that which gives to men freedom in their own persons, and to individuals the power of ruling over others in their several states.",
           "work": "Gorgias",
@@ -7935,7 +8130,7 @@
           }
         },
         {
-          "id": "platon.f.v0028",
+          "id": "platon.f.v0031",
           "kind": "verbatim",
           "text": "SOCRATES: Then, when the rhetorician is more persuasive than the physician, the ignorant is more persuasive with the ignorant than he who has knowledge?—is not that the inference?",
           "work": "Gorgias",
@@ -7948,7 +8143,7 @@
           }
         },
         {
-          "id": "platon.f.v0029",
+          "id": "platon.f.v0032",
           "kind": "verbatim",
           "text": "SOCRATES: And if the cutting be great or deep or such as will cause pain, the cut will be of the same nature?",
           "work": "Gorgias",
@@ -7961,7 +8156,7 @@
           }
         },
         {
-          "id": "platon.f.v0030",
+          "id": "platon.f.v0033",
           "kind": "verbatim",
           "text": "Her you must refute, and either show, as I was saying, that to do injustice and to escape punishment is not the worst of all evils; or, if you leave her word unrefuted, by the dog the god of Egypt, I declare, O Callicles, that Callicles will never be at one with himself, but that his whole life will be a discord.",
           "work": "Gorgias",
@@ -7974,7 +8169,7 @@
           }
         },
         {
-          "id": "platon.f.v0031",
+          "id": "platon.f.v0034",
           "kind": "verbatim",
           "text": "To this however the many cannot attain; and they blame the strong man because they are ashamed of their own weakness, which they desire to conceal, and hence they say that intemperance is base.",
           "work": "Gorgias",
@@ -7987,7 +8182,7 @@
           }
         },
         {
-          "id": "platon.f.v0032",
+          "id": "platon.f.v0035",
           "kind": "verbatim",
           "text": "Surely you might say, Callicles, whether you think that Polus and I were right in admitting the conclusion that no one does wrong voluntarily, but that all do wrong against their will?",
           "work": "Gorgias",
@@ -8000,7 +8195,7 @@
           }
         },
         {
-          "id": "platon.f.v0033",
+          "id": "platon.f.v0036",
           "kind": "verbatim",
           "text": "CALLICLES: But surely, Socrates, no living man ever came near any one of them in his performances.",
           "work": "Gorgias",
@@ -8743,6 +8938,58 @@
         {
           "id": "suntzu.f.v0001",
           "kind": "verbatim",
+          "text": "Hence to fight and conquer in all your battles is not supreme excellence; supreme excellence consists in breaking the enemy’s resistance without fighting.",
+          "work": "The Art of War",
+          "lang": "en",
+          "src": {
+            "work": "The Art of War"
+          },
+          "quality": {
+            "chars": 154
+          }
+        },
+        {
+          "id": "suntzu.f.v0002",
+          "kind": "verbatim",
+          "text": "Regard your soldiers as your children, and they will follow you into the deepest valleys; look on them as your own beloved sons, and they will stand by you even unto death.",
+          "work": "The Art of War",
+          "lang": "en",
+          "src": {
+            "work": "The Art of War"
+          },
+          "quality": {
+            "chars": 172
+          }
+        },
+        {
+          "id": "suntzu.f.v0003",
+          "kind": "verbatim",
+          "text": "If soldiers are punished before they have grown attached to you, they will not prove submissive; and, unless submissive, then will be practically useless.",
+          "work": "The Art of War",
+          "lang": "en",
+          "src": {
+            "work": "The Art of War"
+          },
+          "quality": {
+            "chars": 154
+          }
+        },
+        {
+          "id": "suntzu.f.v0004",
+          "kind": "verbatim",
+          "text": "Water shapes its course according to the nature of the ground over which it flows; the soldier works out his victory in relation to the foe whom he is facing.",
+          "work": "The Art of War",
+          "lang": "en",
+          "src": {
+            "work": "The Art of War"
+          },
+          "quality": {
+            "chars": 158
+          }
+        },
+        {
+          "id": "suntzu.f.v0005",
+          "kind": "verbatim",
           "text": "Seeing that he is actually engaged in an attempt to disprove the existence of Sun Wu himself, we may be sure that he would not have hesitated to assign the work to a later date had he not honestly believed the contrary.",
           "work": "The Art of War",
           "lang": "en",
@@ -8754,7 +9001,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0002",
+          "id": "suntzu.f.v0006",
           "kind": "verbatim",
           "text": "Yüeh’s attack at this critical juncture, when her rival was embarrassed on every side, seems to have convinced him that this upstart kingdom was the great enemy against whom every effort would henceforth have to be directed.",
           "work": "The Art of War",
@@ -8767,7 +9014,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0003",
+          "id": "suntzu.f.v0007",
           "kind": "verbatim",
           "text": "All one can say is that this power will be exercised wisely by some, foolishly by others, and that among those who bear arms some will be loyal and others rebellious.",
           "work": "The Art of War",
@@ -8780,7 +9027,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0004",
+          "id": "suntzu.f.v0008",
           "kind": "verbatim",
           "text": "These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.",
           "work": "The Art of War",
@@ -8793,7 +9040,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0005",
+          "id": "suntzu.f.v0009",
           "kind": "verbatim",
           "text": "Only one who knows the disastrous effects of a long war can realize the supreme importance of rapidity in bringing it to a close.",
           "work": "The Art of War",
@@ -8806,7 +9053,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0006",
+          "id": "suntzu.f.v0010",
           "kind": "verbatim",
           "text": "With his forces intact he will dispute the mastery of the Empire, and thus, without losing a man, his triumph will be complete.",
           "work": "The Art of War",
@@ -8819,7 +9066,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0007",
+          "id": "suntzu.f.v0011",
           "kind": "verbatim",
           "text": "Perhaps the second term should be thought of as a consideration of the enemy’s general position or condition, while the third term is the estimate of his numerical strength.",
           "work": "The Art of War",
@@ -8832,7 +9079,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0008",
+          "id": "suntzu.f.v0012",
           "kind": "verbatim",
           "text": "Ts’ao Kung’s note is \"Make a display of weakness and want.\" Tu Mu says: \"If our force happens to be superior to the enemy’s, weakness may be simulated in order to lure him on; but if inferior, he must be led to believe that we are strong, in order that he may keep off.",
           "work": "The Art of War",
@@ -8845,7 +9092,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0009",
+          "id": "suntzu.f.v0013",
           "kind": "verbatim",
           "text": "Disciplined and calm, to await the appearance of disorder and hubbub amongst the enemy:—this is the art of retaining self-possession.",
           "work": "The Art of War",
@@ -8858,7 +9105,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0010",
+          "id": "suntzu.f.v0014",
           "kind": "verbatim",
           "text": "Tu Mu says: \"If I wish to extricate myself from a dangerous position, I must consider not only the enemy’s ability to injure me, but also my own ability to gain an advantage over the enemy.",
           "work": "The Art of War",
@@ -8871,7 +9118,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0011",
+          "id": "suntzu.f.v0015",
           "kind": "verbatim",
           "text": "When night came on, he lighted the ends of the rushes, and drove the oxen through a number of holes which he had pierced in the walls, backing them up with a force of 5000 picked warriors.",
           "work": "The Art of War",
@@ -8884,7 +9131,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0012",
+          "id": "suntzu.f.v0016",
           "kind": "verbatim",
           "text": "Li Ching replied: \"To the soldier, overwhelming speed is of paramount importance, and he must never miss opportunities.",
           "work": "The Art of War",
@@ -8897,7 +9144,7 @@
           }
         },
         {
-          "id": "suntzu.f.v0013",
+          "id": "suntzu.f.v0017",
           "kind": "verbatim",
           "text": "Wellington’s seemingly ungrateful description of his army at Waterloo as \"the worst he had ever commanded\" meant no more than that it was deficient in this important particular—unity of spirit and courage.",
           "work": "The Art of War",
@@ -9351,239 +9598,18 @@
         {
           "id": "voltaire.f.v0001",
           "kind": "verbatim",
-          "text": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
+          "text": "You have asserted it a thousand times; but you have never been able either to prove it, or to understand it.",
+          "work": "Voltaire's Philosophical Dictionary",
+          "lang": "en",
           "src": {
-            "work": "Candide, ou l'optimisme"
+            "work": "Voltaire's Philosophical Dictionary"
           },
           "quality": {
-            "chars": 101
+            "chars": 108
           }
         },
         {
           "id": "voltaire.f.v0002",
-          "kind": "verbatim",
-          "text": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
-          "src": {
-            "work": "Candide, ou l'optimisme"
-          },
-          "quality": {
-            "chars": 220
-          }
-        },
-        {
-          "id": "voltaire.f.v0003",
-          "kind": "verbatim",
-          "text": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
-          "src": {
-            "work": "Candide, ou l'optimisme"
-          },
-          "quality": {
-            "chars": 94
-          }
-        },
-        {
-          "id": "voltaire.f.v0004",
-          "kind": "verbatim",
-          "text": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
-          "src": {
-            "work": "Candide, ou l'optimisme"
-          },
-          "quality": {
-            "chars": 128
-          }
-        },
-        {
-          "id": "voltaire.f.v0005",
-          "kind": "verbatim",
-          "text": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
-          "src": {
-            "work": "Candide, ou l'optimisme"
-          },
-          "quality": {
-            "chars": 286
-          }
-        },
-        {
-          "id": "voltaire.f.v0006",
-          "kind": "verbatim",
-          "text": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
-          "work": "Candide, ou l'optimisme",
-          "lang": "fr",
-          "src": {
-            "work": "Candide, ou l'optimisme"
-          },
-          "quality": {
-            "chars": 133
-          }
-        },
-        {
-          "id": "voltaire.f.v0007",
-          "kind": "verbatim",
-          "text": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
-          "work": "Zadig, ou la Destinée, histoire orientale",
-          "lang": "fr",
-          "src": {
-            "work": "Zadig, ou la Destinée, histoire orientale"
-          },
-          "quality": {
-            "chars": 110
-          }
-        },
-        {
-          "id": "voltaire.f.v0008",
-          "kind": "verbatim",
-          "text": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
-          "work": "Zadig, ou la Destinée, histoire orientale",
-          "lang": "fr",
-          "src": {
-            "work": "Zadig, ou la Destinée, histoire orientale"
-          },
-          "quality": {
-            "chars": 113
-          }
-        },
-        {
-          "id": "voltaire.f.v0009",
-          "kind": "verbatim",
-          "text": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
-          "work": "Zadig, ou la Destinée, histoire orientale",
-          "lang": "fr",
-          "src": {
-            "work": "Zadig, ou la Destinée, histoire orientale"
-          },
-          "quality": {
-            "chars": 251
-          }
-        },
-        {
-          "id": "voltaire.f.v0010",
-          "kind": "verbatim",
-          "text": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
-          "work": "Zadig, ou la Destinée, histoire orientale",
-          "lang": "fr",
-          "src": {
-            "work": "Zadig, ou la Destinée, histoire orientale"
-          },
-          "quality": {
-            "chars": 232
-          }
-        },
-        {
-          "id": "voltaire.f.v0011",
-          "kind": "verbatim",
-          "text": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 261
-          }
-        },
-        {
-          "id": "voltaire.f.v0012",
-          "kind": "verbatim",
-          "text": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 110
-          }
-        },
-        {
-          "id": "voltaire.f.v0013",
-          "kind": "verbatim",
-          "text": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 93
-          }
-        },
-        {
-          "id": "voltaire.f.v0014",
-          "kind": "verbatim",
-          "text": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 292
-          }
-        },
-        {
-          "id": "voltaire.f.v0015",
-          "kind": "verbatim",
-          "text": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 104
-          }
-        },
-        {
-          "id": "voltaire.f.v0016",
-          "kind": "verbatim",
-          "text": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 132
-          }
-        },
-        {
-          "id": "voltaire.f.v0017",
-          "kind": "verbatim",
-          "text": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 166
-          }
-        },
-        {
-          "id": "voltaire.f.v0018",
-          "kind": "verbatim",
-          "text": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
-          "work": "Micromégas",
-          "lang": "fr",
-          "src": {
-            "work": "Micromégas"
-          },
-          "quality": {
-            "chars": 149
-          }
-        },
-        {
-          "id": "voltaire.f.v0019",
           "kind": "verbatim",
           "text": "D'ailleurs, ce n'est pas eux qu'il faut punir, ce sont ces barbares sédentaires qui du fond de leur cabinet ordonnent, dans le temps de leur digestion, le massacre d'un million d'hommes, et qui ensuite en font remercier Dieu solennellement.",
           "work": "Micromégas",
@@ -9596,137 +9622,7 @@
           }
         },
         {
-          "id": "voltaire.f.v0020",
-          "kind": "verbatim",
-          "text": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 77
-          }
-        },
-        {
-          "id": "voltaire.f.v0021",
-          "kind": "verbatim",
-          "text": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 85
-          }
-        },
-        {
-          "id": "voltaire.f.v0022",
-          "kind": "verbatim",
-          "text": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 266
-          }
-        },
-        {
-          "id": "voltaire.f.v0023",
-          "kind": "verbatim",
-          "text": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 312
-          }
-        },
-        {
-          "id": "voltaire.f.v0024",
-          "kind": "verbatim",
-          "text": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 96
-          }
-        },
-        {
-          "id": "voltaire.f.v0025",
-          "kind": "verbatim",
-          "text": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 150
-          }
-        },
-        {
-          "id": "voltaire.f.v0026",
-          "kind": "verbatim",
-          "text": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 82
-          }
-        },
-        {
-          "id": "voltaire.f.v0027",
-          "kind": "verbatim",
-          "text": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
-          "work": "L'Ingénu",
-          "lang": "fr",
-          "src": {
-            "work": "L'Ingénu"
-          },
-          "quality": {
-            "chars": 160
-          }
-        },
-        {
-          "id": "voltaire.f.v0028",
-          "kind": "verbatim",
-          "text": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
-          "work": "Voltaire's Philosophical Dictionary",
-          "lang": "en",
-          "src": {
-            "work": "Voltaire's Philosophical Dictionary"
-          },
-          "quality": {
-            "chars": 149
-          }
-        },
-        {
-          "id": "voltaire.f.v0029",
-          "kind": "verbatim",
-          "text": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
-          "work": "Voltaire's Philosophical Dictionary",
-          "lang": "en",
-          "src": {
-            "work": "Voltaire's Philosophical Dictionary"
-          },
-          "quality": {
-            "chars": 294
-          }
-        },
-        {
-          "id": "voltaire.f.v0030",
+          "id": "voltaire.f.v0003",
           "kind": "verbatim",
           "text": "The sect of Pietists, wishing to imitate the early Christians, to-day give each other kisses of peace on leaving the assembly, calling each other \"my brother, my sister\"; it is what, twenty years ago, a very pretty and very human Pietist lady avowed to me.",
           "work": "Voltaire's Philosophical Dictionary",
@@ -9739,7 +9635,384 @@
           }
         },
         {
+          "id": "voltaire.f.v0004",
+          "kind": "verbatim",
+          "text": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 101
+          }
+        },
+        {
+          "id": "voltaire.f.v0005",
+          "kind": "verbatim",
+          "text": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 220
+          }
+        },
+        {
+          "id": "voltaire.f.v0006",
+          "kind": "verbatim",
+          "text": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 94
+          }
+        },
+        {
+          "id": "voltaire.f.v0007",
+          "kind": "verbatim",
+          "text": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 128
+          }
+        },
+        {
+          "id": "voltaire.f.v0008",
+          "kind": "verbatim",
+          "text": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 286
+          }
+        },
+        {
+          "id": "voltaire.f.v0009",
+          "kind": "verbatim",
+          "text": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
+          "work": "Candide, ou l'optimisme",
+          "lang": "fr",
+          "src": {
+            "work": "Candide, ou l'optimisme"
+          },
+          "quality": {
+            "chars": 133
+          }
+        },
+        {
+          "id": "voltaire.f.v0010",
+          "kind": "verbatim",
+          "text": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
+          "work": "Zadig, ou la Destinée, histoire orientale",
+          "lang": "fr",
+          "src": {
+            "work": "Zadig, ou la Destinée, histoire orientale"
+          },
+          "quality": {
+            "chars": 110
+          }
+        },
+        {
+          "id": "voltaire.f.v0011",
+          "kind": "verbatim",
+          "text": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
+          "work": "Zadig, ou la Destinée, histoire orientale",
+          "lang": "fr",
+          "src": {
+            "work": "Zadig, ou la Destinée, histoire orientale"
+          },
+          "quality": {
+            "chars": 113
+          }
+        },
+        {
+          "id": "voltaire.f.v0012",
+          "kind": "verbatim",
+          "text": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
+          "work": "Zadig, ou la Destinée, histoire orientale",
+          "lang": "fr",
+          "src": {
+            "work": "Zadig, ou la Destinée, histoire orientale"
+          },
+          "quality": {
+            "chars": 251
+          }
+        },
+        {
+          "id": "voltaire.f.v0013",
+          "kind": "verbatim",
+          "text": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
+          "work": "Zadig, ou la Destinée, histoire orientale",
+          "lang": "fr",
+          "src": {
+            "work": "Zadig, ou la Destinée, histoire orientale"
+          },
+          "quality": {
+            "chars": 232
+          }
+        },
+        {
+          "id": "voltaire.f.v0014",
+          "kind": "verbatim",
+          "text": "Il n'osa d'abord en rien témoigner; mais il était dans une étrange surprise.",
+          "work": "Zadig, ou la Destinée, histoire orientale",
+          "lang": "fr",
+          "src": {
+            "work": "Zadig, ou la Destinée, histoire orientale"
+          },
+          "quality": {
+            "chars": 76
+          }
+        },
+        {
+          "id": "voltaire.f.v0015",
+          "kind": "verbatim",
+          "text": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 261
+          }
+        },
+        {
+          "id": "voltaire.f.v0016",
+          "kind": "verbatim",
+          "text": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 110
+          }
+        },
+        {
+          "id": "voltaire.f.v0017",
+          "kind": "verbatim",
+          "text": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 93
+          }
+        },
+        {
+          "id": "voltaire.f.v0018",
+          "kind": "verbatim",
+          "text": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 292
+          }
+        },
+        {
+          "id": "voltaire.f.v0019",
+          "kind": "verbatim",
+          "text": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 104
+          }
+        },
+        {
+          "id": "voltaire.f.v0020",
+          "kind": "verbatim",
+          "text": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 132
+          }
+        },
+        {
+          "id": "voltaire.f.v0021",
+          "kind": "verbatim",
+          "text": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 166
+          }
+        },
+        {
+          "id": "voltaire.f.v0022",
+          "kind": "verbatim",
+          "text": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
+          "work": "Micromégas",
+          "lang": "fr",
+          "src": {
+            "work": "Micromégas"
+          },
+          "quality": {
+            "chars": 149
+          }
+        },
+        {
+          "id": "voltaire.f.v0023",
+          "kind": "verbatim",
+          "text": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 77
+          }
+        },
+        {
+          "id": "voltaire.f.v0024",
+          "kind": "verbatim",
+          "text": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 85
+          }
+        },
+        {
+          "id": "voltaire.f.v0025",
+          "kind": "verbatim",
+          "text": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 266
+          }
+        },
+        {
+          "id": "voltaire.f.v0026",
+          "kind": "verbatim",
+          "text": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 312
+          }
+        },
+        {
+          "id": "voltaire.f.v0027",
+          "kind": "verbatim",
+          "text": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 96
+          }
+        },
+        {
+          "id": "voltaire.f.v0028",
+          "kind": "verbatim",
+          "text": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 150
+          }
+        },
+        {
+          "id": "voltaire.f.v0029",
+          "kind": "verbatim",
+          "text": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 82
+          }
+        },
+        {
+          "id": "voltaire.f.v0030",
+          "kind": "verbatim",
+          "text": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
+          "work": "L'Ingénu",
+          "lang": "fr",
+          "src": {
+            "work": "L'Ingénu"
+          },
+          "quality": {
+            "chars": 160
+          }
+        },
+        {
           "id": "voltaire.f.v0031",
+          "kind": "verbatim",
+          "text": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
+          "work": "Voltaire's Philosophical Dictionary",
+          "lang": "en",
+          "src": {
+            "work": "Voltaire's Philosophical Dictionary"
+          },
+          "quality": {
+            "chars": 149
+          }
+        },
+        {
+          "id": "voltaire.f.v0032",
+          "kind": "verbatim",
+          "text": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
+          "work": "Voltaire's Philosophical Dictionary",
+          "lang": "en",
+          "src": {
+            "work": "Voltaire's Philosophical Dictionary"
+          },
+          "quality": {
+            "chars": 294
+          }
+        },
+        {
+          "id": "voltaire.f.v0033",
           "kind": "verbatim",
           "text": "These two hundred verses are very beautiful; so are Milton's; and the total of Masenius' poem, despite these two hundred beautiful verses, is not worth anything at all.",
           "work": "Voltaire's Philosophical Dictionary",
@@ -9752,20 +10025,7 @@
           }
         },
         {
-          "id": "voltaire.f.v0032",
-          "kind": "verbatim",
-          "text": "You have asserted it a thousand times; but you have never been able either to prove it, or to understand it.",
-          "work": "Voltaire's Philosophical Dictionary",
-          "lang": "en",
-          "src": {
-            "work": "Voltaire's Philosophical Dictionary"
-          },
-          "quality": {
-            "chars": 108
-          }
-        },
-        {
-          "id": "voltaire.f.v0033",
+          "id": "voltaire.f.v0034",
           "kind": "verbatim",
           "text": "Later he explains in his own way all the texts of Holy Writ by which people have tried to combat this opinion.",
           "work": "Voltaire's Philosophical Dictionary",
@@ -11182,14 +11442,14 @@
         {
           "id": "epicure.f.v0001",
           "kind": "verbatim",
-          "text": "I hear that information has been laid before you concerning us.” … And the tradition is, that a man of the name of Æschylus, who was one of the opposite party in the state, was in the habit of making these false charges.",
+          "text": "It is not possible to live pleasantly without living prudently, and honourably, and justly; nor to live prudently, and honourably, and justly, without living pleasantly.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
           "lang": "en",
           "src": {
             "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
           },
           "quality": {
-            "chars": 220
+            "chars": 169
           }
         },
         {
@@ -11208,6 +11468,45 @@
         {
           "id": "epicure.f.v0003",
           "kind": "verbatim",
+          "text": "Natural justice is a covenant of what is suitable, leading men to avoid injuring one another, and being injured.",
+          "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+          "lang": "en",
+          "src": {
+            "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+          },
+          "quality": {
+            "chars": 112
+          }
+        },
+        {
+          "id": "epicure.f.v0004",
+          "kind": "verbatim",
+          "text": "Death is nothing to us; for that which is dissolved is devoid of sensation, and that which is devoid of sensation is nothing to us.",
+          "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+          "lang": "en",
+          "src": {
+            "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+          },
+          "quality": {
+            "chars": 131
+          }
+        },
+        {
+          "id": "epicure.f.v0005",
+          "kind": "verbatim",
+          "text": "I hear that information has been laid before you concerning us.” … And the tradition is, that a man of the name of Æschylus, who was one of the opposite party in the state, was in the habit of making these false charges.",
+          "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+          "lang": "en",
+          "src": {
+            "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+          },
+          "quality": {
+            "chars": 220
+          }
+        },
+        {
+          "id": "epicure.f.v0006",
+          "kind": "verbatim",
           "text": "He also studied dialectics, and the discussions of the Eretrian school; on which account Ariston said of him:— First Plato comes, and Pyrrho last, And in the middle Diodorus.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
           "lang": "en",
@@ -11219,7 +11518,7 @@
           }
         },
         {
-          "id": "epicure.f.v0004",
+          "id": "epicure.f.v0007",
           "kind": "verbatim",
           "text": "It is said also that he was offended with the king, because of the result of the conspiracy of Callisthenes against Alexander; and that the king, for the sake of annoying him, promoted Anaximenes to honour, and sent presents to Xenocrates.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11232,7 +11531,7 @@
           }
         },
         {
-          "id": "epicure.f.v0005",
+          "id": "epicure.f.v0008",
           "kind": "verbatim",
           "text": "Not but what Echecles was also a pupil of Theombrotus; and Menedemus, of whom we shall speak hereafter, was his pupil.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11245,7 +11544,20 @@
           }
         },
         {
-          "id": "epicure.f.v0006",
+          "id": "epicure.f.v0009",
+          "kind": "verbatim",
+          "text": "Irrefutability they define to be a power in an argument, which prevents one from being drawn from it to its opposite.",
+          "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+          "lang": "en",
+          "src": {
+            "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+          },
+          "quality": {
+            "chars": 117
+          }
+        },
+        {
+          "id": "epicure.f.v0010",
           "kind": "verbatim",
           "text": "Now an element is that out of which at first all things which are are produced, and into which all things are resolved at last.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11258,7 +11570,7 @@
           }
         },
         {
-          "id": "epicure.f.v0007",
+          "id": "epicure.f.v0011",
           "kind": "verbatim",
           "text": "Chrysippus was the son of Apollonius, and a native of either Soli or Tarsus, as Alexander tells us in his Successions; and he was a pupil of Cleanthes.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11271,7 +11583,7 @@
           }
         },
         {
-          "id": "epicure.f.v0008",
+          "id": "epicure.f.v0012",
           "kind": "verbatim",
           "text": "Another of his theories was, that the air around the earth was immoveable, and pregnant with disease, and that everything in it was mortal; but that the upper air was in perpetual motion, and pure and salubrious; and that everything in that was immortal, and on that account divine.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11284,7 +11596,7 @@
           }
         },
         {
-          "id": "epicure.f.v0009",
+          "id": "epicure.f.v0013",
           "kind": "verbatim",
           "text": "How then,” adds Timæus, “could he have leaped into a crater, of which, though they were in the neighbourhood, he had never made any mention?",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11297,7 +11609,7 @@
           }
         },
         {
-          "id": "epicure.f.v0010",
+          "id": "epicure.f.v0014",
           "kind": "verbatim",
           "text": "Diogenes was a native of Apollonia, and the son of Apollothemis, a natural philosopher of high reputation; and he was, as Antisthenes reports, a pupil of Anaximenes.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11310,7 +11622,7 @@
           }
         },
         {
-          "id": "epicure.f.v0011",
+          "id": "epicure.f.v0015",
           "kind": "verbatim",
           "text": "Now, there are none which are apprehended by the senses, for everything which is apprehended by the senses is general, while a sign is something particular.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11323,7 +11635,7 @@
           }
         },
         {
-          "id": "epicure.f.v0012",
+          "id": "epicure.f.v0016",
           "kind": "verbatim",
           "text": "The ethical contains the discussions on Choice and Avoidance; and is comprised in the books about lives, and in some of the Letters, and in the treatise on the Chief Good.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
@@ -11336,7 +11648,7 @@
           }
         },
         {
-          "id": "epicure.f.v0013",
+          "id": "epicure.f.v0017",
           "kind": "verbatim",
           "text": "Let us disdain those men who do not know, by means of the different images which result from distance, how to give an account of the different appearances of things; who, in a word, are ignorant what are the objects which can excite any trouble in us.",
           "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",

@@ -208,3 +208,40 @@ test('persona : élocution, concepts, résumés d’œuvres, règles — sans em
   assert.match(p, /n’invente ni citation/);
   assert.ok(!p.includes('Empreinte lexicale'));
 });
+
+/* ---- Plan de correction v2 : voix naturelle, typographie, repli d'œuvre ---------- */
+
+test('v2 6a : plus de béquille « Je le garde pour fil » — voix naturelle', () => {
+  const fr = E.answer({ author: voltaire, question: qLiberte, corpus: corpus.voltaire, lang: 'fr' });
+  const en = E.answer({ author: voltaire, question: 'What remains of liberty once everything is explained?', corpus: corpus.voltaire, lang: 'en' });
+  assert.doesNotMatch(fr.text, /garde pour fil/i);
+  assert.doesNotMatch(en.text, /keep it as the thread/i);
+  assert.doesNotMatch(fr.text, /\bde le\b/);
+});
+
+test('v2 6b/6c : typographie anglaise dans le prompt EN', () => {
+  const q = 'What is happiness?';
+  const fp = E.floorPrompt({ author: kant, question: q, scope: E.scope(q), passages: [], corpus: corpus.kant, lang: 'en' });
+  assert.doesNotMatch(fp.system + fp.user, /«|»/);
+  assert.match(fp.user, /Your position on happiness: /);
+});
+
+test('v2 6d : phraseFor supprimée', () => {
+  assert.ok(!code.includes('function phraseFor'));
+});
+
+test('v2 6e : repli sur une œuvre présente dans le corpus, pas works[0]', () => {
+  const smith = { id: 'smith', name: 'Adam Smith', blurb: '', works: [{ title: 'Livre absent' }, { title: 'The Wealth of Nations' }] };
+  const out = E.answer({ author: smith, question: 'Qu’est-ce que le bonheur ?', corpus: corpus.smith, passages: [{ work: 'x', sentence: '', weak: true }], lang: 'fr' });
+  assert.equal(out.grounded, false);
+  assert.match(out.text, /« The Wealth of Nations »/);
+  assert.doesNotMatch(out.text, /Livre absent/);
+});
+
+test('v2 6f : « esthétique » relève du domaine art', () => {
+  assert.equal(E.scope('Qu’est-ce que l’esthétique ?').domain, 'art');
+});
+
+test('retrieve : la loi injuste trouve Locke via les gloses FR -> EN (v2 lot 3)', () => {
+  assert.ok(E.retrieve(corpus.locke, E.scope('Faut-il obéir à une loi injuste ?'), 3).some((p) => !p.weak));
+});

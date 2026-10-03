@@ -116,7 +116,7 @@
     { key: "amour", label: "l'amour et le désir", re: /\b(amour|aime|aimer|desir|passion|jalousi|mariage|seduct)\w*|\blove\b|\bdesire\b/,
       these: "l'amour mêle l'attachement, le calcul et l'image qu'on veut donner",
       suite: "reste à distinguer le désir d'un autre du désir d'être estimé", labelEn: "love and desire", theseEn: "love blends attachment, calculation, and the image one wants to give", suiteEn: "it remains to distinguish the desire for another from the desire to be esteemed" },
-    { key: "art", label: "l'art et la beauté", re: /\b(oeuvre|beaut|beau|esthtique|poesie|poeme|roman|theatre|musique|peinture|imitation)\w*|\bart\b|\bbeauty\b|\bpoetry\b/,
+    { key: "art", label: "l'art et la beauté", re: /\b(oeuvre|beaut|beau|esthetique|poesie|poeme|roman|theatre|musique|peinture|imitation)\w*|\bart\b|\bbeauty\b|\bpoetry\b/,
       these: "l'œuvre ne dit pas la règle : elle en donne la forme visible",
       suite: "reste à savoir si l'art imite le monde ou en instruit la connaissance", labelEn: "art and beauty", theseEn: "the work does not state the rule: it gives its visible form", suiteEn: "it remains to know whether art imitates the world or instructs knowledge of it" },
     { key: "guerre", label: "la guerre et la paix", re: /\b(guerre|paix|arme|combat|ennemi|strateg|victoire|defaite|violence|conflit|bataille)\w*|\bwar\b|\bpeace\b/,
@@ -268,14 +268,34 @@
     return hit / Math.sqrt(n * Math.max(words.length, 8));
   }
 
+  /* Glossaire FR -> EN pour le filtre de pertinence (corpus surtout anglais).
+   * Clés = mots français tels qu'ils apparaissent dans les questions ; elles
+   * sont racinisées par terms() au chargement. Éviter les mots trop polysémiques
+   * (happy, free, just, right) : ils font entrer du bruit. */
+  var GLOSS_FR_EN = {
+    loi: "law laws", lois: "law laws", injuste: "unjust injustice", juste: "justice",
+    obeir: "obey obedience", bonheur: "happiness", heureux: "happiness",
+    liberte: "liberty freedom", libre: "freedom", verite: "truth true",
+    pouvoir: "power", legitime: "legitimate lawful legitimacy", vertu: "virtue",
+    devoir: "duty", mort: "death die", temps: "time", amour: "love",
+    guerre: "war", paix: "peace", dieu: "god", beaute: "beauty", art: "art",
+    travail: "labour work", richesse: "wealth riches", nature: "nature",
+    education: "education", enfant: "child children", raison: "reason",
+  };
+  var GLOSS = {};
+  Object.keys(GLOSS_FR_EN).forEach(function (fr) { var t = terms(fr)[0]; if (t) GLOSS[t] = GLOSS_FR_EN[fr]; });
+  function glossEn(raw) { return terms(raw).map(function (t) { return GLOSS[t] || ""; }).join(" "); }
+
   function retrieve(passages, sc, k) {
     var qRank = [sc.raw, sc.label || "", sc.keysRaw || (sc.keys || []).join(" ")].join(" ");
     var qGate = [sc.raw, sc.label || "", sc.labelEn || ""].join(" ");
+    // Second filtre, en anglais : on garde le meilleur des deux (pas de dilution).
+    var qGateEn = sc.lang === "en" ? "" : [glossEn(sc.raw), sc.labelEn || ""].join(" ");
     var ranked = (passages || []).map(function (p, i) {
       var work = p.w || p.work || "";
       var text = p.t || p.text || p.s || "";
       var sent = p.s || bestSentence(text);
-      var sGate = relevance(qGate, (work || "") + " " + sent);
+      var sGate = Math.max(relevance(qGate, (work || "") + " " + sent), qGateEn ? relevance(qGateEn, (work || "") + " " + sent) : 0);
       var sRank = relevance(qRank, work + " " + text);
       return { work: work, text: text, sentence: sent, score: sGate * 2 + sRank, gate: sGate, i: i };
     });
@@ -385,17 +405,6 @@
     if (sc.these) return sc.these;
     return en ? "\"" + (sc.label || "the question") + "\" first needs to be circumscribed" : "\"" + (sc.label || "la question") + "\" demande d'abord d'être circonscrite";
   }
-  /* La demande colore l'énoncé de la thèse (norme, définition, cause…). */
-  function phraseFor(sc, author) {
-    var base = thesisFor(sc, author);
-    var d = sc.demand;
-    if (d === "norme") return "sur ce qu'il faut faire, ma règle est simple : " + base;
-    if (d === "definition") return "je réponds par une définition : " + base;
-    if (d === "cause") return "la cause, à mon sens, se dit ainsi : " + base;
-    if (d === "maniere") return "cela se fait par degrés : " + base;
-    if (d === "verite") return "la réponse tient à ceci : " + base;
-    return base;
-  }
   /* On cite le point de l'autre sans son habillage de demande. */
   function stripWrapper(s) {
     return String(s || "").replace(/^(sur ce qu'il faut faire, ma règle est simple : |je réponds par une définition : |la cause, à mon sens, se dit ainsi : |cela se fait par degrés : |la réponse tient à ceci : |on what must be done, my rule is simple: |I answer with a definition: |the cause, as I see it, is this: |this is done by degrees: |the answer holds in this: )/i, "");
@@ -462,7 +471,6 @@
     } else {
       clauses.push(en ? "The host asks: " + qc + "." : "L’hôte demande : " + qc + ".");
     }
-    if (move !== "minute") clauses.push(en ? "I keep it as the thread: it is about " + subject + ", not another matter." : "Je le garde pour fil : il s’agit de " + subject + ", non d’un autre dossier.");
 
     /* 2. Position — la thèse du convive (elenchus : définir, ne pas conclure). */
     if (method === "elenchus") {
@@ -481,7 +489,10 @@
     if (grounded) {
       clauses.push(en ? "My source is \"" + work + "\": " + sentence : "Mon lieu est « " + work + " » : " + sentence);
     } else {
-      var wl = (author.works && author.works.length) ? (author.works[0].title || author.works[0]) : "";
+      var present = {};
+      (input.corpus || []).forEach(function (p) { present[p.w || p.work] = 1; });
+      var wl = "";
+      (author.works || []).some(function (w) { var t = w && (w.title || w); if (t && present[t]) { wl = t; return true; } return false; });
       clauses.push(wl
         ? (en ? "The closest passage does not decide this question; I therefore hold to what I can sign from \"" + wl + "\", without citing falsely." : "Le passage le plus proche ne tranche pas cette question ; je m’en tiens donc à ce que je peux signer depuis « " + wl + " », sans citer à faux.")
         : (en ? "None of my books decides here: I do not invent quotations." : "Aucun de mes livres ne tranche ici : je ne fabrique pas de citation."));
@@ -526,6 +537,7 @@
       author: author, scope: sc, passage: best, lastTurn: last,
       act: plan.act, move: plan.move, toName: plan.toName, point: plan.point,
       self: input.self, method: input.method || author.method, lang: input.lang,
+      corpus: input.corpus || [],
     });
     return { text: out.text, prise: out.prise, grounded: out.grounded, scope: sc, passage: best || null };
   }
@@ -567,7 +579,7 @@
       Object.keys(d.works).slice(0, 4).forEach(function (t) {
         var w = d.works[t] || {};
         var sm = (w.summary && (en ? (w.summary.en || w.summary.fr) : (w.summary.fr || w.summary.en))) || "";
-        if (sm) workLines.push("« " + t + " » : " + sm);
+        if (sm) workLines.push(en ? "\"" + t + "\": " + sm : "« " + t + " » : " + sm);
       });
     }
     var voice = String((d.voice && (en ? (d.voice.en || d.voice.fr) : (d.voice.fr || d.voice.en))) || sample || "").replace(/\s+/g, " ").trim();
@@ -616,7 +628,10 @@
 
     var dtp = doctrineThesis(sc, author, en);
     var dtpAnchor = dtp && resolveAnchor(dtp.anchors, (input.corpus && input.corpus.length ? input.corpus : input.passages) || []);
-    var positionLine = dtp ? ((en ? "Your position on " : "Ta position sur ") + (sc.label || sc.subject) + " : " + dtp.text + (dtpAnchor ? (en ? " — anchored in \"" + dtpAnchor.work + "\": " + dtpAnchor.sentence : " — ancrée dans « " + dtpAnchor.work + " » : " + dtpAnchor.sentence) : "")) : "";
+    var positionLine = dtp ? ((en ? "Your position on " : "Ta position sur ") + (sc.label || sc.subject) + (en ? ": " : " : ") + dtp.text + (dtpAnchor ? (en ? " — anchored in \"" + dtpAnchor.work + "\": " + dtpAnchor.sentence : " — ancrée dans « " + dtpAnchor.work + " » : " + dtpAnchor.sentence) : "")) : "";
+    // Lot 1 (v2) — sans passage retenu, l'ancre de doctrine résolue tient lieu
+    // de passage : jamais « Aucun passage pertinent » à côté d'une position ancrée.
+    var shown = passages.length ? passages : (dtpAnchor ? [dtpAnchor] : []);
 
     var user = [
       (en ? "Table question (the thread — do not leave it): " : "Question de table (fil directeur — ne la quitte pas) : ") + sc.raw,
@@ -632,9 +647,9 @@
           : move === "minute"
             ? (en ? "; summarise question, theses, open knots." : " ; minute : question, prises tenues, nœuds ouverts.")
             : "."),
-      passages.length
+      shown.length
         ? (en ? "Passages (use at most one, only if it answers):\n" : "Passages (au plus un, seulement s’il répond) :\n") +
-          passages.slice(0, 3).map(function (p) { return "« " + p.work + " »\n" + (p.sentence || firstSentences(p.text, 1)); }).join("\n\n")
+          shown.slice(0, 3).map(function (p) { return (en ? "\"" + p.work + "\"" : "« " + p.work + " »") + "\n" + (p.sentence || firstSentences(p.text, 1)); }).join("\n\n")
         : (en ? "No relevant passage — say so, then argue from your named works." : "Aucun passage pertinent — dis-le, puis argumente depuis tes œuvres nommées."),
       (input.self && input.self.length)
         ? (en ? "Your own previous turns (stay consistent; do not repeat yourself):\n" : "Ta mémoire — tes tours précédents (reste cohérent, ne te répète pas) :\n") + input.self.slice(-4).map(function (h) { return (h.prise ? "[" + (en ? "thesis: " : "prise : ") + h.prise + "] " : "") + clipText(h.text || "", 360); }).join("\n")

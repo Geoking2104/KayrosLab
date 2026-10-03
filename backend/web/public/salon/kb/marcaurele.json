@@ -1,20 +1,20 @@
 {
   "authorId": "marcaurele",
   "kbVersion": "marcaurele@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T21:23:12.256Z",
+  "builtAt": "2026-10-03T22:22:13.825Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Meditations",
-      "sentences": 24
+      "sentences": 30
     }
   ],
   "passages": [
     {
       "id": "marcaurele.p0001",
       "w": "Meditations",
-      "s": "His accurate examination of things in consultations, and patient hearing of others.",
+      "s": "Death hangs over thee: whilst yet thou livest, whilst thou mayest, be good.",
       "src": {
         "work": "Meditations"
       }
@@ -22,7 +22,7 @@
     {
       "id": "marcaurele.p0002",
       "w": "Meditations",
-      "s": "And that being it which we part with whensoever we die, it doth manifestly appear, that it can be but a moment of time, that we then part with.",
+      "s": "Make it not any longer a matter of dispute or discourse, what are the signs and proprieties of a good man, but really and actually to be such.",
       "src": {
         "work": "Meditations"
       }
@@ -30,7 +30,7 @@
     {
       "id": "marcaurele.p0003",
       "w": "Meditations",
-      "s": "For it never doth absolutely addict and apply itself to any one object, but whatsoever it is that it doth now intend and prosecute, it doth prosecute it with exception and reservation; so that whatsoever it is that falls out contrary to its first intentions, even that afterwards it makes its proper object.",
+      "s": "This thou must ever be mindful of, as of this also, that a man's true happiness doth consist in very few things.",
       "src": {
         "work": "Meditations"
       }
@@ -38,7 +38,7 @@
     {
       "id": "marcaurele.p0004",
       "w": "Meditations",
-      "s": "Trouble not thyself any more henceforth, reduce thyself unto perfect simplicity.",
+      "s": "Remember then this thy power that nature hath given thee.",
       "src": {
         "work": "Meditations"
       }
@@ -46,7 +46,7 @@
     {
       "id": "marcaurele.p0005",
       "w": "Meditations",
-      "s": "The most compendious, is that which is according to nature: that is, in all both words and deeds, ever to follow that which is most sound and perfect.",
+      "s": "But nothing that is according to nature can be evil.",
       "src": {
         "work": "Meditations"
       }
@@ -54,7 +54,7 @@
     {
       "id": "marcaurele.p0006",
       "w": "Meditations",
-      "s": "And as for their first inclination and motion, that they take from themselves.",
+      "s": "I accept it, with reference unto the Gods, and their providence; the fountain of all things, from which whatsoever comes to pass, doth hang and depend.",
       "src": {
         "work": "Meditations"
       }
@@ -62,7 +62,7 @@
     {
       "id": "marcaurele.p0007",
       "w": "Meditations",
-      "s": "But still that time come, what will content thee?",
+      "s": "His accurate examination of things in consultations, and patient hearing of others.",
       "src": {
         "work": "Meditations"
       }
@@ -70,7 +70,7 @@
     {
       "id": "marcaurele.p0008",
       "w": "Meditations",
-      "s": "Yea even then, though thou dost thy best to save thyself from him, yet not from him as an enemy.",
+      "s": "And that being it which we part with whensoever we die, it doth manifestly appear, that it can be but a moment of time, that we then part with.",
       "src": {
         "work": "Meditations"
       }
@@ -78,7 +78,7 @@
     {
       "id": "marcaurele.p0009",
       "w": "Meditations",
-      "s": "But yet this also shalt thou generally perceive, if thou dost diligently take heed, that whatsoever doth happen to any one man or men....",
+      "s": "For it never doth absolutely addict and apply itself to any one object, but whatsoever it is that it doth now intend and prosecute, it doth prosecute it with exception and reservation; so that whatsoever it is that falls out contrary to its first intentions, even that afterwards it makes its proper object.",
       "src": {
         "work": "Meditations"
       }
@@ -86,7 +86,7 @@
     {
       "id": "marcaurele.p0010",
       "w": "Meditations",
-      "s": "For as for the body, why should I make the grief of my body, to be the grief of my mind?",
+      "s": "Trouble not thyself any more henceforth, reduce thyself unto perfect simplicity.",
       "src": {
         "work": "Meditations"
       }
@@ -94,7 +94,7 @@
     {
       "id": "marcaurele.p0011",
       "w": "Meditations",
-      "s": "Reasonable creatures, they are ordained one for another.",
+      "s": "The most compendious, is that which is according to nature: that is, in all both words and deeds, ever to follow that which is most sound and perfect.",
       "src": {
         "work": "Meditations"
       }
@@ -102,7 +102,7 @@
     {
       "id": "marcaurele.p0012",
       "w": "Meditations",
-      "s": "These penetrated into the true nature of things; into all causes, and all subjects: and upon these did they exercise their power and authority.",
+      "s": "And as for their first inclination and motion, that they take from themselves.",
       "src": {
         "work": "Meditations"
       }
@@ -110,7 +110,7 @@
     {
       "id": "marcaurele.p0013",
       "w": "Meditations",
-      "s": "Some of them no sooner dead, than forgotten.",
+      "s": "But still that time come, what will content thee?",
       "src": {
         "work": "Meditations"
       }
@@ -118,7 +118,7 @@
     {
       "id": "marcaurele.p0014",
       "w": "Meditations",
-      "s": "As nothing can happen either to an ox, a vine, or to a stone, which is not incidental unto them; unto every one in his own kind.",
+      "s": "Yea even then, though thou dost thy best to save thyself from him, yet not from him as an enemy.",
       "src": {
         "work": "Meditations"
       }
@@ -126,7 +126,7 @@
     {
       "id": "marcaurele.p0015",
       "w": "Meditations",
-      "s": "Thou must not in matter of death carry thyself scornfully, but as one that is well pleased with it, as being one of those things that nature hath appointed.",
+      "s": "But yet this also shalt thou generally perceive, if thou dost diligently take heed, that whatsoever doth happen to any one man or men....",
       "src": {
         "work": "Meditations"
       }
@@ -134,7 +134,7 @@
     {
       "id": "marcaurele.p0016",
       "w": "Meditations",
-      "s": "Yet must thou love them still, for by nature they are thy friends.",
+      "s": "For as for the body, why should I make the grief of my body, to be the grief of my mind?",
       "src": {
         "work": "Meditations"
       }
@@ -142,7 +142,7 @@
     {
       "id": "marcaurele.p0017",
       "w": "Meditations",
-      "s": "And what a matter of either grief or wonder is this, if he that is unlearned, do the deeds of one that is unlearned?",
+      "s": "Reasonable creatures, they are ordained one for another.",
       "src": {
         "work": "Meditations"
       }
@@ -150,7 +150,7 @@
     {
       "id": "marcaurele.p0018",
       "w": "Meditations",
-      "s": "He that in all things doth follow reason for his guide.",
+      "s": "These penetrated into the true nature of things; into all causes, and all subjects: and upon these did they exercise their power and authority.",
       "src": {
         "work": "Meditations"
       }
@@ -158,7 +158,7 @@
     {
       "id": "marcaurele.p0019",
       "w": "Meditations",
-      "s": "But here contrariwise, man (if he make that good use of them that he should) is rather the better and the more praiseworthy for any of those kind of hindrances, than otherwise.",
+      "s": "Some of them no sooner dead, than forgotten.",
       "src": {
         "work": "Meditations"
       }
@@ -166,7 +166,7 @@
     {
       "id": "marcaurele.p0020",
       "w": "Meditations",
-      "s": "But the affectation of simplicity is nowise laudable.",
+      "s": "As nothing can happen either to an ox, a vine, or to a stone, which is not incidental unto them; unto every one in his own kind.",
       "src": {
         "work": "Meditations"
       }
@@ -174,7 +174,7 @@
     {
       "id": "marcaurele.p0021",
       "w": "Meditations",
-      "s": "To righteousness, in speaking the truth freely, and without ambiguity; and in doing all things justly and discreetly.",
+      "s": "Thou must not in matter of death carry thyself scornfully, but as one that is well pleased with it, as being one of those things that nature hath appointed.",
       "src": {
         "work": "Meditations"
       }
@@ -182,7 +182,7 @@
     {
       "id": "marcaurele.p0022",
       "w": "Meditations",
-      "s": "There is but one common soul, though divided into innumerable particular essences and natures.",
+      "s": "Yet must thou love them still, for by nature they are thy friends.",
       "src": {
         "work": "Meditations"
       }
@@ -190,13 +190,61 @@
     {
       "id": "marcaurele.p0023",
       "w": "Meditations",
-      "s": "Gratia and I will have to fight for it; I doubt I shall not get the better of her.",
+      "s": "And what a matter of either grief or wonder is this, if he that is unlearned, do the deeds of one that is unlearned?",
       "src": {
         "work": "Meditations"
       }
     },
     {
       "id": "marcaurele.p0024",
+      "w": "Meditations",
+      "s": "He that in all things doth follow reason for his guide.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0025",
+      "w": "Meditations",
+      "s": "But here contrariwise, man (if he make that good use of them that he should) is rather the better and the more praiseworthy for any of those kind of hindrances, than otherwise.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0026",
+      "w": "Meditations",
+      "s": "But the affectation of simplicity is nowise laudable.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0027",
+      "w": "Meditations",
+      "s": "To righteousness, in speaking the truth freely, and without ambiguity; and in doing all things justly and discreetly.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0028",
+      "w": "Meditations",
+      "s": "There is but one common soul, though divided into innumerable particular essences and natures.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0029",
+      "w": "Meditations",
+      "s": "Gratia and I will have to fight for it; I doubt I shall not get the better of her.",
+      "src": {
+        "work": "Meditations"
+      }
+    },
+    {
+      "id": "marcaurele.p0030",
       "w": "Meditations",
       "s": "After returning, before turning on my side to snore, I do my task and give an account of the day to my delightful master, whom if I could long for a little more, I should not mind growing a trifle thinner.",
       "src": {
@@ -207,6 +255,58 @@
   "formulas": [
     {
       "id": "marcaurele.f.v0001",
+      "kind": "verbatim",
+      "text": "Death hangs over thee: whilst yet thou livest, whilst thou mayest, be good.",
+      "work": "Meditations",
+      "lang": "en",
+      "src": {
+        "work": "Meditations"
+      },
+      "quality": {
+        "chars": 75
+      }
+    },
+    {
+      "id": "marcaurele.f.v0002",
+      "kind": "verbatim",
+      "text": "Make it not any longer a matter of dispute or discourse, what are the signs and proprieties of a good man, but really and actually to be such.",
+      "work": "Meditations",
+      "lang": "en",
+      "src": {
+        "work": "Meditations"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "marcaurele.f.v0003",
+      "kind": "verbatim",
+      "text": "This thou must ever be mindful of, as of this also, that a man's true happiness doth consist in very few things.",
+      "work": "Meditations",
+      "lang": "en",
+      "src": {
+        "work": "Meditations"
+      },
+      "quality": {
+        "chars": 112
+      }
+    },
+    {
+      "id": "marcaurele.f.v0004",
+      "kind": "verbatim",
+      "text": "I accept it, with reference unto the Gods, and their providence; the fountain of all things, from which whatsoever comes to pass, doth hang and depend.",
+      "work": "Meditations",
+      "lang": "en",
+      "src": {
+        "work": "Meditations"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "marcaurele.f.v0005",
       "kind": "verbatim",
       "text": "His accurate examination of things in consultations, and patient hearing of others.",
       "work": "Meditations",
@@ -219,7 +319,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0002",
+      "id": "marcaurele.f.v0006",
       "kind": "verbatim",
       "text": "And that being it which we part with whensoever we die, it doth manifestly appear, that it can be but a moment of time, that we then part with.",
       "work": "Meditations",
@@ -232,7 +332,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0003",
+      "id": "marcaurele.f.v0007",
       "kind": "verbatim",
       "text": "Trouble not thyself any more henceforth, reduce thyself unto perfect simplicity.",
       "work": "Meditations",
@@ -245,7 +345,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0004",
+      "id": "marcaurele.f.v0008",
       "kind": "verbatim",
       "text": "The most compendious, is that which is according to nature: that is, in all both words and deeds, ever to follow that which is most sound and perfect.",
       "work": "Meditations",
@@ -258,7 +358,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0005",
+      "id": "marcaurele.f.v0009",
       "kind": "verbatim",
       "text": "Yea even then, though thou dost thy best to save thyself from him, yet not from him as an enemy.",
       "work": "Meditations",
@@ -271,7 +371,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0006",
+      "id": "marcaurele.f.v0010",
       "kind": "verbatim",
       "text": "These penetrated into the true nature of things; into all causes, and all subjects: and upon these did they exercise their power and authority.",
       "work": "Meditations",
@@ -284,7 +384,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0007",
+      "id": "marcaurele.f.v0011",
       "kind": "verbatim",
       "text": "As nothing can happen either to an ox, a vine, or to a stone, which is not incidental unto them; unto every one in his own kind.",
       "work": "Meditations",
@@ -297,7 +397,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0008",
+      "id": "marcaurele.f.v0012",
       "kind": "verbatim",
       "text": "Thou must not in matter of death carry thyself scornfully, but as one that is well pleased with it, as being one of those things that nature hath appointed.",
       "work": "Meditations",
@@ -310,7 +410,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0009",
+      "id": "marcaurele.f.v0013",
       "kind": "verbatim",
       "text": "But here contrariwise, man (if he make that good use of them that he should) is rather the better and the more praiseworthy for any of those kind of hindrances, than otherwise.",
       "work": "Meditations",
@@ -323,7 +423,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0010",
+      "id": "marcaurele.f.v0014",
       "kind": "verbatim",
       "text": "To righteousness, in speaking the truth freely, and without ambiguity; and in doing all things justly and discreetly.",
       "work": "Meditations",
@@ -336,7 +436,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0011",
+      "id": "marcaurele.f.v0015",
       "kind": "verbatim",
       "text": "There is but one common soul, though divided into innumerable particular essences and natures.",
       "work": "Meditations",
@@ -349,7 +449,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0012",
+      "id": "marcaurele.f.v0016",
       "kind": "verbatim",
       "text": "Gratia and I will have to fight for it; I doubt I shall not get the better of her.",
       "work": "Meditations",
@@ -362,7 +462,7 @@
       }
     },
     {
-      "id": "marcaurele.f.v0013",
+      "id": "marcaurele.f.v0017",
       "kind": "verbatim",
       "text": "After returning, before turning on my side to snore, I do my task and give an account of the day to my delightful master, whom if I could long for a little more, I should not mind growing a trifle thinner.",
       "work": "Meditations",
@@ -375,14 +475,104 @@
       }
     }
   ],
-  "concepts": [],
+  "concepts": [
+    "logos",
+    "jugement",
+    "mort",
+    "nature",
+    "providence",
+    "retraite"
+  ],
   "entities": [],
-  "doctrine": null,
+  "doctrine": {
+    "concepts": [
+      "logos",
+      "jugement",
+      "mort",
+      "nature",
+      "providence",
+      "retraite"
+    ],
+    "theses": {
+      "temps": {
+        "*": {
+          "fr": "la mort veille sur toi : tant que tu vis, tant que tu peux, sois bon",
+          "en": "death hangs over you: while you live, while you may, be good",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "Death hangs over thee: whilst yet thou livest, whilst thou mayest, be good."
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "cessons de disputer sur les signes du bon homme : soyons-le réellement",
+          "en": "let us stop disputing the signs of a good man: let us actually be one",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "Make it not any longer a matter of dispute or discourse, what are the signs and proprieties of a good man, but really and actually to be such."
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le vrai bonheur tient à très peu de choses",
+          "en": "true happiness rests on very few things",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "This thou must ever be mindful of, as of this also, that a man's true happiness doth consist in very few things."
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "souviens-toi du pouvoir que la nature t'a donné : nul ne commande à ton jugement",
+          "en": "remember the power nature gave you: no one commands your judgment",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "Remember then this thy power that nature hath given thee."
+            }
+          ]
+        }
+      },
+      "nature": {
+        "*": {
+          "fr": "rien de ce qui est selon la nature ne peut être un mal",
+          "en": "nothing that is according to nature can be evil",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "But nothing that is according to nature can be evil."
+            }
+          ]
+        }
+      },
+      "religion": {
+        "*": {
+          "fr": "j'accepte ce qui vient des dieux et de leur providence : de là tout dépend",
+          "en": "I accept what comes from the gods and their providence: everything hangs on it",
+          "anchors": [
+            {
+              "work": "Meditations",
+              "startsWith": "I accept it, with reference unto the Gods, and their providence; the fountain of all things, from which whatsoever comes to pass, doth hang and depend."
+            }
+          ]
+        }
+      }
+    }
+  },
   "stats": {
-    "sentences": 24,
-    "formulas": 13,
-    "verbatim": 13,
+    "sentences": 30,
+    "formulas": 17,
+    "verbatim": 17,
     "patterns": 0
   },
-  "checksum": "sha256:a028d4950f664b93a39ea8413707ccb82d564478e9c33aa178345a9e41d90769"
+  "checksum": "sha256:8e3e3e22345f82c6c89298aec17a262871c4e0b90c036b8bf26503c6eb7e0473"
 }

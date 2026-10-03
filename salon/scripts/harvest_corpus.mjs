@@ -14,114 +14,45 @@
  * Usage : node salon/scripts/harvest_corpus.mjs [--limit N] [--works N] [--max N] [--workmax N]
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
-
-const here = dirname(fileURLToPath(import.meta.url));
-const repo = join(here, '..', '..');
+import { join } from 'node:path';
+import { repo, cutGutenberg, authorNameRe, sample, sentences, fetchText } from './corpus_lib.mjs';
 
 const argN = (name, dflt) => {
   const i = process.argv.indexOf('--' + name);
   return i >= 0 && process.argv[i + 1] ? Number(process.argv[i + 1]) : dflt;
 };
 const LIMIT = argN('limit', 0);      // 0 = tous les auteurs
-const WORKS = argN('works', 3);      // œuvres lues par auteur
-const MAX = argN('max', 48);         // phrases gardées par auteur
-const WORKMAX = argN('workmax', 24); // phrases gardées par œuvre
-
-// moteur (pour la découpe propre des phrases)
-const eng = readFileSync(join(repo, 'backend/web/public/salon/salon-engine.js'), 'utf8');
-const sb = { module: { exports: {} } }; sb.globalThis = sb;
-new Function('module', 'exports', 'globalThis', eng)(sb.module, sb.module.exports, sb);
-const E = sb.module.exports;
+const WORKS = argN('works', 5);      // œuvres lues par auteur (production : 5)
+const MAX = argN('max', 60);         // phrases gardées par auteur (hors épingles)
+const WORKMAX = argN('workmax', 12); // phrases gardées par œuvre
 
 const catalog = JSON.parse(readFileSync(join(repo, 'salon/src/lib/salon/catalog.json'), 'utf8'));
 const dest = join(repo, 'backend/web/public/salon/corpus.json');
 const prev = existsSync(dest) ? JSON.parse(readFileSync(dest, 'utf8')) : {};
 
-const NOISE = /project gutenberg|gutenberg\.org|ebook|produced by|transcriber|pg[a-z]*\.txt|copyright|table of contents|advertisement|isbn|printers?|publishers?|\bpress\b|london:|edinburgh|oxford:|mdccc|mdcc|chapter\s+[ivxl]+|^book\b|^volume\b|^contents\b|preface|introduction|translator|editor\b|the author of the following|bibliograph|dictionary of|assistant in the|catalogue|appendix|\bsays that\b|\bwas born\b|\bflourished\b|\bdied in\b|\bthe life of\b|biograph|\bhis life\b|\bher life\b/i;
-
-function isNoise(s) {
-  const letters = s.replace(/[^A-Za-z]/g, '');
-  if (letters.length) {
-    const caps = (letters.match(/[A-Z]/g) || []).length;
-    if (caps / letters.length > 0.5) return true;
-  }
-  if (!/[a-z]{3}/.test(s)) return true; // pas de mot courant → entête/titre
-  return NOISE.test(s);
-}
-
-function cutGutenberg(t, work) {
-  let s = t.replace(/\r/g, '');
-  const start = s.search(/\*\*\*\s*START OF (THE|THIS) PROJECT GUTENBERG/i);
-  if (start >= 0) s = s.slice(start + 200);
-  const end = s.search(/\*\*\*\s*END OF (THE|THIS) PROJECT GUTENBERG/i);
-  if (end >= 0) s = s.slice(0, end);
-  // startAt (catalog.json) : saute l'introduction d'éditeur quand elle est connue.
-  let sliced = false;
-  if (work && work.startAt) {
-    const m = s.search(new RegExp(work.startAt, 'i'));
-    if (m > 0) { s = s.slice(m); sliced = true; }
-  }
-  // Retire les liminaires (préface, introduction, notices) et la fin (index).
-  if (sliced) s = s.slice(0, Math.floor(s.length * 0.99));
-  else s = s.slice(Math.floor(s.length * 0.10), Math.floor(s.length * 0.97));
-  return s;
-}
-
-/* Rejette les phrases qui nomment l'auteur à la troisième personne
- * (commentaire d'éditeur, notice) — proposition du plan de correction. */
-function authorNameRe(a) {
-  const toks = [];
-  for (const n of [a.name, a.nameEn]) {
-    if (!n) continue;
-    const parts = String(n).split(/[\s’'-]+/).filter(Boolean);
-    const last = parts[parts.length - 1];
-    if (last && last.length >= 4) toks.push(last);
-  }
-  const uniq = Array.from(new Set(toks));
-  if (!uniq.length) return null;
-  return new RegExp('\\b(?:' + uniq.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\b');
-}
-
-function sample(arr, max) {
-  if (arr.length <= max) return arr.slice();
-  const out = [];
-  const step = arr.length / max;
-  for (let i = 0; i < max; i++) out.push(arr[Math.floor(i * step)]);
-  return out;
-}
-
-function sentences(text) {
-  const parts = String(text).replace(/\s+/g, ' ').split(/(?<=[.!?])\s+/);
-  const out = [];
+/* V2 (plan, lot 2) — Épingles de doctrine : les phrases d'ancre des thèses
+ * sont toujours présentes dans la mémoire livrée, hors échantillonnage et
+ * hors plafond. Une ancre introuvable = avertissement + sortie non nulle. */
+const doctrinePath = join(repo, 'salon', 'src', 'lib', 'salon', 'doctrine.json');
+const doctrine = existsSync(doctrinePath) ? JSON.parse(readFileSync(doctrinePath, 'utf8')) : {};
+const anchorSets = {};
+for (const [id, d] of Object.entries(doctrine)) {
+  const list = [];
   const seen = new Set();
-  for (const raw of parts) {
-    const s = raw.replace(/^["«“„[\]\s]+/, '').trim();
-    if (!E.cleanSentence(s)) continue;
-    if (isNoise(s)) continue;
-    const key = s.slice(0, 60);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(s);
+  for (const dom of Object.keys((d && d.theses) || {})) {
+    for (const dem of Object.keys(d.theses[dom])) {
+      for (const an of (d.theses[dom][dem].anchors || [])) {
+        if (!an || !an.work || !an.startsWith) continue;
+        const k = an.work + '::' + an.startsWith;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        list.push({ work: an.work, startsWith: an.startsWith });
+      }
+    }
   }
-  return out;
+  if (list.length) anchorSets[id] = list;
 }
-
-async function fetchText(url) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 25000);
-  try {
-    const r = await fetch(url, { redirect: 'follow', signal: ctrl.signal, headers: { 'user-agent': 'KayrosLab-Salon/1.0 (corpus domaine public)' } });
-    if (!r.ok) return null;
-    const t = await r.text();
-    return t.length > 3_000_000 ? t.slice(0, 3_000_000) : t;
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
-}
+let missingPins = 0;
 
 const authors = LIMIT > 0 ? catalog.authors.slice(0, LIMIT) : catalog.authors;
 const out = {};
@@ -137,11 +68,14 @@ for (const a of authors) {
   // le pas par œuvre n'est élargi que si l'auteur reste sous 18 phrases
   // (source unique ou œuvres partageant un même livre).
   const sources = [];
+  const fullSources = [];
   for (const w of works) {
     const raw = await fetchText(w.url);
     if (!raw) { failed++; continue; }
     fetched++;
     sources.push({ title: w.title, list: sentences(cutGutenberg(raw, w)).filter((s) => !_nameRe || !_nameRe.test(s)) });
+    // Texte entier (sans la coupe 10–97 %) : sert aux épingles de doctrine.
+    fullSources.push({ title: w.title, list: sentences(cutGutenberg(raw, w, { window: false })) });
   }
   const collect = (limitPerWork) => {
     const out2 = [];
@@ -162,16 +96,34 @@ for (const a of authors) {
     wm = Math.min(MAX, wm * 2);
     entries = collect(wm);
   }
-  if (!entries.length) {
+  // Épingles de doctrine : hors échantillonnage, hors plafond MAX.
+  const pins = anchorSets[a.id] || [];
+  const pinned = [];
+  for (const pin of pins) {
+    const src = fullSources.find((x) => x.title === pin.work);
+    const s = src && src.list.find((x) => x.indexOf(pin.startsWith) === 0);
+    if (s) {
+      if (!pinned.some((e) => e.s.slice(0, 60) === s.slice(0, 60))) pinned.push({ w: pin.work, s });
+    } else {
+      process.stderr.write(`ancre introuvable ${a.id} :: ${pin.work} :: ${pin.startsWith}\n`);
+      missingPins++;
+    }
+  }
+  if (!entries.length && !pinned.length) {
     // pas de réseau/texte exploitable : on garde la mémoire précédente
     if (prev[a.id]) { out[a.id] = prev[a.id]; total += prev[a.id].length; }
     continue;
   }
-  const kept = sample(entries, MAX);
-  out[a.id] = kept;
-  total += kept.length;
-  process.stderr.write(`${a.id}: ${kept.length}\n`);
+  const pinKeys = new Set(pinned.map((e) => e.s.slice(0, 60)));
+  const kept = sample(entries.filter((e) => !pinKeys.has(e.s.slice(0, 60))), MAX);
+  out[a.id] = pinned.concat(kept);
+  total += pinned.length + kept.length;
+  process.stderr.write(`${a.id}: ${pinned.length} épinglée(s) + ${kept.length}\n`);
 }
 
 writeFileSync(dest, JSON.stringify(out));
 console.log(`authors ${Object.keys(out).length} · phrases ${total} · fetches ${fetched} · echecs ${failed} · bytes ${readFileSync(dest).length}`);
+if (missingPins) {
+  process.stderr.write(`\n${missingPins} ancre(s) de doctrine introuvable(s) — corpus écrit mais incohérent.\n`);
+  process.exit(2);
+}

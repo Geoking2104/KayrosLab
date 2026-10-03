@@ -20,7 +20,7 @@ const QUESTIONS = [
   "La vérité se décrète-t-elle ?",
   "Le pouvoir peut-il être légitime ?",
 ];
-const MIN = [6, 13, 8, 24, 27]; // mesures : plan (clone 7f2c7c5, corpus 2040 ph.) = 7/11/8/20/26 ; après refonte du corpus (lot 5, 2527 ph.) = 6/13/8/24/27 (justice −1 par ré-échantillonnage, documenté).
+const MIN = [14, 15, 19, 29, 28]; // v2 lot 3a-bis (gloses FR -> EN, filtre max) mesuré après épingles de doctrine (corpus 2565 ph.) ; avant : 6/13/8/24/27 sur 90f366f.
 
 test('grounding : auteurs avec passage non faible (non-régression lot 3a)', () => {
   QUESTIONS.forEach((q, i) => {

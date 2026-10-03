@@ -1,20 +1,20 @@
 {
   "authorId": "suntzu",
   "kbVersion": "suntzu@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T21:23:12.382Z",
+  "builtAt": "2026-10-03T22:22:13.900Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "The Art of War",
-      "sentences": 24
+      "sentences": 30
     }
   ],
   "passages": [
     {
       "id": "suntzu.p0001",
       "w": "The Art of War",
-      "s": "Seeing that he is actually engaged in an attempt to disprove the existence of Sun Wu himself, we may be sure that he would not have hesitated to assign the work to a later date had he not honestly believed the contrary.",
+      "s": "Hence to fight and conquer in all your battles is not supreme excellence; supreme excellence consists in breaking the enemy’s resistance without fighting.",
       "src": {
         "work": "The Art of War"
       }
@@ -22,7 +22,7 @@
     {
       "id": "suntzu.p0002",
       "w": "The Art of War",
-      "s": "Yüeh’s attack at this critical juncture, when her rival was embarrassed on every side, seems to have convinced him that this upstart kingdom was the great enemy against whom every effort would henceforth have to be directed.",
+      "s": "Regard your soldiers as your children, and they will follow you into the deepest valleys; look on them as your own beloved sons, and they will stand by you even unto death.",
       "src": {
         "work": "The Art of War"
       }
@@ -30,7 +30,7 @@
     {
       "id": "suntzu.p0003",
       "w": "The Art of War",
-      "s": "My friend Sheng-yu has not fallen into this mistake.",
+      "s": "If soldiers are punished before they have grown attached to you, they will not prove submissive; and, unless submissive, then will be practically useless.",
       "src": {
         "work": "The Art of War"
       }
@@ -38,7 +38,7 @@
     {
       "id": "suntzu.p0004",
       "w": "The Art of War",
-      "s": "All one can say is that this power will be exercised wisely by some, foolishly by others, and that among those who bear arms some will be loyal and others rebellious.",
+      "s": "Prohibit the taking of omens, and do away with superstitious doubts.",
       "src": {
         "work": "The Art of War"
       }
@@ -46,7 +46,7 @@
     {
       "id": "suntzu.p0005",
       "w": "The Art of War",
-      "s": "None of these has the slightest claim to be considered genuine.",
+      "s": "Water shapes its course according to the nature of the ground over which it flows; the soldier works out his victory in relation to the foe whom he is facing.",
       "src": {
         "work": "The Art of War"
       }
@@ -54,7 +54,7 @@
     {
       "id": "suntzu.p0006",
       "w": "The Art of War",
-      "s": "These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.",
+      "s": "There is no instance of a country having benefited from prolonged warfare.",
       "src": {
         "work": "The Art of War"
       }
@@ -62,7 +62,7 @@
     {
       "id": "suntzu.p0007",
       "w": "The Art of War",
-      "s": "Only one who knows the disastrous effects of a long war can realize the supreme importance of rapidity in bringing it to a close.",
+      "s": "Seeing that he is actually engaged in an attempt to disprove the existence of Sun Wu himself, we may be sure that he would not have hesitated to assign the work to a later date had he not honestly believed the contrary.",
       "src": {
         "work": "The Art of War"
       }
@@ -70,7 +70,7 @@
     {
       "id": "suntzu.p0008",
       "w": "The Art of War",
-      "s": "With his forces intact he will dispute the mastery of the Empire, and thus, without losing a man, his triumph will be complete.",
+      "s": "Yüeh’s attack at this critical juncture, when her rival was embarrassed on every side, seems to have convinced him that this upstart kingdom was the great enemy against whom every effort would henceforth have to be directed.",
       "src": {
         "work": "The Art of War"
       }
@@ -78,7 +78,7 @@
     {
       "id": "suntzu.p0009",
       "w": "The Art of War",
-      "s": "Perhaps the second term should be thought of as a consideration of the enemy’s general position or condition, while the third term is the estimate of his numerical strength.",
+      "s": "My friend Sheng-yu has not fallen into this mistake.",
       "src": {
         "work": "The Art of War"
       }
@@ -86,7 +86,7 @@
     {
       "id": "suntzu.p0010",
       "w": "The Art of War",
-      "s": "Ts’ao Kung’s note is \"Make a display of weakness and want.\" Tu Mu says: \"If our force happens to be superior to the enemy’s, weakness may be simulated in order to lure him on; but if inferior, he must be led to believe that we are strong, in order that he may keep off.",
+      "s": "All one can say is that this power will be exercised wisely by some, foolishly by others, and that among those who bear arms some will be loyal and others rebellious.",
       "src": {
         "work": "The Art of War"
       }
@@ -94,7 +94,7 @@
     {
       "id": "suntzu.p0011",
       "w": "The Art of War",
-      "s": "If he sends reinforcements everywhere, he will everywhere be weak.",
+      "s": "None of these has the slightest claim to be considered genuine.",
       "src": {
         "work": "The Art of War"
       }
@@ -102,7 +102,7 @@
     {
       "id": "suntzu.p0012",
       "w": "The Art of War",
-      "s": "Manœuvering with an army is advantageous; with an undisciplined multitude, most dangerous.",
+      "s": "These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.",
       "src": {
         "work": "The Art of War"
       }
@@ -110,7 +110,7 @@
     {
       "id": "suntzu.p0013",
       "w": "The Art of War",
-      "s": "Disciplined and calm, to await the appearance of disorder and hubbub amongst the enemy:—this is the art of retaining self-possession.",
+      "s": "Only one who knows the disastrous effects of a long war can realize the supreme importance of rapidity in bringing it to a close.",
       "src": {
         "work": "The Art of War"
       }
@@ -118,7 +118,7 @@
     {
       "id": "suntzu.p0014",
       "w": "The Art of War",
-      "s": "Tu Mu says: \"If I wish to extricate myself from a dangerous position, I must consider not only the enemy’s ability to injure me, but also my own ability to gain an advantage over the enemy.",
+      "s": "With his forces intact he will dispute the mastery of the Empire, and thus, without losing a man, his triumph will be complete.",
       "src": {
         "work": "The Art of War"
       }
@@ -126,7 +126,7 @@
     {
       "id": "suntzu.p0015",
       "w": "The Art of War",
-      "s": "Moor your craft higher up than the enemy, and facing the sun.",
+      "s": "Perhaps the second term should be thought of as a consideration of the enemy’s general position or condition, while the third term is the estimate of his numerical strength.",
       "src": {
         "work": "The Art of War"
       }
@@ -134,7 +134,7 @@
     {
       "id": "suntzu.p0016",
       "w": "The Art of War",
-      "s": "When night came on, he lighted the ends of the rushes, and drove the oxen through a number of holes which he had pierced in the walls, backing them up with a force of 5000 picked warriors.",
+      "s": "Ts’ao Kung’s note is \"Make a display of weakness and want.\" Tu Mu says: \"If our force happens to be superior to the enemy’s, weakness may be simulated in order to lure him on; but if inferior, he must be led to believe that we are strong, in order that he may keep off.",
       "src": {
         "work": "The Art of War"
       }
@@ -142,7 +142,7 @@
     {
       "id": "suntzu.p0017",
       "w": "The Art of War",
-      "s": "P’ei Hsing-chien, however, paid no heed to their remonstrances and had the camp moved as quickly as possible.",
+      "s": "If he sends reinforcements everywhere, he will everywhere be weak.",
       "src": {
         "work": "The Art of War"
       }
@@ -150,7 +150,7 @@
     {
       "id": "suntzu.p0018",
       "w": "The Art of War",
-      "s": "Thus, Thermopylae was of this classification because the possession of it, even for a few days only, meant holding the entire invading army in check and thus gaining invaluable time.",
+      "s": "Manœuvering with an army is advantageous; with an undisciplined multitude, most dangerous.",
       "src": {
         "work": "The Art of War"
       }
@@ -158,7 +158,7 @@
     {
       "id": "suntzu.p0019",
       "w": "The Art of War",
-      "s": "Li Ching replied: \"To the soldier, overwhelming speed is of paramount importance, and he must never miss opportunities.",
+      "s": "Disciplined and calm, to await the appearance of disorder and hubbub amongst the enemy:—this is the art of retaining self-possession.",
       "src": {
         "work": "The Art of War"
       }
@@ -166,7 +166,7 @@
     {
       "id": "suntzu.p0020",
       "w": "The Art of War",
-      "s": "Wellington’s seemingly ungrateful description of his army at Waterloo as \"the worst he had ever commanded\" meant no more than that it was deficient in this important particular—unity of spirit and courage.",
+      "s": "Tu Mu says: \"If I wish to extricate myself from a dangerous position, I must consider not only the enemy’s ability to injure me, but also my own ability to gain an advantage over the enemy.",
       "src": {
         "work": "The Art of War"
       }
@@ -174,7 +174,7 @@
     {
       "id": "suntzu.p0021",
       "w": "The Art of War",
-      "s": "This end, according to Tu Mu, is best attained by remaining on the defensive, and avoiding battle.",
+      "s": "Moor your craft higher up than the enemy, and facing the sun.",
       "src": {
         "work": "The Art of War"
       }
@@ -182,7 +182,7 @@
     {
       "id": "suntzu.p0022",
       "w": "The Art of War",
-      "s": "Hence he does not strive to ally himself with all and sundry, nor does he foster the power of other states.",
+      "s": "When night came on, he lighted the ends of the rushes, and drove the oxen through a number of holes which he had pierced in the walls, backing them up with a force of 5000 picked warriors.",
       "src": {
         "work": "The Art of War"
       }
@@ -190,13 +190,61 @@
     {
       "id": "suntzu.p0023",
       "w": "The Art of War",
-      "s": "Pan Ch’ao then fell into a passion: ‘It is today,’ he cried, ‘that our fortunes must be decided!",
+      "s": "P’ei Hsing-chien, however, paid no heed to their remonstrances and had the camp moved as quickly as possible.",
       "src": {
         "work": "The Art of War"
       }
     },
     {
       "id": "suntzu.p0024",
+      "w": "The Art of War",
+      "s": "Thus, Thermopylae was of this classification because the possession of it, even for a few days only, meant holding the entire invading army in check and thus gaining invaluable time.",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0025",
+      "w": "The Art of War",
+      "s": "Li Ching replied: \"To the soldier, overwhelming speed is of paramount importance, and he must never miss opportunities.",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0026",
+      "w": "The Art of War",
+      "s": "Wellington’s seemingly ungrateful description of his army at Waterloo as \"the worst he had ever commanded\" meant no more than that it was deficient in this important particular—unity of spirit and courage.",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0027",
+      "w": "The Art of War",
+      "s": "This end, according to Tu Mu, is best attained by remaining on the defensive, and avoiding battle.",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0028",
+      "w": "The Art of War",
+      "s": "Hence he does not strive to ally himself with all and sundry, nor does he foster the power of other states.",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0029",
+      "w": "The Art of War",
+      "s": "Pan Ch’ao then fell into a passion: ‘It is today,’ he cried, ‘that our fortunes must be decided!",
+      "src": {
+        "work": "The Art of War"
+      }
+    },
+    {
+      "id": "suntzu.p0030",
       "w": "The Art of War",
       "s": "The daily expenditure will amount to a thousand ounces of silver.",
       "src": {
@@ -207,6 +255,58 @@
   "formulas": [
     {
       "id": "suntzu.f.v0001",
+      "kind": "verbatim",
+      "text": "Hence to fight and conquer in all your battles is not supreme excellence; supreme excellence consists in breaking the enemy’s resistance without fighting.",
+      "work": "The Art of War",
+      "lang": "en",
+      "src": {
+        "work": "The Art of War"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "suntzu.f.v0002",
+      "kind": "verbatim",
+      "text": "Regard your soldiers as your children, and they will follow you into the deepest valleys; look on them as your own beloved sons, and they will stand by you even unto death.",
+      "work": "The Art of War",
+      "lang": "en",
+      "src": {
+        "work": "The Art of War"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "suntzu.f.v0003",
+      "kind": "verbatim",
+      "text": "If soldiers are punished before they have grown attached to you, they will not prove submissive; and, unless submissive, then will be practically useless.",
+      "work": "The Art of War",
+      "lang": "en",
+      "src": {
+        "work": "The Art of War"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "suntzu.f.v0004",
+      "kind": "verbatim",
+      "text": "Water shapes its course according to the nature of the ground over which it flows; the soldier works out his victory in relation to the foe whom he is facing.",
+      "work": "The Art of War",
+      "lang": "en",
+      "src": {
+        "work": "The Art of War"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "suntzu.f.v0005",
       "kind": "verbatim",
       "text": "Seeing that he is actually engaged in an attempt to disprove the existence of Sun Wu himself, we may be sure that he would not have hesitated to assign the work to a later date had he not honestly believed the contrary.",
       "work": "The Art of War",
@@ -219,7 +319,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0002",
+      "id": "suntzu.f.v0006",
       "kind": "verbatim",
       "text": "Yüeh’s attack at this critical juncture, when her rival was embarrassed on every side, seems to have convinced him that this upstart kingdom was the great enemy against whom every effort would henceforth have to be directed.",
       "work": "The Art of War",
@@ -232,7 +332,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0003",
+      "id": "suntzu.f.v0007",
       "kind": "verbatim",
       "text": "All one can say is that this power will be exercised wisely by some, foolishly by others, and that among those who bear arms some will be loyal and others rebellious.",
       "work": "The Art of War",
@@ -245,7 +345,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0004",
+      "id": "suntzu.f.v0008",
       "kind": "verbatim",
       "text": "These five heads should be familiar to every general: he who knows them will be victorious; he who knows them not will fail.",
       "work": "The Art of War",
@@ -258,7 +358,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0005",
+      "id": "suntzu.f.v0009",
       "kind": "verbatim",
       "text": "Only one who knows the disastrous effects of a long war can realize the supreme importance of rapidity in bringing it to a close.",
       "work": "The Art of War",
@@ -271,7 +371,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0006",
+      "id": "suntzu.f.v0010",
       "kind": "verbatim",
       "text": "With his forces intact he will dispute the mastery of the Empire, and thus, without losing a man, his triumph will be complete.",
       "work": "The Art of War",
@@ -284,7 +384,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0007",
+      "id": "suntzu.f.v0011",
       "kind": "verbatim",
       "text": "Perhaps the second term should be thought of as a consideration of the enemy’s general position or condition, while the third term is the estimate of his numerical strength.",
       "work": "The Art of War",
@@ -297,7 +397,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0008",
+      "id": "suntzu.f.v0012",
       "kind": "verbatim",
       "text": "Ts’ao Kung’s note is \"Make a display of weakness and want.\" Tu Mu says: \"If our force happens to be superior to the enemy’s, weakness may be simulated in order to lure him on; but if inferior, he must be led to believe that we are strong, in order that he may keep off.",
       "work": "The Art of War",
@@ -310,7 +410,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0009",
+      "id": "suntzu.f.v0013",
       "kind": "verbatim",
       "text": "Disciplined and calm, to await the appearance of disorder and hubbub amongst the enemy:—this is the art of retaining self-possession.",
       "work": "The Art of War",
@@ -323,7 +423,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0010",
+      "id": "suntzu.f.v0014",
       "kind": "verbatim",
       "text": "Tu Mu says: \"If I wish to extricate myself from a dangerous position, I must consider not only the enemy’s ability to injure me, but also my own ability to gain an advantage over the enemy.",
       "work": "The Art of War",
@@ -336,7 +436,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0011",
+      "id": "suntzu.f.v0015",
       "kind": "verbatim",
       "text": "When night came on, he lighted the ends of the rushes, and drove the oxen through a number of holes which he had pierced in the walls, backing them up with a force of 5000 picked warriors.",
       "work": "The Art of War",
@@ -349,7 +449,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0012",
+      "id": "suntzu.f.v0016",
       "kind": "verbatim",
       "text": "Li Ching replied: \"To the soldier, overwhelming speed is of paramount importance, and he must never miss opportunities.",
       "work": "The Art of War",
@@ -362,7 +462,7 @@
       }
     },
     {
-      "id": "suntzu.f.v0013",
+      "id": "suntzu.f.v0017",
       "kind": "verbatim",
       "text": "Wellington’s seemingly ungrateful description of his army at Waterloo as \"the worst he had ever commanded\" meant no more than that it was deficient in this important particular—unity of spirit and courage.",
       "work": "The Art of War",
@@ -375,14 +475,104 @@
       }
     }
   ],
-  "concepts": [],
+  "concepts": [
+    "terrain",
+    "ruse",
+    "renseignement",
+    "célérité",
+    "discipline",
+    "victoire"
+  ],
   "entities": [],
-  "doctrine": null,
+  "doctrine": {
+    "concepts": [
+      "terrain",
+      "ruse",
+      "renseignement",
+      "célérité",
+      "discipline",
+      "victoire"
+    ],
+    "theses": {
+      "guerre": {
+        "*": {
+          "fr": "l'excellence suprême n'est pas de vaincre en toutes batailles, mais de briser la résistance sans combattre",
+          "en": "supreme excellence is not conquering in every battle, but breaking resistance without fighting",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "Hence to fight and conquer in all your battles is not supreme excellence; supreme excellence consists in breaking the enemy’s resistance without fighting."
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "tiens tes soldats comme tes enfants : ils te suivront jusqu'au bout",
+          "en": "hold your soldiers as your children: they will follow you to the end",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "Regard your soldiers as your children, and they will follow you into the deepest valleys; look on them as your own beloved sons, and they will stand by you even unto death."
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la discipline sans attachement ne fait que des instruments inutiles",
+          "en": "discipline without attachment makes only useless instruments",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "If soldiers are punished before they have grown attached to you, they will not prove submissive; and, unless submissive, then will be practically useless."
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "interdis les présages : la victoire se calcule et se renseigne, elle ne se devine pas",
+          "en": "ban omens: victory is calculated and informed, never divined",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "Prohibit the taking of omens, and do away with superstitious doubts."
+            }
+          ]
+        }
+      },
+      "nature": {
+        "*": {
+          "fr": "comme l'eau, l'armée épouse le terrain : la victoire suit les circonstances",
+          "en": "like water, an army takes the shape of the ground: victory follows circumstance",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "Water shapes its course according to the nature of the ground over which it flows; the soldier works out his victory in relation to the foe whom he is facing."
+            }
+          ]
+        }
+      },
+      "temps": {
+        "*": {
+          "fr": "la durée épuise : aucun pays n'a profité d'une guerre prolongée",
+          "en": "duration exhausts: no country has profited from prolonged warfare",
+          "anchors": [
+            {
+              "work": "The Art of War",
+              "startsWith": "There is no instance of a country having benefited from prolonged warfare."
+            }
+          ]
+        }
+      }
+    }
+  },
   "stats": {
-    "sentences": 24,
-    "formulas": 13,
-    "verbatim": 13,
+    "sentences": 30,
+    "formulas": 17,
+    "verbatim": 17,
     "patterns": 0
   },
-  "checksum": "sha256:60a6d75e62adef80380748dfbb197646b14d4d823109b094da3b4929a628c1cd"
+  "checksum": "sha256:38a1f16112d58ea29bdbf3a63f4ae25698b737e7b49f21175ed6d4e51b31551d"
 }

@@ -17,8 +17,8 @@
   function loadCorpus() {
     if (CORPUS_READY) return CORPUS_READY;
     CORPUS_READY = Promise.all([
-      fetch("/salon/corpus.json?v=20261004a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
-      fetch("/salon/doctrine.json?v=20261004a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+      fetch("/salon/corpus.json?v=20261005a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+      fetch("/salon/doctrine.json?v=20261005a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
     ]).then(function (a) { CORPUS = a[0] || {}; DOCTRINE = a[1] || {}; return CORPUS; });
     return CORPUS_READY;
   }

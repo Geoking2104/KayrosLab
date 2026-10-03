@@ -1,16 +1,16 @@
 {
   "authorId": "voltaire",
   "kbVersion": "voltaire@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T21:23:12.412Z",
+  "builtAt": "2026-10-03T22:22:13.917Z",
   "source": "bootstrap-corpus",
   "lang": "fr",
   "works": [
     {
       "title": "Candide, ou l'optimisme",
-      "sentences": 12
+      "sentences": 13
     },
     {
-      "title": "Zadig, ou la Destinée, histoire orientale",
+      "title": "Voltaire's Philosophical Dictionary",
       "sentences": 12
     },
     {
@@ -18,11 +18,11 @@
       "sentences": 12
     },
     {
-      "title": "L'Ingénu",
+      "title": "Zadig, ou la Destinée, histoire orientale",
       "sentences": 12
     },
     {
-      "title": "Voltaire's Philosophical Dictionary",
+      "title": "L'Ingénu",
       "sentences": 12
     }
   ],
@@ -30,7 +30,7 @@
     {
       "id": "voltaire.p0001",
       "w": "Candide, ou l'optimisme",
-      "s": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+      "s": "C’est à ce prix que vous mangez du sucre en Europe.",
       "src": {
         "work": "Candide, ou l'optimisme"
       }
@@ -38,397 +38,13 @@
     {
       "id": "voltaire.p0002",
       "w": "Candide, ou l'optimisme",
-      "s": "Vous la verrez, dit Cunégonde; mais continuons.",
+      "s": "Je sais aussi, dit Candide, qu’il faut cultiver notre jardin.",
       "src": {
         "work": "Candide, ou l'optimisme"
       }
     },
     {
       "id": "voltaire.p0003",
-      "w": "Candide, ou l'optimisme",
-      "s": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0004",
-      "w": "Candide, ou l'optimisme",
-      "s": "La fuite de Cunégonde et de Candide était déjà connue.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0005",
-      "w": "Candide, ou l'optimisme",
-      "s": "Enfin une belle prairie entrecoupée de ruisseaux se présenta devant eux.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0006",
-      "w": "Candide, ou l'optimisme",
-      "s": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0007",
-      "w": "Candide, ou l'optimisme",
-      "s": "C’est à ce prix que vous mangez du sucre en Europe.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0008",
-      "w": "Candide, ou l'optimisme",
-      "s": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0009",
-      "w": "Candide, ou l'optimisme",
-      "s": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0010",
-      "w": "Candide, ou l'optimisme",
-      "s": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0011",
-      "w": "Candide, ou l'optimisme",
-      "s": "Que m’importe qu’il ait plaidé pour Rabirius ou pour Cluentius?",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0012",
-      "w": "Candide, ou l'optimisme",
-      "s": "On arriva en peu de jours sur le canal de la mer Noire.",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      }
-    },
-    {
-      "id": "voltaire.p0013",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0014",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Une petite pluie survint; on regagna la maison.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0015",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0016",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0017",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Là-dessus il remonta sur son chameau, et avança vers le bourg.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0018",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0019",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Alors elle fit avertir les juges de venir chez elle pour une affaire importante.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0020",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Ils firent une irruption dans les états du bon Nabussan.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0021",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Il l'accorda à ma femme, et me la refusa.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0022",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Il vint au temple le grand jour du feu sacré.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0023",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Chacun d'eux vint mettre sa devise aux pieds du grand-mage.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0024",
-      "w": "Zadig, ou la Destinée, histoire orientale",
-      "s": "Il n'osa d'abord en rien témoigner; mais il était dans une étrange surprise.",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      }
-    },
-    {
-      "id": "voltaire.p0025",
-      "w": "Micromégas",
-      "s": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0026",
-      "w": "Micromégas",
-      "s": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0027",
-      "w": "Micromégas",
-      "s": "Il faut que ce soit une loi universelle de la nature.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0028",
-      "w": "Micromégas",
-      "s": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0029",
-      "w": "Micromégas",
-      "s": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0030",
-      "w": "Micromégas",
-      "s": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0031",
-      "w": "Micromégas",
-      "s": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0032",
-      "w": "Micromégas",
-      "s": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0033",
-      "w": "Micromégas",
-      "s": "L'étonnement des voyageurs redoublait à chaque instant.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0034",
-      "w": "Micromégas",
-      "s": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0035",
-      "w": "Micromégas",
-      "s": "D'ailleurs, ce n'est pas eux qu'il faut punir, ce sont ces barbares sédentaires qui du fond de leur cabinet ordonnent, dans le temps de leur digestion, le massacre d'un million d'hommes, et qui ensuite en font remercier Dieu solennellement.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0036",
-      "w": "Micromégas",
-      "s": "Ni moi non plus, dit la mite philosophique.",
-      "src": {
-        "work": "Micromégas"
-      }
-    },
-    {
-      "id": "voltaire.p0037",
-      "w": "L'Ingénu",
-      "s": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0038",
-      "w": "L'Ingénu",
-      "s": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0039",
-      "w": "L'Ingénu",
-      "s": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0040",
-      "w": "L'Ingénu",
-      "s": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0041",
-      "w": "L'Ingénu",
-      "s": "L’Ingénu et la lettre arrivèrent presque en même temps à Versailles.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0042",
-      "w": "L'Ingénu",
-      "s": "Les âmes des deux captifs s’attachaient l’une à l’autre.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0043",
-      "w": "L'Ingénu",
-      "s": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0044",
-      "w": "L'Ingénu",
-      "s": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0045",
-      "w": "L'Ingénu",
-      "s": "Pour peu qu’on encourage une amante passionnée, elle est intrépide.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0046",
-      "w": "L'Ingénu",
-      "s": "Saint-Yves rejeta le tout en pleurant; mais l’amie s’en chargea.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0047",
-      "w": "L'Ingénu",
-      "s": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0048",
-      "w": "L'Ingénu",
-      "s": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
-      "src": {
-        "work": "L'Ingénu"
-      }
-    },
-    {
-      "id": "voltaire.p0049",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0050",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "We have taken back from them what we had lent them.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0051",
       "w": "Voltaire's Philosophical Dictionary",
       "s": "But from the manner in which men are made, it would be a fresh contradiction if they were to agree.",
       "src": {
@@ -436,55 +52,7 @@
       }
     },
     {
-      "id": "voltaire.p0052",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "For the same reason, ecclesiastical punishments, always spiritual, do not reach here below any but those who are convinced inwardly of their fault.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0053",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0054",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "I thought he was going to say something silly.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0055",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "The sect of Pietists, wishing to imitate the early Christians, to-day give each other kisses of peace on leaving the assembly, calling each other \"my brother, my sister\"; it is what, twenty years ago, a very pretty and very human Pietist lady avowed to me.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0056",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "He answered manfully that he had no idea.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0057",
-      "w": "Voltaire's Philosophical Dictionary",
-      "s": "These two hundred verses are very beautiful; so are Milton's; and the total of Masenius' poem, despite these two hundred beautiful verses, is not worth anything at all.",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      }
-    },
-    {
-      "id": "voltaire.p0058",
+      "id": "voltaire.p0004",
       "w": "Voltaire's Philosophical Dictionary",
       "s": "You have asserted it a thousand times; but you have never been able either to prove it, or to understand it.",
       "src": {
@@ -492,7 +60,447 @@
       }
     },
     {
+      "id": "voltaire.p0005",
+      "w": "Micromégas",
+      "s": "D'ailleurs, ce n'est pas eux qu'il faut punir, ce sont ces barbares sédentaires qui du fond de leur cabinet ordonnent, dans le temps de leur digestion, le massacre d'un million d'hommes, et qui ensuite en font remercier Dieu solennellement.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0006",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "The sect of Pietists, wishing to imitate the early Christians, to-day give each other kisses of peace on leaving the assembly, calling each other \"my brother, my sister\"; it is what, twenty years ago, a very pretty and very human Pietist lady avowed to me.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0007",
+      "w": "Candide, ou l'optimisme",
+      "s": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0008",
+      "w": "Candide, ou l'optimisme",
+      "s": "Vous la verrez, dit Cunégonde; mais continuons.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0009",
+      "w": "Candide, ou l'optimisme",
+      "s": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0010",
+      "w": "Candide, ou l'optimisme",
+      "s": "La fuite de Cunégonde et de Candide était déjà connue.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0011",
+      "w": "Candide, ou l'optimisme",
+      "s": "Enfin une belle prairie entrecoupée de ruisseaux se présenta devant eux.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0012",
+      "w": "Candide, ou l'optimisme",
+      "s": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0013",
+      "w": "Candide, ou l'optimisme",
+      "s": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0014",
+      "w": "Candide, ou l'optimisme",
+      "s": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0015",
+      "w": "Candide, ou l'optimisme",
+      "s": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0016",
+      "w": "Candide, ou l'optimisme",
+      "s": "Que m’importe qu’il ait plaidé pour Rabirius ou pour Cluentius?",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0017",
+      "w": "Candide, ou l'optimisme",
+      "s": "On arriva en peu de jours sur le canal de la mer Noire.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0018",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0019",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Une petite pluie survint; on regagna la maison.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0020",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0021",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0022",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Là-dessus il remonta sur son chameau, et avança vers le bourg.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0023",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0024",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Alors elle fit avertir les juges de venir chez elle pour une affaire importante.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0025",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Ils firent une irruption dans les états du bon Nabussan.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0026",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Il l'accorda à ma femme, et me la refusa.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0027",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Il vint au temple le grand jour du feu sacré.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0028",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Chacun d'eux vint mettre sa devise aux pieds du grand-mage.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0029",
+      "w": "Zadig, ou la Destinée, histoire orientale",
+      "s": "Il n'osa d'abord en rien témoigner; mais il était dans une étrange surprise.",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      }
+    },
+    {
+      "id": "voltaire.p0030",
+      "w": "Micromégas",
+      "s": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0031",
+      "w": "Micromégas",
+      "s": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0032",
+      "w": "Micromégas",
+      "s": "Il faut que ce soit une loi universelle de la nature.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0033",
+      "w": "Micromégas",
+      "s": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0034",
+      "w": "Micromégas",
+      "s": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0035",
+      "w": "Micromégas",
+      "s": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0036",
+      "w": "Micromégas",
+      "s": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0037",
+      "w": "Micromégas",
+      "s": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0038",
+      "w": "Micromégas",
+      "s": "L'étonnement des voyageurs redoublait à chaque instant.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0039",
+      "w": "Micromégas",
+      "s": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0040",
+      "w": "Micromégas",
+      "s": "Ni moi non plus, dit la mite philosophique.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0041",
+      "w": "L'Ingénu",
+      "s": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0042",
+      "w": "L'Ingénu",
+      "s": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0043",
+      "w": "L'Ingénu",
+      "s": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0044",
+      "w": "L'Ingénu",
+      "s": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0045",
+      "w": "L'Ingénu",
+      "s": "L’Ingénu et la lettre arrivèrent presque en même temps à Versailles.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0046",
+      "w": "L'Ingénu",
+      "s": "Les âmes des deux captifs s’attachaient l’une à l’autre.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0047",
+      "w": "L'Ingénu",
+      "s": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0048",
+      "w": "L'Ingénu",
+      "s": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0049",
+      "w": "L'Ingénu",
+      "s": "Pour peu qu’on encourage une amante passionnée, elle est intrépide.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0050",
+      "w": "L'Ingénu",
+      "s": "Saint-Yves rejeta le tout en pleurant; mais l’amie s’en chargea.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0051",
+      "w": "L'Ingénu",
+      "s": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0052",
+      "w": "L'Ingénu",
+      "s": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0053",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0054",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "We have taken back from them what we had lent them.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0055",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "For the same reason, ecclesiastical punishments, always spiritual, do not reach here below any but those who are convinced inwardly of their fault.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0056",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0057",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "I thought he was going to say something silly.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0058",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "He answered manfully that he had no idea.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
       "id": "voltaire.p0059",
+      "w": "Voltaire's Philosophical Dictionary",
+      "s": "These two hundred verses are very beautiful; so are Milton's; and the total of Masenius' poem, despite these two hundred beautiful verses, is not worth anything at all.",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      }
+    },
+    {
+      "id": "voltaire.p0060",
       "w": "Voltaire's Philosophical Dictionary",
       "s": "Never has there been a dispute as to whether there is daylight at noon.",
       "src": {
@@ -500,7 +508,7 @@
       }
     },
     {
-      "id": "voltaire.p0060",
+      "id": "voltaire.p0061",
       "w": "Voltaire's Philosophical Dictionary",
       "s": "Later he explains in his own way all the texts of Holy Writ by which people have tried to combat this opinion.",
       "src": {
@@ -511,409 +519,6 @@
   "formulas": [
     {
       "id": "voltaire.f.v0001",
-      "kind": "verbatim",
-      "text": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 101
-      }
-    },
-    {
-      "id": "voltaire.f.v0002",
-      "kind": "verbatim",
-      "text": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 220
-      }
-    },
-    {
-      "id": "voltaire.f.v0003",
-      "kind": "verbatim",
-      "text": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 94
-      }
-    },
-    {
-      "id": "voltaire.f.v0004",
-      "kind": "verbatim",
-      "text": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 128
-      }
-    },
-    {
-      "id": "voltaire.f.v0005",
-      "kind": "verbatim",
-      "text": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 286
-      }
-    },
-    {
-      "id": "voltaire.f.v0006",
-      "kind": "verbatim",
-      "text": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
-      "work": "Candide, ou l'optimisme",
-      "lang": "fr",
-      "src": {
-        "work": "Candide, ou l'optimisme"
-      },
-      "quality": {
-        "chars": 133
-      }
-    },
-    {
-      "id": "voltaire.f.v0007",
-      "kind": "verbatim",
-      "text": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
-      "work": "Zadig, ou la Destinée, histoire orientale",
-      "lang": "fr",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      },
-      "quality": {
-        "chars": 110
-      }
-    },
-    {
-      "id": "voltaire.f.v0008",
-      "kind": "verbatim",
-      "text": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
-      "work": "Zadig, ou la Destinée, histoire orientale",
-      "lang": "fr",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      },
-      "quality": {
-        "chars": 113
-      }
-    },
-    {
-      "id": "voltaire.f.v0009",
-      "kind": "verbatim",
-      "text": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
-      "work": "Zadig, ou la Destinée, histoire orientale",
-      "lang": "fr",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      },
-      "quality": {
-        "chars": 251
-      }
-    },
-    {
-      "id": "voltaire.f.v0010",
-      "kind": "verbatim",
-      "text": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
-      "work": "Zadig, ou la Destinée, histoire orientale",
-      "lang": "fr",
-      "src": {
-        "work": "Zadig, ou la Destinée, histoire orientale"
-      },
-      "quality": {
-        "chars": 232
-      }
-    },
-    {
-      "id": "voltaire.f.v0011",
-      "kind": "verbatim",
-      "text": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 261
-      }
-    },
-    {
-      "id": "voltaire.f.v0012",
-      "kind": "verbatim",
-      "text": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 110
-      }
-    },
-    {
-      "id": "voltaire.f.v0013",
-      "kind": "verbatim",
-      "text": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 93
-      }
-    },
-    {
-      "id": "voltaire.f.v0014",
-      "kind": "verbatim",
-      "text": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 292
-      }
-    },
-    {
-      "id": "voltaire.f.v0015",
-      "kind": "verbatim",
-      "text": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 104
-      }
-    },
-    {
-      "id": "voltaire.f.v0016",
-      "kind": "verbatim",
-      "text": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 132
-      }
-    },
-    {
-      "id": "voltaire.f.v0017",
-      "kind": "verbatim",
-      "text": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 166
-      }
-    },
-    {
-      "id": "voltaire.f.v0018",
-      "kind": "verbatim",
-      "text": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 149
-      }
-    },
-    {
-      "id": "voltaire.f.v0019",
-      "kind": "verbatim",
-      "text": "D'ailleurs, ce n'est pas eux qu'il faut punir, ce sont ces barbares sédentaires qui du fond de leur cabinet ordonnent, dans le temps de leur digestion, le massacre d'un million d'hommes, et qui ensuite en font remercier Dieu solennellement.",
-      "work": "Micromégas",
-      "lang": "fr",
-      "src": {
-        "work": "Micromégas"
-      },
-      "quality": {
-        "chars": 240
-      }
-    },
-    {
-      "id": "voltaire.f.v0020",
-      "kind": "verbatim",
-      "text": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 77
-      }
-    },
-    {
-      "id": "voltaire.f.v0021",
-      "kind": "verbatim",
-      "text": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 85
-      }
-    },
-    {
-      "id": "voltaire.f.v0022",
-      "kind": "verbatim",
-      "text": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 266
-      }
-    },
-    {
-      "id": "voltaire.f.v0023",
-      "kind": "verbatim",
-      "text": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 312
-      }
-    },
-    {
-      "id": "voltaire.f.v0024",
-      "kind": "verbatim",
-      "text": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 96
-      }
-    },
-    {
-      "id": "voltaire.f.v0025",
-      "kind": "verbatim",
-      "text": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 150
-      }
-    },
-    {
-      "id": "voltaire.f.v0026",
-      "kind": "verbatim",
-      "text": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 82
-      }
-    },
-    {
-      "id": "voltaire.f.v0027",
-      "kind": "verbatim",
-      "text": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
-      "work": "L'Ingénu",
-      "lang": "fr",
-      "src": {
-        "work": "L'Ingénu"
-      },
-      "quality": {
-        "chars": 160
-      }
-    },
-    {
-      "id": "voltaire.f.v0028",
-      "kind": "verbatim",
-      "text": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
-      "work": "Voltaire's Philosophical Dictionary",
-      "lang": "en",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      },
-      "quality": {
-        "chars": 149
-      }
-    },
-    {
-      "id": "voltaire.f.v0029",
-      "kind": "verbatim",
-      "text": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
-      "work": "Voltaire's Philosophical Dictionary",
-      "lang": "en",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      },
-      "quality": {
-        "chars": 294
-      }
-    },
-    {
-      "id": "voltaire.f.v0030",
-      "kind": "verbatim",
-      "text": "The sect of Pietists, wishing to imitate the early Christians, to-day give each other kisses of peace on leaving the assembly, calling each other \"my brother, my sister\"; it is what, twenty years ago, a very pretty and very human Pietist lady avowed to me.",
-      "work": "Voltaire's Philosophical Dictionary",
-      "lang": "en",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      },
-      "quality": {
-        "chars": 256
-      }
-    },
-    {
-      "id": "voltaire.f.v0031",
-      "kind": "verbatim",
-      "text": "These two hundred verses are very beautiful; so are Milton's; and the total of Masenius' poem, despite these two hundred beautiful verses, is not worth anything at all.",
-      "work": "Voltaire's Philosophical Dictionary",
-      "lang": "en",
-      "src": {
-        "work": "Voltaire's Philosophical Dictionary"
-      },
-      "quality": {
-        "chars": 168
-      }
-    },
-    {
-      "id": "voltaire.f.v0032",
       "kind": "verbatim",
       "text": "You have asserted it a thousand times; but you have never been able either to prove it, or to understand it.",
       "work": "Voltaire's Philosophical Dictionary",
@@ -926,7 +531,423 @@
       }
     },
     {
+      "id": "voltaire.f.v0002",
+      "kind": "verbatim",
+      "text": "D'ailleurs, ce n'est pas eux qu'il faut punir, ce sont ces barbares sédentaires qui du fond de leur cabinet ordonnent, dans le temps de leur digestion, le massacre d'un million d'hommes, et qui ensuite en font remercier Dieu solennellement.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 240
+      }
+    },
+    {
+      "id": "voltaire.f.v0003",
+      "kind": "verbatim",
+      "text": "The sect of Pietists, wishing to imitate the early Christians, to-day give each other kisses of peace on leaving the assembly, calling each other \"my brother, my sister\"; it is what, twenty years ago, a very pretty and very human Pietist lady avowed to me.",
+      "work": "Voltaire's Philosophical Dictionary",
+      "lang": "en",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "voltaire.f.v0004",
+      "kind": "verbatim",
+      "text": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "voltaire.f.v0005",
+      "kind": "verbatim",
+      "text": "Les noces furent préparées: c’était une pompe, une magnificence inouïe; c’étaient des fêtes, des carrousels, des opéra-buffa continuels; et toute l’Italie fit pour moi des sonnets dont il n’y eut pas un seul de passable.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "voltaire.f.v0006",
+      "kind": "verbatim",
+      "text": "Toutes les hôtelleries établies pour la commodité du commerce sont payées par le gouvernement.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "voltaire.f.v0007",
+      "kind": "verbatim",
+      "text": "Vous voyez, dit Candide à Martin, que le crime est puni quelquefois; ce coquin de patron hollandais a eu le sort qu’il méritait.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "voltaire.f.v0008",
+      "kind": "verbatim",
+      "text": "C’est un savant, dit la dame, qui ne ponte point, et que l’abbé m’amène quelquefois à souper; il se connaît parfaitement en tragédies et en livres, et il a fait une tragédie sifflée, et un livre dont on n’a jamais vu hors de la boutique de son libraire qu’un exemplaire qu’il m’a dédié.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 286
+      }
+    },
+    {
+      "id": "voltaire.f.v0009",
+      "kind": "verbatim",
+      "text": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "voltaire.f.v0010",
+      "kind": "verbatim",
+      "text": "La dame pleura, se fâcha, s'adoucit; le souper fut plus long que le dîner; on se parla avec plus de confiance.",
+      "work": "Zadig, ou la Destinée, histoire orientale",
+      "lang": "fr",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "voltaire.f.v0011",
+      "kind": "verbatim",
+      "text": "Vous ne rendrez rien, dit Zadig, et vous aurez les trente mille pièces; c'est vous qui aimez le mieux votre père.",
+      "work": "Zadig, ou la Destinée, histoire orientale",
+      "lang": "fr",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      },
+      "quality": {
+        "chars": 113
+      }
+    },
+    {
+      "id": "voltaire.f.v0012",
+      "kind": "verbatim",
+      "text": "Il remarqua surtout que les babouches de sa femme étaient bleues, et que les babouches de Zadig étaient bleues, que les rubans de sa femme étaient jaunes, et que le bonnet de Zadig était jaune; c'étaient là de terribles indices pour un prince délicat.",
+      "work": "Zadig, ou la Destinée, histoire orientale",
+      "lang": "fr",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "voltaire.f.v0013",
+      "kind": "verbatim",
+      "text": "Il se fit présenter à elle; et après s'être insinué dans son esprit par des louanges sur sa beauté, après lui avoir dit combien c'était dommage de mettre au feu tant de charmes, il la loua encore sur sa constance et sur son courage.",
+      "work": "Zadig, ou la Destinée, histoire orientale",
+      "lang": "fr",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "voltaire.f.v0014",
+      "kind": "verbatim",
+      "text": "Il n'osa d'abord en rien témoigner; mais il était dans une étrange surprise.",
+      "work": "Zadig, ou la Destinée, histoire orientale",
+      "lang": "fr",
+      "src": {
+        "work": "Zadig, ou la Destinée, histoire orientale"
+      },
+      "quality": {
+        "chars": 76
+      }
+    },
+    {
+      "id": "voltaire.f.v0015",
+      "kind": "verbatim",
+      "text": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "voltaire.f.v0016",
+      "kind": "verbatim",
+      "text": "On sait trop d'avance que, de quelque manière que les choses soient, l'auteur finira toujours par les admirer.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "voltaire.f.v0017",
+      "kind": "verbatim",
+      "text": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 93
+      }
+    },
+    {
+      "id": "voltaire.f.v0018",
+      "kind": "verbatim",
+      "text": "En sortant de Jupiter, ils traversèrent un espace d'environ cent millions de lieues, et ils côtoyèrent la planète de Mars, qui, comme on sait, est cinq fois plus petite que notre petit globe; ils virent deux lunes qui servent à cette planète, et qui ont échappé aux regards de nos astronomes.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 292
+      }
+    },
+    {
+      "id": "voltaire.f.v0019",
+      "kind": "verbatim",
+      "text": "Le nain, qui jugeait quelquefois un peu trop vite, décida d'abord qu'il n'y avait personne sur la terre.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "voltaire.f.v0020",
+      "kind": "verbatim",
+      "text": "Enfin l'habitant de Saturne vit quelque chose d'imperceptible qui remuait entre deux eaux dans la mer Baltique: c'était une baleine.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "voltaire.f.v0021",
+      "kind": "verbatim",
+      "text": "Quand Leuwenhoek et Hartsoëker virent les premiers ou crurent voir la graine dont nous sommes formés, ils ne firent pas, à beaucoup près, une si étonnante découverte.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "voltaire.f.v0022",
+      "kind": "verbatim",
+      "text": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "voltaire.f.v0023",
+      "kind": "verbatim",
+      "text": "On acheva de vider sa bouteille d’eau des Barbades, et chacun s’alla coucher.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "voltaire.f.v0024",
+      "kind": "verbatim",
+      "text": "Il n’y trouvait pas qu’un seul apôtre se fût confessé, et cela le rendait très rétif.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "voltaire.f.v0025",
+      "kind": "verbatim",
+      "text": "Cependant, comme elle était bien élevée et fort modeste, elle n’osait convenir tout-à-fait avec elle-même de ses tendres sentiments; mais, s’il lui échappait un regard, un mot, un geste, une pensée, elle enveloppait tout cela d’un voile de pudeur infiniment aimable.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "voltaire.f.v0026",
+      "kind": "verbatim",
+      "text": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 312
+      }
+    },
+    {
+      "id": "voltaire.f.v0027",
+      "kind": "verbatim",
+      "text": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "voltaire.f.v0028",
+      "kind": "verbatim",
+      "text": "L’interrogant bailli fit ce jour-là plus de questions qu’il n’en avait fait dans toute la semaine; le mari resta plus sot qu’il ne l’avait jamais été.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "voltaire.f.v0029",
+      "kind": "verbatim",
+      "text": "L’abbé de Saint-Yves pleurait ses torts aux pieds de sa soeur, qui lui pardonnait.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 82
+      }
+    },
+    {
+      "id": "voltaire.f.v0030",
+      "kind": "verbatim",
+      "text": "Il relisait ces promesses signées Saint-Pouange, et les brevets signés Louvois; on lui dépeignit ces deux hommes tels qu’ils étaient, ou qu’on les croyait être.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "voltaire.f.v0031",
+      "kind": "verbatim",
+      "text": "It is therefore demonstrated that in seven hundred and twenty throws, movement alone has been able to put these six principal planets in their order.",
+      "work": "Voltaire's Philosophical Dictionary",
+      "lang": "en",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "voltaire.f.v0032",
+      "kind": "verbatim",
+      "text": "A fakir rears a child who gives much promise; he spends five or six years in driving into his head that the god Fo appeared to men as a white elephant, and he persuades the child that he will be whipped after his death for five hundred thousand years if he does not believe these metamorphoses.",
+      "work": "Voltaire's Philosophical Dictionary",
+      "lang": "en",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
       "id": "voltaire.f.v0033",
+      "kind": "verbatim",
+      "text": "These two hundred verses are very beautiful; so are Milton's; and the total of Masenius' poem, despite these two hundred beautiful verses, is not worth anything at all.",
+      "work": "Voltaire's Philosophical Dictionary",
+      "lang": "en",
+      "src": {
+        "work": "Voltaire's Philosophical Dictionary"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "voltaire.f.v0034",
       "kind": "verbatim",
       "text": "Later he explains in his own way all the texts of Holy Writ by which people have tried to combat this opinion.",
       "work": "Voltaire's Philosophical Dictionary",
@@ -977,7 +998,8 @@
           "anchors": [
             {
               "work": "Candide, ou l'optimisme",
-              "startsWith": "C’est à ce prix que vous mangez du sucre en Euro"
+              "startsWith": "C’est à ce prix que vous mangez du sucre en Euro",
+              "reviewed": true
             }
           ]
         }
@@ -989,7 +1011,7 @@
           "anchors": [
             {
               "work": "Candide, ou l'optimisme",
-              "startsWith": "Enfin une belle prairie entrecoupée de ruisseaux"
+              "startsWith": "Je sais aussi, dit Candide, qu’il faut cultiver notre jardin."
             }
           ]
         }
@@ -1001,7 +1023,8 @@
           "anchors": [
             {
               "work": "Voltaire's Philosophical Dictionary",
-              "startsWith": "But from the manner in which men are made, it wo"
+              "startsWith": "But from the manner in which men are made, it wo",
+              "reviewed": true
             }
           ]
         }
@@ -1077,10 +1100,10 @@
     }
   },
   "stats": {
-    "sentences": 60,
-    "formulas": 34,
-    "verbatim": 33,
+    "sentences": 61,
+    "formulas": 35,
+    "verbatim": 34,
     "patterns": 1
   },
-  "checksum": "sha256:90f5dae52b0c88fe209f5b8de245dcb8988fcbb02e666ef30486ee0ffdb04488"
+  "checksum": "sha256:b5058c05807f70ad6a98d4433fc434fe5082cc10b8bd8e9a91e8c49a2c7536d1"
 }

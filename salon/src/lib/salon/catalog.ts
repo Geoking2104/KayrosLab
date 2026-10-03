@@ -126,7 +126,9 @@ export function buildPersona(author: LiteraryAuthor, patch?: AgentPatch | null) 
     methodLine,
     patch?.note?.trim() ? `Instruction de table : ${patch.note.trim()}` : "",
     sample ? `Échantillon de voix : « ${sample} »` : "Échantillon de voix : corpus mince.",
-    `Empreinte lexicale (${author.stats.words} mots, ${author.stats.distinct} termes) : ${terms}.`,
+    // Retiré (plan de correction v2, D2) : l'empreinte lexicale alourdissait le prompt
+    // sans porter la voix ; voir salon-engine.js, persona().
+    // `Empreinte lexicale (${author.stats.words} mots, ${author.stats.distinct} termes) : ${terms}.`,
   ]
     .filter(Boolean)
     .join("\n");

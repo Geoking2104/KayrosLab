@@ -1,13 +1,13 @@
 {
   "authorId": "montaigne",
   "kbVersion": "montaigne@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T21:23:12.268Z",
+  "builtAt": "2026-10-03T22:22:13.831Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Essais",
-      "sentences": 12
+      "sentences": 13
     },
     {
       "title": "Journal of Travels in Italy",
@@ -18,7 +18,7 @@
     {
       "id": "montaigne.p0001",
       "w": "Essais",
-      "s": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
+      "s": "They had no sooner heard the name of one senator but a great cry of universal dislike was raised up against him.",
       "src": {
         "work": "Essais"
       }
@@ -34,7 +34,7 @@
     {
       "id": "montaigne.p0003",
       "w": "Essais",
-      "s": "At the first twitch of the gout it signifies much to be called Sir and Your Majesty!",
+      "s": "The premeditation of death is the premeditation of liberty; he who has learned to die has unlearned to serve.",
       "src": {
         "work": "Essais"
       }
@@ -42,7 +42,7 @@
     {
       "id": "montaigne.p0004",
       "w": "Essais",
-      "s": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
+      "s": "Is it not to build a wall without stone or brick, or some such thing, to write books without learning and without art?",
       "src": {
         "work": "Essais"
       }
@@ -50,7 +50,7 @@
     {
       "id": "montaigne.p0005",
       "w": "Essais",
-      "s": "Need we a better proof to condemn human impudence in the concern of beasts?",
+      "s": "At the first twitch of the gout it signifies much to be called Sir and Your Majesty!",
       "src": {
         "work": "Essais"
       }
@@ -58,7 +58,7 @@
     {
       "id": "montaigne.p0006",
       "w": "Essais",
-      "s": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
+      "s": "Even so in virtue itself, of two like effects, we notwithstanding look upon that as the fairest and most worthy, wherein the most trouble and hazard are set before us.",
       "src": {
         "work": "Essais"
       }
@@ -66,7 +66,7 @@
     {
       "id": "montaigne.p0007",
       "w": "Essais",
-      "s": "Even so in virtue itself, of two like effects, we notwithstanding look upon that as the fairest and most worthy, wherein the most trouble and hazard are set before us.",
+      "s": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
       "src": {
         "work": "Essais"
       }
@@ -74,7 +74,7 @@
     {
       "id": "montaigne.p0008",
       "w": "Essais",
-      "s": "Such as have had to do with testy and obstinate women, may have experimented into what a rage it puts them to oppose silence and coldness to their fury, and that a man disdains to nourish their anger.",
+      "s": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
       "src": {
         "work": "Essais"
       }
@@ -82,7 +82,7 @@
     {
       "id": "montaigne.p0009",
       "w": "Essais",
-      "s": "Is it not to build a wall without stone or brick, or some such thing, to write books without learning and without art?",
+      "s": "Need we a better proof to condemn human impudence in the concern of beasts?",
       "src": {
         "work": "Essais"
       }
@@ -90,7 +90,7 @@
     {
       "id": "montaigne.p0010",
       "w": "Essais",
-      "s": "We have, peradventure, reason to blame ourselves for being guilty of so foolish a production as man, and to call the act, and the parts that are employed in the act, shameful (mine, truly, are now shameful and pitiful).",
+      "s": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
       "src": {
         "work": "Essais"
       }
@@ -98,7 +98,7 @@
     {
       "id": "montaigne.p0011",
       "w": "Essais",
-      "s": "They had no sooner heard the name of one senator but a great cry of universal dislike was raised up against him.",
+      "s": "Such as have had to do with testy and obstinate women, may have experimented into what a rage it puts them to oppose silence and coldness to their fury, and that a man disdains to nourish their anger.",
       "src": {
         "work": "Essais"
       }
@@ -106,13 +106,21 @@
     {
       "id": "montaigne.p0012",
       "w": "Essais",
-      "s": "And was not the graving of a seal the first and principal cause of the greatest commotion that this machine of the world ever underwent?",
+      "s": "We have, peradventure, reason to blame ourselves for being guilty of so foolish a production as man, and to call the act, and the parts that are employed in the act, shameful (mine, truly, are now shameful and pitiful).",
       "src": {
         "work": "Essais"
       }
     },
     {
       "id": "montaigne.p0013",
+      "w": "Essais",
+      "s": "And was not the graving of a seal the first and principal cause of the greatest commotion that this machine of the world ever underwent?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0014",
       "w": "Journal of Travels in Italy",
       "s": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
       "src": {
@@ -120,7 +128,7 @@
       }
     },
     {
-      "id": "montaigne.p0014",
+      "id": "montaigne.p0015",
       "w": "Journal of Travels in Italy",
       "s": "Disier, towns scattered along the route, and repaired direct by diligence to the baths of Plombières.",
       "src": {
@@ -128,7 +136,7 @@
       }
     },
     {
-      "id": "montaigne.p0015",
+      "id": "montaigne.p0016",
       "w": "Journal of Travels in Italy",
       "s": "This seizure lasted four hours, and while it was on him he felt plainly the working and the movement of the stone in the urethra and the lower part of the stomach.",
       "src": {
@@ -136,7 +144,7 @@
       }
     },
     {
-      "id": "montaigne.p0016",
+      "id": "montaigne.p0017",
       "w": "Journal of Travels in Italy",
       "s": "The body-servants dine either at their master’s table or at one close by, one valet being enough to attend to the high table, seeing that each gentleman has always his own goblet or silver cup beside him, wherefore the servant only needs to fill this as soon as it may be empty, without moving it.",
       "src": {
@@ -144,7 +152,7 @@
       }
     },
     {
-      "id": "montaigne.p0017",
+      "id": "montaigne.p0018",
       "w": "Journal of Travels in Italy",
       "s": "The duke shortly before his death had allied himself with certain of the cantons, an alliance which our king had resisted, alleging that the cantons, being already pledged to him, could incur no fresh obligations without his leave.",
       "src": {
@@ -152,7 +160,7 @@
       }
     },
     {
-      "id": "montaigne.p0018",
+      "id": "montaigne.p0019",
       "w": "Journal of Travels in Italy",
       "s": "Here we again crossed the Rhine by a wooden bridge and, still keeping beside the river on the left, we passed by another small town allied to the Catholic cantons.",
       "src": {
@@ -160,7 +168,7 @@
       }
     },
     {
-      "id": "montaigne.p0019",
+      "id": "montaigne.p0020",
       "w": "Journal of Travels in Italy",
       "s": "In the first place the innkeepers here charge for food at table d’hôte four, five, or six batzen.",
       "src": {
@@ -168,7 +176,7 @@
       }
     },
     {
-      "id": "montaigne.p0020",
+      "id": "montaigne.p0021",
       "w": "Journal of Travels in Italy",
       "s": "They thresh out the corn in the barns as they may want it, using in this work the heavy end of a flail.",
       "src": {
@@ -176,7 +184,7 @@
       }
     },
     {
-      "id": "montaigne.p0021",
+      "id": "montaigne.p0022",
       "w": "Journal of Travels in Italy",
       "s": "We saw more houses belonging to the Foulcres in other parts of the city, which is beholden to this family for the great outlay of money they spend in its adornment.",
       "src": {
@@ -184,7 +192,7 @@
       }
     },
     {
-      "id": "montaigne.p0022",
+      "id": "montaigne.p0023",
       "w": "Journal of Travels in Italy",
       "s": "In the hostelry there is a hot room, in which travellers go to get sweated for a charge of a batz and a half.",
       "src": {
@@ -192,7 +200,7 @@
       }
     },
     {
-      "id": "montaigne.p0023",
+      "id": "montaigne.p0024",
       "w": "Journal of Travels in Italy",
       "s": "Here we had curtains to our beds of thick linen dyed red.",
       "src": {
@@ -200,7 +208,7 @@
       }
     },
     {
-      "id": "montaigne.p0024",
+      "id": "montaigne.p0025",
       "w": "Journal of Travels in Italy",
       "s": "Here at Rovere, greatly to the gratification of M.",
       "src": {
@@ -211,19 +219,6 @@
   "formulas": [
     {
       "id": "montaigne.f.v0001",
-      "kind": "verbatim",
-      "text": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
-      "work": "Essais",
-      "lang": "en",
-      "src": {
-        "work": "Essais"
-      },
-      "quality": {
-        "chars": 247
-      }
-    },
-    {
-      "id": "montaigne.f.v0002",
       "kind": "verbatim",
       "text": "In those other ordinary friendships, you are to walk with bridle in your hand, with prudence and circumspection, for in them the knot is not so sure that a man may not half suspect it will slip.",
       "work": "Essais",
@@ -236,33 +231,20 @@
       }
     },
     {
+      "id": "montaigne.f.v0002",
+      "kind": "verbatim",
+      "text": "Is it not to build a wall without stone or brick, or some such thing, to write books without learning and without art?",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
       "id": "montaigne.f.v0003",
-      "kind": "verbatim",
-      "text": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
-      "work": "Essais",
-      "lang": "en",
-      "src": {
-        "work": "Essais"
-      },
-      "quality": {
-        "chars": 232
-      }
-    },
-    {
-      "id": "montaigne.f.v0004",
-      "kind": "verbatim",
-      "text": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
-      "work": "Essais",
-      "lang": "en",
-      "src": {
-        "work": "Essais"
-      },
-      "quality": {
-        "chars": 124
-      }
-    },
-    {
-      "id": "montaigne.f.v0005",
       "kind": "verbatim",
       "text": "Even so in virtue itself, of two like effects, we notwithstanding look upon that as the fairest and most worthy, wherein the most trouble and hazard are set before us.",
       "work": "Essais",
@@ -275,7 +257,46 @@
       }
     },
     {
+      "id": "montaigne.f.v0004",
+      "kind": "verbatim",
+      "text": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "montaigne.f.v0005",
+      "kind": "verbatim",
+      "text": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
       "id": "montaigne.f.v0006",
+      "kind": "verbatim",
+      "text": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "montaigne.f.v0007",
       "kind": "verbatim",
       "text": "Such as have had to do with testy and obstinate women, may have experimented into what a rage it puts them to oppose silence and coldness to their fury, and that a man disdains to nourish their anger.",
       "work": "Essais",
@@ -288,7 +309,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0007",
+      "id": "montaigne.f.v0008",
       "kind": "verbatim",
       "text": "We have, peradventure, reason to blame ourselves for being guilty of so foolish a production as man, and to call the act, and the parts that are employed in the act, shameful (mine, truly, are now shameful and pitiful).",
       "work": "Essais",
@@ -301,7 +322,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0008",
+      "id": "montaigne.f.v0009",
       "kind": "verbatim",
       "text": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
       "work": "Journal of Travels in Italy",
@@ -314,7 +335,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0009",
+      "id": "montaigne.f.v0010",
       "kind": "verbatim",
       "text": "This seizure lasted four hours, and while it was on him he felt plainly the working and the movement of the stone in the urethra and the lower part of the stomach.",
       "work": "Journal of Travels in Italy",
@@ -327,7 +348,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0010",
+      "id": "montaigne.f.v0011",
       "kind": "verbatim",
       "text": "The body-servants dine either at their master’s table or at one close by, one valet being enough to attend to the high table, seeing that each gentleman has always his own goblet or silver cup beside him, wherefore the servant only needs to fill this as soon as it may be empty, without moving it.",
       "work": "Journal of Travels in Italy",
@@ -340,7 +361,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0011",
+      "id": "montaigne.f.v0012",
       "kind": "verbatim",
       "text": "The duke shortly before his death had allied himself with certain of the cantons, an alliance which our king had resisted, alleging that the cantons, being already pledged to him, could incur no fresh obligations without his leave.",
       "work": "Journal of Travels in Italy",
@@ -353,7 +374,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0012",
+      "id": "montaigne.f.v0013",
       "kind": "verbatim",
       "text": "Here we again crossed the Rhine by a wooden bridge and, still keeping beside the river on the left, we passed by another small town allied to the Catholic cantons.",
       "work": "Journal of Travels in Italy",
@@ -366,7 +387,7 @@
       }
     },
     {
-      "id": "montaigne.f.v0013",
+      "id": "montaigne.f.v0014",
       "kind": "verbatim",
       "text": "We saw more houses belonging to the Foulcres in other parts of the city, which is beholden to this family for the great outlay of money they spend in its adornment.",
       "work": "Journal of Travels in Italy",
@@ -424,12 +445,12 @@
       },
       "liberte": {
         "*": {
-          "fr": "la liberté est dans le jugement qu’on garde : même devant les puissants, on peut questionner",
-          "en": "liberty lies in the judgement one keeps: even before the powerful, one may question",
+          "fr": "la liberté s'apprend par la pensée de la mort : qui a appris à mourir a désappris de servir",
+          "en": "liberty is learned by thinking on death: he who has learned to die has unlearned to serve",
           "anchors": [
             {
-              "work": "Journal of Travels in Italy",
-              "startsWith": "He met the Pope (Gregory XIII.), the Grand Duke "
+              "work": "Essais",
+              "startsWith": "The premeditation of death is the premeditation of liberty; he who has learned to die has unlearned to serve."
             }
           ]
         }
@@ -453,7 +474,8 @@
           "anchors": [
             {
               "work": "Essais",
-              "startsWith": "At the first twitch of the gout it signifies muc"
+              "startsWith": "At the first twitch of the gout it signifies muc",
+              "reviewed": true
             }
           ]
         }
@@ -496,10 +518,10 @@
     }
   },
   "stats": {
-    "sentences": 24,
-    "formulas": 13,
-    "verbatim": 13,
+    "sentences": 25,
+    "formulas": 14,
+    "verbatim": 14,
     "patterns": 0
   },
-  "checksum": "sha256:5dc0bd273687760ffba00fdc3477ee4fde6499c817771ff02e4ce0af932d984c"
+  "checksum": "sha256:bfc12415e034750a05d47349096ccaddd99944c5778735878747f1cd6734d4ca"
 }

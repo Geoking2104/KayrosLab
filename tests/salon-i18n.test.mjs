@@ -33,7 +33,7 @@ test('engine i18n : en anglais, la réplique est anglaise (citation d’origine 
   });
   assert.ok(out.text && out.text.length > 60);
   assert.match(out.text, /The host asks|I take up your point/);
-  assert.match(out.text, /I keep it as the thread/);
+  assert.match(out.text, /My claim, on this point/);
   assert.doesNotMatch(out.text, /L’hôte demande|Je le garde pour fil|Voilà ce que je signe|Ma prise, sur ce point/);
   assert.ok(out.prise && out.prise.length > 3);
 });
@@ -46,7 +46,7 @@ test('engine i18n : le français ne bouge pas (gabarit identique)', () => {
     lang: 'fr',
   });
   assert.match(out.text, /L’hôte demande : /);
-  assert.match(out.text, /Je le garde pour fil/);
+  assert.match(out.text, /Ma prise, sur ce point/);
   assert.match(out.text, /Voilà ce que je signe|Ce qui reste à décider/);
   assert.doesNotMatch(out.text, /The host asks|I keep it as the thread/);
 });

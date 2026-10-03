@@ -23,6 +23,7 @@ on:
       - 'tests/sales-oracle-site.test.mjs'
       - 'tests/timesfm-site.test.mjs'
       - 'tests/console-pages-deploy.test.mjs'
+      - 'tests/salon-*.test.mjs'
       - 'cycle-timeline.html'
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
@@ -61,7 +62,9 @@ jobs:
             frontend/console-app/package-lock.json
       - name: Validate public demo JavaScript and CTA wiring
         continue-on-error: true
-        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs tests/salon-engine.test.mjs tests/salon-copy.test.mjs tests/salon-responsive.test.mjs tests/salon-openkb.test.mjs tests/salon-gazette.test.mjs tests/salon-i18n.test.mjs tests/salon-prompt-wire.test.mjs tests/salon-doctrine.test.mjs tests/salon-grounding.test.mjs
+        run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
+      - name: Salon tests (bloquant)
+        run: node --test tests/salon-engine.test.mjs tests/salon-copy.test.mjs tests/salon-responsive.test.mjs tests/salon-openkb.test.mjs tests/salon-gazette.test.mjs tests/salon-i18n.test.mjs tests/salon-prompt-wire.test.mjs tests/salon-doctrine.test.mjs tests/salon-grounding.test.mjs tests/salon-prompt-anchor.test.mjs tests/salon-doctrine-coverage.test.mjs
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
         run: |

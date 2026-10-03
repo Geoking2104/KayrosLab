@@ -201,19 +201,10 @@
       try {
         var body = opts.body ? JSON.parse(opts.body) : {};
         var sys = String(body.system || "");
-        var who = "";
-        var m = sys.match(/Tu es ([^.]+)\./);
-        if (m) {
-          var name = m[1];
-          who = seatedIds().find(function (id) { return nameOf(id).indexOf(name) === 0 || name.indexOf(nameOf(id)) === 0; }) || "";
-        }
-        var ctx = contextJSON(who);
-        if (!validContext(ctx)) ctx = sanitizeContext({});
         // Bornes = demoChatSchema (backend/fastify/routes/llm.mjs:42-45), avec marge.
         // Ne PAS utiliser clip() ici : il écrase les \n et casse PRISE:/REPLIQUE:.
         body.system = clipRaw(sys, 3800);
         body.user = clipRaw(String(body.user || ""), 5800);
-        body.context = ctx; // ignoré par le backend aujourd'hui (voir pièges)
         opts = Object.assign({}, opts, { body: JSON.stringify(body) });
       } catch (e) {}
       return orig(url, opts);
