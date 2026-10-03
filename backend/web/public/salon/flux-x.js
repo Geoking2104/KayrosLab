@@ -196,9 +196,11 @@
       if (binding && binding.handle) {
         b.textContent = t("bound") + " @" + binding.handle;
         b.setAttribute("data-bound", "1");
+        b.setAttribute("data-handle", binding.handle);
       } else {
         b.textContent = t("bind");
         b.removeAttribute("data-bound");
+        b.removeAttribute("data-handle");
       }
     }
     if (token()) {
@@ -294,6 +296,18 @@
     });
   }
 
+  function refreshCopy() {
+    /* Après une bascule de langue du Salon : les libellés créés ici suivent, sans mélange. */
+    var b = document.querySelector("[data-fx-bind]");
+    if (b) {
+      var h = b.getAttribute("data-handle");
+      if (b.getAttribute("data-bound") && h) b.textContent = t("bound") + " @" + h;
+      else b.textContent = t("bind");
+    }
+    var g = document.querySelector("[data-flux-x]");
+    if (g) g.textContent = t("gazette");
+  }
+
   function run() {
     style();
     if (handleCallback()) return;
@@ -302,6 +316,18 @@
     watchCompose();
     attachWhispers();
     gazette();
+    if (!document.__fxLangHook) {
+      document.__fxLangHook = 1;
+      document.addEventListener("click", function (e) {
+        var el = e && e.target;
+        var inLang = false;
+        while (el && el !== document) {
+          if (el.className && String(el.className).split(/\s+/).indexOf("lang") !== -1) { inLang = true; break; }
+          el = el.parentNode;
+        }
+        if (inLang) setTimeout(refreshCopy, 80);
+      });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);

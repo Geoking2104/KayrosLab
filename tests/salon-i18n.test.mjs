@@ -58,4 +58,7 @@ test('i18n : mémoire compilée et pupitre suivent la langue stockée, sans mél
   const desk = readFileSync(new URL('backend/web/public/salon/gazette-desk.js', root), 'utf8');
   assert.match(desk, /applyCopy\(\)/, 'le pupitre applique sa copie à l’amorçage');
   assert.match(desk, /locale\(\)/, 'le pupitre suit la langue de la session');
+  const fx = readFileSync(new URL('backend/web/public/salon/flux-x.js', root), 'utf8');
+  assert.match(fx, /refreshCopy/, 'les libellés créés par flux-x se rafraîchissent à la bascule');
+  assert.match(fx, /data-handle/, 'l’état lié est conservé pour la re-traduction');
 });
