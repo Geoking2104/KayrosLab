@@ -9,6 +9,7 @@
   "use strict";
   var CFG = (typeof window !== "undefined" && window.SALON_KB_CONFIG) || {};
   function lang() {
+    try { var s = localStorage.getItem("salon-locale"); if (s === "en" || s === "fr") return s; } catch (e) {}
     var l = (document.documentElement.getAttribute("lang") || "fr");
     return l.slice(0, 2) === "en" ? "en" : "fr";
   }
@@ -87,5 +88,15 @@
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", paint);
     else paint();
+    /* La bascule de langue du Salon recharge ses textes : la mémoire suit, sans mélange. */
+    document.addEventListener("click", function (e) {
+      var el = e && e.target;
+      var inLang = false;
+      while (el && el !== document) {
+        if (el.className && String(el.className).split(/\s+/).indexOf("lang") !== -1) { inLang = true; break; }
+        el = el.parentNode;
+      }
+      if (inLang) setTimeout(paint, 80);
+    });
   }
 })();

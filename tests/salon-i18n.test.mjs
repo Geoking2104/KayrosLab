@@ -50,3 +50,12 @@ test('engine i18n : le français ne bouge pas (gabarit identique)', () => {
   assert.match(out.text, /Voilà ce que je signe|Ce qui reste à décider/);
   assert.doesNotMatch(out.text, /The host asks|I keep it as the thread/);
 });
+
+test('i18n : mémoire compilée et pupitre suivent la langue stockée, sans mélange', () => {
+  const kb = readFileSync(new URL('backend/web/public/salon/salon-kb.js', root), 'utf8');
+  assert.match(kb, /salon-locale/, 'la pastille mémoire lit salon-locale');
+  assert.match(kb, /setTimeout\(paint, 80\)/, 'la pastille se repeint après la bascule de langue');
+  const desk = readFileSync(new URL('backend/web/public/salon/gazette-desk.js', root), 'utf8');
+  assert.match(desk, /applyCopy\(\)/, 'le pupitre applique sa copie à l’amorçage');
+  assert.match(desk, /locale\(\)/, 'le pupitre suit la langue de la session');
+});
