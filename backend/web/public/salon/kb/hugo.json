@@ -1,21 +1,29 @@
 {
   "authorId": "hugo",
   "kbVersion": "hugo@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.208Z",
+  "builtAt": "2026-10-03T21:23:12.394Z",
   "source": "bootstrap-corpus",
-  "lang": "en",
+  "lang": "fr",
   "works": [
     {
       "title": "Les Misérables",
-      "sentences": 14
+      "sentences": 12
     },
     {
       "title": "Notre-Dame de Paris",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "Quatrevingt-Treize",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Toilers of the sea",
+      "sentences": 12
+    },
+    {
+      "title": "The Man Who Laughs: A Romance of English History",
+      "sentences": 12
     }
   ],
   "passages": [
@@ -30,7 +38,7 @@
     {
       "id": "hugo.p0002",
       "w": "Les Misérables",
-      "s": "Madeleine raised his head, met Javert’s falcon eye still fixed upon him, looked at the motionless peasants, and smiled sadly.",
+      "s": "Madeleine made an imperceptible movement.",
       "src": {
         "work": "Les Misérables"
       }
@@ -38,7 +46,7 @@
     {
       "id": "hugo.p0003",
       "w": "Les Misérables",
-      "s": "When he arrived there he turned and said to Javert, in a voice that was barely audible:— “I advise you not to disturb me at this moment.” One thing is certain, and that is, that Javert trembled.",
+      "s": "Had he reached the point where he could no longer recognize the reef, could no longer divine the snare, no longer discern the crumbling brink of abysses?",
       "src": {
         "work": "Les Misérables"
       }
@@ -46,7 +54,7 @@
     {
       "id": "hugo.p0004",
       "w": "Les Misérables",
-      "s": "A lie wedded 1789; the right divine was masked under a charter; fictions became constitutional; prejudices, superstitions and mental reservations, with Article 14 in the heart, were varnished over with liberalism.",
+      "s": "Madame Thénardier, petrified and mute, recommenced her conjectures: “Who is that old fellow?",
       "src": {
         "work": "Les Misérables"
       }
@@ -54,7 +62,7 @@
     {
       "id": "hugo.p0005",
       "w": "Les Misérables",
-      "s": "As he had guessed, there stood a building whose roof started from the top of the wooden barricade and descended to within a very short distance of the ground, with a gentle slope which grazed the linden-tree.",
+      "s": "One of these refugees found herself almost at home.",
       "src": {
         "work": "Les Misérables"
       }
@@ -62,7 +70,7 @@
     {
       "id": "hugo.p0006",
       "w": "Les Misérables",
-      "s": "Philosophy should be an energy; it should have for effort and effect to ameliorate the condition of man.",
+      "s": "She had a chapel friend, an ancient virgin like herself, named Mademoiselle Vaubois, who was a positive blockhead, and beside whom Mademoiselle Gillenormand had the pleasure of being an eagle.",
       "src": {
         "work": "Les Misérables"
       }
@@ -70,7 +78,7 @@
     {
       "id": "hugo.p0007",
       "w": "Les Misérables",
-      "s": "While carrying Marius’ “duds” precipitately to his chamber, at his grandfather’s command, Nicolette had, inadvertently, let fall, probably, on the attic staircase, which was dark, that medallion of black shagreen which contained the paper penned by the colonel.",
+      "s": "One was the bearded old woman who swept out his chamber, and caused Courfeyrac to say: “Seeing that his servant woman wears his beard, Marius does not wear his own beard.” The other was a sort of little girl whom he saw very often, and whom he never looked at.",
       "src": {
         "work": "Les Misérables"
       }
@@ -78,7 +86,7 @@
     {
       "id": "hugo.p0008",
       "w": "Les Misérables",
-      "s": "In truth, he would have been very much amazed if he had been informed that they were women.",
+      "s": "Leblanc with a horrible look, and spit out these words:— “Done for!",
       "src": {
         "work": "Les Misérables"
       }
@@ -86,7 +94,7 @@
     {
       "id": "hugo.p0009",
       "w": "Les Misérables",
-      "s": "Thénardier rapidly unfolded the paper and held it close to the candle.",
+      "s": "She did not know whether it was a good thing or a bad thing, useful or dangerous, eternal or temporary, allowable or prohibited; she loved.",
       "src": {
         "work": "Les Misérables"
       }
@@ -94,7 +102,7 @@
     {
       "id": "hugo.p0010",
       "w": "Les Misérables",
-      "s": "This was all that could be seen by passers-by; but behind the pavilion there was a narrow courtyard, and at the end of the courtyard a low building consisting of two rooms and a cellar, a sort of preparation destined to conceal a child and nurse in case of need.",
+      "s": "In the meantime, let there be no halt, no hesitation, no pause in the grandiose onward march of minds.",
       "src": {
         "work": "Les Misérables"
       }
@@ -102,7 +110,7 @@
     {
       "id": "hugo.p0011",
       "w": "Les Misérables",
-      "s": "Aided by science, which comes from one man, and by the event, which comes from another, it is not greatly alarmed by these contradictions in the attitude of problems, which seem impossibilities to the vulgar herd.",
+      "s": "There were a great many guns bearing the numbers of the legions, few hats, no cravats, many bare arms, some pikes.",
       "src": {
         "work": "Les Misérables"
       }
@@ -110,31 +118,31 @@
     {
       "id": "hugo.p0012",
       "w": "Les Misérables",
-      "s": "The hearse passed the Bastille, traversed the small bridge, and reached the esplanade of the bridge of Austerlitz.",
+      "s": "At the same moment, he pressed the trigger of his rifle.",
       "src": {
         "work": "Les Misérables"
       }
     },
     {
       "id": "hugo.p0013",
-      "w": "Les Misérables",
-      "s": "I know well that courage is required to leave, that it is hard; but the harder it is, the more meritorious.",
+      "w": "Notre-Dame de Paris",
+      "s": "But may the devil flay me if I understand what they mean with their Esmeralda!",
       "src": {
-        "work": "Les Misérables"
+        "work": "Notre-Dame de Paris"
       }
     },
     {
       "id": "hugo.p0014",
-      "w": "Les Misérables",
-      "s": "God is dead, perhaps,” said Gerard de Nerval one day to the writer of these lines, confounding progress with God, and taking the interruption of movement for the death of Being.",
+      "w": "Notre-Dame de Paris",
+      "s": "The young girl did not appear to pay any attention to him; she went and came, displaced a stool, talked to her goat, and indulged in a pout now and then.",
       "src": {
-        "work": "Les Misérables"
+        "work": "Notre-Dame de Paris"
       }
     },
     {
       "id": "hugo.p0015",
       "w": "Notre-Dame de Paris",
-      "s": "Upon my soul,” resumed Gringoire, “I certainly do behold the blind who see, and the lame who walk, but where is the Saviour?” They replied by a burst of sinister laughter.",
+      "s": "In fact, Claude Frollo was no common person.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -142,7 +150,7 @@
     {
       "id": "hugo.p0016",
       "w": "Notre-Dame de Paris",
-      "s": "I do not know how I passed the interval from six to sixteen.",
+      "s": "In its printed form, thought is more imperishable than ever; it is volatile, irresistible, indestructible.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -150,7 +158,7 @@
     {
       "id": "hugo.p0017",
       "w": "Notre-Dame de Paris",
-      "s": "The archdeacon had in Quasimodo the most submissive slave, the most docile lackey, the most vigilant of dogs.",
+      "s": "Gervaise looked after Oudarde, and then the three women, gazing upon the unhappy mother, began to weep.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -158,7 +166,7 @@
     {
       "id": "hugo.p0018",
       "w": "Notre-Dame de Paris",
-      "s": "In its printed form, thought is more imperishable than ever; it is volatile, irresistible, indestructible.",
+      "s": "The old church, all vibrating and sonorous, was in a perpetual joy of bells.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -166,7 +174,7 @@
     {
       "id": "hugo.p0019",
       "w": "Notre-Dame de Paris",
-      "s": "Two lackeys of the official torturer bathed the bleeding shoulders of the patient, anointed them with some unguent which immediately closed all the wounds, and threw upon his back a sort of yellow vestment, in cut like a chasuble.",
+      "s": "Had it not been for the flame which burned in her cheeks, at the sight of her so silent and motionless, one would have declared her a statue of Modesty.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -174,7 +182,7 @@
     {
       "id": "hugo.p0020",
       "w": "Notre-Dame de Paris",
-      "s": "It was a fixed gaze, which was, nevertheless, full of trouble and tumult.",
+      "s": "The shoe shows all this to the mother, and makes her heart melt as fire melts wax.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -182,7 +190,7 @@
     {
       "id": "hugo.p0021",
       "w": "Notre-Dame de Paris",
-      "s": "Had it not been for the flame which burned in her cheeks, at the sight of her so silent and motionless, one would have declared her a statue of Modesty.",
+      "s": "He raised his suppliant eye, and seeing that she was leading him back to her quarters, his whole face beamed with joy and tenderness.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -190,7 +198,7 @@
     {
       "id": "hugo.p0022",
       "w": "Notre-Dame de Paris",
-      "s": "She had recognized the fact that all around her was wall, that below her there was a pavement covered with moisture and a truss of straw; but neither lamp nor air-hole.",
+      "s": "What means of safety have you found, knave?",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -198,7 +206,7 @@
     {
       "id": "hugo.p0023",
       "w": "Notre-Dame de Paris",
-      "s": "Oh!” he said in a very low tone, “she must be cold now.” All at once, a gust of wind extinguished his lamp, and almost at the same instant, he beheld a shade, a whiteness, a form, a woman, appear from the opposite angle of the tower.",
+      "s": "Hence, Master Olivier, consider this said once for all.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
@@ -206,37 +214,13 @@
     {
       "id": "hugo.p0024",
       "w": "Notre-Dame de Paris",
-      "s": "I could not find him,” said Quasimodo coldly.",
+      "s": "He clasped the goat in his arms, and gently drew away from the gypsy, who pressed closer and closer to him, as though to the only asylum which remained to her.",
       "src": {
         "work": "Notre-Dame de Paris"
       }
     },
     {
       "id": "hugo.p0025",
-      "w": "Notre-Dame de Paris",
-      "s": "During this time, since the stones no longer fell, the outcasts ceased to gaze into the air.",
-      "src": {
-        "work": "Notre-Dame de Paris"
-      }
-    },
-    {
-      "id": "hugo.p0026",
-      "w": "Notre-Dame de Paris",
-      "s": "They are knaves from the Cour-des-Miracles.",
-      "src": {
-        "work": "Notre-Dame de Paris"
-      }
-    },
-    {
-      "id": "hugo.p0027",
-      "w": "Notre-Dame de Paris",
-      "s": "When we are in the country, we will place these little shoes on an infant Jesus in the church.",
-      "src": {
-        "work": "Notre-Dame de Paris"
-      }
-    },
-    {
-      "id": "hugo.p0028",
       "w": "Quatrevingt-Treize",
       "s": "Mais, comme l'avait dit le pilote, il y avait du flot.",
       "src": {
@@ -244,23 +228,23 @@
       }
     },
     {
-      "id": "hugo.p0029",
+      "id": "hugo.p0026",
       "w": "Quatrevingt-Treize",
-      "s": "Il était évidemment inutile de s'attarder sur ce sommet éclairé.",
+      "s": "Il semblait chercher une route dans un pays d'ailleurs connu.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
     },
     {
-      "id": "hugo.p0030",
+      "id": "hugo.p0027",
       "w": "Quatrevingt-Treize",
-      "s": "C'étaient ces Parisiens qui, la veille encore, étaient là tous vivants, et tenaient garnison dans la ferme d'Herbe-en-Pail.",
+      "s": "Dans une visite domiciliaire que fit la section Antoine chez Beaumarchais, une femme cueillit dans le jardin une fleur; le peuple la souffleta.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
     },
     {
-      "id": "hugo.p0031",
+      "id": "hugo.p0028",
       "w": "Quatrevingt-Treize",
       "s": "Le rire, éclair de Danton, et le sourire, piqûre de Marat, lui manquaient.",
       "src": {
@@ -268,9 +252,33 @@
       }
     },
     {
+      "id": "hugo.p0029",
+      "w": "Quatrevingt-Treize",
+      "s": "Les têtes ondulaient, épouvantées et terribles.",
+      "src": {
+        "work": "Quatrevingt-Treize"
+      }
+    },
+    {
+      "id": "hugo.p0030",
+      "w": "Quatrevingt-Treize",
+      "s": "Alors cela a fait un bataillon terrible.",
+      "src": {
+        "work": "Quatrevingt-Treize"
+      }
+    },
+    {
+      "id": "hugo.p0031",
+      "w": "Quatrevingt-Treize",
+      "s": "Ce matin-là elle était forte, elle pouvait presque marcher seule; une cure, c'est une paternité, et Tellmarch la regardait, heureux.",
+      "src": {
+        "work": "Quatrevingt-Treize"
+      }
+    },
+    {
       "id": "hugo.p0032",
       "w": "Quatrevingt-Treize",
-      "s": "Il fallut deux mois pour vider les Tuileries.",
+      "s": "Les républicains de Metz et les républicains du Midi demandaient à marcher contre les rebelles.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
@@ -278,7 +286,7 @@
     {
       "id": "hugo.p0033",
       "w": "Quatrevingt-Treize",
-      "s": "LA VENDÉE A FINI LA BRETAGNE La Bretagne est une vieille rebelle.",
+      "s": "Cependant le soir venait, la chaleur augmentait, la sieste était dans l'air, les yeux de Georgette devenaient vagues, René-Jean alla à son berceau, en tira le sac de paille qui lui tenait lieu de matelas, le traîna jusqu'à la fenêtre, s'allongea dessus et dit:--Couchons-nous.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
@@ -286,7 +294,7 @@
     {
       "id": "hugo.p0034",
       "w": "Quatrevingt-Treize",
-      "s": "Bien que difficile à étonner, il fut stupéfait.",
+      "s": "C'est un des droits de la responsabilité.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
@@ -294,7 +302,7 @@
     {
       "id": "hugo.p0035",
       "w": "Quatrevingt-Treize",
-      "s": "Romaine, elle l'était même un peu, car elle était romane.",
+      "s": "Cependant il était temps de s'en aller, Halmalo devait être loin, et le marquis jugea qu'il n'était pas nécessaire de rester là plus longtemps.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
@@ -302,41 +310,201 @@
     {
       "id": "hugo.p0036",
       "w": "Quatrevingt-Treize",
-      "s": "Les noms de ces dix-neuf assiégés peuvent être retrouvés par l'histoire dans les affiches de mise hors la loi.",
+      "s": "Rien à faire en effet avec cet homme, que le tuer ou le délivrer.",
       "src": {
         "work": "Quatrevingt-Treize"
       }
     },
     {
       "id": "hugo.p0037",
-      "w": "Quatrevingt-Treize",
-      "s": "Puisque c'est lui qui nous a rencontrés dans un bois.",
+      "w": "Toilers of the sea",
+      "s": "The tide gathers at first insensibly, then with violence; when it touches the rocks a sudden wrath seems to possess it, and it foams.",
       "src": {
-        "work": "Quatrevingt-Treize"
+        "work": "Toilers of the sea"
       }
     },
     {
       "id": "hugo.p0038",
-      "w": "Quatrevingt-Treize",
-      "s": "C'est un des droits de la responsabilité.",
+      "w": "Toilers of the sea",
+      "s": "As the services are at the same hours, one bell summonses both denominations to prayers; it rings, in fact, both for God and for Satan, according as each pleases to regard it.",
       "src": {
-        "work": "Quatrevingt-Treize"
+        "work": "Toilers of the sea"
       }
     },
     {
       "id": "hugo.p0039",
-      "w": "Quatrevingt-Treize",
-      "s": "Rien de souverain comme l'éclair de ses yeux noyés de larmes; son regard foudroyait l'incendie.",
+      "w": "Toilers of the sea",
+      "s": "This door, too, is walled in, as are also the two windows of the ground-floor.",
       "src": {
-        "work": "Quatrevingt-Treize"
+        "work": "Toilers of the sea"
       }
     },
     {
       "id": "hugo.p0040",
-      "w": "Quatrevingt-Treize",
-      "s": "Ainsi, cet homme, pour trois enfants, les siens?",
+      "w": "Toilers of the sea",
+      "s": "You are to pay Zuela for your passage ten thousand francs.",
       "src": {
-        "work": "Quatrevingt-Treize"
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0041",
+      "w": "Toilers of the sea",
+      "s": "He had lived like a bandit in the disguise of an honest citizen.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0042",
+      "w": "Toilers of the sea",
+      "s": "As his pastor, it was his right and duty to offer counsel.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0043",
+      "w": "Toilers of the sea",
+      "s": "There was still the difficulty of the upper end of the cord.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0044",
+      "w": "Toilers of the sea",
+      "s": "Then he returned to the Durande and measured the diameter of the floor of the engine-room.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0045",
+      "w": "Toilers of the sea",
+      "s": "XI A WORD TO THE WISE IS ENOUGH A feeble, indistinct sound seemed to reach his ear from somewhere in the far distance.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0046",
+      "w": "Toilers of the sea",
+      "s": "It came from the direction of the sloop.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0047",
+      "w": "Toilers of the sea",
+      "s": "She had been making water gradually during his absence.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0048",
+      "w": "Toilers of the sea",
+      "s": "With a rough and primitive nature, this truth is even more applicable.",
+      "src": {
+        "work": "Toilers of the sea"
+      }
+    },
+    {
+      "id": "hugo.p0049",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "That which was before the child was a thing of which care was taken: the man was evidently precious.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0050",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "The appearance of the lighthouse raised their spirits at first, then overwhelmed them.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0051",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "He was no longer in the village; he was in the city.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0052",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "They were rivals, besides, in literature.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0053",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "Being of a different species from you, and at an inaccessible height above you, they are affable.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0054",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "It happened sometimes, in the year 1704, that as night fell on some little village on the coast, a great, heavy van, drawn by a pair of stout horses, made its entry.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0055",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "Therefore it is that we are prone to wander out in the night, without an object.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0056",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "Dea was standing in the half-open doorway.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0057",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "He had had the delight of being the first to taste the contents of Hardquanonne’s flask.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0058",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "A vague glimmering is now and then to be perceived through solid and sombre piles of building.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0059",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "He could not escape from their influence.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      }
+    },
+    {
+      "id": "hugo.p0060",
+      "w": "The Man Who Laughs: A Romance of English History",
+      "s": "There, in the mines, are men who chew coals to fill their stomachs and deceive hunger.",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
       }
     }
   ],
@@ -344,111 +512,98 @@
     {
       "id": "hugo.f.v0001",
       "kind": "verbatim",
-      "text": "Madeleine raised his head, met Javert’s falcon eye still fixed upon him, looked at the motionless peasants, and smiled sadly.",
+      "text": "The city of Paris was having the dome of the Invalides regilded at its own expense.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 125
+        "chars": 83
       }
     },
     {
       "id": "hugo.f.v0002",
       "kind": "verbatim",
-      "text": "When he arrived there he turned and said to Javert, in a voice that was barely audible:— “I advise you not to disturb me at this moment.” One thing is certain, and that is, that Javert trembled.",
+      "text": "Had he reached the point where he could no longer recognize the reef, could no longer divine the snare, no longer discern the crumbling brink of abysses?",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 194
+        "chars": 153
       }
     },
     {
       "id": "hugo.f.v0003",
       "kind": "verbatim",
-      "text": "A lie wedded 1789; the right divine was masked under a charter; fictions became constitutional; prejudices, superstitions and mental reservations, with Article 14 in the heart, were varnished over with liberalism.",
+      "text": "Madame Thénardier, petrified and mute, recommenced her conjectures: “Who is that old fellow?",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 213
+        "chars": 92
       }
     },
     {
       "id": "hugo.f.v0004",
       "kind": "verbatim",
-      "text": "As he had guessed, there stood a building whose roof started from the top of the wooden barricade and descended to within a very short distance of the ground, with a gentle slope which grazed the linden-tree.",
+      "text": "She had a chapel friend, an ancient virgin like herself, named Mademoiselle Vaubois, who was a positive blockhead, and beside whom Mademoiselle Gillenormand had the pleasure of being an eagle.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 208
+        "chars": 192
       }
     },
     {
       "id": "hugo.f.v0005",
       "kind": "verbatim",
-      "text": "Philosophy should be an energy; it should have for effort and effect to ameliorate the condition of man.",
+      "text": "One was the bearded old woman who swept out his chamber, and caused Courfeyrac to say: “Seeing that his servant woman wears his beard, Marius does not wear his own beard.” The other was a sort of little girl whom he saw very often, and whom he never looked at.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 104
+        "chars": 260
       }
     },
     {
       "id": "hugo.f.v0006",
       "kind": "verbatim",
-      "text": "While carrying Marius’ “duds” precipitately to his chamber, at his grandfather’s command, Nicolette had, inadvertently, let fall, probably, on the attic staircase, which was dark, that medallion of black shagreen which contained the paper penned by the colonel.",
+      "text": "She did not know whether it was a good thing or a bad thing, useful or dangerous, eternal or temporary, allowable or prohibited; she loved.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 261
+        "chars": 139
       }
     },
     {
       "id": "hugo.f.v0007",
       "kind": "verbatim",
-      "text": "This was all that could be seen by passers-by; but behind the pavilion there was a narrow courtyard, and at the end of the courtyard a low building consisting of two rooms and a cellar, a sort of preparation destined to conceal a child and nurse in case of need.",
+      "text": "In the meantime, let there be no halt, no hesitation, no pause in the grandiose onward march of minds.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
         "work": "Les Misérables"
       },
       "quality": {
-        "chars": 262
+        "chars": 102
       }
     },
     {
       "id": "hugo.f.v0008",
       "kind": "verbatim",
-      "text": "Aided by science, which comes from one man, and by the event, which comes from another, it is not greatly alarmed by these contradictions in the attitude of problems, which seem impossibilities to the vulgar herd.",
-      "work": "Les Misérables",
-      "lang": "en",
-      "src": {
-        "work": "Les Misérables"
-      },
-      "quality": {
-        "chars": 213
-      }
-    },
-    {
-      "id": "hugo.f.v0009",
-      "kind": "verbatim",
-      "text": "The hearse passed the Bastille, traversed the small bridge, and reached the esplanade of the bridge of Austerlitz.",
+      "text": "There were a great many guns bearing the numbers of the legions, few hats, no cravats, many bare arms, some pikes.",
       "work": "Les Misérables",
       "lang": "en",
       "src": {
@@ -459,59 +614,20 @@
       }
     },
     {
+      "id": "hugo.f.v0009",
+      "kind": "verbatim",
+      "text": "The young girl did not appear to pay any attention to him; she went and came, displaced a stool, talked to her goat, and indulged in a pout now and then.",
+      "work": "Notre-Dame de Paris",
+      "lang": "en",
+      "src": {
+        "work": "Notre-Dame de Paris"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
       "id": "hugo.f.v0010",
-      "kind": "verbatim",
-      "text": "I know well that courage is required to leave, that it is hard; but the harder it is, the more meritorious.",
-      "work": "Les Misérables",
-      "lang": "en",
-      "src": {
-        "work": "Les Misérables"
-      },
-      "quality": {
-        "chars": 107
-      }
-    },
-    {
-      "id": "hugo.f.v0011",
-      "kind": "verbatim",
-      "text": "God is dead, perhaps,” said Gerard de Nerval one day to the writer of these lines, confounding progress with God, and taking the interruption of movement for the death of Being.",
-      "work": "Les Misérables",
-      "lang": "en",
-      "src": {
-        "work": "Les Misérables"
-      },
-      "quality": {
-        "chars": 177
-      }
-    },
-    {
-      "id": "hugo.f.v0012",
-      "kind": "verbatim",
-      "text": "Upon my soul,” resumed Gringoire, “I certainly do behold the blind who see, and the lame who walk, but where is the Saviour?” They replied by a burst of sinister laughter.",
-      "work": "Notre-Dame de Paris",
-      "lang": "en",
-      "src": {
-        "work": "Notre-Dame de Paris"
-      },
-      "quality": {
-        "chars": 171
-      }
-    },
-    {
-      "id": "hugo.f.v0013",
-      "kind": "verbatim",
-      "text": "The archdeacon had in Quasimodo the most submissive slave, the most docile lackey, the most vigilant of dogs.",
-      "work": "Notre-Dame de Paris",
-      "lang": "en",
-      "src": {
-        "work": "Notre-Dame de Paris"
-      },
-      "quality": {
-        "chars": 109
-      }
-    },
-    {
-      "id": "hugo.f.v0014",
       "kind": "verbatim",
       "text": "In its printed form, thought is more imperishable than ever; it is volatile, irresistible, indestructible.",
       "work": "Notre-Dame de Paris",
@@ -524,20 +640,33 @@
       }
     },
     {
-      "id": "hugo.f.v0015",
+      "id": "hugo.f.v0011",
       "kind": "verbatim",
-      "text": "Two lackeys of the official torturer bathed the bleeding shoulders of the patient, anointed them with some unguent which immediately closed all the wounds, and threw upon his back a sort of yellow vestment, in cut like a chasuble.",
+      "text": "Gervaise looked after Oudarde, and then the three women, gazing upon the unhappy mother, began to weep.",
       "work": "Notre-Dame de Paris",
       "lang": "en",
       "src": {
         "work": "Notre-Dame de Paris"
       },
       "quality": {
-        "chars": 230
+        "chars": 103
       }
     },
     {
-      "id": "hugo.f.v0016",
+      "id": "hugo.f.v0012",
+      "kind": "verbatim",
+      "text": "The old church, all vibrating and sonorous, was in a perpetual joy of bells.",
+      "work": "Notre-Dame de Paris",
+      "lang": "en",
+      "src": {
+        "work": "Notre-Dame de Paris"
+      },
+      "quality": {
+        "chars": 76
+      }
+    },
+    {
+      "id": "hugo.f.v0013",
       "kind": "verbatim",
       "text": "Had it not been for the flame which burned in her cheeks, at the sight of her so silent and motionless, one would have declared her a statue of Modesty.",
       "work": "Notre-Dame de Paris",
@@ -550,74 +679,87 @@
       }
     },
     {
-      "id": "hugo.f.v0017",
+      "id": "hugo.f.v0014",
       "kind": "verbatim",
-      "text": "She had recognized the fact that all around her was wall, that below her there was a pavement covered with moisture and a truss of straw; but neither lamp nor air-hole.",
+      "text": "The shoe shows all this to the mother, and makes her heart melt as fire melts wax.",
       "work": "Notre-Dame de Paris",
       "lang": "en",
       "src": {
         "work": "Notre-Dame de Paris"
       },
       "quality": {
-        "chars": 168
+        "chars": 82
+      }
+    },
+    {
+      "id": "hugo.f.v0015",
+      "kind": "verbatim",
+      "text": "He raised his suppliant eye, and seeing that she was leading him back to her quarters, his whole face beamed with joy and tenderness.",
+      "work": "Notre-Dame de Paris",
+      "lang": "en",
+      "src": {
+        "work": "Notre-Dame de Paris"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "hugo.f.v0016",
+      "kind": "verbatim",
+      "text": "He clasped the goat in his arms, and gently drew away from the gypsy, who pressed closer and closer to him, as though to the only asylum which remained to her.",
+      "work": "Notre-Dame de Paris",
+      "lang": "en",
+      "src": {
+        "work": "Notre-Dame de Paris"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "hugo.f.v0017",
+      "kind": "verbatim",
+      "text": "Dans une visite domiciliaire que fit la section Antoine chez Beaumarchais, une femme cueillit dans le jardin une fleur; le peuple la souffleta.",
+      "work": "Quatrevingt-Treize",
+      "lang": "fr",
+      "src": {
+        "work": "Quatrevingt-Treize"
+      },
+      "quality": {
+        "chars": 143
       }
     },
     {
       "id": "hugo.f.v0018",
       "kind": "verbatim",
-      "text": "Oh!” he said in a very low tone, “she must be cold now.” All at once, a gust of wind extinguished his lamp, and almost at the same instant, he beheld a shade, a whiteness, a form, a woman, appear from the opposite angle of the tower.",
-      "work": "Notre-Dame de Paris",
-      "lang": "en",
+      "text": "Le rire, éclair de Danton, et le sourire, piqûre de Marat, lui manquaient.",
+      "work": "Quatrevingt-Treize",
+      "lang": "fr",
       "src": {
-        "work": "Notre-Dame de Paris"
+        "work": "Quatrevingt-Treize"
       },
       "quality": {
-        "chars": 233
+        "chars": 74
       }
     },
     {
       "id": "hugo.f.v0019",
       "kind": "verbatim",
-      "text": "When we are in the country, we will place these little shoes on an infant Jesus in the church.",
-      "work": "Notre-Dame de Paris",
-      "lang": "en",
+      "text": "Ce matin-là elle était forte, elle pouvait presque marcher seule; une cure, c'est une paternité, et Tellmarch la regardait, heureux.",
+      "work": "Quatrevingt-Treize",
+      "lang": "fr",
       "src": {
-        "work": "Notre-Dame de Paris"
+        "work": "Quatrevingt-Treize"
       },
       "quality": {
-        "chars": 94
+        "chars": 132
       }
     },
     {
       "id": "hugo.f.v0020",
       "kind": "verbatim",
-      "text": "C'étaient ces Parisiens qui, la veille encore, étaient là tous vivants, et tenaient garnison dans la ferme d'Herbe-en-Pail.",
-      "work": "Quatrevingt-Treize",
-      "lang": "fr",
-      "src": {
-        "work": "Quatrevingt-Treize"
-      },
-      "quality": {
-        "chars": 123
-      }
-    },
-    {
-      "id": "hugo.f.v0021",
-      "kind": "verbatim",
-      "text": "Les noms de ces dix-neuf assiégés peuvent être retrouvés par l'histoire dans les affiches de mise hors la loi.",
-      "work": "Quatrevingt-Treize",
-      "lang": "fr",
-      "src": {
-        "work": "Quatrevingt-Treize"
-      },
-      "quality": {
-        "chars": 110
-      }
-    },
-    {
-      "id": "hugo.f.v0022",
-      "kind": "verbatim",
-      "text": "Rien de souverain comme l'éclair de ses yeux noyés de larmes; son regard foudroyait l'incendie.",
+      "text": "Les républicains de Metz et les républicains du Midi demandaient à marcher contre les rebelles.",
       "work": "Quatrevingt-Treize",
       "lang": "fr",
       "src": {
@@ -626,15 +768,185 @@
       "quality": {
         "chars": 95
       }
+    },
+    {
+      "id": "hugo.f.v0021",
+      "kind": "verbatim",
+      "text": "Cependant le soir venait, la chaleur augmentait, la sieste était dans l'air, les yeux de Georgette devenaient vagues, René-Jean alla à son berceau, en tira le sac de paille qui lui tenait lieu de matelas, le traîna jusqu'à la fenêtre, s'allongea dessus et dit:--Couchons-nous.",
+      "work": "Quatrevingt-Treize",
+      "lang": "fr",
+      "src": {
+        "work": "Quatrevingt-Treize"
+      },
+      "quality": {
+        "chars": 276
+      }
+    },
+    {
+      "id": "hugo.f.v0022",
+      "kind": "verbatim",
+      "text": "The tide gathers at first insensibly, then with violence; when it touches the rocks a sudden wrath seems to possess it, and it foams.",
+      "work": "Toilers of the sea",
+      "lang": "en",
+      "src": {
+        "work": "Toilers of the sea"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "hugo.f.v0023",
+      "kind": "verbatim",
+      "text": "As the services are at the same hours, one bell summonses both denominations to prayers; it rings, in fact, both for God and for Satan, according as each pleases to regard it.",
+      "work": "Toilers of the sea",
+      "lang": "en",
+      "src": {
+        "work": "Toilers of the sea"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hugo.f.v0024",
+      "kind": "verbatim",
+      "text": "This door, too, is walled in, as are also the two windows of the ground-floor.",
+      "work": "Toilers of the sea",
+      "lang": "en",
+      "src": {
+        "work": "Toilers of the sea"
+      },
+      "quality": {
+        "chars": 78
+      }
+    },
+    {
+      "id": "hugo.f.v0025",
+      "kind": "verbatim",
+      "text": "XI A WORD TO THE WISE IS ENOUGH A feeble, indistinct sound seemed to reach his ear from somewhere in the far distance.",
+      "work": "Toilers of the sea",
+      "lang": "en",
+      "src": {
+        "work": "Toilers of the sea"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "hugo.f.v0026",
+      "kind": "verbatim",
+      "text": "With a rough and primitive nature, this truth is even more applicable.",
+      "work": "Toilers of the sea",
+      "lang": "en",
+      "src": {
+        "work": "Toilers of the sea"
+      },
+      "quality": {
+        "chars": 70
+      }
+    },
+    {
+      "id": "hugo.f.v0027",
+      "kind": "verbatim",
+      "text": "That which was before the child was a thing of which care was taken: the man was evidently precious.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "hugo.f.v0028",
+      "kind": "verbatim",
+      "text": "The appearance of the lighthouse raised their spirits at first, then overwhelmed them.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 86
+      }
+    },
+    {
+      "id": "hugo.f.v0029",
+      "kind": "verbatim",
+      "text": "Being of a different species from you, and at an inaccessible height above you, they are affable.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "hugo.f.v0030",
+      "kind": "verbatim",
+      "text": "It happened sometimes, in the year 1704, that as night fell on some little village on the coast, a great, heavy van, drawn by a pair of stout horses, made its entry.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "hugo.f.v0031",
+      "kind": "verbatim",
+      "text": "He had had the delight of being the first to taste the contents of Hardquanonne’s flask.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 88
+      }
+    },
+    {
+      "id": "hugo.f.v0032",
+      "kind": "verbatim",
+      "text": "A vague glimmering is now and then to be perceived through solid and sombre piles of building.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "hugo.f.v0033",
+      "kind": "verbatim",
+      "text": "There, in the mines, are men who chew coals to fill their stomachs and deceive hunger.",
+      "work": "The Man Who Laughs: A Romance of English History",
+      "lang": "en",
+      "src": {
+        "work": "The Man Who Laughs: A Romance of English History"
+      },
+      "quality": {
+        "chars": 86
+      }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:3a30876740dc0645b369cfa7c2c5d58ce6ecb0f8b941fd1db51cbe65bd64ac49"
+  "checksum": "sha256:16c61201b52a4146091140f5906c132f91c858a6ab093ff13eacadd7de245f95"
 }

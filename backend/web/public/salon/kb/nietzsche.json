@@ -1,26 +1,130 @@
 {
   "authorId": "nietzsche",
   "kbVersion": "nietzsche@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.120Z",
+  "builtAt": "2026-10-03T21:23:12.136Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Beyond Good and Evil",
-      "sentences": 14
+      "title": "Thus Spake Zarathustra: A Book for All and None",
+      "sentences": 12
     },
     {
-      "title": "Human, All Too Human: A Book for Free Spirits",
-      "sentences": 13
+      "title": "Beyond Good and Evil",
+      "sentences": 12
+    },
+    {
+      "title": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "sentences": 12
     },
     {
       "title": "The Antichrist",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Human, All Too Human: A Book for Free Spirits",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "nietzsche.p0001",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "Happy even is he who liveth near this wise man!",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0002",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "They steal the works of the inventors and the treasures of the wise.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0003",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "I would have thy victory and freedom long for a child.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0004",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "Characters of blood did they write on the way they went, and their folly taught that truth is proved by blood.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0005",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "And this secret spake Life herself unto me.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0006",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "An ear as big as a man!” I looked still more attentively—and actually there did move under the ear something that was pitiably small and poor and slim.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0007",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "This, however, is my blessing: to stand above everything as its own heaven, its round roof, its azure bell and eternal security: and blessed is he who thus blesseth!",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0008",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "Especially the strong load-bearing man in whom reverence resideth.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0009",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "Sing and bubble over, O Zarathustra, heal thy soul with new lays: that thou mayest bear thy great fate, which hath not yet been any one’s fate!",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0010",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "It could well have happened in that way: in that way, AND also otherwise.",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0011",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "Abide by thy customs, thou excellent one: grind thy corn, drink thy water, praise thy cooking,—if only it make thee glad!",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0012",
+      "w": "Thus Spake Zarathustra: A Book for All and None",
+      "s": "THAT did ye devise when with me, that do I take as a good omen,—such things only the convalescents devise!",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      }
+    },
+    {
+      "id": "nietzsche.p0013",
       "w": "Beyond Good and Evil",
       "s": "A man who WILLS commands something within himself which renders obedience, or which he believes renders obedience.",
       "src": {
@@ -28,55 +132,47 @@
       }
     },
     {
-      "id": "nietzsche.p0002",
+      "id": "nietzsche.p0014",
       "w": "Beyond Good and Evil",
-      "s": "Cynicism is the only form in which base souls approach what is called honesty; and the higher man must open his ears to all the coarser or finer cynicism, and congratulate himself when the clown becomes shameless right before him, or the scientific satyr speaks out.",
+      "s": "Everything is so arranged that the worst of all tastes, THE TASTE FOR THE UNCONDITIONAL, is cruelly befooled and abused, until a man learns to introduce a little art into his sentiments, and prefers to try conclusions with the artificial, as do the real artists of life.",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0003",
+      "id": "nietzsche.p0015",
       "w": "Beyond Good and Evil",
-      "s": "Very probably, for all philosophers hitherto have loved their truths.",
+      "s": "And perhaps ye are also something of the same kind, ye coming ones?",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0004",
+      "id": "nietzsche.p0016",
       "w": "Beyond Good and Evil",
-      "s": "The Church has frequently canonized the woman in such a case.",
+      "s": "Among men, as among all other animals, there is a surplus of defective, diseased, degenerating, infirm, and necessarily suffering individuals; the successful cases, among men also, are always the exception; and in view of the fact that man is THE ANIMAL NOT YET PROPERLY ADAPTED TO HIS ENVIRONMENT, the rare exception.",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0005",
+      "id": "nietzsche.p0017",
       "w": "Beyond Good and Evil",
-      "s": "Heavy, melancholy men turn lighter, and come temporarily to their surface, precisely by that which makes others heavy--by hatred and love.",
+      "s": "To him who feels himself preordained to contemplation and not to belief, all believers are too noisy and obtrusive; he guards against them.",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0006",
+      "id": "nietzsche.p0018",
       "w": "Beyond Good and Evil",
-      "s": "Even concubinage has been corrupted--by marriage.",
+      "s": "To talk much about oneself may also be a means of concealing oneself.",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0007",
-      "w": "Beyond Good and Evil",
-      "s": "No one desires to injure himself, hence all evil is done unwittingly.",
-      "src": {
-        "work": "Beyond Good and Evil"
-      }
-    },
-    {
-      "id": "nietzsche.p0008",
+      "id": "nietzsche.p0019",
       "w": "Beyond Good and Evil",
       "s": "To punish, appears to it to be somehow unfair--it is certain that the idea of \"punishment\" and \"the obligation to punish\" are then painful and alarming to people.",
       "src": {
@@ -84,23 +180,23 @@
       }
     },
     {
-      "id": "nietzsche.p0009",
+      "id": "nietzsche.p0020",
       "w": "Beyond Good and Evil",
-      "s": "Flaubert, for instance, the honest citizen of Rouen, neither saw, heard, nor tasted anything else in the end; it was his mode of self-torment and refined cruelty.",
+      "s": "People have always to be born to a high station, or, more definitely, they have to be BRED for it: a person has only a right to philosophy--taking the word in its higher significance--in virtue of his descent; the ancestors, the \"blood,\" decide here also.",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0010",
+      "id": "nietzsche.p0021",
       "w": "Beyond Good and Evil",
-      "s": "And what the spirit that leads us wants TO BE CALLED?",
+      "s": "One ought even to ENCOURAGE them, as has been partially attempted in the following rhymes:-- Hail, ye worthies, barrow-wheeling, \"Longer--better,\" aye revealing, Stiffer aye in head and knee; Unenraptured, never jesting, Mediocre everlasting, SANS GENIE ET SANS ESPRIT!",
       "src": {
         "work": "Beyond Good and Evil"
       }
     },
     {
-      "id": "nietzsche.p0011",
+      "id": "nietzsche.p0022",
       "w": "Beyond Good and Evil",
       "s": "It is the age of the masses: they lie on their belly before everything that is massive.",
       "src": {
@@ -108,209 +204,121 @@
       }
     },
     {
-      "id": "nietzsche.p0012",
-      "w": "Beyond Good and Evil",
-      "s": "What a torture are books written in German to a reader who has a THIRD ear!",
-      "src": {
-        "work": "Beyond Good and Evil"
-      }
-    },
-    {
-      "id": "nietzsche.p0013",
-      "w": "Beyond Good and Evil",
-      "s": "There is an INSTINCT FOR RANK, which more than anything else is already the sign of a HIGH rank; there is a DELIGHT in the NUANCES of reverence which leads one to infer noble origin and habits.",
-      "src": {
-        "work": "Beyond Good and Evil"
-      }
-    },
-    {
-      "id": "nietzsche.p0014",
-      "w": "Beyond Good and Evil",
-      "s": "Impatience, and the consciousness of being always condemned to comedy up to that time--for even strife is a comedy, and conceals the end, as every means does--spoil all intercourse for him; this kind of man is acquainted with solitude, and what is most poisonous in it.",
-      "src": {
-        "work": "Beyond Good and Evil"
-      }
-    },
-    {
-      "id": "nietzsche.p0015",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "Fortunately, it is too late now to arrest and turn back the evolutionary process of the reason, which had its inception in this belief.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0016",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "In this sense we hear of moral feelings, of religious feelings, as if they were absolute unities.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0017",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "So also: an opinion gives happiness, therefore it is the true one, its effect is good, therefore it is itself good and true.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0018",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "The repulsive aspect of psychological dissection, with the knife and tweezers entailed by the process, can no longer be spared humanity.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0019",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "Whoever desires no more of things than knowledge of them attains speedily to peace of mind and will at most err through lack of knowledge, but scarcely through eagerness for knowledge (or through sin, as the world calls it).",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0020",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "It is as a rule not the quality of our experience but its quantity upon which depends the development of our superiority or inferiority, from the point of view of good and evil.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0021",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "The custom is therefore the blending of the agreeable and the useful.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
-      "id": "nietzsche.p0022",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "At first these spots were quite extensive, inasmuch as stipulated areas could not be trod by the uninitiated, who, when near them, felt tremors and anxieties.",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      }
-    },
-    {
       "id": "nietzsche.p0023",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "The acting individual himself is held fast in the illusion of volition.",
+      "w": "Beyond Good and Evil",
+      "s": "What is called \"modern ideas,\" or \"the ideas of the eighteenth century,\" or \"French ideas\"--that, consequently, against which the GERMAN mind rose up with profound disgust--is of English origin, there is no doubt about it.",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "Beyond Good and Evil"
       }
     },
     {
       "id": "nietzsche.p0024",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "They have, perhaps, in times of danger from science, incorporated some philosophical doctrine or other into their systems in order to make it possible to continue one's existence within them.",
+      "w": "Beyond Good and Evil",
+      "s": "This is the essentially fundamental tendency in latter-day civilizations.",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "Beyond Good and Evil"
       }
     },
     {
       "id": "nietzsche.p0025",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "They saw but the counterpart as in a mirror of the most perfect specimens of their own caste, hence an ideal, but no contradiction of their own nature.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "My brother was very anxious to take some decisive step to help him, and, laying the plans of his great work on Greece aside, he selected a small portion from the already completed manuscript--a portion dealing with one distinct side of Hellenism,--to wit, its tragic art.",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0026",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "Between carefully deduced truths and such \"foreboded\" things there lies the abysmal distinction that the former are products of the intellect and the latter of the necessity.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "I will dream on!\" I have likewise been told of persons capable of continuing the causality of one and the same dream for three and even more successive nights: all of which facts clearly testify that our innermost being, the common substratum of all of us, experiences our dreams with deep joy and cheerful acquiescence.",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0027",
-      "w": "Human, All Too Human: A Book for Free Spirits",
-      "s": "They employ the most painful expedients to escape if only for a time from the heaviness and weariness in which they are steeped by their great mental indolence and their subjection to a will other than their own.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "It is not unworthy of the greatest hero to long for a continuation of life, ay, even as a day-labourer.",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0028",
-      "w": "The Antichrist",
-      "s": "As a matter of fact, it seems to me that an idea that happens to be true--or, more exactly, as near to truth as any human idea can be, and yet remain generally intelligible--it seems to me that such an idea carries a special and often fatal handicap.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "In this sense we may discriminate between two main currents in the history of the language of the Greek people, according as their language imitated either the world of phenomena and of pictures, or the world of music.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0029",
-      "w": "The Antichrist",
-      "s": "The conflict can interest him only as spectacle, as the conflict between Bonaparte and the old order in Europe interested Goethe and Beethoven.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "And even as tragedy, with its metaphysical comfort, points to the eternal life of this kernel of existence, notwithstanding the perpetual dissolution of phenomena, so the symbolism of the satyric chorus already expresses figuratively this primordial relation between the thing in itself and phenomenon.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0030",
-      "w": "The Antichrist",
-      "s": "Maybe it was this fact that caused Nietzsche to speak up for the children of Israel quite as often as he spoke against them.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "The suddenly swelling tide of the Dionysian then takes the separate little wave-mountains of individuals on its back, just as the brother of Prometheus, the Titan Atlas, does with the earth.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0031",
-      "w": "The Antichrist",
-      "s": "There are two earlier translations, one by Thomas Common and the other by Anthony M.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "But Euripides--the chorus-master--was praised incessantly: indeed, people would have killed themselves in order to learn yet more from him, had they not known that tragic poets were quite as dead as tragedy.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0032",
-      "w": "The Antichrist",
-      "s": "We are Hyperboreans--we know well enough how remote our place is.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "Neither in the designing nor in the execution is he an artist pure and simple.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0033",
-      "w": "The Antichrist",
-      "s": "Virtue,\" \"duty,\" \"good for its own sake,\" goodness grounded upon impersonality or a notion of universal validity--these are all chimeras, and in them one finds only an expression of the decay, the last collapse of life, the Chinese spirit of Koenigsberg.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "For that reason Lessing, the most honest theoretical man, ventured to say that he cared more for the search after truth than for truth itself: in saying which he revealed the fundamental secret of science, to the astonishment, and indeed, to the vexation of scientific men.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0034",
-      "w": "The Antichrist",
-      "s": "In him it does honour to the conditions which enable it to survive, to its virtues--it projects its joy in itself, its feeling of power, into a being to whom one may offer thanks.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "The hero had turned gladiator, on whom, after being liberally battered about and covered with wounds, freedom was occasionally bestowed.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0035",
-      "w": "The Antichrist",
-      "s": "These things are necessary if Christianity is to assume lordship over a soil on which some aphrodisiacal or Adonis cult has already established a notion as to what a cult ought to be.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "The time of the Socratic man is past: crown yourselves with ivy, take in your hands the thyrsus, and do not marvel if tigers and panthers lie down fawning at your feet.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0036",
-      "w": "The Antichrist",
-      "s": "Our whole conception of the \"spiritual,\" the whole conception of our civilization, could have had no meaning in the world that Jesus lived in.",
+      "w": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "s": "It is probable, however, that nearly every one, upon close examination, feels so disintegrated by the critico-historical spirit of our culture, that he can only perhaps make the former existence of myth credible to himself by learned means through intermediary abstractions.",
       "src": {
-        "work": "The Antichrist"
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
       }
     },
     {
       "id": "nietzsche.p0037",
       "w": "The Antichrist",
-      "s": "Later on the church even falsified the history of man in order to make it a prologue to Christianity....",
+      "s": "The majority of men prefer delusion to truth.",
       "src": {
         "work": "The Antichrist"
       }
@@ -318,7 +326,7 @@
     {
       "id": "nietzsche.p0038",
       "w": "The Antichrist",
-      "s": "Hath not God made foolish the wisdom of this world?",
+      "s": "What actual difference does it make to a civilized man, when there is a steel strike, whether the workmen win or the mill-owners win?",
       "src": {
         "work": "The Antichrist"
       }
@@ -326,7 +334,7 @@
     {
       "id": "nietzsche.p0039",
       "w": "The Antichrist",
-      "s": "Among the Greeks scepticism was also occasionally called ephecticism.",
+      "s": "The most they can ever accomplish is to make the superior orders of men acutely conscious of the exact nature of it, and so give them armament against the contagion.",
       "src": {
         "work": "The Antichrist"
       }
@@ -334,9 +342,169 @@
     {
       "id": "nietzsche.p0040",
       "w": "The Antichrist",
-      "s": "Would God have done anything superfluous?",
+      "s": "They are getting away from the old thunderous manner, with its long sentences and its tedious grammatical complexities.",
       "src": {
         "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0041",
+      "w": "The Antichrist",
+      "s": "It preserves whatever is ripe for destruction; it fights on the side of those disinherited and condemned by life; by maintaining life in so many of the botched of all kinds, it gives life itself a gloomy and dubious aspect.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0042",
+      "w": "The Antichrist",
+      "s": "Formerly we accorded to man, as his inheritance from some higher order of beings, what was called \"free will\"; now we have taken even this will from him, for the term no longer describes anything that we can understand.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0043",
+      "w": "The Antichrist",
+      "s": "There is no categorical imperative nor any disciplines, even within the walls of a monastery (--it is always possible to leave--).",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0044",
+      "w": "The Antichrist",
+      "s": "Every one is the child of God--Jesus claims nothing for himself alone--as the child of God each man is the equal of every other man....",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0045",
+      "w": "The Antichrist",
+      "s": "To reduce being a Christian, the state of Christianity, to an acceptance of truth, to a mere phenomenon of consciousness, is to formulate the negation of Christianity.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0046",
+      "w": "The Antichrist",
+      "s": "The presence of so much filth makes it very advisable.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0047",
+      "w": "The Antichrist",
+      "s": "The most modest exercise of the intellect, not to say of decency, should certainly be enough to convince these interpreters of the perfect childishness and unworthiness of such a misuse of the divine digital dexterity.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0048",
+      "w": "The Antichrist",
+      "s": "Only the most intellectual of men have any right to beauty, to the beautiful; only in them can goodness escape being weakness.",
+      "src": {
+        "work": "The Antichrist"
+      }
+    },
+    {
+      "id": "nietzsche.p0049",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "Accordingly, historical philosophising is henceforth indispensable, and with it honesty of judgment.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0050",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "Dreams carry us back to the earlier stages of human culture and afford us a means of understanding it more clearly.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0051",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "Herein is comprised the tremendous mission of the great spirits of the next century.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0052",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "The repulsive aspect of psychological dissection, with the knife and tweezers entailed by the process, can no longer be spared humanity.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0053",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "So, too, it will not be admitted that all for which men sacrificed life and happiness in former centuries was nothing but delusion: perhaps it is alleged these things were degrees of truth.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0054",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "But the rich man appreciates the value of a single possession much less because he is accustomed to many possessions, so that he cannot put himself in the place of the poor man and does not act by any means as ill as the latter supposes.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0055",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "The custom is therefore the blending of the agreeable and the useful.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0056",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "In the first case it is the individual who, for the sake of preserving himself or in order to spare himself pain, does injury with design: in the second case, it is the state.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0057",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "Many acts are called bad that are only stupid, because the degree of intelligence that decided for them was low.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0058",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "The problem which is present to every man is closely connected with this one: how can the weaker party dictate laws to the stronger, control its acts in reference to the weaker?",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0059",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "But when it opens its eyes it finds itself always in paradise.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      }
+    },
+    {
+      "id": "nietzsche.p0060",
+      "w": "Human, All Too Human: A Book for Free Spirits",
+      "s": "Thus will the philosopher embrace the dogmas of asceticism, humility, sanctity, in the light of which his own image appears in its most hideous aspect.",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
       }
     }
   ],
@@ -344,31 +512,109 @@
     {
       "id": "nietzsche.f.v0001",
       "kind": "verbatim",
-      "text": "Cynicism is the only form in which base souls approach what is called honesty; and the higher man must open his ears to all the coarser or finer cynicism, and congratulate himself when the clown becomes shameless right before him, or the scientific satyr speaks out.",
-      "work": "Beyond Good and Evil",
+      "text": "An ear as big as a man!” I looked still more attentively—and actually there did move under the ear something that was pitiably small and poor and slim.",
+      "work": "Thus Spake Zarathustra: A Book for All and None",
       "lang": "en",
       "src": {
-        "work": "Beyond Good and Evil"
+        "work": "Thus Spake Zarathustra: A Book for All and None"
       },
       "quality": {
-        "chars": 266
+        "chars": 151
       }
     },
     {
       "id": "nietzsche.f.v0002",
       "kind": "verbatim",
-      "text": "Heavy, melancholy men turn lighter, and come temporarily to their surface, precisely by that which makes others heavy--by hatred and love.",
+      "text": "This, however, is my blessing: to stand above everything as its own heaven, its round roof, its azure bell and eternal security: and blessed is he who thus blesseth!",
+      "work": "Thus Spake Zarathustra: A Book for All and None",
+      "lang": "en",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "nietzsche.f.v0003",
+      "kind": "verbatim",
+      "text": "Sing and bubble over, O Zarathustra, heal thy soul with new lays: that thou mayest bear thy great fate, which hath not yet been any one’s fate!",
+      "work": "Thus Spake Zarathustra: A Book for All and None",
+      "lang": "en",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "nietzsche.f.v0004",
+      "kind": "verbatim",
+      "text": "Abide by thy customs, thou excellent one: grind thy corn, drink thy water, praise thy cooking,—if only it make thee glad!",
+      "work": "Thus Spake Zarathustra: A Book for All and None",
+      "lang": "en",
+      "src": {
+        "work": "Thus Spake Zarathustra: A Book for All and None"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "nietzsche.f.v0005",
+      "kind": "verbatim",
+      "text": "A man who WILLS commands something within himself which renders obedience, or which he believes renders obedience.",
       "work": "Beyond Good and Evil",
       "lang": "en",
       "src": {
         "work": "Beyond Good and Evil"
       },
       "quality": {
-        "chars": 138
+        "chars": 114
       }
     },
     {
-      "id": "nietzsche.f.v0003",
+      "id": "nietzsche.f.v0006",
+      "kind": "verbatim",
+      "text": "Everything is so arranged that the worst of all tastes, THE TASTE FOR THE UNCONDITIONAL, is cruelly befooled and abused, until a man learns to introduce a little art into his sentiments, and prefers to try conclusions with the artificial, as do the real artists of life.",
+      "work": "Beyond Good and Evil",
+      "lang": "en",
+      "src": {
+        "work": "Beyond Good and Evil"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "nietzsche.f.v0007",
+      "kind": "verbatim",
+      "text": "Among men, as among all other animals, there is a surplus of defective, diseased, degenerating, infirm, and necessarily suffering individuals; the successful cases, among men also, are always the exception; and in view of the fact that man is THE ANIMAL NOT YET PROPERLY ADAPTED TO HIS ENVIRONMENT, the rare exception.",
+      "work": "Beyond Good and Evil",
+      "lang": "en",
+      "src": {
+        "work": "Beyond Good and Evil"
+      },
+      "quality": {
+        "chars": 318
+      }
+    },
+    {
+      "id": "nietzsche.f.v0008",
+      "kind": "verbatim",
+      "text": "To him who feels himself preordained to contemplation and not to belief, all believers are too noisy and obtrusive; he guards against them.",
+      "work": "Beyond Good and Evil",
+      "lang": "en",
+      "src": {
+        "work": "Beyond Good and Evil"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "nietzsche.f.v0009",
       "kind": "verbatim",
       "text": "To punish, appears to it to be somehow unfair--it is certain that the idea of \"punishment\" and \"the obligation to punish\" are then painful and alarming to people.",
       "work": "Beyond Good and Evil",
@@ -381,35 +627,22 @@
       }
     },
     {
-      "id": "nietzsche.f.v0004",
+      "id": "nietzsche.f.v0010",
       "kind": "verbatim",
-      "text": "Flaubert, for instance, the honest citizen of Rouen, neither saw, heard, nor tasted anything else in the end; it was his mode of self-torment and refined cruelty.",
+      "text": "People have always to be born to a high station, or, more definitely, they have to be BRED for it: a person has only a right to philosophy--taking the word in its higher significance--in virtue of his descent; the ancestors, the \"blood,\" decide here also.",
       "work": "Beyond Good and Evil",
       "lang": "en",
       "src": {
         "work": "Beyond Good and Evil"
       },
       "quality": {
-        "chars": 162
+        "chars": 255
       }
     },
     {
-      "id": "nietzsche.f.v0005",
+      "id": "nietzsche.f.v0011",
       "kind": "verbatim",
-      "text": "There is an INSTINCT FOR RANK, which more than anything else is already the sign of a HIGH rank; there is a DELIGHT in the NUANCES of reverence which leads one to infer noble origin and habits.",
-      "work": "Beyond Good and Evil",
-      "lang": "en",
-      "src": {
-        "work": "Beyond Good and Evil"
-      },
-      "quality": {
-        "chars": 193
-      }
-    },
-    {
-      "id": "nietzsche.f.v0006",
-      "kind": "verbatim",
-      "text": "Impatience, and the consciousness of being always condemned to comedy up to that time--for even strife is a comedy, and conceals the end, as every means does--spoil all intercourse for him; this kind of man is acquainted with solitude, and what is most poisonous in it.",
+      "text": "One ought even to ENCOURAGE them, as has been partially attempted in the following rhymes:-- Hail, ye worthies, barrow-wheeling, \"Longer--better,\" aye revealing, Stiffer aye in head and knee; Unenraptured, never jesting, Mediocre everlasting, SANS GENIE ET SANS ESPRIT!",
       "work": "Beyond Good and Evil",
       "lang": "en",
       "src": {
@@ -420,20 +653,254 @@
       }
     },
     {
-      "id": "nietzsche.f.v0007",
+      "id": "nietzsche.f.v0012",
       "kind": "verbatim",
-      "text": "Fortunately, it is too late now to arrest and turn back the evolutionary process of the reason, which had its inception in this belief.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
+      "text": "What is called \"modern ideas,\" or \"the ideas of the eighteenth century,\" or \"French ideas\"--that, consequently, against which the GERMAN mind rose up with profound disgust--is of English origin, there is no doubt about it.",
+      "work": "Beyond Good and Evil",
       "lang": "en",
       "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
+        "work": "Beyond Good and Evil"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "nietzsche.f.v0013",
+      "kind": "verbatim",
+      "text": "My brother was very anxious to take some decisive step to help him, and, laying the plans of his great work on Greece aside, he selected a small portion from the already completed manuscript--a portion dealing with one distinct side of Hellenism,--to wit, its tragic art.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "nietzsche.f.v0014",
+      "kind": "verbatim",
+      "text": "I will dream on!\" I have likewise been told of persons capable of continuing the causality of one and the same dream for three and even more successive nights: all of which facts clearly testify that our innermost being, the common substratum of all of us, experiences our dreams with deep joy and cheerful acquiescence.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 320
+      }
+    },
+    {
+      "id": "nietzsche.f.v0015",
+      "kind": "verbatim",
+      "text": "In this sense we may discriminate between two main currents in the history of the language of the Greek people, according as their language imitated either the world of phenomena and of pictures, or the world of music.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "nietzsche.f.v0016",
+      "kind": "verbatim",
+      "text": "The suddenly swelling tide of the Dionysian then takes the separate little wave-mountains of individuals on its back, just as the brother of Prometheus, the Titan Atlas, does with the earth.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "nietzsche.f.v0017",
+      "kind": "verbatim",
+      "text": "The hero had turned gladiator, on whom, after being liberally battered about and covered with wounds, freedom was occasionally bestowed.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "nietzsche.f.v0018",
+      "kind": "verbatim",
+      "text": "The time of the Socratic man is past: crown yourselves with ivy, take in your hands the thyrsus, and do not marvel if tigers and panthers lie down fawning at your feet.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "nietzsche.f.v0019",
+      "kind": "verbatim",
+      "text": "It is probable, however, that nearly every one, upon close examination, feels so disintegrated by the critico-historical spirit of our culture, that he can only perhaps make the former existence of myth credible to himself by learned means through intermediary abstractions.",
+      "work": "The Birth of Tragedy; or, Hellenism and Pessimism",
+      "lang": "en",
+      "src": {
+        "work": "The Birth of Tragedy; or, Hellenism and Pessimism"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "nietzsche.f.v0020",
+      "kind": "verbatim",
+      "text": "What actual difference does it make to a civilized man, when there is a steel strike, whether the workmen win or the mill-owners win?",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "nietzsche.f.v0021",
+      "kind": "verbatim",
+      "text": "The most they can ever accomplish is to make the superior orders of men acutely conscious of the exact nature of it, and so give them armament against the contagion.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "nietzsche.f.v0022",
+      "kind": "verbatim",
+      "text": "They are getting away from the old thunderous manner, with its long sentences and its tedious grammatical complexities.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "nietzsche.f.v0023",
+      "kind": "verbatim",
+      "text": "It preserves whatever is ripe for destruction; it fights on the side of those disinherited and condemned by life; by maintaining life in so many of the botched of all kinds, it gives life itself a gloomy and dubious aspect.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "nietzsche.f.v0024",
+      "kind": "verbatim",
+      "text": "Formerly we accorded to man, as his inheritance from some higher order of beings, what was called \"free will\"; now we have taken even this will from him, for the term no longer describes anything that we can understand.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "nietzsche.f.v0025",
+      "kind": "verbatim",
+      "text": "There is no categorical imperative nor any disciplines, even within the walls of a monastery (--it is always possible to leave--).",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "nietzsche.f.v0026",
+      "kind": "verbatim",
+      "text": "Every one is the child of God--Jesus claims nothing for himself alone--as the child of God each man is the equal of every other man....",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
       },
       "quality": {
         "chars": 135
       }
     },
     {
-      "id": "nietzsche.f.v0008",
+      "id": "nietzsche.f.v0027",
+      "kind": "verbatim",
+      "text": "To reduce being a Christian, the state of Christianity, to an acceptance of truth, to a mere phenomenon of consciousness, is to formulate the negation of Christianity.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "nietzsche.f.v0028",
+      "kind": "verbatim",
+      "text": "The most modest exercise of the intellect, not to say of decency, should certainly be enough to convince these interpreters of the perfect childishness and unworthiness of such a misuse of the divine digital dexterity.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "nietzsche.f.v0029",
+      "kind": "verbatim",
+      "text": "Only the most intellectual of men have any right to beauty, to the beautiful; only in them can goodness escape being weakness.",
+      "work": "The Antichrist",
+      "lang": "en",
+      "src": {
+        "work": "The Antichrist"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "nietzsche.f.v0030",
+      "kind": "verbatim",
+      "text": "Dreams carry us back to the earlier stages of human culture and afford us a means of understanding it more clearly.",
+      "work": "Human, All Too Human: A Book for Free Spirits",
+      "lang": "en",
+      "src": {
+        "work": "Human, All Too Human: A Book for Free Spirits"
+      },
+      "quality": {
+        "chars": 115
+      }
+    },
+    {
+      "id": "nietzsche.f.v0031",
       "kind": "verbatim",
       "text": "The repulsive aspect of psychological dissection, with the knife and tweezers entailed by the process, can no longer be spared humanity.",
       "work": "Human, All Too Human: A Book for Free Spirits",
@@ -446,22 +913,22 @@
       }
     },
     {
-      "id": "nietzsche.f.v0009",
+      "id": "nietzsche.f.v0032",
       "kind": "verbatim",
-      "text": "Whoever desires no more of things than knowledge of them attains speedily to peace of mind and will at most err through lack of knowledge, but scarcely through eagerness for knowledge (or through sin, as the world calls it).",
+      "text": "In the first case it is the individual who, for the sake of preserving himself or in order to spare himself pain, does injury with design: in the second case, it is the state.",
       "work": "Human, All Too Human: A Book for Free Spirits",
       "lang": "en",
       "src": {
         "work": "Human, All Too Human: A Book for Free Spirits"
       },
       "quality": {
-        "chars": 224
+        "chars": 175
       }
     },
     {
-      "id": "nietzsche.f.v0010",
+      "id": "nietzsche.f.v0033",
       "kind": "verbatim",
-      "text": "It is as a rule not the quality of our experience but its quantity upon which depends the development of our superiority or inferiority, from the point of view of good and evil.",
+      "text": "The problem which is present to every man is closely connected with this one: how can the weaker party dictate laws to the stronger, control its acts in reference to the weaker?",
       "work": "Human, All Too Human: A Book for Free Spirits",
       "lang": "en",
       "src": {
@@ -470,171 +937,16 @@
       "quality": {
         "chars": 177
       }
-    },
-    {
-      "id": "nietzsche.f.v0011",
-      "kind": "verbatim",
-      "text": "At first these spots were quite extensive, inasmuch as stipulated areas could not be trod by the uninitiated, who, when near them, felt tremors and anxieties.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
-      "lang": "en",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      },
-      "quality": {
-        "chars": 158
-      }
-    },
-    {
-      "id": "nietzsche.f.v0012",
-      "kind": "verbatim",
-      "text": "They have, perhaps, in times of danger from science, incorporated some philosophical doctrine or other into their systems in order to make it possible to continue one's existence within them.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
-      "lang": "en",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      },
-      "quality": {
-        "chars": 191
-      }
-    },
-    {
-      "id": "nietzsche.f.v0013",
-      "kind": "verbatim",
-      "text": "They saw but the counterpart as in a mirror of the most perfect specimens of their own caste, hence an ideal, but no contradiction of their own nature.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
-      "lang": "en",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      },
-      "quality": {
-        "chars": 151
-      }
-    },
-    {
-      "id": "nietzsche.f.v0014",
-      "kind": "verbatim",
-      "text": "Between carefully deduced truths and such \"foreboded\" things there lies the abysmal distinction that the former are products of the intellect and the latter of the necessity.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
-      "lang": "en",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      },
-      "quality": {
-        "chars": 174
-      }
-    },
-    {
-      "id": "nietzsche.f.v0015",
-      "kind": "verbatim",
-      "text": "They employ the most painful expedients to escape if only for a time from the heaviness and weariness in which they are steeped by their great mental indolence and their subjection to a will other than their own.",
-      "work": "Human, All Too Human: A Book for Free Spirits",
-      "lang": "en",
-      "src": {
-        "work": "Human, All Too Human: A Book for Free Spirits"
-      },
-      "quality": {
-        "chars": 212
-      }
-    },
-    {
-      "id": "nietzsche.f.v0016",
-      "kind": "verbatim",
-      "text": "As a matter of fact, it seems to me that an idea that happens to be true--or, more exactly, as near to truth as any human idea can be, and yet remain generally intelligible--it seems to me that such an idea carries a special and often fatal handicap.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 250
-      }
-    },
-    {
-      "id": "nietzsche.f.v0017",
-      "kind": "verbatim",
-      "text": "The conflict can interest him only as spectacle, as the conflict between Bonaparte and the old order in Europe interested Goethe and Beethoven.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 143
-      }
-    },
-    {
-      "id": "nietzsche.f.v0018",
-      "kind": "verbatim",
-      "text": "Maybe it was this fact that caused Nietzsche to speak up for the children of Israel quite as often as he spoke against them.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 124
-      }
-    },
-    {
-      "id": "nietzsche.f.v0019",
-      "kind": "verbatim",
-      "text": "Virtue,\" \"duty,\" \"good for its own sake,\" goodness grounded upon impersonality or a notion of universal validity--these are all chimeras, and in them one finds only an expression of the decay, the last collapse of life, the Chinese spirit of Koenigsberg.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 254
-      }
-    },
-    {
-      "id": "nietzsche.f.v0020",
-      "kind": "verbatim",
-      "text": "In him it does honour to the conditions which enable it to survive, to its virtues--it projects its joy in itself, its feeling of power, into a being to whom one may offer thanks.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 179
-      }
-    },
-    {
-      "id": "nietzsche.f.v0021",
-      "kind": "verbatim",
-      "text": "These things are necessary if Christianity is to assume lordship over a soil on which some aphrodisiacal or Adonis cult has already established a notion as to what a cult ought to be.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 183
-      }
-    },
-    {
-      "id": "nietzsche.f.v0022",
-      "kind": "verbatim",
-      "text": "Our whole conception of the \"spiritual,\" the whole conception of our civilization, could have had no meaning in the world that Jesus lived in.",
-      "work": "The Antichrist",
-      "lang": "en",
-      "src": {
-        "work": "The Antichrist"
-      },
-      "quality": {
-        "chars": 142
-      }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:dfdb73e0adf78cd32392901be5d00123b2d22a7ea7f7ef96d415c070f6fb75f9"
+  "checksum": "sha256:dd7a87e71983cdb4c7cba423c3a46231af6134c38da5b952387dfe663b2c0e11"
 }

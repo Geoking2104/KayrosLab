@@ -1,21 +1,29 @@
 {
   "authorId": "hindouisme",
   "kbVersion": "hindouisme@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.311Z",
+  "builtAt": "2026-10-03T21:23:12.761Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Bhagavad Gita",
-      "sentences": 14
+      "sentences": 12
+    },
+    {
+      "title": "The Upanishads",
+      "sentences": 12
     },
     {
       "title": "The Mahabharata (Adi Parva)",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "The Ramayana",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Vedanta Sutras",
+      "sentences": 12
     }
   ],
   "passages": [
@@ -30,7 +38,7 @@
     {
       "id": "hindouisme.p0002",
       "w": "Bhagavad Gita",
-      "s": "And those to come shall speak thee infamy From age to age; but infamy is worse For men of noble blood to bear than death!",
+      "s": "What is his mark who hath that steadfast heart, Confirmed in holy meditation?",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -38,7 +46,7 @@
     {
       "id": "hindouisme.p0003",
       "w": "Bhagavad Gita",
-      "s": "Moreover, for the upholding of thy kind, Action thou should'st embrace.",
+      "s": "Needs must it be The objects of the sense will stir the sense To like and dislike, yet th' enlightened man Yields not to these, knowing them enemies.",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -46,7 +54,7 @@
     {
       "id": "hindouisme.p0004",
       "w": "Bhagavad Gita",
-      "s": "Manifold the renewals of my birth Have been, Arjuna!",
+      "s": "But those untaught, And those without full faith, and those who fear Are shent; no peace is here or other where, No hope, nor happiness for whoso doubts.",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -54,7 +62,7 @@
     {
       "id": "hindouisme.p0005",
       "w": "Bhagavad Gita",
-      "s": "Glad in all good they live, Nigh to the peace of God; and all those live Who pass their days exempt from greed and wrath, Subduing self and senses, knowing the Soul!",
+      "s": "But, as often as the heart Breaks--wild and wavering--from control, so oft Let him re-curb it, let him rein it back To the soul's governance; for perfect bliss Grows only in the bosom tranquillised, The spirit passionless, purged from offence, Vowed to the Infinite.",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -62,7 +70,7 @@
     {
       "id": "hindouisme.p0006",
       "w": "Bhagavad Gita",
-      "s": "Nor earth, nor heaven is forfeit, even for him, Because no heart that holds one right desire Treadeth the road of loss!",
+      "s": "What goeth forth from Me, Causing all life to live, is KARMA called: And, Manifested in divided forms, I am the ADHIBHUTA, Lord of Lives; And ADHIDAIVA, Lord of all the Gods, Because I am PURUSHA, who begets.",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -70,7 +78,7 @@
     {
       "id": "hindouisme.p0007",
       "w": "Bhagavad Gita",
-      "s": "They that receive not this, failing in faith To grasp the greater wisdom, reach not Me, Destroyer of thy foes!",
+      "s": "But to those blessed ones who worship Me, Turning not otherwhere, with minds set fast, I bring assurance of full bliss beyond.",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -78,7 +86,7 @@
     {
       "id": "hindouisme.p0008",
       "w": "Bhagavad Gita",
-      "s": "But to those blessed ones who worship Me, Turning not otherwhere, with minds set fast, I bring assurance of full bliss beyond.",
+      "s": "The worlds are filled with wonder Of Thy perfections!",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -86,7 +94,7 @@
     {
       "id": "hindouisme.p0009",
       "w": "Bhagavad Gita",
-      "s": "Between Thy jaws they lie Mangled full bloodily, Ground into dust and death!",
+      "s": "This friendly human frame, my mind can think Calm thoughts once more; my heart beats still again!",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -94,7 +102,7 @@
     {
       "id": "hindouisme.p0010",
       "w": "Bhagavad Gita",
-      "s": "As father to a son, As friend to friend, as one Who loveth to his lover, turn Thy face In gentleness on me!",
+      "s": "Passion and Ignorance, once overcome, Leave Soothfastness, O Bharata!",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -102,7 +110,7 @@
     {
       "id": "hindouisme.p0011",
       "w": "Bhagavad Gita",
-      "s": "Passion and Ignorance, once overcome, Leave Soothfastness, O Bharata!",
+      "s": "If men forsake the holy ordinance, Heedless of Shastras, yet keep faith at heart And worship, what shall be the state of those, Great Krishna!",
       "src": {
         "work": "Bhagavad Gita"
       }
@@ -110,111 +118,111 @@
     {
       "id": "hindouisme.p0012",
       "w": "Bhagavad Gita",
-      "s": "And--dwelling thus beyond Divided Being and Undivided--I Am called of men and Vedas, Life Supreme, The PURUSHOTTAMA.",
+      "s": "And there be evil doers; loose of heart, Low-minded, stubborn, fraudulent, remiss, Dull, slow, despondent--children of the \"dark.\" Hear, too, of Intellect and Steadfastness The threefold separation, Conqueror-Prince!",
       "src": {
         "work": "Bhagavad Gita"
       }
     },
     {
       "id": "hindouisme.p0013",
-      "w": "Bhagavad Gita",
-      "s": "Hear now Which be the qualities dividing them.",
+      "w": "The Upanishads",
+      "s": "It is not possible to comprehend the subtle problems of life unless the thought is tranquil and the energy concentrated.",
       "src": {
-        "work": "Bhagavad Gita"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0014",
-      "w": "Bhagavad Gita",
-      "s": "A Vaisya's task, Born with his nature, is to till the ground, Tend cattle, venture trade.",
+      "w": "The Upanishads",
+      "s": "Grief and delusion rest upon a belief in diversity, which leads to competition and all forms of selfishness.",
       "src": {
-        "work": "Bhagavad Gita"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0015",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "In the meantime the valiant Lord Vishnu in the form of an enchantress accompanied by Nara deceived the mighty Danavas and took away the Amrita from their hands.",
+      "w": "The Upanishads",
+      "s": "The story is first suggested in the Rig-Veda; it is told more definitely in the Yajur-Veda; and in the Katha-Upanishad it appears fully elaborated and interwoven with the loftiest Vedic teaching.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0016",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "The bird of fair feathers suddenly covered their eyes with dust.",
+      "w": "The Upanishads",
+      "s": "XVII He who performs this Nachiketa fire-sacrifice three times, being united with the three (mother, father and teacher), and who fulfills the three-fold duty (study of the Vedas, sacrifice and alms-giving) crosses over birth and death.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0017",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "Why also did the two other sons of Pritha (Bhima and Arjuna) and the two sons of Madri (Nakula and Sahadeva), themselves injured by the wretched Kurus, follow Yudhishthira who was greatly addicted to the evil habit of gambling?",
+      "w": "The Upanishads",
+      "s": "I desire only that which is eternal.\" Then Death said to him: \"I now see that thou art a sincere desirer of Truth.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0018",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "The great Asura who was known as Ekachakra became noted on earth as Pritivindhya.",
+      "w": "The Upanishads",
+      "s": "It is because of the all-embracing significance of this name that it is used so universally in the Vedic Scriptures to designate the Absolute.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0019",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "He is regarded as a man who by having recourse to forgiveness, shaketh off his rising anger like a snake casting off its slough.",
+      "w": "The Upanishads",
+      "s": "Know also the intellect to be the driver and mind the reins.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0020",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "Art thou going down into the Earth?\" \"'Yayati said, \"Fallen from heaven upon the loss of all my religious merits, I am doomed to enter the Earth-hell.",
+      "w": "The Upanishads",
+      "s": "But Yama shows him that immortality is a state of consciousness and is not gained so long as man clings to name and form, or to perishable objects.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0021",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "And Dhritarashtra and Pandu and Vidura of great intelligence were from their birth brought up by Bhishma, as if they were his own sons.",
+      "w": "The Upanishads",
+      "s": "The Self or Atman holds the position of ruler in this city; and being above the modifications of birth, death and all human imperfections, It is not affected by the changes of the physical organism.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0022",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "And she offered without loss of time, sacrifices unto the god and began to duly repeat the formula that Durvasa had imparted to her some time before.",
+      "w": "The Upanishads",
+      "s": "XI This firm holding back of the senses is what is known as Yoga.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0023",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "Never reprove any one with indications of anger (in thy speech).",
+      "w": "The Upanishads",
+      "s": "Nor can it be expressed by finite language or known by finite intelligence, because it is infinite.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0024",
-      "w": "The Mahabharata (Adi Parva)",
-      "s": "She hath, in this, been moved by the deity of desire that pervadeth every living form.",
+      "w": "The Upanishads",
+      "s": "V If one knows It here, that is Truth; if one knows It not here, then great is his loss.",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       }
     },
     {
       "id": "hindouisme.p0025",
       "w": "The Mahabharata (Adi Parva)",
-      "s": "The citizens in great joy came out to receive the sinless and illustrious one, like the dwellers in heaven coming out to receive their chief.",
+      "s": "Handsome and of various forms and decked with many coloured ear-rings, ye children of Airavata, ye shine like the Sun in the firmament!",
       "src": {
         "work": "The Mahabharata (Adi Parva)"
       }
@@ -222,7 +230,7 @@
     {
       "id": "hindouisme.p0026",
       "w": "The Mahabharata (Adi Parva)",
-      "s": "Incapable of bearing the sight of a foe and endued with great activity, he began to exert his prowess.",
+      "s": "Casting his eyes around in wonder he saw Valakhilya Rishis hanging therefrom with heads downwards and engaged in ascetic penances.",
       "src": {
         "work": "The Mahabharata (Adi Parva)"
       }
@@ -230,13 +238,85 @@
     {
       "id": "hindouisme.p0027",
       "w": "The Mahabharata (Adi Parva)",
-      "s": "His mind fixed on pure meditation, that youth of great energy suffered not his heart to waver, O bull among Kshatriyas, the glance he cast upon us was one of wrath.",
+      "s": "And the monarch began to squeeze his hands.",
       "src": {
         "work": "The Mahabharata (Adi Parva)"
       }
     },
     {
       "id": "hindouisme.p0028",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "The great Asura who was known as Ekachakra became noted on earth as Pritivindhya.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0029",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "The kine have returned without him who tendeth them.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0030",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "But I have not been gratified, this charming account being so short.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0031",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "And Dhritarashtra and Pandu and Vidura of great intelligence were from their birth brought up by Bhishma, as if they were his own sons.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0032",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "And bowing down unto her and his eldest brother, and smelling the heads of his younger brothers, that oppressor of all foes was himself embraced by his mother and every one of those bulls among men.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0033",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "If therefore, ye children, ye desire to witness that festival, go to Varanavata with your followers and friends and enjoy yourselves there like the celestials.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0034",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "Indeed, he entertains no scruples in accepting things impure.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0035",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "And the monarch desired to assist with his forces the hero if the occasion arose.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0036",
+      "w": "The Mahabharata (Adi Parva)",
+      "s": "After Krishna had retired, the illustrious Rishi, addressing in private all the Pandavas with Yudhishthira at their head, said, \"The renowned princess of Panchala is the wedded wife of you all.",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      }
+    },
+    {
+      "id": "hindouisme.p0037",
       "w": "The Ramayana",
       "s": "Bought for a hundred thousand kine, Let Dapple-skin, O Saint, be mine.",
       "src": {
@@ -244,81 +324,9 @@
       }
     },
     {
-      "id": "hindouisme.p0029",
-      "w": "The Ramayana",
-      "s": "It shall be done: let this suffice; Ráma ne’er makes a promise twice.” He ended.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0030",
-      "w": "The Ramayana",
-      "s": "Now, by her wicked counsel stirred, Thou fain wouldst keep my plighted word.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0031",
-      "w": "The Ramayana",
-      "s": "Me also, me ’twere surely good To banish to the distant wood, To dwell amid the shades that hold My famous son with limbs like gold.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0032",
-      "w": "The Ramayana",
-      "s": "E’en when my banishment is o’er, Back to my home I go no more, To look upon the widowed state Reft of her king, disconsolate.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0033",
-      "w": "The Ramayana",
-      "s": "Within those bounds, their brethren slain, No giant shall this day remain, But all shall fly with many a tear And fearing, rid the saints of fear.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0034",
-      "w": "The Ramayana",
-      "s": "Leave, lady, leave this lone retreat In forest wilds for thee unmeet, Where giants fierce and strong assume All shapes and wander in the gloom.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0035",
-      "w": "The Ramayana",
-      "s": "With ready zeal he sought the shade, And reached with hasty steps the wood Where Raghu’s son and Lakshmaṇ stood.(541) Canto III.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0036",
-      "w": "The Ramayana",
-      "s": "And, hero, as thy child draws near, With tender words his spirit cheer; Thy dying wishes gently speak, And kiss him on the brows and cheek.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
-      "id": "hindouisme.p0037",
-      "w": "The Ramayana",
-      "s": "Apart a dais of crystal rose With couches spread for soft repose, Adorned with gold and gems of price Meet for the halls of Paradise.",
-      "src": {
-        "work": "The Ramayana"
-      }
-    },
-    {
       "id": "hindouisme.p0038",
       "w": "The Ramayana",
-      "s": "But warning cries and words were spurned, And angry taunt and threat returned.",
+      "s": "Ah me, for my unhappy fate, Compelled thy words to tolerate!",
       "src": {
         "work": "The Ramayana"
       }
@@ -326,7 +334,7 @@
     {
       "id": "hindouisme.p0039",
       "w": "The Ramayana",
-      "s": "Ere now a monstrous Vánar came, Laid Lanká waste with ruthless flame, And Aksha, Rávaṇ’s offspring, slew With all his warrior retinue.",
+      "s": "Urge on thy horses,” Rama cried, And “Stay, O stay,” the people sighed.",
       "src": {
         "work": "The Ramayana"
       }
@@ -334,9 +342,169 @@
     {
       "id": "hindouisme.p0040",
       "w": "The Ramayana",
-      "s": "But source of every joy wast thou, And all my bliss is ended now.” Then Ráma to Vibhishaṇ cried: “Whate’er the ritual bids, provide.",
+      "s": "Me also, me ’twere surely good To banish to the distant wood, To dwell amid the shades that hold My famous son with limbs like gold.",
       "src": {
         "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0041",
+      "w": "The Ramayana",
+      "s": "To Lakshmaṇ too their looks they raised, And upon Sítá’s beauty gazed With eyes that closed not lest their sight Should miss the vision of delight.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0042",
+      "w": "The Ramayana",
+      "s": "It stretched a hundred leagues and made For hermit bands a welcome shade.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0043",
+      "w": "The Ramayana",
+      "s": "Where can the Maithil lady stray, Whose sight would chase our cares away?",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0044",
+      "w": "The Ramayana",
+      "s": "Think not I doubt thy valour, no; Or deem thee weaker than thy foe, Yet for a while would have thee stay Nor see thee tempt the fight to-day.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0045",
+      "w": "The Ramayana",
+      "s": "They looked upon the boundless main The awful seat of Varuṇ’s reign.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0046",
+      "w": "The Ramayana",
+      "s": "But warning cries and words were spurned, And angry taunt and threat returned.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0047",
+      "w": "The Ramayana",
+      "s": "Let fleet Hanúmán bring us thence Those herbs of wondrous influence.” Meanwhile the rushing wind grew loud, Red lightnings flashed from banks of cloud.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0048",
+      "w": "The Ramayana",
+      "s": "Look, love, the unconquered sea behold, King Varuṇ’s home ordained of old, Whose boundless waters roar and swell Rich with their store of pearl and shell.",
+      "src": {
+        "work": "The Ramayana"
+      }
+    },
+    {
+      "id": "hindouisme.p0049",
+      "w": "The Vedanta Sutras",
+      "s": "On this view both similes are appropriate (20).--Analogous similes we observe to be employed in ordinary life, as when we compare a man to a lion (21).",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0050",
+      "w": "The Vedanta Sutras",
+      "s": "But there had been a time when, what later writers received as a sacred legacy, determining and confining the whole course of their speculations, first sprang from the minds of creative thinkers not fettered by the tradition of any school, but freely following the promptings of their own heads and hearts.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0051",
+      "w": "The Vedanta Sutras",
+      "s": "All option depends on the notions of man; but the knowledge of the real nature of a thing does not depend on the notions of man, but only on the thing itself.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0052",
+      "w": "The Vedanta Sutras",
+      "s": "The non-intelligent pradhana cannot be the object of the term 'Self' because in the passage Ch.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0053",
+      "w": "The Vedanta Sutras",
+      "s": "For it is possible to make such an assumption, because Brahman is connected with certain limiting adjuncts.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0054",
+      "w": "The Vedanta Sutras",
+      "s": "The quality of being the Self, in the first place, belongs to the highest Lord in its primary (non-figurative or non-derived) sense, as we know from such texts as 'That is the Self,' 'That art thou.' Immortality and fearlessness again are often ascribed to him in Scripture.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0055",
+      "w": "The Vedanta Sutras",
+      "s": "For non-intelligent causes such as clay and the like are not capable of command, with reference to their effects, such as jars and the like.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0056",
+      "w": "The Vedanta Sutras",
+      "s": "Thus we read in Scripture, in the arthavada passage explaining the words 'ram of Medhatithi,' which form part of the Subrahma/n/ya-formula, that 'Indra, having assumed the shape of a ram, carried off Medhatithi, the descendant of Ka/n/va' (Sha/d/v.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0057",
+      "w": "The Vedanta Sutras",
+      "s": "That mantra, taken by itself, is not able to give additional strength to any doctrine.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0058",
+      "w": "The Vedanta Sutras",
+      "s": "Hence their opinion cannot be assumed to be erroneous, and as they moreover strengthen their position by argumentation, the objection remains valid, and we must therefore attempt to explain the Vedanta-texts in conformity with the Sm/ri/tis.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0059",
+      "w": "The Vedanta Sutras",
+      "s": "The object can certainly not be the inherent cause; for that would lead to the erroneous conclusion that from the activity of the causal agent, which has for its object the inherent cause, there results something else (viz.",
+      "src": {
+        "work": "The Vedanta Sutras"
+      }
+    },
+    {
+      "id": "hindouisme.p0060",
+      "w": "The Vedanta Sutras",
+      "s": "This argumentation, we rejoin, is not sound.",
+      "src": {
+        "work": "The Vedanta Sutras"
       }
     }
   ],
@@ -357,187 +525,252 @@
     {
       "id": "hindouisme.f.v0002",
       "kind": "verbatim",
-      "text": "Glad in all good they live, Nigh to the peace of God; and all those live Who pass their days exempt from greed and wrath, Subduing self and senses, knowing the Soul!",
+      "text": "Needs must it be The objects of the sense will stir the sense To like and dislike, yet th' enlightened man Yields not to these, knowing them enemies.",
       "work": "Bhagavad Gita",
       "lang": "en",
       "src": {
         "work": "Bhagavad Gita"
       },
       "quality": {
-        "chars": 165
+        "chars": 149
       }
     },
     {
       "id": "hindouisme.f.v0003",
       "kind": "verbatim",
-      "text": "Nor earth, nor heaven is forfeit, even for him, Because no heart that holds one right desire Treadeth the road of loss!",
+      "text": "But, as often as the heart Breaks--wild and wavering--from control, so oft Let him re-curb it, let him rein it back To the soul's governance; for perfect bliss Grows only in the bosom tranquillised, The spirit passionless, purged from offence, Vowed to the Infinite.",
       "work": "Bhagavad Gita",
       "lang": "en",
       "src": {
         "work": "Bhagavad Gita"
       },
       "quality": {
-        "chars": 119
+        "chars": 266
       }
     },
     {
       "id": "hindouisme.f.v0004",
       "kind": "verbatim",
-      "text": "They that receive not this, failing in faith To grasp the greater wisdom, reach not Me, Destroyer of thy foes!",
+      "text": "What goeth forth from Me, Causing all life to live, is KARMA called: And, Manifested in divided forms, I am the ADHIBHUTA, Lord of Lives; And ADHIDAIVA, Lord of all the Gods, Because I am PURUSHA, who begets.",
       "work": "Bhagavad Gita",
       "lang": "en",
       "src": {
         "work": "Bhagavad Gita"
       },
       "quality": {
-        "chars": 110
+        "chars": 208
       }
     },
     {
       "id": "hindouisme.f.v0005",
       "kind": "verbatim",
-      "text": "As father to a son, As friend to friend, as one Who loveth to his lover, turn Thy face In gentleness on me!",
+      "text": "This friendly human frame, my mind can think Calm thoughts once more; my heart beats still again!",
       "work": "Bhagavad Gita",
       "lang": "en",
       "src": {
         "work": "Bhagavad Gita"
       },
       "quality": {
-        "chars": 107
+        "chars": 97
       }
     },
     {
       "id": "hindouisme.f.v0006",
       "kind": "verbatim",
-      "text": "A Vaisya's task, Born with his nature, is to till the ground, Tend cattle, venture trade.",
+      "text": "If men forsake the holy ordinance, Heedless of Shastras, yet keep faith at heart And worship, what shall be the state of those, Great Krishna!",
       "work": "Bhagavad Gita",
       "lang": "en",
       "src": {
         "work": "Bhagavad Gita"
       },
       "quality": {
-        "chars": 89
+        "chars": 142
       }
     },
     {
       "id": "hindouisme.f.v0007",
       "kind": "verbatim",
-      "text": "In the meantime the valiant Lord Vishnu in the form of an enchantress accompanied by Nara deceived the mighty Danavas and took away the Amrita from their hands.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "It is not possible to comprehend the subtle problems of life unless the thought is tranquil and the energy concentrated.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 160
+        "chars": 120
       }
     },
     {
       "id": "hindouisme.f.v0008",
       "kind": "verbatim",
-      "text": "Why also did the two other sons of Pritha (Bhima and Arjuna) and the two sons of Madri (Nakula and Sahadeva), themselves injured by the wretched Kurus, follow Yudhishthira who was greatly addicted to the evil habit of gambling?",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "Grief and delusion rest upon a belief in diversity, which leads to competition and all forms of selfishness.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 227
+        "chars": 108
       }
     },
     {
       "id": "hindouisme.f.v0009",
       "kind": "verbatim",
-      "text": "The great Asura who was known as Ekachakra became noted on earth as Pritivindhya.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "The story is first suggested in the Rig-Veda; it is told more definitely in the Yajur-Veda; and in the Katha-Upanishad it appears fully elaborated and interwoven with the loftiest Vedic teaching.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 81
+        "chars": 195
       }
     },
     {
       "id": "hindouisme.f.v0010",
       "kind": "verbatim",
-      "text": "He is regarded as a man who by having recourse to forgiveness, shaketh off his rising anger like a snake casting off its slough.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "XVII He who performs this Nachiketa fire-sacrifice three times, being united with the three (mother, father and teacher), and who fulfills the three-fold duty (study of the Vedas, sacrifice and alms-giving) crosses over birth and death.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 128
+        "chars": 236
       }
     },
     {
       "id": "hindouisme.f.v0011",
       "kind": "verbatim",
-      "text": "Art thou going down into the Earth?\" \"'Yayati said, \"Fallen from heaven upon the loss of all my religious merits, I am doomed to enter the Earth-hell.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "I desire only that which is eternal.\" Then Death said to him: \"I now see that thou art a sincere desirer of Truth.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 150
+        "chars": 114
       }
     },
     {
       "id": "hindouisme.f.v0012",
       "kind": "verbatim",
-      "text": "She hath, in this, been moved by the deity of desire that pervadeth every living form.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "It is because of the all-embracing significance of this name that it is used so universally in the Vedic Scriptures to designate the Absolute.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 86
+        "chars": 142
       }
     },
     {
       "id": "hindouisme.f.v0013",
       "kind": "verbatim",
-      "text": "The citizens in great joy came out to receive the sinless and illustrious one, like the dwellers in heaven coming out to receive their chief.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "The Self or Atman holds the position of ruler in this city; and being above the modifications of birth, death and all human imperfections, It is not affected by the changes of the physical organism.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 141
+        "chars": 198
       }
     },
     {
       "id": "hindouisme.f.v0014",
       "kind": "verbatim",
-      "text": "Incapable of bearing the sight of a foe and endued with great activity, he began to exert his prowess.",
-      "work": "The Mahabharata (Adi Parva)",
+      "text": "Nor can it be expressed by finite language or known by finite intelligence, because it is infinite.",
+      "work": "The Upanishads",
       "lang": "en",
       "src": {
-        "work": "The Mahabharata (Adi Parva)"
+        "work": "The Upanishads"
       },
       "quality": {
-        "chars": 102
+        "chars": 99
       }
     },
     {
       "id": "hindouisme.f.v0015",
       "kind": "verbatim",
-      "text": "His mind fixed on pure meditation, that youth of great energy suffered not his heart to waver, O bull among Kshatriyas, the glance he cast upon us was one of wrath.",
+      "text": "V If one knows It here, that is Truth; if one knows It not here, then great is his loss.",
+      "work": "The Upanishads",
+      "lang": "en",
+      "src": {
+        "work": "The Upanishads"
+      },
+      "quality": {
+        "chars": 88
+      }
+    },
+    {
+      "id": "hindouisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Handsome and of various forms and decked with many coloured ear-rings, ye children of Airavata, ye shine like the Sun in the firmament!",
       "work": "The Mahabharata (Adi Parva)",
       "lang": "en",
       "src": {
         "work": "The Mahabharata (Adi Parva)"
       },
       "quality": {
-        "chars": 164
+        "chars": 135
       }
     },
     {
-      "id": "hindouisme.f.v0016",
+      "id": "hindouisme.f.v0017",
+      "kind": "verbatim",
+      "text": "Casting his eyes around in wonder he saw Valakhilya Rishis hanging therefrom with heads downwards and engaged in ascetic penances.",
+      "work": "The Mahabharata (Adi Parva)",
+      "lang": "en",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "hindouisme.f.v0018",
+      "kind": "verbatim",
+      "text": "And bowing down unto her and his eldest brother, and smelling the heads of his younger brothers, that oppressor of all foes was himself embraced by his mother and every one of those bulls among men.",
+      "work": "The Mahabharata (Adi Parva)",
+      "lang": "en",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "hindouisme.f.v0019",
+      "kind": "verbatim",
+      "text": "If therefore, ye children, ye desire to witness that festival, go to Varanavata with your followers and friends and enjoy yourselves there like the celestials.",
+      "work": "The Mahabharata (Adi Parva)",
+      "lang": "en",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "hindouisme.f.v0020",
+      "kind": "verbatim",
+      "text": "After Krishna had retired, the illustrious Rishi, addressing in private all the Pandavas with Yudhishthira at their head, said, \"The renowned princess of Panchala is the wedded wife of you all.",
+      "work": "The Mahabharata (Adi Parva)",
+      "lang": "en",
+      "src": {
+        "work": "The Mahabharata (Adi Parva)"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "hindouisme.f.v0021",
       "kind": "verbatim",
       "text": "Me also, me ’twere surely good To banish to the distant wood, To dwell amid the shades that hold My famous son with limbs like gold.",
       "work": "The Ramayana",
@@ -550,91 +783,170 @@
       }
     },
     {
-      "id": "hindouisme.f.v0017",
-      "kind": "verbatim",
-      "text": "E’en when my banishment is o’er, Back to my home I go no more, To look upon the widowed state Reft of her king, disconsolate.",
-      "work": "The Ramayana",
-      "lang": "en",
-      "src": {
-        "work": "The Ramayana"
-      },
-      "quality": {
-        "chars": 125
-      }
-    },
-    {
-      "id": "hindouisme.f.v0018",
-      "kind": "verbatim",
-      "text": "Within those bounds, their brethren slain, No giant shall this day remain, But all shall fly with many a tear And fearing, rid the saints of fear.",
-      "work": "The Ramayana",
-      "lang": "en",
-      "src": {
-        "work": "The Ramayana"
-      },
-      "quality": {
-        "chars": 146
-      }
-    },
-    {
-      "id": "hindouisme.f.v0019",
-      "kind": "verbatim",
-      "text": "Leave, lady, leave this lone retreat In forest wilds for thee unmeet, Where giants fierce and strong assume All shapes and wander in the gloom.",
-      "work": "The Ramayana",
-      "lang": "en",
-      "src": {
-        "work": "The Ramayana"
-      },
-      "quality": {
-        "chars": 143
-      }
-    },
-    {
-      "id": "hindouisme.f.v0020",
-      "kind": "verbatim",
-      "text": "With ready zeal he sought the shade, And reached with hasty steps the wood Where Raghu’s son and Lakshmaṇ stood.(541) Canto III.",
-      "work": "The Ramayana",
-      "lang": "en",
-      "src": {
-        "work": "The Ramayana"
-      },
-      "quality": {
-        "chars": 128
-      }
-    },
-    {
-      "id": "hindouisme.f.v0021",
-      "kind": "verbatim",
-      "text": "Apart a dais of crystal rose With couches spread for soft repose, Adorned with gold and gems of price Meet for the halls of Paradise.",
-      "work": "The Ramayana",
-      "lang": "en",
-      "src": {
-        "work": "The Ramayana"
-      },
-      "quality": {
-        "chars": 133
-      }
-    },
-    {
       "id": "hindouisme.f.v0022",
       "kind": "verbatim",
-      "text": "Ere now a monstrous Vánar came, Laid Lanká waste with ruthless flame, And Aksha, Rávaṇ’s offspring, slew With all his warrior retinue.",
+      "text": "To Lakshmaṇ too their looks they raised, And upon Sítá’s beauty gazed With eyes that closed not lest their sight Should miss the vision of delight.",
       "work": "The Ramayana",
       "lang": "en",
       "src": {
         "work": "The Ramayana"
       },
       "quality": {
-        "chars": 134
+        "chars": 147
+      }
+    },
+    {
+      "id": "hindouisme.f.v0023",
+      "kind": "verbatim",
+      "text": "Think not I doubt thy valour, no; Or deem thee weaker than thy foe, Yet for a while would have thee stay Nor see thee tempt the fight to-day.",
+      "work": "The Ramayana",
+      "lang": "en",
+      "src": {
+        "work": "The Ramayana"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "hindouisme.f.v0024",
+      "kind": "verbatim",
+      "text": "Let fleet Hanúmán bring us thence Those herbs of wondrous influence.” Meanwhile the rushing wind grew loud, Red lightnings flashed from banks of cloud.",
+      "work": "The Ramayana",
+      "lang": "en",
+      "src": {
+        "work": "The Ramayana"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hindouisme.f.v0025",
+      "kind": "verbatim",
+      "text": "Look, love, the unconquered sea behold, King Varuṇ’s home ordained of old, Whose boundless waters roar and swell Rich with their store of pearl and shell.",
+      "work": "The Ramayana",
+      "lang": "en",
+      "src": {
+        "work": "The Ramayana"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "hindouisme.f.v0026",
+      "kind": "verbatim",
+      "text": "On this view both similes are appropriate (20).--Analogous similes we observe to be employed in ordinary life, as when we compare a man to a lion (21).",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hindouisme.f.v0027",
+      "kind": "verbatim",
+      "text": "All option depends on the notions of man; but the knowledge of the real nature of a thing does not depend on the notions of man, but only on the thing itself.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "hindouisme.f.v0028",
+      "kind": "verbatim",
+      "text": "The non-intelligent pradhana cannot be the object of the term 'Self' because in the passage Ch.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "hindouisme.f.v0029",
+      "kind": "verbatim",
+      "text": "The quality of being the Self, in the first place, belongs to the highest Lord in its primary (non-figurative or non-derived) sense, as we know from such texts as 'That is the Self,' 'That art thou.' Immortality and fearlessness again are often ascribed to him in Scripture.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "hindouisme.f.v0030",
+      "kind": "verbatim",
+      "text": "Thus we read in Scripture, in the arthavada passage explaining the words 'ram of Medhatithi,' which form part of the Subrahma/n/ya-formula, that 'Indra, having assumed the shape of a ram, carried off Medhatithi, the descendant of Ka/n/va' (Sha/d/v.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "hindouisme.f.v0031",
+      "kind": "verbatim",
+      "text": "That mantra, taken by itself, is not able to give additional strength to any doctrine.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 86
+      }
+    },
+    {
+      "id": "hindouisme.f.v0032",
+      "kind": "verbatim",
+      "text": "Hence their opinion cannot be assumed to be erroneous, and as they moreover strengthen their position by argumentation, the objection remains valid, and we must therefore attempt to explain the Vedanta-texts in conformity with the Sm/ri/tis.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "hindouisme.f.v0033",
+      "kind": "verbatim",
+      "text": "The object can certainly not be the inherent cause; for that would lead to the erroneous conclusion that from the activity of the causal agent, which has for its object the inherent cause, there results something else (viz.",
+      "work": "The Vedanta Sutras",
+      "lang": "en",
+      "src": {
+        "work": "The Vedanta Sutras"
+      },
+      "quality": {
+        "chars": 223
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:c30bea63a37b4bd607bc19f46a26fd66631baf5b90218fb601a701a06a7db7fd"
+  "checksum": "sha256:6a7378ed65162153e4df32e4271d64b1aca91752cf25d3cb3ac747f1b2f848f0"
 }

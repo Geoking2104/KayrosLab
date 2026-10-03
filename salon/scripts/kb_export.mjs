@@ -24,7 +24,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import {
-  CATALOG_FILE, MIRROR_DIR, NOISE, kbRawDir, kbRoot, loadCatalog, loadKbMap,
+  CATALOG_FILE, MIRROR_DIR, NOISE, REPO, kbRawDir, kbRoot, loadCatalog, loadKbMap,
   nowIso, parseArgs, readJSON, saveKbMap, sentencesOf, sha256, stableChecksum,
   usableSentence, writeJSON,
 } from "./openkb_common.mjs";
@@ -135,7 +135,7 @@ export function mineFormulas({ authorId, entries }) {
 
 /* ----------------------------------------------------------------- packs */
 
-export function buildPack({ authorId, entries, source, kbVersion, worksStats }) {
+export function buildPack({ authorId, entries, source, kbVersion, worksStats, doctrine }) {
   const { formulas, verbatim, patterns } = mineFormulas({ authorId, entries });
   const passages = entries.map((e, i) => ({
     id: `${authorId}.p${String(i + 1).padStart(4, "0")}`,
@@ -156,8 +156,9 @@ export function buildPack({ authorId, entries, source, kbVersion, worksStats }) 
     works: worksStats,
     passages,
     formulas,
-    concepts: [],
+    concepts: (doctrine && doctrine.concepts) || [],
     entities: [],
+    doctrine: doctrine || null,
     stats: { sentences: passages.length, formulas: formulas.length, verbatim: verbatim.length, patterns: patterns.length },
     checksum,
   };
@@ -250,6 +251,8 @@ async function main() {
 
   const catalog = loadCatalog();
   const map = loadKbMap();
+  // Lot 4 : la doctrine voyage dans les packs (concepts + thèses + œuvres).
+  const doctrine = readJSON(join(REPO, "salon", "src", "lib", "salon", "doctrine.json"), {});
   const fromCorpus = Boolean(args["from-corpus"]);
   const corpusPath = join(mirror, "corpus.json");
   const previousCorpus = readJSON(corpusPath, {});
@@ -272,7 +275,7 @@ async function main() {
     const titleByWork = new Map();
     for (const e of entries) titleByWork.set(e.w, (titleByWork.get(e.w) || 0) + 1);
     worksStats[id] = [...titleByWork.entries()].map(([title, sentences]) => ({ title, sentences }));
-    const pack = buildPack({ authorId: id, entries, source, kbVersion, worksStats: worksStats[id] });
+    const pack = buildPack({ authorId: id, entries, source, kbVersion, worksStats: worksStats[id], doctrine: doctrine[id] });
     const v = validatePack(pack, { catalogAuthor: author });
     if (v.hard.length) {
       console.error(`  ✗ ${id} : pack invalide —\n    ${v.hard.slice(0, 6).join("\n    ")}`);

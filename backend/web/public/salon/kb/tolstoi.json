@@ -1,26 +1,130 @@
 {
   "authorId": "tolstoi",
   "kbVersion": "tolstoi@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.160Z",
+  "builtAt": "2026-10-03T21:23:12.245Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
+      "title": "War and Peace",
+      "sentences": 12
+    },
+    {
       "title": "Anna Karenina",
-      "sentences": 14
+      "sentences": 12
     },
     {
       "title": "Resurrection",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "The Cossacks: A Tale of 1852",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Kreutzer Sonata and Other Stories",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "tolstoi.p0001",
+      "w": "War and Peace",
+      "s": "The shapely figure of the fair-haired soldier, with his clear blue eyes, stepped forward from the ranks, went up to the commander in chief, and presented arms.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0002",
+      "w": "War and Peace",
+      "s": "The gloom that enveloped the army was filled with their groans, which seemed to melt into one with the darkness of the night.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0003",
+      "w": "War and Peace",
+      "s": "The Emperor Francis, a rosy, long faced young man, sat very erect on his handsome black horse, looking about him in a leisurely and preoccupied manner.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0004",
+      "w": "War and Peace",
+      "s": "The traveler, having packed his things with his practiced hands, began fastening his coat.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0005",
+      "w": "War and Peace",
+      "s": "After the usual ceremonies Pierre rose and began his address.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0006",
+      "w": "War and Peace",
+      "s": "You like listening?” she said to Natásha, with a smile extremely like “Uncle’s.” “That’s a good player of ours,” she added.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0007",
+      "w": "War and Peace",
+      "s": "Eh?” “That depends on our luck in starting, else why shouldn’t we be there in time?” replied Balagá.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0008",
+      "w": "War and Peace",
+      "s": "He did not know why, but he had to have a biscuit from the Tsar’s hand and he felt that he must not give way.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0009",
+      "w": "War and Peace",
+      "s": "The flogging was only just over, and the executioner was releasing from the flogging bench a stout man with red whiskers, in blue stockings and a green jacket, who was moaning piteously.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0010",
+      "w": "War and Peace",
+      "s": "But I love them, you know, and don’t want to distress either of them.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0011",
+      "w": "War and Peace",
+      "s": "Natásha, undress, darling; lie down on my bed.” A bed had been made on a bedstead for the countess only.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0012",
+      "w": "War and Peace",
+      "s": "Thus he stumbled on Bagovút’s corps in a wood when it was already broad daylight, though the corps should long before have joined Orlóv-Denísov.",
+      "src": {
+        "work": "War and Peace"
+      }
+    },
+    {
+      "id": "tolstoi.p0013",
       "w": "Anna Karenina",
       "s": "Anna smiled, and her smile was reflected by him.",
       "src": {
@@ -28,55 +132,47 @@
       }
     },
     {
-      "id": "tolstoi.p0002",
+      "id": "tolstoi.p0014",
       "w": "Anna Karenina",
-      "s": "The princess was distracted, and did not know what to do.",
+      "s": "You shall not see me if my presence is distasteful to you.” “I don’t want to drive you away.” “Only don’t change anything, leave everything as it is,” he said in a shaky voice.",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0003",
+      "id": "tolstoi.p0015",
       "w": "Anna Karenina",
-      "s": "He was angry with all of them for their interference just because he felt in his soul that they, all these people, were right.",
+      "s": "Getting his right foot in the stirrup, he smoothed the double reins, as he always did, between his fingers, and Cord let go.",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0004",
+      "id": "tolstoi.p0016",
       "w": "Anna Karenina",
-      "s": "The princess, hearing that Varenka had a good voice, asked her to come and sing to them in the evening.",
+      "s": "But what did you do while it was raining?” “Rain?",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0005",
+      "id": "tolstoi.p0017",
       "w": "Anna Karenina",
-      "s": "I’ll break through the spiderweb of lies in which he wants to catch me, come what may.",
+      "s": "Perhaps they know us!” and he hurriedly turned off, drawing her after him into a side path.",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0006",
+      "id": "tolstoi.p0018",
       "w": "Anna Karenina",
-      "s": "He walked about the whole day and only brought back three birds, but to make up for that—he brought back, as he always did from shooting, an excellent appetite, excellent spirits, and that keen, intellectual mood which with him always accompanied violent physical exertion.",
+      "s": "But now, do this, come and see my wife.” “Well, we look at the matter differently,” said Alexey Alexandrovitch coldly.",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0007",
-      "w": "Anna Karenina",
-      "s": "The sledge-drivers clearly knew all about it.",
-      "src": {
-        "work": "Anna Karenina"
-      }
-    },
-    {
-      "id": "tolstoi.p0008",
+      "id": "tolstoi.p0019",
       "w": "Anna Karenina",
       "s": "And therefore, deciding to divide the trousseau into two parts—a larger and smaller trousseau—the princess consented to have the wedding before Lent.",
       "src": {
@@ -84,23 +180,23 @@
       }
     },
     {
-      "id": "tolstoi.p0009",
+      "id": "tolstoi.p0020",
       "w": "Anna Karenina",
-      "s": "One must know all the facts,” he said in his thin voice.",
+      "s": "I must own I’m very, very glad you came.",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0010",
+      "id": "tolstoi.p0021",
       "w": "Anna Karenina",
-      "s": "Well, let’s go,” he said, faintly smiling under his mustache, and showing by this smile that he knew the cause of Vronsky’s gloominess, and did not attach any significance to it.",
+      "s": "I often think of her.” “A nice person to think about!",
       "src": {
         "work": "Anna Karenina"
       }
     },
     {
-      "id": "tolstoi.p0011",
+      "id": "tolstoi.p0022",
       "w": "Anna Karenina",
       "s": "She was ashamed of the very patches and darned places of which she had been so proud at home.",
       "src": {
@@ -108,113 +204,25 @@
       }
     },
     {
-      "id": "tolstoi.p0012",
-      "w": "Anna Karenina",
-      "s": "Please come, Konstantin Dmitrievitch,” he said, “your brother’s looking for you.",
-      "src": {
-        "work": "Anna Karenina"
-      }
-    },
-    {
-      "id": "tolstoi.p0013",
-      "w": "Anna Karenina",
-      "s": "But you promised it, and she wrote to you, and moved to Moscow.",
-      "src": {
-        "work": "Anna Karenina"
-      }
-    },
-    {
-      "id": "tolstoi.p0014",
-      "w": "Anna Karenina",
-      "s": "I know that in my position I can’t be received by any decent woman.",
-      "src": {
-        "work": "Anna Karenina"
-      }
-    },
-    {
-      "id": "tolstoi.p0015",
-      "w": "Resurrection",
-      "s": "Four pages were covered with the 27 paragraphs describing all the details of the external examination of the enormous, fat, swollen, and decomposing body of the merchant who had been making merry in the town.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0016",
-      "w": "Resurrection",
-      "s": "Immediately, your excellency,” said Stephen, getting a large soup ladle out of the sideboard, which was decorated with a number of silver vases.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0017",
-      "w": "Resurrection",
-      "s": "I will go and ask,” and the servant went away.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0018",
-      "w": "Resurrection",
-      "s": "I have come to ask you to forgive me,” he said, in a loud but monotonous voice, like a lesson learnt by heart.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0019",
-      "w": "Resurrection",
-      "s": "Let us sit down.” “I did not expect to see you like this.” “Oh, I am very happy.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0020",
-      "w": "Resurrection",
-      "s": "All this is so,” said another voice, “but you are not going to spend all your life in Siberia.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0021",
-      "w": "Resurrection",
-      "s": "Just see what a tremendous house they have begun to build,” he said, as if he was partly responsible for the building of the house and proud of it.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
-      "id": "tolstoi.p0022",
-      "w": "Resurrection",
-      "s": "Wolf spoke a little about the Countess Katerina Ivanovna and her enthusiasm for the new religious teaching, which he neither approved nor disapproved of, but which was evidently needless to him who was so comme il faut, and then rang the bell.",
-      "src": {
-        "work": "Resurrection"
-      }
-    },
-    {
       "id": "tolstoi.p0023",
-      "w": "Resurrection",
-      "s": "Toporoff was reading the petition and shaking his head.",
+      "w": "Anna Karenina",
+      "s": "Do you know that Dolly’s position is becoming utterly impossible?",
       "src": {
-        "work": "Resurrection"
+        "work": "Anna Karenina"
       }
     },
     {
       "id": "tolstoi.p0024",
-      "w": "Resurrection",
-      "s": "He sat quite straight on a small chair, and listened attentively, trying to understand her and to answer rightly.",
+      "w": "Anna Karenina",
+      "s": "And finding the book, and sitting down again in her place, she opened it.",
       "src": {
-        "work": "Resurrection"
+        "work": "Anna Karenina"
       }
     },
     {
       "id": "tolstoi.p0025",
       "w": "Resurrection",
-      "s": "And, as to our girl here, he was so glad to see her, there are no words for it,” said the woman, and smiled.",
+      "s": "And this mania of selfishness attacked Nekhludoff from the moment he entered the army and began living in the way his companions lived.",
       "src": {
         "work": "Resurrection"
       }
@@ -222,7 +230,7 @@
     {
       "id": "tolstoi.p0026",
       "w": "Resurrection",
-      "s": "He felt for her something he had never experienced before.",
+      "s": "But I read the answer before going out,” said the foreman, defending himself, “and nobody objected.” “I had just then gone out of the room,” said Peter Gerasimovitch, turning to Nekhludoff, “and your thoughts must have been wool-gathering to let the thing pass.” “I never imagined this,” Nekhludoff replied.",
       "src": {
         "work": "Resurrection"
       }
@@ -230,13 +238,85 @@
     {
       "id": "tolstoi.p0027",
       "w": "Resurrection",
-      "s": "One of these was an old idiot, whom Nekhludoff had often seen marching with the gang; another was a boy about twelve; he lay between the two other convicts, with his head on the leg of one of them.",
+      "s": "I’ll offer her something.” “Come on then,” said the red-haired one, advancing towards Korableva.",
       "src": {
         "work": "Resurrection"
       }
     },
     {
       "id": "tolstoi.p0028",
+      "w": "Resurrection",
+      "s": "I have come to ask you to forgive me,” he said, in a loud but monotonous voice, like a lesson learnt by heart.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0029",
+      "w": "Resurrection",
+      "s": "When the assistant left the cell and went into the corridor to give some order the man grew quite bold.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0030",
+      "w": "Resurrection",
+      "s": "I shall go across and see her.” “At the end of the village; the further side, the third from the end.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0031",
+      "w": "Resurrection",
+      "s": "Just see what a tremendous house they have begun to build,” he said, as if he was partly responsible for the building of the house and proud of it.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0032",
+      "w": "Resurrection",
+      "s": "The hearing of the case soon commenced, and Nekhludoff, with the public, entered the left side of the Senate Chamber.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0033",
+      "w": "Resurrection",
+      "s": "He, with his joyful idea of the change that he imagined was going on in her soul, now seemed ridiculous in his own eyes.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0034",
+      "w": "Resurrection",
+      "s": "The policemen who carried the corpse were followed by a police officer and a medical assistant.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0035",
+      "w": "Resurrection",
+      "s": "Take her to the women,” shouted the officer, arranging his sword belt.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0036",
+      "w": "Resurrection",
+      "s": "He became a revolutionist, and so did she.",
+      "src": {
+        "work": "Resurrection"
+      }
+    },
+    {
+      "id": "tolstoi.p0037",
       "w": "The Cossacks: A Tale of 1852",
       "s": "Besides, the continuous performance of man’s heavy work and the responsibilities entrusted to her have endowed the Grebénsk women with a peculiarly independent masculine character and have remarkably developed their physical powers, common sense, resolution, and stability.",
       "src": {
@@ -244,81 +324,9 @@
       }
     },
     {
-      "id": "tolstoi.p0029",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Did you take him there?” “Showed him where,” answered Lukáshka, spreading out his cloak.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0030",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Why else should he swim alone?” said a third.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0031",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "He and Nazárka are merry-making at Yámka’s.” (Yámka was an unmarried, disreputable Cossack woman who kept an illicit pot-house.) “I heard say they had drunk half a pailful.” “What luck that Snatcher has,” somebody remarked.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0032",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "He had had a table, a samovar, wine, and a candle brought out, and over a cup of tea and a cigar he listened to the tales the old man told seated on the threshold at his feet.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0033",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Then she frowned, and pretending to aim with a gun, she shrieked and began rapidly humming and shaking her head.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0034",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Every little glade was overgrown with blackberry bushes and grey feathery reeds.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0035",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Lukáshka went back alone to the cordon pondering over Olénin’s action.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0036",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "Why spoil your life and not make use of what is at hand?",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
-      "id": "tolstoi.p0037",
-      "w": "The Cossacks: A Tale of 1852",
-      "s": "It had few words, but its charm lay in the sad refrain.",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      }
-    },
-    {
       "id": "tolstoi.p0038",
       "w": "The Cossacks: A Tale of 1852",
-      "s": "Not tired yet!” came the old woman’s sleepy voice from the wagon.",
+      "s": "Who is to go tonight?” shouted one of the Cossacks through the open door to the corporal in the next room.",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
       }
@@ -326,7 +334,7 @@
     {
       "id": "tolstoi.p0039",
       "w": "The Cossacks: A Tale of 1852",
-      "s": "That season more wine than usual had been produced, and the people were now free from their labours.",
+      "s": "The Cossacks began bustling about and talking.",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
       }
@@ -334,9 +342,169 @@
     {
       "id": "tolstoi.p0040",
       "w": "The Cossacks: A Tale of 1852",
-      "s": "Then, thank goodness, we heard dogs howling.” “Fools!” said Daddy Eróshka.",
+      "s": "He and Nazárka are merry-making at Yámka’s.” (Yámka was an unmarried, disreputable Cossack woman who kept an illicit pot-house.) “I heard say they had drunk half a pailful.” “What luck that Snatcher has,” somebody remarked.",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0041",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "Only the incessant ringing voices of frogs from the damp distance reached the young man.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0042",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "Though, of course, with my education I may understand, but my wife from her human weakness...” “Well then, will you have some tea?” “If you will permit me, I will bring my own particular glass,” answered the cornet, and stepped out into the porch.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0043",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "He is a brave, a great brave!” he said, pointing to the Chéchen.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0044",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "He kept lifting his eyes from it and looking at the powerful young woman who was moving about.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0045",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "Olénin could not help admiring the horse, he had not yet met with such a beauty in the Caucasus.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0046",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "Not tired yet!” came the old woman’s sleepy voice from the wagon.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0047",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "I have prepared and have procured everything for Maryánka.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0048",
+      "w": "The Cossacks: A Tale of 1852",
+      "s": "Well, Maryánka, will you belong to the ‘fair-faced lad’, and not to Lukáshka?” said Belétski, speaking to Maryánka first for propriety’s sake, but having received no reply he went up to Ústenka and begged her to bring Maryánka home with her.",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      }
+    },
+    {
+      "id": "tolstoi.p0049",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "To tell the truth, without false modesty, they pursued me and finally captured me.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0050",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "I began to question her; she answered that she missed her absent mother.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0051",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "In the periods of this causeless hatred I gradually uncrowned her.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0052",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "It is at once the torture and the relief of man that, when he lives irregularly, he can cherish illusions as to the miseries of his situation.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0053",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "What could have been simpler than to talk with him a few minutes, and then dismiss him coldly without introducing him to my wife?",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0054",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "Two days later I was to start for the assembly of the Zemstvo, and for that reason, on taking leave of me and carrying all his scores with him, Troukhatchevsky asked me when I should return.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0055",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "I felt the need of giving free course to my violence and ‘the joy of wrath.’ “No, they did not finish.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0056",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "The soldiers, discouraged, retreated in great disorder.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0057",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "But Simeon’s intentions reached the ears of the Indian ruler, who prepared to do battle with him.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0058",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "Such conduct on your part would have been best for all concerned.” He continued: “Well, you had a fight, you wicked people.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0059",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "I should have stopped to snatch the bunch of burning straw, and, throwing it on the ground, should have extinguished it with my feet!” Ivan tried to cry out and arouse his people, but his lips refused to utter a word.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      }
+    },
+    {
+      "id": "tolstoi.p0060",
+      "w": "The Kreutzer Sonata and Other Stories",
+      "s": "As Akulina helped the little ones into the wagon she took occasion to remind Polikey of the solemn promise he had made her not to touch a drop of vodka during the journey.",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
       }
     }
   ],
@@ -344,70 +512,148 @@
     {
       "id": "tolstoi.f.v0001",
       "kind": "verbatim",
-      "text": "He was angry with all of them for their interference just because he felt in his soul that they, all these people, were right.",
-      "work": "Anna Karenina",
+      "text": "The shapely figure of the fair-haired soldier, with his clear blue eyes, stepped forward from the ranks, went up to the commander in chief, and presented arms.",
+      "work": "War and Peace",
       "lang": "en",
       "src": {
-        "work": "Anna Karenina"
+        "work": "War and Peace"
       },
       "quality": {
-        "chars": 126
+        "chars": 159
       }
     },
     {
       "id": "tolstoi.f.v0002",
       "kind": "verbatim",
-      "text": "The princess, hearing that Varenka had a good voice, asked her to come and sing to them in the evening.",
-      "work": "Anna Karenina",
+      "text": "The gloom that enveloped the army was filled with their groans, which seemed to melt into one with the darkness of the night.",
+      "work": "War and Peace",
       "lang": "en",
       "src": {
-        "work": "Anna Karenina"
+        "work": "War and Peace"
       },
       "quality": {
-        "chars": 103
+        "chars": 125
       }
     },
     {
       "id": "tolstoi.f.v0003",
       "kind": "verbatim",
-      "text": "I’ll break through the spiderweb of lies in which he wants to catch me, come what may.",
-      "work": "Anna Karenina",
+      "text": "The Emperor Francis, a rosy, long faced young man, sat very erect on his handsome black horse, looking about him in a leisurely and preoccupied manner.",
+      "work": "War and Peace",
       "lang": "en",
       "src": {
-        "work": "Anna Karenina"
+        "work": "War and Peace"
       },
       "quality": {
-        "chars": 86
+        "chars": 151
       }
     },
     {
       "id": "tolstoi.f.v0004",
       "kind": "verbatim",
-      "text": "He walked about the whole day and only brought back three birds, but to make up for that—he brought back, as he always did from shooting, an excellent appetite, excellent spirits, and that keen, intellectual mood which with him always accompanied violent physical exertion.",
-      "work": "Anna Karenina",
+      "text": "The traveler, having packed his things with his practiced hands, began fastening his coat.",
+      "work": "War and Peace",
       "lang": "en",
       "src": {
-        "work": "Anna Karenina"
+        "work": "War and Peace"
       },
       "quality": {
-        "chars": 273
+        "chars": 90
       }
     },
     {
       "id": "tolstoi.f.v0005",
       "kind": "verbatim",
-      "text": "Well, let’s go,” he said, faintly smiling under his mustache, and showing by this smile that he knew the cause of Vronsky’s gloominess, and did not attach any significance to it.",
+      "text": "You like listening?” she said to Natásha, with a smile extremely like “Uncle’s.” “That’s a good player of ours,” she added.",
+      "work": "War and Peace",
+      "lang": "en",
+      "src": {
+        "work": "War and Peace"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "tolstoi.f.v0006",
+      "kind": "verbatim",
+      "text": "He did not know why, but he had to have a biscuit from the Tsar’s hand and he felt that he must not give way.",
+      "work": "War and Peace",
+      "lang": "en",
+      "src": {
+        "work": "War and Peace"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "tolstoi.f.v0007",
+      "kind": "verbatim",
+      "text": "The flogging was only just over, and the executioner was releasing from the flogging bench a stout man with red whiskers, in blue stockings and a green jacket, who was moaning piteously.",
+      "work": "War and Peace",
+      "lang": "en",
+      "src": {
+        "work": "War and Peace"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "tolstoi.f.v0008",
+      "kind": "verbatim",
+      "text": "Natásha, undress, darling; lie down on my bed.” A bed had been made on a bedstead for the countess only.",
+      "work": "War and Peace",
+      "lang": "en",
+      "src": {
+        "work": "War and Peace"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "tolstoi.f.v0009",
+      "kind": "verbatim",
+      "text": "You shall not see me if my presence is distasteful to you.” “I don’t want to drive you away.” “Only don’t change anything, leave everything as it is,” he said in a shaky voice.",
       "work": "Anna Karenina",
       "lang": "en",
       "src": {
         "work": "Anna Karenina"
       },
       "quality": {
-        "chars": 178
+        "chars": 176
       }
     },
     {
-      "id": "tolstoi.f.v0006",
+      "id": "tolstoi.f.v0010",
+      "kind": "verbatim",
+      "text": "Getting his right foot in the stirrup, he smoothed the double reins, as he always did, between his fingers, and Cord let go.",
+      "work": "Anna Karenina",
+      "lang": "en",
+      "src": {
+        "work": "Anna Karenina"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "tolstoi.f.v0011",
+      "kind": "verbatim",
+      "text": "Perhaps they know us!” and he hurriedly turned off, drawing her after him into a side path.",
+      "work": "Anna Karenina",
+      "lang": "en",
+      "src": {
+        "work": "Anna Karenina"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "tolstoi.f.v0012",
       "kind": "verbatim",
       "text": "She was ashamed of the very patches and darned places of which she had been so proud at home.",
       "work": "Anna Karenina",
@@ -420,46 +666,20 @@
       }
     },
     {
-      "id": "tolstoi.f.v0007",
+      "id": "tolstoi.f.v0013",
       "kind": "verbatim",
-      "text": "Please come, Konstantin Dmitrievitch,” he said, “your brother’s looking for you.",
-      "work": "Anna Karenina",
-      "lang": "en",
-      "src": {
-        "work": "Anna Karenina"
-      },
-      "quality": {
-        "chars": 80
-      }
-    },
-    {
-      "id": "tolstoi.f.v0008",
-      "kind": "verbatim",
-      "text": "Four pages were covered with the 27 paragraphs describing all the details of the external examination of the enormous, fat, swollen, and decomposing body of the merchant who had been making merry in the town.",
+      "text": "I’ll offer her something.” “Come on then,” said the red-haired one, advancing towards Korableva.",
       "work": "Resurrection",
       "lang": "en",
       "src": {
         "work": "Resurrection"
       },
       "quality": {
-        "chars": 208
+        "chars": 96
       }
     },
     {
-      "id": "tolstoi.f.v0009",
-      "kind": "verbatim",
-      "text": "Immediately, your excellency,” said Stephen, getting a large soup ladle out of the sideboard, which was decorated with a number of silver vases.",
-      "work": "Resurrection",
-      "lang": "en",
-      "src": {
-        "work": "Resurrection"
-      },
-      "quality": {
-        "chars": 144
-      }
-    },
-    {
-      "id": "tolstoi.f.v0010",
+      "id": "tolstoi.f.v0014",
       "kind": "verbatim",
       "text": "I have come to ask you to forgive me,” he said, in a loud but monotonous voice, like a lesson learnt by heart.",
       "work": "Resurrection",
@@ -472,33 +692,33 @@
       }
     },
     {
-      "id": "tolstoi.f.v0011",
+      "id": "tolstoi.f.v0015",
       "kind": "verbatim",
-      "text": "Let us sit down.” “I did not expect to see you like this.” “Oh, I am very happy.",
+      "text": "When the assistant left the cell and went into the corridor to give some order the man grew quite bold.",
       "work": "Resurrection",
       "lang": "en",
       "src": {
         "work": "Resurrection"
       },
       "quality": {
-        "chars": 80
+        "chars": 103
       }
     },
     {
-      "id": "tolstoi.f.v0012",
+      "id": "tolstoi.f.v0016",
       "kind": "verbatim",
-      "text": "All this is so,” said another voice, “but you are not going to spend all your life in Siberia.",
+      "text": "I shall go across and see her.” “At the end of the village; the further side, the third from the end.",
       "work": "Resurrection",
       "lang": "en",
       "src": {
         "work": "Resurrection"
       },
       "quality": {
-        "chars": 94
+        "chars": 101
       }
     },
     {
-      "id": "tolstoi.f.v0013",
+      "id": "tolstoi.f.v0017",
       "kind": "verbatim",
       "text": "Just see what a tremendous house they have begun to build,” he said, as if he was partly responsible for the building of the house and proud of it.",
       "work": "Resurrection",
@@ -511,72 +731,59 @@
       }
     },
     {
-      "id": "tolstoi.f.v0014",
-      "kind": "verbatim",
-      "text": "Wolf spoke a little about the Countess Katerina Ivanovna and her enthusiasm for the new religious teaching, which he neither approved nor disapproved of, but which was evidently needless to him who was so comme il faut, and then rang the bell.",
-      "work": "Resurrection",
-      "lang": "en",
-      "src": {
-        "work": "Resurrection"
-      },
-      "quality": {
-        "chars": 243
-      }
-    },
-    {
-      "id": "tolstoi.f.v0015",
-      "kind": "verbatim",
-      "text": "He sat quite straight on a small chair, and listened attentively, trying to understand her and to answer rightly.",
-      "work": "Resurrection",
-      "lang": "en",
-      "src": {
-        "work": "Resurrection"
-      },
-      "quality": {
-        "chars": 113
-      }
-    },
-    {
-      "id": "tolstoi.f.v0016",
-      "kind": "verbatim",
-      "text": "One of these was an old idiot, whom Nekhludoff had often seen marching with the gang; another was a boy about twelve; he lay between the two other convicts, with his head on the leg of one of them.",
-      "work": "Resurrection",
-      "lang": "en",
-      "src": {
-        "work": "Resurrection"
-      },
-      "quality": {
-        "chars": 197
-      }
-    },
-    {
-      "id": "tolstoi.f.v0017",
-      "kind": "verbatim",
-      "text": "Besides, the continuous performance of man’s heavy work and the responsibilities entrusted to her have endowed the Grebénsk women with a peculiarly independent masculine character and have remarkably developed their physical powers, common sense, resolution, and stability.",
-      "work": "The Cossacks: A Tale of 1852",
-      "lang": "en",
-      "src": {
-        "work": "The Cossacks: A Tale of 1852"
-      },
-      "quality": {
-        "chars": 273
-      }
-    },
-    {
       "id": "tolstoi.f.v0018",
       "kind": "verbatim",
-      "text": "Did you take him there?” “Showed him where,” answered Lukáshka, spreading out his cloak.",
-      "work": "The Cossacks: A Tale of 1852",
+      "text": "The hearing of the case soon commenced, and Nekhludoff, with the public, entered the left side of the Senate Chamber.",
+      "work": "Resurrection",
       "lang": "en",
       "src": {
-        "work": "The Cossacks: A Tale of 1852"
+        "work": "Resurrection"
       },
       "quality": {
-        "chars": 88
+        "chars": 117
       }
     },
     {
       "id": "tolstoi.f.v0019",
+      "kind": "verbatim",
+      "text": "He, with his joyful idea of the change that he imagined was going on in her soul, now seemed ridiculous in his own eyes.",
+      "work": "Resurrection",
+      "lang": "en",
+      "src": {
+        "work": "Resurrection"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "tolstoi.f.v0020",
+      "kind": "verbatim",
+      "text": "The policemen who carried the corpse were followed by a police officer and a medical assistant.",
+      "work": "Resurrection",
+      "lang": "en",
+      "src": {
+        "work": "Resurrection"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "tolstoi.f.v0021",
+      "kind": "verbatim",
+      "text": "Who is to go tonight?” shouted one of the Cossacks through the open door to the corporal in the next room.",
+      "work": "The Cossacks: A Tale of 1852",
+      "lang": "en",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "tolstoi.f.v0022",
       "kind": "verbatim",
       "text": "He and Nazárka are merry-making at Yámka’s.” (Yámka was an unmarried, disreputable Cossack woman who kept an illicit pot-house.) “I heard say they had drunk half a pailful.” “What luck that Snatcher has,” somebody remarked.",
       "work": "The Cossacks: A Tale of 1852",
@@ -589,52 +796,157 @@
       }
     },
     {
-      "id": "tolstoi.f.v0020",
+      "id": "tolstoi.f.v0023",
       "kind": "verbatim",
-      "text": "He had had a table, a samovar, wine, and a candle brought out, and over a cup of tea and a cigar he listened to the tales the old man told seated on the threshold at his feet.",
+      "text": "Though, of course, with my education I may understand, but my wife from her human weakness...” “Well then, will you have some tea?” “If you will permit me, I will bring my own particular glass,” answered the cornet, and stepped out into the porch.",
       "work": "The Cossacks: A Tale of 1852",
       "lang": "en",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
       },
       "quality": {
-        "chars": 175
+        "chars": 247
       }
     },
     {
-      "id": "tolstoi.f.v0021",
+      "id": "tolstoi.f.v0024",
       "kind": "verbatim",
-      "text": "Every little glade was overgrown with blackberry bushes and grey feathery reeds.",
+      "text": "He kept lifting his eyes from it and looking at the powerful young woman who was moving about.",
       "work": "The Cossacks: A Tale of 1852",
       "lang": "en",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
       },
       "quality": {
-        "chars": 80
+        "chars": 94
       }
     },
     {
-      "id": "tolstoi.f.v0022",
+      "id": "tolstoi.f.v0025",
       "kind": "verbatim",
-      "text": "That season more wine than usual had been produced, and the people were now free from their labours.",
+      "text": "Olénin could not help admiring the horse, he had not yet met with such a beauty in the Caucasus.",
       "work": "The Cossacks: A Tale of 1852",
       "lang": "en",
       "src": {
         "work": "The Cossacks: A Tale of 1852"
       },
       "quality": {
-        "chars": 100
+        "chars": 96
+      }
+    },
+    {
+      "id": "tolstoi.f.v0026",
+      "kind": "verbatim",
+      "text": "Well, Maryánka, will you belong to the ‘fair-faced lad’, and not to Lukáshka?” said Belétski, speaking to Maryánka first for propriety’s sake, but having received no reply he went up to Ústenka and begged her to bring Maryánka home with her.",
+      "work": "The Cossacks: A Tale of 1852",
+      "lang": "en",
+      "src": {
+        "work": "The Cossacks: A Tale of 1852"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "tolstoi.f.v0027",
+      "kind": "verbatim",
+      "text": "It is at once the torture and the relief of man that, when he lives irregularly, he can cherish illusions as to the miseries of his situation.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "tolstoi.f.v0028",
+      "kind": "verbatim",
+      "text": "What could have been simpler than to talk with him a few minutes, and then dismiss him coldly without introducing him to my wife?",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "tolstoi.f.v0029",
+      "kind": "verbatim",
+      "text": "Two days later I was to start for the assembly of the Zemstvo, and for that reason, on taking leave of me and carrying all his scores with him, Troukhatchevsky asked me when I should return.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "tolstoi.f.v0030",
+      "kind": "verbatim",
+      "text": "I felt the need of giving free course to my violence and ‘the joy of wrath.’ “No, they did not finish.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
+      "id": "tolstoi.f.v0031",
+      "kind": "verbatim",
+      "text": "Such conduct on your part would have been best for all concerned.” He continued: “Well, you had a fight, you wicked people.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "tolstoi.f.v0032",
+      "kind": "verbatim",
+      "text": "I should have stopped to snatch the bunch of burning straw, and, throwing it on the ground, should have extinguished it with my feet!” Ivan tried to cry out and arouse his people, but his lips refused to utter a word.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "tolstoi.f.v0033",
+      "kind": "verbatim",
+      "text": "As Akulina helped the little ones into the wagon she took occasion to remind Polikey of the solemn promise he had made her not to touch a drop of vodka during the journey.",
+      "work": "The Kreutzer Sonata and Other Stories",
+      "lang": "en",
+      "src": {
+        "work": "The Kreutzer Sonata and Other Stories"
+      },
+      "quality": {
+        "chars": 171
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:4e9daed522b7b6ead6f98ed6dbee5ac9e107594a0c9471de15c380002cd2dccd"
+  "checksum": "sha256:ece16f3cfe969687dce1f86c3e3db6ae2b8aba807ac353efe2b5b2eb3e75cdc2"
 }

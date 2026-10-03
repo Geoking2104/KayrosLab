@@ -1,242 +1,34 @@
 {
   "authorId": "hegel",
   "kbVersion": "hegel@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.273Z",
+  "builtAt": "2026-10-03T21:23:12.611Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
+      "title": "Phänomenologie des Geistes",
+      "sentences": 12
+    },
+    {
+      "title": "The Logic of Hegel",
+      "sentences": 12
+    },
+    {
       "title": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "sentences": 14
+      "sentences": 12
     },
     {
       "title": "Hegel's Philosophy of Mind",
-      "sentences": 13
+      "sentences": 12
     },
     {
-      "title": "Phänomenologie des Geistes",
-      "sentences": 13
+      "title": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "hegel.p0001",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "In the acts of a child, on the other hand, only a childish and, indeed, momentary “I,” and in those of the youth the subjective constitution or the random aim, form the principle of action.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0002",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "Such propositions as products of the understanding, do not belong to the history of Philosophy, although they imply that the merely sensuous gaze has been left behind, as also the representation of those objects by the imagination only.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0003",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "In it independent thought was an essential moment, since the subject had an imaginary or historical form.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0004",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "This is an immense compilation which is not formed straight from the original sources, but is mixed with reflections after the manner of the times.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0005",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "Because the natural element is, however, still contained in it, the form taken by the morality of the state is still affected by what is natural; the states are small individuals in their natural condition, which could not unite themselves into one whole.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0006",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "But as to this we must say that of Thales in particular, we know nothing more than his principle, which is that water is the god over all.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0007",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "In the first case, the more distended string makes as many vibrations again as the other; in the second case, it makes three vibrations for the other’s two, and so it goes on.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0008",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "In the Thætetus Plato makes Socrates reply to the invitation to examine the Eleatic system: “For Melissus and the others who assert the All to be One at rest, I have a certain respect; I have even more for Parmenides.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0009",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "Wickedness and error thus are constituted by isolating thought and thereby bringing about a separation from the universal.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0010",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "We also have a story of Hermotimus to the effect that he possessed the peculiar gift of being able to make his soul quit his body.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0011",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "Abstract thinking about such matters produces abstruse results which are of no use in the practical life of man.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0012",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "The most plastic individual as a statesman is Pericles, and round him, like stars, Sophocles, Thucydides, Socrates, &c., worked out their individuality into an existence of its own—into a character which regulated their whole being, and which was one principle running throughout the whole of their existence.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0013",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "What his judges found unjust was the intrusion morally of a third into the absolute relation between parents and children.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0014",
-      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "s": "This comes more clearly to light in Stilpo (p.",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      }
-    },
-    {
-      "id": "hegel.p0015",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "It is an identity in which subject and object have not yet appeared: it is not a real I, though we may still retain the name.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0016",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "To feel and not feel well or ill is impossible.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0017",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "There arise two worlds, the world of ideas, and the world of reality which it is supposed to represent, and, in many cases, to represent badly.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0018",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "Society is not a brand-new order of things supervening upon and superseding a state of nature, where the individual was entirely self-supporting.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0019",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "If his controlling spirit be reason, it is not the reason of the so-called “rationalist,” but the reason which seeks in patience to comprehend, and to be at home in, a world it at first finds strange.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0020",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "It may indeed only be taken to mean that all true being must be looked on as a real unity and individuality, must, that is, be conceived as manifesting itself in organisation, must be referred to a self-centred and self-developing activity.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0021",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "There was a vast but ill-defined enthusiasm in the breasts of the younger world, and it was shared by many of their teachers.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0022",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "This freshening and corrective influence they get in the first instance from deeds of violence and crime.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0023",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "The total individual under this concentrated aspect is distinct from the existing and actual play of his consciousness, his secular ideas, developed interests, inclinations, &c.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0024",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "But because life is as requisite as liberty to the solution, the fight ends in the first instance as a one-sided negation with inequality.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0025",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "Whole continents, Africa and the East, have never had this idea, and are without it still.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0026",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "But the machinery of social necessity leaves in many ways a casualness about this satisfaction.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0027",
-      "w": "Hegel's Philosophy of Mind",
-      "s": "For such subject therefore it is at first an Other, an object of contemplating vision,—but the vision of implicit truth, through which witness of the spirit in him, he, on account of his immediate nature, at first characterised himself as nought and wicked.",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      }
-    },
-    {
-      "id": "hegel.p0028",
       "w": "Phänomenologie des Geistes",
       "s": "Auf dieser Unterscheidung, welche vorhanden ist, beruht die Prüfung.",
       "src": {
@@ -244,23 +36,23 @@
       }
     },
     {
-      "id": "hegel.p0029",
+      "id": "hegel.p0002",
       "w": "Phänomenologie des Geistes",
-      "s": "In dem Erklären ist eben darum so viele Selbstbefriedigung, weil das Bewußtsein dabei, es so auszudrücken, in unmittelbarem Selbstgespräche mit sich, nur sich selbst genießt, dabei zwar etwas anderes zu treiben scheint, aber in der Tat sich nur mit sich selbst herumtreibt.",
+      "s": "Diese Weise des Innern zu sein, stimmt unmittelbar denjenigen bei, welche sagen, daß das Innre der Dinge nicht zu erkennen sei; aber der Grund würde anders gefaßt werden müssen.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0030",
+      "id": "hegel.p0003",
       "w": "Phänomenologie des Geistes",
-      "s": "Wir sahen nur, was die Knechtschaft im Verhältnisse der Herrschaft ist.",
+      "s": "Was verschwindet, ist das Bestimmte, oder der Unterschied, der, auf welche Weise und woher es sei, als fester und unwandelbarer sich aufstellt.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0031",
+      "id": "hegel.p0004",
       "w": "Phänomenologie des Geistes",
       "s": "Aber außerdem ist auch die Seite des Innern für sich ein Verhältnis mehrerer Seiten, und es bietet sich daher zuerst der Gedanke eines Gesetzes an, als eine Beziehung der allgemeinen organischen Tätigkeiten oder Eigenschaften aufeinander.",
       "src": {
@@ -268,55 +60,47 @@
       }
     },
     {
-      "id": "hegel.p0032",
+      "id": "hegel.p0005",
       "w": "Phänomenologie des Geistes",
-      "s": "Die nähere Entwicklung gehört in die spekulative Philosophie, worin sie sich als dasjenige zeigen, was sie in Wahrheit sind, nämlich einzelne verschwindende Momente, deren Wahrheit nur das Ganze der denkenden Bewegung, das Wissen selbst ist.",
+      "s": "Selbst ein Teil des Organismus, muß in ihm zwar, wie in jedem Knochen, eine lebendige Selbstbildung gedacht werden, so daß, hiernach betrachtet, er von seiner Seite vielmehr das Gehirn drückt und dessen äußere Beschränkung setzt; wozu er auch als das Härtere eher das Vermögen hat.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0033",
+      "id": "hegel.p0006",
       "w": "Phänomenologie des Geistes",
-      "s": "Indem dies Allgemeine dem Bewußtsein der Tugend, wie dem Weltlaufe auf gleiche Weise zu Gebote steht, so ist nicht abzusehen, ob so ausgerüstet die Tugend das Laster besiegen werde.",
+      "s": "Die ursprüngliche Bestimmtheit der Natur ist daher nur einfaches Prinzip--ein durchsichtiges allgemeines Element, worin die Individualität ebenso frei und sich selbst gleich bleibt, als sie darin ungehindert ihre Unterschiede entfaltet, und reine Wechselwirkung mit sich in ihrer Verwirklichung ist.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0034",
+      "id": "hegel.p0007",
       "w": "Phänomenologie des Geistes",
-      "s": "Der Unterschied des Selbstbewußtseins von dem Wesen ist also vollkommen durchsichtig.",
+      "s": "Gegen solche Einseitigkeit hat die Wirklichkeit eine eigene Kraft; sie steht mit der Wahrheit im Bunde gegen das Bewußtsein, und stellt diesem erst dar, was die Wahrheit ist.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0035",
+      "id": "hegel.p0008",
       "w": "Phänomenologie des Geistes",
-      "s": "Was hier als die Gewalt des Individuums erscheint, unter welche die Substanz komme und hiemit aufgehoben werde, ist dasselbe, was die Verwirklichung der letztern ist.",
+      "s": "Nach jener Seite hat der zu sich gekommene Geist den Blick in die Welt der Wirklichkeit hineingerichtet, und sie noch zu seinem Zwecke und unmittelbaren Inhalt; nach der andern aber ist sein Blick teils nur in sich und negativ gegen sie, teils von ihr weg gen Himmel gewendet und das Jenseits derselben sein Gegenstand.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0036",
+      "id": "hegel.p0009",
       "w": "Phänomenologie des Geistes",
-      "s": "Diese zweite Seite der Absicht ist insofern Resultat der Bildung, als darin, wie die Unterschiede des gegenständlichen Geistes, die Teile und Urteilsbestimmungen seiner Welt, so auch die Unterschiede, welche als ursprünglich bestimmte Naturen erscheinen, zugrunde gegangen sind.",
+      "s": "In dem Gegenstande der reinen Einsicht sind beide Welten vereinigt.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0037",
-      "w": "Phänomenologie des Geistes",
-      "s": "Dem handelnden, eben weil es handelndes ist, gilt das Andere der reinen Pflicht unmittelbar, diese ist also Inhalt eines andern Bewußtseins und nur mittelbar, nämlich in diesem, jenem heilig.",
-      "src": {
-        "work": "Phänomenologie des Geistes"
-      }
-    },
-    {
-      "id": "hegel.p0038",
+      "id": "hegel.p0010",
       "w": "Phänomenologie des Geistes",
       "s": "Die Pflicht ist nicht mehr das dem Selbst gegenübertretende Allgemeine, sondern ist gewußt, in dieser Getrenntheit kein Gelten zu haben; es ist itzt das Gesetz, das um des Selbsts willen, nicht um dessen willen das Selbst ist.",
       "src": {
@@ -324,19 +108,403 @@
       }
     },
     {
-      "id": "hegel.p0039",
+      "id": "hegel.p0011",
       "w": "Phänomenologie des Geistes",
-      "s": "Diese Form ist die Nacht, worin die Substanz verraten ward, und sich zum Subjekte machte; aus dieser Nacht der reinen Gewißheit seiner selbst ist es, daß der sittliche Geist als die von der Natur und seinem unmittelbaren Dasein befreite Gestalt aufersteht.",
+      "s": "Die organische Form, die freigelassen in der Besonderheit fortwuchert, ihrerseits von der Form des Gedankens unterjocht, erhebt andererseits diese geradlinigten und ebnen Gestalten zur beseeltern Rundung,--eine Vermischung, welche die Wurzel der freien Architektur wird.",
       "src": {
         "work": "Phänomenologie des Geistes"
       }
     },
     {
-      "id": "hegel.p0040",
+      "id": "hegel.p0012",
       "w": "Phänomenologie des Geistes",
-      "s": "Das vollkommne Element, worin die Innerlichkeit ebenso äußerlich als die Äußerlichkeit innerlich ist, ist wieder die Sprache, aber weder die in ihrem Inhalte ganz zufällige und einzelne des Orakels, noch die empfindende und nur den einzelnen Gott preisende Hymne, noch das inhaltslose Stammeln der bacchischen Raserei.",
+      "s": "Ein und dasselbe haben daher ebensowohl die Götter als die Menschen getan.",
       "src": {
         "work": "Phänomenologie des Geistes"
+      }
+    },
+    {
+      "id": "hegel.p0013",
+      "w": "The Logic of Hegel",
+      "s": "They seem to be trusting themselves to a sea on which they will be tossed to and fro by the waves of thought, till at length they again reach the sandbank of this temporal scene, as utterly poor as when they left it.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0014",
+      "w": "The Logic of Hegel",
+      "s": "The harmoniousness of childhood is a gift from the hand of nature: the second harmony must spring from the labour and culture of the spirit.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0015",
+      "w": "The Logic of Hegel",
+      "s": "If perception, therefore, is to maintain its claim to be the sole basis of what men hold for truth, universality and necessity appear something illegitimate: they become an accident of our minds, a mere custom, the content of which might be otherwise constituted than it is.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0016",
+      "w": "The Logic of Hegel",
+      "s": "In every dualistic system, and especially in that of Kant, the fundamental defect makes itself visible in the inconsistency of unifying at one moment, what a moment before had been explained to be independent and therefore incapable of unification.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0017",
+      "w": "The Logic of Hegel",
+      "s": "Bare abstractions or formal thoughts are therefore no business of philosophy, which has to deal only with concrete thoughts.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0018",
+      "w": "The Logic of Hegel",
+      "s": "To Kant we owe the completed theory of matter as the unity of repulsion and attraction.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0019",
+      "w": "The Logic of Hegel",
+      "s": "This supposition renders an answer to the question impossible.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0020",
+      "w": "The Logic of Hegel",
+      "s": "In reference to the relation of form and content in the field of science, we should recollect the difference between philosophy and the rest of the sciences.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0021",
+      "w": "The Logic of Hegel",
+      "s": "A man who lives in dispeace with himself and his lot, commits much that is perverse and amiss, for no other reason than because of the false opinion that he is wronged by others.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0022",
+      "w": "The Logic of Hegel",
+      "s": "These instances may show that an immediate judgment, in which an abstract quality is predicated of an immediately individual thing, however correct it may be, cannot contain truth.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0023",
+      "w": "The Logic of Hegel",
+      "s": "Design, like the mechanical object, is a self-contained totality, enriched however by the principle of differentiation which came to the fore in chemism, and thus referring itself to the object that stands over against it.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0024",
+      "w": "The Logic of Hegel",
+      "s": "Thus, in zoology, the ground of division adopted in the classification of the mammalia is mainly afforded by their teeth and claws.",
+      "src": {
+        "work": "The Logic of Hegel"
+      }
+    },
+    {
+      "id": "hegel.p0025",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "In the acts of a child, on the other hand, only a childish and, indeed, momentary “I,” and in those of the youth the subjective constitution or the random aim, form the principle of action.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0026",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "For the substantial as infinite, is just that which has no limitations in that to which it is related, for else it would be limited and not the true substantial.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0027",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "The oriental subject thus has the advantage of independence, since there is nothing fixed; however undetermined is the substance of the Easterns, as undetermined, free and independent may their character be.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0028",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Through the union of Soul and Nature, the creation is effected, and this consists in the development of intelligence and of other principles.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0029",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "His information bears principally on later philosophers—the Stoics, Epicureans, the new Academy, and the Peripatetics.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0030",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Plato, Speusippus, Aristotle, &c., have stolen the fruits of their work from the Pythagoreans by making a simple use of their principle.” In this passage a perfect knowledge of numbers is evident.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0031",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "In the Thætetus Plato makes Socrates reply to the invitation to examine the Eleatic system: “For Melissus and the others who assert the All to be One at rest, I have a certain respect; I have even more for Parmenides.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0032",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Everything is thre-fold and thereby real unity; nature is the never-resting, and the all is the transition out of the one into the other, from division into unity, and from unity into division.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0033",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Aristotle adds in the above-mentioned passage (p.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0034",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Abstract thinking about such matters produces abstruse results which are of no use in the practical life of man.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0035",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "The State has lost its power, which consisted in the unbroken continuity of the universal spirit, as formed of single individuals, so that the individual consciousness knew no other content and reality than law.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0036",
+      "w": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "s": "Now law also has a conscience and has to speak through it; the law-court is the privileged conscience.",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      }
+    },
+    {
+      "id": "hegel.p0037",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "If Inductive Philosophy of the Human Mind has—perhaps to a dainty taste—made the word unsavoury, that is no reason for refusing to give it all the wealth of soul and heart, of intellect and will.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0038",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "That a doctrine of faculties should fix itself in psychology is not so wonderful.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0039",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "It need not indeed always require bare uniformity—require i.e.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0040",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "Man, intelligent, social, ethical, is a being all of one piece and to be explained entirely immanently, or from himself.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0041",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "Such an one, in many ways, was the Florentine poet himself.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0042",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "The actual soul is the unity of both, is the percipient individual.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0043",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "Governments, which had lost touch with their peoples, suspected conspiracy and treason: and a party in the nation credited their rulers with gratuitous designs against private liberty and rights.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0044",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "As regards his general services to the great life of his national state(115), they are unintelligently and perhaps grudgingly rendered.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0045",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "The main point about Habit is that by its means man gets emancipated from the feelings, even in being affected by them.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0046",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "At any rate a comprehensive hieroglyphic language for ever completed is impracticable.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0047",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "Both are thus rendered more and more abstract.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0048",
+      "w": "Hegel's Philosophy of Mind",
+      "s": "Instead of the vow of poverty (muddled up into a contradiction of assigning merit to whosoever gives away goods to the poor, i.e.",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      }
+    },
+    {
+      "id": "hegel.p0049",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "What in the first instance is known to us under current conceptions of a work of art may be subsumed under the three following determinations: (1) A work of art is no product of Nature.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0050",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "It will be necessary also to vindicate this standpoint for art.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0051",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "His shape is therefore the bodily form of man.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0052",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "Such satiety carries with it no permanence, but moves forward without rest to a renewed sense of want.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0053",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "Once assume that all harmony between the two sides is broken, that all genuine articulation of the members of the body and their true identity has dropped away, and life is dissolved in death.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0054",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "The beauty of their harmony is revealed in the avoidance of their crude opposition, which is softened thereby in such a way as to put before us the concordance hidden beneath their difference.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0055",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "But, however called, the question remains what it is which constitutes poetry or prose in art.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0056",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "Here, it is true, the lion is master and king, but the wolf and the bear sit in council.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0057",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "We have on one hand a difficulty, an obstacle, a violation effected through something human life has carried out in action.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0058",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "Critics have made this inactivity a matter of reproach to Shakespeare, blamed him, in fact, as though for this reason the play to some extent never gets properly off.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0059",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "We may mark an illustration of this in the way the old masters distinguished between the drapery of their principal figures and of those of less importance, painting that of the former in elementary colours of absolute purity, but only conceding to that of the rest compound varieties.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      }
+    },
+    {
+      "id": "hegel.p0060",
+      "w": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "s": "Even the Greek tragedians had their eyes constantly directed to the actual conditions of their times and the particular city in which they lived.",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
       }
     }
   ],
@@ -344,174 +512,31 @@
     {
       "id": "hegel.f.v0001",
       "kind": "verbatim",
-      "text": "In the acts of a child, on the other hand, only a childish and, indeed, momentary “I,” and in those of the youth the subjective constitution or the random aim, form the principle of action.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
+      "text": "Diese Weise des Innern zu sein, stimmt unmittelbar denjenigen bei, welche sagen, daß das Innre der Dinge nicht zu erkennen sei; aber der Grund würde anders gefaßt werden müssen.",
+      "work": "Phänomenologie des Geistes",
+      "lang": "fr",
       "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 189
-      }
-    },
-    {
-      "id": "hegel.f.v0002",
-      "kind": "verbatim",
-      "text": "Such propositions as products of the understanding, do not belong to the history of Philosophy, although they imply that the merely sensuous gaze has been left behind, as also the representation of those objects by the imagination only.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 236
-      }
-    },
-    {
-      "id": "hegel.f.v0003",
-      "kind": "verbatim",
-      "text": "This is an immense compilation which is not formed straight from the original sources, but is mixed with reflections after the manner of the times.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 147
-      }
-    },
-    {
-      "id": "hegel.f.v0004",
-      "kind": "verbatim",
-      "text": "Because the natural element is, however, still contained in it, the form taken by the morality of the state is still affected by what is natural; the states are small individuals in their natural condition, which could not unite themselves into one whole.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 255
-      }
-    },
-    {
-      "id": "hegel.f.v0005",
-      "kind": "verbatim",
-      "text": "In the first case, the more distended string makes as many vibrations again as the other; in the second case, it makes three vibrations for the other’s two, and so it goes on.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 175
-      }
-    },
-    {
-      "id": "hegel.f.v0006",
-      "kind": "verbatim",
-      "text": "In the Thætetus Plato makes Socrates reply to the invitation to examine the Eleatic system: “For Melissus and the others who assert the All to be One at rest, I have a certain respect; I have even more for Parmenides.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 217
-      }
-    },
-    {
-      "id": "hegel.f.v0007",
-      "kind": "verbatim",
-      "text": "The most plastic individual as a statesman is Pericles, and round him, like stars, Sophocles, Thucydides, Socrates, &c., worked out their individuality into an existence of its own—into a character which regulated their whole being, and which was one principle running throughout the whole of their existence.",
-      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
-      },
-      "quality": {
-        "chars": 309
-      }
-    },
-    {
-      "id": "hegel.f.v0008",
-      "kind": "verbatim",
-      "text": "There arise two worlds, the world of ideas, and the world of reality which it is supposed to represent, and, in many cases, to represent badly.",
-      "work": "Hegel's Philosophy of Mind",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      },
-      "quality": {
-        "chars": 143
-      }
-    },
-    {
-      "id": "hegel.f.v0009",
-      "kind": "verbatim",
-      "text": "Society is not a brand-new order of things supervening upon and superseding a state of nature, where the individual was entirely self-supporting.",
-      "work": "Hegel's Philosophy of Mind",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      },
-      "quality": {
-        "chars": 145
-      }
-    },
-    {
-      "id": "hegel.f.v0010",
-      "kind": "verbatim",
-      "text": "If his controlling spirit be reason, it is not the reason of the so-called “rationalist,” but the reason which seeks in patience to comprehend, and to be at home in, a world it at first finds strange.",
-      "work": "Hegel's Philosophy of Mind",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      },
-      "quality": {
-        "chars": 200
-      }
-    },
-    {
-      "id": "hegel.f.v0011",
-      "kind": "verbatim",
-      "text": "It may indeed only be taken to mean that all true being must be looked on as a real unity and individuality, must, that is, be conceived as manifesting itself in organisation, must be referred to a self-centred and self-developing activity.",
-      "work": "Hegel's Philosophy of Mind",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
-      },
-      "quality": {
-        "chars": 240
-      }
-    },
-    {
-      "id": "hegel.f.v0012",
-      "kind": "verbatim",
-      "text": "The total individual under this concentrated aspect is distinct from the existing and actual play of his consciousness, his secular ideas, developed interests, inclinations, &c.",
-      "work": "Hegel's Philosophy of Mind",
-      "lang": "en",
-      "src": {
-        "work": "Hegel's Philosophy of Mind"
+        "work": "Phänomenologie des Geistes"
       },
       "quality": {
         "chars": 177
       }
     },
     {
-      "id": "hegel.f.v0013",
+      "id": "hegel.f.v0002",
       "kind": "verbatim",
-      "text": "In dem Erklären ist eben darum so viele Selbstbefriedigung, weil das Bewußtsein dabei, es so auszudrücken, in unmittelbarem Selbstgespräche mit sich, nur sich selbst genießt, dabei zwar etwas anderes zu treiben scheint, aber in der Tat sich nur mit sich selbst herumtreibt.",
+      "text": "Was verschwindet, ist das Bestimmte, oder der Unterschied, der, auf welche Weise und woher es sei, als fester und unwandelbarer sich aufstellt.",
       "work": "Phänomenologie des Geistes",
       "lang": "en",
       "src": {
         "work": "Phänomenologie des Geistes"
       },
       "quality": {
-        "chars": 273
+        "chars": 143
       }
     },
     {
-      "id": "hegel.f.v0014",
+      "id": "hegel.f.v0003",
       "kind": "verbatim",
       "text": "Aber außerdem ist auch die Seite des Innern für sich ein Verhältnis mehrerer Seiten, und es bietet sich daher zuerst der Gedanke eines Gesetzes an, als eine Beziehung der allgemeinen organischen Tätigkeiten oder Eigenschaften aufeinander.",
       "work": "Phänomenologie des Geistes",
@@ -524,72 +549,59 @@
       }
     },
     {
-      "id": "hegel.f.v0015",
+      "id": "hegel.f.v0004",
       "kind": "verbatim",
-      "text": "Die nähere Entwicklung gehört in die spekulative Philosophie, worin sie sich als dasjenige zeigen, was sie in Wahrheit sind, nämlich einzelne verschwindende Momente, deren Wahrheit nur das Ganze der denkenden Bewegung, das Wissen selbst ist.",
+      "text": "Selbst ein Teil des Organismus, muß in ihm zwar, wie in jedem Knochen, eine lebendige Selbstbildung gedacht werden, so daß, hiernach betrachtet, er von seiner Seite vielmehr das Gehirn drückt und dessen äußere Beschränkung setzt; wozu er auch als das Härtere eher das Vermögen hat.",
+      "work": "Phänomenologie des Geistes",
+      "lang": "fr",
+      "src": {
+        "work": "Phänomenologie des Geistes"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "hegel.f.v0005",
+      "kind": "verbatim",
+      "text": "Die ursprüngliche Bestimmtheit der Natur ist daher nur einfaches Prinzip--ein durchsichtiges allgemeines Element, worin die Individualität ebenso frei und sich selbst gleich bleibt, als sie darin ungehindert ihre Unterschiede entfaltet, und reine Wechselwirkung mit sich in ihrer Verwirklichung ist.",
+      "work": "Phänomenologie des Geistes",
+      "lang": "fr",
+      "src": {
+        "work": "Phänomenologie des Geistes"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "hegel.f.v0006",
+      "kind": "verbatim",
+      "text": "Gegen solche Einseitigkeit hat die Wirklichkeit eine eigene Kraft; sie steht mit der Wahrheit im Bunde gegen das Bewußtsein, und stellt diesem erst dar, was die Wahrheit ist.",
       "work": "Phänomenologie des Geistes",
       "lang": "en",
       "src": {
         "work": "Phänomenologie des Geistes"
       },
       "quality": {
-        "chars": 241
+        "chars": 174
       }
     },
     {
-      "id": "hegel.f.v0016",
+      "id": "hegel.f.v0007",
       "kind": "verbatim",
-      "text": "Indem dies Allgemeine dem Bewußtsein der Tugend, wie dem Weltlaufe auf gleiche Weise zu Gebote steht, so ist nicht abzusehen, ob so ausgerüstet die Tugend das Laster besiegen werde.",
-      "work": "Phänomenologie des Geistes",
-      "lang": "fr",
-      "src": {
-        "work": "Phänomenologie des Geistes"
-      },
-      "quality": {
-        "chars": 181
-      }
-    },
-    {
-      "id": "hegel.f.v0017",
-      "kind": "verbatim",
-      "text": "Was hier als die Gewalt des Individuums erscheint, unter welche die Substanz komme und hiemit aufgehoben werde, ist dasselbe, was die Verwirklichung der letztern ist.",
-      "work": "Phänomenologie des Geistes",
-      "lang": "fr",
-      "src": {
-        "work": "Phänomenologie des Geistes"
-      },
-      "quality": {
-        "chars": 166
-      }
-    },
-    {
-      "id": "hegel.f.v0018",
-      "kind": "verbatim",
-      "text": "Diese zweite Seite der Absicht ist insofern Resultat der Bildung, als darin, wie die Unterschiede des gegenständlichen Geistes, die Teile und Urteilsbestimmungen seiner Welt, so auch die Unterschiede, welche als ursprünglich bestimmte Naturen erscheinen, zugrunde gegangen sind.",
-      "work": "Phänomenologie des Geistes",
-      "lang": "fr",
-      "src": {
-        "work": "Phänomenologie des Geistes"
-      },
-      "quality": {
-        "chars": 278
-      }
-    },
-    {
-      "id": "hegel.f.v0019",
-      "kind": "verbatim",
-      "text": "Dem handelnden, eben weil es handelndes ist, gilt das Andere der reinen Pflicht unmittelbar, diese ist also Inhalt eines andern Bewußtseins und nur mittelbar, nämlich in diesem, jenem heilig.",
+      "text": "Nach jener Seite hat der zu sich gekommene Geist den Blick in die Welt der Wirklichkeit hineingerichtet, und sie noch zu seinem Zwecke und unmittelbaren Inhalt; nach der andern aber ist sein Blick teils nur in sich und negativ gegen sie, teils von ihr weg gen Himmel gewendet und das Jenseits derselben sein Gegenstand.",
       "work": "Phänomenologie des Geistes",
       "lang": "en",
       "src": {
         "work": "Phänomenologie des Geistes"
       },
       "quality": {
-        "chars": 191
+        "chars": 319
       }
     },
     {
-      "id": "hegel.f.v0020",
+      "id": "hegel.f.v0008",
       "kind": "verbatim",
       "text": "Die Pflicht ist nicht mehr das dem Selbst gegenübertretende Allgemeine, sondern ist gewußt, in dieser Getrenntheit kein Gelten zu haben; es ist itzt das Gesetz, das um des Selbsts willen, nicht um dessen willen das Selbst ist.",
       "work": "Phänomenologie des Geistes",
@@ -602,39 +614,339 @@
       }
     },
     {
-      "id": "hegel.f.v0021",
+      "id": "hegel.f.v0009",
       "kind": "verbatim",
-      "text": "Diese Form ist die Nacht, worin die Substanz verraten ward, und sich zum Subjekte machte; aus dieser Nacht der reinen Gewißheit seiner selbst ist es, daß der sittliche Geist als die von der Natur und seinem unmittelbaren Dasein befreite Gestalt aufersteht.",
+      "text": "Die organische Form, die freigelassen in der Besonderheit fortwuchert, ihrerseits von der Form des Gedankens unterjocht, erhebt andererseits diese geradlinigten und ebnen Gestalten zur beseeltern Rundung,--eine Vermischung, welche die Wurzel der freien Architektur wird.",
       "work": "Phänomenologie des Geistes",
       "lang": "en",
       "src": {
         "work": "Phänomenologie des Geistes"
       },
       "quality": {
-        "chars": 256
+        "chars": 270
+      }
+    },
+    {
+      "id": "hegel.f.v0010",
+      "kind": "verbatim",
+      "text": "They seem to be trusting themselves to a sea on which they will be tossed to and fro by the waves of thought, till at length they again reach the sandbank of this temporal scene, as utterly poor as when they left it.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "hegel.f.v0011",
+      "kind": "verbatim",
+      "text": "The harmoniousness of childhood is a gift from the hand of nature: the second harmony must spring from the labour and culture of the spirit.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "hegel.f.v0012",
+      "kind": "verbatim",
+      "text": "If perception, therefore, is to maintain its claim to be the sole basis of what men hold for truth, universality and necessity appear something illegitimate: they become an accident of our minds, a mere custom, the content of which might be otherwise constituted than it is.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "hegel.f.v0013",
+      "kind": "verbatim",
+      "text": "In every dualistic system, and especially in that of Kant, the fundamental defect makes itself visible in the inconsistency of unifying at one moment, what a moment before had been explained to be independent and therefore incapable of unification.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "hegel.f.v0014",
+      "kind": "verbatim",
+      "text": "In reference to the relation of form and content in the field of science, we should recollect the difference between philosophy and the rest of the sciences.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "hegel.f.v0015",
+      "kind": "verbatim",
+      "text": "A man who lives in dispeace with himself and his lot, commits much that is perverse and amiss, for no other reason than because of the false opinion that he is wronged by others.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "hegel.f.v0016",
+      "kind": "verbatim",
+      "text": "These instances may show that an immediate judgment, in which an abstract quality is predicated of an immediately individual thing, however correct it may be, cannot contain truth.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "hegel.f.v0017",
+      "kind": "verbatim",
+      "text": "Design, like the mechanical object, is a self-contained totality, enriched however by the principle of differentiation which came to the fore in chemism, and thus referring itself to the object that stands over against it.",
+      "work": "The Logic of Hegel",
+      "lang": "en",
+      "src": {
+        "work": "The Logic of Hegel"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "hegel.f.v0018",
+      "kind": "verbatim",
+      "text": "In the acts of a child, on the other hand, only a childish and, indeed, momentary “I,” and in those of the youth the subjective constitution or the random aim, form the principle of action.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "hegel.f.v0019",
+      "kind": "verbatim",
+      "text": "The oriental subject thus has the advantage of independence, since there is nothing fixed; however undetermined is the substance of the Easterns, as undetermined, free and independent may their character be.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "hegel.f.v0020",
+      "kind": "verbatim",
+      "text": "Through the union of Soul and Nature, the creation is effected, and this consists in the development of intelligence and of other principles.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "hegel.f.v0021",
+      "kind": "verbatim",
+      "text": "Plato, Speusippus, Aristotle, &c., have stolen the fruits of their work from the Pythagoreans by making a simple use of their principle.” In this passage a perfect knowledge of numbers is evident.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 196
       }
     },
     {
       "id": "hegel.f.v0022",
       "kind": "verbatim",
-      "text": "Das vollkommne Element, worin die Innerlichkeit ebenso äußerlich als die Äußerlichkeit innerlich ist, ist wieder die Sprache, aber weder die in ihrem Inhalte ganz zufällige und einzelne des Orakels, noch die empfindende und nur den einzelnen Gott preisende Hymne, noch das inhaltslose Stammeln der bacchischen Raserei.",
-      "work": "Phänomenologie des Geistes",
+      "text": "In the Thætetus Plato makes Socrates reply to the invitation to examine the Eleatic system: “For Melissus and the others who assert the All to be One at rest, I have a certain respect; I have even more for Parmenides.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
       "lang": "en",
       "src": {
-        "work": "Phänomenologie des Geistes"
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
       },
       "quality": {
-        "chars": 318
+        "chars": 217
+      }
+    },
+    {
+      "id": "hegel.f.v0023",
+      "kind": "verbatim",
+      "text": "Everything is thre-fold and thereby real unity; nature is the never-resting, and the all is the transition out of the one into the other, from division into unity, and from unity into division.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "hegel.f.v0024",
+      "kind": "verbatim",
+      "text": "The State has lost its power, which consisted in the unbroken continuity of the universal spirit, as formed of single individuals, so that the individual consciousness knew no other content and reality than law.",
+      "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "hegel.f.v0025",
+      "kind": "verbatim",
+      "text": "If Inductive Philosophy of the Human Mind has—perhaps to a dainty taste—made the word unsavoury, that is no reason for refusing to give it all the wealth of soul and heart, of intellect and will.",
+      "work": "Hegel's Philosophy of Mind",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "hegel.f.v0026",
+      "kind": "verbatim",
+      "text": "Governments, which had lost touch with their peoples, suspected conspiracy and treason: and a party in the nation credited their rulers with gratuitous designs against private liberty and rights.",
+      "work": "Hegel's Philosophy of Mind",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "hegel.f.v0027",
+      "kind": "verbatim",
+      "text": "Instead of the vow of poverty (muddled up into a contradiction of assigning merit to whosoever gives away goods to the poor, i.e.",
+      "work": "Hegel's Philosophy of Mind",
+      "lang": "en",
+      "src": {
+        "work": "Hegel's Philosophy of Mind"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "hegel.f.v0028",
+      "kind": "verbatim",
+      "text": "What in the first instance is known to us under current conceptions of a work of art may be subsumed under the three following determinations: (1) A work of art is no product of Nature.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hegel.f.v0029",
+      "kind": "verbatim",
+      "text": "Once assume that all harmony between the two sides is broken, that all genuine articulation of the members of the body and their true identity has dropped away, and life is dissolved in death.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "hegel.f.v0030",
+      "kind": "verbatim",
+      "text": "The beauty of their harmony is revealed in the avoidance of their crude opposition, which is softened thereby in such a way as to put before us the concordance hidden beneath their difference.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "hegel.f.v0031",
+      "kind": "verbatim",
+      "text": "Critics have made this inactivity a matter of reproach to Shakespeare, blamed him, in fact, as though for this reason the play to some extent never gets properly off.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "hegel.f.v0032",
+      "kind": "verbatim",
+      "text": "We may mark an illustration of this in the way the old masters distinguished between the drapery of their principal figures and of those of less importance, painting that of the former in elementary colours of absolute purity, but only conceding to that of the rest compound varieties.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "hegel.f.v0033",
+      "kind": "verbatim",
+      "text": "Even the Greek tragedians had their eyes constantly directed to the actual conditions of their times and the particular city in which they lived.",
+      "work": "The Philosophy of Fine Art, volume 1 (of 4)",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Fine Art, volume 1 (of 4)"
+      },
+      "quality": {
+        "chars": 145
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:3aed4820f60fb0656b23e4c94ca86b12df3a8dea5962a99e1fcf92ac23070a1b"
+  "checksum": "sha256:ab5a2eaa80ba1725a18668e33ab9e7ea477ffb3fb4582e6d0bd61ca9738674ae"
 }

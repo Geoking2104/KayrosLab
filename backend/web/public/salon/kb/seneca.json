@@ -1,242 +1,30 @@
 {
   "authorId": "seneca",
   "kbVersion": "seneca@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.223Z",
+  "builtAt": "2026-10-03T21:23:12.444Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Apocolocyntosis",
-      "sentences": 14
+      "title": "On Benefits",
+      "sentences": 12
     },
     {
       "title": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "sentences": 13
+      "sentences": 12
     },
     {
-      "title": "On Benefits",
-      "sentences": 13
+      "title": "The Tragedies of Seneca",
+      "sentences": 12
+    },
+    {
+      "title": "Apocolocyntosis",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "seneca.p0001",
-      "w": "Apocolocyntosis",
-      "s": "What he told me I report plain and clear, as I hope for his health and happiness.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0002",
-      "w": "Apocolocyntosis",
-      "s": "After all this torture cannot he have a rest?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0003",
-      "w": "Apocolocyntosis",
-      "s": "Like me in face and lovely grace, like me in voice and song, He'll bid the laws at length speak out that have been dumb so long, Will give unto the weary world years prosperous and bright.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0004",
-      "w": "Apocolocyntosis",
-      "s": "When he had made a great noise with that end of him which talked easiest, he cried out, \"Oh dear, oh dear!",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0005",
-      "w": "Apocolocyntosis",
-      "s": "What he said nobody understood; as a matter of fact, he was ordering my lady of Fever to be taken away, and making that sign with his trembling hand (which was always steady enough for that, if for nothing else) by which he used to decapitate men.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0006",
-      "w": "Apocolocyntosis",
-      "s": "What land, what tribe produced that shaking head?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0007",
-      "w": "Apocolocyntosis",
-      "s": "Only do say what species of god you want the fellow to be made.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0008",
-      "w": "Apocolocyntosis",
-      "s": "Why, says he, I want to know why, his own sister?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0009",
-      "w": "Apocolocyntosis",
-      "s": "Is it for this I have made peace by land and sea?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0010",
-      "w": "Apocolocyntosis",
-      "s": "Silanus--see, Jupiter, whether he had a case against him (at least it is your own if you will be fair.) Come tell me, blessed Claudius, why of all those you killed, both men and women, without a hearing, why you did not hear their side of the case first, before putting them to death?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0011",
-      "w": "Apocolocyntosis",
-      "s": "The Barristers were crawling out of their dark corners, pale and thin, with hardly a breath in their bodies, as though just coming to life again.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0012",
-      "w": "Apocolocyntosis",
-      "s": "Who'll now sit in judgment the whole year round?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0013",
-      "w": "Apocolocyntosis",
-      "s": "Who but you sent us, you, the murderer of all the friends that ever you had?",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0014",
-      "w": "Apocolocyntosis",
-      "s": "Not a soul but was stupefied at this new way of managing matters; they had never known anything like it before.",
-      "src": {
-        "work": "Apocolocyntosis"
-      }
-    },
-    {
-      "id": "seneca.p0015",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "The most trustworthy virtue is that which long and carefully considers itself, controls itself, and slowly and deliberately brings itself to the front.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0016",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Peut-être les Magistrats qui devoient juger à mort un citoyen, portoient ils aussi leur robe renversée, ou la jettoient ils de travers ou confusément sur leurs épaules, pour mieux peindre par ce desordre le trouble de leur esprit.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0017",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Some one will be said to have spoken ill of you: think whether you did not first speak ill of him: think of how many persons you have yourself spoken ill.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0018",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "It is important to know how great and how fresh its strength may be, and whether it can be driven forcibly back and suppressed, or whether we must give way to it until its first storm blow over, lest it sweep away with it our remedies themselves.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0019",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Now, the cases which I have quoted are defended only by the usage of one out-of-the-way quarter of the world: see now, how far more deserving of pardon those crimes are which are spread abroad among all mankind.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0020",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Caesar was shocked at this novel form of cruelty, and ordered him to be let go, and, in his place, all the crystal ware which he saw before him to be broken, and the tank to be filled up.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0021",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Of what importance, then, can it be to lengthen that which, however much you add to it, will never be much more than nothing?",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0022",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Yet when moderation lessens pleasure, it impairs the highest good.” You devote yourself to pleasures, I check them; you indulge in pleasure, I use it; you think that it is the highest good, I do not even think it to be good: for the sake of pleasure I do nothing, you do everything.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0023",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Even though others may form the first line, and your lot may have placed you among the veterans of the third, do your duty there with your voice, encouragement, example, and spirit: even though a man’s hands be cut off, he may find means to help his side in a battle, if he stands his ground and cheers on his comrades.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0024",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Still, we must observe moderation in this matter, for there is a great difference between living simply and living slovenly.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0025",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Let us therefore briskly and cheerfully hasten with undaunted steps whithersoever circumstances call us: let us wander over whatever countries we please; no place of banishment can be found in the whole world in which man cannot find a home.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0026",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "How many noble deeds are unknown to fame!",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0027",
-      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "s": "Cinna, when I found you in the enemy’s camp, you who had not become but were actually born my enemy, I saved your life, and restored to you the whole of your father’s estate.",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      }
-    },
-    {
-      "id": "seneca.p0028",
       "w": "On Benefits",
       "s": "No one is so foolish as to need to be told not to send gladiators or wild beasts to one who has just given a public show, or not to send summer clothing in winter time, or winter clothing in summer.",
       "src": {
@@ -244,23 +32,23 @@
       }
     },
     {
-      "id": "seneca.p0029",
+      "id": "seneca.p0002",
       "w": "On Benefits",
-      "s": "You reply, \"I cannot always say 'No': sometimes I must receive a benefit even against my will.",
+      "s": "Nothing is by itself a becoming gift for any one: all depends upon who gives it, to whom he gives it, when, for what reason, where, and so forth, without which details it is impossible to argue about it.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0030",
+      "id": "seneca.p0003",
       "w": "On Benefits",
-      "s": "I have thought it necessary, my friend Liberalis, to state these facts, both because when speaking of small benefits one ought to make some mention of the greatest, and because also this shameless and hateful vice (of ingratitude), starting with these, transfers itself from them to all the rest.",
+      "s": "What,\" say you, \"can a man repay a benefit, though he does nothing?\" He has taken the first step, he has offered you a good thing with good feeling, and, which is the characteristic of friendship, has placed you both on the same footing.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0031",
+      "id": "seneca.p0004",
       "w": "On Benefits",
       "s": "On the other hand, he who takes pleasure in receiving a benefit, enjoys an unvarying and continuous happiness, which he derives from consideration, not of the thing given, but of the intention of the giver.",
       "src": {
@@ -268,55 +56,47 @@
       }
     },
     {
-      "id": "seneca.p0032",
+      "id": "seneca.p0005",
       "w": "On Benefits",
-      "s": "Yet take away their roots, and no more groves will arise, nor great mountains be clothed with trees.",
+      "s": "It is in your power to decide how my father shall be freed from his prosecutor.\" The tribune swore, and kept his oath; he related the reason of his abandonment of his action to an assembly at the Rostra.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0033",
+      "id": "seneca.p0006",
       "w": "On Benefits",
-      "s": "These same adversaries of ours admit that they are grateful, yet not because it is honourable, but because it is profitable to be so.",
+      "s": "Now what is more honourable than gratitude?",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0034",
+      "id": "seneca.p0007",
       "w": "On Benefits",
-      "s": "One man is ungrateful because he is a fool; a fool is a bad man; a man who is bad possesses every vice: therefore he is ungrateful.",
+      "s": "What if, for example, my country orders me to give to her what I had promised to my friend?",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0035",
+      "id": "seneca.p0008",
       "w": "On Benefits",
-      "s": "It often happens that even when one combatant is pierced with many wounds, while the other is only slightly injured, yet they are said to have fought a drawn battle, although the former may appear to be the worse man.",
+      "s": "Injuries and benefits are the converse of one another: if we say of a man, 'he has done himself an injury,' we can also say 'he has bestowed upon himself a benefit?' VIII.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0036",
+      "id": "seneca.p0009",
       "w": "On Benefits",
-      "s": "Yet giving, like selling anything, consists in making it pass away from you, handing over what you yourself once owned into the keeping of some one else.",
+      "s": "Our most artful enemies are those whom we thank for the wrongs which they do us.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0037",
-      "w": "On Benefits",
-      "s": "Similarly men's minds contain a good feeling, which, however, lies torpid, either through luxury and disuse, or through ignorance of its duties.",
-      "src": {
-        "work": "On Benefits"
-      }
-    },
-    {
-      "id": "seneca.p0038",
+      "id": "seneca.p0010",
       "w": "On Benefits",
       "s": "If any one does me a service, without knowing it, I am under no obligation to him; should he do so, meaning to injure me, I shall imitate his conduct.",
       "src": {
@@ -324,194 +104,313 @@
       }
     },
     {
-      "id": "seneca.p0039",
+      "id": "seneca.p0011",
       "w": "On Benefits",
-      "s": "How can a man arrive at using bold freedom of speech with you, if he is only allowed in his proper turn to make use of the common phrase, \"Hail to you,\" which is used by perfect strangers?",
+      "s": "When Xerxes declared war against Greece, all his courtiers encouraged his boastful temper, which forgot how unsubstantial his grounds for confidence were.",
       "src": {
         "work": "On Benefits"
       }
     },
     {
-      "id": "seneca.p0040",
+      "id": "seneca.p0012",
       "w": "On Benefits",
-      "s": "It matters not how many kingdoms he may have seized or given away, or how great a part of the world may pay him tribute; such a man must be in need of as much as he desires.",
+      "s": "In all the cases which I have mentioned, each party is the owner of the same thing.",
       "src": {
         "work": "On Benefits"
+      }
+    },
+    {
+      "id": "seneca.p0013",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "Tradition tells us that Vatinius, a man born both to be laughed at and hated, was a witty and clever jester.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0014",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "In all dealing with crime he will remember that the one form of punishment is meant to make bad men better, and the other to put them out of the way.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0015",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "Old men are testy and full of complaints, as also are sick people and convalescents, and all whose store of heat has been consumed by weariness or loss of blood.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0016",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "It is important to know how great and how fresh its strength may be, and whether it can be driven forcibly back and suppressed, or whether we must give way to it until its first storm blow over, lest it sweep away with it our remedies themselves.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0017",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "This frenzy, for what else can you call it, has befallen Romans also, for G.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0018",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "This breath that we hold so dear will soon leave us: in the meantime, while we draw it, while we live among human beings, let us practise humanity: let us not be a terror or a danger to any one.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0019",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "All human works are brief and fleeting; they take up no part whatever of infinite time.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0020",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "He who believes giving to be an easy matter, is mistaken: it offers very great difficulties, if we bestow our bounty rationally, and do not scatter it impulsively and at random.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0021",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "The inner curve is the one to take, not only in running races and in the contests of the circus, but also in the race of life; even literary pursuits, the most becoming thing for a gentleman to spend money upon, are only justifiable as long as they are kept within bounds.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0022",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "The talk of these men is not dangerous, their friendship will not lead you to the scaffold, their society will not ruin you in expenses: you may take from them whatsoever you will; they will not prevent your taking the deepest draughts of their wisdom that you please.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0023",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "You cannot avail yourself of the excuse of being a woman, for you have no womanish vices.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0024",
+      "w": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "s": "A monument was erected in his honour at Moguntiacum (Mayence), and games and military spectacles were exhibited there on the anniversary of his death.",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      }
+    },
+    {
+      "id": "seneca.p0025",
+      "w": "The Tragedies of Seneca",
+      "s": "With me, but not without me, canst thou die.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0026",
+      "w": "The Tragedies of Seneca",
+      "s": "What sinking terror filled each quaking breast, When near the borders of sea-girt Pelorus, 350 There smote upon their ears the horrid chorus Of Scylla's baying wolves around them pressed.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0027",
+      "w": "The Tragedies of Seneca",
+      "s": "From her illustrious line my humble blood Shall a richer hue derive.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0028",
+      "w": "The Tragedies of Seneca",
+      "s": "And thou, be with thy worshiper, O goddess of the chase, whose rule 55 Extends o'er all the secret haunts Of earth; whose darts unerring pierce The flying prey; whose thirst is quenched By cool Araxes' distant stream, Or for whose sport the Ister spreads His frozen waves.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0029",
+      "w": "The Tragedies of Seneca",
+      "s": "But he, their driver, as some captain strong Holds straight his bark upon the boisterous sea, Lest she oppose her side against the waves, And by his art escapes the yawning floods; Not otherwise he guides the whirling car.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0030",
+      "w": "The Tragedies of Seneca",
+      "s": "Chalcis heard, The Cyclades re-echoed with the sound, Caphereus' rocky crags and all the grove Resounded with the groans of Hercules.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0031",
+      "w": "The Tragedies of Seneca",
+      "s": "Still no sound was heard Save only that the flames made loud lament.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0032",
+      "w": "The Tragedies of Seneca",
+      "s": "Perchance he threw the corpses to be torn By raving beasts, and kept them from the fire?",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0033",
+      "w": "The Tragedies of Seneca",
+      "s": "So mayst thou see again Thy faithful wife; so may Laërtes live To greet thee yet again; so may thy son Behold thy face, and, more than that thou canst pray, 700 Excel his father's valor and the years Of old Laërtes.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0034",
+      "w": "The Tragedies of Seneca",
+      "s": "See 710 Her cheeks are pale, and fits of trembling fear Possess her frame; her locks in horror rise, And we can hear, though pent within her breast, The loud pulsations of her fluttering heart.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0035",
+      "w": "The Tragedies of Seneca",
+      "s": "But, O ye gods of hell, ye furies dire, 965 Who work your vengeance on the crimes of men, And thou, my father's restless spirit, come And bring this tyrant fitting punishment.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0036",
+      "w": "The Tragedies of Seneca",
+      "s": "At this moment the youth himself enters and inquires the cause of the nurse's distress.",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      }
+    },
+    {
+      "id": "seneca.p0037",
+      "w": "Apocolocyntosis",
+      "s": "What he told me I report plain and clear, as I hope for his health and happiness.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0038",
+      "w": "Apocolocyntosis",
+      "s": "Yet it is no wonder if they are wrong, and no one knows his hour.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0039",
+      "w": "Apocolocyntosis",
+      "s": "As for Claudius, they tell everybody to speed him on his way With cries of joy and solemn litany.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0040",
+      "w": "Apocolocyntosis",
+      "s": "On this Jupiter bids Hercules go and find out what country he comes from; you see Hercules had travelled over the whole world, and might be expected to know all the nations in it.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0041",
+      "w": "Apocolocyntosis",
+      "s": "Or with this club fall stricken to the earth!",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0042",
+      "w": "Apocolocyntosis",
+      "s": "You know what miseries I endured there, in hearing the lawyers plead day and night.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0043",
+      "w": "Apocolocyntosis",
+      "s": "Why, says he, I want to know why, his own sister?",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0044",
+      "w": "Apocolocyntosis",
+      "s": "I'll do as much for you again, when you like; you roll my log, and I'll roll yours: one hand washes another.\" Then arose the blessed Augustus, when his turn 10 came, and spoke with much eloquence.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0045",
+      "w": "Apocolocyntosis",
+      "s": "Caligula murdered his father-in-law, Claudius his son-in-law to boot.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0046",
+      "w": "Apocolocyntosis",
+      "s": "The Barristers were crawling out of their dark corners, pale and thin, with hardly a breath in their bodies, as though just coming to life again.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0047",
+      "w": "Apocolocyntosis",
+      "s": "Out he comes to meet him, smooth and shining (he had just left the bath), and says he: \"What make the gods among mortals?\" \"Look alive,\" says Mercury, \"go and tell them we are coming.\" Away he flew, quicker than tongue can tell.",
+      "src": {
+        "work": "Apocolocyntosis"
+      }
+    },
+    {
+      "id": "seneca.p0048",
+      "w": "Apocolocyntosis",
+      "s": "Pedo requests the judge to take the prisoner's name, and produces a summons with this charge: Senators killed, 35; Roman Knights, 221; others as the sands of the sea-shore for multitude.",
+      "src": {
+        "work": "Apocolocyntosis"
       }
     }
   ],
   "formulas": [
     {
       "id": "seneca.f.v0001",
-      "kind": "verbatim",
-      "text": "Like me in face and lovely grace, like me in voice and song, He'll bid the laws at length speak out that have been dumb so long, Will give unto the weary world years prosperous and bright.",
-      "work": "Apocolocyntosis",
-      "lang": "en",
-      "src": {
-        "work": "Apocolocyntosis"
-      },
-      "quality": {
-        "chars": 188
-      }
-    },
-    {
-      "id": "seneca.f.v0002",
-      "kind": "verbatim",
-      "text": "What he said nobody understood; as a matter of fact, he was ordering my lady of Fever to be taken away, and making that sign with his trembling hand (which was always steady enough for that, if for nothing else) by which he used to decapitate men.",
-      "work": "Apocolocyntosis",
-      "lang": "en",
-      "src": {
-        "work": "Apocolocyntosis"
-      },
-      "quality": {
-        "chars": 247
-      }
-    },
-    {
-      "id": "seneca.f.v0003",
-      "kind": "verbatim",
-      "text": "Silanus--see, Jupiter, whether he had a case against him (at least it is your own if you will be fair.) Come tell me, blessed Claudius, why of all those you killed, both men and women, without a hearing, why you did not hear their side of the case first, before putting them to death?",
-      "work": "Apocolocyntosis",
-      "lang": "en",
-      "src": {
-        "work": "Apocolocyntosis"
-      },
-      "quality": {
-        "chars": 284
-      }
-    },
-    {
-      "id": "seneca.f.v0004",
-      "kind": "verbatim",
-      "text": "The Barristers were crawling out of their dark corners, pale and thin, with hardly a breath in their bodies, as though just coming to life again.",
-      "work": "Apocolocyntosis",
-      "lang": "en",
-      "src": {
-        "work": "Apocolocyntosis"
-      },
-      "quality": {
-        "chars": 145
-      }
-    },
-    {
-      "id": "seneca.f.v0005",
-      "kind": "verbatim",
-      "text": "The most trustworthy virtue is that which long and carefully considers itself, controls itself, and slowly and deliberately brings itself to the front.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 151
-      }
-    },
-    {
-      "id": "seneca.f.v0006",
-      "kind": "verbatim",
-      "text": "Peut-être les Magistrats qui devoient juger à mort un citoyen, portoient ils aussi leur robe renversée, ou la jettoient ils de travers ou confusément sur leurs épaules, pour mieux peindre par ce desordre le trouble de leur esprit.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "fr",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 230
-      }
-    },
-    {
-      "id": "seneca.f.v0007",
-      "kind": "verbatim",
-      "text": "Some one will be said to have spoken ill of you: think whether you did not first speak ill of him: think of how many persons you have yourself spoken ill.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 154
-      }
-    },
-    {
-      "id": "seneca.f.v0008",
-      "kind": "verbatim",
-      "text": "It is important to know how great and how fresh its strength may be, and whether it can be driven forcibly back and suppressed, or whether we must give way to it until its first storm blow over, lest it sweep away with it our remedies themselves.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 246
-      }
-    },
-    {
-      "id": "seneca.f.v0009",
-      "kind": "verbatim",
-      "text": "Now, the cases which I have quoted are defended only by the usage of one out-of-the-way quarter of the world: see now, how far more deserving of pardon those crimes are which are spread abroad among all mankind.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 211
-      }
-    },
-    {
-      "id": "seneca.f.v0010",
-      "kind": "verbatim",
-      "text": "Caesar was shocked at this novel form of cruelty, and ordered him to be let go, and, in his place, all the crystal ware which he saw before him to be broken, and the tank to be filled up.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 187
-      }
-    },
-    {
-      "id": "seneca.f.v0011",
-      "kind": "verbatim",
-      "text": "Even though others may form the first line, and your lot may have placed you among the veterans of the third, do your duty there with your voice, encouragement, example, and spirit: even though a man’s hands be cut off, he may find means to help his side in a battle, if he stands his ground and cheers on his comrades.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 319
-      }
-    },
-    {
-      "id": "seneca.f.v0012",
-      "kind": "verbatim",
-      "text": "Let us therefore briskly and cheerfully hasten with undaunted steps whithersoever circumstances call us: let us wander over whatever countries we please; no place of banishment can be found in the whole world in which man cannot find a home.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 241
-      }
-    },
-    {
-      "id": "seneca.f.v0013",
-      "kind": "verbatim",
-      "text": "Cinna, when I found you in the enemy’s camp, you who had not become but were actually born my enemy, I saved your life, and restored to you the whole of your father’s estate.",
-      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
-      "lang": "en",
-      "src": {
-        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
-      },
-      "quality": {
-        "chars": 174
-      }
-    },
-    {
-      "id": "seneca.f.v0014",
       "kind": "verbatim",
       "text": "No one is so foolish as to need to be told not to send gladiators or wild beasts to one who has just given a public show, or not to send summer clothing in winter time, or winter clothing in summer.",
       "work": "On Benefits",
@@ -524,20 +423,33 @@
       }
     },
     {
-      "id": "seneca.f.v0015",
+      "id": "seneca.f.v0002",
       "kind": "verbatim",
-      "text": "I have thought it necessary, my friend Liberalis, to state these facts, both because when speaking of small benefits one ought to make some mention of the greatest, and because also this shameless and hateful vice (of ingratitude), starting with these, transfers itself from them to all the rest.",
+      "text": "Nothing is by itself a becoming gift for any one: all depends upon who gives it, to whom he gives it, when, for what reason, where, and so forth, without which details it is impossible to argue about it.",
       "work": "On Benefits",
       "lang": "en",
       "src": {
         "work": "On Benefits"
       },
       "quality": {
-        "chars": 296
+        "chars": 203
       }
     },
     {
-      "id": "seneca.f.v0016",
+      "id": "seneca.f.v0003",
+      "kind": "verbatim",
+      "text": "What,\" say you, \"can a man repay a benefit, though he does nothing?\" He has taken the first step, he has offered you a good thing with good feeling, and, which is the characteristic of friendship, has placed you both on the same footing.",
+      "work": "On Benefits",
+      "lang": "en",
+      "src": {
+        "work": "On Benefits"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "seneca.f.v0004",
       "kind": "verbatim",
       "text": "On the other hand, he who takes pleasure in receiving a benefit, enjoys an unvarying and continuous happiness, which he derives from consideration, not of the thing given, but of the intention of the giver.",
       "work": "On Benefits",
@@ -550,46 +462,33 @@
       }
     },
     {
-      "id": "seneca.f.v0017",
+      "id": "seneca.f.v0005",
       "kind": "verbatim",
-      "text": "These same adversaries of ours admit that they are grateful, yet not because it is honourable, but because it is profitable to be so.",
+      "text": "It is in your power to decide how my father shall be freed from his prosecutor.\" The tribune swore, and kept his oath; he related the reason of his abandonment of his action to an assembly at the Rostra.",
       "work": "On Benefits",
       "lang": "en",
       "src": {
         "work": "On Benefits"
       },
       "quality": {
-        "chars": 133
+        "chars": 203
       }
     },
     {
-      "id": "seneca.f.v0018",
+      "id": "seneca.f.v0006",
       "kind": "verbatim",
-      "text": "It often happens that even when one combatant is pierced with many wounds, while the other is only slightly injured, yet they are said to have fought a drawn battle, although the former may appear to be the worse man.",
+      "text": "Injuries and benefits are the converse of one another: if we say of a man, 'he has done himself an injury,' we can also say 'he has bestowed upon himself a benefit?' VIII.",
       "work": "On Benefits",
       "lang": "en",
       "src": {
         "work": "On Benefits"
       },
       "quality": {
-        "chars": 217
+        "chars": 171
       }
     },
     {
-      "id": "seneca.f.v0019",
-      "kind": "verbatim",
-      "text": "Similarly men's minds contain a good feeling, which, however, lies torpid, either through luxury and disuse, or through ignorance of its duties.",
-      "work": "On Benefits",
-      "lang": "en",
-      "src": {
-        "work": "On Benefits"
-      },
-      "quality": {
-        "chars": 144
-      }
-    },
-    {
-      "id": "seneca.f.v0020",
+      "id": "seneca.f.v0007",
       "kind": "verbatim",
       "text": "If any one does me a service, without knowing it, I am under no obligation to him; should he do so, meaning to injure me, I shall imitate his conduct.",
       "work": "On Benefits",
@@ -602,39 +501,261 @@
       }
     },
     {
-      "id": "seneca.f.v0021",
+      "id": "seneca.f.v0008",
       "kind": "verbatim",
-      "text": "How can a man arrive at using bold freedom of speech with you, if he is only allowed in his proper turn to make use of the common phrase, \"Hail to you,\" which is used by perfect strangers?",
+      "text": "When Xerxes declared war against Greece, all his courtiers encouraged his boastful temper, which forgot how unsubstantial his grounds for confidence were.",
       "work": "On Benefits",
       "lang": "en",
       "src": {
         "work": "On Benefits"
       },
       "quality": {
-        "chars": 188
+        "chars": 154
+      }
+    },
+    {
+      "id": "seneca.f.v0009",
+      "kind": "verbatim",
+      "text": "Tradition tells us that Vatinius, a man born both to be laughed at and hated, was a witty and clever jester.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "seneca.f.v0010",
+      "kind": "verbatim",
+      "text": "In all dealing with crime he will remember that the one form of punishment is meant to make bad men better, and the other to put them out of the way.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "seneca.f.v0011",
+      "kind": "verbatim",
+      "text": "Old men are testy and full of complaints, as also are sick people and convalescents, and all whose store of heat has been consumed by weariness or loss of blood.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "seneca.f.v0012",
+      "kind": "verbatim",
+      "text": "It is important to know how great and how fresh its strength may be, and whether it can be driven forcibly back and suppressed, or whether we must give way to it until its first storm blow over, lest it sweep away with it our remedies themselves.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "seneca.f.v0013",
+      "kind": "verbatim",
+      "text": "This breath that we hold so dear will soon leave us: in the meantime, while we draw it, while we live among human beings, let us practise humanity: let us not be a terror or a danger to any one.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "seneca.f.v0014",
+      "kind": "verbatim",
+      "text": "He who believes giving to be an easy matter, is mistaken: it offers very great difficulties, if we bestow our bounty rationally, and do not scatter it impulsively and at random.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "seneca.f.v0015",
+      "kind": "verbatim",
+      "text": "The inner curve is the one to take, not only in running races and in the contests of the circus, but also in the race of life; even literary pursuits, the most becoming thing for a gentleman to spend money upon, are only justifiable as long as they are kept within bounds.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "seneca.f.v0016",
+      "kind": "verbatim",
+      "text": "The talk of these men is not dangerous, their friendship will not lead you to the scaffold, their society will not ruin you in expenses: you may take from them whatsoever you will; they will not prevent your taking the deepest draughts of their wisdom that you please.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "seneca.f.v0017",
+      "kind": "verbatim",
+      "text": "A monument was erected in his honour at Moguntiacum (Mayence), and games and military spectacles were exhibited there on the anniversary of his death.",
+      "work": "Minor Dialogues, Together With the Dialogue on Clemency",
+      "lang": "en",
+      "src": {
+        "work": "Minor Dialogues, Together With the Dialogue on Clemency"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "seneca.f.v0018",
+      "kind": "verbatim",
+      "text": "What sinking terror filled each quaking breast, When near the borders of sea-girt Pelorus, 350 There smote upon their ears the horrid chorus Of Scylla's baying wolves around them pressed.",
+      "work": "The Tragedies of Seneca",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "seneca.f.v0019",
+      "kind": "verbatim",
+      "text": "Chalcis heard, The Cyclades re-echoed with the sound, Caphereus' rocky crags and all the grove Resounded with the groans of Hercules.",
+      "work": "The Tragedies of Seneca",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "seneca.f.v0020",
+      "kind": "verbatim",
+      "text": "See 710 Her cheeks are pale, and fits of trembling fear Possess her frame; her locks in horror rise, And we can hear, though pent within her breast, The loud pulsations of her fluttering heart.",
+      "work": "The Tragedies of Seneca",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedies of Seneca"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "seneca.f.v0021",
+      "kind": "verbatim",
+      "text": "As for Claudius, they tell everybody to speed him on his way With cries of joy and solemn litany.",
+      "work": "Apocolocyntosis",
+      "lang": "en",
+      "src": {
+        "work": "Apocolocyntosis"
+      },
+      "quality": {
+        "chars": 97
       }
     },
     {
       "id": "seneca.f.v0022",
       "kind": "verbatim",
-      "text": "It matters not how many kingdoms he may have seized or given away, or how great a part of the world may pay him tribute; such a man must be in need of as much as he desires.",
-      "work": "On Benefits",
+      "text": "On this Jupiter bids Hercules go and find out what country he comes from; you see Hercules had travelled over the whole world, and might be expected to know all the nations in it.",
+      "work": "Apocolocyntosis",
       "lang": "en",
       "src": {
-        "work": "On Benefits"
+        "work": "Apocolocyntosis"
       },
       "quality": {
-        "chars": 173
+        "chars": 179
+      }
+    },
+    {
+      "id": "seneca.f.v0023",
+      "kind": "verbatim",
+      "text": "I'll do as much for you again, when you like; you roll my log, and I'll roll yours: one hand washes another.\" Then arose the blessed Augustus, when his turn 10 came, and spoke with much eloquence.",
+      "work": "Apocolocyntosis",
+      "lang": "en",
+      "src": {
+        "work": "Apocolocyntosis"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "seneca.f.v0024",
+      "kind": "verbatim",
+      "text": "The Barristers were crawling out of their dark corners, pale and thin, with hardly a breath in their bodies, as though just coming to life again.",
+      "work": "Apocolocyntosis",
+      "lang": "en",
+      "src": {
+        "work": "Apocolocyntosis"
+      },
+      "quality": {
+        "chars": 145
+      }
+    },
+    {
+      "id": "seneca.f.v0025",
+      "kind": "verbatim",
+      "text": "Out he comes to meet him, smooth and shining (he had just left the bath), and says he: \"What make the gods among mortals?\" \"Look alive,\" says Mercury, \"go and tell them we are coming.\" Away he flew, quicker than tongue can tell.",
+      "work": "Apocolocyntosis",
+      "lang": "en",
+      "src": {
+        "work": "Apocolocyntosis"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "seneca.f.v0026",
+      "kind": "verbatim",
+      "text": "Pedo requests the judge to take the prisoner's name, and produces a summons with this charge: Senators killed, 35; Roman Knights, 221; others as the sands of the sea-shore for multitude.",
+      "work": "Apocolocyntosis",
+      "lang": "en",
+      "src": {
+        "work": "Apocolocyntosis"
+      },
+      "quality": {
+        "chars": 186
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 48,
+    "formulas": 26,
+    "verbatim": 26,
     "patterns": 0
   },
-  "checksum": "sha256:0cef4a248f54e4f0cd75390ee6a1320be124f12fba4a1accb25732a8ac11d35c"
+  "checksum": "sha256:5dcb9e2736602c28f646f59fec66e0eb551bd9413c1408b13d73dd945fd94f02"
 }

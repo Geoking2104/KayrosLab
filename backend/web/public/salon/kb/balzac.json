@@ -1,242 +1,34 @@
 {
   "authorId": "balzac",
   "kbVersion": "balzac@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.126Z",
+  "builtAt": "2026-10-03T21:23:12.157Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Cousin Betty",
-      "sentences": 14
+      "title": "Father Goriot",
+      "sentences": 12
     },
     {
       "title": "Eugenie Grandet",
-      "sentences": 13
+      "sentences": 12
     },
     {
-      "title": "Father Goriot",
-      "sentences": 13
+      "title": "Cousin Betty",
+      "sentences": 12
+    },
+    {
+      "title": "Lost Illusions",
+      "sentences": 12
+    },
+    {
+      "title": "The Magic Skin",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "balzac.p0001",
-      "w": "Cousin Betty",
-      "s": "This fine piece is shown at the shop of one of the old curiosity sellers on the Place du Carrousel, near my lodgings.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0002",
-      "w": "Cousin Betty",
-      "s": "Ah, if only you knew how I longed for some fellow-creature, even a tyrant, who would have something to say to me when I was struggling in the vast solitude of Paris!” exclaimed Wenceslas.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0003",
-      "w": "Cousin Betty",
-      "s": "She accepted this detail of her part against her will; she began by making a curious attempt, due to her ignorance.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0004",
-      "w": "Cousin Betty",
-      "s": "Presently Steinbock came out to join the cousins, and thanked the old maid effusively for his prompt release.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0005",
-      "w": "Cousin Betty",
-      "s": "Two tears hung on the fringes of the still long lashes, and she silently pressed the old man’s hand; his beaming face expressed the glee of a favored lover.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0006",
-      "w": "Cousin Betty",
-      "s": "Crevel was losing, as a man must who is not giving his thoughts to his game.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0007",
-      "w": "Cousin Betty",
-      "s": "It inhabits deserts whose extent is so vast that it expands at its ease; there is no jostling there, as there is in Europe, and civilization is impossible without the constant friction of minds and interests.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0008",
-      "w": "Cousin Betty",
-      "s": "I believed my troubles were ended, and they are beginning again, for I never thought to suffer doubly by suffering with my child.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0009",
-      "w": "Cousin Betty",
-      "s": "He still thinks of Madame Marneffe, that I can see; but he will forget her in time.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0010",
-      "w": "Cousin Betty",
-      "s": "How do these women do it?” the Baroness had asked Lisbeth.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0011",
-      "w": "Cousin Betty",
-      "s": "I feel as if I were taking leave of the whole of the old army in you,” said the Count.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0012",
-      "w": "Cousin Betty",
-      "s": "I shall buy an estate I have my eye on--Presles, which Madame de Serizy wants to sell.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0013",
-      "w": "Cousin Betty",
-      "s": "She had stuck one scarlet camellia in her black hair--a patch--the effect was dazzling, and she had amused herself by putting eleven rows of pearls on each arm.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0014",
-      "w": "Cousin Betty",
-      "s": "The poor Jewess means to keep the promise she made to the Christian.",
-      "src": {
-        "work": "Cousin Betty"
-      }
-    },
-    {
-      "id": "balzac.p0015",
-      "w": "Eugenie Grandet",
-      "s": "If you want to give gilt scissors to your daughter, you have the means,” said the abbe.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0016",
-      "w": "Eugenie Grandet",
-      "s": "He gracefully responded to the species of invitation addressed to him, and began very naturally a conversation, in which Madame des Grassins gradually lowered her voice so as to bring it into harmony with the nature of the confidences she was making.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0017",
-      "w": "Eugenie Grandet",
-      "s": "Already she felt the effects of that virgin modesty and that special consciousness of happiness which lead us to fancy, not perhaps without reason, that our thoughts are graven on our foreheads and are open to the eyes of all.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0018",
-      "w": "Eugenie Grandet",
-      "s": "I feel better!” said Eugenie after a moment.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0019",
-      "w": "Eugenie Grandet",
-      "s": "He figured out his calculation on the margin of the newspaper which gave the account of his brother’s death, all the while hearing the moans of his nephew, but without listening to them.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0020",
-      "w": "Eugenie Grandet",
-      "s": "His saddened heart felt the sweetness of the gentle friendship, the exquisite sympathy which these two souls, crushed under perpetual restraint, knew so well how to display when, for an instant, they were left unfettered in the regions of suffering, their natural sphere.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0021",
-      "w": "Eugenie Grandet",
-      "s": "As she read each sentence her heart swelled more and more, and the keen glow which filled her being as she did so, only made the joys of first love still more precious.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0022",
-      "w": "Eugenie Grandet",
-      "s": "As the warm tears touched her, Eugenie sprang to the purse and poured its contents upon the table.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0023",
-      "w": "Eugenie Grandet",
-      "s": "The creditors gratefully acknowledged the remarkable and incontestable honor displayed by the Grandets.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0024",
-      "w": "Eugenie Grandet",
-      "s": "When they saw him coming back from the wharf, followed by a porter from the coach-office wheeling a barrow which was laden with sacks, they all had their comments to make:-- “Water flows to the river; the old fellow was running after his gold,” said one.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0025",
-      "w": "Eugenie Grandet",
-      "s": "But do you know what she has done, Cruchot?” “What?” asked the notary, curious to hear the truth and find out the cause of the quarrel.",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0026",
-      "w": "Eugenie Grandet",
-      "s": "I think you don’t want to give me pain?” “Oh!",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0027",
-      "w": "Eugenie Grandet",
-      "s": "A thing for which I would have laid down my life!” Terrible and utter disaster!",
-      "src": {
-        "work": "Eugenie Grandet"
-      }
-    },
-    {
-      "id": "balzac.p0028",
       "w": "Father Goriot",
       "s": "Goriot appeared for the first time in this condition, an exclamation of astonishment broke from his hostess at the color of his hair--a dingy olive gray.",
       "src": {
@@ -244,23 +36,23 @@
       }
     },
     {
-      "id": "balzac.p0029",
+      "id": "balzac.p0002",
       "w": "Father Goriot",
-      "s": "Maxime, were you going away?” she said reproachfully, with a shade of pique in her manner.",
+      "s": "Anything and everything serves to keep up a game of battledore and shuttlecock with words and ideas.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0030",
+      "id": "balzac.p0003",
       "w": "Father Goriot",
-      "s": "It was like balm to the law student, who was still smarting under the Duchess’ insolent scrutiny; she had looked at him as an auctioneer might look at some article to appraise its value.",
+      "s": "I have never seen such a lovely color in your cheeks before.” Then she went out with a slight inclination of the head to the cousin.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0031",
+      "id": "balzac.p0004",
       "w": "Father Goriot",
       "s": "Your credit is good,” he remarked, eyeing the student, and Rastignac was forced to thank him, though, since the sharp encounter of wits at dinner that day, after Eugene came in from calling on Mme.",
       "src": {
@@ -268,55 +60,47 @@
       }
     },
     {
-      "id": "balzac.p0032",
+      "id": "balzac.p0005",
       "w": "Father Goriot",
-      "s": "My idea is to live a patriarchal life on a vast estate, say a hundred thousand acres, somewhere in the Southern States of America.",
+      "s": "The “abysses of the human heart,” in the moralists’ phrase, are only insidious thoughts, involuntary promptings of personal interest.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0033",
+      "id": "balzac.p0006",
       "w": "Father Goriot",
-      "s": "Have you read Rousseau?” “Yes.” “Do you remember that he asks the reader somewhere what he would do if he could make a fortune by killing an old mandarin somewhere in China by mere force of wishing it, and without stirring from Paris?” “Yes.” “Well, then?” “Pshaw!",
+      "s": "But where is he going to dine?” asked Bianchon.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0034",
+      "id": "balzac.p0007",
       "w": "Father Goriot",
-      "s": "Put the bills in an envelope, direct it, and send it by your maid.” “Why, you are a love of a man,” she said.",
+      "s": "If I have no children--which will probably be the case, for I have no anxiety to raise slips of myself here--you shall inherit my fortune.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0035",
+      "id": "balzac.p0008",
       "w": "Father Goriot",
-      "s": "I told her how you had given the banknote to me; it moved my darling to tears.",
+      "s": "Well,” he remarked, folding his arms, “here is a picture!",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0036",
+      "id": "balzac.p0009",
       "w": "Father Goriot",
-      "s": "In fact, a superior man must rise above vulgar prejudices, and a Christian must resign himself to the mishaps that doing right entails, when right is done in an out-of-the-way style.",
+      "s": "Michonneau than the rest of us,” he said; “speak to her, make her understand that she must go, and go at once.” “At once!” echoed Poiret in amazement.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0037",
-      "w": "Father Goriot",
-      "s": "If you but knew what a pleasure it has been to see after all the arrangements of this bachelor establishment, you would not hesitate any longer, you would ask me to forgive you for your hesitation.",
-      "src": {
-        "work": "Father Goriot"
-      }
-    },
-    {
-      "id": "balzac.p0038",
+      "id": "balzac.p0010",
       "w": "Father Goriot",
       "s": "Derville found that Nucingen was throwing all sorts of difficulties in his way, he threatened him with proceedings, and told him plainly that he would soon obtain an order from the President of the Tribunal.",
       "src": {
@@ -324,19 +108,403 @@
       }
     },
     {
-      "id": "balzac.p0039",
+      "id": "balzac.p0011",
       "w": "Father Goriot",
-      "s": "A servant that cannot trust her mistress, did any one ever hear the like!",
+      "s": "People are wondering what will happen?” “The world laughs at baseness and connives at it.",
       "src": {
         "work": "Father Goriot"
       }
     },
     {
-      "id": "balzac.p0040",
+      "id": "balzac.p0012",
       "w": "Father Goriot",
-      "s": "The most pressing thing just now is not really money; we must put mustard poultices, as hot as they can be made, on his feet and legs.",
+      "s": "Tell them that, but don’t alarm them more than you can help.” Rastignac signed to Christophe to go, and the man went.",
       "src": {
         "work": "Father Goriot"
+      }
+    },
+    {
+      "id": "balzac.p0013",
+      "w": "Eugenie Grandet",
+      "s": "Necessity had made the poor girl so niggardly that Grandet had grown to love her as we love a dog, and Nanon had let him fasten a spiked collar round her throat, whose spikes no longer pricked her.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0014",
+      "w": "Eugenie Grandet",
+      "s": "None but a Parisian, and a Parisian of the upper spheres, could thus array himself without appearing ridiculous; none other could give the harmony of self-conceit to all these fopperies, which were carried off, however, with a dashing air,--the air of a young man who has fine pistols, a sure aim, and Annette.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0015",
+      "w": "Eugenie Grandet",
+      "s": "Here you are in your room, my nephew,” said Pere Grandet as he opened the door.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0016",
+      "w": "Eugenie Grandet",
+      "s": "I feel better!” said Eugenie after a moment.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0017",
+      "w": "Eugenie Grandet",
+      "s": "My uncle said my father had failed.” He uttered a heart-rending cry, and hid his face in his hands.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0018",
+      "w": "Eugenie Grandet",
+      "s": "If the politic old miser had given his dinner from the same idea that cost the dog of Alcibiades his tail, he might perhaps have been called a great man; but the fact is, considering himself superior to a community which he could trick on all occasions, he paid very little heed to what Saumur might say.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0019",
+      "w": "Eugenie Grandet",
+      "s": "As she read each sentence her heart swelled more and more, and the keen glow which filled her being as she did so, only made the joys of first love still more precious.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0020",
+      "w": "Eugenie Grandet",
+      "s": "Pere Grandet chose to go to bed early, and when he went to bed, everybody else was expected to go too; like as when Augustus drank, Poland was drunk.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0021",
+      "w": "Eugenie Grandet",
+      "s": "Eugenie was to be in all things a woman, except in the one thing that consoles for all.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0022",
+      "w": "Eugenie Grandet",
+      "s": "A mother and daughter talking and arguing like that!",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0023",
+      "w": "Eugenie Grandet",
+      "s": "No more dry bread; you shall have all you want--Ah, she opens her eyes!",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0024",
+      "w": "Eugenie Grandet",
+      "s": "By means of full sleeves, deceptive pads, puffed dresses amply trimmed, and high-pressure corsets, she had obtained such curious feminine developments that she ought, for the instruction of mothers, to have exhibited them in a museum.",
+      "src": {
+        "work": "Eugenie Grandet"
+      }
+    },
+    {
+      "id": "balzac.p0025",
+      "w": "Cousin Betty",
+      "s": "This fine piece is shown at the shop of one of the old curiosity sellers on the Place du Carrousel, near my lodgings.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0026",
+      "w": "Cousin Betty",
+      "s": "He is employed in your department in the War Office, under Monsieur Lebrun, in Monsieur Coquet’s room,” said she with a smile.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0027",
+      "w": "Cousin Betty",
+      "s": "Crevel set up for being a man of broad views, a fine gentleman with an air and grace, a liberal man with nothing narrow in his ideas--and all for the small sum of about twelve to fifteen hundred francs a month.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0028",
+      "w": "Cousin Betty",
+      "s": "Madame Marneffe’s house had in a couple of years achieved a reputation for being a very pleasant one.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0029",
+      "w": "Cousin Betty",
+      "s": "But when he came in I felt as if a penknife had been stuck into my heart.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0030",
+      "w": "Cousin Betty",
+      "s": "She went to see him; she told him that great works of art were not to be manufactured like cannon; and that the State--like Louis XIV., Francis I., and Leo X.--ought to be at the beck and call of genius.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0031",
+      "w": "Cousin Betty",
+      "s": "I believed my troubles were ended, and they are beginning again, for I never thought to suffer doubly by suffering with my child.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0032",
+      "w": "Cousin Betty",
+      "s": "I only wish you had been there, that I might have punished him with the sight of the mad passion I felt for you.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0033",
+      "w": "Cousin Betty",
+      "s": "Crevel was becoming “master of the situation,” to use his own words.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0034",
+      "w": "Cousin Betty",
+      "s": "I feel as if I were taking leave of the whole of the old army in you,” said the Count.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0035",
+      "w": "Cousin Betty",
+      "s": "Well, he has settled thirty thousand francs a year on Mademoiselle Bijou by the marriage articles.",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0036",
+      "w": "Cousin Betty",
+      "s": "He is an Othello who is not to be taken in, whom I have the honor of introducing to you--Monsieur le Baron Montes de Montejanos.” “Oh!",
+      "src": {
+        "work": "Cousin Betty"
+      }
+    },
+    {
+      "id": "balzac.p0037",
+      "w": "Lost Illusions",
+      "s": "And now try to understand the thoughts that troubled Lucien's mind as he went down from Angouleme.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0038",
+      "w": "Lost Illusions",
+      "s": "Marry; I give you my consent, but as for giving you anything else, I haven't a penny to bless myself with.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0039",
+      "w": "Lost Illusions",
+      "s": "Firmiani, one of the most charming women in Paris.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0040",
+      "w": "Lost Illusions",
+      "s": "Daniel d'Arthez would not allow that any writer could attain to a pre-eminent rank without a profound knowledge of metaphysics.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0041",
+      "w": "Lost Illusions",
+      "s": "The appearance of this odd and extraordinary looking being, so unmistakably an artist, made a deep impression on Lucien's mind.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0042",
+      "w": "Lost Illusions",
+      "s": "We have a heart somewhere beneath the intellect; we have NOT the grim qualities of the man who makes others work for him.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0043",
+      "w": "Lost Illusions",
+      "s": "While they are setting up the paper, I will go round with you and introduce you to the managers of your theatres, and take you behind the scenes,\" said Lousteau.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0044",
+      "w": "Lost Illusions",
+      "s": "He learned to ride, in order to escort Mme.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0045",
+      "w": "Lost Illusions",
+      "s": "It never crossed his mind that this history of the patent was one of the mystifications at which Mme.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0046",
+      "w": "Lost Illusions",
+      "s": "The girl was brought up in my mother's house; she is the Mlle.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0047",
+      "w": "Lost Illusions",
+      "s": "It is no fault of mine if you have not gained your end; are you going to keep your promise?\" \"Yes, if we succeed,\" said the tall Cointet.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0048",
+      "w": "Lost Illusions",
+      "s": "If Lucien hopes to succeed through the Countess' influence, I have David safe----\" \"You will be Keeper of the Seals yet, it is my belief,\" said Cointet.",
+      "src": {
+        "work": "Lost Illusions"
+      }
+    },
+    {
+      "id": "balzac.p0049",
+      "w": "The Magic Skin",
+      "s": "The young sceptic went up to this so-called talisman, which was to rescue him from all points of view, and he soon found out the cause of its singular brilliancy.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0050",
+      "w": "The Magic Skin",
+      "s": "If you had an income of fifty thousand livres, you would not think much about the people.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0051",
+      "w": "The Magic Skin",
+      "s": "Nowadays, I smile at recollections of the scruples which burdened my conscience at that epoch of innocence and virtue.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0052",
+      "w": "The Magic Skin",
+      "s": "But afterwards, while my hostess and her daughter watched my ways and behavior, scrutinized my appearance and divined my poverty, there could not but be some bonds between us; perhaps because they were themselves so very poor.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0053",
+      "w": "The Magic Skin",
+      "s": "Before she would pardon any blunder, she would keep me a suppliant for long.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0054",
+      "w": "The Magic Skin",
+      "s": "My happiness was increased by the extent of the money I sacrificed.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0055",
+      "w": "The Magic Skin",
+      "s": "We remained perfectly silent for nearly ten minutes.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0056",
+      "w": "The Magic Skin",
+      "s": "I wished never to be alone with myself, and I must have false friends and courtesans, wine and good cheer to distract me.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0057",
+      "w": "The Magic Skin",
+      "s": "The old professor confronted this youthful corpse and shuddered; there seemed something unnatural about the meagre, enfeebled frame.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0058",
+      "w": "The Magic Skin",
+      "s": "And you?” “In the Rue de Varenne.” “What a long way apart we shall be until----” She stopped, and looked at her lover with a mischievous and coquettish expression.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0059",
+      "w": "The Magic Skin",
+      "s": "Baron Japhet applied the nervous fibres of his tongue to the skin; he had skill in thus detecting salts, acids, alkalis, and gases.",
+      "src": {
+        "work": "The Magic Skin"
+      }
+    },
+    {
+      "id": "balzac.p0060",
+      "w": "The Magic Skin",
+      "s": "If England is not obnoxious to you, its misty climate would reduce your fever; but the situation of our baths, a thousand feet above the level of the Mediterranean, is dangerous for you.",
+      "src": {
+        "work": "The Magic Skin"
       }
     }
   ],
@@ -344,144 +512,144 @@
     {
       "id": "balzac.f.v0001",
       "kind": "verbatim",
-      "text": "This fine piece is shown at the shop of one of the old curiosity sellers on the Place du Carrousel, near my lodgings.",
-      "work": "Cousin Betty",
+      "text": "Goriot appeared for the first time in this condition, an exclamation of astonishment broke from his hostess at the color of his hair--a dingy olive gray.",
+      "work": "Father Goriot",
       "lang": "en",
       "src": {
-        "work": "Cousin Betty"
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "balzac.f.v0002",
+      "kind": "verbatim",
+      "text": "I have never seen such a lovely color in your cheeks before.” Then she went out with a slight inclination of the head to the cousin.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "balzac.f.v0003",
+      "kind": "verbatim",
+      "text": "Your credit is good,” he remarked, eyeing the student, and Rastignac was forced to thank him, though, since the sharp encounter of wits at dinner that day, after Eugene came in from calling on Mme.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "balzac.f.v0004",
+      "kind": "verbatim",
+      "text": "The “abysses of the human heart,” in the moralists’ phrase, are only insidious thoughts, involuntary promptings of personal interest.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "balzac.f.v0005",
+      "kind": "verbatim",
+      "text": "If I have no children--which will probably be the case, for I have no anxiety to raise slips of myself here--you shall inherit my fortune.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "balzac.f.v0006",
+      "kind": "verbatim",
+      "text": "Michonneau than the rest of us,” he said; “speak to her, make her understand that she must go, and go at once.” “At once!” echoed Poiret in amazement.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "balzac.f.v0007",
+      "kind": "verbatim",
+      "text": "Derville found that Nucingen was throwing all sorts of difficulties in his way, he threatened him with proceedings, and told him plainly that he would soon obtain an order from the President of the Tribunal.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "balzac.f.v0008",
+      "kind": "verbatim",
+      "text": "Tell them that, but don’t alarm them more than you can help.” Rastignac signed to Christophe to go, and the man went.",
+      "work": "Father Goriot",
+      "lang": "en",
+      "src": {
+        "work": "Father Goriot"
       },
       "quality": {
         "chars": 117
       }
     },
     {
-      "id": "balzac.f.v0002",
-      "kind": "verbatim",
-      "text": "Ah, if only you knew how I longed for some fellow-creature, even a tyrant, who would have something to say to me when I was struggling in the vast solitude of Paris!” exclaimed Wenceslas.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 187
-      }
-    },
-    {
-      "id": "balzac.f.v0003",
-      "kind": "verbatim",
-      "text": "She accepted this detail of her part against her will; she began by making a curious attempt, due to her ignorance.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 115
-      }
-    },
-    {
-      "id": "balzac.f.v0004",
-      "kind": "verbatim",
-      "text": "Two tears hung on the fringes of the still long lashes, and she silently pressed the old man’s hand; his beaming face expressed the glee of a favored lover.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 156
-      }
-    },
-    {
-      "id": "balzac.f.v0005",
-      "kind": "verbatim",
-      "text": "It inhabits deserts whose extent is so vast that it expands at its ease; there is no jostling there, as there is in Europe, and civilization is impossible without the constant friction of minds and interests.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 208
-      }
-    },
-    {
-      "id": "balzac.f.v0006",
-      "kind": "verbatim",
-      "text": "I believed my troubles were ended, and they are beginning again, for I never thought to suffer doubly by suffering with my child.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 129
-      }
-    },
-    {
-      "id": "balzac.f.v0007",
-      "kind": "verbatim",
-      "text": "She had stuck one scarlet camellia in her black hair--a patch--the effect was dazzling, and she had amused herself by putting eleven rows of pearls on each arm.",
-      "work": "Cousin Betty",
-      "lang": "en",
-      "src": {
-        "work": "Cousin Betty"
-      },
-      "quality": {
-        "chars": 160
-      }
-    },
-    {
-      "id": "balzac.f.v0008",
-      "kind": "verbatim",
-      "text": "He gracefully responded to the species of invitation addressed to him, and began very naturally a conversation, in which Madame des Grassins gradually lowered her voice so as to bring it into harmony with the nature of the confidences she was making.",
-      "work": "Eugenie Grandet",
-      "lang": "en",
-      "src": {
-        "work": "Eugenie Grandet"
-      },
-      "quality": {
-        "chars": 250
-      }
-    },
-    {
       "id": "balzac.f.v0009",
       "kind": "verbatim",
-      "text": "Already she felt the effects of that virgin modesty and that special consciousness of happiness which lead us to fancy, not perhaps without reason, that our thoughts are graven on our foreheads and are open to the eyes of all.",
+      "text": "Necessity had made the poor girl so niggardly that Grandet had grown to love her as we love a dog, and Nanon had let him fasten a spiked collar round her throat, whose spikes no longer pricked her.",
       "work": "Eugenie Grandet",
       "lang": "en",
       "src": {
         "work": "Eugenie Grandet"
       },
       "quality": {
-        "chars": 226
+        "chars": 197
       }
     },
     {
       "id": "balzac.f.v0010",
       "kind": "verbatim",
-      "text": "He figured out his calculation on the margin of the newspaper which gave the account of his brother’s death, all the while hearing the moans of his nephew, but without listening to them.",
+      "text": "None but a Parisian, and a Parisian of the upper spheres, could thus array himself without appearing ridiculous; none other could give the harmony of self-conceit to all these fopperies, which were carried off, however, with a dashing air,--the air of a young man who has fine pistols, a sure aim, and Annette.",
       "work": "Eugenie Grandet",
       "lang": "en",
       "src": {
         "work": "Eugenie Grandet"
       },
       "quality": {
-        "chars": 186
+        "chars": 310
       }
     },
     {
       "id": "balzac.f.v0011",
       "kind": "verbatim",
-      "text": "His saddened heart felt the sweetness of the gentle friendship, the exquisite sympathy which these two souls, crushed under perpetual restraint, knew so well how to display when, for an instant, they were left unfettered in the regions of suffering, their natural sphere.",
+      "text": "If the politic old miser had given his dinner from the same idea that cost the dog of Alcibiades his tail, he might perhaps have been called a great man; but the fact is, considering himself superior to a community which he could trick on all occasions, he paid very little heed to what Saumur might say.",
       "work": "Eugenie Grandet",
       "lang": "en",
       "src": {
         "work": "Eugenie Grandet"
       },
       "quality": {
-        "chars": 271
+        "chars": 304
       }
     },
     {
@@ -500,141 +668,297 @@
     {
       "id": "balzac.f.v0013",
       "kind": "verbatim",
-      "text": "When they saw him coming back from the wharf, followed by a porter from the coach-office wheeling a barrow which was laden with sacks, they all had their comments to make:-- “Water flows to the river; the old fellow was running after his gold,” said one.",
+      "text": "Pere Grandet chose to go to bed early, and when he went to bed, everybody else was expected to go too; like as when Augustus drank, Poland was drunk.",
       "work": "Eugenie Grandet",
       "lang": "en",
       "src": {
         "work": "Eugenie Grandet"
       },
       "quality": {
-        "chars": 254
+        "chars": 149
       }
     },
     {
       "id": "balzac.f.v0014",
       "kind": "verbatim",
-      "text": "Goriot appeared for the first time in this condition, an exclamation of astonishment broke from his hostess at the color of his hair--a dingy olive gray.",
-      "work": "Father Goriot",
+      "text": "By means of full sleeves, deceptive pads, puffed dresses amply trimmed, and high-pressure corsets, she had obtained such curious feminine developments that she ought, for the instruction of mothers, to have exhibited them in a museum.",
+      "work": "Eugenie Grandet",
       "lang": "en",
       "src": {
-        "work": "Father Goriot"
+        "work": "Eugenie Grandet"
       },
       "quality": {
-        "chars": 153
+        "chars": 234
       }
     },
     {
       "id": "balzac.f.v0015",
       "kind": "verbatim",
-      "text": "It was like balm to the law student, who was still smarting under the Duchess’ insolent scrutiny; she had looked at him as an auctioneer might look at some article to appraise its value.",
-      "work": "Father Goriot",
+      "text": "This fine piece is shown at the shop of one of the old curiosity sellers on the Place du Carrousel, near my lodgings.",
+      "work": "Cousin Betty",
       "lang": "en",
       "src": {
-        "work": "Father Goriot"
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "balzac.f.v0016",
+      "kind": "verbatim",
+      "text": "He is employed in your department in the War Office, under Monsieur Lebrun, in Monsieur Coquet’s room,” said she with a smile.",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "balzac.f.v0017",
+      "kind": "verbatim",
+      "text": "Crevel set up for being a man of broad views, a fine gentleman with an air and grace, a liberal man with nothing narrow in his ideas--and all for the small sum of about twelve to fifteen hundred francs a month.",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "balzac.f.v0018",
+      "kind": "verbatim",
+      "text": "She went to see him; she told him that great works of art were not to be manufactured like cannon; and that the State--like Louis XIV., Francis I., and Leo X.--ought to be at the beck and call of genius.",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "balzac.f.v0019",
+      "kind": "verbatim",
+      "text": "I believed my troubles were ended, and they are beginning again, for I never thought to suffer doubly by suffering with my child.",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "balzac.f.v0020",
+      "kind": "verbatim",
+      "text": "I only wish you had been there, that I might have punished him with the sight of the mad passion I felt for you.",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 112
+      }
+    },
+    {
+      "id": "balzac.f.v0021",
+      "kind": "verbatim",
+      "text": "He is an Othello who is not to be taken in, whom I have the honor of introducing to you--Monsieur le Baron Montes de Montejanos.” “Oh!",
+      "work": "Cousin Betty",
+      "lang": "en",
+      "src": {
+        "work": "Cousin Betty"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "balzac.f.v0022",
+      "kind": "verbatim",
+      "text": "Daniel d'Arthez would not allow that any writer could attain to a pre-eminent rank without a profound knowledge of metaphysics.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "balzac.f.v0023",
+      "kind": "verbatim",
+      "text": "The appearance of this odd and extraordinary looking being, so unmistakably an artist, made a deep impression on Lucien's mind.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "balzac.f.v0024",
+      "kind": "verbatim",
+      "text": "We have a heart somewhere beneath the intellect; we have NOT the grim qualities of the man who makes others work for him.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "balzac.f.v0025",
+      "kind": "verbatim",
+      "text": "While they are setting up the paper, I will go round with you and introduce you to the managers of your theatres, and take you behind the scenes,\" said Lousteau.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "balzac.f.v0026",
+      "kind": "verbatim",
+      "text": "It is no fault of mine if you have not gained your end; are you going to keep your promise?\" \"Yes, if we succeed,\" said the tall Cointet.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "balzac.f.v0027",
+      "kind": "verbatim",
+      "text": "If Lucien hopes to succeed through the Countess' influence, I have David safe----\" \"You will be Keeper of the Seals yet, it is my belief,\" said Cointet.",
+      "work": "Lost Illusions",
+      "lang": "en",
+      "src": {
+        "work": "Lost Illusions"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "balzac.f.v0028",
+      "kind": "verbatim",
+      "text": "The young sceptic went up to this so-called talisman, which was to rescue him from all points of view, and he soon found out the cause of its singular brilliancy.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "balzac.f.v0029",
+      "kind": "verbatim",
+      "text": "Nowadays, I smile at recollections of the scruples which burdened my conscience at that epoch of innocence and virtue.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "balzac.f.v0030",
+      "kind": "verbatim",
+      "text": "I wished never to be alone with myself, and I must have false friends and courtesans, wine and good cheer to distract me.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "balzac.f.v0031",
+      "kind": "verbatim",
+      "text": "The old professor confronted this youthful corpse and shuddered; there seemed something unnatural about the meagre, enfeebled frame.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "balzac.f.v0032",
+      "kind": "verbatim",
+      "text": "Baron Japhet applied the nervous fibres of his tongue to the skin; he had skill in thus detecting salts, acids, alkalis, and gases.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
+      },
+      "quality": {
+        "chars": 131
+      }
+    },
+    {
+      "id": "balzac.f.v0033",
+      "kind": "verbatim",
+      "text": "If England is not obnoxious to you, its misty climate would reduce your fever; but the situation of our baths, a thousand feet above the level of the Mediterranean, is dangerous for you.",
+      "work": "The Magic Skin",
+      "lang": "en",
+      "src": {
+        "work": "The Magic Skin"
       },
       "quality": {
         "chars": 186
       }
     },
     {
-      "id": "balzac.f.v0016",
-      "kind": "verbatim",
-      "text": "Your credit is good,” he remarked, eyeing the student, and Rastignac was forced to thank him, though, since the sharp encounter of wits at dinner that day, after Eugene came in from calling on Mme.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 197
-      }
-    },
-    {
-      "id": "balzac.f.v0017",
-      "kind": "verbatim",
-      "text": "My idea is to live a patriarchal life on a vast estate, say a hundred thousand acres, somewhere in the Southern States of America.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 130
-      }
-    },
-    {
-      "id": "balzac.f.v0018",
-      "kind": "verbatim",
-      "text": "Have you read Rousseau?” “Yes.” “Do you remember that he asks the reader somewhere what he would do if he could make a fortune by killing an old mandarin somewhere in China by mere force of wishing it, and without stirring from Paris?” “Yes.” “Well, then?” “Pshaw!",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 264
-      }
-    },
-    {
-      "id": "balzac.f.v0019",
-      "kind": "verbatim",
-      "text": "In fact, a superior man must rise above vulgar prejudices, and a Christian must resign himself to the mishaps that doing right entails, when right is done in an out-of-the-way style.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 182
-      }
-    },
-    {
-      "id": "balzac.f.v0020",
-      "kind": "verbatim",
-      "text": "If you but knew what a pleasure it has been to see after all the arrangements of this bachelor establishment, you would not hesitate any longer, you would ask me to forgive you for your hesitation.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 197
-      }
-    },
-    {
-      "id": "balzac.f.v0021",
-      "kind": "verbatim",
-      "text": "Derville found that Nucingen was throwing all sorts of difficulties in his way, he threatened him with proceedings, and told him plainly that he would soon obtain an order from the President of the Tribunal.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 207
-      }
-    },
-    {
-      "id": "balzac.f.v0022",
-      "kind": "verbatim",
-      "text": "The most pressing thing just now is not really money; we must put mustard poultices, as hot as they can be made, on his feet and legs.",
-      "work": "Father Goriot",
-      "lang": "en",
-      "src": {
-        "work": "Father Goriot"
-      },
-      "quality": {
-        "chars": 134
-      }
+      "id": "balzac.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 5,
+      "worksSpan": 4,
+      "examples": [
+        "If I have no children--which will probably be the case, for I have no anxiety to raise slips of myself here--you shall inherit my fortune.",
+        "If the politic old miser had given his dinner from the same idea that cost the dog of Alcibiades his tail, he might perhaps have been called a great man; but the fact is, considering himself superior to a community which he could trick on all occasions, he paid very little heed to what Saumur might say."
+      ]
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
-    "patterns": 0
+    "sentences": 60,
+    "formulas": 34,
+    "verbatim": 33,
+    "patterns": 1
   },
-  "checksum": "sha256:7fcea16b1811debc4730d56843c79cca10f6f6e118f1dd694fd31aac652949a3"
+  "checksum": "sha256:2598777966d1de2e0429c7dac192863f9bbbb950684702c245c95ede52eb4abf"
 }

@@ -1,26 +1,130 @@
 {
   "authorId": "kant",
   "kbVersion": "kant@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.103Z",
+  "builtAt": "2026-10-03T21:23:12.072Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Fundamental Principles of the Metaphysic of Morals",
-      "sentences": 14
+      "title": "The Critique of Pure Reason",
+      "sentences": 12
     },
     {
-      "title": "Kant's Critique of Judgement",
-      "sentences": 13
+      "title": "Fundamental Principles of the Metaphysic of Morals",
+      "sentences": 12
     },
     {
       "title": "The Critique of Practical Reason",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Metaphysical Elements of Ethics",
+      "sentences": 12
+    },
+    {
+      "title": "Kant's Critique of Judgement",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "kant.p0001",
+      "w": "The Critique of Pure Reason",
+      "s": "It is clear that we cannot make the special conditions of sensibility into conditions of the possibility of things, but only of the possibility of their existence as far as they are phenomena.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0002",
+      "w": "The Critique of Pure Reason",
+      "s": "Secondly, there is truth in respect of the deductions from it.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0003",
+      "w": "The Critique of Pure Reason",
+      "s": "In an analytical judgement I do not go beyond the given conception, in order to arrive at some decision respecting it.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0004",
+      "w": "The Critique of Pure Reason",
+      "s": "But time itself is not an object of perception; and therefore we cannot conclude from the fact that things are placed in the same time, the other fact, that the perception of these things can follow each other reciprocally.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0005",
+      "w": "The Critique of Pure Reason",
+      "s": "In truth, if I cognize in all its inner determinations a drop of water as a thing in itself, I cannot look upon one drop as different from another, if the conception of the one is completely identical with that of the other.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0006",
+      "w": "The Critique of Pure Reason",
+      "s": "We now come to a conception which was not inserted in the general list of transcendental conceptions, and yet must be reckoned with them, but at the same time without in the least altering, or indicating a deficiency in that table.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0007",
+      "w": "The Critique of Pure Reason",
+      "s": "As space is not a composite of substances (and not even of real accidents), if I abstract all composition therein—nothing, not even a point, remains; for a point is possible only as the limit of a space—consequently of a composite.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0008",
+      "w": "The Critique of Pure Reason",
+      "s": "Nothing seems to be clearer than that, if one maintains: “The world has a beginning,” and another: “The world has no beginning,” one of the two must be right.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0009",
+      "w": "The Critique of Pure Reason",
+      "s": "This we propose to attempt in the following chapter.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0010",
+      "w": "The Critique of Pure Reason",
+      "s": "The second asserts that reason is capable of presenting us, from the analogy with nature, with a more definite conception of this being, and that its operations, as the cause of all things, are the results of intelligence and free will.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0011",
+      "w": "The Critique of Pure Reason",
+      "s": "They are, on the contrary, regarded as jealous enemies of our insatiable desire for knowledge; and it almost requires an apology to induce us to tolerate, much less to prize and to respect them.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0012",
+      "w": "The Critique of Pure Reason",
+      "s": "Thus the sceptical procedure in philosophy does not present any solution of the problems of reason, but it forms an excellent exercise for its powers, awakening its circumspection, and indicating the means whereby it may most fully establish its claims to its legitimate possessions.",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      }
+    },
+    {
+      "id": "kant.p0013",
       "w": "Fundamental Principles of the Metaphysic of Morals",
       "s": "In a word, nature would have taken care that reason should not break forth into practical exercise, nor have the presumption, with its weak insight, to think out for itself the plan of happiness, and of the means of attaining it.",
       "src": {
@@ -28,55 +132,47 @@
       }
     },
     {
-      "id": "kant.p0002",
+      "id": "kant.p0014",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "It is just in this that the moral worth of the character is brought out which is incomparably the highest of all, namely, that he is beneficent, not from inclination, but from duty.",
+      "s": "It is only what is connected with my will as a principle, by no means as an effect- what does not subserve my inclination, but overpowers it, or at least in case of choice excludes it from its calculation- in other words, simply the law of itself, which can be an object of respect, and hence a command.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0003",
+      "id": "kant.p0015",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "For to deviate from the principle of duty is beyond all doubt wicked; but to be unfaithful to my maxim of prudence may often be very advantageous to me, although to abide by it is certainly safer.",
+      "s": "Thus, then, without quitting the moral knowledge of common human reason, we have arrived at its principle.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0004",
+      "id": "kant.p0016",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "Although many things are done in conformity with what duty prescribes, it is nevertheless always doubtful whether they are done strictly from duty, so as to have a moral worth.",
+      "s": "Even moderately young children feel this impression, ana one should never represent duties to them in any other light.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0005",
+      "id": "kant.p0017",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "Now all imperatives command either hypothetically or categorically.",
+      "s": "We are not to present it as necessary for an uncertain and merely possible purpose, but for a purpose which we may presuppose with certainty and a priori in every man, because it belongs to his being.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0006",
+      "id": "kant.p0018",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "It concerns not the matter of the action, or its intended result, but its form and the principle of which it is itself a result; and what is essentially good in it consists in the mental disposition, let the consequence be what it may.",
+      "s": "Secondly, in the case of this categorical imperative or law of morality, the difficulty (of discerning its possibility) is a very profound one.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0007",
-      "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "Another finds himself forced by necessity to borrow money.",
-      "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
-      }
-    },
-    {
-      "id": "kant.p0008",
+      "id": "kant.p0019",
       "w": "Fundamental Principles of the Metaphysic of Morals",
       "s": "With the view of attaining to this, it is of extreme importance to remember that we must not allow ourselves to think of deducing the reality of this principle from the particular attributes of human nature.",
       "src": {
@@ -84,23 +180,23 @@
       }
     },
     {
-      "id": "kant.p0009",
+      "id": "kant.p0020",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "On this principle all maxims are rejected which are inconsistent with the will being itself universal legislator.",
+      "s": "For then it is clear that he who transgresses the rights of men intends to use the person of others merely as a means, without considering that as rational beings they ought always to be esteemed also as ends, that is, as beings who must be capable of containing in themselves the end of the very same action.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0010",
+      "id": "kant.p0021",
       "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "If now the maxims of rational beings are not by their own nature coincident with this objective principle, then the necessity of acting on it is called practical necessitation, i.e., duty.",
+      "s": "This estimation therefore shows that the worth of such a disposition is dignity, and places it infinitely above all value, with which it cannot for a moment be brought into comparison or competition without as it were violating its sanctity.",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
-      "id": "kant.p0011",
+      "id": "kant.p0022",
       "w": "Fundamental Principles of the Metaphysic of Morals",
       "s": "This, then, cannot be applied to a holy being.",
       "src": {
@@ -108,135 +204,23 @@
       }
     },
     {
-      "id": "kant.p0012",
-      "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "Not only so, but it is inevitably only heteronomy; the will does not give itself the law, but is given by a foreign impulse by means of a particular natural constitution of the subject adapted to receive it.",
-      "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
-      }
-    },
-    {
-      "id": "kant.p0013",
-      "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "How is a Categorical Imperative Possible?",
-      "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
-      }
-    },
-    {
-      "id": "kant.p0014",
-      "w": "Fundamental Principles of the Metaphysic of Morals",
-      "s": "We cannot however as yet say that we are touching the bounds of practical philosophy.",
-      "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
-      }
-    },
-    {
-      "id": "kant.p0015",
-      "w": "Kant's Critique of Judgement",
-      "s": "But the judgement of taste also claims, as every other empirical judgement does, to be valid for every one; and in spite of its inner contingency this is always possible.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0016",
-      "w": "Kant's Critique of Judgement",
-      "s": "But this universality cannot arise from concepts; for from concepts there is no transition to the feeling of pleasure or pain (except in pure practical laws, which bring an interest with them such as is not bound up with the pure judgement of taste).",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0017",
-      "w": "Kant's Critique of Judgement",
-      "s": "For without this as the subjective condition of cognition, knowledge as an effect could not arise.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0018",
-      "w": "Kant's Critique of Judgement",
-      "s": "In both cases the logical estimation of magnitude goes on without hindrance to infinity.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0019",
-      "w": "Kant's Critique of Judgement",
-      "s": "The subjective condition of all judgements is the faculty of Judgement itself.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0020",
-      "w": "Kant's Critique of Judgement",
-      "s": "It will, perhaps, be said that this is also the case, if an Object of nature interests us by its beauty only so far as it is associated with a moral Idea.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0021",
-      "w": "Kant's Critique of Judgement",
-      "s": "In music this play proceeds from bodily sensations to aesthetical Ideas (the Objects of our affections), and then from these back again to the body with redoubled force.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0022",
-      "w": "Kant's Critique of Judgement",
-      "s": "The beautiful formations in the kingdom of organised nature speak loudly for the realism of the aesthetical purposiveness of nature; since we might assume that behind the production of the beautiful there is an Idea of the beautiful in the producing cause, viz.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
       "id": "kant.p0023",
-      "w": "Kant's Critique of Judgement",
-      "s": "For the first Idea, as concerns its ground, already brings us beyond the world of sense; since the unity of the supersensible principle must be regarded as valid in this way not merely for certain species of natural beings, but for the whole of nature as a system.",
+      "w": "Fundamental Principles of the Metaphysic of Morals",
+      "s": "The positive concept of freedom furnishes this third cognition, which cannot, as with physical causes, be the nature of the sensible world (in the concept of which we find conjoined the concept of something in relation as cause to something else as effect).",
       "src": {
-        "work": "Kant's Critique of Judgement"
+        "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
       "id": "kant.p0024",
-      "w": "Kant's Critique of Judgement",
-      "s": "Now the concept of a thing whose existence or form we represent to ourselves as possible under the condition of a purpose is inseparably bound up with the concept of its contingency (according to natural laws).",
+      "w": "Fundamental Principles of the Metaphysic of Morals",
+      "s": "All men attribute to themselves freedom of will.",
       "src": {
-        "work": "Kant's Critique of Judgement"
+        "work": "Fundamental Principles of the Metaphysic of Morals"
       }
     },
     {
       "id": "kant.p0025",
-      "w": "Kant's Critique of Judgement",
-      "s": "Thus water, air, and earth cannot be regarded as means to the raising of mountains, because mountains contain nothing in themselves that requires a ground of their possibility according to purposes, in reference to which therefore their cause can never be represented under the predicate of a means (as useful therefor).",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0026",
-      "w": "Kant's Critique of Judgement",
-      "s": "Hence the concept of a Deity, which would be adequate for our teleological judging of nature, can never be derived from mere theoretical principles of the use of Reason (on which Physico-theology alone is based).",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0027",
-      "w": "Kant's Critique of Judgement",
-      "s": "In the same way if Psychology enabled us to arrive at a cognition of the immortality of the soul it would make Pneumatology possible, which would be just as welcome to the speculative Reason.",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      }
-    },
-    {
-      "id": "kant.p0028",
       "w": "The Critique of Practical Reason",
       "s": "By the matter of the faculty of desire I mean an object the realization of which is desired.",
       "src": {
@@ -244,23 +228,23 @@
       }
     },
     {
-      "id": "kant.p0029",
+      "id": "kant.p0026",
       "w": "The Critique of Practical Reason",
-      "s": "The thing is strange enough, and has no parallel in all the rest of our practical knowledge.",
+      "s": "The concept of a pure will arises out of the former, as that of a pure understanding arises out of the latter.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
     },
     {
-      "id": "kant.p0030",
+      "id": "kant.p0027",
       "w": "The Critique of Practical Reason",
-      "s": "It is always in everyone's power to satisfy the categorical command of morality; whereas it is seldom possible, and by no means so to everyone, to satisfy the empirically conditioned precept of happiness, even with regard to a single purpose.",
+      "s": "Punishment, then, is a physical evil, which, though it be not connected with moral evil as a natural consequence, ought to be connected with it as a consequence by the principles of a moral legislation.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
     },
     {
-      "id": "kant.p0031",
+      "id": "kant.p0028",
       "w": "The Critique of Practical Reason",
       "s": "But this expedient of adducing empirical proofs, instead of a deduction from a priori sources of knowledge, is denied us here in respect to the pure practical faculty of reason.",
       "src": {
@@ -268,9 +252,33 @@
       }
     },
     {
+      "id": "kant.p0029",
+      "w": "The Critique of Practical Reason",
+      "s": "Now if this as a pleasant sensation were to be distinguished from the notion of good, then there would be nothing primarily good at all, but the good would have to be sought only in the means to something else, namely, some pleasantness.",
+      "src": {
+        "work": "The Critique of Practical Reason"
+      }
+    },
+    {
+      "id": "kant.p0030",
+      "w": "The Critique of Practical Reason",
+      "s": "Such a law is, nevertheless, a type of the estimation of the maxim on moral principles.",
+      "src": {
+        "work": "The Critique of Practical Reason"
+      }
+    },
+    {
+      "id": "kant.p0031",
+      "w": "The Critique of Practical Reason",
+      "s": "But if we look closer we shall observe that it is always uncertain how much of the ability is due to native talent, and how much to diligence in cultivating it.",
+      "src": {
+        "work": "The Critique of Practical Reason"
+      }
+    },
+    {
       "id": "kant.p0032",
       "w": "The Critique of Practical Reason",
-      "s": "For I was able to deduce the objective reality of these concepts only with regard to objects of possible experience.",
+      "s": "For that would be just the same as to wish to taint the purity of the moral disposition in its source.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
@@ -278,7 +286,7 @@
     {
       "id": "kant.p0033",
       "w": "The Critique of Practical Reason",
-      "s": "But here again is opened a favourable prospect for the pure practical judgement.",
+      "s": "Whence it resulted in the Dialectic of Pure Theoretic Reason that the opposite methods of attaining the unconditioned and the totality of the conditions were both wrong.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
@@ -286,7 +294,7 @@
     {
       "id": "kant.p0034",
       "w": "The Critique of Practical Reason",
-      "s": "Now whatever checks our self-conceit in our own judgement humiliates; therefore the moral law inevitably humbles every man when he compares with it the physical propensities of his nature.",
+      "s": "It is also of great importance to attend to this property of our personality and as much as possible to cultivate the effect of reason on this feeling.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
@@ -294,7 +302,7 @@
     {
       "id": "kant.p0035",
       "w": "The Critique of Practical Reason",
-      "s": "But the command that makes this a rule cannot command us to have this disposition in actions conformed to duty, but only to endeavour after it.",
+      "s": "With them therefore, virtue was a sort of heroism in the wise man raising himself above the animal nature of man, is sufficient for Himself, and, while he prescribes duties to others, is himself raised above them, and is not subject to any temptation to transgress the moral law.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
@@ -302,47 +310,298 @@
     {
       "id": "kant.p0036",
       "w": "The Critique of Practical Reason",
-      "s": "But this circumstance may be readily explained from what has just been said; because practical pure reason must necessarily begin with principles, which therefore must be the first data, the foundation of all science, and cannot be derived from it.",
+      "s": "The same may be said of the other conceptions of reason of which we have treated above as postulates of it in its practical use.",
       "src": {
         "work": "The Critique of Practical Reason"
       }
     },
     {
       "id": "kant.p0037",
-      "w": "The Critique of Practical Reason",
-      "s": "Hence, though the summum bonum may be the whole object of a pure practical reason, i.e., a pure will, yet it is not on that account to be regarded as its determining principle; and the moral law alone must be regarded as the principle on which that and its realization or promotion are aimed at.",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Subsequently it was found advisable to confine this name to a part of moral philosophy, namely, to the doctrine of duties which are not subject to external laws (for which in German the name Tugendlehre was found suitable).",
       "src": {
-        "work": "The Critique of Practical Reason"
+        "work": "The Metaphysical Elements of Ethics"
       }
     },
     {
       "id": "kant.p0038",
-      "w": "The Critique of Practical Reason",
-      "s": "It is also of great importance to attend to this property of our personality and as much as possible to cultivate the effect of reason on this feeling.",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "That ethics contains duties to the observance of which one cannot be (physically) forced by others, is merely the consequence of this, that it is a doctrine of ends, since to be forced to have ends or to set them before one's self is a contradiction.",
       "src": {
-        "work": "The Critique of Practical Reason"
+        "work": "The Metaphysical Elements of Ethics"
       }
     },
     {
       "id": "kant.p0039",
-      "w": "The Critique of Practical Reason",
-      "s": "A man is worthy to possess a thing or a state when his possession of it is in harmony with the summum bonum.",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Those, in fact, are not so which do not concern so much a certain end (matter, object of the elective will), but merely that which is formal in the moral determination of the will (e.g., that the dutiful action must also be done from duty).",
       "src": {
-        "work": "The Critique of Practical Reason"
+        "work": "The Metaphysical Elements of Ethics"
       }
     },
     {
       "id": "kant.p0040",
-      "w": "The Critique of Practical Reason",
-      "s": "Only we are not here concerned with the theoretical knowledge of the objects of these ideas, but only with this, whether they have objects at all.",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Here, therefore, we treat not of ends which man actually makes to himself in accordance with the sensible impulses of his nature, but of objects of the free elective will under its own laws- objects which he ought to make his end.",
       "src": {
-        "work": "The Critique of Practical Reason"
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0041",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "The supreme element in the former (the power) is the understanding, it being the faculty of concepts, and, therefore, also of those concepts which refer to duty.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0042",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "How, then, can there be further a law for the maxims of actions?",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0043",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Nay, often the weakness which deters a man from the risk of a crime is regarded by him as virtue (which gives the notion of strength).",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0044",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "For it is the doctrine of virtue that commands us to regard the rights of men as holy.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0045",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "There is no obligation to have these, since they are subjective conditions of susceptibility for the notion of duty, not objective conditions of morality.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0046",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Disinterested benevolence is often called (though very improperly) love; even where the happiness of the other is not concerned, but the complete and free surrender of all one's own ends to the ends of another (even a superhuman) being, love is spoken of as being also our duty.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0047",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Yet the former is the usual device of the rhetorician.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0048",
+      "w": "The Metaphysical Elements of Ethics",
+      "s": "Hence this internal freedom which is the condition of all ethical duty must be discussed as a preliminary (discursus praeliminaris), just as above the doctrine of conscience was discussed as the condition of all duty.",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      }
+    },
+    {
+      "id": "kant.p0049",
+      "w": "Kant's Critique of Judgement",
+      "s": "For they concern only the possibility of things according to natural concepts, to which belong not only the means which are to be met with in nature, but also the will itself (as a faculty of desire and consequently a natural faculty), so far as it can be determined conformably to these rules by natural motives.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0050",
+      "w": "Kant's Critique of Judgement",
+      "s": "Thus people are accustomed to say that all gratification (especially if it lasts) is good in itself; which is very much the same as to say that lasting pleasure and the good are the same.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0051",
+      "w": "Kant's Critique of Judgement",
+      "s": "There is presupposed no concept of any purpose, for which the manifold should serve the given Object, and which therefore is to be represented therein.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0052",
+      "w": "Kant's Critique of Judgement",
+      "s": "And in this procedure, as belonging to the logical estimation of magnitude, there is indeed something objectively purposive,--in accordance with the concept of a purpose (as all measurement is),--but nothing purposive and pleasing for the aesthetical Judgement.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0053",
+      "w": "Kant's Critique of Judgement",
+      "s": "For a judgement of taste consists in calling a thing beautiful just because of that characteristic in respect of which it accommodates itself to our mode of apprehension.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0054",
+      "w": "Kant's Critique of Judgement",
+      "s": "Whether or not, again, under the so-called seven free arts some may be included which ought to be classed as sciences, and many that are akin rather to handicraft, I shall not here discuss.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0055",
+      "w": "Kant's Critique of Judgement",
+      "s": "On the other hand, music and that which excites laughter are two different kinds of play with aesthetical Ideas, or with representations of the Understanding through which ultimately nothing is thought; and yet they can give lively gratification merely by their changes.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0056",
+      "w": "Kant's Critique of Judgement",
+      "s": "Are we, for example, asked to construct a triangle, being given the base and vertical angle?",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0057",
+      "w": "Kant's Critique of Judgement",
+      "s": "We shall then, it is true, have an antinomy, but not of Judgement; there will be a conflict in the legislation of Reason.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0058",
+      "w": "Kant's Critique of Judgement",
+      "s": "For external objects as phenomena an adequate ground related to purposes cannot be met with; this, although it lies in nature, must only be sought in the supersensible substrate of nature, from all possible insight into which we are cut off.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0059",
+      "w": "Kant's Critique of Judgement",
+      "s": "The latter condition of aptitude, which we might call the culture of training (discipline), is negative, and consists in the freeing of the will from the despotism of desires.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      }
+    },
+    {
+      "id": "kant.p0060",
+      "w": "Kant's Critique of Judgement",
+      "s": "The possibility of that which I place at the basis of my explanation, must at least be exposed to no doubt; otherwise there would be no end of empty chimeras.",
+      "src": {
+        "work": "Kant's Critique of Judgement"
       }
     }
   ],
   "formulas": [
     {
       "id": "kant.f.v0001",
+      "kind": "verbatim",
+      "text": "It is clear that we cannot make the special conditions of sensibility into conditions of the possibility of things, but only of the possibility of their existence as far as they are phenomena.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "kant.f.v0002",
+      "kind": "verbatim",
+      "text": "In truth, if I cognize in all its inner determinations a drop of water as a thing in itself, I cannot look upon one drop as different from another, if the conception of the one is completely identical with that of the other.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "kant.f.v0003",
+      "kind": "verbatim",
+      "text": "We now come to a conception which was not inserted in the general list of transcendental conceptions, and yet must be reckoned with them, but at the same time without in the least altering, or indicating a deficiency in that table.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "kant.f.v0004",
+      "kind": "verbatim",
+      "text": "As space is not a composite of substances (and not even of real accidents), if I abstract all composition therein—nothing, not even a point, remains; for a point is possible only as the limit of a space—consequently of a composite.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "kant.f.v0005",
+      "kind": "verbatim",
+      "text": "Nothing seems to be clearer than that, if one maintains: “The world has a beginning,” and another: “The world has no beginning,” one of the two must be right.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "kant.f.v0006",
+      "kind": "verbatim",
+      "text": "The second asserts that reason is capable of presenting us, from the analogy with nature, with a more definite conception of this being, and that its operations, as the cause of all things, are the results of intelligence and free will.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "kant.f.v0007",
+      "kind": "verbatim",
+      "text": "They are, on the contrary, regarded as jealous enemies of our insatiable desire for knowledge; and it almost requires an apology to induce us to tolerate, much less to prize and to respect them.",
+      "work": "The Critique of Pure Reason",
+      "lang": "en",
+      "src": {
+        "work": "The Critique of Pure Reason"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "kant.f.v0008",
       "kind": "verbatim",
       "text": "In a word, nature would have taken care that reason should not break forth into practical exercise, nor have the presumption, with its weak insight, to think out for itself the plan of happiness, and of the means of attaining it.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
@@ -355,59 +614,46 @@
       }
     },
     {
-      "id": "kant.f.v0002",
+      "id": "kant.f.v0009",
       "kind": "verbatim",
-      "text": "It is just in this that the moral worth of the character is brought out which is incomparably the highest of all, namely, that he is beneficent, not from inclination, but from duty.",
+      "text": "It is only what is connected with my will as a principle, by no means as an effect- what does not subserve my inclination, but overpowers it, or at least in case of choice excludes it from its calculation- in other words, simply the law of itself, which can be an object of respect, and hence a command.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
       "lang": "en",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       },
       "quality": {
-        "chars": 181
+        "chars": 303
       }
     },
     {
-      "id": "kant.f.v0003",
+      "id": "kant.f.v0010",
       "kind": "verbatim",
-      "text": "For to deviate from the principle of duty is beyond all doubt wicked; but to be unfaithful to my maxim of prudence may often be very advantageous to me, although to abide by it is certainly safer.",
+      "text": "We are not to present it as necessary for an uncertain and merely possible purpose, but for a purpose which we may presuppose with certainty and a priori in every man, because it belongs to his being.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
       "lang": "en",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       },
       "quality": {
-        "chars": 196
+        "chars": 200
       }
     },
     {
-      "id": "kant.f.v0004",
+      "id": "kant.f.v0011",
       "kind": "verbatim",
-      "text": "Although many things are done in conformity with what duty prescribes, it is nevertheless always doubtful whether they are done strictly from duty, so as to have a moral worth.",
+      "text": "Secondly, in the case of this categorical imperative or law of morality, the difficulty (of discerning its possibility) is a very profound one.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
       "lang": "en",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       },
       "quality": {
-        "chars": 176
+        "chars": 143
       }
     },
     {
-      "id": "kant.f.v0005",
-      "kind": "verbatim",
-      "text": "It concerns not the matter of the action, or its intended result, but its form and the principle of which it is itself a result; and what is essentially good in it consists in the mental disposition, let the consequence be what it may.",
-      "work": "Fundamental Principles of the Metaphysic of Morals",
-      "lang": "en",
-      "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
-      },
-      "quality": {
-        "chars": 235
-      }
-    },
-    {
-      "id": "kant.f.v0006",
+      "id": "kant.f.v0012",
       "kind": "verbatim",
       "text": "With the view of attaining to this, it is of extreme importance to remember that we must not allow ourselves to think of deducing the reality of this principle from the particular attributes of human nature.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
@@ -420,176 +666,72 @@
       }
     },
     {
-      "id": "kant.f.v0007",
+      "id": "kant.f.v0013",
       "kind": "verbatim",
-      "text": "On this principle all maxims are rejected which are inconsistent with the will being itself universal legislator.",
+      "text": "This estimation therefore shows that the worth of such a disposition is dignity, and places it infinitely above all value, with which it cannot for a moment be brought into comparison or competition without as it were violating its sanctity.",
       "work": "Fundamental Principles of the Metaphysic of Morals",
       "lang": "en",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       },
       "quality": {
-        "chars": 113
+        "chars": 241
       }
     },
     {
-      "id": "kant.f.v0008",
+      "id": "kant.f.v0014",
       "kind": "verbatim",
-      "text": "If now the maxims of rational beings are not by their own nature coincident with this objective principle, then the necessity of acting on it is called practical necessitation, i.e., duty.",
+      "text": "The positive concept of freedom furnishes this third cognition, which cannot, as with physical causes, be the nature of the sensible world (in the concept of which we find conjoined the concept of something in relation as cause to something else as effect).",
       "work": "Fundamental Principles of the Metaphysic of Morals",
       "lang": "en",
       "src": {
         "work": "Fundamental Principles of the Metaphysic of Morals"
       },
       "quality": {
-        "chars": 188
+        "chars": 257
       }
     },
     {
-      "id": "kant.f.v0009",
+      "id": "kant.f.v0015",
       "kind": "verbatim",
-      "text": "Not only so, but it is inevitably only heteronomy; the will does not give itself the law, but is given by a foreign impulse by means of a particular natural constitution of the subject adapted to receive it.",
-      "work": "Fundamental Principles of the Metaphysic of Morals",
+      "text": "Punishment, then, is a physical evil, which, though it be not connected with moral evil as a natural consequence, ought to be connected with it as a consequence by the principles of a moral legislation.",
+      "work": "The Critique of Practical Reason",
       "lang": "en",
       "src": {
-        "work": "Fundamental Principles of the Metaphysic of Morals"
+        "work": "The Critique of Practical Reason"
       },
       "quality": {
-        "chars": 207
+        "chars": 202
       }
     },
     {
-      "id": "kant.f.v0010",
+      "id": "kant.f.v0016",
       "kind": "verbatim",
-      "text": "It will, perhaps, be said that this is also the case, if an Object of nature interests us by its beauty only so far as it is associated with a moral Idea.",
-      "work": "Kant's Critique of Judgement",
+      "text": "Now if this as a pleasant sensation were to be distinguished from the notion of good, then there would be nothing primarily good at all, but the good would have to be sought only in the means to something else, namely, some pleasantness.",
+      "work": "The Critique of Practical Reason",
       "lang": "en",
       "src": {
-        "work": "Kant's Critique of Judgement"
+        "work": "The Critique of Practical Reason"
       },
       "quality": {
-        "chars": 154
+        "chars": 237
       }
     },
     {
-      "id": "kant.f.v0011",
+      "id": "kant.f.v0017",
       "kind": "verbatim",
-      "text": "In music this play proceeds from bodily sensations to aesthetical Ideas (the Objects of our affections), and then from these back again to the body with redoubled force.",
-      "work": "Kant's Critique of Judgement",
+      "text": "Whence it resulted in the Dialectic of Pure Theoretic Reason that the opposite methods of attaining the unconditioned and the totality of the conditions were both wrong.",
+      "work": "The Critique of Practical Reason",
       "lang": "en",
       "src": {
-        "work": "Kant's Critique of Judgement"
+        "work": "The Critique of Practical Reason"
       },
       "quality": {
         "chars": 169
       }
     },
     {
-      "id": "kant.f.v0012",
-      "kind": "verbatim",
-      "text": "The beautiful formations in the kingdom of organised nature speak loudly for the realism of the aesthetical purposiveness of nature; since we might assume that behind the production of the beautiful there is an Idea of the beautiful in the producing cause, viz.",
-      "work": "Kant's Critique of Judgement",
-      "lang": "en",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      },
-      "quality": {
-        "chars": 261
-      }
-    },
-    {
-      "id": "kant.f.v0013",
-      "kind": "verbatim",
-      "text": "Now the concept of a thing whose existence or form we represent to ourselves as possible under the condition of a purpose is inseparably bound up with the concept of its contingency (according to natural laws).",
-      "work": "Kant's Critique of Judgement",
-      "lang": "en",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      },
-      "quality": {
-        "chars": 210
-      }
-    },
-    {
-      "id": "kant.f.v0014",
-      "kind": "verbatim",
-      "text": "Hence the concept of a Deity, which would be adequate for our teleological judging of nature, can never be derived from mere theoretical principles of the use of Reason (on which Physico-theology alone is based).",
-      "work": "Kant's Critique of Judgement",
-      "lang": "en",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      },
-      "quality": {
-        "chars": 212
-      }
-    },
-    {
-      "id": "kant.f.v0015",
-      "kind": "verbatim",
-      "text": "In the same way if Psychology enabled us to arrive at a cognition of the immortality of the soul it would make Pneumatology possible, which would be just as welcome to the speculative Reason.",
-      "work": "Kant's Critique of Judgement",
-      "lang": "en",
-      "src": {
-        "work": "Kant's Critique of Judgement"
-      },
-      "quality": {
-        "chars": 191
-      }
-    },
-    {
-      "id": "kant.f.v0016",
-      "kind": "verbatim",
-      "text": "By the matter of the faculty of desire I mean an object the realization of which is desired.",
-      "work": "The Critique of Practical Reason",
-      "lang": "en",
-      "src": {
-        "work": "The Critique of Practical Reason"
-      },
-      "quality": {
-        "chars": 92
-      }
-    },
-    {
-      "id": "kant.f.v0017",
-      "kind": "verbatim",
-      "text": "It is always in everyone's power to satisfy the categorical command of morality; whereas it is seldom possible, and by no means so to everyone, to satisfy the empirically conditioned precept of happiness, even with regard to a single purpose.",
-      "work": "The Critique of Practical Reason",
-      "lang": "en",
-      "src": {
-        "work": "The Critique of Practical Reason"
-      },
-      "quality": {
-        "chars": 242
-      }
-    },
-    {
       "id": "kant.f.v0018",
-      "kind": "verbatim",
-      "text": "Now whatever checks our self-conceit in our own judgement humiliates; therefore the moral law inevitably humbles every man when he compares with it the physical propensities of his nature.",
-      "work": "The Critique of Practical Reason",
-      "lang": "en",
-      "src": {
-        "work": "The Critique of Practical Reason"
-      },
-      "quality": {
-        "chars": 188
-      }
-    },
-    {
-      "id": "kant.f.v0019",
-      "kind": "verbatim",
-      "text": "Hence, though the summum bonum may be the whole object of a pure practical reason, i.e., a pure will, yet it is not on that account to be regarded as its determining principle; and the moral law alone must be regarded as the principle on which that and its realization or promotion are aimed at.",
-      "work": "The Critique of Practical Reason",
-      "lang": "en",
-      "src": {
-        "work": "The Critique of Practical Reason"
-      },
-      "quality": {
-        "chars": 295
-      }
-    },
-    {
-      "id": "kant.f.v0020",
       "kind": "verbatim",
       "text": "It is also of great importance to attend to this property of our personality and as much as possible to cultivate the effect of reason on this feeling.",
       "work": "The Critique of Practical Reason",
@@ -602,39 +744,341 @@
       }
     },
     {
-      "id": "kant.f.v0021",
+      "id": "kant.f.v0019",
       "kind": "verbatim",
-      "text": "A man is worthy to possess a thing or a state when his possession of it is in harmony with the summum bonum.",
+      "text": "With them therefore, virtue was a sort of heroism in the wise man raising himself above the animal nature of man, is sufficient for Himself, and, while he prescribes duties to others, is himself raised above them, and is not subject to any temptation to transgress the moral law.",
       "work": "The Critique of Practical Reason",
       "lang": "en",
       "src": {
         "work": "The Critique of Practical Reason"
       },
       "quality": {
-        "chars": 108
+        "chars": 279
+      }
+    },
+    {
+      "id": "kant.f.v0020",
+      "kind": "verbatim",
+      "text": "Subsequently it was found advisable to confine this name to a part of moral philosophy, namely, to the doctrine of duties which are not subject to external laws (for which in German the name Tugendlehre was found suitable).",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "kant.f.v0021",
+      "kind": "verbatim",
+      "text": "That ethics contains duties to the observance of which one cannot be (physically) forced by others, is merely the consequence of this, that it is a doctrine of ends, since to be forced to have ends or to set them before one's self is a contradiction.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 250
       }
     },
     {
       "id": "kant.f.v0022",
       "kind": "verbatim",
-      "text": "Only we are not here concerned with the theoretical knowledge of the objects of these ideas, but only with this, whether they have objects at all.",
-      "work": "The Critique of Practical Reason",
+      "text": "Those, in fact, are not so which do not concern so much a certain end (matter, object of the elective will), but merely that which is formal in the moral determination of the will (e.g., that the dutiful action must also be done from duty).",
+      "work": "The Metaphysical Elements of Ethics",
       "lang": "en",
       "src": {
-        "work": "The Critique of Practical Reason"
+        "work": "The Metaphysical Elements of Ethics"
       },
       "quality": {
-        "chars": 146
+        "chars": 240
+      }
+    },
+    {
+      "id": "kant.f.v0023",
+      "kind": "verbatim",
+      "text": "Here, therefore, we treat not of ends which man actually makes to himself in accordance with the sensible impulses of his nature, but of objects of the free elective will under its own laws- objects which he ought to make his end.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "kant.f.v0024",
+      "kind": "verbatim",
+      "text": "The supreme element in the former (the power) is the understanding, it being the faculty of concepts, and, therefore, also of those concepts which refer to duty.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "kant.f.v0025",
+      "kind": "verbatim",
+      "text": "Nay, often the weakness which deters a man from the risk of a crime is regarded by him as virtue (which gives the notion of strength).",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "kant.f.v0026",
+      "kind": "verbatim",
+      "text": "There is no obligation to have these, since they are subjective conditions of susceptibility for the notion of duty, not objective conditions of morality.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "kant.f.v0027",
+      "kind": "verbatim",
+      "text": "Disinterested benevolence is often called (though very improperly) love; even where the happiness of the other is not concerned, but the complete and free surrender of all one's own ends to the ends of another (even a superhuman) being, love is spoken of as being also our duty.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "kant.f.v0028",
+      "kind": "verbatim",
+      "text": "Hence this internal freedom which is the condition of all ethical duty must be discussed as a preliminary (discursus praeliminaris), just as above the doctrine of conscience was discussed as the condition of all duty.",
+      "work": "The Metaphysical Elements of Ethics",
+      "lang": "en",
+      "src": {
+        "work": "The Metaphysical Elements of Ethics"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "kant.f.v0029",
+      "kind": "verbatim",
+      "text": "There is presupposed no concept of any purpose, for which the manifold should serve the given Object, and which therefore is to be represented therein.",
+      "work": "Kant's Critique of Judgement",
+      "lang": "en",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "kant.f.v0030",
+      "kind": "verbatim",
+      "text": "Whether or not, again, under the so-called seven free arts some may be included which ought to be classed as sciences, and many that are akin rather to handicraft, I shall not here discuss.",
+      "work": "Kant's Critique of Judgement",
+      "lang": "en",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "kant.f.v0031",
+      "kind": "verbatim",
+      "text": "On the other hand, music and that which excites laughter are two different kinds of play with aesthetical Ideas, or with representations of the Understanding through which ultimately nothing is thought; and yet they can give lively gratification merely by their changes.",
+      "work": "Kant's Critique of Judgement",
+      "lang": "en",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "kant.f.v0032",
+      "kind": "verbatim",
+      "text": "The latter condition of aptitude, which we might call the culture of training (discipline), is negative, and consists in the freeing of the will from the despotism of desires.",
+      "work": "Kant's Critique of Judgement",
+      "lang": "en",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "kant.f.v0033",
+      "kind": "verbatim",
+      "text": "The possibility of that which I place at the basis of my explanation, must at least be exposed to no doubt; otherwise there would be no end of empty chimeras.",
+      "work": "Kant's Critique of Judgement",
+      "lang": "en",
+      "src": {
+        "work": "Kant's Critique of Judgement"
+      },
+      "quality": {
+        "chars": 158
       }
     }
   ],
-  "concepts": [],
+  "concepts": [
+    "devoir",
+    "autonomie",
+    "hétéronomie",
+    "impératif catégorique",
+    "maxime",
+    "bonheur"
+  ],
   "entities": [],
+  "doctrine": {
+    "concepts": [
+      "devoir",
+      "autonomie",
+      "hétéronomie",
+      "impératif catégorique",
+      "maxime",
+      "bonheur"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "une loi n’oblige que si sa maxime peut valoir comme loi universelle ; traiter l’autre seulement comme un moyen contredit cette loi",
+          "en": "a law binds only if its maxim can hold as a universal law; treating another merely as a means contradicts it",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "For then it is clear that he who transgresses th"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur est un précepte empiriquement conditionné ; il ne peut fonder la morale",
+          "en": "happiness is an empirically conditioned precept; it cannot ground morality",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "In a word, nature would have taken care that rea"
+            },
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "Now if this as a pleasant sensation were to be d"
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "être libre, c’est que la volonté se donne à elle-même sa loi ; le contraire est l’hétéronomie",
+          "en": "to be free is for the will to give itself its own law; the opposite is heteronomy",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "All men attribute to themselves freedom of will."
+            },
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "The positive concept of freedom furnishes this t"
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la vérité ne s’établit pas par preuves empiriques, mais par déduction depuis des sources a priori",
+          "en": "truth is not established by empirical proofs, but by deduction from a priori sources",
+          "anchors": [
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "But this expedient of adducing empirical proofs,"
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "la contrainte n’oblige que rattachée par principe à une législation morale ; punir relève de la loi, non du pouvoir",
+          "en": "constraint binds only when attached in principle to a moral legislation; punishment belongs to law, not to power",
+          "anchors": [
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "Punishment, then, is a physical evil, which, tho"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la valeur morale tient à la disposition et au devoir, non à l’inclination : c’est ce qui fait sa dignité",
+          "en": "moral worth lies in disposition and duty, not in inclination: that is what makes its dignity",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "This estimation therefore shows that the worth o"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Fundamental Principles of the Metaphysic of Morals": {
+        "summary": {
+          "fr": "Fonde la morale sur le devoir et l’impératif catégorique.",
+          "en": "Grounds morality in duty and the categorical imperative."
+        },
+        "domains": [
+          "justice",
+          "bonheur",
+          "liberte",
+          "vertu"
+        ]
+      },
+      "The Critique of Practical Reason": {
+        "summary": {
+          "fr": "La loi morale, le souverain bien, et la place du bonheur.",
+          "en": "The moral law, the highest good, and the place of happiness."
+        },
+        "domains": [
+          "bonheur",
+          "pouvoir",
+          "verite"
+        ]
+      },
+      "The Metaphysical Elements of Ethics": {
+        "summary": {
+          "fr": "La doctrine des devoirs et la liberté intérieure.",
+          "en": "The doctrine of duties and inner freedom."
+        },
+        "domains": [
+          "vertu"
+        ]
+      }
+    }
+  },
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:1338085ed2f4092c7181e517e8bcaf19e700b978a9284c149024f111ad5ec264"
+  "checksum": "sha256:7d35669eb7c205dfade02df33498ba0b3ddb449e00576bee04e07131ea095f7b"
 }

@@ -1,124 +1,132 @@
 {
   "authorId": "platon",
   "kbVersion": "platon@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.194Z",
+  "builtAt": "2026-10-03T21:23:12.332Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Apology",
-      "sentences": 14
+      "title": "The Republic",
+      "sentences": 12
     },
     {
-      "title": "Gorgias",
-      "sentences": 13
+      "title": "Apology",
+      "sentences": 12
+    },
+    {
+      "title": "Symposium",
+      "sentences": 12
     },
     {
       "title": "Phaedo",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Gorgias",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "platon.p0001",
-      "w": "Apology",
-      "s": "The second accusation he meets by interrogating Meletus, who is present and can be interrogated.",
+      "w": "The Republic",
+      "s": "I went down yesterday to the Piraeus with Glaucon the son of Ariston, that I might offer up my prayers to the goddess (Bendis, the Thracian Artemis.); and also because I wanted to see in what manner they would celebrate the festival, which was a new thing.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0002",
-      "w": "Apology",
-      "s": "If they have been corrupted, their elder relatives (if not themselves) might surely come into court and witness against him, and there is an opportunity still for them to appear.",
+      "w": "The Republic",
+      "s": "But the company would not let him; they insisted that he should remain and defend his position; and I myself added my own humble request that he would not leave us.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0003",
-      "w": "Apology",
-      "s": "Here again, as in the former instance, the defence of Socrates is untrue practically, but may be true in some ideal or transcendental sense.",
+      "w": "The Republic",
+      "s": "Glaucon and the rest entreated me by all means not to let the question drop, but to proceed in the investigation.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0004",
-      "w": "Apology",
-      "s": "His absolute truthfulness seems to hinder him from asserting positively more than this; and he makes no attempt to veil his ignorance in mythology and figures of speech.",
+      "w": "The Republic",
+      "s": "Neither will we believe or acknowledge Achilles himself to have been such a lover of money that he took Agamemnon’s gifts, or that when he had received payment he restored the dead body of Hector, but that without payment he was unwilling to do so.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0005",
-      "w": "Apology",
-      "s": "And so leaving the event with God, in obedience to the law I will now make my defence.",
+      "w": "The Republic",
+      "s": "How your words seem to hesitate on your lips!",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0006",
-      "w": "Apology",
-      "s": "For the word which I will speak is not mine.",
+      "w": "The Republic",
+      "s": "My meaning was, that if one term of a relation is taken alone, the other is taken alone; if one term is qualified, the other is also qualified.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0007",
-      "w": "Apology",
-      "s": "Tell the judges, then, who is their improver; for you must know, as you have taken the pains to discover their corrupter, and are citing and accusing me before them.",
+      "w": "The Republic",
+      "s": "And agreeably to this mode of thinking and speaking, were we not saying that they will have their pleasures and pains in common?",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0008",
-      "w": "Apology",
-      "s": "But you, Meletus, have sufficiently shown that you never had a thought about the young: your carelessness is seen in your not caring about the very things which you bring against me.",
+      "w": "The Republic",
+      "s": "Yes, Socrates; and that is a way of speaking to which you are not at all accustomed, I suppose.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0009",
-      "w": "Apology",
-      "s": "Are they not either gods or the sons of gods?",
+      "w": "The Republic",
+      "s": "That, he said, is a very just distinction.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0010",
-      "w": "Apology",
-      "s": "I tell you that virtue is not given by money, but that from virtue comes money and every other good of man, public as well as private.",
+      "w": "The Republic",
+      "s": "Then if the constitutions of States are five, the dispositions of individual minds will also be five?",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0011",
-      "w": "Apology",
-      "s": "There is Crito, who is of the same age and of the same deme with myself, and there is Critobulus his son, whom I also see.",
+      "w": "The Republic",
+      "s": "Yes, he said, and he also praises tyranny as godlike; and many other things of the same kind are said by him and by the other poets.",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0012",
-      "w": "Apology",
-      "s": "But, setting aside the question of public opinion, there seems to be something wrong in asking a favour of a judge, and thus procuring an acquittal, instead of informing and convincing him.",
+      "w": "The Republic",
+      "s": "Is not the noble that which subjects the beast to the man, or rather to the god in man; and the ignoble that which subjects the man to the beast?’ He can hardly avoid saying Yes—can he now?",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       }
     },
     {
       "id": "platon.p0013",
       "w": "Apology",
-      "s": "Well, perhaps I could afford a mina, and therefore I propose that penalty: Plato, Crito, Critobulus, and Apollodorus, my friends here, bid me say thirty minæ, and they will be the sureties.",
+      "s": "How you, O Athenians, have been affected by my accusers, I cannot tell; but I know that they almost made me forget who I was—so persuasively did they speak; and yet they have hardly uttered a word of truth.",
       "src": {
         "work": "Apology"
       }
@@ -126,191 +134,191 @@
     {
       "id": "platon.p0014",
       "w": "Apology",
-      "s": "And I prophesy to you who are my murderers, that immediately after my departure punishment far heavier than you have inflicted on me will surely await you.",
+      "s": "Speak then, you who have heard me, and tell your neighbours whether any of you have ever known me hold forth in few words or in many upon such matters...You hear their answer.",
       "src": {
         "work": "Apology"
       }
     },
     {
       "id": "platon.p0015",
-      "w": "Gorgias",
-      "s": "Callicles endeavours now to avert the inevitable absurdity by affirming that he and all mankind admitted some pleasures to be good and others bad.",
+      "w": "Apology",
+      "s": "In this latter particular, then, I seem to have slightly the advantage of him.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0016",
-      "w": "Gorgias",
-      "s": "And therefore there is no saying what his fate may be.",
+      "w": "Apology",
+      "s": "Come hither, Meletus, and let me ask a question of you.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0017",
-      "w": "Gorgias",
-      "s": "But Socrates would speak to them, not of what will be, but of what is—of the present consequence of lowering and degrading the soul.",
+      "w": "Apology",
+      "s": "Do not the good do their neighbours good, and the bad do them evil?",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0018",
-      "w": "Gorgias",
-      "s": "But he knows also that there are permanent principles of politics which are always tending to the well-being of states—better administration, better education, the reconciliation of conflicting elements, increased security against external enemies.",
+      "w": "Apology",
+      "s": "For he certainly does appear to me to contradict himself in the indictment as much as if he said that Socrates is guilty of not believing in the gods, and yet of believing in them—but this is not like a person who is in earnest.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0019",
-      "w": "Gorgias",
-      "s": "This art is possessed by Plato in a degree which has never been equalled.",
+      "w": "Apology",
+      "s": "And I shall repeat the same words to every one whom I meet, young and old, citizen and alien, but especially to the citizens, inasmuch as they are my brethren.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0020",
-      "w": "Gorgias",
-      "s": "SOCRATES: Then I am to call you a rhetorician?",
+      "w": "Apology",
+      "s": "I can give you convincing evidence of what I say, not words only, but what you value far more—actions.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0021",
-      "w": "Gorgias",
-      "s": "And in the course of our investigations, as you will see yourself, the rhetorician has been acknowledged to be incapable of making an unjust use of rhetoric, or of willingness to do injustice.",
+      "w": "Apology",
+      "s": "Why, indeed, except for the sake of truth and justice, and because they know that I am speaking the truth, and that Meletus is a liar.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0022",
-      "w": "Gorgias",
-      "s": "SOCRATES: And when men go on a voyage or engage in business, they do not will that which they are doing at the time; for who would desire to take the risk of a voyage or the trouble of business?—But they will, to have the wealth for the sake of which they go on a voyage.",
+      "w": "Apology",
+      "s": "What return shall be made to the man who has never had the wit to be idle during his whole life; but has been careless of what the many care for—wealth, and family interests, and military offices, and speaking in the assembly, and magistracies, and plots, and parties.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0023",
-      "w": "Gorgias",
-      "s": "SOCRATES: And that which is just has been admitted to be honourable?",
+      "w": "Apology",
+      "s": "Let thirty minæ be the penalty; for which sum they will be ample security to you.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0024",
-      "w": "Gorgias",
-      "s": "I cannot say very much for his wit when he conceded to you that to do is more dishonourable than to suffer injustice, for this was the admission which led to his being entangled by you; and because he was too modest to say what he thought, he had his mouth stopped.",
+      "w": "Apology",
+      "s": "Friends, who would have acquitted me, I would like also to talk with you about the thing which has come to pass, while the magistrates are busy, and before I go to the place at which I must die.",
       "src": {
-        "work": "Gorgias"
+        "work": "Apology"
       }
     },
     {
       "id": "platon.p0025",
-      "w": "Gorgias",
-      "s": "Your reputation, Callicles, is not at stake.",
+      "w": "Symposium",
+      "s": "Concerning the things about which you ask to be informed I believe that I am not ill-prepared with an answer.",
       "src": {
-        "work": "Gorgias"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0026",
-      "w": "Gorgias",
-      "s": "Could he be said to regard even their pleasure?",
+      "w": "Symposium",
+      "s": "The servant then assisted him to wash, and he lay down, and presently another servant came in and reported that our friend Socrates had retired into the portico of the neighbouring house.",
       "src": {
-        "work": "Gorgias"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0027",
-      "w": "Gorgias",
-      "s": "SOCRATES: None; only I should like further to know whether the Athenians are supposed to have been made better by Pericles, or, on the contrary, to have been corrupted by him; for I hear that he was the first who gave the people pay, and made them idle and cowardly, and encouraged them in the love of talk and money.",
+      "w": "Symposium",
+      "s": "Thus numerous are the witnesses who acknowledge Love to be the eldest of the gods.",
       "src": {
-        "work": "Gorgias"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0028",
-      "w": "Phaedo",
-      "s": "These rivers are many and mighty, and there are four principal ones, Oceanus, Acheron, Pyriphlegethon, and Cocytus.",
+      "w": "Symposium",
+      "s": "Such is the entire liberty which gods and men have allowed the lover, according to the custom which prevails in our part of the world.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0029",
-      "w": "Phaedo",
-      "s": "Earthly pleasures and pains are short in proportion as they are keen; of any others which are both intense and lasting we have no experience, and can form no idea.",
+      "w": "Symposium",
+      "s": "Eryximachus said: Beware, friend Aristophanes, although you are going to speak, you are making fun of me; and I shall have to watch and see whether I cannot have a laugh at your expense, when you might speak in peace.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0030",
-      "w": "Phaedo",
-      "s": "The last ground of our belief in immortality, and the strongest, is the perfection of the divine nature.",
+      "w": "Symposium",
+      "s": "This, Eryximachus, is my discourse of love, which, although different to yours, I must beg you to leave unassailed by the shafts of your ridicule, in order that each may have his turn; each, or rather either, for Agathon and Socrates are the only ones left.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0031",
-      "w": "Phaedo",
-      "s": "The parallel, as Socrates would say, is not perfect, but agrees in as far as the mind in either case is regarded as dependent on something above and beyond herself.",
+      "w": "Symposium",
+      "s": "And so Love set in order the empire of the gods--the love of beauty, as is evident, for with deformity Love has no concern.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0032",
-      "w": "Phaedo",
-      "s": "The place of the Dialogue in the series is doubtful.",
+      "w": "Symposium",
+      "s": "For he who is anything cannot want to be that which he is?",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0033",
-      "w": "Phaedo",
-      "s": "Why do you say, enquired Cebes, that a man ought not to take his own life, but that the philosopher will be ready to follow the dying?",
+      "w": "Symposium",
+      "s": "For wisdom is a most beautiful thing, and Love is of the beautiful; and therefore Love is also a philosopher or lover of wisdom, and being a lover of wisdom is in a mean between the wise and the ignorant.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0034",
-      "w": "Phaedo",
-      "s": "Instead of caring about them, does he not rather despise anything more than nature needs?",
+      "w": "Symposium",
+      "s": "Lead me to Agathon,' and at length, supported by the flute-girl and some of his attendants, he found his way to them.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0035",
-      "w": "Phaedo",
-      "s": "Or if there were composition only, and no division of substances, then the chaos of Anaxagoras would come again.",
+      "w": "Symposium",
+      "s": "For example, you are a bully, as I can prove by witnesses, if you will not confess.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0036",
-      "w": "Phaedo",
-      "s": "Then we must have acquired the knowledge of equality at some previous time?",
+      "w": "Symposium",
+      "s": "Moreover I have felt the serpent's sting; and he who has suffered, as they say, is willing to tell his fellow-sufferers only, as they alone will be likely to understand him, and will not be extreme in judging of the sayings or doings which have been wrung from his agony.",
       "src": {
-        "work": "Phaedo"
+        "work": "Symposium"
       }
     },
     {
       "id": "platon.p0037",
       "w": "Phaedo",
-      "s": "And Socrates observing them asked what they thought of the argument, and whether there was anything wanting?",
+      "s": "Were you yourself, Phaedo, in the prison with Socrates on the day when he drank the poison?",
       "src": {
         "work": "Phaedo"
       }
@@ -318,7 +326,7 @@
     {
       "id": "platon.p0038",
       "w": "Phaedo",
-      "s": "PHAEDO: Often, Echecrates, I have wondered at Socrates, but never more than on that occasion.",
+      "s": "What can I do better in the interval between this and the setting of the sun?",
       "src": {
         "work": "Phaedo"
       }
@@ -326,7 +334,7 @@
     {
       "id": "platon.p0039",
       "w": "Phaedo",
-      "s": "What expectations I had formed, and how grievously was I disappointed!",
+      "s": "Then must not true existence be revealed to her in thought, if at all?",
       "src": {
         "work": "Phaedo"
       }
@@ -334,9 +342,169 @@
     {
       "id": "platon.p0040",
       "w": "Phaedo",
-      "s": "To that we are quite agreed, he replied.",
+      "s": "Now if it be true that the living come from the dead, then our souls must exist in the other world, for if not, how could they have been born again?",
       "src": {
         "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0041",
+      "w": "Phaedo",
+      "s": "And when the recollection is derived from like things, then another consideration is sure to arise, which is--whether the likeness in any degree falls short or not of that which is recollected?",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0042",
+      "w": "Phaedo",
+      "s": "But that proof, Simmias and Cebes, has been already given, said Socrates, if you put the two arguments together--I mean this and the former one, in which we admitted that everything living is born of the dead.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0043",
+      "w": "Phaedo",
+      "s": "No one who has not studied philosophy and who is not entirely pure at the time of his departure is allowed to enter the company of the Gods, but the lover of knowledge only.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0044",
+      "w": "Phaedo",
+      "s": "That the soul is a harmony is a doctrine which has always had a wonderful attraction for me, and, when mentioned, came back to me at once, as my own original conviction.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0045",
+      "w": "Phaedo",
+      "s": "For harmony cannot possibly have any motion, or sound, or other quality which is opposed to its parts.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0046",
+      "w": "Phaedo",
+      "s": "I should very much like to hear, he replied.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0047",
+      "w": "Phaedo",
+      "s": "Suppose, he said, that we endeavour, if possible, to determine what these are.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0048",
+      "w": "Phaedo",
+      "s": "And we, Socrates, replied Simmias, shall be charmed to listen to you.",
+      "src": {
+        "work": "Phaedo"
+      }
+    },
+    {
+      "id": "platon.p0049",
+      "w": "Gorgias",
+      "s": "The wise man, as the proverb says, is late for a fray, but not for a feast.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0050",
+      "w": "Gorgias",
+      "s": "GORGIAS: That good, Socrates, which is truly the greatest, being that which gives to men freedom in their own persons, and to individuals the power of ruling over others in their several states.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0051",
+      "w": "Gorgias",
+      "s": "SOCRATES: Then, when the rhetorician is more persuasive than the physician, the ignorant is more persuasive with the ignorant than he who has knowledge?—is not that the inference?",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0052",
+      "w": "Gorgias",
+      "s": "They kill and despoil and exile any one whom they please.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0053",
+      "w": "Gorgias",
+      "s": "I cannot admit a word which you have been saying.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0054",
+      "w": "Gorgias",
+      "s": "SOCRATES: And if the cutting be great or deep or such as will cause pain, the cut will be of the same nature?",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0055",
+      "w": "Gorgias",
+      "s": "Her you must refute, and either show, as I was saying, that to do injustice and to escape punishment is not the worst of all evils; or, if you leave her word unrefuted, by the dog the god of Egypt, I declare, O Callicles, that Callicles will never be at one with himself, but that his whole life will be a discord.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0056",
+      "w": "Gorgias",
+      "s": "To this however the many cannot attain; and they blame the strong man because they are ashamed of their own weakness, which they desire to conceal, and hence they say that intemperance is base.",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0057",
+      "w": "Gorgias",
+      "s": "SOCRATES: Then he ceases from pain and pleasure at the same moment?",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0058",
+      "w": "Gorgias",
+      "s": "SOCRATES: Then poetry is a sort of rhetoric?",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0059",
+      "w": "Gorgias",
+      "s": "Surely you might say, Callicles, whether you think that Polus and I were right in admitting the conclusion that no one does wrong voluntarily, but that all do wrong against their will?",
+      "src": {
+        "work": "Gorgias"
+      }
+    },
+    {
+      "id": "platon.p0060",
+      "w": "Gorgias",
+      "s": "CALLICLES: But surely, Socrates, no living man ever came near any one of them in his performances.",
+      "src": {
+        "work": "Gorgias"
       }
     }
   ],
@@ -344,297 +512,441 @@
     {
       "id": "platon.f.v0001",
       "kind": "verbatim",
-      "text": "The second accusation he meets by interrogating Meletus, who is present and can be interrogated.",
-      "work": "Apology",
+      "text": "I went down yesterday to the Piraeus with Glaucon the son of Ariston, that I might offer up my prayers to the goddess (Bendis, the Thracian Artemis.); and also because I wanted to see in what manner they would celebrate the festival, which was a new thing.",
+      "work": "The Republic",
       "lang": "en",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       },
       "quality": {
-        "chars": 96
+        "chars": 256
       }
     },
     {
       "id": "platon.f.v0002",
       "kind": "verbatim",
-      "text": "If they have been corrupted, their elder relatives (if not themselves) might surely come into court and witness against him, and there is an opportunity still for them to appear.",
-      "work": "Apology",
+      "text": "Glaucon and the rest entreated me by all means not to let the question drop, but to proceed in the investigation.",
+      "work": "The Republic",
       "lang": "en",
       "src": {
-        "work": "Apology"
+        "work": "The Republic"
       },
       "quality": {
-        "chars": 178
+        "chars": 113
       }
     },
     {
       "id": "platon.f.v0003",
       "kind": "verbatim",
-      "text": "Here again, as in the former instance, the defence of Socrates is untrue practically, but may be true in some ideal or transcendental sense.",
-      "work": "Apology",
+      "text": "Neither will we believe or acknowledge Achilles himself to have been such a lover of money that he took Agamemnon’s gifts, or that when he had received payment he restored the dead body of Hector, but that without payment he was unwilling to do so.",
+      "work": "The Republic",
       "lang": "en",
       "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 140
-      }
-    },
-    {
-      "id": "platon.f.v0004",
-      "kind": "verbatim",
-      "text": "His absolute truthfulness seems to hinder him from asserting positively more than this; and he makes no attempt to veil his ignorance in mythology and figures of speech.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 169
-      }
-    },
-    {
-      "id": "platon.f.v0005",
-      "kind": "verbatim",
-      "text": "Tell the judges, then, who is their improver; for you must know, as you have taken the pains to discover their corrupter, and are citing and accusing me before them.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 165
-      }
-    },
-    {
-      "id": "platon.f.v0006",
-      "kind": "verbatim",
-      "text": "I tell you that virtue is not given by money, but that from virtue comes money and every other good of man, public as well as private.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 134
-      }
-    },
-    {
-      "id": "platon.f.v0007",
-      "kind": "verbatim",
-      "text": "There is Crito, who is of the same age and of the same deme with myself, and there is Critobulus his son, whom I also see.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 122
-      }
-    },
-    {
-      "id": "platon.f.v0008",
-      "kind": "verbatim",
-      "text": "But, setting aside the question of public opinion, there seems to be something wrong in asking a favour of a judge, and thus procuring an acquittal, instead of informing and convincing him.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 189
-      }
-    },
-    {
-      "id": "platon.f.v0009",
-      "kind": "verbatim",
-      "text": "Well, perhaps I could afford a mina, and therefore I propose that penalty: Plato, Crito, Critobulus, and Apollodorus, my friends here, bid me say thirty minæ, and they will be the sureties.",
-      "work": "Apology",
-      "lang": "en",
-      "src": {
-        "work": "Apology"
-      },
-      "quality": {
-        "chars": 189
-      }
-    },
-    {
-      "id": "platon.f.v0010",
-      "kind": "verbatim",
-      "text": "Callicles endeavours now to avert the inevitable absurdity by affirming that he and all mankind admitted some pleasures to be good and others bad.",
-      "work": "Gorgias",
-      "lang": "en",
-      "src": {
-        "work": "Gorgias"
-      },
-      "quality": {
-        "chars": 146
-      }
-    },
-    {
-      "id": "platon.f.v0011",
-      "kind": "verbatim",
-      "text": "But he knows also that there are permanent principles of politics which are always tending to the well-being of states—better administration, better education, the reconciliation of conflicting elements, increased security against external enemies.",
-      "work": "Gorgias",
-      "lang": "en",
-      "src": {
-        "work": "Gorgias"
+        "work": "The Republic"
       },
       "quality": {
         "chars": 248
       }
     },
     {
+      "id": "platon.f.v0004",
+      "kind": "verbatim",
+      "text": "My meaning was, that if one term of a relation is taken alone, the other is taken alone; if one term is qualified, the other is also qualified.",
+      "work": "The Republic",
+      "lang": "en",
+      "src": {
+        "work": "The Republic"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "platon.f.v0005",
+      "kind": "verbatim",
+      "text": "Yes, Socrates; and that is a way of speaking to which you are not at all accustomed, I suppose.",
+      "work": "The Republic",
+      "lang": "en",
+      "src": {
+        "work": "The Republic"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "platon.f.v0006",
+      "kind": "verbatim",
+      "text": "Yes, he said, and he also praises tyranny as godlike; and many other things of the same kind are said by him and by the other poets.",
+      "work": "The Republic",
+      "lang": "en",
+      "src": {
+        "work": "The Republic"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "platon.f.v0007",
+      "kind": "verbatim",
+      "text": "Is not the noble that which subjects the beast to the man, or rather to the god in man; and the ignoble that which subjects the man to the beast?’ He can hardly avoid saying Yes—can he now?",
+      "work": "The Republic",
+      "lang": "en",
+      "src": {
+        "work": "The Republic"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "platon.f.v0008",
+      "kind": "verbatim",
+      "text": "How you, O Athenians, have been affected by my accusers, I cannot tell; but I know that they almost made me forget who I was—so persuasively did they speak; and yet they have hardly uttered a word of truth.",
+      "work": "Apology",
+      "lang": "en",
+      "src": {
+        "work": "Apology"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "platon.f.v0009",
+      "kind": "verbatim",
+      "text": "Speak then, you who have heard me, and tell your neighbours whether any of you have ever known me hold forth in few words or in many upon such matters...You hear their answer.",
+      "work": "Apology",
+      "lang": "en",
+      "src": {
+        "work": "Apology"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "platon.f.v0010",
+      "kind": "verbatim",
+      "text": "For he certainly does appear to me to contradict himself in the indictment as much as if he said that Socrates is guilty of not believing in the gods, and yet of believing in them—but this is not like a person who is in earnest.",
+      "work": "Apology",
+      "lang": "en",
+      "src": {
+        "work": "Apology"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "platon.f.v0011",
+      "kind": "verbatim",
+      "text": "I can give you convincing evidence of what I say, not words only, but what you value far more—actions.",
+      "work": "Apology",
+      "lang": "en",
+      "src": {
+        "work": "Apology"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
       "id": "platon.f.v0012",
       "kind": "verbatim",
-      "text": "And in the course of our investigations, as you will see yourself, the rhetorician has been acknowledged to be incapable of making an unjust use of rhetoric, or of willingness to do injustice.",
-      "work": "Gorgias",
+      "text": "Why, indeed, except for the sake of truth and justice, and because they know that I am speaking the truth, and that Meletus is a liar.",
+      "work": "Apology",
       "lang": "en",
       "src": {
-        "work": "Gorgias"
-      },
-      "quality": {
-        "chars": 192
-      }
-    },
-    {
-      "id": "platon.f.v0013",
-      "kind": "verbatim",
-      "text": "SOCRATES: And when men go on a voyage or engage in business, they do not will that which they are doing at the time; for who would desire to take the risk of a voyage or the trouble of business?—But they will, to have the wealth for the sake of which they go on a voyage.",
-      "work": "Gorgias",
-      "lang": "en",
-      "src": {
-        "work": "Gorgias"
-      },
-      "quality": {
-        "chars": 271
-      }
-    },
-    {
-      "id": "platon.f.v0014",
-      "kind": "verbatim",
-      "text": "I cannot say very much for his wit when he conceded to you that to do is more dishonourable than to suffer injustice, for this was the admission which led to his being entangled by you; and because he was too modest to say what he thought, he had his mouth stopped.",
-      "work": "Gorgias",
-      "lang": "en",
-      "src": {
-        "work": "Gorgias"
-      },
-      "quality": {
-        "chars": 265
-      }
-    },
-    {
-      "id": "platon.f.v0015",
-      "kind": "verbatim",
-      "text": "SOCRATES: None; only I should like further to know whether the Athenians are supposed to have been made better by Pericles, or, on the contrary, to have been corrupted by him; for I hear that he was the first who gave the people pay, and made them idle and cowardly, and encouraged them in the love of talk and money.",
-      "work": "Gorgias",
-      "lang": "en",
-      "src": {
-        "work": "Gorgias"
-      },
-      "quality": {
-        "chars": 317
-      }
-    },
-    {
-      "id": "platon.f.v0016",
-      "kind": "verbatim",
-      "text": "These rivers are many and mighty, and there are four principal ones, Oceanus, Acheron, Pyriphlegethon, and Cocytus.",
-      "work": "Phaedo",
-      "lang": "en",
-      "src": {
-        "work": "Phaedo"
-      },
-      "quality": {
-        "chars": 115
-      }
-    },
-    {
-      "id": "platon.f.v0017",
-      "kind": "verbatim",
-      "text": "Earthly pleasures and pains are short in proportion as they are keen; of any others which are both intense and lasting we have no experience, and can form no idea.",
-      "work": "Phaedo",
-      "lang": "en",
-      "src": {
-        "work": "Phaedo"
-      },
-      "quality": {
-        "chars": 163
-      }
-    },
-    {
-      "id": "platon.f.v0018",
-      "kind": "verbatim",
-      "text": "The last ground of our belief in immortality, and the strongest, is the perfection of the divine nature.",
-      "work": "Phaedo",
-      "lang": "en",
-      "src": {
-        "work": "Phaedo"
-      },
-      "quality": {
-        "chars": 104
-      }
-    },
-    {
-      "id": "platon.f.v0019",
-      "kind": "verbatim",
-      "text": "The parallel, as Socrates would say, is not perfect, but agrees in as far as the mind in either case is regarded as dependent on something above and beyond herself.",
-      "work": "Phaedo",
-      "lang": "en",
-      "src": {
-        "work": "Phaedo"
-      },
-      "quality": {
-        "chars": 164
-      }
-    },
-    {
-      "id": "platon.f.v0020",
-      "kind": "verbatim",
-      "text": "Why do you say, enquired Cebes, that a man ought not to take his own life, but that the philosopher will be ready to follow the dying?",
-      "work": "Phaedo",
-      "lang": "en",
-      "src": {
-        "work": "Phaedo"
+        "work": "Apology"
       },
       "quality": {
         "chars": 134
       }
     },
     {
-      "id": "platon.f.v0021",
+      "id": "platon.f.v0013",
       "kind": "verbatim",
-      "text": "Instead of caring about them, does he not rather despise anything more than nature needs?",
-      "work": "Phaedo",
+      "text": "What return shall be made to the man who has never had the wit to be idle during his whole life; but has been careless of what the many care for—wealth, and family interests, and military offices, and speaking in the assembly, and magistracies, and plots, and parties.",
+      "work": "Apology",
       "lang": "en",
       "src": {
-        "work": "Phaedo"
+        "work": "Apology"
       },
       "quality": {
-        "chars": 89
+        "chars": 268
+      }
+    },
+    {
+      "id": "platon.f.v0014",
+      "kind": "verbatim",
+      "text": "Friends, who would have acquitted me, I would like also to talk with you about the thing which has come to pass, while the magistrates are busy, and before I go to the place at which I must die.",
+      "work": "Apology",
+      "lang": "en",
+      "src": {
+        "work": "Apology"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "platon.f.v0015",
+      "kind": "verbatim",
+      "text": "Concerning the things about which you ask to be informed I believe that I am not ill-prepared with an answer.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "platon.f.v0016",
+      "kind": "verbatim",
+      "text": "The servant then assisted him to wash, and he lay down, and presently another servant came in and reported that our friend Socrates had retired into the portico of the neighbouring house.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "platon.f.v0017",
+      "kind": "verbatim",
+      "text": "Such is the entire liberty which gods and men have allowed the lover, according to the custom which prevails in our part of the world.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "platon.f.v0018",
+      "kind": "verbatim",
+      "text": "Eryximachus said: Beware, friend Aristophanes, although you are going to speak, you are making fun of me; and I shall have to watch and see whether I cannot have a laugh at your expense, when you might speak in peace.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "platon.f.v0019",
+      "kind": "verbatim",
+      "text": "This, Eryximachus, is my discourse of love, which, although different to yours, I must beg you to leave unassailed by the shafts of your ridicule, in order that each may have his turn; each, or rather either, for Agathon and Socrates are the only ones left.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "platon.f.v0020",
+      "kind": "verbatim",
+      "text": "Lead me to Agathon,' and at length, supported by the flute-girl and some of his attendants, he found his way to them.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "platon.f.v0021",
+      "kind": "verbatim",
+      "text": "Moreover I have felt the serpent's sting; and he who has suffered, as they say, is willing to tell his fellow-sufferers only, as they alone will be likely to understand him, and will not be extreme in judging of the sayings or doings which have been wrung from his agony.",
+      "work": "Symposium",
+      "lang": "en",
+      "src": {
+        "work": "Symposium"
+      },
+      "quality": {
+        "chars": 271
       }
     },
     {
       "id": "platon.f.v0022",
       "kind": "verbatim",
-      "text": "PHAEDO: Often, Echecrates, I have wondered at Socrates, but never more than on that occasion.",
+      "text": "Were you yourself, Phaedo, in the prison with Socrates on the day when he drank the poison?",
       "work": "Phaedo",
       "lang": "en",
       "src": {
         "work": "Phaedo"
       },
       "quality": {
-        "chars": 93
+        "chars": 91
+      }
+    },
+    {
+      "id": "platon.f.v0023",
+      "kind": "verbatim",
+      "text": "Now if it be true that the living come from the dead, then our souls must exist in the other world, for if not, how could they have been born again?",
+      "work": "Phaedo",
+      "lang": "en",
+      "src": {
+        "work": "Phaedo"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "platon.f.v0024",
+      "kind": "verbatim",
+      "text": "And when the recollection is derived from like things, then another consideration is sure to arise, which is--whether the likeness in any degree falls short or not of that which is recollected?",
+      "work": "Phaedo",
+      "lang": "en",
+      "src": {
+        "work": "Phaedo"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "platon.f.v0025",
+      "kind": "verbatim",
+      "text": "No one who has not studied philosophy and who is not entirely pure at the time of his departure is allowed to enter the company of the Gods, but the lover of knowledge only.",
+      "work": "Phaedo",
+      "lang": "en",
+      "src": {
+        "work": "Phaedo"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "platon.f.v0026",
+      "kind": "verbatim",
+      "text": "That the soul is a harmony is a doctrine which has always had a wonderful attraction for me, and, when mentioned, came back to me at once, as my own original conviction.",
+      "work": "Phaedo",
+      "lang": "en",
+      "src": {
+        "work": "Phaedo"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "platon.f.v0027",
+      "kind": "verbatim",
+      "text": "GORGIAS: That good, Socrates, which is truly the greatest, being that which gives to men freedom in their own persons, and to individuals the power of ruling over others in their several states.",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "platon.f.v0028",
+      "kind": "verbatim",
+      "text": "SOCRATES: Then, when the rhetorician is more persuasive than the physician, the ignorant is more persuasive with the ignorant than he who has knowledge?—is not that the inference?",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "platon.f.v0029",
+      "kind": "verbatim",
+      "text": "SOCRATES: And if the cutting be great or deep or such as will cause pain, the cut will be of the same nature?",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "platon.f.v0030",
+      "kind": "verbatim",
+      "text": "Her you must refute, and either show, as I was saying, that to do injustice and to escape punishment is not the worst of all evils; or, if you leave her word unrefuted, by the dog the god of Egypt, I declare, O Callicles, that Callicles will never be at one with himself, but that his whole life will be a discord.",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "platon.f.v0031",
+      "kind": "verbatim",
+      "text": "To this however the many cannot attain; and they blame the strong man because they are ashamed of their own weakness, which they desire to conceal, and hence they say that intemperance is base.",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "platon.f.v0032",
+      "kind": "verbatim",
+      "text": "Surely you might say, Callicles, whether you think that Polus and I were right in admitting the conclusion that no one does wrong voluntarily, but that all do wrong against their will?",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "platon.f.v0033",
+      "kind": "verbatim",
+      "text": "CALLICLES: But surely, Socrates, no living man ever came near any one of them in his performances.",
+      "work": "Gorgias",
+      "lang": "en",
+      "src": {
+        "work": "Gorgias"
+      },
+      "quality": {
+        "chars": 98
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:ba8bff0609e2e745f5bb20f7ba15427651d568d6e2d753c3df8c0a5e7d8a7bff"
+  "checksum": "sha256:c76b1e30b5db3ca7d95c8339100d4972c6654a45f15c299d0ab7677f0aefc4c5"
 }

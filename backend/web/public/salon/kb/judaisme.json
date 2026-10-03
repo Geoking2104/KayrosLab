@@ -1,124 +1,132 @@
 {
   "authorId": "judaisme",
   "kbVersion": "judaisme@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.302Z",
+  "builtAt": "2026-10-03T21:23:12.734Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Deuteronomy",
-      "sentences": 9
+      "title": "Genesis",
+      "sentences": 12
     },
     {
       "title": "Exodus",
-      "sentences": 15
+      "sentences": 12
     },
     {
-      "title": "Genesis",
-      "sentences": 16
+      "title": "Leviticus",
+      "sentences": 9
+    },
+    {
+      "title": "Numbers",
+      "sentences": 12
+    },
+    {
+      "title": "Deuteronomy",
+      "sentences": 10
     }
   ],
   "passages": [
     {
       "id": "judaisme.p0001",
-      "w": "Deuteronomy",
-      "s": "And he wrote them in two tables of stone, and delivered them unto me.",
+      "w": "Genesis",
+      "s": "And they had brick for stone, and slime had they for morter.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0002",
-      "w": "Deuteronomy",
-      "s": "But the LORD hearkened unto me at that time also.",
+      "w": "Genesis",
+      "s": "At the time appointed I will return unto thee, according to the time of life, and Sarah shall have a son.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0003",
-      "w": "Deuteronomy",
-      "s": "So shalt thou put the evil away from the midst of thee.",
+      "w": "Genesis",
+      "s": "And they said again, This one fellow came in to sojourn, and he will needs be a judge: now will we deal worse with thee, than with them.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0004",
-      "w": "Deuteronomy",
-      "s": "Thou shalt not seethe a kid in his mother's milk.",
+      "w": "Genesis",
+      "s": "And the servant had said, It is my master: therefore she took a vail, and covered herself.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0005",
-      "w": "Deuteronomy",
-      "s": "And also unto thy maidservant thou shalt do likewise.",
+      "w": "Genesis",
+      "s": "And he said, I am thy son, thy firstborn Esau.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0006",
-      "w": "Deuteronomy",
-      "s": "And they shall spread the cloth before the elders of the city.",
+      "w": "Genesis",
+      "s": "Now Jacob had pitched his tent in the mount: and Laban with his brethren pitched in the mount of Gilead.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0007",
-      "w": "Deuteronomy",
-      "s": "And thou shalt set it before the LORD thy God, and worship before the LORD thy God: 05:026:011 And thou shalt rejoice in every good thing which the LORD thy God hath given unto thee, and unto thine house, thou, and the Levite, and the stranger that is among you.",
+      "w": "Genesis",
+      "s": "And Jacob sware by the fear of his father Isaac.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0008",
-      "w": "Deuteronomy",
-      "s": "And all the people shall answer and say, Amen.",
+      "w": "Genesis",
+      "s": "And he said, These are to find grace in the sight of my lord.",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0009",
-      "w": "Deuteronomy",
-      "s": "And Moses and Joshua went, and presented themselves in the tabernacle of the congregation.",
+      "w": "Genesis",
+      "s": "And she said, Wilt thou give me a pledge, till thou send it?",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0010",
-      "w": "Exodus",
-      "s": "And the heart of Pharaoh was hardened, and he did not let the people go.",
+      "w": "Genesis",
+      "s": "And Pharaoh awoke, and, behold, it was a dream.",
       "src": {
-        "work": "Exodus"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0011",
-      "w": "Exodus",
-      "s": "And he turned himself, and went out from Pharaoh.",
+      "w": "Genesis",
+      "s": "And they drank, and were merry with him.",
       "src": {
-        "work": "Exodus"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0012",
-      "w": "Exodus",
-      "s": "Moreover the man Moses was very great in the land of Egypt, in the sight of Pharaoh's servants, and in the sight of the people.",
+      "w": "Genesis",
+      "s": "And Jacob's heart fainted, for he believed them not.",
       "src": {
-        "work": "Exodus"
+        "work": "Genesis"
       }
     },
     {
       "id": "judaisme.p0013",
       "w": "Exodus",
-      "s": "And he went out from Pharaoh in a great anger.",
+      "s": "And he said, Be it according to thy word: that thou mayest know that there is none like unto the LORD our God.",
       "src": {
         "work": "Exodus"
       }
@@ -126,7 +134,7 @@
     {
       "id": "judaisme.p0014",
       "w": "Exodus",
-      "s": "For it had been better for us to serve the Egyptians, than that we should die in the wilderness.",
+      "s": "And he turned himself, and went out from Pharaoh.",
       "src": {
         "work": "Exodus"
       }
@@ -134,7 +142,7 @@
     {
       "id": "judaisme.p0015",
       "w": "Exodus",
-      "s": "And Moses said unto them, Why chide ye with me?",
+      "s": "Moreover the man Moses was very great in the land of Egypt, in the sight of Pharaoh's servants, and in the sight of the people.",
       "src": {
         "work": "Exodus"
       }
@@ -142,7 +150,7 @@
     {
       "id": "judaisme.p0016",
       "w": "Exodus",
-      "s": "These are the words which thou shalt speak unto the children of Israel.",
+      "s": "For it had been better for us to serve the Egyptians, than that we should die in the wilderness.",
       "src": {
         "work": "Exodus"
       }
@@ -150,7 +158,7 @@
     {
       "id": "judaisme.p0017",
       "w": "Exodus",
-      "s": "And Moses returned the words of the people unto the LORD.",
+      "s": "And Moses said unto them, Why chide ye with me?",
       "src": {
         "work": "Exodus"
       }
@@ -158,7 +166,7 @@
     {
       "id": "judaisme.p0018",
       "w": "Exodus",
-      "s": "In like manner thou shalt deal with thy vineyard, and with thy oliveyard.",
+      "s": "These are the words which thou shalt speak unto the children of Israel.",
       "src": {
         "work": "Exodus"
       }
@@ -166,7 +174,7 @@
     {
       "id": "judaisme.p0019",
       "w": "Exodus",
-      "s": "And all the sons of Levi gathered themselves together unto him.",
+      "s": "In like manner thou shalt deal with thy vineyard, and with thy oliveyard.",
       "src": {
         "work": "Exodus"
       }
@@ -174,7 +182,7 @@
     {
       "id": "judaisme.p0020",
       "w": "Exodus",
-      "s": "And it came to pass, that every one which sought the LORD went out unto the tabernacle of the congregation, which was without the camp.",
+      "s": "Turn from thy fierce wrath, and repent of this evil against thy people.",
       "src": {
         "work": "Exodus"
       }
@@ -182,7 +190,7 @@
     {
       "id": "judaisme.p0021",
       "w": "Exodus",
-      "s": "Yet thou hast said, I know thee by name, and thou hast also found grace in my sight.",
+      "s": "And all the sons of Levi gathered themselves together unto him.",
       "src": {
         "work": "Exodus"
       }
@@ -190,7 +198,7 @@
     {
       "id": "judaisme.p0022",
       "w": "Exodus",
-      "s": "Seven days thou shalt eat unleavened bread, as I commanded thee, in the time of the month Abib: for in the month Abib thou camest out from Egypt.",
+      "s": "Yet thou hast said, I know thee by name, and thou hast also found grace in my sight.",
       "src": {
         "work": "Exodus"
       }
@@ -206,137 +214,257 @@
     {
       "id": "judaisme.p0024",
       "w": "Exodus",
-      "s": "And they brought yet unto him free offerings every morning.",
+      "s": "And he came out, and spake unto the children of Israel that which he was commanded.",
       "src": {
         "work": "Exodus"
       }
     },
     {
       "id": "judaisme.p0025",
-      "w": "Genesis",
-      "s": "And they had brick for stone, and slime had they for morter.",
+      "w": "Leviticus",
+      "s": "I have given it unto them for their portion of my offerings made by fire; it is most holy, as is the sin offering, and as the trespass offering.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0026",
-      "w": "Genesis",
-      "s": "And they said, So do, as thou hast said.",
+      "w": "Leviticus",
+      "s": "It shall be a statute for ever in your generations concerning the offerings of the LORD made by fire: every one that toucheth them shall be holy.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0027",
-      "w": "Genesis",
-      "s": "And he said, I will not do it for forty's sake.",
+      "w": "Leviticus",
+      "s": "And they did according to the word of Moses.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0028",
-      "w": "Genesis",
-      "s": "Therefore the name of the city was called Zoar.",
+      "w": "Leviticus",
+      "s": "This is the law for her that hath born a male or a female.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0029",
-      "w": "Genesis",
-      "s": "And the servant had said, It is my master: therefore she took a vail, and covered herself.",
+      "w": "Leviticus",
+      "s": "This shall be a statute for ever unto them throughout their generations.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0030",
-      "w": "Genesis",
-      "s": "And Esau went to the field to hunt for venison, and to bring it.",
+      "w": "Leviticus",
+      "s": "Thou shalt not let thy cattle gender with a diverse kind: thou shalt not sow thy field with mingled seed: neither shall a garment mingled of linen and woollen come upon thee.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0031",
-      "w": "Genesis",
-      "s": "And he said, Hast thou not reserved a blessing for me?",
+      "w": "Leviticus",
+      "s": "It shall be a statute for ever in your generations: ye shall celebrate it in the seventh month.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0032",
-      "w": "Genesis",
-      "s": "And Rachel said, Therefore he shall lie with thee to night for thy son's mandrakes.",
+      "w": "Leviticus",
+      "s": "And they brought him unto Moses: (and his mother's name was Shelomith, the daughter of Dibri, of the tribe of Dan:) 03:024:012 And they put him in ward, that the mind of the LORD might be shewed them.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0033",
-      "w": "Genesis",
-      "s": "And Jacob sware by the fear of his father Isaac.",
+      "w": "Leviticus",
+      "s": "And the children of Israel did as the LORD commanded Moses.",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       }
     },
     {
       "id": "judaisme.p0034",
-      "w": "Genesis",
-      "s": "And he divided the children unto Leah, and unto Rachel, and unto the two handmaids.",
+      "w": "Numbers",
+      "s": "These things are the burden of the sons of Kohath in the tabernacle of the congregation.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0035",
-      "w": "Genesis",
-      "s": "And they hated him yet the more for his dreams, and for his words.",
+      "w": "Numbers",
+      "s": "This was the dedication of the altar, after that it was anointed.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0036",
-      "w": "Genesis",
-      "s": "And Tamar went and dwelt in her father's house.",
+      "w": "Numbers",
+      "s": "And Moses called Oshea the son of Nun Jehoshua.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0037",
-      "w": "Genesis",
-      "s": "And Pharaoh awoke, and, behold, it was a dream.",
+      "w": "Numbers",
+      "s": "Now the time was the time of the firstripe grapes.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0038",
-      "w": "Genesis",
-      "s": "If I be bereaved of my children, I am bereaved.",
+      "w": "Numbers",
+      "s": "I have heard the murmurings of the children of Israel, which they murmur against me.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0039",
-      "w": "Genesis",
-      "s": "And he did according to the word that Joseph had spoken.",
+      "w": "Numbers",
+      "s": "And from the wilderness they went to Mattanah: 04:021:019 And from Mattanah to Nahaliel: and from Nahaliel to Bamoth: 04:021:020 And from Bamoth in the valley, that is in the country of Moab, to the top of Pisgah, which looketh toward Jeshimon.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       }
     },
     {
       "id": "judaisme.p0040",
-      "w": "Genesis",
-      "s": "And his brethren could not answer him; for they were troubled at his presence.",
+      "w": "Numbers",
+      "s": "Now he was riding upon his ass, and his two servants were with him.",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0041",
+      "w": "Numbers",
+      "s": "So Balaam went with the princes of Balak.",
+      "src": {
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0042",
+      "w": "Numbers",
+      "s": "I took thee to curse mine enemies, and, behold, thou hast blessed them altogether.",
+      "src": {
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0043",
+      "w": "Numbers",
+      "s": "Blessed is he that blesseth thee, and cursed is he that curseth thee.",
+      "src": {
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0044",
+      "w": "Numbers",
+      "s": "These are the sons of Joseph after their families.",
+      "src": {
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0045",
+      "w": "Numbers",
+      "s": "And there was not left a man of them, save Caleb the son of Jephunneh, and Joshua the son of Nun.",
+      "src": {
+        "work": "Numbers"
+      }
+    },
+    {
+      "id": "judaisme.p0046",
+      "w": "Deuteronomy",
+      "s": "And he wrote them in two tables of stone, and delivered them unto me.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0047",
+      "w": "Deuteronomy",
+      "s": "But the LORD hearkened unto me at that time also.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0048",
+      "w": "Deuteronomy",
+      "s": "So shalt thou put the evil away from the midst of thee.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0049",
+      "w": "Deuteronomy",
+      "s": "Thou shalt not seethe a kid in his mother's milk.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0050",
+      "w": "Deuteronomy",
+      "s": "And also unto thy maidservant thou shalt do likewise.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0051",
+      "w": "Deuteronomy",
+      "s": "So thou shalt put the evil away from among you.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0052",
+      "w": "Deuteronomy",
+      "s": "And they shall spread the cloth before the elders of the city.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0053",
+      "w": "Deuteronomy",
+      "s": "And thou shalt set it before the LORD thy God, and worship before the LORD thy God: 05:026:011 And thou shalt rejoice in every good thing which the LORD thy God hath given unto thee, and unto thine house, thou, and the Levite, and the stranger that is among you.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0054",
+      "w": "Deuteronomy",
+      "s": "And all the people shall answer and say, Amen.",
+      "src": {
+        "work": "Deuteronomy"
+      }
+    },
+    {
+      "id": "judaisme.p0055",
+      "w": "Deuteronomy",
+      "s": "And Moses and Joshua went, and presented themselves in the tabernacle of the congregation.",
+      "src": {
+        "work": "Deuteronomy"
       }
     }
   ],
@@ -344,200 +472,31 @@
     {
       "id": "judaisme.f.v0001",
       "kind": "verbatim",
-      "text": "And he wrote them in two tables of stone, and delivered them unto me.",
-      "work": "Deuteronomy",
+      "text": "At the time appointed I will return unto thee, according to the time of life, and Sarah shall have a son.",
+      "work": "Genesis",
       "lang": "en",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       },
       "quality": {
-        "chars": 69
+        "chars": 105
       }
     },
     {
       "id": "judaisme.f.v0002",
       "kind": "verbatim",
-      "text": "Thou shalt not seethe a kid in his mother's milk.",
-      "work": "Deuteronomy",
+      "text": "And they said again, This one fellow came in to sojourn, and he will needs be a judge: now will we deal worse with thee, than with them.",
+      "work": "Genesis",
       "lang": "en",
       "src": {
-        "work": "Deuteronomy"
+        "work": "Genesis"
       },
       "quality": {
-        "chars": 49
+        "chars": 136
       }
     },
     {
       "id": "judaisme.f.v0003",
-      "kind": "verbatim",
-      "text": "And they shall spread the cloth before the elders of the city.",
-      "work": "Deuteronomy",
-      "lang": "en",
-      "src": {
-        "work": "Deuteronomy"
-      },
-      "quality": {
-        "chars": 62
-      }
-    },
-    {
-      "id": "judaisme.f.v0004",
-      "kind": "verbatim",
-      "text": "And thou shalt set it before the LORD thy God, and worship before the LORD thy God: 05:026:011 And thou shalt rejoice in every good thing which the LORD thy God hath given unto thee, and unto thine house, thou, and the Levite, and the stranger that is among you.",
-      "work": "Deuteronomy",
-      "lang": "en",
-      "src": {
-        "work": "Deuteronomy"
-      },
-      "quality": {
-        "chars": 262
-      }
-    },
-    {
-      "id": "judaisme.f.v0005",
-      "kind": "verbatim",
-      "text": "And Moses and Joshua went, and presented themselves in the tabernacle of the congregation.",
-      "work": "Deuteronomy",
-      "lang": "en",
-      "src": {
-        "work": "Deuteronomy"
-      },
-      "quality": {
-        "chars": 90
-      }
-    },
-    {
-      "id": "judaisme.f.v0006",
-      "kind": "verbatim",
-      "text": "And the heart of Pharaoh was hardened, and he did not let the people go.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 72
-      }
-    },
-    {
-      "id": "judaisme.f.v0007",
-      "kind": "verbatim",
-      "text": "Moreover the man Moses was very great in the land of Egypt, in the sight of Pharaoh's servants, and in the sight of the people.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 127
-      }
-    },
-    {
-      "id": "judaisme.f.v0008",
-      "kind": "verbatim",
-      "text": "For it had been better for us to serve the Egyptians, than that we should die in the wilderness.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 96
-      }
-    },
-    {
-      "id": "judaisme.f.v0009",
-      "kind": "verbatim",
-      "text": "These are the words which thou shalt speak unto the children of Israel.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 71
-      }
-    },
-    {
-      "id": "judaisme.f.v0010",
-      "kind": "verbatim",
-      "text": "In like manner thou shalt deal with thy vineyard, and with thy oliveyard.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 73
-      }
-    },
-    {
-      "id": "judaisme.f.v0011",
-      "kind": "verbatim",
-      "text": "And all the sons of Levi gathered themselves together unto him.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 63
-      }
-    },
-    {
-      "id": "judaisme.f.v0012",
-      "kind": "verbatim",
-      "text": "And it came to pass, that every one which sought the LORD went out unto the tabernacle of the congregation, which was without the camp.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 135
-      }
-    },
-    {
-      "id": "judaisme.f.v0013",
-      "kind": "verbatim",
-      "text": "Yet thou hast said, I know thee by name, and thou hast also found grace in my sight.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 84
-      }
-    },
-    {
-      "id": "judaisme.f.v0014",
-      "kind": "verbatim",
-      "text": "Seven days thou shalt eat unleavened bread, as I commanded thee, in the time of the month Abib: for in the month Abib thou camest out from Egypt.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 145
-      }
-    },
-    {
-      "id": "judaisme.f.v0015",
-      "kind": "verbatim",
-      "text": "All the firstborn of thy sons thou shalt redeem.",
-      "work": "Exodus",
-      "lang": "en",
-      "src": {
-        "work": "Exodus"
-      },
-      "quality": {
-        "chars": 48
-      }
-    },
-    {
-      "id": "judaisme.f.v0016",
       "kind": "verbatim",
       "text": "And the servant had said, It is my master: therefore she took a vail, and covered herself.",
       "work": "Genesis",
@@ -550,91 +509,365 @@
       }
     },
     {
-      "id": "judaisme.f.v0017",
+      "id": "judaisme.f.v0004",
       "kind": "verbatim",
-      "text": "And Esau went to the field to hunt for venison, and to bring it.",
+      "text": "Now Jacob had pitched his tent in the mount: and Laban with his brethren pitched in the mount of Gilead.",
       "work": "Genesis",
       "lang": "en",
       "src": {
         "work": "Genesis"
       },
       "quality": {
-        "chars": 64
+        "chars": 104
+      }
+    },
+    {
+      "id": "judaisme.f.v0005",
+      "kind": "verbatim",
+      "text": "And he said, Be it according to thy word: that thou mayest know that there is none like unto the LORD our God.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "judaisme.f.v0006",
+      "kind": "verbatim",
+      "text": "Moreover the man Moses was very great in the land of Egypt, in the sight of Pharaoh's servants, and in the sight of the people.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "judaisme.f.v0007",
+      "kind": "verbatim",
+      "text": "For it had been better for us to serve the Egyptians, than that we should die in the wilderness.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "judaisme.f.v0008",
+      "kind": "verbatim",
+      "text": "These are the words which thou shalt speak unto the children of Israel.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 71
+      }
+    },
+    {
+      "id": "judaisme.f.v0009",
+      "kind": "verbatim",
+      "text": "In like manner thou shalt deal with thy vineyard, and with thy oliveyard.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 73
+      }
+    },
+    {
+      "id": "judaisme.f.v0010",
+      "kind": "verbatim",
+      "text": "Turn from thy fierce wrath, and repent of this evil against thy people.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 71
+      }
+    },
+    {
+      "id": "judaisme.f.v0011",
+      "kind": "verbatim",
+      "text": "All the firstborn of thy sons thou shalt redeem.",
+      "work": "Exodus",
+      "lang": "en",
+      "src": {
+        "work": "Exodus"
+      },
+      "quality": {
+        "chars": 48
+      }
+    },
+    {
+      "id": "judaisme.f.v0012",
+      "kind": "verbatim",
+      "text": "I have given it unto them for their portion of my offerings made by fire; it is most holy, as is the sin offering, and as the trespass offering.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "judaisme.f.v0013",
+      "kind": "verbatim",
+      "text": "It shall be a statute for ever in your generations concerning the offerings of the LORD made by fire: every one that toucheth them shall be holy.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 145
+      }
+    },
+    {
+      "id": "judaisme.f.v0014",
+      "kind": "verbatim",
+      "text": "This is the law for her that hath born a male or a female.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 58
+      }
+    },
+    {
+      "id": "judaisme.f.v0015",
+      "kind": "verbatim",
+      "text": "This shall be a statute for ever unto them throughout their generations.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 72
+      }
+    },
+    {
+      "id": "judaisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Thou shalt not let thy cattle gender with a diverse kind: thou shalt not sow thy field with mingled seed: neither shall a garment mingled of linen and woollen come upon thee.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "judaisme.f.v0017",
+      "kind": "verbatim",
+      "text": "It shall be a statute for ever in your generations: ye shall celebrate it in the seventh month.",
+      "work": "Leviticus",
+      "lang": "en",
+      "src": {
+        "work": "Leviticus"
+      },
+      "quality": {
+        "chars": 95
       }
     },
     {
       "id": "judaisme.f.v0018",
       "kind": "verbatim",
-      "text": "And Rachel said, Therefore he shall lie with thee to night for thy son's mandrakes.",
-      "work": "Genesis",
+      "text": "And they brought him unto Moses: (and his mother's name was Shelomith, the daughter of Dibri, of the tribe of Dan:) 03:024:012 And they put him in ward, that the mind of the LORD might be shewed them.",
+      "work": "Leviticus",
       "lang": "en",
       "src": {
-        "work": "Genesis"
+        "work": "Leviticus"
       },
       "quality": {
-        "chars": 83
+        "chars": 200
       }
     },
     {
       "id": "judaisme.f.v0019",
       "kind": "verbatim",
-      "text": "And he divided the children unto Leah, and unto Rachel, and unto the two handmaids.",
-      "work": "Genesis",
+      "text": "These things are the burden of the sons of Kohath in the tabernacle of the congregation.",
+      "work": "Numbers",
       "lang": "en",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       },
       "quality": {
-        "chars": 83
+        "chars": 88
       }
     },
     {
       "id": "judaisme.f.v0020",
       "kind": "verbatim",
-      "text": "And they hated him yet the more for his dreams, and for his words.",
-      "work": "Genesis",
+      "text": "This was the dedication of the altar, after that it was anointed.",
+      "work": "Numbers",
       "lang": "en",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       },
       "quality": {
-        "chars": 66
+        "chars": 65
       }
     },
     {
       "id": "judaisme.f.v0021",
       "kind": "verbatim",
-      "text": "If I be bereaved of my children, I am bereaved.",
-      "work": "Genesis",
+      "text": "Now the time was the time of the firstripe grapes.",
+      "work": "Numbers",
       "lang": "en",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       },
       "quality": {
-        "chars": 47
+        "chars": 50
       }
     },
     {
       "id": "judaisme.f.v0022",
       "kind": "verbatim",
-      "text": "And his brethren could not answer him; for they were troubled at his presence.",
-      "work": "Genesis",
+      "text": "I have heard the murmurings of the children of Israel, which they murmur against me.",
+      "work": "Numbers",
       "lang": "en",
       "src": {
-        "work": "Genesis"
+        "work": "Numbers"
       },
       "quality": {
-        "chars": 78
+        "chars": 84
+      }
+    },
+    {
+      "id": "judaisme.f.v0023",
+      "kind": "verbatim",
+      "text": "And from the wilderness they went to Mattanah: 04:021:019 And from Mattanah to Nahaliel: and from Nahaliel to Bamoth: 04:021:020 And from Bamoth in the valley, that is in the country of Moab, to the top of Pisgah, which looketh toward Jeshimon.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "judaisme.f.v0024",
+      "kind": "verbatim",
+      "text": "Now he was riding upon his ass, and his two servants were with him.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 67
+      }
+    },
+    {
+      "id": "judaisme.f.v0025",
+      "kind": "verbatim",
+      "text": "I took thee to curse mine enemies, and, behold, thou hast blessed them altogether.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 82
+      }
+    },
+    {
+      "id": "judaisme.f.v0026",
+      "kind": "verbatim",
+      "text": "Blessed is he that blesseth thee, and cursed is he that curseth thee.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 69
+      }
+    },
+    {
+      "id": "judaisme.f.v0027",
+      "kind": "verbatim",
+      "text": "These are the sons of Joseph after their families.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 50
+      }
+    },
+    {
+      "id": "judaisme.f.v0028",
+      "kind": "verbatim",
+      "text": "And there was not left a man of them, save Caleb the son of Jephunneh, and Joshua the son of Nun.",
+      "work": "Numbers",
+      "lang": "en",
+      "src": {
+        "work": "Numbers"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "judaisme.f.v0029",
+      "kind": "verbatim",
+      "text": "Thou shalt not seethe a kid in his mother's milk.",
+      "work": "Deuteronomy",
+      "lang": "en",
+      "src": {
+        "work": "Deuteronomy"
+      },
+      "quality": {
+        "chars": 49
+      }
+    },
+    {
+      "id": "judaisme.f.v0030",
+      "kind": "verbatim",
+      "text": "And thou shalt set it before the LORD thy God, and worship before the LORD thy God: 05:026:011 And thou shalt rejoice in every good thing which the LORD thy God hath given unto thee, and unto thine house, thou, and the Levite, and the stranger that is among you.",
+      "work": "Deuteronomy",
+      "lang": "en",
+      "src": {
+        "work": "Deuteronomy"
+      },
+      "quality": {
+        "chars": 262
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 55,
+    "formulas": 30,
+    "verbatim": 30,
     "patterns": 0
   },
-  "checksum": "sha256:89811163e70270be86ea876f57c6ec5be3fbe8c8ae184937be76a9eceed92919"
+  "checksum": "sha256:c76a8dca99df640a7c4ed9cc2a49b294f3f4a8fe42cabcdea9abaec4e7833758"
 }

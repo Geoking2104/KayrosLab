@@ -1,21 +1,29 @@
 {
   "authorId": "dostoevski",
   "kbVersion": "dostoevski@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.108Z",
+  "builtAt": "2026-10-03T21:23:12.090Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Crime and Punishment",
-      "sentences": 14
-    },
-    {
-      "title": "Notes from the Underground",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "The Brothers Karamazov",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Notes from the Underground",
+      "sentences": 12
+    },
+    {
+      "title": "The Idiot",
+      "sentences": 12
+    },
+    {
+      "title": "The possessed",
+      "sentences": 12
     }
   ],
   "passages": [
@@ -30,7 +38,7 @@
     {
       "id": "dostoevski.p0002",
       "w": "Crime and Punishment",
-      "s": "The question whether the disease gives rise to the crime, or whether the crime from its own peculiar nature is always accompanied by something of the nature of disease, he did not yet feel able to decide.",
+      "s": "No one was on the stairs, nor in the gateway.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -38,7 +46,7 @@
     {
       "id": "dostoevski.p0003",
       "w": "Crime and Punishment",
-      "s": "But at that moment the door was flung open, and, stooping a little, as he was so tall, Razumihin came in.",
+      "s": "I will let Zossimov know at the same time, though he ought to have been here long ago, for it is nearly twelve.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -46,7 +54,7 @@
     {
       "id": "dostoevski.p0004",
       "w": "Crime and Punishment",
-      "s": "Raskolnikov himself lay without speaking, on his back, gazing persistently, though without understanding, at the stranger.",
+      "s": "There isn’t a sign of independent life in you!",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -54,7 +62,7 @@
     {
       "id": "dostoevski.p0005",
       "w": "Crime and Punishment",
-      "s": "It was masterly, by Jove, it’s what they deserve!",
+      "s": "Was it thinkable that such a creature as Avdotya Romanovna would be marrying an unworthy man for money?",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -62,7 +70,7 @@
     {
       "id": "dostoevski.p0006",
       "w": "Crime and Punishment",
-      "s": "You know Rodya’s character better than anyone and no one can advise us better than you can.",
+      "s": "All last week he was begging me to introduce him to you.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -70,7 +78,7 @@
     {
       "id": "dostoevski.p0007",
       "w": "Crime and Punishment",
-      "s": "They were by now approaching Bakaleyev’s lodgings, where Pulcheria Alexandrovna and Dounia had been expecting them a long while.",
+      "s": "This Marfa Petrovna begged Dounia’s forgiveness afterwards, and she’s just died suddenly.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -78,7 +86,7 @@
     {
       "id": "dostoevski.p0008",
       "w": "Crime and Punishment",
-      "s": "This Marfa Petrovna begged Dounia’s forgiveness afterwards, and she’s just died suddenly.",
+      "s": "But I am living outside for the time, I had to have some repairs done here.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -86,7 +94,7 @@
     {
       "id": "dostoevski.p0009",
       "w": "Crime and Punishment",
-      "s": "But why are you so pale, Rodion Romanovitch?",
+      "s": "Probably “taking his cue” from Luzhin, “that contemptible wretch Lebeziatnikov had not turned up either.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -94,7 +102,7 @@
     {
       "id": "dostoevski.p0010",
       "w": "Crime and Punishment",
-      "s": "Yet she thoroughly understands some questions, for instance about kissing of hands, that is, that it’s an insult to a woman for a man to kiss her hand, because it’s a sign of inequality.",
+      "s": "So it seems at least.” Raskolnikov had long ceased to listen.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -102,7 +110,7 @@
     {
       "id": "dostoevski.p0011",
       "w": "Crime and Punishment",
-      "s": "So it seems at least.” Raskolnikov had long ceased to listen.",
+      "s": "Think it over, my dear fellow, and pray to God.",
       "src": {
         "work": "Crime and Punishment"
       }
@@ -110,133 +118,13 @@
     {
       "id": "dostoevski.p0012",
       "w": "Crime and Punishment",
-      "s": "I cough, I begin to have tickling in my throat and a difficulty in breathing.",
+      "s": "Scoundrel!” “Even if that were true, it would have been for your sake...",
       "src": {
         "work": "Crime and Punishment"
       }
     },
     {
       "id": "dostoevski.p0013",
-      "w": "Crime and Punishment",
-      "s": "Here is your letter,” she said, laying it on the table.",
-      "src": {
-        "work": "Crime and Punishment"
-      }
-    },
-    {
-      "id": "dostoevski.p0014",
-      "w": "Crime and Punishment",
-      "s": "The bright yellow, wooden, little houses looked dirty and dejected with their closed shutters.",
-      "src": {
-        "work": "Crime and Punishment"
-      }
-    },
-    {
-      "id": "dostoevski.p0015",
-      "w": "Notes from the Underground",
-      "s": "You see, you gentlemen have, to the best of my knowledge, taken your whole register of human advantages from the averages of statistical figures and politico-economical formulas.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0016",
-      "w": "Notes from the Underground",
-      "s": "Put it to the test and cast your eyes upon the history of mankind.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0017",
-      "w": "Notes from the Underground",
-      "s": "Again, what is my object precisely in writing?",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0018",
-      "w": "Notes from the Underground",
-      "s": "That is why there are so many “broad natures” among us who never lose their ideal even in the depths of degradation; and though they never stir a finger for their ideal, though they are arrant thieves and knaves, yet they tearfully cherish their first ideal and are extraordinarily honest at heart.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0019",
-      "w": "Notes from the Underground",
-      "s": "And I could hardly have resigned myself to the simple, vulgar, direct debauchery of a clerk and have endured all the filthiness of it.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0020",
-      "w": "Notes from the Underground",
-      "s": "By then he had taken to cutting me in the street, and I suspected that he was afraid of compromising himself by greeting a personage as insignificant as me.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0021",
-      "w": "Notes from the Underground",
-      "s": "Does he want me to throw a bottle at his head?” I thought, in a fury.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0022",
-      "w": "Notes from the Underground",
-      "s": "I’ll go on sitting here and drinking to the end, on purpose, as a sign that I don’t think you of the slightest consequence.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0023",
-      "w": "Notes from the Underground",
-      "s": "The candle went out; I could no longer distinguish her face.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0024",
-      "w": "Notes from the Underground",
-      "s": "When she danced at parties he used to stand for five hours at a stretch, gazing at her.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0025",
-      "w": "Notes from the Underground",
-      "s": "Wait a minute,” she said suddenly, in the passage just at the doorway, stopping me with her hand on my overcoat.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0026",
-      "w": "Notes from the Underground",
-      "s": "One moment out of all that had happened last night stood vividly before my imagination; the moment when I struck a match and saw her pale, distorted face, with its look of torture.",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0027",
-      "w": "Notes from the Underground",
-      "s": "I had been humiliated, so I wanted to humiliate; I had been treated like a rag, so I wanted to show my power....",
-      "src": {
-        "work": "Notes from the Underground"
-      }
-    },
-    {
-      "id": "dostoevski.p0028",
       "w": "The Brothers Karamazov",
       "s": "Ah, Ivan has set you a problem!” cried Rakitin, with undisguised malice.",
       "src": {
@@ -244,23 +132,23 @@
       }
     },
     {
-      "id": "dostoevski.p0029",
+      "id": "dostoevski.p0014",
       "w": "The Brothers Karamazov",
-      "s": "Why lie to oneself since all men live so and perhaps cannot help living so.",
+      "s": "Shall we go over and have a look at it, eh?",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0030",
+      "id": "dostoevski.p0015",
       "w": "The Brothers Karamazov",
-      "s": "They are poor creatures I tell you, those pale young ladies, very different from—Ah, if I had his youth and the looks I had then (for I was better-looking than he at eight and twenty) I’d have been a conquering hero just as he is.",
+      "s": "Besides all this, Alyosha had till the evening before implicitly believed that Katerina Ivanovna had a steadfast and passionate love for Dmitri; but he had only believed it till the evening before.",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0031",
+      "id": "dostoevski.p0016",
       "w": "The Brothers Karamazov",
       "s": "You may be surprised at me, Alyosha, but I am awfully fond of children, too.",
       "src": {
@@ -268,55 +156,47 @@
       }
     },
     {
-      "id": "dostoevski.p0032",
+      "id": "dostoevski.p0017",
       "w": "The Brothers Karamazov",
-      "s": "You’ll have a fit and they’ll both be unconscious,” cried Ivan.",
+      "s": "I know nothing better than to be in the forest,” said he, “though all things are good.” “Truly,” I answered him, “all things are good and fair, because all is truth.",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0033",
+      "id": "dostoevski.p0018",
       "w": "The Brothers Karamazov",
-      "s": "Most likely you’ve had nothing to eat but a mouthful of holy bread.",
+      "s": "She has saved you, it seems,” laughed Rakitin spitefully.",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0034",
+      "id": "dostoevski.p0019",
       "w": "The Brothers Karamazov",
-      "s": "Everything was on the verge of ruin and my guardian angel saved me,” was the thought in his mind.",
+      "s": "Four dozen champagne, not a bottle less.” “What do you want with so much?",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0035",
+      "id": "dostoevski.p0020",
       "w": "The Brothers Karamazov",
-      "s": "At first I thought he was ashamed to talk before his great big Pole.",
+      "s": "You see, gentlemen”—Mitya frowned—“it seems to me that about feelings you’ve no right to question me.",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0036",
+      "id": "dostoevski.p0021",
       "w": "The Brothers Karamazov",
-      "s": "Mitya could gather nothing from their faces.",
+      "s": "Yes.” “Show us the powder, too,” she drawled with a smile of entreaty.",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0037",
-      "w": "The Brothers Karamazov",
-      "s": "He hurriedly shouted to Smurov, “Open the door,” and as soon as it was open, he blew his whistle.",
-      "src": {
-        "work": "The Brothers Karamazov"
-      }
-    },
-    {
-      "id": "dostoevski.p0038",
+      "id": "dostoevski.p0022",
       "w": "The Brothers Karamazov",
       "s": "There’s no help for it, I’ll confess, for there is one point in which I was perhaps to blame.",
       "src": {
@@ -324,19 +204,307 @@
       }
     },
     {
-      "id": "dostoevski.p0039",
+      "id": "dostoevski.p0023",
       "w": "The Brothers Karamazov",
-      "s": "If you can’t take yourself off, talk of something amusing.",
+      "s": "I should never have brought myself to it without him.” “All right, all right ...",
       "src": {
         "work": "The Brothers Karamazov"
       }
     },
     {
-      "id": "dostoevski.p0040",
+      "id": "dostoevski.p0024",
       "w": "The Brothers Karamazov",
-      "s": "A pound of what children are very fond of, what is it, what is it?” The doctor began waving his hands again.",
+      "s": "The two other judges communicated in agitated whispers.",
       "src": {
         "work": "The Brothers Karamazov"
+      }
+    },
+    {
+      "id": "dostoevski.p0025",
+      "w": "Notes from the Underground",
+      "s": "His moans become nasty, disgustingly malignant, and go on for whole days and nights.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0026",
+      "w": "Notes from the Underground",
+      "s": "We sometimes choose absolute nonsense because in our foolishness we see in that nonsense the easiest means for attaining a supposed advantage.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0027",
+      "w": "Notes from the Underground",
+      "s": "No, no; anyway the underground life is more advantageous.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0028",
+      "w": "Notes from the Underground",
+      "s": "That is why there are so many “broad natures” among us who never lose their ideal even in the depths of degradation; and though they never stir a finger for their ideal, though they are arrant thieves and knaves, yet they tearfully cherish their first ideal and are extraordinarily honest at heart.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0029",
+      "w": "Notes from the Underground",
+      "s": "I was triumphant and sang Italian arias.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0030",
+      "w": "Notes from the Underground",
+      "s": "We’ll put your name down,” Simonov decided, addressing me.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0031",
+      "w": "Notes from the Underground",
+      "s": "Does he want me to throw a bottle at his head?” I thought, in a fury.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0032",
+      "w": "Notes from the Underground",
+      "s": "At the steps was standing a solitary night sledge-driver in a rough peasant coat, powdered over with the still falling, wet, and as it were warm, snow.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0033",
+      "w": "Notes from the Underground",
+      "s": "If you catch anything you may not get rid of it.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0034",
+      "w": "Notes from the Underground",
+      "s": "You are sold, all of you, body and soul, and there is no need to strive for love when you can have everything without love.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0035",
+      "w": "Notes from the Underground",
+      "s": "What I liked was just that cheap bustle, that bare prose.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0036",
+      "w": "Notes from the Underground",
+      "s": "She obediently sat down at once and gazed at me open-eyed, evidently expecting something from me at once.",
+      "src": {
+        "work": "Notes from the Underground"
+      }
+    },
+    {
+      "id": "dostoevski.p0037",
+      "w": "The Idiot",
+      "s": "It’s ages, ages!’ Around him are crowds shouting, yelling—ten thousand faces, twenty thousand eyes.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0038",
+      "w": "The Idiot",
+      "s": "Tell me, why didn’t you put me right when I made such a dreadful mistake just now?” continued the latter, examining the prince from head to foot without the slightest ceremony.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0039",
+      "w": "The Idiot",
+      "s": "These little errors of taste on Ferdishenko’s part occurred very frequently.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0040",
+      "w": "The Idiot",
+      "s": "He was just starting again when you arrived, so much does he admire it.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0041",
+      "w": "The Idiot",
+      "s": "Arrived there, he ordered a cup of tea and sat sipping it in the coffee-room.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0042",
+      "w": "The Idiot",
+      "s": "Burdovsky, was simply that she was the sister of a serf-girl with whom he was deeply in love in his youth, and whom most certainly he would have married but for her sudden death.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0043",
+      "w": "The Idiot",
+      "s": "Why, cannot you see that they are all infatuated with pride and vanity?” “He has acknowledged himself to be in the wrong.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0044",
+      "w": "The Idiot",
+      "s": "He was doubtless thinking of his own late experiences with his boon companions.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0045",
+      "w": "The Idiot",
+      "s": "Is it not enough that I am devoured, without my being expected to bless the power that devours me?",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0046",
+      "w": "The Idiot",
+      "s": "The woman appeared to step out from the park, and stand in the path in front of him, as though she had been waiting for him there.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0047",
+      "w": "The Idiot",
+      "s": "There was a question to be decided—most important, but most difficult; so much so, that Mrs.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0048",
+      "w": "The Idiot",
+      "s": "We don’t look thoroughly into matters—don’t care to understand things.",
+      "src": {
+        "work": "The Idiot"
+      }
+    },
+    {
+      "id": "dostoevski.p0049",
+      "w": "The possessed",
+      "s": "Besides, he will be in love with you without any ought about it.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0050",
+      "w": "The possessed",
+      "s": "Can that be of importance at such a moment?\" \"Of the greatest.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0051",
+      "w": "The possessed",
+      "s": "Though Marya Timofyevna was very eager to have another cup and even put out her hand to take it, on second thoughts she refused it ceremoniously, and was obviously pleased with herself for doing so.) Varvara Petrovna gave a wry smile.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0052",
+      "w": "The possessed",
+      "s": "I should like to think so.\" I did not speak.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0053",
+      "w": "The possessed",
+      "s": "But if you like I'll get up the samovar.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0054",
+      "w": "The possessed",
+      "s": "She, she says it was for money!\" Stepan Trofimovitch wailed in anguish.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0055",
+      "w": "The possessed",
+      "s": "Sit down.\" Pyotr Stepanovitch immediately lolled back on the sofa and drew his legs under him.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0056",
+      "w": "The possessed",
+      "s": "At the other end of the table a rival had risen, and all eyes turned to him.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0057",
+      "w": "The possessed",
+      "s": "But Nikolay Stavrogin's answer was even more astounding.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0058",
+      "w": "The possessed",
+      "s": "Thus, for instance, one short and elderly gentleman wearing a dress-coat--in fact, dressed like every one else--wore a venerable grey beard, tied on (and this constituted his disguise).",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0059",
+      "w": "The possessed",
+      "s": "And now will you be here long?\" \"I have to see one man and to remain half an hour, so whatever you say I shall stay that half-hour.\" Kirillov did not speak.",
+      "src": {
+        "work": "The possessed"
+      }
+    },
+    {
+      "id": "dostoevski.p0060",
+      "w": "The possessed",
+      "s": "Virginsky was so scared that he too screamed out like a madman, and with a ferocity, a vindictiveness that one could never have expected of Virginsky.",
+      "src": {
+        "work": "The possessed"
       }
     }
   ],
@@ -357,57 +525,31 @@
     {
       "id": "dostoevski.f.v0002",
       "kind": "verbatim",
-      "text": "The question whether the disease gives rise to the crime, or whether the crime from its own peculiar nature is always accompanied by something of the nature of disease, he did not yet feel able to decide.",
+      "text": "I will let Zossimov know at the same time, though he ought to have been here long ago, for it is nearly twelve.",
       "work": "Crime and Punishment",
       "lang": "en",
       "src": {
         "work": "Crime and Punishment"
       },
       "quality": {
-        "chars": 204
+        "chars": 111
       }
     },
     {
       "id": "dostoevski.f.v0003",
       "kind": "verbatim",
-      "text": "Raskolnikov himself lay without speaking, on his back, gazing persistently, though without understanding, at the stranger.",
+      "text": "Was it thinkable that such a creature as Avdotya Romanovna would be marrying an unworthy man for money?",
       "work": "Crime and Punishment",
       "lang": "en",
       "src": {
         "work": "Crime and Punishment"
       },
       "quality": {
-        "chars": 122
+        "chars": 103
       }
     },
     {
       "id": "dostoevski.f.v0004",
-      "kind": "verbatim",
-      "text": "You know Rodya’s character better than anyone and no one can advise us better than you can.",
-      "work": "Crime and Punishment",
-      "lang": "en",
-      "src": {
-        "work": "Crime and Punishment"
-      },
-      "quality": {
-        "chars": 91
-      }
-    },
-    {
-      "id": "dostoevski.f.v0005",
-      "kind": "verbatim",
-      "text": "They were by now approaching Bakaleyev’s lodgings, where Pulcheria Alexandrovna and Dounia had been expecting them a long while.",
-      "work": "Crime and Punishment",
-      "lang": "en",
-      "src": {
-        "work": "Crime and Punishment"
-      },
-      "quality": {
-        "chars": 128
-      }
-    },
-    {
-      "id": "dostoevski.f.v0006",
       "kind": "verbatim",
       "text": "This Marfa Petrovna begged Dounia’s forgiveness afterwards, and she’s just died suddenly.",
       "work": "Crime and Punishment",
@@ -420,189 +562,85 @@
       }
     },
     {
-      "id": "dostoevski.f.v0007",
+      "id": "dostoevski.f.v0005",
       "kind": "verbatim",
-      "text": "Yet she thoroughly understands some questions, for instance about kissing of hands, that is, that it’s an insult to a woman for a man to kiss her hand, because it’s a sign of inequality.",
+      "text": "Probably “taking his cue” from Luzhin, “that contemptible wretch Lebeziatnikov had not turned up either.",
       "work": "Crime and Punishment",
       "lang": "en",
       "src": {
         "work": "Crime and Punishment"
       },
       "quality": {
-        "chars": 186
+        "chars": 104
+      }
+    },
+    {
+      "id": "dostoevski.f.v0006",
+      "kind": "verbatim",
+      "text": "Besides all this, Alyosha had till the evening before implicitly believed that Katerina Ivanovna had a steadfast and passionate love for Dmitri; but he had only believed it till the evening before.",
+      "work": "The Brothers Karamazov",
+      "lang": "en",
+      "src": {
+        "work": "The Brothers Karamazov"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "dostoevski.f.v0007",
+      "kind": "verbatim",
+      "text": "You may be surprised at me, Alyosha, but I am awfully fond of children, too.",
+      "work": "The Brothers Karamazov",
+      "lang": "en",
+      "src": {
+        "work": "The Brothers Karamazov"
+      },
+      "quality": {
+        "chars": 76
       }
     },
     {
       "id": "dostoevski.f.v0008",
       "kind": "verbatim",
-      "text": "I cough, I begin to have tickling in my throat and a difficulty in breathing.",
-      "work": "Crime and Punishment",
+      "text": "I know nothing better than to be in the forest,” said he, “though all things are good.” “Truly,” I answered him, “all things are good and fair, because all is truth.",
+      "work": "The Brothers Karamazov",
       "lang": "en",
       "src": {
-        "work": "Crime and Punishment"
+        "work": "The Brothers Karamazov"
       },
       "quality": {
-        "chars": 77
+        "chars": 165
       }
     },
     {
       "id": "dostoevski.f.v0009",
       "kind": "verbatim",
-      "text": "The bright yellow, wooden, little houses looked dirty and dejected with their closed shutters.",
-      "work": "Crime and Punishment",
+      "text": "Four dozen champagne, not a bottle less.” “What do you want with so much?",
+      "work": "The Brothers Karamazov",
       "lang": "en",
       "src": {
-        "work": "Crime and Punishment"
+        "work": "The Brothers Karamazov"
       },
       "quality": {
-        "chars": 94
+        "chars": 73
       }
     },
     {
       "id": "dostoevski.f.v0010",
       "kind": "verbatim",
-      "text": "You see, you gentlemen have, to the best of my knowledge, taken your whole register of human advantages from the averages of statistical figures and politico-economical formulas.",
-      "work": "Notes from the Underground",
+      "text": "You see, gentlemen”—Mitya frowned—“it seems to me that about feelings you’ve no right to question me.",
+      "work": "The Brothers Karamazov",
       "lang": "en",
       "src": {
-        "work": "Notes from the Underground"
+        "work": "The Brothers Karamazov"
       },
       "quality": {
-        "chars": 178
+        "chars": 101
       }
     },
     {
       "id": "dostoevski.f.v0011",
-      "kind": "verbatim",
-      "text": "That is why there are so many “broad natures” among us who never lose their ideal even in the depths of degradation; and though they never stir a finger for their ideal, though they are arrant thieves and knaves, yet they tearfully cherish their first ideal and are extraordinarily honest at heart.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 298
-      }
-    },
-    {
-      "id": "dostoevski.f.v0012",
-      "kind": "verbatim",
-      "text": "By then he had taken to cutting me in the street, and I suspected that he was afraid of compromising himself by greeting a personage as insignificant as me.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 156
-      }
-    },
-    {
-      "id": "dostoevski.f.v0013",
-      "kind": "verbatim",
-      "text": "I’ll go on sitting here and drinking to the end, on purpose, as a sign that I don’t think you of the slightest consequence.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 123
-      }
-    },
-    {
-      "id": "dostoevski.f.v0014",
-      "kind": "verbatim",
-      "text": "When she danced at parties he used to stand for five hours at a stretch, gazing at her.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 87
-      }
-    },
-    {
-      "id": "dostoevski.f.v0015",
-      "kind": "verbatim",
-      "text": "Wait a minute,” she said suddenly, in the passage just at the doorway, stopping me with her hand on my overcoat.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 112
-      }
-    },
-    {
-      "id": "dostoevski.f.v0016",
-      "kind": "verbatim",
-      "text": "One moment out of all that had happened last night stood vividly before my imagination; the moment when I struck a match and saw her pale, distorted face, with its look of torture.",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 180
-      }
-    },
-    {
-      "id": "dostoevski.f.v0017",
-      "kind": "verbatim",
-      "text": "I had been humiliated, so I wanted to humiliate; I had been treated like a rag, so I wanted to show my power....",
-      "work": "Notes from the Underground",
-      "lang": "en",
-      "src": {
-        "work": "Notes from the Underground"
-      },
-      "quality": {
-        "chars": 112
-      }
-    },
-    {
-      "id": "dostoevski.f.v0018",
-      "kind": "verbatim",
-      "text": "They are poor creatures I tell you, those pale young ladies, very different from—Ah, if I had his youth and the looks I had then (for I was better-looking than he at eight and twenty) I’d have been a conquering hero just as he is.",
-      "work": "The Brothers Karamazov",
-      "lang": "en",
-      "src": {
-        "work": "The Brothers Karamazov"
-      },
-      "quality": {
-        "chars": 230
-      }
-    },
-    {
-      "id": "dostoevski.f.v0019",
-      "kind": "verbatim",
-      "text": "Everything was on the verge of ruin and my guardian angel saved me,” was the thought in his mind.",
-      "work": "The Brothers Karamazov",
-      "lang": "en",
-      "src": {
-        "work": "The Brothers Karamazov"
-      },
-      "quality": {
-        "chars": 97
-      }
-    },
-    {
-      "id": "dostoevski.f.v0020",
-      "kind": "verbatim",
-      "text": "He hurriedly shouted to Smurov, “Open the door,” and as soon as it was open, he blew his whistle.",
-      "work": "The Brothers Karamazov",
-      "lang": "en",
-      "src": {
-        "work": "The Brothers Karamazov"
-      },
-      "quality": {
-        "chars": 97
-      }
-    },
-    {
-      "id": "dostoevski.f.v0021",
       "kind": "verbatim",
       "text": "There’s no help for it, I’ll confess, for there is one point in which I was perhaps to blame.",
       "work": "The Brothers Karamazov",
@@ -615,26 +653,300 @@
       }
     },
     {
-      "id": "dostoevski.f.v0022",
+      "id": "dostoevski.f.v0012",
       "kind": "verbatim",
-      "text": "A pound of what children are very fond of, what is it, what is it?” The doctor began waving his hands again.",
+      "text": "I should never have brought myself to it without him.” “All right, all right ...",
       "work": "The Brothers Karamazov",
       "lang": "en",
       "src": {
         "work": "The Brothers Karamazov"
       },
       "quality": {
-        "chars": 108
+        "chars": 80
+      }
+    },
+    {
+      "id": "dostoevski.f.v0013",
+      "kind": "verbatim",
+      "text": "His moans become nasty, disgustingly malignant, and go on for whole days and nights.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 84
+      }
+    },
+    {
+      "id": "dostoevski.f.v0014",
+      "kind": "verbatim",
+      "text": "We sometimes choose absolute nonsense because in our foolishness we see in that nonsense the easiest means for attaining a supposed advantage.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "dostoevski.f.v0015",
+      "kind": "verbatim",
+      "text": "That is why there are so many “broad natures” among us who never lose their ideal even in the depths of degradation; and though they never stir a finger for their ideal, though they are arrant thieves and knaves, yet they tearfully cherish their first ideal and are extraordinarily honest at heart.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "dostoevski.f.v0016",
+      "kind": "verbatim",
+      "text": "At the steps was standing a solitary night sledge-driver in a rough peasant coat, powdered over with the still falling, wet, and as it were warm, snow.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "dostoevski.f.v0017",
+      "kind": "verbatim",
+      "text": "You are sold, all of you, body and soul, and there is no need to strive for love when you can have everything without love.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "dostoevski.f.v0018",
+      "kind": "verbatim",
+      "text": "She obediently sat down at once and gazed at me open-eyed, evidently expecting something from me at once.",
+      "work": "Notes from the Underground",
+      "lang": "en",
+      "src": {
+        "work": "Notes from the Underground"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "dostoevski.f.v0019",
+      "kind": "verbatim",
+      "text": "It’s ages, ages!’ Around him are crowds shouting, yelling—ten thousand faces, twenty thousand eyes.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "dostoevski.f.v0020",
+      "kind": "verbatim",
+      "text": "Tell me, why didn’t you put me right when I made such a dreadful mistake just now?” continued the latter, examining the prince from head to foot without the slightest ceremony.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "dostoevski.f.v0021",
+      "kind": "verbatim",
+      "text": "These little errors of taste on Ferdishenko’s part occurred very frequently.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 76
+      }
+    },
+    {
+      "id": "dostoevski.f.v0022",
+      "kind": "verbatim",
+      "text": "Arrived there, he ordered a cup of tea and sat sipping it in the coffee-room.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "dostoevski.f.v0023",
+      "kind": "verbatim",
+      "text": "Burdovsky, was simply that she was the sister of a serf-girl with whom he was deeply in love in his youth, and whom most certainly he would have married but for her sudden death.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "dostoevski.f.v0024",
+      "kind": "verbatim",
+      "text": "Why, cannot you see that they are all infatuated with pride and vanity?” “He has acknowledged himself to be in the wrong.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "dostoevski.f.v0025",
+      "kind": "verbatim",
+      "text": "He was doubtless thinking of his own late experiences with his boon companions.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "dostoevski.f.v0026",
+      "kind": "verbatim",
+      "text": "Is it not enough that I am devoured, without my being expected to bless the power that devours me?",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "dostoevski.f.v0027",
+      "kind": "verbatim",
+      "text": "The woman appeared to step out from the park, and stand in the path in front of him, as though she had been waiting for him there.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "dostoevski.f.v0028",
+      "kind": "verbatim",
+      "text": "There was a question to be decided—most important, but most difficult; so much so, that Mrs.",
+      "work": "The Idiot",
+      "lang": "en",
+      "src": {
+        "work": "The Idiot"
+      },
+      "quality": {
+        "chars": 92
+      }
+    },
+    {
+      "id": "dostoevski.f.v0029",
+      "kind": "verbatim",
+      "text": "Though Marya Timofyevna was very eager to have another cup and even put out her hand to take it, on second thoughts she refused it ceremoniously, and was obviously pleased with herself for doing so.) Varvara Petrovna gave a wry smile.",
+      "work": "The possessed",
+      "lang": "en",
+      "src": {
+        "work": "The possessed"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "dostoevski.f.v0030",
+      "kind": "verbatim",
+      "text": "Sit down.\" Pyotr Stepanovitch immediately lolled back on the sofa and drew his legs under him.",
+      "work": "The possessed",
+      "lang": "en",
+      "src": {
+        "work": "The possessed"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "dostoevski.f.v0031",
+      "kind": "verbatim",
+      "text": "At the other end of the table a rival had risen, and all eyes turned to him.",
+      "work": "The possessed",
+      "lang": "en",
+      "src": {
+        "work": "The possessed"
+      },
+      "quality": {
+        "chars": 76
+      }
+    },
+    {
+      "id": "dostoevski.f.v0032",
+      "kind": "verbatim",
+      "text": "Thus, for instance, one short and elderly gentleman wearing a dress-coat--in fact, dressed like every one else--wore a venerable grey beard, tied on (and this constituted his disguise).",
+      "work": "The possessed",
+      "lang": "en",
+      "src": {
+        "work": "The possessed"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "dostoevski.f.v0033",
+      "kind": "verbatim",
+      "text": "Virginsky was so scared that he too screamed out like a madman, and with a ferocity, a vindictiveness that one could never have expected of Virginsky.",
+      "work": "The possessed",
+      "lang": "en",
+      "src": {
+        "work": "The possessed"
+      },
+      "quality": {
+        "chars": 150
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:aef2b6f8a7d06e309252939b3a3d061ae7afb0d72f41513939d9949071a039be"
+  "checksum": "sha256:aeb46fedb8535b72800c21390c728239ade652383164ca0b5016ea29bd3f2085"
 }

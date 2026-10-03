@@ -1,242 +1,30 @@
 {
   "authorId": "augustin",
   "kbVersion": "augustin@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.240Z",
+  "builtAt": "2026-10-03T21:23:12.495Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Soliloquies",
-      "sentences": 14
+      "title": "The Confessions of St. Augustine",
+      "sentences": 12
     },
     {
       "title": "The City of God, Volume I",
-      "sentences": 13
+      "sentences": 12
     },
     {
-      "title": "The Confessions of St. Augustine",
-      "sentences": 13
+      "title": "Writings in Connection with the Donatist Controversy",
+      "sentences": 12
+    },
+    {
+      "title": "Soliloquies",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "augustin.p0001",
-      "w": "Soliloquies",
-      "s": "Our love, which Thou hast given us, bindeth us to Thee.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0002",
-      "w": "Soliloquies",
-      "s": "If it is by faith that they find Thee who do find Thee, give me that faith.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0003",
-      "w": "Soliloquies",
-      "s": "I know not therefore how thou teachest it to me, nor can I teach it to any one, by the outer senses.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0004",
-      "w": "Soliloquies",
-      "s": "But I wonder why thou dost not love the Other much more, Him who giveth thee both the friendship of the worldly lord and His own, and, after this world, life eternal.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0005",
-      "w": "Soliloquies",
-      "s": "But the sun shineth, nevertheless, on them, and yet he who looketh toward it can not see it wholly just as it is.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0006",
-      "w": "Soliloquies",
-      "s": "Be not wroth with me, albeit I question thee and examine thee, for I needs must do that.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0007",
-      "w": "Soliloquies",
-      "s": "Some are in more honor and in more ease than others; some in less, some almost without, except the one that he loveth.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0008",
-      "w": "Soliloquies",
-      "s": "Wisdom itself knoweth what thou art worthy of, and how much it may show itself to thee.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0009",
-      "w": "Soliloquies",
-      "s": "Howbeit if He permit any adversity to befall thee, it will be for thy good, although thou canst not understand it.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0010",
-      "w": "Soliloquies",
-      "s": "Didst thou not before confess that God is eternal and almighty, and hath created two rational and eternal creatures, as we before said, namely: angels and men's souls, to which He hath given eternal gifts?",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0011",
-      "w": "Soliloquies",
-      "s": "All this I knew, however, before; but I forgot it, as I fear also that I shall this.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0012",
-      "w": "Soliloquies",
-      "s": "I know now that life and reason are eternal, albeit I fear that it shall be in that world as it is here in children.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0013",
-      "w": "Soliloquies",
-      "s": "He who granteth us to know Himself will conceal naught from us.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0014",
-      "w": "Soliloquies",
-      "s": "But it shall be with them even as it is with men, who are in this world brought into the prison of some king and can see their friends all day and ask about them what they desire, albeit they can not be of any good to them, nor the prisoners to them; they have neither the wish nor the ability.",
-      "src": {
-        "work": "Soliloquies"
-      }
-    },
-    {
-      "id": "augustin.p0015",
-      "w": "The City of God, Volume I",
-      "s": "And this gave occasion to the festival of the goose, in which Rome sank nearly to the superstition of the Egyptians, who worship beasts and birds.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0016",
-      "w": "The City of God, Volume I",
-      "s": "Will some one say that, when Fimbria stormed Troy, the gods were already resident in Rome?",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0017",
-      "w": "The City of God, Volume I",
-      "s": "For, so far as concerns themselves, their piety and probity, which are great gifts of God, suffice to give them true felicity, enabling them to live well the life that now is, and afterwards to receive that which is eternal.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0018",
-      "w": "The City of God, Volume I",
-      "s": "Why has temperance not deserved to be a goddess, when some Roman princes have obtained no small glory on account of her?",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0019",
-      "w": "The City of God, Volume I",
-      "s": "Now, had it been done with consent of the nations, it would have been done with greater success, but there would have been no glory of conquest, for neither did the Romans themselves live exempt from those laws which they imposed on others.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0020",
-      "w": "The City of God, Volume I",
-      "s": "That theology, therefore, which they call natural, being put aside for a moment, as it is afterwards to be discussed, we ask if any one is really content to seek a hope for eternal life from poetical, theatrical, scenic gods?",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0021",
-      "w": "The City of God, Volume I",
-      "s": "For what they say would imply that he who put on the soil took away the seed, as Jupiter is said to have been taken away when the lump of soil was offered to Saturn instead of him, and not rather that the soil, by covering the seed, only caused it to be devoured the more eagerly.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0022",
-      "w": "The City of God, Volume I",
-      "s": "In this divination, he says, they also inquire at the inhabitants of the nether world, and make use of blood; and this the Greeks call νεκρομαντείαν.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0023",
-      "w": "The City of God, Volume I",
-      "s": "He also states that the blessed are called in Greek εὐδαίμονες, because they are good souls, that is to say, good demons, confirming his opinion that the souls of men are demons.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0024",
-      "w": "The City of God, Volume I",
-      "s": "He says, further, that the rational, or, as he prefers calling it, the intellectual soul, can pass into the heavens without the spiritual part being cleansed by theurgic art, and that this art cannot so purify the spiritual part as to give it entrance to immortality and eternity.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0025",
-      "w": "The City of God, Volume I",
-      "s": "But if He knew all that He made, He made only those things which He had known.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0026",
-      "w": "The City of God, Volume I",
-      "s": "Since, then, we have now said what seemed needful regarding these two diverse and contrary communities of angels, in which the origin of the two human communities (of which we intend to speak anon) is also found, let us at once bring this book also to a conclusion.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0027",
-      "w": "The City of God, Volume I",
-      "s": "For faith is then only faith when it waits in hope for what is not yet seen in substance.",
-      "src": {
-        "work": "The City of God, Volume I"
-      }
-    },
-    {
-      "id": "augustin.p0028",
       "w": "The Confessions of St. Augustine",
       "s": "But what sort of compassion is this for feigned and scenical passions?",
       "src": {
@@ -244,23 +32,23 @@
       }
     },
     {
-      "id": "augustin.p0029",
+      "id": "augustin.p0002",
       "w": "The Confessions of St. Augustine",
-      "s": "But whither ascend ye, when ye are on high, and set your mouth against the heavens?",
+      "s": "They rise, and set; and by rising, they begin as it were to be; they grow, that they may be perfected; and perfected, they wax old and wither; and all grow not old, but all wither.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0030",
+      "id": "augustin.p0003",
       "w": "The Confessions of St. Augustine",
-      "s": "For he was not one of those talking persons, many of whom I had endured, who undertook to teach me these things, and said nothing.",
+      "s": "Couldest Thou despise and reject from Thy aid the tears of such an one, wherewith she begged of Thee not gold or silver, nor any mutable or passing good, but the salvation of her son's soul?",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0031",
+      "id": "augustin.p0004",
       "w": "The Confessions of St. Augustine",
       "s": "For whatever honour there be in the office of well-ordering a married life, and a family, moved us but slightly.",
       "src": {
@@ -268,55 +56,47 @@
       }
     },
     {
-      "id": "augustin.p0032",
+      "id": "augustin.p0005",
       "w": "The Confessions of St. Augustine",
-      "s": "Thou art my God, to Thee do I sigh night and day.",
+      "s": "But I was displeased that I led a secular life; yea now that my desires no longer inflamed me, as of old, with hopes of honour and profit, a very grievous burden it was to undergo so heavy a bondage.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0033",
+      "id": "augustin.p0006",
       "w": "The Confessions of St. Augustine",
-      "s": "For whence else is this hesitation between conflicting wills?",
+      "s": "This followed, him that is weak in the faith, receive; which he applied to himself, and disclosed to me.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0034",
+      "id": "augustin.p0007",
       "w": "The Confessions of St. Augustine",
-      "s": "When shall I recall all which passed in those holy-days?",
+      "s": "Let Thy mercy be exalted above Thy justice, since Thy words are true, and Thou hast promised mercy unto the merciful; which Thou gavest them to be, who wilt have mercy on whom Thou wilt have mercy; and wilt have compassion on whom Thou hast had compassion.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0035",
+      "id": "augustin.p0008",
       "w": "The Confessions of St. Augustine",
-      "s": "I have seen the lines of architects, the very finest, like a spider's thread; but those are still different, they are not the images of those lines which the eye of flesh showed me: he knoweth them, whosoever without any conception whatsoever of a body, recognises them within himself.",
+      "s": "Or, had not the whole escaped us, but by the part whereof we had hold, was the lost part sought for; in that the memory felt that it did not carry on together all which it was wont, and maimed, as it were, by the curtailment of its ancient habit, demanded the restoration of what it missed?",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0036",
+      "id": "augustin.p0009",
       "w": "The Confessions of St. Augustine",
-      "s": "This is the happy life which all desire; this life which alone is happy, all desire; to joy in the truth all desire.",
+      "s": "For I am taken miserably, and Thou pluckest me out mercifully; sometimes not perceiving it, when I had but lightly lighted upon them; otherwhiles with pain, because I had stuck fast in them.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0037",
-      "w": "The Confessions of St. Augustine",
-      "s": "It tempts, even when it is reproved by myself in myself, on the very ground that it is reproved; and often glories more vainly of the very contempt of vain-glory; and so it is no longer contempt of vain-glory, whereof it glories; for it doth not contemn when it glorieth.",
-      "src": {
-        "work": "The Confessions of St. Augustine"
-      }
-    },
-    {
-      "id": "augustin.p0038",
+      "id": "augustin.p0010",
       "w": "The Confessions of St. Augustine",
       "s": "Let him that is able, hear Thee inwardly discoursing out of Thy oracle: I will boldly cry out, How wonderful are Thy works, O Lord, in Wisdom hast Thou made them all; and this Wisdom is the Beginning, and in that Beginning didst Thou make heaven and earth.",
       "src": {
@@ -324,19 +104,307 @@
       }
     },
     {
-      "id": "augustin.p0039",
+      "id": "augustin.p0011",
       "w": "The Confessions of St. Augustine",
-      "s": "And what is it to have silence there, but to have no sound there?",
+      "s": "For though both voice and tongue be still, yet in thought we go over poems, and verses, and any other discourse, or dimensions of motions, and report as to the spaces of times, how much this is in respect of that, no otherwise than if vocally we did pronounce them.",
       "src": {
         "work": "The Confessions of St. Augustine"
       }
     },
     {
-      "id": "augustin.p0040",
+      "id": "augustin.p0012",
       "w": "The Confessions of St. Augustine",
-      "s": "Behold now, how foolish it is, in such abundance of most true meanings, as may be extracted out of those words, rashly to affirm, which of them Moses principally meant; and with pernicious contentions to offend charity itself, for whose sake he spake every thing, whose words we go about to expound.",
+      "s": "How did they deserve of Thee, to be even without form, since they had not been even this, but from Thee?",
       "src": {
         "work": "The Confessions of St. Augustine"
+      }
+    },
+    {
+      "id": "augustin.p0013",
+      "w": "The City of God, Volume I",
+      "s": "Nola was taken by Alaric shortly after the sack of Rome.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0014",
+      "w": "The City of God, Volume I",
+      "s": "For evil men account those things alone evil which do not make men evil; neither do they blush to praise good things, and yet to remain evil among the good things they praise.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0015",
+      "w": "The City of God, Volume I",
+      "s": "Can anything be said but what was alleged in the case of Regulus' death?",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0016",
+      "w": "The City of God, Volume I",
+      "s": "Why has temperance not deserved to be a goddess, when some Roman princes have obtained no small glory on account of her?",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0017",
+      "w": "The City of God, Volume I",
+      "s": "We faithfully and sincerely confess both.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0018",
+      "w": "The City of God, Volume I",
+      "s": "We know not what they transact, but we know through whom they transact; for we know what things are transacted on the stage, where never, even in a chorus of harlots, hath one who is mutilated or an effeminate appeared.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0019",
+      "w": "The City of God, Volume I",
+      "s": "For what they say would imply that he who put on the soil took away the seed, as Jupiter is said to have been taken away when the lump of soil was offered to Saturn instead of him, and not rather that the soil, by covering the seed, only caused it to be devoured the more eagerly.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0020",
+      "w": "The City of God, Volume I",
+      "s": "I have specially chosen them because their juster thoughts concerning the one God who made heaven and earth, have made them illustrious among philosophers.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0021",
+      "w": "The City of God, Volume I",
+      "s": "If the stars, though they, by his account, are visible gods, are not contaminated when we look at them, neither are the demons contaminated when men see them quite closely.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0022",
+      "w": "The City of God, Volume I",
+      "s": "You see in a fashion, although at a distance, although with filmy eye, the country in which we should abide; but the way to it you know not.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0023",
+      "w": "The City of God, Volume I",
+      "s": "For how can he be happy, if he is nothing?",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0024",
+      "w": "The City of God, Volume I",
+      "s": "Consequently, they argue, God has in His own mind finite conceptions of all finite things which He makes.",
+      "src": {
+        "work": "The City of God, Volume I"
+      }
+    },
+    {
+      "id": "augustin.p0025",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "Who urged you, who compelled you to receive a schismatic whom you had condemned, to preserve the peace of Donatus, and to condemn the world unheard, in violation of the peace of Christ?\" Truth hems them in on every side.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0026",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "Heretics therefore join the Catholic Church to this end, that what they have evil of themselves may be corrected, not that what they have good of God should be repeated.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0027",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "If the one true baptism did not exist except in the Church, it surely would not exist in those who depart from unity.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0028",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For it is expressed in terms of such import, that I should feel no compunction in consenting and subscribing to it in the same spirit in which I too believe that heretics may indeed have the baptism of Christ, but cannot have the remission of their sins.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0029",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "And not to carry our search too far, in the same city of Constantina your predecessors ordained Silvanus bishop at the very outset of his schism.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0030",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "Is it that you might all share equally in bearing the burden of schism?",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0031",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For if you think that we are shameless, because we will not allow that any one should be baptized after baptism from us, although we see that men were baptized again who had received the baptism of John, who certainly is incomparably greater than ourselves, will you maintain that John and Optatus were of equal dignity?",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0032",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For, in proof of your meekness, it is not your words but the cudgels of the Circumcelliones which should be examined.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0033",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For that was the ancient fashion of their wickedness, but now they have advanced too far.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0034",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For His testimony, on the one hand, is to the unity of the world, and His mercy, on the other, is in brotherly love.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0035",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "And we indeed, dear brethren, when we hear false charges brought against us by those whom we have offended by preaching the eloquence of truth, and confuting the vanity of error, have, as you know, the most abundant consolation.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0036",
+      "w": "Writings in Connection with the Donatist Controversy",
+      "s": "For he says, \"This assertion is meaningless, and inflated, and childish, and foolish, and something very far from a true exposition of our faith.",
+      "src": {
+        "work": "Writings in Connection with the Donatist Controversy"
+      }
+    },
+    {
+      "id": "augustin.p0037",
+      "w": "Soliloquies",
+      "s": "Our love, which Thou hast given us, bindeth us to Thee.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0038",
+      "w": "Soliloquies",
+      "s": "O, good Father, free me entirely from the error in which I have hitherto wandered, and yet wander; and teach me the way in which no foe can encounter me before I come to Thee.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0039",
+      "w": "Soliloquies",
+      "s": "In that science thou learnedst on a ball, or an apple, or a painted egg, that thou mightest by the painting understand the motion of the heavens and the course of the stars.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0040",
+      "w": "Soliloquies",
+      "s": "When he hath all these, then hath he life blessed and eternal.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0041",
+      "w": "Soliloquies",
+      "s": "Wert thou, therefore, foolish in heart, when thou didst wish that thou shouldst see with such eyes the high and everlasting Sun?",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0042",
+      "w": "Soliloquies",
+      "s": "Now I understand that thou lovest wisdom very much, and wishest so much to know and feel it naked that thou wouldst not that any cloth were between; but it will seldom so openly reveal itself to any man.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0043",
+      "w": "Soliloquies",
+      "s": "Wisdom itself knoweth what thou art worthy of, and how much it may show itself to thee.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0044",
+      "w": "Soliloquies",
+      "s": "If thou hast understood it, do not conceal it from me, but confess it.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0045",
+      "w": "Soliloquies",
+      "s": "Therefore I can not otherwise believe, for He hath created so great and so many and so wonderful visible creatures; and He ruleth them all and directeth them all, and at one time adorneth them with the most winsome appearances, while at another time He taketh away their adornments and beauties.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0046",
+      "w": "Soliloquies",
+      "s": "All this I knew, however, before; but I forgot it, as I fear also that I shall this.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0047",
+      "w": "Soliloquies",
+      "s": "But I believe that our intellect shall thereby be very much increased, though we can not all know before Doomsday what we would know.",
+      "src": {
+        "work": "Soliloquies"
+      }
+    },
+    {
+      "id": "augustin.p0048",
+      "w": "Soliloquies",
+      "s": "It was he whom Christ spake of in His Gospel that besought Abraham to send Lazarus the beggar to him that he, with his little finger, might place a drop of water on his tongue and therewith cool his thirst.",
+      "src": {
+        "work": "Soliloquies"
       }
     }
   ],
@@ -344,122 +412,135 @@
     {
       "id": "augustin.f.v0001",
       "kind": "verbatim",
-      "text": "I know not therefore how thou teachest it to me, nor can I teach it to any one, by the outer senses.",
-      "work": "Soliloquies",
+      "text": "They rise, and set; and by rising, they begin as it were to be; they grow, that they may be perfected; and perfected, they wax old and wither; and all grow not old, but all wither.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 100
+        "chars": 180
       }
     },
     {
       "id": "augustin.f.v0002",
       "kind": "verbatim",
-      "text": "Be not wroth with me, albeit I question thee and examine thee, for I needs must do that.",
-      "work": "Soliloquies",
+      "text": "Couldest Thou despise and reject from Thy aid the tears of such an one, wherewith she begged of Thee not gold or silver, nor any mutable or passing good, but the salvation of her son's soul?",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 88
+        "chars": 190
       }
     },
     {
       "id": "augustin.f.v0003",
       "kind": "verbatim",
-      "text": "Some are in more honor and in more ease than others; some in less, some almost without, except the one that he loveth.",
-      "work": "Soliloquies",
+      "text": "But I was displeased that I led a secular life; yea now that my desires no longer inflamed me, as of old, with hopes of honour and profit, a very grievous burden it was to undergo so heavy a bondage.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 118
+        "chars": 199
       }
     },
     {
       "id": "augustin.f.v0004",
       "kind": "verbatim",
-      "text": "Howbeit if He permit any adversity to befall thee, it will be for thy good, although thou canst not understand it.",
-      "work": "Soliloquies",
+      "text": "This followed, him that is weak in the faith, receive; which he applied to himself, and disclosed to me.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 114
+        "chars": 104
       }
     },
     {
       "id": "augustin.f.v0005",
       "kind": "verbatim",
-      "text": "Didst thou not before confess that God is eternal and almighty, and hath created two rational and eternal creatures, as we before said, namely: angels and men's souls, to which He hath given eternal gifts?",
-      "work": "Soliloquies",
+      "text": "Let Thy mercy be exalted above Thy justice, since Thy words are true, and Thou hast promised mercy unto the merciful; which Thou gavest them to be, who wilt have mercy on whom Thou wilt have mercy; and wilt have compassion on whom Thou hast had compassion.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 205
+        "chars": 256
       }
     },
     {
       "id": "augustin.f.v0006",
       "kind": "verbatim",
-      "text": "I know now that life and reason are eternal, albeit I fear that it shall be in that world as it is here in children.",
-      "work": "Soliloquies",
+      "text": "Or, had not the whole escaped us, but by the part whereof we had hold, was the lost part sought for; in that the memory felt that it did not carry on together all which it was wont, and maimed, as it were, by the curtailment of its ancient habit, demanded the restoration of what it missed?",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 116
+        "chars": 290
       }
     },
     {
       "id": "augustin.f.v0007",
       "kind": "verbatim",
-      "text": "But it shall be with them even as it is with men, who are in this world brought into the prison of some king and can see their friends all day and ask about them what they desire, albeit they can not be of any good to them, nor the prisoners to them; they have neither the wish nor the ability.",
-      "work": "Soliloquies",
+      "text": "For I am taken miserably, and Thou pluckest me out mercifully; sometimes not perceiving it, when I had but lightly lighted upon them; otherwhiles with pain, because I had stuck fast in them.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "Soliloquies"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 294
+        "chars": 190
       }
     },
     {
       "id": "augustin.f.v0008",
       "kind": "verbatim",
-      "text": "Will some one say that, when Fimbria stormed Troy, the gods were already resident in Rome?",
-      "work": "The City of God, Volume I",
+      "text": "Let him that is able, hear Thee inwardly discoursing out of Thy oracle: I will boldly cry out, How wonderful are Thy works, O Lord, in Wisdom hast Thou made them all; and this Wisdom is the Beginning, and in that Beginning didst Thou make heaven and earth.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "The City of God, Volume I"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 90
+        "chars": 256
       }
     },
     {
       "id": "augustin.f.v0009",
       "kind": "verbatim",
-      "text": "For, so far as concerns themselves, their piety and probity, which are great gifts of God, suffice to give them true felicity, enabling them to live well the life that now is, and afterwards to receive that which is eternal.",
-      "work": "The City of God, Volume I",
+      "text": "For though both voice and tongue be still, yet in thought we go over poems, and verses, and any other discourse, or dimensions of motions, and report as to the spaces of times, how much this is in respect of that, no otherwise than if vocally we did pronounce them.",
+      "work": "The Confessions of St. Augustine",
       "lang": "en",
       "src": {
-        "work": "The City of God, Volume I"
+        "work": "The Confessions of St. Augustine"
       },
       "quality": {
-        "chars": 224
+        "chars": 265
       }
     },
     {
       "id": "augustin.f.v0010",
+      "kind": "verbatim",
+      "text": "How did they deserve of Thee, to be even without form, since they had not been even this, but from Thee?",
+      "work": "The Confessions of St. Augustine",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions of St. Augustine"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "augustin.f.v0011",
       "kind": "verbatim",
       "text": "Why has temperance not deserved to be a goddess, when some Roman princes have obtained no small glory on account of her?",
       "work": "The City of God, Volume I",
@@ -472,29 +553,16 @@
       }
     },
     {
-      "id": "augustin.f.v0011",
-      "kind": "verbatim",
-      "text": "Now, had it been done with consent of the nations, it would have been done with greater success, but there would have been no glory of conquest, for neither did the Romans themselves live exempt from those laws which they imposed on others.",
-      "work": "The City of God, Volume I",
-      "lang": "en",
-      "src": {
-        "work": "The City of God, Volume I"
-      },
-      "quality": {
-        "chars": 240
-      }
-    },
-    {
       "id": "augustin.f.v0012",
       "kind": "verbatim",
-      "text": "That theology, therefore, which they call natural, being put aside for a moment, as it is afterwards to be discussed, we ask if any one is really content to seek a hope for eternal life from poetical, theatrical, scenic gods?",
+      "text": "We know not what they transact, but we know through whom they transact; for we know what things are transacted on the stage, where never, even in a chorus of harlots, hath one who is mutilated or an effeminate appeared.",
       "work": "The City of God, Volume I",
       "lang": "en",
       "src": {
         "work": "The City of God, Volume I"
       },
       "quality": {
-        "chars": 225
+        "chars": 219
       }
     },
     {
@@ -513,128 +581,193 @@
     {
       "id": "augustin.f.v0014",
       "kind": "verbatim",
-      "text": "In this divination, he says, they also inquire at the inhabitants of the nether world, and make use of blood; and this the Greeks call νεκρομαντείαν.",
+      "text": "I have specially chosen them because their juster thoughts concerning the one God who made heaven and earth, have made them illustrious among philosophers.",
       "work": "The City of God, Volume I",
       "lang": "en",
       "src": {
         "work": "The City of God, Volume I"
       },
       "quality": {
-        "chars": 149
+        "chars": 155
       }
     },
     {
       "id": "augustin.f.v0015",
       "kind": "verbatim",
-      "text": "He also states that the blessed are called in Greek εὐδαίμονες, because they are good souls, that is to say, good demons, confirming his opinion that the souls of men are demons.",
+      "text": "If the stars, though they, by his account, are visible gods, are not contaminated when we look at them, neither are the demons contaminated when men see them quite closely.",
       "work": "The City of God, Volume I",
       "lang": "en",
       "src": {
         "work": "The City of God, Volume I"
       },
       "quality": {
-        "chars": 178
+        "chars": 172
       }
     },
     {
       "id": "augustin.f.v0016",
       "kind": "verbatim",
-      "text": "He says, further, that the rational, or, as he prefers calling it, the intellectual soul, can pass into the heavens without the spiritual part being cleansed by theurgic art, and that this art cannot so purify the spiritual part as to give it entrance to immortality and eternity.",
+      "text": "You see in a fashion, although at a distance, although with filmy eye, the country in which we should abide; but the way to it you know not.",
       "work": "The City of God, Volume I",
       "lang": "en",
       "src": {
         "work": "The City of God, Volume I"
       },
       "quality": {
-        "chars": 280
+        "chars": 140
       }
     },
     {
       "id": "augustin.f.v0017",
       "kind": "verbatim",
-      "text": "Since, then, we have now said what seemed needful regarding these two diverse and contrary communities of angels, in which the origin of the two human communities (of which we intend to speak anon) is also found, let us at once bring this book also to a conclusion.",
+      "text": "Consequently, they argue, God has in His own mind finite conceptions of all finite things which He makes.",
       "work": "The City of God, Volume I",
       "lang": "en",
       "src": {
         "work": "The City of God, Volume I"
       },
       "quality": {
-        "chars": 265
+        "chars": 105
       }
     },
     {
       "id": "augustin.f.v0018",
       "kind": "verbatim",
-      "text": "I have seen the lines of architects, the very finest, like a spider's thread; but those are still different, they are not the images of those lines which the eye of flesh showed me: he knoweth them, whosoever without any conception whatsoever of a body, recognises them within himself.",
-      "work": "The Confessions of St. Augustine",
+      "text": "Who urged you, who compelled you to receive a schismatic whom you had condemned, to preserve the peace of Donatus, and to condemn the world unheard, in violation of the peace of Christ?\" Truth hems them in on every side.",
+      "work": "Writings in Connection with the Donatist Controversy",
       "lang": "en",
       "src": {
-        "work": "The Confessions of St. Augustine"
+        "work": "Writings in Connection with the Donatist Controversy"
       },
       "quality": {
-        "chars": 285
+        "chars": 220
       }
     },
     {
       "id": "augustin.f.v0019",
       "kind": "verbatim",
-      "text": "This is the happy life which all desire; this life which alone is happy, all desire; to joy in the truth all desire.",
-      "work": "The Confessions of St. Augustine",
+      "text": "Heretics therefore join the Catholic Church to this end, that what they have evil of themselves may be corrected, not that what they have good of God should be repeated.",
+      "work": "Writings in Connection with the Donatist Controversy",
       "lang": "en",
       "src": {
-        "work": "The Confessions of St. Augustine"
+        "work": "Writings in Connection with the Donatist Controversy"
       },
       "quality": {
-        "chars": 116
+        "chars": 169
       }
     },
     {
       "id": "augustin.f.v0020",
       "kind": "verbatim",
-      "text": "It tempts, even when it is reproved by myself in myself, on the very ground that it is reproved; and often glories more vainly of the very contempt of vain-glory; and so it is no longer contempt of vain-glory, whereof it glories; for it doth not contemn when it glorieth.",
-      "work": "The Confessions of St. Augustine",
+      "text": "If the one true baptism did not exist except in the Church, it surely would not exist in those who depart from unity.",
+      "work": "Writings in Connection with the Donatist Controversy",
       "lang": "en",
       "src": {
-        "work": "The Confessions of St. Augustine"
+        "work": "Writings in Connection with the Donatist Controversy"
       },
       "quality": {
-        "chars": 271
+        "chars": 117
       }
     },
     {
       "id": "augustin.f.v0021",
       "kind": "verbatim",
-      "text": "Let him that is able, hear Thee inwardly discoursing out of Thy oracle: I will boldly cry out, How wonderful are Thy works, O Lord, in Wisdom hast Thou made them all; and this Wisdom is the Beginning, and in that Beginning didst Thou make heaven and earth.",
-      "work": "The Confessions of St. Augustine",
+      "text": "For it is expressed in terms of such import, that I should feel no compunction in consenting and subscribing to it in the same spirit in which I too believe that heretics may indeed have the baptism of Christ, but cannot have the remission of their sins.",
+      "work": "Writings in Connection with the Donatist Controversy",
       "lang": "en",
       "src": {
-        "work": "The Confessions of St. Augustine"
+        "work": "Writings in Connection with the Donatist Controversy"
       },
       "quality": {
-        "chars": 256
+        "chars": 254
       }
     },
     {
       "id": "augustin.f.v0022",
       "kind": "verbatim",
-      "text": "Behold now, how foolish it is, in such abundance of most true meanings, as may be extracted out of those words, rashly to affirm, which of them Moses principally meant; and with pernicious contentions to offend charity itself, for whose sake he spake every thing, whose words we go about to expound.",
-      "work": "The Confessions of St. Augustine",
+      "text": "O, good Father, free me entirely from the error in which I have hitherto wandered, and yet wander; and teach me the way in which no foe can encounter me before I come to Thee.",
+      "work": "Soliloquies",
       "lang": "en",
       "src": {
-        "work": "The Confessions of St. Augustine"
+        "work": "Soliloquies"
       },
       "quality": {
-        "chars": 299
+        "chars": 175
       }
+    },
+    {
+      "id": "augustin.f.v0023",
+      "kind": "verbatim",
+      "text": "In that science thou learnedst on a ball, or an apple, or a painted egg, that thou mightest by the painting understand the motion of the heavens and the course of the stars.",
+      "work": "Soliloquies",
+      "lang": "en",
+      "src": {
+        "work": "Soliloquies"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "augustin.f.v0024",
+      "kind": "verbatim",
+      "text": "Wert thou, therefore, foolish in heart, when thou didst wish that thou shouldst see with such eyes the high and everlasting Sun?",
+      "work": "Soliloquies",
+      "lang": "en",
+      "src": {
+        "work": "Soliloquies"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "augustin.f.v0025",
+      "kind": "verbatim",
+      "text": "Now I understand that thou lovest wisdom very much, and wishest so much to know and feel it naked that thou wouldst not that any cloth were between; but it will seldom so openly reveal itself to any man.",
+      "work": "Soliloquies",
+      "lang": "en",
+      "src": {
+        "work": "Soliloquies"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "augustin.f.v0026",
+      "kind": "verbatim",
+      "text": "It was he whom Christ spake of in His Gospel that besought Abraham to send Lazarus the beggar to him that he, with his little finger, might place a drop of water on his tongue and therewith cool his thirst.",
+      "work": "Soliloquies",
+      "lang": "en",
+      "src": {
+        "work": "Soliloquies"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "augustin.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 3,
+      "worksSpan": 3,
+      "examples": [
+        "If the stars, though they, by his account, are visible gods, are not contaminated when we look at them, neither are the demons contaminated when men see them quite closely.",
+        "If the one true baptism did not exist except in the Church, it surely would not exist in those who depart from unity."
+      ]
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
-    "patterns": 0
+    "sentences": 48,
+    "formulas": 27,
+    "verbatim": 26,
+    "patterns": 1
   },
-  "checksum": "sha256:feddcdf6529ac9cad2f54c35963f5bf4f829b888ab8543c7f54b0d4cd5d9de3b"
+  "checksum": "sha256:1e57d6aab5eff281ed431e417a25259b7012315325de740ee08332d8247a0615"
 }

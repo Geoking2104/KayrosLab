@@ -1,162 +1,58 @@
 {
   "authorId": "poe",
   "kbVersion": "poe@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.094Z",
+  "builtAt": "2026-10-03T21:23:12.049Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "Poems and Essays, Volume 4",
-      "sentences": 14
-    },
-    {
       "title": "Tales, Volume 1",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "Tales, Volume 2",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Tales, Volume 3",
+      "sentences": 12
+    },
+    {
+      "title": "Poems and Essays, Volume 4",
+      "sentences": 12
+    },
+    {
+      "title": "Tales, Volume 5",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "poe.p0001",
-      "w": "Poems and Essays, Volume 4",
-      "s": "To lighten the depression of his spirits, the Baron hurried into the open air.",
+      "w": "Tales, Volume 1",
+      "s": "It was an egregious insult to the good sense of the burghers of Rotterdam.",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       }
     },
     {
       "id": "poe.p0002",
-      "w": "Poems and Essays, Volume 4",
-      "s": "Then he was perpetually kicking out his heels—so—so—” “Mr.",
+      "w": "Tales, Volume 1",
+      "s": "I now began to experience, at intervals, severe pain in the head, especially about the ears—still, however, breathing with tolerable freedom.",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       }
     },
     {
       "id": "poe.p0003",
-      "w": "Poems and Essays, Volume 4",
-      "s": "After the noble manner in which the “Owl,” the “Toad,” the “Mole,” had expressed themselves in respect to my ability, it was rather too much to be coolly spoken of by a thing like the “Daddy-Long-Legs,” as merely “a gentleman of high genius and a scholar.” Gentleman indeed!",
+      "w": "Tales, Volume 1",
+      "s": "By twelve o’clock the circular centre had materially decreased in circumference, and by seven P.M.",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       }
     },
     {
       "id": "poe.p0004",
-      "w": "Poems and Essays, Volume 4",
-      "s": "There are various other tones of equal celebrity, but I shall mention only two more—the tone transcendental and the tone heterogeneous.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0005",
-      "w": "Poems and Essays, Volume 4",
-      "s": "In no instance before that of which I speak, have I known the habitual mystific escape the natural consequence of his manoevres—an attachment of the ludicrous to his own character and person.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0006",
-      "w": "Poems and Essays, Volume 4",
-      "s": "A well-dressed individual enters a shop, makes a purchase to the value of a dollar; finds, much to his vexation, that he has left his pocket-book in another coat pocket; and so says to the shopkeeper— “My dear sir, never mind; just oblige me, will you, by sending the bundle home?",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0007",
-      "w": "Poems and Essays, Volume 4",
-      "s": "But seated here (where I write this) in the luxuriously-cushioned open piazza of the summit, one can see everything that is going on in all directions.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0008",
-      "w": "Poems and Essays, Volume 4",
-      "s": "Upon detaching the slab, a cavity appeared, containing a leaden box filled with various coins, a long scroll of names, several documents which appear to resemble newspapers, with other matters of intense interest to the antiquarian!",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0009",
-      "w": "Poems and Essays, Volume 4",
-      "s": "This the deceased lady’s-maid was easily prevailed on to do.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0010",
-      "w": "Poems and Essays, Volume 4",
-      "s": "He patronized Du Pont the bellows-maker, and he died miserably in attempting to smoke a cigar.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0011",
-      "w": "Poems and Essays, Volume 4",
-      "s": "He then proceeded to meet him, and gave the Wellingtons a rub or two with his wool.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0012",
-      "w": "Poems and Essays, Volume 4",
-      "s": "There are, properly,” he writes, “but two styles of landscape-gardening, the natural and the artificial.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0013",
-      "w": "Poems and Essays, Volume 4",
-      "s": "The eyes roll unnaturally in the head, without any corresponding motions of the lids or brows.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0014",
-      "w": "Poems and Essays, Volume 4",
-      "s": "I observe, too, a vacillation in your step—a joyous inquietude in your eyes.",
-      "src": {
-        "work": "Poems and Essays, Volume 4"
-      }
-    },
-    {
-      "id": "poe.p0015",
-      "w": "Tales, Volume 1",
-      "s": "Having, as I thought, sufficiently collected my ideas, I now, with great caution and deliberation, put my hands behind my back, and unfastened the large iron buckle which belonged to the waistband of my inexpressibles.",
-      "src": {
-        "work": "Tales, Volume 1"
-      }
-    },
-    {
-      "id": "poe.p0016",
-      "w": "Tales, Volume 1",
-      "s": "Should the kittens be found to suffer uneasiness in an equal degree with their mother, I must consider my theory in fault, but a failure to do so I should look upon as a strong confirmation of my idea.",
-      "src": {
-        "work": "Tales, Volume 1"
-      }
-    },
-    {
-      "id": "poe.p0017",
-      "w": "Tales, Volume 1",
-      "s": "At all events I was now close upon the planet, and coming down with the most terrible impetuosity.",
-      "src": {
-        "work": "Tales, Volume 1"
-      }
-    },
-    {
-      "id": "poe.p0018",
       "w": "Tales, Volume 1",
       "s": "When the design was complete, he handed it to me without rising.",
       "src": {
@@ -164,23 +60,23 @@
       }
     },
     {
-      "id": "poe.p0019",
+      "id": "poe.p0005",
       "w": "Tales, Volume 1",
-      "s": "Just as I placed the parchment in your hand, and as you were in the act of inspecting it, Wolf, the Newfoundland, entered, and leaped upon your shoulders.",
+      "s": "Here was indeed a mystery which I felt it impossible to explain; but, even at that early moment, there seemed to glimmer, faintly, within the most remote and secret chambers of my intellect, a glow-worm-like conception of that truth which last night’s adventure brought to so magnificent a demonstration.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0020",
+      "id": "poe.p0006",
       "w": "Tales, Volume 1",
-      "s": "But does not the appearance of Epidaphne justify me in calling it grotesque?",
+      "s": "Put on your spectacles, and tell me what it is.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0021",
+      "id": "poe.p0007",
       "w": "Tales, Volume 1",
       "s": "Every thing was perfectly silent—no groans or noises of any kind.",
       "src": {
@@ -188,55 +84,47 @@
       }
     },
     {
-      "id": "poe.p0022",
+      "id": "poe.p0008",
       "w": "Tales, Volume 1",
-      "s": "Through those of the front room no one could have escaped without notice from the crowd in the street.",
+      "s": "What impression have I made upon your fancy?” I felt a creeping of the flesh as Dupin asked me the question.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0023",
+      "id": "poe.p0009",
       "w": "Tales, Volume 1",
-      "s": "But although, in one or two instances, arrests were made which promised elucidation, yet nothing was elicited which could implicate the parties suspected; and they were discharged forthwith.",
+      "s": "She had been subjected, it said, to brutal violence.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0024",
+      "id": "poe.p0010",
       "w": "Tales, Volume 1",
-      "s": "One part was the hem of the frock, and it had been mended; the other piece was part of the skirt, not the hem.",
+      "s": "What, of itself, would be no evidence of identity, becomes through its corroborative position, proof most sure.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0025",
+      "id": "poe.p0011",
       "w": "Tales, Volume 1",
-      "s": "Before proceeding farther, let us consider the supposed scene of the assassination, in the thicket at the Barrière du Roule.",
+      "s": "But in his toilsome journey to the water his fears redouble within him.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0026",
+      "id": "poe.p0012",
       "w": "Tales, Volume 1",
-      "s": "Under the circumstances of large reward offered, and full pardon to any king’s evidence, it is not to be imagined, for a moment, that some member of a gang of low ruffians, or of any body of men, would not long ago have betrayed his accomplices.",
+      "s": "Osborne’s seat, about a mile from Penstruthal, in North Wales; and at 7 minutes past 11, every thing being ready for departure, the balloon was set free, rising gently but steadily, in a direction nearly South; no use being made, for the first half hour, of either the screw or the rudder.",
       "src": {
         "work": "Tales, Volume 1"
       }
     },
     {
-      "id": "poe.p0027",
-      "w": "Tales, Volume 1",
-      "s": "The balloon was brought over the beach (the tide being out and the sand hard, smooth, and admirably adapted for a descent,) and the grapnel let go, which took firm hold at once.",
-      "src": {
-        "work": "Tales, Volume 1"
-      }
-    },
-    {
-      "id": "poe.p0028",
+      "id": "poe.p0013",
       "w": "Tales, Volume 2",
       "s": "Nevertheless, it is quite true,” replied Scheherazade.",
       "src": {
@@ -244,23 +132,23 @@
       }
     },
     {
-      "id": "poe.p0029",
+      "id": "poe.p0014",
       "w": "Tales, Volume 2",
-      "s": "I sent for you to-night,” he said, “not so much to administer to my bodily ailment, as to satisfy me concerning certain psychal impressions which, of late, have occasioned me much anxiety and surprise.",
+      "s": "That Von Kempelen and his immediate friends will reap a rich harvest, it would be folly to doubt for a moment.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0030",
+      "id": "poe.p0015",
       "w": "Tales, Volume 2",
-      "s": "On quitting the invalid’s bed-side to hold conversation with myself, Doctors D—— and F—— had bidden him a final farewell.",
+      "s": "Valdemar?” The answer now was immediate, but even less audible than before: “No pain—I am dying.” I did not think it advisable to disturb him farther just then, and nothing more was said or done until the arrival of Dr.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0031",
+      "id": "poe.p0016",
       "w": "Tales, Volume 2",
       "s": "I know not how it was—but, with the first glimpse of the building, a sense of insufferable gloom pervaded my spirit.",
       "src": {
@@ -268,55 +156,47 @@
       }
     },
     {
-      "id": "poe.p0032",
+      "id": "poe.p0017",
       "w": "Tales, Volume 2",
-      "s": "An irrepressible tremor gradually pervaded my frame; and, at length, there sat upon my very heart an incubus of utterly causeless alarm.",
+      "s": "And the lynx which dwelleth forever in the tomb, came out therefrom, and lay down at the feet of the Demon, and looked at him steadily in the face.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0033",
+      "id": "poe.p0018",
       "w": "Tales, Volume 2",
-      "s": "I again paused, and holding the flambeaux over the mason-work, threw a few feeble rays upon the figure within.",
+      "s": "It will be said, I am aware, that when we persist in acts because we feel we should not persist in them, our conduct is but a modification of that which ordinarily springs from the combativeness of phrenology.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0034",
+      "id": "poe.p0019",
       "w": "Tales, Volume 2",
-      "s": "The cycles in which the stars move are those best adapted for the evolution, without collision, of the greatest possible number of bodies.",
+      "s": "Once I was myself a decorist; but that sublimation of folly has palled upon my soul.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0035",
+      "id": "poe.p0020",
       "w": "Tales, Volume 2",
-      "s": "I then slept—and, upon awaking, I must have returned upon my steps—thus supposing the circuit nearly double what it actually was.",
+      "s": "It was hope that prompted the nerve to quiver—the frame to shrink.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0036",
+      "id": "poe.p0021",
       "w": "Tales, Volume 2",
-      "s": "I had scarcely stepped from my wooden bed of horror upon the stone floor of the prison, when the motion of the hellish machine ceased and I beheld it drawn up, by some invisible force, through the ceiling.",
+      "s": "The ghastly Danger to which I was subjected haunted me day and night.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0037",
-      "w": "Tales, Volume 2",
-      "s": "The flowers de luce, and the round sparks of dew That hung upon their azure leaves did shew Like twinkling stars that sparkle in the evening blue.",
-      "src": {
-        "work": "Tales, Volume 2"
-      }
-    },
-    {
-      "id": "poe.p0038",
+      "id": "poe.p0022",
       "w": "Tales, Volume 2",
       "s": "Grandeur in any of its moods, but especially in that of extent, startles, excites—and then fatigues, depresses.",
       "src": {
@@ -324,19 +204,307 @@
       }
     },
     {
-      "id": "poe.p0039",
+      "id": "poe.p0023",
       "w": "Tales, Volume 2",
-      "s": "The school-room was the largest in the house—I could not help thinking, in the world.",
+      "s": "From me, in an instant, all virtue dropped bodily as a mantle.",
       "src": {
         "work": "Tales, Volume 2"
       }
     },
     {
-      "id": "poe.p0040",
+      "id": "poe.p0024",
       "w": "Tales, Volume 2",
-      "s": "Please to examine, at your leisure, the inner linings of the cuff of his left sleeve, and the several little packages which may be found in the somewhat capacious pockets of his embroidered morning wrapper.” While he spoke, so profound was the stillness that one might have heard a pin drop upon the floor.",
+      "s": "He hesitated but for an instant; then, with a slight sigh, drew in silence, and put himself upon his defence.",
       "src": {
         "work": "Tales, Volume 2"
+      }
+    },
+    {
+      "id": "poe.p0025",
+      "w": "Tales, Volume 3",
+      "s": "I now imagined that he was suffering, like myself, the torments of thirst, and was about adopting this conclusion as the true one, when the idea occurred to me that I had as yet only examined his paws, and that there might possibly be a wound upon some portion of his body or head.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0026",
+      "w": "Tales, Volume 3",
+      "s": "As it was, he proceeded with confidence in his design.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0027",
+      "w": "Tales, Volume 3",
+      "s": "Peters now came into the forecastle with Augustus, and we resumed our deliberations.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0028",
+      "w": "Tales, Volume 3",
+      "s": "As the brig was completely full of water, we went to this work despondently, and with but little expectation of being able to obtain anything.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0029",
+      "w": "Tales, Volume 3",
+      "s": "When I communicated this object to my companions, they uttered a feeble shout of joy, and we all proceeded forthwith to the forecastle.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0030",
+      "w": "Tales, Volume 3",
+      "s": "The royal penguin, so called from its size and beautiful plumage, is the largest.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0031",
+      "w": "Tales, Volume 3",
+      "s": "Dirk Peters and myself accompanied the mate in the larger boat.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0032",
+      "w": "Tales, Volume 3",
+      "s": "The six men being left on board, our shore-party consisted of thirty-two persons in all.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0033",
+      "w": "Tales, Volume 3",
+      "s": "The place was one of singular wildness, and its aspect brought to my mind the descriptions given by travellers of those dreary regions marking the site of degraded Babylon.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0034",
+      "w": "Tales, Volume 3",
+      "s": "Alas, I feel how much even of incipient madness might have been discovered in the gorgeous and fantastic draperies, in the solemn carvings of Egypt, in the wild cornices and furniture, in the Bedlam patterns of the carpets of tufted gold!",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0035",
+      "w": "Tales, Volume 3",
+      "s": "Presently there came a feeble gleam of sunshine, and the shadow of the leaves of the tree fell faintly but definitely upon the grass.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0036",
+      "w": "Tales, Volume 3",
+      "s": "She had even sent me, in reply, one penned by her own exquisite fingers.",
+      "src": {
+        "work": "Tales, Volume 3"
+      }
+    },
+    {
+      "id": "poe.p0037",
+      "w": "Poems and Essays, Volume 4",
+      "s": "To lighten the depression of his spirits, the Baron hurried into the open air.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0038",
+      "w": "Poems and Essays, Volume 4",
+      "s": "For example:—no very long while ago, a singular circumstance occurred in this very house.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0039",
+      "w": "Poems and Essays, Volume 4",
+      "s": "As for Snobbs—any person who should look at me would be instantly aware that my name wasn’t Snobbs.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0040",
+      "w": "Poems and Essays, Volume 4",
+      "s": "As it dangled among the cordage of the bell, I fancied it alive.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0041",
+      "w": "Poems and Essays, Volume 4",
+      "s": "Man is an animal that diddles, and there is no animal that diddles but man.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0042",
+      "w": "Poems and Essays, Volume 4",
+      "s": "No sooner had I entered the water than this bird took it into its head to fly away with the most indispensable portion of my apparel.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0043",
+      "w": "Poems and Essays, Volume 4",
+      "s": "Upon detaching the slab, a cavity appeared, containing a leaden box filled with various coins, a long scroll of names, several documents which appear to resemble newspapers, with other matters of intense interest to the antiquarian!",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0044",
+      "w": "Poems and Essays, Volume 4",
+      "s": "Wyatt,” replied the captain, somewhat sternly, “you will capsize us if you do not sit quite still.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0045",
+      "w": "Poems and Essays, Volume 4",
+      "s": "I cannot just now remember when or where I first made the acquaintance of that truly fine-looking fellow, Brevet Brigadier General John A.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0046",
+      "w": "Poems and Essays, Volume 4",
+      "s": "He then proceeded to meet him, and gave the Wellingtons a rub or two with his wool.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0047",
+      "w": "Poems and Essays, Volume 4",
+      "s": "Different spectators of the game would advise different moves.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0048",
+      "w": "Poems and Essays, Volume 4",
+      "s": "For example, he has been known to open, first of all, the drawer—but he never opens the main compartment without first closing the back door of cupboard No.",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      }
+    },
+    {
+      "id": "poe.p0049",
+      "w": "Tales, Volume 5",
+      "s": "What—what—what are you making that noise for?” demanded the king, turning furiously to the dwarf.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0050",
+      "w": "Tales, Volume 5",
+      "s": "It was still brilliant with gas; but the rain fell fiercely, and there were few persons to be seen.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0051",
+      "w": "Tales, Volume 5",
+      "s": "Carlyle, and as I knew he could not do it, I would not believe that it could be done by Toby Dammit.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0052",
+      "w": "Tales, Volume 5",
+      "s": "Goodfellow’s), that his object in going to town on the morrow was to make a deposit of an unusually large sum of money in the “Farmers’ and Mechanics’ Bank,” and that, then and there, the said Mr.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0053",
+      "w": "Tales, Volume 5",
+      "s": "Yet in the indulgence of a propensity so truly classical, it is not to be supposed that the restaurateur would lose sight of that intuitive discrimination which was wont to characterize, at one and the same time, his essais and his omelettes.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0054",
+      "w": "Tales, Volume 5",
+      "s": "By the time I had reached the “Ponnonner,” it struck me that I was as wide awake as a man need be.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0055",
+      "w": "Tales, Volume 5",
+      "s": "I here asked the Count what he had to say to our railroads.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0056",
+      "w": "Tales, Volume 5",
+      "s": "I know, I know I should not see The season’s glorious show, Nor would its brightness shine for me; Nor its wild music flow; But if, around my place of sleep, The friends I love should come to weep, They might not haste to go.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0057",
+      "w": "Tales, Volume 5",
+      "s": "Clad all in white, upon a violet bank I saw thee half reclining; while the moon Fell on the upturn’d faces of the roses, And on thine own, upturn’d—alas, in sorrow!",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0058",
+      "w": "Tales, Volume 5",
+      "s": "With its Phantom chased for evermore, By a crowd that seize it not, Through a circle that ever returneth in To the self-same spot, And much of Madness, and more of Sin, And Horror the soul of the plot.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0059",
+      "w": "Tales, Volume 5",
+      "s": "By all I hold most sacred and most solemn— By all my wishes now—my fears hereafter— By all I scorn on earth and hope in heaven— There is no deed I would more glory in, Than in thy cause to scoff at this same glory And trample it under foot.",
+      "src": {
+        "work": "Tales, Volume 5"
+      }
+    },
+    {
+      "id": "poe.p0060",
+      "w": "Tales, Volume 5",
+      "s": "Think of all that is airy and fairy-like, and then of all that is hideous and unwieldy; think of his huge bulk, the Elephant!",
+      "src": {
+        "work": "Tales, Volume 5"
       }
     }
   ],
@@ -344,187 +512,109 @@
     {
       "id": "poe.f.v0001",
       "kind": "verbatim",
-      "text": "After the noble manner in which the “Owl,” the “Toad,” the “Mole,” had expressed themselves in respect to my ability, it was rather too much to be coolly spoken of by a thing like the “Daddy-Long-Legs,” as merely “a gentleman of high genius and a scholar.” Gentleman indeed!",
-      "work": "Poems and Essays, Volume 4",
+      "text": "I now began to experience, at intervals, severe pain in the head, especially about the ears—still, however, breathing with tolerable freedom.",
+      "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 274
+        "chars": 141
       }
     },
     {
       "id": "poe.f.v0002",
       "kind": "verbatim",
-      "text": "There are various other tones of equal celebrity, but I shall mention only two more—the tone transcendental and the tone heterogeneous.",
-      "work": "Poems and Essays, Volume 4",
+      "text": "By twelve o’clock the circular centre had materially decreased in circumference, and by seven P.M.",
+      "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 135
+        "chars": 98
       }
     },
     {
       "id": "poe.f.v0003",
       "kind": "verbatim",
-      "text": "In no instance before that of which I speak, have I known the habitual mystific escape the natural consequence of his manoevres—an attachment of the ludicrous to his own character and person.",
-      "work": "Poems and Essays, Volume 4",
+      "text": "Here was indeed a mystery which I felt it impossible to explain; but, even at that early moment, there seemed to glimmer, faintly, within the most remote and secret chambers of my intellect, a glow-worm-like conception of that truth which last night’s adventure brought to so magnificent a demonstration.",
+      "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 191
+        "chars": 304
       }
     },
     {
       "id": "poe.f.v0004",
       "kind": "verbatim",
-      "text": "A well-dressed individual enters a shop, makes a purchase to the value of a dollar; finds, much to his vexation, that he has left his pocket-book in another coat pocket; and so says to the shopkeeper— “My dear sir, never mind; just oblige me, will you, by sending the bundle home?",
-      "work": "Poems and Essays, Volume 4",
+      "text": "What impression have I made upon your fancy?” I felt a creeping of the flesh as Dupin asked me the question.",
+      "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 280
+        "chars": 108
       }
     },
     {
       "id": "poe.f.v0005",
       "kind": "verbatim",
-      "text": "Upon detaching the slab, a cavity appeared, containing a leaden box filled with various coins, a long scroll of names, several documents which appear to resemble newspapers, with other matters of intense interest to the antiquarian!",
-      "work": "Poems and Essays, Volume 4",
+      "text": "What, of itself, would be no evidence of identity, becomes through its corroborative position, proof most sure.",
+      "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
-        "work": "Poems and Essays, Volume 4"
+        "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 232
+        "chars": 111
       }
     },
     {
       "id": "poe.f.v0006",
       "kind": "verbatim",
-      "text": "Having, as I thought, sufficiently collected my ideas, I now, with great caution and deliberation, put my hands behind my back, and unfastened the large iron buckle which belonged to the waistband of my inexpressibles.",
+      "text": "Osborne’s seat, about a mile from Penstruthal, in North Wales; and at 7 minutes past 11, every thing being ready for departure, the balloon was set free, rising gently but steadily, in a direction nearly South; no use being made, for the first half hour, of either the screw or the rudder.",
       "work": "Tales, Volume 1",
       "lang": "en",
       "src": {
         "work": "Tales, Volume 1"
       },
       "quality": {
-        "chars": 218
+        "chars": 289
       }
     },
     {
       "id": "poe.f.v0007",
       "kind": "verbatim",
-      "text": "Should the kittens be found to suffer uneasiness in an equal degree with their mother, I must consider my theory in fault, but a failure to do so I should look upon as a strong confirmation of my idea.",
-      "work": "Tales, Volume 1",
+      "text": "That Von Kempelen and his immediate friends will reap a rich harvest, it would be folly to doubt for a moment.",
+      "work": "Tales, Volume 2",
       "lang": "en",
       "src": {
-        "work": "Tales, Volume 1"
-      },
-      "quality": {
-        "chars": 201
-      }
-    },
-    {
-      "id": "poe.f.v0008",
-      "kind": "verbatim",
-      "text": "Just as I placed the parchment in your hand, and as you were in the act of inspecting it, Wolf, the Newfoundland, entered, and leaped upon your shoulders.",
-      "work": "Tales, Volume 1",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 1"
-      },
-      "quality": {
-        "chars": 154
-      }
-    },
-    {
-      "id": "poe.f.v0009",
-      "kind": "verbatim",
-      "text": "One part was the hem of the frock, and it had been mended; the other piece was part of the skirt, not the hem.",
-      "work": "Tales, Volume 1",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 1"
+        "work": "Tales, Volume 2"
       },
       "quality": {
         "chars": 110
       }
     },
     {
-      "id": "poe.f.v0010",
+      "id": "poe.f.v0008",
       "kind": "verbatim",
-      "text": "Before proceeding farther, let us consider the supposed scene of the assassination, in the thicket at the Barrière du Roule.",
-      "work": "Tales, Volume 1",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 1"
-      },
-      "quality": {
-        "chars": 124
-      }
-    },
-    {
-      "id": "poe.f.v0011",
-      "kind": "verbatim",
-      "text": "Under the circumstances of large reward offered, and full pardon to any king’s evidence, it is not to be imagined, for a moment, that some member of a gang of low ruffians, or of any body of men, would not long ago have betrayed his accomplices.",
-      "work": "Tales, Volume 1",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 1"
-      },
-      "quality": {
-        "chars": 245
-      }
-    },
-    {
-      "id": "poe.f.v0012",
-      "kind": "verbatim",
-      "text": "The balloon was brought over the beach (the tide being out and the sand hard, smooth, and admirably adapted for a descent,) and the grapnel let go, which took firm hold at once.",
-      "work": "Tales, Volume 1",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 1"
-      },
-      "quality": {
-        "chars": 177
-      }
-    },
-    {
-      "id": "poe.f.v0013",
-      "kind": "verbatim",
-      "text": "I sent for you to-night,” he said, “not so much to administer to my bodily ailment, as to satisfy me concerning certain psychal impressions which, of late, have occasioned me much anxiety and surprise.",
+      "text": "Valdemar?” The answer now was immediate, but even less audible than before: “No pain—I am dying.” I did not think it advisable to disturb him farther just then, and nothing more was said or done until the arrival of Dr.",
       "work": "Tales, Volume 2",
       "lang": "en",
       "src": {
         "work": "Tales, Volume 2"
       },
       "quality": {
-        "chars": 201
+        "chars": 219
       }
     },
     {
-      "id": "poe.f.v0014",
-      "kind": "verbatim",
-      "text": "On quitting the invalid’s bed-side to hold conversation with myself, Doctors D—— and F—— had bidden him a final farewell.",
-      "work": "Tales, Volume 2",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 2"
-      },
-      "quality": {
-        "chars": 121
-      }
-    },
-    {
-      "id": "poe.f.v0015",
+      "id": "poe.f.v0009",
       "kind": "verbatim",
       "text": "I know not how it was—but, with the first glimpse of the building, a sense of insufferable gloom pervaded my spirit.",
       "work": "Tales, Volume 2",
@@ -537,72 +627,20 @@
       }
     },
     {
-      "id": "poe.f.v0016",
+      "id": "poe.f.v0010",
       "kind": "verbatim",
-      "text": "An irrepressible tremor gradually pervaded my frame; and, at length, there sat upon my very heart an incubus of utterly causeless alarm.",
+      "text": "It will be said, I am aware, that when we persist in acts because we feel we should not persist in them, our conduct is but a modification of that which ordinarily springs from the combativeness of phrenology.",
       "work": "Tales, Volume 2",
       "lang": "en",
       "src": {
         "work": "Tales, Volume 2"
       },
       "quality": {
-        "chars": 136
+        "chars": 209
       }
     },
     {
-      "id": "poe.f.v0017",
-      "kind": "verbatim",
-      "text": "The cycles in which the stars move are those best adapted for the evolution, without collision, of the greatest possible number of bodies.",
-      "work": "Tales, Volume 2",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 2"
-      },
-      "quality": {
-        "chars": 138
-      }
-    },
-    {
-      "id": "poe.f.v0018",
-      "kind": "verbatim",
-      "text": "I then slept—and, upon awaking, I must have returned upon my steps—thus supposing the circuit nearly double what it actually was.",
-      "work": "Tales, Volume 2",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 2"
-      },
-      "quality": {
-        "chars": 129
-      }
-    },
-    {
-      "id": "poe.f.v0019",
-      "kind": "verbatim",
-      "text": "I had scarcely stepped from my wooden bed of horror upon the stone floor of the prison, when the motion of the hellish machine ceased and I beheld it drawn up, by some invisible force, through the ceiling.",
-      "work": "Tales, Volume 2",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 2"
-      },
-      "quality": {
-        "chars": 205
-      }
-    },
-    {
-      "id": "poe.f.v0020",
-      "kind": "verbatim",
-      "text": "The flowers de luce, and the round sparks of dew That hung upon their azure leaves did shew Like twinkling stars that sparkle in the evening blue.",
-      "work": "Tales, Volume 2",
-      "lang": "en",
-      "src": {
-        "work": "Tales, Volume 2"
-      },
-      "quality": {
-        "chars": 146
-      }
-    },
-    {
-      "id": "poe.f.v0021",
+      "id": "poe.f.v0011",
       "kind": "verbatim",
       "text": "Grandeur in any of its moods, but especially in that of extent, startles, excites—and then fatigues, depresses.",
       "work": "Tales, Volume 2",
@@ -615,26 +653,300 @@
       }
     },
     {
-      "id": "poe.f.v0022",
+      "id": "poe.f.v0012",
       "kind": "verbatim",
-      "text": "Please to examine, at your leisure, the inner linings of the cuff of his left sleeve, and the several little packages which may be found in the somewhat capacious pockets of his embroidered morning wrapper.” While he spoke, so profound was the stillness that one might have heard a pin drop upon the floor.",
+      "text": "He hesitated but for an instant; then, with a slight sigh, drew in silence, and put himself upon his defence.",
       "work": "Tales, Volume 2",
       "lang": "en",
       "src": {
         "work": "Tales, Volume 2"
       },
       "quality": {
-        "chars": 306
+        "chars": 109
+      }
+    },
+    {
+      "id": "poe.f.v0013",
+      "kind": "verbatim",
+      "text": "I now imagined that he was suffering, like myself, the torments of thirst, and was about adopting this conclusion as the true one, when the idea occurred to me that I had as yet only examined his paws, and that there might possibly be a wound upon some portion of his body or head.",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "poe.f.v0014",
+      "kind": "verbatim",
+      "text": "As the brig was completely full of water, we went to this work despondently, and with but little expectation of being able to obtain anything.",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "poe.f.v0015",
+      "kind": "verbatim",
+      "text": "When I communicated this object to my companions, they uttered a feeble shout of joy, and we all proceeded forthwith to the forecastle.",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 135
+      }
+    },
+    {
+      "id": "poe.f.v0016",
+      "kind": "verbatim",
+      "text": "The place was one of singular wildness, and its aspect brought to my mind the descriptions given by travellers of those dreary regions marking the site of degraded Babylon.",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "poe.f.v0017",
+      "kind": "verbatim",
+      "text": "Alas, I feel how much even of incipient madness might have been discovered in the gorgeous and fantastic draperies, in the solemn carvings of Egypt, in the wild cornices and furniture, in the Bedlam patterns of the carpets of tufted gold!",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "poe.f.v0018",
+      "kind": "verbatim",
+      "text": "Presently there came a feeble gleam of sunshine, and the shadow of the leaves of the tree fell faintly but definitely upon the grass.",
+      "work": "Tales, Volume 3",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 3"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "poe.f.v0019",
+      "kind": "verbatim",
+      "text": "As for Snobbs—any person who should look at me would be instantly aware that my name wasn’t Snobbs.",
+      "work": "Poems and Essays, Volume 4",
+      "lang": "en",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "poe.f.v0020",
+      "kind": "verbatim",
+      "text": "No sooner had I entered the water than this bird took it into its head to fly away with the most indispensable portion of my apparel.",
+      "work": "Poems and Essays, Volume 4",
+      "lang": "en",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "poe.f.v0021",
+      "kind": "verbatim",
+      "text": "Upon detaching the slab, a cavity appeared, containing a leaden box filled with various coins, a long scroll of names, several documents which appear to resemble newspapers, with other matters of intense interest to the antiquarian!",
+      "work": "Poems and Essays, Volume 4",
+      "lang": "en",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "poe.f.v0022",
+      "kind": "verbatim",
+      "text": "Wyatt,” replied the captain, somewhat sternly, “you will capsize us if you do not sit quite still.",
+      "work": "Poems and Essays, Volume 4",
+      "lang": "en",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "poe.f.v0023",
+      "kind": "verbatim",
+      "text": "I cannot just now remember when or where I first made the acquaintance of that truly fine-looking fellow, Brevet Brigadier General John A.",
+      "work": "Poems and Essays, Volume 4",
+      "lang": "en",
+      "src": {
+        "work": "Poems and Essays, Volume 4"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "poe.f.v0024",
+      "kind": "verbatim",
+      "text": "What—what—what are you making that noise for?” demanded the king, turning furiously to the dwarf.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "poe.f.v0025",
+      "kind": "verbatim",
+      "text": "It was still brilliant with gas; but the rain fell fiercely, and there were few persons to be seen.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "poe.f.v0026",
+      "kind": "verbatim",
+      "text": "Carlyle, and as I knew he could not do it, I would not believe that it could be done by Toby Dammit.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "poe.f.v0027",
+      "kind": "verbatim",
+      "text": "Goodfellow’s), that his object in going to town on the morrow was to make a deposit of an unusually large sum of money in the “Farmers’ and Mechanics’ Bank,” and that, then and there, the said Mr.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "poe.f.v0028",
+      "kind": "verbatim",
+      "text": "By the time I had reached the “Ponnonner,” it struck me that I was as wide awake as a man need be.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "poe.f.v0029",
+      "kind": "verbatim",
+      "text": "I know, I know I should not see The season’s glorious show, Nor would its brightness shine for me; Nor its wild music flow; But if, around my place of sleep, The friends I love should come to weep, They might not haste to go.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "poe.f.v0030",
+      "kind": "verbatim",
+      "text": "Clad all in white, upon a violet bank I saw thee half reclining; while the moon Fell on the upturn’d faces of the roses, And on thine own, upturn’d—alas, in sorrow!",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "poe.f.v0031",
+      "kind": "verbatim",
+      "text": "With its Phantom chased for evermore, By a crowd that seize it not, Through a circle that ever returneth in To the self-same spot, And much of Madness, and more of Sin, And Horror the soul of the plot.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "poe.f.v0032",
+      "kind": "verbatim",
+      "text": "By all I hold most sacred and most solemn— By all my wishes now—my fears hereafter— By all I scorn on earth and hope in heaven— There is no deed I would more glory in, Than in thy cause to scoff at this same glory And trample it under foot.",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 240
+      }
+    },
+    {
+      "id": "poe.f.v0033",
+      "kind": "verbatim",
+      "text": "Think of all that is airy and fairy-like, and then of all that is hideous and unwieldy; think of his huge bulk, the Elephant!",
+      "work": "Tales, Volume 5",
+      "lang": "en",
+      "src": {
+        "work": "Tales, Volume 5"
+      },
+      "quality": {
+        "chars": 125
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:907284314bd8c05b614fbc94ae8bd2b7c2feef96c29a820295af7ec1ce3c24c8"
+  "checksum": "sha256:6ab9dfe495af3ee56d22ee428b50eddca1350f2fed1469022220f67c17ecea35"
 }

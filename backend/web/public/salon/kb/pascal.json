@@ -1,17 +1,17 @@
 {
   "authorId": "pascal",
   "kbVersion": "pascal@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.265Z",
+  "builtAt": "2026-10-03T21:23:12.581Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Pensées",
-      "sentences": 20
+      "sentences": 12
     },
     {
       "title": "The Provincial Letters",
-      "sentences": 20
+      "sentences": 12
     }
   ],
   "passages": [
@@ -26,7 +26,7 @@
     {
       "id": "pascal.p0002",
       "w": "Pensées",
-      "s": "Hence arise all the disputes of men, who taunt each other either with following the false impressions of childhood or with running rashly after the new.",
+      "s": "No, no; if they are greater than we, it is because their heads are higher; but their feet are as low as ours.",
       "src": {
         "work": "Pensées"
       }
@@ -34,7 +34,7 @@
     {
       "id": "pascal.p0003",
       "w": "Pensées",
-      "s": "There will immediately arise from the depth of his heart weariness, gloom, sadness, fretfulness, vexation, despair.",
+      "s": "As I know not whence I come, so I know not whither I go.",
       "src": {
         "work": "Pensées"
       }
@@ -42,7 +42,7 @@
     {
       "id": "pascal.p0004",
       "w": "Pensées",
-      "s": "We scarcely ever think of the present; and if we think of it, it is only to take light from it to arrange the future.",
+      "s": "Do not meditate on the passages about the Messiah,\" said the Jew to his son.",
       "src": {
         "work": "Pensées"
       }
@@ -50,7 +50,7 @@
     {
       "id": "pascal.p0005",
       "w": "Pensées",
-      "s": "I envy those whom I see living in the faith with such carelessness, and who make such a bad use of a gift of which it seems to me I would make such a different use.",
+      "s": "The learned honour them, not for popular reasons, but for secret reasons.",
       "src": {
         "work": "Pensées"
       }
@@ -58,7 +58,7 @@
     {
       "id": "pascal.p0006",
       "w": "Pensées",
-      "s": "But there are some who have not the power of thus preventing thought, and who think so much the more as they are forbidden.",
+      "s": "There must then be certainly an intolerable presumption in arguments of this sort, although they seem founded on an apparent humility, which is neither sincere nor reasonable, if it does not make us admit that, not knowing of ourselves what we are, we can only learn it from God.",
       "src": {
         "work": "Pensées"
       }
@@ -66,7 +66,7 @@
     {
       "id": "pascal.p0007",
       "w": "Pensées",
-      "s": "Thus opinion is the queen of the world, but might is its tyrant.",
+      "s": "Saint Augustine has distinctly said that strength would be taken away from the righteous.",
       "src": {
         "work": "Pensées"
       }
@@ -74,7 +74,7 @@
     {
       "id": "pascal.p0008",
       "w": "Pensées",
-      "s": "This is as instructive to me as my forgotten thought; for I strive only to know my nothingness.",
+      "s": "Thus our religion is foolish in respect to the effective cause, and wise in respect to the wisdom which prepares it.",
       "src": {
         "work": "Pensées"
       }
@@ -82,7 +82,7 @@
     {
       "id": "pascal.p0009",
       "w": "Pensées",
-      "s": "Let us see what the wisdom of God will do.",
+      "s": "For the visible blessings which they received from God were so great and so divine, that He indeed appeared able to give them those that are invisible, and a Messiah.",
       "src": {
         "work": "Pensées"
       }
@@ -90,7 +90,7 @@
     {
       "id": "pascal.p0010",
       "w": "Pensées",
-      "s": "In a word, the Self has two qualities: it is unjust in itself since it makes itself the centre of everything; it is inconvenient to others since it would enslave them; for each Self is the enemy, and would like to be the tyrant of all others.",
+      "s": "The very kings made submission to the cross.",
       "src": {
         "work": "Pensées"
       }
@@ -98,7 +98,7 @@
     {
       "id": "pascal.p0011",
       "w": "Pensées",
-      "s": "It is then rather that he was forced to say it, when the occasion presented itself, than that he said it, when the occasion presented itself, the one being of necessity, the other of chance.",
+      "s": "It would have been useless for our Lord Jesus Christ to come like a king, in order to shine forth in His kingdom of holiness.",
       "src": {
         "work": "Pensées"
       }
@@ -106,77 +106,13 @@
     {
       "id": "pascal.p0012",
       "w": "Pensées",
-      "s": "And, as it is alike necessary to man to know these two points, so is it alike merciful of God to have made us know them.",
+      "s": "But when it crowns the expectation, and those, who hoped that God would bless the remedies, see themselves healed without remedies ...",
       "src": {
         "work": "Pensées"
       }
     },
     {
       "id": "pascal.p0013",
-      "w": "Pensées",
-      "s": "That God did not accept the posterity of Abraham.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0014",
-      "w": "Pensées",
-      "s": "Secondly, that their discourses express very clearly the promise of temporal blessings, and that they say nevertheless that their discourses are obscure, and that their meaning will not be understood.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0015",
-      "w": "Pensées",
-      "s": "And in order that this agreement might not be taken for an effect of chance, it was necessary that this should be foretold.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0016",
-      "w": "Pensées",
-      "s": "Then I said, Lord, have I laboured in vain?",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0017",
-      "w": "Pensées",
-      "s": "In what way should the Messiah come, seeing that through Him the sceptre was to be eternally in Judah, and at His coming the sceptre was to be taken away from Judah?",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0018",
-      "w": "Pensées",
-      "s": "It is the same with prophecies, miracles, divination by dreams, sorceries, etc.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0019",
-      "w": "Pensées",
-      "s": "Nobody has ever suffered martyrdom for the miracles which he says he has seen; for the folly of men goes perhaps to the length of martyrdom, for those which the Turks believe by tradition, but not for those which they have seen.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0020",
-      "w": "Pensées",
-      "s": "The one is harmful outwardly; the other inwardly.",
-      "src": {
-        "work": "Pensées"
-      }
-    },
-    {
-      "id": "pascal.p0021",
       "w": "The Provincial Letters",
       "s": "Forty years elapsed after the publication of the Provincials before the Jesuits ventured on a reply.",
       "src": {
@@ -184,9 +120,73 @@
       }
     },
     {
+      "id": "pascal.p0014",
+      "w": "The Provincial Letters",
+      "s": "This is the letter referred to in the text.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0015",
+      "w": "The Provincial Letters",
+      "s": "Truth, we know, is so delicate, that if we make the slightest deviation from it, we fall into error; but this alleged error is so extremely fine-spun, that, if we diverge from it in the slightest degree, we fall back upon the truth.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0016",
+      "w": "The Provincial Letters",
+      "s": "Its office is not to cure one vice by means of another; it is not merely to induce men to practise the external duties of religion: it aims at a virtue higher than that propounded by Pharisees, or the greatest sages of Heathenism.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0017",
+      "w": "The Provincial Letters",
+      "s": "In the one case, it was simply a recognition of the general principle that “the laborer is worthy of his hire.” In the other, it was converting the minister into a shopman who was allowed to “barter” his sacred wares at the market price, or any price he pleased.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0018",
+      "w": "The Provincial Letters",
+      "s": "Est enim omnium eadem ratio.” Footnote 180: Quoted by Escobar, tr.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0019",
+      "w": "The Provincial Letters",
+      "s": "The letters which I have hitherto written are “merely a little sport before a real combat.” As yet I have been only playing with the foils, and “rather indicating the wounds that might be given you than inflicting any.” I have merely exposed your passages to the light, without making almost a reflection on them.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0020",
+      "w": "The Provincial Letters",
+      "s": "This is not the way in which I deal with your writings: I send them to all my friends: I wish everybody to see them.",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
+      "id": "pascal.p0021",
+      "w": "The Provincial Letters",
+      "s": "And are these “the mysteries revealed by the Lamb to his Society?” or are they not rather abominations suggested by the Dragon to those who take part with him?",
+      "src": {
+        "work": "The Provincial Letters"
+      }
+    },
+    {
       "id": "pascal.p0022",
       "w": "The Provincial Letters",
-      "s": "Had they been preserved, they might have thrown some further light on the opinions of Pascal regarding papal authority.",
+      "s": "Be sure, therefore, cost what it may, to set down all that dare to say a word against your practice, as heretics on the holy sacrament.",
       "src": {
         "work": "The Provincial Letters"
       }
@@ -194,7 +194,7 @@
     {
       "id": "pascal.p0023",
       "w": "The Provincial Letters",
-      "s": "How, then,” said I, “are the Jesuits united with them?",
+      "s": "But as I have been the occasion of their ill treatment, I consider myself bound in some sort to improve the occasion, and I shall take advantage of it in three particulars.",
       "src": {
         "work": "The Provincial Letters"
       }
@@ -202,135 +202,7 @@
     {
       "id": "pascal.p0024",
       "w": "The Provincial Letters",
-      "s": "Arnauld would merit the approval of the Sorbonne, and I the censure of the Academy.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0025",
-      "w": "The Provincial Letters",
-      "s": "With all my heart,” the Jesuit replied; “for I dearly love inquisitive people.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0026",
-      "w": "The Provincial Letters",
-      "s": "Should any person present himself before them, for example, fully resolved to make restitution of some ill-gotten gains, do not suppose that they would dissuade him from it.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0027",
-      "w": "The Provincial Letters",
-      "s": "SIR,—I mentioned, at the close of my last letter, that my good friend the Jesuit had promised to show me how the casuists reconcile the contrarieties between their opinions and the decisions of the popes, the councils, and the Scripture.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0028",
-      "w": "The Provincial Letters",
-      "s": "You understand it now, I hope?” “Perfectly well,” was my reply.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0029",
-      "w": "The Provincial Letters",
-      "s": "But I suppose that, to complete the charity, the charitable adviser would be bound in conscience to restore to the rich man the sum which he had made him lose?” “Not at all, sir,” returned the monk; “for he did not rob the man—he only advised the other to do it.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0030",
-      "w": "The Provincial Letters",
-      "s": "Nicole seriously undertakes his defence, and draws several distinctions between true and false devotion to the Virgin.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0031",
-      "w": "The Provincial Letters",
-      "s": "In short, examples of it are not wanting in the discourses of Jesus Christ himself.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0032",
-      "w": "The Provincial Letters",
-      "s": "What, then, are we to make of this, fathers?",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0033",
-      "w": "The Provincial Letters",
-      "s": "Thus you bring your opinions to their full growth very gradually.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0034",
-      "w": "The Provincial Letters",
-      "s": "You talk as if the question were, Whether that is a rare case?",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0035",
-      "w": "The Provincial Letters",
-      "s": "He did not then believe him to be actually a heretic!",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0036",
-      "w": "The Provincial Letters",
-      "s": "Arnauld escape falling under this charge on the subject of the eucharist, after having published a book expressly against your profanations of that sacrament?",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0037",
-      "w": "The Provincial Letters",
-      "s": "I was led away by the common report; but this apology, which would be too good for you, is not sufficient for me, who profess to advance nothing without certain proof.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0038",
-      "w": "The Provincial Letters",
-      "s": "Athanasius, regarding the writings of St.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0039",
-      "w": "The Provincial Letters",
-      "s": "He was one of the most learned bishops of his time in ecclesiastical matters.",
-      "src": {
-        "work": "The Provincial Letters"
-      }
-    },
-    {
-      "id": "pascal.p0040",
-      "w": "The Provincial Letters",
-      "s": "Why have you afforded matter of joy to his enemies?",
+      "s": "Prosper, of the fathers who followed them, of the councils, of St.",
       "src": {
         "work": "The Provincial Letters"
       }
@@ -353,148 +225,70 @@
     {
       "id": "pascal.f.v0002",
       "kind": "verbatim",
-      "text": "Hence arise all the disputes of men, who taunt each other either with following the false impressions of childhood or with running rashly after the new.",
+      "text": "No, no; if they are greater than we, it is because their heads are higher; but their feet are as low as ours.",
       "work": "Pensées",
       "lang": "en",
       "src": {
         "work": "Pensées"
       },
       "quality": {
-        "chars": 152
+        "chars": 109
       }
     },
     {
       "id": "pascal.f.v0003",
       "kind": "verbatim",
-      "text": "There will immediately arise from the depth of his heart weariness, gloom, sadness, fretfulness, vexation, despair.",
+      "text": "Do not meditate on the passages about the Messiah,\" said the Jew to his son.",
       "work": "Pensées",
       "lang": "en",
       "src": {
         "work": "Pensées"
       },
       "quality": {
-        "chars": 115
+        "chars": 76
       }
     },
     {
       "id": "pascal.f.v0004",
       "kind": "verbatim",
-      "text": "We scarcely ever think of the present; and if we think of it, it is only to take light from it to arrange the future.",
+      "text": "There must then be certainly an intolerable presumption in arguments of this sort, although they seem founded on an apparent humility, which is neither sincere nor reasonable, if it does not make us admit that, not knowing of ourselves what we are, we can only learn it from God.",
       "work": "Pensées",
       "lang": "en",
       "src": {
         "work": "Pensées"
       },
       "quality": {
-        "chars": 117
+        "chars": 279
       }
     },
     {
       "id": "pascal.f.v0005",
       "kind": "verbatim",
-      "text": "I envy those whom I see living in the faith with such carelessness, and who make such a bad use of a gift of which it seems to me I would make such a different use.",
+      "text": "Saint Augustine has distinctly said that strength would be taken away from the righteous.",
       "work": "Pensées",
       "lang": "en",
       "src": {
         "work": "Pensées"
       },
       "quality": {
-        "chars": 164
+        "chars": 89
       }
     },
     {
       "id": "pascal.f.v0006",
       "kind": "verbatim",
-      "text": "This is as instructive to me as my forgotten thought; for I strive only to know my nothingness.",
+      "text": "It would have been useless for our Lord Jesus Christ to come like a king, in order to shine forth in His kingdom of holiness.",
       "work": "Pensées",
       "lang": "en",
       "src": {
         "work": "Pensées"
       },
       "quality": {
-        "chars": 95
+        "chars": 125
       }
     },
     {
       "id": "pascal.f.v0007",
-      "kind": "verbatim",
-      "text": "In a word, the Self has two qualities: it is unjust in itself since it makes itself the centre of everything; it is inconvenient to others since it would enslave them; for each Self is the enemy, and would like to be the tyrant of all others.",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 242
-      }
-    },
-    {
-      "id": "pascal.f.v0008",
-      "kind": "verbatim",
-      "text": "It is then rather that he was forced to say it, when the occasion presented itself, than that he said it, when the occasion presented itself, the one being of necessity, the other of chance.",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 190
-      }
-    },
-    {
-      "id": "pascal.f.v0009",
-      "kind": "verbatim",
-      "text": "Secondly, that their discourses express very clearly the promise of temporal blessings, and that they say nevertheless that their discourses are obscure, and that their meaning will not be understood.",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 200
-      }
-    },
-    {
-      "id": "pascal.f.v0010",
-      "kind": "verbatim",
-      "text": "In what way should the Messiah come, seeing that through Him the sceptre was to be eternally in Judah, and at His coming the sceptre was to be taken away from Judah?",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 165
-      }
-    },
-    {
-      "id": "pascal.f.v0011",
-      "kind": "verbatim",
-      "text": "It is the same with prophecies, miracles, divination by dreams, sorceries, etc.",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 79
-      }
-    },
-    {
-      "id": "pascal.f.v0012",
-      "kind": "verbatim",
-      "text": "Nobody has ever suffered martyrdom for the miracles which he says he has seen; for the folly of men goes perhaps to the length of martyrdom, for those which the Turks believe by tradition, but not for those which they have seen.",
-      "work": "Pensées",
-      "lang": "en",
-      "src": {
-        "work": "Pensées"
-      },
-      "quality": {
-        "chars": 228
-      }
-    },
-    {
-      "id": "pascal.f.v0013",
       "kind": "verbatim",
       "text": "Forty years elapsed after the publication of the Provincials before the Jesuits ventured on a reply.",
       "work": "The Provincial Letters",
@@ -507,61 +301,35 @@
       }
     },
     {
-      "id": "pascal.f.v0014",
+      "id": "pascal.f.v0008",
       "kind": "verbatim",
-      "text": "Had they been preserved, they might have thrown some further light on the opinions of Pascal regarding papal authority.",
+      "text": "Truth, we know, is so delicate, that if we make the slightest deviation from it, we fall into error; but this alleged error is so extremely fine-spun, that, if we diverge from it in the slightest degree, we fall back upon the truth.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
         "work": "The Provincial Letters"
       },
       "quality": {
-        "chars": 119
+        "chars": 232
       }
     },
     {
-      "id": "pascal.f.v0015",
+      "id": "pascal.f.v0009",
       "kind": "verbatim",
-      "text": "Arnauld would merit the approval of the Sorbonne, and I the censure of the Academy.",
+      "text": "Its office is not to cure one vice by means of another; it is not merely to induce men to practise the external duties of religion: it aims at a virtue higher than that propounded by Pharisees, or the greatest sages of Heathenism.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
         "work": "The Provincial Letters"
       },
       "quality": {
-        "chars": 83
+        "chars": 230
       }
     },
     {
-      "id": "pascal.f.v0016",
+      "id": "pascal.f.v0010",
       "kind": "verbatim",
-      "text": "Should any person present himself before them, for example, fully resolved to make restitution of some ill-gotten gains, do not suppose that they would dissuade him from it.",
-      "work": "The Provincial Letters",
-      "lang": "en",
-      "src": {
-        "work": "The Provincial Letters"
-      },
-      "quality": {
-        "chars": 173
-      }
-    },
-    {
-      "id": "pascal.f.v0017",
-      "kind": "verbatim",
-      "text": "SIR,—I mentioned, at the close of my last letter, that my good friend the Jesuit had promised to show me how the casuists reconcile the contrarieties between their opinions and the decisions of the popes, the councils, and the Scripture.",
-      "work": "The Provincial Letters",
-      "lang": "en",
-      "src": {
-        "work": "The Provincial Letters"
-      },
-      "quality": {
-        "chars": 237
-      }
-    },
-    {
-      "id": "pascal.f.v0018",
-      "kind": "verbatim",
-      "text": "But I suppose that, to complete the charity, the charitable adviser would be bound in conscience to restore to the rich man the sum which he had made him lose?” “Not at all, sir,” returned the monk; “for he did not rob the man—he only advised the other to do it.",
+      "text": "In the one case, it was simply a recognition of the general principle that “the laborer is worthy of his hire.” In the other, it was converting the minister into a shopman who was allowed to “barter” his sacred wares at the market price, or any price he pleased.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
@@ -572,65 +340,53 @@
       }
     },
     {
-      "id": "pascal.f.v0019",
+      "id": "pascal.f.v0011",
       "kind": "verbatim",
-      "text": "Nicole seriously undertakes his defence, and draws several distinctions between true and false devotion to the Virgin.",
+      "text": "The letters which I have hitherto written are “merely a little sport before a real combat.” As yet I have been only playing with the foils, and “rather indicating the wounds that might be given you than inflicting any.” I have merely exposed your passages to the light, without making almost a reflection on them.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
         "work": "The Provincial Letters"
       },
       "quality": {
-        "chars": 118
+        "chars": 313
       }
     },
     {
-      "id": "pascal.f.v0020",
+      "id": "pascal.f.v0012",
       "kind": "verbatim",
-      "text": "In short, examples of it are not wanting in the discourses of Jesus Christ himself.",
+      "text": "This is not the way in which I deal with your writings: I send them to all my friends: I wish everybody to see them.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
         "work": "The Provincial Letters"
       },
       "quality": {
-        "chars": 83
+        "chars": 116
       }
     },
     {
-      "id": "pascal.f.v0021",
+      "id": "pascal.f.v0013",
       "kind": "verbatim",
-      "text": "Arnauld escape falling under this charge on the subject of the eucharist, after having published a book expressly against your profanations of that sacrament?",
+      "text": "Be sure, therefore, cost what it may, to set down all that dare to say a word against your practice, as heretics on the holy sacrament.",
       "work": "The Provincial Letters",
       "lang": "en",
       "src": {
         "work": "The Provincial Letters"
       },
       "quality": {
-        "chars": 158
-      }
-    },
-    {
-      "id": "pascal.f.v0022",
-      "kind": "verbatim",
-      "text": "I was led away by the common report; but this apology, which would be too good for you, is not sufficient for me, who profess to advance nothing without certain proof.",
-      "work": "The Provincial Letters",
-      "lang": "en",
-      "src": {
-        "work": "The Provincial Letters"
-      },
-      "quality": {
-        "chars": 167
+        "chars": 135
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 24,
+    "formulas": 13,
+    "verbatim": 13,
     "patterns": 0
   },
-  "checksum": "sha256:cd002dd597af8bf99daa9d4bb73b58e95960a671ae8ecd7e982513114d7fe6ee"
+  "checksum": "sha256:cb2707bad84130ef8fd40b208462a576158bf7727a9acba89ba91839a6310653"
 }

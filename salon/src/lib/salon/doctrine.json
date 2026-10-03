@@ -1,0 +1,528 @@
+{
+  "voltaire": {
+    "concepts": [
+      "ironie",
+      "tolérance",
+      "optimisme",
+      "providence",
+      "liberté de penser",
+      "justice"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "la justice ne légitime aucun bien payé du malheur d’autrui",
+          "en": "justice legitimises no good paid for by the misery of others",
+          "anchors": [
+            {
+              "work": "Candide, ou l'optimisme",
+              "startsWith": "C’est à ce prix que vous mangez du sucre en Euro"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur parfait est une fable ; il se cultive comme un jardin, loin des systèmes et des massacres",
+          "en": "perfect happiness is a fable; it is cultivated like a garden, far from systems and massacres",
+          "anchors": [
+            {
+              "work": "Candide, ou l'optimisme",
+              "startsWith": "Enfin une belle prairie entrecoupée de ruisseaux"
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "la liberté n’est pas l’accord de tous : c’est le droit de se contredire sans se haïr",
+          "en": "liberty is not everyone’s agreement: it is the right to contradict one another without hatred",
+          "anchors": [
+            {
+              "work": "Voltaire's Philosophical Dictionary",
+              "startsWith": "But from the manner in which men are made, it wo"
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la vérité ne s’assène pas : qui l’affirme mille fois sans preuve ne la détient pas",
+          "en": "truth is not asserted by force: whoever affirms it a thousand times without proof does not hold it",
+          "anchors": [
+            {
+              "work": "Voltaire's Philosophical Dictionary",
+              "startsWith": "You have asserted it a thousand times; but you h"
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "le pouvoir ne se légitime pas par le massacre bien administré : ce sont les barbares sédentaires qu’il faut d’abord juger",
+          "en": "power is not legitimised by well-managed massacre: the sedentary barbarians are judged first",
+          "anchors": [
+            {
+              "work": "Micromégas",
+              "startsWith": "D'ailleurs, ce n'est pas eux qu'il faut punir, c"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu n’est pas une cérémonie : les baisers de paix n’ont jamais corrigé un cœur",
+          "en": "virtue is not a ceremony: kisses of peace have never corrected a heart",
+          "anchors": [
+            {
+              "work": "Voltaire's Philosophical Dictionary",
+              "startsWith": "The sect of Pietists, wishing to imitate the ear"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Candide, ou l'optimisme": {
+        "summary": {
+          "fr": "Un conte où l’optimisme est mis à l’épreuve du malheur.",
+          "en": "A tale in which optimism is tried by misfortune."
+        },
+        "domains": [
+          "bonheur",
+          "justice"
+        ]
+      },
+      "Micromégas": {
+        "summary": {
+          "fr": "Le géant venu d’ailleurs juge nos petitesses et nos massacres.",
+          "en": "The giant from elsewhere judges our smallness and our massacres."
+        },
+        "domains": [
+          "pouvoir",
+          "verite"
+        ]
+      },
+      "Voltaire's Philosophical Dictionary": {
+        "summary": {
+          "fr": "Des articles brefs pour défaire les dogmes par l’ironie.",
+          "en": "Brief entries undoing dogmas through irony."
+        },
+        "domains": [
+          "verite",
+          "vertu"
+        ]
+      }
+    }
+  },
+  "rousseau": {
+    "concepts": [
+      "volonté générale",
+      "liberté",
+      "égalité",
+      "pitié",
+      "inégalité",
+      "contrat social"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "la justice ne se règle pas sur la force : le droit naturel ne se déduit pas d’un fait",
+          "en": "justice is not ruled by force: natural right is not deduced from a fact",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "Hobbes very plainly saw the flaws in all the mod"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur s’est perdu avec les comparaisons : vanité et envie sont les ferments de l’inégalité",
+          "en": "happiness was lost with comparisons: vanity and envy are the leaven of inequality",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "From these first preferences there proceeded on "
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "la liberté s’applique aux institutions par la volonté générale",
+          "en": "freedom applies itself to institutions through the general will",
+          "anchors": [
+            {
+              "work": "The Social Contract",
+              "startsWith": "The General Will, then, is the application of hu"
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la parole est l’organe de la vérité ; prostituée, elle ne distingue plus l’homme de la bête",
+          "en": "speech is the organ of truth; prostituted, it no longer distinguishes man from beast",
+          "anchors": [
+            {
+              "work": "Julie, or the New Heloise",
+              "startsWith": "Shall the organ of truth, the most worthy organ "
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "la puissance n’est pas la légitimité : les peuples les plus pauvres ont résisté aux plus puissants des monarques",
+          "en": "might is not legitimacy: the poorest peoples resisted the most powerful monarchs",
+          "anchors": [
+            {
+              "work": "The Social Contract",
+              "startsWith": "The monarchy of Cyrus was conquered by thirty th"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu précède les maximes : c’est le sentiment naturel qui retient la main",
+          "en": "virtue precedes maxims: a natural sentiment stays the hand",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "It is in a word, in this natural sentiment, rath"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "The Social Contract": {
+        "summary": {
+          "fr": "La liberté appliquée aux institutions : volonté générale et loi.",
+          "en": "Freedom applied to institutions: general will and law."
+        },
+        "domains": [
+          "liberte",
+          "pouvoir"
+        ]
+      },
+      "Discourse on Inequality": {
+        "summary": {
+          "fr": "Comment l’inégalité naît des comparaisons et de la propriété.",
+          "en": "How inequality is born of comparisons and property."
+        },
+        "domains": [
+          "bonheur",
+          "justice",
+          "vertu"
+        ]
+      },
+      "Julie, or the New Heloise": {
+        "summary": {
+          "fr": "La passion éprouvée par le devoir et par la parole.",
+          "en": "Passion tried by duty and by speech."
+        },
+        "domains": [
+          "verite"
+        ]
+      }
+    }
+  },
+  "montaigne": {
+    "concepts": [
+      "essai",
+      "jugement",
+      "coutume",
+      "amitié",
+      "prudence",
+      "vanité"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "le jugement ne doit pas être une clameur : la foule qui condamne un nom ne dit pas le droit",
+          "en": "judgement must not be a clamour: the crowd condemning a name does not say what is right",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "They had no sooner heard the name of one senator"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur se tient loin des grandes espérances : dans les amitiés ordinaires, on avance bride en main",
+          "en": "happiness keeps away from great hopes: in ordinary friendships, one walks with a bridle in hand",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "In those other ordinary friendships, you are to "
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "la liberté est dans le jugement qu’on garde : même devant les puissants, on peut questionner",
+          "en": "liberty lies in the judgement one keeps: even before the powerful, one may question",
+          "anchors": [
+            {
+              "work": "Journal of Travels in Italy",
+              "startsWith": "He met the Pope (Gregory XIII.), the Grand Duke "
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la vérité demande des matériaux : on ne bâtit pas un livre sans savoir ni art",
+          "en": "truth requires materials: no book is built without learning and art",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "Is it not to build a wall without stone or brick"
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "les titres ne pèsent rien devant la douleur : le pouvoir sans usage n’est qu’un nom",
+          "en": "titles weigh nothing before pain: power without use is but a name",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "At the first twitch of the gout it signifies muc"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu se reconnaît à l’épreuve : le plus digne est le plus hasardeux",
+          "en": "virtue is known by the test: the worthiest is the most hazardous",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "Even so in virtue itself, of two like effects, w"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Essais": {
+        "summary": {
+          "fr": "L’essai de soi-même : jugement, coutume, amitié.",
+          "en": "Trying oneself: judgement, custom, friendship."
+        },
+        "domains": [
+          "vertu",
+          "justice",
+          "verite"
+        ]
+      },
+      "Journal of Travels in Italy": {
+        "summary": {
+          "fr": "Le regard qui s’éprouve au-dehors, entre les puissants.",
+          "en": "The gaze trying itself abroad, among the powerful."
+        },
+        "domains": [
+          "liberte",
+          "pouvoir"
+        ]
+      }
+    }
+  },
+  "kant": {
+    "concepts": [
+      "devoir",
+      "autonomie",
+      "hétéronomie",
+      "impératif catégorique",
+      "maxime",
+      "bonheur"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "une loi n’oblige que si sa maxime peut valoir comme loi universelle ; traiter l’autre seulement comme un moyen contredit cette loi",
+          "en": "a law binds only if its maxim can hold as a universal law; treating another merely as a means contradicts it",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "For then it is clear that he who transgresses th"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur est un précepte empiriquement conditionné ; il ne peut fonder la morale",
+          "en": "happiness is an empirically conditioned precept; it cannot ground morality",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "In a word, nature would have taken care that rea"
+            },
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "Now if this as a pleasant sensation were to be d"
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "être libre, c’est que la volonté se donne à elle-même sa loi ; le contraire est l’hétéronomie",
+          "en": "to be free is for the will to give itself its own law; the opposite is heteronomy",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "All men attribute to themselves freedom of will."
+            },
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "The positive concept of freedom furnishes this t"
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la vérité ne s’établit pas par preuves empiriques, mais par déduction depuis des sources a priori",
+          "en": "truth is not established by empirical proofs, but by deduction from a priori sources",
+          "anchors": [
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "But this expedient of adducing empirical proofs,"
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "la contrainte n’oblige que rattachée par principe à une législation morale ; punir relève de la loi, non du pouvoir",
+          "en": "constraint binds only when attached in principle to a moral legislation; punishment belongs to law, not to power",
+          "anchors": [
+            {
+              "work": "The Critique of Practical Reason",
+              "startsWith": "Punishment, then, is a physical evil, which, tho"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la valeur morale tient à la disposition et au devoir, non à l’inclination : c’est ce qui fait sa dignité",
+          "en": "moral worth lies in disposition and duty, not in inclination: that is what makes its dignity",
+          "anchors": [
+            {
+              "work": "Fundamental Principles of the Metaphysic of Morals",
+              "startsWith": "This estimation therefore shows that the worth o"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Fundamental Principles of the Metaphysic of Morals": {
+        "summary": {
+          "fr": "Fonde la morale sur le devoir et l’impératif catégorique.",
+          "en": "Grounds morality in duty and the categorical imperative."
+        },
+        "domains": [
+          "justice",
+          "bonheur",
+          "liberte",
+          "vertu"
+        ]
+      },
+      "The Critique of Practical Reason": {
+        "summary": {
+          "fr": "La loi morale, le souverain bien, et la place du bonheur.",
+          "en": "The moral law, the highest good, and the place of happiness."
+        },
+        "domains": [
+          "bonheur",
+          "pouvoir",
+          "verite"
+        ]
+      },
+      "The Metaphysical Elements of Ethics": {
+        "summary": {
+          "fr": "La doctrine des devoirs et la liberté intérieure.",
+          "en": "The doctrine of duties and inner freedom."
+        },
+        "domains": [
+          "vertu"
+        ]
+      }
+    }
+  },
+  "epicure": {
+    "concepts": [
+      "plaisir",
+      "trouble",
+      "ataraxie",
+      "désir",
+      "choix",
+      "tranquillité"
+    ],
+    "theses": {
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur, c’est l’absence de trouble : on n’y ajoute rien, on en retire les craintes",
+          "en": "happiness is the absence of trouble: nothing is added to it, its fears are removed",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "Let us disdain those men who do not know, by mea"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu est la droite raison appliquée au choix et à l’évitement",
+          "en": "virtue is right reason applied to choice and avoidance",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "The ethical contains the discussions on Choice a"
+            }
+          ]
+        }
+      },
+      "justice": {
+        "*": {
+          "fr": "les lois sont bonnes quand elles apaisent, mauvaises quand elles manquent : la justice est un pacte d’intérêt commun",
+          "en": "laws are good when they appease, bad when they fail: justice is a pact of common interest",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "One of which is, when the laws are bad, both as "
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Letter to Herodotus (from Diogenes Laertius, Book X)": {
+        "summary": {
+          "fr": "Physique et éthique d’Épicure transmises par Diogène.",
+          "en": "Epicurus’ physics and ethics as transmitted by Diogenes."
+        },
+        "domains": [
+          "bonheur",
+          "vertu",
+          "justice"
+        ]
+      }
+    }
+  }
+}

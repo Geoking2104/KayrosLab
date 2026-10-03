@@ -13,15 +13,17 @@
   /* Mémoire livrée (passages des œuvres) + fil de discussion conservé entre les
    * tours. Le moteur déterministe (salon-engine.js) cadre la question et ancre
    * chaque réplique dans la mémoire du convive. */
-  var CORPUS = null, CORPUS_READY = null, threadHistory = [], selfByAuthor = {};
+  var CORPUS = null, CORPUS_READY = null, threadHistory = [], selfByAuthor = {}, DOCTRINE = {};
   function loadCorpus() {
     if (CORPUS_READY) return CORPUS_READY;
-    CORPUS_READY = fetch("/salon/corpus.json", { cache: "force-cache" })
-      .then(function (r) { return r.ok ? r.json() : {}; })
-      .then(function (j) { CORPUS = j || {}; return CORPUS; })
-      .catch(function () { CORPUS = {}; return CORPUS; });
+    CORPUS_READY = Promise.all([
+      fetch("/salon/corpus.json?v=20261004a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+      fetch("/salon/doctrine.json?v=20261004a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+    ]).then(function (a) { CORPUS = a[0] || {}; DOCTRINE = a[1] || {}; return CORPUS; });
     return CORPUS_READY;
   }
+  /* Enrichit un auteur de sa doctrine (thèses, concepts, résumés d'œuvres). */
+  function withDoctrine(author) { return author && DOCTRINE[author.id] ? Object.assign({}, author, { doctrine: DOCTRINE[author.id] }) : author; }
   function engine() { return (typeof window !== "undefined" && window.SalonEngine) || null; }
   function currentLang() { return (typeof locale !== "undefined" && locale === "en") ? "en" : "fr"; }
   function actOf(seat) { return (seat && seat.role === "objecteur") ? "objection" : "reponse"; }
@@ -211,6 +213,7 @@
     return t.trim();
   }
   function localVoice(author, question, seat) {
+    author = withDoctrine(author);
     try {
       var s = seam(author, question, seat);
       if (!s) return { text: "", prise: "", proof: proofFromAuthor(author) };
@@ -221,6 +224,7 @@
     }
   }
   function askVoice(author, question, seat) {
+    author = withDoctrine(author);
     var role = (seat && seat.role) || "invite";
     return loadCorpus().then(function () {
       var s = seam(author, question, seat);
@@ -239,6 +243,7 @@
           var fp = E.floorPrompt({
             author: author, question: question, scope: s.sc, passages: s.passages,
             history: threadHistory, self: selfByAuthor[author.id] || [], role: (seat && seat.role) || "invite", lang: currentLang(),
+            corpus: (CORPUS && CORPUS[author.id]) || [],
           });
           system = fp.system; user = fp.user;
         } catch (e) { E = null; }
@@ -250,7 +255,7 @@
       showThink("Cadrage, puis reponse — " + authorNameSafe(author));
       logStep(L("Le salon reflechit avec ", "The salon is thinking with ") + authorNameSafe(author), true);
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-      var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 7000);
+      var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 15000);
       return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: user }), signal: ctrl ? ctrl.signal : undefined })
         .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
         .then(function (r) {

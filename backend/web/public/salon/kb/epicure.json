@@ -1,13 +1,13 @@
 {
   "authorId": "epicure",
   "kbVersion": "epicure@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.236Z",
+  "builtAt": "2026-10-03T21:23:12.481Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "sentences": 20
+      "sentences": 24
     }
   ],
   "passages": [
@@ -22,7 +22,7 @@
     {
       "id": "epicure.p0002",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "From thence he went with Agesilaus into Greece, as Agesilaus was summoned to take part in the war against the Thebans.",
+      "s": "But Socrates was not the only person who met with this treatment at the hands of the Athenians, but many other men received the same: for, as Heraclides says, they fined Homer fifty drachmas as a madman, and they said that Tyrtæus was out of his wits.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -30,7 +30,7 @@
     {
       "id": "epicure.p0003",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "Ptolemy Soter, it is said, received him with great honour; and when he had made himself master of Megara, he gave him money, and invited him to sail with him to Egypt.",
+      "s": "And indeed he was very near being brought before the Areopagus if Demetrius of Phalereus had not saved him.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -38,7 +38,7 @@
     {
       "id": "epicure.p0004",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And some say that he was also attached to Phædrus, and that the following epigrams which he wrote upon them are evidences of the love he felt for them:— My Aster, you’re gazing on the stars (ἀστέρες), Would that I were the heavens, that so I might Gaze in return with many eyes on thee.",
+      "s": "I hear that information has been laid before you concerning us.” … And the tradition is, that a man of the name of Æschylus, who was one of the opposite party in the state, was in the habit of making these false charges.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -46,7 +46,7 @@
     {
       "id": "epicure.p0005",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And the one he says is the motion of the soul, but the other is the motion of the universe and of the planets.",
+      "s": "And dialectics is the art of conversing, by means of which we either overturn or establish the proposition contended for, by means of the questions and answers which are put in the mouths of the parties conversing.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -54,7 +54,7 @@
     {
       "id": "epicure.p0006",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "Of contraries then, there are some which are so, as what is good is contrary to what is evil; others, as one evil is contrary to another; and others again, as neutral things are contrary to other things of a neutral character.",
+      "s": "And Plato considers that God is incorporeal just as the soul is, and that it is owing to that that he is not affected by any destruction or external circumstances.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -62,7 +62,7 @@
     {
       "id": "epicure.p0007",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And we have written the following epigram on him:— O wise Arcesilaus, why didst thou drink So vast a quantity of unmixed wine, As to lose all your senses, and then die?",
+      "s": "One of which is, when the laws are bad, both as concerns strangers, and the citizens; another, when the citizens do not obey the laws that are established; and the third is when there is actually no law at all.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -70,7 +70,7 @@
     {
       "id": "epicure.p0008",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "That, therefore, he may come under his definition, he has added the word capacity.",
+      "s": "He also studied dialectics, and the discussions of the Eretrian school; on which account Ariston said of him:— First Plato comes, and Pyrrho last, And in the middle Diodorus.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -78,7 +78,7 @@
     {
       "id": "epicure.p0009",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And all this was done; and while the citizens were all attending his funeral and extolling his character, the serpent hearing the noise, crept out of his clothes and threw the multitude into confusion.",
+      "s": "It is said also that he was offended with the king, because of the result of the conspiracy of Callisthenes against Alexander; and that the king, for the sake of annoying him, promoted Anaximenes to honour, and sent presents to Xenocrates.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -86,7 +86,7 @@
     {
       "id": "epicure.p0010",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "He had also a brother named Pasicles, a pupil of Euclides.",
+      "s": "And the rest will do well, if they ratify this arrangement of mine.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -94,7 +94,7 @@
     {
       "id": "epicure.p0011",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "For we must not take this impression to resemble that made by a seal, since it is impossible to conceive that there should be many impressions made at the same time on the same thing.",
+      "s": "But if some fancy pleasure their best aim, One of the Muses ’tis who has convinc’d them.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -102,7 +102,7 @@
     {
       "id": "epicure.p0012",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "Sorrow is a grief arising from deliberate thought, which endures for some time, and gradually increases.",
+      "s": "Not but what Echecles was also a pupil of Theombrotus; and Menedemus, of whom we shall speak hereafter, was his pupil.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -110,7 +110,7 @@
     {
       "id": "epicure.p0013",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And the causes of the passions they explain to be the motions and conversions which take place in connection with this spirit or soul.",
+      "s": "Irrefutability they define to be a power in an argument, which prevents one from being drawn from it to its opposite.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -118,7 +118,7 @@
     {
       "id": "epicure.p0014",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "The people of Metapontum used to call his house the temple of Ceres; and the street leading to it they called the street of the Muses, as we are told by Phavorinus in his Universal History.",
+      "s": "The bad are the contraries, folly, injustice, and the like.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -126,7 +126,7 @@
     {
       "id": "epicure.p0015",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "And Timon has not let even Empedocles escape, but satirises him in this style, saying:— And then Empedocles, the honeyed speaker Of soft forensic speeches; he did take As many offices as he was able, Creating magistrates who wanted helpers.",
+      "s": "Now an element is that out of which at first all things which are are produced, and into which all things are resolved at last.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -134,7 +134,7 @@
     {
       "id": "epicure.p0016",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "When Empedocles said to him that the wise man was undiscoverable, he replied, “Very likely; for it takes a wise man to discover a wise man.” And Sotion says, that he was the first person who asserted that everything is incomprehensible.",
+      "s": "Chrysippus was the son of Apollonius, and a native of either Soli or Tarsus, as Alexander tells us in his Successions; and he was a pupil of Cleanthes.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -142,7 +142,7 @@
     {
       "id": "epicure.p0017",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "He also adds that Pyrrho was not the original inventor of Scepticism, and that he had no particular dogma of any kind; and that, consequently, it can only be called Pyrrhonism from some similarity.",
+      "s": "Another of his theories was, that the air around the earth was immoveable, and pregnant with disease, and that everything in it was mortal; but that the upper air was in perpetual motion, and pure and salubrious; and that everything in that was immortal, and on that account divine.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -150,7 +150,7 @@
     {
       "id": "epicure.p0018",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "He died when he was nearly ninety years old, as Antigonus tells us; and Sotion, in his eleventh book, makes the same statement.",
+      "s": "How then,” adds Timæus, “could he have leaped into a crater, of which, though they were in the neighbourhood, he had never made any mention?",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -158,7 +158,7 @@
     {
       "id": "epicure.p0019",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "From low to high, when even the object in motion, going from us to the places situated above our heads, meets ten thousand times with the feet of those who are above us; and from high to low, when in the same way it advances towards the heads of those who are below us.",
+      "s": "The second a lyric poet, who wrote a panegyrical hymn on the Twelve Gods.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -166,7 +166,39 @@
     {
       "id": "epicure.p0020",
       "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "s": "The wise man may raise statues if it suits his inclination, if it does not it does not signify.",
+      "s": "Diogenes was a native of Apollonia, and the son of Apollothemis, a natural philosopher of high reputation; and he was, as Antisthenes reports, a pupil of Anaximenes.",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      }
+    },
+    {
+      "id": "epicure.p0021",
+      "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "s": "Now, there are none which are apprehended by the senses, for everything which is apprehended by the senses is general, while a sign is something particular.",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      }
+    },
+    {
+      "id": "epicure.p0022",
+      "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "s": "The ethical contains the discussions on Choice and Avoidance; and is comprised in the books about lives, and in some of the Letters, and in the treatise on the Chief Good.",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      }
+    },
+    {
+      "id": "epicure.p0023",
+      "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "s": "Let us disdain those men who do not know, by means of the different images which result from distance, how to give an account of the different appearances of things; who, in a word, are ignorant what are the objects which can excite any trouble in us.",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      }
+    },
+    {
+      "id": "epicure.p0024",
+      "w": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "s": "For they do not admit that to be pleasure which exists as a condition, but place it wholly in motion.",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       }
@@ -176,7 +208,59 @@
     {
       "id": "epicure.f.v0001",
       "kind": "verbatim",
-      "text": "From thence he went with Agesilaus into Greece, as Agesilaus was summoned to take part in the war against the Thebans.",
+      "text": "I hear that information has been laid before you concerning us.” … And the tradition is, that a man of the name of Æschylus, who was one of the opposite party in the state, was in the habit of making these false charges.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "epicure.f.v0002",
+      "kind": "verbatim",
+      "text": "One of which is, when the laws are bad, both as concerns strangers, and the citizens; another, when the citizens do not obey the laws that are established; and the third is when there is actually no law at all.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "epicure.f.v0003",
+      "kind": "verbatim",
+      "text": "He also studied dialectics, and the discussions of the Eretrian school; on which account Ariston said of him:— First Plato comes, and Pyrrho last, And in the middle Diodorus.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "epicure.f.v0004",
+      "kind": "verbatim",
+      "text": "It is said also that he was offended with the king, because of the result of the conspiracy of Callisthenes against Alexander; and that the king, for the sake of annoying him, promoted Anaximenes to honour, and sent presents to Xenocrates.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "epicure.f.v0005",
+      "kind": "verbatim",
+      "text": "Not but what Echecles was also a pupil of Theombrotus; and Menedemus, of whom we shall speak hereafter, was his pupil.",
       "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
       "lang": "en",
       "src": {
@@ -187,113 +271,9 @@
       }
     },
     {
-      "id": "epicure.f.v0002",
-      "kind": "verbatim",
-      "text": "Ptolemy Soter, it is said, received him with great honour; and when he had made himself master of Megara, he gave him money, and invited him to sail with him to Egypt.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 167
-      }
-    },
-    {
-      "id": "epicure.f.v0003",
-      "kind": "verbatim",
-      "text": "And some say that he was also attached to Phædrus, and that the following epigrams which he wrote upon them are evidences of the love he felt for them:— My Aster, you’re gazing on the stars (ἀστέρες), Would that I were the heavens, that so I might Gaze in return with many eyes on thee.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 286
-      }
-    },
-    {
-      "id": "epicure.f.v0004",
-      "kind": "verbatim",
-      "text": "Of contraries then, there are some which are so, as what is good is contrary to what is evil; others, as one evil is contrary to another; and others again, as neutral things are contrary to other things of a neutral character.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 226
-      }
-    },
-    {
-      "id": "epicure.f.v0005",
-      "kind": "verbatim",
-      "text": "Sorrow is a grief arising from deliberate thought, which endures for some time, and gradually increases.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 104
-      }
-    },
-    {
       "id": "epicure.f.v0006",
       "kind": "verbatim",
-      "text": "The people of Metapontum used to call his house the temple of Ceres; and the street leading to it they called the street of the Muses, as we are told by Phavorinus in his Universal History.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 189
-      }
-    },
-    {
-      "id": "epicure.f.v0007",
-      "kind": "verbatim",
-      "text": "And Timon has not let even Empedocles escape, but satirises him in this style, saying:— And then Empedocles, the honeyed speaker Of soft forensic speeches; he did take As many offices as he was able, Creating magistrates who wanted helpers.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 240
-      }
-    },
-    {
-      "id": "epicure.f.v0008",
-      "kind": "verbatim",
-      "text": "When Empedocles said to him that the wise man was undiscoverable, he replied, “Very likely; for it takes a wise man to discover a wise man.” And Sotion says, that he was the first person who asserted that everything is incomprehensible.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 236
-      }
-    },
-    {
-      "id": "epicure.f.v0009",
-      "kind": "verbatim",
-      "text": "He also adds that Pyrrho was not the original inventor of Scepticism, and that he had no particular dogma of any kind; and that, consequently, it can only be called Pyrrhonism from some similarity.",
-      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
-      "lang": "en",
-      "src": {
-        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
-      },
-      "quality": {
-        "chars": 197
-      }
-    },
-    {
-      "id": "epicure.f.v0010",
-      "kind": "verbatim",
-      "text": "He died when he was nearly ninety years old, as Antigonus tells us; and Sotion, in his eleventh book, makes the same statement.",
+      "text": "Now an element is that out of which at first all things which are are produced, and into which all things are resolved at last.",
       "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
       "lang": "en",
       "src": {
@@ -304,39 +284,172 @@
       }
     },
     {
-      "id": "epicure.f.v0011",
+      "id": "epicure.f.v0007",
       "kind": "verbatim",
-      "text": "From low to high, when even the object in motion, going from us to the places situated above our heads, meets ten thousand times with the feet of those who are above us; and from high to low, when in the same way it advances towards the heads of those who are below us.",
+      "text": "Chrysippus was the son of Apollonius, and a native of either Soli or Tarsus, as Alexander tells us in his Successions; and he was a pupil of Cleanthes.",
       "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
       "lang": "en",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       },
       "quality": {
-        "chars": 269
+        "chars": 151
+      }
+    },
+    {
+      "id": "epicure.f.v0008",
+      "kind": "verbatim",
+      "text": "Another of his theories was, that the air around the earth was immoveable, and pregnant with disease, and that everything in it was mortal; but that the upper air was in perpetual motion, and pure and salubrious; and that everything in that was immortal, and on that account divine.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "epicure.f.v0009",
+      "kind": "verbatim",
+      "text": "How then,” adds Timæus, “could he have leaped into a crater, of which, though they were in the neighbourhood, he had never made any mention?",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "epicure.f.v0010",
+      "kind": "verbatim",
+      "text": "Diogenes was a native of Apollonia, and the son of Apollothemis, a natural philosopher of high reputation; and he was, as Antisthenes reports, a pupil of Anaximenes.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "epicure.f.v0011",
+      "kind": "verbatim",
+      "text": "Now, there are none which are apprehended by the senses, for everything which is apprehended by the senses is general, while a sign is something particular.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 156
       }
     },
     {
       "id": "epicure.f.v0012",
       "kind": "verbatim",
-      "text": "The wise man may raise statues if it suits his inclination, if it does not it does not signify.",
+      "text": "The ethical contains the discussions on Choice and Avoidance; and is comprised in the books about lives, and in some of the Letters, and in the treatise on the Chief Good.",
       "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
       "lang": "en",
       "src": {
         "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
       },
       "quality": {
-        "chars": 95
+        "chars": 171
+      }
+    },
+    {
+      "id": "epicure.f.v0013",
+      "kind": "verbatim",
+      "text": "Let us disdain those men who do not know, by means of the different images which result from distance, how to give an account of the different appearances of things; who, in a word, are ignorant what are the objects which can excite any trouble in us.",
+      "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+      "lang": "en",
+      "src": {
+        "work": "Letter to Herodotus (from Diogenes Laertius, Book X)"
+      },
+      "quality": {
+        "chars": 251
       }
     }
   ],
-  "concepts": [],
+  "concepts": [
+    "plaisir",
+    "trouble",
+    "ataraxie",
+    "désir",
+    "choix",
+    "tranquillité"
+  ],
   "entities": [],
+  "doctrine": {
+    "concepts": [
+      "plaisir",
+      "trouble",
+      "ataraxie",
+      "désir",
+      "choix",
+      "tranquillité"
+    ],
+    "theses": {
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur, c’est l’absence de trouble : on n’y ajoute rien, on en retire les craintes",
+          "en": "happiness is the absence of trouble: nothing is added to it, its fears are removed",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "Let us disdain those men who do not know, by mea"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu est la droite raison appliquée au choix et à l’évitement",
+          "en": "virtue is right reason applied to choice and avoidance",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "The ethical contains the discussions on Choice a"
+            }
+          ]
+        }
+      },
+      "justice": {
+        "*": {
+          "fr": "les lois sont bonnes quand elles apaisent, mauvaises quand elles manquent : la justice est un pacte d’intérêt commun",
+          "en": "laws are good when they appease, bad when they fail: justice is a pact of common interest",
+          "anchors": [
+            {
+              "work": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+              "startsWith": "One of which is, when the laws are bad, both as "
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Letter to Herodotus (from Diogenes Laertius, Book X)": {
+        "summary": {
+          "fr": "Physique et éthique d’Épicure transmises par Diogène.",
+          "en": "Epicurus’ physics and ethics as transmitted by Diogenes."
+        },
+        "domains": [
+          "bonheur",
+          "vertu",
+          "justice"
+        ]
+      }
+    }
+  },
   "stats": {
-    "sentences": 20,
-    "formulas": 12,
-    "verbatim": 12,
+    "sentences": 24,
+    "formulas": 13,
+    "verbatim": 13,
     "patterns": 0
   },
-  "checksum": "sha256:9643899b5dea4e87e21edf2ecb96f337d545472b28786b049de9db93d88abc5c"
+  "checksum": "sha256:44f93e715225364267a021ca4e6e68bbb9527ce5bc9c80989748269281b73ea8"
 }

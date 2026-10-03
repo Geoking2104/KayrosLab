@@ -35,6 +35,9 @@
     t = String(t || "").replace(/\s+/g, " ").trim();
     return t.length > n ? t.slice(0, n - 1) + "…" : t;
   }
+  /* Ne pas confondre avec clip() : clipRaw préserve les retours à la ligne
+   * (contrat PRISE:/REPLIQUE:). Bornes = demoChatSchema, avec marge (lot 1). */
+  function clipRaw(t, n) { t = String(t || ""); return t.length > n ? t.slice(0, n - 1) + "…" : t; }
   function claim(text) {
     var t = String(text || "").replace(/\s+/g, " ").trim();
     var cut = t.split(/(?<=[.!?])\s+/)[0] || t;
@@ -206,9 +209,11 @@
         }
         var ctx = contextJSON(who);
         if (!validContext(ctx)) ctx = sanitizeContext({});
-        body.system = clip(sys, 280);
-        body.user = clip(String(body.user || "").replace(/\n+M[eé]moire[\s\S]*$/, ""), 280);
-        body.context = ctx;
+        // Bornes = demoChatSchema (backend/fastify/routes/llm.mjs:42-45), avec marge.
+        // Ne PAS utiliser clip() ici : il écrase les \n et casse PRISE:/REPLIQUE:.
+        body.system = clipRaw(sys, 3800);
+        body.user = clipRaw(String(body.user || ""), 5800);
+        body.context = ctx; // ignoré par le backend aujourd'hui (voir pièges)
         opts = Object.assign({}, opts, { body: JSON.stringify(body) });
       } catch (e) {}
       return orig(url, opts);

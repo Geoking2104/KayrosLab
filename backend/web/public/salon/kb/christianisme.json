@@ -1,242 +1,130 @@
 {
   "authorId": "christianisme",
   "kbVersion": "christianisme@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.299Z",
+  "builtAt": "2026-10-03T21:23:12.719Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "The Gospel According to John",
-      "sentences": 14
-    },
-    {
-      "title": "The Gospel According to Luke",
-      "sentences": 13
+      "title": "The Gospel According to Matthew",
+      "sentences": 12
     },
     {
       "title": "The Gospel According to Mark",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Gospel According to Luke",
+      "sentences": 12
+    },
+    {
+      "title": "The Gospel According to John",
+      "sentences": 12
+    },
+    {
+      "title": "The Revelation of St. John",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "christianisme.p0001",
-      "w": "The Gospel According to John",
-      "s": "Jesus therefore, being wearied with his journey, sat thus on the well: and it was about the sixth hour.",
+      "w": "The Gospel According to Matthew",
+      "s": "Verily I say unto you, They have their reward.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0002",
-      "w": "The Gospel According to John",
-      "s": "And the man believed the word that Jesus had spoken unto him, and he went his way.",
+      "w": "The Gospel According to Matthew",
+      "s": "Sufficient unto the day is the evil thereof.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0003",
-      "w": "The Gospel According to John",
-      "s": "If thou do these things, shew thyself to the world.",
+      "w": "The Gospel According to Matthew",
+      "s": "And when they were come out, they went into the herd of swine: and, behold, the whole herd of swine ran violently down a steep place into the sea, and perished in the waters.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0004",
-      "w": "The Gospel According to John",
-      "s": "Search, and look: for out of Galilee ariseth no prophet.",
+      "w": "The Gospel According to Matthew",
+      "s": "And they asked him, saying, Is it lawful to heal on the sabbath days?",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0005",
-      "w": "The Gospel According to John",
-      "s": "When he speaketh a lie, he speaketh of his own: for he is a liar, and the father of it.",
+      "w": "The Gospel According to Matthew",
+      "s": "The servants said unto him, Wilt thou then that we go and gather them up?",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0006",
-      "w": "The Gospel According to John",
-      "s": "He said unto them, He put clay upon mine eyes, and I washed, and do see.",
+      "w": "The Gospel According to Matthew",
+      "s": "And if the blind lead the blind, both shall fall into the ditch.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0007",
-      "w": "The Gospel According to John",
-      "s": "Father, save me from this hour: but for this cause came I unto this hour.",
+      "w": "The Gospel According to Matthew",
+      "s": "Likewise shall also the Son of man suffer of them.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0008",
-      "w": "The Gospel According to John",
-      "s": "Jesus answered him, If I wash thee not, thou hast no part with me.",
+      "w": "The Gospel According to Matthew",
+      "s": "Jesus said, Thou shalt do no murder, Thou shalt not commit adultery, Thou shalt not steal, Thou shalt not bear false witness, 40:019:019 Honour thy father and thy mother: and, Thou shalt love thy neighbour as thyself.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0009",
-      "w": "The Gospel According to John",
-      "s": "If ye loved me, ye would rejoice, because I said, I go unto the Father: for my Father is greater than I.",
+      "w": "The Gospel According to Matthew",
+      "s": "And presently the fig tree withered away.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0010",
-      "w": "The Gospel According to John",
-      "s": "Verily, verily, I say unto you, Whatsoever ye shall ask the Father in my name, he will give it you.",
+      "w": "The Gospel According to Matthew",
+      "s": "Jesus saith unto them, Verily I say unto you, That the publicans and the harlots go into the kingdom of God before you.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0011",
-      "w": "The Gospel According to John",
-      "s": "Thine own nation and the chief priests have delivered thee unto me: what hast thou done?",
+      "w": "The Gospel According to Matthew",
+      "s": "Then came they, and laid hands on Jesus and took him.",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0012",
-      "w": "The Gospel According to John",
-      "s": "And when he had said this, he went out again unto the Jews, and saith unto them, I find in him no fault at all.",
+      "w": "The Gospel According to Matthew",
+      "s": "Barabbas, or Jesus which is called Christ?",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       }
     },
     {
       "id": "christianisme.p0013",
-      "w": "The Gospel According to John",
-      "s": "He came therefore, and took the body of Jesus.",
-      "src": {
-        "work": "The Gospel According to John"
-      }
-    },
-    {
-      "id": "christianisme.p0014",
-      "w": "The Gospel According to John",
-      "s": "Then were the disciples glad, when they saw the LORD.",
-      "src": {
-        "work": "The Gospel According to John"
-      }
-    },
-    {
-      "id": "christianisme.p0015",
-      "w": "The Gospel According to Luke",
-      "s": "And they said, Is not this Joseph's son?",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0016",
-      "w": "The Gospel According to Luke",
-      "s": "And he rebuking them suffered them not to speak: for they knew that he was Christ.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0017",
-      "w": "The Gospel According to Luke",
-      "s": "For with the same measure that ye mete withal it shall be measured to you again.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0018",
-      "w": "The Gospel According to Luke",
-      "s": "And he said, Young man, I say unto thee, Arise.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0019",
-      "w": "The Gospel According to Luke",
-      "s": "And when he had said these things, he cried, He that hath ears to hear, let him hear.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0020",
-      "w": "The Gospel According to Luke",
-      "s": "For oftentimes it had caught him: and he was kept bound with chains and in fetters; and he brake the bands, and was driven of the devil into the wilderness.) 42:008:030 And Jesus asked him, saying, What is thy name?",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0021",
-      "w": "The Gospel According to Luke",
-      "s": "And Jesus rebuked the unclean spirit, and healed the child, and delivered him again to his father.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0022",
-      "w": "The Gospel According to Luke",
-      "s": "Then said Jesus unto him, Go, and do thou likewise.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0023",
-      "w": "The Gospel According to Luke",
-      "s": "And he said unto them, 42:013:024 Strive to enter in at the strait gate: for many, I say unto you, will seek to enter in, and shall not be able.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0024",
-      "w": "The Gospel According to Luke",
-      "s": "He that hath ears to hear, let him hear.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0025",
-      "w": "The Gospel According to Luke",
-      "s": "Nevertheless when the Son of man cometh, shall he find faith on the earth?",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0026",
-      "w": "The Gospel According to Luke",
-      "s": "I will send my beloved son: it may be they will reverence him when they see him.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0027",
-      "w": "The Gospel According to Luke",
-      "s": "I have found no cause of death in him: I will therefore chastise him, and let him go.",
-      "src": {
-        "work": "The Gospel According to Luke"
-      }
-    },
-    {
-      "id": "christianisme.p0028",
       "w": "The Gospel According to Mark",
       "s": "And he stretched it out: and his hand was restored whole as the other.",
       "src": {
@@ -244,23 +132,23 @@
       }
     },
     {
-      "id": "christianisme.p0029",
+      "id": "christianisme.p0014",
       "w": "The Gospel According to Mark",
-      "s": "And he answered, saying, My name is Legion: for we are many.",
+      "s": "I adjure thee by God, that thou torment me not.",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0030",
+      "id": "christianisme.p0015",
       "w": "The Gospel According to Mark",
-      "s": "And they went out to see what it was that was done.",
+      "s": "But when he had put them all out, he taketh the father and the mother of the damsel, and them that were with him, and entereth in where the damsel was lying.",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0031",
+      "id": "christianisme.p0016",
       "w": "The Gospel According to Mark",
       "s": "Verily I say unto you, It shall be more tolerable for Sodom and Gomorrha in the day of judgment, than for that city.",
       "src": {
@@ -268,55 +156,47 @@
       }
     },
     {
-      "id": "christianisme.p0032",
+      "id": "christianisme.p0017",
       "w": "The Gospel According to Mark",
-      "s": "And she said, The head of John the Baptist.",
+      "s": "And when they knew, they say, Five, and two fishes.",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0033",
+      "id": "christianisme.p0018",
       "w": "The Gospel According to Mark",
-      "s": "And many other things there be, which they have received to hold, as the washing of cups, and pots, brasen vessels, and of tables.",
+      "s": "Do ye not perceive, that whatsoever thing from without entereth into the man, it cannot defile him; 41:007:019 Because it entereth not into his heart, but into the belly, and goeth out into the draught, purging all meats?",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0034",
+      "id": "christianisme.p0019",
       "w": "The Gospel According to Mark",
-      "s": "And Peter answereth and saith unto him, Thou art the Christ.",
+      "s": "But Jesus answereth again, and saith unto them, Children, how hard is it for them that trust in riches to enter into the kingdom of God!",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0035",
+      "id": "christianisme.p0020",
       "w": "The Gospel According to Mark",
-      "s": "And they call the blind man, saying unto him, Be of good comfort, rise; he calleth thee.",
+      "s": "The blind man said unto him, Lord, that I might receive my sight.",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0036",
+      "id": "christianisme.p0021",
       "w": "The Gospel According to Mark",
-      "s": "And immediately he received his sight, and followed Jesus in the way.",
+      "s": "But he, knowing their hypocrisy, said unto them, Why tempt ye me?",
       "src": {
         "work": "The Gospel According to Mark"
       }
     },
     {
-      "id": "christianisme.p0037",
-      "w": "The Gospel According to Mark",
-      "s": "And he saith unto them, Whose is this image and superscription?",
-      "src": {
-        "work": "The Gospel According to Mark"
-      }
-    },
-    {
-      "id": "christianisme.p0038",
+      "id": "christianisme.p0022",
       "w": "The Gospel According to Mark",
       "s": "And no man after that durst ask him any question.",
       "src": {
@@ -324,7 +204,7 @@
       }
     },
     {
-      "id": "christianisme.p0039",
+      "id": "christianisme.p0023",
       "w": "The Gospel According to Mark",
       "s": "And they all condemned him to be guilty of death.",
       "src": {
@@ -332,11 +212,299 @@
       }
     },
     {
-      "id": "christianisme.p0040",
+      "id": "christianisme.p0024",
       "w": "The Gospel According to Mark",
-      "s": "And a little after, they that stood by said again to Peter, Surely thou art one of them: for thou art a Galilaean, and thy speech agreeth thereto.",
+      "s": "And Peter called to mind the word that Jesus said unto him, Before the cock crow twice, thou shalt deny me thrice.",
       "src": {
         "work": "The Gospel According to Mark"
+      }
+    },
+    {
+      "id": "christianisme.p0025",
+      "w": "The Gospel According to Luke",
+      "s": "And he said unto them, Do violence to no man, neither accuse any falsely; and be content with your wages.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0026",
+      "w": "The Gospel According to Luke",
+      "s": "And Simon's wife's mother was taken with a great fever; and they besought him for her.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0027",
+      "w": "The Gospel According to Luke",
+      "s": "And he did so: and his hand was restored whole as the other.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0028",
+      "w": "The Gospel According to Luke",
+      "s": "And he said, Young man, I say unto thee, Arise.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0029",
+      "w": "The Gospel According to Luke",
+      "s": "I entered into thine house, thou gavest me no water for my feet: but she hath washed my feet with tears, and wiped them with the hairs of her head.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0030",
+      "w": "The Gospel According to Luke",
+      "s": "And he went his way, and published throughout the whole city how great things Jesus had done unto him.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0031",
+      "w": "The Gospel According to Luke",
+      "s": "And Jesus rebuked the unclean spirit, and healed the child, and delivered him again to his father.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0032",
+      "w": "The Gospel According to Luke",
+      "s": "And it came to pass, when the devil was gone out, the dumb spake; and the people wondered.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0033",
+      "w": "The Gospel According to Luke",
+      "s": "The first said unto him, I have bought a piece of ground, and I must needs go and see it: I pray thee have me excused.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0034",
+      "w": "The Gospel According to Luke",
+      "s": "And he said unto him, Take thy bill, and write fourscore.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0035",
+      "w": "The Gospel According to Luke",
+      "s": "But the chief priests and the scribes and the chief of the people sought to destroy him, 42:019:048 And could not find what they might do: for all the people were very attentive to hear him.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0036",
+      "w": "The Gospel According to Luke",
+      "s": "And he said unto them, Ye say that I am.",
+      "src": {
+        "work": "The Gospel According to Luke"
+      }
+    },
+    {
+      "id": "christianisme.p0037",
+      "w": "The Gospel According to John",
+      "s": "Jesus therefore, being wearied with his journey, sat thus on the well: and it was about the sixth hour.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0038",
+      "w": "The Gospel According to John",
+      "s": "Ye have neither heard his voice at any time, nor seen his shape.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0039",
+      "w": "The Gospel According to John",
+      "s": "Do the rulers know indeed that this is the very Christ?",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0040",
+      "w": "The Gospel According to John",
+      "s": "And Jesus saith unto them, Even the same that I said unto you from the beginning.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0041",
+      "w": "The Gospel According to John",
+      "s": "Abraham is dead, and the prophets; and thou sayest, If a man keep my saying, he shall never taste of death.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0042",
+      "w": "The Gospel According to John",
+      "s": "Martha, the sister of him that was dead, saith unto him, Lord, by this time he stinketh: for he hath been dead four days.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0043",
+      "w": "The Gospel According to John",
+      "s": "Jesus answered him, If I wash thee not, thou hast no part with me.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0044",
+      "w": "The Gospel According to John",
+      "s": "Let not your heart be troubled, neither let it be afraid.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0045",
+      "w": "The Gospel According to John",
+      "s": "In the world ye shall have tribulation: but be of good cheer; I have overcome the world.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0046",
+      "w": "The Gospel According to John",
+      "s": "Thine own nation and the chief priests have delivered thee unto me: what hast thou done?",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0047",
+      "w": "The Gospel According to John",
+      "s": "Pilate saith unto them, Take ye him, and crucify him: for I find no fault in him.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0048",
+      "w": "The Gospel According to John",
+      "s": "She saith unto them, Because they have taken away my LORD, and I know not where they have laid him.",
+      "src": {
+        "work": "The Gospel According to John"
+      }
+    },
+    {
+      "id": "christianisme.p0049",
+      "w": "The Revelation of St. John",
+      "s": "If therefore thou shalt not watch, I will come on thee as a thief, and thou shalt not know what hour I will come upon thee.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0050",
+      "w": "The Revelation of St. John",
+      "s": "And I beheld, and lo a black horse; and he that sat on him had a pair of balances in his hand.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0051",
+      "w": "The Revelation of St. John",
+      "s": "Of the tribe of Gad were sealed twelve thousand.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0052",
+      "w": "The Revelation of St. John",
+      "s": "Of the tribe of Levi were sealed twelve thousand.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0053",
+      "w": "The Revelation of St. John",
+      "s": "Of the tribe of Joseph were sealed twelve thousand.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0054",
+      "w": "The Revelation of St. John",
+      "s": "And he said unto me, Take it, and eat it up; and it shall make thy belly bitter, but it shall be in thy mouth sweet as honey.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0055",
+      "w": "The Revelation of St. John",
+      "s": "Here is the patience and the faith of the saints.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0056",
+      "w": "The Revelation of St. John",
+      "s": "These are they which follow the Lamb whithersoever he goeth.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0057",
+      "w": "The Revelation of St. John",
+      "s": "I will tell thee the mystery of the woman, and of the beast that carrieth her, which hath the seven heads and ten horns.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0058",
+      "w": "The Revelation of St. John",
+      "s": "And he saith unto me, These are the true sayings of God.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0059",
+      "w": "The Revelation of St. John",
+      "s": "These both were cast alive into a lake of fire burning with brimstone.",
+      "src": {
+        "work": "The Revelation of St. John"
+      }
+    },
+    {
+      "id": "christianisme.p0060",
+      "w": "The Revelation of St. John",
+      "s": "I will give unto him that is athirst of the fountain of the water of life freely.",
+      "src": {
+        "work": "The Revelation of St. John"
       }
     }
   ],
@@ -344,239 +512,83 @@
     {
       "id": "christianisme.f.v0001",
       "kind": "verbatim",
-      "text": "Jesus therefore, being wearied with his journey, sat thus on the well: and it was about the sixth hour.",
-      "work": "The Gospel According to John",
+      "text": "And when they were come out, they went into the herd of swine: and, behold, the whole herd of swine ran violently down a steep place into the sea, and perished in the waters.",
+      "work": "The Gospel According to Matthew",
       "lang": "en",
       "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       },
       "quality": {
-        "chars": 103
+        "chars": 174
       }
     },
     {
       "id": "christianisme.f.v0002",
       "kind": "verbatim",
-      "text": "If thou do these things, shew thyself to the world.",
-      "work": "The Gospel According to John",
+      "text": "The servants said unto him, Wilt thou then that we go and gather them up?",
+      "work": "The Gospel According to Matthew",
       "lang": "en",
       "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 51
-      }
-    },
-    {
-      "id": "christianisme.f.v0003",
-      "kind": "verbatim",
-      "text": "Search, and look: for out of Galilee ariseth no prophet.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 56
-      }
-    },
-    {
-      "id": "christianisme.f.v0004",
-      "kind": "verbatim",
-      "text": "When he speaketh a lie, he speaketh of his own: for he is a liar, and the father of it.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 87
-      }
-    },
-    {
-      "id": "christianisme.f.v0005",
-      "kind": "verbatim",
-      "text": "He said unto them, He put clay upon mine eyes, and I washed, and do see.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 72
-      }
-    },
-    {
-      "id": "christianisme.f.v0006",
-      "kind": "verbatim",
-      "text": "Father, save me from this hour: but for this cause came I unto this hour.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
+        "work": "The Gospel According to Matthew"
       },
       "quality": {
         "chars": 73
       }
     },
     {
+      "id": "christianisme.f.v0003",
+      "kind": "verbatim",
+      "text": "Likewise shall also the Son of man suffer of them.",
+      "work": "The Gospel According to Matthew",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Matthew"
+      },
+      "quality": {
+        "chars": 50
+      }
+    },
+    {
+      "id": "christianisme.f.v0004",
+      "kind": "verbatim",
+      "text": "Jesus said, Thou shalt do no murder, Thou shalt not commit adultery, Thou shalt not steal, Thou shalt not bear false witness, 40:019:019 Honour thy father and thy mother: and, Thou shalt love thy neighbour as thyself.",
+      "work": "The Gospel According to Matthew",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Matthew"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "christianisme.f.v0005",
+      "kind": "verbatim",
+      "text": "Jesus saith unto them, Verily I say unto you, That the publicans and the harlots go into the kingdom of God before you.",
+      "work": "The Gospel According to Matthew",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Matthew"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "christianisme.f.v0006",
+      "kind": "verbatim",
+      "text": "But when he had put them all out, he taketh the father and the mother of the damsel, and them that were with him, and entereth in where the damsel was lying.",
+      "work": "The Gospel According to Mark",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Mark"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
       "id": "christianisme.f.v0007",
-      "kind": "verbatim",
-      "text": "Jesus answered him, If I wash thee not, thou hast no part with me.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 66
-      }
-    },
-    {
-      "id": "christianisme.f.v0008",
-      "kind": "verbatim",
-      "text": "If ye loved me, ye would rejoice, because I said, I go unto the Father: for my Father is greater than I.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 104
-      }
-    },
-    {
-      "id": "christianisme.f.v0009",
-      "kind": "verbatim",
-      "text": "Verily, verily, I say unto you, Whatsoever ye shall ask the Father in my name, he will give it you.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 99
-      }
-    },
-    {
-      "id": "christianisme.f.v0010",
-      "kind": "verbatim",
-      "text": "Thine own nation and the chief priests have delivered thee unto me: what hast thou done?",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 88
-      }
-    },
-    {
-      "id": "christianisme.f.v0011",
-      "kind": "verbatim",
-      "text": "And when he had said this, he went out again unto the Jews, and saith unto them, I find in him no fault at all.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 111
-      }
-    },
-    {
-      "id": "christianisme.f.v0012",
-      "kind": "verbatim",
-      "text": "He came therefore, and took the body of Jesus.",
-      "work": "The Gospel According to John",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to John"
-      },
-      "quality": {
-        "chars": 46
-      }
-    },
-    {
-      "id": "christianisme.f.v0013",
-      "kind": "verbatim",
-      "text": "For oftentimes it had caught him: and he was kept bound with chains and in fetters; and he brake the bands, and was driven of the devil into the wilderness.) 42:008:030 And Jesus asked him, saying, What is thy name?",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 215
-      }
-    },
-    {
-      "id": "christianisme.f.v0014",
-      "kind": "verbatim",
-      "text": "And Jesus rebuked the unclean spirit, and healed the child, and delivered him again to his father.",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 98
-      }
-    },
-    {
-      "id": "christianisme.f.v0015",
-      "kind": "verbatim",
-      "text": "And he said unto them, 42:013:024 Strive to enter in at the strait gate: for many, I say unto you, will seek to enter in, and shall not be able.",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 144
-      }
-    },
-    {
-      "id": "christianisme.f.v0016",
-      "kind": "verbatim",
-      "text": "He that hath ears to hear, let him hear.",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 40
-      }
-    },
-    {
-      "id": "christianisme.f.v0017",
-      "kind": "verbatim",
-      "text": "I will send my beloved son: it may be they will reverence him when they see him.",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 80
-      }
-    },
-    {
-      "id": "christianisme.f.v0018",
-      "kind": "verbatim",
-      "text": "I have found no cause of death in him: I will therefore chastise him, and let him go.",
-      "work": "The Gospel According to Luke",
-      "lang": "en",
-      "src": {
-        "work": "The Gospel According to Luke"
-      },
-      "quality": {
-        "chars": 85
-      }
-    },
-    {
-      "id": "christianisme.f.v0019",
       "kind": "verbatim",
       "text": "Verily I say unto you, It shall be more tolerable for Sodom and Gomorrha in the day of judgment, than for that city.",
       "work": "The Gospel According to Mark",
@@ -589,26 +601,182 @@
       }
     },
     {
-      "id": "christianisme.f.v0020",
+      "id": "christianisme.f.v0008",
       "kind": "verbatim",
-      "text": "And many other things there be, which they have received to hold, as the washing of cups, and pots, brasen vessels, and of tables.",
+      "text": "Do ye not perceive, that whatsoever thing from without entereth into the man, it cannot defile him; 41:007:019 Because it entereth not into his heart, but into the belly, and goeth out into the draught, purging all meats?",
       "work": "The Gospel According to Mark",
       "lang": "en",
       "src": {
         "work": "The Gospel According to Mark"
       },
       "quality": {
-        "chars": 130
+        "chars": 221
+      }
+    },
+    {
+      "id": "christianisme.f.v0009",
+      "kind": "verbatim",
+      "text": "But Jesus answereth again, and saith unto them, Children, how hard is it for them that trust in riches to enter into the kingdom of God!",
+      "work": "The Gospel According to Mark",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Mark"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "christianisme.f.v0010",
+      "kind": "verbatim",
+      "text": "The blind man said unto him, Lord, that I might receive my sight.",
+      "work": "The Gospel According to Mark",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Mark"
+      },
+      "quality": {
+        "chars": 65
+      }
+    },
+    {
+      "id": "christianisme.f.v0011",
+      "kind": "verbatim",
+      "text": "I entered into thine house, thou gavest me no water for my feet: but she hath washed my feet with tears, and wiped them with the hairs of her head.",
+      "work": "The Gospel According to Luke",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Luke"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "christianisme.f.v0012",
+      "kind": "verbatim",
+      "text": "The first said unto him, I have bought a piece of ground, and I must needs go and see it: I pray thee have me excused.",
+      "work": "The Gospel According to Luke",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Luke"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "christianisme.f.v0013",
+      "kind": "verbatim",
+      "text": "But the chief priests and the scribes and the chief of the people sought to destroy him, 42:019:048 And could not find what they might do: for all the people were very attentive to hear him.",
+      "work": "The Gospel According to Luke",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to Luke"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "christianisme.f.v0014",
+      "kind": "verbatim",
+      "text": "Jesus therefore, being wearied with his journey, sat thus on the well: and it was about the sixth hour.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "christianisme.f.v0015",
+      "kind": "verbatim",
+      "text": "Ye have neither heard his voice at any time, nor seen his shape.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 64
+      }
+    },
+    {
+      "id": "christianisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Do the rulers know indeed that this is the very Christ?",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 55
+      }
+    },
+    {
+      "id": "christianisme.f.v0017",
+      "kind": "verbatim",
+      "text": "Abraham is dead, and the prophets; and thou sayest, If a man keep my saying, he shall never taste of death.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 107
+      }
+    },
+    {
+      "id": "christianisme.f.v0018",
+      "kind": "verbatim",
+      "text": "Martha, the sister of him that was dead, saith unto him, Lord, by this time he stinketh: for he hath been dead four days.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "christianisme.f.v0019",
+      "kind": "verbatim",
+      "text": "Jesus answered him, If I wash thee not, thou hast no part with me.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 66
+      }
+    },
+    {
+      "id": "christianisme.f.v0020",
+      "kind": "verbatim",
+      "text": "Let not your heart be troubled, neither let it be afraid.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 57
       }
     },
     {
       "id": "christianisme.f.v0021",
       "kind": "verbatim",
-      "text": "And they call the blind man, saying unto him, Be of good comfort, rise; he calleth thee.",
-      "work": "The Gospel According to Mark",
+      "text": "In the world ye shall have tribulation: but be of good cheer; I have overcome the world.",
+      "work": "The Gospel According to John",
       "lang": "en",
       "src": {
-        "work": "The Gospel According to Mark"
+        "work": "The Gospel According to John"
       },
       "quality": {
         "chars": 88
@@ -617,24 +785,180 @@
     {
       "id": "christianisme.f.v0022",
       "kind": "verbatim",
-      "text": "And a little after, they that stood by said again to Peter, Surely thou art one of them: for thou art a Galilaean, and thy speech agreeth thereto.",
-      "work": "The Gospel According to Mark",
+      "text": "Thine own nation and the chief priests have delivered thee unto me: what hast thou done?",
+      "work": "The Gospel According to John",
       "lang": "en",
       "src": {
-        "work": "The Gospel According to Mark"
+        "work": "The Gospel According to John"
       },
       "quality": {
-        "chars": 146
+        "chars": 88
       }
+    },
+    {
+      "id": "christianisme.f.v0023",
+      "kind": "verbatim",
+      "text": "Pilate saith unto them, Take ye him, and crucify him: for I find no fault in him.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 81
+      }
+    },
+    {
+      "id": "christianisme.f.v0024",
+      "kind": "verbatim",
+      "text": "She saith unto them, Because they have taken away my LORD, and I know not where they have laid him.",
+      "work": "The Gospel According to John",
+      "lang": "en",
+      "src": {
+        "work": "The Gospel According to John"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "christianisme.f.v0025",
+      "kind": "verbatim",
+      "text": "If therefore thou shalt not watch, I will come on thee as a thief, and thou shalt not know what hour I will come upon thee.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "christianisme.f.v0026",
+      "kind": "verbatim",
+      "text": "Of the tribe of Levi were sealed twelve thousand.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 49
+      }
+    },
+    {
+      "id": "christianisme.f.v0027",
+      "kind": "verbatim",
+      "text": "Of the tribe of Joseph were sealed twelve thousand.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 51
+      }
+    },
+    {
+      "id": "christianisme.f.v0028",
+      "kind": "verbatim",
+      "text": "And he said unto me, Take it, and eat it up; and it shall make thy belly bitter, but it shall be in thy mouth sweet as honey.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "christianisme.f.v0029",
+      "kind": "verbatim",
+      "text": "Here is the patience and the faith of the saints.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 49
+      }
+    },
+    {
+      "id": "christianisme.f.v0030",
+      "kind": "verbatim",
+      "text": "These are they which follow the Lamb whithersoever he goeth.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 60
+      }
+    },
+    {
+      "id": "christianisme.f.v0031",
+      "kind": "verbatim",
+      "text": "I will tell thee the mystery of the woman, and of the beast that carrieth her, which hath the seven heads and ten horns.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "christianisme.f.v0032",
+      "kind": "verbatim",
+      "text": "These both were cast alive into a lake of fire burning with brimstone.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 70
+      }
+    },
+    {
+      "id": "christianisme.f.v0033",
+      "kind": "verbatim",
+      "text": "I will give unto him that is athirst of the fountain of the water of life freely.",
+      "work": "The Revelation of St. John",
+      "lang": "en",
+      "src": {
+        "work": "The Revelation of St. John"
+      },
+      "quality": {
+        "chars": 81
+      }
+    },
+    {
+      "id": "christianisme.f.p01",
+      "kind": "pattern",
+      "label": "ouverture",
+      "shape": "And he said…",
+      "attested": 4,
+      "worksSpan": 2,
+      "examples": [
+        "And he said unto them, Do violence to no man, neither accuse any falsely; and be content with your wages.",
+        "And he said unto him, Take thy bill, and write fourscore."
+      ]
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
-    "patterns": 0
+    "sentences": 60,
+    "formulas": 34,
+    "verbatim": 33,
+    "patterns": 1
   },
-  "checksum": "sha256:402d25f50db7c163a6313b0194a831dc2877bdf3910d095197d9f0c2a69f178f"
+  "checksum": "sha256:742d2de67c5b120d05814c6edb19877825f4759164533348db39c53a451a0cb0"
 }

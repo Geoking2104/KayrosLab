@@ -1,182 +1,22 @@
 {
   "authorId": "leibniz",
   "kbVersion": "leibniz@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.262Z",
+  "builtAt": "2026-10-03T21:23:12.567Z",
   "source": "bootstrap-corpus",
   "lang": "fr",
   "works": [
     {
-      "title": "La monadologie",
-      "sentences": 20
+      "title": "Theodicy",
+      "sentences": 12
     },
     {
-      "title": "Theodicy",
-      "sentences": 20
+      "title": "La monadologie",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "leibniz.p0001",
-      "w": "La monadologie",
-      "s": "Dieu, qui est la souveraine sagesse, ne fait rien qui n'ait sa raison d'être.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0002",
-      "w": "La monadologie",
-      "s": "Il n'y a pas de «communication» directe des substances entre elles.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0003",
-      "w": "La monadologie",
-      "s": "Et l'on peut raisonner de même à l'égard du temps; dès qu'on l'érige à l'état d'absolu, il faut que l'essence de Dieu en souffre ou du dedans ou du dehors.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0004",
-      "w": "La monadologie",
-      "s": "A) Origine des représentations.--L'âme humaine, étant une monade, n'a pas de fenêtre ouverte sur l'univers.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0005",
-      "w": "La monadologie",
-      "s": "Et l'on tombe par là dans le panthéisme: c'est Spinoza qui a raison.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0006",
-      "w": "La monadologie",
-      "s": "Elles sont distinctes, parce que leurs termes le sont.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0007",
-      "w": "La monadologie",
-      "s": "C'est là un fait, pour Leibniz; et ce fait, il le défend à tout propos avec cette obstination tranquille dont il a le don.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0008",
-      "w": "La monadologie",
-      "s": "Mais qu'on en retouche les rouages ou qu'on en change le balancier, et l'on obtiendra un mouvement nouveau.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0009",
-      "w": "La monadologie",
-      "s": "Notre connaissance est de deux sortes: distincte ou confuse.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0010",
-      "w": "La monadologie",
-      "s": "Si loin qu'on remonte vers l'origine de la vie, l'écoulement des choses est également infaillible; on n'y change jamais rien, bien que l'on y puisse toujours changer quelque chose.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0011",
-      "w": "La monadologie",
-      "s": "Pourquoi les situer en Dieu, vu qu'étant éternelles de leur nature, elles se suffisent?",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0012",
-      "w": "La monadologie",
-      "s": "Car Dieu, étant souverainement parfait, est aussi souverainement bon.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0013",
-      "w": "La monadologie",
-      "s": "Dieu trouve donc dans l'objet intérieur de son entendement, sinon dans son entendement lui-même, une limite essentielle à sa volonté.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0014",
-      "w": "La monadologie",
-      "s": "D'après Malebranche, les êtres n'ont pas seulement des rapports de grandeur; ils ont aussi des rapports de qualité.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0015",
-      "w": "La monadologie",
-      "s": "Et cependant, à partir du jour où Leibniz a découvert l'idée de la monade, sa doctrine n'a plus changé de caractère: elle a grandi comme un organisme souple et puissant, qui va se transformant toujours sans jamais perdre son identité.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0016",
-      "w": "La monadologie",
-      "s": "Il n'y a aussi point de dissolution à craindre, et il n'y a aucune manière concevable par laquelle une substance simple puisse périr naturellement.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0017",
-      "w": "La monadologie",
-      "s": "Et feignant, qu'il y ait une machine, dont la structure fasse penser, sentir, avoir perception; on pourra la concevoir aggrandie en conservant les mêmes proportions, en sorte qu'on y puisse entrer comme dans un moulin.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0018",
-      "w": "La monadologie",
-      "s": "Il y a une infinité de figures et de mouvements présents et passés, qui entrent dans la cause efficiente de mon écriture présente; et il y a une infinité de petites inclinations et dispositions de mon âme présentes et passées, qui entrent dans la cause finale.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0019",
-      "w": "La monadologie",
-      "s": "Mais dans les substances simples ce n'est qu'une influence idéale d'une Monade sur l'autre, qui ne peut avoir son effet que par l'intervention de Dieu, en tant que dans les idées de Dieu une Monade demande avec raison, que Dieu en réglant les autres dès le commencement des choses, ait égard à elle.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0020",
-      "w": "La monadologie",
-      "s": "Mais chaque rameau de la plante, chaque membre de l'animal, chaque goutte de ses humeurs est encore un tel jardin ou un tel étang.",
-      "src": {
-        "work": "La monadologie"
-      }
-    },
-    {
-      "id": "leibniz.p0021",
       "w": "Theodicy",
       "s": "I refrain from considering here the other points of the Christian doctrine, and I will show only how Jesus Christ brought about the conversion of natural religion into law, and gained for it the authority of a public dogma.",
       "src": {
@@ -184,39 +24,23 @@
       }
     },
     {
-      "id": "leibniz.p0022",
+      "id": "leibniz.p0002",
       "w": "Theodicy",
-      "s": "Furthermore I show that the predetermination I admit is such as always to predispose, but never to necessitate, and that God will not refuse the requisite new light to those who have made a good use of that which they had.",
+      "s": "It is alleged that they had carried certain things to excess, and aroused suspicions of certain doctrinal innovations.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0023",
+      "id": "leibniz.p0003",
       "w": "Theodicy",
-      "s": "I believe that able geometricians will scarce be troubled by the objections of Joseph Scaliger against Archimedes, or by those of Mr.",
+      "s": "For here is what he says in his posthumous Reply to M.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0024",
-      "w": "Theodicy",
-      "s": "Bayle himself maintains that this experience or this inward sense of our independence, upon which M.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0025",
-      "w": "Theodicy",
-      "s": "The crime is certain and the evil for the State is open to question.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0026",
+      "id": "leibniz.p0004",
       "w": "Theodicy",
       "s": "For there is in the soul not only an order of distinct perceptions, forming its dominion, but also a series of confused perceptions or passions, forming its bondage: and there is no need for astonishment at that; the soul would be a Divinity if it had none but distinct perceptions.",
       "src": {
@@ -224,39 +48,23 @@
       }
     },
     {
-      "id": "leibniz.p0027",
+      "id": "leibniz.p0005",
       "w": "Theodicy",
-      "s": "I learnt from the Grand Elector of Mainz, Johann Philipp von Schonborn, uncle of His Highness the present Elector, who walks gloriously in the footsteps of that worthy predecessor, the story that follows.",
+      "s": "Moreover, the author is still presupposing that false maxim advanced as the third, stating that the happiness of rational creatures is the sole aim of God.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0028",
+      "id": "leibniz.p0006",
       "w": "Theodicy",
-      "s": "To that an answer has already been given on the second maxim, in the assertion that God's affection for any created thing whatsoever is proportionate to the value of the thing.",
+      "s": "Even though these reasons be not applicable to God, they make it clear, nevertheless, that an action like that of this prince may appear preposterous when it is detached from the circumstances indicating its cause.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0029",
-      "w": "Theodicy",
-      "s": "Man finds himself the worse for this, in proportion to his fault; but God, by a wonderful art, turns all the errors of these little worlds to the greater adornment of his great world.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0030",
-      "w": "Theodicy",
-      "s": "Bayle speaks should happen otherwise than it happened, not as if by itself it would have been more deserving of choice, but on account of its connexion with that entire sequence of the universe which deserved to be given preference.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0031",
+      "id": "leibniz.p0007",
       "w": "Theodicy",
       "s": "If each substance taken separately were perfect, all would be alike; which is neither fitting nor possible.",
       "src": {
@@ -264,39 +72,23 @@
       }
     },
     {
-      "id": "leibniz.p0032",
+      "id": "leibniz.p0008",
       "w": "Theodicy",
-      "s": "For if he had not sinned, he would have overthrown the sole plan that God had of necessity created.' That is again a misuse of terms.",
+      "s": "I do not expect that there should straightway be founded a religious order whose purpose would be to exalt man to that high pitch of perfection: such people would be too much above the rest, and too formidable for the authorities.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0033",
+      "id": "leibniz.p0009",
       "w": "Theodicy",
-      "s": "I know that the general opinion of the Schoolmen, according to the Master of the Sentences, is that in the other life there is neither merit nor demerit; but I do not think that, taken literally, it can pass for an article of faith.",
+      "s": "Should we not find it more imperfect and more unhappy than if it had not this freedom of indifference?",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0034",
-      "w": "Theodicy",
-      "s": "There are here excellent arguments, which are valid against the usual systems; but they fail in respect of the System of Pre-established Harmony, which takes us further than we were able to go formerly.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0035",
-      "w": "Theodicy",
-      "s": "God gives perfection to creatures in so far as it is possible in the universe.",
-      "src": {
-        "work": "Theodicy"
-      }
-    },
-    {
-      "id": "leibniz.p0036",
+      "id": "leibniz.p0010",
       "w": "Theodicy",
       "s": "Thus we have enough intelligence to recognize clearly and distinctly that this power and this knowledge are in God; but we have not enough so to comprehend their extent that we can know how they leave the actions of men entirely free and indeterminate.' The continuation has already been quoted above.",
       "src": {
@@ -304,158 +96,121 @@
       }
     },
     {
-      "id": "leibniz.p0037",
+      "id": "leibniz.p0011",
       "w": "Theodicy",
-      "s": "If that does not prevent us from thinking that we are their efficient cause, what reliance shall one place on the proof of feeling, which to M.",
+      "s": "You will find in one world a very happy and noble Sextus, in another a Sextus content with a mediocre state, a Sextus, indeed, of every kind and endless diversity of forms.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0038",
+      "id": "leibniz.p0012",
       "w": "Theodicy",
-      "s": "OBJECTION III If it is always impossible not to sin, it is always unjust to punish.",
+      "s": "I do not know if there are any such among created beings, by reason of the connexion existing between all things; and the example of a wax torch is not the example of a substance, any more than that of a swarm of bees would be.",
       "src": {
         "work": "Theodicy"
       }
     },
     {
-      "id": "leibniz.p0039",
-      "w": "Theodicy",
-      "s": "Thus it is always right to utter truths concerning the divinity; one need not anyhow refrain from fear of giving offence.",
+      "id": "leibniz.p0013",
+      "w": "La monadologie",
+      "s": "Dieu, qui est la souveraine sagesse, ne fait rien qui n'ait sa raison d'être.",
       "src": {
-        "work": "Theodicy"
+        "work": "La monadologie"
       }
     },
     {
-      "id": "leibniz.p0040",
-      "w": "Theodicy",
-      "s": "But it is always upon motives that it acts.",
+      "id": "leibniz.p0014",
+      "w": "La monadologie",
+      "s": "Le vrai, c'est que, à l'occasion de la chute de la pierre, l'agrégat des monades qui constituent l'organe éprouve de lui-même ce qu'on appelle une contusion; et que, à l'occasion de cet état pathologique, la monade dominante qui souffre, tire de son propre fond sa sensation de souffrance.",
       "src": {
-        "work": "Theodicy"
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0015",
+      "w": "La monadologie",
+      "s": "Notre pensée se dégrade indéfiniment, comme la lumière du soleil: si bien qu'à un point donné il nous arrive de connaître encore sans savoir que nous connaissons.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0016",
+      "w": "La monadologie",
+      "s": "Car «nous sommes empiriques dans les trois quarts de nos actions».",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0017",
+      "w": "La monadologie",
+      "s": "Il faut admettre «qu'il a été aussi impossible de toute éternité que Spinoza, par exemple, ne mourût pas à la Haye, qu'il est impossible que deux et deux soient six».",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0018",
+      "w": "La monadologie",
+      "s": "Et cette gradation a pour règle le progrès de la connaissance: la liberté est un libre amour du bien, qui grandit avec et par la raison.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0019",
+      "w": "La monadologie",
+      "s": "Et là réside une autre preuve de son existence.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0020",
+      "w": "La monadologie",
+      "s": "Ils voient l'univers entier à travers le voile assombrissant de leur mélancolie et se figurent qu'il est mauvais, parce qu'ils sont tristes.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0021",
+      "w": "La monadologie",
+      "s": "Les passions trouvent place dans une vie bien ordonnée et peuvent même servir à la vertu.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0022",
+      "w": "La monadologie",
+      "s": "On ne le touche pas, on ne l'imagine pas; on le conçoit, et c'est tout.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0023",
+      "w": "La monadologie",
+      "s": "Et l'imagination forte, qui les frappe et émeut, vient ou de la grandeur ou de la multitude des perceptions précédentes.",
+      "src": {
+        "work": "La monadologie"
+      }
+    },
+    {
+      "id": "leibniz.p0024",
+      "w": "La monadologie",
+      "s": "Note 400: Il y a une raison pour que les Monades créées aient des idées confuses: c'est la résistance de la matière.",
+      "src": {
+        "work": "La monadologie"
       }
     }
   ],
   "formulas": [
     {
       "id": "leibniz.f.v0001",
-      "kind": "verbatim",
-      "text": "A) Origine des représentations.--L'âme humaine, étant une monade, n'a pas de fenêtre ouverte sur l'univers.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 107
-      }
-    },
-    {
-      "id": "leibniz.f.v0002",
-      "kind": "verbatim",
-      "text": "C'est là un fait, pour Leibniz; et ce fait, il le défend à tout propos avec cette obstination tranquille dont il a le don.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 122
-      }
-    },
-    {
-      "id": "leibniz.f.v0003",
-      "kind": "verbatim",
-      "text": "Si loin qu'on remonte vers l'origine de la vie, l'écoulement des choses est également infaillible; on n'y change jamais rien, bien que l'on y puisse toujours changer quelque chose.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 180
-      }
-    },
-    {
-      "id": "leibniz.f.v0004",
-      "kind": "verbatim",
-      "text": "Dieu trouve donc dans l'objet intérieur de son entendement, sinon dans son entendement lui-même, une limite essentielle à sa volonté.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 133
-      }
-    },
-    {
-      "id": "leibniz.f.v0005",
-      "kind": "verbatim",
-      "text": "D'après Malebranche, les êtres n'ont pas seulement des rapports de grandeur; ils ont aussi des rapports de qualité.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 115
-      }
-    },
-    {
-      "id": "leibniz.f.v0006",
-      "kind": "verbatim",
-      "text": "Et cependant, à partir du jour où Leibniz a découvert l'idée de la monade, sa doctrine n'a plus changé de caractère: elle a grandi comme un organisme souple et puissant, qui va se transformant toujours sans jamais perdre son identité.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 234
-      }
-    },
-    {
-      "id": "leibniz.f.v0007",
-      "kind": "verbatim",
-      "text": "Il n'y a aussi point de dissolution à craindre, et il n'y a aucune manière concevable par laquelle une substance simple puisse périr naturellement.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 147
-      }
-    },
-    {
-      "id": "leibniz.f.v0008",
-      "kind": "verbatim",
-      "text": "Il y a une infinité de figures et de mouvements présents et passés, qui entrent dans la cause efficiente de mon écriture présente; et il y a une infinité de petites inclinations et dispositions de mon âme présentes et passées, qui entrent dans la cause finale.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 260
-      }
-    },
-    {
-      "id": "leibniz.f.v0009",
-      "kind": "verbatim",
-      "text": "Mais dans les substances simples ce n'est qu'une influence idéale d'une Monade sur l'autre, qui ne peut avoir son effet que par l'intervention de Dieu, en tant que dans les idées de Dieu une Monade demande avec raison, que Dieu en réglant les autres dès le commencement des choses, ait égard à elle.",
-      "work": "La monadologie",
-      "lang": "fr",
-      "src": {
-        "work": "La monadologie"
-      },
-      "quality": {
-        "chars": 299
-      }
-    },
-    {
-      "id": "leibniz.f.v0010",
       "kind": "verbatim",
       "text": "I refrain from considering here the other points of the Christian doctrine, and I will show only how Jesus Christ brought about the conversion of natural religion into law, and gained for it the authority of a public dogma.",
       "work": "Theodicy",
@@ -468,111 +223,33 @@
       }
     },
     {
-      "id": "leibniz.f.v0011",
+      "id": "leibniz.f.v0002",
       "kind": "verbatim",
-      "text": "Furthermore I show that the predetermination I admit is such as always to predispose, but never to necessitate, and that God will not refuse the requisite new light to those who have made a good use of that which they had.",
+      "text": "It is alleged that they had carried certain things to excess, and aroused suspicions of certain doctrinal innovations.",
       "work": "Theodicy",
       "lang": "en",
       "src": {
         "work": "Theodicy"
       },
       "quality": {
-        "chars": 222
+        "chars": 118
       }
     },
     {
-      "id": "leibniz.f.v0012",
+      "id": "leibniz.f.v0003",
       "kind": "verbatim",
-      "text": "I believe that able geometricians will scarce be troubled by the objections of Joseph Scaliger against Archimedes, or by those of Mr.",
+      "text": "Even though these reasons be not applicable to God, they make it clear, nevertheless, that an action like that of this prince may appear preposterous when it is detached from the circumstances indicating its cause.",
       "work": "Theodicy",
       "lang": "en",
       "src": {
         "work": "Theodicy"
       },
       "quality": {
-        "chars": 133
+        "chars": 214
       }
     },
     {
-      "id": "leibniz.f.v0013",
-      "kind": "verbatim",
-      "text": "Bayle himself maintains that this experience or this inward sense of our independence, upon which M.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 100
-      }
-    },
-    {
-      "id": "leibniz.f.v0014",
-      "kind": "verbatim",
-      "text": "For there is in the soul not only an order of distinct perceptions, forming its dominion, but also a series of confused perceptions or passions, forming its bondage: and there is no need for astonishment at that; the soul would be a Divinity if it had none but distinct perceptions.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 282
-      }
-    },
-    {
-      "id": "leibniz.f.v0015",
-      "kind": "verbatim",
-      "text": "I learnt from the Grand Elector of Mainz, Johann Philipp von Schonborn, uncle of His Highness the present Elector, who walks gloriously in the footsteps of that worthy predecessor, the story that follows.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 204
-      }
-    },
-    {
-      "id": "leibniz.f.v0016",
-      "kind": "verbatim",
-      "text": "To that an answer has already been given on the second maxim, in the assertion that God's affection for any created thing whatsoever is proportionate to the value of the thing.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 176
-      }
-    },
-    {
-      "id": "leibniz.f.v0017",
-      "kind": "verbatim",
-      "text": "Man finds himself the worse for this, in proportion to his fault; but God, by a wonderful art, turns all the errors of these little worlds to the greater adornment of his great world.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 183
-      }
-    },
-    {
-      "id": "leibniz.f.v0018",
-      "kind": "verbatim",
-      "text": "Bayle speaks should happen otherwise than it happened, not as if by itself it would have been more deserving of choice, but on account of its connexion with that entire sequence of the universe which deserved to be given preference.",
-      "work": "Theodicy",
-      "lang": "en",
-      "src": {
-        "work": "Theodicy"
-      },
-      "quality": {
-        "chars": 232
-      }
-    },
-    {
-      "id": "leibniz.f.v0019",
+      "id": "leibniz.f.v0004",
       "kind": "verbatim",
       "text": "If each substance taken separately were perfect, all would be alike; which is neither fitting nor possible.",
       "work": "Theodicy",
@@ -585,64 +262,131 @@
       }
     },
     {
-      "id": "leibniz.f.v0020",
+      "id": "leibniz.f.v0005",
       "kind": "verbatim",
-      "text": "I know that the general opinion of the Schoolmen, according to the Master of the Sentences, is that in the other life there is neither merit nor demerit; but I do not think that, taken literally, it can pass for an article of faith.",
+      "text": "I do not expect that there should straightway be founded a religious order whose purpose would be to exalt man to that high pitch of perfection: such people would be too much above the rest, and too formidable for the authorities.",
       "work": "Theodicy",
       "lang": "en",
       "src": {
         "work": "Theodicy"
       },
       "quality": {
-        "chars": 232
+        "chars": 230
       }
     },
     {
-      "id": "leibniz.f.v0021",
+      "id": "leibniz.f.v0006",
       "kind": "verbatim",
-      "text": "There are here excellent arguments, which are valid against the usual systems; but they fail in respect of the System of Pre-established Harmony, which takes us further than we were able to go formerly.",
+      "text": "Should we not find it more imperfect and more unhappy than if it had not this freedom of indifference?",
       "work": "Theodicy",
       "lang": "en",
       "src": {
         "work": "Theodicy"
       },
       "quality": {
-        "chars": 202
+        "chars": 102
       }
     },
     {
-      "id": "leibniz.f.v0022",
+      "id": "leibniz.f.v0007",
       "kind": "verbatim",
-      "text": "If that does not prevent us from thinking that we are their efficient cause, what reliance shall one place on the proof of feeling, which to M.",
+      "text": "You will find in one world a very happy and noble Sextus, in another a Sextus content with a mediocre state, a Sextus, indeed, of every kind and endless diversity of forms.",
       "work": "Theodicy",
       "lang": "en",
       "src": {
         "work": "Theodicy"
       },
       "quality": {
-        "chars": 143
+        "chars": 172
       }
     },
     {
-      "id": "leibniz.f.p01",
-      "kind": "pattern",
-      "label": "condition",
-      "shape": "(Si|If)\\b",
-      "attested": 3,
-      "worksSpan": 2,
-      "examples": [
-        "Si loin qu'on remonte vers l'origine de la vie, l'écoulement des choses est également infaillible; on n'y change jamais rien, bien que l'on y puisse toujours changer quelque chose.",
-        "If each substance taken separately were perfect, all would be alike; which is neither fitting nor possible."
-      ]
+      "id": "leibniz.f.v0008",
+      "kind": "verbatim",
+      "text": "I do not know if there are any such among created beings, by reason of the connexion existing between all things; and the example of a wax torch is not the example of a substance, any more than that of a swarm of bees would be.",
+      "work": "Theodicy",
+      "lang": "en",
+      "src": {
+        "work": "Theodicy"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "leibniz.f.v0009",
+      "kind": "verbatim",
+      "text": "Le vrai, c'est que, à l'occasion de la chute de la pierre, l'agrégat des monades qui constituent l'organe éprouve de lui-même ce qu'on appelle une contusion; et que, à l'occasion de cet état pathologique, la monade dominante qui souffre, tire de son propre fond sa sensation de souffrance.",
+      "work": "La monadologie",
+      "lang": "fr",
+      "src": {
+        "work": "La monadologie"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "leibniz.f.v0010",
+      "kind": "verbatim",
+      "text": "Notre pensée se dégrade indéfiniment, comme la lumière du soleil: si bien qu'à un point donné il nous arrive de connaître encore sans savoir que nous connaissons.",
+      "work": "La monadologie",
+      "lang": "fr",
+      "src": {
+        "work": "La monadologie"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "leibniz.f.v0011",
+      "kind": "verbatim",
+      "text": "Il faut admettre «qu'il a été aussi impossible de toute éternité que Spinoza, par exemple, ne mourût pas à la Haye, qu'il est impossible que deux et deux soient six».",
+      "work": "La monadologie",
+      "lang": "fr",
+      "src": {
+        "work": "La monadologie"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "leibniz.f.v0012",
+      "kind": "verbatim",
+      "text": "Ils voient l'univers entier à travers le voile assombrissant de leur mélancolie et se figurent qu'il est mauvais, parce qu'ils sont tristes.",
+      "work": "La monadologie",
+      "lang": "fr",
+      "src": {
+        "work": "La monadologie"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "leibniz.f.v0013",
+      "kind": "verbatim",
+      "text": "Les passions trouvent place dans une vie bien ordonnée et peuvent même servir à la vertu.",
+      "work": "La monadologie",
+      "lang": "fr",
+      "src": {
+        "work": "La monadologie"
+      },
+      "quality": {
+        "chars": 89
+      }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 23,
-    "verbatim": 22,
-    "patterns": 1
+    "sentences": 24,
+    "formulas": 13,
+    "verbatim": 13,
+    "patterns": 0
   },
-  "checksum": "sha256:a998c78c9403bf3c9302d7e0b154f54474597370d2375283a44667b87b04034b"
+  "checksum": "sha256:73f88c2d3e2859d1e2a9e6d472fbd8d112e40405f801226d1f7640c55175470e"
 }

@@ -1,242 +1,130 @@
 {
   "authorId": "james",
   "kbVersion": "james@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.292Z",
+  "builtAt": "2026-10-03T21:23:12.687Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "A Pluralistic Universe",
-      "sentences": 14
-    },
-    {
-      "title": "Essays in Radical Empiricism",
-      "sentences": 13
+      "title": "The Varieties of Religious Experience: A Study in Human Nature",
+      "sentences": 12
     },
     {
       "title": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "sentences": 12
+    },
+    {
+      "title": "A Pluralistic Universe",
+      "sentences": 12
+    },
+    {
+      "title": "Essays in Radical Empiricism",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "james.p0001",
-      "w": "A Pluralistic Universe",
-      "s": "We philosophers naturally form part of the material, on the monistic scheme.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "I put my book down, and although my excitement was great, I felt quite collected, and not conscious of any sense of fear.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0002",
-      "w": "A Pluralistic Universe",
-      "s": "For taken abstractly and without qualification the words 'distinct' and 'independent' suggest only disconnection.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "The great central fact in human life is the coming into a conscious vital realization of our oneness with this Infinite Life, and the opening of ourselves fully to this divine inflow.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0003",
-      "w": "A Pluralistic Universe",
-      "s": "If you say 'two' or 'many,' your speech betrayeth you, for the very name collects them into one.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "Exasperated cases, for instance, as a rule do not.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0004",
-      "w": "A Pluralistic Universe",
-      "s": "For such minds Professor Royce's words will always be the truest: 'The very presence of ill in the temporal order is the condition of the perfection of the eternal order....",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "I thought I saw the Saviour, by faith, in human shape, for about one second in the room, with arms extended, appearing to say to me, Come.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0005",
-      "w": "A Pluralistic Universe",
-      "s": "We depend on her for almost everything, she on us for but a small portion of her history.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "They stumble along, feeling their way, as it were, from point to point, and often stop entirely.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0006",
-      "w": "A Pluralistic Universe",
-      "s": "When our eyes are open their sensations enter into our general mental life, which grows incessantly by the addition of what they see.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "When I got down, I was surprised to see him sitting on the wagon‐road waiting for me.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0007",
-      "w": "A Pluralistic Universe",
-      "s": "If logic says it is one, so much the worse for logic.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "The abandonment of their old mode of life is like dust in the balance.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0008",
-      "w": "A Pluralistic Universe",
-      "s": "So far as the outward facts go, Bergson's career has then been commonplace to the utmost.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "We have grown literally afraid to be poor.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0009",
-      "w": "A Pluralistic Universe",
-      "s": "The log meanwhile never drops, and keeps its sameness throughout the journey.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "Thus she needs to employ no artifice in order to arrest the use of her understanding: it remains so stricken with inactivity that she neither knows what she loves, nor in what manner she loves, nor what she wills.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0010",
-      "w": "A Pluralistic Universe",
-      "s": "Green probably works still too strongly here for his anti-sensationalism to be outgrown quickly.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "The whole of Germany, one may say, has positively rejected the Hegelian argumentation.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0011",
-      "w": "A Pluralistic Universe",
-      "s": "Since when, in this mixed world, was any good thing given us in purest outline and isolation?",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "I now turn to my second question: What is the objective “truth” of their content?(350) The part of the content concerning which the question of truth most pertinently arises is that “MORE of the same quality” with which our own higher self appears in the experience to come into harmonious working relation.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0012",
-      "w": "A Pluralistic Universe",
-      "s": "It is as if the actual peculiarities of the world that is were entirely irrelevant to the content of truth.",
+      "w": "The Varieties of Religious Experience: A Study in Human Nature",
+      "s": "I experienced nothing but unaccountable wretchedness.",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       }
     },
     {
       "id": "james.p0013",
-      "w": "A Pluralistic Universe",
-      "s": "Surely he abuses the privilege which society grants to all of us philosophers, of being puzzle-headed.",
-      "src": {
-        "work": "A Pluralistic Universe"
-      }
-    },
-    {
-      "id": "james.p0014",
-      "w": "A Pluralistic Universe",
-      "s": "Moreover, as Hume so clearly pointed out, in my mental activity-situation the words physically to be uttered are represented as the activity's immediate goal.",
-      "src": {
-        "work": "A Pluralistic Universe"
-      }
-    },
-    {
-      "id": "james.p0015",
-      "w": "Essays in Radical Empiricism",
-      "s": "The reason is this, that, as the general chaos of all our experiences gets sifted, we find that there are some fires that will always burn sticks and always warm our bodies, and that there are some waters that will always put out fires; while there are other fires and waters that will not act at all.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0016",
-      "w": "Essays in Radical Empiricism",
-      "s": "Merely to be 'with' one another in a universe of discourse is the most external relation that terms can have, and seems to involve nothing whatever as to farther consequences.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0017",
-      "w": "Essays in Radical Empiricism",
-      "s": "That, however, would be a fact indifferent to our knowledge.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0018",
-      "w": "Essays in Radical Empiricism",
-      "s": "In general terms, then, whatever differing contents our minds may eventually fill a place with, the place itself is a numerically identical content of the two minds, a piece of common property in which, through which, and over which they join.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0019",
-      "w": "Essays in Radical Empiricism",
-      "s": "Bradley's understanding speaks, his words leave me wholly unconverted.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0020",
-      "w": "Essays in Radical Empiricism",
-      "s": "All that we should have to postulate would be a second subsequent experience, collateral and contemporary with the first subsequent one, in which a similar act of appropriation should occur.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0021",
-      "w": "Essays in Radical Empiricism",
-      "s": "The pragmatic method starts from the postulate that there is no difference of truth that doesn't make a difference of fact somewhere; and it seeks to determine the meaning of all differences of opinion by making the discussion hinge as soon as possible upon some practical or particular issue.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0022",
-      "w": "Essays in Radical Empiricism",
-      "s": "The first type takes a consciousness of wider time-span than ours to be the vehicle of the more real activity.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0023",
-      "w": "Essays in Radical Empiricism",
-      "s": "It seems, at first sight, to confine itself to denying theism and pantheism.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0024",
-      "w": "Essays in Radical Empiricism",
-      "s": "Idees et Choses, comment donc ne pas reconnaitre leur dualisme?",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0025",
-      "w": "Essays in Radical Empiricism",
-      "s": "Comme experience psychique, elle n'a aucun poids, son ameublement n'est pas combustible.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0026",
-      "w": "Essays in Radical Empiricism",
-      "s": "It is much more like one of those secular changes that come upon public opinion over-night, as it were, borne upon tides 'too full for sound or foam,' that survive all the crudities and extravagances of their advocates, that you can pin to no one absolutely essential statement, nor kill by any one decisive stab.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0027",
-      "w": "Essays in Radical Empiricism",
-      "s": "Joseph will but consider all these things a little more concretely, he may find that the humanistic scheme and the notion of theoretic truth fall into line consistently enough to yield him also intellectual satisfaction.",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      }
-    },
-    {
-      "id": "james.p0028",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "s": "Now all these suns MAY be inhabited by none but happy creatures; and nothing obliges us to believe that the number of damned persons is very great; for a VERY FEW INSTANCES AND SAMPLES SUFFICE FOR THE UTILITY WHICH GOOD DRAWS FROM EVIL.",
       "src": {
@@ -244,23 +132,23 @@
       }
     },
     {
-      "id": "james.p0029",
+      "id": "james.p0014",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "It agrees with nominalism for instance, in always appealing to particulars; with utilitarianism in emphasizing practical aspects; with positivism in its disdain for verbal solutions, useless questions, and metaphysical abstractions.",
+      "s": "The whole function of philosophy ought to be to find out what definite difference it will make to you and me, at definite instants of our life, if this world-formula or that world-formula be the true one.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0030",
+      "id": "james.p0015",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "You will probably be surprised to learn, then, that Messrs.",
+      "s": "But, as I said in my first lecture, the brand of pantheism offered is hard for them to assimilate if they are lovers of facts, or empirically minded.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0031",
+      "id": "james.p0016",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "s": "This is the complexion of present day materialism, which may better be called naturalism.",
       "src": {
@@ -268,55 +156,47 @@
       }
     },
     {
-      "id": "james.p0032",
+      "id": "james.p0017",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "Materialism means simply the denial that the moral order is eternal, and the cutting off of ultimate hopes; spiritualism means the affirmation of an eternal moral order and the letting loose of hope.",
+      "s": "For the parts of things must always make SOME definite resultant, be it chaotic or harmonious.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0033",
+      "id": "james.p0018",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "It is an odd fact that many monists consider a great victory scored for their side when pluralists say 'the universe is many.' \"'The universe'!\" they chuckle--\"his speech bewrayeth him.",
+      "s": "Any kind of influence whatever helps to make the world one, so far as you can follow it from next to next.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0034",
+      "id": "james.p0019",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "That there MAY be one sovereign purpose, system, kind, and story, is a legitimate hypothesis.",
+      "s": "For instance, if our minds should ever become 'telepathically' connected, so that we knew immediately, or could under certain conditions know immediately, each what the other was thinking, the world we now live in would appear to the thinkers in that world to have been of an inferior grade.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0035",
+      "id": "james.p0020",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "It has 'gone out' for him, as a candle-flame goes out; and it comes back, when you replace it in his hand, as the flame comes back when relit.",
+      "s": "As common sense interpolates her constant 'things' between our intermittent sensations, so science EXTRApolates her world of 'primary' qualities, her atoms, her ether, her magnetic fields, and the like, beyond the common-sense world.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0036",
+      "id": "james.p0021",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "We can cipher fruitfully with them; they serve us wonderfully; but we must not be their dupes.",
+      "s": "Another great reason--beside economy of time--for waiving complete verification in the usual business of life is that all things exist in kinds and not singly.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0037",
-      "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "They lead away from excentricity and isolation, from foiled and barren thinking.",
-      "src": {
-        "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
-      }
-    },
-    {
-      "id": "james.p0038",
+      "id": "james.p0022",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "s": "When, namely, you ask rationalists, instead of accusing pragmatism of desecrating the notion of truth, to define it themselves by saying exactly what THEY understand by it, the only positive attempts I can think of are these two: 1.",
       "src": {
@@ -324,19 +204,307 @@
       }
     },
     {
-      "id": "james.p0039",
+      "id": "james.p0023",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "Mathematics and logic themselves are fermenting with human rearrangements; physics, astronomy and biology follow massive cues of preference.",
+      "s": "In many familiar objects everyone will recognize the human element.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       }
     },
     {
-      "id": "james.p0040",
+      "id": "james.p0024",
       "w": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "s": "If there is want there, there also is the satisfaction provided.",
+      "s": "Whoever you are, now I place my hand upon you, that you be my poem; I whisper with my lips close to your ear, I have loved many women and men, but I love none better than you.",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
+      }
+    },
+    {
+      "id": "james.p0025",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "If we are to discuss the question at all, it must involve a living option.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0026",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "They witness hourly the outward body of events whose inner meaning cannot, by any possible operation, be revealed to their intelligence,--events in which they themselves often play the cardinal part.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0027",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "But with regard to the facts yet to come the case is far different.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0028",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "If I refuse to stop a murder because I am in doubt whether it be not justifiable homicide, I am virtually abetting the crime.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0029",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "The floodgates of the religious life are opened, and the full currents can pour through.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0030",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "But for the deterministic philosophy the murder, the sentence, and the prisoner's optimism were all necessary from eternity; and nothing else for a moment had a ghost of a chance of being put into their place.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0031",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "From the point of view of strict experience, nothing exists but the sum of particular perceptions, with their coincidences on the one hand, their contradictions on the other.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0032",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "Every now and then, however, some one is born with the right to be original, and his revolutionary thought or action may bear prosperous fruit.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0033",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "The impulse dies away without the sympathy of the community.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0034",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "It is not only the size of the difference which concerns the philosopher, but also its place and its kind.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0035",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "It is both and neither; and the only condition on which we gain the right to affirm that it is, is that we fail not to keep affirming all the while that it is not, as well.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0036",
+      "w": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "s": "Repugnant as the mystical style of philosophizing maybe (especially when self-complacent), there is no sort of doubt that it goes with a gift for meeting with certain kinds of phenomenal experience.",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      }
+    },
+    {
+      "id": "james.p0037",
+      "w": "A Pluralistic Universe",
+      "s": "We philosophers naturally form part of the material, on the monistic scheme.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0038",
+      "w": "A Pluralistic Universe",
+      "s": "The functions of the bradleian absolute are in this particular identical with those of the theistic God.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0039",
+      "w": "A Pluralistic Universe",
+      "s": "What you posit as A must already have cancelled the alternative or made it innocuous, by having negated it in advance.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0040",
+      "w": "A Pluralistic Universe",
+      "s": "From Green to Haldane the absolute proposed to us to straighten out the confusions of the thicket of experience in which our life is passed remains a pure abstraction which hardly any one tries to make a whit concreter.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0041",
+      "w": "A Pluralistic Universe",
+      "s": "But such an experience as this passes for fantastic.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0042",
+      "w": "A Pluralistic Universe",
+      "s": "It seemed to me that they ought at least to have mentioned the objections that had stopped me so completely.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0043",
+      "w": "A Pluralistic Universe",
+      "s": "Since 1900 he has been professor at the College de France, and member of the Institute since 1900.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0044",
+      "w": "A Pluralistic Universe",
+      "s": "It violates our mental habits, being a kind of passive and receptive listening quite contrary to that effort to react noisily and verbally on everything, which is our usual intellectual pose.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0045",
+      "w": "A Pluralistic Universe",
+      "s": "The gist of the matter is always the same--something ever goes indissolubly with something else.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0046",
+      "w": "A Pluralistic Universe",
+      "s": "Since when, in this mixed world, was any good thing given us in purest outline and isolation?",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0047",
+      "w": "A Pluralistic Universe",
+      "s": "I take pleasure in the fact that already in 1895 I was so far advanced towards my present bergsonian position.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0048",
+      "w": "A Pluralistic Universe",
+      "s": "Here also the notion of causal efficacy comes to birth.",
+      "src": {
+        "work": "A Pluralistic Universe"
+      }
+    },
+    {
+      "id": "james.p0049",
+      "w": "Essays in Radical Empiricism",
+      "s": "It is all consciousness in one taking; and, in the other, all content.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0050",
+      "w": "Essays in Radical Empiricism",
+      "s": "Of course the mind's free play is restricted when it seeks to copy real things in real space.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0051",
+      "w": "Essays in Radical Empiricism",
+      "s": "This is why I called our experiences, taken all together, a quasi-chaos.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0052",
+      "w": "Essays in Radical Empiricism",
+      "s": "In general terms, then, whatever differing contents our minds may eventually fill a place with, the place itself is a numerically identical content of the two minds, a piece of common property in which, through which, and over which they join.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0053",
+      "w": "Essays in Radical Empiricism",
+      "s": "It continues predicable as long as the terms continue.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0054",
+      "w": "Essays in Radical Empiricism",
+      "s": "After sleeping, my retrospection is as perfect as it is between two successive waking moments of my time.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0055",
+      "w": "Essays in Radical Empiricism",
+      "s": "The pragmatic method starts from the postulate that there is no difference of truth that doesn't make a difference of fact somewhere; and it seeks to determine the meaning of all differences of opinion by making the discussion hinge as soon as possible upon some practical or particular issue.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0056",
+      "w": "Essays in Radical Empiricism",
+      "s": "As between 'our' activities as 'we' experience them, and those of our ideas, or of our brain-cells, the issue is well-defined.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0057",
+      "w": "Essays in Radical Empiricism",
+      "s": "Abolish, now, one of the percipients, and the interpolation changes into 'extrapolation.' The sense-terminus of the remaining percipient is regarded by the philosopher as not quite reaching reality.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0058",
+      "w": "Essays in Radical Empiricism",
+      "s": "Le partage du subjectif et de l'objectif est le fait d'une reflexion tres avancee, que nous aimons encore ajourner dans beaucoup d'endroits.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0059",
+      "w": "Essays in Radical Empiricism",
+      "s": "Radical empiricism alone insists on understanding forwards also, and refuses to substitute static concepts of the understanding for transitions in our moving life.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      }
+    },
+    {
+      "id": "james.p0060",
+      "w": "Essays in Radical Empiricism",
+      "s": "This would seem, however, to make of truth the prior concept, and to relegate satisfaction to a secondary place.",
+      "src": {
+        "work": "Essays in Radical Empiricism"
       }
     }
   ],
@@ -344,187 +512,70 @@
     {
       "id": "james.f.v0001",
       "kind": "verbatim",
-      "text": "If you say 'two' or 'many,' your speech betrayeth you, for the very name collects them into one.",
-      "work": "A Pluralistic Universe",
+      "text": "I put my book down, and although my excitement was great, I felt quite collected, and not conscious of any sense of fear.",
+      "work": "The Varieties of Religious Experience: A Study in Human Nature",
       "lang": "en",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       },
       "quality": {
-        "chars": 96
+        "chars": 121
       }
     },
     {
       "id": "james.f.v0002",
       "kind": "verbatim",
-      "text": "When our eyes are open their sensations enter into our general mental life, which grows incessantly by the addition of what they see.",
-      "work": "A Pluralistic Universe",
+      "text": "The great central fact in human life is the coming into a conscious vital realization of our oneness with this Infinite Life, and the opening of ourselves fully to this divine inflow.",
+      "work": "The Varieties of Religious Experience: A Study in Human Nature",
       "lang": "en",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       },
       "quality": {
-        "chars": 133
+        "chars": 183
       }
     },
     {
       "id": "james.f.v0003",
       "kind": "verbatim",
-      "text": "Green probably works still too strongly here for his anti-sensationalism to be outgrown quickly.",
-      "work": "A Pluralistic Universe",
+      "text": "I thought I saw the Saviour, by faith, in human shape, for about one second in the room, with arms extended, appearing to say to me, Come.",
+      "work": "The Varieties of Religious Experience: A Study in Human Nature",
       "lang": "en",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "james.f.v0004",
+      "kind": "verbatim",
+      "text": "They stumble along, feeling their way, as it were, from point to point, and often stop entirely.",
+      "work": "The Varieties of Religious Experience: A Study in Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       },
       "quality": {
         "chars": 96
       }
     },
     {
-      "id": "james.f.v0004",
-      "kind": "verbatim",
-      "text": "Since when, in this mixed world, was any good thing given us in purest outline and isolation?",
-      "work": "A Pluralistic Universe",
-      "lang": "en",
-      "src": {
-        "work": "A Pluralistic Universe"
-      },
-      "quality": {
-        "chars": 93
-      }
-    },
-    {
       "id": "james.f.v0005",
       "kind": "verbatim",
-      "text": "It is as if the actual peculiarities of the world that is were entirely irrelevant to the content of truth.",
-      "work": "A Pluralistic Universe",
+      "text": "I now turn to my second question: What is the objective “truth” of their content?(350) The part of the content concerning which the question of truth most pertinently arises is that “MORE of the same quality” with which our own higher self appears in the experience to come into harmonious working relation.",
+      "work": "The Varieties of Religious Experience: A Study in Human Nature",
       "lang": "en",
       "src": {
-        "work": "A Pluralistic Universe"
+        "work": "The Varieties of Religious Experience: A Study in Human Nature"
       },
       "quality": {
-        "chars": 107
+        "chars": 307
       }
     },
     {
       "id": "james.f.v0006",
-      "kind": "verbatim",
-      "text": "Surely he abuses the privilege which society grants to all of us philosophers, of being puzzle-headed.",
-      "work": "A Pluralistic Universe",
-      "lang": "en",
-      "src": {
-        "work": "A Pluralistic Universe"
-      },
-      "quality": {
-        "chars": 102
-      }
-    },
-    {
-      "id": "james.f.v0007",
-      "kind": "verbatim",
-      "text": "The reason is this, that, as the general chaos of all our experiences gets sifted, we find that there are some fires that will always burn sticks and always warm our bodies, and that there are some waters that will always put out fires; while there are other fires and waters that will not act at all.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 301
-      }
-    },
-    {
-      "id": "james.f.v0008",
-      "kind": "verbatim",
-      "text": "Merely to be 'with' one another in a universe of discourse is the most external relation that terms can have, and seems to involve nothing whatever as to farther consequences.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 175
-      }
-    },
-    {
-      "id": "james.f.v0009",
-      "kind": "verbatim",
-      "text": "In general terms, then, whatever differing contents our minds may eventually fill a place with, the place itself is a numerically identical content of the two minds, a piece of common property in which, through which, and over which they join.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 243
-      }
-    },
-    {
-      "id": "james.f.v0010",
-      "kind": "verbatim",
-      "text": "All that we should have to postulate would be a second subsequent experience, collateral and contemporary with the first subsequent one, in which a similar act of appropriation should occur.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 190
-      }
-    },
-    {
-      "id": "james.f.v0011",
-      "kind": "verbatim",
-      "text": "The pragmatic method starts from the postulate that there is no difference of truth that doesn't make a difference of fact somewhere; and it seeks to determine the meaning of all differences of opinion by making the discussion hinge as soon as possible upon some practical or particular issue.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 293
-      }
-    },
-    {
-      "id": "james.f.v0012",
-      "kind": "verbatim",
-      "text": "The first type takes a consciousness of wider time-span than ours to be the vehicle of the more real activity.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 110
-      }
-    },
-    {
-      "id": "james.f.v0013",
-      "kind": "verbatim",
-      "text": "It is much more like one of those secular changes that come upon public opinion over-night, as it were, borne upon tides 'too full for sound or foam,' that survive all the crudities and extravagances of their advocates, that you can pin to no one absolutely essential statement, nor kill by any one decisive stab.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 313
-      }
-    },
-    {
-      "id": "james.f.v0014",
-      "kind": "verbatim",
-      "text": "Joseph will but consider all these things a little more concretely, he may find that the humanistic scheme and the notion of theoretic truth fall into line consistently enough to yield him also intellectual satisfaction.",
-      "work": "Essays in Radical Empiricism",
-      "lang": "en",
-      "src": {
-        "work": "Essays in Radical Empiricism"
-      },
-      "quality": {
-        "chars": 220
-      }
-    },
-    {
-      "id": "james.f.v0015",
       "kind": "verbatim",
       "text": "Now all these suns MAY be inhabited by none but happy creatures; and nothing obliges us to believe that the number of damned persons is very great; for a VERY FEW INSTANCES AND SAMPLES SUFFICE FOR THE UTILITY WHICH GOOD DRAWS FROM EVIL.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
@@ -537,72 +588,59 @@
       }
     },
     {
-      "id": "james.f.v0016",
+      "id": "james.f.v0007",
       "kind": "verbatim",
-      "text": "It agrees with nominalism for instance, in always appealing to particulars; with utilitarianism in emphasizing practical aspects; with positivism in its disdain for verbal solutions, useless questions, and metaphysical abstractions.",
+      "text": "The whole function of philosophy ought to be to find out what definite difference it will make to you and me, at definite instants of our life, if this world-formula or that world-formula be the true one.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "lang": "en",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       },
       "quality": {
-        "chars": 232
+        "chars": 204
       }
     },
     {
-      "id": "james.f.v0017",
+      "id": "james.f.v0008",
       "kind": "verbatim",
-      "text": "Materialism means simply the denial that the moral order is eternal, and the cutting off of ultimate hopes; spiritualism means the affirmation of an eternal moral order and the letting loose of hope.",
+      "text": "Any kind of influence whatever helps to make the world one, so far as you can follow it from next to next.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "lang": "en",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       },
       "quality": {
-        "chars": 199
+        "chars": 106
       }
     },
     {
-      "id": "james.f.v0018",
+      "id": "james.f.v0009",
       "kind": "verbatim",
-      "text": "It is an odd fact that many monists consider a great victory scored for their side when pluralists say 'the universe is many.' \"'The universe'!\" they chuckle--\"his speech bewrayeth him.",
+      "text": "As common sense interpolates her constant 'things' between our intermittent sensations, so science EXTRApolates her world of 'primary' qualities, her atoms, her ether, her magnetic fields, and the like, beyond the common-sense world.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "lang": "en",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       },
       "quality": {
-        "chars": 185
+        "chars": 233
       }
     },
     {
-      "id": "james.f.v0019",
+      "id": "james.f.v0010",
       "kind": "verbatim",
-      "text": "It has 'gone out' for him, as a candle-flame goes out; and it comes back, when you replace it in his hand, as the flame comes back when relit.",
+      "text": "Another great reason--beside economy of time--for waiving complete verification in the usual business of life is that all things exist in kinds and not singly.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "lang": "en",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       },
       "quality": {
-        "chars": 142
+        "chars": 159
       }
     },
     {
-      "id": "james.f.v0020",
-      "kind": "verbatim",
-      "text": "We can cipher fruitfully with them; they serve us wonderfully; but we must not be their dupes.",
-      "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
-      "lang": "en",
-      "src": {
-        "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
-      },
-      "quality": {
-        "chars": 94
-      }
-    },
-    {
-      "id": "james.f.v0021",
+      "id": "james.f.v0011",
       "kind": "verbatim",
       "text": "When, namely, you ask rationalists, instead of accusing pragmatism of desecrating the notion of truth, to define it themselves by saying exactly what THEY understand by it, the only positive attempts I can think of are these two: 1.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
@@ -615,38 +653,300 @@
       }
     },
     {
-      "id": "james.f.v0022",
+      "id": "james.f.v0012",
       "kind": "verbatim",
-      "text": "Mathematics and logic themselves are fermenting with human rearrangements; physics, astronomy and biology follow massive cues of preference.",
+      "text": "Whoever you are, now I place my hand upon you, that you be my poem; I whisper with my lips close to your ear, I have loved many women and men, but I love none better than you.",
       "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
       "lang": "en",
       "src": {
         "work": "Pragmatism: A New Name for Some Old Ways of Thinking"
       },
       "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "james.f.v0013",
+      "kind": "verbatim",
+      "text": "They witness hourly the outward body of events whose inner meaning cannot, by any possible operation, be revealed to their intelligence,--events in which they themselves often play the cardinal part.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "james.f.v0014",
+      "kind": "verbatim",
+      "text": "If I refuse to stop a murder because I am in doubt whether it be not justifiable homicide, I am virtually abetting the crime.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "james.f.v0015",
+      "kind": "verbatim",
+      "text": "From the point of view of strict experience, nothing exists but the sum of particular perceptions, with their coincidences on the one hand, their contradictions on the other.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "james.f.v0016",
+      "kind": "verbatim",
+      "text": "Every now and then, however, some one is born with the right to be original, and his revolutionary thought or action may bear prosperous fruit.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "james.f.v0017",
+      "kind": "verbatim",
+      "text": "It is not only the size of the difference which concerns the philosopher, but also its place and its kind.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "james.f.v0018",
+      "kind": "verbatim",
+      "text": "It is both and neither; and the only condition on which we gain the right to affirm that it is, is that we fail not to keep affirming all the while that it is not, as well.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "james.f.v0019",
+      "kind": "verbatim",
+      "text": "Repugnant as the mystical style of philosophizing maybe (especially when self-complacent), there is no sort of doubt that it goes with a gift for meeting with certain kinds of phenomenal experience.",
+      "work": "The Will to Believe, and Other Essays in Popular Philosophy",
+      "lang": "en",
+      "src": {
+        "work": "The Will to Believe, and Other Essays in Popular Philosophy"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "james.f.v0020",
+      "kind": "verbatim",
+      "text": "The functions of the bradleian absolute are in this particular identical with those of the theistic God.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "james.f.v0021",
+      "kind": "verbatim",
+      "text": "What you posit as A must already have cancelled the alternative or made it innocuous, by having negated it in advance.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "james.f.v0022",
+      "kind": "verbatim",
+      "text": "From Green to Haldane the absolute proposed to us to straighten out the confusions of the thicket of experience in which our life is passed remains a pure abstraction which hardly any one tries to make a whit concreter.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "james.f.v0023",
+      "kind": "verbatim",
+      "text": "It seemed to me that they ought at least to have mentioned the objections that had stopped me so completely.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "james.f.v0024",
+      "kind": "verbatim",
+      "text": "It violates our mental habits, being a kind of passive and receptive listening quite contrary to that effort to react noisily and verbally on everything, which is our usual intellectual pose.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "james.f.v0025",
+      "kind": "verbatim",
+      "text": "The gist of the matter is always the same--something ever goes indissolubly with something else.",
+      "work": "A Pluralistic Universe",
+      "lang": "en",
+      "src": {
+        "work": "A Pluralistic Universe"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "james.f.v0026",
+      "kind": "verbatim",
+      "text": "In general terms, then, whatever differing contents our minds may eventually fill a place with, the place itself is a numerically identical content of the two minds, a piece of common property in which, through which, and over which they join.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "james.f.v0027",
+      "kind": "verbatim",
+      "text": "After sleeping, my retrospection is as perfect as it is between two successive waking moments of my time.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "james.f.v0028",
+      "kind": "verbatim",
+      "text": "The pragmatic method starts from the postulate that there is no difference of truth that doesn't make a difference of fact somewhere; and it seeks to determine the meaning of all differences of opinion by making the discussion hinge as soon as possible upon some practical or particular issue.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "james.f.v0029",
+      "kind": "verbatim",
+      "text": "As between 'our' activities as 'we' experience them, and those of our ideas, or of our brain-cells, the issue is well-defined.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "james.f.v0030",
+      "kind": "verbatim",
+      "text": "Abolish, now, one of the percipients, and the interpolation changes into 'extrapolation.' The sense-terminus of the remaining percipient is regarded by the philosopher as not quite reaching reality.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "james.f.v0031",
+      "kind": "verbatim",
+      "text": "Le partage du subjectif et de l'objectif est le fait d'une reflexion tres avancee, que nous aimons encore ajourner dans beaucoup d'endroits.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "fr",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
         "chars": 140
       }
     },
     {
-      "id": "james.f.p01",
-      "kind": "pattern",
-      "label": "condition",
-      "shape": "(Si|If)\\b",
-      "attested": 3,
-      "worksSpan": 2,
-      "examples": [
-        "If you say 'two' or 'many,' your speech betrayeth you, for the very name collects them into one.",
-        "If logic says it is one, so much the worse for logic."
-      ]
+      "id": "james.f.v0032",
+      "kind": "verbatim",
+      "text": "Radical empiricism alone insists on understanding forwards also, and refuses to substitute static concepts of the understanding for transitions in our moving life.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "james.f.v0033",
+      "kind": "verbatim",
+      "text": "This would seem, however, to make of truth the prior concept, and to relegate satisfaction to a secondary place.",
+      "work": "Essays in Radical Empiricism",
+      "lang": "en",
+      "src": {
+        "work": "Essays in Radical Empiricism"
+      },
+      "quality": {
+        "chars": 112
+      }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 23,
-    "verbatim": 22,
-    "patterns": 1
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
+    "patterns": 0
   },
-  "checksum": "sha256:504ad7d780d06a43d002b5ae81c9b228a8671c0983af3ee2fe0e02d1cfdee154"
+  "checksum": "sha256:92ec079cb6232388e14ec59c3041c55b9bff23279834ff72f684c61e6d2e8eec"
 }

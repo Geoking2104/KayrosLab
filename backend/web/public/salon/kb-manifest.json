@@ -1,444 +1,444 @@
 {
-  "generatedAt": "2026-10-03T09:49:59.377Z",
+  "generatedAt": "2026-10-03T21:23:12.809Z",
   "generator": "salon/scripts/kb_export.mjs",
   "source": "bootstrap-corpus",
   "totals": {
     "authors": 54,
-    "sentences": 2040,
-    "formulas": 1133
+    "sentences": 2527,
+    "formulas": 1394
   },
   "authors": {
     "smith": {
       "kbVersion": "smith@bootstrap-2026-10-03",
       "pack": "kb/smith.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:ddd858ea9e2e7c51223ba0e9e12364e830f76aef7b067020169a2767b9f67fac",
-      "builtAt": "2026-10-03T09:49:59.047Z"
+      "sentences": 36,
+      "formulas": 20,
+      "checksum": "sha256:3d837dbf3e351ba44b43b51a896fbb7a0862be8b5bf15a6d70b39b64e4c8d381",
+      "builtAt": "2026-10-03T21:23:11.946Z"
     },
     "aristote": {
       "kbVersion": "aristote@bootstrap-2026-10-03",
       "pack": "kb/aristote.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:aa53de84f7aa0d010d851cc3b904433e86aec35728ffb6050049f9de6f7a631c",
-      "builtAt": "2026-10-03T09:49:59.067Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:81163a360c9566926bff578d82581d9db046997c300ee1080f7fd9da47e7e2a5",
+      "builtAt": "2026-10-03T21:23:11.991Z"
     },
     "spinoza": {
       "kbVersion": "spinoza@bootstrap-2026-10-03",
       "pack": "kb/spinoza.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:e03f1ce1d5cde1ebb944d9c5d59bf0bf6bb257d52af418b88f073f5bc6d9c6cf",
-      "builtAt": "2026-10-03T09:49:59.073Z"
+      "sentences": 36,
+      "formulas": 20,
+      "checksum": "sha256:ef34e32da4f0ff29c04f9bfcca1d09896ec32831d140cf7fb1ecf31f889d7986",
+      "builtAt": "2026-10-03T21:23:12.004Z"
     },
     "darwin": {
       "kbVersion": "darwin@bootstrap-2026-10-03",
       "pack": "kb/darwin.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:abb0db221c929f29aaa57eaf5b78c8d6586b63657f74c75fe1ea72cd42c793ec",
-      "builtAt": "2026-10-03T09:49:59.081Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:92eb5db6ab959df77bcbcb315d39874b61da0aab8968b4cc4705892c57a9fc05",
+      "builtAt": "2026-10-03T21:23:12.022Z"
     },
     "confucius": {
       "kbVersion": "confucius@bootstrap-2026-10-03",
       "pack": "kb/confucius.json",
-      "sentences": 40,
-      "formulas": 23,
-      "checksum": "sha256:b6db9f240f1b5c7be1692274d355ecf66a4ac006e7aee9d81f6434e083dd4223",
-      "builtAt": "2026-10-03T09:49:59.087Z"
+      "sentences": 24,
+      "formulas": 14,
+      "checksum": "sha256:041e3a5557986982276a88ca811e21f0a1d9271801af9dad25a769e2333c4e52",
+      "builtAt": "2026-10-03T21:23:12.035Z"
     },
     "poe": {
       "kbVersion": "poe@bootstrap-2026-10-03",
       "pack": "kb/poe.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:907284314bd8c05b614fbc94ae8bd2b7c2feef96c29a820295af7ec1ce3c24c8",
-      "builtAt": "2026-10-03T09:49:59.094Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:6ab9dfe495af3ee56d22ee428b50eddca1350f2fed1469022220f67c17ecea35",
+      "builtAt": "2026-10-03T21:23:12.049Z"
     },
     "kant": {
       "kbVersion": "kant@bootstrap-2026-10-03",
       "pack": "kb/kant.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:1338085ed2f4092c7181e517e8bcaf19e700b978a9284c149024f111ad5ec264",
-      "builtAt": "2026-10-03T09:49:59.103Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:7d35669eb7c205dfade02df33498ba0b3ddb449e00576bee04e07131ea095f7b",
+      "builtAt": "2026-10-03T21:23:12.072Z"
     },
     "dostoevski": {
       "kbVersion": "dostoevski@bootstrap-2026-10-03",
       "pack": "kb/dostoevski.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:aef2b6f8a7d06e309252939b3a3d061ae7afb0d72f41513939d9949071a039be",
-      "builtAt": "2026-10-03T09:49:59.108Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:aeb46fedb8535b72800c21390c728239ade652383164ca0b5016ea29bd3f2085",
+      "builtAt": "2026-10-03T21:23:12.090Z"
     },
     "kafka": {
       "kbVersion": "kafka@bootstrap-2026-10-03",
       "pack": "kb/kafka.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:0934f7565327eabd06a3fb21ea4c8d8969e55a2147039573a1993b5b6245052f",
-      "builtAt": "2026-10-03T09:49:59.113Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:89836386527b2809a27fcbf6a422248437facb6e7bf959a5cfd0f0c168c881cd",
+      "builtAt": "2026-10-03T21:23:12.110Z"
     },
     "nietzsche": {
       "kbVersion": "nietzsche@bootstrap-2026-10-03",
       "pack": "kb/nietzsche.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:dfdb73e0adf78cd32392901be5d00123b2d22a7ea7f7ef96d415c070f6fb75f9",
-      "builtAt": "2026-10-03T09:49:59.120Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:dd7a87e71983cdb4c7cba423c3a46231af6134c38da5b952387dfe663b2c0e11",
+      "builtAt": "2026-10-03T21:23:12.136Z"
     },
     "balzac": {
       "kbVersion": "balzac@bootstrap-2026-10-03",
       "pack": "kb/balzac.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:7fcea16b1811debc4730d56843c79cca10f6f6e118f1dd694fd31aac652949a3",
-      "builtAt": "2026-10-03T09:49:59.126Z"
+      "sentences": 60,
+      "formulas": 34,
+      "checksum": "sha256:2598777966d1de2e0429c7dac192863f9bbbb950684702c245c95ede52eb4abf",
+      "builtAt": "2026-10-03T21:23:12.157Z"
     },
     "austen": {
       "kbVersion": "austen@bootstrap-2026-10-03",
       "pack": "kb/austen.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:d923ee794734b6e657585d90aea4ed26146e176aab88f732a97a32fb2fe3fa4a",
-      "builtAt": "2026-10-03T09:49:59.133Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:24cf18370126f91c27bb04679431eb617e7f84ad5b688f491146140a1452de36",
+      "builtAt": "2026-10-03T21:23:12.173Z"
     },
     "rousseau": {
       "kbVersion": "rousseau@bootstrap-2026-10-03",
       "pack": "kb/rousseau.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:cd7577842e6e09759a2c8db201d791507f9bc1cca5f3afc3ec9b409760aa82f8",
-      "builtAt": "2026-10-03T09:49:59.138Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:54a8073e8b8565a5ed4e8f392d41c77f5fe84e9150afe5993f1f0509b3a4913d",
+      "builtAt": "2026-10-03T21:23:12.195Z"
     },
     "verne": {
       "kbVersion": "verne@bootstrap-2026-10-03",
       "pack": "kb/verne.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:466a72f14bb8a294ad4379f655055890556d52b922c8dd4987b7ad0867156107",
-      "builtAt": "2026-10-03T09:49:59.146Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:aad54556609835827016a3cfbdd34c0fd9e33205df32a850b60cc159488e6241",
+      "builtAt": "2026-10-03T21:23:12.214Z"
     },
     "marx": {
       "kbVersion": "marx@bootstrap-2026-10-03",
       "pack": "kb/marx.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:d0580f4ee7001df2e023cd6ffa78ed14d12de49a75a83dbf8c62110b9cb9345f",
-      "builtAt": "2026-10-03T09:49:59.153Z"
+      "sentences": 48,
+      "formulas": 26,
+      "checksum": "sha256:31023c997512d1af83071fc3693f7fd1a5c0f6b1f3b97f3afda64a542785d43a",
+      "builtAt": "2026-10-03T21:23:12.228Z"
     },
     "tolstoi": {
       "kbVersion": "tolstoi@bootstrap-2026-10-03",
       "pack": "kb/tolstoi.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:4e9daed522b7b6ead6f98ed6dbee5ac9e107594a0c9471de15c380002cd2dccd",
-      "builtAt": "2026-10-03T09:49:59.160Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:ece16f3cfe969687dce1f86c3e3db6ae2b8aba807ac353efe2b5b2eb3e75cdc2",
+      "builtAt": "2026-10-03T21:23:12.245Z"
     },
     "marcaurele": {
       "kbVersion": "marcaurele@bootstrap-2026-10-03",
       "pack": "kb/marcaurele.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:0ef2cf99e75d198ef31e04e1aea8103d24432d707ecbf90fd4bb146b216de2a0",
-      "builtAt": "2026-10-03T09:49:59.166Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:a028d4950f664b93a39ea8413707ccb82d564478e9c33aa178345a9e41d90769",
+      "builtAt": "2026-10-03T21:23:12.256Z"
     },
     "montaigne": {
       "kbVersion": "montaigne@bootstrap-2026-10-03",
       "pack": "kb/montaigne.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:f4734c86a82149bc1dedce842728e818360c36481f0ff9b83844c696b27826c8",
-      "builtAt": "2026-10-03T09:49:59.171Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:5dc0bd273687760ffba00fdc3477ee4fde6499c817771ff02e4ce0af932d984c",
+      "builtAt": "2026-10-03T21:23:12.268Z"
     },
     "cervantes": {
       "kbVersion": "cervantes@bootstrap-2026-10-03",
       "pack": "kb/cervantes.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:2889efdcbf15dd1c382c9d410e5f0b80d313902041d98b073ab45c847272714c",
-      "builtAt": "2026-10-03T09:49:59.180Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:75d740195ecfe65904982eaeb8da95924301c1656e9d4f3175cd63e9e952c583",
+      "builtAt": "2026-10-03T21:23:12.284Z"
     },
     "machiavel": {
       "kbVersion": "machiavel@bootstrap-2026-10-03",
       "pack": "kb/machiavel.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:4f65236d16c2eeb5377e29a635b7186036b737afd3bd876a79377fab4ad4ecdb",
-      "builtAt": "2026-10-03T09:49:59.185Z"
+      "sentences": 48,
+      "formulas": 26,
+      "checksum": "sha256:73a0caeb57443452cc53a2e0abeb7a6a91705ed1ae641f6d749d82e052abc39b",
+      "builtAt": "2026-10-03T21:23:12.302Z"
     },
     "wilde": {
       "kbVersion": "wilde@bootstrap-2026-10-03",
       "pack": "kb/wilde.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:b668015d58605ccbe8bb6f26de449623cae36aaa06024149c3ee151cfcc5106a",
-      "builtAt": "2026-10-03T09:49:59.190Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:7350acaf78a5610b7c38892cf19a48798ed171e7db49fb4815b0cdf07109e762",
+      "builtAt": "2026-10-03T21:23:12.317Z"
     },
     "platon": {
       "kbVersion": "platon@bootstrap-2026-10-03",
       "pack": "kb/platon.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:ba8bff0609e2e745f5bb20f7ba15427651d568d6e2d753c3df8c0a5e7d8a7bff",
-      "builtAt": "2026-10-03T09:49:59.194Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:c76b1e30b5db3ca7d95c8339100d4972c6654a45f15c299d0ab7677f0aefc4c5",
+      "builtAt": "2026-10-03T21:23:12.332Z"
     },
     "descartes": {
       "kbVersion": "descartes@bootstrap-2026-10-03",
       "pack": "kb/descartes.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:8966ce768877cadd56b6c95ed77de14e2dd352f923eb0d65398bbcec8bc59f13",
-      "builtAt": "2026-10-03T09:49:59.197Z"
+      "sentences": 36,
+      "formulas": 20,
+      "checksum": "sha256:5b204f771c09d48d408d6ee2649de55086bcfbdd298d853b1981a266f4a559db",
+      "builtAt": "2026-10-03T21:23:12.354Z"
     },
     "stendhal": {
       "kbVersion": "stendhal@bootstrap-2026-10-03",
       "pack": "kb/stendhal.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:ed81cf2a9aeecb3867fb8960c5672a560b8fab69d225c2af44d00aa4f39be6ff",
-      "builtAt": "2026-10-03T09:49:59.202Z"
+      "sentences": 60,
+      "formulas": 35,
+      "checksum": "sha256:5cf9ef429cdfb6b4f0b2a27d31388919612a98af943aa2a0bf5e66f0ea671040",
+      "builtAt": "2026-10-03T21:23:12.370Z"
     },
     "suntzu": {
       "kbVersion": "suntzu@bootstrap-2026-10-03",
       "pack": "kb/suntzu.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:01407e74b77a6beb255f2251c32b8770ff0f9a0e04d499f4dc9ff24db766fe15",
-      "builtAt": "2026-10-03T09:49:59.204Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:60a6d75e62adef80380748dfbb197646b14d4d823109b094da3b4929a628c1cd",
+      "builtAt": "2026-10-03T21:23:12.382Z"
     },
     "hugo": {
       "kbVersion": "hugo@bootstrap-2026-10-03",
       "pack": "kb/hugo.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:3a30876740dc0645b369cfa7c2c5d58ce6ecb0f8b941fd1db51cbe65bd64ac49",
-      "builtAt": "2026-10-03T09:49:59.208Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:16c61201b52a4146091140f5906c132f91c858a6ab093ff13eacadd7de245f95",
+      "builtAt": "2026-10-03T21:23:12.394Z"
     },
     "voltaire": {
       "kbVersion": "voltaire@bootstrap-2026-10-03",
       "pack": "kb/voltaire.json",
-      "sentences": 40,
-      "formulas": 23,
-      "checksum": "sha256:37bf903030a8c0e803ba559c3473ad5543ada83a54ab47dc60d8ed39261afa98",
-      "builtAt": "2026-10-03T09:49:59.213Z"
+      "sentences": 60,
+      "formulas": 34,
+      "checksum": "sha256:90f5dae52b0c88fe209f5b8de245dcb8988fcbb02e666ef30486ee0ffdb04488",
+      "builtAt": "2026-10-03T21:23:12.412Z"
     },
     "shakespeare": {
       "kbVersion": "shakespeare@bootstrap-2026-10-03",
       "pack": "kb/shakespeare.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:d42ba954efb22f5f55455f614d09880f8344e0117136cf0f3b447bcc67dd7aa0",
-      "builtAt": "2026-10-03T09:49:59.217Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:5510dfb519499d8f9bcfc92a6a745eb0c86e06857433568a4780d96d5d5b9c18",
+      "builtAt": "2026-10-03T21:23:12.433Z"
     },
     "seneca": {
       "kbVersion": "seneca@bootstrap-2026-10-03",
       "pack": "kb/seneca.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:0cef4a248f54e4f0cd75390ee6a1320be124f12fba4a1accb25732a8ac11d35c",
-      "builtAt": "2026-10-03T09:49:59.223Z"
+      "sentences": 48,
+      "formulas": 26,
+      "checksum": "sha256:5dcb9e2736602c28f646f59fec66e0eb551bd9413c1408b13d73dd945fd94f02",
+      "builtAt": "2026-10-03T21:23:12.444Z"
     },
     "ciceron": {
       "kbVersion": "ciceron@bootstrap-2026-10-03",
       "pack": "kb/ciceron.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:dfd5ce00ad3f5fe8818b6b27352d4ee47dc7da787b4f075c019ec4e2c194e7f4",
-      "builtAt": "2026-10-03T09:49:59.227Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:2a3356e116f8cb7ddfa280b7016918f923deaf82e826f677c8addecf65a017d1",
+      "builtAt": "2026-10-03T21:23:12.460Z"
     },
     "epictete": {
       "kbVersion": "epictete@bootstrap-2026-10-03",
       "pack": "kb/epictete.json",
-      "sentences": 40,
-      "formulas": 23,
-      "checksum": "sha256:ca1251080f99c8468bce6139ecd02f7816ee7580933a9d66cecc5d9f97299073",
-      "builtAt": "2026-10-03T09:49:59.231Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:903eaecde3c82e568e39b15c42aef6584c0a7a6ad78d7b03b8151d21961155a6",
+      "builtAt": "2026-10-03T21:23:12.471Z"
     },
     "epicure": {
       "kbVersion": "epicure@bootstrap-2026-10-03",
       "pack": "kb/epicure.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:9643899b5dea4e87e21edf2ecb96f337d545472b28786b049de9db93d88abc5c",
-      "builtAt": "2026-10-03T09:49:59.236Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:44f93e715225364267a021ca4e6e68bbb9527ce5bc9c80989748269281b73ea8",
+      "builtAt": "2026-10-03T21:23:12.481Z"
     },
     "augustin": {
       "kbVersion": "augustin@bootstrap-2026-10-03",
       "pack": "kb/augustin.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:feddcdf6529ac9cad2f54c35963f5bf4f829b888ab8543c7f54b0d4cd5d9de3b",
-      "builtAt": "2026-10-03T09:49:59.240Z"
+      "sentences": 48,
+      "formulas": 27,
+      "checksum": "sha256:1e57d6aab5eff281ed431e417a25259b7012315325de740ee08332d8247a0615",
+      "builtAt": "2026-10-03T21:23:12.495Z"
     },
     "boece": {
       "kbVersion": "boece@bootstrap-2026-10-03",
       "pack": "kb/boece.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:58d5273c0d448516253d9b0a9bd74ab98339252f0795e9f2d34566ea5a4dcab1",
-      "builtAt": "2026-10-03T09:49:59.243Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:86c465ff25b2931ee28b6e4983811a51bca6d1b8134d9059eac6b1b7a643c2e6",
+      "builtAt": "2026-10-03T21:23:12.506Z"
     },
     "aquinas": {
       "kbVersion": "aquinas@bootstrap-2026-10-03",
       "pack": "kb/aquinas.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:a28c10bcbfa918f3c65fb8fec7e9caf316d0d48968849e46cab6c365edd7618e",
-      "builtAt": "2026-10-03T09:49:59.246Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:cb85d5015847c8c9128b6845c15edeb3182a44dd6f196b232ba7f98248fe68b4",
+      "builtAt": "2026-10-03T21:23:12.515Z"
     },
     "hobbes": {
       "kbVersion": "hobbes@bootstrap-2026-10-03",
       "pack": "kb/hobbes.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:9c2f91f4b1a59fabae9a226704b2b56c142961895edbae405a453ee679a49348",
-      "builtAt": "2026-10-03T09:49:59.249Z"
+      "sentences": 48,
+      "formulas": 26,
+      "checksum": "sha256:7966a1517cc3f05b3495b6e1d167a7119feca41159678f06a9aa9f3211a16c50",
+      "builtAt": "2026-10-03T21:23:12.527Z"
     },
     "locke": {
       "kbVersion": "locke@bootstrap-2026-10-03",
       "pack": "kb/locke.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:49430cb500b0e542700a63f108da5146280bab6788af2c11ca85914cf69c875e",
-      "builtAt": "2026-10-03T09:49:59.254Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:3e36e8c9d5fdebd7e86108efc9a3d518282fc827d9c26a0d35c3e02b910768e1",
+      "builtAt": "2026-10-03T21:23:12.539Z"
     },
     "hume": {
       "kbVersion": "hume@bootstrap-2026-10-03",
       "pack": "kb/hume.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:35bc466e4a59fcc00dfb8194c91f2e43b7af1e32f681ef3b03e3414106295779",
-      "builtAt": "2026-10-03T09:49:59.258Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:c3a0f0275229d3ef69b55d0c1a55e0a53a1d6e8d829506e616f3eca65405ba66",
+      "builtAt": "2026-10-03T21:23:12.553Z"
     },
     "leibniz": {
       "kbVersion": "leibniz@bootstrap-2026-10-03",
       "pack": "kb/leibniz.json",
-      "sentences": 40,
-      "formulas": 23,
-      "checksum": "sha256:a998c78c9403bf3c9302d7e0b154f54474597370d2375283a44667b87b04034b",
-      "builtAt": "2026-10-03T09:49:59.262Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:73f88c2d3e2859d1e2a9e6d472fbd8d112e40405f801226d1f7640c55175470e",
+      "builtAt": "2026-10-03T21:23:12.567Z"
     },
     "pascal": {
       "kbVersion": "pascal@bootstrap-2026-10-03",
       "pack": "kb/pascal.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:cd002dd597af8bf99daa9d4bb73b58e95960a671ae8ecd7e982513114d7fe6ee",
-      "builtAt": "2026-10-03T09:49:59.265Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:cb2707bad84130ef8fd40b208462a576158bf7727a9acba89ba91839a6310653",
+      "builtAt": "2026-10-03T21:23:12.581Z"
     },
     "berkeley": {
       "kbVersion": "berkeley@bootstrap-2026-10-03",
       "pack": "kb/berkeley.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:c4953dbe9afa001e764562a209818358736fcf0c61552947bbdcf83841d1813a",
-      "builtAt": "2026-10-03T09:49:59.269Z"
+      "sentences": 48,
+      "formulas": 26,
+      "checksum": "sha256:5257bdd78f666ec3cafbb21de2385c1921c38a44247691b5a37936ce2294a100",
+      "builtAt": "2026-10-03T21:23:12.596Z"
     },
     "hegel": {
       "kbVersion": "hegel@bootstrap-2026-10-03",
       "pack": "kb/hegel.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:3aed4820f60fb0656b23e4c94ca86b12df3a8dea5962a99e1fcf92ac23070a1b",
-      "builtAt": "2026-10-03T09:49:59.273Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:ab5a2eaa80ba1725a18668e33ab9e7ea477ffb3fb4582e6d0bd61ca9738674ae",
+      "builtAt": "2026-10-03T21:23:12.611Z"
     },
     "schopenhauer": {
       "kbVersion": "schopenhauer@bootstrap-2026-10-03",
       "pack": "kb/schopenhauer.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:3a2bd1125acb75ac120f873dc9335f83755f7db229bce1994fcd247ef6d8ca83",
-      "builtAt": "2026-10-03T09:49:59.276Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:a6466ef0b6ec4646b34fb422d815274cc9729508ab904f0233289ad4c0641f7a",
+      "builtAt": "2026-10-03T21:23:12.624Z"
     },
     "kierkegaard": {
       "kbVersion": "kierkegaard@bootstrap-2026-10-03",
       "pack": "kb/kierkegaard.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:e2b531a99dd09f07fc629dcca9b6599a11ba112e9e35f9c74f21dd5a62bb7365",
-      "builtAt": "2026-10-03T09:49:59.279Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:9104919e55214cc548ca9115367879c3a4831a163fd25351af677de7235a3fd0",
+      "builtAt": "2026-10-03T21:23:12.634Z"
     },
     "mill": {
       "kbVersion": "mill@bootstrap-2026-10-03",
       "pack": "kb/mill.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:7fdbdedb91328065e794f68dcd32c17b363258c968ad017dbdeb5cc0cc9064a0",
-      "builtAt": "2026-10-03T09:49:59.283Z"
+      "sentences": 60,
+      "formulas": 34,
+      "checksum": "sha256:127b20c47b9fadf50284be2103daee342fdfd2c4069713fe9f2756b815095de8",
+      "builtAt": "2026-10-03T21:23:12.650Z"
     },
     "emerson": {
       "kbVersion": "emerson@bootstrap-2026-10-03",
       "pack": "kb/emerson.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:e173a5c18c0b5fed0920caeec48bdf4853e875257eb3e00d5321e6224fb37c48",
-      "builtAt": "2026-10-03T09:49:59.288Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:dd01ae638f5a215cbd4c248fcbb4dc0e1bbe15d161c34f5993fb14377ff36604",
+      "builtAt": "2026-10-03T21:23:12.669Z"
     },
     "james": {
       "kbVersion": "james@bootstrap-2026-10-03",
       "pack": "kb/james.json",
-      "sentences": 40,
-      "formulas": 23,
-      "checksum": "sha256:504ad7d780d06a43d002b5ae81c9b228a8671c0983af3ee2fe0e02d1cfdee154",
-      "builtAt": "2026-10-03T09:49:59.292Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:92ec079cb6232388e14ec59c3041c55b9bff23279834ff72f684c61e6d2e8eec",
+      "builtAt": "2026-10-03T21:23:12.687Z"
     },
     "diderot": {
       "kbVersion": "diderot@bootstrap-2026-10-03",
       "pack": "kb/diderot.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:dde13ab4b36e1789afa3a531280076cc19e5ddad7dc3db7f451cb18ba747f778",
-      "builtAt": "2026-10-03T09:49:59.296Z"
+      "sentences": 60,
+      "formulas": 34,
+      "checksum": "sha256:e0ab2ab7621616196cb84eb44ce072ce5f94ea56c0b1ea5cf8753d4d2322a76c",
+      "builtAt": "2026-10-03T21:23:12.705Z"
     },
     "christianisme": {
       "kbVersion": "christianisme@bootstrap-2026-10-03",
       "pack": "kb/christianisme.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:402d25f50db7c163a6313b0194a831dc2877bdf3910d095197d9f0c2a69f178f",
-      "builtAt": "2026-10-03T09:49:59.299Z"
+      "sentences": 60,
+      "formulas": 34,
+      "checksum": "sha256:742d2de67c5b120d05814c6edb19877825f4759164533348db39c53a451a0cb0",
+      "builtAt": "2026-10-03T21:23:12.719Z"
     },
     "judaisme": {
       "kbVersion": "judaisme@bootstrap-2026-10-03",
       "pack": "kb/judaisme.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:89811163e70270be86ea876f57c6ec5be3fbe8c8ae184937be76a9eceed92919",
-      "builtAt": "2026-10-03T09:49:59.302Z"
+      "sentences": 55,
+      "formulas": 30,
+      "checksum": "sha256:c76a8dca99df640a7c4ed9cc2a49b294f3f4a8fe42cabcdea9abaec4e7833758",
+      "builtAt": "2026-10-03T21:23:12.734Z"
     },
     "islam": {
       "kbVersion": "islam@bootstrap-2026-10-03",
       "pack": "kb/islam.json",
-      "sentences": 20,
-      "formulas": 12,
-      "checksum": "sha256:a5dffb0a084f7d3e52bd5c2b1e653f991a212142da092cf5400ac78a48fe2aef",
-      "builtAt": "2026-10-03T09:49:59.306Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:83178cb465e0172baebf18c4702a3eb4d2ecb9c646690723426e84c200819436",
+      "builtAt": "2026-10-03T21:23:12.750Z"
     },
     "hindouisme": {
       "kbVersion": "hindouisme@bootstrap-2026-10-03",
       "pack": "kb/hindouisme.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:c30bea63a37b4bd607bc19f46a26fd66631baf5b90218fb601a701a06a7db7fd",
-      "builtAt": "2026-10-03T09:49:59.311Z"
+      "sentences": 60,
+      "formulas": 33,
+      "checksum": "sha256:6a7378ed65162153e4df32e4271d64b1aca91752cf25d3cb3ac747f1b2f848f0",
+      "builtAt": "2026-10-03T21:23:12.761Z"
     },
     "bouddhisme": {
       "kbVersion": "bouddhisme@bootstrap-2026-10-03",
       "pack": "kb/bouddhisme.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:a56c0ca093a9d199c12e88f47d9c4a2b25dc539d34f769ecc040a486ad5b6489",
-      "builtAt": "2026-10-03T09:49:59.318Z"
+      "sentences": 36,
+      "formulas": 20,
+      "checksum": "sha256:31bc2b60087890b4d77531c8dcc25c02fdcc96a8ddc62ec305b70736ea9baac8",
+      "builtAt": "2026-10-03T21:23:12.775Z"
     },
     "taoisme": {
       "kbVersion": "taoisme@bootstrap-2026-10-03",
       "pack": "kb/taoisme.json",
-      "sentences": 40,
-      "formulas": 22,
-      "checksum": "sha256:a10e6d6d3708291302c69992ef3f824e2f7d7373722794c8d0e4548f6d14309d",
-      "builtAt": "2026-10-03T09:49:59.321Z"
+      "sentences": 24,
+      "formulas": 13,
+      "checksum": "sha256:037d0b7cd7799539c675e978ef7ef888fb1e3ff7b0374f063243d919b83450ae",
+      "builtAt": "2026-10-03T21:23:12.791Z"
     }
   }
 }

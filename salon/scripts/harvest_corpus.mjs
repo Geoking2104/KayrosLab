@@ -8,7 +8,7 @@
  * régulier par œuvre et par auteur. Sortie : backend/web/public/salon/corpus.json
  * = { "<auteur>": [ { "w": "<œuvre>", "s": "<phrase>" }, … ] }.
  *
- * Déterministe : œuvres triées, échantillonnage à pas fixe. En cas d'échec
+ * Déterministe : ordre du catalogue, échantillonnage à pas fixe. En cas d'échec
  * réseau pour un auteur, on conserve ses entrées existantes (jamais de trou).
  *
  * Usage : node salon/scripts/harvest_corpus.mjs [--limit N] [--works N] [--max N] [--workmax N]
@@ -51,15 +51,37 @@ function isNoise(s) {
   return NOISE.test(s);
 }
 
-function cutGutenberg(t) {
+function cutGutenberg(t, work) {
   let s = t.replace(/\r/g, '');
   const start = s.search(/\*\*\*\s*START OF (THE|THIS) PROJECT GUTENBERG/i);
   if (start >= 0) s = s.slice(start + 200);
   const end = s.search(/\*\*\*\s*END OF (THE|THIS) PROJECT GUTENBERG/i);
   if (end >= 0) s = s.slice(0, end);
+  // startAt (catalog.json) : saute l'introduction d'éditeur quand elle est connue.
+  let sliced = false;
+  if (work && work.startAt) {
+    const m = s.search(new RegExp(work.startAt, 'i'));
+    if (m > 0) { s = s.slice(m); sliced = true; }
+  }
   // Retire les liminaires (préface, introduction, notices) et la fin (index).
-  s = s.slice(Math.floor(s.length * 0.10), Math.floor(s.length * 0.97));
+  if (sliced) s = s.slice(0, Math.floor(s.length * 0.99));
+  else s = s.slice(Math.floor(s.length * 0.10), Math.floor(s.length * 0.97));
   return s;
+}
+
+/* Rejette les phrases qui nomment l'auteur à la troisième personne
+ * (commentaire d'éditeur, notice) — proposition du plan de correction. */
+function authorNameRe(a) {
+  const toks = [];
+  for (const n of [a.name, a.nameEn]) {
+    if (!n) continue;
+    const parts = String(n).split(/[\s’'-]+/).filter(Boolean);
+    const last = parts[parts.length - 1];
+    if (last && last.length >= 4) toks.push(last);
+  }
+  const uniq = Array.from(new Set(toks));
+  if (!uniq.length) return null;
+  return new RegExp('\\b(?:' + uniq.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\b');
 }
 
 function sample(arr, max) {
@@ -108,21 +130,37 @@ let fetched = 0, failed = 0, total = 0;
 for (const a of authors) {
   const works = (a.works || [])
     .filter((w) => w && w.url && /gutenberg\.org/.test(w.url))
-    .sort((x, y) => String(x.title).localeCompare(String(y.title)))
+    // Ordre du catalogue (celui affiché) : works[0] couvert en premier.
     .slice(0, WORKS);
-  const entries = [];
-  const seen = new Set();
+  const _nameRe = authorNameRe(a);
+  // Toutes les phrases candidates par œuvre, puis échantillonnage adaptatif :
+  // le pas par œuvre n'est élargi que si l'auteur reste sous 18 phrases
+  // (source unique ou œuvres partageant un même livre).
+  const sources = [];
   for (const w of works) {
     const raw = await fetchText(w.url);
     if (!raw) { failed++; continue; }
     fetched++;
-    const ss = sample(sentences(cutGutenberg(raw)), WORKMAX);
-    for (const s of ss) {
-      const key = s.slice(0, 60);
-      if (seen.has(key)) continue;
-      seen.add(key);
-      entries.push({ w: w.title, s: s });
+    sources.push({ title: w.title, list: sentences(cutGutenberg(raw, w)).filter((s) => !_nameRe || !_nameRe.test(s)) });
+  }
+  const collect = (limitPerWork) => {
+    const out2 = [];
+    const seen2 = new Set();
+    for (const src of sources) {
+      for (const s of sample(src.list, limitPerWork)) {
+        const key = s.slice(0, 60);
+        if (seen2.has(key)) continue;
+        seen2.add(key);
+        out2.push({ w: src.title, s: s });
+      }
     }
+    return out2;
+  };
+  let wm = WORKMAX;
+  let entries = collect(wm);
+  while (entries.length < 18 && wm < MAX) {
+    wm = Math.min(MAX, wm * 2);
+    entries = collect(wm);
   }
   if (!entries.length) {
     // pas de réseau/texte exploitable : on garde la mémoire précédente

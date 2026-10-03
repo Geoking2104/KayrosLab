@@ -1,26 +1,126 @@
 {
   "authorId": "machiavel",
   "kbVersion": "machiavel@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.185Z",
+  "builtAt": "2026-10-03T21:23:12.302Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
+      "title": "The Prince",
+      "sentences": 12
+    },
+    {
       "title": "Discourses on the First Decade of Titus Livius",
-      "sentences": 14
+      "sentences": 12
     },
     {
       "title": "History of Florence and of the Affairs of Italy",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "La mandragola - La Clizia - Belfagor",
-      "sentences": 13
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "machiavel.p0001",
+      "w": "The Prince",
+      "s": "Such dominions thus acquired are either accustomed to live under a prince, or to live in freedom; and are acquired either by the arms of the prince himself, or of others, or else by fortune or by ability.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0002",
+      "w": "The Prince",
+      "s": "And when fighting afterwards amongst themselves, each one was able to attach to himself his own parts of the country, according to the authority he had assumed there; and the family of the former lord being exterminated, none other than the Romans were acknowledged.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0003",
+      "w": "The Prince",
+      "s": "It was his intention to secure himself against them, and this he would have quickly accomplished had Alexander lived.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0004",
+      "w": "The Prince",
+      "s": "And so much the more is this experiment dangerous, inasmuch as it can only be tried once.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0005",
+      "w": "The Prince",
+      "s": "I shall never hesitate to cite Cesare Borgia and his actions.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0006",
+      "w": "The Prince",
+      "s": "Every one admits how praiseworthy it is in a prince to keep faith, and to live with integrity and not with craft.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0007",
+      "w": "The Prince",
+      "s": "Fortresses, therefore, are useful or not according to circumstances; if they do you good in one way they injure you in another.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0008",
+      "w": "The Prince",
+      "s": "And if you will consider Italy, which is the seat of these changes, and which has given to them their impulse, you will see it to be an open country without barriers and without any defence.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0009",
+      "w": "The Prince",
+      "s": "But Vitellozzo remained very stubborn, for the death of his brother warned him that he should not offend a prince and afterwards trust him; nevertheless, persuaded by Pagolo Orsini, whom the duke had corrupted with gifts and promises, he agreed to wait.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0010",
+      "w": "The Prince",
+      "s": "When the night came which had been agreed upon with Uguccione, who had occupied the plain between the mountains and Pisa with many men, the signal was given, and without being observed Uguccione approached the gate of San Piero and set fire to the portcullis.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0011",
+      "w": "The Prince",
+      "s": "Contrary to his expectations, he found the rebellion at an end, yet he posted his men in the most advantageous places throughout the city.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0012",
+      "w": "The Prince",
+      "s": "He agreed with the Florentines to receive from them a yearly tribute of two hundred thousand florins, and he sent his son Carlo to Florence with four thousand horsemen.",
+      "src": {
+        "work": "The Prince"
+      }
+    },
+    {
+      "id": "machiavel.p0013",
       "w": "Discourses on the First Decade of Titus Livius",
       "s": "At the siege of Lucca the Florentine army was commanded by Messer Giovanni Guicciardini, as its commissary, through whose bad generalship or ill-fortune the town was not taken.",
       "src": {
@@ -28,55 +128,47 @@
       }
     },
     {
-      "id": "machiavel.p0002",
+      "id": "machiavel.p0014",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "For this he was condemned at Rome, while Papirius was honoured; not so much because the one had gained while the other had lost a battle, as because in their treatment of the auspices the one had behaved discreetly, the other with rashness.",
+      "s": "But Solomon could not transmit this inheritance to his son Rehoboam, who neither resembling his grandfather in valour, nor his father in good fortune, with difficulty made good his right to a sixth part of the kingdom.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0003",
+      "id": "machiavel.p0015",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "For it is the magistracies created and the powers usurped in unconstitutional ways that hurt a republic, not those which conform to ordinary rule; so that in Rome, through the whole period of her history, we never find a dictator who acted otherwise than well for the republic.",
+      "s": "For, eager as the Romans were in the pursuit of glory, they never esteemed it a dishonour to obey one whom before they had commanded, or to find themselves serving in the ranks of an army which once they had led.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0004",
+      "id": "machiavel.p0016",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "This was made a pretext by them for prolonging their magistracy, which they took measures to retain by force, gathering round them for this purpose a retinue of young noblemen, whom they enriched with the goods of those citizens whom they had condemned.",
+      "s": "But Florence, and other cities having a like origin, committed this power into the hands of a foreigner, whom they styled Captain, and as he was open to be corrupted by powerful citizens this was a pernicious course.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0005",
+      "id": "machiavel.p0017",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "And further, I say that any difference in their methods of acting results not from any difference in their nature, that being the same in both, or, if there be advantage on either side, the advantage resting with the people, but from their having more or less respect for the laws under which each lives.",
+      "s": "And this we may plainly see from the order in which their wars succeeded one another.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0006",
+      "id": "machiavel.p0018",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "In the religious ceremonies of the ancients neither pomp nor splendour were wanting; but to these was joined the ordinance of sacrifice, giving occasion to much bloodshed and cruelty.",
+      "s": "Had the Romans chosen to make war with gold rather than with iron all the treasures of the earth would not have sufficed them having regard to the greatness of their enterprises and the difficulties they had to overcome in carrying them out.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0007",
-      "w": "Discourses on the First Decade of Titus Livius",
-      "s": "And in all matters of difficulty, wherein courage is needed for resolving, this uncertainty will always be met with, whenever those who have to deliberate and decide are weak.",
-      "src": {
-        "work": "Discourses on the First Decade of Titus Livius"
-      }
-    },
-    {
-      "id": "machiavel.p0008",
+      "id": "machiavel.p0019",
       "w": "Discourses on the First Decade of Titus Livius",
       "s": "For although the Emperor be without strength of his own, he has nevertheless such credit with all these others that he alone can keep them united, and, interposing as mediator, can speedily repress by his influence any dissensions among them.",
       "src": {
@@ -84,23 +176,23 @@
       }
     },
     {
-      "id": "machiavel.p0009",
+      "id": "machiavel.p0020",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "But afterwards, when he could not fulfil what he had promised, either from shame, or through fear of punishment, he poisoned himself.",
+      "s": "And all who stand in her way, she either removes by death, or deprives of the means of effecting good.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0010",
+      "id": "machiavel.p0021",
       "w": "Discourses on the First Decade of Titus Livius",
-      "s": "But he whose life is threatened, finding himself forced by necessity either to do or suffer, becomes a man most dangerous to the prince, as shall be fully explained hereafter.",
+      "s": "Now, as I have said already, we find that conspiracies are attended by danger at three stages: before during, and after their execution; for which reason very few of them have had a happy issue; it being next to impossible to surmount all these different dangers successfully.",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
-      "id": "machiavel.p0011",
+      "id": "machiavel.p0022",
       "w": "Discourses on the First Decade of Titus Livius",
       "s": "Now the government of Rome was of this nature, and the expulsion of the Tarquins took place in this way.",
       "src": {
@@ -108,113 +200,25 @@
       }
     },
     {
-      "id": "machiavel.p0012",
-      "w": "Discourses on the First Decade of Titus Livius",
-      "s": "And although pretexts of this sort are easily seen through, especially by the wise, the mass of the people are often beguiled by them, because desiring present tranquillity, they shut their eyes to the snares hidden behind these specious promises.",
-      "src": {
-        "work": "Discourses on the First Decade of Titus Livius"
-      }
-    },
-    {
-      "id": "machiavel.p0013",
-      "w": "Discourses on the First Decade of Titus Livius",
-      "s": "And before this he had made Lucius Tarquininus, although forced by his poverty to serve on foot, his master of the knights.",
-      "src": {
-        "work": "Discourses on the First Decade of Titus Livius"
-      }
-    },
-    {
-      "id": "machiavel.p0014",
-      "w": "Discourses on the First Decade of Titus Livius",
-      "s": "When Camillus, as already related, went forth to meet the Etruscans, his soldiers on seeing the great army of their enemy, were filled with fear, thinking themselves too to withstand its onset.",
-      "src": {
-        "work": "Discourses on the First Decade of Titus Livius"
-      }
-    },
-    {
-      "id": "machiavel.p0015",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "Of the Ghibelline faction were the Uberti, Manelli, Ubriachi, Fifanti, Amidei, Infangati, Malespini, Scolari, Guidi, Galli, Cappiardi, Lamberti, Soldanieri, Cipriani, Toschi, Amieri, Palermini, Migliorelli, Pigli, Barucci, Cattani, Agolanti, Brunelleschi, Caponsacchi, Elisei, Abati, Tidaldini, Giuochi, and Galigai.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0016",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "Their meeting and determination became known to the Priors, and the adverse party represented it as a conspiracy against the liberties of the republic.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0017",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "These events taking place in the city, induced all the dependencies of the Florentine state to throw off their yoke; so that Arezzo, Castiglione, Pistoia, Volterra, Colle, and San Gemigniano rebelled.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0018",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "When the Bianchi were overcome, the city was not long free from factions; for either, in favor of the emigrants, or on account of the animosity between the nobility and the people, we were still constantly at war.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0019",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "During this time, Giovanni Galeazzo Visconti, usually called the Count of Virtú, imprisoned his uncle Bernabo, and thus became sovereign of the whole of Lombardy.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0020",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "The Venetians were advised to adopt the same course by Francesco Carmignuola, one of the most distinguished warriors of those times, who had been in the service of the duke, and had afterward quitted it; but they hesitated, not knowing how far to trust him; for they thought his enmity with the duke was only feigned.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0021",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "The affairs of Florence being in this condition, Giovanna, queen of Naples, died, and by her will appointed René of Anjou to be her successor.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
-      "id": "machiavel.p0022",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "Neri embarked at Cesena and went to Venice; nor was any prince ever received with so much honor as he was; for upon his arrival, and the matters which his intervention was to decide and determine, the safety of the republic seemed to depend.",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      }
-    },
-    {
       "id": "machiavel.p0023",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "They sent a commissary to Cremona, attacked the Ghiaradadda, and took the whole of it, except Crema.",
+      "w": "Discourses on the First Decade of Titus Livius",
+      "s": "But Pisa being besieged by captains who knew neither how to blockade nor how to storm it, held out so long, that the Florentines, who should have reduced it by force, were obliged to buy its submission.",
       "src": {
-        "work": "History of Florence and of the Affairs of Italy"
+        "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
       "id": "machiavel.p0024",
-      "w": "History of Florence and of the Affairs of Italy",
-      "s": "They therefore entered into an alliance, and at the same time the enmity of the Venetians transpired by a treaty with the Siennese, and the expulsion of all Florentine subjects from their cities and territories.",
+      "w": "Discourses on the First Decade of Titus Livius",
+      "s": "And to treat the matter with greater fulness, I say, that while a republic can never maintain itself long, or manage its affairs to advantage, without citizens of good reputation, on the other hand the credit enjoyed by particular citizens often leads to the establishment of a tyranny.",
       "src": {
-        "work": "History of Florence and of the Affairs of Italy"
+        "work": "Discourses on the First Decade of Titus Livius"
       }
     },
     {
       "id": "machiavel.p0025",
       "w": "History of Florence and of the Affairs of Italy",
-      "s": "The Acciajuoli complained of the injury done them by the Bardi, and the matter was referred to Cosmo, who decided that the Acciajuoli should restore to Alessandra her fortune, and then leave it to her choice either to return to her husband or not.",
+      "s": "In consequence of this, many battles were fought in Lombardy, and the Visconti became lords of Parma.",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       }
@@ -222,7 +226,7 @@
     {
       "id": "machiavel.p0026",
       "w": "History of Florence and of the Affairs of Italy",
-      "s": "He communicated his ideas to Diotisalvi Neroni, and asked him, in case they should succeed in taking possession of Prato, what assistance might be expected from the princes of Italy, by his means?",
+      "s": "This became very evident upon the first occasion that presented itself.",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       }
@@ -230,13 +234,85 @@
     {
       "id": "machiavel.p0027",
       "w": "History of Florence and of the Affairs of Italy",
-      "s": "Upon this agreement, Battistino, by the assistance of the Castelletto and of his friends, became lord of Genoa; and according to the custom of the city, took the title of Doge.",
+      "s": "The Signory, notwithstanding many had foreseen the ruin of their country, were much disturbed at this demand; and although they were aware of the dangerous position in which they stood, that they might not be wanting in their duty, resolutely refused to comply.",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       }
     },
     {
       "id": "machiavel.p0028",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "When the Bianchi were overcome, the city was not long free from factions; for either, in favor of the emigrants, or on account of the animosity between the nobility and the people, we were still constantly at war.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0029",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "Hence many conflicts took place between the different parties or with the forces of the palace; for the Signory sometimes yielding, and at other times resisting, adopted such remedies as they could for these numerous evils.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0030",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "Upon the restoration of peace he was discharged; but when the affair of Volterra took place, being encamped with his people at Fucecchio, the commissaries availed themselves both of himself and his forces.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0031",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "The affairs of Florence being in this condition, Giovanna, queen of Naples, died, and by her will appointed René of Anjou to be her successor.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0032",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "The patriarch's followers at first began to use threats, but being informed of the pope's directions they were appeased.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0033",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "With the remainder of his sick troops he retired to the Siennese territory, and thence to his kingdom, incensed against the Florentines, and threatening them with new wars upon the return of spring.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0034",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "At the same time, King René coming with a fleet to the assistance of his son, and hoping to recover Genoa by means of the castelletto, upon landing his forces was so completely routed, that he was compelled to return in disgrace to Provence.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0035",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "Some horses were wounded and prisoners taken, but no death occurred.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0036",
+      "w": "History of Florence and of the Affairs of Italy",
+      "s": "Giuliano and Lorenzo were both aware of the animosity of the Pazzi, and their desire to deprive them of the government; but they felt assured that any design would be attempted openly, and in conjunction with the civil authority.",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      }
+    },
+    {
+      "id": "machiavel.p0037",
       "w": "La mandragola - La Clizia - Belfagor",
       "s": "E quando e' fussi uom che non è, da ricercare se tu se' o non se' medico, la brevità del tempo, la cosa in sé farà che non ne ragionerà, o che non sarà a tempo a guastarci el disegno, quando bene e' ne ragionassi.",
       "src": {
@@ -244,81 +320,9 @@
       }
     },
     {
-      "id": "machiavel.p0029",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Avete voi detto quelle messe della Nostra Donna?",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0030",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Ma di tutte le cose che si son tentate, questa mi pare la più strana, di avere a sottomettere el corpo mio a questo vituperio, ad essere cagione che un uomo muoia per vituperarmi; che io non crederei, se io fussi sola rimasa nel mondo, e da me avessi a risurgere l'umana natura, che mi fussi simile partito concesso.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0031",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Io scemo ad ognora dieci libbre pensando dove io sono ora, e dove io potrei essere di qui a due ore, temendo che non nasca qualche cosa che interrompa el mio disegno.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0032",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Al destro corno sia preposto Callimaco, al sinistro io, intra le due corna starà qui el dottore.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0033",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Occorse dipoi, che in un tratto egli e il figliuolo se ne innamorarono, nella concorrenza del quale amore assai casi e strani accidenti nacquero, i quali trapassati, il figliuolo la prese per donna, e con quella gran tempo felicissimamente visse.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0034",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Io sono sempre vivuto disperato, ed ora vivo più che mai.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0035",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "A me non pare che si possa ir più là, né che di questi partiti se ne trovi a ogni uscio.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0036",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Io voglio pure andare alla messa, e raccomandarmi a Dio quanto io posso.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
-      "id": "machiavel.p0037",
-      "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Io credo che se Iddio s'impaccia di simili cose, che Sofronia ancora speri in Dio.",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      }
-    },
-    {
       "id": "machiavel.p0038",
       "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Tu ti potrai stare pianamente sul lettuccio.",
+      "s": "Questo vostro dottore, Bramando aver figliuoli, Crederia ch'un asin voli; E qualunque altro ben posto ha in oblio E solo in questo ha posto il suo desìo.",
       "src": {
         "work": "La mandragola - La Clizia - Belfagor"
       }
@@ -326,7 +330,7 @@
     {
       "id": "machiavel.p0039",
       "w": "La mandragola - La Clizia - Belfagor",
-      "s": "E' s'è consumata la notte in misurare il tempo, e dicevamo: ora entra in camera Nicomaco, ora si spoglia, ora si corica a lato alla sposa, ora le dà la battaglia, ora è combattuto gagliardamente.",
+      "s": "Oltra di questo, el fine se ha a riguardare in tutte le cose.",
       "src": {
         "work": "La mandragola - La Clizia - Belfagor"
       }
@@ -334,7 +338,71 @@
     {
       "id": "machiavel.p0040",
       "w": "La mandragola - La Clizia - Belfagor",
-      "s": "Io vorrei parlargli per veder quello ch'ei dice a me di questo nuovo caso.",
+      "s": "Io scemo ad ognora dieci libbre pensando dove io sono ora, e dove io potrei essere di qui a due ore, temendo che non nasca qualche cosa che interrompa el mio disegno.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0041",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Ma io sento uno grande romore da casa Messere Nicia.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0042",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Voi vedete: quel primo è Nicomaco, un vecchio tutto pien d'amore.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0043",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Brutta cosa è vedere un vecchio soldato: bruttissimo vederlo innamorato.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0044",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "E' si levava la mattina di buon'ora, udiva la sua messa, provvedeva al vitto del giorno.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0045",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Che maladetto sia quel poltrone, che me l'arrecò dinanzi!",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0046",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Tu ti potrai stare pianamente sul lettuccio.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0047",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Tu, Damone, paramiti innanzi, e parla tu con queste donne.",
+      "src": {
+        "work": "La mandragola - La Clizia - Belfagor"
+      }
+    },
+    {
+      "id": "machiavel.p0048",
+      "w": "La mandragola - La Clizia - Belfagor",
+      "s": "Nondimeno se non si sa chi costei è, non mi parrebbe di dargliene.",
       "src": {
         "work": "La mandragola - La Clizia - Belfagor"
       }
@@ -343,6 +411,123 @@
   "formulas": [
     {
       "id": "machiavel.f.v0001",
+      "kind": "verbatim",
+      "text": "Such dominions thus acquired are either accustomed to live under a prince, or to live in freedom; and are acquired either by the arms of the prince himself, or of others, or else by fortune or by ability.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "machiavel.f.v0002",
+      "kind": "verbatim",
+      "text": "And when fighting afterwards amongst themselves, each one was able to attach to himself his own parts of the country, according to the authority he had assumed there; and the family of the former lord being exterminated, none other than the Romans were acknowledged.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "machiavel.f.v0003",
+      "kind": "verbatim",
+      "text": "It was his intention to secure himself against them, and this he would have quickly accomplished had Alexander lived.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "machiavel.f.v0004",
+      "kind": "verbatim",
+      "text": "Every one admits how praiseworthy it is in a prince to keep faith, and to live with integrity and not with craft.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 113
+      }
+    },
+    {
+      "id": "machiavel.f.v0005",
+      "kind": "verbatim",
+      "text": "Fortresses, therefore, are useful or not according to circumstances; if they do you good in one way they injure you in another.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "machiavel.f.v0006",
+      "kind": "verbatim",
+      "text": "And if you will consider Italy, which is the seat of these changes, and which has given to them their impulse, you will see it to be an open country without barriers and without any defence.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "machiavel.f.v0007",
+      "kind": "verbatim",
+      "text": "When the night came which had been agreed upon with Uguccione, who had occupied the plain between the mountains and Pisa with many men, the signal was given, and without being observed Uguccione approached the gate of San Piero and set fire to the portcullis.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "machiavel.f.v0008",
+      "kind": "verbatim",
+      "text": "Contrary to his expectations, he found the rebellion at an end, yet he posted his men in the most advantageous places throughout the city.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "machiavel.f.v0009",
+      "kind": "verbatim",
+      "text": "He agreed with the Florentines to receive from them a yearly tribute of two hundred thousand florins, and he sent his son Carlo to Florence with four thousand horsemen.",
+      "work": "The Prince",
+      "lang": "en",
+      "src": {
+        "work": "The Prince"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "machiavel.f.v0010",
       "kind": "verbatim",
       "text": "At the siege of Lucca the Florentine army was commanded by Messer Giovanni Guicciardini, as its commissary, through whose bad generalship or ill-fortune the town was not taken.",
       "work": "Discourses on the First Decade of Titus Livius",
@@ -355,33 +540,33 @@
       }
     },
     {
-      "id": "machiavel.f.v0002",
+      "id": "machiavel.f.v0011",
       "kind": "verbatim",
-      "text": "This was made a pretext by them for prolonging their magistracy, which they took measures to retain by force, gathering round them for this purpose a retinue of young noblemen, whom they enriched with the goods of those citizens whom they had condemned.",
+      "text": "Had the Romans chosen to make war with gold rather than with iron all the treasures of the earth would not have sufficed them having regard to the greatness of their enterprises and the difficulties they had to overcome in carrying them out.",
       "work": "Discourses on the First Decade of Titus Livius",
       "lang": "en",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       },
       "quality": {
-        "chars": 253
+        "chars": 241
       }
     },
     {
-      "id": "machiavel.f.v0003",
+      "id": "machiavel.f.v0012",
       "kind": "verbatim",
-      "text": "In the religious ceremonies of the ancients neither pomp nor splendour were wanting; but to these was joined the ordinance of sacrifice, giving occasion to much bloodshed and cruelty.",
+      "text": "Now, as I have said already, we find that conspiracies are attended by danger at three stages: before during, and after their execution; for which reason very few of them have had a happy issue; it being next to impossible to surmount all these different dangers successfully.",
       "work": "Discourses on the First Decade of Titus Livius",
       "lang": "en",
       "src": {
         "work": "Discourses on the First Decade of Titus Livius"
       },
       "quality": {
-        "chars": 183
+        "chars": 276
       }
     },
     {
-      "id": "machiavel.f.v0004",
+      "id": "machiavel.f.v0013",
       "kind": "verbatim",
       "text": "Now the government of Rome was of this nature, and the expulsion of the Tarquins took place in this way.",
       "work": "Discourses on the First Decade of Titus Livius",
@@ -394,59 +579,33 @@
       }
     },
     {
-      "id": "machiavel.f.v0005",
+      "id": "machiavel.f.v0014",
       "kind": "verbatim",
-      "text": "When Camillus, as already related, went forth to meet the Etruscans, his soldiers on seeing the great army of their enemy, were filled with fear, thinking themselves too to withstand its onset.",
-      "work": "Discourses on the First Decade of Titus Livius",
-      "lang": "en",
-      "src": {
-        "work": "Discourses on the First Decade of Titus Livius"
-      },
-      "quality": {
-        "chars": 193
-      }
-    },
-    {
-      "id": "machiavel.f.v0006",
-      "kind": "verbatim",
-      "text": "Of the Ghibelline faction were the Uberti, Manelli, Ubriachi, Fifanti, Amidei, Infangati, Malespini, Scolari, Guidi, Galli, Cappiardi, Lamberti, Soldanieri, Cipriani, Toschi, Amieri, Palermini, Migliorelli, Pigli, Barucci, Cattani, Agolanti, Brunelleschi, Caponsacchi, Elisei, Abati, Tidaldini, Giuochi, and Galigai.",
+      "text": "In consequence of this, many battles were fought in Lombardy, and the Visconti became lords of Parma.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       },
       "quality": {
-        "chars": 316
+        "chars": 101
       }
     },
     {
-      "id": "machiavel.f.v0007",
+      "id": "machiavel.f.v0015",
       "kind": "verbatim",
-      "text": "Their meeting and determination became known to the Priors, and the adverse party represented it as a conspiracy against the liberties of the republic.",
+      "text": "The Signory, notwithstanding many had foreseen the ruin of their country, were much disturbed at this demand; and although they were aware of the dangerous position in which they stood, that they might not be wanting in their duty, resolutely refused to comply.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       },
       "quality": {
-        "chars": 151
+        "chars": 261
       }
     },
     {
-      "id": "machiavel.f.v0008",
-      "kind": "verbatim",
-      "text": "These events taking place in the city, induced all the dependencies of the Florentine state to throw off their yoke; so that Arezzo, Castiglione, Pistoia, Volterra, Colle, and San Gemigniano rebelled.",
-      "work": "History of Florence and of the Affairs of Italy",
-      "lang": "en",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      },
-      "quality": {
-        "chars": 200
-      }
-    },
-    {
-      "id": "machiavel.f.v0009",
+      "id": "machiavel.f.v0016",
       "kind": "verbatim",
       "text": "When the Bianchi were overcome, the city was not long free from factions; for either, in favor of the emigrants, or on account of the animosity between the nobility and the people, we were still constantly at war.",
       "work": "History of Florence and of the Affairs of Italy",
@@ -459,33 +618,33 @@
       }
     },
     {
-      "id": "machiavel.f.v0010",
+      "id": "machiavel.f.v0017",
       "kind": "verbatim",
-      "text": "During this time, Giovanni Galeazzo Visconti, usually called the Count of Virtú, imprisoned his uncle Bernabo, and thus became sovereign of the whole of Lombardy.",
+      "text": "Hence many conflicts took place between the different parties or with the forces of the palace; for the Signory sometimes yielding, and at other times resisting, adopted such remedies as they could for these numerous evils.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       },
       "quality": {
-        "chars": 162
+        "chars": 223
       }
     },
     {
-      "id": "machiavel.f.v0011",
+      "id": "machiavel.f.v0018",
       "kind": "verbatim",
-      "text": "The Venetians were advised to adopt the same course by Francesco Carmignuola, one of the most distinguished warriors of those times, who had been in the service of the duke, and had afterward quitted it; but they hesitated, not knowing how far to trust him; for they thought his enmity with the duke was only feigned.",
+      "text": "Upon the restoration of peace he was discharged; but when the affair of Volterra took place, being encamped with his people at Fucecchio, the commissaries availed themselves both of himself and his forces.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       },
       "quality": {
-        "chars": 317
+        "chars": 205
       }
     },
     {
-      "id": "machiavel.f.v0012",
+      "id": "machiavel.f.v0019",
       "kind": "verbatim",
       "text": "The affairs of Florence being in this condition, Giovanna, queen of Naples, died, and by her will appointed René of Anjou to be her successor.",
       "work": "History of Florence and of the Affairs of Italy",
@@ -498,9 +657,35 @@
       }
     },
     {
-      "id": "machiavel.f.v0013",
+      "id": "machiavel.f.v0020",
       "kind": "verbatim",
-      "text": "Neri embarked at Cesena and went to Venice; nor was any prince ever received with so much honor as he was; for upon his arrival, and the matters which his intervention was to decide and determine, the safety of the republic seemed to depend.",
+      "text": "The patriarch's followers at first began to use threats, but being informed of the pope's directions they were appeased.",
+      "work": "History of Florence and of the Affairs of Italy",
+      "lang": "en",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "machiavel.f.v0021",
+      "kind": "verbatim",
+      "text": "With the remainder of his sick troops he retired to the Siennese territory, and thence to his kingdom, incensed against the Florentines, and threatening them with new wars upon the return of spring.",
+      "work": "History of Florence and of the Affairs of Italy",
+      "lang": "en",
+      "src": {
+        "work": "History of Florence and of the Affairs of Italy"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "machiavel.f.v0022",
+      "kind": "verbatim",
+      "text": "At the same time, King René coming with a fleet to the assistance of his son, and hoping to recover Genoa by means of the castelletto, upon landing his forces was so completely routed, that he was compelled to return in disgrace to Provence.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
@@ -511,59 +696,20 @@
       }
     },
     {
-      "id": "machiavel.f.v0014",
+      "id": "machiavel.f.v0023",
       "kind": "verbatim",
-      "text": "They therefore entered into an alliance, and at the same time the enmity of the Venetians transpired by a treaty with the Siennese, and the expulsion of all Florentine subjects from their cities and territories.",
+      "text": "Giuliano and Lorenzo were both aware of the animosity of the Pazzi, and their desire to deprive them of the government; but they felt assured that any design would be attempted openly, and in conjunction with the civil authority.",
       "work": "History of Florence and of the Affairs of Italy",
       "lang": "en",
       "src": {
         "work": "History of Florence and of the Affairs of Italy"
       },
       "quality": {
-        "chars": 211
+        "chars": 229
       }
     },
     {
-      "id": "machiavel.f.v0015",
-      "kind": "verbatim",
-      "text": "The Acciajuoli complained of the injury done them by the Bardi, and the matter was referred to Cosmo, who decided that the Acciajuoli should restore to Alessandra her fortune, and then leave it to her choice either to return to her husband or not.",
-      "work": "History of Florence and of the Affairs of Italy",
-      "lang": "en",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      },
-      "quality": {
-        "chars": 247
-      }
-    },
-    {
-      "id": "machiavel.f.v0016",
-      "kind": "verbatim",
-      "text": "He communicated his ideas to Diotisalvi Neroni, and asked him, in case they should succeed in taking possession of Prato, what assistance might be expected from the princes of Italy, by his means?",
-      "work": "History of Florence and of the Affairs of Italy",
-      "lang": "en",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      },
-      "quality": {
-        "chars": 196
-      }
-    },
-    {
-      "id": "machiavel.f.v0017",
-      "kind": "verbatim",
-      "text": "Upon this agreement, Battistino, by the assistance of the Castelletto and of his friends, became lord of Genoa; and according to the custom of the city, took the title of Doge.",
-      "work": "History of Florence and of the Affairs of Italy",
-      "lang": "en",
-      "src": {
-        "work": "History of Florence and of the Affairs of Italy"
-      },
-      "quality": {
-        "chars": 176
-      }
-    },
-    {
-      "id": "machiavel.f.v0018",
+      "id": "machiavel.f.v0024",
       "kind": "verbatim",
       "text": "E quando e' fussi uom che non è, da ricercare se tu se' o non se' medico, la brevità del tempo, la cosa in sé farà che non ne ragionerà, o che non sarà a tempo a guastarci el disegno, quando bene e' ne ragionassi.",
       "work": "La mandragola - La Clizia - Belfagor",
@@ -576,20 +722,20 @@
       }
     },
     {
-      "id": "machiavel.f.v0019",
+      "id": "machiavel.f.v0025",
       "kind": "verbatim",
-      "text": "Ma di tutte le cose che si son tentate, questa mi pare la più strana, di avere a sottomettere el corpo mio a questo vituperio, ad essere cagione che un uomo muoia per vituperarmi; che io non crederei, se io fussi sola rimasa nel mondo, e da me avessi a risurgere l'umana natura, che mi fussi simile partito concesso.",
+      "text": "Questo vostro dottore, Bramando aver figliuoli, Crederia ch'un asin voli; E qualunque altro ben posto ha in oblio E solo in questo ha posto il suo desìo.",
       "work": "La mandragola - La Clizia - Belfagor",
-      "lang": "fr",
+      "lang": "en",
       "src": {
         "work": "La mandragola - La Clizia - Belfagor"
       },
       "quality": {
-        "chars": 316
+        "chars": 153
       }
     },
     {
-      "id": "machiavel.f.v0020",
+      "id": "machiavel.f.v0026",
       "kind": "verbatim",
       "text": "Io scemo ad ognora dieci libbre pensando dove io sono ora, e dove io potrei essere di qui a due ore, temendo che non nasca qualche cosa che interrompa el mio disegno.",
       "work": "La mandragola - La Clizia - Belfagor",
@@ -600,41 +746,16 @@
       "quality": {
         "chars": 166
       }
-    },
-    {
-      "id": "machiavel.f.v0021",
-      "kind": "verbatim",
-      "text": "Occorse dipoi, che in un tratto egli e il figliuolo se ne innamorarono, nella concorrenza del quale amore assai casi e strani accidenti nacquero, i quali trapassati, il figliuolo la prese per donna, e con quella gran tempo felicissimamente visse.",
-      "work": "La mandragola - La Clizia - Belfagor",
-      "lang": "fr",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      },
-      "quality": {
-        "chars": 246
-      }
-    },
-    {
-      "id": "machiavel.f.v0022",
-      "kind": "verbatim",
-      "text": "E' s'è consumata la notte in misurare il tempo, e dicevamo: ora entra in camera Nicomaco, ora si spoglia, ora si corica a lato alla sposa, ora le dà la battaglia, ora è combattuto gagliardamente.",
-      "work": "La mandragola - La Clizia - Belfagor",
-      "lang": "fr",
-      "src": {
-        "work": "La mandragola - La Clizia - Belfagor"
-      },
-      "quality": {
-        "chars": 195
-      }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 48,
+    "formulas": 26,
+    "verbatim": 26,
     "patterns": 0
   },
-  "checksum": "sha256:4f65236d16c2eeb5377e29a635b7186036b737afd3bd876a79377fab4ad4ecdb"
+  "checksum": "sha256:73a0caeb57443452cc53a2e0abeb7a6a91705ed1ae641f6d749d82e052abc39b"
 }

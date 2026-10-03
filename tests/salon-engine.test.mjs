@@ -10,6 +10,17 @@ sandbox.globalThis = sandbox;
 new Function('module', 'exports', 'globalThis', code)(sandbox.module, sandbox.module.exports, sandbox);
 const E = sandbox.module.exports;
 const corpus = JSON.parse(readFileSync(new URL('../backend/web/public/salon/corpus.json', import.meta.url), 'utf8'));
+const doctrine = JSON.parse(readFileSync(new URL('../salon/src/lib/salon/doctrine.json', import.meta.url), 'utf8'));
+const kant = {
+  id: 'kant', name: 'Emmanuel Kant', nameEn: 'Emmanuel Kant', kind: 'philosophe', blurb: '',
+  works: [{ title: 'Fundamental Principles of the Metaphysic of Morals' }, { title: 'The Critique of Practical Reason' }],
+  doctrine: doctrine.kant,
+};
+const epicure = {
+  id: 'epicure', name: 'Épicure', nameEn: 'Epicurus', kind: 'philosophe', blurb: '',
+  works: [{ title: 'Principal Doctrines (from Diogenes Laertius, Book X)' }],
+  doctrine: doctrine.epicure,
+};
 
 const voltaire = {
   id: 'voltaire', name: 'Voltaire', nameEn: 'Voltaire', kind: 'philosophe', method: 'elenchus',
@@ -91,7 +102,9 @@ test('persona + floorPrompt : la mémoire de l’auteur entre dans le prompt', (
   assert.ok(fp.system.includes('PRISE'));
   assert.ok(fp.system.includes(voltaire.blurb));
   assert.ok(fp.user.includes(qLiberte), 'la question est le fil directeur');
-  assert.ok(fp.user.includes('Candide'), 'un passage/œuvre nommée est fourni au modèle');
+  const top = E.retrieve(corpus.voltaire, E.scope(qLiberte), 2);
+  assert.ok(top.length);
+  assert.ok(fp.user.includes('« ' + top[0].work + ' »'), 'un passage/œuvre nommée est fourni au modèle');
 });
 
 test('ancrage : cite une phrase entière quand la mémoire répond, sinon s’abstient', () => {
@@ -146,4 +159,52 @@ test('parseSpeech : lit PRISE et REPLIQUE', () => {
   const r = E.parseSpeech('PRISE: la liberté est une loi qu’on se donne\nREPLIQUE:\nJe le soutiens.  Voilà.');
   assert.equal(r.prise, 'la liberté est une loi qu’on se donne');
   assert.equal(r.text, 'Je le soutiens. Voilà.');
+});
+
+/* ---- Plan de correction : doctrine par auteur, ancre de repli, elenchus, persona ---- */
+
+test('doctrine : Kant change de thèse selon la question (O2)', () => {
+  const a = E.answer({ author: kant, question: 'Faut-il obéir à une loi injuste ?', corpus: corpus.kant || [], lang: 'fr' });
+  const b = E.answer({ author: kant, question: "Qu'est-ce que le bonheur ?", corpus: corpus.kant || [], lang: 'fr' });
+  assert.notEqual(a.prise, b.prise);
+});
+
+test('doctrine : Kant ≠ Épicure sur le bonheur (O1)', () => {
+  const k = E.answer({ author: kant, question: "Qu'est-ce que le bonheur ?", corpus: corpus.kant || [], lang: 'fr' });
+  const e = E.answer({ author: epicure, question: "Qu'est-ce que le bonheur ?", corpus: corpus.epicure || [], lang: 'fr' });
+  assert.ok(k.prise && e.prise);
+  assert.notEqual(k.prise, e.prise);
+});
+
+test('doctrine : le bonheur de Kant est ancré dans une de ses œuvres (O3)', () => {
+  const out = E.answer({ author: kant, question: "Qu'est-ce que le bonheur ?", corpus: corpus.kant || [], lang: 'fr' });
+  assert.equal(out.grounded, true);
+  assert.ok(['The Critique of Practical Reason', 'Fundamental Principles of the Metaphysic of Morals'].includes(out.passage.work));
+});
+
+test('doctrine : quand la recherche ne tranche pas, l’ancre de doctrine sert de lieu', () => {
+  const out = E.answer({ author: kant, question: "Qu'est-ce que le bonheur ?", corpus: corpus.kant || [], passages: [], lang: 'fr' });
+  assert.equal(out.grounded, true);
+  assert.equal(out.passage.anchored, true);
+  assert.equal(out.passage.work, 'Fundamental Principles of the Metaphysic of Morals');
+});
+
+test('retrieve : le bonheur trouve des passages chez Kant (lot 3a)', () => {
+  assert.ok(E.retrieve(corpus.kant, E.scope("Qu'est-ce que le bonheur ?"), 3).some((p) => !p.weak));
+});
+
+test('elenchus adossé à la doctrine : Voltaire produit une thèse (lot 6B)', () => {
+  const v = Object.assign({}, voltaire, { doctrine: doctrine.voltaire });
+  const out = E.answer({ author: v, question: 'Faut-il obéir à une loi injuste ?', corpus: corpus.voltaire || [], lang: 'fr' });
+  assert.doesNotMatch(out.prise, /Je ne tiens pas encore la définition/);
+  assert.ok(out.prise.length > 10);
+});
+
+test('persona : élocution, concepts, résumés d’œuvres, règles — sans empreinte lexicale (lot 7)', () => {
+  const p = E.persona(kant, 'fr', 'Agis de telle sorte que tu traites l’humanité toujours comme une fin.');
+  assert.match(p, /Élocution : /);
+  assert.match(p, /Concepts : /);
+  assert.match(p, /Fundamental Principles of the Metaphysic of Morals/);
+  assert.match(p, /n’invente ni citation/);
+  assert.ok(!p.includes('Empreinte lexicale'));
 });

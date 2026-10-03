@@ -1,26 +1,226 @@
 {
   "authorId": "kafka",
   "kbVersion": "kafka@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.113Z",
+  "builtAt": "2026-10-03T21:23:12.110Z",
   "source": "bootstrap-corpus",
-  "lang": "fr",
+  "lang": "en",
   "works": [
     {
-      "title": "Das Urteil: Eine Geschichte",
-      "sentences": 14
+      "title": "Metamorphosis",
+      "sentences": 12
     },
     {
-      "title": "Ein Landarzt: Kleine Erzählungen",
-      "sentences": 13
+      "title": "The Trial",
+      "sentences": 12
+    },
+    {
+      "title": "Das Urteil: Eine Geschichte",
+      "sentences": 12
     },
     {
       "title": "In der Strafkolonie",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Ein Landarzt: Kleine Erzählungen",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "kafka.p0001",
+      "w": "Metamorphosis",
+      "s": "Should he really call for help though, even apart from the fact that all the doors were locked?",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0002",
+      "w": "Metamorphosis",
+      "s": "Samsa”, he called to him, “what is wrong?",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0003",
+      "w": "Metamorphosis",
+      "s": "The clear sound of the lock as it snapped back was Gregor’s sign that he could break his concentration, and as he regained his breath he said to himself: “So, I didn’t need the locksmith after all”.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0004",
+      "w": "Metamorphosis",
+      "s": "The flight of the chief clerk seemed, unfortunately, to put Gregor’s father into a panic as well.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0005",
+      "w": "Metamorphosis",
+      "s": "Gregor soon had the opportunity to test the strength of his decisions, as early the next morning, almost before the night had ended, his sister, nearly fully dressed, opened the door from the front room and looked anxiously in.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0006",
+      "w": "Metamorphosis",
+      "s": "Their business misfortune had reduced the family to a state of total despair, and Gregor’s only concern at that time had been to arrange things so that they could all forget about it as quickly as possible.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0007",
+      "w": "Metamorphosis",
+      "s": "Gregor listened very closely to all this, and approved fully.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0008",
+      "w": "Metamorphosis",
+      "s": "The maid, of course, had locked herself in her kitchen so that Grete would have to go and answer it.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0009",
+      "w": "Metamorphosis",
+      "s": "Gregor hardly slept at all, either night or day.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0010",
+      "w": "Metamorphosis",
+      "s": "It seemed remarkable to Gregor that above all the various noises of eating their chewing teeth could still be heard, as if they had wanted to show Gregor that you need teeth in order to eat and it was not possible to perform anything with jaws that are toothless however nice they might be.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0011",
+      "w": "Metamorphosis",
+      "s": "He sat upright, played with his uniform cap between the plates left by the three gentlemen after their meal, and occasionally looked down at Gregor as he lay there immobile.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0012",
+      "w": "Metamorphosis",
+      "s": "When she had no success with that she tried to make a nuisance of herself and poked at him a little, and only when she found she could shove him across the floor with no resistance at all did she start to pay attention.",
+      "src": {
+        "work": "Metamorphosis"
+      }
+    },
+    {
+      "id": "kafka.p0013",
+      "w": "The Trial",
+      "s": "It was also her fault that he had not had any dinner that evening and that he had been unable to visit Elsa as he had intended.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0014",
+      "w": "The Trial",
+      "s": "The people supported themselves with their hands on their knees and shook as if suffering a serious attack of coughing.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0015",
+      "w": "The Trial",
+      "s": "You could have gone earlier, no-one would have missed you.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0016",
+      "w": "The Trial",
+      "s": "I just made a chance remark and you took it so badly.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0017",
+      "w": "The Trial",
+      "s": "He said it might well do, as it was probably about the legal proceedings, he said, that were being conducted against him.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0018",
+      "w": "The Trial",
+      "s": "Then she hung both her arms around his neck, leant back and took a long look at him.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0019",
+      "w": "The Trial",
+      "s": "But once he had shaken off the lawyer the documents would need to be submitted straight away and, if possible, he would need to see to it that they were being dealt with every day.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0020",
+      "w": "The Trial",
+      "s": "They had a key made to my door and lend it round to each other.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0021",
+      "w": "The Trial",
+      "s": "The right to acquit people is a major privilege and our judges don't have it, but they do have the right to free people from the indictment.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0022",
+      "w": "The Trial",
+      "s": "It wasn't just using up the money that caused the difficulty, of course, it was much more to do with me not working at the business as much as I used to.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0023",
+      "w": "The Trial",
+      "s": "He did seem to be very busy as a lawyer as well a rich man, neither the loss of income nor the loss of a client could have been of much importance to him in themselves.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0024",
+      "w": "The Trial",
+      "s": "It was discourteous of the Italian not to come but it was also sensible of him, there would have been nothing to see, they would have had to content themselves with seeking out a few pictures with K.'s electric pocket torch and looking at them one small part at a time.",
+      "src": {
+        "work": "The Trial"
+      }
+    },
+    {
+      "id": "kafka.p0025",
       "w": "Das Urteil: Eine Geschichte",
       "s": "Und war es dann noch sicher, daß alle die Plage, die man ihm antun müßte, einen Zweck hätte?",
       "src": {
@@ -28,55 +228,47 @@
       }
     },
     {
-      "id": "kafka.p0002",
+      "id": "kafka.p0026",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Im Laufe dieser drei Jahre hatte sich aber gerade für Georg vieles verändert.",
+      "s": "Die Ziffern waren verschwindend gegenüber dem Umfang, den Georgs Geschäft jetzt angenommen hatte.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0003",
+      "id": "kafka.p0027",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Es wird sich noch Gelegenheit finden, Dir Näheres über meine Braut mitzuteilen, heute genüge Dir, daß ich recht glücklich bin und daß sich in unserem gegenseitigen Verhältnis nur insofern etwas geändert hat, als Du jetzt in mir statt eines ganz gewöhnlichen Freundes einen glücklichen Freund haben wirst.",
+      "s": "Ich weiß, es hält Dich vielerlei von einem Besuche bei uns zurück, wäre aber nicht gerade meine Hochzeit die richtige Gelegenheit, einmal alle Hindernisse über den Haufen zu werfen?",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0004",
+      "id": "kafka.p0028",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Georg staunte darüber, wie dunkel das Zimmer des Vaters selbst an diesem sonnigen Vormittag war.",
+      "s": "Deinem Freunde«, sagte der Vater mit Betonung.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0005",
+      "id": "kafka.p0029",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Du bist wegen dieser Sache zu mir gekommen, um dich mit mir zu beraten.",
+      "s": "Vielleicht kommt auch für sie die Zeit und vielleicht kommt sie früher, als wir denken.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0006",
+      "id": "kafka.p0030",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Im Geschäft entgeht mir manches, es wird mir vielleicht nicht verborgen -- ich will jetzt gar nicht die Annahme machen, daß es mir verborgen wird --, ich bin nicht mehr kräftig genug, mein Gedächtnis läßt nach, ich habe nicht mehr den Blick für alle die vielen Sachen.",
+      "s": "Du nippst vom Frühstück, statt dich ordentlich zu stärken.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0007",
-      "w": "Das Urteil: Eine Geschichte",
-      "s": "Es wird keine Veränderung für dich sein, alles wird mit übertragen werden.",
-      "src": {
-        "work": "Das Urteil: Eine Geschichte"
-      }
-    },
-    {
-      "id": "kafka.p0008",
+      "id": "kafka.p0031",
       "w": "Das Urteil: Eine Geschichte",
       "s": "Du bist immer ein Spaßmacher gewesen und hast dich auch mir gegenüber nicht zurückgehalten.",
       "src": {
@@ -84,23 +276,23 @@
       }
     },
     {
-      "id": "kafka.p0009",
+      "id": "kafka.p0032",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Es wäre sicherlich auch seine Pflicht gewesen, über den Wäschewechsel seines Vaters zu wachen.",
+      "s": "Du hast ja selbst diese Geschichte hie und da wiedererzählt.« Währenddessen war es Georg gelungen, den Vater wieder niederzusetzen und ihm die Trikothose, die er über den Leinenunterhosen trug, sowie die Socken vorsichtig auszuziehn.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0010",
+      "id": "kafka.p0033",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Er konnte ihn nicht gleich ins Bett legen, so fest hielt er sich an dieser Uhrkette.",
+      "s": "Er deckte sich selbst zu und zog dann die Bettdecke noch besonders weit über die Schulter.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0011",
+      "id": "kafka.p0034",
       "w": "Das Urteil: Eine Geschichte",
       "s": "Der Petersburger Freund, den der Vater plötzlich so gut kannte, ergriff ihn, wie noch nie.",
       "src": {
@@ -108,135 +300,23 @@
       }
     },
     {
-      "id": "kafka.p0012",
+      "id": "kafka.p0035",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Vor einer langen Weile hatte er sich fest entschlossen, alles vollkommen genau zu beobachten, damit er nicht irgendwie auf Umwegen, von hinten her, von oben herab überrascht werden könne.",
+      "s": "Und mein Sohn ging im Jubel durch die Welt, schloß Geschäfte ab, die ich vorbereitet hatte, überpurzelte sich vor Vergnügen und ging vor seinem Vater mit dem verschlossenen Gesicht eines Ehrenmannes davon!",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0013",
+      "id": "kafka.p0036",
       "w": "Das Urteil: Eine Geschichte",
-      "s": "Er weiß doch alles, dummer Junge, er weiß doch alles!",
+      "s": "Darum kommt er schon seit Jahren nicht, er weiß ja alles hundertmal besser als du selbst, deine Briefe zerknüllt er ungelesen in der linken Hand, während er in der Rechten meine Briefe zum Lesen sich vorhält!« Seinen Arm schwang er vor Begeisterung über dem Kopf.",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       }
     },
     {
-      "id": "kafka.p0014",
-      "w": "Das Urteil: Eine Geschichte",
-      "s": "Dafür hast du doch Augen!« »Du hast mir also aufgelauert!« rief Georg.",
-      "src": {
-        "work": "Das Urteil: Eine Geschichte"
-      }
-    },
-    {
-      "id": "kafka.p0015",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Den alten Glauben haben sie verloren; der Pfarrer sitzt zu Hause und zerzupft die Meßgewänder, eines nach dem andern; aber der Arzt soll alles leisten mit seiner zarten chirurgischen Hand.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0016",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Mein Pelz hängt hinten am Wagen, ich kann ihn aber nicht erreichen, und keiner aus dem beweglichen Gesindel der Patienten rührt den Finger.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0017",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Als der Türhüter das merkt, lacht er und sagt: »Wenn es dich so lockt, versuche es doch, trotz meines Verbotes hineinzugehn.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0018",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Einer kam von rückwärts, drängte sich, unter meinem Arm durch, eng an mich, als brauche er meine Wärme, trat dann vor mich und sprach, fast Aug in Aug mit mir: »Ich bin der älteste Schakal, weit und breit.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0019",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Ein Dritter, die Hände in den Rocktaschen, so daß sich alles an ihm spannt, geht aufrecht; wahrt die Würde; nur im fortwährenden Beißen seiner Lippen zeigt sich die ungeduldige, nicht zu unterdrückende Jugend.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0020",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Hinter diesen zwei Herren geht der unbeschäftigte Diener.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0021",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Doch ist gewiß dieser Vorzug nicht nur und nicht einmal wesentlich dem Reisen zu verdanken, er gehört vielmehr zu dem Unnachahmlichen dieses Kindes, das zum Beispiel von jedem anerkannt wird, der etwa seinen vielfach sich überschlagenden und doch geradezu wild beherrschten Kunstsprung ins Wasser ihm nachmachen will.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0022",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Mein sechster Sohn scheint, wenigstens auf den ersten Blick, der tiefsinnigste von allen.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0023",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Warum duldete das alles der Private Pallas, der in der Nähe aus seinem Fenster im zweiten Stockwerk alles beobachtete?",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0024",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Frau Wese mit einer Volksmenge zu ihren beiden Seiten eilt mit vor Schrecken ganz gealtertem Gesicht herbei.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0025",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Letzthin las ich in einem Aufsatz irgendeines der zehntausend Windhunde, die sich in den Zeitungen über mich auslassen: meine Affennatur sei noch nicht ganz unterdrückt; Beweis dessen sei, daß ich, wenn Besucher kommen, mit Vorliebe die Hosen ausziehe, um die Einlaufstelle jenes Schusses zu zeigen.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0026",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Drück dich hinten gegen die Gitterstange, bis sie dich fast zweiteilt, du wirst den Grund nicht finden.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0027",
-      "w": "Ein Landarzt: Kleine Erzählungen",
-      "s": "Jedenfalls aber beobachtete ich sie schon lange vorher, ehe ich an solche Dinge dachte, ja die angehäuften Beobachtungen drängten mich erst in die bestimmte Richtung.",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      }
-    },
-    {
-      "id": "kafka.p0028",
+      "id": "kafka.p0037",
       "w": "In der Strafkolonie",
       "s": "Sie werden ihr dann besser folgen können.",
       "src": {
@@ -244,81 +324,9 @@
       }
     },
     {
-      "id": "kafka.p0029",
-      "w": "In der Strafkolonie",
-      "s": "Das ist hier nicht der Fall, oder war es wenigstens nicht beim früheren Kommandanten.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0030",
-      "w": "In der Strafkolonie",
-      "s": "Ist Ihnen das klar?« Er beugte sich freundlich zu dem Reisenden vor, bereit zu den umfassendsten Erklärungen.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0031",
-      "w": "In der Strafkolonie",
-      "s": "Setzen Sie sich, ich zeige sie Ihnen aus dieser Entfernung, dann werden Sie alles gut sehen können.« Er zeigte das erste Blatt.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0032",
-      "w": "In der Strafkolonie",
-      "s": "Hier in diesen elektrisch geheizten Napf am Kopfende wird warmer Reisbrei gelegt, aus dem der Mann, wenn er Lust hat, nehmen kann, was er mit der Zunge erhascht.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0033",
-      "w": "In der Strafkolonie",
-      "s": "Darauf hätte er nichts erwidern, sondern nur hinzufügen können, dass er sich in diesem Falle selbst nicht begreife, denn er reise nur mit der Absicht zu sehen und keineswegs etwa, um fremde Gerichtsverfassungen zu ändern.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0034",
-      "w": "In der Strafkolonie",
-      "s": "Ich bin ihr einziger Vertreter, gleichzeitig der einzige Vertreter des Erbes des alten Kommandanten.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0035",
-      "w": "In der Strafkolonie",
-      "s": "Dann lächelte er dem Reisenden aufmunternd zu und sagte: »Ich war gestern in Ihrer Nähe, als der Kommandant Sie einlud.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0036",
-      "w": "In der Strafkolonie",
-      "s": "Ich war ja glückselig, als ich hörte, dass Sie allein der Exekution beiwohnen sollten.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
-      "id": "kafka.p0037",
-      "w": "In der Strafkolonie",
-      "s": "Legen Sie die Hände für alle sichtbar hin, sonst fassen sie die Damen und spielen mit den Fingern.",
-      "src": {
-        "work": "In der Strafkolonie"
-      }
-    },
-    {
       "id": "kafka.p0038",
       "w": "In der Strafkolonie",
-      "s": "Wir öffnen sie schon.« Und er machte sich mit dem Soldaten, dem er ein Zeichen gab, an die Arbeit.",
+      "s": "Darum beugte sich der Reisende, der sich bereits zurückgelehnt hatte, wieder vor und fragte noch: »Aber dass er überhaupt verurteilt wurde, das weiss er doch?« »Auch nicht,« sagte der Offizier und lächelte den Reisenden an, als erwarte er nun von ihm noch einige sonderbare Eröffnungen.",
       "src": {
         "work": "In der Strafkolonie"
       }
@@ -326,7 +334,7 @@
     {
       "id": "kafka.p0039",
       "w": "In der Strafkolonie",
-      "s": "Vielleicht würde es so bis zum Äussersten gehen.",
+      "s": "Aus diesem Gedankengang heraus fragte der Reisende: »Wird der Kommandant der Exekution beiwohnen?« »Es ist nicht gewiss,« sagte der Offizier, durch die unvermittelte Frage peinlich berührt, und seine freundliche Miene verzerrte sich: »Gerade deshalb müssen wir uns beeilen.",
       "src": {
         "work": "In der Strafkolonie"
       }
@@ -334,9 +342,169 @@
     {
       "id": "kafka.p0040",
       "w": "In der Strafkolonie",
-      "s": "Er war entschlossen, hier bis zum Ende zu bleiben, aber den Anblick der zwei hätte er nicht lange ertragen.",
+      "s": "Setzen Sie sich, ich zeige sie Ihnen aus dieser Entfernung, dann werden Sie alles gut sehen können.« Er zeigte das erste Blatt.",
       "src": {
         "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0041",
+      "w": "In der Strafkolonie",
+      "s": "Es ist allerdings viel Arbeit; er braucht sechs Stunden zu ihrer Vollendung.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0042",
+      "w": "In der Strafkolonie",
+      "s": "Dies war aber um so wahrscheinlicher, als der Kommandant, wie er jetzt überdeutlich gehört hatte, kein Anhänger dieses Verfahrens war und sich gegenüber dem Offizier fast feindselig verhielt.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0043",
+      "w": "In der Strafkolonie",
+      "s": "Es war unmöglich, allen die Bitte, aus der Nähe zuschauen zu dürfen, zu gewähren.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0044",
+      "w": "In der Strafkolonie",
+      "s": "Aber wie wird sie der Kommandant aufnehmen?",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0045",
+      "w": "In der Strafkolonie",
+      "s": "Er versichert sich öfters durch Blicke nach oben, dass Sie da sind.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0046",
+      "w": "In der Strafkolonie",
+      "s": "Wir öffnen sie schon.« Und er machte sich mit dem Soldaten, dem er ein Zeichen gab, an die Arbeit.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0047",
+      "w": "In der Strafkolonie",
+      "s": "Der Verurteilte war sehr erfreut darüber, die Taschentücher zurückerhalten zu haben, aber er durfte sich nicht lange an ihnen freuen, denn der Soldat nahm sie ihm mit einem raschen, nicht vorherzusehenden Griff.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0048",
+      "w": "In der Strafkolonie",
+      "s": "Langsam hob sich der Deckel des Zeichners und klappte dann vollständig auf.",
+      "src": {
+        "work": "In der Strafkolonie"
+      }
+    },
+    {
+      "id": "kafka.p0049",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Es bestätigt sich, was ich weiß: der Junge ist gesund, ein wenig schlecht durchblutet, von der sorgenden Mutter mit Kaffee durchtränkt, aber gesund und am besten mit einem Stoß aus dem Bett zu treiben.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0050",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Viele bieten ihre Seite an und hören kaum die Hacke im Forst, geschweige denn, daß sie ihnen näher kommt.« »Ist es wirklich so oder täuschest du mich im Fieber?« »Es ist wirklich so, nimm das Ehrenwort eines Amtsarztes mit hinüber.« Und er nahm's und wurde still.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0051",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Auch ihre Pferde fressen Fleisch; oft liegt ein Reiter neben seinem Pferd und beide nähren sich vom gleichen Fleischstück, jeder an einem Ende.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0052",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Einer kam von rückwärts, drängte sich, unter meinem Arm durch, eng an mich, als brauche er meine Wärme, trat dann vor mich und sprach, fast Aug in Aug mit mir: »Ich bin der älteste Schakal, weit und breit.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0053",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Und wie sie uns hassen!« Ein Besuch im Bergwerk.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0054",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Auch geht unsere Arbeitsschicht bald zu Ende; wir werden die Rückkehr der Herren nicht mehr mit ansehen.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0055",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Doch ist gewiß dieser Vorzug nicht nur und nicht einmal wesentlich dem Reisen zu verdanken, er gehört vielmehr zu dem Unnachahmlichen dieses Kindes, das zum Beispiel von jedem anerkannt wird, der etwa seinen vielfach sich überschlagenden und doch geradezu wild beherrschten Kunstsprung ins Wasser ihm nachmachen will.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0056",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Leider scheint sich dieser Wunsch nicht erfüllen zu wollen.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0057",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Gerade an der Grenze, welche die Gassen scheidet, bleibt Wese stehen, nur mit dem Stock stützt er sich in die jenseitige Gasse.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0058",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Nach einem Weilchen begann sie wieder; diesmal ganz leise und, ohne besondere Aufforderung, gleich abbrechend; es war, als wolle sie nur ihren Klang prüfen.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0059",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Dumpfes Schluchzen, schmerzhaftes Flöhesuchen, müdes Lecken einer Kokosnuß, Beklopfen der Kistenwand mit dem Schädel, Zungen-Blecken, wenn mir jemand nahekam, -- das waren die ersten Beschäftigungen in dem neuen Leben.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      }
+    },
+    {
+      "id": "kafka.p0060",
+      "w": "Ein Landarzt: Kleine Erzählungen",
+      "s": "Die Ruhe, die ich mir im Kreise dieser Leute erwarb, hielt mich vor allem von jedem Fluchtversuch ab.",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
       }
     }
   ],
@@ -344,200 +512,265 @@
     {
       "id": "kafka.f.v0001",
       "kind": "verbatim",
-      "text": "Es wird sich noch Gelegenheit finden, Dir Näheres über meine Braut mitzuteilen, heute genüge Dir, daß ich recht glücklich bin und daß sich in unserem gegenseitigen Verhältnis nur insofern etwas geändert hat, als Du jetzt in mir statt eines ganz gewöhnlichen Freundes einen glücklichen Freund haben wirst.",
-      "work": "Das Urteil: Eine Geschichte",
-      "lang": "fr",
+      "text": "The clear sound of the lock as it snapped back was Gregor’s sign that he could break his concentration, and as he regained his breath he said to himself: “So, I didn’t need the locksmith after all”.",
+      "work": "Metamorphosis",
+      "lang": "en",
       "src": {
-        "work": "Das Urteil: Eine Geschichte"
+        "work": "Metamorphosis"
       },
       "quality": {
-        "chars": 304
+        "chars": 198
       }
     },
     {
       "id": "kafka.f.v0002",
       "kind": "verbatim",
-      "text": "Im Geschäft entgeht mir manches, es wird mir vielleicht nicht verborgen -- ich will jetzt gar nicht die Annahme machen, daß es mir verborgen wird --, ich bin nicht mehr kräftig genug, mein Gedächtnis läßt nach, ich habe nicht mehr den Blick für alle die vielen Sachen.",
-      "work": "Das Urteil: Eine Geschichte",
-      "lang": "fr",
+      "text": "Gregor soon had the opportunity to test the strength of his decisions, as early the next morning, almost before the night had ended, his sister, nearly fully dressed, opened the door from the front room and looked anxiously in.",
+      "work": "Metamorphosis",
+      "lang": "en",
       "src": {
-        "work": "Das Urteil: Eine Geschichte"
+        "work": "Metamorphosis"
       },
       "quality": {
-        "chars": 268
+        "chars": 227
       }
     },
     {
       "id": "kafka.f.v0003",
       "kind": "verbatim",
-      "text": "Vor einer langen Weile hatte er sich fest entschlossen, alles vollkommen genau zu beobachten, damit er nicht irgendwie auf Umwegen, von hinten her, von oben herab überrascht werden könne.",
+      "text": "Their business misfortune had reduced the family to a state of total despair, and Gregor’s only concern at that time had been to arrange things so that they could all forget about it as quickly as possible.",
+      "work": "Metamorphosis",
+      "lang": "en",
+      "src": {
+        "work": "Metamorphosis"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "kafka.f.v0004",
+      "kind": "verbatim",
+      "text": "The maid, of course, had locked herself in her kitchen so that Grete would have to go and answer it.",
+      "work": "Metamorphosis",
+      "lang": "en",
+      "src": {
+        "work": "Metamorphosis"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "kafka.f.v0005",
+      "kind": "verbatim",
+      "text": "It seemed remarkable to Gregor that above all the various noises of eating their chewing teeth could still be heard, as if they had wanted to show Gregor that you need teeth in order to eat and it was not possible to perform anything with jaws that are toothless however nice they might be.",
+      "work": "Metamorphosis",
+      "lang": "en",
+      "src": {
+        "work": "Metamorphosis"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "kafka.f.v0006",
+      "kind": "verbatim",
+      "text": "He sat upright, played with his uniform cap between the plates left by the three gentlemen after their meal, and occasionally looked down at Gregor as he lay there immobile.",
+      "work": "Metamorphosis",
+      "lang": "en",
+      "src": {
+        "work": "Metamorphosis"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "kafka.f.v0007",
+      "kind": "verbatim",
+      "text": "When she had no success with that she tried to make a nuisance of herself and poked at him a little, and only when she found she could shove him across the floor with no resistance at all did she start to pay attention.",
+      "work": "Metamorphosis",
+      "lang": "en",
+      "src": {
+        "work": "Metamorphosis"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "kafka.f.v0008",
+      "kind": "verbatim",
+      "text": "It was also her fault that he had not had any dinner that evening and that he had been unable to visit Elsa as he had intended.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "kafka.f.v0009",
+      "kind": "verbatim",
+      "text": "The people supported themselves with their hands on their knees and shook as if suffering a serious attack of coughing.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "kafka.f.v0010",
+      "kind": "verbatim",
+      "text": "He said it might well do, as it was probably about the legal proceedings, he said, that were being conducted against him.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "kafka.f.v0011",
+      "kind": "verbatim",
+      "text": "The right to acquit people is a major privilege and our judges don't have it, but they do have the right to free people from the indictment.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "kafka.f.v0012",
+      "kind": "verbatim",
+      "text": "It wasn't just using up the money that caused the difficulty, of course, it was much more to do with me not working at the business as much as I used to.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "kafka.f.v0013",
+      "kind": "verbatim",
+      "text": "He did seem to be very busy as a lawyer as well a rich man, neither the loss of income nor the loss of a client could have been of much importance to him in themselves.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "kafka.f.v0014",
+      "kind": "verbatim",
+      "text": "It was discourteous of the Italian not to come but it was also sensible of him, there would have been nothing to see, they would have had to content themselves with seeking out a few pictures with K.'s electric pocket torch and looking at them one small part at a time.",
+      "work": "The Trial",
+      "lang": "en",
+      "src": {
+        "work": "The Trial"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "kafka.f.v0015",
+      "kind": "verbatim",
+      "text": "Ich weiß, es hält Dich vielerlei von einem Besuche bei uns zurück, wäre aber nicht gerade meine Hochzeit die richtige Gelegenheit, einmal alle Hindernisse über den Haufen zu werfen?",
       "work": "Das Urteil: Eine Geschichte",
       "lang": "fr",
       "src": {
         "work": "Das Urteil: Eine Geschichte"
       },
       "quality": {
-        "chars": 187
+        "chars": 181
       }
     },
     {
-      "id": "kafka.f.v0004",
+      "id": "kafka.f.v0016",
       "kind": "verbatim",
-      "text": "Den alten Glauben haben sie verloren; der Pfarrer sitzt zu Hause und zerzupft die Meßgewänder, eines nach dem andern; aber der Arzt soll alles leisten mit seiner zarten chirurgischen Hand.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "en",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 188
-      }
-    },
-    {
-      "id": "kafka.f.v0005",
-      "kind": "verbatim",
-      "text": "Mein Pelz hängt hinten am Wagen, ich kann ihn aber nicht erreichen, und keiner aus dem beweglichen Gesindel der Patienten rührt den Finger.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
+      "text": "Du hast ja selbst diese Geschichte hie und da wiedererzählt.« Währenddessen war es Georg gelungen, den Vater wieder niederzusetzen und ihm die Trikothose, die er über den Leinenunterhosen trug, sowie die Socken vorsichtig auszuziehn.",
+      "work": "Das Urteil: Eine Geschichte",
       "lang": "fr",
       "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
+        "work": "Das Urteil: Eine Geschichte"
       },
       "quality": {
-        "chars": 139
+        "chars": 233
       }
     },
     {
-      "id": "kafka.f.v0006",
+      "id": "kafka.f.v0017",
       "kind": "verbatim",
-      "text": "Als der Türhüter das merkt, lacht er und sagt: »Wenn es dich so lockt, versuche es doch, trotz meines Verbotes hineinzugehn.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
+      "text": "Und mein Sohn ging im Jubel durch die Welt, schloß Geschäfte ab, die ich vorbereitet hatte, überpurzelte sich vor Vergnügen und ging vor seinem Vater mit dem verschlossenen Gesicht eines Ehrenmannes davon!",
+      "work": "Das Urteil: Eine Geschichte",
       "lang": "fr",
       "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 124
-      }
-    },
-    {
-      "id": "kafka.f.v0007",
-      "kind": "verbatim",
-      "text": "Einer kam von rückwärts, drängte sich, unter meinem Arm durch, eng an mich, als brauche er meine Wärme, trat dann vor mich und sprach, fast Aug in Aug mit mir: »Ich bin der älteste Schakal, weit und breit.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "fr",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
+        "work": "Das Urteil: Eine Geschichte"
       },
       "quality": {
         "chars": 205
       }
     },
     {
-      "id": "kafka.f.v0008",
+      "id": "kafka.f.v0018",
       "kind": "verbatim",
-      "text": "Ein Dritter, die Hände in den Rocktaschen, so daß sich alles an ihm spannt, geht aufrecht; wahrt die Würde; nur im fortwährenden Beißen seiner Lippen zeigt sich die ungeduldige, nicht zu unterdrückende Jugend.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
+      "text": "Darum kommt er schon seit Jahren nicht, er weiß ja alles hundertmal besser als du selbst, deine Briefe zerknüllt er ungelesen in der linken Hand, während er in der Rechten meine Briefe zum Lesen sich vorhält!« Seinen Arm schwang er vor Begeisterung über dem Kopf.",
+      "work": "Das Urteil: Eine Geschichte",
       "lang": "fr",
       "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
+        "work": "Das Urteil: Eine Geschichte"
       },
       "quality": {
-        "chars": 209
+        "chars": 263
       }
     },
     {
-      "id": "kafka.f.v0009",
+      "id": "kafka.f.v0019",
       "kind": "verbatim",
-      "text": "Doch ist gewiß dieser Vorzug nicht nur und nicht einmal wesentlich dem Reisen zu verdanken, er gehört vielmehr zu dem Unnachahmlichen dieses Kindes, das zum Beispiel von jedem anerkannt wird, der etwa seinen vielfach sich überschlagenden und doch geradezu wild beherrschten Kunstsprung ins Wasser ihm nachmachen will.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "fr",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 317
-      }
-    },
-    {
-      "id": "kafka.f.v0010",
-      "kind": "verbatim",
-      "text": "Warum duldete das alles der Private Pallas, der in der Nähe aus seinem Fenster im zweiten Stockwerk alles beobachtete?",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "en",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 118
-      }
-    },
-    {
-      "id": "kafka.f.v0011",
-      "kind": "verbatim",
-      "text": "Frau Wese mit einer Volksmenge zu ihren beiden Seiten eilt mit vor Schrecken ganz gealtertem Gesicht herbei.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "en",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 108
-      }
-    },
-    {
-      "id": "kafka.f.v0012",
-      "kind": "verbatim",
-      "text": "Letzthin las ich in einem Aufsatz irgendeines der zehntausend Windhunde, die sich in den Zeitungen über mich auslassen: meine Affennatur sei noch nicht ganz unterdrückt; Beweis dessen sei, daß ich, wenn Besucher kommen, mit Vorliebe die Hosen ausziehe, um die Einlaufstelle jenes Schusses zu zeigen.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "fr",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 299
-      }
-    },
-    {
-      "id": "kafka.f.v0013",
-      "kind": "verbatim",
-      "text": "Drück dich hinten gegen die Gitterstange, bis sie dich fast zweiteilt, du wirst den Grund nicht finden.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "fr",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 103
-      }
-    },
-    {
-      "id": "kafka.f.v0014",
-      "kind": "verbatim",
-      "text": "Jedenfalls aber beobachtete ich sie schon lange vorher, ehe ich an solche Dinge dachte, ja die angehäuften Beobachtungen drängten mich erst in die bestimmte Richtung.",
-      "work": "Ein Landarzt: Kleine Erzählungen",
-      "lang": "en",
-      "src": {
-        "work": "Ein Landarzt: Kleine Erzählungen"
-      },
-      "quality": {
-        "chars": 166
-      }
-    },
-    {
-      "id": "kafka.f.v0015",
-      "kind": "verbatim",
-      "text": "Ist Ihnen das klar?« Er beugte sich freundlich zu dem Reisenden vor, bereit zu den umfassendsten Erklärungen.",
+      "text": "Darum beugte sich der Reisende, der sich bereits zurückgelehnt hatte, wieder vor und fragte noch: »Aber dass er überhaupt verurteilt wurde, das weiss er doch?« »Auch nicht,« sagte der Offizier und lächelte den Reisenden an, als erwarte er nun von ihm noch einige sonderbare Eröffnungen.",
       "work": "In der Strafkolonie",
-      "lang": "en",
+      "lang": "fr",
       "src": {
         "work": "In der Strafkolonie"
       },
       "quality": {
-        "chars": 109
+        "chars": 286
       }
     },
     {
-      "id": "kafka.f.v0016",
+      "id": "kafka.f.v0020",
+      "kind": "verbatim",
+      "text": "Aus diesem Gedankengang heraus fragte der Reisende: »Wird der Kommandant der Exekution beiwohnen?« »Es ist nicht gewiss,« sagte der Offizier, durch die unvermittelte Frage peinlich berührt, und seine freundliche Miene verzerrte sich: »Gerade deshalb müssen wir uns beeilen.",
+      "work": "In der Strafkolonie",
+      "lang": "fr",
+      "src": {
+        "work": "In der Strafkolonie"
+      },
+      "quality": {
+        "chars": 273
+      }
+    },
+    {
+      "id": "kafka.f.v0021",
       "kind": "verbatim",
       "text": "Setzen Sie sich, ich zeige sie Ihnen aus dieser Entfernung, dann werden Sie alles gut sehen können.« Er zeigte das erste Blatt.",
       "work": "In der Strafkolonie",
@@ -550,91 +783,170 @@
       }
     },
     {
-      "id": "kafka.f.v0017",
-      "kind": "verbatim",
-      "text": "Hier in diesen elektrisch geheizten Napf am Kopfende wird warmer Reisbrei gelegt, aus dem der Mann, wenn er Lust hat, nehmen kann, was er mit der Zunge erhascht.",
-      "work": "In der Strafkolonie",
-      "lang": "en",
-      "src": {
-        "work": "In der Strafkolonie"
-      },
-      "quality": {
-        "chars": 161
-      }
-    },
-    {
-      "id": "kafka.f.v0018",
-      "kind": "verbatim",
-      "text": "Darauf hätte er nichts erwidern, sondern nur hinzufügen können, dass er sich in diesem Falle selbst nicht begreife, denn er reise nur mit der Absicht zu sehen und keineswegs etwa, um fremde Gerichtsverfassungen zu ändern.",
-      "work": "In der Strafkolonie",
-      "lang": "fr",
-      "src": {
-        "work": "In der Strafkolonie"
-      },
-      "quality": {
-        "chars": 221
-      }
-    },
-    {
-      "id": "kafka.f.v0019",
-      "kind": "verbatim",
-      "text": "Ich bin ihr einziger Vertreter, gleichzeitig der einzige Vertreter des Erbes des alten Kommandanten.",
-      "work": "In der Strafkolonie",
-      "lang": "fr",
-      "src": {
-        "work": "In der Strafkolonie"
-      },
-      "quality": {
-        "chars": 100
-      }
-    },
-    {
-      "id": "kafka.f.v0020",
-      "kind": "verbatim",
-      "text": "Dann lächelte er dem Reisenden aufmunternd zu und sagte: »Ich war gestern in Ihrer Nähe, als der Kommandant Sie einlud.",
-      "work": "In der Strafkolonie",
-      "lang": "en",
-      "src": {
-        "work": "In der Strafkolonie"
-      },
-      "quality": {
-        "chars": 119
-      }
-    },
-    {
-      "id": "kafka.f.v0021",
-      "kind": "verbatim",
-      "text": "Legen Sie die Hände für alle sichtbar hin, sonst fassen sie die Damen und spielen mit den Fingern.",
-      "work": "In der Strafkolonie",
-      "lang": "fr",
-      "src": {
-        "work": "In der Strafkolonie"
-      },
-      "quality": {
-        "chars": 98
-      }
-    },
-    {
       "id": "kafka.f.v0022",
       "kind": "verbatim",
-      "text": "Er war entschlossen, hier bis zum Ende zu bleiben, aber den Anblick der zwei hätte er nicht lange ertragen.",
+      "text": "Dies war aber um so wahrscheinlicher, als der Kommandant, wie er jetzt überdeutlich gehört hatte, kein Anhänger dieses Verfahrens war und sich gegenüber dem Offizier fast feindselig verhielt.",
       "work": "In der Strafkolonie",
-      "lang": "en",
+      "lang": "fr",
       "src": {
         "work": "In der Strafkolonie"
       },
       "quality": {
-        "chars": 107
+        "chars": 191
+      }
+    },
+    {
+      "id": "kafka.f.v0023",
+      "kind": "verbatim",
+      "text": "Der Verurteilte war sehr erfreut darüber, die Taschentücher zurückerhalten zu haben, aber er durfte sich nicht lange an ihnen freuen, denn der Soldat nahm sie ihm mit einem raschen, nicht vorherzusehenden Griff.",
+      "work": "In der Strafkolonie",
+      "lang": "fr",
+      "src": {
+        "work": "In der Strafkolonie"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "kafka.f.v0024",
+      "kind": "verbatim",
+      "text": "Es bestätigt sich, was ich weiß: der Junge ist gesund, ein wenig schlecht durchblutet, von der sorgenden Mutter mit Kaffee durchtränkt, aber gesund und am besten mit einem Stoß aus dem Bett zu treiben.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "en",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "kafka.f.v0025",
+      "kind": "verbatim",
+      "text": "Viele bieten ihre Seite an und hören kaum die Hacke im Forst, geschweige denn, daß sie ihnen näher kommt.« »Ist es wirklich so oder täuschest du mich im Fieber?« »Es ist wirklich so, nimm das Ehrenwort eines Amtsarztes mit hinüber.« Und er nahm's und wurde still.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "kafka.f.v0026",
+      "kind": "verbatim",
+      "text": "Auch ihre Pferde fressen Fleisch; oft liegt ein Reiter neben seinem Pferd und beide nähren sich vom gleichen Fleischstück, jeder an einem Ende.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "kafka.f.v0027",
+      "kind": "verbatim",
+      "text": "Einer kam von rückwärts, drängte sich, unter meinem Arm durch, eng an mich, als brauche er meine Wärme, trat dann vor mich und sprach, fast Aug in Aug mit mir: »Ich bin der älteste Schakal, weit und breit.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "kafka.f.v0028",
+      "kind": "verbatim",
+      "text": "Auch geht unsere Arbeitsschicht bald zu Ende; wir werden die Rückkehr der Herren nicht mehr mit ansehen.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "kafka.f.v0029",
+      "kind": "verbatim",
+      "text": "Doch ist gewiß dieser Vorzug nicht nur und nicht einmal wesentlich dem Reisen zu verdanken, er gehört vielmehr zu dem Unnachahmlichen dieses Kindes, das zum Beispiel von jedem anerkannt wird, der etwa seinen vielfach sich überschlagenden und doch geradezu wild beherrschten Kunstsprung ins Wasser ihm nachmachen will.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 317
+      }
+    },
+    {
+      "id": "kafka.f.v0030",
+      "kind": "verbatim",
+      "text": "Gerade an der Grenze, welche die Gassen scheidet, bleibt Wese stehen, nur mit dem Stock stützt er sich in die jenseitige Gasse.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "kafka.f.v0031",
+      "kind": "verbatim",
+      "text": "Nach einem Weilchen begann sie wieder; diesmal ganz leise und, ohne besondere Aufforderung, gleich abbrechend; es war, als wolle sie nur ihren Klang prüfen.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "kafka.f.v0032",
+      "kind": "verbatim",
+      "text": "Dumpfes Schluchzen, schmerzhaftes Flöhesuchen, müdes Lecken einer Kokosnuß, Beklopfen der Kistenwand mit dem Schädel, Zungen-Blecken, wenn mir jemand nahekam, -- das waren die ersten Beschäftigungen in dem neuen Leben.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "fr",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "kafka.f.v0033",
+      "kind": "verbatim",
+      "text": "Die Ruhe, die ich mir im Kreise dieser Leute erwarb, hielt mich vor allem von jedem Fluchtversuch ab.",
+      "work": "Ein Landarzt: Kleine Erzählungen",
+      "lang": "en",
+      "src": {
+        "work": "Ein Landarzt: Kleine Erzählungen"
+      },
+      "quality": {
+        "chars": 101
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:0934f7565327eabd06a3fb21ea4c8d8969e55a2147039573a1993b5b6245052f"
+  "checksum": "sha256:89836386527b2809a27fcbf6a422248437facb6e7bf959a5cfd0f0c168c881cd"
 }

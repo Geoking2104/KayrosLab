@@ -3173,6 +3173,7 @@
         {
           "title": "The Republic",
           "url": "https://www.gutenberg.org/cache/epub/1497/pg1497.txt",
+          "startAt": "I went down yesterday to the Piraeus",
           "source": "gutenberg",
           "ok": true,
           "chars": 20000,
@@ -3195,6 +3196,7 @@
         {
           "title": "Apology",
           "url": "https://www.gutenberg.org/cache/epub/1656/pg1656.txt",
+          "startAt": "How you, O Athenians, have been affected",
           "source": "gutenberg",
           "ok": true,
           "chars": 20000,
@@ -3217,6 +3219,7 @@
         {
           "title": "Symposium",
           "url": "https://www.gutenberg.org/cache/epub/1600/pg1600.txt",
+          "startAt": "Concerning the things about which you ask to be informed",
           "source": "gutenberg",
           "ok": true,
           "chars": 20000,
@@ -3239,6 +3242,7 @@
         {
           "title": "Phaedo",
           "url": "https://www.gutenberg.org/cache/epub/1658/pg1658.txt",
+          "startAt": "Were you yourself, Phaedo, in the prison",
           "source": "gutenberg",
           "ok": true,
           "chars": 20000,
@@ -3261,6 +3265,7 @@
         {
           "title": "Gorgias",
           "url": "https://www.gutenberg.org/cache/epub/1672/pg1672.txt",
+          "startAt": "The wise man, as the proverb says, is late for a fray",
           "source": "gutenberg",
           "ok": true,
           "chars": 20000,

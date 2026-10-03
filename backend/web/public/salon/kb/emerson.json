@@ -1,21 +1,29 @@
 {
   "authorId": "emerson",
   "kbVersion": "emerson@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.288Z",
+  "builtAt": "2026-10-03T21:23:12.669Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Essays — First Series",
-      "sentences": 14
+      "sentences": 12
     },
     {
       "title": "Essays — Second Series",
-      "sentences": 13
+      "sentences": 12
     },
     {
       "title": "Nature",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "The Conduct of Life",
+      "sentences": 12
+    },
+    {
+      "title": "Representative Men: Seven Lectures",
+      "sentences": 12
     }
   ],
   "passages": [
@@ -30,7 +38,7 @@
     {
       "id": "emerson.p0002",
       "w": "Essays — First Series",
-      "s": "If I know your sect, I anticipate your argument.",
+      "s": "As great a stake depends on your private act to-day, as followed their public and renowned steps.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -38,7 +46,7 @@
     {
       "id": "emerson.p0003",
       "w": "Essays — First Series",
-      "s": "Our first journeys discover to us the indifference of places.",
+      "s": "He who is really of their class will not be called by their name, but will be his own man, and in his turn the founder of a sect.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -46,7 +54,7 @@
     {
       "id": "emerson.p0004",
       "w": "Essays — First Series",
-      "s": "Is a man too strong and fierce for society and by temper and position a bad citizen,—a morose ruffian, with a dash of the pirate in him?—Nature sends him a troop of pretty sons and daughters who are getting along in the dame’s classes at the village school, and love and fear for them smooths his grim scowl to courtesy.",
+      "s": "Has a man gained any thing who has received a hundred favors and rendered none?",
       "src": {
         "work": "Essays — First Series"
       }
@@ -54,7 +62,7 @@
     {
       "id": "emerson.p0005",
       "w": "Essays — First Series",
-      "s": "A fever, a mutilation, a cruel disappointment, a loss of wealth, a loss of friends, seems at the moment unpaid loss, and unpayable.",
+      "s": "The whole course of things goes to teach us faith.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -62,7 +70,7 @@
     {
       "id": "emerson.p0006",
       "w": "Essays — First Series",
-      "s": "A man is a method, a progressive arrangement; a selecting principle, gathering his like to him wherever he goes.",
+      "s": "Now he is not homogeneous, but heterogeneous, and the ray does not traverse; there are no thorough lights, but the eye of the beholder is puzzled, detecting many unlike tendencies and a life not yet at one.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -70,7 +78,7 @@
     {
       "id": "emerson.p0007",
       "w": "Essays — First Series",
-      "s": "In giving him to another it still more gives him to himself.",
+      "s": "Yet the systole and diastole of the heart are not without their analogy in the ebb and flow of love.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -78,7 +86,7 @@
     {
       "id": "emerson.p0008",
       "w": "Essays — First Series",
-      "s": "Yet the systole and diastole of the heart are not without their analogy in the ebb and flow of love.",
+      "s": "Let your greatness educate the crude and cold companion.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -86,7 +94,7 @@
     {
       "id": "emerson.p0009",
       "w": "Essays — First Series",
-      "s": "It takes the laws of the world whereby man’s being is conditioned, as they are, and keeps these laws that it may enjoy their proper good.",
+      "s": "To him we owe the Brasidas, the Dion, the Epaminondas, the Scipio of old, and I must think we are more deeply indebted to him than to all the ancient writers.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -94,7 +102,7 @@
     {
       "id": "emerson.p0010",
       "w": "Essays — First Series",
-      "s": "Though your views are in straight antagonism to theirs, assume an identity of sentiment, assume that you are saying precisely that which all think, and in the flow of wit and love roll out your paradoxes in solid column, with not the infirmity of a doubt.",
+      "s": "That third party or common nature is not social; it is impersonal; is God.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -102,7 +110,7 @@
     {
       "id": "emerson.p0011",
       "w": "Essays — First Series",
-      "s": "That third party or common nature is not social; it is impersonal; is God.",
+      "s": "Every one seems to be contradicted by the new; it is only limited by the new.",
       "src": {
         "work": "Essays — First Series"
       }
@@ -110,31 +118,31 @@
     {
       "id": "emerson.p0012",
       "w": "Essays — First Series",
-      "s": "In the presence of law to his mind he is overflowed with a reliance so universal that it sweeps away all cherished hopes and the most stable projects of mortal condition in its flood.",
+      "s": "They shall one day bring a lantern and read the inscriptions.",
       "src": {
         "work": "Essays — First Series"
       }
     },
     {
       "id": "emerson.p0013",
-      "w": "Essays — First Series",
-      "s": "All that mass of mental and moral phenomena which we do not make objects of voluntary thought, come within the power of fortune; they constitute the circumstance of daily life; they are subject to change, to fear, and hope.",
+      "w": "Essays — Second Series",
+      "s": "For poetry is not 'Devil's wine,' but God's wine.",
       "src": {
-        "work": "Essays — First Series"
+        "work": "Essays — Second Series"
       }
     },
     {
       "id": "emerson.p0014",
-      "w": "Essays — First Series",
-      "s": "The cloud, the tree, the turf, the bird are not theirs, have nothing of them; the world is only their lodging and table.",
+      "w": "Essays — Second Series",
+      "s": "Life is a train of moods like a string of beads, and as we pass through them they prove to be many-colored lenses which paint the world their own hue, and each shows only what lies in its focus.",
       "src": {
-        "work": "Essays — First Series"
+        "work": "Essays — Second Series"
       }
     },
     {
       "id": "emerson.p0015",
       "w": "Essays — Second Series",
-      "s": "For the time of towns is tolled from the world by funereal chimes, but in nature the universal hours are counted by succeeding tribes of animals and plants, and by growth of joy on joy.",
+      "s": "You who see the artist, the orator, the poet, too near, and find their life no more excellent than that of mechanics or farmers, and themselves victims of partiality, very hollow and haggard, and pronounce them failures, not heroes, but quacks,--conclude very reasonably that these arts are not for man, but are disease.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -142,7 +150,7 @@
     {
       "id": "emerson.p0016",
       "w": "Essays — Second Series",
-      "s": "One would not willingly pronounce these words in their hearing, and give them the occasion to profane them.",
+      "s": "The god is surcharged with his divine destiny.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -150,7 +158,7 @@
     {
       "id": "emerson.p0017",
       "w": "Essays — Second Series",
-      "s": "The noble are thus known from the ignoble.",
+      "s": "I read in a book of English memoirs, \"Mr.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -158,7 +166,7 @@
     {
       "id": "emerson.p0018",
       "w": "Essays — Second Series",
-      "s": "The god is surcharged with his divine destiny.",
+      "s": "The society of the energetic class, in their friendly and festive meetings, is full of courage and of attempts which intimidate the pale scholar.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -166,7 +174,7 @@
     {
       "id": "emerson.p0019",
       "w": "Essays — Second Series",
-      "s": "I own it is but poor chat and gossip to go to enumerate traits of this simple and rapid power, and we are painting the lightning with charcoal; but in these long nights and vacations I like to console myself so.",
+      "s": "Fox will always hold the first place in an assembly at the Tuileries.\" We may easily seem ridiculous in our eulogy of courtesy, whenever we insist on benevolence as its foundation.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -174,7 +182,7 @@
     {
       "id": "emerson.p0020",
       "w": "Essays — Second Series",
-      "s": "If the house do not please them, they walk out and enter another, as there are several hundreds at their command.",
+      "s": "The incommunicable trees begin to persuade us to live with them, and quit our life of solemn trifles.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -182,7 +190,7 @@
     {
       "id": "emerson.p0021",
       "w": "Essays — Second Series",
-      "s": "Fox will always hold the first place in an assembly at the Tuileries.\" We may easily seem ridiculous in our eulogy of courtesy, whenever we insist on benevolence as its foundation.",
+      "s": "My work may be of none, but I must not think it of none, or I shall not do it with impunity.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -190,7 +198,7 @@
     {
       "id": "emerson.p0022",
       "w": "Essays — Second Series",
-      "s": "In our condition of universal dependence it seems heroic to let the petitioner be the judge of his necessity, and to give all that is asked, though at great inconvenience.",
+      "s": "In the strife of ferocious parties, human nature always finds itself cherished; as the children of the convicts at Botany Bay are found to have as healthy a moral sentiment as other children.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -198,7 +206,7 @@
     {
       "id": "emerson.p0023",
       "w": "Essays — Second Series",
-      "s": "O no, the wary Nature sends a new troop of fairer forms, of lordlier youths, with a little more excess of direction to hold them fast to their several aim; makes them a little wrongheaded in that direction in which they are rightest, and on goes the game again with new whirl, for a generation or two more.",
+      "s": "The modernness of all good books seems to give me an existence as wide as man.",
       "src": {
         "work": "Essays — Second Series"
       }
@@ -206,37 +214,13 @@
     {
       "id": "emerson.p0024",
       "w": "Essays — Second Series",
-      "s": "Nature is the incarnation of a thought, and turns to a thought again, as ice becomes water and gas.",
+      "s": "The same disposition to scrutiny and dissent appeared in civil, festive, neighborly, and domestic society.",
       "src": {
         "work": "Essays — Second Series"
       }
     },
     {
       "id": "emerson.p0025",
-      "w": "Essays — Second Series",
-      "s": "The man momentarily stands for the thought, but will not bear examination; and a society of men will cursorily represent well enough a certain quality and culture, for example, chivalry or beauty of manners; but separate them and there is no gentleman and no lady in the group.",
-      "src": {
-        "work": "Essays — Second Series"
-      }
-    },
-    {
-      "id": "emerson.p0026",
-      "w": "Essays — Second Series",
-      "s": "Whilst we are waiting we beguile the time with jokes, with sleep, with eating, and with crimes.",
-      "src": {
-        "work": "Essays — Second Series"
-      }
-    },
-    {
-      "id": "emerson.p0027",
-      "w": "Essays — Second Series",
-      "s": "Simon, of Fourier, and of Owen, three communities have already been formed in Massachusetts on kindred plans, and many more in the country at large.",
-      "src": {
-        "work": "Essays — Second Series"
-      }
-    },
-    {
-      "id": "emerson.p0028",
       "w": "Nature",
       "s": "It is necessary to use these pleasures with great temperance.",
       "src": {
@@ -244,23 +228,23 @@
       }
     },
     {
-      "id": "emerson.p0029",
+      "id": "emerson.p0026",
       "w": "Nature",
-      "s": "Was there no meaning in the live repose of the valley behind the mill, and which Homer or Shakspeare could not reform for me in words?",
+      "s": "I see the spectacle of morning from the hill-top over against my house, from day-break to sun-rise, with emotions which an angel might share.",
       "src": {
         "work": "Nature"
       }
     },
     {
-      "id": "emerson.p0030",
+      "id": "emerson.p0027",
       "w": "Nature",
-      "s": "In proportion to the energy of his thought and will, he takes up the world into himself.",
+      "s": "A virtuous man is in unison with her works, and makes the central figure of the visible sphere.",
       "src": {
         "work": "Nature"
       }
     },
     {
-      "id": "emerson.p0031",
+      "id": "emerson.p0028",
       "w": "Nature",
       "s": "A lamb is innocence; a snake is subtle spite; flowers express to us the delicate affections.",
       "src": {
@@ -268,9 +252,33 @@
       }
     },
     {
+      "id": "emerson.p0029",
+      "w": "Nature",
+      "s": "We are thus assisted by natural objects in the expression of particular meanings.",
+      "src": {
+        "work": "Nature"
+      }
+    },
+    {
+      "id": "emerson.p0030",
+      "w": "Nature",
+      "s": "Water is good to drink, coal to burn, wool to wear; but wool cannot be drunk, nor water spun, nor coal eaten.",
+      "src": {
+        "work": "Nature"
+      }
+    },
+    {
+      "id": "emerson.p0031",
+      "w": "Nature",
+      "s": "Xenophanes complained in his old age, that, look where he would, all things hastened back to Unity.",
+      "src": {
+        "work": "Nature"
+      }
+    },
+    {
       "id": "emerson.p0032",
       "w": "Nature",
-      "s": "This immediate dependence of language upon nature, this conversion of an outward phenomenon into a type of somewhat in human life, never loses its power to affect us.",
+      "s": "We are not built like a ship to be tossed, but like a house to stand.",
       "src": {
         "work": "Nature"
       }
@@ -278,7 +286,7 @@
     {
       "id": "emerson.p0033",
       "w": "Nature",
-      "s": "Our dealing with sensible objects is a constant exercise in the necessary lessons of difference, of likeness, of order, of being and seeming, of progressive arrangement; of ascent from particular to general; of combination to one end of manifold forces.",
+      "s": "In the strength of his constancy, the Pyramids seem to him recent and transitory.",
       "src": {
         "work": "Nature"
       }
@@ -286,7 +294,7 @@
     {
       "id": "emerson.p0034",
       "w": "Nature",
-      "s": "He forges the subtile and delicate air into wise and melodious words, and gives them wing as angels of persuasion and command.",
+      "s": "I expand and live in the warm day like corn and melons.",
       "src": {
         "work": "Nature"
       }
@@ -294,7 +302,7 @@
     {
       "id": "emerson.p0035",
       "w": "Nature",
-      "s": "When this appears among so many that surround it, the spirit prefers it to all others.",
+      "s": "This view, which admonishes me where the sources of wisdom and power lie, and points to virtue as to \"The golden key Which opes the palace of eternity,\" carries upon its face the highest certificate of truth, because it animates me to create my own world through the purification of my soul.",
       "src": {
         "work": "Nature"
       }
@@ -302,41 +310,201 @@
     {
       "id": "emerson.p0036",
       "w": "Nature",
-      "s": "The first effort of thought tends to relax this despotism of the senses, which binds us to nature as if we were a part of it, and shows us nature aloof, and, as it were, afloat.",
+      "s": "But who can set limits to the remedial force of spirit?",
       "src": {
         "work": "Nature"
       }
     },
     {
       "id": "emerson.p0037",
-      "w": "Nature",
-      "s": "The astronomer, the geometer, rely on their irrefragable analysis, and disdain the results of observation.",
+      "w": "The Conduct of Life",
+      "s": "And, whilst art draws out the venom, it commonly extorts some benefit from the vanquished enemy.",
       "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
       }
     },
     {
       "id": "emerson.p0038",
-      "w": "Nature",
-      "s": "I expand and live in the warm day like corn and melons.",
+      "w": "The Conduct of Life",
+      "s": "It is like the climate, which easily rears a crop, which no glass, or irrigation, or tillage, or manures, can elsewhere rival.",
       "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
       }
     },
     {
       "id": "emerson.p0039",
-      "w": "Nature",
-      "s": "We do not understand the notes of birds.",
+      "w": "The Conduct of Life",
+      "s": "But in these, he is forced to leave out his follies and hindrances, so that when we go to the mill, the machine is more moral than we.",
       "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
       }
     },
     {
       "id": "emerson.p0040",
-      "w": "Nature",
-      "s": "More servants wait on man Than he'll take notice of.",
+      "w": "The Conduct of Life",
+      "s": "Not much otherwise, the economical power touches the masses through the political lords.",
       "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0041",
+      "w": "The Conduct of Life",
+      "s": "It is to invest income; that is to say, to take up particulars into generals; days into integral eras,--literary, emotive, practical, of its life, and still to ascend in its investment.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0042",
+      "w": "The Conduct of Life",
+      "s": "I have heard, that, throughout this country, a certain respect is paid to good broadcloth; but dress makes a little restraint: men will not commit themselves.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0043",
+      "w": "The Conduct of Life",
+      "s": "Wise men read very sharply all your private history in your look and gait and behavior.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0044",
+      "w": "The Conduct of Life",
+      "s": "I have no fears of being forced in my own despite to play, as we say, the devil's attorney.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0045",
+      "w": "The Conduct of Life",
+      "s": "And the Crystal Palaces and World Fairs, with their committees and prizes on all kinds of industry, are the result of this feeling.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0046",
+      "w": "The Conduct of Life",
+      "s": "But he walked to the church without any assurance that he knew the distemper, or could heal it.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0047",
+      "w": "The Conduct of Life",
+      "s": "Already, who provoke pity like that excellent family party just arriving in their well-appointed carriage, as far from home and any honest end as ever?",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0048",
+      "w": "The Conduct of Life",
+      "s": "It is a rule of largest application, true in a plant, true in a loaf of bread, that in the construction of any fabric or organism, any real increase of fitness to its end, is an increase of beauty.",
+      "src": {
+        "work": "The Conduct of Life"
+      }
+    },
+    {
+      "id": "emerson.p0049",
+      "w": "Representative Men: Seven Lectures",
+      "s": "In vain, the wheels of tendency will not stop, nor will all the forces of inertia, fear, or love itself, hold thee there.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0050",
+      "w": "Representative Men: Seven Lectures",
+      "s": "In all nations, there are minds which incline to dwell in the conception of the fundamental Unity.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0051",
+      "w": "Representative Men: Seven Lectures",
+      "s": "Socrates and Plato are the double star, which the most powerful instruments will not entirely separate.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0052",
+      "w": "Representative Men: Seven Lectures",
+      "s": "The atmosphere of moral sentiment is a region of grandeur which reduces all material magnificence to toys, yet opens to every wretch that has reason, the doors of the universe.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0053",
+      "w": "Representative Men: Seven Lectures",
+      "s": "But Swedenborg was not content with the culinary use of the world.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0054",
+      "w": "Representative Men: Seven Lectures",
+      "s": "That pure malignity can exist, is the extreme proposition of unbelief.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0055",
+      "w": "Representative Men: Seven Lectures",
+      "s": "It is from the poor man's hut alone, that strength and virtue come; and yet, on the other side, it is alleged that labor impairs the form, and breaks the spirit of man, and the laborers cry unanimously, \"We have no thoughts.\" Culture, how indispensable!",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0056",
+      "w": "Representative Men: Seven Lectures",
+      "s": "I like not the French celerity,--a new church and state once a week.--This is the second negation; and I shall let it pass for what it will.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0057",
+      "w": "Representative Men: Seven Lectures",
+      "s": "Shakspeare knew that tradition supplies a better fable that any invention can.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0058",
+      "w": "Representative Men: Seven Lectures",
+      "s": "Other admirable men have led lives in some sort of keeping with their thought; but this man, in wide contrast.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0059",
+      "w": "Representative Men: Seven Lectures",
+      "s": "The day of sleepy, selfish policy, ever narrowing the means and opportunities of young men, was ended, and a day of expansion and demand was come.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      }
+    },
+    {
+      "id": "emerson.p0060",
+      "w": "Representative Men: Seven Lectures",
+      "s": "He counts it all nonsense that they say, that some things are undescribable.",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
       }
     }
   ],
@@ -357,148 +525,96 @@
     {
       "id": "emerson.f.v0002",
       "kind": "verbatim",
-      "text": "Is a man too strong and fierce for society and by temper and position a bad citizen,—a morose ruffian, with a dash of the pirate in him?—Nature sends him a troop of pretty sons and daughters who are getting along in the dame’s classes at the village school, and love and fear for them smooths his grim scowl to courtesy.",
+      "text": "As great a stake depends on your private act to-day, as followed their public and renowned steps.",
       "work": "Essays — First Series",
       "lang": "en",
       "src": {
         "work": "Essays — First Series"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "emerson.f.v0003",
+      "kind": "verbatim",
+      "text": "He who is really of their class will not be called by their name, but will be his own man, and in his turn the founder of a sect.",
+      "work": "Essays — First Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — First Series"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "emerson.f.v0004",
+      "kind": "verbatim",
+      "text": "Now he is not homogeneous, but heterogeneous, and the ray does not traverse; there are no thorough lights, but the eye of the beholder is puzzled, detecting many unlike tendencies and a life not yet at one.",
+      "work": "Essays — First Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — First Series"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "emerson.f.v0005",
+      "kind": "verbatim",
+      "text": "To him we owe the Brasidas, the Dion, the Epaminondas, the Scipio of old, and I must think we are more deeply indebted to him than to all the ancient writers.",
+      "work": "Essays — First Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — First Series"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "emerson.f.v0006",
+      "kind": "verbatim",
+      "text": "Life is a train of moods like a string of beads, and as we pass through them they prove to be many-colored lenses which paint the world their own hue, and each shows only what lies in its focus.",
+      "work": "Essays — Second Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — Second Series"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "emerson.f.v0007",
+      "kind": "verbatim",
+      "text": "You who see the artist, the orator, the poet, too near, and find their life no more excellent than that of mechanics or farmers, and themselves victims of partiality, very hollow and haggard, and pronounce them failures, not heroes, but quacks,--conclude very reasonably that these arts are not for man, but are disease.",
+      "work": "Essays — Second Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — Second Series"
       },
       "quality": {
         "chars": 320
       }
     },
     {
-      "id": "emerson.f.v0003",
-      "kind": "verbatim",
-      "text": "A fever, a mutilation, a cruel disappointment, a loss of wealth, a loss of friends, seems at the moment unpaid loss, and unpayable.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 131
-      }
-    },
-    {
-      "id": "emerson.f.v0004",
-      "kind": "verbatim",
-      "text": "A man is a method, a progressive arrangement; a selecting principle, gathering his like to him wherever he goes.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 112
-      }
-    },
-    {
-      "id": "emerson.f.v0005",
-      "kind": "verbatim",
-      "text": "It takes the laws of the world whereby man’s being is conditioned, as they are, and keeps these laws that it may enjoy their proper good.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 137
-      }
-    },
-    {
-      "id": "emerson.f.v0006",
-      "kind": "verbatim",
-      "text": "Though your views are in straight antagonism to theirs, assume an identity of sentiment, assume that you are saying precisely that which all think, and in the flow of wit and love roll out your paradoxes in solid column, with not the infirmity of a doubt.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 255
-      }
-    },
-    {
-      "id": "emerson.f.v0007",
-      "kind": "verbatim",
-      "text": "In the presence of law to his mind he is overflowed with a reliance so universal that it sweeps away all cherished hopes and the most stable projects of mortal condition in its flood.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 183
-      }
-    },
-    {
       "id": "emerson.f.v0008",
       "kind": "verbatim",
-      "text": "All that mass of mental and moral phenomena which we do not make objects of voluntary thought, come within the power of fortune; they constitute the circumstance of daily life; they are subject to change, to fear, and hope.",
-      "work": "Essays — First Series",
+      "text": "The society of the energetic class, in their friendly and festive meetings, is full of courage and of attempts which intimidate the pale scholar.",
+      "work": "Essays — Second Series",
       "lang": "en",
       "src": {
-        "work": "Essays — First Series"
+        "work": "Essays — Second Series"
       },
       "quality": {
-        "chars": 223
+        "chars": 145
       }
     },
     {
       "id": "emerson.f.v0009",
-      "kind": "verbatim",
-      "text": "The cloud, the tree, the turf, the bird are not theirs, have nothing of them; the world is only their lodging and table.",
-      "work": "Essays — First Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — First Series"
-      },
-      "quality": {
-        "chars": 120
-      }
-    },
-    {
-      "id": "emerson.f.v0010",
-      "kind": "verbatim",
-      "text": "One would not willingly pronounce these words in their hearing, and give them the occasion to profane them.",
-      "work": "Essays — Second Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — Second Series"
-      },
-      "quality": {
-        "chars": 107
-      }
-    },
-    {
-      "id": "emerson.f.v0011",
-      "kind": "verbatim",
-      "text": "I own it is but poor chat and gossip to go to enumerate traits of this simple and rapid power, and we are painting the lightning with charcoal; but in these long nights and vacations I like to console myself so.",
-      "work": "Essays — Second Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — Second Series"
-      },
-      "quality": {
-        "chars": 211
-      }
-    },
-    {
-      "id": "emerson.f.v0012",
-      "kind": "verbatim",
-      "text": "If the house do not please them, they walk out and enter another, as there are several hundreds at their command.",
-      "work": "Essays — Second Series",
-      "lang": "en",
-      "src": {
-        "work": "Essays — Second Series"
-      },
-      "quality": {
-        "chars": 113
-      }
-    },
-    {
-      "id": "emerson.f.v0013",
       "kind": "verbatim",
       "text": "Fox will always hold the first place in an assembly at the Tuileries.\" We may easily seem ridiculous in our eulogy of courtesy, whenever we insist on benevolence as its foundation.",
       "work": "Essays — Second Series",
@@ -511,130 +627,326 @@
       }
     },
     {
-      "id": "emerson.f.v0014",
+      "id": "emerson.f.v0010",
       "kind": "verbatim",
-      "text": "In our condition of universal dependence it seems heroic to let the petitioner be the judge of his necessity, and to give all that is asked, though at great inconvenience.",
+      "text": "The incommunicable trees begin to persuade us to live with them, and quit our life of solemn trifles.",
       "work": "Essays — Second Series",
       "lang": "en",
       "src": {
         "work": "Essays — Second Series"
       },
       "quality": {
-        "chars": 171
+        "chars": 101
+      }
+    },
+    {
+      "id": "emerson.f.v0011",
+      "kind": "verbatim",
+      "text": "My work may be of none, but I must not think it of none, or I shall not do it with impunity.",
+      "work": "Essays — Second Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — Second Series"
+      },
+      "quality": {
+        "chars": 92
+      }
+    },
+    {
+      "id": "emerson.f.v0012",
+      "kind": "verbatim",
+      "text": "In the strife of ferocious parties, human nature always finds itself cherished; as the children of the convicts at Botany Bay are found to have as healthy a moral sentiment as other children.",
+      "work": "Essays — Second Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — Second Series"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "emerson.f.v0013",
+      "kind": "verbatim",
+      "text": "The same disposition to scrutiny and dissent appeared in civil, festive, neighborly, and domestic society.",
+      "work": "Essays — Second Series",
+      "lang": "en",
+      "src": {
+        "work": "Essays — Second Series"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "emerson.f.v0014",
+      "kind": "verbatim",
+      "text": "I see the spectacle of morning from the hill-top over against my house, from day-break to sun-rise, with emotions which an angel might share.",
+      "work": "Nature",
+      "lang": "en",
+      "src": {
+        "work": "Nature"
+      },
+      "quality": {
+        "chars": 141
       }
     },
     {
       "id": "emerson.f.v0015",
       "kind": "verbatim",
-      "text": "O no, the wary Nature sends a new troop of fairer forms, of lordlier youths, with a little more excess of direction to hold them fast to their several aim; makes them a little wrongheaded in that direction in which they are rightest, and on goes the game again with new whirl, for a generation or two more.",
-      "work": "Essays — Second Series",
+      "text": "A virtuous man is in unison with her works, and makes the central figure of the visible sphere.",
+      "work": "Nature",
       "lang": "en",
       "src": {
-        "work": "Essays — Second Series"
+        "work": "Nature"
       },
       "quality": {
-        "chars": 306
+        "chars": 95
       }
     },
     {
       "id": "emerson.f.v0016",
       "kind": "verbatim",
-      "text": "The man momentarily stands for the thought, but will not bear examination; and a society of men will cursorily represent well enough a certain quality and culture, for example, chivalry or beauty of manners; but separate them and there is no gentleman and no lady in the group.",
-      "work": "Essays — Second Series",
+      "text": "A lamb is innocence; a snake is subtle spite; flowers express to us the delicate affections.",
+      "work": "Nature",
       "lang": "en",
       "src": {
-        "work": "Essays — Second Series"
+        "work": "Nature"
       },
       "quality": {
-        "chars": 277
+        "chars": 92
       }
     },
     {
       "id": "emerson.f.v0017",
       "kind": "verbatim",
-      "text": "Simon, of Fourier, and of Owen, three communities have already been formed in Massachusetts on kindred plans, and many more in the country at large.",
-      "work": "Essays — Second Series",
+      "text": "Water is good to drink, coal to burn, wool to wear; but wool cannot be drunk, nor water spun, nor coal eaten.",
+      "work": "Nature",
       "lang": "en",
       "src": {
-        "work": "Essays — Second Series"
+        "work": "Nature"
       },
       "quality": {
-        "chars": 148
+        "chars": 109
       }
     },
     {
       "id": "emerson.f.v0018",
       "kind": "verbatim",
-      "text": "Was there no meaning in the live repose of the valley behind the mill, and which Homer or Shakspeare could not reform for me in words?",
+      "text": "Xenophanes complained in his old age, that, look where he would, all things hastened back to Unity.",
       "work": "Nature",
       "lang": "en",
       "src": {
         "work": "Nature"
       },
       "quality": {
-        "chars": 134
+        "chars": 99
       }
     },
     {
       "id": "emerson.f.v0019",
       "kind": "verbatim",
-      "text": "This immediate dependence of language upon nature, this conversion of an outward phenomenon into a type of somewhat in human life, never loses its power to affect us.",
+      "text": "This view, which admonishes me where the sources of wisdom and power lie, and points to virtue as to \"The golden key Which opes the palace of eternity,\" carries upon its face the highest certificate of truth, because it animates me to create my own world through the purification of my soul.",
       "work": "Nature",
       "lang": "en",
       "src": {
         "work": "Nature"
       },
       "quality": {
-        "chars": 166
+        "chars": 291
       }
     },
     {
       "id": "emerson.f.v0020",
       "kind": "verbatim",
-      "text": "Our dealing with sensible objects is a constant exercise in the necessary lessons of difference, of likeness, of order, of being and seeming, of progressive arrangement; of ascent from particular to general; of combination to one end of manifold forces.",
-      "work": "Nature",
+      "text": "It is like the climate, which easily rears a crop, which no glass, or irrigation, or tillage, or manures, can elsewhere rival.",
+      "work": "The Conduct of Life",
       "lang": "en",
       "src": {
-        "work": "Nature"
-      },
-      "quality": {
-        "chars": 253
-      }
-    },
-    {
-      "id": "emerson.f.v0021",
-      "kind": "verbatim",
-      "text": "He forges the subtile and delicate air into wise and melodious words, and gives them wing as angels of persuasion and command.",
-      "work": "Nature",
-      "lang": "en",
-      "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
       },
       "quality": {
         "chars": 126
       }
     },
     {
-      "id": "emerson.f.v0022",
+      "id": "emerson.f.v0021",
       "kind": "verbatim",
-      "text": "The first effort of thought tends to relax this despotism of the senses, which binds us to nature as if we were a part of it, and shows us nature aloof, and, as it were, afloat.",
-      "work": "Nature",
+      "text": "It is to invest income; that is to say, to take up particulars into generals; days into integral eras,--literary, emotive, practical, of its life, and still to ascend in its investment.",
+      "work": "The Conduct of Life",
       "lang": "en",
       "src": {
-        "work": "Nature"
+        "work": "The Conduct of Life"
       },
       "quality": {
-        "chars": 177
+        "chars": 185
+      }
+    },
+    {
+      "id": "emerson.f.v0022",
+      "kind": "verbatim",
+      "text": "I have heard, that, throughout this country, a certain respect is paid to good broadcloth; but dress makes a little restraint: men will not commit themselves.",
+      "work": "The Conduct of Life",
+      "lang": "en",
+      "src": {
+        "work": "The Conduct of Life"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "emerson.f.v0023",
+      "kind": "verbatim",
+      "text": "I have no fears of being forced in my own despite to play, as we say, the devil's attorney.",
+      "work": "The Conduct of Life",
+      "lang": "en",
+      "src": {
+        "work": "The Conduct of Life"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "emerson.f.v0024",
+      "kind": "verbatim",
+      "text": "Already, who provoke pity like that excellent family party just arriving in their well-appointed carriage, as far from home and any honest end as ever?",
+      "work": "The Conduct of Life",
+      "lang": "en",
+      "src": {
+        "work": "The Conduct of Life"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "emerson.f.v0025",
+      "kind": "verbatim",
+      "text": "It is a rule of largest application, true in a plant, true in a loaf of bread, that in the construction of any fabric or organism, any real increase of fitness to its end, is an increase of beauty.",
+      "work": "The Conduct of Life",
+      "lang": "en",
+      "src": {
+        "work": "The Conduct of Life"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "emerson.f.v0026",
+      "kind": "verbatim",
+      "text": "In vain, the wheels of tendency will not stop, nor will all the forces of inertia, fear, or love itself, hold thee there.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "emerson.f.v0027",
+      "kind": "verbatim",
+      "text": "In all nations, there are minds which incline to dwell in the conception of the fundamental Unity.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "emerson.f.v0028",
+      "kind": "verbatim",
+      "text": "Socrates and Plato are the double star, which the most powerful instruments will not entirely separate.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "emerson.f.v0029",
+      "kind": "verbatim",
+      "text": "The atmosphere of moral sentiment is a region of grandeur which reduces all material magnificence to toys, yet opens to every wretch that has reason, the doors of the universe.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "emerson.f.v0030",
+      "kind": "verbatim",
+      "text": "It is from the poor man's hut alone, that strength and virtue come; and yet, on the other side, it is alleged that labor impairs the form, and breaks the spirit of man, and the laborers cry unanimously, \"We have no thoughts.\" Culture, how indispensable!",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "emerson.f.v0031",
+      "kind": "verbatim",
+      "text": "I like not the French celerity,--a new church and state once a week.--This is the second negation; and I shall let it pass for what it will.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "emerson.f.v0032",
+      "kind": "verbatim",
+      "text": "Other admirable men have led lives in some sort of keeping with their thought; but this man, in wide contrast.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "emerson.f.v0033",
+      "kind": "verbatim",
+      "text": "The day of sleepy, selfish policy, ever narrowing the means and opportunities of young men, was ended, and a day of expansion and demand was come.",
+      "work": "Representative Men: Seven Lectures",
+      "lang": "en",
+      "src": {
+        "work": "Representative Men: Seven Lectures"
+      },
+      "quality": {
+        "chars": 146
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:e173a5c18c0b5fed0920caeec48bdf4853e875257eb3e00d5321e6224fb37c48"
+  "checksum": "sha256:dd01ae638f5a215cbd4c248fcbb4dc0e1bbe15d161c34f5993fb14377ff36604"
 }

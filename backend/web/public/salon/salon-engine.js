@@ -184,7 +184,9 @@
       demand: demand,
       domain: dom ? dom.key : "generique",
       keys: dom ? terms(DOMAIN_KEYS[dom.key] || "") : terms(DOMAIN_KEYS.generique),
+      keysRaw: dom ? (DOMAIN_KEYS[dom.key] || "") : DOMAIN_KEYS.generique,
       label: dom ? dom.label : subject,
+      labelEn: dom ? (dom.labelEn || "") : "",
       these: dom ? dom.these : "",
       suite: dom ? dom.suite : "",
       concepts: conceptsIn(raw),
@@ -267,8 +269,8 @@
   }
 
   function retrieve(passages, sc, k) {
-    var qRank = [sc.raw, sc.label || "", (sc.keys || []).join(" ")].join(" ");
-    var qGate = [sc.raw, sc.label || ""].join(" ");
+    var qRank = [sc.raw, sc.label || "", sc.keysRaw || (sc.keys || []).join(" ")].join(" ");
+    var qGate = [sc.raw, sc.label || "", sc.labelEn || ""].join(" ");
     var ranked = (passages || []).map(function (p, i) {
       var work = p.w || p.work || "";
       var text = p.t || p.text || p.s || "";
@@ -297,6 +299,8 @@
     max = max || 120;
     return s.length > max ? s.slice(0, max - 1).trim() + "…" : s;
   }
+  /* Borne un bloc de prompt sans écraser les retours à la ligne (lot 1). */
+  function clipText(t, n) { t = String(t || "").replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n - 1) + "…" : t; }
   function nameOf(a, lang) {
     if (!a) return "l'inconnu";
     return (lang === "en" && a.nameEn) ? a.nameEn : (a.name || a.id || "l'inconnu");
@@ -351,8 +355,28 @@
     if (head.length < 12) head = blurb.replace(/\.\s*$/, "");
     return head;
   }
+  function doctrineThesis(sc, author, en) {
+    var d = author && author.doctrine; if (!d || !d.theses) return null;
+    var byDom = d.theses[sc.domain]; if (!byDom) return null;
+    var t = byDom[sc.demand] || byDom["*"]; if (!t) return null;
+    var text = en ? (t.en || "") : (t.fr || "");
+    return text ? { text: text, anchors: t.anchors || [] } : null;
+  }
+  function resolveAnchor(anchors, corpus) {
+    for (var i = 0; i < (anchors || []).length; i++) {
+      var a = anchors[i];
+      for (var j = 0; j < (corpus || []).length; j++) {
+        var p = corpus[j], s = p.s || p.sentence || "";
+        if ((p.w || p.work) === a.work && s.indexOf(a.startsWith) === 0)
+          return { work: a.work, sentence: s, text: s, weak: false, anchored: true };
+      }
+    }
+    return null;
+  }
   function thesisFor(sc, author, lang) {
     var en = lang === "en";
+    var dt = doctrineThesis(sc, author, en);
+    if (dt) return dt.text;
     var own = authorThesis(author, en);
     if (own) return own;
     var table = (en ? THESES_EN : THESES)[sc.domain] || {};
@@ -442,8 +466,11 @@
 
     /* 2. Position — la thèse du convive (elenchus : définir, ne pas conclure). */
     if (method === "elenchus") {
-      prise = en ? "I do not yet hold the definition you put under these words." : "Je ne tiens pas encore la définition que tu mets sous ces mots.";
-      clauses.push(en ? "Before concluding, tell me what you put under \"" + subject + "\": one thing, or several that you confuse?" : "Avant de conclure, dis-moi ce que tu mets sous « " + subject + " » : une seule chose, ou plusieurs que l’on confond ?");
+      var dte = doctrineThesis(sc, author, en);
+      prise = dte ? closeSentence(dte.text) : (en ? "I do not yet hold the definition you put under these words." : "Je ne tiens pas encore la définition que tu mets sous ces mots.");
+      clauses.push(dte
+        ? (en ? "Suppose we say that " + dte.text + ": is that what you put under \"" + subject + "\"?" : "Admettons que " + dte.text + " : est-ce bien cela que tu mets sous « " + subject + " » ?")
+        : (en ? "Before concluding, tell me what you put under \"" + subject + "\": one thing, or several that you confuse?" : "Avant de conclure, dis-moi ce que tu mets sous « " + subject + " » : une seule chose, ou plusieurs que l’on confond ?"));
     } else {
       var th = thesisFor(sc, author, lang);
       prise = closeSentence(th);
@@ -486,6 +513,11 @@
     var sc = input.scope || scope(input.question || "");
     var passages = input.passages || retrieve(input.corpus || [], sc, 3);
     var best = passages[0];
+    if (!best || best.weak) {
+      var dt = doctrineThesis(sc, author, (input.lang || sc.lang) === "en");
+      var anch = dt && resolveAnchor(dt.anchors, input.corpus || []);
+      if (anch) best = anch;
+    }
     var last = (input.history && input.history.length) ? input.history[input.history.length - 1] : null;
     var plan = (input.move || input.toName)
       ? { move: input.move || "ouvre", act: input.act || "reponse", toName: input.toName, point: input.point }
@@ -516,7 +548,7 @@
     return keys[h % keys.length];
   }
 
-  function persona(author, lang) {
+  function persona(author, lang, sample) {
     if (!author) return "";
     var en = lang === "en";
     var name = nameOf(author, lang);
@@ -525,11 +557,30 @@
     var blurb = en ? (author.blurbEn || author.blurb || "") : (author.blurb || "");
     var works = (author.works || []).map(function (w) { return w.title || w; }).slice(0, 6);
     var method = author.method === "elenchus" ? (en ? "elenchus (ask, do not conclude)" : "elenchus (interroger, ne pas conclure)") : "auto";
+    var d = author.doctrine || {};
+    var elocutioFr = { philosophe: "tu distingues avant de conclure. Une idée, nette.", "écrivain": "tu montres une scène, tu ne disserte pas.", dramaturge: "tu fais parler des êtres ; le jugement reste dans la réplique.", "poète": "le rythme porte le sens ; une image suffit.", essayiste: "une maxime, puis ce qu’elle coûte.", savant: "un fait observé, puis la limite de ce qu’il prouve.", "économiste": "un mécanisme, nommé, sans morale collée.", tradition: "tu parles depuis l’écriture. Une parole, puis le silence qu’elle ouvre." };
+    var elocutioEn = { philosophe: "you distinguish before concluding. One idea, sharp.", "écrivain": "you show a scene; you do not lecture.", dramaturge: "you let beings speak; judgement stays in the line.", "poète": "rhythm carries the sense; one image suffices.", essayiste: "a maxim, then what it costs.", savant: "an observed fact, then the limit of what it proves.", "économiste": "a mechanism, named, with no morality glued on.", tradition: "you speak from the scripture. A word, then the silence it opens." };
+    var el = (en ? elocutioEn : elocutioFr)[kind] || "";
+    var concepts = (d.concepts || []).slice(0, 8);
+    var workLines = [];
+    if (d.works) {
+      Object.keys(d.works).slice(0, 4).forEach(function (t) {
+        var w = d.works[t] || {};
+        var sm = (w.summary && (en ? (w.summary.en || w.summary.fr) : (w.summary.fr || w.summary.en))) || "";
+        if (sm) workLines.push("« " + t + " » : " + sm);
+      });
+    }
+    var voice = String((d.voice && (en ? (d.voice.en || d.voice.fr) : (d.voice.fr || d.voice.en))) || sample || "").replace(/\s+/g, " ").trim();
     return [
       (en ? "You are " : "Tu es ") + name + (kind ? " — " + kind : "") + (era ? " (" + era + ")" : "") + ".",
       blurb ? (en ? "Thesis: " : "Thèse : ") + blurb : "",
       (en ? "Method: " : "Méthode : ") + method + ".",
       works.length ? (en ? "Works in memory: " : "Œuvres en mémoire : ") + works.join("; ") : "",
+      el ? (en ? "Elocution: " : "Élocution : ") + el : "",
+      concepts.length ? (en ? "Concepts: " : "Concepts : ") + concepts.join(", ") + "." : "",
+      workLines.length ? (en ? "Work notes:\n" : "Notes d’œuvres :\n") + workLines.join("\n") : "",
+      (en ? "Rule: do not invoke any work outside this list; never invent a quote or a biographical fact — what is missing becomes an explicit hypothesis." : "Règle : n’invoque aucune œuvre hors de cette liste ; n’invente ni citation ni fait biographique — ce qui manque devient une hypothèse explicite."),
+      voice ? (en ? "Voice sample: \"" + voice + "\"" : "Échantillon de voix : « " + voice + " »") : "",
       (en ? "You are a guest at a table, not a chatbot." : "Tu es un convive à une table, pas un chatbot."),
     ].filter(Boolean).join("\n");
   }
@@ -549,7 +600,7 @@
     var passages = input.passages || [];
 
     var system = [
-      persona(author, lang),
+      persona(author, lang, (passages[0] && !passages[0].weak && (passages[0].sentence || "")) || ""),
       "",
       en
         ? "Contract: reply with exactly two fields —\nPRISE: <one assertive sentence: the thesis THIS turn adds to the table question>\nREPLIQUE:\n<90-170 words, complete sentences, first person, no lists, no headings>"
@@ -563,9 +614,14 @@
       (en ? "Never quote a passage that does not answer the question; never invent a work or a quote." : "Ne cite jamais un passage qui ne répond pas ; ne fabrique ni œuvre ni citation."),
     ].filter(Boolean).join("\n");
 
+    var dtp = doctrineThesis(sc, author, en);
+    var dtpAnchor = dtp && resolveAnchor(dtp.anchors, (input.corpus && input.corpus.length ? input.corpus : input.passages) || []);
+    var positionLine = dtp ? ((en ? "Your position on " : "Ta position sur ") + (sc.label || sc.subject) + " : " + dtp.text + (dtpAnchor ? (en ? " — anchored in \"" + dtpAnchor.work + "\": " + dtpAnchor.sentence : " — ancrée dans « " + dtpAnchor.work + " » : " + dtpAnchor.sentence) : "")) : "";
+
     var user = [
       (en ? "Table question (the thread — do not leave it): " : "Question de table (fil directeur — ne la quitte pas) : ") + sc.raw,
       (en ? "Scope: subject = " : "Cadrage : sujet = ") + (sc.label || sc.subject) + " ; " + (en ? "kind of question = " : "type de demande = ") + sc.demand + ".",
+      positionLine,
       last
         ? (en ? "Previous turn to build on: " : "Dernier tour à enchaîner : ") + nameOf(last.author ? { name: last.author } : { name: last.name }, lang) + (last.prise ? " — " + (en ? "thesis: " : "prise : ") + last.prise : "") + ". " + (last.text || "")
         : (en ? "You open the table: restate the question, then take a stand." : "Tu ouvres la table : ressaisis la question, puis prends position."),
@@ -581,11 +637,11 @@
           passages.slice(0, 3).map(function (p) { return "« " + p.work + " »\n" + (p.sentence || firstSentences(p.text, 1)); }).join("\n\n")
         : (en ? "No relevant passage — say so, then argue from your named works." : "Aucun passage pertinent — dis-le, puis argumente depuis tes œuvres nommées."),
       (input.self && input.self.length)
-        ? (en ? "Your own previous turns (stay consistent; do not repeat yourself):\n" : "Ta mémoire — tes tours précédents (reste cohérent, ne te répète pas) :\n") + input.self.slice(-4).map(function (h) { return (h.prise ? "[" + (en ? "thesis: " : "prise : ") + h.prise + "] " : "") + (h.text || ""); }).join("\n")
+        ? (en ? "Your own previous turns (stay consistent; do not repeat yourself):\n" : "Ta mémoire — tes tours précédents (reste cohérent, ne te répète pas) :\n") + input.self.slice(-4).map(function (h) { return (h.prise ? "[" + (en ? "thesis: " : "prise : ") + h.prise + "] " : "") + clipText(h.text || "", 360); }).join("\n")
         : "",
       (input.history && input.history.length > 1)
         ? (en ? "Recent thread:\n" : "Fil récent :\n") + input.history.slice(-6).map(function (h) {
-            return nameOf({ name: h.name, nameEn: h.nameEn }, lang) + (h.prise ? " [" + (en ? "thesis: " : "prise : ") + h.prise + "]" : "") + " : " + h.text;
+            return nameOf({ name: h.name, nameEn: h.nameEn }, lang) + (h.prise ? " [" + (en ? "thesis: " : "prise : ") + h.prise + "]" : "") + " : " + clipText(h.text || "", 360);
           }).join("\n")
         : "",
     ].filter(Boolean).join("\n\n");
@@ -624,6 +680,8 @@
     planTurn: planTurn,
     lastGuest: lastGuest,
     persona: persona,
+    doctrineThesis: doctrineThesis,
+    resolveAnchor: resolveAnchor,
     floorPrompt: floorPrompt,
     figureFor: figureFor,
     parseSpeech: parseSpeech,

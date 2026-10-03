@@ -1,21 +1,21 @@
 {
   "authorId": "spinoza",
   "kbVersion": "spinoza@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.073Z",
+  "builtAt": "2026-10-03T21:23:12.004Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "Ethics",
-      "sentences": 16
+      "sentences": 12
     },
     {
       "title": "On the Improvement of the Understanding",
-      "sentences": 9
+      "sentences": 12
     },
     {
       "title": "Theologico-Political Treatise",
-      "sentences": 15
+      "sentences": 12
     }
   ],
   "passages": [
@@ -30,7 +30,7 @@
     {
       "id": "spinoza.p0002",
       "w": "Ethics",
-      "s": "Such a doctrine might well have sufficed to conceal the truth from the human race for all eternity, if mathematics had not furnished another standard of verity in considering solely the essence and properties of figures without regard to their final causes.",
+      "s": "For it is said that God has the power to destroy all things, and to reduce them to nothing.",
       "src": {
         "work": "Ethics"
       }
@@ -38,7 +38,7 @@
     {
       "id": "spinoza.p0003",
       "w": "Ethics",
-      "s": "Proof.--This proposition is evident from the last; it is understood more clearly from the preceding note.",
+      "s": "The human mind has no knowledge of the body, and does not know it to exist, save through the ideas of the modifications whereby the body is affected.",
       "src": {
         "work": "Ethics"
       }
@@ -46,7 +46,7 @@
     {
       "id": "spinoza.p0004",
       "w": "Ethics",
-      "s": "When the fluid part of the human body is determined by an external body to impinge often on another soft part, it changes the surface of the latter, and, as it were, leaves the impression thereupon of the external body which impels it.",
+      "s": "This wavering of the imagination will be the same, if the imagination be concerned with things which we thus contemplate, standing in relation to time past or time present: consequently, we may imagine things as contingent, whether they be referred to time present, past, or future.",
       "src": {
         "work": "Ethics"
       }
@@ -54,7 +54,7 @@
     {
       "id": "spinoza.p0005",
       "w": "Ethics",
-      "s": "This wavering of the imagination will be the same, if the imagination be concerned with things which we thus contemplate, standing in relation to time past or time present: consequently, we may imagine things as contingent, whether they be referred to time present, past, or future.",
+      "s": "Everyone shapes his actions according to his emotion, those who are assailed by conflicting emotions know not what they wish; those who are not attacked by any emotion are readily swayed this way or that.",
       "src": {
         "work": "Ethics"
       }
@@ -62,7 +62,7 @@
     {
       "id": "spinoza.p0006",
       "w": "Ethics",
-      "s": "If I am asked, whether such an one should not rather be considered an ass than a man; I answer, that I do not know, neither do I know how a man should be considered, who hangs himself, or how we should consider children, fools, madmen, &c.",
+      "s": "Proof.--We endeavour, as far as possible, to conceive that which we imagine to conduce to pleasure (III.",
       "src": {
         "work": "Ethics"
       }
@@ -70,7 +70,7 @@
     {
       "id": "spinoza.p0007",
       "w": "Ethics",
-      "s": "The mind, both in so far as it has clear and distinct ideas, and also in so far as it has confused ideas, endeavours to persist in its being for an indefinite period, and of this endeavour it is conscious.",
+      "s": "Corollary.--This pleasure is fostered more and more, in proportion as a man conceives himself to be praised by others.",
       "src": {
         "work": "Ethics"
       }
@@ -78,7 +78,7 @@
     {
       "id": "spinoza.p0008",
       "w": "Ethics",
-      "s": "By evil, I mean every kind of pain, especially that which frustrates our longings.",
+      "s": "We can easily gather from what has been said, that this depends in great measure on education.",
       "src": {
         "work": "Ethics"
       }
@@ -86,7 +86,7 @@
     {
       "id": "spinoza.p0009",
       "w": "Ethics",
-      "s": "Corollary.--This pleasure is fostered more and more, in proportion as a man conceives himself to be praised by others.",
+      "s": "For the emotion which we undergo can only be checked or destroyed by an emotion contrary to, and stronger than, itself, in other words, (by the general Definition of the Emotions) only by an idea of a modification of the body contrary to, and stronger than, the modification which we undergo.",
       "src": {
         "work": "Ethics"
       }
@@ -94,7 +94,7 @@
     {
       "id": "spinoza.p0010",
       "w": "Ethics",
-      "s": "Neither can we say, that pain consists in the absence of a greater perfection.",
+      "s": "Still I do not deny that beasts feel: what I deny is, that we may not consult our own advantage and use them as we please, treating them in the way which best suits us; for their nature is not like ours, and their emotions are naturally different from human emotions (III.",
       "src": {
         "work": "Ethics"
       }
@@ -102,7 +102,7 @@
     {
       "id": "spinoza.p0011",
       "w": "Ethics",
-      "s": "There is no individual thing in nature, than which there is not another more powerful and strong.",
+      "s": "This part will not endeavour to do away with its own powers, in order that the other parts of the body may perform its office; for this it would be necessary for it to have a force or power of doing away with its own powers, which (III.",
       "src": {
         "work": "Ethics"
       }
@@ -110,45 +110,13 @@
     {
       "id": "spinoza.p0012",
       "w": "Ethics",
-      "s": "No one can desire to be blessed, to act rightly, and to live rightly, without at the same time wishing to be, act, and to live--in other words, to actually exist.",
+      "s": "Proof.--The order and connection of ideas is the same (II.",
       "src": {
         "work": "Ethics"
       }
     },
     {
       "id": "spinoza.p0013",
-      "w": "Ethics",
-      "s": "Still I do not deny that beasts feel: what I deny is, that we may not consult our own advantage and use them as we please, treating them in the way which best suits us; for their nature is not like ours, and their emotions are naturally different from human emotions (III.",
-      "src": {
-        "work": "Ethics"
-      }
-    },
-    {
-      "id": "spinoza.p0014",
-      "w": "Ethics",
-      "s": "But, if we assume that a man perceives his own infirmity by virtue of understanding something stronger than himself, by the knowledge of which he determines his own power of activity, this is the same as saying that we conceive that a man understands himself distinctly (IV.",
-      "src": {
-        "work": "Ethics"
-      }
-    },
-    {
-      "id": "spinoza.p0015",
-      "w": "Ethics",
-      "s": "As, therefore, those things are good which assist the various parts of the body, and enable them to perform their functions; and as pleasure consists in an increase of, or aid to, man's power, in so far as he is composed of mind and body; it follows that all those things which bring pleasure are good.",
-      "src": {
-        "work": "Ethics"
-      }
-    },
-    {
-      "id": "spinoza.p0016",
-      "w": "Ethics",
-      "s": "Proof.--There is no modification of the body, whereof the mind may not form some clear and distinct conception (V.",
-      "src": {
-        "work": "Ethics"
-      }
-    },
-    {
-      "id": "spinoza.p0017",
       "w": "On the Improvement of the Understanding",
       "s": "To collect in this way the differences, the agreements, and the oppositions of things.",
       "src": {
@@ -156,7 +124,15 @@
       }
     },
     {
-      "id": "spinoza.p0018",
+      "id": "spinoza.p0014",
+      "w": "On the Improvement of the Understanding",
+      "s": "To learn thus exactly how far they can or cannot be modified.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0015",
       "w": "On the Improvement of the Understanding",
       "s": "To compare this result with the nature and power of man.",
       "src": {
@@ -164,7 +140,7 @@
       }
     },
     {
-      "id": "spinoza.p0019",
+      "id": "spinoza.p0016",
       "w": "On the Improvement of the Understanding",
       "s": "If they grant it, then necessarily the same must be said of understanding, as is said of fiction.",
       "src": {
@@ -172,7 +148,7 @@
       }
     },
     {
-      "id": "spinoza.p0020",
+      "id": "spinoza.p0017",
       "w": "On the Improvement of the Understanding",
       "s": "We have now to investigate the doubtful idea--that is, to inquire what can cause us to doubt, and how doubt may be removed.",
       "src": {
@@ -180,7 +156,15 @@
       }
     },
     {
-      "id": "spinoza.p0021",
+      "id": "spinoza.p0018",
+      "w": "On the Improvement of the Understanding",
+      "s": "The exclusion of all idea of cause--that is, the thing must not need explanation by Anything outside itself.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0019",
       "w": "On the Improvement of the Understanding",
       "s": "When the definition of the thing has been given, there must be no room for doubt as to whether the thing exists or not.",
       "src": {
@@ -188,7 +172,7 @@
       }
     },
     {
-      "id": "spinoza.p0022",
+      "id": "spinoza.p0020",
       "w": "On the Improvement of the Understanding",
       "s": "It must contain, as far as the mind is concerned, no substantives which could be put into an adjectival form; in other words, the object defined must not be explained through abstractions.",
       "src": {
@@ -196,7 +180,7 @@
       }
     },
     {
-      "id": "spinoza.p0023",
+      "id": "spinoza.p0021",
       "w": "On the Improvement of the Understanding",
       "s": "Lastly, though this is not absolutely necessary, it should be possible to deduce from the definition all the properties of the thing defined.",
       "src": {
@@ -204,7 +188,7 @@
       }
     },
     {
-      "id": "spinoza.p0024",
+      "id": "spinoza.p0022",
       "w": "On the Improvement of the Understanding",
       "s": "All these rules become obvious to anyone giving strict attention to the matter.",
       "src": {
@@ -212,7 +196,15 @@
       }
     },
     {
-      "id": "spinoza.p0025",
+      "id": "spinoza.p0023",
+      "w": "On the Improvement of the Understanding",
+      "s": "I do no more here than enumerate the sciences necessary for our purpose; I lay no stress on their order.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0024",
       "w": "On the Improvement of the Understanding",
       "s": "By an eternal truth, I mean that which being positive could never become negative.",
       "src": {
@@ -220,7 +212,7 @@
       }
     },
     {
-      "id": "spinoza.p0026",
+      "id": "spinoza.p0025",
       "w": "Theologico-Political Treatise",
       "s": "God, ordinary knowledge is no whit inferior to prophetic, unless indeed we believe, or rather dream, that the prophets had human bodies but superhuman minds, and therefore that their sensations and consciousness were entirely different from our own.",
       "src": {
@@ -228,15 +220,15 @@
       }
     },
     {
-      "id": "spinoza.p0027",
+      "id": "spinoza.p0026",
       "w": "Theologico-Political Treatise",
-      "s": "This, as I shall shortly show, is the only instance of a real voice.",
+      "s": "I could cite from Holy Writ many similar examples, but I think they are sufficiently well known already.",
       "src": {
         "work": "Theologico-Political Treatise"
       }
     },
     {
-      "id": "spinoza.p0028",
+      "id": "spinoza.p0027",
       "w": "Theologico-Political Treatise",
       "s": "From the meaning of disposition we get - (62) (7.) Passions and faculties.",
       "src": {
@@ -244,15 +236,7 @@
       }
     },
     {
-      "id": "spinoza.p0029",
-      "w": "Theologico-Political Treatise",
-      "s": "A lofty spirit means pride, a lowly spirit humility, an evil spirit hatred and melancholy.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0030",
+      "id": "spinoza.p0028",
       "w": "Theologico-Political Treatise",
       "s": "So Nebuchadnezzar is called the servant of God, Assyria the scourge of God, &c.",
       "src": {
@@ -260,31 +244,23 @@
       }
     },
     {
+      "id": "spinoza.p0029",
+      "w": "Theologico-Political Treatise",
+      "s": "Very high mountains are styled the mountains of God, a very deep sleep, the sleep of God, &c.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0030",
+      "w": "Theologico-Political Treatise",
+      "s": "The size of the cedars of Lebanon is alluded to in the Psalmist's expression, \"the cedars of the Lord.\" (71) Similarly, if the Jews were at a loss to understand any phenomenon, or were ignorant of its cause, they referred it to God.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
       "id": "spinoza.p0031",
-      "w": "Theologico-Political Treatise",
-      "s": "In this sense we must explain Amos iv:11: \"I have overthrown you as the overthrow of the Lord came upon Sodom and Gomorrah,\" i.e.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0032",
-      "w": "Theologico-Political Treatise",
-      "s": "The wisdom of Solomon is called the wisdom of God, or extraordinary.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0033",
-      "w": "Theologico-Political Treatise",
-      "s": "Numbers xi:17, 1 Kings xxii:21, &c.), that the Lord was seen by Micah as sitting, by Daniel as an old man clothed in white, by Ezekiel as a fire, that the Holy Spirit appeared to those with Christ as a descending dove, to the apostles as fiery tongues, to Paul on his conversion as a great light.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0034",
       "w": "Theologico-Political Treatise",
       "s": "That the things revealed were imagined very vividly, affecting the prophets in the same way as things seen when awake; 2.",
       "src": {
@@ -292,39 +268,31 @@
       }
     },
     {
+      "id": "spinoza.p0032",
+      "w": "Theologico-Political Treatise",
+      "s": "Isaiah saw seraphim with six wings, Ezekiel beasts with four wings; Isaiah saw God clothed and sitting on a royal throne, Ezekiel saw Him in the likeness of a fire; each doubtless saw God under the form in which he usually imagined Him.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0033",
+      "w": "Theologico-Political Treatise",
+      "s": "The government of the passions, or the acquirement of the habit of virtue.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0034",
+      "w": "Theologico-Political Treatise",
+      "s": "Further, as accustomed to prophesy, Balaam bade the messengers wait for him till the will of the Lord was revealed to him.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
       "id": "spinoza.p0035",
-      "w": "Theologico-Political Treatise",
-      "s": "It is, therefore, certain that they knew not the excellence of virtue and the true happiness.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0036",
-      "w": "Theologico-Political Treatise",
-      "s": "The knowledge of things through their primary causes.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0037",
-      "w": "Theologico-Political Treatise",
-      "s": "In regard to other matters, wherein man's true happiness consists, they were on a par with the rest of the nations.",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0038",
-      "w": "Theologico-Political Treatise",
-      "s": "Whether by the natural light of reason we can conceive of God as a law-giver or potentate ordaining laws for men?",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      }
-    },
-    {
-      "id": "spinoza.p0039",
       "w": "Theologico-Political Treatise",
       "s": "What is the teaching of Holy Writ concerning this natural light of reason and natural law?",
       "src": {
@@ -332,7 +300,7 @@
       }
     },
     {
-      "id": "spinoza.p0040",
+      "id": "spinoza.p0036",
       "w": "Theologico-Political Treatise",
       "s": "Lastly, what is the good gained by knowing the sacred histories and believing them?",
       "src": {
@@ -344,44 +312,18 @@
     {
       "id": "spinoza.f.v0001",
       "kind": "verbatim",
-      "text": "Such a doctrine might well have sufficed to conceal the truth from the human race for all eternity, if mathematics had not furnished another standard of verity in considering solely the essence and properties of figures without regard to their final causes.",
+      "text": "The human mind has no knowledge of the body, and does not know it to exist, save through the ideas of the modifications whereby the body is affected.",
       "work": "Ethics",
       "lang": "en",
       "src": {
         "work": "Ethics"
       },
       "quality": {
-        "chars": 257
+        "chars": 149
       }
     },
     {
       "id": "spinoza.f.v0002",
-      "kind": "verbatim",
-      "text": "Proof.--This proposition is evident from the last; it is understood more clearly from the preceding note.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 105
-      }
-    },
-    {
-      "id": "spinoza.f.v0003",
-      "kind": "verbatim",
-      "text": "When the fluid part of the human body is determined by an external body to impinge often on another soft part, it changes the surface of the latter, and, as it were, leaves the impression thereupon of the external body which impels it.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 235
-      }
-    },
-    {
-      "id": "spinoza.f.v0004",
       "kind": "verbatim",
       "text": "This wavering of the imagination will be the same, if the imagination be concerned with things which we thus contemplate, standing in relation to time past or time present: consequently, we may imagine things as contingent, whether they be referred to time present, past, or future.",
       "work": "Ethics",
@@ -394,33 +336,33 @@
       }
     },
     {
+      "id": "spinoza.f.v0003",
+      "kind": "verbatim",
+      "text": "Everyone shapes his actions according to his emotion, those who are assailed by conflicting emotions know not what they wish; those who are not attacked by any emotion are readily swayed this way or that.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "spinoza.f.v0004",
+      "kind": "verbatim",
+      "text": "Proof.--We endeavour, as far as possible, to conceive that which we imagine to conduce to pleasure (III.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
       "id": "spinoza.f.v0005",
-      "kind": "verbatim",
-      "text": "If I am asked, whether such an one should not rather be considered an ass than a man; I answer, that I do not know, neither do I know how a man should be considered, who hangs himself, or how we should consider children, fools, madmen, &c.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 239
-      }
-    },
-    {
-      "id": "spinoza.f.v0006",
-      "kind": "verbatim",
-      "text": "The mind, both in so far as it has clear and distinct ideas, and also in so far as it has confused ideas, endeavours to persist in its being for an indefinite period, and of this endeavour it is conscious.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 205
-      }
-    },
-    {
-      "id": "spinoza.f.v0007",
       "kind": "verbatim",
       "text": "Corollary.--This pleasure is fostered more and more, in proportion as a man conceives himself to be praised by others.",
       "work": "Ethics",
@@ -433,33 +375,7 @@
       }
     },
     {
-      "id": "spinoza.f.v0008",
-      "kind": "verbatim",
-      "text": "There is no individual thing in nature, than which there is not another more powerful and strong.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 97
-      }
-    },
-    {
-      "id": "spinoza.f.v0009",
-      "kind": "verbatim",
-      "text": "No one can desire to be blessed, to act rightly, and to live rightly, without at the same time wishing to be, act, and to live--in other words, to actually exist.",
-      "work": "Ethics",
-      "lang": "en",
-      "src": {
-        "work": "Ethics"
-      },
-      "quality": {
-        "chars": 162
-      }
-    },
-    {
-      "id": "spinoza.f.v0010",
+      "id": "spinoza.f.v0006",
       "kind": "verbatim",
       "text": "Still I do not deny that beasts feel: what I deny is, that we may not consult our own advantage and use them as we please, treating them in the way which best suits us; for their nature is not like ours, and their emotions are naturally different from human emotions (III.",
       "work": "Ethics",
@@ -472,33 +388,33 @@
       }
     },
     {
-      "id": "spinoza.f.v0011",
+      "id": "spinoza.f.v0007",
       "kind": "verbatim",
-      "text": "As, therefore, those things are good which assist the various parts of the body, and enable them to perform their functions; and as pleasure consists in an increase of, or aid to, man's power, in so far as he is composed of mind and body; it follows that all those things which bring pleasure are good.",
+      "text": "This part will not endeavour to do away with its own powers, in order that the other parts of the body may perform its office; for this it would be necessary for it to have a force or power of doing away with its own powers, which (III.",
       "work": "Ethics",
       "lang": "en",
       "src": {
         "work": "Ethics"
       },
       "quality": {
-        "chars": 302
+        "chars": 236
       }
     },
     {
-      "id": "spinoza.f.v0012",
+      "id": "spinoza.f.v0008",
       "kind": "verbatim",
-      "text": "Proof.--There is no modification of the body, whereof the mind may not form some clear and distinct conception (V.",
-      "work": "Ethics",
+      "text": "If they grant it, then necessarily the same must be said of understanding, as is said of fiction.",
+      "work": "On the Improvement of the Understanding",
       "lang": "en",
       "src": {
-        "work": "Ethics"
+        "work": "On the Improvement of the Understanding"
       },
       "quality": {
-        "chars": 114
+        "chars": 97
       }
     },
     {
-      "id": "spinoza.f.v0013",
+      "id": "spinoza.f.v0009",
       "kind": "verbatim",
       "text": "We have now to investigate the doubtful idea--that is, to inquire what can cause us to doubt, and how doubt may be removed.",
       "work": "On the Improvement of the Understanding",
@@ -511,7 +427,20 @@
       }
     },
     {
-      "id": "spinoza.f.v0014",
+      "id": "spinoza.f.v0010",
+      "kind": "verbatim",
+      "text": "The exclusion of all idea of cause--that is, the thing must not need explanation by Anything outside itself.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "spinoza.f.v0011",
       "kind": "verbatim",
       "text": "When the definition of the thing has been given, there must be no room for doubt as to whether the thing exists or not.",
       "work": "On the Improvement of the Understanding",
@@ -524,7 +453,7 @@
       }
     },
     {
-      "id": "spinoza.f.v0015",
+      "id": "spinoza.f.v0012",
       "kind": "verbatim",
       "text": "It must contain, as far as the mind is concerned, no substantives which could be put into an adjectival form; in other words, the object defined must not be explained through abstractions.",
       "work": "On the Improvement of the Understanding",
@@ -537,7 +466,7 @@
       }
     },
     {
-      "id": "spinoza.f.v0016",
+      "id": "spinoza.f.v0013",
       "kind": "verbatim",
       "text": "Lastly, though this is not absolutely necessary, it should be possible to deduce from the definition all the properties of the thing defined.",
       "work": "On the Improvement of the Understanding",
@@ -550,7 +479,20 @@
       }
     },
     {
-      "id": "spinoza.f.v0017",
+      "id": "spinoza.f.v0014",
+      "kind": "verbatim",
+      "text": "I do no more here than enumerate the sciences necessary for our purpose; I lay no stress on their order.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "spinoza.f.v0015",
       "kind": "verbatim",
       "text": "God, ordinary knowledge is no whit inferior to prophetic, unless indeed we believe, or rather dream, that the prophets had human bodies but superhuman minds, and therefore that their sensations and consciousness were entirely different from our own.",
       "work": "Theologico-Political Treatise",
@@ -563,33 +505,33 @@
       }
     },
     {
+      "id": "spinoza.f.v0016",
+      "kind": "verbatim",
+      "text": "I could cite from Holy Writ many similar examples, but I think they are sufficiently well known already.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "spinoza.f.v0017",
+      "kind": "verbatim",
+      "text": "The size of the cedars of Lebanon is alluded to in the Psalmist's expression, \"the cedars of the Lord.\" (71) Similarly, if the Jews were at a loss to understand any phenomenon, or were ignorant of its cause, they referred it to God.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
       "id": "spinoza.f.v0018",
-      "kind": "verbatim",
-      "text": "In this sense we must explain Amos iv:11: \"I have overthrown you as the overthrow of the Lord came upon Sodom and Gomorrah,\" i.e.",
-      "work": "Theologico-Political Treatise",
-      "lang": "en",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      },
-      "quality": {
-        "chars": 129
-      }
-    },
-    {
-      "id": "spinoza.f.v0019",
-      "kind": "verbatim",
-      "text": "Numbers xi:17, 1 Kings xxii:21, &c.), that the Lord was seen by Micah as sitting, by Daniel as an old man clothed in white, by Ezekiel as a fire, that the Holy Spirit appeared to those with Christ as a descending dove, to the apostles as fiery tongues, to Paul on his conversion as a great light.",
-      "work": "Theologico-Political Treatise",
-      "lang": "en",
-      "src": {
-        "work": "Theologico-Political Treatise"
-      },
-      "quality": {
-        "chars": 296
-      }
-    },
-    {
-      "id": "spinoza.f.v0020",
       "kind": "verbatim",
       "text": "That the things revealed were imagined very vividly, affecting the prophets in the same way as things seen when awake; 2.",
       "work": "Theologico-Political Treatise",
@@ -602,39 +544,40 @@
       }
     },
     {
-      "id": "spinoza.f.v0021",
+      "id": "spinoza.f.v0019",
       "kind": "verbatim",
-      "text": "In regard to other matters, wherein man's true happiness consists, they were on a par with the rest of the nations.",
+      "text": "Isaiah saw seraphim with six wings, Ezekiel beasts with four wings; Isaiah saw God clothed and sitting on a royal throne, Ezekiel saw Him in the likeness of a fire; each doubtless saw God under the form in which he usually imagined Him.",
       "work": "Theologico-Political Treatise",
       "lang": "en",
       "src": {
         "work": "Theologico-Political Treatise"
       },
       "quality": {
-        "chars": 115
+        "chars": 236
       }
     },
     {
-      "id": "spinoza.f.v0022",
+      "id": "spinoza.f.v0020",
       "kind": "verbatim",
-      "text": "Whether by the natural light of reason we can conceive of God as a law-giver or potentate ordaining laws for men?",
+      "text": "Further, as accustomed to prophesy, Balaam bade the messengers wait for him till the will of the Lord was revealed to him.",
       "work": "Theologico-Political Treatise",
       "lang": "en",
       "src": {
         "work": "Theologico-Political Treatise"
       },
       "quality": {
-        "chars": 113
+        "chars": 122
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 36,
+    "formulas": 20,
+    "verbatim": 20,
     "patterns": 0
   },
-  "checksum": "sha256:e03f1ce1d5cde1ebb944d9c5d59bf0bf6bb257d52af418b88f073f5bc6d9c6cf"
+  "checksum": "sha256:ef34e32da4f0ff29c04f9bfcca1d09896ec32831d140cf7fb1ecf31f889d7986"
 }

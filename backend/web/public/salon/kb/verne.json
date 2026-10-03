@@ -1,140 +1,148 @@
 {
   "authorId": "verne",
   "kbVersion": "verne@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.146Z",
+  "builtAt": "2026-10-03T21:23:12.214Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
-      "title": "A Journey into the Interior of the Earth",
-      "sentences": 14
+      "title": "Twenty Thousand Leagues under the Sea",
+      "sentences": 12
     },
     {
       "title": "Around the World in Eighty Days",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "A Journey into the Interior of the Earth",
+      "sentences": 12
     },
     {
       "title": "From the Earth to the moon; and, round the moon",
-      "sentences": 13
+      "sentences": 12
+    },
+    {
+      "title": "Michael Strogoff; Or, The Courier of the Czar",
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "verne.p0001",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "FAMINE, THEN VICTORY, FOLLOWED BY DISMAY I had only just time to replace the unfortunate document upon the table.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "I concluded definitely that it belonged to the vertebrate branch, class mammalia.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0002",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "The earth has been heated by combustion on its surface, that is all.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "Was it unintentionally that you took passage in this frigate?",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0003",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "In 1816 we founded a prosperous literary society; learned strangers think themselves honoured in becoming members of it.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "We remained mute, not stirring, and not knowing what surprise awaited us, whether agreeable or disagreeable.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0004",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "Besides, our horses instinctively chose the easiest places without ever slackening their pace.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "They were a large kind of “chaluts,” like those on the Normandy coasts, great pockets that the waves and a chain fixed in the smaller meshes kept open.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0005",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "I could see deep valleys intersecting each other in every direction, precipices like low walls, lakes reduced to ponds, rivers abbreviated into streams.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "This bird belonged to the most beautiful of the eight species that are found in Papua and in the neighbouring islands.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0006",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "Well, Axel, what do you say to it?\" cried my uncle, rubbing his hands.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "This precious matter, often confused with other polypi, formed then the inextricable plots called “macciota,” and on which I noticed several beautiful specimens of pink coral.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0007",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "As fast as we descended, the succession of beds forming the primitive foundation came out with increasing distinctness.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "It was evidently a block without any possible egress.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0008",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "On the whole, that day and the next we made considerable way horizontally, very little vertically.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "I showed Conseil, on the map of the Mediterranean, the spot occupied by this reef.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0009",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "A NEW MARE INTERNUM At first I could hardly see anything.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "And exactly on this spot the sea covers entire forests embedded during the geological periods, now mineralised and transformed into coal; for me they are an inexhaustible mine.” “Your men follow the trade of miners here, then, Captain?” “Exactly so.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0010",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "Our raft skirted the whole length of the fuci, three or four thousand feet long, undulating like vast serpents beyond the reach of sight; I found some amusement in tracing these endless waves, always thinking I should come to the end of them, and for hours my patience was vying with my surprise.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "At about 900 feet, as Captain Nemo had foreseen, we were floating beneath the undulating bottom of the iceberg.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0011",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "But before it has reached us the rain cloud parts asunder, the sea boils, and the electric fires are brought into violent action by a mighty chemical power that descends from the higher regions.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "And we have only air enough for two days in the reservoirs!",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0012",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "We shall not sail until to-morrow,\" he said.",
+      "w": "Twenty Thousand Leagues under the Sea",
+      "s": "The poor Frenchman, forgetting his conventional language, had taken to his own mother tongue, to utter a last appeal!",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       }
     },
     {
       "id": "verne.p0013",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "THE GREAT EXPLOSION AND THE RUSH DOWN BELOW The next day, Thursday, August 27, is a well-remembered date in our subterranean journey.",
+      "w": "Around the World in Eighty Days",
+      "s": "Articles no less passionate than logical appeared on the question, for geography is one of the pet subjects of the English; and the columns devoted to Phileas Fogg’s venture were eagerly devoured by all classes of readers.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Around the World in Eighty Days"
       }
     },
     {
       "id": "verne.p0014",
-      "w": "A Journey into the Interior of the Earth",
-      "s": "The Professor ate his greedily, with a kind of feverish rage.",
+      "w": "Around the World in Eighty Days",
+      "s": "Fogg, after bidding good-bye to his whist partners, left the steamer, gave his servant several errands to do, urged it upon him to be at the station promptly at eight, and, with his regular step, which beat to the second, like an astronomical clock, directed his steps to the passport office.",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Around the World in Eighty Days"
       }
     },
     {
       "id": "verne.p0015",
       "w": "Around the World in Eighty Days",
-      "s": "Fix felt sure that Phileas Fogg would not land at Suez, but was really going on to Bombay.",
+      "s": "The head of the procession soon appeared beneath the trees, a hundred paces away; and the strange figures who performed the religious ceremony were easily distinguished through the branches.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -142,7 +150,7 @@
     {
       "id": "verne.p0016",
       "w": "Around the World in Eighty Days",
-      "s": "An offence has been committed on Indian soil.",
+      "s": "The two days gained between London and Bombay had been lost, as has been seen, in the journey across India.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -150,7 +158,7 @@
     {
       "id": "verne.p0017",
       "w": "Around the World in Eighty Days",
-      "s": "They reached the walls about half-past twelve, without having met anyone; here there was no guard, nor were there either windows or doors.",
+      "s": "Fogg, I suppose, is anxious to catch the steamer for Yokohama?” “Terribly anxious.” “You believe in this journey around the world, then?” “Absolutely.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -158,7 +166,7 @@
     {
       "id": "verne.p0018",
       "w": "Around the World in Eighty Days",
-      "s": "The two days gained between London and Bombay had been lost, as has been seen, in the journey across India.",
+      "s": "I come from a village where they don’t eat that kind of bread!” “You refuse?” “I refuse.” “Consider that I’ve said nothing,” said Fix; “and let us drink.” “Yes; let us drink!” Passepartout felt himself yielding more and more to the effects of the liquor.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -166,7 +174,7 @@
     {
       "id": "verne.p0019",
       "w": "Around the World in Eighty Days",
-      "s": "The steamer was forced to proceed slowly, and the captain estimated that she would reach Hong Kong twenty hours behind time, and more if the storm lasted.",
+      "s": "Fogg was perfectly tranquil; and yet his whole fortune was at this moment at stake.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -174,7 +182,7 @@
     {
       "id": "verne.p0020",
       "w": "Around the World in Eighty Days",
-      "s": "If you’ll help me, I’ll let you have five hundred of them.” “Help you?” cried Passepartout, whose eyes were standing wide open.",
+      "s": "The “General Grant” passed, on the 23rd of November, the one hundred and eightieth meridian, and was at the very antipodes of London.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -182,7 +190,7 @@
     {
       "id": "verne.p0021",
       "w": "Around the World in Eighty Days",
-      "s": "Fogg was perfectly tranquil; and yet his whole fortune was at this moment at stake.",
+      "s": "IN WHICH PASSEPARTOUT UNDERGOES, AT A SPEED OF TWENTY MILES AN HOUR, A COURSE OF MORMON HISTORY During the night of the 5th of December, the train ran south-easterly for about fifty miles; then rose an equal distance in a north-easterly direction, towards the Great Salt Lake.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -190,7 +198,7 @@
     {
       "id": "verne.p0022",
       "w": "Around the World in Eighty Days",
-      "s": "I should so like to cross the Pacific with you!” “Ah!” said the Honourable Mr.",
+      "s": "Fix had begun by winning several guineas, which he seemed likely to lose; but he showed himself a not less eager whist-player than Mr.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -198,7 +206,7 @@
     {
       "id": "verne.p0023",
       "w": "Around the World in Eighty Days",
-      "s": "Passepartout found himself beside the detective; but he did not talk to him.",
+      "s": "And when does the next train pass here?” said Phileas Fogg.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
@@ -206,37 +214,109 @@
     {
       "id": "verne.p0024",
       "w": "Around the World in Eighty Days",
-      "s": "Couldn’t he have waited for the good season to increase his chances?” While the worthy Frenchman was absorbed in the state of the sky and the depression of the temperature, Aouda was experiencing fears from a totally different cause.",
+      "s": "He would have given one of his ears to hear with the other what the engineer was saying.",
       "src": {
         "work": "Around the World in Eighty Days"
       }
     },
     {
       "id": "verne.p0025",
-      "w": "Around the World in Eighty Days",
-      "s": "Leave him to wander about in this desert!",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "FAMINE, THEN VICTORY, FOLLOWED BY DISMAY I had only just time to replace the unfortunate document upon the table.",
       "src": {
-        "work": "Around the World in Eighty Days"
+        "work": "A Journey into the Interior of the Earth"
       }
     },
     {
       "id": "verne.p0026",
-      "w": "Around the World in Eighty Days",
-      "s": "All the sails were up, and the jib was so arranged as not to screen the brigantine.",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "It is ready,\" I replied, with faltering voice.",
       "src": {
-        "work": "Around the World in Eighty Days"
+        "work": "A Journey into the Interior of the Earth"
       }
     },
     {
       "id": "verne.p0027",
-      "w": "Around the World in Eighty Days",
-      "s": "Aouda and he had remained, despite the cold, under the portico of the Custom House.",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "A negative was expressed by a slow movement of the head from left to right, an affirmative by a slight bend, so slight that his long hair scarcely moved.",
       "src": {
-        "work": "Around the World in Eighty Days"
+        "work": "A Journey into the Interior of the Earth"
       }
     },
     {
       "id": "verne.p0028",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "My uncle soon discovered what sort of a man he had to do with; instead of a good and learned man he found a rude and coarse peasant.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0029",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "Now,\" said my uncle, after having completed these preparations, \"now let us look to our loads.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0030",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "These reflections came into my mind whilst I was contemplating the mineral wealth stored up in this portion of the globe.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0031",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "On the whole, that day and the next we made considerable way horizontally, very little vertically.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0032",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "I felt myself revolving in air, striking and rebounding against the craggy projections of a vertical gallery, quite a well; my head struck against a sharp corner of the rock, and I became unconscious.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0033",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "Then the zoophytes of the transition period also return to nothing.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0034",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "But before it has reached us the rain cloud parts asunder, the sea boils, and the electric fires are brought into violent action by a mighty chemical power that descends from the higher regions.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0035",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "Yet, such as it is, the body shall tell us its own wonderful story.\" Here the Professor laid hold of the fossil skeleton, and handled it with the skill of a dexterous showman.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0036",
+      "w": "A Journey into the Interior of the Earth",
+      "s": "The skilful huntsman had succeeded in lighting the lantern; and although it flickered so much as to threaten to go out, it threw a fitful light across the awful darkness.",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      }
+    },
+    {
+      "id": "verne.p0037",
       "w": "From the Earth to the moon; and, round the moon",
       "s": "This was an essential condition to the success of the enterprise, and continued actively to engage the public attention.",
       "src": {
@@ -244,81 +324,9 @@
       }
     },
     {
-      "id": "verne.p0029",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Russia paid in as her contingent the enormous sum of 368,733 roubles.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0030",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Many workmen, it is true, paid with their lives for the rashness inherent in these dangerous labors; but these mishaps are impossible to be avoided, and they are classed among the details with which the Americans trouble themselves but little.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0031",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "If you persevere in your enterprise, you must be a—” “Very rash person!",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0032",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Managers of entertainments wanted to exhibit him.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0033",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "It was provided with food for a year, water for some months, and gas for some days.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0034",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Perhaps the projectile was unwinding its course through space.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0035",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Where there is no air, there is no more heat than diffused light; and the same with darkness; it is cold where the sun’s rays do not strike direct.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0036",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "But now I think of it—” “What do you think of?” “A capital idea.",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
-      "id": "verne.p0037",
-      "w": "From the Earth to the moon; and, round the moon",
-      "s": "Are these plains composed of arid sand, as the first astronomer maintained?",
-      "src": {
-        "work": "From the Earth to the moon; and, round the moon"
-      }
-    },
-    {
       "id": "verne.p0038",
       "w": "From the Earth to the moon; and, round the moon",
-      "s": "It seemed as if the moon might be touched by the hand!",
+      "s": "These personal demonstrations found a division in the newspapers of the different States.",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       }
@@ -326,7 +334,7 @@
     {
       "id": "verne.p0039",
       "w": "From the Earth to the moon; and, round the moon",
-      "s": "There, according to Humboldt, reigns utter darkness, which the light of the sun and the earth cannot break.",
+      "s": "Each superintendent took his post by the aperture of the run.",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       }
@@ -334,9 +342,169 @@
     {
       "id": "verne.p0040",
       "w": "From the Earth to the moon; and, round the moon",
-      "s": "The earth was but a day old, having been new the night before at twelve; and two days must elapse before its crescent, freed from the solar rays, would serve as a clock to the Selenites, as in its rotary movement each of its points after twenty-four hours repasses the same lunar meridian.",
+      "s": "If you persevere in your enterprise, you must be a—” “Very rash person!",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0041",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "It was raised by means of an enormous iron crane; an ingenious mechanism allowed it to be easily worked toward all the points of the heavens, and to follow the stars from the one horizon to the other during their journey through the heavens.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0042",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "Do you say to yourself, ‘This prison may be our tomb?’ Tomb, perhaps; still I would not change it for Mahomet’s, which floats in space but never advances an inch!” While Michel Ardan was speaking, Barbicane and Nicholl were making their last preparations.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0043",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "And lastly, to crown the repast, Ardan had brought out a fine bottle of Nuits, which was found “by chance” in the provision-box.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0044",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "But all relief was as yet leveled in intense brilliancy.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0045",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "And more than that, with the powerful one set up at Long’s Peak, the orb of night, magnified 48,000 times, is brought to within less than two leagues, and objects having a diameter of thirty feet are seen very distinctly.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0046",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "It seemed as if the moon might be touched by the hand!",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0047",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "Only, I would have you observe, my worthy friend,” replied Barbicane, “that we are none the less lost for that.” “Yes, in another manner, and much more pleasantly,” answered the careless Frenchman with his most amiable smile.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0048",
+      "w": "From the Earth to the moon; and, round the moon",
+      "s": "They saw once more their friends of the Gun Club, and the dearest of all, J.",
+      "src": {
+        "work": "From the Earth to the moon; and, round the moon"
+      }
+    },
+    {
+      "id": "verne.p0049",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "They discussed the pros and cons of the serious events which were taking place beyond the Ural, and those merchants seemed to fear lest the government should be led to take certain restrictive measures, especially in the provinces bordering on the frontier--measures from which trade would certainly suffer.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0050",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "He instantly recognized the young Livonian.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0051",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "Hard ice everywhere, the route open, the road sure!",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0052",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "She knew that she was safe with him, under his protection.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0053",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "It was not a gunshot wound?” “No; a lance-thrust in the head, now healing,” replied the mujik.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0054",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "It was needful to profit by the darkness to leave the little wood and dash along the road; but although night favored it the success of such a flight appeared to be almost impossible.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0055",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "This fierce spy, the tool of Ivan Ogareff, had not deserted her master.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0056",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "Ogareff could not restrain a threatening gesture.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0057",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "Is there no one on the road?” “Not a single soul,” replied Nadia.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0058",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "The body was that of a moujik, horribly mutilated, and already cold.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0059",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "The pilgrims carried a staff, a gourd hung at the belt, and they chanted psalms in a plaintive voice: one came from the Ukraine, another from the Yellow sea, and a third from the Finland provinces.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      }
+    },
+    {
+      "id": "verne.p0060",
+      "w": "Michael Strogoff; Or, The Courier of the Czar",
+      "s": "But the river might be crossed both above and below the town, and consequently, Irkutsk ran a risk of being attacked on its east side, on which there was no wall to protect it.",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
       }
     }
   ],
@@ -344,135 +512,122 @@
     {
       "id": "verne.f.v0001",
       "kind": "verbatim",
-      "text": "FAMINE, THEN VICTORY, FOLLOWED BY DISMAY I had only just time to replace the unfortunate document upon the table.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "We remained mute, not stirring, and not knowing what surprise awaited us, whether agreeable or disagreeable.",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 113
+        "chars": 108
       }
     },
     {
       "id": "verne.f.v0002",
       "kind": "verbatim",
-      "text": "In 1816 we founded a prosperous literary society; learned strangers think themselves honoured in becoming members of it.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "They were a large kind of “chaluts,” like those on the Normandy coasts, great pockets that the waves and a chain fixed in the smaller meshes kept open.",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 120
+        "chars": 151
       }
     },
     {
       "id": "verne.f.v0003",
       "kind": "verbatim",
-      "text": "I could see deep valleys intersecting each other in every direction, precipices like low walls, lakes reduced to ponds, rivers abbreviated into streams.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "This bird belonged to the most beautiful of the eight species that are found in Papua and in the neighbouring islands.",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 152
+        "chars": 118
       }
     },
     {
       "id": "verne.f.v0004",
       "kind": "verbatim",
-      "text": "As fast as we descended, the succession of beds forming the primitive foundation came out with increasing distinctness.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "This precious matter, often confused with other polypi, formed then the inextricable plots called “macciota,” and on which I noticed several beautiful specimens of pink coral.",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 119
+        "chars": 175
       }
     },
     {
       "id": "verne.f.v0005",
       "kind": "verbatim",
-      "text": "On the whole, that day and the next we made considerable way horizontally, very little vertically.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "And exactly on this spot the sea covers entire forests embedded during the geological periods, now mineralised and transformed into coal; for me they are an inexhaustible mine.” “Your men follow the trade of miners here, then, Captain?” “Exactly so.",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 98
+        "chars": 249
       }
     },
     {
       "id": "verne.f.v0006",
       "kind": "verbatim",
-      "text": "Our raft skirted the whole length of the fuci, three or four thousand feet long, undulating like vast serpents beyond the reach of sight; I found some amusement in tracing these endless waves, always thinking I should come to the end of them, and for hours my patience was vying with my surprise.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "The poor Frenchman, forgetting his conventional language, had taken to his own mother tongue, to utter a last appeal!",
+      "work": "Twenty Thousand Leagues under the Sea",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Twenty Thousand Leagues under the Sea"
       },
       "quality": {
-        "chars": 296
+        "chars": 117
       }
     },
     {
       "id": "verne.f.v0007",
       "kind": "verbatim",
-      "text": "But before it has reached us the rain cloud parts asunder, the sea boils, and the electric fires are brought into violent action by a mighty chemical power that descends from the higher regions.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "Articles no less passionate than logical appeared on the question, for geography is one of the pet subjects of the English; and the columns devoted to Phileas Fogg’s venture were eagerly devoured by all classes of readers.",
+      "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 194
+        "chars": 222
       }
     },
     {
       "id": "verne.f.v0008",
       "kind": "verbatim",
-      "text": "THE GREAT EXPLOSION AND THE RUSH DOWN BELOW The next day, Thursday, August 27, is a well-remembered date in our subterranean journey.",
-      "work": "A Journey into the Interior of the Earth",
+      "text": "Fogg, after bidding good-bye to his whist partners, left the steamer, gave his servant several errands to do, urged it upon him to be at the station promptly at eight, and, with his regular step, which beat to the second, like an astronomical clock, directed his steps to the passport office.",
+      "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
-        "work": "A Journey into the Interior of the Earth"
+        "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 133
+        "chars": 292
       }
     },
     {
       "id": "verne.f.v0009",
       "kind": "verbatim",
-      "text": "Fix felt sure that Phileas Fogg would not land at Suez, but was really going on to Bombay.",
+      "text": "The head of the procession soon appeared beneath the trees, a hundred paces away; and the strange figures who performed the religious ceremony were easily distinguished through the branches.",
       "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
         "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 90
+        "chars": 190
       }
     },
     {
       "id": "verne.f.v0010",
-      "kind": "verbatim",
-      "text": "They reached the walls about half-past twelve, without having met anyone; here there was no guard, nor were there either windows or doors.",
-      "work": "Around the World in Eighty Days",
-      "lang": "en",
-      "src": {
-        "work": "Around the World in Eighty Days"
-      },
-      "quality": {
-        "chars": 138
-      }
-    },
-    {
-      "id": "verne.f.v0011",
       "kind": "verbatim",
       "text": "The two days gained between London and Bombay had been lost, as has been seen, in the journey across India.",
       "work": "Around the World in Eighty Days",
@@ -485,85 +640,189 @@
       }
     },
     {
-      "id": "verne.f.v0012",
+      "id": "verne.f.v0011",
       "kind": "verbatim",
-      "text": "The steamer was forced to proceed slowly, and the captain estimated that she would reach Hong Kong twenty hours behind time, and more if the storm lasted.",
+      "text": "Fogg, I suppose, is anxious to catch the steamer for Yokohama?” “Terribly anxious.” “You believe in this journey around the world, then?” “Absolutely.",
       "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
         "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 154
+        "chars": 150
+      }
+    },
+    {
+      "id": "verne.f.v0012",
+      "kind": "verbatim",
+      "text": "I come from a village where they don’t eat that kind of bread!” “You refuse?” “I refuse.” “Consider that I’ve said nothing,” said Fix; “and let us drink.” “Yes; let us drink!” Passepartout felt himself yielding more and more to the effects of the liquor.",
+      "work": "Around the World in Eighty Days",
+      "lang": "en",
+      "src": {
+        "work": "Around the World in Eighty Days"
+      },
+      "quality": {
+        "chars": 254
       }
     },
     {
       "id": "verne.f.v0013",
       "kind": "verbatim",
-      "text": "If you’ll help me, I’ll let you have five hundred of them.” “Help you?” cried Passepartout, whose eyes were standing wide open.",
+      "text": "The “General Grant” passed, on the 23rd of November, the one hundred and eightieth meridian, and was at the very antipodes of London.",
       "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
         "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 127
+        "chars": 133
       }
     },
     {
       "id": "verne.f.v0014",
       "kind": "verbatim",
-      "text": "Fogg was perfectly tranquil; and yet his whole fortune was at this moment at stake.",
+      "text": "IN WHICH PASSEPARTOUT UNDERGOES, AT A SPEED OF TWENTY MILES AN HOUR, A COURSE OF MORMON HISTORY During the night of the 5th of December, the train ran south-easterly for about fifty miles; then rose an equal distance in a north-easterly direction, towards the Great Salt Lake.",
       "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
         "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 83
+        "chars": 276
       }
     },
     {
       "id": "verne.f.v0015",
       "kind": "verbatim",
-      "text": "Couldn’t he have waited for the good season to increase his chances?” While the worthy Frenchman was absorbed in the state of the sky and the depression of the temperature, Aouda was experiencing fears from a totally different cause.",
+      "text": "Fix had begun by winning several guineas, which he seemed likely to lose; but he showed himself a not less eager whist-player than Mr.",
       "work": "Around the World in Eighty Days",
       "lang": "en",
       "src": {
         "work": "Around the World in Eighty Days"
       },
       "quality": {
-        "chars": 233
+        "chars": 134
       }
     },
     {
       "id": "verne.f.v0016",
       "kind": "verbatim",
-      "text": "All the sails were up, and the jib was so arranged as not to screen the brigantine.",
-      "work": "Around the World in Eighty Days",
+      "text": "FAMINE, THEN VICTORY, FOLLOWED BY DISMAY I had only just time to replace the unfortunate document upon the table.",
+      "work": "A Journey into the Interior of the Earth",
       "lang": "en",
       "src": {
-        "work": "Around the World in Eighty Days"
+        "work": "A Journey into the Interior of the Earth"
       },
       "quality": {
-        "chars": 83
+        "chars": 113
       }
     },
     {
       "id": "verne.f.v0017",
       "kind": "verbatim",
-      "text": "Aouda and he had remained, despite the cold, under the portico of the Custom House.",
-      "work": "Around the World in Eighty Days",
+      "text": "A negative was expressed by a slow movement of the head from left to right, an affirmative by a slight bend, so slight that his long hair scarcely moved.",
+      "work": "A Journey into the Interior of the Earth",
       "lang": "en",
       "src": {
-        "work": "Around the World in Eighty Days"
+        "work": "A Journey into the Interior of the Earth"
       },
       "quality": {
-        "chars": 83
+        "chars": 153
       }
     },
     {
       "id": "verne.f.v0018",
+      "kind": "verbatim",
+      "text": "My uncle soon discovered what sort of a man he had to do with; instead of a good and learned man he found a rude and coarse peasant.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "verne.f.v0019",
+      "kind": "verbatim",
+      "text": "Now,\" said my uncle, after having completed these preparations, \"now let us look to our loads.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "verne.f.v0020",
+      "kind": "verbatim",
+      "text": "These reflections came into my mind whilst I was contemplating the mineral wealth stored up in this portion of the globe.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "verne.f.v0021",
+      "kind": "verbatim",
+      "text": "On the whole, that day and the next we made considerable way horizontally, very little vertically.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "verne.f.v0022",
+      "kind": "verbatim",
+      "text": "I felt myself revolving in air, striking and rebounding against the craggy projections of a vertical gallery, quite a well; my head struck against a sharp corner of the rock, and I became unconscious.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "verne.f.v0023",
+      "kind": "verbatim",
+      "text": "But before it has reached us the rain cloud parts asunder, the sea boils, and the electric fires are brought into violent action by a mighty chemical power that descends from the higher regions.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "verne.f.v0024",
+      "kind": "verbatim",
+      "text": "The skilful huntsman had succeeded in lighting the lantern; and although it flickered so much as to threaten to go out, it threw a fitful light across the awful darkness.",
+      "work": "A Journey into the Interior of the Earth",
+      "lang": "en",
+      "src": {
+        "work": "A Journey into the Interior of the Earth"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "verne.f.v0025",
       "kind": "verbatim",
       "text": "This was an essential condition to the success of the enterprise, and continued actively to engage the public attention.",
       "work": "From the Earth to the moon; and, round the moon",
@@ -576,65 +835,118 @@
       }
     },
     {
-      "id": "verne.f.v0019",
+      "id": "verne.f.v0026",
       "kind": "verbatim",
-      "text": "Many workmen, it is true, paid with their lives for the rashness inherent in these dangerous labors; but these mishaps are impossible to be avoided, and they are classed among the details with which the Americans trouble themselves but little.",
+      "text": "These personal demonstrations found a division in the newspapers of the different States.",
       "work": "From the Earth to the moon; and, round the moon",
       "lang": "en",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       },
       "quality": {
-        "chars": 243
+        "chars": 89
       }
     },
     {
-      "id": "verne.f.v0020",
+      "id": "verne.f.v0027",
       "kind": "verbatim",
-      "text": "Where there is no air, there is no more heat than diffused light; and the same with darkness; it is cold where the sun’s rays do not strike direct.",
+      "text": "It was raised by means of an enormous iron crane; an ingenious mechanism allowed it to be easily worked toward all the points of the heavens, and to follow the stars from the one horizon to the other during their journey through the heavens.",
       "work": "From the Earth to the moon; and, round the moon",
       "lang": "en",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       },
       "quality": {
-        "chars": 147
+        "chars": 241
       }
     },
     {
-      "id": "verne.f.v0021",
+      "id": "verne.f.v0028",
       "kind": "verbatim",
-      "text": "There, according to Humboldt, reigns utter darkness, which the light of the sun and the earth cannot break.",
+      "text": "Do you say to yourself, ‘This prison may be our tomb?’ Tomb, perhaps; still I would not change it for Mahomet’s, which floats in space but never advances an inch!” While Michel Ardan was speaking, Barbicane and Nicholl were making their last preparations.",
       "work": "From the Earth to the moon; and, round the moon",
       "lang": "en",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       },
       "quality": {
-        "chars": 107
+        "chars": 255
       }
     },
     {
-      "id": "verne.f.v0022",
+      "id": "verne.f.v0029",
       "kind": "verbatim",
-      "text": "The earth was but a day old, having been new the night before at twelve; and two days must elapse before its crescent, freed from the solar rays, would serve as a clock to the Selenites, as in its rotary movement each of its points after twenty-four hours repasses the same lunar meridian.",
+      "text": "Only, I would have you observe, my worthy friend,” replied Barbicane, “that we are none the less lost for that.” “Yes, in another manner, and much more pleasantly,” answered the careless Frenchman with his most amiable smile.",
       "work": "From the Earth to the moon; and, round the moon",
       "lang": "en",
       "src": {
         "work": "From the Earth to the moon; and, round the moon"
       },
       "quality": {
-        "chars": 289
+        "chars": 225
+      }
+    },
+    {
+      "id": "verne.f.v0030",
+      "kind": "verbatim",
+      "text": "They discussed the pros and cons of the serious events which were taking place beyond the Ural, and those merchants seemed to fear lest the government should be led to take certain restrictive measures, especially in the provinces bordering on the frontier--measures from which trade would certainly suffer.",
+      "work": "Michael Strogoff; Or, The Courier of the Czar",
+      "lang": "en",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      },
+      "quality": {
+        "chars": 307
+      }
+    },
+    {
+      "id": "verne.f.v0031",
+      "kind": "verbatim",
+      "text": "It was not a gunshot wound?” “No; a lance-thrust in the head, now healing,” replied the mujik.",
+      "work": "Michael Strogoff; Or, The Courier of the Czar",
+      "lang": "en",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "verne.f.v0032",
+      "kind": "verbatim",
+      "text": "It was needful to profit by the darkness to leave the little wood and dash along the road; but although night favored it the success of such a flight appeared to be almost impossible.",
+      "work": "Michael Strogoff; Or, The Courier of the Czar",
+      "lang": "en",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "verne.f.v0033",
+      "kind": "verbatim",
+      "text": "The pilgrims carried a staff, a gourd hung at the belt, and they chanted psalms in a plaintive voice: one came from the Ukraine, another from the Yellow sea, and a third from the Finland provinces.",
+      "work": "Michael Strogoff; Or, The Courier of the Czar",
+      "lang": "en",
+      "src": {
+        "work": "Michael Strogoff; Or, The Courier of the Czar"
+      },
+      "quality": {
+        "chars": 197
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 60,
+    "formulas": 33,
+    "verbatim": 33,
     "patterns": 0
   },
-  "checksum": "sha256:466a72f14bb8a294ad4379f655055890556d52b922c8dd4987b7ad0867156107"
+  "checksum": "sha256:aad54556609835827016a3cfbdd34c0fd9e33205df32a850b60cc159488e6241"
 }

@@ -1,242 +1,30 @@
 {
   "authorId": "marx",
   "kbVersion": "marx@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.153Z",
+  "builtAt": "2026-10-03T21:23:12.228Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
+      "title": "The Communist Manifesto",
+      "sentences": 12
+    },
+    {
       "title": "A Contribution to the Critique of Political Economy",
-      "sentences": 14
+      "sentences": 12
+    },
+    {
+      "title": "The Eighteenth Brumaire of Louis Bonaparte",
+      "sentences": 12
     },
     {
       "title": "Secret Diplomatic History of The Eighteenth Century",
-      "sentences": 13
-    },
-    {
-      "title": "The Communist Manifesto",
-      "sentences": 13
+      "sentences": 12
     }
   ],
   "passages": [
     {
       "id": "marx.p0001",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "Then the expression of equivalence of A and B remains unchanged.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0002",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "At a certain stage of development of the process of exchange, the necessity arises for a polar distribution of the functions of exchange value and use-value among commodities, so that one commodity e.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0003",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "The usefulness of all those inventions being solely confined to the marking of proportion.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0004",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "But in either case the quantity of gold for which the commodity is exchanged in the process of circulation is not determined by exchange, but the exchange is determined by the price of the commodity, i.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0005",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "In its capacity of equivalent in the isolated transaction C―M it passes at once from a state of motion to a state of rest; but in its capacity of coin its natural substance comes in constant conflict with its function.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0006",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "While the circulation of commodities can absorb only a definite quantity of gold coin and as a result of that the alternating contraction and expansion of the currency appears as a necessary law, paper money seems to enter circulation in any desired amount.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0007",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "As soon as the term of the contract expires, money enters circulation, since it changes its position by passing from the hands of the former buyer into those of the former seller.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0008",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "Like home circulation, international circulation requires a constantly changing quantity of gold and silver.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0009",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "The normal level of a national currency is now expressed in terms of an international balance of currencies, which practically amounts to the statement that nationality does not change anything in a universal economic law.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0010",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "Metallic currency has its remedy in the import and export of precious metals which immediately enter circulation and thus, by their influx or efflux, cause the prices of commodities to fall or rise.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0011",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "The subdivisions and organization of distribution are determined by the subdivisions and organization of production.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0012",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "But have these simple categories no independent historical or natural existence antedating the more concrete ones?",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0013",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "He advocates “Liberty of Conscience” as a condition of trade, because “Dissenters ...",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0014",
-      "w": "A Contribution to the Critique of Political Economy",
-      "s": "But, perhaps, the activity or the inactivity of the mints of the great commercial nations is one of the most likely indications in the variations of that amount.",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      }
-    },
-    {
-      "id": "marx.p0015",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "In 1773 Catherine's war against Turkey still continuing, and her conflicts with Sweden growing serious, France made preparations to send a powerful fleet into the Baltic.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0016",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "For instance, can there be anything more silly than Mr.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0017",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Hereupon his Danish Majesty made all haste for his return to his dominions, and gave orders to work day and night to get his fleet ready to put to sea.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0018",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Not to give any jealousy, he endeavours for no help from his neighbours to instruct his men in arms.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0019",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "But if this should not succeed, the Czar is still a gainer by having made his confederates uneasy at these his separate negotiations; and as we find by the newspapers, the more solicitous to keep him ready to their confederacy, which must cost them very large proffers and promises.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0020",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "This, it seems, is at present the case of the subject we are upon.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0021",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Colquhoun, the British Consul at Bucharest, suspects that England has some secret material interest in keeping down the trade of the Principalities.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0022",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Fallen from its commercial and maritime grandeur, Holland had then already entered upon its epoch of decline.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0023",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "The incongruous, unwieldy, and precocious Empire heaped together by the Ruriks, like the other empires of similar growth, is broken up into appanages, divided and subdivided among the descendants of the conquerors, dilacerated by feudal wars, rent to pieces by the intervention of foreign peoples.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0024",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "But it was not sufficient to act a character; to make it acceptable, gold was required.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0025",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "He does not drive, but manoeuvre his enemy out of his strongholds.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0026",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Never,\" say the annalists, \"never since Rurik had such an event happened; never had the grand princes of Kiev and Vladimir seen the Novgorodians come and submit to them as their judges.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0027",
-      "w": "Secret Diplomatic History of The Eighteenth Century",
-      "s": "Now, suppose we were altogether ignorant of the details of his operations, military and diplomatic.",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      }
-    },
-    {
-      "id": "marx.p0028",
       "w": "The Communist Manifesto",
       "s": "Conservation of the old modes of production in unaltered form, was, on the contrary, the first condition of existence for all earlier industrial classes.",
       "src": {
@@ -244,23 +32,23 @@
       }
     },
     {
-      "id": "marx.p0029",
+      "id": "marx.p0002",
       "w": "The Communist Manifesto",
-      "s": "In these crises a great part not only of the existing products, but also of the previously created productive forces, are periodically destroyed.",
+      "s": "Into their place stepped free competition, accompanied by a social and political constitution adapted to it, and by the economical and political sway of the bourgeois class.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0030",
+      "id": "marx.p0003",
       "w": "The Communist Manifesto",
-      "s": "Nay more, in proportion as the use of machinery and division of labour increases, in the same proportion the burden of toil also increases, whether by prolongation of the working hours, by increase of the work exacted in a given time or by increased speed of the machinery, etc.",
+      "s": "The less the skill and exertion of strength implied in manual labour, in other words, the more modern industry becomes developed, the more is the labour of men superseded by that of women.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0031",
+      "id": "marx.p0004",
       "w": "The Communist Manifesto",
       "s": "Thus the ten-hours’ bill in England was carried.",
       "src": {
@@ -268,55 +56,47 @@
       }
     },
     {
-      "id": "marx.p0032",
+      "id": "marx.p0005",
       "w": "The Communist Manifesto",
-      "s": "The proletarian is without property; his relation to his wife and children has no longer anything in common with the bourgeois family-relations; modern industrial labour, modern subjection to capital, the same in England as in France, in America as in Germany, has stripped him of every trace of national character.",
+      "s": "Hitherto, every form of society has been based, as we have already seen, on the antagonism of oppressing and oppressed classes.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0033",
+      "id": "marx.p0006",
       "w": "The Communist Manifesto",
-      "s": "The abolition of existing property relations is not at all a distinctive feature of Communism.",
+      "s": "In this sense, the theory of the Communists may be summed up in the single sentence: Abolition of private property.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0034",
+      "id": "marx.p0007",
       "w": "The Communist Manifesto",
-      "s": "Capital is, therefore, not a personal, it is a social power.",
+      "s": "In one word, you reproach us with intending to do away with your property.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0035",
+      "id": "marx.p0008",
       "w": "The Communist Manifesto",
-      "s": "In its completely developed form this family exists only among the bourgeoisie.",
+      "s": "For the rest, nothing is more ridiculous than the virtuous indignation of our bourgeois at the community of women which, they pretend, is to be openly and officially established by the Communists.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0036",
+      "id": "marx.p0009",
       "w": "The Communist Manifesto",
-      "s": "We cannot take from them what they have not got.",
+      "s": "We have seen above, that the first step in the revolution by the working class, is to raise the proletariat to the position of ruling as to win the battle of democracy.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0037",
-      "w": "The Communist Manifesto",
-      "s": "Free education for all children in public schools.",
-      "src": {
-        "work": "The Communist Manifesto"
-      }
-    },
-    {
-      "id": "marx.p0038",
+      "id": "marx.p0010",
       "w": "The Communist Manifesto",
       "s": "In showing that, under their rule, the modern proletariat never existed, they forget that the modern bourgeoisie is the necessary offspring of their own form of society.",
       "src": {
@@ -324,220 +104,313 @@
       }
     },
     {
-      "id": "marx.p0039",
+      "id": "marx.p0011",
       "w": "The Communist Manifesto",
-      "s": "With very few exceptions, all the so-called Socialist and Communist publications that now (1847) circulate in Germany belong to the domain of this foul and enervating literature.",
+      "s": "True” Socialism appeared to kill these two birds with one stone.",
       "src": {
         "work": "The Communist Manifesto"
       }
     },
     {
-      "id": "marx.p0040",
+      "id": "marx.p0012",
       "w": "The Communist Manifesto",
-      "s": "CRITICAL-UTOPIAN SOCIALISM AND COMMUNISM We do not here refer to that literature which, in every great modern revolution, has always given voice to the demands of the proletariat, such as the writings of Babeuf and others.",
+      "s": "But the proletariat, as yet in its infancy, offers to them the spectacle of a class without any historical initiative or any independent political movement.",
       "src": {
         "work": "The Communist Manifesto"
+      }
+    },
+    {
+      "id": "marx.p0013",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Then the expression of equivalence of A and B remains unchanged.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0014",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "We get into a vicious circle by making exchange value the measure of exchange value, because the measuring exchange value needs a measure itself.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0015",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Since labor-time constitutes the substance and the intrinsic measure of values, these names would then actually represent definite proportions of value.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0016",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Moreover, it is immaterial whether or not such a circuit has been actually described in a given case.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0017",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "The state which in its mint price gave a certain name to a piece of gold of certain weight, and in the act of coinage only impressed its stamp on gold, seems now to turn paper into gold by the magic of its stamp.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0018",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "In mediaeval England gold and silver commodities were considered before the law as mere forms of treasure, since their value was but slightly increased by the crude labor spent upon them.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0019",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Finally, the precious metals are international means of purchase in the hands of gold and silver producing countries, in which case they directly constitute a product and commodity and not merely a converted form of a commodity.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0020",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Although possessing a value of its own, gold will become in the former case a token of a metal of lower exchange value than its own, and in the latter, a token of a metal of higher value.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0021",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Proudhon and others naturally find it very pleasant, when they do not know the historical origin of a certain economic phenomenon, to give it a quasi historico-philosopohical explanation by going into mythology.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0022",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "An individual who participates in production as a wage laborer, receives his share of the products, i.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0023",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Under all forms of society there is a certain industry which predominates over all the rest and whose condition therefore determines the rank and influence of all the rest.",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0024",
+      "w": "A Contribution to the Critique of Political Economy",
+      "s": "Suppose, for instance, it is reduced in value....",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      }
+    },
+    {
+      "id": "marx.p0025",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "Bourgeois, fanatic on the point of “Order,” are shot down on their own balconies by drunken soldiers, forfeit their family property, and their houses are bombarded for pastime—all in the name of Property, of Family, of Religion, and of Order.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0026",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "Before we close this period, we must cast a look back upon the two powers, one of which destroys the other on December 2, 1851, while, from December 20, 1848, down to the departure of the constitutional assembly, they live in marital relations.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0027",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "As, in private life, the distinction is made between what a man thinks of himself and says, and that which he really is and does, so, all the more, must the phrases and notions of parties in historic struggles be distinguished from their real organism, and their real interests, their notions and their reality.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0028",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "We stand here at the critical turning point in the history of the French National Guard.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0029",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "In this way the small traders’ world of Paris, now allied with the proletariat, revenged itself for the defeat of June 13, 1849.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0030",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "The “Society of December 10” belonged to him, it was his own handiwork, his own thought.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0031",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "It dares not accept the collision at the moment when it involves a principle, when the Executive power has really given itself a blank, and when the cause of the National Assembly would be the cause of the nation.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0032",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "They stormed only because he made an unparliamentary use of his constitutional right.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0033",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "The resolute Orleanists, Thiers, Changarnier, etc., voted with the republicans and the Mountain.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0034",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "If ever an event cast its shadow before it long before its occurrence, it was Bonaparte’s “coup d’état.” Already on January 29, 1849, barely a month after his election, he had made to Changarnier a proposition to that effect.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0035",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "The party of Order dissolves into its component parts.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0036",
+      "w": "The Eighteenth Brumaire of Louis Bonaparte",
+      "s": "Finally, during the period of the parliamentary republic, the farmers of several localities rose against their own product, the Army;—the bourgeoisie punished them with states of siege and executions.",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      }
+    },
+    {
+      "id": "marx.p0037",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "I have had more difficulty in preventing the Empress from doing harm than I ever had in attempting to engage her to do us good.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0038",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "At the end of that century it had become, as stated by the Rev.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0039",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "Although the treaty stipulated only for 30,000 Muscovites, Peter, in his magnanimity, had landed 40,000 on Zealand; but now that he was to send them on the errand to Schonen, he all at once discovered that out of the 40,000 he could spare but 15,000.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0040",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "Not to give any jealousy, he endeavours for no help from his neighbours to instruct his men in arms.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0041",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "He found it equally contrary to his interest, whether it succeeded or not.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0042",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "I wish it may not at last be found true, that those who have been fighting against that King have, in the main, been fighting against themselves.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0043",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "Colquhoun, the British Consul at Bucharest, suspects that England has some secret material interest in keeping down the trade of the Principalities.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0044",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "The subjects of either of the Allies ...",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0045",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "The bloody mire of Mongolian slavery, not the rude glory of the Norman epoch, forms the cradle of Muscovy, and modern Russia is but a metamorphosis of Muscovy.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0046",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "They followed it up laboriously, gradually, inflexibly.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0047",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "Accordingly he assumed abroad the theatrical attitude of the conqueror, and, indeed, succeeded in hiding under a mask of proud susceptibility and irritable haughtiness the obtrusiveness of the Mongol serf, who still remembered kissing the stirrup of the Khan's meanest envoy.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      }
+    },
+    {
+      "id": "marx.p0048",
+      "w": "Secret Diplomatic History of The Eighteenth Century",
+      "s": "It is, then, not the mere conquest of the Baltic provinces which separates the policy of Peter the Great from that of his ancestors, but it is the transfer of the capital which reveals the true meaning of his Baltic conquests.",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
       }
     }
   ],
   "formulas": [
     {
       "id": "marx.f.v0001",
-      "kind": "verbatim",
-      "text": "At a certain stage of development of the process of exchange, the necessity arises for a polar distribution of the functions of exchange value and use-value among commodities, so that one commodity e.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 200
-      }
-    },
-    {
-      "id": "marx.f.v0002",
-      "kind": "verbatim",
-      "text": "In its capacity of equivalent in the isolated transaction C―M it passes at once from a state of motion to a state of rest; but in its capacity of coin its natural substance comes in constant conflict with its function.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 218
-      }
-    },
-    {
-      "id": "marx.f.v0003",
-      "kind": "verbatim",
-      "text": "While the circulation of commodities can absorb only a definite quantity of gold coin and as a result of that the alternating contraction and expansion of the currency appears as a necessary law, paper money seems to enter circulation in any desired amount.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 257
-      }
-    },
-    {
-      "id": "marx.f.v0004",
-      "kind": "verbatim",
-      "text": "As soon as the term of the contract expires, money enters circulation, since it changes its position by passing from the hands of the former buyer into those of the former seller.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 179
-      }
-    },
-    {
-      "id": "marx.f.v0005",
-      "kind": "verbatim",
-      "text": "Like home circulation, international circulation requires a constantly changing quantity of gold and silver.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 108
-      }
-    },
-    {
-      "id": "marx.f.v0006",
-      "kind": "verbatim",
-      "text": "The normal level of a national currency is now expressed in terms of an international balance of currencies, which practically amounts to the statement that nationality does not change anything in a universal economic law.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 222
-      }
-    },
-    {
-      "id": "marx.f.v0007",
-      "kind": "verbatim",
-      "text": "Metallic currency has its remedy in the import and export of precious metals which immediately enter circulation and thus, by their influx or efflux, cause the prices of commodities to fall or rise.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 198
-      }
-    },
-    {
-      "id": "marx.f.v0008",
-      "kind": "verbatim",
-      "text": "The subdivisions and organization of distribution are determined by the subdivisions and organization of production.",
-      "work": "A Contribution to the Critique of Political Economy",
-      "lang": "en",
-      "src": {
-        "work": "A Contribution to the Critique of Political Economy"
-      },
-      "quality": {
-        "chars": 116
-      }
-    },
-    {
-      "id": "marx.f.v0009",
-      "kind": "verbatim",
-      "text": "In 1773 Catherine's war against Turkey still continuing, and her conflicts with Sweden growing serious, France made preparations to send a powerful fleet into the Baltic.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 170
-      }
-    },
-    {
-      "id": "marx.f.v0010",
-      "kind": "verbatim",
-      "text": "Hereupon his Danish Majesty made all haste for his return to his dominions, and gave orders to work day and night to get his fleet ready to put to sea.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 151
-      }
-    },
-    {
-      "id": "marx.f.v0011",
-      "kind": "verbatim",
-      "text": "Not to give any jealousy, he endeavours for no help from his neighbours to instruct his men in arms.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 100
-      }
-    },
-    {
-      "id": "marx.f.v0012",
-      "kind": "verbatim",
-      "text": "Colquhoun, the British Consul at Bucharest, suspects that England has some secret material interest in keeping down the trade of the Principalities.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 148
-      }
-    },
-    {
-      "id": "marx.f.v0013",
-      "kind": "verbatim",
-      "text": "Fallen from its commercial and maritime grandeur, Holland had then already entered upon its epoch of decline.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 109
-      }
-    },
-    {
-      "id": "marx.f.v0014",
-      "kind": "verbatim",
-      "text": "The incongruous, unwieldy, and precocious Empire heaped together by the Ruriks, like the other empires of similar growth, is broken up into appanages, divided and subdivided among the descendants of the conquerors, dilacerated by feudal wars, rent to pieces by the intervention of foreign peoples.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 297
-      }
-    },
-    {
-      "id": "marx.f.v0015",
-      "kind": "verbatim",
-      "text": "Never,\" say the annalists, \"never since Rurik had such an event happened; never had the grand princes of Kiev and Vladimir seen the Novgorodians come and submit to them as their judges.",
-      "work": "Secret Diplomatic History of The Eighteenth Century",
-      "lang": "en",
-      "src": {
-        "work": "Secret Diplomatic History of The Eighteenth Century"
-      },
-      "quality": {
-        "chars": 185
-      }
-    },
-    {
-      "id": "marx.f.v0016",
       "kind": "verbatim",
       "text": "Conservation of the old modes of production in unaltered form, was, on the contrary, the first condition of existence for all earlier industrial classes.",
       "work": "The Communist Manifesto",
@@ -550,46 +423,59 @@
       }
     },
     {
-      "id": "marx.f.v0017",
+      "id": "marx.f.v0002",
       "kind": "verbatim",
-      "text": "In these crises a great part not only of the existing products, but also of the previously created productive forces, are periodically destroyed.",
+      "text": "Into their place stepped free competition, accompanied by a social and political constitution adapted to it, and by the economical and political sway of the bourgeois class.",
       "work": "The Communist Manifesto",
       "lang": "en",
       "src": {
         "work": "The Communist Manifesto"
       },
       "quality": {
-        "chars": 145
+        "chars": 173
       }
     },
     {
-      "id": "marx.f.v0018",
+      "id": "marx.f.v0003",
       "kind": "verbatim",
-      "text": "Nay more, in proportion as the use of machinery and division of labour increases, in the same proportion the burden of toil also increases, whether by prolongation of the working hours, by increase of the work exacted in a given time or by increased speed of the machinery, etc.",
+      "text": "The less the skill and exertion of strength implied in manual labour, in other words, the more modern industry becomes developed, the more is the labour of men superseded by that of women.",
       "work": "The Communist Manifesto",
       "lang": "en",
       "src": {
         "work": "The Communist Manifesto"
       },
       "quality": {
-        "chars": 278
+        "chars": 188
       }
     },
     {
-      "id": "marx.f.v0019",
+      "id": "marx.f.v0004",
       "kind": "verbatim",
-      "text": "The proletarian is without property; his relation to his wife and children has no longer anything in common with the bourgeois family-relations; modern industrial labour, modern subjection to capital, the same in England as in France, in America as in Germany, has stripped him of every trace of national character.",
+      "text": "Hitherto, every form of society has been based, as we have already seen, on the antagonism of oppressing and oppressed classes.",
       "work": "The Communist Manifesto",
       "lang": "en",
       "src": {
         "work": "The Communist Manifesto"
       },
       "quality": {
-        "chars": 315
+        "chars": 127
       }
     },
     {
-      "id": "marx.f.v0020",
+      "id": "marx.f.v0005",
+      "kind": "verbatim",
+      "text": "We have seen above, that the first step in the revolution by the working class, is to raise the proletariat to the position of ruling as to win the battle of democracy.",
+      "work": "The Communist Manifesto",
+      "lang": "en",
+      "src": {
+        "work": "The Communist Manifesto"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "marx.f.v0006",
       "kind": "verbatim",
       "text": "In showing that, under their rule, the modern proletariat never existed, they forget that the modern bourgeoisie is the necessary offspring of their own form of society.",
       "work": "The Communist Manifesto",
@@ -602,39 +488,274 @@
       }
     },
     {
-      "id": "marx.f.v0021",
+      "id": "marx.f.v0007",
       "kind": "verbatim",
-      "text": "With very few exceptions, all the so-called Socialist and Communist publications that now (1847) circulate in Germany belong to the domain of this foul and enervating literature.",
-      "work": "The Communist Manifesto",
+      "text": "We get into a vicious circle by making exchange value the measure of exchange value, because the measuring exchange value needs a measure itself.",
+      "work": "A Contribution to the Critique of Political Economy",
       "lang": "en",
       "src": {
-        "work": "The Communist Manifesto"
+        "work": "A Contribution to the Critique of Political Economy"
       },
       "quality": {
-        "chars": 178
+        "chars": 145
+      }
+    },
+    {
+      "id": "marx.f.v0008",
+      "kind": "verbatim",
+      "text": "Since labor-time constitutes the substance and the intrinsic measure of values, these names would then actually represent definite proportions of value.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "marx.f.v0009",
+      "kind": "verbatim",
+      "text": "The state which in its mint price gave a certain name to a piece of gold of certain weight, and in the act of coinage only impressed its stamp on gold, seems now to turn paper into gold by the magic of its stamp.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "marx.f.v0010",
+      "kind": "verbatim",
+      "text": "In mediaeval England gold and silver commodities were considered before the law as mere forms of treasure, since their value was but slightly increased by the crude labor spent upon them.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "marx.f.v0011",
+      "kind": "verbatim",
+      "text": "Finally, the precious metals are international means of purchase in the hands of gold and silver producing countries, in which case they directly constitute a product and commodity and not merely a converted form of a commodity.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "marx.f.v0012",
+      "kind": "verbatim",
+      "text": "Although possessing a value of its own, gold will become in the former case a token of a metal of lower exchange value than its own, and in the latter, a token of a metal of higher value.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "marx.f.v0013",
+      "kind": "verbatim",
+      "text": "Proudhon and others naturally find it very pleasant, when they do not know the historical origin of a certain economic phenomenon, to give it a quasi historico-philosopohical explanation by going into mythology.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "marx.f.v0014",
+      "kind": "verbatim",
+      "text": "Under all forms of society there is a certain industry which predominates over all the rest and whose condition therefore determines the rank and influence of all the rest.",
+      "work": "A Contribution to the Critique of Political Economy",
+      "lang": "en",
+      "src": {
+        "work": "A Contribution to the Critique of Political Economy"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "marx.f.v0015",
+      "kind": "verbatim",
+      "text": "Bourgeois, fanatic on the point of “Order,” are shot down on their own balconies by drunken soldiers, forfeit their family property, and their houses are bombarded for pastime—all in the name of Property, of Family, of Religion, and of Order.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "marx.f.v0016",
+      "kind": "verbatim",
+      "text": "Before we close this period, we must cast a look back upon the two powers, one of which destroys the other on December 2, 1851, while, from December 20, 1848, down to the departure of the constitutional assembly, they live in marital relations.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "marx.f.v0017",
+      "kind": "verbatim",
+      "text": "As, in private life, the distinction is made between what a man thinks of himself and says, and that which he really is and does, so, all the more, must the phrases and notions of parties in historic struggles be distinguished from their real organism, and their real interests, their notions and their reality.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 311
+      }
+    },
+    {
+      "id": "marx.f.v0018",
+      "kind": "verbatim",
+      "text": "It dares not accept the collision at the moment when it involves a principle, when the Executive power has really given itself a blank, and when the cause of the National Assembly would be the cause of the nation.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "marx.f.v0019",
+      "kind": "verbatim",
+      "text": "If ever an event cast its shadow before it long before its occurrence, it was Bonaparte’s “coup d’état.” Already on January 29, 1849, barely a month after his election, he had made to Changarnier a proposition to that effect.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "marx.f.v0020",
+      "kind": "verbatim",
+      "text": "Finally, during the period of the parliamentary republic, the farmers of several localities rose against their own product, the Army;—the bourgeoisie punished them with states of siege and executions.",
+      "work": "The Eighteenth Brumaire of Louis Bonaparte",
+      "lang": "en",
+      "src": {
+        "work": "The Eighteenth Brumaire of Louis Bonaparte"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "marx.f.v0021",
+      "kind": "verbatim",
+      "text": "Although the treaty stipulated only for 30,000 Muscovites, Peter, in his magnanimity, had landed 40,000 on Zealand; but now that he was to send them on the errand to Schonen, he all at once discovered that out of the 40,000 he could spare but 15,000.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
+      "lang": "en",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      },
+      "quality": {
+        "chars": 250
       }
     },
     {
       "id": "marx.f.v0022",
       "kind": "verbatim",
-      "text": "CRITICAL-UTOPIAN SOCIALISM AND COMMUNISM We do not here refer to that literature which, in every great modern revolution, has always given voice to the demands of the proletariat, such as the writings of Babeuf and others.",
-      "work": "The Communist Manifesto",
+      "text": "I wish it may not at last be found true, that those who have been fighting against that King have, in the main, been fighting against themselves.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
       "lang": "en",
       "src": {
-        "work": "The Communist Manifesto"
+        "work": "Secret Diplomatic History of The Eighteenth Century"
       },
       "quality": {
-        "chars": 222
+        "chars": 145
+      }
+    },
+    {
+      "id": "marx.f.v0023",
+      "kind": "verbatim",
+      "text": "Colquhoun, the British Consul at Bucharest, suspects that England has some secret material interest in keeping down the trade of the Principalities.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
+      "lang": "en",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "marx.f.v0024",
+      "kind": "verbatim",
+      "text": "The bloody mire of Mongolian slavery, not the rude glory of the Norman epoch, forms the cradle of Muscovy, and modern Russia is but a metamorphosis of Muscovy.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
+      "lang": "en",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "marx.f.v0025",
+      "kind": "verbatim",
+      "text": "Accordingly he assumed abroad the theatrical attitude of the conqueror, and, indeed, succeeded in hiding under a mask of proud susceptibility and irritable haughtiness the obtrusiveness of the Mongol serf, who still remembered kissing the stirrup of the Khan's meanest envoy.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
+      "lang": "en",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "marx.f.v0026",
+      "kind": "verbatim",
+      "text": "It is, then, not the mere conquest of the Baltic provinces which separates the policy of Peter the Great from that of his ancestors, but it is the transfer of the capital which reveals the true meaning of his Baltic conquests.",
+      "work": "Secret Diplomatic History of The Eighteenth Century",
+      "lang": "en",
+      "src": {
+        "work": "Secret Diplomatic History of The Eighteenth Century"
+      },
+      "quality": {
+        "chars": 226
       }
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 22,
-    "verbatim": 22,
+    "sentences": 48,
+    "formulas": 26,
+    "verbatim": 26,
     "patterns": 0
   },
-  "checksum": "sha256:d0580f4ee7001df2e023cd6ffa78ed14d12de49a75a83dbf8c62110b9cb9345f"
+  "checksum": "sha256:31023c997512d1af83071fc3693f7fd1a5c0f6b1f3b97f3afda64a542785d43a"
 }

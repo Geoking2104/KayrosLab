@@ -1,17 +1,17 @@
 {
   "authorId": "confucius",
   "kbVersion": "confucius@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T09:49:59.087Z",
+  "builtAt": "2026-10-03T21:23:12.035Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
     {
       "title": "The Analects of Confucius (from the Chinese Classics)",
-      "sentences": 20
+      "sentences": 12
     },
     {
       "title": "The book of filial duty",
-      "sentences": 20
+      "sentences": 12
     }
   ],
   "passages": [
@@ -26,7 +26,7 @@
     {
       "id": "confucius.p0002",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'The reason why the ancients did not readily give utterance to their words, was that they feared lest their actions should not come up to them.' CHAP.",
+      "s": "Tsai Yu being asleep during the daytime, the Master said, 'Rotten wood cannot be carved; a wall of dirty earth will not receive the trowel.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -34,7 +34,7 @@
     {
       "id": "confucius.p0003",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "When the Master was informed of it, he said, 'Twice may do.' CHAP.",
+      "s": "The Master said, 'The man of virtue makes the difficulty to be overcome his first business, and success only a subsequent consideration;-- this may be called perfect virtue.' CHAP.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -42,7 +42,7 @@
     {
       "id": "confucius.p0004",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'Who can go out but by the door?",
+      "s": "Only with death does his course stop;-- is it not long?",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -50,7 +50,7 @@
     {
       "id": "confucius.p0005",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The subjects on which the Master did not talk, were-- extraordinary things, feats of strength, disorder, and spiritual beings.",
+      "s": "The Master said, 'The commander of the forces of a large state may be carried off, but the will of even a common man cannot be taken from him.' CHAP.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -58,7 +58,7 @@
     {
       "id": "confucius.p0006",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "When right principles of government prevail in the kingdom, he will show himself; when they are prostrated, he will keep concealed.",
+      "s": "Nan Yung was frequently repeating the lines about a white scepter stone.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -66,7 +66,7 @@
     {
       "id": "confucius.p0007",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master was wishing to go and live among the nine wild tribes of the east.",
+      "s": "Having wished him to live, you also wish him to die.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -74,7 +74,7 @@
     {
       "id": "confucius.p0008",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "In warm weather, he had a single garment either of coarse or fine texture, but he wore it displayed over an inner garment.",
+      "s": "Though a man go among rude, uncultivated tribes, these qualities may not be neglected.' CHAP.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -82,7 +82,7 @@
     {
       "id": "confucius.p0009",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'Filial indeed is Min Tsze-ch'ien!",
+      "s": "Is it not that you are an insinuating talker?' 2.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -90,7 +90,7 @@
     {
       "id": "confucius.p0010",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "Turning to Yen Yu, he said, 'Ch'iu, what are your wishes?' Ch'iu replied, 'Suppose a state of sixty or seventy li square, or one of fifty or sixty, and let me have the government of it;-- in three years' time, I could make plenty to abound among the people.",
+      "s": "The Master said, 'When the multitude hate a man, it is necessary to examine into the case.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -98,7 +98,7 @@
     {
       "id": "confucius.p0011",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'What is it you call being distinguished?' 3.",
+      "s": "If you are kind, this will enable you to employ the services of others.",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
@@ -106,77 +106,13 @@
     {
       "id": "confucius.p0012",
       "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, '\"If good men were to govern a country in succession for a hundred years, they would be able to transform the violently bad, and dispense with capital punishments.\" True indeed is this saying!' CHAP.",
+      "s": "If the relations between old and young may not be neglected, how is it that he sets aside the duties that should be observed between sovereign and minister?",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       }
     },
     {
       "id": "confucius.p0013",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'The virtuous will be sure to speak correctly, but those whose speech is good may not always be virtuous.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0014",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, 'The way of the superior man is threefold, but I am not equal to it.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0015",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "If his words be not sincere and truthful and his actions not honourable and careful, will he, with such conduct, be appreciated, even in his neighborhood?",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0016",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The superior man is anxious lest he should not get truth; he is not anxious lest poverty should come upon him.' CHAP.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0017",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "Confucius said, 'The superior man has nine things which are subjects with him of thoughtful consideration.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0018",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "The Master said, '\"It is according to the rules of propriety,\" they say.-- \"It is according to the rules of propriety,\" they say.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0019",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "Some one said to him, 'Is it not yet time for you, sir, to leave this?' He replied, 'Serving men in an upright way, where shall I go to, and not experience such a thrice- repeated dismissal?",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0020",
-      "w": "The Analects of Confucius (from the Chinese Classics)",
-      "s": "Am I devoid of talents and virtue?-- men will put me away from them.",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      }
-    },
-    {
-      "id": "confucius.p0021",
       "w": "The book of filial duty",
       "s": "All things will be added in their due course.",
       "src": {
@@ -184,9 +120,73 @@
       }
     },
     {
+      "id": "confucius.p0014",
+      "w": "The book of filial duty",
+      "s": "It is from the past that they have tried to learn, and the past is a pathway which the feet of spirits have trodden and made luminous.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0015",
+      "w": "The book of filial duty",
+      "s": "The effect of education upon the minds of the people was well known to the good Emperors of old.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0016",
+      "w": "The book of filial duty",
+      "s": "When parents have a son born to them, the regular line of descent in the family is thereby secured.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0017",
+      "w": "The book of filial duty",
+      "s": "When an Emperor can live in harmony with his elders, there will be harmony throughout his dominion between superiors and inferiors; and when he is filial to the Supreme Father and Mother, he will be blessed by them.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0018",
+      "w": "The book of filial duty",
+      "s": "By doing so we shall have performed the duty of mankind, and have done what ought to be done by a filial son, and by the living to the dead.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0019",
+      "w": "The book of filial duty",
+      "s": "He had entered the dense fog on the hills and did not know where he was, when his mother leaned against the door-post and gnawed her fingers as if she would go in quest of him.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0020",
+      "w": "The book of filial duty",
+      "s": "In the country of Ch‘u lived Lao Lai Tzŭ, who, when so old that he had lost nearly all his teeth, made every effort to rejoice and comfort his parents, constantly endeavouring to gladden their hearts.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
+      "id": "confucius.p0021",
+      "w": "The book of filial duty",
+      "s": "He was employed in the severest toil, and served his father with entire obedience.",
+      "src": {
+        "work": "The book of filial duty"
+      }
+    },
+    {
       "id": "confucius.p0022",
       "w": "The book of filial duty",
-      "s": "All through Chinese literature you will find allusion to the love of little ones which has been the heritage of the Chinese from time unknown.",
+      "s": "He now reveres them, although dead, as if they were alive; and hopes they will condescend to dwell in his ancestral hall.",
       "src": {
         "work": "The book of filial duty"
       }
@@ -194,7 +194,7 @@
     {
       "id": "confucius.p0023",
       "w": "The book of filial duty",
-      "s": "But China, from the shelter and security of her myriad bulwarks, has watched the sun of many empires rise and set.",
+      "s": "Taking up his rice and flesh, Ts‘ai returned home to his mother with the food; and in their joy they even forgot that the year was one of dearth.",
       "src": {
         "work": "The book of filial duty"
       }
@@ -202,135 +202,7 @@
     {
       "id": "confucius.p0024",
       "w": "The book of filial duty",
-      "s": "If we can serve our August Master with such feelings as we have toward our father, then loyalty is shown; and if we treat venerable persons with respect, then harmony will reign in the circle of our life.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0025",
-      "w": "The book of filial duty",
-      "s": "This is what we mean by saying that the good Emperors of old governed the world by filial duty.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0026",
-      "w": "The book of filial duty",
-      "s": "As the teachings of these sages are based on the principle of filial piety, their doctrine is propagated without effort, and their government is effectual without resorting to force.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0027",
-      "w": "The book of filial duty",
-      "s": "Such acts will no doubt lead the man to a wrong course of life.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0028",
-      "w": "The book of filial duty",
-      "s": "Because we do not wish to bring disgrace upon the name of our ancestors.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0029",
-      "w": "The book of filial duty",
-      "s": "The women beat their breasts, the men stamp their feet, and with weeping and wailing escort the coffin to its resting-place.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0030",
-      "w": "The book of filial duty",
-      "s": "His perfect sincerity was effectual to renovate his family; his parents became pleasant, and his brother more conciliatory and virtuous.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0031",
-      "w": "The book of filial duty",
-      "s": "Those sages whose nature is heavenly differ from the rest of mankind; and virtue, as in a breath, permeates their whole souls.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0032",
-      "w": "The book of filial duty",
-      "s": "Min carefully concealed all his grievances, and refused to indulge in any complaint; even while suffering severely from cold and hunger, he maintained his affection unabated.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0033",
-      "w": "The book of filial duty",
-      "s": "Thus did Lai forget his age in order to rejoice the hearts of his parents; and affection, harmony, and joy prevailed among the family.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0034",
-      "w": "The book of filial duty",
-      "s": "Passing over the hills and wading through the streams, he carried his mother with much difficulty.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0035",
-      "w": "The book of filial duty",
-      "s": "These were taken out and prepared by Chiang Shih for his mother.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0036",
-      "w": "The book of filial duty",
-      "s": "He cannot rest until he has made their statues, so strong is his desire to nourish and reverence them.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0037",
-      "w": "The book of filial duty",
-      "s": "The frightened animal fled, nor stopped in its rapid course until it reached the high hills.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0038",
-      "w": "The book of filial duty",
-      "s": "Lu, although so young, had the true heavenly disposition; even in the small matter of an orange he did not forget his parent’s wishes.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0039",
-      "w": "The book of filial duty",
-      "s": "His mother was ill, and desired the delicacy of a soup made from bamboo shoots; but in dreary winter, Nature still concealed her fruits awaited.",
-      "src": {
-        "work": "The book of filial duty"
-      }
-    },
-    {
-      "id": "confucius.p0040",
-      "w": "The book of filial duty",
-      "s": "They were so poor that they could not afford to furnish their beds with mosquito-curtains; and every summer night myriads of mosquitoes attacked them without restraint, feasting upon their flesh and blood.",
+      "s": "His mother was in the habit of eating fresh fish at her meals, but winter coming, the ice bound up the rivers.",
       "src": {
         "work": "The book of filial duty"
       }
@@ -353,241 +225,59 @@
     {
       "id": "confucius.f.v0002",
       "kind": "verbatim",
-      "text": "The Master said, 'The reason why the ancients did not readily give utterance to their words, was that they feared lest their actions should not come up to them.' CHAP.",
+      "text": "Tsai Yu being asleep during the daytime, the Master said, 'Rotten wood cannot be carved; a wall of dirty earth will not receive the trowel.",
       "work": "The Analects of Confucius (from the Chinese Classics)",
       "lang": "en",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       },
       "quality": {
-        "chars": 167
+        "chars": 139
       }
     },
     {
       "id": "confucius.f.v0003",
       "kind": "verbatim",
-      "text": "The subjects on which the Master did not talk, were-- extraordinary things, feats of strength, disorder, and spiritual beings.",
+      "text": "The Master said, 'The man of virtue makes the difficulty to be overcome his first business, and success only a subsequent consideration;-- this may be called perfect virtue.' CHAP.",
       "work": "The Analects of Confucius (from the Chinese Classics)",
       "lang": "en",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       },
       "quality": {
-        "chars": 126
+        "chars": 180
       }
     },
     {
       "id": "confucius.f.v0004",
       "kind": "verbatim",
-      "text": "When right principles of government prevail in the kingdom, he will show himself; when they are prostrated, he will keep concealed.",
+      "text": "The Master said, 'The commander of the forces of a large state may be carried off, but the will of even a common man cannot be taken from him.' CHAP.",
       "work": "The Analects of Confucius (from the Chinese Classics)",
       "lang": "en",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       },
       "quality": {
-        "chars": 131
+        "chars": 149
       }
     },
     {
       "id": "confucius.f.v0005",
       "kind": "verbatim",
-      "text": "In warm weather, he had a single garment either of coarse or fine texture, but he wore it displayed over an inner garment.",
+      "text": "If the relations between old and young may not be neglected, how is it that he sets aside the duties that should be observed between sovereign and minister?",
       "work": "The Analects of Confucius (from the Chinese Classics)",
       "lang": "en",
       "src": {
         "work": "The Analects of Confucius (from the Chinese Classics)"
       },
       "quality": {
-        "chars": 122
+        "chars": 156
       }
     },
     {
       "id": "confucius.f.v0006",
       "kind": "verbatim",
-      "text": "Turning to Yen Yu, he said, 'Ch'iu, what are your wishes?' Ch'iu replied, 'Suppose a state of sixty or seventy li square, or one of fifty or sixty, and let me have the government of it;-- in three years' time, I could make plenty to abound among the people.",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 257
-      }
-    },
-    {
-      "id": "confucius.f.v0007",
-      "kind": "verbatim",
-      "text": "The Master said, '\"If good men were to govern a country in succession for a hundred years, they would be able to transform the violently bad, and dispense with capital punishments.\" True indeed is this saying!' CHAP.",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 216
-      }
-    },
-    {
-      "id": "confucius.f.v0008",
-      "kind": "verbatim",
-      "text": "The Master said, 'The virtuous will be sure to speak correctly, but those whose speech is good may not always be virtuous.",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 122
-      }
-    },
-    {
-      "id": "confucius.f.v0009",
-      "kind": "verbatim",
-      "text": "If his words be not sincere and truthful and his actions not honourable and careful, will he, with such conduct, be appreciated, even in his neighborhood?",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 154
-      }
-    },
-    {
-      "id": "confucius.f.v0010",
-      "kind": "verbatim",
-      "text": "The superior man is anxious lest he should not get truth; he is not anxious lest poverty should come upon him.' CHAP.",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 117
-      }
-    },
-    {
-      "id": "confucius.f.v0011",
-      "kind": "verbatim",
-      "text": "The Master said, '\"It is according to the rules of propriety,\" they say.-- \"It is according to the rules of propriety,\" they say.",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 129
-      }
-    },
-    {
-      "id": "confucius.f.v0012",
-      "kind": "verbatim",
-      "text": "Some one said to him, 'Is it not yet time for you, sir, to leave this?' He replied, 'Serving men in an upright way, where shall I go to, and not experience such a thrice- repeated dismissal?",
-      "work": "The Analects of Confucius (from the Chinese Classics)",
-      "lang": "en",
-      "src": {
-        "work": "The Analects of Confucius (from the Chinese Classics)"
-      },
-      "quality": {
-        "chars": 190
-      }
-    },
-    {
-      "id": "confucius.f.v0013",
-      "kind": "verbatim",
-      "text": "All through Chinese literature you will find allusion to the love of little ones which has been the heritage of the Chinese from time unknown.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 142
-      }
-    },
-    {
-      "id": "confucius.f.v0014",
-      "kind": "verbatim",
-      "text": "If we can serve our August Master with such feelings as we have toward our father, then loyalty is shown; and if we treat venerable persons with respect, then harmony will reign in the circle of our life.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 204
-      }
-    },
-    {
-      "id": "confucius.f.v0015",
-      "kind": "verbatim",
-      "text": "As the teachings of these sages are based on the principle of filial piety, their doctrine is propagated without effort, and their government is effectual without resorting to force.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 182
-      }
-    },
-    {
-      "id": "confucius.f.v0016",
-      "kind": "verbatim",
-      "text": "The women beat their breasts, the men stamp their feet, and with weeping and wailing escort the coffin to its resting-place.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 124
-      }
-    },
-    {
-      "id": "confucius.f.v0017",
-      "kind": "verbatim",
-      "text": "His perfect sincerity was effectual to renovate his family; his parents became pleasant, and his brother more conciliatory and virtuous.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 136
-      }
-    },
-    {
-      "id": "confucius.f.v0018",
-      "kind": "verbatim",
-      "text": "Those sages whose nature is heavenly differ from the rest of mankind; and virtue, as in a breath, permeates their whole souls.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 126
-      }
-    },
-    {
-      "id": "confucius.f.v0019",
-      "kind": "verbatim",
-      "text": "Min carefully concealed all his grievances, and refused to indulge in any complaint; even while suffering severely from cold and hunger, he maintained his affection unabated.",
-      "work": "The book of filial duty",
-      "lang": "en",
-      "src": {
-        "work": "The book of filial duty"
-      },
-      "quality": {
-        "chars": 174
-      }
-    },
-    {
-      "id": "confucius.f.v0020",
-      "kind": "verbatim",
-      "text": "Lu, although so young, had the true heavenly disposition; even in the small matter of an orange he did not forget his parent’s wishes.",
+      "text": "It is from the past that they have tried to learn, and the past is a pathway which the feet of spirits have trodden and made luminous.",
       "work": "The book of filial duty",
       "lang": "en",
       "src": {
@@ -598,29 +288,94 @@
       }
     },
     {
-      "id": "confucius.f.v0021",
+      "id": "confucius.f.v0007",
       "kind": "verbatim",
-      "text": "His mother was ill, and desired the delicacy of a soup made from bamboo shoots; but in dreary winter, Nature still concealed her fruits awaited.",
+      "text": "When an Emperor can live in harmony with his elders, there will be harmony throughout his dominion between superiors and inferiors; and when he is filial to the Supreme Father and Mother, he will be blessed by them.",
       "work": "The book of filial duty",
       "lang": "en",
       "src": {
         "work": "The book of filial duty"
       },
       "quality": {
-        "chars": 144
+        "chars": 215
       }
     },
     {
-      "id": "confucius.f.v0022",
+      "id": "confucius.f.v0008",
       "kind": "verbatim",
-      "text": "They were so poor that they could not afford to furnish their beds with mosquito-curtains; and every summer night myriads of mosquitoes attacked them without restraint, feasting upon their flesh and blood.",
+      "text": "By doing so we shall have performed the duty of mankind, and have done what ought to be done by a filial son, and by the living to the dead.",
       "work": "The book of filial duty",
       "lang": "en",
       "src": {
         "work": "The book of filial duty"
       },
       "quality": {
-        "chars": 205
+        "chars": 140
+      }
+    },
+    {
+      "id": "confucius.f.v0009",
+      "kind": "verbatim",
+      "text": "He had entered the dense fog on the hills and did not know where he was, when his mother leaned against the door-post and gnawed her fingers as if she would go in quest of him.",
+      "work": "The book of filial duty",
+      "lang": "en",
+      "src": {
+        "work": "The book of filial duty"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "confucius.f.v0010",
+      "kind": "verbatim",
+      "text": "In the country of Ch‘u lived Lao Lai Tzŭ, who, when so old that he had lost nearly all his teeth, made every effort to rejoice and comfort his parents, constantly endeavouring to gladden their hearts.",
+      "work": "The book of filial duty",
+      "lang": "en",
+      "src": {
+        "work": "The book of filial duty"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "confucius.f.v0011",
+      "kind": "verbatim",
+      "text": "He now reveres them, although dead, as if they were alive; and hopes they will condescend to dwell in his ancestral hall.",
+      "work": "The book of filial duty",
+      "lang": "en",
+      "src": {
+        "work": "The book of filial duty"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "confucius.f.v0012",
+      "kind": "verbatim",
+      "text": "Taking up his rice and flesh, Ts‘ai returned home to his mother with the food; and in their joy they even forgot that the year was one of dearth.",
+      "work": "The book of filial duty",
+      "lang": "en",
+      "src": {
+        "work": "The book of filial duty"
+      },
+      "quality": {
+        "chars": 145
+      }
+    },
+    {
+      "id": "confucius.f.v0013",
+      "kind": "verbatim",
+      "text": "His mother was in the habit of eating fresh fish at her meals, but winter coming, the ice bound up the rivers.",
+      "work": "The book of filial duty",
+      "lang": "en",
+      "src": {
+        "work": "The book of filial duty"
+      },
+      "quality": {
+        "chars": 110
       }
     },
     {
@@ -628,21 +383,22 @@
       "kind": "pattern",
       "label": "ouverture",
       "shape": "The Master said,…",
-      "attested": 9,
+      "attested": 4,
       "worksSpan": 1,
       "examples": [
         "The Master said, 'The full observance of the rules of propriety in serving one's prince is accounted by people to be flattery.' CHAP.",
-        "The Master said, 'The reason why the ancients did not readily give utterance to their words, was that they feared lest their actions should not come up to them.' CHAP."
+        "The Master said, 'The man of virtue makes the difficulty to be overcome his first business, and success only a subsequent consideration;-- this may be called perfect virtue.' CHAP."
       ]
     }
   ],
   "concepts": [],
   "entities": [],
+  "doctrine": null,
   "stats": {
-    "sentences": 40,
-    "formulas": 23,
-    "verbatim": 22,
+    "sentences": 24,
+    "formulas": 14,
+    "verbatim": 13,
     "patterns": 1
   },
-  "checksum": "sha256:b6db9f240f1b5c7be1692274d355ecf66a4ac006e7aee9d81f6434e083dd4223"
+  "checksum": "sha256:041e3a5557986982276a88ca811e21f0a1d9271801af9dad25a769e2333c4e52"
 }
