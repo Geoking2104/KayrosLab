@@ -1,8 +1,8 @@
-/* Gazette — le propos monte du lien, les livres répondent.
-   Simple par défaut : collez une URL (ou le propos) ; le texte est relevé
-   automatiquement (fxtwitter → vxtwitter → oembed) et les textes les plus
-   pertinents des auteurs sont proposés, classés par proximité (moteur du
-   Salon + corpus des œuvres). Les plumes proposées s'ajustent toutes seules. */
+/* Gazette — le propos monte du lien, les auteurs répondent.
+   Simple par défaut : collez une URL ou le propos ; le texte est importé
+   dans « Texte porté à la table » (relevé automatique fxtwitter → vxtwitter
+   → oembed pour un lien), puis les auteurs les plus proches répondent depuis
+   leurs livres (moteur du Salon + corpus). Les plumes s'ajustent toutes seules. */
 (function () {
   var FALLBACK = [
     { id: "voltaire", name: "Voltaire", blurb: "L'ironie contre les dogmes.", works: ["Candide, ou l'optimisme", "Zadig", "Micromégas"], kind: "philosophe" },
@@ -283,6 +283,39 @@
     return (ranked || []).filter(function (r) { return ids[r.authorId]; });
   }
 
+  /* ----------------------------------------------- l'auteur qui répond */
+
+  function authorObject(id) {
+    var known = null;
+    catalog().forEach(function (a) { if (a.id === id) known = a; });
+    var fb = null;
+    FALLBACK.forEach(function (a) { if (a.id === id) fb = a; });
+    var base = known || fb || { id: id, name: authorName(id) };
+    return {
+      id: id,
+      name: base.name || authorName(id),
+      blurb: base.blurb || "",
+      works: base.works || [],
+      kind: base.kind || "",
+    };
+  }
+
+  /** Demande à l'auteur de répondre au propos, depuis ses textes les plus proches. */
+  function respond(authorId, question, corpus) {
+    var E = engine();
+    if (!E || !E.answer) return null;
+    try {
+      var out = E.answer({ author: authorObject(authorId), question: question, corpus: corpus || [], lang: "fr" });
+      if (!out || !out.text) return null;
+      return {
+        text: out.text,
+        prise: out.prise || "",
+        grounded: Boolean(out.grounded),
+        work: out.passage && out.passage.work ? out.passage.work : "",
+      };
+    } catch (e) { return null; }
+  }
+
   /* ------------------------------------------------------------ la feuille */
 
   function intent(text, statusId) {
@@ -290,23 +323,27 @@
     if (statusId) u += "&in_reply_to=" + encodeURIComponent(statusId);
     return u;
   }
-  function article(authorId, row, statusId) {
+  function article(authorId, spoken, statusId) {
     var art = document.createElement("article");
     art.className = "col";
-    art.innerHTML = '<p class="rubric">Extrait</p><h2></h2><p></p><cite></cite><p class="acts"><button type="button" data-act="copy">Retenir</button><button type="button" data-act="x">Porter sur X</button></p>';
+    art.innerHTML = '<p class="rubric">' + (spoken.response ? "Réponse" : "Extrait") + '</p><h2></h2><p></p><cite></cite><p class="acts"><button type="button" data-act="copy">Retenir</button><button type="button" data-act="x">Porter sur X</button></p>';
     art.querySelector("h2").textContent = authorName(authorId);
     var ps = art.querySelectorAll("p");
-    ps[1].textContent = row.text;
+    ps[1].textContent = spoken.text;
     var kind = authorKind(authorId);
-    art.querySelector("cite").textContent = row.work + (kind ? " · " + kind : "");
+    var work = spoken.passage && spoken.passage.work ? spoken.passage.work : "";
+    var citeBits = [];
+    if (work) citeBits.push(work);
+    if (kind) citeBits.push(kind);
+    art.querySelector("cite").textContent = citeBits.join(" · ");
     var acts = art.querySelector(".acts");
     acts.querySelector('[data-act="copy"]').addEventListener("click", function () {
-      if (navigator.clipboard && row.text) navigator.clipboard.writeText(row.text).catch(function () {});
+      if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
       this.textContent = "Retenu.";
     });
     acts.querySelector('[data-act="x"]').addEventListener("click", function () {
-      if (navigator.clipboard && row.text) navigator.clipboard.writeText(row.text).catch(function () {});
-      window.open(intent(row.text, statusId), "_blank", "noopener,noreferrer");
+      if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
+      window.open(intent(spoken.text, statusId), "_blank", "noopener,noreferrer");
     });
     return art;
   }
@@ -335,16 +372,37 @@
       if (!picks.length) picks = ranked.slice(0, MAX_VOICES);
       folio.innerHTML = "";
       picks.forEach(function (cand) {
-        cand.rows.forEach(function (row) { folio.appendChild(article(cand.authorId, row, parsed && parsed.id)); });
+        var out = respond(cand.authorId, thesis, corpus[cand.authorId] || []);
+        var text = out && out.text ? out.text : (cand.rows[0] ? cand.rows[0].text : "");
+        if (!text) return;
+        folio.appendChild(article(cand.authorId, {
+          text: text,
+          response: Boolean(out && out.text),
+          passage: { work: (out && out.work) || (cand.rows[0] && cand.rows[0].work) || "" },
+        }, parsed && parsed.id));
       });
     });
   }
 
   function ingestThenCompose(force) {
     var urlBox = document.getElementById("gz-url");
-    var parsed = urlBox ? parseStatus(urlBox.value) : null;
-    if (!parsed) return compose();
-    return fetchPost(parsed, force).then(function () { return compose(); });
+    var raw = urlBox ? urlBox.value.trim() : "";
+    var parsed = raw ? parseStatus(raw) : null;
+    if (parsed) return fetchPost(parsed, force).then(function () { return compose(); });
+    if (/https?:\/\//i.test(raw)) {
+      note("Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.");
+      return compose();
+    }
+    if (raw.length >= 8) {
+      // Propos collé directement : on l'importe dans le texte porté à la table.
+      var box = document.getElementById("gz-text");
+      if (box && raw !== box.value.trim()) {
+        box.value = clip(raw, 480);
+        note("Propos importé — les auteurs peuvent répondre.");
+      }
+      return compose();
+    }
+    return compose();
   }
 
   /* --------------------------------------------------------------- amorce */
@@ -386,7 +444,7 @@
 
   /* ---------------------------------------------------- exports (tests) */
 
-  var API = { parseStatus: parseStatus, rankTexts: rankTexts, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
+  var API = { parseStatus: parseStatus, rankTexts: rankTexts, respond: respond, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SalonGazette = API;
 

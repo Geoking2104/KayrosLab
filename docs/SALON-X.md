@@ -38,12 +38,12 @@ Redirect accepté : `https://<hôte>/salon/flux/callback`.
 - `X_OAUTH_REDIRECT` (optionnel)
 - `KAYROS_SALON_X_DIR` (fichiers `*.x.json` mode 0600)
 
-## Usage des donn�es et de l'API X
+## Usage des donn�es et de l'API X
 
-Description compl�te (questionnaire de revue de l'app X, en anglais) : [docs/SALON-X-API-USAGE.md](SALON-X-API-USAGE.md).
+Description compl�te (questionnaire de revue de l'app X, en anglais) : [docs/SALON-X-API-USAGE.md](SALON-X-API-USAGE.md).
 
-## Pupitre Gazette — le texte monte seul du lien (2026-10-03)
+## Pupitre Gazette — le texte monte seul du lien, les auteurs répondent (2026-10-03)
 
-- Le propos est relevé du lien **sans compte ni jeton** : `fxtwitter`, puis `vxtwitter`, puis l'oembed de X (8 s max par source) ; en cas d'échec, un message invite simplement à coller le texte.
-- Les textes proposés sont les **extraits les plus proches du propos parmi les œuvres chargées** (moteur du Salon + `corpus.json`) : une à deux phrases entières par plume, classées par proximité, les plus pertinentes cochées d'office (4), et l'ordre des plumes suit la pertinence.
-- Gestes : « Retenir » (copier) et « Porter sur X » (composeur X, en réponse au post si l'URL est fournie).
+- Le propos est relevé du lien **sans compte ni jeton** : `fxtwitter`, puis `vxtwitter`, puis l'oembed de X (8 s max par source) ; un propos collé sans lien est **importé aussitôt** dans « Texte porté à la table », et en cas d'échec un message invite à le coller.
+- Les plumes sont classées par proximité avec le propos (moteur du Salon + `corpus.json`) ; les 4 plus pertinentes sont cochées d'office.
+- **Les auteurs répondent** : chaque plume compose une réponse ancrée dans son texte le plus proche (aveu du manque si rien ne répond) ; gestes « Retenir » (copier) et « Porter sur X » (en réponse au post si l'URL est fournie).

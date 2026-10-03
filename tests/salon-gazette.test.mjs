@@ -76,3 +76,16 @@ test('gazette : rankTexts classe les textes les plus proches et écarte le hors-
   assert.match(one[0].rows[0].text, /[.!?…»"]$/);
   assert.equal(G.rankTexts({}, q).length, 0);
 });
+
+test('réponse : l’auteur répond depuis son texte le plus proche (ou avoue le manque)', () => {
+  const corpus = {
+    a: [{ id: 'a1', w: 'Essai', s: 'La liberté ne se donne pas, elle se prend par la raison et se garde par la loi.' }],
+  };
+  const out = G.respond('a', 'Que reste-t-il de la liberté et de la raison ?', corpus.a);
+  assert.ok(out && out.text && out.text.length > 40, 'une réponse est produite');
+  assert.match(out.text, /Essai/, 'la réponse nomme l’œuvre d’appui');
+  assert.ok(out.prise && out.prise.length > 4, 'la prise accompagne la réponse');
+
+  const bare = G.respond('a', 'Que reste-t-il de la liberté ?', []);
+  assert.ok(bare && bare.text && bare.text.length > 30, 'sans passage, l’auteur parle sans citer à faux');
+});
