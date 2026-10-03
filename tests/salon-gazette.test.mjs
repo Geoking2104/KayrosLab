@@ -124,6 +124,7 @@ test('pupitre : bouton d’import et sélection d’une réponse', () => {
   assert.match(js, /Choisie/);
   assert.match(js, /is-picked/);
   assert.match(js, /api\.fixupx\.com/);
-  assert.match(js, /aperçu hors-ligne/);
+  assert.match(js, /ne lit pas les liens x\.com/);
+  assert.match(js, /previewHint/);
   assert.match(js, /Lecture du lien/);
 });

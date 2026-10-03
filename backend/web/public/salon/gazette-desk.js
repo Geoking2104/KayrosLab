@@ -58,7 +58,8 @@
       imported: "Propos importé — les auteurs peuvent répondre.",
       badLink: "Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.",
       failed: "Le post n’a pas pu être lu",
-      failedPreview: " (aperçu hors-ligne)",
+      failedPreviewFull: "L’aperçu hébergé ne lit pas les liens x.com — collez le texte du propos, puis « Demander aux auteurs ». (Le salon public, lui, lit les liens.)",
+      previewHint: "Aperçu hébergé : les liens x.com n’y sont pas lisibles — collez le texte du propos ; le salon public, lui, les lit.",
       failedTail: " — collez le texte du propos, puis « Demander aux auteurs ».",
       reading: "Lecture du lien…",
       readOk: "Importé ✓",
@@ -94,7 +95,8 @@
       imported: "Statement imported — the authors can answer.",
       badLink: "Link not recognized — paste an x.com/twitter.com link, or the statement text.",
       failed: "The post could not be read",
-      failedPreview: " (offline preview)",
+      failedPreviewFull: "The hosted preview does not read x.com links — paste the statement text, then “Ask the authors”. (The public salon reads links.)",
+      previewHint: "Hosted preview: x.com links cannot be read here — paste the statement text; the public salon reads them.",
       failedTail: " — paste the statement text, then “Ask the authors”.",
       reading: "Reading the link…",
       readOk: "Imported ✓",
@@ -210,6 +212,13 @@
     if (!parsed || !parsed.id) return Promise.resolve(false);
     if (!force && lastFetched === parsed.id) return Promise.resolve(false);
     lastFetched = parsed.id;
+    if (isManagedPreview()) {
+      // Aperçu hébergé : sa politique de sécurité bloque les domaines externes.
+      note(t("failedPreviewFull"));
+      var box = document.getElementById("gz-text");
+      if (box && box.focus) { try { box.focus(); } catch (e) {} }
+      return Promise.resolve(false);
+    }
     note(t("fetching"));
     return fetchFx(parsed)
       .catch(function () { return fetchVx(parsed); })
@@ -222,7 +231,7 @@
         return true;
       })
       .catch(function () {
-        note(t("failed") + (isManagedPreview() ? t("failedPreview") : "") + t("failedTail"));
+        note(t("failed") + t("failedTail"));
         var box = document.getElementById("gz-text");
         if (box && box.focus) { try { box.focus(); } catch (e) {} }
         return false;
@@ -561,6 +570,7 @@
 
   function boot() {
     applyCopy();
+    if (isManagedPreview()) note(t("previewHint"));
     var d = document.getElementById("gz-date");
     if (d) d.textContent = new Date().toLocaleDateString(t("dateLocale"), { weekday: "long", day: "numeric", month: "long", year: "numeric" });
     loadCorpus();
