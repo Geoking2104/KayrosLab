@@ -99,6 +99,19 @@ test('gazette : un lien seul n’est jamais un propos', () => {
   assert.ok(!G.isLoneUrl('La liberté de parole n’est pas la liberté d’offenser.'));
 });
 
+test('i18n : le pupitre parle une seule langue à la fois (fr/en complets)', () => {
+  const fr = G.copyFor('fr');
+  const en = G.copyFor('en');
+  for (const k of Object.keys(fr)) assert.ok(k in en, 'clé manquante en anglais : ' + k);
+  assert.equal(fr.pick, 'Sélectionner');
+  assert.equal(en.pick, 'Select');
+  assert.equal(en.importBtn, 'Fetch the content');
+  assert.equal(en.runBtn, 'Ask the authors');
+  assert.equal(en.carry, 'Carry to X');
+  assert.ok(!/[éèêàçùôîïœ]/i.test(Object.values(en).join(' ')), 'pas d’accents français dans la copie anglaise');
+  assert.match(read('backend/web/public/salon/gazette-desk.js'), /salon-locale/);
+});
+
 test('pupitre : bouton d’import et sélection d’une réponse', () => {
   const html = read('backend/web/public/salon/flux/index.html');
   const js = read('backend/web/public/salon/gazette-desk.js');

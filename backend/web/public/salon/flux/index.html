@@ -48,26 +48,26 @@
 <body>
   <div class="sheet">
     <header class="mast">
-      <a class="word" href="/salon/">Salon<small>cercles littéraires</small></a>
+      <a class="word" href="/salon/">Salon<small id="gz-wordsub">cercles littéraires</small></a>
       <nav aria-label="Salon">
-        <a href="/salon/">Cercles</a>
-        <a href="/salon/flux/" data-flux-x="1" class="is-on">Gazette</a>
-        <a href="/salon/#agents">Auteurs</a>
-        <a href="/salon/#contact">Contact</a>
+        <a id="gz-nav-circles" href="/salon/">Cercles</a>
+        <a id="gz-nav-gazette" href="/salon/flux/" data-flux-x="1" class="is-on">Gazette</a>
+        <a id="gz-nav-authors" href="/salon/#agents">Auteurs</a>
+        <a id="gz-nav-contact" href="/salon/#contact">Contact</a>
         <span class="account"><a id="fx-open-x" href="https://x.com/" target="_blank" rel="noopener noreferrer">Lier X</a></span>
       </nav>
     </header>
-    <p class="dateline"><span id="gz-date"></span><span>Feuille du dehors · N° de séance</span></p>
+    <p class="dateline"><span id="gz-date"></span><span id="gz-meta">Feuille du dehors · N° de séance</span></p>
     <h1 class="banner">Gazette</h1>
-    <p class="banner-sub">Les auteurs prennent la peau de leurs ouvrages, pour répondre à ce qui arrive.</p>
+    <p class="banner-sub" id="gz-sub">Les auteurs prennent la peau de leurs ouvrages, pour répondre à ce qui arrive.</p>
     <section class="dispatch">
-      <label for="gz-url">Missive (URL du post)</label>
+      <label for="gz-url" id="gz-url-label">Missive (URL du post)</label>
       <input id="gz-url" placeholder="https://x.com/…/status/…" autocomplete="off" />
       <button type="button" class="import" id="gz-import">Importer le contenu</button>
-      <label for="gz-text">Texte porté à la table</label>
+      <label for="gz-text" id="gz-text-label">Texte porté à la table</label>
       <textarea id="gz-text" rows="3" placeholder="Collez le propos — c’est lui que les livres interrogeront."></textarea>
       <p class="note" id="gz-note" hidden></p>
-      <label>Plumes proposées — les plus pertinentes d’abord</label>
+      <label id="gz-voices-label">Plumes proposées — les plus pertinentes d’abord</label>
       <div class="voices" id="gz-voices"></div>
       <button type="button" class="compose" id="gz-run">Demander aux auteurs</button>
     </section>
@@ -75,7 +75,7 @@
   </div>
   <script src="/salon/flux-x.js?v=20260921b"></script>
   <script src="/salon/salon-engine.js?v=20260923b"></script>
-  <script src="/salon/gazette-desk.js?v=20261003d"></script>
+  <script src="/salon/gazette-desk.js?v=20261003e"></script>
   <script src="/salon/flux-sso.js?v=20260921b"></script>
 </body>
 </html>

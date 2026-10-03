@@ -80,51 +80,51 @@
 
   /* Domaines : ordre = priorité, premier match. Chacun porte un topos + une thèse. */
   var DOMAINS = [
-    { key: "liberte", label: "la liberté", re: /\b(libre|liberte|autonom|independan|volont|emancip|contrainte|servitude)\w*|\bfree\b|\bfreedom\b/,
+    { key: "liberte", label: "la liberté", re: /\b(libre|liberte|autonom|independan|volont|emancip|contrainte|servitude)\w*|\bfree\b|\bfreedom\b|\bliberty\b/,
       these: "la liberté n'est pas l'absence de contrainte, mais une loi qu'on se donne",
-      suite: "il reste à dire qui pose la loi — soi, la cité, ou le besoin" },
-    { key: "pouvoir", label: "le pouvoir", re: /\b(pouvoir|gouvern|etat|souverain|autorit|obeir|domin|tyrann|legitim|regime|politique|command)\w*|\bpower\b|\bstate\b/,
+      suite: "il reste à dire qui pose la loi — soi, la cité, ou le besoin", labelEn: "liberty", theseEn: "liberty is not the absence of constraint, but a law one gives oneself", suiteEn: "it remains to say who lays the law — oneself, the city, or need" },
+    { key: "pouvoir", label: "le pouvoir", re: /\b(pouvoir|gouvern|etat|souverain|autorit|obeir|domin|tyrann|legitim|regime|politique|command)\w*|\bpower\b|\bstate\b|\bgovern/,
       these: "le pouvoir se juge à ce qu'il fait tenir debout, non à ses titres",
-      suite: "reste à fixer la borne où l'obéissance cesse d'être un devoir" },
+      suite: "reste à fixer la borne où l'obéissance cesse d'être un devoir", labelEn: "power", theseEn: "power is judged by what it holds upright, not by its titles", suiteEn: "it remains to fix the bound where obedience stops being a duty" },
     { key: "justice", label: "la justice", re: /\b(justice|juste|injuste|droit|loi|equite|egalit|punition|chati|proces|tort)\w*|\bjust\b|\blaw\b/,
       these: "le juste ne se confond pas avec le légal, ni le légal avec le fort",
-      suite: "reste à dire sur quel critère on reconnaît l'équité quand la loi se tait" },
+      suite: "reste à dire sur quel critère on reconnaît l'équité quand la loi se tait", labelEn: "justice", theseEn: "the just is not confused with the legal, nor the legal with the strong", suiteEn: "it remains to say by what criterion equity is recognised when the law falls silent" },
     { key: "verite", label: "la vérité", re: /\b(verite|vrai|faux|erreur|savoir|connaiss|connaitre|ignorance|preuve|evidence|opinion|croyance|doute|science|raison|entendement)\w*|\btruth\b|\bknowledg/,
       these: "la vérité ne se décrète pas : elle se tient à l'épreuve de ce qui la contredit",
-      suite: "reste à choisir l'épreuve : l'expérience, la démonstration, ou l'usage" },
+      suite: "reste à choisir l'épreuve : l'expérience, la démonstration, ou l'usage", labelEn: "truth", theseEn: "truth is not decreed: it stands the test of what contradicts it", suiteEn: "it remains to choose the test: experience, demonstration, or use" },
     { key: "conscience", label: "la conscience", re: /\b(conscience|conscient|esprit|ame|pensee|penser|percept|subjectiv|phenomen|mind|mental|ia|intelligence artificielle|algorith|machine|automate|robot)\w*/,
       these: "la conscience se dit en plusieurs sens : il faut d'abord choisir le grain du sujet",
-      suite: "reste à nommer le critère : la sortie, la structure, ou le statut moral" },
+      suite: "reste à nommer le critère : la sortie, la structure, ou le statut moral", labelEn: "conscience", theseEn: "conscience is said in several senses: one must first choose the grain of the subject", suiteEn: "it remains to name the criterion: the output, the structure, or the moral status" },
     { key: "vertu", label: "la vertu", re: /\b(vertu|morale|devoir|obligation|honneur|honnete|caractere|sagesse|prudence|temperance|courage)\w*|\bvirtue\b|\bmoral\b/,
       these: "la vertu n'est pas un mot, c'est un milieu difficile entre deux excès",
-      suite: "reste à voir à quelle condition elle devient une habitude et non un effort" },
+      suite: "reste à voir à quelle condition elle devient une habitude et non un effort", labelEn: "virtue", theseEn: "virtue is not a word, it is a difficult mean between two excesses", suiteEn: "it remains to see on what condition it becomes a habit and not an effort" },
     { key: "bonheur", label: "le bonheur", re: /\b(bonheur|heureux|plaisir|joie|desir|envie|souffr|malheur|tristess|triste|contentement|jouissance|epicur|ataraxi)\w*|\bhappin|\bpleasure\b/,
       these: "le bonheur n'est pas le plus de plaisirs, mais le moins de troubles",
-      suite: "reste à distinguer ce qui dépend de nous de ce qui nous arrive" },
+      suite: "reste à distinguer ce qui dépend de nous de ce qui nous arrive", labelEn: "happiness", theseEn: "happiness is not the most pleasures, but the fewest troubles", suiteEn: "it remains to distinguish what depends on us from what happens to us" },
     { key: "education", label: "l'éducation", re: /\b(education|elever|eleve|enfant|ecole|enseign|instruire|apprendre|formation|pedagog)\w*|\beducat|\bchild\b|\bschool\b/,
       these: "on n'instruit pas un esprit comme on remplit un vase",
-      suite: "reste à savoir ce qui, dans une éducation, rend l'élève capable de juger seul" },
+      suite: "reste à savoir ce qui, dans une éducation, rend l'élève capable de juger seul", labelEn: "education", theseEn: "a mind is not instructed the way a vase is filled", suiteEn: "it remains to know what, in an education, makes the pupil able to judge alone" },
     { key: "travail", label: "le travail et l'échange", re: /\b(travail|labour|salari|argent|richesse|valeur|marche|echange|propriet|capital|production|economi|commerce|monnaie)\w*|\bwork\b|\bmoney\b|\bwealth\b|\bmarket\b/,
       these: "l'échange produit des valeurs, et il en distribue les charges",
-      suite: "reste à savoir qui porte le coût réel et qui en capte le prix" },
+      suite: "reste à savoir qui porte le coût réel et qui en capte le prix", labelEn: "work and exchange", theseEn: "exchange produces values, and it distributes their burdens", suiteEn: "it remains to know who bears the real cost and who captures the price" },
     { key: "nature", label: "la nature", re: /\b(nature|natural|environnement|climat|espece|animal|vivant|matiere|ecolog)\w*|\blife\b/,
       these: "la nature ne se contente pas d'être un décor : elle impose ses épreuves",
-      suite: "reste à décider ce qui, de la règle ou du milieu, décide de ce qui survit" },
+      suite: "reste à décider ce qui, de la règle ou du milieu, décide de ce qui survit", labelEn: "nature", theseEn: "nature is not content to be a backdrop: it imposes its trials", suiteEn: "it remains to decide what, rule or environment, decides what survives" },
     { key: "religion", label: "la providence et la foi", re: /\b(dieu|providence|foi|croyance|religio|sacr|theolog|eglise|divin|grace|priere|ecriture)\w*|\bgod\b|\bfaith\b/,
       these: "nommer providence ce qui crève l'œil est une commodité, pas une preuve",
-      suite: "reste à savoir si le malheur appelle une révérence ou un remède" },
+      suite: "reste à savoir si le malheur appelle une révérence ou un remède", labelEn: "providence and faith", theseEn: "calling providence what stares one in the face is a convenience, not a proof", suiteEn: "it remains to know whether misfortune calls for reverence or a remedy" },
     { key: "amour", label: "l'amour et le désir", re: /\b(amour|aime|aimer|desir|passion|jalousi|mariage|seduct)\w*|\blove\b|\bdesire\b/,
       these: "l'amour mêle l'attachement, le calcul et l'image qu'on veut donner",
-      suite: "reste à distinguer le désir d'un autre du désir d'être estimé" },
+      suite: "reste à distinguer le désir d'un autre du désir d'être estimé", labelEn: "love and desire", theseEn: "love blends attachment, calculation, and the image one wants to give", suiteEn: "it remains to distinguish the desire for another from the desire to be esteemed" },
     { key: "art", label: "l'art et la beauté", re: /\b(oeuvre|beaut|beau|esthtique|poesie|poeme|roman|theatre|musique|peinture|imitation)\w*|\bart\b|\bbeauty\b|\bpoetry\b/,
       these: "l'œuvre ne dit pas la règle : elle en donne la forme visible",
-      suite: "reste à savoir si l'art imite le monde ou en instruit la connaissance" },
+      suite: "reste à savoir si l'art imite le monde ou en instruit la connaissance", labelEn: "art and beauty", theseEn: "the work does not state the rule: it gives its visible form", suiteEn: "it remains to know whether art imitates the world or instructs knowledge of it" },
     { key: "guerre", label: "la guerre et la paix", re: /\b(guerre|paix|arme|combat|ennemi|strateg|victoire|defaite|violence|conflit|bataille)\w*|\bwar\b|\bpeace\b/,
       these: "la victoire parfaite est d'avoir rendu le combat inutile",
-      suite: "reste à fixer ce qu'il en coûte de gagner une guerre contre soi-même" },
+      suite: "reste à fixer ce qu'il en coûte de gagner une guerre contre soi-même", labelEn: "war and peace", theseEn: "the perfect victory is having made the fight useless", suiteEn: "it remains to fix what it costs to win a war against oneself" },
     { key: "temps", label: "le temps et la mort", re: /\b(temps|mort|mourir|mortel|vieillir|duree|souvenir|memoire|avenir|futur|eternite)\w*|\btime\b|\bdeath\b/,
       these: "le temps ne se possède pas : il se dépense",
-      suite: "reste à savoir ce qui, du souvenir ou du projet, donne prix à l'instant" },
+      suite: "reste à savoir ce qui, du souvenir ou du projet, donne prix à l'instant", labelEn: "time and death", theseEn: "time is not possessed: it is spent", suiteEn: "it remains to know what, memory or project, gives the moment its worth" },
   ];
   /* Domaine : on classe par score — nombre de clés trouvées, pondéré par la
    * position (le sujet de la question passe avant l'incise). Déterministe. */
@@ -175,9 +175,10 @@
     var tms = terms(raw);
     var demand = demandOf(raw);
     var subject = dom ? dom.label : (tms.length ? tms[0] : "la question");
-    return {
+    var scLang = /\b(the|what|how|why|is|are|of|to|should|must|does|and|with)\b/.test(norm(raw)) && !/\b(le|la|les|que|qui|est|une|des|pour)\b/.test(norm(raw)) ? "en" : "fr";
+    var sc = {
       raw: raw,
-      lang: /\b(the|what|how|why|is|are|of|to|should|must|does|and|with)\b/.test(norm(raw)) && !/\b(le|la|les|que|qui|est|une|des|pour)\b/.test(norm(raw)) ? "en" : "fr",
+      lang: scLang,
       terms: tms,
       subject: subject,
       demand: demand,
@@ -188,6 +189,12 @@
       suite: dom ? dom.suite : "",
       concepts: conceptsIn(raw),
     };
+    if (scLang === "en" && dom) {
+      if (dom.labelEn) { sc.label = dom.labelEn; sc.subject = dom.labelEn; }
+      if (dom.theseEn) sc.these = dom.theseEn;
+      if (dom.suiteEn) sc.suite = dom.suiteEn;
+    }
+    return sc;
   }
 
   var CONCEPTS = [
@@ -314,10 +321,29 @@
     temps: { definition: "le temps ne se possède pas ; il se dépense" },
     generique: {},
   };
+  /* English mirror of THESES (used only when lang === "en"). */
+  var THESES_EN = {
+    liberte: { definition: "being free is not doing what one wants, it is wanting what one does", norme: "no one is forced to be free without being robbed of their liberty" },
+    pouvoir: { norme: "whoever governs must first account for what they hold together", definition: "power is legitimate only when it can be contested" },
+    justice: { definition: "the just is not whatever the strongest calls just", norme: "one disobeys an unjust law only by working to change it" },
+    verite: { definition: "true is what withstands the test set against it", cause: "error comes less from ignorance than from haste" },
+    conscience: { definition: "conscience is said in several senses, and confusing the senses breeds paradoxes" },
+    vertu: { norme: "virtue is measured at the mean, between two equally lost extremes" },
+    bonheur: { definition: "happiness rests more on few troubles than on many pleasures" },
+    education: { maniere: "judgement is formed by practice, not by the lesson" },
+    travail: { cause: "value is captured where the cost falls on others" },
+    nature: { cause: "what survives did not ask permission to prevail" },
+    religion: { definition: "calling the scandal of the world providence is a comfort, not a proof" },
+    amour: { definition: "to love is to will the other's good, not the image one takes of it" },
+    art: { definition: "the work does not prove: it makes visible" },
+    guerre: { norme: "the best victory is the one that makes the fight useless" },
+    temps: { definition: "time is not possessed; it is spent" },
+    generique: {},
+  };
   /* Thèse : d'abord celle de l'AUTEUR (sa mémoire), cadrée par la demande ;
    * le domaine ne sert que de repli. C'est ce qui distingue les voix. */
-  function authorThesis(author) {
-    var blurb = String((author && (author.blurb || author.blurbEn)) || "").replace(/\s+/g, " ").trim();
+  function authorThesis(author, en) {
+    var blurb = String((author && (en ? (author.blurbEn || "") : (author.blurb || author.blurbEn))) || "").replace(/\s+/g, " ").trim();
     if (!blurb) return "";
     var idx = blurb.search(/[.:—]/);
     var head = idx > 18 ? blurb.slice(idx + 1) : blurb;
@@ -325,14 +351,15 @@
     if (head.length < 12) head = blurb.replace(/\.\s*$/, "");
     return head;
   }
-  function thesisFor(sc, author) {
-    var own = authorThesis(author);
+  function thesisFor(sc, author, lang) {
+    var en = lang === "en";
+    var own = authorThesis(author, en);
     if (own) return own;
-    var table = THESES[sc.domain] || {};
+    var table = (en ? THESES_EN : THESES)[sc.domain] || {};
     if (table[sc.demand]) return table[sc.demand];
     if (table.definition) return table.definition;
     if (sc.these) return sc.these;
-    return "\"" + (sc.label || "la question") + "\" demande d'abord d'être circonscrite";
+    return en ? "\"" + (sc.label || "the question") + "\" first needs to be circumscribed" : "\"" + (sc.label || "la question") + "\" demande d'abord d'être circonscrite";
   }
   /* La demande colore l'énoncé de la thèse (norme, définition, cause…). */
   function phraseFor(sc, author) {
@@ -347,7 +374,7 @@
   }
   /* On cite le point de l'autre sans son habillage de demande. */
   function stripWrapper(s) {
-    return String(s || "").replace(/^(sur ce qu'il faut faire, ma règle est simple : |je réponds par une définition : |la cause, à mon sens, se dit ainsi : |cela se fait par degrés : |la réponse tient à ceci : )/i, "");
+    return String(s || "").replace(/^(sur ce qu'il faut faire, ma règle est simple : |je réponds par une définition : |la cause, à mon sens, se dit ainsi : |cela se fait par degrés : |la réponse tient à ceci : |on what must be done, my rule is simple: |I answer with a definition: |the cause, as I see it, is this: |this is done by degrees: |the answer holds in this: )/i, "");
   }
 
   /* Planificateur dialectique : qui parle, à qui, sur quel point, avec quel acte.
@@ -377,6 +404,7 @@
     var author = input.author || {};
     var sc = input.scope || scope(input.question || "");
     var lang = input.lang || sc.lang || "fr";
+    var en = lang === "en";
     var act = input.act || "reponse";
     var method = input.method || author.method || "auto";
     var passage = input.passage;
@@ -400,54 +428,54 @@
 
     /* 1. Ressaisir — nommer à qui l'on parle et le point qu'il a posé. */
     if (move === "objecte") {
-      clauses.push(toName + ", tu soutiens que " + toLow(point || subject) + " — je ne l’accorde pas encore.");
+      clauses.push(en ? toName + ", you hold that " + toLow(point || subject) + " — I do not grant it yet." : toName + ", tu soutiens que " + toLow(point || subject) + " — je ne l’accorde pas encore.");
     } else if (move === "precise") {
-      clauses.push(toName + ", ton objection portait sur ce point : " + toLow(point || subject) + ". Je précise.");
+      clauses.push(en ? toName + ", your objection bore on this point: " + toLow(point || subject) + ". I refine." : toName + ", ton objection portait sur ce point : " + toLow(point || subject) + ". Je précise.");
     } else if (move === "minute") {
-      clauses.push("Je reprends la table pour la minute : la question reste « " + qc + " ».");
+      clauses.push(en ? "I take the table for the minute: the question remains at \"" + qc + "\"." : "Je reprends la table pour la minute : la question reste « " + qc + " ».");
     } else if (last && last.prise) {
-      clauses.push(toName + ", je reprends ton point : " + toLow(last.prise) + ".");
+      clauses.push(en ? toName + ", I take up your point: " + toLow(last.prise) + "." : toName + ", je reprends ton point : " + toLow(last.prise) + ".");
     } else {
-      clauses.push("L’hôte demande : " + qc + ".");
+      clauses.push(en ? "The host asks: " + qc + "." : "L’hôte demande : " + qc + ".");
     }
-    if (move !== "minute") clauses.push("Je le garde pour fil : il s’agit de " + subject + ", non d’un autre dossier.");
+    if (move !== "minute") clauses.push(en ? "I keep it as the thread: it is about " + subject + ", not another matter." : "Je le garde pour fil : il s’agit de " + subject + ", non d’un autre dossier.");
 
     /* 2. Position — la thèse du convive (elenchus : définir, ne pas conclure). */
     if (method === "elenchus") {
-      prise = "Je ne tiens pas encore la définition que tu mets sous ces mots.";
-      clauses.push("Avant de conclure, dis-moi ce que tu mets sous « " + subject + " » : une seule chose, ou plusieurs que l’on confond ?");
+      prise = en ? "I do not yet hold the definition you put under these words." : "Je ne tiens pas encore la définition que tu mets sous ces mots.";
+      clauses.push(en ? "Before concluding, tell me what you put under \"" + subject + "\": one thing, or several that you confuse?" : "Avant de conclure, dis-moi ce que tu mets sous « " + subject + " » : une seule chose, ou plusieurs que l’on confond ?");
     } else {
-      var th = thesisFor(sc, author);
+      var th = thesisFor(sc, author, lang);
       prise = closeSentence(th);
-      clauses.push((selfLast ? "Comme je le tenais déjà : " : "Ma prise, sur ce point : ") + th + ".");
+      clauses.push((selfLast ? (en ? "As I already held: " : "Comme je le tenais déjà : ") : (en ? "My claim, on this point: " : "Ma prise, sur ce point : ")) + th + ".");
     }
 
     /* 3. Ancrer — une œuvre nommée, une phrase entière, ou l'aveu du manque. */
     if (grounded) {
-      clauses.push("Mon lieu est « " + work + " » : " + sentence);
+      clauses.push(en ? "My source is \"" + work + "\": " + sentence : "Mon lieu est « " + work + " » : " + sentence);
     } else {
       var wl = (author.works && author.works.length) ? (author.works[0].title || author.works[0]) : "";
       clauses.push(wl
-        ? "Le passage le plus proche ne tranche pas cette question ; je m’en tiens donc à ce que je peux signer depuis « " + wl + " », sans citer à faux."
-        : "Aucun de mes livres ne tranche ici : je ne fabrique pas de citation.");
+        ? (en ? "The closest passage does not decide this question; I therefore hold to what I can sign from \"" + wl + "\", without citing falsely." : "Le passage le plus proche ne tranche pas cette question ; je m’en tiens donc à ce que je peux signer depuis « " + wl + " », sans citer à faux.")
+        : (en ? "None of my books decides here: I do not invent quotations." : "Aucun de mes livres ne tranche ici : je ne fabrique pas de citation."));
     }
 
     /* 4. Avancer — conséquence ou question courte, adressée à celui à qui l'on parle. */
-    var suite = String(sc.suite || "").replace(/^(il )?reste à /, "");
+    var suite = String(sc.suite || "").replace(/^(il )?reste à |^it remains to /, "");
     if (method === "elenchus") {
-      clauses.push("Tiens-tu cette définition jusqu’au bout, ou la vois-tu déjà se défaire ?");
+      clauses.push(en ? "Do you hold that definition to the end, or do you already see it coming apart?" : "Tiens-tu cette définition jusqu’au bout, ou la vois-tu déjà se défaire ?");
     } else if (move === "objecte") {
-      clauses.push("Ce n’est pas ta personne que je presse, " + toName + " : c’est ce que ta phrase ne peut plus soutenir.");
+      clauses.push(en ? "It is not your person I press, " + toName + ": it is what your sentence can no longer sustain." : "Ce n’est pas ta personne que je presse, " + toName + " : c’est ce que ta phrase ne peut plus soutenir.");
     } else if (move === "precise") {
-      clauses.push("Tiens-tu ton objection jusqu’au bout, " + toName + ", ou faut-il distinguer davantage ?");
+      clauses.push(en ? "Do you hold your objection to the end, " + toName + ", or must we distinguish further?" : "Tiens-tu ton objection jusqu’au bout, " + toName + ", ou faut-il distinguer davantage ?");
     } else if (move === "minute") {
-      clauses.push("Voilà les nœuds encore ouverts ; à la table de trancher.");
+      clauses.push(en ? "These are the knots still open; the table must decide." : "Voilà les nœuds encore ouverts ; à la table de trancher.");
     } else if (suite) {
-      clauses.push("Ce qui reste à décider : " + suite + ".");
+      clauses.push(en ? "What remains to be decided: " + suite + "." : "Ce qui reste à décider : " + suite + ".");
     } else if (last) {
-      clauses.push("Voilà ce que je signe sur ton point, " + toName + "; la suite est à qui voudra la reprendre.");
+      clauses.push(en ? "That is what I sign on your point, " + toName + "; what follows belongs to whoever takes it up." : "Voilà ce que je signe sur ton point, " + toName + "; la suite est à qui voudra la reprendre.");
     } else {
-      clauses.push("Voilà ce que je signe ; la suite est à qui voudra objecter.");
+      clauses.push(en ? "That is what I sign; what follows belongs to whoever wishes to object." : "Voilà ce que je signe ; la suite est à qui voudra objecter.");
     }
 
     return { prise: prise, text: clauses.join(" "), grounded: grounded };

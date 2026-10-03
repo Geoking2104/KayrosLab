@@ -29,6 +29,109 @@
   var voicesTouched = false;
   var NAME_CACHE = null;
 
+  /* ---------------------------------------------------------------- langues */
+  /* Même règle que le reste du Salon : une seule langue à la fois.
+     Ordre : salon-locale (stocké par la page principale) → lang du document → fr. */
+  function locale() {
+    var l = "";
+    try { l = localStorage.getItem("salon-locale") || ""; } catch (e) {}
+    if (l === "en") return "en";
+    if (l === "fr") return "fr";
+    try { if (document.documentElement && document.documentElement.lang === "en") return "en"; } catch (e) {}
+    return "fr";
+  }
+  var COPY = {
+    fr: {
+      pageTitle: "Gazette du Salon",
+      sub: "Les auteurs prennent la peau de leurs ouvrages, pour répondre à ce qui arrive.",
+      meta: "Feuille du dehors · N° de séance",
+      wordsub: "cercles littéraires",
+      navCircles: "Cercles", navGazette: "Gazette", navAuthors: "Auteurs", navContact: "Contact",
+      missive: "Missive (URL du post)",
+      importBtn: "Importer le contenu",
+      textLabel: "Texte porté à la table",
+      textPh: "Collez le propos — c’est lui que les livres interrogeront.",
+      voicesLabel: "Plumes proposées — les plus pertinentes d’abord",
+      runBtn: "Demander aux auteurs",
+      fetching: "On relève le propos…",
+      fetched: "Propos relevé du post.",
+      imported: "Propos importé — les auteurs peuvent répondre.",
+      badLink: "Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.",
+      failed: "Le post n’a pas pu être lu",
+      failedPreview: " (aperçu hors-ligne)",
+      failedTail: " — collez le texte du propos, puis « Demander aux auteurs ».",
+      reading: "Lecture du lien…",
+      readOk: "Importé ✓",
+      readFail: "Lien non lu",
+      noText: "Portez d’abord une missive — un lien, ou le propos.",
+      notOnTable: "Le propos n’est pas encore à table — collez-le, ou vérifiez le lien.",
+      loneUrl: "Ce lien n’a pas encore livré son texte — « Importer le contenu », ou collez le propos.",
+      noMatch: "Rien d’assez proche dans les œuvres chargées — essayez un propos plus concret.",
+      answer: "Réponse",
+      extract: "Extrait",
+      pick: "Sélectionner",
+      picked: "Choisie ✓",
+      copy: "Copier",
+      copied: "Copié.",
+      carry: "Porter sur X",
+      takenFrom: "Propos repris du post.",
+      dateLocale: "fr-FR",
+    },
+    en: {
+      pageTitle: "Salon Gazette",
+      sub: "The authors put on the skin of their works, to answer what arrives.",
+      meta: "Sheet from outside · Session no.",
+      wordsub: "literary circles",
+      navCircles: "Circles", navGazette: "Gazette", navAuthors: "Authors", navContact: "Contact",
+      missive: "Dispatch (post URL)",
+      importBtn: "Fetch the content",
+      textLabel: "Text brought to the table",
+      textPh: "Paste the statement — the books will question it.",
+      voicesLabel: "Proposed pens — most relevant first",
+      runBtn: "Ask the authors",
+      fetching: "Fetching the statement…",
+      fetched: "Statement fetched from the post.",
+      imported: "Statement imported — the authors can answer.",
+      badLink: "Link not recognized — paste an x.com/twitter.com link, or the statement text.",
+      failed: "The post could not be read",
+      failedPreview: " (offline preview)",
+      failedTail: " — paste the statement text, then “Ask the authors”.",
+      reading: "Reading the link…",
+      readOk: "Imported ✓",
+      readFail: "Link not read",
+      noText: "Bring a dispatch first — a link, or the statement.",
+      notOnTable: "The statement is not at the table yet — paste it, or check the link.",
+      loneUrl: "This link has not delivered its text yet — “Fetch the content”, or paste the statement.",
+      noMatch: "Nothing close enough in the loaded works — try a more concrete statement.",
+      answer: "Answer",
+      extract: "Extract",
+      pick: "Select",
+      picked: "Chosen ✓",
+      copy: "Copy",
+      copied: "Copied.",
+      carry: "Carry to X",
+      takenFrom: "Statement taken from the post.",
+      dateLocale: "en-GB",
+    },
+  };
+  function t(key) { var l = locale(); return (COPY[l] || COPY.fr)[key] || COPY.fr[key] || key; }
+  function copyFor(l) { return COPY[l] || COPY.fr; }
+
+  function applyCopy() {
+    var l = locale();
+    try { document.documentElement.lang = l; } catch (e) {}
+    try { document.title = t("pageTitle"); } catch (e) {}
+    function set(id, val) { var el = document.getElementById(id); if (el && val != null) el.textContent = val; }
+    function setPh(id, val) { var el = document.getElementById(id); if (el && val != null) el.placeholder = val; }
+    set("gz-sub", t("sub")); set("gz-meta", t("meta")); set("gz-wordsub", t("wordsub"));
+    set("gz-nav-circles", t("navCircles")); set("gz-nav-gazette", t("navGazette"));
+    set("gz-nav-authors", t("navAuthors")); set("gz-nav-contact", t("navContact"));
+    set("gz-url-label", t("missive")); setPh("gz-url", "https://x.com/…/status/…");
+    set("gz-import", t("importBtn"));
+    set("gz-text-label", t("textLabel")); setPh("gz-text", t("textPh"));
+    set("gz-voices-label", t("voicesLabel")); set("gz-run", t("runBtn"));
+  }
+
   /* ---------------------------------------------------------- url & propos */
 
   function parseStatus(raw) {
@@ -107,7 +210,7 @@
     if (!parsed || !parsed.id) return Promise.resolve(false);
     if (!force && lastFetched === parsed.id) return Promise.resolve(false);
     lastFetched = parsed.id;
-    note("On relève le propos…");
+    note(t("fetching"));
     return fetchFx(parsed)
       .catch(function () { return fetchVx(parsed); })
       .catch(function () { return fetchFixupx(parsed); })
@@ -115,11 +218,11 @@
       .then(function (hit) {
         if (!hit || !hit.text) throw new Error("empty");
         fillThesis(hit.handle || parsed.handle, hit.text);
-        note("Propos relevé du post.");
+        note(t("fetched"));
         return true;
       })
       .catch(function () {
-        note("Le post n’a pas pu être lu" + (isManagedPreview() ? " (aperçu hors-ligne)" : "") + " — collez le texte du propos, puis « Demander aux auteurs ».");
+        note(t("failed") + (isManagedPreview() ? t("failedPreview") : "") + t("failedTail"));
         var box = document.getElementById("gz-text");
         if (box && box.focus) { try { box.focus(); } catch (e) {} }
         return false;
@@ -131,7 +234,7 @@
     if (!box || !text) return;
     var line = (handle ? "@" + String(handle).replace(/^@/, "") + " — " : "") + text;
     box.value = clip(line, 480);
-    box.placeholder = "Propos repris du post.";
+    box.placeholder = t("takenFrom");
   }
 
   function decodeEntities(text) {
@@ -195,7 +298,7 @@
     var map = {};
     base.forEach(function (a) {
       map[a.id] = {
-        id: a.id, name: a.name || a.id, blurb: a.blurb || "",
+        id: a.id, name: a.name || a.id, blurb: a.blurb || "", blurbEn: a.blurbEn || "",
         works: Array.isArray(a.works) ? a.works.map(function (w) { return typeof w === "string" ? w : (w && w.title) || ""; }).filter(Boolean) : [],
         kind: a.kind || ""
       };
@@ -313,6 +416,7 @@
       id: id,
       name: base.name || authorName(id),
       blurb: base.blurb || "",
+      blurbEn: base.blurbEn || "",
       works: base.works || [],
       kind: base.kind || "",
     };
@@ -323,7 +427,7 @@
     var E = engine();
     if (!E || !E.answer) return null;
     try {
-      var out = E.answer({ author: authorObject(authorId), question: question, corpus: corpus || [], lang: "fr" });
+      var out = E.answer({ author: authorObject(authorId), question: question, corpus: corpus || [], lang: locale() });
       if (!out || !out.text) return null;
       return {
         text: out.text,
@@ -344,8 +448,8 @@
   function article(authorId, spoken, statusId) {
     var art = document.createElement("article");
     art.className = "col";
-    art.innerHTML = '<p class="rubric">' + (spoken.response ? "Réponse" : "Extrait") + '</p><h2></h2><p></p><cite></cite>' +
-      '<p class="acts"><button type="button" data-act="pick">Sélectionner</button><button type="button" data-act="copy">Copier</button><button type="button" data-act="x">Porter sur X</button></p>';
+    art.innerHTML = '<p class="rubric">' + (spoken.response ? t("answer") : t("extract")) + '</p><h2></h2><p></p><cite></cite>' +
+      '<p class="acts"><button type="button" data-act="pick">' + t("pick") + '</button><button type="button" data-act="copy">' + t("copy") + '</button><button type="button" data-act="x">' + t("carry") + '</button></p>';
     art.querySelector("h2").textContent = authorName(authorId);
     var ps = art.querySelectorAll("p");
     ps[1].textContent = spoken.text;
@@ -361,16 +465,16 @@
       document.querySelectorAll("#fx-gazette article.is-picked").forEach(function (el) {
         el.classList.remove("is-picked");
         var b = el.querySelector('[data-act="pick"]');
-        if (b) b.textContent = "Sélectionner";
+        if (b) b.textContent = t("pick");
       });
       if (!wasPicked) {
         art.classList.add("is-picked");
-        this.textContent = "Choisie ✓";
+        this.textContent = t("picked");
       }
     });
     acts.querySelector('[data-act="copy"]').addEventListener("click", function () {
       if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
-      this.textContent = "Copié.";
+      this.textContent = t("copied");
     });
     acts.querySelector('[data-act="x"]').addEventListener("click", function () {
       if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
@@ -388,16 +492,16 @@
     var parsed = urlBox ? parseStatus(urlBox.value) : null;
     if (!thesis || isLoneUrl(thesis)) {
       var msg;
-      if (isLoneUrl(thesis)) msg = "Ce lien n’a pas encore livré son texte — « Importer le contenu », ou collez le propos.";
-      else if (parsed) msg = "Le propos n’est pas encore à table — collez-le, ou vérifiez le lien.";
-      else msg = "Portez d’abord une missive — un lien, ou le propos.";
+      if (isLoneUrl(thesis)) msg = t("loneUrl");
+      else if (parsed) msg = t("notOnTable");
+      else msg = t("noText");
       folio.innerHTML = '<p class="empty">' + msg + "</p>";
       return Promise.resolve();
     }
     return loadCorpus().then(function (corpus) {
       var ranked = rankTexts(corpus || {}, thesis);
       if (!ranked.length) {
-        folio.innerHTML = '<p class="empty">Rien d’assez proche dans les œuvres chargées — essayez un propos plus concret.</p>';
+        folio.innerHTML = '<p class="empty">' + t("noMatch") + "</p>";
         return;
       }
       paintVoices(ranked);
@@ -438,7 +542,7 @@
     var tparsed = tbox ? parseStatus(extractUrl(tbox.value)) : null;
     if (tparsed) return fetchAndCompose(tparsed, force, scroll);
     if (/https?:\/\//i.test(raw)) {
-      note("Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.");
+      note(t("badLink"));
       return compose().then(function () { return false; });
     }
     if (raw.length >= 8) {
@@ -446,7 +550,7 @@
       var box = document.getElementById("gz-text");
       if (box && raw !== box.value.trim()) {
         box.value = clip(raw, 480);
-        note("Propos importé — les auteurs peuvent répondre.");
+        note(t("imported"));
       }
       return compose().then(function () { if (scroll) reveal(); return true; });
     }
@@ -456,8 +560,9 @@
   /* --------------------------------------------------------------- amorce */
 
   function boot() {
+    applyCopy();
     var d = document.getElementById("gz-date");
-    if (d) d.textContent = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    if (d) d.textContent = new Date().toLocaleDateString(t("dateLocale"), { weekday: "long", day: "numeric", month: "long", year: "numeric" });
     loadCorpus();
     loadAuthorsFromSalon(function () { NAME_CACHE = null; paintVoices(); });
     var run = document.getElementById("gz-run");
@@ -472,14 +577,14 @@
         var btn = this;
         if (btn.getAttribute("data-busy")) return;
         btn.setAttribute("data-busy", "1");
-        btn.textContent = "Lecture du lien…";
+        btn.textContent = t("reading");
         ingestThenCompose(true, true).then(function (ok) {
           btn.removeAttribute("data-busy");
-          btn.textContent = ok ? "Importé ✓" : "Lien non lu";
-          setTimeout(function () { btn.textContent = "Importer le contenu"; }, 2600);
+          btn.textContent = ok ? t("readOk") : t("readFail");
+          setTimeout(function () { btn.textContent = t("importBtn"); }, 2600);
         }, function () {
           btn.removeAttribute("data-busy");
-          btn.textContent = "Importer le contenu";
+          btn.textContent = t("importBtn");
         });
       });
     }
@@ -510,7 +615,7 @@
 
   /* ---------------------------------------------------- exports (tests) */
 
-  var API = { parseStatus: parseStatus, rankTexts: rankTexts, respond: respond, isLoneUrl: isLoneUrl, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
+  var API = { parseStatus: parseStatus, rankTexts: rankTexts, respond: respond, isLoneUrl: isLoneUrl, copyFor: copyFor, locale: locale, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SalonGazette = API;
 

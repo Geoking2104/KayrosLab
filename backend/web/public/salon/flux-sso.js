@@ -18,6 +18,14 @@
       : "https://x.com/";
     window.open(href, "_blank", "noopener,noreferrer");
   }
+  function loc() {
+    try {
+      var l = localStorage.getItem("salon-locale");
+      if (l === "en") return "en";
+      if (l === "fr") return "fr";
+    } catch (e) {}
+    return document.documentElement.lang === "en" ? "en" : "fr";
+  }
   function boot() {
     var enter = document.getElementById("salon-auth");
     if (enter) enter.remove();
@@ -30,7 +38,7 @@
       link.setAttribute("data-hook", "1");
       link.addEventListener("click", openX);
     }
-    link.textContent = "Lier X";
+    link.textContent = loc() === "en" ? "Link X" : "Lier X";
     link.href = "https://x.com/";
     link.target = "_blank";
     link.rel = "noopener noreferrer";

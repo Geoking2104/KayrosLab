@@ -48,3 +48,4 @@ Description compl�te (questionnaire de revue de l'app X, en anglais) : [docs/S
 - Les plumes sont classées par proximité avec le propos (moteur du Salon + `corpus.json`) ; les 4 plus pertinentes sont cochées d'office.
 - **Les auteurs répondent** : dès que le contenu est importé, chaque plume compose une réponse ancrée dans son texte le plus proche (aveu du manque si rien ne répond) ; la feuille est amenée à l'écran.
 - Gestes : « Importer le contenu » (relève le lien collé — états Lecture/Importé/Lien non lu ; en cas d'échec, message clair et focus sur le champ texte, y compris « aperçu hors-ligne »), « Sélectionner » (une seule réponse choisie, mise en avant), « Copier », « Porter sur X » (en réponse au post si l'URL est fournie).
+- Langues (I18N) : le pupitre suit la langue du Salon (`salon-locale`, fr/en) — interface ET réponses composées dans cette langue, jamais mélangées ; les citations (propos du post, phrases des œuvres) restent dans leur langue d'origine.
