@@ -46,4 +46,5 @@ Description compl�te (questionnaire de revue de l'app X, en anglais) : [docs/S
 
 - Le propos est relevé du lien **sans compte ni jeton** : `fxtwitter`, puis `vxtwitter`, puis l'oembed de X (8 s max par source) ; un propos collé sans lien est **importé aussitôt** dans « Texte porté à la table », et en cas d'échec un message invite à le coller.
 - Les plumes sont classées par proximité avec le propos (moteur du Salon + `corpus.json`) ; les 4 plus pertinentes sont cochées d'office.
-- **Les auteurs répondent** : chaque plume compose une réponse ancrée dans son texte le plus proche (aveu du manque si rien ne répond) ; gestes « Retenir » (copier) et « Porter sur X » (en réponse au post si l'URL est fournie).
+- **Les auteurs répondent** : dès que le contenu est importé, chaque plume compose une réponse ancrée dans son texte le plus proche (aveu du manque si rien ne répond) ; la feuille est amenée à l'écran.
+- Gestes : « Importer le contenu » (relève le lien collé), « Sélectionner » (une seule réponse choisie, mise en avant), « Copier », « Porter sur X » (en réponse au post si l'URL est fournie).

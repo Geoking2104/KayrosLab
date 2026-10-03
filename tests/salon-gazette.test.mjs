@@ -89,3 +89,16 @@ test('réponse : l’auteur répond depuis son texte le plus proche (ou avoue le
   const bare = G.respond('a', 'Que reste-t-il de la liberté ?', []);
   assert.ok(bare && bare.text && bare.text.length > 30, 'sans passage, l’auteur parle sans citer à faux');
 });
+
+test('pupitre : bouton d’import et sélection d’une réponse', () => {
+  const html = read('backend/web/public/salon/flux/index.html');
+  const js = read('backend/web/public/salon/gazette-desk.js');
+  assert.match(html, /id="gz-import"/);
+  assert.match(html, /Importer le contenu/);
+  assert.match(html, /Demander aux auteurs/);
+  assert.match(js, /gz-import/);
+  assert.match(js, /data-act="pick"/);
+  assert.match(js, /Sélectionner/);
+  assert.match(js, /Choisie/);
+  assert.match(js, /is-picked/);
+});

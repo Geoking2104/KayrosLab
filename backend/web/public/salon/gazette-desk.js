@@ -1,8 +1,8 @@
 /* Gazette — le propos monte du lien, les auteurs répondent.
-   Simple par défaut : collez une URL ou le propos ; le texte est importé
-   dans « Texte porté à la table » (relevé automatique fxtwitter → vxtwitter
-   → oembed pour un lien), puis les auteurs les plus proches répondent depuis
-   leurs livres (moteur du Salon + corpus). Les plumes s'ajustent toutes seules. */
+   Simple par défaut : collez une URL ou le propos puis « Importer le contenu »
+   (relève automatique fxtwitter → vxtwitter → oembed pour un lien ; import
+   direct pour un texte) ; les auteurs les plus proches répondent depuis leurs
+   livres (moteur du Salon + corpus) et l'on peut sélectionner une réponse. */
 (function () {
   var FALLBACK = [
     { id: "voltaire", name: "Voltaire", blurb: "L'ironie contre les dogmes.", works: ["Candide, ou l'optimisme", "Zadig", "Micromégas"], kind: "philosophe" },
@@ -326,7 +326,8 @@
   function article(authorId, spoken, statusId) {
     var art = document.createElement("article");
     art.className = "col";
-    art.innerHTML = '<p class="rubric">' + (spoken.response ? "Réponse" : "Extrait") + '</p><h2></h2><p></p><cite></cite><p class="acts"><button type="button" data-act="copy">Retenir</button><button type="button" data-act="x">Porter sur X</button></p>';
+    art.innerHTML = '<p class="rubric">' + (spoken.response ? "Réponse" : "Extrait") + '</p><h2></h2><p></p><cite></cite>' +
+      '<p class="acts"><button type="button" data-act="pick">Sélectionner</button><button type="button" data-act="copy">Copier</button><button type="button" data-act="x">Porter sur X</button></p>';
     art.querySelector("h2").textContent = authorName(authorId);
     var ps = art.querySelectorAll("p");
     ps[1].textContent = spoken.text;
@@ -337,9 +338,21 @@
     if (kind) citeBits.push(kind);
     art.querySelector("cite").textContent = citeBits.join(" · ");
     var acts = art.querySelector(".acts");
+    acts.querySelector('[data-act="pick"]').addEventListener("click", function () {
+      var wasPicked = art.classList.contains("is-picked");
+      document.querySelectorAll("#fx-gazette article.is-picked").forEach(function (el) {
+        el.classList.remove("is-picked");
+        var b = el.querySelector('[data-act="pick"]');
+        if (b) b.textContent = "Sélectionner";
+      });
+      if (!wasPicked) {
+        art.classList.add("is-picked");
+        this.textContent = "Choisie ✓";
+      }
+    });
     acts.querySelector('[data-act="copy"]').addEventListener("click", function () {
       if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
-      this.textContent = "Retenu.";
+      this.textContent = "Copié.";
     });
     acts.querySelector('[data-act="x"]').addEventListener("click", function () {
       if (navigator.clipboard && spoken.text) navigator.clipboard.writeText(spoken.text).catch(function () {});
@@ -384,14 +397,23 @@
     });
   }
 
-  function ingestThenCompose(force) {
+  function reveal() {
+    var folio = document.getElementById("fx-gazette");
+    if (folio && folio.scrollIntoView) {
+      try { folio.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) { folio.scrollIntoView(); }
+    }
+  }
+  function ingestThenCompose(force, scroll) {
+    function after() {
+      return compose().then(function () { if (scroll) reveal(); });
+    }
     var urlBox = document.getElementById("gz-url");
     var raw = urlBox ? urlBox.value.trim() : "";
     var parsed = raw ? parseStatus(raw) : null;
-    if (parsed) return fetchPost(parsed, force).then(function () { return compose(); });
+    if (parsed) return fetchPost(parsed, force).then(after);
     if (/https?:\/\//i.test(raw)) {
       note("Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.");
-      return compose();
+      return after();
     }
     if (raw.length >= 8) {
       // Propos collé directement : on l'importe dans le texte porté à la table.
@@ -400,9 +422,9 @@
         box.value = clip(raw, 480);
         note("Propos importé — les auteurs peuvent répondre.");
       }
-      return compose();
+      return after();
     }
-    return compose();
+    return after();
   }
 
   /* --------------------------------------------------------------- amorce */
@@ -416,6 +438,11 @@
     if (run && !run.getAttribute("data-bound")) {
       run.setAttribute("data-bound", "1");
       run.addEventListener("click", function () { ingestThenCompose(true); });
+    }
+    var imp = document.getElementById("gz-import");
+    if (imp && !imp.getAttribute("data-bound")) {
+      imp.setAttribute("data-bound", "1");
+      imp.addEventListener("click", function () { ingestThenCompose(true, true); });
     }
     var url = document.getElementById("gz-url");
     if (url && !url.getAttribute("data-ingest")) {
