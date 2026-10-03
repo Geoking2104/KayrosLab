@@ -1,0 +1,640 @@
+{
+  "authorId": "hume",
+  "kbVersion": "hume@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.258Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "A Treatise of Human Nature",
+      "sentences": 14
+    },
+    {
+      "title": "An Enquiry Concerning Human Understanding",
+      "sentences": 13
+    },
+    {
+      "title": "An Enquiry Concerning the Principles of Morals",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "hume.p0001",
+      "w": "A Treatise of Human Nature",
+      "s": "To begin with the first case; it is evident, that when only two luminous bodies appear to the eye, we can perceive, whether they be conjoined or separate: whether they be separated by a great or small distance; and if this distance varies, we can perceive its increase or diminution, with the motion of the bodies.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0002",
+      "w": "A Treatise of Human Nature",
+      "s": "But as soon as the circumstance is mentioned, that touches the memory, the very same ideas now appear in a new light, and have, in a manner, a different feeling from what they had before.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0003",
+      "w": "A Treatise of Human Nature",
+      "s": "This may lead us to conceive the manner, in which that faculty enters into all our reasonings.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0004",
+      "w": "A Treatise of Human Nature",
+      "s": "We do not understand our own meaning in talking so, but ignorantly confound ideas, which are entirely distinct from each other.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0005",
+      "w": "A Treatise of Human Nature",
+      "s": "It must resolve itself into the idea of extension or of solidity; and consequently the reality of motion depends upon that of these other qualities.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0006",
+      "w": "A Treatise of Human Nature",
+      "s": "For when we attribute identity, in an improper sense, to variable or interrupted objects, our mistake is not confined to the expression, but is commonly attended with a fiction, either of something invariable and uninterrupted, or of something mysterious and inexplicable, or at least with a propensity to such fictions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0007",
+      "w": "A Treatise of Human Nature",
+      "s": "It has been observed in treating of the understanding, that the distinction, which we sometimes make betwixt a power and the exercise of it, is entirely frivolous, and that neither man nor any other being ought ever to be thought possest of any ability, unless it be exerted and put in action.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0008",
+      "w": "A Treatise of Human Nature",
+      "s": "Pride and humility are impressions related to love and hatred.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0009",
+      "w": "A Treatise of Human Nature",
+      "s": "The good qualities of others, from the first point of view, produce love; from the second, humility; and from the third, respect; which is a mixture of these two passions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0010",
+      "w": "A Treatise of Human Nature",
+      "s": "But if reason has no original influence, it is impossible it can withstand any principle, which has such an efficacy, or ever keep the mind in suspence a moment.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0011",
+      "w": "A Treatise of Human Nature",
+      "s": "But can there be any difficulty in proving, that vice and virtue are not matters of fact, whose existence we can infer by reason?",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0012",
+      "w": "A Treatise of Human Nature",
+      "s": "For since any considerable alteration of temper and circumstances destroys equally justice and injustice; and since such an alteration has an effect only by changing our own and the publick interest; it follows, that the first establishment of the rules of justice depends on these different interests.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0013",
+      "w": "A Treatise of Human Nature",
+      "s": "Our general knowledge of human nature, our observation of the past history of mankind, our experience of present times; all these causes must induce us to open the door to exceptions, and must make us conclude, that we may resist the more violent effects of supreme power, without any crime or injustice.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0014",
+      "w": "A Treatise of Human Nature",
+      "s": "It is therefore from the influence of characters and qualities, upon those who have an intercourse with any person, that we blame or praise him.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0015",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "All these suppositions are consistent and conceivable.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0016",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "This question I propose as much for the sake of information, as with an intention of raising difficulties.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0017",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "In this consists the whole nature of belief.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0018",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The transition from a present object does in all cases give strength and solidity to the related idea.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0019",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "They acknowledge mind and intelligence to be, not only the ultimate and original cause of all things, but the immediate and sole cause of every event which appears in nature.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0020",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The only immediate utility of all sciences, is to teach us, how to control and regulate future events by their causes.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0021",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "It would seem, indeed, that men begin at the wrong end of this question concerning liberty and necessity, when they enter upon it by examining the faculties of the soul, the influence of the understanding, and the operations of the will.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0022",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Every physical ill, say they, makes an essential part of this benevolent system, and could not possibly be removed, even by the Deity himself, considered as a wise agent, without giving entrance to greater ill, or excluding greater good, which will result from it.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0023",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Prodigies, omens, oracles, judgements, quite obscure the few natural events, that are intermingled with them.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0024",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "He did not throw down the walls of every city like those of Jericho, on the sounding of the rams horns, nor break up the prison of every apostle, like that of St.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0025",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "And what can you say more, allowing all your suppositions and reasonings?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0026",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "I think, that the state ought to tolerate every principle of philosophy; nor is there an instance, that any government has suffered in its political interests by such indulgence.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0027",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Such is the foundation of moral reasoning, which forms the greater part of human knowledge, and is the source of all human action and behaviour.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0028",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Why should I bind another, by a deed or promise, to do me any good office, when I know that he is already prompted, by the strongest inclination, to seek my happiness, and would, of himself, perform the desired service; except the hurt, he thereby receives, be greater than the benefit accruing to me?",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0029",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Where this enters not into consideration, nothing can appear more whimsical, unnatural, and even superstitious, than all or most of the laws of justice and of property.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0030",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The convenience, or rather necessity, which leads to justice is so universal, and everywhere points so much to the same rules, that the habit takes place in all societies; and it is not without some scrutiny, that we are able to ascertain its true origin.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0031",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Once on a time, a statesman, in the shock and contest of parties, prevailed so far as to procure, by his eloquence, the banishment of an able adversary; whom he secretly followed, offering him money for his support during his exile, and soothing him with topics of consolation in his misfortunes.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0032",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "It is here esteemed contrary to the rules of art to represent anything cool and indifferent.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0033",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "To a Cromwell, perhaps, or a De Retz, discretion may appear an alderman-like virtue, as Dr.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0034",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "But surely this peevish delicacy, whence-ever it arises can never be carried so far as to make us deny the existence of every species of merit, and all distinction of manners and behaviour.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0035",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The merit of benevolence, arising from its utility, and its tendency to promote the good of mankind has been already explained, and is, no doubt, the source of a CONSIDERABLE part of that esteem, which is so universally paid to it.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0036",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "He must be a very superficial thinker, who imagines that all instances of mutual deference are to be understood in earnest, and that a man would be more esteemable for being ignorant of his own merits and accomplishments.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0037",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Truths which are pernicious to society, if any such there be, will yield to errors which are salutary and ADVANTAGEOUS.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0038",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Here therefore REASON instructs us in the several tendencies of actions, and HUMANITY makes a distinction in favour of those which are useful and beneficial.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0039",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "But though the question concerning the universal or partial selfishness of man be not so material as is usually imagined to morality and practice, it is certainly of consequence in the speculative science of human nature, and is a proper object of curiosity and enquiry.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0040",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "General peace and order are the attendants of justice or a general abstinence from the possessions of others; but a particular regard to the particular right of one individual citizen may frequently, considered in itself, be productive of pernicious consequences.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "hume.f.v0001",
+      "kind": "verbatim",
+      "text": "To begin with the first case; it is evident, that when only two luminous bodies appear to the eye, we can perceive, whether they be conjoined or separate: whether they be separated by a great or small distance; and if this distance varies, we can perceive its increase or diminution, with the motion of the bodies.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "hume.f.v0002",
+      "kind": "verbatim",
+      "text": "We do not understand our own meaning in talking so, but ignorantly confound ideas, which are entirely distinct from each other.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "hume.f.v0003",
+      "kind": "verbatim",
+      "text": "It must resolve itself into the idea of extension or of solidity; and consequently the reality of motion depends upon that of these other qualities.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "hume.f.v0004",
+      "kind": "verbatim",
+      "text": "It has been observed in treating of the understanding, that the distinction, which we sometimes make betwixt a power and the exercise of it, is entirely frivolous, and that neither man nor any other being ought ever to be thought possest of any ability, unless it be exerted and put in action.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "hume.f.v0005",
+      "kind": "verbatim",
+      "text": "The good qualities of others, from the first point of view, produce love; from the second, humility; and from the third, respect; which is a mixture of these two passions.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "hume.f.v0006",
+      "kind": "verbatim",
+      "text": "Our general knowledge of human nature, our observation of the past history of mankind, our experience of present times; all these causes must induce us to open the door to exceptions, and must make us conclude, that we may resist the more violent effects of supreme power, without any crime or injustice.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 304
+      }
+    },
+    {
+      "id": "hume.f.v0007",
+      "kind": "verbatim",
+      "text": "It is therefore from the influence of characters and qualities, upon those who have an intercourse with any person, that we blame or praise him.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "hume.f.v0008",
+      "kind": "verbatim",
+      "text": "They acknowledge mind and intelligence to be, not only the ultimate and original cause of all things, but the immediate and sole cause of every event which appears in nature.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "hume.f.v0009",
+      "kind": "verbatim",
+      "text": "It would seem, indeed, that men begin at the wrong end of this question concerning liberty and necessity, when they enter upon it by examining the faculties of the soul, the influence of the understanding, and the operations of the will.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "hume.f.v0010",
+      "kind": "verbatim",
+      "text": "Every physical ill, say they, makes an essential part of this benevolent system, and could not possibly be removed, even by the Deity himself, considered as a wise agent, without giving entrance to greater ill, or excluding greater good, which will result from it.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "hume.f.v0011",
+      "kind": "verbatim",
+      "text": "He did not throw down the walls of every city like those of Jericho, on the sounding of the rams horns, nor break up the prison of every apostle, like that of St.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "hume.f.v0012",
+      "kind": "verbatim",
+      "text": "I think, that the state ought to tolerate every principle of philosophy; nor is there an instance, that any government has suffered in its political interests by such indulgence.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "hume.f.v0013",
+      "kind": "verbatim",
+      "text": "Such is the foundation of moral reasoning, which forms the greater part of human knowledge, and is the source of all human action and behaviour.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "hume.f.v0014",
+      "kind": "verbatim",
+      "text": "Why should I bind another, by a deed or promise, to do me any good office, when I know that he is already prompted, by the strongest inclination, to seek my happiness, and would, of himself, perform the desired service; except the hurt, he thereby receives, be greater than the benefit accruing to me?",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 301
+      }
+    },
+    {
+      "id": "hume.f.v0015",
+      "kind": "verbatim",
+      "text": "Where this enters not into consideration, nothing can appear more whimsical, unnatural, and even superstitious, than all or most of the laws of justice and of property.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "hume.f.v0016",
+      "kind": "verbatim",
+      "text": "The convenience, or rather necessity, which leads to justice is so universal, and everywhere points so much to the same rules, that the habit takes place in all societies; and it is not without some scrutiny, that we are able to ascertain its true origin.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "hume.f.v0017",
+      "kind": "verbatim",
+      "text": "Once on a time, a statesman, in the shock and contest of parties, prevailed so far as to procure, by his eloquence, the banishment of an able adversary; whom he secretly followed, offering him money for his support during his exile, and soothing him with topics of consolation in his misfortunes.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "hume.f.v0018",
+      "kind": "verbatim",
+      "text": "The merit of benevolence, arising from its utility, and its tendency to promote the good of mankind has been already explained, and is, no doubt, the source of a CONSIDERABLE part of that esteem, which is so universally paid to it.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "hume.f.v0019",
+      "kind": "verbatim",
+      "text": "He must be a very superficial thinker, who imagines that all instances of mutual deference are to be understood in earnest, and that a man would be more esteemable for being ignorant of his own merits and accomplishments.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "hume.f.v0020",
+      "kind": "verbatim",
+      "text": "Truths which are pernicious to society, if any such there be, will yield to errors which are salutary and ADVANTAGEOUS.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "hume.f.v0021",
+      "kind": "verbatim",
+      "text": "Here therefore REASON instructs us in the several tendencies of actions, and HUMANITY makes a distinction in favour of those which are useful and beneficial.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "hume.f.v0022",
+      "kind": "verbatim",
+      "text": "General peace and order are the attendants of justice or a general abstinence from the possessions of others; but a particular regard to the particular right of one individual citizen may frequently, considered in itself, be productive of pernicious consequences.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 263
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:35bc466e4a59fcc00dfb8194c91f2e43b7af1e32f681ef3b03e3414106295779"
+}

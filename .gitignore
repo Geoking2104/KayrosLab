@@ -31,3 +31,7 @@ target/
 .ovt_*
 .ov_profile_*
 
+# Salon × OpenKB — artefacts locaux (bases OpenKB, rapports d'audit)
+.openkb/
+salon/scripts/reports/
+

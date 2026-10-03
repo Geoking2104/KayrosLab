@@ -1,0 +1,640 @@
+{
+  "authorId": "hobbes",
+  "kbVersion": "hobbes@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.249Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Behemoth",
+      "sentences": 14
+    },
+    {
+      "title": "Leviathan",
+      "sentences": 13
+    },
+    {
+      "title": "Philosophical Rudiments (De Cive)",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "hobbes.p0001",
+      "w": "Behemoth",
+      "s": "For the rivers also are, as well as their banks, within or a part of one country or other.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0002",
+      "w": "Behemoth",
+      "s": "Which thereby shews that the King and Parliament thought that treason was one of the sorts of felony.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0003",
+      "w": "Behemoth",
+      "s": "But that a man, for killing another man by misfortune only, without any evil purpose, should forfeit all his goods and chattels, debts and duties, is a very hard judgment, unless perhaps they were to be given to the kindred of the man slain, by way of amends for damage.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0004",
+      "w": "Behemoth",
+      "s": "Their succession to lands was determined by the pleasure of the master of the family, by gift or deed in his lifetime; and what land they disposed not of in their lifetime, descended after their death to their heirs.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0005",
+      "w": "Behemoth",
+      "s": "They must have some colour or other to make it believed that the King made war first upon the Parliament.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0006",
+      "w": "Behemoth",
+      "s": "For if men be to learn their duty from the sentence which other men shall give concerning the meaning of the Scriptures, and not from their own interpretation, I understand not to what end they were translated into English, and every man not only permitted, but also exhorted, to read them.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0007",
+      "w": "Behemoth",
+      "s": "Perhaps also the most of them thought, that the taking of the militia from the King would be an addition to their own power; but they were very much mistaken, for the House of Commons never intended they should be sharers in it.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0008",
+      "w": "Behemoth",
+      "s": "The people of England may be represented with limitations, as to deliver a petition or the like.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0009",
+      "w": "Behemoth",
+      "s": "Their army was led by Duke Hamilton, who was then set at liberty, when Pendennis Castle, where he was prisoner, was taken by the Parliamentarians.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0010",
+      "w": "Behemoth",
+      "s": "Besides, the King was sure, wheresoever the victory lighted, he could lose nothing in the war but enemies.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0011",
+      "w": "Behemoth",
+      "s": "These votes being passed, they proceed to another, wherein they assume to themselves the power of the militia.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0012",
+      "w": "Behemoth",
+      "s": "To the public at least this benefit may accrue, that some able pen may undertake the controversy, being moved with the desire of that reputation which will necessarily attend victory over so considerable an adversary.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0013",
+      "w": "Behemoth",
+      "s": "And such as are feared by more powerful men than we are.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0014",
+      "w": "Behemoth",
+      "s": "They neither believe all, nor reject all; but judge.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0015",
+      "w": "Leviathan",
+      "s": "But he that would know more particularly the originall of Titles of Honour, may find it, as I have done this, in Mr.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0016",
+      "w": "Leviathan",
+      "s": "And therefore if a man by words, or other signes, seem to despoyle himselfe of the End, for which those signes were intended; he is not to be understood as if he meant it, or that it was his will; but that he was ignorant of how such words and actions were to be interpreted.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0017",
+      "w": "Leviathan",
+      "s": "The Present Monarch Hath Right To Dispose Of The Succession The greatest difficultie about the right of Succession, is in Monarchy: And the difficulty ariseth from this, that at first sight, it is not manifest who is to appoint the Successor; nor many times, who it is whom he hath appointed.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0018",
+      "w": "Leviathan",
+      "s": "If therefore he will have no Heyre, there is no Soveraignty, nor Subjection.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0019",
+      "w": "Leviathan",
+      "s": "So that the incommodity that follows the bare words of a written Law, may lead him to the Intention of the Law, whereby to interpret the same the better; though no Incommodity can warrant a Sentence against the Law.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0020",
+      "w": "Leviathan",
+      "s": "And the violation of chastity by Force, greater, than by flattery.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0021",
+      "w": "Leviathan",
+      "s": "For as Obedience is more acceptable to God than sacrifice; so also to set light by his Commandements, is the greatest of all contumelies.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0022",
+      "w": "Leviathan",
+      "s": "By which it is manifest, that Angel signifieth there, nothing but God himself, that caused Agar supernaturally to apprehend a voice supernaturall, testifying Gods speciall presence there.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0023",
+      "w": "Leviathan",
+      "s": "Who that one chief Pastor is, according to the law of Nature, hath been already shewn; namely, that it is the Civill Soveraign; And to whom the Scripture hath assigned that Office, we shall see in the Chapters following.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0024",
+      "w": "Leviathan",
+      "s": "But a Crier hath not right to Command any man.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0025",
+      "w": "Leviathan",
+      "s": "But this also maketh onely for the Legislative power of Civill Soveraigns: For the Scribes, and Pharisees sat in Moses Chaire, but Moses next under God was Soveraign of the People of Israel: and therefore our Saviour commanded them to doe all that they should say, but not all that they should do.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0026",
+      "w": "Leviathan",
+      "s": "The Laws of God therefore are none but the Laws of Nature, whereof the principall is, that we should not violate our Faith, that is, a commandement to obey our Civill Soveraigns, which wee constituted over us, by mutuall pact one with another.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0027",
+      "w": "Leviathan",
+      "s": "For his Brother, arguing from the action of his teacher, or of him whose knowledge he esteemeth great, concludes it to bee lawfull in it selfe.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0028",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "That the law of nature is not an agreement of men, but the dictate of reason.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0029",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The fourth law of nature, that every man render himself useful.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0030",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Let this therefore stand for the thirteenth law of nature.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0031",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Last of all, the consent of those brutal creatures is natural; that of men by compact only, that is to say, artificial.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0032",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Neither doth this happen by reason of the falsehood of the principle, but of the disposition of men, who, seeming wise to themselves, will needs appear such to all others.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0033",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For seeing subjects not contracting with the people, but by mutual compacts among themselves, were tied to all that the people did; hence also they were tied to that act of the people, in resigning up its right of government into the hands of nobles.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0034",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "And his brother, if he want issue, before all others.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0035",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "When it pleased him to show himself a king, he required entire obedience, Matth.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0036",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "It behoves princes to regard the common benefit of many, not the peculiar interest of this or that man.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0037",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But we demand not whether theft be a sin, but what is to be termed theft; and so concerning others, in like manner.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0038",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Next, those philosophers who said, that God was the world or the world’s soul, that is to say, a part of it, spake unworthily of God; for they attribute nothing to him, but wholly deny his being.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0039",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Repent ye, be baptized, keep the commandments, and the like forms of speech, are not laws.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0040",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For such is the nature of speech in general, that although it deserve the chief place among those signs whereby we declare our conceptions to others, yet cannot it perform that office alone without the help of many circumstances.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "hobbes.f.v0001",
+      "kind": "verbatim",
+      "text": "Which thereby shews that the King and Parliament thought that treason was one of the sorts of felony.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "hobbes.f.v0002",
+      "kind": "verbatim",
+      "text": "But that a man, for killing another man by misfortune only, without any evil purpose, should forfeit all his goods and chattels, debts and duties, is a very hard judgment, unless perhaps they were to be given to the kindred of the man slain, by way of amends for damage.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "hobbes.f.v0003",
+      "kind": "verbatim",
+      "text": "Their succession to lands was determined by the pleasure of the master of the family, by gift or deed in his lifetime; and what land they disposed not of in their lifetime, descended after their death to their heirs.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "hobbes.f.v0004",
+      "kind": "verbatim",
+      "text": "They must have some colour or other to make it believed that the King made war first upon the Parliament.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "hobbes.f.v0005",
+      "kind": "verbatim",
+      "text": "For if men be to learn their duty from the sentence which other men shall give concerning the meaning of the Scriptures, and not from their own interpretation, I understand not to what end they were translated into English, and every man not only permitted, but also exhorted, to read them.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "hobbes.f.v0006",
+      "kind": "verbatim",
+      "text": "Perhaps also the most of them thought, that the taking of the militia from the King would be an addition to their own power; but they were very much mistaken, for the House of Commons never intended they should be sharers in it.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "hobbes.f.v0007",
+      "kind": "verbatim",
+      "text": "The people of England may be represented with limitations, as to deliver a petition or the like.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "hobbes.f.v0008",
+      "kind": "verbatim",
+      "text": "Their army was led by Duke Hamilton, who was then set at liberty, when Pendennis Castle, where he was prisoner, was taken by the Parliamentarians.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "hobbes.f.v0009",
+      "kind": "verbatim",
+      "text": "These votes being passed, they proceed to another, wherein they assume to themselves the power of the militia.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "hobbes.f.v0010",
+      "kind": "verbatim",
+      "text": "To the public at least this benefit may accrue, that some able pen may undertake the controversy, being moved with the desire of that reputation which will necessarily attend victory over so considerable an adversary.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "hobbes.f.v0011",
+      "kind": "verbatim",
+      "text": "And therefore if a man by words, or other signes, seem to despoyle himselfe of the End, for which those signes were intended; he is not to be understood as if he meant it, or that it was his will; but that he was ignorant of how such words and actions were to be interpreted.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "hobbes.f.v0012",
+      "kind": "verbatim",
+      "text": "The Present Monarch Hath Right To Dispose Of The Succession The greatest difficultie about the right of Succession, is in Monarchy: And the difficulty ariseth from this, that at first sight, it is not manifest who is to appoint the Successor; nor many times, who it is whom he hath appointed.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 292
+      }
+    },
+    {
+      "id": "hobbes.f.v0013",
+      "kind": "verbatim",
+      "text": "By which it is manifest, that Angel signifieth there, nothing but God himself, that caused Agar supernaturally to apprehend a voice supernaturall, testifying Gods speciall presence there.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "hobbes.f.v0014",
+      "kind": "verbatim",
+      "text": "Who that one chief Pastor is, according to the law of Nature, hath been already shewn; namely, that it is the Civill Soveraign; And to whom the Scripture hath assigned that Office, we shall see in the Chapters following.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "hobbes.f.v0015",
+      "kind": "verbatim",
+      "text": "But this also maketh onely for the Legislative power of Civill Soveraigns: For the Scribes, and Pharisees sat in Moses Chaire, but Moses next under God was Soveraign of the People of Israel: and therefore our Saviour commanded them to doe all that they should say, but not all that they should do.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "hobbes.f.v0016",
+      "kind": "verbatim",
+      "text": "The Laws of God therefore are none but the Laws of Nature, whereof the principall is, that we should not violate our Faith, that is, a commandement to obey our Civill Soveraigns, which wee constituted over us, by mutuall pact one with another.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "hobbes.f.v0017",
+      "kind": "verbatim",
+      "text": "Last of all, the consent of those brutal creatures is natural; that of men by compact only, that is to say, artificial.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "hobbes.f.v0018",
+      "kind": "verbatim",
+      "text": "Neither doth this happen by reason of the falsehood of the principle, but of the disposition of men, who, seeming wise to themselves, will needs appear such to all others.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "hobbes.f.v0019",
+      "kind": "verbatim",
+      "text": "For seeing subjects not contracting with the people, but by mutual compacts among themselves, were tied to all that the people did; hence also they were tied to that act of the people, in resigning up its right of government into the hands of nobles.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "hobbes.f.v0020",
+      "kind": "verbatim",
+      "text": "It behoves princes to regard the common benefit of many, not the peculiar interest of this or that man.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "hobbes.f.v0021",
+      "kind": "verbatim",
+      "text": "Next, those philosophers who said, that God was the world or the world’s soul, that is to say, a part of it, spake unworthily of God; for they attribute nothing to him, but wholly deny his being.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "hobbes.f.v0022",
+      "kind": "verbatim",
+      "text": "Repent ye, be baptized, keep the commandments, and the like forms of speech, are not laws.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 90
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:9c2f91f4b1a59fabae9a226704b2b56c142961895edbae405a453ee679a49348"
+}

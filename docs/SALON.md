@@ -79,7 +79,9 @@ of the argument. See [`SALON-AGENT-AUTEUR.md`](./SALON-AGENT-AUTEUR.md).
 | `salon/avatars/` | Author portraits |
 | `salon/salon_core.wasm` | Rust floor / retrieval |
 | `salon/src/` | React engine (fiches, cercle, i18n, ingest, PDF, parole) |
+| `salon/scripts/openkb_*.mjs` | Pipeline mémoire compilée (OpenKB) — ingest, sync, packs, audit |
 | `docs/SALON-AGENT-AUTEUR.md` | Contrat de parole de l’agent auteur |
+| `docs/SALON-OPENKB.md` | Spécification d'intégration OpenKB (mémoire compilée par auteur) |
 | `crates/salon-core/` | Rust crate (`salon_eval`) |
 | `backend/web/public/salon/` | Mirror for the static host |
 

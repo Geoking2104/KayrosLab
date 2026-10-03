@@ -1,0 +1,640 @@
+{
+  "authorId": "diderot",
+  "kbVersion": "diderot@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.296Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Ceci n'est pas un conte",
+      "sentences": 14
+    },
+    {
+      "title": "Jacques le fataliste et son maître",
+      "sentences": 13
+    },
+    {
+      "title": "La religieuse",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "diderot.p0001",
+      "w": "Ceci n'est pas un conte",
+      "s": "J'ai connu une Alsacienne belle, mais belle à faire accourir les vieillards, et à arrêter tout court les jeunes gens.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0002",
+      "w": "Ceci n'est pas un conte",
+      "s": "Voyez celui d'entre ces prétendants qui vous est le plus agréable; acceptez-le, c'est moi qui vous en conjure...--Ah!",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0003",
+      "w": "Ceci n'est pas un conte",
+      "s": "Je restai seul avec son amie, qui ne me laissa pas ignorer ce qu'elle qualifiait de la déraison de Tanié.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0004",
+      "w": "Ceci n'est pas un conte",
+      "s": "J'allai lui faire mes adieux au moment où il luttait avec lui-même, où il tâchait de s'arracher des bras de la belle, indigne et cruelle Reymer.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0005",
+      "w": "Ceci n'est pas un conte",
+      "s": "Elle ne regretta ni sa fortune dissipée, ni son honneur flétri.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0006",
+      "w": "Ceci n'est pas un conte",
+      "s": "Le Camus, docteur en médecine, qui l'a consolée dans ses peines et secourue dans son indigence; qui lui a rendu les services les plus continus; qui l'a suivie dans un grenier où sa pauvreté l'avait reléguée, et qui lui a fermé les yeux quand elle est morte.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0007",
+      "w": "Ceci n'est pas un conte",
+      "s": "Son ambition; il a toujours été ambitieux.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0008",
+      "w": "Ceci n'est pas un conte",
+      "s": "Donnez-moi le bras, et ne refusez pas de m'accompagner chez lui.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0009",
+      "w": "Ceci n'est pas un conte",
+      "s": "Ses paupières s'abaissaient; et l'évanouissement reprenait.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0010",
+      "w": "Ceci n'est pas un conte",
+      "s": "Je suis fâché de ne l'avoir pas su plus tôt.--Et il est juste que cette malheureuse soit la victime de l'erreur de votre coeur.--Et qui vous a dit qu'un mois, un jour plus tard, je ne l'aurais pas été, moi, tout aussi cruellement, de l'erreur du sien?--Qui me l'a dit?",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0011",
+      "w": "Ceci n'est pas un conte",
+      "s": "Ma Lettre sur les Sourds et Muets parut presque en même temps.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0012",
+      "w": "Ceci n'est pas un conte",
+      "s": "Vous êtes un homme de bien, s'il en fut jamais.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0013",
+      "w": "Ceci n'est pas un conte",
+      "s": "Après les habits, ce furent d'autres prétextes, et puis d'autres prétextes encore.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0014",
+      "w": "Ceci n'est pas un conte",
+      "s": "Elle sollicita inutilement l'intercession de ces saints personnages qui l'avaient persécutée avec tant de zèle.",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      }
+    },
+    {
+      "id": "diderot.p0015",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Je suis revenu; je me suis remis à faire des vers, et en voilà que je vous apporte...",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0016",
+      "w": "Jacques le fataliste et son maître",
+      "s": "J'y rêverais le reste de ma vie, que je ne le devinerais pas; j'en aurais pour jusqu'au jugement dernier.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0017",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Ma foi, le tout vaudra bien vingt-quatre francs.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0018",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Tous les sermons ressemblent aux préambules des édits du roi; tous les prédicateurs voudraient qu'on pratiquât leurs leçons, parce que nous nous en trouverions mieux peut-être; mais eux à coup sûr...",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0019",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Mais c'est à Paris, et le camarade de ton capitaine était commandant d'une place frontière.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0020",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Elle lui donnait ses conseils dans les occasions d'un succès difficile; elle lui jetait quelquefois des mots de mariage, mais c'était d'un ton si désintéressé, qu'on ne pouvait la soupçonner de parler pour elle.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0021",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Cette quinzaine lui parut éternelle; enfin la marquise fut obligée de céder à son impatience et à ses prières.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0022",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Jacques remplit un grand gobelet de tisane, y versa un peu de vin blanc et l'avala.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0023",
+      "w": "Jacques le fataliste et son maître",
+      "s": "En descendant ils trouvèrent tous les locataires sur les paliers de leurs appartements, à la porte de la maison une populace nombreuse, un fiacre, des archers qui les mirent dans le fiacre, au bruit confus de l'invective et des huées.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0024",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Cependant Bigre le fils s'en était allé chez le fermier, avec son essieu sur l'épaule, et Bigre le père s'était mis à l'ouvrage.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0025",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Je l'ai prévenue, je t'en avertis; et elle s'attend à une galanterie de ta part.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0026",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Si tu reviens de toi-même, on te boudera, on te fera payer chèrement ton incartade, on t'imposera la loi qu'on voudra t'imposer; il faudra t'y soumettre; il faudra fléchir le genou.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0027",
+      "w": "Jacques le fataliste et son maître",
+      "s": "Ce cheval, jeune et vigoureux, s'était couché sur le sillon, et le laboureur avait beau le secouer par la bride, le prier, le caresser, le menacer, jurer, frapper, l'animal restait immobile, et refusait opiniâtrement de se relever.",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      }
+    },
+    {
+      "id": "diderot.p0028",
+      "w": "La religieuse",
+      "s": "Les religieuses m'entourèrent, m'accablèrent de reproches; je les écoutai sans mot dire.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0029",
+      "w": "La religieuse",
+      "s": "Elle me serrait quelquefois la main avec force.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0030",
+      "w": "La religieuse",
+      "s": "Cette dernière idée est bien subtile pour être vraie.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0031",
+      "w": "La religieuse",
+      "s": "Cette mortification fut suivie d'une autre.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0032",
+      "w": "La religieuse",
+      "s": "Je demandai le crucifix à baiser, on me le refusa.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0033",
+      "w": "La religieuse",
+      "s": "Le soir, à souper, elle me fit signe en entrant de m'asseoir à terre au milieu du réfectoire; j'obéis, et l'on ne me servit que du pain et de l'eau; j'en mangeai un peu, que j'arrosai de quelques larmes.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0034",
+      "w": "La religieuse",
+      "s": "Le lendemain il m'écrivit par son émissaire; je reçus sa lettre et je l'envoyai, sans l'ouvrir, à M.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0035",
+      "w": "La religieuse",
+      "s": "Noyer de larmes ces yeux!...» Et elle les baisait.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0036",
+      "w": "La religieuse",
+      "s": "J'ai encouru la disgrâce de notre chère mère; je croyais qu'elle m'avait pardonné, et j'avais quelque raison de le penser; cependant vous êtes toutes assemblées chez elle, je n'y suis pas, et j'ai ordre de demeurer chez moi.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0037",
+      "w": "La religieuse",
+      "s": "Lorsque nous nous étions bien entretenus de nous, nous parlions aussi des autres, et surtout de la supérieure.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0038",
+      "w": "La religieuse",
+      "s": "Descendez chez moi, vous y trouverez bonne compagnie en hommes et en femmes, pas toutes aussi aimables, mais presque aussi jeunes que vous.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0039",
+      "w": "La religieuse",
+      "s": "J'en fais partir une autre, telle à peu près que vous la demandez.",
+      "src": {
+        "work": "La religieuse"
+      }
+    },
+    {
+      "id": "diderot.p0040",
+      "w": "La religieuse",
+      "s": "Au reste, je vous prie de compter sur l'intérêt que je prends à notre infortunée, et sur quelque prudence que je tiens de l'expérience.",
+      "src": {
+        "work": "La religieuse"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "diderot.f.v0001",
+      "kind": "verbatim",
+      "text": "J'ai connu une Alsacienne belle, mais belle à faire accourir les vieillards, et à arrêter tout court les jeunes gens.",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "diderot.f.v0002",
+      "kind": "verbatim",
+      "text": "Voyez celui d'entre ces prétendants qui vous est le plus agréable; acceptez-le, c'est moi qui vous en conjure...--Ah!",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "diderot.f.v0003",
+      "kind": "verbatim",
+      "text": "Je restai seul avec son amie, qui ne me laissa pas ignorer ce qu'elle qualifiait de la déraison de Tanié.",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "diderot.f.v0004",
+      "kind": "verbatim",
+      "text": "J'allai lui faire mes adieux au moment où il luttait avec lui-même, où il tâchait de s'arracher des bras de la belle, indigne et cruelle Reymer.",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "diderot.f.v0005",
+      "kind": "verbatim",
+      "text": "Le Camus, docteur en médecine, qui l'a consolée dans ses peines et secourue dans son indigence; qui lui a rendu les services les plus continus; qui l'a suivie dans un grenier où sa pauvreté l'avait reléguée, et qui lui a fermé les yeux quand elle est morte.",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "diderot.f.v0006",
+      "kind": "verbatim",
+      "text": "Je suis fâché de ne l'avoir pas su plus tôt.--Et il est juste que cette malheureuse soit la victime de l'erreur de votre coeur.--Et qui vous a dit qu'un mois, un jour plus tard, je ne l'aurais pas été, moi, tout aussi cruellement, de l'erreur du sien?--Qui me l'a dit?",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "diderot.f.v0007",
+      "kind": "verbatim",
+      "text": "Elle sollicita inutilement l'intercession de ces saints personnages qui l'avaient persécutée avec tant de zèle.",
+      "work": "Ceci n'est pas un conte",
+      "lang": "fr",
+      "src": {
+        "work": "Ceci n'est pas un conte"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "diderot.f.v0008",
+      "kind": "verbatim",
+      "text": "Je suis revenu; je me suis remis à faire des vers, et en voilà que je vous apporte...",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "diderot.f.v0009",
+      "kind": "verbatim",
+      "text": "J'y rêverais le reste de ma vie, que je ne le devinerais pas; j'en aurais pour jusqu'au jugement dernier.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "diderot.f.v0010",
+      "kind": "verbatim",
+      "text": "Tous les sermons ressemblent aux préambules des édits du roi; tous les prédicateurs voudraient qu'on pratiquât leurs leçons, parce que nous nous en trouverions mieux peut-être; mais eux à coup sûr...",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "diderot.f.v0011",
+      "kind": "verbatim",
+      "text": "Elle lui donnait ses conseils dans les occasions d'un succès difficile; elle lui jetait quelquefois des mots de mariage, mais c'était d'un ton si désintéressé, qu'on ne pouvait la soupçonner de parler pour elle.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "diderot.f.v0012",
+      "kind": "verbatim",
+      "text": "Cette quinzaine lui parut éternelle; enfin la marquise fut obligée de céder à son impatience et à ses prières.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "diderot.f.v0013",
+      "kind": "verbatim",
+      "text": "En descendant ils trouvèrent tous les locataires sur les paliers de leurs appartements, à la porte de la maison une populace nombreuse, un fiacre, des archers qui les mirent dans le fiacre, au bruit confus de l'invective et des huées.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "diderot.f.v0014",
+      "kind": "verbatim",
+      "text": "Si tu reviens de toi-même, on te boudera, on te fera payer chèrement ton incartade, on t'imposera la loi qu'on voudra t'imposer; il faudra t'y soumettre; il faudra fléchir le genou.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "diderot.f.v0015",
+      "kind": "verbatim",
+      "text": "Ce cheval, jeune et vigoureux, s'était couché sur le sillon, et le laboureur avait beau le secouer par la bride, le prier, le caresser, le menacer, jurer, frapper, l'animal restait immobile, et refusait opiniâtrement de se relever.",
+      "work": "Jacques le fataliste et son maître",
+      "lang": "fr",
+      "src": {
+        "work": "Jacques le fataliste et son maître"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "diderot.f.v0016",
+      "kind": "verbatim",
+      "text": "Les religieuses m'entourèrent, m'accablèrent de reproches; je les écoutai sans mot dire.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 88
+      }
+    },
+    {
+      "id": "diderot.f.v0017",
+      "kind": "verbatim",
+      "text": "Le soir, à souper, elle me fit signe en entrant de m'asseoir à terre au milieu du réfectoire; j'obéis, et l'on ne me servit que du pain et de l'eau; j'en mangeai un peu, que j'arrosai de quelques larmes.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "diderot.f.v0018",
+      "kind": "verbatim",
+      "text": "Le lendemain il m'écrivit par son émissaire; je reçus sa lettre et je l'envoyai, sans l'ouvrir, à M.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "diderot.f.v0019",
+      "kind": "verbatim",
+      "text": "J'ai encouru la disgrâce de notre chère mère; je croyais qu'elle m'avait pardonné, et j'avais quelque raison de le penser; cependant vous êtes toutes assemblées chez elle, je n'y suis pas, et j'ai ordre de demeurer chez moi.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "diderot.f.v0020",
+      "kind": "verbatim",
+      "text": "Lorsque nous nous étions bien entretenus de nous, nous parlions aussi des autres, et surtout de la supérieure.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "diderot.f.v0021",
+      "kind": "verbatim",
+      "text": "Descendez chez moi, vous y trouverez bonne compagnie en hommes et en femmes, pas toutes aussi aimables, mais presque aussi jeunes que vous.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "diderot.f.v0022",
+      "kind": "verbatim",
+      "text": "Au reste, je vous prie de compter sur l'intérêt que je prends à notre infortunée, et sur quelque prudence que je tiens de l'expérience.",
+      "work": "La religieuse",
+      "lang": "fr",
+      "src": {
+        "work": "La religieuse"
+      },
+      "quality": {
+        "chars": 135
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:dde13ab4b36e1789afa3a531280076cc19e5ddad7dc3db7f451cb18ba747f778"
+}

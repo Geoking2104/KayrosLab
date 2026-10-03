@@ -1,0 +1,640 @@
+{
+  "authorId": "aristote",
+  "kbVersion": "aristote@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.067Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Politics: A Treatise on Government",
+      "sentences": 14
+    },
+    {
+      "title": "The Athenian Constitution",
+      "sentences": 13
+    },
+    {
+      "title": "The Categories",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "aristote.p0001",
+      "w": "Politics: A Treatise on Government",
+      "s": "Which custom of barter is still preserved amongst many barbarous nations, who procure one necessary with another, but never sell anything; as giving and receiving wine for corn and the like.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0002",
+      "w": "Politics: A Treatise on Government",
+      "s": "And thus let us determine concerning a community of wives and children.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0003",
+      "w": "Politics: A Treatise on Government",
+      "s": "For he made it infamous for any one either to buy or sell their possessions, in which he did right; but he permitted any one that chose it to give them away, or bequeath them, although nearly the same consequences will arise from one practice as from the other.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0004",
+      "w": "Politics: A Treatise on Government",
+      "s": "They are also permitted to resign their office before their time is elapsed, and if all this was done by law it would be well, and not at the pleasure of the individuals, which is a bad rule to follow.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0005",
+      "w": "Politics: A Treatise on Government",
+      "s": "That there are many sorts of citizens, and that he may be said to be as completely who shares the honours of the state, is evident from what has been already said.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0006",
+      "w": "Politics: A Treatise on Government",
+      "s": "From whence it is evident, that a system of laws must be calculated for those who are equal to each other in nature and power.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0007",
+      "w": "Politics: A Treatise on Government",
+      "s": "Another is, when the magistrates are elected by a certain census; but this should be but small, and every one who was included in it should be eligible, but as soon as he was below it should lose that right.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0008",
+      "w": "Politics: A Treatise on Government",
+      "s": "I mean by this, that it may happen, that although one form of government may be better than another, yet there is no reason to prevent another from being preferable thereunto in particular circumstances and for particular purposes.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0009",
+      "w": "Politics: A Treatise on Government",
+      "s": "For either some persons, who envy them the honours they have acquired, will begin to be seditious, or they, on account of the dignity they have acquired, will not be content with their former equality.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0010",
+      "w": "Politics: A Treatise on Government",
+      "s": "But, above all things, let this regulation be made by the law, that no one shall have too much power, either by means of his fortune or friends; but if he has, for his excess therein, let it be contrived that he shall quit the country.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0011",
+      "w": "Politics: A Treatise on Government",
+      "s": "And this reasoning holds true of other changes; for he says, that from the Lacedaemonian form it changes into an oligarchy, and from thence into a democracy, and from a democracy into a tyranny: and sometimes a contrary change takes place, as from a democracy into an oligarchy, rather than into a monarchy.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0012",
+      "w": "Politics: A Treatise on Government",
+      "s": "A number of citizens is the preservation of a democracy; for these are opposed to those rights which are founded in rank: on the contrary, the preservation of an oligarchy depends upon the due regulation of the different orders in the society.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0013",
+      "w": "Politics: A Treatise on Government",
+      "s": "Men are worthy and good three ways; by nature, by custom, by reason.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0014",
+      "w": "Politics: A Treatise on Government",
+      "s": "The same thing happens both in our connections with men and things: what we meet with first pleases best; for which reason children should be kept strangers to everything which is bad, more particularly whatsoever is loose and offensive to good manners.",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      }
+    },
+    {
+      "id": "aristote.p0015",
+      "w": "The Athenian Constitution",
+      "s": "And again he reviles both parties for their grumblings in the times that followed: Nay, if one must lay blame where blame is due, Wer't not for me, the people ne'er had set Their eyes upon these blessings e'en in dreams: While greater men, the men of wealthier life, Should praise me and should court me as their friend.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0016",
+      "w": "The Athenian Constitution",
+      "s": "Here he acquired wealth and hired mercenaries; and not till ten years had elapsed did he return to Eretria and make an attempt to recover the government by force.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0017",
+      "w": "The Athenian Constitution",
+      "s": "On this Cleisthenes retired from the country, and Cleomenes, entering Attica with a small force, expelled, as polluted, seven hundred Athenian families.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0018",
+      "w": "The Athenian Constitution",
+      "s": "Some persons advised the people to make a distribution of the money among themselves, but this was prevented by Themistocles.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0019",
+      "w": "The Athenian Constitution",
+      "s": "After Cleophon the popular leadership was occupied successively by the men who chose to talk the biggest and pander the most to the tastes of the majority, with their eyes fixed only on the interests of the moment.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0020",
+      "w": "The Athenian Constitution",
+      "s": "There should be a Council of Four Hundred, as in the ancient constitution, forty from each tribe, chosen out of candidates of more than thirty years of age, selected by the members of the tribes.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0021",
+      "w": "The Athenian Constitution",
+      "s": "The secessionists should pay their share to the fund for the common defence out of their revenues, just like all the other Athenians.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0022",
+      "w": "The Athenian Constitution",
+      "s": "The eleventh was that which followed the return from Phyle and Piraeus; and this has continued from that day to this, with continual accretions of power to the masses.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0023",
+      "w": "The Athenian Constitution",
+      "s": "They also sell, in the presence of the Council, the property of those who have gone into exile from the court of the Areopagus, and of others whose goods have been confiscated, and the nine Archons ratify the contracts.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0024",
+      "w": "The Athenian Constitution",
+      "s": "A treasurer is appointed by lot to attend to them.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0025",
+      "w": "The Athenian Constitution",
+      "s": "When they are examined, they are asked, first, 'Who is your father, and of what deme?",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0026",
+      "w": "The Athenian Constitution",
+      "s": "Cases of unintentional homicide, or of intent to kill, or of killing a slave or a resident alien or a foreigner, are heard by the court of Palladium.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0027",
+      "w": "The Athenian Constitution",
+      "s": "If he is condemned to a money fine, he must be imprisoned until he has paid up both the original debt, on account of which the information was laid against him, and also the fine which the court as imposed upon him.",
+      "src": {
+        "work": "The Athenian Constitution"
+      }
+    },
+    {
+      "id": "aristote.p0028",
+      "w": "The Categories",
+      "s": "Thus we have a second ground for asserting that the species is more truly substance than the genus.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0029",
+      "w": "The Categories",
+      "s": "For instance, one particular substance, 'man', cannot be more or less man either than himself at some other time or than some other man.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0030",
+      "w": "The Categories",
+      "s": "Thus, in respect of the manner in which the thing takes place, it is the peculiar mark of substance that it should be capable of admitting contrary qualities; for it is by itself changing that it does so.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0031",
+      "w": "The Categories",
+      "s": "But these are not quantitative, but relative; things are not great or small absolutely, they are so called rather as the result of an act of comparison.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0032",
+      "w": "The Categories",
+      "s": "Again, one period of time is not said to be more truly time than another.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0033",
+      "w": "The Categories",
+      "s": "The term 'slave', if defined as related, not to a master, but to a man, or a biped, or anything of that sort, is not reciprocally connected with that in relation to which it is defined, for the statement is not exact.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0034",
+      "w": "The Categories",
+      "s": "Thus the annihilation of the perceptible involves that of perception.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0035",
+      "w": "The Categories",
+      "s": "Such things are not predicated of a person in virtue of his disposition, but in virtue of his inborn capacity or incapacity to do something with ease or to avoid defeat of any kind.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0036",
+      "w": "The Categories",
+      "s": "The man who blushes through shame is not said to be a constitutional blusher, nor is the man who becomes pale through fear said to be constitutionally pale.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0037",
+      "w": "The Categories",
+      "s": "We must not be disturbed because it may be argued that, though proposing to discuss the category of quality, we have included in it many relative terms.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0038",
+      "w": "The Categories",
+      "s": "Knowledge, again, is the opposite of the thing known, in the same sense; and the thing known also is explained by its relation to its opposite, knowledge.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0039",
+      "w": "The Categories",
+      "s": "Again, in the case of contraries, it is possible that there should be changes from either into the other, while the subject retains its identity, unless indeed one of the contraries is a constitutive property of that subject, as heat is of fire.",
+      "src": {
+        "work": "The Categories"
+      }
+    },
+    {
+      "id": "aristote.p0040",
+      "w": "The Categories",
+      "s": "In the case of contraries, it is not always necessary that if one exists the other should also exist: for if all become healthy there will be health and no disease, and again, if everything turns white, there will be white, but no black.",
+      "src": {
+        "work": "The Categories"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "aristote.f.v0001",
+      "kind": "verbatim",
+      "text": "Which custom of barter is still preserved amongst many barbarous nations, who procure one necessary with another, but never sell anything; as giving and receiving wine for corn and the like.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "aristote.f.v0002",
+      "kind": "verbatim",
+      "text": "They are also permitted to resign their office before their time is elapsed, and if all this was done by law it would be well, and not at the pleasure of the individuals, which is a bad rule to follow.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "aristote.f.v0003",
+      "kind": "verbatim",
+      "text": "That there are many sorts of citizens, and that he may be said to be as completely who shares the honours of the state, is evident from what has been already said.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "aristote.f.v0004",
+      "kind": "verbatim",
+      "text": "Another is, when the magistrates are elected by a certain census; but this should be but small, and every one who was included in it should be eligible, but as soon as he was below it should lose that right.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "aristote.f.v0005",
+      "kind": "verbatim",
+      "text": "I mean by this, that it may happen, that although one form of government may be better than another, yet there is no reason to prevent another from being preferable thereunto in particular circumstances and for particular purposes.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "aristote.f.v0006",
+      "kind": "verbatim",
+      "text": "A number of citizens is the preservation of a democracy; for these are opposed to those rights which are founded in rank: on the contrary, the preservation of an oligarchy depends upon the due regulation of the different orders in the society.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "aristote.f.v0007",
+      "kind": "verbatim",
+      "text": "The same thing happens both in our connections with men and things: what we meet with first pleases best; for which reason children should be kept strangers to everything which is bad, more particularly whatsoever is loose and offensive to good manners.",
+      "work": "Politics: A Treatise on Government",
+      "lang": "en",
+      "src": {
+        "work": "Politics: A Treatise on Government"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "aristote.f.v0008",
+      "kind": "verbatim",
+      "text": "Here he acquired wealth and hired mercenaries; and not till ten years had elapsed did he return to Eretria and make an attempt to recover the government by force.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "aristote.f.v0009",
+      "kind": "verbatim",
+      "text": "On this Cleisthenes retired from the country, and Cleomenes, entering Attica with a small force, expelled, as polluted, seven hundred Athenian families.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "aristote.f.v0010",
+      "kind": "verbatim",
+      "text": "After Cleophon the popular leadership was occupied successively by the men who chose to talk the biggest and pander the most to the tastes of the majority, with their eyes fixed only on the interests of the moment.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "aristote.f.v0011",
+      "kind": "verbatim",
+      "text": "There should be a Council of Four Hundred, as in the ancient constitution, forty from each tribe, chosen out of candidates of more than thirty years of age, selected by the members of the tribes.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "aristote.f.v0012",
+      "kind": "verbatim",
+      "text": "The eleventh was that which followed the return from Phyle and Piraeus; and this has continued from that day to this, with continual accretions of power to the masses.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "aristote.f.v0013",
+      "kind": "verbatim",
+      "text": "They also sell, in the presence of the Council, the property of those who have gone into exile from the court of the Areopagus, and of others whose goods have been confiscated, and the nine Archons ratify the contracts.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "aristote.f.v0014",
+      "kind": "verbatim",
+      "text": "Cases of unintentional homicide, or of intent to kill, or of killing a slave or a resident alien or a foreigner, are heard by the court of Palladium.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "aristote.f.v0015",
+      "kind": "verbatim",
+      "text": "If he is condemned to a money fine, he must be imprisoned until he has paid up both the original debt, on account of which the information was laid against him, and also the fine which the court as imposed upon him.",
+      "work": "The Athenian Constitution",
+      "lang": "en",
+      "src": {
+        "work": "The Athenian Constitution"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "aristote.f.v0016",
+      "kind": "verbatim",
+      "text": "The term 'slave', if defined as related, not to a master, but to a man, or a biped, or anything of that sort, is not reciprocally connected with that in relation to which it is defined, for the statement is not exact.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "aristote.f.v0017",
+      "kind": "verbatim",
+      "text": "Such things are not predicated of a person in virtue of his disposition, but in virtue of his inborn capacity or incapacity to do something with ease or to avoid defeat of any kind.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "aristote.f.v0018",
+      "kind": "verbatim",
+      "text": "The man who blushes through shame is not said to be a constitutional blusher, nor is the man who becomes pale through fear said to be constitutionally pale.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "aristote.f.v0019",
+      "kind": "verbatim",
+      "text": "We must not be disturbed because it may be argued that, though proposing to discuss the category of quality, we have included in it many relative terms.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "aristote.f.v0020",
+      "kind": "verbatim",
+      "text": "Knowledge, again, is the opposite of the thing known, in the same sense; and the thing known also is explained by its relation to its opposite, knowledge.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "aristote.f.v0021",
+      "kind": "verbatim",
+      "text": "Again, in the case of contraries, it is possible that there should be changes from either into the other, while the subject retains its identity, unless indeed one of the contraries is a constitutive property of that subject, as heat is of fire.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "aristote.f.v0022",
+      "kind": "verbatim",
+      "text": "In the case of contraries, it is not always necessary that if one exists the other should also exist: for if all become healthy there will be health and no disease, and again, if everything turns white, there will be white, but no black.",
+      "work": "The Categories",
+      "lang": "en",
+      "src": {
+        "work": "The Categories"
+      },
+      "quality": {
+        "chars": 237
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:aa53de84f7aa0d010d851cc3b904433e86aec35728ffb6050049f9de6f7a631c"
+}

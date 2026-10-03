@@ -1,0 +1,654 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-03T09:49:59.405Z",
+  "authors": {
+    "smith": {
+      "kb": "salon-smith",
+      "works": [],
+      "pack": {
+        "path": "kb/smith.json",
+        "builtAt": "2026-10-03T09:49:59.047Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:ddd858ea9e2e7c51223ba0e9e12364e830f76aef7b067020169a2767b9f67fac"
+      },
+      "kbVersion": "smith@bootstrap-2026-10-03"
+    },
+    "aristote": {
+      "kb": "salon-aristote",
+      "works": [],
+      "pack": {
+        "path": "kb/aristote.json",
+        "builtAt": "2026-10-03T09:49:59.067Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:aa53de84f7aa0d010d851cc3b904433e86aec35728ffb6050049f9de6f7a631c"
+      },
+      "kbVersion": "aristote@bootstrap-2026-10-03"
+    },
+    "spinoza": {
+      "kb": "salon-spinoza",
+      "works": [],
+      "pack": {
+        "path": "kb/spinoza.json",
+        "builtAt": "2026-10-03T09:49:59.073Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:e03f1ce1d5cde1ebb944d9c5d59bf0bf6bb257d52af418b88f073f5bc6d9c6cf"
+      },
+      "kbVersion": "spinoza@bootstrap-2026-10-03"
+    },
+    "darwin": {
+      "kb": "salon-darwin",
+      "works": [],
+      "pack": {
+        "path": "kb/darwin.json",
+        "builtAt": "2026-10-03T09:49:59.081Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:abb0db221c929f29aaa57eaf5b78c8d6586b63657f74c75fe1ea72cd42c793ec"
+      },
+      "kbVersion": "darwin@bootstrap-2026-10-03"
+    },
+    "confucius": {
+      "kb": "salon-confucius",
+      "works": [],
+      "pack": {
+        "path": "kb/confucius.json",
+        "builtAt": "2026-10-03T09:49:59.087Z",
+        "sentences": 40,
+        "formulas": 23,
+        "checksum": "sha256:b6db9f240f1b5c7be1692274d355ecf66a4ac006e7aee9d81f6434e083dd4223"
+      },
+      "kbVersion": "confucius@bootstrap-2026-10-03"
+    },
+    "poe": {
+      "kb": "salon-poe",
+      "works": [],
+      "pack": {
+        "path": "kb/poe.json",
+        "builtAt": "2026-10-03T09:49:59.094Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:907284314bd8c05b614fbc94ae8bd2b7c2feef96c29a820295af7ec1ce3c24c8"
+      },
+      "kbVersion": "poe@bootstrap-2026-10-03"
+    },
+    "kant": {
+      "kb": "salon-kant",
+      "works": [],
+      "pack": {
+        "path": "kb/kant.json",
+        "builtAt": "2026-10-03T09:49:59.103Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:1338085ed2f4092c7181e517e8bcaf19e700b978a9284c149024f111ad5ec264"
+      },
+      "kbVersion": "kant@bootstrap-2026-10-03"
+    },
+    "dostoevski": {
+      "kb": "salon-dostoevski",
+      "works": [],
+      "pack": {
+        "path": "kb/dostoevski.json",
+        "builtAt": "2026-10-03T09:49:59.108Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:aef2b6f8a7d06e309252939b3a3d061ae7afb0d72f41513939d9949071a039be"
+      },
+      "kbVersion": "dostoevski@bootstrap-2026-10-03"
+    },
+    "kafka": {
+      "kb": "salon-kafka",
+      "works": [],
+      "pack": {
+        "path": "kb/kafka.json",
+        "builtAt": "2026-10-03T09:49:59.113Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:0934f7565327eabd06a3fb21ea4c8d8969e55a2147039573a1993b5b6245052f"
+      },
+      "kbVersion": "kafka@bootstrap-2026-10-03"
+    },
+    "nietzsche": {
+      "kb": "salon-nietzsche",
+      "works": [],
+      "pack": {
+        "path": "kb/nietzsche.json",
+        "builtAt": "2026-10-03T09:49:59.120Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:dfdb73e0adf78cd32392901be5d00123b2d22a7ea7f7ef96d415c070f6fb75f9"
+      },
+      "kbVersion": "nietzsche@bootstrap-2026-10-03"
+    },
+    "balzac": {
+      "kb": "salon-balzac",
+      "works": [],
+      "pack": {
+        "path": "kb/balzac.json",
+        "builtAt": "2026-10-03T09:49:59.126Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:7fcea16b1811debc4730d56843c79cca10f6f6e118f1dd694fd31aac652949a3"
+      },
+      "kbVersion": "balzac@bootstrap-2026-10-03"
+    },
+    "austen": {
+      "kb": "salon-austen",
+      "works": [],
+      "pack": {
+        "path": "kb/austen.json",
+        "builtAt": "2026-10-03T09:49:59.133Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:d923ee794734b6e657585d90aea4ed26146e176aab88f732a97a32fb2fe3fa4a"
+      },
+      "kbVersion": "austen@bootstrap-2026-10-03"
+    },
+    "rousseau": {
+      "kb": "salon-rousseau",
+      "works": [],
+      "pack": {
+        "path": "kb/rousseau.json",
+        "builtAt": "2026-10-03T09:49:59.138Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:cd7577842e6e09759a2c8db201d791507f9bc1cca5f3afc3ec9b409760aa82f8"
+      },
+      "kbVersion": "rousseau@bootstrap-2026-10-03"
+    },
+    "verne": {
+      "kb": "salon-verne",
+      "works": [],
+      "pack": {
+        "path": "kb/verne.json",
+        "builtAt": "2026-10-03T09:49:59.146Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:466a72f14bb8a294ad4379f655055890556d52b922c8dd4987b7ad0867156107"
+      },
+      "kbVersion": "verne@bootstrap-2026-10-03"
+    },
+    "marx": {
+      "kb": "salon-marx",
+      "works": [],
+      "pack": {
+        "path": "kb/marx.json",
+        "builtAt": "2026-10-03T09:49:59.153Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:d0580f4ee7001df2e023cd6ffa78ed14d12de49a75a83dbf8c62110b9cb9345f"
+      },
+      "kbVersion": "marx@bootstrap-2026-10-03"
+    },
+    "tolstoi": {
+      "kb": "salon-tolstoi",
+      "works": [],
+      "pack": {
+        "path": "kb/tolstoi.json",
+        "builtAt": "2026-10-03T09:49:59.160Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:4e9daed522b7b6ead6f98ed6dbee5ac9e107594a0c9471de15c380002cd2dccd"
+      },
+      "kbVersion": "tolstoi@bootstrap-2026-10-03"
+    },
+    "marcaurele": {
+      "kb": "salon-marcaurele",
+      "works": [],
+      "pack": {
+        "path": "kb/marcaurele.json",
+        "builtAt": "2026-10-03T09:49:59.166Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:0ef2cf99e75d198ef31e04e1aea8103d24432d707ecbf90fd4bb146b216de2a0"
+      },
+      "kbVersion": "marcaurele@bootstrap-2026-10-03"
+    },
+    "montaigne": {
+      "kb": "salon-montaigne",
+      "works": [],
+      "pack": {
+        "path": "kb/montaigne.json",
+        "builtAt": "2026-10-03T09:49:59.171Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:f4734c86a82149bc1dedce842728e818360c36481f0ff9b83844c696b27826c8"
+      },
+      "kbVersion": "montaigne@bootstrap-2026-10-03"
+    },
+    "cervantes": {
+      "kb": "salon-cervantes",
+      "works": [],
+      "pack": {
+        "path": "kb/cervantes.json",
+        "builtAt": "2026-10-03T09:49:59.180Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:2889efdcbf15dd1c382c9d410e5f0b80d313902041d98b073ab45c847272714c"
+      },
+      "kbVersion": "cervantes@bootstrap-2026-10-03"
+    },
+    "machiavel": {
+      "kb": "salon-machiavel",
+      "works": [],
+      "pack": {
+        "path": "kb/machiavel.json",
+        "builtAt": "2026-10-03T09:49:59.185Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:4f65236d16c2eeb5377e29a635b7186036b737afd3bd876a79377fab4ad4ecdb"
+      },
+      "kbVersion": "machiavel@bootstrap-2026-10-03"
+    },
+    "wilde": {
+      "kb": "salon-wilde",
+      "works": [],
+      "pack": {
+        "path": "kb/wilde.json",
+        "builtAt": "2026-10-03T09:49:59.190Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:b668015d58605ccbe8bb6f26de449623cae36aaa06024149c3ee151cfcc5106a"
+      },
+      "kbVersion": "wilde@bootstrap-2026-10-03"
+    },
+    "platon": {
+      "kb": "salon-platon",
+      "works": [],
+      "pack": {
+        "path": "kb/platon.json",
+        "builtAt": "2026-10-03T09:49:59.194Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:ba8bff0609e2e745f5bb20f7ba15427651d568d6e2d753c3df8c0a5e7d8a7bff"
+      },
+      "kbVersion": "platon@bootstrap-2026-10-03"
+    },
+    "descartes": {
+      "kb": "salon-descartes",
+      "works": [],
+      "pack": {
+        "path": "kb/descartes.json",
+        "builtAt": "2026-10-03T09:49:59.197Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:8966ce768877cadd56b6c95ed77de14e2dd352f923eb0d65398bbcec8bc59f13"
+      },
+      "kbVersion": "descartes@bootstrap-2026-10-03"
+    },
+    "stendhal": {
+      "kb": "salon-stendhal",
+      "works": [],
+      "pack": {
+        "path": "kb/stendhal.json",
+        "builtAt": "2026-10-03T09:49:59.202Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:ed81cf2a9aeecb3867fb8960c5672a560b8fab69d225c2af44d00aa4f39be6ff"
+      },
+      "kbVersion": "stendhal@bootstrap-2026-10-03"
+    },
+    "suntzu": {
+      "kb": "salon-suntzu",
+      "works": [],
+      "pack": {
+        "path": "kb/suntzu.json",
+        "builtAt": "2026-10-03T09:49:59.204Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:01407e74b77a6beb255f2251c32b8770ff0f9a0e04d499f4dc9ff24db766fe15"
+      },
+      "kbVersion": "suntzu@bootstrap-2026-10-03"
+    },
+    "hugo": {
+      "kb": "salon-hugo",
+      "works": [],
+      "pack": {
+        "path": "kb/hugo.json",
+        "builtAt": "2026-10-03T09:49:59.208Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:3a30876740dc0645b369cfa7c2c5d58ce6ecb0f8b941fd1db51cbe65bd64ac49"
+      },
+      "kbVersion": "hugo@bootstrap-2026-10-03"
+    },
+    "voltaire": {
+      "kb": "salon-voltaire",
+      "works": [],
+      "pack": {
+        "path": "kb/voltaire.json",
+        "builtAt": "2026-10-03T09:49:59.213Z",
+        "sentences": 40,
+        "formulas": 23,
+        "checksum": "sha256:37bf903030a8c0e803ba559c3473ad5543ada83a54ab47dc60d8ed39261afa98"
+      },
+      "kbVersion": "voltaire@bootstrap-2026-10-03"
+    },
+    "shakespeare": {
+      "kb": "salon-shakespeare",
+      "works": [],
+      "pack": {
+        "path": "kb/shakespeare.json",
+        "builtAt": "2026-10-03T09:49:59.217Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:d42ba954efb22f5f55455f614d09880f8344e0117136cf0f3b447bcc67dd7aa0"
+      },
+      "kbVersion": "shakespeare@bootstrap-2026-10-03"
+    },
+    "seneca": {
+      "kb": "salon-seneca",
+      "works": [],
+      "pack": {
+        "path": "kb/seneca.json",
+        "builtAt": "2026-10-03T09:49:59.223Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:0cef4a248f54e4f0cd75390ee6a1320be124f12fba4a1accb25732a8ac11d35c"
+      },
+      "kbVersion": "seneca@bootstrap-2026-10-03"
+    },
+    "ciceron": {
+      "kb": "salon-ciceron",
+      "works": [],
+      "pack": {
+        "path": "kb/ciceron.json",
+        "builtAt": "2026-10-03T09:49:59.227Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:dfd5ce00ad3f5fe8818b6b27352d4ee47dc7da787b4f075c019ec4e2c194e7f4"
+      },
+      "kbVersion": "ciceron@bootstrap-2026-10-03"
+    },
+    "epictete": {
+      "kb": "salon-epictete",
+      "works": [],
+      "pack": {
+        "path": "kb/epictete.json",
+        "builtAt": "2026-10-03T09:49:59.231Z",
+        "sentences": 40,
+        "formulas": 23,
+        "checksum": "sha256:ca1251080f99c8468bce6139ecd02f7816ee7580933a9d66cecc5d9f97299073"
+      },
+      "kbVersion": "epictete@bootstrap-2026-10-03"
+    },
+    "epicure": {
+      "kb": "salon-epicure",
+      "works": [],
+      "pack": {
+        "path": "kb/epicure.json",
+        "builtAt": "2026-10-03T09:49:59.236Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:9643899b5dea4e87e21edf2ecb96f337d545472b28786b049de9db93d88abc5c"
+      },
+      "kbVersion": "epicure@bootstrap-2026-10-03"
+    },
+    "augustin": {
+      "kb": "salon-augustin",
+      "works": [],
+      "pack": {
+        "path": "kb/augustin.json",
+        "builtAt": "2026-10-03T09:49:59.240Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:feddcdf6529ac9cad2f54c35963f5bf4f829b888ab8543c7f54b0d4cd5d9de3b"
+      },
+      "kbVersion": "augustin@bootstrap-2026-10-03"
+    },
+    "boece": {
+      "kb": "salon-boece",
+      "works": [],
+      "pack": {
+        "path": "kb/boece.json",
+        "builtAt": "2026-10-03T09:49:59.243Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:58d5273c0d448516253d9b0a9bd74ab98339252f0795e9f2d34566ea5a4dcab1"
+      },
+      "kbVersion": "boece@bootstrap-2026-10-03"
+    },
+    "aquinas": {
+      "kb": "salon-aquinas",
+      "works": [],
+      "pack": {
+        "path": "kb/aquinas.json",
+        "builtAt": "2026-10-03T09:49:59.246Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:a28c10bcbfa918f3c65fb8fec7e9caf316d0d48968849e46cab6c365edd7618e"
+      },
+      "kbVersion": "aquinas@bootstrap-2026-10-03"
+    },
+    "hobbes": {
+      "kb": "salon-hobbes",
+      "works": [],
+      "pack": {
+        "path": "kb/hobbes.json",
+        "builtAt": "2026-10-03T09:49:59.249Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:9c2f91f4b1a59fabae9a226704b2b56c142961895edbae405a453ee679a49348"
+      },
+      "kbVersion": "hobbes@bootstrap-2026-10-03"
+    },
+    "locke": {
+      "kb": "salon-locke",
+      "works": [],
+      "pack": {
+        "path": "kb/locke.json",
+        "builtAt": "2026-10-03T09:49:59.254Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:49430cb500b0e542700a63f108da5146280bab6788af2c11ca85914cf69c875e"
+      },
+      "kbVersion": "locke@bootstrap-2026-10-03"
+    },
+    "hume": {
+      "kb": "salon-hume",
+      "works": [],
+      "pack": {
+        "path": "kb/hume.json",
+        "builtAt": "2026-10-03T09:49:59.258Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:35bc466e4a59fcc00dfb8194c91f2e43b7af1e32f681ef3b03e3414106295779"
+      },
+      "kbVersion": "hume@bootstrap-2026-10-03"
+    },
+    "leibniz": {
+      "kb": "salon-leibniz",
+      "works": [],
+      "pack": {
+        "path": "kb/leibniz.json",
+        "builtAt": "2026-10-03T09:49:59.262Z",
+        "sentences": 40,
+        "formulas": 23,
+        "checksum": "sha256:a998c78c9403bf3c9302d7e0b154f54474597370d2375283a44667b87b04034b"
+      },
+      "kbVersion": "leibniz@bootstrap-2026-10-03"
+    },
+    "pascal": {
+      "kb": "salon-pascal",
+      "works": [],
+      "pack": {
+        "path": "kb/pascal.json",
+        "builtAt": "2026-10-03T09:49:59.265Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:cd002dd597af8bf99daa9d4bb73b58e95960a671ae8ecd7e982513114d7fe6ee"
+      },
+      "kbVersion": "pascal@bootstrap-2026-10-03"
+    },
+    "berkeley": {
+      "kb": "salon-berkeley",
+      "works": [],
+      "pack": {
+        "path": "kb/berkeley.json",
+        "builtAt": "2026-10-03T09:49:59.269Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:c4953dbe9afa001e764562a209818358736fcf0c61552947bbdcf83841d1813a"
+      },
+      "kbVersion": "berkeley@bootstrap-2026-10-03"
+    },
+    "hegel": {
+      "kb": "salon-hegel",
+      "works": [],
+      "pack": {
+        "path": "kb/hegel.json",
+        "builtAt": "2026-10-03T09:49:59.273Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:3aed4820f60fb0656b23e4c94ca86b12df3a8dea5962a99e1fcf92ac23070a1b"
+      },
+      "kbVersion": "hegel@bootstrap-2026-10-03"
+    },
+    "schopenhauer": {
+      "kb": "salon-schopenhauer",
+      "works": [],
+      "pack": {
+        "path": "kb/schopenhauer.json",
+        "builtAt": "2026-10-03T09:49:59.276Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:3a2bd1125acb75ac120f873dc9335f83755f7db229bce1994fcd247ef6d8ca83"
+      },
+      "kbVersion": "schopenhauer@bootstrap-2026-10-03"
+    },
+    "kierkegaard": {
+      "kb": "salon-kierkegaard",
+      "works": [],
+      "pack": {
+        "path": "kb/kierkegaard.json",
+        "builtAt": "2026-10-03T09:49:59.279Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:e2b531a99dd09f07fc629dcca9b6599a11ba112e9e35f9c74f21dd5a62bb7365"
+      },
+      "kbVersion": "kierkegaard@bootstrap-2026-10-03"
+    },
+    "mill": {
+      "kb": "salon-mill",
+      "works": [],
+      "pack": {
+        "path": "kb/mill.json",
+        "builtAt": "2026-10-03T09:49:59.283Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:7fdbdedb91328065e794f68dcd32c17b363258c968ad017dbdeb5cc0cc9064a0"
+      },
+      "kbVersion": "mill@bootstrap-2026-10-03"
+    },
+    "emerson": {
+      "kb": "salon-emerson",
+      "works": [],
+      "pack": {
+        "path": "kb/emerson.json",
+        "builtAt": "2026-10-03T09:49:59.288Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:e173a5c18c0b5fed0920caeec48bdf4853e875257eb3e00d5321e6224fb37c48"
+      },
+      "kbVersion": "emerson@bootstrap-2026-10-03"
+    },
+    "james": {
+      "kb": "salon-james",
+      "works": [],
+      "pack": {
+        "path": "kb/james.json",
+        "builtAt": "2026-10-03T09:49:59.292Z",
+        "sentences": 40,
+        "formulas": 23,
+        "checksum": "sha256:504ad7d780d06a43d002b5ae81c9b228a8671c0983af3ee2fe0e02d1cfdee154"
+      },
+      "kbVersion": "james@bootstrap-2026-10-03"
+    },
+    "diderot": {
+      "kb": "salon-diderot",
+      "works": [],
+      "pack": {
+        "path": "kb/diderot.json",
+        "builtAt": "2026-10-03T09:49:59.296Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:dde13ab4b36e1789afa3a531280076cc19e5ddad7dc3db7f451cb18ba747f778"
+      },
+      "kbVersion": "diderot@bootstrap-2026-10-03"
+    },
+    "christianisme": {
+      "kb": "salon-christianisme",
+      "works": [],
+      "pack": {
+        "path": "kb/christianisme.json",
+        "builtAt": "2026-10-03T09:49:59.299Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:402d25f50db7c163a6313b0194a831dc2877bdf3910d095197d9f0c2a69f178f"
+      },
+      "kbVersion": "christianisme@bootstrap-2026-10-03"
+    },
+    "judaisme": {
+      "kb": "salon-judaisme",
+      "works": [],
+      "pack": {
+        "path": "kb/judaisme.json",
+        "builtAt": "2026-10-03T09:49:59.302Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:89811163e70270be86ea876f57c6ec5be3fbe8c8ae184937be76a9eceed92919"
+      },
+      "kbVersion": "judaisme@bootstrap-2026-10-03"
+    },
+    "islam": {
+      "kb": "salon-islam",
+      "works": [],
+      "pack": {
+        "path": "kb/islam.json",
+        "builtAt": "2026-10-03T09:49:59.306Z",
+        "sentences": 20,
+        "formulas": 12,
+        "checksum": "sha256:a5dffb0a084f7d3e52bd5c2b1e653f991a212142da092cf5400ac78a48fe2aef"
+      },
+      "kbVersion": "islam@bootstrap-2026-10-03"
+    },
+    "hindouisme": {
+      "kb": "salon-hindouisme",
+      "works": [],
+      "pack": {
+        "path": "kb/hindouisme.json",
+        "builtAt": "2026-10-03T09:49:59.311Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:c30bea63a37b4bd607bc19f46a26fd66631baf5b90218fb601a701a06a7db7fd"
+      },
+      "kbVersion": "hindouisme@bootstrap-2026-10-03"
+    },
+    "bouddhisme": {
+      "kb": "salon-bouddhisme",
+      "works": [],
+      "pack": {
+        "path": "kb/bouddhisme.json",
+        "builtAt": "2026-10-03T09:49:59.318Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:a56c0ca093a9d199c12e88f47d9c4a2b25dc539d34f769ecc040a486ad5b6489"
+      },
+      "kbVersion": "bouddhisme@bootstrap-2026-10-03"
+    },
+    "taoisme": {
+      "kb": "salon-taoisme",
+      "works": [],
+      "pack": {
+        "path": "kb/taoisme.json",
+        "builtAt": "2026-10-03T09:49:59.321Z",
+        "sentences": 40,
+        "formulas": 22,
+        "checksum": "sha256:a10e6d6d3708291302c69992ef3f824e2f7d7373722794c8d0e4548f6d14309d"
+      },
+      "kbVersion": "taoisme@bootstrap-2026-10-03"
+    }
+  }
+}

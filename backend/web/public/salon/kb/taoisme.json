@@ -1,0 +1,636 @@
+{
+  "authorId": "taoisme",
+  "kbVersion": "taoisme@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.321Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Tao Te Ching",
+      "sentences": 20
+    },
+    {
+      "title": "Zhuangzi",
+      "sentences": 20
+    }
+  ],
+  "passages": [
+    {
+      "id": "taoisme.p0001",
+      "w": "Tao Te Ching",
+      "s": "When he has cleansed away the most mysterious sights (of his imagination), he can become without a flaw.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0002",
+      "w": "Tao Te Ching",
+      "s": "Its upper part is not bright, and its lower part is not obscure.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0003",
+      "w": "Tao Te Ching",
+      "s": "In that likeness to heaven he possesses the Tao.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0004",
+      "w": "Tao Te Ching",
+      "s": "I alone seem listless and still, my desires having as yet given no indication of their presence.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0005",
+      "w": "Tao Te Ching",
+      "s": "It is because he is thus free from striving that therefore no one in the world is able to strive with him.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0006",
+      "w": "Tao Te Ching",
+      "s": "Gravity is the root of lightness; stillness, the ruler of movement.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0007",
+      "w": "Tao Te Ching",
+      "s": "He who would so win it destroys it; he who would hold it in his grasp loses it.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0008",
+      "w": "Tao Te Ching",
+      "s": "To consider this desirable would be to delight in the slaughter of men; and he who delights in the slaughter of men cannot get his will in the kingdom.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0009",
+      "w": "Tao Te Ching",
+      "s": "It clothes all things as with a garment, and makes no assumption of being their lord;--it may be named in the smallest things.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0010",
+      "w": "Tao Te Ching",
+      "s": "All these are the results of the One (Tao).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0011",
+      "w": "Tao Te Ching",
+      "s": "The violent and strong do not die their natural death.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0012",
+      "w": "Tao Te Ching",
+      "s": "The farther that one goes out (from himself), the less he knows.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0013",
+      "w": "Tao Te Ching",
+      "s": "Therefore all things without exception honour the Tao, and exalt its outflowing operation.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0014",
+      "w": "Tao Te Ching",
+      "s": "Poisonous insects will not sting him; fierce beasts will not seize him; birds of prey will not strike him.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0015",
+      "w": "Tao Te Ching",
+      "s": "Therefore the sage is (like) a square which cuts no one (with its angles); (like) a corner which injures no one (with its sharpness).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0016",
+      "w": "Tao Te Ching",
+      "s": "Tao has of all things the most honoured place.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0017",
+      "w": "Tao Te Ching",
+      "s": "The difficulty in governing the people arises from their having much knowledge.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0018",
+      "w": "Tao Te Ching",
+      "s": "He who vanquishes yet still Keeps from his foes apart; He whose hests men most fulfil Yet humbly plies his art.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0019",
+      "w": "Tao Te Ching",
+      "s": "And thus he puts the latter alternative away and makes choice of the former.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0020",
+      "w": "Tao Te Ching",
+      "s": "Thus it is that to leave the subject of living altogether out of view is better than to set a high value on it.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0021",
+      "w": "Zhuangzi",
+      "s": "But what is it that gives to each the individuality, to all the potentiality, of sound?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0022",
+      "w": "Zhuangzi",
+      "s": "Once upon a time, I, Chuang Tzŭ, dreamt I was a butterfly, fluttering hither and thither, to all intents and purposes a butterfly.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0023",
+      "w": "Zhuangzi",
+      "s": "To this day, the very best kinds of wood are still reserved for the \"planks of old age.\" Thus they do not fulfil their allotted span of years, but perish in mid-career beneath the axe.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0024",
+      "w": "Zhuangzi",
+      "s": "In that which was ONE, they were of God; in that which was not ONE, they were of Man.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0025",
+      "w": "Zhuangzi",
+      "s": "Where water is in motion,--is the abyss.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0026",
+      "w": "Zhuangzi",
+      "s": "When man rejoices greatly he gravitates towards the positive pole.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0027",
+      "w": "Zhuangzi",
+      "s": "What is there to put up with in that?\" Thereupon the border-warden went off, and Yao followed him; saying, \"May I ask----,\" to which the warden only replied \"Begone!\" The style of the above episode varies enough from Chuang Tzŭ's standard to make its authorship doubtful.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0028",
+      "w": "Zhuangzi",
+      "s": "Rulers did not employ them as a means of nourishing the ruled.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0029",
+      "w": "Zhuangzi",
+      "s": "I spent much time over them, and I am well acquainted with their purport.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0030",
+      "w": "Zhuangzi",
+      "s": "Put a halter on a horse's head, a string through a bullock's nose,--that is the artificial.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0031",
+      "w": "Zhuangzi",
+      "s": "Confucius said, \"Neither affecting obscurity, nor courting prominence, but unconsciously occupying the happy mean,--he who can attain to these three will enjoy a surpassing fame.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0032",
+      "w": "Zhuangzi",
+      "s": "There is nothing left to us but to wait.\" \"And that man and God are ONE,\" said Yen Hui.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0033",
+      "w": "Zhuangzi",
+      "s": "Man passes through this sublunary life as a white horse passes a crack.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0034",
+      "w": "Zhuangzi",
+      "s": "But this subjective point of view will not bear the test.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0035",
+      "w": "Zhuangzi",
+      "s": "A man is not considered a good man because he is a good talker.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0036",
+      "w": "Zhuangzi",
+      "s": "Society,\" replied T'ai Kung Tiao, \"is an agreement of a certain number of families and individuals to abide by certain customs.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0037",
+      "w": "Zhuangzi",
+      "s": "By firelight or in daylight I am seen: in darkness or by night I am gone.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0038",
+      "w": "Zhuangzi",
+      "s": "Otherwise you will die.\" \"I have heard,\" replied Confucius, \"that the world contains three classes of virtue.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0039",
+      "w": "Zhuangzi",
+      "s": "One flash of this blade, and the princes of the empire submit.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0040",
+      "w": "Zhuangzi",
+      "s": "Why a man who aims at virtue practises what he approves and condemns what he does not practise.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "taoisme.f.v0001",
+      "kind": "verbatim",
+      "text": "When he has cleansed away the most mysterious sights (of his imagination), he can become without a flaw.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "taoisme.f.v0002",
+      "kind": "verbatim",
+      "text": "I alone seem listless and still, my desires having as yet given no indication of their presence.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "taoisme.f.v0003",
+      "kind": "verbatim",
+      "text": "It is because he is thus free from striving that therefore no one in the world is able to strive with him.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0004",
+      "kind": "verbatim",
+      "text": "He who would so win it destroys it; he who would hold it in his grasp loses it.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "taoisme.f.v0005",
+      "kind": "verbatim",
+      "text": "To consider this desirable would be to delight in the slaughter of men; and he who delights in the slaughter of men cannot get his will in the kingdom.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "taoisme.f.v0006",
+      "kind": "verbatim",
+      "text": "It clothes all things as with a garment, and makes no assumption of being their lord;--it may be named in the smallest things.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "taoisme.f.v0007",
+      "kind": "verbatim",
+      "text": "Poisonous insects will not sting him; fierce beasts will not seize him; birds of prey will not strike him.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0008",
+      "kind": "verbatim",
+      "text": "The difficulty in governing the people arises from their having much knowledge.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "taoisme.f.v0009",
+      "kind": "verbatim",
+      "text": "He who vanquishes yet still Keeps from his foes apart; He whose hests men most fulfil Yet humbly plies his art.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "taoisme.f.v0010",
+      "kind": "verbatim",
+      "text": "Once upon a time, I, Chuang Tzŭ, dreamt I was a butterfly, fluttering hither and thither, to all intents and purposes a butterfly.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "taoisme.f.v0011",
+      "kind": "verbatim",
+      "text": "To this day, the very best kinds of wood are still reserved for the \"planks of old age.\" Thus they do not fulfil their allotted span of years, but perish in mid-career beneath the axe.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "taoisme.f.v0012",
+      "kind": "verbatim",
+      "text": "In that which was ONE, they were of God; in that which was not ONE, they were of Man.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "taoisme.f.v0013",
+      "kind": "verbatim",
+      "text": "What is there to put up with in that?\" Thereupon the border-warden went off, and Yao followed him; saying, \"May I ask----,\" to which the warden only replied \"Begone!\" The style of the above episode varies enough from Chuang Tzŭ's standard to make its authorship doubtful.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "taoisme.f.v0014",
+      "kind": "verbatim",
+      "text": "I spent much time over them, and I am well acquainted with their purport.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 73
+      }
+    },
+    {
+      "id": "taoisme.f.v0015",
+      "kind": "verbatim",
+      "text": "Put a halter on a horse's head, a string through a bullock's nose,--that is the artificial.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "taoisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Confucius said, \"Neither affecting obscurity, nor courting prominence, but unconsciously occupying the happy mean,--he who can attain to these three will enjoy a surpassing fame.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "taoisme.f.v0017",
+      "kind": "verbatim",
+      "text": "There is nothing left to us but to wait.\" \"And that man and God are ONE,\" said Yen Hui.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 87
+      }
+    },
+    {
+      "id": "taoisme.f.v0018",
+      "kind": "verbatim",
+      "text": "Man passes through this sublunary life as a white horse passes a crack.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 71
+      }
+    },
+    {
+      "id": "taoisme.f.v0019",
+      "kind": "verbatim",
+      "text": "Society,\" replied T'ai Kung Tiao, \"is an agreement of a certain number of families and individuals to abide by certain customs.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "taoisme.f.v0020",
+      "kind": "verbatim",
+      "text": "By firelight or in daylight I am seen: in darkness or by night I am gone.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 73
+      }
+    },
+    {
+      "id": "taoisme.f.v0021",
+      "kind": "verbatim",
+      "text": "Otherwise you will die.\" \"I have heard,\" replied Confucius, \"that the world contains three classes of virtue.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "taoisme.f.v0022",
+      "kind": "verbatim",
+      "text": "Why a man who aims at virtue practises what he approves and condemns what he does not practise.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 95
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:a10e6d6d3708291302c69992ef3f824e2f7d7373722794c8d0e4548f6d14309d"
+}

@@ -1,0 +1,640 @@
+{
+  "authorId": "austen",
+  "kbVersion": "austen@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.133Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Emma",
+      "sentences": 14
+    },
+    {
+      "title": "Mansfield Park",
+      "sentences": 13
+    },
+    {
+      "title": "Persuasion",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "austen.p0001",
+      "w": "Emma",
+      "s": "I had imagined you were consulting me only as to the wording of it.” Harriet was silent.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0002",
+      "w": "Emma",
+      "s": "Martin’s being no otherwise remembered, than as he furnished a contrast with Mr.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0003",
+      "w": "Emma",
+      "s": "Where a man does his best with only moderate powers, he will have the advantage over negligent superiority.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0004",
+      "w": "Emma",
+      "s": "I am exceedingly sorry: but it is well that the mistake ends where it does.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0005",
+      "w": "Emma",
+      "s": "Well, that is so very!—I am sure if Jane is tired, you will be so kind as to give her your arm.—Mr.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0006",
+      "w": "Emma",
+      "s": "But her account of every thing leaves so much to be guessed, she is so very reserved, so very unwilling to give the least information about any body, that I really think you may say what you like of your acquaintance with her.” “May I, indeed?—Then I will speak the truth, and nothing suits me so well.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0007",
+      "w": "Emma",
+      "s": "However, the very same evening William Larkins came over with a large basket of apples, the same sort of apples, a bushel at least, and I was very much obliged, and went down and spoke to William Larkins and said every thing, as you may suppose.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0008",
+      "w": "Emma",
+      "s": "His wish of staying longer evidently did not please; but it was not opposed.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0009",
+      "w": "Emma",
+      "s": "But I do flatter myself, my dear Jane, that my influence is not entirely worn out.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0010",
+      "w": "Emma",
+      "s": "But she had an almost instant doubt of his caring for her as he had done, of his feeling the same tenderness in the same degree.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0011",
+      "w": "Emma",
+      "s": "Is not this most vexatious, Knightley?” she cried.—“And such weather for exploring!—These delays and disappointments are quite odious.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0012",
+      "w": "Emma",
+      "s": "Happy couple!” said Frank Churchill, as soon as they were out of hearing:—“How well they suit one another!—Very lucky—marrying as they did, upon an acquaintance formed only in a public place!—They only knew each other, I think, a few weeks in Bath!",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0013",
+      "w": "Emma",
+      "s": "This point was just arranged, when a visitor arrived to tear Emma’s thoughts a little from the one subject which had engrossed them, sleeping or waking, the last twenty-four hours—Mrs.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0014",
+      "w": "Emma",
+      "s": "Knightley coolly, and resuming the letter.",
+      "src": {
+        "work": "Emma"
+      }
+    },
+    {
+      "id": "austen.p0015",
+      "w": "Mansfield Park",
+      "s": "My dear Miss Price,” said Miss Crawford, as soon as she was at all within hearing, “I am come to make my own apologies for keeping you waiting; but I have nothing in the world to say for myself—I knew it was very late, and that I was behaving extremely ill; and therefore, if you please, you must forgive me.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0016",
+      "w": "Mansfield Park",
+      "s": "This chapel was fitted up as you see it, in James the Second’s time.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0017",
+      "w": "Mansfield Park",
+      "s": "Family squabbling is the greatest evil of all, and we had better do anything than be altogether by the ears.” His sisters, to whom he had an opportunity of speaking the next morning, were quite as impatient of his advice, quite as unyielding to his representation, quite as determined in the cause of pleasure, as Tom.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0018",
+      "w": "Mansfield Park",
+      "s": "Can I speak with you, Fanny, for a few minutes?” said he.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0019",
+      "w": "Mansfield Park",
+      "s": "Could they be much together, I feel sure of their liking each other.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0020",
+      "w": "Mansfield Park",
+      "s": "Norris; and not bearing to remain with her in what might seem a state of triumph, she followed her uncle out of the room, having staid behind him only long enough to hear these words spoken in angry agitation— “Quite unnecessary!",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0021",
+      "w": "Mansfield Park",
+      "s": "I think, I hope, I am sure she is not serious; but I would rather not hear it.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0022",
+      "w": "Mansfield Park",
+      "s": "Indeed, how can one care for those one has never seen?",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0023",
+      "w": "Mansfield Park",
+      "s": "You will have nothing to fear, or to be agitated about.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0024",
+      "w": "Mansfield Park",
+      "s": "I exclude extremes, of course; and a very close resemblance in all those points would be the likeliest way to produce an extreme.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0025",
+      "w": "Mansfield Park",
+      "s": "Price, in a complaining voice, “now, how can you be so cross?",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0026",
+      "w": "Mansfield Park",
+      "s": "He came, not to stop, but to join them; he was asked to go with them to the Garrison chapel, which was exactly what he had intended, and they all walked thither together.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0027",
+      "w": "Mansfield Park",
+      "s": "At any other time this would have been felt dreadfully.",
+      "src": {
+        "work": "Mansfield Park"
+      }
+    },
+    {
+      "id": "austen.p0028",
+      "w": "Persuasion",
+      "s": "A few months had seen the beginning and the end of their acquaintance; but not with a few months ended Anne’s share of suffering from it.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0029",
+      "w": "Persuasion",
+      "s": "Anne will stay; Anne undertakes to stay at home and take care of him.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0030",
+      "w": "Persuasion",
+      "s": "Pretty well, ma’am, in the fifteen years of my marriage; though many women have done more.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0031",
+      "w": "Persuasion",
+      "s": "It would place her in the same village with Captain Wentworth, within half a mile of him; they would have to frequent the same church, and there must be intercourse between the two families.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0032",
+      "w": "Persuasion",
+      "s": "It is bad for him, I know, to be shut up as he is; but what can we do?",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0033",
+      "w": "Persuasion",
+      "s": "Give him a book, and he will read all day long.” “Yes, that he will!” exclaimed Mary, tauntingly.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0034",
+      "w": "Persuasion",
+      "s": "They knew he was to dine in Lansdown Crescent.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0035",
+      "w": "Persuasion",
+      "s": "The carriage is gone to-day, to bring Louisa and the Harvilles to-morrow.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0036",
+      "w": "Persuasion",
+      "s": "I wish young ladies had not such a number of fine Christian names.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0037",
+      "w": "Persuasion",
+      "s": "In re-settling themselves there were now many changes, the result of which was favourable for her.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0038",
+      "w": "Persuasion",
+      "s": "In the warmth of the moment, and under a mistaken impression, I might, perhaps, have endeavoured to interest you in some circumstances; but not now.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0039",
+      "w": "Persuasion",
+      "s": "Not that he will value it as he ought,” he observed, “Charles is too cool about sporting.",
+      "src": {
+        "work": "Persuasion"
+      }
+    },
+    {
+      "id": "austen.p0040",
+      "w": "Persuasion",
+      "s": "She could think only of the invitation she had with such astonishment witnessed, and of the manner in which it had been received; a manner of doubtful meaning, of surprise rather than gratification, of polite acknowledgement rather than acceptance.",
+      "src": {
+        "work": "Persuasion"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "austen.f.v0001",
+      "kind": "verbatim",
+      "text": "I had imagined you were consulting me only as to the wording of it.” Harriet was silent.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 88
+      }
+    },
+    {
+      "id": "austen.f.v0002",
+      "kind": "verbatim",
+      "text": "Martin’s being no otherwise remembered, than as he furnished a contrast with Mr.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "austen.f.v0003",
+      "kind": "verbatim",
+      "text": "Where a man does his best with only moderate powers, he will have the advantage over negligent superiority.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 107
+      }
+    },
+    {
+      "id": "austen.f.v0004",
+      "kind": "verbatim",
+      "text": "Well, that is so very!—I am sure if Jane is tired, you will be so kind as to give her your arm.—Mr.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "austen.f.v0005",
+      "kind": "verbatim",
+      "text": "However, the very same evening William Larkins came over with a large basket of apples, the same sort of apples, a bushel at least, and I was very much obliged, and went down and spoke to William Larkins and said every thing, as you may suppose.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "austen.f.v0006",
+      "kind": "verbatim",
+      "text": "Is not this most vexatious, Knightley?” she cried.—“And such weather for exploring!—These delays and disappointments are quite odious.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "austen.f.v0007",
+      "kind": "verbatim",
+      "text": "Happy couple!” said Frank Churchill, as soon as they were out of hearing:—“How well they suit one another!—Very lucky—marrying as they did, upon an acquaintance formed only in a public place!—They only knew each other, I think, a few weeks in Bath!",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "austen.f.v0008",
+      "kind": "verbatim",
+      "text": "This point was just arranged, when a visitor arrived to tear Emma’s thoughts a little from the one subject which had engrossed them, sleeping or waking, the last twenty-four hours—Mrs.",
+      "work": "Emma",
+      "lang": "en",
+      "src": {
+        "work": "Emma"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "austen.f.v0009",
+      "kind": "verbatim",
+      "text": "My dear Miss Price,” said Miss Crawford, as soon as she was at all within hearing, “I am come to make my own apologies for keeping you waiting; but I have nothing in the world to say for myself—I knew it was very late, and that I was behaving extremely ill; and therefore, if you please, you must forgive me.",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 308
+      }
+    },
+    {
+      "id": "austen.f.v0010",
+      "kind": "verbatim",
+      "text": "Family squabbling is the greatest evil of all, and we had better do anything than be altogether by the ears.” His sisters, to whom he had an opportunity of speaking the next morning, were quite as impatient of his advice, quite as unyielding to his representation, quite as determined in the cause of pleasure, as Tom.",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 318
+      }
+    },
+    {
+      "id": "austen.f.v0011",
+      "kind": "verbatim",
+      "text": "Norris; and not bearing to remain with her in what might seem a state of triumph, she followed her uncle out of the room, having staid behind him only long enough to hear these words spoken in angry agitation— “Quite unnecessary!",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "austen.f.v0012",
+      "kind": "verbatim",
+      "text": "I think, I hope, I am sure she is not serious; but I would rather not hear it.",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 78
+      }
+    },
+    {
+      "id": "austen.f.v0013",
+      "kind": "verbatim",
+      "text": "I exclude extremes, of course; and a very close resemblance in all those points would be the likeliest way to produce an extreme.",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "austen.f.v0014",
+      "kind": "verbatim",
+      "text": "He came, not to stop, but to join them; he was asked to go with them to the Garrison chapel, which was exactly what he had intended, and they all walked thither together.",
+      "work": "Mansfield Park",
+      "lang": "en",
+      "src": {
+        "work": "Mansfield Park"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "austen.f.v0015",
+      "kind": "verbatim",
+      "text": "A few months had seen the beginning and the end of their acquaintance; but not with a few months ended Anne’s share of suffering from it.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "austen.f.v0016",
+      "kind": "verbatim",
+      "text": "Pretty well, ma’am, in the fifteen years of my marriage; though many women have done more.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 90
+      }
+    },
+    {
+      "id": "austen.f.v0017",
+      "kind": "verbatim",
+      "text": "It would place her in the same village with Captain Wentworth, within half a mile of him; they would have to frequent the same church, and there must be intercourse between the two families.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "austen.f.v0018",
+      "kind": "verbatim",
+      "text": "Give him a book, and he will read all day long.” “Yes, that he will!” exclaimed Mary, tauntingly.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "austen.f.v0019",
+      "kind": "verbatim",
+      "text": "In re-settling themselves there were now many changes, the result of which was favourable for her.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "austen.f.v0020",
+      "kind": "verbatim",
+      "text": "In the warmth of the moment, and under a mistaken impression, I might, perhaps, have endeavoured to interest you in some circumstances; but not now.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "austen.f.v0021",
+      "kind": "verbatim",
+      "text": "Not that he will value it as he ought,” he observed, “Charles is too cool about sporting.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 89
+      }
+    },
+    {
+      "id": "austen.f.v0022",
+      "kind": "verbatim",
+      "text": "She could think only of the invitation she had with such astonishment witnessed, and of the manner in which it had been received; a manner of doubtful meaning, of surprise rather than gratification, of polite acknowledgement rather than acceptance.",
+      "work": "Persuasion",
+      "lang": "en",
+      "src": {
+        "work": "Persuasion"
+      },
+      "quality": {
+        "chars": 248
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:d923ee794734b6e657585d90aea4ed26146e176aab88f732a97a32fb2fe3fa4a"
+}

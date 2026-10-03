@@ -221,6 +221,14 @@
     var role = (seat && seat.role) || "invite";
     return loadCorpus().then(function () {
       var s = seam(author, question, seat);
+      // Salon × OpenKB : enrichit les passages via le pont serveur quand il est actif.
+      // Sans pont (ou en échec), le repli déterministe reste strictement inchangé.
+      var kbReady = (typeof window !== "undefined" && window.SalonKB && window.SalonKB.enabled && window.SalonKB.enabled() && s)
+        ? window.SalonKB.groundedPassages(author.id, question, { act: (seat && seat.act) || null, toName: (seat && seat.toName) || null })
+            .then(function (list) { if (list && list.length) s.passages = list; })
+            .catch(function () {})
+        : null;
+      var proceed = function () {
       var E = s && s.E;
       var system, user;
       if (E) {
@@ -251,6 +259,8 @@
         })
         .catch(function () { return localVoice(author, question, seat); })
         .finally(function () { clearTimeout(timer); });
+      };
+      return kbReady ? kbReady.then(proceed) : proceed();
     });
   }
   function runTable(question, ids, opts) {

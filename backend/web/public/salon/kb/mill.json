@@ -1,0 +1,640 @@
+{
+  "authorId": "mill",
+  "kbVersion": "mill@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.283Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Autobiography",
+      "sentences": 14
+    },
+    {
+      "title": "Considerations on Representative Government",
+      "sentences": 13
+    },
+    {
+      "title": "On Liberty",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "mill.p0001",
+      "w": "Autobiography",
+      "s": "My father never permitted anything which I learnt to degenerate into a mere exercise of memory.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0002",
+      "w": "Autobiography",
+      "s": "Of unbelievers (so called) as well as of believers, there are many species, including almost every variety of moral type.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0003",
+      "w": "Autobiography",
+      "s": "Yet very little, with any claim to a philosophical character, has been written by sceptics against the usefulness of this form of belief.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0004",
+      "w": "Autobiography",
+      "s": "The drawbacks, for every mode of life has its drawbacks, were not, however, unfelt by me.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0005",
+      "w": "Autobiography",
+      "s": "I disliked any sentiments in poetry which I should have disliked in prose; and that included a great deal.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0006",
+      "w": "Autobiography",
+      "s": "The well-known Gale Jones, then an elderly man, made one of his florid speeches; but the speaker with whom I was most struck, though I dissented from nearly every word he said, was Thirlwall, the historian, since Bishop of St.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0007",
+      "w": "Autobiography",
+      "s": "It was, however, connected with the best feature in my character, and the only good point to be found in my very unromantic and in no way honourable distress.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0008",
+      "w": "Autobiography",
+      "s": "The failure of his health soon scattered all his plans of life, and compelled him to live at a distance from London, so that after the first year or two of our acquaintance, we only saw each other at distant intervals.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0009",
+      "w": "Autobiography",
+      "s": "What I now wrote became the basis of that part of the subsequent Treatise; except that it did not contain the Theory of Kinds, which was a later addition, suggested by otherwise inextricable difficulties which met me in my first attempt to work out the subject of some of the concluding chapters of the Third Book.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0010",
+      "w": "Autobiography",
+      "s": "In the beginning, it did not, as a whole, by any means represent my opinions.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0011",
+      "w": "Autobiography",
+      "s": "Persons even of intellectual aspirations had much better, if they can, make their habitual associates of at least their equals, and, as far as possible, their superiors, in knowledge, intellect, and elevation of sentiment.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0012",
+      "w": "Autobiography",
+      "s": "None of my writings have been either so carefully composed, or so sedulously corrected as this.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0013",
+      "w": "Autobiography",
+      "s": "And to this the meeting heartily responded.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0014",
+      "w": "Autobiography",
+      "s": "There was much more at stake than only justice to the negroes, imperative as was that consideration.",
+      "src": {
+        "work": "Autobiography"
+      }
+    },
+    {
+      "id": "mill.p0015",
+      "w": "Considerations on Representative Government",
+      "s": "Their passivity is implied in the very idea of absolute power.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0016",
+      "w": "Considerations on Representative Government",
+      "s": "If we now pass to the influence of the form of government upon character, we shall find the superiority of popular government over every other to be, if possible, still more decided and indisputable.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0017",
+      "w": "Considerations on Representative Government",
+      "s": "These unwritten rules, which limit the use of lawful powers, are, however, only effectual, and maintain themselves in existence on condition of harmonising with the actual distribution of real political strength.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0018",
+      "w": "Considerations on Representative Government",
+      "s": "Either house might also exercise its initiative by referring any subject to the commission, with directions to prepare a law.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0019",
+      "w": "Considerations on Representative Government",
+      "s": "Even now, is it not a great grievance that in every Parliament a very numerous portion of the electors, willing and anxious to be represented, have no member in the House for whom they have voted?",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0020",
+      "w": "Considerations on Representative Government",
+      "s": "Partly by intention and partly unconsciously, it is ever striving to make all other things bend to itself, and is not content while there is any thing which makes permanent head against it, any influence not in agreement with its spirit.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0021",
+      "w": "Considerations on Representative Government",
+      "s": "The worst that is said is that they would vote as mere dependents, the bidding of their male relations.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0022",
+      "w": "Considerations on Representative Government",
+      "s": "A member of a club is really, what the elector falsely believes himself to be, under no obligation to consider the wishes or interests of any one else.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0023",
+      "w": "Considerations on Representative Government",
+      "s": "The tests which I have spoken of are only applicable to tried men, among whom must be reckoned those who, though untried practically, have been tried speculatively; who, in public speech or in print, have discussed public affairs in a manner which proves that they have given serious study to them.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0024",
+      "w": "Considerations on Representative Government",
+      "s": "When a number less than ten remained over, if amounting to five they might still be allowed to agree on a representative; if fewer than five, their votes must be lost, or they might be permitted to record them in favor of somebody already elected.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0025",
+      "w": "Considerations on Representative Government",
+      "s": "The local, like the national Parliament, has for its proper business to consider the interest of the locality as a whole, composed of parts all of which must be adapted to one another, and attended to in the order and ratio of their importance.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0026",
+      "w": "Considerations on Representative Government",
+      "s": "The same books, newspapers, pamphlets, speeches, do not reach them.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0027",
+      "w": "Considerations on Representative Government",
+      "s": "This one indispensable, and, at the same time, sufficient expedient, which meets at once the demands of justice and the growing exigencies of policy, is to open the service of government in all its departments, and in every part of the empire, on perfectly equal terms, to the inhabitants of the colonies.",
+      "src": {
+        "work": "Considerations on Representative Government"
+      }
+    },
+    {
+      "id": "mill.p0028",
+      "w": "On Liberty",
+      "s": "This mode of thought, or rather perhaps of feeling, was common among the last generation of European liberalism, in the Continental section of which it still apparently predominates.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0029",
+      "w": "On Liberty",
+      "s": "Those to whom nothing which I am about to say will be new, may therefore, I hope, excuse me, if on a subject which for now three centuries has been so often discussed, I venture on one discussion more.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0030",
+      "w": "On Liberty",
+      "s": "Very few facts are able to tell their own story, without comments to bring out their meaning.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0031",
+      "w": "On Liberty",
+      "s": "But unhappily there is no security in the state of the public mind, that the suspension of worse forms of legal persecution, which has lasted for about the space of a generation, will continue.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0032",
+      "w": "On Liberty",
+      "s": "There are no objections, and no answers to objections.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0033",
+      "w": "On Liberty",
+      "s": "Such being the partial character of prevailing opinions, even when resting on a true foundation; every opinion which embodies somewhat of the portion of truth which the common opinion omits, ought to be considered precious, with whatever amount of error and confusion that truth may be blended.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0034",
+      "w": "On Liberty",
+      "s": "Yet whatever mischief arises from their use, is greatest when they are employed against the comparatively defenceless; and whatever unfair advantage can be derived by any opinion from this mode of asserting it, accrues almost exclusively to received opinions.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0035",
+      "w": "On Liberty",
+      "s": "But to be restrained in things not affecting their good, by their mere displeasure, develops nothing valuable, except such force of character as may unfold itself in resisting the restraint.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0036",
+      "w": "On Liberty",
+      "s": "In other times there was no advantage in their doing so, unless they acted not only differently, but better.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0037",
+      "w": "On Liberty",
+      "s": "I am the last person to undervalue the self-regarding virtues; they are only second in importance, if even second, to the social.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0038",
+      "w": "On Liberty",
+      "s": "George Barnwell murdered his uncle to get money for his mistress, but if he had done it to set himself up in business, he would equally have been hanged.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0039",
+      "w": "On Liberty",
+      "s": "Advice, instruction, persuasion, and avoidance by other people if thought necessary by them for their own good, are the only measures by which society can justifiably express its dislike or disapprobation of his conduct.",
+      "src": {
+        "work": "On Liberty"
+      }
+    },
+    {
+      "id": "mill.p0040",
+      "w": "On Liberty",
+      "s": "Still less ought the common operations of buying and selling to be interfered with on analogous grounds.",
+      "src": {
+        "work": "On Liberty"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "mill.f.v0001",
+      "kind": "verbatim",
+      "text": "Of unbelievers (so called) as well as of believers, there are many species, including almost every variety of moral type.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "mill.f.v0002",
+      "kind": "verbatim",
+      "text": "The well-known Gale Jones, then an elderly man, made one of his florid speeches; but the speaker with whom I was most struck, though I dissented from nearly every word he said, was Thirlwall, the historian, since Bishop of St.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "mill.f.v0003",
+      "kind": "verbatim",
+      "text": "It was, however, connected with the best feature in my character, and the only good point to be found in my very unromantic and in no way honourable distress.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "mill.f.v0004",
+      "kind": "verbatim",
+      "text": "The failure of his health soon scattered all his plans of life, and compelled him to live at a distance from London, so that after the first year or two of our acquaintance, we only saw each other at distant intervals.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "mill.f.v0005",
+      "kind": "verbatim",
+      "text": "What I now wrote became the basis of that part of the subsequent Treatise; except that it did not contain the Theory of Kinds, which was a later addition, suggested by otherwise inextricable difficulties which met me in my first attempt to work out the subject of some of the concluding chapters of the Third Book.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "mill.f.v0006",
+      "kind": "verbatim",
+      "text": "Persons even of intellectual aspirations had much better, if they can, make their habitual associates of at least their equals, and, as far as possible, their superiors, in knowledge, intellect, and elevation of sentiment.",
+      "work": "Autobiography",
+      "lang": "en",
+      "src": {
+        "work": "Autobiography"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "mill.f.v0007",
+      "kind": "verbatim",
+      "text": "If we now pass to the influence of the form of government upon character, we shall find the superiority of popular government over every other to be, if possible, still more decided and indisputable.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "mill.f.v0008",
+      "kind": "verbatim",
+      "text": "These unwritten rules, which limit the use of lawful powers, are, however, only effectual, and maintain themselves in existence on condition of harmonising with the actual distribution of real political strength.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "mill.f.v0009",
+      "kind": "verbatim",
+      "text": "Either house might also exercise its initiative by referring any subject to the commission, with directions to prepare a law.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "mill.f.v0010",
+      "kind": "verbatim",
+      "text": "Even now, is it not a great grievance that in every Parliament a very numerous portion of the electors, willing and anxious to be represented, have no member in the House for whom they have voted?",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "mill.f.v0011",
+      "kind": "verbatim",
+      "text": "Partly by intention and partly unconsciously, it is ever striving to make all other things bend to itself, and is not content while there is any thing which makes permanent head against it, any influence not in agreement with its spirit.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "mill.f.v0012",
+      "kind": "verbatim",
+      "text": "A member of a club is really, what the elector falsely believes himself to be, under no obligation to consider the wishes or interests of any one else.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "mill.f.v0013",
+      "kind": "verbatim",
+      "text": "The tests which I have spoken of are only applicable to tried men, among whom must be reckoned those who, though untried practically, have been tried speculatively; who, in public speech or in print, have discussed public affairs in a manner which proves that they have given serious study to them.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "mill.f.v0014",
+      "kind": "verbatim",
+      "text": "When a number less than ten remained over, if amounting to five they might still be allowed to agree on a representative; if fewer than five, their votes must be lost, or they might be permitted to record them in favor of somebody already elected.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "mill.f.v0015",
+      "kind": "verbatim",
+      "text": "The local, like the national Parliament, has for its proper business to consider the interest of the locality as a whole, composed of parts all of which must be adapted to one another, and attended to in the order and ratio of their importance.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "mill.f.v0016",
+      "kind": "verbatim",
+      "text": "This one indispensable, and, at the same time, sufficient expedient, which meets at once the demands of justice and the growing exigencies of policy, is to open the service of government in all its departments, and in every part of the empire, on perfectly equal terms, to the inhabitants of the colonies.",
+      "work": "Considerations on Representative Government",
+      "lang": "en",
+      "src": {
+        "work": "Considerations on Representative Government"
+      },
+      "quality": {
+        "chars": 305
+      }
+    },
+    {
+      "id": "mill.f.v0017",
+      "kind": "verbatim",
+      "text": "This mode of thought, or rather perhaps of feeling, was common among the last generation of European liberalism, in the Continental section of which it still apparently predominates.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "mill.f.v0018",
+      "kind": "verbatim",
+      "text": "Those to whom nothing which I am about to say will be new, may therefore, I hope, excuse me, if on a subject which for now three centuries has been so often discussed, I venture on one discussion more.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "mill.f.v0019",
+      "kind": "verbatim",
+      "text": "Such being the partial character of prevailing opinions, even when resting on a true foundation; every opinion which embodies somewhat of the portion of truth which the common opinion omits, ought to be considered precious, with whatever amount of error and confusion that truth may be blended.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "mill.f.v0020",
+      "kind": "verbatim",
+      "text": "I am the last person to undervalue the self-regarding virtues; they are only second in importance, if even second, to the social.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "mill.f.v0021",
+      "kind": "verbatim",
+      "text": "George Barnwell murdered his uncle to get money for his mistress, but if he had done it to set himself up in business, he would equally have been hanged.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "mill.f.v0022",
+      "kind": "verbatim",
+      "text": "Advice, instruction, persuasion, and avoidance by other people if thought necessary by them for their own good, are the only measures by which society can justifiably express its dislike or disapprobation of his conduct.",
+      "work": "On Liberty",
+      "lang": "en",
+      "src": {
+        "work": "On Liberty"
+      },
+      "quality": {
+        "chars": 220
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:7fdbdedb91328065e794f68dcd32c17b363258c968ad017dbdeb5cc0cc9064a0"
+}

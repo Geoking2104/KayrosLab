@@ -1,0 +1,640 @@
+{
+  "authorId": "shakespeare",
+  "kbVersion": "shakespeare@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.217Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "A Midsummer Night's Dream",
+      "sentences": 14
+    },
+    {
+      "title": "Hamlet",
+      "sentences": 13
+    },
+    {
+      "title": "Othello",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "shakespeare.p0001",
+      "w": "A Midsummer Night's Dream",
+      "s": "Or else misgraffed, in respect of yeares Her.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0002",
+      "w": "A Midsummer Night's Dream",
+      "s": "Now good Peter Quince, call forth your Actors by the scrowle.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0003",
+      "w": "A Midsummer Night's Dream",
+      "s": "Hauing once this iuyce, Ile watch Titania, when she is asleepe, And drop the liquor of it in her eyes: The next thing when she waking lookes vpon, (Be it on Lyon, Beare, or Wolfe, or Bull, On medling Monkey, or on busie Ape) Shee shall pursue it, with the soule of loue.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0004",
+      "w": "A Midsummer Night's Dream",
+      "s": "Enter Queene of Fairies, with her traine.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0005",
+      "w": "A Midsummer Night's Dream",
+      "s": "For there is not a more fearefull wilde foule then your Lyon liuing: and wee ought to looke to it Snout.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0006",
+      "w": "A Midsummer Night's Dream",
+      "s": "Blesse thee Bottome, blesse thee; thou art translated.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0007",
+      "w": "A Midsummer Night's Dream",
+      "s": "Stand aside: the noyse they make, Will cause Demetrius to awake Puck.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0008",
+      "w": "A Midsummer Night's Dream",
+      "s": "Lysanders loue (that would not let him bide) Faire Helena; who more engilds the night, Then all yon fierie oes, and eies of light.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0009",
+      "w": "A Midsummer Night's Dream",
+      "s": "And so farre blamelesse proues my enterprize, That I haue nointed an Athenians eies, And so farre am I glad, it so did sort, As this their iangling I esteeme a sport Ob.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0010",
+      "w": "A Midsummer Night's Dream",
+      "s": "Mounsieur Cobweb, good Mounsier get your weapons in your hand, & kill me a red hipt humble-Bee, on the top of a thistle; and good Mounsieur bring mee the hony bag.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0011",
+      "w": "A Midsummer Night's Dream",
+      "s": "And for the morning now is something worne, Our purpos'd hunting shall be set aside.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0012",
+      "w": "A Midsummer Night's Dream",
+      "s": "The Lunaticke, the Louer, and the Poet, Are of imagination all compact.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0013",
+      "w": "A Midsummer Night's Dream",
+      "s": "O wicked wall, through whom I see no blisse, Curst be thy stones for thus deceiuing mee Thes.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0014",
+      "w": "A Midsummer Night's Dream",
+      "s": "Hee is no crescent, and his hornes are inuisible, within the circumference Moon.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0015",
+      "w": "Hamlet",
+      "s": "Thinke it no more: For nature cressant does not grow alone, In thewes and Bulke: but as his Temple waxes, The inward seruice of the Minde and Soule Growes wide withall.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0016",
+      "w": "Hamlet",
+      "s": "That thou dead Coarse againe in compleat steele, Reuisits thus the glimpses of the Moone, Making Night hidious?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0017",
+      "w": "Hamlet",
+      "s": "Go some of ye, And bring the Gentlemen where Hamlet is Guil.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0018",
+      "w": "Hamlet",
+      "s": "Slanders Sir: for the Satyricall slaue saies here, that old men haue gray Beards; that their faces are wrinkled; their eyes purging thicke Amber, or Plum-Tree Gumme: and that they haue a plentifull locke of Wit, together with weake Hammes.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0019",
+      "w": "Hamlet",
+      "s": "The lesse they deserue, the more merit is in your bountie.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0020",
+      "w": "Hamlet",
+      "s": "My honor'd Lord, I know right well you did, And with them words of so sweet breath compos'd, As made the things more rich, then perfume left: Take these againe, for to the Noble minde Rich gifts wax poore, when giuers proue vnkinde.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0021",
+      "w": "Hamlet",
+      "s": "The instances that second Marriage moue, Are base respects of Thrift, but none of Loue.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0022",
+      "w": "Hamlet",
+      "s": "She desires to speake with you in her Closset, ere you go to bed Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0023",
+      "w": "Hamlet",
+      "s": "It is not madnesse That I haue vttered; bring me to the Test And I the matter will re-word: which madnesse Would gamboll from.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0024",
+      "w": "Hamlet",
+      "s": "We fat all creatures else to fat vs, and we fat our selfe for Magots.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0025",
+      "w": "Hamlet",
+      "s": "But tell me, Why you proceeded not against these feates, So crimefull, and so Capitall in Nature, As by your Safety, Wisedome, all things else, You mainly were stirr'd vp?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0026",
+      "w": "Hamlet",
+      "s": "In youth when I did loue, did loue, me thought it was very sweete: To contract O the time for a my behoue, O me thought there was nothing meete Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0027",
+      "w": "Hamlet",
+      "s": "It is indifferent cold my Lord indeed Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0028",
+      "w": "Othello",
+      "s": "Iudge me the world, if 'tis not grosse in sense, That thou hast practis'd on her with foule Charmes, Abus'd her delicate Youth, with Drugs or Minerals, That weakens Motion.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0029",
+      "w": "Othello",
+      "s": "Ere I would say, I would drowne my selfe for the loue of a Gynney Hen, I would change my Humanity with a Baboone Rod.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0030",
+      "w": "Othello",
+      "s": "Enter Desdemona, Iago, Rodorigo, and Aemilia.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0031",
+      "w": "Othello",
+      "s": "To morrow with your earliest, Let me haue speech with you.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0032",
+      "w": "Othello",
+      "s": "Nay, good Lieutenant: I pray you Sir, hold your hand Cassio.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0033",
+      "w": "Othello",
+      "s": "Ile send her to you presently: And Ile deuise a meane to draw the Moore Out of the way, that your conuerse and businesse May be more free.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0034",
+      "w": "Othello",
+      "s": "Men should be what they seeme, Or those that be not, would they might seeme none Oth.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0035",
+      "w": "Othello",
+      "s": "Now by yond Marble Heauen, In the due reuerence of a Sacred vow, I heere engage my words Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0036",
+      "w": "Othello",
+      "s": "Something sure of State, Either from Venice, or some vnhatch'd practise Made demonstrable heere in Cyprus, to him, Hath pudled his cleare Spirit: and in such cases, Mens Natures wrangle with inferiour things, Though great ones are their obiect.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0037",
+      "w": "Othello",
+      "s": "Enter Lodouico, Desdemona, and Attendants.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0038",
+      "w": "Othello",
+      "s": "But alas, to make me The fixed Figure for the time of Scorne, To point his slow, and mouing finger at.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0039",
+      "w": "Othello",
+      "s": "Introth I thinke I should, and vndoo't when I had done.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0040",
+      "w": "Othello",
+      "s": "Cassio hath heere bin set on in the darke By Rodorigo, and Fellowes that are scap'd: He's almost slaine, and Rodorigo quite dead.",
+      "src": {
+        "work": "Othello"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "shakespeare.f.v0001",
+      "kind": "verbatim",
+      "text": "Hauing once this iuyce, Ile watch Titania, when she is asleepe, And drop the liquor of it in her eyes: The next thing when she waking lookes vpon, (Be it on Lyon, Beare, or Wolfe, or Bull, On medling Monkey, or on busie Ape) Shee shall pursue it, with the soule of loue.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "shakespeare.f.v0002",
+      "kind": "verbatim",
+      "text": "Lysanders loue (that would not let him bide) Faire Helena; who more engilds the night, Then all yon fierie oes, and eies of light.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "shakespeare.f.v0003",
+      "kind": "verbatim",
+      "text": "And so farre blamelesse proues my enterprize, That I haue nointed an Athenians eies, And so farre am I glad, it so did sort, As this their iangling I esteeme a sport Ob.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "shakespeare.f.v0004",
+      "kind": "verbatim",
+      "text": "Mounsieur Cobweb, good Mounsier get your weapons in your hand, & kill me a red hipt humble-Bee, on the top of a thistle; and good Mounsieur bring mee the hony bag.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "shakespeare.f.v0005",
+      "kind": "verbatim",
+      "text": "The Lunaticke, the Louer, and the Poet, Are of imagination all compact.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 71
+      }
+    },
+    {
+      "id": "shakespeare.f.v0006",
+      "kind": "verbatim",
+      "text": "O wicked wall, through whom I see no blisse, Curst be thy stones for thus deceiuing mee Thes.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 93
+      }
+    },
+    {
+      "id": "shakespeare.f.v0007",
+      "kind": "verbatim",
+      "text": "Hee is no crescent, and his hornes are inuisible, within the circumference Moon.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "shakespeare.f.v0008",
+      "kind": "verbatim",
+      "text": "Thinke it no more: For nature cressant does not grow alone, In thewes and Bulke: but as his Temple waxes, The inward seruice of the Minde and Soule Growes wide withall.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "shakespeare.f.v0009",
+      "kind": "verbatim",
+      "text": "That thou dead Coarse againe in compleat steele, Reuisits thus the glimpses of the Moone, Making Night hidious?",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "shakespeare.f.v0010",
+      "kind": "verbatim",
+      "text": "Slanders Sir: for the Satyricall slaue saies here, that old men haue gray Beards; that their faces are wrinkled; their eyes purging thicke Amber, or Plum-Tree Gumme: and that they haue a plentifull locke of Wit, together with weake Hammes.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "shakespeare.f.v0011",
+      "kind": "verbatim",
+      "text": "My honor'd Lord, I know right well you did, And with them words of so sweet breath compos'd, As made the things more rich, then perfume left: Take these againe, for to the Noble minde Rich gifts wax poore, when giuers proue vnkinde.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "shakespeare.f.v0012",
+      "kind": "verbatim",
+      "text": "The instances that second Marriage moue, Are base respects of Thrift, but none of Loue.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 87
+      }
+    },
+    {
+      "id": "shakespeare.f.v0013",
+      "kind": "verbatim",
+      "text": "It is not madnesse That I haue vttered; bring me to the Test And I the matter will re-word: which madnesse Would gamboll from.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "shakespeare.f.v0014",
+      "kind": "verbatim",
+      "text": "But tell me, Why you proceeded not against these feates, So crimefull, and so Capitall in Nature, As by your Safety, Wisedome, all things else, You mainly were stirr'd vp?",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "shakespeare.f.v0015",
+      "kind": "verbatim",
+      "text": "In youth when I did loue, did loue, me thought it was very sweete: To contract O the time for a my behoue, O me thought there was nothing meete Ham.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "shakespeare.f.v0016",
+      "kind": "verbatim",
+      "text": "Iudge me the world, if 'tis not grosse in sense, That thou hast practis'd on her with foule Charmes, Abus'd her delicate Youth, with Drugs or Minerals, That weakens Motion.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "shakespeare.f.v0017",
+      "kind": "verbatim",
+      "text": "Ere I would say, I would drowne my selfe for the loue of a Gynney Hen, I would change my Humanity with a Baboone Rod.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "shakespeare.f.v0018",
+      "kind": "verbatim",
+      "text": "Ile send her to you presently: And Ile deuise a meane to draw the Moore Out of the way, that your conuerse and businesse May be more free.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "shakespeare.f.v0019",
+      "kind": "verbatim",
+      "text": "Men should be what they seeme, Or those that be not, would they might seeme none Oth.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "shakespeare.f.v0020",
+      "kind": "verbatim",
+      "text": "Now by yond Marble Heauen, In the due reuerence of a Sacred vow, I heere engage my words Iago.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "shakespeare.f.v0021",
+      "kind": "verbatim",
+      "text": "Something sure of State, Either from Venice, or some vnhatch'd practise Made demonstrable heere in Cyprus, to him, Hath pudled his cleare Spirit: and in such cases, Mens Natures wrangle with inferiour things, Though great ones are their obiect.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "shakespeare.f.v0022",
+      "kind": "verbatim",
+      "text": "Cassio hath heere bin set on in the darke By Rodorigo, and Fellowes that are scap'd: He's almost slaine, and Rodorigo quite dead.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 129
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:d42ba954efb22f5f55455f614d09880f8344e0117136cf0f3b447bcc67dd7aa0"
+}

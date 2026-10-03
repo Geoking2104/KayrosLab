@@ -1,0 +1,636 @@
+{
+  "authorId": "locke",
+  "kbVersion": "locke@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.254Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "An Essay Concerning Human Understanding",
+      "sentences": 20
+    },
+    {
+      "title": "Second Treatise of Government",
+      "sentences": 20
+    }
+  ],
+  "passages": [
+    {
+      "id": "locke.p0001",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Or that the child has any notion or apprehension of that proposition at an age, wherein yet, it is plain, it knows a great many other truths?",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0002",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And I think they equally forsake the truth who, running into contrary extremes, either affirm an innate law, or deny that there is a law knowable by the light of nature, i.e.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0003",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Every deity that they owned above one was an infallible evidence of their ignorance of Him, and a proof that they had no true notion of God, where unity, infinity, and eternity were excluded.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0004",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Men’s business in them is to acquaint themselves with what is to be found without; and so growing up in a constant attention to outward sensations, seldom make any considerable reflection on what passes within them, till they come to be of riper years; and some scarce ever at all.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0005",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The Mind can neither make nor destroy them.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0006",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "After the same manner that the ideas of these original qualities are produced in us, we may conceive that the ideas of SECONDARY qualities are also produced, viz.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0007",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, the narrow mind of man not being capable of having many ideas under view and consideration at once, it was necessary to have a repository, to lay up those ideas which, at another time, it might have use of.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0008",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "When considered between the extremities of matter, which fills the capacity of space with something solid, tangible, and moveable, it is properly called EXTENSION.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0009",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And so not causing a constant train of new ideas to follow one another immediately in our minds, we have no perception of motion; which consisting in a constant succession, we cannot perceive that succession without a constant succession of varying ideas arising from it.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0010",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And therefore it is the most intimate to our thoughts, as well as it is, in its agreement to all other things, the most universal idea we have.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0011",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Some mathematicians perhaps, of advanced speculations, may have other ways to introduce into their minds ideas of infinity.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0012",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "All the actions that we have any idea of reducing themselves, as has been said, to these two, viz.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0013",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And therefore absent good may be looked on and considered without desire.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0014",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "From wrong Desires arising from wrong Judgments.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0015",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For the man who first framed the idea of HYPOCRISY, might have either taken it at first from the observation of one who made show of good qualities which he had not; or else have framed that idea in his mind without having any such pattern to fashion it by.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0016",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Indeed motion cannot be attributed to God; not because he is an immaterial, but because he is an infinite spirit.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0017",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Thus a man is generated, a picture made; and either of them altered, when any new sensible quality or simple idea is produced in either of them, which was not there before: and the things thus made to exist, which were not there before, are effects; and those things which operated to the existence, causes.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0018",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Human laws punish both, with a justice suitable to THEIR way of knowledge;—because, in these cases, they cannot distinguish certainly what is real, what counterfeit: and so the ignorance in drunkenness or sleep is not admitted as a plea.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0019",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Sempronia, I know what it is for another man to be born of the same woman Sempronia; and so have as clear a notion of brothers as of births, and perhaps clearer.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0020",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Thus, by having the idea of a figure with three sides meeting at three angles, I have a complete idea, wherein I require nothing else to make it perfect.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0021",
+      "w": "Second Treatise of Government",
+      "s": "It cannot be meant, who shall decide the controversy; every one knows what Jephtha here tells us, that the Lord the Judge shall judge.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0022",
+      "w": "Second Treatise of Government",
+      "s": "The labour that was mine, removing them out of that common state they were in, hath fixed my property in them.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0023",
+      "w": "Second Treatise of Government",
+      "s": "Besides, the remainder, after such enclosure, would not be as good to the rest of the commoners, as the whole was when they could all make use of the whole; whereas in the beginning and first peopling of the great common of the world, it was quite otherwise.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0024",
+      "w": "Second Treatise of Government",
+      "s": "And thus came in the use of money, some lasting thing that men might keep without spoiling, and that by mutual consent men would take in exchange for the truly useful, but perishable supports of life.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0025",
+      "w": "Second Treatise of Government",
+      "s": "Till then we see the law allows the son to have no will, but he is to be guided by the will of his father or guardian, who is to understand for him.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0026",
+      "w": "Second Treatise of Government",
+      "s": "This is that power to which children are commanded obedience, that the pains and care of their parents may not be increased, or ill rewarded.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0027",
+      "w": "Second Treatise of Government",
+      "s": "These men having, as I say, forfeited their lives, and with it their liberties, and lost their estates; and being in the state of slavery, not capable of any property, cannot in that state be considered as any part of civil society; the chief end whereof is the preservation of property.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0028",
+      "w": "Second Treatise of Government",
+      "s": "And thus that, which begins and actually constitutes any political society, is nothing but the consent of any number of freemen capable of a majority to unite and incorporate into such a society.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0029",
+      "w": "Second Treatise of Government",
+      "s": "And Abimelech particularly is called king, though at most he was but their general.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0030",
+      "w": "Second Treatise of Government",
+      "s": "And why then hath not his son, by the same reason, the same liberty, though he be born any where else?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0031",
+      "w": "Second Treatise of Government",
+      "s": "Of this point therefore we are to note, that such men naturally have no full and perfect power to command whole politic multitudes of men, therefore utterly without our consent, we could in such sort be at no man’s commandment living.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0032",
+      "w": "Second Treatise of Government",
+      "s": "THE legislative power is that, which has a right to direct how the force of the commonwealth shall be employed for preserving the community and the members of it.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0033",
+      "w": "Second Treatise of Government",
+      "s": "It is easy to conceive, that in the infancy of governments, when commonwealths differed little from families in number of people, they differed from them too but little in number of laws: and the governors, being as the fathers of them, watching over them for their good, the government was almost all prerogative.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0034",
+      "w": "Second Treatise of Government",
+      "s": "The only difference is, great robbers punish little ones, to keep them in their obedience; but the great ones are rewarded with laurels and triumphs, because they are too big for the weak hands of justice in this world, and have the power in their own possession, which should punish offenders.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0035",
+      "w": "Second Treatise of Government",
+      "s": "I could not forfeit their lives; they were not mine to forfeit.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0036",
+      "w": "Second Treatise of Government",
+      "s": "No body, no power, can exempt them from the obligations of that eternal law.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0037",
+      "w": "Second Treatise of Government",
+      "s": "But, notwithstanding such resistance, the king’s person and authority are still both secured, and so no danger to governor or government.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0038",
+      "w": "Second Treatise of Government",
+      "s": "This is in effect no more than to bid them first be slaves, and then to take care of their liberty; and when their chains are on, tell them, they may act like freemen.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0039",
+      "w": "Second Treatise of Government",
+      "s": "The examples of particular injustice, or oppression of here and there an unfortunate man, moves them not.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0040",
+      "w": "Second Treatise of Government",
+      "s": "I answer: Self-defence is a part of the law of nature; nor can it be denied the community, even against the king himself: but to revenge themselves upon him, must by no means be allowed them; it being not agreeable to that law.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "locke.f.v0001",
+      "kind": "verbatim",
+      "text": "Every deity that they owned above one was an infallible evidence of their ignorance of Him, and a proof that they had no true notion of God, where unity, infinity, and eternity were excluded.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "locke.f.v0002",
+      "kind": "verbatim",
+      "text": "Men’s business in them is to acquaint themselves with what is to be found without; and so growing up in a constant attention to outward sensations, seldom make any considerable reflection on what passes within them, till they come to be of riper years; and some scarce ever at all.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "locke.f.v0003",
+      "kind": "verbatim",
+      "text": "After the same manner that the ideas of these original qualities are produced in us, we may conceive that the ideas of SECONDARY qualities are also produced, viz.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "locke.f.v0004",
+      "kind": "verbatim",
+      "text": "When considered between the extremities of matter, which fills the capacity of space with something solid, tangible, and moveable, it is properly called EXTENSION.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "locke.f.v0005",
+      "kind": "verbatim",
+      "text": "Some mathematicians perhaps, of advanced speculations, may have other ways to introduce into their minds ideas of infinity.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "locke.f.v0006",
+      "kind": "verbatim",
+      "text": "All the actions that we have any idea of reducing themselves, as has been said, to these two, viz.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "locke.f.v0007",
+      "kind": "verbatim",
+      "text": "Indeed motion cannot be attributed to God; not because he is an immaterial, but because he is an infinite spirit.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 113
+      }
+    },
+    {
+      "id": "locke.f.v0008",
+      "kind": "verbatim",
+      "text": "Human laws punish both, with a justice suitable to THEIR way of knowledge;—because, in these cases, they cannot distinguish certainly what is real, what counterfeit: and so the ignorance in drunkenness or sleep is not admitted as a plea.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "locke.f.v0009",
+      "kind": "verbatim",
+      "text": "Sempronia, I know what it is for another man to be born of the same woman Sempronia; and so have as clear a notion of brothers as of births, and perhaps clearer.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "locke.f.v0010",
+      "kind": "verbatim",
+      "text": "It cannot be meant, who shall decide the controversy; every one knows what Jephtha here tells us, that the Lord the Judge shall judge.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "locke.f.v0011",
+      "kind": "verbatim",
+      "text": "The labour that was mine, removing them out of that common state they were in, hath fixed my property in them.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "locke.f.v0012",
+      "kind": "verbatim",
+      "text": "And thus came in the use of money, some lasting thing that men might keep without spoiling, and that by mutual consent men would take in exchange for the truly useful, but perishable supports of life.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "locke.f.v0013",
+      "kind": "verbatim",
+      "text": "Till then we see the law allows the son to have no will, but he is to be guided by the will of his father or guardian, who is to understand for him.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "locke.f.v0014",
+      "kind": "verbatim",
+      "text": "This is that power to which children are commanded obedience, that the pains and care of their parents may not be increased, or ill rewarded.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "locke.f.v0015",
+      "kind": "verbatim",
+      "text": "These men having, as I say, forfeited their lives, and with it their liberties, and lost their estates; and being in the state of slavery, not capable of any property, cannot in that state be considered as any part of civil society; the chief end whereof is the preservation of property.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 287
+      }
+    },
+    {
+      "id": "locke.f.v0016",
+      "kind": "verbatim",
+      "text": "Of this point therefore we are to note, that such men naturally have no full and perfect power to command whole politic multitudes of men, therefore utterly without our consent, we could in such sort be at no man’s commandment living.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "locke.f.v0017",
+      "kind": "verbatim",
+      "text": "THE legislative power is that, which has a right to direct how the force of the commonwealth shall be employed for preserving the community and the members of it.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "locke.f.v0018",
+      "kind": "verbatim",
+      "text": "It is easy to conceive, that in the infancy of governments, when commonwealths differed little from families in number of people, they differed from them too but little in number of laws: and the governors, being as the fathers of them, watching over them for their good, the government was almost all prerogative.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "locke.f.v0019",
+      "kind": "verbatim",
+      "text": "The only difference is, great robbers punish little ones, to keep them in their obedience; but the great ones are rewarded with laurels and triumphs, because they are too big for the weak hands of justice in this world, and have the power in their own possession, which should punish offenders.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "locke.f.v0020",
+      "kind": "verbatim",
+      "text": "This is in effect no more than to bid them first be slaves, and then to take care of their liberty; and when their chains are on, tell them, they may act like freemen.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "locke.f.v0021",
+      "kind": "verbatim",
+      "text": "The examples of particular injustice, or oppression of here and there an unfortunate man, moves them not.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "locke.f.v0022",
+      "kind": "verbatim",
+      "text": "I answer: Self-defence is a part of the law of nature; nor can it be denied the community, even against the king himself: but to revenge themselves upon him, must by no means be allowed them; it being not agreeable to that law.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 227
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 22,
+    "verbatim": 22,
+    "patterns": 0
+  },
+  "checksum": "sha256:49430cb500b0e542700a63f108da5146280bab6788af2c11ca85914cf69c875e"
+}

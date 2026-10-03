@@ -1,0 +1,652 @@
+{
+  "authorId": "voltaire",
+  "kbVersion": "voltaire@bootstrap-2026-10-03",
+  "builtAt": "2026-10-03T09:49:59.213Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Candide, ou l'optimisme",
+      "sentences": 14
+    },
+    {
+      "title": "L'Ingénu",
+      "sentences": 13
+    },
+    {
+      "title": "Micromégas",
+      "sentences": 13
+    }
+  ],
+  "passages": [
+    {
+      "id": "voltaire.p0001",
+      "w": "Candide, ou l'optimisme",
+      "s": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0002",
+      "w": "Candide, ou l'optimisme",
+      "s": "Monsieur ne croit donc pas à la liberté?",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0003",
+      "w": "Candide, ou l'optimisme",
+      "s": "Pendant toute la traversée ils raisonnèrent beaucoup sur la philosophie du pauvre Pangloss.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0004",
+      "w": "Candide, ou l'optimisme",
+      "s": "Vous avez vu des tremblements de terre; mais, mademoiselle, avez-vous jamais eu la peste?",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0005",
+      "w": "Candide, ou l'optimisme",
+      "s": "Leur âme tout entière volait sur leur langue, était attentive dans leurs oreilles, et étincelante dans leurs yeux.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0006",
+      "w": "Candide, ou l'optimisme",
+      "s": "Il y soupa avec Cacambo; et tous deux, après avoir maudit l’inquisiteur de Portugal, le gouverneur de Buénos-Ayres, et le baron, s’endormirent sur de la mousse.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0007",
+      "w": "Candide, ou l'optimisme",
+      "s": "On voit assez quelle supériorité prodigieuse elle devait avoir sur ces cailloux et sur ce sable que nous nommons or et pierreries.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0008",
+      "w": "Candide, ou l'optimisme",
+      "s": "Cependant, lorsque ma mère me vendit dix écus patagons sur la côte de Guinée, elle me disait: Mon cher enfant, bénis nos fétiches, adore-les toujours, ils te feront vivre heureux; tu as l’honneur d’être esclave de nos seigneurs les blancs, et tu fais par là la fortune de ton père et de ta mère.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0009",
+      "w": "Candide, ou l'optimisme",
+      "s": "Pour moi, je n’ai nulle curiosité de voir la France, dit Candide; vous devinez aisément que quand on a passé un mois dans Eldorado, on ne se soucie plus de rien voir sur la terre que mademoiselle Cunégonde: je vais l’attendre à Venise; nous traverserons la France pour aller en Italie; ne m’accompagnerez-vous pas?",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0010",
+      "w": "Candide, ou l'optimisme",
+      "s": "C’est, dit l’abbé, un feseur de feuilles, un Fréron.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0011",
+      "w": "Candide, ou l'optimisme",
+      "s": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0012",
+      "w": "Candide, ou l'optimisme",
+      "s": "On parle, dit Candide, du sénateur Pococurante, qui demeure dans ce beau palais sur la Brenta, et qui reçoit assez bien les étrangers.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0013",
+      "w": "Candide, ou l'optimisme",
+      "s": "Il est très commun que des rois soient détrônés; et à l’égard de l’honneur que nous avons eu de souper avec eux, c’est une bagatelle qui ne mérite pas notre attention.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0014",
+      "w": "Candide, ou l'optimisme",
+      "s": "Je fus nommé pour aller servir d’aumônier à Constantinople auprès de monsieur l’ambassadeur de France.",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      }
+    },
+    {
+      "id": "voltaire.p0015",
+      "w": "L'Ingénu",
+      "s": "Point du tout, monsieur l’abbé; elle n’était pas parmi les livres de mon capitaine; je n’en ai jamais entendu parler.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0016",
+      "w": "L'Ingénu",
+      "s": "On crut qu’il était à la chasse, selon sa coutume.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0017",
+      "w": "L'Ingénu",
+      "s": "Je vais sur-le-champ chez monsieur l’abbé de Saint-Yves, qui ne demeure qu’à une lieue de vous, et je vous réponds que j’épouserai ma maîtresse dans la journée.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0018",
+      "w": "L'Ingénu",
+      "s": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0019",
+      "w": "L'Ingénu",
+      "s": "Il se désennuya en racontant ses amours à son compatriote.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0020",
+      "w": "L'Ingénu",
+      "s": "Si vous connaissiez comme moi mademoiselle de Saint-Yves, vous seriez au désespoir.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0021",
+      "w": "L'Ingénu",
+      "s": "A peine les deux philosophes daignèrent-ils jeter les yeux sur ces excréments de la littérature.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0022",
+      "w": "L'Ingénu",
+      "s": "Leur fortune était médiocre, et il leur fallait tous les jours des voitures pour aller à la découverte, et ils ne découvraient rien.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0023",
+      "w": "L'Ingénu",
+      "s": "Il sentait que son coeur allait toujours au-delà de ce qu’il lisait.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0024",
+      "w": "L'Ingénu",
+      "s": "Elle ne dit pas un mot pendant tout le chemin.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0025",
+      "w": "L'Ingénu",
+      "s": "La belle Saint-Yves baissait la vue, regardait son amant, rougissait, et détournait, le moment d’après, ses yeux mouillés de pleurs.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0026",
+      "w": "L'Ingénu",
+      "s": "Elle commença par les tendres embrassements de l’oncle et de la tante.",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0027",
+      "w": "L'Ingénu",
+      "s": "Quelle mécanique incompréhensible a soumis les organes au sentiment et à la pensée?",
+      "src": {
+        "work": "L'Ingénu"
+      }
+    },
+    {
+      "id": "voltaire.p0028",
+      "w": "Micromégas",
+      "s": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0029",
+      "w": "Micromégas",
+      "s": "Oui, dit le Saturnien, la nature est comme un parterre dont les fleurs.....",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0030",
+      "w": "Micromégas",
+      "s": "J'arriverai peut-être un jour au pays où il ne manque rien; mais jusqu'à présent personne ne m'a donné de nouvelles positives de ce pays-là.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0031",
+      "w": "Micromégas",
+      "s": "Notre soleil tire sur le rouge, dit le Sirien, et nous avons trente-neuf couleurs primitives.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0032",
+      "w": "Micromégas",
+      "s": "Voilà qui est fait, je n'aimerai jamais plus personne.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0033",
+      "w": "Micromégas",
+      "s": "Le nain n'en avait eu jamais qu'à mi-jambe, et à peine l'autre avait-il mouillé son talon.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0034",
+      "w": "Micromégas",
+      "s": "Mais enfin il y a quelque apparence que ceci n'est pas fait pour rien.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0035",
+      "w": "Micromégas",
+      "s": "Voici un animal bien différent du premier, dit le nain de Saturne; le Sirien mit le prétendu animal dans le creux de sa main.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0036",
+      "w": "Micromégas",
+      "s": "Le Saturnien, passant d'un excès de défiance à un excès de crédulité, crut apercevoir qu'ils travaillaient à la propagation.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0037",
+      "w": "Micromégas",
+      "s": "Peut-être ne daignerait-on pas vous regarder à ma cour; mais je ne méprise personne, et je vous offre ma protection.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0038",
+      "w": "Micromégas",
+      "s": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0039",
+      "w": "Micromégas",
+      "s": "Nous disséquons des mouches, dit le philosophe, nous mesurons des lignes, nous assemblons des nombres; nous sommes d'accord sur deux ou trois points que nous entendons, et nous disputons sur deux ou trois mille que nous n'entendons pas.",
+      "src": {
+        "work": "Micromégas"
+      }
+    },
+    {
+      "id": "voltaire.p0040",
+      "w": "Micromégas",
+      "s": "Le plus vieux citait Aristote, l'autre prononçait le nom de Descartes; celui-ci, de Malebranche; cet autre, de Leibnitz; cet autre, de Locke.",
+      "src": {
+        "work": "Micromégas"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "voltaire.f.v0001",
+      "kind": "verbatim",
+      "text": "Comment Candide rencontra son ancien maître de philosophie, le docteur Pangloss, et ce qui en advint.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "voltaire.f.v0002",
+      "kind": "verbatim",
+      "text": "Leur âme tout entière volait sur leur langue, était attentive dans leurs oreilles, et étincelante dans leurs yeux.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 114
+      }
+    },
+    {
+      "id": "voltaire.f.v0003",
+      "kind": "verbatim",
+      "text": "Il y soupa avec Cacambo; et tous deux, après avoir maudit l’inquisiteur de Portugal, le gouverneur de Buénos-Ayres, et le baron, s’endormirent sur de la mousse.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "voltaire.f.v0004",
+      "kind": "verbatim",
+      "text": "On voit assez quelle supériorité prodigieuse elle devait avoir sur ces cailloux et sur ce sable que nous nommons or et pierreries.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "voltaire.f.v0005",
+      "kind": "verbatim",
+      "text": "Pour moi, je n’ai nulle curiosité de voir la France, dit Candide; vous devinez aisément que quand on a passé un mois dans Eldorado, on ne se soucie plus de rien voir sur la terre que mademoiselle Cunégonde: je vais l’attendre à Venise; nous traverserons la France pour aller en Italie; ne m’accompagnerez-vous pas?",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "voltaire.f.v0006",
+      "kind": "verbatim",
+      "text": "La fille était très jolie, et chantait; elle regardait amoureusement son théatin, et de temps en temps lui pinçait ses grosses joues.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "voltaire.f.v0007",
+      "kind": "verbatim",
+      "text": "On parle, dit Candide, du sénateur Pococurante, qui demeure dans ce beau palais sur la Brenta, et qui reçoit assez bien les étrangers.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "voltaire.f.v0008",
+      "kind": "verbatim",
+      "text": "Il est très commun que des rois soient détrônés; et à l’égard de l’honneur que nous avons eu de souper avec eux, c’est une bagatelle qui ne mérite pas notre attention.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "voltaire.f.v0009",
+      "kind": "verbatim",
+      "text": "Je fus nommé pour aller servir d’aumônier à Constantinople auprès de monsieur l’ambassadeur de France.",
+      "work": "Candide, ou l'optimisme",
+      "lang": "fr",
+      "src": {
+        "work": "Candide, ou l'optimisme"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
+      "id": "voltaire.f.v0010",
+      "kind": "verbatim",
+      "text": "Point du tout, monsieur l’abbé; elle n’était pas parmi les livres de mon capitaine; je n’en ai jamais entendu parler.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "voltaire.f.v0011",
+      "kind": "verbatim",
+      "text": "Je vais sur-le-champ chez monsieur l’abbé de Saint-Yves, qui ne demeure qu’à une lieue de vous, et je vous réponds que j’épouserai ma maîtresse dans la journée.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "voltaire.f.v0012",
+      "kind": "verbatim",
+      "text": "L’Ingénu, plongé dans une sombre et profonde mélancolie, se promena vers le bord de la mer, son fusil à deux coups sur l’épaule, son grand coutelas au côté, tirant de temps en temps sur quelques oiseaux, et souvent tenté de tirer sur lui-même: mais il aimait encore la vie, à cause de mademoiselle de Saint-Yves.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 312
+      }
+    },
+    {
+      "id": "voltaire.f.v0013",
+      "kind": "verbatim",
+      "text": "Leur fortune était médiocre, et il leur fallait tous les jours des voitures pour aller à la découverte, et ils ne découvraient rien.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "voltaire.f.v0014",
+      "kind": "verbatim",
+      "text": "La belle Saint-Yves baissait la vue, regardait son amant, rougissait, et détournait, le moment d’après, ses yeux mouillés de pleurs.",
+      "work": "L'Ingénu",
+      "lang": "fr",
+      "src": {
+        "work": "L'Ingénu"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "voltaire.f.v0015",
+      "kind": "verbatim",
+      "text": "Vers les quatre cent cinquante ans, au sortir de l'enfance, il disséqua beaucoup de ces petits insectes qui n'ont pas cent pieds de diamètre, et qui se dérobent aux microscopes ordinaires; il en composa un livre fort curieux, mais qui lui fit quelques affaires.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "voltaire.f.v0016",
+      "kind": "verbatim",
+      "text": "J'arriverai peut-être un jour au pays où il ne manque rien; mais jusqu'à présent personne ne m'a donné de nouvelles positives de ce pays-là.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "voltaire.f.v0017",
+      "kind": "verbatim",
+      "text": "Voici un animal bien différent du premier, dit le nain de Saturne; le Sirien mit le prétendu animal dans le creux de sa main.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "voltaire.f.v0018",
+      "kind": "verbatim",
+      "text": "Le Saturnien, passant d'un excès de défiance à un excès de crédulité, crut apercevoir qu'ils travaillaient à la propagation.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "voltaire.f.v0019",
+      "kind": "verbatim",
+      "text": "Peut-être ne daignerait-on pas vous regarder à ma cour; mais je ne méprise personne, et je vous offre ma protection.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 116
+      }
+    },
+    {
+      "id": "voltaire.f.v0020",
+      "kind": "verbatim",
+      "text": "Puis, par une suite de triangles liés ensemble, ils conclurent que ce qu'ils voyaient était en effet un jeune homme de cent vingt mille pieds de roi.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "voltaire.f.v0021",
+      "kind": "verbatim",
+      "text": "Nous disséquons des mouches, dit le philosophe, nous mesurons des lignes, nous assemblons des nombres; nous sommes d'accord sur deux ou trois points que nous entendons, et nous disputons sur deux ou trois mille que nous n'entendons pas.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "voltaire.f.v0022",
+      "kind": "verbatim",
+      "text": "Le plus vieux citait Aristote, l'autre prononçait le nom de Descartes; celui-ci, de Malebranche; cet autre, de Leibnitz; cet autre, de Locke.",
+      "work": "Micromégas",
+      "lang": "fr",
+      "src": {
+        "work": "Micromégas"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "voltaire.f.p01",
+      "kind": "pattern",
+      "label": "restriction",
+      "shape": "\\bne\\b[^.]{0,80}\\b(que|point|jamais|rien)\\b",
+      "attested": 4,
+      "worksSpan": 3,
+      "examples": [
+        "Pour moi, je n’ai nulle curiosité de voir la France, dit Candide; vous devinez aisément que quand on a passé un mois dans Eldorado, on ne se soucie plus de rien voir sur la terre que mademoiselle Cunégonde: je vais l’attendre à Venise; nous traverserons la France pour aller en Italie; ne m’accompagnerez-vous pas?",
+        "Je vais sur-le-champ chez monsieur l’abbé de Saint-Yves, qui ne demeure qu’à une lieue de vous, et je vous réponds que j’épouserai ma maîtresse dans la journée."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "stats": {
+    "sentences": 40,
+    "formulas": 23,
+    "verbatim": 22,
+    "patterns": 1
+  },
+  "checksum": "sha256:37bf903030a8c0e803ba559c3473ad5543ada83a54ab47dc60d8ed39261afa98"
+}
