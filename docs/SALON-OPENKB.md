@@ -28,7 +28,7 @@
 | Pack export + validator | `salon/scripts/kb_export.mjs` | ✅ — **bootstrap packs published for all 54 authors** (`--from-corpus`); `--check` validates outputs |
 | Quote audit | `salon/scripts/kb_quote_audit.mjs` | ✅ (active once sources are staged) |
 | Server bridge | `backend/fastify/lib/salon-kb.mjs` + `routes/salon-kb.mjs` (`POST /v1/salon/kb/query`, `GET /v1/salon/kb/manifest`, `GET /v1/salon/kb/status/:authorId`) | ✅ |
-| Client | `backend/web/public/salon/salon-kb.js` + guarded hook in `circle-run.js` | ✅ (off by default: requires `window.SALON_KB_CONFIG.api` **and** a Salon token) |
+| Client | `backend/web/public/salon/salon-kb.js` + guarded hook in `circle-run.js` | ✅ activé — `window.SALON_KB_CONFIG` est défini dans les deux `index.html` ; le pont ne s'ouvre que pour une session liée (jeton `kayros-salon-token`) |
 | Registry | `salon/kb-map.json` (generated) | ✅ |
 | Tests | `tests/salon-openkb.test.mjs` · `backend/fastify/tests/salon-kb.test.mjs` | ✅ |
 
