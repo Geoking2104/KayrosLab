@@ -44,13 +44,13 @@
     document.head.appendChild(style);
     var think = document.createElement("div");
     think.id = "circle-think"; think.hidden = true; think.setAttribute("aria-live", "assertive");
-    think.innerHTML = "<h2>Le salon reflechit <span class=\"dots\"></span></h2><p id=\"think-now\">La table cherche, puis construit une reponse.</p>";
+    think.innerHTML = "<h2>" + L("Le salon reflechit", "The salon is thinking") + " <span class=\"dots\"></span></h2><p id=\"think-now\">" + L("La table cherche, puis construit une reponse.", "The table searches, then builds an answer.") + "</p>";
     var box = document.createElement("div"); box.id = "circle-progress"; box.hidden = true;
-    box.innerHTML = "<h2>Seance en cours</h2><p class=\"cp-now\" id=\"cp-now\">En attente.</p><ol id=\"cp-log\"></ol>";
+    box.innerHTML = "<h2>" + L("Seance en cours", "Session in progress") + "</h2><p class=\"cp-now\" id=\"cp-now\">" + L("En attente.", "Waiting.") + "</p><ol id=\"cp-log\"></ol>";
     var roles = document.createElement("div"); roles.id = "circle-roles"; roles.hidden = true;
-    roles.innerHTML = "<h2>Roles a table</h2><div class=\"cr-grid\" id=\"cr-grid\"></div><p class=\"cr-conflict\" id=\"cr-conflict\" hidden></p>";
+    roles.innerHTML = "<h2>" + L("Roles a table", "Roles at the table") + "</h2><div class=\"cr-grid\" id=\"cr-grid\"></div><p class=\"cr-conflict\" id=\"cr-conflict\" hidden></p>";
     var dyn = document.createElement("div"); dyn.id = "circle-dyn"; dyn.hidden = true;
-    dyn.innerHTML = "<h2>Dynamique des conflits</h2><p class=\"dy-read\" id=\"dy-read\"></p><div class=\"dy-bar\"><i id=\"dy-fill\"></i></div><ol id=\"dy-beats\"></ol>";
+    dyn.innerHTML = "<h2>" + L("Dynamique des conflits", "Conflict dynamics") + "</h2><p class=\"dy-read\" id=\"dy-read\"></p><div class=\"dy-bar\"><i id=\"dy-fill\"></i></div><ol id=\"dy-beats\"></ol>";
     var stream = document.querySelector(".stream");
     var header = stream && stream.querySelector(".protocol");
     var anchor = header || (stream && stream.querySelector(".msgs"));
@@ -98,13 +98,16 @@
       if (i >= ROLE_ORDER.length) { seats.push({ id: id, role: "invite", act: "ecoute", brief: "Observe puis cede." }); return; }
       var slot = ROLE_ORDER[i];
       if (taken[slot.role]) { conflicts.push("@" + id + " visait aussi " + slot.role); seats.push({ id: id, role: "invite", act: "ecoute", brief: "Role pris." }); return; }
-      if (mentioned.length >= 2 && i === 0) conflicts.push("@" + mentioned[0] + " lit, @" + mentioned[1] + " objecte");
+      if (mentioned.length >= 2 && i === 0) conflicts.push("@" + mentioned[0] + L(" lit, @", " reads, @") + mentioned[1] + L(" objecte", " objects"));
       taken[slot.role] = id; seats.push({ id: id, role: slot.role, act: slot.act, brief: slot.brief });
     });
     return { seats: seats, conflicts: conflicts };
   }
-  function authorNameSafe(a) { if (!a) return "Un convive"; if (typeof authorName === "function") return authorName(a); return a.name || a.nameEn || a.id; }
+  function authorNameSafe(a) { if (!a) return L("Un convive", "A guest"); if (typeof authorName === "function") return authorName(a); return a.name || a.nameEn || a.id; }
   function userLang() { if (typeof locale !== "undefined" && locale === "en") return "en"; try { if (localStorage.getItem("salon-locale") === "en") return "en"; } catch (e) {} return "fr"; }
+  function L(fr, en) { return userLang() === "en" ? en : fr; }
+  function roleLabel(r) { var m = { lecteur: "reader", objecteur: "objector", defenseur: "defender", secretaire: "secretary", invite: "guest" }; return (userLang() === "en" && m[r]) ? m[r] : r; }
+  function actLabel(a) { var m = { lit: "reads", objecte: "objects", defend: "defends", minute: "minutes", parle: "speaks" }; return (userLang() === "en" && m[a]) ? m[a] : a; }
   function localizedBlurb(a) { if (!a) return ""; return userLang() === "en" ? (a.blurbEn || a.blurb || "") : (a.blurb || a.blurbEn || ""); }
   function paintRoles(plan) {
     lastPlan = plan; var bar = document.getElementById("circle-roles"); var grid = document.getElementById("cr-grid"); var note = document.getElementById("cr-conflict");
@@ -112,29 +115,29 @@
     (plan.seats || []).forEach(function (s) { by[s.role] = s; });
     grid.innerHTML = ROLE_ORDER.map(function (slot) {
       var seat = by[slot.role], a = seat ? findAuthor(seat.id) : null;
-      return "<button type=\"button\" data-role=\"" + slot.role + "\"><strong>" + slot.role + "</strong><span>@" + (seat ? seat.id : "vide") + " \u00b7 " + (a ? authorNameSafe(a) : "—") + "</span></button>";
+      return "<button type=\"button\" data-role=\"" + slot.role + "\"><strong>" + roleLabel(slot.role) + "</strong><span>@" + (seat ? seat.id : L("vide", "empty")) + " \u00b7 " + (a ? authorNameSafe(a) : "—") + "</span></button>";
     }).join("");
-    if (note) { var t = (plan.conflicts || []).join(" "); note.hidden = !t; note.textContent = t ? ("Conflit : " + t) : ""; }
+    if (note) { var t = (plan.conflicts || []).join(" "); note.hidden = !t; note.textContent = t ? (L("Conflit : ", "Conflict: ") + t) : ""; }
   }
   function paintDynamics() {
     var box = document.getElementById("circle-dyn"); if (!box) return; box.hidden = false;
     var t = Math.max(0, Math.min(100, dynamics.tension)); var fill = document.getElementById("dy-fill"); if (fill) fill.style.width = t + "%";
     var last = dynamics.pairs[dynamics.pairs.length - 1];
-    var phase = t >= 70 ? "vive opposition" : t >= 40 ? "tension ouverte" : t >= 20 ? "discussion" : "apaisement";
+    var phase = t >= 70 ? L("vive opposition", "sharp opposition") : t >= 40 ? L("tension ouverte", "open tension") : t >= 20 ? L("discussion", "discussion") : L("apaisement", "calming");
     var read = document.getElementById("dy-read");
-    if (read) read.textContent = last ? ("@" + last.from + " s oppose a @" + last.to + " — " + phase + " (" + t + ").") : ("Pas encore d opposition. Tension " + t + ".");
+    if (read) read.textContent = last ? ("@" + last.from + L(" s oppose a @", " opposes @") + last.to + " — " + phase + " (" + t + ").") : (L("Pas encore d opposition. Tension ", "No opposition yet. Tension ") + t + ".");
     var ol = document.getElementById("dy-beats");
-    if (ol) ol.innerHTML = dynamics.beats.slice(-8).map(function (b) { return "<li>" + b.clock + " \u00b7 @" + b.id + " " + b.act + (b.to ? " → @" + b.to : "") + (b.note ? " — " + b.note : "") + "</li>"; }).join("");
+    if (ol) ol.innerHTML = dynamics.beats.slice(-8).map(function (b) { return "<li>" + b.clock + " \u00b7 @" + b.id + " " + actLabel(b.act) + (b.to ? " → @" + b.to : "") + (b.note ? " — " + b.note : "") + "</li>"; }).join("");
   }
   function recordBeat(author, seat, guests) {
     var role = (seat && seat.role) || "invite", act = (seat && seat.act) || "parle", to = "", note = "";
     var lecteur = guests.find(function (g) { return g._seat && g._seat.role === "lecteur"; });
     var objecteur = guests.find(function (g) { return g._seat && g._seat.role === "objecteur"; });
-    if (role === "lecteur") { dynamics.tension = Math.min(40, dynamics.tension + 8); note = "pose la these"; }
-    else if (role === "objecteur") { to = lecteur ? lecteur.id : "lecteur"; dynamics.tension = Math.min(100, dynamics.tension + 28); dynamics.pairs.push({ from: author.id, to: to }); note = "ouvre le conflit"; }
-    else if (role === "defenseur") { to = objecteur ? objecteur.id : "objecteur"; dynamics.tension = Math.max(18, dynamics.tension - 16); note = "tient la these"; }
-    else if (role === "secretaire") { dynamics.tension = Math.max(8, Math.round(dynamics.tension * 0.45)); note = dynamics.tension < 25 ? "conflit compose" : "conflit encore vif"; }
-    else { dynamics.tension = Math.max(10, dynamics.tension - 4); note = "observe"; }
+    if (role === "lecteur") { dynamics.tension = Math.min(40, dynamics.tension + 8); note = L("pose la these", "states the thesis"); }
+    else if (role === "objecteur") { to = lecteur ? lecteur.id : "lecteur"; dynamics.tension = Math.min(100, dynamics.tension + 28); dynamics.pairs.push({ from: author.id, to: to }); note = L("ouvre le conflit", "opens the conflict"); }
+    else if (role === "defenseur") { to = objecteur ? objecteur.id : "objecteur"; dynamics.tension = Math.max(18, dynamics.tension - 16); note = L("tient la these", "holds the thesis"); }
+    else if (role === "secretaire") { dynamics.tension = Math.max(8, Math.round(dynamics.tension * 0.45)); note = dynamics.tension < 25 ? L("conflit compose", "conflict composed") : L("conflit encore vif", "conflict still sharp"); }
+    else { dynamics.tension = Math.max(10, dynamics.tension - 4); note = L("observe", "observes"); }
     dynamics.beats.push({ clock: clock().slice(0,5), id: author.id, act: act, to: to, note: note }); paintDynamics();
   }
   function cycleRole(role) {
@@ -143,7 +146,7 @@
     var current = seats[idx].id, next = ids[(Math.max(0, ids.indexOf(current)) + 1) % ids.length];
     var other = seats.findIndex(function (s) { return s.id === next; });
     seats[idx].id = next; if (other >= 0) seats[other].id = current;
-    lastPlan = { seats: seats, conflicts: ["Echange " + role + " @" + next] }; paintRoles(lastPlan);
+    lastPlan = { seats: seats, conflicts: [L("Echange ", "Exchange ") + roleLabel(role) + " @" + next] }; paintRoles(lastPlan);
   }
   function hookMentions() {
     var draft = document.getElementById("draft"), suggest = document.getElementById("suggest");
@@ -245,7 +248,7 @@
         user = "Question de table : " + question;
       }
       showThink("Cadrage, puis reponse — " + authorNameSafe(author));
-      logStep("Le salon reflechit avec " + authorNameSafe(author), true);
+      logStep(L("Le salon reflechit avec ", "The salon is thinking with ") + authorNameSafe(author), true);
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
       var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, 7000);
       return fetch(DEMO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ system: system, user: user }), signal: ctrl ? ctrl.signal : undefined })
@@ -265,23 +268,23 @@
   }
   function runTable(question, ids, opts) {
     opts = opts || {}; question = String(question || "").trim();
-    if (question.length < 2) { showThink("Rien a poser — ecrivez ou ouvrez un cercle."); return Promise.resolve(); }
-    if (running) { pending = { question: question, ids: ids, opts: opts }; showThink("Un tour est deja en cours. Le suivant est note."); return Promise.resolve(); }
+    if (question.length < 2) { showThink(L("Rien a poser — ecrivez ou ouvrez un cercle.", "Nothing to put — write, or open a circle.")); return Promise.resolve(); }
+    if (running) { pending = { question: question, ids: ids, opts: opts }; showThink(L("Un tour est deja en cours. Le suivant est note.", "A turn is already under way. The next one is noted.")); return Promise.resolve(); }
     var plan = lastPlan && !mentionedSeated(question).length ? lastPlan : assignRoles(question, ids);
     var guests = plan.seats.map(function (seat) { var a = findAuthor(seat.id); if (!a) return null; a = Object.assign({}, a); a._seat = seat; return a; }).filter(Boolean);
     if (!guests.length) { showThink("Aucun convive a table."); return Promise.resolve(); }
-    running = true; setBusy(true); showThink("Le salon prend la question et attribue les roles.");
-    if (opts.wave !== false) markWave(opts.label || "Nouveau tour");
+    running = true; setBusy(true); showThink(L("Le salon prend la question et attribue les roles.", "The salon takes the question and assigns the roles."));
+    if (opts.wave !== false) markWave(opts.label || L("Nouveau tour", "New turn"));
     logStep("Question : " + question.slice(0, 110)); paintRoles(plan); paintDynamics();
     var chain = Promise.resolve();
     guests.forEach(function (author, i) {
       chain = chain.then(function () {
         var seat = author._seat || { role: "invite", act: "prend la parole" };
-        showThink((i + 1) + "/" + guests.length + " — " + seat.role + " \u00b7 " + authorNameSafe(author));
-        var wait = appendBubble({ authorId: author.id, name: authorNameSafe(author), act: seat.role + " — reflechit", wait: true, wave: true, text: "Le salon reflechit\u2026" });
+        showThink((i + 1) + "/" + guests.length + " — " + roleLabel(seat.role) + " \u00b7 " + authorNameSafe(author));
+        var wait = appendBubble({ authorId: author.id, name: authorNameSafe(author), act: roleLabel(seat.role) + L(" — reflechit", " — thinking"), wait: true, wave: true, text: L("Le salon reflechit\u2026", "The salon is thinking\u2026") });
         return askVoice(author, question, seat).then(function (out) {
           var text = (out && out.text) || "";
-          if (wait) { wait.classList.remove("is-wait"); var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = seat.act; wait.querySelector("p").textContent = text; fillProof(wait, (out && out.proof) || proofFromAuthor(author)); }
+          if (wait) { wait.classList.remove("is-wait"); var actEl = wait.querySelector("header span"); if (actEl) actEl.textContent = actLabel(seat.act); wait.querySelector("p").textContent = text; fillProof(wait, (out && out.proof) || proofFromAuthor(author)); }
           threadHistory.push({ name: authorNameSafe(author), text: text, prise: (out && out.prise) || "" });
           if (threadHistory.length > 12) threadHistory.shift();
           var mine = (selfByAuthor[author.id] = selfByAuthor[author.id] || []);
@@ -293,23 +296,23 @@
       });
     });
     return chain.then(function () {
-      running = false; setBusy(false); showThink("La table s'est tue. Vous pouvez relancer.");
+      running = false; setBusy(false); showThink(L("La table s'est tue. Vous pouvez relancer.", "The table has fallen silent. You may relaunch."));
       if (pending) { var n = pending; pending = null; return runTable(n.question, n.ids, n.opts); }
-    }).catch(function () { running = false; setBusy(false); showThink("La seance s'est interrompue."); });
+    }).catch(function () { running = false; setBusy(false); showThink(L("La seance s'est interrompue.", "The session was interrupted.")); });
   }
   function hookOpen() {
     var form = document.getElementById("open-circle"); if (!form || form.dataset.circleHook) return; form.dataset.circleHook = "1";
     form.addEventListener("submit", function () {
       setTimeout(function () {
         threadHistory = []; selfByAuthor = {};
-        var data = new FormData(form), name = String(data.get("name") || "Cercle").trim(), question = String(data.get("question") || "").trim();
+        var data = new FormData(form), name = String(data.get("name") || L("Cercle", "Circle")).trim(), question = String(data.get("question") || "").trim();
         var picked = typeof selectedIds === "function" ? selectedIds() : guestIds();
-        if (picked.length < 2) { showThink("Cochez au moins deux convives."); return; }
+        if (picked.length < 2) { showThink(L("Cochez au moins deux convives.", "Tick at least two guests.")); return; }
         seated = picked.slice(); lastPlan = null; dynamics = { tension: 12, beats: [], pairs: [] };
         var h = document.querySelector(".protocol h1"); var p = document.querySelector(".protocol p"); if (h) h.textContent = name; if (p) p.textContent = question;
         if (typeof show === "function") show("cercle");
-        showThink("Le cercle s'ouvre."); markWave("Ouverture — " + name);
-        appendBubble({ host: true, name: "Vous", act: "ouvre la table", text: question, wave: true });
+        showThink(L("Le cercle s'ouvre.", "The circle opens.")); markWave(L("Ouverture — ", "Opening — ") + name);
+        appendBubble({ host: true, name: L("Vous", "You"), act: L("ouvre la table", "opens the table"), text: question, wave: true });
         var stream = document.querySelector(".stream"); if (stream) stream.scrollIntoView({ behavior: "smooth", block: "start" });
         runTable(question, seated, { wave: false });
       }, 0);
@@ -318,7 +321,7 @@
   function hookCompose() {
     var form = document.getElementById("compose"); if (!form || form.dataset.circleHook) return; form.dataset.circleHook = "1";
     form.addEventListener("submit", function () {
-      setTimeout(function () { var q = lastQuestion(); if (q.length < 2) { showThink("Ecrivez d'abord."); return; } showThink("Votre message est a table."); runTable(q, speakersFor(q), { label: "Votre intervention" }); }, 0);
+      setTimeout(function () { var q = lastQuestion(); if (q.length < 2) { showThink(L("Ecrivez d'abord.", "Write first.")); return; } showThink(L("Votre message est a table.", "Your message is at the table.")); runTable(q, speakersFor(q), { label: L("Votre intervention", "Your intervention") }); }, 0);
     });
   }
   function hookTalk() {
@@ -328,13 +331,13 @@
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       var draft = document.getElementById("draft"), typed = draft && draft.value.trim(), q = typed || lastQuestion();
-      showThink("Le salon prend la parole. Cadrage, puis raisonnement.");
+      showThink(L("Le salon prend la parole. Cadrage, puis raisonnement.", "The salon takes the floor. Framing, then reasoning."));
       if (typeof show === "function") try { show("cercle"); } catch (err) {}
       if (q.length < 2) return;
-      markWave(typed ? "Vous laissez la table parler" : "La table reprend");
-      appendBubble({ host: true, name: "Vous", act: "laisse la table parler", text: q, wave: true });
+      markWave(typed ? L("Vous laissez la table parler", "You let the table speak") : L("La table reprend", "The table resumes"));
+      appendBubble({ host: true, name: L("Vous", "You"), act: L("laisse la table parler", "lets the table speak"), text: q, wave: true });
       if (draft && typed) draft.value = "";
-      runTable(q, speakersFor(q), { wave: false, label: "La table parle" });
+      runTable(q, speakersFor(q), { wave: false, label: L("La table parle", "The table speaks") });
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();

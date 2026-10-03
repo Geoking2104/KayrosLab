@@ -67,18 +67,18 @@
     wrap.className = "salon-stage";
     var rail = document.createElement("aside");
     rail.id = "salon-rail";
-    rail.setAttribute("aria-label", "Dynamique et connaissances");
+    rail.setAttribute("aria-label", L("Dynamique et connaissances", "Dynamics and knowledge"));
     var center = document.createElement("section");
     center.id = "salon-center";
     var back = document.createElement("p");
     back.className = "salon-back";
-    back.innerHTML = '<a href="#" data-leave-stage>Retour à la table</a>';
+    back.innerHTML = '<a href="#" data-leave-stage>' + L("Retour à la table", "Back to the table") + '</a>';
     var status = document.createElement("div");
     status.id = "salon-status";
-    status.innerHTML = '<div class="st-row"><span id="st-label">À l’écoute</span><span id="st-pct">0 %</span></div><div class="st-bar" aria-hidden="true"><div class="st-fill" id="st-fill"></div></div>';
+    status.innerHTML = '<div class="st-row"><span id="st-label">' + L("À l’écoute", "Listening") + '</span><span id="st-pct">0 %</span></div><div class="st-bar" aria-hidden="true"><div class="st-fill" id="st-fill"></div></div>';
     var relance = document.createElement("div");
     relance.id = "salon-relance";
-    relance.innerHTML = "<h2>La table s’arrête</h2><p class=\"rl-copy\">Le dernier tour est clos. Relancez le fil, ou changez de rôle.</p><div class=\"rl-row\"></div>";
+    relance.innerHTML = "<h2>" + L("La table s’arrête", "The table stops") + "</h2><p class=\"rl-copy\">" + L("Le dernier tour est clos. Relancez le fil, ou changez de rôle.", "The last turn is closed. Relaunch the thread, or change role.") + "</p><div class=\"rl-row\"></div>";
     var parent = stream.parentNode;
     parent.insertBefore(wrap, stream);
     wrap.appendChild(center);
@@ -160,14 +160,14 @@
     phase = "think";
     pct = 4;
     hideRelance();
-    setStatus(true, (who ? who + " réfléchit" : "Le salon réfléchit"), pct);
+    setStatus(true, (who ? who + L(" réfléchit", " is thinking") : L("Le salon réfléchit", "The salon is thinking")), pct);
     clearInterval(tick);
     tick = setInterval(function () {
       if (!busy) return;
       if (phase === "think" && pct < 58) pct += 2 + Math.random() * 4;
       else if (phase === "write" && pct < 92) pct += 1 + Math.random() * 3;
       else if (pct < 96) pct += 0.4;
-      setStatus(true, phase === "write" ? (who ? who + " écrit" : "Écriture") : (who ? who + " réfléchit" : "Réflexion"), pct);
+      setStatus(true, phase === "write" ? (who ? who + L(" écrit", " is writing") : L("Écriture", "Writing")) : (who ? who + L(" réfléchit", " is thinking") : L("Réflexion", "Thinking")), pct);
     }, 180);
   }
 
@@ -177,7 +177,7 @@
     busy = false;
     phase = "idle";
     clearInterval(tick);
-    setStatus(true, "Tour clos", 100);
+    setStatus(true, L("Tour clos", "Turn closed"), 100);
     setTimeout(function () { setStatus(false, "", 0); maybeRelance(); }, 700);
   }
 
@@ -193,8 +193,11 @@
       var st = items[i].querySelector("header strong");
       if (st) return st.textContent.trim();
     }
-    return "le dernier convive";
+    return L("le dernier convive", "the last guest");
   }
+
+  function enMode() { try { if (typeof locale !== "undefined") return locale === "en"; } catch (e) {} try { var l = localStorage.getItem("salon-locale"); if (l === "en") return true; if (l === "fr") return false; } catch (e) {} return (typeof document !== "undefined" && document.documentElement.lang === "en"); }
+  function L(fr, en) { return enMode() ? en : fr; }
 
   function draft() { return document.getElementById("draft"); }
   function talkBtn() { return document.querySelector('[data-i18n="talk"]'); }
@@ -223,7 +226,7 @@
       else if (kind === "minute") fire("[secretaire] Minute le conflit : question, prises tenues, nœuds encore ouverts.");
       else if (kind === "hote") {
         var d = draft();
-        if (d) { d.placeholder = "Votre relance d’hôte"; d.focus(); }
+        if (d) { d.placeholder = L("Votre relance d’hôte", "Your host relaunch"); d.focus(); }
         hideRelance();
       }
     });
@@ -235,15 +238,15 @@
     var row = box.querySelector(".rl-row");
     if (row) {
       row.innerHTML = [
-        '<button type="button" class="primary" data-rl="suite">Continuer le fil</button>',
-        '<button type="button" data-rl="objet">Faire objecter</button>',
-        '<button type="button" data-rl="defense">Faire défendre</button>',
-        '<button type="button" data-rl="minute">Faire minuter</button>',
-        '<button type="button" data-rl="hote">Intervenir comme hôte</button>'
+        '<button type="button" class="primary" data-rl="suite">' + L("Continuer le fil", "Continue the thread") + '</button>',
+        '<button type="button" data-rl="objet">' + L("Faire objecter", "Have someone object") + '</button>',
+        '<button type="button" data-rl="defense">' + L("Faire défendre", "Have someone defend") + '</button>',
+        '<button type="button" data-rl="minute">' + L("Faire minuter", "Have it minuted") + '</button>',
+        '<button type="button" data-rl="hote">' + L("Intervenir comme hôte", "Step in as host") + '</button>'
       ].join("");
     }
     var copy = box.querySelector(".rl-copy");
-    if (copy) copy.textContent = "Dernier tour : " + lastGuestName() + ". Choisissez comment le fil reprend.";
+    if (copy) copy.textContent = L("Dernier tour : ", "Last turn: ") + lastGuestName() + L(". Choisissez comment le fil reprend.", ". Choose how the thread resumes.");
     box.classList.add("is-on");
   }
 

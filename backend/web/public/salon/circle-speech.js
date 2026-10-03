@@ -10,6 +10,9 @@
     }
     return out;
   }
+  function enMode() { try { if (typeof locale !== "undefined") return locale === "en"; } catch (e) {} try { var l = localStorage.getItem("salon-locale"); if (l === "en") return true; if (l === "fr") return false; } catch (e) {} return (typeof document !== "undefined" && document.documentElement.lang === "en"); }
+  function L(fr, en) { return enMode() ? en : fr; }
+
   function tableQuestion() {
     var p = document.querySelector(".protocol p");
     return p ? String(p.textContent || "").replace(/\s+/g, " ").trim() : "";
@@ -24,9 +27,9 @@
       var proof = ((li.querySelector("p.proof") || {}).textContent || "").trim();
       if (!body || /salon reflechit/i.test(body)) return;
       var prise = "";
-      var m = proof.match(/Prise\s*[—\-]\s*(.+)/i);
+      var m = proof.match(/(?:Prise|Claim)\s*[—\-]\s*(.+)/i);
       if (m) prise = m[1].replace(/\s{2,}.*$/, "").trim();
-      lines.push({ name: name || (li.classList.contains("is-host") ? "Hôte" : "Convive"), text: body, prise: prise, host: li.classList.contains("is-host"), authorId: li.getAttribute("data-author") || "" });
+      lines.push({ name: name || (li.classList.contains("is-host") ? L("Hôte", "Host") : L("Convive", "Guest")), text: body, prise: prise, host: li.classList.contains("is-host"), authorId: li.getAttribute("data-author") || "" });
     });
     var lastGuest = null;
     for (var i = lines.length - 1; i >= 0; i--) {

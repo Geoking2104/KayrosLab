@@ -184,9 +184,9 @@
       var d = mem.digest[id];
       var last = arr[arr.length - 1];
       if (!d && !last) return "";
-      return "<li><strong>@" + id + "</strong> · " + (d ? "digest + " : "") + arr.length + " récent" + (arr.length > 1 ? "s" : "") + " — " + clip((last && last.claim) || d || "", 100) + "</li>";
+      return "<li><strong>@" + id + "</strong> · " + (d ? "digest + " : "") + L(arr.length + " récent" + (arr.length > 1 ? "s" : ""), arr.length + " recent") + " — " + clip((last && last.claim) || d || "", 100) + "</li>";
     }).join("");
-    box.innerHTML = "<h2>Mémoire du cercle</h2><p class=\"cp-now\">schéma v3 " + (ok ? "valide" : "corrigé") + " · " + mem.turns.length + " prise" + (mem.turns.length > 1 ? "s" : "") + " · " + mem.open.length + " ouverte" + (mem.open.length > 1 ? "s" : "") + "</p><ol>" + lines + "</ol>";
+    box.innerHTML = "<h2>" + L("Mémoire du cercle", "Circle memory") + "</h2><p class=\"cp-now\">" + L("schéma v3 ", "scheme v3 ") + (ok ? L("valide", "valid") : L("corrigé", "fixed")) + " · " + L(mem.turns.length + " prise" + (mem.turns.length > 1 ? "s" : ""), mem.turns.length + " claim" + (mem.turns.length > 1 ? "s" : "")) + " · " + L(mem.open.length + " ouverte" + (mem.open.length > 1 ? "s" : ""), mem.open.length + " open") + "</p><ol>" + lines + "</ol>";
   }
   function wrapFetch() {
     if (window.fetch && window.fetch.__salonMem) return;
@@ -216,13 +216,16 @@
     hooked.__salonMem = true;
     window.fetch = hooked;
   }
+  function enMode() { try { if (typeof locale !== "undefined") return locale === "en"; } catch (e) {} try { var l = localStorage.getItem("salon-locale"); if (l === "en") return true; if (l === "fr") return false; } catch (e) {} return (typeof document !== "undefined" && document.documentElement.lang === "en"); }
+  function L(fr, en) { return enMode() ? en : fr; }
+
   function archivePast() {
     var ol = msgsOl(); if (!ol) return;
     var kids = [].filter.call(ol.children, function (n) { return !n.classList.contains("past-thread"); });
     if (kids.length < 2) return;
     var box = document.createElement("details");
     box.className = "past-thread";
-    box.innerHTML = "<summary>Discussion précédente — rouvrir</summary>";
+    box.innerHTML = "<summary>" + L("Discussion précédente — rouvrir", "Previous discussion — reopen") + "</summary>";
     var wrap = document.createElement("ol");
     kids.forEach(function (n) { n.classList.add("is-past"); wrap.appendChild(n); });
     box.appendChild(wrap);
@@ -238,7 +241,7 @@
     var head = li.querySelector("header span"); if (!head) return;
     var sel = document.createElement("select");
     sel.className = "encart-who";
-    sel.setAttribute("aria-label", "Changer l'auteur");
+    sel.setAttribute("aria-label", L("Changer l'auteur", "Change the author"));
     sel.innerHTML = options(li.dataset.author || "");
     sel.addEventListener("change", function () {
       li.dataset.author = sel.value;
@@ -267,7 +270,7 @@
     if (document.getElementById("circle-next")) return document.getElementById("circle-next");
     var nxt = document.createElement("div");
     nxt.id = "circle-next"; nxt.hidden = true;
-    nxt.innerHTML = "<h2>Fin de discussion</h2><p>Relance sur claims + questions ouvertes.</p><div class=\"nx-row\"><button type=\"button\" class=\"btn\" data-nx=\"go\">Continuer la conversation</button><label>Intervenir comme <select class=\"next-role\" id=\"next-role\"><option value=\"hote\">hôte</option><option value=\"lecteur\">lecteur</option><option value=\"objecteur\">objecteur</option><option value=\"defenseur\">défenseur</option><option value=\"secretaire\">secrétaire</option></select></label><button type=\"button\" class=\"btn ghost\" data-nx=\"in\">Intervenir</button></div>";
+    nxt.innerHTML = "<h2>" + L("Fin de discussion", "End of discussion") + "</h2><p>" + L("Relance sur claims + questions ouvertes.", "Relaunch on claims + open questions.") + "</p><div class=\"nx-row\"><button type=\"button\" class=\"btn\" data-nx=\"go\">" + L("Continuer la conversation", "Continue the conversation") + "</button><label>" + L("Intervenir comme ", "Step in as ") + "<select class=\"next-role\" id=\"next-role\"><option value=\"hote\">" + L("hôte", "host") + "</option><option value=\"lecteur\">" + L("lecteur", "reader") + "</option><option value=\"objecteur\">" + L("objecteur", "objector") + "</option><option value=\"defenseur\">" + L("défenseur", "defender") + "</option><option value=\"secretaire\">" + L("secrétaire", "secretary") + "</option></select></label><button type=\"button\" class=\"btn ghost\" data-nx=\"in\">" + L("Intervenir", "Step in") + "</button></div>";
     var compose = document.getElementById("compose");
     if (compose) compose.insertAdjacentElement("beforebegin", nxt);
     nxt.addEventListener("click", function (e) {

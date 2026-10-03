@@ -62,3 +62,17 @@ test('i18n : mémoire compilée et pupitre suivent la langue stockée, sans mél
   assert.match(fx, /refreshCopy/, 'les libellés créés par flux-x se rafraîchissent à la bascule');
   assert.match(fx, /data-handle/, 'l’état lié est conservé pour la re-traduction');
 });
+
+test('i18n : le cercle parle une seule langue (fr/en)', () => {
+  const run = readFileSync(new URL('backend/web/public/salon/circle-run.js', root), 'utf8');
+  assert.match(run, /function roleLabel/, 'rôles localisés');
+  assert.match(run, /The salon is thinking/, 'statuts localisés');
+  const stage = readFileSync(new URL('backend/web/public/salon/circle-stage.js', root), 'utf8');
+  assert.match(stage, /Back to the table/);
+  assert.match(stage, /Continue the thread/);
+  const ui = readFileSync(new URL('backend/web/public/salon/circle-ui.js', root), 'utf8');
+  assert.match(ui, /Circle memory/);
+  assert.match(ui, /End of discussion/);
+  const speech = readFileSync(new URL('backend/web/public/salon/circle-speech.js', root), 'utf8');
+  assert.match(speech, /L\("Hôte", "Host"\)/);
+});
