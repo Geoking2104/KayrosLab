@@ -33,8 +33,8 @@
 
   function parseStatus(raw) {
     raw = String(raw || "").trim();
-    if (/^\d{5,19}$/.test(raw)) return { id: raw, url: "https://x.com/i/web/status/" + raw };
-    var m = raw.match(/(?:x\.com|twitter\.com)\/(?:i\/web\/status|([^/\s]+)\/status)\/(\d{5,19})/i);
+    if (/^\d{1,19}$/.test(raw)) return { id: raw, url: "https://x.com/i/web/status/" + raw };
+    var m = raw.match(/(?:x\.com|twitter\.com)\/(?:i\/web\/status|([^/\s]+)\/status)\/(\d{1,19})/i);
     if (!m) return null;
     return { id: m[2], handle: m[1] && m[1] !== "i" ? m[1] : "", url: raw.split(/\s/)[0] };
   }
@@ -42,6 +42,8 @@
     var m = String(text || "").match(/https?:\/\/(?:www\.)?(?:x\.com|twitter\.com)\/[^\s]+/i);
     return m ? m[0] : "";
   }
+
+  function isLoneUrl(s) { return /^https?:\/\/\S+$/i.test(String(s || "").trim()); }
 
   function note(msg) {
     var el = document.getElementById("gz-note");
@@ -79,6 +81,19 @@
       return { handle: data.user_screen_name || parsed.handle || "", text: text };
     });
   }
+  function isManagedPreview() {
+    try { return /(^|\.)autoclawai\.space$/i.test(String(location.hostname || "")); } catch (e) { return false; }
+  }
+
+  function fetchFixupx(parsed) {
+    return getJSON("https://api.fixupx.com/status/" + parsed.id).then(function (data) {
+      var tw = data.tweet || data;
+      var text = tw.text || tw.full_text || "";
+      if (!text) throw new Error("empty");
+      var handle = (tw.author && (tw.author.screen_name || tw.author.username)) || parsed.handle || "";
+      return { handle: handle, text: text };
+    });
+  }
   function fetchOembed(parsed) {
     var twUrl = "https://twitter.com/i/web/status/" + parsed.id;
     return getJSON("https://publish.twitter.com/oembed?omit_script=true&hide_thread=true&url=" + encodeURIComponent(twUrl)).then(function (data) {
@@ -95,6 +110,7 @@
     note("On relève le propos…");
     return fetchFx(parsed)
       .catch(function () { return fetchVx(parsed); })
+      .catch(function () { return fetchFixupx(parsed); })
       .catch(function () { return fetchOembed(parsed); })
       .then(function (hit) {
         if (!hit || !hit.text) throw new Error("empty");
@@ -103,7 +119,9 @@
         return true;
       })
       .catch(function () {
-        note("Le post n’a pas pu être lu — collez le propos à la main.");
+        note("Le post n’a pas pu être lu" + (isManagedPreview() ? " (aperçu hors-ligne)" : "") + " — collez le texte du propos, puis « Demander aux auteurs ».");
+        var box = document.getElementById("gz-text");
+        if (box && box.focus) { try { box.focus(); } catch (e) {} }
         return false;
       });
   }
@@ -368,10 +386,12 @@
     var urlBox = document.getElementById("gz-url");
     var thesis = box ? box.value.trim() : "";
     var parsed = urlBox ? parseStatus(urlBox.value) : null;
-    if (!thesis) {
-      folio.innerHTML = '<p class="empty">' + (parsed
-        ? "Le propos n’est pas encore à table — collez-le, ou vérifiez le lien."
-        : "Portez d’abord une missive — un lien, ou le propos.") + "</p>";
+    if (!thesis || isLoneUrl(thesis)) {
+      var msg;
+      if (isLoneUrl(thesis)) msg = "Ce lien n’a pas encore livré son texte — « Importer le contenu », ou collez le propos.";
+      else if (parsed) msg = "Le propos n’est pas encore à table — collez-le, ou vérifiez le lien.";
+      else msg = "Portez d’abord une missive — un lien, ou le propos.";
+      folio.innerHTML = '<p class="empty">' + msg + "</p>";
       return Promise.resolve();
     }
     return loadCorpus().then(function (corpus) {
@@ -403,17 +423,23 @@
       try { folio.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (e) { folio.scrollIntoView(); }
     }
   }
+  function fetchAndCompose(parsed, force, scroll) {
+    return fetchPost(parsed, force).then(function (ok) {
+      return compose().then(function () { if (scroll) reveal(); return ok; });
+    });
+  }
   function ingestThenCompose(force, scroll) {
-    function after() {
-      return compose().then(function () { if (scroll) reveal(); });
-    }
     var urlBox = document.getElementById("gz-url");
     var raw = urlBox ? urlBox.value.trim() : "";
     var parsed = raw ? parseStatus(raw) : null;
-    if (parsed) return fetchPost(parsed, force).then(after);
+    if (parsed) return fetchAndCompose(parsed, force, scroll);
+    // Le lien peut aussi avoir été collé dans le champ du texte : on le relève quand même.
+    var tbox = document.getElementById("gz-text");
+    var tparsed = tbox ? parseStatus(extractUrl(tbox.value)) : null;
+    if (tparsed) return fetchAndCompose(tparsed, force, scroll);
     if (/https?:\/\//i.test(raw)) {
       note("Lien non reconnu — collez un lien x.com/twitter.com, ou le texte du propos.");
-      return after();
+      return compose().then(function () { return false; });
     }
     if (raw.length >= 8) {
       // Propos collé directement : on l'importe dans le texte porté à la table.
@@ -422,9 +448,9 @@
         box.value = clip(raw, 480);
         note("Propos importé — les auteurs peuvent répondre.");
       }
-      return after();
+      return compose().then(function () { if (scroll) reveal(); return true; });
     }
-    return after();
+    return compose().then(function () { return false; });
   }
 
   /* --------------------------------------------------------------- amorce */
@@ -442,7 +468,20 @@
     var imp = document.getElementById("gz-import");
     if (imp && !imp.getAttribute("data-bound")) {
       imp.setAttribute("data-bound", "1");
-      imp.addEventListener("click", function () { ingestThenCompose(true, true); });
+      imp.addEventListener("click", function () {
+        var btn = this;
+        if (btn.getAttribute("data-busy")) return;
+        btn.setAttribute("data-busy", "1");
+        btn.textContent = "Lecture du lien…";
+        ingestThenCompose(true, true).then(function (ok) {
+          btn.removeAttribute("data-busy");
+          btn.textContent = ok ? "Importé ✓" : "Lien non lu";
+          setTimeout(function () { btn.textContent = "Importer le contenu"; }, 2600);
+        }, function () {
+          btn.removeAttribute("data-busy");
+          btn.textContent = "Importer le contenu";
+        });
+      });
     }
     var url = document.getElementById("gz-url");
     if (url && !url.getAttribute("data-ingest")) {
@@ -462,7 +501,7 @@
         t2 = setTimeout(function () {
           var url = extractUrl(box.value);
           var parsed = url ? parseStatus(url) : null;
-          if (parsed) ingestThenCompose(false);
+          if (parsed) fetchAndCompose(parsed, false);
           else compose();
         }, 400);
       });
@@ -471,7 +510,7 @@
 
   /* ---------------------------------------------------- exports (tests) */
 
-  var API = { parseStatus: parseStatus, rankTexts: rankTexts, respond: respond, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
+  var API = { parseStatus: parseStatus, rankTexts: rankTexts, respond: respond, isLoneUrl: isLoneUrl, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SalonGazette = API;
 

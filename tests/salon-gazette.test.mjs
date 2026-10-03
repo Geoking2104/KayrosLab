@@ -29,6 +29,10 @@ test('gazette : parseStatus reconnaît les URL x.com / twitter.com et l’id nu'
   assert.equal(b.id, '987654321');
   assert.equal(b.handle, '');
 
+  const shortId = G.parseStatus('https://x.com/jack/status/20');
+  assert.equal(shortId.id, '20');
+  assert.equal(shortId.handle, 'jack');
+
   const c = G.parseStatus('12345678');
   assert.equal(c.id, '12345678');
 
@@ -90,6 +94,11 @@ test('réponse : l’auteur répond depuis son texte le plus proche (ou avoue le
   assert.ok(bare && bare.text && bare.text.length > 30, 'sans passage, l’auteur parle sans citer à faux');
 });
 
+test('gazette : un lien seul n’est jamais un propos', () => {
+  assert.ok(G.isLoneUrl('https://x.com/jack/status/20'));
+  assert.ok(!G.isLoneUrl('La liberté de parole n’est pas la liberté d’offenser.'));
+});
+
 test('pupitre : bouton d’import et sélection d’une réponse', () => {
   const html = read('backend/web/public/salon/flux/index.html');
   const js = read('backend/web/public/salon/gazette-desk.js');
@@ -101,4 +110,7 @@ test('pupitre : bouton d’import et sélection d’une réponse', () => {
   assert.match(js, /Sélectionner/);
   assert.match(js, /Choisie/);
   assert.match(js, /is-picked/);
+  assert.match(js, /api\.fixupx\.com/);
+  assert.match(js, /aperçu hors-ligne/);
+  assert.match(js, /Lecture du lien/);
 });
