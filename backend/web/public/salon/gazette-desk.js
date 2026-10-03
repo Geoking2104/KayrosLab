@@ -1,4 +1,8 @@
-/* Gazette — propos tiré de l’URL, plusieurs répliques auteur + ouvrage. */
+/* Gazette — le propos monte du lien, les livres répondent.
+   Simple par défaut : collez une URL (ou le propos) ; le texte est relevé
+   automatiquement (fxtwitter → vxtwitter → oembed) et les textes les plus
+   pertinents des auteurs sont proposés, classés par proximité (moteur du
+   Salon + corpus des œuvres). Les plumes proposées s'ajustent toutes seules. */
 (function () {
   var FALLBACK = [
     { id: "voltaire", name: "Voltaire", blurb: "L'ironie contre les dogmes.", works: ["Candide, ou l'optimisme", "Zadig", "Micromégas"], kind: "philosophe" },
@@ -19,8 +23,13 @@
     { id: "locke", name: "Locke", blurb: "L'expérience comme source.", works: ["Essai sur l'entendement humain"], kind: "philosophe" }
   ];
   var DEFAULT_IDS = ["voltaire", "rousseau", "montaigne", "kant"];
-  var spin = 0;
+  var MAX_VOICES = 4;   // plumes proposées d'office (les plus pertinentes)
+  var MAX_TEXTS = 2;    // extraits proposés par plume
   var lastFetched = "";
+  var voicesTouched = false;
+  var NAME_CACHE = null;
+
+  /* ---------------------------------------------------------- url & propos */
 
   function parseStatus(raw) {
     raw = String(raw || "").trim();
@@ -29,6 +38,122 @@
     if (!m) return null;
     return { id: m[2], handle: m[1] && m[1] !== "i" ? m[1] : "", url: raw.split(/\s/)[0] };
   }
+  function extractUrl(text) {
+    var m = String(text || "").match(/https?:\/\/(?:www\.)?(?:x\.com|twitter\.com)\/[^\s]+/i);
+    return m ? m[0] : "";
+  }
+
+  function note(msg) {
+    var el = document.getElementById("gz-note");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.hidden = !msg;
+  }
+
+  function clip(s, n) {
+    s = String(s || "").replace(/\s+/g, " ").trim();
+    return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, "") + "…";
+  }
+
+  function getJSON(url, timeoutMs) {
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, timeoutMs || 8000);
+    return fetch(url, { headers: { accept: "application/json" }, signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { clearTimeout(timer); if (!r.ok) throw new Error("http " + r.status); return r.json(); },
+            function (e) { clearTimeout(timer); throw e; });
+  }
+
+  function fetchFx(parsed) {
+    return getJSON("https://api.fxtwitter.com/status/" + parsed.id).then(function (data) {
+      var tw = data.tweet || data;
+      var text = tw.text || tw.full_text || "";
+      if (!text) throw new Error("empty");
+      var handle = (tw.author && (tw.author.screen_name || tw.author.username)) || parsed.handle || "";
+      return { handle: handle, text: text };
+    });
+  }
+  function fetchVx(parsed) {
+    return getJSON("https://api.vxtwitter.com/status/" + parsed.id).then(function (data) {
+      var text = data.text || data.full_text || "";
+      if (!text) throw new Error("empty");
+      return { handle: data.user_screen_name || parsed.handle || "", text: text };
+    });
+  }
+  function fetchOembed(parsed) {
+    var twUrl = "https://twitter.com/i/web/status/" + parsed.id;
+    return getJSON("https://publish.twitter.com/oembed?omit_script=true&hide_thread=true&url=" + encodeURIComponent(twUrl)).then(function (data) {
+      var text = textFromOembed(data.html);
+      if (!text) throw new Error("empty");
+      return { handle: data.author_name || parsed.handle || "", text: text };
+    });
+  }
+
+  function fetchPost(parsed, force) {
+    if (!parsed || !parsed.id) return Promise.resolve(false);
+    if (!force && lastFetched === parsed.id) return Promise.resolve(false);
+    lastFetched = parsed.id;
+    note("On relève le propos…");
+    return fetchFx(parsed)
+      .catch(function () { return fetchVx(parsed); })
+      .catch(function () { return fetchOembed(parsed); })
+      .then(function (hit) {
+        if (!hit || !hit.text) throw new Error("empty");
+        fillThesis(hit.handle || parsed.handle, hit.text);
+        note("Propos relevé du post.");
+        return true;
+      })
+      .catch(function () {
+        note("Le post n’a pas pu être lu — collez le propos à la main.");
+        return false;
+      });
+  }
+
+  function fillThesis(handle, text) {
+    var box = document.getElementById("gz-text");
+    if (!box || !text) return;
+    var line = (handle ? "@" + String(handle).replace(/^@/, "") + " — " : "") + text;
+    box.value = clip(line, 480);
+    box.placeholder = "Propos repris du post.";
+  }
+
+  function decodeEntities(text) {
+    var MAP = {
+      amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", "#39": "'", nbsp: " ",
+      hellip: "…", mdash: "—", ndash: "–", laquo: "«", raquo: "»",
+      eacute: "é", egrave: "è", agrave: "à", ccedil: "ç", ecirc: "ê",
+      rsquo: "’", lsquo: "‘", ldquo: "“", rdquo: "”"
+    };
+    return String(text || "").replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, function (m, code) {
+      if (code.charAt(0) === "#") {
+        var n = code.charAt(1).toLowerCase() === "x" ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+        if (!isFinite(n) || n <= 0) return m;
+        return String.fromCodePoint ? String.fromCodePoint(n) : String.fromCharCode(n);
+      }
+      var key = code.toLowerCase();
+      return MAP[key] !== undefined ? MAP[key] : m;
+    });
+  }
+  function textFromOembed(html) {
+    var m = String(html || "").match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    if (!m) return "";
+    return decodeEntities(m[1].replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+  }
+
+  /* ------------------------------------------------------ corpus & auteurs */
+
+  function engine() { return (typeof window !== "undefined" && window.SalonEngine) || null; }
+
+  var CORPUS = null;
+  var CORPUS_READY = null;
+  function loadCorpus() {
+    if (CORPUS_READY) return CORPUS_READY;
+    CORPUS_READY = fetch("/salon/corpus.json", { cache: "force-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { CORPUS = j || null; return CORPUS; })
+      .catch(function () { return null; });
+    return CORPUS_READY;
+  }
+
   function customs() {
     var out = [];
     try {
@@ -68,160 +193,204 @@
       cb();
     }).catch(function () { cb(); });
   }
-  function worksOf(a) { return (a.works && a.works.length) ? a.works.slice(0, 5) : ["l’œuvre"]; }
-  function clip(s, n) {
-    s = String(s || "").replace(/\s+/g, " ").trim();
-    return s.length <= n ? s : s.slice(0, n - 1).replace(/\s+\S*$/, "") + "…";
+  function names() {
+    if (NAME_CACHE) return NAME_CACHE;
+    var m = {};
+    FALLBACK.forEach(function (a) { m[a.id] = a.name; });
+    catalog().forEach(function (a) { m[a.id] = a.name; });
+    NAME_CACHE = m;
+    return m;
   }
-  function sign(author, work) { return " — " + author.name + ", " + work; }
-  function replies(author, thesis) {
-    var works = worksOf(author);
-    var idea = clip(author.blurb.replace(/[:.].*/, ""), 70);
-    var th = clip(thesis || "la thèse", 72);
+  function kinds() {
+    var m = {};
+    catalog().forEach(function (a) { m[a.id] = a.kind || ""; });
+    return m;
+  }
+  function authorName(id) {
+    var known = names()[id];
+    if (known) return known;
+    return id.charAt(0).toUpperCase() + id.slice(1);
+  }
+  function authorKind(id) { return kinds()[id] || ""; }
+
+  /* ------------------------------------------------------ le classement */
+
+  /** Classe les textes de chaque auteur contre le propos ; garde les plus proches. */
+  function rankTexts(corpus, query) {
+    var E = engine();
+    if (!E || !E.retrieve || !E.scope || !corpus || !query) return [];
+    var sc = E.scope(query);
     var out = [];
-    var moldsC = [
-      function (w) { return "Cela peut se soutenir, sans en faire un dogme : " + th + "." + sign(author, w); },
-      function (w) { return idea + " On accorde donc, avec " + w + ", que " + th + "." + sign(author, w); },
-      function (w) { return w + " n’interdit pas cette lecture : " + th + "." + sign(author, w); }
-    ];
-    var moldsO = [
-      function (w) { return "La thèse ne tient pas. " + w + " rappelle que " + idea.toLowerCase() + "." + sign(author, w); },
-      function (w) { return "Objecter : " + th + " confond l’apparence et la cause." + sign(author, w); },
-      function (w) { return "Non. Par " + w + ", on refuse que " + th + "." + sign(author, w); }
-    ];
-    var n = Math.max(3, Math.min(5, works.length + 1));
-    for (var i = 0; i < n; i++) {
-      var w = works[(i + spin) % works.length];
-      out.push({ stance: "confirmation", text: clip(moldsC[(i + spin) % moldsC.length](w), 270), work: w });
-      out.push({ stance: "infirmation", text: clip(moldsO[(i + spin + 1) % moldsO.length](w), 270), work: w });
-    }
+    Object.keys(corpus).forEach(function (aid) {
+      var rows = E.retrieve(corpus[aid] || [], sc, MAX_TEXTS).filter(function (p) { return !p.weak; });
+      if (!rows.length) return;
+      out.push({
+        authorId: aid,
+        best: rows[0].score,
+        rows: rows.map(function (p) {
+          return { text: p.sentence || p.text || "", work: p.work || "", score: p.score };
+        })
+      });
+    });
+    out.sort(function (a, b) { return (b.best - a.best) || String(a.authorId).localeCompare(String(b.authorId)); });
     return out;
   }
+
+  /* ------------------------------------------------------------- plumes */
+
+  function checkedIds() {
+    var out = [];
+    document.querySelectorAll("#gz-voices input:checked").forEach(function (el) { out.push(el.value); });
+    return out;
+  }
+  function voicesList(ranked) {
+    var cat = catalog();
+    var byId = {};
+    cat.forEach(function (a) { byId[a.id] = a; });
+    var out = [];
+    var seen = {};
+    (ranked || []).forEach(function (r) {
+      var a = byId[r.authorId] || { id: r.authorId, name: authorName(r.authorId) };
+      if (!seen[a.id]) { seen[a.id] = 1; out.push(a); }
+    });
+    cat.forEach(function (a) { if (!seen[a.id]) { seen[a.id] = 1; out.push(a); } });
+    return out;
+  }
+  function paintVoices(ranked) {
+    var box = document.getElementById("gz-voices");
+    if (!box) return;
+    var keep = checkedIds();
+    var auto = ranked && !voicesTouched ? ranked.slice(0, MAX_VOICES).map(function (r) { return r.authorId; }) : null;
+    var list = voicesList(ranked);
+    box.innerHTML = "";
+    list.forEach(function (a) {
+      var lab = document.createElement("label");
+      var input = document.createElement("input");
+      input.type = "checkbox";
+      input.value = a.id;
+      input.checked = auto
+        ? auto.indexOf(a.id) !== -1
+        : (voicesTouched ? keep.indexOf(a.id) !== -1 : DEFAULT_IDS.indexOf(a.id) !== -1);
+      input.addEventListener("change", function () { voicesTouched = true; compose(); });
+      lab.appendChild(input);
+      lab.appendChild(document.createTextNode(" " + a.name));
+      box.appendChild(lab);
+    });
+  }
+  function selected(ranked) {
+    var ids = {};
+    checkedIds().forEach(function (v) { ids[v] = 1; });
+    return (ranked || []).filter(function (r) { return ids[r.authorId]; });
+  }
+
+  /* ------------------------------------------------------------ la feuille */
+
   function intent(text, statusId) {
     var u = "https://x.com/intent/tweet?text=" + encodeURIComponent(text);
     if (statusId) u += "&in_reply_to=" + encodeURIComponent(statusId);
     return u;
   }
-  function decodeEntities(html) {
-    var t = document.createElement("textarea");
-    t.innerHTML = html || "";
-    return t.value;
-  }
-  function textFromOembed(html) {
-    var m = String(html || "").match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-    if (!m) return "";
-    return decodeEntities(m[1].replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
-  }
-  function fillThesis(handle, text) {
-    var box = document.getElementById("gz-text");
-    if (!box || !text) return;
-    var line = (handle ? "@" + handle.replace(/^@/, "") + " — " : "") + text;
-    box.value = clip(line, 480);
-    box.placeholder = "Propos repris du post.";
-  }
-  function fetchPost(parsed) {
-    if (!parsed || !parsed.id || lastFetched === parsed.id) return Promise.resolve(false);
-    lastFetched = parsed.id;
-    var box = document.getElementById("gz-text");
-    if (box && !box.value) box.placeholder = "On relève le propos…";
-    var fx = fetch("https://api.fxtwitter.com/status/" + parsed.id, { headers: { accept: "application/json" } })
-      .then(function (r) { if (!r.ok) throw new Error("fx"); return r.json(); })
-      .then(function (data) {
-        var tw = data.tweet || data;
-        var text = tw.text || tw.full_text || "";
-        var handle = (tw.author && (tw.author.screen_name || tw.author.username)) || parsed.handle || "";
-        if (!text) throw new Error("empty");
-        fillThesis(handle, text);
-        return true;
-      });
-    return fx.catch(function () {
-      var twUrl = "https://twitter.com/i/web/status/" + parsed.id;
-      return fetch("https://publish.twitter.com/oembed?omit_script=true&hide_thread=true&url=" + encodeURIComponent(twUrl))
-        .then(function (r) { if (!r.ok) throw new Error("oem"); return r.json(); })
-        .then(function (data) {
-          var text = textFromOembed(data.html);
-          if (!text) throw new Error("empty");
-          fillThesis(data.author_name || parsed.handle, text);
-          return true;
-        });
-    }).catch(function () {
-      if (parsed.handle) fillThesis(parsed.handle, "(propos à coller si le post reste privé)");
-      return false;
-    });
-  }
-  function ingestThenCompose() {
-    var parsed = parseStatus(document.getElementById("gz-url").value);
-    if (!parsed) return;
-    fetchPost(parsed).then(function () { compose(); });
-  }
-  function paintVoices(list) {
-    var box = document.getElementById("gz-voices"); if (!box) return;
-    box.innerHTML = "";
-    list.forEach(function (a) {
-      var lab = document.createElement("label");
-      var on = DEFAULT_IDS.indexOf(a.id) !== -1;
-      lab.innerHTML = '<input type="checkbox" value="' + a.id.replace(/"/g, "") + '"' + (on ? " checked" : "") + "> ' + a.name;
-      box.appendChild(lab);
-    });
-  }
-  function selected(list) {
-    var ids = {};
-    document.querySelectorAll("#gz-voices input:checked").forEach(function (el) { ids[el.value] = true; });
-    var picked = list.filter(function (a) { return ids[a.id]; });
-    return picked.length ? picked : list.filter(function (a) { return DEFAULT_IDS.indexOf(a.id) !== -1; });
-  }
-  function article(author, row, statusId) {
+  function article(authorId, row, statusId) {
     var art = document.createElement("article");
     art.className = "col";
-    var rubric = row.stance === "confirmation" ? "On accorde" : "On objecte";
-    art.innerHTML = '<p class="rubric">' + rubric + "</p><h2>" + author.name + "</h2><p></p><cite>" + row.work + (author.kind ? " · " + author.kind : "") + '</cite><p class="acts"><button type="button" data-act="copy">Retenir</button><button type="button" data-act="x">Porter sur X</button></p>';
-    art.querySelector("p").textContent = row.text;
-    art.querySelector('[data-act="copy"]').addEventListener("click", function () {
-      if (navigator.clipboard) navigator.clipboard.writeText(row.text);
+    art.innerHTML = '<p class="rubric">Extrait</p><h2></h2><p></p><cite></cite><p class="acts"><button type="button" data-act="copy">Retenir</button><button type="button" data-act="x">Porter sur X</button></p>';
+    art.querySelector("h2").textContent = authorName(authorId);
+    var ps = art.querySelectorAll("p");
+    ps[1].textContent = row.text;
+    var kind = authorKind(authorId);
+    art.querySelector("cite").textContent = row.work + (kind ? " · " + kind : "");
+    var acts = art.querySelector(".acts");
+    acts.querySelector('[data-act="copy"]').addEventListener("click", function () {
+      if (navigator.clipboard && row.text) navigator.clipboard.writeText(row.text).catch(function () {});
       this.textContent = "Retenu.";
     });
-    art.querySelector('[data-act="x"]').addEventListener("click", function () {
-      if (navigator.clipboard) navigator.clipboard.writeText(row.text);
+    acts.querySelector('[data-act="x"]').addEventListener("click", function () {
+      if (navigator.clipboard && row.text) navigator.clipboard.writeText(row.text).catch(function () {});
       window.open(intent(row.text, statusId), "_blank", "noopener,noreferrer");
     });
     return art;
   }
+
   function compose() {
-    spin += 1;
-    var thesis = document.getElementById("gz-text").value.trim();
-    var parsed = parseStatus(document.getElementById("gz-url").value);
     var folio = document.getElementById("fx-gazette");
-    folio.innerHTML = "";
-    if (!thesis && !parsed) { folio.innerHTML = '<p class="empty">Portez d’abord une missive — un lien.</p>'; return; }
-    if (!thesis && parsed) thesis = parsed.handle ? "@" + parsed.handle : "ce post";
-    selected(catalog()).forEach(function (a) {
-      replies(a, thesis).forEach(function (row) {
-        folio.appendChild(article(a, row, parsed && parsed.id));
+    if (!folio) return Promise.resolve();
+    var box = document.getElementById("gz-text");
+    var urlBox = document.getElementById("gz-url");
+    var thesis = box ? box.value.trim() : "";
+    var parsed = urlBox ? parseStatus(urlBox.value) : null;
+    if (!thesis) {
+      folio.innerHTML = '<p class="empty">' + (parsed
+        ? "Le propos n’est pas encore à table — collez-le, ou vérifiez le lien."
+        : "Portez d’abord une missive — un lien, ou le propos.") + "</p>";
+      return Promise.resolve();
+    }
+    return loadCorpus().then(function (corpus) {
+      var ranked = rankTexts(corpus || {}, thesis);
+      if (!ranked.length) {
+        folio.innerHTML = '<p class="empty">Rien d’assez proche dans les œuvres chargées — essayez un propos plus concret.</p>';
+        return;
+      }
+      paintVoices(ranked);
+      var picks = selected(ranked);
+      if (!picks.length) picks = ranked.slice(0, MAX_VOICES);
+      folio.innerHTML = "";
+      picks.forEach(function (cand) {
+        cand.rows.forEach(function (row) { folio.appendChild(article(cand.authorId, row, parsed && parsed.id)); });
       });
     });
   }
+
+  function ingestThenCompose(force) {
+    var urlBox = document.getElementById("gz-url");
+    var parsed = urlBox ? parseStatus(urlBox.value) : null;
+    if (!parsed) return compose();
+    return fetchPost(parsed, force).then(function () { return compose(); });
+  }
+
+  /* --------------------------------------------------------------- amorce */
+
   function boot() {
     var d = document.getElementById("gz-date");
     if (d) d.textContent = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-    loadAuthorsFromSalon(function () { paintVoices(catalog()); });
+    loadCorpus();
+    loadAuthorsFromSalon(function () { NAME_CACHE = null; paintVoices(); });
     var run = document.getElementById("gz-run");
     if (run && !run.getAttribute("data-bound")) {
       run.setAttribute("data-bound", "1");
-      run.addEventListener("click", ingestThenCompose);
+      run.addEventListener("click", function () { ingestThenCompose(true); });
     }
     var url = document.getElementById("gz-url");
     if (url && !url.getAttribute("data-ingest")) {
       url.setAttribute("data-ingest", "1");
-      var timer = 0;
-      function schedule() {
-        clearTimeout(timer);
-        timer = setTimeout(ingestThenCompose, 280);
-      }
-      url.addEventListener("paste", function () { setTimeout(ingestThenCompose, 40); });
+      var t1 = 0;
+      function schedule() { clearTimeout(t1); t1 = setTimeout(function () { ingestThenCompose(false); }, 300); }
+      url.addEventListener("paste", function () { setTimeout(function () { ingestThenCompose(false); }, 40); });
       url.addEventListener("input", schedule);
-      url.addEventListener("change", ingestThenCompose);
+      url.addEventListener("change", schedule);
+    }
+    var box = document.getElementById("gz-text");
+    if (box && !box.getAttribute("data-ingest")) {
+      box.setAttribute("data-ingest", "1");
+      var t2 = 0;
+      box.addEventListener("input", function () {
+        clearTimeout(t2);
+        t2 = setTimeout(function () {
+          var url = extractUrl(box.value);
+          var parsed = url ? parseStatus(url) : null;
+          if (parsed) ingestThenCompose(false);
+          else compose();
+        }, 400);
+      });
     }
   }
+
+  /* ---------------------------------------------------- exports (tests) */
+
+  var API = { parseStatus: parseStatus, rankTexts: rankTexts, textFromOembed: textFromOembed, decodeEntities: decodeEntities };
+  if (typeof module !== "undefined" && module.exports) module.exports = API;
+  if (typeof window !== "undefined") window.SalonGazette = API;
+
+  if (typeof document === "undefined") return;
   if (!/\/salon\/flux\/?$/.test(location.pathname.replace(/index\.html$/, ""))) return;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();

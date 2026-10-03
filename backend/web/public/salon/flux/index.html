@@ -38,6 +38,7 @@
     .acts { display:flex; gap:.8rem; font-size:.82rem; }
     .acts button { background:none; border:0; padding:0; font:inherit; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
     .empty { font-style:italic; color:var(--fade); }
+    .note { font-size:.82rem; color:var(--accent); font-style:italic; margin:.35rem 0 .2rem; }
     .account a, .account button, .fx-bind { background:none; border:0; font:inherit; color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
   </style>
 </head>
@@ -61,14 +62,16 @@
       <input id="gz-url" placeholder="https://x.com/…/status/…" autocomplete="off" />
       <label for="gz-text">Texte porté à la table</label>
       <textarea id="gz-text" rows="3" placeholder="Collez le propos — c’est lui que les livres interrogeront."></textarea>
-      <label>Plumes à la composition</label>
+      <p class="note" id="gz-note" hidden></p>
+      <label>Plumes proposées — les plus pertinentes d’abord</label>
       <div class="voices" id="gz-voices"></div>
       <button type="button" class="compose" id="gz-run">Composer la feuille</button>
     </section>
     <div class="folio" id="fx-gazette"></div>
   </div>
   <script src="/salon/flux-x.js?v=20260921b"></script>
-  <script src="/salon/gazette-desk.js?v=20260921b"></script>
+  <script src="/salon/salon-engine.js?v=20260923b"></script>
+  <script src="/salon/gazette-desk.js?v=20261003a"></script>
   <script src="/salon/flux-sso.js?v=20260921b"></script>
 </body>
 </html>

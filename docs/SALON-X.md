@@ -41,3 +41,9 @@ Redirect accepté : `https://<hôte>/salon/flux/callback`.
 ## Usage des donn�es et de l'API X
 
 Description compl�te (questionnaire de revue de l'app X, en anglais) : [docs/SALON-X-API-USAGE.md](SALON-X-API-USAGE.md).
+
+## Pupitre Gazette — le texte monte seul du lien (2026-10-03)
+
+- Le propos est relevé du lien **sans compte ni jeton** : `fxtwitter`, puis `vxtwitter`, puis l'oembed de X (8 s max par source) ; en cas d'échec, un message invite simplement à coller le texte.
+- Les textes proposés sont les **extraits les plus proches du propos parmi les œuvres chargées** (moteur du Salon + `corpus.json`) : une à deux phrases entières par plume, classées par proximité, les plus pertinentes cochées d'office (4), et l'ordre des plumes suit la pertinence.
+- Gestes : « Retenir » (copier) et « Porter sur X » (composeur X, en réponse au post si l'URL est fournie).
