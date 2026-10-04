@@ -105,17 +105,30 @@
     }
     return prev[b.length];
   }
+  function tokenSim(a, b) {
+    if (!a || !b) return 0;
+    if (a === b) return 1;
+    if (b.indexOf(a) === 0 || a.indexOf(b) === 0) return Math.max(Math.min(a.length, b.length) / Math.max(a.length, b.length), 0.7);
+    return 1 - levDist(a, b) / Math.max(a.length, b.length);
+  }
   function scoreName(query, name) {
     var q = normName(query), n = normName(name);
     if (!q || !n) return 0;
     if (q === n) return 1;
-    var d = Math.min(levDist(q, n), levDist(q.split(" ").sort().join(" "), n.split(" ").sort().join(" ")));
-    var score = 1 - d / Math.max(q.length, n.length, 1);
     var qt = q.split(" ").filter(function (w) { return w.length > 1; });
-    var nt = n.split(" ");
-    var allTok = qt.length && qt.every(function (t) { return nt.some(function (x) { return x.indexOf(t) === 0; }); });
+    var nt = n.split(" ").filter(Boolean);
+    if (!qt.length || !nt.length) return 0;
+    var scores = qt.map(function (t) {
+      var best = 0;
+      nt.forEach(function (x) { var s = tokenSim(t, x); if (s > best) best = s; });
+      return best;
+    });
+    var minTok = Math.min.apply(null, scores);
+    var avgTok = scores.reduce(function (a, b) { return a + b; }, 0) / scores.length;
+    var score = 0.5 * minTok + 0.5 * avgTok;
+    var allTok = qt.every(function (t) { return nt.some(function (x) { return x.indexOf(t) === 0; }); });
     if (allTok) score = Math.max(score, 0.85);
-    return score;
+    return Math.min(score, 1);
   }
   function queryVariants(q) {
     var out = [];
@@ -124,9 +137,9 @@
     var noAcc = stripAccents(q).replace(/\s+/g, " ").trim();
     add(noAcc);
     var words = noAcc.split(" ").filter(Boolean);
-    if (words.length > 1) add(words[words.length - 1]);
+    if (words.length > 1) { add(words[0]); add(words[words.length - 1]); }
     var last = words[words.length - 1] || "";
-    for (var cut = 1; cut <= 3; cut++) if (last.length - cut >= 4) add(last.slice(0, last.length - cut));
+    for (var cut = 1; cut <= 3; cut++) if (last.length - cut >= 3) add(last.slice(0, last.length - cut));
     return out.slice(0, 6);
   }
   function parseFeed(xmlText) {
