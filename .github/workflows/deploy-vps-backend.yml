@@ -122,6 +122,8 @@ jobs:
               KAYROS_SMTP_SECURE: '1',
               KAYROS_SMTP_USER: process.env.KAYROS_SMTP_USER || 'geoffroydelatournelle@gmail.com',
               KAYROS_WA_EVENTS_FILE: '/opt/kayroslab/data/wa-events.ndjson',
+              OLLAMA_ENDPOINT: 'http://127.0.0.1:11434',
+              EMBED_MODEL: 'bge-m3',
             };
             const optionalSources = {
               DATABASE_URL: process.env.DATABASE_URL,
@@ -170,5 +172,6 @@ jobs:
             fs.writeFileSync(envPath, contents, { mode: 0o600 });
             NODE
             find deploy/ovh-vps -name "*.sh" -exec sed -i 's/\r$//' {} \;
+            OLLAMA_ENDPOINT=http://127.0.0.1:11434 EMBED_MODEL=bge-m3 bash deploy/ovh-vps/install-ollama.sh
             KAYROS_LOCAL_PG=1 bash deploy/ovh-vps/deploy-backend.sh
             echo "Deployed at $(date)"

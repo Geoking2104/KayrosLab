@@ -53,6 +53,17 @@ find deploy/ovh-vps -name "*.sh" -exec sed -i 's/\r$//' {} \;
 bash deploy/ovh-vps/deploy-backend.sh
 ```
 
+### Ollama local et embeddings multilingues
+
+Le workflow backend appelle `deploy/ovh-vps/install-ollama.sh` avant le
+redémarrage de l'API. Le script est idempotent, installe `bge-m3`, force
+`OLLAMA_HOST=127.0.0.1:11434` dans systemd et refuse le déploiement si le port
+11434 écoute sur une interface publique.
+
+`/v1/embed` exige une session KayrosLab, applique une limite dédiée et n'accepte
+plus de modèle fourni par le client. Le modèle est fixé côté serveur par
+`EMBED_MODEL=bge-m3`.
+
 ## Sauvegarde
 
 ### Automatique (cron)

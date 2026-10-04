@@ -10,9 +10,11 @@ const completeSchema = z.object({
 });
 
 const embedSchema = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
-  model: z.string().optional(),
-});
+  input: z.union([
+    z.string().min(1).max(16_000),
+    z.array(z.string().min(1).max(16_000)).min(1).max(32),
+  ]),
+}).strict();
 
 const toolsCallSchema = z.object({
   name: z.string().min(1),
@@ -121,12 +123,15 @@ export default async function llmRoute(app) {
     }
   });
 
-  app.post('/v1/embed', async (req, reply) => {
+  app.post('/v1/embed', {
+    config: { rateLimit: { max: 20, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    const me = await app.requireAuth(req, reply);
+    if (!me) return;
     const parsed = embedSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'champ input requis', issues: parsed.error.issues });
-    const { input, model } = parsed.data;
+    const { input } = parsed.data;
     const texts = Array.isArray(input) ? input : [input];
-    if (model) app.kayrosContext.embeddings.model = model;
     try {
       const vecs = await app.kayrosContext.embeddings.embedBatch(texts);
       return { embeddings: vecs, model: app.kayrosContext.embeddings.model };
