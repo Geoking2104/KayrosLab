@@ -47,7 +47,9 @@ PORT=8787
 ALLOWED_ORIGIN=https://www.kayroslab.com
 ANTHROPIC_API_KEY=sk-ant-...
 ANTHROPIC_MODEL=claude-3-5-sonnet-latest   # adapter au modèle API courant
-# OLLAMA_ENDPOINT=http://localhost:11434   # seulement si Ollama installé sur le VPS
+# Ollama reste strictement local au VPS (aucun port 11434 public)
+OLLAMA_ENDPOINT=http://127.0.0.1:11434
+EMBED_MODEL=bge-m3
 # KAYROS_SECRET=...                        # secret partagé optionnel
 ```
 
@@ -123,9 +125,16 @@ cd ~/KayrosLab && git pull && cd backend/fastify && npm install && pm2 restart k
 
 8 Go RAM en CPU seul → petits modèles uniquement (`llama3.2`).
 ```bash
-curl -fsSL https://ollama.com/install.sh | sh
+# Idempotent : installe Ollama, force 127.0.0.1:11434, télécharge bge-m3
+# et vérifie un embedding multilingue.
+bash deploy/ovh-vps/install-ollama.sh
+
+# Pour le chat local (optionnel, distinct des embeddings) :
 ollama pull llama3.2
-# dans .env : OLLAMA_ENDPOINT=http://localhost:11434, puis provider:'ollama'
+
+# Le déploiement GitHub Actions renseigne automatiquement dans .env :
+# OLLAMA_ENDPOINT=http://127.0.0.1:11434
+# EMBED_MODEL=bge-m3
 ```
 Pour du raisonnement stratégique, Claude via l'API reste recommandé.
 

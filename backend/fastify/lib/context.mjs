@@ -93,7 +93,7 @@ export default async function buildContext() {
     MISTRAL_MODEL = 'mistral-small-latest',
     OLLAMA_ENDPOINT = 'http://localhost:11434',
     OLLAMA_MODEL = 'llama3.2',
-    EMBED_MODEL = 'nomic-embed-text',
+    EMBED_MODEL = 'bge-m3',
     KAYROS_SECRET = '',
     KAYROS_MEMORY_FILE = '',
     KAYROS_OFFLOAD_ROOT = '',

@@ -142,11 +142,6 @@ export default async function salonXRoutes(app) {
     const again = await store().findByHash(me.sub, hash);
     if (again) return { id: again.id, idempotent: true };
 
-    const elapsed = Date.now() - store().lastWrite(me.sub);
-    if (elapsed < MIN_WRITE_MS) {
-      return reply.code(429).send({ error: 'délai minimal de 45 s entre deux publications.' });
-    }
-
     try {
       const posted = await withAccess(store(), client(), me.sub, binding, async (access) => {
         const source = await client().getTweet(access, replyTo);
@@ -154,6 +149,12 @@ export default async function salonXRoutes(app) {
         if (!mentionMatches(sourceText, binding.handle)) {
           const err = new Error('API reply refusée : le compte de l’hôte n’est pas convoqué sur ce post.');
           err.status = 403;
+          throw err;
+        }
+        const elapsed = Date.now() - store().lastWrite(me.sub);
+        if (elapsed < MIN_WRITE_MS) {
+          const err = new Error('délai minimal de 45 s entre deux publications.');
+          err.status = 429;
           throw err;
         }
         return client().postTweet(access, {
