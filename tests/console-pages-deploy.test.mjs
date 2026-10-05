@@ -15,7 +15,7 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /frontend\/console-app\/\*\*/);
   assert.match(workflow, /working-directory: frontend\/console-app/);
   assert.match(workflow, /VITE_API_BASE_URL: https:\/\/api\.kayroslab\.com/);
-  assert.match(workflow, /mkdir -p deploy\/console/);
+  assert.match(workflow, /mkdir -p[^\n]*deploy\/console/);
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
