@@ -50,7 +50,7 @@ ollama pull "${EMBED_MODEL}"
 
 response=$(curl -fsS http://127.0.0.1:11434/api/embed \
   -H 'content-type: application/json' \
-  -d "{\"model\":\"${EMBED_MODEL}\",\"input\":\"bonheur\"}")
+  -d "{\"model\":\"${EMBED_MODEL}\",\"input\":\"bonheur\",\"keep_alive\":0}")
 EMBED_RESPONSE="${response}" node <<'NODE'
 const body = JSON.parse(process.env.EMBED_RESPONSE || '{}');
 const vector = body.embeddings?.[0];
