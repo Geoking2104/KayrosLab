@@ -197,3 +197,68 @@ test('SwarmService runs attached scenario, renders dossier and enforces override
   assert.equal(arbitrated.status, 'overridden_human');
   assert.equal(arbitrated.human_decision.verdict, 'GO');
 });
+
+test('B2: the verdict parser accepts the formats real LLMs produce for the output contract', () => {
+  const fenced = normalizeAgentAnalysis({ output: '```json\n{"verdict":"NO_GO","primary_reason":"Cash"}\n```' }, { agent_id: 'cfo' });
+  assert.equal(fenced.verdict, 'NO_GO');
+  assert.equal(normalizeAgentAnalysis({ output: '{"verdict":"**Conditional-Go**"}' }, { agent_id: 'cfo' }).verdict, 'CONDITIONAL_GO');
+  assert.equal(normalizeAgentAnalysis({ output: '{"verdict":"GO."}' }, { agent_id: 'cfo' }).verdict, 'GO');
+  // JSON tronqué par la limite de jetons : le champ verdict reste exploitable.
+  const truncated = normalizeAgentAnalysis({ output: 'Voici mon analyse : {"verdict": "NO-GO", "primary_reason": "Payback de 30 mo' }, { agent_id: 'cfo' });
+  assert.equal(truncated.verdict, 'NO_GO');
+  assert.deepEqual(truncated.unverified_assumptions, []);
+  assert.equal(normalizeAgentAnalysis({ output: 'Verdict : CONDITIONAL GO, sous réserve du budget.' }, { agent_id: 'cfo' }).verdict, 'CONDITIONAL_GO');
+  // L'écho mock de la question (« should we go ») n'est pas un verdict formel.
+  const mock = normalizeAgentAnalysis({ output: '[mock] (cfo) reponse simulee a: Goal: should we go now?', provider: 'mock' }, { agent_id: 'cfo' });
+  assert.equal(mock.verdict, 'CONDITIONAL_GO');
+  assert.match(mock.unverified_assumptions[0], /parsable formal verdict/);
+  assert.equal(mock.llm_provider, 'mock');
+});
+
+test('B2: the agent prompt requires the exact GO / NO_GO / CONDITIONAL_GO verdict field', () => {
+  const agent = new SpecializedDecisionAgent({ definition: { agent_id: 'cfo', role_name: 'CFO', department: 'Finance', seniority: 'executive', primary_focus: 'Cash' } });
+  assert.match(agent.systemPrompt, /"verdict"/);
+  assert.match(agent.systemPrompt, /exactly one of the three strings "GO", "NO_GO" or "CONDITIONAL_GO"/);
+});
+
+test('N5/ENF-09: a run records the effective LLM provider and flags a mock fallback', async () => {
+  const live = new SwarmService({
+    llm: { complete: async () => ({ text: '{"verdict":"GO","primary_reason":"ok"}', provider: 'mistral' }) },
+    logger: null,
+  });
+  const liveRun = await live.run({ swarm_name: 'Live', active_agents: ['cfo', 'cto'] }, { question: 'Lancer ?' });
+  assert.deepEqual(liveRun.llm.providers, ['mistral']);
+  assert.equal(liveRun.llm.mock, false);
+  assert.ok(liveRun.analyses.every((analysis) => analysis.llm_provider === 'mistral' && analysis.verdict === 'GO'));
+
+  const warnings = [];
+  const degraded = new SwarmService({
+    llm: { complete: async () => ({ text: '[mock] (cfo) reponse simulee a: Goal', provider: 'mock', degraded: { reason: 'provider_fallback', from: 'ollama', to: 'mock' } }) },
+    logger: { warn: (message) => warnings.push(message) },
+  });
+  const events = [];
+  degraded.auditSink = (event) => events.push(event);
+  const degradedRun = await degraded.run({ swarm_name: 'Degraded', active_agents: ['cfo'] }, { question: 'Lancer ?' });
+  assert.equal(degradedRun.llm.mock, true);
+  assert.deepEqual(degradedRun.llm.mock_agents, ['cfo']);
+  assert.equal(degradedRun.llm.degraded[0].from, 'ollama');
+  assert.equal(warnings.length, 1);
+  assert.ok(events.some((event) => event.type === 'swarm.run.llm_degraded'));
+});
+
+test('EF-27: personality simulation reaches a user_defined agent with a consented profile', async () => {
+  const prompts = [];
+  const service = new SwarmService({
+    llm: { complete: async (req) => { prompts.push(req.messages[0].content); return { text: '{"verdict":"GO","simulated_stakeholder_feedback":"(simulation) ok"}', provider: 'mistral' }; } },
+    logger: null,
+  });
+  service.createAgent({
+    agent_id: 'client_cfo', role_name: 'CFO client', department: 'Comex', seniority: 'executive', primary_focus: 'Point de vue client.',
+    human_profile: { assigned_name: 'Alex Martin', disc_type: 'D/C', consent_confirmed: true },
+  });
+  const run = await service.run({ swarm_name: 'Persona', active_agents: ['client_cfo'], personality_simulation_enabled: true }, { question: 'Lancer ?' });
+  assert.equal(run.analyses[0].agent_type, 'user_defined');
+  assert.equal(run.analyses[0].personality_simulation_enabled, true);
+  assert.equal(run.analyses[0].assigned_human, 'Alex Martin');
+  assert.match(prompts[0], /Alex Martin/);
+});

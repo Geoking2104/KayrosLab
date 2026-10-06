@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
+import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
 // missions gouvernées et arbitre les verdicts. Les surfaces du produit de
@@ -85,6 +86,7 @@ const impersonatorTeamSchema = z.object({
   purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
   voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
   veto_power: z.boolean().optional(),
+  personality_simulation_enabled: z.boolean().optional(),
   consent_confirmed: z.literal(true),
 });
 
@@ -102,6 +104,67 @@ function surface(message) {
     .replace(/salon/gi, 'session');
 }
 function makeSessionId() { return `session_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`; }
+
+// --- Isolation par propriétaire (EF-21 / EF-22 / ENF-08) -------------------
+// comex/admin gardent la vue du tenant ; un contributeur ne lit et n'écrit que
+// ses propres sessions et les fils, l'activité et les exécutions qui en dépendent.
+// Une ressource d'autrui répond 404 (son existence n'est pas révélée).
+function tenantWide(me) { return ['comex', 'admin'].includes(me?.role); }
+function ownsRoom(me, room) {
+  if (!room) return false;
+  if (room.owner_id) return !!me?.sub && String(room.owner_id) === String(me.sub);
+  // Sessions antérieures à `owner_id` : `created_by` (e-mail posé par le serveur
+  // depuis le jeton) fait foi ; sans lui, la session reste invisible aux contributeurs.
+  return !!room.created_by && !!me?.email && String(room.created_by).toLowerCase() === String(me.email).toLowerCase();
+}
+function canAccessRoom(me, room) { return !!room && (tenantWide(me) || ownsRoom(me, room)); }
+async function consoleRooms(app, me) {
+  return app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
+}
+async function accessibleRooms(app, me) {
+  const rooms = await consoleRooms(app, me);
+  return tenantWide(me) ? rooms : rooms.filter((room) => ownsRoom(me, room));
+}
+/** Quota « par utilisateur » : seules les sessions dont l'utilisateur est propriétaire comptent. */
+async function ownedSessionCount(app, me) {
+  return (await consoleRooms(app, me)).filter((room) => ownsRoom(me, room)).length;
+}
+async function accessibleRoom(app, me, roomId) {
+  const room = await app.kayrosContext.hybridGateway.getRoom(roomId, { tenantId: me.tenantId });
+  return canAccessRoom(me, room) ? room : null;
+}
+async function accessibleThread(app, me, threadId) {
+  const { hybridGateway } = app.kayrosContext;
+  const thread = await hybridGateway.getThread(threadId, { tenantId: me.tenantId });
+  if (!thread) return null;
+  if (tenantWide(me)) return thread;
+  return ownsRoom(me, await hybridGateway.getRoom(thread.room_id, { tenantId: me.tenantId })) ? thread : null;
+}
+function boundedLimit(limit) { return Math.max(1, Math.min(250, Number(limit) || 100)); }
+/** Fils visibles ; `null` si une session explicitement demandée n'est pas accessible. */
+async function scopedThreads(app, me, { roomId = null, limit = 100 } = {}) {
+  const { hybridGateway } = app.kayrosContext;
+  if (roomId) {
+    const room = await accessibleRoom(app, me, roomId);
+    return room ? hybridGateway.listThreads({ tenantId: me.tenantId, roomId: room.room_id, limit }) : null;
+  }
+  if (tenantWide(me)) return hybridGateway.listThreads({ tenantId: me.tenantId, limit });
+  const rooms = await accessibleRooms(app, me);
+  const lists = await Promise.all(rooms.map((room) => hybridGateway.listThreads({ tenantId: me.tenantId, roomId: room.room_id, limit })));
+  return lists.flat().sort((a, b) => String(b.updated_at).localeCompare(String(a.updated_at))).slice(0, boundedLimit(limit));
+}
+/** Activité visible ; `null` si une session explicitement demandée n'est pas accessible. */
+async function scopedActivity(app, me, { roomId = null, after = 0, limit = 100 } = {}) {
+  const { hybridGateway } = app.kayrosContext;
+  if (roomId) {
+    const room = await accessibleRoom(app, me, roomId);
+    return room ? hybridGateway.activity({ tenantId: me.tenantId, roomId: room.room_id, after, limit }) : null;
+  }
+  if (tenantWide(me)) return hybridGateway.activity({ tenantId: me.tenantId, after, limit });
+  const rooms = await accessibleRooms(app, me);
+  const lists = await Promise.all(rooms.map((room) => hybridGateway.activity({ tenantId: me.tenantId, roomId: room.room_id, after, limit })));
+  return lists.flat().sort((a, b) => Number(a.sequence || 0) - Number(b.sequence || 0)).slice(-boundedLimit(limit));
+}
 
 /** Crée un agent impersonator (persona + garde-fous) et renvoie l'agent, la persona et une éventuelle erreur d'enrichissement. */
 async function buildImpersonatorAgent(app, me, d) {
@@ -184,17 +247,18 @@ export default async function consoleRoute(app) {
   // --- Vue d'ensemble du harness -----------------------------------------
   app.get('/v1/console/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    const { hybridGateway, engine } = app.kayrosContext;
+    const { engine } = app.kayrosContext;
     await engine.swarm.hydrateTenant?.(me.tenantId);
-    const rooms = await hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
+    const rooms = await accessibleRooms(app, me);
     const agents = engine.swarm.registry.list({ tenantId: me.tenantId }).map(agentView);
-    const activity = await hybridGateway.activity({ tenantId: me.tenantId, limit: 24 });
-    const threads = await hybridGateway.listThreads({ tenantId: me.tenantId, limit: 30 });
+    const activity = await scopedActivity(app, me, { limit: 24 });
+    const threads = await scopedThreads(app, me, { limit: 30 });
     const sessions = rooms.map((room) => sessionView(room, engine.swarm, me.tenantId, { threads }));
     return {
       user: { id: me.sub, email: me.email, role: me.role, tenantId: me.tenantId },
       summary: {
-        hybrid_agents: agents.filter((agent) => agent.agent_type === 'hybrid_modified').length,
+        // Tout agent doté d'un profil humain consenti (console, hybride, impersonator) : EF-29.
+        hybrid_agents: agents.filter(hasConsentedHumanProfile).length,
         agents: agents.filter((agent) => agent.enabled !== false).length,
         sessions: sessions.length,
         executions: threads.length,
@@ -275,8 +339,7 @@ export default async function consoleRoute(app) {
     const d = parsed.data;
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
-      const existing = await app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
-      if (existing.length >= MAX_SESSIONS_PER_USER) {
+      if (await ownedSessionCount(app, me) >= MAX_SESSIONS_PER_USER) {
         return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_SESSIONS_PER_USER} sessions maximum par utilisateur.` });
       }
       const created = []; const personas = []; const errors = [];
@@ -294,7 +357,9 @@ export default async function consoleRoute(app) {
         swarm_name: `${d.name} — panel de personas`,
         active_agents: created.map((agent) => agent.agent_id),
         voting_threshold: d.voting_threshold || 'majority',
-      }, { tenantId: me.tenantId, by: me.email });
+        // Absent : activée par défaut, chaque persona portant un profil consenti (EF-28).
+        personality_simulation_enabled: d.personality_simulation_enabled,
+      }, { tenantId: me.tenantId, by: me.email, ownerId: me.sub });
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId), agents: created.map(agentView), personas, errors });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
@@ -351,7 +416,7 @@ export default async function consoleRoute(app) {
   app.get('/v1/console/sessions', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
-    const rooms = await app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
+    const rooms = await accessibleRooms(app, me);
     return { sessions: rooms.map((room) => sessionView(room, app.kayrosContext.engine.swarm, me.tenantId)) };
   });
   app.post('/v1/console/sessions', async (req, reply) => {
@@ -360,8 +425,7 @@ export default async function consoleRoute(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'session invalide', issues: parsed.error.issues });
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
-      const existing = await app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
-      if (existing.length >= MAX_SESSIONS_PER_USER) {
+      if (await ownedSessionCount(app, me) >= MAX_SESSIONS_PER_USER) {
         return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_SESSIONS_PER_USER} sessions maximum par utilisateur.` });
       }
       const active = parsed.data.active_agents || [];
@@ -378,14 +442,14 @@ export default async function consoleRoute(app) {
         active_agents: active.length ? active : undefined,
         voting_threshold: parsed.data.voting_threshold,
         personality_simulation_enabled: parsed.data.personality_simulation_enabled,
-      }, { tenantId: me.tenantId, by: me.email });
+      }, { tenantId: me.tenantId, by: me.email, ownerId: me.sub });
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId) });
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.get('/v1/console/sessions/:sessionId', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    const room = await app.kayrosContext.hybridGateway.getRoom(req.params.sessionId, { tenantId: me.tenantId });
+    const room = await accessibleRoom(app, me, req.params.sessionId);
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const threads = await app.kayrosContext.hybridGateway.listThreads({ tenantId: me.tenantId, roomId: room.room_id, limit: 100 });
     const activity = await app.kayrosContext.hybridGateway.activity({ tenantId: me.tenantId, roomId: room.room_id, limit: 100 });
@@ -395,6 +459,7 @@ export default async function consoleRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = collectiveSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'collectif invalide', issues: parsed.error.issues });
+    if (!await accessibleRoom(app, me, req.params.sessionId)) return reply.code(404).send({ error: 'session introuvable' });
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
       const room = await app.kayrosContext.hybridGateway.updateRoomAgents(req.params.sessionId, {
@@ -413,7 +478,7 @@ export default async function consoleRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = missionSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'mission invalide', issues: parsed.error.issues });
-    const room = await app.kayrosContext.hybridGateway.getRoom(req.params.sessionId, { tenantId: me.tenantId });
+    const room = await accessibleRoom(app, me, req.params.sessionId);
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const question = parsed.data.question || parsed.data.text;
     const context = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
@@ -422,35 +487,40 @@ export default async function consoleRoute(app) {
         platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
         user_id: me.sub, by: me.email, explicit: true, text: question, context,
       });
-      return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary };
+      // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
+      return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary, llm: result.run?.llm || null };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
   // --- Journal d'exécution du harness ------------------------------------
   app.get('/v1/console/activity', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    return { events: await app.kayrosContext.hybridGateway.activity({ tenantId: me.tenantId, roomId: req.query?.session_id || req.query?.room_id || null, after: req.query?.after || 0, limit: req.query?.limit || 100 }) };
+    const events = await scopedActivity(app, me, { roomId: req.query?.session_id || req.query?.room_id || null, after: req.query?.after || 0, limit: req.query?.limit || 100 });
+    return events ? { events } : reply.code(404).send({ error: 'session introuvable' });
   });
 
   // --- Fils de décision + arbitrage humain -------------------------------
   app.get('/v1/console/threads', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    return { threads: await app.kayrosContext.hybridGateway.listThreads({ tenantId: me.tenantId, roomId: req.query?.session_id || req.query?.room_id || null, limit: req.query?.limit || 100 }) };
+    const threads = await scopedThreads(app, me, { roomId: req.query?.session_id || req.query?.room_id || null, limit: req.query?.limit || 100 });
+    return threads ? { threads } : reply.code(404).send({ error: 'session introuvable' });
   });
   app.get('/v1/console/threads/:threadId', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    const thread = await app.kayrosContext.hybridGateway.getThread(req.params.threadId, { tenantId: me.tenantId });
+    const thread = await accessibleThread(app, me, req.params.threadId);
     return thread ? { thread } : reply.code(404).send({ error: 'fil introuvable' });
   });
   app.post('/v1/console/threads/:threadId/messages', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = replySchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'réponse invalide', issues: parsed.error.issues });
+    if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
     try { const thread = await app.kayrosContext.hybridGateway.continueThread(req.params.threadId, { tenantId: me.tenantId, text: parsed.data.text, by: me.email }); return reply.code(202).send({ thread }); }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
     const parsed = arbitrationSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'arbitrage invalide', issues: parsed.error.issues });
+    if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
     try { const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email }); return { thread }; }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });

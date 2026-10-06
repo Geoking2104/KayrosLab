@@ -44,6 +44,10 @@ export function bindEngineToServer(engine, { llm, tools, governance }) {
     for (const a of Object.values(engine.agents || {})) {
       if (a) a.llm = llm;
     }
+    // Le swarm (missions console et connecteurs) garde sinon le LLM du moteur,
+    // créé en `sovereignty: 'local'` → Ollama, puis repli mock si le modèle
+    // n'est pas installé (N5). hybridGateway partage cette même instance.
+    if (engine.swarm) engine.swarm.llm = llm;
   }
   if (tools) {
     engine.tools = tools;
@@ -57,6 +61,22 @@ export function bindEngineToServer(engine, { llm, tools, governance }) {
     engine.orchestrator.governance = governance;
   }
   return engine;
+}
+
+/**
+ * Provider effectif de chaque composant qui appelle un LLM (ENF-09) :
+ * `server` quand il partage le LLM du serveur, `engine-local` sinon.
+ */
+export function llmBindings(engine, llm) {
+  if (!engine) return null;
+  const bound = (value) => (value && value === llm ? 'server' : value ? 'engine-local' : 'none');
+  const agents = Object.values(engine.agents || {}).filter(Boolean);
+  return {
+    engine: bound(engine.llm),
+    orchestrator: bound(engine.orchestrator?.llm),
+    agents: agents.length && agents.every((a) => a.llm === llm) ? 'server' : (agents.length ? 'engine-local' : 'none'),
+    swarm: bound(engine.swarm?.llm),
+  };
 }
 
 export function orchestratorForRequest(engine, scope = {}) {

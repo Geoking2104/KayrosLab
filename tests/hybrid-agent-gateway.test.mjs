@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { HybridAgentGateway } from '../core/hybrid-agent-gateway.mjs';
 import { InMemoryCollaborationStore } from '../core/collaboration-store.mjs';
-import { SwarmService } from '../core/swarm.mjs';
+import { SwarmService, UNPARSABLE_VERDICT_ASSUMPTION } from '../core/swarm.mjs';
 
 function gatewayWithDeterministicAgents() {
   const swarm = new SwarmService();
@@ -44,8 +44,12 @@ test('runs only when mentioned and deduplicates platform retries', async () => {
   assert.equal(first.run.question, 'faut-il lancer maintenant ?');
   assert.equal(first.summary.verdict, 'CONDITIONAL_GO');
   assert.ok(first.thread.thread_id);
-  assert.equal(first.thread.status, 'needs_clarification');
-  assert.equal(first.thread.messages.some((message) => message.kind === 'clarification_request'), true);
+  // N4 / EF-24 : un CONDITIONAL_GO sans hypothèse ouverte part à l'arbitrage,
+  // ses conditions étant présentées dans le dossier ; aucune question inventée.
+  assert.equal(first.thread.status, 'awaiting_arbitration');
+  assert.deepEqual(first.thread.clarification_questions, []);
+  assert.equal(first.thread.messages.some((message) => message.kind === 'clarification_request'), false);
+  assert.deepEqual(first.summary.mitigations, ['Valider le budget']);
   assert.equal(retry.duplicate, true);
   assert.equal((await gateway.activity({ roomId: room.room_id })).filter((e) => e.type === 'collaboration.run.completed').length, 1);
 });
@@ -125,4 +129,61 @@ test('a second instance restores the room swarm and hybrid profile from shared s
   assert.equal(result.room.room_id, room.room_id);
   assert.equal(swarmB.getConfiguration(room.swarm_id, { tenantId: 'tenant-a' }).personality_simulation_enabled, true);
   assert.equal(swarmB.registry.get('cfo', { tenantId: 'tenant-a' }).human_profile.assigned_name, 'Shared finance lead');
+});
+
+test('N4: a CONDITIONAL_GO with real open assumptions asks once, then exits the loop to arbitration', async () => {
+  const { gateway } = gatewayWithDeterministicAgents();
+  await gateway.createRoom({ platform: 'console', external_room_id: 'loop-1', name: 'Loop' }, { tenantId: 'tenant-a' });
+  let calls = 0;
+  gateway.swarm.run = async (_id, options) => {
+    calls += 1;
+    return {
+      run_id: `run-${calls}`, swarm_name: 'Loop', question: options.question,
+      analyses: [{ agent_id: 'cfo', verdict: 'CONDITIONAL_GO', critical_risks: [], required_mitigations: ['Budget signé'],
+        unverified_assumptions: ['Le budget 2027 est disponible'] }],
+      consensus: { verdict: 'CONDITIONAL_GO', rationale: 'conditions', requires_human_arbitration: true },
+    };
+  };
+  const first = await gateway.handleMessage({ platform: 'console', external_room_id: 'loop-1', text: 'Lancer ?', explicit: true, tenantId: 'tenant-a' });
+  assert.equal(first.thread.status, 'needs_clarification');
+  assert.ok(first.thread.clarification_questions.some((question) => /budget 2027/.test(question)));
+  // L'humain a répondu ; le collectif ressort la même hypothèse : elle n'est pas reposée.
+  const continued = await gateway.continueThread(first.thread.thread_id, { tenantId: 'tenant-a', text: 'Oui, budget voté.', by: 'owner@test' });
+  assert.equal(continued.status, 'awaiting_arbitration');
+  assert.deepEqual(continued.clarification_questions, []);
+  assert.equal(continued.messages.filter((message) => message.kind === 'clarification_request').length, 1);
+});
+
+test('N4/B2: the technical "unparsable verdict" note is not turned into a user clarification', async () => {
+  const { gateway } = gatewayWithDeterministicAgents();
+  await gateway.createRoom({ platform: 'console', external_room_id: 'unparsable-1', name: 'Unparsable' }, { tenantId: 'tenant-a' });
+  gateway.swarm.run = async (_id, options) => ({
+    run_id: 'run-u', swarm_name: 'Unparsable', question: options.question,
+    analyses: [{ agent_id: 'cfo', verdict: 'CONDITIONAL_GO', unverified_assumptions: [UNPARSABLE_VERDICT_ASSUMPTION] }],
+    consensus: { verdict: 'CONDITIONAL_GO', rationale: 'review', requires_human_arbitration: true },
+  });
+  const result = await gateway.handleMessage({ platform: 'console', external_room_id: 'unparsable-1', text: 'Lancer ?', explicit: true, tenantId: 'tenant-a' });
+  assert.equal(result.thread.status, 'awaiting_arbitration');
+});
+
+test('EF-27: a console (user_defined) agent with a consented human profile enables personality simulation', async () => {
+  const { swarm, gateway } = gatewayWithDeterministicAgents();
+  const agent = swarm.createAgent({
+    agent_id: 'client_cfo', role_name: 'CFO client', department: 'Comex', seniority: 'executive',
+    primary_focus: 'Rejouer le point de vue du client.',
+    human_profile: { assigned_name: 'Alex Martin', disc_type: 'D/C', consent_confirmed: true },
+  }, { tenantId: 'tenant-a', by: 'owner@kayros.test' });
+  assert.equal(agent.agent_type, 'user_defined');
+  const room = await gateway.createRoom({
+    platform: 'console', external_room_id: 'persona-1', name: 'Persona', active_agents: ['client_cfo', 'cto'],
+  }, { tenantId: 'tenant-a', by: 'owner@kayros.test', ownerId: 'user-1' });
+  assert.equal(room.owner_id, 'user-1');
+  assert.equal(swarm.getConfiguration(room.swarm_id, { tenantId: 'tenant-a' }).personality_simulation_enabled, true);
+  // Un choix explicite de l'utilisateur reste prioritaire.
+  const off = await gateway.createRoom({
+    platform: 'console', external_room_id: 'persona-2', name: 'Sans persona', active_agents: ['client_cfo'],
+    personality_simulation_enabled: false,
+  }, { tenantId: 'tenant-a' });
+  assert.equal(swarm.getConfiguration(off.swarm_id, { tenantId: 'tenant-a' }).personality_simulation_enabled, false);
+  assert.equal(off.owner_id, null);
 });

@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildTestApp, bearer } from './test-helpers.mjs';
+import { buildTestApp, bearer, registerComex } from './test-helpers.mjs';
 
 describe('backend auth flow', () => {
   let app, ctx;
@@ -25,6 +25,30 @@ describe('backend auth flow', () => {
 
     const bad = await app.inject({ method: 'GET', url: '/v1/auth/me', headers: { authorization: 'Bearer nope' } });
     assert.equal(bad.statusCode, 401);
+  });
+
+  it('S17 / N3 : ignores a client-supplied tenantId at registration (tenant fixed server-side)', async () => {
+    const reg = await app.inject({
+      method: 'POST', url: '/v1/auth/register',
+      headers: { 'content-type': 'application/json' },
+      payload: { email: 'mallory@test.local', password: 'secret1234', name: 'Mallory', tenantId: 'victim-tenant' },
+    });
+    assert.equal(reg.statusCode, 200);
+    assert.equal(reg.json().user.tenantId, 'default');
+    const token = await bearer(ctx, 'mallory@test.local', 'secret1234');
+    const me = await app.inject({ method: 'GET', url: '/v1/auth/me', headers: { authorization: `Bearer ${token}` } });
+    assert.equal(me.json().user.tenantId, 'default');
+
+    // Un COMEX crée un compte privilégié dans son propre tenant, jamais dans celui demandé.
+    await registerComex(ctx, { email: 'boss@test.local' });
+    const comexToken = await bearer(ctx, 'boss@test.local', 'secret1234');
+    const created = await app.inject({
+      method: 'POST', url: '/v1/auth/register',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${comexToken}` },
+      payload: { email: 'deputy@test.local', password: 'secret1234', role: 'comex', tenantId: 'victim-tenant' },
+    });
+    assert.equal(created.statusCode, 200);
+    assert.equal(created.json().user.tenantId, 't1');
   });
 
   it('verifies password recovery by email, consumes the link once and revokes prior sessions', async () => {

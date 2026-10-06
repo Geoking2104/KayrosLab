@@ -1,7 +1,8 @@
 import { BaseAgent } from './base-agent.mjs';
 import { buildPersonalityContext } from '../personality.mjs';
 
-const OUTPUT_CONTRACT = `Return one JSON object only, with this exact shape:
+const OUTPUT_CONTRACT = `Return one JSON object only (no prose, no markdown fence), with this exact shape.
+The "verdict" field is mandatory and MUST be exactly one of the three strings "GO", "NO_GO" or "CONDITIONAL_GO" (never a combination, never another word).
 {
   "verdict": "GO | NO_GO | CONDITIONAL_GO",
   "primary_reason": "concise reason",

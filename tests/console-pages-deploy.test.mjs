@@ -87,3 +87,19 @@ test('la connexion expose un parcours complet de mot de passe oublie', async () 
   assert.match(api, /\/v1\/auth\/password\/forgot/);
   assert.match(api, /\/v1\/auth\/password\/reset/);
 });
+
+test('EF-26 / EF-28 : la console annonce le rôle requis avant toute saisie et propose la simulation de personnalité', async () => {
+  const app = await read('frontend/console-app/src/App.jsx');
+  assert.match(app, /const MANAGER_ROLES = \['comex', 'admin'\]/);
+  assert.match(app, /Réservé aux rôles comex ou admin/);
+  // Boutons de création d'agents grisés pour un contributeur (pas de formulaire puis 403).
+  for (const label of ['Agent hybride', 'Agent impersonator', 'Équipe d\'impersonators']) {
+    assert.match(app, new RegExp(`disabled=\\{!manager\\} title=\\{locked\\} onClick=\\{\\(\\) => set\\w+\\(true\\)\\}>${label}<`));
+  }
+  // Arbitrage grisé hors comex/admin.
+  assert.match(app, /canArbitrate=\{canManage\(data\.user\)\}/);
+  assert.match(app, /disabled=\{!canArbitrate\}[^>]*onClick=\{\(\) => arbitrate\('accept_consensus'\)\}/);
+  // Option de simulation de personnalité en session et dans l'équipe d'impersonators.
+  assert.match(app, /personality_simulation_enabled: personality/);
+  assert.match(app, /personality_simulation_enabled: form\.personality_simulation_enabled/);
+});
