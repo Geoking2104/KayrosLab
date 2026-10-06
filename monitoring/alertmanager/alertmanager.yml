@@ -1,0 +1,68 @@
+# Alertmanager — routage par sévérité, adapté du dossier source :
+#   - instance unique (pas de maillage HA à 3 répliques Swarm) ;
+#   - le webhook Slack est lu dans un fichier monté en lecture seule
+#     (monitoring/secrets/slack_webhook_url, jamais commité) au lieu d'un
+#     Docker secret Swarm ;
+#   - PagerDuty est fourni en commentaire (à activer si une astreinte existe).
+global:
+  resolve_timeout: 5m
+  slack_api_url_file: /etc/alertmanager/secrets/slack_webhook_url
+
+route:
+  group_by: ['alertname', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: slack-warning-channel
+  routes:
+    # PagerDuty : décommenter ce bloc ET le receiver `pagerduty-oncall`.
+    # - matchers: [severity = critical]
+    #   receiver: pagerduty-oncall
+    #   continue: true
+    - matchers: [severity = critical]
+      receiver: slack-critical-channel
+      repeat_interval: 1h
+      continue: false
+    - matchers: [severity = warning]
+      receiver: slack-warning-channel
+      continue: false
+
+receivers:
+  # - name: pagerduty-oncall
+  #   pagerduty_configs:
+  #     - routing_key_file: /etc/alertmanager/secrets/pagerduty_routing_key
+  #       severity: critical
+  #       description: '[CRITICAL] {{ .CommonAnnotations.summary }}'
+
+  - name: slack-critical-channel
+    slack_configs:
+      - channel: '#devops-critical'
+        send_resolved: true
+        color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+        title: '{{ if eq .Status "firing" }}[CRITICAL]{{ else }}[RÉSOLU]{{ end }} {{ .CommonAnnotations.summary }}'
+        text: >-
+          {{ range .Alerts }}• {{ .Annotations.description }}
+          {{ if .Annotations.runbook }}Runbook : {{ .Annotations.runbook }}{{ end }}
+          {{ end }}
+          env={{ .CommonLabels.env }} node={{ .CommonLabels.node }} service={{ .CommonLabels.service }}
+
+  - name: slack-warning-channel
+    slack_configs:
+      - channel: '#devops-warnings'
+        send_resolved: true
+        color: '{{ if eq .Status "firing" }}warning{{ else }}good{{ end }}'
+        title: '{{ if eq .Status "firing" }}[WARNING]{{ else }}[RÉSOLU]{{ end }} {{ .CommonAnnotations.summary }}'
+        text: >-
+          {{ range .Alerts }}• {{ .Annotations.description }}
+          {{ end }}
+          env={{ .CommonLabels.env }} node={{ .CommonLabels.node }} service={{ .CommonLabels.service }}
+
+inhibit_rules:
+  # Repris du dossier source (equal réduit à `service` : un seul nœud).
+  - source_matchers: [severity = critical]
+    target_matchers: [severity = warning]
+    equal: ['service']
+  # API arrêtée : inutile de notifier aussi l'échec de /health.
+  - source_matchers: [alertname = KayrosApiDown]
+    target_matchers: [alertname = KayrosHealthCheckFailing]
+    equal: ['service']

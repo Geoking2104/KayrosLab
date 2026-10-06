@@ -1,0 +1,62 @@
+name: Monitoring config
+
+# Valide la pile de supervision (monitoring/) : configuration et règles
+# Prometheus (promtool, tests unitaires des alertes), configuration et
+# routage Alertmanager (amtool), sonde blackbox et script de silences.
+# Aucun déploiement : la pile s'installe à la main sur le VPS.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'monitoring/**'
+      - '.github/workflows/monitoring-config.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'monitoring/**'
+      - '.github/workflows/monitoring-config.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prometheus config, rules and rule unit tests
+        run: |
+          docker run --rm -v "$PWD/monitoring:/m:ro" \
+            -v "$PWD/monitoring/prometheus/rules:/etc/prometheus/rules:ro" \
+            --entrypoint promtool prom/prometheus:v3.5.5 check config /m/prometheus/prometheus.yml
+          docker run --rm -v "$PWD/monitoring:/m:ro" --entrypoint promtool prom/prometheus:v3.5.5 \
+            test rules /m/prometheus/tests/kayros-alerts.test.yml
+
+      - name: Alertmanager config and routing
+        run: |
+          docker run --rm -v "$PWD/monitoring:/m:ro" --entrypoint amtool prom/alertmanager:v0.34.1 \
+            check-config /m/alertmanager/alertmanager.yml
+          for case in "severity=critical:slack-critical-channel" "severity=warning:slack-warning-channel"; do
+            docker run --rm -v "$PWD/monitoring:/m:ro" --entrypoint amtool prom/alertmanager:v0.34.1 \
+              config routes test --config.file=/m/alertmanager/alertmanager.yml \
+              --verify.receivers="${case#*:}" "${case%%:*}" service=kayros-api
+          done
+
+      - name: Blackbox config
+        run: |
+          docker run --rm -v "$PWD/monitoring/blackbox:/b:ro" prom/blackbox-exporter:v0.28.0 \
+            --config.file=/b/blackbox.yml --config.check
+
+      - name: Compose file and silence script
+        run: |
+          docker compose -f monitoring/docker-compose.yml config --quiet
+          docker compose -f monitoring/docker-compose.yml --profile grafana config --quiet
+          bash -n monitoring/alertmanager-silence.sh
+          shellcheck monitoring/alertmanager-silence.sh
+          python3 -m json.tool monitoring/grafana/dashboards/kayros-overview.json > /dev/null
+          # Soft-fail : Alertmanager absent ne doit jamais faire échouer un déploiement.
+          ALERTMANAGER_URL=http://127.0.0.1:1 bash monitoring/alertmanager-silence.sh start
+          ALERTMANAGER_URL=http://127.0.0.1:1 bash monitoring/alertmanager-silence.sh run true

@@ -37,6 +37,9 @@ import { oidcConfigFromEnv } from './oidc.mjs';
 import { smtpFromEnv, createSmtpTransport } from './smtp.mjs';
 import { SalonStateStore } from './salon-state.mjs';
 import { resolveLlmConfig, describeLlmConfig } from './llm-config.mjs';
+import {
+  instrumentProviders, instrumentLlm, setLlmPrimary, consoleRunObserver, recordInterruptedRuns,
+} from './metrics.mjs';
 
 export function bindEngineToServer(engine, { llm, tools, governance, maxConcurrency }) {
   if (!engine) return null;
@@ -219,7 +222,11 @@ export default async function buildContext() {
 
   // Priorité documentée dans lib/llm-config.mjs : LLM_PROVIDER > NVIDIA > Mistral > Anthropic > mock.
   const policy = new RoutingPolicy({ defaultProvider: llmConfig.provider, fallback: llmConfig.fallback });
-  const llm = new KayrosLLM(providers, policy, { retry: llmConfig.retry });
+  // Métriques Prometheus (lib/metrics.mjs) : appels par fournisseur/issue,
+  // replis llm_degraded, fournisseur primaire. Aucun secret dans les labels.
+  instrumentProviders(providers);
+  const llm = instrumentLlm(new KayrosLLM(providers, policy, { retry: llmConfig.retry }));
+  setLlmPrimary(llmConfig);
   const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
   const tools = demoTools();
   try {
@@ -572,8 +579,11 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   // Missions console asynchrones restées `running` (processus arrêté pendant
   // les analyses) : elles passent `failed` avec un message explicite, sinon
   // l'interface attendrait indéfiniment et la session resterait bloquée.
+  // Durées, issues et missions en cours exposées par /metrics.
+  if (engine.hybridGateway) engine.hybridGateway.runObserver = consoleRunObserver;
   try {
     const interrupted = await engine.hybridGateway.recoverInterruptedRuns?.();
+    recordInterruptedRuns(interrupted);
     if (interrupted) console.warn(`[kayros] ${interrupted} mission(s) console interrompue(s) par le redémarrage : statut failed`);
   } catch (e) {
     console.warn('[kayros] reprise des missions console impossible:', e?.message || e);

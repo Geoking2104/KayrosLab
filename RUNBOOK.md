@@ -95,10 +95,56 @@ curl https://api.kayroslab.com/health
 
 ### Métriques Prometheus
 
+`/metrics` n'est plus public : sans `METRICS_TOKEN`, il n'accepte que le
+loopback direct (le Prometheus local) et répond 403 à travers nginx.
+
 ```bash
-curl https://api.kayroslab.com/metrics
-# Exposition au format Prometheus : http_request_duration_seconds, etc.
+# Sur le VPS
+curl -s http://127.0.0.1:8787/metrics | grep '^kayros_'
+# Depuis l'extérieur, seulement si METRICS_TOKEN est défini (secret GitHub)
+curl -H "Authorization: Bearer $METRICS_TOKEN" https://api.kayroslab.com/metrics
 ```
+
+Métriques applicatives (`backend/fastify/lib/metrics.mjs`, aucun label
+personnel ni secret) : `kayros_llm_calls_total{provider,model,outcome}`
+(429 = `rate_limited`, `timeout`…), `kayros_llm_fallbacks_total{from,to}`
+(replis `llm_degraded`, dont vers `mock`), `kayros_llm_requests_total`,
+`kayros_llm_primary_info`, `kayros_console_runs_total{kind,outcome}`,
+`kayros_console_run_duration_seconds`, `kayros_console_runs_in_progress`,
+`kayros_console_run_oldest_running_seconds`,
+`kayros_console_runs_interrupted_total`, plus `http_request_duration_seconds`
+et les métriques process/Node.js.
+
+### Supervision et alertes (Prometheus + Alertmanager)
+
+Pile mono-nœud dans `monitoring/` (installation, secrets, choix d'architecture :
+`monitoring/README.md`). Tout écoute sur 127.0.0.1 ; accès par tunnel SSH.
+
+```bash
+cd /opt/kayroslab/monitoring
+docker compose ps                                  # prometheus, alertmanager, blackbox (+ grafana)
+docker compose logs --tail 50 alertmanager
+curl -s http://127.0.0.1:9093/api/v2/alerts | head -c 2000   # alertes actives
+curl -XPOST http://127.0.0.1:9090/-/reload         # après modification des règles
+curl -XPOST http://127.0.0.1:9093/-/reload         # après modification d'alertmanager.yml
+```
+
+- `critical` → Slack #devops-critical, `warning` → Slack #devops-warnings.
+- Le déploiement GitHub Actions pose un silence de 15 min autour du
+  redémarrage pm2 (`monitoring/alertmanager-silence.sh`, sans effet si
+  Alertmanager est absent).
+- Maintenance manuelle :
+  `DURATION_MINUTES=60 monitoring/alertmanager-silence.sh start` … `stop`.
+
+| Alerte | Premier réflexe |
+|--------|-----------------|
+| `KayrosApiDown` / `KayrosHealthCheckFailing` | `pm2 status`, `pm2 logs kayros-api --lines 100`, `curl -fsS http://127.0.0.1:8787/health` ; si seule l'URL publique échoue : `nginx -t`, certificat |
+| `KayrosLlmDegradedToMock` / `KayrosLlmMostlyMock` | `curl -s http://127.0.0.1:8787/health` (bloc `llm`), quotas NVIDIA/Mistral, `pm2 logs kayros-api \| grep -i llm` |
+| `KayrosLlmPrimaryIsMock` | secrets `NVIDIA_API_KEY` / `MISTRAL_API_KEY` absents : vérifier les secrets GitHub et relancer le déploiement |
+| `KayrosLlmRateLimited` | baisser la variable de dépôt `LLM_MAX_CONCURRENCY`, vérifier le quota |
+| `KayrosConsoleRunStuck` | vérifier `KAYROS_CONSOLE_RUN_TIMEOUT_MS` (0 = aucun délai) ; un `pm2 restart` passe la mission `failed` |
+| `KayrosConsoleRunsInterruptedAtStartup` | redémarrage pendant une mission (déploiement, crash, limite mémoire pm2 400 Mo) |
+| `KayrosApiMemoryHigh` / `KayrosApiRestartLoop` | `pm2 describe kayros-api`, mémoire de l'hôte (`free -m`, Ollama) |
 
 ### Logs
 
@@ -182,3 +228,5 @@ pm2 restart kayros-api
 | `deploy/ovh-vps/backup-data.sh` | Sauvegarde des données |
 | `deploy/ovh-vps/BOOTSTRAP.md` | Procédure d'installation initiale |
 | `backend/fastify/DEPLOY-VPS.md` | Documentation déploiement détaillée |
+| `monitoring/README.md` | Supervision Prometheus/Alertmanager/Grafana (mono-nœud) |
+| `monitoring/alertmanager-silence.sh` | Silences d'alertes (déploiement, maintenance) |

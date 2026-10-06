@@ -1,0 +1,79 @@
+# Prometheus — supervision mono-nœud de KayrosLab (VPS OVH).
+# Adapté du dossier source : la cible redis_exporter (Sentinel) est remplacée
+# par l'API Fastify ; la découverte DNS Swarm (tasks.alertmanager) par
+# l'Alertmanager local unique.
+global:
+  scrape_interval: 30s
+  scrape_timeout: 10s
+  evaluation_interval: 30s
+  # Ajoutés à chaque alerte : servent au routage et aux silences de
+  # déploiement (monitoring/alertmanager-silence.sh matche `env`).
+  external_labels:
+    env: production
+    node: ovh-vps
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      timeout: 10s
+      static_configs:
+        - targets: ['127.0.0.1:9093']
+
+scrape_configs:
+  # API KayrosLab (pm2 `kayros-api`). /metrics n'accepte que le loopback
+  # direct quand METRICS_TOKEN est vide : Prometheus (réseau host) le joint
+  # sur 127.0.0.1 sans passer par nginx.
+  - job_name: kayros-api
+    scrape_interval: 15s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['127.0.0.1:8787']
+        labels:
+          service: kayros-api
+    # Si METRICS_TOKEN est défini dans le .env de l'API, décommenter et
+    # déposer la même valeur dans monitoring/secrets/metrics_token :
+    # authorization:
+    #   type: Bearer
+    #   credentials_file: /etc/prometheus/secrets/metrics_token
+
+  # Sonde de bout en bout (nginx + TLS + process) et sonde locale (process).
+  # 60 s : /health partage le quota de rate-limit de l'API (100 req/min).
+  - job_name: kayros-health
+    scrape_interval: 60s
+    metrics_path: /probe
+    params:
+      module: [kayros_health]
+    static_configs:
+      - targets:
+          - https://api.kayroslab.com/health
+          - http://127.0.0.1:8787/health
+        labels:
+          service: kayros-api
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ['127.0.0.1:9090']
+        labels:
+          service: monitoring
+
+  - job_name: alertmanager
+    static_configs:
+      - targets: ['127.0.0.1:9093']
+        labels:
+          service: monitoring
+
+  - job_name: blackbox
+    static_configs:
+      - targets: ['127.0.0.1:9115']
+        labels:
+          service: monitoring

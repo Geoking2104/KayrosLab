@@ -1,0 +1,222 @@
+# Règles d'alerte KayrosLab (mono-nœud). Sévérités :
+#   critical → Slack #devops-critical (et PagerDuty si activé)
+#   warning  → Slack #devops-warnings
+# Le label `service` sert à l'inhibition (une alerte critique masque les
+# warnings du même service) ; `env`/`node` viennent des external_labels.
+groups:
+  - name: kayros-api
+    rules:
+      - alert: KayrosApiDown
+        expr: up{job="kayros-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: kayros-api
+        annotations:
+          summary: "API KayrosLab injoignable (scrape /metrics en échec)"
+          description: "Prometheus ne joint plus 127.0.0.1:8787/metrics depuis 2 min. Vérifier `pm2 status kayros-api` et `pm2 logs kayros-api --lines 100`."
+          runbook: "RUNBOOK.md#surveillance"
+
+      - alert: KayrosHealthCheckFailing
+        expr: probe_success{job="kayros-health"} == 0
+        for: 3m
+        labels:
+          severity: critical
+          service: kayros-api
+        annotations:
+          summary: "/health en échec sur {{ $labels.instance }}"
+          description: "La sonde blackbox de {{ $labels.instance }} échoue depuis 3 min (statut non 200, corps sans \"ok\":true, TLS ou réseau). Si seule l'URL publique échoue : nginx/certificat."
+          runbook: "RUNBOOK.md#surveillance"
+
+      - alert: KayrosTlsCertificateExpiringSoon
+        expr: (probe_ssl_earliest_cert_expiry{job="kayros-health"} - time()) < 14 * 86400
+        for: 1h
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Certificat TLS de {{ $labels.instance }} expire dans moins de 14 jours"
+          description: "Renouvellement certbot à vérifier (`sudo certbot renew --dry-run`)."
+
+      - alert: KayrosApiHigh5xxRate
+        expr: |
+          (
+            sum by (service) (rate(http_request_duration_seconds_count{job="kayros-api",status_code=~"5.."}[10m]))
+            /
+            sum by (service) (rate(http_request_duration_seconds_count{job="kayros-api"}[10m]))
+          ) > 0.05
+          and
+          sum by (service) (rate(http_request_duration_seconds_count{job="kayros-api"}[10m])) > 0.02
+        for: 10m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Plus de 5 % de réponses 5xx sur l'API ({{ $value | humanizePercentage }})"
+          description: "Voir `pm2 logs kayros-api` et le panneau HTTP du tableau de bord Grafana."
+
+      - alert: KayrosApiMemoryHigh
+        expr: process_resident_memory_bytes{job="kayros-api"} > 350 * 1024 * 1024
+        for: 10m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Mémoire de kayros-api élevée ({{ $value | humanize1024 }}o)"
+          description: "pm2 redémarre le processus à 400 Mo (max_memory_restart) : un redémarrage interromprait les missions console en cours."
+
+      - alert: KayrosApiRestartLoop
+        expr: changes(process_start_time_seconds{job="kayros-api"}[30m]) > 2
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "kayros-api a redémarré {{ $value }} fois en 30 min"
+          description: "Crash ou dépassement mémoire répétés (`pm2 describe kayros-api`)."
+
+  - name: kayros-llm
+    rules:
+      - alert: KayrosLlmDegradedToMock
+        expr: sum by (service) (increase(kayros_llm_fallbacks_total{job="kayros-api",to="mock"}[10m])) > 0
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "LLM dégradé vers le moteur déterministe mock"
+          description: "{{ $value | humanize }} repli(s) vers mock en 10 min : NVIDIA (Kimi K3) puis Mistral ont échoué. Les réponses sont déterministes (llm_degraded). Vérifier /health et les quotas fournisseurs."
+
+      - alert: KayrosLlmMostlyMock
+        expr: |
+          sum by (service) (rate(kayros_llm_fallbacks_total{job="kayros-api",to="mock"}[15m]))
+          /
+          sum by (service) (rate(kayros_llm_requests_total{job="kayros-api"}[15m]))
+          > 0.5
+        for: 15m
+        labels:
+          severity: critical
+          service: kayros-api
+        annotations:
+          summary: "Plus de la moitié des requêtes LLM servies par mock depuis 15 min"
+          description: "Les fournisseurs réels sont indisponibles de façon durable ({{ $value | humanizePercentage }} des requêtes)."
+
+      - alert: KayrosLlmPrimaryIsMock
+        expr: kayros_llm_primary_info{job="kayros-api",provider="mock"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Aucun fournisseur LLM configuré : primaire = mock"
+          description: "NVIDIA_API_KEY et MISTRAL_API_KEY absents du .env (ou LLM_PROVIDER=mock). Vérifier les secrets GitHub et relancer le déploiement."
+
+      - alert: KayrosLlmHighErrorRate
+        expr: |
+          (
+            sum by (service, provider) (rate(kayros_llm_calls_total{job="kayros-api",provider!="mock",outcome!="success"}[10m]))
+            /
+            sum by (service, provider) (rate(kayros_llm_calls_total{job="kayros-api",provider!="mock"}[10m]))
+          ) > 0.25
+          and
+          sum by (service, provider) (increase(kayros_llm_calls_total{job="kayros-api",provider!="mock"}[10m])) >= 5
+        for: 10m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Taux d'erreur LLM élevé sur {{ $labels.provider }} ({{ $value | humanizePercentage }})"
+          description: "Plus de 25 % d'appels en échec (429, délai, HTTP, clé) sur 10 min. Détail par issue : kayros_llm_calls_total."
+
+      - alert: KayrosLlmRateLimited
+        expr: sum by (service, provider) (increase(kayros_llm_calls_total{job="kayros-api",outcome="rate_limited"}[10m])) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Réponses 429 répétées de {{ $labels.provider }}"
+          description: "{{ $value | humanize }} réponses 429 en 10 min. Envisager de baisser LLM_MAX_CONCURRENCY (variable de dépôt) ou de vérifier le quota."
+
+      - alert: KayrosLlmTimeouts
+        expr: sum by (service, provider) (increase(kayros_llm_calls_total{job="kayros-api",outcome="timeout"}[15m])) > 3
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Délais d'appel dépassés sur {{ $labels.provider }}"
+          description: "{{ $value | humanize }} appels expirés en 15 min (NVIDIA_TIMEOUT_MS, défaut 180 s)."
+
+      - alert: KayrosLlmRequestsFailing
+        expr: sum by (service) (increase(kayros_llm_requests_total{job="kayros-api",outcome="failed"}[10m])) > 3
+        labels:
+          severity: critical
+          service: kayros-api
+        annotations:
+          summary: "Requêtes LLM en échec complet (chaîne de repli épuisée)"
+          description: "{{ $value | humanize }} requêtes sans aucune réponse, mock compris, en 10 min."
+
+  - name: kayros-console
+    rules:
+      - alert: KayrosConsoleRunFailureRate
+        expr: |
+          (
+            sum by (service) (increase(kayros_console_runs_total{job="kayros-api",outcome=~"failed|timeout"}[1h]))
+            /
+            sum by (service) (increase(kayros_console_runs_total{job="kayros-api"}[1h]))
+          ) > 0.3
+          and
+          sum by (service) (increase(kayros_console_runs_total{job="kayros-api"}[1h])) >= 3
+        for: 5m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Plus de 30 % des missions console échouent ({{ $value | humanizePercentage }} sur 1 h)"
+          description: "Issues failed/timeout de kayros_console_runs_total. Voir les fils `failed` dans la console et `pm2 logs kayros-api`."
+
+      - alert: KayrosConsoleRunStuck
+        expr: max by (service) (kayros_console_run_oldest_running_seconds{job="kayros-api"}) > 1800
+        for: 5m
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "Mission console en cours depuis plus de 30 min ({{ $value | humanizeDuration }})"
+          description: "Le délai KAYROS_CONSOLE_RUN_TIMEOUT_MS (30 min par défaut) aurait dû la passer `failed` : boucle LLM, verrou ou délai désactivé (0)."
+
+      - alert: KayrosConsoleRunsInterruptedAtStartup
+        expr: sum by (service) (increase(kayros_console_runs_interrupted_total{job="kayros-api"}[30m])) > 0
+        labels:
+          severity: warning
+          service: kayros-api
+        annotations:
+          summary: "{{ $value | humanize }} mission(s) console interrompue(s) par un redémarrage"
+          description: "Des missions étaient `running` au démarrage du processus et ont été passées `failed` : redémarrage (déploiement, crash ou limite mémoire pm2) pendant une exécution."
+
+  - name: monitoring
+    rules:
+      - alert: TargetDown
+        expr: up{job!="kayros-api"} == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cible {{ $labels.job }} ({{ $labels.instance }}) injoignable"
+          description: "Composant de supervision arrêté : `docker compose -f monitoring/docker-compose.yml ps`."
+
+      - alert: PrometheusRuleEvaluationFailures
+        expr: increase(prometheus_rule_evaluation_failures_total[10m]) > 0
+        labels:
+          severity: warning
+          service: monitoring
+        annotations:
+          summary: "Échecs d'évaluation de règles Prometheus"
+          description: "Voir les logs : `docker compose -f monitoring/docker-compose.yml logs prometheus`."
+
+      - alert: AlertmanagerNotificationsFailing
+        expr: sum by (integration) (increase(alertmanager_notifications_failed_total[15m])) > 0
+        labels:
+          severity: warning
+          service: monitoring
+        annotations:
+          summary: "Alertmanager n'arrive pas à notifier via {{ $labels.integration }}"
+          description: "Webhook Slack invalide ou absent (monitoring/secrets/slack_webhook_url) ? Logs : `docker compose -f monitoring/docker-compose.yml logs alertmanager`."

@@ -1,0 +1,128 @@
+# Tests unitaires des règles : promtool test rules prometheus/tests/kayros-alerts.test.yml
+rule_files:
+  - ../rules/kayros-alerts.yml
+
+evaluation_interval: 30s
+
+tests:
+  - name: API arrêtée et /health en échec
+    interval: 30s
+    input_series:
+      - series: 'up{job="kayros-api",instance="127.0.0.1:8787",service="kayros-api"}'
+        values: '1 1 0x10'
+      - series: 'probe_success{job="kayros-health",instance="https://api.kayroslab.com/health",service="kayros-api"}'
+        values: '1 1 0x10'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: KayrosApiDown
+        exp_alerts: []
+      - eval_time: 4m
+        alertname: KayrosApiDown
+        exp_alerts:
+          - exp_labels: { severity: critical, service: kayros-api, job: kayros-api, instance: 127.0.0.1:8787 }
+            exp_annotations:
+              summary: "API KayrosLab injoignable (scrape /metrics en échec)"
+              description: "Prometheus ne joint plus 127.0.0.1:8787/metrics depuis 2 min. Vérifier `pm2 status kayros-api` et `pm2 logs kayros-api --lines 100`."
+              runbook: "RUNBOOK.md#surveillance"
+      - eval_time: 5m
+        alertname: KayrosHealthCheckFailing
+        exp_alerts:
+          - exp_labels: { severity: critical, service: kayros-api, job: kayros-health, instance: https://api.kayroslab.com/health }
+            exp_annotations:
+              summary: "/health en échec sur https://api.kayroslab.com/health"
+              description: "La sonde blackbox de https://api.kayroslab.com/health échoue depuis 3 min (statut non 200, corps sans \"ok\":true, TLS ou réseau). Si seule l'URL publique échoue : nginx/certificat."
+              runbook: "RUNBOOK.md#surveillance"
+
+  - name: Repli vers mock et 429
+    interval: 1m
+    input_series:
+      - series: 'kayros_llm_fallbacks_total{job="kayros-api",service="kayros-api",from="nvidia",to="mock",reason="provider_fallback"}'
+        values: '0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1'
+      - series: 'kayros_llm_calls_total{job="kayros-api",service="kayros-api",provider="nvidia",model="moonshotai/kimi-k3",outcome="rate_limited"}'
+        values: '0+3x20'
+      - series: 'kayros_llm_calls_total{job="kayros-api",service="kayros-api",provider="nvidia",model="moonshotai/kimi-k3",outcome="success"}'
+        values: '0+1x20'
+    alert_rule_test:
+      - eval_time: 2m
+        alertname: KayrosLlmDegradedToMock
+        exp_alerts: []
+      - eval_time: 5m
+        alertname: KayrosLlmDegradedToMock
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api }
+            exp_annotations:
+              summary: "LLM dégradé vers le moteur déterministe mock"
+              description: "1 repli(s) vers mock en 10 min : NVIDIA (Kimi K3) puis Mistral ont échoué. Les réponses sont déterministes (llm_degraded). Vérifier /health et les quotas fournisseurs."
+      - eval_time: 20m
+        alertname: KayrosLlmDegradedToMock
+        exp_alerts: []
+      - eval_time: 20m
+        alertname: KayrosLlmRateLimited
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api, provider: nvidia }
+            exp_annotations:
+              summary: "Réponses 429 répétées de nvidia"
+              description: "30 réponses 429 en 10 min. Envisager de baisser LLM_MAX_CONCURRENCY (variable de dépôt) ou de vérifier le quota."
+      - eval_time: 20m
+        alertname: KayrosLlmHighErrorRate
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api, provider: nvidia }
+            exp_annotations:
+              summary: "Taux d'erreur LLM élevé sur nvidia (75%)"
+              description: "Plus de 25 % d'appels en échec (429, délai, HTTP, clé) sur 10 min. Détail par issue : kayros_llm_calls_total."
+
+  - name: Missions console bloquées et en échec
+    interval: 1m
+    input_series:
+      - series: 'kayros_console_run_oldest_running_seconds{job="kayros-api",service="kayros-api"}'
+        values: '0 60 120 1700+60x20'
+      - series: 'kayros_console_runs_total{job="kayros-api",service="kayros-api",kind="message",outcome="failed"}'
+        values: '0+1x60'
+      - series: 'kayros_console_runs_total{job="kayros-api",service="kayros-api",kind="message",outcome="completed"}'
+        values: '0+1x60'
+    alert_rule_test:
+      - eval_time: 5m
+        alertname: KayrosConsoleRunStuck
+        exp_alerts: []
+      - eval_time: 12m
+        alertname: KayrosConsoleRunStuck
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api }
+            exp_annotations:
+              summary: "Mission console en cours depuis plus de 30 min (37m 20s)"
+              description: "Le délai KAYROS_CONSOLE_RUN_TIMEOUT_MS (30 min par défaut) aurait dû la passer `failed` : boucle LLM, verrou ou délai désactivé (0)."
+      - eval_time: 30m
+        alertname: KayrosConsoleRunFailureRate
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api }
+            exp_annotations:
+              summary: "Plus de 30 % des missions console échouent (50% sur 1 h)"
+              description: "Issues failed/timeout de kayros_console_runs_total. Voir les fils `failed` dans la console et `pm2 logs kayros-api`."
+
+  - name: Fournisseur primaire mock
+    interval: 1m
+    input_series:
+      - series: 'kayros_llm_primary_info{job="kayros-api",service="kayros-api",provider="mock",model="default"}'
+        values: '1x20'
+    alert_rule_test:
+      - eval_time: 15m
+        alertname: KayrosLlmPrimaryIsMock
+        exp_alerts:
+          - exp_labels: { severity: warning, service: kayros-api, job: kayros-api, provider: mock, model: default }
+            exp_annotations:
+              summary: "Aucun fournisseur LLM configuré : primaire = mock"
+              description: "NVIDIA_API_KEY et MISTRAL_API_KEY absents du .env (ou LLM_PROVIDER=mock). Vérifier les secrets GitHub et relancer le déploiement."
+
+  - name: Cible de supervision arrêtée
+    interval: 1m
+    input_series:
+      - series: 'up{job="alertmanager",instance="127.0.0.1:9093",service="monitoring"}'
+        values: '0x10'
+    alert_rule_test:
+      - eval_time: 6m
+        alertname: TargetDown
+        exp_alerts:
+          - exp_labels: { severity: warning, service: monitoring, job: alertmanager, instance: 127.0.0.1:9093 }
+            exp_annotations:
+              summary: "Cible alertmanager (127.0.0.1:9093) injoignable"
+              description: "Composant de supervision arrêté : `docker compose -f monitoring/docker-compose.yml ps`."
