@@ -16,7 +16,7 @@ function oauth() {
   });
 }
 
-async function buildApp() {
+async function buildApp({ role = 'comex', email = 'owner@kayros.test', sub = 'u1' } = {}) {
   const swarm = new SwarmService();
   const hybridGateway = new HybridAgentGateway({ swarm });
   const connectorConfig = new ConnectorConfigurationService({ store: new InMemoryConnectorConfigStore() });
@@ -27,7 +27,7 @@ async function buildApp() {
     publicApiUrl: 'https://api.kayros.test', consoleUrl: 'https://console.kayros.test/console/',
     crystalKnowsConfigured: false, connectorEncryptionConfigured: false,
   });
-  app.decorate('requireAuth', async () => ({ sub: 'u1', email: 'owner@kayros.test', role: 'comex', tenantId: 'tenant-a' }));
+  app.decorate('requireAuth', async () => ({ sub, email, role, tenantId: 'tenant-a' }));
   await app.register(consoleRoute);
   return { app, swarm, hybridGateway };
 }
@@ -46,6 +46,53 @@ test('console overview exposes agents, connections and tenant sessions', async (
   assert.ok(Array.isArray(body.sessions[0].collective.active_agents));
   assert.equal(body.connections.length, 3);
   assert.equal(body.rooms, undefined);
+});
+
+test('a contributor only sees owned sessions, threads and activity inside the default tenant', async (t) => {
+  const { app, hybridGateway } = await buildApp({ role: 'contributeur', email: 'alice@kayros.test', sub: 'alice' });
+  t.after(() => app.close());
+  const mine = await hybridGateway.createRoom({ platform: 'console', external_room_id: 'alice-session', name: 'Session Alice' }, { tenantId: 'tenant-a', by: 'alice@kayros.test' });
+  const foreign = await hybridGateway.createRoom({ platform: 'console', external_room_id: 'other-session', name: 'Échange - Nietsche' }, { tenantId: 'tenant-a', by: 'yeye@yeye.com' });
+  hybridGateway.swarm.run = async (_id, options) => ({
+    run_id: `run-${options.question}`, swarm_name: 'Test', question: options.question,
+    analyses: [], consensus: { verdict: 'GO', rationale: 'ok', requires_human_arbitration: true },
+  });
+  const ownRun = await hybridGateway.handleMessage({ platform: 'console', room_id: mine.room_id, tenantId: 'tenant-a', explicit: true, text: 'Décision Alice', by: 'alice@kayros.test' });
+  const foreignRun = await hybridGateway.handleMessage({ platform: 'console', room_id: foreign.room_id, tenantId: 'tenant-a', explicit: true, text: 'Décision Yeye', by: 'yeye@yeye.com' });
+
+  const overview = await app.inject({ method: 'GET', url: '/v1/console/overview' });
+  assert.equal(overview.statusCode, 200);
+  assert.deepEqual(overview.json().sessions.map((session) => session.name), ['Session Alice']);
+  assert.deepEqual(overview.json().threads.map((thread) => thread.thread_id), [ownRun.thread.thread_id]);
+  assert.equal(overview.json().activity.every((event) => event.room_id === mine.room_id), true);
+  assert.equal(overview.json().permissions.arbitrate, false);
+  assert.equal(overview.json().policy.session_visibility, 'owner');
+
+  const sessions = await app.inject({ method: 'GET', url: '/v1/console/sessions' });
+  assert.deepEqual(sessions.json().sessions.map((session) => session.session_id), [mine.room_id]);
+  const threads = await app.inject({ method: 'GET', url: '/v1/console/threads' });
+  assert.deepEqual(threads.json().threads.map((thread) => thread.thread_id), [ownRun.thread.thread_id]);
+  const activity = await app.inject({ method: 'GET', url: '/v1/console/activity' });
+  assert.equal(activity.json().events.every((event) => event.room_id === mine.room_id), true);
+
+  const foreignSession = await app.inject({ method: 'GET', url: `/v1/console/sessions/${foreign.room_id}` });
+  const foreignThread = await app.inject({ method: 'GET', url: `/v1/console/threads/${foreignRun.thread.thread_id}` });
+  assert.equal(foreignSession.statusCode, 404);
+  assert.equal(foreignThread.statusCode, 404);
+});
+
+test('a contributor receives the documented arbitration policy instead of elevated rights', async (t) => {
+  const { app, hybridGateway } = await buildApp({ role: 'contributeur', email: 'alice@kayros.test' });
+  t.after(() => app.close());
+  const room = await hybridGateway.createRoom({ platform: 'console', external_room_id: 'alice-arbitration', name: 'Décision' }, { tenantId: 'tenant-a', by: 'alice@kayros.test' });
+  hybridGateway.swarm.run = async (_id, options) => ({
+    run_id: 'run-policy', swarm_name: 'Décision', question: options.question,
+    analyses: [], consensus: { verdict: 'GO', rationale: 'ok', requires_human_arbitration: true },
+  });
+  const result = await hybridGateway.handleMessage({ platform: 'console', room_id: room.room_id, tenantId: 'tenant-a', explicit: true, text: 'Décider ?', by: 'alice@kayros.test' });
+  const refused = await app.inject({ method: 'POST', url: `/v1/console/threads/${result.thread.thread_id}/arbitrate`, payload: { action: 'accept_consensus' } });
+  assert.equal(refused.statusCode, 403);
+  assert.equal(refused.json().error, 'rôle comex ou admin requis');
 });
 
 test('console opens a harness session and runs a governed mission', async (t) => {
