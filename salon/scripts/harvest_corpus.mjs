@@ -116,7 +116,12 @@ for (const a of authors) {
   }
   const pinKeys = new Set(pinned.map((e) => e.s.slice(0, 60)));
   const kept = sample(entries.filter((e) => !pinKeys.has(e.s.slice(0, 60))), MAX);
-  out[a.id] = pinned.concat(kept);
+  // Conserve les traductions d'affichage (tr) quand la même phrase revient.
+  const prevByKey = new Map((prev[a.id] || []).map((e) => [e.w + '::' + String(e.s || '').slice(0, 60), e]));
+  out[a.id] = pinned.concat(kept).map((e) => {
+    const p0 = prevByKey.get(e.w + '::' + e.s.slice(0, 60));
+    return p0 && p0.tr ? Object.assign({}, e, { tr: p0.tr }) : e;
+  });
   total += pinned.length + kept.length;
   process.stderr.write(`${a.id}: ${pinned.length} épinglée(s) + ${kept.length}\n`);
 }

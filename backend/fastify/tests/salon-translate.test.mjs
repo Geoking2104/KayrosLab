@@ -36,6 +36,17 @@ test('traduction : entrée invalide refusée', async () => {
   } finally { await app.close(); }
 });
 
+test('traduction : un fournisseur dégradé (mock) est refusé, l’original est rendu', async () => {
+  const { app } = await buildTestApp();
+  app.kayrosContext.llm.complete = async () => ({ text: '[mock] (salon-translate) reponse simulee a: x' });
+  try {
+    const r = await app.inject({ method: 'POST', url: '/v1/salon/translate', payload: { to: 'fr', texts: ['The world is a stage.'] } });
+    const j = r.json();
+    assert.equal(j.translations[0], 'The world is a stage.');
+    assert.equal(j.failed, 1);
+  } finally { await app.close(); }
+});
+
 test('traduction : repli un-par-un quand le lot casse', async () => {
   const { app } = await buildTestApp();
   let calls = 0;

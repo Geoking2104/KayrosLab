@@ -137,12 +137,16 @@ export function mineFormulas({ authorId, entries }) {
 
 export function buildPack({ authorId, entries, source, kbVersion, worksStats, doctrine }) {
   const { formulas, verbatim, patterns } = mineFormulas({ authorId, entries });
-  const passages = entries.map((e, i) => ({
-    id: `${authorId}.p${String(i + 1).padStart(4, "0")}`,
-    w: e.w,
-    s: e.s,
-    src: { work: e.w },
-  }));
+  const passages = entries.map((e, i) => {
+    const p = {
+      id: `${authorId}.p${String(i + 1).padStart(4, "0")}`,
+      w: e.w,
+      s: e.s,
+      src: { work: e.w },
+    };
+    if (e.tr) p.tr = e.tr;
+    return p;
+  });
   const checksum = stableChecksum({
     passages: passages.map((p) => ({ id: p.id, w: p.w, s: p.s })),
     formulas: formulas.map((f) => ({ id: f.id, kind: f.kind, text: f.text || f.shape })),
@@ -164,10 +168,21 @@ export function buildPack({ authorId, entries, source, kbVersion, worksStats, do
   };
 }
 
+/** Traduction d'affichage : { fr?, en? } — chaînes non vides, bornées. */
+export function cleanTr(tr) {
+  if (!tr || typeof tr !== "object") return null;
+  const out = {};
+  for (const l of ["fr", "en"]) {
+    const v = tr[l];
+    if (typeof v === "string" && v.trim() && v.trim().length <= 2000) out[l] = v.trim();
+  }
+  return Object.keys(out).length ? out : null;
+}
+
 export function loadCorpusEntries(corpus, authorId) {
   const list = Array.isArray(corpus[authorId]) ? corpus[authorId] : [];
   return list
-    .map((e) => ({ w: e.w || e.work || "", s: String(e.s || e.text || "").replace(/\s+/g, " ").trim() }))
+    .map((e) => ({ w: e.w || e.work || "", s: String(e.s || e.text || "").replace(/\s+/g, " ").trim(), tr: cleanTr(e.tr) }))
     .filter((e) => e.w && usableSentence(e.s));
 }
 
@@ -299,7 +314,7 @@ async function main() {
   for (const [id, pack] of Object.entries(built)) {
     // Projection légère pour le chargement navigateur : {id, w, s}.
     // La provenance complète vit dans kb/<auteur>.json (packs).
-    mergedCorpus[id] = pack.passages.map((p) => ({ id: p.id, w: p.w, s: p.s }));
+    mergedCorpus[id] = pack.passages.map((p) => (p.tr ? { id: p.id, w: p.w, s: p.s, tr: p.tr } : { id: p.id, w: p.w, s: p.s }));
   }
   const formulasAgg = {
     generatedAt: nowIso(),

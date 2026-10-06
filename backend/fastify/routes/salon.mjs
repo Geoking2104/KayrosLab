@@ -109,18 +109,24 @@ export default async function salonRoutes(app) {
       { role: 'system', content: system },
       { role: 'user', content: JSON.stringify(texts) },
     ];
+    // Fournisseur forcé : la traduction est un service de fond, on veut le
+    // chemin le plus fiable (le routage amont peut préférer un modèle lent).
+    const opts = { provider: 'mistral' };
     const parse = (raw) => {
       const t = String(raw || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/,'').trim();
       try {
         const arr = JSON.parse(t);
         if (Array.isArray(arr) && arr.length === texts.length) {
-          return arr.map((x) => (typeof x === 'string' ? normalizeTranslation(x) : null));
+          return arr.map((x) => {
+            const tr = typeof x === 'string' ? normalizeTranslation(x) : null;
+            return tr && !/^\[mock\]/i.test(tr) ? tr : null;
+          });
         }
       } catch { /* essai suivant */ }
       return null;
     };
     try {
-      const r = await llm.complete({ messages, temperature: 0.2, role: 'salon-translate' });
+      const r = await llm.complete({ messages, temperature: 0.2, role: 'salon-translate' }, opts);
       const arr = parse(r && r.text);
       if (arr) return arr;
     } catch { /* repli un-par-un */ }
@@ -136,8 +142,9 @@ export default async function salonRoutes(app) {
           ],
           temperature: 0.2,
           role: 'salon-translate',
-        });
+        }, opts);
         out[i] = normalizeTranslation(r && r.text);
+        if (out[i] && /^\[mock\]/i.test(out[i])) out[i] = null;
       } catch { /* laisse null */ }
     }
     return out;

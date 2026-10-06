@@ -47,6 +47,7 @@
           if (added && draft) {
             added.works = draft.works || added.works; added.memory = draft.memory || added.memory; added.source = "gutenberg";
             added.nameEn = draft.nameEn || added.nameEn; added.eraEn = draft.era || added.eraEn;
+            added.blurbEn = draft.blurbEn || added.blurbEn; added.blurbFr = draft.blurbFr || added.blurbFr;
             var avatarInput = form.querySelector('[name="avatar"]');
             added.avatar = (avatarInput && avatarInput.value.trim()) || draft.avatar || added.avatar || "";
             added.monogram = (added.name || "?").slice(0, 1).toUpperCase(); draft = null;
@@ -188,6 +189,35 @@
     if (u.length >= 2) return u[0] + "-" + u[u.length - 1];
     if (u.length === 1) return String(u[0]);
     return "";
+  }
+  function trLangOf(s) {
+    var t = String(s || "");
+    var fr = (t.match(/[àâçéèêëîïôùûüÿœ]/gi) || []).length * 3 + (t.match(/\b(le|la|les|des|une?|est|nous|vous|dans|pour|qui|que|pas)\b/gi) || []).length;
+    var en = (t.match(/\b(the|of|and|to|in|that|is|it|with|for|as|not)\b/gi) || []).length;
+    return fr > en ? "fr" : "en";
+  }
+  function curLocale() {
+    try { var s = localStorage.getItem("salon-locale"); if (s === "en" || s === "fr") return s; } catch (e) {}
+    try { return (document.documentElement.getAttribute("lang") || "fr").slice(0, 2) === "en" ? "en" : "fr"; } catch (e) {}
+    return "fr";
+  }
+  function L(fr, en) { return curLocale() === "en" ? en : fr; }
+  /* Traduit côté serveur avant d'importer : la mémoire livrée est bilingue. */
+  function translateTexts(texts, to) {
+    if (!texts || !texts.length) return Promise.resolve(null);
+    return fetch(API + "/v1/salon/translate", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ to: to, texts: texts }),
+      signal: AbortSignal.timeout(60000),
+    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (j && j.ok && Array.isArray(j.translations) && j.translations.length === texts.length) return j.translations;
+      return null;
+    }).then(function (trs) {
+      if (!trs) return null;
+      // Un fournisseur dégradé (mock) ne doit jamais devenir une « traduction » livrée.
+      return trs.map(function (t) { return (t && !/^\[mock\]/i.test(String(t))) ? t : null; });
+    }).catch(function () { return null; });
   }
   function gutenbergText(id) {
     var direct = "https://www.gutenberg.org/cache/epub/" + id + "/pg" + id + ".txt";
@@ -395,14 +425,56 @@
         var read = memory.filter(function (m) { return m.sample; }).length;
         if (!read) { setErr("Aucun texte n'a pu être lu — vérifiez la connexion, ou ajoutez des fichiers .txt."); setSt(""); return; }
         var name = displayName(picked.name);
-        return wikiLookup(name).then(function (wiki) {
-          var voice = firstSentences(memory.map(function (m) { return m.sample; }).join(" "), 220);
-          var era = (wiki && wiki.extract && yearsFromText(wiki.extract)) || "domaine public";
-          var titles = memory.map(function (m) { return m.title; });
-          var blurb = wiki && wiki.extract ? wiki.extract.slice(0, 360) : (name + " (" + era + "). Voix constituée à partir de " + titles.slice(0, 3).join(", ") + ". " + voice).slice(0, 400);
-          draft = { name: name, nameEn: picked.name, handle: uniqueHandle(slugHandle(name)), era: era, blurb: blurb, avatar: (wiki && wiki.thumb) || "", works: titles, memory: memory };
-          proposeIntoForm(draft);
-          setSt(read + "/" + picks.length + " textes lus" + (fails ? " (" + fails + " non lus)" : "") + " — fiche proposée. Relisez nom, @, époque, résumé et visuel, puis publiez.");
+        // Traduire la mémoire avant de l'enregistrer : chaque langue affichable est fournie.
+        setSt("Traduction des textes…");
+        var frTxt = [], frIdx = [], enTxt = [], enIdx = [];
+        memory.forEach(function (m, i) {
+          if (!m.sample) return;
+          var src = trLangOf(m.sample);
+          if (src !== "fr") { frIdx.push(i); frTxt.push(m.sample); }
+          if (src !== "en") { enIdx.push(i); enTxt.push(m.sample); }
+        });
+        return Promise.all([translateTexts(frTxt, "fr"), translateTexts(enTxt, "en")]).then(function (res) {
+          var frTr = res[0], enTr = res[1];
+          if (frTr) frIdx.forEach(function (i, k) { if (frTr[k] && frTr[k] !== memory[i].sample) memory[i].sampleFr = frTr[k]; });
+          if (enTr) enIdx.forEach(function (i, k) { if (enTr[k] && enTr[k] !== memory[i].sample) memory[i].sampleEn = enTr[k]; });
+          var missed = memory.filter(function (m) { return m.sample && !m.sampleFr && !m.sampleEn && trLangOf(m.sample) === curLocale(); }).length;
+          return wikiLookup(name).then(function (wiki) {
+            var srcLang = wiki && wiki.lang ? String(wiki.lang).slice(0, 2) : null;
+            var extract = wiki && wiki.extract ? wiki.extract.slice(0, 360) : "";
+            var thumb = (wiki && wiki.thumb) || "";
+            var finish = function (blurbFr, blurbEn) {
+              var loc = curLocale();
+              var voice = firstSentences(memory.map(function (m) { return loc === "en" ? (m.sampleEn || m.sample) : (m.sampleFr || m.sample); }).join(" "), 220);
+              var era = (extract && yearsFromText(extract)) || L("domaine public", "public domain");
+              var titles = memory.map(function (m) { return m.title; });
+              var fallbackFr = (name + " (" + era + "). Voix constituée à partir de " + titles.slice(0, 3).join(", ") + ". " + voice).slice(0, 400);
+              var fallbackEn = (name + " (" + era + "). Voice built from " + titles.slice(0, 3).join(", ") + ". " + voice).slice(0, 400);
+              var bFr = blurbFr || fallbackFr;
+              var bEn = blurbEn || fallbackEn;
+              draft = {
+                name: name, nameEn: picked.name, handle: uniqueHandle(slugHandle(name)), era: era,
+                blurb: loc === "en" ? bEn : bFr, blurbFr: bFr, blurbEn: bEn,
+                avatar: thumb, works: titles, memory: memory,
+              };
+              proposeIntoForm(draft);
+              setSt(read + "/" + picks.length + " textes lus" + (fails ? " (" + fails + " non lus)" : "")
+                + (missed ? " · " + missed + " texte(s) sans traduction" : "")
+                + " — fiche proposée. Relisez nom, @, époque, résumé et visuel, puis publiez.");
+            };
+            if (!extract) { finish("", ""); return; }
+            if (srcLang === "fr") {
+              return translateTexts([extract], "en").then(function (trs) {
+                finish(extract, trs && trs[0] && trs[0] !== extract ? trs[0] : "");
+              });
+            }
+            if (srcLang === "en") {
+              return translateTexts([extract], "fr").then(function (trs) {
+                finish(trs && trs[0] && trs[0] !== extract ? trs[0] : "", extract);
+              });
+            }
+            finish(extract, "");
+          });
         });
       }).catch(function () { setErr("La proposition n'a pas pu être constituée."); setSt(""); });
     });

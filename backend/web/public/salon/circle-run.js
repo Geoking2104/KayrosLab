@@ -17,8 +17,8 @@
   function loadCorpus() {
     if (CORPUS_READY) return CORPUS_READY;
     CORPUS_READY = Promise.all([
-      fetch("/salon/corpus.json?v=20261005a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
-      fetch("/salon/doctrine.json?v=20261005a", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+      fetch("/salon/corpus.json?v=20261005c", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+      fetch("/salon/doctrine.json?v=20261005c", { cache: "force-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
     ]).then(function (a) { CORPUS = a[0] || {}; DOCTRINE = a[1] || {}; return CORPUS; });
     return CORPUS_READY;
   }
@@ -169,10 +169,13 @@
   }
   function fillProof(li, proof) { if (!li) return; var el = li.querySelector("p.proof"); if (!el) return; var t = String(proof || "").trim(); el.hidden = !t; el.textContent = t; }
   function proofFromAuthor(author) {
+    var fr = currentLang() === "fr";
     var titles = ((author && author.works) || []).slice(0, 2).join(", ");
     var mem = (author && author.memory) || [];
-    var quote = mem[0] ? String(mem[0].sample || mem[0].text || "").replace(/\s+/g, " ").trim().slice(0, 220) : "";
-    if (quote) return "\u00ab " + quote + " \u00bb" + (mem[0].title ? " \u2014 " + mem[0].title : titles ? " \u2014 " + titles : "");
+    var m0 = mem[0] || {};
+    var sample = fr ? (m0.sampleFr || m0.sample || m0.text || "") : (m0.sampleEn || m0.sample || m0.text || "");
+    var quote = String(sample || "").replace(/\s+/g, " ").trim().slice(0, 220);
+    if (quote) return "\u00ab " + quote + " \u00bb" + (m0.title ? " \u2014 " + m0.title : titles ? " \u2014 " + titles : "");
     var blurb = localizedBlurb(author).replace(/\s+/g, " ").trim().slice(0, 220);
     return blurb ? ("\u00ab " + blurb + " \u00bb" + (titles ? " \u2014 " + titles : "")) : titles;
   }

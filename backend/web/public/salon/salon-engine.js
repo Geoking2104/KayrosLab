@@ -286,6 +286,19 @@
   Object.keys(GLOSS_FR_EN).forEach(function (fr) { var t = terms(fr)[0]; if (t) GLOSS[t] = GLOSS_FR_EN[fr]; });
   function glossEn(raw) { return terms(raw).map(function (t) { return GLOSS[t] || ""; }).join(" "); }
 
+  /* Affichage bilingue (v2 langues) : une traduction « tr:{fr|en} » portée par
+   * l'entrée prime sur l'original pour la langue demandée ; sans traduction,
+   * l'original reste (jamais de mélange silencieux : la donnée est préparée). */
+  function displaySentence(p, lang) {
+    if (!p) return "";
+    if (lang === "fr" || lang === "en") {
+      var tr = p.tr || {};
+      var t = tr[lang];
+      if (t && typeof t === "string" && t.trim()) return t;
+    }
+    return p.s || p.sentence || p.text || "";
+  }
+
   function retrieve(passages, sc, k) {
     var qRank = [sc.raw, sc.label || "", sc.keysRaw || (sc.keys || []).join(" ")].join(" ");
     var qGate = [sc.raw, sc.label || "", sc.labelEn || ""].join(" ");
@@ -294,10 +307,11 @@
     var ranked = (passages || []).map(function (p, i) {
       var work = p.w || p.work || "";
       var text = p.t || p.text || p.s || "";
-      var sent = p.s || bestSentence(text);
-      var sGate = Math.max(relevance(qGate, (work || "") + " " + sent), qGateEn ? relevance(qGateEn, (work || "") + " " + sent) : 0);
+      var orig = p.s || bestSentence(text);
+      var shown = orig ? displaySentence({ s: orig, tr: p.tr }, sc.lang) : "";
+      var sGate = Math.max(relevance(qGate, (work || "") + " " + orig), qGateEn ? relevance(qGateEn, (work || "") + " " + orig) : 0);
       var sRank = relevance(qRank, work + " " + text);
-      return { work: work, text: text, sentence: sent, score: sGate * 2 + sRank, gate: sGate, i: i };
+      return { work: work, text: text, sentence: shown, original: orig, tr: p.tr || null, score: sGate * 2 + sRank, gate: sGate, i: i };
     });
     ranked.sort(function (a, b) { return (b.score - a.score) || (a.i - b.i); });
     ranked = ranked.slice(0, Math.max(1, k || 3));
@@ -382,13 +396,15 @@
     var text = en ? (t.en || "") : (t.fr || "");
     return text ? { text: text, anchors: t.anchors || [] } : null;
   }
-  function resolveAnchor(anchors, corpus) {
+  function resolveAnchor(anchors, corpus, lang) {
     for (var i = 0; i < (anchors || []).length; i++) {
       var a = anchors[i];
       for (var j = 0; j < (corpus || []).length; j++) {
         var p = corpus[j], s = p.s || p.sentence || "";
-        if ((p.w || p.work) === a.work && s.indexOf(a.startsWith) === 0)
-          return { work: a.work, sentence: s, text: s, weak: false, anchored: true };
+        if ((p.w || p.work) === a.work && s.indexOf(a.startsWith) === 0) {
+          var shown = displaySentence({ s: s, tr: p.tr }, lang);
+          return { work: a.work, sentence: shown, text: shown, weak: false, anchored: true };
+        }
       }
     }
     return null;
@@ -526,7 +542,8 @@
     var best = passages[0];
     if (!best || best.weak) {
       var dt = doctrineThesis(sc, author, (input.lang || sc.lang) === "en");
-      var anch = dt && resolveAnchor(dt.anchors, input.corpus || []);
+      var lang = (input.lang || sc.lang) === "en" ? "en" : "fr";
+    var anch = dt && resolveAnchor(dt.anchors, input.corpus || [], lang);
       if (anch) best = anch;
     }
     var last = (input.history && input.history.length) ? input.history[input.history.length - 1] : null;
@@ -627,7 +644,7 @@
     ].filter(Boolean).join("\n");
 
     var dtp = doctrineThesis(sc, author, en);
-    var dtpAnchor = dtp && resolveAnchor(dtp.anchors, (input.corpus && input.corpus.length ? input.corpus : input.passages) || []);
+    var dtpAnchor = dtp && resolveAnchor(dtp.anchors, (input.corpus && input.corpus.length ? input.corpus : input.passages) || [], en ? "en" : "fr");
     var positionLine = dtp ? ((en ? "Your position on " : "Ta position sur ") + (sc.label || sc.subject) + (en ? ": " : " : ") + dtp.text + (dtpAnchor ? (en ? " — anchored in \"" + dtpAnchor.work + "\": " + dtpAnchor.sentence : " — ancrée dans « " + dtpAnchor.work + " » : " + dtpAnchor.sentence) : "")) : "";
     // Lot 1 (v2) — sans passage retenu, l'ancre de doctrine résolue tient lieu
     // de passage : jamais « Aucun passage pertinent » à côté d'une position ancrée.
@@ -695,6 +712,7 @@
     planTurn: planTurn,
     lastGuest: lastGuest,
     persona: persona,
+    displaySentence: displaySentence,
     doctrineThesis: doctrineThesis,
     resolveAnchor: resolveAnchor,
     floorPrompt: floorPrompt,
