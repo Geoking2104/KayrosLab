@@ -27,6 +27,16 @@ describe('backend auth flow', () => {
     assert.equal(bad.statusCode, 401);
   });
 
+  it('advertises password recovery only when a mailer is configured', async () => {
+    const unavailable = await app.inject({ method: 'GET', url: '/v1/auth/sso' });
+    assert.equal(unavailable.statusCode, 200);
+    assert.equal(unavailable.json().password_reset_available, false);
+
+    ctx.passwordResetMailer = { send: async () => {} };
+    const available = await app.inject({ method: 'GET', url: '/v1/auth/sso' });
+    assert.equal(available.json().password_reset_available, true);
+  });
+
   it('verifies password recovery by email, consumes the link once and revokes prior sessions', async () => {
     await ctx.auth.register({ email: 'recover@test.local', password: 'ancien-secret-2026', name: 'Recover' });
     const previousSession = await bearer(ctx, 'recover@test.local', 'ancien-secret-2026');

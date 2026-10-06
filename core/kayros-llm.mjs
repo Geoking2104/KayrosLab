@@ -13,7 +13,20 @@ export class MockProvider {
   async complete(req) {
     const last = req.messages[req.messages.length - 1]?.content ?? '';
     const tokensIn = req.messages.reduce((n, m) => n + approxTokens(m.content), 0);
-    const text = `[${this.id}] (${req.role ?? 'agent'}) reponse simulee a: ${last.slice(0, 120)}`;
+    const decisionContract = req.messages.some((message) => message.role === 'system'
+      && /"verdict"\s*:\s*"GO \| NO_GO \| CONDITIONAL_GO"/.test(String(message.content || '')));
+    const text = decisionContract
+      ? JSON.stringify({
+        verdict: 'GO',
+        primary_reason: `Simulation structurée : ${req.role ?? 'agent'} a traité la mission sans signal bloquant dans les données fournies.`,
+        simulated_stakeholder_feedback: 'Simulation uniquement — ceci ne constitue ni une citation ni une décision humaine réelle.',
+        strengths_opportunities: ['Le contrat de sortie attendu par le harness est respecté.'],
+        critical_risks: [],
+        metrics: [],
+        required_mitigations: [],
+        unverified_assumptions: [],
+      })
+      : `[${this.id}] (${req.role ?? 'agent'}) reponse simulee a: ${last.slice(0, 120)}`;
     return { text, usage: { tokensIn, tokensOut: approxTokens(text), costUsd: 0 }, provider: this.id, latencyMs: 1 };
   }
 }

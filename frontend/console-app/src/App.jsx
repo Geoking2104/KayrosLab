@@ -8,6 +8,11 @@ const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Te
 const pages = [
   ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['settings', 'Réglages'],
 ];
+const pageIds = new Set(pages.map(([id]) => id));
+function pageFromHash(hash = location.hash) {
+  const requested = String(hash || '').replace(/^#/, '').split('?')[0] || 'overview';
+  return pageIds.has(requested) ? requested : 'overview';
+}
 const votingThresholds = [['majority', 'Majorité'], ['unanimous', 'Unanimité'], ['veto_power_csuite', 'Veto comité exécutif']];
 const votingLabel = (value) => votingThresholds.find(([id]) => id === value)?.[1] || 'Majorité';
 const connectorFields = {
@@ -143,7 +148,8 @@ function Login({ onLogin }) {
       {!resetting && <label>Adresse e-mail<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>}
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}
       {resetting && <label>Confirmer le mot de passe<input type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} minLength={10} required /></label>}
-      {mode === 'login' && <button type="button" className="auth-link forgot-link" onClick={() => { setMode('forgot'); setError(''); setState('idle'); }}>Mot de passe oublié&nbsp;?</button>}
+      {mode === 'login' && sso?.password_reset_available && <button type="button" className="auth-link forgot-link" onClick={() => { setMode('forgot'); setError(''); setState('idle'); }}>Mot de passe oublié&nbsp;?</button>}
+      {mode === 'login' && sso && !sso.password_reset_available && <p className="auth-help">Réinitialisation par e-mail indisponible : contactez votre administrateur.</p>}
       {state === 'sent' && <p className="auth-success" role="status">Si un compte correspond à cette adresse, un e-mail vient d’être envoyé. Vérifiez aussi vos courriers indésirables.</p>}
       {state === 'sent' && <button type="button" className="button secondary" onClick={() => setState('idle')}>Renvoyer le lien</button>}
       {state === 'reset' && <p className="auth-success" role="status">Votre mot de passe a été réinitialisé. Vous pouvez maintenant vous connecter.</p>}
@@ -180,7 +186,7 @@ function CreateSession({ agents, onClose, onCreated }) {
   const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority' });
   const [state, setState] = useState('idle'); const [error, setError] = useState('');
   function toggle(id) { setForm((current) => ({ ...current, active_agents: current.active_agents.includes(id) ? current.active_agents.filter((item) => item !== id) : [...current.active_agents, id] })); }
-  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createSession(form); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
+  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = await api.createSession(form); await onCreated(result.session); onClose(); } catch (err) { setState('error'); setError(err.message); } }
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
     <header><div><h2>Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
@@ -209,7 +215,7 @@ function RunDossier({ run }) {
   return <article className="dossier"><header><div><small>Dossier {run.run_id}</small><h3>{run.swarm_name}</h3></div><span className={`verdict is-${String(run.consensus?.verdict || '').toLowerCase()}`}>{verdictLabel(run.consensus?.verdict)}</span></header>
     <p className="synthesis">{run.consensus?.rationale}</p>
     <RunTrace run={run} />
-    <h4 className="section-kicker">Contributions individuelles</h4><div className="analysis-grid">{(run.analyses || []).map((analysis) => <section key={analysis.agent_id} className="analysis-card"><header><strong>{analysis.role_name || analysis.agent_id}</strong><span>{verdictLabel(analysis.verdict)}</span></header><p>{analysis.primary_reason}</p>
+    <h4 className="section-kicker">Contributions individuelles</h4><div className="analysis-grid">{(run.analyses || []).map((analysis) => <section key={analysis.agent_id} className="analysis-card"><header><strong>{analysis.role_name || analysis.agent_id}</strong><span>{verdictLabel(analysis.verdict)}</span></header><small>Provider : <strong>{analysis.provider || 'non renseigné'}</strong>{analysis.provider === 'mock' ? ' · simulation structurée, sans décision réelle' : ''}</small><p>{analysis.primary_reason}</p>
       {!!analysis.strengths_opportunities?.length && <div><small>Preuves et opportunités</small><ul>{analysis.strengths_opportunities.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {!!analysis.critical_risks?.length && <div><small>Objections</small><ul>{analysis.critical_risks.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {!!analysis.required_mitigations?.length && <div><small>Conditions</small><ul>{analysis.required_mitigations.map((item) => <li key={item}>{item}</li>)}</ul></div>}
@@ -219,7 +225,7 @@ function RunDossier({ run }) {
   </article>;
 }
 
-function DecisionThread({ thread, onChanged }) {
+function DecisionThread({ thread, onChanged, canArbitrate }) {
   const [reply, setReply] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   async function answer(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = await api.replyThread(thread.thread_id, reply); setReply(''); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
   async function arbitrate(action, decision) { setState('loading'); setError(''); try { const result = await api.arbitrateThread(thread.thread_id, { action, decision, justification: action === 'override_veto' ? 'Arbitrage explicite depuis la console.' : '' }); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
@@ -228,16 +234,12 @@ function DecisionThread({ thread, onChanged }) {
       {message.kind === 'run' ? <RunDossier run={message.run} /> : <><small>{message.role === 'human' ? message.author_id || 'Décideur' : 'Collectif Kayros'} · {message.kind}</small>{message.text && <p>{message.text}</p>}{message.questions?.length > 0 && <ol>{message.questions.map((question) => <li key={question}>{question}</li>)}</ol>}{message.decision && <p>Arbitrage : {message.decision.action} · {verdictLabel(message.decision.verdict)}</p>}</>}
     </div>)}</div>
     {thread.status !== 'resolved' && <><form className="thread-reply" onSubmit={answer}><label>Réponse humaine et paramètres complémentaires<textarea value={reply} onChange={(event) => setReply(event.target.value)} placeholder="Budget validé à 120 k€, responsable : …, preuve disponible : …" /></label><button className="button primary" disabled={!reply.trim() || state === 'loading'}>{state === 'loading' ? 'Relance…' : 'Répondre et relancer le même collectif'}</button></form>
-      <div className="arbitration"><div><strong>Arbitrage humain</strong><small>Le verdict reste consultatif jusqu’à cette étape.</small></div><button className="button secondary" onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div></>}
+      {canArbitrate ? <div className="arbitration"><div><strong>Arbitrage humain</strong><small>Le verdict reste consultatif jusqu’à cette étape.</small></div><button className="button secondary" onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div> : <div className="security-warning"><strong>Arbitrage réservé aux rôles COMEX et admin.</strong><p>Vous pouvez compléter le dossier et relancer le collectif, mais la décision finale doit être validée par un responsable autorisé.</p></div>}</>}
     {error && <p className="inline-error" role="alert">{error}</p>}
   </section>;
 }
 
-function Overview({ data, refresh, openSession, onThread }) {
-  const [selectedSession, setSelectedSession] = useState(() => data.sessions[0]?.session_id || null);
-  useEffect(() => {
-    setSelectedSession((current) => (current && data.sessions.some((session) => session.session_id === current) ? current : (data.sessions[0]?.session_id || '')));
-  }, [data.sessions]);
+function Overview({ data, refresh, openSession, onThread, selectedSession, setSelectedSession }) {
   const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
@@ -284,6 +286,7 @@ function Overview({ data, refresh, openSession, onThread }) {
     } catch (err) { setState('error'); setError(err.message); }
   }
   return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console harness</h1><p>Composez un collectif, lancez une mission gouvernée, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
+    <p className="muted so-note">Visibilité : <strong>{data.policy?.session_visibility === 'owner' ? 'vos sessions uniquement' : 'sessions du tenant'}</strong> · Arbitrage : <strong>{(data.policy?.arbitration_roles || ['comex', 'admin']).join(' / ')}</strong> · Provider par défaut : <strong>{data.policy?.default_provider || 'mock'}</strong>{data.policy?.mock_mode ? ' (simulation structurée)' : ''}</p>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
     <section className="metric-row"><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.sessions}</strong><span>Sessions</span></div><div><strong>{data.summary.executions}</strong><span>Exécutions</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
     <p className="muted so-note">Personas simulées : <strong>{data.summary.impersonators ?? 0}</strong> · Profils hybrides : <strong>{data.summary.hybrid_agents ?? 0}</strong> · Persona = agent impersonator (portrait + garde-fous).</p>
@@ -569,7 +572,7 @@ function HybridAgentDialog({ onClose, onCreated }) {
   </section></div>;
 }
 
-function AgentsPage({ data, refresh }) {
+function AgentsPage({ data, refresh, canManage }) {
   const [editing, setEditing] = useState(undefined);
   const [hybrid, setHybrid] = useState(false);
   const [impersonator, setImpersonator] = useState(false);
@@ -583,46 +586,48 @@ function AgentsPage({ data, refresh }) {
     if (filter === 'business') return !agent.human_profile;
     return true;
   });
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables{canManage ? ' et modifiables' : ''}.</p></div><div className="header-actions"><button className="button secondary" disabled={!canManage} onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" disabled={!canManage} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!canManage} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!canManage} onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
+    {!canManage && <div className="security-warning"><strong>Registre en lecture seule.</strong><p>La configuration des agents, profils et impersonators requiert un rôle COMEX ou admin.</p></div>}
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="inline-checks so-filters">{kinds.map(([id, label]) => <button type="button" key={id} className={`text-button ${filter === id ? 'is-active' : ''}`} onClick={() => setFilter(id)}>{label} ({id === 'all' ? data.agents.length : data.agents.filter((a) => (id === 'impersonator' ? !!a.metadata?.impersonator : id === 'hybrid' ? (!!a.human_profile && !a.metadata?.impersonator) : !a.human_profile)).length})</button>)}</div>
-    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
-    {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
-    {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
-    {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
-    {team && <ImpersonatorTeamDialog onClose={() => setTeam(false)} onCreated={async () => { await refresh(); }} />}
+    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} disabled={!canManage} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" disabled={!canManage} onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
+    {canManage && editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
+    {canManage && hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
+    {canManage && impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
+    {canManage && team && <ImpersonatorTeamDialog onClose={() => setTeam(false)} onCreated={async () => { await refresh(); }} />}
   </section>;
 }
 
-function ConnectorCard({ connector, secure, refresh }) {
+function ConnectorCard({ connector, secure, refresh, canManage }) {
   const [secrets, setSecrets] = useState({}); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   async function save(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.configureConnector(connector.platform, { secrets, enabled: true, settings: {} }); setSecrets({}); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); } }
   async function test() { setState('loading'); setError(''); try { await api.testConnector(connector.platform); setState('success'); await refresh(); } catch (err) { setState('error'); setError(err.message); await refresh(); } }
   async function toggle() { try { await api.setConnectorEnabled(connector.platform, !connector.enabled); await refresh(); } catch (err) { setError(err.message); } }
   async function connect() { setState('loading'); setError(''); try { const result = await api.connectConnector(connector.platform); location.assign(result.url); } catch (err) { setState('error'); setError(err.message); } }
   const connected = connector.status === 'connected';
-  return <article className="connector-card"><header><div><span className={`status-dot ${connected ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
-    {connector.one_click && !connected && <button className="button primary" onClick={connect} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : connectLabel[connector.platform]}</button>}
+  return <article className="connector-card"><header><div><span className={`status-dot ${connected ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!canManage || !connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
+    {connector.one_click && !connected && <button className="button primary" onClick={connect} disabled={!canManage || state === 'loading'}>{state === 'loading' ? 'Redirection…' : connectLabel[connector.platform]}</button>}
     {!connector.one_click && !connected && <p className="muted so-note">Connexion simplifiée indisponible : les identifiants d’application du fournisseur doivent être configurés côté serveur. En attendant, utilisez la configuration avancée ci-dessous.</p>}
-    {connected && <div className="connector-actions"><button type="button" className="button secondary" disabled={state === 'loading'} onClick={test}>Tester</button>{connector.webhook_url && <span className="muted so-note">Webhook : <code>{connector.webhook_url}</code></span>}</div>}
+    {connected && <div className="connector-actions"><button type="button" className="button secondary" disabled={!canManage || state === 'loading'} onClick={test}>Tester</button>{connector.webhook_url && <span className="muted so-note">Webhook : <code>{connector.webhook_url}</code></span>}</div>}
     <details className="connector-advanced"><summary>Configuration avancée (jetons)</summary>
-      <form onSubmit={save}>{connectorFields[connector.platform].map(([id, label, secret]) => <label key={id}>{label}<input type={secret ? 'password' : 'text'} value={secrets[id] || ''} onChange={(event) => setSecrets({ ...secrets, [id]: event.target.value })} placeholder={connector.configured_secret_fields.includes(id) ? 'Déjà configuré — laisser vide pour conserver' : ''} /></label>)}
-        <div className="connector-actions"><button className="button secondary" disabled={!secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button></div></form>
+      <form onSubmit={save}>{connectorFields[connector.platform].map(([id, label, secret]) => <label key={id}>{label}<input disabled={!canManage} type={secret ? 'password' : 'text'} value={secrets[id] || ''} onChange={(event) => setSecrets({ ...secrets, [id]: event.target.value })} placeholder={connector.configured_secret_fields.includes(id) ? 'Déjà configuré — laisser vide pour conserver' : ''} /></label>)}
+        <div className="connector-actions"><button className="button secondary" disabled={!canManage || !secure || state === 'loading'}>{connector.connection_id ? 'Mettre à jour' : 'Enregistrer'}</button></div></form>
       {connector.webhook_url && <label>URL à déclarer chez le fournisseur<input readOnly value={connector.webhook_url} onFocus={(event) => event.target.select()} /></label>}
     </details>
     <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>{connector.last_tested_at && <small>Dernier test : {new Date(connector.last_tested_at).toLocaleString('fr-FR')}</small>}
   </article>;
 }
 
-function SettingsPage({ data, refresh }) {
+function SettingsPage({ data, refresh, canManage }) {
   const params = new URLSearchParams(String(location.hash).split('?')[1] || '');
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
   return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p></div></header>
     {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
     {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
+    {!canManage && <div className="security-warning"><strong>Réglages en lecture seule.</strong><p>La configuration et le test des connecteurs requièrent un rôle COMEX ou admin.</p></div>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
-    <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
+    <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} canManage={canManage} />)}</div>
     <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent hybride, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }
@@ -639,8 +644,8 @@ function SessionsPage({ data, onCreate, onThread }) {
   </section>;
 }
 
-function DecisionsPage({ data, selected, onSelect, onChanged }) {
-  if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} /></section>;
+function DecisionsPage({ data, selected, onSelect, onChanged, canArbitrate }) {
+  if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} canArbitrate={canArbitrate} /></section>;
   return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{thread.status.replaceAll('_', ' ')}</span></button>)}</div></section>;
 }
 
@@ -709,10 +714,14 @@ function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases,
 }
 
 function Console() {
-  const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
+  const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => pageFromHash());
   const [creatingSession, setCreatingSession] = useState(false); const [selectedThread, setSelectedThread] = useState(null);
+  const [selectedSession, setSelectedSession] = useState('');
   async function refresh() { try { setData(await api.overview()); setError(''); } catch (err) { setError(err.message); if (err.status === 401) { setToken(''); location.reload(); } } }
-  useEffect(() => { refresh(); const change = () => setPage(location.hash.slice(1) || 'overview'); addEventListener('hashchange', change); const timer = setInterval(refresh, 20000); return () => { removeEventListener('hashchange', change); clearInterval(timer); }; }, []);
+  useEffect(() => { refresh(); const change = () => { const next = pageFromHash(); setPage(next); if (next !== 'activity') setSelectedThread(null); }; addEventListener('hashchange', change); const timer = setInterval(refresh, 20000); return () => { removeEventListener('hashchange', change); clearInterval(timer); }; }, []);
+  useEffect(() => {
+    setSelectedSession((current) => (current && data?.sessions?.some((session) => session.session_id === current) ? current : (data?.sessions?.[0]?.session_id || '')));
+  }, [data?.sessions]);
   async function openThread(thread) {
     if (!thread) { setSelectedThread(null); return; }
     const result = thread.messages ? { thread } : await api.thread(thread.thread_id);
@@ -721,8 +730,8 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
-    {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} selectedSession={selectedSession} setSelectedSession={setSelectedSession} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} canManage={data.permissions?.manage_agents} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} canArbitrate={data.permissions?.arbitrate} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} canManage={data.permissions?.manage_connectors} />}</main>
+    {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={async (session) => { setSelectedSession(session.session_id); await refresh(); location.hash = 'overview'; }} />}
   </div>;
 }
 

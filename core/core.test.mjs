@@ -102,6 +102,21 @@ test('KayrosLLM : mock renvoie une réponse + fallback sur échec du primaire', 
   assert.equal(r2.provider, 'mock');
 });
 
+test('MockProvider respecte le contrat JSON des agents de décision', async () => {
+  const provider = new MockProvider();
+  const result = await provider.complete({
+    role: 'CFO',
+    messages: [
+      { role: 'system', content: 'Return one JSON object only: {\n  "verdict": "GO | NO_GO | CONDITIONAL_GO"\n}' },
+      { role: 'user', content: 'Évaluer cette décision.' },
+    ],
+  });
+  const parsed = JSON.parse(result.text);
+  assert.equal(parsed.verdict, 'GO');
+  assert.deepEqual(parsed.unverified_assumptions, []);
+  assert.equal(result.provider, 'mock');
+});
+
 test('RoutingPolicy : souveraineté local force ollama', () => {
   const p = new RoutingPolicy({ defaultProvider: 'anthropic' });
   assert.equal(p.choose({}, { sovereignty: 'local' }), 'ollama');

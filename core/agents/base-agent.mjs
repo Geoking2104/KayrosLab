@@ -55,6 +55,7 @@ export class BaseAgent {
 
     let text;
     let degraded = null;
+    let providerUsed = 'local-fallback';
     if (this.llm) {
       const res = await this.llm.complete(
         {
@@ -65,6 +66,7 @@ export class BaseAgent {
       );
       text = res.text;
       degraded = res.degraded || null;
+      providerUsed = res.provider || provider || 'unknown';
     } else {
       text = `[${this.name}] Analysis for: ${task.substring(0, 100)}`;
     }
@@ -73,6 +75,7 @@ export class BaseAgent {
       agent: this.name,
       output: text,
       model: this._resolveModel(model) || null,
+      provider: providerUsed,
       degraded,
     };
   }

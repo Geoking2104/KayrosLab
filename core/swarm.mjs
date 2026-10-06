@@ -363,6 +363,8 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
     agent_type: definition.agent_type || raw?.agent_type || null,
     seniority: definition.seniority || raw?.seniority || null,
     veto_power: !!definition.veto_power,
+    provider: raw?.provider || value.provider || null,
+    degraded: raw?.degraded || value.degraded || null,
     verdict,
     primary_reason: String(value.primary_reason || value.reason || '').trim() || 'No primary reason supplied.',
     personality_simulation_enabled: !!profile,

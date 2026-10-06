@@ -104,7 +104,10 @@ export default async function authRoutes(app) {
     }
   });
 
-  app.get('/v1/auth/sso', async () => publicSsoConfig(app.kayrosContext.oidc));
+  app.get('/v1/auth/sso', async () => ({
+    ...publicSsoConfig(app.kayrosContext.oidc),
+    password_reset_available: Boolean(app.kayrosContext.passwordResetMailer),
+  }));
 
   app.post('/v1/auth/sso/start', {
     config: { rateLimit: { max: 20, timeWindow: '1 minute' } },

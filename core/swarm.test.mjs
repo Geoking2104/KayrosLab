@@ -84,6 +84,17 @@ test('unparseable output is downgraded to CONDITIONAL_GO', () => {
   assert.match(normalized.unverified_assumptions[0], /parsable formal verdict/);
 });
 
+test('normalized analysis exposes the effective provider and degradation', () => {
+  const normalized = normalizeAgentAnalysis({
+    output: '{"verdict":"GO","primary_reason":"Structured."}',
+    provider: 'mock',
+    degraded: { reason: 'provider_fallback', from: 'mistral', to: 'mock' },
+  }, { agent_id: 'cfo' });
+  assert.equal(normalized.provider, 'mock');
+  assert.equal(normalized.degraded.reason, 'provider_fallback');
+  assert.equal(normalized.verdict, 'GO');
+});
+
 test('built-in agent becomes a personality-enriched hybrid with consent', async () => {
   const service = new SwarmService();
   const assigned = service.assignPersonality('cfo', {
