@@ -56,16 +56,19 @@ test('secure customer workspace is available without dominating the public expla
   assert.match(template, /data-sales-oracle-tool/);
 });
 
-test('generated static pages keep the narrative and leave the Sales Oracle to the console', () => {
+test('generated static pages keep the sales narrative and leave the Sales Oracle tool to the console', () => {
   for (const file of ['index.html', 'index.fr.html']) {
     const html = read(file);
-    assert.match(html, /id="timesfm"/);
+    assert.match(html, /id="oracle"/);
+    assert.match(html, /id="builders"/); // technical deep-dive moved off the main pitch
     assert.match(html, /class="lang-opt"/);   // EN/FR language selector
+    assert.match(html, /marketing\.css/);
     assert.doesNotMatch(html, /id="secure-workspace"/);
     assert.doesNotMatch(html, /data-sales-oracle-tool/);
     assert.doesNotMatch(html, /sales-oracle-tool\.js/);
     assert.doesNotMatch(html, /sales_oracle_[a-z_]+/);
     assert.doesNotMatch(html, /studio_[a-z_]+/);
+    assert.doesNotMatch(html, /Fastify|createEngine|pm2|Redis/);
   }
 });
 
