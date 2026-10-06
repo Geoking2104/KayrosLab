@@ -16,6 +16,13 @@ const connectorFields = {
   teams: [['app_id', 'Microsoft App ID', false], ['bot_password', 'Secret client', true], ['webhook_url', 'Webhook entrant (facultatif)', true]],
 };
 const connectLabel = { slack: 'Connecter Slack', discord: 'Ajouter le bot Discord', teams: 'Autoriser Microsoft Teams' };
+// Politique de rôles (EF-26) : le serveur réserve l'arbitrage et la création ou
+// modification d'agents (hybrides, impersonators, équipes) à comex/admin. L'UI
+// l'annonce avant toute saisie au lieu de laisser arriver un 403 après le formulaire.
+const MANAGER_ROLES = ['comex', 'admin'];
+const MANAGER_ONLY = 'Réservé aux rôles comex ou admin';
+function canManage(user) { return MANAGER_ROLES.includes(user?.role); }
+function hasConsentedProfile(agent) { return agent?.human_profile?.consent_confirmed === true; }
 
 function splitLines(value) { return String(value || '').split(/\r?\n/).map((item) => item.trim()).filter(Boolean); }
 function splitCsv(value) { return String(value || '').split(',').map((item) => item.trim()).filter(Boolean); }
@@ -178,14 +185,18 @@ function AgentChips({ agents }) {
 function CreateSession({ agents, onClose, onCreated }) {
   const active = agents.filter((agent) => agent.enabled !== false);
   const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority' });
+  // null = règle serveur : activée dès qu'un agent du collectif porte un profil humain consenti (EF-27/28).
+  const [personality, setPersonality] = useState(null);
   const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const autoPersonality = active.some((agent) => form.active_agents.includes(agent.agent_id) && hasConsentedProfile(agent));
   function toggle(id) { setForm((current) => ({ ...current, active_agents: current.active_agents.includes(id) ? current.active_agents.filter((item) => item !== id) : [...current.active_agents, id] })); }
-  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createSession(form); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
+  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createSession(personality === null ? form : { ...form, personality_simulation_enabled: personality }); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
     <header><div><h2>Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
       <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} /><span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
       <label>Seuil de consensus<select value={form.voting_threshold} onChange={(event) => setForm({ ...form, voting_threshold: event.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
+      <label className="consent"><input type="checkbox" checked={personality ?? autoPersonality} onChange={(event) => setPersonality(event.target.checked)} />Simulation de personnalité : les agents dotés d’un profil humain consenti répondent selon ce profil (réactions simulées, jamais des citations réelles).</label>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Ouverture…' : 'Ouvrir la session'}</button></footer>
     </form>
   </section></div>;
@@ -208,8 +219,9 @@ function RunDossier({ run }) {
   const conditions = [...new Set((run.analyses || []).flatMap((item) => item.required_mitigations || []))];
   return <article className="dossier"><header><div><small>Dossier {run.run_id}</small><h3>{run.swarm_name}</h3></div><span className={`verdict is-${String(run.consensus?.verdict || '').toLowerCase()}`}>{verdictLabel(run.consensus?.verdict)}</span></header>
     <p className="synthesis">{run.consensus?.rationale}</p>
+    {run.llm?.mock && <p className="inline-error" role="status">Réponses simulées (provider mock) pour : {run.llm.mock_agents.join(', ')}. Le LLM du serveur n’a pas répondu ; ce dossier ne reflète pas une analyse réelle.</p>}
     <RunTrace run={run} />
-    <h4 className="section-kicker">Contributions individuelles</h4><div className="analysis-grid">{(run.analyses || []).map((analysis) => <section key={analysis.agent_id} className="analysis-card"><header><strong>{analysis.role_name || analysis.agent_id}</strong><span>{verdictLabel(analysis.verdict)}</span></header><p>{analysis.primary_reason}</p>
+    <h4 className="section-kicker">Contributions individuelles</h4><div className="analysis-grid">{(run.analyses || []).map((analysis) => <section key={analysis.agent_id} className="analysis-card"><header><strong>{analysis.role_name || analysis.agent_id}</strong><span>{verdictLabel(analysis.verdict)}</span></header>{analysis.llm_provider && <small title="Provider LLM effectif">{analysis.llm_provider === 'mock' ? 'réponse simulée (mock)' : `LLM : ${analysis.llm_provider}`}</small>}<p>{analysis.primary_reason}</p>
       {!!analysis.strengths_opportunities?.length && <div><small>Preuves et opportunités</small><ul>{analysis.strengths_opportunities.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {!!analysis.critical_risks?.length && <div><small>Objections</small><ul>{analysis.critical_risks.map((item) => <li key={item}>{item}</li>)}</ul></div>}
       {!!analysis.required_mitigations?.length && <div><small>Conditions</small><ul>{analysis.required_mitigations.map((item) => <li key={item}>{item}</li>)}</ul></div>}
@@ -219,7 +231,7 @@ function RunDossier({ run }) {
   </article>;
 }
 
-function DecisionThread({ thread, onChanged }) {
+function DecisionThread({ thread, onChanged, canArbitrate = true }) {
   const [reply, setReply] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   async function answer(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = await api.replyThread(thread.thread_id, reply); setReply(''); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
   async function arbitrate(action, decision) { setState('loading'); setError(''); try { const result = await api.arbitrateThread(thread.thread_id, { action, decision, justification: action === 'override_veto' ? 'Arbitrage explicite depuis la console.' : '' }); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
@@ -228,7 +240,7 @@ function DecisionThread({ thread, onChanged }) {
       {message.kind === 'run' ? <RunDossier run={message.run} /> : <><small>{message.role === 'human' ? message.author_id || 'Décideur' : 'Collectif Kayros'} · {message.kind}</small>{message.text && <p>{message.text}</p>}{message.questions?.length > 0 && <ol>{message.questions.map((question) => <li key={question}>{question}</li>)}</ol>}{message.decision && <p>Arbitrage : {message.decision.action} · {verdictLabel(message.decision.verdict)}</p>}</>}
     </div>)}</div>
     {thread.status !== 'resolved' && <><form className="thread-reply" onSubmit={answer}><label>Réponse humaine et paramètres complémentaires<textarea value={reply} onChange={(event) => setReply(event.target.value)} placeholder="Budget validé à 120 k€, responsable : …, preuve disponible : …" /></label><button className="button primary" disabled={!reply.trim() || state === 'loading'}>{state === 'loading' ? 'Relance…' : 'Répondre et relancer le même collectif'}</button></form>
-      <div className="arbitration"><div><strong>Arbitrage humain</strong><small>Le verdict reste consultatif jusqu’à cette étape.</small></div><button className="button secondary" onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div></>}
+      <div className="arbitration"><div><strong>Arbitrage humain</strong><small>{canArbitrate ? 'Le verdict reste consultatif jusqu’à cette étape.' : `${MANAGER_ONLY} : le verdict reste consultatif jusqu’à leur arbitrage.`}</small></div><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div></>}
     {error && <p className="inline-error" role="alert">{error}</p>}
   </section>;
 }
@@ -286,7 +298,7 @@ function Overview({ data, refresh, openSession, onThread }) {
   return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console harness</h1><p>Composez un collectif, lancez une mission gouvernée, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
     <section className="metric-row"><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.sessions}</strong><span>Sessions</span></div><div><strong>{data.summary.executions}</strong><span>Exécutions</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
-    <p className="muted so-note">Personas simulées : <strong>{data.summary.impersonators ?? 0}</strong> · Profils hybrides : <strong>{data.summary.hybrid_agents ?? 0}</strong> · Persona = agent impersonator (portrait + garde-fous).</p>
+    <p className="muted so-note">Personas simulées : <strong>{data.summary.impersonators ?? 0}</strong> · Profils hybrides (profil humain consenti, personas incluses) : <strong>{data.summary.hybrid_agents ?? 0}</strong> · Persona = agent impersonator (portrait + garde-fous).</p>
     <div className="mission-workbench"><section><header><div><h2>Mission gouvernée</h2><p>Instruction → une étape par agent → consensus → dossier durable → arbitrage.</p></div></header>
       <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
       {session && <AgentChips agents={session.collective.agents} />}
@@ -442,7 +454,7 @@ function ImpersonatorDialog({ onClose, onCreated }) {
 }
 function agentForm(agent) { return agent ? { ...agent, constraints: (agent.constraints || []).join('\n'), tools: (agent.tools || []).join(', '), connectors: agent.connectors || ['console'], rules: (agent.rule_configuration?.user_added_rules || []).map((rule) => rule.rule_text).join('\n'), metadata: JSON.stringify(agent.metadata || {}, null, 2), behavioral: JSON.stringify(agent.behavioral_profile || {}, null, 2) } : emptyAgent; }
 
-function AgentEditor({ agent, capabilities, onSaved, onClose }) {
+function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) {
   const editing = !!agent; const [form, setForm] = useState(() => agentForm(agent)); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   function toggleConnector(id) { setForm((current) => ({ ...current, connectors: current.connectors.includes(id) ? current.connectors.filter((item) => item !== id) : [...current.connectors, id] })); }
   function payload() {
@@ -462,11 +474,11 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
       <fieldset><legend>Canaux autorisés</legend><div className="inline-checks">{Object.keys(platformNames).map((id) => <label key={id}><input type="checkbox" checked={form.connectors.includes(id)} onChange={() => toggleConnector(id)} />{platformNames[id]}</label>)}</div></fieldset>
       <div className="form-grid"><label>Métadonnées JSON<textarea className="code-input" value={form.metadata} onChange={(event) => setForm({ ...form, metadata: event.target.value })} /></label><label>Profil comportemental JSON<textarea className="code-input" value={form.behavioral} onChange={(event) => setForm({ ...form, behavioral: event.target.value })} /></label></div>
       <div className="inline-checks"><label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label><label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
-      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={state === 'loading'}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
+      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || (canEdit ? '\u00a0' : `${MANAGER_ONLY} : consultation seule.`)}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={!canEdit || state === 'loading'} title={canEdit ? undefined : MANAGER_ONLY}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
     </form>
     {editing && <section className="crystal-box"><header><div><h3>Agent hybride</h3><p>{profile ? 'Profil humain consenti attaché à cet agent.' : 'Aucun profil humain pour l’instant.'}</p></div><span>{profile ? 'Hybride' : 'Agent métier'}</span></header>
       {profile && <dl className="profile-summary"><div><dt>Nom</dt><dd>{profile.assigned_name || '—'}</dd></div><div><dt>DISC</dt><dd>{profile.disc_type || '—'}</dd></div><div><dt>Ton</dt><dd>{profile.communication_style?.tone || '—'}</dd></div><div><dt>Sources</dt><dd>{(profile.profile_sources || []).map((item) => item.source).join(', ') || '—'}</dd></div></dl>}
-      <HumanProfilePanel disabled={state === 'loading'} onImported={importProfile} />
+      {canEdit ? <HumanProfilePanel disabled={state === 'loading'} onImported={importProfile} /> : <p className="muted so-note">{MANAGER_ONLY} : import de profil humain indisponible.</p>}
     </section>}
   </section></div>;
 }
@@ -474,7 +486,7 @@ function AgentEditor({ agent, capabilities, onSaved, onClose }) {
 /** Équipe d'impersonators : plusieurs personas simulées réunies dans une session pour éprouver une idée. */
 function ImpersonatorTeamDialog({ onClose, onCreated }) {
   const blank = { name: '', role: '', company: '', source: 'linkedin', linkedin_url: '', email: '', clues: '', portrait_url: '' };
-  const [form, setForm] = useState({ name: '', purpose: 'idea_test', voting_threshold: 'majority', veto_power: true });
+  const [form, setForm] = useState({ name: '', purpose: 'idea_test', voting_threshold: 'majority', veto_power: true, personality_simulation_enabled: true });
   const [members, setMembers] = useState([{ ...blank }, { ...blank }, { ...blank }]);
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState('idle'); const [error, setError] = useState(''); const [result, setResult] = useState(null);
@@ -498,7 +510,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
     try {
       const body = {
         name: form.name.trim(), purpose: form.purpose, voting_threshold: form.voting_threshold,
-        veto_power: form.veto_power, consent_confirmed: true, members: filled.map(payloadMember),
+        veto_power: form.veto_power, personality_simulation_enabled: form.personality_simulation_enabled, consent_confirmed: true, members: filled.map(payloadMember),
       };
       const response = await api.createImpersonatorTeam(body);
       setResult(response); setState('success'); await onCreated(response);
@@ -509,6 +521,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
     {!result ? <form onSubmit={submit}>
       <div className="form-grid"><label>Nom de l'équipe<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ex. Panel achats 2026" required /></label><label>Objectif<select value={form.purpose} onChange={(e) => setForm({ ...form, purpose: e.target.value })}><option value="idea_test">Éprouver une idée</option><option value="objection_rehearsal">Répétition des objections</option><option value="pitch_review">Revue de pitch</option></select></label></div>
       <div className="form-grid"><label>Seuil de consensus<select value={form.voting_threshold} onChange={(e) => setForm({ ...form, voting_threshold: e.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Chaque persona a un pouvoir de veto</label></div>
+      <label className="consent"><input type="checkbox" checked={form.personality_simulation_enabled} onChange={(e) => setForm({ ...form, personality_simulation_enabled: e.target.checked })} />Simulation de personnalité active dans la session (réactions simulées selon chaque profil)</label>
       <fieldset><legend>Personas simulées ({members.length}/12 · minimum 2)</legend><div className="so-manager">
         {members.map((member, index) => <section key={index} className="analysis-card">
           <div className="form-grid three"><label>Personne<input value={member.name} onChange={(e) => updateMember(index, { name: e.target.value })} placeholder="Nom" /></label><label>Fonction<input value={member.role} onChange={(e) => updateMember(index, { role: e.target.value })} /></label><label>Organisation<input value={member.company} onChange={(e) => updateMember(index, { company: e.target.value })} /></label></div>
@@ -570,6 +583,8 @@ function HybridAgentDialog({ onClose, onCreated }) {
 }
 
 function AgentsPage({ data, refresh }) {
+  const manager = canManage(data.user);
+  const locked = manager ? undefined : MANAGER_ONLY;
   const [editing, setEditing] = useState(undefined);
   const [hybrid, setHybrid] = useState(false);
   const [impersonator, setImpersonator] = useState(false);
@@ -583,11 +598,12 @@ function AgentsPage({ data, refresh }) {
     if (filter === 'business') return !agent.human_profile;
     return true;
   });
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" disabled={!manager} title={locked} onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" disabled={!manager} title={locked} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
+    {!manager && <p className="muted so-note" role="note">Création et modification d’agents (agent hybride, agent impersonator, équipe d’impersonators) : {MANAGER_ONLY.toLowerCase()}. Votre rôle : {data.user?.role || 'contributeur'}. Vous pouvez consulter le registre et composer vos sessions avec ces agents.</p>}
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="inline-checks so-filters">{kinds.map(([id, label]) => <button type="button" key={id} className={`text-button ${filter === id ? 'is-active' : ''}`} onClick={() => setFilter(id)}>{label} ({id === 'all' ? data.agents.length : data.agents.filter((a) => (id === 'impersonator' ? !!a.metadata?.impersonator : id === 'hybrid' ? (!!a.human_profile && !a.metadata?.impersonator) : !a.human_profile)).length})</button>)}</div>
-    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>Configurer</button></footer></article>)}</div>
-    {editing !== undefined && <AgentEditor agent={editing} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
+    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} disabled={!manager} title={locked} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>{manager ? 'Configurer' : 'Consulter'}</button></footer></article>)}</div>
+    {editing !== undefined && <AgentEditor agent={editing} canEdit={manager} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
     {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
     {team && <ImpersonatorTeamDialog onClose={() => setTeam(false)} onCreated={async () => { await refresh(); }} />}
@@ -640,7 +656,7 @@ function SessionsPage({ data, onCreate, onThread }) {
 }
 
 function DecisionsPage({ data, selected, onSelect, onChanged }) {
-  if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} /></section>;
+  if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} canArbitrate={canManage(data.user)} /></section>;
   return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{thread.status.replaceAll('_', ' ')}</span></button>)}</div></section>;
 }
 
