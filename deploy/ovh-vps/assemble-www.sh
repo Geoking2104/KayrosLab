@@ -70,10 +70,11 @@ else
 fi
 
 if [[ -f "${APP_DIR}/backend/web/public/console/index.html" ]]; then
-  mkdir -p "${stage}/console"
+  mkdir -p "${stage}/console" "${stage}/workbench"
   cp -a "${APP_DIR}/backend/web/public/console/." "${stage}/console/"
+  cp -a "${APP_DIR}/backend/web/public/console/." "${stage}/workbench/"
 else
-  echo "AVERTISSEMENT : console statique absente — /console/ 404." >&2
+  echo "AVERTISSEMENT : console statique absente — /console/ et /workbench/ 404." >&2
 fi
 
 mkdir -p "${stage}/salon"

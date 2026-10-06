@@ -53,6 +53,16 @@ test('the published demo inline JavaScript is syntactically valid', async () => 
   }
 });
 
+test('the public demo replaces native alerts and can recover a semantic map locally', async () => {
+  const { html, scripts } = await loadDemo();
+  const source = scripts.join('\n');
+  assert.doesNotMatch(source, /\balert\s*\(/, 'validation must stay inside the controlled UI');
+  assert.match(html, /id="demo-inline-notice"[^>]*role="status"/);
+  assert.match(source, /function\s+showDemoNotice\s*\(/);
+  assert.match(source, /function\s+buildFallbackSemanticMap\s*\(/);
+  assert.match(functionSource(source, 'generateSemanticMap'), /demoState\.semanticMap=buildFallbackSemanticMap\(lang\)/);
+});
+
 test('the Explorer les possibles CTA is wired to its handler', async () => {
   const { html, scripts } = await loadDemo();
   assert.match(

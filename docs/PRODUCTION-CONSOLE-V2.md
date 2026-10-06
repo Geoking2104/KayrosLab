@@ -1,5 +1,7 @@
 # Console de production V2
 
+Le parcours de recette, la politique de rôles et les prérequis des intégrations sont détaillés dans [CONSOLE-PARCOURS-OPERATOIRE.md](./CONSOLE-PARCOURS-OPERATOIRE.md).
+
 Statut : implémenté sur `codex/production-console`, prêt à migrer et déployer après fourniture des identifiants externes.
 
 ## Objectif et périmètre

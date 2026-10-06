@@ -61,7 +61,6 @@ jobs:
             frontend/positionning-app/package-lock.json
             frontend/console-app/package-lock.json
       - name: Validate public demo JavaScript and CTA wiring
-        continue-on-error: true
         run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
       - name: Salon tests (bloquant)
         run: node --test tests/salon-engine.test.mjs tests/salon-copy.test.mjs tests/salon-responsive.test.mjs tests/salon-openkb.test.mjs tests/salon-gazette.test.mjs tests/salon-i18n.test.mjs tests/salon-prompt-wire.test.mjs tests/salon-doctrine.test.mjs tests/salon-grounding.test.mjs tests/salon-prompt-anchor.test.mjs tests/salon-doctrine-coverage.test.mjs tests/salon-import.test.mjs
@@ -80,7 +79,7 @@ jobs:
       - name: Assemble deploy folder
         run: |
           set -e
-          mkdir -p deploy/positionner-app deploy/console deploy/assets
+          mkdir -p deploy/positionner-app deploy/console deploy/workbench deploy/assets
           for f in index.html index.fr.html tokens.css site.css studio.css CNAME 404.html; do
             if [ ! -f "$f" ]; then echo "ERROR: required file missing: $f" >&2; exit 1; fi
             cp "$f" deploy/
@@ -95,7 +94,7 @@ jobs:
             if [ -f "$f" ]; then cp "$f" deploy/; fi
           done
           if [ -d frontend/positionning-app/dist ]; then cp -r frontend/positionning-app/dist/* deploy/positionner-app/; else echo "ERROR: positionning dist missing" >&2; exit 1; fi
-          if [ -f backend/web/public/console/index.html ]; then cp -r backend/web/public/console/. deploy/console/; else echo "ERROR: console missing" >&2; exit 1; fi
+          if [ -f backend/web/public/console/index.html ]; then cp -r backend/web/public/console/. deploy/console/; cp -r backend/web/public/console/. deploy/workbench/; else echo "ERROR: console missing" >&2; exit 1; fi
           if [ -f backend/web/public/salon/index.html ]; then mkdir -p deploy/salon; cp -r backend/web/public/salon/. deploy/salon/; else echo "ERROR: salon missing" >&2; exit 1; fi
           if [ -d legal ]; then mkdir -p deploy/legal; cp -r legal/. deploy/legal/; fi
           touch deploy/.nojekyll

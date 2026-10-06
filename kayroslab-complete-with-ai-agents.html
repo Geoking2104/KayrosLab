@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="./tokens.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://microsoft.github.io/Ontology-Playground/embed/ontology-embed.js"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{body:[var(--font-body),'system-ui','sans-serif'],display:['Inter','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{body:['var(--font-body)','system-ui','sans-serif'],display:['Inter','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
 /* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
 /* Hallmark · genre: modern-minimal · macrostructure: Map / Diagram · theme: custom
@@ -338,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <button id="demo-start-btn" onclick="startIdeaExploration()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-6 py-2.5 rounded-3xl text-sm"><i class="fas fa-wand-magic-sparkles mr-1.5"></i><span data-i18n="explore_ideas">Explorer les possibles</span></button>
         <button onclick="resetDemo()" class="border border-slate-200 text-slate-600 font-semibold px-6 py-2.5 rounded-3xl text-sm" data-i18n="reset">Réinitialiser</button>
       </div>
+      <p id="demo-inline-notice" class="hidden mt-3 rounded-xl border px-3 py-2 text-sm" role="status" aria-live="polite"></p>
     </div>
 
     <div id="idea-lab" class="hidden bg-slate-950 text-white rounded-3xl p-6 sm:p-8 mb-6">
@@ -1150,11 +1151,22 @@ function applyTranslations(){
 }
 function setLanguage(lang){
   if(lang!=='fr'&&lang!=='en') return;
-  if(demoState.startedAt&&lang!==demoState.language){ alert(t('language_locked')); return; }
+  if(demoState.startedAt&&lang!==demoState.language){ showDemoNotice(t('language_locked'),'warning'); return; }
   currentLang=lang;
   if(!demoState.startedAt) demoState.language=lang;
   try { localStorage.setItem('kayroslab-language',lang); } catch(e){}
   applyTranslations();
+}
+function showDemoNotice(message,tone){
+  const notice=document.getElementById('demo-inline-notice');
+  if(!notice) return;
+  const text=String(message||'').trim();
+  notice.textContent=text;
+  notice.classList.toggle('hidden',!text);
+  notice.classList.remove('border-red-200','bg-red-50','text-red-800','border-amber-200','bg-amber-50','text-amber-800','border-sky-200','bg-sky-50','text-sky-800');
+  if(!text) return;
+  const classes=tone==='error'?['border-red-200','bg-red-50','text-red-800']:tone==='warning'?['border-amber-200','bg-amber-50','text-amber-800']:['border-sky-200','bg-sky-50','text-sky-800'];
+  notice.classList.add(...classes);
 }
 
 function scrollToSection(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
@@ -1423,6 +1435,31 @@ function normalizeSemanticMap(raw){
     communities,bridges,blindSpots:normalizeStringList(parsed.blindSpots),
     generatedAt:new Date().toISOString(),method:'InfraNodus-inspired text network analysis'
   };
+}
+function buildFallbackSemanticMap(lang){
+  const english=lang==='en';
+  const communities=english?[
+    ['Uses','Value and practical uses',['benefit','practice','adoption']],
+    ['People','Users and collective behaviors',['needs','trust','habits']],
+    ['Systems','Technical and operational conditions',['resources','process','resilience']],
+    ['Institutions','Rules and social environment',['governance','ethics','ecosystem']]
+  ]:[
+    ['Usages','Valeur et usages concrets',['bénéfice','pratique','adoption']],
+    ['Personnes','Utilisateurs et comportements collectifs',['besoins','confiance','habitudes']],
+    ['Systèmes','Conditions techniques et opérationnelles',['ressources','processus','résilience']],
+    ['Institutions','Règles et environnement social',['gouvernance','éthique','écosystème']]
+  ];
+  return normalizeSemanticMap(JSON.stringify({
+    centralConcept:english?'Strategic possibility':'Possibilité stratégique',
+    communities:communities.map((item,index)=>({id:'c'+(index+1),label:item[0],meaning:item[1],concepts:item[2]})),
+    bridges:[
+      {id:'b1',label:english?'Trust by design':'Confiance par conception',connects:['c1','c2'],opportunity:english?'Make adoption a design constraint.':'Faire de l’adoption une contrainte de conception.',question:english?'What would make the first use immediately trustworthy?':'Qu’est-ce qui rendrait le premier usage immédiatement digne de confiance ?',distance:6},
+      {id:'b2',label:english?'Lean resilience':'Résilience frugale',connects:['c1','c3'],opportunity:english?'Test value with minimal infrastructure.':'Tester la valeur avec une infrastructure minimale.',question:english?'What is the smallest resilient experiment?':'Quelle est la plus petite expérimentation résiliente ?',distance:7},
+      {id:'b3',label:english?'Shared governance':'Gouvernance partagée',connects:['c2','c4'],opportunity:english?'Turn affected people into co-designers.':'Transformer les personnes concernées en co-concepteurs.',question:english?'Who should have a real veto in the experiment?':'Qui devrait disposer d’un véritable veto dans l’expérimentation ?',distance:8},
+      {id:'b4',label:english?'Responsible infrastructure':'Infrastructure responsable',connects:['c3','c4'],opportunity:english?'Connect operational choices to public commitments.':'Relier les choix opérationnels aux engagements publics.',question:english?'Which rule would improve rather than slow the test?':'Quelle règle améliorerait le test plutôt que de le ralentir ?',distance:9}
+    ],
+    blindSpots:english?['non-users','unintended effects']:['non-utilisateurs','effets non intentionnels']
+  }));
 }
 function semanticShortLabel(value,max){
   const text=String(value||'');
@@ -1957,7 +1994,7 @@ function renderSemanticMap(){
 }
 function toggleSemanticField(id){
   const exists=demoState.selectedSemanticIds.includes(id);
-  if(!exists&&demoState.selectedSemanticIds.length>=3){ alert(t('semantic_max',{},cycleLanguage())); renderSemanticMap(); return; }
+  if(!exists&&demoState.selectedSemanticIds.length>=3){ showDemoNotice(t('semantic_max',{},cycleLanguage()),'warning'); renderSemanticMap(); return; }
   demoState.selectedSemanticIds=exists?demoState.selectedSemanticIds.filter(value=>value!==id):[...demoState.selectedSemanticIds,id];
   renderSemanticMap();
 }
@@ -1999,12 +2036,11 @@ async function generateSemanticMap(){
   }catch(err){
     const lang=cycleLanguage();
     const message=err instanceof SyntaxError?t('semantic_parse_error',{},lang):(err.message||t('semantic_parse_error',{},lang));
-    const title=t('response_format_title',{},lang);
-    demoState.semanticMap=null;
-    document.getElementById('semantic-loading').innerHTML='<div class="text-red-200"><strong>'+escapeHtml(title)+'</strong><br>'+escapeHtml(t('auto_retry_fail',{},lang))+'<br><span class="opacity-80">'+escapeHtml(message)+'</span></div>';
-    document.getElementById('semantic-content').classList.remove('hidden');
-    document.getElementById('semantic-fields').innerHTML='';
-    document.getElementById('semantic-continue-btn').disabled=true;
+    demoState.semanticMap=buildFallbackSemanticMap(lang);
+    renderSemanticMap();
+    const fallbackMessage=lang==='en'?'Structured local map used after the AI response could not be parsed. You can continue the journey.':'Carte locale structurée utilisée après une réponse IA non parsable. Vous pouvez poursuivre le parcours.';
+    showDemoNotice(fallbackMessage,'warning');
+    log(fallbackMessage+' '+message,'warn');
   }finally{
     demoState.semanticRunning=false;
     if(demoState.semanticMap&&!demoState.explorationRounds.length){
@@ -2016,7 +2052,7 @@ async function generateSemanticMap(){
 }
 function launchExplorationFromSemantics(){
   const directions=selectedSemanticDirections();
-  if(!directions.length){ alert(t('semantic_required',{},cycleLanguage())); return; }
+  if(!directions.length){ showDemoNotice(t('semantic_required',{},cycleLanguage()),'warning'); return; }
   recordUserAction('semantic_redirect',null,directions.map(direction=>direction.label+' — '+direction.question).join('\n'),'detail_semantic_redirect');
   document.querySelectorAll('#semantic-fields input').forEach(input=>{ input.disabled=true; });
   document.getElementById('semantic-continue-btn').disabled=true;
@@ -2340,12 +2376,13 @@ function regenerateIdeaRound(){
 }
 function combineShortlisted(){
   const selected=allIdeaCandidates().filter(c=>demoState.shortlistedIdeaIds.includes(c.id));
-  if(selected.length<2){ alert(t('shortlist_required',{},cycleLanguage())); return; }
+  if(selected.length<2){ showDemoNotice(t('shortlist_required',{},cycleLanguage()),'warning'); return; }
   generateIdeaRound('combine',selected);
 }
 function startIdeaExploration(){
   const idea=document.getElementById('demo-idea').value.trim();
-  if(!idea){ alert(t('start_required')); return; }
+  if(!idea){ showDemoNotice(t('start_required'),'warning'); return; }
+  showDemoNotice('');
   demoState.originalIdea=idea;
   demoState.idea='';
   demoState.conditions=collectConditions();
@@ -2896,7 +2933,7 @@ async function runLiveEngine(idea) {
 
 function beginGovernedCycle() {
   const idea = document.getElementById('selected-idea').value.trim();
-  if (!idea) { alert(t('start_required')); return; }
+  if (!idea) { showDemoNotice(t('start_required'),'warning'); return; }
   // Lance le moteur reel en parallele du parcours pedagogique.
   runLiveEngine(idea);
   const continuing = demoState.history.length>0 && demoState.currentStep===-1 && !demoState.completedAt;
@@ -2996,6 +3033,7 @@ function finishCycle(){
   log(t('cycle_finished_log',{},cycleLanguage()),'success');
 }
 function resetDemo(){
+  showDemoNotice('');
   demoState.originalIdea=''; demoState.idea=''; demoState.conditions={}; demoState.currentStep=-1;
   demoState.history=[]; demoState.userActions=[]; demoState.explorationRounds=[]; demoState.stepChoiceMaps={};
   demoState.semanticMap=null; demoState.selectedSemanticIds=[]; demoState.semanticRunning=false;
@@ -3036,6 +3074,7 @@ function normalizeReportText(value){
 }
 function buildReportModel(){
   const lang=cycleLanguage();
+  const completedSteps=new Set(demoState.history.map(item=>item.stepIdx));
   return {
     title:t('report_title',{},lang),
     lang,
@@ -3061,7 +3100,7 @@ function buildReportModel(){
     initialKi:demoState.kiHistory.length?demoState.kiHistory[0]:demoState.ki,
     finalKi:demoState.ki,
     kiHistory:[...demoState.kiHistory],
-    actions:demoState.userActions.map(a=>({...a})),
+    actions:demoState.userActions.filter(action=>action.stepIdx==null||completedSteps.has(action.stepIdx)).map(a=>({...a})),
     steps:demoState.history.map(h=>({...h}))
   };
 }

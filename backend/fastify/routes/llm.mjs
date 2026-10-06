@@ -61,6 +61,37 @@ function checkDemoRate(ip) {
   return e.count <= DEMO_MAX_PER_HOUR;
 }
 
+export function requestsSemanticMap(system) {
+  const prompt = String(system || '');
+  return prompt.includes('centralConcept') && prompt.includes('communities') && prompt.includes('bridges');
+}
+
+export function semanticMapFallback(system) {
+  const english = /You are|Return ONLY|opening question/i.test(String(system || ''));
+  const communities = english ? [
+    ['Uses', 'Value and practical uses', ['benefit', 'practice', 'adoption']],
+    ['People', 'Users and collective behaviors', ['needs', 'trust', 'habits']],
+    ['Systems', 'Technical and operational conditions', ['resources', 'process', 'resilience']],
+    ['Institutions', 'Rules and social environment', ['governance', 'ethics', 'ecosystem']],
+  ] : [
+    ['Usages', 'Valeur et usages concrets', ['bénéfice', 'pratique', 'adoption']],
+    ['Personnes', 'Utilisateurs et comportements collectifs', ['besoins', 'confiance', 'habitudes']],
+    ['Systèmes', 'Conditions techniques et opérationnelles', ['ressources', 'processus', 'résilience']],
+    ['Institutions', 'Règles et environnement social', ['gouvernance', 'éthique', 'écosystème']],
+  ];
+  return JSON.stringify({
+    centralConcept: english ? 'Strategic possibility' : 'Possibilité stratégique',
+    communities: communities.map(([label, meaning, concepts], index) => ({ id: `c${index + 1}`, label, meaning, concepts })),
+    bridges: [
+      { id: 'b1', label: english ? 'Trust by design' : 'Confiance par conception', connects: ['c1', 'c2'], opportunity: english ? 'Make adoption a design constraint.' : 'Faire de l’adoption une contrainte de conception.', question: english ? 'What would make the first use immediately trustworthy?' : 'Qu’est-ce qui rendrait le premier usage immédiatement digne de confiance ?', distance: 6 },
+      { id: 'b2', label: english ? 'Lean resilience' : 'Résilience frugale', connects: ['c1', 'c3'], opportunity: english ? 'Test value with minimal infrastructure.' : 'Tester la valeur avec une infrastructure minimale.', question: english ? 'What is the smallest resilient experiment?' : 'Quelle est la plus petite expérimentation résiliente ?', distance: 7 },
+      { id: 'b3', label: english ? 'Shared governance' : 'Gouvernance partagée', connects: ['c2', 'c4'], opportunity: english ? 'Turn affected people into co-designers.' : 'Transformer les personnes concernées en co-concepteurs.', question: english ? 'Who should have a real veto in the experiment?' : 'Qui devrait disposer d’un véritable veto dans l’expérimentation ?', distance: 8 },
+      { id: 'b4', label: english ? 'Responsible infrastructure' : 'Infrastructure responsable', connects: ['c3', 'c4'], opportunity: english ? 'Connect operational choices to public commitments.' : 'Relier les choix opérationnels aux engagements publics.', question: english ? 'Which rule would improve rather than slow the test?' : 'Quelle règle améliorerait le test plutôt que de le ralentir ?', distance: 9 },
+    ],
+    blindSpots: english ? ['non-users', 'unintended effects'] : ['non-utilisateurs', 'effets non intentionnels'],
+  });
+}
+
 /** Optional Bearer session — does not fail the request if absent. */
 async function tryAuthSession(app, req) {
   const { auth } = app.kayrosContext || {};
@@ -108,14 +139,20 @@ export default async function llmRoute(app) {
         { messages, temperature: 0.4, role: 'demo-agent' },
         provider ? { provider } : {},
       );
+      const structuredFallback = r.provider === 'mock' && requestsSemanticMap(system)
+        ? semanticMapFallback(system)
+        : null;
+      const text = structuredFallback || r.text;
       return {
-        content: r.text,
-        text: r.text,
+        content: text,
+        text,
         model: r.model || app.kayrosContext.MISTRAL_MODEL || r.provider,
         provider: r.provider,
         usage: r.usage,
         latencyMs: r.latencyMs,
-        degraded: r.degraded || null,
+        degraded: structuredFallback
+          ? { reason: 'structured_demo_fallback', provider: r.provider }
+          : (r.degraded || null),
       };
     } catch (e) {
       app.log.error(e);

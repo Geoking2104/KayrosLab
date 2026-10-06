@@ -19,6 +19,25 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
+test('le workbench est publié comme point d’entrée alternatif de la console', async () => {
+  const [workflow, assembly, nginx] = await Promise.all([
+    read('.github/workflows/deploy-positionning-pages.yml'),
+    read('deploy/ovh-vps/assemble-www.sh'),
+    read('deploy/ovh-vps/nginx-kayroslab-www-locations.conf'),
+  ]);
+  assert.match(workflow, /deploy\/workbench/);
+  assert.match(workflow, /deploy\/workbench\//);
+  assert.match(assembly, /stage}\/workbench/);
+  assert.match(nginx, /location = \/workbench/);
+  assert.match(nginx, /\/workbench\/index\.html/);
+});
+
+test('la validation de la démo bloque le déploiement en cas de JavaScript invalide', async () => {
+  const workflow = await read('.github/workflows/deploy-positionning-pages.yml');
+  const validationStep = workflow.match(/- name: Validate public demo JavaScript[\s\S]*?(?=\n\s+- name:)/)?.[0] || '';
+  assert.doesNotMatch(validationStep, /continue-on-error:\s*true/);
+});
+
 test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () => {
   const [workflow, english, french, foyer] = await Promise.all([
     read('.github/workflows/deploy-positionning-pages.yml'),
@@ -74,6 +93,7 @@ test('la console v2 expose les parcours agents, reglages et decision durable', a
   assert.match(api, /\/v1\/console\/threads/);
   assert.match(css, /@media \(max-width: 840px\)/);
   assert.match(css, /@media \(max-width: 560px\)/);
+  assert.doesNotMatch(app, /Sales Oracle/, 'Sales Oracle reste hors de la Console');
 });
 
 test('la connexion expose un parcours complet de mot de passe oublie', async () => {
