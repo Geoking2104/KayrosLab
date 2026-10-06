@@ -28,6 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/tokens.css', (_req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'tokens.css'));
 });
+app.get('/marketing.css', (_req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'marketing.css'));
+});
 
 // Make i18n available in all views
 app.use((req, res, next) => {

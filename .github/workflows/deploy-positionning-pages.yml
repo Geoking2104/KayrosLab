@@ -31,6 +31,7 @@ on:
       - 'ontology-panel.html'
       - 'tokens.css'
       - 'site.css'
+      - 'marketing.css'
       - 'studio.css'
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
@@ -81,7 +82,7 @@ jobs:
         run: |
           set -e
           mkdir -p deploy/positionner-app deploy/console deploy/assets
-          for f in index.html index.fr.html tokens.css site.css studio.css CNAME 404.html; do
+          for f in index.html index.fr.html marketing.css tokens.css site.css studio.css CNAME 404.html; do
             if [ ! -f "$f" ]; then echo "ERROR: required file missing: $f" >&2; exit 1; fi
             cp "$f" deploy/
           done
