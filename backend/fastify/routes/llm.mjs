@@ -103,15 +103,15 @@ export default async function llmRoute(app) {
     messages.push({ role: 'user', content: user });
 
     try {
-      const provider = app.kayrosContext.MISTRAL_API_KEY ? 'mistral' : undefined;
+      // Provider par défaut du serveur (LLM_PROVIDER > NVIDIA > Mistral > …), repli signalé.
       const r = await app.kayrosContext.llm.complete(
         { messages, temperature: 0.4, role: 'demo-agent' },
-        provider ? { provider } : {},
+        {},
       );
       return {
         content: r.text,
         text: r.text,
-        model: r.model || app.kayrosContext.MISTRAL_MODEL || r.provider,
+        model: r.model || app.kayrosContext.llmConfig?.models?.[r.provider] || r.provider,
         provider: r.provider,
         usage: r.usage,
         latencyMs: r.latencyMs,

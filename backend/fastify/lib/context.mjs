@@ -1,5 +1,6 @@
 import {
-  KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider,
+  KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider, OpenAICompatibleProvider,
+  parseRetryAfter,
   Orchestrator, GovernanceService, demoTools, OllamaEmbeddings,
   evaluateKpis, alertsToSignals,
   AuthService, InMemoryUserStore, FileUserStore,
@@ -35,9 +36,12 @@ import { createMcpClientRegistry } from './mcp-auth.mjs';
 import { oidcConfigFromEnv } from './oidc.mjs';
 import { smtpFromEnv, createSmtpTransport } from './smtp.mjs';
 import { SalonStateStore } from './salon-state.mjs';
+import { resolveLlmConfig, describeLlmConfig } from './llm-config.mjs';
 
-export function bindEngineToServer(engine, { llm, tools, governance }) {
+export function bindEngineToServer(engine, { llm, tools, governance, maxConcurrency }) {
   if (!engine) return null;
+  // Concurrence des agents du swarm (LLM_MAX_CONCURRENCY) : quota par minute des providers.
+  if (engine.swarm && Number.isFinite(maxConcurrency) && maxConcurrency >= 1) engine.swarm.maxConcurrency = maxConcurrency;
   if (llm) {
     engine.llm = llm;
     engine.orchestrator.llm = llm;
@@ -111,6 +115,7 @@ export default async function buildContext() {
     ANTHROPIC_MAXTOK = '1024',
     MISTRAL_API_KEY = '',
     MISTRAL_MODEL = 'mistral-small-latest',
+    NVIDIA_API_KEY = '',
     OLLAMA_ENDPOINT = 'http://localhost:11434',
     OLLAMA_MODEL = 'llama3.2',
     EMBED_MODEL = 'bge-m3',
@@ -135,6 +140,10 @@ export default async function buildContext() {
     KAYROS_CONNECTOR_ENCRYPTION_KEY = '',
     KAYROS_PUBLIC_API_URL = '',
   } = process.env;
+
+  const llmConfig = resolveLlmConfig(process.env);
+  for (const w of llmConfig.warnings) console.warn(`[kayros][llm] ${w}`);
+  console.info('[kayros][llm] provider', JSON.stringify(describeLlmConfig(llmConfig)));
 
   const mcpClients = createMcpClientRegistry(KAYROS_MCP_CLIENTS_JSON);
   const MCP_ALLOWED_ORIGINS = String(KAYROS_MCP_ALLOWED_ORIGINS || '')
@@ -161,60 +170,49 @@ export default async function buildContext() {
           body: JSON.stringify(payload),
         });
         const data = await res.json();
-        if (!res.ok) { const e = new Error('anthropic http ' + res.status); e.detail = data; throw e; }
+        if (!res.ok) {
+          const e = new Error('anthropic http ' + res.status); e.detail = data; e.status = res.status;
+          if (res.status === 429) e.code = 'RATE_LIMITED';
+          const ra = parseRetryAfter(res.headers?.get?.('retry-after')); if (ra !== null) e.retryAfterMs = ra;
+          throw e;
+        }
         const text = (data.content ?? []).filter((b) => b.type === 'text').map((b) => b.text).join('');
         return { text, provider: 'anthropic', latencyMs: Date.now() - t0, usage: { tokensIn: data.usage?.input_tokens ?? 0, tokensOut: data.usage?.output_tokens ?? 0, costUsd: 0 } };
       },
     }),
-    mistral: {
+    // API OpenAI-compatible : même client que NVIDIA (429/Retry-After, retrait du raisonnement).
+    mistral: new OpenAICompatibleProvider({
       id: 'mistral',
-      async complete(req) {
-        if (!MISTRAL_API_KEY) { const e = new Error('MISTRAL_API_KEY non configuree'); e.code = 'NO_KEY'; throw e; }
-        const messages = (req.messages || []).map((m) => ({
-          role: m.role === 'assistant' ? 'assistant' : m.role === 'system' ? 'system' : 'user',
-          content: String(m.content ?? ''),
-        }));
-        const t0 = Date.now();
-        const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + MISTRAL_API_KEY,
-          },
-          body: JSON.stringify({
-            model: req.model || MISTRAL_MODEL || 'mistral-small-latest',
-            messages,
-            temperature: typeof req.temperature === 'number' ? req.temperature : 0.4,
-            max_tokens: 1200,
-          }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          const e = new Error('mistral http ' + res.status);
-          e.detail = data;
-          throw e;
-        }
-        const text = data.choices?.[0]?.message?.content ?? '';
-        return {
-          text,
-          provider: 'mistral',
-          latencyMs: Date.now() - t0,
-          usage: {
-            tokensIn: data.usage?.prompt_tokens ?? 0,
-            tokensOut: data.usage?.completion_tokens ?? 0,
-            costUsd: 0,
-          },
-        };
-      },
-    },
+      baseUrl: 'https://api.mistral.ai/v1',
+      apiKey: MISTRAL_API_KEY,
+      apiKeyEnv: 'MISTRAL_API_KEY',
+      defaultModel: llmConfig.models.mistral,
+      defaultTemperature: 0.4,
+      maxTokens: 1200,
+    }),
+    // NVIDIA NIM hébergé (build.nvidia.com), OpenAI-compatible. Clé via
+    // NVIDIA_API_KEY uniquement (jamais journalisée), modèle via NVIDIA_MODEL.
+    nvidia: new OpenAICompatibleProvider({
+      id: 'nvidia',
+      baseUrl: llmConfig.nvidia.baseUrl,
+      apiKey: NVIDIA_API_KEY,
+      apiKeyEnv: 'NVIDIA_API_KEY',
+      defaultModel: llmConfig.nvidia.model,
+      temperature: llmConfig.nvidia.temperature,
+      defaultTemperature: 1.0,
+      maxTokens: llmConfig.nvidia.maxTokens,
+      timeoutMs: llmConfig.nvidia.timeoutMs,
+      extraBody: llmConfig.nvidia.extraBody,
+      // Identifiants NVIDIA de la forme `org/modele` : un tag Ollama
+      // (`llama3.2:q5_K_M`) des agents de l'orchestrateur cède au défaut.
+      acceptsModel: (m) => String(m).includes('/') && !String(m).includes(':'),
+    }),
     ollama: new OllamaProvider({ endpoint: OLLAMA_ENDPOINT, defaultModel: OLLAMA_MODEL }),
   };
 
-  const defaultProvider = MISTRAL_API_KEY
-    ? 'mistral'
-    : (ANTHROPIC_API_KEY ? 'anthropic' : 'mock');
-  const policy = new RoutingPolicy({ defaultProvider, fallback: 'mock' });
-  const llm = new KayrosLLM(providers, policy);
+  // Priorité documentée dans lib/llm-config.mjs : LLM_PROVIDER > NVIDIA > Mistral > Anthropic > mock.
+  const policy = new RoutingPolicy({ defaultProvider: llmConfig.provider, fallback: llmConfig.fallback });
+  const llm = new KayrosLLM(providers, policy, { retry: llmConfig.retry });
   const embeddings = new OllamaEmbeddings({ endpoint: OLLAMA_ENDPOINT, model: EMBED_MODEL });
   const tools = demoTools();
   try {
@@ -536,6 +534,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
     swarmStore,
     collaborationStore,
+    llmMaxConcurrency: llmConfig.maxConcurrency,
     fs: nodeFs,
     path: nodePath,
   });
@@ -553,7 +552,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     };
   }
 
-  bindEngineToServer(engine, { llm, tools, governance });
+  bindEngineToServer(engine, { llm, tools, governance, maxConcurrency: llmConfig.maxConcurrency });
   for (const adapter of [slackAdapter, discordAdapter, teamsAdapter].filter(Boolean)) {
     engine.hybridGateway.setAdapter(adapter);
   }
@@ -575,6 +574,9 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     storeBackend, swarmStore, collaborationStore, requirePostgres,
     KAYROS_SECRET, GOOGLE_API_KEY, GOOGLE_CX, GITHUB_TOKEN, GITLAB_TOKEN, GITLAB_BASE_URL,
     ANTHROPIC_API_KEY, ANTHROPIC_MODEL, MISTRAL_API_KEY, MISTRAL_MODEL,
+    // Configuration LLM effective, sans aucune clé (booléens seulement).
+    llmConfig,
+    nvidiaConfigured: llmConfig.configured.nvidia,
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
     crystalKnowsConfigured: !!CRYSTALKNOWS_API_TOKEN,

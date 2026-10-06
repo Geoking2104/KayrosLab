@@ -53,6 +53,51 @@ EMBED_MODEL=bge-m3
 # KAYROS_SECRET=...                        # secret partagé optionnel
 ```
 
+### Fournisseur LLM : NVIDIA (prioritaire), Mistral en repli
+
+En production, **les clés LLM ne se saisissent pas à la main dans `.env`** : le
+workflow `.github/workflows/deploy-vps-backend.yml` réécrit à chaque déploiement
+les lignes suivantes de `/opt/kayroslab/backend/fastify/.env` à partir des
+secrets/variables GitHub (une valeur absente vide la ligne) :
+
+| Ligne `.env` | Source GitHub | Rôle |
+|---|---|---|
+| `NVIDIA_API_KEY=` | **secret** `NVIDIA_API_KEY` | active NVIDIA NIM (prioritaire) |
+| `NVIDIA_MODEL=` | variable `NVIDIA_MODEL` (optionnelle) | vide = `deepseek-ai/deepseek-v4.1-flash` |
+| `LLM_PROVIDER=` | variable `LLM_PROVIDER` (optionnelle) | vide = sélection automatique |
+| `LLM_MAX_CONCURRENCY=` | variable `LLM_MAX_CONCURRENCY` (optionnelle) | vide = 2 agents simultanés |
+| `MISTRAL_API_KEY=` | secret `MISTRAL_API_KEY` | repli automatique (ou primaire sans NVIDIA) |
+
+Activer NVIDIA = créer le secret de dépôt `NVIDIA_API_KEY`
+(Settings → Secrets and variables → Actions → New repository secret, ou
+`gh secret set NVIDIA_API_KEY` en saisissant la valeur au prompt), puis relancer
+le workflow « Deploy KayrosLab backend - OVH VPS » (`workflow_dispatch`).
+Aucune autre action sur le serveur. Vérification :
+
+```bash
+curl -s https://api.kayroslab.com/health | jq .llm
+# { "provider": "nvidia", "live": true, "model": "deepseek-ai/deepseek-v4.1-flash",
+#   "fallback": ["mistral", "mock"], "maxConcurrency": 2, "maxRetries": 2, ... }
+```
+
+Ordre de sélection (`lib/llm-config.mjs`) : `LLM_PROVIDER` forcé →
+`NVIDIA_API_KEY` → `MISTRAL_API_KEY` → `ANTHROPIC_API_KEY` → `mock`.
+Retour à Mistral sans supprimer la clé : variable `LLM_PROVIDER=mistral`.
+
+> Modèle : « DeepSeek V4 Pro » n'est plus servi par l'API hébergée NVIDIA
+> (`/v1/models/deepseek-ai/deepseek-v4-pro` et `…-v4-pro-0813` → 410 Gone).
+> Le défaut est donc `deepseek-ai/deepseek-v4.1-flash`, seul DeepSeek génératif
+> au catalogue ; `NVIDIA_MODEL` permet d'en changer
+> (`curl -s https://integrate.api.nvidia.com/v1/models` liste les identifiants).
+
+Hors workflow (instance lancée à la main), ajouter la ligne au `.env` du serveur :
+`NVIDIA_API_KEY=<clé fournie par le porteur>` puis `pm2 restart kayros-api --update-env`.
+
+Robustesse : un 429 est relancé avec backoff exponentiel + jitter (Retry-After
+respecté, `LLM_MAX_RETRIES=2` → 3 essais), puis repli signalé (Mistral, puis
+mock). Les agents du swarm sont interrogés au plus `LLM_MAX_CONCURRENCY` à la
+fois. Les embeddings (Ollama `bge-m3`) ne changent pas.
+
 ## 5. Service permanent (pm2)
 
 ```bash

@@ -78,7 +78,46 @@ export class CircuitBreaker {
 }
 
 /**
+ * Convertit un en-tête HTTP `Retry-After` (secondes ou date HTTP) en millisecondes.
+ * @returns {number|null}
+ */
+export function parseRetryAfter(value, nowMs = Date.now()) {
+  if (value === undefined || value === null || value === '') return null;
+  const raw = String(value).trim();
+  if (/^\d+(\.\d+)?$/.test(raw)) return Math.max(0, Math.round(Number(raw) * 1000));
+  const at = Date.parse(raw);
+  if (Number.isNaN(at)) return null;
+  return Math.max(0, at - nowMs);
+}
+
+/** Limitation de débit (HTTP 429) signalée par un provider. */
+export function isRateLimitError(e) {
+  return !!e && (e.status === 429 || e.code === 'RATE_LIMITED');
+}
+
+/**
+ * Une nouvelle tentative a-t-elle une chance d'aboutir ? Non pour une clé
+ * absente, un provider inconnu ou une erreur client 4xx (hors 408/429) :
+ * relancer ne ferait que retarder le repli.
+ */
+export function isRetryableError(e) {
+  if (!e) return true;
+  if (e.retryable === false) return false;
+  if (['NO_KEY', 'NOT_CONFIGURED', 'UNKNOWN_PROVIDER', 'NO_FETCH'].includes(e.code)) return false;
+  if (typeof e.status === 'number' && e.status >= 400 && e.status < 500 && e.status !== 408 && e.status !== 429) return false;
+  return true;
+}
+
+/**
  * Exécute `fn` avec retry + circuit breaker + fallback.
+ *
+ * - backoff exponentiel + jitter entre deux tentatives ;
+ * - un 429 portant `retryAfterMs` (en-tête Retry-After) attend au moins ce
+ *   délai ; au-delà de `maxRetryAfterMs`, on abandonne tout de suite (repli) ;
+ * - un 429 n'est compté qu'une fois par le breaker, à l'épuisement des
+ *   tentatives : une rafale de limitation ne doit pas ouvrir le circuit (et
+ *   basculer tout le swarm sur le repli) dès le premier appel ;
+ * - les erreurs non relançables (clé absente, 4xx) sortent immédiatement.
  * @param {() => Promise<any>} fn
  * @param {CircuitBreaker} [breaker]
  * @param {object} [retry]
@@ -94,20 +133,54 @@ export async function withResilience(
     err.code = 'CIRCUIT_OPEN';
     throw err;
   }
+  const maxRetries = Number.isFinite(retry?.maxRetries) ? retry.maxRetries : 3;
+  const maxRetryAfterMs = Number.isFinite(retry?.maxRetryAfterMs) ? retry.maxRetryAfterMs : 60000;
+  const wait = typeof retry?.sleep === 'function' ? retry.sleep : sleep;
   let lastErr;
-  for (let attempt = 0; attempt <= retry.maxRetries; attempt++) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       const res = await fn();
       breaker?.onSuccess();
       return res;
     } catch (e) {
       lastErr = e;
-      breaker?.onFailure();
-      const canRetry = attempt < retry.maxRetries && (!breaker || breaker.state !== BreakerState.OPEN);
-      if (!canRetry) break;
-      await sleep(computeBackoff(attempt, retry));
+      const rateLimited = isRateLimitError(e);
+      if (!rateLimited) breaker?.onFailure();
+      let delay = computeBackoff(attempt, retry);
+      const retryAfter = rateLimited && Number.isFinite(e?.retryAfterMs) ? e.retryAfterMs : null;
+      if (retryAfter !== null) delay = Math.max(delay, retryAfter);
+      const canRetry = attempt < maxRetries
+        && isRetryableError(e)
+        && (retryAfter === null || retryAfter <= maxRetryAfterMs)
+        && (!breaker || breaker.state !== BreakerState.OPEN);
+      if (!canRetry) {
+        if (rateLimited) breaker?.onFailure();
+        break;
+      }
+      try { retry?.onRetry?.({ attempt: attempt + 1, delayMs: delay, error: e }); } catch { /* observabilité seulement */ }
+      await wait(delay);
     }
   }
   if (breaker && typeof breaker.fallback === 'function') return breaker.fallback();
   throw lastErr;
+}
+
+/**
+ * `Promise.all` à concurrence bornée : au plus `limit` appels de `fn` en vol,
+ * résultats dans l'ordre d'entrée. `limit` <= 0 ou non fini → sans limite.
+ */
+export async function mapWithConcurrency(items, limit, fn) {
+  const list = Array.from(items || []);
+  const n = Number(limit);
+  const width = Number.isFinite(n) && n >= 1 ? Math.min(Math.floor(n), list.length || 1) : list.length || 1;
+  const results = new Array(list.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < list.length) {
+      const i = next++;
+      results[i] = await fn(list[i], i);
+    }
+  };
+  await Promise.all(Array.from({ length: width }, worker));
+  return results;
 }

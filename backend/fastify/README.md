@@ -50,5 +50,6 @@ curl -s -X POST localhost:8787/v1/llm -H 'content-type: application/json' \
 - Servir derrière un reverse proxy HTTPS (nginx/caddy), restreindre `ALLOWED_ORIGIN`.
 - Gérer le process avec pm2/systemd. Clés via variables d'environnement (jamais dans le dépôt).
 - Pour l'envoi des rapports, du contact et des resets : `KAYROS_SMTP_PASS` (mot de passe d'application Gmail), `KAYROS_MAIL_FROM` et `KAYROS_REPORT_LEAD_BCC` (par défaut : `geoffroydelatournelle@gmail.com`). `contact@kayroslab.com` reste l'adresse publique (redirection IONOS).
-- Pour Positionner, renseigner `MISTRAL_API_KEY`; `GITHUB_TOKEN`, `GITLAB_TOKEN`, `GOOGLE_API_KEY` et `GOOGLE_CX` améliorent la collecte GitHub/GitLab/web utilisée comme base de comparaison.
+- Fournisseur LLM du serveur : `NVIDIA_API_KEY` (NVIDIA NIM, OpenAI-compatible, modèle `NVIDIA_MODEL`, défaut `deepseek-ai/deepseek-v4.1-flash`) est prioritaire, puis `MISTRAL_API_KEY`, puis `ANTHROPIC_API_KEY`, sinon `mock` ; `LLM_PROVIDER` force un choix. Repli signalé : Mistral puis mock. 429 : relances avec backoff + Retry-After (`LLM_MAX_RETRIES`), swarm borné par `LLM_MAX_CONCURRENCY`. Détails : `DEPLOY-VPS.md` §4 et `lib/llm-config.mjs`.
+- Pour Positionner, renseigner `MISTRAL_API_KEY` (l'analyse contextuelle utilise l'API Conversations/web_search propre à Mistral, inchangée); `GITHUB_TOKEN`, `GITLAB_TOKEN`, `GOOGLE_API_KEY` et `GOOGLE_CX` améliorent la collecte GitHub/GitLab/web utilisée comme base de comparaison.
 - Résolution des gates entre requêtes (HITL asynchrone) = lot ultérieur (store partagé).

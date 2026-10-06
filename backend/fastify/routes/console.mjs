@@ -43,7 +43,7 @@ const agentFields = {
   role_name: z.string().min(1).max(160), department: z.string().min(1).max(160),
   seniority: z.enum(['intern', 'junior', 'senior', 'executive']), primary_focus: z.string().min(1).max(4000),
   mission: z.string().min(1).max(4000).optional(), instructions: z.string().max(12000).optional(),
-  constraints: z.array(z.string().min(1).max(1000)).max(50).optional(), provider: z.enum(['mock', 'ollama', 'mistral', 'anthropic']).nullable().optional(),
+  constraints: z.array(z.string().min(1).max(1000)).max(50).optional(), provider: z.enum(['mock', 'ollama', 'mistral', 'anthropic', 'nvidia']).nullable().optional(),
   model: z.string().max(200).nullable().optional(), tools: z.array(z.string().min(1).max(160)).max(100).optional(),
   connectors: z.array(z.enum(['slack', 'discord', 'teams', 'console'])).max(4).optional(), veto_power: z.boolean().optional(), enabled: z.boolean().optional(),
   metadata: z.record(z.string(), z.unknown()).optional(), behavioral_profile: z.record(z.string(), z.unknown()).optional(), rule_configuration: ruleConfigurationSchema,
@@ -266,7 +266,7 @@ export default async function consoleRoute(app) {
         pending_human_decisions: threads.filter((thread) => thread.status !== 'resolved').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,
-      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
+      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
     };
   });
 

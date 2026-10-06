@@ -24,7 +24,7 @@ export async function buildTestApp(env = {}) {
     // est le defaut en production, un harnais qui ne le neutralise pas
     // partage un vrai fichier entre executions et les tests se polluent.
     KAYROS_RUNS_FILE: 'memory',
-    ANTHROPIC_API_KEY: '', OLLAMA_ENDPOINT: '', MISTRAL_API_KEY: '',
+    OLLAMA_ENDPOINT: '',
     LINKEDIN_ACCESS_TOKEN: '', CRYSTALKNOWS_API_TOKEN: '',
     KAYROS_S3_BUCKET: '', KAYROS_S3_ACCESS_KEY_ID: '', KAYROS_S3_SECRET_ACCESS_KEY: '',
     KAYROS_MCP_CLIENTS_JSON: '', KAYROS_MCP_ALLOWED_ORIGINS: '', KAYROS_MCP_RATE_LIMIT: '60',
@@ -34,6 +34,12 @@ export async function buildTestApp(env = {}) {
   };
   for (const [k, v] of Object.entries(defaults)) {
     if (process.env[k] === undefined) process.env[k] = v;
+  }
+  // Clés et choix LLM toujours neutralisés, même si l'environnement du poste
+  // (ou de la CI) les définit : un test ne doit jamais appeler une vraie API
+  // LLM avec une vraie clé. Un test qui veut un provider le passe dans `env`.
+  for (const k of ['NVIDIA_API_KEY', 'MISTRAL_API_KEY', 'ANTHROPIC_API_KEY', 'LLM_PROVIDER', 'LLM_FALLBACK', 'NVIDIA_BASE_URL', 'NVIDIA_MODEL']) {
+    process.env[k] = '';
   }
   for (const [k, v] of Object.entries(env)) process.env[k] = v;
 
