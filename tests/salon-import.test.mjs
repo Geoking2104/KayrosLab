@@ -51,5 +51,5 @@ test('import : traduit la mémoire avant de l’enregistrer (langue choisie)', (
   assert.match(code, /sampleFr/, 'échantillon français');
   assert.match(code, /sampleEn/, 'échantillon anglais');
   assert.match(code, /blurbEn/, 'résumé bilingue');
-  assert.match(code, /\[mock\]/i, 'refus des réponses dégradées');
+  assert.ok(code.includes('\\[mock\\]'), 'refus des réponses dégradées');
 });
