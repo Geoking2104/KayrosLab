@@ -9,6 +9,14 @@ import { UNPARSABLE_VERDICT_ASSUMPTION } from './swarm.mjs';
 export const COLLABORATION_PLATFORMS = Object.freeze(['slack', 'discord', 'teams', 'console']);
 export const ROOM_MODES = Object.freeze(['mention_only', 'always']);
 
+// Exécution asynchrone d'un fil de décision : le fil est créé (ou relancé) au
+// statut `running`, le collectif s'exécute en tâche de fond dans le processus,
+// puis le fil prend son statut final (`needs_clarification`,
+// `awaiting_arbitration`) ou `failed` avec un message lisible.
+export const THREAD_RUNNING = 'running';
+export const THREAD_FAILED = 'failed';
+export const INTERRUPTED_RUN_ERROR = 'Exécution interrompue par un redémarrage du serveur : relancez la mission.';
+
 function now() { return new Date().toISOString(); }
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 function makeId(prefix) { return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`; }
@@ -29,6 +37,24 @@ function cleanPrompt(text) {
 function wasInvoked(text, explicit = false) {
   return explicit || /^\s*\/kayros\b/i.test(String(text || ''))
     || /@(?:kayros(?:lab)?|agent)\b/i.test(String(text || '')) || /<@[A-Z0-9]+>/i.test(String(text || ''));
+}
+/** Message d'échec lisible, borné, sans pile d'appels. */
+export function readableRunError(error) {
+  const message = String(error?.message || error || '').replace(/\s+/g, ' ').trim();
+  return (message || 'erreur inconnue').slice(0, 500);
+}
+function runInProgressError(message) {
+  const error = new Error(message);
+  error.code = 'RUN_IN_PROGRESS';
+  return error;
+}
+function withDeadline(promise, ms) {
+  if (!(Number(ms) > 0)) return promise;
+  let timer;
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`délai maximal d’exécution dépassé (${Math.round(ms / 1000)} s)`)), ms);
+  });
+  return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
 }
 function publicRoom(record) {
   const room = clone(record?.room || null);
@@ -80,9 +106,13 @@ export function summarizeSwarmRun(run) {
 }
 
 export class HybridAgentGateway {
-  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null } = {}) {
+  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0 } = {}) {
     if (!swarm) throw new Error('HybridAgentGateway: swarm requis');
     this.swarm = swarm;
+    // Exécutions asynchrones en cours dans CE processus (thread_id → promesse).
+    this.jobs = new Map();
+    // Délai maximal d'une exécution asynchrone (0 = aucun) : au-delà, le fil passe `failed`.
+    this.runTimeoutMs = Math.max(0, Number(runTimeoutMs) || 0);
     this.auditSink = auditSink;
     this.store = store || new InMemoryCollaborationStore({ maxEvents });
     this.adapters = new Map();
@@ -280,6 +310,7 @@ export class HybridAgentGateway {
     const thread = await this.store.getThread(threadId, { tenantId: scope });
     if (!thread) throw new Error('fil introuvable');
     if (thread.status === 'resolved') throw new Error('fil déjà arbitré');
+    if (thread.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil');
     const answer = required(text, 'réponse humaine');
     const roomRecord = await this.store.getRoom(thread.room_id, { tenantId: scope });
     const room = await this._hydrateRuntime(roomRecord);
@@ -326,6 +357,7 @@ export class HybridAgentGateway {
     const scope = String(tenantId || 'default');
     const thread = await this.store.getThread(threadId, { tenantId: scope });
     if (!thread) throw new Error('fil introuvable');
+    if (thread.status === THREAD_RUNNING) throw runInProgressError('mission en cours : arbitrage possible à la fin des analyses');
     const run = this.swarm.arbitrate(thread.current_run_id, { ...input, tenantId: scope, by });
     await this.swarm.flush?.();
     await this.store.appendThreadMessage(threadId, {
@@ -338,7 +370,8 @@ export class HybridAgentGateway {
     return this.store.getThread(threadId, { tenantId: scope });
   }
 
-  async handleMessage(input = {}) {
+  /** Salon actif + question nettoyée, communs aux exécutions synchrone et asynchrone. */
+  async _prepareMessage(input = {}) {
     const platform = normalizePlatform(input.platform || 'console');
     const record = input.room_id
       ? await this.store.getRoom(input.room_id, { tenantId: input.tenantId })
@@ -347,10 +380,17 @@ export class HybridAgentGateway {
     if (!room || room.status !== 'active') throw new Error('aucun salon Kayros actif pour ce canal');
     if (input.tenantId != null && room.tenant_id !== String(input.tenantId)) throw new Error('salon inaccessible pour ce tenant');
     if (room.mode === 'mention_only' && !wasInvoked(input.text, input.explicit === true)) {
-      return { ignored: true, reason: 'mention_required', room };
+      return { ignored: { ignored: true, reason: 'mention_required', room } };
     }
     const question = cleanPrompt(input.text);
     if (!question) throw new Error('message vide après suppression de la mention Kayros');
+    return { platform, record, room, question };
+  }
+
+  async handleMessage(input = {}) {
+    const prepared = await this._prepareMessage(input);
+    if (prepared.ignored) return prepared.ignored;
+    const { platform, record, room, question } = prepared;
 
     const messageId = String(input.message_id || '').trim() || makeId('message');
     let claimed = false;
@@ -402,5 +442,241 @@ export class HybridAgentGateway {
       if (claimed) await this.store.failMessage(platform, messageId, room.tenant_id).catch(() => {});
       throw error;
     }
+  }
+  // --- Exécution asynchrone (console) -------------------------------------
+
+  /** Promesse de l'exécution en tâche de fond d'un fil (résolue si aucune). */
+  waitForThread(threadId) { return this.jobs.get(String(threadId)) || Promise.resolve(null); }
+  /** Attend toutes les exécutions en cours de ce processus (tests, arrêt propre). */
+  async idle() { while (this.jobs.size) await Promise.allSettled([...this.jobs.values()]); }
+
+  async _runningThreadInRoom(room) {
+    const threads = await this.listThreads({ tenantId: room.tenant_id, roomId: room.room_id, limit: 250 });
+    return threads.find((thread) => thread.status === THREAD_RUNNING) || null;
+  }
+
+  _agentCount(room) {
+    const configuration = this.swarm.getConfiguration?.(room.swarm_id, { tenantId: room.tenant_id });
+    return configuration?.active_agents?.length || 0;
+  }
+
+  /** Mise à jour d'un fil uniquement s'il est encore en cours pour cette exécution. */
+  async _patchRunningThread(threadId, tenantId, runId, patch) {
+    const current = await this.store.getThread(threadId, { tenantId });
+    if (!current || current.status !== THREAD_RUNNING || current.active_run_id !== runId) return null;
+    return this.store.updateThread(threadId, { ...patch, updated_at: now() }, { tenantId });
+  }
+
+  async _failThread(threadId, tenantId, runId, error) {
+    const current = await this.store.getThread(threadId, { tenantId });
+    if (!current || current.status !== THREAD_RUNNING || (runId && current.active_run_id !== runId)) return null;
+    const message = readableRunError(error);
+    await this.store.appendThreadMessage(threadId, {
+      role: 'assistant', kind: 'error', author_id: 'kayros-swarm',
+      text: `La mission n’a pas abouti : ${message}`, created_at: now(),
+    }, { tenantId });
+    await this.store.updateThread(threadId, {
+      status: THREAD_FAILED, error: message, active_run_id: null, updated_at: now(),
+    }, { tenantId });
+    await this._record('collaboration.run.failed', {
+      room_id: current.room_id, tenant_id: tenantId, thread_id: threadId, run_id: runId || current.active_run_id || null, error: message,
+    });
+    return this.store.getThread(threadId, { tenantId });
+  }
+
+  /**
+   * Lance `execute(onProgress)` (le run du collectif) en tâche de fond puis
+   * `finish(run)`. Toute erreur, ou un dépassement de `runTimeoutMs`, fait
+   * passer le fil en `failed`. Les mises à jour de progression sont
+   * sérialisées pour ne jamais se chevaucher.
+   */
+  _launch(threadId, tenantId, runId, { execute, finish }) {
+    let chain = Promise.resolve();
+    const onProgress = ({ completed, total }) => {
+      chain = chain
+        .then(() => this._patchRunningThread(threadId, tenantId, runId, { progress: { completed, total } }))
+        .catch(() => {});
+      return chain;
+    };
+    const job = (async () => {
+      try {
+        const run = await withDeadline(Promise.resolve().then(() => execute(onProgress)), this.runTimeoutMs);
+        await chain;
+        return await finish(run);
+      } catch (error) {
+        await chain;
+        try { return await this._failThread(threadId, tenantId, runId, error); } catch { return null; }
+      } finally {
+        if (this.jobs.get(threadId) === job) this.jobs.delete(threadId);
+      }
+    })();
+    this.jobs.set(threadId, job);
+    return job;
+  }
+
+  /**
+   * Version asynchrone de `handleMessage` : crée immédiatement le fil au statut
+   * `running` et renvoie `{ thread, run_id }` ; le collectif s'exécute ensuite
+   * en tâche de fond. Une seule exécution à la fois par salon.
+   */
+  async startMessage(input = {}) {
+    const prepared = await this._prepareMessage(input);
+    if (prepared.ignored) return prepared.ignored;
+    const { platform, record, room, question } = prepared;
+    const by = input.by || input.user_id || `${platform}:anonymous`;
+    const scope = room.tenant_id;
+    const runId = makeId('swarmrun');
+    const thread = await this.store.withRoomLock(room.room_id, async () => {
+      if (await this._runningThreadInRoom(room)) throw runInProgressError('une mission est déjà en cours sur cette session');
+      await this._hydrateRuntime(record);
+      const createdAt = now();
+      const created = {
+        thread_id: makeId('thread'), tenant_id: scope, room_id: room.room_id,
+        root_run_id: runId, current_run_id: runId, active_run_id: runId,
+        status: THREAD_RUNNING, question, clarification_questions: [],
+        progress: { completed: 0, total: this._agentCount(room) }, error: null,
+        created_by: by, created_at: createdAt, updated_at: createdAt,
+      };
+      await this.store.createThread(created);
+      await this.store.appendThreadMessage(created.thread_id, {
+        role: 'human', kind: 'question', author_id: by, text: question, created_at: createdAt,
+      }, { tenantId: scope });
+      return created;
+    });
+    await this._record('collaboration.run.started', {
+      room_id: room.room_id, tenant_id: scope, platform, thread_id: thread.thread_id, run_id: runId, user_id: input.user_id || null,
+    });
+    this._launch(thread.thread_id, scope, runId, {
+      execute: (onProgress) => this.swarm.run(room.swarm_id, {
+        tenantId: scope, question,
+        context: String(input.context || `Conversation ${platform} · salon ${room.name}`),
+        provider: input.provider, sovereignty: input.sovereignty, model: input.model,
+        by, runId, onProgress,
+      }),
+      finish: async (run) => {
+        const current = await this.store.getThread(thread.thread_id, { tenantId: scope });
+        if (!current || current.status !== THREAD_RUNNING || current.active_run_id !== runId) return current;
+        const questions = clarificationQuestions(run);
+        await this.store.appendThreadMessage(thread.thread_id, {
+          role: 'collective', kind: 'run', author_id: 'kayros-swarm', run, created_at: now(),
+        }, { tenantId: scope });
+        if (questions.length) {
+          await this.store.appendThreadMessage(thread.thread_id, {
+            role: 'assistant', kind: 'clarification_request', author_id: 'kayros-swarm',
+            text: 'Le collectif a besoin de précisions ciblées avant de conclure.',
+            questions, created_at: now(),
+          }, { tenantId: scope });
+        }
+        const total = (run?.analyses || []).length || current.progress?.total || 0;
+        await this.store.updateThread(thread.thread_id, {
+          root_run_id: run.run_id, current_run_id: run.run_id, active_run_id: null,
+          status: questions.length ? 'needs_clarification' : 'awaiting_arbitration',
+          clarification_questions: questions, progress: { completed: total, total }, error: null,
+          updated_at: now(),
+        }, { tenantId: scope });
+        await this.store.updateRoomActivity(room.room_id, now());
+        await this._record('collaboration.run.completed', {
+          room_id: room.room_id, tenant_id: scope, platform, thread_id: thread.thread_id,
+          run_id: run.run_id, verdict: summarizeSwarmRun(run).verdict,
+        });
+        return this.store.getThread(thread.thread_id, { tenantId: scope });
+      },
+    });
+    return { ignored: false, room, run_id: runId, thread: await this.store.getThread(thread.thread_id, { tenantId: scope }) };
+  }
+
+  /**
+   * Version asynchrone de `continueThread` : enregistre la réponse humaine,
+   * passe le fil en `running` et relance le collectif en tâche de fond.
+   * `current_run_id` ne change qu'à la réussite (un échec laisse le run
+   * précédent consultable).
+   */
+  async startContinueThread(threadId, { tenantId = null, text, by = null } = {}) {
+    const scope = String(tenantId || 'default');
+    const existing = await this.store.getThread(threadId, { tenantId: scope });
+    if (!existing) throw new Error('fil introuvable');
+    if (existing.status === 'resolved') throw new Error('fil déjà arbitré');
+    const answer = required(text, 'réponse humaine');
+    const roomRecord = await this.store.getRoom(existing.room_id, { tenantId: scope });
+    const room = publicRoom(roomRecord);
+    if (!room) throw new Error('salon introuvable');
+    const runId = makeId('swarmrun');
+    const { thread, history } = await this.store.withRoomLock(room.room_id, async () => {
+      const current = await this.store.getThread(threadId, { tenantId: scope });
+      if (current.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil');
+      if (await this._runningThreadInRoom(room)) throw runInProgressError('une mission est déjà en cours sur cette session');
+      await this._hydrateRuntime(roomRecord);
+      const previous = (current.messages || []).map((message) => {
+        if (message.kind === 'run') return `Verdict précédent: ${message.run?.consensus?.verdict || 'inconnu'} — ${message.run?.consensus?.rationale || ''}`;
+        return `${message.role}: ${message.text || (message.questions || []).join(' | ')}`;
+      }).join('\n');
+      await this.store.appendThreadMessage(threadId, {
+        role: 'human', kind: 'clarification', author_id: by, text: answer, created_at: now(),
+      }, { tenantId: scope });
+      await this.store.updateThread(threadId, {
+        status: THREAD_RUNNING, active_run_id: runId, error: null,
+        progress: { completed: 0, total: this._agentCount(room) }, updated_at: now(),
+      }, { tenantId: scope });
+      return { thread: current, history: previous };
+    });
+    await this._record('collaboration.thread.rerun.started', {
+      room_id: room.room_id, tenant_id: scope, thread_id: threadId, run_id: runId, by,
+    });
+    this._launch(threadId, scope, runId, {
+      execute: (onProgress) => this.swarm.run(room.swarm_id, {
+        tenantId: scope, question: thread.question,
+        context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
+        by, runId, onProgress,
+      }),
+      finish: async (run) => {
+        const current = await this.store.getThread(threadId, { tenantId: scope });
+        if (!current || current.status !== THREAD_RUNNING || current.active_run_id !== runId) return current;
+        // Une question déjà posée n'est pas reposée (EF-24), comme en mode synchrone.
+        const asked = new Set((current.messages || []).flatMap((message) => (
+          message.kind === 'clarification_request' ? message.questions || [] : []
+        )));
+        const questions = clarificationQuestions(run).filter((item) => !asked.has(item));
+        const status = questions.length ? 'needs_clarification' : 'awaiting_arbitration';
+        await this.store.appendThreadMessage(threadId, {
+          role: 'collective', kind: 'run', author_id: 'kayros-swarm', run, created_at: now(),
+        }, { tenantId: scope });
+        if (questions.length) {
+          await this.store.appendThreadMessage(threadId, {
+            role: 'assistant', kind: 'clarification_request', author_id: 'kayros-swarm',
+            text: 'Des informations restent nécessaires.', questions, created_at: now(),
+          }, { tenantId: scope });
+        }
+        const total = (run?.analyses || []).length || current.progress?.total || 0;
+        await this.store.updateThread(threadId, {
+          current_run_id: run.run_id, active_run_id: null, status, clarification_questions: questions,
+          progress: { completed: total, total }, error: null, updated_at: now(),
+        }, { tenantId: scope });
+        await this._record('collaboration.thread.rerun', {
+          room_id: room.room_id, tenant_id: scope, thread_id: threadId, run_id: run.run_id, by,
+        });
+        return this.store.getThread(threadId, { tenantId: scope });
+      },
+    });
+    return { run_id: runId, thread: await this.store.getThread(threadId, { tenantId: scope }) };
+  }
+
+  /**
+   * Au démarrage du processus : toute exécution restée `running` (processus
+   * arrêté pendant les analyses) passe `failed` avec un message explicite.
+   * Les exécutions suivies par CE processus ne sont pas touchées.
+   */
+  async recoverInterruptedRuns() {
+    const running = this.store.listThreadsByStatus
+      ? await this.store.listThreadsByStatus(THREAD_RUNNING)
+      : (await this.store.listThreads?.({ tenantId: null, limit: 250 }) || []).filter((thread) => thread.status === THREAD_RUNNING);
+    let recovered = 0;
+    for (const thread of running) {
+      if (this.jobs.has(thread.thread_id)) continue;
+      try {
+        const failed = await this._failThread(thread.thread_id, thread.tenant_id, null, new Error(INTERRUPTED_RUN_ERROR));
+        if (failed) recovered += 1;
+      } catch { /* un fil illisible ne bloque pas le démarrage */ }
+    }
+    return recovered;
   }
 }

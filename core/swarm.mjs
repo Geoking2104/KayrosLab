@@ -331,10 +331,8 @@ export function normalizeSwarmVerdict(raw) {
 /** Hypothèse technique ajoutée quand la sortie d'un agent ne contient pas de verdict formel. */
 export const UNPARSABLE_VERDICT_ASSUMPTION = 'Agent output did not contain a parsable formal verdict; human review required.';
 
-function firstJsonObject(text) {
-  const src = String(text || '');
-  const start = src.indexOf('{');
-  if (start < 0) return null;
+/** Objet équilibré commençant à `start` : `{ value, end }` (`end` = -1 si tronqué). */
+function jsonObjectAt(src, start) {
   let depth = 0; let quote = false; let escaped = false;
   for (let i = start; i < src.length; i += 1) {
     const ch = src[i];
@@ -347,10 +345,43 @@ function firstJsonObject(text) {
     if (ch === '"') quote = true;
     else if (ch === '{') depth += 1;
     else if (ch === '}' && --depth === 0) {
-      try { return JSON.parse(src.slice(start, i + 1)); } catch { return null; }
+      try { return { value: JSON.parse(src.slice(start, i + 1)), end: i }; } catch { return { value: null, end: i }; }
     }
   }
+  return { value: null, end: -1 };
+}
+
+/**
+ * Premier objet JSON valide du texte. Une accolade de prose équilibrée mais
+ * non JSON (« {brève} ») est sautée ; un objet tronqué (limite de jetons)
+ * arrête la recherche, comme auparavant, pour ne pas prendre un sous-objet.
+ */
+function firstJsonObject(text) {
+  const src = String(text || '');
+  let start = src.indexOf('{');
+  while (start >= 0) {
+    const { value, end } = jsonObjectAt(src, start);
+    if (value && typeof value === 'object' && !Array.isArray(value)) return value;
+    if (end < 0) return null;
+    start = src.indexOf('{', end + 1);
+  }
   return null;
+}
+
+/**
+ * Objet JSON d'une sortie d'agent. Les modèles à raisonnement (Kimi K3,
+ * DeepSeek…) entourent souvent leur JSON d'un bloc Markdown ```json … ``` :
+ * le contenu du bloc est préféré à toute accolade de la prose environnante.
+ */
+export function extractAgentJson(text) {
+  const src = String(text || '');
+  const fence = /```[ \t]*(?:json|JSON|json5)?[ \t]*\r?\n?([\s\S]*?)```/g;
+  let match;
+  while ((match = fence.exec(src))) {
+    const value = firstJsonObject(match[1]);
+    if (value) return value;
+  }
+  return firstJsonObject(src);
 }
 
 export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnabled = !!definition.human_profile } = {}) {
@@ -358,7 +389,7 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
   // Un modèle à raisonnement peut renvoyer `<think>…</think>` avant le JSON :
   // un « GO » ou une accolade du raisonnement ne doit jamais faire le verdict.
   if (typeof value === 'string') value = stripReasoning(value);
-  if (typeof value === 'string') value = firstJsonObject(value) || { primary_reason: value.slice(0, 500) };
+  if (typeof value === 'string') value = extractAgentJson(value) || { primary_reason: value.slice(0, 500) };
   value = value && typeof value === 'object' ? value : {};
   let verdict = normalizeSwarmVerdict(value.verdict || value.decision);
   const unverified = strings(value.unverified_assumptions);
@@ -651,13 +682,19 @@ export class SwarmService {
   }
   getRun(id, { tenantId = null } = {}) { return clone(this.runs.get(this._key(tenantId, id)) || null); }
 
-  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null } = {}) {
+  /**
+   * `runId` (facultatif) : identifiant réservé par l'appelant (exécution
+   * asynchrone annoncée avant la fin des analyses). `onProgress` (facultatif)
+   * est appelé après chaque analyse d'agent avec `{ completed, total, agent_id }` ;
+   * une erreur levée par ce rappel n'interrompt jamais le run.
+   */
+  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null, runId = null, onProgress = null } = {}) {
     const config = typeof configurationOrId === 'string'
       ? this.getConfiguration(configurationOrId, { tenantId })
       : this.createConfiguration(configurationOrId, { tenantId, by });
     if (!config) throw new Error(`swarm introuvable: ${configurationOrId}`);
     if (!String(question || '').trim()) throw new Error('question de décision requise');
-    const run_id = makeId('swarmrun');
+    const run_id = String(runId || '').trim() || makeId('swarmrun');
     const definitions = config.active_agents.map((id) => {
       const base = this.registry.get(id, { tenantId });
       if (!base || base.enabled === false) throw new Error(`agent indisponible ou désactivé: ${id}`);
@@ -687,7 +724,16 @@ export class SwarmService {
         effective_rules,
       };
     };
-    const analyses = await mapWithConcurrency(definitions, this.maxConcurrency, executeOne);
+    let completed = 0;
+    const tracked = typeof onProgress === 'function'
+      ? async (definition) => {
+        const analysis = await executeOne(definition);
+        completed += 1;
+        try { await onProgress({ completed, total: definitions.length, agent_id: definition.agent_id }); } catch { /* la progression ne bloque jamais un run */ }
+        return analysis;
+      }
+      : executeOne;
+    const analyses = await mapWithConcurrency(definitions, this.maxConcurrency, tracked);
     const llm = summarizeRunProviders(analyses);
     if (llm.mock) {
       this._audit({ type: 'swarm.run.llm_degraded', run_id, swarm_id: config.swarm_id, tenant_id: tenantKey(tenantId), mock_agents: llm.mock_agents, degraded: llm.degraded });

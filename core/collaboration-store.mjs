@@ -122,6 +122,14 @@ export class InMemoryCollaborationStore {
     return rows.map((thread) => ({ ...clone(thread), messages: clone(this.threadMessages.get(thread.thread_id) || []) }));
   }
 
+  /** Fils d'un statut donné, tous tenants confondus (reprise au démarrage). */
+  async listThreadsByStatus(status, { limit = 1000 } = {}) {
+    return [...this.threads.values()]
+      .filter((thread) => thread.status === String(status))
+      .slice(0, Math.max(1, Number(limit) || 1000))
+      .map((thread) => clone(thread));
+  }
+
   async updateThread(threadId, patch, { tenantId = null } = {}) {
     const current = this.threads.get(String(threadId || ''));
     if (!current || (tenantId != null && current.tenant_id !== String(tenantId))) return null;
