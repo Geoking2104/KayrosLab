@@ -15,8 +15,14 @@ const registerSchema = z.object({
   password: z.string().min(4),
   name: z.string().optional(),
   role: z.string().optional(),
+  // Accepté pour compatibilité des anciens clients mais JAMAIS utilisé : le tenant
+  // est fixé côté serveur (EF-25 / ENF-08).
   tenantId: z.string().optional(),
 });
+
+// Tenant d'inscription libre-service tant que Q3 (tenant dédié par utilisateur)
+// n'est pas tranchée : l'isolation entre comptes se fait par propriétaire.
+const SELF_SERVICE_TENANT = 'default';
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -77,12 +83,16 @@ export default async function authRoutes(app) {
     if (!ctx.auth) return reply.code(503).send({ error: 'authentification non configuree' });
     const parsed = registerSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'validation failed', issues: parsed.error.issues });
-    const { email, password, name, role, tenantId } = parsed.data;
+    const { email, password, name, role } = parsed.data;
+    if (parsed.data.tenantId !== undefined) req.log.warn({ email }, 'register: tenantId fourni par le client ignore');
     try {
       let asked = role || 'contributeur';
+      let tenantId = SELF_SERVICE_TENANT;
       if (asked !== 'contributeur') {
         const caller = await app.requireAuth(req, reply); if (!caller) return;
         if (caller.role !== 'comex') return reply.code(403).send({ error: 'seul un COMEX peut creer ce role' });
+        // Un COMEX crée un compte privilégié dans SON tenant, jamais dans un autre.
+        tenantId = caller.tenantId || SELF_SERVICE_TENANT;
       }
       const user = await ctx.auth.register({ email, password, name, role: asked, tenantId });
       await pushAuthelia(req, { email, password, name: name || user?.name });
