@@ -1,0 +1,110 @@
+# KayrosLab — supervision mono-nœud (VPS OVH partagé, ~8 Go de RAM avec
+# Postgres, Ollama et l'API pm2). Adapté du dossier « Architecture &
+# Monitoring Redis HA » : pas de Swarm, pas de Redis/Sentinel, une seule
+# instance Alertmanager. Cf. monitoring/README.md.
+#
+#   docker compose -f monitoring/docker-compose.yml up -d                 # Prometheus + Alertmanager + blackbox
+#   docker compose -f monitoring/docker-compose.yml --profile grafana up -d   # + Grafana (optionnel)
+#
+# Réseau `host` + écoute explicite sur 127.0.0.1 : rien n'est exposé sur
+# l'IP publique, et Prometheus joint l'API (127.0.0.1:8787/metrics) en
+# loopback direct — c'est ce qui l'autorise quand METRICS_TOKEN est vide.
+# Accès humain : tunnel SSH (ssh -L 9090:127.0.0.1:9090 ...).
+#
+# Budget mémoire total ≈ 640 Mo (≈ 900 Mo avec Grafana).
+
+name: kayros-monitoring
+
+x-hardening: &hardening
+  restart: unless-stopped
+  network_mode: host
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  prometheus:
+    <<: *hardening
+    image: prom/prometheus:v3.5.5
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+      - --storage.tsdb.retention.size=1GB
+      - --web.listen-address=127.0.0.1:9090
+      - --web.enable-lifecycle
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/rules:/etc/prometheus/rules:ro
+      - ./secrets:/etc/prometheus/secrets:ro
+      - prometheus_data:/prometheus
+    mem_limit: 512m
+    memswap_limit: 512m
+    cpus: 0.5
+    pids_limit: 256
+
+  alertmanager:
+    <<: *hardening
+    image: prom/alertmanager:v0.34.1
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+      - --web.listen-address=127.0.0.1:9093
+      # Mono-nœud : pas de maillage HA (le dossier source en avait 3 en Swarm).
+      - --cluster.listen-address=
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - ./secrets:/etc/alertmanager/secrets:ro
+      - alertmanager_data:/alertmanager
+    mem_limit: 96m
+    memswap_limit: 96m
+    cpus: 0.2
+    pids_limit: 128
+
+  blackbox:
+    <<: *hardening
+    image: prom/blackbox-exporter:v0.28.0
+    command:
+      - --config.file=/etc/blackbox/blackbox.yml
+      - --web.listen-address=127.0.0.1:9115
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml:ro
+    mem_limit: 48m
+    memswap_limit: 48m
+    cpus: 0.1
+    pids_limit: 64
+
+  grafana:
+    <<: *hardening
+    profiles: ["grafana"]
+    image: grafana/grafana-oss:12.4.3
+    environment:
+      GF_SERVER_HTTP_ADDR: 127.0.0.1
+      GF_SERVER_HTTP_PORT: "3300"
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD__FILE: /etc/grafana/secrets/grafana_admin_password
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ./secrets:/etc/grafana/secrets:ro
+      - grafana_data:/var/lib/grafana
+    mem_limit: 256m
+    memswap_limit: 256m
+    cpus: 0.3
+    pids_limit: 256
+
+volumes:
+  prometheus_data:
+  alertmanager_data:
+  grafana_data:
