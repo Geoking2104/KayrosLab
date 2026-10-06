@@ -73,8 +73,9 @@ test('S14 / N2 : un contributeur ne voit ni n’écrit dans la session d’un au
   const { app, hybridGateway, runCount } = await buildApp(); t.after(() => app.close());
   const bobSession = await openSession(app, 'bob', 'Session de Bob');
   const bobRun = await app.inject(as('bob', { method: 'POST', url: `/v1/console/sessions/${bobSession.session_id}/run`, payload: { question: 'Lancer ?' } }));
-  assert.equal(bobRun.statusCode, 200);
+  assert.equal(bobRun.statusCode, 202);
   const threadId = bobRun.json().thread.thread_id;
+  await hybridGateway.waitForThread(threadId);
   const runsBefore = runCount();
   const messagesBefore = (await hybridGateway.getThread(threadId, { tenantId: 'default' })).messages.length;
 
@@ -115,11 +116,12 @@ test('S14 / N2 : un contributeur ne voit ni n’écrit dans la session d’un au
 });
 
 test('N2 : comex et admin conservent la vue tenant ; l’arbitrage reste réservé à comex/admin', async (t) => {
-  const { app } = await buildApp(); t.after(() => app.close());
+  const { app, hybridGateway } = await buildApp(); t.after(() => app.close());
   const bobSession = await openSession(app, 'bob', 'Session de Bob');
   await openSession(app, 'alice', 'Session d’Alice');
   const bobRun = await app.inject(as('bob', { method: 'POST', url: `/v1/console/sessions/${bobSession.session_id}/run`, payload: { question: 'Lancer ?' } }));
   const threadId = bobRun.json().thread.thread_id;
+  await hybridGateway.waitForThread(threadId);
   const list = await app.inject(as('boss', { method: 'GET', url: '/v1/console/sessions' }));
   assert.equal(list.json().sessions.length, 2);
   const thread = await app.inject(as('boss', { method: 'GET', url: `/v1/console/threads/${threadId}` }));

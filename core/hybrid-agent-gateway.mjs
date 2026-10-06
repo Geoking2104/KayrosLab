@@ -445,8 +445,12 @@ export class HybridAgentGateway {
   }
   // --- Exécution asynchrone (console) -------------------------------------
 
-  /** Promesse de l'exécution en tâche de fond d'un fil (résolue si aucune). */
-  waitForThread(threadId) { return this.jobs.get(String(threadId)) || Promise.resolve(null); }
+  /** Attend la fin de l'exécution en tâche de fond d'un fil (s'il y en a une) et renvoie le fil. */
+  async waitForThread(threadId, { tenantId = null } = {}) {
+    const job = this.jobs.get(String(threadId));
+    if (job) await job.catch(() => null);
+    return this.store.getThread(String(threadId), { tenantId });
+  }
   /** Attend toutes les exécutions en cours de ce processus (tests, arrêt propre). */
   async idle() { while (this.jobs.size) await Promise.allSettled([...this.jobs.values()]); }
 

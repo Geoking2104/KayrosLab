@@ -48,7 +48,7 @@ test('console overview exposes agents, connections and tenant sessions', async (
   assert.equal(body.rooms, undefined);
 });
 
-test('console opens a harness session and runs a governed mission', async (t) => {
+test('console opens a harness session and runs a governed mission (mode wait=true)', async (t) => {
   const { app, swarm } = await buildApp();
   t.after(() => app.close());
   const created = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: {
@@ -61,7 +61,8 @@ test('console opens a harness session and runs a governed mission', async (t) =>
     run_id: 'run-console', swarm_name: 'COMEX', question: options.question, analyses: [],
     consensus: { verdict: 'GO', rationale: 'Majorité favorable.', requires_human_arbitration: true },
   });
-  const response = await app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/run`, payload: { question: 'Lancer maintenant ?' } });
+  // `?wait=true` : mode synchrone historique conservé (compatibilité).
+  const response = await app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/run?wait=true`, payload: { question: 'Lancer maintenant ?' } });
   assert.equal(response.statusCode, 200);
   assert.equal(response.json().summary.verdict, 'GO');
   assert.ok(response.json().thread.thread_id);
