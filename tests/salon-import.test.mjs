@@ -42,6 +42,14 @@ test('import : note d’aperçu hébergé', () => {
 
 test('import : les deux index.html servent la nouvelle version du module', () => {
   assert.equal(html, mirror, 'copies identiques');
-  assert.match(html, /agents-import\.js\?v=20261005b/);
+  assert.match(html, /agents-import\.js\?v=20261005c/);
   assert.match(html, /six œuvres libres/, 'promesse du site alignée (six œuvres)');
+});
+
+test('import : traduit la mémoire avant de l’enregistrer (langue choisie)', () => {
+  assert.match(code, /\/v1\/salon\/translate/, 'route de traduction');
+  assert.match(code, /sampleFr/, 'échantillon français');
+  assert.match(code, /sampleEn/, 'échantillon anglais');
+  assert.match(code, /blurbEn/, 'résumé bilingue');
+  assert.match(code, /\[mock\]/i, 'refus des réponses dégradées');
 });
