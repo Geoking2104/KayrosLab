@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-03T22:22:14.169Z",
+  "updatedAt": "2026-10-06T16:51:01.187Z",
   "authors": {
     "smith": {
       "kb": "salon-smith",
       "works": [],
       "pack": {
         "path": "kb/smith.json",
-        "builtAt": "2026-10-03T22:22:13.666Z",
+        "builtAt": "2026-10-06T16:51:00.911Z",
         "sentences": 36,
         "formulas": 20,
         "checksum": "sha256:3d837dbf3e351ba44b43b51a896fbb7a0862be8b5bf15a6d70b39b64e4c8d381"
@@ -19,7 +19,7 @@
       "works": [],
       "pack": {
         "path": "kb/aristote.json",
-        "builtAt": "2026-10-03T22:22:13.694Z",
+        "builtAt": "2026-10-06T16:51:00.936Z",
         "sentences": 66,
         "formulas": 36,
         "checksum": "sha256:7ae37c72932e414881736b49cf8a34d80d4741b18a8ca104fec7922e86756484"
@@ -31,7 +31,7 @@
       "works": [],
       "pack": {
         "path": "kb/spinoza.json",
-        "builtAt": "2026-10-03T22:22:13.704Z",
+        "builtAt": "2026-10-06T16:51:00.942Z",
         "sentences": 36,
         "formulas": 20,
         "checksum": "sha256:ef34e32da4f0ff29c04f9bfcca1d09896ec32831d140cf7fb1ecf31f889d7986"
@@ -43,7 +43,7 @@
       "works": [],
       "pack": {
         "path": "kb/darwin.json",
-        "builtAt": "2026-10-03T22:22:13.715Z",
+        "builtAt": "2026-10-06T16:51:00.950Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:92eb5db6ab959df77bcbcb315d39874b61da0aab8968b4cc4705892c57a9fc05"
@@ -55,7 +55,7 @@
       "works": [],
       "pack": {
         "path": "kb/confucius.json",
-        "builtAt": "2026-10-03T22:22:13.723Z",
+        "builtAt": "2026-10-06T16:51:00.954Z",
         "sentences": 24,
         "formulas": 14,
         "checksum": "sha256:041e3a5557986982276a88ca811e21f0a1d9271801af9dad25a769e2333c4e52"
@@ -67,7 +67,7 @@
       "works": [],
       "pack": {
         "path": "kb/poe.json",
-        "builtAt": "2026-10-03T22:22:13.731Z",
+        "builtAt": "2026-10-06T16:51:00.959Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:6ab9dfe495af3ee56d22ee428b50eddca1350f2fed1469022220f67c17ecea35"
@@ -79,7 +79,7 @@
       "works": [],
       "pack": {
         "path": "kb/kant.json",
-        "builtAt": "2026-10-03T22:22:13.740Z",
+        "builtAt": "2026-10-06T16:51:00.965Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:10fb00d3a164fa1a960f869df496f44d410533a7dc0e428507c492266ae18fc0"
@@ -91,7 +91,7 @@
       "works": [],
       "pack": {
         "path": "kb/dostoevski.json",
-        "builtAt": "2026-10-03T22:22:13.747Z",
+        "builtAt": "2026-10-06T16:51:00.970Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:aeb46fedb8535b72800c21390c728239ade652383164ca0b5016ea29bd3f2085"
@@ -103,7 +103,7 @@
       "works": [],
       "pack": {
         "path": "kb/kafka.json",
-        "builtAt": "2026-10-03T22:22:13.756Z",
+        "builtAt": "2026-10-06T16:51:00.975Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:89836386527b2809a27fcbf6a422248437facb6e7bf959a5cfd0f0c168c881cd"
@@ -115,7 +115,7 @@
       "works": [],
       "pack": {
         "path": "kb/nietzsche.json",
-        "builtAt": "2026-10-03T22:22:13.765Z",
+        "builtAt": "2026-10-06T16:51:00.980Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:dd7a87e71983cdb4c7cba423c3a46231af6134c38da5b952387dfe663b2c0e11"
@@ -127,7 +127,7 @@
       "works": [],
       "pack": {
         "path": "kb/balzac.json",
-        "builtAt": "2026-10-03T22:22:13.776Z",
+        "builtAt": "2026-10-06T16:51:00.984Z",
         "sentences": 60,
         "formulas": 34,
         "checksum": "sha256:2598777966d1de2e0429c7dac192863f9bbbb950684702c245c95ede52eb4abf"
@@ -139,7 +139,7 @@
       "works": [],
       "pack": {
         "path": "kb/austen.json",
-        "builtAt": "2026-10-03T22:22:13.785Z",
+        "builtAt": "2026-10-06T16:51:00.989Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:24cf18370126f91c27bb04679431eb617e7f84ad5b688f491146140a1452de36"
@@ -151,7 +151,7 @@
       "works": [],
       "pack": {
         "path": "kb/rousseau.json",
-        "builtAt": "2026-10-03T22:22:13.795Z",
+        "builtAt": "2026-10-06T16:51:00.996Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:e6cea55a8e2e3893b1ea5b2123fa1adaa453cb1aaa9513fda311711f856b96ce"
@@ -163,7 +163,7 @@
       "works": [],
       "pack": {
         "path": "kb/verne.json",
-        "builtAt": "2026-10-03T22:22:13.804Z",
+        "builtAt": "2026-10-06T16:51:01.001Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:aad54556609835827016a3cfbdd34c0fd9e33205df32a850b60cc159488e6241"
@@ -175,7 +175,7 @@
       "works": [],
       "pack": {
         "path": "kb/marx.json",
-        "builtAt": "2026-10-03T22:22:13.812Z",
+        "builtAt": "2026-10-06T16:51:01.005Z",
         "sentences": 48,
         "formulas": 26,
         "checksum": "sha256:31023c997512d1af83071fc3693f7fd1a5c0f6b1f3b97f3afda64a542785d43a"
@@ -187,7 +187,7 @@
       "works": [],
       "pack": {
         "path": "kb/tolstoi.json",
-        "builtAt": "2026-10-03T22:22:13.819Z",
+        "builtAt": "2026-10-06T16:51:01.010Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:ece16f3cfe969687dce1f86c3e3db6ae2b8aba807ac353efe2b5b2eb3e75cdc2"
@@ -199,7 +199,7 @@
       "works": [],
       "pack": {
         "path": "kb/marcaurele.json",
-        "builtAt": "2026-10-03T22:22:13.825Z",
+        "builtAt": "2026-10-06T16:51:01.013Z",
         "sentences": 30,
         "formulas": 17,
         "checksum": "sha256:8e3e3e22345f82c6c89298aec17a262871c4e0b90c036b8bf26503c6eb7e0473"
@@ -211,7 +211,7 @@
       "works": [],
       "pack": {
         "path": "kb/montaigne.json",
-        "builtAt": "2026-10-03T22:22:13.831Z",
+        "builtAt": "2026-10-06T16:51:01.016Z",
         "sentences": 25,
         "formulas": 14,
         "checksum": "sha256:bfc12415e034750a05d47349096ccaddd99944c5778735878747f1cd6734d4ca"
@@ -223,7 +223,7 @@
       "works": [],
       "pack": {
         "path": "kb/cervantes.json",
-        "builtAt": "2026-10-03T22:22:13.839Z",
+        "builtAt": "2026-10-06T16:51:01.020Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:75d740195ecfe65904982eaeb8da95924301c1656e9d4f3175cd63e9e952c583"
@@ -235,7 +235,7 @@
       "works": [],
       "pack": {
         "path": "kb/machiavel.json",
-        "builtAt": "2026-10-03T22:22:13.852Z",
+        "builtAt": "2026-10-06T16:51:01.025Z",
         "sentences": 54,
         "formulas": 30,
         "checksum": "sha256:362b97005c0408846ac9528a52175a708b8f55723da19f69f16b81cbaba617cc"
@@ -247,7 +247,7 @@
       "works": [],
       "pack": {
         "path": "kb/wilde.json",
-        "builtAt": "2026-10-03T22:22:13.865Z",
+        "builtAt": "2026-10-06T16:51:01.031Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:7350acaf78a5610b7c38892cf19a48798ed171e7db49fb4815b0cdf07109e762"
@@ -259,7 +259,7 @@
       "works": [],
       "pack": {
         "path": "kb/platon.json",
-        "builtAt": "2026-10-03T22:22:13.878Z",
+        "builtAt": "2026-10-06T16:51:01.036Z",
         "sentences": 66,
         "formulas": 36,
         "checksum": "sha256:1cc31bb352c7067784b32173e7d4ca7192182e3bd73c4c0370e3fb52a67e1ce4"
@@ -271,7 +271,7 @@
       "works": [],
       "pack": {
         "path": "kb/descartes.json",
-        "builtAt": "2026-10-03T22:22:13.887Z",
+        "builtAt": "2026-10-06T16:51:01.041Z",
         "sentences": 36,
         "formulas": 20,
         "checksum": "sha256:5b204f771c09d48d408d6ee2649de55086bcfbdd298d853b1981a266f4a559db"
@@ -283,7 +283,7 @@
       "works": [],
       "pack": {
         "path": "kb/stendhal.json",
-        "builtAt": "2026-10-03T22:22:13.894Z",
+        "builtAt": "2026-10-06T16:51:01.047Z",
         "sentences": 60,
         "formulas": 35,
         "checksum": "sha256:5cf9ef429cdfb6b4f0b2a27d31388919612a98af943aa2a0bf5e66f0ea671040"
@@ -295,7 +295,7 @@
       "works": [],
       "pack": {
         "path": "kb/suntzu.json",
-        "builtAt": "2026-10-03T22:22:13.900Z",
+        "builtAt": "2026-10-06T16:51:01.051Z",
         "sentences": 30,
         "formulas": 17,
         "checksum": "sha256:38a1f16112d58ea29bdbf3a63f4ae25698b737e7b49f21175ed6d4e51b31551d"
@@ -307,7 +307,7 @@
       "works": [],
       "pack": {
         "path": "kb/hugo.json",
-        "builtAt": "2026-10-03T22:22:13.908Z",
+        "builtAt": "2026-10-06T16:51:01.055Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:16c61201b52a4146091140f5906c132f91c858a6ab093ff13eacadd7de245f95"
@@ -319,7 +319,7 @@
       "works": [],
       "pack": {
         "path": "kb/voltaire.json",
-        "builtAt": "2026-10-03T22:22:13.917Z",
+        "builtAt": "2026-10-06T16:51:01.059Z",
         "sentences": 61,
         "formulas": 35,
         "checksum": "sha256:b5058c05807f70ad6a98d4433fc434fe5082cc10b8bd8e9a91e8c49a2c7536d1"
@@ -331,7 +331,7 @@
       "works": [],
       "pack": {
         "path": "kb/shakespeare.json",
-        "builtAt": "2026-10-03T22:22:13.924Z",
+        "builtAt": "2026-10-06T16:51:01.064Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:5510dfb519499d8f9bcfc92a6a745eb0c86e06857433568a4780d96d5d5b9c18"
@@ -343,7 +343,7 @@
       "works": [],
       "pack": {
         "path": "kb/seneca.json",
-        "builtAt": "2026-10-03T22:22:13.931Z",
+        "builtAt": "2026-10-06T16:51:01.068Z",
         "sentences": 48,
         "formulas": 26,
         "checksum": "sha256:5dcb9e2736602c28f646f59fec66e0eb551bd9413c1408b13d73dd945fd94f02"
@@ -355,7 +355,7 @@
       "works": [],
       "pack": {
         "path": "kb/ciceron.json",
-        "builtAt": "2026-10-03T22:22:13.939Z",
+        "builtAt": "2026-10-06T16:51:01.072Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:2a3356e116f8cb7ddfa280b7016918f923deaf82e826f677c8addecf65a017d1"
@@ -367,7 +367,7 @@
       "works": [],
       "pack": {
         "path": "kb/epictete.json",
-        "builtAt": "2026-10-03T22:22:13.946Z",
+        "builtAt": "2026-10-06T16:51:01.076Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:903eaecde3c82e568e39b15c42aef6584c0a7a6ad78d7b03b8151d21961155a6"
@@ -379,7 +379,7 @@
       "works": [],
       "pack": {
         "path": "kb/epicure.json",
-        "builtAt": "2026-10-03T22:22:13.953Z",
+        "builtAt": "2026-10-06T16:51:01.079Z",
         "sentences": 30,
         "formulas": 17,
         "checksum": "sha256:5885b530c9a36387aa41269cc12b80c7152fa1cacfd6b9a32e0699fc2ea5d94d"
@@ -391,7 +391,7 @@
       "works": [],
       "pack": {
         "path": "kb/augustin.json",
-        "builtAt": "2026-10-03T22:22:13.959Z",
+        "builtAt": "2026-10-06T16:51:01.084Z",
         "sentences": 48,
         "formulas": 27,
         "checksum": "sha256:1e57d6aab5eff281ed431e417a25259b7012315325de740ee08332d8247a0615"
@@ -403,7 +403,7 @@
       "works": [],
       "pack": {
         "path": "kb/boece.json",
-        "builtAt": "2026-10-03T22:22:13.965Z",
+        "builtAt": "2026-10-06T16:51:01.087Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:86c465ff25b2931ee28b6e4983811a51bca6d1b8134d9059eac6b1b7a643c2e6"
@@ -415,7 +415,7 @@
       "works": [],
       "pack": {
         "path": "kb/aquinas.json",
-        "builtAt": "2026-10-03T22:22:13.971Z",
+        "builtAt": "2026-10-06T16:51:01.090Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:cb85d5015847c8c9128b6845c15edeb3182a44dd6f196b232ba7f98248fe68b4"
@@ -427,7 +427,7 @@
       "works": [],
       "pack": {
         "path": "kb/hobbes.json",
-        "builtAt": "2026-10-03T22:22:13.979Z",
+        "builtAt": "2026-10-06T16:51:01.095Z",
         "sentences": 48,
         "formulas": 26,
         "checksum": "sha256:7966a1517cc3f05b3495b6e1d167a7119feca41159678f06a9aa9f3211a16c50"
@@ -439,7 +439,7 @@
       "works": [],
       "pack": {
         "path": "kb/locke.json",
-        "builtAt": "2026-10-03T22:22:13.986Z",
+        "builtAt": "2026-10-06T16:51:01.098Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:3e36e8c9d5fdebd7e86108efc9a3d518282fc827d9c26a0d35c3e02b910768e1"
@@ -451,7 +451,7 @@
       "works": [],
       "pack": {
         "path": "kb/hume.json",
-        "builtAt": "2026-10-03T22:22:13.995Z",
+        "builtAt": "2026-10-06T16:51:01.102Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:c3a0f0275229d3ef69b55d0c1a55e0a53a1d6e8d829506e616f3eca65405ba66"
@@ -463,7 +463,7 @@
       "works": [],
       "pack": {
         "path": "kb/leibniz.json",
-        "builtAt": "2026-10-03T22:22:14.001Z",
+        "builtAt": "2026-10-06T16:51:01.106Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:73f88c2d3e2859d1e2a9e6d472fbd8d112e40405f801226d1f7640c55175470e"
@@ -475,7 +475,7 @@
       "works": [],
       "pack": {
         "path": "kb/pascal.json",
-        "builtAt": "2026-10-03T22:22:14.008Z",
+        "builtAt": "2026-10-06T16:51:01.109Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:cb2707bad84130ef8fd40b208462a576158bf7727a9acba89ba91839a6310653"
@@ -487,7 +487,7 @@
       "works": [],
       "pack": {
         "path": "kb/berkeley.json",
-        "builtAt": "2026-10-03T22:22:14.015Z",
+        "builtAt": "2026-10-06T16:51:01.112Z",
         "sentences": 48,
         "formulas": 26,
         "checksum": "sha256:5257bdd78f666ec3cafbb21de2385c1921c38a44247691b5a37936ce2294a100"
@@ -499,7 +499,7 @@
       "works": [],
       "pack": {
         "path": "kb/hegel.json",
-        "builtAt": "2026-10-03T22:22:14.025Z",
+        "builtAt": "2026-10-06T16:51:01.116Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:ab5a2eaa80ba1725a18668e33ab9e7ea477ffb3fb4582e6d0bd61ca9738674ae"
@@ -511,7 +511,7 @@
       "works": [],
       "pack": {
         "path": "kb/schopenhauer.json",
-        "builtAt": "2026-10-03T22:22:14.033Z",
+        "builtAt": "2026-10-06T16:51:01.121Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:a6466ef0b6ec4646b34fb422d815274cc9729508ab904f0233289ad4c0641f7a"
@@ -523,7 +523,7 @@
       "works": [],
       "pack": {
         "path": "kb/kierkegaard.json",
-        "builtAt": "2026-10-03T22:22:14.040Z",
+        "builtAt": "2026-10-06T16:51:01.125Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:9104919e55214cc548ca9115367879c3a4831a163fd25351af677de7235a3fd0"
@@ -535,7 +535,7 @@
       "works": [],
       "pack": {
         "path": "kb/mill.json",
-        "builtAt": "2026-10-03T22:22:14.047Z",
+        "builtAt": "2026-10-06T16:51:01.128Z",
         "sentences": 60,
         "formulas": 34,
         "checksum": "sha256:127b20c47b9fadf50284be2103daee342fdfd2c4069713fe9f2756b815095de8"
@@ -547,7 +547,7 @@
       "works": [],
       "pack": {
         "path": "kb/emerson.json",
-        "builtAt": "2026-10-03T22:22:14.055Z",
+        "builtAt": "2026-10-06T16:51:01.133Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:dd01ae638f5a215cbd4c248fcbb4dc0e1bbe15d161c34f5993fb14377ff36604"
@@ -559,7 +559,7 @@
       "works": [],
       "pack": {
         "path": "kb/james.json",
-        "builtAt": "2026-10-03T22:22:14.065Z",
+        "builtAt": "2026-10-06T16:51:01.138Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:92ec079cb6232388e14ec59c3041c55b9bff23279834ff72f684c61e6d2e8eec"
@@ -571,7 +571,7 @@
       "works": [],
       "pack": {
         "path": "kb/diderot.json",
-        "builtAt": "2026-10-03T22:22:14.076Z",
+        "builtAt": "2026-10-06T16:51:01.142Z",
         "sentences": 60,
         "formulas": 34,
         "checksum": "sha256:e0ab2ab7621616196cb84eb44ce072ce5f94ea56c0b1ea5cf8753d4d2322a76c"
@@ -583,7 +583,7 @@
       "works": [],
       "pack": {
         "path": "kb/christianisme.json",
-        "builtAt": "2026-10-03T22:22:14.084Z",
+        "builtAt": "2026-10-06T16:51:01.146Z",
         "sentences": 60,
         "formulas": 34,
         "checksum": "sha256:742d2de67c5b120d05814c6edb19877825f4759164533348db39c53a451a0cb0"
@@ -595,7 +595,7 @@
       "works": [],
       "pack": {
         "path": "kb/judaisme.json",
-        "builtAt": "2026-10-03T22:22:14.091Z",
+        "builtAt": "2026-10-06T16:51:01.149Z",
         "sentences": 55,
         "formulas": 30,
         "checksum": "sha256:c76a8dca99df640a7c4ed9cc2a49b294f3f4a8fe42cabcdea9abaec4e7833758"
@@ -607,7 +607,7 @@
       "works": [],
       "pack": {
         "path": "kb/islam.json",
-        "builtAt": "2026-10-03T22:22:14.098Z",
+        "builtAt": "2026-10-06T16:51:01.152Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:83178cb465e0172baebf18c4702a3eb4d2ecb9c646690723426e84c200819436"
@@ -619,7 +619,7 @@
       "works": [],
       "pack": {
         "path": "kb/hindouisme.json",
-        "builtAt": "2026-10-03T22:22:14.108Z",
+        "builtAt": "2026-10-06T16:51:01.156Z",
         "sentences": 60,
         "formulas": 33,
         "checksum": "sha256:6a7378ed65162153e4df32e4271d64b1aca91752cf25d3cb3ac747f1b2f848f0"
@@ -631,7 +631,7 @@
       "works": [],
       "pack": {
         "path": "kb/bouddhisme.json",
-        "builtAt": "2026-10-03T22:22:14.115Z",
+        "builtAt": "2026-10-06T16:51:01.159Z",
         "sentences": 36,
         "formulas": 20,
         "checksum": "sha256:31bc2b60087890b4d77531c8dcc25c02fdcc96a8ddc62ec305b70736ea9baac8"
@@ -643,7 +643,7 @@
       "works": [],
       "pack": {
         "path": "kb/taoisme.json",
-        "builtAt": "2026-10-03T22:22:14.121Z",
+        "builtAt": "2026-10-06T16:51:01.163Z",
         "sentences": 24,
         "formulas": 13,
         "checksum": "sha256:037d0b7cd7799539c675e978ef7ef888fb1e3ff7b0374f063243d919b83450ae"

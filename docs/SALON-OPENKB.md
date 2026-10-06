@@ -672,3 +672,13 @@ export default async function salonKbRoutes(app) {
 - [ ] Golden-set acceptance §12.2 met on pilot authors; audit reports archived.
 - [ ] Gazette replies still mention-gated; no tweets in KBs (compliance test).
 - [ ] Runbook: rebuild one author / one work; restore previous pack; upgrade OpenKB.
+
+### F. Langues (v2 — « jamais de mélange »)
+
+- Le corpus porte `tr: { fr?, en? }` : la traduction d'affichage de chaque phrase (l'original
+  reste dans `s`, base des scores de recherche). Les packs et le corpus publié transportent `tr`.
+- `salon-engine.js` affiche la langue choisie partout : répliques, passages du prompt, ancres
+  de doctrine (`resolveAnchor(..., lang)`), preuves des auteurs importés (`sampleFr`/`sampleEn`).
+- Import d'auteur : les six œuvres sont traduites (fr/en) AVANT enregistrement via
+  `POST /v1/salon/translate` (cache, garde anti-`[mock]`) ; résumé Wikipédia bilingue (blurbFr/blurbEn).
+- Import au runtime : la route sert de rattrapage pour toute donnée future (fournisseur LLM forcé côté serveur).

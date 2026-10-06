@@ -1,7 +1,7 @@
 {
   "authorId": "stendhal",
   "kbVersion": "stendhal@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T22:22:13.894Z",
+  "builtAt": "2026-10-06T16:51:01.047Z",
   "source": "bootstrap-corpus",
   "lang": "fr",
   "works": [
@@ -33,6 +33,9 @@
       "s": "L'idée d'un devoir à accomplir, et d'un ridicule ou plutôt d'un sentiment d'infériorité à encourir si l'on n'y parvenait pas, éloigna sur-le-champ tout plaisir de son coeur.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "The idea of ​​a duty to accomplish, and of ridicule or rather a feeling of inferiority to be incurred if one did not succeed, immediately removed all pleasure from his heart."
       }
     },
     {
@@ -41,6 +44,9 @@
       "s": "La prudence l'obligea enfin à revenir chez elle.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "Prudence finally forced her to return home."
       }
     },
     {
@@ -49,6 +55,9 @@
       "s": "Il examinait la lettre dans tous les sens: N'est-ce pas là une écriture de femme?",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "He examined the letter in every direction: Isn't this a woman's writing?"
       }
     },
     {
@@ -57,6 +66,9 @@
       "s": "Mme de Rênal, pétrifiée, ne savait que répondre.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "Madame de Rênal, petrified, did not know what to answer."
       }
     },
     {
@@ -65,6 +77,9 @@
       "s": "A son grand étonnement, Julien s'aperçut qu'on le haïssait moins; il s'attendait au contraire à un redoublement de haine.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "To his great astonishment, Julien noticed that people hated him less; on the contrary, he expected a redoubled hatred."
       }
     },
     {
@@ -73,6 +88,9 @@
       "s": "Si vous étiez un sot, vous pourriez vous y laisser prendre; si vous vouliez faire fortune, vous devriez vous y laisser prendre.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "If you were a fool, you might fall for it; If you wanted to make your fortune, you should go for it."
       }
     },
     {
@@ -81,6 +99,9 @@
       "s": "Il alla demander conseil à l'abbé Pirard, qui, moins poli que le marquis, ne lui répondit qu'en sifflant et parlant d'autre chose.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "He went to ask advice from Abbot Pirard, who, less polite than the Marquis, only responded by whistling and talking about something else."
       }
     },
     {
@@ -89,6 +110,9 @@
       "s": "S'exposer au danger élève l'âme et la sauve de l'ennui où mes pauvres adorateurs semblent plongés; et il est contagieux, cet ennui.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "Exposing oneself to danger elevates the soul and saves it from the boredom in which my poor worshipers seem plunged; and this boredom is contagious."
       }
     },
     {
@@ -97,6 +121,9 @@
       "s": "Tout ce qui était au-dessus de lui la veille, était à ses côtés maintenant ou bien au-dessous.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "Everything that was above him yesterday was at his side now or below him."
       }
     },
     {
@@ -105,6 +132,9 @@
       "s": "Voilà enfin le grand mot prononcé, pensa Julien, c'est vers le...",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "Here at last is the big word spoken, thought Julien, it is towards the..."
       }
     },
     {
@@ -113,6 +143,9 @@
       "s": "Il eut assez de force pour pouvoir continuer à parler.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "He had enough strength to continue speaking."
       }
     },
     {
@@ -121,6 +154,9 @@
       "s": "Il ne trouvait rien que de simple dans son affaire: J'ai voulu tuer, je dois être tué.",
       "src": {
         "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "tr": {
+        "en": "He found nothing but simple in his affair: I wanted to kill, I must be killed."
       }
     },
     {
@@ -129,6 +165,9 @@
       "s": "Le caporal Aubry marchait sans mot dire.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "Corporal Aubry walked without saying a word."
       }
     },
     {
@@ -137,6 +176,9 @@
       "s": "Mademoiselle, daignez vous rappeler que ce mauvais sujet est mon fils et s’appelle Pietranera et non del Dongo.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "Mademoiselle, please remember that this bad subject is my son and his name is Pietranera and not del Dongo."
       }
     },
     {
@@ -145,6 +187,9 @@
       "s": "Huit jours après sa visite à la forteresse, la duchesse reçut une lettre de commutation de peine signée du prince et du ministre, avec le nom en blanc.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "Eight days after her visit to the fortress, the duchess received a letter of sentence commutation signed by the prince and the minister, with the name blank."
       }
     },
     {
@@ -153,6 +198,9 @@
       "s": "Sa joie redoubla lorsqu’il sut que Fabrice s’était présenté sous un faux nom, et avait eu l’honneur d’exciter la jalousie d’un mauvais garnement nommé Giletti, lequel à la ville jouait les troisièmes rôles de valet, et dans les villages dansait sur la corde.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "His joy redoubled when he learned that Fabrice had presented himself under a false name, and had had the honor of arousing the jealousy of a bad rascal named Giletti, who in the city played the third role of valet, and in the villages danced on the rope."
       }
     },
     {
@@ -161,6 +209,9 @@
       "s": "Il avait bien observé auparavant que l’extrémité du fusil était à plus de trois pouces au-dessus de l’épaule de Giletti: la détonation eut lieu tout près de l’oreille de ce dernier.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "He had previously observed that the end of the rifle was more than three inches above Giletti's shoulder: the detonation took place very close to the latter's ear."
       }
     },
     {
@@ -169,6 +220,9 @@
       "s": "D’ailleurs vous n’avancez point; par pure vergogne, décampons.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "Besides, you are not moving forward;  out of sheer shame, let's leave."
       }
     },
     {
@@ -177,6 +231,9 @@
       "s": "Celle-ci, de son côté, était étonnée, et, l’on peut dire à sa gloire, ravie des grâces si nouvelles qu’elle découvrait dans la jeune solitaire; depuis une heure elle la regardait avec un plaisir assez rarement senti à la vue d’une rivale.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "The latter, for her part, was astonished, and, one can say to her glory, delighted with the new graces that she discovered in the young solitary woman; for an hour she had been looking at her with a pleasure rarely felt at the sight of a rival."
       }
     },
     {
@@ -185,6 +242,9 @@
       "s": "Cette seconde tour, comme le lecteur s’en souvient peut-être, fut élevée sur la plate-forme de la grosse tour, en l’honneur d’un prince héréditaire qui, fort différent de l’Hippolyte fils de Thésée, n’avait point repoussé les politesses d’une jeune belle-mère.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "This second tower, as the reader perhaps remembers, was raised on the platform of the large tower, in honor of a hereditary prince who, very different from Hippolytus son of Theseus, had not rejected the courtesies of a young mother-in-law."
       }
     },
     {
@@ -193,6 +253,9 @@
       "s": "Mais, croyez-moi, ceci ne peut durer longtemps, vous obéirez aux ordres de la duchesse.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "But, believe me, this cannot last long, you will obey the Duchess's orders."
       }
     },
     {
@@ -201,6 +264,9 @@
       "s": "Il agissait mécaniquement, dit-il, et comme il eût fait en plein jour, descendant devant des amis, pour gagner un pari.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "He acted mechanically, he said, and as he would have done in broad daylight, going down in front of friends to win a bet."
       }
     },
     {
@@ -209,6 +275,9 @@
       "s": "De près, ce bon fils ne lui fera pas de mal sérieux.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "Up close, this good son won't do him any serious harm."
       }
     },
     {
@@ -217,6 +286,9 @@
       "s": "Une singulière difficulté s’éleva pour le procès de Fabrice: les juges voulaient l’acquitter par acclamation, et dès la première séance.",
       "src": {
         "work": "La Chartreuse De Parme"
+      },
+      "tr": {
+        "en": "A singular difficulty arose for Fabrice's trial: the judges wanted to acquit him by acclamation, and from the first session."
       }
     },
     {
@@ -225,6 +297,9 @@
       "s": "Il y avait encore sous la Restauration une ligne de démarcation dans le grand monde; n'allait pas dans le faubourg Saint-Germain qui voulait; ceux que leur naissance n'y installait point tout d'abord n'y étaient pas introduits, comme depuis, sur la seule étiquette de leur esprit.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "Under the Restoration there was still a line of demarcation in the great world; did not go to the Faubourg Saint-Germain who wanted; those whom their birth did not initially install there were not introduced there, as since, on the sole label of their mind."
       }
     },
     {
@@ -233,6 +308,9 @@
       "s": "Il s'exagère en moins ses propres avantages, et en plus les moindres faveurs de l'objet aimé.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "He exaggerates in less his own advantages, and in addition the slightest favors of the loved object."
       }
     },
     {
@@ -241,6 +319,9 @@
       "s": "C'est à l'anatomie comparée que nous devons demander les plus importantes révélations sur nous-mêmes.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "It is from comparative anatomy that we must seek the most important revelations about ourselves."
       }
     },
     {
@@ -249,6 +330,9 @@
       "s": "La paix se fit, et la réconciliation fut accompagnée de circonstances si délicieuses que Bariac jura à Balaon que le moment des premières faveurs qu'il avait obtenues de sa maîtresse n'avait pas été si doux que celui de ce voluptueux raccommodement.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "Peace was made, and the reconciliation was accompanied by circumstances so delicious that Bariac swore to Balaon that the moment of the first favors he had obtained from his mistress had not been so sweet as that of this voluptuous reconciliation."
       }
     },
     {
@@ -257,6 +341,9 @@
       "s": "En effet, le remède à l'amour est presque impossible.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "Indeed, the cure for love is almost impossible."
       }
     },
     {
@@ -265,6 +352,9 @@
       "s": "Je trouvai une femme très éprise, ayant le plus grand soin du ménage, ne désirant nullement sortir, quoique la saison invitât à la promenade, et d'ailleurs convaincue que son amant la ramènerait en France.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "I found a very smitten woman, taking the greatest care of the household, not wanting to go out at all, although the season invited walks, and moreover convinced that her lover would take her back to France."
       }
     },
     {
@@ -273,6 +363,9 @@
       "s": "Elle l'en faisait sortir pour être avec lui quand elle se croyait en sûreté; et, quand il arrivait quelqu'un qui aurait pu le voir, elle le faisait rentrer dans le coffre.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "She would bring him out to be with him when she thought she was safe; and when someone came along who could see him, she put him in the trunk."
       }
     },
     {
@@ -281,6 +374,9 @@
       "s": "Le gouvernement chercherait à entourer ces établissements de considération, pour consoler un peu la tristesse des pauvres filles qui y achèveraient leur vie.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "The government would seek to surround these establishments with consideration, to console a little the sadness of the poor girls who would end their lives there."
       }
     },
     {
@@ -289,6 +385,9 @@
       "s": "Heures des plaisirs, qui ne tiennent aux sens que par les souvenirs.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "Hours of pleasure, which only hold the senses through memories."
       }
     },
     {
@@ -297,6 +396,9 @@
       "s": "Luizina, l'autre jour, s'est laissé tomber dans le lac, comme vous savez; c'est qu'elle suivait des yeux une feuille de laurier détachée de quelque arbre de l'Isola-Madre (îles Borromées).",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "Luizina, the other day, let herself fall into the lake, as you know; it was because she was following with her eyes a laurel leaf detached from some tree on Isola Madre (Borromean Islands)."
       }
     },
     {
@@ -305,6 +407,10 @@
       "s": "Masculus non solet nisi in plena pubertate amare.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "fr": "Il n'est pas d'usage qu'un homme tombe amoureux à moins qu'il ne soit en pleine puberté.",
+        "en": "It is not customary for a male to fall in love unless he is in full puberty."
       }
     },
     {
@@ -313,6 +419,9 @@
       "s": "C'est peut-être cette qualité qui, plus tard, lorsqu'elle a paru dans le monde et qu'elle a osé parler, lui a fait jouer un rôle si brillant.",
       "src": {
         "work": "De l'Amour"
+      },
+      "tr": {
+        "en": "It is perhaps this quality which, later, when she appeared in the world and dared to speak, made her play such a brilliant role."
       }
     },
     {
@@ -321,6 +430,9 @@
       "s": "Tout est décadence ici, tout est souvenir, tout est mort.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "Everything is decadence here, everything is memory, everything is dead."
       }
     },
     {
@@ -329,6 +441,9 @@
       "s": "Ma place au parterre m’a coûté 32 carlins (14 francs), et mon dixième dans une loge au troisième, 5 sequins.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "My place on the floor cost me 32 pugs (14 francs), and my tenth in a box on the third floor cost 5 sequins."
       }
     },
     {
@@ -337,6 +452,9 @@
       "s": "Celui de Duport ne vaut guère mieux: toujours des guirlandes, des fleurs, des écharpes dont les belles décorent leurs guerriers, ou que les bergères échangent avec leurs amans, et l’on danse en réjouissance de l’écharpe.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "Duport's is hardly better: always garlands, flowers, scarves with which the beauties decorate their warriors, or which the shepherdess exchange with their lovers, and we dance in rejoicing over the scarf."
       }
     },
     {
@@ -345,6 +463,9 @@
       "s": "La musique du troisième acte, qui est une espèce de ballet en danse pyrrhique, est de M.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "The music of the third act, which is a kind of ballet in Pyrrhic dance, is by M."
       }
     },
     {
@@ -353,6 +474,9 @@
       "s": "La bonté de l’archet n’y fait rien, c’est le corps de l’instrument qu’il faut renouveler.» Tous les tableaux pris à Paris sont réunis au palais du Vatican dans la salle Borgia.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "The goodness of the bow does nothing, it is the body of the instrument that must be renewed.” All the paintings taken in Paris are brought together at the Vatican Palace in the Borgia Room."
       }
     },
     {
@@ -361,6 +485,9 @@
       "s": "Les dialogues de Fénélon sont intraduisibles en toscan; rien de plus aisé que de les mettre en vénitien ou en milanais.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "Fénélon's dialogues are untranslatable into Tuscan;  nothing could be easier than putting them into Venetian or Milanese."
       }
     },
     {
@@ -369,6 +496,9 @@
       "s": "Vous savez que l’école de Florence se reconnaît à un dessin hardi qui, sur les pas de Michel-Ange, outre un peu la partie saillante des muscles.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "You know that the Florence school can be recognized by a bold drawing which, following in the footsteps of Michelangelo, adds a little to the protruding part of the muscles."
       }
     },
     {
@@ -377,6 +507,9 @@
       "s": "Les pauvres Italiens sont bien loin de songer aux jouissances de vanité; au milieu de l’absence de toute loi et de toute justice (on parle de ce qui existait autrefois), ils cherchent celles de la sûreté.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "The poor Italians are far from thinking of the pleasures of vanity;  in the midst of the absence of all law and all justice (we are talking about what existed in the past), they seek those of safety."
       }
     },
     {
@@ -385,6 +518,9 @@
       "s": "A Londres, tous les jeudis, il y a conseil d’avocats, chez M.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "In London, every Thursday, there is a council of lawyers, at Mr."
       }
     },
     {
@@ -393,6 +529,9 @@
       "s": "Ce pauvre homme de génie a eu l’imprudence de se marier; sa femme est fort adroite, et renouvelle à ses dépens la vieille histoire de Tom Jones et de Blifil.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "This poor man of genius had the imprudence to marry;  his wife is very clever, and renews at his expense the old story of Tom Jones and Blifil."
       }
     },
     {
@@ -401,6 +540,9 @@
       "s": "Après trois heures rapides, passées au bord des précipices de la Villa Sfrondata, nous voici à la Villa Melzi.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "After three quick hours, spent on the edge of the precipices of Villa Sfrondata, here we are at Villa Melzi."
       }
     },
     {
@@ -409,6 +551,9 @@
       "s": "En montant, plusieurs ânes se sont abattus sur ces pavés glissans, et nos dames ont fait des chutes qui n’ont été que plaisantes: nous nous arrêtions à tout moment à quelqu’une des quinze ou vingt chapelles, pour nous retourner et jouir de la vue.",
       "src": {
         "work": "Rome, Naples et Florence, en 1817"
+      },
+      "tr": {
+        "en": "While going up, several donkeys fell on these slippery cobblestones, and our ladies had falls which were only pleasant: we stopped at any time at one of the fifteen or twenty chapels, to turn around and enjoy the view."
       }
     },
     {
@@ -417,6 +562,9 @@
       "s": "Tel était l'amour que sut inspirer à Hélène, à peine âgée de dix-sept ans, Jules Branciforte.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "Such was the love that Jules Branciforte was able to inspire in Hélène, barely seventeen years old."
       }
     },
     {
@@ -425,6 +573,9 @@
       "s": "Fabio rechargea rapidement son arquebuse, et, quoi que son père pût lui dire, courut au jardin de la maison, ouvrit sans bruit une petite porte qui donnait sur une rue voisine, et ensuite s'en vint, à pas de loup, examiner un peu les gens qui se promenaient sous le balcon du palais.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "Fabio quickly reloaded his arquebus, and, whatever his father might say to him, ran to the garden of the house, quietly opened a small door which opened onto a neighboring street, and then came, stealthily, to examine a little the people who were walking under the balcony of the palace."
       }
     },
     {
@@ -433,6 +584,9 @@
       "s": "Il faut savoir qu'au seizième siècle les jeunes filles, plus voisines du bon sens républicain, estimaient beaucoup plus un homme pour ce qu'il avait fait lui-même que pour les richesses amassées par ses pères ou pour les actions célèbres de ceux-ci.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "You should know that in the sixteenth century young girls, closer to republican common sense, esteemed a man much more for what he had done himself than for the wealth amassed by his fathers or for their famous actions."
       }
     },
     {
@@ -441,6 +595,9 @@
       "s": "Fabrice était un grand homme maigre, d'une agilité et d'une force increvables: quoique à peine âgé de quarante-cinq ans ses cheveux et sa moustache étaient d'une blancheur éclatante, ce qui le contrariait fort: à ce signe on pouvait le reconnaître en des lieux où il eût mieux aimé passer incognito.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "Fabrice was a tall, thin man, of indestructible agility and strength: although barely forty-five years old, his hair and mustache were dazzling white, which greatly annoyed him: by this sign he could be recognized in places where he would have preferred to pass incognito."
       }
     },
     {
@@ -449,6 +606,9 @@
       "s": "Il espérait même revoir sa chambre, où il avait été reçu quand sa mère était absente.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "He even hoped to see his room again, where he had been received when his mother was absent."
       }
     },
     {
@@ -457,6 +617,9 @@
       "s": "Le son lointain de cet Ave Maria me toucha, je l'avoue; je t'accordai ta demande.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "The distant sound of this Ave Maria touched me, I admit;  I granted your request."
       }
     },
     {
@@ -465,6 +628,9 @@
       "s": "La nuit suivante il parla ainsi d'un air résolu: --Demain je viendrai de meilleure heure, je détacherai une des barres de cette grille, vous descendrez dans le jardin, je vous conduirai dans une église de la ville, où un prêtre à moi dévoué nous mariera.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "The following night he spoke thus with a resolute air: -Tomorrow I will come earlier, I will untie one of the bars of this gate, you will go down into the garden, I will take you to a church in the town, where a devoted priest of mine will marry us."
       }
     },
     {
@@ -473,6 +639,9 @@
       "s": "Mais, comme ces deux barres de fer sont trop pesantes pour que la soeur tourière puisse les manoeuvrer, jamais je ne les ai vues en place; et pourtant j'ai passé plus de dix fois cette porte de fer.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "But, as these two iron bars are too heavy for the sister labourer to be able to maneuver them, I have never seen them in place;  and yet I have passed through this iron gate more than ten times."
       }
     },
     {
@@ -481,6 +650,9 @@
       "s": "Aussitôt il sentit que ce bras lui refusait le service.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "Immediately he felt that this arm refused him service."
       }
     },
     {
@@ -489,6 +661,9 @@
       "s": "Nous allons, en effet, assister à la longue dégradation d'une âme noble et généreuse.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "We will, in fact, witness the long degradation of a noble and generous soul."
       }
     },
     {
@@ -497,6 +672,9 @@
       "s": "Le lendemain, dès sept heures, elle se fit annoncer chez le vieux cardinal.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "The next day, at seven o'clock, she was announced to the old cardinal."
       }
     },
     {
@@ -505,6 +683,9 @@
       "s": "Le 9 septembre 1573, Grégoire XIII ordonna que le procès fût fait en toute hâte et en toute rigueur.",
       "src": {
         "work": "L'Abbesse De Castro"
+      },
+      "tr": {
+        "en": "On September 9, 1573, Gregory XIII ordered that the trial be carried out with all haste and rigor."
       }
     }
   ],

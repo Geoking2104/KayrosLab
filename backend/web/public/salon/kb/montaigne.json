@@ -1,7 +1,7 @@
 {
   "authorId": "montaigne",
   "kbVersion": "montaigne@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T22:22:13.831Z",
+  "builtAt": "2026-10-06T16:51:01.016Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
@@ -21,6 +21,9 @@
       "s": "They had no sooner heard the name of one senator but a great cry of universal dislike was raised up against him.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "A peine avaient-ils entendu le nom d'un sénateur qu'un grand cri de haine universelle s'était élevé contre lui."
       }
     },
     {
@@ -29,6 +32,9 @@
       "s": "In those other ordinary friendships, you are to walk with bridle in your hand, with prudence and circumspection, for in them the knot is not so sure that a man may not half suspect it will slip.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Dans ces autres amitiés ordinaires, il faut marcher la bride à la main, avec prudence et circonspection, car dans elles le nœud n'est pas si sûr qu'un homme ne puisse se douter à moitié qu'il va glisser."
       }
     },
     {
@@ -37,6 +43,9 @@
       "s": "The premeditation of death is the premeditation of liberty; he who has learned to die has unlearned to serve.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "La préméditation de la mort est la préméditation de la liberté ;  celui qui a appris à mourir a désappris à servir."
       }
     },
     {
@@ -45,6 +54,9 @@
       "s": "Is it not to build a wall without stone or brick, or some such thing, to write books without learning and without art?",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "N'est-ce pas construire un mur sans pierre ni brique, ou quelque chose du genre, écrire des livres sans savoir et sans art ?"
       }
     },
     {
@@ -53,6 +65,9 @@
       "s": "At the first twitch of the gout it signifies much to be called Sir and Your Majesty!",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Au premier coup de goutte, cela signifie beaucoup d'être appelé Monsieur et Votre Majesté !"
       }
     },
     {
@@ -61,6 +76,9 @@
       "s": "Even so in virtue itself, of two like effects, we notwithstanding look upon that as the fairest and most worthy, wherein the most trouble and hazard are set before us.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Même ainsi, dans la vertu elle-même, parmi deux effets semblables, nous considérons néanmoins celui-là comme le plus juste et le plus digne, celui dans lequel le plus de problèmes et de dangers se présentent à nous."
       }
     },
     {
@@ -69,6 +87,9 @@
       "s": "He told us, that by straining himself in a leap his male organs came out; and the girls of that place have, to this day, a song, wherein they advise one another not to take too great strides, for fear of being turned into men, as Mary Germain was.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Il nous a dit qu'en s'efforçant d'un bond, ses organes mâles sortaient ;  et les filles de cet endroit ont encore aujourd'hui une chanson dans laquelle elles se conseillent de ne pas faire de trop grands pas, de peur d'être transformées en hommes, comme le fut Marie Germain."
       }
     },
     {
@@ -77,6 +98,9 @@
       "s": "On the way, having been for more than two hours given over for a dead man, I began to move and to fetch my breath; for so great abundance of blood was fallen into my stomach, that nature had need to rouse her forces to discharge it.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "En chemin, après avoir été pendant plus de deux heures livré à un mort, je me mis à bouger et à reprendre mon souffle ;  car une si grande abondance de sang tombait dans mon estomac, que la nature avait besoin de réveiller ses forces pour l'évacuer."
       }
     },
     {
@@ -85,6 +109,9 @@
       "s": "Need we a better proof to condemn human impudence in the concern of beasts?",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Faut-il une meilleure preuve pour condamner l’impudence humaine à l’égard des bêtes ?"
       }
     },
     {
@@ -93,6 +120,10 @@
       "s": "This part is nothing in comparison of the whole:-- Omnia cum colo, terràque, manque, Nil sunt ad summam summal totius omnem.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Cette partie n'est rien en comparaison du tout.",
+        "en": "This part is nothing in comparison of the whole."
       }
     },
     {
@@ -101,6 +132,9 @@
       "s": "Such as have had to do with testy and obstinate women, may have experimented into what a rage it puts them to oppose silence and coldness to their fury, and that a man disdains to nourish their anger.",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Ceux qui ont eu affaire à des femmes irritables et obstinées ont peut-être expérimenté combien cela les met en colère d'opposer le silence et la froideur à leur fureur, et qu'un homme dédaigne de nourrir leur colère."
       }
     },
     {
@@ -109,6 +143,9 @@
       "s": "We have, peradventure, reason to blame ourselves for being guilty of so foolish a production as man, and to call the act, and the parts that are employed in the act, shameful (mine, truly, are now shameful and pitiful).",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Nous avons peut-être des raisons de nous reprocher d’être coupables d’une production aussi insensée que l’homme, et de qualifier l’acte et les parties qui y sont employées de honteux (les miens, en vérité, sont maintenant honteux et pitoyables)."
       }
     },
     {
@@ -117,6 +154,9 @@
       "s": "And was not the graving of a seal the first and principal cause of the greatest commotion that this machine of the world ever underwent?",
       "src": {
         "work": "Essais"
+      },
+      "tr": {
+        "fr": "Et la gravure d'un sceau n'a-t-elle pas été la première et principale cause du plus grand émoi que cette machine du monde ait jamais subi ?"
       }
     },
     {
@@ -125,6 +165,9 @@
       "s": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Il rencontra le pape (Grégoire XIII), le grand-duc de Toscane, le duc de Ferrare, des cardinaux, des ambassadeurs, des chanceliers et des fonctionnaires en très grand nombre, et presque aucun d'entre eux ne se débarrassa de lui sans avoir à écouter et à répondre à diverses questions sensées."
       }
     },
     {
@@ -133,6 +176,9 @@
       "s": "Disier, towns scattered along the route, and repaired direct by diligence to the baths of Plombières.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Disier, villes dispersées le long du parcours, et réparées directement par diligence jusqu'aux thermes de Plombières."
       }
     },
     {
@@ -141,6 +187,9 @@
       "s": "This seizure lasted four hours, and while it was on him he felt plainly the working and the movement of the stone in the urethra and the lower part of the stomach.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Cette crise dura quatre heures, et pendant qu'elle était sur lui, il sentit nettement le travail et le mouvement de la pierre dans l'urètre et dans la partie inférieure de l'estomac."
       }
     },
     {
@@ -149,6 +198,9 @@
       "s": "The body-servants dine either at their master’s table or at one close by, one valet being enough to attend to the high table, seeing that each gentleman has always his own goblet or silver cup beside him, wherefore the servant only needs to fill this as soon as it may be empty, without moving it.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Les serviteurs du corps dînent soit à la table de leur maître, soit à celle d'à côté, un valet de chambre suffisant pour s'occuper de la table haute, étant entendu que chaque gentilhomme a toujours son propre gobelet ou coupe d'argent à côté de lui, de sorte que le serviteur n'a qu'à le remplir dès qu'il est vide, sans le déplacer."
       }
     },
     {
@@ -157,6 +209,9 @@
       "s": "The duke shortly before his death had allied himself with certain of the cantons, an alliance which our king had resisted, alleging that the cantons, being already pledged to him, could incur no fresh obligations without his leave.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Le duc, peu avant sa mort, s'était allié avec certains cantons, alliance à laquelle notre roi avait résisté, alléguant que les cantons, déjà engagés envers lui, ne pouvaient contracter de nouvelles obligations sans sa permission."
       }
     },
     {
@@ -165,6 +220,9 @@
       "s": "Here we again crossed the Rhine by a wooden bridge and, still keeping beside the river on the left, we passed by another small town allied to the Catholic cantons.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Ici nous traversâmes de nouveau le Rhin par un pont de bois et, toujours le long du fleuve à gauche, nous passâmes par une autre petite ville alliée aux cantons catholiques."
       }
     },
     {
@@ -173,6 +231,9 @@
       "s": "In the first place the innkeepers here charge for food at table d’hôte four, five, or six batzen.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Ici, d’abord, les aubergistes font payer la nourriture en table d’hôte à quatre, cinq ou six batzens."
       }
     },
     {
@@ -181,6 +242,9 @@
       "s": "They thresh out the corn in the barns as they may want it, using in this work the heavy end of a flail.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Ils battent le blé dans les granges à leur guise, en utilisant pour ce travail le gros bout d'un fléau."
       }
     },
     {
@@ -189,6 +253,9 @@
       "s": "We saw more houses belonging to the Foulcres in other parts of the city, which is beholden to this family for the great outlay of money they spend in its adornment.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Nous avons vu d'autres maisons appartenant aux Foulcre dans d'autres parties de la ville, qui sont redevables à cette famille des grandes dépenses d'argent qu'elle dépense pour sa décoration."
       }
     },
     {
@@ -197,6 +264,9 @@
       "s": "In the hostelry there is a hot room, in which travellers go to get sweated for a charge of a batz and a half.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Dans l'hôtellerie, il y a une salle chaude, dans laquelle les voyageurs vont se transpirer moyennant un batz et demi."
       }
     },
     {
@@ -205,6 +275,9 @@
       "s": "Here we had curtains to our beds of thick linen dyed red.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Ici, nous avions des rideaux pour nos lits en lin épais teints en rouge."
       }
     },
     {
@@ -213,6 +286,9 @@
       "s": "Here at Rovere, greatly to the gratification of M.",
       "src": {
         "work": "Journal of Travels in Italy"
+      },
+      "tr": {
+        "fr": "Ici à Rovere, à la grande satisfaction de M."
       }
     }
   ],

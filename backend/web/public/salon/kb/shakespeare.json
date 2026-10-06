@@ -1,7 +1,7 @@
 {
   "authorId": "shakespeare",
   "kbVersion": "shakespeare@bootstrap-2026-10-03",
-  "builtAt": "2026-10-03T22:22:13.924Z",
+  "builtAt": "2026-10-06T16:51:01.064Z",
   "source": "bootstrap-corpus",
   "lang": "en",
   "works": [
@@ -33,6 +33,9 @@
       "s": "Thaw, and resolue it selfe into a Dew: Or that the Euerlasting had not fixt His Cannon 'gainst Selfe-slaughter.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Décongelez-le et résolvez-le en rosée : ou que l'éternel n'ait pas préparé son canon contre l'auto-homicide."
       }
     },
     {
@@ -41,6 +44,9 @@
       "s": "Tender your selfe more dearly; Or not to crack the winde of the poore Phrase, Roaming it thus, you'l tender me a foole Ophe.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Offrez-vous plus tendrement ; Ou pour ne pas casser le vent du pauvre Phrase, En le parcourant ainsi, tu me feras un imbécile d'Ophé."
       }
     },
     {
@@ -49,6 +55,9 @@
       "s": "At closes in the consequence: At friend, or so, and Gentleman Polon.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "À se termine dans la conséquence : Chez un ami, ou deux, et Monsieur Polon."
       }
     },
     {
@@ -57,6 +66,9 @@
       "s": "Slanders Sir: for the Satyricall slaue saies here, that old men haue gray Beards; that their faces are wrinkled; their eyes purging thicke Amber, or Plum-Tree Gumme: and that they haue a plentifull locke of Wit, together with weake Hammes.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Calomnies Monsieur : car le satyrique slaue dit ici que les vieillards ont la barbe grise ; que leurs visages sont ridés ; leurs yeux purgent de l'ambre épais ou de la gomme de prunier : et qu'ils ont une boucle d'esprit abondante, ainsi qu'un Hammes faible."
       }
     },
     {
@@ -65,6 +77,9 @@
       "s": "So after Pyrrhus pause, A rowsed Vengeance sets him new a-worke, And neuer did the Cyclops hammers fall On Mars his Armours, forg'd for proofe Eterne, With lesse remorse then Pyrrhus bleeding sword Now falles on Priam.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Ainsi, après une pause de Pyrrhus, une vengeance acharnée le met à nouveau au travail, et les marteaux du Cyclope ne sont jamais tombés sur Mars, ses armures, forgées pour l'éternité, avec moins de remords que l'épée sanglante de Pyrrhus tombe maintenant sur Priam."
       }
     },
     {
@@ -73,6 +88,9 @@
       "s": "Or if thou wilt needs Marry, marry a fool: for Wise men know well enough, what monsters you make of them.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Ou si tu as besoin de te marier, épouse-toi un imbécile : car les sages savent bien quels monstres tu en fais."
       }
     },
     {
@@ -81,6 +99,9 @@
       "s": "The instances that second Marriage moue, Are base respects of Thrift, but none of Loue.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Les exemples qui suivent le mariage sont de vils respects pour Thrift, mais aucun pour Loue."
       }
     },
     {
@@ -89,6 +110,9 @@
       "s": "My Lord, he's going to his Mothers Closset: Behinde the Arras Ile conuey my selfe To heare the Processe.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Monseigneur, il va au placard de sa mère : derrière l'île d'Arras, je suis venu me voir pour entendre le procès."
       }
     },
     {
@@ -97,6 +121,9 @@
       "s": "Come sir, to draw toward an end with you.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Venez, monsieur, en finir avec vous."
       }
     },
     {
@@ -105,6 +132,9 @@
       "s": "Conscience and Grace, to the profoundest Pit.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Conscience et Grâce, jusqu'au gouffre le plus profond."
       }
     },
     {
@@ -113,6 +143,9 @@
       "s": "It must be Se offendendo, it cannot bee else: for heere lies the point; If I drowne my selfe wittingly, it argues an Act: and an Act hath three branches.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Il faut que ce soit Se offendendo, il ne peut en être autrement : car c'est là que réside le point ; Si je me noie volontairement, cela prouve un acte : et un acte a trois branches."
       }
     },
     {
@@ -121,6 +154,9 @@
       "s": "Why I will fight with him vppon this Theme.",
       "src": {
         "work": "Hamlet"
+      },
+      "tr": {
+        "fr": "Pourquoi je vais me battre avec lui sur ce thème."
       }
     },
     {
@@ -129,6 +165,9 @@
       "s": "The Earth hath bubbles, as the Water ha's, And these are of them: whither are they vanish'd?",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "La Terre a des bulles, comme l'eau, et celles-ci sont de celles-là : où ont-elles disparu ?"
       }
     },
     {
@@ -137,6 +176,9 @@
       "s": "When I burnt in desire to question them further, they made themselues Ayre, into which they vanish'd.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Quand j'ai brûlé du désir de les interroger davantage, ils se sont transformés en Ayre, dans lequel ils ont disparu."
       }
     },
     {
@@ -145,6 +187,9 @@
       "s": "Will it not be receiu'd, When we haue mark'd with blood those sleepie two Of his owne Chamber, and vs'd their very Daggers, That they haue don't?",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Ne sera-t-il pas reconnu, quand nous aurons marqué de sang ces deux endormis de sa propre chambre, et contre leurs propres poignards, qu'ils ne l'ont pas fait ?"
       }
     },
     {
@@ -153,6 +198,9 @@
       "s": "My Hands are of your colour: but I shame To weare a Heart so white.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Mes mains sont de ta couleur : mais j'ai honte d'avoir un cœur si blanc."
       }
     },
     {
@@ -161,6 +209,9 @@
       "s": "This murtherous Shaft that's shot, Hath not yet lighted: and our safest way, Is to auoid the ayme.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Ce puits meurtrier qui a été abattu n'a pas encore été allumé : et notre moyen le plus sûr est d'éviter l'ayme."
       }
     },
     {
@@ -169,6 +220,9 @@
       "s": "Of sorryest Fancies your Companions making, Vsing those Thoughts, which should indeed haue dy'd With them they thinke on: things without all remedie Should be without regard: what's done, is done Macb.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Des imaginations les plus tristes que font vos compagnons, contre ces pensées, qui auraient dû en effet mourir avec elles sur lesquelles ils pensent : les choses sans aucun remède devraient être sans égard : ce qui est fait, est fait Macb."
       }
     },
     {
@@ -177,6 +231,9 @@
       "s": "Blood hath bene shed ere now, i'th' olden time Ere humane Statute purg'd the gentle Weale: I, and since too, Murthers haue bene perform'd Too terrible for the eare.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Le sang a été versé avant maintenant, dans les temps anciens, avant qu'un statut humain n'ait purgé le doux Weale : moi, et depuis aussi, les Murthers ont été exécutés trop terribles pour l'oreille."
       }
     },
     {
@@ -185,6 +242,9 @@
       "s": "Adde thereto a Tigers Chawdron, For th' Ingredience of our Cawdron All.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Ajoutez-y un chaudron de tigre, pour l'ingrédient de notre tout chaudron."
       }
     },
     {
@@ -193,6 +253,9 @@
       "s": "I am so much a Foole, should I stay longer It would be my disgrace, and your discomfort.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Je suis tellement idiot que si je restais plus longtemps, ce serait ma honte et votre inconfort."
       }
     },
     {
@@ -201,6 +264,9 @@
       "s": "All these are portable, With other Graces weigh'd Mal.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "Tout cela est portable, avec d’autres grâces pesées Mal."
       }
     },
     {
@@ -209,6 +275,9 @@
       "s": "I haue too Nights watch'd with you, but can perceiue no truth in your report.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "J'ai aussi veillé des nuits avec vous, mais je ne puis percevoir aucune vérité dans votre rapport."
       }
     },
     {
@@ -217,6 +286,9 @@
       "s": "Therein the Patient Must minister to himselfe Macb.",
       "src": {
         "work": "The Tragedy of Macbeth"
+      },
+      "tr": {
+        "fr": "C'est là que le patient doit s'occuper de lui-même Macb."
       }
     },
     {
@@ -225,6 +297,9 @@
       "s": "Or else misgraffed, in respect of yeares Her.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Ou bien mal greffé, par rapport à ses années."
       }
     },
     {
@@ -233,6 +308,9 @@
       "s": "Some of your French Crownes haue no haire at all, and then you will play bare-fac'd.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Certaines de vos couronnes françaises n'ont pas de cheveux du tout, et alors vous jouerez à visage nu."
       }
     },
     {
@@ -241,6 +319,9 @@
       "s": "What worser place can I beg in your loue, (And yet a place of high respect with me) Then to be vsed as you doe your dogge Dem.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Quelle pire place puis-je mendier dans votre amour, (Et pourtant une place de grand respect avec moi) Pour ensuite être affronté comme vous le faites avec votre chien Dem."
       }
     },
     {
@@ -249,6 +330,9 @@
       "s": "Lysander on the ground; Deade or asleepe?",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Lysandre à terre ; Mort ou endormi ?"
       }
     },
     {
@@ -257,6 +341,9 @@
       "s": "Most radiant Piramus, most Lilly white of hue, Of colour like the red rose on triumphant bryer, Most brisky Iuuenall, and eke most louely Iew, As true as truest horse, that yet would neuer tyre, Ile meete thee Piramus, at Ninnies toombe Pet.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Le Piramus le plus radieux, le plus blanc des Lilly, De couleur comme la rose rouge sur le bryer triomphant, le Iuuenall le plus vif, et le plus doux Iew, Aussi vrai que le plus vrai cheval, qui ne se fatiguerait encore jamais, Il te rencontre Piramus, à Ninnies toombe Pet."
       }
     },
     {
@@ -265,6 +352,9 @@
       "s": "Ah good Demetrius, wilt thou giue him me?",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Ah bon Démétrius, veux-tu me lui donner ?"
       }
     },
     {
@@ -273,6 +363,9 @@
       "s": "Lysanders loue (that would not let him bide) Faire Helena; who more engilds the night, Then all yon fierie oes, and eies of light.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "L'amour de Lysandre (qui ne le laissait pas attendre) Faire Helena ; qui endorme davantage la nuit, que vous tous, vos yeux de feu et vos yeux de lumière."
       }
     },
     {
@@ -281,6 +374,9 @@
       "s": "Why will you suffer her to flout me thus?",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Pourquoi lui permettrez-vous de me bafouer ainsi ?"
       }
     },
     {
@@ -289,6 +385,9 @@
       "s": "Truly a pecke of Prouender; I could munch your good dry Oates.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Vraiment une bec de Prouender ; Je pourrais grignoter ton bon Oates sec."
       }
     },
     {
@@ -297,6 +396,9 @@
       "s": "And for the morning now is something worne, Our purpos'd hunting shall be set aside.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "Et comme la matinée est maintenant quelque chose de fatigué, notre chasse intentionnelle sera mise de côté."
       }
     },
     {
@@ -305,6 +407,9 @@
       "s": "That is some Satire keene and criticall, Not sorting with a nuptiall ceremonie Lis.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "C'est une satire vive et critique, qui ne s'accorde pas avec une cérémonie nuptiale."
       }
     },
     {
@@ -313,6 +418,9 @@
       "s": "I kisse the wals hole, not your lips at all Pir.",
       "src": {
         "work": "A Midsummer Night's Dream"
+      },
+      "tr": {
+        "fr": "J'embrasse le trou du Wals, pas du tout tes lèvres Pir."
       }
     },
     {
@@ -321,6 +429,9 @@
       "s": "Iudge me the world, if 'tis not grosse in sense, That thou hast practis'd on her with foule Charmes, Abus'd her delicate Youth, with Drugs or Minerals, That weakens Motion.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Juge-moi du monde, si ce n'est pas grossier en sens, que tu as exercé sur elle des charmes immondes, abusé de sa jeunesse délicate, avec des drogues ou des minéraux, qui affaiblissent le mouvement."
       }
     },
     {
@@ -329,6 +440,9 @@
       "s": "So that (deere Lords) if I be left behind A Moth of Peace, and he go to the Warre, The Rites for why I loue him, are bereft me: And I a heauie interim shall support By his deere absence.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "De sorte que (deere Lords) si je suis laissé derrière un papillon de paix, et qu'il va à la guerre, les rites pour lesquels je l'aime, me sont privés: et je soutiendrai un lourd intérim par son absence deere."
       }
     },
     {
@@ -337,6 +451,9 @@
       "s": "I am about it, but indeed my inuention comes from my pate, as Birdlyme do's from Freeze, it pluckes out Braines and all.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Je suis à ce sujet, mais en effet mon influence vient de mon pate, comme Birdlyme de Freeze, elle arrache Braines et tout."
       }
     },
     {
@@ -345,6 +462,9 @@
       "s": "To morrow with your earliest, Let me haue speech with you.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Demain, au plus tôt, permettez-moi de vous parler."
       }
     },
     {
@@ -353,6 +473,9 @@
       "s": "Looke if my gentle Loue be not rais'd vp: Ile make thee an example Des.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Regarde si ma douce Loue n'est pas élevée en vice-président : Je ferai de toi un exemple."
       }
     },
     {
@@ -361,6 +484,9 @@
       "s": "Assure thee, If I do vow a friendship, Ile performe it To the last Article.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Rassure-toi, si je fais vœu d'amitié, je l'accomplirai jusqu'au dernier article."
       }
     },
     {
@@ -369,6 +495,9 @@
       "s": "Ile haue the worke tane out, And giu't Iago: what he will do with it Heauen knowes, not I: I nothing, but to please his Fantasie.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Il a fait le travail, et je l'ai donné à Iago : ce qu'il en fera, Dieu le sait, pas moi : je ne fais que plaire à sa fantaisie."
       }
     },
     {
@@ -377,6 +506,9 @@
       "s": "Why do you speake so startingly, and rash?",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Pourquoi parlez-vous si brusquement et si imprudemment ?"
       }
     },
     {
@@ -385,6 +517,9 @@
       "s": "This is the Monkeys owne giuing out: She is perswaded I will marry her Out of her owne loue & flattery, not out of my promise Oth.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "C'est le propre du singe qui donne : elle est persuadée que je l'épouserai par amour et par flatterie, pas par ma promesse, Oth."
       }
     },
     {
@@ -393,6 +528,9 @@
       "s": "But alas, to make me The fixed Figure for the time of Scorne, To point his slow, and mouing finger at.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Mais hélas, pour faire de moi la figure fixe du temps du mépris, pour me pointer son doigt lent et mou."
       }
     },
     {
@@ -401,6 +539,9 @@
       "s": "That Song to night, Will not go from my mind: I haue much to do, But to go hang my head all at one side And sing it like poore Barbarie: prythee dispatch Aemi.",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Cette chanson de ce soir ne sortira pas de mon esprit : j'ai beaucoup à faire, mais aller baisser la tête d'un côté et la chanter comme la pauvre Barbarie : je t'en prie, envoie Aemi."
       }
     },
     {
@@ -409,6 +550,9 @@
       "s": "Alacke, my Lord, What may you meane by that?",
       "src": {
         "work": "Othello"
+      },
+      "tr": {
+        "fr": "Alacke, mon Seigneur, que voulez-vous dire par là ?"
       }
     },
     {
@@ -417,6 +561,9 @@
       "s": "To give away yourself, keeps yourself still, And you must live, drawn by your own sweet skill.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Pour vous donner, vous restez immobile, Et vous devez vivre, attiré par votre propre talent."
       }
     },
     {
@@ -425,6 +572,9 @@
       "s": "Yet him for this my love no whit disdaineth; Suns of the world may stain when heaven’s sun staineth.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Pourtant, pour cela, mon amour ne le dédaigne pas du tout ; Les soleils du monde peuvent se tacher quand le soleil du ciel se tache."
       }
     },
     {
@@ -433,6 +583,9 @@
       "s": "XLIV If the dull substance of my flesh were thought, Injurious distance should not stop my way; For then despite of space I would be brought, From limits far remote, where thou dost stay.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "XLIV Si l’on pensait à la substance terne de ma chair, une distance nuisible ne devrait pas arrêter mon chemin ; Car alors, malgré l'espace, je serais amené, Des limites très lointaines, où tu demeures."
       }
     },
     {
@@ -441,6 +594,9 @@
       "s": "I have no precious time at all to spend; Nor services to do, till you require.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Je n’ai aucun temps précieux à consacrer ; Ni services à faire, jusqu'à ce que vous en ayez besoin."
       }
     },
     {
@@ -449,6 +605,9 @@
       "s": "LXX That thou art blam’d shall not be thy defect, For slander’s mark was ever yet the fair; The ornament of beauty is suspect, A crow that flies in heaven’s sweetest air.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "LXX Que tu sois blâmé ne sera pas ton défaut, Car la marque de la calomnie a toujours été la belle ; L’ornement de la beauté est suspect, Un corbeau qui vole dans l’air le plus doux du ciel."
       }
     },
     {
@@ -457,6 +616,9 @@
       "s": "LXXX O how I faint when I of you do write, Knowing a better spirit doth use your name, And in the praise thereof spends all his might, To make me tongue-tied speaking of your fame!",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "LXXX Ô comme je m'évanouis lorsque moi de vous écris : Connaissant qu'un esprit meilleur utilise votre nom, Et qu'il consacre toutes ses forces à sa louange, Pour me faire parler de votre renommée sans voix !"
       }
     },
     {
@@ -465,6 +627,9 @@
       "s": "Such is my love, to thee I so belong, That for thy right, myself will bear all wrong.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Mon amour est tel, je t'appartiens tellement, que pour ton droit, je supporterai moi-même tout le mal."
       }
     },
     {
@@ -473,6 +638,9 @@
       "s": "What old December’s bareness everywhere!",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Quelle nudité du vieux décembre partout !"
       }
     },
     {
@@ -481,6 +649,9 @@
       "s": "So all their praises are but prophecies Of this our time, all you prefiguring; And for they looked but with divining eyes, They had not skill enough your worth to sing: For we, which now behold these present days, Have eyes to wonder, but lack tongues to praise.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Ainsi toutes leurs louanges ne sont que des prophéties De notre époque, que vous préfigurez toutes ; Et comme ils ne regardaient qu'avec des yeux devineurs, ils n'avaient pas assez de talent pour chanter : car nous, qui voyons maintenant ces jours-ci, avons des yeux pour s'émerveiller, mais manquons de langues pour louer."
       }
     },
     {
@@ -489,6 +660,9 @@
       "s": "Thus policy in love, to anticipate The ills that were not, grew to faults assur’d, And brought to medicine a healthful state Which, rank of goodness, would by ill be cur’d; But thence I learn and find the lesson true, Drugs poison him that so fell sick of you.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Ainsi la politique en amour, pour anticiper les maux qui n’existaient pas, devint des défauts assurés, et apporta à la médecine un état sain qui, au rang de bonté, serait guéri par le mal ; Mais c'est là que j'apprends et trouve la leçon vraie : les drogues empoisonnent celui qui en a tellement eu marre de vous."
       }
     },
     {
@@ -497,6 +671,9 @@
       "s": "Since saucy jacks so happy are in this, Give them thy fingers, me thy lips to kiss.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "Puisque les cochons sont si heureux là-dedans, donne-leur tes doigts, et moi tes lèvres à embrasser."
       }
     },
     {
@@ -505,6 +682,9 @@
       "s": "CXXXVIII When my love swears that she is made of truth, I do believe her though I know she lies, That she might think me some untutor’d youth, Unlearned in the world’s false subtleties.",
       "src": {
         "work": "Shakespeare's Sonnets"
+      },
+      "tr": {
+        "fr": "CXXXVIII Quand mon amour jure qu'elle est faite de vérité, je la crois, même si je sais qu'elle ment, afin qu'elle puisse me prendre pour un jeune inculte, ignorant les fausses subtilités du monde."
       }
     }
   ],
