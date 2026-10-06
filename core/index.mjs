@@ -188,6 +188,7 @@ export function createEngine(opts = {}) {
     auditSink: opts.swarmAuditSink || opts.auditSink || null,
     profileImporter,
     store: opts.swarmStore || null,
+    ...(opts.llmMaxConcurrency !== undefined ? { maxConcurrency: opts.llmMaxConcurrency } : {}),
   });
   const hybridGateway = new HybridAgentGateway({
     swarm,

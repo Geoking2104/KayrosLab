@@ -9,7 +9,12 @@ name: Deploy KayrosLab backend - OVH VPS
 #   cp /opt/kayroslab/backend/fastify/.env.sample /opt/kayroslab/backend/fastify/.env
 #
 # Secrets requis : VPS_SSH_USER, VPS_SSH_KEY (identiques a ceux d'openDPE)
-# et MISTRAL_API_KEY pour activer le fournisseur LLM en production.
+# et une cle LLM pour activer le fournisseur en production :
+#   NVIDIA_API_KEY  (prioritaire : NVIDIA NIM, API OpenAI-compatible) ;
+#   MISTRAL_API_KEY (repli automatique si NVIDIA echoue, ou primaire sans NVIDIA).
+# Variables de depot optionnelles (Settings > Variables, non secretes) :
+#   LLM_PROVIDER (auto|nvidia|mistral|anthropic|ollama|mock), NVIDIA_MODEL,
+#   LLM_MAX_CONCURRENCY. Vides = defauts (auto, modele par defaut, 2).
 # Secrets WhatsApp (optionnels tant que P1 n'est pas branche) :
 #   WA_TOKEN, WA_PHONE_NUMBER_ID, WA_VERIFY_TOKEN, WA_DISPLAY_NUMBER,
 #   WA_TEMPLATE_INVITE, WA_HASH_SALT
@@ -45,6 +50,10 @@ jobs:
       - name: SSH into VPS and deploy
         uses: appleboy/ssh-action@v1.2.0
         env:
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_MODEL: ${{ vars.NVIDIA_MODEL }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_MAX_CONCURRENCY: ${{ vars.LLM_MAX_CONCURRENCY }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           MISTRAL_MODEL: ${{ secrets.MISTRAL_MODEL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -92,7 +101,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           command_timeout: 30m
-          envs: MISTRAL_API_KEY,MISTRAL_MODEL,ANTHROPIC_API_KEY,ANTHROPIC_MODEL,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN,KAYROS_CONNECTOR_ENCRYPTION_KEY,KAYROS_SMTP_URL,KAYROS_SMTP_PASS,KAYROS_SMTP_USER,KAYROS_SMTP_HOST,KAYROS_MAIL_FROM,KAYROS_CONTACT_TO,KAYROS_MCP_CLIENTS_JSON,KAYROS_S3_BUCKET,KAYROS_S3_REGION,KAYROS_S3_ENDPOINT,KAYROS_S3_ACCESS_KEY_ID,KAYROS_S3_SECRET_ACCESS_KEY,KAYROS_TIMESFM_ENABLED,KAYROS_TIMESFM_TOKEN,OIDC_ISSUER,OIDC_CLIENT_ID,OIDC_CLIENT_SECRET,X_CLIENT_ID,X_CLIENT_SECRET,WA_TOKEN,WA_PHONE_NUMBER_ID,WA_VERIFY_TOKEN,WA_DISPLAY_NUMBER,WA_TEMPLATE_INVITE,WA_HASH_SALT
+          envs: NVIDIA_API_KEY,NVIDIA_MODEL,LLM_PROVIDER,LLM_MAX_CONCURRENCY,MISTRAL_API_KEY,MISTRAL_MODEL,ANTHROPIC_API_KEY,ANTHROPIC_MODEL,DATABASE_URL,POSITIONNER_GITHUB_TOKEN,POSITIONNER_GITLAB_TOKEN,POSITIONNER_GOOGLE_API_KEY,POSITIONNER_GOOGLE_CX,LINKEDIN_ACCESS_TOKEN,CRYSTALKNOWS_API_TOKEN,KAYROS_CONNECTOR_ENCRYPTION_KEY,KAYROS_SMTP_URL,KAYROS_SMTP_PASS,KAYROS_SMTP_USER,KAYROS_SMTP_HOST,KAYROS_MAIL_FROM,KAYROS_CONTACT_TO,KAYROS_MCP_CLIENTS_JSON,KAYROS_S3_BUCKET,KAYROS_S3_REGION,KAYROS_S3_ENDPOINT,KAYROS_S3_ACCESS_KEY_ID,KAYROS_S3_SECRET_ACCESS_KEY,KAYROS_TIMESFM_ENABLED,KAYROS_TIMESFM_TOKEN,OIDC_ISSUER,OIDC_CLIENT_ID,OIDC_CLIENT_SECRET,X_CLIENT_ID,X_CLIENT_SECRET,WA_TOKEN,WA_PHONE_NUMBER_ID,WA_VERIFY_TOKEN,WA_DISPLAY_NUMBER,WA_TEMPLATE_INVITE,WA_HASH_SALT
           script: |
             set -e
             git config --global --add safe.directory /opt/kayroslab
@@ -100,14 +109,22 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             git status --porcelain
-            if [ -z "${MISTRAL_API_KEY:-}" ]; then
-              echo "AVERTISSEMENT : MISTRAL_API_KEY est vide — le salon tourne sur le moteur deterministe (provider 'mock'). Definir le secret pour activer la LLM." >&2
+            if [ -z "${NVIDIA_API_KEY:-}" ] && [ -z "${MISTRAL_API_KEY:-}" ]; then
+              echo "AVERTISSEMENT : NVIDIA_API_KEY et MISTRAL_API_KEY sont vides — le salon tourne sur le moteur deterministe (provider 'mock'). Definir le secret NVIDIA_API_KEY pour activer la LLM." >&2
+            elif [ -z "${NVIDIA_API_KEY:-}" ]; then
+              echo "INFO : NVIDIA_API_KEY absente — fournisseur LLM : Mistral." >&2
             fi
             node <<'NODE'
             const fs = require('fs');
             const envPath = '/opt/kayroslab/backend/fastify/.env';
             let contents = fs.readFileSync(envPath, 'utf8');
+            // Le secret GitHub est la source de verite : une valeur vide ici
+            // vide aussi la ligne du .env (desactivation du provider).
             const replacements = {
+              NVIDIA_API_KEY: process.env.NVIDIA_API_KEY,
+              NVIDIA_MODEL: process.env.NVIDIA_MODEL,
+              LLM_PROVIDER: process.env.LLM_PROVIDER,
+              LLM_MAX_CONCURRENCY: process.env.LLM_MAX_CONCURRENCY,
               MISTRAL_API_KEY: process.env.MISTRAL_API_KEY,
               MISTRAL_MODEL: process.env.MISTRAL_MODEL,
               ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,

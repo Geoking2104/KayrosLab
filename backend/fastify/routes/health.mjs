@@ -1,20 +1,23 @@
 import { llmBindings } from '../lib/context.mjs';
+import { describeLlmConfig, resolveLlmConfig } from '../lib/llm-config.mjs';
 
 export default async function healthRoute(app) {
   app.get('/health', async () => {
     const ctx = app.kayrosContext;
+    // Contexte construit hors buildContext (tests) : on retombe sur l'env.
+    const llmConfig = ctx.llmConfig || resolveLlmConfig(process.env);
     return {
       ok: true,
       providers: Object.keys(ctx.providers),
-      // Fournisseur LLM effectif : mistral/anthropic si la clé est là, sinon mock.
+      // Fournisseur LLM effectif (LLM_PROVIDER > NVIDIA > Mistral > Anthropic > mock),
+      // chaîne de repli et bornes 429. Aucune clé, seulement des booléens.
       llm: {
-        provider: ctx.MISTRAL_API_KEY ? 'mistral' : (ctx.ANTHROPIC_API_KEY ? 'anthropic' : 'mock'),
-        live: Boolean(ctx.MISTRAL_API_KEY || ctx.ANTHROPIC_API_KEY),
-        model: ctx.MISTRAL_API_KEY ? ctx.MISTRAL_MODEL : ctx.ANTHROPIC_MODEL,
+        ...describeLlmConfig(llmConfig),
         // Liaison par composant : tout `engine-local` signale un écart avec `provider` (ENF-09).
         components: llmBindings(ctx.engine, ctx.llm),
       },
       mistralConfigured: !!ctx.MISTRAL_API_KEY,
+      nvidiaConfigured: !!llmConfig.configured?.nvidia,
       model: ctx.ANTHROPIC_MODEL,
       embedModel: ctx.EMBED_MODEL,
       anthropicConfigured: !!ctx.ANTHROPIC_API_KEY,

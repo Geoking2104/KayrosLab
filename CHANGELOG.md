@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.25.25 (2026-10) — Fournisseur LLM NVIDIA, robustesse 429
+
+- Provider `nvidia` (NVIDIA NIM hébergé, API OpenAI-compatible) : `NVIDIA_API_KEY`, `NVIDIA_MODEL` (défaut `deepseek-ai/deepseek-v4.1-flash` ; DeepSeek V4 Pro n'est plus servi par l'API hébergée, 410 Gone), `NVIDIA_BASE_URL`.
+- Sélection : `LLM_PROVIDER` forcé > `NVIDIA_API_KEY` > `MISTRAL_API_KEY` > `ANTHROPIC_API_KEY` > mock ; Mistral reste en repli signalé.
+- Blocs de raisonnement (`<think>`, `reasoning_content`) retirés avant le parsing du verdict.
+- 429 : relances avec backoff exponentiel + jitter, Retry-After respecté (`LLM_MAX_RETRIES`) ; swarm à concurrence bornée (`LLM_MAX_CONCURRENCY`, défaut 2).
+- Déploiement VPS : secret GitHub `NVIDIA_API_KEY` injecté dans le `.env` du serveur.
+
 ## v0.25.24 (2026-09) — Conversions GA4
 
 - `dataLayer` : `generate_lead` (contact), `demo_start` (démo), `login` (SSO).

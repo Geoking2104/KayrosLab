@@ -3,6 +3,11 @@
 // rule resolution, audited formal verdicts and absolute human arbitration.
 
 import { SpecializedDecisionAgent } from './agents/specialized-agent.mjs';
+import { stripReasoning } from './kayros-llm.mjs';
+import { mapWithConcurrency } from './resilience.mjs';
+
+/** Agents du swarm interrogés simultanément par défaut (LLM_MAX_CONCURRENCY côté serveur). */
+export const DEFAULT_SWARM_MAX_CONCURRENCY = 2;
 import {
   ProfileImportService,
   mergeHumanProfiles,
@@ -350,11 +355,14 @@ function firstJsonObject(text) {
 
 export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnabled = !!definition.human_profile } = {}) {
   let value = raw?.structured || raw?.output || raw;
+  // Un modèle à raisonnement peut renvoyer `<think>…</think>` avant le JSON :
+  // un « GO » ou une accolade du raisonnement ne doit jamais faire le verdict.
+  if (typeof value === 'string') value = stripReasoning(value);
   if (typeof value === 'string') value = firstJsonObject(value) || { primary_reason: value.slice(0, 500) };
   value = value && typeof value === 'object' ? value : {};
   let verdict = normalizeSwarmVerdict(value.verdict || value.decision);
   const unverified = strings(value.unverified_assumptions);
-  const rawText = typeof (raw?.output ?? raw) === 'string' ? String(raw?.output ?? raw) : '';
+  const rawText = typeof (raw?.output ?? raw) === 'string' ? stripReasoning(String(raw?.output ?? raw)) : '';
   if (!verdict) {
     // JSON tronqué (limite de jetons) ou entouré de prose : le champ "verdict" reste lisible.
     verdict = normalizeSwarmVerdict(rawText.match(/"(?:verdict|decision)"\s*:\s*"([^"]{1,40})"/i)?.[1]);
@@ -438,8 +446,11 @@ export function aggregateSwarmConsensus(analyses, threshold = 'majority') {
 }
 
 export class SwarmService {
-  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null, store = null, logger = console } = {}) {
+  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null, store = null, logger = console, maxConcurrency = DEFAULT_SWARM_MAX_CONCURRENCY } = {}) {
     this.llm = llm;
+    // Appels LLM simultanés pendant un run : borné pour ne pas déclencher les
+    // 429 des fournisseurs à quota par minute (NVIDIA, Mistral).
+    this.maxConcurrency = maxConcurrency;
     this.logger = logger;
     this.memory = memory;
     this.registry = registry || new AgentRegistry({ systemAgents });
@@ -654,7 +665,7 @@ export class SwarmService {
         personalityEnabled: config.personality_simulation_enabled,
       });
     });
-    const executions = definitions.map(async (definition) => {
+    const executeOne = async (definition) => {
       const effective_rules = resolveEffectiveRules(definition);
       let raw = agentResults?.[definition.agent_id];
       if (raw == null) {
@@ -675,8 +686,8 @@ export class SwarmService {
         ...normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled }),
         effective_rules,
       };
-    });
-    const analyses = await Promise.all(executions);
+    };
+    const analyses = await mapWithConcurrency(definitions, this.maxConcurrency, executeOne);
     const llm = summarizeRunProviders(analyses);
     if (llm.mock) {
       this._audit({ type: 'swarm.run.llm_degraded', run_id, swarm_id: config.swarm_id, tenant_id: tenantKey(tenantId), mock_agents: llm.mock_agents, degraded: llm.degraded });
