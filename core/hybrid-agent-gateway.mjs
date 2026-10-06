@@ -4,6 +4,7 @@
 
 import { AbstractView } from './connectors.mjs';
 import { InMemoryCollaborationStore } from './collaboration-store.mjs';
+import { UNPARSABLE_VERDICT_ASSUMPTION } from './swarm.mjs';
 
 export const COLLABORATION_PLATFORMS = Object.freeze(['slack', 'discord', 'teams', 'console']);
 export const ROOM_MODES = Object.freeze(['mention_only', 'always']);
@@ -36,11 +37,15 @@ function publicRoom(record) {
   return room;
 }
 
+// Questions de clarification réellement attendues de l'humain (EF-24) : elles
+// naissent d'hypothèses non vérifiées. Un CONDITIONAL_GO sans hypothèse ouverte
+// part à l'arbitrage, ses conditions y étant présentées ; l'hypothèse technique
+// « verdict non parsable » relève du dossier, pas d'une question à l'utilisateur.
 function clarificationQuestions(run) {
   const analyses = run?.analyses || [];
-  const assumptions = [...new Set(analyses.flatMap((item) => item.unverified_assumptions || []))];
-  const ambiguous = run?.consensus?.verdict === 'CONDITIONAL_GO' || assumptions.length > 0;
-  if (!ambiguous) return [];
+  const assumptions = [...new Set(analyses.flatMap((item) => item.unverified_assumptions || []))]
+    .filter((item) => item !== UNPARSABLE_VERDICT_ASSUMPTION);
+  if (!assumptions.length) return [];
   const conditions = [...new Set(analyses.flatMap((item) => item.required_mitigations || []))];
   const risks = [...new Set(analyses.flatMap((item) => item.critical_risks || []))];
   const candidates = [
@@ -48,10 +53,12 @@ function clarificationQuestions(run) {
     ...conditions.map((item) => `Quel est l’état, le responsable et l’échéance de cette condition : ${item}`),
     ...risks.map((item) => `Quelle preuve ou mesure disponible permet d’évaluer ce risque : ${item}`),
   ];
-  if (!candidates.length && run?.consensus?.verdict === 'CONDITIONAL_GO') {
-    candidates.push('Quels paramètres, seuils ou contraintes doivent être précisés avant une décision ferme ?');
-  }
   return candidates.slice(0, 4);
+}
+
+/** Un agent porte un profil humain consenti, quel que soit son agent_type (EF-27). */
+export function hasConsentedHumanProfile(agent) {
+  return agent?.human_profile?.consent_confirmed === true;
 }
 
 export function summarizeSwarmRun(run) {
@@ -68,6 +75,7 @@ export function summarizeSwarmRun(run) {
     text: lines.join('\n'), verdict, rationale, risks, mitigations,
     run_id: run?.run_id || null,
     requires_human_arbitration: run?.consensus?.requires_human_arbitration !== false,
+    llm: run?.llm || null,
   };
 }
 
@@ -132,7 +140,7 @@ export class HybridAgentGateway {
     return room;
   }
 
-  async createRoom(input, { tenantId = null, by = null } = {}) {
+  async createRoom(input, { tenantId = null, by = null, ownerId = null } = {}) {
     const scope = String(tenantId || 'default');
     await this.swarm.hydrateTenant?.(scope);
     const platform = normalizePlatform(input?.platform || 'console');
@@ -148,15 +156,16 @@ export class HybridAgentGateway {
     if (!swarm_id) {
       const active_agents = Array.isArray(input?.active_agents) && input.active_agents.length
         ? input.active_agents : ['cfo', 'cto', 'legal_counsel'];
-      const hasConsentedHybrid = active_agents.some((agentId) => {
-        const agent = this.swarm.registry.get(agentId, { tenantId: scope });
-        return agent?.agent_type === 'hybrid_modified' && agent?.human_profile?.consent_confirmed === true;
-      });
+      // Tout agent doté d'un profil humain consenti active la simulation par défaut,
+      // y compris les agents créés en console (`user_defined`) et les impersonators.
+      const hasConsentedProfile = active_agents.some((agentId) => (
+        hasConsentedHumanProfile(this.swarm.registry.get(agentId, { tenantId: scope }))
+      ));
       configuration = this.swarm.createConfiguration({
         swarm_name: input?.swarm_name || `${name} — hybrid team`, active_agents,
         voting_threshold: input?.voting_threshold || 'majority',
         personality_simulation_enabled: input?.personality_simulation_enabled == null
-          ? hasConsentedHybrid : input.personality_simulation_enabled === true,
+          ? hasConsentedProfile : input.personality_simulation_enabled === true,
         agent_rule_overrides: input?.agent_rule_overrides || {},
       }, { tenantId: scope, by });
       await this.swarm.flush?.();
@@ -166,6 +175,8 @@ export class HybridAgentGateway {
     const room = {
       room_id: String(input?.room_id || '').trim() || makeId('room'), tenant_id: scope,
       name, platform, external_room_id, mode, swarm_id, status: 'active',
+      // Propriétaire fixé côté serveur (identifiant utilisateur du jeton), jamais par le client.
+      owner_id: ownerId ? String(ownerId) : null,
       created_by: by, created_at: now(), updated_at: now(), last_activity_at: null,
     };
     const runtimeBundle = this._runtimeBundle(configuration, scope);
@@ -240,12 +251,10 @@ export class HybridAgentGateway {
   async _createDecisionThread({ room, run, question, by = null }) {
     const createdAt = now();
     const questions = clarificationQuestions(run);
-    const needsClarification = run.consensus?.verdict === 'CONDITIONAL_GO'
-      || (run.analyses || []).some((analysis) => (analysis.unverified_assumptions || []).length > 0);
     const thread = {
       thread_id: makeId('thread'), tenant_id: room.tenant_id, room_id: room.room_id,
       root_run_id: run.run_id, current_run_id: run.run_id,
-      status: needsClarification ? 'needs_clarification' : 'awaiting_arbitration',
+      status: questions.length ? 'needs_clarification' : 'awaiting_arbitration',
       question, clarification_questions: questions,
       created_by: by, created_at: createdAt, updated_at: createdAt,
     };
@@ -288,9 +297,13 @@ export class HybridAgentGateway {
       context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
       by,
     });
-    const questions = clarificationQuestions(run);
-    const status = run.consensus?.verdict === 'CONDITIONAL_GO' || questions.length
-      ? 'needs_clarification' : 'awaiting_arbitration';
+    // Une question déjà posée et à laquelle l'humain a répondu n'est pas reposée :
+    // sans question nouvelle, le fil sort de la boucle vers l'arbitrage (EF-24).
+    const asked = new Set((thread.messages || []).flatMap((message) => (
+      message.kind === 'clarification_request' ? message.questions || [] : []
+    )));
+    const questions = clarificationQuestions(run).filter((item) => !asked.has(item));
+    const status = questions.length ? 'needs_clarification' : 'awaiting_arbitration';
     await this.store.appendThreadMessage(threadId, {
       role: 'collective', kind: 'run', author_id: 'kayros-swarm', run, created_at: now(),
     }, { tenantId: scope });
