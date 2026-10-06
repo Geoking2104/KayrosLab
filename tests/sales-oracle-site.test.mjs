@@ -72,6 +72,32 @@ test('generated static pages keep the sales narrative and leave the Sales Oracle
   }
 });
 
+test('landing covers personified agents and Salon charter embed', () => {
+  for (const file of ['index.html', 'index.fr.html']) {
+    const html = read(file);
+    assert.match(html, /id="personify"/);
+    assert.match(html, /CrystalKnows/);
+    assert.match(html, /id="salon"/);
+    assert.match(html, /class="salon-charter"/);
+    assert.match(html, /btn-salon/);
+    assert.match(html, /Fraunces/);
+    assert.doesNotMatch(html, /panel hl reveal/);
+  }
+  const en = read('index.html');
+  const fr = read('index.fr.html');
+  assert.match(en, /They put on the skin of a book/);
+  assert.match(fr, /Ils prennent la peau/);
+  assert.match(en, /role packs/i);
+  assert.match(fr, /packs de r[oô]les/i);
+  assert.match(en, /mise à l.épreuve|stress-test/i);
+  assert.match(fr, /mise à l.épreuve/);
+  const css = read('marketing.css');
+  assert.match(css, /\.salon-charter/);
+  assert.match(css, /--salon-accent/);
+  assert.match(css, /\.personify-grid/);
+  assert.match(css, /oklch\(42% 0\.12 25\)/);
+});
+
 test('agent console embeds the Sales Oracle workspace with the console session', () => {
   const app = read('frontend/console-app/src/App.jsx');
   assert.match(app, /Sales Oracle/);

@@ -33,6 +33,10 @@ test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () =
   assert.match(french, /href="\/salon\/">Salon</);
   assert.match(foyer, /Un cercle est une table/);
   assert.match(foyer, /@voltaire/);
+  assert.match(english, /class="salon-charter"/);
+  assert.match(french, /class="salon-charter"/);
+  assert.match(english, /id="personify"/);
+  assert.match(french, /CrystalKnows/);
 });
 
 test('la console prefixe les routes avec la base API du build', async () => {
