@@ -5,6 +5,7 @@ import metricsPlugin from 'fastify-metrics';
 import buildContext from './lib/context.mjs';
 import authPlugin from './plugins/auth.mjs';
 import { applyEnvFileDefaults } from './lib/env-file.mjs';
+import { metricsEndpoint } from './lib/metrics.mjs';
 
 applyEnvFileDefaults();
 
@@ -21,7 +22,9 @@ const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
 
 await app.register(cors, { origin: [ctx.ALLOWED_ORIGIN, 'null'] });
-await app.register(metricsPlugin, { endpoint: '/metrics' });
+// /metrics : Bearer METRICS_TOKEN si défini, sinon loopback direct uniquement
+// (Prometheus local). Toute requête relayée par nginx est refusée.
+await app.register(metricsPlugin, { endpoint: metricsEndpoint(process.env) });
 await app.register(rateLimit, {
   global: true, max: 100, timeWindow: '1 minute',
   errorResponseBuilder: (req, ctx) => ({

@@ -106,13 +106,17 @@ export function summarizeSwarmRun(run) {
 }
 
 export class HybridAgentGateway {
-  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0 } = {}) {
+  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0, runObserver = null } = {}) {
     if (!swarm) throw new Error('HybridAgentGateway: swarm requis');
     this.swarm = swarm;
     // Exécutions asynchrones en cours dans CE processus (thread_id → promesse).
     this.jobs = new Map();
     // Délai maximal d'une exécution asynchrone (0 = aucun) : au-delà, le fil passe `failed`.
     this.runTimeoutMs = Math.max(0, Number(runTimeoutMs) || 0);
+    // Observateur optionnel des exécutions asynchrones (métriques) :
+    // `started({ kind })` → jeton, puis `finished(jeton, { thread, error })`.
+    // Ses erreurs sont ignorées : il ne peut jamais casser une mission.
+    this.runObserver = runObserver;
     this.auditSink = auditSink;
     this.store = store || new InMemoryCollaborationStore({ maxEvents });
     this.adapters = new Map();
@@ -494,7 +498,12 @@ export class HybridAgentGateway {
    * passer le fil en `failed`. Les mises à jour de progression sont
    * sérialisées pour ne jamais se chevaucher.
    */
-  _launch(threadId, tenantId, runId, { execute, finish }) {
+  _observe(method, ...args) {
+    try { return this.runObserver?.[method]?.(...args) ?? null; } catch { return null; }
+  }
+
+  _launch(threadId, tenantId, runId, { execute, finish, kind = 'message' }) {
+    const observed = this._observe('started', { kind });
     let chain = Promise.resolve();
     const onProgress = ({ completed, total }) => {
       chain = chain
@@ -503,15 +512,21 @@ export class HybridAgentGateway {
       return chain;
     };
     const job = (async () => {
+      let thread = null;
+      let failure = null;
       try {
         const run = await withDeadline(Promise.resolve().then(() => execute(onProgress)), this.runTimeoutMs);
         await chain;
-        return await finish(run);
+        thread = await finish(run);
+        return thread;
       } catch (error) {
+        failure = error;
         await chain;
-        try { return await this._failThread(threadId, tenantId, runId, error); } catch { return null; }
+        try { thread = await this._failThread(threadId, tenantId, runId, error); } catch { thread = null; }
+        return thread;
       } finally {
         if (this.jobs.get(threadId) === job) this.jobs.delete(threadId);
+        if (observed) this._observe('finished', observed, { thread, error: failure });
       }
     })();
     this.jobs.set(threadId, job);
@@ -627,6 +642,7 @@ export class HybridAgentGateway {
       room_id: room.room_id, tenant_id: scope, thread_id: threadId, run_id: runId, by,
     });
     this._launch(threadId, scope, runId, {
+      kind: 'continue',
       execute: (onProgress) => this.swarm.run(room.swarm_id, {
         tenantId: scope, question: thread.question,
         context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
