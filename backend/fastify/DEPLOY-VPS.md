@@ -67,6 +67,9 @@ secrets/variables GitHub (une valeur absente vide la ligne) :
 | `LLM_PROVIDER=` | variable `LLM_PROVIDER` (optionnelle) | vide = sélection automatique |
 | `LLM_MAX_CONCURRENCY=` | variable `LLM_MAX_CONCURRENCY` (optionnelle) | vide = 2 agents simultanés |
 | `MISTRAL_API_KEY=` | secret `MISTRAL_API_KEY` | repli automatique (ou primaire sans NVIDIA) |
+| `NVIDIA_TIMEOUT_MS=` | variable `NVIDIA_TIMEOUT_MS` (optionnelle, écrite seulement si définie) | absent = 180000 ms par appel |
+| `NVIDIA_MAX_TOKENS=` | variable `NVIDIA_MAX_TOKENS` (optionnelle, écrite seulement si définie) | absent = 4096 jetons |
+| `KAYROS_CONSOLE_RUN_TIMEOUT_MS=` | variable `KAYROS_CONSOLE_RUN_TIMEOUT_MS` (optionnelle, écrite seulement si définie) | absent = 30 min par mission console |
 
 Activer NVIDIA = créer le secret de dépôt `NVIDIA_API_KEY`
 (Settings → Secrets and variables → Actions → New repository secret, ou
@@ -89,6 +92,40 @@ Retour à Mistral sans supprimer la clé : variable `LLM_PROVIDER=mistral`.
 > Le défaut est donc `deepseek-ai/deepseek-v4.1-flash`, seul DeepSeek génératif
 > au catalogue ; `NVIDIA_MODEL` permet d'en changer
 > (`curl -s https://integrate.api.nvidia.com/v1/models` liste les identifiants).
+
+#### Passer sur Kimi K3 (modèle lent à raisonnement)
+
+Les missions de la console sont **asynchrones** : `POST /v1/console/sessions/:id/run`
+répond `202` immédiatement (fil `running`), le collectif s'exécute en tâche de
+fond dans le processus `kayros-api` et la console interroge
+`GET /v1/console/threads/:id` toutes les ~3 s. Le proxy (coupure ≈ 60 s) ne
+limite donc plus la durée d'une mission ; un modèle à ~75 s par réponse d'agent
+est utilisable.
+
+1. Variable de dépôt `NVIDIA_MODEL=moonshotai/kimi-k3`
+   (Settings → Secrets and variables → Actions → *Variables*, ou
+   `gh variable set NVIDIA_MODEL --body moonshotai/kimi-k3 -R Geoking2104/KayrosLab`).
+2. **Supprimer** la variable de dépôt `LLM_PROVIDER` (aujourd'hui forcée à
+   `mistral`, ce qui court-circuite NVIDIA) :
+   `gh variable delete LLM_PROVIDER -R Geoking2104/KayrosLab`
+   (ou la mettre à `auto`/`nvidia`). Le workflow réécrit alors `LLM_PROVIDER=`
+   (vide = sélection automatique → `nvidia`, Mistral en repli signalé).
+3. Le secret `NVIDIA_API_KEY` doit exister (inchangé).
+4. Optionnel : `NVIDIA_MAX_TOKENS=16384` si les réponses arrivent vides
+   (`EMPTY_COMPLETION` : budget consommé par le raisonnement → repli Mistral),
+   `NVIDIA_TIMEOUT_MS` (défaut 180000, > pointes ~120 s de Kimi K3),
+   `LLM_MAX_CONCURRENCY` (défaut 2 : 3 agents ≈ 2 × 75 s par mission).
+5. Relancer « Deploy KayrosLab backend - OVH VPS » (`workflow_dispatch` :
+   `gh workflow run deploy-vps-backend.yml -R Geoking2104/KayrosLab`).
+6. Vérifier : `curl -s https://api.kayroslab.com/health | jq .llm` →
+   `"provider": "nvidia", "model": "moonshotai/kimi-k3", "live": true`.
+
+Kimi K3 renvoie `reasoning_content` (ignoré) et entoure souvent son JSON de
+```` ```json ```` : le parseur de verdict extrait le contenu du bloc
+(`extractAgentJson`, `core/swarm.mjs`). Au redémarrage de `kayros-api`, une
+mission restée `running` passe `failed` (« interrompue par un redémarrage ») :
+relancer la mission depuis la console. Retour au mode synchrone historique pour
+un client API : `?wait=true` (soumis alors au délai du proxy).
 
 Hors workflow (instance lancée à la main), ajouter la ligne au `.env` du serveur :
 `NVIDIA_API_KEY=<clé fournie par le porteur>` puis `pm2 restart kayros-api --update-env`.
