@@ -20,7 +20,7 @@ async function buildApp() {
 }
 
 test('session collective accepts new agents without recreating the session', async (t) => {
-  const { app, swarm } = await buildApp();
+  const { app, swarm, hybridGateway } = await buildApp();
   t.after(() => app.close());
   await swarm.createAgent({
     agent_id: 'auteur_hugo', role_name: 'Victor Hugo — écrivain', department: 'Bibliothèque du domaine public',
@@ -45,7 +45,8 @@ test('session collective accepts new agents without recreating the session', asy
     consensus: { verdict: 'GO', rationale: 'OK.', requires_human_arbitration: true },
   });
   const mission = await app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/run`, payload: { question: 'Lancer maintenant ?' } });
-  assert.equal(mission.statusCode, 200);
+  assert.equal(mission.statusCode, 202);
+  assert.equal((await hybridGateway.waitForThread(mission.json().thread_id)).status, 'awaiting_arbitration');
 
   // Refus d'un collectif vide.
   const emptied = await app.inject({ method: 'PATCH', url: `/v1/console/sessions/${sessionId}/collective`, payload: { remove_agent_ids: ['cfo', 'cto', 'auteur_hugo'] } });

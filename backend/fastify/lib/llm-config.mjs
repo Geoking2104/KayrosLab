@@ -25,6 +25,8 @@
  */
 export const NVIDIA_DEFAULT_MODEL = 'deepseek-ai/deepseek-v4.1-flash';
 export const NVIDIA_DEFAULT_BASE_URL = 'https://integrate.api.nvidia.com/v1';
+/** Délai par défaut d'un appel NVIDIA (ms). Surcharger avec NVIDIA_TIMEOUT_MS. */
+export const NVIDIA_DEFAULT_TIMEOUT_MS = 180000;
 export const MISTRAL_DEFAULT_MODEL = 'mistral-small-latest';
 export const KNOWN_LLM_PROVIDERS = Object.freeze(['nvidia', 'mistral', 'anthropic', 'ollama', 'mock']);
 const KEYED = { nvidia: 'NVIDIA_API_KEY', mistral: 'MISTRAL_API_KEY', anthropic: 'ANTHROPIC_API_KEY' };
@@ -104,7 +106,10 @@ export function resolveLlmConfig(env = {}) {
     // null = température de la requête (agents : 0.3), sinon valeur imposée.
     temperature: temperatureRaw === '' ? null : num(temperatureRaw, null, { min: 0, max: 2 }),
     maxTokens: num(env.NVIDIA_MAX_TOKENS, 4096, { min: 1, max: 1048576, integer: true }),
-    timeoutMs: num(env.NVIDIA_TIMEOUT_MS, 120000, { min: 0, integer: true }),
+    // Délai par appel : 180 s laissent passer un modèle à raisonnement lent
+    // (Kimi K3 ≈ 75 s par réponse d'agent, pointes > 120 s). Les missions
+    // console étant asynchrones, ce délai n'est plus borné par le proxy (≈ 60 s).
+    timeoutMs: num(env.NVIDIA_TIMEOUT_MS, NVIDIA_DEFAULT_TIMEOUT_MS, { min: 0, integer: true }),
     extraBody: parseJsonObject(env.NVIDIA_EXTRA_BODY, 'NVIDIA_EXTRA_BODY', warnings),
   };
 

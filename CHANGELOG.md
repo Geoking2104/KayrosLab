@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.25.26 (2026-10) — Missions console asynchrones (LLM lents)
+
+- `POST /v1/console/sessions/:id/run` et `POST /v1/console/threads/:id/messages` répondent `202` avec `thread_id`/`run_id` : le fil est créé au statut `running`, le collectif s'exécute en tâche de fond, puis le fil prend son statut final (`needs_clarification`, `awaiting_arbitration`) ou `failed` avec un message lisible. `?wait=true` conserve le mode synchrone.
+- Progression par agent (`progress: { completed, total }`) exposée par `GET /threads/:id` et `GET /sessions/:id` ; une mission à la fois par session (409) ; arbitrage refusé tant que la mission tourne.
+- Au démarrage, les missions restées `running` passent `failed` (interrompue). Délai maximal par mission : `KAYROS_CONSOLE_RUN_TIMEOUT_MS` (30 min).
+- Console : « Mission en cours… (x/3 analyses) », polling ~3 s, affichage de l'échec.
+- `NVIDIA_TIMEOUT_MS` : défaut porté à 180 s (Kimi K3 ≈ 75 s par réponse). Parseur de verdict : JSON entouré de ```` ```json ```` extrait en priorité.
+- Activation de Kimi K3 : variable de dépôt `NVIDIA_MODEL=moonshotai/kimi-k3`, suppression de la variable `LLM_PROVIDER` (cf. `backend/fastify/DEPLOY-VPS.md` §4).
+
 ## v0.25.25 (2026-10) — Fournisseur LLM NVIDIA, robustesse 429
 
 - Provider `nvidia` (NVIDIA NIM hébergé, API OpenAI-compatible) : `NVIDIA_API_KEY`, `NVIDIA_MODEL` (défaut `deepseek-ai/deepseek-v4.1-flash` ; DeepSeek V4 Pro n'est plus servi par l'API hébergée, 410 Gone), `NVIDIA_BASE_URL`.

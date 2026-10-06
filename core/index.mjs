@@ -195,6 +195,7 @@ export function createEngine(opts = {}) {
     adapters: opts.collaborationAdapters || [],
     auditSink: opts.collaborationAuditSink || opts.auditSink || null,
     store: opts.collaborationStore || null,
+    runTimeoutMs: opts.collaborationRunTimeoutMs || 0,
   });
   if (agents.Bisociateur && embeddings) agents.Bisociateur.embeddings = embeddings;
   const orchestrator = new Orchestrator({

@@ -76,3 +76,13 @@ test('le verrou de salon utilise la meme connexion et la libere meme en erreur',
   assert.deepEqual(queries.map(({ params }) => params), [['room-42'], ['room-42']]);
   assert.equal(released, true);
 });
+
+test('PgCollaborationStore liste les fils `running` tous tenants confondus (reprise au démarrage)', async () => {
+  const pool = fakePool(() => ({ rows: [{ payload: { thread_id: 'th-1', tenant_id: 't-1', status: 'running' } }] }));
+  const store = new PgCollaborationStore(pool);
+  const threads = await store.listThreadsByStatus('running');
+  assert.deepEqual(threads.map((thread) => thread.thread_id), ['th-1']);
+  assert.match(pool.calls[0].sql, /where status = \$1/);
+  assert.doesNotMatch(pool.calls[0].sql, /tenant_id/);
+  assert.deepEqual(pool.calls[0].params, ['running', 1000]);
+});

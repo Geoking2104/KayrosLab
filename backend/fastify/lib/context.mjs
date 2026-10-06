@@ -104,6 +104,13 @@ export function orchestratorForRequest(engine, scope = {}) {
   return orch;
 }
 
+/** KAYROS_CONSOLE_RUN_TIMEOUT_MS : vide = 30 min ; 0 = aucun délai. */
+export function consoleRunTimeoutMs(raw) {
+  if (raw === undefined || raw === null || String(raw).trim() === '') return 30 * 60 * 1000;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : 30 * 60 * 1000;
+}
+
 export default async function buildContext() {
   const sharedPaths = applySharedDataEnv(process.env);
 
@@ -534,6 +541,9 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
     swarmStore,
     collaborationStore,
+    // Délai maximal d'une mission console asynchrone (défaut 30 min, 0 = aucun) :
+    // au-delà, le fil passe `failed`. Les appels LLM ont leur propre délai.
+    collaborationRunTimeoutMs: consoleRunTimeoutMs(process.env.KAYROS_CONSOLE_RUN_TIMEOUT_MS),
     llmMaxConcurrency: llmConfig.maxConcurrency,
     fs: nodeFs,
     path: nodePath,
@@ -558,6 +568,15 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
   if (engine.persistenceReady) {
     await engine.persistenceReady.catch(() => false);
+  }
+  // Missions console asynchrones restées `running` (processus arrêté pendant
+  // les analyses) : elles passent `failed` avec un message explicite, sinon
+  // l'interface attendrait indéfiniment et la session resterait bloquée.
+  try {
+    const interrupted = await engine.hybridGateway.recoverInterruptedRuns?.();
+    if (interrupted) console.warn(`[kayros] ${interrupted} mission(s) console interrompue(s) par le redémarrage : statut failed`);
+  } catch (e) {
+    console.warn('[kayros] reprise des missions console impossible:', e?.message || e);
   }
   if (engine.syncAvailableQuants && typeof engine.syncAvailableQuants.then === 'function') {
     engine.syncAvailableQuants.catch(() => {});

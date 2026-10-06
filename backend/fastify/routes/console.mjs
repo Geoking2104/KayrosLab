@@ -103,6 +103,15 @@ function surface(message) {
     .replace(/salons/gi, 'sessions')
     .replace(/salon/gi, 'session');
 }
+/** `?wait=true` : ancien mode synchrone (la réponse attend la fin des analyses). */
+function waitRequested(req) { return /^(1|true|yes|oui)$/i.test(String(req.query?.wait ?? '')); }
+/** Vue d'exécution asynchrone renvoyée en 202 et utilisée par le polling. */
+function executionView(thread, runId) {
+  return {
+    thread_id: thread?.thread_id || null, run_id: runId || thread?.active_run_id || thread?.current_run_id || null,
+    status: thread?.status || null, progress: thread?.progress || null, error: thread?.error || null,
+  };
+}
 function makeSessionId() { return `session_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`; }
 
 // --- Isolation par propriétaire (EF-21 / EF-22 / ENF-08) -------------------
@@ -263,7 +272,9 @@ export default async function consoleRoute(app) {
         sessions: sessions.length,
         executions: threads.length,
         impersonators: agents.filter((agent) => !!agent.metadata?.impersonator).length,
-        pending_human_decisions: threads.filter((thread) => thread.status !== 'resolved').length,
+        // Une mission en cours ou en échec n'attend pas encore d'arbitrage.
+        pending_human_decisions: threads.filter((thread) => !['resolved', 'running', 'failed'].includes(thread.status)).length,
+        running_executions: threads.filter((thread) => thread.status === 'running').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,
       capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
@@ -474,6 +485,10 @@ export default async function consoleRoute(app) {
       return reply.code(status).send({ error: shown });
     }
   });
+  // Mission : par défaut asynchrone (202 + fil `running`, collectif exécuté en
+  // tâche de fond, suivi par GET /threads/:id ou /sessions/:id). Un LLM lent
+  // (≈75 s par agent) dépasserait sinon le délai du proxy (≈60 s) et la
+  // mission ne serait pas enregistrée. `?wait=true` conserve le mode synchrone.
   app.post('/v1/console/sessions/:sessionId/run', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = missionSchema.safeParse(req.body || {});
@@ -482,14 +497,28 @@ export default async function consoleRoute(app) {
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const question = parsed.data.question || parsed.data.text;
     const context = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    const input = {
+      platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
+      user_id: me.sub, by: me.email, explicit: true, text: question, context,
+    };
+    if (waitRequested(req)) {
+      try {
+        const result = await app.kayrosContext.hybridGateway.handleMessage(input);
+        // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
+        return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary, llm: result.run?.llm || null };
+      } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+    }
     try {
-      const result = await app.kayrosContext.hybridGateway.handleMessage({
-        platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
-        user_id: me.sub, by: me.email, explicit: true, text: question, context,
+      const started = await app.kayrosContext.hybridGateway.startMessage(input);
+      const execution = executionView(started.thread, started.run_id);
+      return reply.code(202).send({
+        session_id: room.room_id, ...execution,
+        run: { run_id: started.run_id, status: 'running' }, thread: started.thread,
+        poll: `/v1/console/threads/${encodeURIComponent(execution.thread_id)}`,
       });
-      // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
-      return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary, llm: result.run?.llm || null };
-    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+    } catch (error) {
+      return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: surface(error.message) });
+    }
   });
 
   // --- Journal d'exécution du harness ------------------------------------
@@ -514,8 +543,16 @@ export default async function consoleRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = replySchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'réponse invalide', issues: parsed.error.issues });
     if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
-    try { const thread = await app.kayrosContext.hybridGateway.continueThread(req.params.threadId, { tenantId: me.tenantId, text: parsed.data.text, by: me.email }); return reply.code(202).send({ thread }); }
-    catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
+    const options = { tenantId: me.tenantId, text: parsed.data.text, by: me.email };
+    try {
+      if (waitRequested(req)) {
+        const thread = await app.kayrosContext.hybridGateway.continueThread(req.params.threadId, options);
+        return reply.code(202).send({ thread });
+      }
+      // Relance asynchrone du collectif : même contrat que /run (fil `running`, polling).
+      const started = await app.kayrosContext.hybridGateway.startContinueThread(req.params.threadId, options);
+      return reply.code(202).send({ ...executionView(started.thread, started.run_id), thread: started.thread });
+    } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;

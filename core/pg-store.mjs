@@ -508,6 +508,15 @@ export class PgCollaborationStore {
     return Promise.all(rows.map((row) => this.getThread(row.payload.thread_id, { tenantId })));
   }
 
+  /** Fils d'un statut donné, tous tenants confondus (reprise au démarrage). */
+  async listThreadsByStatus(status, { limit = 1000 } = {}) {
+    const { rows } = await this.pool.query(
+      'select payload from kayros_decision_threads where status = $1 order by updated_at asc limit $2',
+      [String(status), Math.max(1, Number(limit) || 1000)],
+    );
+    return rows.map((row) => row.payload);
+  }
+
   async updateThread(threadId, patch, { tenantId = null } = {}) {
     const current = await this.getThread(threadId, { tenantId });
     if (!current) return null;

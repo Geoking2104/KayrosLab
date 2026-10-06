@@ -60,6 +60,11 @@ test('resolveLlmConfig : modèle, URL, LLM_FALLBACK, concurrence et relances', (
   assert.equal(d.nvidia.model, 'deepseek-ai/deepseek-v4.1-flash');
   assert.equal(d.nvidia.temperature, null);
   assert.equal(d.nvidia.maxTokens, 4096);
+  // Un modèle lent (Kimi K3 ≈ 75 s, pointes ~120 s) doit passer sous le délai par défaut.
+  assert.equal(d.nvidia.timeoutMs, 180000);
+  assert.ok(d.nvidia.timeoutMs > 120000);
+  assert.equal(resolveLlmConfig({ NVIDIA_TIMEOUT_MS: '240000' }).nvidia.timeoutMs, 240000);
+  assert.equal(resolveLlmConfig({ NVIDIA_MODEL: 'moonshotai/kimi-k3', NVIDIA_API_KEY: 'x' }).model, 'moonshotai/kimi-k3');
   assert.equal(d.maxConcurrency, 2);
   assert.equal(d.retry.maxRetries, 2);
 
