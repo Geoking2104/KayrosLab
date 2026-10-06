@@ -259,6 +259,14 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .decision-list button div { min-width: 0; display: grid; gap: var(--space-xs); }
 .decision-list button strong { overflow-wrap: anywhere; }
 .decision-list button span, .thread-status { flex: none; border: var(--rule-thin) solid var(--color-rule-strong); border-radius: var(--radius-pill); padding: var(--space-xs) var(--space-sm); color: var(--color-muted); font-size: var(--text-xs); white-space: nowrap; }
+.thread-status.is-running { border-color: var(--color-accent); color: var(--color-accent); }
+.thread-status.is-failed { border-color: var(--color-danger); color: var(--color-danger); }
+.run-progress { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) var(--space-lg); border: var(--rule-thin) solid color-mix(in srgb, var(--color-accent) 45%, var(--color-rule)); border-radius: var(--radius-md); background: var(--color-surface); }
+.run-progress div { display: grid; gap: var(--space-xs); }
+.run-progress small { color: var(--color-muted); line-height: 1.5; }
+.run-spinner { flex: none; width: 1.25rem; aspect-ratio: 1; border: 2px solid var(--color-rule-strong); border-top-color: var(--color-accent); border-radius: var(--radius-pill); animation: run-spin 900ms linear infinite; }
+@keyframes run-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .run-spinner { animation: none; } }
 .back { justify-self: start; }
 .thread-view { display: grid; gap: var(--space-xl); }
 .thread-view > header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-lg); padding-bottom: var(--space-lg); border-bottom: var(--rule-thin) solid var(--color-rule); }

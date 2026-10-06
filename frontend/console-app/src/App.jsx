@@ -28,6 +28,12 @@ function splitLines(value) { return String(value || '').split(/\r?\n/).map((item
 function splitCsv(value) { return String(value || '').split(',').map((item) => item.trim()).filter(Boolean); }
 function jsonValue(value, fallback = {}) { try { return JSON.parse(value || '{}'); } catch { return fallback; } }
 function verdictLabel(value) { return String(value || '—').replaceAll('_', ' '); }
+// Missions asynchrones : le serveur répond 202 (fil `running`) puis la console
+// interroge le fil jusqu'à son statut final (ou `failed`).
+const RUN_POLL_MS = 3000;
+const THREAD_STATUS_LABELS = { running: 'mission en cours', failed: 'échec' };
+function threadStatusLabel(status) { return THREAD_STATUS_LABELS[status] || String(status || '—').replaceAll('_', ' '); }
+function progressLabel(progress) { return progress?.total ? `${Math.min(progress.completed || 0, progress.total)}/${progress.total} analyses` : ''; }
 function readFileText(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '')); reader.onerror = () => reject(new Error('Lecture du fichier impossible.')); reader.readAsText(file); }); }
 function readFileDataUrl(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result || '')); reader.onerror = () => reject(new Error('Lecture de l\'image impossible.')); reader.readAsDataURL(file); }); }
 
@@ -233,14 +239,31 @@ function RunDossier({ run }) {
 
 function DecisionThread({ thread, onChanged, canArbitrate = true }) {
   const [reply, setReply] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const running = thread.status === 'running'; const failed = thread.status === 'failed';
+  const onChangedRef = useRef(onChanged); onChangedRef.current = onChanged;
+  // Polling ~3 s tant que la mission tourne ; l'affichage habituel reprend au statut final.
+  useEffect(() => {
+    if (!running) return undefined;
+    let alive = true;
+    const timer = setInterval(async () => {
+      try {
+        const result = await api.thread(thread.thread_id);
+        if (alive && result?.thread) onChangedRef.current(result.thread, { quiet: result.thread.status === 'running' });
+      } catch { /* nouvel essai au prochain intervalle */ }
+    }, RUN_POLL_MS);
+    return () => { alive = false; clearInterval(timer); };
+  }, [thread.thread_id, running]);
   async function answer(event) { event.preventDefault(); setState('loading'); setError(''); try { const result = await api.replyThread(thread.thread_id, reply); setReply(''); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
   async function arbitrate(action, decision) { setState('loading'); setError(''); try { const result = await api.arbitrateThread(thread.thread_id, { action, decision, justification: action === 'override_veto' ? 'Arbitrage explicite depuis la console.' : '' }); setState('success'); onChanged(result.thread); } catch (err) { setState('error'); setError(err.message); } }
-  return <section className="thread-view"><header><div><small>Fil {thread.thread_id} · session {thread.room_id}</small><h2>{thread.question}</h2></div><span className="thread-status">{thread.status.replaceAll('_', ' ')}</span></header>
+  const progress = progressLabel(thread.progress);
+  return <section className="thread-view"><header><div><small>Fil {thread.thread_id} · session {thread.room_id}</small><h2>{thread.question}</h2></div><span className={`thread-status${running ? ' is-running' : failed ? ' is-failed' : ''}`}>{threadStatusLabel(thread.status)}</span></header>
     <div className="timeline">{(thread.messages || []).map((message) => <div className={`thread-message is-${message.role}`} key={message.message_id || `${message.kind}-${message.created_at}`}>
       {message.kind === 'run' ? <RunDossier run={message.run} /> : <><small>{message.role === 'human' ? message.author_id || 'Décideur' : 'Collectif Kayros'} · {message.kind}</small>{message.text && <p>{message.text}</p>}{message.questions?.length > 0 && <ol>{message.questions.map((question) => <li key={question}>{question}</li>)}</ol>}{message.decision && <p>Arbitrage : {message.decision.action} · {verdictLabel(message.decision.verdict)}</p>}</>}
     </div>)}</div>
-    {thread.status !== 'resolved' && <><form className="thread-reply" onSubmit={answer}><label>Réponse humaine et paramètres complémentaires<textarea value={reply} onChange={(event) => setReply(event.target.value)} placeholder="Budget validé à 120 k€, responsable : …, preuve disponible : …" /></label><button className="button primary" disabled={!reply.trim() || state === 'loading'}>{state === 'loading' ? 'Relance…' : 'Répondre et relancer le même collectif'}</button></form>
-      <div className="arbitration"><div><strong>Arbitrage humain</strong><small>{canArbitrate ? 'Le verdict reste consultatif jusqu’à cette étape.' : `${MANAGER_ONLY} : le verdict reste consultatif jusqu’à leur arbitrage.`}</small></div><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div></>}
+    {running && <div className="run-progress" role="status" aria-live="polite"><span className="run-spinner" aria-hidden="true" /><div><strong>Mission en cours…{progress ? ` ${progress}` : ''}</strong><small>Chaque agent instruit la question l’un après l’autre ; avec un modèle à raisonnement, comptez plusieurs minutes. Cette page se met à jour automatiquement.</small></div></div>}
+    {failed && <p className="inline-error" role="alert">La mission a échoué : {thread.error || 'erreur inconnue'}. Vous pouvez la relancer en répondant ci-dessous.</p>}
+    {!running && thread.status !== 'resolved' && <><form className="thread-reply" onSubmit={answer}><label>Réponse humaine et paramètres complémentaires<textarea value={reply} onChange={(event) => setReply(event.target.value)} placeholder="Budget validé à 120 k€, responsable : …, preuve disponible : …" /></label><button className="button primary" disabled={!reply.trim() || state === 'loading'}>{state === 'loading' ? 'Relance…' : 'Répondre et relancer le même collectif'}</button></form>
+      {!failed && <div className="arbitration"><div><strong>Arbitrage humain</strong><small>{canArbitrate ? 'Le verdict reste consultatif jusqu’à cette étape.' : `${MANAGER_ONLY} : le verdict reste consultatif jusqu’à leur arbitrage.`}</small></div><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('reevaluate')}>Demander une réévaluation</button><button className="button secondary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('override_veto', 'CONDITIONAL_GO')}>Passer sous conditions</button><button className="button primary" disabled={!canArbitrate} title={canArbitrate ? undefined : MANAGER_ONLY} onClick={() => arbitrate('accept_consensus')}>Accepter le consensus</button></div>}</>}
     {error && <p className="inline-error" role="alert">{error}</p>}
   </section>;
 }
@@ -291,8 +314,9 @@ function Overview({ data, refresh, openSession, onThread }) {
           lines.length ? `Corpus joint (${lines.length} document(s)) :\n${lines.join('\n')}` : 'Corpus : aucun document chargé pour ce dossier.',
         ].join('\n').slice(0, SALES_ORACLE_CONTEXT_LIMIT);
       }
+      // 202 : le fil est créé au statut `running` ; DecisionThread suit la progression.
       const result = await api.runMission(session.session_id, question, context);
-      setQuestion(''); setState('success'); onThread(result.thread); await refresh();
+      setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
   return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console harness</h1><p>Composez un collectif, lancez une mission gouvernée, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
@@ -303,7 +327,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
       {session && <AgentChips agents={session.collective.agents} />}
       {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour lancer une mission.</p>}
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Analyses individuelles en cours…' : 'Lancer le collectif'}</button></form>
+      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
         <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
@@ -650,14 +674,14 @@ function SessionsPage({ data, onCreate, onThread }) {
       <small>{session.collective.active_agents.length} agent(s) · {session.executions?.length || 0} exécution(s) · {votingLabel(session.collective.voting_threshold)}</small>
       <h2>{session.name}</h2>
       <AgentChips agents={session.collective.agents} />
-      <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
+      <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}{thread.status === 'running' ? ` · mission en cours${thread.progress?.total ? ` (${progressLabel(thread.progress)})` : ''}` : thread.status === 'failed' ? ' · échec' : ''}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
     </article>)}</div>
   </section>;
 }
 
 function DecisionsPage({ data, selected, onSelect, onChanged }) {
   if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} canArbitrate={canManage(data.user)} /></section>;
-  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{thread.status.replaceAll('_', ' ')}</span></button>)}</div></section>;
+  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{threadStatusLabel(thread.status)}{thread.status === 'running' && thread.progress?.total ? ` · ${progressLabel(thread.progress)}` : ''}</span></button>)}</div></section>;
 }
 
 const SALES_ORACLE_TOOL_URL = '/assets/sales-oracle-tool.js';
@@ -737,7 +761,7 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread) => { setSelectedThread(thread); refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
     {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
 }
