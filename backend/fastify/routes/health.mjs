@@ -1,3 +1,5 @@
+import { llmBindings } from '../lib/context.mjs';
+
 export default async function healthRoute(app) {
   app.get('/health', async () => {
     const ctx = app.kayrosContext;
@@ -9,6 +11,8 @@ export default async function healthRoute(app) {
         provider: ctx.MISTRAL_API_KEY ? 'mistral' : (ctx.ANTHROPIC_API_KEY ? 'anthropic' : 'mock'),
         live: Boolean(ctx.MISTRAL_API_KEY || ctx.ANTHROPIC_API_KEY),
         model: ctx.MISTRAL_API_KEY ? ctx.MISTRAL_MODEL : ctx.ANTHROPIC_MODEL,
+        // Liaison par composant : tout `engine-local` signale un écart avec `provider` (ENF-09).
+        components: llmBindings(ctx.engine, ctx.llm),
       },
       mistralConfigured: !!ctx.MISTRAL_API_KEY,
       model: ctx.ANTHROPIC_MODEL,

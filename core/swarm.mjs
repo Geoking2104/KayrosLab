@@ -314,12 +314,17 @@ export class AgentRegistry {
 }
 
 export function normalizeSwarmVerdict(raw) {
-  const t = String(raw || '').trim().toUpperCase().replace(/[\s-]+/g, '_');
+  // Tolère la mise en forme courante des LLM : `**NO-GO**`, "GO.", « CONDITIONAL GO ».
+  const t = String(raw || '').trim().toUpperCase()
+    .replace(/[^A-Z0-9_\s-]+/g, ' ').trim().replace(/[\s-]+/g, '_');
   if (['GO', 'APPROVED', 'APPROVE'].includes(t)) return 'GO';
   if (['NO_GO', 'NOGO', 'REJECTED', 'REJECT', 'VETO'].includes(t)) return 'NO_GO';
-  if (['CONDITIONAL_GO', 'CONDITIONAL', 'REVISE', 'REVISION'].includes(t)) return 'CONDITIONAL_GO';
+  if (['CONDITIONAL_GO', 'CONDITIONAL', 'REVISE', 'REVISION', 'GO_CONDITIONNEL', 'CONDITIONNEL'].includes(t)) return 'CONDITIONAL_GO';
   return null;
 }
+
+/** Hypothèse technique ajoutée quand la sortie d'un agent ne contient pas de verdict formel. */
+export const UNPARSABLE_VERDICT_ASSUMPTION = 'Agent output did not contain a parsable formal verdict; human review required.';
 
 function firstJsonObject(text) {
   const src = String(text || '');
@@ -349,12 +354,18 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
   value = value && typeof value === 'object' ? value : {};
   let verdict = normalizeSwarmVerdict(value.verdict || value.decision);
   const unverified = strings(value.unverified_assumptions);
+  const rawText = typeof (raw?.output ?? raw) === 'string' ? String(raw?.output ?? raw) : '';
   if (!verdict) {
-    verdict = normalizeSwarmVerdict(String(raw?.output || raw || '').match(/\b(CONDITIONAL[\s_-]?GO|NO[\s_-]?GO|GO)\b/i)?.[1]);
+    // JSON tronqué (limite de jetons) ou entouré de prose : le champ "verdict" reste lisible.
+    verdict = normalizeSwarmVerdict(rawText.match(/"(?:verdict|decision)"\s*:\s*"([^"]{1,40})"/i)?.[1]);
+  }
+  if (!verdict) {
+    // Majuscules seulement : un « go » de prose (ou l'écho de la question par le mock) n'est pas un verdict.
+    verdict = normalizeSwarmVerdict(rawText.match(/\b(CONDITIONAL[\s_-]?GO|NO[\s_-]?GO|GO)\b/)?.[1]);
   }
   if (!verdict) {
     verdict = 'CONDITIONAL_GO';
-    unverified.push('Agent output did not contain a parsable formal verdict; human review required.');
+    unverified.push(UNPARSABLE_VERDICT_ASSUMPTION);
   }
   const profile = personalityEnabled ? definition.human_profile || null : null;
   return {
@@ -381,7 +392,18 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
     })).filter((m) => m.metric) : [],
     required_mitigations: strings(value.required_mitigations || value.mitigations),
     unverified_assumptions: [...new Set(unverified)],
+    // Provider LLM effectif de l'agent (ENF-09) : un repli `mock` ne doit jamais être silencieux.
+    llm_provider: raw?.provider || null,
+    llm_degraded: raw?.degraded || null,
   };
+}
+
+/** Synthèse des providers effectivement utilisés par les agents d'un run (ENF-09). */
+export function summarizeRunProviders(analyses = []) {
+  const providers = [...new Set(analyses.map((a) => a.llm_provider).filter(Boolean))];
+  const degraded = analyses.filter((a) => a.llm_degraded).map((a) => ({ agent_id: a.agent_id, ...a.llm_degraded }));
+  const mockAgents = analyses.filter((a) => a.llm_provider === 'mock').map((a) => a.agent_id);
+  return { providers, mock: mockAgents.length > 0, mock_agents: mockAgents, degraded };
 }
 
 export function aggregateSwarmConsensus(analyses, threshold = 'majority') {
@@ -416,8 +438,9 @@ export function aggregateSwarmConsensus(analyses, threshold = 'majority') {
 }
 
 export class SwarmService {
-  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null, store = null } = {}) {
+  constructor({ llm = null, memory = null, registry = null, systemAgents = DEFAULT_SYSTEM_AGENTS, auditSink = null, profileImporter = null, store = null, logger = console } = {}) {
     this.llm = llm;
+    this.logger = logger;
     this.memory = memory;
     this.registry = registry || new AgentRegistry({ systemAgents });
     this.auditSink = auditSink;
@@ -654,6 +677,11 @@ export class SwarmService {
       };
     });
     const analyses = await Promise.all(executions);
+    const llm = summarizeRunProviders(analyses);
+    if (llm.mock) {
+      this._audit({ type: 'swarm.run.llm_degraded', run_id, swarm_id: config.swarm_id, tenant_id: tenantKey(tenantId), mock_agents: llm.mock_agents, degraded: llm.degraded });
+      try { this.logger?.warn?.(`[kayros][swarm] run ${run_id}: réponses simulées (provider mock) pour ${llm.mock_agents.join(', ')}`, llm.degraded); } catch { /* le log ne bloque jamais un run */ }
+    }
     const consensus = aggregateSwarmConsensus(analyses, config.voting_threshold);
     const audit = analyses.map((analysis) => this._audit({
       type: 'swarm.agent.verdict', run_id, swarm_id: config.swarm_id,
@@ -664,7 +692,7 @@ export class SwarmService {
     const run = {
       run_id, swarm_id: config.swarm_id, swarm_name: config.swarm_name,
       tenant_id: tenantKey(tenantId), question: String(question), context: String(context || ''),
-      configuration: config, analyses, consensus,
+      configuration: config, analyses, consensus, llm,
       status: 'pending_human_arbitration', human_decision: null,
       audit,
       created_at: now(), updated_at: now(),
