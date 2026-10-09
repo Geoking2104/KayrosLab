@@ -6,11 +6,6 @@
   <script>
     (function () {
       var path = location.pathname.replace(/\/+$/, "");
-      if (path.indexOf("/salon") === 0) {
-        var hash = /\/agents$/.test(path) ? "#agents" : "";
-        location.replace("/salon/" + location.search + hash);
-        return;
-      }
       location.replace("/" + location.search + location.hash);
     })();
   </script>

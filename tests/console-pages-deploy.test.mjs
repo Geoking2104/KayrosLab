@@ -19,22 +19,20 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
-test('GitHub Pages publie toujours /salon/, sans lien depuis l\'accueil', async () => {
-  const [workflow, english, french, foyer] = await Promise.all([
+test('GitHub Pages ne publie plus /salon/ et rien ne le lie', async () => {
+  const [workflow, english, french, notFound, vercel] = await Promise.all([
     read('.github/workflows/deploy-positionning-pages.yml'),
     read('index.html'),
     read('index.fr.html'),
-    read('backend/web/public/salon/index.html'),
+    read('404.html'),
+    read('vercel.json'),
   ]);
-  assert.match(workflow, /backend\/web\/public\/salon\/\*\*/);
-  assert.match(workflow, /mkdir -p deploy\/salon/);
-  assert.match(workflow, /backend\/web\/public\/salon\/\. deploy\/salon\//);
-  assert.doesNotMatch(english, /href="\/salon\/|href="#salon"/);
-  assert.doesNotMatch(french, /href="\/salon\/|href="#salon"/);
-  assert.match(foyer, /Un cercle est une table/);
-  assert.match(foyer, /@voltaire/);
-  assert.doesNotMatch(english, /class="salon-charter"/);
-  assert.doesNotMatch(french, /class="salon-charter"/);
+  assert.doesNotMatch(workflow, /salon/i);
+  assert.doesNotMatch(english, /href="\/salon|href="#salon"|class="salon-charter"/);
+  assert.doesNotMatch(french, /href="\/salon|href="#salon"|class="salon-charter"/);
+  assert.doesNotMatch(notFound, /salon/i); // URL inconnue (dont /salon) : renvoi vers l'accueil
+  assert.match(notFound, /location\.replace\("\/"/);
+  assert.doesNotMatch(vercel, /salon/i);
   assert.match(english, /id="personify"/);
   assert.match(french, /CrystalKnows/);
 });

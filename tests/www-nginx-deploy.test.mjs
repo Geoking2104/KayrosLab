@@ -22,19 +22,20 @@ test('le vhost www sert le site statique et laisse passer ACME', async () => {
   assert.match(vhost, /location \/\.well-known\/acme-challenge\//);
   assert.match(vhost, /include snippets\/kayroslab-www-locations\.conf/);
   assert.match(locations, /root \/var\/www\/kayroslab/);
-  assert.match(locations, /location \/salon\/ \{/);
-  assert.match(locations, /try_files \$uri \$uri\/ \/salon\/index\.html/);
+  // Salon supprimé : les anciennes URL /salon renvoient vers l'accueil.
+  assert.match(locations, /location \^~ \/salon \{\s*return 301 \/;/);
+  assert.doesNotMatch(locations, /\/salon\/index\.html/);
   assert.match(locations, /location \/console\/ \{/);
   assert.match(locations, /try_files \$uri \$uri\/ \/console\/index\.html/);
   assert.match(locations, /default_type application\/wasm/);
   assert.match(deployWww, /assemble-www\.sh/);
   assert.match(deployWww, /sites-available\/www\.kayroslab\.com/);
   assert.match(deployBackend, /deploy-www\.sh/);
-  assert.match(vps, /backend\/web\/public\/salon\/\*\*/);
+  assert.doesNotMatch(vps, /backend\/web\/public\/salon/);
   assert.match(vps, /index\.fr\.html/);
 });
 
-test('assemble-www copie accueil, salon et console', async () => {
+test('assemble-www copie accueil, console et légal (sans Salon)', async () => {
   const dest = await mkdtemp(join(tmpdir(), 'kayros-www-'));
   try {
     const result = spawnSync(
@@ -47,19 +48,18 @@ test('assemble-www copie accueil, salon et console', async () => {
       },
     );
     assert.equal(result.status, 0, result.stderr || result.stdout);
-    const [home, salon, consoleIndex, legal] = await Promise.all([
+    const [home, consoleIndex, legal] = await Promise.all([
       readFile(join(dest, 'index.fr.html'), 'utf8'),
-      readFile(join(dest, 'salon/index.html'), 'utf8'),
       readFile(join(dest, 'console/index.html'), 'utf8'),
       readFile(join(dest, 'legal/index.html'), 'utf8'),
     ]);
     // Le Salon n'est plus lié depuis l'accueil (la page /salon/ reste déployée, non liée).
     assert.doesNotMatch(home, /href="\/salon\/|href="#salon"|id="salon"/);
     assert.match(home, /\/legal\/#mentions/);
-    assert.match(salon, /Un cercle est une table/);
-    assert.match(salon, /id="contact"/);
+    await assert.rejects(readFile(join(dest, 'salon/index.html'), 'utf8'), 'plus de page /salon/ assemblée');
     assert.match(consoleIndex, /<div id="root">/);
     assert.match(legal, /SASU KayrosLab/);
+    assert.doesNotMatch(legal, /salon/i, 'plus aucune mention du Salon dans /legal/');
     // New brand layer must be deployed with the site (site.css + logo assets).
     const homeHtml = await readFile(join(dest, 'index.html'), 'utf8');
     assert.match(homeHtml, /assets\/logo-kayroslab\.png/);

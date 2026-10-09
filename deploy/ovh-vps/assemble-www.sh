@@ -10,10 +10,6 @@ if [[ ! -f "${APP_DIR}/index.html" ]]; then
   echo "ERREUR : ${APP_DIR}/index.html introuvable." >&2
   exit 1
 fi
-if [[ ! -f "${APP_DIR}/backend/web/public/salon/index.html" ]]; then
-  echo "ERREUR : salon statique manquant (pied de page /salon/ 404)." >&2
-  exit 1
-fi
 
 stage=$(mktemp -d)
 trap 'rm -rf "${stage}"' EXIT
@@ -75,9 +71,6 @@ if [[ -f "${APP_DIR}/backend/web/public/console/index.html" ]]; then
 else
   echo "AVERTISSEMENT : console statique absente — /console/ 404." >&2
 fi
-
-mkdir -p "${stage}/salon"
-cp -a "${APP_DIR}/backend/web/public/salon/." "${stage}/salon/"
 
 if [[ -d "${APP_DIR}/legal" ]]; then
   mkdir -p "${stage}/legal"
