@@ -212,6 +212,10 @@
                 "profile": "fast",
                 "external_ref": "salesforce:Opportunity:0065g00000XyZabAAF",
                 "callback_url": "https://n8n.kayroslab.com/webhook-waiting/123",
+                "callback_events": [
+                  "mission.completed",
+                  "mission.failed"
+                ],
                 "metadata": {
                   "amount": 120000,
                   "stage": "Proposal/Price Quote",
@@ -943,6 +947,20 @@
             "format": "uri",
             "maxLength": 2000,
             "description": "https uniquement, hôte public. Reçoit les événements signés de cette mission."
+          },
+          "callback_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "mission.completed",
+                "mission.failed",
+                "mission.arbitrated"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true,
+            "description": "Événements envoyés à callback_url (défaut : tous). Avec un nœud n8n « Wait », passez [\"mission.completed\",\"mission.failed\"] : l’URL de reprise ne sert qu’une fois."
           },
           "metadata": {
             "type": "object",
