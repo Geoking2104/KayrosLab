@@ -161,6 +161,54 @@ curl -fsS https://api.kayroslab.com/health && echo " public OK"
 pm2 status | grep kayros-api
 ```
 
+## Intégrations (API publique v1, webhooks, file de missions)
+
+Surface utilisée par n8n, Zapier et Salesforce. Guide utilisateur : `integrations/n8n/README.md` (PoC en 15 minutes).
+
+| Élément | Où |
+|---------|-----|
+| Référence lisible | https://api.kayroslab.com/docs |
+| Spécification OpenAPI 3.1 | https://api.kayroslab.com/v1/public/openapi.json (source : `docs/openapi/kayroslab-public-v1.json`) |
+| Routes | `GET /v1/public/me`, `GET /v1/public/collectives`, `POST /v1/public/missions`, `GET /v1/public/missions/:id`, `GET /v1/public/missions?external_ref=` |
+| Administration | Console → **Intégrations** (rôle comex) : clés d’API, URL et secret du webhook, test, livraisons |
+
+### Variables d’environnement
+
+| Variable | Défaut | Effet |
+|----------|--------|-------|
+| `NVIDIA_FAST_MODEL` | `nvidia/nemotron-3.5-lightning-30b-a3b` | Modèle du profil `fast` (variable de dépôt GitHub, optionnelle) |
+| `KAYROS_CONNECTOR_ENCRYPTION_KEY` | — | Chiffre au repos le secret de signature des webhooks (sinon stocké en clair, avertissement au démarrage) |
+| `KAYROS_PUBLIC_RATE_LIMIT` | `60` | Requêtes/min par clé d’API |
+| `KAYROS_PUBLIC_MISSIONS_PER_DAY` | `200` | Missions/jour par tenant (429 au-delà) |
+| `KAYROS_MISSION_QUEUE` | actif si Postgres | `off` = exécution dans le processus (pas de reprise après crash) |
+| `KAYROS_MISSION_CONCURRENCY` / `KAYROS_MISSION_LEASE_MS` | `2` / `120000` | Missions simultanées par processus / bail avant reprise |
+| `KAYROS_WEBHOOK_INTERVAL_MS` | `5000` | Fréquence de la boîte d’envoi des webhooks |
+| `KAYROS_INTEGRATION_WORKERS` | actif | `off` = ni worker ni envoi de webhooks (tests) |
+
+### Vérifier
+
+```bash
+curl -fsS https://api.kayroslab.com/v1/public/openapi.json | head -c 120; echo
+curl -s https://api.kayroslab.com/v1/public/me -H "Authorization: Bearer $KAYROS_API_KEY"
+# Mission de démonstration (< 5 s, aucun appel LLM)
+curl -s https://api.kayroslab.com/v1/public/missions -H "Authorization: Bearer $KAYROS_API_KEY" \
+  -H "Idempotency-Key: runbook-$(date +%s)" -H 'Content-Type: application/json' \
+  -d '{"collective_id":"room_…","question":"Test runbook","profile":"demo"}'
+```
+
+### File de missions et webhooks (Postgres)
+
+```sql
+-- Missions en file / en cours / échouées (reprise automatique après crash à l’expiration du bail)
+select status, count(*) from kayros_mission_jobs group by 1;
+select job_id, thread_id, attempts, locked_by, lease_until, last_error from kayros_mission_jobs where status <> 'done' order by created_at desc limit 20;
+-- Webhooks en attente ou abandonnés (6 essais : 1 min, 5 min, 30 min, 2 h, 6 h)
+select status, count(*) from kayros_webhook_deliveries group by 1;
+select delivery_id, event_type, attempts, last_status, last_error, next_attempt_at from kayros_webhook_deliveries where status <> 'delivered' order by created_at desc limit 20;
+```
+
+Rejouer un webhook abandonné : `update kayros_webhook_deliveries set status='pending', next_attempt_at=now(), attempts=0 where delivery_id='whd_…';`
+
 ## Dépannage
 
 ### Le backend répond 503
@@ -191,6 +239,23 @@ curl -s https://api.kayroslab.com/health | grep smtp
 cd /opt/kayroslab/backend/fastify
 node --input-type=module -e 'import { smtpFromEnv, createSmtpTransport } from "./lib/smtp.mjs"; const s=smtpFromEnv(); const t=await createSmtpTransport(s); console.log(s.host, s.user, await t.verify());'
 ```
+
+### Intégrations : n8n / Zapier ne reçoit rien
+
+1. Console → Intégrations → **Dernières livraisons** : code HTTP et erreur de la cible.
+2. `401`/`400` côté n8n : signature refusée → secret différent (re-révéler le secret, le recoller), ou corps modifié avant vérification (la signature porte sur le **corps brut**).
+3. `pending` qui s’accumulent : `pm2 logs kayros-api | grep webhook` ; vérifier que `KAYROS_INTEGRATION_WORKERS` n’est pas à `off`.
+4. Mission bloquée en `running` : voir `kayros_mission_jobs` ci-dessus ; un job `running` dont le bail est expiré est repris par le prochain worker, au-delà de 3 tentatives le fil passe `failed`.
+
+### Intégrations : 401 / 403 / 409 / 429 sur /v1/public
+
+| Code | Cause |
+|------|-------|
+| 401 | Clé absente, invalide, révoquée ou expirée |
+| 403 | Scope manquant (`missions:write`, `missions:read`, `collectives:read`) |
+| 404 | Collectif inactif, inconnu ou hors des collectifs autorisés pour la clé |
+| 409 | `Idempotency-Key` réutilisée avec un corps différent |
+| 429 | 60 req/min par clé, ou quota quotidien de missions (`KAYROS_PUBLIC_MISSIONS_PER_DAY`) |
 
 ### Rate limit atteint (429)
 
@@ -230,3 +295,6 @@ pm2 restart kayros-api
 | `backend/fastify/DEPLOY-VPS.md` | Documentation déploiement détaillée |
 | `monitoring/README.md` | Supervision Prometheus/Alertmanager/Grafana (mono-nœud) |
 | `monitoring/alertmanager-silence.sh` | Silences d'alertes (déploiement, maintenance) |
+| `docs/openapi/kayroslab-public-v1.json` | Spécification de l’API publique v1 |
+| `docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md` | Architecture des intégrations (n8n, Zapier, Salesforce) |
+| `integrations/n8n/README.md` | PoC Salesforce en 15 minutes |

@@ -1,0 +1,1215 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "KayrosLab — API publique v1",
+    "version": "1.0.0",
+    "summary": "Lancer une mission de collectif d’agents depuis un CRM (Salesforce via n8n / Zapier) et recevoir un verdict signé.",
+    "description": "Petite surface stable pour les outils d’automatisation (n8n, Zapier, Make) et les CRM.\n\n**Démarrage** : créez une clé dans la console (Intégrations → Clés d’API), puis `GET /v1/public/me`.\n\n**Cycle d’une mission** : `POST /v1/public/missions` (202) → la mission tourne de façon asynchrone →\nsoit vous interrogez `GET /v1/public/missions/{id}` jusqu’à `state != running`, soit vous recevez un webhook signé\n(`callback_url` de la mission et/ou URL d’abonnement du tenant).\n\n**Profils** : `fast` (défaut, verdict réel en 1 à 2 min), `demo` (< 5 s, réponses préenregistrées, `llm.simulated = true`),\n`deep` (modèle de raisonnement, ~12 min).\n\n**Webhooks** : `POST` JSON avec `X-Kayros-Signature: t=<unix>,v1=<hex>` où `v1 = HMAC-SHA256(secret, t + \".\" + corps brut)`.\nRejetez les horodatages à plus de 5 minutes. Répondez 2xx en moins de 10 s ; sinon nouvelles tentatives à 1 min, 5 min, 30 min, 2 h et 6 h\n(6 essais). Répondre `410` arrête définitivement les envois pour cette livraison. Dédupliquez sur `event_id`.\n\nGuide pas à pas (PoC Salesforce en 15 minutes) : https://github.com/Geoking2104/KayrosLab/blob/main/integrations/n8n/README.md",
+    "contact": {
+      "name": "KayrosLab",
+      "url": "https://www.kayroslab.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.kayroslab.com",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Connexion",
+      "description": "Vérifier la clé et lister les collectifs."
+    },
+    {
+      "name": "Missions",
+      "description": "Lancer et suivre une mission."
+    }
+  ],
+  "paths": {
+    "/v1/public/me": {
+      "get": {
+        "tags": [
+          "Connexion"
+        ],
+        "operationId": "getMe",
+        "summary": "Tester la clé d’API",
+        "description": "Renvoie le tenant, le compte de service et les scopes de la clé. Idéal comme « test de connexion » dans n8n / Zapier.",
+        "responses": {
+          "200": {
+            "description": "Clé valide.",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clé absente, invalide, révoquée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "clé d’API révoquée",
+                  "code": "api_key_revoked"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limite de débit (60 req/min par clé par défaut) ou quota quotidien de missions atteint.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/collectives": {
+      "get": {
+        "tags": [
+          "Connexion"
+        ],
+        "operationId": "listCollectives",
+        "summary": "Lister les collectifs utilisables",
+        "description": "Collectifs (sessions de la console) actifs et autorisés pour la clé. Scope `collectives:read`.",
+        "responses": {
+          "200": {
+            "description": "Collectifs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "collectives"
+                  ],
+                  "properties": {
+                    "collectives": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Collective"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clé absente, invalide, révoquée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "clé d’API révoquée",
+                  "code": "api_key_revoked"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La clé n’a pas le scope requis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "scope requis : missions:write",
+                  "code": "insufficient_scope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limite de débit (60 req/min par clé par défaut) ou quota quotidien de missions atteint.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/missions": {
+      "post": {
+        "tags": [
+          "Missions"
+        ],
+        "operationId": "createMission",
+        "summary": "Lancer une mission",
+        "description": "Scope `missions:write`. L’en-tête `Idempotency-Key` est obligatoire : rejouer la même requête renvoie la même mission (200, en-tête `idempotent-replayed: true`) ; la même clé avec un autre corps renvoie 409. Pour Salesforce : `sf-<OpportunityId>-<StageName>`.",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "example": "sf-0065g00000XyZabAAF-Proposal"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissionCreate"
+              },
+              "example": {
+                "collective_id": "room_mv13yfz2_abc123",
+                "question": "Faut-il signer ACME à -15 % ?",
+                "profile": "fast",
+                "external_ref": "salesforce:Opportunity:0065g00000XyZabAAF",
+                "callback_url": "https://n8n.kayroslab.com/webhook-waiting/123",
+                "metadata": {
+                  "amount": 120000,
+                  "stage": "Proposal/Price Quote",
+                  "account": "ACME"
+                }
+              }
+            }
+          }
+        },
+        "callbacks": {
+          "missionEvent": {
+            "{$request.body#/callback_url}": {
+              "post": {
+                "summary": "Événement de mission signé",
+                "description": "Envoyé à `callback_url` (et à l’URL d’abonnement du tenant) quand la mission se termine, échoue ou est arbitrée.",
+                "parameters": [
+                  {
+                    "name": "X-Kayros-Signature",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    },
+                    "example": "t=1791559169,v1=5f2c…"
+                  },
+                  {
+                    "name": "X-Kayros-Event",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "$ref": "#/components/schemas/EventType"
+                    }
+                  },
+                  {
+                    "name": "X-Kayros-Event-Id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Kayros-Delivery",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "name": "X-Kayros-Attempt",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "requestBody": {
+                  "required": true,
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "410": {
+                    "description": "Ne plus réessayer cette livraison."
+                  },
+                  "2XX": {
+                    "description": "Reçu."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rejeu idempotent : mission existante.",
+            "headers": {
+              "idempotent-replayed": {
+                "schema": {
+                  "type": "string",
+                  "const": "true"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mission"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Mission acceptée, en cours.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionAccepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide (Idempotency-Key absente, corps invalide, callback_url refusée, external_ref invalide).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "en-tête Idempotency-Key requis",
+                  "code": "idempotency_key_required"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clé absente, invalide, révoquée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "clé d’API révoquée",
+                  "code": "api_key_revoked"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La clé n’a pas le scope requis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "scope requis : missions:write",
+                  "code": "insufficient_scope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Collectif introuvable ou non autorisé pour cette clé.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "collectif introuvable",
+                  "code": "collective_not_found"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency-Key réutilisée avec une requête différente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Idempotency-Key déjà utilisée avec une requête différente",
+                  "code": "idempotency_key_reused",
+                  "mission_id": "msn_…"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limite de débit (60 req/min par clé par défaut) ou quota quotidien de missions atteint.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Missions"
+        ],
+        "operationId": "searchMissions",
+        "summary": "Retrouver les missions d’un objet CRM",
+        "description": "Scope `missions:read`. Missions les plus récentes en premier.",
+        "parameters": [
+          {
+            "name": "external_ref",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "salesforce:Opportunity:0065g00000XyZabAAF"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Missions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "missions"
+                  ],
+                  "properties": {
+                    "missions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Mission"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "external_ref invalide.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clé absente, invalide, révoquée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "clé d’API révoquée",
+                  "code": "api_key_revoked"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La clé n’a pas le scope requis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "scope requis : missions:write",
+                  "code": "insufficient_scope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limite de débit (60 req/min par clé par défaut) ou quota quotidien de missions atteint.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/public/missions/{mission_id}": {
+      "get": {
+        "tags": [
+          "Missions"
+        ],
+        "operationId": "getMission",
+        "summary": "Statut et verdict d’une mission",
+        "description": "Scope `missions:read`. Interrogez toutes les 10 à 30 s tant que `state = running`, ou utilisez les webhooks.",
+        "parameters": [
+          {
+            "name": "mission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^msn_"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mission.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mission"
+                },
+                "example": {
+                  "mission_id": "msn_mv13ygq4b8644cfb171a",
+                  "status": "awaiting_arbitration",
+                  "state": "completed",
+                  "collective_id": "room_mv13yfz2_abc123",
+                  "question": "Faut-il signer ACME à -15 % ?",
+                  "profile": "fast",
+                  "external_ref": {
+                    "system": "salesforce",
+                    "object": "Opportunity",
+                    "id": "0065g00000XyZabAAF",
+                    "url": null
+                  },
+                  "metadata": {
+                    "amount": 120000,
+                    "stage": "Proposal/Price Quote"
+                  },
+                  "progress": {
+                    "completed": 3,
+                    "total": 3
+                  },
+                  "verdict": "CONDITIONAL_GO",
+                  "verdict_label": "CONDITIONAL GO",
+                  "summary": "Pas de majorité stricte GO / NO_GO : conditions à arbitrer.",
+                  "risks": [
+                    "Marge sous la cible si la remise dépasse 12 %"
+                  ],
+                  "conditions": [
+                    "Plafonner la remise à 12 %",
+                    "Clause de pénalités plafonnée"
+                  ],
+                  "clarification_questions": [],
+                  "agents": [
+                    {
+                      "agent_id": "cfo",
+                      "name": "Chief Financial Officer",
+                      "role": "Chief Financial Officer",
+                      "verdict": "CONDITIONAL_GO",
+                      "reason": "Rentabilité acceptable si la remise reste plafonnée.",
+                      "persona": false
+                    }
+                  ],
+                  "human_decision": null,
+                  "llm": {
+                    "provider": "nvidia-fast",
+                    "profile": "fast",
+                    "simulated": false,
+                    "degraded": false
+                  },
+                  "error": null,
+                  "dossier_url": "https://www.kayroslab.com/console/#activity?thread=thread_mv13ygq4_q8wuvva",
+                  "created_at": "2026-10-09T15:20:00.000Z",
+                  "updated_at": "2026-10-09T15:21:34.000Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clé absente, invalide, révoquée ou expirée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "clé d’API révoquée",
+                  "code": "api_key_revoked"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La clé n’a pas le scope requis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "scope requis : missions:write",
+                  "code": "insufficient_scope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mission introuvable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "mission introuvable",
+                  "code": "mission_not_found"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Limite de débit (60 req/min par clé par défaut) ou quota quotidien de missions atteint.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "kl_live_<prefix>_<secret>",
+        "description": "Clé créée dans la console (Intégrations → Clés d’API)."
+      },
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "issues": {
+            "type": "array",
+            "items": {}
+          },
+          "mission_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Profile": {
+        "type": "string",
+        "enum": [
+          "demo",
+          "fast",
+          "deep"
+        ],
+        "default": "fast",
+        "description": "demo : < 5 s, simulé · fast : 1–2 min · deep : ~12 min."
+      },
+      "Verdict": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "GO",
+          "CONDITIONAL_GO",
+          "NO_GO",
+          "NEEDS_CLARIFICATION",
+          null
+        ]
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "running",
+          "completed",
+          "failed",
+          "arbitrated"
+        ],
+        "description": "`completed` : verdict du collectif disponible, arbitrage humain en attente · `arbitrated` : décision humaine prise dans la console."
+      },
+      "EventType": {
+        "type": "string",
+        "enum": [
+          "mission.completed",
+          "mission.failed",
+          "mission.arbitrated",
+          "ping"
+        ]
+      },
+      "ExternalRef": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "`système:objet:id`, ex. `salesforce:Opportunity:006…`",
+            "minLength": 3,
+            "maxLength": 300
+          },
+          {
+            "type": "object",
+            "required": [
+              "system",
+              "id"
+            ],
+            "properties": {
+              "system": {
+                "type": "string",
+                "maxLength": 40
+              },
+              "object": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "id": {
+                "type": "string",
+                "maxLength": 120
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 1000
+              }
+            }
+          }
+        ]
+      },
+      "ExternalRefOut": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "system": {
+            "type": "string"
+          },
+          "object": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Me": {
+        "type": "object",
+        "required": [
+          "tenant_id",
+          "key_id",
+          "scopes"
+        ],
+        "properties": {
+          "tenant_id": {
+            "type": "string"
+          },
+          "key_id": {
+            "type": "string"
+          },
+          "key_name": {
+            "type": "string"
+          },
+          "service_account": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "missions:write",
+                "missions:read",
+                "collectives:read",
+                "webhooks:manage"
+              ]
+            }
+          },
+          "collective_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Vide = tous les collectifs du tenant."
+          },
+          "profiles": {
+            "type": "object",
+            "properties": {
+              "default": {
+                "$ref": "#/components/schemas/Profile"
+              },
+              "available": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Collective": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "voting_threshold": {
+            "type": "string",
+            "enum": [
+              "majority",
+              "unanimous",
+              "veto_power_csuite"
+            ]
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "agent_id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "persona": {
+                  "type": "boolean"
+                },
+                "veto_power": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MissionCreate": {
+        "type": "object",
+        "required": [
+          "collective_id",
+          "question"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "collective_id": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "question": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 12000
+          },
+          "context": {
+            "type": "string",
+            "maxLength": 24000,
+            "description": "Contexte libre transmis au collectif."
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "external_ref": {
+            "$ref": "#/components/schemas/ExternalRef"
+          },
+          "callback_url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2000,
+            "description": "https uniquement, hôte public. Reçoit les événements signés de cette mission."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "description": "Champs CRM (montant, étape, compte…) ajoutés au contexte et renvoyés tels quels."
+          }
+        }
+      },
+      "AgentVerdict": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "persona": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Mission": {
+        "type": "object",
+        "required": [
+          "mission_id",
+          "status",
+          "state",
+          "collective_id",
+          "question",
+          "created_at"
+        ],
+        "properties": {
+          "mission_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "Statut interne du fil (running, awaiting_arbitration, needs_clarification, resolved, failed…)."
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
+          },
+          "collective_id": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "external_ref": {
+            "$ref": "#/components/schemas/ExternalRefOut"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "progress": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "completed": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              }
+            }
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/Verdict"
+          },
+          "verdict_label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification_questions": {
+            "type": "array",
+            "items": {}
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentVerdict"
+            }
+          },
+          "human_decision": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "verdict": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "by": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "justification": {
+                "type": "string"
+              },
+              "decided_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "llm": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "provider": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "profile": {
+                "$ref": "#/components/schemas/Profile"
+              },
+              "simulated": {
+                "type": "boolean",
+                "description": "true en profil demo : verdict à ne pas utiliser pour décider."
+              },
+              "degraded": {
+                "type": "boolean"
+              }
+            }
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dossier_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "description": "Lien vers le dossier complet dans la console."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MissionAccepted": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Mission"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "poll_url": {
+                "type": "string",
+                "example": "/v1/public/missions/msn_…"
+              },
+              "eta_seconds": {
+                "type": "integer",
+                "description": "Durée estimée selon le profil."
+              },
+              "note": {
+                "type": "string",
+                "description": "Ex. repli du profil fast sur le modèle serveur."
+              }
+            }
+          }
+        ]
+      },
+      "WebhookEvent": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "event",
+              "event_id",
+              "occurred_at",
+              "tenant_id"
+            ],
+            "properties": {
+              "event": {
+                "$ref": "#/components/schemas/EventType"
+              },
+              "event_id": {
+                "type": "string"
+              },
+              "occurred_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "tenant_id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Mission"
+          }
+        ]
+      }
+    }
+  }
+}
