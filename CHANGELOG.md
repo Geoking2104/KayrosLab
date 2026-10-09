@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.26.0 (2026-10) — API publique v1, intégrations CRM, connexion Google
+
+- **API publique v1** (`/v1/public/*`, PR #47) : `GET /me`, `GET /collectives`, `POST /missions` (202, `Idempotency-Key` obligatoire, rejeu 200 / conflit 409), `GET /missions/:id`, `GET /missions?external_ref=`. Clés d'API par tenant `kl_live_…` (empreinte SHA-256 seule stockée, scopes, restriction par collectif, expiration, révocation), 60 req/min par clé, 200 missions/jour par tenant.
+- **Profils d'exécution** `demo` (< 5 s, simulé, étiqueté « [Démo] »), `fast` (défaut, `NVIDIA_FAST_MODEL`, 1–2 min), `deep` (configuration serveur, Kimi K3, ~12 min).
+- **Webhooks signés** `mission.completed` / `mission.failed` / `mission.arbitrated` (+ `ping`) : `X-Kayros-Signature: t=…,v1=HMAC-SHA256`, tolérance 5 min, relances 1 min → 6 h depuis une file Postgres durable, `410` arrête les envois ; `callback_events` pour limiter les événements envoyés à `callback_url`.
+- **Console → Intégrations** (PR #48) : création / révocation des clés, webhook du tenant, secret révélable ou renouvelable, webhook de test, journal des livraisons.
+- **OpenAPI 3.1** versionnée (`docs/openapi/kayroslab-public-v1.json`), servie à `/v1/public/openapi.json`, page de référence `/docs` (PR #49).
+- **PoC Salesforce en 15 minutes** avec n8n auto-hébergé (`n8n.kayroslab.com`), variante Zapier, champs personnalisés en option (PR #50, #51).
+- **Connexion Google** sur la console, à côté du SSO entreprise OIDC (Authelia).
+- Site : présentation du connecteur Salesforce et des chats intégrés, thème clair de la console (PR #52 à #54).
+- Supervision mono-nœud Prometheus + Alertmanager (Slack) + Grafana, métriques LLM et missions console (PR #42).
+- Docs : `docs/API.md` (référence de l'API publique, des webhooks et inventaire des routes), `docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md` versionnée sur `main`, README aligné sur l'état actuel.
+
 ## v0.25.26 (2026-10) — Missions console asynchrones (LLM lents)
 
 - `POST /v1/console/sessions/:id/run` et `POST /v1/console/threads/:id/messages` répondent `202` avec `thread_id`/`run_id` : le fil est créé au statut `running`, le collectif s'exécute en tâche de fond, puis le fil prend son statut final (`needs_clarification`, `awaiting_arbitration`) ou `failed` avec un message lisible. `?wait=true` conserve le mode synchrone.

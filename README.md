@@ -17,7 +17,7 @@ profiles, no black box.
 [![Core tests](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
-[Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [Salon](https://www.kayroslab.com/salon/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
+[Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [API docs](https://api.kayroslab.com/docs) · [Salon](https://www.kayroslab.com/salon/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
 
 </div>
 
@@ -45,9 +45,9 @@ it, attaches conditions, or overrides a veto — and the whole dossier (claims, 
 justifications) remains inspectable afterwards.
 
 It is not a trained model, and it does not sell you a crystal ball. It is a **governed LLM stack**:
-an orchestrator that drives real models — Ollama quant-aware on your machine, or Mistral / Claude
-through the Fastify backend — behind layered memory, deterministic Monte-Carlo numbers, and human
-gates with veto rights.
+an orchestrator that drives real models — Ollama quant-aware on your machine, or, through the Fastify
+backend, NVIDIA NIM (Kimi K3 in production, with Mistral as signalled fallback) and Claude — behind
+layered memory, deterministic Monte-Carlo numbers, and human gates with veto rights.
 
 **Salon** is a separate product, not a console tab: literary and philosophical reading circles
 (a text, roles, a minute — verdicts *tenir / relire / laisser*, never GO/NO-GO). Protocol in
@@ -74,6 +74,7 @@ See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
 - **[Chat connectors](#backend-api) →** Slack (signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519).
 - **[Durable dossiers](#agent-console) →** Postgres-backed decision threads you can resume with new evidence, from the same collective.
 - **[Human arbitration](#how-it-works) →** Accept the consensus, pass under conditions, or override a veto — every action recorded.
+- **[Salesforce, n8n & Zapier](#public-api--integrations) →** A stage change on an opportunity launches a mission through the Public API v1; the signed verdict comes back as a task on the opportunity.
 
 ## Keep the numbers honest.
 
@@ -175,7 +176,7 @@ embeddings, Postgres for multi-instance persistence.
 ## Your first decision in ten minutes
 
 **1. Open the console.** [kayroslab.com/console](https://www.kayroslab.com/console/) — create your
-workspace; signup is self-service with a verified e-mail.
+workspace; signup is self-service with a verified e-mail, or sign in with Google or enterprise SSO (OIDC).
 
 **2. Connect a channel (optional).** In **Réglages**, connect Slack, Microsoft Teams or Discord
 in one click (server-side application credentials) — or fall back to manual tokens. Secrets are
@@ -364,9 +365,9 @@ decisions run day to day — in production, with self-service workspaces.
 **Flow:** connect a channel → open a session and compose a collective → instruct the question → the
 collective answers → humans arbitrate → resume with new evidence.
 
-1. **Create a workspace in self service** — signup with verified e-mail (30-minute reset links), tenant-scoped space and per-tenant agent registry.
+1. **Create a workspace in self service** — signup with verified e-mail (30-minute reset links) or Google / enterprise SSO ([docs/SSO.md](docs/SSO.md)), tenant-scoped space and per-tenant agent registry.
 2. **Connect channels** — Slack, Microsoft Teams or Discord credentials stored encrypted server-side (`KAYROS_CONNECTOR_ENCRYPTION_KEY` required), connectivity test included; channel binding is owned by the separate conversational application, not by the console.
-3. **Run the collective** — every question triggers individual agent analyses (verdict, strengths and opportunities, objections, required conditions, metrics) aggregated into a consensus dossier: `GO`, `CONDITIONAL_GO` or `NO_GO`.
+3. **Run the collective** — missions run asynchronously (the console shows « Mission en cours… » with per-agent progress); every question triggers individual agent analyses (verdict, strengths and opportunities, objections, required conditions, metrics) aggregated into a consensus dossier: `GO`, `CONDITIONAL_GO` or `NO_GO`.
 4. **Arbitrate** — the verdict stays consultative until a human accepts the consensus, passes it under conditions, overrides a veto with justification, or requests re-evaluation; every action is recorded in the durable thread.
 5. **Resume** — reply with new evidence or parameters to relaunch the same collective on the same dossier; Postgres-backed threads survive restarts and remain tenant-scoped.
 
@@ -378,6 +379,7 @@ collective answers → humans arbitrate → resume with new evidence.
 | **Impersonators** | **Persona simulation** agents rebuilt from authorised clues (LinkedIn profile, Crystal Knows report, authorised export or manual clues) with a **real portrait**, mandatory consent and five guardrails (labelled “Simulation”, never speak for the person, clues-only, idea-test purpose, no material decision). Create one agent, or **create a team of 2–12 impersonators** and open it as a session to test an idea against a whole stakeholder panel. |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
+| **Intégrations** (Integrations) | API keys for the [Public API v1](#public-api--integrations) (shown once, scoped, revocable), tenant webhook with HMAC signing secret, test ping, delivery log, default mission profile |
 | **Réglages** (Settings) | **One-click SSO connect** (Slack OAuth v2, Microsoft Teams admin consent, Discord bot invite) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
 
 The console runs on the same governed runtime exposed by the API: a session, its dossiers, its
@@ -476,7 +478,7 @@ flowchart TB
   QG -.->|preferredModel| AGENTS
 
   LLM --> P1[(Ollama)]
-  LLM --> P2[(Mistral / Anthropic proxy)]
+  LLM --> P2[(NVIDIA NIM / Mistral / Anthropic)]
   LLM --> P3[(Mock)]
 
   subgraph PERIPH["Optional adapters (backend/adapters · core/adapters)"]
@@ -564,9 +566,54 @@ See **[core/README.md](core/README.md)** for API-level docs.
 
 ---
 
+## Public API & integrations
+
+A small, stable API lets CRMs and automation tools launch a mission on a console collective and
+receive the verdict — **without a human session**. Missions created this way show up in the console
+and are arbitrated there.
+
+| | |
+|---|---|
+| Reference | **[docs/API.md](docs/API.md)** · live: [api.kayroslab.com/docs](https://api.kayroslab.com/docs) |
+| Contract | OpenAPI 3.1 — [`docs/openapi/kayroslab-public-v1.json`](docs/openapi/kayroslab-public-v1.json), served at [`/v1/public/openapi.json`](https://api.kayroslab.com/v1/public/openapi.json) |
+| Endpoints | `GET /v1/public/me` · `GET /v1/public/collectives` · `POST /v1/public/missions` (202, `Idempotency-Key`) · `GET /v1/public/missions/{id}` · `GET /v1/public/missions?external_ref=` |
+| Auth | Per-tenant API keys `kl_live_…` created in **console → Intégrations**, scoped (`missions:write`, `missions:read`, `collectives:read`) and restrictable to collectives; only a SHA-256 fingerprint is stored |
+| Profiles | `demo` (< 5 s, simulated, labelled `[Démo]`) · `fast` (default, 1–2 min, NVIDIA Nemotron) · `deep` (~12 min, Kimi K3) |
+| Webhooks | `mission.completed` · `mission.failed` · `mission.arbitrated`, signed `X-Kayros-Signature: t=…,v1=HMAC-SHA256`, 5-minute replay window, retries at 1 min / 5 min / 30 min / 2 h / 6 h from a durable outbox |
+| Limits | 60 req/min per key, 200 missions/day per tenant (configurable) |
+
+```bash
+curl -s https://api.kayroslab.com/v1/public/missions \
+  -H "Authorization: Bearer $KAYROS_API_KEY" \
+  -H "Idempotency-Key: sf-0065g00000XyZab-Proposal" \
+  -H "Content-Type: application/json" \
+  -d '{"collective_id":"room_…","question":"Faut-il signer ACME à -15 % ?","profile":"demo",
+       "external_ref":"salesforce:Opportunity:0065g00000XyZab"}'
+```
+
+**Salesforce in 15 minutes.** Two ready-to-import n8n workflows (self-hosted n8n on the KayrosLab VPS)
+turn a stage change to *Proposal/Price Quote* into a mission, then write the verdict — and later the
+human decision — back as tasks on the opportunity, with optional Verdict / Score / Dossier fields:
+[integrations/n8n/README.md](integrations/n8n/README.md) · Zapier variant (2 Zaps):
+[integrations/zapier/README.md](integrations/zapier/README.md) · architecture:
+[docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md](docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md).
+
+---
+
 ## Backend API
 
-Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`.
+Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`. Full route inventory: [docs/API.md](docs/API.md#application-api-internal).
+Only the [Public API v1](#public-api--integrations) and the MCP endpoint are integration contracts; the
+other routes serve KayrosLab's own front ends.
+
+### LLM providers
+
+`GET /health` exposes the live provider chain. Selection order: `LLM_PROVIDER` (forced) >
+`NVIDIA_API_KEY` > `MISTRAL_API_KEY` > `ANTHROPIC_API_KEY` > mock. Production runs NVIDIA NIM
+(OpenAI-compatible) with `moonshotai/kimi-k3`, the `fast` profile on `nvidia/nemotron-3.5-lightning-30b-a3b`,
+Mistral then mock as signalled fallbacks, bounded concurrency and 429 backoff; embeddings use `bge-m3`
+on a local Ollama. Every fallback is flagged (`degraded`, `llm.mock`). See
+[backend/fastify/DEPLOY-VPS.md](backend/fastify/DEPLOY-VPS.md).
 
 ### Optional TimesFM KPI forecasts
 
@@ -592,17 +639,21 @@ deployment and limitations.
 | **Memory** | `GET\|POST /v1/memory/l3` · `GET /v1/memory/ideas/:id` · `POST /v1/memory/promote` · `POST /v1/memory/save` |
 | **Positioning** | analyze, search, GitHub, ArXiv, OWL, `GET /v1/positionning/ontology` |
 | **Governance** | `POST /v1/ideas/:id/gates` · `GET /v1/gates` · `POST /v1/gates/:id/resolve` |
-| **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/run` · `POST /v1/swarm/runs/:id/arbitrate` |
+| **Specialized swarms** | `GET\|POST /v1/swarm/agents` · `POST /v1/swarm/configurations` · `POST /v1/swarm/configurations/:swarmId/run` · `GET /v1/swarm/runs/:id` · `GET /v1/swarm/runs/:id/dossier` · `POST /v1/swarm/runs/:id/arbitrate` |
 | **Hybrid profiles** | `POST /v1/swarm/agents/:agentId/personality/import` |
 | **Sales Oracle documents** | `POST\|GET /v1/sales-oracle/cases` · `POST /v1/sales-oracle/cases/:id/documents/uploads` · `POST /v1/sales-oracle/cases/:id/documents/:documentId/complete` · document list/status |
 | **TimesFM forecasts** | `GET /v1/forecast/status` · `POST /v1/ideas/:id/forecast` · `GET /v1/ideas/:id/forecasts` |
+| **Public API v1** | `GET /v1/public/me` · `GET /v1/public/collectives` · `POST /v1/public/missions` · `GET /v1/public/missions/:id` · `GET /v1/public/missions?external_ref=` · `GET /v1/public/openapi.json` · `GET /docs` — see [docs/API.md](docs/API.md) |
+| **Console integrations** | `GET /v1/console/integrations` · `POST /v1/console/integrations/keys` · `DELETE /v1/console/integrations/keys/:keyId` · `PUT /v1/console/integrations/webhook` · `POST /v1/console/integrations/webhook/{secret,test}` · `GET /v1/console/integrations/deliveries` |
 | **Developer Portal MCP** | `POST /mcp` — scoped Streamable HTTP tools, resources and prompt for agentic API consumers |
-| **Agent Console** | `GET /v1/console/overview` · agents CRUD (+ human profile import/upload) · **impersonator agents** (`POST /v1/console/impersonators`) and **impersonator teams** (`POST /v1/console/impersonator-teams`) · connectors (one-click connect / configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` · threads · `POST /v1/console/threads/:threadId/arbitrate` |
+| **Agent Console** | `GET /v1/console/overview` · agents CRUD (+ human profile import/upload) · **impersonator agents** (`POST /v1/console/impersonators`) and **impersonator teams** (`POST /v1/console/impersonator-teams`) · connectors (one-click connect / configure / test) · sessions (harness) · `POST /v1/console/sessions/:sessionId/run` (202, async) · threads · `POST /v1/console/threads/:threadId/messages` (202) · `POST /v1/console/threads/:threadId/arbitrate` |
 | **Contact** | `POST /v1/contact` — public contact request (honeypot, per-IP rate limit, e-mail routed server-side) |
 | **Auteurs du domaine public** | `GET /v1/literary/authors` · `GET /v1/literary/sources` · `GET /v1/literary/search?q=` — recherche temps réel (Gutenberg, NosLivres/efele, EbooksGratuits, Wikisource) · `POST /v1/literary/authors/:authorId/agent` · `POST /v1/literary/agents` — personnalité d'agent construite depuis la somme des œuvres du domaine public (txt/html/epub) + portrait |
 | **Connectors** | Slack events + interactive · Discord `/kayros` · Teams Bot Framework messages · link tokens |
 | LLM & tools | `POST /v1/llm` · `POST /v1/embed` |
-| Auth | register / login / logout / me |
+| Auth | `/v1/auth/` register · login · logout · me · password forgot/reset · SSO (`GET /v1/auth/sso`, `POST /v1/auth/sso/start`, `POST /v1/auth/sso/callback`) — Google and enterprise OIDC |
+| Salon | `/v1/salon/state` · `/v1/salon/translate` · `/v1/salon/kb/*` · `/v1/salon/x/*` · `/v1/salon/whatsapp/*` — see [docs/SALON.md](docs/SALON.md) |
+| Health & metrics | `GET /health` (public: provider chain, persistence, SSO, SMTP — no secrets) · `GET /metrics` (Prometheus, `METRICS_TOKEN` or loopback) |
 | Portfolio | ideas, portfolio, campaigns |
 | Reporting | projection, impact |
 
@@ -632,7 +683,15 @@ Key environment variables:
 
 | Variable | Role |
 |---|---|
-| `MISTRAL_API_KEY` | Backend LLM provider |
+| `NVIDIA_API_KEY` · `NVIDIA_MODEL` · `NVIDIA_FAST_MODEL` | Primary LLM provider (NVIDIA NIM); production model `moonshotai/kimi-k3`, `fast` profile model |
+| `MISTRAL_API_KEY` · `ANTHROPIC_API_KEY` | Fallback LLM providers |
+| `LLM_PROVIDER` · `LLM_FALLBACK` · `LLM_MAX_CONCURRENCY` · `LLM_MAX_RETRIES` | Force a provider, override the fallback chain, concurrency and 429 retries |
+| `KAYROS_CONSOLE_RUN_TIMEOUT_MS` | Max duration of an async console mission (default 30 min) |
+| `OIDC_ISSUER` · `OIDC_CLIENT_ID` · `OIDC_CLIENT_SECRET` | Enterprise SSO (Authelia at `sso.kayroslab.com`) |
+| `GOOGLE_OAUTH_CLIENT_ID` · `GOOGLE_OAUTH_CLIENT_SECRET` | "Sign in with Google" on the console |
+| `KAYROS_PUBLIC_API_URL` · `KAYROS_PUBLIC_RATE_LIMIT` · `KAYROS_PUBLIC_MISSIONS_PER_DAY` | Public API v1 base URL and limits |
+| `KAYROS_WEBHOOK_ALLOW_HTTP` · `KAYROS_WEBHOOK_ALLOW_PRIVATE` · `KAYROS_MISSION_QUEUE` | Webhook SSRF guards (keep `false` in prod) and durable mission queue |
+| `METRICS_TOKEN` | Bearer token for `/metrics` (otherwise loopback only) |
 | `LINKEDIN_ACCESS_TOKEN` | Optional official LinkedIn authenticated-member profile import |
 | `CRYSTALKNOWS_API_TOKEN` | Optional Crystal Knows profile import on eligible plans |
 | `KAYROS_MCP_CLIENTS_JSON` | SHA-256 token digests, tenant bindings, scopes and optional expiries for MCP clients |
@@ -671,6 +730,18 @@ Workflow: `.github/workflows/deploy-positionning-pages.yml`
 - Copies static demos (with **size guard** on the main demo HTML > 50 KB to prevent truncation)
 - Publishes with `peaceiris/actions-gh-pages` (force orphan)
 
+### Production topology
+
+| Host | Serves | How |
+|---|---|---|
+| `www.kayroslab.com` | Landing, demos, whitepapers, console SPA (`/console/`), Salon (`/salon/`) | GitHub Pages (`CNAME`) |
+| `api.kayroslab.com` | Fastify backend, Public API v1, `/docs`, `/mcp`, `/health` | OVH VPS — nginx → PM2 `kayros-api` on port 8787, local Postgres, Ollama `bge-m3` |
+| `sso.kayroslab.com` | OpenID Connect provider (Authelia) | VPS — `setup-ssl-sso.yml`, [docs/SSO.md](docs/SSO.md) |
+| `n8n.kayroslab.com` | Self-hosted n8n for the Salesforce integration | VPS — `setup-n8n-vps.yml`, [integrations/n8n/README.md](integrations/n8n/README.md) |
+
+Monitoring: single-node Prometheus + Alertmanager (Slack routing) + Grafana in [`monitoring/`](monitoring/README.md),
+loopback-only, with deployment silences.
+
 ### OVH VPS (backend)
 
 ```bash
@@ -679,7 +750,8 @@ bash deploy/ovh-vps/deploy-backend.sh
 bash deploy/ovh-vps/install-cron-backup.sh
 ```
 
-CI: `.github/workflows/deploy-vps-backend.yml` (SSH + PM2, port **8787**).
+CI: `.github/workflows/deploy-vps-backend.yml` (SSH + PM2, port **8787**) — a merge on `main` rewrites the
+server `.env` from GitHub secrets (NVIDIA / Mistral / Anthropic keys, OAuth clients, SMTP, metrics token) and reloads PM2.
 
 | Tier | Description | Status |
 |---|---|---|
@@ -694,14 +766,19 @@ Also see [RUNBOOK.md](RUNBOOK.md).
 ## Development & tests
 
 ```bash
-# Engine unit tests
+# Engine unit tests (zero dependency)
 cd core && node --test
 
-# Targeted suites
-node --test connectors-slack-deep.test.mjs connectors-motif.test.mjs positionning/ontology-graph.test.mjs
+# Backend (Fastify routes, public API, console, auth)
+cd backend/fastify && npm ci && npm test
+
+# Site, Salon, deployment and integration checks (from the repo root)
+node --test tests/*.test.mjs
 ```
 
-CI workflow: `.github/workflows/core-tests.yml`.
+CI workflows (`.github/workflows/`): `core-tests.yml`, `backend-tests.yml`, `pg-tests.yml` (Postgres
+stores incl. integrations), `integrations-check.yml` (n8n workflows), `i18n-check.yml`,
+`monitoring-config.yml`.
 
 ---
 
@@ -722,6 +799,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | **v19** | **Specialized swarms + Hybrid Agent Sales Oracle** — system/custom/hybrid composition, personality simulation, official profile imports, veto-aware executive and buyer-committee rehearsal | ✅ |
 | **v20** | **Governed TimesFM forecasting** — isolated model service, P10–P90 uncertainty, tenant-scoped snapshots and mandatory human review for wide intervals | ✅ |
 | **v21** | **Governed agent console in production** — self-service signup, encrypted connector secrets, Slack/Teams/Discord room binding, Postgres-backed durable decision threads with human arbitration | ✅ |
+| **v22** | **NVIDIA NIM LLM + async missions** — Kimi K3 primary with Mistral fallback, 429 robustness, asynchronous console missions with progress, Prometheus/Alertmanager monitoring | ✅ |
+| **v23** | **Public API v1 & CRM integrations** — per-tenant API keys, `demo`/`fast`/`deep` profiles, HMAC-signed webhooks with durable retries, OpenAPI 3.1 + `/docs`, console Intégrations page, Salesforce PoC via n8n / Zapier, Google sign-in | ✅ |
 
 ---
 
@@ -733,6 +812,8 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | Run local, quant-aware inference | [core/OLLAMA.md](core/OLLAMA.md) |
 | Operate in production | [RUNBOOK.md](RUNBOOK.md) |
 | Compose swarms, hybrid agents and Sales Oracle cases | [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) |
+| Call the API (Public API v1, webhooks, route inventory) | **[docs/API.md](docs/API.md)** · [OpenAPI spec](docs/openapi/kayroslab-public-v1.json) · [live docs](https://api.kayroslab.com/docs) |
+| Connect Salesforce through n8n or Zapier | [integrations/README.md](integrations/README.md) |
 | Connect Codex, Claude Code or Cursor | [Developer Portal MCP](docs/developer-portal-mcp.md) |
 | Read the functional and technical specs | [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) · [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) |
 | Follow the Slack / Teams / Discord product thesis | [SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) |
