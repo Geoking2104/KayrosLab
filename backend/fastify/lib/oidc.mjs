@@ -14,11 +14,35 @@ export function oidcConfigFromEnv(env = process.env) {
   const clientSecret = String(env.OIDC_CLIENT_SECRET || '').trim();
   const audience = String(env.OIDC_AUDIENCE || clientId).trim();
   return {
+    id: 'oidc',
+    label: String(env.OIDC_PROVIDER_NAME || 'SSO entreprise').trim(),
     issuer,
     clientId,
     clientSecret,
     audience,
+    tokenEndpointAuthMethod: env.OIDC_TOKEN_ENDPOINT_AUTH_METHOD || (clientSecret ? 'client_secret_basic' : 'none'),
     enabled: Boolean(issuer && clientId),
+  };
+}
+
+export function googleConfigFromEnv(env = process.env) {
+  const clientId = String(env.GOOGLE_OAUTH_CLIENT_ID || '').trim();
+  const clientSecret = String(env.GOOGLE_OAUTH_CLIENT_SECRET || '').trim();
+  return {
+    id: 'google', label: 'Google', issuer: 'https://accounts.google.com',
+    clientId, clientSecret, audience: clientId,
+    tokenEndpointAuthMethod: 'client_secret_post',
+    enabled: Boolean(clientId && clientSecret),
+  };
+}
+
+export function publicAuthProviders(oidc, google) {
+  return {
+    ...publicSsoConfig(oidc),
+    enabled: Boolean(oidc?.enabled || google?.enabled),
+    providers: [google, oidc].filter((config) => config?.enabled).map((config) => ({
+      id: config.id || 'oidc', label: config.label || 'SSO entreprise',
+    })),
   };
 }
 
@@ -44,17 +68,19 @@ export async function loadDiscovery(config, { fetchImpl = fetch } = {}) {
   if (!config?.issuer) {
     const e = new Error('émetteur OIDC manquant'); e.code = 'OIDC_DISCOVERY'; throw e;
   }
-  const res = await fetchImpl(`${config.issuer}/.well-known/openid-configuration`);
+  const res = await fetchImpl(`${config.issuer}/.well-known/openid-configuration`, { signal: AbortSignal.timeout(10_000) });
   if (!res.ok) {
     const e = new Error(`découverte OIDC injoignable (${res.status})`); e.code = 'OIDC_DISCOVERY'; throw e;
   }
   const doc = await res.json();
-  if (!doc.authorization_endpoint || !doc.token_endpoint || !doc.jwks_uri) {
+  if (doc.issuer !== config.issuer || ![doc.authorization_endpoint, doc.token_endpoint, doc.jwks_uri].every((value) => {
+    try { return new URL(value).protocol === 'https:'; } catch { return false; }
+  })) {
     const e = new Error('découverte OIDC incomplète'); e.code = 'OIDC_DISCOVERY'; throw e;
   }
   return {
     ...config,
-    issuer: String(doc.issuer || config.issuer).replace(/\/$/, ''),
+    issuer: config.issuer,
     authorizationEndpoint: doc.authorization_endpoint,
     tokenEndpoint: doc.token_endpoint,
     jwksUri: doc.jwks_uri,
@@ -104,8 +130,8 @@ export function verifyIdToken(token, { issuer, audience, jwks, nonce, now = () =
   if (header.alg !== 'RS256') {
     const e = new Error('id_token OIDC : algorithme refusé'); e.code = 'OIDC_TOKEN'; throw e;
   }
-  const jwk = (jwks || []).find((k) => k.kid === header.kid && k.kty === 'RSA')
-    || (jwks || []).find((k) => k.kty === 'RSA');
+  const keys = (jwks || []).filter((k) => k.kty === 'RSA' && (!k.use || k.use === 'sig') && (!k.alg || k.alg === 'RS256'));
+  const jwk = header.kid ? keys.find((k) => k.kid === header.kid) : (keys.length === 1 ? keys[0] : null);
   if (!jwk) {
     const e = new Error('id_token OIDC : clé inconnue'); e.code = 'OIDC_TOKEN'; throw e;
   }
@@ -116,18 +142,20 @@ export function verifyIdToken(token, { issuer, audience, jwks, nonce, now = () =
   if (!verify.verify(key, unb64url(s))) {
     const e = new Error('id_token OIDC : signature'); e.code = 'OIDC_TOKEN'; throw e;
   }
-  const iss = String(issuer || '').replace(/\/?$/, '/');
-  const gotIss = String(payload.iss || '').replace(/\/?$/, '/');
-  if (gotIss !== iss) {
+  const validIssuer = payload.iss === issuer || (issuer === 'https://accounts.google.com' && payload.iss === 'accounts.google.com');
+  if (!validIssuer) {
     const e = new Error('id_token OIDC : émetteur'); e.code = 'OIDC_TOKEN'; throw e;
   }
   const aud = payload.aud;
   const audOk = aud === audience || (Array.isArray(aud) && aud.includes(audience));
-  if (!audOk) {
+  if (!audOk || (payload.azp && payload.azp !== audience) || (Array.isArray(aud) && aud.length > 1 && payload.azp !== audience)) {
     const e = new Error('id_token OIDC : audience'); e.code = 'OIDC_TOKEN'; throw e;
   }
-  if (typeof payload.exp === 'number' && now() >= payload.exp) {
+  if (!Number.isFinite(payload.exp) || now() >= payload.exp || !Number.isFinite(payload.iat) || payload.iat > now() + 60 || (payload.nbf !== undefined && (!Number.isFinite(payload.nbf) || payload.nbf > now() + 60))) {
     const e = new Error('id_token OIDC : expiré'); e.code = 'OIDC_TOKEN'; throw e;
+  }
+  if (typeof payload.sub !== 'string' || !payload.sub.trim()) {
+    const e = new Error('id_token OIDC : sujet manquant'); e.code = 'OIDC_TOKEN'; throw e;
   }
   if (nonce && payload.nonce !== nonce) {
     const e = new Error('id_token OIDC : nonce'); e.code = 'OIDC_TOKEN'; throw e;
@@ -145,10 +173,16 @@ export async function exchangeAuthorizationCode(discovered, {
     redirect_uri: redirectUri,
     code_verifier: codeVerifier,
   });
-  if (discovered.clientSecret) body.set('client_secret', discovered.clientSecret);
+  const method = discovered.tokenEndpointAuthMethod || (discovered.clientSecret ? 'client_secret_basic' : 'none');
+  const headers = { 'content-type': 'application/x-www-form-urlencoded' };
+  if (method === 'client_secret_post') body.set('client_secret', discovered.clientSecret);
+  else if (method === 'client_secret_basic') {
+    headers.authorization = `Basic ${Buffer.from(`${discovered.clientId}:${discovered.clientSecret}`).toString('base64')}`;
+  } else if (method !== 'none') throw new Error('Méthode d’authentification OIDC non prise en charge');
   const res = await fetchImpl(discovered.tokenEndpoint, {
     method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    headers,
+    signal: AbortSignal.timeout(10_000),
     body,
   });
   const json = await res.json().catch(() => ({}));
@@ -163,6 +197,7 @@ export async function exchangeAuthorizationCode(discovered, {
 export function isAllowedRedirect(uri, consoleUrl) {
   let parsed;
   try { parsed = new URL(uri); } catch { return false; }
+  if (parsed.search || parsed.hash || parsed.username || parsed.password) return false;
   if (parsed.protocol !== 'https:' && parsed.hostname !== 'localhost' && parsed.hostname !== '127.0.0.1') {
     return false;
   }

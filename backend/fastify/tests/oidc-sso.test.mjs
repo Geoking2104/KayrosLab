@@ -4,6 +4,8 @@ import { generateKeyPairSync, createSign } from 'node:crypto';
 import { buildTestApp } from './test-helpers.mjs';
 import {
   authorizeUrl,
+  googleConfigFromEnv,
+  publicAuthProviders,
   oidcConfigFromEnv,
   isAllowedRedirect,
   pkceChallenge,
@@ -87,6 +89,13 @@ describe('SSO OpenID Connect', () => {
   it('désactive le SSO sans émetteur', () => {
     const config = oidcConfigFromEnv({ OIDC_ISSUER: '', OIDC_CLIENT_ID: clientId });
     assert.equal(config.enabled, false);
+  });
+
+  it('expose Google comme fournisseur séparé quand ses secrets sont configurés', () => {
+    const google = googleConfigFromEnv({ GOOGLE_OAUTH_CLIENT_ID: 'google-client', GOOGLE_OAUTH_CLIENT_SECRET: 'google-secret' });
+    const config = publicAuthProviders({ enabled: false }, google);
+    assert.equal(google.enabled, true);
+    assert.deepEqual(config.providers, [{ id: 'google', label: 'Google' }]);
   });
 
   let app, ctx;
