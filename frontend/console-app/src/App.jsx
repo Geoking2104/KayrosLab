@@ -786,6 +786,28 @@ function IntegrationsPage({ data }) {
   </section>;
 }
 
+/** Comptes chat liés : condition pour arbitrer une mission depuis Slack, Teams ou Discord. */
+function ChatLinksPanel() {
+  const [links, setLinks] = useState([]);
+  const [token, setLinkToken] = useState('');
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  async function load() { try { setLinks((await api.chatLinks()).links || []); } catch { setLinks([]); } }
+  useEffect(() => { load(); }, []);
+  async function submit(event) {
+    event.preventDefault(); setError(''); setStatus('');
+    try { const result = await api.linkChatAccount(token.trim()); setStatus(`Compte ${result.platformId} lié.`); setLinkToken(''); await load(); }
+    catch (err) { setError(err.message); }
+  }
+  return <section className="privacy-panel"><h2>Lier un compte chat</h2>
+    <p>Pour arbitrer une mission depuis Slack, Teams ou Discord, cliquez un bouton d’arbitrage dans le chat (ou envoyez « lier » au bot Teams en privé) : le bot vous remet un jeton à usage unique, valable 15 minutes. Collez-le ici. Seuls les rôles COMEX et admin peuvent arbitrer.</p>
+    <form className="inline-form" onSubmit={submit}><input aria-label="Jeton de liaison" placeholder="link_…" value={token} onChange={(event) => setLinkToken(event.target.value)} /><button className="button primary" disabled={!token.trim()}>Lier</button></form>
+    {status && <p className="auth-success" role="status">{status}</p>}
+    {error && <p className="inline-error" role="alert">{error}</p>}
+    {!!links.length && <ul>{links.map((link) => <li key={link.platformId}><strong>{link.platformId}</strong> → {link.email} ({link.role})</li>)}</ul>}
+  </section>;
+}
+
 function SettingsPage({ data, refresh }) {
   const params = hashParams();
   const connected = params.get('connected');
@@ -795,6 +817,7 @@ function SettingsPage({ data, refresh }) {
     {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
     <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
+    <ChatLinksPanel />
     <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent hybride, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }

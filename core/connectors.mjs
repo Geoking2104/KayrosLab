@@ -28,9 +28,11 @@ import {
  * Chaque adaptateur la traduit dans son format natif (Block Kit, Adaptive Card, Embed).
  */
 export class AbstractView {
-  constructor({ title, text, fields = [], actions = [], color = null, ts = null } = {}) {
+  constructor({ title, text, fields = [], actions = [], color = null, ts = null, inputs = [] } = {}) {
     this.title = title; this.text = text; this.fields = fields;
     this.actions = actions; this.color = color; this.ts = ts;
+    // Champs de saisie facultatifs (Teams : Input.Text dans la carte, ex. motif d'arbitrage).
+    this.inputs = inputs;
   }
   /** @returns {{title:string, text:string, fields:object[], actions:object[], color:string|null, ts:string|null}} */
   toJSON() { return { title: this.title, text: this.text, fields: this.fields, actions: this.actions, color: this.color, ts: this.ts }; }
@@ -253,16 +255,29 @@ export class SlackAdapter extends ChatAdapter {
     return null;
   }
 
-  async postMessage(channelId, view) {
+  /** @param {{threadTs?:string}} [options] réponse dans un fil Slack (thread_ts). */
+  async postMessage(channelId, view, { threadTs = null } = {}) {
     const blocks = this.renderView(view);
-    const res = await this._api('POST', 'chat.postMessage', { channel: channelId, blocks, text: view.title });
-    return { ok: res.ok, messageId: res.ts ?? null };
+    const res = await this._api('POST', 'chat.postMessage', {
+      channel: channelId, blocks, text: view.title, ...(threadTs ? { thread_ts: String(threadTs) } : {}),
+    });
+    return { ok: res.ok, messageId: res.ts ?? null, error: res.ok ? undefined : res.error };
+  }
+
+  /** Message éphémère via le `response_url` d'une interaction (aucun jeton requis). */
+  async respondToUrl(responseUrl, body) {
+    const url = new URL(String(responseUrl || ''));
+    if (url.protocol !== 'https:' || url.hostname !== 'hooks.slack.com') throw new Error('response_url Slack invalide');
+    const res = await this._fetch(url.toString(), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+    });
+    return { ok: !!res.ok };
   }
 
   async updateMessage(channelId, messageId, view) {
     const blocks = this.renderView(view);
     const res = await this._api('POST', 'chat.update', { channel: channelId, ts: messageId, blocks, text: view.title });
-    return { ok: res.ok };
+    return { ok: res.ok, error: res.ok ? undefined : res.error };
   }
 
   async ephemeralMessage(channelId, userId, text) {
@@ -294,10 +309,15 @@ export class SlackAdapter extends ChatAdapter {
     if (view.actions.length) {
       blocks.push({
         type: 'actions',
+        // Block Kit n'accepte que `primary` ou `danger` (sans style = bouton neutre).
         elements: view.actions.map((a) => ({
           type: 'button', text: { type: 'plain_text', text: a.label },
-          action_id: a.id, style: a.style ?? 'default', value: a.id,
-          ...(a.confirm ? { confirm: { title: { text: a.confirm }, confirm: { text: 'Oui' }, deny: { text: 'Non' } } } : {}),
+          action_id: a.id, value: a.id,
+          ...(['primary', 'danger'].includes(a.style) ? { style: a.style } : {}),
+          ...(a.confirm ? { confirm: {
+            title: { type: 'plain_text', text: 'Confirmation' }, text: { type: 'plain_text', text: a.confirm },
+            confirm: { type: 'plain_text', text: 'Oui' }, deny: { type: 'plain_text', text: 'Non' },
+          } } : {}),
         })),
       });
     }
@@ -407,6 +427,57 @@ export class TeamsAdapter extends ChatAdapter {
     };
   }
 
+  /**
+   * URL Bot Framework d'une conversation à partir de sa référence
+   * (`service_url` reçu dans l'activité entrante, après vérification du JWT).
+   * Seuls les domaines Bot Framework / Teams sont acceptés (anti-SSRF).
+   */
+  _conversationBase(ref = {}) {
+    const raw = String(ref.service_url || ref.serviceUrl || 'https://smba.trafficmanager.net/amer/').trim();
+    let url;
+    try { url = new URL(raw); } catch { throw new Error('serviceUrl Teams invalide'); }
+    const host = url.hostname.toLowerCase();
+    const allowed = ['trafficmanager.net', 'botframework.com', 'botframework.azure.us', 'teams.microsoft.com', 'teams.microsoft.us']
+      .some((suffix) => host === suffix || host.endsWith(`.${suffix}`));
+    if (url.protocol !== 'https:' || !allowed) throw new Error('serviceUrl Teams non autorisé');
+    const conversationId = String(ref.conversation_id || ref.conversationId || '').trim();
+    if (!conversationId) throw new Error('conversation Teams requise');
+    return `${url.origin}${url.pathname.replace(/\/$/, '')}/v3/conversations/${encodeURIComponent(conversationId)}/activities`;
+  }
+
+  async _connectorCall(method, url, activity) {
+    const token = await this._botAccessToken();
+    if (!token) return { ok: false, error: 'botAccessToken indisponible (TEAMS_APP_ID / TEAMS_BOT_PASSWORD)' };
+    const res = await this._fetch(url, {
+      method, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify(activity),
+    });
+    if (!res.ok) return { ok: false, error: await res.text().catch(() => '') };
+    const data = await res.json().catch(() => ({}));
+    return { ok: true, messageId: data.id ?? null };
+  }
+
+  /** Envoie une activité (réponse au message d'origine si `reply_to_id`) dans une conversation. */
+  async sendToConversation(ref, viewOrActivity) {
+    const activity = viewOrActivity instanceof AbstractView ? this._activityPayload(viewOrActivity) : viewOrActivity;
+    const base = this._conversationBase(ref);
+    const replyTo = String(ref?.reply_to_id || '').trim();
+    const payload = replyTo ? { ...activity, replyToId: replyTo } : activity;
+    return this._connectorCall('POST', replyTo ? `${base}/${encodeURIComponent(replyTo)}` : base, payload);
+  }
+
+  /** Remplace une activité déjà publiée (carte d'arbitrage → issue). */
+  async updateInConversation(ref, activityId, view) {
+    if (!activityId) return { ok: false, error: 'activité inconnue' };
+    const base = this._conversationBase(ref);
+    return this._connectorCall('PUT', `${base}/${encodeURIComponent(activityId)}`, { ...this._activityPayload(view), id: activityId });
+  }
+
+  /** Indicateur « en train d'écrire » pendant l'analyse. */
+  async sendTyping(ref) {
+    return this._connectorCall('POST', this._conversationBase(ref), { type: 'typing' });
+  }
+
   parseRequest(req) {
     const body = req.body ?? {};
     if (body.type === 'message' && body.text) {
@@ -511,6 +582,12 @@ export class TeamsAdapter extends ChatAdapter {
     }
     if (view.text) {
       body.push({ type: 'TextBlock', text: view.text, wrap: true, isSubtle: !view.title });
+    }
+    for (const input of view.inputs ?? []) {
+      body.push({
+        type: 'Input.Text', id: input.id, label: input.label, placeholder: input.placeholder || undefined,
+        isMultiline: input.multiline !== false, maxLength: input.maxLength || 1000,
+      });
     }
     for (const f of view.fields ?? []) {
       body.push({

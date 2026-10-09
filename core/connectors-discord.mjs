@@ -163,6 +163,19 @@ export class DiscordAdapter extends ChatAdapter {
     return { ok: true, messageId: data.id };
   }
 
+  /** Publie un message natif dans un salon avec le jeton du bot (ignore DISCORD_WEBHOOK_URL). */
+  async postChannelMessage(channelId, payload) {
+    if (!this.botToken || !channelId) return { ok: false, error: 'botToken/channelId manquant' };
+    const res = await this._fetch(`https://discord.com/api/v10/channels/${encodeURIComponent(channelId)}/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bot ${this.botToken}` },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) return { ok: false, error: await res.text().catch(() => '') };
+    const data = await res.json().catch(() => ({}));
+    return { ok: true, messageId: data.id ?? null };
+  }
+
   async updateMessage(channelId, messageId, view) {
     if (!this.botToken || !channelId || !messageId) return { ok: false, error: 'botToken/channelId/messageId manquant' };
     const content = this.renderView(view);
@@ -175,6 +188,22 @@ export class DiscordAdapter extends ChatAdapter {
       body: JSON.stringify(content),
     });
     return { ok: res.ok };
+  }
+
+  /**
+   * Modifie la réponse d'une interaction (différée type 5 ou message du composant cliqué)
+   * via le webhook d'interaction : jeton valable 15 minutes, aucun jeton de bot requis.
+   */
+  async editInteractionResponse(applicationId, interactionToken, payload, messageId = '@original') {
+    const app = String(applicationId || this.applicationId || '').trim();
+    const token = String(interactionToken || '').trim();
+    if (!app || !token) return { ok: false, error: 'application_id/jeton d’interaction manquant' };
+    const res = await this._fetch(`https://discord.com/api/v10/webhooks/${encodeURIComponent(app)}/${encodeURIComponent(token)}/messages/${messageId === '@original' ? '@original' : encodeURIComponent(messageId)}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    });
+    if (!res.ok) return { ok: false, status: res.status, error: await res.text().catch(() => '') };
+    const data = await res.json().catch(() => ({}));
+    return { ok: true, messageId: data.id ?? null };
   }
 
   async ephemeralMessage(channelId, userId, text) {
@@ -203,7 +232,7 @@ export class DiscordAdapter extends ChatAdapter {
   renderModalData(form) {
     const custom_id = String(form?.custom_id || form?.id || 'kayros_modal').slice(0, 100);
     const title = String(form?.title || 'KayrosLab').slice(0, 45);
-    const raw = form?.inputs || form?.fields || [];
+    const raw = form?.inputs?.length ? form.inputs : (form?.fields || []);
     const inputs = raw.length
       ? raw
       : [{ id: 'reason', label: 'Motif (obligatoire)', multiline: true, required: true }];

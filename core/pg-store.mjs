@@ -538,6 +538,16 @@ export class PgCollaborationStore {
     return rows[0]?.payload || null;
   }
 
+  /** Mise à jour atomique de la seule référence chat (jsonb_set) : pas de lecture-écriture concurrente. */
+  async updateThreadChat(threadId, chat, { tenantId = null } = {}) {
+    const { rows } = await this.pool.query(
+      `update kayros_decision_threads set payload=jsonb_set(payload, '{chat}', $3::jsonb, true)
+       where thread_id=$1 and tenant_id=$2 returning payload`,
+      [String(threadId), String(tenantId || 'default'), JSON.stringify(chat ?? null)],
+    );
+    return rows[0]?.payload || null;
+  }
+
   async appendThreadMessage(threadId, message, { tenantId = null } = {}) {
     const scope = String(tenantId || message.tenant_id || 'default');
     const { rows } = await this.pool.query(

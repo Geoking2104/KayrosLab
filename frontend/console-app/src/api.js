@@ -54,6 +54,9 @@ export const api = {
   connectors: () => request('/v1/console/connectors'),
   configureConnector: (platform, input) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PUT', body: JSON.stringify(input) }),
   setConnectorEnabled: (platform, enabled) => request(`/v1/console/connectors/${encodeURIComponent(platform)}`, { method: 'PATCH', body: JSON.stringify({ enabled }) }),
+  // Liaison d'un compte Slack / Teams / Discord (jeton à usage unique donné par le bot) : arbitrage depuis le chat.
+  chatLinks: () => request('/v1/connectors/links'),
+  linkChatAccount: (token) => request(`/v1/connectors/link/${encodeURIComponent(token)}`, { method: 'POST', body: '{}' }),
   testConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/test`, { method: 'POST', body: '{}' }),
   sessions: () => request('/v1/console/sessions'),
   session: (sessionId) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}`),

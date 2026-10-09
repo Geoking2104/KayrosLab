@@ -19,7 +19,7 @@ export function oauthConfigFromEnv(env = process.env) {
       clientId: String(env.SLACK_CLIENT_ID || '').trim(),
       clientSecret: String(env.SLACK_CLIENT_SECRET || '').trim(),
       signingSecret: String(env.SLACK_SIGNING_SECRET || '').trim(),
-      scopes: String(env.SLACK_OAUTH_SCOPES || 'app_mentions:read,chat:write,im:history,channels:history,groups:history').trim(),
+      scopes: String(env.SLACK_OAUTH_SCOPES || 'app_mentions:read,chat:write,commands,im:history,channels:history,groups:history').trim(),
     },
     discord: {
       clientId: String(env.DISCORD_CLIENT_ID || env.DISCORD_APPLICATION_ID || '').trim(),

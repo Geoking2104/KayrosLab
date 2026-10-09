@@ -138,6 +138,14 @@ export class InMemoryCollaborationStore {
     return clone(next);
   }
 
+  /** Remplace uniquement la référence chat d'un fil (mise à jour partielle, sans écraser le reste). */
+  async updateThreadChat(threadId, chat, { tenantId = null } = {}) {
+    const current = this.threads.get(String(threadId || ''));
+    if (!current || (tenantId != null && current.tenant_id !== String(tenantId))) return null;
+    current.chat = clone(chat);
+    return clone(current);
+  }
+
   async appendThreadMessage(threadId, message, { tenantId = null } = {}) {
     const thread = this.threads.get(String(threadId || ''));
     if (!thread || (tenantId != null && thread.tenant_id !== String(tenantId))) throw new Error('fil introuvable');

@@ -86,3 +86,14 @@ test('PgCollaborationStore liste les fils `running` tous tenants confondus (repr
   assert.doesNotMatch(pool.calls[0].sql, /tenant_id/);
   assert.deepEqual(pool.calls[0].params, ['running', 1000]);
 });
+
+test('PgCollaborationStore met à jour la seule référence chat d’un fil, de façon atomique (jsonb_set)', async () => {
+  const pool = fakePool(() => ({ rows: [{ payload: { thread_id: 'thread-1', chat: { platform: 'slack', message_ts: '1.2' } } }] }));
+  const store = new PgCollaborationStore(pool);
+  const updated = await store.updateThreadChat('thread-1', { platform: 'slack', message_ts: '1.2' }, { tenantId: 't-1' });
+
+  assert.equal(updated.chat.message_ts, '1.2');
+  assert.equal(pool.calls.length, 1, 'aucune lecture préalable : pas de course lecture-écriture');
+  assert.match(pool.calls[0].sql, /jsonb_set\(payload, '\{chat\}'/);
+  assert.deepEqual(pool.calls[0].params, ['thread-1', 't-1', JSON.stringify({ platform: 'slack', message_ts: '1.2' })]);
+});
