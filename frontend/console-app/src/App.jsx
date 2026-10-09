@@ -109,6 +109,8 @@ function Login({ onLogin }) {
     const params = new URLSearchParams(location.search);
     const code = params.get('code');
     const returnedState = params.get('state');
+    const returnedError = params.get('error_description') || params.get('error');
+    if (returnedError) { history.replaceState({}, '', location.pathname); setError(`Connexion SSO refusée : ${returnedError}`); return; }
     if (!code || !returnedState) return;
     const stored = sessionStorage.getItem('kayros_sso');
     history.replaceState({}, '', location.pathname);
@@ -120,6 +122,7 @@ function Login({ onLogin }) {
     setState('loading');
     api.ssoCallback({
       code,
+      provider: payload.provider || 'oidc',
       codeVerifier: payload.verifier,
       redirectUri: payload.redirectUri,
       nonce: payload.nonce,
@@ -128,7 +131,7 @@ function Login({ onLogin }) {
       onLogin();
     }).catch((err) => { setState('error'); setError(err.message); });
   }, [onLogin]);
-  async function startSso() {
+  async function startSso(provider = 'oidc') {
     setState('loading'); setError('');
     try {
       const verifier = randomUrlToken(48);
@@ -136,8 +139,8 @@ function Login({ onLogin }) {
       const nonce = randomUrlToken(16);
       const challenge = await pkceChallenge(verifier);
       const redirectUri = ssoRedirectUri();
-      sessionStorage.setItem('kayros_sso', JSON.stringify({ verifier, state, nonce, redirectUri }));
-      const started = await api.ssoStart({ redirectUri, state, challenge, nonce });
+      sessionStorage.setItem('kayros_sso', JSON.stringify({ provider, verifier, state, nonce, redirectUri }));
+      const started = await api.ssoStart({ provider, redirectUri, state, challenge, nonce });
       location.assign(started.url);
     } catch (err) { setState('error'); setError(err.message); }
   }
@@ -160,8 +163,8 @@ function Login({ onLogin }) {
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
       {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
-      {showSso && <button type="button" className="button secondary sso-button" onClick={startSso} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : 'Continuer avec SSO'}</button>}
-      {showSso && <p className="auth-or">OpenID Connect · hébergé ici</p>}
+      {showSso && sso.providers?.map((provider) => <button key={provider.id} type="button" className="button secondary sso-button" onClick={() => startSso(provider.id)} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : `Continuer avec ${provider.label}`}</button>)}
+      {showSso && <p className="auth-or">Connexion sécurisée par OAuth 2.0 / OpenID Connect</p>}
       {registration && <label>Nom<input value={name} onChange={(event) => setName(event.target.value)} required /></label>}
       {!resetting && <label>Adresse e-mail<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>}
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}
