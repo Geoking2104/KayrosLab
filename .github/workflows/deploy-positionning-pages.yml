@@ -14,16 +14,12 @@ on:
       - 'backend/web/views/homepage-studio.ejs'
       - 'backend/web/locales/**'
       - 'backend/web/public/assets/**'
-      - 'backend/web/public/salon/**'
-      - 'salon/**'
       - 'legal/**'
-      - 'crates/salon-core/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
       - 'tests/sales-oracle-site.test.mjs'
       - 'tests/timesfm-site.test.mjs'
       - 'tests/console-pages-deploy.test.mjs'
-      - 'tests/salon-*.test.mjs'
       - 'cycle-timeline.html'
       - 'portfolio-dormant.html'
       - 'portfolio-board.html'
@@ -36,6 +32,7 @@ on:
       - 'livret-blanc-*.html'
       - 'whitepaper-*.html'
       - 'CNAME'
+      - '404.html'
       - '.github/workflows/deploy-positionning-pages.yml'
   workflow_dispatch:
 
@@ -64,8 +61,6 @@ jobs:
       - name: Validate public demo JavaScript and CTA wiring
         continue-on-error: true
         run: node --test tests/demo-html.test.mjs tests/sales-oracle-site.test.mjs tests/timesfm-site.test.mjs tests/console-pages-deploy.test.mjs
-      - name: Salon tests (bloquant)
-        run: node --test tests/salon-engine.test.mjs tests/salon-copy.test.mjs tests/salon-responsive.test.mjs tests/salon-openkb.test.mjs tests/salon-gazette.test.mjs tests/salon-i18n.test.mjs tests/salon-prompt-wire.test.mjs tests/salon-doctrine.test.mjs tests/salon-grounding.test.mjs tests/salon-prompt-anchor.test.mjs tests/salon-doctrine-coverage.test.mjs tests/salon-import.test.mjs tests/salon-language.test.mjs
       - name: Install & build positionning-app
         working-directory: frontend/positionning-app
         run: |
@@ -97,21 +92,8 @@ jobs:
           done
           if [ -d frontend/positionning-app/dist ]; then cp -r frontend/positionning-app/dist/* deploy/positionner-app/; else echo "ERROR: positionning dist missing" >&2; exit 1; fi
           if [ -f backend/web/public/console/index.html ]; then cp -r backend/web/public/console/. deploy/console/; else echo "ERROR: console missing" >&2; exit 1; fi
-          if [ -f backend/web/public/salon/index.html ]; then mkdir -p deploy/salon; cp -r backend/web/public/salon/. deploy/salon/; else echo "ERROR: salon missing" >&2; exit 1; fi
           if [ -d legal ]; then mkdir -p deploy/legal; cp -r legal/. deploy/legal/; fi
           touch deploy/.nojekyll
-      - name: Verify Salon landing and engine
-        run: |
-          set -e
-          SIZE=$(wc -c < deploy/salon/index.html)
-          echo "salon/index.html = $SIZE bytes"
-          if [ "$SIZE" -lt 50000 ]; then echo "ERROR: salon specimen truncated ($SIZE bytes)" >&2; exit 1; fi
-          grep -q 'id="open-circle"' deploy/salon/index.html || { echo "ERROR: ouvrir un cercle missing" >&2; exit 1; }
-          grep -q 'id="accueil"' deploy/salon/index.html || { echo "ERROR: accueil pane missing" >&2; exit 1; }
-          grep -q 'salon-engine.js' deploy/salon/index.html || { echo "ERROR: salon-engine not wired" >&2; exit 1; }
-          for f in salon-engine.js salon-kb.js corpus.json kb-manifest.json formulas.json circle-run.js circle-ui.js circle-stage.js circle-speech.js knowledge.js conflict.js agents-import.js titles-fr.js flux-x.js gazette-desk.js; do
-            if [ ! -f "deploy/salon/$f" ]; then echo "ERROR: salon asset missing: $f" >&2; exit 1; fi
-          done
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

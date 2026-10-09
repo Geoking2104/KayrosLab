@@ -1,8 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "redirects": [
-    { "source": "/salon", "destination": "https://www.kayroslab.com/salon/", "permanent": true },
-    { "source": "/salon/", "destination": "https://www.kayroslab.com/salon/", "permanent": true },
-    { "source": "/salon/:path*", "destination": "https://www.kayroslab.com/salon/:path*", "permanent": true }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json"
 }
