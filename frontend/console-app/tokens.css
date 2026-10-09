@@ -1,26 +1,50 @@
 /* Hallmark · macrostructure: Workbench · genre: modern-minimal · theme: Quiet · anchor hue: cyan
  * audience: operations and business teams · use: connect a room and run a governed mission · tone: technical
- * pre-emit critique: P5 H4 E4 S5 R5 V4 · contrast: pass (46–50) · slop: pass (51–60) · mobile: pass (36, 59, 61–69)
+ * theme: Light (aligné sur www.kayroslab.com) · pre-emit critique: P5 H4 E4 S5 R5 V4 · contrast: pass (46–50) · slop: pass (51–60) · mobile: pass (36, 59, 61–69)
  */
 :root {
-  --color-paper: oklch(15% 0.018 242);
-  --color-surface: oklch(19% 0.02 242);
-  --color-surface-raised: oklch(23% 0.022 242);
-  --color-rule: oklch(33% 0.024 242);
-  --color-rule-strong: oklch(46% 0.035 242);
-  --color-muted: oklch(71% 0.025 242);
-  --color-ink: oklch(95% 0.012 220);
-  --color-accent: oklch(79% 0.14 205);
-  --color-accent-ink: oklch(19% 0.04 220);
-  --color-focus: oklch(82% 0.16 205);
-  --color-danger: oklch(72% 0.16 25);
-  --color-warning: oklch(82% 0.13 83);
-  --color-success: oklch(78% 0.14 155);
-  --color-overlay: oklch(8% 0.018 242 / 0.72);
-  --color-shadow: oklch(5% 0.01 242 / 0.28);
+  /* Thème clair aligné sur le site (marketing.css) : fonds blancs, encre sombre, accent sarcelle. */
+  color-scheme: light;
+  --color-paper: #f5f7f9;
+  --color-paper-2: #f8fafb;
+  --color-paper-3: #eef1f4;
+  --color-surface: #ffffff;
+  --color-surface-raised: #eef1f4;
+  --color-rule: #e4e6ea;
+  --color-rule-strong: #c9ced4;
+  --color-rule-dark: #b9c0c8;
+  --color-muted: #5f6670;
+  --color-ink: #0a0c10;
+  --color-ink-2: #3a3f48;
+  --color-accent: #0f766e;
+  --color-accent-strong: #0b5a54;
+  --color-accent-soft: #e6f4f2;
+  --color-accent-ink: #ffffff;
+  --color-focus: #0f766e;
+  --color-violet: #5b4cdb;
+  --color-violet-soft: #eeecfb;
+  --color-amber: #b45309;
+  --color-amber-soft: #fdf3e4;
+  --color-blue: #1d4ed8;
+  --color-blue-soft: #e8effd;
+  --color-danger: #b42318;
+  --color-danger-soft: #fbe9e7;
+  --color-warning: #8a6d1a;
+  --color-warning-soft: #f8f1dc;
+  --color-success: #157347;
+  --color-success-soft: #e7f4ec;
+  --color-positive: #157347;
+  --color-positive-soft: #e7f4ec;
+  --color-overlay: rgba(10, 12, 16, 0.42);
+  --color-shadow: rgba(14, 15, 17, 0.18);
+  --shadow-sm: 0 1px 2px rgba(16, 20, 24, .05), 0 1px 3px rgba(16, 20, 24, .05);
+  --shadow-md: 0 12px 32px -14px rgba(14, 15, 17, .18), 0 4px 12px -6px rgba(14, 15, 17, .10);
+  --shadow-lg: 0 40px 80px -40px rgba(14, 15, 17, .38), 0 14px 32px -18px rgba(14, 15, 17, .22);
+  --gradient-brand: linear-gradient(115deg, #0f766e 0%, #1a9e92 45%, #5b4cdb 100%);
+  --brand-slack: #4a154b; --brand-teams: #5b5fc7; --brand-discord: #5865f2; --brand-salesforce: #0176d3;
 
-  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
-  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "Fira Code", "Cascadia Code", monospace;
 
   --space-3xs: 0.125rem;
@@ -49,7 +73,7 @@
   --dur-long: 420ms;
 
   --radius-sm: 0.45rem;
-  --radius-md: 0.75rem;
+  --radius-md: 1rem;
   --radius-pill: 999px;
   --rule-thin: 1px;
   --z-modal: 400;
