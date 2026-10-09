@@ -668,3 +668,10 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 @media (prefers-reduced-motion: reduce) {
   .agent-table article:hover, .connector-card:hover, .session-grid article:hover, .rooms-grid article:hover, .author-card:hover { transform: none; }
 }
+
+/* Rail pleine hauteur (bureau) : le rail reste collant (100dvh) et la colonne garde son fond
+ * blanc et sa bordure sur toute la hauteur de la page, même quand le contenu est plus long. */
+@media (min-width: 841px) {
+  .app-shell { background: linear-gradient(90deg, var(--color-surface) 0 calc(15.5rem - 1px), var(--color-rule) calc(15.5rem - 1px) 15.5rem, transparent 15.5rem); }
+  .sidebar { align-self: start; height: 100vh; height: 100dvh; }
+}
