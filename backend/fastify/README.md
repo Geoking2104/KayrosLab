@@ -22,6 +22,8 @@ Voir [`../../docs/developer-portal-mcp.md`](../../docs/developer-portal-mcp.md) 
 ## Endpoints
 
 - `GET  /health` → état + providers + modèle.
+- **API publique v1** (intégrations Salesforce / n8n / Zapier) : `GET /v1/public/me`, `GET /v1/public/collectives`, `POST /v1/public/missions` (202, `Idempotency-Key`), `GET /v1/public/missions/:id`, `GET /v1/public/missions?external_ref=` ; spécification `GET /v1/public/openapi.json`, référence `GET /docs`. Détails : `docs/API.md`.
+- Console → Intégrations : `/v1/console/integrations` (clés d'API, webhook signé, journal des livraisons).
 - `POST /v1/demo/chat` → proxy LLM public de la démo HTML, sans clé côté navigateur.
 - `POST /v1/demo/report-leads` → capture lead RGPD et envoi SMTP du PDF/Markdown généré par la démo.
 - `POST /v1/demo/positionning/analyze` → analyse Positionner publique via Mistral serveur, sans fallback local ni exemples codés en dur.
