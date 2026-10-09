@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.17",
+  "version": "{{APP_VERSION}}",
+  "id": "{{TEAMS_MANIFEST_ID}}",
+  "developer": {
+    "name": "KayrosLab",
+    "websiteUrl": "https://www.kayroslab.com",
+    "privacyUrl": "https://www.kayroslab.com/legal/",
+    "termsOfUseUrl": "https://www.kayroslab.com/legal/"
+  },
+  "name": {
+    "short": "KayrosLab",
+    "full": "KayrosLab — collectif d'agents gouvernés"
+  },
+  "description": {
+    "short": "Posez une question au collectif d'agents KayrosLab et arbitrez son verdict.",
+    "full": "Mentionnez KayrosLab dans un canal connecté : le collectif d'agents analyse la question en tâche de fond puis publie son verdict avec les boutons d'arbitrage (accepter le consensus, demander une réévaluation, passer sous conditions). L'arbitrage est réservé aux comptes KayrosLab liés ayant le rôle COMEX ou admin ; envoyez « lier » au bot en conversation privée pour lier votre compte."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#0377D3",
+  "bots": [
+    {
+      "botId": "{{TEAMS_APP_ID}}",
+      "scopes": ["personal", "team", "groupChat"],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": ["personal"],
+          "commands": [
+            { "title": "lier", "description": "Recevoir un jeton à usage unique pour lier votre compte KayrosLab" }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": ["{{API_HOST}}", "www.kayroslab.com"]
+}

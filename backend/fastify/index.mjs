@@ -6,17 +6,13 @@ import buildContext from './lib/context.mjs';
 import authPlugin from './plugins/auth.mjs';
 import { applyEnvFileDefaults } from './lib/env-file.mjs';
 import { metricsEndpoint } from './lib/metrics.mjs';
+import { isSignedChatWebhook, registerBodyParsers } from './lib/body-parsers.mjs';
 
 applyEnvFileDefaults();
 
 const app = Fastify({ logger: true, bodyLimit: 5 * 1024 * 1024 });
 
-app.removeContentTypeParser('application/json');
-app.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, done) => {
-  req.rawBody = body;
-  try { done(null, JSON.parse(body)); }
-  catch (error) { done(error); }
-});
+registerBodyParsers(app);
 
 const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
@@ -43,7 +39,8 @@ app.addHook('preHandler', async (req, reply) => {
   if (path.startsWith('/v1/auth/password/')) return;
   if (path.startsWith('/v1/auth/sso')) return;
   if (path.startsWith('/v1/salon/')) return;
-  if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
+  // Webhooks Slack / Discord / Teams : signature de la plateforme vérifiée dans la route.
+  if (isSignedChatWebhook(path)) return;
   if (path === '/mcp') return;
   // API publique : authentifiée par clé d'API (routes/public-api.mjs), pas par le secret partagé.
   if (path.startsWith('/v1/public/')) return;
