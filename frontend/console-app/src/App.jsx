@@ -676,7 +676,7 @@ const SCOPE_LABELS = {
   'collectives:read': 'lister les collectifs', 'webhooks:manage': 'gérer les webhooks (réservé)',
 };
 const EVENT_LABELS = { 'mission.completed': 'mission terminée', 'mission.failed': 'mission en échec', 'mission.arbitrated': 'arbitrage humain' };
-const DELIVERY_LABELS = { delivered: 'livré', pending: 'nouvel essai prévu', failed: 'abandonné', sending: 'envoi…' };
+const DELIVERY_LABELS = { delivered: 'livré', pending: 'nouvel essai prévu', failed: 'abandonné', delivering: 'envoi en cours' };
 function formatDate(value) { return value ? new Date(value).toLocaleString('fr-FR') : '—'; }
 function copyText(text) { navigator.clipboard?.writeText(text).catch(() => {}); }
 
