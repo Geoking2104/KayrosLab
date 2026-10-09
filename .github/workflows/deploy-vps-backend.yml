@@ -45,7 +45,6 @@ on:
       - 'tokens.css'
       - 'site.css'
       - 'marketing.css'
-      - 'assets/**'
       - 'studio.css'
       - 'backend/web/public/salon/**'
       - 'legal/**'
