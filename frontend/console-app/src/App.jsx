@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, getToken, setToken } from './api.js';
+import { BrandLogo, BrandRow, kayrosLogo } from './brand.jsx';
 
 // La console est un harness d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
@@ -83,7 +84,7 @@ function ssoRedirectUri() {
 
 function Mark({ name }) {
   const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', integrations: '⇄', settings: '⚙' };
-  return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
+  return <span className={`nav-mark nav-mark--${name}`} aria-hidden="true">{labels[name]}</span>;
 }
 
 function Login({ onLogin }) {
@@ -166,7 +167,7 @@ function Login({ onLogin }) {
   }
   const showSso = sso?.enabled && !forgotten && !resetting && state !== 'sent' && state !== 'reset';
   return <main className="login-shell">
-    <section className="login-copy"><a className="wordmark" href="/">KayrosLab</a><h1>Décider avec un collectif explicite.</h1><p>Composez des collectifs d'agents, lancez des missions gouvernées et gardez chaque verdict sous arbitrage humain.</p></section>
+    <section className="login-copy"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><div className="login-hero"><h1>Décider avec un <span className="grad-text">collectif explicite.</span></h1><p>Composez des collectifs d'agents, lancez des missions gouvernées et gardez chaque verdict sous arbitrage humain.</p></div><div className="login-brands"><span>Branché sur vos outils</span><BrandRow platforms={['salesforce', 'slack', 'teams', 'discord', 'n8n', 'zapier']} /></div></section>
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
       {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
@@ -191,7 +192,7 @@ function Login({ onLogin }) {
 
 function Connection({ connection }) {
   const connected = connection.status === 'connected';
-  return <div className="connection"><span className={`status-dot ${connected ? 'is-on' : connection.status === 'error' ? 'is-error' : ''}`} />
+  return <div className="connection"><span className="connection-logo"><BrandLogo platform={connection.platform} size={22} /><span className={`status-dot ${connected ? 'is-on' : connection.status === 'error' ? 'is-error' : ''}`} /></span>
     <div><strong>{platformNames[connection.platform]}</strong><small>{connection.source === 'environment' ? 'variables serveur' : 'console'}</small></div>
     <span className="connection-state">{connected ? 'Connecté' : connection.status === 'configured' ? 'À tester' : connection.status === 'disabled' ? 'Désactivé' : connection.status === 'error' ? 'Erreur' : 'À configurer'}</span>
   </div>;
@@ -668,7 +669,7 @@ function ConnectorCard({ connector, secure, refresh }) {
   async function toggle() { try { await api.setConnectorEnabled(connector.platform, !connector.enabled); await refresh(); } catch (err) { setError(err.message); } }
   async function connect() { setState('loading'); setError(''); try { const result = await api.connectConnector(connector.platform); location.assign(result.url); } catch (err) { setState('error'); setError(err.message); } }
   const connected = connector.status === 'connected';
-  return <article className="connector-card"><header><div><span className={`status-dot ${connected ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
+  return <article className={`connector-card connector-card--${connector.platform}`}><header><div><span className="connection-logo connection-logo--lg"><BrandLogo platform={connector.platform} size={28} /><span className={`status-dot ${connected ? 'is-on' : connector.status === 'error' ? 'is-error' : ''}`} /></span><div><h2>{platformNames[connector.platform]}</h2><small>{connector.status.replaceAll('_', ' ')}</small></div></div><button className="switch" aria-pressed={connector.enabled} disabled={!connector.connection_id} onClick={toggle}><span />{connector.enabled ? 'Activé' : 'Désactivé'}</button></header>
     {connector.one_click && !connected && <button className="button primary" onClick={connect} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : connectLabel[connector.platform]}</button>}
     {!connector.one_click && !connected && <p className="muted so-note">Connexion simplifiée indisponible : les identifiants d’application du fournisseur doivent être configurés côté serveur. En attendant, utilisez la configuration avancée ci-dessous.</p>}
     {connected && <div className="connector-actions"><button type="button" className="button secondary" disabled={state === 'loading'} onClick={test}>Tester</button>{connector.webhook_url && <span className="muted so-note">Webhook : <code>{connector.webhook_url}</code></span>}</div>}
@@ -764,12 +765,12 @@ function IntegrationsPage({ data }) {
   const allowed = canManage(data.user);
   async function reload() { try { setInfo(await api.integrations()); setError(''); } catch (err) { setError(err.message); } }
   useEffect(() => { if (allowed) reload(); }, [allowed]);
-  const header = <header className="page-header"><div><p className="context-line">n8n · Zapier · Salesforce</p><h1>Intégrations</h1><p>Déclenchez une mission depuis votre CRM et recevez le verdict du collectif dans l’opportunité.</p></div></header>;
+  const header = <header className="page-header"><div><p className="context-line">n8n · Zapier · Salesforce</p><h1>Intégrations</h1><p>Déclenchez une mission depuis votre CRM et recevez le verdict du collectif dans l’opportunité.</p><BrandRow platforms={['salesforce', 'n8n', 'zapier']} /></div></header>;
   if (!allowed) return <section className="page">{header}<p className="muted">{MANAGER_ONLY} : demandez à un membre du comité exécutif de créer une clé d’API.</p></section>;
   if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
   return <section className="page">{header}
-    <section className="privacy-panel integration-panel"><h2>PoC Salesforce en 15 minutes</h2>
+    <section className="privacy-panel integration-panel integration-panel--salesforce"><h2><BrandLogo platform="salesforce" size={26} />PoC Salesforce en 15 minutes</h2>
       <ol className="integration-steps">
         <li>Créez une clé d’API ci-dessous (nom « n8n — Salesforce »).</li>
         <li>Révélez le secret de signature du webhook.</li>
@@ -789,7 +790,7 @@ function SettingsPage({ data, refresh }) {
   const params = hashParams();
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
-  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div></header>
     {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
     {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
@@ -899,7 +900,7 @@ function Console() {
     setPage('activity');
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
-  return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
+  return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
     <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'integrations' && <IntegrationsPage data={data} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
     {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
