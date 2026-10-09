@@ -1,0 +1,194 @@
+{
+  "id": "KayrosSfLaunch01",
+  "name": "KayrosLab — Salesforce : lancer la revue d’opportunité",
+  "nodes": [
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000001",
+      "name": "Opportunité modifiée",
+      "type": "n8n-nodes-base.salesforceTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "authentication": "oAuth2",
+        "triggerOn": "opportunityUpdated",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000002",
+      "name": "Opportunité créée",
+      "type": "n8n-nodes-base.salesforceTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        200
+      ],
+      "parameters": {
+        "authentication": "oAuth2",
+        "triggerOn": "opportunityCreated",
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000003",
+      "name": "Lire l’opportunité",
+      "type": "n8n-nodes-base.salesforce",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        100
+      ],
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "opportunity",
+        "operation": "get",
+        "opportunityId": "={{ $json.Id }}"
+      }
+    },
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000004",
+      "name": "Configuration et filtre",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        100
+      ],
+      "parameters": {
+        "jsCode": "// ⚙️ CONFIGURATION — à adapter (seul nœud à modifier pour le PoC)\nconst CONFIG = {\n  // API KayrosLab (https://api.kayroslab.com/docs)\n  kayros_api: 'https://api.kayroslab.com',\n  // Collectif qui instruit la revue : GET /v1/public/collectives, champ \"id\"\n  collective_id: 'room_REMPLACER',\n  // Étape Salesforce qui déclenche la revue (valeur exacte du champ StageName)\n  stage: 'Proposal/Price Quote',\n  // demo (< 5 s, simulé) · fast (défaut, 1–2 min) · deep (~12 min)\n  profile: 'fast',\n  // URL de production du workflow « KayrosLab → Salesforce : verdict et arbitrage »\n  events_url: 'https://n8n.kayroslab.com/webhook/kayros-mission-events',\n};\n\n// Une seule revue par opportunité et par étape, même si l'opportunité est\n// modifiée plusieurs fois (montant, date…) pendant l'étape.\nconst state = $getWorkflowStaticData('global');\nstate.launched = state.launched || {};\n\nconst out = [];\nfor (const item of $input.all()) {\n  const opp = item.json;\n  if (!opp.Id || opp.StageName !== CONFIG.stage) continue;\n  const idempotencyKey = ('sf-' + opp.Id + '-' + opp.StageName).replace(/\\s+/g, '_').slice(0, 200);\n  if (state.launched[idempotencyKey]) continue;\n  const amount = opp.Amount != null ? opp.Amount + (opp.CurrencyIsoCode ? ' ' + opp.CurrencyIsoCode : '') : 'montant non renseigné';\n  out.push({ json: {\n    ...CONFIG,\n    opportunity_id: opp.Id,\n    opportunity_name: opp.Name || opp.Id,\n    idempotency_key: idempotencyKey,\n    question: 'Faut-il engager l’opportunité « ' + (opp.Name || opp.Id) + ' » (' + amount + ', clôture ' + (opp.CloseDate || 'non fixée') + ') à l’étape ' + opp.StageName + ' ? Donnez un verdict GO / CONDITIONAL_GO / NO_GO, les risques et les conditions.',\n    context: String(opp.Description || '').slice(0, 20000),\n    metadata: {\n      opportunity: opp.Name || null, stage: opp.StageName, amount: opp.Amount ?? null,\n      close_date: opp.CloseDate || null, probability: opp.Probability ?? null,\n      type: opp.Type || null, lead_source: opp.LeadSource || null, account_id: opp.AccountId || null,\n    },\n  } });\n}\nreturn out;\n"
+      }
+    },
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000005",
+      "name": "Lancer la mission KayrosLab",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.kayros_api }}/v1/public/missions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $json.idempotency_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ collective_id: $json.collective_id, question: $json.question, context: $json.context || undefined, profile: $json.profile, external_ref: { system: \"salesforce\", object: \"Opportunity\", id: $json.opportunity_id }, metadata: $json.metadata, callback_url: $json.events_url, callback_events: [\"mission.completed\", \"mission.failed\", \"mission.arbitrated\"] }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          },
+          "timeout": 30000
+        }
+      }
+    },
+    {
+      "id": "a1c7e0a2-0b1f-4a50-8a0e-000000000006",
+      "name": "Résultat du lancement",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        100
+      ],
+      "parameters": {
+        "jsCode": "// 202 = mission lancée · 200 = déjà lancée (rejeu idempotent) · 409 = clé déjà\n// utilisée avec une autre requête (opportunité modifiée entre-temps) : dans ces\n// trois cas l'opportunité est marquée comme traitée pour cette étape.\nconst state = $getWorkflowStaticData('global');\nstate.launched = state.launched || {};\nconst out = [];\n$input.all().forEach((item, index) => {\n  const request = $('Configuration et filtre').itemMatching(index).json;\n  const status = Number(item.json.statusCode);\n  const body = item.json.body || {};\n  if ([200, 202, 409].includes(status)) {\n    state.launched[request.idempotency_key] = new Date().toISOString();\n    out.push({ json: {\n      opportunity_id: request.opportunity_id, opportunity_name: request.opportunity_name,\n      outcome: status === 202 ? 'mission lancée' : status === 200 ? 'déjà lancée' : 'déjà traitée (409)',\n      mission_id: body.mission_id || null, eta_seconds: body.eta_seconds ?? null,\n      dossier_url: body.dossier_url || null, note: body.note || null,\n    } });\n    return;\n  }\n  throw new Error('KayrosLab a refusé la mission (' + status + ') : ' + (body.error || JSON.stringify(body)).slice(0, 500));\n});\nreturn out;\n"
+      }
+    }
+  ],
+  "connections": {
+    "Opportunité modifiée": {
+      "main": [
+        [
+          {
+            "node": "Lire l’opportunité",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Opportunité créée": {
+      "main": [
+        [
+          {
+            "node": "Lire l’opportunité",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire l’opportunité": {
+      "main": [
+        [
+          {
+            "node": "Configuration et filtre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuration et filtre": {
+      "main": [
+        [
+          {
+            "node": "Lancer la mission KayrosLab",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lancer la mission KayrosLab": {
+      "main": [
+        [
+          {
+            "node": "Résultat du lancement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true
+  },
+  "pinData": {},
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
