@@ -675,3 +675,7 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
   .app-shell { background: linear-gradient(90deg, var(--color-surface) 0 calc(15.5rem - 1px), var(--color-rule) calc(15.5rem - 1px) 15.5rem, transparent 15.5rem); }
   .sidebar { align-self: start; height: 100vh; height: 100dvh; }
 }
+
+/* Cartes de session : les titres et questions longues reviennent à la ligne au lieu d'être coupés. */
+.session-grid article, .rooms-grid article { grid-template-columns: minmax(0, 1fr); }
+.session-grid article > div .text-button { max-width: 100%; white-space: normal; text-align: left; line-height: 1.4; padding-block: var(--space-xs); }

@@ -22,7 +22,7 @@ profiles, no black box.
 </div>
 
 <p align="center">
-  <img src="assets/console-overview.png" alt="The KayrosLab agent console: connected channels, live metrics and a decision under review" width="100%">
+  <img src="assets/console-overview.webp" alt="The KayrosLab agent console: connected channels, live metrics and a decision under review" width="100%">
 </p>
 
 <p align="center">
