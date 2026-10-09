@@ -35,3 +35,30 @@ test('every in-page anchor of the landing resolves to an element', () => {
     }
   }
 });
+
+test('integration logos are local (inline sprite + assets/logos), never hotlinked', () => {
+  const logos = ['salesforce', 'slack', 'microsoft-teams', 'discord', 'n8n', 'zapier'];
+  for (const file of ['index.html', 'index.fr.html']) {
+    const html = read(file);
+    for (const logo of logos) {
+      assert.match(html, new RegExp(`<symbol id="logo-${logo}"`), `${file}: missing symbol ${logo}`);
+      assert.match(html, new RegExp(`<use href="#logo-${logo}"/>`), `${file}: logo ${logo} unused`);
+    }
+    assert.doesNotMatch(html, /simpleicons|cdn\.jsdelivr|unpkg\.com/);
+    assert.doesNotMatch(html, /panel hl reveal/);
+    // Mock chat visuals show the three arbitration actions, as illustrations only.
+    assert.equal((html.match(/class="gb ok"/g) || []).length, 3);
+    assert.equal((html.match(/class="gb no"/g) || []).length, 3);
+    assert.match(html, /class="sf-mock/);
+  }
+  for (const logo of logos) {
+    for (const dir of ['assets/logos', 'backend/web/public/assets/logos']) {
+      assert.match(read(`${dir}/${logo}.svg`), /^<svg[^>]+viewBox="0 0 24 24"/);
+    }
+  }
+});
+
+test('landing motion respects prefers-reduced-motion', () => {
+  const css = read('marketing.css');
+  assert.match(css, /@media \(prefers-reduced-motion:reduce\)\{[\s\S]*\.js \.reveal\{opacity:1;transform:none;transition:none\}/);
+});

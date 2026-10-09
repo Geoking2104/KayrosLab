@@ -23,6 +23,14 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="logo-salesforce" viewBox="0 0 24 24"><path fill="#00A1E0" d="M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8"/></symbol>
+  <symbol id="logo-slack" viewBox="0 0 24 24"><path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z"/><path fill="#E01E5A" d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/><path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z"/><path fill="#36C5F0" d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z"/><path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z"/><path fill="#2EB67D" d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/><path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z"/><path fill="#ECB22E" d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></symbol>
+  <symbol id="logo-microsoft-teams" viewBox="0 0 24 24"><path fill="#6264A7" d="M20.625 8.127q-.55 0-1.025-.205-.475-.205-.832-.563-.358-.357-.563-.832Q18 6.053 18 5.502q0-.54.205-1.02t.563-.837q.357-.358.832-.563.474-.205 1.025-.205.54 0 1.02.205t.837.563q.358.357.563.837.205.48.205 1.02 0 .55-.205 1.025-.205.475-.563.832-.357.358-.837.563-.48.205-1.02.205zm0-3.75q-.469 0-.797.328-.328.328-.328.797 0 .469.328.797.328.328.797.328.469 0 .797-.328.328-.328.328-.797 0-.469-.328-.797-.328-.328-.797-.328zM24 10.002v5.578q0 .774-.293 1.46-.293.685-.803 1.194-.51.51-1.195.803-.686.293-1.459.293-.445 0-.908-.105-.463-.106-.85-.329-.293.95-.855 1.729-.563.78-1.319 1.336-.756.557-1.67.861-.914.305-1.898.305-1.148 0-2.162-.398-1.014-.399-1.805-1.102-.79-.703-1.312-1.664t-.674-2.086h-5.8q-.411 0-.704-.293T0 16.881V6.873q0-.41.293-.703t.703-.293h8.59q-.34-.715-.34-1.5 0-.727.275-1.365.276-.639.75-1.114.475-.474 1.114-.75.638-.275 1.365-.275t1.365.275q.639.276 1.114.75.474.475.75 1.114.275.638.275 1.365t-.275 1.365q-.276.639-.75 1.113-.475.475-1.114.75-.638.276-1.365.276-.188 0-.375-.024-.188-.023-.375-.058v1.078h10.875q.469 0 .797.328.328.328.328.797zM12.75 2.373q-.41 0-.78.158-.368.158-.638.434-.27.275-.428.639-.158.363-.158.773 0 .41.158.78.159.368.428.638.27.27.639.428.369.158.779.158.41 0 .773-.158.364-.159.64-.428.274-.27.433-.639.158-.369.158-.779 0-.41-.158-.773-.159-.364-.434-.64-.275-.275-.639-.433-.363-.158-.773-.158zM6.937 9.814h2.25V7.94H2.814v1.875h2.25v6h1.875zm10.313 7.313v-6.75H12v6.504q0 .41-.293.703t-.703.293H8.309q.152.809.556 1.5.405.691.985 1.19.58.497 1.318.779.738.281 1.582.281.926 0 1.746-.352.82-.351 1.436-.966.615-.616.966-1.43.352-.815.352-1.752zm5.25-1.547v-5.203h-3.75v6.855q.305.305.691.452.387.146.809.146.469 0 .879-.176.41-.175.715-.48.304-.305.48-.715t.176-.879Z"/></symbol>
+  <symbol id="logo-discord" viewBox="0 0 24 24"><path fill="#5865F2" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
+  <symbol id="logo-n8n" viewBox="0 0 24 24"><path fill="#EA4B71" d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></symbol>
+  <symbol id="logo-zapier" viewBox="0 0 24 24"><path fill="#FF4F00" d="M4.157 0A4.151 4.151 0 0 0 0 4.161v15.678A4.151 4.151 0 0 0 4.157 24h15.682A4.152 4.152 0 0 0 24 19.839V4.161A4.152 4.152 0 0 0 19.839 0H4.157Zm10.61 8.761h.03a.577.577 0 0 1 .23.038.585.585 0 0 1 .201.124.63.63 0 0 1 .162.431.612.612 0 0 1-.162.435.58.58 0 0 1-.201.128.58.58 0 0 1-.23.042.529.529 0 0 1-.235-.042.585.585 0 0 1-.332-.328.559.559 0 0 1-.038-.235.613.613 0 0 1 .17-.431.59.59 0 0 1 .405-.162Zm2.853 1.572c.03.004.061.004.095.004.325-.011.646.064.937.219.238.144.431.355.552.609.128.279.189.582.185.888v.193a2 2 0 0 1 0 .219h-2.498c.003.227.075.45.204.642a.78.78 0 0 0 .646.265.714.714 0 0 0 .484-.136.642.642 0 0 0 .23-.318l.915.257a1.398 1.398 0 0 1-.28.537c-.14.159-.321.284-.521.355a2.234 2.234 0 0 1-.836.136 1.923 1.923 0 0 1-1.001-.245 1.618 1.618 0 0 1-.665-.703 2.221 2.221 0 0 1-.227-1.036 1.95 1.95 0 0 1 .48-1.398 1.9 1.9 0 0 1 1.3-.488Zm-9.607.023c.162.004.325.026.48.079.207.065.4.174.563.314.26.302.393.692.366 1.088v2.276H8.53l-.109-.711h-.065c-.064.163-.155.31-.272.439a1.122 1.122 0 0 1-.374.264 1.023 1.023 0 0 1-.453.083 1.334 1.334 0 0 1-.866-.264.965.965 0 0 1-.329-.801.993.993 0 0 1 .076-.431 1.02 1.02 0 0 1 .242-.363 1.478 1.478 0 0 1 1.043-.303h.952v-.181a.696.696 0 0 0-.136-.454.553.553 0 0 0-.438-.154.695.695 0 0 0-.378.086.48.48 0 0 0-.193.254l-.99-.144a1.26 1.26 0 0 1 .257-.563c.14-.174.321-.302.533-.378.261-.091.54-.136.82-.129.053-.003.106-.007.163-.007Zm4.384.007c.174 0 .347.038.506.114.182.083.34.211.458.374.257.423.377.911.351 1.406a2.53 2.53 0 0 1-.355 1.448 1.148 1.148 0 0 1-1.009.517c-.204 0-.401-.045-.582-.136a1.052 1.052 0 0 1-.48-.457 1.298 1.298 0 0 1-.114-.234h-.045l.004 1.784h-1.059v-4.713h.904l.117.805h.057c.068-.208.177-.401.328-.56a1.129 1.129 0 0 1 .843-.344h.076v-.004Zm7.559.084h.903l.113.805h.053a1.37 1.37 0 0 1 .235-.484.813.813 0 0 1 .313-.242.82.82 0 0 1 .39-.076h.234v1.051h-.401a.662.662 0 0 0-.313.008.623.623 0 0 0-.272.155.663.663 0 0 0-.174.26.683.683 0 0 0-.027.314v1.875h-1.054v-3.666Zm-17.515.003h3.262v.896L3.73 13.104l.034.113h1.973l.042.9H2.4v-.9l1.931-1.754-.045-.117H2.441v-.896Zm11.815 0h1.055v3.659h-1.055V10.45Zm3.443.684.019.016a.69.69 0 0 0-.351.045.756.756 0 0 0-.287.204c-.11.155-.174.336-.189.522h1.545c-.034-.526-.257-.787-.74-.787h.003Zm-5.718.163c-.026 0-.057 0-.083.004a.78.78 0 0 0-.31.053.746.746 0 0 0-.257.189 1.016 1.016 0 0 0-.204.695v.064c-.015.257.057.507.204.711a.634.634 0 0 0 .253.196.638.638 0 0 0 .314.061.644.644 0 0 0 .578-.265c.14-.223.204-.48.189-.74a1.216 1.216 0 0 0-.181-.711.677.677 0 0 0-.503-.257Zm-4.509 1.266a.464.464 0 0 0-.268.102.373.373 0 0 0-.114.276c0 .053.008.106.027.155a.375.375 0 0 0 .087.132.576.576 0 0 0 .397.11v.004a.863.863 0 0 0 .563-.182.573.573 0 0 0 .211-.457v-.14h-.903Z"/></symbol>
+</svg>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -78,6 +86,7 @@
       <a class="btn btn-ghost btn-lg" href="mailto:contact@kayroslab.com">Book a conversation</a>
     </div>
     <p class="micro"><b>Faster clarity. Fewer blind spots.</b> Human arbitration on every sensitive verdict — local or cloud.</p>
+    <div class="hero-logos" aria-label="Available integrations"><span class="hl-label">Plugs into your tools</span><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Salesforce</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Microsoft Teams</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</a><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-n8n"/></svg>n8n</a><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-zapier"/></svg>Zapier</a></div>
   </div>
   <div class="wrap">
     <div class="shot reveal">
@@ -159,7 +168,7 @@
         <div>
           <h3>Where your teams already work</h3>
           <p>Run missions from the console or from Salesforce, and bring the same governed deliberation into Slack, Microsoft Teams and Discord.</p>
-          <div class="btags"><span class="btag">Console</span><span class="btag">Salesforce</span><span class="btag">Slack</span><span class="btag">Teams</span><span class="btag">Discord</span></div>
+          <div class="btags"><span class="btag">Console</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Salesforce</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Teams</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</span></div>
         </div>
       </div>
     </div>
@@ -311,85 +320,182 @@
 
 <!-- SALES ORACLE -->
 <!-- INTEGRATIONS — Salesforce connector (integrations/n8n, integrations/zapier, public API v1) -->
-<section id="integrations" class="soft" aria-labelledby="integrations-title">
+<section id="integrations" class="sf-section" aria-labelledby="integrations-title">
   <div class="wrap">
     <div class="sec-head center">
-      <span class="eyebrow">Salesforce connector</span>
-      <h2 id="integrations-title">The committee reviews your deals, right inside Salesforce.</h2>
-      <p>When an opportunity reaches the <b>Proposal</b> stage, a KayrosLab collective of agents — finance, legal, engineering… — reviews it. Its verdict lands back on the opportunity, with risks, conditions and a link to the full dossier.</p>
+      <span class="eyebrow eyebrow-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Salesforce connector</span>
+      <h2 id="integrations-title">Every strategic deal goes before your committee — <span class="grad-sf">without leaving Salesforce.</span></h2>
+      <p>As soon as an opportunity reaches the <b>Proposal</b> stage, a collective of finance, legal and engineering agents reviews it. Your reps find the verdict, risks and conditions in the opportunity's activity — and the final call stays human.</p>
     </div>
-    <div class="how">
-      <div class="hcard reveal"><div class="hn">01</div><h3>The deal moves</h3><p>An opportunity reaches the trigger stage — <i>Proposal/Price Quote</i> by default, configurable.</p></div>
-      <div class="hcard reveal"><div class="hn">02</div><h3>A mission starts</h3><p>n8n or Zapier launches a mission on the chosen collective through the KayrosLab public API — one review per opportunity and stage.</p></div>
-      <div class="hcard reveal"><div class="hn">03</div><h3>“Verdict” task</h3><p>GO, CONDITIONAL GO or NO GO, support score, risks, conditions, per-agent opinions and a <b>Full dossier</b> link.</p></div>
-      <div class="hcard reveal"><div class="hn">04</div><h3>“Decision” task</h3><p>When a human arbitrates in the console, a second task records that decision on the opportunity.</p></div>
-    </div>
-    <div class="split">
-      <div class="panel reveal">
-        <span class="plabel">Setup</span>
-        <h3>A proof of concept in 15 minutes</h3>
-        <p>Two ready-to-import workflows, with no change to your Salesforce data model.</p>
-        <ul class="flist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>n8n (recommended).</b> Self-hosted on the KayrosLab server, data kept in Europe. A two-Zap <b>Zapier</b> variant for teams already on it.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Three analysis profiles.</b> <i>demo</i> (simulated verdict in seconds, labelled “[Démo]”), <i>fast</i> (1–2 min) or <i>deep</i> (~12 min) for sensitive deals.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Optional custom fields.</b> KayrosLab Verdict, Status, Score and Dossier on the opportunity, for list views, reports and validation rules.</span></li>
+
+    <div class="sf-grid">
+      <figure class="sf-mock reveal" aria-labelledby="sf-mock-cap">
+        <div class="sf-top">
+          <svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>
+          <div><span class="sf-obj">Opportunity</span><span class="sf-name">Example Inc. — Platform renewal</span></div>
+        </div>
+        <ol class="sf-path" aria-label="Opportunity stages">
+          <li class="done">Qualification</li><li class="done">Needs Analysis</li><li class="now" aria-current="step">Proposal/Price Quote</li><li>Negotiation</li><li>Closed</li>
+        </ol>
+        <div class="sf-activity">
+          <span class="sf-label">Activity</span>
+          <div class="sf-task">
+            <div class="sf-task-h"><span class="sf-dot cond" aria-hidden="true"></span><b>KayrosLab — Verdict: CONDITIONAL GO</b></div>
+            <div class="sf-score"><span>Support score</span><span class="bar" aria-hidden="true"><i style="width:83%"></i></span><b>83/100</b></div>
+            <ul class="sf-agents">
+              <li><span class="vt go">GO</span>CFO</li>
+              <li><span class="vt cond">CONDITIONAL GO</span>Legal</li>
+              <li><span class="vt go">GO</span>CTO</li>
+            </ul>
+            <p class="sf-line"><b>Risk:</b> no reversibility clause.</p>
+            <p class="sf-line"><b>Condition:</b> approve the security annex before signing.</p>
+            <span class="sf-link">Full dossier and arbitration →</span>
+          </div>
+          <div class="sf-task sf-task--done">
+            <div class="sf-task-h"><span class="sf-dot go" aria-hidden="true"></span><b>KayrosLab — Decision: CONDITIONAL GO</b></div>
+            <p class="sf-line">Arbitrated by a human in the console, conditions attached.</p>
+          </div>
+        </div>
+        <figcaption id="sf-mock-cap" class="mock-cap">Illustration — fictitious data. Real tasks carry the verdict, summary, risks, conditions, each agent's opinion and the dossier link.</figcaption>
+      </figure>
+
+      <div class="sf-copy reveal">
+        <h3>The right call, at the moment the deal is decided.</h3>
+        <ul class="benefits">
+          <li><span class="bi bi-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><div><b>Zero data entry for reps.</b> Moving the stage triggers the review; the verdict lands as a task on the opportunity.</div></li>
+          <li><span class="bi bi-teal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V7l8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Risks before signature.</b> Finance, legal and engineering challenge the deal and list their conditions.</div></li>
+          <li><span class="bi bi-violet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>Humans stay in charge.</b> Arbitration in the console comes back as a “Decision” task — the full trail stays in Salesforce.</div></li>
+          <li><span class="bi bi-amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-6"/></svg></span><div><b>Manage by verdict.</b> Optional Verdict, Status, Score and Dossier fields feed your list views, reports and validation rules.</div></li>
         </ul>
-        <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-accent" href="/console/">Create an API key</a>
-          <a class="btn btn-ghost" href="https://github.com/Geoking2104/KayrosLab/blob/main/integrations/n8n/README.md">PoC guide</a>
+        <div class="via"><span>Connected through</span>
+          <span class="logo-chip"><svg class="logo-ico" aria-hidden="true"><use href="#logo-n8n"/></svg>n8n</span>
+          <span class="logo-chip"><svg class="logo-ico" aria-hidden="true"><use href="#logo-zapier"/></svg>Zapier</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-sf" href="/console/">Start the PoC</a>
+          <a class="btn btn-ghost" href="https://github.com/Geoking2104/KayrosLab/blob/main/integrations/n8n/README.md">Step-by-step guide</a>
         </div>
       </div>
-      <div class="panel reveal">
+    </div>
+
+    <ol class="flow" aria-label="Opportunity journey">
+      <li class="fstep reveal"><span class="fico fico-sf" aria-hidden="true"><svg class="logo-ico"><use href="#logo-salesforce"/></svg></span><span class="fn">01</span><h3>The deal moves</h3><p>It reaches the trigger stage — <i>Proposal/Price Quote</i> by default, configurable.</p></li>
+      <li class="fstep reveal"><span class="fico fico-auto" aria-hidden="true"><svg class="logo-ico"><use href="#logo-n8n"/></svg><svg class="logo-ico"><use href="#logo-zapier"/></svg></span><span class="fn">02</span><h3>The review starts</h3><p>n8n or Zapier launches a mission on your collective — one review per opportunity and stage.</p></li>
+      <li class="fstep reveal"><span class="fico fico-kl" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><span class="fn">03</span><h3>The verdict lands</h3><p>“Verdict” task: GO, CONDITIONAL GO or NO GO, score, risks, conditions and a dossier link.</p></li>
+      <li class="fstep reveal"><span class="fico fico-human" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><span class="fn">04</span><h3>You decide</h3><p>Your arbitration in the console comes back as a “Decision” task on the opportunity.</p></li>
+    </ol>
+
+    <div class="split">
+      <div class="panel panel-tint-sf reveal">
+        <span class="plabel">Setup</span>
+        <h3>Your first verdict in 15 minutes</h3>
+        <p>Two ready-to-import workflows, with no change to your Salesforce data model.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>n8n, recommended.</b> Self-hosted on the KayrosLab server, data kept in Europe. Already on Zapier? The variant fits in 2 Zaps.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Demo, fast or deep.</b> <i>demo</i> returns a simulated verdict in seconds (labelled “[Démo]”), <i>fast</i> in 1–2 min, <i>deep</i> in ~12 min for sensitive deals.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>A sandbox is enough.</b> A Salesforce Developer Edition or sandbox is ideal for a first run.</span></li>
+        </ul>
+      </div>
+      <div class="panel panel-tint-ink reveal">
         <span class="plabel">Security</span>
-        <h3>Built for a production CRM</h3>
-        <p>Every exchange between Salesforce and KayrosLab is authenticated, signed and safe to retry without duplicates.</p>
+        <h3>Ready for your production CRM</h3>
+        <p>Every exchange is authenticated, signed, and safe to retry without duplicates.</p>
         <ul class="flist">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>One API key per tool.</b> Scoped to the rights it needs and to selected collectives, revocable in the console; KayrosLab only stores its fingerprint.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>HMAC-SHA256 signed webhooks.</b> Wrong signature, tampered body or a timestamp older than 5 minutes: rejected.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Guaranteed delivery.</b> If Salesforce is unavailable, KayrosLab retries at 1 min, 5 min, 30 min, 2 h and 6 h — history in the console.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>No verdict lost.</b> Salesforce down? KayrosLab retries at 1 min, 5 min, 30 min, 2 h and 6 h — history in the console.</span></li>
         </ul>
-        <div style="margin-top:22px"><a class="btn btn-primary" href="https://api.kayroslab.com/docs">API documentation</a></div>
+        <div class="cta-row"><a class="btn btn-primary" href="https://api.kayroslab.com/docs">API documentation</a></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- INTEGRATED CHATS — Slack · Microsoft Teams · Discord (core/connectors*.mjs, SPECIFICATIONS_CONNECTEURS_CHAT.md) -->
-<section id="chats" aria-labelledby="chats-title">
+<section id="chats" class="chat-section" aria-labelledby="chats-title">
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Integrated chats</span>
-      <h2 id="chats-title">Slack, Microsoft Teams and Discord become decision rooms.</h2>
-      <p>Ask where the team already talks: the collective answers in the channel, and decision makers arbitrate without opening the app. The decision stays as traced and binding as in the console.</p>
+      <h2 id="chats-title">Arbitrate where your teams <span class="grad-chat">already talk.</span></h2>
+      <p>A question asked in Slack, Teams or Discord goes to the collective, which answers in the channel. Your decision makers approve, request a revision or reject in one click — with the same traceability as in the console.</p>
+      <div class="logo-row" aria-label="Supported platforms">
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</span>
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Microsoft Teams</span>
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</span>
+      </div>
     </div>
-    <div class="roles">
-      <div class="role reveal"><span class="rbadge">Slack</span><h3>Mention the app</h3><p>A mention or a direct message sends the question to the collective, which answers in the channel. Approve · Revise · Reject buttons in Block Kit, with the reason entered in a modal.</p></div>
-      <div class="role reveal"><span class="rbadge">Microsoft Teams</span><h3>Talk to the bot</h3><p>The bot receives your messages through Azure Bot Service and replies in the conversation. Arbitration on Adaptive Cards, reason in a task module.</p></div>
-      <div class="role reveal"><span class="rbadge">Discord</span><h3>Type /kayros</h3><p>The <b>/kayros</b> command followed by your question asks the collective from any channel of the server. Arbitration through buttons and a reason form.</p></div>
+
+    <div class="chat-mocks">
+      <figure class="cm cm-slack reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg><span># deal-committee</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">CL</span><div><b>Claire</b><p><span class="mention">@KayrosLab</span> should we renew Example Inc. on the proposed terms?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab <span class="app">APP</span></b>
+            <div class="gate gate-slack">
+              <p class="gate-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg>Arbitration required — Example Inc. renewal</p>
+              <dl><div><dt>Required role</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 reviewers)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">✓ Approve</span><span class="gb">↻ Revise</span><span class="gb no">✕ Reject</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Slack</b> — mention the app or message it directly. Block Kit buttons, reason captured in a modal.</figcaption>
+      </figure>
+
+      <figure class="cm cm-teams reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg><span>Deal review</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">TM</span><div><b>Thomas</b><p>What does the collective think of the Example Inc. renewal?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab</b>
+            <div class="gate gate-teams">
+              <p class="gate-t">Arbitration required — Example Inc. renewal</p>
+              <dl><div><dt>Required role</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 reviewers)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">Approve</span><span class="gb">Revise</span><span class="gb no">Reject</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Microsoft Teams</b> — talk to the bot in the conversation. Adaptive Card, reason in a task module.</figcaption>
+      </figure>
+
+      <figure class="cm cm-discord reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg><span># decisions</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">LN</span><div><b>Lea</b><p><span class="slash">/kayros</span> question: do we commit to the Example Inc. offer?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab <span class="app">BOT</span></b>
+            <div class="gate gate-discord">
+              <p class="gate-t">Arbitration required — Example Inc. renewal</p>
+              <dl><div><dt>Required role</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 reviewers)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">Approve</span><span class="gb">Revise</span><span class="gb no">Reject</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Discord</b> — type <code>/kayros</code> and your question, in any channel of the server.</figcaption>
+      </figure>
     </div>
-    <div class="gov">
+    <p class="mock-cap center">Illustrations — fictitious conversations. Rejecting or revising always opens a reason form.</p>
+
+    <div class="gov gov-color">
       <div class="gcard reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
-        <h4>One-click connection</h4>
+        <div class="ico ico-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
+        <h4>Connected in one click</h4>
         <p>In Settings: Slack OAuth, Teams admin consent, Discord bot invite. Secrets encrypted server-side, connectivity test included.</p>
       </div>
       <div class="gcard reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <h4>Roles come from KayrosLab</h4>
-        <p>No decision without an account linked through a single-use token. Being a chat admin grants no arbitration right: a veto cannot be usurped.</p>
+        <div class="ico ico-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <h4>A veto that can't be usurped</h4>
+        <p>Rights come from the KayrosLab account linked through a single-use token — being a chat admin grants no arbitration right.</p>
       </div>
       <div class="gcard reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h4>Verified requests</h4>
-        <p>HMAC signature for Slack, Bot Framework JWT for Teams, Ed25519 signature for Discord — with replay protection beyond 5 minutes.</p>
+        <div class="ico ico-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Every request verified</h4>
+        <p>HMAC signature for Slack, Bot Framework JWT for Teams, Ed25519 signature for Discord, replay protection beyond 5 minutes.</p>
       </div>
       <div class="gcard reveal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
-        <h4>Mandatory reason, applied once</h4>
+        <div class="ico ico-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <h4>One decision, one trace</h4>
         <p>Rejecting or revising requires a reason, timestamped and kept in the audit trail. A double click on “Approve” never arbitrates twice.</p>
       </div>
     </div>
-    <p class="tech-link" style="margin-top:28px">Chat speeds things up, it does not replace the console: everything stays doable there. <a href="/console/">Connect a channel →</a></p>
+    <div class="chat-cta reveal">
+      <p><b>Chat speeds things up; the console stays the reference.</b> Everything remains doable in the console, and an unavailable channel never blocks the process.</p>
+      <a class="btn btn-accent" href="/console/">Connect a channel</a>
+    </div>
   </div>
 </section>
 
@@ -643,8 +749,8 @@
 
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-  } else { document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')}); }
+    document.querySelectorAll('.reveal,.flow').forEach(function(el){io.observe(el)});
+  } else { document.querySelectorAll('.reveal,.flow').forEach(function(el){el.classList.add('in')}); }
 </script>
 
 </body>
