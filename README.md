@@ -732,6 +732,7 @@ CI workflow: `.github/workflows/core-tests.yml`.
 | Understand the engine modules and API | [core/README.md](core/README.md) · [engine architecture](docs/engine-architecture.md) |
 | Run local, quant-aware inference | [core/OLLAMA.md](core/OLLAMA.md) |
 | Operate in production | [RUNBOOK.md](RUNBOOK.md) |
+| Review the console architecture and Salesforce / Zapier / n8n integration plan | [docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md](docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md) |
 | Compose swarms, hybrid agents and Sales Oracle cases | [docs/specialized-agent-swarms.md](docs/specialized-agent-swarms.md) |
 | Connect Codex, Claude Code or Cursor | [Developer Portal MCP](docs/developer-portal-mcp.md) |
 | Read the functional and technical specs | [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) · [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) |
