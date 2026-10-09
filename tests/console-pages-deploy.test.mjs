@@ -19,7 +19,7 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
-test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () => {
+test('GitHub Pages publie toujours /salon/, sans lien depuis l\'accueil', async () => {
   const [workflow, english, french, foyer] = await Promise.all([
     read('.github/workflows/deploy-positionning-pages.yml'),
     read('index.html'),
@@ -29,12 +29,12 @@ test('GitHub Pages publie Salon sous /salon/ depuis le pied de page', async () =
   assert.match(workflow, /backend\/web\/public\/salon\/\*\*/);
   assert.match(workflow, /mkdir -p deploy\/salon/);
   assert.match(workflow, /backend\/web\/public\/salon\/\. deploy\/salon\//);
-  assert.match(english, /href="\/salon\/">Salon</);
-  assert.match(french, /href="\/salon\/">Salon</);
+  assert.doesNotMatch(english, /href="\/salon\/|href="#salon"/);
+  assert.doesNotMatch(french, /href="\/salon\/|href="#salon"/);
   assert.match(foyer, /Un cercle est une table/);
   assert.match(foyer, /@voltaire/);
-  assert.match(english, /class="salon-charter"/);
-  assert.match(french, /class="salon-charter"/);
+  assert.doesNotMatch(english, /class="salon-charter"/);
+  assert.doesNotMatch(french, /class="salon-charter"/);
   assert.match(english, /id="personify"/);
   assert.match(french, /CrystalKnows/);
 });

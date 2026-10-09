@@ -278,68 +278,6 @@ footer{padding:66px 0 40px;border-top:1px solid var(--line)}
   .nav-right .signin{display:none}
 }
 
-/* ── Salon charter embed (Hallmark: paper / Fraunces / oxblood — same tokens as /salon) ── */
-.salon-charter{
-  --salon-paper:oklch(96.4% 0.016 85);
-  --salon-paper-2:oklch(93.5% 0.022 80);
-  --salon-ink:oklch(22% 0.028 48);
-  --salon-ink-2:oklch(40% 0.02 50);
-  --salon-muted:oklch(48% 0.018 55);
-  --salon-rule:oklch(84% 0.02 80);
-  --salon-accent:oklch(42% 0.12 25);
-  --salon-display:"Fraunces","Iowan Old Style","Palatino Linotype",Palatino,serif;
-  --salon-body:"Source Sans 3","Segoe UI",sans-serif;
-  background:var(--salon-paper);
-  color:var(--salon-ink);
-  border-top:1px solid var(--salon-rule);
-  border-bottom:1px solid var(--salon-rule);
-  font-family:var(--salon-body);
-  padding:88px 0;
-}
-.salon-charter .salon-stage{
-  display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:end;
-  max-width:var(--maxw);margin:0 auto;padding:0 24px;
-}
-.salon-charter .kicker{
-  margin:0;color:var(--salon-accent);letter-spacing:.16em;text-transform:uppercase;
-  font-size:.72rem;font-weight:600;
-}
-.salon-charter h2{
-  font-family:var(--salon-display);font-weight:550;letter-spacing:-.03em;
-  font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.12;margin:.35rem 0 .75rem;
-  max-width:16ch;color:var(--salon-ink);text-wrap:balance;
-}
-.salon-charter .lead{
-  margin:0;max-width:48ch;color:var(--salon-ink-2);line-height:1.55;font-size:1.05rem;
-}
-.salon-charter .salon-aside{
-  border-left:1px solid var(--salon-rule);padding:8px 0 8px 28px;
-  display:grid;gap:14px;
-}
-.salon-charter .salon-aside p{
-  margin:0;font-family:var(--salon-display);font-size:1.2rem;font-weight:500;
-  line-height:1.35;color:var(--salon-ink);max-width:28ch;
-}
-.salon-charter .salon-aside .muted{font-family:var(--salon-body);font-size:.9rem;color:var(--salon-muted);font-weight:400}
-.salon-charter .btn-salon{
-  display:inline-flex;align-items:center;justify-content:center;min-height:44px;
-  padding:10px 18px;margin-top:22px;border-radius:0;border:1px solid var(--salon-accent);
-  background:var(--salon-accent);color:oklch(97% 0.01 85);font-weight:600;font-size:14.5px;
-  font-family:var(--salon-body);letter-spacing:.01em;transition:background .15s,color .15s,border-color .15s;
-}
-.salon-charter .btn-salon:hover{background:transparent;color:var(--salon-accent)}
-.salon-charter .btn-salon-ghost{
-  display:inline-flex;align-items:center;min-height:44px;margin-left:14px;
-  color:var(--salon-ink-2);font-weight:600;font-size:14.5px;text-decoration:underline;
-  text-underline-offset:.2em;
-}
-.salon-charter .btn-salon-ghost:hover{color:var(--salon-accent)}
-@media (max-width:820px){
-  .salon-charter{padding:64px 0}
-  .salon-charter .salon-stage{grid-template-columns:1fr;gap:28px}
-  .salon-charter .salon-aside{border-left:0;border-top:1px solid var(--salon-rule);padding:22px 0 0}
-}
-
 /* ── Personified agents — role packs vs CrystalKnows ── */
 .personify-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
 .ppath{border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px 26px;background:#fff;box-shadow:var(--shadow-sm);display:grid;gap:12px;align-content:start}
