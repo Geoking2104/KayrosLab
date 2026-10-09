@@ -9,6 +9,8 @@ module.exports = {
     exec_mode: 'fork',            // etat en memoire (gates, denylist) : pas de cluster
     autorestart: true,
     max_memory_restart: '400M',
+    // Laisse le temps de rendre les missions en cours à la file Postgres (SIGINT).
+    kill_timeout: 5000,
     out_file: '/var/log/pm2/kayros-api.out.log',
     error_file: '/var/log/pm2/kayros-api.err.log',
     merge_logs: true,

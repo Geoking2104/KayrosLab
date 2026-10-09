@@ -28,6 +28,17 @@ export const NVIDIA_DEFAULT_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 /** Délai par défaut d'un appel NVIDIA (ms). Surcharger avec NVIDIA_TIMEOUT_MS. */
 export const NVIDIA_DEFAULT_TIMEOUT_MS = 180000;
 export const MISTRAL_DEFAULT_MODEL = 'mistral-small-latest';
+/**
+ * Modèle du profil `fast` (missions d'intégration, 1–2 min). Choisi le
+ * 2026-10-09 par sondage du catalogue NVIDIA hébergé : MoE 30B (3B actifs),
+ * ≈ 0,6–1 s pour une réponse courte, quand deepseek-v4.1-flash et
+ * glm-5.3-flash dépassaient 30 s et que les Llama/Mistral 7–70B renvoyaient
+ * 404/410. Raisonnement désactivé (`enable_thinking: false`) : sinon le
+ * modèle « réfléchit » à voix haute avant le JSON. Surcharger avec
+ * NVIDIA_FAST_MODEL (et NVIDIA_FAST_EXTRA_BODY).
+ */
+export const NVIDIA_FAST_DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b';
+export const NVIDIA_FAST_DEFAULT_EXTRA_BODY = Object.freeze({ chat_template_kwargs: { enable_thinking: false } });
 export const KNOWN_LLM_PROVIDERS = Object.freeze(['nvidia', 'mistral', 'anthropic', 'ollama', 'mock']);
 const KEYED = { nvidia: 'NVIDIA_API_KEY', mistral: 'MISTRAL_API_KEY', anthropic: 'ANTHROPIC_API_KEY' };
 
@@ -112,6 +123,19 @@ export function resolveLlmConfig(env = {}) {
     timeoutMs: num(env.NVIDIA_TIMEOUT_MS, NVIDIA_DEFAULT_TIMEOUT_MS, { min: 0, integer: true }),
     extraBody: parseJsonObject(env.NVIDIA_EXTRA_BODY, 'NVIDIA_EXTRA_BODY', warnings),
   };
+  // Profil `fast` : même clé et même URL NVIDIA, modèle rapide et réponses
+  // plus courtes. Sans clé NVIDIA, `fast` retombe sur la configuration du
+  // serveur (profil effectif `deep`, signalé dans la mission).
+  const fastModelRaw = String(env.NVIDIA_FAST_MODEL || '').trim();
+  const fastModel = fastModelRaw || NVIDIA_FAST_DEFAULT_MODEL;
+  const fastExtra = parseJsonObject(env.NVIDIA_FAST_EXTRA_BODY, 'NVIDIA_FAST_EXTRA_BODY', warnings);
+  const fast = {
+    available: has.nvidia,
+    model: fastModel,
+    maxTokens: num(env.NVIDIA_FAST_MAX_TOKENS, 1500, { min: 64, max: 32768, integer: true }),
+    timeoutMs: num(env.NVIDIA_FAST_TIMEOUT_MS, 60000, { min: 0, integer: true }),
+    extraBody: fastExtra || (fastModel === NVIDIA_FAST_DEFAULT_MODEL ? { ...NVIDIA_FAST_DEFAULT_EXTRA_BODY } : null),
+  };
 
   return {
     provider,
@@ -122,6 +146,7 @@ export function resolveLlmConfig(env = {}) {
     configured: has,
     models,
     nvidia,
+    fast,
     maxConcurrency: num(env.LLM_MAX_CONCURRENCY, 2, { min: 1, max: 32, integer: true }),
     retry: {
       maxRetries: num(env.LLM_MAX_RETRIES, 2, { min: 0, max: 10, integer: true }),
@@ -146,5 +171,6 @@ export function describeLlmConfig(cfg) {
     baseUrl: cfg.provider === 'nvidia' ? cfg.nvidia.baseUrl : undefined,
     maxConcurrency: cfg.maxConcurrency,
     maxRetries: cfg.retry.maxRetries,
+    fastModel: cfg.fast?.available ? cfg.fast.model : null,
   };
 }

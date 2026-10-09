@@ -45,6 +45,8 @@ app.addHook('preHandler', async (req, reply) => {
   if (path.startsWith('/v1/salon/')) return;
   if (/^\/v1\/connectors\/(slack|discord|teams)\/configured\/[0-9a-f-]+$/i.test(path)) return;
   if (path === '/mcp') return;
+  // API publique : authentifiée par clé d'API (routes/public-api.mjs), pas par le secret partagé.
+  if (path.startsWith('/v1/public/')) return;
   if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) return reply.code(401).send({ error: 'non autorise' });
 });
 
@@ -78,6 +80,28 @@ await app.register((await import('./routes/positionning.mjs')).default);
 await app.register((await import('./routes/swarm.mjs')).default);
 await app.register((await import('./routes/sales-oracle.mjs')).default);
 await app.register((await import('./routes/mcp.mjs')).default);
+await app.register((await import('./routes/public-api.mjs')).default);
+await app.register((await import('./routes/console-integrations.mjs')).default);
+
+// Arrêt propre (pm2 reload envoie SIGINT) : les missions en cours retournent
+// dans la file Postgres et reprennent aussitôt dans le nouveau processus.
+let stopping = false;
+async function shutdown(signal) {
+  if (stopping) return;
+  stopping = true;
+  app.log.info(`${signal} reçu : arrêt propre`);
+  const timer = setTimeout(() => process.exit(0), 4000);
+  timer.unref?.();
+  try {
+    ctx.webhookDispatcher?.stop();
+    const released = await ctx.missionWorker?.stop({ release: true });
+    if (released) app.log.info(`${released} mission(s) rendue(s) à la file`);
+    await app.close();
+  } catch (error) { app.log.error(error); }
+  process.exit(0);
+}
+process.once('SIGINT', () => shutdown('SIGINT'));
+process.once('SIGTERM', () => shutdown('SIGTERM'));
 
 const PORT = Number(ctx.PORT || 8787);
 app.listen({ port: PORT, host: '0.0.0.0' })

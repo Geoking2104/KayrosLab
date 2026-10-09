@@ -14,9 +14,12 @@ import swarmRoute from '../routes/swarm.mjs';
 import salesOracleRoute from '../routes/sales-oracle.mjs';
 import contactRoute from '../routes/contact.mjs';
 import mcpRoute from '../routes/mcp.mjs';
+import publicApiRoute from '../routes/public-api.mjs';
+import consoleIntegrationsRoute from '../routes/console-integrations.mjs';
+import consoleRoute from '../routes/console.mjs';
 import buildContext from '../lib/context.mjs';
 
-export async function buildTestApp(env = {}) {
+export async function buildTestApp(env = {}, options = {}) {
   const defaults = {
     KAYROS_AUTH_SECRET: 'test-aes-256-secret',
     KAYROS_SECRET: '',            // desactive le preHandler x-kayros-secret
@@ -28,6 +31,8 @@ export async function buildTestApp(env = {}) {
     LINKEDIN_ACCESS_TOKEN: '', CRYSTALKNOWS_API_TOKEN: '',
     KAYROS_S3_BUCKET: '', KAYROS_S3_ACCESS_KEY_ID: '', KAYROS_S3_SECRET_ACCESS_KEY: '',
     KAYROS_MCP_CLIENTS_JSON: '', KAYROS_MCP_ALLOWED_ORIGINS: '', KAYROS_MCP_RATE_LIMIT: '60',
+    // Aucun worker de fond dans les tests : livraisons et missions pilotées à la main.
+    KAYROS_INTEGRATION_WORKERS: 'off',
     DATABASE_URL: '', GOOGLE_API_KEY: '', GITHUB_TOKEN: '', GITLAB_TOKEN: '',
     TEAMS_APP_ID: '8f3b2a1c-0000-1111-2222-333344445555',
     TEAMS_BOT_PASSWORD: 'test-bot-secret', TEAMS_WEBHOOK_URL: 'https://webhook.test/teams',
@@ -60,6 +65,7 @@ export async function buildTestApp(env = {}) {
       if (p.startsWith('/v1/auth/sso')) return;
       if (p.startsWith('/v1/salon/')) return;
       if (p === '/mcp') return;
+      if (p.startsWith('/v1/public/')) return;
       if (req.headers['x-kayros-secret'] !== ctx.KAYROS_SECRET) {
         return reply.code(401).send({ error: 'non autorise' });
       }
@@ -77,6 +83,9 @@ export async function buildTestApp(env = {}) {
   await app.register(salesOracleRoute);
   await app.register(contactRoute);
   await app.register(mcpRoute);
+  await app.register(publicApiRoute);
+  await app.register(consoleIntegrationsRoute);
+  if (options.console) await app.register(consoleRoute);
   return { app, ctx };
 }
 

@@ -48,6 +48,9 @@ export async function createPgPool(env = process.env, { pg: injectedPg = null } 
  * @param {{ fs?: object, url?: URL, logger?: object }} [deps]
  * @returns {Promise<boolean>} true si le schema a ete applique
  */
+/** Clé du verrou consultatif qui sérialise l'application du schéma. */
+export const SCHEMA_LOCK_KEY = 4_204_242_001;
+
 export async function applySchema(pool, { fs = null, url = null, logger = console } = {}) {
   if (!pool) return false;
   try {
@@ -55,7 +58,10 @@ export async function applySchema(pool, { fs = null, url = null, logger = consol
     const target = url || new URL('./sql/schema.sql', import.meta.url);
     const sql = await nodeFs.readFile(target, 'utf8');
     if (!sql.trim()) return false;
-    await pool.query(sql);
+    // Verrou consultatif le temps de la requête (transaction implicite) : deux
+    // processus qui démarrent ensemble (tests en parallèle, reload pm2) se
+    // disputeraient sinon les `create … if not exists` (violation sur pg_type).
+    await pool.query(`select pg_advisory_xact_lock(${SCHEMA_LOCK_KEY});\n${sql}`);
     logger?.info?.('[kayroslab] schema Postgres applique');
     return true;
   } catch (e) {

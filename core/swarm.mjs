@@ -751,6 +751,8 @@ export class SwarmService {
       tenant_id: tenantKey(tenantId), question: String(question), context: String(context || ''),
       configuration: config, analyses, consensus, llm,
       status: 'pending_human_arbitration', human_decision: null,
+      // Auteur du run : base du contrôle de propriétaire sur /v1/swarm/runs/* (F4).
+      created_by: by || null,
       audit,
       created_at: now(), updated_at: now(),
     };
