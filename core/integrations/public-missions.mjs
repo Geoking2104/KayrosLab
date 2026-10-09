@@ -238,7 +238,8 @@ export class MissionEventPublisher {
     if (!mission) return [];
     const settings = await this.settings.get(mission.tenant_id);
     const targets = [];
-    if (mission.callback_url) targets.push(mission.callback_url);
+    const wanted = Array.isArray(mission.callback_events) && mission.callback_events.length ? mission.callback_events : null;
+    if (mission.callback_url && (!wanted || wanted.includes(type))) targets.push(mission.callback_url);
     if (settings.webhook_url && settings.enabled !== false && (settings.events || []).includes(type)) targets.push(settings.webhook_url);
     if (!targets.length) return [];
     const event = {

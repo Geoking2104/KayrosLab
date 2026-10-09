@@ -53,6 +53,23 @@ describe('API publique et intégrations', () => {
     assert.equal(viaHeader.statusCode, 200);
   });
 
+  it('callback_events : seuls les événements demandés partent vers callback_url', async () => {
+    const { token } = await createKey();
+    const collective = await createCollective();
+    const bad = await launch(token, { collective_id: collective, question: 'Signer ?', profile: 'demo', callback_url: 'https://n8n.example.com/webhook-waiting/1', callback_events: ['mission.unknown'] }, 'ce-bad');
+    assert.equal(bad.statusCode, 400, bad.body);
+    const res = await launch(token, { collective_id: collective, question: 'Signer ?', profile: 'demo', callback_url: 'https://n8n.example.com/webhook-waiting/2', callback_events: ['mission.completed', 'mission.failed'] }, 'ce-ok');
+    assert.equal(res.statusCode, 202, res.body);
+    const threadId = new URL(res.json().dossier_url).hash.split('thread=')[1];
+    await ctx.hybridGateway.waitForThread(decodeURIComponent(threadId));
+    await ctx.webhookDispatcher.deliverDue();
+    assert.deepEqual(sent.map((item) => item.headers['x-kayros-event']), ['mission.completed']);
+    const arbitrated = await app.inject({ method: 'POST', url: `/v1/console/threads/${threadId}/arbitrate`, headers: auth(comex), payload: { action: 'accept_consensus' } });
+    assert.equal(arbitrated.statusCode, 200, arbitrated.body);
+    await ctx.webhookDispatcher.deliverDue();
+    assert.deepEqual(sent.map((item) => item.headers['x-kayros-event']), ['mission.completed'], 'arbitrage non envoyé à l’URL de reprise');
+  });
+
   it('refuse clé absente, invalide ou révoquée, et un scope manquant', async () => {
     assert.equal((await app.inject({ method: 'GET', url: '/v1/public/me' })).statusCode, 401);
     assert.equal((await app.inject({ method: 'GET', url: '/v1/public/me', headers: auth('kl_live_abcdefghij_' + 'x'.repeat(32)) })).statusCode, 401);

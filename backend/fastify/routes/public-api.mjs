@@ -15,7 +15,7 @@ import { requireApiKey, apiKeyRateLimitKey } from '../lib/public-api-auth.mjs';
 import {
   makeMissionId, missionView, parseExternalRef, requestFingerprint,
 } from '../../../core/integrations/public-missions.mjs';
-import { validateCallbackUrl } from '../../../core/integrations/webhooks.mjs';
+import { validateCallbackUrl, WEBHOOK_EVENTS } from '../../../core/integrations/webhooks.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
 
@@ -33,6 +33,9 @@ export const missionCreateSchema = z.object({
   profile: z.enum(EXECUTION_PROFILES).optional(),
   external_ref: externalRefSchema.optional(),
   callback_url: z.string().max(2000).optional(),
+  // Événements envoyés à callback_url (défaut : tous). n8n « Wait » : seulement
+  // completed + failed, car son URL de reprise ne sert qu'une fois.
+  callback_events: z.array(z.enum(WEBHOOK_EVENTS)).min(1).max(WEBHOOK_EVENTS.length).optional(),
   metadata: z.record(z.string(), z.union([z.string().max(1000), z.number(), z.boolean(), z.null()])).optional(),
 });
 
@@ -143,7 +146,9 @@ export default async function publicApiRoutes(app) {
       service_account: principal.serviceAccount, idempotency_key: idempotencyKey, request_sha256: fingerprint,
       thread_id: makeThreadId(), room_id: room.room_id, question: input.question,
       profile: options.requested, effective_profile: options.effective_profile,
-      external_ref: externalRef, callback_url: callbackUrl, metadata: input.metadata || {},
+      external_ref: externalRef, callback_url: callbackUrl,
+      callback_events: callbackUrl && input.callback_events ? [...new Set(input.callback_events)] : null,
+      metadata: input.metadata || {},
       created_at: createdAt, updated_at: createdAt,
     };
     try { await publicMissions.insert(mission); }
