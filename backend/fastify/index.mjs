@@ -82,6 +82,7 @@ await app.register((await import('./routes/sales-oracle.mjs')).default);
 await app.register((await import('./routes/mcp.mjs')).default);
 await app.register((await import('./routes/public-api.mjs')).default);
 await app.register((await import('./routes/console-integrations.mjs')).default);
+await app.register((await import('./routes/public-docs.mjs')).default);
 
 // Arrêt propre (pm2 reload envoie SIGINT) : les missions en cours retournent
 // dans la file Postgres et reprennent aussitôt dans le nouveau processus.

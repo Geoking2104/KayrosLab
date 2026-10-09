@@ -25,6 +25,7 @@ on:
       - 'core/auth.mjs'
       - 'core/adapters/timesfm-forecast.mjs'
       - 'core/integrations/**'
+      - 'docs/openapi/**'
       - '.github/workflows/backend-tests.yml'
   pull_request:
     branches: [main]
@@ -44,6 +45,7 @@ on:
       - 'core/hybrid-agent-gateway.mjs'
       - 'core/collaboration-store.mjs'
       - 'core/integrations/**'
+      - 'docs/openapi/**'
       - 'core/sql/**'
       - '.github/workflows/backend-tests.yml'
 
