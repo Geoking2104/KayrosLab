@@ -33,6 +33,7 @@
       <a href="#how">How it works</a>
       <a href="#personify">Agents</a>
       <a href="#oracle">Sales Oracle</a>
+      <a href="#integrations">Integrations</a>
       <a href="#salon">Salon</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -52,6 +53,7 @@
     <a href="#how">How it works</a>
     <a href="#personify">Agents</a>
     <a href="#oracle">Sales Oracle</a>
+    <a href="#integrations">Integrations</a>
     <a href="#salon">Salon</a>
     <a href="#faq">FAQ</a>
     <a href="/console/">Try the console</a>
@@ -156,8 +158,8 @@
         <div class="blabel">Channel layer</div>
         <div>
           <h3>Where your teams already work</h3>
-          <p>Run missions from the console, or bring the same governed deliberation into Slack, Microsoft Teams and Discord.</p>
-          <div class="btags"><span class="btag">Console</span><span class="btag">Slack</span><span class="btag">Teams</span><span class="btag">Discord</span></div>
+          <p>Run missions from the console or from Salesforce, and bring the same governed deliberation into Slack, Microsoft Teams and Discord.</p>
+          <div class="btags"><span class="btag">Console</span><span class="btag">Salesforce</span><span class="btag">Slack</span><span class="btag">Teams</span><span class="btag">Discord</span></div>
         </div>
       </div>
     </div>
@@ -308,6 +310,89 @@
 </section>
 
 <!-- SALES ORACLE -->
+<!-- INTEGRATIONS — Salesforce connector (integrations/n8n, integrations/zapier, public API v1) -->
+<section id="integrations" class="soft" aria-labelledby="integrations-title">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Salesforce connector</span>
+      <h2 id="integrations-title">The committee reviews your deals, right inside Salesforce.</h2>
+      <p>When an opportunity reaches the <b>Proposal</b> stage, a KayrosLab collective of agents — finance, legal, engineering… — reviews it. Its verdict lands back on the opportunity, with risks, conditions and a link to the full dossier.</p>
+    </div>
+    <div class="how">
+      <div class="hcard reveal"><div class="hn">01</div><h3>The deal moves</h3><p>An opportunity reaches the trigger stage — <i>Proposal/Price Quote</i> by default, configurable.</p></div>
+      <div class="hcard reveal"><div class="hn">02</div><h3>A mission starts</h3><p>n8n or Zapier launches a mission on the chosen collective through the KayrosLab public API — one review per opportunity and stage.</p></div>
+      <div class="hcard reveal"><div class="hn">03</div><h3>“Verdict” task</h3><p>GO, CONDITIONAL GO or NO GO, support score, risks, conditions, per-agent opinions and a <b>Full dossier</b> link.</p></div>
+      <div class="hcard reveal"><div class="hn">04</div><h3>“Decision” task</h3><p>When a human arbitrates in the console, a second task records that decision on the opportunity.</p></div>
+    </div>
+    <div class="split">
+      <div class="panel reveal">
+        <span class="plabel">Setup</span>
+        <h3>A proof of concept in 15 minutes</h3>
+        <p>Two ready-to-import workflows, with no change to your Salesforce data model.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>n8n (recommended).</b> Self-hosted on the KayrosLab server, data kept in Europe. A two-Zap <b>Zapier</b> variant for teams already on it.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Three analysis profiles.</b> <i>demo</i> (simulated verdict in seconds, labelled “[Démo]”), <i>fast</i> (1–2 min) or <i>deep</i> (~12 min) for sensitive deals.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Optional custom fields.</b> KayrosLab Verdict, Status, Score and Dossier on the opportunity, for list views, reports and validation rules.</span></li>
+        </ul>
+        <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-accent" href="/console/">Create an API key</a>
+          <a class="btn btn-ghost" href="https://github.com/Geoking2104/KayrosLab/blob/main/integrations/n8n/README.md">PoC guide</a>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <span class="plabel">Security</span>
+        <h3>Built for a production CRM</h3>
+        <p>Every exchange between Salesforce and KayrosLab is authenticated, signed and safe to retry without duplicates.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>One API key per tool.</b> Scoped to the rights it needs and to selected collectives, revocable in the console; KayrosLab only stores its fingerprint.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>HMAC-SHA256 signed webhooks.</b> Wrong signature, tampered body or a timestamp older than 5 minutes: rejected.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Guaranteed delivery.</b> If Salesforce is unavailable, KayrosLab retries at 1 min, 5 min, 30 min, 2 h and 6 h — history in the console.</span></li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-primary" href="https://api.kayroslab.com/docs">API documentation</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATED CHATS — Slack · Microsoft Teams · Discord (core/connectors*.mjs, SPECIFICATIONS_CONNECTEURS_CHAT.md) -->
+<section id="chats" aria-labelledby="chats-title">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Integrated chats</span>
+      <h2 id="chats-title">Slack, Microsoft Teams and Discord become decision rooms.</h2>
+      <p>Ask where the team already talks: the collective answers in the channel, and decision makers arbitrate without opening the app. The decision stays as traced and binding as in the console.</p>
+    </div>
+    <div class="roles">
+      <div class="role reveal"><span class="rbadge">Slack</span><h3>Mention the app</h3><p>A mention or a direct message sends the question to the collective, which answers in the channel. Approve · Revise · Reject buttons in Block Kit, with the reason entered in a modal.</p></div>
+      <div class="role reveal"><span class="rbadge">Microsoft Teams</span><h3>Talk to the bot</h3><p>The bot receives your messages through Azure Bot Service and replies in the conversation. Arbitration on Adaptive Cards, reason in a task module.</p></div>
+      <div class="role reveal"><span class="rbadge">Discord</span><h3>Type /kayros</h3><p>The <b>/kayros</b> command followed by your question asks the collective from any channel of the server. Arbitration through buttons and a reason form.</p></div>
+    </div>
+    <div class="gov">
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
+        <h4>One-click connection</h4>
+        <p>In Settings: Slack OAuth, Teams admin consent, Discord bot invite. Secrets encrypted server-side, connectivity test included.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <h4>Roles come from KayrosLab</h4>
+        <p>No decision without an account linked through a single-use token. Being a chat admin grants no arbitration right: a veto cannot be usurped.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Verified requests</h4>
+        <p>HMAC signature for Slack, Bot Framework JWT for Teams, Ed25519 signature for Discord — with replay protection beyond 5 minutes.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <h4>Mandatory reason, applied once</h4>
+        <p>Rejecting or revising requires a reason, timestamped and kept in the audit trail. A double click on “Approve” never arbitrates twice.</p>
+      </div>
+    </div>
+    <p class="tech-link" style="margin-top:28px">Chat speeds things up, it does not replace the console: everything stays doable there. <a href="/console/">Connect a channel →</a></p>
+  </div>
+</section>
+
 <section id="oracle">
   <div class="wrap">
     <div class="feat">
@@ -465,7 +550,7 @@
       </details>
       <details>
         <summary>Where do teams run missions?</summary>
-        <div class="ans">In the console, and optionally in Slack, Microsoft Teams or Discord as decision rooms. The dossier remains the source of truth.</div>
+        <div class="ans">In the console, and optionally in Slack, Microsoft Teams or Discord as decision rooms — or automatically from Salesforce, when an opportunity reaches the chosen stage (through n8n or Zapier). The dossier remains the source of truth.</div>
       </details>
       <details>
         <summary>What are personified agents?</summary>
@@ -511,6 +596,8 @@
         <a href="/salon/">Salon</a>
         <a href="#personify">Personified agents</a>
         <a href="#oracle">Sales Oracle</a>
+        <a href="#integrations">Salesforce</a>
+        <a href="#chats">Slack · Teams · Discord</a>
         <a href="#how">How it works</a>
         <a href="/kayroslab-complete-with-ai-agents.html">Live demo</a>
       </div>
