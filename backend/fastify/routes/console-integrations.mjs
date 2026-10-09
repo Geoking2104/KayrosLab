@@ -118,10 +118,19 @@ export default async function consoleIntegrationsRoutes(app) {
     if (!url) return reply.code(400).send({ error: 'aucune URL : renseignez l’URL du webhook (ou passez `url`)' });
     try { url = validateCallbackUrl(url, urlOptions()); } catch (error) { return reply.code(400).send({ error: error.message }); }
     await ctx().integrationSettings.ensureSecret(me.tenantId, { by: me.email || me.sub });
+    const { webhookDispatcher } = ctx();
     const [delivery] = await ctx().missionEvents.ping(me.tenantId, url);
-    await ctx().webhookDispatcher.deliverDue().catch(() => 0);
-    const after = (await ctx().webhookDispatcher.outbox.list(me.tenantId, { limit: 50 })).find((item) => item.delivery_id === delivery?.delivery_id) || delivery;
-    return { delivery: after ? deliveryView(after) : null };
+    await webhookDispatcher.deliverDue().catch(() => 0);
+    // Le worker de fond a pu prendre la livraison avant nous : attendre son
+    // premier essai (borné par le délai d'envoi) pour afficher un vrai résultat.
+    const find = async () => (await webhookDispatcher.outbox.list(me.tenantId, { limit: 50 })).find((item) => item.delivery_id === delivery?.delivery_id);
+    const deadline = Date.now() + (webhookDispatcher.timeoutMs || 10000) + 1000;
+    let after = await find();
+    while (after && after.attempts === 0 && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      after = await find();
+    }
+    return { delivery: deliveryView(after || delivery) };
   });
 
   app.get('/v1/console/integrations/deliveries', async (req, reply) => {
