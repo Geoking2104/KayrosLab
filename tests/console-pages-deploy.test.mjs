@@ -107,3 +107,19 @@ test('EF-26 / EF-28 : la console annonce le rôle requis avant toute saisie et p
   assert.match(app, /personality_simulation_enabled: personality/);
   assert.match(app, /personality_simulation_enabled: form\.personality_simulation_enabled/);
 });
+
+test('intégrations : page Intégrations, profil de mission (fast par défaut) et liens dossier #activity?thread=', async () => {
+  const [app, api] = await Promise.all([read('frontend/console-app/src/App.jsx'), read('frontend/console-app/src/api.js')]);
+  assert.match(app, /\['integrations', 'Intégrations'\]/);
+  assert.match(app, /function IntegrationsPage\(/);
+  assert.match(app, /useState\('fast'\)/);
+  assert.match(app, /\['demo', 'Démo'/);
+  // La page se lit avant `?` : `#activity?thread=…` et `#settings?connected=…` restent routables.
+  assert.match(app, /split\('\?'\)\[0\]/);
+  assert.match(app, /hashParams\(\)\.get\('thread'\)/);
+  for (const path of ['/v1/console/integrations', '/v1/console/integrations/keys', '/v1/console/integrations/webhook', '/v1/console/integrations/webhook/secret', '/v1/console/integrations/webhook/test']) {
+    assert.ok(api.includes(`'${path}'`) || api.includes(`\`${path}/`), `api.js : ${path}`);
+  }
+  // Un DELETE sans corps ne doit pas annoncer du JSON (Fastify le refuse).
+  assert.match(api, /options\.body !== undefined \? \{ 'content-type': 'application\/json' \}/);
+});

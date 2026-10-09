@@ -16,7 +16,8 @@ async function request(path, options = {}) {
   const response = await fetch(apiUrl(path), {
     ...options,
     headers: {
-      'content-type': 'application/json',
+      // Pas de content-type sans corps : Fastify refuse un DELETE JSON vide.
+      ...(options.body !== undefined ? { 'content-type': 'application/json' } : {}),
       ...(token ? { authorization: `Bearer ${token}` } : {}),
       ...(options.headers || {}),
     },
@@ -58,11 +59,20 @@ export const api = {
   session: (sessionId) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}`),
   createSession: (session) => request('/v1/console/sessions', { method: 'POST', body: JSON.stringify(session) }),
   updateSessionCollective: (sessionId, body) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/collective`, { method: 'PATCH', body: JSON.stringify(body) }),
-  runMission: (sessionId, question, context) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, {
-    method: 'POST', body: JSON.stringify(context ? { question, context } : { question }),
+  // `profile` : demo (réponses préenregistrées), fast (défaut, 1–2 min) ou deep (~12 min).
+  runMission: (sessionId, question, context, profile) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, {
+    method: 'POST', body: JSON.stringify({ question, ...(context ? { context } : {}), ...(profile ? { profile } : {}) }),
   }),
   activity: (sessionId = '') => request(`/v1/console/activity${sessionId ? `?session_id=${encodeURIComponent(sessionId)}` : ''}`),
   thread: (threadId) => request(`/v1/console/threads/${encodeURIComponent(threadId)}`),
   replyThread: (threadId, text) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/messages`, { method: 'POST', body: JSON.stringify({ text }) }),
+  // Intégrations (n8n, Zapier, Salesforce) : clés d'API par tenant et webhooks signés.
+  integrations: () => request('/v1/console/integrations'),
+  createApiKey: (input) => request('/v1/console/integrations/keys', { method: 'POST', body: JSON.stringify(input) }),
+  revokeApiKey: (keyId) => request(`/v1/console/integrations/keys/${encodeURIComponent(keyId)}`, { method: 'DELETE' }),
+  updateWebhook: (input) => request('/v1/console/integrations/webhook', { method: 'PUT', body: JSON.stringify(input) }),
+  revealWebhookSecret: () => request('/v1/console/integrations/webhook/secret', { method: 'POST', body: '{}' }),
+  testWebhook: (url) => request('/v1/console/integrations/webhook/test', { method: 'POST', body: JSON.stringify(url ? { url } : {}) }),
+  webhookDeliveries: () => request('/v1/console/integrations/deliveries'),
   arbitrateThread: (threadId, decision) => request(`/v1/console/threads/${encodeURIComponent(threadId)}/arbitrate`, { method: 'POST', body: JSON.stringify(decision) }),
 };

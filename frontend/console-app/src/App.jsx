@@ -6,7 +6,17 @@ import { api, getToken, setToken } from './api.js';
 // L'expérience littéraire vit dans une application séparée, hors de cette surface.
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['settings', 'Réglages'],
+  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['integrations', 'Intégrations'], ['settings', 'Réglages'],
+];
+// Le hash porte la page puis d'éventuels paramètres : `#activity?thread=…` (lien
+// « dossier » des intégrations), `#settings?connected=slack` (retour OAuth).
+function pageFromHash(hash = location.hash) { return String(hash || '').replace(/^#/, '').split('?')[0] || 'overview'; }
+function hashParams(hash = location.hash) { return new URLSearchParams(String(hash || '').split('?')[1] || ''); }
+// Profils d'exécution d'une mission (cf. core/integrations/profiles.mjs).
+const MISSION_PROFILES = [
+  ['fast', 'Rapide', 'verdict réel en 1 à 2 min (modèle rapide)'],
+  ['demo', 'Démo', 'réponses préenregistrées en moins de 5 s, aucun appel LLM'],
+  ['deep', 'Approfondi', 'modèle de raisonnement, ~12 min'],
 ];
 const votingThresholds = [['majority', 'Majorité'], ['unanimous', 'Unanimité'], ['veto_power_csuite', 'Veto comité exécutif']];
 const votingLabel = (value) => votingThresholds.find(([id]) => id === value)?.[1] || 'Majorité';
@@ -72,7 +82,7 @@ function ssoRedirectUri() {
 }
 
 function Mark({ name }) {
-  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', settings: '⚙' };
+  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', integrations: '⇄', settings: '⚙' };
   return <span className="nav-mark" aria-hidden="true">{labels[name]}</span>;
 }
 
@@ -274,6 +284,7 @@ function Overview({ data, refresh, openSession, onThread }) {
     setSelectedSession((current) => (current && data.sessions.some((session) => session.session_id === current) ? current : (data.sessions[0]?.session_id || '')));
   }, [data.sessions]);
   const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  const [profile, setProfile] = useState('fast'); const [runNote, setRunNote] = useState('');
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
   const [soCases, setSoCases] = useState([]);
@@ -315,7 +326,9 @@ function Overview({ data, refresh, openSession, onThread }) {
         ].join('\n').slice(0, SALES_ORACLE_CONTEXT_LIMIT);
       }
       // 202 : le fil est créé au statut `running` ; DecisionThread suit la progression.
-      const result = await api.runMission(session.session_id, question, context);
+      const result = await api.runMission(session.session_id, question, context, profile);
+      const eta = result.eta_seconds ? ` · durée estimée ${result.eta_seconds < 60 ? `${result.eta_seconds} s` : `${Math.round(result.eta_seconds / 60)} min`}` : '';
+      setRunNote(`Profil ${result.profile || profile}${eta}${result.note ? ` — ${result.note}` : ''}`);
       setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
@@ -327,7 +340,10 @@ function Overview({ data, refresh, openSession, onThread }) {
       <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
       {session && <AgentChips agents={session.collective.agents} />}
       {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour lancer une mission.</p>}
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label><button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
+      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label>
+        <label>Profil d’exécution<select value={profile} onChange={(event) => setProfile(event.target.value)}>{MISSION_PROFILES.map(([id, label, hint]) => <option key={id} value={id}>{label} — {hint}</option>)}</select></label>
+        {profile === 'demo' && <p className="muted so-note">Mode démo : verdict simulé, clairement étiqueté « [Démo] ». Idéal pour montrer le circuit, pas pour décider.</p>}
+        <button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
         <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
@@ -336,6 +352,7 @@ function Overview({ data, refresh, openSession, onThread }) {
         {soManage && <SalesOracleManager ready={soReady} clientRef={soClientRef} currentCase={soCase} documents={soDocs} onCases={setSoCases} onDocs={setSoDocs} onStatus={setSoStatus} />}
         {soStatus && <p className={`form-error ${soStatus.tone === 'error' ? '' : 'is-empty'}`} role="status">{soStatus.text || '\u00a0'}</p>}
       </section>
+      {runNote && state === 'success' && <p className="muted so-note" role="status">{runNote}</p>}
       {error && <p className="inline-error">{error}</p>}
     </section><section><header><div><h2>Exécutions récentes</h2><p>Reprendre une mission avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
       <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)}><strong>{item.question}</strong><small>{item.status.replaceAll('_', ' ')} · {item.current_run_id}</small></button>)}{!data.threads.length && <p className="muted">Aucune mission lancée.</p>}</div>
@@ -654,8 +671,112 @@ function ConnectorCard({ connector, secure, refresh }) {
   </article>;
 }
 
+const SCOPE_LABELS = {
+  'missions:write': 'lancer des missions', 'missions:read': 'lire les verdicts',
+  'collectives:read': 'lister les collectifs', 'webhooks:manage': 'gérer les webhooks (réservé)',
+};
+const EVENT_LABELS = { 'mission.completed': 'mission terminée', 'mission.failed': 'mission en échec', 'mission.arbitrated': 'arbitrage humain' };
+const DELIVERY_LABELS = { delivered: 'livré', pending: 'nouvel essai prévu', failed: 'abandonné', sending: 'envoi…' };
+function formatDate(value) { return value ? new Date(value).toLocaleString('fr-FR') : '—'; }
+function copyText(text) { navigator.clipboard?.writeText(text).catch(() => {}); }
+
+/** Clé d'API : affichée une seule fois, à copier dans n8n / Zapier. */
+function SecretReveal({ label, value, onDismiss, warning }) {
+  return <div className="security-warning integration-secret" role="status"><strong>{label}</strong>{warning && <p>{warning}</p>}
+    <div className="connector-actions"><input readOnly value={value} onFocus={(event) => event.target.select()} aria-label={label} /><button type="button" className="button secondary" onClick={() => copyText(value)}>Copier</button>{onDismiss && <button type="button" className="text-button" onClick={onDismiss}>J’ai copié, masquer</button>}</div></div>;
+}
+
+function ApiKeysPanel({ info, sessions, reload }) {
+  const [form, setForm] = useState({ name: '', scopes: info.scopes.default, collective_ids: [], expires_in_days: '' });
+  const [created, setCreated] = useState(null); const [state, setState] = useState('idle'); const [error, setError] = useState('');
+  function toggle(list, value) { return list.includes(value) ? list.filter((item) => item !== value) : [...list, value]; }
+  async function create(event) {
+    event.preventDefault(); setState('loading'); setError('');
+    try {
+      const result = await api.createApiKey({ name: form.name.trim(), scopes: form.scopes, collective_ids: form.collective_ids, ...(form.expires_in_days ? { expires_in_days: Number(form.expires_in_days) } : {}) });
+      setCreated(result); setForm({ ...form, name: '' }); setState('success'); await reload();
+    } catch (err) { setState('error'); setError(err.message); }
+  }
+  async function revoke(key) {
+    if (!confirm(`Révoquer la clé « ${key.name} » ? Les workflows qui l’utilisent recevront une erreur 401.`)) return;
+    try { await api.revokeApiKey(key.key_id); await reload(); } catch (err) { setError(err.message); }
+  }
+  return <section className="privacy-panel integration-panel"><h2>Clés d’API</h2>
+    <p className="muted">Une clé par outil (n8n, Zapier…). Elle agit au nom d’un compte de service de votre espace. Seule son empreinte est conservée : la clé complète n’est affichée qu’une fois.</p>
+    {created && <SecretReveal label={`Clé « ${created.key.name} »`} value={created.token} warning={created.warning} onDismiss={() => setCreated(null)} />}
+    <form onSubmit={create} className="integration-form">
+      <label>Nom de la clé<input value={form.name} required maxLength={120} placeholder="n8n — Salesforce" onChange={(event) => setForm({ ...form, name: event.target.value })} /></label>
+      <fieldset><legend>Droits</legend>{info.scopes.available.map((scope) => <label key={scope} className="checkbox"><input type="checkbox" checked={form.scopes.includes(scope)} onChange={() => setForm({ ...form, scopes: toggle(form.scopes, scope) })} />{SCOPE_LABELS[scope] || scope} <code>{scope}</code></label>)}</fieldset>
+      <fieldset><legend>Collectifs autorisés (aucun coché = tous)</legend>{sessions.map((session) => <label key={session.session_id} className="checkbox"><input type="checkbox" checked={form.collective_ids.includes(session.session_id)} onChange={() => setForm({ ...form, collective_ids: toggle(form.collective_ids, session.session_id) })} />{session.name} <code>{session.session_id}</code></label>)}{!sessions.length && <span className="muted">Aucune session : créez d’abord un collectif.</span>}</fieldset>
+      <label>Expiration (jours, facultatif)<input type="number" min="1" max="3650" value={form.expires_in_days} onChange={(event) => setForm({ ...form, expires_in_days: event.target.value })} /></label>
+      <div className="connector-actions"><button className="button primary" disabled={!form.name.trim() || !form.scopes.length || state === 'loading'}>{state === 'loading' ? 'Création…' : 'Créer la clé'}</button></div>
+    </form>
+    <table className="integration-table"><thead><tr><th>Nom</th><th>Clé</th><th>Droits</th><th>Dernier usage</th><th>État</th><th /></tr></thead>
+      <tbody>{info.keys.map((key) => <tr key={key.key_id}><td>{key.name}</td><td><code>{key.display}</code></td><td>{key.scopes.join(', ')}{key.collective_ids.length ? ` · ${key.collective_ids.length} collectif(s)` : ''}</td><td>{formatDate(key.last_used_at)}</td><td>{key.status === 'active' ? 'active' : key.status === 'revoked' ? 'révoquée' : 'expirée'}</td><td>{key.status === 'active' && <button type="button" className="text-button" onClick={() => revoke(key)}>Révoquer</button>}</td></tr>)}
+        {!info.keys.length && <tr><td colSpan={6} className="muted">Aucune clé pour l’instant.</td></tr>}</tbody></table>
+    <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>
+  </section>;
+}
+
+function WebhookPanel({ info, reload }) {
+  const [url, setUrl] = useState(info.webhook.webhook_url || ''); const [events, setEvents] = useState(info.webhook.events || info.events);
+  const [secret, setSecret] = useState(null); const [state, setState] = useState('idle'); const [error, setError] = useState(''); const [test, setTest] = useState(null);
+  async function run(action) {
+    setState('loading'); setError('');
+    try { await action(); setState('success'); await reload(); } catch (err) { setState('error'); setError(err.message); }
+  }
+  const save = (event) => { event.preventDefault(); return run(async () => { const result = await api.updateWebhook({ webhook_url: url.trim() || null, events }); if (result.secret) setSecret({ value: result.secret, warning: result.warning }); }); };
+  const reveal = () => run(async () => { const result = await api.revealWebhookSecret(); setSecret({ value: result.secret }); });
+  const rotate = () => { if (confirm('Générer un nouveau secret ? Les signatures calculées avec l’ancien seront refusées par vos workflows tant qu’ils ne sont pas mis à jour.')) run(async () => { const result = await api.updateWebhook({ rotate_secret: true }); setSecret({ value: result.secret, warning: result.warning }); }); };
+  const ping = () => run(async () => { const result = await api.testWebhook(); setTest(result.delivery); });
+  return <section className="privacy-panel integration-panel"><h2>Webhook sortant</h2>
+    <p className="muted">KayrosLab notifie cette URL (en plus du <code>callback_url</code> propre à chaque mission) quand une mission se termine, échoue ou est arbitrée. Chaque appel est signé : <code>X-Kayros-Signature: t=…,v1=HMAC-SHA256(secret, t + "." + corps)</code>. Nouvelles tentatives à 1 min, 5 min, 30 min, 2 h et 6 h.</p>
+    <form onSubmit={save} className="integration-form">
+      <label>URL du webhook (https)<input type="url" value={url} placeholder="https://n8n.kayroslab.com/webhook/kayros-events" onChange={(event) => setUrl(event.target.value)} /></label>
+      <fieldset><legend>Événements</legend>{info.events.map((item) => <label key={item} className="checkbox"><input type="checkbox" checked={events.includes(item)} onChange={() => setEvents(events.includes(item) ? events.filter((e) => e !== item) : [...events, item])} />{EVENT_LABELS[item] || item} <code>{item}</code></label>)}</fieldset>
+      <div className="connector-actions"><button className="button primary" disabled={state === 'loading' || !events.length}>Enregistrer</button><button type="button" className="button secondary" disabled={state === 'loading'} onClick={ping}>Envoyer un test</button></div>
+    </form>
+    <p>Secret de signature : <strong>{info.webhook.has_secret ? <code>{info.webhook.secret_hint}</code> : 'pas encore créé'}</strong></p>
+    <div className="connector-actions"><button type="button" className="button secondary" disabled={state === 'loading'} onClick={reveal}>{info.webhook.has_secret ? 'Révéler le secret' : 'Créer le secret'}</button>{info.webhook.has_secret && <button type="button" className="text-button" disabled={state === 'loading'} onClick={rotate}>Faire tourner le secret</button>}</div>
+    {secret && <SecretReveal label="Secret de signature (à coller dans n8n / Zapier)" value={secret.value} warning={secret.warning} onDismiss={() => setSecret(null)} />}
+    {test && <p className={test.status === 'delivered' ? 'auth-success' : 'inline-error'} role="status">Test {DELIVERY_LABELS[test.status] || test.status}{test.last_status ? ` · HTTP ${test.last_status}` : ''}{test.last_error ? ` · ${test.last_error}` : ''}</p>}
+    <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p>
+    <h3>Dernières livraisons</h3>
+    <table className="integration-table"><thead><tr><th>Date</th><th>Événement</th><th>Cible</th><th>État</th><th>Essais</th><th>Dernière réponse</th></tr></thead>
+      <tbody>{info.deliveries.map((item) => <tr key={item.delivery_id}><td>{formatDate(item.created_at)}</td><td>{EVENT_LABELS[item.event] || item.event}</td><td><code>{item.target}</code></td><td>{DELIVERY_LABELS[item.status] || item.status}{item.next_attempt_at ? ` (${formatDate(item.next_attempt_at)})` : ''}</td><td>{item.attempts}</td><td>{item.last_status ? `HTTP ${item.last_status}` : ''}{item.last_error ? ` ${item.last_error}` : ''}</td></tr>)}
+        {!info.deliveries.length && <tr><td colSpan={6} className="muted">Aucune livraison.</td></tr>}</tbody></table>
+  </section>;
+}
+
+/** Intégrations : n8n / Zapier → Salesforce, via l'API publique /v1/public. */
+function IntegrationsPage({ data }) {
+  const [info, setInfo] = useState(null); const [error, setError] = useState('');
+  const allowed = canManage(data.user);
+  async function reload() { try { setInfo(await api.integrations()); setError(''); } catch (err) { setError(err.message); } }
+  useEffect(() => { if (allowed) reload(); }, [allowed]);
+  const header = <header className="page-header"><div><p className="context-line">n8n · Zapier · Salesforce</p><h1>Intégrations</h1><p>Déclenchez une mission depuis votre CRM et recevez le verdict du collectif dans l’opportunité.</p></div></header>;
+  if (!allowed) return <section className="page">{header}<p className="muted">{MANAGER_ONLY} : demandez à un membre du comité exécutif de créer une clé d’API.</p></section>;
+  if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
+  const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
+  return <section className="page">{header}
+    <section className="privacy-panel integration-panel"><h2>PoC Salesforce en 15 minutes</h2>
+      <ol className="integration-steps">
+        <li>Créez une clé d’API ci-dessous (nom « n8n — Salesforce »).</li>
+        <li>Révélez le secret de signature du webhook.</li>
+        <li>Importez le workflow n8n fourni, collez la clé et le secret, connectez Salesforce.</li>
+        <li>Passez une opportunité à l’étape « Proposal » : une tâche avec le verdict apparaît sur l’opportunité.</li>
+      </ol>
+      <div className="connector-actions"><a className="button primary" href={info.api.guide_url} target="_blank" rel="noreferrer">Guide pas à pas</a><a className="button secondary" href={info.api.docs_url} target="_blank" rel="noreferrer">Documentation de l’API</a><a className="text-button" href={info.api.openapi_url} target="_blank" rel="noreferrer">Spécification OpenAPI</a></div>
+      <p className="muted so-note">URL de l’API : <code>{info.api.base_url}/v1/public</code> · Profil par défaut : <strong>{profileLine}</strong> · Démo (&lt; 5 s, simulée) · Approfondi ({info.profiles.deep_model || 'modèle serveur'}).</p>
+    </section>
+    <ApiKeysPanel info={info} sessions={data.sessions} reload={reload} />
+    <WebhookPanel key={`${info.webhook.webhook_url}|${info.webhook.has_secret}`} info={info} reload={reload} />
+    {error && <p className="inline-error">{error}</p>}
+  </section>;
+}
+
 function SettingsPage({ data, refresh }) {
-  const params = new URLSearchParams(String(location.hash).split('?')[1] || '');
+  const params = hashParams();
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
   return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p></div></header>
@@ -749,19 +870,27 @@ function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases,
 }
 
 function Console() {
-  const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => location.hash.slice(1) || 'overview');
+  const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => pageFromHash());
   const [creatingSession, setCreatingSession] = useState(false); const [selectedThread, setSelectedThread] = useState(null);
   async function refresh() { try { setData(await api.overview()); setError(''); } catch (err) { setError(err.message); if (err.status === 401) { setToken(''); location.reload(); } } }
-  useEffect(() => { refresh(); const change = () => setPage(location.hash.slice(1) || 'overview'); addEventListener('hashchange', change); const timer = setInterval(refresh, 20000); return () => { removeEventListener('hashchange', change); clearInterval(timer); }; }, []);
+  // `#activity?thread=<id>` : lien « dossier » renvoyé par l'API publique (Salesforce, n8n…).
+  async function openThreadFromHash() {
+    const threadId = pageFromHash() === 'activity' ? hashParams().get('thread') : '';
+    if (!threadId) return;
+    try { const result = await api.thread(threadId); setSelectedThread(result.thread); } catch (err) { setError(`Dossier ${threadId} introuvable : ${err.message}`); }
+  }
+  useEffect(() => { refresh(); openThreadFromHash(); const change = () => { setPage(pageFromHash()); openThreadFromHash(); }; addEventListener('hashchange', change); const timer = setInterval(refresh, 20000); return () => { removeEventListener('hashchange', change); clearInterval(timer); }; }, []);
   async function openThread(thread) {
-    if (!thread) { setSelectedThread(null); return; }
+    if (!thread) { setSelectedThread(null); if (pageFromHash() === 'activity') history.replaceState(null, '', '#activity'); return; }
     const result = thread.messages ? { thread } : await api.thread(thread.thread_id);
     setSelectedThread(result.thread);
-    location.hash = 'activity';
+    // replaceState ne déclenche pas hashchange : pas de second chargement du fil.
+    history.replaceState(null, '', `#activity?thread=${encodeURIComponent(result.thread.thread_id)}`);
+    setPage('activity');
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/">KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'integrations' && <IntegrationsPage data={data} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
     {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
 }

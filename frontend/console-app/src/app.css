@@ -517,3 +517,15 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-filters { flex-wrap: wrap; gap: var(--space-sm); margin-block: var(--space-md); }
 .so-filters .text-button { color: var(--color-muted); }
 .so-filters .text-button.is-active { color: var(--color-accent); font-weight: 600; text-decoration: underline; }
+
+/* Intégrations (clés d'API, webhook signé) */
+.integration-panel { margin-top: 20px; }
+.integration-form { display: grid; gap: 12px; margin: 12px 0; }
+.integration-form fieldset { border: 1px solid var(--color-rule); border-radius: 8px; padding: 8px 12px; display: grid; gap: 6px; }
+.integration-form .checkbox { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+.integration-form .checkbox input { width: auto; }
+.integration-secret input { flex: 1; min-width: 260px; font-family: ui-monospace, monospace; }
+.integration-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.integration-table th, .integration-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+.integration-steps { margin: 8px 0 12px 18px; display: grid; gap: 4px; }
+@media (max-width: 760px) { .integration-table { display: block; overflow-x: auto; } }
