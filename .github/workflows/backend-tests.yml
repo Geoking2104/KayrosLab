@@ -26,6 +26,8 @@ on:
       - 'core/adapters/timesfm-forecast.mjs'
       - 'core/integrations/**'
       - 'docs/openapi/**'
+      - 'tests/console-pages-deploy.test.mjs'
+      - 'tests/hybrid-agent-gateway.test.mjs'
       - '.github/workflows/backend-tests.yml'
   pull_request:
     branches: [main]
@@ -47,6 +49,8 @@ on:
       - 'core/integrations/**'
       - 'docs/openapi/**'
       - 'core/sql/**'
+      - 'tests/console-pages-deploy.test.mjs'
+      - 'tests/hybrid-agent-gateway.test.mjs'
       - '.github/workflows/backend-tests.yml'
 
 jobs:

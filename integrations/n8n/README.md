@@ -26,6 +26,32 @@ Tâche « Décision » ◀───── [2]                          ◀──
 
 > Installation **manuelle** volontaire la première fois : chaque étape se vérifie à l'œil. Le dépôt est déjà cloné dans `/opt/kayroslab` sur le VPS.
 
+### Installation automatisée (GitHub Actions)
+
+Le workflow **Setup n8n - OVH VPS** (`.github/workflows/setup-n8n-vps.yml`, lancement manuel) déroule les étapes A2 à A4 via `setup-n8n-vps.sh`, avec les secrets de déploiement existants :
+
+| Étape | Effet |
+|-------|-------|
+| `install` | base et rôle Postgres `n8n` (repli SQLite si Postgres est indisponible), `.env` avec une `N8N_ENCRYPTION_KEY` générée, `docker compose up -d`, vhost nginx + htpasswd, certificat **seulement si** le DNS pointe déjà vers 51.210.9.71 |
+| `certbot` | à relancer une fois l'enregistrement DNS en place : active le vhost et obtient le certificat |
+| `status` | conteneur, `healthz`, DNS, vhost, certificat, santé de l'API — aucun secret |
+
+```bash
+gh workflow run setup-n8n-vps.yml -f step=install
+gh workflow run setup-n8n-vps.yml -f step=certbot   # après le DNS
+```
+
+Rejouable sans risque : clé, mots de passe et htpasswd existants sont conservés ; nginx n'est rechargé qu'après `nginx -t`. Aucun secret n'apparaît dans les logs. Sur le VPS (root) :
+
+| Secret | Emplacement |
+|--------|-------------|
+| `N8N_ENCRYPTION_KEY`, mot de passe Postgres `n8n` | `/opt/kayroslab/integrations/n8n/.env` (600, ignoré par git) |
+| Identifiant / mot de passe nginx de l'éditeur | `/root/kayros-n8n/basic-auth.txt` (600) — `sudo cat /root/kayros-n8n/basic-auth.txt` |
+
+> ⚠️ **Sauvegardez `N8N_ENCRYPTION_KEY`** hors du VPS (gestionnaire de mots de passe) : `sudo grep N8N_ENCRYPTION_KEY /opt/kayroslab/integrations/n8n/.env`. Sans elle, les identifiants enregistrés dans n8n (Salesforce, clé KayrosLab, secret HMAC) sont perdus si le VPS doit être reconstruit.
+
+Installation à la main, étape par étape :
+
 ### A1. DNS (à faire en premier : la propagation prend quelques minutes)
 
 Chez le registraire du domaine (IONOS), ajoutez un enregistrement :
