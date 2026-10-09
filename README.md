@@ -15,6 +15,7 @@ profiles, no black box.
 [![Pages](https://img.shields.io/badge/GitHub_Pages-Site-7c3aed?style=flat-square)](https://geoking2104.github.io/KayrosLab/)
 [![Deploy Pages](https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-positionning-pages.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-positionning-pages.yml)
 [![Core tests](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml/badge.svg)](https://github.com/Geoking2104/KayrosLab/actions/workflows/core-tests.yml)
+[![API docs](https://img.shields.io/badge/API-v1_docs-0f766e?style=flat-square)](https://api.kayroslab.com/docs)
 [![License](https://img.shields.io/badge/License-Proprietary-slategray?style=flat-square)](#license)
 
 [Website](https://www.kayroslab.com) · [Console](https://www.kayroslab.com/console/) · [API docs](https://api.kayroslab.com/docs) · [Salon](https://www.kayroslab.com/salon/) · [Live demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) · [Whitepaper](https://www.kayroslab.com/whitepaper-kayroslab.html) · [Contact](mailto:contact@kayroslab.com)
@@ -57,6 +58,120 @@ See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
 
 ---
 
+## Public API v1
+
+**Launch a governed mission from your own tools and get the verdict back — no human session needed.**
+A CRM or an automation tool (Salesforce via n8n or Zapier, Make, your own code) sends a question to a
+console **collective**; the agents deliberate; KayrosLab returns `GO`, `CONDITIONAL_GO` or `NO_GO` with
+risks, conditions, each agent's opinion and a link to the dossier. The mission appears in the console,
+where **a human still arbitrates**.
+
+<p align="center">
+  <a href="https://api.kayroslab.com/docs"><img src="assets/api-docs.webp" alt="api.kayroslab.com/docs — quick start and interactive OpenAPI reference of the KayrosLab public API v1" width="49%"></a>
+  <img src="assets/console-integrations.webp" alt="Console → Intégrations: Salesforce PoC guide, scoped API keys and signed webhook" width="49%">
+</p>
+<p align="center"><sub><em>Left: the live reference at api.kayroslab.com/docs. Right: console → Intégrations (local instance, fictitious data).</em></sub></p>
+
+| | |
+|---|---|
+| **Live reference** | **[api.kayroslab.com/docs](https://api.kayroslab.com/docs)** — quick start + interactive viewer |
+| **OpenAPI 3.1** | [`https://api.kayroslab.com/v1/public/openapi.json`](https://api.kayroslab.com/v1/public/openapi.json) · source: [`docs/openapi/kayroslab-public-v1.json`](docs/openapi/kayroslab-public-v1.json) |
+| **Full guide** | **[docs/API.md](docs/API.md)** — fields, lifecycle, webhooks, errors, limits, route inventory |
+| **Base URL** | `https://api.kayroslab.com` |
+| **Endpoints** | `GET /v1/public/me` (test the key) · `GET /v1/public/collectives` · `POST /v1/public/missions` (`202`, `Idempotency-Key` required) · `GET /v1/public/missions/{id}` · `GET /v1/public/missions?external_ref=` |
+| **Authentication** | API key `kl_live_<prefix>_<secret>` created in **console → Intégrations** (role `comex` / `admin`), shown once, sent as `Authorization: Bearer …` or `X-Api-Key`. Tenant-scoped, revocable, optional expiry, restrictable to some collectives; only a SHA-256 fingerprint is stored |
+| **Scopes** | `missions:write` · `missions:read` · `collectives:read` (default set) · `webhooks:manage` (reserved) |
+| **Modes (profiles)** | `demo` — prepared answers in < 5 s, labelled `[Démo]`, `llm.simulated = true`, for wiring tests only · `fast` *(default)* — real verdict in 1–2 min (NVIDIA Nemotron) · `deep` — server model (Kimi K3), ~12 min |
+| **Webhooks** | `mission.completed` · `mission.failed` · `mission.arbitrated` (+ `ping`) to the mission's `callback_url` and/or the tenant URL. Header `X-Kayros-Signature: t=<unix>,v1=<hex>`, `v1 = HMAC-SHA256(secret, t + "." + raw body)`; reject > 5 min skew, dedupe on `event_id`, answer `2xx` < 10 s. Retries at 1 min, 5 min, 30 min, 2 h, 6 h; `410` stops them |
+| **Limits** | 60 requests/min per key · 200 missions/day per tenant (configurable) |
+
+**Quick start**
+
+```bash
+export KAYROS_API_KEY=kl_live_…            # console → Intégrations → Clés d'API
+
+# 1. Test the key and pick a collective
+curl -s https://api.kayroslab.com/v1/public/me          -H "Authorization: Bearer $KAYROS_API_KEY"
+curl -s https://api.kayroslab.com/v1/public/collectives -H "Authorization: Bearer $KAYROS_API_KEY"
+
+# 2. Launch a mission (demo = simulated answer in seconds; use fast for a real verdict)
+curl -s https://api.kayroslab.com/v1/public/missions \
+  -H "Authorization: Bearer $KAYROS_API_KEY" \
+  -H "Idempotency-Key: sf-0065g00000XyZab-Proposal" \
+  -H "Content-Type: application/json" \
+  -d '{"collective_id":"room_…","question":"Faut-il signer ACME à -15 % ?","profile":"demo",
+       "external_ref":"salesforce:Opportunity:0065g00000XyZab"}'
+
+# 3. Poll until state != running (or receive the signed webhook)
+curl -s https://api.kayroslab.com/v1/public/missions/msn_… -H "Authorization: Bearer $KAYROS_API_KEY"
+```
+
+**Salesforce in 15 minutes.** Two ready-to-import n8n workflows (self-hosted n8n on the KayrosLab VPS)
+turn a stage change to *Proposal/Price Quote* into a mission, verify the signed webhook, then write the
+verdict — and later the human decision — back as tasks on the opportunity:
+[integrations/n8n/README.md](integrations/n8n/README.md) · Zapier variant (2 Zaps):
+[integrations/zapier/README.md](integrations/zapier/README.md) · architecture:
+[docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md](docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md).
+
+---
+
+## Chat connectors: Slack, Microsoft Teams, Discord
+
+The three chat connectors are **native** (implemented in `core/connectors*.mjs`,
+`core/connector-config.mjs`, `core/connector-oauth.mjs`, `backend/fastify/routes/connectors.mjs`); they do
+not go through the Public API or n8n. Status below reflects the code on `main`, not the marketing site.
+
+<p align="center">
+  <img src="assets/console-settings.webp" alt="Console → Réglages: Slack, Discord and Microsoft Teams connector cards with advanced token configuration" width="80%">
+</p>
+<p align="center"><sub><em>Console → Réglages on a local instance without server application credentials: one-click connect is unavailable, manual tokens remain possible.</em></sub></p>
+
+### What actually works today
+
+| Capability | Slack | Microsoft Teams | Discord |
+|---|---|---|---|
+| Ask the collective from the channel | ✅ Implemented — `app_mention` or direct message (Events API) | ✅ Implemented — message to the bot (Bot Framework activity) | ✅ Implemented — slash command `/kayros question:…` (Interactions endpoint) |
+| Answer posted back in the channel | ✅ Verdict + summary, "En attente d'arbitrage humain" | ✅ Reply in the conversation | ✅ Reply to the interaction |
+| Inbound request verification | ✅ HMAC `v0` signature (`X-Slack-Signature`), 5-min timestamp window | ✅ Bot Framework JWT RS256 (JWKS, issuer, audience = App ID, expiry) | ✅ Ed25519 (`X-Signature-Ed25519` + timestamp), 5-min window |
+| Idempotence (retries, double clicks) | ✅ | ✅ | ✅ |
+| Per-tenant connection from the console (encrypted secrets, connectivity test) | ✅ `auth.test` | ✅ Azure AD client-credentials token | ✅ `users/@me` |
+| One-click connect | ⚠️ Implemented (Slack OAuth v2) — **requires server app credentials**, see below | ⚠️ Implemented (Azure AD admin consent) — **requires server app credentials** | ⚠️ Implemented (bot invite) — **requires server app credentials** |
+| Approve / Revise / Reject buttons with mandatory reason | ⚠️ **Partial** — Block Kit + modal, for **governance gates** of the strategic cycle, on the server-wide app only (`/v1/connectors/slack/interactive`) | ⚠️ **Partial** — Adaptive Card + task module, same scope | ⚠️ **Partial** — components + modal, same scope |
+| Arbitrate a **console mission** from the chat | ❌ Not implemented — the chat reply says arbitration is pending; arbitration happens in the console | ❌ Same | ❌ Same |
+| Kayros account ↔ chat user link (rights come from Kayros, not from chat admin status) | ✅ Single-use token (`POST /v1/connectors/link`, `/link/:token`) | ✅ | ✅ |
+| Long missions | ⚠️ The collective runs **synchronously inside the webhook request**; with slow models (Kimi K3) this exceeds Slack's 3-second acknowledgement window — retries are deduplicated, but an immediate ack + deferred post is **proposed** | ⚠️ Same constraint (Bot Framework expects a quick HTTP answer) — **proposed:** proactive reply | ⚠️ Discord requires an interaction response within 3 s — **proposed:** deferred response (type 5) + follow-up |
+
+### Implementation conditions
+
+**Common to the three (required):**
+- `KAYROS_CONNECTOR_ENCRYPTION_KEY` — 32-byte base64 key (AES-256-GCM) on every backend instance; without it the console refuses to store any connector secret.
+- `KAYROS_PUBLIC_API_URL` (e.g. `https://api.kayroslab.com`) — used to build each connection's webhook URL `…/v1/connectors/<platform>/configured/<connection_id>`, shown in console → Réglages.
+- Public HTTPS reachability of `api.kayroslab.com` from the platform; a console **collective** bound to the channel (binding is owned by the conversational application, not by the console).
+- To arbitrate from chat, each user links their chat identity to their Kayros account (single-use token); a chat admin gets no arbitration right by default.
+
+| | Slack | Microsoft Teams | Discord |
+|---|---|---|---|
+| **Create the app** | Slack app (api.slack.com/apps) with a bot user | Azure Bot resource + Microsoft App ID / password (client secret), Teams channel enabled; a Teams app package (manifest) is **not in the repo** — to be created and uploaded by the tenant admin | Discord application with a bot (discord.com/developers); the `/kayros` slash command with a `question` option must be **registered manually** — no registration script in the repo |
+| **Permissions / scopes** | Bot scopes `app_mentions:read`, `chat:write`, `im:history`, `channels:history`, `groups:history` (default of `SLACK_OAUTH_SCOPES`); events `app_mention`, `message.im` | Bot Framework messaging; admin consent on the Azure AD tenant (`TEAMS_OAUTH_TENANT`, default `organizations`) | OAuth scopes `bot applications.commands`, permissions integer `DISCORD_INVITE_PERMISSIONS` (default `534723950656`) |
+| **URLs to configure on the platform** | Event Subscriptions **and** Interactivity Request URL = the connection's webhook URL (per tenant) or `/v1/connectors/slack/events` + `/v1/connectors/slack/interactive` (server-wide app) · OAuth redirect `/v1/connectors/slack/oauth/callback` | Messaging endpoint = connection webhook URL, or `/v1/connectors/teams/interactive` (server-wide) · admin-consent redirect `/v1/connectors/teams/oauth/callback` | Interactions Endpoint URL = connection webhook URL, or `/v1/connectors/discord/interactive` (server-wide) · redirect `/v1/connectors/discord/oauth/callback` |
+| **Secrets — manual mode (console → Réglages → Configuration avancée)** | `bot_token` (`xoxb-…`), `signing_secret`, optional `webhook_url` | `app_id`, `bot_password`, optional `webhook_url` | `application_id`, `bot_token`, `public_key`, optional `webhook_url` |
+| **Server env — one-click mode** | `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, `SLACK_SIGNING_SECRET` (+ `SLACK_OAUTH_SCOPES`) | `TEAMS_APP_ID`, `TEAMS_BOT_PASSWORD` (+ `TEAMS_OAUTH_TENANT`) | `DISCORD_CLIENT_ID` (or `DISCORD_APPLICATION_ID`), `DISCORD_BOT_TOKEN`, `DISCORD_PUBLIC_KEY` (+ `DISCORD_CLIENT_SECRET`, `DISCORD_INVITE_PERMISSIONS`) |
+| **Server env — server-wide app (gate cards & buttons)** | `SLACK_BOT_TOKEN`, `SLACK_SIGNING_SECRET`, `SLACK_GATE_CHANNEL`, optional `SLACK_WEBHOOK_URL` | `TEAMS_APP_ID`, `TEAMS_BOT_PASSWORD`, `TEAMS_GATE_CHANNEL`, optional `TEAMS_WEBHOOK_URL` | `DISCORD_APPLICATION_ID`, `DISCORD_BOT_TOKEN`, `DISCORD_PUBLIC_KEY`, `DISCORD_GATE_CHANNEL`, optional `DISCORD_WEBHOOK_URL` |
+| **Public API scope** | none — chat connectors do not use `kl_live_` keys | none | none |
+
+> **Deployment note.** `.github/workflows/deploy-vps-backend.yml` currently injects `KAYROS_CONNECTOR_ENCRYPTION_KEY`
+> but **none** of the `SLACK_*`, `TEAMS_*` or `DISCORD_*` variables, and it rewrites the server `.env` on every
+> deploy. Until those secrets are added to the workflow, production offers the manual (token) mode only, and
+> one-click connect stays unavailable.
+
+**Alternative without a native app (not provided):** Slack, Teams and Discord can also be reached through n8n or
+Zapier by subscribing to the Public API webhooks (`mission.completed`, `mission.arbitrated`) and posting to the
+channel. No such workflow ships in `integrations/` today. Product thesis and detailed specs:
+[SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) ·
+[SPECIFICATIONS_TECHNIQUES_CONNECTEURS.md](SPECIFICATIONS_TECHNIQUES_CONNECTEURS.md).
+
+---
+
 ## Compose the committee.
 
 *You don't pick one voice. You hear all of them.*
@@ -71,10 +186,10 @@ See [docs/SALON.md](docs/SALON.md). **Do not merge Salon or any workbench over
 *Slack, Teams, Discord or the console — every channel becomes a decision room.*
 
 - **[Agent console](#agent-console) →** Self-service workspace: harness sessions, agent registry (custom, hybrid and impersonator), persona teams, one-click channel connection, decision dossiers and Sales Oracle — no second login.
-- **[Chat connectors](#backend-api) →** Slack (signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519).
+- **[Chat connectors](#chat-connectors-slack-microsoft-teams-discord) →** Slack (HMAC signatures, idempotence, Block Kit), Microsoft Teams (JWT RS256, Adaptive Cards), Discord (Ed25519) — see the real status and set-up conditions.
 - **[Durable dossiers](#agent-console) →** Postgres-backed decision threads you can resume with new evidence, from the same collective.
 - **[Human arbitration](#how-it-works) →** Accept the consensus, pass under conditions, or override a veto — every action recorded.
-- **[Salesforce, n8n & Zapier](#public-api--integrations) →** A stage change on an opportunity launches a mission through the Public API v1; the signed verdict comes back as a task on the opportunity.
+- **[Salesforce, n8n & Zapier](#public-api-v1) →** A stage change on an opportunity launches a mission through the Public API v1; the signed verdict comes back as a task on the opportunity.
 
 ## Keep the numbers honest.
 
@@ -127,6 +242,12 @@ No heavy setup: create your workspace at **[kayroslab.com/console](https://www.k
 self-service — and run your first committee from the browser. Or explore the
 [public governed demo](https://www.kayroslab.com/kayroslab-complete-with-ai-agents.html) without an
 account: semantic map, novelty-ranked exploration, full 8-agent cycle, PDF export.
+
+<p align="center">
+  <a href="https://www.kayroslab.com"><img src="assets/site-home.webp" alt="www.kayroslab.com — Your AI executive committee for high-stakes decisions" width="49%"></a>
+  <a href="https://www.kayroslab.com/console/"><img src="assets/console-login.webp" alt="Console sign-in: Google, enterprise SSO or e-mail and password; self-service discovery workspace" width="49%"></a>
+</p>
+<p align="center"><sub><em>www.kayroslab.com and the console sign-in (Google, enterprise SSO, e-mail) — captured 9 Oct 2026.</em></sub></p>
 
 <details>
 <summary><b>Run the engine and the backend locally</b></summary>
@@ -292,7 +413,7 @@ supplies explicit decision rules; the profile can supply consented communication
 traits, decision triggers and objection patterns. Personality simulation is opt-in per swarm and
 never changes the requirement for human arbitration.
 
-![KayrosLab Hybrid Agent Sales Oracle — governed simulation of an executive committee and buyer veto network](backend/web/public/assets/hybrid-agent-sales-oracle.png)
+<p align="center"><img src="assets/console-impersonator-swarm.webp" alt="A persona panel rehearsing a 12 % price increase: each simulated stakeholder returns CONDITIONAL GO with objections and conditions" width="85%"></p>
 
 ### Rehearse an executive decision
 
@@ -379,7 +500,7 @@ collective answers → humans arbitrate → resume with new evidence.
 | **Impersonators** | **Persona simulation** agents rebuilt from authorised clues (LinkedIn profile, Crystal Knows report, authorised export or manual clues) with a **real portrait**, mandatory consent and five guardrails (labelled “Simulation”, never speak for the person, clues-only, idea-test purpose, no material decision). Create one agent, or **create a team of 2–12 impersonators** and open it as a session to test an idea against a whole stakeholder panel. |
 | **Décisions** (Decisions) | Durable dossiers — analyses, objections, conditions, replies and arbitrations |
 | **Sales Oracle** | Governed case workspace: create a case, upload the evidence corpus, follow ingestion — reuses the console session |
-| **Intégrations** (Integrations) | API keys for the [Public API v1](#public-api--integrations) (shown once, scoped, revocable), tenant webhook with HMAC signing secret, test ping, delivery log, default mission profile |
+| **Intégrations** (Integrations) | API keys for the [Public API v1](#public-api-v1) (shown once, scoped, revocable), tenant webhook with HMAC signing secret, test ping, delivery log, default mission profile |
 | **Réglages** (Settings) | **One-click SSO connect** (Slack OAuth v2, Microsoft Teams admin consent, Discord bot invite) with server-side application credentials, encrypted secrets at rest, connectivity tests, Crystal Knows capability state |
 
 The console runs on the same governed runtime exposed by the API: a session, its dossiers, its
@@ -566,44 +687,10 @@ See **[core/README.md](core/README.md)** for API-level docs.
 
 ---
 
-## Public API & integrations
-
-A small, stable API lets CRMs and automation tools launch a mission on a console collective and
-receive the verdict — **without a human session**. Missions created this way show up in the console
-and are arbitrated there.
-
-| | |
-|---|---|
-| Reference | **[docs/API.md](docs/API.md)** · live: [api.kayroslab.com/docs](https://api.kayroslab.com/docs) |
-| Contract | OpenAPI 3.1 — [`docs/openapi/kayroslab-public-v1.json`](docs/openapi/kayroslab-public-v1.json), served at [`/v1/public/openapi.json`](https://api.kayroslab.com/v1/public/openapi.json) |
-| Endpoints | `GET /v1/public/me` · `GET /v1/public/collectives` · `POST /v1/public/missions` (202, `Idempotency-Key`) · `GET /v1/public/missions/{id}` · `GET /v1/public/missions?external_ref=` |
-| Auth | Per-tenant API keys `kl_live_…` created in **console → Intégrations**, scoped (`missions:write`, `missions:read`, `collectives:read`) and restrictable to collectives; only a SHA-256 fingerprint is stored |
-| Profiles | `demo` (< 5 s, simulated, labelled `[Démo]`) · `fast` (default, 1–2 min, NVIDIA Nemotron) · `deep` (~12 min, Kimi K3) |
-| Webhooks | `mission.completed` · `mission.failed` · `mission.arbitrated`, signed `X-Kayros-Signature: t=…,v1=HMAC-SHA256`, 5-minute replay window, retries at 1 min / 5 min / 30 min / 2 h / 6 h from a durable outbox |
-| Limits | 60 req/min per key, 200 missions/day per tenant (configurable) |
-
-```bash
-curl -s https://api.kayroslab.com/v1/public/missions \
-  -H "Authorization: Bearer $KAYROS_API_KEY" \
-  -H "Idempotency-Key: sf-0065g00000XyZab-Proposal" \
-  -H "Content-Type: application/json" \
-  -d '{"collective_id":"room_…","question":"Faut-il signer ACME à -15 % ?","profile":"demo",
-       "external_ref":"salesforce:Opportunity:0065g00000XyZab"}'
-```
-
-**Salesforce in 15 minutes.** Two ready-to-import n8n workflows (self-hosted n8n on the KayrosLab VPS)
-turn a stage change to *Proposal/Price Quote* into a mission, then write the verdict — and later the
-human decision — back as tasks on the opportunity, with optional Verdict / Score / Dossier fields:
-[integrations/n8n/README.md](integrations/n8n/README.md) · Zapier variant (2 Zaps):
-[integrations/zapier/README.md](integrations/zapier/README.md) · architecture:
-[docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md](docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md).
-
----
-
 ## Backend API
 
 Path: [`backend/fastify/`](backend/fastify/) — reuses `core/`. Full route inventory: [docs/API.md](docs/API.md#application-api-internal).
-Only the [Public API v1](#public-api--integrations) and the MCP endpoint are integration contracts; the
+Only the [Public API v1](#public-api-v1) and the MCP endpoint are integration contracts; the
 other routes serve KayrosLab's own front ends.
 
 ### LLM providers
