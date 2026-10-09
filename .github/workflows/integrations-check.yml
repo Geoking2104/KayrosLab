@@ -1,0 +1,33 @@
+name: Integrations check
+
+# Workflows n8n du PoC Salesforce : JSON importable, en phase avec le
+# générateur, sans secret, code des nœuds testé contre de vraies signatures.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'integrations/**'
+      - 'tests/n8n-workflows.test.mjs'
+      - '.github/workflows/integrations-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'integrations/**'
+      - 'tests/n8n-workflows.test.mjs'
+      - '.github/workflows/integrations-check.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: n8n workflows
+        run: node --test tests/n8n-workflows.test.mjs
+      - name: docker compose config
+        working-directory: integrations/n8n
+        run: |
+          cp .env.example .env
+          docker compose config --quiet

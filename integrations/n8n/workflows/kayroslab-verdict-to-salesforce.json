@@ -1,0 +1,258 @@
+{
+  "id": "KayrosSfEvents01",
+  "name": "KayrosLab → Salesforce : verdict et arbitrage",
+  "nodes": [
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000001",
+      "name": "Événement KayrosLab",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "6b0f5b8e-2c1d-4c55-9a43-8a1f3c2e7d10",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kayros-mission-events",
+        "responseMode": "lastNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000002",
+      "name": "Préparer la vérification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Extrait l'horodatage et la signature de X-Kayros-Signature, et reconstruit\n// la chaîne signée : t + \".\" + corps. KayrosLab signe JSON.stringify(événement) ;\n// n8n a déjà analysé le JSON, et JSON.stringify(JSON.parse(x)) === x pour tout\n// JSON produit par JSON.stringify : la signature se vérifie à l'identique.\nreturn $input.all().map((item) => {\n  const headers = item.json.headers || {};\n  const header = String(headers['x-kayros-signature'] || '');\n  const parts = header.split(',').map((part) => part.trim().split('='));\n  const timestamp = (parts.find(([key]) => key === 't') || [])[1] || '';\n  const signatures = parts.filter(([key]) => key === 'v1').map(([, value]) => value || '');\n  const body = item.json.body || {};\n  return { json: { signature_t: timestamp, signatures, signed_payload: timestamp + '.' + JSON.stringify(body), event: body } };\n});\n"
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000003",
+      "name": "Calculer la signature (HMAC)",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "action": "hmac",
+        "type": "SHA256",
+        "value": "={{ $json.signed_payload }}",
+        "dataPropertyName": "expected_signature",
+        "encoding": "hex"
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000004",
+      "name": "Vérifier la signature",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// ⚙️ Options\nconst OPTIONS = {\n  // false = ignorer les arbitrages humains (mission.arbitrated)\n  notify_arbitration: true,\n  // Écart toléré entre l'horodatage signé et l'horloge de n8n (secondes)\n  tolerance_seconds: 300,\n};\n\n// 1) Signature : HMAC-SHA256(secret, t + \".\" + corps) calculé par le nœud précédent.\nconst state = $getWorkflowStaticData('global');\nstate.seen = state.seen || {};\nconst now = Date.now();\nfor (const [id, at] of Object.entries(state.seen)) if (now - at > 7 * 24 * 3600 * 1000) delete state.seen[id];\n\nconst out = [];\nfor (const item of $input.all()) {\n  const { signature_t: t, signatures = [], expected_signature: expected, event = {} } = item.json;\n  if (!t || !signatures.length) throw new Error('Signature KayrosLab absente : requête refusée.');\n  if (!signatures.includes(expected)) throw new Error('Signature KayrosLab invalide : vérifiez le secret (console → Intégrations → Webhook).');\n  if (Math.abs(now / 1000 - Number(t)) > OPTIONS.tolerance_seconds) throw new Error('Horodatage de signature hors tolérance (rejeu ?).');\n\n  // 2) Filtrage : test de la console, doublons (nouvel essai après coupure), objets non Salesforce.\n  if (event.event === 'ping') { out.push({ json: { skipped: 'ping', message: 'Signature valide : le webhook est correctement configuré.' } }); continue; }\n  if (state.seen[event.event_id]) { out.push({ json: { skipped: 'doublon', event_id: event.event_id } }); continue; }\n  state.seen[event.event_id] = now;\n  const ref = event.external_ref || {};\n  if (String(ref.system || '').toLowerCase() !== 'salesforce' || !ref.id) { out.push({ json: { skipped: 'objet non Salesforce', mission_id: event.mission_id } }); continue; }\n  if (event.event === 'mission.arbitrated' && !OPTIONS.notify_arbitration) { out.push({ json: { skipped: 'arbitrage ignoré', mission_id: event.mission_id } }); continue; }\n\n  // 3) Tâche Salesforce lisible par un commercial.\n  const demo = event.llm && event.llm.simulated ? '[Démo] ' : '';\n  const label = event.verdict_label || (event.verdict ? String(event.verdict).replace(/_/g, ' ') : 'sans verdict');\n  const list = (title, items) => (items && items.length ? [title, ...items.map((entry) => '- ' + entry)] : []);\n  // Score d'adhésion (0–100) : GO = 1, CONDITIONAL_GO = 0,5, autre = 0, moyenne des agents.\n  const weights = { GO: 1, CONDITIONAL_GO: 0.5 };\n  const votes = (event.agents || []).filter((agent) => agent.verdict);\n  const score = votes.length ? Math.round((100 * votes.reduce((sum, agent) => sum + (weights[agent.verdict] || 0), 0)) / votes.length) : null;\n  let subject; let priority = 'Normal'; const lines = [];\n  if (event.event === 'mission.failed') {\n    subject = demo + 'KayrosLab — Revue en échec';\n    priority = 'High';\n    lines.push('La revue du collectif n’a pas abouti : ' + (event.error || 'erreur inconnue') + '.', 'Relancez-la depuis la console ou en repassant l’opportunité à l’étape.');\n  } else if (event.event === 'mission.arbitrated') {\n    const decision = event.human_decision || {};\n    const verdict = decision.verdict ? String(decision.verdict).replace(/_/g, ' ') : label;\n    subject = demo + 'KayrosLab — Décision : ' + verdict;\n    lines.push('Décision humaine : ' + verdict + (decision.by ? ' (par ' + decision.by + ')' : ''));\n    if (decision.justification) lines.push('Justification : ' + decision.justification);\n    lines.push('Avis du collectif : ' + label);\n  } else {\n    subject = demo + 'KayrosLab — Verdict : ' + label;\n    if (event.verdict === 'NO_GO') priority = 'High';\n    lines.push('Verdict du collectif : ' + label);\n    if (score !== null) lines.push('Score d’adhésion : ' + score + '/100 (' + votes.length + ' agents)');\n    if (event.summary) lines.push('Synthèse : ' + event.summary);\n    lines.push('', ...list('Risques :', event.risks), ...list('Conditions :', event.conditions));\n    const agents = (event.agents || []).map((agent) => agent.name + ' : ' + String(agent.verdict || '—').replace(/_/g, ' ') + (agent.reason ? ' — ' + agent.reason : ''));\n    lines.push('', ...list('Avis des agents :', agents));\n    if (event.clarification_questions && event.clarification_questions.length) lines.push('', ...list('Questions de clarification :', event.clarification_questions.map((q) => (typeof q === 'string' ? q : q.question || JSON.stringify(q)))));\n  }\n  if (demo) lines.push('', '⚠️ Mode démo : réponses préenregistrées, ne pas utiliser pour décider.');\n  lines.push('', 'Dossier complet et arbitrage : ' + (event.dossier_url || '—'));\n  lines.push('Mission ' + event.mission_id + ' · profil ' + (event.profile || '—') + (event.llm && event.llm.provider ? ' · ' + event.llm.provider : ''));\n\n  out.push({ json: {\n    opportunity_id: ref.id,\n    task_subject: subject.slice(0, 255),\n    task_description: lines.join('\\n').slice(0, 31000),\n    task_priority: priority,\n    task_date: new Date().toISOString().slice(0, 10),\n    event: event.event, mission_id: event.mission_id, verdict: event.verdict || null,\n    verdict_label: label, score, dossier_url: event.dossier_url || null,\n    human_verdict: event.human_decision ? event.human_decision.verdict || null : null,\n  } });\n}\nreturn out;\n"
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000005",
+      "name": "Tâche à créer ?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c0ffee00-0000-4000-8000-000000000001",
+              "leftValue": "={{ $json.opportunity_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000008",
+      "name": "Rien à créer",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        200
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000006",
+      "name": "Créer la tâche Salesforce",
+      "type": "n8n-nodes-base.salesforce",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "task",
+        "operation": "create",
+        "status": "Completed",
+        "additionalFields": {
+          "whatId": "={{ $json.opportunity_id }}",
+          "subject": "={{ $json.task_subject }}",
+          "description": "={{ $json.task_description }}",
+          "priority": "={{ $json.task_priority }}",
+          "activityDate": "={{ $json.task_date }}"
+        }
+      }
+    },
+    {
+      "id": "b2d8f1b3-1c2a-4b61-9b1f-000000000007",
+      "name": "Champs KayrosLab sur l’opportunité (option)",
+      "type": "n8n-nodes-base.salesforce",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        0
+      ],
+      "disabled": true,
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "opportunity",
+        "operation": "update",
+        "opportunityId": "={{ $('Tâche à créer ?').item.json.opportunity_id }}",
+        "updateFields": {
+          "customFieldsUi": {
+            "customFieldsValues": [
+              {
+                "fieldId": "Kayros_Verdict__c",
+                "value": "={{ $('Tâche à créer ?').item.json.human_verdict || $('Tâche à créer ?').item.json.verdict }}"
+              },
+              {
+                "fieldId": "Kayros_Score__c",
+                "value": "={{ $('Tâche à créer ?').item.json.score }}"
+              },
+              {
+                "fieldId": "Kayros_Dossier__c",
+                "value": "={{ $('Tâche à créer ?').item.json.dossier_url }}"
+              },
+              {
+                "fieldId": "Kayros_Statut__c",
+                "value": "={{ $('Tâche à créer ?').item.json.event === 'mission.arbitrated' ? 'Arbitré' : $('Tâche à créer ?').item.json.event === 'mission.failed' ? 'Échec' : 'À arbitrer' }}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Événement KayrosLab": {
+      "main": [
+        [
+          {
+            "node": "Préparer la vérification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer la vérification": {
+      "main": [
+        [
+          {
+            "node": "Calculer la signature (HMAC)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculer la signature (HMAC)": {
+      "main": [
+        [
+          {
+            "node": "Vérifier la signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier la signature": {
+      "main": [
+        [
+          {
+            "node": "Tâche à créer ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tâche à créer ?": {
+      "main": [
+        [
+          {
+            "node": "Créer la tâche Salesforce",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rien à créer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Créer la tâche Salesforce": {
+      "main": [
+        [
+          {
+            "node": "Champs KayrosLab sur l’opportunité (option)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true
+  },
+  "pinData": {},
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
