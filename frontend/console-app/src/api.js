@@ -48,6 +48,8 @@ export const api = {
   importCrystal: (agentId, input) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/crystal`, { method: 'POST', body: JSON.stringify(input) }),
   importPersonality: (agentId, input) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/personality`, { method: 'POST', body: JSON.stringify(input) }),
   setHumanProfile: (agentId, profile) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/human-profile`, { method: 'PUT', body: JSON.stringify(profile) }),
+  // Aperçu d'un profil réel (Crystal Knows API / export JSON / type DISC) avant ajout à un comité.
+  previewPersonality: (input) => request('/v1/console/personality/preview', { method: 'POST', body: JSON.stringify(input) }),
   createImpersonator: (input) => request('/v1/console/impersonators', { method: 'POST', body: JSON.stringify(input) }),
   createImpersonatorTeam: (input) => request('/v1/console/impersonator-teams', { method: 'POST', body: JSON.stringify(input) }),
   connectConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/connect`, { method: 'POST', body: '{}' }),

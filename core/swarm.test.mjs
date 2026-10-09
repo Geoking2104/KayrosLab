@@ -262,3 +262,50 @@ test('EF-27: personality simulation reaches a user_defined agent with a consente
   assert.equal(run.analyses[0].assigned_human, 'Alex Martin');
   assert.match(prompts[0], /Alex Martin/);
 });
+
+const okVerdict = { verdict: 'GO', primary_reason: 'ok', strengths_opportunities: [], critical_risks: [], metrics: [], required_mitigations: [], unverified_assumptions: [] };
+
+test('session : surcharge des attributs d’un agent proposé sans toucher au registre', async () => {
+  const service = new SwarmService();
+  const config = service.createConfiguration({
+    swarm_id: 'session_override', swarm_name: 'Override', active_agents: ['cfo', 'cto'],
+    agent_rule_overrides: {
+      cfo: {
+        display_name: 'DAF prudente', seniority: 'senior', veto_power: true, mission: 'Protéger la trésorerie.',
+        behavioral_profile: { disc_type: 'C', risk_appetite: 'prudent' }, disabled_rules: ['RULE_CFO_02'],
+        added_rules: [{ rule_text: 'Exiger un plan de financement.' }],
+      },
+    },
+  });
+  const effective = service.effectiveConfigurationAgent(config, 'cfo');
+  assert.equal(effective.display_name, 'DAF prudente');
+  assert.equal(effective.veto_power, true);
+  assert.equal(effective.mission, 'Protéger la trésorerie.');
+  assert.equal(effective.metadata.session_override, true);
+  const context = compileEffectiveAgentContext(effective);
+  assert.match(context, /Profil comportemental de l'agent:\n- Profil DISC: C\n- Appétence au risque: prudent/);
+  assert.match(context, /Exiger un plan de financement/);
+  assert.doesNotMatch(context, /RULE_CFO_02/);
+  assert.equal(service.registry.get('cfo').display_name, 'Chief Financial Officer');
+  const run = await service.run(config.swarm_id, { question: 'Go?', agentResults: { cfo: { ...okVerdict, verdict: 'NO_GO' }, cto: okVerdict } });
+  assert.equal(run.consensus.verdict, 'NO_GO');
+  assert.equal(run.consensus.veto.agent_id, 'cfo');
+});
+
+test('session : agents composés propres à la session, hors registre du tenant', async () => {
+  const service = new SwarmService();
+  const composed = { agent_id: 'growth_lead', role_name: 'Growth Lead', department: 'Marketing', seniority: 'senior', primary_focus: 'Tester la traction.', behavioral_profile: { tone: 'enthousiaste' } };
+  const config = service.createConfiguration({ swarm_id: 'own_agents', swarm_name: 'Own', active_agents: ['cfo', 'growth_lead'], session_agents: [composed] }, { tenantId: 't1' });
+  assert.equal(service.registry.get('growth_lead', { tenantId: 't1' }), null);
+  assert.equal(config.session_agents[0].metadata.session_scoped, true);
+  const run = await service.run(config.swarm_id, { tenantId: 't1', question: 'Go?', agentResults: { cfo: okVerdict, growth_lead: okVerdict } });
+  assert.deepEqual(run.analyses.map((a) => a.agent_id), ['cfo', 'growth_lead']);
+  assert.throws(() => service.createConfiguration({ swarm_name: 'Dup', active_agents: ['cfo'], session_agents: [{ ...composed, agent_id: 'cfo' }] }), /déjà existant/);
+
+  const updated = service.updateConfigurationAgents('own_agents', {
+    addSessionAgents: [{ ...composed, agent_id: 'buyer_persona', role_name: 'Acheteuse' }], removeAgentIds: ['growth_lead'],
+  }, { tenantId: 't1' });
+  assert.deepEqual(updated.active_agents, ['cfo', 'buyer_persona']);
+  assert.deepEqual(updated.session_agents.map((a) => a.agent_id), ['buyer_persona']);
+  service.restoreConfiguration(updated, { tenantId: 't1' });
+});

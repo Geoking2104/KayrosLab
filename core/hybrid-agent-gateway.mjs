@@ -201,8 +201,9 @@ export class HybridAgentGateway {
         ? input.active_agents : ['cfo', 'cto', 'legal_counsel'];
       // Tout agent doté d'un profil humain consenti active la simulation par défaut,
       // y compris les agents créés en console (`user_defined`) et les impersonators.
+      const session_agents = Array.isArray(input?.session_agents) ? input.session_agents : [];
       const hasConsentedProfile = active_agents.some((agentId) => (
-        hasConsentedHumanProfile(this.swarm.registry.get(agentId, { tenantId: scope }))
+        hasConsentedHumanProfile(session_agents.find((agent) => agent?.agent_id === agentId) || this.swarm.registry.get(agentId, { tenantId: scope }))
       ));
       configuration = this.swarm.createConfiguration({
         swarm_name: input?.swarm_name || `${name} — hybrid team`, active_agents,
@@ -210,6 +211,8 @@ export class HybridAgentGateway {
         personality_simulation_enabled: input?.personality_simulation_enabled == null
           ? hasConsentedProfile : input.personality_simulation_enabled === true,
         agent_rule_overrides: input?.agent_rule_overrides || {},
+        // Agents composés pour ce seul collectif : stockés dans la configuration, jamais dans le registre.
+        session_agents,
       }, { tenantId: scope, by });
       await this.swarm.flush?.();
       swarm_id = configuration.swarm_id;
@@ -237,7 +240,7 @@ export class HybridAgentGateway {
   }
 
   /** Ajoute ou retire des agents du collectif actif d'un salon existant, sans recréer le salon. */
-  async updateRoomAgents(roomId, { addAgentIds = [], removeAgentIds = [], maxBuiltAgents = null, tenantId = null, by = null } = {}) {
+  async updateRoomAgents(roomId, { addAgentIds = [], removeAgentIds = [], addSessionAgents = [], maxBuiltAgents = null, tenantId = null, by = null } = {}) {
     const scope = String(tenantId || 'default');
     const record = await this.store.getRoom(roomId, { tenantId: scope });
     const room = publicRoom(record);
@@ -247,16 +250,18 @@ export class HybridAgentGateway {
     if (!current) throw new Error(`configuration du salon introuvable: ${room.swarm_id}`);
     const removes = (Array.isArray(removeAgentIds) ? removeAgentIds : []).map((id) => String(id || '').trim()).filter(Boolean);
     const adds = (Array.isArray(addAgentIds) ? addAgentIds : []).map((id) => String(id || '').trim()).filter(Boolean);
+    const ownAdds = Array.isArray(addSessionAgents) ? addSessionAgents : [];
     const prospective = current.active_agents.filter((id) => !removes.includes(id));
     for (const id of adds) if (!prospective.includes(id)) prospective.push(id);
+    for (const agent of ownAdds) if (agent?.agent_id && !prospective.includes(agent.agent_id)) prospective.push(String(agent.agent_id));
     if (!prospective.length) throw new Error('le collectif du salon doit conserver au moins un agent actif');
     if (maxBuiltAgents != null) {
-      const built = prospective.filter((id) => this.swarm.registry.get(id, { tenantId: scope })?.metadata?.literary).length;
+      const built = prospective.filter((id) => this.swarm.resolveConfigurationAgent(current, id, { tenantId: scope })?.metadata?.literary).length;
       if (built > Number(maxBuiltAgents)) {
         throw new Error(`Limite de la version en ligne atteinte : ${maxBuiltAgents} agents construits maximum par salon.`);
       }
     }
-    const configuration = this.swarm.updateConfigurationAgents(room.swarm_id, { addAgentIds: adds, removeAgentIds: removes }, { tenantId: scope, by });
+    const configuration = this.swarm.updateConfigurationAgents(room.swarm_id, { addAgentIds: adds, removeAgentIds: removes, addSessionAgents: ownAdds }, { tenantId: scope, by });
     const bundle = {
       configuration,
       agents: configuration.active_agents.map((id) => this.swarm.registry.get(id, { tenantId: scope })).filter(Boolean),

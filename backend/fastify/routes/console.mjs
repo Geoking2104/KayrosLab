@@ -3,18 +3,12 @@ import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../co
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
 import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
+import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
 // missions gouvernées et arbitre les verdicts. Les surfaces du produit de
 // conversation dérivé n'apparaissent plus ici.
 
-const sessionSchema = z.object({
-  name: z.string().min(1).max(120),
-  active_agents: z.array(z.string()).min(1).optional(),
-  swarm_name: z.string().max(120).optional(),
-  voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
-  personality_simulation_enabled: z.boolean().optional(),
-});
 const missionSchema = z.object({ question: z.string().min(1).max(12000), text: z.string().min(1).max(12000).optional(), context: z.string().max(24000).optional(), profile: z.enum(EXECUTION_PROFILES).optional() });
 const ruleConfigurationSchema = z.object({
   system_proposed_rules: z.array(z.object({ rule_id: z.string().min(1).max(120), rule_text: z.string().min(1).max(2000), status: z.enum(['active', 'overridden', 'disabled']).optional() })).optional(),
@@ -28,14 +22,68 @@ const humanProfileSchema = z.object({
   skepticism_factor: z.string().max(500).optional(), profile_summary: z.array(z.string().max(1000)).max(30).optional(),
   professional_context: z.object({ headline: z.string().max(500).optional(), current_role: z.string().max(300).optional(), company: z.string().max(300).optional(), location: z.string().max(300).optional(), skills: z.array(z.string().max(300)).max(100).optional(), qualities: z.array(z.string().max(300)).max(100).optional() }).optional(),
   communication_style: z.object({ tone: z.string().max(160).optional(), preferred_format: z.string().max(300).optional(), decision_triggers: z.array(z.string().max(500)).max(30).optional(), stress_triggers: z.array(z.string().max(500)).max(30).optional(), objection_patterns: z.array(z.string().max(500)).max(30).optional(), communication_directives: z.array(z.string().max(500)).max(30).optional() }).optional(),
+  avatar_url: z.string().max(3000).optional(),
+  disc_intensity: z.number().int().min(0).max(100).optional(),
+  behavioral_traits: z.record(z.string().max(40), z.number().min(0).max(100)).optional(),
+  // Provenance renvoyée par l'aperçu d'import (Crystal, DISC, export) et conservée telle quelle.
+  profile_sources: z.array(z.object({
+    source: z.enum(['linkedin', 'crystalknows', 'manual']), source_url: z.string().max(1000).nullable().optional(),
+    import_mode: z.string().max(80).optional(), imported_at: z.string().max(40).optional(), imported_by: z.string().max(320).nullable().optional(),
+    fields: z.array(z.string().max(80)).max(40).optional(), consent_confirmed: z.boolean().optional(),
+    external_profile_id: z.string().max(200).nullable().optional(), verified: z.boolean().nullable().optional(),
+  })).max(8).optional(),
   consent_confirmed: z.boolean().optional(),
 }).optional();
+// Caractéristiques déclarées d'un agent (personnalité de rôle) : injectées dans son contexte d'exécution.
+const behavioralProfileSchema = z.record(z.string().max(60), z.union([z.string().max(1000), z.number(), z.boolean(), z.array(z.string().max(500)).max(20)])).optional();
+const seniorityEnum = z.enum(['intern', 'junior', 'senior', 'executive']);
+// « Nouvelle session » : ajustement d'un agent proposé pour ce seul collectif (le registre reste intact).
+const sessionOverrideSchema = z.object({
+  display_name: z.string().min(1).max(160).optional(), role_name: z.string().min(1).max(160).optional(),
+  department: z.string().min(1).max(160).optional(), seniority: seniorityEnum.optional(),
+  mission: z.string().min(1).max(4000).optional(), instructions: z.string().max(12000).optional(),
+  constraints: z.array(z.string().min(1).max(1000)).max(50).optional(), veto_power: z.boolean().optional(),
+  behavioral_profile: behavioralProfileSchema,
+  disabled_rules: z.array(z.string().min(1).max(120)).max(50).optional(),
+  modified_rules: z.array(z.object({ replaces_rule_id: z.string().min(1).max(120), modified_text: z.string().min(1).max(2000) })).max(50).optional(),
+  added_rules: z.array(z.string().min(1).max(2000)).max(50).optional(),
+});
+// Agent composé pour la session (ou issu d'un profil réel importé) : n'entre pas dans le registre du tenant.
+const sessionAgentSchema = z.object({
+  agent_id: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/).optional(),
+  display_name: z.string().min(1).max(160), role_name: z.string().min(1).max(160), department: z.string().min(1).max(160),
+  seniority: seniorityEnum.optional().default('senior'), mission: z.string().min(1).max(4000),
+  instructions: z.string().max(12000).optional(), constraints: z.array(z.string().min(1).max(1000)).max(50).optional(),
+  rules: z.array(z.string().min(1).max(2000)).max(30).optional(), veto_power: z.boolean().optional(),
+  behavioral_profile: behavioralProfileSchema, human_profile: humanProfileSchema,
+});
+const MAX_CUSTOM_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_CUSTOM_AGENTS_PER_SESSION || 8);
+const sessionSchema = z.object({
+  name: z.string().min(1).max(120),
+  active_agents: z.array(z.string()).optional(),
+  swarm_name: z.string().max(120).optional(),
+  voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
+  personality_simulation_enabled: z.boolean().optional(),
+  agent_overrides: z.record(z.string().max(80), sessionOverrideSchema).optional(),
+  custom_agents: z.array(sessionAgentSchema).max(MAX_CUSTOM_AGENTS_PER_SESSION).optional(),
+// `active_agents` absent (et aucun agent composé) : collectif par défaut du serveur.
+}).refine((value) => (value.active_agents === undefined && !value.custom_agents?.length) || (value.active_agents?.length || 0) + (value.custom_agents?.length || 0) > 0, { message: 'au moins un agent requis dans le collectif' });
+// Aperçu d'un profil réel avant de l'ajouter à un comité (Crystal Knows API, export JSON ou type DISC).
+const personalityPreviewSchema = z.object({
+  consent_confirmed: z.literal(true),
+  source: z.enum(['crystalknows', 'export', 'disc']),
+  email: z.string().email().max(320).optional(), linkedin_url: z.string().max(1000).optional(),
+  full_name: z.string().max(200).optional(), company_name: z.string().max(200).optional(), job_title: z.string().max(200).optional(),
+  profile_data: z.record(z.string(), z.unknown()).optional(),
+  disc_type: z.string().max(10).optional(), assigned_name: z.string().max(200).optional(),
+});
 const personalityImportSchema = z.object({
   consent_confirmed: z.literal(true),
   imports: z.array(z.object({
     source: z.enum(['linkedin', 'crystalknows']),
     profile_url: z.string().max(1000).optional(), linkedin_url: z.string().max(1000).optional(),
     email: z.string().email().max(320).optional(), profile_data: z.record(z.string(), z.unknown()).optional(),
+    full_name: z.string().max(200).optional(), company_name: z.string().max(200).optional(), job_title: z.string().max(200).optional(),
   })).max(4).optional().default([]),
   manual_profile: humanProfileSchema,
 }).refine((value) => value.imports.length > 0 || !!value.manual_profile, { message: 'au moins un import ou un profil manuel requis' });
@@ -60,7 +108,8 @@ const replySchema = z.object({ text: z.string().min(1).max(12000) });
 const collectiveSchema = z.object({
   add_agent_ids: z.array(z.string().min(1).max(80)).max(30).optional().default([]),
   remove_agent_ids: z.array(z.string().min(1).max(80)).max(30).optional().default([]),
-}).refine((value) => value.add_agent_ids.length > 0 || value.remove_agent_ids.length > 0, { message: 'aucun changement de collectif demandé' });
+  add_custom_agents: z.array(sessionAgentSchema).max(MAX_CUSTOM_AGENTS_PER_SESSION).optional().default([]),
+}).refine((value) => value.add_agent_ids.length > 0 || value.remove_agent_ids.length > 0 || value.add_custom_agents.length > 0, { message: 'aucun changement de collectif demandé' });
 const arbitrationSchema = z.object({ action: z.enum(['accept_consensus', 'override_veto', 'reevaluate']), justification: z.string().max(4000).optional(), decision: z.enum(['GO', 'CONDITIONAL_GO']).optional() });
 const impersonatorSchema = z.object({
   agent_id: z.string().max(64).optional(),
@@ -119,6 +168,31 @@ function runProfile(app, profile) {
   return profileRunOptions(profile || DEFAULT_PROFILE, {
     fastAvailable: !!cfg?.fast?.available, fastModel: cfg?.fast?.model, deepModel: cfg?.model, deepProvider: cfg?.provider,
   });
+}
+function slug(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40);
+}
+/** Agent composé → définition d'agent de session (identifiant unique, règles ajoutées, profil consenti). */
+function sessionAgentDefinition(input) {
+  const base = slug(input.display_name || input.role_name) || 'agent';
+  const agent_id = input.agent_id || `${/^[a-z]/.test(base) ? base : `a_${base}`}_${Math.random().toString(36).slice(2, 6)}`.slice(0, 64);
+  const definition = {
+    agent_id, display_name: input.display_name, role_name: input.role_name, department: input.department,
+    seniority: input.seniority || 'senior', primary_focus: input.mission, mission: input.mission,
+    instructions: input.instructions || '', constraints: input.constraints || [], connectors: ['console'],
+    veto_power: input.veto_power === true, behavioral_profile: input.behavioral_profile || {},
+    rule_configuration: { system_proposed_rules: [], user_modified_rules: [], user_added_rules: (input.rules || []).map((rule_text, index) => ({ rule_id: `USR_${agent_id.toUpperCase()}_${index + 1}`, rule_text })) },
+  };
+  if (input.human_profile) {
+    if (input.human_profile.consent_confirmed !== true) throw new Error('profil humain : consentement explicite requis');
+    definition.human_profile = input.human_profile;
+  }
+  return definition;
+}
+function sessionOverrides(overrides = {}) {
+  return Object.fromEntries(Object.entries(overrides).map(([id, patch]) => [id, {
+    ...patch, ...(patch.added_rules ? { added_rules: patch.added_rules.map((rule_text) => ({ rule_text })) } : {}),
+  }]));
 }
 function makeSessionId() { return `session_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`; }
 
@@ -222,10 +296,15 @@ function collectiveView(swarm, configuration, tenantId) {
     voting_threshold: configuration?.voting_threshold || 'majority',
     personality_simulation_enabled: configuration?.personality_simulation_enabled === true,
     active_agents: active,
-    agents: active.map((id) => swarm.registry.get(id, { tenantId })).filter(Boolean).map((agent) => ({
+    agents: active.map((id) => (swarm.effectiveConfigurationAgent
+      ? swarm.effectiveConfigurationAgent(configuration, id, { tenantId })
+      : swarm.registry.get(id, { tenantId }))).filter(Boolean).map((agent) => ({
       agent_id: agent.agent_id, role_name: agent.role_name, display_name: agent.display_name || agent.role_name,
-      department: agent.department, tools: agent.tools || [], provider: agent.provider || null, model: agent.model || null,
+      department: agent.department, seniority: agent.seniority, tools: agent.tools || [], provider: agent.provider || null, model: agent.model || null,
       veto_power: agent.veto_power === true, hybrid: !!agent.human_profile, impersonator: !!agent.metadata?.impersonator,
+      session_scoped: agent.metadata?.session_scoped === true, session_override: agent.metadata?.session_override === true,
+      disc_type: agent.human_profile?.disc_type || agent.behavioral_profile?.disc_type || null,
+      human_profile: agent.human_profile ? { assigned_name: agent.human_profile.assigned_name || null, avatar_url: agent.human_profile.avatar_url || null, consent_confirmed: agent.human_profile.consent_confirmed === true } : null,
     })),
   };
 }
@@ -285,7 +364,7 @@ export default async function consoleRoute(app) {
         running_executions: threads.filter((thread) => thread.status === 'running').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,
-      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
+      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, crystal_knows_api: app.kayrosContext.crystalKnowsApi || { version: 'v4', predictions: false }, max_custom_agents_per_session: MAX_CUSTOM_AGENTS_PER_SESSION, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
     };
   });
 
@@ -334,6 +413,38 @@ export default async function consoleRoute(app) {
       const agent = app.kayrosContext.engine.swarm.assignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
       await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
     } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // Aperçu d'un profil réel (Crystal Knows / export / DISC) : profil normalisé et
+  // attributs d'agent proposés, sans rien enregistrer. L'appel à l'API Crystal
+  // consomme des crédits du compte : réservé à comex/admin ; export et DISC restent ouverts.
+  app.post('/v1/console/personality/preview', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const parsed = personalityPreviewSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'aperçu de profil invalide', issues: parsed.error.issues });
+    const d = parsed.data;
+    try {
+      let profile;
+      if (d.source === 'disc') {
+        if (!normalizeDiscType(d.disc_type)) return reply.code(400).send({ error: 'type DISC invalide (ex. D, Di, Sc, C)' });
+        profile = profileFromDiscType(d.disc_type, { assigned_name: d.assigned_name || null, imported_by: me.email });
+      } else if (d.source === 'export') {
+        if (!d.profile_data) return reply.code(400).send({ error: 'export JSON du profil requis' });
+        profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{ source: 'crystalknows', profile_data: d.profile_data }] }, { by: me.email });
+        if (d.assigned_name && !profile.assigned_name) profile.assigned_name = d.assigned_name;
+      } else {
+        if (!manager(me, reply)) return;
+        if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur (CRYSTALKNOWS_API_TOKEN). Utilisez l’import d’un export JSON ou la saisie DISC.' });
+        if (!d.email && !d.linkedin_url && !d.full_name) return reply.code(400).send({ error: 'e-mail, URL LinkedIn ou nom complet requis' });
+        profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{
+          source: 'crystalknows', email: d.email, linkedin_url: d.linkedin_url, full_name: d.full_name, company_name: d.company_name, job_title: d.job_title,
+        }] }, { by: me.email });
+      }
+      return { profile, agent: agentAttributesFromProfile(profile, { role: d.job_title || null, company: d.company_name || null }) };
+    } catch (error) {
+      const status = /crédits/.test(error.message) ? 402 : /aucun profil/.test(error.message) ? 404 : /limite de débit/.test(error.message) ? 429 : 400;
+      return reply.code(status).send({ error: surface(error.message) });
+    }
   });
 
   // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---
@@ -447,7 +558,8 @@ export default async function consoleRoute(app) {
       if (await ownedSessionCount(app, me) >= MAX_SESSIONS_PER_USER) {
         return reply.code(403).send({ error: `Limite de la version en ligne atteinte : ${MAX_SESSIONS_PER_USER} sessions maximum par utilisateur.` });
       }
-      const active = parsed.data.active_agents || [];
+      const custom = (parsed.data.custom_agents || []).map(sessionAgentDefinition);
+      const active = [...(parsed.data.active_agents || []), ...custom.map((agent) => agent.agent_id)];
       if (active.length) {
         const agents = app.kayrosContext.engine.swarm.registry.list({ tenantId: me.tenantId });
         const built = agents.filter((agent) => active.includes(agent.agent_id) && !!agent.metadata?.literary).length;
@@ -461,6 +573,8 @@ export default async function consoleRoute(app) {
         active_agents: active.length ? active : undefined,
         voting_threshold: parsed.data.voting_threshold,
         personality_simulation_enabled: parsed.data.personality_simulation_enabled,
+        agent_rule_overrides: sessionOverrides(parsed.data.agent_overrides),
+        session_agents: custom,
       }, { tenantId: me.tenantId, by: me.email, ownerId: me.sub });
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId) });
@@ -483,6 +597,7 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
       const room = await app.kayrosContext.hybridGateway.updateRoomAgents(req.params.sessionId, {
         addAgentIds: parsed.data.add_agent_ids, removeAgentIds: parsed.data.remove_agent_ids,
+        addSessionAgents: parsed.data.add_custom_agents.map(sessionAgentDefinition),
         maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId: me.tenantId, by: me.email,
       });
       return { session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId) };

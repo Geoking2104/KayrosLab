@@ -1,5 +1,12 @@
 # Changelog
 
+## Non publié — Console : composer ses agents, aide au seuil de consensus, personnalités réelles
+
+- **Nouvelle session** : vérification et ajustement des attributs de chaque agent proposé pour la session (identité, séniorité, mission, instructions, contraintes, veto, personnalité, règles) sans modifier le registre ; composition d'agents propres à la session (`custom_agents`, stockés dans `session_agents`, ouverts aux contributeurs) ; Échap ferme la boîte ; largeur des boîtes « wide » corrigée.
+- **Seuil de consensus** : bouton « ? » qui explique les trois seuils (règle, quand choisir, conséquences) et le veto, dans « Nouvelle session », l'équipe d'impersonators et l'import de comité.
+- **Crystal Knows** : adaptateur aligné sur la Data API v4 (`GET /v4/profile`, `GET /v4/content/profile/:id`, prédictions opt-in), traits comportementaux, erreurs 401/402/404/429 lisibles ; repli export JSON / type DISC ; `POST /v1/console/personality/preview` ; dialogue « Personnalités réelles » pour compléter un comité existant ou en construire un.
+- Profil comportemental d'un agent injecté dans son contexte d'exécution.
+
 ## v0.26.0 (2026-10) — API publique v1, intégrations CRM, connexion Google
 
 - **API publique v1** (`/v1/public/*`, PR #47) : `GET /me`, `GET /collectives`, `POST /missions` (202, `Idempotency-Key` obligatoire, rejeu 200 / conflit 409), `GET /missions/:id`, `GET /missions?external_ref=`. Clés d'API par tenant `kl_live_…` (empreinte SHA-256 seule stockée, scopes, restriction par collectif, expiration, révocation), 60 req/min par clé, 200 missions/jour par tenant.

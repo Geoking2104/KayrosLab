@@ -780,7 +780,8 @@ Key environment variables:
 | `KAYROS_WEBHOOK_ALLOW_HTTP` · `KAYROS_WEBHOOK_ALLOW_PRIVATE` · `KAYROS_MISSION_QUEUE` | Webhook SSRF guards (keep `false` in prod) and durable mission queue |
 | `METRICS_TOKEN` | Bearer token for `/metrics` (otherwise loopback only) |
 | `LINKEDIN_ACCESS_TOKEN` | Optional official LinkedIn authenticated-member profile import |
-| `CRYSTALKNOWS_API_TOKEN` | Optional Crystal Knows profile import on eligible plans |
+| `CRYSTALKNOWS_API_TOKEN` | Optional Crystal Knows Data API key (server-side only) for real-personality import |
+| `CRYSTALKNOWS_API_VERSION` · `CRYSTALKNOWS_ALLOW_PREDICTIONS` · `CRYSTALKNOWS_API_BASE` | `v4` (default) or legacy `v1`; opt-in paid async predictions; base URL override |
 | `KAYROS_MCP_CLIENTS_JSON` | SHA-256 token digests, tenant bindings, scopes and optional expiries for MCP clients |
 | `KAYROS_EMBED_MODEL` | Force embedding model (default: soft fallback chain) |
 | `DATABASE_URL` | Optional Postgres |

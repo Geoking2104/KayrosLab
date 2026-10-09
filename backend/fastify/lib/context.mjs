@@ -154,6 +154,9 @@ export default async function buildContext() {
     QDRANT_DIM = '768',
     QDRANT_API_KEY = '',
     CRYSTALKNOWS_API_TOKEN = '',
+    CRYSTALKNOWS_API_BASE = '',
+    CRYSTALKNOWS_API_VERSION = 'v4',
+    CRYSTALKNOWS_ALLOW_PREDICTIONS = '',
     LINKEDIN_ACCESS_TOKEN = '',
     KAYROS_MCP_CLIENTS_JSON = '',
     KAYROS_MCP_ALLOWED_ORIGINS = '',
@@ -572,6 +575,11 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     qdrantDim: Number(QDRANT_DIM) || 768,
     qdrantApiKey: QDRANT_API_KEY || null,
     crystalKnowsApiToken: CRYSTALKNOWS_API_TOKEN || null,
+    // Crystal Data API v4 par défaut ; `v1` = ancien endpoint Entreprise /v1/profiles.
+    // Les prédictions asynchrones (POST /v4/predictions) consomment un crédit : opt-in.
+    crystalKnowsBaseUrl: CRYSTALKNOWS_API_BASE || null,
+    crystalKnowsApiVersion: CRYSTALKNOWS_API_VERSION === 'v1' ? 'v1' : 'v4',
+    crystalKnowsAllowPredictions: /^(1|true|yes|on)$/i.test(CRYSTALKNOWS_ALLOW_PREDICTIONS),
     // Official LinkedIn Profile API: authenticated member only. Never exposed
     // to clients and never used to scrape arbitrary public profile URLs.
     linkedinAccessToken: LINKEDIN_ACCESS_TOKEN || null,
@@ -679,6 +687,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     EMBED_MODEL, PORT, ALLOWED_ORIGIN,
     OLLAMA_ENDPOINT, OLLAMA_MODEL,
     crystalKnowsConfigured: !!CRYSTALKNOWS_API_TOKEN,
+    crystalKnowsApi: { version: CRYSTALKNOWS_API_VERSION === 'v1' ? 'v1' : 'v4', predictions: /^(1|true|yes|on)$/i.test(CRYSTALKNOWS_ALLOW_PREDICTIONS) },
     connectorEncryptionConfigured: !!KAYROS_CONNECTOR_ENCRYPTION_KEY,
     mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
     apiKeys, publicMissions, integrationSettings, webhookDispatcher, missionEvents, missionWorker,
