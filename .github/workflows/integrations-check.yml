@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: n8n setup script syntax
+        run: bash -n integrations/n8n/setup-n8n-vps.sh
       - name: n8n workflows
         run: node --test tests/n8n-workflows.test.mjs
       - name: docker compose config

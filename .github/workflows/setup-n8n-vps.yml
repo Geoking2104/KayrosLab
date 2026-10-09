@@ -1,0 +1,59 @@
+name: Setup n8n - OVH VPS
+
+# Installation / suivi de n8n (integrations/n8n/README.md, partie A) sur le VPS
+# 51.210.9.71, avec les memes secrets que le deploiement backend.
+#   install : base Postgres dediee (repli SQLite), .env + N8N_ENCRYPTION_KEY,
+#             docker compose up -d, vhost nginx + htpasswd, certbot si le DNS
+#             pointe deja vers le VPS ;
+#   certbot : vhost + certificat (a relancer une fois le DNS en place) ;
+#   status  : etat du conteneur, healthz, DNS, certificat (aucun secret).
+# Secrets generes SUR le VPS, jamais affiches : cle de chiffrement dans
+# /opt/kayroslab/integrations/n8n/.env (600), mot de passe de l'editeur dans
+# /root/kayros-n8n/basic-auth.txt (600). Idempotent : rien n'est regenere.
+# Ne modifie ni le backend, ni pm2, ni les autres vhosts nginx.
+
+on:
+  workflow_dispatch:
+    inputs:
+      step:
+        description: 'Etape'
+        type: choice
+        options: [status, install, certbot]
+        default: status
+      domain:
+        description: 'Domaine public de n8n (enregistrement A -> 51.210.9.71)'
+        type: string
+        default: n8n.kayroslab.com
+
+concurrency:
+  group: setup-n8n-vps
+  cancel-in-progress: false
+
+jobs:
+  n8n:
+    runs-on: ubuntu-latest
+    steps:
+      - name: n8n ${{ inputs.step }} sur le VPS
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          N8N_STEP: ${{ inputs.step }}
+          N8N_SETUP_DOMAIN: ${{ inputs.domain }}
+        with:
+          host: 51.210.9.71
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          command_timeout: 20m
+          envs: N8N_STEP,N8N_SETUP_DOMAIN
+          script: |
+            set -e
+            git config --global --add safe.directory /opt/kayroslab
+            cd /opt/kayroslab
+            # Seul integrations/n8n est rafraichi depuis main : le code du
+            # backend deploye n'est pas touche (le prochain deploiement fait
+            # son git reset --hard habituel ; .env est ignore par git).
+            git fetch -q origin main
+            git checkout FETCH_HEAD -- integrations/n8n
+            SUDO=""
+            if [ "$(id -u)" -ne 0 ]; then SUDO="sudo -n"; fi
+            $SUDO bash integrations/n8n/setup-n8n-vps.sh "$N8N_STEP" "$N8N_SETUP_DOMAIN"
