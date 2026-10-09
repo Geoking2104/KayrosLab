@@ -53,7 +53,8 @@ test('assemble-www copie accueil, salon et console', async () => {
       readFile(join(dest, 'console/index.html'), 'utf8'),
       readFile(join(dest, 'legal/index.html'), 'utf8'),
     ]);
-    assert.match(home, /href="\/salon\/">Salon</);
+    // Le Salon n'est plus lié depuis l'accueil (la page /salon/ reste déployée, non liée).
+    assert.doesNotMatch(home, /href="\/salon\/|href="#salon"|id="salon"/);
     assert.match(home, /\/legal\/#mentions/);
     assert.match(salon, /Un cercle est une table/);
     assert.match(salon, /id="contact"/);

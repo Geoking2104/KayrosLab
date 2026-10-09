@@ -72,30 +72,24 @@ test('generated static pages keep the sales narrative and leave the Sales Oracle
   }
 });
 
-test('landing covers personified agents and Salon charter embed', () => {
+test('landing covers personified agents; Salon is no longer embedded', () => {
   for (const file of ['index.html', 'index.fr.html']) {
     const html = read(file);
     assert.match(html, /id="personify"/);
     assert.match(html, /CrystalKnows/);
-    assert.match(html, /id="salon"/);
-    assert.match(html, /class="salon-charter"/);
-    assert.match(html, /btn-salon/);
-    assert.match(html, /Fraunces/);
+    // Section Salon retirée du contenu : plus de section, de bouton ni de lien vers /salon/.
+    assert.doesNotMatch(html, /id="salon"|class="salon-charter"|btn-salon|href="\/salon\/|href="#salon"/);
     assert.doesNotMatch(html, /panel hl reveal/);
   }
   const en = read('index.html');
   const fr = read('index.fr.html');
-  assert.match(en, /They put on the skin of a book/);
-  assert.match(fr, /Ils prennent la peau/);
   assert.match(en, /role packs/i);
   assert.match(fr, /packs de r[oô]les/i);
   assert.match(en, /mise à l.épreuve|stress-test/i);
   assert.match(fr, /mise à l.épreuve/);
   const css = read('marketing.css');
-  assert.match(css, /\.salon-charter/);
-  assert.match(css, /--salon-accent/);
+  assert.doesNotMatch(css, /\.salon-charter/);
   assert.match(css, /\.personify-grid/);
-  assert.match(css, /oklch\(42% 0\.12 25\)/);
 });
 
 test('agent console embeds the Sales Oracle workspace with the console session', () => {
