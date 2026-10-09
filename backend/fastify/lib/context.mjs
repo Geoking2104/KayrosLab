@@ -44,7 +44,7 @@ import {
 import { createObjectStorageFromEnv } from './object-storage.mjs';
 import { createLinkService } from './context-links.mjs';
 import { createMcpClientRegistry } from './mcp-auth.mjs';
-import { oidcConfigFromEnv } from './oidc.mjs';
+import { oidcConfigFromEnv, googleConfigFromEnv } from './oidc.mjs';
 import { smtpFromEnv, createSmtpTransport } from './smtp.mjs';
 import { SalonStateStore } from './salon-state.mjs';
 import { resolveLlmConfig, describeLlmConfig } from './llm-config.mjs';
@@ -316,6 +316,7 @@ export default async function buildContext() {
 
   const auth = AUTH_SECRET ? new AuthService({ secret: AUTH_SECRET, users: userStore }) : null;
   const oidc = oidcConfigFromEnv(process.env);
+  const google = googleConfigFromEnv(process.env);
   const smtp = smtpFromEnv(process.env);
   let smtpTransport = null;
   if (smtp.enabled) {
@@ -662,7 +663,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   }
 
   return {
-    providers, llm, embeddings, tools, auth, oidc, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
+    providers, llm, embeddings, tools, auth, oidc, google, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig, connectorOAuth, connectorOAuthConfigured: { slack: connectorOAuth.available('slack'), discord: connectorOAuth.available('discord'), teams: connectorOAuth.available('teams') }, connectorOAuthModes: connectorOAuth.describe(), publicApiUrl: KAYROS_PUBLIC_API_URL,
