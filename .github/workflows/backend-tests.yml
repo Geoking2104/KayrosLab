@@ -24,6 +24,7 @@ on:
       - 'core/governance.mjs'
       - 'core/auth.mjs'
       - 'core/adapters/timesfm-forecast.mjs'
+      - 'core/integrations/**'
       - '.github/workflows/backend-tests.yml'
   pull_request:
     branches: [main]
@@ -42,6 +43,8 @@ on:
       - 'core/swarm.mjs'
       - 'core/hybrid-agent-gateway.mjs'
       - 'core/collaboration-store.mjs'
+      - 'core/integrations/**'
+      - 'core/sql/**'
       - '.github/workflows/backend-tests.yml'
 
 jobs:

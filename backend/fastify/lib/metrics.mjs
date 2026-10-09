@@ -13,7 +13,7 @@
 import { timingSafeEqual } from 'node:crypto';
 import promClient from '@platformatic/prom-client';
 
-export const KNOWN_PROVIDERS = Object.freeze(['nvidia', 'mistral', 'anthropic', 'ollama', 'mock']);
+export const KNOWN_PROVIDERS = Object.freeze(['nvidia', 'nvidia-fast', 'mistral', 'anthropic', 'ollama', 'mock', 'demo']);
 export const LLM_OUTCOMES = Object.freeze(['success', 'rate_limited', 'timeout', 'not_configured', 'circuit_open', 'error']);
 export const RUN_OUTCOMES = Object.freeze(['completed', 'needs_clarification', 'failed', 'timeout']);
 const MAX_MODEL_LABELS = 20;

@@ -23,7 +23,18 @@ import {
   InMemoryRunStore, FileRunStore, UNIFIED_CONDITIONS,
   InMemorySalesOracleRepository, SalesOracleService,
 } from '../../../core/index.mjs';
-import { ConnectorConfigurationService, InMemoryConnectorConfigStore, PgConnectorConfigStore } from '../../../core/connector-config.mjs';
+import {
+  ConnectorConfigurationService, InMemoryConnectorConfigStore, PgConnectorConfigStore,
+  connectorEncryptionKey, encryptConnectorSecrets, decryptConnectorSecrets,
+} from '../../../core/connector-config.mjs';
+import { ApiKeyService, InMemoryApiKeyStore, PgApiKeyStore } from '../../../core/integrations/api-keys.mjs';
+import {
+  IntegrationSettingsService, InMemoryIntegrationSettingsStore, PgIntegrationSettingsStore,
+  InMemoryWebhookOutbox, PgWebhookOutbox, WebhookDispatcher,
+} from '../../../core/integrations/webhooks.mjs';
+import { InMemoryPublicMissionStore, PgPublicMissionStore, MissionEventPublisher } from '../../../core/integrations/public-missions.mjs';
+import { PgMissionQueue, MissionWorker } from '../../../core/integrations/mission-queue.mjs';
+import { DemoProvider, FAST_PROVIDER_ID, DEMO_PROVIDER_ID } from '../../../core/integrations/profiles.mjs';
 import { ConnectorOAuthService } from '../../../core/connector-oauth.mjs';
 import { applySharedDataEnv } from '../../../core/shared-data.mjs';
 import {
@@ -218,7 +229,24 @@ export default async function buildContext() {
       acceptsModel: (m) => String(m).includes('/') && !String(m).includes(':'),
     }),
     ollama: new OllamaProvider({ endpoint: OLLAMA_ENDPOINT, defaultModel: OLLAMA_MODEL }),
+    // Profil `demo` des missions : réponses préparées, aucun appel réseau.
+    [DEMO_PROVIDER_ID]: new DemoProvider(),
   };
+  // Profil `fast` : même compte NVIDIA, modèle rapide, réponses plus courtes.
+  if (llmConfig.fast.available) {
+    providers[FAST_PROVIDER_ID] = new OpenAICompatibleProvider({
+      id: FAST_PROVIDER_ID,
+      baseUrl: llmConfig.nvidia.baseUrl,
+      apiKey: NVIDIA_API_KEY,
+      apiKeyEnv: 'NVIDIA_API_KEY',
+      defaultModel: llmConfig.fast.model,
+      defaultTemperature: 0.4,
+      maxTokens: llmConfig.fast.maxTokens,
+      timeoutMs: llmConfig.fast.timeoutMs,
+      extraBody: llmConfig.fast.extraBody,
+      acceptsModel: (m) => String(m).includes('/') && !String(m).includes(':'),
+    });
+  }
 
   // Priorité documentée dans lib/llm-config.mjs : LLM_PROVIDER > NVIDIA > Mistral > Anthropic > mock.
   const policy = new RoutingPolicy({ defaultProvider: llmConfig.provider, fallback: llmConfig.fallback });
@@ -576,6 +604,42 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   if (engine.persistenceReady) {
     await engine.persistenceReady.catch(() => false);
   }
+  // --- Intégrations : clés d'API, missions publiques, webhooks, file durable ---
+  let encryptionKey = null;
+  try { encryptionKey = connectorEncryptionKey(KAYROS_CONNECTOR_ENCRYPTION_KEY); } catch (e) { console.warn('[kayros][integrations]', e.message); }
+  const apiKeys = new ApiKeyService({ store: pgPool ? new PgApiKeyStore(pgPool) : new InMemoryApiKeyStore() });
+  const publicMissions = pgPool ? new PgPublicMissionStore(pgPool) : new InMemoryPublicMissionStore();
+  const integrationSettings = new IntegrationSettingsService({
+    store: pgPool ? new PgIntegrationSettingsStore(pgPool) : new InMemoryIntegrationSettingsStore(),
+    encrypt: encryptionKey ? (secret) => encryptConnectorSecrets({ secret }, encryptionKey) : null,
+    decrypt: encryptionKey ? (value) => decryptConnectorSecrets(value, encryptionKey).secret : null,
+  });
+  if (!encryptionKey) console.warn('[kayros][integrations] KAYROS_CONNECTOR_ENCRYPTION_KEY absente : secrets de webhook stockés en clair');
+  const webhookDispatcher = new WebhookDispatcher({
+    outbox: pgPool ? new PgWebhookOutbox(pgPool) : new InMemoryWebhookOutbox(),
+    settings: integrationSettings,
+    intervalMs: Math.max(1000, Number(process.env.KAYROS_WEBHOOK_INTERVAL_MS) || 5000),
+  });
+  const missionEvents = new MissionEventPublisher({
+    missions: publicMissions, settings: integrationSettings, dispatcher: webhookDispatcher, consoleUrl: CONSOLE_URL,
+  });
+  let missionWorker = null;
+  if (engine.hybridGateway) {
+    engine.hybridGateway.eventSink = (kind, thread) => missionEvents.publish(kind, thread);
+    // File durable : seulement avec Postgres (KAYROS_MISSION_QUEUE=off pour revenir à l'exécution en mémoire).
+    if (pgPool && !/^(0|off|false|no)$/i.test(String(process.env.KAYROS_MISSION_QUEUE || ''))) {
+      const queue = new PgMissionQueue(pgPool);
+      missionWorker = new MissionWorker({
+        queue,
+        handler: (job) => engine.hybridGateway.executeJob(job),
+        concurrency: Math.max(1, Math.min(8, Number(process.env.KAYROS_MISSION_CONCURRENCY) || 2)),
+        leaseMs: Math.max(10000, Number(process.env.KAYROS_MISSION_LEASE_MS) || 120000),
+      });
+      engine.hybridGateway.setQueue(queue, missionWorker);
+      console.info('[kayros] file de missions : Postgres (reprise après redémarrage)');
+    }
+  }
+
   // Missions console asynchrones restées `running` (processus arrêté pendant
   // les analyses) : elles passent `failed` avec un message explicite, sinon
   // l'interface attendrait indéfiniment et la session resterait bloquée.
@@ -587,6 +651,11 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     if (interrupted) console.warn(`[kayros] ${interrupted} mission(s) console interrompue(s) par le redémarrage : statut failed`);
   } catch (e) {
     console.warn('[kayros] reprise des missions console impossible:', e?.message || e);
+  }
+  // Après le tri ci-dessus : le worker reprend les missions restées en file.
+  if (!/^(0|off|false|no)$/i.test(String(process.env.KAYROS_INTEGRATION_WORKERS || ''))) {
+    missionWorker?.start();
+    webhookDispatcher.start();
   }
   if (engine.syncAvailableQuants && typeof engine.syncAvailableQuants.then === 'function') {
     engine.syncAvailableQuants.catch(() => {});
@@ -611,5 +680,6 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     crystalKnowsConfigured: !!CRYSTALKNOWS_API_TOKEN,
     connectorEncryptionConfigured: !!KAYROS_CONNECTOR_ENCRYPTION_KEY,
     mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
+    apiKeys, publicMissions, integrationSettings, webhookDispatcher, missionEvents, missionWorker,
   };
 }

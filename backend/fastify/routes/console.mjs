@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
 import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
+import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
 // missions gouvernées et arbitre les verdicts. Les surfaces du produit de
@@ -14,7 +15,7 @@ const sessionSchema = z.object({
   voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
   personality_simulation_enabled: z.boolean().optional(),
 });
-const missionSchema = z.object({ question: z.string().min(1).max(12000), text: z.string().min(1).max(12000).optional(), context: z.string().max(24000).optional() });
+const missionSchema = z.object({ question: z.string().min(1).max(12000), text: z.string().min(1).max(12000).optional(), context: z.string().max(24000).optional(), profile: z.enum(EXECUTION_PROFILES).optional() });
 const ruleConfigurationSchema = z.object({
   system_proposed_rules: z.array(z.object({ rule_id: z.string().min(1).max(120), rule_text: z.string().min(1).max(2000), status: z.enum(['active', 'overridden', 'disabled']).optional() })).optional(),
   user_added_rules: z.array(z.union([z.string().min(1).max(2000), z.object({ rule_id: z.string().max(120).optional(), rule_text: z.string().min(1).max(2000) })])).optional(),
@@ -111,6 +112,13 @@ function executionView(thread, runId) {
     thread_id: thread?.thread_id || null, run_id: runId || thread?.active_run_id || thread?.current_run_id || null,
     status: thread?.status || null, progress: thread?.progress || null, error: thread?.error || null,
   };
+}
+/** Options d'exécution d'un profil (demo / fast / deep) selon la configuration LLM du serveur. */
+function runProfile(app, profile) {
+  const cfg = app.kayrosContext?.llmConfig;
+  return profileRunOptions(profile || DEFAULT_PROFILE, {
+    fastAvailable: !!cfg?.fast?.available, fastModel: cfg?.fast?.model, deepModel: cfg?.model, deepProvider: cfg?.provider,
+  });
 }
 function makeSessionId() { return `session_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`; }
 
@@ -497,9 +505,11 @@ export default async function consoleRoute(app) {
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const question = parsed.data.question || parsed.data.text;
     const context = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    const profile = runProfile(app, parsed.data.profile);
     const input = {
       platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
       user_id: me.sub, by: me.email, explicit: true, text: question, context,
+      provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
     };
     if (waitRequested(req)) {
       try {
@@ -512,7 +522,7 @@ export default async function consoleRoute(app) {
       const started = await app.kayrosContext.hybridGateway.startMessage(input);
       const execution = executionView(started.thread, started.run_id);
       return reply.code(202).send({
-        session_id: room.room_id, ...execution,
+        session_id: room.room_id, ...execution, profile: profile.effective_profile, eta_seconds: profile.eta_seconds,
         run: { run_id: started.run_id, status: 'running' }, thread: started.thread,
         poll: `/v1/console/threads/${encodeURIComponent(execution.thread_id)}`,
       });
@@ -542,8 +552,11 @@ export default async function consoleRoute(app) {
   app.post('/v1/console/threads/:threadId/messages', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = replySchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'réponse invalide', issues: parsed.error.issues });
-    if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
-    const options = { tenantId: me.tenantId, text: parsed.data.text, by: me.email };
+    const existing = await accessibleThread(app, me, req.params.threadId);
+    if (!existing) return reply.code(404).send({ error: 'fil introuvable' });
+    // La relance garde le profil de la mission d'origine (un fil sans profil : configuration du serveur).
+    const profile = existing.profile ? runProfile(app, existing.profile) : null;
+    const options = { tenantId: me.tenantId, text: parsed.data.text, by: me.email, provider: profile?.provider || null, model: profile?.model || null };
     try {
       if (waitRequested(req)) {
         const thread = await app.kayrosContext.hybridGateway.continueThread(req.params.threadId, options);

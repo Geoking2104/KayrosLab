@@ -136,6 +136,31 @@ async function actorScope(app, req, body = {}) {
   };
 }
 
+// --- Contrôle de propriétaire (F4) ------------------------------------------
+// comex/admin voient le tenant ; les autres rôles ne lisent et ne lancent que
+// leurs propres configurations et runs. Une ressource d'autrui répond 404
+// (son existence n'est pas révélée), comme dans la console (PR #39).
+function tenantWide(session) { return ['comex', 'admin'].includes(session?.role); }
+function sameActor(session, by) {
+  if (!by || !session) return false;
+  const value = String(by).toLowerCase();
+  return (!!session.sub && value === String(session.sub).toLowerCase())
+    || (!!session.email && value === String(session.email).toLowerCase());
+}
+export function canAccessConfiguration(session, configuration) {
+  return !!configuration && (tenantWide(session) || sameActor(session, configuration.created_by));
+}
+export function canAccessRun(session, run, service) {
+  if (!run) return false;
+  if (tenantWide(session)) return true;
+  // Runs antérieurs à `created_by` : auteur de l'audit de fin de run, sinon propriétaire de la configuration.
+  const author = run.created_by
+    || (run.audit || []).find((event) => event?.type === 'swarm.run.completed')?.by || null;
+  if (author) return sameActor(session, author);
+  const configuration = run.configuration || service?.getConfiguration?.(run.swarm_id, { tenantId: session?.tenantId || null });
+  return sameActor(session, configuration?.created_by);
+}
+
 function serviceFor(app, reply) {
   const service = app.kayrosContext?.engine?.swarm;
   if (!service) reply.code(503).send({ error: 'swarm service non disponible' });
@@ -225,7 +250,7 @@ export default async function swarmRoutes(app) {
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req);
     const config = service.getConfiguration(req.params.swarmId, scope);
-    return config || reply.code(404).send({ error: 'swarm introuvable' });
+    return canAccessConfiguration(req.swarmSession, config) ? config : reply.code(404).send({ error: 'swarm introuvable' });
   });
 
   app.post('/v1/swarm/configurations/:swarmId/run', async (req, reply) => {
@@ -233,6 +258,9 @@ export default async function swarmRoutes(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'requête swarm invalide', issues: parsed.error.issues });
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req, parsed.data);
+    if (!canAccessConfiguration(req.swarmSession, service.getConfiguration(req.params.swarmId, { tenantId: scope.tenantId }))) {
+      return reply.code(404).send({ error: 'swarm introuvable' });
+    }
     try {
       const run = await service.run(req.params.swarmId, { ...parsed.data, ...scope });
       return reply.code(202).send(run);
@@ -243,14 +271,14 @@ export default async function swarmRoutes(app) {
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req);
     const run = service.getRun(req.params.runId, scope);
-    return run || reply.code(404).send({ error: 'run introuvable' });
+    return canAccessRun(req.swarmSession, run, service) ? run : reply.code(404).send({ error: 'run introuvable' });
   });
 
   app.get('/v1/swarm/runs/:runId/dossier', async (req, reply) => {
     const service = serviceFor(app, reply); if (!service) return reply;
     const scope = await actorScope(app, req);
     const run = service.getRun(req.params.runId, scope);
-    if (!run) return reply.code(404).send({ error: 'run introuvable' });
+    if (!canAccessRun(req.swarmSession, run, service)) return reply.code(404).send({ error: 'run introuvable' });
     return reply.type('text/markdown; charset=utf-8').send(renderSwarmDossierMarkdown(run));
   });
 
