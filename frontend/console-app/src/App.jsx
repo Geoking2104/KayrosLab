@@ -93,6 +93,13 @@ function Login({ onLogin }) {
   const [sso, setSso] = useState(null);
   const registration = mode === 'register'; const forgotten = mode === 'forgot'; const resetting = mode === 'reset';
   useEffect(() => {
+    // Back from the identity provider can restore this page from the browser
+    // cache, including its disabled buttons. Allow another login attempt.
+    const resumeLogin = (event) => { if (event.persisted) setState('idle'); };
+    addEventListener('pageshow', resumeLogin);
+    return () => removeEventListener('pageshow', resumeLogin);
+  }, []);
+  useEffect(() => {
     const syncResetLink = () => {
       const token = new URLSearchParams(String(location.hash).split('?')[1] || '').get('token');
       if (String(location.hash).startsWith('#reset-password') && token) { setMode('reset'); setState('idle'); setError(''); }
