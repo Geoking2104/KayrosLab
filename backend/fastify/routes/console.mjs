@@ -15,10 +15,19 @@ const ruleConfigurationSchema = z.object({
   user_added_rules: z.array(z.union([z.string().min(1).max(2000), z.object({ rule_id: z.string().max(120).optional(), rule_text: z.string().min(1).max(2000) })])).optional(),
   user_modified_rules: z.array(z.object({ replaces_rule_id: z.string().min(1).max(120), modified_text: z.string().min(1).max(2000) })).optional(),
 }).optional();
+// Descriptif de personnalité éditable (cf. core/personality-descriptif.mjs).
+const descriptifSchema = z.object({
+  disc_type: z.string().max(8).nullable().optional(), archetype: z.string().max(120).nullable().optional(),
+  disc_intensity: z.number().min(0).max(100).nullable().optional(), overview: z.string().max(4000).nullable().optional(),
+  qualities: z.array(z.string().max(80)).max(6).optional(),
+  traits: z.record(z.string().max(40), z.number().min(0).max(100)).optional(),
+  sections: z.record(z.string().max(40), z.array(z.string().max(500)).max(12)).optional(),
+  source: z.string().max(40).optional(),
+}).nullable().optional();
 const humanProfileSchema = z.object({
   assigned_name: z.string().max(200).optional(), linkedin_url: z.string().max(1000).optional(), crystalknows_report_url: z.string().max(1000).optional(),
   disc_type: z.string().max(80).optional(), enneagram_type: z.string().max(80).optional(), myers_briggs_type: z.string().max(80).optional(),
-  behavioral_archetype: z.string().max(160).optional(), core_motivators: z.array(z.string().max(500)).max(30).optional(),
+  behavioral_archetype: z.string().max(160).optional(), descriptif: descriptifSchema, core_motivators: z.array(z.string().max(500)).max(30).optional(),
   skepticism_factor: z.string().max(500).optional(), profile_summary: z.array(z.string().max(1000)).max(30).optional(),
   professional_context: z.object({ headline: z.string().max(500).optional(), current_role: z.string().max(300).optional(), company: z.string().max(300).optional(), location: z.string().max(300).optional(), skills: z.array(z.string().max(300)).max(100).optional(), qualities: z.array(z.string().max(300)).max(100).optional() }).optional(),
   communication_style: z.object({ tone: z.string().max(160).optional(), preferred_format: z.string().max(300).optional(), decision_triggers: z.array(z.string().max(500)).max(30).optional(), stress_triggers: z.array(z.string().max(500)).max(30).optional(), objection_patterns: z.array(z.string().max(500)).max(30).optional(), communication_directives: z.array(z.string().max(500)).max(30).optional() }).optional(),
@@ -35,7 +44,7 @@ const humanProfileSchema = z.object({
   consent_confirmed: z.boolean().optional(),
 }).optional();
 // Caractéristiques déclarées d'un agent (personnalité de rôle) : injectées dans son contexte d'exécution.
-const behavioralProfileSchema = z.record(z.string().max(60), z.union([z.string().max(1000), z.number(), z.boolean(), z.array(z.string().max(500)).max(20)])).optional();
+const behavioralProfileSchema = z.object({ descriptif: descriptifSchema }).catchall(z.union([z.string().max(1000), z.number(), z.boolean(), z.array(z.string().max(500)).max(20)])).optional();
 const seniorityEnum = z.enum(['intern', 'junior', 'senior', 'executive']);
 // « Nouvelle session » : ajustement d'un agent proposé pour ce seul collectif (le registre reste intact).
 const sessionOverrideSchema = z.object({

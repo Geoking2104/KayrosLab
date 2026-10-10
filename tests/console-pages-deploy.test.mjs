@@ -159,3 +159,19 @@ test('sessions : un agent de session peut rejoindre le registre partagé (comex/
   assert.match(promote, /Espace partagé en libre-service/);
   assert.match(promote, /share_consent_confirmed/);
 });
+
+test('descriptif de personnalité : éditeur dans la composition et le registre', async () => {
+  const [app, composer, editor] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/agent-composer.jsx'),
+    read('frontend/console-app/src/personality-descriptif.jsx'),
+  ]);
+  assert.match(composer, /<DescriptifPanel draft=\{draft\}/);
+  assert.match(composer, /out\.descriptif = descriptif/);
+  assert.match(app, /<DescriptifFieldset value=\{form\.descriptif\}/);
+  assert.match(app, /withoutDescriptif\(agent\.behavioral_profile\)/);
+  assert.match(editor, /export function DiscWheel/);
+  assert.match(editor, /Traits comportementaux · 0 à 100/);
+  assert.match(editor, /Créer depuis le type DISC/);
+  assert.match(editor, /from '\.\.\/\.\.\/\.\.\/core\/personality-descriptif\.mjs'/);
+});

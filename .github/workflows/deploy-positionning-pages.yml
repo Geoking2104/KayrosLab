@@ -6,6 +6,7 @@ on:
     paths:
       - 'frontend/positionning-app/**'
       - 'frontend/console-app/**'
+      - 'core/personality-descriptif.mjs'
       - 'index.html'
       - 'index.fr.html'
       - 'validation-proposition.html'

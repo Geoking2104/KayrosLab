@@ -1,3 +1,4 @@
+import { descriptifFromCrystal, descriptifFromDisc, normalizeDescriptif } from './personality-descriptif.mjs';
 // KayrosLab — consent-aware stakeholder personality profiles.
 // LinkedIn is identity/professional context only. Behavioral attributes come
 // from explicit manual input or an authorized Crystal profile import.
@@ -104,6 +105,7 @@ export function normalizeHumanProfile(input = {}) {
       qualities: strings(input.professional_context?.qualities),
     }),
     communication_style: normalizeCommunicationStyle(input.communication_style),
+    descriptif: normalizeDescriptif(input.descriptif),
     profile_sources: sources,
     consent_confirmed: input.consent_confirmed === true || (sources.length > 0 && sources.every((s) => s.consent_confirmed === true)),
   });
@@ -264,6 +266,7 @@ export function profileFromCrystalData(response = {}, meta = {}) {
         ...recommendationList(content.recommendations, ['do', 'dos']),
       ],
     },
+    descriptif: descriptifFromCrystal(response),
     consent_confirmed: true,
   });
   profile.profile_sources = [{
@@ -324,6 +327,7 @@ export function profileFromDiscType(discType, { assigned_name = null, imported_b
       objection_patterns: merge('objection_patterns'), communication_directives: merge('communication_directives'),
     },
     core_motivators: merge('decision_triggers'),
+    descriptif: descriptifFromDisc(disc),
     consent_confirmed: true,
   });
   profile.profile_sources = [{ source: 'manual', import_mode: 'disc_type', imported_at: now(), imported_by, fields: importedFields(profile), consent_confirmed: true }];
@@ -510,6 +514,8 @@ export function agentAttributesFromProfile(profile = {}, { role = null, company 
       risk_appetite: risk,
       motivators: (p.core_motivators || []).slice(0, 5),
       communication_directives: (style.communication_directives || []).slice(0, 5),
+      // Descriptif éditable : celui du profil importé, sinon le modèle du type DISC.
+      descriptif: p.descriptif || descriptifFromDisc(p.disc_type, { traits: p.behavioral_traits }) || null,
     }),
   });
 }

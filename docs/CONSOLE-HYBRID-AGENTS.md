@@ -132,3 +132,9 @@ Testée avec un vrai jeton sur les profils de test gratuits (`pjones@`, `drew@`,
 tous deux gérés par `profileFromCrystalData` (fixture `core/fixtures/crystal-v4-profile-pjones.json`).
 Un jeton valide d'une organisation sans l'option « API Access » obtient `401 Organization does not have the API Access feature`
 pour tout autre profil (et pour `GET /v4/content/profile/:id`) : la console l'affiche explicitement ; l'import JSON / DISC reste disponible.
+
+
+### Descriptif de personnalité (`behavioral_profile.descriptif`)
+
+Chaque agent personnifié peut porter un descriptif éditable : `disc_type`, `archetype`, `disc_intensity` (0–100), `overview`, `qualities[]`, `traits` (`risk_aversion`, `skepticism`, `pragmatism`, `pace`, `expressiveness`, `social`, `dominance`, `leniency`, de 0 à 100), `sections` (`communication`, `building_trust`, `motivation`, `driving_action`, `energizers`, `drainers`, `strengths`, `blindspots`, `working_together`, `meetings`, `emails`, `following_up`, `negotiating`, `proposal`, `do`, `dont`) et `source` (`crystalknows`, `disc_template`, `manual` ou `anonymised`).
+Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la console, construit le descriptif depuis Crystal v4 (`descriptifFromCrystal`) ou depuis un type DISC (`descriptifFromDisc`), le normalise et l'injecte dans le contexte d'exécution (`descriptifContext`).

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import consoleRoute from '../routes/console.mjs';
 import { HybridAgentGateway, SwarmService } from '../../../core/index.mjs';
+import { compileEffectiveAgentContext } from '../../../core/swarm.mjs';
 import { ConnectorConfigurationService, InMemoryConnectorConfigStore } from '../../../core/connector-config.mjs';
 
 async function buildApp({ role = 'contributeur', crystal = false, profileImporter = null, tenantId = 'tenant-a', user = null } = {}) {
@@ -186,4 +187,65 @@ test('registre : tenant partagé (libre-service) — profil réel refusé, attri
   // Aucune trace du nom de la personne importée.
   assert.doesNotMatch(JSON.stringify(saved), /paul jones/i);
   assert.match(saved.mission, /Réagir comme Analyste rigoureux/);
+});
+
+const DESCRIPTIF = {
+  disc_type: 'C', archetype: 'Analyste', disc_intensity: 80, overview: 'Paul décide sur des faits vérifiés.',
+  qualities: ['Rigoureux'], traits: { risk_aversion: 83, pace: 35 },
+  sections: { communication: ['Chiffrer chaque affirmation'], blindspots: ['Paul Jones peut retarder la décision'] }, source: 'crystalknows',
+};
+
+test('descriptif : agent composé et agent ajusté portent leur descriptif jusqu’au contexte d’exécution', async (t) => {
+  const { app, swarm } = await buildApp();
+  t.after(() => app.close());
+  const created = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: {
+    name: 'Descriptifs', active_agents: ['cfo'],
+    agent_overrides: { cfo: { behavioral_profile: { disc_type: 'D', descriptif: { disc_type: 'D', sections: { negotiating: ['Échanger des concessions contre des engagements'] }, traits: { dominance: 90 } } } } },
+    custom_agents: [{ agent_id: 'analyste', display_name: 'Analyste', role_name: 'Analyste', department: 'Finance', mission: 'Vérifier.', behavioral_profile: { disc_type: 'C', descriptif: DESCRIPTIF } }],
+  } });
+  assert.equal(created.statusCode, 201, created.body);
+  const config = swarm.getConfiguration(created.json().session.collective.swarm_id, { tenantId: 'tenant-a' });
+  const own = swarm.effectiveConfigurationAgent(config, 'analyste', { tenantId: 'tenant-a' });
+  assert.equal(own.behavioral_profile.descriptif.archetype, 'Analyste');
+  assert.match(compileEffectiveAgentContext(own), /Comment lui parler : Chiffrer chaque affirmation/);
+  assert.match(compileEffectiveAgentContext(own), /Prend des risques ↔ Évite le risque : 83\/100/);
+  const cfo = swarm.effectiveConfigurationAgent(config, 'cfo', { tenantId: 'tenant-a' });
+  assert.match(compileEffectiveAgentContext(cfo), /Négocier : Échanger des concessions/);
+  // Le registre reste intact.
+  assert.equal(swarm.registry.get('cfo', { tenantId: 'tenant-a' }).behavioral_profile?.descriptif, undefined);
+  // Descriptif invalide refusé (trait hors bornes).
+  const bad = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: { name: 'X', custom_agents: [{ display_name: 'A', role_name: 'A', department: 'B', mission: 'C', behavioral_profile: { descriptif: { traits: { pace: 300 } } } }] } });
+  assert.equal(bad.statusCode, 400);
+});
+
+test('descriptif : enregistré au registre (comex) et anonymisé dans le tenant partagé', async (t) => {
+  const own = await buildApp({ role: 'admin' });
+  t.after(() => own.app.close());
+  const make = async (app) => {
+    const res = await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: { name: 'Profil', custom_agents: [{ agent_id: 'paul_jones', display_name: 'Paul Jones', role_name: 'Analyste', department: 'Finance', mission: 'Réagir comme Paul Jones.', behavioral_profile: { disc_type: 'C', descriptif: DESCRIPTIF }, human_profile: REAL_PROFILE }] } });
+    assert.equal(res.statusCode, 201, res.body);
+    return res.json().session.session_id;
+  };
+  let sessionId = await make(own.app);
+  const saved = await own.app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/agents/paul_jones/promote`, payload: { share_consent_confirmed: true } });
+  assert.equal(saved.statusCode, 201, saved.body);
+  assert.equal(own.swarm.registry.get('paul_jones', { tenantId: 'tenant-a' }).behavioral_profile.descriptif.source, 'crystalknows');
+  // Édition du descriptif dans le registre (comex/admin).
+  const patched = await own.app.inject({ method: 'PATCH', url: '/v1/console/agents/paul_jones', payload: { behavioral_profile: { disc_type: 'Cs', descriptif: { ...DESCRIPTIF, disc_type: 'Cs', sections: { meetings: ['Envoyer les pièces avant'] } } } } });
+  assert.equal(patched.statusCode, 200, patched.body);
+  assert.match(compileEffectiveAgentContext(own.swarm.registry.get('paul_jones', { tenantId: 'tenant-a' })), /En réunion : Envoyer les pièces avant/);
+
+  const shared = await buildApp({ role: 'comex', tenantId: 'default' });
+  t.after(() => shared.app.close());
+  sessionId = await make(shared.app);
+  const res = await shared.app.inject({ method: 'POST', url: `/v1/console/sessions/${sessionId}/agents/paul_jones/promote`, payload: { include_human_profile: false, agent_id: 'analyste_c', display_name: 'Analyste rigoureux' } });
+  assert.equal(res.statusCode, 201, res.body);
+  const anon = shared.swarm.registry.get('analyste_c', { tenantId: 'default' });
+  assert.equal(anon.behavioral_profile.descriptif.source, 'anonymised');
+  assert.doesNotMatch(JSON.stringify(anon), /paul|jones/i);
+  assert.match(anon.behavioral_profile.descriptif.overview, /Analyste rigoureux décide/);
+  // Un identifiant qui reprend le nom est refusé.
+  const sid = await make(shared.app);
+  const leaky = await shared.app.inject({ method: 'POST', url: `/v1/console/sessions/${sid}/agents/paul_jones/promote`, payload: { include_human_profile: false, agent_id: 'paul_jones_analyste' } });
+  assert.equal(leaky.statusCode, 400);
 });
