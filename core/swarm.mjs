@@ -27,7 +27,7 @@ export const HUMAN_ACTIONS = Object.freeze(['accept_consensus', 'override_veto',
 export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   {
     agent_id: 'cfo', agent_type: 'system_predefined',
-    can_create_agents: true, can_create_files: true,, role_name: 'Chief Financial Officer',
+    can_create_agents: true, can_create_files: true, role_name: 'Chief Financial Officer',
     department: 'Finance', seniority: 'executive',
     primary_focus: 'Test financial viability, cash exposure, unit economics and downside scenarios.',
     veto_power: false,
@@ -40,7 +40,7 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   },
   {
     agent_id: 'cto', agent_type: 'system_predefined',
-    can_create_agents: true, can_create_files: true,, role_name: 'Chief Technology Officer',
+    can_create_agents: true, can_create_files: true, role_name: 'Chief Technology Officer',
     department: 'Engineering', seniority: 'executive',
     primary_focus: 'Test architecture, delivery feasibility, operability, scalability and technical debt.',
     veto_power: false,
@@ -53,7 +53,7 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   },
   {
     agent_id: 'legal_counsel', agent_type: 'system_predefined',
-    can_create_agents: true, can_create_files: true,, role_name: 'Legal Counsel',
+    can_create_agents: true, can_create_files: true, role_name: 'Legal Counsel',
     department: 'Legal & Compliance', seniority: 'executive',
     primary_focus: 'Test regulatory, contractual, licensing, privacy and documentation exposure.',
     veto_power: false,
@@ -67,7 +67,7 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   },
   {
     agent_id: 'quality_analyst', agent_type: 'system_predefined',
-    can_create_agents: true, can_create_files: true,, role_name: 'Analyste qualité & feedback',
+    can_create_agents: true, can_create_files: true, role_name: 'Analyste qualité & feedback',
     department: 'Qualité & Gouvernance', seniority: 'senior',
     primary_focus: 'Évaluer la qualité des analyses agentiques (clarté, preuves, cohérence, biais) et produire un feedback actionnable pour améliorer le Kayroslab Index.',
     veto_power: false,

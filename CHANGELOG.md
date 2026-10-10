@@ -1,5 +1,17 @@
 # Changelog
 
+## Non publié — Console UX & agents (octobre 2026)
+
+- **Parcours overview** réorganisé en 3 étapes : 1. Collectif → 2. Question → 3. Suivi & arbitrage.
+- **Rôles prédéfinis** dans « Créer un collectif » (Direction, Commercial, Production, Logistique, Support, Qualité, Opérations) + secteur et taille d’équipe.
+- **Agents système** : ajout de `quality_analyst` et `planner`.
+- **Permissions agents** : section Permissions (activé, veto, outils, connecteurs) + `can_create_agents` / `can_create_files` activés par défaut.
+- **Matérialisation automatique** : agents et fichiers proposés dans le verdict (`proposed_agents`, `proposed_files`) créés et rattachés à la session.
+- **Ajout d’agent** à un collectif existant depuis la page Sessions.
+- **KPI** dans Réglages (Kayroslab Index placeholder, missions, agents, collectifs, arbitrages).
+- Correctif : virgule manquante dans le catalogue littéraire (Nietzsche retiré) ; double virgule dans les définitions d’agents système.
+
+
 ## Non publié — Console : descriptif de personnalité éditable des agents personnifiés
 
 - **Descriptif de personnalité** dans l'édition d'un agent : composition de session (agent composé, agent proposé ajusté, profil Crystal / DISC importé) et registre (comex/admin). Il comprend une roue DISC (16 types, repère selon l'intensité), le type, l'archétype, l'intensité, les qualités, une vue d'ensemble, 8 traits 0–100 réglables par curseurs et 16 sections éditables en listes : comment lui parler, gagner sa confiance, ses moteurs, déclencher la décision, énergie, ce qui l'épuise, points forts, angles morts, travailler ensemble, réunions, écrits, relances, négociation, présenter une proposition, à faire, à éviter.
