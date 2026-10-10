@@ -60,6 +60,7 @@ const ROLE_PACKS = [
   { id: 'hr', name: 'Gestionnaire de paie / RH', category: 'Support', focus: 'Recrutement, contrats et paie.' },
   { id: 'controller', name: 'Contrôleur de gestion / Comptable', category: 'Support', focus: 'Suit les comptes et obligations légales.' },
   { id: 'legal', name: 'Chargé des affaires juridiques', category: 'Support', focus: 'Veille au respect du droit et des réglementations.' },
+  { id: 'quality_analyst', name: 'Analyste qualité & feedback', category: 'Qualité', focus: 'Évalue la qualité des analyses et propose des améliorations pour le Kayroslab Index.' },
 ];
 const SECTORS = ['Tech / SaaS', 'Industrie', 'Commerce / Retail', 'Services', 'Santé', 'Finance', 'Autre'];
 const TEAM_SIZES = ['Solo / Créateur', 'Petite PME (< 20)', 'PME (20–100)', 'ETI / Grande entreprise'];
@@ -346,7 +347,7 @@ function addCustom(member = { draft: emptyDraft(), profile: null }) {
         </div>
         <p className="muted so-note">Ajoutez des rôles prédéfinis ou cochez les agents déjà présents.</p>
         <details className="role-packs"><summary>Rôles prédéfinis</summary>
-          {['Direction', 'Commercial & Marketing', 'Production & Technique', 'Achats & Logistique', 'Support'].map((cat) => <div key={cat} className="role-cat"><strong>{cat}</strong><div className="role-list">{ROLE_PACKS.filter((r) => r.category === cat).map((r) => <button key={r.id} type="button" className="button secondary small" onClick={() => addRolePack(r)}>{r.name}</button>)}</div></div>)}
+          {['Direction', 'Commercial & Marketing', 'Production & Technique', 'Achats & Logistique', 'Support', 'Qualité'].map((cat) => <div key={cat} className="role-cat"><strong>{cat}</strong><div className="role-list">{ROLE_PACKS.filter((r) => r.category === cat).map((r) => <button key={r.id} type="button" className="button secondary small" onClick={() => addRolePack(r)}>{r.name}</button>)}</div></div>)}
         </details>
         <p className="muted so-note">Cochez les agents proposés, puis « Vérifier » pour relire leurs attributs et les ajuster. Les ajustements valent pour cette session seulement.</p>
         {!active.length && <p className="muted so-note" role="note">Aucun agent proposé n’est actif : composez un agent ou importez une personnalité réelle.</p>}
@@ -1041,7 +1042,7 @@ function SettingsPage({ data, refresh }) {
   const pending = data.summary?.pending_human_decisions || 0;
   const agents = data.summary?.agents || 0;
   const sessions = data.summary?.sessions || 0;
-  // Placeholder Kayroslab Index (0-100) — à brancher sur un vrai calcul côté backend
+  // Kayroslab Index (0-100) : base sur volume + présence d'un analyste qualité. À enrichir côté backend.
   const kayrosIndex = Math.min(100, Math.round((total > 0 ? 40 : 0) + (agents * 5) + (sessions * 3) - pending * 2));
 
   const params = hashParams();
