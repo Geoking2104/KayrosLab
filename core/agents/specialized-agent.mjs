@@ -12,7 +12,8 @@ The "verdict" field is mandatory and MUST be exactly one of the three strings "G
   "metrics": [{"metric":"...","value":"...","confidence_impact":"high | medium | low","persona_skepticism_level":"high | medium | low"}],
   "required_mitigations": ["..."],
   "unverified_assumptions": ["..."],
-  "proposed_agents": [{"role_name":"...","department":"...","mission":"...","primary_focus":"..."}]
+  "proposed_agents": [{"role_name":"...","department":"...","mission":"...","primary_focus":"..."}],
+  "proposed_files": [{"filename":"...","content":"...","mime":"text/plain"}]
 }`;
 
 /**
