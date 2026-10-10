@@ -11,7 +11,8 @@ The "verdict" field is mandatory and MUST be exactly one of the three strings "G
   "critical_risks": ["..."],
   "metrics": [{"metric":"...","value":"...","confidence_impact":"high | medium | low","persona_skepticism_level":"high | medium | low"}],
   "required_mitigations": ["..."],
-  "unverified_assumptions": ["..."]
+  "unverified_assumptions": ["..."],
+  "proposed_agents": [{"role_name":"...","department":"...","mission":"...","primary_focus":"..."}]
 }`;
 
 /**
