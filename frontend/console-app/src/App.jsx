@@ -1014,9 +1014,9 @@ function SalesOracleManager({ ready, clientRef, currentCase, documents, onCases,
 /** Onboarding guidé pour les tenants neufs (0 sessions ou 0 exécutions). */
 const ONBOARDING_KEY = 'kayros_onboarding_done';
 const COLLECTIVE_TEMPLATES = [
-  { id: 'deal', name: 'Comité deal review', hint: 'CFO · Legal · Sales — pour arbitrer une opportunité', agents: ['cfo', 'legal', 'sales'] },
-  { id: 'product', name: 'Comité produit', hint: 'CTO · Product · Sales — pour valider une roadmap', agents: ['cto', 'product', 'sales'] },
-  { id: 'invest', name: 'Comité investissement', hint: 'CFO · Strategy · Legal — pour une décision d’allocation', agents: ['cfo', 'strategy', 'legal'] },
+  { id: 'deal', name: 'Comité deal review', hint: 'CFO · Legal · CTO — arbitrer une opportunité', agents: ['cfo', 'legal_counsel', 'cto'] },
+  { id: 'product', name: 'Comité produit', hint: 'CTO · CFO · Legal — valider une roadmap', agents: ['cto', 'cfo', 'legal_counsel'] },
+  { id: 'invest', name: 'Comité investissement', hint: 'CFO · Legal · CTO — décision d’allocation', agents: ['cfo', 'legal_counsel', 'cto'] },
 ];
 const EXAMPLE_QUESTIONS = [
   'Faut-il lancer ce projet maintenant, et à quelles conditions ?',
@@ -1034,9 +1034,17 @@ function Onboarding({ data, onDone, onCreateSession }) {
   }
   function skip() { finish(); }
   async function launch() {
-    // Crée une session à partir du template choisi puis laisse l’utilisateur lancer
     const tpl = COLLECTIVE_TEMPLATES.find((t) => t.id === template);
-    if (tpl && onCreateSession) await onCreateSession({ name: tpl.name, active_agents: tpl.agents, voting_threshold: 'majority' });
+    if (tpl && onCreateSession) {
+      const available = new Set((data?.agents || []).map((a) => a.agent_id));
+      const ids = tpl.agents.filter((id) => available.has(id));
+      // Si aucun agent du template n'est présent, on prend les 3 premiers agents actifs
+      const fallback = (data?.agents || []).filter((a) => a.enabled !== false).slice(0, 3).map((a) => a.agent_id);
+      const active_agents = ids.length ? ids : fallback;
+      if (active_agents.length) {
+        await onCreateSession({ name: tpl.name, active_agents, voting_threshold: 'majority' });
+      }
+    }
     finish();
   }
   return <div className="dialog-backdrop" role="dialog" aria-modal="true" aria-labelledby="onb-title">
