@@ -440,7 +440,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
-  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console de décisions</h1><p>Composez un collectif, lancez une mission, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
+  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId} · Vue d’ensemble</p><h1>Console de décisions</h1><p>Composez un collectif, lancez une mission, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
     <section className="metric-row">
       <div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div>
@@ -453,7 +453,13 @@ function Overview({ data, refresh, openSession, onThread }) {
       <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
       {session && <AgentChips agents={session.collective.agents} />}
       {!data.sessions.length && <div className="empty-state"><p>Aucun collectif pour le moment.</p><button type="button" className="button primary" onClick={openSession}>Créer mon premier collectif</button></div>}
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label>
+      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ex. Faut-il lancer ce projet maintenant, et à quelles conditions ?" /></label>
+        <div className="question-examples">
+          <span className="muted">Exemples :</span>
+          <button type="button" className="text-button" onClick={() => setQuestion('Faut-il lancer ce projet maintenant, et à quelles conditions ?')}>Lancement</button>
+          <button type="button" className="text-button" onClick={() => setQuestion('Devons-nous accepter la remise de 15 % demandée par ce client ?')}>Remise client</button>
+          <button type="button" className="text-button" onClick={() => setQuestion('La roadmap Q4 est-elle réaliste au vu des ressources actuelles ?')}>Roadmap</button>
+        </div>
         <div className="profile-picker">
           {MISSION_PROFILES.map(([id, label, hint]) => <button key={id} type="button" className={`profile-card ${profile === id ? 'is-selected' : ''}`} onClick={() => setProfile(id)}><strong>{label}</strong><small>{hint}</small></button>)}
         </div>
