@@ -1074,8 +1074,45 @@ function SettingsPage({ data, refresh }) {
   </section>;
 }
 
+
+function AddAgentToSession({ session, agents, onClose, onSaved }) {
+  const [role, setRole] = useState('');
+  const [existing, setExisting] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  async function submit(e) {
+    e.preventDefault(); setBusy(true); setError('');
+    try {
+      const body = { add_agent_ids: [], add_custom_agents: [] };
+      if (existing) body.add_agent_ids.push(existing);
+      if (role) {
+        const pack = ROLE_PACKS.find((r) => r.id === role);
+        if (pack) body.add_custom_agents.push({
+          display_name: pack.name, role_name: pack.name, department: pack.category,
+          seniority: 'senior', mission: pack.focus, primary_focus: pack.focus,
+        });
+      }
+      if (!body.add_agent_ids.length && !body.add_custom_agents.length) throw new Error('Choisissez un agent ou un rôle.');
+      await api.updateSessionCollective(session.session_id, body);
+      await onSaved(); onClose();
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+  return <div className="dialog-backdrop" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <section className="dialog" role="dialog" aria-modal="true">
+      <header><h2>Ajouter un agent</h2><button className="icon-button" aria-label="Fermer" onClick={onClose}>×</button></header>
+      <form onSubmit={submit}>
+        <label>Rôle prédéfini<select value={role} onChange={(e) => setRole(e.target.value)}><option value="">—</option>{ROLE_PACKS.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}</select></label>
+        <label>Ou agent du registre<select value={existing} onChange={(e) => setExisting(e.target.value)}><option value="">—</option>{agents.filter((a) => a.enabled !== false).map((a) => <option key={a.agent_id} value={a.agent_id}>{a.display_name || a.role_name}</option>)}</select></label>
+        {error && <p className="form-error">{error}</p>}
+        <footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={busy}>{busy ? 'Ajout…' : 'Ajouter'}</button></footer>
+      </form>
+    </section>
+  </div>;
+}
 function SessionsPage({ data, refresh, onCreate, onThread }) {
   const [realProfiles, setRealProfiles] = useState(false);
+  const [addingTo, setAddingTo] = useState(null);
   return <section className="page"><header className="page-header"><div><p className="context-line">Collectifs exécutables</p><h1>Sessions</h1><p>Chaque session est un collectif stable : son journal d'exécution et ses dossiers restent attachés.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setRealProfiles(true)}>Importer des personnalités réelles</button><button className="button primary" onClick={onCreate}>Nouvelle session</button></div></header>
     {realProfiles && <RealProfilesDialog data={data} canUseApi={canManage(data.user)} onClose={() => setRealProfiles(false)} onDone={refresh} />}
     {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour composer un collectif et lancer une mission.</p>}
@@ -1083,9 +1120,11 @@ function SessionsPage({ data, refresh, onCreate, onThread }) {
       <small>{session.collective.active_agents.length} agent(s) · {session.executions?.length || 0} exécution(s) · {votingLabel(session.collective.voting_threshold)}</small>
       <h2>{session.name}</h2>
       <AgentChips agents={session.collective.agents} />
+      <button type="button" className="button secondary small" onClick={() => setAddingTo(session)}>Ajouter un agent</button>
       <SessionOwnAgents session={session} capabilities={data.capabilities} onSaved={refresh} />
       <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}{thread.status === 'running' ? ` · mission en cours${thread.progress?.total ? ` (${progressLabel(thread.progress)})` : ''}` : thread.status === 'failed' ? ' · échec' : ''}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
     </article>)}</div>
+    {addingTo && <AddAgentToSession session={addingTo} agents={data.agents} onClose={() => setAddingTo(null)} onSaved={refresh} />}
   </section>;
 }
 
