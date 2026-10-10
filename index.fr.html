@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KayrosLab — Comité de direction IA pour décisions à enjeux</title>
+<meta name="description" content="KayrosLab est un atelier de décision gouverné : des agents spécialisés aux devoirs opposés instruisent les preuves, challengent les hypothèses et rendent un verdict consultatif — GO, GO conditionnel ou NO-GO — qu'un humain arbitre.">
+<link rel="canonical" href="https://www.kayroslab.com/index.fr.html">
+<link rel="alternate" hreflang="en" href="https://www.kayroslab.com/">
+<link rel="alternate" hreflang="fr" href="https://www.kayroslab.com/index.fr.html">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr">
+<meta property="og:locale:alternate" content="en">
+<meta property="og:title" content="KayrosLab — Décidez avec un comité de direction IA">
+<meta property="og:description" content="Éprouvez vos décisions stratégiques avant le réel. Des agents débattent les preuves. Vous arbitrez le verdict.">
+<meta property="og:image" content="assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="marketing.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="logo-salesforce" viewBox="0 0 24 24"><path fill="#00A1E0" d="M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8"/></symbol>
+  <symbol id="logo-slack" viewBox="0 0 24 24"><path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z"/><path fill="#E01E5A" d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/><path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z"/><path fill="#36C5F0" d="M8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z"/><path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834z"/><path fill="#2EB67D" d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/><path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52z"/><path fill="#ECB22E" d="M15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></symbol>
+  <symbol id="logo-microsoft-teams" viewBox="0 0 24 24"><path fill="#6264A7" d="M20.625 8.127q-.55 0-1.025-.205-.475-.205-.832-.563-.358-.357-.563-.832Q18 6.053 18 5.502q0-.54.205-1.02t.563-.837q.357-.358.832-.563.474-.205 1.025-.205.54 0 1.02.205t.837.563q.358.357.563.837.205.48.205 1.02 0 .55-.205 1.025-.205.475-.563.832-.357.358-.837.563-.48.205-1.02.205zm0-3.75q-.469 0-.797.328-.328.328-.328.797 0 .469.328.797.328.328.797.328.469 0 .797-.328.328-.328.328-.797 0-.469-.328-.797-.328-.328-.797-.328zM24 10.002v5.578q0 .774-.293 1.46-.293.685-.803 1.194-.51.51-1.195.803-.686.293-1.459.293-.445 0-.908-.105-.463-.106-.85-.329-.293.95-.855 1.729-.563.78-1.319 1.336-.756.557-1.67.861-.914.305-1.898.305-1.148 0-2.162-.398-1.014-.399-1.805-1.102-.79-.703-1.312-1.664t-.674-2.086h-5.8q-.411 0-.704-.293T0 16.881V6.873q0-.41.293-.703t.703-.293h8.59q-.34-.715-.34-1.5 0-.727.275-1.365.276-.639.75-1.114.475-.474 1.114-.75.638-.275 1.365-.275t1.365.275q.639.276 1.114.75.474.475.75 1.114.275.638.275 1.365t-.275 1.365q-.276.639-.75 1.113-.475.475-1.114.75-.638.276-1.365.276-.188 0-.375-.024-.188-.023-.375-.058v1.078h10.875q.469 0 .797.328.328.328.328.797zM12.75 2.373q-.41 0-.78.158-.368.158-.638.434-.27.275-.428.639-.158.363-.158.773 0 .41.158.78.159.368.428.638.27.27.639.428.369.158.779.158.41 0 .773-.158.364-.159.64-.428.274-.27.433-.639.158-.369.158-.779 0-.41-.158-.773-.159-.364-.434-.64-.275-.275-.639-.433-.363-.158-.773-.158zM6.937 9.814h2.25V7.94H2.814v1.875h2.25v6h1.875zm10.313 7.313v-6.75H12v6.504q0 .41-.293.703t-.703.293H8.309q.152.809.556 1.5.405.691.985 1.19.58.497 1.318.779.738.281 1.582.281.926 0 1.746-.352.82-.351 1.436-.966.615-.616.966-1.43.352-.815.352-1.752zm5.25-1.547v-5.203h-3.75v6.855q.305.305.691.452.387.146.809.146.469 0 .879-.176.41-.175.715-.48.304-.305.48-.715t.176-.879Z"/></symbol>
+  <symbol id="logo-discord" viewBox="0 0 24 24"><path fill="#5865F2" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
+  <symbol id="logo-n8n" viewBox="0 0 24 24"><path fill="#EA4B71" d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></symbol>
+  <symbol id="logo-zapier" viewBox="0 0 24 24"><path fill="#FF4F00" d="M4.157 0A4.151 4.151 0 0 0 0 4.161v15.678A4.151 4.151 0 0 0 4.157 24h15.682A4.152 4.152 0 0 0 24 19.839V4.161A4.152 4.152 0 0 0 19.839 0H4.157Zm10.61 8.761h.03a.577.577 0 0 1 .23.038.585.585 0 0 1 .201.124.63.63 0 0 1 .162.431.612.612 0 0 1-.162.435.58.58 0 0 1-.201.128.58.58 0 0 1-.23.042.529.529 0 0 1-.235-.042.585.585 0 0 1-.332-.328.559.559 0 0 1-.038-.235.613.613 0 0 1 .17-.431.59.59 0 0 1 .405-.162Zm2.853 1.572c.03.004.061.004.095.004.325-.011.646.064.937.219.238.144.431.355.552.609.128.279.189.582.185.888v.193a2 2 0 0 1 0 .219h-2.498c.003.227.075.45.204.642a.78.78 0 0 0 .646.265.714.714 0 0 0 .484-.136.642.642 0 0 0 .23-.318l.915.257a1.398 1.398 0 0 1-.28.537c-.14.159-.321.284-.521.355a2.234 2.234 0 0 1-.836.136 1.923 1.923 0 0 1-1.001-.245 1.618 1.618 0 0 1-.665-.703 2.221 2.221 0 0 1-.227-1.036 1.95 1.95 0 0 1 .48-1.398 1.9 1.9 0 0 1 1.3-.488Zm-9.607.023c.162.004.325.026.48.079.207.065.4.174.563.314.26.302.393.692.366 1.088v2.276H8.53l-.109-.711h-.065c-.064.163-.155.31-.272.439a1.122 1.122 0 0 1-.374.264 1.023 1.023 0 0 1-.453.083 1.334 1.334 0 0 1-.866-.264.965.965 0 0 1-.329-.801.993.993 0 0 1 .076-.431 1.02 1.02 0 0 1 .242-.363 1.478 1.478 0 0 1 1.043-.303h.952v-.181a.696.696 0 0 0-.136-.454.553.553 0 0 0-.438-.154.695.695 0 0 0-.378.086.48.48 0 0 0-.193.254l-.99-.144a1.26 1.26 0 0 1 .257-.563c.14-.174.321-.302.533-.378.261-.091.54-.136.82-.129.053-.003.106-.007.163-.007Zm4.384.007c.174 0 .347.038.506.114.182.083.34.211.458.374.257.423.377.911.351 1.406a2.53 2.53 0 0 1-.355 1.448 1.148 1.148 0 0 1-1.009.517c-.204 0-.401-.045-.582-.136a1.052 1.052 0 0 1-.48-.457 1.298 1.298 0 0 1-.114-.234h-.045l.004 1.784h-1.059v-4.713h.904l.117.805h.057c.068-.208.177-.401.328-.56a1.129 1.129 0 0 1 .843-.344h.076v-.004Zm7.559.084h.903l.113.805h.053a1.37 1.37 0 0 1 .235-.484.813.813 0 0 1 .313-.242.82.82 0 0 1 .39-.076h.234v1.051h-.401a.662.662 0 0 0-.313.008.623.623 0 0 0-.272.155.663.663 0 0 0-.174.26.683.683 0 0 0-.027.314v1.875h-1.054v-3.666Zm-17.515.003h3.262v.896L3.73 13.104l.034.113h1.973l.042.9H2.4v-.9l1.931-1.754-.045-.117H2.441v-.896Zm11.815 0h1.055v3.659h-1.055V10.45Zm3.443.684.019.016a.69.69 0 0 0-.351.045.756.756 0 0 0-.287.204c-.11.155-.174.336-.189.522h1.545c-.034-.526-.257-.787-.74-.787h.003Zm-5.718.163c-.026 0-.057 0-.083.004a.78.78 0 0 0-.31.053.746.746 0 0 0-.257.189 1.016 1.016 0 0 0-.204.695v.064c-.015.257.057.507.204.711a.634.634 0 0 0 .253.196.638.638 0 0 0 .314.061.644.644 0 0 0 .578-.265c.14-.223.204-.48.189-.74a1.216 1.216 0 0 0-.181-.711.677.677 0 0 0-.503-.257Zm-4.509 1.266a.464.464 0 0 0-.268.102.373.373 0 0 0-.114.276c0 .053.008.106.027.155a.375.375 0 0 0 .087.132.576.576 0 0 0 .397.11v.004a.863.863 0 0 0 .563-.182.573.573 0 0 0 .211-.457v-.14h-.903Z"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.fr.html"><img src="assets/logo-kayroslab.png" alt="Logo KayrosLab">KayrosLab</a>
+    <nav class="nav-links">
+      <a href="#outcomes">Résultats</a>
+      <a href="#platform">Plateforme</a>
+      <a href="#how">Comment ça marche</a>
+      <a href="#personify">Agents</a>
+      <a href="#oracle">Sales Oracle</a>
+      <a href="#integrations">Intégrations</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang" role="group" aria-label="Sélecteur de langue">
+        <a class="lang-opt" href="/" hreflang="en" lang="en">EN</a>
+        <span class="lang-opt active" aria-current="true" lang="fr">FR</span>
+      </span>
+      <a class="signin" href="/console/">Se connecter</a>
+      <a class="btn btn-primary" href="/console/">Essayer la console</a>
+    </div>
+    <button class="hamb" id="hamb" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mnav" id="mnav">
+    <a href="#outcomes">Résultats</a>
+    <a href="#platform">Plateforme</a>
+    <a href="#how">Comment ça marche</a>
+    <a href="#personify">Agents</a>
+    <a href="#oracle">Sales Oracle</a>
+    <a href="#integrations">Intégrations</a>
+    <a href="#faq">FAQ</a>
+    <a href="/console/">Essayer la console</a>
+    <a href="mailto:contact@kayroslab.com">Contact</a>
+    <span class="lang" role="group" aria-label="Sélecteur de langue">
+      <a class="lang-opt" href="/" hreflang="en" lang="en">EN</a>
+      <span class="lang-opt active" aria-current="true" lang="fr">FR</span>
+    </span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap center">
+    <span class="pill"><span class="dot"></span>Atelier de décision gouverné pour dirigeants</span>
+    <h1>Votre <span class="grad">comité de direction IA</span> pour les décisions à enjeux.</h1>
+    <p class="lead">Avant d'engager un budget, des recrutements ou une réponse client — faites passer la décision par des agents spécialisés aux devoirs opposés. Ils instruisent les preuves, challengent les hypothèses et consolident les objections en un verdict. Vous restez responsable.</p>
+    <div class="cta">
+      <a class="btn btn-accent btn-lg" href="/console/">Essayer la console</a>
+      <a class="btn btn-ghost btn-lg" href="mailto:contact@kayroslab.com">Réserver un échange</a>
+    </div>
+    <p class="micro"><b>Plus de clarté, moins d'angles morts.</b> Arbitrage humain sur chaque verdict sensible — en local ou dans le cloud.</p>
+    <div class="hero-logos" aria-label="Intégrations disponibles"><span class="hl-label">Branché sur vos outils</span><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Salesforce</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Microsoft Teams</a><a class="logo-chip" href="#chats"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</a><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-n8n"/></svg>n8n</a><a class="logo-chip" href="#integrations"><svg class="logo-ico" aria-hidden="true"><use href="#logo-zapier"/></svg>Zapier</a></div>
+  </div>
+  <div class="wrap">
+    <div class="shot reveal">
+      <div class="bar"><i></i><i></i><i></i><span class="u">kayroslab.com/console</span></div>
+      <img src="assets/console-overview.webp" alt="Console KayrosLab : canaux Slack, Discord et Teams, métriques de mission en direct et décisions en attente d’arbitrage" width="1300" height="812" loading="eager">
+      <div class="cap">Chaque analyse, objection et condition reste au dossier tant qu'un humain n'a pas accepté, conditionné ou passé outre le verdict.</div>
+    </div>
+  </div>
+</section>
+
+<section id="outcomes" class="outcomes">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Pourquoi les dirigeants l'utilisent</span>
+      <h2>Des résultats, pas du jargon d'orchestration.</h2>
+      <p>KayrosLab est conçu pour le moment où une décision doit passer de la conversation à l'engagement — avec preuves, objections et responsabilité attachées.</p>
+    </div>
+    <div class="ogrid">
+      <div class="ocard reveal">
+        <div class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+        <h3>Temps-vers-insight réduit</h3>
+        <p>Transformez une question stratégique floue en dossier structuré en une session — affirmations, sources et fourchettes côte à côte.</p>
+      </div>
+      <div class="ocard reveal">
+        <div class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5M14 19c.3-2 1.8-3.5 4-3.5 1.2 0 2.2.4 3 1"/></svg></div>
+        <h3>Un comité de direction à la demande</h3>
+        <p>Finance, juridique, ingénierie, ventes et plus débattent depuis leur devoir — pas depuis une seule voix de modèle qui vous donne raison.</p>
+      </div>
+      <div class="ocard reveal">
+        <div class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l8 4v5c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V7l8-4Z"/><path d="M12 8v5M12 16h.01"/></svg></div>
+        <h3>Risques avant l'engagement</h3>
+        <p>Les objections red-team et les droits de veto arrivent tôt, pour que les surprises apparaissent en répétition — pas après la signature.</p>
+      </div>
+      <div class="ocard reveal">
+        <div class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v3l2 2"/></svg></div>
+        <h3>Un conseil défendable</h3>
+        <p>Chaîne de raisonnement inspectable, consciente de la conformité. Les prévisions restent des fourchettes ; les verdicts restent consultatifs jusqu'à votre décision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="platform" class="soft-dark">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Le cloud de décision KayrosLab</span>
+      <h2>Une pile unique, des preuves à l'arbitrage.</h2>
+      <p>Un parcours gouverné qui couvre rôles, délibération, chiffres et contrôle humain — pour les dirigeants et les équipes qui les soutiennent.</p>
+    </div>
+    <div class="bands">
+      <div class="band reveal">
+        <div class="blabel">Couche décision</div>
+        <div>
+          <h3>Des verdicts qui restent consultatifs</h3>
+          <p>GO, GO conditionnel ou NO-GO — avec conditions, objections et une porte humaine avant toute action.</p>
+          <div class="btags"><span class="btag">Arbitrage humain</span><span class="btag">Droits de veto</span><span class="btag">Dossier append-only</span></div>
+        </div>
+      </div>
+      <div class="band reveal">
+        <div class="blabel">Couche agents</div>
+        <div>
+          <h3>Rôles spécialisés aux devoirs opposés</h3>
+          <p>Composez un comité qui instruit, argumente et réconcilie — finance vs croissance, juridique vs vitesse, ingénierie vs promesse.</p>
+          <div class="btags"><span class="btag">Agents liés au rôle</span><span class="btag">Red team</span><span class="btag">Répétition parties prenantes</span></div>
+        </div>
+      </div>
+      <div class="band reveal">
+        <div class="blabel">Couche insight</div>
+        <div>
+          <h3>Preuves, fourchettes et narratifs</h3>
+          <p>Chiffres issus d'hypothèses explicites, scénarios réouvrables, et un narratif exécutif prêt pour le prochain comité de pilotage.</p>
+          <div class="btags"><span class="btag">Bandes de prévision</span><span class="btag">Matrice d'objections</span><span class="btag">Mémoire durable</span></div>
+        </div>
+      </div>
+      <div class="band reveal">
+        <div class="blabel">Couche canaux</div>
+        <div>
+          <h3>Là où vos équipes décident déjà</h3>
+          <p>Lancez des missions depuis la console ou depuis Salesforce, et apportez la même délibération gouvernée dans Slack, Microsoft Teams et Discord.</p>
+          <div class="btags"><span class="btag">Console</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Salesforce</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Teams</span><span class="btag btag-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Des issues claires</span>
+      <h2>Les opinions assurées sont faciles. Les décisions gouvernées ne le sont pas.</h2>
+      <p>Les réunions compressent l'incertitude en opinions ; la voix la plus forte l'emporte. KayrosLab garde affirmations, sources, chiffres et objections inspectables jusqu'à l'engagement.</p>
+    </div>
+    <div class="verdicts">
+      <div class="vcard go reveal">
+        <span class="vtag">GO</span>
+        <h3>Poursuivre</h3>
+        <p>Preuves et conditions satisfaites. L'humain responsable accepte et passe à l'exécution.</p>
+      </div>
+      <div class="vcard cond reveal">
+        <span class="vtag">CONDITIONAL_GO</span>
+        <h3>Poursuivre sous conditions</h3>
+        <p>Il reste des frictions : preuve manquante ou objection ouverte. La décision ne passe qu'avec des conditions attachées.</p>
+      </div>
+      <div class="vcard no reveal">
+        <span class="vtag">NO_GO</span>
+        <h3>Ne pas poursuivre</h3>
+        <p>Un détenteur de veto bloque. Le dossier consigne l'objection et la justification — réouvrable quand les preuves changent.</p>
+      </div>
+    </div>
+    <div class="sec-head center" style="margin-top:34px">
+      <p style="font-size:15px"><b style="color:var(--ink)">Le vote instruit · le veto décide.</b> Le verdict ne prime jamais sur la gouvernance : il reste consultatif tant qu'un humain n'accepte pas, n'attache pas de conditions, ou ne passe pas outre un veto.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Comment ça marche</span>
+      <h2>De la question au verdict arbitré — en langage clair.</h2>
+      <p>Pas besoin d'apprendre un framework d'agents. Énoncez la décision, laissez le comité travailler, puis arbitrez preuves en main.</p>
+    </div>
+    <div class="how">
+      <div class="hcard reveal"><div class="hn">01</div><h3>Énoncez la mission</h3><p>Décrivez la vraie décision — lancement, embauche, offre, pivot — avec le contexte et les contraintes qui comptent.</p></div>
+      <div class="hcard reveal"><div class="hn">02</div><h3>Composez le comité</h3><p>Assignez des rôles métier opposés pour que chaque agent instruise depuis un devoir, pas depuis un persona de chat générique.</p></div>
+      <div class="hcard reveal"><div class="hn">03</div><h3>Challenger &amp; consolider</h3><p>Les agents rassemblent les preuves, attaquent les hypothèses faibles et plient les objections dans un dossier structuré.</p></div>
+      <div class="hcard reveal"><div class="hn">04</div><h3>Vous arbitrez</h3><p>Acceptez, attachez des conditions, ou honorez un veto. Chaque étape est enregistrée pour la revue suivante.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Valeur métier des rôles</span>
+      <h2>Des agents comme comité de direction — pas comme plomberie.</h2>
+      <p>Partez de <strong>packs de rôles</strong> — CFO, CTO, DRH / RH, Juridique, Ventes — chacun encodant les enjeux et réflexes de veto typiques de la fonction. Ou allez plus loin avec un import de profil réel consenti ci-dessous.</p>
+    </div>
+    <div class="roles">
+      <div class="role reveal"><span class="rbadge">CFO · Finance</span><h3>Protéger le downside</h3><p>Met sous tension l'économie unitaire, le timing de trésorerie et les fourchettes avant que l'optimisme ne devienne un plan.</p></div>
+      <div class="role reveal"><span class="rbadge">Juridique · Risque</span><h3>Faire remonter les veto tôt</h3><p>Signale consentement, responsabilité et frictions de conformité tant qu'il est encore temps de redessiner la demande.</p></div>
+      <div class="role reveal"><span class="rbadge">CTO · Ingénierie</span><h3>Ancrer la promesse</h3><p>Challenge faisabilité, dépendances et risque de livraison pour que les engagements clients restent honnêtes.</p></div>
+      <div class="role reveal"><span class="rbadge">Ventes · GTM</span><h3>Éprouver la demande</h3><p>Répète les objections acheteur, les évaluateurs RFP et le narratif qui doit survivre au premier appel.</p></div>
+      <div class="role reveal"><span class="rbadge">Stratégie</span><h3>Garder l'espace d'options</h3><p>Cartographie alternatives et effets de second ordre pour que le comité ne se verrouille pas sur la première idée.</p></div>
+      <div class="role reveal"><span class="rbadge">Critique / Red team</span><h3>Attaquer le plan exprès</h3><p>Avocat du diable et red team forcent des modes de défaillance non évidents dans le dossier — avant le réel.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- AGENTS PERSONNIFIÉS -->
+<section id="personify" class="soft">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Différenciateur marché</span>
+      <h2>Agents personnifiés — deux façons d’éprouver une décision.</h2>
+      <p>Les packs de rôles génériques vous donnent des devoirs institutionnels. L’import optionnel et consenti d’un profil CrystalKnows place le style de communication d’une vraie partie prenante dans la répétition — comme mise à l’épreuve, toujours étiquetée Simulation.</p>
+    </div>
+    <div class="personify-grid">
+      <div class="ppath reveal">
+        <span class="ptag">Packs de rôles</span>
+        <h3>Caractéristiques de la fonction</h3>
+        <p>Composez un comité à partir de packs qui encodent ce qu’un CFO, un CTO, un DRH, un conseil juridique ou un responsable commercial protège, challenge et peut vetoer — sans prétendre être une personne nommée.</p>
+        <div class="chips">
+          <span class="chip">CFO</span>
+          <span class="chip">CTO</span>
+          <span class="chip">DRH / RH</span>
+          <span class="chip">Juridique</span>
+          <span class="chip">Ventes</span>
+          <span class="chip">Red team</span>
+        </div>
+        <p class="note">Devoir institutionnel · enjeux opposés · prêt en une session.</p>
+      </div>
+      <div class="ppath crystal reveal">
+        <span class="ptag">CrystalKnows · optionnel</span>
+        <h3>Import de profil réel pour mise à l’épreuve</h3>
+        <p>Lorsque vous disposez d’un profil de personnalité CrystalKnows autorisé et consenti, importez-le sur un agent hybride ou personnifié. La répétition s’appuie sur préférences de communication, déclencheurs et patterns d’objection pour éprouver la mission — jamais comme citation, endorsement ou prédiction comportementale.</p>
+        <div class="chips">
+          <span class="chip">Import consenti</span>
+          <span class="chip">Provenance exigée</span>
+          <span class="chip">Toujours « Simulation »</span>
+        </div>
+        <p class="note">Optionnel sur les offres éligibles. Import officiel ou export autorisé seulement — pas de scraping. Aide à la répétition, pas une boule de cristal.</p>
+      </div>
+    </div>
+    <p class="tech-link" style="margin-top:28px">À voir dans la console → <a href="#oracle">Sales Oracle &amp; panel de parties prenantes</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Deux entrées</span>
+      <h2>Faites tourner le comité là où votre équipe décide déjà.</h2>
+      <p>Démarrez en libre-service dans la console, ou apportez la même délibération gouvernée dans les canaux que vos opérateurs utilisent au quotidien.</p>
+    </div>
+    <div class="split">
+      <div class="panel reveal">
+        <span class="plabel">Dirigeants &amp; opérateurs</span>
+        <h3>Ouvrez la console, composez un comité</h3>
+        <p>Espace en libre-service : connectez un canal, composez un collectif, posez la vraie question, arbitrez le verdict.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Salles de décision dans le chat.</b> Slack, Microsoft Teams ou Discord deviennent des salles gouvernées pour les missions live.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Dossiers durables.</b> Reprenez une décision avec de nouvelles preuves — scopé au tenant, prêt pour le prochain pilotage.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Arbitrage humain.</b> Acceptez, conditionnez, ou passez outre un veto — chaque action est enregistrée.</span></li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-accent" href="/console/">Essayer la console</a></div>
+      </div>
+      <div class="panel reveal">
+        <span class="plabel">Équipes go-to-market</span>
+        <h3>Répétez l'affaire avant la salle</h3>
+        <p>Éprouvez propositions et RFP contre un panel de parties prenantes simulé — toujours étiqueté simulation, jamais comme une vraie citation.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Répétition exécutive.</b> Faites passer le corpus cité par les règles GO / GO conditionnel / veto.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Carte du comité acheteur.</b> Sponsor, achats, finance, sécurité, juridique, technique — red-team chaque détenteur de veto.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Partez avec des artefacts.</b> Matrice d'objections, checklist conditionnelle, plan de preuves, narratif exécutif.</span></li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-primary" href="#oracle">Voir le Sales Oracle</a></div>
+      </div>
+    </div>
+    <p class="tech-link">Vous construisez des agents ou intégrez le moteur ? <a href="#builders">Pour les équipes techniques →</a></p>
+  </div>
+</section>
+
+<!-- INTÉGRATIONS — connecteur Salesforce (integrations/n8n, integrations/zapier, API publique v1) -->
+<section id="integrations" class="sf-section" aria-labelledby="integrations-title">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow eyebrow-logo"><svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>Connecteur Salesforce</span>
+      <h2 id="integrations-title">Chaque deal stratégique passe devant votre comité — <span class="grad-sf">sans quitter Salesforce.</span></h2>
+      <p>Dès qu'une opportunité atteint l'étape <b>Proposal</b>, un collectif d'agents finance, juridique et technique l'instruit. Vos commerciaux retrouvent le verdict, les risques et les conditions dans l'activité de l'opportunité — et la décision finale reste humaine.</p>
+    </div>
+
+    <div class="sf-grid">
+      <figure class="sf-mock reveal" aria-labelledby="sf-mock-cap">
+        <div class="sf-top">
+          <svg class="logo-ico" aria-hidden="true"><use href="#logo-salesforce"/></svg>
+          <div><span class="sf-obj">Opportunité</span><span class="sf-name">Exemple SA — Renouvellement plateforme</span></div>
+        </div>
+        <ol class="sf-path" aria-label="Étapes de l'opportunité">
+          <li class="done">Qualification</li><li class="done">Needs Analysis</li><li class="now" aria-current="step">Proposal/Price Quote</li><li>Negotiation</li><li>Closed</li>
+        </ol>
+        <div class="sf-activity">
+          <span class="sf-label">Activité</span>
+          <div class="sf-task">
+            <div class="sf-task-h"><span class="sf-dot cond" aria-hidden="true"></span><b>KayrosLab — Verdict : CONDITIONAL GO</b></div>
+            <div class="sf-score"><span>Score d'adhésion</span><span class="bar" aria-hidden="true"><i style="width:83%"></i></span><b>83/100</b></div>
+            <ul class="sf-agents">
+              <li><span class="vt go">GO</span>CFO</li>
+              <li><span class="vt cond">CONDITIONAL GO</span>Juridique</li>
+              <li><span class="vt go">GO</span>CTO</li>
+            </ul>
+            <p class="sf-line"><b>Risque :</b> clause de réversibilité absente.</p>
+            <p class="sf-line"><b>Condition :</b> valider l'annexe sécurité avant signature.</p>
+            <span class="sf-link">Dossier complet et arbitrage →</span>
+          </div>
+          <div class="sf-task sf-task--done">
+            <div class="sf-task-h"><span class="sf-dot go" aria-hidden="true"></span><b>KayrosLab — Décision : CONDITIONAL GO</b></div>
+            <p class="sf-line">Arbitré par un humain dans la console, conditions attachées.</p>
+          </div>
+        </div>
+        <figcaption id="sf-mock-cap" class="mock-cap">Illustration — données fictives. Les tâches réelles portent le verdict, la synthèse, les risques, les conditions, l'avis de chaque agent et le lien vers le dossier.</figcaption>
+      </figure>
+
+      <div class="sf-copy reveal">
+        <h3>Le bon arbitrage, au moment où le deal se joue.</h3>
+        <ul class="benefits">
+          <li><span class="bi bi-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><div><b>Zéro saisie pour les commerciaux.</b> Le passage à l'étape déclenche la revue ; le verdict arrive en tâche sur l'opportunité.</div></li>
+          <li><span class="bi bi-teal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V7l8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Les risques avant la signature.</b> Finance, juridique et technique challengent le deal et listent leurs conditions.</div></li>
+          <li><span class="bi bi-violet" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>L'humain garde la main.</b> L'arbitrage dans la console revient en tâche « Décision » — la trace complète reste dans Salesforce.</div></li>
+          <li><span class="bi bi-amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-6"/></svg></span><div><b>Pilotez par verdict.</b> En option, des champs Verdict, Statut, Score et Dossier alimentent vos vues de liste, rapports et règles de validation.</div></li>
+        </ul>
+        <div class="via"><span>Branché via</span>
+          <span class="logo-chip"><svg class="logo-ico" aria-hidden="true"><use href="#logo-n8n"/></svg>n8n</span>
+          <span class="logo-chip"><svg class="logo-ico" aria-hidden="true"><use href="#logo-zapier"/></svg>Zapier</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-sf" href="/console/">Lancer le PoC</a>
+          <a class="btn btn-ghost" href="https://github.com/Geoking2104/KayrosLab/blob/main/integrations/n8n/README.md">Guide pas à pas</a>
+        </div>
+      </div>
+    </div>
+
+    <ol class="flow" aria-label="Parcours d'une opportunité">
+      <li class="fstep reveal"><span class="fico fico-sf" aria-hidden="true"><svg class="logo-ico"><use href="#logo-salesforce"/></svg></span><span class="fn">01</span><h3>L'opportunité avance</h3><p>Elle atteint l'étape déclencheuse — <i>Proposal/Price Quote</i> par défaut, paramétrable.</p></li>
+      <li class="fstep reveal"><span class="fico fico-auto" aria-hidden="true"><svg class="logo-ico"><use href="#logo-n8n"/></svg><svg class="logo-ico"><use href="#logo-zapier"/></svg></span><span class="fn">02</span><h3>La revue démarre</h3><p>n8n ou Zapier lance une mission sur votre collectif — une seule revue par opportunité et par étape.</p></li>
+      <li class="fstep reveal"><span class="fico fico-kl" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><span class="fn">03</span><h3>Le verdict arrive</h3><p>Tâche « Verdict » : GO, CONDITIONAL GO ou NO GO, score, risques, conditions et lien vers le dossier.</p></li>
+      <li class="fstep reveal"><span class="fico fico-human" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><span class="fn">04</span><h3>Vous décidez</h3><p>Votre arbitrage dans la console revient en tâche « Décision » sur l'opportunité.</p></li>
+    </ol>
+
+    <div class="split">
+      <div class="panel panel-tint-sf reveal">
+        <span class="plabel">Mise en place</span>
+        <h3>Votre premier verdict en 15 minutes</h3>
+        <p>Deux workflows prêts à importer, sans toucher au modèle de données Salesforce.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>n8n, recommandé.</b> Auto-hébergé sur le serveur KayrosLab, données en Europe. Déjà sur Zapier ? La variante tient en 2 Zaps.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Démo, rapide ou approfondi.</b> <i>demo</i> rend un verdict simulé en quelques secondes (étiqueté « [Démo] »), <i>fast</i> en 1 à 2 min, <i>deep</i> en ~12 min pour les dossiers sensibles.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Une sandbox suffit.</b> Une Developer Edition ou une sandbox Salesforce est idéale pour un premier essai.</span></li>
+        </ul>
+      </div>
+      <div class="panel panel-tint-ink reveal">
+        <span class="plabel">Sécurité</span>
+        <h3>Prêt pour votre CRM de production</h3>
+        <p>Chaque échange est authentifié, signé, et peut être rejoué sans créer de doublon.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Une clé d'API par outil.</b> Limitée aux droits nécessaires et à certains collectifs, révocable dans la console ; KayrosLab n'en garde que l'empreinte.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Webhooks signés HMAC-SHA256.</b> Signature fausse, corps modifié ou horodatage de plus de 5 minutes : refusés.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Aucun verdict perdu.</b> Salesforce indisponible ? KayrosLab réessaie à 1 min, 5 min, 30 min, 2 h et 6 h — historique dans la console.</span></li>
+        </ul>
+        <div class="cta-row"><a class="btn btn-primary" href="https://api.kayroslab.com/docs">Documentation de l'API</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHATS INTÉGRÉS — Slack · Microsoft Teams · Discord (core/connectors*.mjs, SPECIFICATIONS_CONNECTEURS_CHAT.md) -->
+<section id="chats" class="chat-section" aria-labelledby="chats-title">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Chats intégrés</span>
+      <h2 id="chats-title">Arbitrez là où vos équipes <span class="grad-chat">parlent déjà.</span></h2>
+      <p>Une question posée dans Slack, Teams ou Discord part au collectif, qui répond dans le canal. Vos décideurs approuvent, demandent une révision ou refusent d'un clic — avec la même traçabilité que dans la console.</p>
+      <div class="logo-row" aria-label="Plateformes prises en charge">
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg>Slack</span>
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg>Microsoft Teams</span>
+        <span class="logo-chip lg"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg>Discord</span>
+      </div>
+    </div>
+
+    <div class="chat-mocks">
+      <figure class="cm cm-slack reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-slack"/></svg><span># comite-deals</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">CL</span><div><b>Claire</b><p><span class="mention">@KayrosLab</span> faut-il renouveler Exemple SA aux conditions proposées ?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab <span class="app">APP</span></b>
+            <div class="gate gate-slack">
+              <p class="gate-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg>Arbitrage requis — Renouvellement Exemple SA</p>
+              <dl><div><dt>Rôle requis</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 évaluateurs)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">✓ Approuver</span><span class="gb">↻ Réviser</span><span class="gb no">✕ Refuser</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Slack</b> — mentionnez l'application ou écrivez-lui en direct. Boutons Block Kit, motif dans une fenêtre modale.</figcaption>
+      </figure>
+
+      <figure class="cm cm-teams reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-microsoft-teams"/></svg><span>Revue des deals</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">TM</span><div><b>Thomas</b><p>Quel est l'avis du collectif sur le renouvellement Exemple SA ?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab</b>
+            <div class="gate gate-teams">
+              <p class="gate-t">Arbitrage requis — Renouvellement Exemple SA</p>
+              <dl><div><dt>Rôle requis</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 évaluateurs)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">Approuver</span><span class="gb">Réviser</span><span class="gb no">Refuser</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Microsoft Teams</b> — parlez au bot dans la conversation. Carte adaptative, motif dans un module de tâche.</figcaption>
+      </figure>
+
+      <figure class="cm cm-discord reveal">
+        <div class="cm-bar"><svg class="logo-ico" aria-hidden="true"><use href="#logo-discord"/></svg><span># décisions</span></div>
+        <div class="cm-body">
+          <div class="msg"><span class="av av-u" aria-hidden="true">LN</span><div><b>Léa</b><p><span class="slash">/kayros</span> question : on engage l'offre Exemple SA ?</p></div></div>
+          <div class="msg"><span class="av av-k" aria-hidden="true"><img src="assets/logo-kayroslab.png" alt=""></span><div><b>KayrosLab <span class="app">BOT</span></b>
+            <div class="gate gate-discord">
+              <p class="gate-t">Arbitrage requis — Renouvellement Exemple SA</p>
+              <dl><div><dt>Rôle requis</dt><dd>COMEX</dd></div><div><dt>Vote</dt><dd>72/100 (3 évaluateurs)</dd></div></dl>
+              <div class="gbtns"><span class="gb ok">Approuver</span><span class="gb">Réviser</span><span class="gb no">Refuser</span></div>
+            </div></div></div>
+        </div>
+        <figcaption><b>Discord</b> — tapez <code>/kayros</code> et votre question, dans n'importe quel salon du serveur.</figcaption>
+      </figure>
+    </div>
+    <p class="mock-cap center">Illustrations — conversations fictives. Refuser ou réviser ouvre toujours un formulaire de motif.</p>
+
+    <div class="gov gov-color">
+      <div class="gcard reveal">
+        <div class="ico ico-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
+        <h4>Branché en un clic</h4>
+        <p>Dans Réglages : OAuth Slack, consentement administrateur Teams, invitation du bot Discord. Secrets chiffrés côté serveur, test de connexion inclus.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico ico-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <h4>Un veto qui ne s'usurpe pas</h4>
+        <p>Les droits viennent du compte KayrosLab lié par jeton à usage unique — être administrateur du chat ne donne aucun droit d'arbitrage.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico ico-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Chaque requête vérifiée</h4>
+        <p>Signature HMAC pour Slack, jeton JWT du Bot Framework pour Teams, signature Ed25519 pour Discord, anti-rejeu au-delà de 5 minutes.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico ico-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <h4>Une décision, une trace</h4>
+        <p>Refuser ou réviser exige un motif, horodaté et conservé dans l'audit. Un double-clic sur « Approuver » n'arbitre jamais deux fois.</p>
+      </div>
+    </div>
+    <div class="chat-cta reveal">
+      <p><b>Le chat accélère, la console reste la référence.</b> Tout reste faisable dans la console, et un canal indisponible ne bloque jamais le processus.</p>
+      <a class="btn btn-accent" href="/console/">Connecter un canal</a>
+    </div>
+  </div>
+</section>
+
+<section id="oracle">
+  <div class="wrap">
+    <div class="feat">
+      <div class="feat-media reveal">
+        <div class="media"><img src="assets/hybrid-agent-sales-oracle.jpg" alt="Hybrid Agent Sales Oracle — simulation gouvernée d'un comité exécutif et d'un réseau de veto acheteur"></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Sales Oracle</span>
+        <h3>Répétez la décision — ou éprouvez le RFP — avant de répondre.</h3>
+        <p class="desc">Combinez un pack de rôle (CFO, CTO, Juridique…) avec un profil de partie prenante optionnel et consenti — y compris import CrystalKnows — pour que les règles de décision rencontrent des préférences de communication, déclencheurs et patterns d’objection réalistes.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Répétez une décision exécutive.</b> Déposez la proposition et les métriques ; passez-les par GO, GO conditionnel et veto.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Éprouvez un RFP client.</b> Cartographiez les évaluateurs et red-teamez chaque détenteur de veto avant de soumettre.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>Gardes-fous by design.</b> Connecteurs officiels, exports autorisés ou import CrystalKnows consenti — pas de scraping. Les simulations restent étiquetées.</span></li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-accent" href="/console/">Essayer le Sales Oracle</a></div>
+      </div>
+    </div>
+    <div class="feat rev" style="margin-top:70px">
+      <div class="feat-media reveal">
+        <div class="media tall"><img src="assets/console-impersonator-swarm.webp" alt="Dossier de décision d’un panel de parties prenantes simulées : analyse de chaque persona, trace du harness et verdict conditionnel en attente d’arbitrage humain" width="1440" height="1250" loading="lazy"></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Panel de parties prenantes</span>
+        <h3>Testez une idée contre tout un panel — clairement étiqueté.</h3>
+        <p class="desc">Construisez un agent personnifié ou une équipe de 2 à 12 à partir d’indices autorisés (rapport CrystalKnows, données LinkedIn membres officielles, export autorisé ou notes manuelles), avec consentement obligatoire et gardes-fous durs : toujours « Simulation », jamais au nom de la personne, jamais une décision matérielle.</p>
+        <ul class="flist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span><b>CrystalKnows ou indices autorisés.</b> Import de profil consenti pour une mise à l’épreuve réaliste des décisions et des missions.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg><span>Le feedback simulé ne peut jamais être présenté comme une vraie citation, endorsement ou prédiction comportementale.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust" class="soft">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Confiance &amp; contrôle</span>
+      <h2>Une gouvernance pour conseils et opérateurs.</h2>
+      <p>Restez inspectable : chaque étape sensible peut s'arrêter pour un humain, les dossiers restent durables, et le runtime peut rester sur vos machines.</p>
+    </div>
+    <div class="gov">
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4Z"/></svg></div>
+        <h4>Portes humaines &amp; veto</h4>
+        <p>Les sorties sensibles s'arrêtent pour une décision humaine. Les votes pondérés instruisent ; un veto peut bloquer — sur une piste append-only.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h3v6H8zM13 9h3"/></svg></div>
+        <h4>Chiffres honnêtes</h4>
+        <p>Les bandes de prévision sont des simulations étiquetées, issues d'hypothèses explicites — jamais habillées en certitudes.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <h4>Isolation par tenant</h4>
+        <p>Espaces de travail, dossiers et mémoires restent scopés à votre organisation. Secrets chiffrés au repos.</p>
+      </div>
+      <div class="gcard reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 18h10a4 4 0 0 0 0-8 5.5 5.5 0 0 0-10.4-1.5A3.5 3.5 0 0 0 7 18Z"/></svg></div>
+        <h4>Local ou cloud</h4>
+        <p>Gardez l'inférence sur votre infrastructure quand la souveraineté compte, ou utilisez un cloud gouverné — au choix par espace.</p>
+      </div>
+    </div>
+
+    <div class="sec-head center" style="margin-top:56px">
+      <span class="eyebrow">Preuve sociale</span>
+      <h2>Histoires de terrain — placeholders pour l'instant.</h2>
+      <p>Nous n'inventons ni clients ni métriques. Remplacez ces cartes dès que vous avez de vraies citations.</p>
+    </div>
+    <div class="proof">
+      <div class="pcard reveal"><div class="ph">Citation placeholder</div><div class="pq">« On a enfin vu les objections avant le comité de pilotage — pas pendant. »</div><div class="pa">— Rôle / entreprise (à confirmer)</div></div>
+      <div class="pcard reveal"><div class="ph">Citation placeholder</div><div class="pq">« Le GO conditionnel nous a obligés à attacher la preuve qu'on repoussait. »</div><div class="pa">— Rôle / entreprise (à confirmer)</div></div>
+      <div class="pcard reveal"><div class="ph">Citation placeholder</div><div class="pq">« La même délibération dans Slack, rouverte ensuite dans la console. »</div><div class="pa">— Rôle / entreprise (à confirmer)</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Où ça s'inscrit</span>
+      <h2>La couche manquante entre le chat et l'action.</h2>
+      <p>Assistants de conversation, suites d'innovation et frameworks d'agents s'arrêtent avant une décision gouvernée. KayrosLab livre cette couche.</p>
+    </div>
+    <div class="grid3">
+      <div class="card reveal"><h3>vs Assistants de chat</h3><p>Mémoire de session seule, pas de frontières de rôle, pas de discipline de preuves, pas de portes ni de veto. KayrosLab ajoute gouvernance et dossier durable.</p></div>
+      <div class="card reveal"><h3>vs Suites d'innovation</h3><p>Excellentes pour collecter des idées à l'échelle — plus faibles sur la délibération multi-agents avec répétition comité acheteur et arbitrage humain.</p></div>
+      <div class="card reveal"><h3>vs Stacks d'agents DIY</h3><p>L'orchestration seule ne donne ni mémoire, ni console, ni audit, ni veto. KayrosLab livre l'atelier de décision de bout en bout.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="builders" class="soft">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">Pour les équipes techniques</span>
+      <h2>La même vérité produit — plus profond si besoin.</h2>
+      <p>Le pitch public reste orienté acheteur. Architectes et builders peuvent ouvrir le dépôt, le livre blanc et la démo live quand ils veulent les internals.</p>
+    </div>
+    <div class="panel reveal" style="max-width:780px;margin:44px auto 0">
+      <span class="plabel">Matériaux ouverts</span>
+      <h3>Inspectez l'architecture</h3>
+      <p>Dépôt public, livre blanc et démo multi-agents live — sans mettre clés API ni jargon runtime sur la page d'accueil.</p>
+      <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="https://github.com/Geoking2104/KayrosLab">Voir sur GitHub</a>
+        <a class="btn btn-ghost" href="/livret-blanc-kayroslab.html">Livre blanc</a>
+        <a class="btn btn-ghost" href="/kayroslab-complete-with-ai-agents.html">Démo live</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow">FAQ</span>
+      <h2>Les questions que les dirigeants posent en premier</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Qu'est-ce que KayrosLab exactement ?</summary>
+        <div class="ans">Un atelier de décision gouverné. Vous énoncez une vraie décision ; un comité d'agents liés à des rôles aux devoirs opposés instruit les preuves, challenge les hypothèses et rend un verdict — GO, GO conditionnel ou NO-GO. Le verdict reste consultatif tant que l'humain responsable ne l'accepte pas, n'y attache pas de conditions, ou ne passe pas outre un veto.</div>
+      </details>
+      <details>
+        <summary>Est-ce que ça remplace nos dirigeants ?</summary>
+        <div class="ans">Non. C'est un comité de direction que vous pouvez convoquer pour répéter et challenger — pas une boule de cristal, pas un autopilote. Les humains arbitrent ; les veto restent réels.</div>
+      </details>
+      <details>
+        <summary>Peut-on le faire tourner sur nos machines ?</summary>
+        <div class="ans">Oui. Vous pouvez garder inférence et données sur votre infrastructure quand la souveraineté compte, ou utiliser un cloud gouverné. Au choix par espace de travail.</div>
+      </details>
+      <details>
+        <summary>Où les équipes lancent-elles les missions ?</summary>
+        <div class="ans">Dans la console, et optionnellement dans Slack, Microsoft Teams ou Discord comme salles de décision — ou automatiquement depuis Salesforce, quand une opportunité atteint l'étape choisie (via n8n ou Zapier). Le dossier reste la source de vérité.</div>
+      </details>
+      <details>
+        <summary>Que sont les agents personnifiés ?</summary>
+        <div class="ans">Deux chemins complémentaires. Les <b>packs de rôles</b> (CFO, CTO, DRH / RH, Juridique, Ventes…) encodent les caractéristiques et réflexes de veto typiques d’une fonction. L’<b>import de profil réel</b> — optionnellement via CrystalKnows lorsque vous disposez d’un profil de personnalité autorisé et consenti — permet d’éprouver une décision ou une mission face au style de communication et d’objection de cette partie prenante. Le feedback est toujours étiqueté Simulation ; ce n’est jamais une vraie citation, un endorsement ou une prédiction comportementale.</div>
+      </details>
+      <details>
+        <summary>Comment gérez-vous la vie privée et le consentement ?</summary>
+        <div class="ans">Connecteurs officiels ou exports autorisés seulement — pas de scraping. Les imports CrystalKnows et autres profils exigent consentement et provenance explicites. Le feedback de parties prenantes simulées est toujours étiqueté simulation — jamais comme une vraie citation ou endorsement.</div>
+      </details>
+      <details>
+        <summary>Un verdict peut-il primer sur un humain ?</summary>
+        <div class="ans">Jamais. Le vote instruit, le veto décide. Les synthèses sensibles ouvrent une porte humaine ; chaque action est écrite dans une piste d'audit append-only.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="final">
+      <h2>Éprouvez la décision avant que le réel ne le fasse.</h2>
+      <p>Composez un comité, posez la vraie question, et arbitrez preuves en main — en minutes, pas un nouveau séminaire.</p>
+      <div class="cta">
+        <a class="btn btn-light btn-lg" href="/console/">Essayer la console</a>
+        <a class="btn btn-lg" style="background:transparent;border:1px solid #3a3f45;color:#eef1f2" href="mailto:contact@kayroslab.com">Réserver un échange</a>
+      </div>
+      <p class="micro">Libre-service avec e-mail vérifié. Vous préférez une visite guidée ? Écrivez à contact@kayroslab.com.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="brand" href="index.fr.html"><img src="assets/logo-kayroslab.png" alt="Logo KayrosLab">KayrosLab</a>
+        <p>Transformer le bruit en stratégie gouvernée. Kairos est le moment opportun — KayrosLab le trouve dans vos preuves, avec objections et chiffres attachés.</p>
+      </div>
+      <div class="fcol">
+        <h5>Produit</h5>
+        <a href="/console/">Console</a>
+        <a href="#personify">Agents personnifiés</a>
+        <a href="#oracle">Sales Oracle</a>
+        <a href="#integrations">Salesforce</a>
+        <a href="#chats">Slack · Teams · Discord</a>
+        <a href="#how">Comment ça marche</a>
+        <a href="/kayroslab-complete-with-ai-agents.html">Démo live</a>
+      </div>
+      <div class="fcol">
+        <h5>Build</h5>
+        <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
+        <a href="#builders">Pour les équipes techniques</a>
+        <a href="/livret-blanc-kayroslab.html">Livre blanc</a>
+      </div>
+      <div class="fcol">
+        <h5>Confiance</h5>
+        <a href="#trust">Gouvernance</a>
+        <a href="#trust">Déploiement souverain</a>
+        <a href="#faq">Données &amp; consentement</a>
+      </div>
+      <div class="fcol">
+        <h5>Société</h5>
+        <a href="/index.fr.html">Site</a>
+        <a href="mailto:contact@kayroslab.com">Contact</a>
+        <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 KayrosLab · Geoffroy de La Tournelle. Tous droits réservés.</span>
+      <span class="soc">
+        <a href="/legal/#mentions">Mentions légales</a>
+        <a href="/" hreflang="en" lang="en">English</a>
+        <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
+        <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>8)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  var hb=document.getElementById('hamb'),mn=document.getElementById('mnav');
+  hb.addEventListener('click',function(){var o=mn.classList.toggle('open');hb.setAttribute('aria-expanded',o)});
+  mn.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mn.classList.remove('open');hb.setAttribute('aria-expanded',false)})});
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    document.querySelectorAll('.reveal,.flow').forEach(function(el){io.observe(el)});
+  } else { document.querySelectorAll('.reveal,.flow').forEach(function(el){el.classList.add('in')}); }
+</script>
+
+</body>
+</html>
