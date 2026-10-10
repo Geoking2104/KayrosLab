@@ -61,6 +61,7 @@ const ROLE_PACKS = [
   { id: 'controller', name: 'Contrôleur de gestion / Comptable', category: 'Support', focus: 'Suit les comptes et obligations légales.' },
   { id: 'legal', name: 'Chargé des affaires juridiques', category: 'Support', focus: 'Veille au respect du droit et des réglementations.' },
   { id: 'quality_analyst', name: 'Analyste qualité & feedback', category: 'Qualité', focus: 'Évalue la qualité des analyses et propose des améliorations pour le Kayroslab Index.' },
+  { id: 'planner', name: 'Gestionnaire tâches & planning', category: 'Opérations', focus: 'Découpe les décisions en tâches, estime les charges et suit l’avancement.' },
 ];
 const SECTORS = ['Tech / SaaS', 'Industrie', 'Commerce / Retail', 'Services', 'Santé', 'Finance', 'Autre'];
 const TEAM_SIZES = ['Solo / Créateur', 'Petite PME (< 20)', 'PME (20–100)', 'ETI / Grande entreprise'];
@@ -347,7 +348,7 @@ function addCustom(member = { draft: emptyDraft(), profile: null }) {
         </div>
         <p className="muted so-note">Ajoutez des rôles prédéfinis ou cochez les agents déjà présents.</p>
         <details className="role-packs"><summary>Rôles prédéfinis</summary>
-          {['Direction', 'Commercial & Marketing', 'Production & Technique', 'Achats & Logistique', 'Support', 'Qualité'].map((cat) => <div key={cat} className="role-cat"><strong>{cat}</strong><div className="role-list">{ROLE_PACKS.filter((r) => r.category === cat).map((r) => <button key={r.id} type="button" className="button secondary small" onClick={() => addRolePack(r)}>{r.name}</button>)}</div></div>)}
+          {['Direction', 'Commercial & Marketing', 'Production & Technique', 'Achats & Logistique', 'Support', 'Qualité', 'Opérations'].map((cat) => <div key={cat} className="role-cat"><strong>{cat}</strong><div className="role-list">{ROLE_PACKS.filter((r) => r.category === cat).map((r) => <button key={r.id} type="button" className="button secondary small" onClick={() => addRolePack(r)}>{r.name}</button>)}</div></div>)}
         </details>
         <p className="muted so-note">Cochez les agents proposés, puis « Vérifier » pour relire leurs attributs et les ajuster. Les ajustements valent pour cette session seulement.</p>
         {!active.length && <p className="muted so-note" role="note">Aucun agent proposé n’est actif : composez un agent ou importez une personnalité réelle.</p>}
