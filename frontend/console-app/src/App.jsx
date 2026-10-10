@@ -169,7 +169,8 @@ function Login({ onLogin }) {
   return <main className="login-shell">
     <section className="login-copy"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><div className="login-hero"><h1>Décider avec un <span className="grad-text">collectif explicite.</span></h1><p>Composez des collectifs d'agents, lancez des missions gouvernées et gardez chaque verdict sous arbitrage humain.</p></div><div className="login-brands"><span>Branché sur vos outils</span><BrandRow platforms={['salesforce', 'slack', 'teams', 'discord', 'n8n', 'zapier']} /></div></section>
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
-      {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
+      {forgotten && <p className="auth-help">Pour réinitialiser votre mot de passe KayrosLab, saisissez votre adresse. Si elle correspond à un compte, vous recevrez un lien valable 30 minutes.</p>}
+      {forgotten && sso?.providers?.some((provider) => provider.id === 'google') && <><p className="auth-help">Vous vous connectez habituellement avec Google ? Utilisez le bouton ci-dessous. Ce formulaire ne change pas votre mot de passe Google.</p><button type="button" className="button secondary sso-button" onClick={() => startSso('google')} disabled={state === 'loading'}>Continuer avec Google</button></>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
       {showSso && sso.providers?.map((provider) => <button key={provider.id} type="button" className="button secondary sso-button" onClick={() => startSso(provider.id)} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : `Continuer avec ${provider.label}`}</button>)}
       {showSso && <p className="auth-or">Connexion sécurisée par OAuth 2.0 / OpenID Connect</p>}
@@ -178,7 +179,7 @@ function Login({ onLogin }) {
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}
       {resetting && <label>Confirmer le mot de passe<input type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} minLength={10} required /></label>}
       {mode === 'login' && <button type="button" className="auth-link forgot-link" onClick={() => { setMode('forgot'); setError(''); setState('idle'); }}>Mot de passe oublié&nbsp;?</button>}
-      {state === 'sent' && <p className="auth-success" role="status">Si un compte correspond à cette adresse, un e-mail vient d’être envoyé. Vérifiez aussi vos courriers indésirables.</p>}
+      {state === 'sent' && <p className="auth-success" role="status">Demande prise en compte. Si un compte correspond à cette adresse, vous recevrez un lien de réinitialisation. Vérifiez aussi vos courriers indésirables.</p>}
       {state === 'sent' && <button type="button" className="button secondary" onClick={() => setState('idle')}>Renvoyer le lien</button>}
       {state === 'reset' && <p className="auth-success" role="status">Votre mot de passe a été réinitialisé. Vous pouvez maintenant vous connecter.</p>}
       <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>

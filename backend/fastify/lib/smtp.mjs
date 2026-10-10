@@ -85,6 +85,9 @@ export function smtpFromEnv(env = process.env) {
         host,
         port,
         secure: secure || port === 465,
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 15000,
         auth: { user: authUser, pass: authPass },
       }
     : null;

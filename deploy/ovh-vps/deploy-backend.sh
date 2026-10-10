@@ -156,6 +156,10 @@ if [[ -n "${DB_URL}" ]]; then
 fi
 echo " -> health OK"
 
+# Une configuration SMTP présente mais invalide doit faire échouer le contrôle
+# de déploiement ; /health ne vérifie que la présence de la configuration.
+node "${APP_DIR}/deploy/ovh-vps/check-smtp.mjs" "${APP_DIR}/backend/fastify/.env"
+
 if [[ -f "${APP_DIR}/deploy/ovh-vps/deploy-www.sh" ]]; then
   APP_DIR="${APP_DIR}" bash "${APP_DIR}/deploy/ovh-vps/deploy-www.sh"
 fi

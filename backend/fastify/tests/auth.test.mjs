@@ -55,13 +55,15 @@ describe('backend auth flow', () => {
     await ctx.auth.register({ email: 'recover@test.local', password: 'ancien-secret-2026', name: 'Recover' });
     const previousSession = await bearer(ctx, 'recover@test.local', 'ancien-secret-2026');
     const sent = [];
-    ctx.passwordResetMailer = { send: async (message) => sent.push(message) };
+    let checks = 0;
+    ctx.passwordResetMailer = { verify: async () => { checks++; }, send: async (message) => sent.push(message) };
 
     const unknown = await app.inject({ method: 'POST', url: '/v1/auth/password/forgot', payload: { email: 'unknown@test.local' } });
     const known = await app.inject({ method: 'POST', url: '/v1/auth/password/forgot', payload: { email: 'recover@test.local' } });
     assert.equal(unknown.statusCode, 202);
     assert.deepEqual(unknown.json(), known.json(), 'la réponse ne doit pas révéler si le compte existe');
     assert.equal(sent.length, 1);
+    assert.equal(checks, 2, 'SMTP is checked even for an unknown address');
     assert.equal(sent[0].email, 'recover@test.local');
 
     const reset = await app.inject({ method: 'POST', url: '/v1/auth/password/reset', payload: { token: sent[0].token, password: 'nouveau-secret-2026' } });
@@ -72,5 +74,46 @@ describe('backend auth flow', () => {
 
     const reused = await app.inject({ method: 'POST', url: '/v1/auth/password/reset', payload: { token: sent[0].token, password: 'troisieme-secret-2026' } });
     assert.equal(reused.statusCode, 400);
+  });
+
+  it('reports missing or unreachable SMTP without looking up an account', async () => {
+    ctx.auth.createPasswordReset = async () => { assert.fail('account lookup must follow SMTP readiness'); };
+    for (const mailer of [null, {
+      verify: async () => { throw Object.assign(new Error('private SMTP details'), { code: 'EAUTH' }); },
+      send: async () => { assert.fail('must not send'); },
+    }]) {
+      ctx.passwordResetMailer = mailer;
+      const responses = [];
+      for (const email of ['known@test.local', 'unknown@test.local']) {
+        const response = await app.inject({ method: 'POST', url: '/v1/auth/password/forgot', payload: { email } });
+        assert.equal(response.statusCode, 503);
+        assert.match(response.json().error, /temporairement indisponible/);
+        assert.doesNotMatch(response.body, /private SMTP details|EAUTH/);
+        responses.push(response.json());
+      }
+      assert.deepEqual(responses[0], responses[1]);
+    }
+  });
+
+  it('does not claim delivery or reveal membership when a recipient is rejected', async () => {
+    await ctx.auth.register({ email: 'recover@test.local', password: 'ancien-secret-2026' });
+    ctx.passwordResetMailer = {
+      verify: async () => true,
+      send: async () => { throw Object.assign(new Error('recipient rejected'), { code: 'EENVELOPE' }); },
+    };
+    const known = await app.inject({ method: 'POST', url: '/v1/auth/password/forgot', payload: { email: 'recover@test.local' } });
+    const unknown = await app.inject({ method: 'POST', url: '/v1/auth/password/forgot', payload: { email: 'unknown@test.local' } });
+    assert.equal(known.statusCode, 202);
+    assert.deepEqual(known.json(), unknown.json());
+    assert.doesNotMatch(known.body, /a été envoyé|vient d’être envoyé|recipient rejected/);
+  });
+
+  it('returns the verified identity for synchronization of the SSO password', async () => {
+    await ctx.auth.register({ email: 'sync@test.local', password: 'ancien-secret-2026', name: 'Sync' });
+    const { token } = await ctx.auth.createPasswordReset({ email: 'sync@test.local' });
+    const result = await ctx.auth.resetPassword({ token, password: 'nouveau-secret-2026' });
+    assert.equal(result.user.email, 'sync@test.local');
+    assert.equal(result.user.name, 'Sync');
+    assert.equal(result.user.passwordHash, undefined);
   });
 });

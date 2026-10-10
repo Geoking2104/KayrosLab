@@ -332,6 +332,7 @@ export default async function buildContext() {
   if (smtpTransport) {
     const from = smtp.from;
     passwordResetMailer = {
+      verify: () => smtpTransport.verify(),
       async send({ email, token }) {
         const resetUrl = `${CONSOLE_URL}/#reset-password?token=${encodeURIComponent(token)}`;
         await smtpTransport.sendMail({
