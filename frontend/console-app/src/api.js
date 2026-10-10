@@ -60,6 +60,7 @@ export const api = {
   sessions: () => request('/v1/console/sessions'),
   session: (sessionId) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}`),
   createSession: (session) => request('/v1/console/sessions', { method: 'POST', body: JSON.stringify(session) }),
+  promoteSessionAgent: (sessionId, agentId, body = {}) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/agents/${encodeURIComponent(agentId)}/promote`, { method: 'POST', body: JSON.stringify(body) }),
   updateSessionCollective: (sessionId, body) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/collective`, { method: 'PATCH', body: JSON.stringify(body) }),
   // `profile` : demo (réponses préenregistrées), fast (défaut, 1–2 min) ou deep (~12 min).
   runMission: (sessionId, question, context, profile) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, {

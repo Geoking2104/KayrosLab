@@ -145,3 +145,17 @@ test('nouvelle session : agents ajustables, composés, aide au seuil et personna
   assert.match(real, /Construire un nouveau comité/);
   assert.match(api, /\/v1\/console\/personality\/preview/);
 });
+
+test('sessions : un agent de session peut rejoindre le registre partagé (comex/admin seulement)', async () => {
+  const [app, api, promote] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+    read('frontend/console-app/src/registry-promotion.jsx'),
+  ]);
+  assert.match(app, /<SessionOwnAgents session=\{session\} capabilities=\{data\.capabilities\}/);
+  assert.match(api, /\/agents\/\$\{encodeURIComponent\(agentId\)\}\/promote/);
+  assert.match(promote, /registry_promotion/);
+  assert.match(promote, /Seul un rôle comex ou admin peut enregistrer/);
+  assert.match(promote, /Espace partagé en libre-service/);
+  assert.match(promote, /share_consent_confirmed/);
+});

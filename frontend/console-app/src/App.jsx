@@ -4,6 +4,7 @@ import { BrandLogo, BrandRow, kayrosLogo } from './brand.jsx';
 import { AgentAttributesForm, AgentAttributesSummary, customAgentFromDraft, draftErrors, draftFromAgent, emptyDraft, overrideFromDraft } from './agent-composer.jsx';
 import { ConsensusHelp, ConsensusHint } from './consensus-help.jsx';
 import { ProfileTraits, RealProfileImporter, RealProfilesDialog } from './real-profiles.jsx';
+import { SessionOwnAgents } from './registry-promotion.jsx';
 
 // La console est un harness d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
@@ -901,6 +902,7 @@ function SessionsPage({ data, refresh, onCreate, onThread }) {
       <small>{session.collective.active_agents.length} agent(s) · {session.executions?.length || 0} exécution(s) · {votingLabel(session.collective.voting_threshold)}</small>
       <h2>{session.name}</h2>
       <AgentChips agents={session.collective.agents} />
+      <SessionOwnAgents session={session} capabilities={data.capabilities} onSaved={refresh} />
       <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}{thread.status === 'running' ? ` · mission en cours${thread.progress?.total ? ` (${progressLabel(thread.progress)})` : ''}` : thread.status === 'failed' ? ' · échec' : ''}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
     </article>)}</div>
   </section>;

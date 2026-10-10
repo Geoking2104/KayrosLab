@@ -761,6 +761,57 @@ export class SwarmService {
     this._audit({ type: 'swarm.configuration.updated', swarm_id: swarmId, tenant_id: tenantKey(tenantId), added: adds, removed: removes, by });
     return clone(updated);
   }
+  /**
+   * Enregistre dans le registre partagé du tenant un agent composé ou ajusté dans
+   * une session (profil réel Crystal/DISC compris). Le collectif n'est pas modifié,
+   * sauf si l'agent de session garde son identifiant : la copie de session cède
+   * alors la place à l'agent du registre (même définition).
+   * `include_human_profile: false` enregistre les seuls attributs, sans profil réel.
+   */
+  promoteSessionAgent(swarmId, agentId, { agent_id = null, display_name = null, include_human_profile = true } = {}, { tenantId = null, by = null } = {}) {
+    const key = this._key(tenantId, swarmId);
+    const config = this.configurations.get(key);
+    if (!config) throw new Error(`swarm introuvable: ${swarmId}`);
+    if (!(config.active_agents || []).includes(agentId)) throw new Error(`agent absent du collectif: ${agentId}`);
+    const own = (config.session_agents || []).some((agent) => agent.agent_id === agentId);
+    const overridden = !own && Object.keys(config.agent_rule_overrides?.[agentId] || {}).length > 0;
+    if (!own && !overridden) throw new Error(`agent déjà dans le registre: ${agentId}`);
+    const effective = this.effectiveConfigurationAgent(config, agentId, { tenantId });
+    const targetId = String(agent_id || (own ? agentId : `${agentId}_variante`)).trim();
+    if (this.registry.get(targetId, { tenantId })) throw new Error(`agent déjà existant: ${targetId}`);
+    const { session_scoped, session_override, ...metadata } = plainObject(effective.metadata);
+    const input = {
+      ...clone(effective), agent_id: targetId, agent_type: 'user_defined', enabled: true,
+      metadata: { ...metadata, promoted_from_session: { swarm_id: swarmId, agent_id: agentId, by, at: now() } },
+    };
+    if (display_name) input.display_name = String(display_name).trim();
+    if (!include_human_profile && input.human_profile) {
+      // Attributs seuls : le nom de la personne importée ne doit subsister nulle part
+      // (mission « Réagir comme … », instructions, règles, profil comportemental).
+      const person = String(input.human_profile.assigned_name || '').trim();
+      delete input.human_profile;
+      if (person) {
+        const chosen = String(display_name || '').trim();
+        const neutral = chosen && chosen.toLowerCase() !== person.toLowerCase() ? chosen : String(effective.role_name || 'ce profil').trim();
+        const pattern = new RegExp(person.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        const scrub = (value) => (typeof value === 'string' ? value.replace(pattern, neutral)
+          : Array.isArray(value) ? value.map(scrub)
+            : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, scrub(v)])) : value);
+        for (const field of ['display_name', 'primary_focus', 'mission', 'instructions', 'constraints', 'behavioral_profile', 'rule_configuration']) {
+          if (input[field] !== undefined) input[field] = scrub(input[field]);
+        }
+        delete input.effective_context; delete input.effective_rules;
+      }
+    }
+    const agent = this.createAgent(input, { tenantId, by });
+    if (own && targetId === agentId) {
+      const updated = { ...clone(config), session_agents: (config.session_agents || []).filter((item) => item.agent_id !== agentId), updated_at: now() };
+      this.configurations.set(key, updated);
+      this._persist(this.store?.saveConfiguration?.(updated, { tenantId: tenantKey(tenantId) }));
+    }
+    this._audit({ type: 'swarm.agent.promoted_from_session', swarm_id: swarmId, agent_id: targetId, source_agent_id: agentId, tenant_id: tenantKey(tenantId), human_profile: !!agent.human_profile, by });
+    return agent;
+  }
   getRun(id, { tenantId = null } = {}) { return clone(this.runs.get(this._key(tenantId, id)) || null); }
 
   /**

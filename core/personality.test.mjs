@@ -177,3 +177,31 @@ test('saisie DISC : type normalisé et style de communication de départ', () =>
   assert.equal(profile.consent_confirmed, true);
   assert.throws(() => profileFromDiscType('Z'), /DISC invalide/);
 });
+
+// Réponse réelle de GET /v4/profile (profil de test public Crystal, contenu réduit) :
+// clés de traits capitalisées, `phrase` au singulier, `recommendations` objet { do, dont }.
+test('Crystal v4 réel : traits capitalisés et contenu « phrase » correctement projetés', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const live = JSON.parse(await readFile(new URL('./fixtures/crystal-v4-profile-pjones.json', import.meta.url), 'utf8'));
+  const profile = profileFromCrystalData(live);
+  assert.equal(profile.assigned_name, 'Paul Jones');
+  assert.equal(profile.disc_type, 'C');
+  assert.equal(profile.behavioral_archetype, 'Analyst');
+  assert.deepEqual(profile.behavioral_traits, { dominance: 63, expressiveness: 9, leniency: 64, pace: 35, pragmatism: 90, risk_aversion: 83, skepticism: 83, social: 36 });
+  assert.match(profile.skepticism_factor, /élevé \(83\/100\)/);
+  assert.equal(profile.disc_intensity, 81);
+  assert.ok(profile.core_motivators.includes('Accuracy & precision'));
+  assert.ok(profile.communication_style.decision_triggers.includes('Provide detailed feedback'));
+  assert.ok(profile.communication_style.objection_patterns.some((item) => /emotional language/.test(item)));
+  assert.ok(profile.profile_summary.some((item) => item.startsWith('Angle mort : ')));
+  assert.match(profile.avatar_url, /^https:\/\/profile-photos\.crys\.io\//);
+  assert.equal(profile.profile_sources[0].verified, true);
+});
+
+test('Crystal : 401 « API Access feature » produit un message explicite', async () => {
+  const adapter = new CrystalKnowsProfileAdapter({
+    apiToken: 'test-token',
+    fetchImpl: async () => ({ ok: false, status: 401, headers: { get: () => null }, json: async () => ({ error: 'Organization does not have the API Access feature' }) }),
+  });
+  await assert.rejects(adapter.importProfile({ full_name: 'Jane Doe', company_name: 'Acme' }), (error) => error.code === 'crystal_api_access_missing' && /API Access/.test(error.message));
+});

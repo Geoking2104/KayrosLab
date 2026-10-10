@@ -45,9 +45,13 @@ function boundedScore(value) {
   const n = Number(value);
   return Number.isFinite(n) ? Math.max(0, Math.min(100, Math.round(n))) : null;
 }
+// L'API réelle renvoie des clés capitalisées (« Dominance », « Risk-Aversion ») ;
+// le Swagger les documente en snake_case. Les deux formes sont acceptées.
+function traitKey(key) { return String(key || '').trim().toLowerCase().replace(/[^a-z]+/g, '_').replace(/^_+|_+$/g, ''); }
 function normalizeBehavioralTraits(value) {
   if (!value || typeof value !== 'object') return null;
-  const traits = Object.fromEntries(BEHAVIORAL_TRAITS.map((key) => [key, boundedScore(value[key])]).filter(([, v]) => v != null));
+  const byKey = Object.fromEntries(Object.entries(value).map(([key, score]) => [traitKey(key), score]));
+  const traits = Object.fromEntries(BEHAVIORAL_TRAITS.map((key) => [key, boundedScore(byKey[key])]).filter(([, v]) => v != null));
   return Object.keys(traits).length ? traits : null;
 }
 
@@ -230,7 +234,10 @@ export function profileFromCrystalData(response = {}, meta = {}) {
   const content = data.content || response.content || {};
   const traits = normalizeBehavioralTraits(personalities.behavioral_traits || data.behavioral_traits);
   const assigned_name = [data.first_name, data.last_name].filter(Boolean).join(' ') || data.name || meta.full_name || null;
-  const overview = [...phraseList(content.profile), ...(personalities.overview ? strings([personalities.overview]) : [])];
+  const overview = [
+    ...phraseList(content.profile), ...(personalities.overview ? strings([personalities.overview]) : []),
+    ...phraseList(content.blindspots).map((item) => `Angle mort : ${item}`),
+  ];
   const enneagram = personalities.enneagram_type ?? data.enneagram_type;
   const profile = normalizeHumanProfile({
     assigned_name,
@@ -249,7 +256,7 @@ export function profileFromCrystalData(response = {}, meta = {}) {
     professional_context: { current_role: meta.job_title || null, company: meta.company_name || null, qualities: strings(content.qualities || data.qualities || []) },
     communication_style: {
       preferred_format: phraseList(content.meeting)[0] || null,
-      decision_triggers: [...phraseList(content.motivation), ...recommendationList(content.drive_action, ['dos'])],
+      decision_triggers: [...phraseList(content.motivation), ...phraseList(content.building_trust), ...recommendationList(content.drive_action, ['dos']), ...phraseList(content.driving_action)],
       stress_triggers: phraseList(content.drainer),
       objection_patterns: recommendationList(content.recommendations, ['dont', 'donts']),
       communication_directives: [
@@ -352,6 +359,14 @@ function crystalError(status, body, retryAfter) {
     404: 'aucun profil Crystal ne correspond à ces identifiants',
     429: `limite de débit atteinte${retryAfter ? `, réessayer dans ${retryAfter} s` : ''}`,
   };
+  // Jeton valide mais organisation sans l'option « API Access » : seuls les profils
+  // de test publics (pjones@, drew@, bkim@crystalknows.com) répondent alors.
+  if (status === 401 && /API Access feature/i.test(body?.error || '')) {
+    const error = new Error('crystalknows: le jeton est valide mais l’organisation Crystal n’a pas l’option « API Access » (seuls les profils de test répondent) — activez-la auprès de Crystal ou utilisez l’import JSON / DISC');
+    error.status = 401;
+    error.code = 'crystal_api_access_missing';
+    return error;
+  }
   const error = new Error(`crystalknows: ${messages[status] || `HTTP ${status}`}${detail}`);
   error.status = status;
   return error;

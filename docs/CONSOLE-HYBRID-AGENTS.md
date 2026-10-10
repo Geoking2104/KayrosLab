@@ -42,6 +42,7 @@ Authenticated console endpoints:
 | `GET` | `/v1/console/sessions/:sessionId` | Session detail with its executions and activity log |
 | `PATCH` | `/v1/console/sessions/:sessionId/collective` | Add or remove agents from the active collective (`add_custom_agents` adds session-only agents, e.g. imported real personalities) |
 | `POST` | `/v1/console/personality/preview` | Preview a real personality (Crystal Knows Data API v4, Crystal JSON export or DISC type) and the proposed agent attributes, without saving anything. API lookups (credits) require comex/admin |
+| `POST` | `/v1/console/sessions/:sessionId/agents/:agentId/promote` | Save a session-composed, session-adjusted or imported (Crystal/DISC) agent to the tenant's shared registry. comex/admin only. Body: `agent_id?`, `display_name?`, `include_human_profile` (default `true`), `share_consent_confirmed` (required with a real profile). In a shared self-service tenant (`KAYROS_SHARED_TENANT_IDS`, default `default`) a real profile is refused (403 `shared_tenant_real_profile`); `include_human_profile: false` saves the attributes only and scrubs the person's name from every text field |
 | `POST` | `/v1/console/sessions/:sessionId/run` | Run a governed mission from the console |
 | `POST` | `/v1/console/agents/:agentId/personality` | Import d'un profil humain consenti (Crystal Knows / LinkedIn / export autorisé / saisie) |
 | `POST` | `/v1/console/impersonators` | Crée un **agent impersonator** : persona reconstruite depuis des indices (LinkedIn / Crystal Knows / export / manuel) + garde-fous |
@@ -121,3 +122,13 @@ renvoyée au client), `CRYSTALKNOWS_API_VERSION` (`v4` par défaut, `v1` = ancie
 (réponse de l'API collée ou fichier) ou saisie d'un type DISC (`profileFromDiscType`). Le profil est
 projeté sur les attributs d'agent par `agentAttributesFromProfile` (DISC, archétype, traits 0–100 →
 appétence au risque et style de décision, motivations, directives). Consentement explicite requis.
+
+
+### Validation réelle de la Data API v4 (10/10/2026)
+
+Testée avec un vrai jeton sur les profils de test gratuits (`pjones@`, `drew@`, `bkim@crystalknows.com`) :
+`GET /v4/profile` renvoie `200` avec le contenu complet dans `data.content` (sections au format `{ phrase: [...] }`,
+`recommendations: { do, dont }`) et des traits comportementaux aux clés capitalisées (`Dominance`, `Risk-Aversion`…),
+tous deux gérés par `profileFromCrystalData` (fixture `core/fixtures/crystal-v4-profile-pjones.json`).
+Un jeton valide d'une organisation sans l'option « API Access » obtient `401 Organization does not have the API Access feature`
+pour tout autre profil (et pour `GET /v4/content/profile/:id`) : la console l'affiche explicitement ; l'import JSON / DISC reste disponible.

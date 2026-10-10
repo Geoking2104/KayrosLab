@@ -6,6 +6,8 @@
 - **Seuil de consensus** : bouton « ? » qui explique les trois seuils (règle, quand choisir, conséquences) et le veto, dans « Nouvelle session », l'équipe d'impersonators et l'import de comité.
 - **Crystal Knows** : adaptateur aligné sur la Data API v4 (`GET /v4/profile`, `GET /v4/content/profile/:id`, prédictions opt-in), traits comportementaux, erreurs 401/402/404/429 lisibles ; repli export JSON / type DISC ; `POST /v1/console/personality/preview` ; dialogue « Personnalités réelles » pour compléter un comité existant ou en construire un.
 - Profil comportemental d'un agent injecté dans son contexte d'exécution.
+- **Enregistrer dans le registre** : un agent composé, ajusté ou importé (Crystal/DISC) dans une session peut rejoindre le registre partagé du tenant (`POST /v1/console/sessions/:id/agents/:agentId/promote`, comex/admin uniquement, comme la création d'agent). Un profil réel exige un consentement de partage explicite et n'est jamais publié dans un tenant partagé en libre-service (`KAYROS_SHARED_TENANT_IDS`, défaut `default`) : seuls les attributs y sont enregistrés, nom de la personne retiré de tous les textes. Les contributeurs voient les agents propres à la session et une explication.
+- **Crystal Data API v4 validée en réel** (profils de test `pjones@`, `drew@`, `bkim@crystalknows.com`) : traits comportementaux renvoyés avec des clés capitalisées (`Risk-Aversion`) désormais reconnus, sections `building_trust`, `driving_action`, `blindspots` projetées, message explicite quand l'organisation Crystal n'a pas l'option « API Access ».
 
 ## v0.26.0 (2026-10) — API publique v1, intégrations CRM, connexion Google
 

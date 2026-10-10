@@ -57,6 +57,18 @@ const sessionAgentSchema = z.object({
   rules: z.array(z.string().min(1).max(2000)).max(30).optional(), veto_power: z.boolean().optional(),
   behavioral_profile: behavioralProfileSchema, human_profile: humanProfileSchema,
 });
+// Enregistrement d'un agent de session dans le registre partagé du tenant.
+const promoteSchema = z.object({
+  agent_id: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/).optional(),
+  display_name: z.string().min(1).max(160).optional(),
+  include_human_profile: z.boolean().optional().default(true),
+  // Exigé quand un profil réel est partagé : tout membre du tenant le verra.
+  share_consent_confirmed: z.boolean().optional(),
+});
+// Tenants dont le registre est commun à des comptes qui ne se connaissent pas
+// (inscription self-service → tenant « default ») : un profil réel n'y est jamais publié.
+const SHARED_TENANTS = new Set(String(process.env.KAYROS_SHARED_TENANT_IDS ?? 'default').split(',').map((item) => item.trim()).filter(Boolean));
+function sharedTenant(tenantId) { return SHARED_TENANTS.has(String(tenantId ?? 'default')); }
 const MAX_CUSTOM_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_CUSTOM_AGENTS_PER_SESSION || 8);
 const sessionSchema = z.object({
   name: z.string().min(1).max(120),
@@ -364,7 +376,7 @@ export default async function consoleRoute(app) {
         running_executions: threads.filter((thread) => thread.status === 'running').length,
       },
       connections: await connections(app, me.tenantId), sessions, agents, activity, threads,
-      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, crystal_knows_api: app.kayrosContext.crystalKnowsApi || { version: 'v4', predictions: false }, max_custom_agents_per_session: MAX_CUSTOM_AGENTS_PER_SESSION, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
+      capabilities: { crystal_knows: app.kayrosContext.crystalKnowsConfigured === true, crystal_knows_api: app.kayrosContext.crystalKnowsApi || { version: 'v4', predictions: false }, max_custom_agents_per_session: MAX_CUSTOM_AGENTS_PER_SESSION, registry_promotion: { allowed: ['comex', 'admin'].includes(me.role), real_profiles: !sharedTenant(me.tenantId) }, encrypted_connector_storage: app.kayrosContext.connectorEncryptionConfigured === true, providers: ['mock', 'ollama', 'mistral', 'anthropic', 'nvidia'], connector_oauth: app.kayrosContext.connectorOAuthConfigured || { slack: false, discord: false, teams: false } },
     };
   });
 
@@ -606,6 +618,39 @@ export default async function consoleRoute(app) {
       const status = /^(session introuvable|configuration de la session introuvable)$/.test(shown) ? 404
         : /Limite/.test(shown) ? 403 : 400;
       return reply.code(status).send({ error: shown });
+    }
+  });
+  // Agent de session (composé, ajusté ou importé Crystal/DISC) → registre partagé du tenant.
+  // Même droit que la création d'agent (comex/admin). Un profil réel exige un
+  // consentement de partage explicite et reste interdit dans un tenant partagé.
+  app.post('/v1/console/sessions/:sessionId/agents/:agentId/promote', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const parsed = promoteSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'enregistrement invalide', issues: parsed.error.issues });
+    const room = await accessibleRoom(app, me, req.params.sessionId);
+    if (!room) return reply.code(404).send({ error: 'session introuvable' });
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const configuration = swarm.getConfiguration(room.swarm_id, { tenantId: me.tenantId });
+    const source = configuration && swarm.effectiveConfigurationAgent(configuration, req.params.agentId, { tenantId: me.tenantId });
+    if (!source || !configuration.active_agents?.includes(req.params.agentId)) return reply.code(404).send({ error: 'agent absent de la session' });
+    const d = parsed.data;
+    if (source.human_profile && d.include_human_profile) {
+      if (sharedTenant(me.tenantId)) {
+        return reply.code(403).send({ error: 'Ce registre est partagé par tous les comptes en libre-service : un profil réel n’y est pas publié. Enregistrez les seuls attributs (sans profil réel, sous un nom neutre) ou utilisez un espace dédié.', code: 'shared_tenant_real_profile' });
+      }
+      if (d.share_consent_confirmed !== true) {
+        return reply.code(400).send({ error: 'Confirmez que la personne a consenti au partage de son profil avec tous les membres de l’espace.', code: 'share_consent_required' });
+      }
+    }
+    try {
+      const agent = swarm.promoteSessionAgent(room.swarm_id, req.params.agentId, d, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      const updatedRoom = await accessibleRoom(app, me, req.params.sessionId);
+      return reply.code(201).send({ agent: agentView(agent), session: sessionView(updatedRoom || room, swarm, me.tenantId) });
+    } catch (error) {
+      const shown = surface(error?.message || error);
+      return reply.code(/existant|déjà dans le registre/.test(shown) ? 409 : 400).send({ error: shown });
     }
   });
   // Mission : par défaut asynchrone (202 + fil `running`, collectif exécuté en

@@ -737,3 +737,14 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
   .attribute-summary, .trait-bars { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .rule-row { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Agents propres a une session -> registre partage */
+.session-own-agents { display: grid; gap: 6px; padding: 10px 12px; border: var(--rule-thin) dashed var(--color-rule-strong); border-radius: var(--radius-md); }
+.session-own-agents > small { text-transform: uppercase; letter-spacing: .04em; opacity: .7; }
+.session-own-agents ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.session-own-agents li { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.session-own-agents li em { font-style: normal; font-size: .75rem; padding: 1px 6px; border-radius: 999px; background: rgba(90, 110, 160, .12); }
+.session-own-agents .small-note { margin: 0; font-size: .8rem; }
+.promote-dialog { max-width: 620px; }
+.promote-dialog .dialog-body { display: grid; gap: 12px; }
+.session-own-agents li .text-button { white-space: nowrap; }
