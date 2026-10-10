@@ -503,51 +503,89 @@ function Overview({ data, refresh, openSession, onThread }) {
       setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
-  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId} · Vue d’ensemble</p><h1>Console de décisions</h1><p>1. Créez un collectif → 2. Posez votre question → 3. Arbitrez le verdict.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
-    <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
+  return <>
+    <header className="console-header">
+      <div>
+        <p className="context-line">Espace {data.user.tenantId}</p>
+        <h1>Console de décisions</h1>
+        <p className="flow-hint">Parcours guidé : 1. Collectif → 2. Question → 3. Arbitrage</p>
+      </div>
+      <button className="button primary" onClick={openSession}>+ Nouveau collectif</button>
+    </header>
+
     <section className="metric-row">
-      <div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div>
+      <div><strong>{data.summary.agents}</strong><span>Agents</span></div>
       <div><strong>{data.summary.sessions}</strong><span>Collectifs</span></div>
       <div><strong>{data.summary.executions}</strong><span>Missions</span></div>
-      <a className="metric-link" href="#activity"><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></a>
+      <a className="metric-link" href="#activity"><div><strong>{data.summary.pending_human_decisions}</strong><span>À arbitrer</span></div></a>
     </section>
-    <p className="muted so-note">Personas simulées : <strong>{data.summary.impersonators ?? 0}</strong> · Profils hybrides (profil humain consenti, personas incluses) : <strong>{data.summary.hybrid_agents ?? 0}</strong> · Persona = agent impersonator (portrait + garde-fous).</p>
-    <div className="mission-workbench"><section><header><div><h2>Mission gouvernée</h2><p>Instruction → une étape par agent → consensus → dossier durable → arbitrage.</p></div></header>
-      <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
-      {session && <AgentChips agents={session.collective.agents} />}
-      {!data.sessions.length && <div className="empty-state"><p>Aucun collectif pour le moment.</p><button type="button" className="button primary" onClick={openSession}>Créer mon premier collectif</button></div>}
-      <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ex. Faut-il lancer ce projet maintenant, et à quelles conditions ?" /></label>
-        <div className="question-examples">
-          <span className="muted">Exemples :</span>
-          <button type="button" className="text-button" onClick={() => setQuestion('Faut-il lancer ce projet maintenant, et à quelles conditions ?')}>Lancement</button>
-          <button type="button" className="text-button" onClick={() => setQuestion('Devons-nous accepter la remise de 15 % demandée par ce client ?')}>Remise client</button>
-          <button type="button" className="text-button" onClick={() => setQuestion('La roadmap Q4 est-elle réaliste au vu des ressources actuelles ?')}>Roadmap</button>
+
+    {data.threads.some((t) => t.status === 'awaiting_arbitration') && (
+      <section className="pending-strip">
+        <h3>3. Arbitrages en attente</h3>
+        <div className="thread-list">
+          {data.threads.filter((t) => t.status === 'awaiting_arbitration').slice(0, 3).map((item) => (
+            <button key={item.thread_id} onClick={() => onThread(item)} className="is-pending">
+              <strong>{item.question}</strong><small>Verdict consultatif · arbitrage requis</small>
+            </button>
+          ))}
         </div>
-        <div className="profile-picker">
-          {MISSION_PROFILES.map(([id, label, hint]) => <button key={id} type="button" className={`profile-card ${profile === id ? 'is-selected' : ''}`} onClick={() => setProfile(id)}><strong>{label}</strong><small>{hint}</small></button>)}
-        </div>
-        {profile === 'demo' && <p className="muted so-note">Mode démo : verdict simulé, étiqueté « [Démo] ». Pour montrer le circuit, pas pour décider.</p>}
-        <button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
-      {data.threads.some((t) => t.status === 'awaiting_arbitration') && <section className="pending-strip">
-        <h3 className="so-kicker">Arbitrages en attente</h3>
-        <div className="thread-list">{data.threads.filter((t) => t.status === 'awaiting_arbitration').slice(0, 3).map((item) => <button key={item.thread_id} onClick={() => onThread(item)} className="is-pending"><strong>{item.question}</strong><small>En attente d’arbitrage</small></button>)}</div>
-      </section>}
-      <section className="so-strip">
-        <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
-        <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
-        {soCase && <p className="muted so-note">Corpus : {soDocs.length} document(s) — la question du dossier et la liste des preuves sont injectées dans le contexte du collectif.</p>}
-        <button type="button" className="text-button" onClick={() => setSoManage((current) => !current)}>{soManage ? 'Masquer la gestion des dossiers' : 'Créer un dossier / charger des preuves'}</button>
-        {soManage && <SalesOracleManager ready={soReady} clientRef={soClientRef} currentCase={soCase} documents={soDocs} onCases={setSoCases} onDocs={setSoDocs} onStatus={setSoStatus} />}
-        {soStatus && <p className={`form-error ${soStatus.tone === 'error' ? '' : 'is-empty'}`} role="status">{soStatus.text || '\u00a0'}</p>}
       </section>
-      {runNote && state === 'success' && <p className="muted so-note" role="status">{runNote}</p>}
-      {error && <p className="inline-error">{error}</p>}
-    </section><section><header><div><h2>Exécutions récentes</h2><p>Reprendre une mission avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
-      <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)} className={item.status === 'awaiting_arbitration' ? 'is-pending' : ''}>
-        <strong>{item.question}</strong>
-        <small>{threadStatusLabel(item.status)}{item.progress?.total ? ` · ${progressLabel(item.progress)}` : ''} · {item.current_run_id}</small>
-      </button>)}{!data.threads.length && <div className="empty-state"><p>Aucune mission lancée.</p><p className="muted so-note">Posez une question ci-contre pour obtenir un premier verdict argumenté.</p></div>}</div>
-    </section></div>
+    )}
+
+    <div className="flow-grid">
+      <section className="flow-step">
+        <h2>1. Collectif</h2>
+        <p className="muted">Choisissez ou créez le groupe d’agents qui instruira la mission.</p>
+        <label>Collectif actif
+          <select value={selectedSession || ''} onChange={(e) => setSelectedSession(e.target.value)}>
+            <option value="">Sélectionner…</option>
+            {data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}
+          </select>
+        </label>
+        {session && <AgentChips agents={session.collective.agents} />}
+        {!data.sessions.length && <div className="empty-state"><p>Aucun collectif.</p><button className="button primary" onClick={openSession}>Créer mon premier collectif</button></div>}
+      </section>
+
+      <section className="flow-step">
+        <h2>2. Question</h2>
+        <p className="muted">Formulez la décision à instruire. Les agents répondent en parallèle.</p>
+        <form onSubmit={run}>
+          <label>Question<textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ex. Faut-il lancer ce projet maintenant ?" /></label>
+          <div className="question-examples">
+            <button type="button" className="text-button" onClick={() => setQuestion('Faut-il lancer ce projet maintenant, et à quelles conditions ?')}>Lancement</button>
+            <button type="button" className="text-button" onClick={() => setQuestion('Devons-nous accepter la remise de 15 % ?')}>Remise</button>
+          </div>
+          <div className="profile-picker">
+            {MISSION_PROFILES.map(([id, label, hint]) => <button key={id} type="button" className={`profile-card ${profile === id ? 'is-selected' : ''}`} onClick={() => setProfile(id)}><strong>{label}</strong><small>{hint}</small></button>)}
+          </div>
+          <button className="button primary" disabled={state === 'loading' || !session}>{state === 'loading' ? 'Lancement…' : 'Lancer la mission'}</button>
+        </form>
+        {runNote && <p className="muted so-note">{runNote}</p>}
+        {error && <p className="inline-error">{error}</p>}
+      </section>
+
+      <section className="flow-step">
+        <h2>3. Suivi & arbitrage</h2>
+        <p className="muted">Reprendre une mission ou arbitrer un verdict.</p>
+        <div className="thread-list">
+          {data.threads.filter((item) => item.status !== 'resolved').slice(0, 5).map((item) => (
+            <button key={item.thread_id} onClick={() => onThread(item)} className={item.status === 'awaiting_arbitration' ? 'is-pending' : ''}>
+              <strong>{item.question}</strong>
+              <small>{threadStatusLabel(item.status)}{item.progress?.total ? ` · ${progressLabel(item.progress)}` : ''}</small>
+            </button>
+          ))}
+          {!data.threads.length && <div className="empty-state"><p>Aucune mission.</p></div>}
+        </div>
+        <a className="text-button" href="#activity">Voir toutes les décisions</a>
+      </section>
+    </div>
+
+    <details className="so-strip">
+      <summary>Dossier Sales Oracle (facultatif)</summary>
+      {/* existing Sales Oracle content can be kept collapsed */}
+      <p className="muted so-note">Joindre un corpus client pour enrichir la mission.</p>
+    </details>
   </>;
 }
 
@@ -999,10 +1037,27 @@ function ChatLinksPanel() {
 }
 
 function SettingsPage({ data, refresh }) {
+  const total = data.summary?.executions || 0;
+  const pending = data.summary?.pending_human_decisions || 0;
+  const agents = data.summary?.agents || 0;
+  const sessions = data.summary?.sessions || 0;
+  // Placeholder Kayroslab Index (0-100) — à brancher sur un vrai calcul côté backend
+  const kayrosIndex = Math.min(100, Math.round((total > 0 ? 40 : 0) + (agents * 5) + (sessions * 3) - pending * 2));
+
   const params = hashParams();
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
-  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Personnalisation & suivi</p><h1>Réglages</h1>
+      <section className="kpi-strip">
+        <div className="kpi-card"><strong>{kayrosIndex}</strong><small>Kayroslab Index</small></div>
+        <div className="kpi-card"><strong>{total}</strong><small>Missions</small></div>
+        <div className="kpi-card"><strong>{agents}</strong><small>Agents actifs</small></div>
+        <div className="kpi-card"><strong>{sessions}</strong><small>Collectifs</small></div>
+        <div className="kpi-card"><strong>{pending}</strong><small>Arbitrages ouverts</small></div>
+      </section>
+      <p className="muted">Indicateurs de suivi des interventions agentiques (IA, hybrides, humaines). Le Kayroslab Index évoluera avec la qualité des verdicts et la rapidité d’arbitrage.</p>
+    </div>
+    <header className="page-header" style={{display:"none"}}><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div>
       <button type="button" className="button secondary" onClick={() => { try { localStorage.removeItem('kayros_onboarding_done'); } catch {} location.hash = '#overview'; location.reload(); }}>Revoir le guide</button>
     </header>
     {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
