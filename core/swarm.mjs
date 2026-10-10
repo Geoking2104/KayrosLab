@@ -77,6 +77,7 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   },
   {
     agent_id: 'planner', agent_type: 'system_predefined', role_name: 'Gestionnaire tâches & planning',
+    can_create_agents: true,
     department: 'Opérations & Coordination', seniority: 'senior',
     primary_focus: 'Transformer les décisions en plan d’action : découper en tâches, estimer les charges, séquencer, identifier les dépendances et suivre l’avancement.',
     veto_power: false,
@@ -140,6 +141,7 @@ export function validateAgentDefinition(input, { forceType = null } = {}) {
     throw new Error('role_name, department et primary_focus sont requis');
   }
   d.veto_power = !!d.veto_power;
+  d.can_create_agents = !!d.can_create_agents;
   d.human_profile = d.human_profile ? normalizeHumanProfile(d.human_profile) : null;
   const rc = d.rule_configuration || {};
   const base = Array.isArray(rc.system_proposed_rules) ? rc.system_proposed_rules : [];
