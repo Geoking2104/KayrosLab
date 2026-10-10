@@ -48,7 +48,7 @@ test('le formulaire propose une inscription puis ouvre la console', async () => 
     read('frontend/console-app/src/App.jsx'),
     read('frontend/console-app/src/api.js'),
   ]);
-  assert.match(app, /Créer un espace de découverte/);
+  assert.match(app, /Essayer avec un comité prêt/);
   // Un bouton par fournisseur (SSO entreprise, Google…) annoncé par GET /v1/auth/sso.
   assert.match(app, /sso\.providers\?\.map\(/);
   assert.match(app, /startSso\(provider\.id\)/);
