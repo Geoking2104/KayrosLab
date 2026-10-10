@@ -1047,17 +1047,20 @@ function SettingsPage({ data, refresh }) {
   const params = hashParams();
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
-  return <section className="page"><header className="page-header"><div><p className="context-line">Personnalisation & suivi</p><h1>Réglages</h1>
-      <section className="kpi-strip">
-        <div className="kpi-card"><strong>{kayrosIndex}</strong><small>Kayroslab Index</small></div>
-        <div className="kpi-card"><strong>{total}</strong><small>Missions</small></div>
-        <div className="kpi-card"><strong>{agents}</strong><small>Agents actifs</small></div>
-        <div className="kpi-card"><strong>{sessions}</strong><small>Collectifs</small></div>
-        <div className="kpi-card"><strong>{pending}</strong><small>Arbitrages ouverts</small></div>
-      </section>
-      <p className="muted">Indicateurs de suivi des interventions agentiques (IA, hybrides, humaines). Le Kayroslab Index évoluera avec la qualité des verdicts et la rapidité d’arbitrage.</p>
-    </div>
-    <header className="page-header" style={{display:"none"}}><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div>
+  return <section className="page">
+    <header className="page-header">
+      <div>
+        <p className="context-line">Personnalisation & suivi</p>
+        <h1>Réglages</h1>
+        <section className="kpi-strip">
+          <div className="kpi-card"><strong>{kayrosIndex}</strong><small>Kayroslab Index</small></div>
+          <div className="kpi-card"><strong>{total}</strong><small>Missions</small></div>
+          <div className="kpi-card"><strong>{agents}</strong><small>Agents actifs</small></div>
+          <div className="kpi-card"><strong>{sessions}</strong><small>Collectifs</small></div>
+          <div className="kpi-card"><strong>{pending}</strong><small>Arbitrages ouverts</small></div>
+        </section>
+        <p className="muted">Indicateurs de suivi des interventions agentiques (IA, hybrides, humaines). Le Kayroslab Index évoluera avec la qualité des verdicts et la rapidité d’arbitrage.</p>
+      </div>
       <button type="button" className="button secondary" onClick={() => { try { localStorage.removeItem('kayros_onboarding_done'); } catch {} location.hash = '#overview'; location.reload(); }}>Revoir le guide</button>
     </header>
     {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
