@@ -78,6 +78,7 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   {
     agent_id: 'planner', agent_type: 'system_predefined', role_name: 'Gestionnaire tâches & planning',
     can_create_agents: true,
+    can_create_files: true,
     department: 'Opérations & Coordination', seniority: 'senior',
     primary_focus: 'Transformer les décisions en plan d’action : découper en tâches, estimer les charges, séquencer, identifier les dépendances et suivre l’avancement.',
     veto_power: false,
@@ -142,6 +143,7 @@ export function validateAgentDefinition(input, { forceType = null } = {}) {
   }
   d.veto_power = !!d.veto_power;
   d.can_create_agents = !!d.can_create_agents;
+  d.can_create_files = !!d.can_create_files;
   d.human_profile = d.human_profile ? normalizeHumanProfile(d.human_profile) : null;
   const rc = d.rule_configuration || {};
   const base = Array.isArray(rc.system_proposed_rules) ? rc.system_proposed_rules : [];
@@ -499,6 +501,7 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
     required_mitigations: strings(value.required_mitigations || value.mitigations),
     unverified_assumptions: [...new Set(unverified)],
     proposed_agents: Array.isArray(value.proposed_agents) ? value.proposed_agents : [],
+    proposed_files: Array.isArray(value.proposed_files) ? value.proposed_files : [],
     // Provider LLM effectif de l'agent (ENF-09) : un repli `mock` ne doit jamais être silencieux.
     llm_provider: raw?.provider || null,
     llm_degraded: raw?.degraded || null,
@@ -938,6 +941,32 @@ export class SwarmService {
             created.push(createdAgent.agent_id);
           }
         } catch { /* ignore individual creation failures */ }
+      }
+    }
+    // Matérialisation des fichiers proposés
+    const createdFiles = [];
+    for (const analysis of analyses) {
+      const def = definitions.find((d) => d.agent_id === analysis.agent_id);
+      if (!def?.can_create_files) continue;
+      const files = analysis.proposed_files || [];
+      if (!Array.isArray(files)) continue;
+      for (const f of files.slice(0, 6)) {
+        if (!f?.filename || !f?.content) continue;
+        try {
+          const fileId = `file_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`;
+          const record = {
+            file_id: fileId,
+            filename: String(f.filename).slice(0, 200),
+            content: String(f.content).slice(0, 50000),
+            mime: f.mime || 'text/plain',
+            created_by_agent: def.agent_id,
+            run_id: run_id,
+            created_at: now(),
+          };
+          if (!this.files) this.files = new Map();
+          this.files.set(this._key(tenantId, fileId), record);
+          createdFiles.push(record);
+        } catch { /* ignore */ }
       }
     }
     const llm = summarizeRunProviders(analyses);
