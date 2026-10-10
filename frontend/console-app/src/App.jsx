@@ -670,7 +670,7 @@ function HumanProfilePanel({ onImported, disabled }) {
   </section>;
 }
 
-const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false, can_create_agents: false, can_create_files: false };
+const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false, can_create_agents: true, can_create_files: true };
 
 /** Agent impersonateur : persona reconstruite depuis des indices (LinkedIn / Crystal Knows) pour éprouver une idée. */
 function ImpersonatorDialog({ onClose, onCreated }) {
