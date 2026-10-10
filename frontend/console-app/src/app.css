@@ -809,3 +809,15 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .agent-rows { grid-template-columns: minmax(0, 1fr); }
 .agent-row, .agent-row__body { min-width: 0; }
 .session-dialog .button, .dialog-body .button { max-width: 100%; white-space: normal; text-align: center; height: auto; }
+
+/* --- P0 Onboarding & empty states --- */
+.onboarding .onb-steps { display: flex; gap: var(--space-sm); margin-block: var(--space-md); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--color-muted); }
+.onboarding .onb-steps .is-on { color: var(--color-accent); font-weight: 600; }
+.onb-templates { display: grid; gap: var(--space-sm); margin-block: var(--space-md); }
+.onb-card { text-align: left; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md); background: var(--color-surface); cursor: pointer; }
+.onb-card.is-selected { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.onb-card strong { display: block; }
+.onb-card small { color: var(--color-muted); }
+.onb-examples { display: grid; gap: var(--space-2xs); margin-block: var(--space-md); }
+.empty-state { display: grid; gap: var(--space-sm); justify-items: start; padding: var(--space-lg); border: 1px dashed var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper-2); }
+.empty-state p { margin: 0; }
