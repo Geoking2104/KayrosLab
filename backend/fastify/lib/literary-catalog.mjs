@@ -169,17 +169,7 @@ export const LITERARY_AUTHORS = Object.freeze([
     works: [
       { title: 'The Critique of Pure Reason', url: 'https://www.gutenberg.org/cache/epub/4280/pg4280.txt' },
     ],
-  },
-  {
-    id: 'nietzsche', name: 'Friedrich Nietzsche', kind: 'philosophe', lang: 'en',
-    era: '1844–1900 · modernité',
-    blurb: 'Soupçonner les valeurs installées : volonté, courage de penser contre, création de sens.',
-    wikipedia: 'Friedrich Nietzsche',
-    works: [
-      { title: 'Thus Spake Zarathustra', url: 'https://www.gutenberg.org/cache/epub/1998/pg1998.txt' },
-      { title: 'Beyond Good and Evil', url: 'https://www.gutenberg.org/cache/epub/4363/pg4363.txt' },
-    ],
-  },
+  }
   {
     id: 'darwin', name: 'Charles Darwin', kind: 'savant', lang: 'en',
     era: '1809–1882 · sciences',
