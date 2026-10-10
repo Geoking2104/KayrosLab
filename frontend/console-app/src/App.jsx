@@ -753,7 +753,18 @@ function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) 
         discType={form.descriptif?.disc_type || jsonDisc(form.behavioral) || agent?.human_profile?.disc_type}
         onDiscType={(disc) => setForm((current) => ({ ...current, behavioral: jsonWithDisc(current.behavioral, disc), descriptif: current.descriptif ? { ...current.descriptif, disc_type: disc || null } : current.descriptif }))}
         onChange={(descriptif) => setForm((current) => ({ ...current, descriptif }))} />
-      <div className="inline-checks"><label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label><label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
+      <fieldset className="permissions-fieldset">
+        <legend>Permissions</legend>
+        <div className="inline-checks">
+          <label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label>
+          <label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto (peut bloquer un verdict)</label>
+        </div>
+        <label>Outils autorisés (séparés par des virgules)<input value={form.tools} onChange={(event) => setForm({ ...form, tools: event.target.value })} placeholder="ex. web_search, calculator" /></label>
+        <div className="connector-checks">
+          <span>Connecteurs :</span>
+          {['console', 'slack', 'teams', 'discord'].map((id) => <label key={id}><input type="checkbox" checked={form.connectors.includes(id)} onChange={() => toggleConnector(id)} />{id}</label>)}
+        </div>
+      </fieldset>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || (canEdit ? '\u00a0' : `${MANAGER_ONLY} : consultation seule.`)}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={!canEdit || state === 'loading'} title={canEdit ? undefined : MANAGER_ONLY}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
     </form>
     {editing && <section className="crystal-box"><header><div><h3>Agent hybride</h3><p>{profile ? 'Profil humain consenti attaché à cet agent.' : 'Aucun profil humain pour l’instant.'}</p></div><span>{profile ? 'Hybride' : 'Agent métier'}</span></header>
