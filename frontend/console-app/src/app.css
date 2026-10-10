@@ -869,3 +869,17 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .role-list { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
 .button.small { font-size: var(--text-xs); padding: 4px 8px; }
 @media (max-width: 640px) { .context-fields { grid-template-columns: 1fr; } }
+
+/* --- Flow-oriented Overview --- */
+.flow-hint { color: var(--color-muted); font-size: var(--text-sm); margin-top: .25rem; }
+.flow-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); margin-block: var(--space-lg); }
+.flow-step { background: var(--color-surface); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-md); }
+.flow-step h2 { margin-block: 0 .5rem; font-size: var(--text-lg); }
+.flow-step form { display: grid; gap: var(--space-sm); }
+@media (max-width: 900px) { .flow-grid { grid-template-columns: 1fr; } }
+
+/* --- KPI strip in Settings --- */
+.kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-sm); margin-block: var(--space-md); }
+.kpi-card { padding: var(--space-sm); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); }
+.kpi-card strong { display: block; font-size: 1.4rem; }
+.kpi-card small { color: var(--color-muted); }
