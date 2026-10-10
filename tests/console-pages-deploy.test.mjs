@@ -124,3 +124,38 @@ test('intégrations : page Intégrations, profil de mission (fast par défaut) e
   // Un DELETE sans corps ne doit pas annoncer du JSON (Fastify le refuse).
   assert.match(api, /options\.body !== undefined \? \{ 'content-type': 'application\/json' \}/);
 });
+
+test('nouvelle session : agents ajustables, composés, aide au seuil et personnalités réelles', async () => {
+  const [app, api, help, composer, real] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+    read('frontend/console-app/src/consensus-help.jsx'),
+    read('frontend/console-app/src/agent-composer.jsx'),
+    read('frontend/console-app/src/real-profiles.jsx'),
+  ]);
+  assert.match(app, /Vérifier \/ modifier/);
+  assert.match(app, /\+ Composer un agent/);
+  assert.match(app, /agent_overrides: overrides/);
+  assert.match(app, /custom_agents: custom\.map/);
+  assert.match(app, /<ConsensusHelp value=\{form\.voting_threshold\} \/>/);
+  assert.match(help, /Comment choisir le seuil de consensus/);
+  for (const id of ['majority', 'unanimous', 'veto_power_csuite']) assert.match(help, new RegExp(`id: '${id}'`));
+  assert.match(composer, /export function overrideFromDraft/);
+  assert.match(real, /Ajouter à un comité existant/);
+  assert.match(real, /Construire un nouveau comité/);
+  assert.match(api, /\/v1\/console\/personality\/preview/);
+});
+
+test('sessions : un agent de session peut rejoindre le registre partagé (comex/admin seulement)', async () => {
+  const [app, api, promote] = await Promise.all([
+    read('frontend/console-app/src/App.jsx'),
+    read('frontend/console-app/src/api.js'),
+    read('frontend/console-app/src/registry-promotion.jsx'),
+  ]);
+  assert.match(app, /<SessionOwnAgents session=\{session\} capabilities=\{data\.capabilities\}/);
+  assert.match(api, /\/agents\/\$\{encodeURIComponent\(agentId\)\}\/promote/);
+  assert.match(promote, /registry_promotion/);
+  assert.match(promote, /Seul un rôle comex ou admin peut enregistrer/);
+  assert.match(promote, /Espace partagé en libre-service/);
+  assert.match(promote, /share_consent_confirmed/);
+});

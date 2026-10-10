@@ -48,6 +48,8 @@ export const api = {
   importCrystal: (agentId, input) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/crystal`, { method: 'POST', body: JSON.stringify(input) }),
   importPersonality: (agentId, input) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/personality`, { method: 'POST', body: JSON.stringify(input) }),
   setHumanProfile: (agentId, profile) => request(`/v1/console/agents/${encodeURIComponent(agentId)}/human-profile`, { method: 'PUT', body: JSON.stringify(profile) }),
+  // Aperçu d'un profil réel (Crystal Knows API / export JSON / type DISC) avant ajout à un comité.
+  previewPersonality: (input) => request('/v1/console/personality/preview', { method: 'POST', body: JSON.stringify(input) }),
   createImpersonator: (input) => request('/v1/console/impersonators', { method: 'POST', body: JSON.stringify(input) }),
   createImpersonatorTeam: (input) => request('/v1/console/impersonator-teams', { method: 'POST', body: JSON.stringify(input) }),
   connectConnector: (platform) => request(`/v1/console/connectors/${encodeURIComponent(platform)}/connect`, { method: 'POST', body: '{}' }),
@@ -61,6 +63,7 @@ export const api = {
   sessions: () => request('/v1/console/sessions'),
   session: (sessionId) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}`),
   createSession: (session) => request('/v1/console/sessions', { method: 'POST', body: JSON.stringify(session) }),
+  promoteSessionAgent: (sessionId, agentId, body = {}) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/agents/${encodeURIComponent(agentId)}/promote`, { method: 'POST', body: JSON.stringify(body) }),
   updateSessionCollective: (sessionId, body) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/collective`, { method: 'PATCH', body: JSON.stringify(body) }),
   // `profile` : demo (réponses préenregistrées), fast (défaut, 1–2 min) ou deep (~12 min).
   runMission: (sessionId, question, context, profile) => request(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, {

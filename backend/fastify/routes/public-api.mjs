@@ -46,7 +46,9 @@ function collectiveAllowed(principal, roomId) {
 }
 function collectiveView(swarm, room) {
   const configuration = swarm.getConfiguration?.(room.swarm_id, { tenantId: room.tenant_id });
-  const agents = (configuration?.active_agents || []).map((id) => swarm.registry.get(id, { tenantId: room.tenant_id })).filter(Boolean);
+  const agents = (configuration?.active_agents || []).map((id) => (swarm.effectiveConfigurationAgent
+    ? swarm.effectiveConfigurationAgent(configuration, id, { tenantId: room.tenant_id })
+    : swarm.registry.get(id, { tenantId: room.tenant_id }))).filter(Boolean);
   return {
     id: room.room_id, name: room.name, created_at: room.created_at,
     voting_threshold: configuration?.voting_threshold || 'majority',

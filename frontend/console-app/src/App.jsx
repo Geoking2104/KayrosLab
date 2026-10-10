@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, getToken, setToken } from './api.js';
 import { BrandLogo, BrandRow, kayrosLogo } from './brand.jsx';
+import { AgentAttributesForm, AgentAttributesSummary, customAgentFromDraft, draftErrors, draftFromAgent, emptyDraft, overrideFromDraft } from './agent-composer.jsx';
+import { ConsensusHelp, ConsensusHint } from './consensus-help.jsx';
+import { ProfileTraits, RealProfileImporter, RealProfilesDialog } from './real-profiles.jsx';
+import { SessionOwnAgents } from './registry-promotion.jsx';
 
 // La console est un harness d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
@@ -204,28 +208,116 @@ function AgentChips({ agents }) {
   return <div className="collective-chips">{agents.map((agent) => <span className="collective-chip" key={agent.agent_id}>
     <Portrait agent={agent} name={agent.display_name} size={22} />
     <span><strong>{agent.display_name}</strong><small>{agent.department}</small></span>
-    {agent.hybrid ? <em title="Profil hybride conssenti">hybride</em> : null}
+    {agent.hybrid ? <em title="Profil hybride consenti">hybride</em> : null}
     {agent.impersonator ? <em title="Persona simulée (impersonator)">persona</em> : null}
     {agent.veto_power ? <em title="Pouvoir de veto">veto</em> : null}
   </span>)}</div>;
 }
 
-function CreateSession({ agents, onClose, onCreated }) {
+function agentBadges(agent, { overridden = false, composed = false, real = false } = {}) {
+  return <span className="agent-badges">
+    {composed && <em title="Agent composé pour cette session">{real ? 'profil réel' : 'composé'}</em>}
+    {overridden && <em title="Attributs ajustés pour cette session">modifié</em>}
+    {agent?.veto_power && <em title="Pouvoir de veto">veto</em>}
+    {agent?.human_profile && <em title="Profil humain consenti">hybride</em>}
+  </span>;
+}
+
+/**
+ * « Nouvelle session » : choisir les agents proposés, vérifier et ajuster leurs
+ * attributs pour ce collectif, composer ses propres agents ou importer des
+ * personnalités réelles (Crystal Knows / DISC). Les ajustements restent propres
+ * à la session : le registre du tenant n'est jamais modifié.
+ */
+function CreateSession({ data, agents, onClose, onCreated }) {
   const active = agents.filter((agent) => agent.enabled !== false);
+  const maxCustom = data?.capabilities?.max_custom_agents_per_session || 8;
   const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority' });
+  const [drafts, setDrafts] = useState({});
+  const [custom, setCustom] = useState([]);
+  const [expanded, setExpanded] = useState(null);
+  const [importing, setImporting] = useState(false);
   // null = règle serveur : activée dès qu'un agent du collectif porte un profil humain consenti (EF-27/28).
   const [personality, setPersonality] = useState(null);
   const [state, setState] = useState('idle'); const [error, setError] = useState('');
-  const autoPersonality = active.some((agent) => form.active_agents.includes(agent.agent_id) && hasConsentedProfile(agent));
+  const byId = (id) => active.find((agent) => agent.agent_id === id);
+  const overrides = Object.fromEntries(Object.entries(drafts)
+    .filter(([id]) => form.active_agents.includes(id) && byId(id))
+    .map(([id, draft]) => [id, overrideFromDraft(byId(id), draft)]).filter(([, patch]) => patch));
+  const autoPersonality = active.some((agent) => form.active_agents.includes(agent.agent_id) && hasConsentedProfile(agent)) || custom.some((member) => member.profile);
+  const total = form.active_agents.length + custom.length;
+  useEffect(() => {
+    const onKey = (event) => { if (event.key === 'Escape') onClose(); };
+    addEventListener('keydown', onKey); return () => removeEventListener('keydown', onKey);
+  }, [onClose]);
   function toggle(id) { setForm((current) => ({ ...current, active_agents: current.active_agents.includes(id) ? current.active_agents.filter((item) => item !== id) : [...current.active_agents, id] })); }
-  async function submit(event) { event.preventDefault(); setState('loading'); setError(''); try { await api.createSession(personality === null ? form : { ...form, personality_simulation_enabled: personality }); await onCreated(); onClose(); } catch (err) { setState('error'); setError(err.message); } }
-  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide" role="dialog" aria-modal="true">
-    <header><div><h2>Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
+  function editPreset(id, draft) {
+    setDrafts((current) => ({ ...current, [id]: draft }));
+    setForm((current) => (current.active_agents.includes(id) ? current : { ...current, active_agents: [...current.active_agents, id] }));
+  }
+  function resetPreset(id) { setDrafts((current) => { const next = { ...current }; delete next[id]; return next; }); }
+  function addCustom(member = { draft: emptyDraft(), profile: null }) {
+    if (custom.length >= maxCustom) { setError(`${maxCustom} agents composés maximum par session.`); return; }
+    const key = `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+    setCustom((current) => [...current, { key, ...member }]); setExpanded(member.profile ? null : key); setError('');
+  }
+  function updateCustom(key, draft) { setCustom((current) => current.map((member) => (member.key === key ? { ...member, draft } : member))); }
+  async function submit(event) {
+    event.preventDefault(); setError('');
+    const incomplete = custom.find((member) => draftErrors(member.draft));
+    if (incomplete) { setExpanded(incomplete.key); setError(`Agent composé « ${incomplete.draft.display_name || 'sans nom'} » — ${draftErrors(incomplete.draft)}`); return; }
+    setState('loading');
+    try {
+      const body = {
+        name: form.name, voting_threshold: form.voting_threshold, active_agents: form.active_agents,
+        ...(Object.keys(overrides).length ? { agent_overrides: overrides } : {}),
+        ...(custom.length ? { custom_agents: custom.map((member) => customAgentFromDraft(member.draft, { human_profile: member.profile })) } : {}),
+        ...(personality === null ? {} : { personality_simulation_enabled: personality }),
+      };
+      await api.createSession(body); setState('success'); await onCreated(); onClose();
+    } catch (err) { setState('error'); setError(err.message); }
+  }
+  return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide session-dialog" role="dialog" aria-modal="true" aria-labelledby="create-session-title">
+    <header><div><h2 id="create-session-title">Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" aria-label="Fermer" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
-      <fieldset><legend>Collectif actif</legend><div className="agent-picker">{active.map((agent) => <label className="agent-check" key={agent.agent_id}><input type="checkbox" checked={form.active_agents.includes(agent.agent_id)} onChange={() => toggle(agent.agent_id)} /><span><strong>{agent.display_name || agent.role_name}</strong><small>{agent.department}</small></span></label>)}</div></fieldset>
-      <label>Seuil de consensus<select value={form.voting_threshold} onChange={(event) => setForm({ ...form, voting_threshold: event.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
+      <fieldset><legend>Collectif actif · {total} agent(s)</legend>
+        <p className="muted so-note">Cochez les agents proposés, puis « Vérifier » pour relire leurs attributs et les ajuster. Les ajustements valent pour cette session seulement.</p>
+        {!active.length && <p className="muted so-note" role="note">Aucun agent proposé n’est actif : composez un agent ou importez une personnalité réelle.</p>}
+        <ul className="agent-rows">{active.map((agent) => {
+          const id = agent.agent_id; const draft = drafts[id]; const open = expanded === id; const checked = form.active_agents.includes(id);
+          return <li key={id} className={`agent-row ${checked ? 'is-selected' : ''}`}>
+            <div className="agent-row__head">
+              <label className="agent-row__check"><input type="checkbox" checked={checked} onChange={() => toggle(id)} /><Portrait agent={agent} name={draft?.display_name || agent.display_name || agent.role_name} size={28} /><span><strong>{draft?.display_name || agent.display_name || agent.role_name}</strong><small>{draft?.department || agent.department}{agent.seniority ? ` · ${agent.seniority}` : ''}</small></span></label>
+              {agentBadges({ ...agent, veto_power: draft ? draft.veto_power : agent.veto_power }, { overridden: !!overrides[id] })}
+              <button type="button" className="text-button" aria-expanded={open} onClick={() => setExpanded(open ? null : id)}>{open ? 'Masquer' : 'Vérifier / modifier'}</button>
+            </div>
+            {open && <div className="agent-row__body">
+              <AgentAttributesSummary agent={agent} draft={draft} />
+              <AgentAttributesForm draft={draft || draftFromAgent(agent)} onChange={(next) => editPreset(id, next)} idPrefix={id} />
+              {draft && <div className="connector-actions"><button type="button" className="text-button" onClick={() => resetPreset(id)}>Rétablir les attributs d’origine</button></div>}
+            </div>}
+          </li>;
+        })}
+        {custom.map((member) => { const open = expanded === member.key; const name = member.draft.display_name || member.draft.role_name || 'Nouvel agent';
+          return <li key={member.key} className="agent-row is-selected is-custom">
+            <div className="agent-row__head">
+              <span className="agent-row__check"><Portrait agent={{ human_profile: member.profile }} name={name} size={28} /><span><strong>{name}</strong><small>{member.draft.department || 'département à préciser'}{member.profile?.disc_type ? ` · DISC ${member.profile.disc_type}` : ''}</small></span></span>
+              {agentBadges({ veto_power: member.draft.veto_power, human_profile: member.profile }, { composed: true, real: !!member.profile })}
+              <span className="agent-row__actions"><button type="button" className="text-button" aria-expanded={open} onClick={() => setExpanded(open ? null : member.key)}>{open ? 'Masquer' : 'Modifier'}</button><button type="button" className="text-button" onClick={() => setCustom((current) => current.filter((item) => item.key !== member.key))}>Retirer</button></span>
+            </div>
+            {open && <div className="agent-row__body">{member.profile && <ProfileTraits profile={member.profile} />}<AgentAttributesForm draft={member.draft} onChange={(next) => updateCustom(member.key, next)} idPrefix={member.key} /></div>}
+          </li>; })}
+        </ul>
+        <div className="connector-actions composer-actions">
+          <button type="button" className="button secondary" onClick={() => addCustom()} disabled={custom.length >= maxCustom}>+ Composer un agent</button>
+          <button type="button" className="button secondary" aria-expanded={importing} onClick={() => setImporting((current) => !current)}>{importing ? 'Fermer l’import' : 'Importer une personnalité réelle (Crystal Knows)'}</button>
+        </div>
+        {importing && <div className="import-panel"><RealProfileImporter canUseApi={canManage(data?.user)} apiConfigured={data?.capabilities?.crystal_knows === true} addLabel="Ajouter au collectif" onAdd={(member) => addCustom(member)} /></div>}
+      </fieldset>
+      <div className="threshold-field"><label>Seuil de consensus<select value={form.voting_threshold} onChange={(event) => setForm({ ...form, voting_threshold: event.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><ConsensusHelp value={form.voting_threshold} /></div>
+      <ConsensusHint value={form.voting_threshold} />
       <label className="consent"><input type="checkbox" checked={personality ?? autoPersonality} onChange={(event) => setPersonality(event.target.checked)} />Simulation de personnalité : les agents dotés d’un profil humain consenti répondent selon ce profil (réactions simulées, jamais des citations réelles).</label>
-      <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !form.active_agents.length}>{state === 'loading' ? 'Ouverture…' : 'Ouvrir la session'}</button></footer>
+      <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p><footer><button type="button" className="button secondary" onClick={onClose}>Annuler</button><button className="button primary" disabled={state === 'loading' || !total}>{state === 'loading' ? 'Ouverture…' : 'Ouvrir la session'}</button></footer>
     </form>
   </section></div>;
 }
@@ -573,7 +665,7 @@ function ImpersonatorTeamDialog({ onClose, onCreated }) {
     <header><div><h2>Créer une équipe d'impersonators</h2><p>Réunissez plusieurs personas simulées dans un collectif (session) pour éprouver une idée face à plusieurs parties prenantes.</p></div><button className="icon-button" onClick={onClose}>×</button></header>
     {!result ? <form onSubmit={submit}>
       <div className="form-grid"><label>Nom de l'équipe<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ex. Panel achats 2026" required /></label><label>Objectif<select value={form.purpose} onChange={(e) => setForm({ ...form, purpose: e.target.value })}><option value="idea_test">Éprouver une idée</option><option value="objection_rehearsal">Répétition des objections</option><option value="pitch_review">Revue de pitch</option></select></label></div>
-      <div className="form-grid"><label>Seuil de consensus<select value={form.voting_threshold} onChange={(e) => setForm({ ...form, voting_threshold: e.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Chaque persona a un pouvoir de veto</label></div>
+      <div className="form-grid"><div className="threshold-field"><label>Seuil de consensus<select value={form.voting_threshold} onChange={(e) => setForm({ ...form, voting_threshold: e.target.value })}>{votingThresholds.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><ConsensusHelp value={form.voting_threshold} /></div><label className="consent"><input type="checkbox" checked={form.veto_power} onChange={(e) => setForm({ ...form, veto_power: e.target.checked })} />Chaque persona a un pouvoir de veto</label></div>
       <label className="consent"><input type="checkbox" checked={form.personality_simulation_enabled} onChange={(e) => setForm({ ...form, personality_simulation_enabled: e.target.checked })} />Simulation de personnalité active dans la session (réactions simulées selon chaque profil)</label>
       <fieldset><legend>Personas simulées ({members.length}/12 · minimum 2)</legend><div className="so-manager">
         {members.map((member, index) => <section key={index} className="analysis-card">
@@ -642,6 +734,7 @@ function AgentsPage({ data, refresh }) {
   const [hybrid, setHybrid] = useState(false);
   const [impersonator, setImpersonator] = useState(false);
   const [team, setTeam] = useState(false);
+  const [realProfiles, setRealProfiles] = useState(false);
   const [filter, setFilter] = useState('all');
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
   const kinds = [['all', 'Tous'], ['business', 'Métier'], ['hybrid', 'Hybride'], ['impersonator', 'Impersonator']];
@@ -651,7 +744,7 @@ function AgentsPage({ data, refresh }) {
     if (filter === 'business') return !agent.human_profile;
     return true;
   });
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" disabled={!manager} title={locked} onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" disabled={!manager} title={locked} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setTeam(true)}>Équipe d'impersonators</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button secondary" disabled={!manager} title={locked} onClick={() => setEditing(null)}>Ajouter un agent</button><button className="button secondary" disabled={!manager} title={locked} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setTeam(true)}>Équipe d'impersonators</button><button className="button secondary" onClick={() => setRealProfiles(true)} title="Ajouter des personnalités réelles à un comité ou en construire un">Personnalités réelles (Crystal Knows)</button></div></header>
     {!manager && <p className="muted so-note" role="note">Création et modification d’agents (agent hybride, agent impersonator, équipe d’impersonators) : {MANAGER_ONLY.toLowerCase()}. Votre rôle : {data.user?.role || 'contributeur'}. Vous pouvez consulter le registre et composer vos sessions avec ces agents.</p>}
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="inline-checks so-filters">{kinds.map(([id, label]) => <button type="button" key={id} className={`text-button ${filter === id ? 'is-active' : ''}`} onClick={() => setFilter(id)}>{label} ({id === 'all' ? data.agents.length : data.agents.filter((a) => (id === 'impersonator' ? !!a.metadata?.impersonator : id === 'hybrid' ? (!!a.human_profile && !a.metadata?.impersonator) : !a.human_profile)).length})</button>)}</div>
@@ -660,6 +753,7 @@ function AgentsPage({ data, refresh }) {
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
     {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
     {team && <ImpersonatorTeamDialog onClose={() => setTeam(false)} onCreated={async () => { await refresh(); }} />}
+    {realProfiles && <RealProfilesDialog data={data} canUseApi={manager} onClose={() => setRealProfiles(false)} onDone={refresh} />}
   </section>;
 }
 
@@ -819,17 +913,20 @@ function SettingsPage({ data, refresh }) {
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
     <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
     <ChatLinksPanel />
-    <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? 'API serveur configurée' : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. L’import ne s’active qu’au niveau d’un agent hybride, avec consentement explicite. Les jetons restent côté serveur ; aucun scraping n’est utilisé.</p></section>
+    <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? `API serveur configurée (Data API ${data.capabilities.crystal_knows_api?.version || 'v4'}${data.capabilities.crystal_knows_api?.predictions ? ', prédictions activées' : ''})` : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. Les profils réels s’importent avec consentement explicite depuis « Nouvelle session », la page Agents (« Personnalités réelles ») ou un agent hybride. Sans jeton, l’import d’un export JSON Crystal ou d’un type DISC reste disponible. Le jeton reste côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }
 
-function SessionsPage({ data, onCreate, onThread }) {
-  return <section className="page"><header className="page-header"><div><p className="context-line">Collectifs exécutables</p><h1>Sessions</h1><p>Chaque session est un collectif stable : son journal d'exécution et ses dossiers restent attachés.</p></div><button className="button primary" onClick={onCreate}>Nouvelle session</button></header>
+function SessionsPage({ data, refresh, onCreate, onThread }) {
+  const [realProfiles, setRealProfiles] = useState(false);
+  return <section className="page"><header className="page-header"><div><p className="context-line">Collectifs exécutables</p><h1>Sessions</h1><p>Chaque session est un collectif stable : son journal d'exécution et ses dossiers restent attachés.</p></div><div className="header-actions"><button className="button secondary" onClick={() => setRealProfiles(true)}>Importer des personnalités réelles</button><button className="button primary" onClick={onCreate}>Nouvelle session</button></div></header>
+    {realProfiles && <RealProfilesDialog data={data} canUseApi={canManage(data.user)} onClose={() => setRealProfiles(false)} onDone={refresh} />}
     {!data.sessions.length && <p className="muted">Aucune session — ouvrez-en une pour composer un collectif et lancer une mission.</p>}
     <div className="session-grid">{data.sessions.map((session) => <article key={session.session_id}>
       <small>{session.collective.active_agents.length} agent(s) · {session.executions?.length || 0} exécution(s) · {votingLabel(session.collective.voting_threshold)}</small>
       <h2>{session.name}</h2>
       <AgentChips agents={session.collective.agents} />
+      <SessionOwnAgents session={session} capabilities={data.capabilities} onSaved={refresh} />
       <div>{(session.executions || []).slice(0, 3).map((thread) => <button className="text-button" key={thread.thread_id} onClick={() => onThread(thread)}>{thread.question}{thread.status === 'running' ? ` · mission en cours${thread.progress?.total ? ` (${progressLabel(thread.progress)})` : ''}` : thread.status === 'failed' ? ' · échec' : ''}</button>)}{!(session.executions || []).length && <span className="muted">Aucune mission pour cette session.</span>}</div>
     </article>)}</div>
   </section>;
@@ -925,8 +1022,8 @@ function Console() {
   }
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
-    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'integrations' && <IntegrationsPage data={data} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
-    {creatingSession && <CreateSession agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
+    <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} refresh={refresh} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'integrations' && <IntegrationsPage data={data} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
+    {creatingSession && <CreateSession data={data} agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
   </div>;
 }
 

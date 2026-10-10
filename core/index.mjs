@@ -181,7 +181,12 @@ export function createEngine(opts = {}) {
     linkedinAdapter: opts.linkedinProfileAdapter || (opts.linkedinAccessToken
       ? new LinkedInSelfProfileAdapter({ accessToken: opts.linkedinAccessToken, fetchImpl: opts.fetchImpl }) : null),
     crystalKnowsAdapter: opts.crystalKnowsProfileAdapter || (opts.crystalKnowsApiToken
-      ? new CrystalKnowsProfileAdapter({ apiToken: opts.crystalKnowsApiToken, fetchImpl: opts.fetchImpl }) : null),
+      ? new CrystalKnowsProfileAdapter({
+        apiToken: opts.crystalKnowsApiToken, fetchImpl: opts.fetchImpl,
+        ...(opts.crystalKnowsBaseUrl ? { baseUrl: opts.crystalKnowsBaseUrl } : {}),
+        apiVersion: opts.crystalKnowsApiVersion || 'v4',
+        allowPredictions: opts.crystalKnowsAllowPredictions === true,
+      }) : null),
   });
   const swarm = new SwarmService({
     llm, memory, systemAgents: opts.systemAgents,

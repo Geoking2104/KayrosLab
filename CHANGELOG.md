@@ -1,5 +1,14 @@
 # Changelog
 
+## Non publié — Console : composer ses agents, aide au seuil de consensus, personnalités réelles
+
+- **Nouvelle session** : vérification et ajustement des attributs de chaque agent proposé pour la session (identité, séniorité, mission, instructions, contraintes, veto, personnalité, règles) sans modifier le registre ; composition d'agents propres à la session (`custom_agents`, stockés dans `session_agents`, ouverts aux contributeurs) ; Échap ferme la boîte ; largeur des boîtes « wide » corrigée.
+- **Seuil de consensus** : bouton « ? » qui explique les trois seuils (règle, quand choisir, conséquences) et le veto, dans « Nouvelle session », l'équipe d'impersonators et l'import de comité.
+- **Crystal Knows** : adaptateur aligné sur la Data API v4 (`GET /v4/profile`, `GET /v4/content/profile/:id`, prédictions opt-in), traits comportementaux, erreurs 401/402/404/429 lisibles ; repli export JSON / type DISC ; `POST /v1/console/personality/preview` ; dialogue « Personnalités réelles » pour compléter un comité existant ou en construire un.
+- Profil comportemental d'un agent injecté dans son contexte d'exécution.
+- **Enregistrer dans le registre** : un agent composé, ajusté ou importé (Crystal/DISC) dans une session peut rejoindre le registre partagé du tenant (`POST /v1/console/sessions/:id/agents/:agentId/promote`, comex/admin uniquement, comme la création d'agent). Un profil réel exige un consentement de partage explicite et n'est jamais publié dans un tenant partagé en libre-service (`KAYROS_SHARED_TENANT_IDS`, défaut `default`) : seuls les attributs y sont enregistrés, nom de la personne retiré de tous les textes. Les contributeurs voient les agents propres à la session et une explication.
+- **Crystal Data API v4 validée en réel** (profils de test `pjones@`, `drew@`, `bkim@crystalknows.com`) : traits comportementaux renvoyés avec des clés capitalisées (`Risk-Aversion`) désormais reconnus, sections `building_trust`, `driving_action`, `blindspots` projetées, message explicite quand l'organisation Crystal n'a pas l'option « API Access ».
+
 ## v0.27.0 (2026-10) — Connecteurs chat asynchrones, arbitrage depuis Slack / Teams / Discord
 
 - **Réponses asynchrones** : Slack (200 immédiat, message « ⏳ analyse en cours » dans le fil puis `chat.update`), Teams (200 + indicateur de saisie, réponse proactive via la référence de conversation `serviceUrl`, carte remplacée), Discord (réponse différée type 5 puis édition de `@original`, message du bot au-delà de 15 min). Le collectif tourne en tâche de fond comme les missions console (`startMessage`, file Postgres) ; un échec publie « La mission n’a pas abouti » avec la raison. Déduplication par identifiant de message conservée, signatures inchangées.

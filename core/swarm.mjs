@@ -183,9 +183,30 @@ export function applyRulePatchToDefinition(definition, patch = {}) {
   return validateAgentDefinition(d);
 }
 
+/**
+ * Champs d'identité qu'une session peut surcharger pour son seul collectif
+ * (« Nouvelle session » : vérifier puis ajuster un agent proposé) sans modifier
+ * le registre du tenant.
+ */
+export const SESSION_OVERRIDE_FIELDS = Object.freeze(['display_name', 'role_name', 'department', 'seniority', 'mission', 'instructions', 'constraints', 'veto_power', 'behavioral_profile']);
+
+export function applyIdentityOverrides(definition, patch = {}) {
+  const d = clone(definition);
+  let changed = false;
+  for (const field of SESSION_OVERRIDE_FIELDS) {
+    if (patch[field] === undefined) continue;
+    changed = true;
+    if (field === 'mission') { d.mission = String(patch.mission || '').trim() || d.mission; continue; }
+    d[field] = clone(patch[field]);
+  }
+  if (!changed) return d;
+  d.metadata = { ...plainObject(d.metadata), session_override: true };
+  return d;
+}
+
 /** Apply rules plus the optional personality fields carried by v6 overrides. */
 export function applyAgentPatchToDefinition(definition, patch = {}, { personalityEnabled = false } = {}) {
-  let d = applyRulePatchToDefinition(definition, patch);
+  let d = applyRulePatchToDefinition(applyIdentityOverrides(validateAgentDefinition(definition), patch), patch);
   const overlay = profileFromAgentOverride(patch);
   if (overlay) {
     if (personalityEnabled && overlay.consent_confirmed !== true) {
@@ -223,6 +244,20 @@ export function resolveEffectiveRules(definition) {
   return rules;
 }
 
+const BEHAVIORAL_LABELS = Object.freeze({
+  disc_type: 'Profil DISC', archetype: 'Archétype', tone: 'Ton', decision_style: 'Style de décision',
+  risk_appetite: 'Appétence au risque', traits: 'Traits', communication_directives: 'Directives de communication',
+  biases: 'Biais à surveiller', motivators: 'Motivations',
+});
+/** Caractéristiques déclarées de l'agent (personnalité de rôle, pas un profil humain réel). */
+export function behavioralContext(profile = {}) {
+  const lines = Object.entries(plainObject(profile)).map(([key, value]) => {
+    const text = Array.isArray(value) ? strings(value).join('; ') : value != null && typeof value !== 'object' ? String(value).trim() : '';
+    return text ? `- ${BEHAVIORAL_LABELS[key] || key}: ${text}` : null;
+  }).filter(Boolean);
+  return lines.length ? `Profil comportemental de l'agent:\n${lines.join('\n')}` : '';
+}
+
 export function compileEffectiveAgentContext(definition) {
   const d = validateAgentDefinition(definition);
   const rules = resolveEffectiveRules(d);
@@ -235,6 +270,7 @@ export function compileEffectiveAgentContext(definition) {
     `Règles de décision:\n${rules.length
       ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
       : '- Aucune règle active; signaler explicitement cette lacune de gouvernance.'}`,
+    behavioralContext(d.behavioral_profile) || null,
     impersonatorContext(d) || null,
   ];
   return sections.filter(Boolean).join('\n\n');
@@ -590,7 +626,13 @@ export class SwarmService {
     return agent;
   }
 
-  async importAndAssignPersonality(agentId, { imports = [], manual_profile = null, consent_confirmed = false } = {}, { tenantId = null, by = null } = {}) {
+  async importAndAssignPersonality(agentId, input = {}, { tenantId = null, by = null } = {}) {
+    if (!this.registry.get(agentId, { tenantId })) throw new Error(`agent introuvable: ${agentId}`);
+    return this.assignPersonality(agentId, await this.previewPersonality(input, { by }), { tenantId, by });
+  }
+
+  /** Construit le profil humain fusionné (imports + saisie) sans l'attacher à un agent. */
+  async previewPersonality({ imports = [], manual_profile = null, consent_confirmed = false } = {}, { by = null } = {}) {
     if (consent_confirmed !== true) throw new Error('profile import: consentement explicite requis');
     const fragments = [];
     for (const item of imports || []) {
@@ -609,7 +651,39 @@ export class SwarmService {
       fragments.push(manual);
     }
     if (!fragments.length) throw new Error('profile import: au moins une source ou un profil manuel requis');
-    return this.assignPersonality(agentId, mergeHumanProfiles(...fragments), { tenantId, by });
+    return mergeHumanProfiles(...fragments);
+  }
+
+  /** Agent du collectif : agent propre à la session, sinon agent du registre. */
+  resolveConfigurationAgent(config, agentId, { tenantId = null } = {}) {
+    const own = (config?.session_agents || []).find((agent) => agent.agent_id === agentId);
+    return own ? clone(own) : this.registry.get(agentId, { tenantId });
+  }
+
+  /** Agent tel qu'il siège dans ce collectif (surcharges de session appliquées). */
+  effectiveConfigurationAgent(config, agentId, { tenantId = null } = {}) {
+    const base = this.resolveConfigurationAgent(config, agentId, { tenantId });
+    if (!base) return null;
+    try { return applyAgentPatchToDefinition(base, config?.agent_rule_overrides?.[agentId] || {}); } catch { return base; }
+  }
+
+  /** Valide les agents composés pour une session (ils ne rejoignent jamais le registre du tenant). */
+  _sessionAgents(list, { tenantId = null, existing = [] } = {}) {
+    const taken = new Set(existing.map((agent) => agent.agent_id));
+    return (Array.isArray(list) ? list : []).map((input) => {
+      const definition = validateAgentDefinition({
+        ...clone(input), agent_type: 'user_defined', enabled: true,
+        metadata: { ...plainObject(input?.metadata), session_scoped: true },
+      });
+      if (this.registry.get(definition.agent_id, { tenantId }) || taken.has(definition.agent_id)) {
+        throw new Error(`agent déjà existant: ${definition.agent_id}`);
+      }
+      if (definition.human_profile && definition.human_profile.consent_confirmed !== true) {
+        throw new Error('human_profile: consentement explicite requis');
+      }
+      taken.add(definition.agent_id);
+      return definition;
+    });
   }
 
   createConfiguration(input, { tenantId = null, by = null } = {}) {
@@ -622,20 +696,22 @@ export class SwarmService {
     if (this.configurations.has(this._key(tenantId, swarm_id))) throw new Error(`swarm déjà existant: ${swarm_id}`);
     if (!active_agents.length) throw new Error('active_agents: au moins un agent requis');
     assertOneOf(voting_threshold, VOTING_THRESHOLDS, 'voting_threshold');
+    const session_agents = this._sessionAgents(input?.session_agents, { tenantId });
+    const draft = { session_agents };
     for (const id of active_agents) {
-      const agent = this.registry.get(id, { tenantId });
+      const agent = this.resolveConfigurationAgent(draft, id, { tenantId });
       if (!agent) throw new Error(`agent actif introuvable: ${id}`);
       if (agent.enabled === false) throw new Error(`agent désactivé: ${id}`);
     }
     const overrides = clone(input?.agent_rule_overrides || {});
     for (const [id, patch] of Object.entries(overrides)) {
-      const definition = this.registry.get(id, { tenantId });
+      const definition = this.resolveConfigurationAgent(draft, id, { tenantId });
       if (!definition || !active_agents.includes(id)) throw new Error(`override d'un agent inactif ou introuvable: ${id}`);
       applyAgentPatchToDefinition(definition, patch, { personalityEnabled: personality_simulation_enabled });
     }
     const config = {
       swarm_id, swarm_name, active_agents, voting_threshold, personality_simulation_enabled,
-      agent_rule_overrides: overrides, tenant_id: tenantKey(tenantId),
+      agent_rule_overrides: overrides, ...(session_agents.length ? { session_agents } : {}), tenant_id: tenantKey(tenantId),
       created_by: by, created_at: now(), updated_at: now(),
     };
     this.configurations.set(this._key(tenantId, swarm_id), config);
@@ -651,7 +727,7 @@ export class SwarmService {
       throw new Error('configuration persistée invalide');
     }
     for (const agentId of config.active_agents) {
-      if (!this.registry.get(agentId, { tenantId })) throw new Error(`agent actif introuvable: ${agentId}`);
+      if (!this.resolveConfigurationAgent(config, agentId, { tenantId })) throw new Error(`agent actif introuvable: ${agentId}`);
     }
     this.configurations.set(this._key(tenantId, config.swarm_id), config);
     return clone(config);
@@ -660,25 +736,81 @@ export class SwarmService {
   getConfiguration(id, { tenantId = null } = {}) { return clone(this.configurations.get(this._key(tenantId, id)) || null); }
 
   /** Met à jour le collectif actif d'une configuration existante (ajouts/retraits d'agents) avec validation et persistance. */
-  updateConfigurationAgents(swarmId, { addAgentIds = [], removeAgentIds = [] } = {}, { tenantId = null, by = null } = {}) {
+  updateConfigurationAgents(swarmId, { addAgentIds = [], removeAgentIds = [], addSessionAgents = [] } = {}, { tenantId = null, by = null } = {}) {
     const key = this._key(tenantId, swarmId);
     const config = this.configurations.get(key);
     if (!config) throw new Error(`swarm introuvable: ${swarmId}`);
-    const adds = strings(addAgentIds);
     const removes = strings(removeAgentIds);
+    const keptOwn = (config.session_agents || []).filter((agent) => !removes.includes(agent.agent_id));
+    const newOwn = this._sessionAgents(addSessionAgents, { tenantId, existing: keptOwn });
+    const adds = [...new Set([...strings(addAgentIds), ...newOwn.map((agent) => agent.agent_id)])];
     const next = config.active_agents.filter((id) => !removes.includes(id));
     for (const id of adds) if (!next.includes(id)) next.push(id);
     if (!next.length) throw new Error('active_agents: au moins un agent requis');
+    const session_agents = [...keptOwn, ...newOwn];
     for (const id of next) {
-      const agent = this.registry.get(id, { tenantId });
+      const agent = this.resolveConfigurationAgent({ session_agents }, id, { tenantId });
       if (!agent) throw new Error(`agent actif introuvable: ${id}`);
       if (agent.enabled === false) throw new Error(`agent désactivé: ${id}`);
     }
-    const updated = { ...clone(config), active_agents: next, updated_at: now() };
+    const overrides = Object.fromEntries(Object.entries(config.agent_rule_overrides || {}).filter(([id]) => next.includes(id)));
+    const updated = { ...clone(config), active_agents: next, agent_rule_overrides: overrides, updated_at: now() };
+    if (session_agents.length || config.session_agents) updated.session_agents = clone(session_agents);
     this.configurations.set(key, updated);
     this._persist(this.store?.saveConfiguration?.(updated, { tenantId: tenantKey(tenantId) }));
     this._audit({ type: 'swarm.configuration.updated', swarm_id: swarmId, tenant_id: tenantKey(tenantId), added: adds, removed: removes, by });
     return clone(updated);
+  }
+  /**
+   * Enregistre dans le registre partagé du tenant un agent composé ou ajusté dans
+   * une session (profil réel Crystal/DISC compris). Le collectif n'est pas modifié,
+   * sauf si l'agent de session garde son identifiant : la copie de session cède
+   * alors la place à l'agent du registre (même définition).
+   * `include_human_profile: false` enregistre les seuls attributs, sans profil réel.
+   */
+  promoteSessionAgent(swarmId, agentId, { agent_id = null, display_name = null, include_human_profile = true } = {}, { tenantId = null, by = null } = {}) {
+    const key = this._key(tenantId, swarmId);
+    const config = this.configurations.get(key);
+    if (!config) throw new Error(`swarm introuvable: ${swarmId}`);
+    if (!(config.active_agents || []).includes(agentId)) throw new Error(`agent absent du collectif: ${agentId}`);
+    const own = (config.session_agents || []).some((agent) => agent.agent_id === agentId);
+    const overridden = !own && Object.keys(config.agent_rule_overrides?.[agentId] || {}).length > 0;
+    if (!own && !overridden) throw new Error(`agent déjà dans le registre: ${agentId}`);
+    const effective = this.effectiveConfigurationAgent(config, agentId, { tenantId });
+    const targetId = String(agent_id || (own ? agentId : `${agentId}_variante`)).trim();
+    if (this.registry.get(targetId, { tenantId })) throw new Error(`agent déjà existant: ${targetId}`);
+    const { session_scoped, session_override, ...metadata } = plainObject(effective.metadata);
+    const input = {
+      ...clone(effective), agent_id: targetId, agent_type: 'user_defined', enabled: true,
+      metadata: { ...metadata, promoted_from_session: { swarm_id: swarmId, agent_id: agentId, by, at: now() } },
+    };
+    if (display_name) input.display_name = String(display_name).trim();
+    if (!include_human_profile && input.human_profile) {
+      // Attributs seuls : le nom de la personne importée ne doit subsister nulle part
+      // (mission « Réagir comme … », instructions, règles, profil comportemental).
+      const person = String(input.human_profile.assigned_name || '').trim();
+      delete input.human_profile;
+      if (person) {
+        const chosen = String(display_name || '').trim();
+        const neutral = chosen && chosen.toLowerCase() !== person.toLowerCase() ? chosen : String(effective.role_name || 'ce profil').trim();
+        const pattern = new RegExp(person.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        const scrub = (value) => (typeof value === 'string' ? value.replace(pattern, neutral)
+          : Array.isArray(value) ? value.map(scrub)
+            : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, scrub(v)])) : value);
+        for (const field of ['display_name', 'primary_focus', 'mission', 'instructions', 'constraints', 'behavioral_profile', 'rule_configuration']) {
+          if (input[field] !== undefined) input[field] = scrub(input[field]);
+        }
+        delete input.effective_context; delete input.effective_rules;
+      }
+    }
+    const agent = this.createAgent(input, { tenantId, by });
+    if (own && targetId === agentId) {
+      const updated = { ...clone(config), session_agents: (config.session_agents || []).filter((item) => item.agent_id !== agentId), updated_at: now() };
+      this.configurations.set(key, updated);
+      this._persist(this.store?.saveConfiguration?.(updated, { tenantId: tenantKey(tenantId) }));
+    }
+    this._audit({ type: 'swarm.agent.promoted_from_session', swarm_id: swarmId, agent_id: targetId, source_agent_id: agentId, tenant_id: tenantKey(tenantId), human_profile: !!agent.human_profile, by });
+    return agent;
   }
   getRun(id, { tenantId = null } = {}) { return clone(this.runs.get(this._key(tenantId, id)) || null); }
 
@@ -696,7 +828,7 @@ export class SwarmService {
     if (!String(question || '').trim()) throw new Error('question de décision requise');
     const run_id = String(runId || '').trim() || makeId('swarmrun');
     const definitions = config.active_agents.map((id) => {
-      const base = this.registry.get(id, { tenantId });
+      const base = this.resolveConfigurationAgent(config, id, { tenantId });
       if (!base || base.enabled === false) throw new Error(`agent indisponible ou désactivé: ${id}`);
       return applyAgentPatchToDefinition(base, config.agent_rule_overrides?.[id] || {}, {
         personalityEnabled: config.personality_simulation_enabled,

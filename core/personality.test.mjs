@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   CrystalKnowsProfileAdapter,
+  normalizeDiscType,
+  profileFromDiscType,
   LinkedInSelfProfileAdapter,
   ProfileImportService,
   mergeHumanProfiles,
@@ -67,7 +69,7 @@ test('profile import requires consent and merges LinkedIn + Crystal provenance',
 test('official adapters call only documented endpoints and LinkedIn rejects another member', async () => {
   let crystalUrl = '';
   const crystal = new CrystalKnowsProfileAdapter({
-    apiToken: 'secret',
+    apiToken: 'secret', apiVersion: 'v1',
     fetchImpl: async (url, opts) => {
       crystalUrl = String(url);
       assert.equal(opts.headers.Authorization, 'Bearer secret');
@@ -89,4 +91,117 @@ test('official adapters call only documented endpoints and LinkedIn rejects anot
     () => linkedin.importProfile({ profile_url: 'https://linkedin.com/in/someone-else' }),
     /membre authentifié/,
   );
+});
+
+// Forme réelle de l'API Data v4 (https://api.crystalknows.com/v4/swagger).
+const crystalV4Profile = {
+  id: 'p_123', first_name: 'Paul', last_name: 'Jones', photo_url: 'https://cdn.crystalknows.com/p.jpg',
+  url: 'https://www.crystalknows.com/p/pjones', verified: true,
+  personalities: {
+    disc_type: 'Dc', archetype: 'Architect', disc_intensity: 3, enneagram_type: 8, myers_briggs_type: 'ENTJ',
+    overview: 'Paul is direct and analytical.',
+    behavioral_traits: { dominance: 81, expressiveness: 40, leniency: 22, pace: 70, pragmatism: 64, risk_aversion: 35, skepticism: 78, social: 30 },
+  },
+  content: {
+    motivation: [{ phrases: ['Winning'] }, { phrases: ['Autonomy'] }],
+    drainer: { phrases: ['Long meetings'] },
+    meeting: { phrases: ['Keep it short'] },
+    working_together: { phrases: ['Bring data'] },
+    recommendations: [{ dos: ['Be concise'], dont: ['Ramble'] }],
+    profile: { overview: ['Results first.'] },
+    qualities: ['decisive'],
+  },
+};
+
+test('Crystal v4 : traits, motivations et recommandations sont projetés sur le profil', () => {
+  const profile = profileFromCrystalData({ data: crystalV4Profile });
+  assert.equal(profile.assigned_name, 'Paul Jones');
+  assert.equal(profile.disc_type, 'Dc');
+  assert.equal(profile.enneagram_type, '8');
+  assert.equal(profile.avatar_url, 'https://cdn.crystalknows.com/p.jpg');
+  assert.equal(profile.behavioral_traits.skepticism, 78);
+  assert.match(profile.skepticism_factor, /élevé \(78\/100\)/);
+  assert.deepEqual(profile.core_motivators, ['Winning', 'Autonomy']);
+  assert.deepEqual(profile.communication_style.stress_triggers, ['Long meetings']);
+  assert.deepEqual(profile.communication_style.objection_patterns, ['Ramble']);
+  assert.ok(profile.communication_style.communication_directives.includes('Be concise'));
+  assert.ok(profile.profile_summary.includes('Results first.'));
+  assert.equal(profile.profile_sources[0].external_profile_id, 'p_123');
+});
+
+test('adaptateur Crystal v4 : GET /v4/profile puis contenu gratuit, erreurs documentées', async () => {
+  const calls = [];
+  const crystal = new CrystalKnowsProfileAdapter({
+    apiToken: 'secret',
+    fetchImpl: async (url, opts) => {
+      calls.push(String(url));
+      assert.equal(opts.headers.Authorization, 'Bearer secret');
+      if (String(url).includes('/v4/content/profile/p_123')) return { ok: true, json: async () => crystalV4Profile.content };
+      return { ok: true, json: async () => ({ data: { ...crystalV4Profile, content: undefined } }) };
+    },
+  });
+  const profile = await crystal.importProfile({ email: 'pjones@crystalknows.com' });
+  assert.match(calls[0], /^https:\/\/api\.crystalknows\.com\/v4\/profile\?email=pjones%40crystalknows\.com$/);
+  assert.match(calls[1], /\/v4\/content\/profile\/p_123$/);
+  assert.deepEqual(profile.core_motivators, ['Winning', 'Autonomy']);
+
+  const missing = new CrystalKnowsProfileAdapter({ apiToken: 't', fetchImpl: async () => ({ ok: false, status: 402, json: async () => ({ error: 'out of credits' }) }) });
+  await assert.rejects(() => missing.importProfile({ full_name: 'A B', company_name: 'X' }), /crédits API épuisés/);
+  await assert.rejects(() => new CrystalKnowsProfileAdapter({}).importProfile({ email: 'a@b.c' }), /token serveur non configuré/);
+});
+
+test('adaptateur Crystal v4 : prédiction asynchrone opt-in sur un profil inconnu', async () => {
+  const calls = [];
+  const crystal = new CrystalKnowsProfileAdapter({
+    apiToken: 't', allowPredictions: true, sleep: async () => {},
+    fetchImpl: async (url, opts = {}) => {
+      calls.push(`${opts.method || 'GET'} ${new URL(String(url)).pathname}`);
+      const path = new URL(String(url)).pathname;
+      if (path === '/v4/profile') return { ok: false, status: 404, json: async () => ({ error: 'not found' }) };
+      if (path === '/v4/predictions') { assert.equal(JSON.parse(opts.body).query.name, 'Paul Jones'); return { ok: true, json: async () => ({ job_id: 'job1', status: 'queued' }) }; }
+      return { ok: true, json: async () => ({ job_id: 'job1', status: 'completed', result: { state: 'found', profile: crystalV4Profile } }) };
+    },
+  });
+  const profile = await crystal.importProfile({ full_name: 'Paul Jones', company_name: 'Crystal' });
+  assert.equal(profile.disc_type, 'Dc');
+  assert.deepEqual(calls, ['GET /v4/profile', 'POST /v4/predictions', 'GET /v4/predictions/job1']);
+});
+
+test('saisie DISC : type normalisé et style de communication de départ', () => {
+  assert.equal(normalizeDiscType('d/c'), 'Dc');
+  assert.equal(normalizeDiscType('xyz'), null);
+  const profile = profileFromDiscType('SC', { assigned_name: 'Claire' });
+  assert.equal(profile.disc_type, 'Sc');
+  assert.equal(profile.behavioral_archetype, 'Stabilité / Conformité');
+  assert.match(profile.communication_style.tone, /calme/);
+  assert.equal(profile.consent_confirmed, true);
+  assert.throws(() => profileFromDiscType('Z'), /DISC invalide/);
+});
+
+// Réponse réelle de GET /v4/profile (profil de test public Crystal, contenu réduit) :
+// clés de traits capitalisées, `phrase` au singulier, `recommendations` objet { do, dont }.
+test('Crystal v4 réel : traits capitalisés et contenu « phrase » correctement projetés', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const live = JSON.parse(await readFile(new URL('./fixtures/crystal-v4-profile-pjones.json', import.meta.url), 'utf8'));
+  const profile = profileFromCrystalData(live);
+  assert.equal(profile.assigned_name, 'Paul Jones');
+  assert.equal(profile.disc_type, 'C');
+  assert.equal(profile.behavioral_archetype, 'Analyst');
+  assert.deepEqual(profile.behavioral_traits, { dominance: 63, expressiveness: 9, leniency: 64, pace: 35, pragmatism: 90, risk_aversion: 83, skepticism: 83, social: 36 });
+  assert.match(profile.skepticism_factor, /élevé \(83\/100\)/);
+  assert.equal(profile.disc_intensity, 81);
+  assert.ok(profile.core_motivators.includes('Accuracy & precision'));
+  assert.ok(profile.communication_style.decision_triggers.includes('Provide detailed feedback'));
+  assert.ok(profile.communication_style.objection_patterns.some((item) => /emotional language/.test(item)));
+  assert.ok(profile.profile_summary.some((item) => item.startsWith('Angle mort : ')));
+  assert.match(profile.avatar_url, /^https:\/\/profile-photos\.crys\.io\//);
+  assert.equal(profile.profile_sources[0].verified, true);
+});
+
+test('Crystal : 401 « API Access feature » produit un message explicite', async () => {
+  const adapter = new CrystalKnowsProfileAdapter({
+    apiToken: 'test-token',
+    fetchImpl: async () => ({ ok: false, status: 401, headers: { get: () => null }, json: async () => ({ error: 'Organization does not have the API Access feature' }) }),
+  });
+  await assert.rejects(adapter.importProfile({ full_name: 'Jane Doe', company_name: 'Acme' }), (error) => error.code === 'crystal_api_access_missing' && /API Access/.test(error.message));
 });
