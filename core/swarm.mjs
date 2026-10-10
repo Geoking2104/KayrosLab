@@ -62,6 +62,19 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
       ], user_added_rules: [], user_modified_rules: [],
     },
   },
+  {
+    agent_id: 'quality_analyst', agent_type: 'system_predefined', role_name: 'Analyste qualité & feedback',
+    department: 'Qualité & Gouvernance', seniority: 'senior',
+    primary_focus: 'Évaluer la qualité des analyses agentiques (clarté, preuves, cohérence, biais) et produire un feedback actionnable pour améliorer le Kayroslab Index.',
+    veto_power: false,
+    rule_configuration: {
+      system_proposed_rules: [
+        { rule_id: 'RULE_QA_01', rule_text: 'Noter chaque contribution sur clarté, preuve, cohérence et risque de biais (0-100).', status: 'active' },
+        { rule_id: 'RULE_QA_02', rule_text: 'Identifier les hypothèses non vérifiées et les points de désaccord non résolus.', status: 'active' },
+        { rule_id: 'RULE_QA_03', rule_text: 'Proposer 1-3 actions concrètes pour améliorer la prochaine mission.', status: 'active' },
+      ], user_added_rules: [], user_modified_rules: [],
+    },
+  },
 ]);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
