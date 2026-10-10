@@ -503,7 +503,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
-  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId} · Vue d’ensemble</p><h1>Console de décisions</h1><p>Composez un collectif, lancez une mission, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
+  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId} · Vue d’ensemble</p><h1>Console de décisions</h1><p>1. Créez un collectif → 2. Posez votre question → 3. Arbitrez le verdict.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
     <section className="metric-row">
       <div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div>
