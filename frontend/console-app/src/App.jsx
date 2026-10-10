@@ -10,6 +10,20 @@ import { DescriptifFieldset, cleanDescriptif } from './personality-descriptif.js
 // La console est un harness d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
 // L'expérience littéraire vit dans une application séparée, hors de cette surface.
+
+function useToast() {
+  const [toasts, setToasts] = useState([]);
+  function push(message, tone = 'success') {
+    const id = Date.now().toString(36);
+    setToasts((t) => [...t, { id, message, tone }]);
+    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4000);
+  }
+  return { toasts, push };
+}
+function ToastHost({ toasts }) {
+  if (!toasts?.length) return null;
+  return <div className="toast-host" role="status" aria-live="polite">{toasts.map((t) => <div key={t.id} className={`toast is-${t.tone}`}>{t.message}</div>)}</div>;
+}
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
   ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['integrations', 'Intégrations'], ['settings', 'Réglages'],
@@ -465,6 +479,10 @@ function Overview({ data, refresh, openSession, onThread }) {
         </div>
         {profile === 'demo' && <p className="muted so-note">Mode démo : verdict simulé, étiqueté « [Démo] ». Pour montrer le circuit, pas pour décider.</p>}
         <button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
+      {data.threads.some((t) => t.status === 'awaiting_arbitration') && <section className="pending-strip">
+        <h3 className="so-kicker">Arbitrages en attente</h3>
+        <div className="thread-list">{data.threads.filter((t) => t.status === 'awaiting_arbitration').slice(0, 3).map((item) => <button key={item.thread_id} onClick={() => onThread(item)} className="is-pending"><strong>{item.question}</strong><small>En attente d’arbitrage</small></button>)}</div>
+      </section>}
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
         <label>Dossier à joindre au collectif<select value={soCaseId} onChange={(event) => setSoCaseId(event.target.value)} disabled={!soReady}><option value="">Aucun dossier</option>{soCases.map((item) => <option key={item.case_id} value={item.case_id}>{item.name} · {soUseCaseLabel(item.use_case)}</option>)}</select></label>
@@ -935,7 +953,9 @@ function SettingsPage({ data, refresh }) {
   const params = hashParams();
   const connected = params.get('connected');
   const connectError = params.get('connect_error');
-  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Canaux externes</p><h1>Réglages</h1><p>Connectez Slack, Teams ou Discord en un clic. Les jetons restent chiffrés côté serveur.</p><BrandRow platforms={['slack', 'teams', 'discord']} /></div>
+      <button type="button" className="button secondary" onClick={() => { try { localStorage.removeItem('kayros_onboarding_done'); } catch {} location.hash = '#overview'; location.reload(); }}>Revoir le guide</button>
+    </header>
     {connected && <p className="auth-success" role="status">{platformNames[connected] || connected} connecté. Testez la connexion puis rattachez un canal depuis l'application de conversation.</p>}
     {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
@@ -1098,6 +1118,7 @@ function Console() {
   const [data, setData] = useState(null); const [error, setError] = useState(''); const [page, setPage] = useState(() => pageFromHash());
   const [creatingSession, setCreatingSession] = useState(false); const [selectedThread, setSelectedThread] = useState(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const { toasts, push: pushToast } = useToast();
   async function refresh() { try { setData(await api.overview()); setError(''); } catch (err) { setError(err.message); if (err.status === 401) { setToken(''); location.reload(); } } }
   // `#activity?thread=<id>` : lien « dossier » renvoyé par l'API publique (Salesforce, n8n…).
   async function openThreadFromHash() {
@@ -1121,8 +1142,9 @@ function Console() {
   if (!data) return <div className="loading-screen">{error || 'Chargement de la console…'}</div>;
   return <div className="app-shell"><aside className="sidebar"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><nav>{pages.map(([id, label]) => <a key={id} className={page === id ? 'active' : ''} href={`#${id}`}><Mark name={id} />{label}</a>)}</nav><div className="account"><span>{data.user.email[0].toUpperCase()}</span><div><strong>{data.user.email}</strong><small>{data.user.role}</small></div><button onClick={() => { setToken(''); location.reload(); }}>↗</button></div></aside>
     <main className="console-main">{error && <p className="inline-error">Actualisation impossible : {error}</p>}{page === 'overview' && <Overview data={data} refresh={refresh} openSession={() => setCreatingSession(true)} onThread={openThread} />}{page === 'sessions' && <SessionsPage data={data} refresh={refresh} onCreate={() => setCreatingSession(true)} onThread={openThread} />}{page === 'agents' && <AgentsPage data={data} refresh={refresh} />}{page === 'activity' && <DecisionsPage data={data} selected={selectedThread} onSelect={openThread} onChanged={(thread, options) => { setSelectedThread(thread); if (!options?.quiet) refresh(); }} />}{page === 'integrations' && <IntegrationsPage data={data} />}{page === 'settings' && <SettingsPage data={data} refresh={refresh} />}</main>
-    {creatingSession && <CreateSession data={data} agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={refresh} />}
-    {showOnboarding && <Onboarding data={data} onDone={() => setShowOnboarding(false)} onCreateSession={async (body) => { await api.createSession(body); await refresh(); }} />}
+    {creatingSession && <CreateSession data={data} agents={data.agents} onClose={() => setCreatingSession(false)} onCreated={() => { refresh(); }} />}
+    {showOnboarding && <Onboarding data={data} onDone={() => setShowOnboarding(false)} onCreateSession={async (body) => { await api.createSession(body); await refresh(); pushToast('Collectif créé'); }} />}
+    <ToastHost toasts={toasts} />
   </div>;
 }
 
