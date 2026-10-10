@@ -198,9 +198,12 @@ function Login({ onLogin }) {
 
 function Connection({ connection }) {
   const connected = connection.status === 'connected';
+  const needsSetup = !connected && connection.status !== 'error';
   return <div className="connection"><span className="connection-logo"><BrandLogo platform={connection.platform} size={22} /><span className={`status-dot ${connected ? 'is-on' : connection.status === 'error' ? 'is-error' : ''}`} /></span>
     <div><strong>{platformNames[connection.platform]}</strong><small>{connection.source === 'environment' ? 'variables serveur' : 'console'}</small></div>
-    <span className="connection-state">{connected ? 'Connecté' : connection.status === 'configured' ? 'À tester' : connection.status === 'disabled' ? 'Désactivé' : connection.status === 'error' ? 'Erreur' : 'À configurer'}</span>
+    {needsSetup
+      ? <a className="text-button" href="#settings">Connecter</a>
+      : <span className="connection-state">{connected ? 'Connecté' : connection.status === 'configured' ? 'À tester' : connection.status === 'disabled' ? 'Désactivé' : 'Erreur'}</span>}
   </div>;
 }
 
@@ -437,17 +440,24 @@ function Overview({ data, refresh, openSession, onThread }) {
       setQuestion(''); setState('success'); await onThread(result.thread); await refresh();
     } catch (err) { setState('error'); setError(err.message); }
   }
-  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console harness</h1><p>Composez un collectif, lancez une mission gouvernée, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
+  return <><header className="console-header"><div><p className="context-line">Espace {data.user.tenantId}</p><h1>Console de décisions</h1><p>Composez un collectif, lancez une mission, arbitrez sur preuves.</p></div><button className="button primary" onClick={openSession}>Nouvelle session</button></header>
     <section className="connection-strip">{data.connections.map((item) => <Connection key={item.platform} connection={item} />)}</section>
-    <section className="metric-row"><div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div><div><strong>{data.summary.sessions}</strong><span>Sessions</span></div><div><strong>{data.summary.executions}</strong><span>Exécutions</span></div><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></section>
+    <section className="metric-row">
+      <div><strong>{data.summary.agents}</strong><span>Agents actifs</span></div>
+      <div><strong>{data.summary.sessions}</strong><span>Collectifs</span></div>
+      <div><strong>{data.summary.executions}</strong><span>Missions</span></div>
+      <a className="metric-link" href="#activity"><div><strong>{data.summary.pending_human_decisions}</strong><span>Arbitrages ouverts</span></div></a>
+    </section>
     <p className="muted so-note">Personas simulées : <strong>{data.summary.impersonators ?? 0}</strong> · Profils hybrides (profil humain consenti, personas incluses) : <strong>{data.summary.hybrid_agents ?? 0}</strong> · Persona = agent impersonator (portrait + garde-fous).</p>
     <div className="mission-workbench"><section><header><div><h2>Mission gouvernée</h2><p>Instruction → une étape par agent → consensus → dossier durable → arbitrage.</p></div></header>
       <label>Session<select value={selectedSession || ''} onChange={(event) => setSelectedSession(event.target.value)}><option value="">Sélectionner…</option>{data.sessions.map((item) => <option value={item.session_id} key={item.session_id}>{item.name} · {item.collective.active_agents.length} agents</option>)}</select></label>
       {session && <AgentChips agents={session.collective.agents} />}
       {!data.sessions.length && <div className="empty-state"><p>Aucun collectif pour le moment.</p><button type="button" className="button primary" onClick={openSession}>Créer mon premier collectif</button></div>}
       <form onSubmit={run}><label>Question à instruire<textarea value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Faut-il lancer ce projet maintenant, avec quel budget et sous quelles conditions ?" /></label>
-        <label>Profil d’exécution<select value={profile} onChange={(event) => setProfile(event.target.value)}>{MISSION_PROFILES.map(([id, label, hint]) => <option key={id} value={id}>{label} — {hint}</option>)}</select></label>
-        {profile === 'demo' && <p className="muted so-note">Mode démo : verdict simulé, clairement étiqueté « [Démo] ». Idéal pour montrer le circuit, pas pour décider.</p>}
+        <div className="profile-picker">
+          {MISSION_PROFILES.map(([id, label, hint]) => <button key={id} type="button" className={`profile-card ${profile === id ? 'is-selected' : ''}`} onClick={() => setProfile(id)}><strong>{label}</strong><small>{hint}</small></button>)}
+        </div>
+        {profile === 'demo' && <p className="muted so-note">Mode démo : verdict simulé, étiqueté « [Démo] ». Pour montrer le circuit, pas pour décider.</p>}
         <button className="button primary" disabled={!session || !question.trim() || state === 'loading'}>{state === 'loading' ? 'Lancement de la mission…' : 'Lancer le collectif'}</button></form>
       <section className="so-strip">
         <h3 className="so-kicker">Dossier Sales Oracle — preuves client (facultatif)</h3>
@@ -460,7 +470,10 @@ function Overview({ data, refresh, openSession, onThread }) {
       {runNote && state === 'success' && <p className="muted so-note" role="status">{runNote}</p>}
       {error && <p className="inline-error">{error}</p>}
     </section><section><header><div><h2>Exécutions récentes</h2><p>Reprendre une mission avec tout son contexte.</p></div><a className="text-button" href="#activity">Tout voir</a></header>
-      <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)}><strong>{item.question}</strong><small>{item.status.replaceAll('_', ' ')} · {item.current_run_id}</small></button>)}{!data.threads.length && <div className="empty-state"><p>Aucune mission lancée.</p><p className="muted so-note">Posez une question ci-contre pour obtenir un premier verdict argumenté.</p></div>}</div>
+      <div className="thread-list">{data.threads.filter((item) => item.status !== 'resolved').slice(0, 6).map((item) => <button key={item.thread_id} onClick={() => onThread(item)} className={item.status === 'awaiting_arbitration' ? 'is-pending' : ''}>
+        <strong>{item.question}</strong>
+        <small>{threadStatusLabel(item.status)}{item.progress?.total ? ` · ${progressLabel(item.progress)}` : ''} · {item.current_run_id}</small>
+      </button>)}{!data.threads.length && <div className="empty-state"><p>Aucune mission lancée.</p><p className="muted so-note">Posez une question ci-contre pour obtenir un premier verdict argumenté.</p></div>}</div>
     </section></div>
   </>;
 }
