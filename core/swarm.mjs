@@ -498,6 +498,7 @@ export function normalizeAgentAnalysis(raw, definition = {}, { personalityEnable
     })).filter((m) => m.metric) : [],
     required_mitigations: strings(value.required_mitigations || value.mitigations),
     unverified_assumptions: [...new Set(unverified)],
+    proposed_agents: Array.isArray(value.proposed_agents) ? value.proposed_agents : [],
     // Provider LLM effectif de l'agent (ENF-09) : un repli `mock` ne doit jamais être silencieux.
     llm_provider: raw?.provider || null,
     llm_degraded: raw?.degraded || null,
@@ -910,6 +911,35 @@ export class SwarmService {
       }
       : executeOne;
     const analyses = await mapWithConcurrency(definitions, this.maxConcurrency, tracked);
+    // Matérialisation automatique des agents proposés par les agents autorisés
+    const created = [];
+    for (const analysis of analyses) {
+      const def = definitions.find((d) => d.agent_id === analysis.agent_id);
+      if (!def?.can_create_agents) continue;
+      const proposed = analysis.proposed_agents || [];
+      if (!Array.isArray(proposed)) continue;
+      for (const prop of proposed.slice(0, 4)) {
+        if (!prop?.role_name) continue;
+        try {
+          const agentId = `auto_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`;
+          const createdAgent = this.createAgent({
+            agent_id: agentId,
+            display_name: prop.display_name || prop.role_name,
+            role_name: prop.role_name,
+            department: prop.department || 'Proposé',
+            seniority: prop.seniority || 'senior',
+            primary_focus: prop.primary_focus || prop.mission || 'Agent créé automatiquement',
+            mission: prop.mission || prop.primary_focus || 'Agent créé automatiquement',
+            agent_type: 'user_defined',
+            metadata: { session_scoped: true, created_by_agent: def.agent_id },
+          }, { tenantId, by: `agent:${def.agent_id}` });
+          if (createdAgent && config.active_agents.length < 12) {
+            config.active_agents.push(createdAgent.agent_id);
+            created.push(createdAgent.agent_id);
+          }
+        } catch { /* ignore individual creation failures */ }
+      }
+    }
     const llm = summarizeRunProviders(analyses);
     if (llm.mock) {
       this._audit({ type: 'swarm.run.llm_degraded', run_id, swarm_id: config.swarm_id, tenant_id: tenantKey(tenantId), mock_agents: llm.mock_agents, degraded: llm.degraded });
