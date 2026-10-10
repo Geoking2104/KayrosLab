@@ -1,5 +1,5 @@
-/* Hallmark · genre: modern-minimal · macrostructure: Operational Workbench · tone: technical-quiet · anchor: cyan · nav: application rail · footer: none */
-/* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4 */
+/* Hallmark Â· genre: modern-minimal Â· macrostructure: Operational Workbench Â· tone: technical-quiet Â· anchor: cyan Â· nav: application rail Â· footer: none */
+/* Hallmark Â· pre-emit critique: P5 H4 E4 S5 R5 V4 */
 @import "../tokens.css";
 
 * { box-sizing: border-box; }
@@ -182,7 +182,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
   @keyframes dialog-in-reduced { from { opacity: 0; } to { opacity: 1; } }
 }
 
-/* Console v2 · operational views */
+/* Console v2 Â· operational views */
 .nav-mark { width: 1.25rem; text-align: center; color: currentColor; font: 500 var(--text-sm)/1 var(--font-mono); }
 .status-dot.is-error { background: var(--color-danger); }
 .page { display: grid; gap: var(--space-xl); }
@@ -363,7 +363,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
   .so-author .button { grid-column: 1 / -1; }
 }
 
-/* --- Constructeur d'agent auteur : catalogue + recherche temps r�el --- */
+/* --- Constructeur d'agent auteur : catalogue + recherche temps rï¿½el --- */
 .so-tabs { display: flex; gap: var(--space-2xs); }
 .so-livesearch { display: flex; gap: var(--space-2xs); }
 .so-livesearch input { flex: 1; min-height: 2.5rem; border: 1px solid var(--color-rule-dark); background: var(--color-paper); color: var(--color-ink); padding-inline: var(--space-2xs); font: inherit; }
@@ -385,7 +385,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-annuaire ul { margin: 0; padding-inline-start: var(--space-md); display: grid; gap: var(--space-3xs); }
 .so-annuaire li { font-size: var(--text-xs); line-height: 1.5; }
 
-/* --- R�sum� de cr�ation + repli manuel + attributions IA --- */
+/* --- Rï¿½sumï¿½ de crï¿½ation + repli manuel + attributions IA --- */
 .so-creation { border: 1px solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper-3); padding: var(--space-md); display: grid; gap: var(--space-sm); }
 .so-creation h3 { margin: 0; font-size: var(--text-md); }
 .so-attributions { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2xs); }
@@ -414,7 +414,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-created { border: 1px dashed var(--color-rule-dark); padding: var(--space-sm); }
 .so-note { font-size: var(--text-xs); }
 
-/* — Page Auteurs : présentation du catalogue et sélection — */
+/* â Page Auteurs : prÃ©sentation du catalogue et sÃ©lection â */
 .authors-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, .36fr); gap: var(--space-lg); align-items: start; }
 .authors-main { display: grid; gap: var(--space-md); min-width: 0; }
 .authors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr)); gap: var(--space-sm); }
@@ -436,14 +436,14 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .authors-aside strong { font-size: var(--text-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .authors-aside small { font-size: var(--text-xs); }
 .so-avatar-initials { display: grid; place-items: center; color: var(--color-accent); font-size: var(--text-xs); font-weight: 700; }
-/* — Destination d'une session d'agents (attributions d'auteur) — */
+/* â Destination d'une session d'agents (attributions d'auteur) â */
 .so-destinations { display: grid; gap: var(--space-2xs); }
 .so-destinations .radio { display: flex; align-items: flex-start; gap: var(--space-2xs); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-sm); padding: var(--space-2xs) var(--space-sm); cursor: pointer; }
 .so-destinations .radio:has(input:checked) { border-color: var(--color-accent); }
 .so-destinations .radio input { width: 1rem; min-height: 1rem; margin-top: .22rem; accent-color: var(--color-accent); }
 .so-destinations .radio span { min-width: 0; display: grid; gap: 2px; }
 .so-destinations .radio small { font-size: var(--text-xs); }
-/* — Sales Oracle intégré au processus global (mission rapide) — */
+/* â Sales Oracle intÃ©grÃ© au processus global (mission rapide) â */
 .so-strip { display: grid; gap: var(--space-2xs); border-top: var(--rule-thin) solid var(--color-rule); padding-block-start: var(--space-md); }
 .so-strip > h3 { margin: 0; }
 .so-manager { display: grid; gap: var(--space-md); }
@@ -462,7 +462,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .so-suggest { margin: 0; font-size: var(--text-sm); color: var(--color-ink-2); }
 .so-created-card { border: 1px solid var(--color-positive); background: var(--color-positive-soft); }
 
-/* --- Auteurs pr�s�lectionn�s (catalogue) --- */
+/* --- Auteurs prï¿½sï¿½lectionnï¿½s (catalogue) --- */
 .so-catalog-section { border-top: 1px solid var(--color-rule); margin-block-start: var(--space-lg); padding-block-start: var(--space-lg); }
 .so-catalog-section h2 { margin: 0 0 var(--space-2xs); font-size: var(--text-lg); }
 .so-catalog { display: grid; gap: var(--space-sm); margin-block-start: var(--space-md); }
@@ -504,7 +504,7 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .connector-advanced summary { cursor: pointer; color: var(--color-muted); font-size: var(--text-sm); }
 .connector-card > .button.primary { justify-self: start; }
 
-/* --- Impersonator : portraits de persona (image r�elle, repli monogramme) --- */
+/* --- Impersonator : portraits de persona (image réelle, repli monogramme) --- */
 .persona-avatar { position: relative; display: inline-grid; place-items: center; border-radius: 50%; overflow: hidden; flex: none; background: var(--color-surface-raised); color: var(--color-ink); font-weight: 600; line-height: 1; border: var(--rule-thin) solid var(--color-rule); }
 .persona-avatar__mono { position: relative; z-index: 0; }
 .persona-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
@@ -513,12 +513,12 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .persona-head small { color: var(--color-muted); }
 .collective-chip .persona-avatar { margin-right: var(--space-2xs); }
 
-/* --- Agents : filtres par type (m�tier / hybride / impersonator) --- */
+/* --- Agents : filtres par type (métier / hybride / impersonator) --- */
 .so-filters { flex-wrap: wrap; gap: var(--space-sm); margin-block: var(--space-md); }
 .so-filters .text-button { color: var(--color-muted); }
 .so-filters .text-button.is-active { color: var(--color-accent); font-weight: 600; text-decoration: underline; }
 
-/* Intégrations (clés d'API, webhook signé) */
+/* IntÃ©grations (clÃ©s d'API, webhook signÃ©) */
 .integration-panel { margin-top: 20px; }
 .integration-form { display: grid; gap: 12px; margin: 12px 0; }
 .integration-form fieldset { border: 1px solid var(--color-rule); border-radius: 8px; padding: 8px 12px; display: grid; gap: 6px; }
@@ -530,9 +530,9 @@ legend { margin-bottom: var(--space-sm); color: var(--color-muted); font-size: v
 .integration-steps { margin: 8px 0 12px 18px; display: grid; gap: 4px; }
 @media (max-width: 760px) { .integration-table { display: block; overflow-x: auto; } }
 
-/* ══ Thème clair · aligné sur www.kayroslab.com (marketing.css) ══
- * Fonds blancs, accent sarcelle → violet, cartes vivantes, logos des intégrations.
- * Les règles ci-dessous complètent les jetons de tokens.css ; aucune fonctionnalité retirée. */
+/* ââ ThÃ¨me clair Â· alignÃ© sur www.kayroslab.com (marketing.css) ââ
+ * Fonds blancs, accent sarcelle â violet, cartes vivantes, logos des intÃ©grations.
+ * Les rÃ¨gles ci-dessous complÃ¨tent les jetons de tokens.css ; aucune fonctionnalitÃ© retirÃ©e. */
 body { background:
   radial-gradient(1100px 520px at 100% -10%, rgba(91, 76, 219, .07), transparent 70%),
   radial-gradient(900px 480px at 15% -20%, rgba(15, 118, 110, .09), transparent 70%),
@@ -589,11 +589,11 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .account > span { background: var(--gradient-brand); color: #fff; }
 @media (hover: hover) and (pointer: fine) { .sidebar nav a:hover { background: var(--color-paper-3); } }
 
-/* En-têtes */
+/* En-tÃªtes */
 .context-line { color: var(--color-accent); font-weight: 600; }
 .page-header > div > .brand-row, .console-header > div > .brand-row { margin-top: var(--space-xs); }
 
-/* Bandeau de connexions et métriques */
+/* Bandeau de connexions et mÃ©triques */
 .connection-strip { gap: var(--space-sm); border-block: 0; }
 .connection { border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-sm); }
 .connection + .connection { border-left: var(--rule-thin) solid var(--color-rule); }
@@ -606,7 +606,7 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .metric-row div:nth-child(4) { --metric: var(--color-amber); }
 .metric-row strong { font-size: clamp(1.9rem, 3vw, 2.4rem); color: var(--metric, var(--color-ink)); }
 
-/* Cartes : blanches, ombrées, liseré dégradé */
+/* Cartes : blanches, ombrÃ©es, liserÃ© dÃ©gradÃ© */
 .workbench, .mission-workbench, .agent-table article, .connector-card, .rooms-grid article, .session-grid article, .dossier, .thread-reply, .privacy-panel, .security-warning, .run-progress, .dialog, .authors-aside, .author-card {
   background: var(--color-surface); border-color: var(--color-rule); box-shadow: var(--shadow-sm); }
 .agent-table article, .connector-card, .session-grid article, .rooms-grid article, .dossier, .privacy-panel { position: relative; overflow: hidden; border-radius: var(--radius-md); }
@@ -631,7 +631,7 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .run-progress { background: var(--color-accent-soft); }
 .harness-trace, .so-progress, .so-panel, .so-author, .so-selected, .so-catalog-card { background: var(--color-paper-2); }
 
-/* Verdicts et statuts : pastilles teintées */
+/* Verdicts et statuts : pastilles teintÃ©es */
 .verdict, .thread-status, .decision-list button span { background: var(--color-surface); font-weight: 600; }
 .verdict { background: var(--color-warning-soft); }
 .verdict.is-go { background: var(--color-success-soft); }
@@ -650,7 +650,7 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 @media (max-width: 840px) {
   .app-shell { grid-template-columns: minmax(0, 1fr); }
   .sidebar { min-width: 0; background: var(--color-surface); }
-  /* 6 entrées : une rangée défilante plutôt qu'une grille à 5 colonnes qui se replie. */
+  /* 6 entrÃ©es : une rangÃ©e dÃ©filante plutÃ´t qu'une grille Ã  5 colonnes qui se replie. */
   .sidebar nav { display: flex; gap: var(--space-2xs); overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--space-md) * -1); padding-inline: var(--space-md); }
   .sidebar nav::-webkit-scrollbar { display: none; }
   .sidebar nav a { flex: none; min-width: 44px; padding: var(--space-2xs) var(--space-xs); }
@@ -670,17 +670,17 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 }
 
 /* Rail pleine hauteur (bureau) : le rail reste collant (100dvh) et la colonne garde son fond
- * blanc et sa bordure sur toute la hauteur de la page, même quand le contenu est plus long. */
+ * blanc et sa bordure sur toute la hauteur de la page, mÃªme quand le contenu est plus long. */
 @media (min-width: 841px) {
   .app-shell { background: linear-gradient(90deg, var(--color-surface) 0 calc(15.5rem - 1px), var(--color-rule) calc(15.5rem - 1px) 15.5rem, transparent 15.5rem); }
   .sidebar { align-self: start; height: 100vh; height: 100dvh; }
 }
 
-/* Cartes de session : les titres et questions longues reviennent à la ligne au lieu d'être coupés. */
+/* Cartes de session : les titres et questions longues reviennent Ã  la ligne au lieu d'Ãªtre coupÃ©s. */
 .session-grid article, .rooms-grid article { grid-template-columns: minmax(0, 1fr); }
 .session-grid article > div .text-button { max-width: 100%; white-space: normal; text-align: left; line-height: 1.4; padding-block: var(--space-xs); }
 
-/* --- Nouvelle session : composition et vérification des agents --------------- */
+/* --- Nouvelle session : composition et vÃ©rification des agents --------------- */
 .dialog.wide { width: min(58rem, 100%); }
 .dialog-body { display: grid; gap: var(--space-lg); margin-top: var(--space-xl); }
 .session-dialog fieldset, .dialog-body fieldset { min-width: 0; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-sm); padding: var(--space-md); }
@@ -752,7 +752,7 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .inline-form input { flex: 1 1 18rem; min-width: 0; }
 .privacy-panel ul { margin-top: var(--space-sm); padding-left: 1.2rem; color: var(--color-muted); }
 
-/* --- Descriptif de personnalité (agents personnifiés) ------------------------ */
+/* --- Descriptif de personnalitÃ© (agents personnifiÃ©s) ------------------------ */
 .descriptif-panel { display: grid; gap: var(--space-md); }
 .descriptif-toggle { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm); }
 .descriptif-toggle p { margin: 0; flex: 1 1 20rem; }
@@ -821,3 +821,14 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .onb-examples { display: grid; gap: var(--space-2xs); margin-block: var(--space-md); }
 .empty-state { display: grid; gap: var(--space-sm); justify-items: start; padding: var(--space-lg); border: 1px dashed var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper-2); }
 .empty-state p { margin: 0; }
+
+/* --- P1 Overview polish --- */
+.metric-link { text-decoration: none; color: inherit; }
+.metric-link:hover div { border-color: var(--color-accent); }
+.profile-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); margin-block: var(--space-sm); }
+.profile-card { text-align: left; border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-sm); background: var(--color-surface); cursor: pointer; }
+.profile-card.is-selected { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.profile-card strong { display: block; font-size: var(--text-sm); }
+.profile-card small { color: var(--color-muted); font-size: var(--text-xs); }
+.thread-list button.is-pending { border-color: var(--color-warning); background: var(--color-warning-soft, #fff8e6); }
+@media (max-width: 760px) { .profile-picker { grid-template-columns: 1fr; } }
