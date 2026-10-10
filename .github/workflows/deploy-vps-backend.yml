@@ -55,7 +55,6 @@ on:
       - 'tokens.css'
       - 'site.css'
       - 'marketing.css'
-      - 'assets/**'
       - 'studio.css'
       - 'legal/**'
       - 'backend/web/public/console/**'

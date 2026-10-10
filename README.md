@@ -904,13 +904,13 @@ stores incl. integrations), `integrations-check.yml` (n8n workflows), `i18n-chec
 | Call the API (Public API v1, webhooks, route inventory) | **[docs/API.md](docs/API.md)** · [OpenAPI spec](docs/openapi/kayroslab-public-v1.json) · [live docs](https://api.kayroslab.com/docs) |
 | Connect Salesforce through n8n or Zapier | [integrations/README.md](integrations/README.md) |
 | Connect Codex, Claude Code or Cursor | [Developer Portal MCP](docs/developer-portal-mcp.md) |
-| Read the functional and technical specs | [SPECIFICATIONS_FONCTIONNELLES.md](SPECIFICATIONS_FONCTIONNELLES.md) · [SPECIFICATIONS_TECHNIQUES.md](SPECIFICATIONS_TECHNIQUES.md) |
-| Follow the Slack / Teams / Discord product thesis | [SPECIFICATIONS_CONNECTEURS_CHAT.md](SPECIFICATIONS_CONNECTEURS_CHAT.md) |
+| Read the functional and technical specs | [archive/specs/SPECIFICATIONS_FONCTIONNELLES.md](archive/specs/SPECIFICATIONS_FONCTIONNELLES.md) (historique ; à jour : [docs/CAHIER-DES-CHARGES-CONSOLE.md](docs/CAHIER-DES-CHARGES-CONSOLE.md)) · [archive/specs/SPECIFICATIONS_TECHNIQUES.md](archive/specs/SPECIFICATIONS_TECHNIQUES.md) |
+| Follow the Slack / Teams / Discord product thesis | [archive/specs/SPECIFICATIONS_CONNECTEURS_CHAT.md](archive/specs/SPECIFICATIONS_CONNECTEURS_CHAT.md) |
 | Use the optional adapters | [backend/adapters/README.md](backend/adapters/README.md) |
 | Understand TimesFM forecasting | [docs/TIMESFM_FORECASTING.md](docs/TIMESFM_FORECASTING.md) |
 | Run the demo end to end | [docs/pitch-seed.md](docs/pitch-seed.md) |
 | Track releases | [CHANGELOG.md](CHANGELOG.md) |
-| Dig into past iterations | [docs/v13-slack-ontology.md](docs/v13-slack-ontology.md) · [docs/v14-slack-ontology.md](docs/v14-slack-ontology.md) |
+| Dig into past iterations | [archive/docs/v13-slack-ontology.md](archive/docs/v13-slack-ontology.md) · [archive/docs/v14-slack-ontology.md](archive/docs/v14-slack-ontology.md) |
 
 ---
 
