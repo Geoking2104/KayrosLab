@@ -851,3 +851,11 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
   .profile-picker, .onb-templates { grid-template-columns: 1fr; }
   .metric-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* --- P3 Toasts & pending strip --- */
+.toast-host { position: fixed; bottom: 1rem; right: 1rem; z-index: 100; display: grid; gap: .5rem; max-width: 20rem; }
+.toast { padding: .75rem 1rem; border-radius: var(--radius-md); background: var(--color-surface); border: var(--rule-thin) solid var(--color-rule); box-shadow: var(--shadow-md); font-size: var(--text-sm); }
+.toast.is-success { border-color: var(--color-success); }
+.toast.is-error { border-color: var(--color-danger); }
+.pending-strip { margin-block: var(--space-md); padding: var(--space-md); border: var(--rule-thin) solid var(--color-warning); border-radius: var(--radius-md); background: var(--color-warning-soft, #fff8e6); }
+.pending-strip .so-kicker { color: var(--color-warning); }
