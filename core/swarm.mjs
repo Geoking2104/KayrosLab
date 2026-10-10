@@ -26,7 +26,8 @@ export const HUMAN_ACTIONS = Object.freeze(['accept_consensus', 'override_veto',
 
 export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
   {
-    agent_id: 'cfo', agent_type: 'system_predefined', role_name: 'Chief Financial Officer',
+    agent_id: 'cfo', agent_type: 'system_predefined',
+    can_create_agents: true, can_create_files: true,, role_name: 'Chief Financial Officer',
     department: 'Finance', seniority: 'executive',
     primary_focus: 'Test financial viability, cash exposure, unit economics and downside scenarios.',
     veto_power: false,
@@ -38,7 +39,8 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
     },
   },
   {
-    agent_id: 'cto', agent_type: 'system_predefined', role_name: 'Chief Technology Officer',
+    agent_id: 'cto', agent_type: 'system_predefined',
+    can_create_agents: true, can_create_files: true,, role_name: 'Chief Technology Officer',
     department: 'Engineering', seniority: 'executive',
     primary_focus: 'Test architecture, delivery feasibility, operability, scalability and technical debt.',
     veto_power: false,
@@ -50,7 +52,8 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
     },
   },
   {
-    agent_id: 'legal_counsel', agent_type: 'system_predefined', role_name: 'Legal Counsel',
+    agent_id: 'legal_counsel', agent_type: 'system_predefined',
+    can_create_agents: true, can_create_files: true,, role_name: 'Legal Counsel',
     department: 'Legal & Compliance', seniority: 'executive',
     primary_focus: 'Test regulatory, contractual, licensing, privacy and documentation exposure.',
     veto_power: false,
@@ -63,7 +66,8 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
     },
   },
   {
-    agent_id: 'quality_analyst', agent_type: 'system_predefined', role_name: 'Analyste qualité & feedback',
+    agent_id: 'quality_analyst', agent_type: 'system_predefined',
+    can_create_agents: true, can_create_files: true,, role_name: 'Analyste qualité & feedback',
     department: 'Qualité & Gouvernance', seniority: 'senior',
     primary_focus: 'Évaluer la qualité des analyses agentiques (clarté, preuves, cohérence, biais) et produire un feedback actionnable pour améliorer le Kayroslab Index.',
     veto_power: false,
@@ -142,8 +146,8 @@ export function validateAgentDefinition(input, { forceType = null } = {}) {
     throw new Error('role_name, department et primary_focus sont requis');
   }
   d.veto_power = !!d.veto_power;
-  d.can_create_agents = !!d.can_create_agents;
-  d.can_create_files = !!d.can_create_files;
+  d.can_create_agents = d.can_create_agents !== false;
+  d.can_create_files = d.can_create_files !== false;
   d.human_profile = d.human_profile ? normalizeHumanProfile(d.human_profile) : null;
   const rc = d.rule_configuration || {};
   const base = Array.isArray(rc.system_proposed_rules) ? rc.system_proposed_rules : [];
