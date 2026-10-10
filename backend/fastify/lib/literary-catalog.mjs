@@ -169,7 +169,7 @@ export const LITERARY_AUTHORS = Object.freeze([
     works: [
       { title: 'The Critique of Pure Reason', url: 'https://www.gutenberg.org/cache/epub/4280/pg4280.txt' },
     ],
-  }
+  },
   {
     id: 'darwin', name: 'Charles Darwin', kind: 'savant', lang: 'en',
     era: '1809–1882 · sciences',
