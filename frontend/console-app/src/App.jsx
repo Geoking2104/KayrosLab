@@ -670,7 +670,7 @@ function HumanProfilePanel({ onImported, disabled }) {
   </section>;
 }
 
-const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false, can_create_agents: false };
+const emptyAgent = { agent_id: '', display_name: '', role_name: '', department: '', seniority: 'senior', primary_focus: '', mission: '', instructions: '', constraints: '', provider: '', model: '', tools: '', connectors: ['console'], rules: '', metadata: '{}', behavioral: '{}', enabled: true, veto_power: false, can_create_agents: false, can_create_files: false };
 
 /** Agent impersonateur : persona reconstruite depuis des indices (LinkedIn / Crystal Knows) pour éprouver une idée. */
 function ImpersonatorDialog({ onClose, onCreated }) {
@@ -735,7 +735,7 @@ function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) 
   const editing = !!agent; const [form, setForm] = useState(() => agentForm(agent)); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   function toggleConnector(id) { setForm((current) => ({ ...current, connectors: current.connectors.includes(id) ? current.connectors.filter((item) => item !== id) : [...current.connectors, id] })); }
   function payload() {
-    const base = { display_name: form.display_name, role_name: form.role_name, department: form.department, seniority: form.seniority, primary_focus: form.primary_focus || form.mission, mission: form.mission, instructions: form.instructions, constraints: splitLines(form.constraints), provider: form.provider || null, model: form.model || null, tools: splitCsv(form.tools), connectors: form.connectors, enabled: form.enabled, veto_power: form.veto_power, can_create_agents: !!form.can_create_agents, metadata: jsonValue(form.metadata), behavioral_profile: { ...jsonValue(form.behavioral), ...(cleanDescriptif(form.descriptif) ? { descriptif: cleanDescriptif(form.descriptif) } : {}) } };
+    const base = { display_name: form.display_name, role_name: form.role_name, department: form.department, seniority: form.seniority, primary_focus: form.primary_focus || form.mission, mission: form.mission, instructions: form.instructions, constraints: splitLines(form.constraints), provider: form.provider || null, model: form.model || null, tools: splitCsv(form.tools), connectors: form.connectors, enabled: form.enabled, veto_power: form.veto_power, can_create_agents: !!form.can_create_agents, can_create_files: !!form.can_create_files, metadata: jsonValue(form.metadata), behavioral_profile: { ...jsonValue(form.behavioral), ...(cleanDescriptif(form.descriptif) ? { descriptif: cleanDescriptif(form.descriptif) } : {}) } };
     const system = agent?.rule_configuration?.system_proposed_rules || [];
     base.rule_configuration = { system_proposed_rules: system, user_modified_rules: agent?.rule_configuration?.user_modified_rules || [], user_added_rules: splitLines(form.rules).map((rule_text, index) => ({ rule_id: `USR_${String(form.agent_id).toUpperCase()}_${index + 1}`, rule_text })) };
     return editing ? base : { ...base, agent_id: form.agent_id };
@@ -760,6 +760,7 @@ function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) 
           <label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label>
           <label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto (peut bloquer un verdict)</label>
           <label><input type="checkbox" checked={!!form.can_create_agents} onChange={(event) => setForm({ ...form, can_create_agents: event.target.checked })} />Peut créer d’autres agents</label>
+          <label><input type="checkbox" checked={!!form.can_create_files} onChange={(event) => setForm({ ...form, can_create_files: event.target.checked })} />Peut créer des fichiers</label>
         </div>
         <label>Outils autorisés (séparés par des virgules)<input value={form.tools} onChange={(event) => setForm({ ...form, tools: event.target.value })} placeholder="ex. web_search, calculator" /></label>
         <div className="connector-checks">
