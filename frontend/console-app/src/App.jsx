@@ -5,6 +5,7 @@ import { AgentAttributesForm, AgentAttributesSummary, customAgentFromDraft, draf
 import { ConsensusHelp, ConsensusHint } from './consensus-help.jsx';
 import { ProfileTraits, RealProfileImporter, RealProfilesDialog } from './real-profiles.jsx';
 import { SessionOwnAgents } from './registry-promotion.jsx';
+import { DescriptifFieldset, cleanDescriptif } from './personality-descriptif.jsx';
 
 // La console est un harness d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
@@ -597,13 +598,17 @@ function ImpersonatorDialog({ onClose, onCreated }) {
     </>}
   </section></div>;
 }
-function agentForm(agent) { return agent ? { ...agent, constraints: (agent.constraints || []).join('\n'), tools: (agent.tools || []).join(', '), connectors: agent.connectors || ['console'], rules: (agent.rule_configuration?.user_added_rules || []).map((rule) => rule.rule_text).join('\n'), metadata: JSON.stringify(agent.metadata || {}, null, 2), behavioral: JSON.stringify(agent.behavioral_profile || {}, null, 2) } : emptyAgent; }
+function agentForm(agent) { return agent ? { ...agent, constraints: (agent.constraints || []).join('\n'), tools: (agent.tools || []).join(', '), connectors: agent.connectors || ['console'], rules: (agent.rule_configuration?.user_added_rules || []).map((rule) => rule.rule_text).join('\n'), metadata: JSON.stringify(agent.metadata || {}, null, 2), behavioral: JSON.stringify(withoutDescriptif(agent.behavioral_profile), null, 2), descriptif: agent.behavioral_profile?.descriptif || null } : { ...emptyAgent, descriptif: null }; }
+// Le descriptif a son propre éditeur : il n'apparaît pas dans le JSON du profil comportemental.
+function jsonDisc(text) { try { return JSON.parse(text || '{}').disc_type || ''; } catch { return ''; } }
+function jsonWithDisc(text, disc) { try { const value = JSON.parse(text || '{}'); if (disc) value.disc_type = disc; else delete value.disc_type; return JSON.stringify(value, null, 2); } catch { return text; } }
+function withoutDescriptif(profile) { const { descriptif, ...rest } = profile || {}; return rest; }
 
 function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) {
   const editing = !!agent; const [form, setForm] = useState(() => agentForm(agent)); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   function toggleConnector(id) { setForm((current) => ({ ...current, connectors: current.connectors.includes(id) ? current.connectors.filter((item) => item !== id) : [...current.connectors, id] })); }
   function payload() {
-    const base = { display_name: form.display_name, role_name: form.role_name, department: form.department, seniority: form.seniority, primary_focus: form.primary_focus || form.mission, mission: form.mission, instructions: form.instructions, constraints: splitLines(form.constraints), provider: form.provider || null, model: form.model || null, tools: splitCsv(form.tools), connectors: form.connectors, enabled: form.enabled, veto_power: form.veto_power, metadata: jsonValue(form.metadata), behavioral_profile: jsonValue(form.behavioral) };
+    const base = { display_name: form.display_name, role_name: form.role_name, department: form.department, seniority: form.seniority, primary_focus: form.primary_focus || form.mission, mission: form.mission, instructions: form.instructions, constraints: splitLines(form.constraints), provider: form.provider || null, model: form.model || null, tools: splitCsv(form.tools), connectors: form.connectors, enabled: form.enabled, veto_power: form.veto_power, metadata: jsonValue(form.metadata), behavioral_profile: { ...jsonValue(form.behavioral), ...(cleanDescriptif(form.descriptif) ? { descriptif: cleanDescriptif(form.descriptif) } : {}) } };
     const system = agent?.rule_configuration?.system_proposed_rules || [];
     base.rule_configuration = { system_proposed_rules: system, user_modified_rules: agent?.rule_configuration?.user_modified_rules || [], user_added_rules: splitLines(form.rules).map((rule_text, index) => ({ rule_id: `USR_${String(form.agent_id).toUpperCase()}_${index + 1}`, rule_text })) };
     return editing ? base : { ...base, agent_id: form.agent_id };
@@ -618,6 +623,10 @@ function AgentEditor({ agent, capabilities, onSaved, onClose, canEdit = true }) 
       <div className="form-grid"><label>Modèle<input value={form.model || ''} onChange={(event) => setForm({ ...form, model: event.target.value })} placeholder="Optionnel" /></label><label>Outils · séparés par des virgules<input value={form.tools} onChange={(event) => setForm({ ...form, tools: event.target.value })} /></label></div>
       <fieldset><legend>Canaux autorisés</legend><div className="inline-checks">{Object.keys(platformNames).map((id) => <label key={id}><input type="checkbox" checked={form.connectors.includes(id)} onChange={() => toggleConnector(id)} />{platformNames[id]}</label>)}</div></fieldset>
       <div className="form-grid"><label>Métadonnées JSON<textarea className="code-input" value={form.metadata} onChange={(event) => setForm({ ...form, metadata: event.target.value })} /></label><label>Profil comportemental JSON<textarea className="code-input" value={form.behavioral} onChange={(event) => setForm({ ...form, behavioral: event.target.value })} /></label></div>
+      <DescriptifFieldset value={form.descriptif} readOnly={!canEdit} idPrefix={`registry-${form.agent_id || 'new'}`} name={form.display_name || agent?.human_profile?.assigned_name}
+        discType={form.descriptif?.disc_type || jsonDisc(form.behavioral) || agent?.human_profile?.disc_type}
+        onDiscType={(disc) => setForm((current) => ({ ...current, behavioral: jsonWithDisc(current.behavioral, disc), descriptif: current.descriptif ? { ...current.descriptif, disc_type: disc || null } : current.descriptif }))}
+        onChange={(descriptif) => setForm((current) => ({ ...current, descriptif }))} />
       <div className="inline-checks"><label><input type="checkbox" checked={form.enabled} onChange={(event) => setForm({ ...form, enabled: event.target.checked })} />Agent activé</label><label><input type="checkbox" checked={form.veto_power} onChange={(event) => setForm({ ...form, veto_power: event.target.checked })} />Pouvoir de veto</label></div>
       <p className={`form-error ${error ? '' : 'is-empty'}`}>{error || (canEdit ? '\u00a0' : `${MANAGER_ONLY} : consultation seule.`)}</p><footer><button type="button" className="button secondary" onClick={onClose}>Fermer</button><button className="button primary" disabled={!canEdit || state === 'loading'} title={canEdit ? undefined : MANAGER_ONLY}>{state === 'loading' ? 'Enregistrement…' : 'Enregistrer l’agent'}</button></footer>
     </form>

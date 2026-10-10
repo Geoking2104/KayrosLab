@@ -27,10 +27,16 @@ export function SessionOwnAgents({ session, capabilities, onSaved }) {
   </div>;
 }
 
+// Identifiant neutre (dérivé du rôle, jamais du nom de la personne) pour un registre partagé.
+function neutralId(role) {
+  const base = String(role || 'agent').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 40) || 'agent';
+  return `${/^[a-z]/.test(base) ? base : `a_${base}`}_${Math.random().toString(36).slice(2, 6)}`;
+}
+
 export function PromoteAgentDialog({ session, agent, realProfilesAllowed, onClose, onSaved }) {
   const real = agent.hybrid === true;
   const [form, setForm] = useState({
-    agent_id: agent.session_scoped ? agent.agent_id : `${agent.agent_id}_variante`.slice(0, 64),
+    agent_id: real && !realProfilesAllowed ? neutralId(agent.role_name) : agent.session_scoped ? agent.agent_id : `${agent.agent_id}_variante`.slice(0, 64),
     display_name: real && !realProfilesAllowed ? agent.role_name || '' : agent.display_name || '',
     include_human_profile: real && realProfilesAllowed,
     share_consent_confirmed: false,

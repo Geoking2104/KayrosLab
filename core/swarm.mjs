@@ -2,6 +2,7 @@
 // Dynamic agent definitions, personality-enriched hybrid agents, three-layer
 // rule resolution, audited formal verdicts and absolute human arbitration.
 
+import { descriptifContext } from './personality-descriptif.mjs';
 import { SpecializedDecisionAgent } from './agents/specialized-agent.mjs';
 import { stripReasoning } from './kayros-llm.mjs';
 import { mapWithConcurrency } from './resilience.mjs';
@@ -251,11 +252,13 @@ const BEHAVIORAL_LABELS = Object.freeze({
 });
 /** Caractéristiques déclarées de l'agent (personnalité de rôle, pas un profil humain réel). */
 export function behavioralContext(profile = {}) {
-  const lines = Object.entries(plainObject(profile)).map(([key, value]) => {
+  const { descriptif, ...rest } = plainObject(profile);
+  const lines = Object.entries(rest).map(([key, value]) => {
     const text = Array.isArray(value) ? strings(value).join('; ') : value != null && typeof value !== 'object' ? String(value).trim() : '';
     return text ? `- ${BEHAVIORAL_LABELS[key] || key}: ${text}` : null;
   }).filter(Boolean);
-  return lines.length ? `Profil comportemental de l'agent:\n${lines.join('\n')}` : '';
+  const rich = descriptif ? descriptifContext(descriptif) : '';
+  return [lines.length ? `Profil comportemental de l'agent:\n${lines.join('\n')}` : '', rich].filter(Boolean).join('\n\n');
 }
 
 export function compileEffectiveAgentContext(definition) {
@@ -616,7 +619,11 @@ export class SwarmService {
         }],
       });
     }
-    const agent = this.registry.assignHumanProfile(agentId, profile, { tenantId });
+    let agent = this.registry.assignHumanProfile(agentId, profile, { tenantId });
+    // Le descriptif importé devient éditable sur l'agent, sans écraser une saisie existante.
+    if (profile.descriptif && !agent.behavioral_profile?.descriptif) {
+      agent = this.registry.update(agentId, { behavioral_profile: { ...(agent.behavioral_profile || {}), descriptif: profile.descriptif } }, { tenantId });
+    }
     this._persist(this.store?.saveAgent?.(agent, { tenantId: tenantKey(tenantId) }));
     this._audit({
       type: 'swarm.agent.personality_assigned', agent_id: agentId,
@@ -793,14 +800,23 @@ export class SwarmService {
       if (person) {
         const chosen = String(display_name || '').trim();
         const neutral = chosen && chosen.toLowerCase() !== person.toLowerCase() ? chosen : String(effective.role_name || 'ce profil').trim();
-        const pattern = new RegExp(person.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-        const scrub = (value) => (typeof value === 'string' ? value.replace(pattern, neutral)
+        const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Nom complet, puis prénom et nom isolés (les textes Crystal disent « Paul is… »).
+        const tokens = person.split(/\s+/).filter((token) => token.length >= 3).map(escape);
+        const patterns = [new RegExp(escape(person), 'gi'), ...tokens.map((token) => new RegExp(`(?<![\\p{L}])${token}(?![\\p{L}])`, 'giu'))];
+        const scrubText = (text) => patterns.reduce((acc, pattern) => acc.replace(pattern, neutral), text);
+        const scrub = (value) => (typeof value === 'string' ? scrubText(value)
           : Array.isArray(value) ? value.map(scrub)
             : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, scrub(v)])) : value);
         for (const field of ['display_name', 'primary_focus', 'mission', 'instructions', 'constraints', 'behavioral_profile', 'rule_configuration']) {
           if (input[field] !== undefined) input[field] = scrub(input[field]);
         }
         delete input.effective_context; delete input.effective_rules;
+        if (input.behavioral_profile?.descriptif) input.behavioral_profile.descriptif = { ...input.behavioral_profile.descriptif, source: 'anonymised' };
+        // L'identifiant d'origine (« paul_jones_x1y2 ») trahirait le nom : ni repris, ni accepté.
+        input.metadata.promoted_from_session = { ...input.metadata.promoted_from_session, agent_id: null };
+        const slugTokens = person.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter((token) => token.length >= 3);
+        if (slugTokens.some((token) => targetId.includes(token))) throw new Error(`identifiant à anonymiser : ${targetId} contient le nom de la personne`);
       }
     }
     const agent = this.createAgent(input, { tenantId, by });

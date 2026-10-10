@@ -1,6 +1,7 @@
 // Composition et vérification des agents d'une session : attributs d'identité,
 // mission, règles et profil comportemental (caractéristiques injectées dans le
 // contexte d'exécution de l'agent, cf. behavioralContext dans core/swarm.mjs).
+import { DescriptifFieldset, cleanDescriptif } from './personality-descriptif.jsx';
 
 export const SENIORITIES = [['intern', 'Stagiaire'], ['junior', 'Junior'], ['senior', 'Senior'], ['executive', 'Dirigeant (executive)']];
 export const DISC_OPTIONS = [['', 'Non précisé'], ['D', 'D · Dominance (direct, orienté résultats)'], ['I', 'I · Influence (enthousiaste, relationnel)'], ['S', 'S · Stabilité (posé, coopératif)'], ['C', 'C · Conformité (précis, analytique)'], ['Di', 'Di'], ['Dc', 'Dc'], ['Id', 'Id'], ['Is', 'Is'], ['Si', 'Si'], ['Sc', 'Sc'], ['Cs', 'Cs'], ['Cd', 'Cd']];
@@ -17,14 +18,14 @@ export function emptyDraft() {
   return {
     display_name: '', role_name: '', department: '', seniority: 'senior', mission: '', instructions: '', constraints: '', veto_power: false,
     behavioral: { disc_type: '', archetype: '', tone: '', decision_style: '', risk_appetite: '', traits: '', motivators: '', communication_directives: '' },
-    extraBehavioral: {}, systemRules: [], added: '',
+    extraBehavioral: {}, descriptif: null, systemRules: [], added: '',
   };
 }
 
 /** Brouillon éditable à partir d'un agent du registre (ou d'attributs proposés par un import). */
 export function draftFromAgent(agent = {}) {
   const behavioral = agent.behavioral_profile || {};
-  const extraBehavioral = Object.fromEntries(Object.entries(behavioral).filter(([key]) => !BEHAVIORAL_KEYS.includes(key)));
+  const extraBehavioral = Object.fromEntries(Object.entries(behavioral).filter(([key]) => !BEHAVIORAL_KEYS.includes(key) && key !== 'descriptif'));
   const rc = agent.rule_configuration || {};
   const modified = new Map((rc.user_modified_rules || []).map((rule) => [rule.replaces_rule_id, rule.modified_text]));
   return {
@@ -33,6 +34,7 @@ export function draftFromAgent(agent = {}) {
     constraints: (agent.constraints || []).join('\n'), veto_power: agent.veto_power === true,
     behavioral: Object.fromEntries(BEHAVIORAL_KEYS.map((key) => [key, list(behavioral[key])])),
     extraBehavioral,
+    descriptif: behavioral.descriptif && typeof behavioral.descriptif === 'object' ? behavioral.descriptif : null,
     systemRules: (rc.system_proposed_rules || []).map((rule) => ({
       rule_id: rule.rule_id, original: rule.rule_text, enabled: rule.status !== 'disabled',
       text: modified.get(rule.rule_id) || rule.rule_text,
@@ -48,6 +50,8 @@ function behavioralFromDraft(draft) {
     if (['traits', 'motivators', 'communication_directives'].includes(key)) { const items = csv(value); if (items.length) out[key] = items; }
     else if (String(value || '').trim()) out[key] = String(value).trim();
   }
+  const descriptif = cleanDescriptif(draft.descriptif);
+  if (descriptif) out.descriptif = descriptif;
   return out;
 }
 
@@ -126,6 +130,7 @@ export function AgentAttributesForm({ draft, onChange, idPrefix = 'agent' }) {
       </div>
       <label>Directives de communication · séparées par des virgules<input value={draft.behavioral.communication_directives} onChange={(e) => setBehavioral({ communication_directives: e.target.value })} placeholder="Ex. chiffrer chaque affirmation, conclure par une recommandation" /></label>
     </fieldset>
+    <DescriptifPanel draft={draft} onChange={onChange} idPrefix={idPrefix} />
     <div className="form-grid">
       <label>Contraintes · une par ligne<textarea value={draft.constraints} onChange={(e) => set({ constraints: e.target.value })} /></label>
       <label>Règles ajoutées · une par ligne<textarea value={draft.added} onChange={(e) => set({ added: e.target.value })} placeholder="Ex. Refuser tout projet sans sponsor identifié." /></label>
@@ -152,4 +157,12 @@ export function AgentAttributesSummary({ agent, draft }) {
     <div className="wide"><dt>Mission</dt><dd>{d.mission || '—'}</dd></div>
     <div className="wide"><dt>Personnalité</dt><dd>{traits.join(' · ') || 'non précisée'}</dd></div>
   </dl>;
+}
+
+/** Descriptif de personnalité de l'agent (behavioral_profile.descriptif). */
+function DescriptifPanel({ draft, onChange, idPrefix }) {
+  return <DescriptifFieldset value={draft.descriptif} idPrefix={`${idPrefix}-descriptif`} name={draft.display_name}
+    discType={draft.behavioral.disc_type}
+    onDiscType={(disc_type) => onChange({ ...draft, behavioral: { ...draft.behavioral, disc_type }, descriptif: draft.descriptif ? { ...draft.descriptif, disc_type: disc_type || null } : draft.descriptif })}
+    onChange={(descriptif) => onChange({ ...draft, descriptif, behavioral: descriptif?.archetype && !draft.behavioral.archetype ? { ...draft.behavioral, archetype: descriptif.archetype } : draft.behavioral })} />;
 }

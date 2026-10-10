@@ -1,5 +1,12 @@
 # Changelog
 
+## Non publié — Console : descriptif de personnalité éditable des agents personnifiés
+
+- **Descriptif de personnalité** dans l'édition d'un agent : composition de session (agent composé, agent proposé ajusté, profil Crystal / DISC importé) et registre (comex/admin). Il comprend une roue DISC (16 types, repère selon l'intensité), le type, l'archétype, l'intensité, les qualités, une vue d'ensemble, 8 traits 0–100 réglables par curseurs et 16 sections éditables en listes : comment lui parler, gagner sa confiance, ses moteurs, déclencher la décision, énergie, ce qui l'épuise, points forts, angles morts, travailler ensemble, réunions, écrits, relances, négociation, présenter une proposition, à faire, à éviter.
+- Prérempli depuis la Data API v4 de Crystal (les 18 sections de contenu de `GET /v4/profile` sont reprises, les sections absentes sont complétées par le modèle DISC), sinon depuis des modèles DISC rédigés pour KayrosLab (aucun texte Crystal repris comme modèle). Les actions « Compléter les sections vides » et « Remplacer par le modèle » sont proposées, la seconde avec confirmation.
+- Stocké dans `behavioral_profile.descriptif` (module partagé `core/personality-descriptif.mjs`, schéma validé côté serveur) et injecté dans le contexte d'exécution de l'agent. Il suit les surcharges de session, les agents composés et l'enregistrement au registre. Dans un tenant partagé, il est anonymisé : prénom, nom et identifiant d'origine sont retirés, la source devient `anonymised`, et un identifiant contenant le nom est refusé.
+- Corrigé : débordement horizontal de la boîte « Nouvelle session » sur mobile.
+
 ## Non publié — Console : composer ses agents, aide au seuil de consensus, personnalités réelles
 
 - **Nouvelle session** : vérification et ajustement des attributs de chaque agent proposé pour la session (identité, séniorité, mission, instructions, contraintes, veto, personnalité, règles) sans modifier le registre ; composition d'agents propres à la session (`custom_agents`, stockés dans `session_agents`, ouverts aux contributeurs) ; Échap ferme la boîte ; largeur des boîtes « wide » corrigée.
