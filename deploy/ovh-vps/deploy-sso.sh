@@ -144,7 +144,9 @@ if [[ -f "${BACKEND_ENV}" ]]; then
 fi
 
 export KAYROS_AUTHELIA_DIR="${CONF_DIR}"
-docker compose -f "${COMPOSE}" up -d
+# Le fichier monté peut avoir changé (notamment filesystem -> SMTP) sans
+# modification du compose. Recréer le service pour charger le notificateur.
+docker compose -f "${COMPOSE}" up -d --force-recreate
 
 if [[ -f "${APP_DIR}/deploy/ovh-vps/nginx-kayroslab-sso.conf" ]]; then
   CERT_DIR=""

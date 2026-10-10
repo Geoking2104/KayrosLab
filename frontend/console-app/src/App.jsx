@@ -173,7 +173,8 @@ function Login({ onLogin }) {
   return <main className="login-shell">
     <section className="login-copy"><a className="wordmark" href="/"><img src={kayrosLogo} alt="" />KayrosLab</a><div className="login-hero"><h1>Décider avec un <span className="grad-text">collectif explicite.</span></h1><p>Composez des collectifs d'agents, lancez des missions gouvernées et gardez chaque verdict sous arbitrage humain.</p></div><div className="login-brands"><span>Branché sur vos outils</span><BrandRow platforms={['salesforce', 'slack', 'teams', 'discord', 'n8n', 'zapier']} /></div></section>
     <form className="login-form" onSubmit={submit}><h2>{registration ? 'Créer votre espace' : forgotten ? 'Mot de passe oublié' : resetting ? 'Choisir un nouveau mot de passe' : 'Ouvrir la console'}</h2>
-      {forgotten && <p className="auth-help">Saisissez votre adresse. Si elle correspond à un compte, nous vous enverrons un lien de vérification valable 30 minutes.</p>}
+      {forgotten && <p className="auth-help">Pour réinitialiser votre mot de passe KayrosLab, saisissez votre adresse. Si elle correspond à un compte, vous recevrez un lien valable 30 minutes.</p>}
+      {forgotten && sso?.providers?.some((provider) => provider.id === 'google') && <><p className="auth-help">Vous vous connectez habituellement avec Google ? Utilisez le bouton ci-dessous. Ce formulaire ne change pas votre mot de passe Google.</p><button type="button" className="button secondary sso-button" onClick={() => startSso('google')} disabled={state === 'loading'}>Continuer avec Google</button></>}
       {resetting && <p className="auth-help">Le lien reçu par e-mail vérifie votre demande. Choisissez un mot de passe d’au moins 10 caractères.</p>}
       {showSso && sso.providers?.map((provider) => <button key={provider.id} type="button" className="button secondary sso-button" onClick={() => startSso(provider.id)} disabled={state === 'loading'}>{state === 'loading' ? 'Redirection…' : `Continuer avec ${provider.label}`}</button>)}
       {showSso && <p className="auth-or">Connexion sécurisée par OAuth 2.0 / OpenID Connect</p>}
@@ -182,7 +183,7 @@ function Login({ onLogin }) {
       {!forgotten && <label>Mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={(resetting || registration) ? 10 : 1} required /></label>}
       {resetting && <label>Confirmer le mot de passe<input type="password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} minLength={10} required /></label>}
       {mode === 'login' && <button type="button" className="auth-link forgot-link" onClick={() => { setMode('forgot'); setError(''); setState('idle'); }}>Mot de passe oublié&nbsp;?</button>}
-      {state === 'sent' && <p className="auth-success" role="status">Si un compte correspond à cette adresse, un e-mail vient d’être envoyé. Vérifiez aussi vos courriers indésirables.</p>}
+      {state === 'sent' && <p className="auth-success" role="status">Demande prise en compte. Si un compte correspond à cette adresse, vous recevrez un lien de réinitialisation. Vérifiez aussi vos courriers indésirables.</p>}
       {state === 'sent' && <button type="button" className="button secondary" onClick={() => setState('idle')}>Renvoyer le lien</button>}
       {state === 'reset' && <p className="auth-success" role="status">Votre mot de passe a été réinitialisé. Vous pouvez maintenant vous connecter.</p>}
       <p className={`form-error ${error ? '' : 'is-empty'}`} role={error ? 'alert' : undefined}>{error || '\u00a0'}</p>
@@ -880,6 +881,28 @@ function IntegrationsPage({ data }) {
   </section>;
 }
 
+/** Comptes chat liés : condition pour arbitrer une mission depuis Slack, Teams ou Discord. */
+function ChatLinksPanel() {
+  const [links, setLinks] = useState([]);
+  const [token, setLinkToken] = useState('');
+  const [status, setStatus] = useState('');
+  const [error, setError] = useState('');
+  async function load() { try { setLinks((await api.chatLinks()).links || []); } catch { setLinks([]); } }
+  useEffect(() => { load(); }, []);
+  async function submit(event) {
+    event.preventDefault(); setError(''); setStatus('');
+    try { const result = await api.linkChatAccount(token.trim()); setStatus(`Compte ${result.platformId} lié.`); setLinkToken(''); await load(); }
+    catch (err) { setError(err.message); }
+  }
+  return <section className="privacy-panel"><h2>Lier un compte chat</h2>
+    <p>Pour arbitrer une mission depuis Slack, Teams ou Discord, cliquez un bouton d’arbitrage dans le chat (ou envoyez « lier » au bot Teams en privé) : le bot vous remet un jeton à usage unique, valable 15 minutes. Collez-le ici. Seuls les rôles COMEX et admin peuvent arbitrer.</p>
+    <form className="inline-form" onSubmit={submit}><input aria-label="Jeton de liaison" placeholder="link_…" value={token} onChange={(event) => setLinkToken(event.target.value)} /><button className="button primary" disabled={!token.trim()}>Lier</button></form>
+    {status && <p className="auth-success" role="status">{status}</p>}
+    {error && <p className="inline-error" role="alert">{error}</p>}
+    {!!links.length && <ul>{links.map((link) => <li key={link.platformId}><strong>{link.platformId}</strong> → {link.email} ({link.role})</li>)}</ul>}
+  </section>;
+}
+
 function SettingsPage({ data, refresh }) {
   const params = hashParams();
   const connected = params.get('connected');
@@ -889,6 +912,7 @@ function SettingsPage({ data, refresh }) {
     {connectError && <p className="inline-error" role="alert">Connexion échouée : {connectError}</p>}
     {!data.capabilities.encrypted_connector_storage && <div className="security-warning"><strong>Stockage chiffré non initialisé.</strong><p>Définissez KAYROS_CONNECTOR_ENCRYPTION_KEY avant d’enregistrer des identifiants. Aucun secret ne sera accepté tant que cette clé manque.</p></div>}
     <div className="connector-grid">{data.connections.map((connector) => <ConnectorCard key={connector.platform} connector={connector} secure={data.capabilities.encrypted_connector_storage} refresh={refresh} />)}</div>
+    <ChatLinksPanel />
     <section className="privacy-panel"><h2>Crystal Knows</h2><p>État : <strong>{data.capabilities.crystal_knows ? `API serveur configurée (Data API ${data.capabilities.crystal_knows_api?.version || 'v4'}${data.capabilities.crystal_knows_api?.predictions ? ', prédictions activées' : ''})` : 'CRYSTALKNOWS_API_TOKEN absent'}</strong>. Les profils réels s’importent avec consentement explicite depuis « Nouvelle session », la page Agents (« Personnalités réelles ») ou un agent hybride. Sans jeton, l’import d’un export JSON Crystal ou d’un type DISC reste disponible. Le jeton reste côté serveur ; aucun scraping n’est utilisé.</p></section>
   </section>;
 }

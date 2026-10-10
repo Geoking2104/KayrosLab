@@ -51,7 +51,8 @@ const ssoCallbackSchema = z.object({
   nonce: z.string().min(8).max(256),
 });
 
-const RESET_ACCEPTED = 'Si un compte correspond à cette adresse, un lien de réinitialisation lui a été envoyé.';
+const RESET_ACCEPTED = 'Demande prise en compte. Si un compte correspond à cette adresse, vous recevrez un lien de réinitialisation. Vérifiez aussi vos courriers indésirables.';
+const RESET_UNAVAILABLE = 'L’envoi des e-mails de réinitialisation est temporairement indisponible. Réessayez plus tard ou utilisez votre connexion Google habituelle.';
 
 async function resolvedOidc(ctx, provider = 'oidc') {
   if (provider === 'google') {
@@ -189,13 +190,23 @@ export default async function authRoutes(app) {
     if (!ctx.auth) return reply.code(503).send({ error: 'authentification non configuree' });
     const parsed = forgotPasswordSchema.safeParse(req.body);
     if (!parsed.success) return reply.code(400).send({ error: 'adresse e-mail invalide' });
+    // Check the same transport BEFORE looking up the account: an SMTP outage
+    // must not return success, nor disclose whether an address is registered.
+    if (!ctx.passwordResetMailer) return reply.code(503).send({ error: RESET_UNAVAILABLE });
+    try { await ctx.passwordResetMailer.verify(); }
+    catch (error) {
+      req.log.error({ code: error.code }, 'password reset SMTP unavailable');
+      return reply.code(503).send({ error: RESET_UNAVAILABLE });
+    }
     const reset = await ctx.auth.createPasswordReset({
       email: parsed.data.email,
       ttlSec: ctx.passwordResetTtlSec || 1800,
     });
-    if (reset && ctx.passwordResetMailer) {
+    if (reset) {
       try { await ctx.passwordResetMailer.send({ email: reset.user.email, token: reset.token }); }
-      catch (error) { req.log.error({ err: error }, 'password reset email failed'); }
+      // A recipient-specific rejection must not expose account membership.
+      // Acknowledging the request does not claim that the email was delivered.
+      catch (error) { req.log.error({ code: error.code }, 'password reset email failed'); }
     }
     return reply.code(202).send({ ok: true, message: RESET_ACCEPTED });
   });

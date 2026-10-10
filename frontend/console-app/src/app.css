@@ -748,3 +748,6 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .promote-dialog { max-width: 620px; }
 .promote-dialog .dialog-body { display: grid; gap: 12px; }
 .session-own-agents li .text-button { white-space: nowrap; }
+.inline-form { display: flex; gap: var(--space-sm); margin-top: var(--space-sm); flex-wrap: wrap; }
+.inline-form input { flex: 1 1 18rem; min-width: 0; }
+.privacy-panel ul { margin-top: var(--space-sm); padding-left: 1.2rem; color: var(--color-muted); }

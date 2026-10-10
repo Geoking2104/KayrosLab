@@ -239,7 +239,7 @@ export class AuthService {
       passwordChangedAt: new Date().toISOString(),
     });
     this.revokeAllSessions(user.id);
-    return true;
+    return { user: publicUser(user) };
   }
 
   /** Deconnexion : revoque ce jeton precis. */

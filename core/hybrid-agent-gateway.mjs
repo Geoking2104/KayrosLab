@@ -108,7 +108,7 @@ export function summarizeSwarmRun(run) {
 }
 
 export class HybridAgentGateway {
-  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0, runObserver = null, queue = null, worker = null, eventSink = null, maxJobAttempts = 3 } = {}) {
+  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0, runObserver = null, queue = null, worker = null, eventSink = null, chatNotifier = null, maxJobAttempts = 3 } = {}) {
     if (!swarm) throw new Error('HybridAgentGateway: swarm requis');
     this.swarm = swarm;
     // Exécutions asynchrones en cours dans CE processus (thread_id → promesse).
@@ -126,6 +126,10 @@ export class HybridAgentGateway {
     // Rappel facultatif `(kind, thread)` : `completed`, `failed`, `arbitrated`
     // (webhooks signés des intégrations). Ses erreurs sont ignorées.
     this.eventSink = eventSink;
+    // Rappel facultatif `(kind, thread, extra)` des fils nés dans un chat
+    // (`thread.chat`) : `started`, `completed`, `failed`, `arbitrated`.
+    // Il publie la réponse asynchrone dans le canal d'origine (core/chat-replies.mjs).
+    this.chatNotifier = chatNotifier;
     this.auditSink = auditSink;
     this.store = store || new InMemoryCollaborationStore({ maxEvents });
     this.adapters = new Map();
@@ -484,8 +488,15 @@ export class HybridAgentGateway {
   /** Branche une file durable et son worker (voir core/integrations/mission-queue.mjs). */
   setQueue(queue, worker = null) { this.queue = queue || null; this.worker = worker || null; }
 
+  /** Notifie le chat d'origine d'un fil (sans attendre la publication) ; ne lève jamais. */
+  _notifyChat(kind, thread, extra = null) {
+    if (!this.chatNotifier || !thread?.chat) return;
+    try { Promise.resolve(this.chatNotifier(kind, thread, extra)).catch(() => {}); } catch { /* le chat ne casse jamais une mission */ }
+  }
+
   /** Diffuse un événement de fil (`completed`, `failed`, `arbitrated`) ; ne lève jamais. */
   async _emit(kind, thread) {
+    this._notifyChat(kind, thread);
     if (!this.eventSink || !thread) return;
     try { await this.eventSink(kind, thread); } catch { /* un webhook ne casse jamais une mission */ }
   }
@@ -686,7 +697,16 @@ export class HybridAgentGateway {
     const by = input.by || input.user_id || `${platform}:anonymous`;
     const scope = room.tenant_id;
     const runId = makeId('swarmrun');
-    const thread = await this.store.withRoomLock(room.room_id, async () => {
+    // Déduplication facultative sur l'identifiant de message de la plateforme
+    // (relances Slack, Bot Framework, double envoi) : un doublon renvoie le fil existant.
+    const messageId = input.dedupe === true ? String(input.message_id || '').trim() : '';
+    let claimed = false;
+    const locked = await this.store.withRoomLock(room.room_id, async () => {
+      if (messageId) {
+        const claim = await this.store.claimMessage({ platform, messageId, tenantId: scope, roomId: room.room_id });
+        if (!claim.claimed) return { duplicate: true, result: claim.result || null };
+        claimed = true;
+      }
       if (input.allowConcurrent !== true && await this._runningThreadInRoom(room)) {
         throw runInProgressError('une mission est déjà en cours sur cette session');
       }
@@ -700,6 +720,8 @@ export class HybridAgentGateway {
         progress: { completed: 0, total: this._agentCount(room) }, error: null,
         ...(input.profile ? { profile: input.profile } : {}),
         ...(input.origin ? { origin: input.origin } : {}),
+        // Référence non secrète du message d'origine (canal, fil, conversation) pour la réponse asynchrone.
+        ...(input.chat ? { chat: clone(input.chat) } : {}),
         created_by: by, created_at: createdAt, updated_at: createdAt,
       };
       await this.store.createThread(created);
@@ -707,7 +729,19 @@ export class HybridAgentGateway {
         role: 'human', kind: 'question', author_id: by, text: question, created_at: createdAt,
       }, { tenantId: scope });
       return created;
+    }).catch(async (error) => {
+      if (claimed) await this.store.failMessage(platform, messageId, scope).catch(() => {});
+      throw error;
     });
+    if (locked.duplicate) {
+      const existingId = locked.result?.thread_id || null;
+      const existing = existingId ? await this.store.getThread(existingId, { tenantId: scope }) : null;
+      return { ignored: false, duplicate: true, processing: !existing, room, run_id: existing?.active_run_id || existing?.current_run_id || null, thread: existing };
+    }
+    const thread = locked;
+    if (claimed) await this.store.completeMessage(platform, messageId, { thread_id: thread.thread_id }, scope).catch(() => {});
+    // Accusé de réception dans le chat (message « analyse en cours ») avant le lancement.
+    this._notifyChat('started', thread, input.chatExtra || null);
     await this._record('collaboration.run.started', {
       room_id: room.room_id, tenant_id: scope, platform, thread_id: thread.thread_id, run_id: runId, user_id: input.user_id || null,
     });

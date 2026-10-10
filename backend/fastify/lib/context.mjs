@@ -1,3 +1,4 @@
+import { ChatReplyService } from '../../../core/chat-replies.mjs';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider, OpenAICompatibleProvider,
   parseRetryAfter,
@@ -334,6 +335,7 @@ export default async function buildContext() {
   if (smtpTransport) {
     const from = smtp.from;
     passwordResetMailer = {
+      verify: () => smtpTransport.verify(),
       async send({ email, token }) {
         const resetUrl = `${CONSOLE_URL}/#reset-password?token=${encodeURIComponent(token)}`;
         await smtpTransport.sendMail({
@@ -436,10 +438,12 @@ export default async function buildContext() {
   // Connexion « un bouton » : le serveur porte les identifiants d'application.
   const connectorOAuth = new ConnectorOAuthService();
 
-  const slackAdapter = process.env.SLACK_BOT_TOKEN
+  // Application Slack du serveur : un jeton de bot (espace unique) OU seulement le
+  // secret de signature (mode OAuth multi-espaces : chaque espace a son jeton chiffré).
+  const slackAdapter = process.env.SLACK_BOT_TOKEN || process.env.SLACK_SIGNING_SECRET
     ? new SlackAdapter({
         signingSecret: process.env.SLACK_SIGNING_SECRET || '',
-        botToken: process.env.SLACK_BOT_TOKEN,
+        botToken: process.env.SLACK_BOT_TOKEN || '',
         webhookUrl: process.env.SLACK_WEBHOOK_URL || '',
         linkService,
       })
@@ -654,6 +658,15 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   // l'interface attendrait indéfiniment et la session resterait bloquée.
   // Durées, issues et missions en cours exposées par /metrics.
   if (engine.hybridGateway) engine.hybridGateway.runObserver = consoleRunObserver;
+  // Réponses asynchrones et arbitrage depuis Slack / Teams / Discord : le
+  // verdict est publié dans le canal d'origine avec le connecteur de l'espace
+  // (console) ou, à défaut, l'application du serveur.
+  const chatReplies = engine.hybridGateway ? new ChatReplyService({
+    gateway: engine.hybridGateway,
+    resolveAdapter: (platform, tenantId) => connectorConfig.adapterFor(tenantId, platform),
+    linkService, users: userStore, consoleUrl: CONSOLE_URL,
+    logger: { warn: (detail, message) => console.warn(message, detail?.detail ?? '') },
+  }).attach() : null;
   try {
     const interrupted = await engine.hybridGateway.recoverInterruptedRuns?.();
     recordInterruptedRuns(interrupted);
@@ -674,7 +687,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     providers, llm, embeddings, tools, auth, oidc, google, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
-    linkService, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig, connectorOAuth, connectorOAuthConfigured: { slack: connectorOAuth.available('slack'), discord: connectorOAuth.available('discord'), teams: connectorOAuth.available('teams') }, connectorOAuthModes: connectorOAuth.describe(), publicApiUrl: KAYROS_PUBLIC_API_URL,
+    linkService, chatReplies, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig, connectorOAuth, connectorOAuthConfigured: { slack: connectorOAuth.available('slack'), discord: connectorOAuth.available('discord'), teams: connectorOAuth.available('teams') }, connectorOAuthModes: connectorOAuth.describe(), publicApiUrl: KAYROS_PUBLIC_API_URL,
     engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,

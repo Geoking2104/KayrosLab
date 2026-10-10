@@ -16,18 +16,32 @@ import {
   isMotifCallback,
 } from '../../../core/connectors-motif.mjs';
 
+import {
+  handleDiscordInteraction,
+  handleSlackArbitration,
+  handleSlackCommand,
+  handleSlackEvent,
+  handleTeamsActivity,
+} from '../lib/chat-handlers.mjs';
+
 const interactionIds = createIdempotenceStore(4000);
 const discordInteractions = createIdempotenceStore(4000);
 const teamsInteractions = createIdempotenceStore(4000);
 
-function discordCommandText(body) {
-  const options = body?.data?.options || [];
-  const flattened = options.flatMap((option) => option?.options || [option]);
-  return String(flattened.find((option) => ['question', 'prompt', 'message'].includes(option?.name))?.value || '').trim();
+/** Corps Slack : JSON (Events API) ou formulaire (`payload=` des interactions, commandes slash). */
+function slackBody(req) {
+  const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+  if (typeof body.payload === 'string') {
+    try { return { interactive: true, payload: JSON.parse(body.payload) }; } catch { return { interactive: true, payload: {} }; }
+  }
+  if (body.command) return { command: true, payload: body };
+  return { payload: body };
 }
 
-function compactChatReply(summary) {
-  return String(summary?.text || 'Le collectif n’a pas produit de synthèse.').slice(0, 1900);
+function rawBodyOf(req) {
+  return typeof req.rawBody === 'string'
+    ? req.rawBody
+    : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
 }
 
 export default async function connectorsRoute(app) {
@@ -43,117 +57,71 @@ export default async function connectorsRoute(app) {
     }
   }
 
+  // Connexions par espace (console) : même URL pour Events API, interactivité et /kayros.
   app.post('/v1/connectors/slack/configured/:connectionId', async (req, reply) => {
     const connection = await configured(req, reply, 'slack'); if (!connection) return;
-    const rawBody = typeof req.rawBody === 'string' ? req.rawBody : JSON.stringify(req.body ?? {});
-    if (!(await connection.adapter.verifySignature({ headers: req.headers, rawBody }))) return reply.code(401).send({ error: 'invalid slack signature' });
-    const body = req.body || {};
-    if (body.type === 'url_verification') return reply.send({ challenge: body.challenge });
-    const event = body.event || {};
-    if (!['app_mention', 'message'].includes(event.type) || event.bot_id || event.subtype) return reply.send({ ok: true });
-    try {
-      const result = await app.kayrosContext.hybridGateway.handleMessage({
-        platform: 'slack', external_room_id: event.channel, message_id: event.client_msg_id || event.ts,
-        user_id: platformUserId('slack', event.user), text: event.text,
-        explicit: event.type === 'app_mention' || event.channel_type === 'im',
-        context: event.thread_ts ? `Thread Slack ${event.thread_ts}` : '', publish: true,
-        tenantId: connection.row.tenant_id,
-      });
-      return reply.send({ ok: true, ignored: !!result.ignored, thread_id: result.thread?.thread_id || null });
-    } catch (error) {
-      req.log.warn({ err: error }, 'configured slack message ignored');
-      return reply.send({ ok: true, ignored: true, reason: error.message });
+    if (!(await connection.adapter.verifySignature({ headers: req.headers, rawBody: rawBodyOf(req) }))) return reply.code(401).send({ error: 'invalid slack signature' });
+    const { payload, interactive, command } = slackBody(req);
+    if (payload.type === 'url_verification') return reply.send({ challenge: payload.challenge });
+    const tenantId = connection.row.tenant_id;
+    if (command) return reply.send(await handleSlackCommand(app.kayrosContext, payload, { tenantId }) || '');
+    if (interactive) {
+      const handled = await handleSlackArbitration(app.kayrosContext, connection.adapter, payload);
+      return reply.code(200).send(handled ?? '');
     }
+    const result = await handleSlackEvent(app.kayrosContext, payload, { tenantId });
+    if (result.reason) req.log.warn({ reason: result.reason }, 'configured slack message ignored');
+    return reply.send(result);
   });
 
   app.post('/v1/connectors/discord/configured/:connectionId', async (req, reply) => {
     const connection = await configured(req, reply, 'discord'); if (!connection) return;
-    const rawBody = typeof req.rawBody === 'string' ? req.rawBody : JSON.stringify(req.body ?? {});
-    if (!(await connection.adapter.verifySignature({ headers: req.headers, rawBody, body: req.body }))) return reply.code(401).send({ error: 'invalid discord signature' });
+    if (!(await connection.adapter.verifySignature({ headers: req.headers, rawBody: rawBodyOf(req), body: req.body }))) return reply.code(401).send({ error: 'invalid discord signature' });
     const body = req.body || {};
     if (body.type === 1) return reply.send({ type: 1 });
-    if (body.type !== 2 || String(body.data?.name || '').toLowerCase() !== 'kayros') return reply.send({ type: 4, data: { content: 'Interaction non prise en charge.', flags: 64 } });
-    const text = discordCommandText(body);
-    if (!text) return reply.send({ type: 4, data: { content: 'Ajoutez une question après /kayros.', flags: 64 } });
-    try {
-      const result = await app.kayrosContext.hybridGateway.handleMessage({
-        platform: 'discord', external_room_id: body.channel_id || body.channel?.id, message_id: body.id,
-        user_id: platformUserId('discord', body.member?.user?.id || body.user?.id), text, explicit: true,
-        context: `Commande Discord · serveur ${body.guild_id || 'direct'}`, tenantId: connection.row.tenant_id,
-      });
-      return reply.send({ type: 4, data: { content: compactChatReply(result.summary) } });
-    } catch (error) {
-      return reply.send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce canal : ${error.message}`, flags: 64 } });
-    }
+    const handled = await handleDiscordInteraction(app.kayrosContext, connection.adapter, body, { tenantId: connection.row.tenant_id });
+    return reply.send(handled || { type: 4, data: { content: 'Interaction non prise en charge.', flags: 64 } });
   });
 
   app.post('/v1/connectors/teams/configured/:connectionId', async (req, reply) => {
     const connection = await configured(req, reply, 'teams'); if (!connection) return;
     if (!(await connection.adapter.verifySignature({ headers: req.headers }))) return reply.code(401).send({ error: 'invalid teams token' });
-    const body = req.body || {};
-    if (body.type !== 'message' || !body.text) return reply.send({ statusCode: 200 });
-    try {
-      const result = await app.kayrosContext.hybridGateway.handleMessage({
-        platform: 'teams', external_room_id: body.conversation?.id, message_id: body.id,
-        user_id: platformUserId('teams', body.from?.id), text: body.text, explicit: true,
-        context: `Conversation Teams · ${body.channelData?.team?.name || body.conversation?.name || 'direct'}`,
-        tenantId: connection.row.tenant_id,
-      });
-      return reply.send({ type: 'message', text: compactChatReply(result.summary) });
-    } catch (error) {
-      return reply.send({ type: 'message', text: `Kayros n’a pas pu traiter ce canal : ${error.message}` });
-    }
+    const result = await handleTeamsActivity(app.kayrosContext, connection.adapter, req.body || {}, { tenantId: connection.row.tenant_id });
+    return reply.send(result.response || { statusCode: 200 });
   });
 
   // Slack Events API — app_mention and direct messages are routed to a room.
   app.post('/v1/connectors/slack/events', async (req, reply) => {
     const ctx = app.kayrosContext;
     if (!ctx.slackAdapter) return reply.code(200).send({ ok: true });
-    const rawBody = typeof req.rawBody === 'string'
-      ? req.rawBody
-      : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
-    const okSig = await ctx.slackAdapter.verifySignature({ headers: req.headers, rawBody });
+    if (!ctx.slackAdapter.signingSecret) return reply.code(401).send({ error: 'SLACK_SIGNING_SECRET requis' });
+    const okSig = await ctx.slackAdapter.verifySignature({ headers: req.headers, rawBody: rawBodyOf(req) });
     if (!okSig) return reply.code(401).send({ error: 'invalid slack signature' });
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    const { payload: body } = slackBody(req);
     if (body.type === 'url_verification') return reply.code(200).send({ challenge: body.challenge });
-    const event = body.event || {};
-    if (!['app_mention', 'message'].includes(event.type) || event.bot_id || event.subtype) return reply.code(200).send({ ok: true });
-    try {
-      const result = await ctx.hybridGateway.handleMessage({
-        platform: 'slack', external_room_id: event.channel,
-        message_id: event.client_msg_id || event.ts,
-        user_id: platformUserId('slack', event.user),
-        text: event.text,
-        explicit: event.type === 'app_mention' || event.channel_type === 'im',
-        context: event.thread_ts ? `Thread Slack ${event.thread_ts}` : '',
-        publish: true,
-      });
-      return reply.code(200).send({ ok: true, ignored: result.ignored || false, run_id: result.run?.run_id || null });
-    } catch (error) {
-      req.log.warn({ err: error }, 'slack hybrid-agent message ignored');
-      return reply.code(200).send({ ok: true, ignored: true, reason: error.message });
-    }
+    // Acquittement immédiat (< 3 s) : le collectif tourne en tâche de fond, le verdict est publié ensuite.
+    const result = await handleSlackEvent(ctx, body);
+    if (result.reason) req.log.warn({ reason: result.reason }, 'slack hybrid-agent message ignored');
+    return reply.code(200).send(result);
   });
 
   // Slack interactive endpoint (Block actions, modals, slash)
   app.post('/v1/connectors/slack/interactive', async (req, reply) => {
     const ctx = app.kayrosContext;
     if (!ctx.slackAdapter) return reply.code(200).send('');
+    if (!ctx.slackAdapter.signingSecret) return reply.code(401).send({ error: 'SLACK_SIGNING_SECRET requis' });
 
-    const rawBody = typeof req.rawBody === 'string'
-      ? req.rawBody
-      : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
-    const okSig = await ctx.slackAdapter.verifySignature({
-      headers: req.headers,
-      rawBody,
-    });
+    const okSig = await ctx.slackAdapter.verifySignature({ headers: req.headers, rawBody: rawBodyOf(req) });
     if (!okSig) return reply.code(401).send({ error: 'invalid slack signature' });
 
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
-    let payload = body;
-    if (body.payload) {
-      try { payload = JSON.parse(body.payload); } catch { payload = body; }
+    const { payload, command } = slackBody(req);
+    if (command) {
+      const answered = await handleSlackCommand(ctx, payload);
+      if (answered) return reply.code(200).send(answered);
     }
+    // Arbitrage des missions (boutons du verdict, modale du motif).
+    const arbitration = await handleSlackArbitration(ctx, ctx.slackAdapter, payload);
+    if (arbitration !== null) return reply.code(200).send(arbitration);
 
     // view_submission for motif modal (v14)
     if (payload.type === 'view_submission' && isMotifCallback(payload.view?.callback_id)) {
@@ -296,10 +264,7 @@ export default async function connectorsRoute(app) {
     const ctx = app.kayrosContext;
     if (!ctx.discordAdapter) return reply.code(200).send('');
 
-    const rawBody = typeof req.rawBody === 'string'
-      ? req.rawBody
-      : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body ?? {}));
-    const okSig = await ctx.discordAdapter.verifySignature({ headers: req.headers, rawBody });
+    const okSig = await ctx.discordAdapter.verifySignature({ headers: req.headers, rawBody: rawBodyOf(req) });
     if (!okSig) return reply.code(401).send({ error: 'invalid discord signature' });
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
@@ -307,24 +272,9 @@ export default async function connectorsRoute(app) {
     // Interactions framework: PING must always be answered with a pong (type 1)
     if (body.type === 1) return reply.code(200).send({ type: 1 });
 
-    // /kayros question: execute the room's hybrid team and answer in-channel.
-    if (body.type === 2 && String(body.data?.name || '').toLowerCase() === 'kayros') {
-      const text = discordCommandText(body);
-      if (!text) return reply.code(200).send({ type: 4, data: { content: 'Ajoutez une question après /kayros.', flags: 64 } });
-      try {
-        const result = await ctx.hybridGateway.handleMessage({
-          platform: 'discord', external_room_id: body.channel_id || body.channel?.id,
-          message_id: body.id,
-          user_id: platformUserId('discord', body.member?.user?.id || body.user?.id),
-          text,
-          explicit: true,
-          context: `Commande Discord · serveur ${body.guild_id || 'direct'}`,
-        });
-        return reply.code(200).send({ type: 4, data: { content: compactChatReply(result.summary) } });
-      } catch (error) {
-        return reply.code(200).send({ type: 4, data: { content: `Kayros n’a pas pu traiter ce canal : ${error.message}`, flags: 64 } });
-      }
-    }
+    // /kayros (réponse différée type 5) et arbitrage des missions par boutons.
+    const handled = await handleDiscordInteraction(ctx, ctx.discordAdapter, body);
+    if (handled) return reply.code(200).send(handled);
 
     const iid = discordInteractionId(body);
     if (iid && discordInteractions.seen(iid)) {
@@ -383,26 +333,10 @@ export default async function connectorsRoute(app) {
 
     const body = req.body ?? {};
 
-    // Direct Bot Framework message. Interactive card submissions keep using
-    // the existing governance path below.
-    const teamsRoomId = body.conversation?.id;
-    const hasTeamsRoom = (await ctx.hybridGateway.listRooms({ platform: 'teams' }))
-      .some((room) => room.external_room_id === teamsRoomId);
-    if (body.type === 'message' && body.text && !body.value && hasTeamsRoom) {
-      try {
-        const result = await ctx.hybridGateway.handleMessage({
-          platform: 'teams', external_room_id: teamsRoomId,
-          message_id: body.id,
-          user_id: platformUserId('teams', body.from?.id),
-          text: body.text,
-          explicit: true,
-          context: `Conversation Teams · ${body.channelData?.team?.name || body.conversation?.name || 'direct'}`,
-        });
-        return reply.code(200).send({ type: 'message', text: compactChatReply(result.summary) });
-      } catch (error) {
-        return reply.code(200).send({ type: 'message', text: `Kayros n’a pas pu traiter ce canal : ${error.message}` });
-      }
-    }
+    // Questions au collectif (salon Teams connecté), « lier » en privé et
+    // cartes d'arbitrage des missions ; les gates historiques suivent le chemin ci-dessous.
+    const handled = await handleTeamsActivity(ctx, ctx.teamsAdapter, body, { requireRoom: true });
+    if (handled.handled) return reply.code(200).send(handled.response || { statusCode: 200 });
 
     // Idempotence sur les activities recues (retries Bot Framework)
     const iid = teamsActivityId(body);
