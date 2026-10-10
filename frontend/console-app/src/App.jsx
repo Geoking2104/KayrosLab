@@ -33,6 +33,36 @@ const pages = [
 function pageFromHash(hash = location.hash) { return String(hash || '').replace(/^#/, '').split('?')[0] || 'overview'; }
 function hashParams(hash = location.hash) { return new URLSearchParams(String(hash || '').split('?')[1] || ''); }
 // Profils d'exécution d'une mission (cf. core/integrations/profiles.mjs).
+
+const ROLE_PACKS = [
+  // Direction
+  { id: 'ceo', name: 'CEO / PDG', category: 'Direction', focus: 'Définit la stratégie globale et représente l’entreprise.' },
+  { id: 'cfo', name: 'CFO / Directeur financier', category: 'Direction', focus: 'Pilote la comptabilité, la trésorerie et le budget.' },
+  { id: 'cmo', name: 'CMO / Directeur marketing', category: 'Direction', focus: 'Gère la stratégie de marque, l’acquisition et la communication.' },
+  { id: 'coo', name: 'COO / Directeur des opérations', category: 'Direction', focus: 'Supervise les processus et l’efficacité quotidienne.' },
+  { id: 'cto', name: 'CTO / Responsable SI', category: 'Direction', focus: 'Pilote la technique, l’informatique et l’innovation.' },
+  { id: 'manager', name: 'Manager / Chef de projet', category: 'Direction', focus: 'Encadre une équipe, fixe les objectifs et suit les missions.' },
+  // Commercial
+  { id: 'com_marketing', name: 'Chargé de communication / Marketing', category: 'Commercial & Marketing', focus: 'Crée les supports et gère les campagnes.' },
+  { id: 'sales', name: 'Technico-commercial / Vendeur', category: 'Commercial & Marketing', focus: 'Développe le portefeuille client et négocie.' },
+  { id: 'support', name: 'Responsable Service Client', category: 'Commercial & Marketing', focus: 'Assure la satisfaction et le suivi des réclamations.' },
+  // Production
+  { id: 'engineer', name: 'Ingénieur / Chef de projet technique', category: 'Production & Technique', focus: 'Conçoit les solutions techniques.' },
+  { id: 'designer', name: 'Dessinateur / Prototypiste', category: 'Production & Technique', focus: 'Élabore les plans et modèles.' },
+  { id: 'technician', name: 'Technicien / Opérateur', category: 'Production & Technique', focus: 'Assure fabrication, assemblage ou maintenance.' },
+  { id: 'quality', name: 'Chargé de la qualité', category: 'Production & Technique', focus: 'Vérifie la conformité des produits et processus.' },
+  // Logistique
+  { id: 'buyer', name: 'Acheteur', category: 'Achats & Logistique', focus: 'Sélectionne les fournisseurs et négocie.' },
+  { id: 'warehouse', name: 'Magasinier / Gestionnaire de stocks', category: 'Achats & Logistique', focus: 'Gère les entrées, sorties et stocks.' },
+  { id: 'logistics', name: 'Responsable logistique', category: 'Achats & Logistique', focus: 'Coordonne transport et chaîne d’approvisionnement.' },
+  // Support
+  { id: 'assistant', name: 'Secrétaire / Assistant de direction', category: 'Support', focus: 'Gère l’agenda, l’accueil et le suivi administratif.' },
+  { id: 'hr', name: 'Gestionnaire de paie / RH', category: 'Support', focus: 'Recrutement, contrats et paie.' },
+  { id: 'controller', name: 'Contrôleur de gestion / Comptable', category: 'Support', focus: 'Suit les comptes et obligations légales.' },
+  { id: 'legal', name: 'Chargé des affaires juridiques', category: 'Support', focus: 'Veille au respect du droit et des réglementations.' },
+];
+const SECTORS = ['Tech / SaaS', 'Industrie', 'Commerce / Retail', 'Services', 'Santé', 'Finance', 'Autre'];
+const TEAM_SIZES = ['Solo / Créateur', 'Petite PME (< 20)', 'PME (20–100)', 'ETI / Grande entreprise'];
 const MISSION_PROFILES = [
   ['fast', 'Rapide', 'verdict réel en 1 à 2 min (modèle rapide)'],
   ['demo', 'Démo', 'réponses préenregistrées en moins de 5 s, aucun appel LLM'],
@@ -250,7 +280,8 @@ function agentBadges(agent, { overridden = false, composed = false, real = false
 function CreateSession({ data, agents, onClose, onCreated }) {
   const active = agents.filter((agent) => agent.enabled !== false);
   const maxCustom = data?.capabilities?.max_custom_agents_per_session || 8;
-  const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority' });
+  const [form, setForm] = useState({ name: '', active_agents: active.slice(0, 3).map((agent) => agent.agent_id), voting_threshold: 'majority', sector: '', teamSize: '' });
+  const [selectedRoles, setSelectedRoles] = useState([]);
   const [drafts, setDrafts] = useState({});
   const [custom, setCustom] = useState([]);
   const [expanded, setExpanded] = useState(null);
@@ -274,7 +305,17 @@ function CreateSession({ data, agents, onClose, onCreated }) {
     setForm((current) => (current.active_agents.includes(id) ? current : { ...current, active_agents: [...current.active_agents, id] }));
   }
   function resetPreset(id) { setDrafts((current) => { const next = { ...current }; delete next[id]; return next; }); }
-  function addCustom(member = { draft: emptyDraft(), profile: null }) {
+  
+  function addRolePack(role) {
+    const draft = emptyDraft();
+    draft.display_name = role.name;
+    draft.role_name = role.name;
+    draft.department = role.category;
+    draft.primary_focus = role.focus;
+    draft.mission = role.focus;
+    addCustom({ draft, profile: null });
+  }
+function addCustom(member = { draft: emptyDraft(), profile: null }) {
     if (custom.length >= maxCustom) { setError(`${maxCustom} agents composés maximum par session.`); return; }
     const key = `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
     setCustom((current) => [...current, { key, ...member }]); setExpanded(member.profile ? null : key); setError('');
@@ -299,6 +340,14 @@ function CreateSession({ data, agents, onClose, onCreated }) {
     <header><div><h2 id="create-session-title">Créer un collectif</h2><p>Un collectif fixe les agents qui instruiront vos missions. Il conserve son historique.</p></div><button className="icon-button" aria-label="Fermer" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
       <fieldset><legend>Collectif actif · {total} agent(s)</legend>
+        <div className="context-fields">
+          <label>Secteur d’activité<select value={form.sector} onChange={(e) => setForm({ ...form, sector: e.target.value })}><option value="">Non précisé</option>{SECTORS.map((s) => <option key={s}>{s}</option>)}</select></label>
+          <label>Taille de l’équipe<select value={form.teamSize} onChange={(e) => setForm({ ...form, teamSize: e.target.value })}><option value="">Non précisé</option>{TEAM_SIZES.map((s) => <option key={s}>{s}</option>)}</select></label>
+        </div>
+        <p className="muted so-note">Ajoutez des rôles prédéfinis ou cochez les agents déjà présents.</p>
+        <details className="role-packs"><summary>Rôles prédéfinis</summary>
+          {['Direction', 'Commercial & Marketing', 'Production & Technique', 'Achats & Logistique', 'Support'].map((cat) => <div key={cat} className="role-cat"><strong>{cat}</strong><div className="role-list">{ROLE_PACKS.filter((r) => r.category === cat).map((r) => <button key={r.id} type="button" className="button secondary small" onClick={() => addRolePack(r)}>{r.name}</button>)}</div></div>)}
+        </details>
         <p className="muted so-note">Cochez les agents proposés, puis « Vérifier » pour relire leurs attributs et les ajuster. Les ajustements valent pour cette session seulement.</p>
         {!active.length && <p className="muted so-note" role="note">Aucun agent proposé n’est actif : composez un agent ou importez une personnalité réelle.</p>}
         <ul className="agent-rows">{active.map((agent) => {
