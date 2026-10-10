@@ -883,3 +883,8 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .kpi-card { padding: var(--space-sm); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); }
 .kpi-card strong { display: block; font-size: 1.4rem; }
 .kpi-card small { color: var(--color-muted); }
+
+.permissions-fieldset { border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); padding: var(--space-sm); margin-block: var(--space-md); }
+.permissions-fieldset legend { font-weight: 600; padding: 0 .5rem; }
+.connector-checks { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-top: .5rem; font-size: var(--text-sm); }
+
