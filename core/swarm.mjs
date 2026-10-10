@@ -75,6 +75,19 @@ export const DEFAULT_SYSTEM_AGENTS = Object.freeze([
       ], user_added_rules: [], user_modified_rules: [],
     },
   },
+  {
+    agent_id: 'planner', agent_type: 'system_predefined', role_name: 'Gestionnaire tâches & planning',
+    department: 'Opérations & Coordination', seniority: 'senior',
+    primary_focus: 'Transformer les décisions en plan d’action : découper en tâches, estimer les charges, séquencer, identifier les dépendances et suivre l’avancement.',
+    veto_power: false,
+    rule_configuration: {
+      system_proposed_rules: [
+        { rule_id: 'RULE_PLN_01', rule_text: 'Découper toute décision en tâches actionnables avec responsable, échéance et livrable attendu.', status: 'active' },
+        { rule_id: 'RULE_PLN_02', rule_text: 'Signaler les dépendances critiques et les risques de retard.', status: 'active' },
+        { rule_id: 'RULE_PLN_03', rule_text: 'Proposer un ordre de priorité (Must / Should / Could) et un jalon de suivi.', status: 'active' },
+      ], user_added_rules: [], user_modified_rules: [],
+    },
+  },
 ]);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
