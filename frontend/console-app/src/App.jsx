@@ -282,7 +282,7 @@ function CreateSession({ data, agents, onClose, onCreated }) {
     } catch (err) { setState('error'); setError(err.message); }
   }
   return <div className="dialog-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="dialog wide session-dialog" role="dialog" aria-modal="true" aria-labelledby="create-session-title">
-    <header><div><h2 id="create-session-title">Ouvrir une session</h2><p>Une session fixe un collectif stable : elle garde son journal d'exécution et ses dossiers.</p></div><button className="icon-button" aria-label="Fermer" onClick={onClose}>×</button></header>
+    <header><div><h2 id="create-session-title">Créer un collectif</h2><p>Un collectif fixe les agents qui instruiront vos missions. Il conserve son historique.</p></div><button className="icon-button" aria-label="Fermer" onClick={onClose}>×</button></header>
     <form onSubmit={submit}><label>Nom de la session<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Ex. Comité d'investissement" required /></label>
       <fieldset><legend>Collectif actif · {total} agent(s)</legend>
         <p className="muted so-note">Cochez les agents proposés, puis « Vérifier » pour relire leurs attributs et les ajuster. Les ajustements valent pour cette session seulement.</p>
