@@ -451,6 +451,28 @@ function DecisionThread({ thread, onChanged, canArbitrate = true }) {
   </section>;
 }
 
+
+function DeployProgress() {
+  const [run, setRun] = useState(null);
+  const [err, setErr] = useState('');
+  async function load() {
+    try {
+      const res = await fetch('https://api.github.com/repos/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml/runs?per_page=1');
+      const data = await res.json();
+      setRun(data.workflow_runs?.[0] || null);
+      setErr('');
+    } catch (e) { setErr(e.message); }
+  }
+  useEffect(() => { load(); const id = setInterval(load, 8000); return () => clearInterval(id); }, []);
+  if (!run) return null;
+  const pct = run.status === 'completed' ? 100 : run.status === 'in_progress' ? 60 : 20;
+  const label = run.status === 'completed' ? (run.conclusion === 'success' ? 'Déployé' : 'Échec') : 'Déploiement en cours…';
+  return <div className="deploy-progress">
+    <div className="deploy-progress__bar"><span style={{ width: pct + '%' }} /></div>
+    <small>{label} · run #{run.run_number} · {run.display_title}</small>
+    {err && <small className="inline-error">{err}</small>}
+  </div>;
+}
 function Overview({ data, refresh, openSession, onThread }) {
   const [selectedSession, setSelectedSession] = useState(() => data.sessions[0]?.session_id || null);
   useEffect(() => {
@@ -510,7 +532,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       <div>
         <p className="context-line">Espace {data.user.tenantId}</p>
         <h1>Console de décisions</h1>
-        <p className="flow-hint">Parcours guidé : 1. Collectif → 2. Question → 3. Arbitrage</p>
+        <p className="flow-hint">Parcours guidé : 1. Collectif → 2. Question → 3. Arbitrage</p><DeployProgress />
       </div>
       <div className="header-actions">
         <a className="button secondary" href="https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml" target="_blank" rel="noreferrer">Déployer</a>
