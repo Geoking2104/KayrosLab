@@ -7,7 +7,7 @@ import { ProfileTraits, RealProfileImporter, RealProfilesDialog } from './real-p
 import { SessionOwnAgents } from './registry-promotion.jsx';
 import { DescriptifFieldset, cleanDescriptif } from './personality-descriptif.jsx';
 
-// La console est un harness d'agents : registre d'agents (métier ou hybride),
+// La console est un espace de décision d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
 // L'expérience littéraire vit dans une application séparée, hors de cette surface.
 
@@ -26,7 +26,7 @@ function ToastHost({ toasts }) {
 }
 const platformNames = { slack: 'Slack', discord: 'Discord', teams: 'Microsoft Teams', console: 'Console' };
 const pages = [
-  ['overview', 'Harness'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['integrations', 'Intégrations'], ['settings', 'Réglages'],
+  ['overview', 'Console'], ['sessions', 'Sessions'], ['agents', 'Agents'], ['activity', 'Décisions'], ['integrations', 'Intégrations'], ['settings', 'Réglages'],
 ];
 // Le hash porte la page puis d'éventuels paramètres : `#activity?thread=…` (lien
 // « dossier » des intégrations), `#settings?connected=slack` (retour OAuth).
@@ -399,7 +399,7 @@ function RunTrace({ run }) {
     else if (entry.type === 'swarm.run.completed') steps.push({ key: 'consensus', label: 'Agrégation du consensus', value: verdictLabel(entry.consensus) });
   }
   if (!steps.length) return null;
-  return <div className="harness-trace"><p className="section-kicker">Trace du harness</p><ol>{steps.map((step, index) => <li key={step.key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step.label}</strong><em>{step.value}</em></li>)}</ol></div>;
+  return <div className="console-trace"><p className="section-kicker">Trace de la console</p><ol>{steps.map((step, index) => <li key={step.key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step.label}</strong><em>{step.value}</em></li>)}</ol></div>;
 }
 
 function RunDossier({ run }) {
@@ -1142,9 +1142,38 @@ function SessionsPage({ data, refresh, onCreate, onThread }) {
   </section>;
 }
 
+
+function Timeline({ session, threads }) {
+  const events = [];
+  if (session) events.push({ t: session.created_at || session.updated_at, actor: 'Utilisateur', channel: 'Console', action: 'Création du collectif', detail: session.name, kind: 'create' });
+  for (const th of threads || []) {
+    events.push({ t: th.created_at || th.updated_at, actor: 'Utilisateur', channel: 'Console', action: 'Mission lancée', detail: th.question, kind: 'run', thread: th });
+    if (th.status === 'awaiting_arbitration' || th.status === 'resolved') {
+      events.push({ t: th.updated_at, actor: 'Collectif', channel: 'Console', action: 'Verdict produit', detail: th.status, kind: 'verdict', thread: th });
+    }
+    if (th.human_decision) {
+      events.push({ t: th.human_decision.decided_at, actor: th.human_decision.by || 'Humain', channel: 'Console', action: 'Arbitrage', detail: th.human_decision.action, kind: 'arb', thread: th });
+    }
+  }
+  events.sort((a, b) => String(a.t || '').localeCompare(String(b.t || '')));
+  const [open, setOpen] = useState(null);
+  if (!events.length) return null;
+  return <section className="timeline">
+    <h3>Timeline</h3>
+    <ol>{events.map((ev, i) => <li key={i} className={`tl-item tl-${ev.kind}`} onClick={() => setOpen(open === i ? null : i)}>
+      <time>{ev.t ? new Date(ev.t).toLocaleString('fr-FR') : '—'}</time>
+      <strong>{ev.action}</strong>
+      <small>{ev.actor} · {ev.channel}</small>
+      <p>{ev.detail}</p>
+      {open === i && ev.thread && <div className="tl-detail"><pre>{JSON.stringify(ev.thread, null, 2).slice(0, 1200)}</pre></div>}
+    </li>)}</ol>
+  </section>;
+}
 function DecisionsPage({ data, selected, onSelect, onChanged }) {
   if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} canArbitrate={canManage(data.user)} /></section>;
-  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header><div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{threadStatusLabel(thread.status)}{thread.status === 'running' && thread.progress?.total ? ` · ${progressLabel(thread.progress)}` : ''}</span></button>)}</div></section>;
+  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header>
+    <Timeline session={data.sessions?.[0]} threads={data.threads} />
+    <div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{threadStatusLabel(thread.status)}{thread.status === 'running' && thread.progress?.total ? ` · ${progressLabel(thread.progress)}` : ''}</span></button>)}</div></section>;
 }
 
 const SALES_ORACLE_TOOL_URL = '/assets/sales-oracle-tool.js';

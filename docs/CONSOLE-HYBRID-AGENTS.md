@@ -2,7 +2,7 @@
 
 > La spécification de production V2 (agents administrables, coffre connecteurs et fils de décision) se trouve dans [PRODUCTION-CONSOLE-V2.md](./PRODUCTION-CONSOLE-V2.md).
 
-La console est un **harness d'agents** : un poste de travail qui compose des collectifs, exécute des missions gouvernées et conserve chaque dossier sous arbitrage humain. Elle emprunte le vocabulaire d'un harness d'agents (agents, outils, collectif, session, mission, étapes, arbitrage) et s'appuie sur le runtime gouverné de KayrosLab. Elle ne dépend d'aucune application d'interface dérivée : le produit de conversation séparé possède ses propres surfaces.
+La console est un **espace de décision d'agents** : un poste de travail qui compose des collectifs, exécute des missions gouvernées et conserve chaque dossier sous arbitrage humain. Elle emprunte le vocabulaire d'un espace de décision d'agents (agents, outils, collectif, session, mission, étapes, arbitrage) et s'appuie sur le runtime gouverné de KayrosLab. Elle ne dépend d'aucune application d'interface dérivée : le produit de conversation séparé possède ses propres surfaces.
 
 ## Product model
 
@@ -10,7 +10,7 @@ La console est un **harness d'agents** : un poste de travail qui compose des col
 Tenant
   ├─ Agent registry (rules + optional consented human profile)
   ├─ Swarm configurations (collectives)
-  └─ Harness sessions
+  └─ Sessions console
        └─ stable collective (agent rosters + voting threshold)
             ↓
        Governed mission (one step per agent + consensus)

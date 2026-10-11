@@ -31,7 +31,7 @@ async function request(path, options = {}) {
   return body;
 }
 
-// La console est un harness d'agents : elle parle de collectifs, de sessions et
+// La console est un espace de décision d'agents : elle parle de collectifs, de sessions et
 // de missions. Aucune surface d'application tierce n'est exposée ici.
 export const api = {
   register: (name, email, password) => request('/v1/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password }) }),
