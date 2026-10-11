@@ -512,7 +512,10 @@ function Overview({ data, refresh, openSession, onThread }) {
         <h1>Console de décisions</h1>
         <p className="flow-hint">Parcours guidé : 1. Collectif → 2. Question → 3. Arbitrage</p>
       </div>
-      <button className="button primary" onClick={openSession}>+ Nouveau collectif</button>
+      <div className="header-actions">
+        <a className="button secondary" href="https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml" target="_blank" rel="noreferrer">Déployer</a>
+        <button className="button primary" onClick={openSession}>+ Nouveau collectif</button>
+      </div>
     </header>
 
     <section className="metric-row">
