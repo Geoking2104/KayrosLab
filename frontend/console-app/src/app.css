@@ -902,3 +902,11 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .tl-detail dt { color: var(--color-muted); }
 .tl-detail dd { margin: 0; }
 
+
+.benefits-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); margin-block: var(--space-md); }
+.benefit { padding: var(--space-sm); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-surface); }
+.benefit strong { display: block; margin-bottom: .25rem; }
+.process-tabs { display: flex; gap: .5rem; margin-block: var(--space-sm); }
+.integration-steps.clickable li { cursor: default; padding: .4rem 0; }
+@media (max-width: 800px) { .benefits-row { grid-template-columns: 1fr; } }
+

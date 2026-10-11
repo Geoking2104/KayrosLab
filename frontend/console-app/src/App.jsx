@@ -1013,7 +1013,42 @@ function IntegrationsPage({ data }) {
   if (!allowed) return <section className="page">{header}<p className="muted">{MANAGER_ONLY} : demandez à un membre du comité exécutif de créer une clé d’API.</p></section>;
   if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
+  const [active, setActive] = useState('n8n');
+  const processes = {
+    n8n: [
+      'Créez une clé d’API KayrosLab (scopes missions:write).',
+      'Dans n8n, importez le workflow fourni ou créez un HTTP Request.',
+      'Collez la clé et le secret de signature webhook.',
+      'Déclenchez sur un événement (CRM, formulaire, cron) et mappez la question.',
+      'Recevez le verdict dans le canal de votre choix.',
+    ],
+    zapier: [
+      'Créez une clé d’API KayrosLab.',
+      'Dans Zapier, utilisez un Webhooks by Zapier ou l’action HTTP.',
+      'POST /v1/public/missions avec la clé Bearer.',
+      'Mappez les champs de votre app source vers la question.',
+      'Récupérez le verdict via polling ou webhook sortant.',
+    ],
+    salesforce: [
+      'Créez une clé d’API et notez le secret webhook.',
+      'Importez le workflow n8n « Salesforce → KayrosLab ».',
+      'Connectez Salesforce (OAuth) et sélectionnez l’objet Opportunity.',
+      'Déclenchez sur passage à l’étape Proposal.',
+      'Une tâche avec le verdict est créée sur l’opportunité.',
+    ],
+  };
   return <section className="page">{header}
+    <section className="benefits-row">
+      <div className="benefit"><strong>Décisions dans vos outils</strong><p>Verdict du collectif injecté dans Salesforce, Slack ou e-mail sans changer d’écran.</p></div>
+      <div className="benefit"><strong>Déclenchement sans code</strong><p>n8n ou Zapier lancent une mission dès qu’un événement CRM ou formulaire arrive.</p></div>
+      <div className="benefit"><strong>Traçabilité</strong><p>Chaque appel est signé, idempotent et visible dans la timeline de la console.</p></div>
+    </section>
+    <section className="process-tabs">
+      {['n8n', 'zapier', 'salesforce'].map((id) => <button key={id} type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{id === 'n8n' ? 'n8n' : id === 'zapier' ? 'Zapier' : 'Salesforce'}</button>)}
+    </section>
+    <ol className="integration-steps clickable">
+      {processes[active].map((step, i) => <li key={i}><span>{i + 1}</span>{step}</li>)}
+    </ol>
     <section className="privacy-panel integration-panel integration-panel--salesforce"><h2><BrandLogo platform="salesforce" size={26} />PoC Salesforce en 15 minutes</h2>
       <ol className="integration-steps">
         <li>Créez une clé d’API ci-dessous (nom « n8n — Salesforce »).</li>
