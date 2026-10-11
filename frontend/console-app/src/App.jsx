@@ -1039,6 +1039,15 @@ Body:
   "question": "{{question}}",
   "external_ref": "{{id}}"
 }`,
+    api: `curl -X POST https://api.kayroslab.com/v1/public/missions \
+  -H "Authorization: Bearer $KAYROS_API_KEY" \
+  -H "Idempotency-Key: $(uuidgen)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "collective_id": "col_xxx",
+    "question": "Faut-il lancer ce projet ?",
+    "external_ref": "deal-123"
+  }'`,
     salesforce: `# Salesforce + n8n
 # Déclencheur : Opportunity Stage = Proposal
 POST https://api.kayroslab.com/v1/public/missions
@@ -1073,6 +1082,13 @@ Idempotency-Key: {{$json.Id}}
       'Déclenchez sur passage à l’étape Proposal.',
       'Une tâche avec le verdict est créée sur l’opportunité.',
     ],
+    api: [
+      'Créez une clé d’API (scopes missions:write, missions:read).',
+      'Appelez POST /v1/public/missions avec Idempotency-Key.',
+      'Polling GET /v1/public/missions/:id ou webhook signé.',
+      'Arbitrez dans la console ou via POST /threads/:id/arbitrate.',
+      'Récupérez le verdict et les analyses dans la réponse.',
+    ],
   };
   return <section className="page">{header}
     <section className="benefits-row">
@@ -1081,16 +1097,26 @@ Idempotency-Key: {{$json.Id}}
       <div className="benefit"><strong>Traçabilité</strong><p>Chaque appel est signé, idempotent et visible dans la timeline de la console.</p></div>
     </section>
     <section className="process-tabs">
-      {['n8n', 'zapier', 'salesforce'].map((id) => <button key={id} type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{id === 'n8n' ? 'n8n' : id === 'zapier' ? 'Zapier' : 'Salesforce'}</button>)}
+      {[['n8n','n8n'],['zapier','Zapier'],['salesforce','Salesforce'],['api','API']].map(([id,label]) => <button key={id} type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{label}</button>)}
     </section>
     <ol className="integration-steps clickable">
       {processes[active].map((step, i) => <li key={i}><span>{i + 1}</span>{step}</li>)}
     </ol>
     <div className="code-block">
       <header><strong>Code d’intégration</strong>
-        <button type="button" className="button secondary small" onClick={() => { navigator.clipboard.writeText(snippets[active]); }}>Copier le code</button>
+        <button type="button" className="button secondary small" onClick={() => { navigator.clipboard.writeText(snippets[active] || ''); }}>Copier le code</button>
       </header>
-      <pre>{snippets[active]}</pre>
+      <pre>{snippets[active] || 'Sélectionnez un onglet.'}</pre>
+    </div>
+    {active === 'api' && <section className="benefits-row">
+      <div className="benefit"><strong>API publique v1</strong><p>POST /missions (202), GET /missions/:id, clés kl_live_…, idempotence, 60 req/min.</p></div>
+      <div className="benefit"><strong>Webhooks signés</strong><p>HMAC-SHA256, secret dédié, livraison des verdicts vers votre endpoint.</p></div>
+      <div className="benefit"><strong>Mise en place</strong><p>Créez une clé, testez avec curl, branchez n8n/Zapier ou votre backend.</p></div>
+    </section>}
+    <div className="connector-actions">
+      <a className="button primary" href="https://api.kayroslab.com/docs" target="_blank" rel="noreferrer">Documentation API</a>
+      <a className="button secondary" href="https://api.kayroslab.com/openapi.json" target="_blank" rel="noreferrer">OpenAPI</a>
+      <button type="button" className="button secondary" onClick={() => navigator.clipboard.writeText(snippets.api || '')}>Copier l’exemple curl</button>
     </div>
     <section className="privacy-panel integration-panel integration-panel--salesforce"><h2><BrandLogo platform="salesforce" size={26} />PoC Salesforce en 15 minutes</h2>
       <ol className="integration-steps">
