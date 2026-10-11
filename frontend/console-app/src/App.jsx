@@ -134,7 +134,7 @@ function ssoRedirectUri() {
 }
 
 function Mark({ name }) {
-  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', integrations: '⇄', settings: '⚙' };
+  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', integrations: '⇄', settings: '⚙', document: '📄', question: '?', collective: '👥', arbitrate: '⚖', deploy: '🚀' };
   return <span className={`nav-mark nav-mark--${name}`} aria-hidden="true">{labels[name]}</span>;
 }
 
@@ -586,7 +586,7 @@ function Overview({ data, refresh, openSession, onThread }) {
 
     <div className="flow-grid">
       <section className="flow-step">
-        <h2>3. Collectif</h2>
+        <h2><Mark name="collective" /> 3. Collectif</h2>
         <p className="muted">Choisissez ou créez le groupe d’agents qui instruira la mission.</p>
         <label>Collectif actif
           <select value={selectedSession || ''} onChange={(e) => setSelectedSession(e.target.value)}>
@@ -600,7 +600,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       </section>
 
       <section className="flow-step">
-        <h2>1. Document source</h2>
+        <h2><Mark name="document" /> 1. Document source</h2>
         <p className="muted">Uploadez un brief, un cahier des charges ou un extrait. La question et le collectif s’appuieront dessus.</p>
         <label className="upload-zone">
           <input type="file" accept=".txt,.md,.csv,.json,.pdf" onChange={(e) => {
@@ -615,7 +615,7 @@ function Overview({ data, refresh, openSession, onThread }) {
         {docText && <details><summary>Aperçu ({docText.length} caractères)</summary><pre className="doc-preview">{docText.slice(0, 600)}</pre></details>}
       </section>
       <section className="flow-step">
-        <h2>2. Question</h2>
+        <h2><Mark name="question" /> 2. Question</h2>
         <p className="muted">Formulez la décision. Si un document est chargé, les agents l’utiliseront comme contexte.</p>
         <form onSubmit={run}>
           <label>Question<textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ex. Faut-il lancer ce projet maintenant ?" /></label>
@@ -634,7 +634,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       </section>
 
       <section className="flow-step">
-        <h2>4. Suivi & arbitrage</h2>
+        <h2><Mark name="arbitrate" /> 4. Suivi & arbitrage</h2>
         <p className="muted">Reprendre une mission ou arbitrer un verdict.</p>
         <div className="thread-list">
           {data.threads.filter((item) => item.status !== 'resolved').slice(0, 5).map((item) => (
@@ -959,7 +959,7 @@ function AgentsPage({ data, refresh }) {
     if (filter === 'business') return !agent.human_profile;
     return true;
   });
-  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1>Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button primary" disabled={!manager} title={locked} onClick={() => setEditing(null)}>Créer un agent</button><button className="button secondary" disabled={!manager} title={locked} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setTeam(true)}>Équipe d'impersonators</button><button className="button secondary" onClick={() => setRealProfiles(true)} title="Ajouter des personnalités réelles à un comité ou en construire un">Personnalités réelles (Crystal Knows)</button></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Registre du tenant</p><h1><Mark name="agents" /> Agents</h1><p>Identité, mission, règles, modèles, outils, profil hybride consenti et personas simulées sont inspectables et modifiables.</p></div><div className="header-actions"><button className="button primary" disabled={!manager} title={locked} onClick={() => setEditing(null)}>Créer un agent</button><button className="button secondary" disabled={!manager} title={locked} onClick={() => setHybrid(true)}>Agent hybride</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setImpersonator(true)}>Agent impersonator</button><button className="button primary" disabled={!manager} title={locked} onClick={() => setTeam(true)}>Équipe d'impersonators</button><button className="button secondary" onClick={() => setRealProfiles(true)} title="Ajouter des personnalités réelles à un comité ou en construire un">Personnalités réelles (Crystal Knows)</button></div></header>
     {!manager && <p className="muted so-note" role="note">Création et modification d’agents (agent hybride, agent impersonator, équipe d’impersonators) : {MANAGER_ONLY.toLowerCase()}. Votre rôle : {data.user?.role || 'contributeur'}. Vous pouvez consulter le registre et composer vos sessions avec ces agents.</p>}
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="inline-checks so-filters">{kinds.map(([id, label]) => <button type="button" key={id} className={`text-button ${filter === id ? 'is-active' : ''}`} onClick={() => setFilter(id)}>{label} ({id === 'all' ? data.agents.length : data.agents.filter((a) => (id === 'impersonator' ? !!a.metadata?.impersonator : id === 'hybrid' ? (!!a.human_profile && !a.metadata?.impersonator) : !a.human_profile)).length})</button>)}</div>
@@ -1089,7 +1089,7 @@ function IntegrationsPage({ data }) {
   const allowed = canManage(data.user);
   async function reload() { try { setInfo(await api.integrations()); setError(''); } catch (err) { setError(err.message); } }
   useEffect(() => { if (allowed) reload(); }, [allowed]);
-  const header = <header className="page-header"><div><p className="context-line">n8n · Zapier · Salesforce</p><h1>Intégrations</h1><p>Déclenchez une mission depuis votre CRM et recevez le verdict du collectif dans l’opportunité.</p><BrandRow platforms={['salesforce', 'n8n', 'zapier']} /></div></header>;
+  const header = <header className="page-header"><div><p className="context-line">n8n · Zapier · Salesforce</p><h1><Mark name="integrations" /> Intégrations</h1><p>Déclenchez une mission depuis votre CRM et recevez le verdict du collectif dans l’opportunité.</p><BrandRow platforms={['salesforce', 'n8n', 'zapier']} /></div></header>;
   if (!allowed) return <section className="page">{header}<p className="muted">{MANAGER_ONLY} : demandez à un membre du comité exécutif de créer une clé d’API.</p></section>;
   if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
@@ -1263,7 +1263,7 @@ function SettingsPage({ data, refresh }) {
     <header className="page-header">
       <div>
         <p className="context-line">Personnalisation & suivi</p>
-        <h1>Réglages</h1>
+        <h1><Mark name="settings" /> Réglages</h1>
         <section className="kpi-strip">
           <div className="kpi-card"><strong>{kayrosIndex}</strong><small>Kayroslab Index</small></div>
           <div className="kpi-card"><strong>{total}</strong><small>Missions</small></div>
@@ -1380,7 +1380,7 @@ function Timeline({ session, threads }) {
 }
 function DecisionsPage({ data, selected, onSelect, onChanged }) {
   if (selected) return <section className="page"><button className="text-button back" onClick={() => onSelect(null)}>← Revenir aux dossiers</button><DecisionThread thread={selected} onChanged={onChanged} canArbitrate={canManage(data.user)} /></section>;
-  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1>Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header>
+  return <section className="page"><header className="page-header"><div><p className="context-line">Historique durable</p><h1><Mark name="activity" /> Décisions</h1><p>Chaque dossier conserve les analyses, preuves, objections, réponses et arbitrages.</p></div></header>
     <Timeline session={data.sessions?.[0]} threads={data.threads} />
     <div className="decision-list">{data.threads.map((thread) => <button key={thread.thread_id} onClick={() => onSelect(thread)}><div><small>{thread.thread_id} · {thread.room_id}</small><strong>{thread.question}</strong></div><span>{threadStatusLabel(thread.status)}{thread.status === 'running' && thread.progress?.total ? ` · ${progressLabel(thread.progress)}` : ''}</span></button>)}</div></section>;
 }

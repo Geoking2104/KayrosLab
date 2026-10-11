@@ -934,3 +934,11 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 
 .tab-with-help { display: inline-flex; align-items: center; gap: .25rem; }
 
+
+.flow-step h2, .page-header h1 { display: flex; align-items: center; gap: .4rem; }
+.nav-mark { font-size: 1.1em; opacity: .85; }
+.flow-step { border-left: 3px solid var(--color-accent); padding-left: var(--space-md); }
+.flow-step:nth-child(2) { border-left-color: color-mix(in srgb, var(--color-accent) 80%, #888); }
+.flow-step:nth-child(3) { border-left-color: color-mix(in srgb, var(--color-accent) 60%, #888); }
+.flow-step:nth-child(4) { border-left-color: color-mix(in srgb, var(--color-accent) 40%, #888); }
+
