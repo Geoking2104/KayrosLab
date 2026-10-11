@@ -1016,3 +1016,10 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
   .console-main > *, .flow-step, .dialog, .dialog-backdrop, .tl-item, .agent-table article, .benefit { animation: none; }
 }
 
+
+.agent-powers { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
+.power { font-size: var(--text-xs); padding: .15rem .45rem; border-radius: 99px; background: var(--color-surface-raised); color: var(--color-muted); }
+.power--veto { background: color-mix(in srgb, #ef4444 15%, transparent); color: #b91c1c; }
+.power--create { background: color-mix(in srgb, #8b5cf6 15%, transparent); color: #6d28d9; }
+.power--files { background: color-mix(in srgb, #0ea5e9 15%, transparent); color: #0369a1; }
+
