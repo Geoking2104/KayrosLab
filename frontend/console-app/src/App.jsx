@@ -1117,6 +1117,7 @@ Idempotency-Key: {{$json.Id}}
       <a className="button primary" href="https://api.kayroslab.com/docs" target="_blank" rel="noreferrer">Documentation API</a>
       <a className="button secondary" href="https://api.kayroslab.com/openapi.json" target="_blank" rel="noreferrer">OpenAPI</a>
       <button type="button" className="button secondary" onClick={() => navigator.clipboard.writeText(snippets.api || '')}>Copier l’exemple curl</button>
+      {active === 'api' && <a className="button primary" href="https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml" target="_blank" rel="noreferrer">Déployer l’API</a>}
     </div>
     <section className="privacy-panel integration-panel integration-panel--salesforce"><h2><BrandLogo platform="salesforce" size={26} />PoC Salesforce en 15 minutes</h2>
       <ol className="integration-steps">
