@@ -1094,6 +1094,7 @@ function IntegrationsPage({ data }) {
   if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
   const [active, setActive] = useState('n8n');
+  const [toolHelp, setToolHelp] = useState(null);
   const snippets = {
     n8n: `// n8n — HTTP Request node
 POST {{$env.KAYROS_API}}/v1/public/missions
@@ -1177,7 +1178,7 @@ Idempotency-Key: {{$json.Id}}
       <div className="benefit"><strong>Traçabilité</strong><p>Chaque appel est signé, idempotent et visible dans la timeline de la console.</p></div>
     </section>
     <section className="process-tabs">
-      {[['n8n','n8n'],['zapier','Zapier'],['salesforce','Salesforce'],['api','API']].map(([id,label]) => <button key={id} type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{label}</button>)}
+      {[['n8n','n8n'],['zapier','Zapier'],['salesforce','Salesforce'],['api','API']].map(([id,label]) => <span key={id} className="tab-with-help"><button type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{label}</button><button type="button" className="text-button help-btn" aria-label={`Aide ${label}`} onClick={() => setToolHelp(id)}>?</button></span>)}
     </section>
     <ol className="integration-steps clickable">
       {processes[active].map((step, i) => <li key={i}><span>{i + 1}</span>{step}</li>)}
@@ -1212,6 +1213,13 @@ Idempotency-Key: {{$json.Id}}
     <ApiKeysPanel info={info} sessions={data.sessions} reload={reload} />
     <WebhookPanel key={`${info.webhook.webhook_url}|${info.webhook.has_secret}`} info={info} reload={reload} />
     {error && <p className="inline-error">{error}</p>}
+    {toolHelp && <div className="dialog-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setToolHelp(null)}>
+      <section className="dialog" role="dialog" aria-modal="true">
+        <header><h2>Aide · {toolHelp}</h2><button className="icon-button" onClick={() => setToolHelp(null)}>×</button></header>
+        <div className="dialog-body"><p>{{'n8n': 'n8n orchestre des workflows. Créez une clé API, importez le workflow fourni, et déclenchez une mission sur un événement (CRM, formulaire, cron). Le verdict revient dans votre canal.', 'zapier': 'Zapier connecte vos apps sans code. Utilisez Webhooks by Zapier pour POST /v1/public/missions, mappez vos champs, et récupérez le verdict par polling ou webhook.', 'salesforce': 'Salesforce + n8n : déclenchez sur un changement d’étape Opportunity, envoyez la question à KayrosLab, et créez une Task avec le verdict sur l’opportunité.', 'api': 'API publique v1 : POST /missions (202), GET /missions/:id, clés kl_live_…, idempotence, webhooks signés HMAC-SHA256. 60 req/min, 200 missions/jour.'}[toolHelp]}</p></div>
+        <footer><button className="button primary" onClick={() => setToolHelp(null)}>Fermer</button></footer>
+      </section>
+    </div>}
   </section>;
 }
 
