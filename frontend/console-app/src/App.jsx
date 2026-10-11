@@ -1165,7 +1165,20 @@ function Timeline({ session, threads }) {
       <strong>{ev.action}</strong>
       <small>{ev.actor} · {ev.channel}</small>
       <p>{ev.detail}</p>
-      {open === i && ev.thread && <div className="tl-detail"><pre>{JSON.stringify(ev.thread, null, 2).slice(0, 1200)}</pre></div>}
+      {open === i && <div className="tl-detail" onClick={(e) => e.stopPropagation()}>
+        <dl>
+          <div><dt>Acteur</dt><dd>{ev.actor}</dd></div>
+          <div><dt>Canal</dt><dd>{ev.channel}</dd></div>
+          <div><dt>Action</dt><dd>{ev.action}</dd></div>
+          <div><dt>Horodatage</dt><dd>{ev.t || '—'}</dd></div>
+          <div><dt>Détail</dt><dd>{ev.detail}</dd></div>
+          {ev.thread?.thread_id && <div><dt>Fil</dt><dd>{ev.thread.thread_id}</dd></div>}
+          {ev.thread?.status && <div><dt>Statut</dt><dd>{ev.thread.status}</dd></div>}
+          {ev.thread?.current_run_id && <div><dt>Run</dt><dd>{ev.thread.current_run_id}</dd></div>}
+          {ev.thread?.human_decision && <div><dt>Arbitrage</dt><dd>{ev.thread.human_decision.action} par {ev.thread.human_decision.by || '—'}</dd></div>}
+        </dl>
+        {ev.thread?.question && <p><strong>Question :</strong> {ev.thread.question}</p>}
+      </div>}
     </li>)}</ol>
   </section>;
 }
