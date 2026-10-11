@@ -1014,6 +1014,43 @@ function IntegrationsPage({ data }) {
   if (!info) return <section className="page">{header}<p className={error ? 'inline-error' : 'muted'}>{error || 'Chargement…'}</p></section>;
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
   const [active, setActive] = useState('n8n');
+  const snippets = {
+    n8n: `// n8n — HTTP Request node
+POST {{$env.KAYROS_API}}/v1/public/missions
+Authorization: Bearer {{$env.KAYROS_KEY}}
+Idempotency-Key: {{$json.opportunity_id}}
+Content-Type: application/json
+
+{
+  "collective_id": "{{$json.collective_id}}",
+  "question": "{{$json.question}}",
+  "external_ref": "{{$json.opportunity_id}}"
+}`,
+    zapier: `# Zapier — Webhooks by Zapier (POST)
+URL: https://api.kayroslab.com/v1/public/missions
+Headers:
+  Authorization: Bearer <KAYROS_API_KEY>
+  Idempotency-Key: {{id}}
+  Content-Type: application/json
+
+Body:
+{
+  "collective_id": "{{collective_id}}",
+  "question": "{{question}}",
+  "external_ref": "{{id}}"
+}`,
+    salesforce: `# Salesforce + n8n
+# Déclencheur : Opportunity Stage = Proposal
+POST https://api.kayroslab.com/v1/public/missions
+Authorization: Bearer <KAYROS_API_KEY>
+Idempotency-Key: {{$json.Id}}
+
+{
+  "collective_id": "<collective_id>",
+  "question": "Faut-il avancer l’opportunité {{$json.Name}} ?",
+  "external_ref": "{{$json.Id}}"
+}`,
+  };
   const processes = {
     n8n: [
       'Créez une clé d’API KayrosLab (scopes missions:write).',
@@ -1049,6 +1086,12 @@ function IntegrationsPage({ data }) {
     <ol className="integration-steps clickable">
       {processes[active].map((step, i) => <li key={i}><span>{i + 1}</span>{step}</li>)}
     </ol>
+    <div className="code-block">
+      <header><strong>Code d’intégration</strong>
+        <button type="button" className="button secondary small" onClick={() => { navigator.clipboard.writeText(snippets[active]); }}>Copier le code</button>
+      </header>
+      <pre>{snippets[active]}</pre>
+    </div>
     <section className="privacy-panel integration-panel integration-panel--salesforce"><h2><BrandLogo platform="salesforce" size={26} />PoC Salesforce en 15 minutes</h2>
       <ol className="integration-steps">
         <li>Créez une clé d’API ci-dessous (nom « n8n — Salesforce »).</li>

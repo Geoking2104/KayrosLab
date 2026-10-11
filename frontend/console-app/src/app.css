@@ -910,3 +910,8 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .integration-steps.clickable li { cursor: default; padding: .4rem 0; }
 @media (max-width: 800px) { .benefits-row { grid-template-columns: 1fr; } }
 
+
+.code-block { margin-block: var(--space-md); border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-md); background: #0f172a; color: #e2e8f0; }
+.code-block header { display: flex; justify-content: space-between; align-items: center; padding: .5rem .75rem; border-bottom: 1px solid #334155; }
+.code-block pre { margin: 0; padding: .75rem; overflow: auto; font-size: 0.8rem; white-space: pre-wrap; }
+
