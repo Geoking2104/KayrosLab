@@ -955,3 +955,17 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .sidebar .nav-mark { width: 1.4rem; height: 1.4rem; font-size: 0.85rem; }
 .flow-step h2 .nav-mark, .page-header h1 .nav-mark { width: 1.8rem; height: 1.8rem; font-size: 1rem; }
 
+
+.nav-mark { transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.sidebar nav a:hover .nav-mark,
+.flow-step h2:hover .nav-mark,
+.page-header h1:hover .nav-mark,
+.tab-with-help:hover .nav-mark {
+  transform: scale(1.08);
+  background: color-mix(in srgb, var(--mark-color, var(--color-accent)) 22%, transparent);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--mark-color, var(--color-accent)) 25%, transparent);
+}
+.sidebar nav a:hover { background: var(--color-surface-raised); color: var(--color-ink); }
+.flow-step { transition: border-left-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out); }
+.flow-step:hover { background: color-mix(in srgb, var(--color-accent) 4%, transparent); }
+
