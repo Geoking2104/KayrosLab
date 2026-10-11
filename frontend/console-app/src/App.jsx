@@ -481,6 +481,7 @@ function Overview({ data, refresh, openSession, onThread }) {
   const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const [profile, setProfile] = useState('fast'); const [runNote, setRunNote] = useState('');
   const [docText, setDocText] = useState(''); const [docName, setDocName] = useState('');
+  const [showHelp, setShowHelp] = useState(false);
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
   const [soCases, setSoCases] = useState([]);
@@ -537,7 +538,25 @@ function Overview({ data, refresh, openSession, onThread }) {
       <div>
         <p className="context-line">Espace {data.user.tenantId}</p>
         <h1>Console de décisions</h1>
-        <p className="flow-hint">Parcours : 1. Document → 2. Question → 3. Collectif → 4. Arbitrage</p><DeployProgress />
+        <p className="flow-hint">Parcours : 1. Document → 2. Question → 3. Collectif → 4. Arbitrage
+          <button type="button" className="text-button help-btn" onClick={() => setShowHelp(true)} aria-label="Aide au parcours">?</button>
+        </p>
+        <DeployProgress />
+        {showHelp && <div className="dialog-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setShowHelp(false)}>
+          <section className="dialog" role="dialog" aria-modal="true">
+            <header><h2>Aide au parcours</h2><button className="icon-button" aria-label="Fermer" onClick={() => setShowHelp(false)}>×</button></header>
+            <div className="dialog-body">
+              <ol className="help-steps">
+                <li><strong>1. Document</strong> — Uploadez un brief, un cahier des charges ou un extrait. Les agents l’utiliseront comme contexte.</li>
+                <li><strong>2. Question</strong> — Formulez la décision à instruire. Vous pouvez partir du document.</li>
+                <li><strong>3. Collectif</strong> — Choisissez ou créez le groupe d’agents (CFO, CTO, qualité, planning…).</li>
+                <li><strong>4. Arbitrage</strong> — Consultez le verdict, puis acceptez, conditionnez ou demandez une réévaluation.</li>
+              </ol>
+              <p className="muted">Le parcours est linéaire : le document alimente la question, la question est instruite par le collectif, le verdict attend votre arbitrage.</p>
+            </div>
+            <footer><button className="button primary" onClick={() => setShowHelp(false)}>Compris</button></footer>
+          </section>
+        </div>}
       </div>
       <div className="header-actions">
         <a className="button secondary" href="https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml" target="_blank" rel="noreferrer">Déployer</a>

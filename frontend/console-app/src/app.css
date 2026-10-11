@@ -926,3 +926,8 @@ input:hover:not(:disabled), select:hover:not(:disabled), textarea:hover:not(:dis
 .upload-zone input { display: none; }
 .doc-preview { max-height: 120px; overflow: auto; font-size: 0.8rem; background: #f4f4f4; padding: .5rem; margin-top: .5rem; }
 
+
+.help-btn { margin-left: .5rem; border: 1px solid var(--color-rule); border-radius: 99px; width: 1.4rem; height: 1.4rem; padding: 0; font-weight: 700; }
+.help-steps { padding-left: 1.2rem; display: grid; gap: .5rem; }
+.help-steps li { line-height: 1.4; }
+
