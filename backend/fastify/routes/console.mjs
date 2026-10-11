@@ -393,7 +393,10 @@ export default async function consoleRoute(app) {
   app.get('/v1/console/agents', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
-    return { agents: app.kayrosContext.engine.swarm.registry.list({ tenantId: me.tenantId }).map(agentView) };
+    const agents = app.kayrosContext.engine.swarm.registry.list({ tenantId: me.tenantId })
+      .filter((a) => !a.metadata?.literary && !String(a.agent_id || '').startsWith('auteur_'))
+      .map(agentView);
+    return { agents };
   });
   app.post('/v1/console/agents', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;

@@ -968,6 +968,7 @@ function AgentsPage({ data, refresh }) {
   async function toggle(agent) { await api.updateAgent(agent.agent_id, { enabled: agent.enabled === false }); await refresh(); }
   const kinds = [['all', 'Tous'], ['business', 'Métier'], ['hybrid', 'Hybride'], ['impersonator', 'Impersonator']];
   const filtered = data.agents.filter((agent) => {
+    if (agent.metadata?.literary || String(agent.agent_id || '').startsWith('auteur_')) return false;
     if (filter === 'impersonator') return !!agent.metadata?.impersonator;
     if (filter === 'hybrid') return !!agent.human_profile && !agent.metadata?.impersonator;
     if (filter === 'business') return !agent.human_profile;
