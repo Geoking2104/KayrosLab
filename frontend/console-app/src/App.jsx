@@ -945,6 +945,7 @@ function AgentsPage({ data, refresh }) {
   const manager = canManage(data.user);
   const locked = manager ? undefined : MANAGER_ONLY;
   const [editing, setEditing] = useState(undefined);
+  const [helpAgent, setHelpAgent] = useState(null);
   const [hybrid, setHybrid] = useState(false);
   const [impersonator, setImpersonator] = useState(false);
   const [team, setTeam] = useState(false);
@@ -962,7 +963,21 @@ function AgentsPage({ data, refresh }) {
     {!manager && <p className="muted so-note" role="note">Création et modification d’agents (agent hybride, agent impersonator, équipe d’impersonators) : {MANAGER_ONLY.toLowerCase()}. Votre rôle : {data.user?.role || 'contributeur'}. Vous pouvez consulter le registre et composer vos sessions avec ces agents.</p>}
     {!data.agents.length && <p className="muted">Aucun agent — commencez par « Ajouter un agent hybride » pour rejouer le point de vue d'une partie prenante.</p>}
     <div className="inline-checks so-filters">{kinds.map(([id, label]) => <button type="button" key={id} className={`text-button ${filter === id ? 'is-active' : ''}`} onClick={() => setFilter(id)}>{label} ({id === 'all' ? data.agents.length : data.agents.filter((a) => (id === 'impersonator' ? !!a.metadata?.impersonator : id === 'hybrid' ? (!!a.human_profile && !a.metadata?.impersonator) : !a.human_profile)).length})</button>)}</div>
-    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} disabled={!manager} title={locked} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button className="text-button" onClick={() => setEditing(agent)}>{manager ? 'Configurer' : 'Consulter'}</button></footer></article>)}</div>
+    <div className="agent-table">{filtered.map((agent) => <article key={agent.agent_id} className={agent.enabled === false ? 'is-disabled' : ''}><header><div><small>{agent.agent_id} · {agent.department}</small><h2><Portrait agent={agent} name={agent.display_name || agent.role_name} size={34} />{agent.display_name || agent.role_name}</h2></div><button className="switch" aria-pressed={agent.enabled !== false} disabled={!manager} title={locked} onClick={() => toggle(agent)}><span />{agent.enabled === false ? 'Inactif' : 'Actif'}</button></header><p>{agent.mission || agent.primary_focus}</p><dl><div><dt>Rôle</dt><dd>{agent.role_name}</dd></div><div><dt>Modèle</dt><dd>{agent.provider || 'défaut'}{agent.model ? ` / ${agent.model}` : ''}</dd></div><div><dt>Règles</dt><dd>{agent.effective_rules.length}</dd></div><div><dt>Profil</dt><dd>{agent.human_profile ? 'hybride consenti' : 'agent métier'}</dd></div><div><dt>Type</dt><dd>{agent.metadata?.impersonator ? 'impersonator' : agent.human_profile ? 'hybride' : 'métier'}</dd></div></dl><footer><span>{(agent.tools || []).join(' · ') || 'Aucun outil dédié'}</span><button type="button" className="text-button help-btn" aria-label="Aide" onClick={() => setHelpAgent(agent)}>?</button><button className="text-button" onClick={() => setEditing(agent)}>{manager ? 'Configurer' : 'Consulter'}</button></footer></article>)}</div>
+    {helpAgent && <div className="dialog-backdrop" onMouseDown={(e) => e.target === e.currentTarget && setHelpAgent(null)}>
+      <section className="dialog" role="dialog" aria-modal="true">
+        <header><h2>Aide · {helpAgent.display_name || helpAgent.role_name}</h2><button className="icon-button" onClick={() => setHelpAgent(null)}>×</button></header>
+        <div className="dialog-body">
+          <p><strong>Rôle :</strong> {helpAgent.role_name}</p>
+          <p><strong>Département :</strong> {helpAgent.department}</p>
+          <p><strong>Mission :</strong> {helpAgent.mission || helpAgent.primary_focus}</p>
+          <p><strong>Séniorité :</strong> {helpAgent.seniority || '—'}</p>
+          {!!helpAgent.effective_rules?.length && <div><strong>Règles :</strong><ul>{helpAgent.effective_rules.map((r) => <li key={r.rule_id || r.rule_text}>{r.rule_text}</li>)}</ul></div>}
+          <p className="muted">Permissions : {helpAgent.can_create_agents ? 'peut créer des agents' : 'création d’agents désactivée'} · {helpAgent.can_create_files ? 'peut créer des fichiers' : 'création de fichiers désactivée'}</p>
+        </div>
+        <footer><button className="button primary" onClick={() => setHelpAgent(null)}>Fermer</button></footer>
+      </section>
+    </div>}
     {editing !== undefined && <AgentEditor agent={editing} canEdit={manager} capabilities={data.capabilities} onClose={() => setEditing(undefined)} onSaved={async () => { await refresh(); setEditing(undefined); }} />}
     {hybrid && <HybridAgentDialog onClose={() => setHybrid(false)} onCreated={async () => { await refresh(); }} />}
     {impersonator && <ImpersonatorDialog onClose={() => setImpersonator(false)} onCreated={async () => { await refresh(); }} />}
