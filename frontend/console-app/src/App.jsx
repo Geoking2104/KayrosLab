@@ -134,8 +134,21 @@ function ssoRedirectUri() {
 }
 
 function Mark({ name }) {
-  const labels = { overview: '▦', sessions: '▤', agents: '◉', activity: '✓', integrations: '⇄', settings: '⚙', document: '📄', question: '?', collective: '👥', arbitrate: '⚖', deploy: '🚀' };
-  return <span className={`nav-mark nav-mark--${name}`} aria-hidden="true">{labels[name]}</span>;
+  const icons = {
+    overview: { g: '▦', c: 'var(--color-accent)' },
+    sessions: { g: '▤', c: '#6366f1' },
+    agents: { g: '◉', c: '#8b5cf6' },
+    activity: { g: '✓', c: '#10b981' },
+    integrations: { g: '⇄', c: '#f59e0b' },
+    settings: { g: '⚙', c: '#64748b' },
+    document: { g: '📄', c: '#0ea5e9' },
+    question: { g: '?', c: '#ec4899' },
+    collective: { g: '👥', c: '#14b8a6' },
+    arbitrate: { g: '⚖', c: '#f97316' },
+    deploy: { g: '🚀', c: '#22c55e' },
+  };
+  const ic = icons[name] || { g: '•', c: 'var(--color-muted)' };
+  return <span className={`nav-mark nav-mark--${name}`} style={{ '--mark-color': ic.c }} aria-hidden="true">{ic.g}</span>;
 }
 
 function Login({ onLogin }) {
