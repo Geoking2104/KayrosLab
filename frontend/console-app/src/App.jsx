@@ -7,6 +7,7 @@ import { ProfileTraits, RealProfileImporter, RealProfilesDialog } from './real-p
 import { SessionOwnAgents } from './registry-promotion.jsx';
 import { DescriptifFieldset, cleanDescriptif } from './personality-descriptif.jsx';
 
+// cache-bust 2026-10-11T16:50Z
 // La console est un espace de décision d'agents : registre d'agents (métier ou hybride),
 // collectifs, sessions gouvernées, missions, dossiers et arbitrage humain.
 // L'expérience littéraire vit dans une application séparée, hors de cette surface.
