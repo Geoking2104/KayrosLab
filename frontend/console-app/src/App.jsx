@@ -1095,6 +1095,8 @@ function IntegrationsPage({ data }) {
   const profileLine = info.profiles.fast_available ? `rapide (${info.profiles.fast_model})` : 'rapide indisponible (clé NVIDIA absente) : repli sur le modèle serveur';
   const [active, setActive] = useState('n8n');
   const [toolHelp, setToolHelp] = useState(null);
+  const [testResult, setTestResult] = useState('');
+  const [testing, setTesting] = useState(false);
   const snippets = {
     n8n: `// n8n — HTTP Request node
 POST {{$env.KAYROS_API}}/v1/public/missions
@@ -1178,8 +1180,9 @@ Idempotency-Key: {{$json.Id}}
       <div className="benefit"><strong>Traçabilité</strong><p>Chaque appel est signé, idempotent et visible dans la timeline de la console.</p></div>
     </section>
     <section className="process-tabs">
-      {[['n8n','n8n'],['zapier','Zapier'],['salesforce','Salesforce'],['api','API']].map(([id,label]) => <span key={id} className="tab-with-help"><button type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{label}</button><button type="button" className="text-button help-btn" aria-label={`Aide ${label}`} onClick={() => setToolHelp(id)}>?</button></span>)}
+      {[['n8n','n8n'],['zapier','Zapier'],['salesforce','Salesforce'],['api','API']].map(([id,label]) => <span key={id} className="tab-with-help"><button type="button" className={`text-button ${active === id ? 'is-active' : ''}`} onClick={() => setActive(id)}>{label}</button><button type="button" className="text-button help-btn" aria-label={`Aide ${label}`} onClick={() => setToolHelp(id)}>?</button><button type="button" className="text-button" disabled={testing} onClick={async () => { setTesting(true); setTestResult(''); try { const r = await fetch('https://api.kayroslab.com/health'); const j = await r.json(); setTestResult(j.ok ? `${label} : API OK` : `${label} : API indisponible`); } catch (e) { setTestResult(`${label} : ${e.message}`); } setTesting(false); }}>Tester</button></span>)}
     </section>
+    {testResult && <p className="muted so-note">{testResult}</p>}
     <ol className="integration-steps clickable">
       {processes[active].map((step, i) => <li key={i}><span>{i + 1}</span>{step}</li>)}
     </ol>
