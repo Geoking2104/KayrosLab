@@ -480,6 +480,7 @@ function Overview({ data, refresh, openSession, onThread }) {
   }, [data.sessions]);
   const [question, setQuestion] = useState(''); const [state, setState] = useState('idle'); const [error, setError] = useState('');
   const [profile, setProfile] = useState('fast'); const [runNote, setRunNote] = useState('');
+  const [docText, setDocText] = useState(''); const [docName, setDocName] = useState('');
   const soClientRef = useRef(null);
   const [soReady, setSoReady] = useState(false);
   const [soCases, setSoCases] = useState([]);
@@ -520,6 +521,10 @@ function Overview({ data, refresh, openSession, onThread }) {
           lines.length ? `Corpus joint (${lines.length} document(s)) :\n${lines.join('\n')}` : 'Corpus : aucun document chargé pour ce dossier.',
         ].join('\n').slice(0, SALES_ORACLE_CONTEXT_LIMIT);
       }
+      if (docText) {
+        const docCtx = `Document source « ${docName || 'fichier'} » :\n${docText.slice(0, 8000)}`;
+        context = context ? `${context}\n\n${docCtx}` : docCtx;
+      }
       // 202 : le fil est créé au statut `running` ; DecisionThread suit la progression.
       const result = await api.runMission(session.session_id, question, context, profile);
       const eta = result.eta_seconds ? ` · durée estimée ${result.eta_seconds < 60 ? `${result.eta_seconds} s` : `${Math.round(result.eta_seconds / 60)} min`}` : '';
@@ -532,7 +537,7 @@ function Overview({ data, refresh, openSession, onThread }) {
       <div>
         <p className="context-line">Espace {data.user.tenantId}</p>
         <h1>Console de décisions</h1>
-        <p className="flow-hint">Parcours guidé : 1. Collectif → 2. Question → 3. Arbitrage</p><DeployProgress />
+        <p className="flow-hint">Parcours : 1. Document → 2. Question → 3. Collectif → 4. Arbitrage</p><DeployProgress />
       </div>
       <div className="header-actions">
         <a className="button secondary" href="https://github.com/Geoking2104/KayrosLab/actions/workflows/deploy-vps-backend.yml" target="_blank" rel="noreferrer">Déployer</a>
@@ -562,7 +567,7 @@ function Overview({ data, refresh, openSession, onThread }) {
 
     <div className="flow-grid">
       <section className="flow-step">
-        <h2>1. Collectif</h2>
+        <h2>3. Collectif</h2>
         <p className="muted">Choisissez ou créez le groupe d’agents qui instruira la mission.</p>
         <label>Collectif actif
           <select value={selectedSession || ''} onChange={(e) => setSelectedSession(e.target.value)}>
@@ -576,25 +581,41 @@ function Overview({ data, refresh, openSession, onThread }) {
       </section>
 
       <section className="flow-step">
+        <h2>1. Document source</h2>
+        <p className="muted">Uploadez un brief, un cahier des charges ou un extrait. La question et le collectif s’appuieront dessus.</p>
+        <label className="upload-zone">
+          <input type="file" accept=".txt,.md,.csv,.json,.pdf" onChange={(e) => {
+            const f = e.target.files?.[0]; if (!f) return;
+            setDocName(f.name);
+            const reader = new FileReader();
+            reader.onload = () => setDocText(String(reader.result || '').slice(0, 12000));
+            reader.readAsText(f);
+          }} />
+          <span>{docName ? `Fichier : ${docName}` : 'Déposer un fichier ou cliquer pour choisir'}</span>
+        </label>
+        {docText && <details><summary>Aperçu ({docText.length} caractères)</summary><pre className="doc-preview">{docText.slice(0, 600)}</pre></details>}
+      </section>
+      <section className="flow-step">
         <h2>2. Question</h2>
-        <p className="muted">Formulez la décision à instruire. Les agents répondent en parallèle.</p>
+        <p className="muted">Formulez la décision. Si un document est chargé, les agents l’utiliseront comme contexte.</p>
         <form onSubmit={run}>
           <label>Question<textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Ex. Faut-il lancer ce projet maintenant ?" /></label>
           <div className="question-examples">
             <button type="button" className="text-button" onClick={() => setQuestion('Faut-il lancer ce projet maintenant, et à quelles conditions ?')}>Lancement</button>
             <button type="button" className="text-button" onClick={() => setQuestion('Devons-nous accepter la remise de 15 % ?')}>Remise</button>
+            {docText && <button type="button" className="text-button" onClick={() => setQuestion(`À partir du document « ${docName} », quelle décision recommandez-vous ?`)}>Depuis le document</button>}
           </div>
           <div className="profile-picker">
             {MISSION_PROFILES.map(([id, label, hint]) => <button key={id} type="button" className={`profile-card ${profile === id ? 'is-selected' : ''}`} onClick={() => setProfile(id)}><strong>{label}</strong><small>{hint}</small></button>)}
           </div>
-          <button className="button primary" disabled={state === 'loading' || !session}>{state === 'loading' ? 'Lancement…' : 'Lancer la mission'}</button>
+          <button className="button primary" disabled={state === 'loading' || !session || !question.trim()}>{state === 'loading' ? 'Lancement…' : 'Lancer la mission'}</button>
         </form>
         {runNote && <p className="muted so-note">{runNote}</p>}
         {error && <p className="inline-error">{error}</p>}
       </section>
 
       <section className="flow-step">
-        <h2>3. Suivi & arbitrage</h2>
+        <h2>4. Suivi & arbitrage</h2>
         <p className="muted">Reprendre une mission ou arbitrer un verdict.</p>
         <div className="thread-list">
           {data.threads.filter((item) => item.status !== 'resolved').slice(0, 5).map((item) => (
