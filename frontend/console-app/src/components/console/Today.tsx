@@ -1,14 +1,61 @@
 import { ArrowRight } from "lucide-react";
 import { useConsole } from "@/lib/console/store";
-import { CYCLE, formatWhen, SESSION_QUOTA, STATUS_LABEL, useCaseLabel } from "@/lib/console/model";
+import { CYCLE, formatWhen, SESSION_QUOTA, STATUS_LABEL, useCaseLabel, type CycleId } from "@/lib/console/model";
 import { Button, Panel, ProgressBar, StatusPill, VerdictPill } from "./ui";
 import { go } from "./Shell";
+
+const ACTIONS = [
+  {
+    id: "teams",
+    title: "Teams",
+    body: "Teams n’est pas connecté. Les identifiants d’application manquent côté serveur — ce n’est pas un échec de clic.",
+    label: "Connecter",
+    page: "connexions" as const,
+    color: "#5b5fc7",
+    soft: "#eef0fb",
+  },
+  {
+    id: "crystal",
+    title: "Crystal Knows",
+    body: "Crystal Knows n’est pas configuré. L’import d’un export autorisé ou d’un DISC reste possible, sans scraping.",
+    label: "Configurer",
+    page: "agents" as const,
+    color: "#5b4cdb",
+    soft: "#eeecfb",
+  },
+  {
+    id: "provider",
+    title: "Provider",
+    body: "Provider annoncé : Mistral. Le swarm utilise le même provider. Un profil démo est étiqueté comme tel, jamais comme un verdict silencieux.",
+    label: "Voir l’annonce",
+    page: "espace" as const,
+    color: "#0176d3",
+    soft: "#eaf5fe",
+  },
+];
+
+const STEP_TONE = [
+  { color: "#0f766e", soft: "#e6f4f2" },
+  { color: "#0176d3", soft: "#eaf5fe" },
+  { color: "#5b4cdb", soft: "#eeecfb" },
+  { color: "#b45309", soft: "#fdf3e4" },
+  { color: "#8a6d1a", soft: "#f8f1dc" },
+  { color: "#157347", soft: "#e7f4ec" },
+  { color: "#00a1e0", soft: "#e7f6fd" },
+  { color: "#0a0c10", soft: "#eef1f4" },
+];
 
 export function Today() {
   const { state, dismissGuide } = useConsole();
   const queue = [...state.threads].sort((a, b) => rank(a.status) - rank(b.status) || b.updatedAt.localeCompare(a.updatedAt));
   const mine = state.collectives.length;
   const running = state.threads.filter((thread) => thread.status === "running");
+
+  function openStage(stage: CycleId) {
+    const match = [...state.threads].filter((thread) => thread.stage === stage).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0];
+    if (match) go("dossiers", match.id);
+    else go("dossiers");
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -82,34 +129,45 @@ export function Today() {
         <Panel>
           <h2 className="text-sm font-medium">Prochaine action utile</h2>
           <ul className="mt-3 flex flex-col gap-3 text-sm">
-            <li className="flex items-start justify-between gap-3">
-              <span>Teams n’est pas connecté. Les identifiants d’application manquent côté serveur — ce n’est pas un échec de clic.</span>
-              <a href="#connexions" className="shrink-0 font-medium text-accent-strong">
-                Voir
-              </a>
-            </li>
-            <li className="flex items-start justify-between gap-3">
-              <span>Crystal Knows n’est pas configuré. L’import d’un export autorisé ou d’un DISC reste possible, sans scraping.</span>
-              <a href="#agents" className="shrink-0 font-medium text-accent-strong">
-                Agents
-              </a>
-            </li>
-            <li>
-              Provider annonce : <strong className="font-medium">Mistral</strong>. Le swarm utilise le même provider. Un profil démo est étiqueté comme tel, jamais comme un verdict silencieux.
-            </li>
+            {ACTIONS.map((action) => (
+              <li key={action.id} className="rounded-xl border border-line border-l-4 px-3 py-3" style={{ borderLeftColor: action.color, background: action.soft }}>
+                <p className="text-xs font-bold uppercase tracking-[0.08em]" style={{ color: action.color }}>{action.title}</p>
+                <p className="mt-1 text-ink-soft">{action.body}</p>
+                <button
+                  type="button"
+                  onClick={() => go(action.page)}
+                  className="mt-3 inline-flex min-h-11 items-center rounded-[10px] px-4 text-sm font-semibold text-white"
+                  style={{ background: action.color }}
+                >
+                  {action.label}
+                </button>
+              </li>
+            ))}
           </ul>
         </Panel>
         <Panel>
           <h2 className="text-sm font-medium">Où vit le cycle</h2>
-          <p className="mt-2 text-sm text-muted">Huit temps, un seul dossier. Le menu ne les duplique pas.</p>
+          <p className="mt-2 text-sm text-muted">Huit temps, un seul dossier. Cliquez une étape pour ouvrir le dossier qui y est.</p>
           <ol className="mt-4 grid grid-cols-2 gap-2 text-sm">
-            {CYCLE.map((step, index) => (
-              <li key={step.id} className="rounded-lg bg-paper px-3 py-2">
-                <span className="text-xs text-muted">{String(index).padStart(2, "0")}</span>
-                <p className="font-medium">{step.label}</p>
-                <p className="text-xs text-muted">{step.hint}</p>
-              </li>
-            ))}
+            {CYCLE.map((step, index) => {
+              const tone = STEP_TONE[index] ?? STEP_TONE[0];
+              const match = state.threads.find((thread) => thread.stage === step.id);
+              return (
+                <li key={step.id}>
+                  <button
+                    type="button"
+                    onClick={() => openStage(step.id)}
+                    className="h-full w-full rounded-xl border border-transparent px-3 py-2 text-left hover:border-line"
+                    style={{ background: tone.soft }}
+                  >
+                    <span className="text-xs font-bold" style={{ color: tone.color }}>{String(index).padStart(2, "0")}</span>
+                    <p className="font-semibold text-ink">{step.label}</p>
+                    <p className="text-xs text-muted">{step.hint}</p>
+                    <p className="mt-1 text-[11px] font-semibold" style={{ color: tone.color }}>{match ? "Ouvrir le dossier" : "Voir les dossiers"}</p>
+                  </button>
+                </li>
+              );
+            })}
           </ol>
         </Panel>
       </div>
