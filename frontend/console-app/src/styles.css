@@ -1,28 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --color-paper: #f3f5f4;
-  --color-paper-2: #e6ebe8;
-  --color-surface: #fbfcfc;
-  --color-ink: #161a18;
-  --color-ink-soft: #3c4540;
-  --color-muted: #5c6762;
-  --color-line: #d8e0dc;
-  --color-line-strong: #c2ccc7;
-  --color-accent: #0f766e;
-  --color-accent-strong: #0c5c56;
-  --color-accent-soft: #e5f3f1;
-  --color-accent-ink: #f4fffd;
-  --color-go: #146c43;
-  --color-go-soft: #e5f4ec;
-  --color-hold: #8a5a10;
-  --color-hold-soft: #f8f1e3;
-  --color-stop: #9f2c22;
-  --color-stop-soft: #f8e8e6;
-  --color-info: #1e4d78;
-  --color-info-soft: #e7f0f7;
+  --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --color-paper: #f5f7f9;
+  --color-paper-2: #eef1f4;
+  --color-surface: #ffffff;
+  --color-ink: #0a0c10;
+  --color-ink-soft: #3a3f48;
+  --color-muted: #6a707a;
+  --color-line: #e4e6ea;
+  --color-line-strong: #cfd3d4;
+  --color-accent: #0176d3;
+  --color-accent-strong: #0b5cab;
+  --color-accent-soft: #eaf5fe;
+  --color-accent-ink: #ffffff;
+  --color-go: #157347;
+  --color-go-soft: #e7f4ec;
+  --color-hold: #8a6d1a;
+  --color-hold-soft: #f8f1dc;
+  --color-stop: #b42318;
+  --color-stop-soft: #fbe9e7;
+  --color-info: #0176d3;
+  --color-info-soft: #eaf5fe;
+  --color-teal: #0f766e;
+  --color-teal-soft: #e6f4f2;
+  --color-violet: #5b4cdb;
+  --color-violet-soft: #eeecfb;
+  --shadow-card: 0 12px 32px -18px rgba(14, 15, 17, 0.18), 0 1px 2px rgba(16, 20, 24, 0.05);
+  --shadow-cta: 0 10px 24px -12px rgba(1, 118, 211, 0.7);
 }
 
 @layer base {
@@ -32,9 +38,17 @@
   body {
     margin: 0;
     background: var(--color-paper);
-    color: var(--color-ink);
+    color: var(--color-ink-soft);
     font-family: var(--font-sans);
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    color: var(--color-ink);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {

@@ -44,7 +44,7 @@ export function Demo() {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">Démo publique</h1>
+        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Démo publique</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Huit étapes. La première passe. Le provider affiché est la démo préenregistrée.
         </p>

@@ -38,7 +38,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">Dossiers</h1>
+        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Dossiers</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce.
         </p>
@@ -71,7 +71,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
             role="tab"
             aria-selected={filter === item.id}
             onClick={() => setFilter(item.id)}
-            className={cn("min-h-10 rounded-full px-3 text-sm", filter === item.id ? "bg-ink text-surface" : "bg-surface text-ink-soft")}
+            className={cn("min-h-10 rounded-full px-3 text-sm font-semibold", filter === item.id ? "bg-accent text-white shadow-cta" : "border border-line bg-surface text-ink-soft")}
           >
             {item.label}
           </button>
@@ -84,7 +84,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
           {list.map((thread) => {
             const collective = state.collectives.find((item) => item.id === thread.collectiveId);
             return (
-              <li key={thread.id} className="rounded-3xl border border-line bg-surface p-4">
+              <li key={thread.id} className="rounded-3xl border border-line bg-surface p-4 shadow-card">
                 <button type="button" onClick={() => go("dossiers", thread.id)} className="w-full text-left">
                   <div className="flex flex-wrap items-center gap-2">
                     <StatusPill status={thread.status} />
@@ -129,6 +129,8 @@ function Dossier({ threadId }: { threadId: string }) {
     return <Empty title="Dossier introuvable" body="Il n’appartient pas à votre compte, ou l’identifiant est périmé." action={<Button onClick={() => go("dossiers")}>Retour aux dossiers</Button>} />;
   }
 
+  const support = supportOf(thread.contributions);
+
   function act(action: "accept" | "conditions" | "reevaluate" | "override") {
     const result = arbitrate(thread!.id, action, note);
     setError(result.ok ? "" : result.reason ?? "Action refusée");
@@ -136,22 +138,80 @@ function Dossier({ threadId }: { threadId: string }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <button type="button" onClick={() => go("dossiers")} className="w-fit text-sm text-muted">
+      <button type="button" onClick={() => go("dossiers")} className="w-fit text-sm font-bold text-accent">
         ← Tous les dossiers
       </button>
-      <CycleRail stage={thread.stage} />
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          <StatusPill status={thread.status} />
-          <VerdictPill verdict={thread.verdict} />
-          <span className="text-xs text-muted">{useCaseLabel(thread.useCase)} · {thread.provider}</span>
+      <section className="overflow-hidden rounded-3xl border border-[#d8e6f3] bg-surface shadow-card">
+        <div className="flex items-center gap-3 bg-gradient-to-r from-accent to-accent-strong px-5 py-4 text-white">
+          <img src={`${import.meta.env.BASE_URL}logo-kayroslab.png`} alt="" width={36} height={36} className="size-9 rounded-[9px]" />
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">Dossier</p>
+            <h1 className="text-base font-bold leading-snug text-white">{thread.question}</h1>
+          </div>
         </div>
-        <h1 className="mt-3 text-2xl font-medium leading-snug tracking-tight">{thread.question}</h1>
-        <p className="mt-2 text-sm text-muted">
-          {collective.name} · {votingLabel(collective.voting)}
-          {collective.personality ? " · simulation de personnalité active" : ""} · {formatWhen(thread.updatedAt)}
-        </p>
-      </div>
+        <div className="border-b border-[#e1ecf6] bg-[#f3f8fd] px-3 py-3">
+          <CycleRail stage={thread.stage} />
+        </div>
+        <div className="grid gap-3 p-4 md:p-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <StatusPill status={thread.status} />
+            <VerdictPill verdict={thread.verdict} />
+            <span className="text-xs text-muted">{useCaseLabel(thread.useCase)} · {thread.provider}</span>
+          </div>
+          <p className="text-sm text-ink-soft">
+            {collective.name} · {votingLabel(collective.voting)}
+            {collective.personality ? " · simulation de personnalité active" : ""} · {formatWhen(thread.updatedAt)}
+          </p>
+          {thread.verdict ? (
+            <div className={cn("grid gap-2 rounded-xl border border-line border-l-4 bg-white px-4 py-3", thread.verdict === "GO" ? "border-l-go" : thread.verdict === "NO_GO" ? "border-l-stop" : "border-l-hold")}>
+              <p className="flex items-center gap-2 text-sm font-bold text-ink">
+                <span className={cn("size-2.5 shrink-0 rounded-full", thread.verdict === "GO" ? "bg-go" : thread.verdict === "NO_GO" ? "bg-stop" : "bg-hold")} aria-hidden="true" />
+                KayrosLab — Verdict : {VERDICT_LABEL[thread.verdict]}
+              </p>
+              {support != null ? (
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2.5 text-[13px] text-muted">
+                  <span>Score d’appui</span>
+                  <span className="h-2 overflow-hidden rounded-full bg-paper-2" aria-hidden="true">
+                    <span className="block h-full rounded-full bg-gradient-to-r from-[#00a1e0] to-teal" style={{ width: `${support}%` }} />
+                  </span>
+                  <b className="font-bold text-ink">{support}/100</b>
+                </div>
+              ) : null}
+              {thread.contributions.length ? (
+                <ul className="flex flex-wrap gap-1.5">
+                  {thread.contributions.map((item) => {
+                    const agent = state.agents.find((entry) => entry.id === item.agentId);
+                    return (
+                      <li key={item.agentId} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper py-0.5 pr-2.5 pl-1 text-xs font-semibold text-ink">
+                        <VerdictPill verdict={item.verdict} />
+                        {agent?.role ?? agent?.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
+              {thread.conditions.map((condition) => (
+                <p key={condition} className="text-sm text-ink-soft"><span className="font-bold text-ink">Condition :</span> {condition}</p>
+              ))}
+              {thread.verdict === "CONDITIONAL_GO" ? (
+                <p className="text-sm text-ink-soft">Les conditions sont soumises à l’arbitrage. Le dossier n’est pas renvoyé en clarification.</p>
+              ) : null}
+            </div>
+          ) : null}
+          {thread.arbitration ? (
+            <div className="grid gap-1 rounded-xl border border-line border-l-4 border-l-go bg-[#fbfdfc] px-4 py-3">
+              <p className="flex items-center gap-2 text-sm font-bold text-ink">
+                <span className="size-2.5 shrink-0 rounded-full bg-go" aria-hidden="true" />
+                KayrosLab — Décision : {thread.verdict ? VERDICT_LABEL[thread.verdict] : "Arbitrée"}
+              </p>
+              <p className="text-sm text-ink-soft">
+                {labelAction(thread.arbitration.action)} · {thread.arbitration.by} · {formatWhen(thread.arbitration.at)}
+                {thread.arbitration.note ? ` · ${thread.arbitration.note}` : ""}
+              </p>
+            </div>
+          ) : null}
+        </div>
+      </section>
       <Briefing
         agents={state.agents.filter((agent) => agent.enabled)}
         checkedIds={thread.agentIds}
@@ -188,7 +248,7 @@ function Dossier({ threadId }: { threadId: string }) {
                   </div>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface">
                     <div
-                      className="h-full rounded-full bg-[#0b5cab]"
+                      className="h-full rounded-full bg-gradient-to-r from-[#00a1e0] to-teal"
                       style={{ width: done ? "100%" : current ? "45%" : "0%" }}
                     />
                   </div>
@@ -217,33 +277,13 @@ function Dossier({ threadId }: { threadId: string }) {
         </Panel>
       ) : null}
 
-      {thread.verdict ? (
-        <Panel>
-          <p className="text-xs uppercase tracking-wide text-muted">Lecture</p>
-          <p className="mt-1 text-xl font-medium">{VERDICT_LABEL[thread.verdict]}</p>
-          {thread.verdict === "CONDITIONAL_GO" ? (
-            <p className="mt-2 text-sm text-ink-soft">
-              Les conditions sont soumises à l’arbitrage. Le dossier n’est pas renvoyé en clarification.
-            </p>
-          ) : null}
-          {thread.conditions.length ? (
-            <ul className="mt-4 flex flex-col gap-2">
-              {thread.conditions.map((condition) => (
-                <li key={condition} className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold">
-                  {condition}
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </Panel>
-      ) : null}
-
       {thread.contributions.length ? (
         <div className="grid gap-3">
           {thread.contributions.map((item) => {
             const agent = state.agents.find((entry) => entry.id === item.agentId);
+            const edge = item.verdict === "GO" ? "border-l-go" : item.verdict === "NO_GO" ? "border-l-stop" : "border-l-hold";
             return (
-              <Panel key={item.agentId}>
+              <Panel key={item.agentId} className={cn("border-l-4", edge)}>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="text-sm font-medium">
                     {agent?.name} · {agent?.role}
@@ -292,16 +332,6 @@ function Dossier({ threadId }: { threadId: string }) {
               <p className="mt-3 text-muted">Basculez sur COMEX dans le bandeau du compte pour voir le geste d’arbitrage sur ce même dossier.</p>
             </div>
           )}
-        </Panel>
-      ) : null}
-
-      {thread.arbitration ? (
-        <Panel>
-          <h2 className="text-sm font-medium">Décision humaine</h2>
-          <p className="mt-2 text-sm">
-            {labelAction(thread.arbitration.action)} · {thread.arbitration.by} · {formatWhen(thread.arbitration.at)}
-          </p>
-          {thread.arbitration.note ? <p className="mt-2 text-sm text-ink-soft">{thread.arbitration.note}</p> : null}
         </Panel>
       ) : null}
 
@@ -365,11 +395,11 @@ function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
 }
 
 const TRACE_TONE = {
-  Document: { color: "#0f766e", soft: "#e5f3f1" },
-  Agent: { color: "#146c43", soft: "#e5f4ec" },
-  Canal: { color: "#8a5a10", soft: "#f8f1e3" },
-  Modèle: { color: "#0b5cab", soft: "#e7f2fb" },
-  Humain: { color: "#4a154b", soft: "#f6eef6" },
+  Document: { color: "#0f766e", soft: "#e6f4f2" },
+  Agent: { color: "#157347", soft: "#e7f4ec" },
+  Canal: { color: "#b45309", soft: "#fdf3e4" },
+  Modèle: { color: "#0176d3", soft: "#eaf5fe" },
+  Humain: { color: "#5b4cdb", soft: "#eeecfb" },
 } as const;
 
 function traceOf(thread: Thread, agents: Agent[]) {
@@ -588,7 +618,7 @@ function Briefing({
                 <TextArea value={raw} onChange={(event) => setRaw(event.target.value)} placeholder="Écrivez ici pour démarrer sans document" aria-label="Texte brut" />
               </Field>
               {raw.trim().length >= 40 ? (
-                <button type="button" className="mt-3 inline-flex min-h-11 items-center rounded-full bg-[#1e4d78] px-4 text-sm font-medium text-white" onClick={() => applyReading("saisie.txt", raw.trim())}>
+                <button type="button" className="mt-3 inline-flex min-h-11 items-center rounded-lg bg-accent px-4 text-sm font-semibold text-white" onClick={() => applyReading("saisie.txt", raw.trim())}>
                   Découper ce texte en questions
                 </button>
               ) : null}
@@ -609,7 +639,7 @@ function Briefing({
           <p className="mt-1 text-sm text-muted">Seulement après une analyse. Sans document, le texte brut ne se télécharge pas : il sert de départ.</p>
           <button
             type="button"
-            className="mt-3 inline-flex min-h-11 items-center rounded-full border-2 border-[#161a18] bg-white px-4 text-sm font-medium disabled:opacity-45"
+            className="mt-3 inline-flex min-h-11 items-center rounded-lg border border-line-strong bg-white px-4 text-sm font-semibold text-ink disabled:opacity-45"
             disabled={!analyzed}
             onClick={download}
           >
@@ -644,7 +674,7 @@ function Briefing({
                 {proposals.map((item) => {
                   const on = checkedIds.includes(item.agent.id);
                   return (
-                    <li key={item.agent.id} className="rounded-2xl px-3 py-2" style={{ background: "#e5f4ec" }}>
+                    <li key={item.agent.id} className={cn("rounded-xl border px-3 py-2", on ? "border-accent bg-accent-soft" : "border-line bg-white")}>
                       <div className="flex items-center gap-3">
                         <input type="checkbox" className="size-4" checked={on} aria-label={`Proposer ${item.agent.name}`} onChange={() => onToggle(item.agent.id)} />
                         <AgentMark agent={item.agent} size={28} />
@@ -659,7 +689,7 @@ function Briefing({
               </ul>
               <button
                 type="button"
-                className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#146c43] px-4 text-sm font-medium text-white"
+                className="inline-flex min-h-11 w-fit items-center rounded-[10px] bg-accent px-4 text-sm font-semibold text-white shadow-cta"
                 onClick={() => {
                   for (const item of proposals) {
                     if (!checkedIds.includes(item.agent.id)) onToggle(item.agent.id);
@@ -705,7 +735,7 @@ function Briefing({
             <p className="text-sm font-medium">KayrosLab est prêt à lancer la réflexion auprès du comité.</p>
             <button
               type="button"
-              className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#4a154b] px-4 text-sm font-medium text-white"
+              className="inline-flex min-h-11 w-fit items-center rounded-[10px] bg-accent px-4 text-sm font-semibold text-white shadow-cta"
               onClick={() => {
                 const result = onLaunch(asked.trim(), {
                   name: name || (analyzed ? "document.txt" : "saisie.txt"),
@@ -729,24 +759,31 @@ function Briefing({
   );
 }
 
+function supportOf(items: { verdict: "GO" | "CONDITIONAL_GO" | "NO_GO" }[]) {
+  if (!items.length) return null;
+  const weight = { GO: 100, CONDITIONAL_GO: 55, NO_GO: 0 };
+  return Math.round(items.reduce((sum, item) => sum + weight[item.verdict], 0) / items.length);
+}
+
 function CycleRail({ stage }: { stage: CycleId }) {
   const current = CYCLE.findIndex((step) => step.id === stage);
   return (
-    <ol className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8" aria-label="Cycle du dossier">
+    <ol className="flex gap-1 overflow-x-auto" aria-label="Cycle du dossier">
       {CYCLE.map((step, index) => {
-        const tone = STEP_TONE[step.id];
         const state = index < current ? "done" : index === current ? "now" : "later";
         return (
           <li
             key={step.id}
-            className="rounded-2xl px-2 py-2"
-            style={{
-              background: state === "now" ? tone.color : state === "done" ? tone.soft : "#f4f7f5",
-              color: state === "now" ? "#fff" : tone.color,
-            }}
+            title={step.hint}
+            aria-current={state === "now" ? "step" : undefined}
+            className={cn(
+              "shrink-0 rounded-full px-2.5 py-1.5 text-center text-[11px] font-semibold whitespace-nowrap",
+              state === "now" && "bg-accent text-white",
+              state === "done" && "bg-[#c9e6d6] text-[#155a37]",
+              state === "later" && "bg-[#dfe9f3] text-[#3d4b5a]",
+            )}
           >
-            <span className="mt-1 block text-xs font-medium">{step.label}</span>
-            <span className="mt-0.5 block text-[11px] leading-tight opacity-80">{step.hint}</span>
+            {step.label}
           </li>
         );
       })}
@@ -754,16 +791,6 @@ function CycleRail({ stage }: { stage: CycleId }) {
   );
 }
 
-const STEP_TONE: Record<CycleId, { color: string; soft: string }> = {
-  ecouter: { color: "#0f766e", soft: "#e5f3f1" },
-  cartographier: { color: "#0b5cab", soft: "#e7f2fb" },
-  construire: { color: "#146c43", soft: "#e5f4ec" },
-  positionner: { color: "#8a5a10", soft: "#f8f1e3" },
-  eprouver: { color: "#9f2c22", soft: "#f8e8e6" },
-  arbitrer: { color: "#4a154b", soft: "#f6eef6" },
-  projeter: { color: "#1e4d78", soft: "#e7eef5" },
-  realiser: { color: "#3c4540", soft: "#e6ebe8" },
-};
 
 function Block({ title, items }: { title: string; items: string[] }) {
   return (

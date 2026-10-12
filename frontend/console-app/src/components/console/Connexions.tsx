@@ -5,12 +5,12 @@ import { Field, Panel, controlClass } from "./ui";
 import { cn } from "@/lib/cn";
 
 const TABS = [
-  { id: "canaux", label: "Canaux", color: "#0f766e", soft: "#e5f3f1" },
-  { id: "salesforce", label: "Salesforce", color: "#0b5cab", soft: "#e7f2fb" },
-  { id: "cles", label: "Clés", color: "#3c4540", soft: "#e6ebe8" },
-  { id: "webhook", label: "Webhook", color: "#8a5a10", soft: "#f8f1e3" },
-  { id: "chat", label: "Liaison", color: "#5b4b8a", soft: "#eeeaf6" },
-  { id: "guides", label: "Guides", color: "#9f2c22", soft: "#f8e8e6" },
+  { id: "canaux", label: "Canaux" },
+  { id: "salesforce", label: "Salesforce" },
+  { id: "cles", label: "Clés" },
+  { id: "webhook", label: "Webhook" },
+  { id: "chat", label: "Liaison" },
+  { id: "guides", label: "Guides" },
 ] as const;
 
 const TONE: Record<ConnectorId, { color: string; soft: string }> = {
@@ -44,7 +44,6 @@ export function Connexions({ legacy }: { legacy: string }) {
   const [token, setToken] = useState("");
   const [linkError, setLinkError] = useState("");
   const manager = state.role === "comex";
-  const active = TABS.find((item) => item.id === tab) ?? TABS[0];
 
   useEffect(() => {
     const timer = window.setInterval(() => setTick((value) => value + 1), 3000);
@@ -56,7 +55,7 @@ export function Connexions({ legacy }: { legacy: string }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">Connexions</h1>
+        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Connexions</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Chaque canal s’intègre ou s’édite ici. Un canal connecté montre qui est en ligne. Aucun secret n’est collé dans la page.
         </p>
@@ -72,8 +71,7 @@ export function Connexions({ legacy }: { legacy: string }) {
               role="tab"
               aria-selected={on}
               onClick={() => setTab(item.id)}
-              className="min-h-11 rounded-full px-4 text-sm font-medium"
-              style={{ background: on ? item.color : item.soft, color: on ? "#fff" : item.color }}
+              className={cn("min-h-11 rounded-full px-4 text-sm font-semibold", on ? "bg-accent text-white shadow-cta" : "border border-line bg-white text-ink-soft")}
             >
               {item.label}
             </button>
@@ -102,7 +100,7 @@ export function Connexions({ legacy }: { legacy: string }) {
 
       {tab === "cles" ? (
         <div className="grid gap-3">
-          <Panel style={{ borderColor: active.color }}>
+          <Panel>
             <h2 className="text-sm font-medium">Profil de mission par défaut</h2>
             <div className="mt-3 grid gap-2 sm:grid-cols-3">
               {PROFILES.map((profile) => (
@@ -214,8 +212,7 @@ export function Connexions({ legacy }: { legacy: string }) {
                 key={id}
                 type="button"
                 onClick={() => setTool(id)}
-                className="min-h-10 rounded-full px-3 text-sm font-medium"
-                style={{ background: tool === id ? "#9f2c22" : "#f8e8e6", color: tool === id ? "#fff" : "#9f2c22" }}
+                className={cn("min-h-10 rounded-full px-3 text-sm font-semibold", tool === id ? "bg-accent text-white shadow-cta" : "border border-line bg-white text-ink-soft")}
               >
                 {id}
               </button>
@@ -258,7 +255,7 @@ function Channel({
   const [error, setError] = useState("");
 
   return (
-    <Panel className="border-2" style={{ borderColor: tone.color, background: tone.soft }}>
+    <Panel className="border-l-4" style={{ borderLeftColor: tone.color }}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <Mark id={connector.id} />
@@ -297,12 +294,12 @@ function Presence({ connector, tick }: { connector: Connector; tick: number }) {
   const calm = online < base;
   return (
     <div className="mt-3 flex flex-wrap items-center gap-3 rounded-lg bg-surface px-3 py-2">
-      <span className={cn("size-2.5 rounded-full", calm ? "bg-[#8a5a10]" : "bg-[#146c43]")} aria-hidden="true" />
+      <span className={cn("size-2.5 rounded-full", calm ? "bg-hold" : "bg-go")} aria-hidden="true" />
       <p className="text-sm">
         <span className="font-medium">{online}</span>
         <span className="text-muted"> / {total} utilisateurs</span>
       </p>
-      <span className="text-xs font-medium" style={{ color: calm ? "#8a5a10" : "#146c43" }}>{calm ? "Calme" : "Actif"}</span>
+      <span className={cn("text-xs font-semibold", calm ? "text-hold" : "text-go")}>{calm ? "Calme" : "Actif"}</span>
       <span className="text-xs text-muted">temps réel · à l’instant</span>
     </div>
   );
@@ -438,7 +435,7 @@ function Editor({
 }
 
 function Mark({ id }: { id: ConnectorId }) {
-  return <img src={`${import.meta.env.BASE_URL}brands/${id}.svg`} alt="" width={36} height={36} className="size-9 shrink-0" />;
+  return <img src={`${import.meta.env.BASE_URL}brands/${id}.svg`} alt="" width={36} height={36} className="size-9 shrink-0 rounded-[9px] bg-white" />;
 }
 
 function Action({
@@ -447,15 +444,15 @@ function Action({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { tone: "integrate" | "edit" | "test" | "on" | "off" }) {
   const tones = {
-    integrate: "bg-[#0f766e] text-white",
-    edit: "border-2 border-[#161a18] bg-white text-[#161a18]",
-    test: "bg-[#1e4d78] text-white",
-    on: "bg-[#146c43] text-white",
-    off: "bg-[#8a5a10] text-white",
+    integrate: "bg-accent text-white shadow-cta",
+    edit: "border border-line bg-white text-ink",
+    test: "border border-line bg-white text-ink-soft",
+    on: "bg-go text-white",
+    off: "bg-hold text-white",
   };
   return (
     <button
-      className={cn("inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-45", tones[tone], className)}
+      className={cn("inline-flex min-h-11 items-center justify-center rounded-[10px] px-4 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-45", tones[tone], className)}
       {...props}
     />
   );

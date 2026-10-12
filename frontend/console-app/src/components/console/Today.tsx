@@ -38,7 +38,7 @@ export function Today() {
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-medium tracking-tight">Ce qui vous attend</h1>
+          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Ce qui vous attend</h1>
           <p className="mt-1 max-w-xl text-sm text-muted">
             Pas un mur d’indicateurs. Les dossiers ouverts, dans l’ordre où vous pouvez agir. Le cycle stratégique vit dans chaque dossier.
           </p>
@@ -56,7 +56,7 @@ export function Today() {
               key={thread.id}
               type="button"
               onClick={() => go("dossiers", thread.id)}
-              className="rounded-3xl border border-line bg-surface p-4 text-left transition-colors duration-150 hover:border-line-strong md:p-5"
+              className="rounded-3xl border border-line bg-surface p-4 text-left shadow-card transition duration-150 hover:-translate-y-0.5 hover:shadow-md md:p-5"
             >
               <div className="flex flex-wrap items-center gap-2">
                 <StatusPill status={thread.status} />

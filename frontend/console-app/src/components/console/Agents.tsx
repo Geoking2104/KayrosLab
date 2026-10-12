@@ -17,7 +17,7 @@ function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
           <AgentMark agent={agent} size={44} />
           <div>
             <p className="text-xs text-muted">{agent.department} · {agent.kind} · {agent.provider}</p>
-            <h1 className="text-2xl font-medium tracking-tight">{agent.name}</h1>
+            <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">{agent.name}</h1>
             <p className="text-sm text-ink-soft">{agent.role}{agent.veto ? " · droit de veto" : ""}{agent.enabled ? "" : " · inactif"}</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-medium tracking-tight">Agents</h1>
+          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Agents</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted">
             Les agents métier instruisent sans personnifier personne. Créez une fiche ou modifiez celles du registre.
           </p>

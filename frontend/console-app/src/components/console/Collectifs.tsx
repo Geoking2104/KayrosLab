@@ -36,7 +36,7 @@ export function Collectifs() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-medium tracking-tight">Collectifs</h1>
+          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Collectifs</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted">
             Un collectif est l’équipe stable qui instruit vos dossiers. {state.collectives.length}/{SESSION_QUOTA} pour votre compte — les collectifs des autres membres du tenant ne sont ni listés ni modifiables.
           </p>

@@ -35,7 +35,7 @@ export function Instruct() {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-2xl font-medium tracking-tight">Instruire une décision</h1>
+        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Instruire une décision</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Trois préparations, puis le dossier. L’instruction, la lecture et l’arbitrage ne changent pas d’écran.
         </p>
