@@ -7,14 +7,16 @@ import {
   VERDICT_LABEL,
   votingLabel,
   type Agent,
+  type AgentKind,
   type CycleId,
   type Evidence,
   type Thread,
   type ThreadStatus,
+  GUARDRAILS,
 } from "@/lib/console/model";
 import { readDocument } from "@/lib/console/read";
 import { cn } from "@/lib/cn";
-import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill } from "./ui";
+import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 
@@ -719,6 +721,7 @@ function Briefing({
               })}
             </ul>
           ) : null}
+          <OutsideAgent onAdded={(id) => { if (!checkedIds.includes(id)) onToggle(id); }} />
         </li>
       </ol>
       {error ? <p className="mt-3 text-sm text-stop" role="alert">{error}</p> : null}
@@ -756,6 +759,186 @@ function Briefing({
         )}
       </div>
     </Panel>
+  );
+}
+
+const OUTSIDE_TYPES: { id: AgentKind; label: string; hint: string; color: string; soft: string }[] = [
+  { id: "metier", label: "Métier", hint: "Une fonction, sans personnifier personne.", color: "#0f766e", soft: "#e6f4f2" },
+  { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
+  { id: "impersonator", label: "Impersonator", hint: "Persona simulée, toujours étiquetée.", color: "#5b4cdb", soft: "#eeecfb" },
+];
+
+function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
+  const { state, createAgent, setRole } = useConsole();
+  const [open, setOpen] = useState(false);
+  const [kind, setKind] = useState<AgentKind | null>(null);
+  const manager = state.role === "comex";
+
+  return (
+    <div className="mt-3">
+      {open ? (
+        <div className="rounded-xl border border-line bg-white p-3">
+          {!kind ? (
+            <>
+              <p className="text-sm font-medium">Choisissez le type d’agent</p>
+              <p className="mt-1 text-sm text-muted">En dehors des propositions. Il rejoint ce dossier, pas le collectif.</p>
+              {manager ? (
+                <div className="mt-3 grid gap-2">
+                  {OUTSIDE_TYPES.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setKind(item.id)}
+                      className="rounded-xl border border-line px-3 py-3 text-left"
+                      style={{ background: item.soft, borderLeft: `4px solid ${item.color}` }}
+                    >
+                      <span className="text-xs font-bold uppercase tracking-[0.08em]" style={{ color: item.color }}>{item.label}</span>
+                      <span className="mt-1 block text-sm text-ink-soft">{item.hint}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-3">
+                  <p className="text-sm text-muted">Créer un agent est réservé au COMEX.</p>
+                  <Button className="mt-3" onClick={() => setRole("comex")}>Passer en COMEX</Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <OutsideForm
+              kind={kind}
+              onBack={() => setKind(null)}
+              onCreate={(draft) => {
+                const result = createAgent(draft);
+                if (result.ok && result.id) onAdded(result.id);
+                if (result.ok) {
+                  setKind(null);
+                  setOpen(false);
+                }
+                return result;
+              }}
+            />
+          )}
+          <Button className="mt-3" variant="ghost" onClick={() => { setOpen(false); setKind(null); }}>Annuler</Button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          className="inline-flex min-h-11 items-center rounded-[10px] border border-line-strong bg-white px-4 text-sm font-semibold text-ink"
+          onClick={() => setOpen(true)}
+        >
+          Ajouter un agent
+        </button>
+      )}
+    </div>
+  );
+}
+
+function OutsideForm({
+  kind,
+  onBack,
+  onCreate,
+}: {
+  kind: AgentKind;
+  onBack: () => void;
+  onCreate: (agent: {
+    name: string;
+    role: string;
+    department: string;
+    mission: string;
+    kind: AgentKind;
+    veto: boolean;
+    enabled: boolean;
+    consented: boolean;
+    simulation: boolean;
+    clues: string;
+    brief?: string;
+  }) => { ok: boolean; reason?: string; id?: string };
+}) {
+  const personal = kind !== "metier";
+  const [name, setName] = useState("");
+  const [role, setRole] = useState(personal ? "Persona simulée" : "");
+  const [department, setDepartment] = useState(personal ? "Simulation" : "");
+  const [mission, setMission] = useState("");
+  const [clues, setClues] = useState("");
+  const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => false));
+  const [error, setError] = useState("");
+  const label = kind === "metier" ? "Métier" : kind === "hybride" ? "Hybride" : "Impersonator";
+
+  function save() {
+    if (!name.trim()) {
+      setError("Le nom est requis.");
+      return;
+    }
+    if (!personal && (!role.trim() || !department.trim() || !mission.trim())) {
+      setError("Fonction, service et mission sont requis.");
+      return;
+    }
+    if (personal && guards.some((item) => !item)) {
+      setError("Cochez les cinq garde-fous avant d’enregistrer.");
+      return;
+    }
+    const result = onCreate({
+      name: name.trim(),
+      role: role.trim() || "Persona simulée",
+      department: department.trim() || "Simulation",
+      mission: mission.trim() || "Instruit dans son périmètre.",
+      kind,
+      veto: false,
+      enabled: true,
+      consented: personal,
+      simulation: personal,
+      clues: personal ? clues.trim() || "Saisie manuelle" : "",
+      brief: "",
+    });
+    if (!result.ok) setError(result.reason ?? "Refusé");
+  }
+
+  return (
+    <div className="grid gap-3">
+      <p className="text-sm font-medium">Nouvel agent · {label}</p>
+      <Field label="Nom">
+        <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} />
+      </Field>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Field label={personal ? "Rôle simulé" : "Fonction"}>
+          <input className={controlClass} value={role} onChange={(event) => setRole(event.target.value)} />
+        </Field>
+        <Field label="Service">
+          <input className={controlClass} value={department} onChange={(event) => setDepartment(event.target.value)} />
+        </Field>
+      </div>
+      <Field label="Mission">
+        <TextArea value={mission} onChange={(event) => setMission(event.target.value)} />
+      </Field>
+      {personal ? (
+        <>
+          <Field label="Indices autorisés" hint="Export ou saisie. Aucun scraping.">
+            <input className={controlClass} value={clues} onChange={(event) => setClues(event.target.value)} />
+          </Field>
+          <ul className="grid gap-2">
+            {GUARDRAILS.map((item, index) => (
+              <li key={item}>
+                <label className="flex items-start gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    className="mt-1 size-4"
+                    checked={guards[index]}
+                    onChange={() => setGuards((current) => current.map((value, i) => (i === index ? !value : value)))}
+                  />
+                  <span>{item}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
+      <div className="flex flex-wrap gap-2">
+        <Button onClick={save}>Créer et retenir</Button>
+        <Button variant="ghost" onClick={onBack}>Autre type</Button>
+      </div>
+    </div>
   );
 }
 

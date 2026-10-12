@@ -46,6 +46,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   const focus = state.agents.find((agent) => agent.id === agentId) ?? null;
   const manager = state.role === "comex";
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("metier");
+  const [picking, setPicking] = useState(false);
   const [mode, setMode] = useState<null | "metier" | "hybride" | "impersonator" | "team">(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [simId, setSimId] = useState<string | null>(null);
@@ -55,6 +56,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   function openCreate(next: NonNullable<typeof mode>) {
     setEditingId(null);
     setSimId(null);
+    setPicking(false);
     setMode(next);
   }
 
@@ -72,7 +74,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
         <div>
           <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Agents</h1>
           <p className="mt-1 max-w-2xl text-sm text-muted">
-            Les agents métier instruisent sans personnifier personne. Créez une fiche ou modifiez celles du registre.
+            Ajoutez un agent qui n’est pas dans la liste. Le type se choisit ensuite : métier, hybride, impersonator ou équipe.
           </p>
         </div>
       </div>
@@ -85,18 +87,31 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
             : "Créer ou modifier un agent est réservé au COMEX. Passez en COMEX pour ouvrir les formulaires."}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
-          {manager ? (
-            <>
-              <Button onClick={() => openCreate("metier")}>Créer un agent métier</Button>
-              <Button variant="secondary" onClick={() => openCreate("hybride")}>Agent hybride</Button>
-              <Button variant="secondary" onClick={() => openCreate("impersonator")}>Nouvel impersonator</Button>
-              <Button variant="secondary" onClick={() => openCreate("team")}>Équipe 2–12</Button>
-            </>
-          ) : (
-            <Button onClick={() => setRole("comex")}>Passer en COMEX</Button>
-          )}
+          <Button
+            onClick={() => {
+              setMode(null);
+              setEditingId(null);
+              setSimId(null);
+              setPicking((open) => !open);
+            }}
+          >
+            Ajouter un agent
+          </Button>
+          {!manager ? <Button variant="secondary" onClick={() => setRole("comex")}>Passer en COMEX</Button> : null}
         </div>
       </Panel>
+
+      {picking && !mode ? (
+        manager ? (
+          <TypeChoice onPick={openCreate} onClose={() => setPicking(false)} />
+        ) : (
+          <Panel>
+            <h2 className="text-sm font-medium">Choix du type</h2>
+            <p className="mt-1 text-sm text-muted">Créer un agent est réservé au COMEX. Passez en COMEX, puis choisissez le type.</p>
+            <Button className="mt-3" onClick={() => setRole("comex")}>Passer en COMEX</Button>
+          </Panel>
+        )
+      ) : null}
 
       {mode === "metier" && manager && !editing ? (
         <MetierForm onClose={() => setMode(null)} onCreate={createAgent} onUpdate={updateAgent} />
@@ -205,6 +220,37 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
         Crystal Knows : jeton serveur absent. L’API n’est pas appelée. Un export JSON autorisé ou un type DISC peut servir d’indice, avec consentement. Aucun profil LinkedIn n’est visité.
       </p>
     </div>
+  );
+}
+
+const AGENT_TYPES: { id: "metier" | "hybride" | "impersonator" | "team"; label: string; hint: string; color: string; soft: string }[] = [
+  { id: "metier", label: "Métier", hint: "Une fonction. Personne n’est personnifiée.", color: "#0f766e", soft: "#e6f4f2" },
+  { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
+  { id: "impersonator", label: "Impersonator", hint: "Persona simulée, toujours étiquetée.", color: "#5b4cdb", soft: "#eeecfb" },
+  { id: "team", label: "Équipe", hint: "De 2 à 12 personas, un panel.", color: "#8a6d1a", soft: "#f8f1dc" },
+];
+
+function TypeChoice({ onPick, onClose }: { onPick: (kind: (typeof AGENT_TYPES)[number]["id"]) => void; onClose: () => void }) {
+  return (
+    <Panel>
+      <h2 className="text-sm font-medium">Choisissez le type d’agent</h2>
+      <p className="mt-1 text-sm text-muted">Il n’a pas besoin d’être déjà dans le registre.</p>
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        {AGENT_TYPES.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => onPick(item.id)}
+            className="rounded-xl border border-line px-3 py-3 text-left"
+            style={{ background: item.soft, borderLeft: `4px solid ${item.color}` }}
+          >
+            <span className="text-xs font-bold uppercase tracking-[0.08em]" style={{ color: item.color }}>{item.label}</span>
+            <span className="mt-1 block text-sm text-ink-soft">{item.hint}</span>
+          </button>
+        ))}
+      </div>
+      <Button className="mt-3" variant="ghost" onClick={onClose}>Annuler</Button>
+    </Panel>
   );
 }
 

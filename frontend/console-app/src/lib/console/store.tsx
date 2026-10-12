@@ -42,7 +42,7 @@ type Store = {
   addAgentToCollective: (collectiveId: string, agentId: string) => void;
   updateCollective: (id: string, patch: { name?: string; voting?: Voting; personality?: boolean; removeAgentId?: string }) => { ok: boolean; reason?: string };
   setAgentEnabled: (agentId: string, enabled: boolean) => { ok: boolean; reason?: string };
-  createAgent: (agent: Omit<Agent, "id" | "provider" | "model">) => { ok: boolean; reason?: string };
+  createAgent: (agent: Omit<Agent, "id" | "provider" | "model">) => { ok: boolean; reason?: string; id?: string };
   updateAgent: (id: string, agent: Omit<Agent, "id" | "provider" | "model" | "kind">) => { ok: boolean; reason?: string };
   createImpersonatorTeam: (names: string[], clues: string) => { ok: boolean; reason?: string; collectiveId?: string };
   startMission: (draft: DraftMission) => string;
@@ -301,7 +301,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               : `${created.name} est au registre.`,
           },
         }));
-        return { ok: true };
+        return { ok: true, id: created.id };
       },
       createImpersonatorTeam: (names, clues) => {
         if (state.role !== "comex") return { ok: false, reason: "Réservé aux rôles COMEX ou admin." };
