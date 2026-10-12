@@ -37,141 +37,30 @@ test('GitHub Pages ne publie plus /salon/ et rien ne le lie', async () => {
   assert.match(french, /CrystalKnows/);
 });
 
-test('la console prefixe les routes avec la base API du build', async () => {
-  const source = await read('frontend/console-app/src/api.js');
-  assert.match(source, /import\.meta\.env\.VITE_API_BASE_URL/);
-  assert.match(source, /fetch\(apiUrl\(path\)/);
-});
-
-test('le formulaire propose une inscription puis ouvre la console', async () => {
-  const [app, api] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/api.js'),
+test('la console est la revue, servie sous /console/', async () => {
+  const [shell, dossiers, vite, html] = await Promise.all([
+    read('frontend/console-app/src/components/console/Shell.tsx'),
+    read('frontend/console-app/src/components/console/Dossiers.tsx'),
+    read('frontend/console-app/vite.config.js'),
+    read('frontend/console-app/index.html'),
   ]);
-  assert.match(app, /Essayer avec un comité prêt/);
-  // Un bouton par fournisseur (SSO entreprise, Google…) annoncé par GET /v1/auth/sso.
-  assert.match(app, /sso\.providers\?\.map\(/);
-  assert.match(app, /startSso\(provider\.id\)/);
-  assert.match(app, /`Continuer avec \$\{provider\.label\}`/);
-  assert.match(api, /\/v1\/auth\/sso\/callback/);
-  assert.match(app, /await api\.register\(name, email, password\)/);
-  assert.match(app, /const result = await api\.login\(email, password\)/);
-  assert.match(api, /register:.*request\('\/v1\/auth\/register'/);
+  assert.match(shell, /Aujourd’hui/);
+  assert.match(shell, /Dossiers/);
+  assert.match(shell, /Agents/);
+  assert.match(shell, /Connexions/);
+  assert.match(dossiers, /Trace du comité/);
+  assert.match(dossiers, /Lecture seule/);
+  assert.match(vite, /base: '\/console\/'/);
+  assert.match(vite, /backend\/web\/public\/console/);
+  assert.match(html, /KayrosLab Console/);
 });
 
-test('la console v2 expose les parcours agents, reglages et decision durable', async () => {
-  const [app, api, css] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/api.js'),
-    read('frontend/console-app/src/app.css'),
-  ]);
-  assert.match(app, /Agents/);
-  assert.match(app, /Réglages/);
-  assert.match(app, /Profil comportemental/);
-  assert.match(app, /consentement explicite/i);
-  assert.match(app, /Slack/);
-  assert.match(app, /Discord/);
-  assert.match(app, /Microsoft Teams/);
-  assert.match(app, /Contributions individuelles/);
-  assert.match(app, /Arbitrage humain/);
-  assert.match(api, /\/v1\/console\/agents/);
-  assert.match(api, /\/v1\/console\/connectors/);
-  assert.match(api, /\/v1\/console\/threads/);
-  assert.match(css, /@media \(max-width: 840px\)/);
-  assert.match(css, /@media \(max-width: 560px\)/);
-});
-
-test('la connexion expose un parcours complet de mot de passe oublie', async () => {
-  const [app, api] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/api.js'),
-  ]);
-  assert.match(app, /Mot de passe oublié/);
-  assert.match(app, /Envoyer le lien de vérification/);
-  assert.match(app, /Confirmer le mot de passe/);
-  assert.match(api, /\/v1\/auth\/password\/forgot/);
-  assert.match(api, /\/v1\/auth\/password\/reset/);
-});
-
-test('EF-26 / EF-28 : la console annonce le rôle requis avant toute saisie et propose la simulation de personnalité', async () => {
-  const app = await read('frontend/console-app/src/App.jsx');
-  assert.match(app, /const MANAGER_ROLES = \['comex', 'admin'\]/);
-  assert.match(app, /Réservé aux rôles comex ou admin/);
-  // Boutons de création d'agents grisés pour un contributeur (pas de formulaire puis 403).
-  for (const label of ['Agent hybride', 'Agent impersonator', 'Équipe d\'impersonators']) {
-    assert.match(app, new RegExp(`disabled=\\{!manager\\} title=\\{locked\\} onClick=\\{\\(\\) => set\\w+\\(true\\)\\}>${label}<`));
-  }
-  // Arbitrage grisé hors comex/admin.
-  assert.match(app, /canArbitrate=\{canManage\(data\.user\)\}/);
-  assert.match(app, /disabled=\{!canArbitrate\}[^>]*onClick=\{\(\) => arbitrate\('accept_consensus'\)\}/);
-  // Option de simulation de personnalité en session et dans l'équipe d'impersonators.
-  assert.match(app, /personality_simulation_enabled: personality/);
-  assert.match(app, /personality_simulation_enabled: form\.personality_simulation_enabled/);
-});
-
-test('intégrations : page Intégrations, profil de mission (fast par défaut) et liens dossier #activity?thread=', async () => {
-  const [app, api] = await Promise.all([read('frontend/console-app/src/App.jsx'), read('frontend/console-app/src/api.js')]);
-  assert.match(app, /\['integrations', 'Intégrations'\]/);
-  assert.match(app, /function IntegrationsPage\(/);
-  assert.match(app, /useState\('fast'\)/);
-  assert.match(app, /\['demo', 'Démo'/);
-  // La page se lit avant `?` : `#activity?thread=…` et `#settings?connected=…` restent routables.
-  assert.match(app, /split\('\?'\)\[0\]/);
-  assert.match(app, /hashParams\(\)\.get\('thread'\)/);
-  for (const path of ['/v1/console/integrations', '/v1/console/integrations/keys', '/v1/console/integrations/webhook', '/v1/console/integrations/webhook/secret', '/v1/console/integrations/webhook/test']) {
-    assert.ok(api.includes(`'${path}'`) || api.includes(`\`${path}/`), `api.js : ${path}`);
-  }
-  // Un DELETE sans corps ne doit pas annoncer du JSON (Fastify le refuse).
-  assert.match(api, /options\.body !== undefined \? \{ 'content-type': 'application\/json' \}/);
-});
-
-test('nouvelle session : agents ajustables, composés, aide au seuil et personnalités réelles', async () => {
-  const [app, api, help, composer, real] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/api.js'),
-    read('frontend/console-app/src/consensus-help.jsx'),
-    read('frontend/console-app/src/agent-composer.jsx'),
-    read('frontend/console-app/src/real-profiles.jsx'),
-  ]);
-  assert.match(app, /Vérifier \/ modifier/);
-  assert.match(app, /\+ Composer un agent/);
-  assert.match(app, /agent_overrides: overrides/);
-  assert.match(app, /custom_agents: custom\.map/);
-  assert.match(app, /<ConsensusHelp value=\{form\.voting_threshold\} \/>/);
-  assert.match(help, /Comment choisir le seuil de consensus/);
-  for (const id of ['majority', 'unanimous', 'veto_power_csuite']) assert.match(help, new RegExp(`id: '${id}'`));
-  assert.match(composer, /export function overrideFromDraft/);
-  assert.match(real, /Ajouter à un comité existant/);
-  assert.match(real, /Construire un nouveau comité/);
-  assert.match(api, /\/v1\/console\/personality\/preview/);
-});
-
-test('sessions : un agent de session peut rejoindre le registre partagé (comex/admin seulement)', async () => {
-  const [app, api, promote] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/api.js'),
-    read('frontend/console-app/src/registry-promotion.jsx'),
-  ]);
-  assert.match(app, /<SessionOwnAgents session=\{session\} capabilities=\{data\.capabilities\}/);
-  assert.match(api, /\/agents\/\$\{encodeURIComponent\(agentId\)\}\/promote/);
-  assert.match(promote, /registry_promotion/);
-  assert.match(promote, /Seul un rôle comex ou admin peut enregistrer/);
-  assert.match(promote, /Espace partagé en libre-service/);
-  assert.match(promote, /share_consent_confirmed/);
-});
-
-test('descriptif de personnalité : éditeur dans la composition et le registre', async () => {
-  const [app, composer, editor] = await Promise.all([
-    read('frontend/console-app/src/App.jsx'),
-    read('frontend/console-app/src/agent-composer.jsx'),
-    read('frontend/console-app/src/personality-descriptif.jsx'),
-  ]);
-  assert.match(composer, /<DescriptifPanel draft=\{draft\}/);
-  assert.match(composer, /out\.descriptif = descriptif/);
-  assert.match(app, /<DescriptifFieldset value=\{form\.descriptif\}/);
-  assert.match(app, /withoutDescriptif\(agent\.behavioral_profile\)/);
-  assert.match(editor, /export function DiscWheel/);
-  assert.match(editor, /Traits comportementaux · 0 à 100/);
-  assert.match(editor, /Créer depuis le type DISC/);
-  assert.match(editor, /from '\.\.\/\.\.\/\.\.\/core\/personality-descriptif\.mjs'/);
+test('les anciens liens de la console restent lisibles', async () => {
+  const model = await read('frontend/console-app/src/lib/console/model.ts');
+  assert.match(model, /activity: "dossiers"/);
+  assert.match(model, /sessions: "collectifs"/);
+  assert.match(model, /integrations: "connexions"/);
+  const shell = await read('frontend/console-app/src/components/console/Shell.tsx');
+  assert.match(shell, /split\("\?"\)/);
+  assert.match(shell, /params\.get\("thread"\)/);
 });

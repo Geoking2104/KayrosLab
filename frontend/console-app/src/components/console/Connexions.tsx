@@ -438,7 +438,7 @@ function Editor({
 }
 
 function Mark({ id }: { id: ConnectorId }) {
-  return <img src={`/brands/${id}.svg`} alt="" width={36} height={36} className="size-9 shrink-0" />;
+  return <img src={`${import.meta.env.BASE_URL}brands/${id}.svg`} alt="" width={36} height={36} className="size-9 shrink-0" />;
 }
 
 function Action({

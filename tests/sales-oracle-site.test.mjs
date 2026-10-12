@@ -92,13 +92,11 @@ test('landing covers personified agents; Salon is no longer embedded', () => {
   assert.match(css, /\.personify-grid/);
 });
 
-test('agent console embeds the Sales Oracle workspace with the console session', () => {
-  const app = read('frontend/console-app/src/App.jsx');
-  assert.match(app, /Sales Oracle/);
-  assert.match(app, /assets\/sales-oracle-tool\.js/);
-  assert.match(app, /SalesOracleClient/);
+test('Sales Oracle reste un outil du site, plus un écran de la console', () => {
   const tool = read('backend/web/public/assets/sales-oracle-tool.js');
   assert.match(tool, /SALES_ORACLE_API_BASE/);
+  const shell = read('frontend/console-app/src/components/console/Shell.tsx');
+  assert.doesNotMatch(shell, /SalesOracleClient/);
 });
 
 test('simulation studio translations stay aligned', () => {

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-paper: #f3f5f4;
+  --color-paper-2: #e6ebe8;
+  --color-surface: #fbfcfc;
+  --color-ink: #161a18;
+  --color-ink-soft: #3c4540;
+  --color-muted: #5c6762;
+  --color-line: #d8e0dc;
+  --color-line-strong: #c2ccc7;
+  --color-accent: #0f766e;
+  --color-accent-strong: #0c5c56;
+  --color-accent-soft: #e5f3f1;
+  --color-accent-ink: #f4fffd;
+  --color-go: #146c43;
+  --color-go-soft: #e5f4ec;
+  --color-hold: #8a5a10;
+  --color-hold-soft: #f8f1e3;
+  --color-stop: #9f2c22;
+  --color-stop-soft: #f8e8e6;
+  --color-info: #1e4d78;
+  --color-info-soft: #e7f0f7;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
