@@ -27,9 +27,10 @@ const FILTERS: { id: "all" | ThreadStatus; label: string }[] = [
 ];
 
 export function Dossiers({ threadId }: { threadId: string }) {
-  const { state, deleteThread, addAgentToThread, startMission } = useConsole();
+  const { state, deleteThread, startMission } = useConsole();
   const selected = state.threads.find((thread) => thread.id === threadId);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
+  const [pickedAgents, setPickedAgents] = useState<string[]>([]);
   const list = state.threads.filter((thread) => filter === "all" || thread.status === filter);
 
   if (selected) return <Dossier threadId={selected.id} />;
@@ -39,19 +40,24 @@ export function Dossiers({ threadId }: { threadId: string }) {
       <div>
         <h1 className="text-2xl font-medium tracking-tight">Dossiers</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
-          D’abord le document, ensuite une question choisie, ensuite le comité. Vous ne voyez que vos dossiers.
+          Déposez un document. KayrosLab le lit et le découpe en questions. Vous téléchargez cette analyse, vous choisissez la question, puis les agents. Le comité ne part que lorsque KayrosLab l’annonce.
         </p>
       </div>
-      <DocumentDesk
-        onPose={(question, file) => {
+      <Briefing
+        agents={state.agents.filter((agent) => agent.enabled)}
+        checkedIds={pickedAgents}
+        onToggle={(id) => setPickedAgents((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))}
+        onLaunch={(question, file) => {
           const collective = state.collectives.find((item) => item.id === state.selectedCollectiveId) ?? state.collectives[0];
           if (!collective) return { ok: false, reason: "Aucun collectif pour instruire." };
+          if (pickedAgents.length === 0) return { ok: false, reason: "Choisissez au moins un agent." };
           const id = startMission({
             question,
             collectiveId: collective.id,
             profile: state.defaultProfile,
             useCase: "comex_decision",
-            evidence: file ? [file] : [],
+            evidence: [file],
+            agentIds: pickedAgents,
           });
           go("dossiers", id);
           return { ok: true };
@@ -93,11 +99,6 @@ export function Dossiers({ threadId }: { threadId: string }) {
                     </div>
                   ) : null}
                 </button>
-                <AddAgents
-                  thread={thread}
-                  agents={state.agents}
-                  onAdd={(agentId) => addAgentToThread(thread.id, agentId)}
-                />
                 <button
                   type="button"
                   className="mt-3 min-h-11 rounded-lg border border-line bg-stop-soft px-3 text-sm text-stop"
@@ -151,46 +152,21 @@ function Dossier({ threadId }: { threadId: string }) {
           {collective.personality ? " · simulation de personnalité active" : ""} · {formatWhen(thread.updatedAt)}
         </p>
       </div>
-      <DocumentDesk
+      <Briefing
+        agents={state.agents.filter((agent) => agent.enabled)}
+        checkedIds={thread.agentIds}
         existing={thread.evidence}
-        onKeep={(file) => attachReading(thread.id, file)}
-        onPose={(question) => poseQuestion(thread.id, question)}
+        currentQuestion={thread.question}
+        busy={thread.status === "running"}
+        onOpenAgent={(id) => go("agents", { agent: id, dossier: thread.id })}
+        onToggle={(id) => {
+          const result = thread.agentIds.includes(id) ? removeAgentFromThread(thread.id, id) : addAgentToThread(thread.id, id);
+          setAgentError(result.ok ? "" : result.reason ?? "Refusé");
+        }}
+        onRead={(file) => attachReading(thread.id, file)}
+        onLaunch={(question) => poseQuestion(thread.id, question)}
       />
-      <Panel>
-        <h2 className="text-sm font-medium">Agents de ce dossier</h2>
-        <ul className="mt-3 grid gap-2">
-          {thread.agentIds.map((id) => {
-            const agent = state.agents.find((item) => item.id === id);
-            return (
-              <li key={id} className="flex items-center gap-2 rounded-2xl bg-paper px-3 py-2">
-                <button
-                  type="button"
-                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
-                  onClick={() => go("agents", { agent: id, dossier: thread.id })}
-                >
-                  <AgentMark agent={agent} />
-                  <span className="min-w-0">
-                    <span className="block text-sm font-medium">{agent?.name ?? id}</span>
-                    <span className="block text-xs text-muted">{agent?.role ?? "Fiche"}</span>
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  className="min-h-11 shrink-0 rounded-full border-2 border-[#9f2c22] px-3 text-sm font-medium text-[#9f2c22]"
-                  onClick={() => {
-                    const result = removeAgentFromThread(thread.id, id);
-                    setAgentError(result.ok ? "" : result.reason ?? "Refusé");
-                  }}
-                >
-                  Retirer
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        {agentError ? <p className="mt-2 text-sm text-stop" role="alert">{agentError}</p> : null}
-        <AddAgents thread={thread} agents={state.agents} onAdd={(agentId) => addAgentToThread(thread.id, agentId)} />
-      </Panel>
+      {agentError ? <p className="text-sm text-stop" role="alert">{agentError}</p> : null}
 
       {thread.status === "running" ? (
         <Panel>
@@ -451,62 +427,243 @@ function traceKind(label: string, detail: string) {
   return "Modèle" as const;
 }
 
-function AddAgents({
-  thread,
+function Briefing({
   agents,
-  onAdd,
+  checkedIds,
+  existing = [],
+  currentQuestion = "",
+  busy = false,
+  onOpenAgent,
+  onToggle,
+  onRead,
+  onLaunch,
 }: {
-  thread: Thread;
   agents: Agent[];
-  onAdd: (agentId: string) => { ok: boolean; reason?: string };
+  checkedIds: string[];
+  existing?: Evidence[];
+  currentQuestion?: string;
+  busy?: boolean;
+  onOpenAgent?: (id: string) => void;
+  onToggle: (id: string) => void;
+  onRead?: (file: Evidence) => { ok: boolean; reason?: string };
+  onLaunch: (question: string, file: Evidence) => { ok: boolean; reason?: string };
 }) {
+  const saved = existing.find((file) => file.summary);
+  const [name, setName] = useState(saved?.name ?? "");
+  const [text, setText] = useState(saved?.text ?? "");
+  const [summary, setSummary] = useState(saved?.summary ?? "");
+  const [facts, setFacts] = useState<string[]>(saved?.facts ?? []);
+  const [questions, setQuestions] = useState<string[]>(saved?.questions ?? []);
+  const [picked, setPicked] = useState(saved?.questions?.[0] ?? "");
+  const [custom, setCustom] = useState("");
   const [error, setError] = useState("");
-  const [open, setOpen] = useState(false);
-  const available = agents.filter((agent) => agent.enabled && !thread.agentIds.includes(agent.id));
-  const blocked = thread.status === "needs_clarification";
+  const asked = custom.trim().length >= 8 ? custom.trim() : picked;
+  const analyzed = Boolean(summary);
+  const ready = analyzed && asked.trim().length >= 8 && checkedIds.length > 0;
+  const sameRun = busy && asked.trim() === currentQuestion.trim();
+
+  function applyReading(label: string, source: string) {
+    const reading = readDocument(label, source);
+    if (reading.thin) {
+      setSummary("");
+      setFacts([]);
+      setQuestions([]);
+      setPicked("");
+      setError(reading.note);
+      return;
+    }
+    const file: Evidence = {
+      name: label,
+      type: "Lecture",
+      text: source,
+      summary: reading.summary,
+      facts: reading.facts,
+      questions: reading.questions,
+    };
+    setName(label);
+    setText(source);
+    setSummary(reading.summary);
+    setFacts(reading.facts);
+    setQuestions(reading.questions);
+    setPicked(reading.questions[0] ?? "");
+    setError("");
+    onRead?.(file);
+  }
+
+  function onFile(file: File) {
+    const allowed = /\.(txt|md|csv|json)$/i.test(file.name);
+    if (!allowed) {
+      setError("Déposez un .txt, un .md, un .csv ou un .json. Un PDF n’est pas lu.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => applyReading(file.name, String(reader.result ?? ""));
+    reader.readAsText(file);
+  }
+
+  function download() {
+    if (!summary) {
+      setError("KayrosLab n’a pas encore analysé de document.");
+      return;
+    }
+    const body = [
+      `# Lecture KayrosLab — ${name || "document"}`,
+      "",
+      "## Résumé",
+      summary,
+      "",
+      "## Décorticage",
+      ...facts.map((item) => `- ${item}`),
+      "",
+      "## Questions",
+      ...questions.map((item, index) => `${index + 1}. ${item}`),
+      "",
+      "Moteur local déterministe. Seuls les chiffres, dates et clauses présents dans le document sont repris.",
+    ].join("\n");
+    const filename = `${(name || "lecture").replace(/\.\w+$/, "").replace(/[^\w\- ]+/g, "").trim() || "lecture"}-kayroslab.md`;
+    const blob = new Blob([body], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    window.setTimeout(() => {
+      link.remove();
+      URL.revokeObjectURL(url);
+    }, 1500);
+    setError("");
+  }
 
   return (
-    <div className="mt-3">
-      {open && !blocked ? (
-        available.length === 0 ? (
-          <p className="mb-3 text-sm text-muted">Tous les agents actifs sont déjà dans ce dossier.</p>
+    <Panel>
+      <h2 className="text-sm font-medium">Préparer la réflexion</h2>
+      <ol className="mt-4 flex flex-col gap-5">
+        <li>
+          <p className="text-sm font-medium">1. Document</p>
+          <p className="mt-1 text-sm text-muted">KayrosLab lit le fichier dès le dépôt, puis le découpe en questions. On ne colle rien avant.</p>
+          <label className="mt-3 flex min-h-24 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-line-strong bg-paper px-4 py-5 text-sm">
+            <span className="font-medium">Déposer un .txt, .md, .csv ou .json</span>
+            <input
+              className="mt-3 block w-full text-sm"
+              type="file"
+              accept=".txt,.md,.csv,.json,text/plain"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (file) onFile(file);
+                event.target.value = "";
+              }}
+            />
+          </label>
+          {analyzed ? (
+            <div className="mt-3 grid gap-2">
+              <p className="text-xs text-muted">{name} · analyse KayrosLab</p>
+              <p className="text-sm">{summary}</p>
+              <ul className="list-disc pl-5 text-sm">
+                {facts.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          ) : null}
+        </li>
+        <li>
+          <p className="text-sm font-medium">2. Télécharger l’analyse</p>
+          <p className="mt-1 text-sm text-muted">Le fichier récupéré est la lecture de KayrosLab : résumé, faits et questions. Pas le texte brut.</p>
+          <button
+            type="button"
+            className="mt-3 inline-flex min-h-11 items-center rounded-full border-2 border-[#161a18] bg-white px-4 text-sm font-medium disabled:opacity-45"
+            disabled={!analyzed}
+            onClick={download}
+          >
+            Télécharger l’analyse
+          </button>
+        </li>
+        <li>
+          <p className="text-sm font-medium">3. Question</p>
+          <p className="mt-1 text-sm text-muted">Choisissez une question proposée, ou écrivez la vôtre sur le texte analysé.</p>
+          {analyzed ? (
+            <div className="mt-3 grid gap-3">
+              <div className="grid gap-2">
+                {questions.map((question) => (
+                  <label key={question} className="flex items-start gap-2 rounded-lg bg-paper px-3 py-2 text-sm">
+                    <input type="radio" name="brief-question" checked={picked === question && custom.trim().length < 8} onChange={() => { setPicked(question); setCustom(""); }} />
+                    <span>{question}</span>
+                  </label>
+                ))}
+              </div>
+              <Field label="Ou une question sur ce texte" hint="Si vous écrivez ici, elle remplace la question cochée.">
+                <TextArea value={custom} onChange={(event) => setCustom(event.target.value)} placeholder="Question portant sur le document analysé" aria-label="Question sur le texte analysé" />
+              </Field>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-muted">Disponible une fois le document analysé.</p>
+          )}
+        </li>
+        <li>
+          <p className="text-sm font-medium">4. Agents</p>
+          <p className="mt-1 text-sm text-muted">Cochez ceux qui instruiront. Le collectif n’est pas modifié.</p>
+          {asked.trim().length >= 8 || currentQuestion.trim().length >= 8 ? (
+            <ul className="mt-3 grid gap-2">
+              {agents.map((agent) => {
+                const on = checkedIds.includes(agent.id);
+                return (
+                  <li key={agent.id} className="flex items-center gap-3 rounded-2xl bg-paper px-3 py-2">
+                    <input
+                      type="checkbox"
+                      className="size-4"
+                      checked={on}
+                      aria-label={`Ajouter ${agent.name}`}
+                      onChange={() => onToggle(agent.id)}
+                    />
+                    <AgentMark agent={agent} size={28} />
+                    <button type="button" className="min-w-0 flex-1 text-left text-sm" onClick={() => onOpenAgent?.(agent.id)}>
+                      <span className="block font-medium">{agent.name}</span>
+                      <span className="block text-xs text-muted">{agent.role}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="mt-2 text-sm text-muted">La question d’abord, les agents ensuite.</p>
+          )}
+        </li>
+      </ol>
+      {error ? <p className="mt-3 text-sm text-stop" role="alert">{error}</p> : null}
+      <div className="mt-4 rounded-2xl bg-paper px-4 py-3">
+        <ul className="grid gap-1 text-sm">
+          <li>{analyzed ? "Document analysé." : "Document pas encore lu."}</li>
+          <li>{asked.trim().length >= 8 ? "Question retenue." : "Question pas encore choisie."}</li>
+          <li>{checkedIds.length ? `${checkedIds.length} agent${checkedIds.length > 1 ? "s" : ""} retenu${checkedIds.length > 1 ? "s" : ""}.` : "Aucun agent retenu."}</li>
+        </ul>
+        {ready && sameRun ? (
+          <p className="mt-3 text-sm font-medium">La réflexion est en cours auprès du comité.</p>
+        ) : ready ? (
+          <div className="mt-3 flex flex-col gap-3">
+            <p className="text-sm font-medium">KayrosLab est prêt à lancer la réflexion auprès du comité.</p>
+            <button
+              type="button"
+              className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#4a154b] px-4 text-sm font-medium text-white"
+              onClick={() => {
+                const result = onLaunch(asked.trim(), {
+                  name: name || "document.txt",
+                  type: "Lecture",
+                  text,
+                  summary,
+                  facts,
+                  questions,
+                });
+                setError(result.ok ? "" : result.reason ?? "Refusé");
+              }}
+            >
+              Lancer la réflexion
+            </button>
+          </div>
         ) : (
-          <ul className="mb-3 grid gap-2">
-            {available.map((agent) => (
-              <li key={agent.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-paper px-3 py-2">
-                <span className="flex min-w-0 items-center gap-3 text-sm">
-                  <AgentMark agent={agent} size={28} />
-                  <span>{agent.name} · {agent.role}</span>
-                </span>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    const result = onAdd(agent.id);
-                    setError(result.ok ? "" : result.reason ?? "Refusé");
-                    if (result.ok) setOpen(false);
-                  }}
-                >
-                  Ajouter
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )
-      ) : null}
-      {error ? <p className="mb-2 text-sm text-stop" role="alert">{error}</p> : null}
-      <button
-        type="button"
-        className="inline-flex min-h-11 items-center rounded-full bg-[#146c43] px-4 text-sm font-medium text-white disabled:opacity-45"
-        disabled={blocked}
-        onClick={() => {
-          setError(blocked ? "Précisez d’abord la question." : "");
-          setOpen((value) => !value);
-        }}
-      >
-        Ajouter un agent
-      </button>
-      {blocked ? <p className="mt-2 text-sm text-muted">Précisez d’abord la question. Un agent ajouté n’aurait rien à instruire.</p> : null}
-    </div>
+          <p className="mt-3 text-sm text-muted">Pas encore prêt. Il manque une étape ci-dessus.</p>
+        )}
+      </div>
+    </Panel>
   );
 }
 
@@ -532,138 +689,6 @@ function CycleRail({ stage }: { stage: CycleId }) {
         );
       })}
     </ol>
-  );
-}
-
-function DocumentDesk({
-  existing = [],
-  onKeep,
-  onPose,
-}: {
-  existing?: Evidence[];
-  onKeep?: (file: Evidence) => { ok: boolean; reason?: string };
-  onPose: (question: string, file: Evidence | null) => { ok: boolean; reason?: string };
-}) {
-  const saved = existing.find((file) => file.summary);
-  const [name, setName] = useState(saved?.name ?? "");
-  const [text, setText] = useState(saved?.text ?? "");
-  const [summary, setSummary] = useState(saved?.summary ?? "");
-  const [facts, setFacts] = useState<string[]>(saved?.facts ?? []);
-  const [questions, setQuestions] = useState<string[]>(saved?.questions ?? []);
-  const [picked, setPicked] = useState(saved?.questions?.[0] ?? "");
-  const [note, setNote] = useState("");
-  const [error, setError] = useState("");
-
-  function read() {
-    const source = text.trim();
-    const label = name.trim() || "note.txt";
-    const reading = readDocument(label, source);
-    if (reading.thin) {
-      setSummary("");
-      setFacts([]);
-      setQuestions([]);
-      setError(reading.note);
-      return;
-    }
-    setName(label);
-    setSummary(reading.summary);
-    setFacts(reading.facts);
-    setQuestions(reading.questions);
-    setPicked(reading.questions[0] ?? "");
-    setError("");
-    setNote(reading.note);
-    onKeep?.({
-      name: label,
-      type: "Lecture",
-      text: source,
-      summary: reading.summary,
-      facts: reading.facts,
-      questions: reading.questions,
-    });
-  }
-
-  function download() {
-    const source = text.trim();
-    const body = summary
-      ? `# ${name || "lecture"}\n\n${summary}\n\n${facts.map((item) => `- ${item}`).join("\n")}\n\n## Texte\n\n${source}\n`
-      : source;
-    if (!body.trim()) {
-      setError("Collez un texte avant de télécharger.");
-      return;
-    }
-    const filename = `${(name || "lecture").replace(/\.\w+$/, "").replace(/[^\w\- ]+/g, "").trim() || "lecture"}.md`;
-    const blob = new Blob([body], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.rel = "noopener";
-    document.body.appendChild(link);
-    link.click();
-    window.setTimeout(() => {
-      link.remove();
-      URL.revokeObjectURL(url);
-    }, 1500);
-    setError("");
-    setNote(`Téléchargement lancé : ${filename}`);
-  }
-
-  return (
-    <Panel>
-      <h2 className="text-sm font-medium">Document, avant le comité</h2>
-      <p className="mt-1 text-sm text-muted">
-        Collez le texte, lisez-le, téléchargez la lecture, puis choisissez une question. Moteur local déterministe : seuls les chiffres et les clauses présents dans le texte sont repris. api.kayroslab.com n’est pas appelé.
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <button type="button" className="inline-flex min-h-11 items-center rounded-full bg-[#1e4d78] px-4 text-sm font-medium text-white disabled:opacity-45" disabled={text.trim().length < 40} onClick={read}>
-          Lire
-        </button>
-        <button type="button" className="inline-flex min-h-11 items-center rounded-full border-2 border-[#161a18] bg-white px-4 text-sm font-medium" onClick={download}>
-          Télécharger
-        </button>
-      </div>
-      <div className="mt-4">
-        <Field label="Texte du document">
-          <TextArea value={text} onChange={(event) => setText(event.target.value)} placeholder="Collez l’extrait : objet, montant, échéance, clause." aria-label="Texte du document" />
-        </Field>
-      </div>
-      {name ? <p className="mt-2 text-xs text-muted">{name}</p> : null}
-      {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
-      {note && !error ? <p className="mt-2 text-sm text-ink-soft">{note}</p> : null}
-      {summary ? (
-        <div className="mt-4 grid gap-3">
-          <p className="text-sm">{summary}</p>
-          {facts.length ? (
-            <ul className="list-disc pl-5 text-sm">
-              {facts.map((item) => <li key={item}>{item}</li>)}
-            </ul>
-          ) : null}
-          <fieldset>
-            <legend className="text-sm font-medium">Questions proposées</legend>
-            <div className="mt-2 grid gap-2">
-              {questions.map((question) => (
-                <label key={question} className="flex items-start gap-2 rounded-lg bg-paper px-3 py-2 text-sm">
-                  <input type="radio" name="proposed" checked={picked === question} onChange={() => setPicked(question)} />
-                  <span>{question}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <button
-            type="button"
-            className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#4a154b] px-4 text-sm font-medium text-white disabled:opacity-45"
-            disabled={!picked}
-            onClick={() => {
-              const file: Evidence | null = summary ? { name: name || "note.txt", type: "Lecture", text, summary, facts, questions } : null;
-              const result = onPose(picked, file);
-              setError(result.ok ? "" : result.reason ?? "Refusé");
-            }}
-          >
-            Poser au comité
-          </button>
-        </div>
-      ) : null}
-    </Panel>
   );
 }
 

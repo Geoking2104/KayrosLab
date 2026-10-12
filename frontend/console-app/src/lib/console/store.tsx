@@ -28,6 +28,7 @@ type DraftMission = {
   profile: Profile;
   useCase: UseCase;
   evidence: Evidence[];
+  agentIds?: string[];
 };
 
 type Store = {
@@ -348,7 +349,10 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       startMission: (draft) => {
         const id = uid("dos");
         const collective = state.collectives.find((item) => item.id === draft.collectiveId) ?? state.collectives[0];
-        const agentIds = (collective?.agentIds ?? []).filter((agentId) => state.agents.some((agent) => agent.id === agentId && agent.enabled));
+        const chosen = (draft.agentIds ?? []).filter((agentId) => state.agents.some((agent) => agent.id === agentId && agent.enabled));
+        const agentIds = chosen.length
+          ? chosen
+          : (collective?.agentIds ?? []).filter((agentId) => state.agents.some((agent) => agent.id === agentId && agent.enabled));
         const at = stamp();
         const thread: Thread = {
           id,
@@ -383,7 +387,6 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         if (!agent) return { ok: false, reason: "Agent introuvable." };
         if (!agent.enabled) return { ok: false, reason: "Cet agent est inactif." };
         if (thread.agentIds.includes(agentId)) return { ok: false, reason: "Cet agent est déjà dans le dossier." };
-        if (thread.status === "needs_clarification") return { ok: false, reason: "Précisez la question avant d’ajouter quelqu’un." };
         setState((current) => ({
           ...current,
           threads: current.threads.map((item) => {
