@@ -40,7 +40,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
       <div>
         <h1 className="text-2xl font-medium tracking-tight">Dossiers</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
-          Déposez un document. KayrosLab le lit et le découpe en questions. Vous téléchargez cette analyse, vous choisissez la question, puis les agents. Le comité ne part que lorsque KayrosLab l’annonce.
+          Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce.
         </p>
       </div>
       <Briefing
@@ -427,6 +427,30 @@ function traceKind(label: string, detail: string) {
   return "Modèle" as const;
 }
 
+const AGENT_TOPICS: { re: RegExp; match: RegExp; why: string }[] = [
+  { re: /marge|prix|budget|remise|tr[eé]sorerie|€|eur|co[uû]t|chiffre|plafond/i, match: /finance|cfo|daf|marge|prix/i, why: "La question touche à l’argent, à la marge ou au prix." },
+  { re: /clause|contrat|r[eé]sili|rgpd|juridique|opposab|obligation|engagement|avenant/i, match: /juridique|legal|veto|clause/i, why: "La question touche au droit ou à une clause." },
+  { re: /technique|h[eé]berg|souverain|dette|faisab|production|inf[eé]rence|n[oœ]ud|capacit[eé]|logiciel/i, match: /technique|cto|ing[eé]nier|faisab|dette/i, why: "La question touche à la faisabilité ou à la technique." },
+  { re: /client|revenu|deal|signat|commercial|volume|relation/i, match: /commercial|sales|revenu|client/i, why: "La question touche au revenu ou à la relation client." },
+];
+
+function suggestAgents(text: string, agents: Agent[]) {
+  const clean = text.trim();
+  if (clean.length < 8) return [];
+  const scored = agents
+    .map((agent) => {
+      const blob = `${agent.name} ${agent.role} ${agent.department} ${agent.mission} ${agent.brief ?? ""}`;
+      const hits = AGENT_TOPICS.filter((topic) => topic.re.test(clean) && topic.match.test(blob));
+      return { agent, hits };
+    })
+    .filter((item) => item.hits.length > 0)
+    .sort((a, b) => b.hits.length - a.hits.length);
+  if (scored.length) return scored.map((item) => ({ agent: item.agent, why: item.hits[0].why }));
+  return agents
+    .filter((agent) => agent.kind === "metier")
+    .map((agent) => ({ agent, why: "Comité général : la question ne désigne pas encore un métier." }));
+}
+
 function Briefing({
   agents,
   checkedIds,
@@ -455,12 +479,14 @@ function Briefing({
   const [facts, setFacts] = useState<string[]>(saved?.facts ?? []);
   const [questions, setQuestions] = useState<string[]>(saved?.questions ?? []);
   const [picked, setPicked] = useState(saved?.questions?.[0] ?? "");
+  const [raw, setRaw] = useState(saved ? "" : currentQuestion);
   const [custom, setCustom] = useState("");
   const [error, setError] = useState("");
-  const asked = custom.trim().length >= 8 ? custom.trim() : picked;
+  const asked = (custom.trim().length >= 8 ? custom.trim() : picked.trim()) || (raw.trim().length >= 8 ? raw.trim() : "");
   const analyzed = Boolean(summary);
-  const ready = analyzed && asked.trim().length >= 8 && checkedIds.length > 0;
+  const ready = asked.trim().length >= 8 && checkedIds.length > 0;
   const sameRun = busy && asked.trim() === currentQuestion.trim();
+  const proposals = suggestAgents(asked || raw || currentQuestion, agents);
 
   function applyReading(label: string, source: string) {
     const reading = readDocument(label, source);
@@ -541,8 +567,8 @@ function Briefing({
       <h2 className="text-sm font-medium">Préparer la réflexion</h2>
       <ol className="mt-4 flex flex-col gap-5">
         <li>
-          <p className="text-sm font-medium">1. Document</p>
-          <p className="mt-1 text-sm text-muted">KayrosLab lit le fichier dès le dépôt, puis le découpe en questions. On ne colle rien avant.</p>
+          <p className="text-sm font-medium">1. Document, ou texte brut</p>
+          <p className="mt-1 text-sm text-muted">Le document est lu puis téléchargeable. Sans document, le texte brut suffit pour démarrer, comme sur un modèle.</p>
           <label className="mt-3 flex min-h-24 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-line-strong bg-paper px-4 py-5 text-sm">
             <span className="font-medium">Déposer un .txt, .md, .csv ou .json</span>
             <input
@@ -556,6 +582,18 @@ function Briefing({
               }}
             />
           </label>
+          {!analyzed ? (
+            <div className="mt-3">
+              <Field label="Texte brut" hint="Question ou brief. Aucun téléchargement n’est exigé.">
+                <TextArea value={raw} onChange={(event) => setRaw(event.target.value)} placeholder="Écrivez ici pour démarrer sans document" aria-label="Texte brut" />
+              </Field>
+              {raw.trim().length >= 40 ? (
+                <button type="button" className="mt-3 inline-flex min-h-11 items-center rounded-full bg-[#1e4d78] px-4 text-sm font-medium text-white" onClick={() => applyReading("saisie.txt", raw.trim())}>
+                  Découper ce texte en questions
+                </button>
+              ) : null}
+            </div>
+          ) : null}
           {analyzed ? (
             <div className="mt-3 grid gap-2">
               <p className="text-xs text-muted">{name} · analyse KayrosLab</p>
@@ -568,7 +606,7 @@ function Briefing({
         </li>
         <li>
           <p className="text-sm font-medium">2. Télécharger l’analyse</p>
-          <p className="mt-1 text-sm text-muted">Le fichier récupéré est la lecture de KayrosLab : résumé, faits et questions. Pas le texte brut.</p>
+          <p className="mt-1 text-sm text-muted">Seulement après une analyse. Sans document, le texte brut ne se télécharge pas : il sert de départ.</p>
           <button
             type="button"
             className="mt-3 inline-flex min-h-11 items-center rounded-full border-2 border-[#161a18] bg-white px-4 text-sm font-medium disabled:opacity-45"
@@ -580,41 +618,67 @@ function Briefing({
         </li>
         <li>
           <p className="text-sm font-medium">3. Question</p>
-          <p className="mt-1 text-sm text-muted">Choisissez une question proposée, ou écrivez la vôtre sur le texte analysé.</p>
+          <p className="mt-1 text-sm text-muted">Choisissez une question proposée, écrivez la vôtre, ou gardez le texte brut.</p>
           {analyzed ? (
-            <div className="mt-3 grid gap-3">
-              <div className="grid gap-2">
-                {questions.map((question) => (
-                  <label key={question} className="flex items-start gap-2 rounded-lg bg-paper px-3 py-2 text-sm">
-                    <input type="radio" name="brief-question" checked={picked === question && custom.trim().length < 8} onChange={() => { setPicked(question); setCustom(""); }} />
-                    <span>{question}</span>
-                  </label>
-                ))}
-              </div>
-              <Field label="Ou une question sur ce texte" hint="Si vous écrivez ici, elle remplace la question cochée.">
-                <TextArea value={custom} onChange={(event) => setCustom(event.target.value)} placeholder="Question portant sur le document analysé" aria-label="Question sur le texte analysé" />
-              </Field>
+            <div className="mt-3 grid gap-2">
+              {questions.map((question) => (
+                <label key={question} className="flex items-start gap-2 rounded-lg bg-paper px-3 py-2 text-sm">
+                  <input type="radio" name="brief-question" checked={picked === question && custom.trim().length < 8} onChange={() => { setPicked(question); setCustom(""); }} />
+                  <span>{question}</span>
+                </label>
+              ))}
             </div>
-          ) : (
-            <p className="mt-2 text-sm text-muted">Disponible une fois le document analysé.</p>
-          )}
+          ) : null}
+          <div className="mt-3">
+            <Field label={analyzed ? "Ou une question sur ce texte" : "Question"} hint={analyzed ? "Si vous écrivez ici, elle remplace la question cochée." : "Vous pouvez démarrer sans document."}>
+              <TextArea value={custom} onChange={(event) => setCustom(event.target.value)} placeholder="Posez la question au comité" aria-label="Question au comité" />
+            </Field>
+          </div>
         </li>
         <li>
-          <p className="text-sm font-medium">4. Agents</p>
-          <p className="mt-1 text-sm text-muted">Cochez ceux qui instruiront. Le collectif n’est pas modifié.</p>
-          {asked.trim().length >= 8 || currentQuestion.trim().length >= 8 ? (
+          <p className="text-sm font-medium">4. Agents proposés pour cette question</p>
+          <p className="mt-1 text-sm text-muted">KayrosLab retient ceux dont le métier répond au texte. Vous pouvez en ajouter ou en retirer. Le collectif n’est pas modifié.</p>
+          {proposals.length && (asked.trim().length >= 8 || raw.trim().length >= 8 || currentQuestion.trim().length >= 8) ? (
+            <div className="mt-3 grid gap-2">
+              <ul className="grid gap-2">
+                {proposals.map((item) => {
+                  const on = checkedIds.includes(item.agent.id);
+                  return (
+                    <li key={item.agent.id} className="rounded-2xl px-3 py-2" style={{ background: "#e5f4ec" }}>
+                      <div className="flex items-center gap-3">
+                        <input type="checkbox" className="size-4" checked={on} aria-label={`Proposer ${item.agent.name}`} onChange={() => onToggle(item.agent.id)} />
+                        <AgentMark agent={item.agent} size={28} />
+                        <button type="button" className="min-w-0 flex-1 text-left text-sm" onClick={() => onOpenAgent?.(item.agent.id)}>
+                          <span className="block font-medium">{item.agent.name}</span>
+                          <span className="block text-xs text-muted">{item.agent.role} · {item.why}</span>
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+              <button
+                type="button"
+                className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#146c43] px-4 text-sm font-medium text-white"
+                onClick={() => {
+                  for (const item of proposals) {
+                    if (!checkedIds.includes(item.agent.id)) onToggle(item.agent.id);
+                  }
+                }}
+              >
+                Retenir ces propositions
+              </button>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-muted">Écrivez la question pour voir qui peut intervenir.</p>
+          )}
+          {(asked.trim().length >= 8 || currentQuestion.trim().length >= 8) && agents.some((agent) => !proposals.some((item) => item.agent.id === agent.id)) ? (
             <ul className="mt-3 grid gap-2">
-              {agents.map((agent) => {
+              {agents.filter((agent) => !proposals.some((item) => item.agent.id === agent.id)).map((agent) => {
                 const on = checkedIds.includes(agent.id);
                 return (
                   <li key={agent.id} className="flex items-center gap-3 rounded-2xl bg-paper px-3 py-2">
-                    <input
-                      type="checkbox"
-                      className="size-4"
-                      checked={on}
-                      aria-label={`Ajouter ${agent.name}`}
-                      onChange={() => onToggle(agent.id)}
-                    />
+                    <input type="checkbox" className="size-4" checked={on} aria-label={`Ajouter ${agent.name}`} onChange={() => onToggle(agent.id)} />
                     <AgentMark agent={agent} size={28} />
                     <button type="button" className="min-w-0 flex-1 text-left text-sm" onClick={() => onOpenAgent?.(agent.id)}>
                       <span className="block font-medium">{agent.name}</span>
@@ -624,15 +688,13 @@ function Briefing({
                 );
               })}
             </ul>
-          ) : (
-            <p className="mt-2 text-sm text-muted">La question d’abord, les agents ensuite.</p>
-          )}
+          ) : null}
         </li>
       </ol>
       {error ? <p className="mt-3 text-sm text-stop" role="alert">{error}</p> : null}
       <div className="mt-4 rounded-2xl bg-paper px-4 py-3">
         <ul className="grid gap-1 text-sm">
-          <li>{analyzed ? "Document analysé." : "Document pas encore lu."}</li>
+          <li>{analyzed ? "Document analysé." : raw.trim() || custom.trim() ? "Démarrage par texte brut, sans téléchargement." : "Ni document, ni texte."}</li>
           <li>{asked.trim().length >= 8 ? "Question retenue." : "Question pas encore choisie."}</li>
           <li>{checkedIds.length ? `${checkedIds.length} agent${checkedIds.length > 1 ? "s" : ""} retenu${checkedIds.length > 1 ? "s" : ""}.` : "Aucun agent retenu."}</li>
         </ul>
@@ -646,12 +708,12 @@ function Briefing({
               className="inline-flex min-h-11 w-fit items-center rounded-full bg-[#4a154b] px-4 text-sm font-medium text-white"
               onClick={() => {
                 const result = onLaunch(asked.trim(), {
-                  name: name || "document.txt",
-                  type: "Lecture",
-                  text,
-                  summary,
+                  name: name || (analyzed ? "document.txt" : "saisie.txt"),
+                  type: analyzed ? "Lecture" : "Saisie",
+                  text: text || raw || asked,
+                  summary: summary || asked.trim(),
                   facts,
-                  questions,
+                  questions: questions.length ? questions : [asked.trim()],
                 });
                 setError(result.ok ? "" : result.reason ?? "Refusé");
               }}
