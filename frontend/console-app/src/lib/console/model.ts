@@ -229,6 +229,7 @@ export interface AppState {
   defaultProfile: Profile;
   selectedCollectiveId: string;
   guideSeen: boolean;
+  guideAck: boolean[];
   notice?: { tone: "ok" | "warn" | "stop"; text: string };
 }
 
@@ -562,6 +563,7 @@ export function seedState(): AppState {
     defaultProfile: "fast",
     selectedCollectiveId: "col-deal",
     guideSeen: false,
+    guideAck: [false, false, false, false],
   };
 }
 

@@ -21,12 +21,12 @@ import { Instruct } from "./Instruct";
 import { Workbench } from "./Workbench";
 import { Demo } from "./Demo";
 
-const NAV: { id: Page; label: string; short: string; icon: typeof Inbox }[] = [
-  { id: "overview", label: "Aujourd’hui", short: "Jour", icon: Inbox },
-  { id: "dossiers", label: "Dossiers", short: "Dossiers", icon: FolderOpen },
-  { id: "collectifs", label: "Collectifs", short: "Équipes", icon: Users },
-  { id: "agents", label: "Agents", short: "Agents", icon: Bot },
-  { id: "connexions", label: "Connexions", short: "Liens", icon: Plug },
+const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; bar: string; soft: string; ink: string }[] = [
+  { id: "overview", label: "Aujourd’hui", short: "Jour", icon: Inbox, bar: "bg-accent", soft: "bg-accent-soft", ink: "text-accent" },
+  { id: "dossiers", label: "Dossiers", short: "Dossiers", icon: FolderOpen, bar: "bg-teal", soft: "bg-teal-soft", ink: "text-teal" },
+  { id: "collectifs", label: "Collectifs", short: "Équipes", icon: Users, bar: "bg-hold", soft: "bg-hold-soft", ink: "text-hold" },
+  { id: "agents", label: "Agents", short: "Agents", icon: Bot, bar: "bg-violet", soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "connexions", label: "Connexions", short: "Liens", icon: Plug, bar: "bg-go", soft: "bg-go-soft", ink: "text-go" },
 ];
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
@@ -93,9 +93,17 @@ function Frame() {
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={cn("flex min-h-11 items-center gap-3 rounded-[10px] px-3 text-sm font-semibold", active ? "bg-accent text-white shadow-cta" : "text-ink-soft hover:bg-paper")}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "flex min-h-11 items-center gap-3 rounded-[10px] border-l-4 px-3 text-sm font-semibold",
+                  item.ink,
+                  active ? item.soft : "border-transparent hover:bg-paper",
+                )}
+                style={active ? { borderLeftColor: "currentColor" } : undefined}
               >
-                <Icon size={18} strokeWidth={1.75} aria-hidden="true" />
+                <span className={cn("grid size-8 shrink-0 place-items-center rounded-lg text-white", item.bar)}>
+                  <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+                </span>
                 {item.label}
                 {item.id === "dossiers" && waiting > 0 ? (
                   <span className="ml-auto rounded-full bg-hold-soft px-2 py-0.5 text-xs font-medium text-hold">{waiting}</span>
@@ -164,8 +172,8 @@ function Frame() {
           const Icon = item.icon;
           const active = page === item.id;
           return (
-            <a key={item.id} href={`#${item.id}`} className={cn("flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold", active ? "bg-accent-soft text-accent" : "text-muted")}>
-              <Icon size={18} strokeWidth={1.75} aria-hidden="true" />
+            <a key={item.id} href={`#${item.id}`} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold", item.ink, active && item.soft)}>
+              <Icon size={18} strokeWidth={1.75} aria-hidden="true" className={item.ink} />
               {item.short}
             </a>
           );

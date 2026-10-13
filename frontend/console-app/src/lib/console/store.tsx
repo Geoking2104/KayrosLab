@@ -35,6 +35,7 @@ type Store = {
   state: AppState;
   setRole: (role: Role) => void;
   dismissGuide: () => void;
+  ackGuide: (index: number, checked: boolean) => void;
   replayGuide: () => void;
   clearNotice: () => void;
   selectCollective: (id: string) => void;
@@ -86,7 +87,10 @@ function load(): AppState {
       }),
       ...(parsed.connectors ?? []).filter((item) => !base.connectors.some((seed) => seed.id === item.id)),
     ];
-    return { ...base, ...parsed, agents, connectors, notice: undefined };
+    const guideAck = Array.isArray(parsed.guideAck) && parsed.guideAck.length === 4
+      ? parsed.guideAck.map((item) => Boolean(item))
+      : base.guideAck;
+    return { ...base, ...parsed, agents, connectors, guideAck, notice: undefined };
   } catch {
     return seedState();
   }
@@ -180,8 +184,13 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
     return {
       state,
       setRole: (role) => setState((current) => ({ ...current, role })),
-      dismissGuide: () => setState((current) => ({ ...current, guideSeen: true })),
-      replayGuide: () => setState((current) => ({ ...current, guideSeen: false })),
+      dismissGuide: () => setState((current) => ({ ...current, guideSeen: true, guideAck: [true, true, true, true] })),
+      ackGuide: (index, checked) => setState((current) => {
+        const previous = current.guideAck?.length === 4 ? current.guideAck : [false, false, false, false];
+        const guideAck = previous.map((item, i) => (i === index ? checked : item));
+        return { ...current, guideAck, guideSeen: guideAck.every(Boolean) };
+      }),
+      replayGuide: () => setState((current) => ({ ...current, guideSeen: false, guideAck: [false, false, false, false] })),
       clearNotice: () => setState((current) => ({ ...current, notice: undefined })),
       selectCollective: (id) => setState((current) => ({ ...current, selectedCollectiveId: id })),
       createCollective: (input) => {
