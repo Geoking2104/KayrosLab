@@ -1,5 +1,5 @@
 // KayrosLab — Connecteurs conversationnels (Slack · Teams · Discord)
-// Ref. SPECIFICATIONS_CONNECTEURS_CHAT.md (EF-88 a EF-109)
+// Ref. archive/specs/SPECIFICATIONS_CONNECTEURS_CHAT.md (EF-88 a EF-109)
 //
 // Principe :
 //   1. Le coeur expose des INTENTIONS (arbitrer_gate, voter, soumettre_idee…)
