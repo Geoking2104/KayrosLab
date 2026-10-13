@@ -5,6 +5,7 @@ import { cn } from "@/lib/cn";
 import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
+import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
 
 function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
   return (
@@ -217,7 +218,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
         )}
       </div>
       <p className="text-sm text-muted">
-        Crystal Knows : jeton serveur absent. L’API n’est pas appelée. Un export JSON autorisé ou un type DISC peut servir d’indice, avec consentement. Aucun profil LinkedIn n’est visité.
+        Crystal Knows : jeton serveur absent, aucune fiche n’est téléchargée. Un impersonator se relie d’abord à une adresse CrystalKnows ou LinkedIn publique, conservée comme indice. Ces adresses ne sont pas visitées.
       </p>
     </div>
   );
@@ -226,7 +227,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
 const AGENT_TYPES: { id: "metier" | "hybride" | "impersonator" | "team"; label: string; hint: string; color: string; soft: string }[] = [
   { id: "metier", label: "Métier", hint: "Une fonction. Personne n’est personnifiée.", color: "#0f766e", soft: "#e6f4f2" },
   { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
-  { id: "impersonator", label: "Impersonator", hint: "Persona simulée, toujours étiquetée.", color: "#5b4cdb", soft: "#eeecfb" },
+  { id: "impersonator", label: "Impersonator", hint: "Reliez CrystalKnows ou LinkedIn, puis la fiche.", color: "#5b4cdb", soft: "#eeecfb" },
   { id: "team", label: "Équipe", hint: "De 2 à 12 personas, un panel.", color: "#8a6d1a", soft: "#f8f1dc" },
 ];
 
@@ -448,9 +449,22 @@ function Composer({
   const [source, setSource] = useState<"manuel" | "json" | "disc" | "api">("manuel");
   const [disc, setDisc] = useState("Di");
   const [error, setError] = useState("");
+  const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
   const personal = mode !== "metier";
+  const gate = mode === "impersonator" && !existing && !link;
+
+  function acceptLink(next: ProfileSource, url: string) {
+    setLink({ source: next, url });
+    setClues(profileClue(next, url));
+    setSource("manuel");
+    setError("");
+  }
 
   function save() {
+    if (mode === "impersonator" && !existing && !link) {
+      setError("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche.");
+      return;
+    }
     if (mode === "team") {
       if (source === "api") {
         setError("CRYSTALKNOWS_API_TOKEN absent. Aucun appel. L’équipe n’est pas créée.");
@@ -473,11 +487,13 @@ function Composer({
       setError("Cochez le consentement et les cinq garde-fous avant d’enregistrer.");
       return;
     }
-    const clueText = source === "json"
-      ? clues.trim() || "Export JSON Crystal autorisé"
-      : source === "disc"
-        ? `DISC ${disc} · saisie autorisée, pas d’appel API`
-        : clues;
+    const clueText = mode === "impersonator" && link
+      ? (clues.trim().includes(link.url) ? clues.trim() : `${profileClue(link.source, link.url)}${clues.trim() ? ` · ${clues.trim()}` : ""}`)
+      : source === "json"
+        ? clues.trim() || "Export JSON Crystal autorisé"
+        : source === "disc"
+          ? `DISC ${disc} · saisie autorisée, pas d’appel API`
+          : clues;
     const draft = {
       name: name.trim(),
       role,
@@ -505,6 +521,18 @@ function Composer({
         : mode === "impersonator"
           ? "Nouvel impersonator"
           : "Nouvel agent métier";
+
+  if (gate) {
+    return (
+      <Panel>
+        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">Impersonator · simulation</p>
+        <div className="mt-3">
+          <ProfileLink onContinue={acceptLink} />
+        </div>
+        <Button className="mt-4" variant="ghost" onClick={onClose}>Annuler</Button>
+      </Panel>
+    );
+  }
 
   return (
     <Panel>
@@ -538,26 +566,37 @@ function Composer({
         )}
         {personal ? (
           <>
-            <Field label="Source du profil" hint="L’API Crystal n’est pas appelée sans jeton serveur.">
-              <select className={controlClass} value={source} onChange={(event) => setSource(event.target.value as typeof source)}>
-                <option value="manuel">Saisie manuelle</option>
-                <option value="json">Export JSON autorisé</option>
-                <option value="disc">Type DISC</option>
-                <option value="api">API Crystal Knows</option>
-              </select>
-            </Field>
-            {source === "disc" ? (
-              <Field label="Type DISC">
-                <select className={controlClass} value={disc} onChange={(event) => setDisc(event.target.value)}>
-                  {["D", "I", "S", "C", "Di", "Sc"].map((item) => <option key={item}>{item}</option>)}
-                </select>
-              </Field>
-            ) : source === "api" ? (
-              <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold">Jeton serveur absent. Ce choix ne peut pas être enregistré.</p>
+            {mode === "impersonator" && link ? (
+              <>
+                <LinkedMark source={link.source} url={link.url} onChange={existing ? undefined : () => setLink(null)} />
+                <Field label="Notes" hint="L’adresse reste un indice. Elle n’est pas visitée, et aucune fiche n’est téléchargée.">
+                  <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
+                </Field>
+              </>
             ) : (
-              <Field label="Indices autorisés" hint="Export, entretien consenti, ou saisie. Pas d’URL à visiter.">
-                <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
-              </Field>
+              <>
+                <Field label="Source du profil" hint="L’API Crystal n’est pas appelée sans jeton serveur.">
+                  <select className={controlClass} value={source} onChange={(event) => setSource(event.target.value as typeof source)}>
+                    <option value="manuel">Saisie manuelle</option>
+                    <option value="json">Export JSON autorisé</option>
+                    <option value="disc">Type DISC</option>
+                    <option value="api">API Crystal Knows</option>
+                  </select>
+                </Field>
+                {source === "disc" ? (
+                  <Field label="Type DISC">
+                    <select className={controlClass} value={disc} onChange={(event) => setDisc(event.target.value)}>
+                      {["D", "I", "S", "C", "Di", "Sc"].map((item) => <option key={item}>{item}</option>)}
+                    </select>
+                  </Field>
+                ) : source === "api" ? (
+                  <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold">Jeton serveur absent. Ce choix ne peut pas être enregistré.</p>
+                ) : (
+                  <Field label="Indices autorisés" hint="Export, entretien consenti, ou saisie. Pas d’URL à visiter.">
+                    <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
+                  </Field>
+                )}
+              </>
             )}
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1 size-4" checked={consent} onChange={(event) => setConsent(event.target.checked)} />

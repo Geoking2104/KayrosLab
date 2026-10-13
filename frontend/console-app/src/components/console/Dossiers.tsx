@@ -19,6 +19,7 @@ import { cn } from "@/lib/cn";
 import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
+import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
 
 const FILTERS: { id: "all" | ThreadStatus; label: string }[] = [
   { id: "all", label: "Tous" },
@@ -765,7 +766,7 @@ function Briefing({
 const OUTSIDE_TYPES: { id: AgentKind; label: string; hint: string; color: string; soft: string }[] = [
   { id: "metier", label: "Métier", hint: "Une fonction, sans personnifier personne.", color: "#0f766e", soft: "#e6f4f2" },
   { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
-  { id: "impersonator", label: "Impersonator", hint: "Persona simulée, toujours étiquetée.", color: "#5b4cdb", soft: "#eeecfb" },
+  { id: "impersonator", label: "Impersonator", hint: "Reliez CrystalKnows ou LinkedIn avant la fiche.", color: "#5b4cdb", soft: "#eeecfb" },
 ];
 
 function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
@@ -863,9 +864,14 @@ function OutsideForm({
   const [clues, setClues] = useState("");
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => false));
   const [error, setError] = useState("");
+  const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
   const label = kind === "metier" ? "Métier" : kind === "hybride" ? "Hybride" : "Impersonator";
 
   function save() {
+    if (kind === "impersonator" && !link) {
+      setError("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche.");
+      return;
+    }
     if (!name.trim()) {
       setError("Le nom est requis.");
       return;
@@ -888,10 +894,30 @@ function OutsideForm({
       enabled: true,
       consented: personal,
       simulation: personal,
-      clues: personal ? clues.trim() || "Saisie manuelle" : "",
+      clues: personal
+        ? (kind === "impersonator" && link
+          ? (clues.trim().includes(link.url) ? clues.trim() : `${profileClue(link.source, link.url)}${clues.trim() ? ` · ${clues.trim()}` : ""}`)
+          : clues.trim() || "Saisie manuelle")
+        : "",
       brief: "",
     });
     if (!result.ok) setError(result.reason ?? "Refusé");
+  }
+
+  if (kind === "impersonator" && !link) {
+    return (
+      <div className="grid gap-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">Impersonator · simulation</p>
+        <ProfileLink
+          onContinue={(source, url) => {
+            setLink({ source, url });
+            setClues(profileClue(source, url));
+            setError("");
+          }}
+        />
+        <Button variant="ghost" onClick={onBack}>Autre type</Button>
+      </div>
+    );
   }
 
   return (
@@ -911,9 +937,12 @@ function OutsideForm({
       <Field label="Mission">
         <TextArea value={mission} onChange={(event) => setMission(event.target.value)} />
       </Field>
+      {kind === "impersonator" && link ? (
+        <LinkedMark source={link.source} url={link.url} onChange={() => setLink(null)} />
+      ) : null}
       {personal ? (
         <>
-          <Field label="Indices autorisés" hint="Export ou saisie. Aucun scraping.">
+          <Field label={kind === "impersonator" ? "Notes" : "Indices autorisés"} hint={kind === "impersonator" ? "L’adresse n’est pas visitée. Aucune fiche n’est téléchargée." : "Export ou saisie. Aucun scraping."}>
             <input className={controlClass} value={clues} onChange={(event) => setClues(event.target.value)} />
           </Field>
           <ul className="grid gap-2">
