@@ -55,7 +55,7 @@ export function Connexions({ legacy }: { legacy: string }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Connexions</h1>
+        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Connexions</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Chaque canal s’intègre ou s’édite ici. Un canal connecté montre qui est en ligne. Aucun secret n’est collé dans la page.
         </p>

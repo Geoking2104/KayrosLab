@@ -32,7 +32,7 @@ export function ProgressBar({
         aria-valuemax={safeTotal}
         aria-label={label}
       >
-        <div className="h-full rounded-full bg-gradient-to-r from-[#00a1e0] to-teal transition-[width] duration-500" style={{ width: `${Math.min(ratio, 100)}%` }} />
+        <div className="h-full rounded-full bg-accent transition-[width] duration-500" style={{ width: `${Math.min(ratio, 100)}%` }} />
       </div>
     </div>
   );
@@ -46,7 +46,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-45",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-[background-color,transform] duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45",
         variant === "primary" && "bg-accent text-accent-ink shadow-cta hover:bg-accent-strong",
         variant === "secondary" && "border border-line bg-surface text-ink shadow-none hover:bg-paper",
         variant === "ghost" && "text-ink-soft shadow-none hover:bg-paper-2 hover:text-ink",
@@ -77,7 +77,7 @@ export function Field({
 }
 
 export const controlClass =
-  "min-h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm text-ink outline-none placeholder:text-muted";
+  "min-h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm text-ink outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/15";
 
 export function TextArea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea {...props} className={cn(controlClass, "min-h-28 py-3 leading-relaxed", props.className)} />;
@@ -94,22 +94,22 @@ export function StatusPill({ status }: { status: ThreadStatus }) {
           : status === "failed"
             ? "bg-stop-soft text-stop"
             : "bg-paper-2 text-ink-soft";
-  return <span className={cn("inline-flex rounded-full px-2.5 py-1 text-xs font-medium", tone)}>{STATUS_LABEL[status]}</span>;
+  return <span className={cn("inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-semibold tracking-wide", tone)}>{STATUS_LABEL[status]}</span>;
 }
 
 export function VerdictPill({ verdict }: { verdict?: Verdict }) {
   if (!verdict) return null;
   const tone = verdict === "GO" ? "bg-go-soft text-go" : verdict === "NO_GO" ? "bg-stop-soft text-stop" : "bg-hold-soft text-hold";
-  return <span className={cn("inline-flex rounded-full px-2 py-0.5 text-[11px] font-bold tracking-wide", tone)}>{VERDICT_LABEL[verdict]}</span>;
+  return <span className={cn("inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-semibold tracking-wide", tone)}>{VERDICT_LABEL[verdict]}</span>;
 }
 
 export function Panel({ children, className, style }: { children: ReactNode; className?: string; style?: CSSProperties }) {
-  return <section style={style} className={cn("rounded-3xl border border-line bg-surface p-4 shadow-card md:p-5", className)}>{children}</section>;
+  return <section style={style} className={cn("rounded-2xl border border-line bg-surface p-4 shadow-card md:p-5", className)}>{children}</section>;
 }
 
 export function Empty({ title, body, action }: { title: string; body: string; action?: ReactNode }) {
   return (
-    <div className="rounded-3xl border border-dashed border-line-strong bg-surface px-5 py-10 text-center shadow-card">
+    <div className="rounded-2xl border border-dashed border-line bg-surface px-5 py-10 text-center">
       <p className="font-medium text-ink">{title}</p>
       <p className="mx-auto mt-2 max-w-md text-sm text-muted">{body}</p>
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}

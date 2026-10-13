@@ -27,7 +27,7 @@ export function Workbench() {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Workbench</h1>
+        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Workbench</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Le poste de mission. La session active est celle que vous venez de choisir. Le dossier s’ouvre dès le lancement.
         </p>

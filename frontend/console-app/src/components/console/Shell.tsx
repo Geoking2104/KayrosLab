@@ -21,12 +21,12 @@ import { Instruct } from "./Instruct";
 import { Workbench } from "./Workbench";
 import { Demo } from "./Demo";
 
-const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; bar: string; soft: string; ink: string }[] = [
-  { id: "overview", label: "Aujourd’hui", short: "Jour", icon: Inbox, bar: "bg-accent", soft: "bg-accent-soft", ink: "text-accent" },
-  { id: "dossiers", label: "Dossiers", short: "Dossiers", icon: FolderOpen, bar: "bg-teal", soft: "bg-teal-soft", ink: "text-teal" },
-  { id: "collectifs", label: "Collectifs", short: "Équipes", icon: Users, bar: "bg-hold", soft: "bg-hold-soft", ink: "text-hold" },
-  { id: "agents", label: "Agents", short: "Agents", icon: Bot, bar: "bg-violet", soft: "bg-violet-soft", ink: "text-violet" },
-  { id: "connexions", label: "Connexions", short: "Liens", icon: Plug, bar: "bg-go", soft: "bg-go-soft", ink: "text-go" },
+const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; soft: string; ink: string }[] = [
+  { id: "overview", label: "Aujourd’hui", short: "Jour", icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
+  { id: "dossiers", label: "Dossiers", short: "Dossiers", icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
+  { id: "collectifs", label: "Collectifs", short: "Équipes", icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
+  { id: "agents", label: "Agents", short: "Agents", icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "connexions", label: "Connexions", short: "Liens", icon: Plug, soft: "bg-go-soft", ink: "text-go" },
 ];
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
@@ -76,16 +76,16 @@ function Frame() {
   const waiting = state.threads.filter((thread) => thread.status === "awaiting_arbitration" || thread.status === "needs_clarification").length;
 
   return (
-    <div className="min-h-screen bg-paper text-ink md:grid md:grid-cols-[240px_1fr]">
+    <div className="min-h-screen bg-paper text-ink md:grid md:grid-cols-[232px_1fr]">
       <aside className="hidden border-r border-line bg-surface md:flex md:flex-col">
-        <a href="#overview" className="flex items-center gap-3 px-4 py-5">
+        <a href="#overview" className="flex items-center gap-2.5 px-4 py-4">
           <Mark />
           <span>
-            <span className="block text-[17px] font-bold leading-tight tracking-[-0.02em]">KayrosLab</span>
-            <span className="block text-xs text-muted">Console</span>
+            <span className="block text-[15px] font-semibold leading-tight tracking-[-0.02em] text-ink">KayrosLab</span>
+            <span className="block text-[11px] font-medium tracking-wide text-muted">Console</span>
           </span>
         </a>
-        <nav className="flex flex-1 flex-col gap-1 px-3">
+        <nav className="flex flex-1 flex-col gap-0.5 px-3">
           {NAV.map((item) => {
             const Icon = item.icon;
             const active = page === item.id;
@@ -95,51 +95,52 @@ function Frame() {
                 href={`#${item.id}`}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex min-h-11 items-center gap-3 rounded-[10px] border-l-4 px-3 text-sm font-semibold",
-                  item.ink,
-                  active ? item.soft : "border-transparent hover:bg-paper",
+                  "flex min-h-10 items-center gap-2.5 rounded-lg px-2 text-sm font-medium",
+                  active ? cn(item.soft, "text-ink") : "text-ink-soft hover:bg-paper",
                 )}
-                style={active ? { borderLeftColor: "currentColor" } : undefined}
               >
-                <span className={cn("grid size-8 shrink-0 place-items-center rounded-lg text-white", item.bar)}>
-                  <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+                <span className={cn("grid size-7 shrink-0 place-items-center rounded-md", item.ink, active ? "bg-white" : item.soft)}>
+                  <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 {item.label}
                 {item.id === "dossiers" && waiting > 0 ? (
-                  <span className="ml-auto rounded-full bg-hold-soft px-2 py-0.5 text-xs font-medium text-hold">{waiting}</span>
+                  <span className="ml-auto min-w-5 rounded-md bg-white px-1.5 text-center text-[11px] font-semibold tabular-nums text-ink">{waiting}</span>
                 ) : null}
               </a>
             );
           })}
         </nav>
         <div className="border-t border-line p-3">
-          <a href="#espace" className={cn("block rounded-2xl px-3 py-2", page === "espace" ? "bg-accent text-white" : "bg-paper text-ink")}>
-            <span className="block text-sm font-semibold">{WORKSPACE_NAME}</span>
-            <span className={cn("block truncate text-xs", page === "espace" ? "text-white/80" : "text-muted")}>{WORKSPACE_EMAIL}</span>
+          <a href="#espace" className={cn("flex items-center gap-2.5 rounded-xl px-2 py-2", page === "espace" ? "bg-accent-soft" : "hover:bg-paper")}>
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-[11px] font-semibold text-white">{initials(WORKSPACE_NAME)}</span>
+            <span className="min-w-0">
+              <span className="block truncate text-sm font-semibold text-ink">{WORKSPACE_NAME}</span>
+              <span className="block truncate text-[11px] text-muted">{WORKSPACE_EMAIL}</span>
+            </span>
           </a>
           <RoleSwitch role={state.role} onChange={setRole} />
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-col">
-        <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-line bg-white/90 px-4 py-3 backdrop-blur md:px-8">
+        <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-line bg-white/85 px-4 py-2.5 backdrop-blur md:px-8">
           <span className="md:hidden">
             <Mark />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-bold tracking-tight text-ink md:text-base">
+            <p className="truncate text-sm font-semibold tracking-tight text-ink">
               {page === "instruire" ? "Instruire une décision" : page === "workbench" ? "Workbench" : page === "demo" ? "Démo publique" : NAV.find((item) => item.id === page)?.label ?? "Espace"}
             </p>
-            <p className="truncate text-xs text-muted">Verdict consultatif jusqu’à l’arbitrage humain</p>
+            <p className="truncate text-[11px] text-muted">Verdict consultatif jusqu’à l’arbitrage humain</p>
           </div>
           {page !== "instruire" ? (
-            <a href="#instruire" className="inline-flex min-h-11 items-center gap-2 rounded-[10px] bg-accent px-3 text-sm font-semibold text-white shadow-cta hover:bg-accent-strong md:px-4">
-              <Scale size={16} aria-hidden="true" />
+            <a href="#instruire" className="inline-flex min-h-10 items-center gap-2 rounded-[10px] bg-accent px-3 text-sm font-semibold text-white shadow-cta hover:bg-accent-strong md:px-3.5">
+              <Scale size={15} aria-hidden="true" />
               <span className="hidden sm:inline">Instruire une décision</span>
               <span className="sm:hidden">Instruire</span>
             </a>
           ) : (
-            <a href="#overview" className="inline-flex min-h-11 items-center rounded-[10px] border border-line bg-white px-3 text-sm font-semibold text-ink">
+            <a href="#overview" className="inline-flex min-h-10 items-center rounded-[10px] border border-line bg-white px-3 text-sm font-semibold text-ink">
               Fermer
             </a>
           )}
@@ -167,13 +168,13 @@ function Frame() {
         </main>
       </div>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface md:hidden" aria-label="Navigation">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label="Navigation">
         {NAV.map((item) => {
           const Icon = item.icon;
           const active = page === item.id;
           return (
-            <a key={item.id} href={`#${item.id}`} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold", item.ink, active && item.soft)}>
-              <Icon size={18} strokeWidth={1.75} aria-hidden="true" className={item.ink} />
+            <a key={item.id} href={`#${item.id}`} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-0.5 border-t-2 text-[11px] font-medium", active ? cn(item.ink, "border-current") : "border-transparent text-muted")}>
+              <Icon size={18} strokeWidth={1.75} aria-hidden="true" className={active ? item.ink : "text-muted"} />
               {item.short}
             </a>
           );
@@ -185,6 +186,10 @@ function Frame() {
 
 function Mark() {
   return <img src={`${import.meta.env.BASE_URL}logo-kayroslab.png`} alt="" width={28} height={28} className="h-7 w-7 rounded-[7px]" />;
+}
+
+function initials(name: string) {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("");
 }
 
 function RoleSwitch({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
@@ -200,7 +205,7 @@ function RoleSwitch({ role, onChange }: { role: "contributeur" | "comex"; onChan
           key={id}
           type="button"
           onClick={() => onChange(id)}
-          className={cn("min-h-10 rounded-md text-xs font-medium", role === id ? "bg-surface text-ink" : "text-muted")}
+          className={cn("min-h-9 rounded-md text-xs font-semibold", role === id ? "bg-surface text-ink shadow-card" : "text-muted")}
           aria-pressed={role === id}
         >
           {label}

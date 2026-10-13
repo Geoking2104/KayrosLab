@@ -27,7 +27,7 @@ export function Espace() {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Espace</h1>
+        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Espace</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Identité, quota et ce que le serveur sait faire. Rien ici ne lance une mission.
         </p>

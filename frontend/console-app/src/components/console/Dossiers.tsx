@@ -41,7 +41,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Dossiers</h1>
+        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Dossiers</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">
           Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce.
         </p>
@@ -87,7 +87,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
           {list.map((thread) => {
             const collective = state.collectives.find((item) => item.id === thread.collectiveId);
             return (
-              <li key={thread.id} className="rounded-3xl border border-line bg-surface p-4 shadow-card">
+              <li key={thread.id} className="rounded-2xl border border-line bg-surface p-4 shadow-card">
                 <button type="button" onClick={() => go("dossiers", thread.id)} className="w-full text-left">
                   <div className="flex flex-wrap items-center gap-2">
                     <StatusPill status={thread.status} />

@@ -90,26 +90,28 @@ export function Today() {
   return (
     <div className="flex flex-col gap-6">
       {guideOpen ? (
-        <Panel className="bg-accent-soft">
-          <p className="text-sm font-medium">Le parcours tient en une phrase</p>
-          <p className="mt-1 max-w-xl text-sm text-ink-soft">
+        <Panel>
+          <p className="text-sm font-semibold text-ink">Le parcours</p>
+          <p className="mt-1 max-w-2xl text-sm text-ink-soft">
             Vous posez une décision. Un collectif l’instruit. Le verdict reste consultatif tant qu’un humain ne l’a pas arbitré.
           </p>
-          <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {GUIDE.map((step, index) => {
               const Icon = step.icon;
               return (
-                <li key={step.title} className="rounded-xl border border-line bg-surface px-3 py-3 text-sm" style={{ borderTop: `3px solid ${step.color}` }}>
-                  <span className="grid size-9 place-items-center rounded-lg" style={{ background: step.soft, color: step.color }}>
-                    <Icon size={18} strokeWidth={1.75} aria-hidden="true" />
-                  </span>
-                  <p className="mt-2 text-xs font-bold" style={{ color: step.color }}>0{index + 1}</p>
-                  <p className="font-semibold text-ink">{step.title}</p>
+                <li key={step.title} className="bg-surface px-3 py-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="grid size-8 place-items-center rounded-lg" style={{ background: step.soft, color: step.color }}>
+                      <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
+                    </span>
+                    <span className="text-[11px] font-semibold tabular-nums text-muted">0{index + 1}</span>
+                  </div>
+                  <p className="mt-2 font-semibold text-ink">{step.title}</p>
                   <p className="text-xs text-muted">{step.hint}</p>
-                  <label className="mt-3 flex min-h-11 items-center gap-2 font-semibold text-ink">
+                  <label className="mt-3 flex min-h-11 items-center gap-2 text-sm font-medium text-ink">
                     <input
                       type="checkbox"
-                      className="size-5 accent-accent"
+                      className="size-4 rounded accent-accent"
                       checked={ack[index]}
                       onChange={(event) => ackGuide(index, event.target.checked)}
                     />
@@ -119,87 +121,97 @@ export function Today() {
               );
             })}
           </ol>
-          <p className="mt-3 text-xs text-muted">Les quatre cases ferment ce rappel.</p>
         </Panel>
       ) : null}
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-ink">Ce qui vous attend</h1>
+          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Ce qui vous attend</h1>
           <p className="mt-1 max-w-xl text-sm text-muted">
-            Pas un mur d’indicateurs. Les dossiers ouverts, dans l’ordre où vous pouvez agir. Le cycle stratégique vit dans chaque dossier.
+            Les dossiers ouverts, dans l’ordre où vous pouvez agir.
           </p>
         </div>
-        <p className="text-sm text-muted">
-          {mine}/{SESSION_QUOTA} collectifs sur votre compte · {state.agents.filter((agent) => agent.enabled).length} agents actifs
-        </p>
+        <dl className="flex gap-4 text-sm">
+          <div>
+            <dt className="text-[11px] font-medium text-muted">Collectifs</dt>
+            <dd className="font-semibold tabular-nums text-ink">{mine}/{SESSION_QUOTA}</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] font-medium text-muted">Agents actifs</dt>
+            <dd className="font-semibold tabular-nums text-ink">{state.agents.filter((agent) => agent.enabled).length}</dd>
+          </div>
+        </dl>
       </div>
 
-      <div className="grid gap-3">
-        {queue.filter((thread) => thread.status !== "resolved").map((thread) => {
-          const collective = state.collectives.find((item) => item.id === thread.collectiveId);
-          return (
-            <button
-              key={thread.id}
-              type="button"
-              onClick={() => go("dossiers", thread.id)}
-              className="rounded-3xl border border-line bg-surface p-4 text-left shadow-card transition duration-150 hover:-translate-y-0.5 hover:shadow-md md:p-5"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <StatusPill status={thread.status} />
-                <VerdictPill verdict={thread.verdict} />
-                <span className="text-xs text-muted">{useCaseLabel(thread.useCase)}</span>
-              </div>
-              <p className="mt-3 text-base font-medium leading-snug">{thread.question}</p>
-              {thread.status === "running" ? (
-                <div className="mt-3">
-                  <ProgressBar done={thread.progress.done} total={thread.progress.total} active />
+      <Panel className="overflow-hidden p-0 md:p-0">
+        <div className="divide-y divide-line">
+          {queue.filter((thread) => thread.status !== "resolved").map((thread) => {
+            const collective = state.collectives.find((item) => item.id === thread.collectiveId);
+            return (
+              <button
+                key={thread.id}
+                type="button"
+                onClick={() => go("dossiers", thread.id)}
+                className="w-full px-4 py-4 text-left transition-colors duration-150 hover:bg-paper md:px-5"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <StatusPill status={thread.status} />
+                  <VerdictPill verdict={thread.verdict} />
+                  <span className="text-xs text-muted">{useCaseLabel(thread.useCase)}</span>
                 </div>
-              ) : null}
-              <p className="mt-2 flex items-center gap-2 text-sm text-muted">
-                {collective?.name ?? "Collectif"} · {why(thread.status, state.role)}
-                <ArrowRight size={14} className="ml-auto" aria-hidden="true" />
-              </p>
-            </button>
-          );
-        })}
-      </div>
+                <p className="mt-2 text-[15px] font-semibold leading-snug text-ink">{thread.question}</p>
+                {thread.status === "running" ? (
+                  <div className="mt-3">
+                    <ProgressBar done={thread.progress.done} total={thread.progress.total} active />
+                  </div>
+                ) : null}
+                <p className="mt-2 flex items-center gap-2 text-sm text-muted">
+                  {collective?.name ?? "Collectif"} · {why(thread.status, state.role)}
+                  <ArrowRight size={14} className="ml-auto text-ink-soft" aria-hidden="true" />
+                </p>
+              </button>
+            );
+          })}
+        </div>
+      </Panel>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel>
-          <h2 className="flex items-center gap-2 text-sm font-medium">
-            <ListChecks size={18} className="text-accent" aria-hidden="true" />
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
+            <ListChecks size={16} className="text-accent" aria-hidden="true" />
             Prochaine action utile
           </h2>
-          <ul className="mt-3 flex flex-col gap-3 text-sm">
+          <ul className="mt-4 flex flex-col gap-3 text-sm">
             {ACTIONS.map((action) => (
-              <li key={action.id} className="rounded-xl border border-line border-l-4 px-3 py-3" style={{ borderLeftColor: action.color, background: action.soft }}>
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 min-w-10 place-items-center rounded-lg bg-white px-1.5">
+              <li key={action.id} className="rounded-xl border border-line bg-surface p-3">
+                <div className="flex items-start gap-3">
+                  <span className="grid h-10 min-w-10 shrink-0 place-items-center rounded-lg border border-line bg-white px-1.5">
                     <img src={`${import.meta.env.BASE_URL}${action.logo}`} alt="" className={action.logoClass} />
                   </span>
-                  <p className="text-xs font-bold uppercase tracking-[0.08em]" style={{ color: action.color }}>{action.title}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold text-ink">{action.title}</p>
+                    <p className="mt-0.5 text-sm text-muted">{action.body}</p>
+                    <button
+                      type="button"
+                      onClick={() => go(action.page)}
+                      className="mt-3 inline-flex min-h-10 items-center rounded-[10px] px-3.5 text-sm font-semibold text-white"
+                      style={{ background: action.color }}
+                    >
+                      {action.label}
+                    </button>
+                  </div>
                 </div>
-                <p className="mt-2 text-ink-soft">{action.body}</p>
-                <button
-                  type="button"
-                  onClick={() => go(action.page)}
-                  className="mt-3 inline-flex min-h-11 items-center rounded-[10px] px-4 text-sm font-semibold text-white"
-                  style={{ background: action.color }}
-                >
-                  {action.label}
-                </button>
               </li>
             ))}
           </ul>
         </Panel>
         <Panel>
-          <h2 className="flex items-center gap-2 text-sm font-medium">
-            <Milestone size={18} className="text-teal" aria-hidden="true" />
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
+            <Milestone size={16} className="text-teal" aria-hidden="true" />
             Où vit le cycle
           </h2>
-          <p className="mt-2 text-sm text-muted">Huit temps, un seul dossier. Cliquez une étape pour ouvrir le dossier qui y est.</p>
-          <ol className="mt-4 grid grid-cols-2 gap-2 text-sm">
+          <p className="mt-1 text-sm text-muted">Huit temps. Une étape ouvre le dossier qui s’y trouve.</p>
+          <ol className="mt-2 divide-y divide-line">
             {CYCLE.map((step, index) => {
               const tone = STEP_TONE[index] ?? STEP_TONE[0];
               const Icon = tone.icon;
@@ -209,20 +221,16 @@ export function Today() {
                   <button
                     type="button"
                     onClick={() => openStage(step.id)}
-                    className="h-full w-full rounded-xl border border-transparent px-3 py-2 text-left hover:border-line"
-                    style={{ background: tone.soft }}
+                    className="flex w-full items-center gap-3 py-2.5 text-left"
                   >
-                    <span className="flex items-center gap-2">
-                      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white" style={{ color: tone.color }}>
-                        <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
-                      </span>
-                      <span>
-                        <span className="text-xs font-bold" style={{ color: tone.color }}>{String(index).padStart(2, "0")}</span>
-                        <p className="font-semibold text-ink">{step.label}</p>
-                      </span>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg" style={{ background: tone.soft, color: tone.color }}>
+                      <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
                     </span>
-                    <p className="mt-1 text-xs text-muted">{step.hint}</p>
-                    <p className="mt-1 text-[11px] font-semibold" style={{ color: tone.color }}>{match ? "Ouvrir le dossier" : "Voir les dossiers"}</p>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-ink">{step.label}</span>
+                      <span className="block truncate text-xs text-muted">{step.hint}</span>
+                    </span>
+                    <span className="shrink-0 text-xs font-medium" style={{ color: tone.color }}>{match ? "Ouvrir" : "Dossiers"}</span>
                   </button>
                 </li>
               );
