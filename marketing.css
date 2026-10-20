@@ -485,5 +485,5 @@ p.mock-cap.center{padding:14px 0 0}
 .nx-why{background:linear-gradient(135deg,#06423d 0%,#1e1b4b 100%);color:#f1f5f9}
 .nx-why h2{color:#fff}.nx-light{color:#5eead4}
 .nx-pillar{border-radius:16px;padding:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
-.nx-pillar p{color:#e2e8f0}
+.nx-pillar h3{color:#fff}.nx-pillar p{color:#e2e8f0}
 @media (max-width:860px){.nx-grid3,.nx-steps{grid-template-columns:1fr}.nx-pain,.nx-solution,.nx-why{padding:52px 0}}
