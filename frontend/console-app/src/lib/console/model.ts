@@ -521,7 +521,7 @@ export function seedState(): AppState {
         status: "not_configured",
         enabled: false,
         oauthReady: false,
-        detail: "Autorisation d’admin indisponible : identifiants d’application absents côté serveur. Le coffre de secrets est actif. Aucun jeton ne sera demandé au navigateur.",
+        detail: "Exemple de démonstration. L’état réel s’affiche une fois connecté (variables serveur TEAMS_APP_ID et TEAMS_BOT_PASSWORD).",
       },
       {
         id: "discord",

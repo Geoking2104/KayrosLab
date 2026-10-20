@@ -23,7 +23,7 @@ const ACTIONS = [
   {
     id: "teams",
     title: "Teams",
-    body: "Teams n’est pas connecté. Les identifiants d’application manquent côté serveur — ce n’est pas un échec de clic.",
+    body: "Exemple : connectez Teams depuis Connexions. L’état réel de vos canaux s’y affiche une fois connecté.",
     label: "Connecter",
     page: "connexions" as const,
     color: "#5b5fc7",
