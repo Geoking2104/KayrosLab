@@ -2,6 +2,7 @@ import { useEffect, useState, type ButtonHTMLAttributes } from "react";
 import { useConsole } from "@/lib/console/store";
 import { formatWhen, PROFILES, type Connector, type ConnectorId } from "@/lib/console/model";
 import { Field, Panel, controlClass } from "./ui";
+import { LiveChannels } from "./LiveChannels";
 import { cn } from "@/lib/cn";
 
 const TABS = [
@@ -44,13 +45,14 @@ export function Connexions({ legacy }: { legacy: string }) {
   const [token, setToken] = useState("");
   const [linkError, setLinkError] = useState("");
   const manager = state.role === "comex";
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => setTick((value) => value + 1), 3000);
     return () => window.clearInterval(timer);
   }, []);
 
-  const visible = tab === "salesforce" ? state.connectors.filter((item) => item.id === "salesforce") : state.connectors;
+  const visible = tab === "salesforce" || live ? state.connectors.filter((item) => item.id === "salesforce") : state.connectors;
 
   return (
     <div className="flex flex-col gap-5">
@@ -81,6 +83,7 @@ export function Connexions({ legacy }: { legacy: string }) {
 
       {tab === "canaux" || tab === "salesforce" ? (
         <div className="grid gap-3">
+          {tab === "canaux" ? <LiveChannels onSession={setLive} /> : null}
           {visible.map((connector) => (
             <Channel
               key={connector.id}
@@ -260,7 +263,10 @@ function Channel({
         <div className="flex items-start gap-3">
           <Mark id={connector.id} />
           <div>
-            <p className="text-xs font-medium" style={{ color: tone.color }}>{statusLabel(connector.status)}</p>
+            <p className="flex items-center gap-2 text-xs font-medium" style={{ color: tone.color }}>
+              <span className="rounded-full bg-hold px-2 py-0.5 text-[11px] font-semibold text-white">Démo</span>
+              {statusLabel(connector.status)}
+            </p>
             <h2 className="text-lg font-medium">{connector.name}</h2>
           </div>
         </div>
@@ -279,7 +285,7 @@ function Channel({
         </div>
       </div>
       <p className="mt-3 text-sm text-ink-soft">{connector.detail}</p>
-      <p className="mt-2 text-xs text-muted">{connector.lastTest ? `Dernier test ${formatWhen(connector.lastTest)}` : "Jamais testé"} · coffre chiffré actif</p>
+      <p className="mt-2 text-xs text-muted">{connector.lastTest ? `Dernier test ${formatWhen(connector.lastTest)}` : "Jamais testé"} · données de démonstration</p>
       <Presence connector={connector} tick={tick} />
       {editing ? <Editor connector={connector} onSave={onSave} onDone={onClose} error={error} setError={setError} /> : null}
     </Panel>
@@ -300,7 +306,7 @@ function Presence({ connector, tick }: { connector: Connector; tick: number }) {
         <span className="text-muted"> / {total} utilisateurs</span>
       </p>
       <span className={cn("text-xs font-semibold", calm ? "text-hold" : "text-go")}>{calm ? "Calme" : "Actif"}</span>
-      <span className="text-xs text-muted">temps réel · à l’instant</span>
+      <span className="text-xs text-muted">présence simulée (démo)</span>
     </div>
   );
 }
@@ -346,8 +352,8 @@ function Editor({
   if (connector.id === "teams") {
     return (
       <div className="mt-4 rounded-lg bg-surface px-3 py-3 text-sm">
-        <p className="font-medium">Onboarding bloqué</p>
-        <p className="mt-1 text-ink-soft">MICROSOFT_APP_ID et le secret d’application manquent côté serveur. Le bouton n’enregistre rien et ne demande pas de jeton.</p>
+        <p className="font-medium">Démo</p>
+        <p className="mt-1 text-ink-soft">Connectez-vous pour voir l’état réel de Teams. Côté serveur, la connexion en un geste exige <code>TEAMS_APP_ID</code> et <code>TEAMS_BOT_PASSWORD</code>.</p>
       </div>
     );
   }
