@@ -6,8 +6,11 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('les accueils anglais et francais exposent la console', async () => {
   const [english, french] = await Promise.all([read('index.html'), read('index.fr.html')]);
-  assert.match(english, /href="\/console\/"[^>]*>Try the console/i);
-  assert.match(french, /href="\/console\/"[^>]*>Essayer la console/i);
+  assert.match(english, /href="\/console\/\?lang=en"[^>]*>Try the console/i);
+  assert.match(french, /href="\/console\/\?lang=fr"[^>]*>Essayer la console/i);
+  // La console suit la langue de la page d'origine (?lang=), pas seulement le navigateur.
+  assert.doesNotMatch(english, /href="\/console\/"/);
+  assert.doesNotMatch(french, /href="\/console\/"/);
 });
 
 test('GitHub Pages construit et publie la console sous /console/', async () => {

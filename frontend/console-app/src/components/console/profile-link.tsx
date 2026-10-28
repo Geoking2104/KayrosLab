@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Button, Field, controlClass } from "./ui";
 import { cn } from "@/lib/cn";
+import { t } from "@/lib/i18n";
 
 export type ProfileSource = "crystal" | "linkedin";
 
 const SOURCES: { id: ProfileSource; label: string; hint: string; logo: string; placeholder: string; color: string; alt: string }[] = [
   {
     id: "crystal",
-    label: "Relier CrystalKnows",
-    hint: "Adresse du profil public. Aucune fiche n’est téléchargée.",
+    get label() { return t("Relier CrystalKnows"); },
+    get hint() { return t("Adresse du profil public. Aucune fiche n’est téléchargée."); },
     logo: "brands/crystalknows.svg",
     placeholder: "https://www.crystalknows.com/p/…",
     color: "#01293D",
@@ -16,8 +17,8 @@ const SOURCES: { id: ProfileSource; label: string; hint: string; logo: string; p
   },
   {
     id: "linkedin",
-    label: "Relier le profil public LinkedIn",
-    hint: "Adresse publique /in/. LinkedIn n’est pas visité.",
+    get label() { return t("Relier le profil public LinkedIn"); },
+    get hint() { return t("Adresse publique /in/. LinkedIn n’est pas visité."); },
     logo: "brands/linkedin.svg",
     placeholder: "https://www.linkedin.com/in/…",
     color: "#0A66C2",
@@ -42,7 +43,11 @@ export function profileUrlOk(source: ProfileSource, raw: string) {
 }
 
 export function profileClue(source: ProfileSource, url: string) {
-  return source === "crystal" ? `Profil CrystalKnows ${url}` : `Profil public LinkedIn ${url}`;
+  return source === "crystal" ? t("Profil CrystalKnows {{url}}", {
+    url
+  }) : t("Profil public LinkedIn {{url}}", {
+    url
+  });
 }
 
 export function LinkedMark({ source, url, onChange }: { source: ProfileSource; url: string; onChange?: () => void }) {
@@ -51,13 +56,11 @@ export function LinkedMark({ source, url, onChange }: { source: ProfileSource; u
     <div className="flex items-center gap-3 rounded-xl border border-line bg-white px-3 py-3" style={{ borderLeft: `4px solid ${item.color}` }}>
       <img src={logoSrc(item.logo)} alt={item.alt} className={cn("h-8 max-w-[9rem] object-contain object-left", source === "linkedin" && "w-8")} />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-ink">{source === "crystal" ? "Relié à CrystalKnows" : "Relié à LinkedIn"}</p>
+        <p className="text-sm font-semibold text-ink">{source === "crystal" ? t("Relié à CrystalKnows") : t("Relié à LinkedIn")}</p>
         <p className="truncate text-xs text-muted">{url}</p>
       </div>
       {onChange ? (
-        <button type="button" className="shrink-0 text-sm font-semibold text-accent" onClick={onChange}>
-          Changer
-        </button>
+        <button type="button" className="shrink-0 text-sm font-semibold text-accent" onClick={onChange}>{t("Changer")}</button>
       ) : null}
     </div>
   );
@@ -72,8 +75,10 @@ export function ProfileLink({ onContinue }: { onContinue: (source: ProfileSource
   return (
     <div className="grid gap-4" data-profile-gate>
       <div>
-        <h2 className="text-sm font-semibold text-ink">Relier un profil avant la fiche</h2>
-        <p className="mt-1 text-sm text-muted">Choisissez CrystalKnows ou le profil public LinkedIn. Sans ce lien, la fiche ne s’ouvre pas. L’adresse est un indice autorisé : elle n’est pas visitée.</p>
+        <h2 className="text-sm font-semibold text-ink">{t("Relier un profil avant la fiche")}</h2>
+        <p className="mt-1 text-sm text-muted">{t(
+          "Choisissez CrystalKnows ou le profil public LinkedIn. Sans ce lien, la fiche ne s’ouvre pas. L’adresse est un indice autorisé : elle n’est pas visitée."
+        )}</p>
       </div>
       <div className="grid gap-2 sm:grid-cols-2">
         {SOURCES.map((item) => {
@@ -99,17 +104,14 @@ export function ProfileLink({ onContinue }: { onContinue: (source: ProfileSource
       </div>
       {picked ? (
         <div className="grid gap-3">
-          <Field label="Adresse du profil" hint={picked.placeholder}>
-            <input className={controlClass} value={url} onChange={(event) => setUrl(event.target.value)} placeholder={picked.placeholder} inputMode="url" autoComplete="url" aria-label="Adresse du profil" />
+          <Field label={t("Adresse du profil")} hint={picked.placeholder}>
+            <input className={controlClass} value={url} onChange={(event) => setUrl(event.target.value)} placeholder={picked.placeholder} inputMode="url" autoComplete="url" aria-label={t("Adresse du profil")} />
           </Field>
           {url.trim() && !ok ? (
-            <p className="text-sm text-stop" role="alert">
-              Adresse attendue : {picked.placeholder.replace("…", "nom")}
+            <p className="text-sm text-stop" role="alert">{t("Adresse attendue :")}{" "}{picked.placeholder.replace("…", "nom")}
             </p>
           ) : null}
-          <Button className="w-fit" disabled={!ok} onClick={() => source && onContinue(source, url.trim())}>
-            Continuer vers la fiche
-          </Button>
+          <Button className="w-fit" disabled={!ok} onClick={() => source && onContinue(source, url.trim())}>{t("Continuer vers la fiche")}</Button>
         </div>
       ) : null}
     </div>

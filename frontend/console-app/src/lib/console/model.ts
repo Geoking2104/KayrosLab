@@ -1,3 +1,4 @@
+import { locale, t, tc, tk } from "@/lib/i18n";
 export type Role = "contributeur" | "comex";
 export type Page =
   | "overview"
@@ -37,14 +38,14 @@ export const WORKSPACE_EMAIL = "camille.renaud@atelier.fr";
 export const WORKSPACE_NAME = "Camille Renaud";
 
 export const CYCLE: { id: CycleId; label: string; hint: string }[] = [
-  { id: "ecouter", label: "Écouter", hint: "Question comparable" },
-  { id: "cartographier", label: "Cartographier", hint: "Objections en tension" },
-  { id: "construire", label: "Construire", hint: "Scénarios et hypothèses" },
-  { id: "positionner", label: "Positionner", hint: "Faits et écarts" },
-  { id: "eprouver", label: "Éprouver", hint: "Avis contradictoires" },
-  { id: "arbitrer", label: "Arbitrer", hint: "Décision humaine" },
-  { id: "projeter", label: "Projeter", hint: "Conditions et suite" },
-  { id: "realiser", label: "Réaliser", hint: "Engagement tracé" },
+  { id: "ecouter", get label() { return t("Écouter"); }, get hint() { return t("Question comparable"); } },
+  { id: "cartographier", get label() { return t("Cartographier"); }, get hint() { return t("Objections en tension"); } },
+  { id: "construire", get label() { return t("Construire"); }, get hint() { return t("Scénarios et hypothèses"); } },
+  { id: "positionner", get label() { return t("Positionner"); }, get hint() { return t("Faits et écarts"); } },
+  { id: "eprouver", get label() { return t("Éprouver"); }, get hint() { return t("Avis contradictoires"); } },
+  { id: "arbitrer", get label() { return t("Arbitrer"); }, get hint() { return t("Décision humaine"); } },
+  { id: "projeter", get label() { return t("Projeter"); }, get hint() { return t("Conditions et suite"); } },
+  { id: "realiser", get label() { return t("Réaliser"); }, get hint() { return t("Engagement tracé"); } },
 ];
 
 export const PAGE_FROM_HASH: Record<string, Page> = {
@@ -64,45 +65,45 @@ export const PAGE_FROM_HASH: Record<string, Page> = {
 };
 
 export const USE_CASES: { id: UseCase; label: string; oracle: boolean }[] = [
-  { id: "general", label: "Décision générale", oracle: false },
-  { id: "rfp", label: "Appel d’offres", oracle: true },
-  { id: "comex_decision", label: "Décision de comité", oracle: true },
-  { id: "renewal", label: "Renouvellement", oracle: true },
-  { id: "negotiation", label: "Négociation", oracle: true },
+  { id: "general", get label() { return t("Décision générale"); }, oracle: false },
+  { id: "rfp", get label() { return t("Appel d’offres"); }, oracle: true },
+  { id: "comex_decision", get label() { return t("Décision de comité"); }, oracle: true },
+  { id: "renewal", get label() { return t("Renouvellement"); }, oracle: true },
+  { id: "negotiation", get label() { return t("Négociation"); }, oracle: true },
 ];
 
 export const PROFILES: { id: Profile; label: string; hint: string; provider: string }[] = [
-  { id: "demo", label: "Démo", hint: "Réponses préenregistrées, moins de 5 s. Aucun appel modèle.", provider: "Démo préenregistrée" },
-  { id: "fast", label: "Rapide", hint: "Verdict réel en 1 à 2 min. Ici, le temps est raccourci pour la revue.", provider: "Mistral" },
-  { id: "deep", label: "Approfondi", hint: "Modèle de raisonnement, environ 12 min en production.", provider: "Mistral" },
+  { id: "demo", get label() { return t("Démo"); }, get hint() { return t("Réponses préenregistrées, moins de 5 s. Aucun appel modèle."); }, get provider() { return t("Démo préenregistrée"); } },
+  { id: "fast", get label() { return t("Rapide"); }, get hint() { return t("Verdict réel en 1 à 2 min. Ici, le temps est raccourci pour la revue."); }, provider: "Mistral" },
+  { id: "deep", get label() { return t("Approfondi"); }, get hint() { return t("Modèle de raisonnement, environ 12 min en production."); }, provider: "Mistral" },
 ];
 
 export const VOTING: { id: Voting; label: string }[] = [
-  { id: "majority", label: "Majorité" },
-  { id: "unanimous", label: "Unanimité" },
-  { id: "veto_csuite", label: "Veto du comité" },
+  { id: "majority", get label() { return t("Majorité"); } },
+  { id: "unanimous", get label() { return t("Unanimité"); } },
+  { id: "veto_csuite", get label() { return t("Veto du comité"); } },
 ];
 
 export const STATUS_LABEL: Record<ThreadStatus, string> = {
-  running: "Instruction en cours",
-  awaiting_arbitration: "À arbitrer",
-  needs_clarification: "Précision attendue",
+  get running() { return t("Instruction en cours"); },
+  get awaiting_arbitration() { return t("À arbitrer"); },
+  get needs_clarification() { return t("Précision attendue"); },
   resolved: "Clos",
-  failed: "Échec",
+  get failed() { return t("Échec"); },
 };
 
 export const VERDICT_LABEL: Record<Verdict, string> = {
   GO: "GO",
-  CONDITIONAL_GO: "GO conditionnel",
+  get CONDITIONAL_GO() { return t("GO conditionnel"); },
   NO_GO: "NO-GO",
 };
 
 export const GUARDRAILS = [
-  "La fiche est étiquetée Simulation.",
-  "L’agent ne parle jamais à la place de la personne.",
-  "Seuls les indices autorisés sont utilisés.",
-  "L’usage est un test d’idée, pas une enquête.",
-  "Aucune décision matérielle (embauche, crédit, logement, assurance).",
+  tk("La fiche est étiquetée Simulation."),
+  tk("L’agent ne parle jamais à la place de la personne."),
+  tk("Seuls les indices autorisés sont utilisés."),
+  tk("L’usage est un test d’idée, pas une enquête."),
+  tk("Aucune décision matérielle (embauche, crédit, logement, assurance)."),
 ];
 
 export interface Agent {
@@ -240,10 +241,10 @@ const mid = "2026-10-10T14:05:00.000Z";
 export const SEED_AGENTS: Agent[] = [
   {
     id: "ag-cfo",
-    name: "Direction financière",
+    name: tk("Direction financière"),
     role: "CFO",
     department: "Finance",
-    mission: "Protège la marge, la trésorerie et le plancher de prix.",
+    mission: tk("Protège la marge, la trésorerie et le plancher de prix."),
     kind: "metier",
     veto: false,
     enabled: true,
@@ -252,14 +253,16 @@ export const SEED_AGENTS: Agent[] = [
     consented: false,
     simulation: false,
     clues: "",
-    brief: "Chiffre la marge, la trésorerie et le plancher de prix. Refuse un GO si le seuil n’est pas écrit.",
+    brief: tk(
+      "Chiffre la marge, la trésorerie et le plancher de prix. Refuse un GO si le seuil n’est pas écrit."
+    ),
   },
   {
     id: "ag-legal",
-    name: "Affaires juridiques",
+    name: tk("Affaires juridiques"),
     role: "Legal",
     department: "Juridique",
-    mission: "Bloque ce qui n’est pas opposable. Droit de veto.",
+    mission: tk("Bloque ce qui n’est pas opposable. Droit de veto."),
     kind: "metier",
     veto: true,
     enabled: true,
@@ -268,14 +271,14 @@ export const SEED_AGENTS: Agent[] = [
     consented: false,
     simulation: false,
     clues: "",
-    brief: "Vérifie l’opposabilité. Veto si une clause ou une obligation manque.",
+    brief: tk("Vérifie l’opposabilité. Veto si une clause ou une obligation manque."),
   },
   {
     id: "ag-cto",
-    name: "Direction technique",
+    name: tk("Direction technique"),
     role: "CTO",
-    department: "Ingénierie",
-    mission: "Juge la faisabilité, la dette et la capacité réelle.",
+    department: tk("Ingénierie"),
+    mission: tk("Juge la faisabilité, la dette et la capacité réelle."),
     kind: "metier",
     veto: false,
     enabled: true,
@@ -284,14 +287,16 @@ export const SEED_AGENTS: Agent[] = [
     consented: false,
     simulation: false,
     clues: "",
-    brief: "Juge la faisabilité, la dette et la capacité de l’équipe. Nomme ce qui ne tient pas en production.",
+    brief: tk(
+      "Juge la faisabilité, la dette et la capacité de l’équipe. Nomme ce qui ne tient pas en production."
+    ),
   },
   {
     id: "ag-sales",
-    name: "Direction commerciale",
+    name: tk("Direction commerciale"),
     role: "Sales",
     department: "Revenue",
-    mission: "Défend la relation client et le revenu signable.",
+    mission: tk("Défend la relation client et le revenu signable."),
     kind: "metier",
     veto: false,
     enabled: true,
@@ -300,14 +305,16 @@ export const SEED_AGENTS: Agent[] = [
     consented: false,
     simulation: false,
     clues: "",
-    brief: "Défend le revenu signable et la relation. Signale un prix ou un délai que le client ne tiendra pas.",
+    brief: tk(
+      "Défend le revenu signable et la relation. Signale un prix ou un délai que le client ne tiendra pas."
+    ),
   },
   {
     id: "ag-claire",
     name: "Claire Morel",
-    role: "DAF simulée",
+    role: tk("DAF simulée"),
     department: "Finance",
-    mission: "Simule la lecture d’une DAF à partir d’un export autorisé.",
+    mission: tk("Simule la lecture d’une DAF à partir d’un export autorisé."),
     kind: "hybride",
     veto: false,
     enabled: true,
@@ -315,7 +322,7 @@ export const SEED_AGENTS: Agent[] = [
     model: "serveur",
     consented: true,
     simulation: true,
-    clues: "Export Crystal autorisé · pas de scraping",
+    clues: tk("Export Crystal autorisé · pas de scraping"),
   },
 ];
 
@@ -326,7 +333,7 @@ export function seedState(): AppState {
     collectives: [
       {
         id: "col-deal",
-        name: "Comité deal",
+        name: tk("Comité deal"),
         agentIds: ["ag-cfo", "ag-legal", "ag-cto", "ag-sales"],
         voting: "veto_csuite",
         personality: false,
@@ -334,7 +341,7 @@ export function seedState(): AppState {
       },
       {
         id: "col-produit",
-        name: "Comité produit",
+        name: tk("Comité produit"),
         agentIds: ["ag-cto", "ag-cfo", "ag-legal"],
         voting: "majority",
         personality: true,
@@ -345,7 +352,9 @@ export function seedState(): AppState {
       {
         id: "dos-helia",
         question:
-          "Faut-il accepter la remise de 18 % demandée par Helia Industrie sur le contrat cadre 2027, contre un engagement de volume sur 24 mois ?",
+          tk(
+            "Faut-il accepter la remise de 18 % demandée par Helia Industrie sur le contrat cadre 2027, contre un engagement de volume sur 24 mois ?"
+          ),
         collectiveId: "col-deal",
         status: "awaiting_arbitration",
         verdict: "CONDITIONAL_GO",
@@ -358,40 +367,40 @@ export function seedState(): AppState {
           {
             agentId: "ag-cfo",
             verdict: "CONDITIONAL_GO",
-            strengths: ["L’engagement 24 mois sécurise le carnet."],
-            objections: ["18 % passe sous le plancher de marge historique (22 %)."],
-            conditions: ["Plancher de marge à 22 % après remise, sinon refus."],
-            metric: "Marge après remise · 19,4 %",
+            strengths: [tk("L’engagement 24 mois sécurise le carnet.")],
+            objections: [tk("18 % passe sous le plancher de marge historique (22 %).")],
+            conditions: [tk("Plancher de marge à 22 % après remise, sinon refus.")],
+            metric: tk("Marge après remise · 19,4 %"),
           },
           {
             agentId: "ag-legal",
             verdict: "CONDITIONAL_GO",
-            strengths: ["Le cadre 2027 peut absorber un avenant court."],
-            objections: ["Sans pénalité de volume, l’engagement n’est pas opposable."],
-            conditions: ["Avenant signé avant facturation, pénalité si volume < 80 %."],
-            metric: "Veto · levé si avenant",
+            strengths: [tk("Le cadre 2027 peut absorber un avenant court.")],
+            objections: [tk("Sans pénalité de volume, l’engagement n’est pas opposable.")],
+            conditions: [tk("Avenant signé avant facturation, pénalité si volume < 80 %.")],
+            metric: tk("Veto · levé si avenant"),
           },
           {
             agentId: "ag-cto",
             verdict: "GO",
-            strengths: ["Aucun développement spécifique. Charge d’intégration connue."],
-            objections: ["Le reporting volume n’est pas branché sur l’ERP."],
-            conditions: ["Suivi manuel accepté pendant 90 jours."],
-            metric: "Charge · 6 j",
+            strengths: [tk("Aucun développement spécifique. Charge d’intégration connue.")],
+            objections: [tk("Le reporting volume n’est pas branché sur l’ERP.")],
+            conditions: [tk("Suivi manuel accepté pendant 90 jours.")],
+            metric: tk("Charge · 6 j"),
           },
           {
             agentId: "ag-sales",
             verdict: "GO",
-            strengths: ["Helia est le compte n°2. Perdre le cadre ouvre un concurrent."],
-            objections: ["Une contre-offre à 12 % a déjà été refusée."],
-            conditions: ["Annoncer 15 % maintenant, 18 % seulement avec le volume tenu."],
-            metric: "ARR exposé · 240 k€",
+            strengths: [tk("Helia est le compte n°2. Perdre le cadre ouvre un concurrent.")],
+            objections: [tk("Une contre-offre à 12 % a déjà été refusée.")],
+            conditions: [tk("Annoncer 15 % maintenant, 18 % seulement avec le volume tenu.")],
+            metric: tk("ARR exposé · 240 k€"),
           },
         ],
         conditions: [
-          "Plancher de marge à 22 % après remise.",
-          "Avenant de volume avec pénalité sous 80 % de l’engagement.",
-          "Signature de l’avenant avant toute facture remise.",
+          tk("Plancher de marge à 22 % après remise."),
+          tk("Avenant de volume avec pénalité sous 80 % de l’engagement."),
+          tk("Signature de l’avenant avant toute facture remise."),
         ],
         questions: [],
         evidence: [
@@ -402,13 +411,15 @@ export function seedState(): AppState {
         createdAt: "2026-10-11T16:10:00.000Z",
         updatedAt: "2026-10-11T16:18:00.000Z",
         events: [
-          { at: "2026-10-11T16:10:00.000Z", label: "Mission lancée", detail: "Profil rapide · provider Mistral · swarm aligné" },
-          { at: "2026-10-11T16:18:00.000Z", label: "Verdict produit", detail: "GO conditionnel · en attente d’arbitrage, pas de boucle de précision" },
+          { at: "2026-10-11T16:10:00.000Z", label: tk("Mission lancée"), detail: tk("Profil rapide · provider Mistral · swarm aligné") },
+          { at: "2026-10-11T16:18:00.000Z", label: tk("Verdict produit"), detail: tk("GO conditionnel · en attente d’arbitrage, pas de boucle de précision") },
         ],
       },
       {
         id: "dos-pilote",
-        question: "Ouvrir un pilote B2B auprès de 12 cabinets, sur 90 jours, sans engagement commercial ?",
+        question: tk(
+          "Ouvrir un pilote B2B auprès de 12 cabinets, sur 90 jours, sans engagement commercial ?"
+        ),
         collectiveId: "col-produit",
         status: "running",
         profile: "fast",
@@ -423,11 +434,11 @@ export function seedState(): AppState {
         progress: { done: 1, total: 3 },
         createdAt: "2026-10-11T18:32:00.000Z",
         updatedAt: now,
-        events: [{ at: "2026-10-11T18:32:00.000Z", label: "Mission lancée", detail: "Comité produit · 1/3 analyses" }],
+        events: [{ at: "2026-10-11T18:32:00.000Z", label: tk("Mission lancée"), detail: tk("Comité produit · 1/3 analyses") }],
       },
       {
         id: "dos-vague",
-        question: "On y va ?",
+        question: tk("On y va ?"),
         collectiveId: "col-deal",
         status: "needs_clarification",
         profile: "fast",
@@ -437,18 +448,22 @@ export function seedState(): AppState {
         agentIds: ["ag-cfo", "ag-legal", "ag-sales"],
         contributions: [],
         conditions: [],
-        questions: ["Précisez l’objet, le montant ou l’écart, et l’échéance. La question n’est pas comparable."],
+        questions: [tk(
+          "Précisez l’objet, le montant ou l’écart, et l’échéance. La question n’est pas comparable."
+        )],
         evidence: [],
         progress: { done: 1, total: 3 },
         createdAt: "2026-10-08T11:00:00.000Z",
         updatedAt: "2026-10-08T11:02:00.000Z",
         events: [
-          { at: "2026-10-08T11:02:00.000Z", label: "Précision demandée", detail: "Ce n’est pas un GO conditionnel. Le collectif s’arrête faute d’objet." },
+          { at: "2026-10-08T11:02:00.000Z", label: tk("Précision demandée"), detail: tk("Ce n’est pas un GO conditionnel. Le collectif s’arrête faute d’objet.") },
         ],
       },
       {
         id: "dos-qinode",
-        question: "Renouveler l’hébergement actuel ou basculer le nœud d’inférence sur une instance souveraine au prochain trimestre ?",
+        question: tk(
+          "Renouveler l’hébergement actuel ou basculer le nœud d’inférence sur une instance souveraine au prochain trimestre ?"
+        ),
         collectiveId: "col-produit",
         status: "resolved",
         verdict: "GO",
@@ -461,43 +476,43 @@ export function seedState(): AppState {
           {
             agentId: "ag-cto",
             verdict: "GO",
-            strengths: ["Le chemin de bascule est déjà spécifié. Pas de réécriture du moteur."],
-            objections: ["La fenêtre de gel est de 4 heures."],
-            conditions: ["Basculer un tenant canari avant le reste."],
-            metric: "Fenêtre · 4 h",
+            strengths: [tk("Le chemin de bascule est déjà spécifié. Pas de réécriture du moteur.")],
+            objections: [tk("La fenêtre de gel est de 4 heures.")],
+            conditions: [tk("Basculer un tenant canari avant le reste.")],
+            metric: tk("Fenêtre · 4 h"),
           },
           {
             agentId: "ag-cfo",
             verdict: "GO",
-            strengths: ["Le surcoût tient dans l’enveloppe trimestre."],
-            objections: ["Le gain n’est pas un revenu, c’est un risque évité."],
-            conditions: ["Revue à 60 jours, sinon retour arrière documenté."],
-            metric: "Delta coût · +8 %",
+            strengths: [tk("Le surcoût tient dans l’enveloppe trimestre.")],
+            objections: [tk("Le gain n’est pas un revenu, c’est un risque évité.")],
+            conditions: [tk("Revue à 60 jours, sinon retour arrière documenté.")],
+            metric: tk("Delta coût · +8 %"),
           },
           {
             agentId: "ag-legal",
             verdict: "GO",
-            strengths: ["Le transfert reste dans l’UE. Registre à jour."],
+            strengths: [tk("Le transfert reste dans l’UE. Registre à jour.")],
             objections: [],
             conditions: [],
-            metric: "Veto · non levé contre",
+            metric: tk("Veto · non levé contre"),
           },
         ],
-        conditions: ["Canari sur un tenant, revue à 60 jours."],
+        conditions: [tk("Canari sur un tenant, revue à 60 jours.")],
         questions: [],
-        evidence: [{ name: "Note-souverainete.md", type: "Sécurité" }],
+        evidence: [{ name: "Note-souverainete.md", type: tk("Sécurité") }],
         arbitration: {
           action: "accept",
           by: "COMEX",
-          note: "Consensus accepté. Canari d’abord.",
+          note: tk("Consensus accepté. Canari d’abord."),
           at: "2026-10-10T15:40:00.000Z",
         },
         progress: { done: 3, total: 3 },
         createdAt: "2026-10-10T14:20:00.000Z",
         updatedAt: "2026-10-10T15:40:00.000Z",
         events: [
-          { at: "2026-10-10T14:28:00.000Z", label: "Verdict produit", detail: "GO" },
-          { at: "2026-10-10T15:40:00.000Z", label: "Arbitrage", detail: "Consensus accepté par le COMEX" },
+          { at: "2026-10-10T14:28:00.000Z", label: tk("Verdict produit"), detail: "GO" },
+          { at: "2026-10-10T15:40:00.000Z", label: tk("Arbitrage"), detail: tk("Consensus accepté par le COMEX") },
         ],
       },
     ],
@@ -508,7 +523,9 @@ export function seedState(): AppState {
         status: "connected",
         enabled: true,
         oauthReady: true,
-        detail: "Connexion en un geste. auth.test réussi. Le rattachement d’un canal se fait dans l’app de conversation, pas ici.",
+        detail: tk(
+          "Connexion en un geste. auth.test réussi. Le rattachement d’un canal se fait dans l’app de conversation, pas ici."
+        ),
         lastTest: "2026-10-11T08:12:00.000Z",
         usersOnline: 12,
         usersTotal: 48,
@@ -521,7 +538,9 @@ export function seedState(): AppState {
         status: "not_configured",
         enabled: false,
         oauthReady: false,
-        detail: "Exemple de démonstration. L’état réel s’affiche une fois connecté (variables serveur TEAMS_APP_ID et TEAMS_BOT_PASSWORD).",
+        detail: tk(
+          "Exemple de démonstration. L’état réel s’affiche une fois connecté (variables serveur TEAMS_APP_ID et TEAMS_BOT_PASSWORD)."
+        ),
       },
       {
         id: "discord",
@@ -529,7 +548,9 @@ export function seedState(): AppState {
         status: "error",
         enabled: false,
         oauthReady: true,
-        detail: "Dernier test : users/@me a répondu 401. Le jeton est rejeté. Le secret n’est pas affiché.",
+        detail: tk(
+          "Dernier test : users/@me a répondu 401. Le jeton est rejeté. Le secret n’est pas affiché."
+        ),
         lastTest: "2026-10-07T19:02:00.000Z",
         presence: "offline",
         options: { serveur: "" },
@@ -540,7 +561,7 @@ export function seedState(): AppState {
         status: "not_configured",
         enabled: false,
         oauthReady: false,
-        detail: "Onboarding non terminé. Aucun secret n’est saisi dans le navigateur.",
+        detail: tk("Onboarding non terminé. Aucun secret n’est saisi dans le navigateur."),
         presence: "offline",
         options: {},
       },
@@ -548,7 +569,7 @@ export function seedState(): AppState {
     keys: [
       {
         id: "key-n8n",
-        name: "n8n — atelier",
+        name: tk("n8n — atelier"),
         prefix: "kl_live_7f3a",
         revealed: true,
         createdAt: earlier,
@@ -569,7 +590,13 @@ export function seedState(): AppState {
 
 export function formatWhen(value?: string) {
   if (!value) return "—";
-  return new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+  return new Intl.DateTimeFormat(locale(), { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+}
+
+export function kindLabel(kind: AgentKind) {
+  if (kind === "metier") return t("Métier");
+  if (kind === "hybride") return t("Hybride");
+  return t("Impersonator");
 }
 
 export function isManager(role: Role) {
@@ -609,14 +636,17 @@ function briefContribution(agent: Agent, question: string): Contribution {
   let verdict: Verdict = "CONDITIONAL_GO";
   if (/(abandon|renoncer|arrêter|stopper|refuser)/.test(q)) verdict = "NO_GO";
   else if (/(pilote|lancer|ouvrir|basculer)/.test(q) && !agent.veto) verdict = "GO";
-  const line = (agent.brief?.trim() || agent.mission).replace(/\.$/, "");
+  const line = tc(agent.brief?.trim() || agent.mission).replace(/\.$/, "");
   return {
     agentId: agent.id,
     verdict,
-    strengths: [`${agent.department} peut instruire : ${agent.mission}`],
-    objections: verdict === "GO" ? [] : [`${agent.role} : ${line}.`],
-    conditions: verdict === "CONDITIONAL_GO" ? [`${line}.`] : verdict === "NO_GO" ? ["Ne pas engager tant que cette fonction n’a pas levé son objection."] : [],
-    metric: agent.veto && verdict !== "GO" ? "Veto · disponible" : "Avis · consultatif",
+    strengths: [t("{{department}} peut instruire : {{mission}}", {
+      department: tc(agent.department),
+      mission: tc(agent.mission)
+    })],
+    objections: verdict === "GO" ? [] : [t("{{role}} : {{line}}.", { role: tc(agent.role), line })],
+    conditions: verdict === "CONDITIONAL_GO" ? [`${line}.`] : verdict === "NO_GO" ? [t("Ne pas engager tant que cette fonction n’a pas levé son objection.")] : [],
+    metric: agent.veto && verdict !== "GO" ? t("Veto · disponible") : t("Avis · consultatif"),
   };
 }
 
@@ -627,30 +657,30 @@ export function contributionFor(agent: Agent, question: string): Contribution {
     return {
       agentId: agent.id,
       verdict,
-      strengths: ["Le scénario est chiffrable à partir de la question posée."],
-      objections: verdict === "GO" ? [] : ["Le gain n’est pas garanti sans plancher de marge ou revue datée."],
-      conditions: verdict === "CONDITIONAL_GO" ? ["Fixer un plancher et une date de revue avant engagement."] : [],
-      metric: verdict === "NO_GO" ? "Rentabilité · non tenue" : "Revue · 60 jours",
+      strengths: [t("Le scénario est chiffrable à partir de la question posée.")],
+      objections: verdict === "GO" ? [] : [t("Le gain n’est pas garanti sans plancher de marge ou revue datée.")],
+      conditions: verdict === "CONDITIONAL_GO" ? [t("Fixer un plancher et une date de revue avant engagement.")] : [],
+      metric: verdict === "NO_GO" ? t("Rentabilité · non tenue") : t("Revue · 60 jours"),
     };
   }
   if (agent.role === "Legal") {
     return {
       agentId: agent.id,
       verdict,
-      strengths: ["L’objet peut tenir dans un avenant, sans nouveau cadre."],
-      objections: verdict === "GO" ? [] : ["Il manque une clause opposable (volume, délai ou réversibilité)."],
-      conditions: verdict === "NO_GO" ? ["Ne pas signer en l’état."] : ["Écrit opposable avant exécution."],
-      metric: agent.veto ? "Veto · disponible" : "Avis · consultatif",
+      strengths: [t("L’objet peut tenir dans un avenant, sans nouveau cadre.")],
+      objections: verdict === "GO" ? [] : [t("Il manque une clause opposable (volume, délai ou réversibilité).")],
+      conditions: verdict === "NO_GO" ? [t("Ne pas signer en l’état.")] : [t("Écrit opposable avant exécution.")],
+      metric: agent.veto ? t("Veto · disponible") : t("Avis · consultatif"),
     };
   }
   if (agent.role === "CTO") {
     return {
       agentId: agent.id,
       verdict,
-      strengths: ["Pas de dépendance technique bloquante identifiée dans l’énoncé."],
-      objections: ["La charge réelle n’est pas dans la question. Elle reste une hypothèse."],
-      conditions: verdict === "CONDITIONAL_GO" ? ["Limiter le périmètre à un canari."] : [],
-      metric: "Faisabilité · tenue",
+      strengths: [t("Pas de dépendance technique bloquante identifiée dans l’énoncé.")],
+      objections: [t("La charge réelle n’est pas dans la question. Elle reste une hypothèse.")],
+      conditions: verdict === "CONDITIONAL_GO" ? [t("Limiter le périmètre à un canari.")] : [],
+      metric: t("Faisabilité · tenue"),
     };
   }
   if (agent.kind === "metier" && !["CFO", "Legal", "CTO", "Sales"].includes(agent.role)) {
@@ -659,10 +689,12 @@ export function contributionFor(agent: Agent, question: string): Contribution {
   return {
     agentId: agent.id,
     verdict,
-    strengths: [`La question est vendable telle quelle : « ${short} »`],
-    objections: verdict === "NO_GO" ? ["Le marché ne paiera pas cette version."] : [],
+    strengths: [t("La question est vendable telle quelle : « {{short}} »", {
+      short
+    })],
+    objections: verdict === "NO_GO" ? [t("Le marché ne paiera pas cette version.")] : [],
     conditions: [],
-    metric: "Relation · exposée",
+    metric: t("Relation · exposée"),
   };
 }
 
@@ -671,7 +703,12 @@ export function simulateMetier(agent: Agent, question: string) {
   if (isVague(asked)) {
     return {
       status: "clarify" as const,
-      ask: `Quelle décision, quel seuil, quel horizon ? ${agent.name} n’instruit pas une formule trop courte.`,
+      ask: t(
+        "Quelle décision, quel seuil, quel horizon ? {{name}} n’instruit pas une formule trop courte.",
+        {
+          name: tc(agent.name)
+        }
+      ),
     };
   }
   return {
@@ -691,12 +728,16 @@ export function simulateMeeting(agents: Agent[], question: string, voting: Votin
   if (isVague(asked)) {
     return {
       status: "clarify" as const,
-      ask: "Quelle décision, quel seuil, quel horizon ? La réunion ne part pas sur une formule trop courte.",
+      ask: t(
+        "Quelle décision, quel seuil, quel horizon ? La réunion ne part pas sur une formule trop courte."
+      ),
     };
   }
   const present = agents.filter((agent) => agent.enabled);
   if (present.length < 2) {
-    return { status: "thin" as const, ask: "Une réunion compte au moins deux agents actifs. Réactivez-en un, ou complétez le collectif." };
+    return { status: "thin" as const, ask: t(
+      "Une réunion compte au moins deux agents actifs. Réactivez-en un, ou complétez le collectif."
+    ) };
   }
   const contributions = present.map((agent) => contributionFor(agent, asked));
   const turns = contributions.map((contribution, index) => {
@@ -707,9 +748,15 @@ export function simulateMeeting(agents: Agent[], question: string, voting: Votin
     const reply = !previous || !prevAgent
       ? point
       : previous.verdict === contribution.verdict
-        ? `D’accord avec ${prevAgent.role} sur le sens. ${point}`
-        : `Je ne suis pas ${prevAgent.role}. ${point}`;
-    const label = personality && agent.simulation ? "Simulation étiquetée. " : "";
+        ? t("D’accord avec {{role}} sur le sens. {{point}}", {
+      role: tc(prevAgent.role),
+      point
+    })
+        : t("Je ne suis pas {{role}}. {{point}}", {
+      role: tc(prevAgent.role),
+      point
+    });
+    const label = personality && agent.simulation ? t("Simulation étiquetée. ") : "";
     return {
       agentId: agent.id,
       name: agent.name,
@@ -747,9 +794,15 @@ export function admitToMeeting(
   const reply = !previous
     ? point
     : previous.verdict === contribution.verdict
-      ? `Je rejoins la salle. D’accord avec ${previous.role} sur le sens. ${point}`
-      : `Je rejoins la salle. Je ne suis pas ${previous.role}. ${point}`;
-  const label = personality && agent.simulation ? "Simulation étiquetée. " : "";
+      ? t("Je rejoins la salle. D’accord avec {{role}} sur le sens. {{point}}", {
+    role: tc(previous.role),
+    point
+  })
+      : t("Je rejoins la salle. Je ne suis pas {{role}}. {{point}}", {
+    role: tc(previous.role),
+    point
+  });
+  const label = personality && agent.simulation ? t("Simulation étiquetée. ") : "";
   const turns = [
     ...meeting.turns,
     { agentId: agent.id, name: agent.name, role: agent.role, verdict: contribution.verdict, line: `${label}${reply}` },
@@ -792,7 +845,7 @@ export const FOREIGN_SESSION = "Échange - Nietzsche";
 export function registerAccount(email: string, tenantFromClient: string) {
   const clean = email.trim().toLowerCase();
   if (!clean.includes("@") || clean.startsWith("@")) {
-    return { ok: false as const, reason: "Adresse invalide. Rien n’est créé." };
+    return { ok: false as const, reason: t("Adresse invalide. Rien n’est créé.") };
   }
   return {
     ok: true as const,
@@ -803,11 +856,17 @@ export function registerAccount(email: string, tenantFromClient: string) {
 }
 
 export function refuseForeign(action: "run" | "message") {
-  const what = action === "run" ? "Aucune mission n’est lancée." : "Aucun message n’est enregistré.";
+  const what = action === "run" ? t("Aucune mission n’est lancée.") : t("Aucun message n’est enregistré.");
   return {
     ok: false as const,
     status: 403,
-    reason: `403 — « ${FOREIGN_SESSION} » appartient à un autre compte du tenant. ${what}`,
+    reason: t(
+      "403 — « {{FOREIGN_SESSION}} » appartient à un autre compte du tenant. {{what}}",
+      {
+        FOREIGN_SESSION: tc(FOREIGN_SESSION),
+        what
+      }
+    ),
   };
 }
 

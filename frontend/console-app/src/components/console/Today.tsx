@@ -18,13 +18,14 @@ import { useConsole } from "@/lib/console/store";
 import { CYCLE, formatWhen, SESSION_QUOTA, STATUS_LABEL, useCaseLabel, type CycleId } from "@/lib/console/model";
 import { Panel, ProgressBar, StatusPill, VerdictPill } from "./ui";
 import { go } from "./Shell";
+import { t, tc } from "@/lib/i18n";
 
 const ACTIONS = [
   {
     id: "teams",
     title: "Teams",
-    body: "Exemple : connectez Teams depuis Connexions. L’état réel de vos canaux s’y affiche une fois connecté.",
-    label: "Connecter",
+    get body() { return t("Exemple : connectez Teams depuis Connexions. L’état réel de vos canaux s’y affiche une fois connecté."); },
+    get label() { return t("Connecter"); },
     page: "connexions" as const,
     color: "#5b5fc7",
     soft: "#eef0fb",
@@ -34,8 +35,8 @@ const ACTIONS = [
   {
     id: "crystal",
     title: "CrystalKnows",
-    body: "Crystal Knows n’est pas configuré. L’import d’un export autorisé ou d’un DISC reste possible, sans scraping.",
-    label: "Configurer",
+    get body() { return t("Crystal Knows n’est pas configuré. L’import d’un export autorisé ou d’un DISC reste possible, sans scraping."); },
+    get label() { return t("Configurer"); },
     page: "agents" as const,
     color: "#01293D",
     soft: "#eeecfb",
@@ -45,8 +46,8 @@ const ACTIONS = [
   {
     id: "provider",
     title: "Mistral",
-    body: "Provider annoncé : Mistral. Le swarm utilise le même provider. Un profil démo est étiqueté comme tel, jamais comme un verdict silencieux.",
-    label: "Voir l’annonce",
+    get body() { return t("Provider annoncé : Mistral. Le swarm utilise le même provider. Un profil démo est étiqueté comme tel, jamais comme un verdict silencieux."); },
+    get label() { return t("Voir l’annonce"); },
     page: "espace" as const,
     color: "#FA520F",
     soft: "#fff1e8",
@@ -56,10 +57,10 @@ const ACTIONS = [
 ];
 
 const GUIDE = [
-  { title: "La question", hint: "Vous posez la décision.", icon: MessageCircleQuestion, color: "#0176d3", soft: "#eaf5fe" },
-  { title: "Le collectif", hint: "Il l’instruit.", icon: Users, color: "#0f766e", soft: "#e6f4f2" },
-  { title: "Le verdict", hint: "Il reste consultatif.", icon: Scale, color: "#5b4cdb", soft: "#eeecfb" },
-  { title: "Votre arbitrage", hint: "Un humain tranche.", icon: BadgeCheck, color: "#157347", soft: "#e7f4ec" },
+  { get title() { return t("La question"); }, get hint() { return t("Vous posez la décision."); }, icon: MessageCircleQuestion, color: "#0176d3", soft: "#eaf5fe" },
+  { get title() { return t("Le collectif"); }, get hint() { return t("Il l’instruit."); }, icon: Users, color: "#0f766e", soft: "#e6f4f2" },
+  { get title() { return t("Le verdict"); }, get hint() { return t("Il reste consultatif."); }, icon: Scale, color: "#5b4cdb", soft: "#eeecfb" },
+  { get title() { return t("Votre arbitrage"); }, get hint() { return t("Un humain tranche."); }, icon: BadgeCheck, color: "#157347", soft: "#e7f4ec" },
 ];
 
 const STEP_TONE = [
@@ -91,10 +92,10 @@ export function Today() {
     <div className="flex flex-col gap-6">
       {guideOpen ? (
         <Panel>
-          <p className="text-sm font-semibold text-ink">Le parcours</p>
-          <p className="mt-1 max-w-2xl text-sm text-ink-soft">
-            Vous posez une décision. Un collectif l’instruit. Le verdict reste consultatif tant qu’un humain ne l’a pas arbitré.
-          </p>
+          <p className="text-sm font-semibold text-ink">{t("Le parcours")}</p>
+          <p className="mt-1 max-w-2xl text-sm text-ink-soft">{t(
+            "Vous posez une décision. Un collectif l’instruit. Le verdict reste consultatif tant qu’un humain ne l’a pas arbitré."
+          )}</p>
           <ol className="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {GUIDE.map((step, index) => {
               const Icon = step.icon;
@@ -114,9 +115,7 @@ export function Today() {
                       className="size-4 rounded accent-accent"
                       checked={ack[index]}
                       onChange={(event) => ackGuide(index, event.target.checked)}
-                    />
-                    J’ai compris
-                  </label>
+                    />{t("J’ai compris")}</label>
                 </li>
               );
             })}
@@ -126,18 +125,16 @@ export function Today() {
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Ce qui vous attend</h1>
-          <p className="mt-1 max-w-xl text-sm text-muted">
-            Les dossiers ouverts, dans l’ordre où vous pouvez agir.
-          </p>
+          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Ce qui vous attend")}</h1>
+          <p className="mt-1 max-w-xl text-sm text-muted">{t("Les dossiers ouverts, dans l’ordre où vous pouvez agir.")}</p>
         </div>
         <dl className="flex gap-4 text-sm">
           <div>
-            <dt className="text-[11px] font-medium text-muted">Collectifs</dt>
+            <dt className="text-[11px] font-medium text-muted">{t("Collectifs")}</dt>
             <dd className="font-semibold tabular-nums text-ink">{mine}/{SESSION_QUOTA}</dd>
           </div>
           <div>
-            <dt className="text-[11px] font-medium text-muted">Agents actifs</dt>
+            <dt className="text-[11px] font-medium text-muted">{t("Agents actifs")}</dt>
             <dd className="font-semibold tabular-nums text-ink">{state.agents.filter((agent) => agent.enabled).length}</dd>
           </div>
         </dl>
@@ -159,14 +156,14 @@ export function Today() {
                   <VerdictPill verdict={thread.verdict} />
                   <span className="text-xs text-muted">{useCaseLabel(thread.useCase)}</span>
                 </div>
-                <p className="mt-2 text-[15px] font-semibold leading-snug text-ink">{thread.question}</p>
+                <p className="mt-2 text-[15px] font-semibold leading-snug text-ink">{tc(thread.question)}</p>
                 {thread.status === "running" ? (
                   <div className="mt-3">
                     <ProgressBar done={thread.progress.done} total={thread.progress.total} active />
                   </div>
                 ) : null}
                 <p className="mt-2 flex items-center gap-2 text-sm text-muted">
-                  {collective?.name ?? "Collectif"} · {why(thread.status, state.role)}
+                  {tc(collective?.name) || t("Collectif")} · {why(thread.status, state.role)}
                   <ArrowRight size={14} className="ml-auto text-ink-soft" aria-hidden="true" />
                 </p>
               </button>
@@ -178,9 +175,7 @@ export function Today() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel>
           <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
-            <ListChecks size={16} className="text-accent" aria-hidden="true" />
-            Prochaine action utile
-          </h2>
+            <ListChecks size={16} className="text-accent" aria-hidden="true" />{t("Prochaine action utile")}</h2>
           <ul className="mt-4 flex flex-col gap-3 text-sm">
             {ACTIONS.map((action) => (
               <li key={action.id} className="rounded-xl border border-line bg-surface p-3">
@@ -207,10 +202,8 @@ export function Today() {
         </Panel>
         <Panel>
           <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
-            <Milestone size={16} className="text-teal" aria-hidden="true" />
-            Où vit le cycle
-          </h2>
-          <p className="mt-1 text-sm text-muted">Huit temps. Une étape ouvre le dossier qui s’y trouve.</p>
+            <Milestone size={16} className="text-teal" aria-hidden="true" />{t("Où vit le cycle")}</h2>
+          <p className="mt-1 text-sm text-muted">{t("Huit temps. Une étape ouvre le dossier qui s’y trouve.")}</p>
           <ol className="mt-2 divide-y divide-line">
             {CYCLE.map((step, index) => {
               const tone = STEP_TONE[index] ?? STEP_TONE[0];
@@ -241,10 +234,12 @@ export function Today() {
 
       {running.length ? (
         <p className="text-xs text-muted">
-          {running.length} instruction{running.length > 1 ? "s" : ""} en cours, mise à jour sur cette page. Dernier mouvement : {formatWhen(running[0]?.updatedAt)}.
+          {running.length > 1
+            ? t("{{count}} instructions en cours, mise à jour sur cette page. Dernier mouvement : {{when}}.", { count: running.length, when: formatWhen(running[0]?.updatedAt) })
+            : t("{{count}} instruction en cours, mise à jour sur cette page. Dernier mouvement : {{when}}.", { count: running.length, when: formatWhen(running[0]?.updatedAt) })}
         </p>
       ) : null}
-      <p className="text-xs text-muted">Statuts suivis : {Object.values(STATUS_LABEL).join(" · ")}.</p>
+      <p className="text-xs text-muted">{t("Statuts suivis :")}{" "}{Object.values(STATUS_LABEL).join(" · ")}.</p>
     </div>
   );
 }
@@ -258,8 +253,8 @@ function rank(status: string) {
 }
 
 function why(status: string, role: string) {
-  if (status === "needs_clarification") return "Une précision est vraiment attendue";
-  if (status === "awaiting_arbitration") return role === "comex" ? "Vous pouvez arbitrer" : "Arbitrage réservé au COMEX";
-  if (status === "running") return "Le collectif instruit";
-  return "Clos";
+  if (status === "needs_clarification") return t("Une précision est vraiment attendue");
+  if (status === "awaiting_arbitration") return role === "comex" ? t("Vous pouvez arbitrer") : t("Arbitrage réservé au COMEX");
+  if (status === "running") return t("Le collectif instruit");
+  return t("Clos");
 }

@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="./tokens.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://microsoft.github.io/Ontology-Playground/embed/ontology-embed.js"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{body:[var(--font-body),'system-ui','sans-serif'],display:['Inter','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{body:['var(--font-body)','system-ui','sans-serif'],display:['Inter','sans-serif'],mono:['Fira Code','monospace']}}}};</script>
 <style>
 /* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
 /* Hallmark · genre: modern-minimal · macrostructure: Map / Diagram · theme: custom
@@ -945,7 +945,8 @@ function initialLanguage(){
     const saved=localStorage.getItem('kayroslab-language');
     if(saved==='fr'||saved==='en') return saved;
   } catch(e){}
-  return (navigator.language||'fr').toLowerCase().startsWith('fr')?'fr':'en';
+  const nav=typeof navigator!=='undefined'?navigator:(typeof window!=='undefined'?window.navigator:null);
+  return ((nav&&nav.language)||'fr').toLowerCase().startsWith('fr')?'fr':'en';
 }
 let currentLang=initialLanguage();
 function t(key,vars,lang){

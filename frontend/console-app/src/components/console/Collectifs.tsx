@@ -3,11 +3,12 @@ import { useConsole } from "@/lib/console/store";
 import { admitToMeeting, SESSION_QUOTA, simulateMeeting, VERDICT_LABEL, VOTING, votingLabel, type Agent, type Collective, type Voting } from "@/lib/console/model";
 import { Button, Empty, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
+import { t, tc } from "@/lib/i18n";
 
 export function Collectifs() {
   const { state, createCollective, selectCollective, addAgentToCollective, updateCollective, startMission } = useConsole();
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("Comité investissement");
+  const [name, setName] = useState(t("Comité investissement"));
   const [voting, setVoting] = useState<Voting>("majority");
   const [personality, setPersonality] = useState(true);
   const [picked, setPicked] = useState<string[]>(["ag-cfo", "ag-legal", "ag-cto"]);
@@ -36,29 +37,27 @@ export function Collectifs() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Collectifs</h1>
-          <p className="mt-1 max-w-2xl text-sm text-muted">
-            Un collectif est l’équipe stable qui instruit vos dossiers. {state.collectives.length}/{SESSION_QUOTA} pour votre compte — les collectifs des autres membres du tenant ne sont ni listés ni modifiables.
-          </p>
+          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Collectifs")}</h1>
+          <p className="mt-1 max-w-2xl text-sm text-muted">{t("Un collectif est l’équipe stable qui instruit vos dossiers.")}{" "}{state.collectives.length}/{SESSION_QUOTA}{" "}{t(
+              "pour votre compte — les collectifs des autres membres du tenant ne sont ni listés ni modifiables."
+            )}</p>
         </div>
-        <Button onClick={() => setOpen((value) => !value)} disabled={remaining <= 0}>
-          Nouveau collectif
-        </Button>
+        <Button onClick={() => setOpen((value) => !value)} disabled={remaining <= 0}>{t("Nouveau collectif")}</Button>
       </div>
       {remaining <= 0 ? (
-        <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold" role="status">
-          Quota atteint pour votre compte. Un autre utilisateur du même tenant ne bloque pas ce quota, et vous ne pouvez pas écrire dans ses sessions.
-        </p>
+        <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold" role="status">{t(
+          "Quota atteint pour votre compte. Un autre utilisateur du même tenant ne bloque pas ce quota, et vous ne pouvez pas écrire dans ses sessions."
+        )}</p>
       ) : null}
 
       {open ? (
         <Panel>
-          <h2 className="text-sm font-medium">Composer</h2>
+          <h2 className="text-sm font-medium">{t("Composer")}</h2>
           <div className="mt-4 grid gap-4">
-            <Field label="Nom">
+            <Field label={t("Nom")}>
               <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} />
             </Field>
-            <Field label="Seuil">
+            <Field label={t("Seuil")}>
               <select className={controlClass} value={voting} onChange={(event) => setVoting(event.target.value as Voting)}>
                 {VOTING.map((item) => (
                   <option key={item.id} value={item.id}>{item.label}</option>
@@ -68,33 +67,35 @@ export function Collectifs() {
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1 size-4" checked={personality} onChange={(event) => setPersonality(event.target.checked)} />
               <span>
-                <span className="font-medium">Simulation de personnalité</span>
-                <span className="mt-1 block text-muted">Transmise à la session. Les agents consentis parlent depuis leur profil, pas depuis un type générique.</span>
+                <span className="font-medium">{t("Simulation de personnalité")}</span>
+                <span className="mt-1 block text-muted">{t(
+                  "Transmise à la session. Les agents consentis parlent depuis leur profil, pas depuis un type générique."
+                )}</span>
               </span>
             </label>
             <fieldset>
-              <legend className="text-sm font-medium">Agents actifs</legend>
+              <legend className="text-sm font-medium">{t("Agents actifs")}</legend>
               <div className="mt-2 grid gap-2 sm:grid-cols-2">
                 {active.map((agent) => (
                   <label key={agent.id} className="flex min-h-11 items-center gap-3 rounded-lg border border-line px-3 text-sm">
                     <input type="checkbox" checked={picked.includes(agent.id)} onChange={() => toggle(agent.id)} />
-                    {agent.name}
-                    <span className="text-muted">{agent.role}</span>
+                    {tc(agent.name)}
+                    <span className="text-muted">{tc(agent.role)}</span>
                   </label>
                 ))}
               </div>
             </fieldset>
             {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
             <div className="flex gap-2">
-              <Button onClick={submit}>Créer et sélectionner</Button>
-              <Button variant="ghost" onClick={() => setOpen(false)}>Annuler</Button>
+              <Button onClick={submit}>{t("Créer et sélectionner")}</Button>
+              <Button variant="ghost" onClick={() => setOpen(false)}>{t("Annuler")}</Button>
             </div>
           </div>
         </Panel>
       ) : null}
 
       {state.collectives.length === 0 ? (
-        <Empty title="Aucun collectif" body="Le premier que vous créez est sélectionné automatiquement." />
+        <Empty title={t("Aucun collectif")} body={t("Le premier que vous créez est sélectionné automatiquement.")} />
       ) : (
         <div className="grid gap-3">
           {state.collectives.map((collective) => {
@@ -104,18 +105,18 @@ export function Collectifs() {
               <Panel key={collective.id} className={selected ? "border-accent" : undefined}>
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs text-muted">{selected ? "Sélectionné pour la prochaine instruction" : "Non sélectionné"} · {votingLabel(collective.voting)}</p>
-                    <h2 className="mt-1 text-lg font-medium">{collective.name}</h2>
+                    <p className="text-xs text-muted">{selected ? t("Sélectionné pour la prochaine instruction") : t("Non sélectionné")} · {votingLabel(collective.voting)}</p>
+                    <h2 className="mt-1 text-lg font-medium">{tc(collective.name)}</h2>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {!selected ? <Button variant="secondary" onClick={() => selectCollective(collective.id)}>Sélectionner</Button> : null}
+                    {!selected ? <Button variant="secondary" onClick={() => selectCollective(collective.id)}>{t("Sélectionner")}</Button> : null}
                     <Button variant="secondary" onClick={() => { setEditError(""); setEditId((current) => current === collective.id ? null : collective.id); }}>
                       {editId === collective.id ? "Fermer" : "Modifier"}
                     </Button>
                     <Button variant="secondary" onClick={() => setMeetingId((current) => current === collective.id ? null : collective.id)}>
-                      {meetingId === collective.id ? "Fermer la réunion" : "Simuler la réunion"}
+                      {meetingId === collective.id ? t("Fermer la réunion") : t("Simuler la réunion")}
                     </Button>
-                    <Button onClick={() => { selectCollective(collective.id); go("instruire"); }}>Instruire</Button>
+                    <Button onClick={() => { selectCollective(collective.id); go("instruire"); }}>{t("Instruire")}</Button>
                   </div>
                 </div>
                 <ul className="mt-3 flex flex-wrap gap-2">
@@ -123,18 +124,16 @@ export function Collectifs() {
                     const agent = state.agents.find((item) => item.id === id);
                     return (
                       <li key={id} className="inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1 text-xs">
-                        <span>{agent?.name ?? id}{agent?.veto ? " · veto" : ""}</span>
+                        <span>{tc(agent?.name) || id}{agent?.veto ? t(" · veto") : ""}</span>
                         {editId === collective.id ? (
                           <button
                             type="button"
                             className="text-stop"
                             onClick={() => {
                               const result = updateCollective(collective.id, { removeAgentId: id });
-                              setEditError(result.ok ? "" : result.reason ?? "Refusé");
+                              setEditError(result.ok ? "" : result.reason ?? t("Refusé"));
                             }}
-                          >
-                            Retirer
-                          </button>
+                          >{t("Retirer")}</button>
                         ) : null}
                       </li>
                     );
@@ -147,14 +146,16 @@ export function Collectifs() {
                     error={editError}
                     onSave={(patch) => {
                       const result = updateCollective(collective.id, patch);
-                      setEditError(result.ok ? "" : result.reason ?? "Refusé");
+                      setEditError(result.ok ? "" : result.reason ?? t("Refusé"));
                       if (result.ok) setEditId(null);
                     }}
                   />
                 ) : null}
                 {meetingId === collective.id ? (
                   <Meeting
-                    questionDefault="Faut-il accorder une remise de 12 % pour signer avant la fin du trimestre ?"
+                    questionDefault={t(
+                      "Faut-il accorder une remise de 12 % pour signer avant la fin du trimestre ?"
+                    )}
                     run={(question) => {
                       const agents = collective.agentIds
                         .map((id) => state.agents.find((agent) => agent.id === id))
@@ -186,7 +187,7 @@ export function Collectifs() {
                   />
                 ) : null}
                 <label className="mt-4 flex flex-col gap-1 text-sm">
-                  <span className="text-muted">Ajouter un agent du registre</span>
+                  <span className="text-muted">{t("Ajouter un agent du registre")}</span>
                   <select
                     className={controlClass}
                     defaultValue=""
@@ -195,16 +196,16 @@ export function Collectifs() {
                       event.target.value = "";
                     }}
                   >
-                    <option value="">Choisir…</option>
+                    <option value="">{t("Choisir…")}</option>
                     {active.filter((agent) => !collective.agentIds.includes(agent.id)).map((agent) => (
-                      <option key={agent.id} value={agent.id}>{agent.name}</option>
+                      <option key={agent.id} value={agent.id}>{tc(agent.name)}</option>
                     ))}
                   </select>
                 </label>
                 <div className="mt-3 flex flex-col gap-1">
-                  {threads.length === 0 ? <p className="text-sm text-muted">Aucune mission sur ce collectif.</p> : threads.slice(0, 3).map((thread) => (
+                  {threads.length === 0 ? <p className="text-sm text-muted">{t("Aucune mission sur ce collectif.")}</p> : threads.slice(0, 3).map((thread) => (
                     <button key={thread.id} type="button" className="text-left text-sm text-accent-strong" onClick={() => go("dossiers", thread.id)}>
-                      {thread.question}
+                      {tc(thread.question)}
                     </button>
                   ))}
                 </div>
@@ -232,10 +233,10 @@ function CollectiveEdit({
 
   return (
     <div className="mt-4 grid gap-3 border-t border-line pt-4">
-      <Field label="Nom">
+      <Field label={t("Nom")}>
         <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} />
       </Field>
-      <Field label="Seuil">
+      <Field label={t("Seuil")}>
         <select className={controlClass} value={voting} onChange={(event) => setVoting(event.target.value as Voting)}>
           {VOTING.map((item) => (
             <option key={item.id} value={item.id}>{item.label}</option>
@@ -244,10 +245,12 @@ function CollectiveEdit({
       </Field>
       <label className="flex items-start gap-3 text-sm">
         <input type="checkbox" className="mt-1 size-4" checked={personality} onChange={(event) => setPersonality(event.target.checked)} />
-        <span>Simulation de personnalité transmise à la réunion et aux dossiers suivants.</span>
+        <span>{t(
+          "Simulation de personnalité transmise à la réunion et aux dossiers suivants."
+        )}</span>
       </label>
       {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
-      <Button className="w-fit" onClick={() => onSave({ name, voting, personality })}>Enregistrer le collectif</Button>
+      <Button className="w-fit" onClick={() => onSave({ name, voting, personality })}>{t("Enregistrer le collectif")}</Button>
     </div>
   );
 }
@@ -282,26 +285,26 @@ function Meeting({
     <div className="mt-4 border-t border-line pt-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-medium">Réunion simulée</h3>
-          <p className="mt-1 text-sm text-muted">Chacun parle depuis sa fonction. Supprimer n’efface pas le collectif.</p>
+          <h3 className="text-sm font-medium">{t("Réunion simulée")}</h3>
+          <p className="mt-1 text-sm text-muted">{t("Chacun parle depuis sa fonction. Supprimer n’efface pas le collectif.")}</p>
         </div>
-        <Button variant="danger" onClick={onDelete}>Supprimer la réunion</Button>
+        <Button variant="danger" onClick={onDelete}>{t("Supprimer la réunion")}</Button>
       </div>
-      <Field label="Ordre du jour">
+      <Field label={t("Ordre du jour")}>
         <TextArea className="mt-2" value={question} onChange={(event) => setQuestion(event.target.value)} />
       </Field>
       <div className="mt-3 flex flex-wrap items-end gap-2">
-        <Field label="Ajouter un agent">
+        <Field label={t("Ajouter un agent")}>
           <select className={controlClass} value={pick} onChange={(event) => setPick(event.target.value)} disabled={candidates.length === 0}>
-            <option value="">{candidates.length === 0 ? "Tous les agents actifs sont déjà là" : "Choisir…"}</option>
+            <option value="">{candidates.length === 0 ? t("Tous les agents actifs sont déjà là") : "Choisir…"}</option>
             {candidates.map((agent) => (
-              <option key={agent.id} value={agent.id}>{agent.name}</option>
+              <option key={agent.id} value={agent.id}>{tc(agent.name)}</option>
             ))}
           </select>
         </Field>
-        <Button variant="secondary" onClick={add} disabled={!pick}>Ajouter</Button>
+        <Button variant="secondary" onClick={add} disabled={!pick}>{t("Ajouter")}</Button>
         <Button onClick={() => setResult(run(question))} disabled={question.trim().length < 3}>
-          {result?.status === "ready" ? "Rejouer la séance" : "Ouvrir la séance"}
+          {result?.status === "ready" ? t("Rejouer la séance") : t("Ouvrir la séance")}
         </Button>
       </div>
       {result?.status === "clarify" || result?.status === "thin" ? (
@@ -314,27 +317,29 @@ function Meeting({
               <li key={turn.agentId} className="rounded-lg bg-paper px-3 py-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs text-muted">{index + 1}</span>
-                  <span className="text-sm font-medium">{turn.name}</span>
-                  <span className="text-xs text-muted">{turn.role}</span>
+                  <span className="text-sm font-medium">{tc(turn.name)}</span>
+                  <span className="text-xs text-muted">{tc(turn.role)}</span>
                   <VerdictPill verdict={turn.verdict} />
                 </div>
                 <p className="mt-2 text-sm">{turn.line}</p>
               </li>
             ))}
           </ol>
-          {result.absent.length ? <p className="text-sm text-muted">Absents, agent inactif : {result.absent.join(", ")}.</p> : null}
+          {result.absent.length ? <p className="text-sm text-muted">{t("Absents, agent inactif :")}{" "}{result.absent.join(", ")}.</p> : null}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm">Salle, seuil appliqué</span>
+            <span className="text-sm">{t("Salle, seuil appliqué")}</span>
             <VerdictPill verdict={result.verdict} />
             <span className="text-xs text-muted">{VERDICT_LABEL[result.verdict]} · {result.provider}</span>
           </div>
           {result.conditions.length ? (
             <ul className="list-disc pl-5 text-sm">
-              {result.conditions.map((item) => <li key={item}>{item}</li>)}
+              {result.conditions.map((item) => <li key={item}>{tc(item)}</li>)}
             </ul>
           ) : null}
-          <p className="text-xs text-muted">Avis de salle. Ouvrir le dossier lance la même question pour de vrai, puis l’arbitrage.</p>
-          <Button variant="secondary" onClick={() => onOpen(question)}>Ouvrir le dossier</Button>
+          <p className="text-xs text-muted">{t(
+            "Avis de salle. Ouvrir le dossier lance la même question pour de vrai, puis l’arbitrage."
+          )}</p>
+          <Button variant="secondary" onClick={() => onOpen(question)}>{t("Ouvrir le dossier")}</Button>
         </div>
       ) : null}
     </div>

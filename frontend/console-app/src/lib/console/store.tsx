@@ -19,6 +19,7 @@ import {
   type UseCase,
   type Voting,
 } from "./model";
+import { t, tc, tk } from "@/lib/i18n";
 
 const KEY = "kayros-console-cx-v1";
 
@@ -108,10 +109,12 @@ function finishRunning(state: AppState, thread: Thread): Thread {
       status: "needs_clarification",
       stage: "ecouter",
       verdict: undefined,
-      questions: ["Précisez l’objet, le montant ou l’écart, et l’échéance. Sans cela le collectif ne produit pas de verdict."],
+      questions: [t(
+        "Précisez l’objet, le montant ou l’écart, et l’échéance. Sans cela le collectif ne produit pas de verdict."
+      )],
       progress: { done: 1, total: thread.progress.total },
       updatedAt: at,
-      events: [...thread.events, { at, label: "Précision demandée", detail: "Question trop courte pour un verdict. Ce n’est pas un GO conditionnel." }],
+      events: [...thread.events, { at, label: tk("Précision demandée"), detail: t("Question trop courte pour un verdict. Ce n’est pas un GO conditionnel.") }],
     };
   }
   const contributions = agents.map((agent) => contributionFor(agent, thread.question));
@@ -127,13 +130,16 @@ function finishRunning(state: AppState, thread: Thread): Thread {
     stage: "arbitrer",
     progress: { done: thread.progress.total, total: thread.progress.total },
     updatedAt: at,
-    provider: thread.profile === "demo" ? "Démo préenregistrée" : "Mistral",
+    provider: thread.profile === "demo" ? t("Démo préenregistrée") : "Mistral",
     events: [
       ...thread.events,
       {
         at,
-        label: "Verdict produit",
-        detail: `${settled.verdict === "CONDITIONAL_GO" ? "GO conditionnel envoyé à l’arbitrage" : settled.verdict} · provider ${thread.profile === "demo" ? "démo" : "Mistral"} · swarm aligné`,
+        label: tk("Verdict produit"),
+        detail: t("{{v}} · provider {{v1}} · swarm aligné", {
+          v: settled.verdict === "CONDITIONAL_GO" ? t("GO conditionnel envoyé à l’arbitrage") : settled.verdict,
+          v1: thread.profile === "demo" ? t("démo") : "Mistral"
+        }),
       },
     ],
   };
@@ -195,10 +201,15 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       selectCollective: (id) => setState((current) => ({ ...current, selectedCollectiveId: id })),
       createCollective: (input) => {
         if (state.collectives.length >= SESSION_QUOTA) {
-          return { ok: false, reason: `3 collectifs maximum pour votre compte (${WORKSPACE_EMAIL}). Le tenant peut en contenir davantage : ils ne comptent pas dans votre quota.` };
+          return { ok: false, reason: t(
+            "3 collectifs maximum pour votre compte ({{WORKSPACE_EMAIL}}). Le tenant peut en contenir davantage : ils ne comptent pas dans votre quota.",
+            {
+              WORKSPACE_EMAIL
+            }
+          ) };
         }
         if (!input.name.trim() || input.agentIds.length < 2) {
-          return { ok: false, reason: "Nommez le collectif et choisissez au moins deux agents actifs." };
+          return { ok: false, reason: t("Nommez le collectif et choisissez au moins deux agents actifs.") };
         }
         const id = uid("col");
         const collective: Collective = {
@@ -213,7 +224,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           ...current,
           collectives: [collective, ...current.collectives],
           selectedCollectiveId: id,
-          notice: { tone: "ok", text: `« ${collective.name} » est sélectionné. Vous pouvez l’instruire tout de suite.` },
+          notice: { tone: "ok", text: t("« {{name}} » est sélectionné. Vous pouvez l’instruire tout de suite.", {
+            name: tc(collective.name)
+          }) },
         }));
         return { ok: true, id };
       },
@@ -229,10 +242,10 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       },
       updateCollective: (id, patch) => {
         const existing = state.collectives.find((item) => item.id === id);
-        if (!existing) return { ok: false, reason: "Ce collectif n’est plus là." };
-        if (patch.name !== undefined && !patch.name.trim()) return { ok: false, reason: "Le nom est requis." };
+        if (!existing) return { ok: false, reason: t("Ce collectif n’est plus là.") };
+        if (patch.name !== undefined && !patch.name.trim()) return { ok: false, reason: t("Le nom est requis.") };
         if (patch.removeAgentId && existing.agentIds.length <= 2) {
-          return { ok: false, reason: "Un collectif garde au moins deux agents." };
+          return { ok: false, reason: t("Un collectif garde au moins deux agents.") };
         }
         setState((current) => ({
           ...current,
@@ -246,12 +259,14 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               agentIds: patch.removeAgentId ? item.agentIds.filter((agentId) => agentId !== patch.removeAgentId) : item.agentIds,
             };
           }),
-          notice: { tone: "ok", text: patch.removeAgentId ? "Agent retiré du collectif. Les dossiers déjà ouverts gardent leur composition." : "Collectif mis à jour." },
+          notice: { tone: "ok", text: patch.removeAgentId ? t(
+            "Agent retiré du collectif. Les dossiers déjà ouverts gardent leur composition."
+          ) : t("Collectif mis à jour.") },
         }));
         return { ok: true };
       },
       setAgentEnabled: (agentId, enabled) => {
-        if (state.role !== "comex") return { ok: false, reason: "Réservé aux rôles COMEX ou admin." };
+        if (state.role !== "comex") return { ok: false, reason: t("Réservé aux rôles COMEX ou admin.") };
         setState((current) => ({
           ...current,
           agents: current.agents.map((agent) => (agent.id === agentId ? { ...agent, enabled } : agent)),
@@ -259,12 +274,12 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         return { ok: true };
       },
       updateAgent: (id, agent) => {
-        if (state.role !== "comex") return { ok: false, reason: "Réservé aux rôles COMEX ou admin." };
+        if (state.role !== "comex") return { ok: false, reason: t("Réservé aux rôles COMEX ou admin.") };
         const existing = state.agents.find((item) => item.id === id);
-        if (!existing) return { ok: false, reason: "Cet agent n’est plus au registre." };
-        if (!agent.name.trim()) return { ok: false, reason: "Le nom est requis." };
+        if (!existing) return { ok: false, reason: t("Cet agent n’est plus au registre.") };
+        if (!agent.name.trim()) return { ok: false, reason: t("Le nom est requis.") };
         if ((existing.kind === "hybride" || existing.kind === "impersonator") && !agent.consented) {
-          return { ok: false, reason: "Consentement explicite requis pour conserver ce profil." };
+          return { ok: false, reason: t("Consentement explicite requis pour conserver ce profil.") };
         }
         const name = agent.name.trim();
         setState((current) => ({
@@ -286,18 +301,23 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 }
               : item,
           ),
-          notice: { tone: "ok", text: `${name} est mis à jour. Les collectifs qui l’utilisent voient la nouvelle fiche.` },
+          notice: { tone: "ok", text: t(
+            "{{name}} est mis à jour. Les collectifs qui l’utilisent voient la nouvelle fiche.",
+            {
+              name
+            }
+          ) },
         }));
         return { ok: true };
       },
       createAgent: (agent) => {
-        if (state.role !== "comex") return { ok: false, reason: "Réservé aux rôles COMEX ou admin. Le formulaire n’est pas ouvert." };
-        if (!agent.name.trim()) return { ok: false, reason: "Le nom est requis." };
+        if (state.role !== "comex") return { ok: false, reason: t("Réservé aux rôles COMEX ou admin. Le formulaire n’est pas ouvert.") };
+        if (!agent.name.trim()) return { ok: false, reason: t("Le nom est requis.") };
         if (agent.kind === "metier" && (!agent.role.trim() || !agent.department.trim() || !agent.mission.trim())) {
-          return { ok: false, reason: "Fonction, service et mission sont requis pour un agent métier." };
+          return { ok: false, reason: t("Fonction, service et mission sont requis pour un agent métier.") };
         }
         if ((agent.kind === "hybride" || agent.kind === "impersonator") && !agent.consented) {
-          return { ok: false, reason: "Consentement explicite requis avant d’enregistrer un profil personnifié." };
+          return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
         }
         const created: Agent = { ...agent, id: uid("ag"), provider: "Mistral", model: "serveur", simulation: agent.consented || agent.simulation };
         setState((current) => ({
@@ -306,26 +326,36 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           notice: {
             tone: "ok",
             text: created.simulation
-              ? `${created.name} est au registre. La simulation de personnalité est active. Profils hybrides : ${hybridCount([created, ...current.agents])}.`
-              : `${created.name} est au registre.`,
+              ? t(
+              "{{name}} est au registre. La simulation de personnalité est active. Profils hybrides : {{hybridCount}}.",
+              {
+                name: created.name,
+                hybridCount: hybridCount([created, ...current.agents])
+              }
+            )
+              : t("{{name}} est au registre.", {
+              name: created.name
+            }),
           },
         }));
         return { ok: true, id: created.id };
       },
       createImpersonatorTeam: (names, clues) => {
-        if (state.role !== "comex") return { ok: false, reason: "Réservé aux rôles COMEX ou admin." };
+        if (state.role !== "comex") return { ok: false, reason: t("Réservé aux rôles COMEX ou admin.") };
         const clean = names.map((name) => name.trim()).filter(Boolean);
-        if (clean.length < 2 || clean.length > 12) return { ok: false, reason: "Une équipe compte entre 2 et 12 personas." };
-        if (!clues.trim()) return { ok: false, reason: "Indiquez les indices autorisés. Aucun scraping n’est lancé." };
+        if (clean.length < 2 || clean.length > 12) return { ok: false, reason: t("Une équipe compte entre 2 et 12 personas.") };
+        if (!clues.trim()) return { ok: false, reason: t("Indiquez les indices autorisés. Aucun scraping n’est lancé.") };
         if (state.collectives.length >= SESSION_QUOTA) {
-          return { ok: false, reason: "Quota de collectifs atteint pour votre compte. L’équipe n’est pas créée, pour ne pas ouvrir une session refusée ensuite." };
+          return { ok: false, reason: t(
+            "Quota de collectifs atteint pour votre compte. L’équipe n’est pas créée, pour ne pas ouvrir une session refusée ensuite."
+          ) };
         }
         const agents: Agent[] = clean.map((name) => ({
           id: uid("ag"),
           name,
-          role: "Persona simulée",
+          role: t("Persona simulée"),
           department: "Simulation",
-          mission: "Teste une idée contre cette persona. Ne parle pas à sa place.",
+          mission: t("Teste une idée contre cette persona. Ne parle pas à sa place."),
           kind: "impersonator",
           veto: false,
           enabled: true,
@@ -351,7 +381,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             ...current.collectives,
           ],
           selectedCollectiveId: id,
-          notice: { tone: "ok", text: "Équipe créée et collectif sélectionné. Les cinq garde-fous sont inscrits sur chaque persona." },
+          notice: { tone: "ok", text: t(
+            "Équipe créée et collectif sélectionné. Les cinq garde-fous sont inscrits sur chaque persona."
+          ) },
         }));
         return { ok: true, collectiveId: id };
       },
@@ -369,7 +401,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           collectiveId: collective?.id ?? "",
           status: "running",
           profile: draft.profile,
-          provider: draft.profile === "demo" ? "Démo préenregistrée" : "Mistral",
+          provider: draft.profile === "demo" ? t("Démo préenregistrée") : "Mistral",
           useCase: draft.useCase,
           stage: "construire",
           agentIds,
@@ -380,7 +412,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           progress: { done: 0, total: Math.max(agentIds.length, 1) },
           createdAt: at,
           updatedAt: at,
-          events: [{ at, label: "Mission lancée", detail: `${collective?.name ?? "Collectif"} · profil ${draft.profile}` }],
+          events: [{ at, label: tk("Mission lancée"), detail: t("{{collective}} · profil {{profile}}", { collective: tc(collective?.name) || t("Collectif"), profile: draft.profile }) }],
         };
         setState((current) => ({
           ...current,
@@ -392,10 +424,10 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       addAgentToThread: (threadId, agentId) => {
         const thread = state.threads.find((item) => item.id === threadId);
         const agent = state.agents.find((item) => item.id === agentId);
-        if (!thread) return { ok: false, reason: "Dossier introuvable." };
-        if (!agent) return { ok: false, reason: "Agent introuvable." };
-        if (!agent.enabled) return { ok: false, reason: "Cet agent est inactif." };
-        if (thread.agentIds.includes(agentId)) return { ok: false, reason: "Cet agent est déjà dans le dossier." };
+        if (!thread) return { ok: false, reason: t("Dossier introuvable.") };
+        if (!agent) return { ok: false, reason: t("Agent introuvable.") };
+        if (!agent.enabled) return { ok: false, reason: t("Cet agent est inactif.") };
+        if (thread.agentIds.includes(agentId)) return { ok: false, reason: t("Cet agent est déjà dans le dossier.") };
         setState((current) => ({
           ...current,
           threads: current.threads.map((item) => {
@@ -408,7 +440,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 agentIds,
                 progress: { done: item.progress.done, total: item.progress.total + 1 },
                 updatedAt: at,
-                events: [...item.events, { at, label: "Agent ajouté", detail: `${agent.name} rejoint la file. Le collectif n’est pas modifié.` }],
+                events: [...item.events, { at, label: tk("Agent ajouté"), detail: t("{{name}} rejoint la file. Le collectif n’est pas modifié.", {
+                  name: tc(agent.name)
+                }) }],
               };
             }
             const contribution = contributionFor(agent, item.question);
@@ -428,25 +462,38 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 ...item.events,
                 {
                   at,
-                  label: "Agent ajouté",
+                  label: tk("Agent ajouté"),
                   detail: locked
-                    ? `${agent.name} a déposé un avis. La décision humaine déjà prise reste inscrite.`
-                    : `${agent.name} a instruit. Lecture recalculée : ${settled.verdict}. Le collectif n’est pas modifié.`,
+                    ? t(
+                    "{{name}} a déposé un avis. La décision humaine déjà prise reste inscrite.",
+                    {
+                      name: tc(agent.name)
+                    }
+                  )
+                    : t(
+                    "{{name}} a instruit. Lecture recalculée : {{verdict}}. Le collectif n’est pas modifié.",
+                    {
+                      name: tc(agent.name),
+                      verdict: settled.verdict
+                    }
+                  ),
                 },
               ],
             };
           }),
-          notice: { tone: "ok", text: `${agent.name} est dans ce dossier, pas dans le collectif.` },
+          notice: { tone: "ok", text: t("{{name}} est dans ce dossier, pas dans le collectif.", {
+            name: tc(agent.name)
+          }) },
         }));
         return { ok: true };
       },
       removeAgentFromThread: (threadId, agentId) => {
         const thread = state.threads.find((item) => item.id === threadId);
         const agent = state.agents.find((item) => item.id === agentId);
-        if (!thread) return { ok: false, reason: "Dossier introuvable." };
-        if (!thread.agentIds.includes(agentId)) return { ok: false, reason: "Cet agent n’est pas dans le dossier." };
-        if (thread.agentIds.length <= 1) return { ok: false, reason: "Un dossier garde au moins un agent." };
-        const name = agent?.name ?? agentId;
+        if (!thread) return { ok: false, reason: t("Dossier introuvable.") };
+        if (!thread.agentIds.includes(agentId)) return { ok: false, reason: t("Cet agent n’est pas dans le dossier.") };
+        if (thread.agentIds.length <= 1) return { ok: false, reason: t("Un dossier garde au moins un agent.") };
+        const name = tc(agent?.name) || agentId;
         setState((current) => ({
           ...current,
           threads: current.threads.map((item) => {
@@ -460,7 +507,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 agentIds,
                 progress: { done: Math.min(item.progress.done, agentIds.length), total: agentIds.length },
                 updatedAt: at,
-                events: [...item.events, { at, label: "Agent retiré", detail: `${name} quitte la file. Le collectif n’est pas modifié.` }],
+                events: [...item.events, { at, label: tk("Agent retiré"), detail: t("{{name}} quitte la file. Le collectif n’est pas modifié.", {
+                  name
+                }) }],
               };
             }
             const locked = item.status === "resolved";
@@ -473,25 +522,31 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               verdict: locked ? item.verdict : settled?.verdict,
               conditions: locked ? item.conditions : settled?.conditions ?? [],
               updatedAt: at,
-              events: [...item.events, { at, label: "Agent retiré", detail: locked ? `${name} est retiré. La décision humaine reste inscrite.` : `${name} est retiré. Lecture recalculée.` }],
+              events: [...item.events, { at, label: tk("Agent retiré"), detail: locked ? t("{{name}} est retiré. La décision humaine reste inscrite.", {
+                name
+              }) : t("{{name}} est retiré. Lecture recalculée.", {
+                name
+              }) }],
             };
           }),
-          notice: { tone: "ok", text: `${name} n’instruit plus ce dossier. Le collectif n’est pas modifié.` },
+          notice: { tone: "ok", text: t("{{name}} n’instruit plus ce dossier. Le collectif n’est pas modifié.", {
+            name
+          }) },
         }));
         return { ok: true };
       },
       deleteThread: (threadId) => {
-        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: "Dossier introuvable." };
+        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: t("Dossier introuvable.") };
         setState((current) => ({
           ...current,
           threads: current.threads.filter((item) => item.id !== threadId),
-          notice: { tone: "ok", text: "Dossier supprimé. Le collectif et les autres dossiers restent." },
+          notice: { tone: "ok", text: t("Dossier supprimé. Le collectif et les autres dossiers restent.") },
         }));
         return { ok: true };
       },
       attachReading: (threadId, file) => {
-        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: "Dossier introuvable." };
-        if (!file.text?.trim()) return { ok: false, reason: "Rien à attacher." };
+        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: t("Dossier introuvable.") };
+        if (!file.text?.trim()) return { ok: false, reason: t("Rien à attacher.") };
         setState((current) => ({
           ...current,
           threads: current.threads.map((item) => {
@@ -502,17 +557,22 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               ...item,
               evidence,
               updatedAt: at,
-              events: [...item.events, { at, label: "Document lu", detail: `${file.name} · ${file.questions?.length ?? 0} questions proposées. Moteur local.` }],
+              events: [...item.events, { at, label: tk("Document lu"), detail: t("{{name}} · {{v}} questions proposées. Moteur local.", {
+                name: file.name,
+                v: file.questions?.length ?? 0
+              }) }],
             };
           }),
-          notice: { tone: "ok", text: "Lecture attachée au dossier. Aucune question n’est encore posée au comité." },
+          notice: { tone: "ok", text: t(
+            "Lecture attachée au dossier. Aucune question n’est encore posée au comité."
+          ) },
         }));
         return { ok: true };
       },
       poseQuestion: (threadId, question) => {
         const asked = question.trim();
-        if (asked.length < 8) return { ok: false, reason: "Choisissez une question de la liste." };
-        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: "Dossier introuvable." };
+        if (asked.length < 8) return { ok: false, reason: t("Choisissez une question de la liste.") };
+        if (!state.threads.some((item) => item.id === threadId)) return { ok: false, reason: t("Dossier introuvable.") };
         setState((current) => ({
           ...current,
           threads: current.threads.map((item) => {
@@ -531,17 +591,19 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               humanReply: undefined,
               progress: { done: 0, total: Math.max(item.agentIds.length, 1) },
               updatedAt: at,
-              events: [...item.events, { at, label: "Question posée au comité", detail: asked }],
+              events: [...item.events, { at, label: tk("Question posée au comité"), detail: asked }],
             };
           }),
-          notice: { tone: "ok", text: "Le comité instruit cette question. La lecture du document reste dans le dossier." },
+          notice: { tone: "ok", text: t(
+            "Le comité instruit cette question. La lecture du document reste dans le dossier."
+          ) },
         }));
         return { ok: true };
       },
       replyClarification: (threadId, reply) => {
         const text = reply.trim();
         if (text.length < 12) {
-          notify("La réponse est encore trop courte pour relancer le collectif.", "warn");
+          notify(t("La réponse est encore trop courte pour relancer le collectif."), "warn");
           return;
         }
         setState((current) => ({
@@ -551,7 +613,10 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             const at = stamp();
             return {
               ...thread,
-              question: `${thread.question} — précision : ${text}`,
+              question: t("{{question}} — précision : {{text}}", {
+                question: thread.question,
+                text
+              }),
               humanReply: text,
               status: "running",
               stage: "eprouver",
@@ -559,17 +624,17 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               contributions: [],
               progress: { done: 0, total: thread.agentIds.length },
               updatedAt: at,
-              events: [...thread.events, { at, label: "Précision reçue", detail: "Même collectif, même dossier, historique conservé." }],
+              events: [...thread.events, { at, label: tk("Précision reçue"), detail: t("Même collectif, même dossier, historique conservé.") }],
             };
           }),
         }));
       },
       arbitrate: (threadId, action, note) => {
         if (state.role !== "comex") {
-          return { ok: false, reason: "Rôle COMEX ou admin requis. L’action n’est pas envoyée." };
+          return { ok: false, reason: t("Rôle COMEX ou admin requis. L’action n’est pas envoyée.") };
         }
         if (action === "override" && note.trim().length < 12) {
-          return { ok: false, reason: "Une dérogation au veto exige une justification." };
+          return { ok: false, reason: t("Une dérogation au veto exige une justification.") };
         }
         setState((current) => ({
           ...current,
@@ -585,22 +650,22 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 contributions: [],
                 progress: { done: 0, total: thread.agentIds.length },
                 updatedAt: at,
-                events: [...thread.events, { at, label: "Réévaluation demandée", detail: note.trim() || "Même collectif, nouvel instruction." }],
+                events: [...thread.events, { at, label: tk("Réévaluation demandée"), detail: note.trim() || t("Même collectif, nouvel instruction.") }],
               };
             }
             const stage = action === "accept" && thread.verdict === "GO" ? "realiser" : "projeter";
             const label =
-              action === "accept" ? "Consensus accepté" : action === "conditions" ? "Passé sous conditions" : "Veto levé par dérogation";
+              action === "accept" ? t("Consensus accepté") : action === "conditions" ? t("Passé sous conditions") : t("Veto levé par dérogation");
             return {
               ...thread,
               status: "resolved",
               stage,
               updatedAt: at,
-              arbitration: { action, by: "COMEX · Camille Renaud", note: note.trim(), at },
-              events: [...thread.events, { at, label: "Arbitrage", detail: label }],
+              arbitration: { action, by: t("COMEX · Camille Renaud"), note: note.trim(), at },
+              events: [...thread.events, { at, label: tk("Arbitrage"), detail: label }],
             };
           }),
-          notice: { tone: "ok", text: "Arbitrage enregistré dans le dossier. Le fil reste auditable." },
+          notice: { tone: "ok", text: t("Arbitrage enregistré dans le dossier. Le fil reste auditable.") },
         }));
         return { ok: true };
       },
@@ -611,18 +676,22 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             if (connector.id !== id) return connector;
             const at = stamp();
             if (connector.id === "teams") {
-              return { ...connector, lastTest: at, status: "not_configured", detail: "Test non lancé : autorisation d’admin impossible sans identifiants d’application côté serveur." };
+              return { ...connector, lastTest: at, status: "not_configured", detail: t(
+                "Test non lancé : autorisation d’admin impossible sans identifiants d’application côté serveur."
+              ) };
             }
             if (connector.id === "discord") {
-              return { ...connector, lastTest: at, status: "error", detail: "users/@me · 401. Le jeton reste rejeté. Aucun secret affiché." };
+              return { ...connector, lastTest: at, status: "error", detail: t("users/@me · 401. Le jeton reste rejeté. Aucun secret affiché.") };
             }
             if (connector.id === "salesforce" && connector.status !== "connected") {
-              return { ...connector, lastTest: at, status: "not_configured", detail: "Test refusé : terminez l’onboarding avant de pinguer l’org." };
+              return { ...connector, lastTest: at, status: "not_configured", detail: t("Test refusé : terminez l’onboarding avant de pinguer l’org.") };
             }
             if (connector.id === "salesforce") {
-              return { ...connector, lastTest: at, status: "connected", enabled: true, detail: "Ping org réussi. Aucun secret renvoyé au navigateur." };
+              return { ...connector, lastTest: at, status: "connected", enabled: true, detail: t("Ping org réussi. Aucun secret renvoyé au navigateur.") };
             }
-            return { ...connector, lastTest: at, status: "connected", enabled: true, detail: "auth.test réussi à l’instant. Secret inchangé, non renvoyé au navigateur." };
+            return { ...connector, lastTest: at, status: "connected", enabled: true, detail: t(
+              "auth.test réussi à l’instant. Secret inchangé, non renvoyé au navigateur."
+            ) };
           }),
         }));
       },
@@ -638,10 +707,12 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       },
       configureConnector: (id, options, connect) => {
         const current = state.connectors.find((item) => item.id === id);
-        if (!current) return { ok: false, reason: "Canal inconnu." };
-        if (id === "teams") return { ok: false, reason: "Identifiants d’application absents côté serveur. Rien n’est enregistré." };
+        if (!current) return { ok: false, reason: t("Canal inconnu.") };
+        if (id === "teams") return { ok: false, reason: t("Identifiants d’application absents côté serveur. Rien n’est enregistré.") };
         if (id === "salesforce" && connect && ["environment", "object", "stage", "direction", "writeback"].some((key) => !options[key])) {
-          return { ok: false, reason: "Choisissez l’environnement, l’objet, l’étape, le sens et l’écriture du verdict." };
+          return { ok: false, reason: t(
+            "Choisissez l’environnement, l’objet, l’étape, le sens et l’écriture du verdict."
+          ) };
         }
         setState((snapshot) => ({
           ...snapshot,
@@ -657,12 +728,24 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                 usersOnline: 7,
                 usersTotal: 24,
                 presence: "live",
-                detail: `Org ${options.environment}. ${options.object} à l’étape ${options.stage}. Verdict en ${options.writeback === "task" ? "tâche" : "champ"}. Secret tenu côté serveur.`,
+                detail: t(
+                  "Org {{environment}}. {{object}} à l’étape {{stage}}. Verdict en {{v}}. Secret tenu côté serveur.",
+                  {
+                    environment: options.environment,
+                    object: options.object,
+                    stage: options.stage,
+                    v: options.writeback === "task" ? t("tâche") : t("champ")
+                  }
+                ),
               };
             }
             return { ...connector, options: { ...connector.options, ...options } };
           }),
-          notice: { tone: "ok", text: connect ? `${current.name} est intégré.` : `${current.name} est mis à jour.` },
+          notice: { tone: "ok", text: connect ? t("{{name}} est intégré.", {
+            name: current.name
+          }) : t("{{name}} est mis à jour.", {
+            name: current.name
+          }) },
         }));
         return { ok: true };
       },
@@ -673,7 +756,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           keys: [
             {
               id: uid("key"),
-              name: name.trim() || "Clé sans nom",
+              name: name.trim() || t("Clé sans nom"),
               prefix: secret.slice(0, 12),
               secret,
               revealed: false,
@@ -704,16 +787,24 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             { id: uid("del"), event: "ping", status: "delivered", at: stamp() },
             ...current.deliveries,
           ],
-          notice: { tone: "ok", text: "Ping signé HMAC accepté par le journal de livraison." },
+          notice: { tone: "ok", text: t("Ping signé HMAC accepté par le journal de livraison.") },
         }));
       },
       setDefaultProfile: (profile) => setState((current) => ({ ...current, defaultProfile: profile })),
       linkChat: (token) => {
-        if (state.role !== "comex") return { ok: false, reason: "Seuls COMEX et admin peuvent arbitrer depuis le chat, donc lier un compte." };
-        if (!token.trim().startsWith("link_")) return { ok: false, reason: "Le jeton doit commencer par link_ et provenir du bot (15 minutes)." };
+        if (state.role !== "comex") return { ok: false, reason: t(
+          "Seuls COMEX et admin peuvent arbitrer depuis le chat, donc lier un compte."
+        ) };
+        if (!token.trim().startsWith("link_")) return { ok: false, reason: t("Le jeton doit commencer par link_ et provenir du bot (15 minutes).") };
         setState((current) => ({
           ...current,
-          notice: { tone: "ok", text: `Compte ${token.trim()} lié à ${WORKSPACE_EMAIL}. L’arbitrage depuis le chat reste réservé au COMEX.` },
+          notice: { tone: "ok", text: t(
+            "Compte {{trim}} lié à {{WORKSPACE_EMAIL}}. L’arbitrage depuis le chat reste réservé au COMEX.",
+            {
+              trim: token.trim(),
+              WORKSPACE_EMAIL
+            }
+          ) },
         }));
         return { ok: true };
       },
@@ -729,6 +820,6 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
 
 export function useConsole() {
   const value = useContext(Ctx);
-  if (!value) throw new Error("Console hors provider");
+  if (!value) throw new Error(t("Console hors provider"));
   return value;
 }
