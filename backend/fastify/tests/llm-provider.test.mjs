@@ -57,7 +57,7 @@ test('resolveLlmConfig : provider forcé sans clé ou inconnu → avertissement,
 test('resolveLlmConfig : modèle, URL, LLM_FALLBACK, concurrence et relances', () => {
   const d = resolveLlmConfig({ NVIDIA_API_KEY: 'x' });
   assert.equal(d.nvidia.baseUrl, NVIDIA_DEFAULT_BASE_URL);
-  assert.equal(d.nvidia.model, 'deepseek-ai/deepseek-v4.1-flash');
+  assert.equal(d.nvidia.model, 'openai/gpt-oss-20b');
   assert.equal(d.nvidia.temperature, null);
   assert.equal(d.nvidia.maxTokens, 4096);
   // Un modèle lent (Kimi K3 ≈ 75 s, pointes ~120 s) doit passer sous le délai par défaut.

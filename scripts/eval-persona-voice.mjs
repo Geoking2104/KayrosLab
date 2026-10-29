@@ -12,7 +12,7 @@ if (!process.env.NVIDIA_API_KEY) { console.error('NVIDIA_API_KEY absent : évalu
 const llm = new OpenAICompatibleProvider({
   id: 'nvidia', baseUrl: process.env.NVIDIA_BASE_URL || 'https://integrate.api.nvidia.com/v1',
   apiKey: process.env.NVIDIA_API_KEY, apiKeyEnv: 'NVIDIA_API_KEY',
-  defaultModel: process.env.NVIDIA_MODEL || 'deepseek-ai/deepseek-v4.1-flash', maxTokens: 900, timeoutMs: 60000,
+  defaultModel: process.env.NVIDIA_MODEL || 'openai/gpt-oss-20b', maxTokens: 900, timeoutMs: 60000,
 });
 const fx = (f) => new URL(`../core/fixtures/${f}`, import.meta.url);
 const personas = {

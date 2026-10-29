@@ -63,7 +63,7 @@ secrets/variables GitHub (une valeur absente vide la ligne) :
 | Ligne `.env` | Source GitHub | Rôle |
 |---|---|---|
 | `NVIDIA_API_KEY=` | **secret** `NVIDIA_API_KEY` | active NVIDIA NIM (prioritaire) |
-| `NVIDIA_MODEL=` | variable `NVIDIA_MODEL` (optionnelle) | vide = `deepseek-ai/deepseek-v4.1-flash` |
+| `NVIDIA_MODEL=` | variable `NVIDIA_MODEL` (optionnelle) | vide = `openai/gpt-oss-20b` (≈ 7–11 s, voix des personas validée ; `moonshotai/kimi-k3` répond 410 Gone depuis octobre 2026 : vider ou changer la variable de dépôt) |
 | `LLM_PROVIDER=` | variable `LLM_PROVIDER` (optionnelle) | vide = sélection automatique |
 | `LLM_MAX_CONCURRENCY=` | variable `LLM_MAX_CONCURRENCY` (optionnelle) | vide = 2 agents simultanés |
 | `MISTRAL_API_KEY=` | secret `MISTRAL_API_KEY` | repli automatique (ou primaire sans NVIDIA) |
