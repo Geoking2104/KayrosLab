@@ -155,6 +155,12 @@ export function fromApiThread(t: any): Thread {
     objections: a.critical_risks || [],
     conditions: a.required_mitigations || [],
     metric: a.metrics?.[0] ? `${a.metrics[0].metric} : ${a.metrics[0].value}` : "",
+    ...(a.persona_confidence ? { persona: {
+      confidence: a.persona_confidence,
+      feedback: a.simulated_stakeholder_feedback || undefined,
+      voiceSource: a.persona_voice_fallback ? "deterministic" as const : "model" as const,
+      score: a.persona_voice_score?.score,
+    } } : {}),
   }));
   const agentIds = run?.configuration?.active_agents || contributions.map((c) => c.agentId);
   const status = STATUS[t.status] || "running";

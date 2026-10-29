@@ -253,16 +253,31 @@ export function estimateDiscFromStyle(style) {
   if (!style || style.samples < 3) return null;
   const short = style.avg_sentence_words <= 12 ? 1 : style.avg_sentence_words <= 18 ? 0.5 : 0;
   const scores = {
-    D: short + style.imperative_ratio * 2 + (1 - style.hedge_ratio) * 0.5 - style.greeting_ratio * 0.3,
+    // Étalonné sur fixtures/disc-calibration.json : les puces raccourcissent les phrases,
+    // donc la brièveté ne compte pleinement que pour des messages courts.
+    D: short * ((style.avg_message_words || 0) <= 15 ? 1 : 0.3) + style.imperative_ratio * 2 + (1 - style.hedge_ratio) * 0.3 - style.greeting_ratio * 0.3 - style.bullet_ratio,
     I: style.exclamation_ratio * 2 + style.warmth_ratio * 2 + style.greeting_ratio * 0.5,
     S: style.hedge_ratio * 2 + style.greeting_ratio * 0.8 + style.warmth_ratio * 0.5,
-    C: style.bullet_ratio * 1.5 + (style.avg_sentence_words > 18 ? 1 : 0) + style.question_ratio,
+    C: style.bullet_ratio * 2 + ((style.avg_message_words || 0) > 18 ? 1 : 0) + (style.avg_sentence_words > 18 ? 0.5 : 0) + style.question_ratio * 1.5,
   };
   const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const [first, second] = ranked;
   const type = second[1] >= first[1] * 0.75 ? `${first[0]}${second[0].toLowerCase()}` : first[0];
   const confidence = Math.min(0.6, Math.round((0.15 + Math.min(style.samples, 40) / 100) * 100) / 100);
   return { disc_type: canonicalDisc(type) || first[0], confidence, method: 'writing_style_heuristic', scores };
+}
+
+/**
+ * Étalonnage de l'estimateur contre des cas de référence (`fixtures/disc-calibration.json`) :
+ * taux d'accord sur la lettre dominante. L'estimation reste plafonnée et étiquetée.
+ */
+export function calibrateDiscEstimator(cases = []) {
+  const rows = cases.map((c) => {
+    const estimate = estimateDiscFromStyle(analyseWritingStyle(c.samples));
+    const got = estimate?.disc_type?.[0]?.toUpperCase() || null;
+    return { id: c.id, reference: c.reference, expected: c.disc_primary, got, disc_type: estimate?.disc_type || null, confidence: estimate?.confidence ?? null, match: got === c.disc_primary };
+  });
+  return { agreement: rows.length ? Math.round((rows.filter((r) => r.match).length / rows.length) * 100) / 100 : 0, cases: rows };
 }
 
 function styleDirectives(style) {

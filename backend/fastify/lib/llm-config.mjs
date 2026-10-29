@@ -20,10 +20,15 @@
  * hébergée NVIDIA (integrate.api.nvidia.com) : /v1/models répond 410 Gone pour
  * deepseek-ai/deepseek-v4-pro (fin de vie 2026-08-07) et
  * deepseek-ai/deepseek-v4-pro-0813 (fin de vie 2026-09-14). Le seul DeepSeek
- * génératif encore au catalogue est deepseek-ai/deepseek-v4.1-flash.
+ * génératif encore au catalogue est deepseek-ai/deepseek-v4.1-flash, mais il
+ * dépassait 45 s sans réponse le 2026-10-29 (voix des personas en repli
+ * déterministe). openai/gpt-oss-20b : ≈ 7–11 s par réplique, JSON de verdict
+ * conforme, 6/6 répliques de persona retenues (scripts/eval-persona-voice.mjs,
+ * fidélité moyenne 0,92). moonshotai/kimi-k3, gpt-oss-120b, llama-3.3-70b,
+ * llama-4-maverick, qwen3-next et gemma-3-27b répondent 410 Gone.
  * Surcharger avec NVIDIA_MODEL.
  */
-export const NVIDIA_DEFAULT_MODEL = 'deepseek-ai/deepseek-v4.1-flash';
+export const NVIDIA_DEFAULT_MODEL = 'openai/gpt-oss-20b';
 export const NVIDIA_DEFAULT_BASE_URL = 'https://integrate.api.nvidia.com/v1';
 /** Délai par défaut d'un appel NVIDIA (ms). Surcharger avec NVIDIA_TIMEOUT_MS. */
 export const NVIDIA_DEFAULT_TIMEOUT_MS = 180000;

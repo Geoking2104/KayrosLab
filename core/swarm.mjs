@@ -15,7 +15,7 @@ import {
   normalizeHumanProfile,
   profileFromAgentOverride,
 } from './personality.mjs';
-import { speakAs } from './impersonator-voice.mjs';
+import { VOICE_MIN_SCORE, conformVoice, scoreVoice, speakAs } from './impersonator-voice.mjs';
 import { impersonatorContext, impersonatorGuardrails, impersonatorOf, normalizeImpersonator } from './impersonator.mjs';
 
 export const AGENT_TYPES = Object.freeze(['system_predefined', 'user_defined', 'hybrid_modified']);
@@ -927,9 +927,16 @@ export class SwarmService {
       if (impersonatorOf(definition) && definition.human_profile && config.personality_simulation_enabled) {
         const spoken = speakAs(definition.human_profile, question);
         analysis.persona_confidence = spoken.confidence;
-        if (!analysis.simulated_stakeholder_feedback) {
+        const shaped = analysis.simulated_stakeholder_feedback ? conformVoice(analysis.simulated_stakeholder_feedback, definition.human_profile) : '';
+        const score = shaped ? scoreVoice(shaped, definition.human_profile, { idea: question }) : null;
+        if (shaped && score.score >= VOICE_MIN_SCORE) {
+          analysis.simulated_stakeholder_feedback = shaped;
+          analysis.persona_voice_score = score;
+        } else {
+          if (shaped) analysis.persona_voice_rejected = { message: shaped, score };
           analysis.simulated_stakeholder_feedback = spoken.message;
           analysis.persona_voice_fallback = true;
+          analysis.persona_voice_score = scoreVoice(spoken.message, definition.human_profile, { idea: question });
         }
       }
       return { ...analysis, effective_rules };

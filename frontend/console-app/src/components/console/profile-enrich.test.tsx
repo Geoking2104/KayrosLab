@@ -4,9 +4,10 @@ import { i18next } from "@/lib/i18n";
 
 const enrichProfile = vi.fn();
 const speak = vi.fn();
+const providers = vi.fn(async () => ({ crystalknows_public: { ready: true }, crystalknows_api: { ready: false, env: "CRYSTALKNOWS_API_TOKEN" }, x_api: { ready: false, env: "X_BEARER_TOKEN" }, gmail: { ready: true }, outlook: { ready: true }, voice_model: { ready: true } }));
 vi.mock("@/lib/console/api", async (orig) => {
   const mod = await orig<typeof import("@/lib/console/api")>();
-  return { ...mod, api: { ...mod.api, enrichProfile: (...args: unknown[]) => enrichProfile(...args), speak: (...args: unknown[]) => speak(...args) } };
+  return { ...mod, api: { ...mod.api, enrichProfile: (...args: unknown[]) => enrichProfile(...args), speak: (...args: unknown[]) => speak(...args), personalityProviders: () => providers() } };
 });
 
 import { ProfileEnrich, enrichedClue, splitEmails, splitPosts } from "./profile-enrich";
@@ -75,5 +76,23 @@ describe("ProfileEnrich", () => {
     await waitFor(() => expect(screen.getByTestId("confidence").dataset.kind).toBe("estimate"));
     expect(screen.getByTestId("confidence").textContent).toMatch(/pas une fiche CrystalKnows/);
     expect(enrichProfile.mock.calls[0][0]).toMatchObject({ crystal_export: { disc_type: "D" }, email_address: "geo@x.fr" });
+  });
+
+  it("signale les jetons serveur absents et envoie un jeton Gmail sans le stocker", async () => {
+    enrichProfile.mockReset().mockResolvedValue(result);
+    render(<ProfileEnrich live name="G" onResult={() => {}} />);
+    fireEvent.change(screen.getByLabelText(/^Mode CrystalKnows/), { target: { value: "api" } });
+    expect((await screen.findByTestId("ready-crystal")).textContent).toMatch(/CRYSTALKNOWS_API_TOKEN absent/);
+    fireEvent.click(screen.getByRole("tab", { name: "3. X" }));
+    expect(screen.getByTestId("ready-x").textContent).toMatch(/X_BEARER_TOKEN absent/);
+    fireEvent.click(screen.getByRole("tab", { name: "4. E-mails" }));
+    fireEvent.change(screen.getByLabelText(/^Jeton Gmail/), { target: { value: "ya29.token" } });
+    fireEvent.change(screen.getByLabelText(/^Adresse de l’auteur/), { target: { value: "geo@x.fr" } });
+    fireEvent.click(screen.getByText("Construire le profil"));
+    await waitFor(() => expect(enrichProfile).toHaveBeenCalled());
+    expect(enrichProfile.mock.calls[0][0]).toMatchObject({ gmail: { access_token: "ya29.token" }, email_address: "geo@x.fr" });
+    speak.mockReset().mockResolvedValue({ message: "Simulation — Quel gain ?", notice: "n", confidence: result.confidence, source: "model", model_provider: "mistral" });
+    fireEvent.click(await screen.findByText("Écouter la persona"));
+    await waitFor(() => expect(screen.getByTestId("speak-source").textContent).toMatch(/modèle \(mistral\)/));
   });
 });

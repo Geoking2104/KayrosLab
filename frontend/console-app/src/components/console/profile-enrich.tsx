@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { api as http, type EnrichRequest, type EnrichResult, type EnrichedProfile, type PersonaConfidence, type SpeakResult } from "@/lib/console/api";
+import { useEffect, useState } from "react";
+import { api as http, type EnrichProviders, type EnrichRequest, type EnrichResult, type EnrichedProfile, type PersonaConfidence, type SpeakResult } from "@/lib/console/api";
 import { Button, Field, TextArea, controlClass } from "./ui";
 import { cn } from "@/lib/cn";
 import { t } from "@/lib/i18n";
@@ -95,6 +95,9 @@ export function SpeakPreview({ live, profile, agentId }: { live: boolean; profil
         <blockquote data-testid="speak" className="rounded-lg border border-line p-3 text-sm">
           <p>{said.message}</p>
           <p className="mt-1 text-xs text-muted">{said.notice}</p>
+          {said.source ? <p className="mt-1 text-xs text-muted" data-testid="speak-source">{said.source === "model"
+            ? t("Réplique du modèle ({{provider}}).", { provider: said.model_provider ?? "?" })
+            : t("Aperçu déterministe (modèle absent ou réplique infidèle).")}</p> : null}
         </blockquote>
       ) : null}
     </div>
@@ -136,6 +139,15 @@ export function ProfileEnrich({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<EnrichResult | null>(null);
+  const [gmailToken, setGmailToken] = useState("");
+  const [outlookToken, setOutlookToken] = useState("");
+  const [providers, setProviders] = useState<EnrichProviders | null>(null);
+  useEffect(() => {
+    if (!live) return;
+    let alive = true;
+    http.personalityProviders?.().then((p) => { if (alive) setProviders(p); }).catch(() => {});
+    return () => { alive = false; };
+  }, [live]);
 
   const parsed = splitEmails(emails);
   const kept = author.trim() ? parsed.filter((m) => !m.from || m.from.toLowerCase().includes(author.trim().toLowerCase())) : parsed;
@@ -153,6 +165,9 @@ export function ProfileEnrich({
     if (xUser.trim()) out.x_username = xUser.trim();
     if (xPosts.trim()) out.x_posts = splitPosts(xPosts);
     if (xArchive) out.x_archive = xArchive;
+    if (gmailToken.trim()) out.gmail = { access_token: gmailToken.trim() };
+    if (outlookToken.trim()) out.outlook = { access_token: outlookToken.trim() };
+    if ((gmailToken.trim() || outlookToken.trim()) && author.trim()) out.email_address = author.trim();
     return out;
   }
 
@@ -209,9 +224,12 @@ export function ProfileEnrich({
               <TextArea value={exportJson} onChange={(e) => setExportJson(e.target.value)} />
             </Field>
           ) : (
-            <Field label={t("E-mail de la personne")} hint={t("API CrystalKnows v4 : jeton serveur CRYSTALKNOWS_API_TOKEN requis, consomme des crédits.")}>
-              <input className={controlClass} value={apiEmail} onChange={(e) => setApiEmail(e.target.value)} />
-            </Field>
+            <>
+              {providers ? <p className={cn("text-xs", providers.crystalknows_api.ready ? "text-muted" : "text-hold")} data-testid="ready-crystal">{providers.crystalknows_api.ready ? t("Jeton serveur CrystalKnows configuré.") : t("CRYSTALKNOWS_API_TOKEN absent côté serveur : ce mode sera refusé.")}</p> : null}
+              <Field label={t("E-mail de la personne")} hint={t("API CrystalKnows v4 : jeton serveur CRYSTALKNOWS_API_TOKEN requis, consomme des crédits.")}>
+                <input className={controlClass} value={apiEmail} onChange={(e) => setApiEmail(e.target.value)} />
+              </Field>
+            </>
           )}
         </div>
       ) : null}
@@ -232,6 +250,7 @@ export function ProfileEnrich({
 
       {step === "x" ? (
         <div className="grid gap-3">
+          {providers && !providers.x_api.ready ? <p className="text-xs text-hold" data-testid="ready-x">{t("X_BEARER_TOKEN absent côté serveur : le compte seul sera refusé ; collez des posts ou l’archive.")}</p> : null}
           <Field label={t("Compte X")} hint={t("Lu par l’API X officielle si le serveur a X_BEARER_TOKEN. Sinon, collez des posts ou l’archive.")}>
             <input className={controlClass} value={xUser} placeholder="@…" onChange={(e) => setXUser(e.target.value)} />
           </Field>
@@ -249,6 +268,16 @@ export function ProfileEnrich({
           <Field label={t("E-mails écrits par la personne")} hint={t("Collez un fil entier : chaque « De : » ou ligne --- ouvre un message. Citations et signatures sont retirées.")}>
             <TextArea value={emails} onChange={(e) => setEmails(e.target.value)} />
           </Field>
+          <details className="rounded-lg border border-line p-2 text-sm">
+            <summary>{t("Importer depuis Gmail ou Outlook (sans copier-coller)")}</summary>
+            <p className="mt-2 text-xs text-muted">{t("Jeton OAuth lecture seule de la personne (Gmail : gmail.readonly ; Outlook : Mail.Read). Seuls les messages envoyés sont lus ; le jeton sert à cette requête et n’est pas enregistré.")}</p>
+            <Field label={t("Jeton Gmail")}>
+              <input type="password" autoComplete="off" className={controlClass} value={gmailToken} onChange={(e) => setGmailToken(e.target.value)} />
+            </Field>
+            <Field label={t("Jeton Outlook")}>
+              <input type="password" autoComplete="off" className={controlClass} value={outlookToken} onChange={(e) => setOutlookToken(e.target.value)} />
+            </Field>
+          </details>
           <Field label={t("Adresse de l’auteur (optionnel)")}>
             <input className={controlClass} value={author} onChange={(e) => setAuthor(e.target.value)} />
           </Field>
