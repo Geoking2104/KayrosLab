@@ -1,4 +1,5 @@
 import { ChatReplyService } from '../../../core/chat-replies.mjs';
+import { buildAuditEvidence } from './audit-evidence.mjs';
 import {
   KayrosLLM, RoutingPolicy, MockProvider, OllamaProvider, AnthropicProvider, OpenAICompatibleProvider,
   parseRetryAfter,
@@ -563,7 +564,12 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   const memoryPath = KAYROS_MEMORY_FILE || (nodeFs ? './.kayros-memory.json' : null);
   const offloadRoot = KAYROS_OFFLOAD_ROOT || (nodeFs ? './.kayros-l0' : null);
 
+  // Journal d'audit scellé (Proof-of-Control) : actif si KAYROS_AUDIT_SIGNING_KEY(_FILE).
+  const auditEvidence = buildAuditEvidence(process.env);
+  const auditEvidenceFn = auditEvidence.enabled ? auditEvidence.sink.asAuditFunction() : null;
+
   const engine = createEngine({
+    ...(auditEvidenceFn ? { swarmAuditSink: auditEvidenceFn, collaborationAuditSink: auditEvidenceFn } : {}),
     sovereignty: 'local',
     model: OLLAMA_MODEL,
     quant: KAYROS_QUANT || 'q4_K_M',
@@ -682,13 +688,14 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   if (engine.syncAvailableQuants && typeof engine.syncAvailableQuants.then === 'function') {
     engine.syncAvailableQuants.catch(() => {});
   }
+  auditEvidence.anchors?.start();
 
   return {
     providers, llm, embeddings, tools, auth, oidc, google, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
     linkService, chatReplies, slackAdapter, discordAdapter, teamsAdapter, connectorService, connectorConfig, connectorOAuth, connectorOAuthConfigured: { slack: connectorOAuth.available('slack'), discord: connectorOAuth.available('discord'), teams: connectorOAuth.available('teams') }, connectorOAuthModes: connectorOAuth.describe(), publicApiUrl: KAYROS_PUBLIC_API_URL,
-    engine, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
+    engine, auditEvidence, hybridGateway: engine.hybridGateway, salesOracle, salesOracleRepository, objectStorage, timesfm,
     sharedPaths,
     pgPool,
     storeBackend, swarmStore, collaborationStore, requirePostgres,
