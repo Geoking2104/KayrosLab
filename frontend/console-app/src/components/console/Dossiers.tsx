@@ -20,13 +20,14 @@ import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, Verdict
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
+import { t, tc, tk } from "@/lib/i18n";
 
 const FILTERS: { id: "all" | ThreadStatus; label: string }[] = [
-  { id: "all", label: "Tous" },
-  { id: "awaiting_arbitration", label: "À arbitrer" },
-  { id: "running", label: "En instruction" },
-  { id: "needs_clarification", label: "Précision" },
-  { id: "resolved", label: "Clos" },
+  { id: "all", get label() { return t("Tous"); } },
+  { id: "awaiting_arbitration", get label() { return t("À arbitrer"); } },
+  { id: "running", get label() { return t("En instruction"); } },
+  { id: "needs_clarification", get label() { return t("Précision"); } },
+  { id: "resolved", get label() { return t("Clos"); } },
 ];
 
 export function Dossiers({ threadId }: { threadId: string }) {
@@ -41,10 +42,10 @@ export function Dossiers({ threadId }: { threadId: string }) {
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Dossiers</h1>
-        <p className="mt-1 max-w-2xl text-sm text-muted">
-          Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce.
-        </p>
+        <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Dossiers")}</h1>
+        <p className="mt-1 max-w-2xl text-sm text-muted">{t(
+          "Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce."
+        )}</p>
       </div>
       <Briefing
         agents={state.agents.filter((agent) => agent.enabled)}
@@ -52,8 +53,8 @@ export function Dossiers({ threadId }: { threadId: string }) {
         onToggle={(id) => setPickedAgents((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))}
         onLaunch={(question, file) => {
           const collective = state.collectives.find((item) => item.id === state.selectedCollectiveId) ?? state.collectives[0];
-          if (!collective) return { ok: false, reason: "Aucun collectif pour instruire." };
-          if (pickedAgents.length === 0) return { ok: false, reason: "Choisissez au moins un agent." };
+          if (!collective) return { ok: false, reason: t("Aucun collectif pour instruire.") };
+          if (pickedAgents.length === 0) return { ok: false, reason: t("Choisissez au moins un agent.") };
           const id = startMission({
             question,
             collectiveId: collective.id,
@@ -81,7 +82,9 @@ export function Dossiers({ threadId }: { threadId: string }) {
         ))}
       </div>
       {list.length === 0 ? (
-        <Empty title="Aucun dossier dans ce filtre" body="Lancez une instruction : le dossier s’ouvre ici, pas dans un écran à part." action={<Button onClick={() => go("instruire")}>Instruire une décision</Button>} />
+        <Empty title={t("Aucun dossier dans ce filtre")} body={t(
+          "Lancez une instruction : le dossier s’ouvre ici, pas dans un écran à part."
+        )} action={<Button onClick={() => go("instruire")}>{t("Instruire une décision")}</Button>} />
       ) : (
         <ul className="flex flex-col gap-2">
           {list.map((thread) => {
@@ -92,9 +95,9 @@ export function Dossiers({ threadId }: { threadId: string }) {
                   <div className="flex flex-wrap items-center gap-2">
                     <StatusPill status={thread.status} />
                     <VerdictPill verdict={thread.verdict} />
-                    <span className="text-xs text-muted">{collective?.name}</span>
+                    <span className="text-xs text-muted">{tc(collective?.name)}</span>
                   </div>
-                  <p className="mt-2 font-medium">{thread.question}</p>
+                  <p className="mt-2 font-medium">{tc(thread.question)}</p>
                   <p className="mt-1 text-xs text-muted">{formatWhen(thread.updatedAt)}</p>
                   {thread.status === "running" ? (
                     <div className="mt-3">
@@ -106,9 +109,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
                   type="button"
                   className="mt-3 min-h-11 rounded-lg border border-line bg-stop-soft px-3 text-sm text-stop"
                   onClick={() => deleteThread(thread.id)}
-                >
-                  Supprimer
-                </button>
+                >{t("Supprimer")}</button>
               </li>
             );
           })}
@@ -129,27 +130,25 @@ function Dossier({ threadId }: { threadId: string }) {
   const manager = state.role === "comex";
 
   if (!thread || !collective) {
-    return <Empty title="Dossier introuvable" body="Il n’appartient pas à votre compte, ou l’identifiant est périmé." action={<Button onClick={() => go("dossiers")}>Retour aux dossiers</Button>} />;
+    return <Empty title={t("Dossier introuvable")} body={t("Il n’appartient pas à votre compte, ou l’identifiant est périmé.")} action={<Button onClick={() => go("dossiers")}>{t("Retour aux dossiers")}</Button>} />;
   }
 
   const support = supportOf(thread.contributions);
 
   function act(action: "accept" | "conditions" | "reevaluate" | "override") {
     const result = arbitrate(thread!.id, action, note);
-    setError(result.ok ? "" : result.reason ?? "Action refusée");
+    setError(result.ok ? "" : result.reason ?? t("Action refusée"));
   }
 
   return (
     <div className="flex flex-col gap-5">
-      <button type="button" onClick={() => go("dossiers")} className="w-fit text-sm font-bold text-accent">
-        ← Tous les dossiers
-      </button>
+      <button type="button" onClick={() => go("dossiers")} className="w-fit text-sm font-bold text-accent">{t("← Tous les dossiers")}</button>
       <section className="overflow-hidden rounded-3xl border border-[#d8e6f3] bg-surface shadow-card">
         <div className="flex items-center gap-3 bg-gradient-to-r from-accent to-accent-strong px-5 py-4 text-white">
           <img src={`${import.meta.env.BASE_URL}logo-kayroslab.png`} alt="" width={36} height={36} className="size-9 rounded-[9px]" />
           <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">Dossier</p>
-            <h1 className="text-base font-bold leading-snug text-white">{thread.question}</h1>
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">{t("Dossier")}</p>
+            <h1 className="text-base font-bold leading-snug text-white">{tc(thread.question)}</h1>
           </div>
         </div>
         <div className="border-b border-[#e1ecf6] bg-[#f3f8fd] px-3 py-3">
@@ -162,18 +161,17 @@ function Dossier({ threadId }: { threadId: string }) {
             <span className="text-xs text-muted">{useCaseLabel(thread.useCase)} · {thread.provider}</span>
           </div>
           <p className="text-sm text-ink-soft">
-            {collective.name} · {votingLabel(collective.voting)}
-            {collective.personality ? " · simulation de personnalité active" : ""} · {formatWhen(thread.updatedAt)}
+            {tc(collective.name)} · {votingLabel(collective.voting)}
+            {collective.personality ? t(" · simulation de personnalité active") : ""} · {formatWhen(thread.updatedAt)}
           </p>
           {thread.verdict ? (
             <div className={cn("grid gap-2 rounded-xl border border-line border-l-4 bg-white px-4 py-3", thread.verdict === "GO" ? "border-l-go" : thread.verdict === "NO_GO" ? "border-l-stop" : "border-l-hold")}>
               <p className="flex items-center gap-2 text-sm font-bold text-ink">
-                <span className={cn("size-2.5 shrink-0 rounded-full", thread.verdict === "GO" ? "bg-go" : thread.verdict === "NO_GO" ? "bg-stop" : "bg-hold")} aria-hidden="true" />
-                KayrosLab — Verdict : {VERDICT_LABEL[thread.verdict]}
+                <span className={cn("size-2.5 shrink-0 rounded-full", thread.verdict === "GO" ? "bg-go" : thread.verdict === "NO_GO" ? "bg-stop" : "bg-hold")} aria-hidden="true" />{t("KayrosLab — Verdict :")}{" "}{VERDICT_LABEL[thread.verdict]}
               </p>
               {support != null ? (
                 <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2.5 text-[13px] text-muted">
-                  <span>Score d’appui</span>
+                  <span>{t("Score d’appui")}</span>
                   <span className="h-2 overflow-hidden rounded-full bg-paper-2" aria-hidden="true">
                     <span className="block h-full rounded-full bg-gradient-to-r from-[#00a1e0] to-teal" style={{ width: `${support}%` }} />
                   </span>
@@ -187,29 +185,30 @@ function Dossier({ threadId }: { threadId: string }) {
                     return (
                       <li key={item.agentId} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper py-0.5 pr-2.5 pl-1 text-xs font-semibold text-ink">
                         <VerdictPill verdict={item.verdict} />
-                        {agent?.role ?? agent?.name}
+                        {tc(agent?.role ?? agent?.name)}
                       </li>
                     );
                   })}
                 </ul>
               ) : null}
               {thread.conditions.map((condition) => (
-                <p key={condition} className="text-sm text-ink-soft"><span className="font-bold text-ink">Condition :</span> {condition}</p>
+                <p key={condition} className="text-sm text-ink-soft"><span className="font-bold text-ink">{t("Condition :")}</span> {tc(condition)}</p>
               ))}
               {thread.verdict === "CONDITIONAL_GO" ? (
-                <p className="text-sm text-ink-soft">Les conditions sont soumises à l’arbitrage. Le dossier n’est pas renvoyé en clarification.</p>
+                <p className="text-sm text-ink-soft">{t(
+                  "Les conditions sont soumises à l’arbitrage. Le dossier n’est pas renvoyé en clarification."
+                )}</p>
               ) : null}
             </div>
           ) : null}
           {thread.arbitration ? (
             <div className="grid gap-1 rounded-xl border border-line border-l-4 border-l-go bg-[#fbfdfc] px-4 py-3">
               <p className="flex items-center gap-2 text-sm font-bold text-ink">
-                <span className="size-2.5 shrink-0 rounded-full bg-go" aria-hidden="true" />
-                KayrosLab — Décision : {thread.verdict ? VERDICT_LABEL[thread.verdict] : "Arbitrée"}
+                <span className="size-2.5 shrink-0 rounded-full bg-go" aria-hidden="true" />{t("KayrosLab — Décision :")}{" "}{thread.verdict ? VERDICT_LABEL[thread.verdict] : t("Arbitrée")}
               </p>
               <p className="text-sm text-ink-soft">
-                {labelAction(thread.arbitration.action)} · {thread.arbitration.by} · {formatWhen(thread.arbitration.at)}
-                {thread.arbitration.note ? ` · ${thread.arbitration.note}` : ""}
+                {labelAction(thread.arbitration.action)} · {tc(thread.arbitration.by)} · {formatWhen(thread.arbitration.at)}
+                {thread.arbitration.note ? ` · ${tc(thread.arbitration.note)}` : ""}
               </p>
             </div>
           ) : null}
@@ -219,12 +218,12 @@ function Dossier({ threadId }: { threadId: string }) {
         agents={state.agents.filter((agent) => agent.enabled)}
         checkedIds={thread.agentIds}
         existing={thread.evidence}
-        currentQuestion={thread.question}
+        currentQuestion={tc(thread.question)}
         busy={thread.status === "running"}
         onOpenAgent={(id) => go("agents", { agent: id, dossier: thread.id })}
         onToggle={(id) => {
           const result = thread.agentIds.includes(id) ? removeAgentFromThread(thread.id, id) : addAgentToThread(thread.id, id);
-          setAgentError(result.ok ? "" : result.reason ?? "Refusé");
+          setAgentError(result.ok ? "" : result.reason ?? t("Refusé"));
         }}
         onRead={(file) => attachReading(thread.id, file)}
         onLaunch={(question) => poseQuestion(thread.id, question)}
@@ -233,8 +232,8 @@ function Dossier({ threadId }: { threadId: string }) {
 
       {thread.status === "running" ? (
         <Panel>
-          <p className="text-sm font-medium">Instruction en cours</p>
-          <p className="mt-1 text-sm text-muted">Chaque agent instruit à son tour. Cette page se met à jour seule.</p>
+          <p className="text-sm font-medium">{t("Instruction en cours")}</p>
+          <p className="mt-1 text-sm text-muted">{t("Chaque agent instruit à son tour. Cette page se met à jour seule.")}</p>
           <div className="mt-3">
             <ProgressBar done={thread.progress.done} total={thread.progress.total} active />
           </div>
@@ -246,8 +245,8 @@ function Dossier({ threadId }: { threadId: string }) {
               return (
                 <div key={id} className="rounded-lg bg-paper px-3 py-2 text-sm">
                   <div className="flex items-center justify-between gap-3">
-                    <span>{agent?.name ?? id}</span>
-                    <span className="text-xs text-muted">{done ? "Déposé" : current ? "En cours" : "En file"}</span>
+                    <span>{tc(agent?.name) || id}</span>
+                    <span className="text-xs text-muted">{done ? t("Déposé") : current ? t("En cours") : t("En file")}</span>
                   </div>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface">
                     <div
@@ -264,18 +263,18 @@ function Dossier({ threadId }: { threadId: string }) {
 
       {thread.status === "needs_clarification" ? (
         <Panel>
-          <h2 className="text-sm font-medium">Précision attendue</h2>
-          <p className="mt-1 text-sm text-muted">Ce n’est pas un GO conditionnel. Le collectif s’est arrêté parce que la question n’est pas instruisible.</p>
+          <h2 className="text-sm font-medium">{t("Précision attendue")}</h2>
+          <p className="mt-1 text-sm text-muted">{t(
+            "Ce n’est pas un GO conditionnel. Le collectif s’est arrêté parce que la question n’est pas instruisible."
+          )}</p>
           <ul className="mt-3 list-disc pl-5 text-sm">
             {thread.questions.map((question) => (
-              <li key={question}>{question}</li>
+              <li key={question}>{tc(question)}</li>
             ))}
           </ul>
           <div className="mt-4 flex flex-col gap-3">
-            <TextArea value={reply} onChange={(event) => setReply(event.target.value)} placeholder="Objet, montant, échéance" aria-label="Précision" />
-            <Button className="self-start" onClick={() => replyClarification(thread.id, reply)}>
-              Relancer le même collectif
-            </Button>
+            <TextArea value={reply} onChange={(event) => setReply(event.target.value)} placeholder={t("Objet, montant, échéance")} aria-label={t("Précision")} />
+            <Button className="self-start" onClick={() => replyClarification(thread.id, reply)}>{t("Relancer le même collectif")}</Button>
           </div>
         </Panel>
       ) : null}
@@ -289,18 +288,18 @@ function Dossier({ threadId }: { threadId: string }) {
               <Panel key={item.agentId} className={cn("border-l-4", edge)}>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="text-sm font-medium">
-                    {agent?.name} · {agent?.role}
-                    {agent?.veto ? " · veto" : ""}
+                    {tc(agent?.name)} · {tc(agent?.role)}
+                    {agent?.veto ? t(" · veto") : ""}
                   </h2>
                   <VerdictPill verdict={item.verdict} />
                 </div>
                 <dl className="mt-3 grid gap-3 text-sm md:grid-cols-2">
-                  <Block title="Appuis" items={item.strengths} />
-                  <Block title="Objections" items={item.objections} />
-                  <Block title="Conditions" items={item.conditions} />
+                  <Block title={t("Appuis")} items={item.strengths} />
+                  <Block title={t("Objections")} items={item.objections} />
+                  <Block title={t("Conditions")} items={item.conditions} />
                   <div>
-                    <dt className="text-xs text-muted">Repère</dt>
-                    <dd className="font-mono text-xs">{item.metric}</dd>
+                    <dt className="text-xs text-muted">{t("Repère")}</dt>
+                    <dd className="font-mono text-xs">{tc(item.metric)}</dd>
                   </div>
                 </dl>
               </Panel>
@@ -311,36 +310,38 @@ function Dossier({ threadId }: { threadId: string }) {
 
       {thread.status === "awaiting_arbitration" ? (
         <Panel>
-          <h2 className="text-sm font-medium">Arbitrage</h2>
+          <h2 className="text-sm font-medium">{t("Arbitrage")}</h2>
           {manager ? (
             <>
-              <p className="mt-1 text-sm text-muted">Le consensus ne s’exécute pas tout seul. Choisissez, le motif reste dans le fil.</p>
-              <TextArea className="mt-3" value={note} onChange={(event) => setNote(event.target.value)} placeholder="Motif, obligatoire pour une dérogation au veto" aria-label="Motif d’arbitrage" />
+              <p className="mt-1 text-sm text-muted">{t(
+                "Le consensus ne s’exécute pas tout seul. Choisissez, le motif reste dans le fil."
+              )}</p>
+              <TextArea className="mt-3" value={note} onChange={(event) => setNote(event.target.value)} placeholder={t("Motif, obligatoire pour une dérogation au veto")} aria-label={t("Motif d’arbitrage")} />
               {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                <Button onClick={() => act("accept")}>Accepter le consensus</Button>
-                <Button variant="secondary" onClick={() => act("conditions")}>Passer sous conditions</Button>
-                <Button variant="secondary" onClick={() => act("reevaluate")}>Demander une réévaluation</Button>
-                <Button variant="danger" onClick={() => act("override")} disabled={note.trim().length < 12}>
-                  Déroger au veto
-                </Button>
+                <Button onClick={() => act("accept")}>{t("Accepter le consensus")}</Button>
+                <Button variant="secondary" onClick={() => act("conditions")}>{t("Passer sous conditions")}</Button>
+                <Button variant="secondary" onClick={() => act("reevaluate")}>{t("Demander une réévaluation")}</Button>
+                <Button variant="danger" onClick={() => act("override")} disabled={note.trim().length < 12}>{t("Déroger au veto")}</Button>
               </div>
             </>
           ) : (
             <div className="mt-3 rounded-lg bg-paper px-3 py-3 text-sm">
-              <p className="font-medium">Rôle COMEX ou admin requis</p>
-              <p className="mt-1 text-muted">
-                Vous pouvez lire le dossier et répondre à une précision. Les actions d’arbitrage ne sont pas actives : aucun envoi, donc pas de refus après coup.
-              </p>
-              <p className="mt-3 text-muted">Basculez sur COMEX dans le bandeau du compte pour voir le geste d’arbitrage sur ce même dossier.</p>
+              <p className="font-medium">{t("Rôle COMEX ou admin requis")}</p>
+              <p className="mt-1 text-muted">{t(
+                "Vous pouvez lire le dossier et répondre à une précision. Les actions d’arbitrage ne sont pas actives : aucun envoi, donc pas de refus après coup."
+              )}</p>
+              <p className="mt-3 text-muted">{t(
+                "Basculez sur COMEX dans le bandeau du compte pour voir le geste d’arbitrage sur ce même dossier."
+              )}</p>
             </div>
           )}
         </Panel>
       ) : null}
 
       <Panel>
-        <h2 className="text-sm font-medium">Retirer la décision</h2>
-        <p className="mt-1 text-sm text-muted">Le collectif et les autres dossiers restent.</p>
+        <h2 className="text-sm font-medium">{t("Retirer la décision")}</h2>
+        <p className="mt-1 text-sm text-muted">{t("Le collectif et les autres dossiers restent.")}</p>
         <Button
           className="mt-3"
           variant="danger"
@@ -348,26 +349,24 @@ function Dossier({ threadId }: { threadId: string }) {
             deleteThread(thread.id);
             go("dossiers");
           }}
-        >
-          Supprimer le dossier
-        </Button>
+        >{t("Supprimer le dossier")}</Button>
       </Panel>
 
       <Trace thread={thread} agents={state.agents} />
 
       <Panel>
-        <h2 className="text-sm font-medium">Journal</h2>
+        <h2 className="text-sm font-medium">{t("Journal")}</h2>
         <ol className="mt-3 flex flex-col gap-3">
           {[...thread.events].reverse().map((event) => (
             <li key={`${event.at}-${event.label}`} className="grid gap-1 border-l border-line pl-3 text-sm">
               <span className="text-xs text-muted">{formatWhen(event.at)}</span>
-              <span className="font-medium">{event.label}</span>
-              <span className="text-ink-soft">{event.detail}</span>
+              <span className="font-medium">{tc(event.label)}</span>
+              <span className="text-ink-soft">{tc(event.detail)}</span>
             </li>
           ))}
         </ol>
       </Panel>
-      <p className="text-xs text-muted">Identifiant {thread.id}. Le lien public d’intégration ouvre ce dossier, pas un autre écran.</p>
+      <p className="text-xs text-muted">{t("Identifiant {{id}}. Le lien public d’intégration ouvre ce dossier, pas un autre écran.", { id: thread.id })}</p>
     </div>
   );
 }
@@ -376,8 +375,10 @@ function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
   const steps = traceOf(thread, agents);
   return (
     <Panel>
-      <h2 className="text-sm font-medium">Trace du comité</h2>
-      <p className="mt-1 text-sm text-muted">Lecture seule. Elle suit ce dossier. Elle ne rebranche ni le collectif, ni un flux.</p>
+      <h2 className="text-sm font-medium">{t("Trace du comité")}</h2>
+      <p className="mt-1 text-sm text-muted">{t(
+        "Lecture seule. Elle suit ce dossier. Elle ne rebranche ni le collectif, ni un flux."
+      )}</p>
       <ol className="mt-4 grid gap-0">
         {steps.map((step, index) => (
           <li key={`${step.at}-${step.title}-${index}`} className="grid grid-cols-[16px_1fr] gap-3">
@@ -386,9 +387,9 @@ function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
               {index < steps.length - 1 ? <span className="w-px flex-1 bg-line" /> : null}
             </span>
             <div className={index < steps.length - 1 ? "pb-4" : ""}>
-              <p className="text-xs font-medium" style={{ color: step.color }}>{step.kind}{step.live ? " · en cours" : ""}{step.at ? ` · ${formatWhen(step.at)}` : ""}</p>
-              <p className="text-sm font-medium">{step.title}</p>
-              <p className="text-sm text-ink-soft">{step.detail}</p>
+              <p className="text-xs font-medium" style={{ color: step.color }}>{t(step.kind)}{step.live ? t(" · en cours") : ""}{step.at ? ` · ${formatWhen(step.at)}` : ""}</p>
+              <p className="text-sm font-medium">{tc(step.title)}</p>
+              <p className="text-sm text-ink-soft">{tc(step.detail)}</p>
             </div>
           </li>
         ))}
@@ -418,7 +419,7 @@ function traceOf(thread: Thread, agents: Agent[]) {
       kind: "Agent" as const,
       ...tone,
       title: agent?.name ?? item.agentId,
-      detail: `${item.verdict} · ${item.metric}${item.objections[0] ? ` · ${item.objections[0]}` : ""}`,
+      detail: `${item.verdict} · ${tc(item.metric)}${item.objections[0] ? ` · ${tc(item.objections[0])}` : ""}`,
       at: "",
       live: false,
     };
@@ -433,7 +434,7 @@ function traceOf(thread: Thread, agents: Agent[]) {
       kind: "Agent",
       ...TRACE_TONE.Agent,
       title: agent?.name ?? "Agent",
-      detail: "Instruit maintenant. Les autres restent en file.",
+      detail: t("Instruit maintenant. Les autres restent en file."),
       at: thread.updatedAt,
       live: true,
     });
@@ -442,8 +443,8 @@ function traceOf(thread: Thread, agents: Agent[]) {
     steps.push({
       kind: "Humain",
       ...TRACE_TONE.Humain,
-      title: "Dossier ouvert",
-      detail: "Aucune intervention enregistrée.",
+      title: t("Dossier ouvert"),
+      detail: t("Aucune intervention enregistrée."),
       at: thread.createdAt,
       live: false,
     });
@@ -461,10 +462,10 @@ function traceKind(label: string, detail: string) {
 }
 
 const AGENT_TOPICS: { re: RegExp; match: RegExp; why: string }[] = [
-  { re: /marge|prix|budget|remise|tr[eé]sorerie|€|eur|co[uû]t|chiffre|plafond/i, match: /finance|cfo|daf|marge|prix/i, why: "La question touche à l’argent, à la marge ou au prix." },
-  { re: /clause|contrat|r[eé]sili|rgpd|juridique|opposab|obligation|engagement|avenant/i, match: /juridique|legal|veto|clause/i, why: "La question touche au droit ou à une clause." },
-  { re: /technique|h[eé]berg|souverain|dette|faisab|production|inf[eé]rence|n[oœ]ud|capacit[eé]|logiciel/i, match: /technique|cto|ing[eé]nier|faisab|dette/i, why: "La question touche à la faisabilité ou à la technique." },
-  { re: /client|revenu|deal|signat|commercial|volume|relation/i, match: /commercial|sales|revenu|client/i, why: "La question touche au revenu ou à la relation client." },
+  { re: /marge|prix|budget|remise|tr[eé]sorerie|€|eur|co[uû]t|chiffre|plafond|margin|price|discount|cash|cost|cap\b/i, match: /finance|cfo|daf|marge|prix/i, get why() { return t("La question touche à l’argent, à la marge ou au prix."); } },
+  { re: /clause|contrat|r[eé]sili|rgpd|juridique|opposab|obligation|engagement|avenant|contract|terminat|gdpr|legal|commitment|amendment/i, match: /juridique|legal|veto|clause/i, get why() { return t("La question touche au droit ou à une clause."); } },
+  { re: /technique|h[eé]berg|souverain|dette|faisab|production|inf[eé]rence|n[oœ]ud|capacit[eé]|logiciel|technical|hosting|sovereign|debt|feasib|inference|capacity|software/i, match: /technique|cto|ing[eé]nier|faisab|dette/i, get why() { return t("La question touche à la faisabilité ou à la technique."); } },
+  { re: /client|revenu|deal|signat|commercial|volume|relation|customer|revenue|sales/i, match: /commercial|sales|revenu|client/i, get why() { return t("La question touche au revenu ou à la relation client."); } },
 ];
 
 function suggestAgents(text: string, agents: Agent[]) {
@@ -481,7 +482,7 @@ function suggestAgents(text: string, agents: Agent[]) {
   if (scored.length) return scored.map((item) => ({ agent: item.agent, why: item.hits[0].why }));
   return agents
     .filter((agent) => agent.kind === "metier")
-    .map((agent) => ({ agent, why: "Comité général : la question ne désigne pas encore un métier." }));
+    .map((agent) => ({ agent, why: t("Comité général : la question ne désigne pas encore un métier.") }));
 }
 
 function Briefing({
@@ -533,7 +534,7 @@ function Briefing({
     }
     const file: Evidence = {
       name: label,
-      type: "Lecture",
+      type: tk("Lecture"),
       text: source,
       summary: reading.summary,
       facts: reading.facts,
@@ -552,7 +553,7 @@ function Briefing({
   function onFile(file: File) {
     const allowed = /\.(txt|md|csv|json)$/i.test(file.name);
     if (!allowed) {
-      setError("Déposez un .txt, un .md, un .csv ou un .json. Un PDF n’est pas lu.");
+      setError(t("Déposez un .txt, un .md, un .csv ou un .json. Un PDF n’est pas lu."));
       return;
     }
     const reader = new FileReader();
@@ -562,22 +563,24 @@ function Briefing({
 
   function download() {
     if (!summary) {
-      setError("KayrosLab n’a pas encore analysé de document.");
+      setError(t("KayrosLab n’a pas encore analysé de document."));
       return;
     }
     const body = [
-      `# Lecture KayrosLab — ${name || "document"}`,
+      t("# Lecture KayrosLab — {{name}}", { name: name || t("document") }),
       "",
-      "## Résumé",
+      `## ${t("Résumé")}`,
       summary,
       "",
-      "## Décorticage",
+      `## ${t("Décorticage")}`,
       ...facts.map((item) => `- ${item}`),
       "",
-      "## Questions",
+      `## ${t("Questions")}`,
       ...questions.map((item, index) => `${index + 1}. ${item}`),
       "",
-      "Moteur local déterministe. Seuls les chiffres, dates et clauses présents dans le document sont repris.",
+      t(
+        "Moteur local déterministe. Seuls les chiffres, dates et clauses présents dans le document sont repris."
+      ),
     ].join("\n");
     const filename = `${(name || "lecture").replace(/\.\w+$/, "").replace(/[^\w\- ]+/g, "").trim() || "lecture"}-kayroslab.md`;
     const blob = new Blob([body], { type: "text/markdown;charset=utf-8" });
@@ -597,13 +600,15 @@ function Briefing({
 
   return (
     <Panel>
-      <h2 className="text-sm font-medium">Préparer la réflexion</h2>
+      <h2 className="text-sm font-medium">{t("Préparer la réflexion")}</h2>
       <ol className="mt-4 flex flex-col gap-5">
         <li>
-          <p className="text-sm font-medium">1. Document, ou texte brut</p>
-          <p className="mt-1 text-sm text-muted">Le document est lu puis téléchargeable. Sans document, le texte brut suffit pour démarrer, comme sur un modèle.</p>
+          <p className="text-sm font-medium">{t("1. Document, ou texte brut")}</p>
+          <p className="mt-1 text-sm text-muted">{t(
+            "Le document est lu puis téléchargeable. Sans document, le texte brut suffit pour démarrer, comme sur un modèle."
+          )}</p>
           <label className="mt-3 flex min-h-24 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-line-strong bg-paper px-4 py-5 text-sm">
-            <span className="font-medium">Déposer un .txt, .md, .csv ou .json</span>
+            <span className="font-medium">{t("Déposer un .txt, .md, .csv ou .json")}</span>
             <input
               className="mt-3 block w-full text-sm"
               type="file"
@@ -617,19 +622,17 @@ function Briefing({
           </label>
           {!analyzed ? (
             <div className="mt-3">
-              <Field label="Texte brut" hint="Question ou brief. Aucun téléchargement n’est exigé.">
-                <TextArea value={raw} onChange={(event) => setRaw(event.target.value)} placeholder="Écrivez ici pour démarrer sans document" aria-label="Texte brut" />
+              <Field label={t("Texte brut")} hint={t("Question ou brief. Aucun téléchargement n’est exigé.")}>
+                <TextArea value={raw} onChange={(event) => setRaw(event.target.value)} placeholder={t("Écrivez ici pour démarrer sans document")} aria-label={t("Texte brut")} />
               </Field>
               {raw.trim().length >= 40 ? (
-                <button type="button" className="mt-3 inline-flex min-h-11 items-center rounded-lg bg-accent px-4 text-sm font-semibold text-white" onClick={() => applyReading("saisie.txt", raw.trim())}>
-                  Découper ce texte en questions
-                </button>
+                <button type="button" className="mt-3 inline-flex min-h-11 items-center rounded-lg bg-accent px-4 text-sm font-semibold text-white" onClick={() => applyReading("saisie.txt", raw.trim())}>{t("Découper ce texte en questions")}</button>
               ) : null}
             </div>
           ) : null}
           {analyzed ? (
             <div className="mt-3 grid gap-2">
-              <p className="text-xs text-muted">{name} · analyse KayrosLab</p>
+              <p className="text-xs text-muted">{name}{" "}{t("· analyse KayrosLab")}</p>
               <p className="text-sm">{summary}</p>
               <ul className="list-disc pl-5 text-sm">
                 {facts.map((item) => <li key={item}>{item}</li>)}
@@ -638,20 +641,22 @@ function Briefing({
           ) : null}
         </li>
         <li>
-          <p className="text-sm font-medium">2. Télécharger l’analyse</p>
-          <p className="mt-1 text-sm text-muted">Seulement après une analyse. Sans document, le texte brut ne se télécharge pas : il sert de départ.</p>
+          <p className="text-sm font-medium">{t("2. Télécharger l’analyse")}</p>
+          <p className="mt-1 text-sm text-muted">{t(
+            "Seulement après une analyse. Sans document, le texte brut ne se télécharge pas : il sert de départ."
+          )}</p>
           <button
             type="button"
             className="mt-3 inline-flex min-h-11 items-center rounded-lg border border-line-strong bg-white px-4 text-sm font-semibold text-ink disabled:opacity-45"
             disabled={!analyzed}
             onClick={download}
-          >
-            Télécharger l’analyse
-          </button>
+          >{t("Télécharger l’analyse")}</button>
         </li>
         <li>
-          <p className="text-sm font-medium">3. Question</p>
-          <p className="mt-1 text-sm text-muted">Choisissez une question proposée, écrivez la vôtre, ou gardez le texte brut.</p>
+          <p className="text-sm font-medium">{t("3. Question")}</p>
+          <p className="mt-1 text-sm text-muted">{t(
+            "Choisissez une question proposée, écrivez la vôtre, ou gardez le texte brut."
+          )}</p>
           {analyzed ? (
             <div className="mt-3 grid gap-2">
               {questions.map((question) => (
@@ -663,14 +668,16 @@ function Briefing({
             </div>
           ) : null}
           <div className="mt-3">
-            <Field label={analyzed ? "Ou une question sur ce texte" : "Question"} hint={analyzed ? "Si vous écrivez ici, elle remplace la question cochée." : "Vous pouvez démarrer sans document."}>
-              <TextArea value={custom} onChange={(event) => setCustom(event.target.value)} placeholder="Posez la question au comité" aria-label="Question au comité" />
+            <Field label={analyzed ? t("Ou une question sur ce texte") : t("Question")} hint={analyzed ? t("Si vous écrivez ici, elle remplace la question cochée.") : t("Vous pouvez démarrer sans document.")}>
+              <TextArea value={custom} onChange={(event) => setCustom(event.target.value)} placeholder={t("Posez la question au comité")} aria-label={t("Question au comité")} />
             </Field>
           </div>
         </li>
         <li>
-          <p className="text-sm font-medium">4. Agents proposés pour cette question</p>
-          <p className="mt-1 text-sm text-muted">KayrosLab retient ceux dont le métier répond au texte. Vous pouvez en ajouter ou en retirer. Le collectif n’est pas modifié.</p>
+          <p className="text-sm font-medium">{t("4. Agents proposés pour cette question")}</p>
+          <p className="mt-1 text-sm text-muted">{t(
+            "KayrosLab retient ceux dont le métier répond au texte. Vous pouvez en ajouter ou en retirer. Le collectif n’est pas modifié."
+          )}</p>
           {proposals.length && (asked.trim().length >= 8 || raw.trim().length >= 8 || currentQuestion.trim().length >= 8) ? (
             <div className="mt-3 grid gap-2">
               <ul className="grid gap-2">
@@ -679,11 +686,11 @@ function Briefing({
                   return (
                     <li key={item.agent.id} className={cn("rounded-xl border px-3 py-2", on ? "border-accent bg-accent-soft" : "border-line bg-white")}>
                       <div className="flex items-center gap-3">
-                        <input type="checkbox" className="size-4" checked={on} aria-label={`Proposer ${item.agent.name}`} onChange={() => onToggle(item.agent.id)} />
+                        <input type="checkbox" className="size-4" checked={on} aria-label={t("Proposer {{name}}", { name: tc(item.agent.name) })} onChange={() => onToggle(item.agent.id)} />
                         <AgentMark agent={item.agent} size={28} />
                         <button type="button" className="min-w-0 flex-1 text-left text-sm" onClick={() => onOpenAgent?.(item.agent.id)}>
-                          <span className="block font-medium">{item.agent.name}</span>
-                          <span className="block text-xs text-muted">{item.agent.role} · {item.why}</span>
+                          <span className="block font-medium">{tc(item.agent.name)}</span>
+                          <span className="block text-xs text-muted">{tc(item.agent.role)} · {item.why}</span>
                         </button>
                       </div>
                     </li>
@@ -698,12 +705,10 @@ function Briefing({
                     if (!checkedIds.includes(item.agent.id)) onToggle(item.agent.id);
                   }
                 }}
-              >
-                Retenir ces propositions
-              </button>
+              >{t("Retenir ces propositions")}</button>
             </div>
           ) : (
-            <p className="mt-2 text-sm text-muted">Écrivez la question pour voir qui peut intervenir.</p>
+            <p className="mt-2 text-sm text-muted">{t("Écrivez la question pour voir qui peut intervenir.")}</p>
           )}
           {(asked.trim().length >= 8 || currentQuestion.trim().length >= 8) && agents.some((agent) => !proposals.some((item) => item.agent.id === agent.id)) ? (
             <ul className="mt-3 grid gap-2">
@@ -711,11 +716,11 @@ function Briefing({
                 const on = checkedIds.includes(agent.id);
                 return (
                   <li key={agent.id} className="flex items-center gap-3 rounded-2xl bg-paper px-3 py-2">
-                    <input type="checkbox" className="size-4" checked={on} aria-label={`Ajouter ${agent.name}`} onChange={() => onToggle(agent.id)} />
+                    <input type="checkbox" className="size-4" checked={on} aria-label={t("Ajouter {{name}}", { name: tc(agent.name) })} onChange={() => onToggle(agent.id)} />
                     <AgentMark agent={agent} size={28} />
                     <button type="button" className="min-w-0 flex-1 text-left text-sm" onClick={() => onOpenAgent?.(agent.id)}>
-                      <span className="block font-medium">{agent.name}</span>
-                      <span className="block text-xs text-muted">{agent.role}</span>
+                      <span className="block font-medium">{tc(agent.name)}</span>
+                      <span className="block text-xs text-muted">{tc(agent.role)}</span>
                     </button>
                   </li>
                 );
@@ -728,35 +733,33 @@ function Briefing({
       {error ? <p className="mt-3 text-sm text-stop" role="alert">{error}</p> : null}
       <div className="mt-4 rounded-2xl bg-paper px-4 py-3">
         <ul className="grid gap-1 text-sm">
-          <li>{analyzed ? "Document analysé." : raw.trim() || custom.trim() ? "Démarrage par texte brut, sans téléchargement." : "Ni document, ni texte."}</li>
-          <li>{asked.trim().length >= 8 ? "Question retenue." : "Question pas encore choisie."}</li>
-          <li>{checkedIds.length ? `${checkedIds.length} agent${checkedIds.length > 1 ? "s" : ""} retenu${checkedIds.length > 1 ? "s" : ""}.` : "Aucun agent retenu."}</li>
+          <li>{analyzed ? t("Document analysé.") : raw.trim() || custom.trim() ? t("Démarrage par texte brut, sans téléchargement.") : t("Ni document, ni texte.")}</li>
+          <li>{asked.trim().length >= 8 ? t("Question retenue.") : t("Question pas encore choisie.")}</li>
+          <li>{checkedIds.length ? (checkedIds.length > 1 ? t("{{count}} agents retenus.", { count: checkedIds.length }) : t("{{count}} agent retenu.", { count: checkedIds.length })) : t("Aucun agent retenu.")}</li>
         </ul>
         {ready && sameRun ? (
-          <p className="mt-3 text-sm font-medium">La réflexion est en cours auprès du comité.</p>
+          <p className="mt-3 text-sm font-medium">{t("La réflexion est en cours auprès du comité.")}</p>
         ) : ready ? (
           <div className="mt-3 flex flex-col gap-3">
-            <p className="text-sm font-medium">KayrosLab est prêt à lancer la réflexion auprès du comité.</p>
+            <p className="text-sm font-medium">{t("KayrosLab est prêt à lancer la réflexion auprès du comité.")}</p>
             <button
               type="button"
               className="inline-flex min-h-11 w-fit items-center rounded-[10px] bg-accent px-4 text-sm font-semibold text-white shadow-cta"
               onClick={() => {
                 const result = onLaunch(asked.trim(), {
                   name: name || (analyzed ? "document.txt" : "saisie.txt"),
-                  type: analyzed ? "Lecture" : "Saisie",
+                  type: analyzed ? tk("Lecture") : tk("Saisie"),
                   text: text || raw || asked,
                   summary: summary || asked.trim(),
                   facts,
                   questions: questions.length ? questions : [asked.trim()],
                 });
-                setError(result.ok ? "" : result.reason ?? "Refusé");
+                setError(result.ok ? "" : result.reason ?? t("Refusé"));
               }}
-            >
-              Lancer la réflexion
-            </button>
+            >{t("Lancer la réflexion")}</button>
           </div>
         ) : (
-          <p className="mt-3 text-sm text-muted">Pas encore prêt. Il manque une étape ci-dessus.</p>
+          <p className="mt-3 text-sm text-muted">{t("Pas encore prêt. Il manque une étape ci-dessus.")}</p>
         )}
       </div>
     </Panel>
@@ -764,9 +767,9 @@ function Briefing({
 }
 
 const OUTSIDE_TYPES: { id: AgentKind; label: string; hint: string; color: string; soft: string }[] = [
-  { id: "metier", label: "Métier", hint: "Une fonction, sans personnifier personne.", color: "#0f766e", soft: "#e6f4f2" },
-  { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
-  { id: "impersonator", label: "Impersonator", hint: "Reliez CrystalKnows ou LinkedIn avant la fiche.", color: "#5b4cdb", soft: "#eeecfb" },
+  { id: "metier", get label() { return t("Métier"); }, get hint() { return t("Une fonction, sans personnifier personne."); }, color: "#0f766e", soft: "#e6f4f2" },
+  { id: "hybride", get label() { return t("Hybride"); }, get hint() { return t("Métier plus un profil consenti."); }, color: "#0176d3", soft: "#eaf5fe" },
+  { id: "impersonator", get label() { return t("Impersonator"); }, get hint() { return t("Reliez CrystalKnows ou LinkedIn avant la fiche."); }, color: "#5b4cdb", soft: "#eeecfb" },
 ];
 
 function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
@@ -781,8 +784,8 @@ function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
         <div className="rounded-xl border border-line bg-white p-3">
           {!kind ? (
             <>
-              <p className="text-sm font-medium">Choisissez le type d’agent</p>
-              <p className="mt-1 text-sm text-muted">En dehors des propositions. Il rejoint ce dossier, pas le collectif.</p>
+              <p className="text-sm font-medium">{t("Choisissez le type d’agent")}</p>
+              <p className="mt-1 text-sm text-muted">{t("En dehors des propositions. Il rejoint ce dossier, pas le collectif.")}</p>
               {manager ? (
                 <div className="mt-3 grid gap-2">
                   {OUTSIDE_TYPES.map((item) => (
@@ -800,8 +803,8 @@ function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
                 </div>
               ) : (
                 <div className="mt-3">
-                  <p className="text-sm text-muted">Créer un agent est réservé au COMEX.</p>
-                  <Button className="mt-3" onClick={() => setRole("comex")}>Passer en COMEX</Button>
+                  <p className="text-sm text-muted">{t("Créer un agent est réservé au COMEX.")}</p>
+                  <Button className="mt-3" onClick={() => setRole("comex")}>{t("Passer en COMEX")}</Button>
                 </div>
               )}
             </>
@@ -820,16 +823,14 @@ function OutsideAgent({ onAdded }: { onAdded: (id: string) => void }) {
               }}
             />
           )}
-          <Button className="mt-3" variant="ghost" onClick={() => { setOpen(false); setKind(null); }}>Annuler</Button>
+          <Button className="mt-3" variant="ghost" onClick={() => { setOpen(false); setKind(null); }}>{t("Annuler")}</Button>
         </div>
       ) : (
         <button
           type="button"
           className="inline-flex min-h-11 items-center rounded-[10px] border border-line-strong bg-white px-4 text-sm font-semibold text-ink"
           onClick={() => setOpen(true)}
-        >
-          Ajouter un agent
-        </button>
+        >{t("Ajouter un agent")}</button>
       )}
     </div>
   );
@@ -858,37 +859,37 @@ function OutsideForm({
 }) {
   const personal = kind !== "metier";
   const [name, setName] = useState("");
-  const [role, setRole] = useState(personal ? "Persona simulée" : "");
+  const [role, setRole] = useState(personal ? t("Persona simulée") : "");
   const [department, setDepartment] = useState(personal ? "Simulation" : "");
   const [mission, setMission] = useState("");
   const [clues, setClues] = useState("");
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => false));
   const [error, setError] = useState("");
   const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
-  const label = kind === "metier" ? "Métier" : kind === "hybride" ? "Hybride" : "Impersonator";
+  const label = kind === "metier" ? t("Métier") : kind === "hybride" ? t("Hybride") : t("Impersonator");
 
   function save() {
     if (kind === "impersonator" && !link) {
-      setError("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche.");
+      setError(t("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche."));
       return;
     }
     if (!name.trim()) {
-      setError("Le nom est requis.");
+      setError(t("Le nom est requis."));
       return;
     }
     if (!personal && (!role.trim() || !department.trim() || !mission.trim())) {
-      setError("Fonction, service et mission sont requis.");
+      setError(t("Fonction, service et mission sont requis."));
       return;
     }
     if (personal && guards.some((item) => !item)) {
-      setError("Cochez les cinq garde-fous avant d’enregistrer.");
+      setError(t("Cochez les cinq garde-fous avant d’enregistrer."));
       return;
     }
     const result = onCreate({
       name: name.trim(),
-      role: role.trim() || "Persona simulée",
+      role: role.trim() || t("Persona simulée"),
       department: department.trim() || "Simulation",
-      mission: mission.trim() || "Instruit dans son périmètre.",
+      mission: mission.trim() || t("Instruit dans son périmètre."),
       kind,
       veto: false,
       enabled: true,
@@ -897,17 +898,17 @@ function OutsideForm({
       clues: personal
         ? (kind === "impersonator" && link
           ? (clues.trim().includes(link.url) ? clues.trim() : `${profileClue(link.source, link.url)}${clues.trim() ? ` · ${clues.trim()}` : ""}`)
-          : clues.trim() || "Saisie manuelle")
+          : clues.trim() || t("Saisie manuelle"))
         : "",
       brief: "",
     });
-    if (!result.ok) setError(result.reason ?? "Refusé");
+    if (!result.ok) setError(result.reason ?? t("Refusé"));
   }
 
   if (kind === "impersonator" && !link) {
     return (
       <div className="grid gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">Impersonator · simulation</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">{t("Impersonator · simulation")}</p>
         <ProfileLink
           onContinue={(source, url) => {
             setLink({ source, url });
@@ -915,26 +916,26 @@ function OutsideForm({
             setError("");
           }}
         />
-        <Button variant="ghost" onClick={onBack}>Autre type</Button>
+        <Button variant="ghost" onClick={onBack}>{t("Autre type")}</Button>
       </div>
     );
   }
 
   return (
     <div className="grid gap-3">
-      <p className="text-sm font-medium">Nouvel agent · {label}</p>
-      <Field label="Nom">
+      <p className="text-sm font-medium">{t("Nouvel agent · {{label}}", { label })}</p>
+      <Field label={t("Nom")}>
         <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} />
       </Field>
       <div className="grid gap-3 sm:grid-cols-2">
-        <Field label={personal ? "Rôle simulé" : "Fonction"}>
+        <Field label={personal ? t("Rôle simulé") : t("Fonction")}>
           <input className={controlClass} value={role} onChange={(event) => setRole(event.target.value)} />
         </Field>
-        <Field label="Service">
+        <Field label={t("Service")}>
           <input className={controlClass} value={department} onChange={(event) => setDepartment(event.target.value)} />
         </Field>
       </div>
-      <Field label="Mission">
+      <Field label={t("Mission")}>
         <TextArea value={mission} onChange={(event) => setMission(event.target.value)} />
       </Field>
       {kind === "impersonator" && link ? (
@@ -942,7 +943,7 @@ function OutsideForm({
       ) : null}
       {personal ? (
         <>
-          <Field label={kind === "impersonator" ? "Notes" : "Indices autorisés"} hint={kind === "impersonator" ? "L’adresse n’est pas visitée. Aucune fiche n’est téléchargée." : "Export ou saisie. Aucun scraping."}>
+          <Field label={kind === "impersonator" ? t("Notes") : t("Indices autorisés")} hint={kind === "impersonator" ? t("L’adresse n’est pas visitée. Aucune fiche n’est téléchargée.") : t("Export ou saisie. Aucun scraping.")}>
             <input className={controlClass} value={clues} onChange={(event) => setClues(event.target.value)} />
           </Field>
           <ul className="grid gap-2">
@@ -955,7 +956,7 @@ function OutsideForm({
                     checked={guards[index]}
                     onChange={() => setGuards((current) => current.map((value, i) => (i === index ? !value : value)))}
                   />
-                  <span>{item}</span>
+                  <span>{tc(item)}</span>
                 </label>
               </li>
             ))}
@@ -964,8 +965,8 @@ function OutsideForm({
       ) : null}
       {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
       <div className="flex flex-wrap gap-2">
-        <Button onClick={save}>Créer et retenir</Button>
-        <Button variant="ghost" onClick={onBack}>Autre type</Button>
+        <Button onClick={save}>{t("Créer et retenir")}</Button>
+        <Button variant="ghost" onClick={onBack}>{t("Autre type")}</Button>
       </div>
     </div>
   );
@@ -980,7 +981,7 @@ function supportOf(items: { verdict: "GO" | "CONDITIONAL_GO" | "NO_GO" }[]) {
 function CycleRail({ stage }: { stage: CycleId }) {
   const current = CYCLE.findIndex((step) => step.id === stage);
   return (
-    <ol className="flex gap-1 overflow-x-auto" aria-label="Cycle du dossier">
+    <ol className="flex gap-1 overflow-x-auto" aria-label={t("Cycle du dossier")}>
       {CYCLE.map((step, index) => {
         const state = index < current ? "done" : index === current ? "now" : "later";
         return (
@@ -1008,14 +1009,14 @@ function Block({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <dt className="text-xs text-muted">{title}</dt>
-      <dd>{items.length ? items.join(" ") : "—"}</dd>
+      <dd>{items.length ? items.map((item) => tc(item)).join(" ") : "—"}</dd>
     </div>
   );
 }
 
 function labelAction(action: string) {
-  if (action === "accept") return "Consensus accepté";
-  if (action === "conditions") return "Passé sous conditions";
-  if (action === "override") return "Dérogation au veto";
-  return "Réévaluation";
+  if (action === "accept") return t("Consensus accepté");
+  if (action === "conditions") return t("Passé sous conditions");
+  if (action === "override") return t("Dérogation au veto");
+  return t("Réévaluation");
 }

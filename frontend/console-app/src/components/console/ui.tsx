@@ -2,11 +2,12 @@ import type { ButtonHTMLAttributes, CSSProperties, ReactNode, TextareaHTMLAttrib
 import { cn } from "@/lib/cn";
 import type { ThreadStatus, Verdict } from "@/lib/console/model";
 import { STATUS_LABEL, VERDICT_LABEL } from "@/lib/console/model";
+import { t } from "@/lib/i18n";
 
 export function ProgressBar({
   done,
   total,
-  label = "Tâches",
+  label = t("Tâches"),
   active = false,
 }: {
   done: number;

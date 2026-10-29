@@ -20,13 +20,14 @@ import { Espace } from "./Espace";
 import { Instruct } from "./Instruct";
 import { Workbench } from "./Workbench";
 import { Demo } from "./Demo";
+import { LANGS, setLanguage, t, useLang, type Lang } from "@/lib/i18n";
 
 const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; soft: string; ink: string }[] = [
-  { id: "overview", label: "Aujourd’hui", short: "Jour", icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
-  { id: "dossiers", label: "Dossiers", short: "Dossiers", icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
-  { id: "collectifs", label: "Collectifs", short: "Équipes", icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
-  { id: "agents", label: "Agents", short: "Agents", icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
-  { id: "connexions", label: "Connexions", short: "Liens", icon: Plug, soft: "bg-go-soft", ink: "text-go" },
+  { id: "overview", get label() { return t("Aujourd’hui"); }, get short() { return t("Jour"); }, icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
+  { id: "dossiers", get label() { return t("Dossiers"); }, get short() { return t("Dossiers"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
+  { id: "collectifs", get label() { return t("Collectifs"); }, get short() { return t("Équipes"); }, icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
+  { id: "agents", get label() { return t("Agents"); }, get short() { return t("Agents"); }, icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "connexions", get label() { return t("Connexions"); }, get short() { return t("Liens"); }, icon: Plug, soft: "bg-go-soft", ink: "text-go" },
 ];
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
@@ -53,9 +54,10 @@ function readLocation() {
 }
 
 export function ConsoleApp() {
+  const lang = useLang();
   return (
     <ConsoleProvider>
-      <Frame />
+      <Frame key={lang} />
     </ConsoleProvider>
   );
 }
@@ -129,27 +131,26 @@ function Frame() {
           </span>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold tracking-tight text-ink">
-              {page === "instruire" ? "Instruire une décision" : page === "workbench" ? "Workbench" : page === "demo" ? "Démo publique" : NAV.find((item) => item.id === page)?.label ?? "Espace"}
+              {page === "instruire" ? t("Instruire une décision") : page === "workbench" ? "Workbench" : page === "demo" ? t("Démo publique") : NAV.find((item) => item.id === page)?.label ?? t("Espace")}
             </p>
-            <p className="truncate text-[11px] text-muted">Verdict consultatif jusqu’à l’arbitrage humain</p>
+            <p className="truncate text-[11px] text-muted">{t("Verdict consultatif jusqu’à l’arbitrage humain")}</p>
           </div>
+          <LangSwitch />
           {page !== "instruire" ? (
             <a href="#instruire" className="inline-flex min-h-10 items-center gap-2 rounded-[10px] bg-accent px-3 text-sm font-semibold text-white shadow-cta hover:bg-accent-strong md:px-3.5">
               <Scale size={15} aria-hidden="true" />
-              <span className="hidden sm:inline">Instruire une décision</span>
-              <span className="sm:hidden">Instruire</span>
+              <span className="hidden sm:inline">{t("Instruire une décision")}</span>
+              <span className="sm:hidden">{t("Instruire")}</span>
             </a>
           ) : (
-            <a href="#overview" className="inline-flex min-h-10 items-center rounded-[10px] border border-line bg-white px-3 text-sm font-semibold text-ink">
-              Fermer
-            </a>
+            <a href="#overview" className="inline-flex min-h-10 items-center rounded-[10px] border border-line bg-white px-3 text-sm font-semibold text-ink">{t("Fermer")}</a>
           )}
         </header>
 
         {state.notice ? (
           <div className={cn("mx-4 mt-4 flex items-start justify-between gap-3 rounded-2xl border px-4 py-3 text-sm md:mx-8", state.notice.tone === "stop" ? "border-line bg-stop-soft text-stop" : state.notice.tone === "warn" ? "border-line bg-hold-soft text-hold" : "border-line bg-accent-soft text-ink")} role="status">
             <p>{state.notice.text}</p>
-            <button type="button" aria-label="Fermer le message" onClick={clearNotice} className="rounded-lg p-1">
+            <button type="button" aria-label={t("Fermer le message")} onClick={clearNotice} className="rounded-lg p-1">
               <X size={16} />
             </button>
           </div>
@@ -168,7 +169,7 @@ function Frame() {
         </main>
       </div>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label="Navigation">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label={t("Navigation")}>
         {NAV.map((item) => {
           const Icon = item.icon;
           const active = page === item.id;
@@ -184,6 +185,27 @@ function Frame() {
   );
 }
 
+function LangSwitch() {
+  const lang = useLang();
+  return (
+    <div className="grid grid-cols-2 gap-0.5 rounded-lg border border-line bg-paper p-0.5" role="group" aria-label={t("Langue de la console")}>
+      {LANGS.map((item: Lang) => (
+        <button
+          key={item}
+          type="button"
+          lang={item}
+          onClick={() => void setLanguage(item)}
+          aria-pressed={lang === item}
+          title={item === "en" ? "English" : "Français"}
+          className={cn("min-h-8 min-w-9 rounded-md px-1.5 text-xs font-semibold uppercase", lang === item ? "bg-surface text-ink shadow-card" : "text-muted")}
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function Mark() {
   return <img src={`${import.meta.env.BASE_URL}logo-kayroslab.png`} alt="" width={28} height={28} className="h-7 w-7 rounded-[7px]" />;
 }
@@ -194,10 +216,10 @@ function initials(name: string) {
 
 function RoleSwitch({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
   return (
-    <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-paper p-1" role="group" aria-label="Rôle de l’espace">
+    <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-paper p-1" role="group" aria-label={t("Rôle de l’espace")}>
       {(
         [
-          ["contributeur", "Contrib."],
+          ["contributeur", t("Contrib.")],
           ["comex", "COMEX"],
         ] as const
       ).map(([id, label]) => (

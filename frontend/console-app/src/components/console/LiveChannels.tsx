@@ -2,34 +2,36 @@ import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { api, ApiError, liveState, REQUIRED_ENV, tokenStore, type LiveConnector, type LivePlatform, type LiveUser } from "@/lib/console/api";
 import { Panel, controlClass } from "./ui";
 import { cn } from "@/lib/cn";
+import { locale, t } from "@/lib/i18n";
 
-const LANG = typeof navigator !== "undefined" && !/^fr/i.test(navigator.language || "fr") ? "en" : "fr";
+/** Libellés du panneau, traduits par le catalogue partagé (getters : suivent la langue active). */
 const T = {
-  fr: {
-    title: "Canaux réels de votre espace", demoBadge: "Démo",
-    loggedOut: "Vous n’êtes pas connecté : les canaux ci-dessous sont une démonstration, pas l’état de votre espace.",
-    login: "Se connecter", email: "E-mail", password: "Mot de passe", loggingIn: "Connexion…",
-    loading: "Chargement de l’état des canaux…", apiError: "L’API ne répond pas comme prévu", retry: "Réessayer",
-    logout: "Se déconnecter", signedAs: "Connecté en tant que",
-    connected: "Connecté", error: "Erreur de test", disabled: "Désactivé", configured: "Configuré", connectable: "Prêt à connecter", missing_config: "Configuration serveur manquante",
-    missing: "Le serveur ne propose pas la connexion en un geste. Variables requises côté serveur :",
-    connect: "Connecter", connecting: "Ouverture…", env: "via variables d’environnement du serveur",
-    managerOnly: "Seul un COMEX peut connecter un canal.", sessionExpired: "Session expirée, reconnectez-vous.",
-    lastTest: "Dernier test",
-  },
-  en: {
-    title: "Your workspace’s real channels", demoBadge: "Demo",
-    loggedOut: "You are not signed in: the channels below are a demonstration, not your workspace’s state.",
-    login: "Sign in", email: "E-mail", password: "Password", loggingIn: "Signing in…",
-    loading: "Loading channel status…", apiError: "The API did not respond as expected", retry: "Retry",
-    logout: "Sign out", signedAs: "Signed in as",
-    connected: "Connected", error: "Test error", disabled: "Disabled", configured: "Configured", connectable: "Ready to connect", missing_config: "Server configuration missing",
-    missing: "The server does not offer one-click connection. Required server variables:",
-    connect: "Connect", connecting: "Opening…", env: "via server environment variables",
-    managerOnly: "Only a COMEX member can connect a channel.", sessionExpired: "Session expired, please sign in again.",
-    lastTest: "Last test",
-  },
-}[LANG];
+  get title() { return t("Canaux réels de votre espace"); },
+  get demoBadge() { return t("Démo"); },
+  get loggedOut() { return t("Vous n’êtes pas connecté : les canaux ci-dessous sont une démonstration, pas l’état de votre espace."); },
+  get login() { return t("Se connecter"); },
+  get email() { return t("E-mail"); },
+  get password() { return t("Mot de passe"); },
+  get loggingIn() { return t("Connexion…"); },
+  get loading() { return t("Chargement de l’état des canaux…"); },
+  get apiError() { return t("L’API ne répond pas comme prévu"); },
+  get retry() { return t("Réessayer"); },
+  get logout() { return t("Se déconnecter"); },
+  get signedAs() { return t("Connecté en tant que"); },
+  get connected() { return t("Connecté"); },
+  get error() { return t("Erreur de test"); },
+  get disabled() { return t("Désactivé"); },
+  get configured() { return t("Configuré"); },
+  get connectable() { return t("Prêt à connecter"); },
+  get missing_config() { return t("Configuration serveur manquante"); },
+  get missing() { return t("Le serveur ne propose pas la connexion en un geste. Variables requises côté serveur :"); },
+  get connect() { return t("Connecter"); },
+  get connecting() { return t("Ouverture…"); },
+  get env() { return t("via variables d’environnement du serveur"); },
+  get managerOnly() { return t("Seul un COMEX peut connecter un canal."); },
+  get sessionExpired() { return t("Session expirée, reconnectez-vous."); },
+  get lastTest() { return t("Dernier test"); },
+};
 
 const NAMES: Record<string, string> = { slack: "Slack", teams: "Microsoft Teams", discord: "Discord" };
 const COLORS: Record<string, string> = { slack: "#4a154b", teams: "#4b53bc", discord: "#5865f2" };
@@ -156,7 +158,7 @@ export function LiveChannels({ onSession }: { onSession?: (live: boolean) => voi
             ) : null}
             {c.source === "environment" ? <p className="mt-2 text-xs text-muted">{T.env}</p> : null}
             {c.last_error ? <p className="mt-2 text-xs text-stop">{c.last_error}</p> : null}
-            {c.last_tested_at ? <p className="mt-1 text-xs text-muted">{T.lastTest} {new Date(c.last_tested_at).toLocaleString(LANG)}</p> : null}
+            {c.last_tested_at ? <p className="mt-1 text-xs text-muted">{T.lastTest} {new Date(c.last_tested_at).toLocaleString(locale())}</p> : null}
           </Panel>
         );
       })}

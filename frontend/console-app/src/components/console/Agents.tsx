@@ -1,34 +1,33 @@
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
-import { GUARDRAILS, simulateMetier, type Agent, type AgentKind } from "@/lib/console/model";
+import { GUARDRAILS, kindLabel, simulateMetier, type Agent, type AgentKind } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
 import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
+import { t, tc } from "@/lib/i18n";
 
 function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
   return (
     <div className="flex flex-col gap-5">
       <button type="button" className="w-fit text-sm text-muted" onClick={() => (dossierId ? go("dossiers", dossierId) : go("agents"))}>
-        ← {dossierId ? "Retour au dossier" : "Tous les agents"}
+        ← {dossierId ? t("Retour au dossier") : t("Tous les agents")}
       </button>
       <Panel>
         <div className="flex items-start gap-3">
           <AgentMark agent={agent} size={44} />
           <div>
-            <p className="text-xs text-muted">{agent.department} · {agent.kind} · {agent.provider}</p>
-            <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{agent.name}</h1>
-            <p className="text-sm text-ink-soft">{agent.role}{agent.veto ? " · droit de veto" : ""}{agent.enabled ? "" : " · inactif"}</p>
+            <p className="text-xs text-muted">{tc(agent.department)} · {kindLabel(agent.kind)} · {agent.provider}</p>
+            <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{tc(agent.name)}</h1>
+            <p className="text-sm text-ink-soft">{tc(agent.role)}{agent.veto ? t(" · droit de veto") : ""}{agent.enabled ? "" : t(" · inactif")}</p>
           </div>
         </div>
-        <p className="mt-4 text-sm">{agent.mission}</p>
-        {agent.brief ? <p className="mt-3 text-sm text-ink-soft">{agent.brief}</p> : null}
-        <p className="mt-3 text-xs text-muted">Modèle {agent.model}. {agent.simulation ? "Fiche de simulation." : "Agent de registre."}</p>
+        <p className="mt-4 text-sm">{tc(agent.mission)}</p>
+        {agent.brief ? <p className="mt-3 text-sm text-ink-soft">{tc(agent.brief)}</p> : null}
+        <p className="mt-3 text-xs text-muted">{t("Modèle {{model}}.", { model: agent.model })} {agent.simulation ? t("Fiche de simulation.") : t("Agent de registre.")}</p>
         {agent.consented ? (
-          <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">
-            Simulation étiquetée. Indices : {agent.clues || "saisie manuelle"}. Pas de décision matérielle.
-          </p>
+          <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">{t("Simulation étiquetée. Indices : {{clues}}. Pas de décision matérielle.", { clues: tc(agent.clues) || t("saisie manuelle") })}</p>
         ) : null}
       </Panel>
     </div>
@@ -36,10 +35,10 @@ function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
 }
 
 const TABS: { id: AgentKind | "all"; label: string }[] = [
-  { id: "all", label: "Tous" },
-  { id: "metier", label: "Métier" },
-  { id: "hybride", label: "Hybrides" },
-  { id: "impersonator", label: "Impersonators" },
+  { id: "all", get label() { return t("Tous"); } },
+  { id: "metier", get label() { return t("Métier"); } },
+  { id: "hybride", get label() { return t("Hybrides"); } },
+  { id: "impersonator", get label() { return t("Impersonators"); } },
 ];
 
 export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dossierId?: string }) {
@@ -73,19 +72,23 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">Agents</h1>
-          <p className="mt-1 max-w-2xl text-sm text-muted">
-            Ajoutez un agent qui n’est pas dans la liste. Le type se choisit ensuite : métier, hybride, impersonator ou équipe.
-          </p>
+          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Agents")}</h1>
+          <p className="mt-1 max-w-2xl text-sm text-muted">{t(
+            "Ajoutez un agent qui n’est pas dans la liste. Le type se choisit ensuite : métier, hybride, impersonator ou équipe."
+          )}</p>
         </div>
       </div>
 
       <Panel className={manager ? undefined : "bg-paper"}>
-        <p className="text-sm font-medium">{manager ? "Création et modification ouvertes." : "Consultation seule."}</p>
+        <p className="text-sm font-medium">{manager ? t("Création et modification ouvertes.") : t("Consultation seule.")}</p>
         <p className="mt-1 text-sm text-muted">
           {manager
-            ? "Une fiche existante se modifie sans en créer une autre. Le consentement reste exigé pour un profil personnifié."
-            : "Créer ou modifier un agent est réservé au COMEX. Passez en COMEX pour ouvrir les formulaires."}
+            ? t(
+            "Une fiche existante se modifie sans en créer une autre. Le consentement reste exigé pour un profil personnifié."
+          )
+            : t(
+            "Créer ou modifier un agent est réservé au COMEX. Passez en COMEX pour ouvrir les formulaires."
+          )}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button
@@ -95,10 +98,8 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               setSimId(null);
               setPicking((open) => !open);
             }}
-          >
-            Ajouter un agent
-          </Button>
-          {!manager ? <Button variant="secondary" onClick={() => setRole("comex")}>Passer en COMEX</Button> : null}
+          >{t("Ajouter un agent")}</Button>
+          {!manager ? <Button variant="secondary" onClick={() => setRole("comex")}>{t("Passer en COMEX")}</Button> : null}
         </div>
       </Panel>
 
@@ -107,9 +108,11 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
           <TypeChoice onPick={openCreate} onClose={() => setPicking(false)} />
         ) : (
           <Panel>
-            <h2 className="text-sm font-medium">Choix du type</h2>
-            <p className="mt-1 text-sm text-muted">Créer un agent est réservé au COMEX. Passez en COMEX, puis choisissez le type.</p>
-            <Button className="mt-3" onClick={() => setRole("comex")}>Passer en COMEX</Button>
+            <h2 className="text-sm font-medium">{t("Choix du type")}</h2>
+            <p className="mt-1 text-sm text-muted">{t(
+              "Créer un agent est réservé au COMEX. Passez en COMEX, puis choisissez le type."
+            )}</p>
+            <Button className="mt-3" onClick={() => setRole("comex")}>{t("Passer en COMEX")}</Button>
           </Panel>
         )
       ) : null}
@@ -166,9 +169,9 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                 <div className="flex items-start gap-3">
                   <AgentMark agent={agent} />
                   <div>
-                  <p className="text-xs text-muted">{agent.department} · {agent.kind} · {agent.provider}</p>
-                  <h2 className="text-lg font-medium">{agent.name}</h2>
-                  <p className="text-sm text-ink-soft">{agent.role}{agent.veto ? " · droit de veto" : ""}</p>
+                  <p className="text-xs text-muted">{tc(agent.department)} · {kindLabel(agent.kind)} · {agent.provider}</p>
+                  <h2 className="text-lg font-medium">{tc(agent.name)}</h2>
+                  <p className="text-sm text-ink-soft">{tc(agent.role)}{agent.veto ? t(" · droit de veto") : ""}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -180,9 +183,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                       setSimId(null);
                       setEditingId(agent.id);
                     }}
-                  >
-                    Modifier
-                  </Button>
+                  >{t("Modifier")}</Button>
                   {agent.kind === "metier" ? (
                     <Button
                       variant="secondary"
@@ -191,9 +192,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                         setEditingId(null);
                         setSimId(agent.id);
                       }}
-                    >
-                      Simuler
-                    </Button>
+                    >{t("Simuler")}</Button>
                   ) : null}
                   <button
                     type="button"
@@ -202,40 +201,38 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                     onClick={() => setAgentEnabled(agent.id, !agent.enabled)}
                     className="min-h-11 rounded-lg border border-line px-3 text-sm disabled:opacity-50"
                   >
-                    {agent.enabled ? "Actif" : "Inactif"}
+                    {agent.enabled ? t("Actif") : t("Inactif")}
                   </button>
                 </div>
               </div>
-              <p className="mt-3 text-sm">{agent.mission}</p>
-              {agent.kind === "metier" && agent.brief ? <p className="mt-2 text-sm text-ink-soft">{agent.brief}</p> : null}
+              <p className="mt-3 text-sm">{tc(agent.mission)}</p>
+              {agent.kind === "metier" && agent.brief ? <p className="mt-2 text-sm text-ink-soft">{tc(agent.brief)}</p> : null}
               {agent.consented ? (
-                <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">
-                  Simulation étiquetée. Indices : {agent.clues || "saisie manuelle"}. Pas de décision matérielle.
-                </p>
+                <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">{t("Simulation étiquetée. Indices : {{clues}}. Pas de décision matérielle.", { clues: tc(agent.clues) || t("saisie manuelle") })}</p>
               ) : null}
             </Panel>
           ),
         )}
       </div>
-      <p className="text-sm text-muted">
-        Crystal Knows : jeton serveur absent, aucune fiche n’est téléchargée. Un impersonator se relie d’abord à une adresse CrystalKnows ou LinkedIn publique, conservée comme indice. Ces adresses ne sont pas visitées.
-      </p>
+      <p className="text-sm text-muted">{t(
+        "Crystal Knows : jeton serveur absent, aucune fiche n’est téléchargée. Un impersonator se relie d’abord à une adresse CrystalKnows ou LinkedIn publique, conservée comme indice. Ces adresses ne sont pas visitées."
+      )}</p>
     </div>
   );
 }
 
 const AGENT_TYPES: { id: "metier" | "hybride" | "impersonator" | "team"; label: string; hint: string; color: string; soft: string }[] = [
-  { id: "metier", label: "Métier", hint: "Une fonction. Personne n’est personnifiée.", color: "#0f766e", soft: "#e6f4f2" },
-  { id: "hybride", label: "Hybride", hint: "Métier plus un profil consenti.", color: "#0176d3", soft: "#eaf5fe" },
-  { id: "impersonator", label: "Impersonator", hint: "Reliez CrystalKnows ou LinkedIn, puis la fiche.", color: "#5b4cdb", soft: "#eeecfb" },
-  { id: "team", label: "Équipe", hint: "De 2 à 12 personas, un panel.", color: "#8a6d1a", soft: "#f8f1dc" },
+  { id: "metier", get label() { return t("Métier"); }, get hint() { return t("Une fonction. Personne n’est personnifiée."); }, color: "#0f766e", soft: "#e6f4f2" },
+  { id: "hybride", get label() { return t("Hybride"); }, get hint() { return t("Métier plus un profil consenti."); }, color: "#0176d3", soft: "#eaf5fe" },
+  { id: "impersonator", get label() { return t("Impersonator"); }, get hint() { return t("Reliez CrystalKnows ou LinkedIn, puis la fiche."); }, color: "#5b4cdb", soft: "#eeecfb" },
+  { id: "team", get label() { return t("Équipe"); }, get hint() { return t("De 2 à 12 personas, un panel."); }, color: "#8a6d1a", soft: "#f8f1dc" },
 ];
 
 function TypeChoice({ onPick, onClose }: { onPick: (kind: (typeof AGENT_TYPES)[number]["id"]) => void; onClose: () => void }) {
   return (
     <Panel>
-      <h2 className="text-sm font-medium">Choisissez le type d’agent</h2>
-      <p className="mt-1 text-sm text-muted">Il n’a pas besoin d’être déjà dans le registre.</p>
+      <h2 className="text-sm font-medium">{t("Choisissez le type d’agent")}</h2>
+      <p className="mt-1 text-sm text-muted">{t("Il n’a pas besoin d’être déjà dans le registre.")}</p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {AGENT_TYPES.map((item) => (
           <button
@@ -250,34 +247,34 @@ function TypeChoice({ onPick, onClose }: { onPick: (kind: (typeof AGENT_TYPES)[n
           </button>
         ))}
       </div>
-      <Button className="mt-3" variant="ghost" onClick={onClose}>Annuler</Button>
+      <Button className="mt-3" variant="ghost" onClick={onClose}>{t("Annuler")}</Button>
     </Panel>
   );
 }
 
 function MetierSim({ agent, onClose }: { agent: Agent; onClose: () => void }) {
-  const [question, setQuestion] = useState("Faut-il lancer le pilote de 90 jours sans plancher de marge écrit ?");
+  const [question, setQuestion] = useState(t("Faut-il lancer le pilote de 90 jours sans plancher de marge écrit ?"));
   const [result, setResult] = useState<ReturnType<typeof simulateMetier> | null>(null);
 
   return (
     <Panel>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs text-muted">Simulation de fonction · {agent.provider}</p>
-          <h2 className="text-lg font-medium">{agent.name}</h2>
-          <p className="text-sm text-ink-soft">{agent.role} · {agent.department}. Aucune personne n’est jouée.</p>
+          <p className="text-xs text-muted">{t("Simulation de fonction · {{provider}}", { provider: agent.provider })}</p>
+          <h2 className="text-lg font-medium">{tc(agent.name)}</h2>
+          <p className="text-sm text-ink-soft">{t("{{role}} · {{department}}. Aucune personne n’est jouée.", { role: tc(agent.role), department: tc(agent.department) })}</p>
         </div>
-        <Button variant="ghost" onClick={onClose}>Fermer</Button>
+        <Button variant="ghost" onClick={onClose}>{t("Fermer")}</Button>
       </div>
       {!agent.enabled ? (
-        <p className="mt-3 text-sm text-hold">Cet agent est inactif dans les collectifs. La simulation ne le réactive pas.</p>
+        <p className="mt-3 text-sm text-hold">{t(
+          "Cet agent est inactif dans les collectifs. La simulation ne le réactive pas."
+        )}</p>
       ) : null}
-      <Field label="Question à instruire">
+      <Field label={t("Question à instruire")}>
         <TextArea className="mt-3" value={question} onChange={(event) => setQuestion(event.target.value)} />
       </Field>
-      <Button className="mt-3" onClick={() => setResult(simulateMetier(agent, question))} disabled={question.trim().length < 3}>
-        Lancer la simulation
-      </Button>
+      <Button className="mt-3" onClick={() => setResult(simulateMetier(agent, question))} disabled={question.trim().length < 3}>{t("Lancer la simulation")}</Button>
       {result?.status === "clarify" ? (
         <p className="mt-4 rounded-lg bg-info-soft px-3 py-3 text-sm text-info" role="status">{result.ask}</p>
       ) : null}
@@ -285,16 +282,16 @@ function MetierSim({ agent, onClose }: { agent: Agent; onClose: () => void }) {
         <div className="mt-4 grid gap-3 rounded-lg bg-paper px-3 py-3">
           <div className="flex flex-wrap items-center gap-2">
             <VerdictPill verdict={result.contribution.verdict} />
-            <span className="text-xs text-muted">{result.provider} · {result.contribution.metric}</span>
+            <span className="text-xs text-muted">{result.provider} · {tc(result.contribution.metric)}</span>
           </div>
-          {result.contribution.strengths.map((item) => <p key={item} className="text-sm">{item}</p>)}
-          {result.contribution.objections.map((item) => <p key={item} className="text-sm text-ink-soft">{item}</p>)}
+          {result.contribution.strengths.map((item) => <p key={item} className="text-sm">{tc(item)}</p>)}
+          {result.contribution.objections.map((item) => <p key={item} className="text-sm text-ink-soft">{tc(item)}</p>)}
           {result.contribution.conditions.length ? (
             <ul className="list-disc pl-5 text-sm">
-              {result.contribution.conditions.map((item) => <li key={item}>{item}</li>)}
+              {result.contribution.conditions.map((item) => <li key={item}>{tc(item)}</li>)}
             </ul>
           ) : null}
-          <p className="text-xs text-muted">Avis consultatif. Ce n’est pas un arbitrage.</p>
+          <p className="text-xs text-muted">{t("Avis consultatif. Ce n’est pas un arbitrage.")}</p>
         </div>
       ) : null}
     </Panel>
@@ -335,17 +332,17 @@ function MetierForm({
     brief?: string;
   }) => { ok: boolean; reason?: string };
 }) {
-  const [name, setName] = useState(existing?.name ?? "");
-  const [role, setRole] = useState(existing?.role ?? "");
-  const [department, setDepartment] = useState(existing?.department ?? "");
-  const [mission, setMission] = useState(existing?.mission ?? "");
-  const [brief, setBrief] = useState(existing?.brief ?? "");
+  const [name, setName] = useState(tc(existing?.name));
+  const [role, setRole] = useState(tc(existing?.role));
+  const [department, setDepartment] = useState(tc(existing?.department));
+  const [mission, setMission] = useState(tc(existing?.mission));
+  const [brief, setBrief] = useState(tc(existing?.brief));
   const [veto, setVeto] = useState(existing?.veto ?? false);
   const [error, setError] = useState("");
 
   function save() {
     if (!name.trim() || !role.trim() || !department.trim() || !mission.trim()) {
-      setError("Nom, fonction, service et mission sont requis.");
+      setError(t("Nom, fonction, service et mission sont requis."));
       return;
     }
     const draft = {
@@ -361,40 +358,40 @@ function MetierForm({
       clues: "",
     };
     const result = existing ? onUpdate(existing.id, draft) : onCreate({ ...draft, kind: "metier" });
-    if (!result.ok) setError(result.reason ?? "Refusé");
+    if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
 
   return (
     <Panel>
-      <h2 className="text-sm font-medium">{existing ? `Modifier ${existing.name}` : "Nouvel agent métier"}</h2>
-      <p className="mt-1 text-sm text-muted">Fiche de fonction. Aucune personne n’est simulée.</p>
+      <h2 className="text-sm font-medium">{existing ? t("Modifier {{name}}", { name: tc(existing.name) }) : t("Nouvel agent métier")}</h2>
+      <p className="mt-1 text-sm text-muted">{t("Fiche de fonction. Aucune personne n’est simulée.")}</p>
       <div className="mt-4 grid gap-4">
-        <Field label="Nom">
+        <Field label={t("Nom")}>
           <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Fonction">
+          <Field label={t("Fonction")}>
             <input className={controlClass} value={role} onChange={(event) => setRole(event.target.value)} />
           </Field>
-          <Field label="Service">
+          <Field label={t("Service")}>
             <input className={controlClass} value={department} onChange={(event) => setDepartment(event.target.value)} />
           </Field>
         </div>
-        <Field label="Mission" hint="Ce que cet agent défend dans une décision.">
+        <Field label={t("Mission")} hint={t("Ce que cet agent défend dans une décision.")}>
           <TextArea value={mission} onChange={(event) => setMission(event.target.value)} />
         </Field>
-        <Field label="Consignes" hint="Comment il instruit. Ce n’est pas un profil de personne.">
+        <Field label={t("Consignes")} hint={t("Comment il instruit. Ce n’est pas un profil de personne.")}>
           <TextArea value={brief} onChange={(event) => setBrief(event.target.value)} />
         </Field>
         <label className="flex items-start gap-3 text-sm">
           <input type="checkbox" className="mt-1 size-4" checked={veto} onChange={(event) => setVeto(event.target.checked)} />
-          <span>Droit de veto dans un collectif qui l’autorise.</span>
+          <span>{t("Droit de veto dans un collectif qui l’autorise.")}</span>
         </label>
         {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
         <div className="flex gap-2">
-          <Button onClick={save}>{existing ? "Enregistrer les modifications" : "Créer l’agent métier"}</Button>
-          <Button variant="ghost" onClick={onClose}>Annuler</Button>
+          <Button onClick={save}>{existing ? t("Enregistrer les modifications") : t("Créer l’agent métier")}</Button>
+          <Button variant="ghost" onClick={onClose}>{t("Annuler")}</Button>
         </div>
       </div>
     </Panel>
@@ -437,15 +434,15 @@ function Composer({
   }) => { ok: boolean; reason?: string };
   onTeam: (names: string[], clues: string) => { ok: boolean; reason?: string };
 }) {
-  const [name, setName] = useState(existing?.name ?? "");
-  const [role, setRole] = useState(existing?.role ?? (mode === "metier" ? "Contrôle de gestion" : "Persona simulée"));
-  const [department, setDepartment] = useState(existing?.department ?? (mode === "metier" ? "Support" : "Simulation"));
-  const [mission, setMission] = useState(existing?.mission ?? "");
-  const [clues, setClues] = useState(existing?.clues ?? "");
+  const [name, setName] = useState(tc(existing?.name));
+  const [role, setRole] = useState(existing ? tc(existing.role) : (mode === "metier" ? t("Contrôle de gestion") : t("Persona simulée")));
+  const [department, setDepartment] = useState(existing ? tc(existing.department) : (mode === "metier" ? "Support" : "Simulation"));
+  const [mission, setMission] = useState(tc(existing?.mission));
+  const [clues, setClues] = useState(tc(existing?.clues));
   const [veto, setVeto] = useState(existing?.veto ?? false);
   const [consent, setConsent] = useState(existing?.consented ?? false);
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => Boolean(existing?.consented)));
-  const [team, setTeam] = useState("Camille Achats\nJordan Achats\nAlex Risque");
+  const [team, setTeam] = useState(t("Camille Achats\nJordan Achats\nAlex Risque"));
   const [source, setSource] = useState<"manuel" | "json" | "disc" | "api">("manuel");
   const [disc, setDisc] = useState("Di");
   const [error, setError] = useState("");
@@ -462,43 +459,47 @@ function Composer({
 
   function save() {
     if (mode === "impersonator" && !existing && !link) {
-      setError("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche.");
+      setError(t("Reliez CrystalKnows ou un profil public LinkedIn avant la fiche."));
       return;
     }
     if (mode === "team") {
       if (source === "api") {
-        setError("CRYSTALKNOWS_API_TOKEN absent. Aucun appel. L’équipe n’est pas créée.");
+        setError(t("CRYSTALKNOWS_API_TOKEN absent. Aucun appel. L’équipe n’est pas créée."));
         return;
       }
       if (!consent || guards.some((item) => !item)) {
-        setError("Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel.");
+        setError(t("Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel."));
         return;
       }
       const result = onTeam(team.split("\n"), source === "disc" ? `DISC ${disc}` : clues);
-      if (!result.ok) setError(result.reason ?? "Refusé");
+      if (!result.ok) setError(result.reason ?? t("Refusé"));
       else onClose();
       return;
     }
     if (personal && source === "api") {
-      setError("CRYSTALKNOWS_API_TOKEN absent. Aucun appel. Utilisez un export JSON ou un type DISC.");
+      setError(t(
+        "CRYSTALKNOWS_API_TOKEN absent. Aucun appel. Utilisez un export JSON ou un type DISC."
+      ));
       return;
     }
     if (personal && (!consent || guards.some((item) => !item))) {
-      setError("Cochez le consentement et les cinq garde-fous avant d’enregistrer.");
+      setError(t("Cochez le consentement et les cinq garde-fous avant d’enregistrer."));
       return;
     }
     const clueText = mode === "impersonator" && link
       ? (clues.trim().includes(link.url) ? clues.trim() : `${profileClue(link.source, link.url)}${clues.trim() ? ` · ${clues.trim()}` : ""}`)
       : source === "json"
-        ? clues.trim() || "Export JSON Crystal autorisé"
+        ? clues.trim() || t("Export JSON Crystal autorisé")
         : source === "disc"
-          ? `DISC ${disc} · saisie autorisée, pas d’appel API`
+          ? t("DISC {{disc}} · saisie autorisée, pas d’appel API", {
+      disc
+    })
           : clues;
     const draft = {
       name: name.trim(),
       role,
       department,
-      mission: mission.trim() || "Instruit dans son périmètre.",
+      mission: mission.trim() || t("Instruit dans son périmètre."),
       veto: mode === "metier" && veto,
       enabled: existing?.enabled ?? true,
       consented: personal && consent,
@@ -508,28 +509,28 @@ function Composer({
     const result = existing
       ? onUpdate(existing.id, draft)
       : onAgent({ ...draft, kind: mode });
-    if (!result.ok) setError(result.reason ?? "Refusé");
+    if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
 
   const title = existing
-    ? `Modifier ${existing.name}`
+    ? t("Modifier {{name}}", { name: tc(existing.name) })
     : mode === "team"
-      ? "Nouvelle équipe d’impersonators"
+      ? t("Nouvelle équipe d’impersonators")
       : mode === "hybride"
-        ? "Nouvel agent hybride"
+        ? t("Nouvel agent hybride")
         : mode === "impersonator"
-          ? "Nouvel impersonator"
-          : "Nouvel agent métier";
+          ? t("Nouvel impersonator")
+          : t("Nouvel agent métier");
 
   if (gate) {
     return (
       <Panel>
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">Impersonator · simulation</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-violet">{t("Impersonator · simulation")}</p>
         <div className="mt-3">
           <ProfileLink onContinue={acceptLink} />
         </div>
-        <Button className="mt-4" variant="ghost" onClick={onClose}>Annuler</Button>
+        <Button className="mt-4" variant="ghost" onClick={onClose}>{t("Annuler")}</Button>
       </Panel>
     );
   }
@@ -539,27 +540,29 @@ function Composer({
       <h2 className="text-sm font-medium">{title}</h2>
       <div className="mt-4 grid gap-4">
         {mode === "team" ? (
-          <Field label="Personas, une par ligne" hint="Entre 2 et 12. Le collectif du panel est ouvert et sélectionné si votre quota le permet.">
+          <Field label={t("Personas, une par ligne")} hint={t(
+            "Entre 2 et 12. Le collectif du panel est ouvert et sélectionné si votre quota le permet."
+          )}>
             <TextArea value={team} onChange={(event) => setTeam(event.target.value)} />
           </Field>
         ) : (
           <>
-            <Field label="Nom">
+            <Field label={t("Nom")}>
               <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} required />
             </Field>
-            <Field label="Rôle">
+            <Field label={t("Rôle")}>
               <input className={controlClass} value={role} onChange={(event) => setRole(event.target.value)} />
             </Field>
-            <Field label="Service">
+            <Field label={t("Service")}>
               <input className={controlClass} value={department} onChange={(event) => setDepartment(event.target.value)} />
             </Field>
-            <Field label="Mission">
+            <Field label={t("Mission")}>
               <TextArea value={mission} onChange={(event) => setMission(event.target.value)} />
             </Field>
             {mode === "metier" ? (
               <label className="flex items-start gap-3 text-sm">
                 <input type="checkbox" className="mt-1 size-4" checked={veto} onChange={(event) => setVeto(event.target.checked)} />
-                <span>Droit de veto dans un collectif qui l’autorise.</span>
+                <span>{t("Droit de veto dans un collectif qui l’autorise.")}</span>
               </label>
             ) : null}
           </>
@@ -569,30 +572,32 @@ function Composer({
             {mode === "impersonator" && link ? (
               <>
                 <LinkedMark source={link.source} url={link.url} onChange={existing ? undefined : () => setLink(null)} />
-                <Field label="Notes" hint="L’adresse reste un indice. Elle n’est pas visitée, et aucune fiche n’est téléchargée.">
+                <Field label={t("Notes")} hint={t(
+                  "L’adresse reste un indice. Elle n’est pas visitée, et aucune fiche n’est téléchargée."
+                )}>
                   <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
                 </Field>
               </>
             ) : (
               <>
-                <Field label="Source du profil" hint="L’API Crystal n’est pas appelée sans jeton serveur.">
+                <Field label={t("Source du profil")} hint={t("L’API Crystal n’est pas appelée sans jeton serveur.")}>
                   <select className={controlClass} value={source} onChange={(event) => setSource(event.target.value as typeof source)}>
-                    <option value="manuel">Saisie manuelle</option>
-                    <option value="json">Export JSON autorisé</option>
-                    <option value="disc">Type DISC</option>
-                    <option value="api">API Crystal Knows</option>
+                    <option value="manuel">{t("Saisie manuelle")}</option>
+                    <option value="json">{t("Export JSON autorisé")}</option>
+                    <option value="disc">{t("Type DISC")}</option>
+                    <option value="api">{t("API Crystal Knows")}</option>
                   </select>
                 </Field>
                 {source === "disc" ? (
-                  <Field label="Type DISC">
+                  <Field label={t("Type DISC")}>
                     <select className={controlClass} value={disc} onChange={(event) => setDisc(event.target.value)}>
                       {["D", "I", "S", "C", "Di", "Sc"].map((item) => <option key={item}>{item}</option>)}
                     </select>
                   </Field>
                 ) : source === "api" ? (
-                  <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold">Jeton serveur absent. Ce choix ne peut pas être enregistré.</p>
+                  <p className="rounded-lg bg-hold-soft px-3 py-2 text-sm text-hold">{t("Jeton serveur absent. Ce choix ne peut pas être enregistré.")}</p>
                 ) : (
-                  <Field label="Indices autorisés" hint="Export, entretien consenti, ou saisie. Pas d’URL à visiter.">
+                  <Field label={t("Indices autorisés")} hint={t("Export, entretien consenti, ou saisie. Pas d’URL à visiter.")}>
                     <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
                   </Field>
                 )}
@@ -600,10 +605,12 @@ function Composer({
             )}
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1 size-4" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
-              <span>Je confirme un consentement explicite. Sans cette case, rien n’est enregistré.</span>
+              <span>{t(
+                "Je confirme un consentement explicite. Sans cette case, rien n’est enregistré."
+              )}</span>
             </label>
             <fieldset className="flex flex-col gap-2">
-              <legend className="text-sm font-medium">Garde-fous</legend>
+              <legend className="text-sm font-medium">{t("Garde-fous")}</legend>
               {GUARDRAILS.map((rule, index) => (
                 <label key={rule} className="flex items-start gap-3 text-sm">
                   <input
@@ -612,7 +619,7 @@ function Composer({
                     checked={guards[index]}
                     onChange={() => setGuards((current) => current.map((item, i) => (i === index ? !item : item)))}
                   />
-                  <span>{rule}</span>
+                  <span>{tc(rule)}</span>
                 </label>
               ))}
             </fieldset>
@@ -620,8 +627,8 @@ function Composer({
         ) : null}
         {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
         <div className="flex gap-2">
-          <Button onClick={save} disabled={mode !== "team" && !name.trim()}>{existing ? "Enregistrer les modifications" : "Créer"}</Button>
-          <Button variant="ghost" onClick={onClose}>Annuler</Button>
+          <Button onClick={save} disabled={mode !== "team" && !name.trim()}>{existing ? t("Enregistrer les modifications") : t("Créer")}</Button>
+          <Button variant="ghost" onClick={onClose}>{t("Annuler")}</Button>
         </div>
       </div>
     </Panel>
