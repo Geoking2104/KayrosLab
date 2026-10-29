@@ -79,11 +79,12 @@ export function fromApiAgent(a: any): Agent {
     model: a.model || "serveur",
     consented: Boolean(a.human_profile),
     simulation: Boolean(a.impersonator || a.metadata?.impersonator),
-    clues: "",
+    clues: (a.metadata?.impersonator?.clues || []).join(" · "),
     brief: a.instructions || "",
     settings,
     skillIds: (a.metadata?.skills || []).map((s: any) => s.skill_id),
     contextIds: (a.metadata?.context_sources || []).map((s: any) => s.context_id),
+    humanProfile: a.human_profile || undefined,
   };
 }
 

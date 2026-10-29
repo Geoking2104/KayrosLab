@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { api as http, ApiError, AUTH_EVENT, tokenStore, type LiveUser, type WorkspaceKind } from "./api";
+import { api as http, ApiError, AUTH_EVENT, tokenStore, type EnrichRequest, type EnrichResult, type LiveUser, type WorkspaceKind } from "./api";
 import { EMPTY_WORKSPACE, fromApiAgent, fromApiSession, fromApiThread, slugId, toApiAgent, votingToApi, type MemberRole, type Workspace } from "./live";
 import {
   contributionFor,
@@ -70,6 +70,8 @@ type Store = {
   createAgent: (agent: Omit<Agent, "id" | "provider" | "model">) => { ok: boolean; reason?: string; id?: string };
   updateAgent: (id: string, agent: Omit<Agent, "id" | "provider" | "model" | "kind">) => { ok: boolean; reason?: string };
   createImpersonatorTeam: (names: string[], clues: string) => { ok: boolean; reason?: string; collectiveId?: string };
+  /** Ré-enrichit un agent existant (mode connecté). */
+  enrichAgent: (id: string, body: EnrichRequest) => Promise<{ ok: boolean; reason?: string; result?: EnrichResult }>;
   startMission: (draft: DraftMission) => string;
   addAgentToThread: (threadId: string, agentId: string) => { ok: boolean; reason?: string };
   removeAgentFromThread: (threadId: string, agentId: string) => { ok: boolean; reason?: string };
@@ -895,6 +897,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       memberRole: state.role === "comex" ? "comex" : "contributeur",
       permissions: PERMISSIONS[state.role === "comex" ? "comex" : "contributeur"],
       saveItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour enregistrer.") }),
+      enrichAgent: async () => ({ ok: false, reason: t("Connectez-vous à l’API : l’enrichissement est calculé par le serveur.") }),
       deleteItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour supprimer.") }),
     };
   }, [state, refreshLive]);
@@ -942,6 +945,14 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           }), t("{{name}} est au registre avec son profil enrichi.", { name: agent.name.trim() }));
           return { ok: true };
         }
+        if (agent.kind === "impersonator") {
+          if (!agent.consented) return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
+          run(http.createImpersonator({
+            name: agent.name.trim(), role: agent.role.trim() || undefined, source: "manual",
+            clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
+          }), t("{{name}} est au registre.", { name: agent.name.trim() }));
+          return { ok: true };
+        }
         if (agent.kind !== "metier") return later();
         if (!agent.name.trim() || !agent.mission.trim()) return { ok: false, reason: t("Nom et mission sont requis.") };
         run(saveAgent(null, agent), t("{{name}} est au registre.", { name: agent.name.trim() }));
@@ -957,7 +968,25 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         run(http.updateAgent(agentId, { enabled }));
         return { ok: true };
       },
-      createImpersonatorTeam: () => later(),
+      createImpersonatorTeam: (names, clues) => {
+        const denied = comexOnly(); if (denied) return denied;
+        const clean = names.map((name) => name.trim()).filter(Boolean);
+        if (clean.length < 2 || clean.length > 12) return { ok: false, reason: t("Une équipe compte entre 2 et 12 personas.") };
+        run(http.createImpersonatorTeam({
+          name: t("Panel d’impersonators"),
+          members: clean.map((name) => ({ name, source: "manual", clues: clues.trim() ? [clues.trim().slice(0, 500)] : [] })),
+        }), t("Le panel de {{count}} personas est créé.", { count: clean.length }));
+        return { ok: true };
+      },
+      enrichAgent: async (id, body) => {
+        const denied = comexOnly(); if (denied) return denied;
+        try {
+          const result = await http.enrichAgent(id, body);
+          await refreshLive();
+          notify(t("Profil ré-enrichi : {{label}}", { label: result.confidence.label }));
+          return { ok: true, result };
+        } catch (error) { return { ok: false, reason: (error as Error).message }; }
+      },
       createCollective: (input) => {
         if (!input.name.trim() || input.agentIds.length < 2) return { ok: false, reason: t("Nommez le collectif et choisissez au moins deux agents actifs.") };
         const promise = http.createSession({

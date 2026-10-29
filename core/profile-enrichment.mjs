@@ -376,7 +376,7 @@ export function buildEnrichedProfile({ assigned_name = null, crystal = null, lin
       const d = descriptifFromDisc(estimate.disc_type);
       parts.push(normalizeHumanProfile({
         disc_type: estimate.disc_type, behavioral_archetype: d?.archetype || null, behavioral_traits: d?.traits || null,
-        descriptif: d ? { ...d, source: 'enriched', overview: `${d.overview} (Estimation depuis le style d’écriture, confiance ${Math.round(estimate.confidence * 100)} %.)` } : null,
+        descriptif: d ? { ...d, source: 'enriched', confidence: estimate.confidence, overview: `${d.overview} (Estimation depuis le style d’écriture, confiance ${Math.round(estimate.confidence * 100)} %.)` } : null,
         consent_confirmed: true,
       }));
       evidence.push({ source: 'estimate', mode: estimate.method, disc_type: estimate.disc_type, confidence: estimate.confidence });

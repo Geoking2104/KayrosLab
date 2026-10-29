@@ -240,3 +240,10 @@ Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'imp
 > Camille's contribution (simulation): opposed — expects a volume/commitment clause, wants a 90-day
 > notice, rejects any change mid-contract; conditions: TCO proof, SLA guarantee, staged rollout.
 > The human then arbitrates the consensus with those conditions attached.
+
+## 9.d Parcours P0 : assistant, voix et confiance
+
+- **Assistant d’import** (console → Agents → Impersonator) en 5 étapes : CrystalKnows (page publique `/p/…`, HTML collé, export JSON privé, ou API v4 avec `CRYSTALKNOWS_API_TOKEN` côté serveur — sinon 503 explicite), export LinkedIn CSV guidé, X (`X_BEARER_TOKEN`, posts collés ou archive `tweets.js`), e-mails (fil collé, découpe sur `---` / `De :` / `From:`, filtre par adresse de l’auteur).
+- **Routes** : `POST /v1/console/personality/enrich` (crystal_export, crystal_api en plus), `POST /v1/console/agents/:agentId/enrich` (ré-enrichissement, manager), `POST /v1/console/personality/speak` (aperçu « ainsi je parlerais », `agent_id` ou `human_profile`), `POST /v1/console/impersonator-teams` (panel).
+- **Voix** : `core/impersonator-voice.mjs` injecte un bloc « VOIX DE LA PERSONA » (registre, longueur, priorités, angles morts, lui écrire) dans le contexte de l’impersonator ; en simulation, si le modèle ne renvoie pas de retour de persona, une réplique déterministe signée « Simulation — » est produite (`persona_voice_fallback`).
+- **Confiance** : `profileConfidence` distingue `crystalknows` (DISC mesuré), `estimate` (style d’écriture, plafonné à 60 %, jamais présenté comme CrystalKnows), `disc_template`, `manual`. Badge visible sur la fiche et la carte agent.

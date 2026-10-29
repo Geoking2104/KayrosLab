@@ -6,8 +6,24 @@ import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui"
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
-import { ProfileEnrich, enrichedClue } from "./profile-enrich";
-import type { EnrichResult } from "@/lib/console/api";
+import { ConfidenceBadge, ProfileEnrich, SpeakPreview, enrichedClue } from "./profile-enrich";
+import type { EnrichResult, PersonaConfidence } from "@/lib/console/api";
+
+/** Provenance du DISC côté client (même règle que le serveur : estimation plafonnée à 60 %). */
+export function agentConfidence(agent: Agent): PersonaConfidence | null {
+  const hp = agent.humanProfile as any;
+  if (!hp) return null;
+  const d = hp.descriptif || {};
+  const sources = (hp.evidence || []).map((e: any) => e.source).filter(Boolean);
+  if (String(hp.source || d.source || "").startsWith("crystalknows") && d.confidence == null) {
+    return { kind: "crystalknows", disc_type: d.disc_type ?? null, archetype: d.archetype ?? null, confidence: null, label: t("Fiche CrystalKnows (DISC mesuré)"), sources };
+  }
+  if (d.disc_type && d.confidence != null) {
+    const c = Math.min(0.6, Number(d.confidence) || 0);
+    return { kind: "estimate", disc_type: d.disc_type, archetype: d.archetype ?? null, confidence: c, label: t("Estimation depuis le style d’écriture (confiance {{pct}} %) — pas une fiche CrystalKnows", { pct: Math.round(c * 100) }), sources };
+  }
+  return { kind: "manual", disc_type: d.disc_type ?? null, archetype: null, confidence: null, label: t("Profil saisi à la main"), sources };
+}
 import { t, tc } from "@/lib/i18n";
 
 function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
@@ -211,6 +227,9 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               {agent.kind === "metier" && agent.brief ? <p className="mt-2 text-sm text-ink-soft">{tc(agent.brief)}</p> : null}
               {agent.consented ? (
                 <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">{t("Simulation étiquetée. Indices : {{clues}}. Pas de décision matérielle.", { clues: tc(agent.clues) || t("saisie manuelle") })}</p>
+              ) : null}
+              {agent.kind === "impersonator" && agentConfidence(agent) ? (
+                <div className="mt-2"><ConfidenceBadge confidence={agentConfidence(agent)!} /></div>
               ) : null}
             </Panel>
           ),
@@ -457,7 +476,9 @@ function Composer({
   const [error, setError] = useState("");
   const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
   const [enriched, setEnriched] = useState<EnrichResult | null>(null);
-  const { live } = useConsole();
+  const { live, enrichAgent, createCollective, state } = useConsole();
+  const [picked, setPicked] = useState<string[]>([]);
+  const impersonators = state.agents.filter((a) => a.kind === "impersonator" && a.enabled);
   const personal = mode !== "metier";
   const gate = mode === "impersonator" && !existing && !link;
 
@@ -480,6 +501,12 @@ function Composer({
       }
       if (!consent || guards.some((item) => !item)) {
         setError(t("Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel."));
+        return;
+      }
+      if (picked.length >= 2) {
+        const result = createCollective({ name: t("Panel d’impersonators"), agentIds: picked, voting: "majority", personality: true });
+        if (!result.ok) setError(result.reason ?? t("Refusé"));
+        else onClose();
         return;
       }
       const result = onTeam(team.split("\n"), source === "disc" ? `DISC ${disc}` : clues);
@@ -556,7 +583,19 @@ function Composer({
           )}>
             <TextArea value={team} onChange={(event) => setTeam(event.target.value)} />
           </Field>
-        ) : (
+        ) : null}
+        {mode === "team" && impersonators.length >= 2 ? (
+          <fieldset className="grid gap-1 text-sm">
+            <legend className="text-xs text-muted">{t("Ou réunissez des impersonators enrichis existants (2 au moins)")}</legend>
+            {impersonators.map((a) => (
+              <label key={a.id} className="flex items-center gap-2">
+                <input type="checkbox" checked={picked.includes(a.id)} onChange={(e) => setPicked((cur) => e.target.checked ? [...cur, a.id] : cur.filter((x) => x !== a.id))} />
+                <span>{tc(a.name)}</span>
+              </label>
+            ))}
+          </fieldset>
+        ) : null}
+        {mode === "team" ? null : (
           <>
             <Field label={t("Nom")}>
               <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} required />
@@ -580,6 +619,22 @@ function Composer({
         )}
         {personal ? (
           <>
+            {mode === "impersonator" && existing && live ? (
+              <>
+                <ProfileEnrich
+                  live={live}
+                  name={name}
+                  agentId={existing.id}
+                  enrich={async (body) => {
+                    const res = await enrichAgent(existing.id, body);
+                    if (!res.ok || !res.result) throw new Error(res.reason ?? t("Refusé"));
+                    return res.result;
+                  }}
+                  onResult={(result) => setClues(enrichedClue(result.profile) || clues)}
+                />
+                <SpeakPreview live={live} agentId={existing.id} />
+              </>
+            ) : null}
             {mode === "impersonator" && link ? (
               <>
                 <LinkedMark source={link.source} url={link.url} onChange={existing ? undefined : () => setLink(null)} />
