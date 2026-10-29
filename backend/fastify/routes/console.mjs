@@ -407,39 +407,72 @@ export async function applyGraphAgents(app, tenantId, graph, node, by) {
 }
 
 // Composition temporaire : les agents ajoutés / exclus par le graphe sont rétablis
-// à la fin de la dernière mission qui les utilise (compteur par session).
-const graphLeases = new Map(); // `${tenant}:${session}` -> { count, added:Set, removed:Set, by }
-const threadLeases = new Map(); // thread_id -> clé de session
-/** Applique la composition du graphe pour une mission (thread pré-attribué) et retient quoi rétablir. */
-export async function acquireGraphAgents(app, tenantId, graph, node, by, threadId) {
-  const key = `${tenantId}:${node.config.session_id}`;
-  const lease = graphLeases.get(key) || { count: 0, added: new Set(), removed: new Set(), tenantId, sessionId: node.config.session_id, by };
-  graphLeases.set(key, lease);
-  lease.count += 1;
-  if (threadId) threadLeases.set(threadId, key);
-  const change = await applyGraphAgents(app, tenantId, graph, node, by);
-  for (const id of change?.added || []) { if (lease.removed.has(id)) lease.removed.delete(id); else lease.added.add(id); }
-  for (const id of change?.removed || []) { if (lease.added.has(id)) lease.added.delete(id); else lease.removed.add(id); }
-  return change;
+// à la fin de la dernière mission qui les utilise. Le bail est persisté (type
+// `graph_leases`, un par session) : un redémarrage ne laisse pas la composition modifiée.
+function leaseLock(tenantId, sessionId, fn) { return withPipelineLock(`lease:${tenantId}:${sessionId}`, fn); }
+async function findLease(ws, tenantId, sessionId) {
+  return (await ws.list(tenantId, 'graph_leases', { session_id: sessionId }))[0] || null;
 }
-/** Fin de mission : rend la session dans sa composition d'origine si plus aucune mission du graphe n'y tourne. */
-export async function releaseGraphAgents(app, threadId) {
-  const key = threadLeases.get(threadId);
-  if (!key) return null;
-  threadLeases.delete(threadId);
-  const lease = graphLeases.get(key);
-  if (!lease) return null;
-  lease.count -= 1;
-  if (lease.count > 0) return null;
-  graphLeases.delete(key);
-  const addAgentIds = [...lease.removed]; const removeAgentIds = [...lease.added];
+/** Applique la composition du graphe pour une mission (fil pré-attribué) et retient quoi rétablir. */
+export async function acquireGraphAgents(app, tenantId, graph, node, by, threadId) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const sessionId = node.config.session_id;
+  return leaseLock(tenantId, sessionId, async () => {
+    const change = await applyGraphAgents(app, tenantId, graph, node, by);
+    const lease = await findLease(ws, tenantId, sessionId) || await ws.create(tenantId, 'graph_leases', { session_id: sessionId, threads: [], added: [], removed: [] }, { by });
+    const added = new Set(lease.added); const removed = new Set(lease.removed);
+    for (const id of change?.added || []) { if (removed.has(id)) removed.delete(id); else added.add(id); }
+    for (const id of change?.removed || []) { if (added.has(id)) added.delete(id); else removed.add(id); }
+    const threads = [...new Set([...(lease.threads || []), threadId].filter(Boolean))];
+    await ws.update(tenantId, 'graph_leases', lease.id, { threads, added: [...added], removed: [...removed] });
+    return change;
+  });
+}
+async function restoreLease(app, tenantId, lease) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  await ws.remove(tenantId, 'graph_leases', lease.id);
+  const addAgentIds = lease.removed || []; const removeAgentIds = lease.added || [];
   if (!addAgentIds.length && !removeAgentIds.length) return { restored: [], removed: [] };
   const gateway = app.kayrosContext.hybridGateway;
   try {
-    const room = await gateway.getRoom(lease.sessionId, { tenantId: lease.tenantId });
-    if (room) await gateway.updateRoomAgents(room.room_id, { addAgentIds, removeAgentIds, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId: lease.tenantId, by: lease.by });
+    const room = await gateway.getRoom(lease.session_id, { tenantId });
+    if (room) await gateway.updateRoomAgents(room.room_id, { addAgentIds, removeAgentIds, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId, by: lease.created_by });
   } catch (error) { app.log?.warn?.({ err: error?.message }, 'rétablissement de la composition du collectif'); }
   return { restored: addAgentIds, removed: removeAgentIds };
+}
+/** Fin de mission : rend la session dans sa composition d'origine si plus aucune mission du graphe n'y tourne. */
+export async function releaseGraphAgents(app, threadId, tenantHint = null) {
+  if (!threadId) return null;
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const found = await ws.findAcross('graph_leases', (l) => (l.threads || []).includes(threadId));
+  if (!found || (tenantHint && found.tenantId !== tenantHint)) return null;
+  return leaseLock(found.tenantId, found.item.session_id, async () => {
+    const lease = await ws.get(found.tenantId, 'graph_leases', found.item.id);
+    if (!lease) return null;
+    const threads = (lease.threads || []).filter((t) => t !== threadId);
+    if (threads.length) { await ws.update(found.tenantId, 'graph_leases', lease.id, { threads }); return null; }
+    return restoreLease(app, found.tenantId, lease);
+  });
+}
+/** Démarrage : les baux dont plus aucune mission ne tourne (redémarrage en cours de mission) sont rétablis. */
+export async function recoverGraphLeases(app) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const gateway = app.kayrosContext.hybridGateway;
+  const out = [];
+  for (const { tenantId, item } of await ws.listAcross('graph_leases')) {
+    await leaseLock(tenantId, item.session_id, async () => {
+      const lease = await ws.get(tenantId, 'graph_leases', item.id);
+      if (!lease) return;
+      const alive = [];
+      for (const id of lease.threads || []) {
+        // Une mission vivante a une tâche dans ce processus (reprise comprise) ; sinon elle a été interrompue.
+        if (gateway.jobs?.has?.(String(id))) alive.push(id);
+      }
+      if (alive.length) { await ws.update(tenantId, 'graph_leases', lease.id, { threads: alive }); return; }
+      out.push({ tenantId, session_id: lease.session_id, ...await restoreLease(app, tenantId, lease) });
+    });
+  }
+  return out;
 }
 
 async function savePipeline(app, tenantId, pipeline) {
@@ -507,7 +540,13 @@ export async function advancePipelines(app, kind, thread) {
     const project = await ws.get(tenantId, 'projects', pipeline.project_id);
     const outcome = stepOutcome(project?.graph, step.node_id, thread);
     Object.assign(step, { verdict: outcome.verdict, rationale: outcome.rationale, gates: outcome.results });
-    if (outcome.status === 'blocked') step.status = 'blocked';
+    if (outcome.status === 'blocked') {
+      step.status = 'blocked';
+      // Les branches sœurs en cours sont suspendues : leur résultat sera ignoré et elles repartiront à la levée de la porte.
+      for (const other of pipeline.steps.filter((x) => x.status === 'running')) {
+        Object.assign(other, { status: 'halted', halted: { by_gate_of: step.node_id, thread_id: other.thread_id, at } });
+      }
+    }
     else if (pipeline.steps.some((x) => (x.deps || []).includes(step.node_id)) && needsApproval(project?.graph, step.node_id, pipeline)) step.status = 'awaiting_approval';
     else step.status = 'completed';
     if (pipeline.status === 'cancelled') return savePipeline(app, tenantId, settle(pipeline));
@@ -533,6 +572,10 @@ export default async function consoleRoute(app) {
     };
     gateway.gatesWrapped = true;
   }
+  // Reprise : composition des collectifs rétablie si le serveur a redémarré en cours de mission.
+  app.addHook('onReady', async () => {
+    try { const restored = await recoverGraphLeases(app); if (restored.length) app.log?.info?.({ restored }, 'composition des collectifs rétablie'); } catch (error) { app.log?.warn?.({ err: error?.message }, 'reprise des baux de composition'); }
+  });
   // --- Vue d'ensemble du harness -----------------------------------------
   app.get('/v1/console/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
@@ -939,6 +982,8 @@ export default async function consoleRoute(app) {
       if (pipeline.status === 'cancelled' || !blocked.length) return { code: 409, body: { error: 'aucune porte bloquée sur cet enchaînement', code: 'not_blocked' } };
       const at = new Date().toISOString();
       for (const step of blocked) Object.assign(step, { status: 'overridden', override: { by: me.email, justification, at } });
+      // Branches suspendues par le blocage : relancées depuis le début.
+      for (const step of pipeline.steps.filter((x) => x.status === 'halted')) Object.assign(step, { status: 'pending', thread_id: null, run_id: null, verdict: null, rationale: null, gates: [] });
       return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
     });
     return reply.code(result.code).send(result.body);
@@ -951,8 +996,10 @@ export default async function consoleRoute(app) {
     const result = await withPipelineLock(req.params.pipelineId, async () => {
       const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
       if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
-      const waiting = pipeline.steps.filter((s) => s.status === 'awaiting_approval');
-      if (pipeline.status === 'cancelled' || !waiting.length) return { code: 409, body: { error: 'aucune étape en attente de validation', code: 'not_awaiting' } };
+      // Validation branche par branche (`node_id`), ou de toutes les étapes en attente sans `node_id`.
+      const nodeId = req.body?.node_id ? String(req.body.node_id) : null;
+      const waiting = pipeline.steps.filter((s) => s.status === 'awaiting_approval' && (!nodeId || s.node_id === nodeId));
+      if (pipeline.status === 'cancelled' || !waiting.length) return { code: 409, body: { error: nodeId ? 'cette étape n’attend pas de validation' : 'aucune étape en attente de validation', code: 'not_awaiting' } };
       const at = new Date().toISOString();
       for (const step of waiting) Object.assign(step, { status: 'approved', approval: { by: me.email, comment: comment || null, at } });
       return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
@@ -965,7 +1012,10 @@ export default async function consoleRoute(app) {
     const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
     if (!pipeline) return reply.code(404).send({ error: 'enchaînement introuvable' });
     if (['completed', 'failed', 'cancelled'].includes(pipeline.status)) return { pipeline };
-    return { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: new Date().toISOString(), cancelled_by: me.email }) };
+    const at = new Date().toISOString();
+    // Les missions en cours sont détachées : leur résultat ne sera pas pris en compte.
+    for (const step of pipeline.steps.filter((x) => x.status === 'running')) Object.assign(step, { status: 'halted', halted: { by_cancel: me.email, thread_id: step.thread_id, at } });
+    return { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: at, cancelled_by: me.email }) };
   });
 
   // --- Journal d'exécution du harness ------------------------------------

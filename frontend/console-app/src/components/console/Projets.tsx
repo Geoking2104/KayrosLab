@@ -157,12 +157,12 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
 const STEP: Record<PipelineStepStatus, () => string> = {
   pending: () => t("en attente"), running: () => t("en cours"), completed: () => t("terminé"),
   blocked: () => t("porte bloquée"), overridden: () => t("porte levée"), failed: () => t("échec"),
-  awaiting_approval: () => t("validation attendue"), approved: () => t("validé"),
+  awaiting_approval: () => t("validation attendue"), approved: () => t("validé"), halted: () => t("suspendu"),
 };
 const STEP_TONE: Record<PipelineStepStatus, string> = {
   pending: "bg-paper text-muted", running: "bg-accent-soft text-accent", completed: "bg-go-soft text-go",
   blocked: "bg-stop-soft text-stop", overridden: "bg-hold-soft text-hold", failed: "bg-stop-soft text-stop",
-  awaiting_approval: "bg-hold-soft text-hold", approved: "bg-go-soft text-go",
+  awaiting_approval: "bg-hold-soft text-hold", approved: "bg-go-soft text-go", halted: "bg-paper text-muted line-through",
 };
 
 /** Niveaux d’exécution : les étapes d’un même niveau tournent en parallèle, le niveau suivant est la jonction. */
@@ -248,11 +248,19 @@ function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; ca
                   <Button variant="secondary" disabled={reason.trim().length < 3} onClick={() => void act(async () => { await api.resumePipeline(p.id, reason); setReason(""); })}>{t("Lever la porte et continuer")}</Button>
                 </div>
               ) : null}
-              {p.status === "awaiting_approval" && canArbitrate ? (
-                <div className="mt-2 flex flex-wrap gap-2">
+              {canArbitrate && p.status !== "cancelled" && p.steps.some((s) => s.status === "awaiting_approval") ? (
+                <div className="mt-2 flex flex-wrap gap-2" data-testid="approvals">
                   <input aria-label={t("Commentaire de validation")} className={`${controlClass} min-w-56 flex-1`} value={comment} onChange={(e) => setComment(e.target.value)} placeholder={t("Commentaire (facultatif)")} />
-                  <Button variant="secondary" onClick={() => void act(async () => { await api.approvePipeline(p.id, comment); setComment(""); })}>{t("Valider et continuer")}</Button>
+                  {/* Une validation par branche : les autres branches restent en attente. */}
+                  {p.steps.filter((s) => s.status === "awaiting_approval").map((s, _i, waiting) => (
+                    <Button key={s.node_id} variant="secondary" onClick={() => void act(async () => { await api.approvePipeline(p.id, s.node_id, comment); setComment(""); })}>
+                      {waiting.length > 1 ? t("Valider « {{label}} » et continuer", { label: tc(s.label || s.session_id) }) : t("Valider et continuer")}
+                    </Button>
+                  ))}
                 </div>
+              ) : null}
+              {p.status === "blocked" && p.steps.some((s) => s.status === "halted") ? (
+                <p className="mt-1 text-xs text-muted">{t("Les branches en cours ont été suspendues par la porte bloquée ; elles repartiront à sa levée.")}</p>
               ) : null}
               {["running", "blocked", "awaiting_approval"].includes(p.status) && canRun ? (
                 <Button variant="ghost" className="mt-1" onClick={() => void act(() => api.cancelPipeline(p.id))}>{t("Arrêter l’enchaînement")}</Button>

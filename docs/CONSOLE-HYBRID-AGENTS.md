@@ -147,17 +147,20 @@ Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la con
 - **Branches parallèles et jonction** : les étapes dont toutes les dépendances sont terminées démarrent ensemble. Une étape à plusieurs dépendances est une jonction : son contexte contient les verdicts de toutes ses branches amont.
 - À la fin de chaque mission (`completed`), les **portes de sortie** de l'étape sont évaluées sur les avis : ce sont les portes atteintes sans traverser un autre collectif.
   - Si elles passent, les étapes devenues prêtes démarrent.
-  - Si une porte bloque, l'étape passe à `blocked` et aucune nouvelle étape ne démarre (les branches déjà en cours terminent). Un comex ou un admin lève les portes bloquées avec `POST /v1/console/pipelines/:id/resume {justification}`.
-- **Pause d'arbitrage** : avec `pause_between: true`, ou sur une porte avec `config.pause: true`, une étape dont les portes passent et qui a des étapes en aval passe à `awaiting_approval`. Rien ne démarre avant `POST /v1/console/pipelines/:id/approve {comment?}` (rôle *arbitrate*), qui valide toutes les étapes en attente (`approved`).
+  - Si une porte bloque, l'étape passe à `blocked` et aucune nouvelle étape ne démarre. Les branches sœurs en cours passent à `halted` : leur résultat est ignoré.
+  - Un comex ou un admin lève les portes bloquées avec `POST /v1/console/pipelines/:id/resume {justification}`. Les branches `halted` repartent alors depuis le début, sur un nouveau fil.
+  - Limite : la mission LLM d'une branche suspendue n'est pas interrompue (pas d'annulation dans la passerelle). Elle va à son terme sans effet sur l'enchaînement.
+- **Pause d'arbitrage** : avec `pause_between: true`, ou sur une porte avec `config.pause: true`, une étape dont les portes passent et qui a des étapes en aval passe à `awaiting_approval`. Rien ne démarre avant `POST /v1/console/pipelines/:id/approve {comment?}` (rôle *arbitrate*), qui valide l'étape `node_id` (branche par branche) ou, sans `node_id`, toutes les étapes en attente (`approved`).
+  - Une étape en attente ne retient que ses descendants : les autres branches continuent.
 - Statut global : `blocked` > `awaiting_approval` > `failed` > `completed` > `running`. Une mission en échec met l'enchaînement à `failed`.
-- `POST /pipelines/:id/cancel` arrête l'enchaînement.
+- `POST /pipelines/:id/cancel` arrête l'enchaînement. Les étapes en cours passent à `halted` et leur résultat est ignoré.
 - Les routes de lecture sont `GET /projects/:id/pipelines` et `GET /pipelines/:id`.
 
 ### Nœuds agent
 - Un nœud **agent** (`config.agent_id`) relié à un collectif (dans un sens ou dans l'autre) est **ajouté à la session** de ce collectif avant chaque mission, qu'elle soit lancée par un enchaînement ou directement sur la session.
 - Avec `config.exclude: true`, l'agent est retiré de la session.
 - **Composition temporaire** : à la fin de la mission (`completed` ou `failed`), les agents ajoutés sont retirés et les agents exclus sont rétablis. Un compteur par session évite qu'une mission en cours perde ses agents quand une autre se termine.
-- Limite : ce compteur est en mémoire. Un redémarrage pendant une mission laisse la composition modifiée.
+- Le bail est **persisté** dans l'espace de travail (type `graph_leases`, un par session : fils en cours, agents ajoutés et retirés). Au démarrage du serveur, les baux dont aucune mission ne tourne plus dans le processus sont rétablis.
 - La modification passe par `updateRoomAgents` et respecte la limite d'agents construits.
 
 ### Rôle lecteur hors console

@@ -112,7 +112,8 @@ export function pipelineStatus(pipeline) {
 
 /** Étapes prêtes : en attente, toutes leurs dépendances terminées, et rien ne bloque l'enchaînement. */
 export function readySteps(pipeline) {
-  if (['cancelled', 'blocked', 'awaiting_approval', 'failed'].includes(pipelineStatus(pipeline))) return [];
+  // Une étape en attente de validation ne retient que ses propres descendants (validation branche par branche).
+  if (['cancelled', 'blocked', 'failed'].includes(pipelineStatus(pipeline))) return [];
   const byNode = new Map(pipeline.steps.map((s) => [s.node_id, s]));
   return pipeline.steps.filter((s) => s.status === 'pending' && (s.deps || []).every((d) => STEP_DONE.has(byNode.get(d)?.status)));
 }

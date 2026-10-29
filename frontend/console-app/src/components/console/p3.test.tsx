@@ -38,6 +38,7 @@ function mockApi() {
     if (path === "/v1/console/members/invite") { const b = JSON.parse(String(init?.body)); const m = { id: "mbr_9", ...b, status: "invited", invite_status: MAIL.smtp ? "sent" : "queued" }; MEMBERS.push(m); return json({ item: m, delivery: { status: m.invite_status, error: "" } }, 201); }
     if (path === "/v1/console/projects/prj_1/pipelines" && method === "POST") { PIPES.unshift({ id: "ppl_1", project_id: "prj_1", question: JSON.parse(String(init?.body)).question, status: "blocked", current: 0, created_at: "2026-10-29T10:00:00Z", steps: [{ node_id: "c", label: "Finance", session_id: "room_1", status: "blocked", thread_id: "t1", verdict: "CONDITIONAL_GO", gates: [{ gate_id: "p", label: "", status: "blocked", reasons: ["majorité non atteinte"] }] }, { node_id: "c2", label: "Juridique", session_id: "room_1", status: "pending", thread_id: null, verdict: null }] }); return json({ pipeline: PIPES[0] }, 202); }
     if (path === "/v1/console/projects/prj_1/pipelines") return json({ pipelines: PIPES });
+    if (path === "/v1/console/pipelines/ppl_2/approve") { const nodeId = JSON.parse(String(init?.body)).node_id; const st = PIPES[0].steps.find((s: any) => s.node_id === nodeId); st.status = "approved"; if (!PIPES[0].steps.some((s: any) => s.status === "awaiting_approval")) PIPES[0].status = "running"; return json({ pipeline: PIPES[0] }); }
     if (path === "/v1/console/pipelines/ppl_1/resume") { PIPES[0].status = "completed"; PIPES[0].steps[0].status = "overridden"; PIPES[0].steps[1].status = "completed"; return json({ pipeline: PIPES[0] }); }
     if (path === "/v1/console/mail/status") return json({ smtp: MAIL.smtp, from: null });
     if (path === "/v1/console/projects/prj_1/notifications/retry") { NOTIFS.forEach((n) => { n.status = "sent"; }); return json({ notifications: NOTIFS }); }
@@ -249,6 +250,33 @@ describe("suite P3 : portes, rôles, invitations, glisser-déposer", () => {
     fireEvent.click(screen.getByRole("button", { name: "Lever la porte et continuer" }));
     await waitFor(() => expect(screen.getByTestId("pipelines").textContent).toContain("porte levée"));
     expect(calls.find((c) => c.url.endsWith("/resume"))!.body).toEqual({ justification: "Risque accepté" });
+  });
+
+  it("« Valider et continuer » valide une branche à la fois", async () => {
+    PROJECT.graph = { nodes: [{ id: "a", type: "collectif", label: "Finance", config: { session_id: "room_1" } }, { id: "b", type: "collectif", label: "Tech", config: { session_id: "room_1" } }], edges: [] };
+    PIPES.push({ id: "ppl_2", project_id: "prj_1", question: "Signer ?", status: "awaiting_approval", current: -1, created_at: "2026-10-29T10:00:00Z", steps: [
+      { node_id: "a", label: "Finance", session_id: "room_1", deps: [], status: "awaiting_approval", thread_id: "t1", verdict: "GO" },
+      { node_id: "b", label: "Tech", session_id: "room_1", deps: [], status: "awaiting_approval", thread_id: "t2", verdict: "GO" },
+      { node_id: "j", label: "Juridique", session_id: "room_1", deps: ["a", "b"], status: "pending", thread_id: null, verdict: null }] });
+    live("projets");
+    expect((await screen.findByTestId("pipelines")).querySelectorAll('[data-testid="parallel-group"]').length).toBe(1);
+    fireEvent.change(screen.getByLabelText("Commentaire de validation"), { target: { value: "OK finance" } });
+    fireEvent.click(screen.getByRole("button", { name: "Valider « Finance » et continuer" }));
+    await waitFor(() => expect(calls.some((c) => c.url.endsWith("/ppl_2/approve"))).toBe(true));
+    expect(calls.find((c) => c.url.endsWith("/ppl_2/approve"))!.body).toEqual({ node_id: "a", comment: "OK finance" });
+    // Il reste une seule branche en attente : bouton « Valider et continuer ».
+    fireEvent.click(await screen.findByRole("button", { name: "Valider et continuer" }));
+    await waitFor(() => expect(calls.filter((c) => c.url.endsWith("/ppl_2/approve")).length).toBe(2));
+    expect(calls.filter((c) => c.url.endsWith("/ppl_2/approve"))[1].body).toEqual({ node_id: "b", comment: "" });
+    await waitFor(() => expect(screen.queryByTestId("approvals")).toBeNull());
+  });
+
+  it("un lecteur ne voit pas « Valider et continuer »", async () => {
+    ME_ROLE.value = "lecteur";
+    PIPES.push({ id: "ppl_2", project_id: "prj_1", question: "Signer ?", status: "awaiting_approval", current: -1, steps: [{ node_id: "a", label: "Finance", session_id: "room_1", deps: [], status: "awaiting_approval", thread_id: "t1", verdict: "GO" }] });
+    live("projets");
+    await screen.findByTestId("pipelines");
+    expect(screen.queryByRole("button", { name: "Valider et continuer" })).toBeNull();
   });
 
   it("le membre de démo choisi est conservé", async () => {

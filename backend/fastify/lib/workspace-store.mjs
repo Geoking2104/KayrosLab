@@ -4,8 +4,8 @@
 import { promises as fs } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 
-export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts', 'members', 'notifications', 'pipelines'];
-const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx', members: 'mbr', notifications: 'ntf', pipelines: 'ppl' };
+export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts', 'members', 'notifications', 'pipelines', 'graph_leases'];
+const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx', members: 'mbr', notifications: 'ntf', pipelines: 'ppl', graph_leases: 'gls' };
 
 export class WorkspaceStore {
   constructor({ file = 'memory' } = {}) {
@@ -70,6 +70,11 @@ export class WorkspaceStore {
       if (found) return { tenantId, item: structuredClone(found) };
     }
     return null;
+  }
+  /** Tous les objets d'un type, tous tenants confondus (reprise au démarrage). */
+  async listAcross(kind) {
+    const data = await this._load();
+    return Object.entries(data).flatMap(([tenantId, buckets]) => (buckets?.[kind] || []).map((item) => ({ tenantId, item: structuredClone(item) })));
   }
   async remove(tenantId, kind, id) {
     const items = await this._bucket(tenantId, kind);

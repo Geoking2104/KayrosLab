@@ -192,12 +192,12 @@ export function fromApiThread(t: any): Thread {
 }
 
 /** Enchaînement de collectifs le long du graphe d'un projet. */
-export type PipelineStepStatus = "pending" | "running" | "completed" | "blocked" | "overridden" | "failed" | "awaiting_approval" | "approved";
+export type PipelineStepStatus = "pending" | "running" | "completed" | "blocked" | "overridden" | "failed" | "awaiting_approval" | "approved" | "halted";
 export type PipelineStep = {
   node_id: string; label: string; session_id: string; deps?: string[]; status: PipelineStepStatus; thread_id: string | null; verdict: string | null;
   gates?: { gate_id: string; label: string; status: string; reasons: string[] }[];
   agents?: { added: string[]; removed: string[]; error: string | null } | null;
-  override?: { by: string; justification: string; at: string }; approval?: { by: string; comment: string | null; at: string }; error?: string | null;
+  override?: { by: string; justification: string; at: string }; approval?: { by: string; comment: string | null; at: string }; halted?: { by_gate_of?: string; by_cancel?: string; thread_id: string | null; at: string }; error?: string | null;
 };
 export type Pipeline = {
   id: string; project_id: string; question: string; status: "running" | "blocked" | "awaiting_approval" | "completed" | "failed" | "cancelled";

@@ -1009,5 +1009,8 @@
   "Branches parallèles": "Parallel branches",
   "Commentaire de validation": "Approval comment",
   "Commentaire (facultatif)": "Comment (optional)",
-  "Valider et continuer": "Approve and continue"
+  "Valider et continuer": "Approve and continue",
+  "suspendu": "halted",
+  "Valider « {{label}} » et continuer": "Approve “{{label}}” and continue",
+  "Les branches en cours ont été suspendues par la porte bloquée ; elles repartiront à sa levée.": "Running branches were halted by the blocked gate; they will restart once it is lifted."
 }

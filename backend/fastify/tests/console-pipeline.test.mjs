@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
-import consoleRoute from '../routes/console.mjs';
+import consoleRoute, { acquireGraphAgents, advancePipelines, recoverGraphLeases } from '../routes/console.mjs';
 import consoleWorkspaceRoute from '../routes/console-workspace.mjs';
 import authRoutes from '../routes/auth-routes.mjs';
 import publicApiRoutes from '../routes/public-api.mjs';
@@ -292,4 +292,75 @@ test('chat : un compte non lié est lecteur par défaut, ouverture explicite par
   await assert.rejects(startChatMission(ctx, { platform: 'slack', channelId: 'C1', userId: 'slack:UANON', text: 'question ?' }), (e) => e.code === 'NOT_LINKED', 'admin/comex jamais accordés à un compte non lié');
   process.env.KAYROS_CHAT_UNLINKED_ROLE = 'contributeur';
   await assert.rejects(startChatMission(ctx, { platform: 'slack', channelId: 'C1', userId: 'slack:UANON', text: 'question ?' }).then(() => { throw Object.assign(new Error('ok'), { code: 'OK' }); }), (e) => e.code !== 'NOT_LINKED');
+});
+
+test('validation branche par branche : valider une branche ne valide pas l’autre', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const project = await parallelProject(app);
+  const id = (await app.inject({ method: 'POST', url: `/v1/console/projects/${project.id}/pipelines`, payload: { question: 'Faut-il signer le contrat Helia ?', profile: 'demo', pause_between: true } })).json().pipeline.id;
+  await waitPipeline(app, id, (p) => p.steps.filter((s) => s.status === 'awaiting_approval').length === 2);
+  const one = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: { node_id: 'a' } });
+  assert.equal(one.statusCode, 200, one.body);
+  const st = Object.fromEntries(one.json().pipeline.steps.map((s) => [s.node_id, s.status]));
+  assert.deepEqual(st, { a: 'approved', b: 'awaiting_approval', j: 'pending' }, 'la jonction attend encore la branche b');
+  assert.equal((await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: { node_id: 'a' } })).statusCode, 409);
+  assert.equal((await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: { node_id: 'b' } })).statusCode, 200);
+  const done = await waitPipeline(app, id);
+  assert.equal(done.status, 'completed', JSON.stringify(done));
+});
+
+test('porte bloquée sur une branche : la branche sœur en cours est suspendue puis relancée à la levée', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const ws = app.kayrosContext.workspaceStore;
+  const s1 = await session(app, 'Finance', ['cfo']);
+  const s2 = await session(app, 'Tech', ['cto']);
+  const s3 = await session(app, 'Juridique', ['legal_counsel']);
+  const graph = {
+    nodes: [{ id: 'a', type: 'collectif', label: 'Finance', config: { session_id: s1 } }, { id: 'b', type: 'collectif', label: 'Tech', config: { session_id: s2 } },
+      { id: 'pa', type: 'porte', config: { min_go: 50, strict: true } }, { id: 'j', type: 'collectif', label: 'Juridique', config: { session_id: s3 } }],
+    edges: [{ from: 'a', to: 'pa' }, { from: 'pa', to: 'j' }, { from: 'b', to: 'j' }],
+  };
+  const project = await ws.create('tenant-a', 'projects', { name: 'Helia', graph });
+  const pipeline = await ws.create('tenant-a', 'pipelines', {
+    project_id: project.id, question: 'Signer ?', profile: 'demo', status: 'running', created_sub: 'u1',
+    steps: [
+      { node_id: 'a', label: 'Finance', session_id: s1, deps: [], status: 'running', thread_id: 'thr_a' },
+      { node_id: 'b', label: 'Tech', session_id: s2, deps: [], status: 'running', thread_id: 'thr_b' },
+      { node_id: 'j', label: 'Juridique', session_id: s3, deps: ['a', 'b'], status: 'pending', thread_id: null },
+    ],
+  }, { by: 'owner@kayros.test' });
+  const noGo = { messages: [{ run: { analyses: [{ agent_id: 'cfo', verdict: 'NO_GO' }], consensus: { verdict: 'NO_GO', rationale: 'non' } } }] };
+  const blocked = await advancePipelines(app, 'completed', { thread_id: 'thr_a', tenant_id: 'tenant-a', ...noGo });
+  assert.equal(blocked.status, 'blocked');
+  const b = blocked.steps.find((s) => s.node_id === 'b');
+  assert.equal(b.status, 'halted');
+  assert.equal(b.halted.by_gate_of, 'a');
+  // Le résultat tardif de la branche suspendue est ignoré.
+  assert.equal(await advancePipelines(app, 'completed', { thread_id: 'thr_b', tenant_id: 'tenant-a', messages: [] }), null);
+  const resumed = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${pipeline.id}/resume`, payload: { justification: 'Risque accepté' } });
+  assert.equal(resumed.statusCode, 200, resumed.body);
+  const rb = resumed.json().pipeline.steps.find((s) => s.node_id === 'b');
+  assert.equal(rb.status, 'running', 'la branche suspendue repart');
+  assert.notEqual(rb.thread_id, 'thr_b');
+  const done = await waitPipeline(app, pipeline.id);
+  assert.equal(done.status, 'completed', JSON.stringify(done));
+});
+
+test('composition du graphe : bail persisté, rétabli au redémarrage si la mission a été interrompue', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const s1 = await session(app, 'Finance', ['cfo', 'cto']);
+  const graph = { nodes: [{ id: 'c', type: 'collectif', config: { session_id: s1 } }, { id: 'ag', type: 'agent', config: { agent_id: 'planner' } }, { id: 'x', type: 'agent', config: { agent_id: 'cto', exclude: true } }], edges: [{ from: 'ag', to: 'c' }, { from: 'x', to: 'c' }] };
+  await acquireGraphAgents(app, 'tenant-a', graph, graph.nodes[0], 'owner@kayros.test', 'thr_lost');
+  const leases = await app.kayrosContext.workspaceStore.list('tenant-a', 'graph_leases');
+  assert.deepEqual({ threads: leases[0].threads, added: leases[0].added, removed: leases[0].removed }, { threads: ['thr_lost'], added: ['planner'], removed: ['cto'] });
+  const active = async () => (await app.inject({ url: `/v1/console/sessions/${s1}` })).json().session.collective.active_agents;
+  assert.ok((await active()).includes('planner'));
+  // Simule un redémarrage : aucune tâche vivante pour thr_lost.
+  const restored = await recoverGraphLeases(app);
+  assert.equal(restored.length, 1);
+  assert.deepEqual([...await active()].sort(), ['cfo', 'cto']);
+  assert.equal((await app.kayrosContext.workspaceStore.list('tenant-a', 'graph_leases')).length, 0);
 });
