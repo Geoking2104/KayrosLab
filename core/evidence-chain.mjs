@@ -16,7 +16,7 @@
 // CWT/CBOR. La complétude n'est pas garantie : seuls les événements passés
 // par le sink sont prouvés (comme le niveau 3 du standard).
 
-import { createHash, createPrivateKey, createPublicKey, generateKeyPairSync, sign, verify } from 'node:crypto';
+import { createHash, createPrivateKey, createPublicKey, generateKeyPairSync, randomBytes, sign, verify } from 'node:crypto';
 
 export const EVIDENCE_FORMAT = 'kayros-evidence/0.1';
 export const GENESIS_HASH = '0'.repeat(64);
@@ -94,7 +94,10 @@ function sealEnvelope({ chain, seq, prev, payload, signer, ts }) {
  * @param {Function} [opts.now]         horloge injectable
  * @param {Function} [opts.onCheckpoint] reçoit la tête de chaîne tous les `checkpointEvery` événements, pour ancrage externe
  */
-export function createSignedChainSink({ inner, signer, now = () => new Date().toISOString(), checkpointEvery = 0, onCheckpoint = null } = {}) {
+export function createSignedChainSink({
+  inner, signer, now = () => new Date().toISOString(), checkpointEvery = 0, onCheckpoint = null,
+  defaultChain = null, loadHead = null,
+} = {}) {
   if (!signer || typeof signer.sign !== 'function') throw new Error('evidence-chain: signer requis');
   const target = typeof inner === 'function' ? { append: inner } : inner;
   if (!target || typeof target.append !== 'function') throw new Error('evidence-chain: sink cible requis');
@@ -102,14 +105,31 @@ export function createSignedChainSink({ inner, signer, now = () => new Date().to
   let queue = Promise.resolve();
   const stats = { sealed: 0, failures: 0 };
 
-  const chainOf = (entry) => String(entry?.runId ?? entry?.run_id ?? 'default');
+  // Un événement sans runId (essaim, passerelle) rejoint la chaîne de la
+  // session : un nom unique par démarrage évite qu'un redémarrage reparte de
+  // seq 0 dans un fichier déjà commencé.
+  const sessionChain = String(defaultChain || `session-${now().replace(/[^0-9]/g, '').slice(0, 14)}-${randomBytes(3).toString('hex')}`);
+  const chainOf = (entry) => String(entry?.runId ?? entry?.run_id ?? sessionChain);
+
+  // Reprise d'une chaîne existante (ex. fichier JSONL après redémarrage).
+  const headOf = async (chain) => {
+    if (heads.has(chain)) return heads.get(chain);
+    let head = { seq: -1, hash: GENESIS_HASH };
+    if (typeof loadHead === 'function') {
+      const last = await loadHead(chain);
+      if (last && Number.isInteger(last.seq) && typeof last.hash === 'string') head = { seq: last.seq, hash: last.hash };
+    }
+    heads.set(chain, head);
+    return head;
+  };
 
   const sealOne = async (entry) => {
     const chain = chainOf(entry);
-    const head = heads.get(chain) || { seq: -1, hash: GENESIS_HASH };
+    const head = await headOf(chain);
     const envelope = sealEnvelope({ chain, seq: head.seq + 1, prev: head.hash, payload: entry, signer, ts: now() });
-    // runId recopié à la racine : le sink JSONL range le fichier par runId.
-    await target.append({ ...envelope, runId: entry?.runId ?? entry?.run_id });
+    // Nom de chaîne recopié en runId à la racine : le sink JSONL range un
+    // fichier par chaîne, donc une chaîne = un fichier vérifiable seul.
+    await target.append({ ...envelope, runId: chain });
     heads.set(chain, { seq: envelope.seq, hash: envelope.hash });
     stats.sealed += 1;
     if (checkpointEvery > 0 && onCheckpoint && (envelope.seq + 1) % checkpointEvery === 0) {
@@ -118,7 +138,7 @@ export function createSignedChainSink({ inner, signer, now = () => new Date().to
     return envelope;
   };
 
-  const checkpointOf = (chain = 'default') => {
+  const checkpointOf = (chain = sessionChain) => {
     const head = heads.get(String(chain));
     if (!head) return null;
     const body = { v: EVIDENCE_FORMAT, type: 'checkpoint', chain: String(chain), seq: head.seq, head: head.hash, kid: signer.kid, ts: now() };
@@ -140,6 +160,9 @@ export function createSignedChainSink({ inner, signer, now = () => new Date().to
     async flush() { await queue; return typeof target.flush === 'function' ? target.flush() : true; },
     /** Tête de chaîne signée, à publier hors du système (dépôt, horodatage...). */
     checkpoint: checkpointOf,
+    /** Têtes signées de toutes les chaînes ouvertes depuis le démarrage. */
+    checkpoints() { return [...heads.keys()].filter((c) => heads.get(c).seq >= 0).map((c) => checkpointOf(c)); },
+    sessionChain,
     /** Adaptateur pour les auditSink synchrones (SwarmService, HybridAgentGateway). */
     asAuditFunction() {
       return (entry) => { this.append(entry).catch(() => {}); };
@@ -162,7 +185,7 @@ function parseLines(input) {
  * @param {string|string[]} opts.publicKeys  clé(s) publique(s) PEM acceptées
  * @param {object} [opts.checkpoint]  tête attendue (ancrée hors système) : détecte une troncature
  */
-export function verifyEvidenceChain(input, { publicKeys, checkpoint = null } = {}) {
+export function verifyEvidenceChain(input, { publicKeys, checkpoint = null, anchors = [] } = {}) {
   const keys = new Map();
   for (const pem of [].concat(publicKeys || [])) keys.set(keyIdOf(pem), createPublicKey(pem));
   if (!keys.size) throw new Error('evidence-chain: au moins une clé publique requise');
@@ -171,6 +194,8 @@ export function verifyEvidenceChain(input, { publicKeys, checkpoint = null } = {
   const heads = new Map();
   let records;
   let atCheckpoint = null;
+  const anchorList = [].concat(anchors || []).filter((a) => a && a.chain != null);
+  const seenAt = new Map(); // `${chain}#${seq}` -> hash, pour les ancres
   try { records = parseLines(input); } catch (e) {
     return { ok: false, count: 0, chains: {}, errors: [{ line: null, reason: `JSON illisible: ${e.message}` }] };
   }
@@ -193,6 +218,7 @@ export function verifyEvidenceChain(input, { publicKeys, checkpoint = null } = {
     if (envelope.prev !== head.hash) return fail('chaînage rompu (prev)');
     heads.set(envelope.chain, { seq: envelope.seq, hash: envelope.hash });
     if (checkpoint && envelope.chain === checkpoint.chain && envelope.seq === checkpoint.seq) atCheckpoint = envelope.hash;
+    if (anchorList.length) seenAt.set(`${envelope.chain}#${envelope.seq}`, envelope.hash);
   });
 
   if (checkpoint) {
@@ -204,6 +230,15 @@ export function verifyEvidenceChain(input, { publicKeys, checkpoint = null } = {
     if (!cpOk) errors.push({ line: null, chain: checkpoint.chain, reason: 'checkpoint : signature invalide' });
     else if (!head || head.seq < checkpoint.seq) errors.push({ line: null, chain: checkpoint.chain, reason: 'journal tronqué : entrées manquantes avant le checkpoint' });
     else if (atCheckpoint !== checkpoint.head) errors.push({ line: null, chain: checkpoint.chain, reason: 'checkpoint : tête différente' });
+  }
+
+  // Ancres issues d'un manifeste déjà vérifié (verifyAnchorManifest) : seules
+  // les chaînes présentes dans le journal sont contrôlées.
+  for (const anchor of anchorList) {
+    if (!heads.has(anchor.chain)) continue;
+    const head = heads.get(anchor.chain);
+    if (head.seq < anchor.seq) errors.push({ line: null, chain: anchor.chain, reason: `journal tronqué : l'ancre attend seq ${anchor.seq}, la chaîne s'arrête à ${head.seq}` });
+    else if (seenAt.get(`${anchor.chain}#${anchor.seq}`) !== anchor.head) errors.push({ line: null, chain: anchor.chain, reason: `ancre : empreinte différente à seq ${anchor.seq} (journal réécrit)` });
   }
 
   const chains = Object.fromEntries([...heads].map(([c, h]) => [c, { length: h.seq + 1, head: h.hash }]));

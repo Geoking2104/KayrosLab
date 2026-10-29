@@ -40,6 +40,8 @@ export * from './workflow-permissions.mjs';
 export * from './workflow-presets.mjs';
 export * from './log-sink.mjs';
 export * from './evidence-chain.mjs';
+export * from './evidence-anchor.mjs';
+export * from './evidence-keys.mjs';
 import { createSignedChainSink, createEd25519Signer } from './evidence-chain.mjs';
 import { createMemorySink } from './log-sink.mjs';
 export * from './run-store.mjs';

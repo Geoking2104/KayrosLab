@@ -23,6 +23,10 @@ export default async function healthRoute(app) {
       anthropicConfigured: !!ctx.ANTHROPIC_API_KEY,
       persistence: ctx.storeBackend,
       multiInstanceReady: ctx.storeBackend === 'postgres' && !!ctx.collaborationStore && !!ctx.swarmStore,
+      // Journal d'audit scellé : kid public seulement, jamais la clé privée.
+      auditEvidence: ctx.auditEvidence?.enabled
+        ? { enabled: true, kid: ctx.auditEvidence.kid, anchoring: ctx.auditEvidence.anchorTargets }
+        : { enabled: false, ...(ctx.auditEvidence?.error ? { error: ctx.auditEvidence.error } : {}) },
       sso: { oidc: Boolean(ctx.oidc?.enabled), issuer: ctx.oidc?.enabled ? ctx.oidc.issuer : undefined },
       smtp: {
         configured: Boolean(ctx.smtp?.enabled && ctx.contactMailer),

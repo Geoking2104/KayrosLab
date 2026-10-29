@@ -33,14 +33,62 @@ const engine = createEngine({
 
 Sans `auditSigningKey`, le comportement est inchangé.
 
+## Activation côté backend (Fastify)
+
+1. Générer la paire Ed25519 sur une machine de confiance :
+
+   ```bash
+   node scripts/verify-audit-chain.mjs --keygen ./keys
+   # keys/audit-signing.key.pem (0600, secrète) · keys/audit-signing.pub.pem (à publier)
+   # équivalent openssl : openssl genpkey -algorithm ed25519 -out audit-signing.key.pem
+   ```
+
+2. Fournir la clé au backend, une seule des deux formes :
+
+   | Variable | Rôle |
+   |---|---|
+   | `KAYROS_AUDIT_SIGNING_KEY_FILE` | chemin du PEM (recommandé : secret monté en fichier) |
+   | `KAYROS_AUDIT_SIGNING_KEY` | PEM en clair (`\n` échappés acceptés) ou PEM en base64 (`base64 -w0 key.pem`) |
+   | `KAYROS_AUDIT_DIR` | journaux scellés, un fichier par chaîne (défaut `./data/audit`) |
+   | `KAYROS_AUDIT_CHECKPOINT_EVERY` | checkpoint signé toutes les N entrées (défaut 100) |
+   | `KAYROS_AUDIT_ANCHOR_DIR` | dossier d'ancrage, à monter sur un stockage distinct |
+   | `KAYROS_AUDIT_ANCHOR_INTERVAL_MS` | période d'ancrage automatique (défaut 1 h, `0` = manuel) |
+   | `KAYROS_AUDIT_ANCHOR_GITHUB_TOKEN` / `KAYROS_AUDIT_ANCHOR_GIST_ID` | ancrage dans un gist (jeton au seul droit `gist`) |
+
+3. Contrôler : `GET /health` → `auditEvidence: { enabled: true, kid }`. Une clé invalide n'empêche pas le démarrage : `enabled: false` et un avertissement dans les logs.
+
+Endpoints :
+
+- `GET /v1/audit/evidence` : kid, clé publique, chaîne de session, têtes signées, dernier ancrage (public, rien de secret).
+- `GET /v1/audit/evidence/public-key` : clé publique PEM.
+- `POST /v1/audit/evidence/anchor` (`x-kayros-secret` requis, corps `{ note?, force? }`) : ancrage immédiat.
+
+Les événements de l'essaim et de la passerelle hybride sont scellés. Sans `runId`, ils rejoignent une chaîne de session `session-<date>-<aléa>` propre à chaque démarrage ; une chaîne nommée reprend sa tête depuis son fichier après redémarrage, sans rupture.
+
+## Ancrage externe des têtes
+
+Un manifeste `kayros-anchor/0.1` signé liste `(chain, seq, head)` pour chaque chaîne. Une fois publié hors du serveur, toute réécriture (même par le détenteur de la clé), troncature ou suppression d'un journal antérieur devient détectable.
+
+```bash
+# depuis une machine distincte (cron), après copie des journaux :
+KAYROS_AUDIT_SIGNING_KEY_FILE=keys/audit-signing.key.pem \
+  node scripts/anchor-audit-chain.mjs data/audit --pubkey keys/audit-signing.pub.pem --out /mnt/ancres
+# + gist secret (révisions horodatées par GitHub) :
+KAYROS_AUDIT_ANCHOR_GITHUB_TOKEN=... node scripts/anchor-audit-chain.mjs data/audit --pubkey keys/audit-signing.pub.pem --gist
+```
+
+Le script vérifie d'abord tous les journaux et **refuse d'ancrer** une chaîne invalide. Il écrit `anchor-<horodatage>-<empreinte>.json` et ajoute une ligne à `anchors.jsonl`. Pour un horodatage tiers supplémentaire, le manifeste peut être soumis à une TSA RFC 3161 (`openssl ts -query -data anchor-….json`) ; ce n'est pas automatisé.
+
 ## Vérification par un tiers
 
 ```bash
 node scripts/verify-audit-chain.mjs --keygen ./keys          # paire Ed25519 (garder la clé privée secrète)
 node scripts/verify-audit-chain.mjs logs/<runId>.jsonl --pubkey keys/audit-signing.pub.pem [--checkpoint cp.json]
+# dossier complet + ancres publiées (manifeste .json ou anchors.jsonl, option répétable) :
+node scripts/verify-audit-chain.mjs data/audit --pubkey keys/audit-signing.pub.pem --anchor /mnt/ancres/anchors.jsonl [--json]
 ```
 
-Résultat binaire (code 0 / 1) et première rupture : contenu modifié, signature invalide, clé inconnue, séquence ou chaînage rompu, journal tronqué.
+Résultat binaire (code 0 / 1, 2 = usage) et première rupture : contenu modifié, signature invalide, clé inconnue, séquence ou chaînage rompu, journal tronqué, manifeste modifié, empreinte différente d'une ancre, chaîne ancrée absente (journal supprimé).
 
 ## Correspondance avec le brouillon (indicative)
 
@@ -53,8 +101,11 @@ Résultat binaire (code 0 / 1) et première rupture : contenu modifié, signatur
 
 ## Confiance résiduelle et limites
 
-- Le détenteur de la clé privée (l'opérateur) peut réécrire **toute** une chaîne non encore ancrée : seul un checkpoint publié à l'extérieur l'en empêche. Sans ancrage, on reste proche du niveau 2.
+- Le détenteur de la clé privée peut encore réécrire ce qui a été produit **depuis le dernier ancrage**, et il signe aussi les manifestes : l'ancrage ne vaut que si la destination échappe à son contrôle (stockage d'une autre équipe, gist, TSA). Sans ancrage, on reste proche du niveau 2.
+- Clé dans une variable ou un fichier : pas de KMS/HSM ; la même clé signe journaux et manifestes.
 - Complétude non garantie : seuls les événements passés par le sink sont prouvés ; pas de passerelle d'interception sans contournement (C7.1).
-- Pas de gestion de rotation ni de révocation de clés, pas de stockage HSM/KMS.
+- Rotation manuelle : plusieurs `--pubkey` acceptées à la vérification, pas de révocation.
 - Format maison proche de RFC 8785, pas le profil CWT/CBOR ni les vecteurs `poc-evidence-vectors`.
 - Les payloads sont en clair : la minimisation des données (C2) reste à faire.
+
+- Aucune revendication de conformité Proof-of-Control : pilote technique seulement.
