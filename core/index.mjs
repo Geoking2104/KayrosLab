@@ -39,6 +39,9 @@ export * from './workflow-graph.mjs';
 export * from './workflow-permissions.mjs';
 export * from './workflow-presets.mjs';
 export * from './log-sink.mjs';
+export * from './evidence-chain.mjs';
+import { createSignedChainSink, createEd25519Signer } from './evidence-chain.mjs';
+import { createMemorySink } from './log-sink.mjs';
 export * from './run-store.mjs';
 export * from './role-context.mjs';
 export * from './shared-data.mjs';
@@ -188,9 +191,20 @@ export function createEngine(opts = {}) {
         allowPredictions: opts.crystalKnowsAllowPredictions === true,
       }) : null),
   });
+  // Pilote Proof-of-Control : si une clé de signature est fournie, chaque
+  // événement d'audit est scellé dans une chaîne signée (core/evidence-chain.mjs).
+  const auditEvidence = opts.auditSigningKey
+    ? createSignedChainSink({
+      inner: opts.auditSink || createMemorySink(),
+      signer: createEd25519Signer(opts.auditSigningKey),
+      ...(opts.auditCheckpointEvery ? { checkpointEvery: opts.auditCheckpointEvery } : {}),
+      ...(opts.onAuditCheckpoint ? { onCheckpoint: opts.onAuditCheckpoint } : {}),
+    })
+    : null;
+  const sharedAuditSink = auditEvidence ? auditEvidence.asAuditFunction() : (opts.auditSink || null);
   const swarm = new SwarmService({
     llm, memory, systemAgents: opts.systemAgents,
-    auditSink: opts.swarmAuditSink || opts.auditSink || null,
+    auditSink: opts.swarmAuditSink || sharedAuditSink,
     profileImporter,
     store: opts.swarmStore || null,
     ...(opts.llmMaxConcurrency !== undefined ? { maxConcurrency: opts.llmMaxConcurrency } : {}),
@@ -198,7 +212,7 @@ export function createEngine(opts = {}) {
   const hybridGateway = new HybridAgentGateway({
     swarm,
     adapters: opts.collaborationAdapters || [],
-    auditSink: opts.collaborationAuditSink || opts.auditSink || null,
+    auditSink: opts.collaborationAuditSink || sharedAuditSink,
     store: opts.collaborationStore || null,
     runTimeoutMs: opts.collaborationRunTimeoutMs || 0,
   });
@@ -207,7 +221,7 @@ export function createEngine(opts = {}) {
     llm, tools, governance, memory, layered, plannerModel: opts.plannerModel, agents, quantGuidance, ...scopeDefaults,
   });
   const engine = {
-    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents, swarm, hybridGateway, profileImporter,
+    llm, tools, governance, vectors, embeddings, memory, layered, orchestrator, agents, swarm, hybridGateway, profileImporter, auditEvidence,
     quantGuidance, baseModel, scopeDefaults,
   };
   engine.attachNodeFs = async () => {
