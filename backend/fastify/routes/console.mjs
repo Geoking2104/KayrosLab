@@ -455,7 +455,7 @@ export async function releaseGraphAgents(app, threadId, tenantHint = null) {
   });
 }
 /** Démarrage : les baux dont plus aucune mission ne tourne (redémarrage en cours de mission) sont rétablis. */
-export async function recoverGraphLeases(app) {
+export async function recoverGraphLeases(app, { graceMs = 60_000 } = {}) {
   const ws = workspaceStoreFor(app.kayrosContext);
   const gateway = app.kayrosContext.hybridGateway;
   const out = [];
@@ -465,8 +465,13 @@ export async function recoverGraphLeases(app) {
       if (!lease) return;
       const alive = [];
       for (const id of lease.threads || []) {
-        // Une mission vivante a une tâche dans ce processus (reprise comprise) ; sinon elle a été interrompue.
-        if (gateway.jobs?.has?.(String(id))) alive.push(id);
+        // Vivante : tâche dans ce processus, pouls récent d'un autre processus, ou mission encore en file durable.
+        if (gateway.jobs?.has?.(String(id))) { alive.push(id); continue; }
+        const thread = await gateway.getThread(id, { tenantId }).catch(() => null);
+        if (thread && gateway.isThreadAlive?.(thread)) { alive.push(id); continue; }
+        if (thread?.status === 'running' && await gateway.queue?.activeForThread?.(id).catch(() => false)) { alive.push(id); continue; }
+        // Fil créé mais pas encore lancé (bail pris juste avant startMessage) : laissé un court instant.
+        if (!thread && Date.now() - Date.parse(lease.updated_at || 0) < graceMs) alive.push(id);
       }
       if (alive.length) { await ws.update(tenantId, 'graph_leases', lease.id, { threads: alive }); return; }
       out.push({ tenantId, session_id: lease.session_id, ...await restoreLease(app, tenantId, lease) });
@@ -527,7 +532,8 @@ export async function advancePipelines(app, kind, thread) {
   const ws = workspaceStoreFor(app.kayrosContext);
   const candidate = (await ws.list(tenantId, 'pipelines')).find((p) => p.steps.some((s) => s.thread_id === thread.thread_id && s.status === 'running'));
   if (!candidate) return null;
-  return withPipelineLock(candidate.id, async () => {
+  let haltThreads = [];
+  const saved = await withPipelineLock(candidate.id, async () => {
     const pipeline = await ws.get(tenantId, 'pipelines', candidate.id);
     const step = pipeline?.steps.find((s) => s.thread_id === thread.thread_id);
     if (!step || step.status !== 'running') return pipeline;
@@ -546,12 +552,23 @@ export async function advancePipelines(app, kind, thread) {
       for (const other of pipeline.steps.filter((x) => x.status === 'running')) {
         Object.assign(other, { status: 'halted', halted: { by_gate_of: step.node_id, thread_id: other.thread_id, at } });
       }
+      // Les missions suspendues sont réellement annulées (appel LLM interrompu, agents restants non lancés).
+      haltThreads = pipeline.steps.filter((x) => x.status === 'halted' && x.halted?.at === at).map((x) => x.thread_id);
     }
     else if (pipeline.steps.some((x) => (x.deps || []).includes(step.node_id)) && needsApproval(project?.graph, step.node_id, pipeline)) step.status = 'awaiting_approval';
     else step.status = 'completed';
     if (pipeline.status === 'cancelled') return savePipeline(app, tenantId, settle(pipeline));
     return startReadySteps(app, tenantId, pipeline);
   });
+  await cancelStepThreads(app, tenantId, haltThreads, { by: 'kayros:porte', reason: 'branche suspendue par une porte bloquée' });
+  return saved;
+}
+/** Annule les missions de branches suspendues ou d'un enchaînement arrêté (hors verrou). */
+async function cancelStepThreads(app, tenantId, threadIds, { by, reason }) {
+  const gateway = app.kayrosContext.hybridGateway;
+  for (const id of threadIds.filter(Boolean)) {
+    try { await gateway.cancelThread?.(id, { tenantId, by, reason }); } catch (error) { app.log?.warn?.({ err: error?.message }, 'annulation de mission'); }
+  }
 }
 
 export default async function consoleRoute(app) {
@@ -564,7 +581,7 @@ export default async function consoleRoute(app) {
       if (kind === 'completed' && thread) next = await withGates(app, thread.tenant_id, thread);
       if (prior) await prior(kind, next);
       // Composition temporaire du graphe : rétablie à la fin de la mission.
-      if (['completed', 'failed'].includes(kind) && thread?.thread_id) {
+      if (['completed', 'failed', 'cancelled'].includes(kind) && thread?.thread_id) {
         try { await releaseGraphAgents(app, thread.thread_id); } catch (error) { app.log?.warn?.({ err: error?.message }, 'composition du collectif'); }
       }
       // Collectif suivant du graphe (après la diffusion de l'événement de cette mission).
@@ -573,9 +590,18 @@ export default async function consoleRoute(app) {
     gateway.gatesWrapped = true;
   }
   // Reprise : composition des collectifs rétablie si le serveur a redémarré en cours de mission.
-  app.addHook('onReady', async () => {
+  // Puis périodiquement (KAYROS_GRAPH_LEASE_SWEEP_MS, 60 s par défaut ; 0 = désactivé) : un processus
+  // mort pendant une mission est détecté par l'absence de pouls, sans rétablir trop tôt une mission vivante ailleurs.
+  const sweep = async () => {
     try { const restored = await recoverGraphLeases(app); if (restored.length) app.log?.info?.({ restored }, 'composition des collectifs rétablie'); } catch (error) { app.log?.warn?.({ err: error?.message }, 'reprise des baux de composition'); }
+  };
+  let sweeper = null;
+  app.addHook('onReady', async () => {
+    await sweep();
+    const every = Number(process.env.KAYROS_GRAPH_LEASE_SWEEP_MS ?? 60_000);
+    if (every > 0) { sweeper = setInterval(sweep, every); sweeper.unref?.(); }
   });
+  app.addHook('onClose', async () => { if (sweeper) clearInterval(sweeper); });
   // --- Vue d'ensemble du harness -----------------------------------------
   app.get('/v1/console/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
@@ -1013,9 +1039,12 @@ export default async function consoleRoute(app) {
     if (!pipeline) return reply.code(404).send({ error: 'enchaînement introuvable' });
     if (['completed', 'failed', 'cancelled'].includes(pipeline.status)) return { pipeline };
     const at = new Date().toISOString();
-    // Les missions en cours sont détachées : leur résultat ne sera pas pris en compte.
-    for (const step of pipeline.steps.filter((x) => x.status === 'running')) Object.assign(step, { status: 'halted', halted: { by_cancel: me.email, thread_id: step.thread_id, at } });
-    return { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: at, cancelled_by: me.email }) };
+    // Les missions en cours sont annulées (appel LLM interrompu) ; un résultat tardif serait ignoré.
+    const running = pipeline.steps.filter((x) => x.status === 'running');
+    for (const step of running) Object.assign(step, { status: 'halted', halted: { by_cancel: me.email, thread_id: step.thread_id, at } });
+    const saved = await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: at, cancelled_by: me.email });
+    await cancelStepThreads(app, me.tenantId, running.map((x) => x.thread_id), { by: me.email, reason: 'enchaînement arrêté' });
+    return { pipeline: saved };
   });
 
   // --- Journal d'exécution du harness ------------------------------------

@@ -887,7 +887,7 @@ export class SwarmService {
    * est appelé après chaque analyse d'agent avec `{ completed, total, agent_id }` ;
    * une erreur levée par ce rappel n'interrompt jamais le run.
    */
-  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null, runId = null, onProgress = null } = {}) {
+  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null, runId = null, onProgress = null, signal = null } = {}) {
     const config = typeof configurationOrId === 'string'
       ? this.getConfiguration(configurationOrId, { tenantId })
       : this.createConfiguration(configurationOrId, { tenantId, by });
@@ -903,6 +903,8 @@ export class SwarmService {
     });
     const executeOne = async (definition) => {
       const effective_rules = resolveEffectiveRules(definition);
+      // Mission annulée : aucun nouvel agent ne démarre (pas de jetons consommés).
+      if (signal?.aborted) throw signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
       let raw = agentResults?.[definition.agent_id];
       if (raw == null) {
         const agent = new SpecializedDecisionAgent({
@@ -915,7 +917,7 @@ export class SwarmService {
           provider: definition.provider || provider,
           sovereignty,
           model: definition.model || model,
-          runId: run_id, traceId: run_id,
+          runId: run_id, traceId: run_id, signal,
         });
       }
       return {

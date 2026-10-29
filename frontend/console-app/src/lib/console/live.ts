@@ -135,7 +135,7 @@ export function fromApiSession(s: any): Collective {
 
 const STATUS: Record<string, ThreadStatus> = {
   running: "running", awaiting_arbitration: "awaiting_arbitration", needs_clarification: "needs_clarification",
-  resolved: "resolved", arbitrated: "resolved", completed: "resolved", failed: "failed",
+  resolved: "resolved", arbitrated: "resolved", completed: "resolved", failed: "failed", cancelled: "failed",
 };
 
 function short(at: string) {

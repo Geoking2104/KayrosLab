@@ -15,6 +15,7 @@ export const ROOM_MODES = Object.freeze(['mention_only', 'always']);
 // `awaiting_arbitration`) ou `failed` avec un message lisible.
 export const THREAD_RUNNING = 'running';
 export const THREAD_FAILED = 'failed';
+export const THREAD_CANCELLED = 'cancelled';
 export const INTERRUPTED_RUN_ERROR = 'Exécution interrompue par un redémarrage du serveur : relancez la mission.';
 
 function now() { return new Date().toISOString(); }
@@ -50,13 +51,23 @@ function runInProgressError(message) {
   error.code = 'RUN_IN_PROGRESS';
   return error;
 }
-function withDeadline(promise, ms) {
-  if (!(Number(ms) > 0)) return promise;
+function withDeadline(promise, ms, signal = null) {
+  const racers = [promise];
   let timer;
-  const deadline = new Promise((_, reject) => {
-    timer = setTimeout(() => reject(new Error(`délai maximal d’exécution dépassé (${Math.round(ms / 1000)} s)`)), ms);
-  });
-  return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+  if (Number(ms) > 0) {
+    racers.push(new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`délai maximal d’exécution dépassé (${Math.round(ms / 1000)} s)`)), ms);
+    }));
+  }
+  // Annulation : la mission s'arrête tout de suite, même si un agent ne surveille pas le signal.
+  if (signal) {
+    racers.push(new Promise((_, reject) => {
+      if (signal.aborted) reject(signal.reason);
+      else signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+    }));
+  }
+  if (racers.length === 1) return promise;
+  return Promise.race(racers).finally(() => clearTimeout(timer));
 }
 function publicRoom(record) {
   const room = clone(record?.room || null);
@@ -108,7 +119,7 @@ export function summarizeSwarmRun(run) {
 }
 
 export class HybridAgentGateway {
-  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0, runObserver = null, queue = null, worker = null, eventSink = null, chatNotifier = null, maxJobAttempts = 3 } = {}) {
+  constructor({ swarm, adapters = [], auditSink = null, maxEvents = 1000, store = null, runTimeoutMs = 0, runObserver = null, queue = null, worker = null, eventSink = null, chatNotifier = null, maxJobAttempts = 3, cancelPollMs = 2000, heartbeatMs = 15000 } = {}) {
     if (!swarm) throw new Error('HybridAgentGateway: swarm requis');
     this.swarm = swarm;
     // Exécutions asynchrones en cours dans CE processus (thread_id → promesse).
@@ -123,6 +134,12 @@ export class HybridAgentGateway {
     this.queue = queue;
     this.worker = worker;
     this.maxJobAttempts = Math.max(1, Number(maxJobAttempts) || 3);
+    // Annulation : contrôleur par fil en cours dans ce processus ; une annulation
+    // faite par un autre processus est détectée en relisant le fil (cancelPollMs).
+    this.controllers = new Map();
+    this.cancelPollMs = Math.max(0, Number(cancelPollMs) || 0);
+    // Pouls d'une exécution (`heartbeat_at` sur le fil) : un autre processus sait qu'elle est vivante.
+    this.heartbeatMs = Math.max(0, Number(heartbeatMs) || 0);
     // Rappel facultatif `(kind, thread)` : `completed`, `failed`, `arbitrated`
     // (webhooks signés des intégrations). Ses erreurs sont ignorées.
     this.eventSink = eventSink;
@@ -547,8 +564,58 @@ export class HybridAgentGateway {
     try { return this.runObserver?.[method]?.(...args) ?? null; } catch { return null; }
   }
 
+  /** Une exécution est-elle vivante (ce processus, ou pouls récent d'un autre processus) ? */
+  isThreadAlive(thread, { staleMs = null } = {}) {
+    if (!thread || thread.status !== THREAD_RUNNING) return false;
+    if (this.jobs.has(String(thread.thread_id))) return true;
+    const limit = staleMs ?? Math.max(3 * (this.heartbeatMs || 15000), 30000);
+    // Seul un pouls explicite compte : un fil `running` sans pouls (ancien format, processus tué) est interrompu.
+    const beat = Date.parse(thread.heartbeat_at || 0);
+    return Number.isFinite(beat) && Date.now() - beat < limit;
+  }
+
+  /**
+   * Annule une mission en cours : le fil passe `cancelled`, l'appel LLM en vol
+   * est interrompu (AbortSignal) et les agents restants ne sont pas lancés.
+   * Fonctionne entre processus : celui qui exécute relit le fil et s'arrête.
+   */
+  async cancelThread(threadId, { tenantId = null, by = null, reason = '' } = {}) {
+    const id = String(threadId);
+    const current = await this.store.getThread(id, { tenantId });
+    if (!current) return null;
+    if (current.status !== THREAD_RUNNING) return current;
+    const at = now();
+    await this.store.appendThreadMessage(id, {
+      role: 'assistant', kind: 'cancelled', author_id: 'kayros-swarm',
+      text: `Mission annulée${reason ? ` : ${reason}` : ''}.`, created_at: at,
+    }, { tenantId: current.tenant_id || tenantId });
+    await this.store.updateThread(id, {
+      status: THREAD_CANCELLED, active_run_id: null, cancelled: { by, reason: reason || null, at, run_id: current.active_run_id || null }, updated_at: at,
+    }, { tenantId: current.tenant_id || tenantId });
+    this.controllers.get(id)?.abort(Object.assign(new Error('mission annulée'), { code: 'ABORTED' }));
+    await this._record('collaboration.run.cancelled', { room_id: current.room_id, tenant_id: current.tenant_id || tenantId, thread_id: id, run_id: current.active_run_id || null, by, reason: reason || null });
+    const cancelled = await this.store.getThread(id, { tenantId: current.tenant_id || tenantId });
+    await this._emit('cancelled', cancelled);
+    return cancelled;
+  }
+
   _launch(threadId, tenantId, runId, { execute, finish, kind = 'message' }) {
     const observed = this._observe('started', { kind });
+    const controller = new AbortController();
+    this.controllers.set(threadId, controller);
+    const timers = [];
+    if (this.cancelPollMs) {
+      timers.push(setInterval(() => {
+        this.store.getThread(threadId, { tenantId }).then((t) => {
+          if (t && (t.status !== THREAD_RUNNING || (t.active_run_id && t.active_run_id !== runId))) controller.abort(Object.assign(new Error('mission annulée'), { code: 'ABORTED' }));
+        }).catch(() => {});
+      }, this.cancelPollMs));
+    }
+    if (this.heartbeatMs) {
+      this._patchRunningThread(threadId, tenantId, runId, { heartbeat_at: now() }).catch(() => {});
+      timers.push(setInterval(() => { this._patchRunningThread(threadId, tenantId, runId, { heartbeat_at: now() }).catch(() => {}); }, this.heartbeatMs));
+    }
+    for (const timer of timers) timer.unref?.();
     let chain = Promise.resolve();
     const onProgress = ({ completed, total }) => {
       chain = chain
@@ -560,7 +627,7 @@ export class HybridAgentGateway {
       let thread = null;
       let failure = null;
       try {
-        const run = await withDeadline(Promise.resolve().then(() => execute(onProgress)), this.runTimeoutMs);
+        const run = await withDeadline(Promise.resolve().then(() => execute(onProgress, controller.signal)), this.runTimeoutMs, controller.signal);
         await chain;
         thread = await finish(run);
         return thread;
@@ -570,6 +637,8 @@ export class HybridAgentGateway {
         try { thread = await this._failThread(threadId, tenantId, runId, error); } catch { thread = null; }
         return thread;
       } finally {
+        for (const timer of timers) clearInterval(timer);
+        if (this.controllers.get(threadId) === controller) this.controllers.delete(threadId);
         if (this.jobs.get(threadId) === job) this.jobs.delete(threadId);
         if (observed) this._observe('finished', observed, { thread, error: failure });
       }
@@ -628,14 +697,14 @@ export class HybridAgentGateway {
     // `_launch` est appelé de façon synchrone : `waitForThread` voit la tâche dès le retour.
     return this._launch(spec.thread_id, scope, spec.run_id, {
       kind: spec.kind === 'continue' ? 'continue' : 'message',
-      execute: async (onProgress) => {
+      execute: async (onProgress, signal) => {
         const record = await this.store.getRoom(spec.room_id, { tenantId: scope });
         const room = await this._hydrateRuntime(record);
         if (!room) throw new Error('salon introuvable');
         return this.swarm.run(room.swarm_id, {
           tenantId: scope, question: spec.question, context: spec.context,
           provider: spec.provider || undefined, sovereignty: spec.sovereignty || undefined, model: spec.model || undefined,
-          by: spec.by, runId: spec.run_id, onProgress,
+          by: spec.by, runId: spec.run_id, onProgress, signal,
         });
       },
       finish: (run) => this._finishRun(spec, run),
@@ -813,6 +882,8 @@ export class HybridAgentGateway {
     let recovered = 0;
     for (const thread of running) {
       if (this.jobs.has(thread.thread_id)) continue;
+      // Pouls récent : la mission tourne dans un autre processus, elle n'est pas interrompue.
+      if (this.heartbeatMs && this.isThreadAlive(thread)) continue;
       try {
         if (this.queue && await this.queue.activeForThread(thread.thread_id)) continue;
         const failed = await this._failThread(thread.thread_id, thread.tenant_id, null, new Error(INTERRUPTED_RUN_ERROR));

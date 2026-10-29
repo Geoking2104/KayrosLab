@@ -149,18 +149,18 @@ Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la con
   - Si elles passent, les étapes devenues prêtes démarrent.
   - Si une porte bloque, l'étape passe à `blocked` et aucune nouvelle étape ne démarre. Les branches sœurs en cours passent à `halted` : leur résultat est ignoré.
   - Un comex ou un admin lève les portes bloquées avec `POST /v1/console/pipelines/:id/resume {justification}`. Les branches `halted` repartent alors depuis le début, sur un nouveau fil.
-  - Limite : la mission LLM d'une branche suspendue n'est pas interrompue (pas d'annulation dans la passerelle). Elle va à son terme sans effet sur l'enchaînement.
+  - La mission LLM d'une branche suspendue est **annulée** (`gateway.cancelThread`) : le fil passe à `cancelled`, l'appel LLM en cours est interrompu (`AbortSignal` propagé jusqu'au fournisseur) et les agents restants ne sont pas lancés. Un autre processus qui exécute la mission détecte l'annulation en relisant le fil (`cancelPollMs`, 2 s).
 - **Pause d'arbitrage** : avec `pause_between: true`, ou sur une porte avec `config.pause: true`, une étape dont les portes passent et qui a des étapes en aval passe à `awaiting_approval`. Rien ne démarre avant `POST /v1/console/pipelines/:id/approve {comment?}` (rôle *arbitrate*), qui valide l'étape `node_id` (branche par branche) ou, sans `node_id`, toutes les étapes en attente (`approved`).
   - Une étape en attente ne retient que ses descendants : les autres branches continuent.
 - Statut global : `blocked` > `awaiting_approval` > `failed` > `completed` > `running`. Une mission en échec met l'enchaînement à `failed`.
-- `POST /pipelines/:id/cancel` arrête l'enchaînement. Les étapes en cours passent à `halted` et leur résultat est ignoré.
+- `POST /pipelines/:id/cancel` arrête l'enchaînement. Les étapes en cours passent à `halted` et leurs missions sont annulées.
 - Les routes de lecture sont `GET /projects/:id/pipelines` et `GET /pipelines/:id`.
 
 ### Nœuds agent
 - Un nœud **agent** (`config.agent_id`) relié à un collectif (dans un sens ou dans l'autre) est **ajouté à la session** de ce collectif avant chaque mission, qu'elle soit lancée par un enchaînement ou directement sur la session.
 - Avec `config.exclude: true`, l'agent est retiré de la session.
 - **Composition temporaire** : à la fin de la mission (`completed` ou `failed`), les agents ajoutés sont retirés et les agents exclus sont rétablis. Un compteur par session évite qu'une mission en cours perde ses agents quand une autre se termine.
-- Le bail est **persisté** dans l'espace de travail (type `graph_leases`, un par session : fils en cours, agents ajoutés et retirés). Au démarrage du serveur, les baux dont aucune mission ne tourne plus dans le processus sont rétablis.
+- Le bail est **persisté** dans l'espace de travail (type `graph_leases`, un par session : fils en cours, agents ajoutés et retirés). Au démarrage du serveur puis toutes les 60 s (`KAYROS_GRAPH_LEASE_SWEEP_MS`, 0 = désactivé), les baux dont aucune mission n'est vivante sont rétablis. Une mission est vivante si elle tourne dans ce processus, si son fil porte un pouls récent (`heartbeat_at`, rafraîchi toutes les 15 s par le processus qui l'exécute, périmé après 45 s) ou si elle est encore en file durable. La reprise des runs interrompus au démarrage ignore aussi les fils au pouls récent : plusieurs processus peuvent partager le même stockage.
 - La modification passe par `updateRoomAgents` et respecte la limite d'agents construits.
 
 ### Rôle lecteur hors console

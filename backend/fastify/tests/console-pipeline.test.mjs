@@ -332,7 +332,10 @@ test('porte bloquée sur une branche : la branche sœur en cours est suspendue p
     ],
   }, { by: 'owner@kayros.test' });
   const noGo = { messages: [{ run: { analyses: [{ agent_id: 'cfo', verdict: 'NO_GO' }], consensus: { verdict: 'NO_GO', rationale: 'non' } } }] };
+  const cancelled = [];
+  app.kayrosContext.hybridGateway.cancelThread = async (id, opts) => { cancelled.push([id, opts.reason]); return null; };
   const blocked = await advancePipelines(app, 'completed', { thread_id: 'thr_a', tenant_id: 'tenant-a', ...noGo });
+  assert.deepEqual(cancelled, [['thr_b', 'branche suspendue par une porte bloquée']], 'la mission de la branche sœur est annulée');
   assert.equal(blocked.status, 'blocked');
   const b = blocked.steps.find((s) => s.node_id === 'b');
   assert.equal(b.status, 'halted');
@@ -358,9 +361,58 @@ test('composition du graphe : bail persisté, rétabli au redémarrage si la mis
   assert.deepEqual({ threads: leases[0].threads, added: leases[0].added, removed: leases[0].removed }, { threads: ['thr_lost'], added: ['planner'], removed: ['cto'] });
   const active = async () => (await app.inject({ url: `/v1/console/sessions/${s1}` })).json().session.collective.active_agents;
   assert.ok((await active()).includes('planner'));
+  assert.equal((await recoverGraphLeases(app)).length, 0, 'fil pas encore créé : délai de grâce');
   // Simule un redémarrage : aucune tâche vivante pour thr_lost.
-  const restored = await recoverGraphLeases(app);
+  const restored = await recoverGraphLeases(app, { graceMs: 0 });
   assert.equal(restored.length, 1);
   assert.deepEqual([...await active()].sort(), ['cfo', 'cto']);
   assert.equal((await app.kayrosContext.workspaceStore.list('tenant-a', 'graph_leases')).length, 0);
+});
+
+test('composition multi-processus : un pouls récent d’un autre processus garde le bail, un pouls ancien le rétablit', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const gateway = app.kayrosContext.hybridGateway;
+  const s1 = await session(app, 'Finance', ['cfo']);
+  const graph = { nodes: [{ id: 'c', type: 'collectif', config: { session_id: s1 } }, { id: 'ag', type: 'agent', config: { agent_id: 'planner' } }], edges: [{ from: 'ag', to: 'c' }] };
+  await acquireGraphAgents(app, 'tenant-a', graph, graph.nodes[0], 'owner@kayros.test', 'thr_elsewhere');
+  let beat = new Date().toISOString();
+  gateway.getThread = async (id) => (id === 'thr_elsewhere' ? { thread_id: id, status: 'running', heartbeat_at: beat } : null);
+  assert.equal((await recoverGraphLeases(app, { graceMs: 0 })).length, 0, 'mission vivante dans un autre processus');
+  assert.equal((await app.kayrosContext.workspaceStore.list('tenant-a', 'graph_leases')).length, 1);
+  beat = new Date(Date.now() - 10 * 60_000).toISOString();
+  const restored = await recoverGraphLeases(app, { graceMs: 0 });
+  assert.equal(restored.length, 1, 'plus de pouls : processus mort, composition rétablie');
+  assert.deepEqual(restored[0].removed, ['planner']);
+});
+
+test('arrêt d’un enchaînement : les missions en cours sont annulées', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const ws = app.kayrosContext.workspaceStore;
+  const cancelled = [];
+  app.kayrosContext.hybridGateway.cancelThread = async (id, opts) => { cancelled.push([id, opts.by]); return null; };
+  const p = await ws.create('tenant-a', 'pipelines', { project_id: 'x', question: 'Q ?', status: 'running', steps: [{ node_id: 'a', status: 'running', thread_id: 'thr_1', deps: [] }, { node_id: 'b', status: 'pending', thread_id: null, deps: ['a'] }] }, { by: 'owner@kayros.test' });
+  const res = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${p.id}/cancel` });
+  assert.equal(res.statusCode, 200, res.body);
+  assert.equal(res.json().pipeline.steps[0].status, 'halted');
+  assert.deepEqual(cancelled, [['thr_1', 'owner@kayros.test']]);
+});
+
+test('passerelle réelle : la branche suspendue est annulée (fil cancelled, pas de verdict)', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const gateway = app.kayrosContext.hybridGateway;
+  const s1 = await session(app, 'Finance', ['cfo']);
+  // Mission qui ne se termine jamais d'elle-même : seule l'annulation l'arrête.
+  const swarm = app.kayrosContext.engine.swarm;
+  const original = swarm.run.bind(swarm);
+  let aborted = false;
+  swarm.run = (id, options) => new Promise((_, reject) => options.signal?.addEventListener('abort', () => { aborted = true; reject(options.signal.reason); }));
+  t.after(() => { swarm.run = original; });
+  const started = await gateway.startMessage({ platform: 'console', room_id: s1, tenantId: 'tenant-a', text: 'Signer ?', explicit: true, by: 'owner@kayros.test' });
+  await gateway.cancelThread(started.thread.thread_id, { tenantId: 'tenant-a', by: 'kayros:porte', reason: 'branche suspendue' });
+  const thread = await gateway.waitForThread(started.thread.thread_id, { tenantId: 'tenant-a' });
+  assert.equal(thread.status, 'cancelled');
+  assert.equal(aborted, true, 'le run du collectif a reçu l’annulation');
 });
