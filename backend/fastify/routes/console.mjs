@@ -1,8 +1,11 @@
 import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
-import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
+import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
+import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
+import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
+import { collectiveAttachmentsContext } from './console-workspace.mjs';
 import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
@@ -166,7 +169,23 @@ const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER ||
 const MAX_BUILT_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_BUILT_AGENTS_PER_SESSION || process.env.KAYROS_MAX_BUILT_AGENTS_PER_ROOM || 3);
 
 function agentView(agent) { return { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) }; }
-function manager(me, reply) { if (['comex', 'admin'].includes(me.role)) return true; reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false; }
+// Le rôle effectif tient compte de la fiche membre de l'espace (Réglages → Membres).
+async function permitted(app, me, reply, permission) {
+  try {
+    const { can, PERMISSION_ERROR } = await import('./console-workspace.mjs');
+    if (await can(app, me, permission)) return true;
+    reply.code(403).send({ error: PERMISSION_ERROR[permission] || 'rôle insuffisant' }); return false;
+  } catch {
+    // Espace indisponible : rôle du jeton.
+    if (permission === 'run' || ['comex', 'admin'].includes(me.role)) return true;
+    reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false;
+  }
+}
+const manager = (app, me, reply) => permitted(app, me, reply, 'manage');
+async function withGates(app, tenantId, thread) {
+  try { const { applyGates } = await import('./console-workspace.mjs'); return await applyGates(app, tenantId, thread); }
+  catch { return thread; }
+}
 // La console ne doit jamais exposer le vocabulaire d'une application tierce.
 function surface(message) {
   return String(message || '')
@@ -233,7 +252,7 @@ function canAccessRoom(me, room) { return !!room && (tenantWide(me) || ownsRoom(
 async function consoleRooms(app, me) {
   return app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
 }
-async function accessibleRooms(app, me) {
+export async function accessibleRooms(app, me) {
   const rooms = await consoleRooms(app, me);
   return tenantWide(me) ? rooms : rooms.filter((room) => ownsRoom(me, room));
 }
@@ -254,7 +273,7 @@ async function accessibleThread(app, me, threadId) {
 }
 function boundedLimit(limit) { return Math.max(1, Math.min(250, Number(limit) || 100)); }
 /** Fils visibles ; `null` si une session explicitement demandée n'est pas accessible. */
-async function scopedThreads(app, me, { roomId = null, limit = 100 } = {}) {
+export async function scopedThreads(app, me, { roomId = null, limit = 100 } = {}) {
   const { hybridGateway } = app.kayrosContext;
   if (roomId) {
     const room = await accessibleRoom(app, me, roomId);
@@ -360,7 +379,229 @@ async function connections(app, tenantId) {
   });
 }
 
+// --- Enchaînement de collectifs le long du graphe d'un projet ------------
+const pipelineLocks = new Map();
+function withPipelineLock(id, fn) {
+  const prior = pipelineLocks.get(id) || Promise.resolve();
+  const next = prior.then(fn, fn);
+  pipelineLocks.set(id, next.catch(() => {}));
+  return next;
+}
+/** Applique les nœuds « agent » du graphe à la session du collectif (ajout / exclusion). */
+export async function applyGraphAgents(app, tenantId, graph, node, by) {
+  const { add, remove } = agentNodesFor(graph, node.id);
+  if (!add.length && !remove.length) return null;
+  const gateway = app.kayrosContext.hybridGateway;
+  const room = await gateway.getRoom(node.config.session_id, { tenantId });
+  if (!room) return { added: [], removed: [], error: 'session introuvable' };
+  const swarm = app.kayrosContext.engine.swarm;
+  await swarm.hydrateTenant?.(tenantId);
+  const active = swarm.getConfiguration(room.swarm_id, { tenantId })?.active_agents || [];
+  const adds = add.filter((id) => !active.includes(id));
+  const removes = remove.filter((id) => active.includes(id));
+  if (!adds.length && !removes.length) return { added: [], removed: [], error: null };
+  try {
+    await gateway.updateRoomAgents(room.room_id, { addAgentIds: adds, removeAgentIds: removes, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId, by });
+    return { added: adds, removed: removes, error: null };
+  } catch (error) { return { added: [], removed: [], error: surface(error?.message || error) }; }
+}
+
+// Composition temporaire : les agents ajoutés / exclus par le graphe sont rétablis
+// à la fin de la dernière mission qui les utilise. Le bail est persisté (type
+// `graph_leases`, un par session) : un redémarrage ne laisse pas la composition modifiée.
+function leaseLock(tenantId, sessionId, fn) { return withPipelineLock(`lease:${tenantId}:${sessionId}`, fn); }
+async function findLease(ws, tenantId, sessionId) {
+  return (await ws.list(tenantId, 'graph_leases', { session_id: sessionId }))[0] || null;
+}
+/** Applique la composition du graphe pour une mission (fil pré-attribué) et retient quoi rétablir. */
+export async function acquireGraphAgents(app, tenantId, graph, node, by, threadId) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const sessionId = node.config.session_id;
+  return leaseLock(tenantId, sessionId, async () => {
+    const change = await applyGraphAgents(app, tenantId, graph, node, by);
+    const lease = await findLease(ws, tenantId, sessionId) || await ws.create(tenantId, 'graph_leases', { session_id: sessionId, threads: [], added: [], removed: [] }, { by });
+    const added = new Set(lease.added); const removed = new Set(lease.removed);
+    for (const id of change?.added || []) { if (removed.has(id)) removed.delete(id); else added.add(id); }
+    for (const id of change?.removed || []) { if (added.has(id)) added.delete(id); else removed.add(id); }
+    const threads = [...new Set([...(lease.threads || []), threadId].filter(Boolean))];
+    await ws.update(tenantId, 'graph_leases', lease.id, { threads, added: [...added], removed: [...removed] });
+    return change;
+  });
+}
+async function restoreLease(app, tenantId, lease) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  await ws.remove(tenantId, 'graph_leases', lease.id);
+  const addAgentIds = lease.removed || []; const removeAgentIds = lease.added || [];
+  if (!addAgentIds.length && !removeAgentIds.length) return { restored: [], removed: [] };
+  const gateway = app.kayrosContext.hybridGateway;
+  try {
+    const room = await gateway.getRoom(lease.session_id, { tenantId });
+    if (room) await gateway.updateRoomAgents(room.room_id, { addAgentIds, removeAgentIds, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId, by: lease.created_by });
+  } catch (error) { app.log?.warn?.({ err: error?.message }, 'rétablissement de la composition du collectif'); }
+  return { restored: addAgentIds, removed: removeAgentIds };
+}
+/** Fin de mission : rend la session dans sa composition d'origine si plus aucune mission du graphe n'y tourne. */
+export async function releaseGraphAgents(app, threadId, tenantHint = null) {
+  if (!threadId) return null;
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const found = await ws.findAcross('graph_leases', (l) => (l.threads || []).includes(threadId));
+  if (!found || (tenantHint && found.tenantId !== tenantHint)) return null;
+  return leaseLock(found.tenantId, found.item.session_id, async () => {
+    const lease = await ws.get(found.tenantId, 'graph_leases', found.item.id);
+    if (!lease) return null;
+    const threads = (lease.threads || []).filter((t) => t !== threadId);
+    if (threads.length) { await ws.update(found.tenantId, 'graph_leases', lease.id, { threads }); return null; }
+    return restoreLease(app, found.tenantId, lease);
+  });
+}
+/** Démarrage : les baux dont plus aucune mission ne tourne (redémarrage en cours de mission) sont rétablis. */
+export async function recoverGraphLeases(app, { graceMs = 60_000 } = {}) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const gateway = app.kayrosContext.hybridGateway;
+  const out = [];
+  for (const { tenantId, item } of await ws.listAcross('graph_leases')) {
+    await leaseLock(tenantId, item.session_id, async () => {
+      const lease = await ws.get(tenantId, 'graph_leases', item.id);
+      if (!lease) return;
+      const alive = [];
+      for (const id of lease.threads || []) {
+        // Vivante : tâche dans ce processus, pouls récent d'un autre processus, ou mission encore en file durable.
+        if (gateway.jobs?.has?.(String(id))) { alive.push(id); continue; }
+        const thread = await gateway.getThread(id, { tenantId }).catch(() => null);
+        if (thread && gateway.isThreadAlive?.(thread)) { alive.push(id); continue; }
+        if (thread?.status === 'running' && await gateway.queue?.activeForThread?.(id).catch(() => false)) { alive.push(id); continue; }
+        // Fil créé mais pas encore lancé (bail pris juste avant startMessage) : laissé un court instant.
+        if (!thread && Date.now() - Date.parse(lease.updated_at || 0) < graceMs) alive.push(id);
+      }
+      if (alive.length) { await ws.update(tenantId, 'graph_leases', lease.id, { threads: alive }); return; }
+      out.push({ tenantId, session_id: lease.session_id, ...await restoreLease(app, tenantId, lease) });
+    });
+  }
+  return out;
+}
+
+async function savePipeline(app, tenantId, pipeline) {
+  return workspaceStoreFor(app.kayrosContext).update(tenantId, 'pipelines', pipeline.id, pipeline);
+}
+function settle(pipeline) {
+  const status = pipelineStatus(pipeline);
+  const finished = ['completed', 'failed', 'cancelled'].includes(status) && !pipeline.steps.some((s) => s.status === 'running');
+  return { ...pipeline, status, current: pipeline.steps.findIndex((s) => s.status === 'running'), finished_at: finished ? (pipeline.finished_at || new Date().toISOString()) : null };
+}
+/** Démarre une étape (mission sur la session du collectif, contexte de ses branches amont). Mute `pipeline`. */
+async function startPipelineStep(app, tenantId, pipeline, project, step) {
+  const node = (project?.graph?.nodes || []).find((n) => n.id === step.node_id);
+  const gateway = app.kayrosContext.hybridGateway;
+  const room = node ? await gateway.getRoom(step.session_id, { tenantId }) : null;
+  if (!room) { Object.assign(step, { status: 'failed', error: 'session du collectif introuvable' }); return; }
+  step.thread_id = makeThreadId();
+  step.agents = await acquireGraphAgents(app, tenantId, project.graph, node, pipeline.created_by, step.thread_id);
+  const attached = await collectiveAttachmentsContext(app, tenantId, room.room_id);
+  const context = [`Session de harness « ${room.name} » · collectif ${room.swarm_id}`, chainContext(pipeline, project, step), attached].filter(Boolean).join('\n\n').slice(0, 24000);
+  const profile = runProfile(app, pipeline.profile);
+  Object.assign(step, { status: 'running', started_at: new Date().toISOString(), error: null });
+  // Enregistré avant le lancement : la fin de mission (autre tâche) doit retrouver l'étape.
+  await savePipeline(app, tenantId, settle(pipeline));
+  try {
+    const started = await gateway.startMessage({
+      platform: 'console', room_id: room.room_id, tenantId, thread_id: step.thread_id,
+      user_id: pipeline.created_sub, by: pipeline.created_by, explicit: true, text: pipeline.question, context,
+      provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
+      origin: 'pipeline', allowConcurrent: true,
+    });
+    step.run_id = started.run_id || null;
+  } catch (error) {
+    Object.assign(step, { status: 'failed', error: surface(error?.message || error) });
+    await releaseGraphAgents(app, step.thread_id);
+  }
+}
+/** Lance toutes les étapes prêtes (branches parallèles), puis enregistre l'état. À appeler sous verrou. */
+async function startReadySteps(app, tenantId, pipeline) {
+  const project = await workspaceStoreFor(app.kayrosContext).get(tenantId, 'projects', pipeline.project_id);
+  for (const step of readySteps(pipeline)) {
+    // Une branche en échec arrête le lancement des suivantes.
+    if (pipelineStatus(pipeline) === 'failed') break;
+    await startPipelineStep(app, tenantId, pipeline, project, step);
+  }
+  return savePipeline(app, tenantId, settle(pipeline));
+}
+/** Fin d'une mission : l'étape se termine ; les étapes devenues prêtes démarrent, ou l'enchaînement se bloque / attend un arbitrage / échoue. */
+export async function advancePipelines(app, kind, thread) {
+  if (!thread?.thread_id || !['completed', 'failed'].includes(kind)) return null;
+  const tenantId = thread.tenant_id || 'default';
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const candidate = (await ws.list(tenantId, 'pipelines')).find((p) => p.steps.some((s) => s.thread_id === thread.thread_id && s.status === 'running'));
+  if (!candidate) return null;
+  let haltThreads = [];
+  const saved = await withPipelineLock(candidate.id, async () => {
+    const pipeline = await ws.get(tenantId, 'pipelines', candidate.id);
+    const step = pipeline?.steps.find((s) => s.thread_id === thread.thread_id);
+    if (!step || step.status !== 'running') return pipeline;
+    const at = new Date().toISOString();
+    step.finished_at = at;
+    if (kind === 'failed') {
+      Object.assign(step, { status: 'failed', error: thread.error?.message || thread.error || 'mission en échec' });
+      return savePipeline(app, tenantId, settle(pipeline));
+    }
+    const project = await ws.get(tenantId, 'projects', pipeline.project_id);
+    const outcome = stepOutcome(project?.graph, step.node_id, thread);
+    Object.assign(step, { verdict: outcome.verdict, rationale: outcome.rationale, gates: outcome.results });
+    if (outcome.status === 'blocked') {
+      step.status = 'blocked';
+      // Les branches sœurs en cours sont suspendues : leur résultat sera ignoré et elles repartiront à la levée de la porte.
+      for (const other of pipeline.steps.filter((x) => x.status === 'running')) {
+        Object.assign(other, { status: 'halted', halted: { by_gate_of: step.node_id, thread_id: other.thread_id, at } });
+      }
+      // Les missions suspendues sont réellement annulées (appel LLM interrompu, agents restants non lancés).
+      haltThreads = pipeline.steps.filter((x) => x.status === 'halted' && x.halted?.at === at).map((x) => x.thread_id);
+    }
+    else if (pipeline.steps.some((x) => (x.deps || []).includes(step.node_id)) && needsApproval(project?.graph, step.node_id, pipeline)) step.status = 'awaiting_approval';
+    else step.status = 'completed';
+    if (pipeline.status === 'cancelled') return savePipeline(app, tenantId, settle(pipeline));
+    return startReadySteps(app, tenantId, pipeline);
+  });
+  await cancelStepThreads(app, tenantId, haltThreads, { by: 'kayros:porte', reason: 'branche suspendue par une porte bloquée' });
+  return saved;
+}
+/** Annule les missions de branches suspendues ou d'un enchaînement arrêté (hors verrou). */
+async function cancelStepThreads(app, tenantId, threadIds, { by, reason }) {
+  const gateway = app.kayrosContext.hybridGateway;
+  for (const id of threadIds.filter(Boolean)) {
+    try { await gateway.cancelThread?.(id, { tenantId, by, reason }); } catch (error) { app.log?.warn?.({ err: error?.message }, 'annulation de mission'); }
+  }
+}
+
 export default async function consoleRoute(app) {
+  // Fin de mission asynchrone : les portes du graphe sont évaluées avant la diffusion de l'événement.
+  const gateway = app.kayrosContext?.hybridGateway;
+  if (gateway && !gateway.gatesWrapped) {
+    const prior = gateway.eventSink;
+    gateway.eventSink = async (kind, thread) => {
+      let next = thread;
+      if (kind === 'completed' && thread) next = await withGates(app, thread.tenant_id, thread);
+      if (prior) await prior(kind, next);
+      // Composition temporaire du graphe : rétablie à la fin de la mission.
+      if (['completed', 'failed', 'cancelled'].includes(kind) && thread?.thread_id) {
+        try { await releaseGraphAgents(app, thread.thread_id); } catch (error) { app.log?.warn?.({ err: error?.message }, 'composition du collectif'); }
+      }
+      // Collectif suivant du graphe (après la diffusion de l'événement de cette mission).
+      try { await advancePipelines(app, kind, next); } catch (error) { app.log?.warn?.({ err: error?.message }, 'enchaînement de collectifs'); }
+    };
+    gateway.gatesWrapped = true;
+  }
+  // Reprise : composition des collectifs rétablie si le serveur a redémarré en cours de mission.
+  // Puis périodiquement (KAYROS_GRAPH_LEASE_SWEEP_MS, 60 s par défaut ; 0 = désactivé) : un processus
+  // mort pendant une mission est détecté par l'absence de pouls, sans rétablir trop tôt une mission vivante ailleurs.
+  const sweep = async () => {
+    try { const restored = await recoverGraphLeases(app); if (restored.length) app.log?.info?.({ restored }, 'composition des collectifs rétablie'); } catch (error) { app.log?.warn?.({ err: error?.message }, 'reprise des baux de composition'); }
+  };
+  let sweeper = null;
+  app.addHook('onReady', async () => {
+    await sweep();
+    const every = Number(process.env.KAYROS_GRAPH_LEASE_SWEEP_MS ?? 60_000);
+    if (every > 0) { sweeper = setInterval(sweep, every); sweeper.unref?.(); }
+  });
+  app.addHook('onClose', async () => { if (sweeper) clearInterval(sweeper); });
   // --- Vue d'ensemble du harness -----------------------------------------
   app.get('/v1/console/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
@@ -399,19 +640,19 @@ export default async function consoleRoute(app) {
     return { agents };
   });
   app.post('/v1/console/agents', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = agentCreateSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'agent invalide', issues: parsed.error.issues });
     try { const agent = app.kayrosContext.engine.swarm.createAgent(parsed.data, { tenantId: me.tenantId, by: me.email }); await app.kayrosContext.engine.swarm.flush?.(); return reply.code(201).send({ agent: agentView(agent) }); }
     catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
   app.patch('/v1/console/agents/:agentId', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = agentPatchSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'modification agent invalide', issues: parsed.error.issues });
     try { const agent = app.kayrosContext.engine.swarm.updateAgent(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email }); await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) }; }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/agents/:agentId/crystal', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur' });
     const parsed = crystalImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import Crystal invalide', issues: parsed.error.issues });
     try {
@@ -421,7 +662,7 @@ export default async function consoleRoute(app) {
   });
   // Profil humain d'un agent hybride : import Crystal/LinkedIn ou export autorisé.
   app.post('/v1/console/agents/:agentId/personality', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = personalityImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import de profil invalide', issues: parsed.error.issues });
     try {
       const agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
@@ -430,7 +671,7 @@ export default async function consoleRoute(app) {
   });
   // Profil humain fourni directement (saisie ou export de fichier), sans API tierce.
   app.put('/v1/console/agents/:agentId/human-profile', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = humanProfileSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'profil humain invalide', issues: parsed.error.issues });
     if (parsed.data?.consent_confirmed !== true) return reply.code(400).send({ error: 'consentement explicite requis pour un profil humain' });
     try {
@@ -457,7 +698,7 @@ export default async function consoleRoute(app) {
         profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{ source: 'crystalknows', profile_data: d.profile_data }] }, { by: me.email });
         if (d.assigned_name && !profile.assigned_name) profile.assigned_name = d.assigned_name;
       } else {
-        if (!manager(me, reply)) return;
+        if (!await manager(app, me, reply)) return;
         if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur (CRYSTALKNOWS_API_TOKEN). Utilisez l’import d’un export JSON ou la saisie DISC.' });
         if (!d.email && !d.linkedin_url && !d.full_name) return reply.code(400).send({ error: 'e-mail, URL LinkedIn ou nom complet requis' });
         profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{
@@ -473,7 +714,7 @@ export default async function consoleRoute(app) {
 
   // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---
   app.post('/v1/console/impersonators', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = impersonatorSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'agent impersonateur invalide', issues: parsed.error.issues });
     const d = parsed.data;
@@ -487,7 +728,7 @@ export default async function consoleRoute(app) {
 
   // --- Équipe d'impersonators : panel de personas pour éprouver une idée ---
   app.post('/v1/console/impersonator-teams', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = impersonatorTeamSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'équipe impersonator invalide', issues: parsed.error.issues });
     const d = parsed.data;
@@ -525,7 +766,7 @@ export default async function consoleRoute(app) {
     return { connectors: await connections(app, me.tenantId), encrypted_storage: app.kayrosContext.connectorEncryptionConfigured === true };
   });
   app.put('/v1/console/connectors/:platform', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = connectorSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'configuration connecteur invalide', issues: parsed.error.issues });
     try {
       const connector = await app.kayrosContext.connectorConfig.configure(me.tenantId, req.params.platform, parsed.data);
@@ -534,7 +775,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.patch('/v1/console/connectors/:platform', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = connectorStateSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'état connecteur invalide' });
     try {
       const connector = await app.kayrosContext.connectorConfig.setEnabled(me.tenantId, req.params.platform, parsed.data.enabled);
@@ -543,7 +784,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/connectors/:platform/connect', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const platform = String(req.params.platform || '').toLowerCase();
     if (!['slack', 'discord', 'teams'].includes(platform)) return reply.code(404).send({ error: 'plateforme inconnue' });
     const oauth = app.kayrosContext.connectorOAuth;
@@ -558,7 +799,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/connectors/:platform/test', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     try {
       const connector = await app.kayrosContext.connectorConfig.test(me.tenantId, req.params.platform);
       if (connector.ok && connector.enabled) { const adapter = await app.kayrosContext.connectorConfig.adapterFor(me.tenantId, req.params.platform); if (adapter) app.kayrosContext.hybridGateway.setTenantAdapter(me.tenantId, adapter); }
@@ -574,7 +815,7 @@ export default async function consoleRoute(app) {
     return { sessions: rooms.map((room) => sessionView(room, app.kayrosContext.engine.swarm, me.tenantId)) };
   });
   app.post('/v1/console/sessions', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = sessionSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'session invalide', issues: parsed.error.issues });
     try {
@@ -613,7 +854,7 @@ export default async function consoleRoute(app) {
     return { session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId, { threads }), activity };
   });
   app.patch('/v1/console/sessions/:sessionId/collective', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = collectiveSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'collectif invalide', issues: parsed.error.issues });
     if (!await accessibleRoom(app, me, req.params.sessionId)) return reply.code(404).send({ error: 'session introuvable' });
@@ -636,7 +877,7 @@ export default async function consoleRoute(app) {
   // Même droit que la création d'agent (comex/admin). Un profil réel exige un
   // consentement de partage explicite et reste interdit dans un tenant partagé.
   app.post('/v1/console/sessions/:sessionId/agents/:agentId/promote', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = promoteSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'enregistrement invalide', issues: parsed.error.issues });
     const room = await accessibleRoom(app, me, req.params.sessionId);
@@ -670,24 +911,39 @@ export default async function consoleRoute(app) {
   // (≈75 s par agent) dépasserait sinon le délai du proxy (≈60 s) et la
   // mission ne serait pas enregistrée. `?wait=true` conserve le mode synchrone.
   app.post('/v1/console/sessions/:sessionId/run', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = missionSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'mission invalide', issues: parsed.error.issues });
     const room = await accessibleRoom(app, me, req.params.sessionId);
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const question = parsed.data.question || parsed.data.text;
-    const context = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    const baseContext = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    // Skills et sources de contexte rattachés au collectif (Bibliothèque).
+    // Nœuds « agent » des graphes de projet reliés à ce collectif : composition appliquée avant la mission.
+    // Composition temporaire : rétablie à la fin de cette mission (fil pré-attribué).
+    const threadId = makeThreadId();
+    for (const project of await workspaceStoreFor(app.kayrosContext).list(me.tenantId, 'projects')) {
+      for (const node of (project.graph?.nodes || []).filter((n) => n.type === 'collectif' && n.config?.session_id === room.room_id)) {
+        if (agentNodesFor(project.graph, node.id).add.length || agentNodesFor(project.graph, node.id).remove.length) {
+          await acquireGraphAgents(app, me.tenantId, project.graph, node, me.email, threadId);
+        }
+      }
+    }
+    const attached = await collectiveAttachmentsContext(app, me.tenantId, room.room_id);
+    const context = attached ? `${baseContext}\n\n${attached}`.slice(0, 24000) : baseContext;
     const profile = runProfile(app, parsed.data.profile);
     const input = {
-      platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
+      platform: 'console', room_id: room.room_id, tenantId: me.tenantId, thread_id: threadId,
       user_id: me.sub, by: me.email, explicit: true, text: question, context,
       provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
     };
     if (waitRequested(req)) {
       try {
-        const result = await app.kayrosContext.hybridGateway.handleMessage(input);
+        let result;
+        try { result = await app.kayrosContext.hybridGateway.handleMessage(input); } finally { await releaseGraphAgents(app, threadId); }
         // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
-        return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary, llm: result.run?.llm || null };
+        const thread = result.thread ? await withGates(app, me.tenantId, result.thread) : result.thread;
+        return { session_id: room.room_id, run: result.run, thread, summary: result.summary, llm: result.run?.llm || null };
       } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
     }
     try {
@@ -699,8 +955,96 @@ export default async function consoleRoute(app) {
         poll: `/v1/console/threads/${encodeURIComponent(execution.thread_id)}`,
       });
     } catch (error) {
+      await releaseGraphAgents(app, threadId);
       return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: surface(error.message) });
     }
+  });
+
+  // --- Enchaînement de collectifs (graphe de projet) ----------------------
+  const pipelineSchema = z.object({ question: z.string().trim().min(3).max(4000), profile: z.enum(EXECUTION_PROFILES).optional(), pause_between: z.boolean().optional() });
+  app.post('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
+    const parsed = pipelineSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'question invalide (3 caractères minimum)', issues: parsed.error.issues });
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const project = await ws.get(me.tenantId, 'projects', req.params.projectId);
+    if (!project) return reply.code(404).send({ error: 'projet introuvable' });
+    const nodes = pipelineSteps(project.graph);
+    if (!nodes.length) return reply.code(400).send({ error: 'aucun collectif lié à une session dans le graphe', code: 'no_collective' });
+    for (const node of nodes) {
+      if (!await accessibleRoom(app, me, node.config.session_id)) return reply.code(404).send({ error: `session introuvable pour le collectif « ${node.label || node.id} »` });
+    }
+    if ((await ws.list(me.tenantId, 'pipelines', { project_id: project.id })).some((p) => !['completed', 'failed', 'cancelled'].includes(p.status))) {
+      return reply.code(409).send({ error: 'un enchaînement est déjà en cours sur ce projet', code: 'pipeline_running' });
+    }
+    const created = await ws.create(me.tenantId, 'pipelines', {
+      project_id: project.id, question: parsed.data.question, profile: parsed.data.profile || null,
+      status: 'running', current: 0, created_sub: me.sub, pause_between: parsed.data.pause_between === true,
+      steps: nodes.map((n) => ({ node_id: n.id, label: n.label || '', session_id: n.config.session_id, deps: stepDeps(project.graph, n.id), status: 'pending', thread_id: null, run_id: null, verdict: null })),
+    }, { by: me.email });
+    const pipeline = await withPipelineLock(created.id, () => startReadySteps(app, me.tenantId, created));
+    return reply.code(202).send({ pipeline });
+  });
+  app.get('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const items = await workspaceStoreFor(app.kayrosContext).list(me.tenantId, 'pipelines', { project_id: req.params.projectId });
+    return { pipelines: items.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))).slice(0, 20) };
+  });
+  app.get('/v1/console/pipelines/:pipelineId', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const pipeline = await workspaceStoreFor(app.kayrosContext).get(me.tenantId, 'pipelines', req.params.pipelineId);
+    return pipeline ? { pipeline } : reply.code(404).send({ error: 'enchaînement introuvable' });
+  });
+  // Porte bloquée : un comex/admin lève la porte (motif obligatoire) et le collectif suivant démarre.
+  app.post('/v1/console/pipelines/:pipelineId/resume', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
+    const justification = String(req.body?.justification || '').trim();
+    if (justification.length < 3) return reply.code(400).send({ error: 'motif obligatoire (3 caractères minimum)', code: 'reason_required' });
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const result = await withPipelineLock(req.params.pipelineId, async () => {
+      const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+      if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
+      const blocked = pipeline.steps.filter((s) => s.status === 'blocked');
+      if (pipeline.status === 'cancelled' || !blocked.length) return { code: 409, body: { error: 'aucune porte bloquée sur cet enchaînement', code: 'not_blocked' } };
+      const at = new Date().toISOString();
+      for (const step of blocked) Object.assign(step, { status: 'overridden', override: { by: me.email, justification, at } });
+      // Branches suspendues par le blocage : relancées depuis le début.
+      for (const step of pipeline.steps.filter((x) => x.status === 'halted')) Object.assign(step, { status: 'pending', thread_id: null, run_id: null, verdict: null, rationale: null, gates: [] });
+      return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
+    });
+    return reply.code(result.code).send(result.body);
+  });
+  // Pause d'arbitrage : une porte passée attend une validation humaine avant les collectifs suivants.
+  app.post('/v1/console/pipelines/:pipelineId/approve', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
+    const comment = String(req.body?.comment || '').trim().slice(0, 2000);
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const result = await withPipelineLock(req.params.pipelineId, async () => {
+      const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+      if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
+      // Validation branche par branche (`node_id`), ou de toutes les étapes en attente sans `node_id`.
+      const nodeId = req.body?.node_id ? String(req.body.node_id) : null;
+      const waiting = pipeline.steps.filter((s) => s.status === 'awaiting_approval' && (!nodeId || s.node_id === nodeId));
+      if (pipeline.status === 'cancelled' || !waiting.length) return { code: 409, body: { error: nodeId ? 'cette étape n’attend pas de validation' : 'aucune étape en attente de validation', code: 'not_awaiting' } };
+      const at = new Date().toISOString();
+      for (const step of waiting) Object.assign(step, { status: 'approved', approval: { by: me.email, comment: comment || null, at } });
+      return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
+    });
+    return reply.code(result.code).send(result.body);
+  });
+  app.post('/v1/console/pipelines/:pipelineId/cancel', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+    if (!pipeline) return reply.code(404).send({ error: 'enchaînement introuvable' });
+    if (['completed', 'failed', 'cancelled'].includes(pipeline.status)) return { pipeline };
+    const at = new Date().toISOString();
+    // Les missions en cours sont annulées (appel LLM interrompu) ; un résultat tardif serait ignoré.
+    const running = pipeline.steps.filter((x) => x.status === 'running');
+    for (const step of running) Object.assign(step, { status: 'halted', halted: { by_cancel: me.email, thread_id: step.thread_id, at } });
+    const saved = await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: at, cancelled_by: me.email });
+    await cancelStepThreads(app, me.tenantId, running.map((x) => x.thread_id), { by: me.email, reason: 'enchaînement arrêté' });
+    return { pipeline: saved };
   });
 
   // --- Journal d'exécution du harness ------------------------------------
@@ -714,15 +1058,16 @@ export default async function consoleRoute(app) {
   app.get('/v1/console/threads', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const threads = await scopedThreads(app, me, { roomId: req.query?.session_id || req.query?.room_id || null, limit: req.query?.limit || 100 });
-    return threads ? { threads } : reply.code(404).send({ error: 'session introuvable' });
+    if (!threads) return reply.code(404).send({ error: 'session introuvable' });
+    return { threads: await Promise.all(threads.map((t) => withGates(app, me.tenantId, t))) };
   });
   app.get('/v1/console/threads/:threadId', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const thread = await accessibleThread(app, me, req.params.threadId);
-    return thread ? { thread } : reply.code(404).send({ error: 'fil introuvable' });
+    return thread ? { thread: await withGates(app, me.tenantId, thread) } : reply.code(404).send({ error: 'fil introuvable' });
   });
   app.post('/v1/console/threads/:threadId/messages', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = replySchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'réponse invalide', issues: parsed.error.issues });
     const existing = await accessibleThread(app, me, req.params.threadId);
     if (!existing) return reply.code(404).send({ error: 'fil introuvable' });
@@ -740,10 +1085,25 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
     const parsed = arbitrationSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'arbitrage invalide', issues: parsed.error.issues });
-    if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
-    try { const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email }); return { thread }; }
+    const current = await accessibleThread(app, me, req.params.threadId);
+    if (!current) return reply.code(404).send({ error: 'fil introuvable' });
+    // Une porte du graphe de projet bloquée interdit d'accepter un verdict favorable :
+    // il faut le rejeter (réévaluation) ou passer outre avec une justification.
+    const gated = await withGates(app, me.tenantId, current);
+    const evaluation = gated?.gate_evaluation;
+    if (evaluation?.status === 'blocked' && parsed.data.action === 'accept_consensus' && evaluation.consensus_verdict !== 'NO_GO') {
+      const reasons = evaluation.results.filter((r) => r.status === 'blocked').flatMap((r) => r.reasons);
+      return reply.code(409).send({ error: `porte du projet bloquante : ${reasons.join(' ; ')}. Demandez une réévaluation ou passez outre avec une justification.`, code: 'gate_blocked', gate_evaluation: evaluation });
+    }
+    try {
+      const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email });
+      // Les parties prenantes « informé » des projets concernés reçoivent la décision.
+      try { const { notifyInformed } = await import('./console-workspace.mjs'); await notifyInformed(app, me.tenantId, thread, { by: me.email }); }
+      catch (error) { app.log?.warn?.({ err: error }, 'notification des informés impossible'); }
+      return { thread };
+    }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
 }

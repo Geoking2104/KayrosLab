@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import {
-  Bot,
+  Building2,
+  Library,
   FolderOpen,
   Inbox,
-  Plug,
   Scale,
-  Users,
+  Settings,
   X,
 } from "lucide-react";
 import { ConsoleProvider, useConsole } from "@/lib/console/store";
 import { PAGE_FROM_HASH, WORKSPACE_EMAIL, WORKSPACE_NAME, type Page } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
 import { Today } from "./Today";
-import { Dossiers } from "./Dossiers";
+import { Dossier, Dossiers } from "./Dossiers";
+import { Projets } from "./Projets";
+import { Membres } from "./Membres";
+import { MEMBER_ROLES } from "@/lib/console/roles";
 import { Collectifs } from "./Collectifs";
 import { Agents } from "./Agents";
 import { Connexions } from "./Connexions";
@@ -20,15 +23,31 @@ import { Espace } from "./Espace";
 import { Instruct } from "./Instruct";
 import { Workbench } from "./Workbench";
 import { Demo } from "./Demo";
+import { Societe } from "./Societe";
+import { Bibliotheque } from "./Bibliotheque";
 import { LANGS, setLanguage, t, useLang, type Lang } from "@/lib/i18n";
 
 const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; soft: string; ink: string }[] = [
-  { id: "overview", get label() { return t("Aujourd’hui"); }, get short() { return t("Jour"); }, icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
-  { id: "dossiers", get label() { return t("Dossiers"); }, get short() { return t("Dossiers"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
-  { id: "collectifs", get label() { return t("Collectifs"); }, get short() { return t("Équipes"); }, icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
-  { id: "agents", get label() { return t("Agents"); }, get short() { return t("Agents"); }, icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
-  { id: "connexions", get label() { return t("Connexions"); }, get short() { return t("Liens"); }, icon: Plug, soft: "bg-go-soft", ink: "text-go" },
+  { id: "societe", get label() { return t("Société"); }, get short() { return t("Société"); }, icon: Building2, soft: "bg-accent-soft", ink: "text-accent" },
+  { id: "projets", get label() { return t("Projets"); }, get short() { return t("Projets"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
+  { id: "bibliotheque", get label() { return t("Bibliothèque"); }, get short() { return t("Biblio"); }, icon: Library, soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "reglages", get label() { return t("Réglages"); }, get short() { return t("Réglages"); }, icon: Settings, soft: "bg-go-soft", ink: "text-go" },
 ];
+
+// Navigation à 4 entrées : chaque page historique reste accessible par son
+// ancre et se range sous une entrée, avec des onglets secondaires.
+const SECTION: Partial<Record<Page, Page>> = {
+  societe: "societe", overview: "societe",
+  projets: "projets", dossiers: "projets",
+  bibliotheque: "bibliotheque", agents: "bibliotheque", collectifs: "bibliotheque",
+  reglages: "reglages", connexions: "reglages", espace: "reglages", membres: "reglages",
+};
+const TABS: Partial<Record<Page, { id: Page; label: () => string }[]>> = {
+  societe: [{ id: "societe", label: () => t("Tableau de bord") }, { id: "overview", label: () => t("Aujourd’hui") }],
+  projets: [{ id: "projets", label: () => t("Projets") }, { id: "dossiers", label: () => t("Tous les dossiers") }],
+  bibliotheque: [{ id: "agents", label: () => t("Agents") }, { id: "collectifs", label: () => t("Collectifs") }, { id: "bibliotheque", label: () => t("Skills et contexte") }],
+  reglages: [{ id: "connexions", label: () => t("Connexions") }, { id: "membres", label: () => t("Membres") }, { id: "espace", label: () => t("Espace") }],
+};
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
   let hash: string = page;
@@ -48,7 +67,7 @@ function readLocation() {
   if (typeof window === "undefined") return { page: "overview" as Page, thread: "", agent: "", dossier: "", legacy: "overview" };
   const raw = window.location.hash.replace(/^#/, "");
   const [path, query = ""] = raw.split("?");
-  const page = PAGE_FROM_HASH[path || "overview"] ?? "overview";
+  const page = PAGE_FROM_HASH[path || "societe"] ?? "societe";
   const params = new URLSearchParams(query);
   return { page, thread: params.get("thread") ?? "", agent: params.get("agent") ?? "", dossier: params.get("dossier") ?? "", legacy: path };
 }
@@ -63,14 +82,14 @@ export function ConsoleApp() {
 }
 
 function Frame() {
-  const { state, clearNotice, setRole } = useConsole();
+  const { state, clearNotice, setRole, live, liveUser, memberRole } = useConsole();
   const [loc, setLoc] = useState({ page: "overview" as Page, thread: "", agent: "", dossier: "", legacy: "overview" });
 
   useEffect(() => {
     const sync = () => setLoc(readLocation());
     sync();
     window.addEventListener("hashchange", sync);
-    if (!window.location.hash) window.location.hash = "overview";
+    if (!window.location.hash) window.location.hash = "societe";
     return () => window.removeEventListener("hashchange", sync);
   }, []);
 
@@ -90,7 +109,7 @@ function Frame() {
         <nav className="flex flex-1 flex-col gap-0.5 px-3">
           {NAV.map((item) => {
             const Icon = item.icon;
-            const active = page === item.id;
+            const active = SECTION[page] === item.id;
             return (
               <a
                 key={item.id}
@@ -105,7 +124,7 @@ function Frame() {
                   <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 {item.label}
-                {item.id === "dossiers" && waiting > 0 ? (
+                {item.id === "projets" && waiting > 0 ? (
                   <span className="ml-auto min-w-5 rounded-md bg-white px-1.5 text-center text-[11px] font-semibold tabular-nums text-ink">{waiting}</span>
                 ) : null}
               </a>
@@ -120,7 +139,14 @@ function Frame() {
               <span className="block truncate text-[11px] text-muted">{WORKSPACE_EMAIL}</span>
             </span>
           </a>
-          <RoleSwitch role={state.role} onChange={setRole} />
+          {live ? (
+            <>
+              <p className="rounded-md bg-go-soft px-2 py-1 text-xs text-go" data-testid="live-badge">{t("Connecté à l’API · {{v}}", { v: liveUser?.email ?? "" })}</p>
+              <a href="#membres" className="mt-2 block rounded-md bg-paper px-2 py-1 text-xs text-ink-soft" data-testid="member-role">{t("Rôle : {{v}}", { v: MEMBER_ROLES.find((r) => r.id === memberRole)?.label ?? memberRole })}</a>
+            </>
+          ) : (
+            <DemoMember role={state.role} onChange={setRole} />
+          )}
         </div>
       </aside>
 
@@ -131,10 +157,11 @@ function Frame() {
           </span>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold tracking-tight text-ink">
-              {page === "instruire" ? t("Instruire une décision") : page === "workbench" ? "Workbench" : page === "demo" ? t("Démo publique") : NAV.find((item) => item.id === page)?.label ?? t("Espace")}
+              {page === "instruire" ? t("Instruire une décision") : page === "workbench" ? "Workbench" : page === "demo" ? t("Démo publique") : NAV.find((item) => item.id === SECTION[page])?.label ?? t("Espace")}
             </p>
             <p className="truncate text-[11px] text-muted">{t("Verdict consultatif jusqu’à l’arbitrage humain")}</p>
           </div>
+          {!live ? <span className="rounded-md bg-hold-soft px-2 py-1 text-[11px] text-hold">{t("Mode démo")}</span> : null}
           <LangSwitch />
           {page !== "instruire" ? (
             <a href="#instruire" className="inline-flex min-h-10 items-center gap-2 rounded-[10px] bg-accent px-3 text-sm font-semibold text-white shadow-cta hover:bg-accent-strong md:px-3.5">
@@ -157,22 +184,37 @@ function Frame() {
         ) : null}
 
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-28 md:px-8 md:pb-10">
+          {SECTION[page] && TABS[SECTION[page]!] ? (
+            <nav className="mb-5 flex gap-1 border-b border-line" aria-label={t("Sous-sections")}>
+              {TABS[SECTION[page]!]!.map((tab) => (
+                <a key={tab.id} href={`#${tab.id}`} aria-current={tab.id === page ? "page" : undefined} className={cn("-mb-px border-b-2 px-3 py-2 text-sm", tab.id === page ? "border-accent font-medium text-ink" : "border-transparent text-muted hover:text-ink")}>
+                  {tab.label()}
+                </a>
+              ))}
+            </nav>
+          ) : null}
+          {page === "societe" && <Societe />}
+          {page === "projets" && <Projets />}
+          {page === "bibliotheque" && <Bibliotheque />}
           {page === "overview" && <Today />}
-          {page === "dossiers" && <Dossiers threadId={loc.thread} />}
+          {page === "dossiers" && <Dossiers threadId="" />}
           {page === "collectifs" && <Collectifs />}
           {page === "agents" && <Agents agentId={loc.agent} dossierId={loc.dossier} />}
-          {page === "connexions" && <Connexions legacy={loc.legacy} />}
+          {(page === "connexions" || page === "reglages") && <Connexions legacy={loc.legacy} />}
           {page === "espace" && <Espace />}
+          {page === "membres" && <Membres />}
           {page === "instruire" && <Instruct />}
           {page === "workbench" && <Workbench />}
           {page === "demo" && <Demo />}
         </main>
       </div>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label={t("Navigation")}>
+      {loc.thread ? <DossierPanel threadId={loc.thread} onClose={() => go(page)} /> : null}
+
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label={t("Navigation")}>
         {NAV.map((item) => {
           const Icon = item.icon;
-          const active = page === item.id;
+          const active = SECTION[page] === item.id;
           return (
             <a key={item.id} href={`#${item.id}`} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-0.5 border-t-2 text-[11px] font-medium", active ? cn(item.ink, "border-current") : "border-transparent text-muted")}>
               <Icon size={18} strokeWidth={1.75} aria-hidden="true" className={active ? item.ink : "text-muted"} />
@@ -181,6 +223,26 @@ function Frame() {
           );
         })}
       </nav>
+    </div>
+  );
+}
+
+/** Le dossier s’ouvre dans un panneau latéral, au-dessus de la page courante. */
+function DossierPanel({ threadId, onClose }: { threadId: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-40 flex justify-end">
+      <button type="button" aria-label={t("Fermer le dossier")} className="absolute inset-0 bg-ink/20" onClick={onClose} />
+      <aside role="dialog" aria-modal="true" aria-label={t("Dossier")} data-testid="dossier-panel" className="relative h-full w-full max-w-3xl overflow-y-auto border-l border-line bg-paper px-4 py-5 shadow-xl md:px-6">
+        <button type="button" aria-label={t("Fermer le dossier")} onClick={onClose} className="absolute right-3 top-3 rounded-lg p-1.5 hover:bg-surface">
+          <X size={18} />
+        </button>
+        <Dossier threadId={threadId} />
+      </aside>
     </div>
   );
 }
@@ -214,25 +276,19 @@ function initials(name: string) {
   return name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("");
 }
 
-function RoleSwitch({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
+// Mode démo : on choisit un membre fictif de l’espace ; son rôle fixe les droits.
+const DEMO_MEMBERS = [
+  { id: "comex", name: "Camille Renaud", role: "comex" as const },
+  { id: "contributeur", name: "Sam Martin", role: "contributeur" as const },
+];
+
+function DemoMember({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
   return (
-    <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-paper p-1" role="group" aria-label={t("Rôle de l’espace")}>
-      {(
-        [
-          ["contributeur", t("Contrib.")],
-          ["comex", "COMEX"],
-        ] as const
-      ).map(([id, label]) => (
-        <button
-          key={id}
-          type="button"
-          onClick={() => onChange(id)}
-          className={cn("min-h-9 rounded-md text-xs font-semibold", role === id ? "bg-surface text-ink shadow-card" : "text-muted")}
-          aria-pressed={role === id}
-        >
-          {label}
-        </button>
-      ))}
-    </div>
+    <label className="mt-2 grid gap-1 text-[11px] text-muted">
+      {t("Membre de démo")}
+      <select aria-label={t("Membre de démo")} className="min-h-8 rounded-lg border border-line bg-paper px-2 text-xs text-ink" value={role} onChange={(e) => onChange(e.target.value as "contributeur" | "comex")}>
+        {DEMO_MEMBERS.map((m) => <option key={m.id} value={m.role}>{m.name} · {MEMBER_ROLES.find((r) => r.id === m.role)?.label}</option>)}
+      </select>
+    </label>
   );
 }

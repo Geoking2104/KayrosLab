@@ -16,7 +16,7 @@ import {
 } from "@/lib/console/model";
 import { readDocument } from "@/lib/console/read";
 import { cn } from "@/lib/cn";
-import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
+import { Section, Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
@@ -119,7 +119,8 @@ export function Dossiers({ threadId }: { threadId: string }) {
   );
 }
 
-function Dossier({ threadId }: { threadId: string }) {
+/** Détail d’un dossier, affiché dans le panneau latéral. */
+export function Dossier({ threadId }: { threadId: string }) {
   const { state, arbitrate, replyClarification, addAgentToThread, removeAgentFromThread, deleteThread, attachReading, poseQuestion } = useConsole();
   const thread = state.threads.find((item) => item.id === threadId);
   const [note, setNote] = useState("");
@@ -311,6 +312,15 @@ function Dossier({ threadId }: { threadId: string }) {
       {thread.status === "awaiting_arbitration" ? (
         <Panel>
           <h2 className="text-sm font-medium">{t("Arbitrage")}</h2>
+          {thread.gates?.status === "blocked" ? (
+            <div className="mt-2 rounded-lg border border-stop/40 bg-stop-soft px-3 py-2 text-sm" role="status" data-testid="gate-blocked">
+              <p className="font-semibold text-stop">{t("Porte du projet bloquée")}</p>
+              <ul className="mt-1 list-disc pl-5 text-ink-soft">
+                {thread.gates.results.filter((r) => r.status === "blocked").flatMap((r) => r.reasons.map((reason) => <li key={`${r.gateId}-${reason}`}>{reason}</li>))}
+              </ul>
+              <p className="mt-1 text-xs text-muted">{t("Accepter le consensus n’est pas possible : demandez une réévaluation ou dérogez avec une justification.")}</p>
+            </div>
+          ) : thread.gates?.status === "passed" ? <p className="mt-2 text-xs text-go" data-testid="gate-passed">{t("Portes du projet franchies.")}</p> : null}
           {manager ? (
             <>
               <p className="mt-1 text-sm text-muted">{t(
@@ -319,8 +329,8 @@ function Dossier({ threadId }: { threadId: string }) {
               <TextArea className="mt-3" value={note} onChange={(event) => setNote(event.target.value)} placeholder={t("Motif, obligatoire pour une dérogation au veto")} aria-label={t("Motif d’arbitrage")} />
               {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                <Button onClick={() => act("accept")}>{t("Accepter le consensus")}</Button>
-                <Button variant="secondary" onClick={() => act("conditions")}>{t("Passer sous conditions")}</Button>
+                <Button onClick={() => act("accept")} disabled={thread.gates?.status === "blocked"}>{t("Accepter le consensus")}</Button>
+                <Button variant="secondary" onClick={() => act("conditions")} disabled={thread.gates?.status === "blocked"}>{t("Passer sous conditions")}</Button>
                 <Button variant="secondary" onClick={() => act("reevaluate")}>{t("Demander une réévaluation")}</Button>
                 <Button variant="danger" onClick={() => act("override")} disabled={note.trim().length < 12}>{t("Déroger au veto")}</Button>
               </div>
@@ -339,8 +349,7 @@ function Dossier({ threadId }: { threadId: string }) {
         </Panel>
       ) : null}
 
-      <Panel>
-        <h2 className="text-sm font-medium">{t("Retirer la décision")}</h2>
+      <Section id="dossier-retirer" title={t("Retirer la décision")} defaultOpen={false}>
         <p className="mt-1 text-sm text-muted">{t("Le collectif et les autres dossiers restent.")}</p>
         <Button
           className="mt-3"
@@ -350,12 +359,11 @@ function Dossier({ threadId }: { threadId: string }) {
             go("dossiers");
           }}
         >{t("Supprimer le dossier")}</Button>
-      </Panel>
+      </Section>
 
       <Trace thread={thread} agents={state.agents} />
 
-      <Panel>
-        <h2 className="text-sm font-medium">{t("Journal")}</h2>
+      <Section id="dossier-journal" title={t("Journal")} defaultOpen={false}>
         <ol className="mt-3 flex flex-col gap-3">
           {[...thread.events].reverse().map((event) => (
             <li key={`${event.at}-${event.label}`} className="grid gap-1 border-l border-line pl-3 text-sm">
@@ -365,7 +373,7 @@ function Dossier({ threadId }: { threadId: string }) {
             </li>
           ))}
         </ol>
-      </Panel>
+      </Section>
       <p className="text-xs text-muted">{t("Identifiant {{id}}. Le lien public d’intégration ouvre ce dossier, pas un autre écran.", { id: thread.id })}</p>
     </div>
   );
@@ -374,8 +382,7 @@ function Dossier({ threadId }: { threadId: string }) {
 function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
   const steps = traceOf(thread, agents);
   return (
-    <Panel>
-      <h2 className="text-sm font-medium">{t("Trace du comité")}</h2>
+    <Section id="dossier-trace" title={t("Trace du comité")} defaultOpen={false}>
       <p className="mt-1 text-sm text-muted">{t(
         "Lecture seule. Elle suit ce dossier. Elle ne rebranche ni le collectif, ni un flux."
       )}</p>
@@ -394,7 +401,7 @@ function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
           </li>
         ))}
       </ol>
-    </Panel>
+    </Section>
   );
 }
 

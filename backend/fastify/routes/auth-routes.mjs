@@ -1,5 +1,7 @@
 import { z } from 'zod';
 import { syncAutheliaUser } from '../lib/authelia-sync.mjs';
+import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
+import { inviteTokenHash } from './console-workspace.mjs';
 import {
   authorizeUrl,
   exchangeAuthorizationCode,
@@ -105,6 +107,57 @@ export default async function authRoutes(app) {
       await pushAuthelia(req, { email, password, name: name || user?.name });
       return { user };
     } catch (e) { return reply.code(400).send({ error: e.message }); }
+  });
+
+  // --- Activation d'une invitation (console → Membres → Inviter) ---------
+  // Le lien reçu par e-mail porte un jeton à usage unique : il crée le compte
+  // DANS l'espace de l'invitant (et non dans l'espace libre-service), ou
+  // rattache un compte existant du même espace, puis ouvre la session.
+  const findInvite = async (token) => {
+    const hash = inviteTokenHash(token);
+    if (!token || String(token).length < 16) return null;
+    const found = await workspaceStoreFor(app.kayrosContext).findAcross('members', (m) => m.status === 'invited' && m.invite_token_sha256 === hash);
+    if (!found) return null;
+    if (found.item.invite_expires_at && Date.parse(found.item.invite_expires_at) < Date.now()) return { ...found, expired: true };
+    return found;
+  };
+  app.get('/v1/auth/invite/:token', async (req, reply) => {
+    const found = await findInvite(req.params.token);
+    if (!found) return reply.code(404).send({ error: 'invitation introuvable ou déjà utilisée', code: 'invite_not_found' });
+    if (found.expired) return reply.code(410).send({ error: 'invitation expirée : demandez une nouvelle invitation', code: 'invite_expired' });
+    const account = await app.kayrosContext.userStore?.findByEmail?.(found.item.email).catch(() => null);
+    return { email: found.item.email, name: found.item.name || '', role: found.item.role, invited_by: found.item.invited_by || null, account_exists: !!account };
+  });
+  const acceptSchema = z.object({ token: z.string().min(16).max(200), password: z.string().min(8).max(200), name: z.string().max(200).optional() });
+  app.post('/v1/auth/invite/accept', async (req, reply) => {
+    const ctx = app.kayrosContext;
+    if (!ctx.auth) return reply.code(503).send({ error: 'authentification non configuree' });
+    const parsed = acceptSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'mot de passe de 8 caractères minimum requis', issues: parsed.error.issues });
+    const found = await findInvite(parsed.data.token);
+    if (!found) return reply.code(404).send({ error: 'invitation introuvable ou déjà utilisée', code: 'invite_not_found' });
+    if (found.expired) return reply.code(410).send({ error: 'invitation expirée : demandez une nouvelle invitation', code: 'invite_expired' });
+    const { tenantId, item: member } = found;
+    const existing = await ctx.userStore?.findByEmail?.(member.email).catch(() => null);
+    if (existing && String(existing.tenantId || 'default') !== tenantId) {
+      return reply.code(409).send({ error: 'un compte existe déjà avec cette adresse dans un autre espace : contactez l’administrateur', code: 'account_other_tenant' });
+    }
+    let session;
+    try {
+      if (!existing) {
+        // Rôle du compte : comex pour les gestionnaires, sinon contributeur ; la fiche membre fixe le rôle effectif (lecteur compris).
+        const accountRole = ['comex', 'admin'].includes(member.role) ? 'comex' : 'contributeur';
+        await ctx.auth.register({ email: member.email, password: parsed.data.password, name: parsed.data.name || member.name || null, role: accountRole, tenantId });
+        await pushAuthelia(req, { email: member.email, password: parsed.data.password, name: parsed.data.name || member.name });
+      }
+      // Compte existant : le mot de passe saisi doit être le sien (connexion classique).
+      session = await ctx.auth.login({ email: member.email, password: parsed.data.password, throttleKey: `${member.email}|${req.ip}` });
+    } catch (e) {
+      if (e.code === 'AUTH_THROTTLED') return reply.code(429).send({ error: e.message });
+      return reply.code(existing ? 401 : 400).send({ error: existing ? 'compte existant : saisissez son mot de passe actuel' : e.message });
+    }
+    await workspaceStoreFor(ctx).update(tenantId, 'members', member.id, { status: 'active', joined_at: new Date().toISOString(), invite_token_sha256: null, account_created: !existing });
+    return { ...session, activated: true, account_created: !existing };
   });
 
   app.post('/v1/auth/login', async (req, reply) => {

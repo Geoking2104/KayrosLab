@@ -1,4 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { api as http, ApiError, AUTH_EVENT, tokenStore, type LiveUser, type WorkspaceKind } from "./api";
+import { EMPTY_WORKSPACE, fromApiAgent, fromApiSession, fromApiThread, slugId, toApiAgent, votingToApi, type MemberRole, type Workspace } from "./live";
 import {
   contributionFor,
   hybridCount,
@@ -32,8 +34,29 @@ type DraftMission = {
   agentIds?: string[];
 };
 
+type Result = { ok: boolean; reason?: string };
+type LiveData = { agents: Agent[]; collectives: Collective[]; threads: Thread[] };
+
+export const PERMISSIONS: Record<MemberRole, string[]> = {
+  admin: ["read", "run", "arbitrate", "manage", "members"],
+  comex: ["read", "run", "arbitrate", "manage"],
+  contributeur: ["read", "run"],
+  lecteur: ["read"],
+};
+
 type Store = {
   state: AppState;
+  /** Vrai quand la console est connectée à l’API (hors mode Démo). */
+  live: boolean;
+  liveUser: LiveUser | null;
+  syncing: boolean;
+  refreshLive: () => Promise<void>;
+  workspace: Workspace;
+  /** Rôle réel du membre (admin, comex, contributeur, lecteur) et ses permissions. */
+  memberRole: MemberRole;
+  permissions: string[];
+  saveItem: (kind: WorkspaceKind, id: string | null, body: Record<string, unknown>) => Promise<Result & { id?: string }>;
+  deleteItem: (kind: WorkspaceKind, id: string) => Promise<Result>;
   setRole: (role: Role) => void;
   dismissGuide: () => void;
   ackGuide: (index: number, checked: boolean) => void;
@@ -183,6 +206,57 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(timer);
   }, [state.threads]);
 
+  // --- Mode connecté : agents, collectifs, dossiers et Bibliothèque via l’API.
+  const [liveUser, setLiveUser] = useState<LiveUser | null>(null);
+  const [liveData, setLiveData] = useState<LiveData | null>(null);
+  const [workspace, setWorkspace] = useState<Workspace>(EMPTY_WORKSPACE);
+  const [syncing, setSyncing] = useState(false);
+  const [membership, setMembership] = useState<{ role: MemberRole; permissions: string[] } | null>(null);
+  const pending = useRef(new Map<string, Thread>());
+
+  const refreshLive = useCallback(async () => {
+    if (!tokenStore.get()) { setLiveUser(null); setLiveData(null); setWorkspace(EMPTY_WORKSPACE); return; }
+    setSyncing(true);
+    try {
+      const me = liveUser ?? (await http.me()).user;
+      const [agents, sessions, threads, companies, projects, skills, contexts, members, membership] = await Promise.all([
+        http.agents(), http.sessions(), http.threads(),
+        http.list("companies"), http.list("projects"), http.list("skills"), http.list("contexts"),
+        http.list("members").catch(() => ({ members: [] })),
+        http.memberMe().catch(() => null),
+      ]);
+      setMembership(membership ? { role: membership.role as MemberRole, permissions: membership.permissions } : null);
+      const mapped = threads.threads.map(fromApiThread);
+      setLiveUser(me);
+      setLiveData({
+        agents: agents.agents.map(fromApiAgent),
+        collectives: sessions.sessions.map(fromApiSession),
+        threads: [...pending.current.values(), ...mapped],
+      });
+      setWorkspace({ companies: companies.companies, projects: projects.projects, skills: skills.skills, contexts: contexts.contexts, members: members.members ?? [] });
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 401) { tokenStore.clear(); return; }
+      setState((current) => ({ ...current, notice: { tone: "warn", text: t("API indisponible : {{v}}", { v: (error as Error).message }) } }));
+    } finally {
+      setSyncing(false);
+    }
+  }, [liveUser]);
+
+  useEffect(() => {
+    const onAuth = () => { setLiveUser(null); void refreshLive(); };
+    window.addEventListener(AUTH_EVENT, onAuth);
+    if (tokenStore.get()) void refreshLive();
+    return () => window.removeEventListener(AUTH_EVENT, onAuth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Suivi des dossiers en cours côté serveur.
+  useEffect(() => {
+    if (!liveData?.threads.some((thread) => thread.status === "running")) return;
+    const timer = window.setTimeout(() => { void refreshLive(); }, 2500);
+    return () => window.clearTimeout(timer);
+  }, [liveData, refreshLive]);
+
   const api = useMemo<Store>(() => {
     const notify = (text: string, tone: "ok" | "warn" | "stop" = "ok") => {
       setState((current) => ({ ...current, notice: { text, tone } }));
@@ -298,6 +372,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
                   simulation: existing.kind !== "metier" && agent.consented,
                   clues: agent.clues.trim(),
                   brief: agent.brief?.trim() ?? "",
+                  settings: agent.settings ?? item.settings,
                 }
               : item,
           ),
@@ -812,10 +887,156 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         localStorage.removeItem(KEY);
         setState(seedState());
       },
+      live: false,
+      liveUser: null,
+      syncing: false,
+      refreshLive,
+      workspace: EMPTY_WORKSPACE,
+      memberRole: state.role === "comex" ? "comex" : "contributeur",
+      permissions: PERMISSIONS[state.role === "comex" ? "comex" : "contributeur"],
+      saveItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour enregistrer.") }),
+      deleteItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour supprimer.") }),
     };
-  }, [state]);
+  }, [state, refreshLive]);
 
-  return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
+  const value = useMemo<Store>(() => {
+    if (!liveData || !liveUser) return api;
+    // Rôle réel : la fiche membre de l’espace prime sur le rôle du compte.
+    // Sans fiche membre : comex/admin gardent leur rôle, les autres rôles du compte valent contributeur (comme l’API).
+    const memberRole = (membership?.role ?? (["comex", "admin"].includes(liveUser.role) ? liveUser.role : "contributeur")) as MemberRole;
+    const perms = membership?.permissions ?? PERMISSIONS[memberRole] ?? ["read"];
+    const canRun = (): Result | null => (perms.includes("run") ? null : { ok: false, reason: t("Votre rôle (lecteur) ne permet pas de lancer ou relancer une mission.") });
+    const role: Role = ["comex", "admin"].includes(memberRole) ? "comex" : "contributeur";
+    const selected = liveData.collectives.some((c) => c.id === state.selectedCollectiveId)
+      ? state.selectedCollectiveId
+      : liveData.collectives[0]?.id ?? "";
+    const view: AppState = { ...state, ...liveData, role, selectedCollectiveId: selected };
+    const notify = (text: string, tone: "ok" | "warn" | "stop" = "ok") => setState((current) => ({ ...current, notice: { text, tone } }));
+    const fail = (error: unknown) => notify((error as Error).message || t("Refusé"), "stop");
+    const comexOnly = (): Result | null => (role === "comex" ? null : { ok: false, reason: t("Réservé aux rôles COMEX ou admin.") });
+    const later = (): Result => ({ ok: false, reason: t("Pas encore disponible en mode connecté.") });
+    const run = (promise: Promise<unknown>, ok?: string) => {
+      promise.then(async () => { await refreshLive(); if (ok) notify(ok); }).catch(fail);
+    };
+    const saveAgent = (id: string | null, agent: Parameters<Store["updateAgent"]>[1]) => {
+      const body = toApiAgent(agent);
+      return id ? http.updateAgent(id, body) : http.createAgent({ ...body, agent_id: slugId(agent.name) });
+    };
+    return {
+      ...api,
+      state: view,
+      live: true,
+      liveUser,
+      syncing,
+      workspace,
+      memberRole,
+      permissions: perms,
+      setRole: () => notify(t("En mode connecté, le rôle vient de votre compte."), "warn"),
+      createAgent: (agent) => {
+        const denied = comexOnly(); if (denied) return denied;
+        if (agent.kind !== "metier") return later();
+        if (!agent.name.trim() || !agent.mission.trim()) return { ok: false, reason: t("Nom et mission sont requis.") };
+        run(saveAgent(null, agent), t("{{name}} est au registre.", { name: agent.name.trim() }));
+        return { ok: true };
+      },
+      updateAgent: (id, agent) => {
+        const denied = comexOnly(); if (denied) return denied;
+        run(saveAgent(id, agent), t("{{name}} est mis à jour.", { name: agent.name.trim() }));
+        return { ok: true };
+      },
+      setAgentEnabled: (agentId, enabled) => {
+        const denied = comexOnly(); if (denied) return denied;
+        run(http.updateAgent(agentId, { enabled }));
+        return { ok: true };
+      },
+      createImpersonatorTeam: () => later(),
+      createCollective: (input) => {
+        if (!input.name.trim() || input.agentIds.length < 2) return { ok: false, reason: t("Nommez le collectif et choisissez au moins deux agents actifs.") };
+        const promise = http.createSession({
+          name: input.name.trim(), active_agents: input.agentIds,
+          voting_threshold: votingToApi(input.voting), personality_simulation_enabled: input.personality,
+        }).then((res) => setState((current) => ({ ...current, selectedCollectiveId: res.session.session_id })));
+        run(promise, t("« {{name}} » est créé.", { name: input.name.trim() }));
+        return { ok: true, id: "" };
+      },
+      addAgentToCollective: (collectiveId, agentId) => run(http.updateCollective(collectiveId, { add_agent_ids: [agentId] })),
+      updateCollective: (id, patch) => {
+        if (patch.name !== undefined || patch.voting !== undefined || patch.personality !== undefined) {
+          return { ok: false, reason: t("Le nom et le mode de vote se fixent à la création en mode connecté.") };
+        }
+        if (patch.removeAgentId) run(http.updateCollective(id, { remove_agent_ids: [patch.removeAgentId] }), t("Agent retiré du collectif."));
+        return { ok: true };
+      },
+      startMission: (draft) => {
+        const denied = canRun();
+        if (denied) { notify(denied.reason!, "stop"); return ""; }
+        const collective = liveData.collectives.find((c) => c.id === draft.collectiveId) ?? liveData.collectives[0];
+        const placeholder = uid("pending");
+        const at = stamp();
+        if (!collective) { notify(t("Créez d’abord un collectif."), "stop"); return placeholder; }
+        const thread: Thread = {
+          id: placeholder, question: draft.question.trim(), collectiveId: collective.id, status: "running",
+          profile: draft.profile, provider: "serveur", useCase: draft.useCase, stage: "construire",
+          agentIds: collective.agentIds, contributions: [], conditions: [], questions: [], evidence: draft.evidence,
+          progress: { done: 0, total: Math.max(collective.agentIds.length, 1) }, createdAt: at, updatedAt: at,
+          events: [{ at, label: tk("Mission lancée"), detail: tc(collective.name) }],
+        };
+        pending.current.set(placeholder, thread);
+        setLiveData((current) => (current ? { ...current, threads: [thread, ...current.threads] } : current));
+        const context = draft.evidence.map((e) => `${e.name}\n${e.text || e.summary || ""}`).join("\n\n").slice(0, 24000) || undefined;
+        http.run(collective.id, { question: draft.question.trim(), profile: draft.profile, context })
+          .then(async (res) => {
+            pending.current.delete(placeholder);
+            const realId = res.thread?.thread_id || res.thread_id;
+            if (realId && window.location.hash.includes(placeholder)) {
+              window.location.hash = window.location.hash.replace(placeholder, realId);
+            }
+            await refreshLive();
+          })
+          .catch((error) => { pending.current.delete(placeholder); void refreshLive(); fail(error); });
+        return placeholder;
+      },
+      replyClarification: (threadId, reply) => {
+        if (!reply.trim()) return;
+        const denied = canRun(); if (denied) { notify(denied.reason!, "stop"); return; }
+        run(http.reply(threadId, reply.trim()), t("Le collectif reprend l’instruction."));
+      },
+      poseQuestion: (threadId, question) => {
+        if (!question.trim()) return { ok: false, reason: t("La question est vide.") };
+        const denied = canRun(); if (denied) return denied;
+        run(http.reply(threadId, question.trim()));
+        return { ok: true };
+      },
+      arbitrate: (threadId, action, note) => {
+        const denied = comexOnly(); if (denied) return denied;
+        const body = action === "override" ? { action: "override_veto", justification: note, decision: "GO" }
+          : action === "reevaluate" ? { action: "reevaluate", justification: note }
+          : { action: "accept_consensus", justification: note, ...(action === "conditions" ? { decision: "CONDITIONAL_GO" } : {}) };
+        if (action === "override" && !note.trim()) return { ok: false, reason: t("Une justification est requise pour lever un veto.") };
+        const gated = liveData.threads.find((x) => x.id === threadId)?.gates;
+        if (gated?.status === "blocked" && (action === "accept" || action === "conditions")) return { ok: false, reason: t("Une porte du projet est bloquée : demandez une réévaluation ou dérogez avec une justification.") };
+        run(http.arbitrate(threadId, body), t("Arbitrage inscrit au journal."));
+        return { ok: true };
+      },
+      addAgentToThread: () => later(),
+      removeAgentFromThread: () => later(),
+      deleteThread: () => later(),
+      attachReading: () => later(),
+      saveItem: async (kind, id, body) => {
+        try {
+          const res = id ? await http.updateItem(kind, id, body) : await http.createItem(kind, body);
+          await refreshLive();
+          return { ok: true, id: res.item.id };
+        } catch (error) { return { ok: false, reason: (error as Error).message }; }
+      },
+      deleteItem: async (kind, id) => {
+        try { await http.deleteItem(kind, id); await refreshLive(); return { ok: true }; }
+        catch (error) { return { ok: false, reason: (error as Error).message }; }
+      },
+    };
+  }, [api, liveData, liveUser, membership, state, syncing, workspace, refreshLive]);
+
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
 export function useConsole() {

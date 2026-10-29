@@ -171,12 +171,14 @@ export class ChatReplyService {
    *   linkService?: object, users?: { findById?: Function }, consoleUrl?: string,
    *   logger?: { warn?: Function }, now?: () => number }} options
    */
-  constructor({ gateway, resolveAdapter = null, linkService = null, users = null, consoleUrl = '', logger = null, now = Date.now } = {}) {
+  constructor({ gateway, resolveAdapter = null, linkService = null, users = null, consoleUrl = '', logger = null, now = Date.now, resolveRole = null } = {}) {
     if (!gateway) throw new Error('ChatReplyService: gateway requis');
     this.gateway = gateway;
     this.resolveAdapter = resolveAdapter;
     this.linkService = linkService;
     this.users = users;
+    // Rôle de l'espace (fiche membre) : prime sur le rôle du compte s'il est fourni.
+    this.resolveRole = resolveRole;
     this.consoleUrl = consoleUrl;
     this.logger = logger;
     this.now = now;
@@ -357,7 +359,10 @@ export class ChatReplyService {
       user = await this.users.findById(link.kayrosUserId).catch(() => null);
       if (!user) return { ok: false, code: 'forbidden', message: 'Compte KayrosLab lié introuvable : liez de nouveau votre compte.' };
     }
-    const role = user?.role || link.role;
+    let role = user?.role || link.role;
+    if (this.resolveRole) {
+      try { role = (await this.resolveRole({ tenantId, email: user?.email || link.email || '', role })) || role; } catch { /* rôle du compte */ }
+    }
     if (user?.tenantId && String(user.tenantId) !== tenantId) return { ok: false, code: 'forbidden', message: 'Compte KayrosLab lié à un autre espace.' };
     if (!ARBITRATION_ROLES.includes(role)) return { ok: false, code: 'forbidden', message: 'Arbitrage réservé aux rôles COMEX ou admin de KayrosLab.' };
     const by = user?.email || link.email || platformUserId;

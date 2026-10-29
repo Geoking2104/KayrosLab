@@ -48,6 +48,7 @@ import { createMcpClientRegistry } from './mcp-auth.mjs';
 import { oidcConfigFromEnv, googleConfigFromEnv } from './oidc.mjs';
 import { smtpFromEnv, createSmtpTransport } from './smtp.mjs';
 import { SalonStateStore } from './salon-state.mjs';
+import { memberRole } from './workspace-roles.mjs';
 import { resolveLlmConfig, describeLlmConfig } from './llm-config.mjs';
 import {
   instrumentProviders, instrumentLlm, setLlmPrimary, consoleRunObserver, recordInterruptedRuns,
@@ -661,10 +662,13 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
   // Réponses asynchrones et arbitrage depuis Slack / Teams / Discord : le
   // verdict est publié dans le canal d'origine avec le connecteur de l'espace
   // (console) ou, à défaut, l'application du serveur.
+  // Contexte final (assigné au retour) : le rôle d'espace s'y lit au moment de l'arbitrage.
+  let roleContext = null;
   const chatReplies = engine.hybridGateway ? new ChatReplyService({
     gateway: engine.hybridGateway,
     resolveAdapter: (platform, tenantId) => connectorConfig.adapterFor(tenantId, platform),
     linkService, users: userStore, consoleUrl: CONSOLE_URL,
+    resolveRole: async ({ tenantId, email, role }) => (await memberRole(roleContext, { tenantId, email, accountRole: role })).role,
     logger: { warn: (detail, message) => console.warn(message, detail?.detail ?? '') },
   }).attach() : null;
   try {
@@ -683,7 +687,7 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     engine.syncAvailableQuants.catch(() => {});
   }
 
-  return {
+  roleContext = {
     providers, llm, embeddings, tools, auth, oidc, google, smtp, contactMailer, consoleUrl: CONSOLE_URL, userStore, passwordResetMailer, passwordResetTtlSec: PASSWORD_RESET_TTL_SEC, ideas, scorecards,
     salonState,
     governance, gateStore, runStore, campagnes, activites, journal, auditStore, workingGroups, stageTimer,
@@ -705,4 +709,5 @@ const discordAdapter = process.env.DISCORD_PUBLIC_KEY || process.env.DISCORD_BOT
     mcpClients, MCP_ALLOWED_ORIGINS, MCP_RATE_LIMIT,
     apiKeys, publicMissions, integrationSettings, webhookDispatcher, missionEvents, missionWorker,
   };
+  return roleContext;
 }

@@ -170,6 +170,11 @@ test('redémarrage : les exécutions restées `running` passent `failed` (interr
   assert.equal(await gateway.recoverInterruptedRuns(), 0, 'une exécution suivie par ce processus n’est pas touchée');
   // Nouveau processus sur le même store.
   const restarted = new HybridAgentGateway({ swarm: new SwarmService({ logger: null }), store });
+  await new Promise((r) => setImmediate(r));
+  assert.ok((await store.getThread(started.thread.thread_id, { tenantId: 't1' })).heartbeat_at, 'pouls posé au lancement');
+  assert.equal(await restarted.recoverInterruptedRuns(), 0, 'pouls récent : la mission tourne peut-être dans un autre processus');
+  // Le processus est mort : plus de pouls depuis longtemps.
+  await store.updateThread(started.thread.thread_id, { heartbeat_at: new Date(Date.now() - 10 * 60_000).toISOString() }, { tenantId: 't1' });
   assert.equal(await restarted.recoverInterruptedRuns(), 1);
   const thread = await restarted.getThread(started.thread.thread_id, { tenantId: 't1' });
   assert.equal(thread.status, THREAD_FAILED);
@@ -235,4 +240,46 @@ test('provider NVIDIA (Kimi K3) : reasoning_content ignoré, contenu ```json par
   const analysis = normalizeAgentAnalysis(completion.text, { agent_id: 'cfo' });
   assert.equal(analysis.verdict, 'NO_GO');
   assert.deepEqual(analysis.required_mitigations, ['Lever 2 M€']);
+});
+
+test('annulation : le fil passe `cancelled`, le signal interrompt la mission et les agents restants', async () => {
+  const { swarm, gateway, room } = await setup();
+  let seen = null;
+  swarm.run = (_id, options) => new Promise((_, reject) => { seen = options.signal; options.signal.addEventListener('abort', () => reject(options.signal.reason)); });
+  const events = [];
+  gateway.eventSink = async (kind, thread) => { events.push([kind, thread.status]); };
+  const started = await gateway.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Lancer ?', explicit: true });
+  const cancelled = await gateway.cancelThread(started.thread.thread_id, { tenantId: 't1', by: 'a@b.c', reason: 'branche suspendue' });
+  assert.equal(cancelled.status, 'cancelled');
+  assert.equal(seen.aborted, true, 'le signal transmis au collectif est déclenché');
+  const thread = await gateway.waitForThread(started.thread.thread_id, { tenantId: 't1' });
+  assert.equal(thread.status, 'cancelled', 'l’échec provoqué par l’abandon ne remplace pas l’annulation');
+  assert.deepEqual(events, [['cancelled', 'cancelled']]);
+  assert.equal(gateway.jobs.size, 0);
+  assert.equal(gateway.controllers.size, 0);
+});
+
+test('annulation depuis un autre processus : le processus qui exécute relit le fil et s’arrête', async () => {
+  const store = new InMemoryCollaborationStore();
+  const { swarm, room } = await setup({ store });
+  const runner = new HybridAgentGateway({ swarm, store, cancelPollMs: 10 });
+  let signal = null;
+  swarm.run = (_id, options) => new Promise((_, reject) => { signal = options.signal; options.signal.addEventListener('abort', () => reject(options.signal.reason)); });
+  const started = await runner.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Lancer ?', explicit: true });
+  const other = new HybridAgentGateway({ swarm: new SwarmService({ logger: null }), store });
+  await other.cancelThread(started.thread.thread_id, { tenantId: 't1', by: 'x' });
+  // Les minuteries de sondage sont « unref » : on garde la boucle d'événements active pendant l'attente.
+  const keepAlive = setInterval(() => {}, 1000);
+  const thread = await runner.waitForThread(started.thread.thread_id, { tenantId: 't1' }).finally(() => clearInterval(keepAlive));
+  assert.equal(signal.aborted, true);
+  assert.equal(thread.status, 'cancelled');
+});
+
+test('swarm.run : un signal déjà déclenché empêche tout appel aux agents', async () => {
+  const { swarm, room } = await setup();
+  const calls = [];
+  swarm.llm = { complete: async (req) => { calls.push(req); return { text: 'VERDICT: GO', provider: 'x' }; } };
+  const ctrl = new AbortController(); ctrl.abort(Object.assign(new Error('mission annulée'), { code: 'ABORTED' }));
+  await assert.rejects(swarm.run(room.swarm_id, { tenantId: 't1', question: 'Q ?', signal: ctrl.signal }), /annulée/);
+  assert.equal(calls.length, 0);
 });

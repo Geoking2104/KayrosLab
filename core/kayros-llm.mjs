@@ -158,6 +158,8 @@ export class OpenAICompatibleProvider {
     if (this.timeoutMs > 0 && typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
       init.signal = AbortSignal.timeout(this.timeoutMs);
     }
+    // Annulation de la mission : la requête HTTP en vol est interrompue.
+    if (req.signal) init.signal = init.signal && typeof AbortSignal.any === 'function' ? AbortSignal.any([init.signal, req.signal]) : req.signal;
     const t0 = Date.now();
     const res = await this._f()(`${this.baseUrl}/chat/completions`, init);
     let data = null;
@@ -217,6 +219,7 @@ export class HttpBackendProvider {
     const res = await this._f()(this.url, {
       method: 'POST', headers,
       body: JSON.stringify({ messages: req.messages, model: req.model, provider: req.provider ?? this.provider, role: req.role, temperature: req.temperature }),
+      ...(req.signal ? { signal: req.signal } : {}),
     });
     if (!res.ok) { const e = new Error(`Backend HTTP ${res.status}`); e.code = 'BACKEND_HTTP'; throw e; }
     const d = await res.json();
@@ -294,6 +297,8 @@ export class KayrosLLM {
   }
 
   async complete(req, opts = {}) {
+    // Mission annulée : ni appel, ni repli vers un autre fournisseur.
+    if (req?.signal?.aborted) throw req.signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
     const primaryId = this.policy.choose(req, opts);
     const model = this.policy.modelFor(req, opts);
     const attempt = async (id, modelOverride) => {
@@ -310,6 +315,7 @@ export class KayrosLLM {
     try {
       return await attempt(primaryId, model);
     } catch (primaryErr) {
+      if (req?.signal?.aborted) throw primaryErr;
       const quant = model ? parseQuantFromTag(model) : null;
       // Strip quant for any provider that might reject unknown tags (ollama + backend)
       if (quant) {
