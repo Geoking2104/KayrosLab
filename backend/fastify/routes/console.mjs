@@ -6,7 +6,8 @@ import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
-import { agentAttributesFromProfile, mergeHumanProfiles, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
+import { profileConfidence, speakAs } from '../../../core/impersonator-voice.mjs';
+import { agentAttributesFromProfile, mergeHumanProfiles, profileFromCrystalData, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 import {
   CrystalPublicProfileFetcher, ENRICHMENT_LIMITS, XProfileAdapter, buildEnrichedProfile, postsFromXArchive,
   profileFromCrystalPublic, profileFromEmails, profileFromLinkedInExport, profileFromXPosts,
@@ -25,7 +26,7 @@ const ruleConfigurationSchema = z.object({
 // Descriptif de personnalité éditable (cf. core/personality-descriptif.mjs).
 const descriptifSchema = z.object({
   disc_type: z.string().max(8).nullable().optional(), archetype: z.string().max(120).nullable().optional(),
-  disc_intensity: z.number().min(0).max(100).nullable().optional(), disc_degrees: z.number().min(0).max(360).nullable().optional(), overview: z.string().max(4000).nullable().optional(),
+  disc_intensity: z.number().min(0).max(100).nullable().optional(), disc_degrees: z.number().min(0).max(360).nullable().optional(), confidence: z.number().min(0).max(1).nullable().optional(), overview: z.string().max(4000).nullable().optional(),
   qualities: z.array(z.string().max(80)).max(6).optional(),
   traits: z.record(z.string().max(40), z.number().min(0).max(100)).optional(),
   sections: z.record(z.string().max(40), z.array(z.string().max(500)).max(12)).optional(),
@@ -171,6 +172,8 @@ const enrichSchema = z.object({
   x_username: z.string().max(200).optional(),
   x_posts: z.array(z.string().max(2000)).max(300).optional(),
   x_archive: z.string().max(5000000).optional(),
+  crystal_export: z.record(z.string(), z.unknown()).optional(),
+  crystal_api: z.object({ email: z.string().email().max(320).optional(), linkedin_url: z.string().max(1000).optional(), full_name: z.string().max(200).optional(), company_name: z.string().max(200).optional() }).optional(),
 });
 const impersonatorMemberSchema = impersonatorSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true });
 const impersonatorTeamSchema = z.object({
@@ -314,6 +317,55 @@ async function scopedActivity(app, me, { roomId = null, after = 0, limit = 100 }
   const rooms = await accessibleRooms(app, me);
   const lists = await Promise.all(rooms.map((room) => hybridGateway.activity({ tenantId: me.tenantId, roomId: room.room_id, after, limit })));
   return lists.flat().sort((a, b) => Number(a.sequence || 0) - Number(b.sequence || 0)).slice(-boundedLimit(limit));
+}
+
+/** Calcule un profil enrichi depuis la requête ; renvoie null si la réponse d'erreur est déjà envoyée. */
+async function enrichFromRequest(app, me, reply, d) {
+  const warnings = [];
+  try {
+    let crystal = null;
+    if (d.crystal_public_html) crystal = profileFromCrystalPublic(d.crystal_public_html, { imported_by: me.email });
+    else if (d.crystal_public_url) {
+      // Lecture réseau : réservée aux rôles qui gèrent les agents.
+      if (!await manager(app, me, reply)) return null;
+      const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: app.kayrosContext.crystalPublicFetch || globalThis.fetch });
+      const page = await fetcher.fetch(d.crystal_public_url);
+      crystal = profileFromCrystalPublic(page.html, { imported_by: me.email, source_url: page.url });
+    } else if (d.crystal_export) {
+      // Chemin privé n°1 : export JSON CrystalKnows fourni par la personne.
+      crystal = profileFromCrystalData(d.crystal_export, { imported_by: me.email, import_mode: 'json_export' });
+    } else if (d.crystal_api) {
+      // Chemin privé n°2 : API CrystalKnows v4 (CRYSTALKNOWS_API_TOKEN, crédits du compte).
+      if (!await manager(app, me, reply)) return null;
+      if (!app.kayrosContext.crystalKnowsConfigured) {
+        reply.code(503).send({ error: 'CRYSTALKNOWS_API_TOKEN absent : utilisez la page publique ou l’export JSON.' }); return null;
+      }
+      crystal = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{ source: 'crystalknows', ...d.crystal_api }] }, { by: me.email });
+    }
+    const linkedin = d.linkedin_export ? profileFromLinkedInExport(d.linkedin_export, { imported_by: me.email }) : null;
+    const email = d.emails?.length ? profileFromEmails(d.emails, { author: d.email_address || null, imported_by: me.email }) : null;
+    let x = null;
+    const posts = [...(d.x_posts || []), ...(d.x_archive ? postsFromXArchive(d.x_archive) : [])];
+    if (posts.length) x = profileFromXPosts(posts, { username: d.x_username?.replace(/^@/, '') || null, imported_by: me.email });
+    else if (d.x_username) {
+      const api = new XProfileAdapter({ fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
+      if (!api.configured) warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
+      else {
+        if (!await manager(app, me, reply)) return null;
+        const fetched = await api.fetchProfile(d.x_username);
+        x = profileFromXPosts(fetched.posts, { username: fetched.username, bio: fetched.bio, name: fetched.name, imported_by: me.email });
+      }
+    }
+    const result = buildEnrichedProfile({ assigned_name: d.assigned_name || null, crystal, linkedin, email, x });
+    const p = result.profile;
+    return {
+      ...result, warnings, limits: ENRICHMENT_LIMITS, confidence: profileConfidence(p),
+      agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }),
+    };
+  } catch (error) {
+    const status = /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : /crédits/.test(error.message) ? 402 : 400;
+    reply.code(status).send({ error: surface(error.message), warnings }); return null;
+  }
 }
 
 /** Crée un agent impersonator (persona + garde-fous) et renvoie l'agent, la persona et une éventuelle erreur d'enrichissement. */
@@ -747,39 +799,40 @@ export default async function consoleRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const parsed = enrichSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'enrichissement invalide (consentement requis)', issues: parsed.error.issues });
-    const d = parsed.data;
-    const warnings = [];
+    const out = await enrichFromRequest(app, me, reply, parsed.data); if (!out) return;
+    return out;
+  });
+  // Ré-enrichit un agent existant (impersonator ou hybride) : le profil enrichi remplace
+  // DISC et descriptif, la provenance s'ajoute à l'historique.
+  app.post('/v1/console/agents/:agentId/enrich', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const parsed = enrichSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'enrichissement invalide (consentement requis)', issues: parsed.error.issues });
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const current = swarm.registry.get(req.params.agentId, { tenantId: me.tenantId });
+    if (!current) return reply.code(404).send({ error: 'agent introuvable' });
+    const out = await enrichFromRequest(app, me, reply, { ...parsed.data, assigned_name: parsed.data.assigned_name || current.human_profile?.assigned_name || undefined }); if (!out) return;
     try {
-      let crystal = null;
-      if (d.crystal_public_html) crystal = profileFromCrystalPublic(d.crystal_public_html, { imported_by: me.email });
-      else if (d.crystal_public_url) {
-        // Lecture réseau : réservée aux rôles qui gèrent les agents.
-        if (!await manager(app, me, reply)) return;
-        const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: app.kayrosContext.crystalPublicFetch || globalThis.fetch });
-        const page = await fetcher.fetch(d.crystal_public_url);
-        crystal = profileFromCrystalPublic(page.html, { imported_by: me.email, source_url: page.url });
-      }
-      const linkedin = d.linkedin_export ? profileFromLinkedInExport(d.linkedin_export, { imported_by: me.email }) : null;
-      const email = d.emails?.length ? profileFromEmails(d.emails, { author: d.email_address || null, imported_by: me.email }) : null;
-      let x = null;
-      const posts = [...(d.x_posts || []), ...(d.x_archive ? postsFromXArchive(d.x_archive) : [])];
-      if (posts.length) x = profileFromXPosts(posts, { username: d.x_username?.replace(/^@/, '') || null, imported_by: me.email });
-      else if (d.x_username) {
-        const api = new XProfileAdapter({ fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
-        if (!api.configured) warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
-        else {
-          if (!await manager(app, me, reply)) return;
-          const fetched = await api.fetchProfile(d.x_username);
-          x = profileFromXPosts(fetched.posts, { username: fetched.username, bio: fetched.bio, name: fetched.name, imported_by: me.email });
-        }
-      }
-      const result = buildEnrichedProfile({ assigned_name: d.assigned_name || null, crystal, linkedin, email, x });
-      const p = result.profile;
-      return { ...result, warnings, limits: ENRICHMENT_LIMITS, agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }) };
-    } catch (error) {
-      const status = /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : 400;
-      return reply.code(status).send({ error: surface(error.message), warnings });
+      let agent = swarm.assignPersonality(current.agent_id, mergeHumanProfiles(current.human_profile, out.profile), { tenantId: me.tenantId, by: me.email });
+      agent = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) } }, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      return { ...out, agent: agentView(agent), confidence: profileConfidence(agent.human_profile) };
+    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+  });
+  // Aperçu « ainsi je parlerais » : réaction déterministe de la persona à une idée.
+  app.post('/v1/console/personality/speak', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const parsed = z.object({ idea: z.string().min(1).max(1000), agent_id: z.string().max(64).optional(), human_profile: humanProfileSchema }).safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'aperçu invalide', issues: parsed.error.issues });
+    let profile = parsed.data.human_profile;
+    if (parsed.data.agent_id) {
+      await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
+      profile = app.kayrosContext.engine.swarm.registry.get(parsed.data.agent_id, { tenantId: me.tenantId })?.human_profile;
+      if (!profile) return reply.code(404).send({ error: 'agent ou profil introuvable' });
     }
+    if (!profile) return reply.code(400).send({ error: 'agent_id ou human_profile requis' });
+    try { return speakAs(profile, parsed.data.idea); } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
   // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---

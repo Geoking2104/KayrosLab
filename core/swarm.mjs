@@ -15,6 +15,7 @@ import {
   normalizeHumanProfile,
   profileFromAgentOverride,
 } from './personality.mjs';
+import { speakAs } from './impersonator-voice.mjs';
 import { impersonatorContext, impersonatorGuardrails, impersonatorOf, normalizeImpersonator } from './impersonator.mjs';
 
 export const AGENT_TYPES = Object.freeze(['system_predefined', 'user_defined', 'hybrid_modified']);
@@ -920,10 +921,18 @@ export class SwarmService {
           runId: run_id, traceId: run_id, signal,
         });
       }
-      return {
-        ...normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled }),
-        effective_rules,
-      };
+      const analysis = normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled });
+      // Impersonator : provenance du DISC toujours exposée ; sans retour en voix de la
+      // persona (modèle absent ou muet), l'aperçu déterministe « ainsi je parlerais » le remplace.
+      if (impersonatorOf(definition) && definition.human_profile && config.personality_simulation_enabled) {
+        const spoken = speakAs(definition.human_profile, question);
+        analysis.persona_confidence = spoken.confidence;
+        if (!analysis.simulated_stakeholder_feedback) {
+          analysis.simulated_stakeholder_feedback = spoken.message;
+          analysis.persona_voice_fallback = true;
+        }
+      }
+      return { ...analysis, effective_rules };
     };
     let completed = 0;
     const tracked = typeof onProgress === 'function'

@@ -257,6 +257,8 @@ export function normalizeDescriptif(input) {
     disc_intensity: score(input.disc_intensity),
     disc_degrees: Number.isFinite(Number(input.disc_degrees)) && input.disc_degrees !== null && input.disc_degrees !== '' ? ((Math.round(Number(input.disc_degrees)) % 360) + 360) % 360 : null,
     overview: String(input.overview || '').trim().slice(0, 4000) || null,
+    // Confiance d'une estimation (0–1). Absente pour une fiche CrystalKnows mesurée.
+    confidence: input.confidence == null || input.confidence === '' || !Number.isFinite(Number(input.confidence)) ? null : Math.max(0, Math.min(1, Math.round(Number(input.confidence) * 100) / 100)),
     qualities: strings(input.qualities, 6).map((item) => item.slice(0, 80)),
     traits, sections,
     source: ['crystalknows', 'crystalknows_public', 'enriched', 'disc_template', 'manual', 'anonymised'].includes(input.source) ? input.source : 'manual',
