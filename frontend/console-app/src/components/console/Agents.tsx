@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
-import { GUARDRAILS, kindLabel, simulateMetier, type Agent, type AgentKind } from "@/lib/console/model";
+import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
 import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
@@ -318,6 +318,7 @@ function MetierForm({
     simulation: boolean;
     clues: string;
     brief?: string;
+    settings?: AgentSettings;
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -330,6 +331,7 @@ function MetierForm({
     simulation: boolean;
     clues: string;
     brief?: string;
+    settings?: AgentSettings;
   }) => { ok: boolean; reason?: string };
 }) {
   const [name, setName] = useState(tc(existing?.name));
@@ -338,6 +340,7 @@ function MetierForm({
   const [mission, setMission] = useState(tc(existing?.mission));
   const [brief, setBrief] = useState(tc(existing?.brief));
   const [veto, setVeto] = useState(existing?.veto ?? false);
+  const [settings, setSettings] = useState<AgentSettings>(existing?.settings ?? defaultSettings());
   const [error, setError] = useState("");
 
   function save() {
@@ -356,6 +359,7 @@ function MetierForm({
       consented: false,
       simulation: false,
       clues: "",
+      settings,
     };
     const result = existing ? onUpdate(existing.id, draft) : onCreate({ ...draft, kind: "metier" });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
@@ -388,6 +392,8 @@ function MetierForm({
           <input type="checkbox" className="mt-1 size-4" checked={veto} onChange={(event) => setVeto(event.target.checked)} />
           <span>{t("Droit de veto dans un collectif qui l’autorise.")}</span>
         </label>
+        <AgentSettingsFields value={settings} onChange={setSettings} />
+        <AttachedLibrary agent={existing} />
         {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
         <div className="flex gap-2">
           <Button onClick={save}>{existing ? t("Enregistrer les modifications") : t("Créer l’agent métier")}</Button>
@@ -632,5 +638,102 @@ function Composer({
         </div>
       </div>
     </Panel>
+  );
+}
+
+/** Une ligne par élément : contraintes, outils, règles. */
+function ListArea({ value, onChange, placeholder }: { value: string[]; onChange: (next: string[]) => void; placeholder?: string }) {
+  const [text, setText] = useState(value.join("\n"));
+  return (
+    <TextArea
+      value={text}
+      placeholder={placeholder}
+      onChange={(event) => {
+        setText(event.target.value);
+        onChange(event.target.value.split("\n").map((line) => line.trim()).filter(Boolean));
+      }}
+    />
+  );
+}
+
+const SENIORITY_LABEL: Record<Seniority, string> = {
+  get intern() { return t("Stagiaire"); },
+  get junior() { return t("Junior"); },
+  get senior() { return t("Senior"); },
+  get executive() { return t("Dirigeant"); },
+};
+
+export function AgentSettingsFields({ value, onChange }: { value: AgentSettings; onChange: (next: AgentSettings) => void }) {
+  const set = <K extends keyof AgentSettings>(key: K, next: AgentSettings[K]) => onChange({ ...value, [key]: next });
+  return (
+    <fieldset className="grid gap-4 rounded-md border border-line p-4" data-testid="agent-settings">
+      <legend className="px-1 text-sm font-medium">{t("Paramétrage")}</legend>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label={t("Séniorité")}>
+          <select className={controlClass} value={value.seniority} onChange={(event) => set("seniority", event.target.value as Seniority)}>
+            {SENIORITIES.map((item) => <option key={item} value={item}>{SENIORITY_LABEL[item]}</option>)}
+          </select>
+        </Field>
+        <Field label={t("Axe principal")} hint={t("Ce qu’il examine en premier.")}>
+          <input className={controlClass} value={value.primaryFocus} onChange={(event) => set("primaryFocus", event.target.value)} />
+        </Field>
+        <Field label={t("Fournisseur de modèle")}>
+          <select className={controlClass} value={value.provider} onChange={(event) => set("provider", event.target.value as AgentProvider)}>
+            {AGENT_PROVIDERS.map((item) => <option key={item || "default"} value={item}>{item || t("Par défaut du serveur")}</option>)}
+          </select>
+        </Field>
+        <Field label={t("Modèle")} hint={t("Vide : modèle du profil d’exécution.")}>
+          <input className={controlClass} value={value.model} onChange={(event) => set("model", event.target.value)} />
+        </Field>
+      </div>
+      <Field label={t("Contraintes")} hint={t("Une par ligne.")}>
+        <ListArea value={value.constraints} onChange={(next) => set("constraints", next)} />
+      </Field>
+      <Field label={t("Outils autorisés")} hint={t("Un identifiant d’outil par ligne.")}>
+        <ListArea value={value.tools} onChange={(next) => set("tools", next)} />
+      </Field>
+      <div>
+        <p className="text-sm font-medium">{t("Canaux")}</p>
+        <div className="mt-2 flex flex-wrap gap-4">
+          {AGENT_CHANNELS.map((channel) => (
+            <label key={channel} className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                className="size-4"
+                checked={value.channels.includes(channel)}
+                onChange={(event) => set("channels", event.target.checked ? [...value.channels, channel] : value.channels.filter((item) => item !== channel))}
+              />
+              {channel === "console" ? "Console" : channel === "teams" ? "Teams" : channel === "slack" ? "Slack" : "Discord"}
+            </label>
+          ))}
+        </div>
+      </div>
+      {value.systemRules?.length ? (
+        <div>
+          <p className="text-sm font-medium">{t("Règles système")}</p>
+          <ul className="mt-2 grid gap-1 text-sm text-ink-soft">
+            {value.systemRules.map((rule) => <li key={rule.id}><span className="font-mono text-xs">{rule.id}</span> · {rule.text}</li>)}
+          </ul>
+        </div>
+      ) : null}
+      <Field label={t("Règles de comportement")} hint={t("Une règle par ligne, ajoutée aux règles système.")}>
+        <ListArea value={value.rules} onChange={(next) => set("rules", next)} />
+      </Field>
+    </fieldset>
+  );
+}
+
+/** Skills et sources rattachés (mode connecté), gérés depuis la Bibliothèque. */
+function AttachedLibrary({ agent }: { agent?: Agent }) {
+  const { live, workspace } = useConsole();
+  if (!live) return null;
+  const skills = workspace.skills.filter((item) => agent && item.agent_ids.includes(agent.id)).map((item) => item.name);
+  const contexts = workspace.contexts.filter((item) => agent && item.agent_ids.includes(agent.id)).map((item) => item.name);
+  return (
+    <div className="rounded-md border border-line p-3 text-sm" data-testid="agent-library">
+      <p>{t("Skills : {{v}}", { v: skills.join(", ") || "—" })}</p>
+      <p className="mt-1">{t("Sources de contexte : {{v}}", { v: contexts.join(", ") || "—" })}</p>
+      <button type="button" className="mt-2 text-accent underline" onClick={() => go("bibliotheque")}>{t("Gérer dans la Bibliothèque")}</button>
+    </div>
   );
 }

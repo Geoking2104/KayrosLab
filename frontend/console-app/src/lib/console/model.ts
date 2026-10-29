@@ -1,6 +1,8 @@
 import { locale, t, tc, tk } from "@/lib/i18n";
 export type Role = "contributeur" | "comex";
 export type Page =
+  | "societe"
+  | "bibliotheque"
   | "overview"
   | "dossiers"
   | "collectifs"
@@ -49,6 +51,10 @@ export const CYCLE: { id: CycleId; label: string; hint: string }[] = [
 ];
 
 export const PAGE_FROM_HASH: Record<string, Page> = {
+  societe: "societe",
+  company: "societe",
+  bibliotheque: "bibliotheque",
+  library: "bibliotheque",
   overview: "overview",
   dossiers: "dossiers",
   activity: "dossiers",
@@ -121,6 +127,39 @@ export interface Agent {
   simulation: boolean;
   clues: string;
   brief?: string;
+  settings?: AgentSettings;
+  /** Identifiants Bibliothèque rattachés (mode connecté). */
+  skillIds?: string[];
+  contextIds?: string[];
+}
+
+export type Seniority = "intern" | "junior" | "senior" | "executive";
+export type AgentProvider = "" | "mock" | "ollama" | "mistral" | "anthropic" | "nvidia";
+export type AgentChannel = "slack" | "discord" | "teams" | "console";
+
+/** Paramètres acceptés par l’API agent (agentFields) et exposés dans le formulaire. */
+export interface AgentSettings {
+  seniority: Seniority;
+  primaryFocus: string;
+  constraints: string[];
+  tools: string[];
+  channels: AgentChannel[];
+  provider: AgentProvider;
+  model: string;
+  /** Règles de comportement ajoutées par l’utilisateur (rule_configuration.user_added_rules). */
+  rules: string[];
+  /** Règles système proposées, en lecture (rule_configuration.system_proposed_rules). */
+  systemRules?: { id: string; text: string; status: "active" | "overridden" | "disabled" }[];
+  /** Règles système réécrites, conservées telles quelles à l’enregistrement. */
+  modifiedRules?: { replaces_rule_id: string; modified_text: string }[];
+}
+
+export const SENIORITIES: Seniority[] = ["intern", "junior", "senior", "executive"];
+export const AGENT_PROVIDERS: AgentProvider[] = ["", "mock", "ollama", "mistral", "anthropic", "nvidia"];
+export const AGENT_CHANNELS: AgentChannel[] = ["console", "slack", "teams", "discord"];
+
+export function defaultSettings(): AgentSettings {
+  return { seniority: "senior", primaryFocus: "", constraints: [], tools: [], channels: ["console"], provider: "", model: "", rules: [] };
 }
 
 export interface Collective {

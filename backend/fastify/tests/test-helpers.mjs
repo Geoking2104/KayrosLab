@@ -17,6 +17,7 @@ import mcpRoute from '../routes/mcp.mjs';
 import publicApiRoute from '../routes/public-api.mjs';
 import consoleIntegrationsRoute from '../routes/console-integrations.mjs';
 import consoleRoute from '../routes/console.mjs';
+import consoleWorkspaceRoute from '../routes/console-workspace.mjs';
 import buildContext from '../lib/context.mjs';
 
 export async function buildTestApp(env = {}, options = {}) {
@@ -27,6 +28,7 @@ export async function buildTestApp(env = {}, options = {}) {
     // est le defaut en production, un harnais qui ne le neutralise pas
     // partage un vrai fichier entre executions et les tests se polluent.
     KAYROS_RUNS_FILE: 'memory',
+    KAYROS_WORKSPACE_FILE: 'memory',
     OLLAMA_ENDPOINT: '',
     LINKEDIN_ACCESS_TOKEN: '', CRYSTALKNOWS_API_TOKEN: '',
     KAYROS_S3_BUCKET: '', KAYROS_S3_ACCESS_KEY_ID: '', KAYROS_S3_SECRET_ACCESS_KEY: '',
@@ -85,7 +87,7 @@ export async function buildTestApp(env = {}, options = {}) {
   await app.register(mcpRoute);
   await app.register(publicApiRoute);
   await app.register(consoleIntegrationsRoute);
-  if (options.console) await app.register(consoleRoute);
+  if (options.console) { await app.register(consoleRoute); await app.register(consoleWorkspaceRoute); }
   return { app, ctx };
 }
 

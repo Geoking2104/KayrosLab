@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   Bot,
+  Building2,
+  Library,
   FolderOpen,
   Inbox,
   Plug,
@@ -20,13 +22,17 @@ import { Espace } from "./Espace";
 import { Instruct } from "./Instruct";
 import { Workbench } from "./Workbench";
 import { Demo } from "./Demo";
+import { Societe } from "./Societe";
+import { Bibliotheque } from "./Bibliotheque";
 import { LANGS, setLanguage, t, useLang, type Lang } from "@/lib/i18n";
 
 const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; soft: string; ink: string }[] = [
+  { id: "societe", get label() { return t("Société"); }, get short() { return t("Société"); }, icon: Building2, soft: "bg-accent-soft", ink: "text-accent" },
   { id: "overview", get label() { return t("Aujourd’hui"); }, get short() { return t("Jour"); }, icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
   { id: "dossiers", get label() { return t("Dossiers"); }, get short() { return t("Dossiers"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
   { id: "collectifs", get label() { return t("Collectifs"); }, get short() { return t("Équipes"); }, icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
   { id: "agents", get label() { return t("Agents"); }, get short() { return t("Agents"); }, icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "bibliotheque", get label() { return t("Bibliothèque"); }, get short() { return t("Biblio"); }, icon: Library, soft: "bg-teal-soft", ink: "text-teal" },
   { id: "connexions", get label() { return t("Connexions"); }, get short() { return t("Liens"); }, icon: Plug, soft: "bg-go-soft", ink: "text-go" },
 ];
 
@@ -48,7 +54,7 @@ function readLocation() {
   if (typeof window === "undefined") return { page: "overview" as Page, thread: "", agent: "", dossier: "", legacy: "overview" };
   const raw = window.location.hash.replace(/^#/, "");
   const [path, query = ""] = raw.split("?");
-  const page = PAGE_FROM_HASH[path || "overview"] ?? "overview";
+  const page = PAGE_FROM_HASH[path || "societe"] ?? "societe";
   const params = new URLSearchParams(query);
   return { page, thread: params.get("thread") ?? "", agent: params.get("agent") ?? "", dossier: params.get("dossier") ?? "", legacy: path };
 }
@@ -63,14 +69,14 @@ export function ConsoleApp() {
 }
 
 function Frame() {
-  const { state, clearNotice, setRole } = useConsole();
+  const { state, clearNotice, setRole, live, liveUser } = useConsole();
   const [loc, setLoc] = useState({ page: "overview" as Page, thread: "", agent: "", dossier: "", legacy: "overview" });
 
   useEffect(() => {
     const sync = () => setLoc(readLocation());
     sync();
     window.addEventListener("hashchange", sync);
-    if (!window.location.hash) window.location.hash = "overview";
+    if (!window.location.hash) window.location.hash = "societe";
     return () => window.removeEventListener("hashchange", sync);
   }, []);
 
@@ -120,7 +126,11 @@ function Frame() {
               <span className="block truncate text-[11px] text-muted">{WORKSPACE_EMAIL}</span>
             </span>
           </a>
-          <RoleSwitch role={state.role} onChange={setRole} />
+          {live ? (
+            <p className="rounded-md bg-go-soft px-2 py-1 text-xs text-go" data-testid="live-badge">{t("Connecté à l’API · {{v}}", { v: liveUser?.email ?? "" })}</p>
+          ) : (
+            <RoleSwitch role={state.role} onChange={setRole} />
+          )}
         </div>
       </aside>
 
@@ -135,6 +145,7 @@ function Frame() {
             </p>
             <p className="truncate text-[11px] text-muted">{t("Verdict consultatif jusqu’à l’arbitrage humain")}</p>
           </div>
+          {!live ? <span className="rounded-md bg-hold-soft px-2 py-1 text-[11px] text-hold">{t("Mode démo")}</span> : null}
           <LangSwitch />
           {page !== "instruire" ? (
             <a href="#instruire" className="inline-flex min-h-10 items-center gap-2 rounded-[10px] bg-accent px-3 text-sm font-semibold text-white shadow-cta hover:bg-accent-strong md:px-3.5">
@@ -157,6 +168,8 @@ function Frame() {
         ) : null}
 
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-28 md:px-8 md:pb-10">
+          {page === "societe" && <Societe />}
+          {page === "bibliotheque" && <Bibliotheque />}
           {page === "overview" && <Today />}
           {page === "dossiers" && <Dossiers threadId={loc.thread} />}
           {page === "collectifs" && <Collectifs />}

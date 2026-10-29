@@ -37,10 +37,14 @@ export function liveState(c: LiveConnector): LiveState {
   return c.one_click ? "connectable" : "missing_config";
 }
 
+/** Prévient le store console qu’il doit basculer entre mode démo et mode connecté. */
+export const AUTH_EVENT = "kayros:auth";
+function authChanged() { try { window.dispatchEvent(new Event(AUTH_EVENT)); } catch { /* hors navigateur */ } }
+
 export const tokenStore = {
   get: () => { try { return localStorage.getItem(TOKEN_KEY); } catch { return null; } },
-  set: (t: string) => { try { localStorage.setItem(TOKEN_KEY, t); } catch { /* stockage indisponible */ } },
-  clear: () => { try { localStorage.removeItem(TOKEN_KEY); } catch { /* idem */ } },
+  set: (t: string) => { try { localStorage.setItem(TOKEN_KEY, t); } catch { /* stockage indisponible */ } authChanged(); },
+  clear: () => { try { localStorage.removeItem(TOKEN_KEY); } catch { /* idem */ } authChanged(); },
 };
 
 async function call<T>(path: string, init: RequestInit = {}, fetchImpl: typeof fetch = fetch): Promise<T> {
@@ -60,5 +64,22 @@ export const api = {
   me: () => call<{ user: LiveUser }>("/v1/auth/me"),
   logout: () => call<{ ok: boolean }>("/v1/auth/logout", { method: "POST" }),
   connectors: () => call<{ connectors: LiveConnector[]; encrypted_storage: boolean }>("/v1/console/connectors"),
+  agents: () => call<{ agents: any[] }>("/v1/console/agents"),
+  createAgent: (body: Record<string, unknown>) => call<{ agent: any }>("/v1/console/agents", { method: "POST", body: JSON.stringify(body) }),
+  updateAgent: (id: string, body: Record<string, unknown>) => call<{ agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(body) }),
+  sessions: () => call<{ sessions: any[] }>("/v1/console/sessions"),
+  createSession: (body: Record<string, unknown>) => call<{ session: any }>("/v1/console/sessions", { method: "POST", body: JSON.stringify(body) }),
+  updateCollective: (id: string, body: { add_agent_ids?: string[]; remove_agent_ids?: string[] }) => call<{ session: any }>(`/v1/console/sessions/${encodeURIComponent(id)}/collective`, { method: "PATCH", body: JSON.stringify(body) }),
+  run: (sessionId: string, body: { question: string; context?: string; profile?: string }) => call<{ thread?: any; thread_id?: string }>(`/v1/console/sessions/${encodeURIComponent(sessionId)}/run`, { method: "POST", body: JSON.stringify(body) }),
+  threads: () => call<{ threads: any[] }>("/v1/console/threads"),
+  reply: (threadId: string, text: string) => call<{ thread?: any }>(`/v1/console/threads/${encodeURIComponent(threadId)}/messages`, { method: "POST", body: JSON.stringify({ text }) }),
+  arbitrate: (threadId: string, body: { action: string; justification?: string; decision?: string }) => call<{ thread: any }>(`/v1/console/threads/${encodeURIComponent(threadId)}/arbitrate`, { method: "POST", body: JSON.stringify(body) }),
+  list: <K extends WorkspaceKind>(kind: K, query = "") => call<Record<K, any[]>>(`/v1/console/${kind}${query}`),
+  createItem: (kind: WorkspaceKind, body: Record<string, unknown>) => call<{ item: any }>(`/v1/console/${kind}`, { method: "POST", body: JSON.stringify(body) }),
+  updateItem: (kind: WorkspaceKind, id: string, body: Record<string, unknown>) => call<{ item: any }>(`/v1/console/${kind}/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(body) }),
+  deleteItem: (kind: WorkspaceKind, id: string) => call<{ ok: boolean }>(`/v1/console/${kind}/${encodeURIComponent(id)}`, { method: "DELETE" }),
+  dashboard: (companyId?: string) => call<any>(`/v1/console/dashboard${companyId ? `?company_id=${encodeURIComponent(companyId)}` : ""}`),
   connect: (platform: LivePlatform) => call<{ url: string; mode: string }>(`/v1/console/connectors/${platform}/connect`, { method: "POST" }),
 };
+
+export type WorkspaceKind = "companies" | "projects" | "skills" | "contexts";

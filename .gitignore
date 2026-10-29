@@ -12,6 +12,8 @@ __pycache__/
 # Artefacts generes par les suites de tests (memoire de travail du core).
 .kayros-memory.json
 .kayros-memory.json.tmp
+.kayros-workspace.json
+.kayros-workspace.json.*.tmp
 .kayros-runs.json
 .kayros-runs.json.tmp
 .kayros-runs-test-*.json

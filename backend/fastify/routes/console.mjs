@@ -3,6 +3,7 @@ import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../co
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
 import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
+import { collectiveAttachmentsContext } from './console-workspace.mjs';
 import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
@@ -233,7 +234,7 @@ function canAccessRoom(me, room) { return !!room && (tenantWide(me) || ownsRoom(
 async function consoleRooms(app, me) {
   return app.kayrosContext.hybridGateway.listRooms({ tenantId: me.tenantId, platform: 'console' });
 }
-async function accessibleRooms(app, me) {
+export async function accessibleRooms(app, me) {
   const rooms = await consoleRooms(app, me);
   return tenantWide(me) ? rooms : rooms.filter((room) => ownsRoom(me, room));
 }
@@ -254,7 +255,7 @@ async function accessibleThread(app, me, threadId) {
 }
 function boundedLimit(limit) { return Math.max(1, Math.min(250, Number(limit) || 100)); }
 /** Fils visibles ; `null` si une session explicitement demandée n'est pas accessible. */
-async function scopedThreads(app, me, { roomId = null, limit = 100 } = {}) {
+export async function scopedThreads(app, me, { roomId = null, limit = 100 } = {}) {
   const { hybridGateway } = app.kayrosContext;
   if (roomId) {
     const room = await accessibleRoom(app, me, roomId);
@@ -676,7 +677,10 @@ export default async function consoleRoute(app) {
     const room = await accessibleRoom(app, me, req.params.sessionId);
     if (!room) return reply.code(404).send({ error: 'session introuvable' });
     const question = parsed.data.question || parsed.data.text;
-    const context = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    const baseContext = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
+    // Skills et sources de contexte rattachés au collectif (Bibliothèque).
+    const attached = await collectiveAttachmentsContext(app, me.tenantId, room.room_id);
+    const context = attached ? `${baseContext}\n\n${attached}`.slice(0, 24000) : baseContext;
     const profile = runProfile(app, parsed.data.profile);
     const input = {
       platform: 'console', room_id: room.room_id, tenantId: me.tenantId,

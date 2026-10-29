@@ -295,6 +295,19 @@ export function behavioralContext(profile = {}) {
   return [lines.length ? `Profil comportemental de l'agent:\n${lines.join('\n')}` : '', rich].filter(Boolean).join('\n\n');
 }
 
+// Skills et sources de contexte rattachés depuis la console (instantanés stockés
+// dans metadata) : ils entrent dans le contexte effectif de l'agent.
+function skillsContext(metadata = {}) {
+  const skills = Array.isArray(metadata.skills) ? metadata.skills.filter((s) => s && s.name) : [];
+  if (!skills.length) return '';
+  return `Skills:\n${skills.map((s) => `- ${s.name}${s.instructions ? ` : ${String(s.instructions).slice(0, 2000)}` : ''}${Array.isArray(s.tools) && s.tools.length ? ` (outils: ${s.tools.join(', ')})` : ''}`).join('\n')}`;
+}
+function contextSourcesContext(metadata = {}) {
+  const sources = Array.isArray(metadata.context_sources) ? metadata.context_sources.filter((s) => s && s.name) : [];
+  if (!sources.length) return '';
+  return `Sources de contexte:\n${sources.map((s) => `- ${s.name}${s.kind ? ` [${s.kind}]` : ''}${s.content ? ` : ${String(s.content).slice(0, 4000)}` : ''}`).join('\n')}`;
+}
+
 export function compileEffectiveAgentContext(definition) {
   const d = validateAgentDefinition(definition);
   const rules = resolveEffectiveRules(d);
@@ -304,6 +317,8 @@ export function compileEffectiveAgentContext(definition) {
     d.constraints.length ? `Contraintes:\n${d.constraints.map((item) => `- ${item}`).join('\n')}` : null,
     d.tools.length ? `Outils autorisés: ${d.tools.join(', ')}` : null,
     d.connectors.length ? `Connecteurs autorisés: ${d.connectors.join(', ')}` : null,
+    skillsContext(d.metadata) || null,
+    contextSourcesContext(d.metadata) || null,
     `Règles de décision:\n${rules.length
       ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
       : '- Aucune règle active; signaler explicitement cette lacune de gouvernance.'}`,
