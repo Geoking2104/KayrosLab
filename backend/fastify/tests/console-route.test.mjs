@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import consoleRoute from '../routes/console.mjs';
-import { HybridAgentGateway, SwarmService, ConnectorOAuthService } from '../../../core/index.mjs';
+import { HybridAgentGateway, SwarmService, ConnectorOAuthService, DEFAULT_SYSTEM_AGENTS } from '../../../core/index.mjs';
 import { ConnectorConfigurationService, InMemoryConnectorConfigStore } from '../../../core/connector-config.mjs';
 
 function oauth() {
@@ -41,7 +41,15 @@ test('console overview exposes agents, connections and tenant sessions', async (
   assert.equal(response.statusCode, 200);
   const body = response.json();
   assert.equal(body.summary.sessions, 1);
-  assert.equal(body.summary.agents, 3);
+  // Le résumé compte les agents système du registre (DEFAULT_SYSTEM_AGENTS), pas une constante figée.
+  const expectedSystemAgents = DEFAULT_SYSTEM_AGENTS.filter((agent) => agent.enabled !== false);
+  assert.equal(body.summary.agents, expectedSystemAgents.length);
+  assert.deepEqual(
+    body.agents.map((agent) => agent.agent_id).sort(),
+    expectedSystemAgents.map((agent) => agent.agent_id).sort(),
+  );
+  assert.ok(body.agents.some((agent) => agent.agent_id === 'quality_analyst'));
+  assert.ok(body.agents.some((agent) => agent.agent_id === 'planner'));
   assert.equal(body.sessions[0].name, 'Launch');
   assert.ok(Array.isArray(body.sessions[0].collective.active_agents));
   assert.equal(body.connections.length, 3);
