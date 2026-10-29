@@ -180,6 +180,32 @@ Rules: 2–12 members; every member becomes an impersonator agent (guardrails in
 session's collective; the session counts against the per-user session limit; a member whose upstream
 profile lookup fails is still created (reported in `errors`).
 
+### 9.c Profile enrichment (Crystal-like card from several sources)
+
+`POST /v1/console/personality/enrich` (`core/profile-enrichment.mjs`) builds a profile comparable to a public
+CrystalKnows page (DISC, archetype, qualities, overview, "how to communicate with…" sections). Nothing is saved;
+the result is passed as `human_profile` to `POST /v1/console/impersonators` with `source: "enriched"`.
+
+| Field | Source | How it is read |
+|---|---|---|
+| `crystal_public_url` | `https://www.crystalknows.com/p/<slug>` only | One anonymous GET (identified User-Agent, no cookie/token), comex/admin only. The Next.js payload is parsed: DISC type, degrees, intensity, archetype, qualities, behavior, energizers, drainers, strengths, blind spots, trust, negotiation, follow-up, writing style. |
+| `crystal_public_html` | Page saved by the operator | Same parser, no network call. |
+| `linkedin_export` | LinkedIn "Get a copy of your data" | `Profile.csv`, `Positions.csv`, `Skills.csv` → identity, current role, history, skills. |
+| `emails` + `email_address` | Messages pasted/supplied by the operator | Only messages *from* the person; quotes, reply history and signatures removed; writing-style metrics. |
+| `x_username` | Official X API v2 (`X_BEARER_TOKEN`) | `users/by/username` + `users/:id/tweets` (retweets and replies excluded), comex/admin only. |
+| `x_posts`, `x_archive` | Pasted posts or the person's X archive (`tweets.js`) | Style metrics, no network call. |
+
+Merge order: LinkedIn → e-mails → X → CrystalKnows (Crystal wins for DISC and sections). Observed writing habits are
+appended to the `emails` section as "Observé : …". Without a Crystal card, a DISC type is **estimated** from the writing
+style (heuristic, confidence ≤ 60 %) and flagged in `evidence` and in the overview.
+
+Limits (also returned as `limits`):
+
+- No LinkedIn scraping; no x.com scraping; no mailbox access; no login, cookie or paywall bypass.
+- A private CrystalKnows profile cannot be read: use the authorized JSON export or the v4 API with `CRYSTALKNOWS_API_TOKEN`.
+- The public page publishes no numeric trait scores: traits are derived from the DISC template.
+- The public page format may change; the parser then fails with an explicit error (404/400) rather than guessing.
+
 ## 10. Console UX
 
 Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'impersonators** (panel) :

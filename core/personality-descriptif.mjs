@@ -255,10 +255,11 @@ export function normalizeDescriptif(input) {
     disc_type: canonicalDisc(input.disc_type) || (String(input.disc_type || '').trim().slice(0, 8) || null),
     archetype: String(input.archetype || '').trim().slice(0, 120) || null,
     disc_intensity: score(input.disc_intensity),
+    disc_degrees: Number.isFinite(Number(input.disc_degrees)) && input.disc_degrees !== null && input.disc_degrees !== '' ? ((Math.round(Number(input.disc_degrees)) % 360) + 360) % 360 : null,
     overview: String(input.overview || '').trim().slice(0, 4000) || null,
     qualities: strings(input.qualities, 6).map((item) => item.slice(0, 80)),
     traits, sections,
-    source: ['crystalknows', 'disc_template', 'manual', 'anonymised'].includes(input.source) ? input.source : 'manual',
+    source: ['crystalknows', 'crystalknows_public', 'enriched', 'disc_template', 'manual', 'anonymised'].includes(input.source) ? input.source : 'manual',
   };
   const empty = !out.disc_type && !out.overview && !Object.keys(traits).length && !Object.keys(sections).length;
   return empty ? null : Object.fromEntries(Object.entries(out).filter(([, v]) => v != null && !(Array.isArray(v) && !v.length)));
