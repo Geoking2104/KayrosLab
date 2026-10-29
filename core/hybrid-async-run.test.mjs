@@ -268,7 +268,9 @@ test('annulation depuis un autre processus : le processus qui exécute relit le 
   const started = await runner.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Lancer ?', explicit: true });
   const other = new HybridAgentGateway({ swarm: new SwarmService({ logger: null }), store });
   await other.cancelThread(started.thread.thread_id, { tenantId: 't1', by: 'x' });
-  const thread = await runner.waitForThread(started.thread.thread_id, { tenantId: 't1' });
+  // Les minuteries de sondage sont « unref » : on garde la boucle d'événements active pendant l'attente.
+  const keepAlive = setInterval(() => {}, 1000);
+  const thread = await runner.waitForThread(started.thread.thread_id, { tenantId: 't1' }).finally(() => clearInterval(keepAlive));
   assert.equal(signal.aborted, true);
   assert.equal(thread.status, 'cancelled');
 });
