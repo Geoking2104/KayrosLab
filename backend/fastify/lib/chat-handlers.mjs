@@ -3,6 +3,7 @@
 // acquittement immédiat + mission asynchrone, puis arbitrage par boutons.
 // La vérification de signature reste dans les routes, avant tout appel ici.
 
+import { linkedChatRole, memberRole } from './workspace-roles.mjs';
 import { platformUserId } from '../../../core/connectors-slack-deep.mjs';
 import {
   ChatReplyService,
@@ -22,14 +23,27 @@ export function chatReplies(ctx) {
     linkService: ctx.linkService || null,
     users: ctx.userStore || null,
     consoleUrl: ctx.consoleUrl || '',
+    resolveRole: chatRoleResolver(ctx),
   }).attach();
   ctx.chatReplies = service;
   return service;
 }
 
 /** Lance la mission du collectif en tâche de fond pour un message de chat. */
+/** Résolution du rôle d'espace (fiche membre) pour l'arbitrage depuis le chat. */
+export function chatRoleResolver(ctx) {
+  return async ({ tenantId, email, role }) => (await memberRole(ctx, { tenantId, email, accountRole: role })).role;
+}
+
+export const READ_ONLY_MESSAGE = 'Votre compte KayrosLab a le rôle lecteur dans cet espace : vous pouvez consulter les dossiers mais pas lancer de mission.';
+
 export async function startChatMission(ctx, { platform, channelId, messageId, userId, text, explicit = false, context = '', tenantId = null, chat, chatExtra = null }) {
   chatReplies(ctx);
+  // Compte de chat lié à un membre lecteur : la mission est refusée (les comptes non liés gardent l'accès du canal).
+  const linked = await linkedChatRole(ctx, userId);
+  if (linked && !linked.permissions.includes('run')) {
+    const error = new Error(READ_ONLY_MESSAGE); error.code = 'READ_ONLY'; throw error;
+  }
   return ctx.hybridGateway.startMessage({
     platform, external_room_id: channelId, message_id: messageId, dedupe: !!messageId,
     user_id: userId, text, explicit, context, ...(tenantId ? { tenantId } : {}),

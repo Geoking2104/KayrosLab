@@ -1,5 +1,6 @@
+import { createHash, randomBytes } from 'node:crypto';
 import { z } from 'zod';
-import { WorkspaceStore } from '../lib/workspace-store.mjs';
+import { PERMISSIONS, memberRole, workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { scopedThreads, accessibleRooms } from './console.mjs';
 import { evaluateThreadGates } from '../lib/project-gates.mjs';
 
@@ -27,7 +28,7 @@ const nodeSchema = z.object({
   config: z.object({
     session_id: z.string().max(120).optional(), agent_id: z.string().max(120).optional(),
     threshold: z.enum(['majority', 'unanimous', 'veto_csuite']).optional(), min_go: z.number().min(0).max(100).optional(),
-    veto: z.boolean().optional(), strict: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
+    veto: z.boolean().optional(), strict: z.boolean().optional(), exclude: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
   }).optional().default({}),
   // Position libre choisie par glisser-déposer (sinon mise en page automatique).
   x: z.number().min(0).max(10000).optional(), y: z.number().min(0).max(10000).optional(),
@@ -82,20 +83,17 @@ const memberSchema = z.object({
 const SCHEMAS = { companies: companySchema, projects: projectSchema, skills: skillSchema, contexts: contextSchema, members: memberSchema };
 const LABEL = { companies: 'société', projects: 'projet', skills: 'skill', contexts: 'source de contexte', members: 'membre' };
 const SKILL_VERSIONED = ['name', 'description', 'instructions', 'tools'];
-export const PERMISSIONS = {
-  admin: ['read', 'run', 'arbitrate', 'manage', 'members'],
-  comex: ['read', 'run', 'arbitrate', 'manage'],
-  contributeur: ['read', 'run'],
-  lecteur: ['read'],
-};
+export { PERMISSIONS };
+/** Fiche membre sans l'empreinte du jeton d'invitation. */
+export function publicMember(member) {
+  if (!member) return member;
+  const { invite_token_sha256: _hash, ...rest } = member;
+  return rest;
+}
 
 /** Rôle effectif : la fiche membre de l'espace prime sur le rôle du jeton. */
 export async function effectiveRole(app, me) {
-  const members = await store(app).list(me.tenantId, 'members');
-  const member = members.find((m) => m.email === String(me.email || '').toLowerCase());
-  // Sans fiche membre : comex/admin gardent leur rôle, les autres rôles du compte valent contributeur.
-  const fallback = ['comex', 'admin'].includes(me.role) ? me.role : 'contributeur';
-  return { member: member || null, role: member?.role || fallback };
+  return memberRole(app.kayrosContext, { tenantId: me.tenantId, email: me.email, accountRole: me.role });
 }
 /** Vérifie une permission (read, run, arbitrate, manage, members) selon le rôle effectif. */
 export async function can(app, me, permission) {
@@ -118,14 +116,7 @@ export async function applyGates(app, tenantId, thread) {
   return { ...thread, gate_evaluation: evaluation };
 }
 
-function store(app) {
-  const ctx = app.kayrosContext;
-  if (!ctx.workspaceStore) {
-    const file = process.env.KAYROS_WORKSPACE_FILE ?? './.kayros-workspace.json';
-    ctx.workspaceStore = new WorkspaceStore({ file });
-  }
-  return ctx.workspaceStore;
-}
+function store(app) { return workspaceStoreFor(app.kayrosContext); }
 async function allowed(app, me, reply, permission = 'manage') {
   const { role } = await effectiveRole(app, me);
   if ((PERMISSIONS[role] || []).includes(permission)) return true;
@@ -175,12 +166,19 @@ export async function notifyInformed(app, tenantId, thread, { by = null, reason 
   return sent;
 }
 
+/** Jeton d'activation d'invitation : seul son empreinte est conservée sur la fiche membre. */
+export const INVITE_TTL_MS = 7 * 24 * 3600 * 1000;
+export function inviteTokenHash(token) { return createHash('sha256').update(String(token || '')).digest('hex'); }
+export function inviteUrl(app, token) {
+  const base = String(app.kayrosContext.consoleUrl || process.env.KAYROS_CONSOLE_URL || 'https://www.kayroslab.com/console').replace(/\/+$/, '');
+  return `${base}/?invite=${encodeURIComponent(token)}`;
+}
+
 /** E-mail d'invitation d'un membre (statut sent / failed / queued sans SMTP). */
-async function sendInvite(app, { email, name, role, by }) {
+async function sendInvite(app, { email, name, role, by, url }) {
   const mailer = app.kayrosContext.contactMailer;
   if (!mailer?.sendMail) return { status: 'queued', error: '' };
-  const url = app.kayrosContext.consoleUrl || process.env.KAYROS_CONSOLE_URL || 'https://www.kayroslab.com/console';
-  const text = `Bonjour${name ? ` ${name}` : ''},\n\n${by || 'Un administrateur'} vous invite sur la console KayrosLab avec le rôle « ${role} ».\nConnectez-vous ou créez votre compte avec cette adresse (${email}) : ${url}\n\nCe message est envoyé automatiquement par KayrosLab.`;
+  const text = `Bonjour${name ? ` ${name}` : ''},\n\n${by || 'Un administrateur'} vous invite sur la console KayrosLab avec le rôle « ${role} ».\nActivez votre accès (création du mot de passe, ou connexion si vous avez déjà un compte avec ${email}) : ${url}\nCe lien est valable 7 jours.\n\nCe message est envoyé automatiquement par KayrosLab.`;
   try { await mailer.sendMail({ to: email, from: app.kayrosContext.smtp?.from, subject: '[KayrosLab] Invitation à rejoindre l’espace', text }); return { status: 'sent', error: '' }; }
   catch (e) { return { status: 'failed', error: String(e.message || e).slice(0, 300) }; }
 }
@@ -236,12 +234,13 @@ export default async function consoleWorkspaceRoutes(app) {
     app.get(base, async (req, reply) => {
       const me = await app.requireAuth(req, reply); if (!me) return;
       const filter = kind === 'projects' ? { company_id: req.query?.company_id || null } : {};
-      return { [kind]: await store(app).list(me.tenantId, kind, filter) };
+      const items = await store(app).list(me.tenantId, kind, filter);
+      return { [kind]: kind === 'members' ? items.map(publicMember) : items };
     });
     app.get(`${base}/:id`, async (req, reply) => {
       const me = await app.requireAuth(req, reply); if (!me) return;
       const item = await store(app).get(me.tenantId, kind, req.params.id);
-      return item ? { item } : reply.code(404).send({ error: `${LABEL[kind]} introuvable` });
+      return item ? { item: kind === 'members' ? publicMember(item) : item } : reply.code(404).send({ error: `${LABEL[kind]} introuvable` });
     });
     app.post(base, async (req, reply) => {
       const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply, kind === 'members' ? 'members' : 'manage')) return;
@@ -296,8 +295,8 @@ export default async function consoleWorkspaceRoutes(app) {
   app.get('/v1/console/members/me', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     let { member, role } = await effectiveRole(app, me);
-    if (member?.status === 'invited') member = await store(app).update(me.tenantId, 'members', member.id, { status: 'active', joined_at: new Date().toISOString() });
-    return { email: me.email, member, role, permissions: PERMISSIONS[role] || [] };
+    if (member?.status === 'invited') member = await store(app).update(me.tenantId, 'members', member.id, { status: 'active', joined_at: new Date().toISOString(), invite_token_sha256: null });
+    return { email: me.email, member: publicMember(member), role, permissions: PERMISSIONS[role] || [] };
   });
   // Invitation par e-mail : crée (ou relance) la fiche membre et envoie le lien d'accès.
   app.post('/v1/console/members/invite', async (req, reply) => {
@@ -307,10 +306,15 @@ export default async function consoleWorkspaceRoutes(app) {
     const ws = store(app);
     const existing = (await ws.list(me.tenantId, 'members')).find((m) => m.email === parsed.data.email);
     if (existing && existing.status !== 'invited') return reply.code(409).send({ error: 'membre déjà actif' });
-    const delivery = await sendInvite(app, { ...parsed.data, by: me.email });
-    const fields = { ...parsed.data, status: 'invited', invited_by: me.email, invited_at: new Date().toISOString(), invite_status: delivery.status, invite_error: delivery.error };
+    const token = randomBytes(24).toString('base64url');
+    const url = inviteUrl(app, token);
+    const delivery = await sendInvite(app, { ...parsed.data, by: me.email, url });
+    const fields = {
+      ...parsed.data, status: 'invited', invited_by: me.email, invited_at: new Date().toISOString(), invite_status: delivery.status, invite_error: delivery.error,
+      invite_token_sha256: inviteTokenHash(token), invite_expires_at: new Date(Date.now() + INVITE_TTL_MS).toISOString(),
+    };
     const item = existing ? await ws.update(me.tenantId, 'members', existing.id, { ...fields, updated_by: me.email }) : await ws.create(me.tenantId, 'members', fields, { by: me.email });
-    return reply.code(existing ? 200 : 201).send({ item, delivery });
+    return reply.code(existing ? 200 : 201).send({ item: publicMember(item), delivery, invite_url: url });
   });
   // État de l'envoi d'e-mails (SMTP configuré ou non) pour expliquer les notifications « en file ».
   app.get('/v1/console/mail/status', async (req, reply) => {

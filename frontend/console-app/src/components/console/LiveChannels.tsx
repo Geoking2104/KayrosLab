@@ -46,6 +46,11 @@ export function LiveChannels({ onSession }: { onSession?: (live: boolean) => voi
   const [busy, setBusy] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // Lien d'invitation reçu par e-mail : ?invite=<jeton> → activation du compte dans l'espace de l'invitant.
+  const [invite] = useState(() => { try { return new URLSearchParams(window.location.search).get("invite") || ""; } catch { return ""; } });
+  const [inviteInfo, setInviteInfo] = useState<{ email: string; role: string; invited_by: string | null; account_exists: boolean } | null>(null);
+  const [inviteError, setInviteError] = useState("");
+  const [name, setName] = useState("");
 
   const signOut = useCallback((message = "") => {
     tokenStore.clear(); setUser(null); setItems([]); setError(message); setPhase("logged_out");
@@ -68,6 +73,25 @@ export function LiveChannels({ onSession }: { onSession?: (live: boolean) => voi
   useEffect(() => { if (tokenStore.get()) void load(); }, [load]);
   useEffect(() => { onSession?.(phase === "ready" || phase === "loading" || phase === "checking" || (phase === "api_error" && !!user)); }, [phase, user, onSession]);
 
+  useEffect(() => {
+    if (!invite) return;
+    api.inviteInfo(invite).then(setInviteInfo).catch((e) => setInviteError(e instanceof Error ? e.message : String(e)));
+  }, [invite]);
+
+  function clearInviteParam() {
+    try { const url = new URL(window.location.href); url.searchParams.delete("invite"); window.history.replaceState(null, "", url.toString()); } catch { /* hors navigateur */ }
+  }
+
+  async function activate(event: FormEvent) {
+    event.preventDefault(); setBusy("invite"); setError("");
+    try {
+      const res = await api.acceptInvite({ token: invite, password, ...(name.trim() ? { name: name.trim() } : {}) });
+      clearInviteParam(); setInviteInfo(null);
+      tokenStore.set(res.token); setPassword(""); setPhase("loading"); await load();
+    } catch (e) { setError(e instanceof Error ? e.message : String(e)); }
+    finally { setBusy(null); }
+  }
+
   async function submit(event: FormEvent) {
     event.preventDefault(); setBusy("login"); setError("");
     try {
@@ -84,6 +108,36 @@ export function LiveChannels({ onSession }: { onSession?: (live: boolean) => voi
       if (e instanceof ApiError && e.status === 401) return signOut(T.sessionExpired);
       setError(e instanceof ApiError && e.status === 403 ? T.managerOnly : e instanceof Error ? e.message : String(e));
     } finally { setBusy(null); }
+  }
+
+  if (phase === "logged_out" && invite && (inviteInfo || inviteError)) {
+    return (
+      <Panel className="border-l-4 border-l-accent">
+        {inviteInfo ? (
+          <>
+            <h2 className="text-sm font-semibold">{t("Activer votre invitation")}</h2>
+            <p className="mt-1 text-sm text-ink-soft">
+              {t("{{by}} vous invite avec le rôle « {{role}} » ({{email}}).", { by: inviteInfo.invited_by || t("Un administrateur"), role: inviteInfo.role, email: inviteInfo.email })}{" "}
+              {inviteInfo.account_exists ? t("Un compte existe déjà : saisissez son mot de passe.") : t("Choisissez un mot de passe (8 caractères minimum).")}
+            </p>
+            <form className="mt-3 grid gap-2 sm:grid-cols-[1fr_1fr_auto] sm:items-end" onSubmit={activate} aria-label={t("Activer votre invitation")}>
+              {!inviteInfo.account_exists ? (
+                <label className="grid gap-1 text-xs text-muted">{t("Nom affiché")}
+                  <input className={controlClass} autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
+                </label>
+              ) : null}
+              <label className="grid gap-1 text-xs text-muted">{T.password}
+                <input className={controlClass} type="password" autoComplete={inviteInfo.account_exists ? "current-password" : "new-password"} required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} />
+              </label>
+              <button type="submit" disabled={busy === "invite"} className="min-h-11 rounded-[10px] bg-accent px-4 text-sm font-semibold text-white disabled:opacity-50">
+                {busy === "invite" ? T.loggingIn : t("Activer mon accès")}
+              </button>
+            </form>
+          </>
+        ) : <p className="text-sm text-stop" role="alert">{inviteError}</p>}
+        {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
+      </Panel>
+    );
   }
 
   if (phase === "logged_out") {

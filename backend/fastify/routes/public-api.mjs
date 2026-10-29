@@ -1,3 +1,4 @@
+import { memberCan } from '../lib/workspace-roles.mjs';
 // API publique v1 : la petite surface stable pour Zapier, n8n, Make,
 // Salesforce… (docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md §3.3).
 //
@@ -96,6 +97,10 @@ export default async function publicApiRoutes(app) {
 
   app.post('/v1/public/missions', { config: { rateLimit } }, async (req, reply) => {
     const principal = await requireApiKey(app, req, reply, 'missions:write'); if (!principal) return reply;
+    // La clé agit au nom de son créateur : un membre passé lecteur ne lance plus de mission.
+    if (principal.createdBy && !await memberCan(ctx(), { tenantId: principal.tenantId, email: principal.createdBy, accountRole: 'comex' }, 'run')) {
+      return reply.code(403).send({ error: 'le créateur de cette clé a le rôle lecteur : lancement de mission refusé', code: 'creator_read_only' });
+    }
     const idempotencyKey = String(req.headers['idempotency-key'] || '').trim();
     if (!idempotencyKey || idempotencyKey.length > 200) {
       return reply.code(400).send({ error: 'en-tête Idempotency-Key requis (1 à 200 caractères), ex. sf-<OpportunityId>-<Stage>', code: 'idempotency_key_required' });

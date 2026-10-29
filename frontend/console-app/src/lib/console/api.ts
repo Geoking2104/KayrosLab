@@ -1,4 +1,5 @@
 // Client minimal de l'API KayrosLab pour la console (auth e-mail/mot de passe existante : POST /v1/auth/login).
+import type { Pipeline } from "./live";
 export const API_BASE: string = (import.meta.env?.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
 const TOKEN_KEY = "kayroslab.console.token";
 
@@ -62,6 +63,12 @@ async function call<T>(path: string, init: RequestInit = {}, fetchImpl: typeof f
 export const api = {
   login: (email: string, password: string) => call<{ token: string; user: LiveUser }>("/v1/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
   me: () => call<{ user: LiveUser }>("/v1/auth/me"),
+  inviteInfo: (token: string) => call<{ email: string; name: string; role: string; invited_by: string | null; account_exists: boolean }>(`/v1/auth/invite/${encodeURIComponent(token)}`),
+  acceptInvite: (body: { token: string; password: string; name?: string }) => call<{ token: string; user: LiveUser; account_created: boolean }>("/v1/auth/invite/accept", { method: "POST", body: JSON.stringify(body) }),
+  startPipeline: (projectId: string, body: { question: string; profile?: string }) => call<{ pipeline: Pipeline }>(`/v1/console/projects/${encodeURIComponent(projectId)}/pipelines`, { method: "POST", body: JSON.stringify(body) }),
+  pipelines: (projectId: string) => call<{ pipelines: Pipeline[] }>(`/v1/console/projects/${encodeURIComponent(projectId)}/pipelines`),
+  resumePipeline: (id: string, justification: string) => call<{ pipeline: Pipeline }>(`/v1/console/pipelines/${encodeURIComponent(id)}/resume`, { method: "POST", body: JSON.stringify({ justification }) }),
+  cancelPipeline: (id: string) => call<{ pipeline: Pipeline }>(`/v1/console/pipelines/${encodeURIComponent(id)}/cancel`, { method: "POST" }),
   logout: () => call<{ ok: boolean }>("/v1/auth/logout", { method: "POST" }),
   connectors: () => call<{ connectors: LiveConnector[]; encrypted_storage: boolean }>("/v1/console/connectors"),
   agents: () => call<{ agents: any[] }>("/v1/console/agents"),

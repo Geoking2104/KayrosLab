@@ -4,8 +4,8 @@
 import { promises as fs } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 
-export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts', 'members', 'notifications'];
-const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx', members: 'mbr', notifications: 'ntf' };
+export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts', 'members', 'notifications', 'pipelines'];
+const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx', members: 'mbr', notifications: 'ntf', pipelines: 'ppl' };
 
 export class WorkspaceStore {
   constructor({ file = 'memory' } = {}) {
@@ -61,6 +61,15 @@ export class WorkspaceStore {
     items[index] = { ...items[index], ...patch, id, updated_at: new Date().toISOString() };
     await this._save();
     return structuredClone(items[index]);
+  }
+  /** Premier objet d'un type, tous tenants confondus (jeton d'invitation, fil d'un enchaînement). */
+  async findAcross(kind, predicate) {
+    const data = await this._load();
+    for (const [tenantId, buckets] of Object.entries(data)) {
+      const found = (buckets?.[kind] || []).find(predicate);
+      if (found) return { tenantId, item: structuredClone(found) };
+    }
+    return null;
   }
   async remove(tenantId, kind, id) {
     const items = await this._bucket(tenantId, kind);

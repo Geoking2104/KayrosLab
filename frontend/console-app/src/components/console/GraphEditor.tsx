@@ -77,6 +77,11 @@ export function GraphEditor({ spec, onChange, selected, onSelect, agents, collec
                 <option value="">—</option>
                 {agents.map((a) => <option key={a.id} value={a.id}>{tc(a.name)}</option>)}
               </select>
+              <label className="mt-1 flex items-center gap-2 text-sm">
+                <input type="checkbox" className="size-4" checked={Boolean(node.config.exclude)} onChange={(e) => patchNode({ config: { exclude: e.target.checked } })} />
+                {t("Retirer cet agent du collectif relié")}
+              </label>
+              <p className="text-xs text-muted">{t("Relié à un collectif, l’agent est ajouté à sa session (ou retiré) avant chaque mission.")}</p>
             </Field>
           ) : null}
           {node.type === "porte" ? (

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Mail, Pencil, Trash2, UserPlus } from "lucide-react";
 import { useConsole } from "@/lib/console/store";
 import { api } from "@/lib/console/api";
-import type { GraphSpec, Project, Stakeholder, StakeholderRole } from "@/lib/console/live";
+import type { GraphSpec, Pipeline, PipelineStepStatus, Project, Stakeholder, StakeholderRole } from "@/lib/console/live";
 import { STAKEHOLDER_ROLES } from "@/lib/console/roles";
 import { formatWhen } from "@/lib/console/model";
 import { Button, Empty, Section, StatusPill, VerdictPill, controlClass } from "./ui";
@@ -101,6 +101,7 @@ export function Projets() {
           </Section>
           {!project.demo ? <ContextCascade project={project} nodeId={selected} /> : null}
           <Stakeholders project={project} onSave={project.demo || !canManage ? undefined : (list) => saveItem("projects", project.id, { stakeholders: list })} />
+          {!project.demo && live ? <Pipelines project={project} canRun={permissions.includes("run")} canArbitrate={permissions.includes("arbitrate")} /> : null}
           {!project.demo ? <Notifications project={project} threadId={thread?.id} canSend={canManage} /> : null}
           <Section id="projet-dossiers" title={t("Dossiers du projet")} summary={t("{{n}} dossiers", { n: threads.length })}>
             {threads.length ? (
@@ -149,6 +150,77 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
           );
         })}
       </ol>
+    </Section>
+  );
+}
+
+const STEP: Record<PipelineStepStatus, () => string> = {
+  pending: () => t("en attente"), running: () => t("en cours"), completed: () => t("terminé"),
+  blocked: () => t("porte bloquée"), overridden: () => t("porte levée"), failed: () => t("échec"),
+};
+const STEP_TONE: Record<PipelineStepStatus, string> = {
+  pending: "bg-paper text-muted", running: "bg-accent-soft text-accent", completed: "bg-go-soft text-go",
+  blocked: "bg-stop-soft text-stop", overridden: "bg-hold-soft text-hold", failed: "bg-stop-soft text-stop",
+};
+
+/** Enchaînement : les collectifs du graphe traitent la question l’un après l’autre, les portes décident du passage. */
+function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; canRun: boolean; canArbitrate: boolean }) {
+  const [items, setItems] = useState<Pipeline[]>([]);
+  const [question, setQuestion] = useState("");
+  const [reason, setReason] = useState("");
+  const [error, setError] = useState("");
+  const steps = (project.graph?.nodes ?? []).filter((n) => n.type === "collectif" && n.config.session_id).length;
+  const load = useCallback(() => api.pipelines(project.id).then((r) => setItems(r.pipelines)).catch(() => setItems([])), [project.id]);
+  useEffect(() => { void load(); }, [load]);
+  const running = items.some((p) => p.status === "running");
+  useEffect(() => {
+    if (!running) return;
+    const timer = setInterval(() => void load(), 3000);
+    return () => clearInterval(timer);
+  }, [running, load]);
+  const act = async (fn: () => Promise<unknown>) => { try { await fn(); setError(""); await load(); } catch (e) { setError((e as Error).message); } };
+  return (
+    <Section id="projet-enchainement" title={t("Enchaînement des collectifs")} summary={t("{{n}} collectifs liés", { n: steps })}>
+      <p className="mb-2 text-xs text-muted">{t("Chaque collectif du graphe traite la question dans l’ordre des liens ; il reçoit les verdicts précédents. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.")}</p>
+      {canRun ? (
+        <form className="mb-3 flex flex-wrap gap-2" onSubmit={(e) => { e.preventDefault(); void act(async () => { await api.startPipeline(project.id, { question }); setQuestion(""); }); }}>
+          <input aria-label={t("Question de l’enchaînement")} className={`${controlClass} min-w-64 flex-1`} value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("Question soumise aux collectifs")} />
+          <Button type="submit" disabled={steps === 0 || question.trim().length < 3 || running}>{t("Lancer l’enchaînement")}</Button>
+        </form>
+      ) : <p className="mb-2 text-xs text-muted">{t("Votre rôle (lecteur) ne permet pas de lancer ou relancer une mission.")}</p>}
+      {steps === 0 ? <p className="text-sm text-muted">{t("Reliez au moins un nœud collectif à une session dans le graphe.")}</p> : null}
+      {items.length ? (
+        <ul className="grid gap-2" data-testid="pipelines">
+          {items.map((p) => (
+            <li key={p.id} className="rounded-md border border-line px-3 py-2 text-sm">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-medium">{p.question}</span>
+                <span className="text-xs text-muted">{p.created_at ? formatWhen(p.created_at) : ""}</span>
+              </div>
+              <ol className="mt-1 flex flex-wrap items-center gap-1 text-xs">
+                {p.steps.map((s, i) => (
+                  <li key={s.node_id} className="flex items-center gap-1">
+                    {i ? <span aria-hidden className="text-muted">→</span> : null}
+                    <span className={`rounded px-1.5 ${STEP_TONE[s.status]}`} title={(s.gates ?? []).flatMap((g) => g.reasons).join(" · ")}>
+                      {tc(s.label || s.session_id)} · {STEP[s.status]()}{s.verdict ? ` · ${s.verdict}` : ""}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              {p.status === "blocked" && canArbitrate ? (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <input aria-label={t("Motif de levée de la porte")} className={`${controlClass} min-w-56 flex-1`} value={reason} onChange={(e) => setReason(e.target.value)} placeholder={t("Motif (obligatoire)")} />
+                  <Button variant="secondary" disabled={reason.trim().length < 3} onClick={() => void act(async () => { await api.resumePipeline(p.id, reason); setReason(""); })}>{t("Lever la porte et continuer")}</Button>
+                </div>
+              ) : null}
+              {(p.status === "running" || p.status === "blocked") && canRun ? (
+                <Button variant="ghost" className="mt-1" onClick={() => void act(() => api.cancelPipeline(p.id))}>{t("Arrêter l’enchaînement")}</Button>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {error ? <p className="mt-2 text-xs text-stop" role="alert">{error}</p> : null}
     </Section>
   );
 }

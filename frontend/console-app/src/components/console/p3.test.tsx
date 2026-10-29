@@ -25,6 +25,7 @@ const NOTIFS: any[] = [];
 const ME_ROLE = { value: "admin" };
 const MAIL = { smtp: false };
 const GATES: { value: any } = { value: null };
+const PIPES: any[] = [];
 const calls: { url: string; method: string; body?: any }[] = [];
 
 function mockApi() {
@@ -35,6 +36,9 @@ function mockApi() {
     const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
     if (path === "/v1/console/members/me") return json({ email: "comex@atelier.fr", role: ME_ROLE.value, permissions: ME_ROLE.value === "admin" ? ["read", "run", "arbitrate", "manage", "members"] : ["read"], member: null });
     if (path === "/v1/console/members/invite") { const b = JSON.parse(String(init?.body)); const m = { id: "mbr_9", ...b, status: "invited", invite_status: MAIL.smtp ? "sent" : "queued" }; MEMBERS.push(m); return json({ item: m, delivery: { status: m.invite_status, error: "" } }, 201); }
+    if (path === "/v1/console/projects/prj_1/pipelines" && method === "POST") { PIPES.unshift({ id: "ppl_1", project_id: "prj_1", question: JSON.parse(String(init?.body)).question, status: "blocked", current: 0, created_at: "2026-10-29T10:00:00Z", steps: [{ node_id: "c", label: "Finance", session_id: "room_1", status: "blocked", thread_id: "t1", verdict: "CONDITIONAL_GO", gates: [{ gate_id: "p", label: "", status: "blocked", reasons: ["majorité non atteinte"] }] }, { node_id: "c2", label: "Juridique", session_id: "room_1", status: "pending", thread_id: null, verdict: null }] }); return json({ pipeline: PIPES[0] }, 202); }
+    if (path === "/v1/console/projects/prj_1/pipelines") return json({ pipelines: PIPES });
+    if (path === "/v1/console/pipelines/ppl_1/resume") { PIPES[0].status = "completed"; PIPES[0].steps[0].status = "overridden"; PIPES[0].steps[1].status = "completed"; return json({ pipeline: PIPES[0] }); }
     if (path === "/v1/console/mail/status") return json({ smtp: MAIL.smtp, from: null });
     if (path === "/v1/console/projects/prj_1/notifications/retry") { NOTIFS.forEach((n) => { n.status = "sent"; }); return json({ notifications: NOTIFS }); }
     if (path === "/v1/console/threads/thread_1/arbitrate") return json({ thread: THREAD });
@@ -61,7 +65,7 @@ function mockApi() {
 
 beforeEach(async () => {
   localStorage.clear();
-  calls.length = 0; MEMBERS.length = 0; NOTIFS.length = 0; ME_ROLE.value = "admin"; MAIL.smtp = false; GATES.value = null;
+  calls.length = 0; PIPES.length = 0; MEMBERS.length = 0; NOTIFS.length = 0; ME_ROLE.value = "admin"; MAIL.smtp = false; GATES.value = null;
   PROJECT.graph = null;
   PROJECT.stakeholders = [{ name: "Léa", role: "informe", title: "", email: "lea@atelier.fr" }];
   await i18next.changeLanguage("fr");
@@ -231,6 +235,20 @@ describe("suite P3 : portes, rôles, invitations, glisser-déposer", () => {
     live("dossiers?thread=thread_1");
     await waitFor(() => expect(screen.getByTestId("member-role").textContent).toContain("Lecteur"));
     expect(calls.some((c) => c.method === "POST" && /\/run/.test(c.url))).toBe(false);
+  });
+
+  it("lance un enchaînement de collectifs, affiche la porte bloquée puis la lève", async () => {
+    PROJECT.graph = { nodes: [{ id: "c", type: "collectif", label: "Finance", config: { session_id: "room_1" } }, { id: "p", type: "porte", label: "", config: {} }, { id: "c2", type: "collectif", label: "Juridique", config: { session_id: "room_1" } }], edges: [{ from: "c", to: "p" }, { from: "p", to: "c2" }] };
+    live("projets");
+    fireEvent.change(await screen.findByLabelText("Question de l’enchaînement"), { target: { value: "Faut-il signer ?" } });
+    fireEvent.click(screen.getByRole("button", { name: "Lancer l’enchaînement" }));
+    const list = await screen.findByTestId("pipelines");
+    await waitFor(() => expect(list.textContent).toContain("porte bloquée"));
+    expect(calls.find((c) => c.method === "POST" && c.url.endsWith("/projects/prj_1/pipelines"))!.body).toEqual({ question: "Faut-il signer ?" });
+    fireEvent.change(screen.getByLabelText("Motif de levée de la porte"), { target: { value: "Risque accepté" } });
+    fireEvent.click(screen.getByRole("button", { name: "Lever la porte et continuer" }));
+    await waitFor(() => expect(screen.getByTestId("pipelines").textContent).toContain("porte levée"));
+    expect(calls.find((c) => c.url.endsWith("/resume"))!.body).toEqual({ justification: "Risque accepté" });
   });
 
   it("le membre de démo choisi est conservé", async () => {

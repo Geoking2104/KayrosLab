@@ -80,6 +80,24 @@ describe("LiveChannels", () => {
     await waitFor(() => expect(assign).toHaveBeenCalledWith("https://discord.com/oauth2/authorize?x=1"));
   });
 
+  it("activates an invitation from the e-mail link, then signs in", async () => {
+    window.history.replaceState(null, "", "/console/?invite=tok_invite_1234567890");
+    const fetchFn = mockFetch((url, init) => {
+      if (url.includes("/v1/auth/invite/tok_invite")) return { status: 200, body: { email: "nina@example.com", name: "", role: "lecteur", invited_by: "a@example.com", account_exists: false } };
+      if (url.endsWith("/v1/auth/invite/accept")) return { status: 200, body: { token: "tok_nina", user: { id: "u2", email: "nina@example.com", role: "contributeur" }, account_created: true } };
+      if (url.endsWith("/v1/auth/me")) return { status: 200, body: { user: { id: "u2", email: "nina@example.com", role: "contributeur" } } };
+      return { status: 200, body: CONNECTORS };
+    });
+    render(<LiveChannels />);
+    expect((await screen.findByText(/vous invite avec le rôle|invites you with the/)).textContent).toContain("nina@example.com");
+    fireEvent.change(screen.getByLabelText(/Mot de passe|Password/), { target: { value: "motdepasse-solide" } });
+    fireEvent.submit(screen.getByRole("form", { name: /Activer votre invitation|Activate your invitation/ }));
+    await waitFor(() => expect(localStorage.getItem("kayroslab.console.token")).toBe("tok_nina"));
+    const accept = fetchFn.mock.calls.find(([url]) => String(url).endsWith("/invite/accept"))!;
+    expect(JSON.parse(String(accept[1]!.body))).toEqual({ token: "tok_invite_1234567890", password: "motdepasse-solide" });
+    expect(window.location.search).toBe("");
+  });
+
   it("returns to logged-out state on 401 and shows API errors otherwise", async () => {
     localStorage.setItem("kayroslab.console.token", "old");
     mockFetch(() => ({ status: 401, body: { error: "unauthorized" } }));

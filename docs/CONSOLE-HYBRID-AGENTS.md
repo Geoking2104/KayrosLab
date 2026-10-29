@@ -138,3 +138,38 @@ pour tout autre profil (et pour `GET /v4/content/profile/:id`) : la console l'af
 
 Chaque agent personnifié peut porter un descriptif éditable : `disc_type`, `archetype`, `disc_intensity` (0–100), `overview`, `qualities[]`, `traits` (`risk_aversion`, `skepticism`, `pragmatism`, `pace`, `expressiveness`, `social`, `dominance`, `leniency`, de 0 à 100), `sections` (`communication`, `building_trust`, `motivation`, `driving_action`, `energizers`, `drainers`, `strengths`, `blindspots`, `working_together`, `meetings`, `emails`, `following_up`, `negotiating`, `proposal`, `do`, `dont`) et `source` (`crystalknows`, `disc_template`, `manual` ou `anonymised`).
 Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la console, construit le descriptif depuis Crystal v4 (`descriptifFromCrystal`) ou depuis un type DISC (`descriptifFromDisc`), le normalise et l'injecte dans le contexte d'exécution (`descriptifContext`).
+
+## Enchaînement de collectifs, agents du graphe, rôles et invitations
+
+### Enchaînement le long du graphe
+- Chaque nœud **collectif** relié à une session devient une étape, dans l'ordre topologique du graphe.
+- `POST /v1/console/projects/:id/pipelines {question, profile?}` (rôle *run*) lance la première mission (202).
+- À la fin de chaque mission (événement `completed`), les **portes de sortie** de l'étape sont évaluées sur les avis : ce sont les portes atteintes sans traverser un autre collectif.
+  - Si elles passent, le collectif suivant démarre. Il reçoit les verdicts des étapes précédentes dans son contexte.
+  - Si une porte bloque, l'enchaînement passe à `blocked`. Un comex ou un admin peut lever la porte avec `POST /v1/console/pipelines/:id/resume {justification}`, et l'étape suivante démarre.
+- Une mission en échec met l'enchaînement à `failed`.
+- `POST /pipelines/:id/cancel` arrête l'enchaînement.
+- Les routes de lecture sont `GET /projects/:id/pipelines` et `GET /pipelines/:id`.
+
+### Nœuds agent
+- Un nœud **agent** (`config.agent_id`) relié à un collectif (dans un sens ou dans l'autre) est **ajouté à la session** de ce collectif avant chaque mission, qu'elle soit lancée par un enchaînement ou directement sur la session.
+- Avec `config.exclude: true`, l'agent est retiré de la session.
+- La modification passe par `updateRoomAgents` et respecte la limite d'agents construits.
+
+### Rôle lecteur hors console
+- **API publique** : une clé agit au nom de son créateur (`created_by`). Si la fiche membre du créateur est passée lecteur, `POST /v1/public/missions` renvoie `403 creator_read_only`.
+- **Slack, Teams, Discord** :
+  - Un compte de chat **lié** à un membre lecteur ne peut ni lancer de mission ni arbitrer. La fiche membre prime sur le rôle du compte.
+  - Les comptes non liés gardent l'accès défini par le canal.
+
+### Activation d'une invitation
+1. L'administrateur invite un membre depuis Réglages → Membres → « Inviter par e-mail ».
+   - Un jeton à usage unique, valable 7 jours, est créé. Seule son empreinte SHA-256 est stockée.
+   - L'e-mail contient le lien `<console>/?invite=<jeton>`.
+   - Sans SMTP, la réponse de l'API (`invite_url`) donne le lien à transmettre à la main.
+2. La console affiche « Activer votre invitation » (`GET /v1/auth/invite/:jeton`).
+3. `POST /v1/auth/invite/accept {token, password, name?}` :
+   - Sans compte existant, crée le compte **dans l'espace de l'invitant** (et non dans l'espace libre-service), avec le rôle de compte comex pour un comex ou un admin, contributeur sinon. Le rôle effectif reste celui de la fiche membre, lecteur compris.
+   - Avec un compte existant dans le même espace, vérifie son mot de passe.
+   - Un compte existant dans un autre espace donne `409 account_other_tenant`.
+   - Dans les cas acceptés, la fiche passe à `active` et la session est ouverte.

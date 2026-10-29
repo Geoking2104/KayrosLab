@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
-import { hasConsentedHumanProfile } from '../../../core/hybrid-agent-gateway.mjs';
+import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
+import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
+import { agentNodesFor, chainContext, pipelineSteps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
 import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
@@ -377,6 +379,101 @@ async function connections(app, tenantId) {
   });
 }
 
+// --- Enchaînement de collectifs le long du graphe d'un projet ------------
+const pipelineLocks = new Map();
+function withPipelineLock(id, fn) {
+  const prior = pipelineLocks.get(id) || Promise.resolve();
+  const next = prior.then(fn, fn);
+  pipelineLocks.set(id, next.catch(() => {}));
+  return next;
+}
+/** Applique les nœuds « agent » du graphe à la session du collectif (ajout / exclusion). */
+export async function applyGraphAgents(app, tenantId, graph, node, by) {
+  const { add, remove } = agentNodesFor(graph, node.id);
+  if (!add.length && !remove.length) return null;
+  const gateway = app.kayrosContext.hybridGateway;
+  const room = await gateway.getRoom(node.config.session_id, { tenantId });
+  if (!room) return { added: [], removed: [], error: 'session introuvable' };
+  const swarm = app.kayrosContext.engine.swarm;
+  await swarm.hydrateTenant?.(tenantId);
+  const active = swarm.getConfiguration(room.swarm_id, { tenantId })?.active_agents || [];
+  const adds = add.filter((id) => !active.includes(id));
+  const removes = remove.filter((id) => active.includes(id));
+  if (!adds.length && !removes.length) return { added: [], removed: [], error: null };
+  try {
+    await gateway.updateRoomAgents(room.room_id, { addAgentIds: adds, removeAgentIds: removes, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId, by });
+    return { added: adds, removed: removes, error: null };
+  } catch (error) { return { added: [], removed: [], error: surface(error?.message || error) }; }
+}
+async function savePipeline(app, tenantId, pipeline) {
+  return workspaceStoreFor(app.kayrosContext).update(tenantId, 'pipelines', pipeline.id, pipeline);
+}
+/** Démarre l'étape `index` (mission sur la session du collectif, contexte des étapes précédentes). */
+async function startPipelineStep(app, tenantId, pipeline, index) {
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const project = await ws.get(tenantId, 'projects', pipeline.project_id);
+  const step = pipeline.steps[index];
+  const node = (project?.graph?.nodes || []).find((n) => n.id === step.node_id);
+  const gateway = app.kayrosContext.hybridGateway;
+  const room = node ? await gateway.getRoom(step.session_id, { tenantId }) : null;
+  if (!room) {
+    Object.assign(step, { status: 'failed', error: 'session du collectif introuvable' });
+    return savePipeline(app, tenantId, { ...pipeline, status: 'failed', current: index, finished_at: new Date().toISOString() });
+  }
+  step.agents = await applyGraphAgents(app, tenantId, project.graph, node, pipeline.created_by);
+  const attached = await collectiveAttachmentsContext(app, tenantId, room.room_id);
+  const context = [`Session de harness « ${room.name} » · collectif ${room.swarm_id}`, chainContext(pipeline, project), attached].filter(Boolean).join('\n\n').slice(0, 24000);
+  const profile = runProfile(app, pipeline.profile);
+  Object.assign(step, { status: 'running', thread_id: makeThreadId(), started_at: new Date().toISOString(), error: null });
+  let saved = await savePipeline(app, tenantId, { ...pipeline, status: 'running', current: index });
+  try {
+    const started = await gateway.startMessage({
+      platform: 'console', room_id: room.room_id, tenantId, thread_id: step.thread_id,
+      user_id: pipeline.created_sub, by: pipeline.created_by, explicit: true, text: pipeline.question, context,
+      provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
+      origin: 'pipeline', allowConcurrent: true,
+    });
+    const fresh = await ws.get(tenantId, 'pipelines', pipeline.id);
+    if (fresh && fresh.steps[index].thread_id === step.thread_id && !fresh.steps[index].run_id) {
+      fresh.steps[index].run_id = started.run_id || null;
+      saved = await savePipeline(app, tenantId, fresh);
+    }
+  } catch (error) {
+    Object.assign(step, { status: 'failed', error: surface(error?.message || error) });
+    saved = await savePipeline(app, tenantId, { ...pipeline, status: 'failed', current: index, finished_at: new Date().toISOString() });
+  }
+  return saved;
+}
+/** Fin d'une mission : l'enchaînement qui l'attendait passe à l'étape suivante, se bloque ou échoue. */
+export async function advancePipelines(app, kind, thread) {
+  if (!thread?.thread_id || !['completed', 'failed'].includes(kind)) return null;
+  const tenantId = thread.tenant_id || 'default';
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const candidate = (await ws.list(tenantId, 'pipelines')).find((p) => p.status === 'running' && p.steps.some((s) => s.thread_id === thread.thread_id));
+  if (!candidate) return null;
+  return withPipelineLock(candidate.id, async () => {
+    const pipeline = await ws.get(tenantId, 'pipelines', candidate.id);
+    const index = pipeline?.steps.findIndex((s) => s.thread_id === thread.thread_id) ?? -1;
+    if (index < 0 || pipeline.steps[index].status !== 'running') return pipeline;
+    const step = pipeline.steps[index];
+    const at = new Date().toISOString();
+    if (kind === 'failed') {
+      Object.assign(step, { status: 'failed', error: thread.error?.message || thread.error || 'mission en échec', finished_at: at });
+      return savePipeline(app, tenantId, { ...pipeline, status: 'failed', finished_at: at });
+    }
+    const project = await ws.get(tenantId, 'projects', pipeline.project_id);
+    const outcome = stepOutcome(project?.graph, step.node_id, thread);
+    Object.assign(step, { verdict: outcome.verdict, rationale: outcome.rationale, gates: outcome.results, finished_at: at });
+    if (outcome.status === 'blocked') {
+      step.status = 'blocked';
+      return savePipeline(app, tenantId, { ...pipeline, status: 'blocked' });
+    }
+    step.status = 'completed';
+    if (index + 1 >= pipeline.steps.length) return savePipeline(app, tenantId, { ...pipeline, status: 'completed', finished_at: at });
+    return startPipelineStep(app, tenantId, pipeline, index + 1);
+  });
+}
+
 export default async function consoleRoute(app) {
   // Fin de mission asynchrone : les portes du graphe sont évaluées avant la diffusion de l'événement.
   const gateway = app.kayrosContext?.hybridGateway;
@@ -386,6 +483,8 @@ export default async function consoleRoute(app) {
       let next = thread;
       if (kind === 'completed' && thread) next = await withGates(app, thread.tenant_id, thread);
       if (prior) await prior(kind, next);
+      // Collectif suivant du graphe (après la diffusion de l'événement de cette mission).
+      try { await advancePipelines(app, kind, next); } catch (error) { app.log?.warn?.({ err: error?.message }, 'enchaînement de collectifs'); }
     };
     gateway.gatesWrapped = true;
   }
@@ -706,6 +805,12 @@ export default async function consoleRoute(app) {
     const question = parsed.data.question || parsed.data.text;
     const baseContext = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
     // Skills et sources de contexte rattachés au collectif (Bibliothèque).
+    // Nœuds « agent » des graphes de projet reliés à ce collectif : composition appliquée avant la mission.
+    for (const project of await workspaceStoreFor(app.kayrosContext).list(me.tenantId, 'projects')) {
+      for (const node of (project.graph?.nodes || []).filter((n) => n.type === 'collectif' && n.config?.session_id === room.room_id)) {
+        await applyGraphAgents(app, me.tenantId, project.graph, node, me.email);
+      }
+    }
     const attached = await collectiveAttachmentsContext(app, me.tenantId, room.room_id);
     const context = attached ? `${baseContext}\n\n${attached}`.slice(0, 24000) : baseContext;
     const profile = runProfile(app, parsed.data.profile);
@@ -733,6 +838,67 @@ export default async function consoleRoute(app) {
     } catch (error) {
       return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: surface(error.message) });
     }
+  });
+
+  // --- Enchaînement de collectifs (graphe de projet) ----------------------
+  const pipelineSchema = z.object({ question: z.string().trim().min(3).max(4000), profile: z.enum(EXECUTION_PROFILES).optional() });
+  app.post('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
+    const parsed = pipelineSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'question invalide (3 caractères minimum)', issues: parsed.error.issues });
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const project = await ws.get(me.tenantId, 'projects', req.params.projectId);
+    if (!project) return reply.code(404).send({ error: 'projet introuvable' });
+    const nodes = pipelineSteps(project.graph);
+    if (!nodes.length) return reply.code(400).send({ error: 'aucun collectif lié à une session dans le graphe', code: 'no_collective' });
+    for (const node of nodes) {
+      if (!await accessibleRoom(app, me, node.config.session_id)) return reply.code(404).send({ error: `session introuvable pour le collectif « ${node.label || node.id} »` });
+    }
+    if ((await ws.list(me.tenantId, 'pipelines', { project_id: project.id })).some((p) => p.status === 'running')) {
+      return reply.code(409).send({ error: 'un enchaînement est déjà en cours sur ce projet', code: 'pipeline_running' });
+    }
+    const created = await ws.create(me.tenantId, 'pipelines', {
+      project_id: project.id, question: parsed.data.question, profile: parsed.data.profile || null,
+      status: 'running', current: 0, created_sub: me.sub,
+      steps: nodes.map((n) => ({ node_id: n.id, label: n.label || '', session_id: n.config.session_id, status: 'pending', thread_id: null, run_id: null, verdict: null })),
+    }, { by: me.email });
+    const pipeline = await withPipelineLock(created.id, () => startPipelineStep(app, me.tenantId, created, 0));
+    return reply.code(202).send({ pipeline });
+  });
+  app.get('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const items = await workspaceStoreFor(app.kayrosContext).list(me.tenantId, 'pipelines', { project_id: req.params.projectId });
+    return { pipelines: items.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at))).slice(0, 20) };
+  });
+  app.get('/v1/console/pipelines/:pipelineId', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const pipeline = await workspaceStoreFor(app.kayrosContext).get(me.tenantId, 'pipelines', req.params.pipelineId);
+    return pipeline ? { pipeline } : reply.code(404).send({ error: 'enchaînement introuvable' });
+  });
+  // Porte bloquée : un comex/admin lève la porte (motif obligatoire) et le collectif suivant démarre.
+  app.post('/v1/console/pipelines/:pipelineId/resume', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
+    const justification = String(req.body?.justification || '').trim();
+    if (justification.length < 3) return reply.code(400).send({ error: 'motif obligatoire (3 caractères minimum)', code: 'reason_required' });
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const result = await withPipelineLock(req.params.pipelineId, async () => {
+      const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+      if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
+      const index = pipeline.steps.findIndex((s) => s.status === 'blocked');
+      if (pipeline.status !== 'blocked' || index < 0) return { code: 409, body: { error: 'aucune porte bloquée sur cet enchaînement', code: 'not_blocked' } };
+      Object.assign(pipeline.steps[index], { status: 'overridden', override: { by: me.email, justification, at: new Date().toISOString() } });
+      if (index + 1 >= pipeline.steps.length) return { code: 200, body: { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'completed', finished_at: new Date().toISOString() }) } };
+      return { code: 200, body: { pipeline: await startPipelineStep(app, me.tenantId, pipeline, index + 1) } };
+    });
+    return reply.code(result.code).send(result.body);
+  });
+  app.post('/v1/console/pipelines/:pipelineId/cancel', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+    if (!pipeline) return reply.code(404).send({ error: 'enchaînement introuvable' });
+    if (['completed', 'failed', 'cancelled'].includes(pipeline.status)) return { pipeline };
+    return { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'cancelled', finished_at: new Date().toISOString(), cancelled_by: me.email }) };
   });
 
   // --- Journal d'exécution du harness ------------------------------------
