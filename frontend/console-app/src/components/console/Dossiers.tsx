@@ -18,6 +18,7 @@ import { readDocument } from "@/lib/console/read";
 import { cn } from "@/lib/cn";
 import { Section, Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
+import { ConfidenceBadge } from "./profile-enrich";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
 import { t, tc, tk } from "@/lib/i18n";
@@ -187,6 +188,7 @@ export function Dossier({ threadId }: { threadId: string }) {
                       <li key={item.agentId} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper py-0.5 pr-2.5 pl-1 text-xs font-semibold text-ink">
                         <VerdictPill verdict={item.verdict} />
                         {tc(agent?.role ?? agent?.name)}
+                        {item.persona ? <span className="text-muted" title={item.persona.confidence.label} data-testid="trace-persona">{item.persona.confidence.kind === "crystalknows" ? t("· CrystalKnows") : item.persona.confidence.kind === "estimate" ? t("· DISC estimé") : t("· saisi")}</span> : null}
                       </li>
                     );
                   })}
@@ -294,6 +296,15 @@ export function Dossier({ threadId }: { threadId: string }) {
                   </h2>
                   <VerdictPill verdict={item.verdict} />
                 </div>
+                {item.persona ? (
+                  <div className="mt-3 grid gap-1.5" data-testid="mission-persona">
+                    <ConfidenceBadge confidence={item.persona.confidence} />
+                    {item.persona.feedback ? <blockquote className="border-l-2 border-line pl-3 text-sm italic">{item.persona.feedback}</blockquote> : null}
+                    <p className="text-xs text-muted">{item.persona.voiceSource === "model"
+                      ? t("Voix produite par le modèle (fidélité {{pct}} %).", { pct: Math.round((item.persona.score ?? 0) * 100) })
+                      : t("Voix de repli déterministe : le modèle n’a pas fourni de réplique fidèle.")}</p>
+                  </div>
+                ) : null}
                 <dl className="mt-3 grid gap-3 text-sm md:grid-cols-2">
                   <Block title={t("Appuis")} items={item.strengths} />
                   <Block title={t("Objections")} items={item.objections} />

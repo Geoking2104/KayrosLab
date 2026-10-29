@@ -188,6 +188,13 @@ export interface Contribution {
   objections: string[];
   conditions: string[];
   metric: string;
+  /** Impersonator : provenance du DISC et réplique simulée (modèle ou repli déterministe). */
+  persona?: {
+    confidence: { kind: "crystalknows" | "estimate" | "disc_template" | "manual" | "none"; disc_type: string | null; archetype: string | null; confidence: number | null; label: string; sources: string[] };
+    feedback?: string;
+    voiceSource: "model" | "deterministic";
+    score?: number;
+  };
 }
 
 export interface Evidence {

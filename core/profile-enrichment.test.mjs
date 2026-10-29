@@ -123,3 +123,13 @@ test('buildEnrichedProfile sans Crystal : DISC estimé et marqué', () => {
   assert.equal(r.evidence.at(-1).source, 'estimate');
   assert.throws(() => buildEnrichedProfile({}), /aucune source/);
 });
+
+import { calibrateDiscEstimator } from './profile-enrichment.mjs';
+import { readFileSync as readCal } from 'node:fs';
+test('étalonnage DISC : accord sur les fiches CrystalKnows réelles et les modèles, confiance plafonnée', () => {
+  const { cases } = JSON.parse(readCal(new URL('./fixtures/disc-calibration.json', import.meta.url), 'utf8'));
+  const out = calibrateDiscEstimator(cases);
+  assert.equal(out.agreement, 1, JSON.stringify(out.cases));
+  assert.deepEqual(out.cases.filter((c) => c.reference.startsWith('crystalknows')).map((c) => [c.id, c.got]), [['geoffroy2104', 'D'], ['pjones', 'C']]);
+  for (const c of out.cases) assert.ok(c.confidence <= 0.6);
+});

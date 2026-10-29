@@ -1064,5 +1064,19 @@
   "{{kept}} message(s) de la personne sur {{total}}": "{{kept}} message(s) from the person out of {{total}}",
   "Renseignez au moins une source, puis construisez le profil.": "Fill in at least one source, then build the profile.",
   "Le panel de {{count}} personas est créé.": "The {{count}}-persona panel is created.",
-  "Profil ré-enrichi : {{label}}": "Profile re-enriched: {{label}}"
+  "Profil ré-enrichi : {{label}}": "Profile re-enriched: {{label}}",
+  "· CrystalKnows": "· CrystalKnows",
+  "· DISC estimé": "· estimated DISC",
+  "· saisi": "· entered",
+  "Voix produite par le modèle (fidélité {{pct}} %).": "Voice produced by the model ({{pct}}% fidelity).",
+  "Voix de repli déterministe : le modèle n’a pas fourni de réplique fidèle.": "Deterministic fallback voice: the model did not return a faithful line.",
+  "Réplique du modèle ({{provider}}).": "Model reply ({{provider}}).",
+  "Aperçu déterministe (modèle absent ou réplique infidèle).": "Deterministic preview (no model or unfaithful reply).",
+  "Jeton serveur CrystalKnows configuré.": "CrystalKnows server token configured.",
+  "CRYSTALKNOWS_API_TOKEN absent côté serveur : ce mode sera refusé.": "CRYSTALKNOWS_API_TOKEN missing on the server: this mode will be refused.",
+  "X_BEARER_TOKEN absent côté serveur : le compte seul sera refusé ; collez des posts ou l’archive.": "X_BEARER_TOKEN missing on the server: an account alone will be refused; paste posts or the archive.",
+  "Importer depuis Gmail ou Outlook (sans copier-coller)": "Import from Gmail or Outlook (no pasting)",
+  "Jeton OAuth lecture seule de la personne (Gmail : gmail.readonly ; Outlook : Mail.Read). Seuls les messages envoyés sont lus ; le jeton sert à cette requête et n’est pas enregistré.": "The person’s read-only OAuth token (Gmail: gmail.readonly; Outlook: Mail.Read). Only sent messages are read; the token is used for this request and not stored.",
+  "Jeton Gmail": "Gmail token",
+  "Jeton Outlook": "Outlook token"
 }

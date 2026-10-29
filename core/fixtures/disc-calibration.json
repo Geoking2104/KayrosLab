@@ -1,0 +1,37 @@
+{
+  "note": "Corpus d’étalonnage. Les types de référence D (geoffroy2104) et C (pjones) viennent de fiches CrystalKnows réelles (fixtures crystal-public-geoffroy2104.html et crystal-v4-profile-pjones.json) ; les textes sont rédigés d’après la rubrique « Lui écrire » de chaque fiche, ce ne sont pas des e-mails réels. Les cas I et S suivent les modèles DISC génériques.",
+  "cases": [
+    { "id": "geoffroy2104", "reference": "crystalknows_public", "fixture": "crystal-public-geoffroy2104.html", "disc_primary": "D", "samples": [
+      "Go pour vendredi. Envoie-moi le chiffre final.",
+      "On tranche demain. Prépare deux options max.",
+      "Pas convaincu. Donne-moi le gain réel.",
+      "Valide. Lance la prod lundi.",
+      "Trop long. Résume en trois points.",
+      "Fais-le. Je signe ce soir."
+    ] },
+    { "id": "pjones", "reference": "crystalknows_api_v4", "fixture": "crystal-v4-profile-pjones.json", "disc_primary": "C", "samples": [
+      "Bonjour, avant de valider, pourriez-vous préciser la méthode de calcul utilisée pour l’hypothèse de croissance retenue dans le tableau de la page 4 ?",
+      "Merci pour le document. Quelques points à vérifier :\n- la source des données de marché\n- la période de référence\n- le traitement des valeurs manquantes",
+      "Je préfère attendre la version consolidée, car les chiffres du deuxième onglet ne correspondent pas encore à ceux de la synthèse transmise la semaine dernière.",
+      "Pouvez-vous m’envoyer le détail des hypothèses ? Je reviendrai vers vous après analyse.",
+      "Points d’attention :\n- risque de change non couvert\n- dépendance à un fournisseur unique\n- calendrier serré",
+      "Quel est l’intervalle de confiance associé à cette estimation, et sur quel échantillon a-t-elle été construite ?"
+    ] },
+    { "id": "template-i", "reference": "disc_template", "disc_primary": "I", "samples": [
+      "Bonjour à tous ! Super nouvelle, on a signé avec eux !",
+      "Merci beaucoup pour votre énergie, l’équipe a été géniale !",
+      "J’adore cette idée ! On en parle autour d’un café ?",
+      "Bravo à tous, quelle belle réussite ensemble !",
+      "Hello ! Trop contente de vous retrouver jeudi !",
+      "Merci encore, c’était top, vraiment !"
+    ] },
+    { "id": "template-s", "reference": "disc_template", "disc_primary": "S", "samples": [
+      "Bonjour, merci pour ton message. Je pense qu’on pourrait peut-être prendre un peu plus de temps pour l’équipe.",
+      "Bonjour à tous, j’espère que vous allez bien. Il me semble qu’il serait préférable d’avancer pas à pas.",
+      "Merci beaucoup. Peut-être pourrions-nous en discuter ensemble avant de décider ?",
+      "Bonjour, je crois que l’équipe a besoin d’être rassurée, si possible avant la fin du mois.",
+      "Bonjour, merci pour ta patience. Il faudrait sans doute prévoir une transition douce.",
+      "Bonjour, je me demande si on ne pourrait pas accompagner davantage les nouveaux arrivants."
+    ] }
+  ]
+}

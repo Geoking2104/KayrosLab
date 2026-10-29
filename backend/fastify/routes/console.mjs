@@ -6,7 +6,8 @@ import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
-import { profileConfidence, speakAs } from '../../../core/impersonator-voice.mjs';
+import { profileConfidence, speakAs, speakWithModel } from '../../../core/impersonator-voice.mjs';
+import { fetchGmailMessages, fetchOutlookMessages, GMAIL_SCOPE, OUTLOOK_SCOPE } from '../../../core/email-connectors.mjs';
 import { agentAttributesFromProfile, mergeHumanProfiles, profileFromCrystalData, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 import {
   CrystalPublicProfileFetcher, ENRICHMENT_LIMITS, XProfileAdapter, buildEnrichedProfile, postsFromXArchive,
@@ -173,6 +174,8 @@ const enrichSchema = z.object({
   x_posts: z.array(z.string().max(2000)).max(300).optional(),
   x_archive: z.string().max(5000000).optional(),
   crystal_export: z.record(z.string(), z.unknown()).optional(),
+  gmail: z.object({ access_token: z.string().min(10).max(4096), query: z.string().max(500).optional(), max: z.number().int().min(1).max(50).optional() }).optional(),
+  outlook: z.object({ access_token: z.string().min(10).max(4096), max: z.number().int().min(1).max(50).optional() }).optional(),
   crystal_api: z.object({ email: z.string().email().max(320).optional(), linkedin_url: z.string().max(1000).optional(), full_name: z.string().max(200).optional(), company_name: z.string().max(200).optional() }).optional(),
 });
 const impersonatorMemberSchema = impersonatorSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true });
@@ -342,14 +345,27 @@ async function enrichFromRequest(app, me, reply, d) {
       }
       crystal = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{ source: 'crystalknows', ...d.crystal_api }] }, { by: me.email });
     }
+    // Boîtes mail : API officielles Gmail / Microsoft Graph, jeton OAuth de la requête (jamais stocké).
+    const mailbox = [];
+    if (d.gmail || d.outlook) {
+      if (!await manager(app, me, reply)) return null;
+      const fetchImpl = app.kayrosContext.mailFetch || globalThis.fetch;
+      if (d.gmail) mailbox.push(...await fetchGmailMessages({ accessToken: d.gmail.access_token, query: d.gmail.query || 'in:sent', max: d.gmail.max, fetchImpl }));
+      if (d.outlook) mailbox.push(...await fetchOutlookMessages({ accessToken: d.outlook.access_token, max: d.outlook.max, fetchImpl }));
+      if (!mailbox.length) warnings.push('Boîte mail : aucun message envoyé trouvé pour cette recherche.');
+    }
+    const allEmails = [...(d.emails || []), ...mailbox];
     const linkedin = d.linkedin_export ? profileFromLinkedInExport(d.linkedin_export, { imported_by: me.email }) : null;
-    const email = d.emails?.length ? profileFromEmails(d.emails, { author: d.email_address || null, imported_by: me.email }) : null;
+    const email = allEmails.length ? profileFromEmails(allEmails, { author: d.email_address || null, imported_by: me.email }) : null;
     let x = null;
     const posts = [...(d.x_posts || []), ...(d.x_archive ? postsFromXArchive(d.x_archive) : [])];
     if (posts.length) x = profileFromXPosts(posts, { username: d.x_username?.replace(/^@/, '') || null, imported_by: me.email });
     else if (d.x_username) {
-      const api = new XProfileAdapter({ fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
-      if (!api.configured) warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
+      const api = new XProfileAdapter({ bearerToken: (app.kayrosContext.xBearerToken ?? process.env.X_BEARER_TOKEN) || '', fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
+      if (!api.configured) {
+        if (!crystal && !linkedin && !email) { reply.code(503).send({ error: 'X_BEARER_TOKEN absent côté serveur : le compte X ne peut pas être lu. Collez des posts ou importez l’archive X.', warnings }); return null; }
+        warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
+      }
       else {
         if (!await manager(app, me, reply)) return null;
         const fetched = await api.fetchProfile(d.x_username);
@@ -363,7 +379,7 @@ async function enrichFromRequest(app, me, reply, d) {
       agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }),
     };
   } catch (error) {
-    const status = /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : /crédits/.test(error.message) ? 402 : 400;
+    const status = /refusé ou expiré/.test(error.message) ? 424 : /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : /crédits/.test(error.message) ? 402 : 400;
     reply.code(status).send({ error: surface(error.message), warnings }); return null;
   }
 }
@@ -820,10 +836,23 @@ export default async function consoleRoute(app) {
       return { ...out, agent: agentView(agent), confidence: profileConfidence(agent.human_profile) };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
+  // Disponibilité des chemins d'import (jetons serveur) : aucune valeur secrète exposée.
+  app.get('/v1/console/personality/providers', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const ctx = app.kayrosContext;
+    return {
+      crystalknows_public: { ready: true },
+      crystalknows_api: { ready: !!ctx.crystalKnowsConfigured, env: 'CRYSTALKNOWS_API_TOKEN' },
+      x_api: { ready: Boolean((ctx.xBearerToken ?? process.env.X_BEARER_TOKEN) || ''), env: 'X_BEARER_TOKEN' },
+      gmail: { ready: true, mode: 'oauth_token_per_request', scope: GMAIL_SCOPE },
+      outlook: { ready: true, mode: 'oauth_token_per_request', scope: OUTLOOK_SCOPE },
+      voice_model: { ready: Boolean(ctx.engine.swarm?.llm && ctx.engine.swarm.llm.id !== 'mock') },
+    };
+  });
   // Aperçu « ainsi je parlerais » : réaction déterministe de la persona à une idée.
   app.post('/v1/console/personality/speak', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    const parsed = z.object({ idea: z.string().min(1).max(1000), agent_id: z.string().max(64).optional(), human_profile: humanProfileSchema }).safeParse(req.body || {});
+    const parsed = z.object({ idea: z.string().min(1).max(1000), agent_id: z.string().max(64).optional(), human_profile: humanProfileSchema, use_model: z.boolean().optional() }).safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'aperçu invalide', issues: parsed.error.issues });
     let profile = parsed.data.human_profile;
     if (parsed.data.agent_id) {
@@ -832,7 +861,10 @@ export default async function consoleRoute(app) {
       if (!profile) return reply.code(404).send({ error: 'agent ou profil introuvable' });
     }
     if (!profile) return reply.code(400).send({ error: 'agent_id ou human_profile requis' });
-    try { return speakAs(profile, parsed.data.idea); } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
+    try {
+      if (parsed.data.use_model === false) return { ...speakAs(profile, parsed.data.idea), source: 'deterministic' };
+      return await speakWithModel(app.kayrosContext.engine.swarm.llm, profile, parsed.data.idea);
+    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
   // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---

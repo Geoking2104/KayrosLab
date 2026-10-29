@@ -72,11 +72,15 @@ export type EnrichRequest = {
   x_posts?: string[];
   x_archive?: string;
   crystal_export?: Record<string, unknown>;
+  /** Jeton OAuth lecture seule, utilisé pour cette requête puis oublié. */
+  gmail?: { access_token: string; query?: string; max?: number };
+  outlook?: { access_token: string; max?: number };
   crystal_api?: { email?: string; linkedin_url?: string; full_name?: string; company_name?: string };
 };
 /** Provenance du DISC : une estimation n’est jamais une fiche CrystalKnows. */
 export type PersonaConfidence = { kind: "crystalknows" | "estimate" | "disc_template" | "manual" | "none"; disc_type: string | null; archetype: string | null; confidence: number | null; label: string; sources: string[] };
-export type SpeakResult = { message: string; notice: string; confidence: PersonaConfidence };
+export type SpeakResult = { message: string; notice: string; confidence: PersonaConfidence; source?: "model" | "deterministic"; model_provider?: string | null; score?: { score: number } };
+export type EnrichProviders = Record<"crystalknows_public" | "crystalknows_api" | "x_api" | "gmail" | "outlook" | "voice_model", { ready: boolean; env?: string; mode?: string; scope?: string }>;
 export type EnrichedProfile = {
   assigned_name?: string;
   avatar_url?: string;
@@ -110,6 +114,7 @@ export const api = {
   agents: () => call<{ agents: any[] }>("/v1/console/agents"),
   enrichProfile: (body: EnrichRequest) => call<EnrichResult>("/v1/console/personality/enrich", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   enrichAgent: (id: string, body: EnrichRequest) => call<EnrichResult & { agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}/enrich`, { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
+  personalityProviders: () => call<EnrichProviders>("/v1/console/personality/providers"),
   speak: (body: { idea: string; agent_id?: string; human_profile?: unknown }) => call<SpeakResult>("/v1/console/personality/speak", { method: "POST", body: JSON.stringify(body) }),
   createImpersonatorTeam: (body: Record<string, unknown>) => call<{ session: any; agents: any[]; errors: any[] }>("/v1/console/impersonator-teams", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   createImpersonator: (body: Record<string, unknown>) => call<{ agent: any; enrichment_error: string | null }>("/v1/console/impersonators", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
