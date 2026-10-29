@@ -902,7 +902,10 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Store>(() => {
     if (!liveData || !liveUser) return api;
     // Rôle réel : la fiche membre de l’espace prime sur le rôle du compte.
-    const memberRole = (membership?.role ?? liveUser.role) as MemberRole;
+    // Sans fiche membre : comex/admin gardent leur rôle, les autres rôles du compte valent contributeur (comme l’API).
+    const memberRole = (membership?.role ?? (["comex", "admin"].includes(liveUser.role) ? liveUser.role : "contributeur")) as MemberRole;
+    const perms = membership?.permissions ?? PERMISSIONS[memberRole] ?? ["read"];
+    const canRun = (): Result | null => (perms.includes("run") ? null : { ok: false, reason: t("Votre rôle (lecteur) ne permet pas de lancer ou relancer une mission.") });
     const role: Role = ["comex", "admin"].includes(memberRole) ? "comex" : "contributeur";
     const selected = liveData.collectives.some((c) => c.id === state.selectedCollectiveId)
       ? state.selectedCollectiveId
@@ -927,7 +930,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       syncing,
       workspace,
       memberRole,
-      permissions: membership?.permissions ?? PERMISSIONS[memberRole] ?? ["read"],
+      permissions: perms,
       setRole: () => notify(t("En mode connecté, le rôle vient de votre compte."), "warn"),
       createAgent: (agent) => {
         const denied = comexOnly(); if (denied) return denied;
@@ -965,6 +968,8 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         return { ok: true };
       },
       startMission: (draft) => {
+        const denied = canRun();
+        if (denied) { notify(denied.reason!, "stop"); return ""; }
         const collective = liveData.collectives.find((c) => c.id === draft.collectiveId) ?? liveData.collectives[0];
         const placeholder = uid("pending");
         const at = stamp();
@@ -993,10 +998,12 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       },
       replyClarification: (threadId, reply) => {
         if (!reply.trim()) return;
+        const denied = canRun(); if (denied) { notify(denied.reason!, "stop"); return; }
         run(http.reply(threadId, reply.trim()), t("Le collectif reprend l’instruction."));
       },
       poseQuestion: (threadId, question) => {
         if (!question.trim()) return { ok: false, reason: t("La question est vide.") };
+        const denied = canRun(); if (denied) return denied;
         run(http.reply(threadId, question.trim()));
         return { ok: true };
       },
@@ -1006,6 +1013,8 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           : action === "reevaluate" ? { action: "reevaluate", justification: note }
           : { action: "accept_consensus", justification: note, ...(action === "conditions" ? { decision: "CONDITIONAL_GO" } : {}) };
         if (action === "override" && !note.trim()) return { ok: false, reason: t("Une justification est requise pour lever un veto.") };
+        const gated = liveData.threads.find((x) => x.id === threadId)?.gates;
+        if (gated?.status === "blocked" && (action === "accept" || action === "conditions")) return { ok: false, reason: t("Une porte du projet est bloquée : demandez une réévaluation ou dérogez avec une justification.") };
         run(http.arbitrate(threadId, body), t("Arbitrage inscrit au journal."));
         return { ok: true };
       },

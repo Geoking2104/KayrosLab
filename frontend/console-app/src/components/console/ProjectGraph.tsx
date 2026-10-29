@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef, useState } from "react";
 import { CYCLE, STATUS_LABEL, VERDICT_LABEL, VOTING, type Agent, type Collective, type Thread, type Verdict } from "@/lib/console/model";
 import type { GraphSpec, GraphSpecNode, NodeType, Stakeholder } from "@/lib/console/live";
 import { cn } from "@/lib/cn";
@@ -9,7 +9,7 @@ import { t, tc } from "@/lib/i18n";
 // et affiche son statut en direct à partir du dossier.
 
 type Tone = "done" | "live" | "wait" | "stop" | "idle";
-export type GraphNode = { id: string; col: number; row: number; kind: string; title: string; detail: string; tone: Tone; badge?: string };
+export type GraphNode = { id: string; col: number; row: number; kind: string; title: string; detail: string; tone: Tone; badge?: string; x?: number; y?: number };
 export type GraphEdge = { from: string; to: string };
 
 const W = 190, H = 78, GX = 70, GY = 22;
@@ -115,6 +115,14 @@ export function layoutSpec(spec: GraphSpec, thread: Thread | undefined, collecti
         tone = share >= n.config.min_go ? tone : "stop";
       } else if (n.config.min_go != null) detail = t("Seuil {{m}} % d’avis favorables", { m: n.config.min_go });
       if (n.config.veto) detail = `${detail ? `${detail} · ` : ""}${t("veto actif")}`;
+      if (n.config.strict) detail = `${detail ? `${detail} · ` : ""}${t("GO franc requis")}`;
+      // Évaluation du serveur : la porte pilote l’arbitrage.
+      const result = thread?.gates?.results.find((r) => r.gateId === n.id);
+      if (result) {
+        tone = result.status === "passed" ? "done" : result.status === "blocked" ? "stop" : "wait";
+        badge = result.status === "passed" ? t("Franchie") : result.status === "blocked" ? t("Bloquée") : t("En attente");
+        if (result.status === "blocked" && result.reasons.length) detail = result.reasons.join(" · ");
+      }
     }
     if (n.type === "arbitrage" && n.config.role && n.config.role !== "decideur") {
       title = stakeholders.filter((s) => s.role === n.config.role).map((s) => s.name).join(", ") || t("Personne désignée");
@@ -126,17 +134,24 @@ export function layoutSpec(spec: GraphSpec, thread: Thread | undefined, collecti
       tone = thread?.status === "resolved" && people.length ? "done" : "idle";
     }
     if (n.label) title = n.label;
-    return { id: n.id, col: c, row, kind, title, detail, tone, badge };
+    return { id: n.id, col: c, row, kind, title, detail, tone, badge, x: n.x, y: n.y };
   });
   return { nodes, edges: spec.edges };
 }
 
-export function ProjectGraph({ thread, collective, agents, stakeholders, spec, selected, onSelect }: { thread?: Thread; collective?: Collective; agents: Agent[]; stakeholders: Stakeholder[]; spec?: GraphSpec | null; selected?: string; onSelect?: (id: string) => void }) {
+/** Position d’un nœud : libre (glisser-déposer) ou automatique (colonne, ligne). */
+export const autoPos = (n: { col: number; row: number }) => ({ x: 16 + n.col * (W + GX), y: 16 + n.row * (H + GY) });
+const STEP = 10;
+
+export function ProjectGraph({ thread, collective, agents, stakeholders, spec, selected, onSelect, onMove }: { thread?: Thread; collective?: Collective; agents: Agent[]; stakeholders: Stakeholder[]; spec?: GraphSpec | null; selected?: string; onSelect?: (id: string) => void; onMove?: (id: string, x: number, y: number) => void }) {
   const { nodes, edges } = useMemo(() => (spec ? layoutSpec(spec, thread, collective, agents, stakeholders) : buildGraph(thread, collective, agents, stakeholders)), [spec, thread, collective, agents, stakeholders]);
-  const pos = (n: GraphNode) => ({ x: 16 + n.col * (W + GX), y: 16 + n.row * (H + GY) });
-  const cols = Math.max(1, ...nodes.map((n) => n.col + 1));
-  const width = 32 + cols * W + (cols - 1) * GX;
-  const height = 32 + Math.max(1, ...nodes.map((n) => n.row + 1)) * (H + GY);
+  // Glisser-déposer : position provisoire pendant le geste, validée au relâchement.
+  const [drag, setDrag] = useState<{ id: string; x: number; y: number } | null>(null);
+  const start = useRef<{ id: string; px: number; py: number; x: number; y: number; moved: boolean } | null>(null);
+  const pos = (n: GraphNode) => (drag?.id === n.id ? { x: drag.x, y: drag.y } : n.x != null && n.y != null ? { x: n.x, y: n.y } : autoPos(n));
+  const width = Math.max(32 + W, ...nodes.map((n) => pos(n).x + W + 16));
+  const height = Math.max(32 + H, ...nodes.map((n) => pos(n).y + H + 16));
+  const clamp = (v: number) => Math.max(0, Math.min(10000, Math.round(v)));
   const stage = thread?.stage;
   return (
     <div className="grid gap-3" data-testid="project-graph">
@@ -165,9 +180,30 @@ export function ProjectGraph({ thread, collective, agents, stakeholders, spec, s
           {nodes.map((n) => {
             const p = pos(n);
             return (
-              <div key={n.id} data-node={n.id} data-tone={n.tone} role={onSelect ? "button" : undefined} tabIndex={onSelect ? 0 : undefined} aria-pressed={onSelect ? selected === n.id : undefined}
-                onClick={onSelect ? () => onSelect(n.id) : undefined} onKeyDown={onSelect ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(n.id); } } : undefined}
-                className={cn("absolute flex flex-col rounded-lg border-2 px-2.5 py-1.5 shadow-sm", TONE[n.tone], onSelect && "cursor-pointer", selected === n.id && "ring-2 ring-accent ring-offset-2")} style={{ left: p.x, top: p.y, width: W, height: H }}>
+              <div key={n.id} data-node={n.id} data-tone={n.tone} data-x={p.x} data-y={p.y} role={onSelect ? "button" : undefined} tabIndex={onSelect ? 0 : undefined} aria-pressed={onSelect ? selected === n.id : undefined}
+                aria-description={onMove ? t("Glissez le nœud, ou flèches du clavier pour le déplacer.") : undefined}
+                onClick={onSelect ? () => { if (start.current?.moved) return; onSelect(n.id); } : undefined}
+                onKeyDown={(e) => {
+                  if (onSelect && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onSelect(n.id); return; }
+                  const delta = onMove && ({ ArrowLeft: [-STEP, 0], ArrowRight: [STEP, 0], ArrowUp: [0, -STEP], ArrowDown: [0, STEP] } as Record<string, number[]>)[e.key];
+                  if (delta) { e.preventDefault(); onMove!(n.id, clamp(p.x + delta[0]), clamp(p.y + delta[1])); }
+                }}
+                onPointerDown={onMove ? (e) => { start.current = { id: n.id, px: e.clientX, py: e.clientY, x: p.x, y: p.y, moved: false }; (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId); } : undefined}
+                onPointerMove={onMove ? (e) => {
+                  const s = start.current; if (!s || s.id !== n.id) return;
+                  const dx = e.clientX - s.px, dy = e.clientY - s.py;
+                  if (!Number.isFinite(dx) || !Number.isFinite(dy)) return;
+                  if (!s.moved && Math.hypot(dx, dy) < 4) return;
+                  s.moved = true;
+                  setDrag({ id: n.id, x: clamp(s.x + dx), y: clamp(s.y + dy) });
+                } : undefined}
+                onPointerUp={onMove ? () => {
+                  const s = start.current;
+                  if (s?.moved && drag?.id === n.id) onMove(n.id, drag.x, drag.y);
+                  setDrag(null);
+                  setTimeout(() => { start.current = null; }, 0);
+                } : undefined}
+                className={cn("absolute flex touch-none select-none flex-col rounded-lg border-2 px-2.5 py-1.5 shadow-sm", TONE[n.tone], onSelect && "cursor-pointer", onMove && "cursor-grab active:cursor-grabbing", drag?.id === n.id && "z-10 shadow-lg", selected === n.id && "ring-2 ring-accent ring-offset-2")} style={{ left: p.x, top: p.y, width: W, height: H }}>
                 <span className="flex items-center justify-between text-[10px] uppercase tracking-wide text-muted">
                   {n.kind}
                   {n.badge ? <span className="rounded bg-white/70 px-1 font-semibold normal-case text-ink">{n.badge}</span> : null}

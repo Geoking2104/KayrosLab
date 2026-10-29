@@ -25,7 +25,9 @@ export interface Stakeholder { name: string; role: StakeholderRole; title: strin
 export type NodeType = "question" | "collectif" | "agent" | "porte" | "arbitrage" | "notification" | "decision";
 export interface GraphSpecNode {
   id: string; type: NodeType; label: string;
-  config: { session_id?: string; agent_id?: string; threshold?: Voting; min_go?: number; veto?: boolean; role?: StakeholderRole };
+  config: { session_id?: string; agent_id?: string; threshold?: Voting; min_go?: number; veto?: boolean; strict?: boolean; role?: StakeholderRole };
+  /** Position libre choisie par glisser-déposer (sinon mise en page automatique). */
+  x?: number; y?: number;
 }
 export interface GraphSpec { nodes: GraphSpecNode[]; edges: { from: string; to: string }[] }
 export interface SkillVersion { version: number; at?: string; by?: string; name: string; description: string; instructions: string; tools: string[] }
@@ -35,7 +37,7 @@ export interface ContextSource {
   company_id?: string; project_id?: string; node_id?: string;
 }
 export type MemberRole = "admin" | "comex" | "contributeur" | "lecteur";
-export interface Member { id: string; email: string; name: string; role: MemberRole }
+export interface Member { id: string; email: string; name: string; role: MemberRole; status?: "active" | "invited"; invite_status?: "sent" | "queued" | "failed"; invited_at?: string }
 export interface Workspace { companies: Company[]; projects: Project[]; skills: Skill[]; contexts: ContextSource[]; members: Member[] }
 export const EMPTY_WORKSPACE: Workspace = { companies: [], projects: [], skills: [], contexts: [], members: [] };
 
@@ -175,6 +177,10 @@ export function fromApiThread(t: any): Thread {
     evidence: [],
     arbitration: decision ? { action: decision.action === "override_veto" ? "override" : decision.action === "reevaluate" ? "reevaluate" : "accept", by: decision.by || decision.decided_by || "", note: decision.justification || "", at: decision.at || decision.decided_at || t.updated_at } : undefined,
     progress: t.progress ? { done: t.progress.done ?? t.progress.completed ?? 0, total: t.progress.total ?? Math.max(agentIds.length, 1) } : { done: status === "running" ? 0 : agentIds.length, total: Math.max(agentIds.length, 1) },
+    gates: t.gate_evaluation ? {
+      status: t.gate_evaluation.status, verdict: t.gate_evaluation.verdict,
+      results: (t.gate_evaluation.results || []).map((r: any) => ({ gateId: r.gate_id, projectId: r.project_id, status: r.status, share: r.share, reasons: r.reasons || [] })),
+    } : undefined,
     createdAt: t.created_at,
     updatedAt: t.updated_at,
     events: messages.map((m) => ({

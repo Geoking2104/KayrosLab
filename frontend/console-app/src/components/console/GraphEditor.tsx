@@ -7,6 +7,11 @@ import { NODE_TYPES } from "./ProjectGraph";
 import { STAKEHOLDER_ROLES } from "@/lib/console/roles";
 import { t, tc } from "@/lib/i18n";
 
+/** Déplace un nœud (glisser-déposer ou flèches du clavier). */
+export function moveNode(spec: GraphSpec, id: string, x: number, y: number): GraphSpec {
+  return { ...spec, nodes: spec.nodes.map((n) => (n.id === id ? { ...n, x, y } : n)) };
+}
+
 /** Vrai si ajouter from → to crée une boucle. */
 export function wouldLoop(spec: GraphSpec, from: string, to: string) {
   if (from === to) return true;
@@ -51,7 +56,8 @@ export function GraphEditor({ spec, onChange, selected, onSelect, agents, collec
         <Button type="button" onClick={() => { const res = addNode(spec, type, selected || undefined); onChange(res.spec); onSelect(res.id); setError(""); }}>
           <Plus size={14} aria-hidden /> {selected ? t("Ajouter après le nœud choisi") : t("Ajouter un nœud")}
         </Button>
-        <p className="text-xs text-muted">{t("Cliquez un nœud du graphe pour le configurer ou le relier.")}</p>
+        {spec.nodes.some((n) => n.x != null) ? <Button type="button" variant="ghost" onClick={() => onChange({ ...spec, nodes: spec.nodes.map(({ x: _x, y: _y, ...n }) => n) })}>{t("Disposition automatique")}</Button> : null}
+        <p className="text-xs text-muted">{t("Cliquez un nœud pour le configurer ou le relier ; glissez-le pour le déplacer.")}</p>
       </div>
       {node ? (
         <div className="grid gap-3 rounded-lg border border-line bg-surface p-3" data-testid="node-config">
@@ -83,10 +89,17 @@ export function GraphEditor({ spec, onChange, selected, onSelect, agents, collec
               <Field label={t("Seuil d’avis favorables (%)")}>
                 <input type="number" min={0} max={100} className={controlClass} value={node.config.min_go ?? ""} onChange={(e) => patchNode({ config: { min_go: e.target.value === "" ? undefined : Math.max(0, Math.min(100, Number(e.target.value))) } })} />
               </Field>
-              <label className="flex items-center gap-2 self-end pb-2 text-sm">
-                <input type="checkbox" className="size-4" checked={Boolean(node.config.veto)} onChange={(e) => patchNode({ config: { veto: e.target.checked } })} />
-                {t("Veto bloquant")}
-              </label>
+              <div className="grid gap-1 self-end pb-2">
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" className="size-4" checked={Boolean(node.config.veto)} onChange={(e) => patchNode({ config: { veto: e.target.checked } })} />
+                  {t("Veto bloquant")}
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" className="size-4" checked={Boolean(node.config.strict)} onChange={(e) => patchNode({ config: { strict: e.target.checked } })} />
+                  {t("GO franc requis")}
+                </label>
+              </div>
+              <p className="text-xs text-muted sm:col-span-3">{t("Une porte bloquée interdit d’accepter le verdict : il faut demander une réévaluation ou passer outre avec une justification.")}</p>
             </div>
           ) : null}
           {node.type === "arbitrage" || node.type === "notification" ? (

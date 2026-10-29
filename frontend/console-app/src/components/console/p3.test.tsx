@@ -3,7 +3,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { ConsoleApp } from "./Shell";
 import { i18next } from "@/lib/i18n";
 import { defaultSpec, layoutSpec } from "./ProjectGraph";
-import { addNode, wouldLoop } from "./GraphEditor";
+import { addNode, moveNode, wouldLoop } from "./GraphEditor";
 
 const AGENT = {
   agent_id: "achats", display_name: "Acheteur senior", role_name: "Acheteur", department: "Achats", seniority: "senior",
@@ -23,6 +23,8 @@ const PROJECT: any = { id: "prj_1", company_id: "co_1", name: "Renouvellement He
 const MEMBERS: any[] = [];
 const NOTIFS: any[] = [];
 const ME_ROLE = { value: "admin" };
+const MAIL = { smtp: false };
+const GATES: { value: any } = { value: null };
 const calls: { url: string; method: string; body?: any }[] = [];
 
 function mockApi() {
@@ -32,6 +34,10 @@ function mockApi() {
     const path = url.replace(/^.*\/v1/, "/v1").split("?")[0];
     const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
     if (path === "/v1/console/members/me") return json({ email: "comex@atelier.fr", role: ME_ROLE.value, permissions: ME_ROLE.value === "admin" ? ["read", "run", "arbitrate", "manage", "members"] : ["read"], member: null });
+    if (path === "/v1/console/members/invite") { const b = JSON.parse(String(init?.body)); const m = { id: "mbr_9", ...b, status: "invited", invite_status: MAIL.smtp ? "sent" : "queued" }; MEMBERS.push(m); return json({ item: m, delivery: { status: m.invite_status, error: "" } }, 201); }
+    if (path === "/v1/console/mail/status") return json({ smtp: MAIL.smtp, from: null });
+    if (path === "/v1/console/projects/prj_1/notifications/retry") { NOTIFS.forEach((n) => { n.status = "sent"; }); return json({ notifications: NOTIFS }); }
+    if (path === "/v1/console/threads/thread_1/arbitrate") return json({ thread: THREAD });
     if (path === "/v1/console/members" && method === "GET") return json({ members: MEMBERS });
     if (path === "/v1/console/members" && method === "POST") { const b = JSON.parse(String(init?.body)); const m = { id: "mbr_2", ...b }; MEMBERS.push(m); return json({ item: m }, 201); }
     if (path === "/v1/console/skills/skl_1/restore") return json({ item: {} });
@@ -42,7 +48,7 @@ function mockApi() {
     if (path === "/v1/console/agents" && method === "GET") return json({ agents: [AGENT] });
     if (path.startsWith("/v1/console/agents/") && method === "PATCH") return json({ agent: AGENT });
     if (path === "/v1/console/sessions") return json({ sessions: [SESSION] });
-    if (path === "/v1/console/threads") return json({ threads: [THREAD] });
+    if (path === "/v1/console/threads") return json({ threads: [{ ...THREAD, gate_evaluation: GATES.value }] });
     if (path === "/v1/console/companies") return json({ companies: [{ id: "co_1", name: "Atelier Renaud", sector: "Industrie", description: "" }] });
     if (path === "/v1/console/projects" && method === "GET") return json({ projects: [PROJECT] });
     if (path.startsWith("/v1/console/projects/") && method === "PATCH") { Object.assign(PROJECT, JSON.parse(String(init?.body))); return json({ item: PROJECT }); }
@@ -55,7 +61,7 @@ function mockApi() {
 
 beforeEach(async () => {
   localStorage.clear();
-  calls.length = 0; MEMBERS.length = 0; NOTIFS.length = 0; ME_ROLE.value = "admin";
+  calls.length = 0; MEMBERS.length = 0; NOTIFS.length = 0; ME_ROLE.value = "admin"; MAIL.smtp = false; GATES.value = null;
   PROJECT.graph = null;
   PROJECT.stakeholders = [{ name: "Léa", role: "informe", title: "", email: "lea@atelier.fr" }];
   await i18next.changeLanguage("fr");
@@ -124,7 +130,7 @@ describe("P3 en mode connecté", () => {
     expect((await screen.findByTestId("member-role")).textContent).toContain("Admin");
     fireEvent.change(await screen.findByLabelText("E-mail du membre"), { target: { value: "lea@atelier.fr" } });
     fireEvent.change(screen.getByLabelText("Rôle du nouveau membre"), { target: { value: "lecteur" } });
-    fireEvent.click(screen.getByRole("button", { name: /Ajouter le membre/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Ajouter sans e-mail/ }));
     await waitFor(() => expect(calls.some((c) => c.method === "POST" && c.url.endsWith("/v1/console/members"))).toBe(true));
     expect(calls.find((c) => c.method === "POST" && c.url.endsWith("/members"))!.body).toMatchObject({ email: "lea@atelier.fr", role: "lecteur" });
   });
@@ -156,3 +162,87 @@ describe("mode démo", () => {
     expect(screen.queryByRole("button", { name: "COMEX" })).toBeNull();
   });
 });
+
+const BLOCKED = { status: "blocked", verdict: "NO_GO", consensus_verdict: "CONDITIONAL_GO", results: [{ gate_id: "porte", project_id: "prj_1", status: "blocked", share: 0, reasons: ["0 % d'avis favorables, seuil 50 %"] }] };
+
+// jsdom n'expose pas clientX sur PointerEvent : on s'appuie sur MouseEvent.
+class TestPointerEvent extends MouseEvent { pointerId: number; constructor(type: string, init: PointerEventInit = {}) { super(type, init); this.pointerId = init.pointerId ?? 1; } }
+
+describe("suite P3 : portes, rôles, invitations, glisser-déposer", () => {
+  it("déplace un nœud au clavier et au glisser-déposer, puis enregistre sa position", async () => {
+    vi.stubGlobal("PointerEvent", TestPointerEvent);
+    const spec = defaultSpec(undefined);
+    expect(moveNode(spec, "porte", 400, 120).nodes.find((n) => n.id === "porte")).toMatchObject({ x: 400, y: 120 });
+    live("projets");
+    fireEvent.click(await screen.findByRole("button", { name: /Modifier le graphe/ }));
+    const graph = await screen.findByTestId("project-graph");
+    const node = graph.querySelector('[data-node="porte"]') as HTMLElement;
+    const x0 = Number(node.dataset.x), y0 = Number(node.dataset.y);
+    fireEvent.keyDown(node, { key: "ArrowRight" });
+    await waitFor(() => expect(Number((graph.querySelector('[data-node="porte"]') as HTMLElement).dataset.x)).toBe(x0 + 10));
+    const moved = graph.querySelector('[data-node="porte"]') as HTMLElement;
+    fireEvent.pointerDown(moved, { clientX: 100, clientY: 100, pointerId: 1 });
+    fireEvent.pointerMove(moved, { clientX: 160, clientY: 140, pointerId: 1 });
+    fireEvent.pointerUp(moved, { clientX: 160, clientY: 140, pointerId: 1 });
+    await waitFor(() => expect(Number((graph.querySelector('[data-node="porte"]') as HTMLElement).dataset.y)).toBe(y0 + 40));
+    expect(screen.getByRole("button", { name: "Disposition automatique" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Enregistrer le graphe" }));
+    await waitFor(() => expect(calls.some((c) => c.method === "PATCH" && c.body?.graph)).toBe(true));
+    expect(calls.find((c) => c.body?.graph)!.body.graph.nodes.find((n: any) => n.id === "porte")).toMatchObject({ x: x0 + 70, y: y0 + 40 });
+  });
+
+  it("une porte bloquée s’affiche sur le graphe et verrouille l’acceptation", async () => {
+    GATES.value = BLOCKED;
+    PROJECT.graph = defaultSpec({ id: "room_1", name: "C", agentIds: ["achats"], voting: "majority", personality: false, createdAt: "" });
+    live("dossiers?thread=thread_1");
+    expect((await screen.findByTestId("gate-blocked")).textContent).toContain("seuil 50 %");
+    expect((screen.getByRole("button", { name: "Accepter le consensus" }) as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByRole("button", { name: "Demander une réévaluation" }) as HTMLButtonElement).disabled).toBe(false);
+    cleanup();
+    live("projets");
+    const gate = await waitFor(() => { const el = screen.getByTestId("project-graph").querySelector('[data-node="porte"]') as HTMLElement; expect(el.dataset.tone).toBe("stop"); return el; });
+    expect(gate.textContent).toContain("Bloquée");
+  });
+
+  it("invite un membre par e-mail et signale l’absence de SMTP", async () => {
+    live("membres");
+    fireEvent.change(await screen.findByLabelText("E-mail du membre"), { target: { value: "nina@atelier.fr" } });
+    fireEvent.change(screen.getByLabelText("Rôle du nouveau membre"), { target: { value: "comex" } });
+    fireEvent.click(screen.getByRole("button", { name: /Inviter par e-mail/ }));
+    await waitFor(() => expect(calls.some((c) => c.url.endsWith("/members/invite"))).toBe(true));
+    expect(calls.find((c) => c.url.endsWith("/members/invite"))!.body).toMatchObject({ email: "nina@atelier.fr", role: "comex" });
+    expect((await screen.findByRole("status")).textContent).toContain("SMTP");
+    expect((await screen.findByTestId("invite-nina@atelier.fr")).textContent).toContain("en file");
+  });
+
+  it("explique la file sans SMTP, puis relance une fois le SMTP prêt", async () => {
+    NOTIFS.push({ id: "n1", to: "lea@atelier.fr", name: "Léa", subject: "s", status: "queued", created_at: "2026-10-29T10:00:00Z" });
+    live("projets");
+    expect((await screen.findByTestId("smtp-missing")).textContent).toContain("SMTP");
+    cleanup();
+    MAIL.smtp = true;
+    live("projets");
+    fireEvent.click(await screen.findByRole("button", { name: /Relancer 1 envois en attente/ }));
+    await waitFor(() => expect(calls.some((c) => c.url.endsWith("/notifications/retry"))).toBe(true));
+  });
+
+  it("un lecteur ne lance pas de mission", async () => {
+    ME_ROLE.value = "lecteur";
+    live("dossiers?thread=thread_1");
+    await waitFor(() => expect(screen.getByTestId("member-role").textContent).toContain("Lecteur"));
+    expect(calls.some((c) => c.method === "POST" && /\/run/.test(c.url))).toBe(false);
+  });
+
+  it("le membre de démo choisi est conservé", async () => {
+    window.location.hash = "societe";
+    const first = render(<ConsoleApp />);
+    const select = (await screen.findAllByLabelText("Membre de démo")).find((el) => el.tagName === "SELECT") as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: "contributeur" } });
+    await act(async () => { await new Promise((r) => setTimeout(r, 0)); });
+    first.unmount();
+    render(<ConsoleApp />);
+    const again = (await screen.findAllByLabelText("Membre de démo")).find((el) => el.tagName === "SELECT") as HTMLSelectElement;
+    expect(again.value).toBe("contributeur");
+  });
+});
+

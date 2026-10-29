@@ -312,6 +312,15 @@ export function Dossier({ threadId }: { threadId: string }) {
       {thread.status === "awaiting_arbitration" ? (
         <Panel>
           <h2 className="text-sm font-medium">{t("Arbitrage")}</h2>
+          {thread.gates?.status === "blocked" ? (
+            <div className="mt-2 rounded-lg border border-stop/40 bg-stop-soft px-3 py-2 text-sm" role="status" data-testid="gate-blocked">
+              <p className="font-semibold text-stop">{t("Porte du projet bloquée")}</p>
+              <ul className="mt-1 list-disc pl-5 text-ink-soft">
+                {thread.gates.results.filter((r) => r.status === "blocked").flatMap((r) => r.reasons.map((reason) => <li key={`${r.gateId}-${reason}`}>{reason}</li>))}
+              </ul>
+              <p className="mt-1 text-xs text-muted">{t("Accepter le consensus n’est pas possible : demandez une réévaluation ou dérogez avec une justification.")}</p>
+            </div>
+          ) : thread.gates?.status === "passed" ? <p className="mt-2 text-xs text-go" data-testid="gate-passed">{t("Portes du projet franchies.")}</p> : null}
           {manager ? (
             <>
               <p className="mt-1 text-sm text-muted">{t(
@@ -320,8 +329,8 @@ export function Dossier({ threadId }: { threadId: string }) {
               <TextArea className="mt-3" value={note} onChange={(event) => setNote(event.target.value)} placeholder={t("Motif, obligatoire pour une dérogation au veto")} aria-label={t("Motif d’arbitrage")} />
               {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
               <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                <Button onClick={() => act("accept")}>{t("Accepter le consensus")}</Button>
-                <Button variant="secondary" onClick={() => act("conditions")}>{t("Passer sous conditions")}</Button>
+                <Button onClick={() => act("accept")} disabled={thread.gates?.status === "blocked"}>{t("Accepter le consensus")}</Button>
+                <Button variant="secondary" onClick={() => act("conditions")} disabled={thread.gates?.status === "blocked"}>{t("Passer sous conditions")}</Button>
                 <Button variant="secondary" onClick={() => act("reevaluate")}>{t("Demander une réévaluation")}</Button>
                 <Button variant="danger" onClick={() => act("override")} disabled={note.trim().length < 12}>{t("Déroger au veto")}</Button>
               </div>

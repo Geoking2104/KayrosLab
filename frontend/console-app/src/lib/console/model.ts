@@ -210,7 +210,15 @@ export interface Arbitration {
   at: string;
 }
 
+/** Évaluation des portes du graphe de projet (calculée par le serveur). */
+export interface GateEvaluation {
+  status: "passed" | "blocked" | "pending";
+  verdict?: Verdict | null;
+  results: { gateId: string; projectId: string; status: "passed" | "blocked" | "pending"; share: number | null; reasons: string[] }[];
+}
+
 export interface Thread {
+  gates?: GateEvaluation;
   id: string;
   question: string;
   collectiveId: string;

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { WorkspaceStore } from '../lib/workspace-store.mjs';
 import { scopedThreads, accessibleRooms } from './console.mjs';
+import { evaluateThreadGates } from '../lib/project-gates.mjs';
 
 // Espace de travail de la console : Société → Projets, et Bibliothèque
 // (Skills, Sources de contexte) rattachable aux agents et aux collectifs.
@@ -26,8 +27,10 @@ const nodeSchema = z.object({
   config: z.object({
     session_id: z.string().max(120).optional(), agent_id: z.string().max(120).optional(),
     threshold: z.enum(['majority', 'unanimous', 'veto_csuite']).optional(), min_go: z.number().min(0).max(100).optional(),
-    veto: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
+    veto: z.boolean().optional(), strict: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
   }).optional().default({}),
+  // Position libre choisie par glisser-déposer (sinon mise en page automatique).
+  x: z.number().min(0).max(10000).optional(), y: z.number().min(0).max(10000).optional(),
 });
 const graphSchema = z.object({
   nodes: z.array(nodeSchema).max(80), edges: z.array(z.object({ from: z.string().max(60), to: z.string().max(60) })).max(200),
@@ -74,11 +77,12 @@ export const MEMBER_ROLES = ['admin', 'comex', 'contributeur', 'lecteur'];
 const memberSchema = z.object({
   email: z.string().email().max(320).transform((v) => v.toLowerCase()), name: z.string().max(200).optional().default(''),
   role: z.enum(MEMBER_ROLES).optional().default('contributeur'),
+  status: z.enum(['active', 'invited']).optional(),
 });
 const SCHEMAS = { companies: companySchema, projects: projectSchema, skills: skillSchema, contexts: contextSchema, members: memberSchema };
 const LABEL = { companies: 'société', projects: 'projet', skills: 'skill', contexts: 'source de contexte', members: 'membre' };
 const SKILL_VERSIONED = ['name', 'description', 'instructions', 'tools'];
-const PERMISSIONS = {
+export const PERMISSIONS = {
   admin: ['read', 'run', 'arbitrate', 'manage', 'members'],
   comex: ['read', 'run', 'arbitrate', 'manage'],
   contributeur: ['read', 'run'],
@@ -89,7 +93,29 @@ const PERMISSIONS = {
 export async function effectiveRole(app, me) {
   const members = await store(app).list(me.tenantId, 'members');
   const member = members.find((m) => m.email === String(me.email || '').toLowerCase());
-  return { member: member || null, role: member?.role || me.role || 'contributeur' };
+  // Sans fiche membre : comex/admin gardent leur rôle, les autres rôles du compte valent contributeur.
+  const fallback = ['comex', 'admin'].includes(me.role) ? me.role : 'contributeur';
+  return { member: member || null, role: member?.role || fallback };
+}
+/** Vérifie une permission (read, run, arbitrate, manage, members) selon le rôle effectif. */
+export async function can(app, me, permission) {
+  const { role } = await effectiveRole(app, me);
+  return (PERMISSIONS[role] || []).includes(permission);
+}
+export const PERMISSION_ERROR = {
+  run: 'rôle contributeur, comex ou admin requis', arbitrate: 'rôle comex ou admin requis',
+  manage: 'rôle comex ou admin requis', members: 'rôle admin requis',
+};
+
+/** Évalue les portes du graphe des projets du fil et l'inscrit sur le fil (idempotent). */
+export async function applyGates(app, tenantId, thread) {
+  if (!thread?.thread_id) return thread;
+  const projects = (await store(app).list(tenantId, 'projects')).filter((p) => p.graph && ((p.session_ids || []).includes(thread.room_id) || (p.thread_ids || []).includes(thread.thread_id)));
+  const evaluation = thread.status === 'running' ? (thread.gate_evaluation || null) : (projects.length ? evaluateThreadGates(projects, thread) : null);
+  if (JSON.stringify(evaluation) === JSON.stringify(thread.gate_evaluation || null)) return thread;
+  const gateway = app.kayrosContext.hybridGateway;
+  try { await gateway?.store?.updateThread?.(thread.thread_id, { gate_evaluation: evaluation }, { tenantId }); } catch { /* lecture seule : l'évaluation reste calculée */ }
+  return { ...thread, gate_evaluation: evaluation };
 }
 
 function store(app) {
@@ -103,7 +129,7 @@ function store(app) {
 async function allowed(app, me, reply, permission = 'manage') {
   const { role } = await effectiveRole(app, me);
   if ((PERMISSIONS[role] || []).includes(permission)) return true;
-  reply.code(403).send({ error: permission === 'members' ? 'rôle admin requis' : 'rôle comex ou admin requis' });
+  reply.code(403).send({ error: PERMISSION_ERROR[permission] || 'rôle comex ou admin requis' });
   return false;
 }
 
@@ -132,19 +158,31 @@ export async function notifyInformed(app, tenantId, thread, { by = null, reason 
   for (const project of projects) {
     const recipients = (project.stakeholders || []).filter((s) => s.role === 'informe' && s.email);
     if (!recipients.length) continue;
-    const decision = thread?.human_decision?.decision || lastVerdict(thread || {}) || '—';
+    // Décision humaine : inscrite dans le dernier message d'arbitrage du fil.
+    const arbitration = [...(thread?.messages || [])].reverse().find((m) => m.kind === 'arbitration')?.decision || thread?.human_decision || null;
+    const decision = arbitration?.verdict || arbitration?.decision || lastVerdict(thread || {}) || '—';
     const subject = `[KayrosLab] ${project.name} : décision ${reason === 'arbitrage' ? 'arbitrée' : 'à suivre'}`;
-    const text = `Bonjour,\n\nVous êtes informé(e) du projet « ${project.name} ».\nQuestion : ${thread?.question || '—'}\nDécision : ${decision}${thread?.human_decision?.justification ? `\nJustification : ${thread.human_decision.justification}` : ''}\n\nCe message est envoyé automatiquement par KayrosLab.`;
+    const text = `Bonjour,\n\nVous êtes informé(e) du projet « ${project.name} ».\nQuestion : ${thread?.question || '—'}\nDécision : ${decision}${arbitration?.justification ? `\nJustification : ${arbitration.justification}` : ''}\n\nCe message est envoyé automatiquement par KayrosLab.`;
     for (const r of recipients) {
       let status = 'queued', error = '';
       if (mailer?.sendMail) {
         try { await mailer.sendMail({ to: r.email, from, subject, text }); status = 'sent'; }
         catch (e) { status = 'failed'; error = String(e.message || e).slice(0, 300); }
       }
-      sent.push(await ws.create(tenantId, 'notifications', { project_id: project.id, thread_id: thread?.thread_id || '', to: r.email, name: r.name, subject, status, error, reason }, { by }));
+      sent.push(await ws.create(tenantId, 'notifications', { project_id: project.id, thread_id: thread?.thread_id || '', to: r.email, name: r.name, subject, text, status, error, reason }, { by }));
     }
   }
   return sent;
+}
+
+/** E-mail d'invitation d'un membre (statut sent / failed / queued sans SMTP). */
+async function sendInvite(app, { email, name, role, by }) {
+  const mailer = app.kayrosContext.contactMailer;
+  if (!mailer?.sendMail) return { status: 'queued', error: '' };
+  const url = app.kayrosContext.consoleUrl || process.env.KAYROS_CONSOLE_URL || 'https://www.kayroslab.com/console';
+  const text = `Bonjour${name ? ` ${name}` : ''},\n\n${by || 'Un administrateur'} vous invite sur la console KayrosLab avec le rôle « ${role} ».\nConnectez-vous ou créez votre compte avec cette adresse (${email}) : ${url}\n\nCe message est envoyé automatiquement par KayrosLab.`;
+  try { await mailer.sendMail({ to: email, from: app.kayrosContext.smtp?.from, subject: '[KayrosLab] Invitation à rejoindre l’espace', text }); return { status: 'sent', error: '' }; }
+  catch (e) { return { status: 'failed', error: String(e.message || e).slice(0, 300) }; }
 }
 
 /** Texte injecté dans le contexte d'une mission lancée sur un collectif. */
@@ -254,11 +292,46 @@ export default async function consoleWorkspaceRoutes(app) {
     });
   }
 
-  // Rôle et permissions de l'utilisateur courant.
+  // Rôle et permissions de l'utilisateur courant ; une invitation devient active à la première connexion.
   app.get('/v1/console/members/me', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
-    const { member, role } = await effectiveRole(app, me);
+    let { member, role } = await effectiveRole(app, me);
+    if (member?.status === 'invited') member = await store(app).update(me.tenantId, 'members', member.id, { status: 'active', joined_at: new Date().toISOString() });
     return { email: me.email, member, role, permissions: PERMISSIONS[role] || [] };
+  });
+  // Invitation par e-mail : crée (ou relance) la fiche membre et envoie le lien d'accès.
+  app.post('/v1/console/members/invite', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply, 'members')) return;
+    const parsed = memberSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'invitation invalide', issues: parsed.error.issues });
+    const ws = store(app);
+    const existing = (await ws.list(me.tenantId, 'members')).find((m) => m.email === parsed.data.email);
+    if (existing && existing.status !== 'invited') return reply.code(409).send({ error: 'membre déjà actif' });
+    const delivery = await sendInvite(app, { ...parsed.data, by: me.email });
+    const fields = { ...parsed.data, status: 'invited', invited_by: me.email, invited_at: new Date().toISOString(), invite_status: delivery.status, invite_error: delivery.error };
+    const item = existing ? await ws.update(me.tenantId, 'members', existing.id, { ...fields, updated_by: me.email }) : await ws.create(me.tenantId, 'members', fields, { by: me.email });
+    return reply.code(existing ? 200 : 201).send({ item, delivery });
+  });
+  // État de l'envoi d'e-mails (SMTP configuré ou non) pour expliquer les notifications « en file ».
+  app.get('/v1/console/mail/status', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    return { smtp: !!app.kayrosContext.contactMailer?.sendMail, from: app.kayrosContext.smtp?.from || null };
+  });
+  // Relance des notifications restées en file ou en échec (après configuration du SMTP).
+  app.post('/v1/console/projects/:id/notifications/retry', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply)) return;
+    const ws = store(app);
+    const mailer = app.kayrosContext.contactMailer;
+    if (!mailer?.sendMail) return reply.code(409).send({ error: 'SMTP non configuré : les notifications restent en file', code: 'smtp_missing' });
+    const items = (await ws.list(me.tenantId, 'notifications', { project_id: req.params.id })).filter((n) => n.status !== 'sent');
+    const out = [];
+    for (const n of items) {
+      let status = 'sent', error = '';
+      try { await mailer.sendMail({ to: n.to, from: app.kayrosContext.smtp?.from, subject: n.subject, text: n.text || n.subject }); }
+      catch (e) { status = 'failed'; error = String(e.message || e).slice(0, 300); }
+      out.push(await ws.update(me.tenantId, 'notifications', n.id, { status, error, retried_at: new Date().toISOString() }));
+    }
+    return { notifications: out };
   });
 
   // Versions d'un skill et restauration.

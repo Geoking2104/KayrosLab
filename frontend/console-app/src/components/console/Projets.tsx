@@ -7,7 +7,7 @@ import { STAKEHOLDER_ROLES } from "@/lib/console/roles";
 import { formatWhen } from "@/lib/console/model";
 import { Button, Empty, Section, StatusPill, VerdictPill, controlClass } from "./ui";
 import { ProjectGraph, defaultSpec } from "./ProjectGraph";
-import { GraphEditor } from "./GraphEditor";
+import { GraphEditor, moveNode } from "./GraphEditor";
 import { go } from "./Shell";
 import { t, tc } from "@/lib/i18n";
 
@@ -18,7 +18,7 @@ type Layer = { level: "societe" | "projet" | "noeud"; items: { id: string; name:
 type Notification = { id: string; to: string; name: string; subject: string; status: "sent" | "queued" | "failed"; created_at: string; error?: string };
 
 const LEVEL: Record<Layer["level"], () => string> = { societe: () => t("Société"), projet: () => t("Projet"), noeud: () => t("Nœud") };
-const NOTIF: Record<Notification["status"], () => string> = { sent: () => t("Envoyé"), queued: () => t("En file (SMTP absent)"), failed: () => t("Échec") };
+const NOTIF: Record<Notification["status"], () => string> = { sent: () => t("Envoyé"), queued: () => t("En file : SMTP non configuré"), failed: () => t("Échec") };
 
 /** Projets : graphe de décision (lecture ou édition), contexte en cascade, parties prenantes, notifications, dossiers. */
 export function Projets() {
@@ -93,7 +93,8 @@ export function Projets() {
           }>
             <div className="grid gap-3">
               <ProjectGraph thread={thread} collective={collective} agents={state.agents} stakeholders={project.stakeholders} spec={spec}
-                selected={selected} onSelect={draft ? setSelected : live && !project.demo ? setSelected : undefined} />
+                selected={selected} onSelect={draft ? setSelected : live && !project.demo ? setSelected : undefined}
+                onMove={draft ? (id, x, y) => setDraft((d) => (d ? moveNode(d, id, x, y) : d)) : undefined} />
               {draft ? <GraphEditor spec={draft} onChange={setDraft} selected={selected} onSelect={setSelected} agents={state.agents} collectives={state.collectives} /> : null}
               {graphError ? <p className="text-xs text-stop" role="alert">{graphError}</p> : null}
             </div>
@@ -155,8 +156,11 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
 function Notifications({ project, threadId, canSend }: { project: ProjectView; threadId?: string; canSend: boolean }) {
   const [items, setItems] = useState<Notification[]>([]);
   const [error, setError] = useState("");
+  const [smtp, setSmtp] = useState<boolean | null>(null);
   const load = useCallback(() => api.projectNotifications(project.id).then((r) => setItems(r.notifications as Notification[])).catch(() => setItems([])), [project.id]);
   useEffect(() => { void load(); }, [load]);
+  useEffect(() => { api.mailStatus().then((r) => setSmtp(r.smtp)).catch(() => setSmtp(null)); }, []);
+  const waiting = items.filter((n) => n.status !== "sent").length;
   const informed = project.stakeholders.filter((s) => s.role === "informe");
   return (
     <Section id="projet-notifications" title={t("Notifications aux informés")} summary={t("{{n}} envois", { n: items.length })} actions={canSend ? (
@@ -165,6 +169,16 @@ function Notifications({ project, threadId, canSend }: { project: ProjectView; t
       }}><Mail size={14} aria-hidden /> {t("Notifier les informés")}</Button>
     ) : null}>
       <p className="mb-2 text-xs text-muted">{t("Chaque arbitrage envoie automatiquement la décision par e-mail aux parties prenantes « Informé » qui ont une adresse.")}</p>
+      {smtp === false ? (
+        <p className="mb-2 rounded-md border border-hold/40 bg-hold-soft px-3 py-2 text-xs text-ink" role="status" data-testid="smtp-missing">
+          {t("L’envoi d’e-mails n’est pas configuré sur le serveur (SMTP). Les notifications sont gardées « en file » et pourront être relancées une fois le SMTP configuré.")}
+        </p>
+      ) : null}
+      {canSend && smtp && waiting ? (
+        <Button variant="secondary" className="mb-2" onClick={async () => {
+          try { await api.retryNotifications(project.id); setError(""); await load(); } catch (e) { setError((e as Error).message); }
+        }}>{t("Relancer {{n}} envois en attente", { n: waiting })}</Button>
+      ) : null}
       {!informed.length ? <p className="text-sm text-muted">{t("Aucune partie prenante « Informé ».")}</p> : null}
       {items.length ? (
         <ul className="grid gap-1 text-sm" data-testid="notifications">

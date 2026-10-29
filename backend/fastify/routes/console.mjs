@@ -168,11 +168,21 @@ const MAX_BUILT_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_BUILT_AGENTS_
 
 function agentView(agent) { return { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) }; }
 // Le rôle effectif tient compte de la fiche membre de l'espace (Réglages → Membres).
-async function manager(app, me, reply) {
-  let role = me.role;
-  try { const { effectiveRole } = await import('./console-workspace.mjs'); role = (await effectiveRole(app, me)).role; } catch { /* espace indisponible : rôle du jeton */ }
-  if (['comex', 'admin'].includes(role)) return true;
-  reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false;
+async function permitted(app, me, reply, permission) {
+  try {
+    const { can, PERMISSION_ERROR } = await import('./console-workspace.mjs');
+    if (await can(app, me, permission)) return true;
+    reply.code(403).send({ error: PERMISSION_ERROR[permission] || 'rôle insuffisant' }); return false;
+  } catch {
+    // Espace indisponible : rôle du jeton.
+    if (permission === 'run' || ['comex', 'admin'].includes(me.role)) return true;
+    reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false;
+  }
+}
+const manager = (app, me, reply) => permitted(app, me, reply, 'manage');
+async function withGates(app, tenantId, thread) {
+  try { const { applyGates } = await import('./console-workspace.mjs'); return await applyGates(app, tenantId, thread); }
+  catch { return thread; }
 }
 // La console ne doit jamais exposer le vocabulaire d'une application tierce.
 function surface(message) {
@@ -368,6 +378,17 @@ async function connections(app, tenantId) {
 }
 
 export default async function consoleRoute(app) {
+  // Fin de mission asynchrone : les portes du graphe sont évaluées avant la diffusion de l'événement.
+  const gateway = app.kayrosContext?.hybridGateway;
+  if (gateway && !gateway.gatesWrapped) {
+    const prior = gateway.eventSink;
+    gateway.eventSink = async (kind, thread) => {
+      let next = thread;
+      if (kind === 'completed' && thread) next = await withGates(app, thread.tenant_id, thread);
+      if (prior) await prior(kind, next);
+    };
+    gateway.gatesWrapped = true;
+  }
   // --- Vue d'ensemble du harness -----------------------------------------
   app.get('/v1/console/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
@@ -581,7 +602,7 @@ export default async function consoleRoute(app) {
     return { sessions: rooms.map((room) => sessionView(room, app.kayrosContext.engine.swarm, me.tenantId)) };
   });
   app.post('/v1/console/sessions', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = sessionSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'session invalide', issues: parsed.error.issues });
     try {
@@ -620,7 +641,7 @@ export default async function consoleRoute(app) {
     return { session: sessionView(room, app.kayrosContext.engine.swarm, me.tenantId, { threads }), activity };
   });
   app.patch('/v1/console/sessions/:sessionId/collective', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = collectiveSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'collectif invalide', issues: parsed.error.issues });
     if (!await accessibleRoom(app, me, req.params.sessionId)) return reply.code(404).send({ error: 'session introuvable' });
@@ -677,7 +698,7 @@ export default async function consoleRoute(app) {
   // (≈75 s par agent) dépasserait sinon le délai du proxy (≈60 s) et la
   // mission ne serait pas enregistrée. `?wait=true` conserve le mode synchrone.
   app.post('/v1/console/sessions/:sessionId/run', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = missionSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'mission invalide', issues: parsed.error.issues });
     const room = await accessibleRoom(app, me, req.params.sessionId);
@@ -697,7 +718,8 @@ export default async function consoleRoute(app) {
       try {
         const result = await app.kayrosContext.hybridGateway.handleMessage(input);
         // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
-        return { session_id: room.room_id, run: result.run, thread: result.thread, summary: result.summary, llm: result.run?.llm || null };
+        const thread = result.thread ? await withGates(app, me.tenantId, result.thread) : result.thread;
+        return { session_id: room.room_id, run: result.run, thread, summary: result.summary, llm: result.run?.llm || null };
       } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
     }
     try {
@@ -724,15 +746,16 @@ export default async function consoleRoute(app) {
   app.get('/v1/console/threads', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const threads = await scopedThreads(app, me, { roomId: req.query?.session_id || req.query?.room_id || null, limit: req.query?.limit || 100 });
-    return threads ? { threads } : reply.code(404).send({ error: 'session introuvable' });
+    if (!threads) return reply.code(404).send({ error: 'session introuvable' });
+    return { threads: await Promise.all(threads.map((t) => withGates(app, me.tenantId, t))) };
   });
   app.get('/v1/console/threads/:threadId', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const thread = await accessibleThread(app, me, req.params.threadId);
-    return thread ? { thread } : reply.code(404).send({ error: 'fil introuvable' });
+    return thread ? { thread: await withGates(app, me.tenantId, thread) } : reply.code(404).send({ error: 'fil introuvable' });
   });
   app.post('/v1/console/threads/:threadId/messages', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = replySchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'réponse invalide', issues: parsed.error.issues });
     const existing = await accessibleThread(app, me, req.params.threadId);
     if (!existing) return reply.code(404).send({ error: 'fil introuvable' });
@@ -750,9 +773,18 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
     const parsed = arbitrationSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'arbitrage invalide', issues: parsed.error.issues });
-    if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
+    const current = await accessibleThread(app, me, req.params.threadId);
+    if (!current) return reply.code(404).send({ error: 'fil introuvable' });
+    // Une porte du graphe de projet bloquée interdit d'accepter un verdict favorable :
+    // il faut le rejeter (réévaluation) ou passer outre avec une justification.
+    const gated = await withGates(app, me.tenantId, current);
+    const evaluation = gated?.gate_evaluation;
+    if (evaluation?.status === 'blocked' && parsed.data.action === 'accept_consensus' && evaluation.consensus_verdict !== 'NO_GO') {
+      const reasons = evaluation.results.filter((r) => r.status === 'blocked').flatMap((r) => r.reasons);
+      return reply.code(409).send({ error: `porte du projet bloquante : ${reasons.join(' ; ')}. Demandez une réévaluation ou passez outre avec une justification.`, code: 'gate_blocked', gate_evaluation: evaluation });
+    }
     try {
       const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email });
       // Les parties prenantes « informé » des projets concernés reçoivent la décision.
