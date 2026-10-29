@@ -15,9 +15,9 @@ You state the decision. A committee of specialized agents with opposing duties i
 </div>
 
 <p align="center">
-  <img src="assets/console-overview.webp" alt="KayrosLab console overview: dossiers waiting for arbitration, live metrics and the 8-step decision cycle" width="100%">
+  <img src="assets/readme/console-today.webp" alt="KayrosLab console, Today view: the 4-step journey and the open cases ordered by the action you can take next" width="100%">
 </p>
-<p align="center"><sub><em>The live console: open dossiers, next actions, and the full decision cycle — verdicts stay consultative until a human arbitrates.</em></sub></p>
+<p align="center"><sub><em>The live console, Today view: the journey from question to arbitration, then the open cases in the order you can act on them. Verdicts stay advisory until a human arbitrates.</em></sub></p>
 
 ---
 
@@ -51,13 +51,23 @@ The same process runs from the web console, Slack, Microsoft Teams or Discord.
 
 ## What the live console shows today
 
-On [kayroslab.com/console](https://www.kayroslab.com/console/):
+On [kayroslab.com/console](https://www.kayroslab.com/console/) (English and French, switch with EN / FR):
 
-- **Today view** — open dossiers ordered by the action you can take next.
-- **Dossiers** — full decision threads with status (Instruction, To arbitrate, Precision expected, Closed).
-- **Collectives & Agents** — compose committees of specialized or hybrid agents.
-- **Connections** — Slack, Teams, Discord, Salesforce (via API), CrystalKnows (authorized export only).
-- **8-step cycle** — Listen → Map → Build → Position → Test → Arbitrate → Project → Realize.
+- **Today** — the journey, then open cases ordered by the action you can take next.
+- **Cases** — full decision threads with status (Under review, To arbitrate, Clarification needed, Closed), the verdict, each agent's position and the trail.
+- **Collectives & Agents** — compose committees of business, hybrid or impersonator agents, with veto rights.
+- **Connections** — Slack, Teams, Discord, Salesforce, API keys, webhook and account linking.
+- **8-step cycle** — Listen → Map → Build → Position → Test → Arbitrate → Project → Deliver.
+
+<p align="center">
+  <img src="assets/readme/console-case-verdict.webp" alt="A case in the console: Conditional GO verdict with a 78/100 support score, each agent's vote and the conditions submitted for arbitration" width="100%">
+</p>
+<p align="center"><sub><em>A case at the Arbitrate stage: consolidated verdict, support score, each agent's vote and the conditions a human must accept or override.</em></sub></p>
+
+| | |
+|---|---|
+| <img src="assets/readme/console-review-a-decision.webp" alt="Review a decision: write the question, choose the decision type and the execution profile"><br><sub>**Review a decision** — the question, its type and the execution profile.</sub> | <img src="assets/readme/console-collectives.webp" alt="Collectives: deal and product committees with their agents, veto and voting rule"><br><sub>**Collectives** — stable committees, voting rule and veto.</sub> |
+| <img src="assets/readme/console-agents.webp" alt="Agents registry: Finance, Legal affairs with veto, Engineering leadership, each with its duty"><br><sub>**Agents** — each agent has a duty and a refusal rule.</sub> | <img src="assets/readme/console-connections.webp" alt="Connections: Slack, Discord, Microsoft Teams and Salesforce channels with their configuration status"><br><sub>**Connections** — channels, Salesforce, keys and webhook.</sub> |
 
 Every sensitive step can pause for a human. Forecasts are labelled simulations. Secrets stay encrypted. You choose local or cloud per workspace.
 
@@ -109,6 +119,11 @@ The public pitch stays buyer-facing. Architects and builders can go deeper:
 - Live multi-agent demo
 - Public API v1 (`https://api.kayroslab.com/docs`) — launch a mission from your CRM or automation and receive the verdict
 - Native Slack, Teams and Discord connectors
+
+<p align="center">
+  <img src="assets/readme/api-docs.webp" alt="KayrosLab public API v1 documentation: quick start with curl, webhook signature and the OpenAPI 3.1 reference" width="100%">
+</p>
+<p align="center"><sub><em>Public API v1 documentation at api.kayroslab.com/docs: quick start, signed webhooks and the OpenAPI 3.1 reference.</em></sub></p>
 
 See the existing detailed technical sections further down in this README for API, connectors and architecture.
 
