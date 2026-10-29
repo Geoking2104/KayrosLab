@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode, TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 import type { ThreadStatus, Verdict } from "@/lib/console/model";
@@ -115,5 +117,30 @@ export function Empty({ title, body, action }: { title: string; body: string; ac
       <p className="mx-auto mt-2 max-w-md text-sm text-muted">{body}</p>
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}
     </div>
+  );
+}
+
+/** Section repliable : l’état ouvert/fermé est mémorisé par clé dans le navigateur. */
+export function Section({ id, title, summary, actions, defaultOpen = true, children }: { id: string; title: string; summary?: ReactNode; actions?: ReactNode; defaultOpen?: boolean; children: ReactNode }) {
+  const key = `kayroslab.section.${id}`;
+  const [open, setOpen] = useState(() => {
+    try { const v = localStorage.getItem(key); return v == null ? defaultOpen : v === "1"; } catch { return defaultOpen; }
+  });
+  const toggle = () => setOpen((current) => {
+    try { localStorage.setItem(key, current ? "0" : "1"); } catch { /* stockage indisponible */ }
+    return !current;
+  });
+  return (
+    <section className="rounded-2xl border border-line bg-surface shadow-card" data-section={id} data-open={open ? "1" : "0"}>
+      <div className="flex flex-wrap items-center gap-2 px-4 py-3 md:px-5">
+        <button type="button" onClick={toggle} aria-expanded={open} aria-controls={`section-${id}`} className="flex min-w-0 flex-1 items-center gap-2 text-left">
+          <ChevronDown size={16} aria-hidden="true" className={cn("shrink-0 text-muted transition-transform", open ? "" : "-rotate-90")} />
+          <span className="text-sm font-semibold text-ink">{title}</span>
+          {!open && summary ? <span className="truncate text-xs text-muted">{summary}</span> : null}
+        </button>
+        {open && actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+      </div>
+      {open ? <div id={`section-${id}`} className="border-t border-line px-4 py-4 md:px-5">{children}</div> : null}
+    </section>
   );
 }

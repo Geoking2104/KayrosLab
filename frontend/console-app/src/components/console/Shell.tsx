@@ -14,6 +14,8 @@ import { cn } from "@/lib/cn";
 import { Today } from "./Today";
 import { Dossier, Dossiers } from "./Dossiers";
 import { Projets } from "./Projets";
+import { Membres } from "./Membres";
+import { MEMBER_ROLES } from "@/lib/console/roles";
 import { Collectifs } from "./Collectifs";
 import { Agents } from "./Agents";
 import { Connexions } from "./Connexions";
@@ -38,13 +40,13 @@ const SECTION: Partial<Record<Page, Page>> = {
   societe: "societe", overview: "societe",
   projets: "projets", dossiers: "projets",
   bibliotheque: "bibliotheque", agents: "bibliotheque", collectifs: "bibliotheque",
-  reglages: "reglages", connexions: "reglages", espace: "reglages",
+  reglages: "reglages", connexions: "reglages", espace: "reglages", membres: "reglages",
 };
 const TABS: Partial<Record<Page, { id: Page; label: () => string }[]>> = {
   societe: [{ id: "societe", label: () => t("Tableau de bord") }, { id: "overview", label: () => t("Aujourd’hui") }],
   projets: [{ id: "projets", label: () => t("Projets") }, { id: "dossiers", label: () => t("Tous les dossiers") }],
   bibliotheque: [{ id: "agents", label: () => t("Agents") }, { id: "collectifs", label: () => t("Collectifs") }, { id: "bibliotheque", label: () => t("Skills et contexte") }],
-  reglages: [{ id: "connexions", label: () => t("Connexions") }, { id: "espace", label: () => t("Espace") }],
+  reglages: [{ id: "connexions", label: () => t("Connexions") }, { id: "membres", label: () => t("Membres") }, { id: "espace", label: () => t("Espace") }],
 };
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
@@ -80,7 +82,7 @@ export function ConsoleApp() {
 }
 
 function Frame() {
-  const { state, clearNotice, setRole, live, liveUser } = useConsole();
+  const { state, clearNotice, setRole, live, liveUser, memberRole } = useConsole();
   const [loc, setLoc] = useState({ page: "overview" as Page, thread: "", agent: "", dossier: "", legacy: "overview" });
 
   useEffect(() => {
@@ -138,9 +140,12 @@ function Frame() {
             </span>
           </a>
           {live ? (
-            <p className="rounded-md bg-go-soft px-2 py-1 text-xs text-go" data-testid="live-badge">{t("Connecté à l’API · {{v}}", { v: liveUser?.email ?? "" })}</p>
+            <>
+              <p className="rounded-md bg-go-soft px-2 py-1 text-xs text-go" data-testid="live-badge">{t("Connecté à l’API · {{v}}", { v: liveUser?.email ?? "" })}</p>
+              <a href="#membres" className="mt-2 block rounded-md bg-paper px-2 py-1 text-xs text-ink-soft" data-testid="member-role">{t("Rôle : {{v}}", { v: MEMBER_ROLES.find((r) => r.id === memberRole)?.label ?? memberRole })}</a>
+            </>
           ) : (
-            <RoleSwitch role={state.role} onChange={setRole} />
+            <DemoMember role={state.role} onChange={setRole} />
           )}
         </div>
       </aside>
@@ -197,6 +202,7 @@ function Frame() {
           {page === "agents" && <Agents agentId={loc.agent} dossierId={loc.dossier} />}
           {(page === "connexions" || page === "reglages") && <Connexions legacy={loc.legacy} />}
           {page === "espace" && <Espace />}
+          {page === "membres" && <Membres />}
           {page === "instruire" && <Instruct />}
           {page === "workbench" && <Workbench />}
           {page === "demo" && <Demo />}
@@ -270,25 +276,19 @@ function initials(name: string) {
   return name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("");
 }
 
-function RoleSwitch({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
+// Mode démo : on choisit un membre fictif de l’espace ; son rôle fixe les droits.
+const DEMO_MEMBERS = [
+  { id: "comex", name: "Camille Renaud", role: "comex" as const },
+  { id: "contributeur", name: "Sam Martin", role: "contributeur" as const },
+];
+
+function DemoMember({ role, onChange }: { role: "contributeur" | "comex"; onChange: (role: "contributeur" | "comex") => void }) {
   return (
-    <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-paper p-1" role="group" aria-label={t("Rôle de l’espace")}>
-      {(
-        [
-          ["contributeur", t("Contrib.")],
-          ["comex", "COMEX"],
-        ] as const
-      ).map(([id, label]) => (
-        <button
-          key={id}
-          type="button"
-          onClick={() => onChange(id)}
-          className={cn("min-h-9 rounded-md text-xs font-semibold", role === id ? "bg-surface text-ink shadow-card" : "text-muted")}
-          aria-pressed={role === id}
-        >
-          {label}
-        </button>
-      ))}
-    </div>
+    <label className="mt-2 grid gap-1 text-[11px] text-muted">
+      {t("Membre de démo")}
+      <select aria-label={t("Membre de démo")} className="min-h-8 rounded-lg border border-line bg-paper px-2 text-xs text-ink" value={role} onChange={(e) => onChange(e.target.value as "contributeur" | "comex")}>
+        {DEMO_MEMBERS.map((m) => <option key={m.id} value={m.role}>{m.name} · {MEMBER_ROLES.find((r) => r.id === m.role)?.label}</option>)}
+      </select>
+    </label>
   );
 }

@@ -167,7 +167,13 @@ const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER ||
 const MAX_BUILT_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_BUILT_AGENTS_PER_SESSION || process.env.KAYROS_MAX_BUILT_AGENTS_PER_ROOM || 3);
 
 function agentView(agent) { return { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) }; }
-function manager(me, reply) { if (['comex', 'admin'].includes(me.role)) return true; reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false; }
+// Le rôle effectif tient compte de la fiche membre de l'espace (Réglages → Membres).
+async function manager(app, me, reply) {
+  let role = me.role;
+  try { const { effectiveRole } = await import('./console-workspace.mjs'); role = (await effectiveRole(app, me)).role; } catch { /* espace indisponible : rôle du jeton */ }
+  if (['comex', 'admin'].includes(role)) return true;
+  reply.code(403).send({ error: 'rôle comex ou admin requis' }); return false;
+}
 // La console ne doit jamais exposer le vocabulaire d'une application tierce.
 function surface(message) {
   return String(message || '')
@@ -400,19 +406,19 @@ export default async function consoleRoute(app) {
     return { agents };
   });
   app.post('/v1/console/agents', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = agentCreateSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'agent invalide', issues: parsed.error.issues });
     try { const agent = app.kayrosContext.engine.swarm.createAgent(parsed.data, { tenantId: me.tenantId, by: me.email }); await app.kayrosContext.engine.swarm.flush?.(); return reply.code(201).send({ agent: agentView(agent) }); }
     catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
   app.patch('/v1/console/agents/:agentId', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = agentPatchSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'modification agent invalide', issues: parsed.error.issues });
     try { const agent = app.kayrosContext.engine.swarm.updateAgent(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email }); await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) }; }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/agents/:agentId/crystal', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur' });
     const parsed = crystalImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import Crystal invalide', issues: parsed.error.issues });
     try {
@@ -422,7 +428,7 @@ export default async function consoleRoute(app) {
   });
   // Profil humain d'un agent hybride : import Crystal/LinkedIn ou export autorisé.
   app.post('/v1/console/agents/:agentId/personality', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = personalityImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import de profil invalide', issues: parsed.error.issues });
     try {
       const agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
@@ -431,7 +437,7 @@ export default async function consoleRoute(app) {
   });
   // Profil humain fourni directement (saisie ou export de fichier), sans API tierce.
   app.put('/v1/console/agents/:agentId/human-profile', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = humanProfileSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'profil humain invalide', issues: parsed.error.issues });
     if (parsed.data?.consent_confirmed !== true) return reply.code(400).send({ error: 'consentement explicite requis pour un profil humain' });
     try {
@@ -458,7 +464,7 @@ export default async function consoleRoute(app) {
         profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{ source: 'crystalknows', profile_data: d.profile_data }] }, { by: me.email });
         if (d.assigned_name && !profile.assigned_name) profile.assigned_name = d.assigned_name;
       } else {
-        if (!manager(me, reply)) return;
+        if (!await manager(app, me, reply)) return;
         if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur (CRYSTALKNOWS_API_TOKEN). Utilisez l’import d’un export JSON ou la saisie DISC.' });
         if (!d.email && !d.linkedin_url && !d.full_name) return reply.code(400).send({ error: 'e-mail, URL LinkedIn ou nom complet requis' });
         profile = await app.kayrosContext.engine.swarm.previewPersonality({ consent_confirmed: true, imports: [{
@@ -474,7 +480,7 @@ export default async function consoleRoute(app) {
 
   // --- Agents impersonateurs : persona reconstruite pour éprouver une idée ---
   app.post('/v1/console/impersonators', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = impersonatorSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'agent impersonateur invalide', issues: parsed.error.issues });
     const d = parsed.data;
@@ -488,7 +494,7 @@ export default async function consoleRoute(app) {
 
   // --- Équipe d'impersonators : panel de personas pour éprouver une idée ---
   app.post('/v1/console/impersonator-teams', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = impersonatorTeamSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'équipe impersonator invalide', issues: parsed.error.issues });
     const d = parsed.data;
@@ -526,7 +532,7 @@ export default async function consoleRoute(app) {
     return { connectors: await connections(app, me.tenantId), encrypted_storage: app.kayrosContext.connectorEncryptionConfigured === true };
   });
   app.put('/v1/console/connectors/:platform', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = connectorSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'configuration connecteur invalide', issues: parsed.error.issues });
     try {
       const connector = await app.kayrosContext.connectorConfig.configure(me.tenantId, req.params.platform, parsed.data);
@@ -535,7 +541,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.patch('/v1/console/connectors/:platform', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = connectorStateSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'état connecteur invalide' });
     try {
       const connector = await app.kayrosContext.connectorConfig.setEnabled(me.tenantId, req.params.platform, parsed.data.enabled);
@@ -544,7 +550,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/connectors/:platform/connect', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const platform = String(req.params.platform || '').toLowerCase();
     if (!['slack', 'discord', 'teams'].includes(platform)) return reply.code(404).send({ error: 'plateforme inconnue' });
     const oauth = app.kayrosContext.connectorOAuth;
@@ -559,7 +565,7 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/connectors/:platform/test', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     try {
       const connector = await app.kayrosContext.connectorConfig.test(me.tenantId, req.params.platform);
       if (connector.ok && connector.enabled) { const adapter = await app.kayrosContext.connectorConfig.adapterFor(me.tenantId, req.params.platform); if (adapter) app.kayrosContext.hybridGateway.setTenantAdapter(me.tenantId, adapter); }
@@ -637,7 +643,7 @@ export default async function consoleRoute(app) {
   // Même droit que la création d'agent (comex/admin). Un profil réel exige un
   // consentement de partage explicite et reste interdit dans un tenant partagé.
   app.post('/v1/console/sessions/:sessionId/agents/:agentId/promote', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = promoteSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'enregistrement invalide', issues: parsed.error.issues });
     const room = await accessibleRoom(app, me, req.params.sessionId);
@@ -744,10 +750,16 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
-    const me = await app.requireAuth(req, reply); if (!me || !manager(me, reply)) return;
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = arbitrationSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'arbitrage invalide', issues: parsed.error.issues });
     if (!await accessibleThread(app, me, req.params.threadId)) return reply.code(404).send({ error: 'fil introuvable' });
-    try { const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email }); return { thread }; }
+    try {
+      const thread = await app.kayrosContext.hybridGateway.arbitrateThread(req.params.threadId, parsed.data, { tenantId: me.tenantId, by: me.email });
+      // Les parties prenantes « informé » des projets concernés reçoivent la décision.
+      try { const { notifyInformed } = await import('./console-workspace.mjs'); await notifyInformed(app, me.tenantId, thread, { by: me.email }); }
+      catch (error) { app.log?.warn?.({ err: error }, 'notification des informés impossible'); }
+      return { thread };
+    }
     catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
   });
 }

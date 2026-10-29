@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { api as http, ApiError, AUTH_EVENT, tokenStore, type LiveUser, type WorkspaceKind } from "./api";
-import { EMPTY_WORKSPACE, fromApiAgent, fromApiSession, fromApiThread, slugId, toApiAgent, votingToApi, type Workspace } from "./live";
+import { EMPTY_WORKSPACE, fromApiAgent, fromApiSession, fromApiThread, slugId, toApiAgent, votingToApi, type MemberRole, type Workspace } from "./live";
 import {
   contributionFor,
   hybridCount,
@@ -37,6 +37,13 @@ type DraftMission = {
 type Result = { ok: boolean; reason?: string };
 type LiveData = { agents: Agent[]; collectives: Collective[]; threads: Thread[] };
 
+export const PERMISSIONS: Record<MemberRole, string[]> = {
+  admin: ["read", "run", "arbitrate", "manage", "members"],
+  comex: ["read", "run", "arbitrate", "manage"],
+  contributeur: ["read", "run"],
+  lecteur: ["read"],
+};
+
 type Store = {
   state: AppState;
   /** Vrai quand la console est connectée à l’API (hors mode Démo). */
@@ -45,6 +52,9 @@ type Store = {
   syncing: boolean;
   refreshLive: () => Promise<void>;
   workspace: Workspace;
+  /** Rôle réel du membre (admin, comex, contributeur, lecteur) et ses permissions. */
+  memberRole: MemberRole;
+  permissions: string[];
   saveItem: (kind: WorkspaceKind, id: string | null, body: Record<string, unknown>) => Promise<Result & { id?: string }>;
   deleteItem: (kind: WorkspaceKind, id: string) => Promise<Result>;
   setRole: (role: Role) => void;
@@ -201,6 +211,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
   const [liveData, setLiveData] = useState<LiveData | null>(null);
   const [workspace, setWorkspace] = useState<Workspace>(EMPTY_WORKSPACE);
   const [syncing, setSyncing] = useState(false);
+  const [membership, setMembership] = useState<{ role: MemberRole; permissions: string[] } | null>(null);
   const pending = useRef(new Map<string, Thread>());
 
   const refreshLive = useCallback(async () => {
@@ -208,10 +219,13 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
     setSyncing(true);
     try {
       const me = liveUser ?? (await http.me()).user;
-      const [agents, sessions, threads, companies, projects, skills, contexts] = await Promise.all([
+      const [agents, sessions, threads, companies, projects, skills, contexts, members, membership] = await Promise.all([
         http.agents(), http.sessions(), http.threads(),
         http.list("companies"), http.list("projects"), http.list("skills"), http.list("contexts"),
+        http.list("members").catch(() => ({ members: [] })),
+        http.memberMe().catch(() => null),
       ]);
+      setMembership(membership ? { role: membership.role as MemberRole, permissions: membership.permissions } : null);
       const mapped = threads.threads.map(fromApiThread);
       setLiveUser(me);
       setLiveData({
@@ -219,7 +233,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         collectives: sessions.sessions.map(fromApiSession),
         threads: [...pending.current.values(), ...mapped],
       });
-      setWorkspace({ companies: companies.companies, projects: projects.projects, skills: skills.skills, contexts: contexts.contexts });
+      setWorkspace({ companies: companies.companies, projects: projects.projects, skills: skills.skills, contexts: contexts.contexts, members: members.members ?? [] });
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) { tokenStore.clear(); return; }
       setState((current) => ({ ...current, notice: { tone: "warn", text: t("API indisponible : {{v}}", { v: (error as Error).message }) } }));
@@ -878,6 +892,8 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       syncing: false,
       refreshLive,
       workspace: EMPTY_WORKSPACE,
+      memberRole: state.role === "comex" ? "comex" : "contributeur",
+      permissions: PERMISSIONS[state.role === "comex" ? "comex" : "contributeur"],
       saveItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour enregistrer.") }),
       deleteItem: async () => ({ ok: false, reason: t("Connectez-vous à l’API pour supprimer.") }),
     };
@@ -885,7 +901,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<Store>(() => {
     if (!liveData || !liveUser) return api;
-    const role: Role = ["comex", "admin"].includes(liveUser.role) ? "comex" : "contributeur";
+    // Rôle réel : la fiche membre de l’espace prime sur le rôle du compte.
+    const memberRole = (membership?.role ?? liveUser.role) as MemberRole;
+    const role: Role = ["comex", "admin"].includes(memberRole) ? "comex" : "contributeur";
     const selected = liveData.collectives.some((c) => c.id === state.selectedCollectiveId)
       ? state.selectedCollectiveId
       : liveData.collectives[0]?.id ?? "";
@@ -908,6 +926,8 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       liveUser,
       syncing,
       workspace,
+      memberRole,
+      permissions: membership?.permissions ?? PERMISSIONS[memberRole] ?? ["read"],
       setRole: () => notify(t("En mode connecté, le rôle vient de votre compte."), "warn"),
       createAgent: (agent) => {
         const denied = comexOnly(); if (denied) return denied;
@@ -1005,7 +1025,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         catch (error) { return { ok: false, reason: (error as Error).message }; }
       },
     };
-  }, [api, liveData, liveUser, state, syncing, workspace, refreshLive]);
+  }, [api, liveData, liveUser, membership, state, syncing, workspace, refreshLive]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

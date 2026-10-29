@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { ConsoleApp } from "./Shell";
 import { i18next } from "@/lib/i18n";
 import { buildGraph } from "./ProjectGraph";
@@ -102,7 +102,7 @@ describe("projets connectés", () => {
     await waitFor(() => expect(calls.some((c) => c.method === "PATCH" && c.url.includes("/projects/prj_1"))).toBe(true));
     const patch = calls.find((c) => c.method === "PATCH")!;
     expect(patch.body.stakeholders).toEqual([{ name: "Camille Renaud", role: "decideur", title: "DG", email: "" }, { name: "Léa Martin", role: "sponsor", title: "", email: "" }]);
-    fireEvent.click(await screen.findByRole("button", { name: /Faut-il signer le contrat Helia/ }));
+    fireEvent.click(within(document.querySelector('[data-section="projet-dossiers"]') as HTMLElement).getByRole("button", { name: /Faut-il signer le contrat Helia/ }));
     expect(await screen.findByTestId("dossier-panel")).toBeTruthy();
   });
 });

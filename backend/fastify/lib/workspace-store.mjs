@@ -4,8 +4,8 @@
 import { promises as fs } from 'node:fs';
 import { randomBytes } from 'node:crypto';
 
-export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts'];
-const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx' };
+export const WORKSPACE_KINDS = ['companies', 'projects', 'skills', 'contexts', 'members', 'notifications'];
+const PREFIX = { companies: 'co', projects: 'prj', skills: 'skl', contexts: 'ctx', members: 'mbr', notifications: 'ntf' };
 
 export class WorkspaceStore {
   constructor({ file = 'memory' } = {}) {

@@ -4,7 +4,7 @@ import { useConsole } from "@/lib/console/store";
 import { api } from "@/lib/console/api";
 import type { Project } from "@/lib/console/live";
 import type { ThreadStatus, Verdict } from "@/lib/console/model";
-import { Button, Empty, Field, Panel, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
+import { Button, Empty, Field, Panel, Section, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { t, tc } from "@/lib/i18n";
 
@@ -118,9 +118,8 @@ export function Societe() {
       ) : null}
 
       {dash?.projects.map((project) => (
-        <Panel key={project.id}>
+        <Section key={project.id} id={`societe-projet-${project.id}`} title={project.name} summary={t("{{a}} à arbitrer · {{r}} en cours · {{d}} clos", { a: project.counts.awaiting_arbitration ?? 0, r: project.counts.running ?? 0, d: project.counts.resolved ?? 0 })}>
           <div className="flex flex-wrap items-baseline gap-2">
-            <h3 className="text-sm font-medium">{project.name}</h3>
             <span className="rounded-full bg-paper-2 px-2 py-0.5 text-xs">{PROJECT_STATUS[project.status]}</span>
             {project.owner ? <span className="text-xs text-muted">{t("Porteur : {{v}}", { v: project.owner })}</span> : null}
             {project.due_date ? <span className="text-xs text-muted">{t("Échéance : {{v}}", { v: project.due_date })}</span> : null}
@@ -145,7 +144,7 @@ export function Societe() {
               ))}
             </ul>
           ) : <p className="mt-3 text-sm text-muted">{t("Aucun dossier pour ce projet.")}</p>}
-        </Panel>
+        </Section>
       ))}
     </div>
   );

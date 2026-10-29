@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
 import type { ContextSource, Skill } from "@/lib/console/live";
-import { Button, Empty, Field, Panel, TextArea, controlClass } from "./ui";
+import { api } from "@/lib/console/api";
+import { Button, Empty, Field, Panel, Section, TextArea, controlClass } from "./ui";
+import { formatWhen } from "@/lib/console/model";
 import { go } from "./Shell";
 import { cn } from "@/lib/cn";
 import { t, tc } from "@/lib/i18n";
 
 type Tab = "skills" | "contexts";
-type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[] };
+type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[]; company_id: string; project_id: string; node_id: string };
 
-const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [] };
+const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [], company_id: "", project_id: "", node_id: "" };
 const KIND_LABEL: Record<ContextSource["kind"], string> = {
   get note() { return t("Note"); },
   get document() { return t("Document"); },
@@ -19,7 +21,7 @@ const KIND_LABEL: Record<ContextSource["kind"], string> = {
 
 /** Bibliothèque : skills et sources de contexte rattachables aux agents et aux collectifs. */
 export function Bibliotheque() {
-  const { live, state, workspace, saveItem, deleteItem } = useConsole();
+  const { live, state, workspace, saveItem, deleteItem, refreshLive } = useConsole();
   const [tab, setTab] = useState<Tab>("skills");
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState("");
@@ -47,7 +49,7 @@ export function Bibliotheque() {
     const common = { name: draft.name.trim(), agent_ids: draft.agent_ids, session_ids: draft.session_ids };
     const body = tab === "skills"
       ? { ...common, description: draft.description.trim(), instructions: draft.instructions.trim(), tools: draft.tools.split("\n").map((x) => x.trim()).filter(Boolean) }
-      : { ...common, kind: draft.kind, content: draft.content, url: draft.url.trim() };
+      : { ...common, kind: draft.kind, content: draft.content, url: draft.url.trim(), company_id: draft.company_id, project_id: draft.project_id, node_id: draft.project_id ? draft.node_id : "" };
     const res = await saveItem(tab, draft.id, body);
     if (!res.ok) setError(res.reason ?? t("Refusé")); else { setDraft(null); setError(""); }
   }
@@ -82,6 +84,29 @@ export function Bibliotheque() {
                   </select>
                 </Field>
                 {draft.kind === "url" ? <Field label={t("Adresse")}><input className={controlClass} value={draft.url} onChange={(e) => setDraft({ ...draft, url: e.target.value })} /></Field> : null}
+                <div className="grid gap-3 sm:grid-cols-3" data-testid="context-scope">
+                  <Field label={t("Société")} hint={t("Hérité par tous ses projets.")}>
+                    <select className={controlClass} value={draft.company_id} onChange={(e) => setDraft({ ...draft, company_id: e.target.value, project_id: "", node_id: "" })}>
+                      <option value="">—</option>
+                      {workspace.companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                    </select>
+                  </Field>
+                  <Field label={t("Projet")} hint={t("Prime sur la société.")}>
+                    <select className={controlClass} value={draft.project_id} onChange={(e) => {
+                      const p = workspace.projects.find((x) => x.id === e.target.value);
+                      setDraft({ ...draft, project_id: e.target.value, company_id: p?.company_id ?? draft.company_id, node_id: "" });
+                    }}>
+                      <option value="">—</option>
+                      {workspace.projects.filter((p) => !draft.company_id || p.company_id === draft.company_id).map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+                    </select>
+                  </Field>
+                  <Field label={t("Nœud du graphe")} hint={t("Le plus précis : une étape du projet.")}>
+                    <select className={controlClass} value={draft.node_id} disabled={!draft.project_id} onChange={(e) => setDraft({ ...draft, node_id: e.target.value })}>
+                      <option value="">—</option>
+                      {(workspace.projects.find((p) => p.id === draft.project_id)?.graph?.nodes ?? []).map((n) => <option key={n.id} value={n.id}>{n.label || n.id}</option>)}
+                    </select>
+                  </Field>
+                </div>
                 <Field label={t("Contenu")} hint={t("Texte transmis aux agents (20 000 caractères maximum).")}><TextArea value={draft.content} onChange={(e) => setDraft({ ...draft, content: e.target.value })} /></Field>
               </>
             )}
@@ -123,6 +148,10 @@ export function Bibliotheque() {
         <Panel key={item.id}>
           <div className="flex flex-wrap items-baseline gap-2">
             <h3 className="text-sm font-medium">{item.name}</h3>
+            {"instructions" in item ? <span className="rounded bg-paper-2 px-1.5 text-[11px] font-semibold" data-testid="skill-version">v{item.version ?? 1}</span> : null}
+            {"kind" in item && (item.node_id || item.project_id || item.company_id) ? (
+              <span className="rounded bg-accent-soft px-1.5 text-[11px]">{item.node_id ? t("Nœud {{v}}", { v: item.node_id }) : item.project_id ? t("Projet : {{v}}", { v: workspace.projects.find((p) => p.id === item.project_id)?.name ?? item.project_id }) : t("Société : {{v}}", { v: workspace.companies.find((c) => c.id === item.company_id)?.name ?? item.company_id })}</span>
+            ) : null}
             {"kind" in item ? <span className="text-xs text-muted">{KIND_LABEL[item.kind]}</span> : null}
             <span className="ml-auto flex gap-2">
               <Button variant="secondary" onClick={() => edit(item)}>{t("Modifier")}</Button>
@@ -136,6 +165,24 @@ export function Bibliotheque() {
               c: item.session_ids.map((id) => tc(state.collectives.find((x) => x.id === id)?.name) || id).join(", ") || "—",
             })}
           </p>
+          {"instructions" in item && item.versions?.length ? (
+            <div className="mt-3">
+              <Section id={`skill-versions-${item.id}`} title={t("Historique des versions")} summary={t("{{n}} versions antérieures", { n: item.versions.length })} defaultOpen={false}>
+                <ul className="grid gap-2">
+                  {[...item.versions].reverse().map((v) => (
+                    <li key={v.version} className="flex flex-wrap items-center gap-2 text-sm">
+                      <span className="font-semibold">v{v.version}</span>
+                      <span className="text-xs text-muted">{formatWhen(v.at)}{v.by ? ` · ${v.by}` : ""}</span>
+                      <span className="min-w-0 flex-1 truncate text-ink-soft" title={v.instructions}>{v.instructions || v.description}</span>
+                      <Button variant="secondary" onClick={async () => {
+                        try { await api.restoreSkill(item.id, v.version); await refreshLive(); setError(""); } catch (e) { setError((e as Error).message); }
+                      }}>{t("Restaurer v{{v}}", { v: v.version })}</Button>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            </div>
+          ) : null}
         </Panel>
       ))}
     </div>

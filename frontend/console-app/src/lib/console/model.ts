@@ -4,6 +4,7 @@ export type Page =
   | "societe"
   | "projets"
   | "reglages"
+  | "membres"
   | "bibliotheque"
   | "overview"
   | "dossiers"
@@ -57,6 +58,8 @@ export const PAGE_FROM_HASH: Record<string, Page> = {
   projets: "projets",
   projects: "projets",
   reglages: "reglages",
+  membres: "membres",
+  members: "membres",
   company: "societe",
   bibliotheque: "bibliotheque",
   library: "bibliotheque",

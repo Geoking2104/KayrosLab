@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { CYCLE, STATUS_LABEL, VERDICT_LABEL, VOTING, type Agent, type Collective, type Thread, type Verdict } from "@/lib/console/model";
-import type { Stakeholder } from "@/lib/console/live";
+import type { GraphSpec, GraphSpecNode, NodeType, Stakeholder } from "@/lib/console/live";
 import { cn } from "@/lib/cn";
 import { t, tc } from "@/lib/i18n";
 
@@ -50,11 +50,93 @@ export function buildGraph(thread: Thread | undefined, collective: Collective | 
   return { nodes, edges };
 }
 
-export function ProjectGraph({ thread, collective, agents, stakeholders }: { thread?: Thread; collective?: Collective; agents: Agent[]; stakeholders: Stakeholder[] }) {
-  const { nodes, edges } = useMemo(() => buildGraph(thread, collective, agents, stakeholders), [thread, collective, agents, stakeholders]);
+
+export const NODE_TYPES: { id: NodeType; label: () => string }[] = [
+  { id: "question", label: () => t("Question") },
+  { id: "collectif", label: () => t("Collectif") },
+  { id: "agent", label: () => t("Agent") },
+  { id: "porte", label: () => t("Porte de consensus") },
+  { id: "arbitrage", label: () => t("Arbitrage humain") },
+  { id: "notification", label: () => t("Notification") },
+  { id: "decision", label: () => t("Décision") },
+];
+
+/** Graphe par défaut d’un projet, modifiable ensuite. */
+export function defaultSpec(collective: Collective | undefined): GraphSpec {
+  const agents = collective?.agentIds ?? [];
+  const nodes: GraphSpecNode[] = [
+    { id: "question", type: "question", label: "", config: {} },
+    { id: "collectif", type: "collectif", label: "", config: { session_id: collective?.id } },
+    ...agents.map((id) => ({ id: `agent-${id}`, type: "agent" as const, label: "", config: { agent_id: id } })),
+    { id: "porte", type: "porte", label: "", config: { threshold: collective?.voting ?? "majority" } },
+    { id: "arbitrage", type: "arbitrage", label: "", config: { role: "decideur" } },
+    { id: "notification", type: "notification", label: "", config: { role: "informe" } },
+    { id: "decision", type: "decision", label: "", config: {} },
+  ];
+  const edges = [
+    { from: "question", to: "collectif" },
+    ...(agents.length ? agents.flatMap((id) => [{ from: "collectif", to: `agent-${id}` }, { from: `agent-${id}`, to: "porte" }]) : [{ from: "collectif", to: "porte" }]),
+    { from: "porte", to: "arbitrage" }, { from: "arbitrage", to: "decision" }, { from: "arbitrage", to: "notification" },
+  ];
+  return { nodes, edges };
+}
+
+/** Place les nœuds d’un graphe libre (colonne = plus long chemin) et y projette le statut en direct. */
+export function layoutSpec(spec: GraphSpec, thread: Thread | undefined, collective: Collective | undefined, agents: Agent[], stakeholders: Stakeholder[]) {
+  const live = buildGraph(thread, collective, agents, stakeholders).nodes;
+  const byId = (id: string) => live.find((n) => n.id === id);
+  const col = new Map<string, number>();
+  const depth = (id: string, seen = new Set<string>()): number => {
+    if (col.has(id)) return col.get(id)!;
+    if (seen.has(id)) return 0;
+    seen.add(id);
+    const parents = spec.edges.filter((e) => e.to === id).map((e) => e.from);
+    const d = parents.length ? Math.max(...parents.map((p) => depth(p, seen) + 1)) : 0;
+    col.set(id, d);
+    return d;
+  };
+  const rows = new Map<number, number>();
+  const nodes: GraphNode[] = spec.nodes.map((n) => {
+    const c = depth(n.id);
+    const row = rows.get(c) ?? 0;
+    rows.set(c, row + 1);
+    const base = n.type === "question" ? byId("question") : n.type === "collectif" ? byId("collective")
+      : n.type === "agent" ? byId(`agent:${n.config.agent_id}`) : n.type === "porte" ? byId("gate")
+      : n.type === "arbitrage" ? byId("arbitration") : n.type === "decision" ? byId("decision") : undefined;
+    const kind = NODE_TYPES.find((x) => x.id === n.type)?.label() ?? n.type;
+    let { title = n.label || kind, detail = "", tone = "idle" as Tone, badge } = base ?? {};
+    if (n.type === "agent" && !base) { const a = agents.find((x) => x.id === n.config.agent_id); title = tc(a?.name) || n.config.agent_id || t("Agent à choisir"); detail = t("Hors collectif du dossier"); }
+    if (n.type === "porte") {
+      const rule = VOTING.find((x) => x.id === n.config.threshold)?.label ?? t("Majorité");
+      title = rule;
+      if (n.config.min_go != null && thread?.contributions.length) {
+        const share = Math.round((thread.contributions.filter((x) => x.verdict !== "NO_GO").length / thread.contributions.length) * 100);
+        detail = t("{{s}} % favorables · seuil {{m}} %", { s: share, m: n.config.min_go });
+        tone = share >= n.config.min_go ? tone : "stop";
+      } else if (n.config.min_go != null) detail = t("Seuil {{m}} % d’avis favorables", { m: n.config.min_go });
+      if (n.config.veto) detail = `${detail ? `${detail} · ` : ""}${t("veto actif")}`;
+    }
+    if (n.type === "arbitrage" && n.config.role && n.config.role !== "decideur") {
+      title = stakeholders.filter((s) => s.role === n.config.role).map((s) => s.name).join(", ") || t("Personne désignée");
+    }
+    if (n.type === "notification") {
+      const people = stakeholders.filter((s) => s.role === (n.config.role ?? "informe"));
+      title = people.map((s) => s.name).join(", ") || t("Aucun informé");
+      detail = t("{{n}} destinataires e-mail", { n: people.filter((s) => s.email).length });
+      tone = thread?.status === "resolved" && people.length ? "done" : "idle";
+    }
+    if (n.label) title = n.label;
+    return { id: n.id, col: c, row, kind, title, detail, tone, badge };
+  });
+  return { nodes, edges: spec.edges };
+}
+
+export function ProjectGraph({ thread, collective, agents, stakeholders, spec, selected, onSelect }: { thread?: Thread; collective?: Collective; agents: Agent[]; stakeholders: Stakeholder[]; spec?: GraphSpec | null; selected?: string; onSelect?: (id: string) => void }) {
+  const { nodes, edges } = useMemo(() => (spec ? layoutSpec(spec, thread, collective, agents, stakeholders) : buildGraph(thread, collective, agents, stakeholders)), [spec, thread, collective, agents, stakeholders]);
   const pos = (n: GraphNode) => ({ x: 16 + n.col * (W + GX), y: 16 + n.row * (H + GY) });
-  const width = 32 + 6 * W + 5 * GX;
-  const height = 32 + Math.max(...nodes.map((n) => n.row + 1)) * (H + GY);
+  const cols = Math.max(1, ...nodes.map((n) => n.col + 1));
+  const width = 32 + cols * W + (cols - 1) * GX;
+  const height = 32 + Math.max(1, ...nodes.map((n) => n.row + 1)) * (H + GY);
   const stage = thread?.stage;
   return (
     <div className="grid gap-3" data-testid="project-graph">
@@ -83,7 +165,9 @@ export function ProjectGraph({ thread, collective, agents, stakeholders }: { thr
           {nodes.map((n) => {
             const p = pos(n);
             return (
-              <div key={n.id} data-node={n.id} data-tone={n.tone} className={cn("absolute flex flex-col rounded-lg border-2 px-2.5 py-1.5 shadow-sm", TONE[n.tone])} style={{ left: p.x, top: p.y, width: W, height: H }}>
+              <div key={n.id} data-node={n.id} data-tone={n.tone} role={onSelect ? "button" : undefined} tabIndex={onSelect ? 0 : undefined} aria-pressed={onSelect ? selected === n.id : undefined}
+                onClick={onSelect ? () => onSelect(n.id) : undefined} onKeyDown={onSelect ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(n.id); } } : undefined}
+                className={cn("absolute flex flex-col rounded-lg border-2 px-2.5 py-1.5 shadow-sm", TONE[n.tone], onSelect && "cursor-pointer", selected === n.id && "ring-2 ring-accent ring-offset-2")} style={{ left: p.x, top: p.y, width: W, height: H }}>
                 <span className="flex items-center justify-between text-[10px] uppercase tracking-wide text-muted">
                   {n.kind}
                   {n.badge ? <span className="rounded bg-white/70 px-1 font-semibold normal-case text-ink">{n.badge}</span> : null}

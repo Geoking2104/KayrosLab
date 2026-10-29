@@ -16,7 +16,7 @@ import {
 } from "@/lib/console/model";
 import { readDocument } from "@/lib/console/read";
 import { cn } from "@/lib/cn";
-import { Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
+import { Section, Button, Empty, Field, Panel, ProgressBar, StatusPill, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
@@ -340,8 +340,7 @@ export function Dossier({ threadId }: { threadId: string }) {
         </Panel>
       ) : null}
 
-      <Panel>
-        <h2 className="text-sm font-medium">{t("Retirer la décision")}</h2>
+      <Section id="dossier-retirer" title={t("Retirer la décision")} defaultOpen={false}>
         <p className="mt-1 text-sm text-muted">{t("Le collectif et les autres dossiers restent.")}</p>
         <Button
           className="mt-3"
@@ -351,12 +350,11 @@ export function Dossier({ threadId }: { threadId: string }) {
             go("dossiers");
           }}
         >{t("Supprimer le dossier")}</Button>
-      </Panel>
+      </Section>
 
       <Trace thread={thread} agents={state.agents} />
 
-      <Panel>
-        <h2 className="text-sm font-medium">{t("Journal")}</h2>
+      <Section id="dossier-journal" title={t("Journal")} defaultOpen={false}>
         <ol className="mt-3 flex flex-col gap-3">
           {[...thread.events].reverse().map((event) => (
             <li key={`${event.at}-${event.label}`} className="grid gap-1 border-l border-line pl-3 text-sm">
@@ -366,7 +364,7 @@ export function Dossier({ threadId }: { threadId: string }) {
             </li>
           ))}
         </ol>
-      </Panel>
+      </Section>
       <p className="text-xs text-muted">{t("Identifiant {{id}}. Le lien public d’intégration ouvre ce dossier, pas un autre écran.", { id: thread.id })}</p>
     </div>
   );
@@ -375,8 +373,7 @@ export function Dossier({ threadId }: { threadId: string }) {
 function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
   const steps = traceOf(thread, agents);
   return (
-    <Panel>
-      <h2 className="text-sm font-medium">{t("Trace du comité")}</h2>
+    <Section id="dossier-trace" title={t("Trace du comité")} defaultOpen={false}>
       <p className="mt-1 text-sm text-muted">{t(
         "Lecture seule. Elle suit ce dossier. Elle ne rebranche ni le collectif, ni un flux."
       )}</p>
@@ -395,7 +392,7 @@ function Trace({ thread, agents }: { thread: Thread; agents: Agent[] }) {
           </li>
         ))}
       </ol>
-    </Panel>
+    </Section>
   );
 }
 

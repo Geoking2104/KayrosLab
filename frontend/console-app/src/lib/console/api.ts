@@ -78,8 +78,13 @@ export const api = {
   createItem: (kind: WorkspaceKind, body: Record<string, unknown>) => call<{ item: any }>(`/v1/console/${kind}`, { method: "POST", body: JSON.stringify(body) }),
   updateItem: (kind: WorkspaceKind, id: string, body: Record<string, unknown>) => call<{ item: any }>(`/v1/console/${kind}/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(body) }),
   deleteItem: (kind: WorkspaceKind, id: string) => call<{ ok: boolean }>(`/v1/console/${kind}/${encodeURIComponent(id)}`, { method: "DELETE" }),
+  memberMe: () => call<{ email: string; role: string; permissions: string[]; member: any }>("/v1/console/members/me"),
+  restoreSkill: (id: string, version: number) => call<{ item: any }>(`/v1/console/skills/${encodeURIComponent(id)}/restore`, { method: "POST", body: JSON.stringify({ version }) }),
+  projectContext: (id: string, nodeId = "") => call<{ layers: { level: "societe" | "projet" | "noeud"; items: any[] }[]; text: string }>(`/v1/console/projects/${encodeURIComponent(id)}/context${nodeId ? `?node_id=${encodeURIComponent(nodeId)}` : ""}`),
+  projectNotifications: (id: string) => call<{ notifications: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/notifications`),
+  notifyProject: (id: string, threadId?: string) => call<{ notifications: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/notify`, { method: "POST", body: JSON.stringify({ thread_id: threadId }) }),
   dashboard: (companyId?: string) => call<any>(`/v1/console/dashboard${companyId ? `?company_id=${encodeURIComponent(companyId)}` : ""}`),
   connect: (platform: LivePlatform) => call<{ url: string; mode: string }>(`/v1/console/connectors/${platform}/connect`, { method: "POST" }),
 };
 
-export type WorkspaceKind = "companies" | "projects" | "skills" | "contexts";
+export type WorkspaceKind = "companies" | "projects" | "skills" | "contexts" | "members";

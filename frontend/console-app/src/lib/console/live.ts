@@ -18,13 +18,26 @@ export interface Project {
   id: string; company_id: string; name: string; goal: string; owner: string;
   status: "draft" | "active" | "paused" | "closed"; due_date: string;
   session_ids: string[]; thread_ids: string[]; stakeholders: Stakeholder[];
+  graph?: GraphSpec | null;
 }
 export type StakeholderRole = "decideur" | "sponsor" | "consulte" | "informe";
 export interface Stakeholder { name: string; role: StakeholderRole; title: string; email: string }
-export interface Skill { id: string; name: string; description: string; instructions: string; tools: string[]; agent_ids: string[]; session_ids: string[] }
-export interface ContextSource { id: string; name: string; kind: "note" | "document" | "url" | "policy"; content: string; url: string; agent_ids: string[]; session_ids: string[] }
-export interface Workspace { companies: Company[]; projects: Project[]; skills: Skill[]; contexts: ContextSource[] }
-export const EMPTY_WORKSPACE: Workspace = { companies: [], projects: [], skills: [], contexts: [] };
+export type NodeType = "question" | "collectif" | "agent" | "porte" | "arbitrage" | "notification" | "decision";
+export interface GraphSpecNode {
+  id: string; type: NodeType; label: string;
+  config: { session_id?: string; agent_id?: string; threshold?: Voting; min_go?: number; veto?: boolean; role?: StakeholderRole };
+}
+export interface GraphSpec { nodes: GraphSpecNode[]; edges: { from: string; to: string }[] }
+export interface SkillVersion { version: number; at?: string; by?: string; name: string; description: string; instructions: string; tools: string[] }
+export interface Skill { id: string; name: string; description: string; instructions: string; tools: string[]; agent_ids: string[]; session_ids: string[]; version?: number; versions?: SkillVersion[] }
+export interface ContextSource {
+  id: string; name: string; kind: "note" | "document" | "url" | "policy"; content: string; url: string; agent_ids: string[]; session_ids: string[];
+  company_id?: string; project_id?: string; node_id?: string;
+}
+export type MemberRole = "admin" | "comex" | "contributeur" | "lecteur";
+export interface Member { id: string; email: string; name: string; role: MemberRole }
+export interface Workspace { companies: Company[]; projects: Project[]; skills: Skill[]; contexts: ContextSource[]; members: Member[] }
+export const EMPTY_WORKSPACE: Workspace = { companies: [], projects: [], skills: [], contexts: [], members: [] };
 
 const VOTING_TO_API: Record<Voting, string> = { majority: "majority", unanimous: "unanimous", veto_csuite: "veto_power_csuite" };
 const VOTING_FROM_API: Record<string, Voting> = { majority: "majority", unanimous: "unanimous", veto_power_csuite: "veto_csuite" };
