@@ -15,9 +15,9 @@ You state the decision. A committee of specialized agents with opposing duties i
 </div>
 
 <p align="center">
-  <img src="assets/console-overview.webp" alt="KayrosLab console overview: dossiers waiting for arbitration, live metrics and the 8-step decision cycle" width="100%">
+  <img src="assets/readme/console-company.webp" alt="KayrosLab console company dashboard: active projects, decisions to arbitrate, collectives and library counters" width="100%">
 </p>
-<p align="center"><sub><em>The live console: open dossiers, next actions, and the full decision cycle — verdicts stay consultative until a human arbitrates.</em></sub></p>
+<p align="center"><sub><em>The company dashboard: every project with its decision cases, what is waiting for arbitration and what is still under review. Verdicts stay advisory until a human arbitrates.</em></sub></p>
 
 ---
 
@@ -51,13 +51,46 @@ The same process runs from the web console, Slack, Microsoft Teams or Discord.
 
 ## What the live console shows today
 
-On [kayroslab.com/console](https://www.kayroslab.com/console/):
+On [kayroslab.com/console](https://www.kayroslab.com/console/), four entries:
 
-- **Today view** — open dossiers ordered by the action you can take next.
-- **Dossiers** — full decision threads with status (Instruction, To arbitrate, Precision expected, Closed).
-- **Collectives & Agents** — compose committees of specialized or hybrid agents.
-- **Connections** — Slack, Teams, Discord, Salesforce (via API), CrystalKnows (authorized export only).
-- **8-step cycle** — Listen → Map → Build → Position → Test → Arbitrate → Project → Realize.
+| Entry | What you do there |
+|-------|-------------------|
+| **Company** | Dashboard per company: active projects, cases to arbitrate, cases under review, collectives, skills and context. *Today* lists the next action per open case. |
+| **Projects** | Each project carries a **decision graph** you edit like an n8n workflow: question → collectives (in parallel or in sequence) → individual agents → consensus gates (threshold, unanimity, veto) → human arbitration → notification → decision. Nodes are dragged freely, and statuses update live while the run moves forward. Context cascades from company to project to node. Stakeholders (decision maker, sponsor, consulted, informed) receive the decision by email. |
+| **Library** | Agents (full form: role, mission, instructions, constraints, tools, model, veto), collectives, versioned **skills** you can restore, and **context sources** (notes, documents, URLs, policies). |
+| **Settings** | Connections (Slack, Teams, Discord, Salesforce via API, CrystalKnows export), **members and roles**, workspace. |
+
+<table>
+<tr>
+<td width="50%"><img src="assets/readme/console-project-graph.webp" alt="Project decision graph with parallel collectives, a veto gate and the decision node"><br><sub>Decision graph: parallel collectives, consensus gate with veto, cascading context.</sub></td>
+<td width="50%"><img src="assets/readme/console-library.webp" alt="Library: versioned skills linked to agents and collectives"><br><sub>Library: versioned skills attached to agents and collectives.</sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="assets/readme/console-members.webp" alt="Members and roles: COMEX, Admin, Contributor, Viewer, email invitations"><br><sub>Members: four roles and email invitations.</sub></td>
+<td width="50%"><img src="assets/api-docs.webp" alt="Public API v1 documentation"><br><sub>Public API v1, to launch a mission from your CRM or automation.</sub></td>
+</tr>
+</table>
+
+### How a project runs
+
+- **Parallel branches, joined.** Independent collectives run at the same time, and the next step waits for all of them.
+- **Gates stop the flow.** When a gate blocks, the sibling branches still running are suspended and their LLM missions are cancelled, so no tokens are spent for nothing. A COMEX member or an admin lifts the gate with a written justification, and the suspended branches restart.
+- **Arbitration branch by branch.** A step can pause for human approval. Each branch waiting for approval gets its own *Approve and continue* button.
+- **Temporary composition.** Agent nodes join a collective only for the duration of the mission. The original composition is restored afterwards, even after a server restart or a crash in another process (missions send a heartbeat).
+- **Eight-step cycle.** Listen → Map → Build → Position → Test → Arbitrate → Project → Deliver, shown above the graph.
+
+### Roles
+
+| Role | Can |
+|------|-----|
+| **Admin** | Everything, including members and connections |
+| **COMEX** | Arbitrate, lift gates, override a veto |
+| **Contributor** | Create projects, run missions, edit the library |
+| **Viewer** | Read only. Chat accounts not linked to a member also get this role. |
+
+### English / French
+
+The console ships in **English and French** (EN/FR switch in the header, saved in the browser). User content is never translated.
 
 Every sensitive step can pause for a human. Forecasts are labelled simulations. Secrets stay encrypted. You choose local or cloud per workspace.
 
@@ -82,6 +115,7 @@ KayrosLab ships the full decision workshop: opposing duties, inspectable reasoni
 - **Human gates & veto** — sensitive output pauses for a human. Weighted votes instruct; a veto can block. Append-only trail.
 - **Honest numbers** — forecast bands are labelled simulations from stated hypotheses.
 - **Tenant isolation** — workspaces, dossiers and memories stay scoped to your organization. Secrets encrypted at rest.
+- **Roles enforced server-side** — viewer, contributor, COMEX and admin permissions are checked by the API, not only hidden in the UI. API keys without an owner are refused.
 - **Local or cloud** — keep inference on your infrastructure or run a governed cloud. You choose per workspace.
 
 No scraped profiles. No black-box verdicts.
@@ -109,6 +143,8 @@ The public pitch stays buyer-facing. Architects and builders can go deeper:
 - Live multi-agent demo
 - Public API v1 (`https://api.kayroslab.com/docs`) — launch a mission from your CRM or automation and receive the verdict
 - Native Slack, Teams and Discord connectors
+- Console API under `/v1/console/*`: companies, projects and their graphs, pipelines (`/projects/:id/pipelines`, `resume`, `approve`, `cancel`), skills, contexts, members and invitations. Details in [`docs/CONSOLE-HYBRID-AGENTS.md`](docs/CONSOLE-HYBRID-AGENTS.md)
+- Durable async runs with cancellation (`AbortSignal` propagated down to the LLM call) and multi-process-safe recovery
 
 See the existing detailed technical sections further down in this README for API, connectors and architecture.
 
