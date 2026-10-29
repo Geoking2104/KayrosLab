@@ -1,3 +1,4 @@
+import { withHarness, checkCompliance } from './agent-harness.mjs';
 // KayrosLab — Abstraction LLM (KayrosLLM) + adaptateurs.
 // Quant soft-fallback: strip quant suffix → retry → policy fallback (mock).
 
@@ -296,7 +297,16 @@ export class KayrosLLM {
     return this._breakers.get(id);
   }
 
-  async complete(req, opts = {}) {
+  async complete(rawReq, opts = {}) {
+    // Harnais global : bloc système injecté dans tout appel (opt-out : harness:false),
+    // conformité notée sur la complétion (res.compliance), jamais bloquante.
+    const req = rawReq?.harness === false ? rawReq : { ...rawReq, messages: withHarness(rawReq?.messages) };
+    const res = await this._complete(req, opts);
+    if (req?.harness === false || !res || typeof res !== 'object') return res;
+    return { ...res, compliance: checkCompliance(res.text, { role: req.role }) };
+  }
+
+  async _complete(req, opts = {}) {
     // Mission annulée : ni appel, ni repli vers un autre fournisseur.
     if (req?.signal?.aborted) throw req.signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
     const primaryId = this.policy.choose(req, opts);
