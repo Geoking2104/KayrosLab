@@ -10,13 +10,22 @@ const companySchema = z.object({
   name: z.string().min(1).max(160), sector: z.string().max(160).optional().default(''),
   description: z.string().max(4000).optional().default(''),
 });
+// Partie prenante humaine d'un projet (matrice décideur / sponsor / consulté / informé).
+export const STAKEHOLDER_ROLES = ['decideur', 'sponsor', 'consulte', 'informe'];
+const stakeholderSchema = z.union([
+  z.string().min(1).max(200).transform((name) => ({ name, role: 'consulte', title: '', email: '' })),
+  z.object({
+    name: z.string().min(1).max(200), role: z.enum(STAKEHOLDER_ROLES).optional().default('consulte'),
+    title: z.string().max(200).optional().default(''), email: z.string().max(320).optional().default(''),
+  }),
+]);
 const projectSchema = z.object({
   company_id: z.string().min(1).max(120), name: z.string().min(1).max(200),
   goal: z.string().max(4000).optional().default(''), owner: z.string().max(200).optional().default(''),
   status: z.enum(['draft', 'active', 'paused', 'closed']).optional().default('active'),
   due_date: z.string().max(40).optional().default(''),
   session_ids: ids.optional().default([]), thread_ids: ids.optional().default([]),
-  stakeholders: z.array(z.string().min(1).max(200)).max(50).optional().default([]),
+  stakeholders: z.array(stakeholderSchema).max(50).optional().default([]),
 });
 const attachSchema = { agent_ids: ids.optional().default([]), session_ids: ids.optional().default([]) };
 const skillSchema = z.object({

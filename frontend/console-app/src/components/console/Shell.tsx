@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import {
-  Bot,
   Building2,
   Library,
   FolderOpen,
   Inbox,
-  Plug,
   Scale,
-  Users,
+  Settings,
   X,
 } from "lucide-react";
 import { ConsoleProvider, useConsole } from "@/lib/console/store";
 import { PAGE_FROM_HASH, WORKSPACE_EMAIL, WORKSPACE_NAME, type Page } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
 import { Today } from "./Today";
-import { Dossiers } from "./Dossiers";
+import { Dossier, Dossiers } from "./Dossiers";
+import { Projets } from "./Projets";
 import { Collectifs } from "./Collectifs";
 import { Agents } from "./Agents";
 import { Connexions } from "./Connexions";
@@ -28,13 +27,25 @@ import { LANGS, setLanguage, t, useLang, type Lang } from "@/lib/i18n";
 
 const NAV: { id: Page; label: string; short: string; icon: typeof Inbox; soft: string; ink: string }[] = [
   { id: "societe", get label() { return t("Société"); }, get short() { return t("Société"); }, icon: Building2, soft: "bg-accent-soft", ink: "text-accent" },
-  { id: "overview", get label() { return t("Aujourd’hui"); }, get short() { return t("Jour"); }, icon: Inbox, soft: "bg-accent-soft", ink: "text-accent" },
-  { id: "dossiers", get label() { return t("Dossiers"); }, get short() { return t("Dossiers"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
-  { id: "collectifs", get label() { return t("Collectifs"); }, get short() { return t("Équipes"); }, icon: Users, soft: "bg-hold-soft", ink: "text-hold" },
-  { id: "agents", get label() { return t("Agents"); }, get short() { return t("Agents"); }, icon: Bot, soft: "bg-violet-soft", ink: "text-violet" },
-  { id: "bibliotheque", get label() { return t("Bibliothèque"); }, get short() { return t("Biblio"); }, icon: Library, soft: "bg-teal-soft", ink: "text-teal" },
-  { id: "connexions", get label() { return t("Connexions"); }, get short() { return t("Liens"); }, icon: Plug, soft: "bg-go-soft", ink: "text-go" },
+  { id: "projets", get label() { return t("Projets"); }, get short() { return t("Projets"); }, icon: FolderOpen, soft: "bg-teal-soft", ink: "text-teal" },
+  { id: "bibliotheque", get label() { return t("Bibliothèque"); }, get short() { return t("Biblio"); }, icon: Library, soft: "bg-violet-soft", ink: "text-violet" },
+  { id: "reglages", get label() { return t("Réglages"); }, get short() { return t("Réglages"); }, icon: Settings, soft: "bg-go-soft", ink: "text-go" },
 ];
+
+// Navigation à 4 entrées : chaque page historique reste accessible par son
+// ancre et se range sous une entrée, avec des onglets secondaires.
+const SECTION: Partial<Record<Page, Page>> = {
+  societe: "societe", overview: "societe",
+  projets: "projets", dossiers: "projets",
+  bibliotheque: "bibliotheque", agents: "bibliotheque", collectifs: "bibliotheque",
+  reglages: "reglages", connexions: "reglages", espace: "reglages",
+};
+const TABS: Partial<Record<Page, { id: Page; label: () => string }[]>> = {
+  societe: [{ id: "societe", label: () => t("Tableau de bord") }, { id: "overview", label: () => t("Aujourd’hui") }],
+  projets: [{ id: "projets", label: () => t("Projets") }, { id: "dossiers", label: () => t("Tous les dossiers") }],
+  bibliotheque: [{ id: "agents", label: () => t("Agents") }, { id: "collectifs", label: () => t("Collectifs") }, { id: "bibliotheque", label: () => t("Skills et contexte") }],
+  reglages: [{ id: "connexions", label: () => t("Connexions") }, { id: "espace", label: () => t("Espace") }],
+};
 
 export function go(page: Page, extra?: string | { thread?: string; agent?: string; dossier?: string }) {
   let hash: string = page;
@@ -96,7 +107,7 @@ function Frame() {
         <nav className="flex flex-1 flex-col gap-0.5 px-3">
           {NAV.map((item) => {
             const Icon = item.icon;
-            const active = page === item.id;
+            const active = SECTION[page] === item.id;
             return (
               <a
                 key={item.id}
@@ -111,7 +122,7 @@ function Frame() {
                   <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 {item.label}
-                {item.id === "dossiers" && waiting > 0 ? (
+                {item.id === "projets" && waiting > 0 ? (
                   <span className="ml-auto min-w-5 rounded-md bg-white px-1.5 text-center text-[11px] font-semibold tabular-nums text-ink">{waiting}</span>
                 ) : null}
               </a>
@@ -141,7 +152,7 @@ function Frame() {
           </span>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-semibold tracking-tight text-ink">
-              {page === "instruire" ? t("Instruire une décision") : page === "workbench" ? "Workbench" : page === "demo" ? t("Démo publique") : NAV.find((item) => item.id === page)?.label ?? t("Espace")}
+              {page === "instruire" ? t("Instruire une décision") : page === "workbench" ? "Workbench" : page === "demo" ? t("Démo publique") : NAV.find((item) => item.id === SECTION[page])?.label ?? t("Espace")}
             </p>
             <p className="truncate text-[11px] text-muted">{t("Verdict consultatif jusqu’à l’arbitrage humain")}</p>
           </div>
@@ -168,13 +179,23 @@ function Frame() {
         ) : null}
 
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-28 md:px-8 md:pb-10">
+          {SECTION[page] && TABS[SECTION[page]!] ? (
+            <nav className="mb-5 flex gap-1 border-b border-line" aria-label={t("Sous-sections")}>
+              {TABS[SECTION[page]!]!.map((tab) => (
+                <a key={tab.id} href={`#${tab.id}`} aria-current={tab.id === page ? "page" : undefined} className={cn("-mb-px border-b-2 px-3 py-2 text-sm", tab.id === page ? "border-accent font-medium text-ink" : "border-transparent text-muted hover:text-ink")}>
+                  {tab.label()}
+                </a>
+              ))}
+            </nav>
+          ) : null}
           {page === "societe" && <Societe />}
+          {page === "projets" && <Projets />}
           {page === "bibliotheque" && <Bibliotheque />}
           {page === "overview" && <Today />}
-          {page === "dossiers" && <Dossiers threadId={loc.thread} />}
+          {page === "dossiers" && <Dossiers threadId="" />}
           {page === "collectifs" && <Collectifs />}
           {page === "agents" && <Agents agentId={loc.agent} dossierId={loc.dossier} />}
-          {page === "connexions" && <Connexions legacy={loc.legacy} />}
+          {(page === "connexions" || page === "reglages") && <Connexions legacy={loc.legacy} />}
           {page === "espace" && <Espace />}
           {page === "instruire" && <Instruct />}
           {page === "workbench" && <Workbench />}
@@ -182,10 +203,12 @@ function Frame() {
         </main>
       </div>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label={t("Navigation")}>
+      {loc.thread ? <DossierPanel threadId={loc.thread} onClose={() => go(page)} /> : null}
+
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-line bg-surface/95 backdrop-blur md:hidden" aria-label={t("Navigation")}>
         {NAV.map((item) => {
           const Icon = item.icon;
-          const active = page === item.id;
+          const active = SECTION[page] === item.id;
           return (
             <a key={item.id} href={`#${item.id}`} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-0.5 border-t-2 text-[11px] font-medium", active ? cn(item.ink, "border-current") : "border-transparent text-muted")}>
               <Icon size={18} strokeWidth={1.75} aria-hidden="true" className={active ? item.ink : "text-muted"} />
@@ -194,6 +217,26 @@ function Frame() {
           );
         })}
       </nav>
+    </div>
+  );
+}
+
+/** Le dossier s’ouvre dans un panneau latéral, au-dessus de la page courante. */
+function DossierPanel({ threadId, onClose }: { threadId: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-40 flex justify-end">
+      <button type="button" aria-label={t("Fermer le dossier")} className="absolute inset-0 bg-ink/20" onClick={onClose} />
+      <aside role="dialog" aria-modal="true" aria-label={t("Dossier")} data-testid="dossier-panel" className="relative h-full w-full max-w-3xl overflow-y-auto border-l border-line bg-paper px-4 py-5 shadow-xl md:px-6">
+        <button type="button" aria-label={t("Fermer le dossier")} onClick={onClose} className="absolute right-3 top-3 rounded-lg p-1.5 hover:bg-surface">
+          <X size={18} />
+        </button>
+        <Dossier threadId={threadId} />
+      </aside>
     </div>
   );
 }

@@ -2,6 +2,8 @@ import { locale, t, tc, tk } from "@/lib/i18n";
 export type Role = "contributeur" | "comex";
 export type Page =
   | "societe"
+  | "projets"
+  | "reglages"
   | "bibliotheque"
   | "overview"
   | "dossiers"
@@ -52,6 +54,9 @@ export const CYCLE: { id: CycleId; label: string; hint: string }[] = [
 
 export const PAGE_FROM_HASH: Record<string, Page> = {
   societe: "societe",
+  projets: "projets",
+  projects: "projets",
+  reglages: "reglages",
   company: "societe",
   bibliotheque: "bibliotheque",
   library: "bibliotheque",
@@ -628,7 +633,7 @@ export function seedState(): AppState {
 }
 
 export function formatWhen(value?: string) {
-  if (!value) return "—";
+  if (!value || Number.isNaN(Date.parse(value))) return "—";
   return new Intl.DateTimeFormat(locale(), { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
 }
 

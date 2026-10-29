@@ -17,8 +17,10 @@ export interface Company { id: string; name: string; sector: string; description
 export interface Project {
   id: string; company_id: string; name: string; goal: string; owner: string;
   status: "draft" | "active" | "paused" | "closed"; due_date: string;
-  session_ids: string[]; thread_ids: string[]; stakeholders: string[];
+  session_ids: string[]; thread_ids: string[]; stakeholders: Stakeholder[];
 }
+export type StakeholderRole = "decideur" | "sponsor" | "consulte" | "informe";
+export interface Stakeholder { name: string; role: StakeholderRole; title: string; email: string }
 export interface Skill { id: string; name: string; description: string; instructions: string; tools: string[]; agent_ids: string[]; session_ids: string[] }
 export interface ContextSource { id: string; name: string; kind: "note" | "document" | "url" | "policy"; content: string; url: string; agent_ids: string[]; session_ids: string[] }
 export interface Workspace { companies: Company[]; projects: Project[]; skills: Skill[]; contexts: ContextSource[] }

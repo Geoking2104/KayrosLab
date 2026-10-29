@@ -72,3 +72,17 @@ test('un membre ne peut pas créer de société', async (t) => {
   const res = await app.inject({ method: 'POST', url: '/v1/console/companies', payload: { name: 'X' } });
   assert.equal(res.statusCode, 403);
 });
+
+test('parties prenantes humaines d’un projet', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const co = (await app.inject({ method: 'POST', url: '/v1/console/companies', payload: { name: 'Atelier' } })).json().item;
+  const prj = await app.inject({ method: 'POST', url: '/v1/console/projects', payload: { company_id: co.id, name: 'P', stakeholders: ['Ancien format', { name: 'Camille Renaud', role: 'decideur', title: 'DG' }] } });
+  assert.equal(prj.statusCode, 201);
+  assert.deepEqual(prj.json().item.stakeholders.map((s) => [s.name, s.role]), [['Ancien format', 'consulte'], ['Camille Renaud', 'decideur']]);
+  const bad = await app.inject({ method: 'PATCH', url: `/v1/console/projects/${prj.json().item.id}`, payload: { stakeholders: [{ name: 'X', role: 'roi' }] } });
+  assert.equal(bad.statusCode, 400);
+  const ok = await app.inject({ method: 'PATCH', url: `/v1/console/projects/${prj.json().item.id}`, payload: { stakeholders: [{ name: 'Léa', role: 'sponsor' }] } });
+  assert.equal(ok.json().item.stakeholders[0].role, 'sponsor');
+  assert.equal(ok.json().item.name, 'P');
+});

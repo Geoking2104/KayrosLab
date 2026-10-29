@@ -119,7 +119,8 @@ export function Dossiers({ threadId }: { threadId: string }) {
   );
 }
 
-function Dossier({ threadId }: { threadId: string }) {
+/** Détail d’un dossier, affiché dans le panneau latéral. */
+export function Dossier({ threadId }: { threadId: string }) {
   const { state, arbitrate, replyClarification, addAgentToThread, removeAgentFromThread, deleteThread, attachReading, poseQuestion } = useConsole();
   const thread = state.threads.find((item) => item.id === threadId);
   const [note, setNote] = useState("");
