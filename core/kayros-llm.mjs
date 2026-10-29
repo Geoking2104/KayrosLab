@@ -1,3 +1,4 @@
+import { withHarness, checkCompliance, harnessMode, correctiveInstruction, HarnessComplianceError, HARNESS_MAX_RETRIES } from './agent-harness.mjs';
 // KayrosLab — Abstraction LLM (KayrosLLM) + adaptateurs.
 // Quant soft-fallback: strip quant suffix → retry → policy fallback (mock).
 
@@ -296,7 +297,29 @@ export class KayrosLLM {
     return this._breakers.get(id);
   }
 
-  async complete(req, opts = {}) {
+  async complete(rawReq, opts = {}) {
+    // Harnais global : bloc système injecté dans tout appel, complétion notée,
+    // puis (mode enforce) 1 relance corrective et blocage si toujours non conforme.
+    const mode = harnessMode(rawReq);
+    if (mode === 'off') return this._complete(rawReq, opts);
+    const req = { ...rawReq, messages: withHarness(rawReq?.messages) };
+    const grade = (r) => (r && typeof r === 'object' ? { ...r, compliance: checkCompliance(r.text, { role: req.role }) } : r);
+    let res = grade(await this._complete(req, opts));
+    // Repli simulé (mock) : rien à faire respecter.
+    if (mode === 'flag' || !res?.compliance || res.compliance.compliant || res.provider === 'mock') return res;
+    let attempts = 1;
+    for (let i = 0; i < HARNESS_MAX_RETRIES; i++) {
+      attempts++;
+      const retryReq = { ...req, messages: [...req.messages, { role: 'assistant', content: String(res.text ?? '') }, { role: 'user', content: correctiveInstruction(res.compliance.flags, { role: req.role }) }] };
+      const prevFlags = res.compliance.flags;
+      res = grade(await this._complete(retryReq, opts));
+      res = { ...res, harness_retry: { attempts, previous_flags: prevFlags } };
+      if (res.compliance?.compliant || res.provider === 'mock') return res;
+    }
+    throw new HarnessComplianceError(res, attempts);
+  }
+
+  async _complete(req, opts = {}) {
     // Mission annulée : ni appel, ni repli vers un autre fournisseur.
     if (req?.signal?.aborted) throw req.signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
     const primaryId = this.policy.choose(req, opts);

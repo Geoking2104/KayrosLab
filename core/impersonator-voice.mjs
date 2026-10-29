@@ -182,7 +182,7 @@ export async function speakWithModel(llm, input = {}, idea = '', { model = null 
     const message = conformVoice(raw, input);
     const score = scoreVoice(message, input, { idea: subject });
     if (score.score < VOICE_MIN_SCORE) return { ...base, source: 'deterministic', score: scoreVoice(base.message, input), model_provider: out.provider, rejected: { message, score } };
-    return { ...base, message, source: 'model', model_provider: out.provider, score, notice: base.confidence.kind === 'estimate' ? base.notice : 'Réplique du modèle dans la voix de la persona (simulation).' };
+    return { ...base, message, source: 'model', model_provider: out.provider, score, compliance: out.compliance ?? null, notice: base.confidence.kind === 'estimate' ? base.notice : 'Réplique du modèle dans la voix de la persona (simulation).' };
   } catch (error) {
     return { ...base, source: 'deterministic', score: scoreVoice(base.message, input), model_error: String(error.message || error).slice(0, 200) };
   }

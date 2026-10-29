@@ -131,7 +131,11 @@ test('serveur : appel NVIDIA bien formé (fetch simulé), raisonnement retiré',
   const sent = JSON.parse(calls[0].init.body);
   assert.equal(sent.model, NVIDIA_DEFAULT_MODEL);
   assert.equal(sent.temperature, 0.3);
-  assert.deepEqual(sent.messages, [{ role: 'user', content: 'Lancer ?' }]);
+  // Harnais global injecté en tête, message utilisateur intact.
+  assert.equal(sent.messages[0].role, 'system');
+  assert.match(sent.messages[0].content, /\[KAYROS-HARNESS\]/);
+  assert.deepEqual(sent.messages.slice(1), [{ role: 'user', content: 'Lancer ?' }]);
+  assert.equal(res.compliance.version, 'kayros-harness/1');
   assert.equal(res.provider, 'nvidia');
   assert.equal(res.text, '{"verdict":"NO_GO","primary_reason":"r"}');
   assert.equal(res.degraded, undefined);
