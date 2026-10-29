@@ -3,7 +3,9 @@ import { descriptifFromCrystal, descriptifFromDisc, normalizeDescriptif } from '
 // LinkedIn is identity/professional context only. Behavioral attributes come
 // from explicit manual input or an authorized Crystal profile import.
 
-export const PROFILE_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'manual']);
+// `x` (profil public via l'API X officielle ou archive fournie) et `email` (corpus de messages
+// fournis par l'opérateur) sont des sources d'enrichissement du style, cf. profile-enrichment.mjs.
+export const PROFILE_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'manual', 'x', 'email']);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 function now() { return new Date().toISOString(); }
@@ -24,7 +26,7 @@ export function unwrapProfileUrl(value) {
 }
 
 export function normalizeProfileUrl(source, value) {
-  if (!PROFILE_SOURCES.includes(source) || source === 'manual') throw new Error(`profile source URL invalide: ${source}`);
+  if (!PROFILE_SOURCES.includes(source) || source === 'manual' || source === 'email') throw new Error(`profile source URL invalide: ${source}`);
   const raw = unwrapProfileUrl(value);
   let url;
   try { url = new URL(raw); } catch { throw new Error(`${source}: URL de profil invalide`); }
@@ -34,6 +36,8 @@ export function normalizeProfileUrl(source, value) {
   if (source === 'crystalknows' && host !== 'crystalknows.com' && !host.endsWith('.crystalknows.com')) {
     throw new Error('crystalknows: domaine crystalknows.com requis');
   }
+  if (source === 'x' && !['x.com', 'twitter.com'].includes(host)) throw new Error('x: domaine x.com requis');
+  if (source === 'x') { url.hostname = 'x.com'; url.search = ''; }
   if (source === 'linkedin') { url.hostname = 'www.linkedin.com'; url.search = ''; }
   url.hash = '';
   return url.toString().replace(/\/$/, '');
@@ -73,7 +77,7 @@ export function normalizeHumanProfile(input = {}) {
   const sources = Array.isArray(input.profile_sources) ? input.profile_sources.map((s) => {
     const source = String(s?.source || '').toLowerCase();
     if (!PROFILE_SOURCES.includes(source)) throw new Error(`profile source inconnue: ${source}`);
-    const source_url = source === 'manual' || !s.source_url ? null : normalizeProfileUrl(source, s.source_url);
+    const source_url = source === 'manual' || source === 'email' || !s.source_url ? null : normalizeProfileUrl(source, s.source_url);
     return compact({
       source, source_url, import_mode: String(s.import_mode || 'authorized_export'),
       imported_at: s.imported_at || now(), imported_by: s.imported_by || null,

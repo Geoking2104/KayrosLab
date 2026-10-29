@@ -60,6 +60,35 @@ async function call<T>(path: string, init: RequestInit = {}, fetchImpl: typeof f
   return data as T;
 }
 
+/** Enrichissement d’un profil impersonator (cf. core/profile-enrichment.mjs). */
+export type EnrichRequest = {
+  assigned_name?: string;
+  crystal_public_url?: string;
+  crystal_public_html?: string;
+  linkedin_export?: Record<string, string>;
+  emails?: Array<string | { from?: string; body: string }>;
+  email_address?: string;
+  x_username?: string;
+  x_posts?: string[];
+  x_archive?: string;
+};
+export type EnrichedProfile = {
+  assigned_name?: string;
+  avatar_url?: string;
+  disc_type?: string;
+  behavioral_archetype?: string;
+  professional_context?: { headline?: string; current_role?: string; company?: string; skills?: string[]; qualities?: string[] };
+  descriptif?: { disc_type?: string; archetype?: string; disc_intensity?: number | null; disc_degrees?: number | null; overview?: string; qualities?: string[]; traits?: Record<string, number>; sections?: Record<string, string[]>; source?: string };
+  [key: string]: unknown;
+};
+export type EnrichResult = {
+  profile: EnrichedProfile;
+  evidence: Array<{ source: string; mode: string; samples?: number; disc_type?: string; confidence?: number; url?: string }>;
+  warnings: string[];
+  limits: string[];
+  estimate: null | { disc_type: string; confidence: number };
+};
+
 export const api = {
   login: (email: string, password: string) => call<{ token: string; user: LiveUser }>("/v1/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
   me: () => call<{ user: LiveUser }>("/v1/auth/me"),
@@ -73,6 +102,8 @@ export const api = {
   logout: () => call<{ ok: boolean }>("/v1/auth/logout", { method: "POST" }),
   connectors: () => call<{ connectors: LiveConnector[]; encrypted_storage: boolean }>("/v1/console/connectors"),
   agents: () => call<{ agents: any[] }>("/v1/console/agents"),
+  enrichProfile: (body: EnrichRequest) => call<EnrichResult>("/v1/console/personality/enrich", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
+  createImpersonator: (body: Record<string, unknown>) => call<{ agent: any; enrichment_error: string | null }>("/v1/console/impersonators", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   createAgent: (body: Record<string, unknown>) => call<{ agent: any }>("/v1/console/agents", { method: "POST", body: JSON.stringify(body) }),
   updateAgent: (id: string, body: Record<string, unknown>) => call<{ agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(body) }),
   sessions: () => call<{ sessions: any[] }>("/v1/console/sessions"),

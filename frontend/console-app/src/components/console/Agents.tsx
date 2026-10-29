@@ -6,6 +6,8 @@ import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui"
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
+import { ProfileEnrich, enrichedClue } from "./profile-enrich";
+import type { EnrichResult } from "@/lib/console/api";
 import { t, tc } from "@/lib/i18n";
 
 function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
@@ -426,6 +428,7 @@ function Composer({
     consented: boolean;
     simulation: boolean;
     clues: string;
+    humanProfile?: Record<string, unknown>;
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -453,6 +456,8 @@ function Composer({
   const [disc, setDisc] = useState("Di");
   const [error, setError] = useState("");
   const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
+  const [enriched, setEnriched] = useState<EnrichResult | null>(null);
+  const { live } = useConsole();
   const personal = mode !== "metier";
   const gate = mode === "impersonator" && !existing && !link;
 
@@ -514,7 +519,7 @@ function Composer({
     };
     const result = existing
       ? onUpdate(existing.id, draft)
-      : onAgent({ ...draft, kind: mode });
+      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}) });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
@@ -578,8 +583,22 @@ function Composer({
             {mode === "impersonator" && link ? (
               <>
                 <LinkedMark source={link.source} url={link.url} onChange={existing ? undefined : () => setLink(null)} />
+                {!existing ? (
+                  <ProfileEnrich
+                    live={live}
+                    name={name}
+                    crystalUrl={link.source === "crystal" ? link.url : ""}
+                    onResult={(result) => {
+                      setEnriched(result);
+                      if (!name.trim() && result.profile.assigned_name) setName(result.profile.assigned_name);
+                      const role = result.profile.professional_context?.current_role;
+                      if (role) setRole(role);
+                      setClues(enrichedClue(result.profile) || clues);
+                    }}
+                  />
+                ) : null}
                 <Field label={t("Notes")} hint={t(
-                  "L’adresse reste un indice. Elle n’est pas visitée, et aucune fiche n’est téléchargée."
+                  "Sans enrichissement, l’adresse reste un indice : elle n’est pas visitée."
                 )}>
                   <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
                 </Field>

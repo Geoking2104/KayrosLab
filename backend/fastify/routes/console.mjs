@@ -6,7 +6,11 @@ import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
-import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
+import { agentAttributesFromProfile, mergeHumanProfiles, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
+import {
+  CrystalPublicProfileFetcher, ENRICHMENT_LIMITS, XProfileAdapter, buildEnrichedProfile, postsFromXArchive,
+  profileFromCrystalPublic, profileFromEmails, profileFromLinkedInExport, profileFromXPosts,
+} from '../../../core/profile-enrichment.mjs';
 
 // La console est un harness d'agents : elle compose des collectifs, exécute des
 // missions gouvernées et arbitre les verdicts. Les surfaces du produit de
@@ -21,7 +25,7 @@ const ruleConfigurationSchema = z.object({
 // Descriptif de personnalité éditable (cf. core/personality-descriptif.mjs).
 const descriptifSchema = z.object({
   disc_type: z.string().max(8).nullable().optional(), archetype: z.string().max(120).nullable().optional(),
-  disc_intensity: z.number().min(0).max(100).nullable().optional(), overview: z.string().max(4000).nullable().optional(),
+  disc_intensity: z.number().min(0).max(100).nullable().optional(), disc_degrees: z.number().min(0).max(360).nullable().optional(), overview: z.string().max(4000).nullable().optional(),
   qualities: z.array(z.string().max(80)).max(6).optional(),
   traits: z.record(z.string().max(40), z.number().min(0).max(100)).optional(),
   sections: z.record(z.string().max(40), z.array(z.string().max(500)).max(12)).optional(),
@@ -39,7 +43,7 @@ const humanProfileSchema = z.object({
   behavioral_traits: z.record(z.string().max(40), z.number().min(0).max(100)).optional(),
   // Provenance renvoyée par l'aperçu d'import (Crystal, DISC, export) et conservée telle quelle.
   profile_sources: z.array(z.object({
-    source: z.enum(['linkedin', 'crystalknows', 'manual']), source_url: z.string().max(1000).nullable().optional(),
+    source: z.enum(['linkedin', 'crystalknows', 'manual', 'x', 'email']), source_url: z.string().max(1000).nullable().optional(),
     import_mode: z.string().max(80).optional(), imported_at: z.string().max(40).optional(), imported_by: z.string().max(320).nullable().optional(),
     fields: z.array(z.string().max(80)).max(40).optional(), consent_confirmed: z.boolean().optional(),
     external_profile_id: z.string().max(200).nullable().optional(), verified: z.boolean().nullable().optional(),
@@ -140,7 +144,9 @@ const impersonatorSchema = z.object({
   name: z.string().min(1).max(200),
   role: z.string().max(200).optional(),
   company: z.string().max(200).optional(),
-  source: z.enum(['linkedin', 'crystalknows', 'export', 'manual']),
+  source: z.enum(['linkedin', 'crystalknows', 'export', 'manual', 'enriched']),
+  // Profil déjà enrichi (POST /v1/console/personality/enrich), attaché tel quel après normalisation.
+  human_profile: humanProfileSchema,
   linkedin_url: z.string().max(1000).optional(),
   report_url: z.string().max(1000).optional(),
   email: z.string().email().max(320).optional(),
@@ -152,6 +158,19 @@ const impersonatorSchema = z.object({
   veto_power: z.boolean().optional(),
   consent_reference: z.string().max(300).optional(),
   consent_confirmed: z.literal(true),
+});
+// Enrichissement multi-sources (cf. core/profile-enrichment.mjs et docs/impersonator-agent.md).
+const enrichSchema = z.object({
+  consent_confirmed: z.literal(true),
+  assigned_name: z.string().max(200).optional(),
+  crystal_public_url: z.string().max(1000).optional(),
+  crystal_public_html: z.string().max(3000000).optional(),
+  linkedin_export: z.record(z.string().max(200), z.string().max(2000000)).optional(),
+  emails: z.array(z.union([z.string().max(50000), z.object({ from: z.string().max(500).optional(), subject: z.string().max(1000).optional(), body: z.string().max(50000) })])).max(200).optional(),
+  email_address: z.string().max(320).optional(),
+  x_username: z.string().max(200).optional(),
+  x_posts: z.array(z.string().max(2000)).max(300).optional(),
+  x_archive: z.string().max(5000000).optional(),
 });
 const impersonatorMemberSchema = impersonatorSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true });
 const impersonatorTeamSchema = z.object({
@@ -316,6 +335,12 @@ async function buildImpersonatorAgent(app, me, d) {
   }
   if (d.source === 'export' && d.profile_data) imports.push({ source: d.export_source || 'crystalknows', profile_data: d.profile_data });
   let enrichment_error = null;
+  if (d.source === 'enriched' && d.human_profile) {
+    try {
+      const swarm = app.kayrosContext.engine.swarm;
+      agent = await swarm.assignPersonality(agent.agent_id, mergeHumanProfiles(agent.human_profile, { ...d.human_profile, consent_confirmed: true }), { tenantId: me.tenantId, by: me.email });
+    } catch (error) { enrichment_error = error.message; }
+  }
   if (imports.length) {
     try {
       agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(agent.agent_id, { consent_confirmed: true, imports }, { tenantId: me.tenantId, by: me.email });
@@ -709,6 +734,51 @@ export default async function consoleRoute(app) {
     } catch (error) {
       const status = /crédits/.test(error.message) ? 402 : /aucun profil/.test(error.message) ? 404 : /limite de débit/.test(error.message) ? 429 : 400;
       return reply.code(status).send({ error: surface(error.message) });
+    }
+  });
+
+  // Enrichit un profil depuis des sources autorisées : page publique CrystalKnows, export
+  // LinkedIn, e-mails fournis, posts X (API officielle ou archive). Rien n'est enregistré.
+  app.get('/v1/console/personality/enrich/limits', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    return { limits: ENRICHMENT_LIMITS, x_api_configured: new XProfileAdapter({ fetchImpl: app.kayrosContext.xFetch }).configured };
+  });
+  app.post('/v1/console/personality/enrich', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const parsed = enrichSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'enrichissement invalide (consentement requis)', issues: parsed.error.issues });
+    const d = parsed.data;
+    const warnings = [];
+    try {
+      let crystal = null;
+      if (d.crystal_public_html) crystal = profileFromCrystalPublic(d.crystal_public_html, { imported_by: me.email });
+      else if (d.crystal_public_url) {
+        // Lecture réseau : réservée aux rôles qui gèrent les agents.
+        if (!await manager(app, me, reply)) return;
+        const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: app.kayrosContext.crystalPublicFetch || globalThis.fetch });
+        const page = await fetcher.fetch(d.crystal_public_url);
+        crystal = profileFromCrystalPublic(page.html, { imported_by: me.email, source_url: page.url });
+      }
+      const linkedin = d.linkedin_export ? profileFromLinkedInExport(d.linkedin_export, { imported_by: me.email }) : null;
+      const email = d.emails?.length ? profileFromEmails(d.emails, { author: d.email_address || null, imported_by: me.email }) : null;
+      let x = null;
+      const posts = [...(d.x_posts || []), ...(d.x_archive ? postsFromXArchive(d.x_archive) : [])];
+      if (posts.length) x = profileFromXPosts(posts, { username: d.x_username?.replace(/^@/, '') || null, imported_by: me.email });
+      else if (d.x_username) {
+        const api = new XProfileAdapter({ fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
+        if (!api.configured) warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
+        else {
+          if (!await manager(app, me, reply)) return;
+          const fetched = await api.fetchProfile(d.x_username);
+          x = profileFromXPosts(fetched.posts, { username: fetched.username, bio: fetched.bio, name: fetched.name, imported_by: me.email });
+        }
+      }
+      const result = buildEnrichedProfile({ assigned_name: d.assigned_name || null, crystal, linkedin, email, x });
+      const p = result.profile;
+      return { ...result, warnings, limits: ENRICHMENT_LIMITS, agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }) };
+    } catch (error) {
+      const status = /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : 400;
+      return reply.code(status).send({ error: surface(error.message), warnings });
     }
   });
 

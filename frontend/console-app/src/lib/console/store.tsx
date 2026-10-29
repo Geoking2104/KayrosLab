@@ -934,6 +934,14 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       setRole: () => notify(t("En mode connecté, le rôle vient de votre compte."), "warn"),
       createAgent: (agent) => {
         const denied = comexOnly(); if (denied) return denied;
+        if (agent.kind === "impersonator" && agent.humanProfile) {
+          if (!agent.consented) return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
+          run(http.createImpersonator({
+            name: agent.name.trim(), role: agent.role.trim() || undefined, source: "enriched", human_profile: agent.humanProfile,
+            clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
+          }), t("{{name}} est au registre avec son profil enrichi.", { name: agent.name.trim() }));
+          return { ok: true };
+        }
         if (agent.kind !== "metier") return later();
         if (!agent.name.trim() || !agent.mission.trim()) return { ok: false, reason: t("Nom et mission sont requis.") };
         run(saveAgent(null, agent), t("{{name}} est au registre.", { name: agent.name.trim() }));

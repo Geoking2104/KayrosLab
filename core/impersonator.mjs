@@ -13,7 +13,7 @@
 
 import { buildPersonalityContext, normalizeHumanProfile } from './personality.mjs';
 
-export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual']);
+export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual', 'enriched']);
 export const IMPERSONATOR_PURPOSES = Object.freeze(['idea_test', 'objection_rehearsal', 'pitch_review']);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }

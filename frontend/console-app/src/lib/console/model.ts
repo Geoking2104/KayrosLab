@@ -139,6 +139,8 @@ export interface Agent {
   /** Identifiants Bibliothèque rattachés (mode connecté). */
   skillIds?: string[];
   contextIds?: string[];
+  /** Profil enrichi (Crystal public, export LinkedIn, e-mails, X) d’un impersonator. */
+  humanProfile?: Record<string, unknown>;
 }
 
 export type Seniority = "intern" | "junior" | "senior" | "executive";
