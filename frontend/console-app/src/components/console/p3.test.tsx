@@ -244,7 +244,7 @@ describe("suite P3 : portes, rôles, invitations, glisser-déposer", () => {
     fireEvent.click(screen.getByRole("button", { name: "Lancer l’enchaînement" }));
     const list = await screen.findByTestId("pipelines");
     await waitFor(() => expect(list.textContent).toContain("porte bloquée"));
-    expect(calls.find((c) => c.method === "POST" && c.url.endsWith("/projects/prj_1/pipelines"))!.body).toEqual({ question: "Faut-il signer ?" });
+    expect(calls.find((c) => c.method === "POST" && c.url.endsWith("/projects/prj_1/pipelines"))!.body).toEqual({ question: "Faut-il signer ?", pause_between: false });
     fireEvent.change(screen.getByLabelText("Motif de levée de la porte"), { target: { value: "Risque accepté" } });
     fireEvent.click(screen.getByRole("button", { name: "Lever la porte et continuer" }));
     await waitFor(() => expect(screen.getByTestId("pipelines").textContent).toContain("porte levée"));

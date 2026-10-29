@@ -16,3 +16,20 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+  smoke-graph-dnd:
+    # Test de fumée navigateur : glisser-déposer du graphe de projet (API simulée, Chrome du runner).
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: frontend/console-app } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm, cache-dependency-path: frontend/console-app/package-lock.json }
+      - run: npm ci
+      - run: npm i --no-save playwright@1
+      - name: Serveur de dev Vite
+        run: |
+          npx vite --port 4174 --strictPort > /tmp/vite.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://localhost:4174/console/ > /dev/null && exit 0; sleep 1; done
+          cat /tmp/vite.log; exit 1
+      - name: Glisser-déposer (Playwright + Chrome)
+        run: CONSOLE_URL=http://localhost:4174/console/ CHROME="$(command -v google-chrome)" node scripts/smoke-graph-dnd.mjs

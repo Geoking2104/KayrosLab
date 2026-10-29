@@ -993,7 +993,6 @@
   "échec": "failed",
   "Enchaînement des collectifs": "Collective chain",
   "{{n}} collectifs liés": "{{n}} linked collectives",
-  "Chaque collectif du graphe traite la question dans l’ordre des liens ; il reçoit les verdicts précédents. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.": "Each collective in the graph handles the question in link order and receives the previous verdicts. A blocked gate stops the chain until a human arbitration.",
   "Question de l’enchaînement": "Chain question",
   "Question soumise aux collectifs": "Question for the collectives",
   "Lancer l’enchaînement": "Start the chain",
@@ -1001,5 +1000,14 @@
   "Motif de levée de la porte": "Reason for lifting the gate",
   "Motif (obligatoire)": "Reason (required)",
   "Lever la porte et continuer": "Lift the gate and continue",
-  "Arrêter l’enchaînement": "Stop the chain"
+  "Arrêter l’enchaînement": "Stop the chain",
+  "Chaque collectif du graphe traite la question dans l’ordre des liens ; les branches parallèles tournent en même temps et se rejoignent sur le collectif suivant, qui reçoit tous leurs verdicts. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.": "Each collective in the graph handles the question in link order; parallel branches run at the same time and join on the next collective, which receives all their verdicts. A blocked gate stops the chain until a human arbitrates.",
+  "validation attendue": "approval pending",
+  "validé": "approved",
+  "Pause d’arbitrage entre les collectifs": "Arbitration pause between collectives",
+  "Pause d’arbitrage après la porte": "Arbitration pause after this gate",
+  "Branches parallèles": "Parallel branches",
+  "Commentaire de validation": "Approval comment",
+  "Commentaire (facultatif)": "Comment (optional)",
+  "Valider et continuer": "Approve and continue"
 }

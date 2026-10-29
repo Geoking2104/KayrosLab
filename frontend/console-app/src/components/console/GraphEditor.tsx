@@ -103,6 +103,10 @@ export function GraphEditor({ spec, onChange, selected, onSelect, agents, collec
                   <input type="checkbox" className="size-4" checked={Boolean(node.config.strict)} onChange={(e) => patchNode({ config: { strict: e.target.checked } })} />
                   {t("GO franc requis")}
                 </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" className="size-4" checked={Boolean(node.config.pause)} onChange={(e) => patchNode({ config: { pause: e.target.checked } })} />
+                  {t("Pause d’arbitrage après la porte")}
+                </label>
               </div>
               <p className="text-xs text-muted sm:col-span-3">{t("Une porte bloquée interdit d’accepter le verdict : il faut demander une réévaluation ou passer outre avec une justification.")}</p>
             </div>

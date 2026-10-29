@@ -8,7 +8,7 @@ import publicApiRoutes from '../routes/public-api.mjs';
 import { HybridAgentGateway, SwarmService } from '../../../core/index.mjs';
 import { AuthService, InMemoryUserStore } from '../../../core/auth.mjs';
 import { WorkspaceStore } from '../lib/workspace-store.mjs';
-import { agentNodesFor, gatesAfter, pipelineSteps } from '../lib/project-pipeline.mjs';
+import { agentNodesFor, gatesAfter, pipelineSteps, stepDeps } from '../lib/project-pipeline.mjs';
 import { startChatMission } from '../lib/chat-handlers.mjs';
 import { ChatReplyService } from '../../../core/chat-replies.mjs';
 import { linkedChatRole, memberRole } from '../lib/workspace-roles.mjs';
@@ -25,7 +25,7 @@ async function buildApp(user = { email: 'owner@kayros.test', role: 'comex' }, ex
   return { app, current };
 }
 const session = async (app, name, agents) => (await app.inject({ method: 'POST', url: '/v1/console/sessions', payload: { name, active_agents: agents } })).json().session.session_id;
-async function waitPipeline(app, id, done = (p) => p.status !== 'running') {
+async function waitPipeline(app, id, done = (p) => p.status !== 'running' && !p.steps.some((s) => s.status === 'running')) {
   for (let i = 0; i < 200; i += 1) {
     const p = (await app.inject({ url: `/v1/console/pipelines/${id}` })).json().pipeline;
     if (done(p)) return p;
@@ -68,8 +68,9 @@ test('enchaînement : deux collectifs en séquence, agents du graphe appliqués,
   assert.deepEqual(done.steps.map((s) => s.status), ['completed', 'completed']);
   assert.ok(done.steps[1].thread_id && done.steps[1].thread_id !== done.steps[0].thread_id);
   const s1view = (await app.inject({ url: `/v1/console/sessions/${s1}` })).json().session;
-  const agents = JSON.stringify(s1view);
-  assert.match(agents, /planner/); 
+  const agents = JSON.stringify(s1view.collective.active_agents);
+  assert.doesNotMatch(agents, /planner/, 'l’agent ajouté par le graphe quitte le collectif après la mission');
+  assert.match(agents, /cto/, 'l’agent exclu par le graphe est rétabli');
   const t2 = await app.kayrosContext.hybridGateway.getThread(done.steps[1].thread_id, { tenantId: 'tenant-a' });
   assert.equal(t2.room_id, s2);
   assert.match(JSON.stringify(t2), /Étape 1 « Finance » : verdict/, 'le verdict de l’étape 1 est dans le contexte de l’étape 2');
@@ -174,4 +175,121 @@ test('invitation : lien à jeton, création du compte dans l’espace de l’inv
   // Jeton à usage unique.
   assert.equal((await app.inject({ url: `/v1/auth/invite/${token}` })).statusCode, 404);
   assert.equal((await app.inject({ method: 'POST', url: '/v1/auth/invite/accept', payload: { token, password: 'motdepasse-solide' } })).statusCode, 404);
+});
+
+test('graphe : deux branches parallèles et une jonction', () => {
+  const g = {
+    nodes: [{ id: 'q', type: 'question' }, { id: 'a', type: 'collectif', config: { session_id: 's1' } }, { id: 'b', type: 'collectif', config: { session_id: 's2' } },
+      { id: 'pa', type: 'porte' }, { id: 'j', type: 'collectif', config: { session_id: 's3' } }],
+    edges: [{ from: 'q', to: 'a' }, { from: 'q', to: 'b' }, { from: 'a', to: 'pa' }, { from: 'pa', to: 'j' }, { from: 'b', to: 'j' }],
+  };
+  assert.deepEqual(stepDeps(g, 'a'), []);
+  assert.deepEqual(stepDeps(g, 'b'), []);
+  assert.deepEqual(stepDeps(g, 'j').sort(), ['a', 'b']);
+});
+
+async function parallelProject(app, extraGateConfig = {}) {
+  const s1 = await session(app, 'Finance', ['cfo']);
+  const s2 = await session(app, 'Tech', ['cto']);
+  const s3 = await session(app, 'Juridique', ['legal_counsel']);
+  const co = (await app.inject({ method: 'POST', url: '/v1/console/companies', payload: { name: 'Atelier' } })).json().item;
+  const graph = {
+    nodes: [{ id: 'q', type: 'question' }, { id: 'a', type: 'collectif', label: 'Finance', config: { session_id: s1 } }, { id: 'b', type: 'collectif', label: 'Tech', config: { session_id: s2 } },
+      { id: 'pa', type: 'porte', config: { threshold: 'majority', ...extraGateConfig } }, { id: 'j', type: 'collectif', label: 'Juridique', config: { session_id: s3 } }],
+    edges: [{ from: 'q', to: 'a' }, { from: 'q', to: 'b' }, { from: 'a', to: 'pa' }, { from: 'pa', to: 'j' }, { from: 'b', to: 'j' }],
+  };
+  const res = await app.inject({ method: 'POST', url: '/v1/console/projects', payload: { company_id: co.id, name: 'Helia', session_ids: [s1, s2, s3], graph } });
+  assert.equal(res.statusCode, 201, res.body);
+  return res.json().item;
+}
+
+test('enchaînement parallèle : deux branches démarrent ensemble, la jonction reçoit les deux verdicts', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const project = await parallelProject(app);
+  const res = await app.inject({ method: 'POST', url: `/v1/console/projects/${project.id}/pipelines`, payload: { question: 'Faut-il signer le contrat Helia ?', profile: 'demo' } });
+  assert.equal(res.statusCode, 202, res.body);
+  const started = res.json().pipeline;
+  const byNode = Object.fromEntries(started.steps.map((s) => [s.node_id, s]));
+  assert.ok(byNode.a.thread_id && byNode.b.thread_id, 'les deux branches sont lancées immédiatement');
+  assert.equal(byNode.j.status, 'pending');
+  assert.deepEqual([...byNode.j.deps].sort(), ['a', 'b']);
+  const done = await waitPipeline(app, started.id);
+  assert.equal(done.status, 'completed', JSON.stringify(done));
+  const j = done.steps.find((s) => s.node_id === 'j');
+  const thread = await app.kayrosContext.hybridGateway.getThread(j.thread_id, { tenantId: 'tenant-a' });
+  const text = JSON.stringify(thread);
+  assert.match(text, /Finance/); assert.match(text, /Tech/); assert.match(text, /jonction de 2 branches/);
+});
+
+test('pause d’arbitrage : après une porte passée, un comex valide avant la suite', async (t) => {
+  const { app, current } = await buildApp();
+  t.after(() => app.close());
+  const project = await parallelProject(app);
+  const res = await app.inject({ method: 'POST', url: `/v1/console/projects/${project.id}/pipelines`, payload: { question: 'Faut-il signer le contrat Helia ?', profile: 'demo', pause_between: true } });
+  assert.equal(res.statusCode, 202, res.body);
+  const id = res.json().pipeline.id;
+  const waiting = await waitPipeline(app, id, (p) => p.status === 'awaiting_approval' && !p.steps.some((s) => s.status === 'running'));
+  assert.equal(waiting.steps.find((s) => s.node_id === 'j').status, 'pending', 'la jonction attend la validation');
+  current.role = 'lecteur';
+  const denied = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: {} });
+  assert.equal(denied.statusCode, 403);
+  current.role = 'comex';
+  const ok = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: { comment: 'Go pour la suite' } });
+  assert.equal(ok.statusCode, 200, ok.body);
+  const done = await waitPipeline(app, id);
+  assert.equal(done.status, 'completed', JSON.stringify(done));
+  assert.equal(done.steps.find((s) => s.node_id === 'a').approval.by, 'owner@kayros.test');
+  const again = await app.inject({ method: 'POST', url: `/v1/console/pipelines/${id}/approve`, payload: {} });
+  assert.equal(again.statusCode, 409);
+});
+
+test('pause d’arbitrage portée par une porte (config.pause)', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const project = await parallelProject(app, { pause: true });
+  const id = (await app.inject({ method: 'POST', url: `/v1/console/projects/${project.id}/pipelines`, payload: { question: 'Faut-il signer le contrat Helia ?', profile: 'demo' } })).json().pipeline.id;
+  const waiting = await waitPipeline(app, id, (p) => p.status === 'awaiting_approval' && !p.steps.some((s) => s.status === 'running'));
+  const st = Object.fromEntries(waiting.steps.map((s) => [s.node_id, s.status]));
+  assert.equal(st.a, 'awaiting_approval'); assert.equal(st.b, 'completed', 'branche sans porte pause'); assert.equal(st.j, 'pending');
+});
+
+test('mission simple : la composition du graphe est rétablie après la mission', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const s1 = await session(app, 'Finance', ['cfo', 'cto']);
+  const co = (await app.inject({ method: 'POST', url: '/v1/console/companies', payload: { name: 'Atelier' } })).json().item;
+  const graph = { nodes: [{ id: 'c', type: 'collectif', config: { session_id: s1 } }, { id: 'ag', type: 'agent', config: { agent_id: 'planner' } }], edges: [{ from: 'ag', to: 'c' }] };
+  await app.inject({ method: 'POST', url: '/v1/console/projects', payload: { company_id: co.id, name: 'P', session_ids: [s1], graph } });
+  const run = await app.inject({ method: 'POST', url: `/v1/console/sessions/${s1}/run?wait=true`, payload: { question: 'Signer le contrat ?', profile: 'demo' } });
+  assert.equal(run.statusCode, 200, run.body);
+  assert.match(JSON.stringify(run.json().run || run.json().thread), /planner/, 'planner a participé');
+  const view = (await app.inject({ url: `/v1/console/sessions/${s1}` })).json().session;
+  assert.doesNotMatch(JSON.stringify(view.collective.active_agents), /planner/);
+});
+
+test('API publique : une clé sans créateur connu est refusée', async (t) => {
+  const app = Fastify();
+  const workspaceStore = new WorkspaceStore({ file: 'memory' });
+  const principal = { kind: 'api_key', sub: 'svc:tenant-a:crm', role: 'service', tenantId: 'tenant-a', keyId: 'k1', serviceAccount: 'crm', scopes: ['missions:write'], collectiveIds: [], createdBy: '' };
+  app.decorate('kayrosContext', { workspaceStore, userStore: new InMemoryUserStore(), apiKeys: { authenticate: async () => principal }, publicMissions: {}, hybridGateway: {}, engine: { swarm: {} } });
+  await app.register(publicApiRoutes);
+  t.after(() => app.close());
+  const post = () => app.inject({ method: 'POST', url: '/v1/public/missions', headers: { authorization: 'Bearer kl_x', 'idempotency-key': 'k-1' }, payload: { collective_id: 'r1', question: 'Signer ?' } });
+  assert.equal((await post()).json().code, 'creator_unknown');
+  principal.createdBy = 'ghost@ailleurs.test';
+  const res = await post();
+  assert.equal(res.statusCode, 403);
+  assert.equal(res.json().code, 'creator_unknown', 'créateur ni membre ni compte de cet espace');
+});
+
+test('chat : un compte non lié est lecteur par défaut, ouverture explicite par KAYROS_CHAT_UNLINKED_ROLE', async (t) => {
+  const { app } = await buildApp({ email: 'owner@kayros.test', role: 'comex' }, { userStore: new InMemoryUserStore(), linkService: { get: async () => null } });
+  t.after(() => { delete process.env.KAYROS_CHAT_UNLINKED_ROLE; return app.close(); });
+  const ctx = app.kayrosContext;
+  await assert.rejects(startChatMission(ctx, { platform: 'slack', channelId: 'C1', userId: 'slack:UANON', text: 'question ?' }), (e) => e.code === 'NOT_LINKED');
+  process.env.KAYROS_CHAT_UNLINKED_ROLE = 'admin';
+  await assert.rejects(startChatMission(ctx, { platform: 'slack', channelId: 'C1', userId: 'slack:UANON', text: 'question ?' }), (e) => e.code === 'NOT_LINKED', 'admin/comex jamais accordés à un compte non lié');
+  process.env.KAYROS_CHAT_UNLINKED_ROLE = 'contributeur';
+  await assert.rejects(startChatMission(ctx, { platform: 'slack', channelId: 'C1', userId: 'slack:UANON', text: 'question ?' }).then(() => { throw Object.assign(new Error('ok'), { code: 'OK' }); }), (e) => e.code !== 'NOT_LINKED');
 });

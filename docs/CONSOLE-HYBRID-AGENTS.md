@@ -142,25 +142,33 @@ Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la con
 ## Enchaînement de collectifs, agents du graphe, rôles et invitations
 
 ### Enchaînement le long du graphe
-- Chaque nœud **collectif** relié à une session devient une étape, dans l'ordre topologique du graphe.
-- `POST /v1/console/projects/:id/pipelines {question, profile?}` (rôle *run*) lance la première mission (202).
-- À la fin de chaque mission (événement `completed`), les **portes de sortie** de l'étape sont évaluées sur les avis : ce sont les portes atteintes sans traverser un autre collectif.
-  - Si elles passent, le collectif suivant démarre. Il reçoit les verdicts des étapes précédentes dans son contexte.
-  - Si une porte bloque, l'enchaînement passe à `blocked`. Un comex ou un admin peut lever la porte avec `POST /v1/console/pipelines/:id/resume {justification}`, et l'étape suivante démarre.
-- Une mission en échec met l'enchaînement à `failed`.
+- Chaque nœud **collectif** relié à une session devient une étape. Ses dépendances (`deps`) sont les collectifs qui l'atteignent sans traverser un autre collectif.
+- `POST /v1/console/projects/:id/pipelines {question, profile?, pause_between?}` (rôle *run*) lance **toutes les étapes sans dépendance** (202).
+- **Branches parallèles et jonction** : les étapes dont toutes les dépendances sont terminées démarrent ensemble. Une étape à plusieurs dépendances est une jonction : son contexte contient les verdicts de toutes ses branches amont.
+- À la fin de chaque mission (`completed`), les **portes de sortie** de l'étape sont évaluées sur les avis : ce sont les portes atteintes sans traverser un autre collectif.
+  - Si elles passent, les étapes devenues prêtes démarrent.
+  - Si une porte bloque, l'étape passe à `blocked` et aucune nouvelle étape ne démarre (les branches déjà en cours terminent). Un comex ou un admin lève les portes bloquées avec `POST /v1/console/pipelines/:id/resume {justification}`.
+- **Pause d'arbitrage** : avec `pause_between: true`, ou sur une porte avec `config.pause: true`, une étape dont les portes passent et qui a des étapes en aval passe à `awaiting_approval`. Rien ne démarre avant `POST /v1/console/pipelines/:id/approve {comment?}` (rôle *arbitrate*), qui valide toutes les étapes en attente (`approved`).
+- Statut global : `blocked` > `awaiting_approval` > `failed` > `completed` > `running`. Une mission en échec met l'enchaînement à `failed`.
 - `POST /pipelines/:id/cancel` arrête l'enchaînement.
 - Les routes de lecture sont `GET /projects/:id/pipelines` et `GET /pipelines/:id`.
 
 ### Nœuds agent
 - Un nœud **agent** (`config.agent_id`) relié à un collectif (dans un sens ou dans l'autre) est **ajouté à la session** de ce collectif avant chaque mission, qu'elle soit lancée par un enchaînement ou directement sur la session.
 - Avec `config.exclude: true`, l'agent est retiré de la session.
+- **Composition temporaire** : à la fin de la mission (`completed` ou `failed`), les agents ajoutés sont retirés et les agents exclus sont rétablis. Un compteur par session évite qu'une mission en cours perde ses agents quand une autre se termine.
+- Limite : ce compteur est en mémoire. Un redémarrage pendant une mission laisse la composition modifiée.
 - La modification passe par `updateRoomAgents` et respecte la limite d'agents construits.
 
 ### Rôle lecteur hors console
-- **API publique** : une clé agit au nom de son créateur (`created_by`). Si la fiche membre du créateur est passée lecteur, `POST /v1/public/missions` renvoie `403 creator_read_only`.
+- **API publique** : une clé agit au nom de son créateur (`created_by`).
+  - Si la fiche membre du créateur est passée lecteur, `POST /v1/public/missions` renvoie `403 creator_read_only`.
+  - Si le créateur est vide, ou n'est ni membre ni compte de cet espace, la réponse est `403 creator_unknown`. Il faut alors recréer la clé depuis la console.
 - **Slack, Teams, Discord** :
   - Un compte de chat **lié** à un membre lecteur ne peut ni lancer de mission ni arbitrer. La fiche membre prime sur le rôle du compte.
-  - Les comptes non liés gardent l'accès défini par le canal.
+  - Un compte **non lié** a le rôle `KAYROS_CHAT_UNLINKED_ROLE`, `lecteur` par défaut : il ne lance pas de mission et reçoit l'invitation à lier son compte.
+  - `contributeur` rétablit l'ancien accès par canal. **À définir en production si des utilisateurs non liés lancent des missions.**
+  - `admin` et `comex` ne sont jamais accordés à un compte non lié.
 
 ### Activation d'une invitation
 1. L'administrateur invite un membre depuis Réglages → Membres → « Inviter par e-mail ».

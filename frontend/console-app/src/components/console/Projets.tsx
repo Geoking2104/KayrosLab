@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Mail, Pencil, Trash2, UserPlus } from "lucide-react";
 import { useConsole } from "@/lib/console/store";
 import { api } from "@/lib/console/api";
-import type { GraphSpec, Pipeline, PipelineStepStatus, Project, Stakeholder, StakeholderRole } from "@/lib/console/live";
+import type { GraphSpec, Pipeline, PipelineStep, PipelineStepStatus, Project, Stakeholder, StakeholderRole } from "@/lib/console/live";
 import { STAKEHOLDER_ROLES } from "@/lib/console/roles";
 import { formatWhen } from "@/lib/console/model";
 import { Button, Empty, Section, StatusPill, VerdictPill, controlClass } from "./ui";
@@ -157,22 +157,46 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
 const STEP: Record<PipelineStepStatus, () => string> = {
   pending: () => t("en attente"), running: () => t("en cours"), completed: () => t("terminé"),
   blocked: () => t("porte bloquée"), overridden: () => t("porte levée"), failed: () => t("échec"),
+  awaiting_approval: () => t("validation attendue"), approved: () => t("validé"),
 };
 const STEP_TONE: Record<PipelineStepStatus, string> = {
   pending: "bg-paper text-muted", running: "bg-accent-soft text-accent", completed: "bg-go-soft text-go",
   blocked: "bg-stop-soft text-stop", overridden: "bg-hold-soft text-hold", failed: "bg-stop-soft text-stop",
+  awaiting_approval: "bg-hold-soft text-hold", approved: "bg-go-soft text-go",
 };
+
+/** Niveaux d’exécution : les étapes d’un même niveau tournent en parallèle, le niveau suivant est la jonction. */
+export function stepLevels(steps: PipelineStep[]): PipelineStep[][] {
+  const level = new Map<string, number>();
+  const byNode = new Map(steps.map((s) => [s.node_id, s]));
+  const depth = (s: PipelineStep, seen = new Set<string>()): number => {
+    if (level.has(s.node_id)) return level.get(s.node_id)!;
+    if (seen.has(s.node_id)) return 0;
+    seen.add(s.node_id);
+    const d = Math.max(-1, ...(s.deps ?? []).map((id) => { const dep = byNode.get(id); return dep ? depth(dep, seen) : -1; })) + 1;
+    level.set(s.node_id, d);
+    return d;
+  };
+  // Anciens enchaînements (sans deps) : séquence stricte dans l’ordre des étapes.
+  const legacy = steps.every((s) => !s.deps);
+  const out: PipelineStep[][] = [];
+  steps.forEach((s, i) => { const d = legacy ? i : depth(s); (out[d] ||= []).push(s); });
+  return out.filter(Boolean);
+}
 
 /** Enchaînement : les collectifs du graphe traitent la question l’un après l’autre, les portes décident du passage. */
 function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; canRun: boolean; canArbitrate: boolean }) {
   const [items, setItems] = useState<Pipeline[]>([]);
   const [question, setQuestion] = useState("");
   const [reason, setReason] = useState("");
+  const [pause, setPause] = useState(false);
+  const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const steps = (project.graph?.nodes ?? []).filter((n) => n.type === "collectif" && n.config.session_id).length;
   const load = useCallback(() => api.pipelines(project.id).then((r) => setItems(r.pipelines)).catch(() => setItems([])), [project.id]);
   useEffect(() => { void load(); }, [load]);
-  const running = items.some((p) => p.status === "running");
+  const running = items.some((p) => p.status === "running" || p.steps.some((s) => s.status === "running"));
+  const active = items.some((p) => !["completed", "failed", "cancelled"].includes(p.status));
   useEffect(() => {
     if (!running) return;
     const timer = setInterval(() => void load(), 3000);
@@ -181,11 +205,15 @@ function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; ca
   const act = async (fn: () => Promise<unknown>) => { try { await fn(); setError(""); await load(); } catch (e) { setError((e as Error).message); } };
   return (
     <Section id="projet-enchainement" title={t("Enchaînement des collectifs")} summary={t("{{n}} collectifs liés", { n: steps })}>
-      <p className="mb-2 text-xs text-muted">{t("Chaque collectif du graphe traite la question dans l’ordre des liens ; il reçoit les verdicts précédents. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.")}</p>
+      <p className="mb-2 text-xs text-muted">{t("Chaque collectif du graphe traite la question dans l’ordre des liens ; les branches parallèles tournent en même temps et se rejoignent sur le collectif suivant, qui reçoit tous leurs verdicts. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.")}</p>
       {canRun ? (
-        <form className="mb-3 flex flex-wrap gap-2" onSubmit={(e) => { e.preventDefault(); void act(async () => { await api.startPipeline(project.id, { question }); setQuestion(""); }); }}>
+        <form className="mb-3 flex flex-wrap gap-2" onSubmit={(e) => { e.preventDefault(); void act(async () => { await api.startPipeline(project.id, { question, pause_between: pause }); setQuestion(""); }); }}>
           <input aria-label={t("Question de l’enchaînement")} className={`${controlClass} min-w-64 flex-1`} value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("Question soumise aux collectifs")} />
-          <Button type="submit" disabled={steps === 0 || question.trim().length < 3 || running}>{t("Lancer l’enchaînement")}</Button>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" className="size-4" checked={pause} onChange={(e) => setPause(e.target.checked)} />
+            {t("Pause d’arbitrage entre les collectifs")}
+          </label>
+          <Button type="submit" disabled={steps === 0 || question.trim().length < 3 || active}>{t("Lancer l’enchaînement")}</Button>
         </form>
       ) : <p className="mb-2 text-xs text-muted">{t("Votre rôle (lecteur) ne permet pas de lancer ou relancer une mission.")}</p>}
       {steps === 0 ? <p className="text-sm text-muted">{t("Reliez au moins un nœud collectif à une session dans le graphe.")}</p> : null}
@@ -198,11 +226,18 @@ function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; ca
                 <span className="text-xs text-muted">{p.created_at ? formatWhen(p.created_at) : ""}</span>
               </div>
               <ol className="mt-1 flex flex-wrap items-center gap-1 text-xs">
-                {p.steps.map((s, i) => (
-                  <li key={s.node_id} className="flex items-center gap-1">
+                {stepLevels(p.steps).map((group, i) => (
+                  <li key={group[0].node_id} className="flex items-center gap-1">
                     {i ? <span aria-hidden className="text-muted">→</span> : null}
-                    <span className={`rounded px-1.5 ${STEP_TONE[s.status]}`} title={(s.gates ?? []).flatMap((g) => g.reasons).join(" · ")}>
-                      {tc(s.label || s.session_id)} · {STEP[s.status]()}{s.verdict ? ` · ${s.verdict}` : ""}
+                    <span className={group.length > 1 ? "flex flex-wrap items-center gap-1 rounded border border-dashed border-line px-1" : "contents"} title={group.length > 1 ? t("Branches parallèles") : undefined} data-testid={group.length > 1 ? "parallel-group" : undefined}>
+                      {group.map((s, j) => (
+                        <span key={s.node_id} className="flex items-center gap-1">
+                          {j ? <span aria-hidden className="text-muted">∥</span> : null}
+                          <span className={`rounded px-1.5 ${STEP_TONE[s.status]}`} title={(s.gates ?? []).flatMap((g) => g.reasons).join(" · ")}>
+                            {tc(s.label || s.session_id)} · {STEP[s.status]()}{s.verdict ? ` · ${s.verdict}` : ""}
+                          </span>
+                        </span>
+                      ))}
                     </span>
                   </li>
                 ))}
@@ -213,7 +248,13 @@ function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; ca
                   <Button variant="secondary" disabled={reason.trim().length < 3} onClick={() => void act(async () => { await api.resumePipeline(p.id, reason); setReason(""); })}>{t("Lever la porte et continuer")}</Button>
                 </div>
               ) : null}
-              {(p.status === "running" || p.status === "blocked") && canRun ? (
+              {p.status === "awaiting_approval" && canArbitrate ? (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <input aria-label={t("Commentaire de validation")} className={`${controlClass} min-w-56 flex-1`} value={comment} onChange={(e) => setComment(e.target.value)} placeholder={t("Commentaire (facultatif)")} />
+                  <Button variant="secondary" onClick={() => void act(async () => { await api.approvePipeline(p.id, comment); setComment(""); })}>{t("Valider et continuer")}</Button>
+                </div>
+              ) : null}
+              {["running", "blocked", "awaiting_approval"].includes(p.status) && canRun ? (
                 <Button variant="ghost" className="mt-1" onClick={() => void act(() => api.cancelPipeline(p.id))}>{t("Arrêter l’enchaînement")}</Button>
               ) : null}
             </li>

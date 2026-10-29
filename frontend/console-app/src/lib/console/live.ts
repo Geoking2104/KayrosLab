@@ -25,7 +25,7 @@ export interface Stakeholder { name: string; role: StakeholderRole; title: strin
 export type NodeType = "question" | "collectif" | "agent" | "porte" | "arbitrage" | "notification" | "decision";
 export interface GraphSpecNode {
   id: string; type: NodeType; label: string;
-  config: { session_id?: string; agent_id?: string; threshold?: Voting; min_go?: number; veto?: boolean; strict?: boolean; exclude?: boolean; role?: StakeholderRole };
+  config: { session_id?: string; agent_id?: string; threshold?: Voting; min_go?: number; veto?: boolean; strict?: boolean; exclude?: boolean; pause?: boolean; role?: StakeholderRole };
   /** Position libre choisie par glisser-déposer (sinon mise en page automatique). */
   x?: number; y?: number;
 }
@@ -192,14 +192,14 @@ export function fromApiThread(t: any): Thread {
 }
 
 /** Enchaînement de collectifs le long du graphe d'un projet. */
-export type PipelineStepStatus = "pending" | "running" | "completed" | "blocked" | "overridden" | "failed";
+export type PipelineStepStatus = "pending" | "running" | "completed" | "blocked" | "overridden" | "failed" | "awaiting_approval" | "approved";
 export type PipelineStep = {
-  node_id: string; label: string; session_id: string; status: PipelineStepStatus; thread_id: string | null; verdict: string | null;
+  node_id: string; label: string; session_id: string; deps?: string[]; status: PipelineStepStatus; thread_id: string | null; verdict: string | null;
   gates?: { gate_id: string; label: string; status: string; reasons: string[] }[];
   agents?: { added: string[]; removed: string[]; error: string | null } | null;
-  override?: { by: string; justification: string; at: string }; error?: string | null;
+  override?: { by: string; justification: string; at: string }; approval?: { by: string; comment: string | null; at: string }; error?: string | null;
 };
 export type Pipeline = {
-  id: string; project_id: string; question: string; status: "running" | "blocked" | "completed" | "failed" | "cancelled";
-  current: number; steps: PipelineStep[]; created_by?: string; created_at?: string;
+  id: string; project_id: string; question: string; status: "running" | "blocked" | "awaiting_approval" | "completed" | "failed" | "cancelled";
+  pause_between?: boolean; current: number; steps: PipelineStep[]; created_by?: string; created_at?: string;
 };

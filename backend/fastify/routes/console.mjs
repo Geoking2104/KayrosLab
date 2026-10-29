@@ -3,7 +3,7 @@ import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../co
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
 import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
 import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
-import { agentNodesFor, chainContext, pipelineSteps, stepOutcome } from '../lib/project-pipeline.mjs';
+import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
 import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../../core/integrations/profiles.mjs';
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
 import { agentAttributesFromProfile, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
@@ -405,27 +405,65 @@ export async function applyGraphAgents(app, tenantId, graph, node, by) {
     return { added: adds, removed: removes, error: null };
   } catch (error) { return { added: [], removed: [], error: surface(error?.message || error) }; }
 }
+
+// Composition temporaire : les agents ajoutés / exclus par le graphe sont rétablis
+// à la fin de la dernière mission qui les utilise (compteur par session).
+const graphLeases = new Map(); // `${tenant}:${session}` -> { count, added:Set, removed:Set, by }
+const threadLeases = new Map(); // thread_id -> clé de session
+/** Applique la composition du graphe pour une mission (thread pré-attribué) et retient quoi rétablir. */
+export async function acquireGraphAgents(app, tenantId, graph, node, by, threadId) {
+  const key = `${tenantId}:${node.config.session_id}`;
+  const lease = graphLeases.get(key) || { count: 0, added: new Set(), removed: new Set(), tenantId, sessionId: node.config.session_id, by };
+  graphLeases.set(key, lease);
+  lease.count += 1;
+  if (threadId) threadLeases.set(threadId, key);
+  const change = await applyGraphAgents(app, tenantId, graph, node, by);
+  for (const id of change?.added || []) { if (lease.removed.has(id)) lease.removed.delete(id); else lease.added.add(id); }
+  for (const id of change?.removed || []) { if (lease.added.has(id)) lease.added.delete(id); else lease.removed.add(id); }
+  return change;
+}
+/** Fin de mission : rend la session dans sa composition d'origine si plus aucune mission du graphe n'y tourne. */
+export async function releaseGraphAgents(app, threadId) {
+  const key = threadLeases.get(threadId);
+  if (!key) return null;
+  threadLeases.delete(threadId);
+  const lease = graphLeases.get(key);
+  if (!lease) return null;
+  lease.count -= 1;
+  if (lease.count > 0) return null;
+  graphLeases.delete(key);
+  const addAgentIds = [...lease.removed]; const removeAgentIds = [...lease.added];
+  if (!addAgentIds.length && !removeAgentIds.length) return { restored: [], removed: [] };
+  const gateway = app.kayrosContext.hybridGateway;
+  try {
+    const room = await gateway.getRoom(lease.sessionId, { tenantId: lease.tenantId });
+    if (room) await gateway.updateRoomAgents(room.room_id, { addAgentIds, removeAgentIds, maxBuiltAgents: MAX_BUILT_AGENTS_PER_SESSION, tenantId: lease.tenantId, by: lease.by });
+  } catch (error) { app.log?.warn?.({ err: error?.message }, 'rétablissement de la composition du collectif'); }
+  return { restored: addAgentIds, removed: removeAgentIds };
+}
+
 async function savePipeline(app, tenantId, pipeline) {
   return workspaceStoreFor(app.kayrosContext).update(tenantId, 'pipelines', pipeline.id, pipeline);
 }
-/** Démarre l'étape `index` (mission sur la session du collectif, contexte des étapes précédentes). */
-async function startPipelineStep(app, tenantId, pipeline, index) {
-  const ws = workspaceStoreFor(app.kayrosContext);
-  const project = await ws.get(tenantId, 'projects', pipeline.project_id);
-  const step = pipeline.steps[index];
+function settle(pipeline) {
+  const status = pipelineStatus(pipeline);
+  const finished = ['completed', 'failed', 'cancelled'].includes(status) && !pipeline.steps.some((s) => s.status === 'running');
+  return { ...pipeline, status, current: pipeline.steps.findIndex((s) => s.status === 'running'), finished_at: finished ? (pipeline.finished_at || new Date().toISOString()) : null };
+}
+/** Démarre une étape (mission sur la session du collectif, contexte de ses branches amont). Mute `pipeline`. */
+async function startPipelineStep(app, tenantId, pipeline, project, step) {
   const node = (project?.graph?.nodes || []).find((n) => n.id === step.node_id);
   const gateway = app.kayrosContext.hybridGateway;
   const room = node ? await gateway.getRoom(step.session_id, { tenantId }) : null;
-  if (!room) {
-    Object.assign(step, { status: 'failed', error: 'session du collectif introuvable' });
-    return savePipeline(app, tenantId, { ...pipeline, status: 'failed', current: index, finished_at: new Date().toISOString() });
-  }
-  step.agents = await applyGraphAgents(app, tenantId, project.graph, node, pipeline.created_by);
+  if (!room) { Object.assign(step, { status: 'failed', error: 'session du collectif introuvable' }); return; }
+  step.thread_id = makeThreadId();
+  step.agents = await acquireGraphAgents(app, tenantId, project.graph, node, pipeline.created_by, step.thread_id);
   const attached = await collectiveAttachmentsContext(app, tenantId, room.room_id);
-  const context = [`Session de harness « ${room.name} » · collectif ${room.swarm_id}`, chainContext(pipeline, project), attached].filter(Boolean).join('\n\n').slice(0, 24000);
+  const context = [`Session de harness « ${room.name} » · collectif ${room.swarm_id}`, chainContext(pipeline, project, step), attached].filter(Boolean).join('\n\n').slice(0, 24000);
   const profile = runProfile(app, pipeline.profile);
-  Object.assign(step, { status: 'running', thread_id: makeThreadId(), started_at: new Date().toISOString(), error: null });
-  let saved = await savePipeline(app, tenantId, { ...pipeline, status: 'running', current: index });
+  Object.assign(step, { status: 'running', started_at: new Date().toISOString(), error: null });
+  // Enregistré avant le lancement : la fin de mission (autre tâche) doit retrouver l'étape.
+  await savePipeline(app, tenantId, settle(pipeline));
   try {
     const started = await gateway.startMessage({
       platform: 'console', room_id: room.room_id, tenantId, thread_id: step.thread_id,
@@ -433,44 +471,47 @@ async function startPipelineStep(app, tenantId, pipeline, index) {
       provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
       origin: 'pipeline', allowConcurrent: true,
     });
-    const fresh = await ws.get(tenantId, 'pipelines', pipeline.id);
-    if (fresh && fresh.steps[index].thread_id === step.thread_id && !fresh.steps[index].run_id) {
-      fresh.steps[index].run_id = started.run_id || null;
-      saved = await savePipeline(app, tenantId, fresh);
-    }
+    step.run_id = started.run_id || null;
   } catch (error) {
     Object.assign(step, { status: 'failed', error: surface(error?.message || error) });
-    saved = await savePipeline(app, tenantId, { ...pipeline, status: 'failed', current: index, finished_at: new Date().toISOString() });
+    await releaseGraphAgents(app, step.thread_id);
   }
-  return saved;
 }
-/** Fin d'une mission : l'enchaînement qui l'attendait passe à l'étape suivante, se bloque ou échoue. */
+/** Lance toutes les étapes prêtes (branches parallèles), puis enregistre l'état. À appeler sous verrou. */
+async function startReadySteps(app, tenantId, pipeline) {
+  const project = await workspaceStoreFor(app.kayrosContext).get(tenantId, 'projects', pipeline.project_id);
+  for (const step of readySteps(pipeline)) {
+    // Une branche en échec arrête le lancement des suivantes.
+    if (pipelineStatus(pipeline) === 'failed') break;
+    await startPipelineStep(app, tenantId, pipeline, project, step);
+  }
+  return savePipeline(app, tenantId, settle(pipeline));
+}
+/** Fin d'une mission : l'étape se termine ; les étapes devenues prêtes démarrent, ou l'enchaînement se bloque / attend un arbitrage / échoue. */
 export async function advancePipelines(app, kind, thread) {
   if (!thread?.thread_id || !['completed', 'failed'].includes(kind)) return null;
   const tenantId = thread.tenant_id || 'default';
   const ws = workspaceStoreFor(app.kayrosContext);
-  const candidate = (await ws.list(tenantId, 'pipelines')).find((p) => p.status === 'running' && p.steps.some((s) => s.thread_id === thread.thread_id));
+  const candidate = (await ws.list(tenantId, 'pipelines')).find((p) => p.steps.some((s) => s.thread_id === thread.thread_id && s.status === 'running'));
   if (!candidate) return null;
   return withPipelineLock(candidate.id, async () => {
     const pipeline = await ws.get(tenantId, 'pipelines', candidate.id);
-    const index = pipeline?.steps.findIndex((s) => s.thread_id === thread.thread_id) ?? -1;
-    if (index < 0 || pipeline.steps[index].status !== 'running') return pipeline;
-    const step = pipeline.steps[index];
+    const step = pipeline?.steps.find((s) => s.thread_id === thread.thread_id);
+    if (!step || step.status !== 'running') return pipeline;
     const at = new Date().toISOString();
+    step.finished_at = at;
     if (kind === 'failed') {
-      Object.assign(step, { status: 'failed', error: thread.error?.message || thread.error || 'mission en échec', finished_at: at });
-      return savePipeline(app, tenantId, { ...pipeline, status: 'failed', finished_at: at });
+      Object.assign(step, { status: 'failed', error: thread.error?.message || thread.error || 'mission en échec' });
+      return savePipeline(app, tenantId, settle(pipeline));
     }
     const project = await ws.get(tenantId, 'projects', pipeline.project_id);
     const outcome = stepOutcome(project?.graph, step.node_id, thread);
-    Object.assign(step, { verdict: outcome.verdict, rationale: outcome.rationale, gates: outcome.results, finished_at: at });
-    if (outcome.status === 'blocked') {
-      step.status = 'blocked';
-      return savePipeline(app, tenantId, { ...pipeline, status: 'blocked' });
-    }
-    step.status = 'completed';
-    if (index + 1 >= pipeline.steps.length) return savePipeline(app, tenantId, { ...pipeline, status: 'completed', finished_at: at });
-    return startPipelineStep(app, tenantId, pipeline, index + 1);
+    Object.assign(step, { verdict: outcome.verdict, rationale: outcome.rationale, gates: outcome.results });
+    if (outcome.status === 'blocked') step.status = 'blocked';
+    else if (pipeline.steps.some((x) => (x.deps || []).includes(step.node_id)) && needsApproval(project?.graph, step.node_id, pipeline)) step.status = 'awaiting_approval';
+    else step.status = 'completed';
+    if (pipeline.status === 'cancelled') return savePipeline(app, tenantId, settle(pipeline));
+    return startReadySteps(app, tenantId, pipeline);
   });
 }
 
@@ -483,6 +524,10 @@ export default async function consoleRoute(app) {
       let next = thread;
       if (kind === 'completed' && thread) next = await withGates(app, thread.tenant_id, thread);
       if (prior) await prior(kind, next);
+      // Composition temporaire du graphe : rétablie à la fin de la mission.
+      if (['completed', 'failed'].includes(kind) && thread?.thread_id) {
+        try { await releaseGraphAgents(app, thread.thread_id); } catch (error) { app.log?.warn?.({ err: error?.message }, 'composition du collectif'); }
+      }
       // Collectif suivant du graphe (après la diffusion de l'événement de cette mission).
       try { await advancePipelines(app, kind, next); } catch (error) { app.log?.warn?.({ err: error?.message }, 'enchaînement de collectifs'); }
     };
@@ -806,22 +851,27 @@ export default async function consoleRoute(app) {
     const baseContext = parsed.data.context || `Session de harness « ${room.name} » · collectif ${room.swarm_id}`;
     // Skills et sources de contexte rattachés au collectif (Bibliothèque).
     // Nœuds « agent » des graphes de projet reliés à ce collectif : composition appliquée avant la mission.
+    // Composition temporaire : rétablie à la fin de cette mission (fil pré-attribué).
+    const threadId = makeThreadId();
     for (const project of await workspaceStoreFor(app.kayrosContext).list(me.tenantId, 'projects')) {
       for (const node of (project.graph?.nodes || []).filter((n) => n.type === 'collectif' && n.config?.session_id === room.room_id)) {
-        await applyGraphAgents(app, me.tenantId, project.graph, node, me.email);
+        if (agentNodesFor(project.graph, node.id).add.length || agentNodesFor(project.graph, node.id).remove.length) {
+          await acquireGraphAgents(app, me.tenantId, project.graph, node, me.email, threadId);
+        }
       }
     }
     const attached = await collectiveAttachmentsContext(app, me.tenantId, room.room_id);
     const context = attached ? `${baseContext}\n\n${attached}`.slice(0, 24000) : baseContext;
     const profile = runProfile(app, parsed.data.profile);
     const input = {
-      platform: 'console', room_id: room.room_id, tenantId: me.tenantId,
+      platform: 'console', room_id: room.room_id, tenantId: me.tenantId, thread_id: threadId,
       user_id: me.sub, by: me.email, explicit: true, text: question, context,
       provider: profile.provider, model: profile.model || undefined, profile: profile.effective_profile,
     };
     if (waitRequested(req)) {
       try {
-        const result = await app.kayrosContext.hybridGateway.handleMessage(input);
+        let result;
+        try { result = await app.kayrosContext.hybridGateway.handleMessage(input); } finally { await releaseGraphAgents(app, threadId); }
         // `llm` expose le provider effectif des agents : un repli mock est visible (ENF-09).
         const thread = result.thread ? await withGates(app, me.tenantId, result.thread) : result.thread;
         return { session_id: room.room_id, run: result.run, thread, summary: result.summary, llm: result.run?.llm || null };
@@ -836,12 +886,13 @@ export default async function consoleRoute(app) {
         poll: `/v1/console/threads/${encodeURIComponent(execution.thread_id)}`,
       });
     } catch (error) {
+      await releaseGraphAgents(app, threadId);
       return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: surface(error.message) });
     }
   });
 
   // --- Enchaînement de collectifs (graphe de projet) ----------------------
-  const pipelineSchema = z.object({ question: z.string().trim().min(3).max(4000), profile: z.enum(EXECUTION_PROFILES).optional() });
+  const pipelineSchema = z.object({ question: z.string().trim().min(3).max(4000), profile: z.enum(EXECUTION_PROFILES).optional(), pause_between: z.boolean().optional() });
   app.post('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'run')) return;
     const parsed = pipelineSchema.safeParse(req.body || {});
@@ -854,15 +905,15 @@ export default async function consoleRoute(app) {
     for (const node of nodes) {
       if (!await accessibleRoom(app, me, node.config.session_id)) return reply.code(404).send({ error: `session introuvable pour le collectif « ${node.label || node.id} »` });
     }
-    if ((await ws.list(me.tenantId, 'pipelines', { project_id: project.id })).some((p) => p.status === 'running')) {
+    if ((await ws.list(me.tenantId, 'pipelines', { project_id: project.id })).some((p) => !['completed', 'failed', 'cancelled'].includes(p.status))) {
       return reply.code(409).send({ error: 'un enchaînement est déjà en cours sur ce projet', code: 'pipeline_running' });
     }
     const created = await ws.create(me.tenantId, 'pipelines', {
       project_id: project.id, question: parsed.data.question, profile: parsed.data.profile || null,
-      status: 'running', current: 0, created_sub: me.sub,
-      steps: nodes.map((n) => ({ node_id: n.id, label: n.label || '', session_id: n.config.session_id, status: 'pending', thread_id: null, run_id: null, verdict: null })),
+      status: 'running', current: 0, created_sub: me.sub, pause_between: parsed.data.pause_between === true,
+      steps: nodes.map((n) => ({ node_id: n.id, label: n.label || '', session_id: n.config.session_id, deps: stepDeps(project.graph, n.id), status: 'pending', thread_id: null, run_id: null, verdict: null })),
     }, { by: me.email });
-    const pipeline = await withPipelineLock(created.id, () => startPipelineStep(app, me.tenantId, created, 0));
+    const pipeline = await withPipelineLock(created.id, () => startReadySteps(app, me.tenantId, created));
     return reply.code(202).send({ pipeline });
   });
   app.get('/v1/console/projects/:projectId/pipelines', async (req, reply) => {
@@ -884,11 +935,27 @@ export default async function consoleRoute(app) {
     const result = await withPipelineLock(req.params.pipelineId, async () => {
       const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
       if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
-      const index = pipeline.steps.findIndex((s) => s.status === 'blocked');
-      if (pipeline.status !== 'blocked' || index < 0) return { code: 409, body: { error: 'aucune porte bloquée sur cet enchaînement', code: 'not_blocked' } };
-      Object.assign(pipeline.steps[index], { status: 'overridden', override: { by: me.email, justification, at: new Date().toISOString() } });
-      if (index + 1 >= pipeline.steps.length) return { code: 200, body: { pipeline: await savePipeline(app, me.tenantId, { ...pipeline, status: 'completed', finished_at: new Date().toISOString() }) } };
-      return { code: 200, body: { pipeline: await startPipelineStep(app, me.tenantId, pipeline, index + 1) } };
+      const blocked = pipeline.steps.filter((s) => s.status === 'blocked');
+      if (pipeline.status === 'cancelled' || !blocked.length) return { code: 409, body: { error: 'aucune porte bloquée sur cet enchaînement', code: 'not_blocked' } };
+      const at = new Date().toISOString();
+      for (const step of blocked) Object.assign(step, { status: 'overridden', override: { by: me.email, justification, at } });
+      return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
+    });
+    return reply.code(result.code).send(result.body);
+  });
+  // Pause d'arbitrage : une porte passée attend une validation humaine avant les collectifs suivants.
+  app.post('/v1/console/pipelines/:pipelineId/approve', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;
+    const comment = String(req.body?.comment || '').trim().slice(0, 2000);
+    const ws = workspaceStoreFor(app.kayrosContext);
+    const result = await withPipelineLock(req.params.pipelineId, async () => {
+      const pipeline = await ws.get(me.tenantId, 'pipelines', req.params.pipelineId);
+      if (!pipeline) return { code: 404, body: { error: 'enchaînement introuvable' } };
+      const waiting = pipeline.steps.filter((s) => s.status === 'awaiting_approval');
+      if (pipeline.status === 'cancelled' || !waiting.length) return { code: 409, body: { error: 'aucune étape en attente de validation', code: 'not_awaiting' } };
+      const at = new Date().toISOString();
+      for (const step of waiting) Object.assign(step, { status: 'approved', approval: { by: me.email, comment: comment || null, at } });
+      return { code: 200, body: { pipeline: await startReadySteps(app, me.tenantId, pipeline) } };
     });
     return reply.code(result.code).send(result.body);
   });

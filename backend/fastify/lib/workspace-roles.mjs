@@ -49,3 +49,13 @@ export async function linkedChatRole(ctx, platformUserId) {
   const { role } = await memberRole(ctx, { tenantId, email, accountRole: user?.role || link.role });
   return { tenantId, email, role, permissions: PERMISSIONS[role] || [] };
 }
+
+/**
+ * Rôle d'un compte de chat NON lié. Par défaut `lecteur` : sans liaison à un
+ * compte KayrosLab, pas de mission (aucun contournement des rôles).
+ * KAYROS_CHAT_UNLINKED_ROLE=contributeur rouvre l'accès au niveau du canal.
+ */
+export function unlinkedChatRole(env = process.env) {
+  const role = String(env.KAYROS_CHAT_UNLINKED_ROLE || 'lecteur').trim().toLowerCase();
+  return PERMISSIONS[role] && !['admin', 'comex'].includes(role) ? role : 'lecteur';
+}

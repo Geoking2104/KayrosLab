@@ -28,7 +28,7 @@ const nodeSchema = z.object({
   config: z.object({
     session_id: z.string().max(120).optional(), agent_id: z.string().max(120).optional(),
     threshold: z.enum(['majority', 'unanimous', 'veto_csuite']).optional(), min_go: z.number().min(0).max(100).optional(),
-    veto: z.boolean().optional(), strict: z.boolean().optional(), exclude: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
+    veto: z.boolean().optional(), strict: z.boolean().optional(), exclude: z.boolean().optional(), pause: z.boolean().optional(), role: z.enum(STAKEHOLDER_ROLES).optional(),
   }).optional().default({}),
   // Position libre choisie par glisser-déposer (sinon mise en page automatique).
   x: z.number().min(0).max(10000).optional(), y: z.number().min(0).max(10000).optional(),
