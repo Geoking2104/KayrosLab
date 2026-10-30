@@ -66,8 +66,9 @@ describe("PreLaunchBriefs", () => {
     render(<PreLaunchBriefs projectId="prj_1" />);
     await screen.findByText("Brief validé");
     fireEvent.click(await screen.findByText("Reformuler à nouveau"));
-    await waitFor(() => expect(calls.some((c) => c.method === "PATCH" && c.body.content === "Ma compréhension v2" && c.body.status === "draft")).toBe(true));
-    fireEvent.click(screen.getByText("Valider"));
+    await screen.findByTestId("brief-diff");
+    fireEvent.click(screen.getByText("Valider la nouvelle version"));
+    await waitFor(() => expect(calls.some((c) => c.method === "PATCH" && c.body.content === "Ma compréhension v2" && c.body.status === "validated")).toBe(true));
     await waitFor(() => expect(screen.queryByTestId("pending-brief")).toBeNull());
     expect(calls.some((c) => c.method === "PATCH" && c.body.status === "validated")).toBe(true);
   });

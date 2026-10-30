@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
-import type { ContextSource, Skill } from "@/lib/console/live";
+import type { ContextSource, Skill, SkillTag } from "@/lib/console/live";
 import { api } from "@/lib/console/api";
 import { Button, Empty, Field, Panel, Section, TextArea, controlClass } from "./ui";
 import { formatWhen } from "@/lib/console/model";
@@ -10,9 +10,14 @@ import { ContextComposer, StatusBadge, type ComposerValue } from "./ContextCompo
 import { t, tc } from "@/lib/i18n";
 
 type Tab = "skills" | "contexts";
-type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[]; company_id: string; project_id: string; node_id: string; mode: "" | "rfp" | "interne"; raw_input: string; structured: Record<string, string>; status: "draft" | "validated" };
+type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[]; company_id: string; project_id: string; node_id: string; mode: "" | "rfp" | "interne"; raw_input: string; structured: Record<string, string>; status: "draft" | "validated"; tags: SkillTag[] };
 
-const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [], company_id: "", project_id: "", node_id: "", mode: "", raw_input: "", structured: {}, status: "validated" };
+const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [], company_id: "", project_id: "", node_id: "", mode: "", raw_input: "", structured: {}, status: "validated", tags: [] };
+
+const SKILL_TEMPLATES: Record<SkillTag, string> = {
+  rfp: "Objectif : répondre à un appel d’offres.\nEntrées : cahier des charges, critères d’évaluation, échéance.\nÉtapes : 1. extraire exigences et critères ; 2. vérifier l’éligibilité ; 3. rédiger la réponse point par point ; 4. lister risques et pièces manquantes.\nSortie : réponse structurée + matrice de conformité.",
+  interne: "Objectif : traiter une demande interne.\nEntrées : demandeur, besoin, contraintes, délai.\nÉtapes : 1. reformuler le besoin ; 2. identifier les parties prenantes ; 3. proposer un plan d’action ; 4. signaler les décisions à prendre.\nSortie : note de synthèse actionnable.",
+};
 const KIND_LABEL: Record<ContextSource["kind"], string> = {
   get note() { return t("Note"); },
   get document() { return t("Document"); },
@@ -27,6 +32,7 @@ export function Bibliotheque() {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState("");
   const [skillBusy, setSkillBusy] = useState(false);
+  const [tagFilter, setTagFilter] = useState<SkillTag | "">("");
 
   if (!live) {
     return (
@@ -38,11 +44,12 @@ export function Bibliotheque() {
     );
   }
 
-  const items: (Skill | ContextSource)[] = tab === "skills" ? workspace.skills : workspace.contexts;
+  const items: (Skill | ContextSource)[] = tab === "skills" ? workspace.skills.filter((k) => !tagFilter || (k.tags ?? []).includes(tagFilter)) : workspace.contexts;
   const toggle = (list: string[], id: string, on: boolean) => (on ? [...list, id] : list.filter((x) => x !== id));
   const edit = (item: Skill | ContextSource) => setDraft({
     ...EMPTY, ...item, id: item.id,
     tools: "tools" in item ? item.tools.join("\n") : "",
+    tags: "tools" in item ? item.tags ?? [] : [],
   } as Draft);
 
   async function save(override?: Partial<Draft>) {
@@ -52,7 +59,7 @@ export function Bibliotheque() {
     const common = { name: d.name.trim(), agent_ids: d.agent_ids, session_ids: d.session_ids };
     const guided = d.mode ? { mode: d.mode, raw_input: d.raw_input, structured: d.structured } : {};
     const body = tab === "skills"
-      ? { ...common, description: d.description.trim(), instructions: d.instructions.trim(), tools: d.tools.split("\n").map((x) => x.trim()).filter(Boolean) }
+      ? { ...common, description: d.description.trim(), instructions: d.instructions.trim(), tools: d.tools.split("\n").map((x) => x.trim()).filter(Boolean), tags: d.tags }
       : { ...common, ...guided, status: d.mode ? d.status : "validated", kind: d.kind, content: d.content, url: d.url.trim(), company_id: d.company_id, project_id: d.project_id, node_id: d.project_id ? d.node_id : "" };
     const res = await saveItem(tab, draft.id, body);
     if (!res.ok) setError(res.reason ?? t("Refusé")); else { setDraft(null); setError(""); }
@@ -92,6 +99,15 @@ export function Bibliotheque() {
               <>
                 <Field label={t("Description")}><input className={controlClass} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field>
                 <div><Button variant="secondary" onClick={rephraseSkill} disabled={skillBusy || !(draft.description.trim() || draft.instructions.trim())}>{skillBusy ? t("Reformulation…") : t("Reformuler l’objectif du skill")}</Button></div>
+                <fieldset className="flex flex-wrap items-center gap-3" data-testid="skill-tags">
+                  <legend className="text-sm text-ink-soft">{t("Usage")}</legend>
+                  {(["rfp", "interne"] as SkillTag[]).map((tag) => (
+                    <span key={tag} className="flex items-center gap-2 text-sm">
+                      <label className="flex items-center gap-1"><input type="checkbox" className="size-4" checked={draft.tags.includes(tag)} onChange={(e) => setDraft({ ...draft, tags: toggle(draft.tags, tag, e.target.checked) as SkillTag[] })} />{tag === "rfp" ? t("RFP") : t("Interne")}</label>
+                      <Button variant="ghost" onClick={() => setDraft({ ...draft, tags: draft.tags.includes(tag) ? draft.tags : [...draft.tags, tag], instructions: draft.instructions.trim() ? draft.instructions : SKILL_TEMPLATES[tag] })}>{tag === "rfp" ? t("Modèle RFP") : t("Modèle interne")}</Button>
+                    </span>
+                  ))}
+                </fieldset>
                 <Field label={t("Instructions")} hint={t("Ce que l’agent sait faire avec ce skill. Injecté dans son contexte.")}><TextArea value={draft.instructions} onChange={(e) => setDraft({ ...draft, instructions: e.target.value })} /></Field>
                 <Field label={t("Outils")} hint={t("Un identifiant d’outil par ligne.")}><TextArea value={draft.tools} onChange={(e) => setDraft({ ...draft, tools: e.target.value })} /></Field>
               </>
@@ -174,6 +190,13 @@ export function Bibliotheque() {
         </Panel>
       ) : null}
 
+      {tab === "skills" && workspace.skills.length ? (
+        <div className="flex gap-2" data-testid="skill-filter">
+          {([["", t("Tous")], ["rfp", t("RFP")], ["interne", t("Interne")]] as [SkillTag | "", string][]).map(([v, label]) => (
+            <Button key={v || "all"} variant={tagFilter === v ? "primary" : "ghost"} onClick={() => setTagFilter(v)}>{label}</Button>
+          ))}
+        </div>
+      ) : null}
       {!items.length && !draft ? (
         <Empty title={tab === "skills" ? t("Aucun skill") : t("Aucune source de contexte")} body={t("Ajoutez-en un, puis rattachez-le à un agent ou à un collectif.")} />
       ) : null}
@@ -181,6 +204,7 @@ export function Bibliotheque() {
         <Panel key={item.id}>
           <div className="flex flex-wrap items-baseline gap-2">
             <h3 className="text-sm font-medium">{item.name}</h3>
+            {"instructions" in item ? (item.tags ?? []).map((tag) => <span key={tag} className="rounded bg-accent-soft px-1.5 text-[11px] font-semibold" data-testid="skill-tag">{tag === "rfp" ? t("RFP") : t("Interne")}</span>) : null}
             {"instructions" in item ? <span className="rounded bg-paper-2 px-1.5 text-[11px] font-semibold" data-testid="skill-version">v{item.version ?? 1}</span> : null}
             {"kind" in item && (item.node_id || item.project_id || item.company_id) ? (
               <span className="rounded bg-accent-soft px-1.5 text-[11px]">{item.node_id ? t("Nœud {{v}}", { v: item.node_id }) : item.project_id ? t("Projet : {{v}}", { v: workspace.projects.find((p) => p.id === item.project_id)?.name ?? item.project_id }) : t("Société : {{v}}", { v: workspace.companies.find((c) => c.id === item.company_id)?.name ?? item.company_id })}</span>

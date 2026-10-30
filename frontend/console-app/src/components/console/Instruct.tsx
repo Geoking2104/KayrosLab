@@ -1,3 +1,4 @@
+import { SessionBriefs } from "./Briefs";
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
 import { PROFILES, USE_CASES, type Profile, type UseCase } from "@/lib/console/model";
@@ -9,7 +10,7 @@ import { t, tc, tk } from "@/lib/i18n";
 const EVIDENCE_TYPES = [tk("RFP / exigences"), "Proposition", "Contrat", tk("Sécurité"), "Finance", "Notes", "Autre"];
 
 export function Instruct() {
-  const { state, startMission } = useConsole();
+  const { state, startMission, live } = useConsole();
   const [step, setStep] = useState(0);
   const [question, setQuestion] = useState(t(
     "Faut-il accorder 90 jours d’essai au cabinet Nord, sans remise, avec un point de sortie écrit ?"
@@ -125,6 +126,7 @@ export function Instruct() {
               ))}
             </div>
           )}
+          {collective && live ? <div className="mt-4"><SessionBriefs sessionId={collective.id} /></div> : null}
           <div className="mt-4 flex flex-wrap gap-2">
             <Button variant="secondary" onClick={() => setStep(0)}>{t("Retour")}</Button>
             <Button onClick={() => setStep(2)} disabled={!collective}>{t("Continuer")}</Button>

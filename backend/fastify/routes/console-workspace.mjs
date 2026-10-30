@@ -64,7 +64,9 @@ const attachSchema = { agent_ids: ids.optional().default([]), session_ids: ids.o
 const skillSchema = z.object({
   name: z.string().min(1).max(160), description: z.string().max(2000).optional().default(''),
   instructions: z.string().max(8000).optional().default(''),
-  tools: z.array(z.string().min(1).max(120)).max(50).optional().default([]), ...attachSchema,
+  tools: z.array(z.string().min(1).max(120)).max(50).optional().default([]),
+  // Étiquettes de cas d'usage : RFP / AO ou projet interne (filtre + modèles côté console).
+  tags: z.array(z.enum(['rfp', 'interne'])).max(2).optional().default([]), ...attachSchema,
 });
 const contextSchema = z.object({
   name: z.string().min(1).max(200), kind: z.enum(['note', 'document', 'url', 'policy']).optional().default('note'),
@@ -95,6 +97,51 @@ const memberSchema = z.object({
 const SCHEMAS = { companies: companySchema, projects: projectSchema, skills: skillSchema, contexts: contextSchema, members: memberSchema };
 const LABEL = { companies: 'société', projects: 'projet', skills: 'skill', contexts: 'source de contexte', members: 'membre' };
 const SKILL_VERSIONED = ['name', 'description', 'instructions', 'tools'];
+const CONTEXT_TRIGGERS = ['content', 'url', 'company_id', 'project_id', 'node_id', 'session_ids', 'agent_ids'];
+const SKILL_TRIGGERS = [...SKILL_VERSIONED, 'tags', 'session_ids', 'agent_ids'];
+const PROJECT_TRIGGERS = ['name', 'goal', 'company_id', 'session_ids'];
+const overlap = (a = [], b = []) => a.some((x) => b.includes(x));
+
+/**
+ * Retour en brouillon des sources guidées validées dont le contexte environnant a changé :
+ * source de niveau société/projet (ou de collectif), skill du même collectif/agent, fiche projet.
+ * Les écritures passent par le store (pas de réaction en chaîne). Renvoie les ids invalidés.
+ */
+export async function invalidateDependents(app, tenantId, { kind, before = null, after = null, by = null }) {
+  const ref = after || before; if (!ref) return [];
+  const ws = store(app);
+  const all = await ws.list(tenantId, 'contexts');
+  const projects = kind === 'contexts' && ref.company_id && !ref.project_id ? (await ws.list(tenantId, 'projects')).filter((p) => p.company_id === ref.company_id).map((p) => p.id) : [];
+  const hit = (c) => {
+    if (c.id === ref.id || !c.mode || c.status !== 'validated') return false;
+    if (kind === 'contexts') {
+      if (!ref.project_id && ref.company_id && (c.company_id === ref.company_id || projects.includes(c.project_id))) return true;
+      if (ref.project_id && !ref.node_id && c.project_id === ref.project_id) return true;
+      return overlap(ref.session_ids, c.session_ids);
+    }
+    if (kind === 'skills') return overlap(ref.session_ids, c.session_ids) || overlap(ref.agent_ids, c.agent_ids);
+    if (kind === 'projects') return c.project_id === ref.id;
+    return false;
+  };
+  const reason = { contexts: `source « ${ref.name} » modifiée`, skills: `skill « ${ref.name} » modifié`, projects: `projet « ${ref.name} » modifié` }[kind];
+  const out = [];
+  for (const c of all.filter(hit)) {
+    await ws.update(tenantId, 'contexts', c.id, { status: 'draft', invalidated_reason: reason, invalidated_at: new Date().toISOString(), invalidated_by: by });
+    out.push(c.id);
+  }
+  return out;
+}
+const changed = (before, patch, keys) => keys.some((k) => k in patch && JSON.stringify(patch[k]) !== JSON.stringify(before?.[k]));
+async function afterWrite(app, me, kind, before, after, patch = null) {
+  if (!['contexts', 'skills', 'projects'].includes(kind)) return [];
+  if (patch) {
+    const keys = { contexts: CONTEXT_TRIGGERS, skills: SKILL_TRIGGERS, projects: PROJECT_TRIGGERS }[kind];
+    if (!changed(before, patch, keys)) return [];
+  }
+  // Un brouillon n'est pas injecté : sa modification ne périme rien.
+  if (kind === 'contexts' && !(before && isActiveContext(before)) && !(after && isActiveContext(after))) return [];
+  return invalidateDependents(app, me.tenantId, { kind, before, after, by: me.email });
+}
 export { PERMISSIONS };
 /** Fiche membre sans l'empreinte du jeton d'invitation. */
 export function publicMember(member) {
@@ -266,7 +313,8 @@ export default async function consoleWorkspaceRoutes(app) {
       const fields = kind === 'skills' ? { ...parsed.data, version: 1, versions: [] } : parsed.data;
       const item = await store(app).create(me.tenantId, kind, fields, { by: me.email });
       if (item.agent_ids?.length) await syncAgents(app, me.tenantId, item.agent_ids, me.email);
-      return reply.code(201).send({ item });
+      const invalidated = await afterWrite(app, me, kind, null, item);
+      return reply.code(201).send({ item, invalidated });
     });
     app.patch(`${base}/:id`, async (req, reply) => {
       const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply, kind === 'members' ? 'members' : 'manage')) return;
@@ -286,11 +334,13 @@ export default async function consoleWorkspaceRoutes(app) {
         patch.updated_by = me.email;
       }
       if (kind === 'contexts' && !('status' in patch) && before.mode && 'raw_input' in patch && patch.raw_input !== before.raw_input) patch.status = 'draft';
-      if (kind === 'contexts' && patch.status === 'validated' && before.status !== 'validated') { patch.validated_by = me.email; patch.validated_at = new Date().toISOString(); }
+      if (kind === 'contexts' && patch.status === 'validated' && before.status !== 'validated') { patch.validated_by = me.email; patch.validated_at = new Date().toISOString(); patch.invalidated_reason = ''; patch.validated_content = patch.content ?? before.content; }
+      if (kind === 'contexts' && patch.status === 'validated' && 'content' in patch) patch.validated_content = patch.content;
       const item = await store(app).update(me.tenantId, kind, req.params.id, patch);
       const touched = [...(before.agent_ids || []), ...(item.agent_ids || [])];
       if (touched.length) await syncAgents(app, me.tenantId, touched, me.email);
-      return { item };
+      const invalidated = await afterWrite(app, me, kind, before, item, patch);
+      return { item, invalidated };
     });
     app.delete(`${base}/:id`, async (req, reply) => {
       const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply, kind === 'members' ? 'members' : 'manage')) return;
@@ -304,7 +354,8 @@ export default async function consoleWorkspaceRoutes(app) {
       }
       await store(app).remove(me.tenantId, kind, req.params.id);
       if (before.agent_ids?.length) await syncAgents(app, me.tenantId, before.agent_ids, me.email);
-      return { ok: true };
+      const invalidated = await afterWrite(app, me, kind, before, null);
+      return { ok: true, invalidated };
     });
   }
 
@@ -388,6 +439,33 @@ export default async function consoleWorkspaceRoutes(app) {
     if (!parsed.success) return reply.code(400).send({ error: 'reformulation invalide', issues: parsed.error.issues });
     if (!parsed.data.raw.trim() && !Object.values(parsed.data.fields).some((v) => String(v).trim())) return reply.code(400).send({ error: 'saisie vide' });
     return rephraseContext(app.kayrosContext.llm || app.kayrosContext.engine?.swarm?.llm, parsed.data.type, parsed.data);
+  });
+  // Invalidation explicite : la source repasse en brouillon (n'est plus injectée).
+  app.post('/v1/console/contexts/:id/invalidate', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await allowed(app, me, reply)) return;
+    const before = await store(app).get(me.tenantId, 'contexts', req.params.id);
+    if (!before) return reply.code(404).send({ error: 'source de contexte introuvable' });
+    const reason = String(req.body?.reason || 'invalidation manuelle').slice(0, 300);
+    const item = await store(app).update(me.tenantId, 'contexts', before.id, { status: 'draft', invalidated_reason: reason, invalidated_at: new Date().toISOString(), invalidated_by: me.email });
+    if (item.agent_ids?.length) await syncAgents(app, me.tenantId, item.agent_ids, me.email);
+    return { item };
+  });
+  // Briefs d'un collectif (écran Instruct) : sources validées injectées + brouillons non injectés.
+  app.get('/v1/console/sessions/:id/briefs', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const sid = req.params.id;
+    const ws = store(app);
+    const projects = (await ws.list(me.tenantId, 'projects')).filter((p) => (p.session_ids || []).includes(sid));
+    const seen = new Map(); const pending = new Map();
+    for (const project of projects) {
+      const { layers, pending: pend } = await cascadeContext(app, me.tenantId, project);
+      for (const l of layers) for (const c of l.items) seen.set(c.id, { ...c, level: l.level, project: project.name });
+      for (const c of pend) pending.set(c.id, c);
+    }
+    for (const c of (await ws.list(me.tenantId, 'contexts')).filter((x) => (x.session_ids || []).includes(sid))) {
+      if (isActiveContext(c)) seen.set(c.id, { ...c, level: 'collectif' }); else pending.set(c.id, c);
+    }
+    return { validated: [...seen.values()], pending: [...pending.values()] };
   });
   app.get('/v1/console/context/modes', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;

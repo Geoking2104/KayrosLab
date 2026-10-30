@@ -10,7 +10,7 @@ import { ProjectGraph, defaultSpec } from "./ProjectGraph";
 import { GraphEditor, moveNode } from "./GraphEditor";
 import { go } from "./Shell";
 import { t, tc } from "@/lib/i18n";
-import { StatusBadge } from "./ContextComposer";
+import { BriefsPanel } from "./Briefs";
 
 export { STAKEHOLDER_ROLES };
 
@@ -155,52 +155,12 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
   );
 }
 
-/** Avant le lancement : briefs validés injectés, brouillons non injectés à reformuler/valider. */
+/** Avant le lancement d’un enchaînement : briefs du projet (cascade). */
 export function PreLaunchBriefs({ projectId }: { projectId: string }) {
-  const { refreshLive } = useConsole();
-  const [validated, setValidated] = useState<any[]>([]);
-  const [pending, setPending] = useState<any[]>([]);
-  const [busy, setBusy] = useState("");
-  const [error, setError] = useState("");
-  const load = useCallback(() => api.projectContext(projectId).then((r) => {
-    setValidated(r.layers.flatMap((l) => l.items.map((c: any) => ({ ...c, level: l.level }))));
-    setPending(r.pending ?? []);
-  }).catch(() => { setValidated([]); setPending([]); }), [projectId]);
-  useEffect(() => { void load(); }, [load]);
-  const act = async (id: string, fn: () => Promise<unknown>) => {
-    setBusy(id); setError("");
-    try { await fn(); await load(); await refreshLive?.(); } catch (e) { setError((e as Error).message); } finally { setBusy(""); }
-  };
-  const rephrase = (c: any) => act(c.id, async () => {
-    const r = await api.rephraseContext({ type: c.mode === "interne" ? "interne" : "rfp", raw: c.raw_input || c.content, fields: c.structured || {} });
-    if (r.source !== "model") throw new Error(t("Reformulation indisponible : votre brouillon est conservé, relisez-le avant de valider."));
-    await api.patchContext(c.id, { content: r.brief, structured: r.structured, status: "draft" });
-  });
-  if (!validated.length && !pending.length) return null;
-  return (
-    <div className="mb-3 rounded-lg border border-line p-3" data-testid="prelaunch-briefs">
-      <p className="text-sm font-medium">{t("Briefs transmis aux collectifs")}</p>
-      <ul className="mt-1 grid gap-1 text-sm">
-        {validated.map((c) => <li key={c.id} className="flex items-baseline gap-2"><StatusBadge status="validated" /><span className="font-medium">{c.name}</span><span className="truncate text-ink-soft" title={c.content}>{String(c.content || "").slice(0, 160)}</span></li>)}
-      </ul>
-      {pending.length ? (
-        <>
-          <p className="mt-2 text-xs text-hold">{t("Non transmis tant qu’ils ne sont pas validés :")}</p>
-          <ul className="mt-1 grid gap-2 text-sm">
-            {pending.map((c) => (
-              <li key={c.id} className="flex flex-wrap items-center gap-2" data-testid="pending-brief">
-                <StatusBadge status="draft" /><span className="font-medium">{c.name}</span>
-                <span className="min-w-0 flex-1 truncate text-ink-soft" title={c.content}>{String(c.content || c.raw_input || "").slice(0, 160)}</span>
-                <Button variant="secondary" disabled={busy === c.id} onClick={() => void rephrase(c)}>{t("Reformuler à nouveau")}</Button>
-                <Button disabled={busy === c.id || !String(c.content || "").trim()} onClick={() => void act(c.id, () => api.patchContext(c.id, { status: "validated" }))}>{t("Valider")}</Button>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : null}
-      {error ? <p className="mt-2 text-sm text-stop" role="alert">{error}</p> : null}
-    </div>
-  );
+  const load = useCallback(() => api.projectContext(projectId).then((r) => ({
+    validated: r.layers.flatMap((l) => l.items.map((c: any) => ({ ...c, level: l.level }))), pending: r.pending ?? [],
+  })), [projectId]);
+  return <BriefsPanel load={load} />;
 }
 
 const STEP: Record<PipelineStepStatus, () => string> = {
