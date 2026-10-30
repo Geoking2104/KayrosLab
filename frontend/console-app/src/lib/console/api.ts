@@ -99,6 +99,8 @@ export type EnrichResult = {
   confidence: PersonaConfidence;
 };
 
+export interface RephraseResult { type: "rfp" | "interne" | "skill"; source: "model" | "draft"; structured: Record<string, string>; brief: string; missing: string[]; questions: string[]; error?: string }
+
 export const api = {
   login: (email: string, password: string) => call<{ token: string; user: LiveUser }>("/v1/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
   me: () => call<{ user: LiveUser }>("/v1/auth/me"),
@@ -136,7 +138,11 @@ export const api = {
   retryNotifications: (id: string) => call<{ notifications: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/notifications/retry`, { method: "POST", body: "{}" }),
   memberMe: () => call<{ email: string; role: string; permissions: string[]; member: any }>("/v1/console/members/me"),
   restoreSkill: (id: string, version: number) => call<{ item: any }>(`/v1/console/skills/${encodeURIComponent(id)}/restore`, { method: "POST", body: JSON.stringify({ version }) }),
-  projectContext: (id: string, nodeId = "") => call<{ layers: { level: "societe" | "projet" | "noeud"; items: any[] }[]; text: string }>(`/v1/console/projects/${encodeURIComponent(id)}/context${nodeId ? `?node_id=${encodeURIComponent(nodeId)}` : ""}`),
+  rephraseContext: (body: { type: "rfp" | "interne" | "skill"; raw?: string; fields?: Record<string, string> }) => call<RephraseResult>("/v1/console/context/rephrase", { method: "POST", body: JSON.stringify(body) }),
+  invalidateContext: (id: string, reason = "") => call<{ item: any }>(`/v1/console/contexts/${encodeURIComponent(id)}/invalidate`, { method: "POST", body: JSON.stringify({ reason }) }),
+  sessionBriefs: (id: string) => call<{ validated: any[]; pending: any[] }>(`/v1/console/sessions/${encodeURIComponent(id)}/briefs`),
+  patchContext: (id: string, patch: Record<string, unknown>) => call<{ item: any }>(`/v1/console/contexts/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(patch) }),
+  projectContext: (id: string, nodeId = "") => call<{ layers: { level: "societe" | "projet" | "noeud"; items: any[] }[]; text: string; pending?: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/context${nodeId ? `?node_id=${encodeURIComponent(nodeId)}` : ""}`),
   projectNotifications: (id: string) => call<{ notifications: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/notifications`),
   notifyProject: (id: string, threadId?: string) => call<{ notifications: any[] }>(`/v1/console/projects/${encodeURIComponent(id)}/notify`, { method: "POST", body: JSON.stringify({ thread_id: threadId }) }),
   dashboard: (companyId?: string) => call<any>(`/v1/console/dashboard${companyId ? `?company_id=${encodeURIComponent(companyId)}` : ""}`),

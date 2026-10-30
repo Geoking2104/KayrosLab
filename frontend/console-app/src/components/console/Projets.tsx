@@ -10,6 +10,7 @@ import { ProjectGraph, defaultSpec } from "./ProjectGraph";
 import { GraphEditor, moveNode } from "./GraphEditor";
 import { go } from "./Shell";
 import { t, tc } from "@/lib/i18n";
+import { BriefsPanel } from "./Briefs";
 
 export { STAKEHOLDER_ROLES };
 
@@ -154,6 +155,14 @@ function ContextCascade({ project, nodeId }: { project: ProjectView; nodeId: str
   );
 }
 
+/** Avant le lancement d’un enchaînement : briefs du projet (cascade). */
+export function PreLaunchBriefs({ projectId }: { projectId: string }) {
+  const load = useCallback(() => api.projectContext(projectId).then((r) => ({
+    validated: r.layers.flatMap((l) => l.items.map((c: any) => ({ ...c, level: l.level }))), pending: r.pending ?? [],
+  })), [projectId]);
+  return <BriefsPanel load={load} />;
+}
+
 const STEP: Record<PipelineStepStatus, () => string> = {
   pending: () => t("en attente"), running: () => t("en cours"), completed: () => t("terminé"),
   blocked: () => t("porte bloquée"), overridden: () => t("porte levée"), failed: () => t("échec"),
@@ -206,6 +215,7 @@ function Pipelines({ project, canRun, canArbitrate }: { project: ProjectView; ca
   return (
     <Section id="projet-enchainement" title={t("Enchaînement des collectifs")} summary={t("{{n}} collectifs liés", { n: steps })}>
       <p className="mb-2 text-xs text-muted">{t("Chaque collectif du graphe traite la question dans l’ordre des liens ; les branches parallèles tournent en même temps et se rejoignent sur le collectif suivant, qui reçoit tous leurs verdicts. Une porte bloquée arrête l’enchaînement jusqu’à un arbitrage.")}</p>
+      {canRun ? <PreLaunchBriefs projectId={project.id} /> : null}
       {canRun ? (
         <form className="mb-3 flex flex-wrap gap-2" onSubmit={(e) => { e.preventDefault(); void act(async () => { await api.startPipeline(project.id, { question, pause_between: pause }); setQuestion(""); }); }}>
           <input aria-label={t("Question de l’enchaînement")} className={`${controlClass} min-w-64 flex-1`} value={question} onChange={(e) => setQuestion(e.target.value)} placeholder={t("Question soumise aux collectifs")} />

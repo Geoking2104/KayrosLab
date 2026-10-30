@@ -31,10 +31,14 @@ export interface GraphSpecNode {
 }
 export interface GraphSpec { nodes: GraphSpecNode[]; edges: { from: string; to: string }[] }
 export interface SkillVersion { version: number; at?: string; by?: string; name: string; description: string; instructions: string; tools: string[] }
-export interface Skill { id: string; name: string; description: string; instructions: string; tools: string[]; agent_ids: string[]; session_ids: string[]; version?: number; versions?: SkillVersion[] }
+export interface Skill { id: string; name: string; description: string; instructions: string; tools: string[]; agent_ids: string[]; session_ids: string[]; version?: number; versions?: SkillVersion[]; tags?: SkillTag[] }
+export type SkillTag = "rfp" | "interne";
 export interface ContextSource {
   id: string; name: string; kind: "note" | "document" | "url" | "policy"; content: string; url: string; agent_ids: string[]; session_ids: string[];
   company_id?: string; project_id?: string; node_id?: string;
+  /** Saisie guidée : seule une source « validated » (ou sans statut) alimente les agents. */
+  status?: "draft" | "validated"; mode?: "" | "rfp" | "interne"; raw_input?: string; structured?: Record<string, string>;
+  validated_at?: string; validated_by?: string; validated_content?: string; invalidated_reason?: string; invalidated_at?: string;
 }
 export type MemberRole = "admin" | "comex" | "contributeur" | "lecteur";
 export interface Member { id: string; email: string; name: string; role: MemberRole; status?: "active" | "invited"; invite_status?: "sent" | "queued" | "failed"; invited_at?: string }
