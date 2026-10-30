@@ -1,0 +1,38 @@
+services:
+  timesfm:
+    build:
+      context: ../backend/timesfm-service
+      dockerfile: Dockerfile
+    image: kayroslab-timesfm:2.5
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8001:8001"
+    environment:
+      TIMESFM_MODEL_ID: ${TIMESFM_MODEL_ID:-google/timesfm-2.5-200m-pytorch}
+      TIMESFM_MAX_CONTEXT: ${TIMESFM_MAX_CONTEXT:-1024}
+      TIMESFM_MAX_HORIZON: ${TIMESFM_MAX_HORIZON:-256}
+      TIMESFM_MAX_BATCH: ${KAYROS_TIMESFM_MAX_BATCH:-32}
+      TIMESFM_TORCH_THREADS: ${TIMESFM_TORCH_THREADS:-2}
+      TIMESFM_API_TOKEN: ${KAYROS_TIMESFM_TOKEN:-}
+    volumes:
+      - timesfm-model-cache:/models/huggingface
+    read_only: true
+    tmpfs:
+      - /tmp:size=512m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    mem_limit: 6g
+    cpus: 2.0
+    healthcheck:
+      test: ["CMD", "python", "-c", "import json,urllib.request; data=json.load(urllib.request.urlopen('http://127.0.0.1:8001/health', timeout=4)); raise SystemExit(0 if data.get('model_loaded') else 1)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10m
+      retries: 3
+
+volumes:
+  timesfm-model-cache:
+    name: kayroslab-timesfm-model-cache-v1
