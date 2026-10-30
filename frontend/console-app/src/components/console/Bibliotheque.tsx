@@ -6,12 +6,13 @@ import { Button, Empty, Field, Panel, Section, TextArea, controlClass } from "./
 import { formatWhen } from "@/lib/console/model";
 import { go } from "./Shell";
 import { cn } from "@/lib/cn";
+import { ContextComposer, StatusBadge, type ComposerValue } from "./ContextComposer";
 import { t, tc } from "@/lib/i18n";
 
 type Tab = "skills" | "contexts";
-type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[]; company_id: string; project_id: string; node_id: string };
+type Draft = { id: string | null; name: string; description: string; instructions: string; tools: string; kind: ContextSource["kind"]; content: string; url: string; agent_ids: string[]; session_ids: string[]; company_id: string; project_id: string; node_id: string; mode: "" | "rfp" | "interne"; raw_input: string; structured: Record<string, string>; status: "draft" | "validated" };
 
-const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [], company_id: "", project_id: "", node_id: "" };
+const EMPTY: Draft = { id: null, name: "", description: "", instructions: "", tools: "", kind: "note", content: "", url: "", agent_ids: [], session_ids: [], company_id: "", project_id: "", node_id: "", mode: "", raw_input: "", structured: {}, status: "validated" };
 const KIND_LABEL: Record<ContextSource["kind"], string> = {
   get note() { return t("Note"); },
   get document() { return t("Document"); },
@@ -25,6 +26,7 @@ export function Bibliotheque() {
   const [tab, setTab] = useState<Tab>("skills");
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState("");
+  const [skillBusy, setSkillBusy] = useState(false);
 
   if (!live) {
     return (
@@ -43,15 +45,31 @@ export function Bibliotheque() {
     tools: "tools" in item ? item.tools.join("\n") : "",
   } as Draft);
 
-  async function save() {
+  async function save(override?: Partial<Draft>) {
     if (!draft) return;
+    const d = { ...draft, ...override };
     if (!draft.name.trim()) { setError(t("Le nom est requis.")); return; }
-    const common = { name: draft.name.trim(), agent_ids: draft.agent_ids, session_ids: draft.session_ids };
+    const common = { name: d.name.trim(), agent_ids: d.agent_ids, session_ids: d.session_ids };
+    const guided = d.mode ? { mode: d.mode, raw_input: d.raw_input, structured: d.structured } : {};
     const body = tab === "skills"
-      ? { ...common, description: draft.description.trim(), instructions: draft.instructions.trim(), tools: draft.tools.split("\n").map((x) => x.trim()).filter(Boolean) }
-      : { ...common, kind: draft.kind, content: draft.content, url: draft.url.trim(), company_id: draft.company_id, project_id: draft.project_id, node_id: draft.project_id ? draft.node_id : "" };
+      ? { ...common, description: d.description.trim(), instructions: d.instructions.trim(), tools: d.tools.split("\n").map((x) => x.trim()).filter(Boolean) }
+      : { ...common, ...guided, status: d.mode ? d.status : "validated", kind: d.kind, content: d.content, url: d.url.trim(), company_id: d.company_id, project_id: d.project_id, node_id: d.project_id ? d.node_id : "" };
     const res = await saveItem(tab, draft.id, body);
     if (!res.ok) setError(res.reason ?? t("Refusé")); else { setDraft(null); setError(""); }
+  }
+  const composerValue = (d: Draft): ComposerValue => ({ mode: d.mode || "rfp", raw_input: d.raw_input, structured: d.structured, content: d.content }) as ComposerValue;
+  const fromComposer = (v: ComposerValue) => ({ raw_input: v.raw_input, structured: v.structured, content: v.content });
+
+  /** Reformule l’objectif du skill (optionnel) : la description proposée reste éditable. */
+  async function rephraseSkill() {
+    if (!draft) return;
+    setSkillBusy(true);
+    try {
+      const r = await api.rephraseContext({ type: "skill", raw: [draft.description, draft.instructions].filter(Boolean).join("\n") });
+      if (r.source === "model") setDraft({ ...draft, description: r.brief.slice(0, 2000) });
+      else setError(t("Reformulation indisponible : votre brouillon est conservé, relisez-le avant de valider."));
+    } catch { setError(t("Reformulation indisponible : votre brouillon est conservé, relisez-le avant de valider.")); }
+    finally { setSkillBusy(false); }
   }
 
   return (
@@ -73,11 +91,19 @@ export function Bibliotheque() {
             {tab === "skills" ? (
               <>
                 <Field label={t("Description")}><input className={controlClass} value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} /></Field>
+                <div><Button variant="secondary" onClick={rephraseSkill} disabled={skillBusy || !(draft.description.trim() || draft.instructions.trim())}>{skillBusy ? t("Reformulation…") : t("Reformuler l’objectif du skill")}</Button></div>
                 <Field label={t("Instructions")} hint={t("Ce que l’agent sait faire avec ce skill. Injecté dans son contexte.")}><TextArea value={draft.instructions} onChange={(e) => setDraft({ ...draft, instructions: e.target.value })} /></Field>
                 <Field label={t("Outils")} hint={t("Un identifiant d’outil par ligne.")}><TextArea value={draft.tools} onChange={(e) => setDraft({ ...draft, tools: e.target.value })} /></Field>
               </>
             ) : (
               <>
+                <Field label={t("Saisie")} hint={t("Libre, ou guidée pour un RFP / AO ou un projet interne.")}>
+                  <select aria-label={t("Saisie")} className={controlClass} value={draft.mode} onChange={(e) => setDraft({ ...draft, mode: e.target.value as Draft["mode"], status: e.target.value ? "draft" : "validated" })}>
+                    <option value="">{t("Libre")}</option>
+                    <option value="rfp">{t("RFP / AO")}</option>
+                    <option value="interne">{t("Projet interne")}</option>
+                  </select>
+                </Field>
                 <Field label={t("Type")}>
                   <select className={controlClass} value={draft.kind} onChange={(e) => setDraft({ ...draft, kind: e.target.value as ContextSource["kind"] })}>
                     {(Object.keys(KIND_LABEL) as ContextSource["kind"][]).map((k) => <option key={k} value={k}>{KIND_LABEL[k]}</option>)}
@@ -107,7 +133,14 @@ export function Bibliotheque() {
                     </select>
                   </Field>
                 </div>
-                <Field label={t("Contenu")} hint={t("Texte transmis aux agents (20 000 caractères maximum).")}><TextArea value={draft.content} onChange={(e) => setDraft({ ...draft, content: e.target.value })} /></Field>
+                {draft.mode ? (
+                  <ContextComposer mode={draft.mode} value={composerValue(draft)}
+                    onChange={(v) => setDraft({ ...draft, ...fromComposer(v), status: "draft" })}
+                    onValidate={(v) => void save({ ...fromComposer(v), status: "validated" })}
+                    onSaveDraft={(v) => void save({ ...fromComposer(v), status: "draft" })} />
+                ) : (
+                  <Field label={t("Contenu")} hint={t("Texte transmis aux agents (20 000 caractères maximum).")}><TextArea value={draft.content} onChange={(e) => setDraft({ ...draft, content: e.target.value })} /></Field>
+                )}
               </>
             )}
             <fieldset>
@@ -134,7 +167,7 @@ export function Bibliotheque() {
             </fieldset>
             {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
             <div className="flex gap-2">
-              <Button onClick={save}>{t("Enregistrer")}</Button>
+              {tab === "contexts" && draft.mode ? null : <Button onClick={() => void save()}>{t("Enregistrer")}</Button>}
               <Button variant="ghost" onClick={() => setDraft(null)}>{t("Annuler")}</Button>
             </div>
           </div>
@@ -153,6 +186,8 @@ export function Bibliotheque() {
               <span className="rounded bg-accent-soft px-1.5 text-[11px]">{item.node_id ? t("Nœud {{v}}", { v: item.node_id }) : item.project_id ? t("Projet : {{v}}", { v: workspace.projects.find((p) => p.id === item.project_id)?.name ?? item.project_id }) : t("Société : {{v}}", { v: workspace.companies.find((c) => c.id === item.company_id)?.name ?? item.company_id })}</span>
             ) : null}
             {"kind" in item ? <span className="text-xs text-muted">{KIND_LABEL[item.kind]}</span> : null}
+            {"kind" in item && item.mode ? <span className="rounded bg-paper-2 px-1.5 text-[11px]">{item.mode === "rfp" ? t("RFP / AO") : t("Projet interne")}</span> : null}
+            {"kind" in item && (item.mode || item.status === "draft") ? <StatusBadge status={item.status} /> : null}
             <span className="ml-auto flex gap-2">
               <Button variant="secondary" onClick={() => edit(item)}>{t("Modifier")}</Button>
               <Button variant="danger" onClick={async () => { const res = await deleteItem(tab, item.id); if (!res.ok) setError(res.reason ?? ""); }}>{t("Supprimer")}</Button>

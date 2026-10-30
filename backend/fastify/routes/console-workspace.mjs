@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { PERMISSIONS, memberRole, workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { scopedThreads, accessibleRooms } from './console.mjs';
 import { evaluateThreadGates } from '../lib/project-gates.mjs';
+import { rephraseContext, CONTEXT_MODES } from '../../../core/context-rephrase.mjs';
 
 // Espace de travail de la console : Société → Projets, et Bibliothèque
 // (Skills, Sources de contexte) rattachable aux agents et aux collectifs.
@@ -71,7 +72,18 @@ const contextSchema = z.object({
   // Cascade société → projet → nœud : la source s'applique au niveau le plus précis renseigné.
   company_id: z.string().max(120).optional().default(''), project_id: z.string().max(120).optional().default(''),
   node_id: z.string().max(60).optional().default(''),
+  // Saisie guidée : brouillon (non injecté) tant que la reformulation n'est pas validée.
+  status: z.enum(['draft', 'validated']).optional().default('validated'),
+  mode: z.enum(['', 'rfp', 'interne']).optional().default(''),
+  raw_input: z.string().max(20000).optional().default(''),
+  structured: z.record(z.string().max(60), z.string().max(4000)).optional().default({}),
   ...attachSchema,
+});
+/** Seules les sources validées (ou historiques, sans statut) alimentent les agents. */
+export const isActiveContext = (c) => c?.status !== 'draft';
+const rephraseSchema = z.object({
+  type: z.enum(['rfp', 'interne', 'skill']), raw: z.string().max(12000).optional().default(''),
+  fields: z.record(z.string().max(60), z.string().max(4000)).optional().default({}),
 });
 // Membres de l'espace et leurs rôles (remplace le bouton Contributeur / COMEX).
 export const MEMBER_ROLES = ['admin', 'comex', 'contributeur', 'lecteur'];
@@ -126,7 +138,10 @@ async function allowed(app, me, reply, permission = 'manage') {
 
 /** Sources de contexte en cascade pour un projet (et un nœud de son graphe). */
 export async function cascadeContext(app, tenantId, project, nodeId = '') {
-  const contexts = await store(app).list(tenantId, 'contexts');
+  const all = await store(app).list(tenantId, 'contexts');
+  const inScope = (c) => (c.company_id && c.company_id === project.company_id && !c.project_id) || (c.project_id === project.id && (!c.node_id || c.node_id === nodeId));
+  const pending = all.filter((c) => !isActiveContext(c) && inScope(c));
+  const contexts = all.filter(isActiveContext);
   const layers = [
     { level: 'societe', items: contexts.filter((c) => c.company_id && c.company_id === project.company_id && !c.project_id) },
     { level: 'projet', items: contexts.filter((c) => c.project_id === project.id && !c.node_id) },
@@ -135,7 +150,7 @@ export async function cascadeContext(app, tenantId, project, nodeId = '') {
   const label = { societe: 'Société', projet: 'Projet', noeud: 'Nœud' };
   const text = layers.filter((l) => l.items.length)
     .map((l) => `Contexte ${label[l.level]}:\n${l.items.map((c) => `- ${c.name} [${c.kind}]${c.content ? ` : ${c.content.slice(0, 4000)}` : ''}${c.url ? ` (${c.url})` : ''}`).join('\n')}`).join('\n\n');
-  return { layers, text };
+  return { layers, text, pending };
 }
 
 /** E-mail aux parties prenantes « informé » des projets qui contiennent ce fil. */
@@ -187,7 +202,7 @@ async function sendInvite(app, { email, name, role, by, url }) {
 export async function collectiveAttachmentsContext(app, tenantId, sessionId) {
   const ws = store(app);
   const skills = (await ws.list(tenantId, 'skills')).filter((s) => (s.session_ids || []).includes(sessionId));
-  const contexts = (await ws.list(tenantId, 'contexts')).filter((c) => (c.session_ids || []).includes(sessionId));
+  const contexts = (await ws.list(tenantId, 'contexts')).filter((c) => isActiveContext(c) && (c.session_ids || []).includes(sessionId));
   const parts = [];
   for (const project of (await ws.list(tenantId, 'projects')).filter((p) => (p.session_ids || []).includes(sessionId))) {
     const { text } = await cascadeContext(app, tenantId, project);
@@ -204,7 +219,7 @@ async function syncAgents(app, tenantId, agentIds, by) {
   await swarm.hydrateTenant?.(tenantId);
   const ws = store(app);
   const skills = await ws.list(tenantId, 'skills');
-  const contexts = await ws.list(tenantId, 'contexts');
+  const contexts = (await ws.list(tenantId, 'contexts')).filter(isActiveContext);
   for (const agentId of new Set(agentIds)) {
     const agent = swarm.registry.get(agentId, { tenantId });
     if (!agent) continue;
@@ -270,6 +285,8 @@ export default async function consoleWorkspaceRoutes(app) {
         patch.version = version + 1;
         patch.updated_by = me.email;
       }
+      if (kind === 'contexts' && !('status' in patch) && before.mode && 'raw_input' in patch && patch.raw_input !== before.raw_input) patch.status = 'draft';
+      if (kind === 'contexts' && patch.status === 'validated' && before.status !== 'validated') { patch.validated_by = me.email; patch.validated_at = new Date().toISOString(); }
       const item = await store(app).update(me.tenantId, kind, req.params.id, patch);
       const touched = [...(before.agent_ids || []), ...(item.agent_ids || [])];
       if (touched.length) await syncAgents(app, me.tenantId, touched, me.email);
@@ -363,6 +380,20 @@ export default async function consoleWorkspaceRoutes(app) {
   });
 
   // Contexte en cascade d'un projet, éventuellement pour un nœud de son graphe.
+  // Reformulation guidée (RFP / interne / skill) : JSON structuré + brief « Ma compréhension ».
+  // Rien n'est enregistré : l'utilisateur relit, corrige puis valide via PATCH status=validated.
+  app.post('/v1/console/context/rephrase', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const parsed = rephraseSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'reformulation invalide', issues: parsed.error.issues });
+    if (!parsed.data.raw.trim() && !Object.values(parsed.data.fields).some((v) => String(v).trim())) return reply.code(400).send({ error: 'saisie vide' });
+    return rephraseContext(app.kayrosContext.llm || app.kayrosContext.engine?.swarm?.llm, parsed.data.type, parsed.data);
+  });
+  app.get('/v1/console/context/modes', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    return { modes: CONTEXT_MODES };
+  });
+
   app.get('/v1/console/projects/:id/context', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
     const project = await store(app).get(me.tenantId, 'projects', req.params.id);

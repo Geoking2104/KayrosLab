@@ -35,6 +35,9 @@ export interface Skill { id: string; name: string; description: string; instruct
 export interface ContextSource {
   id: string; name: string; kind: "note" | "document" | "url" | "policy"; content: string; url: string; agent_ids: string[]; session_ids: string[];
   company_id?: string; project_id?: string; node_id?: string;
+  /** Saisie guidée : seule une source « validated » (ou sans statut) alimente les agents. */
+  status?: "draft" | "validated"; mode?: "" | "rfp" | "interne"; raw_input?: string; structured?: Record<string, string>;
+  validated_at?: string; validated_by?: string;
 }
 export type MemberRole = "admin" | "comex" | "contributeur" | "lecteur";
 export interface Member { id: string; email: string; name: string; role: MemberRole; status?: "active" | "invited"; invite_status?: "sent" | "queued" | "failed"; invited_at?: string }
