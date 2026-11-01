@@ -4,6 +4,7 @@
 import Fastify from 'fastify';
 import authPlugin from '../plugins/auth.mjs';
 import healthRoute from '../routes/health.mjs';
+import auditEvidenceRoute from '../routes/audit-evidence.mjs';
 import authRoutes from '../routes/auth-routes.mjs';
 import salonRoute from '../routes/salon.mjs';
 import salonKbRoute from '../routes/salon-kb.mjs';
@@ -35,6 +36,8 @@ export async function buildTestApp(env = {}, options = {}) {
     KAYROS_MCP_CLIENTS_JSON: '', KAYROS_MCP_ALLOWED_ORIGINS: '', KAYROS_MCP_RATE_LIMIT: '60',
     // Aucun worker de fond dans les tests : livraisons et missions pilotées à la main.
     KAYROS_INTEGRATION_WORKERS: 'off',
+    // Journal scellé désactivé sauf si un test fournit une clé.
+    KAYROS_AUDIT_SIGNING_KEY: '', KAYROS_AUDIT_SIGNING_KEY_FILE: '', KAYROS_AUDIT_ANCHOR_DIR: '', KAYROS_AUDIT_ANCHOR_GITHUB_TOKEN: '',
     DATABASE_URL: '', GOOGLE_API_KEY: '', GITHUB_TOKEN: '', GITLAB_TOKEN: '',
     TEAMS_APP_ID: '8f3b2a1c-0000-1111-2222-333344445555',
     TEAMS_BOT_PASSWORD: 'test-bot-secret', TEAMS_WEBHOOK_URL: 'https://webhook.test/teams',
@@ -75,6 +78,7 @@ export async function buildTestApp(env = {}, options = {}) {
   }
 
   await app.register(healthRoute);
+  await app.register(auditEvidenceRoute);
   await app.register(authRoutes);
   await app.register(salonRoute);
   await app.register(salonKbRoute);
