@@ -3,7 +3,7 @@
 //   CHROME=google-chrome UI=http://127.0.0.1:4302/console/ TOKEN_FILE=/tmp/demo-token OUT=./raw node scripts/capture-console.mjs
 //   (Node 22+ ; sous Node 20, ajouter --experimental-websocket)
 // La console lit son jeton dans sessionStorage ; aucun identifiant réel n'est requis.
-// Les PNG bruts sont ensuite convertis en WebP dans assets/ et backend/web/public/assets/.
+// Les PNG bruts sont ensuite convertis en WebP dans assets/ (source unique, copiée au déploiement).
 import { spawn } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 

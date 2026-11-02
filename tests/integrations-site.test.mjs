@@ -52,7 +52,7 @@ test('integration logos are local (inline sprite + assets/logos), never hotlinke
     assert.match(html, /class="sf-mock/);
   }
   for (const logo of logos) {
-    for (const dir of ['assets/logos', 'backend/web/public/assets/logos']) {
+    for (const dir of ['assets/logos']) {
       assert.match(read(`${dir}/${logo}.svg`), /^<svg[^>]+viewBox="0 0 24 24"/);
     }
   }

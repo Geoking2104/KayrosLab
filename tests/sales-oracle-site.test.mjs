@@ -93,7 +93,7 @@ test('landing covers personified agents; Salon is no longer embedded', () => {
 });
 
 test('Sales Oracle reste un outil du site, plus un écran de la console', () => {
-  const tool = read('backend/web/public/assets/sales-oracle-tool.js');
+  const tool = read('assets/sales-oracle-tool.js');
   assert.match(tool, /SALES_ORACLE_API_BASE/);
   const shell = read('frontend/console-app/src/components/console/Shell.tsx');
   assert.doesNotMatch(shell, /SalesOracleClient/);
@@ -112,11 +112,13 @@ test('simulation studio translations stay aligned', () => {
 });
 
 test('editorial illustration and Pages asset packaging are protected', () => {
-  const asset = new URL('../backend/web/public/assets/hybrid-agent-sales-oracle.png', import.meta.url);
+  const asset = new URL('../assets/hybrid-agent-sales-oracle.png', import.meta.url);
   assert.ok(statSync(asset).size > 100_000, 'illustration looks missing or truncated');
 
   const workflow = read('.github/workflows/deploy-positionning-pages.yml');
-  assert.match(workflow, /backend\/web\/public\/assets/);
+  assert.match(workflow, /cp -r assets\/\. deploy\/assets\//, 'Pages copie la source unique assets/');
+  assert.doesNotMatch(workflow, /backend\/web\/public\/assets/, 'plus de copie dupliquée des assets');
+  assert.match(read('deploy/ovh-vps/assemble-www.sh'), /APP_DIR\}\/assets\/\./, 'OVH copie aussi assets/');
   assert.match(workflow, /deploy\/assets/);
   assert.match(workflow, /studio\.css/);
 });
