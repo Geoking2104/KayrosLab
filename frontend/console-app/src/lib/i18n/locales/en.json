@@ -130,7 +130,6 @@
   "Clés": "Keys",
   "Clés d’API": "API keys",
   "Cochez le consentement et les cinq garde-fous avant d’enregistrer.": "Tick the consent and the five guardrails before saving.",
-  "Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel.": "Tick the consent and the five guardrails before opening the panel.",
   "Cochez les cinq garde-fous avant d’enregistrer.": "Tick the five guardrails before saving.",
   "Cochez les trois conditions d’onboarding.": "Tick the three onboarding conditions.",
   "Coffre connecteurs": "Connector vault",
@@ -1170,5 +1169,12 @@
   "Indices manuels": "Manual clues",
   "Une par ligne. Elles sont enregistrées puis visitées par le serveur pour constituer la base publique.": "One per line. They are saved, then visited by the server to build the public record.",
   "Persona consentie par défaut. Cochez si la personne refuse (rien n’est enregistré).": "Consent is assumed by default. Tick if the person refuses (nothing is saved).",
-  "Persona consentie par défaut. Décochez si la personne refuse : rien n’est enregistré.": "Consent is assumed by default. Untick if the person refuses: nothing is saved."
+  "Persona consentie par défaut. Décochez si la personne refuse : rien n’est enregistré.": "Consent is assumed by default. Untick if the person refuses: nothing is saved.",
+  "Cochez les cinq garde-fous avant d’ouvrir le panel.": "Tick the five guardrails before opening the panel.",
+  "Équipe à usage interne : aucun consentement requis. Les garde-fous restent obligatoires.": "Internal-use team: no consent required. Guardrails remain mandatory.",
+  "Outils indisponibles : {{error}}": "Tools unavailable: {{error}}",
+  "porte humaine": "human gate",
+  "Outils enregistrés.": "Tools saved.",
+  "Aucun outil autorisé.": "No allowed tools.",
+  "Enregistrer les outils": "Save tools"
 }

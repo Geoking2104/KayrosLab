@@ -4,7 +4,8 @@ import { GUARDRAILS, parsePublicSources, type AgentKind } from "@/lib/console/mo
 import { PERSONA_TEMPLATES, type PersonaTemplate } from "@/lib/console/persona-templates";
 import { Button, Field, Panel, TextArea, controlClass } from "./ui";
 import { PersonaSkillPicker } from "./PersonaSkillPicker";
-import type { PersonaSkill } from "@/lib/console/api";
+import { PersonaToolPicker } from "./PersonaToolPicker";
+import type { PersonaSkill, PersonaTool } from "@/lib/console/api";
 
 export type QuickImpersonatorInput = {
   name: string;
@@ -19,6 +20,7 @@ export type QuickImpersonatorInput = {
   clues: string;
   publicSources?: string[];
   personaSkills?: string[];
+  personaTools?: string[];
   purpose?: PersonaTemplate["purpose"];
 };
 
@@ -33,12 +35,15 @@ export function QuickImpersonator({
   onClose,
   templates = PERSONA_TEMPLATES,
   loadSkills,
+  loadTools,
 }: {
   onCreate: (agent: QuickImpersonatorInput) => { ok: boolean; reason?: string };
   onClose: () => void;
   templates?: PersonaTemplate[];
   /** Catalogue de compétences (défaut : GET /v1/console/persona-skills) ; absent du mode démo. */
   loadSkills?: (() => Promise<PersonaSkill[]>) | null;
+  /** Registre d’outils (défaut : GET /v1/console/persona-tools) ; absent du mode démo. */
+  loadTools?: (() => Promise<PersonaTool[]>) | null;
 }) {
   const [templateId, setTemplateId] = useState("");
   const [name, setName] = useState("");
@@ -47,6 +52,7 @@ export function QuickImpersonator({
   const [urls, setUrls] = useState("");
   const [refused, setRefused] = useState(false);
   const [skills, setSkills] = useState<string[]>([]);
+  const [tools, setTools] = useState<string[]>([]);
   const [clues, setClues] = useState("");
   const [ack, setAck] = useState(false);
   const [error, setError] = useState("");
@@ -82,6 +88,7 @@ export function QuickImpersonator({
       clues: clues.trim(),
       publicSources: source === "public" ? sources : undefined,
       personaSkills: skills.length ? skills : undefined,
+      personaTools: tools.length ? tools : undefined,
       purpose: template?.purpose,
     });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
@@ -124,7 +131,8 @@ export function QuickImpersonator({
           <input type="checkbox" checked={refused} onChange={(e) => setRefused(e.target.checked)} />
           <span>{t("Persona consentie par défaut. Cochez si la personne refuse (rien n’est enregistré).")}</span>
         </label>
-        {loadSkills !== null ? <PersonaSkillPicker value={skills} onChange={setSkills} load={loadSkills ?? undefined} /> : null}
+        {loadTools !== null && loadSkills !== null ? <PersonaToolPicker value={tools} onChange={setTools} load={loadTools ?? undefined} /> : null}
+        {loadSkills !== null ? <PersonaSkillPicker value={skills} onChange={setSkills} load={loadSkills ?? undefined} allowlist={tools} /> : null}
         <Field label={t("Indices")}>
           <TextArea aria-label={t("Indices")} value={clues} onChange={(e) => setClues(e.target.value)} />
         </Field>

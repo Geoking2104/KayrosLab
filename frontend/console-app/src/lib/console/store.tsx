@@ -944,6 +944,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "enriched", human_profile: agent.humanProfile,
             clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
             ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
+            ...(agent.personaTools?.length ? { tools: agent.personaTools } : {}),
           }), t("{{name}} est au registre avec son profil enrichi.", { name: agent.name.trim() }));
           return { ok: true };
         }
@@ -953,6 +954,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             purpose: agent.purpose || undefined, veto_power: agent.veto,
             clues: agent.clues.split("\n").map((c) => c.trim().slice(0, 500)).filter(Boolean).slice(0, 30),
             ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
+            ...(agent.personaTools?.length ? { tools: agent.personaTools } : {}),
           }), t("{{name}} est au registre (données publiques).", { name: agent.name.trim() }));
           return { ok: true };
         }
@@ -962,6 +964,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "manual",
             clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
             ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
+            ...(agent.personaTools?.length ? { tools: agent.personaTools } : {}),
           }), t("{{name}} est au registre.", { name: agent.name.trim() }));
           return { ok: true };
         }

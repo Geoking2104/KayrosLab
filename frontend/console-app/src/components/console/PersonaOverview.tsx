@@ -2,14 +2,32 @@ import { useEffect, useState } from "react";
 import { t } from "@/lib/i18n";
 import { api, type PersonaOverview as Overview } from "@/lib/console/api";
 import { Button, Panel } from "./ui";
+import { PersonaToolPicker } from "./PersonaToolPicker";
 
-/** Page persona en lecture seule (P6) : activité, vetos, decisionsTimeline et mémoire. Aucune écriture. */
-export function PersonaOverview({ agentId, onClose, load = (id) => api.personaOverview(id) }: {
-  agentId: string; onClose: () => void; load?: (id: string) => Promise<Overview>;
+/**
+ * Page persona (P6) : activité, vetos, decisionsTimeline et mémoire en lecture seule. Seul réglage :
+ * les outils autorisés, réservé aux managers (PUT /v1/console/agents/:id/tools, validé et audité serveur).
+ */
+export function PersonaOverview({ agentId, onClose, load = (id) => api.personaOverview(id), canEditTools = false, loadTools, saveTools = (id, tools) => api.setPersonaTools(id, tools) }: {
+  agentId: string; onClose: () => void; load?: (id: string) => Promise<Overview>; canEditTools?: boolean;
+  loadTools?: () => Promise<import("@/lib/console/api").PersonaTool[]>; saveTools?: (id: string, tools: string[]) => Promise<{ granted: unknown[]; denied: unknown[] }>;
 }) {
+  const [tools, setTools] = useState<string[] | null>(null);
+  const [toolsMsg, setToolsMsg] = useState("");
+  const [effective, setEffective] = useState<string | null>(null);
+  const name = (g: unknown) => (typeof g === "string" ? g : (g as { tool?: string })?.tool ?? "");
+  async function submitTools() {
+    if (!tools) return;
+    setToolsMsg("");
+    try {
+      const r = await saveTools(agentId, tools);
+      setEffective(r.granted.map(name).join(", "));
+      setToolsMsg(t("Outils enregistrés."));
+    } catch (e: any) { setToolsMsg(String(e?.message || e)); }
+  }
   const [data, setData] = useState<Overview | null>(null);
   const [error, setError] = useState("");
-  useEffect(() => { let on = true; load(agentId).then((d) => on && setData(d), (e) => on && setError(String(e?.message || e))); return () => { on = false; }; }, [agentId]);
+  useEffect(() => { let on = true; load(agentId).then((d) => { if (!on) return; setData(d); setTools(d.persona.tools || []); }, (e) => on && setError(String(e?.message || e))); return () => { on = false; }; }, [agentId]);
   const when = (v: string | null) => (v ? new Date(v).toLocaleString("fr-FR", { timeZone: "Europe/Paris" }) : "—");
   return (
     <Panel>
@@ -21,6 +39,17 @@ export function PersonaOverview({ agentId, onClose, load = (id) => api.personaOv
       {!data && !error ? <p className="mt-2 text-sm text-muted">{t("Chargement…")}</p> : null}
       {data ? (
         <div className="mt-3 grid gap-4 text-sm">
+          <section>
+            <h3 className="font-medium">{t("Outils autorisés")}</h3>
+            {canEditTools && tools ? (
+              <div className="mt-1 grid gap-2">
+                <PersonaToolPicker value={tools} onChange={setTools} load={loadTools} />
+                <div><Button onClick={submitTools}>{t("Enregistrer les outils")}</Button></div>
+              </div>
+            ) : <p className="text-muted">{data.persona.tools.length ? data.persona.tools.join(", ") : t("Aucun outil autorisé.")}</p>}
+            {effective !== null ? <p data-testid="persona-effective-tools">{effective ? t("Outils effectifs : {{tools}}", { tools: effective }) : t("Outils effectifs : aucun")}</p> : null}
+            {toolsMsg ? <p role="status" className="text-ink-soft">{toolsMsg}</p> : null}
+          </section>
           <section>
             <h3 className="font-medium">{t("Activité")} ({data.counts.runs})</h3>
             {data.activity.length ? <ul className="mt-1 grid gap-1">{data.activity.map((a) => (

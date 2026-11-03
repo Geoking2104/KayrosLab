@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { PersonaOverview } from "./PersonaOverview";
 
 afterEach(cleanup);
@@ -22,5 +22,29 @@ describe("PersonaOverview", () => {
     expect(screen.getByText("Vetoes (1)")).toBeTruthy();
     expect(screen.getByText("Human decisions (1)")).toBeTruthy();
     expect(screen.queryByText("Save")).toBeNull();
+  });
+
+  it("manager : règle les outils autorisés depuis le registre et met à jour les outils effectifs", async () => {
+    const load = vi.fn(async () => data);
+    const loadTools = vi.fn(async () => [
+      { name: "estimate_resources", description: "Estimate", sideEffect: "read", gate: false, assignable: true, reason: null },
+      { name: "send_email", description: "Send", sideEffect: "write", gate: true, assignable: false, reason: "écriture interdite aux personas" },
+    ]);
+    const saveTools = vi.fn(async (_id: string, tools: string[]) => ({ granted: tools.map((tool) => ({ tool })), denied: [] }));
+    render(<PersonaOverview agentId="imp_alex" onClose={() => {}} load={load} canEditTools loadTools={loadTools} saveTools={saveTools} />);
+    const box = (await screen.findByText("estimate_resources")).closest("label")!.querySelector("input")!;
+    const write = screen.getByText("send_email").closest("label")!.querySelector("input")!;
+    expect(write.disabled).toBe(true);
+    fireEvent.click(box);
+    fireEvent.click(screen.getByText("Save tools"));
+    await screen.findByText("Tools saved.");
+    expect(saveTools).toHaveBeenCalledWith("imp_alex", ["estimate_resources"]);
+    expect(screen.getByTestId("persona-effective-tools").textContent).toContain("estimate_resources");
+  });
+
+  it("non-manager : outils en lecture seule", async () => {
+    render(<PersonaOverview agentId="imp_alex" onClose={() => {}} load={async () => data} />);
+    await screen.findByText("No allowed tools.");
+    expect(screen.queryByText("Save tools")).toBeNull();
   });
 });
