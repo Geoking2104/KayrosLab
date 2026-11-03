@@ -6,8 +6,9 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('les accueils anglais et francais exposent la console', async () => {
   const [english, french] = await Promise.all([read('index.html'), read('index.fr.html')]);
-  assert.match(english, /href="\/console\/\?lang=en"[^>]*>Try the console/i);
-  assert.match(french, /href="\/console\/\?lang=fr"[^>]*>Essayer la console/i);
+  // CTA unique : l'essai gratuit ouvre la console dans la langue de la page.
+  assert.match(english, /href="\/console\/\?lang=en"[^>]*>Test it on my decision — free/);
+  assert.match(french, /href="\/console\/\?lang=fr"[^>]*>Tester sur ma décision — gratuit/);
   // La console suit la langue de la page d'origine (?lang=), pas seulement le navigateur.
   assert.doesNotMatch(english, /href="\/console\/"/);
   assert.doesNotMatch(french, /href="\/console\/"/);
@@ -36,8 +37,8 @@ test('GitHub Pages ne publie plus /salon/ et rien ne le lie', async () => {
   assert.doesNotMatch(notFound, /salon/i); // URL inconnue (dont /salon) : renvoi vers l'accueil
   assert.match(notFound, /location\.replace\("\/"/);
   assert.doesNotMatch(vercel, /salon/i);
-  assert.match(english, /id="personify"/);
-  assert.match(french, /CrystalKnows/);
+  assert.match(await read('personas.html'), /id="personify"/);
+  assert.match(await read('personas.fr.html'), /CrystalKnows/);
 });
 
 test('la console est la revue, servie sous /console/', async () => {
