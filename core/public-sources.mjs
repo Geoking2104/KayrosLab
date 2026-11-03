@@ -14,7 +14,7 @@ import { createHash } from 'node:crypto';
 import { lookup as dnsLookup } from 'node:dns/promises';
 import { isIP } from 'node:net';
 
-export const PUBLIC_SOURCE_LIMITS = Object.freeze({ timeoutMs: 8000, maxBytes: 512 * 1024, maxRedirects: 3, excerptChars: 1200, maxSources: 30 });
+export const PUBLIC_SOURCE_LIMITS = Object.freeze({ timeoutMs: 8000, maxBytes: 512 * 1024, maxRedirects: 3, excerptChars: 1200, maxSources: 30, domainFailureThreshold: 2 });
 const BLOCKED_HOSTS = /^(localhost|localhost\.localdomain|ip6-localhost|ip6-loopback|metadata\.google\.internal)$|\.(localhost|local|internal|lan|home|corp)$/i;
 
 function ipv4ToInt(ip) { return ip.split('.').reduce((acc, p) => (acc * 256) + Number(p), 0); }
@@ -133,11 +133,45 @@ export async function visitPublicSource(value, { fetchImpl = globalThis.fetch, l
   }
 }
 
-/** Visite séquentiellement une liste d'URLs (dédoublonnées, plafonnées). */
+/** Échec imputable au domaine (réseau, délai, refus d'accès, saturation, erreur serveur) — pas une URL refusée par la politique. */
+function isDomainFailure(record) {
+  if (!record?.error) return false;
+  if (Number.isInteger(record.status)) return [401, 403, 407, 429].includes(record.status) || record.status >= 500;
+  return !/^source publique : (URL invalide|http\(s\)|identifiants|port|hôte refusé|adresse privée|trop de redirections)/.test(record.error);
+}
+function domainOf(value) {
+  try { return new URL(String(value)).hostname.toLowerCase().replace(/^www\./, '') || null; } catch { return null; }
+}
+
+/**
+ * Disjoncteur par domaine, limité à UNE visite de liste : après `threshold` échecs consécutifs
+ * sur un domaine, ses URLs restantes ne sont plus demandées et leur trace l'indique (`skipped`).
+ * Un succès remet le compteur à zéro. Rien n'est mémorisé d'une visite à l'autre.
+ */
+export class DomainBreaker {
+  constructor(threshold = PUBLIC_SOURCE_LIMITS.domainFailureThreshold) { this.threshold = Math.max(1, Number(threshold) || 1); this.failures = new Map(); }
+  isOpen(domain) { return Boolean(domain) && (this.failures.get(domain) || 0) >= this.threshold; }
+  record(domain, failed) { if (domain) this.failures.set(domain, failed ? (this.failures.get(domain) || 0) + 1 : 0); }
+}
+
+/** Visite séquentiellement une liste d'URLs (dédoublonnées, plafonnées), avec disjoncteur par domaine. */
 export async function visitPublicSources(urls = [], options = {}) {
   const list = [...new Set((urls || []).map((u) => String(u || '').trim()).filter(Boolean))].slice(0, PUBLIC_SOURCE_LIMITS.maxSources);
+  const breaker = new DomainBreaker(options.limits?.domainFailureThreshold ?? PUBLIC_SOURCE_LIMITS.domainFailureThreshold);
+  const now = options.now || (() => new Date());
   const out = [];
-  for (const url of list) out.push(await visitPublicSource(url, options));
+  for (const url of list) {
+    const domain = domainOf(url);
+    if (breaker.isOpen(domain)) {
+      out.push({ url, final_url: null, status: null, content_type: null, title: null, excerpt: null, sha256: null, bytes: 0, truncated: false,
+        fetched_at: now().toISOString(), skipped: true,
+        error: `source publique : domaine ${domain} fermé pour cette visite (${breaker.threshold} échecs consécutifs), non demandé` });
+      continue;
+    }
+    const record = await visitPublicSource(url, options);
+    breaker.record(domain, isDomainFailure(record));
+    out.push(record);
+  }
   return out;
 }
 
@@ -149,5 +183,6 @@ export function normalizePublicEvidence(input = []) {
     title: r.title ? String(r.title).slice(0, 300) : null, excerpt: r.excerpt ? String(r.excerpt).slice(0, PUBLIC_SOURCE_LIMITS.excerptChars) : null,
     sha256: /^[a-f0-9]{64}$/.test(String(r.sha256 || '')) ? r.sha256 : null, bytes: Number(r.bytes) || 0, truncated: r.truncated === true,
     fetched_at: r.fetched_at ? String(r.fetched_at) : null, error: r.error ? String(r.error).slice(0, 300) : null,
+    ...(r.skipped === true ? { skipped: true } : {}),
   }));
 }

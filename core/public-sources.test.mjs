@@ -87,3 +87,32 @@ test('persona : trace liée, extraits dans le profil et dans le contexte effecti
 test('profileFromPublicSources ignore les visites en erreur', () => {
   assert.equal(profileFromPublicSources([{ url: 'https://x', error: 'HTTP 500' }]), null);
 });
+
+test('disjoncteur par domaine : 2 échecs consécutifs ferment le domaine pour la visite, autres domaines intacts', async () => {
+  const calls = [];
+  const fetchImpl = async (url) => {
+    calls.push(url);
+    if (url.includes('down.example')) return new Response('nope', { status: 503 });
+    return new Response('<title>OK</title><p>public</p>', { status: 200, headers: { 'content-type': 'text/html' } });
+  };
+  const urls = ['https://down.example/a', 'https://www.down.example/b', 'https://down.example/c', 'https://up.example/x', 'https://down.example/d'];
+  const out = await visitPublicSources(urls, { fetchImpl, lookup: publicLookup });
+  assert.equal(calls.filter((u) => u.includes('down.example')).length, 2, 'seuls 2 appels au domaine en panne');
+  assert.deepEqual(out.map((r) => r.skipped === true), [false, false, true, false, true]);
+  assert.match(out[2].error, /domaine down\.example fermé/);
+  assert.equal(out[3].status, 200);
+  assert.equal(normalizePublicEvidence(out)[2].skipped, true, 'trace conservée');
+  // Nouvelle visite : rien n'est mémorisé.
+  calls.length = 0;
+  await visitPublicSources(['https://down.example/a'], { fetchImpl, lookup: publicLookup });
+  assert.equal(calls.length, 1);
+});
+
+test('disjoncteur : un succès remet le compteur à zéro ; un 404 ou un refus de politique ne compte pas', async () => {
+  const seq = { 'https://flaky.example/1': 500, 'https://flaky.example/2': 200, 'https://flaky.example/3': 500, 'https://flaky.example/4': 404, 'https://flaky.example/5': 200 };
+  const calls = [];
+  const fetchImpl = async (url) => { calls.push(url); return new Response('t', { status: seq[url] }); };
+  const out = await visitPublicSources([...Object.keys(seq), 'http://flaky.example:8080/x', 'https://flaky.example/6'], { fetchImpl, lookup: publicLookup });
+  assert.equal(out.filter((r) => r.skipped).length, 0);
+  assert.equal(calls.length, 6, 'aucune URL sautée');
+});
