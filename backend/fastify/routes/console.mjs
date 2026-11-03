@@ -141,12 +141,14 @@ const collectiveSchema = z.object({
   add_custom_agents: z.array(sessionAgentSchema).max(MAX_CUSTOM_AGENTS_PER_SESSION).optional().default([]),
 }).refine((value) => value.add_agent_ids.length > 0 || value.remove_agent_ids.length > 0 || value.add_custom_agents.length > 0, { message: 'aucun changement de collectif demandé' });
 const arbitrationSchema = z.object({ action: z.enum(['accept_consensus', 'override_veto', 'reevaluate']), justification: z.string().max(4000).optional(), decision: z.enum(['GO', 'CONDITIONAL_GO']).optional() });
-const impersonatorSchema = z.object({
+const impersonatorBaseSchema = z.object({
   agent_id: z.string().max(64).optional(),
   name: z.string().min(1).max(200),
   role: z.string().max(200).optional(),
   company: z.string().max(200).optional(),
-  source: z.enum(['linkedin', 'crystalknows', 'export', 'manual', 'enriched']),
+  source: z.enum(['linkedin', 'crystalknows', 'export', 'manual', 'enriched', 'public']),
+  // Source 'public' : persona bâtie sur données publiques — consentement non requis, URLs exigées.
+  public_sources: z.array(z.string().max(1000).regex(/^https?:\/\/\S+$/i, 'public_sources : URL http(s) attendue')).max(30).optional(),
   // Profil déjà enrichi (POST /v1/console/personality/enrich), attaché tel quel après normalisation.
   human_profile: humanProfileSchema,
   linkedin_url: z.string().max(1000).optional(),
@@ -159,8 +161,13 @@ const impersonatorSchema = z.object({
   purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
   veto_power: z.boolean().optional(),
   consent_reference: z.string().max(300).optional(),
-  consent_confirmed: z.literal(true),
+  consent_confirmed: z.literal(true).optional(),
 });
+const publicSourceRule = (value) => value.source !== 'public' || (Array.isArray(value.public_sources) && value.public_sources.length > 0);
+const consentRule = (value) => value.source === 'public' || value.consent_confirmed === true;
+const impersonatorSchema = impersonatorBaseSchema
+  .refine(publicSourceRule, { message: 'public_sources (liste d\'URLs non vide) requis pour la source public', path: ['public_sources'] })
+  .refine(consentRule, { message: 'consentement explicite requis', path: ['consent_confirmed'] });
 // Enrichissement multi-sources (cf. core/profile-enrichment.mjs et docs/impersonator-agent.md).
 const enrichSchema = z.object({
   consent_confirmed: z.literal(true),
@@ -178,7 +185,8 @@ const enrichSchema = z.object({
   outlook: z.object({ access_token: z.string().min(10).max(4096), max: z.number().int().min(1).max(50).optional() }).optional(),
   crystal_api: z.object({ email: z.string().email().max(320).optional(), linkedin_url: z.string().max(1000).optional(), full_name: z.string().max(200).optional(), company_name: z.string().max(200).optional() }).optional(),
 });
-const impersonatorMemberSchema = impersonatorSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true });
+const impersonatorMemberSchema = impersonatorBaseSchema.omit({ consent_confirmed: true, purpose: true, veto_power: true })
+  .refine(publicSourceRule, { message: 'public_sources (liste d\'URLs non vide) requis pour la source public', path: ['public_sources'] });
 const impersonatorTeamSchema = z.object({
   name: z.string().min(1).max(120),
   members: z.array(impersonatorMemberSchema).min(2).max(12),
@@ -186,8 +194,8 @@ const impersonatorTeamSchema = z.object({
   voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
   veto_power: z.boolean().optional(),
   personality_simulation_enabled: z.boolean().optional(),
-  consent_confirmed: z.literal(true),
-});
+  consent_confirmed: z.literal(true).optional(),
+}).refine((value) => value.consent_confirmed === true || value.members.every((m) => m.source === 'public'), { message: 'consentement explicite requis (sauf si tous les membres sont de source public)', path: ['consent_confirmed'] });
 
 // Limites de la version en ligne (surchargeables par environnement).
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
@@ -389,7 +397,8 @@ async function buildImpersonatorAgent(app, me, d) {
   const impersonator = {
     persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
     source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
-    consent_confirmed: true, consent_reference: d.consent_reference || null, clues: d.clues || [], portrait_url: d.portrait_url || null,
+    consent_confirmed: d.source === 'public' ? d.consent_confirmed === true : true, public_sources: d.public_sources || [],
+    consent_reference: d.consent_reference || null, clues: d.clues || [], portrait_url: d.portrait_url || null,
   };
   const definition = impersonatorAgentDefinition({
     agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,

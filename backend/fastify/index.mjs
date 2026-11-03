@@ -6,6 +6,9 @@ import buildContext from './lib/context.mjs';
 import authPlugin from './plugins/auth.mjs';
 import { applyEnvFileDefaults } from './lib/env-file.mjs';
 import { metricsEndpoint } from './lib/metrics.mjs';
+import { fileURLToPath } from 'node:url';
+import { parse as parseYaml } from 'yaml';
+import { synchronizePersonaPackage } from '../../core/persona-package.mjs';
 import { isSignedChatWebhook, registerBodyParsers } from './lib/body-parsers.mjs';
 
 applyEnvFileDefaults();
@@ -16,6 +19,19 @@ registerBodyParsers(app);
 
 const ctx = await buildContext();
 app.decorate('kayrosContext', ctx);
+
+// Personas déclaratives (un fichier par persona dans personas/) : chargées via le constructeur
+// impersonator gouverné, sans écraser un agent existant. KAYROS_PERSONAS_DIR=off désactive.
+if (process.env.KAYROS_PERSONAS_DIR !== 'off' && ctx.engine?.swarm) {
+  const personasDir = process.env.KAYROS_PERSONAS_DIR || fileURLToPath(new URL('../../personas/', import.meta.url));
+  try {
+    const result = await synchronizePersonaPackage(ctx.engine.swarm, personasDir, {
+      tenantId: process.env.KAYROS_PERSONAS_TENANT_ID || null, parse: (text) => parseYaml(text),
+    });
+    app.log.info({ personas: result }, 'personas déclaratives synchronisées');
+    for (const e of result.errors) app.log.warn(`persona rejetée (${e.file}) : ${e.error}`);
+  } catch (error) { app.log.error(error, 'synchronisation des personas impossible'); }
+}
 
 await app.register(cors, { origin: [ctx.ALLOWED_ORIGIN, 'null'] });
 // /metrics : Bearer METRICS_TOKEN si défini, sinon loopback direct uniquement
