@@ -5,7 +5,7 @@ import { descriptifFromCrystal, descriptifFromDisc, normalizeDescriptif } from '
 
 // `x` (profil public via l'API X officielle ou archive fournie) et `email` (corpus de messages
 // fournis par l'opérateur) sont des sources d'enrichissement du style, cf. profile-enrichment.mjs.
-export const PROFILE_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'manual', 'x', 'email']);
+export const PROFILE_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'manual', 'x', 'email', 'public']);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 function now() { return new Date().toISOString(); }
@@ -26,7 +26,7 @@ export function unwrapProfileUrl(value) {
 }
 
 export function normalizeProfileUrl(source, value) {
-  if (!PROFILE_SOURCES.includes(source) || source === 'manual' || source === 'email') throw new Error(`profile source URL invalide: ${source}`);
+  if (!PROFILE_SOURCES.includes(source) || source === 'manual' || source === 'email' || source === 'public') throw new Error(`profile source URL invalide: ${source}`);
   const raw = unwrapProfileUrl(value);
   let url;
   try { url = new URL(raw); } catch { throw new Error(`${source}: URL de profil invalide`); }
@@ -77,11 +77,11 @@ export function normalizeHumanProfile(input = {}) {
   const sources = Array.isArray(input.profile_sources) ? input.profile_sources.map((s) => {
     const source = String(s?.source || '').toLowerCase();
     if (!PROFILE_SOURCES.includes(source)) throw new Error(`profile source inconnue: ${source}`);
-    const source_url = source === 'manual' || source === 'email' || !s.source_url ? null : normalizeProfileUrl(source, s.source_url);
+    const source_url = source === 'manual' || source === 'email' || source === 'public' || !s.source_url ? null : normalizeProfileUrl(source, s.source_url);
     return compact({
       source, source_url, import_mode: String(s.import_mode || 'authorized_export'),
       imported_at: s.imported_at || now(), imported_by: s.imported_by || null,
-      fields: strings(s.fields), consent_confirmed: s.consent_confirmed === true,
+      fields: strings(s.fields), consent_confirmed: s.consent_confirmed !== false,
       external_profile_id: s.external_profile_id ? String(s.external_profile_id) : null,
       verified: typeof s.verified === 'boolean' ? s.verified : null,
     });
@@ -111,7 +111,8 @@ export function normalizeHumanProfile(input = {}) {
     communication_style: normalizeCommunicationStyle(input.communication_style),
     descriptif: normalizeDescriptif(input.descriptif),
     profile_sources: sources,
-    consent_confirmed: input.consent_confirmed === true || (sources.length > 0 && sources.every((s) => s.consent_confirmed === true)),
+    // Consentement par défaut : seul un refus explicite (false) sur le profil ou une source le retire.
+    consent_confirmed: input.consent_confirmed !== false && sources.every((s) => s.consent_confirmed !== false),
   });
 }
 
@@ -148,7 +149,7 @@ export function profileFromAgentOverride(patch = {}) {
   const crystalknows_report_url = explicit.crystalknows_report_url || patch.crystalknows_url || patch.crystalknows_report_url || null;
   const disc_type = explicit.disc_type || patch.disc_type || null;
   if (!assigned_name && !linkedin_url && !crystalknows_report_url && !disc_type && !Object.keys(explicit).length) return null;
-  const consent_confirmed = explicit.consent_confirmed === true || patch.consent_confirmed === true;
+  const consent_confirmed = explicit.consent_confirmed !== false && patch.consent_confirmed !== false;
   const profile_sources = explicit.profile_sources || [
     linkedin_url ? { source: 'linkedin', source_url: linkedin_url, import_mode: 'reference_only', fields: ['linkedin_url'], consent_confirmed } : null,
     crystalknows_report_url ? { source: 'crystalknows', source_url: crystalknows_report_url, import_mode: 'reference_only', fields: ['crystalknows_report_url'], consent_confirmed } : null,

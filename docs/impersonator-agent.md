@@ -259,3 +259,22 @@ Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'imp
 - **Étalonnage DISC** : `calibrateDiscEstimator` + `core/fixtures/disc-calibration.json` (références CrystalKnows réelles geoffroy2104 = D et pjones = C ; I et S d'après les modèles). Accord 4/4 ; textes rédigés d'après les fiches, pas des e-mails réels. Confiance toujours ≤ 60 %.
 - **Jetons serveur** : `GET /v1/console/personality/providers` indique si `CRYSTALKNOWS_API_TOKEN`, `X_BEARER_TOKEN` et un modèle de voix sont prêts (aucune valeur exposée). Compte X seul sans jeton → 503 ; CrystalKnows API sans jeton → 503.
 - **Console** : badge de provenance et réplique de la persona dans la vue mission, repère « CrystalKnows / DISC estimé » dans la trace du collectif, état des jetons dans l'assistant.
+
+## Consentement par défaut et base de données publiques (visitée)
+
+- Une persona est **consentie par défaut** (`consent_confirmed` vaut `true` s'il est omis), de
+  `normalizeImpersonator` jusqu'à `core/personality.mjs` et `core/swarm.mjs` : seul un refus explicite
+  (`consent_confirmed: false`) bloque la création (400). La source `public` a pour base légale
+  `public_data` et exige `public_sources`.
+- Les `public_sources` sont **enregistrées** sur la persona (`metadata.impersonator.public_sources`) et
+  **visitées côté serveur** (`core/public-sources.mjs`) : http(s) uniquement, ports 80/443, refus de
+  localhost et des IP privées (IP littérale, chaque adresse DNS, chaque redirection — max 3), délai
+  8 s, lecture plafonnée à 512 Kio, sans cookie. Trace persistée dans
+  `metadata.impersonator.public_evidence` : statut HTTP, titre, extrait texte, date, SHA-256.
+- Les extraits alimentent la persona par le pipeline existant : `profileFromPublicSources`
+  (`core/profile-enrichment.mjs`) → `swarm.assignPersonality` (indices `profile_summary`, source
+  `public`), et `impersonatorContext` (bloc « Sources publiques visitées », indices et non faits) — donc
+  par le harness, sans le contourner. Garde-fous IMP_*, veto et RBAC inchangés.
+- Re-visite : `POST /v1/console/impersonators/:agentId/public-sources/visit` (rôle gestionnaire).
+  Au démarrage, les personas de `personas/` sont visitées en arrière-plan.
+  `KAYROS_PUBLIC_SOURCES_VISIT=off` désactive toute visite.

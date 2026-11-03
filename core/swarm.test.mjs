@@ -114,15 +114,21 @@ test('built-in agent becomes a personality-enriched hybrid with consent', async 
   assert.match(renderSwarmDossierMarkdown(run), /Jean Dupont/);
 });
 
-test('personality-enabled configuration refuses profile data without consent', () => {
+test('personality-enabled configuration: consent by default, explicit refusal blocks', () => {
   const service = new SwarmService();
   assert.throws(() => service.createConfiguration({
     swarm_id: 'no_consent', swarm_name: 'No consent', active_agents: ['cfo'],
     voting_threshold: 'majority', personality_simulation_enabled: true,
     agent_rule_overrides: {
-      cfo: { assigned_human: 'Private Person', disc_type: 'D' },
+      cfo: { assigned_human: 'Private Person', disc_type: 'D', consent_confirmed: false },
     },
   }), /consentement/);
+  const ok = service.createConfiguration({
+    swarm_id: 'default_consent', swarm_name: 'Default consent', active_agents: ['cfo'],
+    voting_threshold: 'majority', personality_simulation_enabled: true,
+    agent_rule_overrides: { cfo: { assigned_human: 'Public Persona', disc_type: 'D' } },
+  });
+  assert.ok(ok);
 });
 
 test('v6 compact override accepts supplied LinkedIn/Crystal Markdown links', async () => {

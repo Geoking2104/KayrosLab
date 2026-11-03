@@ -408,6 +408,28 @@ export function buildEnrichedProfile({ assigned_name = null, crystal = null, lin
   return { profile, evidence, style, estimate, generated_at: now() };
 }
 
+// ---------------------------------------------------------------- Sources publiques visitées
+/**
+ * Fragment de human_profile issu des traces de visite (core/public-sources.mjs). Seuls les
+ * extraits réellement lus sont repris (aucune inférence) : ils deviennent des indices de
+ * `profile_summary`, et la provenance est tracée dans `profile_sources` (source 'public').
+ */
+export function profileFromPublicSources(records = [], { imported_by = null, assigned_name = null } = {}) {
+  const ok = (Array.isArray(records) ? records : []).filter((r) => r && !r.error && (r.title || r.excerpt));
+  if (!ok.length) return null;
+  const summary = ok.map((r) => {
+    const host = (() => { try { return new URL(r.final_url || r.url).hostname; } catch { return r.url; } })();
+    const excerpt = String(r.excerpt || '').slice(0, 280);
+    return `Source publique ${host}${r.title ? ` — ${r.title}` : ''}${excerpt ? ` : « ${excerpt}${(r.excerpt || '').length > 280 ? '…' : ''} »` : ''}`;
+  });
+  return normalizeHumanProfile({
+    assigned_name: assigned_name || null,
+    profile_summary: summary,
+    consent_confirmed: true,
+    profile_sources: [{ source: 'public', import_mode: 'public_web', imported_by, fields: ['profile_summary'], consent_confirmed: true }],
+  });
+}
+
 export const ENRICHMENT_LIMITS = Object.freeze([
   'LinkedIn : aucun scraping. Seul l’export officiel « Obtenir une copie de vos données » (CSV) ou l’API /v2/me de la personne connectée est lu.',
   'CrystalKnows : seule la page publique /p/<profil> est lue, sans session ni cookie. Un profil privé n’est pas récupérable ; utilisez alors l’export JSON ou l’API v4 avec jeton.',

@@ -51,7 +51,7 @@ test('enrichissement : page publique Crystal + e-mails, puis impersonator « enr
 test('enrichissement : consentement requis, URL hors /p/ refusée, lecture réseau réservée', async (t) => {
   const { app } = await buildApp({ role: 'contributeur', fetchImpl: async () => { throw new Error('ne doit pas être appelé'); } });
   t.after(() => app.close());
-  const noConsent = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { crystal_public_html: html } });
+  const noConsent = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { consent_confirmed: false, crystal_public_html: html } });
   assert.equal(noConsent.statusCode, 400);
   const network = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { consent_confirmed: true, crystal_public_url: 'geoffroy2104' } });
   assert.equal(network.statusCode, 403);

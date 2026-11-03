@@ -10,18 +10,19 @@ import { SwarmService } from './swarm.mjs';
 const json = (o) => JSON.stringify(o);
 const pub = { name: 'Alex Martin', role: 'CFO', source: 'public', public_sources: ['https://example.com/alex'] };
 
-test('source public : consentement non requis mais public_sources exigé', () => {
+test('source public : consentie par défaut, base données publiques, public_sources exigé', () => {
   const i = normalizeImpersonator({ persona_name: 'A', source: 'public', public_sources: ['https://x.example/a'] });
   assert.equal(i.legal_basis, 'public_data');
-  assert.equal(i.consent_confirmed, false);
+  assert.equal(i.consent_confirmed, true);
   assert.deepEqual(i.public_sources, ['https://x.example/a']);
   assert.throws(() => normalizeImpersonator({ persona_name: 'A', source: 'public' }), /public_sources/);
   assert.throws(() => normalizeImpersonator({ persona_name: 'A', source: 'public', public_sources: ['pas-une-url'] }), /URLs/);
 });
 
-test('les autres sources gardent l\'exigence de consentement', () => {
+test('autres sources : consentement par défaut, refus explicite bloquant', () => {
   for (const source of ['linkedin', 'crystalknows', 'export', 'manual', 'enriched']) {
-    assert.throws(() => normalizeImpersonator({ persona_name: 'A', source, public_sources: ['https://x.example'] }), /consentement/);
+    assert.equal(normalizeImpersonator({ persona_name: 'A', source, public_sources: ['https://x.example'] }).consent_confirmed, true);
+    assert.throws(() => normalizeImpersonator({ persona_name: 'A', source, consent_confirmed: false }), /consentement/);
     assert.equal(normalizeImpersonator({ persona_name: 'A', source, consent_confirmed: true }).legal_basis, 'consent');
   }
 });
@@ -38,7 +39,7 @@ test('garde-fous IMP_* et veto inchangés pour une persona publique', () => {
 test('loadPersonaPackage : un fichier par persona, rejets rapportés, catalog/ ignoré', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'personas-'));
   await writeFile(join(dir, 'alex.json'), json(pub));
-  await writeFile(join(dir, 'sans-consentement.json'), json({ name: 'B', source: 'manual' }));
+  await writeFile(join(dir, 'sans-consentement.json'), json({ name: 'B', source: 'manual', consent_confirmed: false }));
   await writeFile(join(dir, 'notes.txt'), 'ignoré');
   await mkdir(join(dir, 'catalog'));
   await writeFile(join(dir, 'catalog', 'modele.json'), json(pub));

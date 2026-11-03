@@ -12,6 +12,8 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, extname, basename } from 'node:path';
 import { normalizeImpersonator, impersonatorAgentDefinition, personaClues } from './impersonator.mjs';
+import { mergeHumanProfiles } from './personality.mjs';
+import { profileFromPublicSources } from './profile-enrichment.mjs';
 
 export const PERSONA_EXTENSIONS = Object.freeze(['.yaml', '.yml', '.json']);
 const FILE_ID = /^[a-z0-9][a-z0-9_-]{0,63}$/;
@@ -96,14 +98,38 @@ export async function loadPersonaPackage(directory, { parse = defaultParser } = 
  * Enregistre les personas absentes du registre du tenant (idempotent, jamais d'écrasement).
  * Renvoie `{ created, skipped, errors }`.
  */
-export async function synchronizePersonaPackage(swarm, directory, { tenantId = null, by = 'persona-package', parse } = {}) {
+/**
+ * Visite les public_sources d'une persona (via `visit`, ex. visitPublicSources) et lie la trace
+ * (metadata.impersonator.public_evidence) ; les extraits passent par profileFromPublicSources.
+ */
+export async function attachPersonaPublicEvidence(swarm, agent, visit, { tenantId = null, by = 'persona-package' } = {}) {
+  const urls = agent?.metadata?.impersonator?.public_sources || [];
+  if (!urls.length || typeof visit !== 'function') return agent;
+  const evidence = await visit(urls);
+  const impersonator = normalizeImpersonator({ ...agent.metadata.impersonator, public_evidence: evidence });
+  let next = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), impersonator } }, { tenantId, by });
+  const fragment = profileFromPublicSources(impersonator.public_evidence, { imported_by: by });
+  if (fragment) next = swarm.assignPersonality(next.agent_id, mergeHumanProfiles(next.human_profile, fragment), { tenantId, by });
+  return next;
+}
+
+export async function synchronizePersonaPackage(swarm, directory, { tenantId = null, by = 'persona-package', parse, visit = null } = {}) {
   const { personas, errors } = await loadPersonaPackage(directory, { parse });
-  const created = []; const skipped = [];
+  const created = []; const skipped = []; const visited = [];
   await swarm.hydrateTenant?.(tenantId);
   for (const { file, definition } of personas) {
-    if (swarm.registry?.get?.(definition.agent_id, { tenantId })) { skipped.push(definition.agent_id); continue; }
+    const existing = swarm.registry?.get?.(definition.agent_id, { tenantId });
+    if (existing) {
+      skipped.push(definition.agent_id);
+      // Persona existante jamais visitée : la trace est ajoutée (rien d'autre n'est modifié).
+      if (visit && existing.metadata?.impersonator?.public_sources?.length && !existing.metadata.impersonator.public_evidence?.length) {
+        try { await attachPersonaPublicEvidence(swarm, existing, visit, { tenantId, by }); visited.push(definition.agent_id); } catch (error) { errors.push({ file, error: error.message }); }
+      }
+      continue;
+    }
     try {
-      const agent = swarm.createAgent(definition, { tenantId, by });
+      let agent = swarm.createAgent(definition, { tenantId, by });
+      if (visit) { agent = await attachPersonaPublicEvidence(swarm, agent, visit, { tenantId, by }); visited.push(agent.agent_id); }
       try {
         swarm.updateAgent?.(agent.agent_id, { metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile), persona_file: file } }, { tenantId, by });
       } catch { /* la persona de base reste valide */ }
@@ -114,5 +140,5 @@ export async function synchronizePersonaPackage(swarm, directory, { tenantId = n
     }
   }
   await swarm.flush?.();
-  return { created, skipped, errors };
+  return { created, skipped, visited, errors };
 }

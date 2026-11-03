@@ -9,6 +9,7 @@ import { metricsEndpoint } from './lib/metrics.mjs';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import { synchronizePersonaPackage } from '../../core/persona-package.mjs';
+import { visitPublicSources } from '../../core/public-sources.mjs';
 import { isSignedChatWebhook, registerBodyParsers } from './lib/body-parsers.mjs';
 
 applyEnvFileDefaults();
@@ -30,6 +31,14 @@ if (process.env.KAYROS_PERSONAS_DIR !== 'off' && ctx.engine?.swarm) {
     });
     app.log.info({ personas: result }, 'personas déclaratives synchronisées');
     for (const e of result.errors) app.log.warn(`persona rejetée (${e.file}) : ${e.error}`);
+    // Visite des sources publiques en arrière-plan (ne retarde pas le démarrage) ;
+    // KAYROS_PUBLIC_SOURCES_VISIT=off la désactive.
+    if (String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() !== 'off') {
+      synchronizePersonaPackage(ctx.engine.swarm, personasDir, {
+        tenantId: process.env.KAYROS_PERSONAS_TENANT_ID || null, parse: (text) => parseYaml(text), visit: (urls) => visitPublicSources(urls),
+      }).then((visit) => app.log.info({ visited: visit.visited }, 'sources publiques des personas visitées'))
+        .catch((error) => app.log.warn(`visite des sources publiques impossible : ${error.message}`));
+    }
   } catch (error) { app.log.error(error, 'synchronisation des personas impossible'); }
 }
 
