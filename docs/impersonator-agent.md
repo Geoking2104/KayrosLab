@@ -278,3 +278,7 @@ Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'imp
 - Re-visite : `POST /v1/console/impersonators/:agentId/public-sources/visit` (rôle gestionnaire).
   Au démarrage, les personas de `personas/` sont visitées en arrière-plan.
   `KAYROS_PUBLIC_SOURCES_VISIT=off` désactive toute visite.
+
+## Agent distant AG-UI (`remote-ag-ui`, P8)
+
+Un agent dont `metadata.runtime` vaut `remote-ag-ui` (avec `metadata.remote_ag_ui.url`) délègue son analyse à un serveur AG-UI distant (`core/adapters/remote-ag-ui.mjs`) : POST `RunAgentInput`, flux SSE (`TEXT_MESSAGE_CONTENT`, `RUN_FINISHED`, `RUN_ERROR`). La gouvernance reste locale : règles effectives (`resolveEffectiveRules`) transmises en contexte et rattachées au résultat, `checkCompliance` appliqué à la sortie (enforce : une relance corrective puis `HarnessComplianceError` ; flag : notation), URL publique http(s) uniquement (anti-SSRF), sans redirection, délai et taille bornés. Le verdict passe ensuite par le consensus, le veto et l'arbitrage humain habituels.
