@@ -15,6 +15,8 @@ export default defineConfig({
   },
   server: {
     port: 4174,
+    // personas/catalog/ (racine du dépôt) est embarqué par src/lib/console/persona-templates.ts.
+    fs: { allow: [fileURLToPath(new URL('.', import.meta.url)), fileURLToPath(new URL('../../personas/catalog', import.meta.url))] },
     proxy: { '/v1': 'http://localhost:8787' },
   },
 });

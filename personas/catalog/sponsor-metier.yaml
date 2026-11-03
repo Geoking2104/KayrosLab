@@ -1,0 +1,12 @@
+id: sponsor-metier
+template_title: Sponsor métier pressé
+description: Directeur métier qui veut un résultat visible rapidement et une adoption simple.
+role: Directeur métier
+department: Opérations
+purpose: pitch_review
+veto_power: false
+mission: Simuler la réaction d'un sponsor métier (valeur rapide, adoption, effort des équipes).
+clues:
+  - Veut un premier résultat visible en moins de trois mois
+  - S'inquiète de la charge imposée aux équipes
+  - Soutient si un cas d'usage concret est démontré

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { TemplatePicker } from "./TemplatePicker";
+import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
@@ -68,6 +70,8 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   const [mode, setMode] = useState<null | "metier" | "hybride" | "impersonator" | "team">(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [simId, setSimId] = useState<string | null>(null);
+  const [templating, setTemplating] = useState(false);
+  const [template, setTemplate] = useState<PersonaTemplate | null>(null);
   const list = state.agents.filter((agent) => tab === "all" || agent.kind === tab);
   const editing = state.agents.find((agent) => agent.id === editingId) ?? null;
 
@@ -75,7 +79,14 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
     setEditingId(null);
     setSimId(null);
     setPicking(false);
+    setTemplating(false);
+    setTemplate(null);
     setMode(next);
+  }
+
+  function pickTemplate(next: PersonaTemplate) {
+    openCreate("impersonator");
+    setTemplate(next);
   }
 
   if (focus) {
@@ -117,6 +128,18 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               setPicking((open) => !open);
             }}
           >{t("Ajouter un agent")}</Button>
+          {manager ? (
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setMode(null);
+                setEditingId(null);
+                setSimId(null);
+                setPicking(false);
+                setTemplating((open) => !open);
+              }}
+            >{t("Partir d’un modèle")}</Button>
+          ) : null}
           {!manager ? <Button variant="secondary" onClick={() => setRole("comex")}>{t("Passer en COMEX")}</Button> : null}
         </div>
       </Panel>
@@ -135,14 +158,19 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
         )
       ) : null}
 
+      {templating && manager && !mode ? (
+        <TemplatePicker onPick={pickTemplate} onClose={() => setTemplating(false)} />
+      ) : null}
+
       {mode === "metier" && manager && !editing ? (
         <MetierForm onClose={() => setMode(null)} onCreate={createAgent} onUpdate={updateAgent} />
       ) : null}
       {mode && mode !== "metier" && manager && !editing ? (
         <Composer
-          key={mode}
+          key={`${mode}-${template?.id ?? ""}`}
           mode={mode}
-          onClose={() => setMode(null)}
+          template={mode === "impersonator" ? template ?? undefined : undefined}
+          onClose={() => { setMode(null); setTemplate(null); }}
           onAgent={createAgent}
           onUpdate={updateAgent}
           onTeam={createImpersonatorTeam}
@@ -428,6 +456,7 @@ function MetierForm({
 function Composer({
   mode,
   existing,
+  template,
   onClose,
   onAgent,
   onUpdate,
@@ -435,6 +464,8 @@ function Composer({
 }: {
   mode: "metier" | "hybride" | "impersonator" | "team";
   existing?: Agent;
+  /** Modèle de personas/catalog/ : pré-remplit fonction, service, mission, indices et veto. */
+  template?: PersonaTemplate;
   onClose: () => void;
   onAgent: (agent: {
     name: string;
@@ -463,11 +494,11 @@ function Composer({
   onTeam: (names: string[], clues: string) => { ok: boolean; reason?: string };
 }) {
   const [name, setName] = useState(tc(existing?.name));
-  const [role, setRole] = useState(existing ? tc(existing.role) : (mode === "metier" ? t("Contrôle de gestion") : t("Persona simulée")));
-  const [department, setDepartment] = useState(existing ? tc(existing.department) : (mode === "metier" ? "Support" : "Simulation"));
-  const [mission, setMission] = useState(tc(existing?.mission));
-  const [clues, setClues] = useState(tc(existing?.clues));
-  const [veto, setVeto] = useState(existing?.veto ?? false);
+  const [role, setRole] = useState(existing ? tc(existing.role) : template?.role || (mode === "metier" ? t("Contrôle de gestion") : t("Persona simulée")));
+  const [department, setDepartment] = useState(existing ? tc(existing.department) : template?.department || (mode === "metier" ? "Support" : "Simulation"));
+  const [mission, setMission] = useState(existing ? tc(existing.mission) : template?.mission || "");
+  const [clues, setClues] = useState(existing ? tc(existing.clues) : template?.clues.join("\n") || "");
+  const [veto, setVeto] = useState(existing?.veto ?? template?.veto ?? false);
   const [consent, setConsent] = useState(existing?.consented ?? false);
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => Boolean(existing?.consented)));
   const [team, setTeam] = useState(t("Camille Achats\nJordan Achats\nAlex Risque"));
@@ -484,7 +515,7 @@ function Composer({
 
   function acceptLink(next: ProfileSource, url: string) {
     setLink({ source: next, url });
-    setClues(profileClue(next, url));
+    setClues(template?.clues.length ? `${profileClue(next, url)}\n${template.clues.join("\n")}` : profileClue(next, url));
     setSource("manuel");
     setError("");
   }
