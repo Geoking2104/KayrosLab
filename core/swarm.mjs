@@ -951,6 +951,14 @@ export class SwarmService {
       // Mission annulée : aucun nouvel agent ne démarre (pas de jetons consommés).
       if (signal?.aborted) throw signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
       let raw = agentResults?.[definition.agent_id];
+      if (raw == null && definition.metadata?.runtime === 'remote-ag-ui') {
+        // P8 : agent distant AG-UI ; harnais et règles effectives appliqués à la sortie.
+        const { runRemoteAgUiAgent } = await import('./adapters/remote-ag-ui.mjs');
+        raw = await runRemoteAgUiAgent({
+          definition, effectiveContext: compileEffectiveAgentContext(definition), question, context,
+          runId: run_id, signal, ...(this.remoteAgUi || {}),
+        });
+      }
       if (raw == null) {
         const agent = new SpecializedDecisionAgent({
           definition, effectiveContext: compileEffectiveAgentContext(definition),
@@ -966,6 +974,7 @@ export class SwarmService {
         });
       }
       const analysis = normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled });
+      if (raw?.provider === 'remote-ag-ui') analysis.harness_compliance = raw.compliance || null;
       // Impersonator : provenance du DISC toujours exposée ; sans retour en voix de la
       // persona (modèle absent ou muet), l'aperçu déterministe « ainsi je parlerais » le remplace.
       if (impersonatorOf(definition) && definition.human_profile && config.personality_simulation_enabled) {
