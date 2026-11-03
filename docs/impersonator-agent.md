@@ -35,10 +35,13 @@ feeds a materially impactful decision about them.
 | `crystalknows` | Crystal Profiles API lookup by LinkedIn URL or email (eligible plans) → DISC, archétype, motivateurs, triggers, objection patterns. | Server-side token only. |
 | `export` | An authorised structured export (JSON) parsed client-side then sent as `profile_data`. | The user certifies the export is authorised. Portrait taken from the export when present. |
 | `manual` | Free-text clues entered by the operator. | Lowest fidelity; still gated by consent + guardrails. |
+| `public` | Publicly available data only, listed in `public_sources` (non-empty list of http(s) URLs). | **Consent not required** (`legal_basis: public_data`); guardrails IMP_01…05, `veto_power`, harness and RBAC unchanged. |
 
 ## 4. Consent, legal and ethics (mandatory)
 
-- `consent_confirmed: true` is required; without it the agent is rejected (HTTP 400).
+- `consent_confirmed: true` is required for every source except `public`; without it the agent is rejected (HTTP 400).
+- Source `public` is exempt from consent but requires `public_sources` (non-empty list of http(s) URLs), recorded on `metadata.impersonator` and shown in the persona context.
+- Declarative personas: one file per persona in `personas/` (see `personas/README.md`), loaded at startup by `core/persona-package.mjs` through the same constructor.
 - Optional `consent_reference` records where the consent is held.
 - The persona is used **only** for collaboration/communication/idea-testing simulation. It must not be
   used for hiring, credit, insurance, housing, health or any materially impactful decision about the person.

@@ -6,7 +6,9 @@
 // stakeholder would likely react — never to speak in their name.
 //
 // Design rules:
-//  - explicit consent is mandatory before any profile clue is attached;
+//  - explicit consent is mandatory before any profile clue is attached, except for the
+//    'public' source, built only from publicly available data, which instead requires a
+//    non-empty list of public source URLs (public_sources) kept for traceability;
 //  - the persona is a *simulation*, always labelled as such in the output;
 //  - no private fact that is not in the supplied clues may be invented;
 //  - the agent may never be used for a materially impactful decision about the person.
@@ -14,7 +16,9 @@
 import { voiceContext } from './impersonator-voice.mjs';
 import { buildPersonalityContext, normalizeHumanProfile } from './personality.mjs';
 
-export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual', 'enriched']);
+export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual', 'enriched', 'public']);
+/** Sources exemptées de consentement explicite (données publiques uniquement, sources tracées). */
+export const CONSENT_EXEMPT_SOURCES = Object.freeze(['public']);
 export const IMPERSONATOR_PURPOSES = Object.freeze(['idea_test', 'objection_rehearsal', 'pitch_review']);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
@@ -33,7 +37,15 @@ export function normalizeImpersonator(input = {}) {
   if (!IMPERSONATOR_SOURCES.includes(source)) throw new Error(`impersonator: source inconnue ${source}`);
   const purpose = str(input.purpose || 'idea_test').toLowerCase();
   if (!IMPERSONATOR_PURPOSES.includes(purpose)) throw new Error(`impersonator: purpose inconnu ${purpose}`);
-  if (input.consent_confirmed !== true) throw new Error('impersonator: consentement explicite requis');
+  const public_sources = strings(input.public_sources);
+  const consentExempt = CONSENT_EXEMPT_SOURCES.includes(source);
+  if (consentExempt) {
+    if (!public_sources.length) throw new Error('impersonator: public_sources (liste d\'URLs publiques) requis pour la source public');
+    const bad = public_sources.find((u) => !/^https?:\/\/\S+$/i.test(u));
+    if (bad) throw new Error(`impersonator: public_sources doit contenir des URLs http(s) (${bad})`);
+  } else if (input.consent_confirmed !== true) {
+    throw new Error('impersonator: consentement explicite requis');
+  }
   const portrait_url = str(input.portrait_url) || null;
   if (portrait_url && !/^https:\/\//i.test(portrait_url) && !/^data:image\//i.test(portrait_url)) {
     throw new Error('impersonator: portrait_url doit être une URL https ou une image en data-URI');
@@ -46,7 +58,9 @@ export function normalizeImpersonator(input = {}) {
     source,
     source_url: str(input.source_url) || null,
     purpose,
-    consent_confirmed: true,
+    consent_confirmed: consentExempt ? input.consent_confirmed === true : true,
+    legal_basis: consentExempt ? 'public_data' : 'consent',
+    public_sources,
     consent_reference: str(input.consent_reference) || null,
     clues: strings(input.clues),
     notes: str(input.notes) || null,
@@ -112,7 +126,9 @@ export function impersonatorContext(agent) {
     'PERSONA SIMULATION — aide à l\'épreuve d\'idée, jamais une déclaration d\'identité.',
     `Persona simulée : ${[impersonator.persona_name, impersonator.persona_role, impersonator.persona_company].filter(Boolean).join(' — ')}`,
     `Source des indices : ${impersonator.source}${impersonator.source_url ? ` (${impersonator.source_url})` : ''}`,
-    `Consentement : confirmé${impersonator.consent_reference ? ` (réf. ${impersonator.consent_reference})` : ''}`,
+    impersonator.legal_basis === 'public_data'
+      ? `Base : données publiques uniquement (${impersonator.public_sources.join(', ')})`
+      : `Consentement : confirmé${impersonator.consent_reference ? ` (réf. ${impersonator.consent_reference})` : ''}`,
     clues.disc ? `DISC : ${clues.disc}` : null,
     clues.archetype ? `Archétype : ${clues.archetype}` : null,
     clues.skepticism ? `Scepticisme : ${clues.skepticism}` : null,
