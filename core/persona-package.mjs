@@ -14,6 +14,7 @@ import { join, extname, basename } from 'node:path';
 import { normalizeImpersonator, impersonatorAgentDefinition, personaClues } from './impersonator.mjs';
 import { mergeHumanProfiles } from './personality.mjs';
 import { profileFromPublicSources } from './profile-enrichment.mjs';
+import { loadSkillCatalog, resolveSkills, SKILLS_FILE } from './persona-skills.mjs';
 
 export const PERSONA_EXTENSIONS = Object.freeze(['.yaml', '.yml', '.json']);
 const FILE_ID = /^[a-z0-9][a-z0-9_-]{0,63}$/;
@@ -27,7 +28,7 @@ async function defaultParser(text, ext) {
 }
 
 /** Convertit une entrée de fichier en descripteur impersonator + options de définition. */
-export function personaFromEntry(entry, { file = null } = {}) {
+export function personaFromEntry(entry, { file = null, skillCatalog = [] } = {}) {
   if (!entry || typeof entry !== 'object' || Array.isArray(entry)) throw new Error('persona : objet attendu');
   const name = String(entry.name ?? '').trim();
   const fallbackId = file ? basename(file, extname(file)) : '';
@@ -47,9 +48,12 @@ export function personaFromEntry(entry, { file = null } = {}) {
     notes: entry.notes,
     portrait_url: entry.portrait_url,
   });
+  const skills = resolveSkills(entry.skills, skillCatalog);
   return {
     agent_id: agent_id || undefined,
     impersonator,
+    skills,
+    tools: Array.isArray(entry.tools) ? entry.tools.map((t) => String(t).trim()).filter(Boolean).slice(0, 20) : [],
     veto_power: entry.veto_power !== false,
     mission: entry.mission,
     human_profile: {
@@ -63,27 +67,35 @@ export function personaFromEntry(entry, { file = null } = {}) {
 /** Définition d'agent prête pour `swarm.createAgent`, issue du constructeur impersonator gouverné. */
 export function personaAgentDefinition(entry, opts) {
   const p = personaFromEntry(entry, opts);
-  return impersonatorAgentDefinition(p);
+  const d = impersonatorAgentDefinition(p);
+  // Skills (instantanés) et allowlist explicite : les outils effectifs restent skill ∩ assertToolAllowed.
+  if (p.skills.length) d.metadata = { ...d.metadata, skills: p.skills };
+  if (p.tools.length) d.tools = p.tools;
+  return d;
 }
 
 /**
  * Lit un dossier de personas. Renvoie `{ personas: [{file, definition}], errors: [{file, error}] }`.
  * Un dossier absent n'est pas une erreur (aucune persona déclarée).
  */
-export async function loadPersonaPackage(directory, { parse = defaultParser } = {}) {
+export async function loadPersonaPackage(directory, { parse = defaultParser, skillCatalog = null } = {}) {
+  let catalog = skillCatalog || []; let catalogError = null;
+  if (!skillCatalog) {
+    try { catalog = await loadSkillCatalog(join(directory, SKILLS_FILE), { parse: (t) => parse(t, '.yaml') }); } catch (error) { catalogError = error; }
+  }
   const entries = await readdir(directory, { withFileTypes: true }).catch((error) => {
     if (error.code === 'ENOENT') return [];
     throw error;
   });
-  const personas = []; const errors = []; const seen = new Set();
+  const personas = []; const errors = catalogError ? [{ file: SKILLS_FILE, error: catalogError.message }] : []; const seen = new Set();
   for (const dirent of entries.sort((a, b) => a.name.localeCompare(b.name))) {
     if (!dirent.isFile()) continue;
     const ext = extname(dirent.name).toLowerCase();
-    if (!PERSONA_EXTENSIONS.includes(ext) || dirent.name.startsWith('.')) continue;
+    if (!PERSONA_EXTENSIONS.includes(ext) || dirent.name.startsWith('.') || dirent.name === SKILLS_FILE) continue;
     const file = join(directory, dirent.name);
     try {
       const raw = await parse(await readFile(file, 'utf8'), ext);
-      const definition = personaAgentDefinition(raw, { file: dirent.name });
+      const definition = personaAgentDefinition(raw, { file: dirent.name, skillCatalog: catalog });
       if (seen.has(definition.agent_id)) throw new Error(`persona : id en double « ${definition.agent_id} »`);
       seen.add(definition.agent_id);
       personas.push({ file: dirent.name, definition });
