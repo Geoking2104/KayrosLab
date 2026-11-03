@@ -120,7 +120,7 @@ test('fil en cours : relance, arbitrage et seconde mission sur la session refus�
   const started = await gateway.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Lancer ?', explicit: true });
   const threadId = started.thread.thread_id;
   await assert.rejects(gateway.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Encore ?', explicit: true }), { code: 'RUN_IN_PROGRESS' });
-  await assert.rejects(gateway.startContinueThread(threadId, { tenantId: 't1', text: 'Budget validé' }), { code: 'RUN_IN_PROGRESS' });
+  await assert.rejects(gateway.startContinueThread(threadId, { tenantId: 't1', text: 'Budget validé' }), { code: 'RUN_IN_PROGRESS', thread_id: threadId });
   await assert.rejects(gateway.continueThread(threadId, { tenantId: 't1', text: 'Budget validé' }), { code: 'RUN_IN_PROGRESS' });
   await assert.rejects(gateway.arbitrateThread(threadId, { action: 'accept_consensus' }, { tenantId: 't1', by: 'boss' }), { code: 'RUN_IN_PROGRESS' });
   // Isolation tenant : un autre tenant ne voit pas le fil.
@@ -299,4 +299,19 @@ test('redémarrage : attente d’arbitrage et runs suspendus (pending_review) ne
   for (const status of ['awaiting_arbitration', 'needs_clarification', 'pending_review', 'revision_required']) {
     assert.equal((await store.getThread(`th_${status}`, { tenantId: 't1' })).status, status);
   }
+});
+
+test('verrou par fil : un thread_id réservé déjà en cours est refusé même en mode concurrent (RUN_IN_PROGRESS + thread_id)', async () => {
+  const { swarm, gateway, room } = await setup();
+  const gate = deferred();
+  swarm.run = async (_id, options) => { await gate.promise; return fakeRun(options.runId, options.question); };
+  const base = { platform: 'console', room_id: room.room_id, tenantId: 't1', explicit: true, allowConcurrent: true, thread_id: 'thread-reserve-1' };
+  await gateway.startMessage({ ...base, text: 'Étape 1 ?' });
+  await assert.rejects(gateway.startMessage({ ...base, text: 'Doublon ?' }), (e) => e.code === 'RUN_IN_PROGRESS' && e.thread_id === 'thread-reserve-1');
+  // Un autre fil concurrent reste autorisé.
+  await gateway.startMessage({ ...base, thread_id: 'thread-reserve-2', text: 'Étape 2 ?' });
+  gate.resolve();
+  await gateway.idle();
+  // Fil terminé : l'identifiant ne peut pas être réutilisé pour écraser l'historique.
+  await assert.rejects(gateway.startMessage({ ...base, text: 'Réécrire ?' }), (e) => e.code === 'RUN_IN_PROGRESS' && /reprise du fil/.test(e.message));
 });
