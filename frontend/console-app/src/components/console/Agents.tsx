@@ -5,6 +5,7 @@ import { PersonaDesigner } from "./PersonaDesigner";
 import { PersonaOverview } from "./PersonaOverview";
 import { PersonaSkillPicker } from "./PersonaSkillPicker";
 import { PersonaToolPicker } from "./PersonaToolPicker";
+import { canManagePersonaTools } from "@/lib/console/api";
 import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
@@ -81,6 +82,8 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   const [quick, setQuick] = useState(false);
   const [designing, setDesigning] = useState(false);
   const consoleCtx = useConsole() as any;
+  // Réglage des outils : affiché seulement si le serveur accorde « manage » (connecté).
+  const canEditTools = Boolean(consoleCtx.live) && canManagePersonaTools(consoleCtx.permissions);
   const [template, setTemplate] = useState<PersonaTemplate | null>(null);
   const list = state.agents.filter((agent) => tab === "all" || agent.kind === tab);
   const editing = state.agents.find((agent) => agent.id === editingId) ?? null;
@@ -195,7 +198,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
       ) : null}
 
       {quick && manager && !mode ? (
-        <QuickImpersonator onCreate={createAgent} onClose={() => setQuick(false)} loadSkills={consoleCtx.live ? undefined : null} />
+        <QuickImpersonator onCreate={createAgent} onClose={() => setQuick(false)} loadSkills={consoleCtx.live ? undefined : null} canEditTools={canEditTools} />
       ) : null}
 
       {designing && manager && !mode ? (
@@ -252,7 +255,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
             />
             )
           ) : overviewId === agent.id && consoleCtx.live ? (
-            <PersonaOverview key={agent.id} agentId={agent.id} onClose={() => setOverviewId(null)} canEditTools={manager} />
+            <PersonaOverview key={agent.id} agentId={agent.id} onClose={() => setOverviewId(null)} canEditTools={canEditTools} />
           ) : simId === agent.id && agent.kind === "metier" ? (
             <MetierSim key={agent.id} agent={agent} onClose={() => setSimId(null)} />
           ) : (
@@ -578,7 +581,8 @@ function Composer({
   const [error, setError] = useState("");
   const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
   const [enriched, setEnriched] = useState<EnrichResult | null>(null);
-  const { live, enrichAgent, createCollective, state } = useConsole();
+  const { live, enrichAgent, createCollective, state, permissions } = useConsole();
+  const canEditTools = live && canManagePersonaTools(permissions);
   const [picked, setPicked] = useState<string[]>([]);
   const impersonators = state.agents.filter((a) => a.kind === "impersonator" && a.enabled);
   const personal = mode !== "metier";
@@ -649,7 +653,7 @@ function Composer({
     };
     const result = existing
       ? onUpdate(existing.id, draft)
-      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}), ...(mode === "impersonator" && skillIds.length ? { personaSkills: skillIds } : {}), ...(mode === "impersonator" && toolIds.length ? { personaTools: toolIds } : {}) });
+      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}), ...(mode === "impersonator" && skillIds.length ? { personaSkills: skillIds } : {}), ...(mode === "impersonator" && canEditTools && toolIds.length ? { personaTools: toolIds } : {}) });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
@@ -793,7 +797,7 @@ function Composer({
                 : t("Je confirme un consentement explicite. Sans cette case, rien n’est enregistré.")}</span>
             </label> : <p className="text-sm text-ink-soft">{t("Équipe à usage interne : aucun consentement requis. Les garde-fous restent obligatoires.")}</p>}
             {mode === "impersonator" && !existing && live ? <>
-              <PersonaToolPicker value={toolIds} onChange={setToolIds} />
+              {canEditTools ? <PersonaToolPicker value={toolIds} onChange={setToolIds} /> : null}
               <PersonaSkillPicker value={skillIds} onChange={setSkillIds} allowlist={toolIds} />
             </> : null}
             <fieldset className="flex flex-col gap-2">

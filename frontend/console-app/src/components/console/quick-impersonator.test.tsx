@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { QuickImpersonator } from "./QuickImpersonator";
+import { canManagePersonaTools } from "@/lib/console/api";
 import { parsePublicSources } from "@/lib/console/model";
 import { effectiveSkillToolsPreview } from "@/lib/console/api";
 
@@ -52,6 +53,29 @@ describe("QuickImpersonator", () => {
     fireEvent.click(screen.getByText("I have read the five guardrails."));
     fireEvent.click(screen.getByText("Create persona"));
     expect(onCreate).toHaveBeenCalledWith(expect.objectContaining({ personaSkills: ["roi"] }));
+  });
+  it("réglage des outils masqué hors managers, affiché et envoyé pour un manager", async () => {
+    const loadSkills = async () => [{ id: "roi", name: "ROI objection", instructions: null, tools: ["estimate_resources"] }];
+    const loadTools = vi.fn(async () => [{ name: "estimate_resources", description: "Estimate", sideEffect: "read", gate: false, assignable: true, reason: null }]);
+    const { unmount } = render(<QuickImpersonator onCreate={() => ({ ok: true })} onClose={() => {}} loadSkills={loadSkills} loadTools={loadTools} />);
+    await screen.findByText("ROI objection");
+    expect(screen.queryByText("Allowed tools")).toBeNull();
+    expect(loadTools).not.toHaveBeenCalled();
+    unmount();
+    const onCreate = vi.fn(() => ({ ok: true }));
+    render(<QuickImpersonator onCreate={onCreate} onClose={() => {}} loadSkills={loadSkills} loadTools={loadTools} canEditTools />);
+    fireEvent.click((await screen.findByText("estimate_resources")).closest("label")!.querySelector("input")!);
+    fill("Name", "Alex");
+    fill("Public URLs", "https://example.com/a");
+    fireEvent.click(screen.getByText("I have read the five guardrails."));
+    fireEvent.click(screen.getByText("Create persona"));
+    expect(onCreate).toHaveBeenCalledWith(expect.objectContaining({ personaTools: ["estimate_resources"] }));
+  });
+  it("canManagePersonaTools reflète exactement la permission serveur « manage »", () => {
+    expect(canManagePersonaTools(["read", "run", "arbitrate", "manage"])).toBe(true);
+    expect(canManagePersonaTools(["read", "run"])).toBe(false);
+    expect(canManagePersonaTools(["read"])).toBe(false);
+    expect(canManagePersonaTools(undefined)).toBe(false);
   });
   it("garde-fous à reconnaître avant création ; modèle pré-remplit", () => {
     const onCreate = vi.fn(() => ({ ok: true }));
