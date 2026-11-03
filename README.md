@@ -159,6 +159,15 @@ See the existing detailed technical sections further down in this README for API
 
 Or [book a conversation](mailto:contact@kayroslab.com).
 
+### Self-host (Docker)
+
+```bash
+cp deploy/docker/.env.example .env   # set POSTGRES_PASSWORD and KAYROS_AUTH_SECRET
+docker compose up --build            # console: http://localhost:8080/console/
+```
+
+The stack runs `fastify` (API), `postgres` and `console` (nginx, proxies `/v1`). The decision harness runs with `KAYROS_HARNESS_MODE=enforce`, and `personas/` is mounted read-only.
+
 ---
 
 *KayrosLab — crash-test your strategic decisions before the real world does.*
