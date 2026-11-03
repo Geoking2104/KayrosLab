@@ -28,6 +28,8 @@ on:
       - 'docs/openapi/**'
       - 'tests/console-pages-deploy.test.mjs'
       - 'tests/hybrid-agent-gateway.test.mjs'
+      - 'tests/deploy-pm2-jlist.test.mjs'
+      - 'deploy/ovh-vps/**'
       - '.github/workflows/backend-tests.yml'
   pull_request:
     branches: [main]
@@ -51,6 +53,8 @@ on:
       - 'core/sql/**'
       - 'tests/console-pages-deploy.test.mjs'
       - 'tests/hybrid-agent-gateway.test.mjs'
+      - 'tests/deploy-pm2-jlist.test.mjs'
+      - 'deploy/ovh-vps/**'
       - '.github/workflows/backend-tests.yml'
 
 jobs:
@@ -71,6 +75,6 @@ jobs:
         working-directory: backend/fastify
         run: npm test
       - name: Run console core security and decision-thread tests
-        run: node --test core/connector-config.test.mjs tests/hybrid-agent-gateway.test.mjs tests/console-pages-deploy.test.mjs
+        run: node --test core/connector-config.test.mjs tests/hybrid-agent-gateway.test.mjs tests/console-pages-deploy.test.mjs tests/deploy-pm2-jlist.test.mjs
       - name: Compile-check isolated TimesFM service
         run: python -m py_compile backend/timesfm-service/timesfm_service.py
