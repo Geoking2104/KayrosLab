@@ -125,6 +125,8 @@ export const api = {
   // P7 : publier / révoquer une persona (bâti sur promote).
   publishPersona: (agentId: string, body: { note?: string; session_id?: string } = {}) => call<{ agent: any; publication: any }>(`/v1/console/agents/${encodeURIComponent(agentId)}/publish`, { method: "POST", body: JSON.stringify(body) }),
   revokePersona: (agentId: string, reason: string) => call<{ agent: any; publication: any }>(`/v1/console/agents/${encodeURIComponent(agentId)}/revoke`, { method: "POST", body: JSON.stringify({ reason }) }),
+  // P5 : catalogue de compétences des personas (personas/skills.yaml).
+  personaSkills: () => call<{ skills: PersonaSkill[] }>("/v1/console/persona-skills"),
   // P6 : page persona en lecture seule.
   personaOverview: (agentId: string) => call<PersonaOverview>(`/v1/console/agents/${encodeURIComponent(agentId)}/overview`),
   // P4 : un tour de conception (brouillon seulement, aucune écriture côté serveur).
@@ -171,4 +173,12 @@ export interface PersonaOverview {
   decisionsTimeline: { seq: number; decision: string; by: string; reason: string; run_id: string; ts: string }[];
   memory: { public_sources: string[]; public_evidence: { url: string; status: number | null; title: string | null; excerpt: string | null; fetched_at: string | null }[]; profile_summary: string[]; recent_reasons: string[] };
   counts: { runs: number; vetoes: number; decisions: number };
+}
+
+export interface PersonaSkill { id: string; name: string; instructions: string | null; tools: string[] }
+
+/** Aperçu des outils effectifs : outils des compétences ∩ allowlist de la persona (rien n'élargit les droits). */
+export function effectiveSkillToolsPreview(catalog: PersonaSkill[], selected: string[], allowlist: string[] = []) {
+  const wanted = [...new Set(catalog.filter((s) => selected.includes(s.id)).flatMap((s) => s.tools))];
+  return { wanted, granted: wanted.filter((tool) => allowlist.includes(tool)), denied: wanted.filter((tool) => !allowlist.includes(tool)) };
 }

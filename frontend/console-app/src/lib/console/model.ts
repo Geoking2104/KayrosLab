@@ -141,8 +141,10 @@ export interface Agent {
   contextIds?: string[];
   /** Profil enrichi (Crystal public, export LinkedIn, e-mails, X) d’un impersonator. */
   humanProfile?: Record<string, unknown>;
-  /** Persona bâtie sur données publiques : URLs sources (exemptent du consentement, jamais des garde-fous). */
+  /** Persona bâtie sur données publiques : URLs sources (enregistrées puis visitées par le serveur ; jamais d’exemption des garde-fous). */
   publicSources?: string[];
+  /** Compétences de personas/skills.yaml (ids), envoyées au serveur dans `skills`. */
+  personaSkills?: string[];
   /** Usage déclaré de la persona (défaut idea_test). */
   purpose?: "idea_test" | "objection_rehearsal" | "pitch_review";
 }

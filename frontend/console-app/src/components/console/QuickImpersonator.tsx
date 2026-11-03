@@ -3,6 +3,8 @@ import { t, tc } from "@/lib/i18n";
 import { GUARDRAILS, parsePublicSources, type AgentKind } from "@/lib/console/model";
 import { PERSONA_TEMPLATES, type PersonaTemplate } from "@/lib/console/persona-templates";
 import { Button, Field, Panel, TextArea, controlClass } from "./ui";
+import { PersonaSkillPicker } from "./PersonaSkillPicker";
+import type { PersonaSkill } from "@/lib/console/api";
 
 export type QuickImpersonatorInput = {
   name: string;
@@ -16,30 +18,35 @@ export type QuickImpersonatorInput = {
   simulation: boolean;
   clues: string;
   publicSources?: string[];
+  personaSkills?: string[];
   purpose?: PersonaTemplate["purpose"];
 };
 
 /**
  * « Impersonator rapide » : nom, fonction, source, indices. La source « public » (données
- * publiques uniquement) exige au moins une URL et se passe de consentement ; toute autre source
- * exige le consentement explicite. Les cinq garde-fous, le veto et l’arbitrage humain s’appliquent
+ * publiques uniquement) exige au moins une URL. Une persona est consentie par défaut : seul un
+ * refus explicite (case « La personne refuse ») bloque l’enregistrement. Les cinq garde-fous, le veto et l’arbitrage humain s’appliquent
  * à l’identique : la validation finale reste celle du serveur (POST /v1/console/impersonators).
  */
 export function QuickImpersonator({
   onCreate,
   onClose,
   templates = PERSONA_TEMPLATES,
+  loadSkills,
 }: {
   onCreate: (agent: QuickImpersonatorInput) => { ok: boolean; reason?: string };
   onClose: () => void;
   templates?: PersonaTemplate[];
+  /** Catalogue de compétences (défaut : GET /v1/console/persona-skills) ; absent du mode démo. */
+  loadSkills?: (() => Promise<PersonaSkill[]>) | null;
 }) {
   const [templateId, setTemplateId] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [source, setSource] = useState<"public" | "manual">("public");
   const [urls, setUrls] = useState("");
-  const [consent, setConsent] = useState(false);
+  const [refused, setRefused] = useState(false);
+  const [skills, setSkills] = useState<string[]>([]);
   const [clues, setClues] = useState("");
   const [ack, setAck] = useState(false);
   const [error, setError] = useState("");
@@ -59,9 +66,8 @@ export function QuickImpersonator({
     if (source === "public") {
       if (invalid.length) return setError(t("URL invalide : {{url}}", { url: invalid[0] }));
       if (!sources.length) return setError(t("Ajoutez au moins une URL publique (http ou https)."));
-    } else if (!consent) {
-      return setError(t("Consentement explicite requis avant d’enregistrer un profil personnifié."));
     }
+    if (refused) return setError(t("La personne a refusé : rien n’est enregistré."));
     if (!ack) return setError(t("Prenez connaissance des cinq garde-fous."));
     const result = onCreate({
       name: name.trim(),
@@ -71,10 +77,11 @@ export function QuickImpersonator({
       kind: "impersonator",
       veto: template ? template.veto : true,
       enabled: true,
-      consented: source === "manual" && consent,
+      consented: true,
       simulation: true,
       clues: clues.trim(),
       publicSources: source === "public" ? sources : undefined,
+      personaSkills: skills.length ? skills : undefined,
       purpose: template?.purpose,
     });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
@@ -105,19 +112,19 @@ export function QuickImpersonator({
         <Field label={t("Source")}>
           <select aria-label={t("Source")} className={controlClass} value={source} onChange={(e) => setSource(e.target.value as "public" | "manual")}>
             <option value="public">{t("Données publiques")}</option>
-            <option value="manual">{t("Indices manuels (consentement requis)")}</option>
+            <option value="manual">{t("Indices manuels")}</option>
           </select>
         </Field>
         {source === "public" ? (
-          <Field label={t("URLs publiques")} hint={t("Une par ligne. Elles sont conservées comme sources ; elles ne sont pas visitées.")}>
+          <Field label={t("URLs publiques")} hint={t("Une par ligne. Elles sont enregistrées puis visitées par le serveur pour constituer la base publique.")}>
             <TextArea aria-label={t("URLs publiques")} value={urls} onChange={(e) => setUrls(e.target.value)} placeholder="https://" />
           </Field>
-        ) : (
-          <label className="flex items-start gap-2 text-sm">
-            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-            <span>{t("La personne a donné son consentement explicite.")}</span>
-          </label>
-        )}
+        ) : null}
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" checked={refused} onChange={(e) => setRefused(e.target.checked)} />
+          <span>{t("Persona consentie par défaut. Cochez si la personne refuse (rien n’est enregistré).")}</span>
+        </label>
+        {loadSkills !== null ? <PersonaSkillPicker value={skills} onChange={setSkills} load={loadSkills ?? undefined} /> : null}
         <Field label={t("Indices")}>
           <TextArea aria-label={t("Indices")} value={clues} onChange={(e) => setClues(e.target.value)} />
         </Field>

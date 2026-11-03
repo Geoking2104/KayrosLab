@@ -3,6 +3,7 @@ import { TemplatePicker } from "./TemplatePicker";
 import { QuickImpersonator } from "./QuickImpersonator";
 import { PersonaDesigner } from "./PersonaDesigner";
 import { PersonaOverview } from "./PersonaOverview";
+import { PersonaSkillPicker } from "./PersonaSkillPicker";
 import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
@@ -193,7 +194,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
       ) : null}
 
       {quick && manager && !mode ? (
-        <QuickImpersonator onCreate={createAgent} onClose={() => setQuick(false)} />
+        <QuickImpersonator onCreate={createAgent} onClose={() => setQuick(false)} loadSkills={consoleCtx.live ? undefined : null} />
       ) : null}
 
       {designing && manager && !mode ? (
@@ -543,6 +544,7 @@ function Composer({
     simulation: boolean;
     clues: string;
     humanProfile?: Record<string, unknown>;
+    personaSkills?: string[];
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -563,7 +565,9 @@ function Composer({
   const [mission, setMission] = useState(existing ? tc(existing.mission) : template?.mission || "");
   const [clues, setClues] = useState(existing ? tc(existing.clues) : template?.clues.join("\n") || "");
   const [veto, setVeto] = useState(existing?.veto ?? template?.veto ?? false);
-  const [consent, setConsent] = useState(existing?.consented ?? false);
+  // Persona (impersonator) consentie par défaut : seul un refus explicite (case décochée) bloque.
+  const [consent, setConsent] = useState(existing?.consented ?? mode === "impersonator");
+  const [skillIds, setSkillIds] = useState<string[]>([]);
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => Boolean(existing?.consented)));
   const [team, setTeam] = useState(t("Camille Achats\nJordan Achats\nAlex Risque"));
   const [source, setSource] = useState<"manuel" | "json" | "disc" | "api">("manuel");
@@ -641,7 +645,7 @@ function Composer({
     };
     const result = existing
       ? onUpdate(existing.id, draft)
-      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}) });
+      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}), ...(mode === "impersonator" && skillIds.length ? { personaSkills: skillIds } : {}) });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
@@ -780,10 +784,11 @@ function Composer({
             )}
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1 size-4" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
-              <span>{t(
-                "Je confirme un consentement explicite. Sans cette case, rien n’est enregistré."
-              )}</span>
+              <span>{mode === "impersonator"
+                ? t("Persona consentie par défaut. Décochez si la personne refuse : rien n’est enregistré.")
+                : t("Je confirme un consentement explicite. Sans cette case, rien n’est enregistré.")}</span>
             </label>
+            {mode === "impersonator" && !existing && live ? <PersonaSkillPicker value={skillIds} onChange={setSkillIds} /> : null}
             <fieldset className="flex flex-col gap-2">
               <legend className="text-sm font-medium">{t("Garde-fous")}</legend>
               {GUARDRAILS.map((rule, index) => (
