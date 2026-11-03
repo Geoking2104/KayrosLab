@@ -395,7 +395,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         }
         const publicBasis = agent.kind === "impersonator" && (agent.publicSources?.length ?? 0) > 0;
         if ((agent.kind === "hybride" || agent.kind === "impersonator") && !agent.consented && !publicBasis) {
-          return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
+          return { ok: false, reason: t("Refus de la personne : rien n’est enregistré.") };
         }
         const created: Agent = { ...agent, id: uid("ag"), provider: "Mistral", model: "serveur", simulation: agent.consented || publicBasis || agent.simulation };
         setState((current) => ({
@@ -939,10 +939,11 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       createAgent: (agent) => {
         const denied = comexOnly(); if (denied) return denied;
         if (agent.kind === "impersonator" && agent.humanProfile) {
-          if (!agent.consented) return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
+          if (!agent.consented) return { ok: false, reason: t("Refus de la personne : rien n’est enregistré.") };
           run(http.createImpersonator({
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "enriched", human_profile: agent.humanProfile,
             clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
+            ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
           }), t("{{name}} est au registre avec son profil enrichi.", { name: agent.name.trim() }));
           return { ok: true };
         }
@@ -951,14 +952,16 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "public", public_sources: agent.publicSources,
             purpose: agent.purpose || undefined, veto_power: agent.veto,
             clues: agent.clues.split("\n").map((c) => c.trim().slice(0, 500)).filter(Boolean).slice(0, 30),
+            ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
           }), t("{{name}} est au registre (données publiques).", { name: agent.name.trim() }));
           return { ok: true };
         }
         if (agent.kind === "impersonator") {
-          if (!agent.consented) return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
+          if (!agent.consented) return { ok: false, reason: t("Refus de la personne : rien n’est enregistré.") };
           run(http.createImpersonator({
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "manual",
             clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
+            ...(agent.personaSkills?.length ? { skills: agent.personaSkills } : {}),
           }), t("{{name}} est au registre.", { name: agent.name.trim() }));
           return { ok: true };
         }
