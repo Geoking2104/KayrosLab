@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TemplatePicker } from "./TemplatePicker";
 import { QuickImpersonator } from "./QuickImpersonator";
+import { PersonaDesigner } from "./PersonaDesigner";
 import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
@@ -73,6 +74,8 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   const [simId, setSimId] = useState<string | null>(null);
   const [templating, setTemplating] = useState(false);
   const [quick, setQuick] = useState(false);
+  const [designing, setDesigning] = useState(false);
+  const consoleCtx = useConsole() as any;
   const [template, setTemplate] = useState<PersonaTemplate | null>(null);
   const list = state.agents.filter((agent) => tab === "all" || agent.kind === tab);
   const editing = state.agents.find((agent) => agent.id === editingId) ?? null;
@@ -157,6 +160,17 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               }}
             >{t("Impersonator rapide")}</Button>
           ) : null}
+          {manager && consoleCtx.live ? (
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setMode(null);
+                setQuick(false);
+                setTemplating(false);
+                setDesigning((open) => !open);
+              }}
+            >{t("Persona conversationnelle")}</Button>
+          ) : null}
           {!manager ? <Button variant="secondary" onClick={() => setRole("comex")}>{t("Passer en COMEX")}</Button> : null}
         </div>
       </Panel>
@@ -177,6 +191,10 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
 
       {quick && manager && !mode ? (
         <QuickImpersonator onCreate={createAgent} onClose={() => setQuick(false)} />
+      ) : null}
+
+      {designing && manager && !mode ? (
+        <PersonaDesigner onClose={() => setDesigning(false)} onSaved={() => { void consoleCtx.refreshLive?.(); }} />
       ) : null}
 
       {templating && manager && !mode ? (

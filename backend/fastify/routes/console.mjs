@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
 import { visitPublicSources } from '../../../core/public-sources.mjs';
+import { designPersonaTurn } from '../../../core/persona-designer.mjs';
 import { profileFromPublicSources } from '../../../core/profile-enrichment.mjs';
 import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
 import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
@@ -917,6 +918,20 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // Création conversationnelle (P4) : propose un brouillon, n'écrit jamais. L'enregistrement passe
+  // par la carte d'approbation humaine puis POST /v1/console/impersonators (seul chemin d'écriture).
+  app.post('/v1/console/persona-designer/turn', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const parsed = z.object({
+      messages: z.array(z.object({ role: z.enum(['user', 'assistant']), content: z.string().max(4000) })).min(1).max(40),
+      draft: z.record(z.string(), z.unknown()).optional(),
+    }).safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'conversation invalide', issues: parsed.error.issues });
+    try {
+      return await designPersonaTurn({ llm: app.kayrosContext.engine.swarm?.llm || null, messages: parsed.data.messages, draft: parsed.data.draft || {} });
+    } catch (error) { return reply.code(/HarnessCompliance/.test(error?.name || '') ? 422 : 400).send({ error: surface(error.message) }); }
   });
 
   // Re-visite les sources publiques d'une persona (trace rafraîchie, extraits ré-injectés).
