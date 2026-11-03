@@ -1,0 +1,7 @@
+**/node_modules
+.git
+.env
+**/.env
+backend/web/public/console
+**/dist
+**/*.log
