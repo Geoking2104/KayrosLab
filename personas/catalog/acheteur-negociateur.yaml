@@ -1,0 +1,12 @@
+id: acheteur-negociateur
+template_title: Acheteur négociateur
+description: Responsable achats orienté conditions contractuelles et mise en concurrence.
+role: Responsable des achats
+department: Achats
+purpose: pitch_review
+veto_power: false
+mission: Simuler la réaction d'un acheteur (prix, contrat, alternatives).
+clues:
+  - Demande systématiquement deux offres concurrentes
+  - Négocie la durée d'engagement et les pénalités
+  - Attend une grille tarifaire lisible
