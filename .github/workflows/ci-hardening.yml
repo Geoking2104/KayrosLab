@@ -1,0 +1,71 @@
+name: CI hardening
+
+# P4 : barrières complémentaires.
+# - Schéma et migrations appliqués sur un Postgres vierge (ON_ERROR_STOP), deux fois
+#   (ils doivent être ré-exécutables), dans les deux ordres possibles.
+# - Construction des images de docker-compose.yml (aucun push, aucun secret).
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-hardening-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migrations-fresh-postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: kayros
+          POSTGRES_PASSWORD: kayros
+          POSTGRES_DB: kayros_fresh
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U kayros"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGPASSWORD: kayros
+    steps:
+      - uses: actions/checkout@v4
+      - name: Schéma puis migrations (x2) sur base vierge
+        run: |
+          set -euo pipefail
+          URL=postgres://kayros@localhost:5432/kayros_fresh
+          for pass in 1 2; do
+            echo "== passe $pass : schema.sql"
+            psql "$URL" -v ON_ERROR_STOP=1 -q -f core/sql/schema.sql
+            for f in $(ls core/sql/migrations/*.sql | sort); do
+              echo "== passe $pass : $f"
+              psql "$URL" -v ON_ERROR_STOP=1 -q -f "$f"
+            done
+          done
+      - name: Migrations seules puis schéma sur une seconde base vierge
+        run: |
+          set -euo pipefail
+          psql postgres://kayros@localhost:5432/kayros_fresh -v ON_ERROR_STOP=1 -q -c "create database kayros_order"
+          URL=postgres://kayros@localhost:5432/kayros_order
+          for f in $(ls core/sql/migrations/*.sql | sort); do psql "$URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
+          psql "$URL" -v ON_ERROR_STOP=1 -q -f core/sql/schema.sql
+          psql "$URL" -At -c "select count(*) from information_schema.tables where table_schema='public'"
+
+  docker-compose-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker compose config + build (sans push)
+        env:
+          # Valeurs factices : uniquement pour l'interpolation de docker-compose.yml au build.
+          POSTGRES_PASSWORD: ci-build-only
+          KAYROS_AUTH_SECRET: ci-build-only
+        run: |
+          docker compose -f docker-compose.yml config --quiet
+          docker compose -f docker-compose.yml build
