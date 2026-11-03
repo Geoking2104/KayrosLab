@@ -110,6 +110,8 @@ fi
 if [[ -n "${DB_URL}" ]]; then
   export DATABASE_URL="${DB_URL}"
 fi
+# Aligne le daemon PM2 en memoire sur la version installee (non bloquant).
+pm2 update || true
 pm2 startOrReload "${BACKEND_DIR}/ecosystem.config.cjs" --env production --update-env
 pm2 save
 # Diagnostic seulement : avertissements PM2 ignores, jamais bloquant.
