@@ -36,6 +36,7 @@ export function QuickImpersonator({
   templates = PERSONA_TEMPLATES,
   loadSkills,
   loadTools,
+  canEditTools = false,
 }: {
   onCreate: (agent: QuickImpersonatorInput) => { ok: boolean; reason?: string };
   onClose: () => void;
@@ -44,6 +45,8 @@ export function QuickImpersonator({
   loadSkills?: (() => Promise<PersonaSkill[]>) | null;
   /** Registre d’outils (défaut : GET /v1/console/persona-tools) ; absent du mode démo. */
   loadTools?: (() => Promise<PersonaTool[]>) | null;
+  /** Réglage des outils réservé aux managers (RBAC serveur « manage ») ; masqué sinon. */
+  canEditTools?: boolean;
 }) {
   const [templateId, setTemplateId] = useState("");
   const [name, setName] = useState("");
@@ -88,7 +91,7 @@ export function QuickImpersonator({
       clues: clues.trim(),
       publicSources: source === "public" ? sources : undefined,
       personaSkills: skills.length ? skills : undefined,
-      personaTools: tools.length ? tools : undefined,
+      personaTools: canEditTools && tools.length ? tools : undefined,
       purpose: template?.purpose,
     });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
@@ -131,7 +134,7 @@ export function QuickImpersonator({
           <input type="checkbox" checked={refused} onChange={(e) => setRefused(e.target.checked)} />
           <span>{t("Persona consentie par défaut. Cochez si la personne refuse (rien n’est enregistré).")}</span>
         </label>
-        {loadTools !== null && loadSkills !== null ? <PersonaToolPicker value={tools} onChange={setTools} load={loadTools ?? undefined} /> : null}
+        {canEditTools && loadTools !== null && loadSkills !== null ? <PersonaToolPicker value={tools} onChange={setTools} load={loadTools ?? undefined} /> : null}
         {loadSkills !== null ? <PersonaSkillPicker value={skills} onChange={setSkills} load={loadSkills ?? undefined} allowlist={tools} /> : null}
         <Field label={t("Indices")}>
           <TextArea aria-label={t("Indices")} value={clues} onChange={(e) => setClues(e.target.value)} />

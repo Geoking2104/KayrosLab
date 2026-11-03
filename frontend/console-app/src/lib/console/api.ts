@@ -180,6 +180,11 @@ export interface PersonaOverview {
 export interface PersonaSkill { id: string; name: string; instructions: string | null; tools: string[] }
 
 /** Aperçu des outils effectifs : outils des compétences ∩ allowlist de la persona (rien n'élargit les droits). */
+/** Miroir exact du RBAC serveur de PUT /v1/console/agents/:id/tools (permitted(..., 'manage')). */
+export function canManagePersonaTools(permissions: readonly string[] | null | undefined) {
+  return Array.isArray(permissions) && permissions.includes("manage");
+}
+
 export type PersonaTool = { name: string; description: string; sideEffect: string; gate: boolean; assignable: boolean; reason: string | null };
 
 export function effectiveSkillToolsPreview(catalog: PersonaSkill[], selected: string[], allowlist: string[] = []) {
