@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
-import consoleRoute, { acquireGraphAgents, advancePipelines, recoverGraphLeases } from '../routes/console.mjs';
+import consoleRoute, { acquireGraphAgents, advancePipelines, recoverGraphLeases, reconcileOrphanPipelineSteps } from '../routes/console.mjs';
 import consoleWorkspaceRoute from '../routes/console-workspace.mjs';
 import authRoutes from '../routes/auth-routes.mjs';
 import publicApiRoutes from '../routes/public-api.mjs';
@@ -415,4 +415,30 @@ test('passerelle réelle : la branche suspendue est annulée (fil cancelled, pas
   const thread = await gateway.waitForThread(started.thread.thread_id, { tenantId: 'tenant-a' });
   assert.equal(thread.status, 'cancelled');
   assert.equal(aborted, true, 'le run du collectif a reçu l’annulation');
+});
+
+test('réconciliation : étape running dont le fil est failed → failed, tracée ; attentes humaines intactes', async (t) => {
+  const { app } = await buildApp();
+  t.after(() => app.close());
+  const { hybridGateway: gw, workspaceStore: ws } = app.kayrosContext;
+  const at = new Date().toISOString();
+  const thread = (id, status) => gw.store.createThread({ thread_id: id, tenant_id: 'tenant-a', room_id: 'room_x', status, question: 'q', messages: [], created_at: at, updated_at: at, error: status === 'failed' ? 'Exécution interrompue' : null });
+  await thread('th_dead', 'failed');
+  await thread('th_wait', 'awaiting_arbitration');
+  const orphan = await ws.create('tenant-a', 'pipelines', { project_id: 'p', question: 'q', status: 'running', steps: [{ node_id: 'c1', status: 'running', thread_id: 'th_dead', deps: [] }] });
+  const waiting = await ws.create('tenant-a', 'pipelines', { project_id: 'p', question: 'q', status: 'running', steps: [
+    { node_id: 'c1', status: 'awaiting_approval', thread_id: 'th_dead', deps: [] },
+    { node_id: 'c2', status: 'running', thread_id: 'th_wait', deps: [] },
+  ] });
+  const out = await reconcileOrphanPipelineSteps(app);
+  assert.deepEqual(out.map((o) => o.pipeline_id), [orphan.id]);
+  const fixed = await ws.get('tenant-a', 'pipelines', orphan.id);
+  assert.equal(fixed.steps[0].status, 'failed');
+  const untouched = await ws.get('tenant-a', 'pipelines', waiting.id);
+  assert.deepEqual(untouched.steps.map((s) => s.status), ['awaiting_approval', 'running']);
+  const events = gw.store.events;
+  const evt = (Array.isArray(events) ? events : events.events || []).find((e) => e.type === 'pipeline.step.reconciled');
+  assert.ok(evt, 'audit pipeline.step.reconciled');
+  assert.equal(evt.thread_id, 'th_dead');
+  assert.deepEqual(await reconcileOrphanPipelineSteps(app), [], 'idempotent');
 });

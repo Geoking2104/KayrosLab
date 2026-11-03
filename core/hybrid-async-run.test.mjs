@@ -179,6 +179,10 @@ test('redémarrage : les exécutions restées `running` passent `failed` (interr
   const thread = await restarted.getThread(started.thread.thread_id, { tenantId: 't1' });
   assert.equal(thread.status, THREAD_FAILED);
   assert.equal(thread.error, INTERRUPTED_RUN_ERROR);
+  const events = store.events;
+  const interrupted = (Array.isArray(events) ? events : events.events || []).filter((e) => e.type === 'collaboration.run.interrupted');
+  assert.equal(interrupted.length, 1, 'audit dédié collaboration.run.interrupted');
+  assert.equal(interrupted[0].reason, 'restart');
   assert.equal(await restarted.recoverInterruptedRuns(), 0, 'idempotent');
   // La session n'est plus bloquée par le fil interrompu.
   restarted.swarm.run = async (_id, options) => fakeRun(options.runId, options.question);
@@ -282,4 +286,17 @@ test('swarm.run : un signal déjà déclenché empêche tout appel aux agents', 
   const ctrl = new AbortController(); ctrl.abort(Object.assign(new Error('mission annulée'), { code: 'ABORTED' }));
   await assert.rejects(swarm.run(room.swarm_id, { tenantId: 't1', question: 'Q ?', signal: ctrl.signal }), /annulée/);
   assert.equal(calls.length, 0);
+});
+
+test('redémarrage : attente d’arbitrage et runs suspendus (pending_review) ne sont jamais touchés', async () => {
+  const store = new InMemoryCollaborationStore();
+  const at = new Date(Date.now() - 3600_000).toISOString();
+  for (const status of ['awaiting_arbitration', 'needs_clarification', 'pending_review', 'revision_required']) {
+    await store.createThread({ thread_id: `th_${status}`, tenant_id: 't1', room_id: 'r', status, question: 'q', created_at: at, updated_at: at });
+  }
+  const gateway = new HybridAgentGateway({ swarm: new SwarmService({ logger: null }), store });
+  assert.equal(await gateway.recoverInterruptedRuns(), 0);
+  for (const status of ['awaiting_arbitration', 'needs_clarification', 'pending_review', 'revision_required']) {
+    assert.equal((await store.getThread(`th_${status}`, { tenantId: 't1' })).status, status);
+  }
 });

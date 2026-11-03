@@ -887,7 +887,14 @@ export class HybridAgentGateway {
       try {
         if (this.queue && await this.queue.activeForThread(thread.thread_id)) continue;
         const failed = await this._failThread(thread.thread_id, thread.tenant_id, null, new Error(INTERRUPTED_RUN_ERROR));
-        if (failed) recovered += 1;
+        if (failed) {
+          recovered += 1;
+          // Trace dédiée : distingue une interruption par redémarrage d'un échec de mission.
+          await this._record('collaboration.run.interrupted', {
+            room_id: thread.room_id, tenant_id: thread.tenant_id, thread_id: thread.thread_id,
+            run_id: thread.active_run_id || null, reason: 'restart', by: 'kayros-startup',
+          });
+        }
       } catch { /* un fil illisible ne bloque pas le démarrage */ }
     }
     return recovered;
