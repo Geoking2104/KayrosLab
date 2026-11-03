@@ -23,7 +23,7 @@ copy_if() {
   fi
 }
 
-for f in index.html index.fr.html marketing.css tokens.css site.css studio.css 404.html; do
+for f in index.html index.fr.html integrations.html integrations.fr.html sales-oracle.html sales-oracle.fr.html personas.html personas.fr.html security-governance.html security-governance.fr.html developers.html developers.fr.html demo.html demo.fr.html marketing.css tokens.css site.css studio.css 404.html; do
   copy_if "${APP_DIR}/${f}" "${stage}/${f}"
 done
 

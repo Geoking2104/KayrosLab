@@ -57,10 +57,11 @@ test('secure customer workspace is available without dominating the public expla
 });
 
 test('generated static pages keep the sales narrative and leave the Sales Oracle tool to the console', () => {
-  for (const file of ['index.html', 'index.fr.html']) {
+  for (const [file, oracle, builders] of [['index.html', 'sales-oracle.html', 'developers.html'], ['index.fr.html', 'sales-oracle.fr.html', 'developers.fr.html']]) {
+    assert.match(read(oracle), /id="oracle"/);      // Sales Oracle has its own page
+    assert.match(read(builders), /id="builders"/);  // technical deep-dive on the developers page
     const html = read(file);
-    assert.match(html, /id="oracle"/);
-    assert.match(html, /id="builders"/); // technical deep-dive moved off the main pitch
+    assert.ok(html.includes(`href="${oracle}"`) && html.includes(`href="${builders}"`), `${file}: links to secondary pages`);
     assert.match(html, /class="lang-opt"/);   // EN/FR language selector
     assert.match(html, /marketing\.css/);
     assert.doesNotMatch(html, /id="secure-workspace"/);
@@ -72,8 +73,10 @@ test('generated static pages keep the sales narrative and leave the Sales Oracle
   }
 });
 
-test('landing covers personified agents; Salon is no longer embedded', () => {
-  for (const file of ['index.html', 'index.fr.html']) {
+test('personas page covers personified agents; Salon is no longer embedded', () => {
+  for (const [home, file] of [['index.html', 'personas.html'], ['index.fr.html', 'personas.fr.html']]) {
+    assert.ok(read(home).includes(`href="${file}"`), `${home}: link to ${file}`);
+    assert.doesNotMatch(read(home), /id="salon"|class="salon-charter"|btn-salon|href="\/salon\/|href="#salon"/);
     const html = read(file);
     assert.match(html, /id="personify"/);
     assert.match(html, /CrystalKnows/);
@@ -81,8 +84,8 @@ test('landing covers personified agents; Salon is no longer embedded', () => {
     assert.doesNotMatch(html, /id="salon"|class="salon-charter"|btn-salon|href="\/salon\/|href="#salon"/);
     assert.doesNotMatch(html, /panel hl reveal/);
   }
-  const en = read('index.html');
-  const fr = read('index.fr.html');
+  const en = read('personas.html');
+  const fr = read('personas.fr.html');
   assert.match(en, /role packs/i);
   assert.match(fr, /packs de r[oô]les/i);
   assert.match(en, /mise à l.épreuve|stress-test/i);
