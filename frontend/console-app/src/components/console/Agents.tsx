@@ -4,6 +4,7 @@ import { QuickImpersonator } from "./QuickImpersonator";
 import { PersonaDesigner } from "./PersonaDesigner";
 import { PersonaOverview } from "./PersonaOverview";
 import { PersonaSkillPicker } from "./PersonaSkillPicker";
+import { PersonaToolPicker } from "./PersonaToolPicker";
 import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
@@ -251,7 +252,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
             />
             )
           ) : overviewId === agent.id && consoleCtx.live ? (
-            <PersonaOverview key={agent.id} agentId={agent.id} onClose={() => setOverviewId(null)} />
+            <PersonaOverview key={agent.id} agentId={agent.id} onClose={() => setOverviewId(null)} canEditTools={manager} />
           ) : simId === agent.id && agent.kind === "metier" ? (
             <MetierSim key={agent.id} agent={agent} onClose={() => setSimId(null)} />
           ) : (
@@ -545,6 +546,7 @@ function Composer({
     clues: string;
     humanProfile?: Record<string, unknown>;
     personaSkills?: string[];
+    personaTools?: string[];
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -568,6 +570,7 @@ function Composer({
   // Persona (impersonator) consentie par défaut : seul un refus explicite (case décochée) bloque.
   const [consent, setConsent] = useState(existing?.consented ?? mode === "impersonator");
   const [skillIds, setSkillIds] = useState<string[]>([]);
+  const [toolIds, setToolIds] = useState<string[]>([]);
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => Boolean(existing?.consented)));
   const [team, setTeam] = useState(t("Camille Achats\nJordan Achats\nAlex Risque"));
   const [source, setSource] = useState<"manuel" | "json" | "disc" | "api">("manuel");
@@ -598,8 +601,9 @@ function Composer({
         setError(t("CRYSTALKNOWS_API_TOKEN absent. Aucun appel. L’équipe n’est pas créée."));
         return;
       }
-      if (!consent || guards.some((item) => !item)) {
-        setError(t("Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel."));
+      // Équipe = usage interne : pas de consentement, mais les cinq garde-fous IMP_* restent à valider.
+      if (guards.some((item) => !item)) {
+        setError(t("Cochez les cinq garde-fous avant d’ouvrir le panel."));
         return;
       }
       if (picked.length >= 2) {
@@ -645,7 +649,7 @@ function Composer({
     };
     const result = existing
       ? onUpdate(existing.id, draft)
-      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}), ...(mode === "impersonator" && skillIds.length ? { personaSkills: skillIds } : {}) });
+      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}), ...(mode === "impersonator" && skillIds.length ? { personaSkills: skillIds } : {}), ...(mode === "impersonator" && toolIds.length ? { personaTools: toolIds } : {}) });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
@@ -782,13 +786,16 @@ function Composer({
                 )}
               </>
             )}
-            <label className="flex items-start gap-3 text-sm">
+            {mode !== "team" ? <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" className="mt-1 size-4" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
               <span>{mode === "impersonator"
                 ? t("Persona consentie par défaut. Décochez si la personne refuse : rien n’est enregistré.")
                 : t("Je confirme un consentement explicite. Sans cette case, rien n’est enregistré.")}</span>
-            </label>
-            {mode === "impersonator" && !existing && live ? <PersonaSkillPicker value={skillIds} onChange={setSkillIds} /> : null}
+            </label> : <p className="text-sm text-ink-soft">{t("Équipe à usage interne : aucun consentement requis. Les garde-fous restent obligatoires.")}</p>}
+            {mode === "impersonator" && !existing && live ? <>
+              <PersonaToolPicker value={toolIds} onChange={setToolIds} />
+              <PersonaSkillPicker value={skillIds} onChange={setSkillIds} allowlist={toolIds} />
+            </> : null}
             <fieldset className="flex flex-col gap-2">
               <legend className="text-sm font-medium">{t("Garde-fous")}</legend>
               {GUARDRAILS.map((rule, index) => (

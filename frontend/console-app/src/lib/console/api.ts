@@ -128,6 +128,8 @@ export const api = {
   // P5 : catalogue de compétences des personas (personas/skills.yaml).
   personaSkills: () => call<{ skills: PersonaSkill[] }>("/v1/console/persona-skills"),
   // P6 : page persona en lecture seule.
+  personaTools: () => call<{ tools: PersonaTool[] }>("/v1/console/persona-tools"),
+  setPersonaTools: (agentId: string, tools: string[]) => call<{ agent: any; granted: unknown[]; denied: unknown[] }>(`/v1/console/agents/${encodeURIComponent(agentId)}/tools`, { method: "PUT", body: JSON.stringify({ tools }) }),
   personaOverview: (agentId: string) => call<PersonaOverview>(`/v1/console/agents/${encodeURIComponent(agentId)}/overview`),
   // P4 : un tour de conception (brouillon seulement, aucune écriture côté serveur).
   designPersonaTurn: (body: { messages: DesignerMessage[]; draft?: PersonaDraft }) => call<DesignerTurn>("/v1/console/persona-designer/turn", { method: "POST", body: JSON.stringify(body) }),
@@ -178,6 +180,8 @@ export interface PersonaOverview {
 export interface PersonaSkill { id: string; name: string; instructions: string | null; tools: string[] }
 
 /** Aperçu des outils effectifs : outils des compétences ∩ allowlist de la persona (rien n'élargit les droits). */
+export type PersonaTool = { name: string; description: string; sideEffect: string; gate: boolean; assignable: boolean; reason: string | null };
+
 export function effectiveSkillToolsPreview(catalog: PersonaSkill[], selected: string[], allowlist: string[] = []) {
   const wanted = [...new Set(catalog.filter((s) => selected.includes(s.id)).flatMap((s) => s.tools))];
   return { wanted, granted: wanted.filter((tool) => allowlist.includes(tool)), denied: wanted.filter((tool) => !allowlist.includes(tool)) };

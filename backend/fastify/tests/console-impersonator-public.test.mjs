@@ -45,12 +45,14 @@ test('autres sources : consentie par défaut, refus explicite → 400', async (t
   assert.equal((await post(app, '/v1/console/impersonators', { name: 'A', source: 'manual', consent_confirmed: true })).statusCode, 201);
 });
 
-test('équipe : refus explicite bloquant sauf si tous les membres sont publics', async (t) => {
+test('équipe : usage interne, aucun consentement exigé (même refus explicite ignoré)', async (t) => {
   const { app } = await buildApp(); t.after(() => app.close());
   const m = (n) => ({ name: n, source: 'public', public_sources: [`https://example.com/${n}`] });
   assert.equal((await post(app, '/v1/console/impersonator-teams', { name: 'Panel', members: [m('a'), m('b')] })).statusCode, 201);
   const mixed = await post(app, '/v1/console/impersonator-teams', { name: 'Panel 2', members: [m('c'), { name: 'd', source: 'manual' }], consent_confirmed: false });
-  assert.equal(mixed.statusCode, 400);
+  assert.equal(mixed.statusCode, 201, mixed.body);
+  assert.equal(mixed.json().agents.length, 2, mixed.body);
+  for (const agent of mixed.json().agents) assert.ok(JSON.stringify(agent).includes('IMP_'), 'garde-fous IMP_* conservés');
 });
 
 test('RBAC inchangé : un facilitateur ne crée pas de persona publique', async (t) => {

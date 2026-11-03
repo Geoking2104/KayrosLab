@@ -4,6 +4,7 @@ import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, norm
 import { visitPublicSources } from '../../../core/public-sources.mjs';
 import { designPersonaTurn } from '../../../core/persona-designer.mjs';
 import { buildPersonaOverview } from '../../../core/persona-overview.mjs';
+import { personaToolPolicy, validatePersonaTools } from '../../../core/persona-tools.mjs';
 import { loadSkillCatalog, resolveSkills, effectiveSkillTools } from '../../../core/persona-skills.mjs';
 import { fileURLToPath as toPath } from 'node:url';
 import { join as joinPath } from 'node:path';
@@ -171,6 +172,8 @@ const impersonatorBaseSchema = z.object({
   consent_reference: z.string().max(300).optional(),
   // P5 : ids de skills de personas/skills.yaml (outils effectifs = skill ∩ assertToolAllowed).
   skills: z.array(z.string().regex(/^[a-z0-9][a-z0-9_-]{0,63}$/)).max(20).optional(),
+  // Allowlist d'outils (registre, sans écriture, politique d'espace) : validatePersonaTools.
+  tools: z.array(z.string().min(1).max(120)).max(20).optional(),
   // Persona consentie par défaut : seul un refus explicite (false) est rejeté.
   consent_confirmed: z.boolean().optional(),
 });
@@ -205,8 +208,10 @@ const impersonatorTeamSchema = z.object({
   voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
   veto_power: z.boolean().optional(),
   personality_simulation_enabled: z.boolean().optional(),
+  // Usage interne (panel d'épreuve d'idée) : aucun consentement exigé ni bloquant pour une équipe ;
+  // les garde-fous IMP_* s'appliquent à chaque membre (buildImpersonatorAgent).
   consent_confirmed: z.boolean().optional(),
-}).refine((value) => value.consent_confirmed !== false || value.members.every((m) => m.source === 'public'), { message: 'consentement refusé (sauf si tous les membres sont de source public)', path: ['consent_confirmed'] });
+});
 
 // Limites de la version en ligne (surchargeables par environnement).
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
@@ -414,6 +419,7 @@ async function buildImpersonatorAgent(app, me, d) {
   // Base de données publiques : URLs validées (normalizeImpersonator) puis visitées côté serveur.
   normalizeImpersonator(impersonator);
   const skills = d.skills?.length ? resolveSkills(d.skills, await personaSkillCatalog(app)) : [];
+  const personaTools = d.tools?.length ? validatePersonaTools(d.tools, { registry: app.kayrosContext.engine.tools }) : [];
   impersonator.public_evidence = await visitPersonaSources(app, impersonator.public_sources);
   const definition = impersonatorAgentDefinition({
     agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
@@ -421,6 +427,7 @@ async function buildImpersonatorAgent(app, me, d) {
   });
   if (skills.length) definition.metadata = { ...definition.metadata, skills };
   let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
+  if (personaTools.length) agent = app.kayrosContext.engine.swarm.setAgentTools(agent.agent_id, personaTools, { tenantId: me.tenantId, by: me.email });
   const imports = [];
   if (d.source === 'linkedin' && d.linkedin_url) imports.push({ source: 'linkedin', linkedin_url: d.linkedin_url });
   if (d.source === 'crystalknows' && (d.email || d.linkedin_url || d.report_url)) {
@@ -985,6 +992,28 @@ export default async function consoleRoute(app) {
       const agent = swarm.revokePersona(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
       await swarm.flush?.();
       return { agent: agentView(agent), publication: agent.metadata.publication };
+    } catch (error) { return reply.code(400).send({ error: surface(error?.message || error) }); }
+  });
+
+  // Outils autorisés d'une persona : catalogue (politique) et réglage réservé aux managers, audité.
+  app.get('/v1/console/persona-tools', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    return { tools: personaToolPolicy(app.kayrosContext.engine.tools) };
+  });
+  app.put('/v1/console/agents/:agentId/tools', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const parsed = z.object({ tools: z.array(z.string().min(1).max(120)).max(20) }).safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'outils invalides', issues: parsed.error.issues });
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const agent = swarm.registry.get(req.params.agentId, { tenantId: me.tenantId });
+    if (!agent) return reply.code(404).send({ error: 'agent introuvable' });
+    if (!agent.metadata?.impersonator) return reply.code(400).send({ error: 'réglage réservé aux personas' });
+    try {
+      const tools = validatePersonaTools(parsed.data.tools, { registry: app.kayrosContext.engine.tools, agentId: agent.agent_id });
+      const updated = swarm.setAgentTools(agent.agent_id, tools, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      return { agent: agentView(updated), ...effectiveSkillTools(updated, { registry: app.kayrosContext.engine.tools }) };
     } catch (error) { return reply.code(400).send({ error: surface(error?.message || error) }); }
   });
 

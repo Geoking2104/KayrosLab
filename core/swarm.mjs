@@ -918,6 +918,17 @@ export class SwarmService {
     return updated;
   }
 
+  /** Allowlist d'outils d'un agent (déjà validée par l'appelant) ; changement audité avant/après. */
+  setAgentTools(agentId, tools, { tenantId = null, by = null } = {}) {
+    if (!by) throw new Error('outils: auteur humain requis');
+    const current = this.registry.get(agentId, { tenantId });
+    if (!current) throw new Error(`agent introuvable: ${agentId}`);
+    const before = [...(current.tools || [])];
+    const agent = this.updateAgent(agentId, { tools: [...tools] }, { tenantId, by });
+    this._audit({ type: 'swarm.agent.tools_updated', agent_id: agentId, tenant_id: tenantKey(tenantId), by, before, after: [...agent.tools] });
+    return agent;
+  }
+
   /** Runs d'un tenant (copies), du plus récent au plus ancien. */
   listRuns({ tenantId = null } = {}) {
     const prefix = `${tenantKey(tenantId)}:`;
