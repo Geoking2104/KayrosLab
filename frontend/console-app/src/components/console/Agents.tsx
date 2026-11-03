@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TemplatePicker } from "./TemplatePicker";
 import { QuickImpersonator } from "./QuickImpersonator";
 import { PersonaDesigner } from "./PersonaDesigner";
+import { PersonaOverview } from "./PersonaOverview";
 import type { PersonaTemplate } from "@/lib/console/persona-templates";
 import { useConsole } from "@/lib/console/store";
 import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
@@ -72,6 +73,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
   const [mode, setMode] = useState<null | "metier" | "hybride" | "impersonator" | "team">(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [simId, setSimId] = useState<string | null>(null);
+  const [overviewId, setOverviewId] = useState<string | null>(null);
   const [templating, setTemplating] = useState(false);
   const [quick, setQuick] = useState(false);
   const [designing, setDesigning] = useState(false);
@@ -246,6 +248,8 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               onTeam={createImpersonatorTeam}
             />
             )
+          ) : overviewId === agent.id && consoleCtx.live ? (
+            <PersonaOverview key={agent.id} agentId={agent.id} onClose={() => setOverviewId(null)} />
           ) : simId === agent.id && agent.kind === "metier" ? (
             <MetierSim key={agent.id} agent={agent} onClose={() => setSimId(null)} />
           ) : (
@@ -269,6 +273,9 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                       setEditingId(agent.id);
                     }}
                   >{t("Modifier")}</Button>
+                  {agent.kind === "impersonator" && consoleCtx.live ? (
+                    <Button variant="secondary" onClick={() => { setMode(null); setEditingId(null); setOverviewId(agent.id); }}>{t("Fiche")}</Button>
+                  ) : null}
                   {agent.kind === "metier" ? (
                     <Button
                       variant="secondary"

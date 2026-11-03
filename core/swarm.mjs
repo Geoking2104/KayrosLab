@@ -883,6 +883,12 @@ export class SwarmService {
     this._audit({ type: 'swarm.agent.promoted_from_session', swarm_id: swarmId, agent_id: targetId, source_agent_id: agentId, tenant_id: tenantKey(tenantId), human_profile: !!agent.human_profile, by });
     return agent;
   }
+  /** Runs d'un tenant (copies), du plus récent au plus ancien. */
+  listRuns({ tenantId = null } = {}) {
+    const prefix = `${tenantKey(tenantId)}:`;
+    return [...this.runs.entries()].filter(([k]) => k.startsWith(prefix)).map(([, r]) => clone(r))
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  }
   getRun(id, { tenantId = null } = {}) { return clone(this.runs.get(this._key(tenantId, id)) || null); }
 
   /**
