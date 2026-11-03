@@ -736,72 +736,10 @@ main .frame.hero {
                 <a href="/whitepaper-kayroslab.html">Whitepaper</a>
                 <a href="https://github.com/Geoking2104/KayrosLab">GitHub</a>
                 <a href="https://www.linkedin.com/in/gdelatournelle/">LinkedIn</a>
-                <a href="/#contact" data-contact-open>Contact</a>
+                <a href="/index.fr.html#contact" data-contact-open>Contact</a>
             </nav>
         </div>
     </footer>
-
-    <dialog id="fr-contact-dialog" class="contact-dialog" aria-labelledby="fr-contact-dialog-title">
-        <form id="fr-contact-form" class="contact-form" novalidate>
-            <button type="button" class="contact-close" data-contact-close aria-label="Fermer">×</button>
-            <h2 id="fr-contact-dialog-title">Parlons de votre prochaine décision.</h2>
-            <p class="contact-intro">Laissez vos coordonnées : nous revenons vers vous rapidement pour cadrer votre besoin.</p>
-            <div class="contact-grid">
-                <label>Nom<input name="lastName" required maxlength="120" autocomplete="family-name"></label>
-                <label>Prénom<input name="firstName" required maxlength="120" autocomplete="given-name"></label>
-                <label>Société<input name="company" required maxlength="180" autocomplete="organization"></label>
-                <label>Fonction<input name="position" required maxlength="180" autocomplete="organization-title"></label>
-                <label>E-mail professionnel<input name="email" type="email" required maxlength="254" autocomplete="email"></label>
-            </div>
-            <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="contact-status" role="status" aria-live="polite"></p>
-            <div class="contact-actions"><button type="submit" class="button button--primary">Envoyer</button></div>
-            <p class="contact-privacy">Vos informations sont utilisées uniquement pour répondre à votre demande. Responsable de traitement : SASU KayrosLab.</p>
-        </form>
-    </dialog>
-    <script>
-    (function () {
-      var dialog = document.getElementById('contact-dialog');
-      var form = document.getElementById('contact-form');
-      var status = form.querySelector('.contact-status');
-      var submit = form.querySelector('button[type="submit"]');
-      document.querySelectorAll('[data-contact-open]').forEach(function (el) {
-        el.addEventListener('click', function (e) { e.preventDefault(); if (typeof dialog.showModal === 'function') { dialog.showModal(); } else { dialog.setAttribute('open', ''); } });
-      });
-      form.querySelector('[data-contact-close]').addEventListener('click', function () { if (typeof dialog.close === 'function') { dialog.close(); } else { dialog.removeAttribute('open'); } });
-      dialog.addEventListener('click', function (e) { if (e.target === dialog && typeof dialog.close === 'function') { dialog.close(); } });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!form.reportValidity()) return;
-        var payload = {
-          lastName: form.lastName.value.trim(),
-          firstName: form.firstName.value.trim(),
-          company: form.company.value.trim(),
-          position: form.position.value.trim(),
-          email: form.email.value.trim(),
-          website: form.website.value,
-          language: 'fr'
-        };
-        status.textContent = 'Envoi en cours…';
-        submit.disabled = true;
-        fetch('https://api.kayroslab.com/v1/contact', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(function (r) {
-          if (!r.ok) throw new Error('http ' + r.status);
-          return r.json();
-        }).then(function () {
-          status.textContent = 'Merci ! Votre demande est envoyée — nous revenons vers vous rapidement.';
-          form.reset();
-        }).catch(function () {
-          status.textContent = 'L\'envoi a échoué. Réessayez dans un instant.';
-        }).finally(function () {
-          submit.disabled = false;
-        });
-      });
-    })();
-    </script>
     </div>
     <div class="lang-view" id="pv-view-en" lang="en" hidden>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -1001,68 +939,6 @@ main .frame.hero {
             </nav>
         </div>
     </footer>
-
-    <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-dialog-title">
-        <form id="contact-form" class="contact-form" novalidate>
-            <button type="button" class="contact-close" data-contact-close aria-label="Close">×</button>
-            <h2 id="contact-dialog-title">Let&#39;s talk about your next decision.</h2>
-            <p class="contact-intro">Leave your details and we will get back to you quickly to frame your need.</p>
-            <div class="contact-grid">
-                <label>Last name<input name="lastName" required maxlength="120" autocomplete="family-name"></label>
-                <label>First name<input name="firstName" required maxlength="120" autocomplete="given-name"></label>
-                <label>Company<input name="company" required maxlength="180" autocomplete="organization"></label>
-                <label>Role<input name="position" required maxlength="180" autocomplete="organization-title"></label>
-                <label>Professional email<input name="email" type="email" required maxlength="254" autocomplete="email"></label>
-            </div>
-            <input name="website" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <p class="contact-status" role="status" aria-live="polite"></p>
-            <div class="contact-actions"><button type="submit" class="button button--primary">Send</button></div>
-            <p class="contact-privacy">Your details are used solely to answer your request. Data controller: SASU KayrosLab.</p>
-        </form>
-    </dialog>
-    <script>
-    (function () {
-      var dialog = document.getElementById('contact-dialog');
-      var form = document.getElementById('contact-form');
-      var status = form.querySelector('.contact-status');
-      var submit = form.querySelector('button[type="submit"]');
-      document.querySelectorAll('[data-contact-open]').forEach(function (el) {
-        el.addEventListener('click', function (e) { e.preventDefault(); if (typeof dialog.showModal === 'function') { dialog.showModal(); } else { dialog.setAttribute('open', ''); } });
-      });
-      form.querySelector('[data-contact-close]').addEventListener('click', function () { if (typeof dialog.close === 'function') { dialog.close(); } else { dialog.removeAttribute('open'); } });
-      dialog.addEventListener('click', function (e) { if (e.target === dialog && typeof dialog.close === 'function') { dialog.close(); } });
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!form.reportValidity()) return;
-        var payload = {
-          lastName: form.lastName.value.trim(),
-          firstName: form.firstName.value.trim(),
-          company: form.company.value.trim(),
-          position: form.position.value.trim(),
-          email: form.email.value.trim(),
-          website: form.website.value,
-          language: 'en'
-        };
-        status.textContent = 'Sending…';
-        submit.disabled = true;
-        fetch('https://api.kayroslab.com/v1/contact', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(function (r) {
-          if (!r.ok) throw new Error('http ' + r.status);
-          return r.json();
-        }).then(function () {
-          status.textContent = 'Thank you! Your request has been sent — we will get back to you shortly.';
-          form.reset();
-        }).catch(function () {
-          status.textContent = 'Sending failed. Please try again in a moment.';
-        }).finally(function () {
-          submit.disabled = false;
-        });
-      });
-    })();
-    </script>
     </div>
     <script>
     (function () {
@@ -1074,5 +950,6 @@ main .frame.hero {
       show("fr");
     })();
     </script>
+<script src="assets/contact.js" defer></script>
 </body>
 </html>
