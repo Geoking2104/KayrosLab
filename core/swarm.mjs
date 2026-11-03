@@ -691,8 +691,9 @@ export class SwarmService {
   }
 
   /** Construit le profil humain fusionné (imports + saisie) sans l'attacher à un agent. */
-  async previewPersonality({ imports = [], manual_profile = null, consent_confirmed = false } = {}, { by = null } = {}) {
-    if (consent_confirmed !== true) throw new Error('profile import: consentement explicite requis');
+  async previewPersonality({ imports = [], manual_profile = null, consent_confirmed = true } = {}, { by = null } = {}) {
+    // Consentement par défaut (personas) : seul un refus explicite bloque l'import.
+    if (consent_confirmed === false) throw new Error('profile import: consentement refusé');
     const fragments = [];
     for (const item of imports || []) {
       fragments.push(await this.profileImporter.importProfile({

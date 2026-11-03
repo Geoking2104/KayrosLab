@@ -16,8 +16,8 @@ test('catalogue : modèles anonymes, convertibles en persona gouvernée', () => 
     assert.equal(tpl.name, undefined, `${file} ne doit désigner personne`);
     assert.equal(tpl.source, undefined, file);
     const { template_title, description, department, ...rest } = tpl;
-    // Sans source ni consentement, un modèle seul n'est pas une persona valide.
-    assert.throws(() => personaAgentDefinition({ ...rest, name: 'X' }), /consentement/);
+    // Un modèle seul avec refus explicite n'est pas une persona valide (consentement par défaut sinon).
+    assert.throws(() => personaAgentDefinition({ ...rest, name: 'X', consent_confirmed: false }), /consentement/);
     const d = personaAgentDefinition({ ...rest, name: 'Persona test', source: 'public', public_sources: ['https://example.com/p'] });
     assert.equal(impersonatorGuardrails(d.metadata.impersonator).length, 5);
     assert.equal(d.veto_power, tpl.veto_power !== false);

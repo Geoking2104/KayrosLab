@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
-import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails } from '../../../core/impersonator.mjs';
+import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
+import { visitPublicSources } from '../../../core/public-sources.mjs';
+import { profileFromPublicSources } from '../../../core/profile-enrichment.mjs';
 import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
 import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
 import { agentNodesFor, chainContext, needsApproval, pipelineStatus, pipelineSteps, readySteps, stepDeps, stepOutcome } from '../lib/project-pipeline.mjs';
@@ -161,16 +163,17 @@ const impersonatorBaseSchema = z.object({
   purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
   veto_power: z.boolean().optional(),
   consent_reference: z.string().max(300).optional(),
-  consent_confirmed: z.literal(true).optional(),
+  // Persona consentie par défaut : seul un refus explicite (false) est rejeté.
+  consent_confirmed: z.boolean().optional(),
 });
 const publicSourceRule = (value) => value.source !== 'public' || (Array.isArray(value.public_sources) && value.public_sources.length > 0);
-const consentRule = (value) => value.source === 'public' || value.consent_confirmed === true;
+const consentRule = (value) => value.source === 'public' || value.consent_confirmed !== false;
 const impersonatorSchema = impersonatorBaseSchema
   .refine(publicSourceRule, { message: 'public_sources (liste d\'URLs non vide) requis pour la source public', path: ['public_sources'] })
-  .refine(consentRule, { message: 'consentement explicite requis', path: ['consent_confirmed'] });
+  .refine(consentRule, { message: 'consentement refusé (consent_confirmed: false)', path: ['consent_confirmed'] });
 // Enrichissement multi-sources (cf. core/profile-enrichment.mjs et docs/impersonator-agent.md).
 const enrichSchema = z.object({
-  consent_confirmed: z.literal(true),
+  consent_confirmed: z.literal(true).optional().default(true),
   assigned_name: z.string().max(200).optional(),
   crystal_public_url: z.string().max(1000).optional(),
   crystal_public_html: z.string().max(3000000).optional(),
@@ -194,8 +197,8 @@ const impersonatorTeamSchema = z.object({
   voting_threshold: z.enum(['unanimous', 'majority', 'veto_power_csuite']).optional(),
   veto_power: z.boolean().optional(),
   personality_simulation_enabled: z.boolean().optional(),
-  consent_confirmed: z.literal(true).optional(),
-}).refine((value) => value.consent_confirmed === true || value.members.every((m) => m.source === 'public'), { message: 'consentement explicite requis (sauf si tous les membres sont de source public)', path: ['consent_confirmed'] });
+  consent_confirmed: z.boolean().optional(),
+}).refine((value) => value.consent_confirmed !== false || value.members.every((m) => m.source === 'public'), { message: 'consentement refusé (sauf si tous les membres sont de source public)', path: ['consent_confirmed'] });
 
 // Limites de la version en ligne (surchargeables par environnement).
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
@@ -397,9 +400,12 @@ async function buildImpersonatorAgent(app, me, d) {
   const impersonator = {
     persona_name: d.name, persona_role: d.role || null, persona_company: d.company || null,
     source: d.source, source_url: d.linkedin_url || d.report_url || null, purpose: d.purpose || 'idea_test',
-    consent_confirmed: d.source === 'public' ? d.consent_confirmed === true : true, public_sources: d.public_sources || [],
+    consent_confirmed: d.consent_confirmed !== false, public_sources: d.public_sources || [],
     consent_reference: d.consent_reference || null, clues: d.clues || [], portrait_url: d.portrait_url || null,
   };
+  // Base de données publiques : URLs validées (normalizeImpersonator) puis visitées côté serveur.
+  normalizeImpersonator(impersonator);
+  impersonator.public_evidence = await visitPersonaSources(app, impersonator.public_sources);
   const definition = impersonatorAgentDefinition({
     agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
     human_profile: { assigned_name: d.name, avatar_url: d.portrait_url || null, professional_context: { current_role: d.role || null, company: d.company || null } },
@@ -423,12 +429,35 @@ async function buildImpersonatorAgent(app, me, d) {
       agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(agent.agent_id, { consent_confirmed: true, imports }, { tenantId: me.tenantId, by: me.email });
     } catch (error) { enrichment_error = error.message; }
   }
+  agent = attachPublicEvidence(app, me, agent, impersonator.public_evidence) || agent;
   try {
     agent = app.kayrosContext.engine.swarm.updateAgent(agent.agent_id, {
       metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) },
     }, { tenantId: me.tenantId, by: me.email });
   } catch { /* la persona de base reste valide */ }
   return { agent, impersonator, enrichment_error };
+}
+
+/** Visite des URLs publiques (injectable pour les tests ; KAYROS_PUBLIC_SOURCES_VISIT=off désactive). */
+async function visitPersonaSources(app, urls = []) {
+  if (!urls?.length) return [];
+  const ctx = app.kayrosContext;
+  if (typeof ctx.publicSourceVisitor === 'function') return ctx.publicSourceVisitor(urls);
+  if (String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() === 'off') {
+    return urls.map((url) => ({ url, fetched_at: new Date().toISOString(), error: 'visite désactivée (KAYROS_PUBLIC_SOURCES_VISIT=off)' }));
+  }
+  return visitPublicSources(urls);
+}
+
+/** Lie la trace de visite à la persona et verse les extraits dans le profil via le pipeline d'enrichissement. */
+function attachPublicEvidence(app, me, agent, evidence = []) {
+  if (!evidence?.length) return null;
+  const swarm = app.kayrosContext.engine.swarm;
+  const impersonator = normalizeImpersonator({ ...(agent.metadata?.impersonator || {}), public_evidence: evidence });
+  let next = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), impersonator } }, { tenantId: me.tenantId, by: me.email });
+  const fragment = profileFromPublicSources(impersonator.public_evidence, { imported_by: me.email });
+  if (fragment) next = swarm.assignPersonality(next.agent_id, mergeHumanProfiles(next.human_profile, fragment), { tenantId: me.tenantId, by: me.email });
+  return next;
 }
 
 function collectiveView(swarm, configuration, tenantId) {
@@ -888,6 +917,24 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // Re-visite les sources publiques d'une persona (trace rafraîchie, extraits ré-injectés).
+  app.post('/v1/console/impersonators/:agentId/public-sources/visit', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const current = swarm.registry.get(req.params.agentId, { tenantId: me.tenantId });
+    if (!current?.metadata?.impersonator) return reply.code(404).send({ error: 'persona introuvable' });
+    const urls = current.metadata.impersonator.public_sources || [];
+    if (!urls.length) return reply.code(400).send({ error: 'aucune source publique enregistrée' });
+    try {
+      const evidence = await visitPersonaSources(app, urls);
+      let agent = attachPublicEvidence(app, me, current, evidence);
+      agent = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) } }, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      return { agent: agentView(agent), public_evidence: agent.metadata.impersonator.public_evidence };
+    } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
   // --- Équipe d'impersonators : panel de personas pour éprouver une idée ---

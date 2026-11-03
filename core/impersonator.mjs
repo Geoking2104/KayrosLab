@@ -6,15 +6,18 @@
 // stakeholder would likely react — never to speak in their name.
 //
 // Design rules:
-//  - explicit consent is mandatory before any profile clue is attached, except for the
-//    'public' source, built only from publicly available data, which instead requires a
-//    non-empty list of public source URLs (public_sources) kept for traceability;
+//  - a persona is consented BY DEFAULT (consent_confirmed defaults to true); only an explicit
+//    refusal (consent_confirmed: false) blocks it — except for the 'public' source, whose legal
+//    basis is public data and which requires a non-empty list of public URLs (public_sources);
+//  - public_sources are recorded on the persona and VISITED server-side (core/public-sources.mjs,
+//    SSRF-guarded); the visit trace is kept in public_evidence (status, title, excerpt, date, hash);
 //  - the persona is a *simulation*, always labelled as such in the output;
 //  - no private fact that is not in the supplied clues may be invented;
 //  - the agent may never be used for a materially impactful decision about the person.
 
 import { voiceContext } from './impersonator-voice.mjs';
 import { buildPersonalityContext, normalizeHumanProfile } from './personality.mjs';
+import { assertPublicUrl, normalizePublicEvidence } from './public-sources.mjs';
 
 export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual', 'enriched', 'public']);
 /** Sources exemptées de consentement explicite (données publiques uniquement, sources tracées). */
@@ -39,13 +42,13 @@ export function normalizeImpersonator(input = {}) {
   if (!IMPERSONATOR_PURPOSES.includes(purpose)) throw new Error(`impersonator: purpose inconnu ${purpose}`);
   const public_sources = strings(input.public_sources);
   const consentExempt = CONSENT_EXEMPT_SOURCES.includes(source);
-  if (consentExempt) {
-    if (!public_sources.length) throw new Error('impersonator: public_sources (liste d\'URLs publiques) requis pour la source public');
-    const bad = public_sources.find((u) => !/^https?:\/\/\S+$/i.test(u));
-    if (bad) throw new Error(`impersonator: public_sources doit contenir des URLs http(s) (${bad})`);
-  } else if (input.consent_confirmed !== true) {
-    throw new Error('impersonator: consentement explicite requis');
+  if (consentExempt && !public_sources.length) throw new Error('impersonator: public_sources (liste d\'URLs publiques) requis pour la source public');
+  for (const u of public_sources) {
+    if (!/^https?:\/\/\S+$/i.test(u)) throw new Error(`impersonator: public_sources doit contenir des URLs http(s) (${u})`);
+    try { assertPublicUrl(u); } catch (error) { throw new Error(`impersonator: ${error.message}`); }
   }
+  // Consentement par défaut : seul un refus explicite bloque (hors source public, base légale = données publiques).
+  if (!consentExempt && input.consent_confirmed === false) throw new Error('impersonator: consentement refusé (consent_confirmed: false)');
   const portrait_url = str(input.portrait_url) || null;
   if (portrait_url && !/^https:\/\//i.test(portrait_url) && !/^data:image\//i.test(portrait_url)) {
     throw new Error('impersonator: portrait_url doit être une URL https ou une image en data-URI');
@@ -58,9 +61,10 @@ export function normalizeImpersonator(input = {}) {
     source,
     source_url: str(input.source_url) || null,
     purpose,
-    consent_confirmed: consentExempt ? input.consent_confirmed === true : true,
+    consent_confirmed: input.consent_confirmed !== false,
     legal_basis: consentExempt ? 'public_data' : 'consent',
     public_sources,
+    public_evidence: normalizePublicEvidence(input.public_evidence),
     consent_reference: str(input.consent_reference) || null,
     clues: strings(input.clues),
     notes: str(input.notes) || null,
@@ -116,6 +120,16 @@ export function impersonatorGuardrails(impersonator) {
   ];
 }
 
+/** Extraits des sources publiques visitées (indices bruts, jamais des faits établis). */
+export function publicEvidenceLines(impersonator) {
+  const visited = (impersonator?.public_evidence || []).filter((r) => !r.error && (r.title || r.excerpt));
+  if (!visited.length) return [];
+  return [
+    `Sources publiques visitées (${visited.length}/${(impersonator.public_evidence || []).length}) — extraits à traiter comme indices :`,
+    ...visited.slice(0, 8).map((r) => `- ${r.final_url || r.url}${r.title ? ` « ${r.title} »` : ''} [${r.fetched_at || '?'}, sha256 ${String(r.sha256 || '').slice(0, 12)}]${r.excerpt ? ` : ${r.excerpt.slice(0, 400)}` : ''}`),
+  ];
+}
+
 /** Persona + clues context block compiled into the agent's effective context. */
 export function impersonatorContext(agent) {
   const impersonator = impersonatorOf(agent);
@@ -129,6 +143,7 @@ export function impersonatorContext(agent) {
     impersonator.legal_basis === 'public_data'
       ? `Base : données publiques uniquement (${impersonator.public_sources.join(', ')})`
       : `Consentement : confirmé${impersonator.consent_reference ? ` (réf. ${impersonator.consent_reference})` : ''}`,
+    ...publicEvidenceLines(impersonator),
     clues.disc ? `DISC : ${clues.disc}` : null,
     clues.archetype ? `Archétype : ${clues.archetype}` : null,
     clues.skepticism ? `Scepticisme : ${clues.skepticism}` : null,

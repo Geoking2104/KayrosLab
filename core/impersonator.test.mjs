@@ -22,8 +22,9 @@ const impersonator = {
   clues: ['décide vite', 'exige des preuves chiffrées'],
 };
 
-test('impersonator requires explicit consent and a known source', () => {
-  assert.throws(() => normalizeImpersonator({ persona_name: 'X', source: 'linkedin' }), /consentement explicite/);
+test('impersonator: consent by default, explicit refusal blocks, known source required', () => {
+  assert.equal(normalizeImpersonator({ persona_name: 'X', source: 'linkedin' }).consent_confirmed, true);
+  assert.throws(() => normalizeImpersonator({ persona_name: 'X', source: 'linkedin', consent_confirmed: false }), /consentement refusé/);
   assert.throws(() => normalizeImpersonator({ persona_name: 'X', source: 'nope', consent_confirmed: true }), /source inconnue/);
   const ok = normalizeImpersonator(impersonator);
   assert.equal(ok.persona_name, 'Camille Dubois');
