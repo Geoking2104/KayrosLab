@@ -141,6 +141,17 @@ export interface Agent {
   contextIds?: string[];
   /** Profil enrichi (Crystal public, export LinkedIn, e-mails, X) d’un impersonator. */
   humanProfile?: Record<string, unknown>;
+  /** Persona bâtie sur données publiques : URLs sources (exemptent du consentement, jamais des garde-fous). */
+  publicSources?: string[];
+  /** Usage déclaré de la persona (défaut idea_test). */
+  purpose?: "idea_test" | "objection_rehearsal" | "pitch_review";
+}
+
+/** URLs http(s) valides d’une saisie libre (une par ligne ou séparées par des espaces). */
+export function parsePublicSources(text: string): { urls: string[]; invalid: string[] } {
+  const items = text.split(/[\s,]+/).map((x) => x.trim()).filter(Boolean);
+  const urls = [...new Set(items.filter((x) => /^https?:\/\/\S+$/i.test(x)))];
+  return { urls, invalid: items.filter((x) => !/^https?:\/\/\S+$/i.test(x)) };
 }
 
 export type Seniority = "intern" | "junior" | "senior" | "executive";

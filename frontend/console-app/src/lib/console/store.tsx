@@ -393,10 +393,11 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
         if (agent.kind === "metier" && (!agent.role.trim() || !agent.department.trim() || !agent.mission.trim())) {
           return { ok: false, reason: t("Fonction, service et mission sont requis pour un agent métier.") };
         }
-        if ((agent.kind === "hybride" || agent.kind === "impersonator") && !agent.consented) {
+        const publicBasis = agent.kind === "impersonator" && (agent.publicSources?.length ?? 0) > 0;
+        if ((agent.kind === "hybride" || agent.kind === "impersonator") && !agent.consented && !publicBasis) {
           return { ok: false, reason: t("Consentement explicite requis avant d’enregistrer un profil personnifié.") };
         }
-        const created: Agent = { ...agent, id: uid("ag"), provider: "Mistral", model: "serveur", simulation: agent.consented || agent.simulation };
+        const created: Agent = { ...agent, id: uid("ag"), provider: "Mistral", model: "serveur", simulation: agent.consented || publicBasis || agent.simulation };
         setState((current) => ({
           ...current,
           agents: [created, ...current.agents],
@@ -943,6 +944,14 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
             name: agent.name.trim(), role: agent.role.trim() || undefined, source: "enriched", human_profile: agent.humanProfile,
             clues: agent.clues.trim() ? [agent.clues.trim().slice(0, 500)] : [],
           }), t("{{name}} est au registre avec son profil enrichi.", { name: agent.name.trim() }));
+          return { ok: true };
+        }
+        if (agent.kind === "impersonator" && (agent.publicSources?.length ?? 0) > 0) {
+          run(http.createImpersonator({
+            name: agent.name.trim(), role: agent.role.trim() || undefined, source: "public", public_sources: agent.publicSources,
+            purpose: agent.purpose || undefined, veto_power: agent.veto,
+            clues: agent.clues.split("\n").map((c) => c.trim().slice(0, 500)).filter(Boolean).slice(0, 30),
+          }), t("{{name}} est au registre (données publiques).", { name: agent.name.trim() }));
           return { ok: true };
         }
         if (agent.kind === "impersonator") {

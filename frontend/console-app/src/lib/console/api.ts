@@ -119,7 +119,8 @@ export const api = {
   personalityProviders: () => call<EnrichProviders>("/v1/console/personality/providers"),
   speak: (body: { idea: string; agent_id?: string; human_profile?: unknown }) => call<SpeakResult>("/v1/console/personality/speak", { method: "POST", body: JSON.stringify(body) }),
   createImpersonatorTeam: (body: Record<string, unknown>) => call<{ session: any; agents: any[]; errors: any[] }>("/v1/console/impersonator-teams", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
-  createImpersonator: (body: Record<string, unknown>) => call<{ agent: any; enrichment_error: string | null }>("/v1/console/impersonators", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
+  // Source « public » (données publiques uniquement) : pas de consentement, public_sources exigées côté serveur.
+  createImpersonator: (body: Record<string, unknown>) => call<{ agent: any; enrichment_error: string | null }>("/v1/console/impersonators", { method: "POST", body: JSON.stringify(body.source === "public" ? body : { ...body, consent_confirmed: true }) }),
   createAgent: (body: Record<string, unknown>) => call<{ agent: any }>("/v1/console/agents", { method: "POST", body: JSON.stringify(body) }),
   updateAgent: (id: string, body: Record<string, unknown>) => call<{ agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}`, { method: "PATCH", body: JSON.stringify(body) }),
   sessions: () => call<{ sessions: any[] }>("/v1/console/sessions"),
