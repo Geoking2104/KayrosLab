@@ -685,6 +685,32 @@ async function startReadySteps(app, tenantId, pipeline) {
   }
   return savePipeline(app, tenantId, settle(pipeline));
 }
+/**
+ * Réconciliation : une étape d'enchaînement restée `running` alors que son fil est `failed`
+ * (mission interrompue par un redémarrage, échec survenu avant l'enregistrement des écouteurs)
+ * est terminée comme à l'événement d'échec, et tracée. Seules les étapes `running` sont lues :
+ * attente d'arbitrage, d'approbation, porte bloquée ou run suspendu (pending_review) ne sont jamais touchés.
+ */
+export async function reconcileOrphanPipelineSteps(app) {
+  const gateway = app.kayrosContext.hybridGateway;
+  if (!gateway) return [];
+  const ws = workspaceStoreFor(app.kayrosContext);
+  const out = [];
+  for (const { tenantId, item } of await ws.listAcross('pipelines')) {
+    for (const step of (item.steps || []).filter((s) => s.status === 'running' && s.thread_id)) {
+      if (gateway.jobs?.has?.(String(step.thread_id))) continue;
+      const thread = await gateway.getThread(step.thread_id, { tenantId }).catch(() => null);
+      if (thread?.status !== 'failed') continue;
+      await advancePipelines(app, 'failed', thread);
+      await gateway._record?.('pipeline.step.reconciled', {
+        tenant_id: tenantId, pipeline_id: item.id, node_id: step.node_id ?? null, thread_id: step.thread_id,
+        from: 'running', to: 'failed', reason: thread.error || 'fil en échec', by: 'kayros-reconcile',
+      });
+      out.push({ tenantId, pipeline_id: item.id, thread_id: step.thread_id });
+    }
+  }
+  return out;
+}
 /** Fin d'une mission : l'étape se termine ; les étapes devenues prêtes démarrent, ou l'enchaînement se bloque / attend un arbitrage / échoue. */
 export async function advancePipelines(app, kind, thread) {
   if (!thread?.thread_id || !['completed', 'failed'].includes(kind)) return null;
@@ -754,6 +780,7 @@ export default async function consoleRoute(app) {
   // mort pendant une mission est détecté par l'absence de pouls, sans rétablir trop tôt une mission vivante ailleurs.
   const sweep = async () => {
     try { const restored = await recoverGraphLeases(app); if (restored.length) app.log?.info?.({ restored }, 'composition des collectifs rétablie'); } catch (error) { app.log?.warn?.({ err: error?.message }, 'reprise des baux de composition'); }
+    try { const steps = await reconcileOrphanPipelineSteps(app); if (steps.length) app.log?.warn?.({ steps }, 'étapes d’enchaînement orphelines réconciliées'); } catch (error) { app.log?.warn?.({ err: error?.message }, 'réconciliation des enchaînements'); }
   };
   let sweeper = null;
   app.addHook('onReady', async () => {
