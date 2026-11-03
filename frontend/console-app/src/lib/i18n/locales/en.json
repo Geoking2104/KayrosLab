@@ -1137,5 +1137,17 @@
   "URL invalide : {{url}}": "Invalid URL: {{url}}",
   "Ajoutez au moins une URL publique (http ou https).": "Add at least one public URL (http or https).",
   "Prenez connaissance des cinq garde-fous.": "Please acknowledge the five guardrails.",
-  "{{name}} est au registre (données publiques).": "{{name}} is in the registry (public data)."
+  "{{name}} est au registre (données publiques).": "{{name}} is in the registry (public data).",
+  "Concevoir une persona en conversation": "Design a persona by conversation",
+  "Décrivez la persona (nom, fonction, URLs publiques). Un brouillon vous sera soumis pour approbation avant tout enregistrement.": "Describe the persona (name, role, public URLs). A draft will be submitted for your approval before anything is saved.",
+  "Conversation": "Conversation",
+  "Votre message": "Your message",
+  "Ex. : Persona : Alex Martin, CFO. https://exemple.com/alex": "E.g.: Persona: Alex Martin, CFO. https://example.com/alex",
+  "Envoyer": "Send",
+  "Carte d’approbation": "Approval card",
+  "Persona enregistrée.": "Persona saved.",
+  "Approuver et enregistrer": "Approve and save",
+  "Rejeter le brouillon": "Reject draft",
+  "Le concepteur est indisponible.": "The designer is unavailable.",
+  "Persona conversationnelle": "Conversational persona"
 }

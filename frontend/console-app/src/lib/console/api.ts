@@ -101,6 +101,10 @@ export type EnrichResult = {
 
 export interface RephraseResult { type: "rfp" | "interne" | "skill"; source: "model" | "draft"; structured: Record<string, string>; brief: string; missing: string[]; questions: string[]; error?: string }
 
+export type DesignerMessage = { role: "user" | "assistant"; content: string };
+export type PersonaDraft = { name: string; role?: string; company?: string; source: "public" | "manual"; public_sources: string[]; clues: string[]; purpose: string };
+export type DesignerTurn = { reply: string; draft: PersonaDraft; valid: boolean; issues: string[]; guardrails: { rule_id: string; rule_text: string }[]; requires_approval: true; source: "model" | "deterministic" };
+
 export const api = {
   login: (email: string, password: string) => call<{ token: string; user: LiveUser }>("/v1/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }),
   me: () => call<{ user: LiveUser }>("/v1/auth/me"),
@@ -118,6 +122,8 @@ export const api = {
   enrichAgent: (id: string, body: EnrichRequest) => call<EnrichResult & { agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}/enrich`, { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   personalityProviders: () => call<EnrichProviders>("/v1/console/personality/providers"),
   speak: (body: { idea: string; agent_id?: string; human_profile?: unknown }) => call<SpeakResult>("/v1/console/personality/speak", { method: "POST", body: JSON.stringify(body) }),
+  // P4 : un tour de conception (brouillon seulement, aucune écriture côté serveur).
+  designPersonaTurn: (body: { messages: DesignerMessage[]; draft?: PersonaDraft }) => call<DesignerTurn>("/v1/console/persona-designer/turn", { method: "POST", body: JSON.stringify(body) }),
   createImpersonatorTeam: (body: Record<string, unknown>) => call<{ session: any; agents: any[]; errors: any[] }>("/v1/console/impersonator-teams", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   // Source « public » (données publiques uniquement) : pas de consentement, public_sources exigées côté serveur.
   createImpersonator: (body: Record<string, unknown>) => call<{ agent: any; enrichment_error: string | null }>("/v1/console/impersonators", { method: "POST", body: JSON.stringify(body.source === "public" ? body : { ...body, consent_confirmed: true }) }),
