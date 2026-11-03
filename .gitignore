@@ -38,3 +38,7 @@ target/
 salon/scripts/reports/
 
 integrations/teams/dist/
+
+# Clés de signature d'audit (pilote Proof-of-Control)
+*.key.pem
+/keys/
