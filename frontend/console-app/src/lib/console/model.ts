@@ -145,6 +145,8 @@ export interface Agent {
   publicSources?: string[];
   /** Compétences de personas/skills.yaml (ids), envoyées au serveur dans `skills`. */
   personaSkills?: string[];
+  /** Outils autorisés demandés à la création (validés serveur : registre, politique, RBAC manager). */
+  personaTools?: string[];
   /** Usage déclaré de la persona (défaut idea_test). */
   purpose?: "idea_test" | "objection_rehearsal" | "pitch_review";
 }
