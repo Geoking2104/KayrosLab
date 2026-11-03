@@ -2,7 +2,7 @@ name: CI hardening
 
 # P4 : barrières complémentaires.
 # - Schéma et migrations appliqués sur un Postgres vierge (ON_ERROR_STOP), deux fois
-#   (ils doivent être ré-exécutables), dans les deux ordres possibles.
+#   (ils doivent être ré-exécutables). Les migrations sont incrémentales sur schema.sql.
 # - Construction des images de docker-compose.yml (aucun push, aucun secret).
 
 on:
@@ -48,14 +48,8 @@ jobs:
               psql "$URL" -v ON_ERROR_STOP=1 -q -f "$f"
             done
           done
-      - name: Migrations seules puis schéma sur une seconde base vierge
-        run: |
-          set -euo pipefail
-          psql postgres://kayros@localhost:5432/kayros_fresh -v ON_ERROR_STOP=1 -q -c "create database kayros_order"
-          URL=postgres://kayros@localhost:5432/kayros_order
-          for f in $(ls core/sql/migrations/*.sql | sort); do psql "$URL" -v ON_ERROR_STOP=1 -q -f "$f"; done
-          psql "$URL" -v ON_ERROR_STOP=1 -q -f core/sql/schema.sql
-          psql "$URL" -At -c "select count(*) from information_schema.tables where table_schema='public'"
+      - name: Tables présentes
+        run: psql postgres://kayros@localhost:5432/kayros_fresh -At -c "select count(*) from information_schema.tables where table_schema='public'"
 
   docker-compose-build:
     runs-on: ubuntu-latest
