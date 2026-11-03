@@ -122,6 +122,9 @@ export const api = {
   enrichAgent: (id: string, body: EnrichRequest) => call<EnrichResult & { agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}/enrich`, { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   personalityProviders: () => call<EnrichProviders>("/v1/console/personality/providers"),
   speak: (body: { idea: string; agent_id?: string; human_profile?: unknown }) => call<SpeakResult>("/v1/console/personality/speak", { method: "POST", body: JSON.stringify(body) }),
+  // P7 : publier / révoquer une persona (bâti sur promote).
+  publishPersona: (agentId: string, body: { note?: string; session_id?: string } = {}) => call<{ agent: any; publication: any }>(`/v1/console/agents/${encodeURIComponent(agentId)}/publish`, { method: "POST", body: JSON.stringify(body) }),
+  revokePersona: (agentId: string, reason: string) => call<{ agent: any; publication: any }>(`/v1/console/agents/${encodeURIComponent(agentId)}/revoke`, { method: "POST", body: JSON.stringify({ reason }) }),
   // P6 : page persona en lecture seule.
   personaOverview: (agentId: string) => call<PersonaOverview>(`/v1/console/agents/${encodeURIComponent(agentId)}/overview`),
   // P4 : un tour de conception (brouillon seulement, aucune écriture côté serveur).
