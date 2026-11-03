@@ -13,6 +13,7 @@ import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
 import { ConfidenceBadge, ProfileEnrich, SpeakPreview, enrichedClue } from "./profile-enrich";
 import type { EnrichResult, PersonaConfidence } from "@/lib/console/api";
+import { api } from "@/lib/console/api";
 
 /** Provenance du DISC côté client (même règle que le serveur : estimation plafonnée à 60 %). */
 export function agentConfidence(agent: Agent): PersonaConfidence | null {
@@ -275,6 +276,23 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                   >{t("Modifier")}</Button>
                   {agent.kind === "impersonator" && consoleCtx.live ? (
                     <Button variant="secondary" onClick={() => { setMode(null); setEditingId(null); setOverviewId(agent.id); }}>{t("Fiche")}</Button>
+                  ) : null}
+                  {agent.kind === "impersonator" && consoleCtx.live && manager ? (
+                    <Button
+                      variant="secondary"
+                      onClick={async () => {
+                        try {
+                          if (agent.enabled) {
+                            const reason = window.prompt(t("Motif de la révocation"))?.trim();
+                            if (!reason) return;
+                            await api.revokePersona(agent.id, reason);
+                          } else {
+                            await api.publishPersona(agent.id);
+                          }
+                          await consoleCtx.refreshLive?.();
+                        } catch (e: any) { window.alert(String(e?.message || e)); }
+                      }}
+                    >{agent.enabled ? t("Révoquer") : t("Publier")}</Button>
                   ) : null}
                   {agent.kind === "metier" ? (
                     <Button

@@ -883,6 +883,41 @@ export class SwarmService {
     this._audit({ type: 'swarm.agent.promoted_from_session', swarm_id: swarmId, agent_id: targetId, source_agent_id: agentId, tenant_id: tenantKey(tenantId), human_profile: !!agent.human_profile, by });
     return agent;
   }
+  /**
+   * P7 — Publication d'une persona, bâtie sur promoteSessionAgent : un agent de session est
+   * promu (mêmes règles : anonymisation, profil réel) puis marqué publié ; un agent déjà au
+   * registre (révoqué) est republié. Historique conservé dans metadata.publication.history.
+   */
+  publishPersona(agentId, { swarmId = null, promote = {}, note = '' } = {}, { tenantId = null, by = null } = {}) {
+    if (!by) throw new Error('publication: auteur humain requis');
+    let agent = this.registry.get(agentId, { tenantId });
+    if (!agent) {
+      if (!swarmId) throw new Error(`agent introuvable: ${agentId}`);
+      agent = this.promoteSessionAgent(swarmId, agentId, promote, { tenantId, by });
+    }
+    if (agent.agent_type === 'system_predefined' || !agent.metadata?.impersonator) throw new Error('publication: seule une persona est publiable');
+    return this._setPublication(agent, 'published', { by, note }, { tenantId });
+  }
+
+  /** P7 — Révocation : désactive la persona (plus utilisable dans un collectif), sans suppression. */
+  revokePersona(agentId, { reason = '' } = {}, { tenantId = null, by = null } = {}) {
+    if (!by) throw new Error('révocation: auteur humain requis');
+    if (!String(reason).trim()) throw new Error('révocation: motif requis');
+    const agent = this.registry.get(agentId, { tenantId });
+    if (!agent) throw new Error(`agent introuvable: ${agentId}`);
+    if (agent.agent_type === 'system_predefined' || !agent.metadata?.impersonator) throw new Error('révocation: seule une persona est révocable');
+    return this._setPublication(agent, 'revoked', { by, note: reason }, { tenantId });
+  }
+
+  _setPublication(agent, status, { by, note }, { tenantId }) {
+    const previous = agent.metadata?.publication || {};
+    const event = { status, by: String(by), note: String(note || '').slice(0, 500), at: now() };
+    const publication = { status, by: event.by, at: event.at, history: [...(previous.history || []), event].slice(-50) };
+    const updated = this.updateAgent(agent.agent_id, { enabled: status === 'published', metadata: { ...(agent.metadata || {}), publication } }, { tenantId, by });
+    this._audit({ type: status === 'published' ? 'swarm.agent.published' : 'swarm.agent.revoked', agent_id: agent.agent_id, tenant_id: tenantKey(tenantId), by: event.by, note: event.note });
+    return updated;
+  }
+
   /** Runs d'un tenant (copies), du plus récent au plus ancien. */
   listRuns({ tenantId = null } = {}) {
     const prefix = `${tenantKey(tenantId)}:`;

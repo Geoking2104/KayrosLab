@@ -941,6 +941,53 @@ export default async function consoleRoute(app) {
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
   });
 
+  // P7 : Publier / Révoquer une persona (bâti sur promote). Manager uniquement ; mêmes garde-fous
+  // de partage de profil réel que /promote quand l'agent vient d'une session.
+  const publishSchema = promoteSchema.extend({ session_id: z.string().min(1).max(120).optional(), note: z.string().max(500).optional() });
+  app.post('/v1/console/agents/:agentId/publish', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const parsed = publishSchema.safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'publication invalide', issues: parsed.error.issues });
+    const { session_id, note, ...promote } = parsed.data;
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    let swarmId = null;
+    if (!swarm.registry.get(req.params.agentId, { tenantId: me.tenantId })) {
+      if (!session_id) return reply.code(404).send({ error: 'agent introuvable' });
+      const room = await accessibleRoom(app, me, session_id);
+      if (!room) return reply.code(404).send({ error: 'session introuvable' });
+      const configuration = swarm.getConfiguration(room.swarm_id, { tenantId: me.tenantId });
+      const source = configuration && swarm.effectiveConfigurationAgent(configuration, req.params.agentId, { tenantId: me.tenantId });
+      if (!source || !configuration.active_agents?.includes(req.params.agentId)) return reply.code(404).send({ error: 'agent absent de la session' });
+      if (source.human_profile && promote.include_human_profile) {
+        if (sharedTenant(me.tenantId)) return reply.code(403).send({ error: 'Ce registre est partagé par tous les comptes en libre-service : un profil réel n’y est pas publié.', code: 'shared_tenant_real_profile' });
+        if (promote.share_consent_confirmed !== true) return reply.code(400).send({ error: 'Confirmez que la personne a consenti au partage de son profil avec tous les membres de l’espace.', code: 'share_consent_required' });
+      }
+      swarmId = room.swarm_id;
+    }
+    try {
+      const agent = swarm.publishPersona(req.params.agentId, { swarmId, promote, note }, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      return reply.code(200).send({ agent: agentView(agent), publication: agent.metadata.publication });
+    } catch (error) {
+      const shown = surface(error?.message || error);
+      return reply.code(/existant|déjà dans le registre/.test(shown) ? 409 : 400).send({ error: shown });
+    }
+  });
+  app.post('/v1/console/agents/:agentId/revoke', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
+    const parsed = z.object({ reason: z.string().min(1).max(500) }).safeParse(req.body || {});
+    if (!parsed.success) return reply.code(400).send({ error: 'motif de révocation requis', issues: parsed.error.issues });
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    if (!swarm.registry.get(req.params.agentId, { tenantId: me.tenantId })) return reply.code(404).send({ error: 'agent introuvable' });
+    try {
+      const agent = swarm.revokePersona(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
+      await swarm.flush?.();
+      return { agent: agentView(agent), publication: agent.metadata.publication };
+    } catch (error) { return reply.code(400).send({ error: surface(error?.message || error) }); }
+  });
+
   // P6 : page persona en lecture seule (activité, vetos, decisionsTimeline, mémoire).
   app.get('/v1/console/agents/:agentId/overview', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me) return;
