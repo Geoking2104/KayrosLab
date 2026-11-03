@@ -3,6 +3,7 @@ import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../co
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
 import { visitPublicSources } from '../../../core/public-sources.mjs';
 import { designPersonaTurn } from '../../../core/persona-designer.mjs';
+import { buildPersonaOverview } from '../../../core/persona-overview.mjs';
 import { loadSkillCatalog, resolveSkills, effectiveSkillTools } from '../../../core/persona-skills.mjs';
 import { fileURLToPath as toPath } from 'node:url';
 import { join as joinPath } from 'node:path';
@@ -938,6 +939,16 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // P6 : page persona en lecture seule (activité, vetos, decisionsTimeline, mémoire).
+  app.get('/v1/console/agents/:agentId/overview', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const agent = swarm.registry.get(req.params.agentId, { tenantId: me.tenantId });
+    if (!agent) return reply.code(404).send({ error: 'agent introuvable' });
+    return buildPersonaOverview(agent, swarm.listRuns({ tenantId: me.tenantId }));
   });
 
   // P5 : catalogue de skills des personas et outils effectifs d'un agent (skill ∩ assertToolAllowed).

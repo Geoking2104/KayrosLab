@@ -122,6 +122,8 @@ export const api = {
   enrichAgent: (id: string, body: EnrichRequest) => call<EnrichResult & { agent: any }>(`/v1/console/agents/${encodeURIComponent(id)}/enrich`, { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
   personalityProviders: () => call<EnrichProviders>("/v1/console/personality/providers"),
   speak: (body: { idea: string; agent_id?: string; human_profile?: unknown }) => call<SpeakResult>("/v1/console/personality/speak", { method: "POST", body: JSON.stringify(body) }),
+  // P6 : page persona en lecture seule.
+  personaOverview: (agentId: string) => call<PersonaOverview>(`/v1/console/agents/${encodeURIComponent(agentId)}/overview`),
   // P4 : un tour de conception (brouillon seulement, aucune écriture côté serveur).
   designPersonaTurn: (body: { messages: DesignerMessage[]; draft?: PersonaDraft }) => call<DesignerTurn>("/v1/console/persona-designer/turn", { method: "POST", body: JSON.stringify(body) }),
   createImpersonatorTeam: (body: Record<string, unknown>) => call<{ session: any; agents: any[]; errors: any[] }>("/v1/console/impersonator-teams", { method: "POST", body: JSON.stringify({ ...body, consent_confirmed: true }) }),
@@ -157,3 +159,13 @@ export const api = {
 };
 
 export type WorkspaceKind = "companies" | "projects" | "skills" | "contexts" | "members";
+
+export interface PersonaOverview {
+  read_only: true;
+  persona: { agent_id: string; display_name: string | null; role_name: string | null; veto_power: boolean; tools: string[]; skills: { id: string | null; name: string }[]; source: string | null; consent_confirmed: boolean };
+  activity: { run_id: string; question: string; verdict: string; primary_reason: string | null; consensus: string | null; status: string | null; at: string | null }[];
+  vetoes: { run_id: string; question: string; reason: string | null; at: string | null }[];
+  decisionsTimeline: { seq: number; decision: string; by: string; reason: string; run_id: string; ts: string }[];
+  memory: { public_sources: string[]; public_evidence: { url: string; status: number | null; title: string | null; excerpt: string | null; fetched_at: string | null }[]; profile_summary: string[]; recent_reasons: string[] };
+  counts: { runs: number; vetoes: number; decisions: number };
+}
