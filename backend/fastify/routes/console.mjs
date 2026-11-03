@@ -3,6 +3,10 @@ import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../co
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
 import { visitPublicSources } from '../../../core/public-sources.mjs';
 import { designPersonaTurn } from '../../../core/persona-designer.mjs';
+import { loadSkillCatalog, resolveSkills, effectiveSkillTools } from '../../../core/persona-skills.mjs';
+import { fileURLToPath as toPath } from 'node:url';
+import { join as joinPath } from 'node:path';
+import { parse as parseYamlText } from 'yaml';
 import { profileFromPublicSources } from '../../../core/profile-enrichment.mjs';
 import { hasConsentedHumanProfile, makeThreadId } from '../../../core/hybrid-agent-gateway.mjs';
 import { workspaceStoreFor } from '../lib/workspace-roles.mjs';
@@ -164,6 +168,8 @@ const impersonatorBaseSchema = z.object({
   purpose: z.enum(['idea_test', 'objection_rehearsal', 'pitch_review']).optional(),
   veto_power: z.boolean().optional(),
   consent_reference: z.string().max(300).optional(),
+  // P5 : ids de skills de personas/skills.yaml (outils effectifs = skill ∩ assertToolAllowed).
+  skills: z.array(z.string().regex(/^[a-z0-9][a-z0-9_-]{0,63}$/)).max(20).optional(),
   // Persona consentie par défaut : seul un refus explicite (false) est rejeté.
   consent_confirmed: z.boolean().optional(),
 });
@@ -406,11 +412,13 @@ async function buildImpersonatorAgent(app, me, d) {
   };
   // Base de données publiques : URLs validées (normalizeImpersonator) puis visitées côté serveur.
   normalizeImpersonator(impersonator);
+  const skills = d.skills?.length ? resolveSkills(d.skills, await personaSkillCatalog(app)) : [];
   impersonator.public_evidence = await visitPersonaSources(app, impersonator.public_sources);
   const definition = impersonatorAgentDefinition({
     agent_id: d.agent_id, impersonator, veto_power: d.veto_power !== false,
     human_profile: { assigned_name: d.name, avatar_url: d.portrait_url || null, professional_context: { current_role: d.role || null, company: d.company || null } },
   });
+  if (skills.length) definition.metadata = { ...definition.metadata, skills };
   let agent = app.kayrosContext.engine.swarm.createAgent(definition, { tenantId: me.tenantId, by: me.email });
   const imports = [];
   if (d.source === 'linkedin' && d.linkedin_url) imports.push({ source: 'linkedin', linkedin_url: d.linkedin_url });
@@ -437,6 +445,18 @@ async function buildImpersonatorAgent(app, me, d) {
     }, { tenantId: me.tenantId, by: me.email });
   } catch { /* la persona de base reste valide */ }
   return { agent, impersonator, enrichment_error };
+}
+
+/** Catalogue de skills (personas/skills.yaml, ou ctx.personaSkills injecté pour les tests). */
+let skillCatalogCache = null;
+async function personaSkillCatalog(app) {
+  if (Array.isArray(app.kayrosContext.personaSkills)) return app.kayrosContext.personaSkills;
+  if (!skillCatalogCache) {
+    const dir = process.env.KAYROS_PERSONAS_DIR && process.env.KAYROS_PERSONAS_DIR !== 'off'
+      ? process.env.KAYROS_PERSONAS_DIR : toPath(new URL('../../../personas/', import.meta.url));
+    skillCatalogCache = await loadSkillCatalog(joinPath(dir, 'skills.yaml'), { parse: (t) => parseYamlText(t) });
+  }
+  return skillCatalogCache;
 }
 
 /** Visite des URLs publiques (injectable pour les tests ; KAYROS_PUBLIC_SOURCES_VISIT=off désactive). */
@@ -918,6 +938,20 @@ export default async function consoleRoute(app) {
       await app.kayrosContext.engine.swarm.flush?.();
       return reply.code(201).send({ agent: agentView(agent), persona: personaClues(agent.human_profile), guardrails: impersonatorGuardrails(impersonator), enrichment_error });
     } catch (error) { return reply.code(/existant/.test(error.message) ? 409 : 400).send({ error: surface(error.message) }); }
+  });
+
+  // P5 : catalogue de skills des personas et outils effectifs d'un agent (skill ∩ assertToolAllowed).
+  app.get('/v1/console/persona-skills', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    try { return { skills: await personaSkillCatalog(app) }; } catch (error) { return reply.code(500).send({ error: surface(error.message) }); }
+  });
+  app.get('/v1/console/agents/:agentId/skill-tools', async (req, reply) => {
+    const me = await app.requireAuth(req, reply); if (!me) return;
+    const swarm = app.kayrosContext.engine.swarm;
+    await swarm.hydrateTenant?.(me.tenantId);
+    const agent = swarm.registry.get(req.params.agentId, { tenantId: me.tenantId });
+    if (!agent) return reply.code(404).send({ error: 'agent introuvable' });
+    return { agent_id: agent.agent_id, skills: (agent.metadata?.skills || []).map((s) => s.id || s.name), ...effectiveSkillTools(agent, { registry: app.kayrosContext.engine.tools || null }) };
   });
 
   // Création conversationnelle (P4) : propose un brouillon, n'écrit jamais. L'enregistrement passe

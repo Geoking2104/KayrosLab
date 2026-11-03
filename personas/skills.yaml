@@ -1,0 +1,22 @@
+# KayrosLab — Catalogue de skills des personas (P5).
+# Un skill = instructions + outils SOUHAITÉS. Un outil n'est réellement utilisable que s'il figure
+# AUSSI dans l'allowlist de la persona (`tools:` du fichier persona) ET passe assertToolAllowed
+# (core/workflow-permissions.mjs : allowlist, pas de wildcard pour l'écriture, porte humaine `gate`).
+# Les skills ne peuvent donc jamais élargir les droits : outils effectifs = skill ∩ permissions.
+skills:
+  - id: objection_roi
+    name: Objection ROI
+    instructions: Exiger un ROI chiffré, un délai de retour et un coût total de possession avant tout accord.
+    tools: [estimate_resources]
+  - id: veille_reglementaire
+    name: Veille réglementaire
+    instructions: Vérifier les risques réglementaires du domaine avant de se prononcer ; citer la source.
+    tools: [search_regulatory_risks]
+  - id: veille_concurrentielle
+    name: Veille concurrentielle
+    instructions: Comparer l'idée aux alternatives du marché ; signaler l'absence de différenciation.
+    tools: [search_competitors]
+  - id: trajectoire
+    name: Trajectoire probabiliste
+    instructions: Raisonner en scénarios P10/P50/P90 plutôt qu'en valeur unique.
+    tools: [simulate_trajectory]
