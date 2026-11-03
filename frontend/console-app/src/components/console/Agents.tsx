@@ -1,11 +1,29 @@
 import { useState } from "react";
 import { useConsole } from "@/lib/console/store";
-import { GUARDRAILS, kindLabel, simulateMetier, type Agent, type AgentKind } from "@/lib/console/model";
+import { AGENT_CHANNELS, AGENT_PROVIDERS, GUARDRAILS, SENIORITIES, defaultSettings, kindLabel, simulateMetier, type Agent, type AgentKind, type AgentProvider, type AgentSettings, type Seniority } from "@/lib/console/model";
 import { cn } from "@/lib/cn";
 import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
+import { ConfidenceBadge, ProfileEnrich, SpeakPreview, enrichedClue } from "./profile-enrich";
+import type { EnrichResult, PersonaConfidence } from "@/lib/console/api";
+
+/** Provenance du DISC côté client (même règle que le serveur : estimation plafonnée à 60 %). */
+export function agentConfidence(agent: Agent): PersonaConfidence | null {
+  const hp = agent.humanProfile as any;
+  if (!hp) return null;
+  const d = hp.descriptif || {};
+  const sources = (hp.evidence || []).map((e: any) => e.source).filter(Boolean);
+  if (String(hp.source || d.source || "").startsWith("crystalknows") && d.confidence == null) {
+    return { kind: "crystalknows", disc_type: d.disc_type ?? null, archetype: d.archetype ?? null, confidence: null, label: t("Fiche CrystalKnows (DISC mesuré)"), sources };
+  }
+  if (d.disc_type && d.confidence != null) {
+    const c = Math.min(0.6, Number(d.confidence) || 0);
+    return { kind: "estimate", disc_type: d.disc_type, archetype: d.archetype ?? null, confidence: c, label: t("Estimation depuis le style d’écriture (confiance {{pct}} %) — pas une fiche CrystalKnows", { pct: Math.round(c * 100) }), sources };
+  }
+  return { kind: "manual", disc_type: d.disc_type ?? null, archetype: null, confidence: null, label: t("Profil saisi à la main"), sources };
+}
 import { t, tc } from "@/lib/i18n";
 
 function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
@@ -210,6 +228,9 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
               {agent.consented ? (
                 <p className="mt-3 rounded-lg bg-accent-soft px-3 py-2 text-sm">{t("Simulation étiquetée. Indices : {{clues}}. Pas de décision matérielle.", { clues: tc(agent.clues) || t("saisie manuelle") })}</p>
               ) : null}
+              {agent.kind === "impersonator" && agentConfidence(agent) ? (
+                <div className="mt-2"><ConfidenceBadge confidence={agentConfidence(agent)!} /></div>
+              ) : null}
             </Panel>
           ),
         )}
@@ -318,6 +339,7 @@ function MetierForm({
     simulation: boolean;
     clues: string;
     brief?: string;
+    settings?: AgentSettings;
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -330,6 +352,7 @@ function MetierForm({
     simulation: boolean;
     clues: string;
     brief?: string;
+    settings?: AgentSettings;
   }) => { ok: boolean; reason?: string };
 }) {
   const [name, setName] = useState(tc(existing?.name));
@@ -338,6 +361,7 @@ function MetierForm({
   const [mission, setMission] = useState(tc(existing?.mission));
   const [brief, setBrief] = useState(tc(existing?.brief));
   const [veto, setVeto] = useState(existing?.veto ?? false);
+  const [settings, setSettings] = useState<AgentSettings>(existing?.settings ?? defaultSettings());
   const [error, setError] = useState("");
 
   function save() {
@@ -356,6 +380,7 @@ function MetierForm({
       consented: false,
       simulation: false,
       clues: "",
+      settings,
     };
     const result = existing ? onUpdate(existing.id, draft) : onCreate({ ...draft, kind: "metier" });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
@@ -388,6 +413,8 @@ function MetierForm({
           <input type="checkbox" className="mt-1 size-4" checked={veto} onChange={(event) => setVeto(event.target.checked)} />
           <span>{t("Droit de veto dans un collectif qui l’autorise.")}</span>
         </label>
+        <AgentSettingsFields value={settings} onChange={setSettings} />
+        <AttachedLibrary agent={existing} />
         {error ? <p className="text-sm text-stop" role="alert">{error}</p> : null}
         <div className="flex gap-2">
           <Button onClick={save}>{existing ? t("Enregistrer les modifications") : t("Créer l’agent métier")}</Button>
@@ -420,6 +447,7 @@ function Composer({
     consented: boolean;
     simulation: boolean;
     clues: string;
+    humanProfile?: Record<string, unknown>;
   }) => { ok: boolean; reason?: string };
   onUpdate: (id: string, agent: {
     name: string;
@@ -447,6 +475,10 @@ function Composer({
   const [disc, setDisc] = useState("Di");
   const [error, setError] = useState("");
   const [link, setLink] = useState<null | { source: ProfileSource; url: string }>(null);
+  const [enriched, setEnriched] = useState<EnrichResult | null>(null);
+  const { live, enrichAgent, createCollective, state } = useConsole();
+  const [picked, setPicked] = useState<string[]>([]);
+  const impersonators = state.agents.filter((a) => a.kind === "impersonator" && a.enabled);
   const personal = mode !== "metier";
   const gate = mode === "impersonator" && !existing && !link;
 
@@ -469,6 +501,12 @@ function Composer({
       }
       if (!consent || guards.some((item) => !item)) {
         setError(t("Cochez le consentement et les cinq garde-fous avant d’ouvrir le panel."));
+        return;
+      }
+      if (picked.length >= 2) {
+        const result = createCollective({ name: t("Panel d’impersonators"), agentIds: picked, voting: "majority", personality: true });
+        if (!result.ok) setError(result.reason ?? t("Refusé"));
+        else onClose();
         return;
       }
       const result = onTeam(team.split("\n"), source === "disc" ? `DISC ${disc}` : clues);
@@ -508,7 +546,7 @@ function Composer({
     };
     const result = existing
       ? onUpdate(existing.id, draft)
-      : onAgent({ ...draft, kind: mode });
+      : onAgent({ ...draft, kind: mode, ...(enriched ? { humanProfile: enriched.profile } : {}) });
     if (!result.ok) setError(result.reason ?? t("Refusé"));
     else onClose();
   }
@@ -545,7 +583,19 @@ function Composer({
           )}>
             <TextArea value={team} onChange={(event) => setTeam(event.target.value)} />
           </Field>
-        ) : (
+        ) : null}
+        {mode === "team" && impersonators.length >= 2 ? (
+          <fieldset className="grid gap-1 text-sm">
+            <legend className="text-xs text-muted">{t("Ou réunissez des impersonators enrichis existants (2 au moins)")}</legend>
+            {impersonators.map((a) => (
+              <label key={a.id} className="flex items-center gap-2">
+                <input type="checkbox" checked={picked.includes(a.id)} onChange={(e) => setPicked((cur) => e.target.checked ? [...cur, a.id] : cur.filter((x) => x !== a.id))} />
+                <span>{tc(a.name)}</span>
+              </label>
+            ))}
+          </fieldset>
+        ) : null}
+        {mode === "team" ? null : (
           <>
             <Field label={t("Nom")}>
               <input className={controlClass} value={name} onChange={(event) => setName(event.target.value)} required />
@@ -569,11 +619,41 @@ function Composer({
         )}
         {personal ? (
           <>
+            {mode === "impersonator" && existing && live ? (
+              <>
+                <ProfileEnrich
+                  live={live}
+                  name={name}
+                  agentId={existing.id}
+                  enrich={async (body) => {
+                    const res = await enrichAgent(existing.id, body);
+                    if (!res.ok || !res.result) throw new Error(res.reason ?? t("Refusé"));
+                    return res.result;
+                  }}
+                  onResult={(result) => setClues(enrichedClue(result.profile) || clues)}
+                />
+                <SpeakPreview live={live} agentId={existing.id} />
+              </>
+            ) : null}
             {mode === "impersonator" && link ? (
               <>
                 <LinkedMark source={link.source} url={link.url} onChange={existing ? undefined : () => setLink(null)} />
+                {!existing ? (
+                  <ProfileEnrich
+                    live={live}
+                    name={name}
+                    crystalUrl={link.source === "crystal" ? link.url : ""}
+                    onResult={(result) => {
+                      setEnriched(result);
+                      if (!name.trim() && result.profile.assigned_name) setName(result.profile.assigned_name);
+                      const role = result.profile.professional_context?.current_role;
+                      if (role) setRole(role);
+                      setClues(enrichedClue(result.profile) || clues);
+                    }}
+                  />
+                ) : null}
                 <Field label={t("Notes")} hint={t(
-                  "L’adresse reste un indice. Elle n’est pas visitée, et aucune fiche n’est téléchargée."
+                  "Sans enrichissement, l’adresse reste un indice : elle n’est pas visitée."
                 )}>
                   <TextArea value={clues} onChange={(event) => setClues(event.target.value)} />
                 </Field>
@@ -632,5 +712,102 @@ function Composer({
         </div>
       </div>
     </Panel>
+  );
+}
+
+/** Une ligne par élément : contraintes, outils, règles. */
+function ListArea({ value, onChange, placeholder }: { value: string[]; onChange: (next: string[]) => void; placeholder?: string }) {
+  const [text, setText] = useState(value.join("\n"));
+  return (
+    <TextArea
+      value={text}
+      placeholder={placeholder}
+      onChange={(event) => {
+        setText(event.target.value);
+        onChange(event.target.value.split("\n").map((line) => line.trim()).filter(Boolean));
+      }}
+    />
+  );
+}
+
+const SENIORITY_LABEL: Record<Seniority, string> = {
+  get intern() { return t("Stagiaire"); },
+  get junior() { return t("Junior"); },
+  get senior() { return t("Senior"); },
+  get executive() { return t("Dirigeant"); },
+};
+
+export function AgentSettingsFields({ value, onChange }: { value: AgentSettings; onChange: (next: AgentSettings) => void }) {
+  const set = <K extends keyof AgentSettings>(key: K, next: AgentSettings[K]) => onChange({ ...value, [key]: next });
+  return (
+    <fieldset className="grid gap-4 rounded-md border border-line p-4" data-testid="agent-settings">
+      <legend className="px-1 text-sm font-medium">{t("Paramétrage")}</legend>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label={t("Séniorité")}>
+          <select className={controlClass} value={value.seniority} onChange={(event) => set("seniority", event.target.value as Seniority)}>
+            {SENIORITIES.map((item) => <option key={item} value={item}>{SENIORITY_LABEL[item]}</option>)}
+          </select>
+        </Field>
+        <Field label={t("Axe principal")} hint={t("Ce qu’il examine en premier.")}>
+          <input className={controlClass} value={value.primaryFocus} onChange={(event) => set("primaryFocus", event.target.value)} />
+        </Field>
+        <Field label={t("Fournisseur de modèle")}>
+          <select className={controlClass} value={value.provider} onChange={(event) => set("provider", event.target.value as AgentProvider)}>
+            {AGENT_PROVIDERS.map((item) => <option key={item || "default"} value={item}>{item || t("Par défaut du serveur")}</option>)}
+          </select>
+        </Field>
+        <Field label={t("Modèle")} hint={t("Vide : modèle du profil d’exécution.")}>
+          <input className={controlClass} value={value.model} onChange={(event) => set("model", event.target.value)} />
+        </Field>
+      </div>
+      <Field label={t("Contraintes")} hint={t("Une par ligne.")}>
+        <ListArea value={value.constraints} onChange={(next) => set("constraints", next)} />
+      </Field>
+      <Field label={t("Outils autorisés")} hint={t("Un identifiant d’outil par ligne.")}>
+        <ListArea value={value.tools} onChange={(next) => set("tools", next)} />
+      </Field>
+      <div>
+        <p className="text-sm font-medium">{t("Canaux")}</p>
+        <div className="mt-2 flex flex-wrap gap-4">
+          {AGENT_CHANNELS.map((channel) => (
+            <label key={channel} className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                className="size-4"
+                checked={value.channels.includes(channel)}
+                onChange={(event) => set("channels", event.target.checked ? [...value.channels, channel] : value.channels.filter((item) => item !== channel))}
+              />
+              {channel === "console" ? "Console" : channel === "teams" ? "Teams" : channel === "slack" ? "Slack" : "Discord"}
+            </label>
+          ))}
+        </div>
+      </div>
+      {value.systemRules?.length ? (
+        <div>
+          <p className="text-sm font-medium">{t("Règles système")}</p>
+          <ul className="mt-2 grid gap-1 text-sm text-ink-soft">
+            {value.systemRules.map((rule) => <li key={rule.id}><span className="font-mono text-xs">{rule.id}</span> · {rule.text}</li>)}
+          </ul>
+        </div>
+      ) : null}
+      <Field label={t("Règles de comportement")} hint={t("Une règle par ligne, ajoutée aux règles système.")}>
+        <ListArea value={value.rules} onChange={(next) => set("rules", next)} />
+      </Field>
+    </fieldset>
+  );
+}
+
+/** Skills et sources rattachés (mode connecté), gérés depuis la Bibliothèque. */
+function AttachedLibrary({ agent }: { agent?: Agent }) {
+  const { live, workspace } = useConsole();
+  if (!live) return null;
+  const skills = workspace.skills.filter((item) => agent && item.agent_ids.includes(agent.id)).map((item) => item.name);
+  const contexts = workspace.contexts.filter((item) => agent && item.agent_ids.includes(agent.id)).map((item) => item.name);
+  return (
+    <div className="rounded-md border border-line p-3 text-sm" data-testid="agent-library">
+      <p>{t("Skills : {{v}}", { v: skills.join(", ") || "—" })}</p>
+      <p className="mt-1">{t("Sources de contexte : {{v}}", { v: contexts.join(", ") || "—" })}</p>
+      <button type="button" className="mt-2 text-accent underline" onClick={() => go("bibliotheque")}>{t("Gérer dans la Bibliothèque")}</button>
+    </div>
   );
 }

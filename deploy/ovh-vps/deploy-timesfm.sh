@@ -15,10 +15,23 @@ if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>
   exit 1
 fi
 
-available_kb=$(awk '/MemAvailable:/ {print $2}' /proc/meminfo)
+MEMINFO_FILE="${MEMINFO_FILE:-/proc/meminfo}"
+available_kb=$(awk '/MemAvailable:/ {print $2}' "${MEMINFO_FILE}")
 if [[ -n "${available_kb:-}" && "${available_kb}" -lt 3145728 ]]; then
-  echo "ERROR: TimesFM needs at least 3 GiB of available RAM during model startup." >&2
-  exit 1
+  # RAM insuffisante : TimesFM est optionnel (la projection déterministe reste
+  # disponible). On avertit sans bloquer le déploiement de l'API, sauf si
+  # KAYROS_TIMESFM_STRICT=1. Le conteneur TimesFM existant n'est pas touché.
+  echo "WARNING: TimesFM needs at least 3 GiB of available RAM during model startup (available: $((available_kb / 1024)) MiB). Skipping TimesFM rebuild; deterministic projection remains available." >&2
+  {
+    echo "--- diagnostic mémoire (lecture seule) ---"
+    free -h 2>/dev/null || true
+    ps aux --sort=-%mem 2>/dev/null | head -n 11 || true
+    docker stats --no-stream --format 'table {{.Name}}\t{{.MemUsage}}\t{{.MemPerc}}' 2>/dev/null || true
+  } >&2
+  if [[ "${KAYROS_TIMESFM_STRICT:-0}" =~ ^(1|true|yes|on)$ ]]; then
+    exit 1
+  fi
+  exit 0
 fi
 
 cd "${APP_DIR}"

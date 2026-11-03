@@ -1,3 +1,4 @@
+import { memberCan, memberRole } from '../lib/workspace-roles.mjs';
 // API publique v1 : la petite surface stable pour Zapier, n8n, Make,
 // Salesforce… (docs/ARCHITECTURE-CONSOLE-INTEGRATIONS.md §3.3).
 //
@@ -73,6 +74,24 @@ export default async function publicApiRoutes(app) {
     keyGenerator: apiKeyRateLimitKey,
   };
   const ctx = () => app.kayrosContext;
+  // La clé agit au nom de son créateur : créateur inconnu (clé ancienne, compte
+  // supprimé, hors espace) → refus ; membre passé lecteur → pas de mission.
+  const creatorAllowed = async (principal, reply, permission) => {
+    const email = String(principal.createdBy || '').toLowerCase();
+    const known = email && (
+      (await memberRole(ctx(), { tenantId: principal.tenantId, email })).member
+      || await (async () => { const u = await ctx().userStore?.findByEmail?.(email).catch(() => null); return u && String(u.tenantId || 'default') === principal.tenantId ? u : null; })()
+    );
+    if (!known) {
+      reply.code(403).send({ error: 'clé sans créateur connu dans cet espace : recréez-la depuis la console', code: 'creator_unknown' });
+      return false;
+    }
+    if (!await memberCan(ctx(), { tenantId: principal.tenantId, email, accountRole: known.role === 'comex' ? 'comex' : known.role }, permission)) {
+      reply.code(403).send({ error: 'le créateur de cette clé a le rôle lecteur : lancement de mission refusé', code: 'creator_read_only' });
+      return false;
+    }
+    return true;
+  };
   const viewOptions = () => ({ consoleUrl: ctx().consoleUrl });
 
   app.get('/v1/public/me', { config: { rateLimit } }, async (req, reply) => {
@@ -96,6 +115,7 @@ export default async function publicApiRoutes(app) {
 
   app.post('/v1/public/missions', { config: { rateLimit } }, async (req, reply) => {
     const principal = await requireApiKey(app, req, reply, 'missions:write'); if (!principal) return reply;
+    if (!await creatorAllowed(principal, reply, 'run')) return reply;
     const idempotencyKey = String(req.headers['idempotency-key'] || '').trim();
     if (!idempotencyKey || idempotencyKey.length > 200) {
       return reply.code(400).send({ error: 'en-tête Idempotency-Key requis (1 à 200 caractères), ex. sf-<OpportunityId>-<Stage>', code: 'idempotency_key_required' });

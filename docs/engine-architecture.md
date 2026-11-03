@@ -152,7 +152,7 @@ by name. They never travel in a JSON snapshot nor come from an HTTP body.
 | Concern | Module | Default |
 |---------|--------|---------|
 | Suspended runs | `run-store.mjs` — `InMemoryRunStore`, `FileRunStore`; `pg-store.mjs` — `PgRunStore` | Postgres when `DATABASE_URL` is set, otherwise `KAYROS_RUNS_FILE` or `./.kayros-runs.json`; `memory` forces the volatile store |
-| Audit trail | `log-sink.mjs` — JSONL, one file per run, append-only | `logs/<runId>.jsonl` |
+| Audit trail | `log-sink.mjs` — JSONL, one file per run, append-only; optionally sealed by `evidence-chain.mjs` (hash chain + Ed25519, see `docs/proof-of-control-pilot.md`) | `logs/<runId>.jsonl` |
 
 A file store assumes a single writer: it rewrites the whole file on every
 change, so two instances behind a load balancer overwrite each other and a

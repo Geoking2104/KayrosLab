@@ -15,6 +15,7 @@ import {
   normalizeHumanProfile,
   profileFromAgentOverride,
 } from './personality.mjs';
+import { VOICE_MIN_SCORE, conformVoice, scoreVoice, speakAs } from './impersonator-voice.mjs';
 import { impersonatorContext, impersonatorGuardrails, impersonatorOf, normalizeImpersonator } from './impersonator.mjs';
 
 export const AGENT_TYPES = Object.freeze(['system_predefined', 'user_defined', 'hybrid_modified']);
@@ -295,6 +296,19 @@ export function behavioralContext(profile = {}) {
   return [lines.length ? `Profil comportemental de l'agent:\n${lines.join('\n')}` : '', rich].filter(Boolean).join('\n\n');
 }
 
+// Skills et sources de contexte rattachés depuis la console (instantanés stockés
+// dans metadata) : ils entrent dans le contexte effectif de l'agent.
+function skillsContext(metadata = {}) {
+  const skills = Array.isArray(metadata.skills) ? metadata.skills.filter((s) => s && s.name) : [];
+  if (!skills.length) return '';
+  return `Skills:\n${skills.map((s) => `- ${s.name}${s.instructions ? ` : ${String(s.instructions).slice(0, 2000)}` : ''}${Array.isArray(s.tools) && s.tools.length ? ` (outils: ${s.tools.join(', ')})` : ''}`).join('\n')}`;
+}
+function contextSourcesContext(metadata = {}) {
+  const sources = Array.isArray(metadata.context_sources) ? metadata.context_sources.filter((s) => s && s.name) : [];
+  if (!sources.length) return '';
+  return `Sources de contexte:\n${sources.map((s) => `- ${s.name}${s.kind ? ` [${s.kind}]` : ''}${s.content ? ` : ${String(s.content).slice(0, 4000)}` : ''}`).join('\n')}`;
+}
+
 export function compileEffectiveAgentContext(definition) {
   const d = validateAgentDefinition(definition);
   const rules = resolveEffectiveRules(d);
@@ -304,6 +318,8 @@ export function compileEffectiveAgentContext(definition) {
     d.constraints.length ? `Contraintes:\n${d.constraints.map((item) => `- ${item}`).join('\n')}` : null,
     d.tools.length ? `Outils autorisés: ${d.tools.join(', ')}` : null,
     d.connectors.length ? `Connecteurs autorisés: ${d.connectors.join(', ')}` : null,
+    skillsContext(d.metadata) || null,
+    contextSourcesContext(d.metadata) || null,
     `Règles de décision:\n${rules.length
       ? rules.map((r) => `- [${r.rule_id}] (${r.origin}) ${r.rule_text}`).join('\n')
       : '- Aucune règle active; signaler explicitement cette lacune de gouvernance.'}`,
@@ -872,7 +888,7 @@ export class SwarmService {
    * est appelé après chaque analyse d'agent avec `{ completed, total, agent_id }` ;
    * une erreur levée par ce rappel n'interrompt jamais le run.
    */
-  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null, runId = null, onProgress = null } = {}) {
+  async run(configurationOrId, { tenantId = null, question, context = '', provider, sovereignty, model, by = null, agentResults = null, runId = null, onProgress = null, signal = null } = {}) {
     const config = typeof configurationOrId === 'string'
       ? this.getConfiguration(configurationOrId, { tenantId })
       : this.createConfiguration(configurationOrId, { tenantId, by });
@@ -888,6 +904,8 @@ export class SwarmService {
     });
     const executeOne = async (definition) => {
       const effective_rules = resolveEffectiveRules(definition);
+      // Mission annulée : aucun nouvel agent ne démarre (pas de jetons consommés).
+      if (signal?.aborted) throw signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
       let raw = agentResults?.[definition.agent_id];
       if (raw == null) {
         const agent = new SpecializedDecisionAgent({
@@ -900,13 +918,28 @@ export class SwarmService {
           provider: definition.provider || provider,
           sovereignty,
           model: definition.model || model,
-          runId: run_id, traceId: run_id,
+          runId: run_id, traceId: run_id, signal,
         });
       }
-      return {
-        ...normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled }),
-        effective_rules,
-      };
+      const analysis = normalizeAgentAnalysis(raw, definition, { personalityEnabled: config.personality_simulation_enabled });
+      // Impersonator : provenance du DISC toujours exposée ; sans retour en voix de la
+      // persona (modèle absent ou muet), l'aperçu déterministe « ainsi je parlerais » le remplace.
+      if (impersonatorOf(definition) && definition.human_profile && config.personality_simulation_enabled) {
+        const spoken = speakAs(definition.human_profile, question);
+        analysis.persona_confidence = spoken.confidence;
+        const shaped = analysis.simulated_stakeholder_feedback ? conformVoice(analysis.simulated_stakeholder_feedback, definition.human_profile) : '';
+        const score = shaped ? scoreVoice(shaped, definition.human_profile, { idea: question }) : null;
+        if (shaped && score.score >= VOICE_MIN_SCORE) {
+          analysis.simulated_stakeholder_feedback = shaped;
+          analysis.persona_voice_score = score;
+        } else {
+          if (shaped) analysis.persona_voice_rejected = { message: shaped, score };
+          analysis.simulated_stakeholder_feedback = spoken.message;
+          analysis.persona_voice_fallback = true;
+          analysis.persona_voice_score = scoreVoice(spoken.message, definition.human_profile, { idea: question });
+        }
+      }
+      return { ...analysis, effective_rules };
     };
     let completed = 0;
     const tracked = typeof onProgress === 'function'

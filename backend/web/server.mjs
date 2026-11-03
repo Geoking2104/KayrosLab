@@ -24,6 +24,7 @@ i18n.configure({
 // --- Middleware ---
 app.use(i18n.init);
 app.use(express.urlencoded({ extended: true }));
+app.use('/assets', express.static(path.join(__dirname, '..', '..', 'assets')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/tokens.css', (_req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'tokens.css'));

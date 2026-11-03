@@ -15,9 +15,9 @@ You state the decision. A committee of specialized agents with opposing duties i
 </div>
 
 <p align="center">
-  <img src="assets/readme/console-today.webp" alt="KayrosLab console, Today view: the 4-step journey and the open cases ordered by the action you can take next" width="100%">
+  <img src="assets/readme/console-company.webp" alt="KayrosLab console company dashboard: active projects, decisions to arbitrate, collectives and library counters" width="100%">
 </p>
-<p align="center"><sub><em>The live console, Today view: the journey from question to arbitration, then the open cases in the order you can act on them. Verdicts stay advisory until a human arbitrates.</em></sub></p>
+<p align="center"><sub><em>The company dashboard: every project with its decision cases, what is waiting for arbitration and what is still under review. Verdicts stay advisory until a human arbitrates.</em></sub></p>
 
 ---
 
@@ -51,23 +51,46 @@ The same process runs from the web console, Slack, Microsoft Teams or Discord.
 
 ## What the live console shows today
 
-On [kayroslab.com/console](https://www.kayroslab.com/console/) (English and French, switch with EN / FR):
+On [kayroslab.com/console](https://www.kayroslab.com/console/), four entries:
 
-- **Today** — the journey, then open cases ordered by the action you can take next.
-- **Cases** — full decision threads with status (Under review, To arbitrate, Clarification needed, Closed), the verdict, each agent's position and the trail.
-- **Collectives & Agents** — compose committees of business, hybrid or impersonator agents, with veto rights.
-- **Connections** — Slack, Teams, Discord, Salesforce, API keys, webhook and account linking.
-- **8-step cycle** — Listen → Map → Build → Position → Test → Arbitrate → Project → Deliver.
+| Entry | What you do there |
+|-------|-------------------|
+| **Company** | Dashboard per company: active projects, cases to arbitrate, cases under review, collectives, skills and context. *Today* lists the next action per open case. |
+| **Projects** | Each project carries a **decision graph** you edit like an n8n workflow: question → collectives (in parallel or in sequence) → individual agents → consensus gates (threshold, unanimity, veto) → human arbitration → notification → decision. Nodes are dragged freely, and statuses update live while the run moves forward. Context cascades from company to project to node. Stakeholders (decision maker, sponsor, consulted, informed) receive the decision by email. |
+| **Library** | Agents (full form: role, mission, instructions, constraints, tools, model, veto), collectives, versioned **skills** you can restore, and **context sources** (notes, documents, URLs, policies). |
+| **Settings** | Connections (Slack, Teams, Discord, Salesforce via API, CrystalKnows export), **members and roles**, workspace. |
 
-<p align="center">
-  <img src="assets/readme/console-case-verdict.webp" alt="A case in the console: Conditional GO verdict with a 78/100 support score, each agent's vote and the conditions submitted for arbitration" width="100%">
-</p>
-<p align="center"><sub><em>A case at the Arbitrate stage: consolidated verdict, support score, each agent's vote and the conditions a human must accept or override.</em></sub></p>
+<table>
+<tr>
+<td width="50%"><img src="assets/readme/console-project-graph.webp" alt="Project decision graph with parallel collectives, a veto gate and the decision node"><br><sub>Decision graph: parallel collectives, consensus gate with veto, cascading context.</sub></td>
+<td width="50%"><img src="assets/readme/console-library.webp" alt="Library: versioned skills linked to agents and collectives"><br><sub>Library: versioned skills attached to agents and collectives.</sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="assets/readme/console-members.webp" alt="Members and roles: COMEX, Admin, Contributor, Viewer, email invitations"><br><sub>Members: four roles and email invitations.</sub></td>
+<td width="50%"><img src="assets/api-docs.webp" alt="Public API v1 documentation"><br><sub>Public API v1, to launch a mission from your CRM or automation.</sub></td>
+</tr>
+</table>
 
-| | |
-|---|---|
-| <img src="assets/readme/console-review-a-decision.webp" alt="Review a decision: write the question, choose the decision type and the execution profile"><br><sub>**Review a decision** — the question, its type and the execution profile.</sub> | <img src="assets/readme/console-collectives.webp" alt="Collectives: deal and product committees with their agents, veto and voting rule"><br><sub>**Collectives** — stable committees, voting rule and veto.</sub> |
-| <img src="assets/readme/console-agents.webp" alt="Agents registry: Finance, Legal affairs with veto, Engineering leadership, each with its duty"><br><sub>**Agents** — each agent has a duty and a refusal rule.</sub> | <img src="assets/readme/console-connections.webp" alt="Connections: Slack, Discord, Microsoft Teams and Salesforce channels with their configuration status"><br><sub>**Connections** — channels, Salesforce, keys and webhook.</sub> |
+### How a project runs
+
+- **Parallel branches, joined.** Independent collectives run at the same time, and the next step waits for all of them.
+- **Gates stop the flow.** When a gate blocks, the sibling branches still running are suspended and their LLM missions are cancelled, so no tokens are spent for nothing. A COMEX member or an admin lifts the gate with a written justification, and the suspended branches restart.
+- **Arbitration branch by branch.** A step can pause for human approval. Each branch waiting for approval gets its own *Approve and continue* button.
+- **Temporary composition.** Agent nodes join a collective only for the duration of the mission. The original composition is restored afterwards, even after a server restart or a crash in another process (missions send a heartbeat).
+- **Eight-step cycle.** Listen → Map → Build → Position → Test → Arbitrate → Project → Deliver, shown above the graph.
+
+### Roles
+
+| Role | Can |
+|------|-----|
+| **Admin** | Everything, including members and connections |
+| **COMEX** | Arbitrate, lift gates, override a veto |
+| **Contributor** | Create projects, run missions, edit the library |
+| **Viewer** | Read only. Chat accounts not linked to a member also get this role. |
+
+### English / French
+
+The console ships in **English and French** (EN/FR switch in the header, saved in the browser). User content is never translated.
 
 Every sensitive step can pause for a human. Forecasts are labelled simulations. Secrets stay encrypted. You choose local or cloud per workspace.
 
@@ -92,6 +115,7 @@ KayrosLab ships the full decision workshop: opposing duties, inspectable reasoni
 - **Human gates & veto** — sensitive output pauses for a human. Weighted votes instruct; a veto can block. Append-only trail.
 - **Honest numbers** — forecast bands are labelled simulations from stated hypotheses.
 - **Tenant isolation** — workspaces, dossiers and memories stay scoped to your organization. Secrets encrypted at rest.
+- **Roles enforced server-side** — viewer, contributor, COMEX and admin permissions are checked by the API, not only hidden in the UI. API keys without an owner are refused.
 - **Local or cloud** — keep inference on your infrastructure or run a governed cloud. You choose per workspace.
 
 No scraped profiles. No black-box verdicts.
@@ -119,6 +143,8 @@ The public pitch stays buyer-facing. Architects and builders can go deeper:
 - Live multi-agent demo
 - Public API v1 (`https://api.kayroslab.com/docs`) — launch a mission from your CRM or automation and receive the verdict
 - Native Slack, Teams and Discord connectors
+- Console API under `/v1/console/*`: companies, projects and their graphs, pipelines (`/projects/:id/pipelines`, `resume`, `approve`, `cancel`), skills, contexts, members and invitations. Details in [`docs/CONSOLE-HYBRID-AGENTS.md`](docs/CONSOLE-HYBRID-AGENTS.md)
+- Durable async runs with cancellation (`AbortSignal` propagated down to the LLM call) and multi-process-safe recovery
 
 <p align="center">
   <img src="assets/readme/api-docs.webp" alt="KayrosLab public API v1 documentation: quick start with curl, webhook signature and the OpenAPI 3.1 reference" width="100%">

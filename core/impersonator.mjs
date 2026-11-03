@@ -11,9 +11,10 @@
 //  - no private fact that is not in the supplied clues may be invented;
 //  - the agent may never be used for a materially impactful decision about the person.
 
+import { voiceContext } from './impersonator-voice.mjs';
 import { buildPersonalityContext, normalizeHumanProfile } from './personality.mjs';
 
-export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual']);
+export const IMPERSONATOR_SOURCES = Object.freeze(['linkedin', 'crystalknows', 'export', 'manual', 'enriched']);
 export const IMPERSONATOR_PURPOSES = Object.freeze(['idea_test', 'objection_rehearsal', 'pitch_review']);
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
@@ -126,7 +127,8 @@ export function impersonatorContext(agent) {
     'Attendu : réaction probable de la persona face à l\'idée soumise (accord, objections, conditions), étiquetée « Simulation ».',
   ].filter(Boolean);
   const base = buildPersonalityContext(profile);
-  return base ? `${lines.join('\n')}\n\n${base}` : lines.join('\n');
+  const voice = voiceContext(profile);
+  return [lines.join('\n'), voice, base].filter(Boolean).join('\n\n');
 }
 
 /** Build the impersonator agent definition from a request + an imported profile. */

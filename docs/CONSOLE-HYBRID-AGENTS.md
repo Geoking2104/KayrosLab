@@ -138,3 +138,49 @@ pour tout autre profil (et pour `GET /v4/content/profile/:id`) : la console l'af
 
 Chaque agent personnifié peut porter un descriptif éditable : `disc_type`, `archetype`, `disc_intensity` (0–100), `overview`, `qualities[]`, `traits` (`risk_aversion`, `skepticism`, `pragmatism`, `pace`, `expressiveness`, `social`, `dominance`, `leniency`, de 0 à 100), `sections` (`communication`, `building_trust`, `motivation`, `driving_action`, `energizers`, `drainers`, `strengths`, `blindspots`, `working_together`, `meetings`, `emails`, `following_up`, `negotiating`, `proposal`, `do`, `dont`) et `source` (`crystalknows`, `disc_template`, `manual` ou `anonymised`).
 Le module `core/personality-descriptif.mjs`, partagé entre le serveur et la console, construit le descriptif depuis Crystal v4 (`descriptifFromCrystal`) ou depuis un type DISC (`descriptifFromDisc`), le normalise et l'injecte dans le contexte d'exécution (`descriptifContext`).
+
+## Enchaînement de collectifs, agents du graphe, rôles et invitations
+
+### Enchaînement le long du graphe
+- Chaque nœud **collectif** relié à une session devient une étape. Ses dépendances (`deps`) sont les collectifs qui l'atteignent sans traverser un autre collectif.
+- `POST /v1/console/projects/:id/pipelines {question, profile?, pause_between?}` (rôle *run*) lance **toutes les étapes sans dépendance** (202).
+- **Branches parallèles et jonction** : les étapes dont toutes les dépendances sont terminées démarrent ensemble. Une étape à plusieurs dépendances est une jonction : son contexte contient les verdicts de toutes ses branches amont.
+- À la fin de chaque mission (`completed`), les **portes de sortie** de l'étape sont évaluées sur les avis : ce sont les portes atteintes sans traverser un autre collectif.
+  - Si elles passent, les étapes devenues prêtes démarrent.
+  - Si une porte bloque, l'étape passe à `blocked` et aucune nouvelle étape ne démarre. Les branches sœurs en cours passent à `halted` : leur résultat est ignoré.
+  - Un comex ou un admin lève les portes bloquées avec `POST /v1/console/pipelines/:id/resume {justification}`. Les branches `halted` repartent alors depuis le début, sur un nouveau fil.
+  - La mission LLM d'une branche suspendue est **annulée** (`gateway.cancelThread`) : le fil passe à `cancelled`, l'appel LLM en cours est interrompu (`AbortSignal` propagé jusqu'au fournisseur) et les agents restants ne sont pas lancés. Un autre processus qui exécute la mission détecte l'annulation en relisant le fil (`cancelPollMs`, 2 s).
+- **Pause d'arbitrage** : avec `pause_between: true`, ou sur une porte avec `config.pause: true`, une étape dont les portes passent et qui a des étapes en aval passe à `awaiting_approval`. Rien ne démarre avant `POST /v1/console/pipelines/:id/approve {comment?}` (rôle *arbitrate*), qui valide l'étape `node_id` (branche par branche) ou, sans `node_id`, toutes les étapes en attente (`approved`).
+  - Une étape en attente ne retient que ses descendants : les autres branches continuent.
+- Statut global : `blocked` > `awaiting_approval` > `failed` > `completed` > `running`. Une mission en échec met l'enchaînement à `failed`.
+- `POST /pipelines/:id/cancel` arrête l'enchaînement. Les étapes en cours passent à `halted` et leurs missions sont annulées.
+- Les routes de lecture sont `GET /projects/:id/pipelines` et `GET /pipelines/:id`.
+
+### Nœuds agent
+- Un nœud **agent** (`config.agent_id`) relié à un collectif (dans un sens ou dans l'autre) est **ajouté à la session** de ce collectif avant chaque mission, qu'elle soit lancée par un enchaînement ou directement sur la session.
+- Avec `config.exclude: true`, l'agent est retiré de la session.
+- **Composition temporaire** : à la fin de la mission (`completed` ou `failed`), les agents ajoutés sont retirés et les agents exclus sont rétablis. Un compteur par session évite qu'une mission en cours perde ses agents quand une autre se termine.
+- Le bail est **persisté** dans l'espace de travail (type `graph_leases`, un par session : fils en cours, agents ajoutés et retirés). Au démarrage du serveur puis toutes les 60 s (`KAYROS_GRAPH_LEASE_SWEEP_MS`, 0 = désactivé), les baux dont aucune mission n'est vivante sont rétablis. Une mission est vivante si elle tourne dans ce processus, si son fil porte un pouls récent (`heartbeat_at`, rafraîchi toutes les 15 s par le processus qui l'exécute, périmé après 45 s) ou si elle est encore en file durable. La reprise des runs interrompus au démarrage ignore aussi les fils au pouls récent : plusieurs processus peuvent partager le même stockage.
+- La modification passe par `updateRoomAgents` et respecte la limite d'agents construits.
+
+### Rôle lecteur hors console
+- **API publique** : une clé agit au nom de son créateur (`created_by`).
+  - Si la fiche membre du créateur est passée lecteur, `POST /v1/public/missions` renvoie `403 creator_read_only`.
+  - Si le créateur est vide, ou n'est ni membre ni compte de cet espace, la réponse est `403 creator_unknown`. Il faut alors recréer la clé depuis la console.
+- **Slack, Teams, Discord** :
+  - Un compte de chat **lié** à un membre lecteur ne peut ni lancer de mission ni arbitrer. La fiche membre prime sur le rôle du compte.
+  - Un compte **non lié** a le rôle `KAYROS_CHAT_UNLINKED_ROLE`, `lecteur` par défaut : il ne lance pas de mission et reçoit l'invitation à lier son compte.
+  - `contributeur` rétablit l'ancien accès par canal. **À définir en production si des utilisateurs non liés lancent des missions.**
+  - `admin` et `comex` ne sont jamais accordés à un compte non lié.
+
+### Activation d'une invitation
+1. L'administrateur invite un membre depuis Réglages → Membres → « Inviter par e-mail ».
+   - Un jeton à usage unique, valable 7 jours, est créé. Seule son empreinte SHA-256 est stockée.
+   - L'e-mail contient le lien `<console>/?invite=<jeton>`.
+   - Sans SMTP, la réponse de l'API (`invite_url`) donne le lien à transmettre à la main.
+2. La console affiche « Activer votre invitation » (`GET /v1/auth/invite/:jeton`).
+3. `POST /v1/auth/invite/accept {token, password, name?}` :
+   - Sans compte existant, crée le compte **dans l'espace de l'invitant** (et non dans l'espace libre-service), avec le rôle de compte comex pour un comex ou un admin, contributeur sinon. Le rôle effectif reste celui de la fiche membre, lecteur compris.
+   - Avec un compte existant dans le même espace, vérifie son mot de passe.
+   - Un compte existant dans un autre espace donne `409 account_other_tenant`.
+   - Dans les cas acceptés, la fiche passe à `active` et la session est ouverte.

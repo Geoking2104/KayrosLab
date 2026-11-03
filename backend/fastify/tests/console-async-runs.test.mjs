@@ -194,6 +194,13 @@ test('redémarrage : une mission restée `running` est exposée en `failed` (int
   assert.equal(res.statusCode, 202);
   // Nouveau processus sur la même base : la reprise est faite au démarrage (lib/context.mjs).
   const second = await buildApp({ store }); t.after(() => second.app.close());
+  // Le premier processus bat encore : pas de reprise prématurée.
+  assert.equal(await second.hybridGateway.recoverInterruptedRuns(), 0);
+  // Il s'arrête : plus de pouls (simulé en vieillissant heartbeat_at).
+  first.hybridGateway.close?.();
+  const id = res.json().thread_id;
+  const stale = await store.getThread(id, { tenantId: res.json().tenant_id || (await store.getThread(id))?.tenant_id });
+  await store.updateThread(stale.thread_id, { heartbeat_at: new Date(Date.now() - 10 * 60_000).toISOString() }, { tenantId: stale.tenant_id });
   assert.equal(await second.hybridGateway.recoverInterruptedRuns(), 1);
   const thread = (await getThread(second.app, 'bob', res.json().thread_id)).json().thread;
   assert.equal(thread.status, 'failed');

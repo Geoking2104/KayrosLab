@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { SalesOracleClient, resolvedMimeType, salesOracleActionRequirement, sha256Hex } from '../../web/public/assets/sales-oracle-tool.js';
+import { SalesOracleClient, resolvedMimeType, salesOracleActionRequirement, sha256Hex } from '../../../assets/sales-oracle-tool.js';
 
 const jsonResponse = (payload, status = 200) => ({
   ok: status >= 200 && status < 300, status,

@@ -57,11 +57,13 @@ do
   copy_if "${APP_DIR}/${f}" "${stage}/${f}"
 done
 
-if [[ -d "${APP_DIR}/backend/web/public/assets" ]]; then
+# Source unique des images du site : assets/ à la racine (assets/readme exclu).
+if [[ -d "${APP_DIR}/assets" ]]; then
   mkdir -p "${stage}/assets"
-  cp -a "${APP_DIR}/backend/web/public/assets/." "${stage}/assets/"
+  cp -a "${APP_DIR}/assets/." "${stage}/assets/"
+  rm -rf "${stage}/assets/readme"
 else
-  echo "ERREUR : backend/web/public/assets manquant." >&2
+  echo "ERREUR : assets/ manquant." >&2
   exit 1
 fi
 

@@ -39,7 +39,7 @@ export class BaseAgent {
   }
 
   async execute(task, {
-    goal, context = '', provider, sovereignty, model, runId, run_id, traceId, trace_id,
+    goal, context = '', provider, sovereignty, model, runId, run_id, traceId, trace_id, signal = null,
   } = {}) {
     const correlation = {
       runId: runId || run_id,
@@ -56,11 +56,12 @@ export class BaseAgent {
     let text;
     let degraded = null;
     let usedProvider = null;
+    if (signal?.aborted) throw signal.reason || Object.assign(new Error('mission annulée'), { code: 'ABORTED' });
     if (this.llm) {
       const res = await this.llm.complete(
         {
           role: this.name, messages, model: this._resolveModel(model), temperature: 0.3,
-          ...correlation,
+          ...correlation, ...(signal ? { signal } : {}),
         },
         { provider, sovereignty, ...correlation },
       );

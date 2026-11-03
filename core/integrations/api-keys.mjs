@@ -99,6 +99,7 @@ export function servicePrincipal(record) {
     keyId: record.key_id,
     keyName: record.name,
     serviceAccount: record.service_account,
+    createdBy: record.created_by || null,
     scopes: Object.freeze([...(record.scopes || [])]),
     collectiveIds: Object.freeze([...(record.collective_ids || [])]),
   });

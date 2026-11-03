@@ -180,6 +180,32 @@ Rules: 2–12 members; every member becomes an impersonator agent (guardrails in
 session's collective; the session counts against the per-user session limit; a member whose upstream
 profile lookup fails is still created (reported in `errors`).
 
+### 9.c Profile enrichment (Crystal-like card from several sources)
+
+`POST /v1/console/personality/enrich` (`core/profile-enrichment.mjs`) builds a profile comparable to a public
+CrystalKnows page (DISC, archetype, qualities, overview, "how to communicate with…" sections). Nothing is saved;
+the result is passed as `human_profile` to `POST /v1/console/impersonators` with `source: "enriched"`.
+
+| Field | Source | How it is read |
+|---|---|---|
+| `crystal_public_url` | `https://www.crystalknows.com/p/<slug>` only | One anonymous GET (identified User-Agent, no cookie/token), comex/admin only. The Next.js payload is parsed: DISC type, degrees, intensity, archetype, qualities, behavior, energizers, drainers, strengths, blind spots, trust, negotiation, follow-up, writing style. |
+| `crystal_public_html` | Page saved by the operator | Same parser, no network call. |
+| `linkedin_export` | LinkedIn "Get a copy of your data" | `Profile.csv`, `Positions.csv`, `Skills.csv` → identity, current role, history, skills. |
+| `emails` + `email_address` | Messages pasted/supplied by the operator | Only messages *from* the person; quotes, reply history and signatures removed; writing-style metrics. |
+| `x_username` | Official X API v2 (`X_BEARER_TOKEN`) | `users/by/username` + `users/:id/tweets` (retweets and replies excluded), comex/admin only. |
+| `x_posts`, `x_archive` | Pasted posts or the person's X archive (`tweets.js`) | Style metrics, no network call. |
+
+Merge order: LinkedIn → e-mails → X → CrystalKnows (Crystal wins for DISC and sections). Observed writing habits are
+appended to the `emails` section as "Observé : …". Without a Crystal card, a DISC type is **estimated** from the writing
+style (heuristic, confidence ≤ 60 %) and flagged in `evidence` and in the overview.
+
+Limits (also returned as `limits`):
+
+- No LinkedIn scraping; no x.com scraping; no mailbox access; no login, cookie or paywall bypass.
+- A private CrystalKnows profile cannot be read: use the authorized JSON export or the v4 API with `CRYSTALKNOWS_API_TOKEN`.
+- The public page publishes no numeric trait scores: traits are derived from the DISC template.
+- The public page format may change; the parser then fails with an explicit error (404/400) rather than guessing.
+
 ## 10. Console UX
 
 Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'impersonators** (panel) :
@@ -214,3 +240,19 @@ Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'imp
 > Camille's contribution (simulation): opposed — expects a volume/commitment clause, wants a 90-day
 > notice, rejects any change mid-contract; conditions: TCO proof, SLA guarantee, staged rollout.
 > The human then arbitrates the consensus with those conditions attached.
+
+## 9.d Parcours P0 : assistant, voix et confiance
+
+- **Assistant d’import** (console → Agents → Impersonator) en 5 étapes : CrystalKnows (page publique `/p/…`, HTML collé, export JSON privé, ou API v4 avec `CRYSTALKNOWS_API_TOKEN` côté serveur — sinon 503 explicite), export LinkedIn CSV guidé, X (`X_BEARER_TOKEN`, posts collés ou archive `tweets.js`), e-mails (fil collé, découpe sur `---` / `De :` / `From:`, filtre par adresse de l’auteur).
+- **Routes** : `POST /v1/console/personality/enrich` (crystal_export, crystal_api en plus), `POST /v1/console/agents/:agentId/enrich` (ré-enrichissement, manager), `POST /v1/console/personality/speak` (aperçu « ainsi je parlerais », `agent_id` ou `human_profile`), `POST /v1/console/impersonator-teams` (panel).
+- **Voix** : `core/impersonator-voice.mjs` injecte un bloc « VOIX DE LA PERSONA » (registre, longueur, priorités, angles morts, lui écrire) dans le contexte de l’impersonator ; en simulation, si le modèle ne renvoie pas de retour de persona, une réplique déterministe signée « Simulation — » est produite (`persona_voice_fallback`).
+- **Confiance** : `profileConfidence` distingue `crystalknows` (DISC mesuré), `estimate` (style d’écriture, plafonné à 60 %, jamais présenté comme CrystalKnows), `disc_template`, `manual`. Badge visible sur la fiche et la carte agent.
+
+## 9.e P1 : voix sur modèle réel, boîtes mail, étalonnage, jetons
+
+- **Voix sur modèle réel** : `speakWithModel` (aperçu `/personality/speak`, par défaut sur le modèle du swarm ; `use_model:false` pour forcer le déterministe) et le swarm notent chaque réplique avec `scoreVoice` (étiquette « Simulation — », première personne, longueur DISC, registre, **français**, **aucun chiffre ou source inventé**). Sous 0,6 → repli déterministe, réplique rejetée conservée dans `persona_voice_rejected`. `conformVoice` étiquette et coupe à la longueur de la persona.
+- **Évaluation** : `NVIDIA_API_KEY=… NVIDIA_MODEL=openai/gpt-oss-20b node scripts/eval-persona-voice.mjs` (2 fiches CrystalKnows réelles × 3 idées). Constats : réponses en anglais et chiffres inventés avant les nouvelles consignes ; ensuite 6/6 répliques modèle retenues, score moyen 0,94. L'ancien défaut `deepseek-ai/deepseek-v4.1-flash` expirait (> 45 s) : le défaut est désormais `openai/gpt-oss-20b` (6/6 retenues, fidélité 0,92, ≈ 11 s par réplique le 2026-10-29). `nvidia/nemotron-3.5-lightning-30b-a3b` (profil fast) ne produit que du raisonnement sans réplique (finish_reason=length) : inadapté à la voix.
+- **Gmail / Outlook** : `gmail: {access_token, query?}` et `outlook: {access_token}` dans `/personality/enrich` et `/agents/:id/enrich`. API officielles (Gmail `users.messages`, Graph `sentitems`), jeton lecture seule de la personne, utilisé pour la requête et jamais stocké ; jeton refusé → 424.
+- **Étalonnage DISC** : `calibrateDiscEstimator` + `core/fixtures/disc-calibration.json` (références CrystalKnows réelles geoffroy2104 = D et pjones = C ; I et S d'après les modèles). Accord 4/4 ; textes rédigés d'après les fiches, pas des e-mails réels. Confiance toujours ≤ 60 %.
+- **Jetons serveur** : `GET /v1/console/personality/providers` indique si `CRYSTALKNOWS_API_TOKEN`, `X_BEARER_TOKEN` et un modèle de voix sont prêts (aucune valeur exposée). Compte X seul sans jeton → 503 ; CrystalKnows API sans jeton → 503.
+- **Console** : badge de provenance et réplique de la persona dans la vue mission, repère « CrystalKnows / DISC estimé » dans la trace du collectif, état des jetons dans l'assistant.

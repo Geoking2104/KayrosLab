@@ -48,6 +48,7 @@ app.addHook('preHandler', async (req, reply) => {
 });
 
 await app.register((await import('./routes/health.mjs')).default);
+await app.register((await import('./routes/audit-evidence.mjs')).default);
 await app.register((await import('./routes/llm.mjs')).default);
 await app.register((await import('./routes/novelty.mjs')).default);
 await app.register((await import('./routes/cycle.mjs')).default);
@@ -73,6 +74,7 @@ await app.register((await import('./routes/reporting.mjs')).default);
 await app.register((await import('./routes/timer.mjs')).default);
 await app.register((await import('./routes/connectors.mjs')).default);
 await app.register((await import('./routes/console.mjs')).default);
+await app.register((await import('./routes/console-workspace.mjs')).default);
 await app.register((await import('./routes/positionning.mjs')).default);
 await app.register((await import('./routes/swarm.mjs')).default);
 await app.register((await import('./routes/sales-oracle.mjs')).default);

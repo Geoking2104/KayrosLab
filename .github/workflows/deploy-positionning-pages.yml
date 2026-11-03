@@ -14,7 +14,7 @@ on:
       - 'backend/web/views/homepage.ejs'
       - 'backend/web/views/homepage-studio.ejs'
       - 'backend/web/locales/**'
-      - 'backend/web/public/assets/**'
+      - 'assets/**'
       - 'legal/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
@@ -82,7 +82,7 @@ jobs:
             if [ ! -f "$f" ]; then echo "ERROR: required file missing: $f" >&2; exit 1; fi
             cp "$f" deploy/
           done
-          if [ -d backend/web/public/assets ]; then cp -r backend/web/public/assets/. deploy/assets/; else echo "ERROR: assets missing" >&2; exit 1; fi
+          if [ -d assets ]; then cp -r assets/. deploy/assets/; rm -rf deploy/assets/readme; else echo "ERROR: assets missing" >&2; exit 1; fi
           DEMO="kayroslab-complete-with-ai-agents.html"
           if [ ! -f "$DEMO" ]; then echo "ERROR: $DEMO missing" >&2; exit 1; fi
           SIZE=$(wc -c < "$DEMO")

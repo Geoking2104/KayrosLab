@@ -49,6 +49,9 @@ async function buildApp() {
 }
 
 test('configured Slack webhook verifies its tenant secret and opens a durable thread', async (t) => {
+  // Accès au niveau du canal pour les comptes non liés (opt-in explicite).
+  process.env.KAYROS_CHAT_UNLINKED_ROLE = 'contributeur';
+  t.after(() => { delete process.env.KAYROS_CHAT_UNLINKED_ROLE; });
   const { app, connector } = await buildApp();
   t.after(() => app.close());
   const body = { type: 'event_callback', event: { type: 'app_mention', channel: 'C-PROD', user: 'U1', text: '<@BOT> faut-il lancer ?', ts: '171.0' } };
