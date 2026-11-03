@@ -189,7 +189,8 @@ export default async function publicApiRoutes(app) {
     } catch (error) {
       // La clé d'idempotence est libérée : le client peut relancer la même requête.
       await publicMissions.remove(mission.mission_id).catch(() => {});
-      return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: error.message, code: 'mission_not_started' });
+      if (error?.code === 'RUN_IN_PROGRESS') return reply.code(409).send({ error: error.message, code: 'run_in_progress', ...(error.thread_id ? { thread_id: error.thread_id } : {}) });
+      return reply.code(400).send({ error: error.message, code: 'mission_not_started' });
     }
     const thread = await hybridGateway.getThread(mission.thread_id, { tenantId: principal.tenantId });
     return reply.code(202).send({

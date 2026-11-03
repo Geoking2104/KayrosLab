@@ -132,9 +132,12 @@ test('isolation et verrou sur un fil en cours : 404 pour autrui, 409 pour le pro
   const second = await app.inject(as('bob', { method: 'POST', url: `/v1/console/sessions/${session.session_id}/run`, payload: { question: 'Encore ?' } }));
   assert.equal(second.statusCode, 409);
   assert.match(second.json().error, /déjà en cours sur cette session/);
+  assert.equal(second.json().code, 'run_in_progress');
   assert.ok(!/salon/i.test(second.json().error));
   const rerun = await app.inject(as('bob', { method: 'POST', url: `/v1/console/threads/${threadId}/messages`, payload: { text: 'Budget validé' } }));
   assert.equal(rerun.statusCode, 409);
+  assert.equal(rerun.json().code, 'run_in_progress');
+  assert.equal(rerun.json().thread_id, threadId);
   // Le comex voit le fil mais ne peut pas arbitrer avant la fin des analyses.
   assert.equal((await getThread(app, 'boss', threadId)).statusCode, 200);
   const early = await app.inject(as('boss', { method: 'POST', url: `/v1/console/threads/${threadId}/arbitrate`, payload: { action: 'accept_consensus' } }));

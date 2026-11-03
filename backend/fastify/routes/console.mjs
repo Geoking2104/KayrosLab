@@ -1330,7 +1330,8 @@ export default async function consoleRoute(app) {
       });
     } catch (error) {
       await releaseGraphAgents(app, threadId);
-      return reply.code(error?.code === 'RUN_IN_PROGRESS' ? 409 : 400).send({ error: surface(error.message) });
+      if (error?.code === 'RUN_IN_PROGRESS') return reply.code(409).send({ error: surface(error.message), code: 'run_in_progress', ...(error.thread_id ? { thread_id: error.thread_id } : {}) });
+      return reply.code(400).send({ error: surface(error.message) });
     }
   });
 
@@ -1456,7 +1457,10 @@ export default async function consoleRoute(app) {
       // Relance asynchrone du collectif : même contrat que /run (fil `running`, polling).
       const started = await app.kayrosContext.hybridGateway.startContinueThread(req.params.threadId, options);
       return reply.code(202).send({ ...executionView(started.thread, started.run_id), thread: started.thread });
-    } catch (error) { return reply.code(/introuvable/.test(error.message) ? 404 : 409).send({ error: surface(error.message) }); }
+    } catch (error) {
+      if (/introuvable/.test(error.message)) return reply.code(404).send({ error: surface(error.message) });
+      return reply.code(409).send({ error: surface(error.message), ...(error?.code === 'RUN_IN_PROGRESS' ? { code: 'run_in_progress', thread_id: error.thread_id || req.params.threadId } : {}) });
+    }
   });
   app.post('/v1/console/threads/:threadId/arbitrate', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !await permitted(app, me, reply, 'arbitrate')) return;

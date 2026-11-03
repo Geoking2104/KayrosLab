@@ -46,9 +46,10 @@ export function readableRunError(error) {
   const message = String(error?.message || error || '').replace(/\s+/g, ' ').trim();
   return (message || 'erreur inconnue').slice(0, 500);
 }
-function runInProgressError(message) {
+function runInProgressError(message, threadId = null) {
   const error = new Error(message);
   error.code = 'RUN_IN_PROGRESS';
+  if (threadId) error.thread_id = threadId;
   return error;
 }
 function withDeadline(promise, ms, signal = null) {
@@ -349,7 +350,7 @@ export class HybridAgentGateway {
     const thread = await this.store.getThread(threadId, { tenantId: scope });
     if (!thread) throw new Error('fil introuvable');
     if (thread.status === 'resolved') throw new Error('fil déjà arbitré');
-    if (thread.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil');
+    if (thread.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil', thread.thread_id);
     const answer = required(text, 'réponse humaine');
     const roomRecord = await this.store.getRoom(thread.room_id, { tenantId: scope });
     const room = await this._hydrateRuntime(roomRecord);
@@ -776,6 +777,13 @@ export class HybridAgentGateway {
         if (!claim.claimed) return { duplicate: true, result: claim.result || null };
         claimed = true;
       }
+      // Verrou par fil : un identifiant réservé ne peut porter qu'une exécution, même en mode concurrent.
+      const reserved = String(input.thread_id || '').trim();
+      if (reserved) {
+        const existing = await this.store.getThread(reserved, { tenantId: scope });
+        if (existing?.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil', reserved);
+        if (existing) throw runInProgressError('ce fil existe déjà : utiliser la reprise du fil', reserved);
+      }
       if (input.allowConcurrent !== true && await this._runningThreadInRoom(room)) {
         throw runInProgressError('une mission est déjà en cours sur cette session');
       }
@@ -841,7 +849,7 @@ export class HybridAgentGateway {
     const runId = makeId('swarmrun');
     const { thread, history } = await this.store.withRoomLock(room.room_id, async () => {
       const current = await this.store.getThread(threadId, { tenantId: scope });
-      if (current.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil');
+      if (current.status === THREAD_RUNNING) throw runInProgressError('une mission est déjà en cours sur ce fil', current.thread_id);
       if (await this._runningThreadInRoom(room)) throw runInProgressError('une mission est déjà en cours sur cette session');
       await this._hydrateRuntime(roomRecord);
       const previous = (current.messages || []).map((message) => {
