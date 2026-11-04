@@ -9,8 +9,10 @@ test('les accueils anglais et francais orientent l\'essai vers une demande d\'ac
   // Accès console sur sélection manuelle : le CTA d'essai ouvre le formulaire de contact (intention console).
   assert.match(english, /href="#contact" data-contact-open data-contact-intent="console"[^>]*>Request console access/);
   assert.match(french, /href="#contact" data-contact-open data-contact-intent="console"[^>]*>Demander un accès à la console/);
-  assert.doesNotMatch(english, /href="[^"]*\/console/);
-  assert.doesNotMatch(french, /href="[^"]*\/console/);
+  assert.match(english, /class="signin" href="\/console\/">Console<\/a>/);
+  assert.match(french, /class="signin" href="\/console\/">Console<\/a>/);
+  assert.match(english, /href="\/console\/">Console<\/a>/);
+  assert.match(french, /href="\/console\/">Console<\/a>/);
 });
 
 test('GitHub Pages construit et publie la console sous /console/', async () => {

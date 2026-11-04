@@ -7,7 +7,7 @@ const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), 'utf
 test('integrations page presents the Salesforce connector and the integrated chats in both languages', () => {
   for (const [home, file] of [['index.html', 'integrations.html'], ['index.fr.html', 'integrations.fr.html']]) {
     const landing = read(home);
-    assert.ok(landing.includes(`href="${file}"`), `${home}: nav/footer link to ${file}`);
+    assert.ok(landing.includes(`href="/${file}"`) || landing.includes(`href="${file}"`), `${home}: nav/footer link to ${file}`);
     const html = read(file);
     assert.match(html, /<section id="integrations"/);
     assert.match(html, /<section id="chats"/);
@@ -34,7 +34,7 @@ test('every anchor of the site pages resolves (same page or sibling page)', () =
     for (const [, target] of html.matchAll(/href="#([^"]+)"/g)) {
       assert.ok(idsOf(file).has(target), `${file}: #${target} has no target`);
     }
-    for (const [, page, target] of html.matchAll(/href="([a-z.-]+\.html)(?:#([^"]+))?"/g)) {
+    for (const [, page, target] of html.matchAll(/href="\/?([a-z.-]+\.html)(?:#([^"]+))?"/g)) {
       if (!SITE.includes(page)) continue;
       if (target) assert.ok(idsOf(page).has(target), `${file}: ${page}#${target} has no target`);
     }

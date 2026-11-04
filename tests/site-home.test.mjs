@@ -16,7 +16,8 @@ test('accueil : récit en quatre temps, accès console explicite, démo en lien 
     // Tous les boutons d'action ouvrent le formulaire de contact (demande d'accès console, sélection manuelle).
     for (const [, href] of html.matchAll(/class="btn[^"]*"\s+href="([^"]+)"/g)) assert.equal(href, "#contact");
     assert.ok(html.includes(cta));
-    assert.match(html, new RegExp(`href="demo${lang === 'fr' ? '.fr' : ''}.html"`));
+    const demo = `demo${lang === 'fr' ? '.fr' : ''}.html`;
+    assert.ok(html.includes(`href="/${demo}"`) || html.includes(`href="${demo}"`));
     assert.match(html, /assets\/home\.js/);
     assert.match(html, /role="tablist"/);
     assert.match(html, /id="h-sticky"/);
@@ -67,7 +68,8 @@ test('le détail déplacé reste publié sur les pages secondaires (FR + EN), li
       const html = read(file);
       for (const n of needles) assert.ok(html.includes(n), `${file}: ${n}`);
       assert.match(html, /marketing\.css/);
-      assert.ok(read(home).includes(`href="${file}"`), `${home} → ${file}`);
+      const landing = read(home);
+      assert.ok(landing.includes(`href="/${file}"`) || landing.includes(`href="${file}"`), `${home} → ${file}`);
     }
   }
 });
