@@ -55,7 +55,8 @@ test('home.js : onglets au clavier, mouvement réduit respecté', () => {
   assert.match(js, /ArrowRight/);
   const css = read('marketing.css');
   assert.match(css, /\.h-panel\[hidden\]\{display:none\}/);
-  assert.match(css, /prefers-reduced-motion:reduce\)\{[\s\S]*\.h-track\{animation:none/);
+  // Le défilement des logos a été retiré (f861e98) ; s'il revient, il doit respecter le mouvement réduit.
+  if (/\.h-track\{[^}]*animation:h-scroll/.test(css)) assert.match(css, /prefers-reduced-motion:reduce\)\{[\s\S]*\.h-track\{animation:none/);
 });
 
 test('les pages secondaires sont assemblées pour www et GitHub Pages', () => {
