@@ -49,6 +49,7 @@ test('bilingue et mobile : langue déclarée, liens croisés et règles étroite
   assert.match(css, /@media\s*\(max-width:620px\)/);
   assert.match(css, /\.h-stage-grid,\.h-tools-in\{grid-template-columns:1fr/);
   assert.match(css, /\.h-tablist\{flex-wrap:nowrap[^}]*overflow-x:auto/);
+  assert.match(css, /@media\(max-width:340px\)[\s\S]*?\.home \.nav-right>\.btn\{display:none\}/);
   for (const html of [en, fr]) assert.equal((html.match(/class="logo-chip"/g) || []).length, 6);
 });
 

@@ -723,3 +723,8 @@ p.mock-cap.center{padding:14px 0 0}
   .home .final-cta .cta{flex-direction:column;align-items:center;gap:14px}
   .h-sticky .btn{min-height:46px}
 }
+@media(max-width:340px){
+  .home .nav-in{gap:8px}
+  .home .nav-in .brand{flex:none}
+  .home .nav-right>.btn{display:none}
+}
