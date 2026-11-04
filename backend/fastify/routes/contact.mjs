@@ -19,6 +19,7 @@ const leadSchema = z.object({
   email: z.string().trim().email().max(254),
   language: z.enum(['fr', 'en']).optional().default('fr'),
   website: z.string().max(200).optional().default(''),
+  intent: z.enum(['contact', 'console']).optional().default('contact'),
 });
 
 const noteSchema = z.object({
@@ -143,7 +144,7 @@ export default async function contactRoute(app) {
         data.message,
       ].filter(Boolean).join('\n');
     } else {
-      subject = `[KayrosLab] Demande de contact — ${data.firstName} ${data.lastName} (${data.company})`;
+      subject = `[KayrosLab] ${data.intent === 'console' ? 'Demande d\'accès à la console' : 'Demande de contact'} — ${data.firstName} ${data.lastName} (${data.company})`;
       text = [
         'Nouvelle demande de contact envoyée depuis kayroslab.com.',
         '',
@@ -153,6 +154,7 @@ export default async function contactRoute(app) {
         `Fonction : ${data.position}`,
         `E-mail : ${data.email}`,
         `Langue du formulaire : ${data.language}`,
+        `Objet : ${data.intent === 'console' ? 'Demande d\'accès à la console' : 'Contact'}`,
         '',
         'Répondre directement à cet e-mail atteint l\'expéditeur (reply-to).',
       ].join('\n');
