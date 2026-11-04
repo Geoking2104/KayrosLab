@@ -235,7 +235,7 @@ details .ans{padding:0 44px 22px 0;font-size:15.2px;color:var(--muted);line-heig
 .final .micro{font-size:13.5px;color:#7d858b;margin-top:16px;position:relative;z-index:1}
 
 footer{padding:66px 0 40px;border-top:1px solid var(--line)}
-.fgrid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:30px}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.45fr) repeat(5,minmax(0,1fr));gap:26px}
 .fbrand p{font-size:14.3px;color:var(--muted);margin-top:14px;max-width:300px}
 .fcol h5{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 14px;font-weight:700}
 .fcol a{display:block;font-size:14.3px;color:var(--body);padding:5px 0}
@@ -258,6 +258,7 @@ footer{padding:66px 0 40px;border-top:1px solid var(--line)}
   .mnav.open .lang{margin:14px 24px;display:inline-flex}
 }
 
+@media (max-width:1160px){.fgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
 @media (max-width:980px){
   .nav-links{display:none} .hamb{display:block}
   .ogrid,.verdicts,.grid3,.gov,.proof,.roles{grid-template-columns:1fr 1fr}
