@@ -596,9 +596,7 @@ p.mock-cap.center{padding:14px 0 0}
 .h-pill b{font-size:22px}
 .h-badge{margin-top:26px;color:var(--muted)}
 .h-badge a{color:var(--accent);font-weight:600}
-.h-marquee{overflow:hidden;margin:34px 0 18px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.h-track{display:flex;gap:14px;width:max-content;animation:h-scroll 28s linear infinite}
-.h-static-logos{display:none}
+.h-logo-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:34px auto 18px}
 .h-steps{list-style:none;padding:0;margin:36px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;text-align:left}
 .h-steps li{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px}
 .h-steps h3{font-size:19px;margin:12px 0 6px}
@@ -613,7 +611,6 @@ p.mock-cap.center{padding:14px 0 0}
 @keyframes h-on{to{opacity:1}}
 @keyframes h-pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 8px transparent}}
 @keyframes h-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes h-scroll{to{transform:translateX(-50%)}}
 @media (max-width:900px){
   .h-hero-grid,.h-split{grid-template-columns:1fr;gap:36px}
   .h-pills,.h-steps{grid-template-columns:1fr}
@@ -626,7 +623,6 @@ p.mock-cap.center{padding:14px 0 0}
 }
 @media (prefers-reduced-motion:reduce){
   .js .h-mock .h-av,.js .h-verdict{animation:none;opacity:1;transform:none}
-  .h-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}
   .h-panel:not([hidden]){animation:none}
   .h-type.typing::after{animation:none}
   .h-sticky{transition:none}
