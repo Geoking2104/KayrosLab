@@ -11,8 +11,8 @@ test('accueil court : 7 sections + FAQ, un seul CTA principal vers l’essai, d�
     const html = read(file);
     for (const id of ['decisions', 'debate', 'verdict', 'tools', 'start', 'example', 'try', 'faq']) assert.match(html, new RegExp(`<section[^>]*\\sid="${id}"`), `${file}: #${id}`);
     assert.ok(words(html) < 1100, `${file}: ${words(html)} mots, trop long`);
-    // Tous les boutons d'action pointent vers l'essai gratuit (console dans la langue de la page).
-    for (const [, href] of html.matchAll(/class="btn[^"]*"\s+href="([^"]+)"/g)) assert.equal(href, `/console/?lang=${lang}`);
+    // Tous les boutons d'action ouvrent le formulaire de contact (demande d'accès console, sélection manuelle).
+    for (const [, href] of html.matchAll(/class="btn[^"]*"\s+href="([^"]+)"/g)) assert.equal(href, "#contact");
     assert.ok(html.includes(cta));
     assert.match(html, new RegExp(`href="demo${lang === 'fr' ? '.fr' : ''}.html"`));
     assert.match(html, /assets\/home\.js/);
