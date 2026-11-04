@@ -61,7 +61,8 @@ test('generated static pages keep the sales narrative and leave the Sales Oracle
     assert.match(read(oracle), /id="oracle"/);      // Sales Oracle has its own page
     assert.match(read(builders), /id="builders"/);  // technical deep-dive on the developers page
     const html = read(file);
-    assert.ok(html.includes(`href="${oracle}"`) && html.includes(`href="${builders}"`), `${file}: links to secondary pages`);
+    const linksTo = (page) => html.includes(`href="/${page}"`) || html.includes(`href="${page}"`);
+    assert.ok(linksTo(oracle) && linksTo(builders), `${file}: links to secondary pages`);
     assert.match(html, /class="lang-opt"/);   // EN/FR language selector
     assert.match(html, /marketing\.css/);
     assert.doesNotMatch(html, /id="secure-workspace"/);
@@ -75,7 +76,8 @@ test('generated static pages keep the sales narrative and leave the Sales Oracle
 
 test('personas page covers personified agents; Salon is no longer embedded', () => {
   for (const [home, file] of [['index.html', 'personas.html'], ['index.fr.html', 'personas.fr.html']]) {
-    assert.ok(read(home).includes(`href="${file}"`), `${home}: link to ${file}`);
+    const landing = read(home);
+    assert.ok(landing.includes(`href="/${file}"`) || landing.includes(`href="${file}"`), `${home}: link to ${file}`);
     assert.doesNotMatch(read(home), /id="salon"|class="salon-charter"|btn-salon|href="\/salon\/|href="#salon"/);
     const html = read(file);
     assert.match(html, /id="personify"/);
