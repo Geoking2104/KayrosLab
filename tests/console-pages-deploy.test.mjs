@@ -4,14 +4,13 @@ import { readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('les accueils anglais et francais exposent la console', async () => {
+test('les accueils anglais et francais orientent l\'essai vers une demande d\'accès', async () => {
   const [english, french] = await Promise.all([read('index.html'), read('index.fr.html')]);
-  // CTA unique : l'essai gratuit ouvre la console dans la langue de la page.
-  assert.match(english, /href="\/console\/\?lang=en"[^>]*>Test it on my decision — free/);
-  assert.match(french, /href="\/console\/\?lang=fr"[^>]*>Tester sur ma décision — gratuit/);
-  // La console suit la langue de la page d'origine (?lang=), pas seulement le navigateur.
-  assert.doesNotMatch(english, /href="\/console\/"/);
-  assert.doesNotMatch(french, /href="\/console\/"/);
+  // Accès console sur sélection manuelle : le CTA d'essai ouvre le formulaire de contact (intention console).
+  assert.match(english, /href="#contact" data-contact-open data-contact-intent="console"[^>]*>Test it on my decision — free/);
+  assert.match(french, /href="#contact" data-contact-open data-contact-intent="console"[^>]*>Tester sur ma décision — gratuit/);
+  assert.doesNotMatch(english, /href="[^"]*\/console/);
+  assert.doesNotMatch(french, /href="[^"]*\/console/);
 });
 
 test('GitHub Pages construit et publie la console sous /console/', async () => {

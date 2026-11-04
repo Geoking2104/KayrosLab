@@ -110,6 +110,20 @@ describe('Contact public', () => {
     assert.match(sent[0].subject, /Anne Dupont/);
   });
 
+  it('marque une demande d’accès à la console', async () => {
+    const res = await app.inject({
+      method: 'POST',
+      url: '/v1/contact',
+      payload: {
+        lastName: 'Dupont', firstName: 'Anne', company: 'Atelier', position: 'Directrice',
+        email: 'anne@atelier.test', language: 'fr', intent: 'console',
+      },
+    });
+    assert.equal(res.statusCode, 200, res.body);
+    assert.match(sent.at(-1).subject, /accès à la console/);
+    assert.match(sent.at(-1).text, /Objet : Demande d'accès à la console/);
+  });
+
   it('signale un formulaire incomplet', async () => {
     const res = await app.inject({
       method: 'POST',
