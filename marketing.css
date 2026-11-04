@@ -628,3 +628,98 @@ p.mock-cap.center{padding:14px 0 0}
   .h-sticky{transition:none}
   .h-pill:hover{transform:none}
 }
+
+/* KayrosLab decision rehearsal homepage */
+.home{font-family:"Source Sans 3",sans-serif}
+.home h1,.home h2,.home h3,.home .h-q{font-family:"Fraunces",Georgia,serif;letter-spacing:-.025em}
+.home .h-hero{padding:74px 0 78px;background:#f3f4ee}
+.home .h-hero-grid{grid-template-columns:.92fr 1.08fr;gap:54px;max-width:1240px}
+.home .h-hero h1{max-width:12ch;margin:14px 0 0;font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.045em;color:#172b2a}
+.home .h-hero h1 em{color:#0f766e;font-style:italic;font-weight:500}
+.home .h-hero .lead{max-width:34em;color:#425653;line-height:1.55}
+.h-kicker{margin:0;letter-spacing:.08em}
+.home .micro{color:#53625d}
+.home .h-shot{min-width:0;margin:0;overflow:hidden;border:1px solid #d8ded7;border-radius:8px;background:#fff;box-shadow:0 22px 52px -32px rgba(21,43,39,.48)}
+.home .h-shot img{display:block;width:100%;height:auto;aspect-ratio:8/5;object-fit:cover;object-position:top left}
+.home .h-shot figcaption{display:flex;justify-content:space-between;gap:16px;padding:12px 15px;color:#566561;font-size:12px;line-height:1.35}
+.h-story{padding:76px 0}
+.h-step-label{display:flex;align-items:baseline;gap:13px;margin-bottom:30px;color:#5a6c66;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.h-step-label span:first-child{font:600 29px/1 "Fraunces",Georgia,serif;color:#0f766e;letter-spacing:-.04em}
+.h-stage-grid{display:grid;grid-template-columns:.88fr 1.12fr;align-items:center;gap:clamp(34px,6vw,84px)}
+.h-stage-intro h2,.h-tools h2,.h-brief h2{max-width:14ch;margin:0;font-size:clamp(31px,3.8vw,45px);line-height:1.08}
+.h-stage-intro .h-p{margin:18px 0 0;line-height:1.6}
+.h-note{max-width:38em;margin:18px 0 0;color:#697670;font-size:14px;line-height:1.5}
+.h-tabs{min-width:0;margin:0}
+.h-tablist{justify-content:flex-start;margin:0 0 15px;gap:7px}
+.h-tablist button{padding:8px 12px;font-size:13px}
+.h-panel{min-height:190px;align-content:center;padding:28px;background:#fff;border-radius:5px;box-shadow:0 12px 35px -28px rgba(15,23,42,.45)}
+.h-panel .h-q{margin:0;font-size:clamp(22px,2.5vw,29px);line-height:1.2}
+.h-panel p:not(.h-q){max-width:43em;margin:0;color:#475653;line-height:1.55}
+.h-panel .h-ex{font-style:normal;text-transform:uppercase;letter-spacing:.07em;font-size:10px}
+.h-mandates{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;border-top:1px solid #d9ded8}
+.h-mandates article{display:flex;gap:14px;align-items:flex-start;padding:19px 0;border-bottom:1px solid #d9ded8}
+.h-mandates article>span{display:grid;place-items:center;flex:none;width:36px;height:36px;border:1px solid #b7c8c1;border-radius:50%;color:#0f766e;font-size:10px;font-weight:700}
+.h-mandates h3{margin:0 0 5px;font-size:19px}
+.h-mandates p{margin:0;color:#52615c;font-size:14px;line-height:1.45}
+.h-stage-reverse .h-stage-intro{order:2}
+.h-shot-detail img{aspect-ratio:8/5}
+.h-outcomes{border-top:1px solid #d4dcd5}
+.h-outcomes>div{display:grid;grid-template-columns:minmax(145px,.7fr) 1.3fr;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid #d4dcd5}
+.h-outcomes p{margin:0;color:#43524e}
+.h-badge{margin:20px 0 0;color:#52615c;line-height:1.5}
+.h-badge a,.h-story .h-link{color:#0f766e}
+.h-tools{padding:66px 0;background:#f3f4ee;border-top:1px solid #e0e4dc;border-bottom:1px solid #e0e4dc}
+.h-tools-in{display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;gap:36px}
+.h-tools h2{margin-top:10px}
+.h-tools .h-p{margin:13px 0 16px;font-size:16px;line-height:1.5}
+.h-tools .h-logo-row{justify-content:flex-start;gap:9px}
+.h-brief{padding:76px 0;background:#173b36;color:#edf5ef}
+.h-brief .eyebrow{color:#91d7c7}
+.h-brief-in{display:grid;grid-template-columns:1fr .9fr;gap:25px 56px;align-items:center}
+.h-brief h2{color:#fff;margin-top:10px}
+.h-brief-in>div:first-child p{max-width:36em;color:#cedbd4;line-height:1.55}
+.h-brief-sample{padding:18px 22px;border:1px solid rgba(255,255,255,.23);background:rgba(255,255,255,.06)}
+.h-brief-sample p{display:flex;gap:14px;margin:0;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:14px;line-height:1.35}
+.h-brief-sample p:last-child{border:0}
+.h-brief-sample span{flex:none;width:90px;color:#91d7c7;font-size:10px;font-weight:700;letter-spacing:.08em}
+.h-brief .cta{grid-column:1/-1;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.h-brief .h-link{color:#c5eee4}
+.home .final-cta{background:#f3f4ee;color:#43524e;border-top:1px solid #dfe4dc}
+.home .final-cta h2{color:#173b36;font:600 clamp(29px,3.6vw,43px)/1.15 "Fraunces",Georgia,serif}
+.home .final-cta .eyebrow{color:#0f766e}
+.home .final-cta .h-link-light{color:#0f766e;opacity:1}
+@media(max-width:900px){
+  .home .h-hero{padding:54px 0 58px}
+  .home .h-hero-grid,.h-stage-grid,.h-tools-in{grid-template-columns:1fr;gap:30px}
+  .home .h-hero h1{max-width:15ch}
+  .h-stage-reverse .h-stage-intro{order:0}
+  .h-brief-in{grid-template-columns:1fr;gap:22px}
+  .h-brief .cta{grid-column:auto}
+}
+@media(max-width:620px){
+  .home .h-hero{padding:38px 0 44px}
+  .home .h-hero-grid{gap:27px}
+  .home .h-hero h1{font-size:clamp(39px,11vw,52px)}
+  .home .h-hero .lead{font-size:17px}
+  .home .h-shot figcaption{display:block}
+  .home .h-shot figcaption span{display:block}
+  .home .h-shot figcaption span+span{margin-top:3px}
+  .h-story{padding:54px 0}
+  .h-step-label{margin-bottom:22px;font-size:11px}
+  .h-stage-intro h2,.h-tools h2,.h-brief h2{font-size:34px}
+  .h-tablist{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding:0 0 6px;scrollbar-width:thin}
+  .h-tablist button{flex:none;white-space:nowrap}
+  .h-panel{min-height:0;padding:21px}
+  .h-mandates{grid-template-columns:1fr}
+  .h-outcomes>div{grid-template-columns:1fr;gap:9px;padding:16px 0}
+  .h-tools{padding:50px 0}
+  .h-logo-row{gap:8px}
+  .h-brief{padding:54px 0}
+  .h-brief-sample{padding:12px 15px}
+  .h-brief-sample p{align-items:flex-start}
+  .h-brief-sample span{width:84px}
+  .h-brief .cta{align-items:flex-start;flex-direction:column;gap:12px}
+  .home .final-cta{padding:58px 0 84px}
+  .home .final-cta .cta{flex-direction:column;align-items:center;gap:14px}
+  .h-sticky .btn{min-height:46px}
+}
