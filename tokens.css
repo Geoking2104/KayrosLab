@@ -1,0 +1,108 @@
+/* KayrosLab design tokens — SINGLE SOURCE OF TRUTH
+ * System: Salesforce Lightning Design System (SLDS) patterns — light foundation.
+ * Reference: https://www.lightningdesignsystem.com/2e1ef8501/p/355656-patterns
+ *   "The foundational colors are white and light grays, with dark grays and dark
+ *    blue to create contrast for text and interactive elements."
+ *
+ * Everything on the site consumes these variables; change a value here and the
+ * whole website follows. Never hard-code colors, fonts or spacing in a page.
+ */
+
+:root {
+  /* --- SLDS color foundation (light) --- */
+  --color-paper: #f3f2f2;          /* page background (SLDS gray 1) */
+  --color-surface: #ffffff;        /* cards, panels */
+  --color-surface-raised: #fafaf9; /* raised rows / subtle fills */
+  --color-rule: #c9c9c9;           /* borders (SLDS colorBorder) */
+  --color-rule-strong: #747474;    /* strong borders */
+  --color-muted: #706e6b;          /* weak text (SLDS colorTextWeak) */
+  --color-ink: #181818;            /* default text (SLDS colorTextDefault) */
+  --color-accent: #0176d3;         /* brand blue (SLDS brand) */
+  --color-accent-ink: #ffffff;     /* text on brand */
+  --color-focus: #0176d3;          /* focus ring */
+  --color-danger: #ea001e;         /* error */
+  --color-warning: #fe9339;        /* warning */
+  --color-success: #2e844a;        /* success */
+  --color-overlay: rgb(0 0 0 / 0.5);
+  --color-shadow: rgb(0 0 0 / 0.08);
+
+  /* --- Legacy aliases kept for existing pages --- */
+  --color-paper-2: var(--color-surface);
+  --color-paper-3: var(--color-surface-raised);
+  --color-ink-deep: #032d60;       /* SLDS dark blue for headings */
+  --color-ink-2: #3e3e3c;
+  --color-muted-on-dark: #ffffff;
+  --color-rule-dark: #939393;
+  --color-accent-strong: #014486;  /* brand hover/active */
+  --color-link: #0b5cab;           /* link/label text on light surfaces (AA: 6.0 on paper) */
+  --color-accent-soft: #eaf5fe;    /* brand tint (SLDS info surface) */
+  --color-positive: var(--color-success);
+  --color-positive-soft: #ebf7ee;
+  --color-violet: var(--color-accent);
+  --color-warning-soft: #fef1e9;
+  --color-danger-soft: #fdeeee;
+
+  /* --- SLDS 2 global styling hooks (aliases) --- */
+  --slds-g-color-brand-base-50: var(--color-accent);
+  --slds-g-color-neutral-base-95: var(--color-paper);
+  --slds-g-color-neutral-base-100: var(--color-surface);
+  --slds-g-color-border-base-1: var(--color-rule);
+  --slds-g-spacing-1: 0.25rem;
+  --slds-g-spacing-2: 0.5rem;
+  --slds-g-spacing-3: 0.75rem;
+  --slds-g-spacing-4: 1rem;
+  --slds-g-spacing-6: 1.5rem;
+  --slds-g-spacing-8: 2rem;
+  --slds-g-radius-border-1: 0.25rem;
+  --slds-g-radius-border-2: 0.5rem;
+
+  /* --- Typography (SLDS stack; Inter is the open substitute for Salesforce Sans) --- */
+  --font-display: "Salesforce Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: "Salesforce Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, "SFMono-Regular", monospace;
+
+  --text-xs: 0.625rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-display-s: clamp(2rem, 4vw, 3rem);
+  --text-display: clamp(1.75rem, 3.4vw, 2.75rem);
+
+  /* --- Spacing (SLDS 4px grid) --- */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+
+  /* --- Radii / rules (SLDS: 0.25rem) --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.5rem;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+  --rule-thin: 1px;
+
+  /* --- Elevation (SLDS) --- */
+  --shadow-soft: 0 2px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-card: 0 2px 2px 0 rgb(0 0 0 / 0.05);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --z-modal: 400;
+}
