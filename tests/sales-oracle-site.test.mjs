@@ -92,6 +92,17 @@ test('personas page covers personified agents; Salon is no longer embedded', () 
   assert.match(fr, /packs de r[oô]les/i);
   assert.match(en, /mise à l.épreuve|stress-test/i);
   assert.match(fr, /mise à l.épreuve/);
+  assert.match(fr, /Agents personnifiés : préparez la discussion/);
+  assert.match(fr, /Toujours une simulation/);
+  assert.match(fr, /Essayer sur ma décision/);
+  assert.equal((fr.match(/<title>([\s\S]*?)<\/title>/)||[])[1]?.trim(), 'Agents personnifiés : préparez vos échanges | KayrosLab');
+  assert.match(fr, /og:title" content="Agents personnifiés : préparez vos échanges \| KayrosLab"/);
+  assert.match(fr, /twitter:title" content="Agents personnifiés : préparez vos échanges \| KayrosLab"/);
+  const sales = read('sales-oracle.fr.html');
+  assert.match(sales, /Essayer Sales Oracle/);
+  assert.match(sales, /notes manuelles/);
+  assert.match(sales, /og:title" content="Sales Oracle : préparez vos soutenances \| KayrosLab"/);
+
   const css = read('marketing.css');
   assert.doesNotMatch(css, /\.salon-charter/);
   assert.match(css, /\.personify-grid/);

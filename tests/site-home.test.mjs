@@ -12,6 +12,8 @@ test('accueil : récit en quatre temps, accès console explicite, démo en lien 
     for (const id of ['decisions', 'debate', 'verdict', 'tools', 'start', 'example', 'try', 'faq']) assert.match(html, new RegExp(`<section[^>]*\\sid="${id}"`), `${file}: #${id}`);
     const order = ['decisions', 'debate', 'example', 'verdict', 'tools', 'start', 'try', 'faq'].map((id) => html.indexOf(`id="${id}"`));
     assert.ok(order.every((position, i) => i === 0 || position > order[i - 1]), `${file}: récit dans le bon ordre`);
+    // FR validé (double pilier + personnifié) : 1134 mots mesurés après intégration (932 avant).
+    // Plafond FR 1400 = marge pour le récit approuvé sans forcer un raccourci arbitraire ; EN reste à 1100.
     const limit = file.includes('.fr.') ? 1400 : 1100;
     assert.ok(words(html) < limit, `${file}: ${words(html)} mots, trop long (limite ${limit})`);
     // Tous les boutons d'action ouvrent le formulaire de contact (demande d'accès console, sélection manuelle).
@@ -91,5 +93,52 @@ test('les pages secondaires sont assemblées pour www et GitHub Pages', () => {
   for (const slug of PAGES) for (const f of [`${slug}.html`, `${slug}.fr.html`]) {
     assert.ok(www.includes(f), `assemble-www: ${f}`);
     assert.ok(pages.includes(f), `pages: ${f}`);
+  }
+});
+
+
+const attrContent = (html, needle) => {
+  const re = new RegExp(`${needle}" content="([^"]*)"`);
+  const m = html.match(re);
+  return m ? m[1] : null;
+};
+const pageTitle = (html) => (html.match(/<title>([\s\S]*?)<\/title>/) || [])[1]?.trim() || null;
+
+test('accueil FR : agent personnifié tôt, liens personas/oracle, consentement et non-prédiction', () => {
+  const html = read('index.fr.html');
+  const personifyBlock = html.indexOf('id="personify-home-title"');
+  const example = html.indexOf('id="example"');
+  const debate = html.indexOf('id="debate"');
+  assert.ok(personifyBlock > -1, 'bloc agent personnifié présent');
+  assert.ok(personifyBlock > debate && personifyBlock < example, 'bloc personnifié entre #debate et #example');
+  assert.match(html, /Les réactions personnifiées sont des simulations/);
+  assert.doesNotMatch(html, /réactions personnifiés[^e]/);
+  assert.match(html, /pas des propos réels ni des prédictions sur la personne/);
+  assert.match(html, /profil autorisé/);
+  assert.match(html, /consentement/);
+  assert.ok(html.includes('href="/personas.fr.html#personify"'));
+  assert.ok(html.includes('href="/sales-oracle.fr.html#oracle"'));
+  assert.match(read('personas.fr.html'), /\sid="personify"/);
+  assert.match(read('sales-oracle.fr.html'), /\sid="oracle"/);
+  assert.ok(html.includes('Demander un accès à la console'));
+  assert.ok(html.includes('Voir un exemple de dossier'));
+  assert.match(html, /href="#example"/);
+  for (const [, href] of html.matchAll(/class="btn[^"]*"\s+href="([^"]+)"/g)) assert.equal(href, '#contact');
+});
+
+test('meta FR : title, description, og et twitter alignés (accueil, personas, sales-oracle)', () => {
+  const pages = [
+    ['index.fr.html', 'KayrosLab — Éprouvez la décision. Répétez sa défense.', 'Confrontez votre décision aux objections métier et préparez sa défense avec des agents personnifiés. Dossier consultatif, simulations explicites, arbitrage humain.'],
+    ['personas.fr.html', 'Agents personnifiés : préparez vos échanges | KayrosLab', 'Associez un rôle métier à un profil autorisé pour répéter une discussion. Explorez les objections possibles, sans prédire la pensée ni la décision d’une personne.'],
+    ['sales-oracle.fr.html', 'Sales Oracle : préparez vos soutenances | KayrosLab', 'Éprouvez votre proposition commerciale et répétez la soutenance avec des mandats métier et des parties prenantes simulées à partir de profils autorisés.'],
+  ];
+  for (const [file, title, description] of pages) {
+    const html = read(file);
+    assert.equal(pageTitle(html), title, `${file}: <title>`);
+    assert.equal(attrContent(html, 'og:title'), title, `${file}: og:title`);
+    assert.equal(attrContent(html, 'twitter:title'), title, `${file}: twitter:title`);
+    assert.equal(attrContent(html, 'name="description'), description, `${file}: description`);
+    assert.equal(attrContent(html, 'og:description'), description, `${file}: og:description`);
+    assert.equal(attrContent(html, 'twitter:description'), description, `${file}: twitter:description`);
   }
 });
