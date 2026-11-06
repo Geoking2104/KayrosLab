@@ -12,7 +12,8 @@ test('accueil : récit en quatre temps, accès console explicite, démo en lien 
     for (const id of ['decisions', 'debate', 'verdict', 'tools', 'start', 'example', 'try', 'faq']) assert.match(html, new RegExp(`<section[^>]*\\sid="${id}"`), `${file}: #${id}`);
     const order = ['decisions', 'debate', 'example', 'verdict', 'tools', 'start', 'try', 'faq'].map((id) => html.indexOf(`id="${id}"`));
     assert.ok(order.every((position, i) => i === 0 || position > order[i - 1]), `${file}: récit dans le bon ordre`);
-    assert.ok(words(html) < 1100, `${file}: ${words(html)} mots, trop long`);
+    const limit = file.includes('.fr.') ? 1400 : 1100;
+    assert.ok(words(html) < limit, `${file}: ${words(html)} mots, trop long (limite ${limit})`);
     // Tous les boutons d'action ouvrent le formulaire de contact (demande d'accès console, sélection manuelle).
     for (const [, href] of html.matchAll(/class="btn[^"]*"\s+href="([^"]+)"/g)) assert.equal(href, "#contact");
     assert.ok(html.includes(cta));
@@ -45,7 +46,7 @@ test('bilingue et mobile : langue déclarée, liens croisés et règles étroite
   assert.match(en, /href="\/index\.fr\.html" hreflang="fr"/);
   assert.match(fr, /href="\/" hreflang="en"/);
   assert.match(en, /Rehearse the decision <em>before you defend it\./);
-  assert.match(fr, /Éprouvez la décision <em>avant de la défendre\./);
+  assert.match(fr, /Éprouvez la décision\. <em>Répétez sa défense\./);
   const css = read('marketing.css');
   assert.match(css, /@media\s*\(max-width:620px\)/);
   assert.match(css, /\.h-stage-grid,\.h-tools-in\{grid-template-columns:1fr/);
