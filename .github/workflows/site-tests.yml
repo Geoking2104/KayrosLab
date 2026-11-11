@@ -2,10 +2,10 @@ name: Site tests
 
 on:
   pull_request:
-    paths: ['index.html', 'index.fr.html', '*.html', 'marketing.css', 'assets/**', 'tests/**', 'deploy/ovh-vps/assemble-www.sh', '.github/workflows/site-tests.yml', '.github/workflows/deploy-positionning-pages.yml']
+    paths: ['index.html', 'index.fr.html', '*.html', 'marketing.css', 'assets/**', 'robots.txt', 'sitemap.xml', 'tests/**', 'deploy/ovh-vps/assemble-www.sh', '.github/workflows/site-tests.yml', '.github/workflows/deploy-positionning-pages.yml']
   push:
     branches: [main]
-    paths: ['index.html', 'index.fr.html', '*.html', 'marketing.css', 'assets/**', 'tests/**', 'deploy/ovh-vps/assemble-www.sh', '.github/workflows/site-tests.yml']
+    paths: ['index.html', 'index.fr.html', '*.html', 'marketing.css', 'assets/**', 'robots.txt', 'sitemap.xml', 'tests/**', 'deploy/ovh-vps/assemble-www.sh', '.github/workflows/site-tests.yml']
 
 jobs:
   site:
@@ -16,4 +16,4 @@ jobs:
         with:
           node-version: 22
       - name: Landing, pages secondaires et assemblage
-        run: node --test tests/site-home.test.mjs tests/integrations-site.test.mjs tests/sales-oracle-site.test.mjs tests/console-pages-deploy.test.mjs tests/legal-site.test.mjs
+        run: node --test tests/site-home.test.mjs tests/integrations-site.test.mjs tests/sales-oracle-site.test.mjs tests/console-pages-deploy.test.mjs tests/legal-site.test.mjs tests/site-seo.test.mjs tests/www-nginx-deploy.test.mjs

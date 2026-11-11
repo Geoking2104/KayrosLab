@@ -11,10 +11,11 @@ import { parse as parseYaml } from 'yaml';
 import { synchronizePersonaPackage } from '../../core/persona-package.mjs';
 import { visitPublicSources } from '../../core/public-sources.mjs';
 import { isSignedChatWebhook, registerBodyParsers } from './lib/body-parsers.mjs';
+import { serverOptions, rateLimitOptions } from './lib/http-hardening.mjs';
 
 applyEnvFileDefaults();
 
-const app = Fastify({ logger: true, bodyLimit: 5 * 1024 * 1024 });
+const app = Fastify(serverOptions());
 
 registerBodyParsers(app);
 
@@ -46,12 +47,7 @@ await app.register(cors, { origin: [ctx.ALLOWED_ORIGIN, 'null'] });
 // /metrics : Bearer METRICS_TOKEN si défini, sinon loopback direct uniquement
 // (Prometheus local). Toute requête relayée par nginx est refusée.
 await app.register(metricsPlugin, { endpoint: metricsEndpoint(process.env) });
-await app.register(rateLimit, {
-  global: true, max: 100, timeWindow: '1 minute',
-  errorResponseBuilder: (req, ctx) => ({
-    statusCode: 429, error: 'Too Many Requests', message: `Rate limit depasse. Reessayez dans ${Math.ceil((ctx.ttl || 60000) / 1000)}s.`,
-  }),
-});
+await app.register(rateLimit, rateLimitOptions);
 await app.register(authPlugin);
 
 app.addHook('preHandler', async (req, reply) => {

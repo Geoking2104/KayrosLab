@@ -86,9 +86,8 @@ export default async function llmRoute(app) {
   });
 
   app.post('/v1/demo/chat', async (req, reply) => {
-    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
-      || req.ip
-      || 'unknown';
+    // IP réelle résolue par trustProxy (nginx local) ; X-Forwarded-For brut est falsifiable.
+    const ip = req.ip || 'unknown';
     if (!checkDemoRate(ip)) {
       return reply.code(429).send({ error: `Quota démo dépassé (${DEMO_MAX_PER_HOUR}/h). Réessayez plus tard.` });
     }
