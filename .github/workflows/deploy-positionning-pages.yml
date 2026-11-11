@@ -22,6 +22,8 @@ on:
       - 'demo.html'
       - 'demo.fr.html'
       - 'validation-proposition.html'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'backend/web/views/index.ejs'
       - 'backend/web/views/homepage.ejs'
       - 'backend/web/views/homepage-studio.ejs'
@@ -90,7 +92,7 @@ jobs:
         run: |
           set -e
           mkdir -p deploy/positionner-app deploy/console deploy/assets
-          for f in index.html index.fr.html integrations.html integrations.fr.html sales-oracle.html sales-oracle.fr.html personas.html personas.fr.html security-governance.html security-governance.fr.html developers.html developers.fr.html demo.html demo.fr.html marketing.css tokens.css site.css studio.css CNAME 404.html; do
+          for f in index.html index.fr.html integrations.html integrations.fr.html sales-oracle.html sales-oracle.fr.html personas.html personas.fr.html security-governance.html security-governance.fr.html developers.html developers.fr.html demo.html demo.fr.html marketing.css tokens.css site.css studio.css CNAME 404.html robots.txt sitemap.xml; do
             if [ ! -f "$f" ]; then echo "ERROR: required file missing: $f" >&2; exit 1; fi
             cp "$f" deploy/
           done

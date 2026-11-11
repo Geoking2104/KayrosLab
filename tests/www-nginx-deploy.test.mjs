@@ -81,7 +81,9 @@ test('assemble-www copie accueil, console et légal (sans Salon)', async () => {
 test('le workflow SSL www demande le certificat puis reapplique le vhost', async () => {
   const ssl = await read('.github/workflows/setup-ssl-www.yml');
   assert.match(ssl, /www\.kayroslab\.com/);
-  assert.match(ssl, /-d kayroslab\.com/);
+  // L'apex kayroslab.com reste servi par GitHub Pages (DNS 185.199.108-111.153) :
+  // certbot ne doit pas demander de certificat pour lui sur le VPS.
+  assert.doesNotMatch(ssl, /-d kayroslab\.com/);
   assert.match(ssl, /certbot --nginx/);
   assert.match(ssl, /deploy-www\.sh/);
 });
