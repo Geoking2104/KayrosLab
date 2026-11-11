@@ -114,9 +114,8 @@ export default async function positionningRoute(app) {
   });
 
   app.post('/v1/demo/positionning/analyze', async (req, reply) => {
-    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
-      || req.ip
-      || 'unknown';
+    // IP réelle résolue par trustProxy (nginx local) ; X-Forwarded-For brut est falsifiable.
+    const ip = req.ip || 'unknown';
     if (!checkPublicAnalyzeRate(ip)) {
       return reply.code(429).send({ error: `Positioner quota exceeded (${PUBLIC_ANALYZE_MAX_PER_HOUR}/h). Try later.` });
     }

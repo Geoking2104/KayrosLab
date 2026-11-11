@@ -90,9 +90,8 @@ function decodeAttachment(file) {
 
 export default async function contactRoute(app) {
   app.post('/v1/contact', { bodyLimit: 5 * 1024 * 1024 }, async (req, reply) => {
-    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
-      || req.ip
-      || 'unknown';
+    // IP réelle résolue par trustProxy (nginx local) ; X-Forwarded-For brut est falsifiable.
+    const ip = req.ip || 'unknown';
 
     const isNote = req.body && (req.body.kind === 'message' || req.body.kind === 'bug');
     const parsed = isNote ? noteSchema.safeParse(req.body) : leadSchema.safeParse(req.body);

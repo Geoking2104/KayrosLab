@@ -129,9 +129,8 @@ function attachmentFromDocument(document, requestedFormat) {
 
 export default async function demoReportLeadsRoute(app) {
   app.post('/v1/demo/report-leads', { bodyLimit: 12 * 1024 * 1024 }, async (req, reply) => {
-    const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim()
-      || req.ip
-      || 'unknown';
+    // IP réelle résolue par trustProxy (nginx local) ; X-Forwarded-For brut est falsifiable.
+    const ip = req.ip || 'unknown';
     if (!checkReportRate(ip)) {
       return reply.code(429).send({ error: `Quota d'envoi dépassé (${REPORT_MAX_PER_HOUR}/h). Réessayez plus tard.` });
     }
