@@ -120,6 +120,28 @@ export const GUARDRAILS = [
   tk("Aucune décision matérielle (embauche, crédit, logement, assurance)."),
 ];
 
+/** Source de modélisation tracée (cahier des charges v4) : provenance seulement, jamais de contenu. */
+export interface PersonaComplianceSource {
+  type: string;
+  label: string;
+  url: string | null;
+  mode: string | null;
+  imported_at: string | null;
+  verified: boolean;
+  visited?: boolean;
+}
+
+/** Vue de conformité renvoyée par l'API quand KAYROS_PERSONA_PUBLIC_MODEL est activé. */
+export interface PersonaCompliance {
+  rules_version: string;
+  legal_basis: "legitimate_interest";
+  controller: "tenant";
+  verification_status: "estimated" | "verified";
+  label: string;
+  portrait_url: string | null;
+  profile_sources: PersonaComplianceSource[];
+}
+
 export interface Agent {
   id: string;
   name: string;
@@ -149,6 +171,8 @@ export interface Agent {
   personaTools?: string[];
   /** Usage déclaré de la persona (défaut idea_test). */
   purpose?: "idea_test" | "objection_rehearsal" | "pitch_review";
+  /** Conformité persona (serveur, drapeau KAYROS_PERSONA_PUBLIC_MODEL) : absente tant que le drapeau est désactivé. */
+  compliance?: PersonaCompliance;
 }
 
 /** URLs http(s) valides d’une saisie libre (une par ligne ou séparées par des espaces). */

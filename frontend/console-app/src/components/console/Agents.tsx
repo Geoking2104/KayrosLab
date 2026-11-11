@@ -13,6 +13,7 @@ import { cn } from "@/lib/cn";
 import { Button, Field, Panel, TextArea, VerdictPill, controlClass } from "./ui";
 import { go } from "./Shell";
 import { AgentMark } from "./agent-mark";
+import { PersonaComplianceLabel, PersonaContextPanel } from "./persona-avatar";
 import { LinkedMark, ProfileLink, profileClue, type ProfileSource } from "./profile-link";
 import { ConfidenceBadge, ProfileEnrich, SpeakPreview, enrichedClue } from "./profile-enrich";
 import type { EnrichResult, PersonaConfidence } from "@/lib/console/api";
@@ -48,8 +49,10 @@ function AgentFocus({ agent, dossierId }: { agent: Agent; dossierId: string }) {
             <p className="text-xs text-muted">{tc(agent.department)} · {kindLabel(agent.kind)} · {agent.provider}</p>
             <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{tc(agent.name)}</h1>
             <p className="text-sm text-ink-soft">{tc(agent.role)}{agent.veto ? t(" · droit de veto") : ""}{agent.enabled ? "" : t(" · inactif")}</p>
+            {agent.compliance ? <div className="mt-2"><PersonaComplianceLabel compliance={agent.compliance} /></div> : null}
           </div>
         </div>
+        {agent.compliance ? <PersonaContextPanel compliance={agent.compliance} /> : null}
         <p className="mt-4 text-sm">{tc(agent.mission)}</p>
         {agent.brief ? <p className="mt-3 text-sm text-ink-soft">{tc(agent.brief)}</p> : null}
         <p className="mt-3 text-xs text-muted">{t("Modèle {{model}}.", { model: agent.model })} {agent.simulation ? t("Fiche de simulation.") : t("Agent de registre.")}</p>
@@ -267,6 +270,7 @@ export function Agents({ agentId = "", dossierId = "" }: { agentId?: string; dos
                   <p className="text-xs text-muted">{tc(agent.department)} · {kindLabel(agent.kind)} · {agent.provider}</p>
                   <h2 className="text-lg font-medium">{tc(agent.name)}</h2>
                   <p className="text-sm text-ink-soft">{tc(agent.role)}{agent.veto ? t(" · droit de veto") : ""}</p>
+                  {agent.compliance ? <div className="mt-1"><PersonaComplianceLabel compliance={agent.compliance} /></div> : null}
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">

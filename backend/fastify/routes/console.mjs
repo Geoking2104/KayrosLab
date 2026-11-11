@@ -17,6 +17,10 @@ import { EXECUTION_PROFILES, DEFAULT_PROFILE, profileRunOptions } from '../../..
 import { collectiveAttachmentsContext } from './console-workspace.mjs';
 import { profileConfidence, speakAs, speakWithModel } from '../../../core/impersonator-voice.mjs';
 import { fetchGmailMessages, fetchOutlookMessages, GMAIL_SCOPE, OUTLOOK_SCOPE } from '../../../core/email-connectors.mjs';
+import {
+  MAILBOX_ENRICH_DISABLED, excludeSpecialCategoryItems, mailboxEnrichEnabled, personaComplianceView, personaPublicModelEnabled,
+  scanTextInputs, specialCategoryError,
+} from '../../../core/persona-compliance.mjs';
 import { agentAttributesFromProfile, mergeHumanProfiles, profileFromCrystalData, normalizeDiscType, profileFromDiscType } from '../../../core/personality.mjs';
 import {
   CrystalPublicProfileFetcher, ENRICHMENT_LIMITS, XProfileAdapter, buildEnrichedProfile, postsFromXArchive,
@@ -217,7 +221,15 @@ const impersonatorTeamSchema = z.object({
 const MAX_SESSIONS_PER_USER = Number(process.env.KAYROS_MAX_SESSIONS_PER_USER || process.env.KAYROS_MAX_ROOMS_PER_USER || 3);
 const MAX_BUILT_AGENTS_PER_SESSION = Number(process.env.KAYROS_MAX_BUILT_AGENTS_PER_SESSION || process.env.KAYROS_MAX_BUILT_AGENTS_PER_ROOM || 3);
 
-function agentView(agent) { return { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) }; }
+function agentView(agent) {
+  const view = { ...agent, effective_rules: resolveEffectiveRules(agent), effective_context: compileEffectiveAgentContext(agent) };
+  // Cahier des charges v4, phase 1 : base légale, statut Estimé / Vérifié et sources (drapeau KAYROS_PERSONA_PUBLIC_MODEL).
+  if (personaPublicModelEnabled()) {
+    const compliance = personaComplianceView(agent);
+    if (compliance) view.persona_compliance = compliance;
+  }
+  return view;
+}
 // Le rôle effectif tient compte de la fiche membre de l'espace (Réglages → Membres).
 async function permitted(app, me, reply, permission) {
   try {
@@ -349,6 +361,14 @@ async function scopedActivity(app, me, { roomId = null, after = 0, limit = 100 }
 /** Calcule un profil enrichi depuis la requête ; renvoie null si la réponse d'erreur est déjà envoyée. */
 async function enrichFromRequest(app, me, reply, d) {
   const warnings = [];
+  // v4 : plus aucune lecture de boîte mail quand KAYROS_MAILBOX_ENRICH=off (modèle Crystal : aucun accès au contenu des e-mails).
+  if ((d.gmail || d.outlook) && !mailboxEnrichEnabled()) { reply.code(410).send(MAILBOX_ENRICH_DISABLED); return null; }
+  const complianceOn = personaPublicModelEnabled();
+  if (complianceOn) {
+    // Filtre art. 9 bloquant sur les textes fournis (aucun extrait renvoyé, seulement champ, index, catégories).
+    const scan = scanTextInputs({ emails: d.emails, x_posts: d.x_posts, x_archive: d.x_archive, linkedin_export: d.linkedin_export });
+    if (scan.blocked) { reply.code(422).send(specialCategoryError(scan.findings)); return null; }
+  }
   try {
     let crystal = null;
     if (d.crystal_public_html) crystal = profileFromCrystalPublic(d.crystal_public_html, { imported_by: me.email });
@@ -393,6 +413,12 @@ async function enrichFromRequest(app, me, reply, d) {
       else {
         if (!await manager(app, me, reply)) return null;
         const fetched = await api.fetchProfile(d.x_username);
+        if (complianceOn) {
+          // Posts lus par API : ceux qui touchent une catégorie art. 9 sont écartés (comptés, jamais cités).
+          const { kept, excluded } = excludeSpecialCategoryItems(fetched.posts || []);
+          if (excluded) warnings.push(`X : ${excluded} post(s) écarté(s) (données sensibles, RGPD art. 9).`);
+          fetched.posts = kept;
+        }
         x = profileFromXPosts(fetched.posts, { username: fetched.username, bio: fetched.bio, name: fetched.name, imported_by: me.email });
       }
     }
@@ -938,8 +964,9 @@ export default async function consoleRoute(app) {
       crystalknows_public: { ready: true },
       crystalknows_api: { ready: !!ctx.crystalKnowsConfigured, env: 'CRYSTALKNOWS_API_TOKEN' },
       x_api: { ready: Boolean((ctx.xBearerToken ?? process.env.X_BEARER_TOKEN) || ''), env: 'X_BEARER_TOKEN' },
-      gmail: { ready: true, mode: 'oauth_token_per_request', scope: GMAIL_SCOPE },
-      outlook: { ready: true, mode: 'oauth_token_per_request', scope: OUTLOOK_SCOPE },
+      gmail: mailboxEnrichEnabled() ? { ready: true, mode: 'oauth_token_per_request', scope: GMAIL_SCOPE } : { ready: false, disabled: true, env: 'KAYROS_MAILBOX_ENRICH' },
+      outlook: mailboxEnrichEnabled() ? { ready: true, mode: 'oauth_token_per_request', scope: OUTLOOK_SCOPE } : { ready: false, disabled: true, env: 'KAYROS_MAILBOX_ENRICH' },
+      persona_public_model: { enabled: personaPublicModelEnabled(), env: 'KAYROS_PERSONA_PUBLIC_MODEL' },
       voice_model: { ready: Boolean(ctx.engine.swarm?.llm && ctx.engine.swarm.llm.id !== 'mock') },
     };
   });
@@ -967,6 +994,10 @@ export default async function consoleRoute(app) {
     const parsed = impersonatorSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'agent impersonateur invalide', issues: parsed.error.issues });
     const d = parsed.data;
+    if (personaPublicModelEnabled()) {
+      const scan = scanTextInputs({ clues: d.clues });
+      if (scan.blocked) return reply.code(422).send(specialCategoryError(scan.findings));
+    }
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
       const { agent, impersonator, enrichment_error } = await buildImpersonatorAgent(app, me, d);
