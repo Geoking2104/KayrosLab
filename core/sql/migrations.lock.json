@@ -2,6 +2,7 @@
   "_comment": "Migrations livrées : immuables. Ajouter une nouvelle migration = ajouter sa ligne ici ; ne jamais modifier ni supprimer une entrée.",
   "migrations": {
     "20260828_console_v2.sql": "4a39c2e50683ba0e0a0e928da150b2b7381a966cc8f3a7964176903ce4490845",
-    "20261009_public_api_integrations.sql": "c5110f5169ac4bec71e804f85539ae2bcf4eb40c33e840583a6d1371a696a847"
+    "20261009_public_api_integrations.sql": "c5110f5169ac4bec71e804f85539ae2bcf4eb40c33e840583a6d1371a696a847",
+    "20261111_persona_compliance.sql": "cb2c9033e46167f734f655f3141186c1f8b1633eb93045cbfd6483681beef588"
   }
 }
