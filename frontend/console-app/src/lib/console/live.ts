@@ -89,6 +89,7 @@ export function fromApiAgent(a: any): Agent {
     skillIds: (a.metadata?.skills || []).map((s: any) => s.skill_id),
     contextIds: (a.metadata?.context_sources || []).map((s: any) => s.context_id),
     humanProfile: a.human_profile || undefined,
+    compliance: a.persona_compliance || undefined,
   };
 }
 
