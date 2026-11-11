@@ -27,6 +27,8 @@ export * from './capitalisation.mjs';
 export * from './gates-futurs.mjs';
 export * from './arbitrage.mjs';
 export * from './ecouter.mjs';
+export * from './source-policy.mjs';
+export * from './github-signals.mjs';
 export * from './cartographier.mjs';
 export * from './construire.mjs';
 export * from './collision.mjs';

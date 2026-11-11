@@ -169,6 +169,23 @@ export function buildSearchToolDefs(cfg = {}) {
       },
     },
     {
+      name: 'collect_github_signals',
+      description: 'Signaux de sujet GitHub (dépôts, issues) pour l’étape Écouter : API officielle, politique de collecte, provenance par signal',
+      inputKeys: ['q'],
+      sideEffect: 'read',
+      gate: false,
+      source: 'search-tools',
+      handler: async ({ q, limit, kinds, decisionId }) => {
+        const { createGitHubSignalCollector } = await import('../github-signals.mjs');
+        const collector = createGitHubSignalCollector({
+          token: config.githubToken,
+          fetchImpl: config.fetchImpl ?? globalThis.fetch,
+          env: config.env ?? process.env,
+        });
+        return collector.collect({ query: q, kinds: kinds ?? ['repositories', 'issues'], perPage: limit ?? limit0, decisionId: decisionId ?? null });
+      },
+    },
+    {
       name: 'search_arxiv',
       description: 'Recherche d’articles académiques sur ArXiv',
       inputKeys: ['q'],
