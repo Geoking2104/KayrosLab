@@ -1,0 +1,243 @@
+// KayrosLab — politique de collecte par source (refus par défaut).
+//
+// Chaque source de signaux déclare ici, une fois pour toutes :
+//   - les modes de collecte autorisés : 'api' | 'scrape' | 'import' | 'none' ;
+//   - ses limites de débit et le plafond de requêtes par décision ;
+//   - l'URL de ses conditions d'utilisation et la date à laquelle on les a lues ;
+//   - si elle peut servir au profilage d'une personne ou seulement à des
+//     signaux de sujet (topic-level).
+//
+// Tout ce qui n'est pas déclaré est refusé : source inconnue, mode non listé,
+// source désactivée (clé API absente, accord commercial non signé), finalité
+// ou périmètre non autorisés. Un connecteur DOIT appeler `assertCollectionAllowed`
+// avant toute requête réseau et recopier `termsVersion` dans la provenance du
+// signal.
+//
+// Per-source collection policy (default deny). Every signal source declares
+// its allowed collection modes, rate limits, terms URL, terms verification date
+// and whether it may be used for person profiling or topic-level signals only.
+
+export const SOURCE_POLICY_VERSION = '2026-11-12';
+export const COLLECTION_MODES = Object.freeze(['api', 'scrape', 'import', 'none']);
+export const COLLECTION_PURPOSES = Object.freeze(['topic_signal', 'person_profiling']);
+
+const TRUTHY = new Set(['1', 'true', 'on', 'yes', 'signed']);
+const isOn = (value) => TRUTHY.has(String(value ?? '').trim().toLowerCase());
+const hasValue = (value) => String(value ?? '').trim().length > 0;
+
+function deepFreeze(value) {
+  if (value && typeof value === 'object' && !Object.isFrozen(value)) {
+    Object.freeze(value);
+    for (const key of Object.keys(value)) deepFreeze(value[key]);
+  }
+  return value;
+}
+
+/**
+ * Registre figé. `enabledWhen(env)` décide si la source est utilisable dans
+ * l'environnement courant ; `disabledReason` explique pourquoi elle ne l'est pas.
+ */
+export const SOURCE_POLICIES = deepFreeze({
+  github: {
+    id: 'github',
+    label: 'GitHub',
+    termsUrl: 'https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies',
+    termsVerifiedAt: '2026-11-12',
+    personProfiling: false,
+    topicSignals: true,
+    preferredMode: 'api',
+    modes: {
+      api: {
+        allowed: true,
+        scopes: ['repositories', 'issues', 'topics'],
+        purposes: ['topic_signal'],
+        rateLimit: {
+          // REST search API : 10 req/min sans jeton, 30 req/min avec jeton.
+          searchRequestsPerMinute: { unauthenticated: 10, authenticated: 30 },
+          maxRequestsPerDecision: 10,
+          honorHeaders: ['x-ratelimit-remaining', 'x-ratelimit-reset', 'retry-after'],
+        },
+        tokenEnv: 'GITHUB_TOKEN',
+      },
+      scrape: {
+        // Toléré uniquement pour des signaux publics, agrégés, au niveau du
+        // sujet (dépôts, issues, topics), en respectant robots.txt et un
+        // rythme lent. Jamais pour profiler une personne ni revendre des
+        // données personnelles. Aucun scraper n'est implémenté à ce jour.
+        allowed: true,
+        scopes: ['repositories', 'issues', 'topics'],
+        purposes: ['topic_signal'],
+        conditions: {
+          publicOnly: true,
+          aggregatedOnly: true,
+          respectRobotsTxt: true,
+          noPersonalDataResale: true,
+          minDelayMs: 10_000,
+        },
+        rateLimit: { maxRequestsPerDecision: 5, minDelayMs: 10_000 },
+      },
+      import: { allowed: false },
+      none: { allowed: true },
+    },
+    disabledReason: null,
+  },
+  x: {
+    id: 'x',
+    label: 'X (Twitter)',
+    termsUrl: 'https://x.com/en/tos',
+    termsVerifiedAt: '2026-11-12',
+    personProfiling: false,
+    topicSignals: true,
+    preferredMode: 'api',
+    modes: {
+      api: {
+        allowed: true,
+        scopes: ['posts', 'topics'],
+        purposes: ['topic_signal'],
+        rateLimit: { perPlan: true, maxRequestsPerDecision: 10, honorHeaders: ['x-rate-limit-remaining', 'x-rate-limit-reset'] },
+        tokenEnv: 'X_API_BEARER_TOKEN',
+      },
+      scrape: { allowed: false },
+      import: { allowed: false },
+      none: { allowed: true },
+    },
+    envKeys: ['X_API_BEARER_TOKEN'],
+    disabledReason: 'X : API officielle uniquement, désactivée tant que X_API_BEARER_TOKEN n\'est pas défini',
+  },
+  reddit: {
+    id: 'reddit',
+    label: 'Reddit',
+    termsUrl: 'https://redditinc.com/policies/user-agreement',
+    termsVerifiedAt: '2026-11-12',
+    personProfiling: false,
+    topicSignals: true,
+    preferredMode: 'api',
+    modes: {
+      api: {
+        allowed: true,
+        scopes: ['posts', 'subreddits', 'topics'],
+        purposes: ['topic_signal'],
+        rateLimit: { requestsPerMinute: 100, maxRequestsPerDecision: 10, note: 'à confirmer dans l\'accord commercial' },
+      },
+      scrape: { allowed: false },
+      import: { allowed: false },
+      none: { allowed: true },
+    },
+    envKeys: ['KAYROS_REDDIT_COMMERCIAL_AGREEMENT'],
+    disabledReason: 'Reddit : API uniquement, désactivée tant que KAYROS_REDDIT_COMMERCIAL_AGREEMENT n\'atteste pas un accord commercial signé',
+  },
+  import: {
+    id: 'import',
+    label: 'Import JSON/CSV fourni par le client',
+    termsUrl: null,
+    termsVerifiedAt: '2026-11-12',
+    personProfiling: false,
+    topicSignals: true,
+    preferredMode: 'import',
+    modes: {
+      api: { allowed: false },
+      scrape: { allowed: false },
+      import: { allowed: true, formats: ['json', 'csv'], scopes: ['signals'], purposes: ['topic_signal'], rateLimit: { maxRequestsPerDecision: null } },
+      none: { allowed: true },
+    },
+    disabledReason: null,
+  },
+});
+
+const ENABLED = Object.freeze({
+  github: () => true,
+  x: (env) => hasValue(env.X_API_BEARER_TOKEN),
+  reddit: (env) => isOn(env.KAYROS_REDDIT_COMMERCIAL_AGREEMENT),
+  import: () => true,
+});
+
+export class SourcePolicyError extends Error {
+  constructor(code, message, details = {}) {
+    super(message);
+    this.name = 'SourcePolicyError';
+    this.code = code;
+    this.details = details;
+  }
+}
+
+/** Liste des sources déclarées. */
+export function listSources() {
+  return Object.keys(SOURCE_POLICIES);
+}
+
+/** Politique d'une source ; refuse une source inconnue. */
+export function getSourcePolicy(source) {
+  const id = String(source ?? '').trim().toLowerCase();
+  if (!Object.prototype.hasOwnProperty.call(SOURCE_POLICIES, id)) {
+    throw new SourcePolicyError('unknown_source', `Source « ${source} » non déclarée dans la politique de collecte : refusée par défaut.`, { source });
+  }
+  return SOURCE_POLICIES[id];
+}
+
+/** Version des conditions appliquées, à recopier dans la provenance. */
+export function termsVersionOf(policy) {
+  return `${policy.id}@${policy.termsVerifiedAt}`;
+}
+
+/** Source utilisable dans cet environnement ? */
+export function isSourceEnabled(source, env = process.env) {
+  const policy = getSourcePolicy(source);
+  return Boolean(ENABLED[policy.id]?.(env || {}));
+}
+
+/**
+ * Vérifie une collecte sans lever d'exception.
+ * @returns {{ allowed: true, source, mode, purpose, scope, termsUrl, termsVersion, rateLimit, conditions }
+ *          | { allowed: false, code, error, details }}
+ */
+export function evaluateCollection({ source, mode, purpose = 'topic_signal', scope = null, env = process.env } = {}) {
+  try {
+    return assertCollectionAllowed({ source, mode, purpose, scope, env });
+  } catch (error) {
+    if (error instanceof SourcePolicyError) return { allowed: false, code: error.code, error: error.message, details: error.details };
+    throw error;
+  }
+}
+
+/** Vérifie une collecte ; lève une SourcePolicyError explicite en cas de refus. */
+export function assertCollectionAllowed({ source, mode, purpose = 'topic_signal', scope = null, env = process.env } = {}) {
+  const policy = getSourcePolicy(source);
+  if (!COLLECTION_MODES.includes(mode)) {
+    throw new SourcePolicyError('unknown_mode', `Mode de collecte « ${mode} » inconnu (attendus : ${COLLECTION_MODES.join(', ')}).`, { source: policy.id, mode });
+  }
+  if (mode === 'none') {
+    throw new SourcePolicyError('mode_not_allowed', `Mode « none » : aucune collecte n'est effectuée pour ${policy.label}.`, { source: policy.id, mode });
+  }
+  const rule = policy.modes[mode];
+  if (!rule?.allowed) {
+    throw new SourcePolicyError('mode_not_allowed', `${policy.label} : mode « ${mode} » non autorisé par la politique de collecte.`, { source: policy.id, mode });
+  }
+  if (!isSourceEnabled(policy.id, env)) {
+    throw new SourcePolicyError('source_disabled', policy.disabledReason || `${policy.label} : source désactivée.`, { source: policy.id, mode });
+  }
+  if (!COLLECTION_PURPOSES.includes(purpose)) {
+    throw new SourcePolicyError('unknown_purpose', `Finalité « ${purpose} » inconnue.`, { source: policy.id, purpose });
+  }
+  if (purpose === 'person_profiling' && !policy.personProfiling) {
+    throw new SourcePolicyError('purpose_not_allowed', `${policy.label} : le profilage de personnes est interdit pour cette source ; seuls des signaux de sujet sont autorisés.`, { source: policy.id, mode, purpose });
+  }
+  if (Array.isArray(rule.purposes) && !rule.purposes.includes(purpose)) {
+    throw new SourcePolicyError('purpose_not_allowed', `${policy.label} : finalité « ${purpose} » non autorisée en mode « ${mode} ».`, { source: policy.id, mode, purpose });
+  }
+  if (scope != null && Array.isArray(rule.scopes) && !rule.scopes.includes(scope)) {
+    throw new SourcePolicyError('scope_not_allowed', `${policy.label} : périmètre « ${scope} » non autorisé en mode « ${mode} » (autorisés : ${rule.scopes.join(', ')}).`, { source: policy.id, mode, scope });
+  }
+  return Object.freeze({
+    allowed: true,
+    source: policy.id,
+    mode,
+    purpose,
+    scope,
+    termsUrl: policy.termsUrl,
+    termsVerifiedAt: policy.termsVerifiedAt,
+    termsVersion: termsVersionOf(policy),
+    policyVersion: SOURCE_POLICY_VERSION,
+    rateLimit: rule.rateLimit ?? null,
+    conditions: rule.conditions ?? null,
+  });
+}
