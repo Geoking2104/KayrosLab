@@ -6,6 +6,8 @@ import { i18next } from "@/lib/i18n";
 
 const PAGES = [
   "overview",
+  "arbitrages",
+  "guide",
   "dossiers",
   "dossiers?thread=dos-helia",
   "dossiers?thread=dos-pilote",

@@ -579,7 +579,7 @@ function Composer({
   const [skillIds, setSkillIds] = useState<string[]>([]);
   const [toolIds, setToolIds] = useState<string[]>([]);
   const [guards, setGuards] = useState<boolean[]>(GUARDRAILS.map(() => Boolean(existing?.consented)));
-  const [team, setTeam] = useState(t("Camille Achats\nJordan Achats\nAlex Risque"));
+  const [team, setTeam] = useState(t("Achats A\nAchats B\nRisque"));
   const [source, setSource] = useState<"manuel" | "json" | "disc" | "api">("manuel");
   const [disc, setDisc] = useState("Di");
   const [error, setError] = useState("");

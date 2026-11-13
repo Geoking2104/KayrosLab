@@ -66,14 +66,15 @@ describe("graphe de projet", () => {
   });
 });
 
-describe("navigation à 4 entrées", () => {
-  it("range les anciennes pages sous Société, Projets, Bibliothèque et Réglages", async () => {
+describe("navigation orientée décisions", () => {
+  it("conserve les anciennes routes et regroupe les agents avec les comités", async () => {
     window.location.hash = "agents";
     render(<ConsoleApp />);
     const nav = (await screen.findAllByRole("navigation"))[0];
-    expect(nav.querySelectorAll("a").length).toBe(4);
-    await waitFor(() => expect(nav.querySelector('[aria-current="page"]')?.textContent).toContain("Bibliothèque"));
-    expect(screen.getByRole("navigation", { name: "Sous-sections" }).textContent).toContain("Collectifs");
+    expect(nav.querySelector('a[href="#arbitrages"]')).toBeTruthy();
+    expect(nav.querySelector('a[href="#guide"]')).toBeTruthy();
+    await waitFor(() => expect(nav.querySelector('[aria-current="page"]')?.textContent).toContain("Comités et agents"));
+    expect(screen.getByRole("navigation", { name: "Sous-sections" }).textContent).toContain("Comités");
   });
   it("ouvre un dossier dans un panneau latéral sans quitter la liste", async () => {
     window.location.hash = "dossiers";
@@ -82,7 +83,7 @@ describe("navigation à 4 entrées", () => {
     act(() => { window.location.hash = "dossiers?thread=__absent__"; window.dispatchEvent(new HashChangeEvent("hashchange")); });
     const panel = await screen.findByTestId("dossier-panel");
     expect(panel.textContent).toContain("Dossier introuvable");
-    fireEvent.click(screen.getAllByRole("button", { name: "Fermer le dossier" })[1]);
+    fireEvent.click(screen.getByRole("button", { name: "Fermer le dossier" }));
     await waitFor(() => expect(screen.queryByTestId("dossier-panel")).toBeNull());
   });
 });

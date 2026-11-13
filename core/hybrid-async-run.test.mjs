@@ -315,3 +315,31 @@ test('verrou par fil : un thread_id réservé déjà en cours est refusé même 
   // Fil terminé : l'identifiant ne peut pas être réutilisé pour écraser l'historique.
   await assert.rejects(gateway.startMessage({ ...base, text: 'Réécrire ?' }), (e) => e.code === 'RUN_IN_PROGRESS' && /reprise du fil/.test(e.message));
 });
+
+test('decision context survives reload and both continuation paths, including legacy runs', async () => {
+  const { swarm, gateway, room, store } = await setup();
+  const seen = [];
+  swarm.run = async (_id, options) => {
+    seen.push(options.context);
+    const run = fakeRun(options.runId || `sync-${seen.length}`, options.question, 'GO', { context: options.context });
+    swarm.runs.set(swarm._key(options.tenantId, run.run_id), run);
+    return run;
+  };
+  const source = 'Finance report: approved budget EUR 20000. Revenue is an assumption.';
+  const started = await gateway.startMessage({ platform: 'console', room_id: room.room_id, tenantId: 't1', text: 'Should we launch the pilot?', context: source, explicit: true });
+  assert.equal(started.thread.source_context, source, 'context is durable before the model completes');
+  await gateway.waitForThread(started.thread.thread_id);
+  const stored = await store.getThread(started.thread.thread_id, { tenantId: 't1' });
+  assert.equal(stored.source_context, source);
+  assert.equal(await store.getThread(stored.thread_id, { tenantId: 'another-tenant' }), null);
+  const reloaded = new HybridAgentGateway({ swarm, store, runTimeoutMs: 0 });
+  await reloaded.continueThread(stored.thread_id, { tenantId: 't1', text: 'The pilot must fit within ninety days.' });
+  assert.ok(seen.at(-1).startsWith(source));
+  assert.ok(seen.at(-1).includes('ninety days'));
+  // Old persisted cases have no source_context, but the first run contains it.
+  await store.updateThread(stored.thread_id, { source_context: null }, { tenantId: 't1' });
+  await reloaded.startContinueThread(stored.thread_id, { tenantId: 't1', text: 'Keep the existing budget cap.' });
+  await reloaded.waitForThread(stored.thread_id);
+  assert.ok(seen.at(-1).startsWith(source));
+  assert.ok(seen.at(-1).includes('existing budget cap'));
+});

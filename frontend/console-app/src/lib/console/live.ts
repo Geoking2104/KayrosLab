@@ -1,3 +1,4 @@
+import { tk } from "@/lib/i18n";
 // Correspondance entre les objets de l’API console et le modèle de l’interface.
 // En mode connecté, agents, collectifs (sessions) et dossiers (fils) viennent
 // de l’API ; le mode Démo garde l’état local préenregistré.
@@ -169,6 +170,7 @@ export function fromApiThread(t: any): Thread {
   }));
   const agentIds = run?.configuration?.active_agents || contributions.map((c) => c.agentId);
   const status = STATUS[t.status] || "running";
+  const initialContext = t.source_context || runs[0]?.run?.context;
   const decision = run?.human_decision;
   const human = [...messages].reverse().find((m) => m.role === "human" && m.kind !== "question");
   return {
@@ -186,7 +188,7 @@ export function fromApiThread(t: any): Thread {
     conditions: [...new Set(contributions.flatMap((c) => c.conditions))],
     questions: t.clarification_questions || [],
     humanReply: human?.text,
-    evidence: [],
+    evidence: typeof initialContext === "string" && initialContext.trim() ? [{ name: tk("Contexte initial de l’instruction"), type: "text", text: initialContext }] : [],
     arbitration: decision ? { action: decision.action === "override_veto" ? "override" : decision.action === "reevaluate" ? "reevaluate" : "accept", by: decision.by || decision.decided_by || "", note: decision.justification || "", at: decision.at || decision.decided_at || t.updated_at } : undefined,
     progress: t.progress ? { done: t.progress.done ?? t.progress.completed ?? 0, total: t.progress.total ?? Math.max(agentIds.length, 1) } : { done: status === "running" ? 0 : agentIds.length, total: Math.max(agentIds.length, 1) },
     gates: t.gate_evaluation ? {

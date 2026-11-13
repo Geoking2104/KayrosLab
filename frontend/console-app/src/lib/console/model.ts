@@ -1,6 +1,8 @@
 import { locale, t, tc, tk } from "@/lib/i18n";
 export type Role = "contributeur" | "comex";
 export type Page =
+  | "arbitrages"
+  | "guide"
   | "societe"
   | "projets"
   | "reglages"
@@ -54,6 +56,12 @@ export const CYCLE: { id: CycleId; label: string; hint: string }[] = [
 ];
 
 export const PAGE_FROM_HASH: Record<string, Page> = {
+  accueil: "overview",
+  home: "overview",
+  arbitrages: "arbitrages",
+  approvals: "arbitrages",
+  guide: "guide",
+  onboarding: "instruire",
   societe: "societe",
   projets: "projets",
   projects: "projets",
@@ -102,7 +110,7 @@ export const STATUS_LABEL: Record<ThreadStatus, string> = {
   get running() { return t("Instruction en cours"); },
   get awaiting_arbitration() { return t("À arbitrer"); },
   get needs_clarification() { return t("Précision attendue"); },
-  resolved: "Clos",
+  get resolved() { return t("Clos"); },
   get failed() { return t("Échec"); },
 };
 
@@ -672,7 +680,7 @@ export function seedState(): AppState {
     keys: [
       {
         id: "key-n8n",
-        name: tk("n8n — atelier"),
+        name: tk("n8n — démo"),
         prefix: "kl_live_7f3a",
         revealed: true,
         createdAt: earlier,

@@ -26,7 +26,7 @@ const STEPS: Record<string, string[]> = {
   n8n: [tk("Créez une clé nommée pour le flux."), tk("Importez le workflow fourni."), tk("Mappez l’opportunité vers la question."), tk("Le verdict revient signé dans votre outil.")],
   zapier: [tk("Webhook sortant vers POST /v1/public/missions."), tk("Profil rapide ou démo selon l’enjeu."), tk("Récupérez le dossier par l’identifiant renvoyé.")],
   salesforce: [tk("Choisissez l’org et l’objet."), tk("L’étape Proposal déclenche la question."), tk("Le verdict revient en tâche ou en champ.")],
-  api: [tk("Clé kl_live_ montrée une fois."), tk("POST /missions répond 202."), tk("60 requêtes/min, 200 missions/jour.")],
+  api: [tk("Clé d’API affichée une seule fois."), tk("POST /missions répond 202."), tk("60 requêtes/min, 200 missions/jour.")],
 };
 
 const SALESFORCE_CHECKS = [
