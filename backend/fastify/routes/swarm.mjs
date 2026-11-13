@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { policyRefusalBody } from '../../../core/persona-sources.mjs';
 import {
   compileEffectiveAgentContext,
   renderSwarmDossierMarkdown,
@@ -229,6 +230,8 @@ export default async function swarmRoutes(app) {
       await service.flush?.();
       return reply.code(201).send(agent);
     } catch (error) {
+      // Politique de collecte (ProfileImportService) : refus → 403 avec le code.
+      if (error?.name === 'SourcePolicyError') return reply.code(403).send(policyRefusalBody(error));
       return fail(reply, error, /introuvable/.test(error.message) ? 404 : 400);
     }
   });

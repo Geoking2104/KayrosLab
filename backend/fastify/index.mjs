@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import { synchronizePersonaPackage } from '../../core/persona-package.mjs';
 import { visitPublicSources } from '../../core/public-sources.mjs';
+import { visitPersonaUrls } from '../../core/persona-sources.mjs';
 import { isSignedChatWebhook, registerBodyParsers } from './lib/body-parsers.mjs';
 import { serverOptions, rateLimitOptions } from './lib/http-hardening.mjs';
 
@@ -36,7 +37,9 @@ if (process.env.KAYROS_PERSONAS_DIR !== 'off' && ctx.engine?.swarm) {
     // KAYROS_PUBLIC_SOURCES_VISIT=off la désactive.
     if (String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() !== 'off') {
       synchronizePersonaPackage(ctx.engine.swarm, personasDir, {
-        tenantId: process.env.KAYROS_PERSONAS_TENANT_ID || null, parse: (text) => parseYaml(text), visit: (urls) => visitPublicSources(urls),
+        tenantId: process.env.KAYROS_PERSONAS_TENANT_ID || null, parse: (text) => parseYaml(text),
+        // Politique de collecte (persona) : URLs refusées tracées sans requête, GitHub par API REST.
+        visit: (urls) => visitPersonaUrls(urls, { visit: (list) => visitPublicSources(list), githubToken: ctx.GITHUB_TOKEN || process.env.GITHUB_TOKEN || '' }),
       }).then((visit) => app.log.info({ visited: visit.visited }, 'sources publiques des personas visitées'))
         .catch((error) => app.log.warn(`visite des sources publiques impossible : ${error.message}`));
     }

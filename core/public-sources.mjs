@@ -175,6 +175,11 @@ export async function visitPublicSources(urls = [], options = {}) {
   return out;
 }
 
+function provenanceFields(c) {
+  const str = (v, n = 80) => (v == null || v === '' ? null : String(v).slice(0, n));
+  return { source: str(c.source, 40), mode: str(c.mode, 40), scope: str(c.scope, 40), collected_at: str(c.collected_at, 40), terms_version: str(c.terms_version), policy_version: str(c.policy_version, 40) };
+}
+
 /** Trace compacte persistée dans metadata.impersonator.public_evidence. */
 export function normalizePublicEvidence(input = []) {
   return (Array.isArray(input) ? input : []).filter((r) => r && typeof r === 'object' && r.url).slice(0, PUBLIC_SOURCE_LIMITS.maxSources).map((r) => ({
@@ -184,5 +189,8 @@ export function normalizePublicEvidence(input = []) {
     sha256: /^[a-f0-9]{64}$/.test(String(r.sha256 || '')) ? r.sha256 : null, bytes: Number(r.bytes) || 0, truncated: r.truncated === true,
     fetched_at: r.fetched_at ? String(r.fetched_at) : null, error: r.error ? String(r.error).slice(0, 300) : null,
     ...(r.skipped === true ? { skipped: true } : {}),
+    // Provenance de la politique de collecte (core/persona-sources.mjs) : source, mode, date, version des conditions.
+    ...(r.collection && typeof r.collection === 'object' && r.collection.source ? { collection: provenanceFields(r.collection) } : {}),
+    ...(r.policy_code ? { policy_code: String(r.policy_code).slice(0, 60) } : {}),
   }));
 }

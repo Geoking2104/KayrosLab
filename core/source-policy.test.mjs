@@ -13,14 +13,15 @@ const refused = (args, code) => {
   return out;
 };
 
-test('registre figé, versionné, avec les quatre sources initiales', () => {
-  assert.equal(SOURCE_POLICY_VERSION, '2026-11-12');
-  assert.deepEqual(COLLECTION_MODES, ['api', 'scrape', 'import', 'none']);
-  assert.deepEqual(listSources().sort(), ['github', 'import', 'reddit', 'x']);
+test('registre figé, versionné : sources de signaux et sources persona', () => {
+  assert.equal(SOURCE_POLICY_VERSION, '2026-11-13');
+  assert.deepEqual(COLLECTION_MODES, ['api', 'scrape', 'public_visit', 'import', 'none']);
+  assert.deepEqual(listSources().sort(), ['crystalknows', 'discord', 'github', 'gmail', 'import', 'linkedin', 'manual', 'outlook', 'reddit', 'user_text', 'web', 'x']);
   assert.ok(Object.isFrozen(SOURCE_POLICIES));
   assert.ok(Object.isFrozen(SOURCE_POLICIES.github.modes.scrape.conditions));
-  assert.throws(() => { SOURCE_POLICIES.github.personProfiling = true; }, TypeError);
-  assert.equal(SOURCE_POLICIES.github.personProfiling, false);
+  assert.throws(() => { SOURCE_POLICIES.reddit.personProfiling = true; }, TypeError);
+  assert.equal(SOURCE_POLICIES.reddit.personProfiling, false);
+  assert.equal(SOURCE_POLICIES.discord.personProfiling, false);
 });
 
 test('chaque source déclare modes, conditions, date de vérification et usage', () => {
@@ -29,11 +30,17 @@ test('chaque source déclare modes, conditions, date de vérification et usage',
     x: 'https://x.com/en/tos',
     reddit: 'https://redditinc.com/policies/user-agreement',
     import: null,
+    linkedin: 'https://www.linkedin.com/legal/user-agreement',
+    crystalknows: 'https://www.crystalknows.com/tos',
+    gmail: 'https://developers.google.com/terms/api-services-user-data-policy',
+    outlook: 'https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use',
+    discord: 'https://discord.com/terms',
+    user_text: null, manual: null, web: null,
   };
   for (const id of listSources()) {
     const p = getSourcePolicy(id);
-    assert.equal(p.termsUrl, urls[id]);
-    assert.equal(p.termsVerifiedAt, '2026-11-12');
+    assert.equal(p.termsUrl, urls[id], id);
+    assert.match(p.termsVerifiedAt, /^2026-11-1[23]$/);
     assert.equal(typeof p.personProfiling, 'boolean');
     assert.equal(typeof p.topicSignals, 'boolean');
     for (const mode of COLLECTION_MODES) assert.equal(typeof p.modes[mode]?.allowed, 'boolean', `${id}.${mode}`);
@@ -42,7 +49,7 @@ test('chaque source déclare modes, conditions, date de vérification et usage',
 });
 
 test('refus par défaut : source inconnue, mode inconnu ou "none"', () => {
-  refused({ source: 'linkedin', mode: 'api', env: {} }, 'unknown_source');
+  refused({ source: 'facebook', mode: 'api', env: {} }, 'unknown_source');
   refused({ source: '', mode: 'api', env: {} }, 'unknown_source');
   refused({ source: 'github', mode: 'crawl', env: {} }, 'unknown_mode');
   refused({ source: 'github', mode: 'none', env: {} }, 'mode_not_allowed');
@@ -55,7 +62,10 @@ test('github : API préférée, signaux de sujet seulement', () => {
   assert.equal(ok.termsVersion, 'github@2026-11-12');
   assert.equal(ok.rateLimit.maxRequestsPerDecision, 10);
   assert.equal(getSourcePolicy('github').preferredMode, 'api');
-  refused({ source: 'github', mode: 'api', purpose: 'person_profiling', env: {} }, 'purpose_not_allowed');
+  // Profilage : périmètre persona obligatoire (profile, repos, readme), jamais les périmètres de sujet.
+  refused({ source: 'github', mode: 'api', purpose: 'person_profiling', env: {} }, 'scope_not_allowed');
+  refused({ source: 'github', mode: 'api', purpose: 'person_profiling', scope: 'repositories', env: {} }, 'scope_not_allowed');
+  assert.equal(assertCollectionAllowed({ source: 'github', mode: 'api', purpose: 'person_profiling', scope: 'profile', env: {} }).allowed, true);
   refused({ source: 'github', mode: 'api', scope: 'users', env: {} }, 'scope_not_allowed');
   refused({ source: 'github', mode: 'import', env: {} }, 'mode_not_allowed');
 });
@@ -72,7 +82,10 @@ test('x : API seulement, désactivée sans X_API_BEARER_TOKEN', () => {
   refused({ source: 'x', mode: 'scrape', env: { X_API_BEARER_TOKEN: 't' } }, 'mode_not_allowed');
   assert.equal(isSourceEnabled('x', {}), false);
   assert.equal(assertCollectionAllowed({ source: 'x', mode: 'api', env: { X_API_BEARER_TOKEN: 't' } }).allowed, true);
-  refused({ source: 'x', mode: 'api', purpose: 'person_profiling', env: { X_API_BEARER_TOKEN: 't' } }, 'purpose_not_allowed');
+  refused({ source: 'x', mode: 'api', purpose: 'person_profiling', scope: 'profile', env: {} }, 'source_disabled');
+  assert.equal(assertCollectionAllowed({ source: 'x', mode: 'api', purpose: 'person_profiling', scope: 'posts', env: { X_API_BEARER_TOKEN: 't' } }).allowed, true);
+  // Nom historique lu par l'enrichissement persona.
+  assert.equal(isSourceEnabled('x', { X_BEARER_TOKEN: 't' }), true);
 });
 
 test('reddit : API seulement, désactivée sans accord commercial', () => {
