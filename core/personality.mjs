@@ -1,4 +1,5 @@
 import { descriptifFromCrystal, descriptifFromDisc, normalizeDescriptif } from './personality-descriptif.mjs';
+import { assertPersonaCollection, classifyProfileImport, normalizeProvenance } from './persona-sources.mjs';
 // KayrosLab — consent-aware stakeholder personality profiles.
 // LinkedIn is identity/professional context only. Behavioral attributes come
 // from explicit manual input or an authorized Crystal profile import.
@@ -84,6 +85,8 @@ export function normalizeHumanProfile(input = {}) {
       fields: strings(s.fields), consent_confirmed: s.consent_confirmed !== false,
       external_profile_id: s.external_profile_id ? String(s.external_profile_id) : null,
       verified: typeof s.verified === 'boolean' ? s.verified : null,
+      // Provenance de collecte (politique de collecte, finalité person_profiling).
+      collected_via: Array.isArray(s.collected_via) && s.collected_via.length ? s.collected_via.map(normalizeProvenance).filter(Boolean).slice(0, 6) : null,
     });
   }) : [];
   return compact({
@@ -471,13 +474,23 @@ export class CrystalKnowsProfileAdapter {
 }
 
 export class ProfileImportService {
-  constructor({ linkedinAdapter = null, crystalKnowsAdapter = null } = {}) {
+  constructor({ linkedinAdapter = null, crystalKnowsAdapter = null, env = null } = {}) {
     this.adapters = { linkedin: linkedinAdapter, crystalknows: crystalKnowsAdapter };
+    this.env = env;
   }
   async importProfile({ source, profile_url = null, linkedin_url = null, email = null, full_name = null, company_name = null, job_title = null, profile_data = null, consent_confirmed = false, imported_by = null } = {}) {
     const normalizedSource = String(source || '').toLowerCase();
     if (!['linkedin', 'crystalknows'].includes(normalizedSource)) throw new Error(`profile source inconnue: ${source}`);
     if (consent_confirmed !== true) throw new Error('profile import: consentement explicite requis');
+    // Politique de collecte (finalité person_profiling) vérifiée avant tout parsing ou appel réseau :
+    // export fourni → import ; sinon connecteur API (LinkedIn API refusée pour un tiers).
+    const decision = assertPersonaCollection({ ...classifyProfileImport({ source: normalizedSource, profile_data }), env: this.env || process.env });
+    const profile = await this.importAllowed({ normalizedSource, profile_url, linkedin_url, email, full_name, company_name, job_title, profile_data, imported_by });
+    const collected = { source: decision.source, mode: decision.mode, scope: decision.scope, collected_at: new Date().toISOString(), terms_version: decision.termsVersion, policy_version: decision.policyVersion };
+    if (Array.isArray(profile?.profile_sources)) profile.profile_sources = profile.profile_sources.map((s) => (s.collected_via?.length ? s : { ...s, collected_via: [collected] }));
+    return profile;
+  }
+  async importAllowed({ normalizedSource, profile_url, linkedin_url, email, full_name, company_name, job_title, profile_data, imported_by }) {
     if (profile_data) {
       return normalizedSource === 'linkedin'
         ? profileFromLinkedInData(clone(profile_data), { profile_url, imported_by, import_mode: 'authorized_export' })

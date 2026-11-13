@@ -31,7 +31,8 @@ test('disponibilité des chemins et erreurs claires sans jetons serveur', async 
   assert.equal(p.gmail.mode, 'oauth_token_per_request');
   assert.ok(!JSON.stringify(p).match(/Bearer|sk-/));
   const x = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { consent_confirmed: true, x_username: '@geoffroy' } });
-  assert.equal(x.statusCode, 503); assert.match(x.json().error, /X_BEARER_TOKEN absent/);
+  // Politique de collecte : X par API seulement ; sans jeton, refus 403 source_disabled (avant : 503).
+  assert.equal(x.statusCode, 403); assert.equal(x.json().code, 'source_disabled'); assert.equal(x.json().source, 'x'); assert.match(x.json().error, /X_BEARER_TOKEN absent/);
   const withCrystal = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { consent_confirmed: true, crystal_public_html: html, x_username: 'geoffroy' } });
   assert.equal(withCrystal.statusCode, 200); assert.match(withCrystal.json().warnings.join(), /X_BEARER_TOKEN absent/);
   const c = await app.inject({ method: 'POST', url: '/v1/console/personality/enrich', payload: { consent_confirmed: true, crystal_api: { email: 'a@b.fr' } } });

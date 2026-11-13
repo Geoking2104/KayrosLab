@@ -282,3 +282,29 @@ Agents → **Ajouter un agent impersonator** (single persona) ou **Équipe d'imp
 ## Agent distant AG-UI (`remote-ag-ui`, P8)
 
 Un agent dont `metadata.runtime` vaut `remote-ag-ui` (avec `metadata.remote_ag_ui.url`) délègue son analyse à un serveur AG-UI distant (`core/adapters/remote-ag-ui.mjs`) : POST `RunAgentInput`, flux SSE (`TEXT_MESSAGE_CONTENT`, `RUN_FINISHED`, `RUN_ERROR`). La gouvernance reste locale : règles effectives (`resolveEffectiveRules`) transmises en contexte et rattachées au résultat, `checkCompliance` appliqué à la sortie (enforce : une relance corrective puis `HarnessComplianceError` ; flag : notation), URL publique http(s) uniquement (anti-SSRF), sans redirection, délai et taille bornés. Le verdict passe ensuite par le consensus, le veto et l'arbitrage humain habituels.
+
+## Politique de collecte des sources (finalité `person_profiling`)
+
+Depuis la version `2026-11-13` de `core/source-policy.mjs`, toute source d'une persona passe par
+`core/persona-sources.mjs` (`assertPersonaCollection` / `evaluatePersonaCollection`) **avant** toute
+requête réseau ou tout parsing. Un refus renvoie `403` avec `{ code, source, mode, scope, purpose, policy_version }`
+(exception conservée : Gmail / Outlook coupés par `KAYROS_MAILBOX_ENRICH=off` → `410`, `policy_code: source_disabled`).
+
+| Source | Modes autorisés (persona) | Entrées de l'API |
+|---|---|---|
+| `github` | `api` : `profile`, `repos`, `readme` | URL `github.com/<compte>[/<dépôt>]` dans `public_sources` (lue par l'API REST, jamais la page) |
+| `x` | `api` : `profile`, `posts` (jeton `X_API_BEARER_TOKEN` ou `X_BEARER_TOKEN`) | `x_username` |
+| `user_text` | `import` : `emails`, `x_posts`, `x_archive` | textes collés, archive X |
+| `gmail`, `outlook` | `api` : `messages` (actif sauf `KAYROS_MAILBOX_ENRICH=off`) | `gmail`, `outlook` |
+| `linkedin` | `import` : `data_export`, `profile_data`, `reference_url` | `linkedin_export`, `profile_data` |
+| `crystalknows` | `api`, `public_visit` (page publique), `import` | `crystal_api`, `crystal_public_url`, `crystal_public_html`, `crystal_export` |
+| `manual` | `import` : `manual_profile`, `disc_type`, `clues`, `enriched_profile` | saisie, DISC, profil enrichi |
+| `web` | `public_visit` : `professional_page` | autres URLs de `public_sources` |
+
+Refusés : Reddit, Discord, LinkedIn par API (membre tiers), toute URL `x.com`/`twitter.com`, `linkedin.com`,
+`reddit.com`, `discord.*` dans `public_sources`, et tout mode `scrape`.
+
+Chaque élément collecté porte sa provenance `{ source, mode, scope, collected_at, terms_version, policy_version }` :
+`human_profile.profile_sources[].collected_via` et `metadata.impersonator.public_evidence[].collection`.
+La vue `persona_compliance.profile_sources` (drapeau `KAYROS_PERSONA_PUBLIC_MODEL`) expose `collected_at`,
+`terms_version` et `collection` (déduite, `inferred: true`, pour les profils antérieurs).

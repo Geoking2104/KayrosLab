@@ -6,6 +6,9 @@
 //  - aucun taux de précision n'est calculé ni exposé : seul le statut estimé / vérifié l'est.
 // Tant que les drapeaux ne sont pas posés, le comportement existant est inchangé.
 
+import { classifyPersonaUrl, collectionProvenance, evaluatePersonaCollection, provenanceOfProfileSource } from './persona-sources.mjs';
+import { SOURCE_POLICY_VERSION } from './source-policy.mjs';
+
 export const PERSONA_COMPLIANCE_RULES_VERSION = 'v4-2026-11-11';
 
 const ON = new Set(['1', 'true', 'on', 'yes']);
@@ -142,11 +145,14 @@ export function verificationLabel(status) {
 }
 
 /** Sources de modélisation affichables (provenance seulement, jamais de contenu). */
+// Chaque entrée porte la provenance de la politique de collecte (core/source-policy.mjs) :
+// `collection` = { source, mode, scope, collected_at, terms_version, policy_version[, inferred] }.
 export function describeProfileSources(agent) {
   const out = [];
   const hp = agent?.human_profile || {};
   for (const s of Array.isArray(hp.profile_sources) ? hp.profile_sources : []) {
     if (!s?.source) continue;
+    const collection = provenanceOfProfileSource(s);
     out.push({
       type: s.source,
       label: SOURCE_LABELS[s.source] || s.source,
@@ -154,19 +160,36 @@ export function describeProfileSources(agent) {
       mode: s.import_mode || null,
       imported_at: s.imported_at || null,
       verified: s.verified === true,
+      collected_at: collection[0]?.collected_at || s.imported_at || null,
+      terms_version: collection[0]?.terms_version || null,
+      collection,
     });
   }
   const imp = agent?.metadata?.impersonator || {};
   const evidence = Array.isArray(imp.public_evidence) ? imp.public_evidence : [];
   for (const url of Array.isArray(imp.public_sources) ? imp.public_sources : []) {
     const trace = evidence.find((e) => e?.url === url) || null;
+    const collection = trace?.collection ? [trace.collection] : inferredUrlProvenance(url, trace);
     out.push({
-      type: 'web', label: SOURCE_LABELS.web, url, mode: 'public_visit',
+      type: collection[0]?.source === 'github' ? 'github' : 'web', label: collection[0]?.source === 'github' ? 'GitHub (API)' : SOURCE_LABELS.web, url,
+      mode: collection[0]?.mode || 'public_visit',
       imported_at: trace?.fetched_at || null, verified: false,
       visited: trace ? !trace.error : false,
+      ...(trace?.policy_code ? { policy_code: trace.policy_code } : {}),
+      collected_at: trace?.collection?.collected_at || trace?.fetched_at || null,
+      terms_version: collection[0]?.terms_version || null,
+      collection,
     });
   }
   return out;
+}
+
+/** Provenance déduite d'une URL non encore visitée sous la politique (version actuelle des conditions). */
+function inferredUrlProvenance(url, trace) {
+  const target = classifyPersonaUrl(url);
+  const decision = evaluatePersonaCollection({ ...target, env: {} });
+  if (!decision.allowed) return [{ source: target.source, mode: target.mode, scope: target.scope ?? null, collected_at: trace?.fetched_at || null, terms_version: null, policy_version: SOURCE_POLICY_VERSION, refused: decision.code, inferred: true }];
+  return [{ ...collectionProvenance(decision, trace?.fetched_at || null), inferred: true }];
 }
 
 /**

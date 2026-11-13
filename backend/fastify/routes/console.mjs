@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
 import { visitPublicSources } from '../../../core/public-sources.mjs';
+import { collectionProvenance, evaluatePersonaCollection, planPersonaUrls, policyRefusalBody, visitPersonaUrls } from '../../../core/persona-sources.mjs';
 import { designPersonaTurn } from '../../../core/persona-designer.mjs';
 import { buildPersonaOverview } from '../../../core/persona-overview.mjs';
 import { personaToolPolicy, validatePersonaTools } from '../../../core/persona-tools.mjs';
@@ -62,6 +63,11 @@ const humanProfileSchema = z.object({
     import_mode: z.string().max(80).optional(), imported_at: z.string().max(40).optional(), imported_by: z.string().max(320).nullable().optional(),
     fields: z.array(z.string().max(80)).max(40).optional(), consent_confirmed: z.boolean().optional(),
     external_profile_id: z.string().max(200).nullable().optional(), verified: z.boolean().nullable().optional(),
+    // Provenance de collecte (politique de collecte, finalité person_profiling).
+    collected_via: z.array(z.object({
+      source: z.string().max(40), mode: z.string().max(40), scope: z.string().max(40).nullable().optional(),
+      collected_at: z.string().max(40).nullable().optional(), terms_version: z.string().max(80).nullable().optional(), policy_version: z.string().max(40).nullable().optional(),
+    })).max(6).optional(),
   })).max(8).optional(),
   consent_confirmed: z.boolean().optional(),
 }).optional();
@@ -359,10 +365,64 @@ async function scopedActivity(app, me, { roomId = null, after = 0, limit = 100 }
 }
 
 /** Calcule un profil enrichi depuis la requête ; renvoie null si la réponse d'erreur est déjà envoyée. */
+/** Imports Crystal/LinkedIn (export fourni → import ; sinon API) : premier refus ou null. */
+function profileImportsRefusal(app, imports = []) {
+  const env = personaPolicyEnv(app);
+  for (const item of imports || []) {
+    const source = String(item.source || '').toLowerCase();
+    const decision = evaluatePersonaCollection({ source, mode: item.profile_data ? 'import' : 'api', scope: item.profile_data ? 'profile_data' : 'profile', env });
+    if (!decision.allowed) return decision;
+  }
+  return null;
+}
+
+/** Environnement de la politique : jeton X injecté par le contexte (tests) prioritaire. */
+function personaPolicyEnv(app) {
+  const ctx = app.kayrosContext;
+  return ctx.xBearerToken != null ? { ...process.env, X_BEARER_TOKEN: ctx.xBearerToken, X_API_BEARER_TOKEN: ctx.xBearerToken } : process.env;
+}
+/** Refus de politique : 403 avec le code (aucune donnée collectée). */
+function sendPolicyRefusal(reply, refusal, extra = {}) {
+  reply.code(403).send({ ...policyRefusalBody(refusal), ...extra });
+  return null;
+}
+
+/**
+ * Sources d'un enrichissement (finalité person_profiling), dans l'ordre où la route
+ * les lira. Aucune lecture réseau ni aucun parsing n'a lieu avant ces décisions.
+ * `key` = type de profile_sources qui recevra la provenance.
+ */
+function enrichTargets(d) {
+  const t = [];
+  if (d.gmail) t.push({ source: 'gmail', mode: 'api', scope: 'messages', key: 'email' });
+  if (d.outlook) t.push({ source: 'outlook', mode: 'api', scope: 'messages', key: 'email' });
+  if (d.crystal_public_html) t.push({ source: 'crystalknows', mode: 'import', scope: 'public_page_html', key: 'crystalknows' });
+  else if (d.crystal_public_url) t.push({ source: 'crystalknows', mode: 'public_visit', scope: 'public_profile', key: 'crystalknows' });
+  else if (d.crystal_export) t.push({ source: 'crystalknows', mode: 'import', scope: 'json_export', key: 'crystalknows' });
+  else if (d.crystal_api) t.push({ source: 'crystalknows', mode: 'api', scope: 'profile', key: 'crystalknows' });
+  if (d.linkedin_export) t.push({ source: 'linkedin', mode: 'import', scope: 'data_export', key: 'linkedin' });
+  if (d.emails?.length) t.push({ source: 'user_text', mode: 'import', scope: 'emails', key: 'email' });
+  if (d.x_posts?.length) t.push({ source: 'user_text', mode: 'import', scope: 'x_posts', key: 'x' });
+  if (d.x_archive) t.push({ source: 'user_text', mode: 'import', scope: 'x_archive', key: 'x' });
+  return t;
+}
+
 async function enrichFromRequest(app, me, reply, d) {
   const warnings = [];
-  // v4 : plus aucune lecture de boîte mail quand KAYROS_MAILBOX_ENRICH=off (modèle Crystal : aucun accès au contenu des e-mails).
-  if ((d.gmail || d.outlook) && !mailboxEnrichEnabled()) { reply.code(410).send(MAILBOX_ENRICH_DISABLED); return null; }
+  const env = personaPolicyEnv(app);
+  // Politique de collecte (persona) avant toute lecture : un refus renvoie 403 et son code.
+  // Exception conservée : boîte mail coupée par KAYROS_MAILBOX_ENRICH=off → 410 (comportement v4).
+  const provenance = {};
+  for (const target of enrichTargets(d)) {
+    const decision = evaluatePersonaCollection({ ...target, env });
+    if (!decision.allowed) {
+      if ((target.source === 'gmail' || target.source === 'outlook') && decision.code === 'source_disabled') {
+        reply.code(410).send({ ...MAILBOX_ENRICH_DISABLED, policy_code: decision.code }); return null;
+      }
+      return sendPolicyRefusal(reply, decision);
+    }
+    (provenance[target.key] ||= []).push(collectionProvenance(decision));
+  }
   const complianceOn = personaPublicModelEnabled();
   if (complianceOn) {
     // Filtre art. 9 bloquant sur les textes fournis (aucun extrait renvoyé, seulement champ, index, catégories).
@@ -405,13 +465,16 @@ async function enrichFromRequest(app, me, reply, d) {
     const posts = [...(d.x_posts || []), ...(d.x_archive ? postsFromXArchive(d.x_archive) : [])];
     if (posts.length) x = profileFromXPosts(posts, { username: d.x_username?.replace(/^@/, '') || null, imported_by: me.email });
     else if (d.x_username) {
-      const api = new XProfileAdapter({ bearerToken: (app.kayrosContext.xBearerToken ?? process.env.X_BEARER_TOKEN) || '', fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
-      if (!api.configured) {
-        if (!crystal && !linkedin && !email) { reply.code(503).send({ error: 'X_BEARER_TOKEN absent côté serveur : le compte X ne peut pas être lu. Collez des posts ou importez l’archive X.', warnings }); return null; }
+      // X : API officielle seulement (politique x/api/profile) ; jamais de lecture de x.com.
+      const xDecision = evaluatePersonaCollection({ source: 'x', mode: 'api', scope: 'profile', env });
+      const api = new XProfileAdapter({ bearerToken: (app.kayrosContext.xBearerToken ?? process.env.X_BEARER_TOKEN ?? process.env.X_API_BEARER_TOKEN) || '', fetchImpl: app.kayrosContext.xFetch || globalThis.fetch });
+      if (!xDecision.allowed || !api.configured) {
+        if (!crystal && !linkedin && !email) { sendPolicyRefusal(reply, xDecision.allowed ? { code: 'source_disabled', error: 'X : jeton API absent', details: { source: 'x', mode: 'api' } } : xDecision, { error: 'X_BEARER_TOKEN absent côté serveur : le compte X ne peut pas être lu. Collez des posts ou importez l’archive X.', warnings }); return null; }
         warnings.push('X_BEARER_TOKEN absent : posts X non récupérés. Collez des posts ou importez l’archive X.');
       }
       else {
         if (!await manager(app, me, reply)) return null;
+        (provenance.x ||= []).push(collectionProvenance(xDecision));
         const fetched = await api.fetchProfile(d.x_username);
         if (complianceOn) {
           // Posts lus par API : ceux qui touchent une catégorie art. 9 sont écartés (comptés, jamais cités).
@@ -424,6 +487,10 @@ async function enrichFromRequest(app, me, reply, d) {
     }
     const result = buildEnrichedProfile({ assigned_name: d.assigned_name || null, crystal, linkedin, email, x });
     const p = result.profile;
+    // Provenance de collecte sur chaque source du profil (source, mode, date, version des conditions).
+    if (Array.isArray(p.profile_sources)) {
+      p.profile_sources = p.profile_sources.map((s) => (provenance[s.source]?.length && !s.collected_via?.length ? { ...s, collected_via: provenance[s.source] } : s));
+    }
     return {
       ...result, warnings, limits: ENRICHMENT_LIMITS, confidence: profileConfidence(p),
       agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }),
@@ -432,6 +499,34 @@ async function enrichFromRequest(app, me, reply, d) {
     const status = /refusé ou expiré/.test(error.message) ? 424 : /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : /crédits/.test(error.message) ? 402 : 400;
     reply.code(status).send({ error: surface(error.message), warnings }); return null;
   }
+}
+
+/**
+ * Sources d'une persona à créer, vérifiées avant toute création ou lecture :
+ * renvoie `null` si tout est autorisé, sinon `{ refusal, refused_urls }`.
+ */
+function impersonatorSourcesRefusal(app, d) {
+  const env = personaPolicyEnv(app);
+  const targets = [];
+  if (d.source === 'linkedin' && d.linkedin_url) targets.push({ source: 'linkedin', mode: 'api', scope: 'profile' });
+  if (d.source === 'crystalknows' && (d.email || d.linkedin_url || d.report_url)) targets.push({ source: 'crystalknows', mode: 'api', scope: 'profile' });
+  if (d.source === 'export' && d.profile_data) targets.push({ source: d.export_source || 'crystalknows', mode: 'import', scope: 'profile_data' });
+  if (d.source === 'enriched' && d.human_profile) targets.push({ source: 'manual', mode: 'import', scope: 'enriched_profile' });
+  if (d.source === 'manual') targets.push({ source: 'manual', mode: 'import', scope: 'manual_profile' });
+  for (const target of targets) {
+    const decision = evaluatePersonaCollection({ ...target, env });
+    if (!decision.allowed) return { refusal: decision, refused_urls: [] };
+  }
+  if (d.public_sources?.length) {
+    const { refused } = planPersonaUrls(d.public_sources, { env });
+    if (refused.length) {
+      return {
+        refusal: { code: refused[0].code, error: `Sources publiques refusées par la politique de collecte : ${refused.map((r) => r.url).join(', ')}`, details: { source: refused[0].source, mode: refused[0].mode } },
+        refused_urls: refused.map(({ url, source, mode, code }) => ({ url, source, mode, code })),
+      };
+    }
+  }
+  return null;
 }
 
 /** Crée un agent impersonator (persona + garde-fous) et renvoie l'agent, la persona et une éventuelle erreur d'enrichissement. */
@@ -497,11 +592,15 @@ async function personaSkillCatalog(app) {
 async function visitPersonaSources(app, urls = []) {
   if (!urls?.length) return [];
   const ctx = app.kayrosContext;
-  if (typeof ctx.publicSourceVisitor === 'function') return ctx.publicSourceVisitor(urls);
-  if (String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() === 'off') {
+  if (String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() === 'off' && typeof ctx.publicSourceVisitor !== 'function') {
     return urls.map((url) => ({ url, fetched_at: new Date().toISOString(), error: 'visite désactivée (KAYROS_PUBLIC_SOURCES_VISIT=off)' }));
   }
-  return visitPublicSources(urls);
+  // Politique de collecte : URLs refusées tracées sans requête, GitHub par API REST, pages par la visite SSRF.
+  const visit = typeof ctx.publicSourceVisitor === 'function' ? ctx.publicSourceVisitor : (list) => visitPublicSources(list);
+  return visitPersonaUrls(urls, {
+    visit, env: personaPolicyEnv(app),
+    githubFetch: ctx.githubFetch || globalThis.fetch, githubToken: ctx.GITHUB_TOKEN || process.env.GITHUB_TOKEN || '',
+  });
 }
 
 /** Lie la trace de visite à la persona et verse les extraits dans le profil via le pipeline d'enrichissement. */
@@ -868,6 +967,8 @@ export default async function consoleRoute(app) {
     const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     if (!app.kayrosContext.crystalKnowsConfigured) return reply.code(503).send({ error: 'Crystal Knows n’est pas configuré côté serveur' });
     const parsed = crystalImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import Crystal invalide', issues: parsed.error.issues });
+    const crystalDecision = evaluatePersonaCollection({ source: 'crystalknows', mode: 'api', scope: 'profile', env: personaPolicyEnv(app) });
+    if (!crystalDecision.allowed) return sendPolicyRefusal(reply, crystalDecision);
     try {
       const agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(req.params.agentId, { consent_confirmed: true, imports: [{ source: 'crystalknows', email: parsed.data.email, linkedin_url: parsed.data.linkedin_url }] }, { tenantId: me.tenantId, by: me.email });
       await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
@@ -877,6 +978,8 @@ export default async function consoleRoute(app) {
   app.post('/v1/console/agents/:agentId/personality', async (req, reply) => {
     const me = await app.requireAuth(req, reply); if (!me || !await manager(app, me, reply)) return;
     const parsed = personalityImportSchema.safeParse(req.body || {}); if (!parsed.success) return reply.code(400).send({ error: 'import de profil invalide', issues: parsed.error.issues });
+    const importRefusal = profileImportsRefusal(app, parsed.data.imports);
+    if (importRefusal) return sendPolicyRefusal(reply, importRefusal);
     try {
       const agent = await app.kayrosContext.engine.swarm.importAndAssignPersonality(req.params.agentId, parsed.data, { tenantId: me.tenantId, by: me.email });
       await app.kayrosContext.engine.swarm.flush?.(); return { agent: agentView(agent) };
@@ -901,6 +1004,10 @@ export default async function consoleRoute(app) {
     const parsed = personalityPreviewSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'aperçu de profil invalide', issues: parsed.error.issues });
     const d = parsed.data;
+    const previewTarget = d.source === 'disc' ? { source: 'manual', mode: 'import', scope: 'disc_type' }
+      : d.source === 'export' ? { source: 'crystalknows', mode: 'import', scope: 'profile_data' } : { source: 'crystalknows', mode: 'api', scope: 'profile' };
+    const previewDecision = evaluatePersonaCollection({ ...previewTarget, env: personaPolicyEnv(app) });
+    if (!previewDecision.allowed) return sendPolicyRefusal(reply, previewDecision);
     try {
       let profile;
       if (d.source === 'disc') {
@@ -998,6 +1105,8 @@ export default async function consoleRoute(app) {
       const scan = scanTextInputs({ clues: d.clues });
       if (scan.blocked) return reply.code(422).send(specialCategoryError(scan.findings));
     }
+    const sourcesRefusal = impersonatorSourcesRefusal(app, d);
+    if (sourcesRefusal) return sendPolicyRefusal(reply, sourcesRefusal.refusal, { refused_urls: sourcesRefusal.refused_urls });
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
       const { agent, impersonator, enrichment_error } = await buildImpersonatorAgent(app, me, d);
@@ -1122,12 +1231,18 @@ export default async function consoleRoute(app) {
     if (!current?.metadata?.impersonator) return reply.code(404).send({ error: 'persona introuvable' });
     const urls = current.metadata.impersonator.public_sources || [];
     if (!urls.length) return reply.code(400).send({ error: 'aucune source publique enregistrée' });
+    // Persona existante : les URLs refusées sont tracées (policy_code) ; tout refusé → 403.
+    const plan = planPersonaUrls(urls, { env: personaPolicyEnv(app) });
+    if (!plan.allowed.length) {
+      return sendPolicyRefusal(reply, { code: plan.refused[0].code, error: 'Aucune source publique autorisée par la politique de collecte.', details: { source: plan.refused[0].source, mode: plan.refused[0].mode } },
+        { refused_urls: plan.refused.map(({ url, source, mode, code }) => ({ url, source, mode, code })) });
+    }
     try {
       const evidence = await visitPersonaSources(app, urls);
       let agent = attachPublicEvidence(app, me, current, evidence);
       agent = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) } }, { tenantId: me.tenantId, by: me.email });
       await swarm.flush?.();
-      return { agent: agentView(agent), public_evidence: agent.metadata.impersonator.public_evidence };
+      return { agent: agentView(agent), public_evidence: agent.metadata.impersonator.public_evidence, refused_urls: plan.refused.map(({ url, source, mode, code }) => ({ url, source, mode, code })) };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
@@ -1137,6 +1252,11 @@ export default async function consoleRoute(app) {
     const parsed = impersonatorTeamSchema.safeParse(req.body || {});
     if (!parsed.success) return reply.code(400).send({ error: 'équipe impersonator invalide', issues: parsed.error.issues });
     const d = parsed.data;
+    // Politique de collecte vérifiée pour tous les membres avant toute création.
+    for (const member of d.members) {
+      const refusal = impersonatorSourcesRefusal(app, member);
+      if (refusal) return sendPolicyRefusal(reply, refusal.refusal, { member: member.name, refused_urls: refusal.refused_urls });
+    }
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
       if (await ownedSessionCount(app, me) >= MAX_SESSIONS_PER_USER) {
