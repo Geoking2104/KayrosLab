@@ -308,3 +308,14 @@ Chaque élément collecté porte sa provenance `{ source, mode, scope, collected
 `human_profile.profile_sources[].collected_via` et `metadata.impersonator.public_evidence[].collection`.
 La vue `persona_compliance.profile_sources` (drapeau `KAYROS_PERSONA_PUBLIC_MODEL`) expose `collected_at`,
 `terms_version` et `collection` (déduite, `inferred: true`, pour les profils antérieurs).
+
+### robots.txt (mode `public_visit`)
+
+Avant chaque page publique (`web`, page publique CrystalKnows), `core/robots-txt.mjs` lit
+`https://<hôte>/robots.txt` (RFC 9309) avec les protections SSRF des pages, un délai de 4 s et un plafond de 500 Kio.
+Le cache est tenu par origine, en mémoire : 24 h, ou 10 min après un échec.
+- **Groupes :** le groupe `KayrosLabBot` passe en premier, puis `*`. C'est la règle la plus longue qui s'applique ; à égalité, `Allow` l'emporte. Les jokers `*` et `$` sont pris en charge.
+- **Statut de robots.txt :** 4xx (sauf 429) → autorisé ; 429, 5xx, erreur réseau, délai dépassé ou plus de 5 redirections → refusé (fail closed).
+- **Crawl-delay :** respecté par origine. Une attente de plus de 10 s → refus `robots_crawl_delay`.
+- **User-Agent :** `KayrosLabBot/1.0 (+https://www.kayroslab.com/)`, sur robots.txt comme sur les pages.
+- **Refus :** `policy_code: robots_disallowed`, avec la trace `robots` dans `public_evidence`. L'API répond 403 à la création ; sur une persona existante, la règle est partielle (200 + `refused_urls`) ou totale (403).

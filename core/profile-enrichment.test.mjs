@@ -41,13 +41,13 @@ test('profileFromCrystalPublic reconstruit la fiche Crystal', () => {
 
 test('CrystalPublicProfileFetcher : URL unique, sans cookie, erreur sur HTTP', async () => {
   const calls = [];
-  const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: async (url, init) => { calls.push({ url, init }); return { ok: true, status: 200, text: async () => html }; } });
+  const fetcher = new CrystalPublicProfileFetcher({ robots: false, fetchImpl: async (url, init) => { calls.push({ url, init }); return { ok: true, status: 200, text: async () => html }; } });
   const r = await fetcher.fetch('https://crystalknows.com/p/geoffroy2104');
   assert.equal(calls[0].url, 'https://www.crystalknows.com/p/geoffroy2104');
   assert.equal(calls[0].init.headers.cookie, undefined);
   assert.equal(calls[0].init.headers.authorization, undefined);
   assert.ok(r.html.includes('__next_f'));
-  const ko = new CrystalPublicProfileFetcher({ fetchImpl: async () => ({ ok: false, status: 404 }) });
+  const ko = new CrystalPublicProfileFetcher({ robots: false, fetchImpl: async () => ({ ok: false, status: 404 }) });
   await assert.rejects(() => ko.fetch('nobody'), /HTTP 404/);
 });
 

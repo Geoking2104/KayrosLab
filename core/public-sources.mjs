@@ -5,7 +5,10 @@
 //  - refus de localhost, des IP privées, loopback, link-local, CGNAT, multicast, ULA IPv6 —
 //    vérifié sur l'IP littérale ET sur chaque adresse résolue par DNS, à chaque redirection ;
 //  - redirections suivies manuellement (max 3), délai max, taille max lue (troncature) ;
-//  - aucun cookie ni jeton envoyé.
+//  - aucun cookie ni jeton envoyé ;
+//  - robots.txt respecté avant chaque requête (RFC 9309, core/robots-txt.mjs) : jeton
+//    « KayrosLabBot », refus par défaut si robots.txt est injoignable, Crawl-delay appliqué ;
+//    un refus est tracé (`policy_code: robots_disallowed | robots_crawl_delay`, `robots`).
 // Chaque visite produit une trace : statut HTTP, titre, extrait texte, date, empreinte SHA-256.
 // Les extraits n'alimentent la persona que par le pipeline existant (profile-enrichment →
 // normalizeImpersonator → impersonatorContext → harness) : rien n'est injecté en contournement.
@@ -13,6 +16,7 @@
 import { createHash } from 'node:crypto';
 import { lookup as dnsLookup } from 'node:dns/promises';
 import { isIP } from 'node:net';
+import { KAYROS_BOT_USER_AGENT, defaultRobotsGuard, robotsTrace } from './robots-txt.mjs';
 
 export const PUBLIC_SOURCE_LIMITS = Object.freeze({ timeoutMs: 8000, maxBytes: 512 * 1024, maxRedirects: 3, excerptChars: 1200, maxSources: 30, domainFailureThreshold: 2 });
 const BLOCKED_HOSTS = /^(localhost|localhost\.localdomain|ip6-localhost|ip6-loopback|metadata\.google\.internal)$|\.(localhost|local|internal|lan|home|corp)$/i;
@@ -95,7 +99,7 @@ async function readLimited(res, maxBytes) {
 }
 
 /** Visite une URL publique et renvoie sa trace (jamais d'exception : `error` renseigné). */
-export async function visitPublicSource(value, { fetchImpl = globalThis.fetch, lookup = dnsLookup, limits = {}, now = () => new Date() } = {}) {
+export async function visitPublicSource(value, { fetchImpl = globalThis.fetch, lookup = dnsLookup, limits = {}, now = () => new Date(), robots = defaultRobotsGuard } = {}) {
   const L = { ...PUBLIC_SOURCE_LIMITS, ...limits };
   const record = { url: String(value || '').trim(), final_url: null, status: null, content_type: null, title: null, excerpt: null, sha256: null, bytes: 0, truncated: false, fetched_at: now().toISOString(), error: null };
   try {
@@ -104,11 +108,19 @@ export async function visitPublicSource(value, { fetchImpl = globalThis.fetch, l
     if (typeof fetchImpl !== 'function') throw new Error('source publique : fetch indisponible');
     for (let hop = 0; ; hop += 1) {
       await assertPublicHost(url, { lookup });
+      // robots.txt de l'origine visitée (à chaque saut : une redirection peut changer d'hôte).
+      if (robots) {
+        const decision = await robots.check(url.href);
+        record.robots = robotsTrace(decision);
+        if (!decision.allowed) { record.policy_code = 'robots_disallowed'; record.error = `politique de collecte : robots_disallowed — ${decision.reason}`; return record; }
+        const slot = await robots.acquire(url.href, decision);
+        if (!slot.ok) { record.policy_code = slot.code; record.error = `politique de collecte : ${slot.code} — Crawl-delay de ${decision.crawl_delay_s} s non respectable dans cette visite`; return record; }
+      }
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), L.timeoutMs);
       let res;
       try {
-        res = await fetchImpl(url.href, { method: 'GET', redirect: 'manual', signal: ctrl.signal, credentials: 'omit', headers: { 'user-agent': 'KayrosLab-public-persona/1.0 (+public data only)', accept: 'text/html,text/plain;q=0.9,*/*;q=0.5' } });
+        res = await fetchImpl(url.href, { method: 'GET', redirect: 'manual', signal: ctrl.signal, credentials: 'omit', headers: { 'user-agent': KAYROS_BOT_USER_AGENT, accept: 'text/html,text/plain;q=0.9,*/*;q=0.5' } });
         if (res.status >= 300 && res.status < 400 && res.headers.get('location')) {
           if (hop >= L.maxRedirects) throw new Error('source publique : trop de redirections');
           url = assertPublicUrl(new URL(res.headers.get('location'), url).href);
@@ -136,6 +148,7 @@ export async function visitPublicSource(value, { fetchImpl = globalThis.fetch, l
 /** Échec imputable au domaine (réseau, délai, refus d'accès, saturation, erreur serveur) — pas une URL refusée par la politique. */
 function isDomainFailure(record) {
   if (!record?.error) return false;
+  if (record.policy_code) return false; // refus robots.txt : décision de politique, pas une panne
   if (Number.isInteger(record.status)) return [401, 403, 407, 429].includes(record.status) || record.status >= 500;
   return !/^source publique : (URL invalide|http\(s\)|identifiants|port|hôte refusé|adresse privée|trop de redirections)/.test(record.error);
 }
@@ -192,5 +205,6 @@ export function normalizePublicEvidence(input = []) {
     // Provenance de la politique de collecte (core/persona-sources.mjs) : source, mode, date, version des conditions.
     ...(r.collection && typeof r.collection === 'object' && r.collection.source ? { collection: provenanceFields(r.collection) } : {}),
     ...(r.policy_code ? { policy_code: String(r.policy_code).slice(0, 60) } : {}),
+    ...(r.robots && typeof r.robots === 'object' ? { robots: robotsTrace(r.robots) } : {}),
   }));
 }

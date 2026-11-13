@@ -30,6 +30,7 @@ export * from './ecouter.mjs';
 export * from './source-policy.mjs';
 export * from './github-signals.mjs';
 export * from './persona-sources.mjs';
+export * from './robots-txt.mjs';
 export * from './cartographier.mjs';
 export * from './construire.mjs';
 export * from './collision.mjs';
