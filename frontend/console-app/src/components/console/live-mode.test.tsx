@@ -56,6 +56,11 @@ describe("mappers API", () => {
     expect(thread.contributions[0].objections).toEqual(["Marge"]);
     expect(thread.conditions).toEqual(["Plafonner"]);
   });
+  it("restaure le contexte initial des dossiers connectés et des anciens runs", () => {
+    expect(fromApiThread({ ...THREAD, source_context: "Initial source" }).evidence[0].text).toBe("Initial source");
+    const legacy = { ...THREAD, messages: [{ run: { context: "Original source", analyses: [] } }, { run: { context: "Later reply", analyses: [] } }] };
+    expect(fromApiThread(legacy).evidence[0].text).toBe("Original source");
+  });
   it("envoie tous les champs agent acceptés par l’API", () => {
     const body = toApiAgent({ name: "A", role: "R", department: "D", mission: "M", veto: true, enabled: true, brief: "B",
       settings: { ...defaultSettings(), constraints: ["c"], tools: ["t"], channels: ["slack"], provider: "mistral", model: "m", seniority: "executive", rules: ["r"] } });
@@ -64,13 +69,13 @@ describe("mappers API", () => {
 });
 
 describe("mode connecté", () => {
-  it("ouvre sur le tableau de bord société avec les projets en cours", async () => {
+  it("ouvre sur les décisions et leurs prochaines actions", async () => {
     localStorage.setItem("kayroslab.console.token", "tok");
     mockApi();
     window.location.hash = "";
     render(<ConsoleApp />);
-    expect(await screen.findByText("Renouvellement Helia")).toBeTruthy();
-    expect(screen.getAllByText("Atelier Renaud").length).toBeGreaterThan(0);
+    expect(await screen.findByText("Faut-il signer le contrat Helia ?")).toBeTruthy();
+    expect(screen.getByText("Préparer mon arbitrage")).toBeTruthy();
     expect(screen.getByTestId("live-badge").textContent).toContain("comex@atelier.fr");
   });
 

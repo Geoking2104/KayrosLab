@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ArrowRight, Search, ShieldCheck } from "lucide-react";
+import { decisionStage, nextDecisionAction } from "@/lib/console/journey";
 import { useConsole } from "@/lib/console/store";
 import {
   CYCLE,
@@ -29,14 +31,16 @@ const FILTERS: { id: "all" | ThreadStatus; label: string }[] = [
   { id: "running", get label() { return t("En instruction"); } },
   { id: "needs_clarification", get label() { return t("Précision"); } },
   { id: "resolved", get label() { return t("Clos"); } },
+  { id: "failed", get label() { return t("Échec"); } },
 ];
 
 export function Dossiers({ threadId }: { threadId: string }) {
-  const { state, deleteThread, startMission } = useConsole();
+  const { state, deleteThread, startMission, permissions } = useConsole();
   const selected = state.threads.find((thread) => thread.id === threadId);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
   const [pickedAgents, setPickedAgents] = useState<string[]>([]);
-  const list = state.threads.filter((thread) => filter === "all" || thread.status === filter);
+  const [query, setQuery] = useState("");
+  const list = state.threads.filter((thread) => (filter === "all" || thread.status === filter) && tc(thread.question).toLocaleLowerCase().includes(query.toLocaleLowerCase()));
 
   if (selected) return <Dossier threadId={selected.id} />;
 
@@ -45,9 +49,11 @@ export function Dossiers({ threadId }: { threadId: string }) {
       <div>
         <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Dossiers")}</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted">{t(
-          "Deux départs : un document analysé, ou un texte brut comme sur un modèle. La question propose ensuite les agents capables d’intervenir. Le comité ne part que lorsque KayrosLab l’annonce."
+          "Retrouvez la question, les preuves, les avis du comité et la décision humaine dans un même dossier."
         )}</p>
       </div>
+      <div className="flex flex-wrap items-center justify-between gap-3"><label className="relative"><Search size={15} className="absolute left-3 top-3.5 text-muted" /><input className={cn(controlClass, "pl-9")} aria-label={t("Rechercher une décision")} placeholder={t("Rechercher une décision")} value={query} onChange={e => setQuery(e.target.value)} /></label><Button onClick={() => go("instruire")} disabled={!permissions.includes("run")}>{t("Préparer une décision")}<ArrowRight size={15} /></Button></div>
+      <details className="rounded-xl border border-line bg-surface p-4"><summary className="cursor-pointer text-sm text-muted">{t("Analyse de document avancée")}</summary><div className="mt-4">
       <Briefing
         agents={state.agents.filter((agent) => agent.enabled)}
         checkedIds={pickedAgents}
@@ -68,6 +74,7 @@ export function Dossiers({ threadId }: { threadId: string }) {
           return { ok: true };
         }}
       />
+      </div></details>
       <div className="flex flex-wrap gap-2" role="tablist">
         {FILTERS.map((item) => (
           <button
@@ -145,16 +152,19 @@ export function Dossier({ threadId }: { threadId: string }) {
   return (
     <div className="flex flex-col gap-5">
       <button type="button" onClick={() => go("dossiers")} className="w-fit text-sm font-bold text-accent">{t("← Tous les dossiers")}</button>
-      <section className="overflow-hidden rounded-3xl border border-[#d8e6f3] bg-surface shadow-card">
-        <div className="flex items-center gap-3 bg-gradient-to-r from-accent to-accent-strong px-5 py-4 text-white">
+      <section className="overflow-hidden rounded-xl border border-line bg-surface shadow-card">
+        <div className="flex items-center gap-3 border-b border-line bg-surface px-5 py-5">
           <img src={`${import.meta.env.BASE_URL}logo-kayroslab.png`} alt="" width={36} height={36} className="size-9 rounded-[9px]" />
           <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">{t("Dossier")}</p>
-            <h1 className="text-base font-bold leading-snug text-white">{tc(thread.question)}</h1>
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">{t("Dossier")}</p>
+            <h1 className="text-lg font-semibold leading-snug text-ink">{tc(thread.question)}</h1>
           </div>
         </div>
-        <div className="border-b border-[#e1ecf6] bg-[#f3f8fd] px-3 py-3">
-          <CycleRail stage={thread.stage} />
+        <div className="border-b border-line bg-paper px-4 py-3">
+          <ol className="grid grid-cols-5 gap-2 text-[10px] sm:text-xs" aria-label={t("Avancement de la décision")}>
+            {[t("Cadrage"), t("Contexte"), t("Avis IA"), t("Arbitrage"), t("Décision actée")].map((label, index) => <li key={label} aria-current={decisionStage(thread) === index ? "step" : undefined} className={cn("border-t-2 pt-2", index <= decisionStage(thread) ? "border-accent text-accent" : "border-line text-muted")}>{label}</li>)}
+          </ol>
+          <details className="mt-3"><summary className="cursor-pointer text-xs text-muted">{t("Voir le cycle détaillé")}</summary><div className="mt-3"><CycleRail stage={thread.stage} /></div></details>
         </div>
         <div className="grid gap-3 p-4 md:p-5">
           <div className="flex flex-wrap items-center gap-2">
@@ -217,6 +227,14 @@ export function Dossier({ threadId }: { threadId: string }) {
           ) : null}
         </div>
       </section>
+      <Panel className="border-accent/20 bg-accent-soft">
+        <div className="flex items-start gap-3"><ShieldCheck size={19} className="shrink-0 text-accent" /><div><p className="text-xs text-muted">{t("Prochaine action")}</p><h2 className="mt-1 text-base">{nextDecisionAction(thread, manager)}</h2><p className="mt-2 text-sm text-muted">{thread.status === "resolved" ? t("La décision humaine est enregistrée. Retrouvez son motif et son historique dans le journal.") : t("Lisez les objections et vérifiez les sources avant de vous prononcer. Un avis IA ne clôture pas la décision.")}</p></div></div>
+      </Panel>
+      {thread.evidence.length > 0 && <Section id="dossier-sources" title={t("Contexte transmis au comité")} defaultOpen={false}>
+        <p className="mb-3 text-xs text-muted">{t("Contenu fourni à l’instruction. Sa présence ne constitue pas une vérification des faits.")}</p>
+        {thread.evidence.map((source, index) => <details key={index} className="mb-2 rounded-lg border border-line p-3"><summary className="cursor-pointer text-sm font-medium">{tc(source.name)}</summary><p className="mt-3 whitespace-pre-wrap break-words text-sm text-ink-soft">{source.text || source.summary || t("Le contenu de cette référence n’est pas disponible.")}</p></details>)}
+      </Section>}
+      <details className="rounded-xl border border-line bg-surface p-4"><summary className="cursor-pointer text-sm text-muted">{t("Enrichir le contexte ou relancer le comité")}</summary><div className="mt-4">
       <Briefing
         agents={state.agents.filter((agent) => agent.enabled)}
         checkedIds={thread.agentIds}
@@ -231,6 +249,7 @@ export function Dossier({ threadId }: { threadId: string }) {
         onRead={(file) => attachReading(thread.id, file)}
         onLaunch={(question) => poseQuestion(thread.id, question)}
       />
+      </div></details>
       {agentError ? <p className="text-sm text-stop" role="alert">{agentError}</p> : null}
 
       {thread.status === "running" ? (

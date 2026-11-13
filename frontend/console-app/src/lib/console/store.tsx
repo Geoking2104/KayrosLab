@@ -32,6 +32,8 @@ type DraftMission = {
   useCase: UseCase;
   evidence: Evidence[];
   agentIds?: string[];
+  /** Called only after the server accepts the run; guided drafts survive a failed launch. */
+  onSettled?: (result: { ok: boolean; id?: string; reason?: string }) => void;
 };
 
 type Result = { ok: boolean; reason?: string };
@@ -497,6 +499,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
           selectedCollectiveId: collective?.id ?? current.selectedCollectiveId,
           threads: [thread, ...current.threads],
         }));
+        draft.onSettled?.({ ok: true, id });
         return id;
       },
       addAgentToThread: (threadId, agentId) => {
@@ -739,7 +742,7 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               status: "resolved",
               stage,
               updatedAt: at,
-              arbitration: { action, by: t("COMEX · Camille Renaud"), note: note.trim(), at },
+              arbitration: { action, by: t("COMEX · Responsable démo"), note: note.trim(), at },
               events: [...thread.events, { at, label: tk("Arbitrage"), detail: label }],
             };
           }),
@@ -1021,11 +1024,11 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
       },
       startMission: (draft) => {
         const denied = canRun();
-        if (denied) { notify(denied.reason!, "stop"); return ""; }
+        if (denied) { notify(denied.reason!, "stop"); draft.onSettled?.(denied); return ""; }
         const collective = liveData.collectives.find((c) => c.id === draft.collectiveId) ?? liveData.collectives[0];
         const placeholder = uid("pending");
         const at = stamp();
-        if (!collective) { notify(t("Créez d’abord un collectif."), "stop"); return placeholder; }
+        if (!collective) { const reason = t("Créez d’abord un collectif."); notify(reason, "stop"); draft.onSettled?.({ ok: false, reason }); return ""; }
         const thread: Thread = {
           id: placeholder, question: draft.question.trim(), collectiveId: collective.id, status: "running",
           profile: draft.profile, provider: "serveur", useCase: draft.useCase, stage: "construire",
@@ -1044,8 +1047,9 @@ export function ConsoleProvider({ children }: { children: ReactNode }) {
               window.location.hash = window.location.hash.replace(placeholder, realId);
             }
             await refreshLive();
+            draft.onSettled?.({ ok: true, id: realId });
           })
-          .catch((error) => { pending.current.delete(placeholder); void refreshLive(); fail(error); });
+          .catch((error) => { pending.current.delete(placeholder); void refreshLive(); fail(error); draft.onSettled?.({ ok: false, reason: (error as Error).message }); });
         return placeholder;
       },
       replyClarification: (threadId, reply) => {

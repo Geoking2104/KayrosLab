@@ -1,260 +1,339 @@
+import { useState } from "react";
 import {
-  BadgeCheck,
-  Blocks,
-  Crosshair,
-  Ear,
-  Flag,
-  Gavel,
-  ListChecks,
-  Map,
-  MessageCircleQuestion,
-  Milestone,
-  Scale,
-  Telescope,
-  Users,
   ArrowRight,
+  CheckCheck,
+  CircleHelp,
+  Clock3,
+  Gavel,
+  Search,
+  ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import { useConsole } from "@/lib/console/store";
-import { CYCLE, formatWhen, SESSION_QUOTA, STATUS_LABEL, useCaseLabel, type CycleId } from "@/lib/console/model";
-import { Panel, ProgressBar, StatusPill, VerdictPill } from "./ui";
-import { go } from "./Shell";
+import { formatWhen, type ThreadStatus } from "@/lib/console/model";
+import { decisionPriority, nextDecisionAction } from "@/lib/console/journey";
 import { t, tc } from "@/lib/i18n";
+import {
+  Button,
+  Empty,
+  Panel,
+  ProgressBar,
+  StatusPill,
+  VerdictPill,
+  controlClass,
+} from "./ui";
+import { DecisionGuide } from "./DecisionGuide";
+import { go } from "./Shell";
+import { cn } from "@/lib/cn";
 
-const ACTIONS = [
-  {
-    id: "teams",
-    title: "Teams",
-    get body() { return t("Exemple : connectez Teams depuis Connexions. L’état réel de vos canaux s’y affiche une fois connecté."); },
-    get label() { return t("Connecter"); },
-    page: "connexions" as const,
-    color: "#5b5fc7",
-    soft: "#eef0fb",
-    logo: "brands/teams.svg",
-    logoClass: "h-8 w-8",
-  },
-  {
-    id: "crystal",
-    title: "CrystalKnows",
-    get body() { return t("Crystal Knows n’est pas configuré. L’import d’un export autorisé ou d’un DISC reste possible, sans scraping."); },
-    get label() { return t("Configurer"); },
-    page: "agents" as const,
-    color: "#01293D",
-    soft: "#eeecfb",
-    logo: "brands/crystalknows.svg",
-    logoClass: "h-6 w-auto max-w-[128px]",
-  },
-  {
-    id: "provider",
-    title: "Mistral",
-    get body() { return t("Provider annoncé : Mistral. Le swarm utilise le même provider. Un profil démo est étiqueté comme tel, jamais comme un verdict silencieux."); },
-    get label() { return t("Voir l’annonce"); },
-    page: "espace" as const,
-    color: "#FA520F",
-    soft: "#fff1e8",
-    logo: "brands/mistral.svg",
-    logoClass: "h-8 w-8",
-  },
-];
-
-const GUIDE = [
-  { get title() { return t("La question"); }, get hint() { return t("Vous posez la décision."); }, icon: MessageCircleQuestion, color: "#0176d3", soft: "#eaf5fe" },
-  { get title() { return t("Le collectif"); }, get hint() { return t("Il l’instruit."); }, icon: Users, color: "#0f766e", soft: "#e6f4f2" },
-  { get title() { return t("Le verdict"); }, get hint() { return t("Il reste consultatif."); }, icon: Scale, color: "#5b4cdb", soft: "#eeecfb" },
-  { get title() { return t("Votre arbitrage"); }, get hint() { return t("Un humain tranche."); }, icon: BadgeCheck, color: "#157347", soft: "#e7f4ec" },
-];
-
-const STEP_TONE = [
-  { color: "#0f766e", soft: "#e6f4f2", icon: Ear },
-  { color: "#0176d3", soft: "#eaf5fe", icon: Map },
-  { color: "#5b4cdb", soft: "#eeecfb", icon: Blocks },
-  { color: "#b45309", soft: "#fdf3e4", icon: Crosshair },
-  { color: "#8a6d1a", soft: "#f8f1dc", icon: Scale },
-  { color: "#157347", soft: "#e7f4ec", icon: Gavel },
-  { color: "#00a1e0", soft: "#e7f6fd", icon: Telescope },
-  { color: "#0a0c10", soft: "#eef1f4", icon: Flag },
-];
-
-export function Today() {
-  const { state, ackGuide } = useConsole();
-  const queue = [...state.threads].sort((a, b) => rank(a.status) - rank(b.status) || b.updatedAt.localeCompare(a.updatedAt));
-  const mine = state.collectives.length;
-  const running = state.threads.filter((thread) => thread.status === "running");
-  const ack = state.guideAck.length === 4 ? state.guideAck : [false, false, false, false];
-  const guideOpen = ack.some((item) => !item);
-
-  function openStage(stage: CycleId) {
-    const match = [...state.threads].filter((thread) => thread.stage === stage).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0];
-    if (match) go("dossiers", match.id);
-    else go("dossiers");
-  }
-
+export function Today({ approvals = false }: { approvals?: boolean }) {
+  const { state, live, permissions, workspace } = useConsole();
+  const [filter, setFilter] = useState<"active" | "all" | ThreadStatus>(
+    approvals ? "awaiting_arbitration" : "active",
+  );
+  const [search, setSearch] = useState("");
+  const canArbitrate = permissions.includes("arbitrate");
+  const count = (status: ThreadStatus) =>
+    state.threads.filter((x) => x.status === status).length;
+  const queue = state.threads
+    .filter((x) => {
+      const inView =
+        filter === "all" ||
+        (filter === "active" ? x.status !== "resolved" : x.status === filter);
+      return (
+        inView &&
+        `${tc(x.question)} ${tc(state.collectives.find((c) => c.id === x.collectiveId)?.name)}`
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase())
+      );
+    })
+    .sort(
+      (a, b) =>
+        decisionPriority(a) - decisionPriority(b) ||
+        b.updatedAt.localeCompare(a.updatedAt),
+    );
+  const metrics = [
+    {
+      id: "awaiting_arbitration" as const,
+      label: t("À arbitrer"),
+      icon: Gavel,
+      hint: t("Décision humaine attendue"),
+      color: "text-hold",
+    },
+    {
+      id: "needs_clarification" as const,
+      label: t("À préciser"),
+      icon: CircleHelp,
+      hint: t("Une information manque"),
+      color: "text-info",
+    },
+    {
+      id: "running" as const,
+      label: t("En instruction"),
+      icon: Clock3,
+      hint: t("Le comité travaille"),
+      color: "text-accent",
+    },
+    {
+      id: "resolved" as const,
+      label: t("Décisions actées"),
+      icon: CheckCheck,
+      hint: t("Arbitrage enregistré"),
+      color: "text-go",
+    },
+  ];
   return (
-    <div className="flex flex-col gap-6">
-      {guideOpen ? (
-        <Panel>
-          <p className="text-sm font-semibold text-ink">{t("Le parcours")}</p>
-          <p className="mt-1 max-w-2xl text-sm text-ink-soft">{t(
-            "Vous posez une décision. Un collectif l’instruit. Le verdict reste consultatif tant qu’un humain ne l’a pas arbitré."
-          )}</p>
-          <ol className="mt-4 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-            {GUIDE.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <li key={step.title} className="bg-surface px-3 py-3 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="grid size-8 place-items-center rounded-lg" style={{ background: step.soft, color: step.color }}>
-                      <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
-                    </span>
-                    <span className="text-[11px] font-semibold tabular-nums text-muted">0{index + 1}</span>
-                  </div>
-                  <p className="mt-2 font-semibold text-ink">{step.title}</p>
-                  <p className="text-xs text-muted">{step.hint}</p>
-                  <label className="mt-3 flex min-h-11 items-center gap-2 text-sm font-medium text-ink">
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded accent-accent"
-                      checked={ack[index]}
-                      onChange={(event) => ackGuide(index, event.target.checked)}
-                    />{t("J’ai compris")}</label>
-                </li>
-              );
-            })}
-          </ol>
-        </Panel>
-      ) : null}
-
+    <div className="grid gap-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[26px] font-semibold tracking-[-0.025em] text-ink">{t("Ce qui vous attend")}</h1>
-          <p className="mt-1 max-w-xl text-sm text-muted">{t("Les dossiers ouverts, dans l’ordre où vous pouvez agir.")}</p>
+          <p className="eyebrow">
+            {approvals ? t("Comité humain") : t("Votre espace de décision")}
+          </p>
+          <h1 className="page-title">
+            {approvals ? t("Arbitrages") : t("Ce qui vous attend")}
+          </h1>
+          <p className="mt-2 text-sm text-muted">
+            {approvals
+              ? t(
+                  "Examinez les preuves, les objections et les conditions avant de trancher.",
+                )
+              : t("Chaque décision avance avec une prochaine action claire.")}
+          </p>
         </div>
-        <dl className="flex gap-4 text-sm">
-          <div>
-            <dt className="text-[11px] font-medium text-muted">{t("Collectifs")}</dt>
-            <dd className="font-semibold tabular-nums text-ink">{mine}/{SESSION_QUOTA}</dd>
-          </div>
-          <div>
-            <dt className="text-[11px] font-medium text-muted">{t("Agents actifs")}</dt>
-            <dd className="font-semibold tabular-nums text-ink">{state.agents.filter((agent) => agent.enabled).length}</dd>
-          </div>
-        </dl>
+        <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs text-muted">
+          <ShieldCheck size={14} className="text-accent" />
+          {t("L’humain garde la main")}
+        </span>
       </div>
-
-      <Panel className="overflow-hidden p-0 md:p-0">
-        <div className="divide-y divide-line">
-          {queue.filter((thread) => thread.status !== "resolved").map((thread) => {
-            const collective = state.collectives.find((item) => item.id === thread.collectiveId);
-            return (
-              <button
-                key={thread.id}
-                type="button"
-                onClick={() => go("dossiers", thread.id)}
-                className="w-full px-4 py-4 text-left transition-colors duration-150 hover:bg-paper md:px-5"
+      {!approvals && (
+        <section className="welcome-panel">
+          <div>
+            <span className="eyebrow text-accent">
+              {t("DE LA QUESTION À LA DÉCISION")}
+            </span>
+            <h2 className="mt-2 text-xl leading-tight">
+              {t("Quelle décision voulez-vous éclairer ?")}
+            </h2>
+            <p className="mt-2 max-w-xl text-sm text-muted">
+              {t(
+                "Posez la question. Confrontez les points de vue. Arrivez au comité avec un dossier prêt à arbitrer.",
+              )}
+            </p>
+          </div>
+          <Button
+            onClick={() => go("instruire")}
+            disabled={!permissions.includes("run")}
+            className="shrink-0"
+          >
+            {t("Préparer une décision")}
+            <ArrowRight size={16} />
+          </Button>
+        </section>
+      )}
+      {!live && (
+        <p className="flex items-center gap-2 text-xs text-muted">
+          <Sparkles size={14} />
+          {t(
+            "Espace de démonstration · données d’exemple, aucun appel IA réel.",
+          )}
+        </p>
+      )}
+      {!permissions.includes("run") && (
+        <p className="rounded-lg bg-info-soft p-3 text-sm text-info">
+          {t(
+            "Votre accès est en lecture seule. Vous pouvez consulter les dossiers et préparer votre comité.",
+          )}
+        </p>
+      )}
+      <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+        {metrics.map((metric) => (
+          <button
+            key={metric.id}
+            onClick={() => setFilter(metric.id)}
+            aria-pressed={filter === metric.id}
+            className={cn(
+              "metric-card",
+              filter === metric.id && "border-accent ring-1 ring-accent",
+            )}
+          >
+            <span className="flex items-center justify-between gap-2 text-xs font-medium text-muted">
+              {metric.label}
+              <metric.icon size={16} className={metric.color} />
+            </span>
+            <strong className="mt-3 block text-3xl font-semibold tabular-nums">
+              {count(metric.id)}
+            </strong>
+            <span className="mt-1 block text-xs text-muted">{metric.hint}</span>
+          </button>
+        ))}
+      </div>
+      <div
+        className={cn(
+          "grid items-start gap-5",
+          !approvals && "xl:grid-cols-[minmax(0,1fr)_300px]",
+        )}
+      >
+        <section className="overflow-hidden rounded-xl border border-line bg-surface">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line p-4">
+            <h2 className="text-sm">
+              {t("Mes dossiers")}{" "}
+              <span className="ml-1 text-muted">{queue.length}</span>
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              <label className="relative">
+                <Search
+                  size={14}
+                  className="pointer-events-none absolute left-3 top-3.5 text-muted"
+                />
+                <input
+                  aria-label={t("Rechercher une décision")}
+                  placeholder={t("Rechercher une décision")}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className={cn(controlClass, "max-w-56 pl-9")}
+                />
+              </label>
+              <select
+                aria-label={t("Filtrer les décisions")}
+                value={filter}
+                onChange={(e) => setFilter(e.target.value as typeof filter)}
+                className={cn(controlClass, "w-auto")}
               >
-                <div className="flex flex-wrap items-center gap-2">
-                  <StatusPill status={thread.status} />
-                  <VerdictPill verdict={thread.verdict} />
-                  <span className="text-xs text-muted">{useCaseLabel(thread.useCase)}</span>
-                </div>
-                <p className="mt-2 text-[15px] font-semibold leading-snug text-ink">{tc(thread.question)}</p>
-                {thread.status === "running" ? (
-                  <div className="mt-3">
-                    <ProgressBar done={thread.progress.done} total={thread.progress.total} active />
-                  </div>
-                ) : null}
-                <p className="mt-2 flex items-center gap-2 text-sm text-muted">
-                  {tc(collective?.name) || t("Collectif")} · {why(thread.status, state.role)}
-                  <ArrowRight size={14} className="ml-auto text-ink-soft" aria-hidden="true" />
-                </p>
-              </button>
-            );
-          })}
-        </div>
-      </Panel>
-
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Panel>
-          <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
-            <ListChecks size={16} className="text-accent" aria-hidden="true" />{t("Prochaine action utile")}</h2>
-          <ul className="mt-4 flex flex-col gap-3 text-sm">
-            {ACTIONS.map((action) => (
-              <li key={action.id} className="rounded-xl border border-line bg-surface p-3">
-                <div className="flex items-start gap-3">
-                  <span className="grid h-10 min-w-10 shrink-0 place-items-center rounded-lg border border-line bg-white px-1.5">
-                    <img src={`${import.meta.env.BASE_URL}${action.logo}`} alt="" className={action.logoClass} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="font-semibold text-ink">{action.title}</p>
-                    <p className="mt-0.5 text-sm text-muted">{action.body}</p>
-                    <button
-                      type="button"
-                      onClick={() => go(action.page)}
-                      className="mt-3 inline-flex min-h-10 items-center rounded-[10px] px-3.5 text-sm font-semibold text-white"
-                      style={{ background: action.color }}
-                    >
-                      {action.label}
-                    </button>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Panel>
-        <Panel>
-          <h2 className="flex items-center gap-2 text-sm font-semibold text-ink">
-            <Milestone size={16} className="text-teal" aria-hidden="true" />{t("Où vit le cycle")}</h2>
-          <p className="mt-1 text-sm text-muted">{t("Huit temps. Une étape ouvre le dossier qui s’y trouve.")}</p>
-          <ol className="mt-2 divide-y divide-line">
-            {CYCLE.map((step, index) => {
-              const tone = STEP_TONE[index] ?? STEP_TONE[0];
-              const Icon = tone.icon;
-              const match = state.threads.find((thread) => thread.stage === step.id);
-              return (
-                <li key={step.id}>
+                <option value="active">{t("En cours")}</option>
+                <option value="all">{t("Tous")}</option>
+                {metrics.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.label}
+                  </option>
+                ))}
+                <option value="failed">{t("Échec")}</option>
+              </select>
+            </div>
+          </div>
+          {queue.length ? (
+            <ul className="divide-y divide-line">
+              {queue.map((thread) => (
+                <li key={thread.id}>
                   <button
-                    type="button"
-                    onClick={() => openStage(step.id)}
-                    className="flex w-full items-center gap-3 py-2.5 text-left"
+                    className="group grid w-full gap-3 p-4 text-left transition-colors hover:bg-paper md:p-5"
+                    onClick={() =>
+                      go(approvals ? "arbitrages" : "overview", thread.id)
+                    }
                   >
-                    <span className="grid size-8 shrink-0 place-items-center rounded-lg" style={{ background: tone.soft, color: tone.color }}>
-                      <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
+                    <div className="flex flex-wrap items-center gap-2">
+                      <StatusPill status={thread.status} />
+                      {thread.gates?.status === "blocked" && (
+                        <span className="text-xs font-medium text-stop">
+                          {t("Porte bloquée")}
+                        </span>
+                      )}
+                      <span className="ml-auto text-xs text-muted">
+                        {formatWhen(thread.updatedAt)}
+                      </span>
+                    </div>
+                    <p className="text-sm font-semibold leading-6">
+                      {tc(thread.question)}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                      <span>
+                        {tc(
+                          state.collectives.find(
+                            (c) => c.id === thread.collectiveId,
+                          )?.name,
+                        )}
+                      </span>
+                      <span aria-hidden>·</span>
+                      <span>
+                        {thread.evidence.length === 1 ? t("1 élément de contexte") : t("{{count}} éléments de contexte", {
+                          count: thread.evidence.length,
+                        })}
+                      </span>
+                      {thread.verdict && (
+                        <VerdictPill verdict={thread.verdict} />
+                      )}
+                    </div>
+                    {thread.status === "running" && (
+                      <ProgressBar
+                        done={thread.progress.done}
+                        total={thread.progress.total}
+                        active
+                      />
+                    )}
+                    <span className="flex items-center justify-between text-xs font-medium text-accent">
+                      {nextDecisionAction(thread, canArbitrate)}
+                      <ArrowRight
+                        size={15}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
                     </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold text-ink">{step.label}</span>
-                      <span className="block truncate text-xs text-muted">{step.hint}</span>
-                    </span>
-                    <span className="shrink-0 text-xs font-medium" style={{ color: tone.color }}>{match ? "Ouvrir" : "Dossiers"}</span>
                   </button>
                 </li>
-              );
-            })}
-          </ol>
-        </Panel>
+              ))}
+            </ul>
+          ) : (
+            <Empty
+              title={t("Aucune décision dans cette vue")}
+              body={
+                search
+                  ? t("Essayez une autre recherche ou un autre statut.")
+                  : t(
+                      "Préparez une décision pour constituer votre premier dossier.",
+                    )
+              }
+              action={
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setSearch("");
+                    setFilter("all");
+                  }}
+                >
+                  {t("Voir tous les dossiers")}
+                </Button>
+              }
+            />
+          )}
+        </section>
+        {!approvals && (
+          <aside className="grid gap-4">
+            <DecisionGuide compact />
+            <Panel>
+              <h2 className="text-sm">{t("Votre comité, vos règles")}</h2>
+              <p className="mt-2 text-xs leading-5 text-muted">
+                {t(
+                  "L’avis des agents est consultatif. Les rôles, les votes et les éventuels vetos restent visibles avant l’arbitrage.",
+                )}
+              </p>
+              <button
+                className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-accent"
+                onClick={() => go("collectifs")}
+              >
+                {t("Voir les comités")}
+                <ArrowRight size={14} />
+              </button>
+            </Panel>
+          </aside>
+        )}
       </div>
-
-      {running.length ? (
-        <p className="text-xs text-muted">
-          {running.length > 1
-            ? t("{{count}} instructions en cours, mise à jour sur cette page. Dernier mouvement : {{when}}.", { count: running.length, when: formatWhen(running[0]?.updatedAt) })
-            : t("{{count}} instruction en cours, mise à jour sur cette page. Dernier mouvement : {{when}}.", { count: running.length, when: formatWhen(running[0]?.updatedAt) })}
-        </p>
-      ) : null}
-      <p className="text-xs text-muted">{t("Statuts suivis :")}{" "}{Object.values(STATUS_LABEL).join(" · ")}.</p>
+      {!approvals && live && workspace.projects.length > 0 && (
+        <Panel>
+          <h2 className="text-sm">{t("Projets en cours")}</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {workspace.projects
+              .filter((p) => p.status !== "closed")
+              .map((project) => (
+                <Button
+                  key={project.id}
+                  variant="secondary"
+                  onClick={() => go("projets")}
+                >
+                  {project.name}
+                  <ArrowRight size={14} />
+                </Button>
+              ))}
+          </div>
+        </Panel>
+      )}
     </div>
   );
-}
-
-function rank(status: string) {
-  if (status === "needs_clarification") return 0;
-  if (status === "awaiting_arbitration") return 1;
-  if (status === "running") return 2;
-  if (status === "failed") return 3;
-  return 4;
-}
-
-function why(status: string, role: string) {
-  if (status === "needs_clarification") return t("Une précision est vraiment attendue");
-  if (status === "awaiting_arbitration") return role === "comex" ? t("Vous pouvez arbitrer") : t("Arbitrage réservé au COMEX");
-  if (status === "running") return t("Le collectif instruit");
-  return t("Clos");
 }

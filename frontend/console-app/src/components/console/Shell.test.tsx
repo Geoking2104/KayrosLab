@@ -19,14 +19,14 @@ describe("console bilingue", () => {
   it("s’affiche en anglais puis bascule en français", async () => {
     render(<ConsoleApp />);
     expect(screen.getAllByText("Today").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Review a decision").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("New decision").length).toBeGreaterThan(0);
     expect(screen.queryByText("Aujourd’hui")).toBeNull();
 
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: "fr" }));
     });
     expect(screen.getAllByText("Aujourd’hui").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Instruire une décision").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Nouvelle décision").length).toBeGreaterThan(0);
     expect(document.documentElement.lang).toBe("fr");
     expect(localStorage.getItem("kayroslab.lang")).toBe("fr");
     expect(screen.getByRole("button", { name: "fr" }).getAttribute("aria-pressed")).toBe("true");

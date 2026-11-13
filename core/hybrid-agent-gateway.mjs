@@ -318,14 +318,14 @@ export class HybridAgentGateway {
     return this.store.listThreads?.({ tenantId, roomId, limit }) || [];
   }
 
-  async _createDecisionThread({ room, run, question, by = null }) {
+  async _createDecisionThread({ room, run, question, context = '', by = null }) {
     const createdAt = now();
     const questions = clarificationQuestions(run);
     const thread = {
       thread_id: makeId('thread'), tenant_id: room.tenant_id, room_id: room.room_id,
       root_run_id: run.run_id, current_run_id: run.run_id,
       status: questions.length ? 'needs_clarification' : 'awaiting_arbitration',
-      question, clarification_questions: questions,
+      question, source_context: String(context || ''), clarification_questions: questions,
       created_by: by, created_at: createdAt, updated_at: createdAt,
     };
     await this.store.createThread(thread);
@@ -365,7 +365,7 @@ export class HybridAgentGateway {
     const run = await this.swarm.run(room.swarm_id, {
       tenantId: scope,
       question: thread.question,
-      context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
+      context: [thread.source_context || (thread.messages || []).find((message) => message.run?.context)?.run.context, `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`].filter(Boolean).join('\n\n'),
       by,
     });
     // Une question déjà posée et à laquelle l'humain a répondu n'est pas reposée :
@@ -457,7 +457,7 @@ export class HybridAgentGateway {
           provider: input.provider, sovereignty: input.sovereignty, model: input.model,
           by: input.by || input.user_id || `${platform}:anonymous`,
         });
-        const thread = await this._createDecisionThread({ room, run, question, by: input.by || input.user_id || `${platform}:anonymous` });
+        const thread = await this._createDecisionThread({ room, run, question, context: input.context, by: input.by || input.user_id || `${platform}:anonymous` });
         const summary = { ...summarizeSwarmRun(run), thread_id: thread.thread_id, clarification_questions: thread.clarification_questions || [] };
         const result = { ignored: false, duplicate: false, room, run, thread, summary };
         await this.store.updateRoomActivity(room.room_id, now());
@@ -793,7 +793,7 @@ export class HybridAgentGateway {
         // Identifiant réservable par l'appelant (mission publique enregistrée avant le lancement).
         thread_id: String(input.thread_id || '').trim() || makeId('thread'), tenant_id: scope, room_id: room.room_id,
         root_run_id: runId, current_run_id: runId, active_run_id: runId,
-        status: THREAD_RUNNING, question, clarification_questions: [],
+        status: THREAD_RUNNING, question, source_context: String(input.context || ''), clarification_questions: [],
         progress: { completed: 0, total: this._agentCount(room) }, error: null,
         ...(input.profile ? { profile: input.profile } : {}),
         ...(input.origin ? { origin: input.origin } : {}),
@@ -871,7 +871,7 @@ export class HybridAgentGateway {
     const dispatched = await this._dispatch({
       kind: 'continue', tenant_id: scope, room_id: room.room_id, thread_id: threadId, run_id: runId,
       platform: room.platform, question: thread.question,
-      context: `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`,
+      context: [thread.source_context || (thread.messages || []).find((message) => message.run?.context)?.run.context, `Fil de décision ${threadId}\n${history}\nRéponse humaine: ${answer}`].filter(Boolean).join('\n\n'),
       provider: provider || null, model: model || null, by,
     });
     return { run_id: runId, queued: dispatched.queued, thread: await this.store.getThread(threadId, { tenantId: scope }) };

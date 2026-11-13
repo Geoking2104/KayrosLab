@@ -49,7 +49,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-[background-color,transform] duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-[background-color,transform] duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45",
         variant === "primary" && "bg-accent text-accent-ink shadow-cta hover:bg-accent-strong",
         variant === "secondary" && "border border-line bg-surface text-ink shadow-none hover:bg-paper",
         variant === "ghost" && "text-ink-soft shadow-none hover:bg-paper-2 hover:text-ink",
@@ -107,12 +107,12 @@ export function VerdictPill({ verdict }: { verdict?: Verdict }) {
 }
 
 export function Panel({ children, className, style }: { children: ReactNode; className?: string; style?: CSSProperties }) {
-  return <section style={style} className={cn("rounded-2xl border border-line bg-surface p-4 shadow-card md:p-5", className)}>{children}</section>;
+  return <section style={style} className={cn("rounded-xl border border-line bg-surface p-4 shadow-card md:p-5", className)}>{children}</section>;
 }
 
 export function Empty({ title, body, action }: { title: string; body: string; action?: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-dashed border-line bg-surface px-5 py-10 text-center">
+    <div className="rounded-xl border border-dashed border-line bg-surface px-5 py-10 text-center">
       <p className="font-medium text-ink">{title}</p>
       <p className="mx-auto mt-2 max-w-md text-sm text-muted">{body}</p>
       {action ? <div className="mt-4 flex justify-center">{action}</div> : null}
@@ -131,7 +131,7 @@ export function Section({ id, title, summary, actions, defaultOpen = true, child
     return !current;
   });
   return (
-    <section className="rounded-2xl border border-line bg-surface shadow-card" data-section={id} data-open={open ? "1" : "0"}>
+    <section className="rounded-xl border border-line bg-surface shadow-card" data-section={id} data-open={open ? "1" : "0"}>
       <div className="flex flex-wrap items-center gap-2 px-4 py-3 md:px-5">
         <button type="button" onClick={toggle} aria-expanded={open} aria-controls={`section-${id}`} className="flex min-w-0 flex-1 items-center gap-2 text-left">
           <ChevronDown size={16} aria-hidden="true" className={cn("shrink-0 text-muted transition-transform", open ? "" : "-rotate-90")} />

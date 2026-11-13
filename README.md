@@ -15,9 +15,9 @@ You state the decision. A committee of specialized agents with opposing duties i
 </div>
 
 <p align="center">
-  <img src="assets/readme/console-company.webp" alt="KayrosLab console company dashboard: active projects, decisions to arbitrate, collectives and library counters" width="100%">
+  <img src="assets/readme/console-decision-home-en.jpg" alt="KayrosLab decision dashboard: prioritized cases, next actions and guided onboarding" width="100%">
 </p>
-<p align="center"><sub><em>The company dashboard: every project with its decision cases, what is waiting for arbitration and what is still under review. Verdicts stay advisory until a human arbitrates.</em></sub></p>
+<p align="center"><sub><em>The decision dashboard: what needs attention, what is under review, and the next useful action. Verdicts stay advisory until a human arbitrates. Screenshot uses demonstration data.</em></sub></p>
 
 ---
 
@@ -49,27 +49,43 @@ The same process runs from the web console, Slack, Microsoft Teams or Discord.
 
 ---
 
-## What the live console shows today
+## Decision-first console
 
-On [kayroslab.com/console](https://www.kayroslab.com/console/), four entries:
+The console opens on **Today**: pending human arbitrations, missing information, active reviews and recorded decisions. Every case has a clear next action, and an AI opinion remains advisory until an authorized member arbitrates.
 
-| Entry | What you do there |
-|-------|-------------------|
-| **Company** | Dashboard per company: active projects, cases to arbitrate, cases under review, collectives, skills and context. *Today* lists the next action per open case. |
-| **Projects** | Each project carries a **decision graph** you edit like an n8n workflow: question → collectives (in parallel or in sequence) → individual agents → consensus gates (threshold, unanimity, veto) → human arbitration → notification → decision. Nodes are dragged freely, and statuses update live while the run moves forward. Context cascades from company to project to node. Stakeholders (decision maker, sponsor, consulted, informed) receive the decision by email. |
-| **Library** | Agents (full form: role, mission, instructions, constraints, tools, model, veto), collectives, versioned **skills** you can restore, and **context sources** (notes, documents, URLs, policies). |
-| **Settings** | Connections (Slack, Teams, Discord, Salesforce via API, CrystalKnows export), **members and roles**, workspace. |
+**Prepare a decision** guides a new user through five steps:
 
-<table>
-<tr>
-<td width="50%"><img src="assets/readme/console-project-graph.webp" alt="Project decision graph with parallel collectives, a veto gate and the decision node"><br><sub>Decision graph: parallel collectives, consensus gate with veto, cascading context.</sub></td>
-<td width="50%"><img src="assets/readme/console-library.webp" alt="Library: versioned skills linked to agents and collectives"><br><sub>Library: versioned skills attached to agents and collectives.</sub></td>
-</tr>
-<tr>
-<td width="50%"><img src="assets/readme/console-members.webp" alt="Members and roles: COMEX, Admin, Contributor, Viewer, email invitations"><br><sub>Members: four roles and email invitations.</sub></td>
-<td width="50%"><img src="assets/api-docs.webp" alt="Public API v1 documentation"><br><sub>Public API v1, to launch a mission from your CRM or automation.</sub></td>
-</tr>
-</table>
+1. **Frame the decision** — the question, expected outcome, decision type and optional target date.
+2. **Add context** — facts, assumptions, constraints and actual source text (paste, `.txt` or `.md`).
+3. **Choose the committee** — review active AI agents, their responsibilities and veto holders.
+4. **Check governance** — inspect the saved voting rule and human permissions before acknowledging them.
+5. **Review and launch** — verify what will be sent, then follow the review in the same case.
+
+<p align="center">
+  <img src="assets/readme/console-onboarding-en.jpg" alt="Five-step guided decision onboarding, starting with the question" width="100%">
+</p>
+
+Drafts are kept in the current browser tab, separately for each account and tenant. A failed launch preserves the draft; only a server-confirmed launch clears it. Reader accounts cannot launch, and repeated clicks cannot submit a second request while one is pending. Demo mode is clearly labelled and does not call an AI model.
+
+| Area | Purpose |
+| --- | --- |
+| **Today** | Prioritized queue, search, status filters and next actions |
+| **Decisions** | Complete cases: question, context, opinions, objections, arbitration and history |
+| **Approvals** | Direct access to cases waiting for human arbitration |
+| **Committees & agents** | Reusable AI committees, agent responsibilities, models and voting rules |
+| **Sources & knowledge** | Reusable context and versioned skills |
+| **Projects & workflows** | Project portfolios, advanced decision graphs and pipeline gates |
+| **Organization** | Company structure and project overview |
+| **Settings** | Connections, human members, permissions and workspace |
+| **Getting started** | A practical explanation of the first decision and workspace setup |
+
+The responsive shell follows the [Nuxt UI dashboard](https://ui.nuxt.com/theme?view=dashboard) visual principles using the existing React/Tailwind stack: slate surfaces, green actions, distinct icons, readable status badges and a mobile navigation menu. The decision journey draws on [Eve](https://github.com/vercel/eve)'s durable context and explicit human-interaction patterns. **The existing KayrosLab AI engine remains in use; this is not an Eve runtime migration.**
+
+English and French use the same flow and controls. User-authored questions and sources are not translated. Existing console hashes and case links remain supported. The detailed eight-stage decision cycle, persona designer, graph editor and channel integrations remain accessible.
+
+Source text is sent to the configured engine only when launched. This flow does not claim to parse PDFs or crawl URLs, and a target date does not schedule a reminder.
+
+See [the full information architecture, user journeys and implementation boundaries](docs/CONSOLE-DECISION-JOURNEY.md).
 
 ### How a project runs
 
@@ -153,9 +169,9 @@ See the existing detailed technical sections further down in this README for API
 ## Get started
 
 1. Open the [console](https://www.kayroslab.com/console/).
-2. Pose one real decision.
-3. Let the collective instruct it.
-4. Arbitrate the verdict.
+2. Choose **Prepare a decision** and complete the five guided steps.
+3. Follow the committee’s review and supply any missing context.
+4. Have an authorized human arbitrate the recommendation.
 
 Or [book a conversation](mailto:contact@kayroslab.com).
 
