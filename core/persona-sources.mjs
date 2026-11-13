@@ -10,6 +10,7 @@
 // every collected item carries its provenance.
 
 import { createHash } from 'node:crypto';
+import { robotsTrace } from './robots-txt.mjs';
 import { SOURCE_POLICY_VERSION, SourcePolicyError, assertCollectionAllowed, evaluateCollection, getSourcePolicy, termsVersionOf } from './source-policy.mjs';
 
 export const PERSONA_PURPOSE = 'person_profiling';
@@ -131,7 +132,26 @@ export function planPersonaUrls(urls = [], { env = process.env } = {}) {
 
 function refusedRecord(r, now) {
   return { url: r.url, final_url: null, status: null, content_type: null, title: null, excerpt: null, sha256: null, bytes: 0, truncated: false,
-    fetched_at: now().toISOString(), error: `politique de collecte : ${r.code} (${r.source}/${r.mode})`, policy_code: r.code };
+    fetched_at: now().toISOString(), error: `politique de collecte : ${r.code} (${r.source}/${r.mode})${r.reason ? ` — ${r.reason}` : ''}`, policy_code: r.code,
+    ...(r.robots ? { robots: r.robots } : {}) };
+}
+
+/**
+ * robots.txt (RFC 9309) des URLs `public_visit` autorisées par la politique
+ * (exigence `requiresRobotsCompliance`). `robots` = RobotsGuard (null : non vérifié).
+ * Renvoie `{ allowed, refused }` ; un refus porte `code: 'robots_disallowed'` et sa trace.
+ */
+export async function checkPersonaRobots(urls = [], { robots = null, env = process.env } = {}) {
+  const plan = planPersonaUrls(urls, { env });
+  if (!robots) return plan;
+  const allowed = []; const refused = [...plan.refused];
+  for (const a of plan.allowed) {
+    if (a.mode !== 'public_visit' || a.decision?.conditions?.requiresRobotsCompliance !== true) { allowed.push(a); continue; }
+    const decision = await robots.check(a.url);
+    if (decision.allowed) allowed.push({ ...a, robots: robotsTrace(decision) });
+    else refused.push({ url: a.url, source: a.source, mode: a.mode, code: decision.code || 'robots_disallowed', error: decision.reason, reason: decision.reason, robots: robotsTrace(decision) });
+  }
+  return { allowed, refused };
 }
 
 // ---------------------------------------------------------------- GitHub (API REST)
@@ -200,8 +220,8 @@ export async function collectGitHubPersonaEvidence(url, { fetchImpl = globalThis
  * d'erreur avec `policy_code` (rien n'est demandé) ; GitHub → API ; pages autorisées →
  * `visit(urls)` (core/public-sources.mjs ou visiteur injecté). Ordre d'entrée conservé.
  */
-export async function visitPersonaUrls(urls = [], { visit, env = process.env, githubFetch = globalThis.fetch, githubToken = '', now = () => new Date() } = {}) {
-  const { allowed, refused } = planPersonaUrls(urls, { env });
+export async function visitPersonaUrls(urls = [], { visit, env = process.env, githubFetch = globalThis.fetch, githubToken = '', now = () => new Date(), robots = null } = {}) {
+  const { allowed, refused } = await checkPersonaRobots(urls, { env, robots });
   const byUrl = new Map();
   for (const r of refused) byUrl.set(r.url, refusedRecord(r, now));
   const pages = allowed.filter((a) => a.mode === 'public_visit');

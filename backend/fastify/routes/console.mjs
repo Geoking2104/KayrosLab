@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { compileEffectiveAgentContext, resolveEffectiveRules } from '../../../core/swarm.mjs';
 import { impersonatorAgentDefinition, personaClues, impersonatorGuardrails, normalizeImpersonator } from '../../../core/impersonator.mjs';
 import { visitPublicSources } from '../../../core/public-sources.mjs';
-import { collectionProvenance, evaluatePersonaCollection, planPersonaUrls, policyRefusalBody, visitPersonaUrls } from '../../../core/persona-sources.mjs';
+import { checkPersonaRobots, collectionProvenance, evaluatePersonaCollection, planPersonaUrls, policyRefusalBody, visitPersonaUrls } from '../../../core/persona-sources.mjs';
+import { defaultRobotsGuard } from '../../../core/robots-txt.mjs';
 import { designPersonaTurn } from '../../../core/persona-designer.mjs';
 import { buildPersonaOverview } from '../../../core/persona-overview.mjs';
 import { personaToolPolicy, validatePersonaTools } from '../../../core/persona-tools.mjs';
@@ -376,6 +377,36 @@ function profileImportsRefusal(app, imports = []) {
   return null;
 }
 
+/**
+ * Garde robots.txt (RFC 9309) des visites de pages : `ctx.robotsGuard` si fourni (null la
+ * coupe) ; sinon la garde partagée du processus. Quand un visiteur ou un fetch Crystal est
+ * injecté (tests, réseau simulé), la garde n'est active que si `ctx.robotsGuard` est fourni.
+ */
+function pageRobots(ctx) {
+  if (ctx.robotsGuard !== undefined) return ctx.robotsGuard;
+  return typeof ctx.publicSourceVisitor === 'function' ? null : defaultRobotsGuard;
+}
+function crystalRobots(ctx) {
+  if (ctx.robotsGuard !== undefined) return ctx.robotsGuard || false;
+  return ctx.crystalPublicFetch ? false : defaultRobotsGuard;
+}
+function visitsDisabled(ctx) {
+  return String(process.env.KAYROS_PUBLIC_SOURCES_VISIT || '').toLowerCase() === 'off' && typeof ctx.publicSourceVisitor !== 'function';
+}
+const refusedView = (list) => list.map(({ url, source, mode, code, robots }) => ({ url, source, mode, code, ...(robots ? { robots } : {}) }));
+/** robots.txt des sources publiques d'une persona à créer : refus → `{ refusal, refused_urls }`. */
+async function personaRobotsRefusal(app, urls = []) {
+  const ctx = app.kayrosContext;
+  const robots = pageRobots(ctx);
+  if (!urls?.length || !robots || visitsDisabled(ctx)) return null;
+  const { refused } = await checkPersonaRobots(urls, { robots, env: personaPolicyEnv(app) });
+  if (!refused.length) return null;
+  return {
+    refusal: { code: refused[0].code, error: `Sources publiques refusées par robots.txt : ${refused.map((r) => r.url).join(', ')}`, details: { source: refused[0].source, mode: refused[0].mode } },
+    refused_urls: refusedView(refused),
+  };
+}
+
 /** Environnement de la politique : jeton X injecté par le contexte (tests) prioritaire. */
 function personaPolicyEnv(app) {
   const ctx = app.kayrosContext;
@@ -435,7 +466,7 @@ async function enrichFromRequest(app, me, reply, d) {
     else if (d.crystal_public_url) {
       // Lecture réseau : réservée aux rôles qui gèrent les agents.
       if (!await manager(app, me, reply)) return null;
-      const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: app.kayrosContext.crystalPublicFetch || globalThis.fetch });
+      const fetcher = new CrystalPublicProfileFetcher({ fetchImpl: app.kayrosContext.crystalPublicFetch || globalThis.fetch, robots: crystalRobots(app.kayrosContext) });
       const page = await fetcher.fetch(d.crystal_public_url);
       crystal = profileFromCrystalPublic(page.html, { imported_by: me.email, source_url: page.url });
     } else if (d.crystal_export) {
@@ -496,6 +527,8 @@ async function enrichFromRequest(app, me, reply, d) {
       agent: agentAttributesFromProfile(p, { role: p.professional_context?.current_role || null, company: p.professional_context?.company || null }),
     };
   } catch (error) {
+    // robots.txt refusé (page publique CrystalKnows) : refus de politique → 403.
+    if (error?.name === 'SourcePolicyError') return sendPolicyRefusal(reply, error, { warnings, ...(error.details?.robots ? { robots: error.details.robots } : {}) });
     const status = /refusé ou expiré/.test(error.message) ? 424 : /HTTP 404|aucun profil public/.test(error.message) ? 404 : /HTTP 429/.test(error.message) ? 429 : /crédits/.test(error.message) ? 402 : 400;
     reply.code(status).send({ error: surface(error.message), warnings }); return null;
   }
@@ -598,7 +631,7 @@ async function visitPersonaSources(app, urls = []) {
   // Politique de collecte : URLs refusées tracées sans requête, GitHub par API REST, pages par la visite SSRF.
   const visit = typeof ctx.publicSourceVisitor === 'function' ? ctx.publicSourceVisitor : (list) => visitPublicSources(list);
   return visitPersonaUrls(urls, {
-    visit, env: personaPolicyEnv(app),
+    visit, env: personaPolicyEnv(app), robots: pageRobots(ctx),
     githubFetch: ctx.githubFetch || globalThis.fetch, githubToken: ctx.GITHUB_TOKEN || process.env.GITHUB_TOKEN || '',
   });
 }
@@ -1105,7 +1138,7 @@ export default async function consoleRoute(app) {
       const scan = scanTextInputs({ clues: d.clues });
       if (scan.blocked) return reply.code(422).send(specialCategoryError(scan.findings));
     }
-    const sourcesRefusal = impersonatorSourcesRefusal(app, d);
+    const sourcesRefusal = impersonatorSourcesRefusal(app, d) || await personaRobotsRefusal(app, d.public_sources);
     if (sourcesRefusal) return sendPolicyRefusal(reply, sourcesRefusal.refusal, { refused_urls: sourcesRefusal.refused_urls });
     try {
       await app.kayrosContext.engine.swarm.hydrateTenant?.(me.tenantId);
@@ -1232,17 +1265,19 @@ export default async function consoleRoute(app) {
     const urls = current.metadata.impersonator.public_sources || [];
     if (!urls.length) return reply.code(400).send({ error: 'aucune source publique enregistrée' });
     // Persona existante : les URLs refusées sont tracées (policy_code) ; tout refusé → 403.
-    const plan = planPersonaUrls(urls, { env: personaPolicyEnv(app) });
+    // robots.txt compris (RFC 9309) : même règle partielle / totale.
+    const plan = visitsDisabled(app.kayrosContext) ? planPersonaUrls(urls, { env: personaPolicyEnv(app) })
+      : await checkPersonaRobots(urls, { robots: pageRobots(app.kayrosContext), env: personaPolicyEnv(app) });
     if (!plan.allowed.length) {
       return sendPolicyRefusal(reply, { code: plan.refused[0].code, error: 'Aucune source publique autorisée par la politique de collecte.', details: { source: plan.refused[0].source, mode: plan.refused[0].mode } },
-        { refused_urls: plan.refused.map(({ url, source, mode, code }) => ({ url, source, mode, code })) });
+        { refused_urls: refusedView(plan.refused) });
     }
     try {
       const evidence = await visitPersonaSources(app, urls);
       let agent = attachPublicEvidence(app, me, current, evidence);
       agent = swarm.updateAgent(agent.agent_id, { metadata: { ...(agent.metadata || {}), persona_clues: personaClues(agent.human_profile) } }, { tenantId: me.tenantId, by: me.email });
       await swarm.flush?.();
-      return { agent: agentView(agent), public_evidence: agent.metadata.impersonator.public_evidence, refused_urls: plan.refused.map(({ url, source, mode, code }) => ({ url, source, mode, code })) };
+      return { agent: agentView(agent), public_evidence: agent.metadata.impersonator.public_evidence, refused_urls: refusedView(plan.refused) };
     } catch (error) { return reply.code(400).send({ error: surface(error.message) }); }
   });
 
@@ -1254,7 +1289,7 @@ export default async function consoleRoute(app) {
     const d = parsed.data;
     // Politique de collecte vérifiée pour tous les membres avant toute création.
     for (const member of d.members) {
-      const refusal = impersonatorSourcesRefusal(app, member);
+      const refusal = impersonatorSourcesRefusal(app, member) || await personaRobotsRefusal(app, member.public_sources);
       if (refusal) return sendPolicyRefusal(reply, refusal.refusal, { member: member.name, refused_urls: refusal.refused_urls });
     }
     try {

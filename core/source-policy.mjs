@@ -26,7 +26,7 @@
 // `public_visit` = visite unitaire d'une URL désignée par un humain (pas de
 // parcours de liens, garde SSRF, taille et délai bornés) : distincte du `scrape`.
 
-export const SOURCE_POLICY_VERSION = '2026-11-13';
+export const SOURCE_POLICY_VERSION = '2026-11-13.1';
 export const COLLECTION_MODES = Object.freeze(['api', 'scrape', 'public_visit', 'import', 'none']);
 export const COLLECTION_PURPOSES = Object.freeze(['topic_signal', 'person_profiling']);
 
@@ -82,6 +82,8 @@ export const SOURCE_POLICIES = deepFreeze({
           publicOnly: true,
           aggregatedOnly: true,
           respectRobotsTxt: true,
+          // Aucun scraper n'est codé ; s'il l'est, il passe par RobotsGuard (core/robots-txt.mjs).
+          requiresRobotsCompliance: true,
           noPersonalDataResale: true,
           minDelayMs: 10_000,
         },
@@ -203,7 +205,7 @@ export const SOURCE_POLICIES = deepFreeze({
       api: { allowed: true, purposes: ['person_profiling'], scopesByPurpose: { person_profiling: ['profile'] }, tokenEnv: 'CRYSTALKNOWS_API_TOKEN' },
       scrape: { allowed: false },
       // Page publique de profil, une URL crystalknows.com/p/<slug> à la fois.
-      public_visit: { allowed: true, purposes: ['person_profiling'], scopesByPurpose: { person_profiling: ['public_profile'] }, conditions: { singleUrl: true, hostAllowlist: ['www.crystalknows.com'] } },
+      public_visit: { allowed: true, purposes: ['person_profiling'], scopesByPurpose: { person_profiling: ['public_profile'] }, conditions: { singleUrl: true, hostAllowlist: ['www.crystalknows.com'], requiresRobotsCompliance: true, robotsUserAgent: 'KayrosLabBot', robotsFailClosed: true } },
       import: { allowed: true, purposes: ['person_profiling'], scopesByPurpose: { person_profiling: ['json_export', 'public_page_html', 'profile_data'] }, conditions: { providedByUser: true } },
       none: { allowed: true },
     },
@@ -299,7 +301,9 @@ export const SOURCE_POLICIES = deepFreeze({
         allowed: true,
         purposes: ['person_profiling'],
         scopesByPurpose: { person_profiling: ['professional_page'] },
-        conditions: { designatedByHuman: true, noCrawl: true, ssrfGuard: true, maxBytes: 512 * 1024, timeoutMs: 8000, respectRobotsTxt: 'à durcir (cahier v4)' },
+        // robots.txt (RFC 9309) vérifié avant chaque requête : jeton KayrosLabBot puis « * »,
+        // robots.txt injoignable (5xx, 429, réseau, délai) → refus ; Crawl-delay appliqué.
+        conditions: { designatedByHuman: true, noCrawl: true, ssrfGuard: true, maxBytes: 512 * 1024, timeoutMs: 8000, respectRobotsTxt: true, requiresRobotsCompliance: true, robotsUserAgent: 'KayrosLabBot', robotsFailClosed: true },
         rateLimit: { maxRequestsPerDecision: 30, domainFailureThreshold: 2 },
       },
       import: { allowed: false },

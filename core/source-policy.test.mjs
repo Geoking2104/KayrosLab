@@ -14,7 +14,7 @@ const refused = (args, code) => {
 };
 
 test('registre figé, versionné : sources de signaux et sources persona', () => {
-  assert.equal(SOURCE_POLICY_VERSION, '2026-11-13');
+  assert.equal(SOURCE_POLICY_VERSION, '2026-11-13.1');
   assert.deepEqual(COLLECTION_MODES, ['api', 'scrape', 'public_visit', 'import', 'none']);
   assert.deepEqual(listSources().sort(), ['crystalknows', 'discord', 'github', 'gmail', 'import', 'linkedin', 'manual', 'outlook', 'reddit', 'user_text', 'web', 'x']);
   assert.ok(Object.isFrozen(SOURCE_POLICIES));
@@ -72,7 +72,7 @@ test('github : API préférée, signaux de sujet seulement', () => {
 
 test('github scrape : public, agrégé, robots.txt, rythme lent, jamais de profilage', () => {
   const ok = assertCollectionAllowed({ source: 'github', mode: 'scrape', scope: 'topics', env: {} });
-  assert.deepEqual({ ...ok.conditions }, { publicOnly: true, aggregatedOnly: true, respectRobotsTxt: true, noPersonalDataResale: true, minDelayMs: 10000 });
+  assert.deepEqual({ ...ok.conditions }, { publicOnly: true, aggregatedOnly: true, respectRobotsTxt: true, requiresRobotsCompliance: true, noPersonalDataResale: true, minDelayMs: 10000 });
   refused({ source: 'github', mode: 'scrape', purpose: 'person_profiling', scope: 'repositories', env: {} }, 'purpose_not_allowed');
   refused({ source: 'github', mode: 'scrape', scope: 'users', env: {} }, 'scope_not_allowed');
 });

@@ -12,6 +12,8 @@
 // d'écriture est un indice marqué comme tel, jamais une mesure.
 import { canonicalDisc, discArchetype, descriptifFromDisc, normalizeDescriptif } from './personality-descriptif.mjs';
 import { mergeHumanProfiles, normalizeHumanProfile } from './personality.mjs';
+import { KAYROS_BOT_USER_AGENT, defaultRobotsGuard, robotsTrace } from './robots-txt.mjs';
+import { SourcePolicyError } from './source-policy.mjs';
 
 const now = () => new Date().toISOString();
 const uniq = (items, max = 12) => [...new Set((items || []).map((x) => String(x ?? '').trim()).filter(Boolean))].slice(0, max);
@@ -132,18 +134,28 @@ export function profileFromCrystalPublic(input, { imported_by = null, source_url
  * requête anonyme identifiée, aucun cookie ni jeton : un profil privé renvoie une erreur.
  */
 export class CrystalPublicProfileFetcher {
-  constructor({ fetchImpl = globalThis.fetch, userAgent = 'KayrosLab-profile-import/1.0 (+consented persona import)', timeoutMs = 10000 } = {}) {
-    this.fetchImpl = fetchImpl; this.userAgent = userAgent; this.timeoutMs = timeoutMs;
+  // robots : RobotsGuard (core/robots-txt.mjs) ; false le désactive (tests unitaires seulement).
+  constructor({ fetchImpl = globalThis.fetch, userAgent = KAYROS_BOT_USER_AGENT, timeoutMs = 10000, robots = defaultRobotsGuard } = {}) {
+    this.fetchImpl = fetchImpl; this.userAgent = userAgent; this.timeoutMs = timeoutMs; this.robots = robots;
   }
   async fetch(value) {
     const { url } = crystalPublicUrl(value);
     if (typeof this.fetchImpl !== 'function') throw new Error('crystalknows: fetch indisponible');
+    let robots = null;
+    if (this.robots) {
+      // robots.txt de www.crystalknows.com (RFC 9309) avant la page : refus → SourcePolicyError.
+      const decision = await this.robots.check(url);
+      robots = robotsTrace(decision);
+      if (!decision.allowed) throw new SourcePolicyError('robots_disallowed', `crystalknows: ${decision.reason}`, { source: 'crystalknows', mode: 'public_visit', scope: 'public_profile', robots });
+      const slot = await this.robots.acquire(url, decision);
+      if (!slot.ok) throw new SourcePolicyError(slot.code, `crystalknows: Crawl-delay de ${decision.crawl_delay_s} s non respectable`, { source: 'crystalknows', mode: 'public_visit', scope: 'public_profile', robots });
+    }
     const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
     const timer = ctrl ? setTimeout(() => ctrl.abort(), this.timeoutMs) : null;
     try {
       const res = await this.fetchImpl(url, { headers: { 'user-agent': this.userAgent, accept: 'text/html' }, redirect: 'follow', signal: ctrl?.signal });
       if (!res.ok) throw new Error(`crystalknows: page publique indisponible (HTTP ${res.status})`);
-      return { url, html: await res.text() };
+      return { url, html: await res.text(), robots };
     } finally { if (timer) clearTimeout(timer); }
   }
 }
