@@ -162,6 +162,11 @@ The public pitch stays buyer-facing. Architects and builders can go deeper:
 - Console API under `/v1/console/*`: companies, projects and their graphs, pipelines (`/projects/:id/pipelines`, `resume`, `approve`, `cancel`), skills, contexts, members and invitations. Details in [`docs/CONSOLE-HYBRID-AGENTS.md`](docs/CONSOLE-HYBRID-AGENTS.md)
 - Durable async runs with cancellation (`AbortSignal` propagated down to the LLM call) and multi-process-safe recovery
 
+<p align="center">
+  <img src="assets/readme/api-docs.webp" alt="KayrosLab public API v1 documentation: quick start with curl, webhook signature and the OpenAPI 3.1 reference" width="100%">
+</p>
+<p align="center"><sub><em>Public API v1 documentation at api.kayroslab.com/docs: quick start, signed webhooks and the OpenAPI 3.1 reference.</em></sub></p>
+
 See the existing detailed technical sections further down in this README for API, connectors and architecture.
 
 ---
