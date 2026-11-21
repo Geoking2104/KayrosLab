@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
-const PAGES = ['index', 'integrations', 'personas', 'sales-oracle', 'security-governance', 'developers', 'demo'];
+const PAGES = ['index', 'integrations', 'personas', 'sales-oracle', 'security-governance', 'developers', 'demo', 'realisations'];
 
 test('aucune icône SVG ne pointe vers un document entier (<use href> sans ancre)', async () => {
   for (const name of PAGES.flatMap((p) => [`${p}.html`, `${p}.fr.html`])) {
