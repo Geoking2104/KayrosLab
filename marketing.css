@@ -729,3 +729,12 @@ p.mock-cap.center{padding:14px 0 0}
   .home .nav-in .brand{flex:none}
   .home .nav-right>.btn{display:none}
 }
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+  padding-block: 2rem 4rem;
+}
+.project-list h2 { font-size: 1.5rem; margin: 0 0 .6rem; }
+.project-list h2 a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
