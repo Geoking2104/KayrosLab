@@ -201,3 +201,36 @@ bloquante avant tout dÃ©ploiement :
 - run: node salon/scripts/publish_gate.mjs --skip-build
 - run: node --test tests/salon-speech.test.mjs
 ```
+
+## Cercle : persistance, partage, TTL
+
+Le cercle (convives, question, tours, prises) est enregistré côté serveur sous un
+identifiant anonyme généré par le navigateur (`salon-client-v1`, UUID).
+
+- `GET /v1/salon/room?id=<uuid>` renvoie `{ room, updatedAt, storage }` ;
+  `POST` avec `{ room }` remplace l'état et renvoie le nouvel `updatedAt`.
+- `storage` vaut `file` quand `KAYROS_SALON_DIR` pointe sur un volume persistant
+  (`/opt/kayroslab/data/salon` en production), `memory` sinon — dans ce dernier
+  cas les cercles disparaissent à chaque redémarrage.
+- **Partage multi-appareils** : l'URL `…/salon/?c=<uuid>` adopte l'identifiant
+  reçu (il est écrit dans `localStorage`), ce qui ouvre le même cercle sur un
+  autre navigateur. Le bouton « Copier le lien du cercle » copie cette URL
+  (`navigator.clipboard`, repli sur un `prompt`).
+- **Synchronisation entre onglets** : la page relit le cercle au retour de focus
+  (`focus`, `visibilitychange`) et toutes les 15 s ; elle applique la version
+  distante seulement si son `updatedAt` est plus récent et qu'aucun tour n'est en
+  cours (`busy`). Une question en cours de frappe n'est jamais écrasée.
+- **TTL** : `SALON_ROOM_TTL_DAYS` (30 jours par défaut) purge au démarrage puis
+  toutes les 6 h les cercles dont `updatedAt` (ou la date du fichier) dépasse le
+  délai. Les cercles sont anonymes : aucun préfixe n'est filtré.
+- Limite connue : l'écriture est « dernier arrivé gagne » ; deux onglets qui
+  modifient le même cercle au même instant peuvent perdre un tour. Un compte
+  (ou un `If-Match` sur `updatedAt`) serait nécessaire pour une fusion.
+
+## Variables d'environnement utiles
+
+| Variable | Effet |
+| --- | --- |
+| `KAYROS_SALON_DIR` | Répertoire des cercles (`file`) ; sinon mémoire |
+| `SALON_ROOM_TTL_DAYS` | Durée de vie d'un cercle inactif (30 par défaut) |
+| `SALON_EMBED_MODEL` | Modèle dense (`bge-m3`) |
