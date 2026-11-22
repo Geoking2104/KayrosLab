@@ -41,15 +41,23 @@ function words(text) {
 /** Une prise est une thèse courte, pas une citation ni du balisage.
  * Le modèle renvoie parfois une phrase entre guillemets, en anglais, ou avec
  * des astérisques Markdown : on retombe alors sur la première phrase du texte. */
-function cleanPrise(prise, text, lang) {
+function cleanPrise(prise, text, lang, sources = []) {
   const p = String(prise || '').replace(/^[*_>\s]+/, '').replace(/[*_\s]+$/, '').replace(/\s+/g, ' ').trim();
   const detected = p ? classifyLang(p) : '';
+  // Une phrase recopiée d'un passage est une citation, pas une thèse.
+  const fromSource = p.length >= 20 && (sources || []).some((s) => quoteMatches(p, s));
   const usable = p.length >= 12 && p.length <= 240
-    && !/[«»"]/.test(p) && !/[*_#]/.test(p)
+    && !/[«»"]/.test(p) && !/[*_#]/.test(p) && !fromSource
     && (!detected || !lang || detected === lang);
   if (usable) return p;
-  const first = String(text || '').split(/(?<=[.!?])\s+/)[0] || '';
-  return first.replace(/[«»"*_#]/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
+  // Sinon : les premières phrases de la réplique, assez longues pour une thèse.
+  const sentences = String(text || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+  let out = '';
+  for (const s of sentences) {
+    out = out ? `${out} ${s}` : s;
+    if (out.length >= 60) break;
+  }
+  return out.replace(/[«»"*_#]/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
 }
 
 function relevance(query, text) {
@@ -597,7 +605,7 @@ export default async function salonSpeakRoutes(app) {
         return {
           ok: true,
           text,
-          prise: cleanPrise(prise, text, userLang),
+          prise: cleanPrise(prise, text, userLang, sources),
           citations: [],
           engine: 'llm',
           provider: result ? result.provider || null : null,
@@ -660,7 +668,7 @@ export default async function salonSpeakRoutes(app) {
     return {
       ok: true,
       text,
-      prise: cleanPrise(prise, text, userLang),
+      prise: cleanPrise(prise, text, userLang, sources),
       citations: citationsOut,
       engine: 'llm',
       provider: result.provider || null,
