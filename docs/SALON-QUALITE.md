@@ -265,3 +265,30 @@ Les ellipses sont vérifiées par fragments ordonnés.
 `/health` expose `llm.provider` (configuré) et `llm.effective` /
 `llm.lastFallback` (ce qui a réellement répondu). Un repli NVIDIA ? Mistral est
 visible sans consulter les logs ; aucune clé n'est exposée.
+
+## Deux régimes de parole (citation ou doctrine)
+
+Le pack publié fait ~270 phrases par auteur : le mot d'une question peut y
+manquer (« devoir » chez Kant, « mariage » chez Austen). Un contrat unique
+« cite exactement ou tais-toi » produisait un aveu dans 5 cas sur 8.
+
+- **Régime strict** — le concept de la question figure dans les passages
+  retenus : la réplique doit contenir une citation exacte, vérifiée.
+- **Régime de doctrine** — le concept manque : la réplique parle depuis les
+  passages les plus proches (similarité `bge-m3`), **sans guillemets**. Toute
+  citation produite est quand même vérifiée ; si elle est fausse, la réponse est
+  refusée. L'API renvoie alors `degraded: "doctrine sans citation"`.
+- **Salvage** — réplique valide sauf l'absence de citation : elle est conservée
+  (`engine: "llm"`, `degraded: "citation absente"`) au lieu d'être remplacée par
+  un gabarit.
+
+La « prise » est nettoyée : ni citation recopiée d'un passage, ni balisage
+Markdown, ni phrase dans une autre langue, ni fragment trop court ; sinon elle
+est dérivée des premières phrases de la réplique.
+
+Mesure sur 8 auteurs (API live) : **0/8 ? 6–7/8** répliques produites par le
+modèle (la variation vient du modèle). Les replis restants sont des citations
+inventées ou l'emploi d'une œuvre d'un autre auteur — refusés à dessein.
+
+`providerFallback` est renvoyé à part : `degraded` décrit la réplique, pas la
+santé du fournisseur.
