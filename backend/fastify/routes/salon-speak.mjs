@@ -542,6 +542,8 @@ export default async function salonSpeakRoutes(app) {
       prise = (pm ? pm[1] : '').replace(/^["«]+|["»]+$/g, '').trim();
       text = (bm || '').trim();
       if (!text) text = raw.replace(/^\s*PRISE\s*:.*$/im, '').trim();
+      // Le modèle recopie parfois la question dans PRISE : ce n'est pas une thèse.
+      if (prise && canonical(prise) === canonical(question)) prise = '';
     }
 
     const otherTitles = (cat.authors || [])
@@ -648,8 +650,12 @@ export default async function salonSpeakRoutes(app) {
       citations: citationsOut,
       engine: 'llm',
       provider: result.provider || null,
-      // Honnêteté : une réplique de doctrine n'est pas ancrée sur une citation.
-      degraded: result.degraded || (!strong && citationsOut.length === 0 ? 'doctrine sans citation' : null),
+      // `degraded` décrit la réplique ; le repli de fournisseur reste à part.
+      degraded: (typeof result.degraded === 'string' ? result.degraded : null)
+        || (!strong && citationsOut.length === 0 ? 'doctrine sans citation' : null),
+      providerFallback: result.degraded && result.degraded.reason === 'provider_fallback'
+        ? { from: result.degraded.from || null, to: result.degraded.to || null, error: String(result.degraded.error || '').slice(0, 160) }
+        : null,
       to: toward === 'author' ? toName : 'hôte',
       retrieval: { mode, coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), index: index ? { sentences: index.count, model: index.model } : null, ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
     };
