@@ -528,9 +528,11 @@ export default async function salonSpeakRoutes(app) {
     }
 
     const dense = indexPool.length ? null : await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, withPrincipal);
-    const reranked = (indexPool.length || dense) ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
+    const reranked = indexPool.length
+      ? await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, indexPool.slice(0, 12))
+      : (dense ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal));
     const selected = (indexPool.length
-      ? indexPool
+      ? (reranked && reranked.length ? reranked : indexPool)
       : (dense && dense.length ? dense : (reranked && reranked.length ? reranked : withPrincipal))).slice(0, 5);
     const mode = indexPool.length ? 'hybrid+index' : (dense ? 'hybrid+dense' : 'hybrid');
     const cleaned = selected.filter((x) => x.sentence);
