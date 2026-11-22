@@ -29,6 +29,45 @@ export default async function salonRoutes(app) {
     }
   });
 
+  /* Cercle anonyme : un identifiant aléatoire par navigateur permet de
+   * retrouver la table, la question et le fil de prises après rechargement.
+   * L'identifiant est un UUID non devinable ; pas de listing, pas de compte. */
+  const ROOM_CLIENT = /^[a-z0-9-]{16,64}$/;
+  const roomClient = (req) => {
+    const id = String(req.query?.id || '').trim();
+    return ROOM_CLIENT.test(id) ? id : null;
+  };
+
+  app.get('/v1/salon/room', {
+    config: { rateLimit: { max: 120, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    const id = roomClient(req);
+    if (!id) return reply.code(400).send({ ok: false, error: 'identifiant invalide' });
+    const store = app.kayrosContext.salonState;
+    if (!store) return reply.code(503).send({ ok: false, error: 'salon indisponible' });
+    const state = await store.get(`anon-${id}`);
+    const room = state && Array.isArray(state.rooms) ? state.rooms[0] : null;
+    return { ok: true, room: room || null };
+  });
+
+  app.put('/v1/salon/room', {
+    config: { rateLimit: { max: 60, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    const id = roomClient(req);
+    if (!id) return reply.code(400).send({ ok: false, error: 'identifiant invalide' });
+    const store = app.kayrosContext.salonState;
+    if (!store) return reply.code(503).send({ ok: false, error: 'salon indisponible' });
+    const room = req.body?.room;
+    if (!room || typeof room !== 'object') return reply.code(400).send({ ok: false, error: 'room requis' });
+    try {
+      const state = await store.put(`anon-${id}`, { rooms: [{ ...room, id: 'table' }] });
+      return { ok: true, room: state.rooms[0] || null };
+    } catch (error) {
+      if (error.code === 'SALON_TOO_LARGE') return reply.code(413).send({ ok: false, error: error.message });
+      return reply.code(400).send({ ok: false, error: error.message });
+    }
+  });
+
   /* Relais texte Gutenberg (import d'auteur du domaine public).
    * Les .txt de gutenberg.org n'envoient pas d'en-tête CORS : le navigateur
    * ne peut pas les lire en direct. Ce relais lit le texte côté serveur et

@@ -52,6 +52,22 @@
   ];
 
   const MAX_SEATS = 4;
+  const CLIENT_KEY = 'salon-client-v1';
+  const CLIENT_ID = (() => {
+    try {
+      let id = localStorage.getItem(CLIENT_KEY);
+      if (!/^[a-z0-9-]{16,64}$/.test(id || '')) {
+        id = crypto.randomUUID
+          ? crypto.randomUUID()
+          : `c-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+        localStorage.setItem(CLIENT_KEY, id);
+      }
+      return id;
+    } catch {
+      return `c-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+    }
+  })();
+  let saveTimer = null;
 
   /* ------------------------------------------------------------- outils */
 
@@ -446,6 +462,37 @@
     ui.seatCount.textContent = `${state.seated.length}/${MAX_SEATS}`;
   }
 
+  /** Sauvegarde serveur du cercle (identifiant anonyme par navigateur). */
+  function saveRoom() {
+    if (!state.catalog) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      const room = {
+        id: 'table',
+        name: 'Salon',
+        question: state.question,
+        authorIds: state.seated.map((a) => a.id),
+        turns: state.turns.map((t) => ({
+          authorId: t.author.id,
+          text: t.text,
+          prise: t.prise,
+          citations: (t.citations || []).slice(0, 4).map((c) => ({ work: c.work, text: c.text })),
+          origin: 'agent',
+          grounded: true,
+          act: t.act,
+          to: t.toName || 'l’hôte',
+          createdAt: new Date().toISOString(),
+        })),
+      };
+      fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ room }),
+        signal: AbortSignal.timeout(8000),
+      }).catch(() => {});
+    }, 300);
+  }
+
   /* ------------------------------------------------------------- actions */
 
   function seat(id) {
@@ -457,12 +504,14 @@
     localStorage.setItem('salon-seated-v2', JSON.stringify(state.seated.map((a) => a.id)));
     renderSeated(); renderCandidates(); updateControls();
     setStatus(`${author.name} prend place.`);
+    saveRoom();
   }
 
   function unseat(id) {
     state.seated = state.seated.filter((a) => a.id !== id);
     localStorage.setItem('salon-seated-v2', JSON.stringify(state.seated.map((a) => a.id)));
     renderSeated(); renderCandidates(); updateControls();
+    saveRoom();
   }
 
   function addTurn(turn) {
@@ -470,6 +519,7 @@
     renderThread(true);
     renderEvolution();
     updateControls();
+    saveRoom();
   }
 
   async function callAPI(author, act, toward, toName) {
@@ -554,6 +604,7 @@
     state.round = 0;
     ui.question.value = '';
     renderQuestion(); renderThread(); renderEvolution(); updateControls(); setStatus('prêt');
+    saveRoom();
   }
 
   async function init() {
@@ -563,10 +614,49 @@
       state.manifest = manifest;
       const published = new Set(Object.keys((manifest && manifest.authors) || {}));
       const byId = new Map((catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
+
+      let remote = null;
+      try {
+        const res = await fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, { signal: AbortSignal.timeout(8000) });
+        if (res.ok) {
+          const data = await res.json();
+          remote = data.room || null;
+        }
+      } catch { remote = null; }
+
       let seatedIds = [];
       try { seatedIds = JSON.parse(localStorage.getItem('salon-seated-v2') || '[]'); } catch { seatedIds = []; }
       if (!Array.isArray(seatedIds) || !seatedIds.length) seatedIds = ['voltaire', 'rousseau', 'montaigne'];
       state.seated = seatedIds.map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
+
+      if (remote && Array.isArray(remote.authorIds)) {
+        const seated = remote.authorIds.map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
+        if (seated.length) {
+          state.seated = seated;
+          state.question = String(remote.question || '');
+          ui.question.value = state.question;
+          state.turns = (remote.turns || []).map((t) => {
+            const author = byId.get(t.authorId);
+            if (!author) return null;
+            const to = String(t.to || 'l’hôte');
+            const toward = to && !['l’hôte', 'hôte', 'user', 'la table'].includes(to) ? 'author' : 'user';
+            return {
+              author,
+              text: t.text || '',
+              prise: t.prise || '',
+              citations: t.citations || [],
+              act: t.act || 'reponse',
+              toward,
+              toName: to,
+              engine: 'restauré',
+              provider: '',
+              degraded: '',
+              retrieval: null,
+            };
+          }).filter(Boolean).slice(-500);
+        }
+      }
+
       if (!state.seated.length) {
         const first = [...byId.values()].slice(0, 2);
         state.seated = first;
@@ -589,6 +679,7 @@
     state.turns = [];
     state.round = 0;
     renderQuestion(); renderThread(); renderEvolution();
+    saveRoom();
     runRound('open');
   });
   ui.debate.addEventListener('click', () => runRound('debate'));
