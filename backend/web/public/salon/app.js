@@ -685,8 +685,5 @@
   ui.debate.addEventListener('click', () => runRound('debate'));
   ui.reset.addEventListener('click', resetDebate);
 
-  // Diagnostic temporaire (retiré après validation).
-  window.__salon = { state, saveRoom };
-
   init();
 })();
