@@ -24,7 +24,7 @@ test('GitHub Pages construit et publie la console sous /console/', async () => {
   assert.match(workflow, /backend\/web\/public\/console\/\. deploy\/console\//);
 });
 
-test('GitHub Pages ne publie plus /salon/ et rien ne le lie', async () => {
+test('GitHub Pages publie /salon/ sans le lier depuis les accueils', async () => {
   const [workflow, english, french, notFound, vercel] = await Promise.all([
     read('.github/workflows/deploy-positionning-pages.yml'),
     read('index.html'),
@@ -32,7 +32,8 @@ test('GitHub Pages ne publie plus /salon/ et rien ne le lie', async () => {
     read('404.html'),
     read('vercel.json'),
   ]);
-  assert.doesNotMatch(workflow, /salon/i);
+  assert.match(workflow, /deploy\/salon/);
+  assert.match(workflow, /salon\/kb/);
   assert.doesNotMatch(english, /href="\/salon|href="#salon"|class="salon-charter"/);
   assert.doesNotMatch(french, /href="\/salon|href="#salon"|class="salon-charter"/);
   assert.doesNotMatch(notFound, /salon/i); // URL inconnue (dont /salon) : renvoi vers l'accueil
