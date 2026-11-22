@@ -282,9 +282,49 @@ export class RoutingPolicy {
   }
 }
 
+/** Registre runtime minimal : quel fournisseur a réellement répondu, et quel
+ * repli a eu lieu. `/health` annonçait le fournisseur *configuré* (nvidia)
+ * alors que les répliques venaient de Mistral : ce registre rend l'écart
+ * visible sans exposer de secret ni appeler le réseau. */
+const runtime = {
+  effective: null,
+  effectiveAt: null,
+  lastFallback: null,
+};
+
+function noteLlmResult(res) {
+  if (!res || typeof res !== 'object' || !res.provider) return;
+  runtime.effective = res.provider;
+  runtime.effectiveAt = new Date().toISOString();
+  const degraded = res.degraded;
+  if (degraded && degraded.reason === 'provider_fallback') {
+    runtime.lastFallback = {
+      from: degraded.from || null,
+      to: degraded.to || null,
+      error: String(degraded.error || '').slice(0, 240) || null,
+      at: runtime.effectiveAt,
+    };
+  }
+}
+
+/** Instantané sans secret, pour /health. */
+export function llmRuntimeSnapshot() {
+  return {
+    effective: runtime.effective,
+    effectiveAt: runtime.effectiveAt,
+    lastFallback: runtime.lastFallback ? { ...runtime.lastFallback } : null,
+  };
+}
+
+/** Réservé aux tests : remet le registre à zéro. */
+export function resetLlmRuntime() {
+  runtime.effective = null;
+  runtime.effectiveAt = null;
+  runtime.lastFallback = null;
+}
+
 export class KayrosLLM {
-  constructor(providers, policy = new RoutingPolicy(), { breakerConfig, retry } = {}) {
-    this.providers = providers;
+  constructor(providers, policy = new RoutingPolicy(), { breakerConfig, retry } = {}) {    this.providers = providers;
     this.policy = policy;
     this._breakers = new Map();
     this._breakerConfig = breakerConfig ?? { failureThreshold: 3, coolDownMs: 30000 };
@@ -298,6 +338,12 @@ export class KayrosLLM {
   }
 
   async complete(rawReq, opts = {}) {
+    const res = await this._completeWithHarness(rawReq, opts);
+    noteLlmResult(res);
+    return res;
+  }
+
+  async _completeWithHarness(rawReq, opts = {}) {
     // Harnais global : bloc système injecté dans tout appel, complétion notée,
     // puis (mode enforce) 1 relance corrective et blocage si toujours non conforme.
     const mode = harnessMode(rawReq);

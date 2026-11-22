@@ -1,5 +1,6 @@
 import { llmBindings } from '../lib/context.mjs';
 import { describeLlmConfig, resolveLlmConfig } from '../lib/llm-config.mjs';
+import { llmRuntimeSnapshot } from '../../../core/kayros-llm.mjs';
 
 export default async function healthRoute(app) {
   app.get('/health', async () => {
@@ -13,6 +14,9 @@ export default async function healthRoute(app) {
       // chaîne de repli et bornes 429. Aucune clé, seulement des booléens.
       llm: {
         ...describeLlmConfig(llmConfig),
+        // Ce qui a *réellement* répondu, distinct du fournisseur configuré :
+        // un repli NVIDIA → Mistral reste invisible autrement.
+        ...llmRuntimeSnapshot(),
         // Liaison par composant : tout `engine-local` signale un écart avec `provider` (ENF-09).
         components: llmBindings(ctx.engine, ctx.llm),
       },

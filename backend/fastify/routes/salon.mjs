@@ -1,4 +1,5 @@
 import { emptySalonState } from '../lib/salon-state.mjs';
+import { mergeRooms } from '../lib/salon-merge.mjs';
 import { z } from 'zod';
 
 export default async function salonRoutes(app) {
@@ -59,9 +60,29 @@ export default async function salonRoutes(app) {
     if (!store) return reply.code(503).send({ ok: false, error: 'salon indisponible' });
     const room = req.body?.room;
     if (!room || typeof room !== 'object') return reply.code(400).send({ ok: false, error: 'room requis' });
+    // `intent: 'replace'` = action destructive explicite (recommencer, retirer
+    // un convive) ; sinon on fusionne quand un autre client a écrit entre-temps.
+    const intent = req.body?.intent === 'replace' ? 'replace' : 'append';
+    const baseUpdatedAt = typeof req.body?.baseUpdatedAt === 'string' ? req.body.baseUpdatedAt : null;
     try {
-      const state = await store.put(`anon-${id}`, { rooms: [{ ...room, id: 'table' }] });
-      return { ok: true, room: state.rooms[0] || null, updatedAt: state.updatedAt || null };
+      const current = await store.get(`anon-${id}`);
+      const currentRoom = current && Array.isArray(current.rooms) ? current.rooms[0] : null;
+      const conflicted = Boolean(
+        currentRoom
+        && baseUpdatedAt
+        && current.updatedAt
+        && Date.parse(current.updatedAt) > Date.parse(baseUpdatedAt),
+      );
+      const merged = conflicted && intent === 'append' && (currentRoom.turns || []).length > 0;
+      const payload = merged ? mergeRooms(currentRoom, room) : { ...room, id: 'table' };
+      const state = await store.put(`anon-${id}`, { rooms: [payload] });
+      return {
+        ok: true,
+        merged,
+        room: state.rooms[0] || null,
+        updatedAt: state.updatedAt || null,
+        storage: store.dir ? 'file' : 'memory',
+      };
     } catch (error) {
       if (error.code === 'SALON_TOO_LARGE') return reply.code(413).send({ ok: false, error: error.message });
       return reply.code(400).send({ ok: false, error: error.message });
@@ -73,7 +94,7 @@ export default async function salonRoutes(app) {
   const purgeRooms = () => {
     const store = app.kayrosContext.salonState;
     if (!store || typeof store.purge !== 'function') return;
-    store.purge({ ttlMs: ttlDays * 24 * 60 * 60 * 1000 })
+    store.purge({ ttlMs: ttlDays * 24 * 60 * 60 * 1000, prefix: 'anon-' })
       .then((removed) => { if (removed) app.log.info({ removed }, 'salon: cercles expirés purgés'); })
       .catch(() => {});
   };

@@ -74,6 +74,7 @@
     }
   })();
   let saveTimer = null;
+  let pendingIntent = 'append';
   let lastSync = 0;
 
   /* ------------------------------------------------------------- outils */
@@ -470,10 +471,15 @@
   }
 
   /** Sauvegarde serveur du cercle (identifiant anonyme par navigateur). */
-  function saveRoom() {
+  function saveRoom(intent = 'append') {
     if (!state.catalog) return;
+    // Une action destructive (recommencer, retirer un convive) doit remplacer
+    // l'état distant, pas fusionner : sinon le tour retiré reviendrait.
+    if (intent === 'replace') pendingIntent = 'replace';
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => {
+    saveTimer = setTimeout(async () => {
+      const intentNow = pendingIntent;
+      pendingIntent = 'append';
       const room = {
         id: 'table',
         name: 'Salon',
@@ -494,10 +500,19 @@
       fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ room }),
+        body: JSON.stringify({
+          room,
+          intent: intentNow,
+          baseUpdatedAt: lastSync ? new Date(lastSync).toISOString() : null,
+        }),
         signal: AbortSignal.timeout(8000),
       }).then((r) => r.json()).then((data) => {
-        if (data && data.updatedAt) lastSync = Date.parse(data.updatedAt) || lastSync;
+        if (!data) return;
+        if (data.updatedAt) lastSync = Date.parse(data.updatedAt) || lastSync;
+        if (data.merged && data.room) {
+          applyRemoteRoom(data.room, data.updatedAt, { keepDraft: true });
+          setStatus('cercle fusionné avec un autre onglet');
+        }
       }).catch(() => {});
     }, 300);
   }
@@ -585,7 +600,7 @@
     state.seated = state.seated.filter((a) => a.id !== id);
     localStorage.setItem('salon-seated-v2', JSON.stringify(state.seated.map((a) => a.id)));
     renderSeated(); renderCandidates(); updateControls();
-    saveRoom();
+    saveRoom('replace');
   }
 
   function addTurn(turn) {
@@ -678,7 +693,7 @@
     state.round = 0;
     ui.question.value = '';
     renderQuestion(); renderThread(); renderEvolution(); updateControls(); setStatus('prêt');
-    saveRoom();
+    saveRoom('replace');
   }
 
   async function init() {
@@ -735,7 +750,9 @@
     state.turns = [];
     state.round = 0;
     renderQuestion(); renderThread(); renderEvolution();
-    saveRoom();
+    // Nouvelle question = nouvelle table : les tours de l'ancienne question ne
+    // doivent pas revenir par fusion depuis un autre onglet.
+    saveRoom('replace');
     runRound('open');
   });
   ui.debate.addEventListener('click', () => runRound('debate'));

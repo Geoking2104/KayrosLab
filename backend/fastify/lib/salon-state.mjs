@@ -209,8 +209,8 @@ export class SalonStateStore {
   }
 
   /** Purge les cercles plus vieux que ttlMs (mémoire + disque).
-   * Les cercles sont anonymes (UUID navigateur) : `prefix` reste optionnel,
-   * un préfixe `anon-` ne correspondrait à aucun identifiant réel.
+   * Les clés du store sont préfixées « anon- » par la route ; `prefix` permet
+   * de ne purger que ce namespace si d'autres données y sont ajoutées un jour.
    */
   async purge({ ttlMs = 30 * 24 * 60 * 60 * 1000, prefix = null } = {}) {
     const cutoff = Date.now() - ttlMs;

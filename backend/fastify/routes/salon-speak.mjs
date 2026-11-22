@@ -13,6 +13,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { canonical, quoteMatches, verifyQuotes } from '../lib/salon-quotes.mjs';
 
 const MIRROR = fileURLToPath(new URL('../../web/public/salon/', import.meta.url));
 const INDEX_DIR = fileURLToPath(new URL('../data/salon-emb/', import.meta.url));
@@ -28,18 +29,6 @@ const STOP = new Set([
 
 function json(file, fallback = null) {
   try { return JSON.parse(readFileSync(file, 'utf8')); } catch { return fallback; }
-}
-
-function canonical(text) {
-  return String(text || '')
-    .replace(/\u00A0/g, ' ')
-    .replace(/[\u2018\u2019\u02BC]/g, "'")
-    .replace(/[\u201C\u201D\u201E\u00AB\u00BB]/g, '"')
-    .replace(/[\u2013\u2014\u2010\u2011]/g, '-')
-    .replace(/\u2026/g, '...')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .toLowerCase();
 }
 
 function words(text) {
@@ -267,46 +256,6 @@ function composeFallback({ author, question, passage, act, toName, lang = 'fr' }
     ? `${who}, je te l’accorde en partie. Pourtant la question demeure, et « ${work} » la déplace : « ${quote} » Ce n’est pas ta personne que je presse, c’est ce que cette phrase ne peut plus soutenir. Ainsi la difficulté n’est pas dans les mots, mais dans ce que ta thèse engage.`
     : `${who}, voici ce que je peux signer. Dans « ${work} » : « ${quote} » Cela répond à ce que tu viens de poser, et cela suffit pour aujourd’hui : la suite est à qui voudra objecter. Je m’en tiens là, sans ajouter de maxime inutile. La question reste ouverte, et je la rends à la table.`;
   return { prise, text, work, quote };
-}
-
-function verifyQuotes(text, author, sources, otherTitles = []) {
-  const known = (author.works || []).map((w) => canonical(w.title)).filter(Boolean);
-  const citations = [];
-  const errors = [];
-  const unmatched = [];
-  for (const m of String(text || '').matchAll(/[«"“]([^«»"“”]{20,400})[»"”]/g)) {
-    const q = m[1].trim();
-    const cq = canonical(q);
-    if (known.some((t) => t === cq || t.includes(cq) || cq.includes(t.split(':')[0]))) continue;
-    const hit = sources.find((s) => quoteMatches(q, s));
-    if (hit) citations.push({ text: q, source: hit });
-    else { errors.push(`citation non vérifiée : « ${q.slice(0, 60)}… »`); unmatched.push(q); }
-  }
-  // Une œuvre d'un autre auteur glissée dans la bouche du convive est une
-  // hallucination d'attribution : on la refuse, même hors guillemets.
-  const body = canonical(text);
-  for (const t of otherTitles) {
-    if (t.length >= 8 && body.includes(t)) errors.push(`œuvre d'un autre auteur : « ${t} »`);
-  }
-  return { citations, errors, unmatched };
-}
-
-/** Correspondance exacte, préfixe, ou citation elliptique « … » par fragments. */
-function quoteMatches(q, source) {
-  const cq = canonical(q).replace(/\s*\.\.\.\s*$/, '');
-  const cs = canonical(source);
-  if (cs.includes(cq)) return true;
-  const parts = cq.split(/\s*\.\.\.\s*/).filter((p) => p.length >= 12);
-  if (parts.length > 1) {
-    let pos = 0;
-    for (const part of parts) {
-      const at = cs.indexOf(part, pos);
-      if (at < 0) return false;
-      pos = at + part.length;
-    }
-    return true;
-  }
-  return cq.length >= 20 && cs.startsWith(cq);
 }
 
 const INDEX_CACHE = new Map();
