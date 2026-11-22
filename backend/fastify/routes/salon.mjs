@@ -47,7 +47,7 @@ export default async function salonRoutes(app) {
     if (!store) return reply.code(503).send({ ok: false, error: 'salon indisponible' });
     const state = await store.get(`anon-${id}`);
     const room = state && Array.isArray(state.rooms) ? state.rooms[0] : null;
-    return { ok: true, room: room || null };
+    return { ok: true, room: room || null, updatedAt: (state && state.updatedAt) || null };
   });
 
   app.post('/v1/salon/room', {
@@ -61,12 +61,26 @@ export default async function salonRoutes(app) {
     if (!room || typeof room !== 'object') return reply.code(400).send({ ok: false, error: 'room requis' });
     try {
       const state = await store.put(`anon-${id}`, { rooms: [{ ...room, id: 'table' }] });
-      return { ok: true, room: state.rooms[0] || null };
+      return { ok: true, room: state.rooms[0] || null, updatedAt: state.updatedAt || null };
     } catch (error) {
       if (error.code === 'SALON_TOO_LARGE') return reply.code(413).send({ ok: false, error: error.message });
       return reply.code(400).send({ ok: false, error: error.message });
     }
   });
+
+  /* Purge périodique des cercles anonymes (TTL configurable, 30 j par défaut). */
+  const ttlDays = Number(process.env.SALON_ROOM_TTL_DAYS || 30);
+  const purgeRooms = () => {
+    const store = app.kayrosContext.salonState;
+    if (!store || typeof store.purge !== 'function') return;
+    store.purge({ ttlMs: ttlDays * 24 * 60 * 60 * 1000, prefix: 'anon-' })
+      .then((removed) => { if (removed) app.log.info({ removed }, 'salon: cercles anonymes purgés'); })
+      .catch(() => {});
+  };
+  purgeRooms();
+  const purgeTimer = setInterval(purgeRooms, 6 * 60 * 60 * 1000);
+  if (purgeTimer.unref) purgeTimer.unref();
+  app.addHook('onClose', async () => clearInterval(purgeTimer));
 
   /* Relais texte Gutenberg (import d'auteur du domaine public).
    * Les .txt de gutenberg.org n'envoient pas d'en-tête CORS : le navigateur

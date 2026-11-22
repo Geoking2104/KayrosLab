@@ -109,6 +109,8 @@ h1 {
   margin: 10px 0 4px;
 }
 
+.table-actions { margin: 2px 0 8px; }
+
 .seat {
   display: grid;
   grid-template-columns: 46px minmax(0, 1fr) 28px;

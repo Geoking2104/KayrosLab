@@ -31,6 +31,7 @@
     tensionLabel: $('tensionLabel'),
     prises: $('prises'),
     turnCount: $('turnCount'),
+    share: $('share'),
   };
 
   const state = {
@@ -53,8 +54,13 @@
 
   const MAX_SEATS = 4;
   const CLIENT_KEY = 'salon-client-v1';
+  const SHARED_ID = new URL(window.location.href).searchParams.get('c');
   const CLIENT_ID = (() => {
     try {
+      if (SHARED_ID && /^[a-z0-9-]{16,64}$/.test(SHARED_ID)) {
+        localStorage.setItem(CLIENT_KEY, SHARED_ID);
+        return SHARED_ID;
+      }
       let id = localStorage.getItem(CLIENT_KEY);
       if (!/^[a-z0-9-]{16,64}$/.test(id || '')) {
         id = crypto.randomUUID
@@ -68,6 +74,7 @@
     }
   })();
   let saveTimer = null;
+  let lastSync = 0;
 
   /* ------------------------------------------------------------- outils */
 
@@ -489,8 +496,71 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ room }),
         signal: AbortSignal.timeout(8000),
+      }).then((r) => r.json()).then((data) => {
+        if (data && data.updatedAt) lastSync = Date.parse(data.updatedAt) || lastSync;
       }).catch(() => {});
     }, 300);
+  }
+
+  /** Applique un cercle serveur (init et synchronisation entre onglets). */
+  function applyRemoteRoom(remote, updatedAt, { scroll = false } = {}) {
+    if (!remote || !state.catalog) return false;
+    const published = new Set(Object.keys((state.manifest && state.manifest.authors) || {}));
+    const byId = new Map((state.catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
+    const seated = (remote.authorIds || []).map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
+    if (!seated.length) return false;
+    state.seated = seated;
+    state.question = String(remote.question || '');
+    ui.question.value = state.question;
+    state.turns = (remote.turns || []).map((t) => {
+      const author = byId.get(t.authorId);
+      if (!author) return null;
+      const to = String(t.to || 'l’hôte');
+      const toward = to && !['l’hôte', 'hôte', 'user', 'la table'].includes(to) ? 'author' : 'user';
+      return {
+        author,
+        text: t.text || '',
+        prise: t.prise || '',
+        citations: t.citations || [],
+        act: t.act || 'reponse',
+        toward,
+        toName: to,
+        engine: 'restauré',
+        provider: '',
+        degraded: '',
+        retrieval: null,
+      };
+    }).filter(Boolean).slice(-500);
+    if (updatedAt) lastSync = Date.parse(updatedAt) || lastSync;
+    renderSeated(); renderCandidates(); renderQuestion(); renderThread(scroll); renderEvolution(); updateControls();
+    return true;
+  }
+
+  /** Relit le cercle si un autre onglet/appareil l'a modifié. */
+  async function refreshRoom() {
+    if (state.busy || document.hidden || !state.catalog) return;
+    try {
+      const res = await fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, { signal: AbortSignal.timeout(6000) });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.room) return;
+      const at = Date.parse(data.updatedAt || 0);
+      if (!Number.isFinite(at) || at <= lastSync) return;
+      if (applyRemoteRoom(data.room, data.updatedAt)) setStatus('cercle synchronisé');
+    } catch { /* hors ligne */ }
+  }
+
+  async function shareRoom() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('c', CLIENT_ID);
+    url.searchParams.delete('v');
+    const text = url.toString();
+    try {
+      await navigator.clipboard.writeText(text);
+      setStatus('Lien du cercle copié.');
+    } catch {
+      window.prompt('Copiez le lien du cercle :', text);
+    }
   }
 
   /* ------------------------------------------------------------- actions */
@@ -616,11 +686,13 @@
       const byId = new Map((catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
 
       let remote = null;
+      let remoteAt = null;
       try {
         const res = await fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, { signal: AbortSignal.timeout(8000) });
         if (res.ok) {
           const data = await res.json();
           remote = data.room || null;
+          remoteAt = data.updatedAt || null;
         }
       } catch { remote = null; }
 
@@ -630,31 +702,7 @@
       state.seated = seatedIds.map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
 
       if (remote && Array.isArray(remote.authorIds)) {
-        const seated = remote.authorIds.map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
-        if (seated.length) {
-          state.seated = seated;
-          state.question = String(remote.question || '');
-          ui.question.value = state.question;
-          state.turns = (remote.turns || []).map((t) => {
-            const author = byId.get(t.authorId);
-            if (!author) return null;
-            const to = String(t.to || 'l’hôte');
-            const toward = to && !['l’hôte', 'hôte', 'user', 'la table'].includes(to) ? 'author' : 'user';
-            return {
-              author,
-              text: t.text || '',
-              prise: t.prise || '',
-              citations: t.citations || [],
-              act: t.act || 'reponse',
-              toward,
-              toName: to,
-              engine: 'restauré',
-              provider: '',
-              degraded: '',
-              retrieval: null,
-            };
-          }).filter(Boolean).slice(-500);
-        }
+        applyRemoteRoom(remote, remoteAt, { scroll: true });
       }
 
       if (!state.seated.length) {
@@ -671,6 +719,10 @@
   }
 
   ui.search.addEventListener('input', renderCandidates);
+  if (ui.share) ui.share.addEventListener('click', shareRoom);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshRoom(); });
+  window.addEventListener('focus', refreshRoom);
+  setInterval(refreshRoom, 20000);
   ui.form.addEventListener('submit', (event) => {
     event.preventDefault();
     const q = ui.question.value.trim();

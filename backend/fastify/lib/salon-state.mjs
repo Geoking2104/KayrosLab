@@ -207,4 +207,34 @@ export class SalonStateStore {
     try { await fs.chmod(path, 0o600); } catch { /* systèmes sans chmod */ }
     return state;
   }
+
+  /** Purge les cercles anonymes plus vieux que ttlMs (mémoire + disque). */
+  async purge({ ttlMs = 30 * 24 * 60 * 60 * 1000, prefix = 'anon-' } = {}) {
+    const cutoff = Date.now() - ttlMs;
+    let removed = 0;
+    for (const [key, state] of this._mem) {
+      if (!key.startsWith(prefix)) continue;
+      const at = Date.parse((state && state.updatedAt) || 0);
+      if (Number.isFinite(at) && at < cutoff) {
+        this._mem.delete(key);
+        removed += 1;
+      }
+    }
+    if (!this.dir) return removed;
+    const fs = await this._mod();
+    let files = [];
+    try { files = await fs.readdir(this.dir); } catch { return removed; }
+    for (const file of files) {
+      if (!file.startsWith(prefix) || !file.endsWith('.json')) continue;
+      const path = `${this.dir}/${file}`;
+      try {
+        const st = await fs.stat(path);
+        if (st.mtimeMs < cutoff) {
+          await fs.unlink(path);
+          removed += 1;
+        }
+      } catch { /* fichier déjà supprimé */ }
+    }
+    return removed;
+  }
 }
