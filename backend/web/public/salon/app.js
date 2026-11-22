@@ -208,13 +208,15 @@
 
     if (!turn) turn = composeLocal({ author: state.author, question, passages, act: 'reponse' });
 
+    const deg = turn.degraded;
+    const degText = typeof deg === 'string' ? deg : (deg && (deg.reason || deg.to)) || '';
     addMessage({
       role: 'author',
       name: state.author.name,
       text: turn.text,
       prise: turn.prise,
       citations: turn.citations,
-      meta: [turn.engine, turn.provider, turn.degraded].filter(Boolean).join(' · '),
+      meta: [turn.engine, turn.provider, degText].filter(Boolean).join(' · '),
     });
     state.history.push({ name: state.author.name, text: turn.text, prise: turn.prise });
     state.busy = false;

@@ -130,7 +130,7 @@ function composeFallback({ author, question, passage, act, toName }) {
   return { prise, text, work, quote };
 }
 
-function verifyQuotes(text, author, sources) {
+function verifyQuotes(text, author, sources, otherTitles = []) {
   const known = (author.works || []).map((w) => canonical(w.title)).filter(Boolean);
   const citations = [];
   const errors = [];
@@ -141,6 +141,12 @@ function verifyQuotes(text, author, sources) {
     const hit = sources.find((s) => canonical(s).includes(cq));
     if (hit) citations.push({ text: q, source: hit });
     else errors.push(`citation non vérifiée : « ${q.slice(0, 60)}… »`);
+  }
+  // Une œuvre d'un autre auteur glissée dans la bouche du convive est une
+  // hallucination d'attribution : on la refuse, même hors guillemets.
+  const body = canonical(text);
+  for (const t of otherTitles) {
+    if (t.length >= 8 && body.includes(t)) errors.push(`œuvre d'un autre auteur : « ${t} »`);
   }
   return { citations, errors };
 }
@@ -228,9 +234,17 @@ export default async function salonSpeakRoutes(app) {
     }
 
     const sources = cleaned.map((x) => x.sentence);
-    const checked = text ? verifyQuotes(text, author, sources) : { citations: [], errors: ['réponse vide'] };
+    const otherTitles = (cat.authors || [])
+      .filter((a) => a.id !== authorId)
+      .flatMap((a) => (a.works || []).map((w) => canonical(w.title)))
+      .filter((t) => t && t.length >= 8)
+      .filter((t) => !(author.works || []).some((w) => canonical(w.title).includes(t)));
+    const checked = text ? verifyQuotes(text, author, sources, otherTitles) : { citations: [], errors: ['réponse vide'] };
     const wordCount = (text.match(/[\p{L}\p{N}'’-]+/gu) || []).length;
-    const valid = text && checked.errors.length === 0 && wordCount >= 40 && wordCount <= 240;
+    const strong = cleaned.length > 0 && cleaned[0].score >= 0.08;
+    const grounded = checked.citations.length > 0;
+    const valid = text && checked.errors.length === 0 && wordCount >= 40 && wordCount <= 240
+      && (!strong || grounded);
 
     if (!valid) {
       const passage = cleaned[0] || null;
@@ -242,7 +256,7 @@ export default async function salonSpeakRoutes(app) {
         citations: passage ? [{ work: passage.work, text: passage.quote }] : [],
         engine: 'fallback',
         provider: result ? result.provider || null : null,
-        degraded: isMock ? 'mock' : (checked.errors[0] || 'hors contrat'),
+        degraded: isMock ? 'mock' : (checked.errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
       };
     }
 
