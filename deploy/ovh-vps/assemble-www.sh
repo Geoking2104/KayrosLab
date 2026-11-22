@@ -78,6 +78,13 @@ fi
 if [[ -f "${APP_DIR}/backend/web/public/salon/index.html" ]]; then
   mkdir -p "${stage}/salon"
   cp -a "${APP_DIR}/backend/web/public/salon/." "${stage}/salon/"
+  # Cache-busting dérivé du contenu (même règle que publish_pages.mjs) :
+  # un ?v= figé laisserait le navigateur servir un ancien app.js.
+  if command -v sha256sum >/dev/null 2>&1; then
+    js_ver=$(sha256sum "${stage}/salon/app.js" | cut -c1-8)
+    css_ver=$(sha256sum "${stage}/salon/style.css" | cut -c1-8)
+    sed -i "s/app\.js?v=[A-Za-z0-9._-]*/app.js?v=${js_ver}/g; s/style\.css?v=[A-Za-z0-9._-]*/style.css?v=${css_ver}/g" "${stage}/salon/index.html"
+  fi
 else
   echo "AVERTISSEMENT : salon statique absent — /salon/ 404." >&2
 fi
