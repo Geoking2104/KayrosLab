@@ -208,12 +208,16 @@ export class SalonStateStore {
     return state;
   }
 
-  /** Purge les cercles anonymes plus vieux que ttlMs (mémoire + disque). */
-  async purge({ ttlMs = 30 * 24 * 60 * 60 * 1000, prefix = 'anon-' } = {}) {
+  /** Purge les cercles plus vieux que ttlMs (mémoire + disque).
+   * Les cercles sont anonymes (UUID navigateur) : `prefix` reste optionnel,
+   * un préfixe `anon-` ne correspondrait à aucun identifiant réel.
+   */
+  async purge({ ttlMs = 30 * 24 * 60 * 60 * 1000, prefix = null } = {}) {
     const cutoff = Date.now() - ttlMs;
+    const match = (key) => (prefix ? key.startsWith(prefix) : true);
     let removed = 0;
     for (const [key, state] of this._mem) {
-      if (!key.startsWith(prefix)) continue;
+      if (!match(key)) continue;
       const at = Date.parse((state && state.updatedAt) || 0);
       if (Number.isFinite(at) && at < cutoff) {
         this._mem.delete(key);
@@ -225,7 +229,7 @@ export class SalonStateStore {
     let files = [];
     try { files = await fs.readdir(this.dir); } catch { return removed; }
     for (const file of files) {
-      if (!file.startsWith(prefix) || !file.endsWith('.json')) continue;
+      if (!file.endsWith('.json') || !match(file.slice(0, -5))) continue;
       const path = `${this.dir}/${file}`;
       try {
         const st = await fs.stat(path);

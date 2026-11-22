@@ -73,8 +73,8 @@ export default async function salonRoutes(app) {
   const purgeRooms = () => {
     const store = app.kayrosContext.salonState;
     if (!store || typeof store.purge !== 'function') return;
-    store.purge({ ttlMs: ttlDays * 24 * 60 * 60 * 1000, prefix: 'anon-' })
-      .then((removed) => { if (removed) app.log.info({ removed }, 'salon: cercles anonymes purgés'); })
+    store.purge({ ttlMs: ttlDays * 24 * 60 * 60 * 1000 })
+      .then((removed) => { if (removed) app.log.info({ removed }, 'salon: cercles expirés purgés'); })
       .catch(() => {});
   };
   purgeRooms();
