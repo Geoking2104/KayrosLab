@@ -1,0 +1,3381 @@
+{
+  "authorId": "montaigne",
+  "kbVersion": "montaigne@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.248Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Essais",
+      "sentences": 70
+    },
+    {
+      "title": "Journal of Travels in Italy",
+      "sentences": 65
+    },
+    {
+      "title": "Essays of Michel de Montaigne — Volume 01",
+      "sentences": 68
+    },
+    {
+      "title": "Essays of Michel de Montaigne — Volume 02",
+      "sentences": 69
+    }
+  ],
+  "passages": [
+    {
+      "id": "montaigne.p0001",
+      "w": "Essais",
+      "s": "In those other ordinary friendships, you are to walk with bridle in your hand, with prudence and circumspection, for in them the knot is not so sure that a man may not half suspect it will slip.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0002",
+      "w": "Essais",
+      "s": "The premeditation of death is the premeditation of liberty; he who has learned to die has unlearned to serve.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0003",
+      "w": "Essais",
+      "s": "At the first twitch of the gout it signifies much to be called Sir and Your Majesty!",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0004",
+      "w": "Essais",
+      "s": "This pernicious licence in respect to the distribution of praise, has formerly been confined in its area of operations; and it may be the reason why poetry once lost favour with the more judicious.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0005",
+      "w": "Essais",
+      "s": "But compare Chambers’s “Domestic Annals of Scotland,” 2d ed.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0006",
+      "w": "Essais",
+      "s": "A great conqueror of past times boasts that he gave his enemies as great an inducement to love him, as his friends.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0007",
+      "w": "Essais",
+      "s": "If I could have found him, I might perhaps have pursued the gentler course, being uncertain of your views; but I entreat you nevertheless to feel no manner of doubt that I refuse to carry out any wishes of yours, and that, where your commands are concerned, I know no distinction of person or matter.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0008",
+      "w": "Essais",
+      "s": "I have dedicated it to the particular commodity of my kinsfolk and friends, so that, having lost me (which they must do shortly), they may therein recover some traits of my conditions and humours, and by that means preserve more whole, and more life-like, the knowledge they had of me.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0009",
+      "w": "Essais",
+      "s": "68.]--by this means attributing to his quality the praise that only belongs to merit, and that of right is due to supreme desert, though lodged in the lowest and most inferior subject.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0010",
+      "w": "Essais",
+      "s": "Where things not born lie, that never being had.”] Seneca, Tyoa.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0011",
+      "w": "Essais",
+      "s": "The ancient Florentines were so far from seeking to obtain any advantage over their enemies by surprise, that they always gave them a month’s warning before they drew their army into the field, by the continual tolling of a bell they called Martinella.--[After St.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0012",
+      "w": "Essais",
+      "s": "I see even those who are pertinent enough, who would, but cannot stop short in their career; for whilst they are seeking out a handsome period to conclude with, they go on at random, straggling about upon impertinent trivialities, as men staggering upon weak legs.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0013",
+      "w": "Essais",
+      "s": "It should seem that the nature of wit is to have its operation prompt and sudden, and that of judgment to have it more deliberate and more slow.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0014",
+      "w": "Essais",
+      "s": "57, ex Pacuvio] The so celebrated art of divination amongst the Tuscans took its beginning thus: A labourer striking deep with his cutter into the earth, saw the demigod Tages ascend, with an infantine aspect, but endued with a mature and senile wisdom.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0015",
+      "w": "Essais",
+      "s": "The ceremony of the interview of princes.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0016",
+      "w": "Essais",
+      "s": "The severe punishment the people of Rome inflicted upon those who fled from the battle of Cannae, and those who ran away with Aeneius Fulvius at his defeat, did not extend to death.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0017",
+      "w": "Essais",
+      "s": "8.] Such as have been well rubbed in some skirmish, may yet, all wounded and bloody as they are, be brought on again the next day to charge; but such as have once conceived a good sound fear of the enemy, will never be made so much as to look him in the face.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0018",
+      "w": "Essais",
+      "s": "The other and meaner pleasure, if it could deserve this fair name, it ought to be by way of competition, and not of privilege.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0019",
+      "w": "Essais",
+      "s": "And from them it is that we have borrowed our expression, “The late Monsieur such and such a one.”--[“feu Monsieur un tel.”] Peradventure, as the saying is, the term we have lived is worth our money.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0020",
+      "w": "Essais",
+      "s": "The deadest deaths are the best: “‘Miser, O miser,’ aiunt, ‘omnia ademit Una dies infesta mihi tot praemia vitae.’” [“‘Wretch that I am,’ they cry, ‘one fatal day has deprived me of all joys of life.’”--Lucretius, iii.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0021",
+      "w": "Essais",
+      "s": "Death is the term of all things.” --Hor., Ep., i.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0022",
+      "w": "Essais",
+      "s": "If you have made your profit of life, you have had enough of it; go your way satisfied.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0023",
+      "w": "Essais",
+      "s": "Pontanus and others report the like metamorphosis to have happened in these latter days in Italy.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0024",
+      "w": "Essais",
+      "s": "How often do the involuntary motions of the countenance discover our inward thoughts, and betray our most private secrets to the bystanders.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0025",
+      "w": "Essais",
+      "s": "And the eyes of witches are said to be assailant and hurtful:-- “Nescio quis teneros oculus mihi fascinat agnos.” [“Some eye, I know not whose is bewitching my tender lambs.” --Virgil, Eclog., iii.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0026",
+      "w": "Essais",
+      "s": "Fear: begets a terrible astonishment and confusion Feared, lest disgrace should make such delinquents desperate Give these young wenches the things they long for Have you ever found any who have been dissatisfied with dying?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0027",
+      "w": "Essais",
+      "s": "There are people, amongst whom it is the fashion to turn their backs upon him they salute, and never look upon the man they intend to honour.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0028",
+      "w": "Essais",
+      "s": "But let us return to the empire of custom.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0029",
+      "w": "Essais",
+      "s": "6.] according to what the oracle answered to those of Delphos who, fearing to be invaded by the Persians in the Median war, inquired of Apollo, how they should dispose of the holy treasure of his temple; whether they should hide, or remove it to some other place?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0030",
+      "w": "Essais",
+      "s": "By severity you have hitherto prevailed nothing; Lepidus has followed Salvidienus; Murena, Lepidus; Caepio, Murena; Egnatius, Caepio.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0031",
+      "w": "Essais",
+      "s": "But it is quite otherwise; for our soul stretches and dilates itself proportionably as it fills; and in the examples of elder times, we see, quite contrary, men very proper for public business, great captains, and great statesmen very learned withal.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0032",
+      "w": "Essais",
+      "s": "But it is not enough that our education does not spoil us; it must, moreover, alter us for the better.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0033",
+      "w": "Essais",
+      "s": "Examples have demonstrated to us that in military affairs, and all others of the like active nature, the study of sciences more softens and untempers the courages of men than it in any way fortifies and excites them.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0034",
+      "w": "Essais",
+      "s": "Look at Cimon, for example, and Themistocles, and a thousand others, who very much deceived the expectation men had of them.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0035",
+      "w": "Essais",
+      "s": "459.] by what secret springs we move, and the reason of our various agitations and irresolutions: for, methinks the first doctrine with which one should season his understanding, ought to be that which regulates his manners and his sense; that teaches him to know himself, and how both well to dig and well to live.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0036",
+      "w": "Essais",
+      "s": "I would not have his spirit cowed and subdued, by applying him to the rack, and tormenting him, as some do, fourteen or fifteen hours a day, and so make a pack-horse of him.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0037",
+      "w": "Essais",
+      "s": "Besides what Quintilian has very well observed, that this imperious authority is often attended by very dangerous consequences, and particularly our way of chastising.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0038",
+      "w": "Essais",
+      "s": "The world is nothing but babble; and I hardly ever yet saw that man who did not rather prate too much, than speak too little.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0039",
+      "w": "Essais",
+      "s": "Aristophanes the grammarian was quite out, when he reprehended Epicurus for his plain way of delivering himself, and the design of his oratory, which was only perspicuity of speech.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0040",
+      "w": "Essais",
+      "s": "And there it was not possible to add anything to the care he had to provide me the most able tutors, with all other circumstances of education, reserving also several particular rules contrary to the college practice; but so it was, that with all these precautions, it was a college still.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0041",
+      "w": "Essais",
+      "s": "The sense of the passage is in the preceding sentence.] He that had never seen a river, imagined the first he met with to be the sea; and the greatest things that have fallen within our knowledge, we conclude the extremes that nature makes of the kind.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0042",
+      "w": "Essais",
+      "s": "That a man is soberly to judge of the divine ordinances.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0043",
+      "w": "Essais",
+      "s": "This was the principal; the corporeal, an accidental and secondary matter; quite the contrary as to the lover.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0044",
+      "w": "Essais",
+      "s": "This is the reason why the lawgivers, to honour marriage with some resemblance of this divine alliance, interdict all gifts betwixt man and wife; inferring by that, that all should belong to each of them, and that they have nothing to divide or to give to each other.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0045",
+      "w": "Essais",
+      "s": "That which remains will not be equally dear, will not be whole: the same day will involve the destruction of both.”] or: [“If a superior force has taken that part of my soul, why do I, the remaining one, linger behind?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0046",
+      "w": "Essais",
+      "s": "That might be very well,” answered Pericles, “for any other than a praetor, who ought not only to have his hands, but his eyes, too, chaste.”--[Cicero, De Offic., i.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0047",
+      "w": "Essais",
+      "s": "Now in this case, we should either have a man of irreproachable veracity, or so simple that he has not wherewithal to contrive, and to give a colour of truth to false relations, and who can have no ends in forging an untruth.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0048",
+      "w": "Essais",
+      "s": "They rise with the sun, and so soon as they are up, eat for all day, for they have no more meals but that; they do not then drink, as Suidas reports of some other people of the East that never drank at their meals; but drink very often all day after, and sometimes to a rousing pitch.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0049",
+      "w": "Essais",
+      "s": "188.]--as our own ancestors, who being besieged by Caesar in the city Alexia, resolved to sustain the famine of the siege with the bodies of their old men, women, and other persons who were incapable of bearing arms.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0050",
+      "w": "Essais",
+      "s": "We are to content ourselves with the light it pleases the sun to communicate to us, by virtue of his rays; and who will lift up his eyes to take in a greater, let him not think it strange, if for the reward of his presumption, he there lose his sight.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0051",
+      "w": "Essais",
+      "s": "And that man of old who, throwing a stone at a dog, hit and killed his mother-in-law, had he not reason to pronounce this verse: [“Fortune has more judgement than we.”--Menander] Icetes had contracted with two soldiers to kill Timoleon at Adrana in Sicily.--[Plutarch, Life of Timoleon, c.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0052",
+      "w": "Essais",
+      "s": "And I beleeve and conceive a thousand manners of life, contrary to the common sorte.” --Florio, ed.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0053",
+      "w": "Essais",
+      "s": "He would rather have performed a noble, just, and generous action, and to have had ignominy for his reward, than for glory.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0054",
+      "w": "Essais",
+      "s": "They weep copiously within the very threshold of the nuptial chamber.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0055",
+      "w": "Essais",
+      "s": "Charondas punished those as evil men who were convicted of keeping ill company.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0056",
+      "w": "Essais",
+      "s": "This it is to make choice of treasures that can secure themselves from plunder and violence, and to hide them in such a place into which no one can enter and that is not to be betrayed by any but ourselves.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0057",
+      "w": "Essais",
+      "s": "I see young men very gay and frolic, who nevertheless keep a mass of pills in their trunk at home, to take when they’ve got a cold, which they fear so much the less, because they think they have remedy at hand.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0058",
+      "w": "Essais",
+      "s": "It is impossible to give over business, if you do not also quit the fruit; therefore disengage yourselves from all concern of name and glory; ‘tis to be feared the lustre of your former actions will give you but too much light, and follow you into your most private retreat.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0059",
+      "w": "Essais",
+      "s": "Non est ornamentum virile concimitas.” [“A carefully arranged dress is no manly ornament.” --Seneca, Ep., 115.] The sages tell us that, as to what concerns knowledge, ‘tis nothing but philosophy; and as to what concerns effects, nothing but virtue, which is generally proper to all degrees and to all orders.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0060",
+      "w": "Essais",
+      "s": "Theodorus answered Lysimachus, who threatened to kill him, “Thou wilt do a brave feat,” said he, “to attain the force of a cantharides.” The majority of philosophers are observed to have either purposely anticipated, or hastened and assisted their own death.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0061",
+      "w": "Essais",
+      "s": "To what end serves the knowledge of things if it renders us more unmanly?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0062",
+      "w": "Essais",
+      "s": "If we would not disturb in our members the jurisdiction that appertains to them in this, ‘tis to be believed it would be the better for us, and that nature has given them a just and moderate temper both to pleasure and pain; neither can it fail of being just, being equal and common.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0063",
+      "w": "Essais",
+      "s": "How many examples of the contempt of pain have we in that sex?",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0064",
+      "w": "Essais",
+      "s": "And when you ask Thales why he does not marry, he tells you, because he has no mind to leave any posterity behind him.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0065",
+      "w": "Essais",
+      "s": "If I chanced to leave my cash-box behind me, O, what strange suspicions and anxiety of mind did I enter into, and, which was worse, without daring to acquaint anybody with it.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0066",
+      "w": "Essais",
+      "s": "If he cannot digest a strong-working decoction to eradicate the evil, let him at least take a lenitive to ease it: [“It is an effeminate and flimsy opinion, nor more so in pain than in pleasure, in which, while we are at our ease, we cannot bear without a cry the sting of a bee.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0067",
+      "w": "Essais",
+      "s": "Measure him without his stilts; let him lay aside his revenues and his titles; let him present himself in his shirt.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0068",
+      "w": "Essais",
+      "s": "In all things, saving only in those that are evil, a change is to be feared; even the change of seasons, winds, viands, and humours.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0069",
+      "w": "Essais",
+      "s": "We are great enough, if we rightly understand how to maintain it.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0070",
+      "w": "Essais",
+      "s": "Dum fortuna calet, dum conficit omnia terror.” [“Whilst fortune is fresh, and terror finishes all.” --Lucan, vii.",
+      "src": {
+        "work": "Essais"
+      }
+    },
+    {
+      "id": "montaigne.p0071",
+      "w": "Journal of Travels in Italy",
+      "s": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0072",
+      "w": "Journal of Travels in Italy",
+      "s": "In this book he refers to several incidents of his sojourn in Rome--notably to the grant of Roman citizenship which was then made to him.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0073",
+      "w": "Journal of Travels in Italy",
+      "s": "They show likewise two of their swords, about the length of our own two-handed swords, the edges gapped by strokes of battle.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0074",
+      "w": "Journal of Travels in Italy",
+      "s": "These are exceedingly cold, and it is there considered that the colder the water the better.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0075",
+      "w": "Journal of Travels in Italy",
+      "s": "On the morrow we set out after dinner and slept at Vitri le François, seven leagues farther on.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0076",
+      "w": "Journal of Travels in Italy",
+      "s": "She was hanged on the charge of using unlawful appliances to remedy the defects of her sex.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0077",
+      "w": "Journal of Travels in Italy",
+      "s": "We breakfasted in the morning at Neufchasteau, and after travelling six leagues we supped at Mirecourt.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0078",
+      "w": "Journal of Travels in Italy",
+      "s": "During their sojourn they attend religious services the same as in other places, and the greater part of them end their days there without desiring change of condition.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0079",
+      "w": "Journal of Travels in Italy",
+      "s": "The other spring which rises at the base of the mountain opposite, and of which M.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0080",
+      "w": "Journal of Travels in Italy",
+      "s": "One portion of his beard and one side of his eyebrow had become white, and he told M.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0081",
+      "w": "Journal of Travels in Italy",
+      "s": "The hosts supply all wood for this charge, but the country is so rich therein that it costs nothing but the cutting, and the hostesses do exceedingly well in the kitchens.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0082",
+      "w": "Journal of Travels in Italy",
+      "s": "Beyond this it is prohibited to all persons coming from infected places to repair to Plommieres under pain of death.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0083",
+      "w": "Journal of Travels in Italy",
+      "s": "Messieurs took leave of the ladies at eventide.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0084",
+      "w": "Journal of Travels in Italy",
+      "s": "This we heard likewise from others whom we met in our travels, and also at the siege of La Fère[31] more than fifty of these people served with us, and that they made no scruple of being married by a priest to Catholic women, who were never required to change their religion.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0085",
+      "w": "Journal of Travels in Italy",
+      "s": "They say the reason of this custom is that in past years an attempt against the city miscarried on account of a similar fault of the town clock.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0086",
+      "w": "Journal of Travels in Italy",
+      "s": "We witnessed an operation for rupture done by a surgeon on the child of a poor man, who was very roughly handled by the operator, and likewise saw the very fine public library overlooking the river in a pleasant situation.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0087",
+      "w": "Journal of Travels in Italy",
+      "s": "In all rooms of this sort, which are always well furnished, there will be five or six tables fitted with benches at which all the guests will dine together, each party at its own particular table.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0088",
+      "w": "Journal of Travels in Italy",
+      "s": "For this purpose they use a vessel of pewter or wood with a long spout.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0089",
+      "w": "Journal of Travels in Italy",
+      "s": "In most places they use wooden plates and pots, clean and white as they can be made; but in some they set on the wooden plates others of pewter, until they serve the fruit, for which wood is always used.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0090",
+      "w": "Journal of Travels in Italy",
+      "s": "This structure gives them the chance to place in position their large wheel, which, in chimneys built like ours, would occupy so much room in the flue that the smoke would not be able to find a passage.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0091",
+      "w": "Journal of Travels in Italy",
+      "s": "The interpreter and guide whom we engaged at Basle, a sworn messenger of the city, went to the Mass with us, and showed by his carriage that he had come there with great longing and devout feeling.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0092",
+      "w": "Journal of Travels in Italy",
+      "s": "It possessed seventeen stoves and eleven kitchens, and in the house adjoining were fifty furnished chambers, the walls of all the rooms being hung with the coats-of-arms of the gentry who had lodged therein.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0093",
+      "w": "Journal of Travels in Italy",
+      "s": "These baths are placed in a valley commanded by the slopes of high mountains, which nevertheless are fertile and well cultivated.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0094",
+      "w": "Journal of Travels in Italy",
+      "s": "The ambassador had been summoned by the queen to meet her at Lyons, in order to devise some plan of checkmating the schemes of Spain and the late Duke of Savoy.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0095",
+      "w": "Journal of Travels in Italy",
+      "s": "Otherwise, if in passing you give a greeting and bow they will generally make no sign of acknowledgment, according to ancient usage, but some will bow the head slightly by way of returning the salutation.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0096",
+      "w": "Journal of Travels in Italy",
+      "s": "At home we put on our warm furred dressing-gowns when we enter our apartments, but here people appear in doublet and bareheaded in the warm rooms, and put on thick garments before going into the air.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0097",
+      "w": "Journal of Travels in Italy",
+      "s": "When the hour strikes one of them is bound to cry out at the top of his voice to the other, and ask what is the hour, whereupon the other in like manner tells him the hour, and adds that he is keeping good watch.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0098",
+      "w": "Journal of Travels in Italy",
+      "s": "This town, the capital of a Swiss canton, has the same form of religion as Zürich.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0099",
+      "w": "Journal of Travels in Italy",
+      "s": "Then branches are plaited from below, and at last joined to those which grow upward from the contrary direction: thus the whole space is filled with green growth.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0100",
+      "w": "Journal of Travels in Italy",
+      "s": "There is a fine terrace overlooking this lake where merchandise is stored, and about fifty paces from the shore stands a finely-built lodge, where a sentinel is always on duty.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0101",
+      "w": "Journal of Travels in Italy",
+      "s": "The son of the captain of the town, who was brought up as a page in the household of M.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0102",
+      "w": "Journal of Travels in Italy",
+      "s": "There, as in other places, they fill the mattresses with the leaves of a certain tree, which serves the purpose better than straw and lasts longer.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0103",
+      "w": "Journal of Travels in Italy",
+      "s": "It was a saying of his that people of fastidious taste had more occasion to complain when travelling of their bed furniture than of aught else, and he commended those who carried a mattress or curtains amongst the baggage when visiting strange countries.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0104",
+      "w": "Journal of Travels in Italy",
+      "s": "After the meal they replace the glasses filled full on the table, and offer two or three sorts of eatables which serve to provoke thirst.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0105",
+      "w": "Journal of Travels in Italy",
+      "s": "They will never give water even to those who ask for it, except these should be persons of great worship.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0106",
+      "w": "Journal of Travels in Italy",
+      "s": "Moreover, the principal Lutheran arguments were that the divinity was inseparable from the body, wherefore the divinity being omnipresent the body must be omnipresent also.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0107",
+      "w": "Journal of Travels in Italy",
+      "s": "At our meals they brought in great silver vessels of various kinds (these in sooth were intended to serve merely as ornaments, being richly worked and covered with the arms of divers gentlemen), the sort of plate which is only to be seen in houses of high quality.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0108",
+      "w": "Journal of Travels in Italy",
+      "s": "On being asked if they permitted dancing, the minister exclaimed, “And why not!” and again to the question: Why had they let Jesus Christ be represented in the windows of the church, and upon the organs newly built?",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0109",
+      "w": "Journal of Travels in Italy",
+      "s": "On our road we saw, as in divers other places, certain water-mills which have water brought to them simply by wooden troughs, which take in the water at the foot of some mountain, and then, being raised and propped high above the ground, discharge the stream down a very steep incline from the end of the last trough.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0110",
+      "w": "Journal of Travels in Italy",
+      "s": "They thresh out the corn in the barns as they may want it, using in this work the heavy end of a flail.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0111",
+      "w": "Journal of Travels in Italy",
+      "s": "This is reckoned the fairest town of Germany, as Strasburg is the strongest.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0112",
+      "w": "Journal of Travels in Italy",
+      "s": "The reason why their window glass is so brilliant is that they have no set window-frames like ours, but casements which open at will and which they clean often.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0113",
+      "w": "Journal of Travels in Italy",
+      "s": "This being finished, two men approached and each one of them placed two fingers of the right hand upon the child; the minister then addressed them, and this was all.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0114",
+      "w": "Journal of Travels in Italy",
+      "s": "On the top of this tower the water is poured into a great stone cistern, and from this cistern it runs down through divers pipes and is distributed all over the city, which in consequence is abundantly supplied with fountains.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0115",
+      "w": "Journal of Travels in Italy",
+      "s": "If a duke should arrive in the city, one of the burgomasters would attend to bid him welcome.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0116",
+      "w": "Journal of Travels in Italy",
+      "s": "The male was the blacker of the two, and had a red neck; the female was of a grey colour and laid a great number of eggs.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0117",
+      "w": "Journal of Travels in Italy",
+      "s": "The stranger now finds himself in a hall, and in all his passage he meets no one with whom he may speak.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0118",
+      "w": "Journal of Travels in Italy",
+      "s": "In our lodging there was a machine made of iron fixed so as to reach down to the bottom of a very deep well.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0119",
+      "w": "Journal of Travels in Italy",
+      "s": "It has, moreover, a pleasant relish on the palate which makes it agreeable to drink, and it is excellent for distempers of the head and stomach.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0120",
+      "w": "Journal of Travels in Italy",
+      "s": "These vegetables, like their great-headed cabbages, are salted for winter use, and they plant them in their fields in the country, rather than their gardens, and harvest them.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0121",
+      "w": "Journal of Travels in Italy",
+      "s": "Here we ate the first chestnuts we had seen in Germany, served raw.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0122",
+      "w": "Journal of Travels in Italy",
+      "s": "The road is scarcely wide enough to let pass a common cart, as in divers other places amongst these mountains, so much so that the carters hereabout are wont to reduce the size of their carts a foot at the least.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0123",
+      "w": "Journal of Travels in Italy",
+      "s": "Everywhere we have been they have the fashion of serving the fish the same time as the meat; but, as far as we saw, they offer no meat on fish days.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0124",
+      "w": "Journal of Travels in Italy",
+      "s": "This cold reception, added to the fact that he refused to allow us to see the castle, ruffled somewhat M.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0125",
+      "w": "Journal of Travels in Italy",
+      "s": "There we saw ten or twelve field-pieces, each carrying a ball as big as a goose’s egg, and mounted on wheels enriched and gilded all over; the very pieces themselves being gilded.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0126",
+      "w": "Journal of Travels in Italy",
+      "s": "On the Tuesday morning we resumed our journey, crossing the plain and following the mountain path.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0127",
+      "w": "Journal of Travels in Italy",
+      "s": "No wine grows in these mountains, but corn enough for the inhabitants, who drink three sorts of good white wine.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0128",
+      "w": "Journal of Travels in Italy",
+      "s": "At this place he called for the schoolmaster to converse with him in Latin, but the fellow was a fool from whom he could get no information as to the country.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0129",
+      "w": "Journal of Travels in Italy",
+      "s": "When it stops the machine has to be wound up afresh.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0130",
+      "w": "Journal of Travels in Italy",
+      "s": "We crossed the river again by a stone bridge, and, after a bout of four leagues, we arrived in good time at Bolzan.[102] This town, about the size of Libourne, is situated on the river before named, and is somewhat less pleasing than other towns we had visited in Germany, so much so that M.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0131",
+      "w": "Journal of Travels in Italy",
+      "s": "The Foulcres have done great building work, but they have built for their posterity, while the cardinal aforesaid has built for the public weal, for he has left this castle, together with the furniture still in it worth more than a hundred thousand crowns, to his successors in office.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0132",
+      "w": "Journal of Travels in Italy",
+      "s": "He said that he seemed to be in like case to one who reads some delightful story or good book, and dreads to turn the last page.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0133",
+      "w": "Journal of Travels in Italy",
+      "s": "The river was all this time on the right hand, and when they resumed their journey after dinner they kept the same road as far as Chiusa, a small fort in a mountain cleft above the Adisse, which the Venetians had taken.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0134",
+      "w": "Journal of Travels in Italy",
+      "s": "The king, the greater part of the courtiers, and thousands of the people of Paris were attacked, and the whole city was panic-stricken.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0135",
+      "w": "Journal of Travels in Italy",
+      "s": "14] Antoinette de Bourbon, daughter of François de Bourbon, Comte de Vendôme, and Marie de Luxembourg.",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      }
+    },
+    {
+      "id": "montaigne.p0136",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "At thirteen he had passed through all the classes, and as he was destined for the law he left school to study that science.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0137",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Although he blames severely in his own book [Essays, i.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0138",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Let us add, that on his monument he is represented in a coat of mail, with his casque and gauntlets on his right side, and a lion at his feet, all which signifies, in the language of funeral emblems, that the departed has been engaged in some important military transactions.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0139",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "The hotels, the provisions, the Swiss cookery, everything, was agreeable to him; it appears, indeed, as if he preferred to the French manners and tastes those of the places he was visiting, and of which the simplicity and freedom (or frankness) accorded more with his own mode of life and thinking.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0140",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "As to Rome, he cared less to go there, inasmuch as everybody went there; and he said that he never had a lacquey who could not tell him all about Florence or Ferrara.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0141",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "On quitting Venice, he went in succession to Ferrara, Rovigo, Padua, Bologna (where he had a stomach-ache), Florence, &c.; and everywhere, before alighting, he made it a rule to send some of his servants to ascertain where the best accommodation was to be had.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0142",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "But he afterwards hired, at twenty crowns a month, fine furnished rooms in the house of a Spaniard, who included in these terms the use of the kitchen fire.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0143",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He believed that an ancient Roman would not recognise the place again.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0144",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He arrived at the beginning of May 1581, at Bagno della Villa, where he established himself, order to try the waters.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0145",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "This intelligence made him hasten his departure; and from Lucca he proceeded to Rome.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0146",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "We have just seen that, during his absence in Italy, the author of the Essays was elected mayor of Bordeaux.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0147",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "And so you will act in a manner very agreeable to me, while the contrary will displease me greatly.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0148",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "On the expiration of his official career, after four years' duration, he could say fairly enough of himself that he left behind him neither hatred nor cause of offence.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0149",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Gifted with an active and inquiring spirit, and, above all, possessing a sound and healthy tone of mind, Mademoiselle de Gournay had been carried from her childhood with that tide which set in with sixteenth century towards controversy, learning, and knowledge.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0150",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "We do not know what part he took in that assembly: but it is known that he was commissioned, about this period, to negotiate between Henry of Navarre (afterwards Henry IV.) and the Duke of Guise.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0151",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "His monument was restored in 1803 by a descendant.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0152",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "On the other hand, Malebranche and the writers of Port Royal were against him; some reprehended the licentiousness of his writings; others their impiety, materialism, epicureanism.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0153",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "To Monsieur de MONTAIGNE [This account of the death of La Boetie begins imperfectly.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0154",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He returned word that he was obliged, but, being indisposed, he would thank me to do him the pleasure of spending an hour with him before he started for Medoc.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0155",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I advised him to go as he had proposed, but to stay for the night at Germignac, which is only about two leagues from the town.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0156",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Early on the following morning, however, I had intelligence from Madame de la Boetie, that in the night he had fresh and violent attack of dysentery.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0157",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "When I consented, he seemed to grow more cheerful.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0158",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He then gave me to understand that his complaint was infectious, and, moreover, disagreeable and depressing; and that he, knowing thoroughly my constitution, desired that I should content myself with coming to see him now and then.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0159",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Death,\" I replied, \"has no worse sensation, my brother.\" \"None so bad,\" was his answer.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0160",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "As for you, my friend, I feel sure that you are so wise, that you will control your emotions, and submit to His divine ordinance regarding me; and I beg of you to see that that good man and woman do not mourn for my departure unnecessarily.\" He proceeded to inquire how they behaved at present.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0161",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "At last he said that whatever he thought for the best would be agreeable to him; and as he intended to make him his heir, he was at liberty to dispose of what would be his.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0162",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He blessed God that in his extremity he had the happiness to be surrounded by those whom he held dearest in the world, and he looked upon it as a fine spectacle, where four persons were together, so unanimous in their feelings, and loving each other for each other's sake.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0163",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Interrupting me, he begged that it might happen so, and that the conversation which had passed between us might not be mere words, but might be impressed deeply on our minds, to be put in exercise at the first occasion; and that this was the real object and aim of all philosophy.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0164",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Moreover, it is probable that hitherto my life has been spent more simply, and with less of evil, than if God had spared me, and I had survived to feel the thirst for riches and worldly prosperity.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0165",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "The notary was called, and he dictated his will there and then with such speed that the man could scarcely keep up with him; and when he had done, he asked me to read it out, saying to me, \"What a good thing it is to look after what are called our riches.\" 'Sunt haec, quoe hominibus vocantur bona'.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0166",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "After God, thou shouldest love thy father and mother--thy mother, my sister, whom I regard as one of the best and most intelligent of women, and by whom I beg of thee to let thy own life be regulated.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0167",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I assure thee, my dear, that if I had the option now of continuing in life or of completing the voyage on which I have set out, I should find it very hard to choose.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0168",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "You enjoy sufficient store of wealth and beauty; you are a lady of good family; it only remains for you to add to these possessions the cultivation of your mind, in which I exhort you not to fail.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0169",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "But first, calling to him my brother, M.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0170",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "You perceive what disasters our quarrels have brought upon this kingdom, and I anticipate still worse mischiefs; and in your goodness and wisdom, beware of involving your family in such broils; let it continue to enjoy its former reputation and happiness.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0171",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "But he soon sank, and when he heard us in lamentation, he murmured, \"O God!",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0172",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I, in order to change the current of his thoughts, put in, \"Surely not; water is the best.\" \"Ah, yes,\" he returned, \"doubtless so;--(Greek phrase)--.\" He had now become, icy-cold at his extremities, even to his face; a deathly perspiration was upon him, and his pulse was scarcely perceptible.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0173",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Having become so near a neighbour to death, and hearing the sobs of Mademoiselle de la Boetie, he called her, and said to her thus: \"My own likeness, you grieve yourself beforehand; will you not have pity on me?",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0174",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "It is now three days since I have been eager to take my departure.\" Being in this extremity, he frequently called me, merely to satisfy him that I was at his side.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0175",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "It is perfectly possible that some fastidious persons will detect in the book some trace of Gascon parentage; but it will be so much the more to their discredit, that they allowed the task to devolve on one who is quite a novice in these things.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0176",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Your most humble and most obedient son, MICHEL DE MONTAIGNE III.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0177",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Monsieur, I pray God to have you in His keeping.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0178",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "For my part, I prefer to be quiet rather than clever: give me content, even if I am not to be so wide in my range.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0179",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "In fact, he lives in my heart so vividly and so wholly, that I am loath to believe him committed to the dull ground, or altogether cast off from communication with us.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0180",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I know, indeed, that he was raised to the dignities connected with his neighbourhood--dignities accounted considerable; and I know also, that no one ever acquitted himself better of them; and when he died at the age of thirty-two, he enjoyed a reputation in that way beyond all who had preceded him.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0181",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Different from the builder, who places the most attractive, portion of his house towards the street, and to the draper, who displays in his window his best goods, that which was most precious in my friend, the juice and marrow of his genius, departed with him, and there have remained to us but the bark and the leaves.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0182",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Sir, I pray God to grant you a very happy and a very long life.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0183",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "However this may be, it cannot be concealed that the vice of falsehood is one very unbecoming in gentleman, let it assume what guise it will.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0184",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Naturally each workman feels himself more strong in some special part his art, and those are to be regarded as most fortunate, who lay hands on the noblest, for all the parts essential to the construction of any whole are not equally precious.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0185",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Let them talk; I adhere for my part the custom of the good old days; I also wear my hair as it used to be then; and, in truth, novelty costs this poor country up to the present moment so dear (and I do not know whether we have reached the highest pitch yet), that everywhere and in everything I renounce the fashion.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0186",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Hereupon, my wife, I commend myself very heartily to your good will, and pray God to have you in His keeping.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0187",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "He has done a thing not only excusable, according to the military laws of this age, but necessary and (as we are of opinion) commendable.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0188",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "By saving him you lay me under an extreme obligation.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0189",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "To the Jurats of Bordeaux.--[Published from the original among the archives of the town of Bordeaux, M.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0190",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Monsieur de Cursol has also written to me and apprised me of his journey.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0191",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I hope to join you at the earliest convenient opportunity.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0192",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Its authenticity has been called in question; but wrongly, in our opinion.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0193",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "382.] MADEMOISELLE,--My friends know that, from the first moment of our acquaintance, I have destined a copy of my book for you; for I feel that you have done it much honour.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0194",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "To the KING, HENRY IV.--[The original is in the French national library, in the Dupuy collection.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0195",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I have always looked forward to your enjoyment of your present fortune, and you may recollect that, even when I had to make confession of itto my cure, I viewed your successes with satisfaction: now, with the greater propriety and freedom, I embrace them affectionately.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0196",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "In the conduct of such affairs as you have in hand, men are obliged to have recourse to unusual expedients.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0197",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "And here we feel already some effect of the favourable impression produced upon our rebellious towns by the contrast between their rude treatment, and that of those which are loyal to you.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0198",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "You have acted very commendably in adapting yourself, in the matter of external forms, to your new fortunes; but the preservation of your old affability and frankness in private intercourse is entitled to an equal share of praise.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0199",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Sire, I consider myself greatly honoured by the receipt of your commands, and I have not omitted to communicate to M.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0200",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "What I have done for your predecessors I shall do still more readily for you.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0201",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "Your very humble and very obedient servant and subject, MONTAIGNE.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0202",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I used every exertion to discover the man of whom you spoke.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0203",
+      "w": "Essays of Michel de Montaigne — Volume 01",
+      "s": "I hope that you have in Guienne many as well affected to you as I am.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      }
+    },
+    {
+      "id": "montaigne.p0204",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Not one was seen who, however weakened with wounds, did not in his last gasp yet endeavour to revenge himself, and with all the arms of a brave despair, to sweeten his own death in the death of an enemy.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0205",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Therewith they adorne age, vertue, and conscience.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0206",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "3] --The Italians have more fitly baptized by this name--[La tristezza]-- malignity; for 'tis a quality always hurtful, always idle and vain; and as being cowardly, mean, and base, it is by the Stoics expressly and particularly forbidden to their sages.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0207",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Et via vix tandem voci laxata dolore est.\" [\"And at length and with difficulty is a passage opened by grief for utterance.\"--AEneid, xi.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0208",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Misero quod omneis Eripit sensus mihi: nam simul te, Lesbia, aspexi, nihil est super mi, Quod loquar amens.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0209",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "As folly, on the one side, though it should enjoy all it desire, would notwithstanding never be content, so, on the other, wisdom, acquiescing in the present, is never dissatisfied with itself.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0210",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Amongst those laws that relate to the dead, I look upon that to be very sound by which the actions of princes are to be examined after their decease.--[Diodorus Siculus, i.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0211",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "We owe subjection and obedience to all our kings, whether good or bad, alike, for that has respect unto their office; but as to esteem and affection, these are only due to their virtue.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0212",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And such as, out of respect to some private obligation, unjustly espouse and vindicate the memory of a faulty prince, do private right at the expense of public justice.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0213",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I loved thee,\" answered he, \"whilst thou wert worthy of it, but since thou art become a parricide, an incendiary, a player, and a coachman, I hate thee as thou dost deserve.\" And the other, why he should attempt to kill him?",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0214",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "67.]--But the public and universal testimonies that were given of him after his death (and so will be to all posterity, both of him and all other wicked princes like him), of his tyrannies and abominable deportment, who, of a sound judgment, can reprove them?",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0215",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "890.] Bertrand de Guesclin, dying at the siege of the Castle of Rancon, near unto Puy, in Auvergne, the besieged were afterwards, upon surrender, enjoined to lay down the keys of the place upon the corpse of the dead general.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0216",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Of which there are so many ancient examples (to say nothing of those of our own observation), that it is not necessary I should longer insist upon it.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0217",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "In like manner certain of the Indians, in their battles with the Spaniards, carried with them the bones of one of their captains, in consideration of the victories they had formerly obtained under his conduct.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0218",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I must yet add another example, equally remarkable for the present consideration with any of the former.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0219",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "But he nourished this modest humour to such a degree of superstition as to give express orders in his last will that they should put him on drawers so soon as he should be dead; to which, methinks, he would have done well to have added that he should be blindfolded, too, that put them on.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0220",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "7.]--I attribute to some superstitious devotion of his; for both his historian and himself, amongst their great qualities, marked the whole course of their lives with a singular respect and reverence to religion.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0221",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Emilius Lepidus, who forbade his heirs to bestow upon his hearse even the common ceremonies in use upon such occasions.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0222",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "See, here, an easy and cheap reformation.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0223",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Totus hic locus est contemnendus in nobis, non negligendus in nostris;\"--[\"The place of our sepulture is to be contemned by us, but not to be neglected by our friends.\"--Cicero, Tusc.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0224",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Quo non nata jacent.\" [\"Dost ask where thou shalt lie after death?",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0225",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Ventus ut amittit vires, nisi robore densa Occurrant sylvae, spatio diffusus inani.\" [\"As the wind loses its force diffused in void space, unless it in its strength encounters the thick wood.\"--Lucan, iii.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0226",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Plutarch says of those who are delighted with little dogs and monkeys, that the amorous part that is in us, for want of a legitimate object, rather than lie idle, does after that manner forge and create one false and frivolous.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0227",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "It is not those beautiful tresses you tear, nor is it the white bosom that in your anger you so unmercifully beat, that with an unlucky bullet have slain your beloved brother; quarrel with something else.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0228",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And the philosopher Bion said pleasantly of the king, who by handsful pulled his hair off his head for sorrow, \"Does this man think that baldness is a remedy for grief?\"--[Cicero, Tusc.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0229",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Xerxes whipped the sea, and wrote a challenge to Mount Athos; Cyrus employed a whole army several days at work, to revenge himself of the river Gyndas, for the fright it had put him into in passing over it; and Caligula demolished a very beautiful palace for the pleasure his mother had once enjoyed there.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0230",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "They are vices that always go together, but in truth such actions as these have in them still more of presumption than want of wit.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0231",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Wherein he was still less excusable than the former, and less than he was afterwards when, having lost a battle under Quintilius Varus in Germany, in rage and despair he went running his head against the wall, crying out, \"O Varus!",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0232",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Out of this generous principle it was that they delivered up to Pyrrhus his treacherous physician, and to the Etrurians their disloyal schoolmaster.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0233",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Deceit may serve for a need, but he only confesses himself overcome who knows he is neither subdued by policy nor misadventure, but by dint of valour, man to man, in a fair and just war.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0234",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Dolus, an virtus, quis in hoste requirat?\" [\"What matters whether by valour or by strategem we overcome the enemy?\"--Aeneid, ii.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0235",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Eumenes, being shut up in the city of Nora by Antigonus, and by him importuned to come out to speak with him, as he sent him word it was fit he should to a greater man than himself, and one who had now an advantage over him, returned this noble answer.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0236",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I could, and do, with great facility, rely upon the faith of another; but I should very unwillingly do it in such a case, as it should thereby be judged that it was rather an effect of my despair and want of courage than voluntarily and out of confidence and security in the faith of him with whom I had to do.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0237",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And therefore here the rule fails, \"Neminem id agere ut ex alte rius praedetur inscitia.\"--[\"No one should preys upon another's folly.\"--Cicero, De Offic., iii.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0238",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And of later memory, at Yvoy, Signor Juliano Romero having played that part of a novice to go out to parley with the Constable, at his return found his place taken.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0239",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And yet more generous was the answer of that great Alexander to Polypercon who was persuading him to take the advantage of the night's obscurity to fall upon Darius.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0240",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Unjust judges, who defer judgment to a time wherein they can have no knowledge of the cause!",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0241",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "My other faculties are all sufficiently ordinary and mean; but in this I think myself very rare and singular, and deserving to be thought famous.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0242",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And it should be enough, methinks, that I feel the misery and inconvenience of it, without branding me with malice, a vice so contrary to my humour.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0243",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "That by this means I am not so talkative, for the magazine of the memory is ever better furnished with matter than that of the invention.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0244",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "12.]--I should have a register of injuries, or a prompter, as Darius, who, that he might not forget the offence he had received from those of Athens, so oft as he sat down to dinner, ordered one of his pages three times to repeat in his ear, \"Sir, remember the Athenians\";--[Herod., v.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0245",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "It is not without good reason said \"that he who has not a good memory should never take upon him the trade of lying.\" I know very well that the grammarians--[Nigidius, Aulus Gellius, xi.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0246",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "In what they, wholly invent, forasmuch as there is no contrary impression to jostle their invention there seems to be less danger of tripping; and yet even this by reason it is a vain body and without any hold, is very apt to escape the memory, if it be not well assured.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0247",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I have known many in my time very ambitious of the repute of this fine wit; but they do not see that if they have the reputation of it, the effect can no longer be.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0248",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "We are not men, nor have other tie upon one another, but by our word.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0249",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I have an honest lad to my tailor, whom I never knew guilty of one truth, no, not when it had been to his advantage.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0250",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "There are a thousand ways to miss the white, there is only one to hit it.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0251",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "An ancient father says \"that a dog we know is better company than a man whose language we do not understand.\" \"Ut externus alieno pene non sit hominis vice.\" [\"As a foreigner cannot be said to supply us the place of a man.\" --Pliny, Nat.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0252",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "At which the poor confounded ambassador, the more handsomely to disengage himself, made answer, that the Duke would have been very loth, out of respect to his Majesty, that such an execution should have been performed by day.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0253",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Now, as we teach young ladies those sports and exercises which are most proper to set out the grace and beauty of those parts wherein their chiefest ornament and perfection lie, so it should be in these two advantages of eloquence, to which the lawyers and preachers of our age seem principally to pretend.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0254",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I know, experimentally, the disposition of nature so impatient of tedious and elaborate premeditation, that if it do not go frankly and gaily to work, it can perform nothing to purpose.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0255",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "But besides this, the solicitude of doing well, and a certain striving and contending of a mind too far strained and overbent upon its undertaking, breaks and hinders itself like water, that by force of its own pressing violence and abundance, cannot find a ready issue through the neck of a bottle or a narrow sluice.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0256",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "By which means, the things I say are better than those I write, if either were to be preferred, where neither is worth anything.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0257",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I perhaps sometimes hit upon something when I write, that seems quaint and sprightly to me, though it will appear dull and heavy to another.--But let us leave these fine compliments; every one talks thus of himself according to his talent.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0258",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "If I should make erasure so often as this inconvenience befalls me, I should make clean work; occasion will, at some other time, lay it as visible to me as the light, and make me wonder what I should stick at.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0259",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "65.] --and others of the like nature, upon which antiquity founded most of their public and private enterprises, our religion has totally abolished them.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0260",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Let whatever thou art preparing be sudden.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0261",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "6.] yet are they of much less authority now than heretofore.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0262",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "29.] \"Ille potens sui Laetusque deget, cui licet in diem Dixisse vixi!",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0263",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "25] And those who take this sentence in a contrary sense interpret it amiss: \"Ista sic reciprocantur, ut et si divinatio sit, dii sint; et si dii lint, sit divinatio.\" [\"These things are so far reciprocal that if there be divination, there must be deities; and if deities, divination.\"--Cicero, De Divin., i.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0264",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Upon the rumour of which, all the people ran to see the sight, by whom his words and science, containing the principles and means to attain to this art, were recorded, and kept for many ages.--[Cicero, De Devina, ii.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0265",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "And, indeed, in all republics, a good share of the government has ever been referred to chance.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0266",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Quis est enim, qui totum diem jaculans non aliquando collineet?\" [\"For who shoots all day at butts that does not sometimes hit the white?\"--Cicero, De Divin., ii.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0267",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "There would be more certainty in it if there were a rule and a truth of always lying.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0268",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "37.] Cicero observes that of all the philosophers who have acknowledged a deity, Xenophanes the Colophonian only has endeavoured to eradicate all manner of divination--[Cicero, De Divin., i.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0269",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "I had given anything with my own eyes to see those two great marvels, the book of Joachim the Calabrian abbot, which foretold all the future Popes, their names and qualities; and that of the Emperor Leo, which prophesied all the emperors and patriarchs of Greece.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0270",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "So that there is no supple motion of body, nor any movement in the handling of arms, how irregular or ungraceful soever, that we need condemn, if they serve to protect us from the blow that is made against us.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0271",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "Of which kind of fighting the Turks still retain something in their practice of arms; and Socrates, in Plato, laughs at Laches, who had defined fortitude to be a standing firm in the ranks against the enemy.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    },
+    {
+      "id": "montaigne.p0272",
+      "w": "Essays of Michel de Montaigne — Volume 02",
+      "s": "As for the Scythians, 'tis said of them, that when Darius went his expedition to subdue them, he sent, by a herald, highly to reproach their king, that he always retired before him and declined a battle; to which Idanthyrses,--[Herod., iv.",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "montaigne.f.v0001",
+      "kind": "verbatim",
+      "text": "In those other ordinary friendships, you are to walk with bridle in your hand, with prudence and circumspection, for in them the knot is not so sure that a man may not half suspect it will slip.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "montaigne.f.v0002",
+      "kind": "verbatim",
+      "text": "This pernicious licence in respect to the distribution of praise, has formerly been confined in its area of operations; and it may be the reason why poetry once lost favour with the more judicious.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "montaigne.f.v0003",
+      "kind": "verbatim",
+      "text": "If I could have found him, I might perhaps have pursued the gentler course, being uncertain of your views; but I entreat you nevertheless to feel no manner of doubt that I refuse to carry out any wishes of yours, and that, where your commands are concerned, I know no distinction of person or matter.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 300
+      }
+    },
+    {
+      "id": "montaigne.f.v0004",
+      "kind": "verbatim",
+      "text": "I have dedicated it to the particular commodity of my kinsfolk and friends, so that, having lost me (which they must do shortly), they may therein recover some traits of my conditions and humours, and by that means preserve more whole, and more life-like, the knowledge they had of me.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "montaigne.f.v0005",
+      "kind": "verbatim",
+      "text": "68.]--by this means attributing to his quality the praise that only belongs to merit, and that of right is due to supreme desert, though lodged in the lowest and most inferior subject.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "montaigne.f.v0006",
+      "kind": "verbatim",
+      "text": "The ancient Florentines were so far from seeking to obtain any advantage over their enemies by surprise, that they always gave them a month’s warning before they drew their army into the field, by the continual tolling of a bell they called Martinella.--[After St.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "montaigne.f.v0007",
+      "kind": "verbatim",
+      "text": "I see even those who are pertinent enough, who would, but cannot stop short in their career; for whilst they are seeking out a handsome period to conclude with, they go on at random, straggling about upon impertinent trivialities, as men staggering upon weak legs.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "montaigne.f.v0008",
+      "kind": "verbatim",
+      "text": "57, ex Pacuvio] The so celebrated art of divination amongst the Tuscans took its beginning thus: A labourer striking deep with his cutter into the earth, saw the demigod Tages ascend, with an infantine aspect, but endued with a mature and senile wisdom.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "montaigne.f.v0009",
+      "kind": "verbatim",
+      "text": "The severe punishment the people of Rome inflicted upon those who fled from the battle of Cannae, and those who ran away with Aeneius Fulvius at his defeat, did not extend to death.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "montaigne.f.v0010",
+      "kind": "verbatim",
+      "text": "8.] Such as have been well rubbed in some skirmish, may yet, all wounded and bloody as they are, be brought on again the next day to charge; but such as have once conceived a good sound fear of the enemy, will never be made so much as to look him in the face.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "montaigne.f.v0011",
+      "kind": "verbatim",
+      "text": "The deadest deaths are the best: “‘Miser, O miser,’ aiunt, ‘omnia ademit Una dies infesta mihi tot praemia vitae.’” [“‘Wretch that I am,’ they cry, ‘one fatal day has deprived me of all joys of life.’”--Lucretius, iii.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "montaigne.f.v0012",
+      "kind": "verbatim",
+      "text": "Fear: begets a terrible astonishment and confusion Feared, lest disgrace should make such delinquents desperate Give these young wenches the things they long for Have you ever found any who have been dissatisfied with dying?",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "montaigne.f.v0013",
+      "kind": "verbatim",
+      "text": "6.] according to what the oracle answered to those of Delphos who, fearing to be invaded by the Persians in the Median war, inquired of Apollo, how they should dispose of the holy treasure of his temple; whether they should hide, or remove it to some other place?",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "montaigne.f.v0014",
+      "kind": "verbatim",
+      "text": "Examples have demonstrated to us that in military affairs, and all others of the like active nature, the study of sciences more softens and untempers the courages of men than it in any way fortifies and excites them.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "montaigne.f.v0015",
+      "kind": "verbatim",
+      "text": "Aristophanes the grammarian was quite out, when he reprehended Epicurus for his plain way of delivering himself, and the design of his oratory, which was only perspicuity of speech.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "montaigne.f.v0016",
+      "kind": "verbatim",
+      "text": "The sense of the passage is in the preceding sentence.] He that had never seen a river, imagined the first he met with to be the sea; and the greatest things that have fallen within our knowledge, we conclude the extremes that nature makes of the kind.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "montaigne.f.v0017",
+      "kind": "verbatim",
+      "text": "This is the reason why the lawgivers, to honour marriage with some resemblance of this divine alliance, interdict all gifts betwixt man and wife; inferring by that, that all should belong to each of them, and that they have nothing to divide or to give to each other.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "montaigne.f.v0018",
+      "kind": "verbatim",
+      "text": "That which remains will not be equally dear, will not be whole: the same day will involve the destruction of both.”] or: [“If a superior force has taken that part of my soul, why do I, the remaining one, linger behind?",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "montaigne.f.v0019",
+      "kind": "verbatim",
+      "text": "Now in this case, we should either have a man of irreproachable veracity, or so simple that he has not wherewithal to contrive, and to give a colour of truth to false relations, and who can have no ends in forging an untruth.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "montaigne.f.v0020",
+      "kind": "verbatim",
+      "text": "They rise with the sun, and so soon as they are up, eat for all day, for they have no more meals but that; they do not then drink, as Suidas reports of some other people of the East that never drank at their meals; but drink very often all day after, and sometimes to a rousing pitch.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 284
+      }
+    },
+    {
+      "id": "montaigne.f.v0021",
+      "kind": "verbatim",
+      "text": "We are to content ourselves with the light it pleases the sun to communicate to us, by virtue of his rays; and who will lift up his eyes to take in a greater, let him not think it strange, if for the reward of his presumption, he there lose his sight.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "montaigne.f.v0022",
+      "kind": "verbatim",
+      "text": "It is impossible to give over business, if you do not also quit the fruit; therefore disengage yourselves from all concern of name and glory; ‘tis to be feared the lustre of your former actions will give you but too much light, and follow you into your most private retreat.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "montaigne.f.v0023",
+      "kind": "verbatim",
+      "text": "Theodorus answered Lysimachus, who threatened to kill him, “Thou wilt do a brave feat,” said he, “to attain the force of a cantharides.” The majority of philosophers are observed to have either purposely anticipated, or hastened and assisted their own death.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "montaigne.f.v0024",
+      "kind": "verbatim",
+      "text": "If we would not disturb in our members the jurisdiction that appertains to them in this, ‘tis to be believed it would be the better for us, and that nature has given them a just and moderate temper both to pleasure and pain; neither can it fail of being just, being equal and common.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 283
+      }
+    },
+    {
+      "id": "montaigne.f.v0025",
+      "kind": "verbatim",
+      "text": "If he cannot digest a strong-working decoction to eradicate the evil, let him at least take a lenitive to ease it: [“It is an effeminate and flimsy opinion, nor more so in pain than in pleasure, in which, while we are at our ease, we cannot bear without a cry the sting of a bee.",
+      "work": "Essais",
+      "lang": "en",
+      "src": {
+        "work": "Essais"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "montaigne.f.v0026",
+      "kind": "verbatim",
+      "text": "He met the Pope (Gregory XIII.), the Grand Duke of Tuscany, the Duke of Ferrara, and cardinals, ambassadors, chancellors, and officials out of number, and hardly one of these got rid of him without having to listen and reply to divers well-judged questions.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "montaigne.f.v0027",
+      "kind": "verbatim",
+      "text": "This we heard likewise from others whom we met in our travels, and also at the siege of La Fère[31] more than fifty of these people served with us, and that they made no scruple of being married by a priest to Catholic women, who were never required to change their religion.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "montaigne.f.v0028",
+      "kind": "verbatim",
+      "text": "We witnessed an operation for rupture done by a surgeon on the child of a poor man, who was very roughly handled by the operator, and likewise saw the very fine public library overlooking the river in a pleasant situation.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "montaigne.f.v0029",
+      "kind": "verbatim",
+      "text": "In all rooms of this sort, which are always well furnished, there will be five or six tables fitted with benches at which all the guests will dine together, each party at its own particular table.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "montaigne.f.v0030",
+      "kind": "verbatim",
+      "text": "The interpreter and guide whom we engaged at Basle, a sworn messenger of the city, went to the Mass with us, and showed by his carriage that he had come there with great longing and devout feeling.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "montaigne.f.v0031",
+      "kind": "verbatim",
+      "text": "At home we put on our warm furred dressing-gowns when we enter our apartments, but here people appear in doublet and bareheaded in the warm rooms, and put on thick garments before going into the air.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "montaigne.f.v0032",
+      "kind": "verbatim",
+      "text": "When the hour strikes one of them is bound to cry out at the top of his voice to the other, and ask what is the hour, whereupon the other in like manner tells him the hour, and adds that he is keeping good watch.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "montaigne.f.v0033",
+      "kind": "verbatim",
+      "text": "It was a saying of his that people of fastidious taste had more occasion to complain when travelling of their bed furniture than of aught else, and he commended those who carried a mattress or curtains amongst the baggage when visiting strange countries.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "montaigne.f.v0034",
+      "kind": "verbatim",
+      "text": "At our meals they brought in great silver vessels of various kinds (these in sooth were intended to serve merely as ornaments, being richly worked and covered with the arms of divers gentlemen), the sort of plate which is only to be seen in houses of high quality.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "montaigne.f.v0035",
+      "kind": "verbatim",
+      "text": "On being asked if they permitted dancing, the minister exclaimed, “And why not!” and again to the question: Why had they let Jesus Christ be represented in the windows of the church, and upon the organs newly built?",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "montaigne.f.v0036",
+      "kind": "verbatim",
+      "text": "On the top of this tower the water is poured into a great stone cistern, and from this cistern it runs down through divers pipes and is distributed all over the city, which in consequence is abundantly supplied with fountains.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "montaigne.f.v0037",
+      "kind": "verbatim",
+      "text": "The road is scarcely wide enough to let pass a common cart, as in divers other places amongst these mountains, so much so that the carters hereabout are wont to reduce the size of their carts a foot at the least.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "montaigne.f.v0038",
+      "kind": "verbatim",
+      "text": "The Foulcres have done great building work, but they have built for their posterity, while the cardinal aforesaid has built for the public weal, for he has left this castle, together with the furniture still in it worth more than a hundred thousand crowns, to his successors in office.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "montaigne.f.v0039",
+      "kind": "verbatim",
+      "text": "The river was all this time on the right hand, and when they resumed their journey after dinner they kept the same road as far as Chiusa, a small fort in a mountain cleft above the Adisse, which the Venetians had taken.",
+      "work": "Journal of Travels in Italy",
+      "lang": "en",
+      "src": {
+        "work": "Journal of Travels in Italy"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "montaigne.f.v0040",
+      "kind": "verbatim",
+      "text": "Let us add, that on his monument he is represented in a coat of mail, with his casque and gauntlets on his right side, and a lion at his feet, all which signifies, in the language of funeral emblems, that the departed has been engaged in some important military transactions.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "montaigne.f.v0041",
+      "kind": "verbatim",
+      "text": "The hotels, the provisions, the Swiss cookery, everything, was agreeable to him; it appears, indeed, as if he preferred to the French manners and tastes those of the places he was visiting, and of which the simplicity and freedom (or frankness) accorded more with his own mode of life and thinking.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "montaigne.f.v0042",
+      "kind": "verbatim",
+      "text": "On quitting Venice, he went in succession to Ferrara, Rovigo, Padua, Bologna (where he had a stomach-ache), Florence, &c.; and everywhere, before alighting, he made it a rule to send some of his servants to ascertain where the best accommodation was to be had.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "montaigne.f.v0043",
+      "kind": "verbatim",
+      "text": "Gifted with an active and inquiring spirit, and, above all, possessing a sound and healthy tone of mind, Mademoiselle de Gournay had been carried from her childhood with that tide which set in with sixteenth century towards controversy, learning, and knowledge.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "montaigne.f.v0044",
+      "kind": "verbatim",
+      "text": "We do not know what part he took in that assembly: but it is known that he was commissioned, about this period, to negotiate between Henry of Navarre (afterwards Henry IV.) and the Duke of Guise.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "montaigne.f.v0045",
+      "kind": "verbatim",
+      "text": "On the other hand, Malebranche and the writers of Port Royal were against him; some reprehended the licentiousness of his writings; others their impiety, materialism, epicureanism.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "montaigne.f.v0046",
+      "kind": "verbatim",
+      "text": "He then gave me to understand that his complaint was infectious, and, moreover, disagreeable and depressing; and that he, knowing thoroughly my constitution, desired that I should content myself with coming to see him now and then.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "montaigne.f.v0047",
+      "kind": "verbatim",
+      "text": "As for you, my friend, I feel sure that you are so wise, that you will control your emotions, and submit to His divine ordinance regarding me; and I beg of you to see that that good man and woman do not mourn for my departure unnecessarily.\" He proceeded to inquire how they behaved at present.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "montaigne.f.v0048",
+      "kind": "verbatim",
+      "text": "He blessed God that in his extremity he had the happiness to be surrounded by those whom he held dearest in the world, and he looked upon it as a fine spectacle, where four persons were together, so unanimous in their feelings, and loving each other for each other's sake.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "montaigne.f.v0049",
+      "kind": "verbatim",
+      "text": "Interrupting me, he begged that it might happen so, and that the conversation which had passed between us might not be mere words, but might be impressed deeply on our minds, to be put in exercise at the first occasion; and that this was the real object and aim of all philosophy.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 280
+      }
+    },
+    {
+      "id": "montaigne.f.v0050",
+      "kind": "verbatim",
+      "text": "The notary was called, and he dictated his will there and then with such speed that the man could scarcely keep up with him; and when he had done, he asked me to read it out, saying to me, \"What a good thing it is to look after what are called our riches.\" 'Sunt haec, quoe hominibus vocantur bona'.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "montaigne.f.v0051",
+      "kind": "verbatim",
+      "text": "After God, thou shouldest love thy father and mother--thy mother, my sister, whom I regard as one of the best and most intelligent of women, and by whom I beg of thee to let thy own life be regulated.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "montaigne.f.v0052",
+      "kind": "verbatim",
+      "text": "You enjoy sufficient store of wealth and beauty; you are a lady of good family; it only remains for you to add to these possessions the cultivation of your mind, in which I exhort you not to fail.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "montaigne.f.v0053",
+      "kind": "verbatim",
+      "text": "You perceive what disasters our quarrels have brought upon this kingdom, and I anticipate still worse mischiefs; and in your goodness and wisdom, beware of involving your family in such broils; let it continue to enjoy its former reputation and happiness.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "montaigne.f.v0054",
+      "kind": "verbatim",
+      "text": "I, in order to change the current of his thoughts, put in, \"Surely not; water is the best.\" \"Ah, yes,\" he returned, \"doubtless so;--(Greek phrase)--.\" He had now become, icy-cold at his extremities, even to his face; a deathly perspiration was upon him, and his pulse was scarcely perceptible.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "montaigne.f.v0055",
+      "kind": "verbatim",
+      "text": "It is perfectly possible that some fastidious persons will detect in the book some trace of Gascon parentage; but it will be so much the more to their discredit, that they allowed the task to devolve on one who is quite a novice in these things.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "montaigne.f.v0056",
+      "kind": "verbatim",
+      "text": "I know, indeed, that he was raised to the dignities connected with his neighbourhood--dignities accounted considerable; and I know also, that no one ever acquitted himself better of them; and when he died at the age of thirty-two, he enjoyed a reputation in that way beyond all who had preceded him.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "montaigne.f.v0057",
+      "kind": "verbatim",
+      "text": "Naturally each workman feels himself more strong in some special part his art, and those are to be regarded as most fortunate, who lay hands on the noblest, for all the parts essential to the construction of any whole are not equally precious.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "montaigne.f.v0058",
+      "kind": "verbatim",
+      "text": "I have always looked forward to your enjoyment of your present fortune, and you may recollect that, even when I had to make confession of itto my cure, I viewed your successes with satisfaction: now, with the greater propriety and freedom, I embrace them affectionately.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "montaigne.f.v0059",
+      "kind": "verbatim",
+      "text": "You have acted very commendably in adapting yourself, in the matter of external forms, to your new fortunes; but the preservation of your old affability and frankness in private intercourse is entitled to an equal share of praise.",
+      "work": "Essays of Michel de Montaigne — Volume 01",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 01"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "montaigne.f.v0060",
+      "kind": "verbatim",
+      "text": "3] --The Italians have more fitly baptized by this name--[La tristezza]-- malignity; for 'tis a quality always hurtful, always idle and vain; and as being cowardly, mean, and base, it is by the Stoics expressly and particularly forbidden to their sages.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "montaigne.f.v0061",
+      "kind": "verbatim",
+      "text": "As folly, on the one side, though it should enjoy all it desire, would notwithstanding never be content, so, on the other, wisdom, acquiescing in the present, is never dissatisfied with itself.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "montaigne.f.v0062",
+      "kind": "verbatim",
+      "text": "We owe subjection and obedience to all our kings, whether good or bad, alike, for that has respect unto their office; but as to esteem and affection, these are only due to their virtue.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "montaigne.f.v0063",
+      "kind": "verbatim",
+      "text": "I loved thee,\" answered he, \"whilst thou wert worthy of it, but since thou art become a parricide, an incendiary, a player, and a coachman, I hate thee as thou dost deserve.\" And the other, why he should attempt to kill him?",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "montaigne.f.v0064",
+      "kind": "verbatim",
+      "text": "67.]--But the public and universal testimonies that were given of him after his death (and so will be to all posterity, both of him and all other wicked princes like him), of his tyrannies and abominable deportment, who, of a sound judgment, can reprove them?",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "montaigne.f.v0065",
+      "kind": "verbatim",
+      "text": "Totus hic locus est contemnendus in nobis, non negligendus in nostris;\"--[\"The place of our sepulture is to be contemned by us, but not to be neglected by our friends.\"--Cicero, Tusc.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "montaigne.f.v0066",
+      "kind": "verbatim",
+      "text": "Plutarch says of those who are delighted with little dogs and monkeys, that the amorous part that is in us, for want of a legitimate object, rather than lie idle, does after that manner forge and create one false and frivolous.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "montaigne.f.v0067",
+      "kind": "verbatim",
+      "text": "Wherein he was still less excusable than the former, and less than he was afterwards when, having lost a battle under Quintilius Varus in Germany, in rage and despair he went running his head against the wall, crying out, \"O Varus!",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "montaigne.f.v0068",
+      "kind": "verbatim",
+      "text": "Deceit may serve for a need, but he only confesses himself overcome who knows he is neither subdued by policy nor misadventure, but by dint of valour, man to man, in a fair and just war.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "montaigne.f.v0069",
+      "kind": "verbatim",
+      "text": "Eumenes, being shut up in the city of Nora by Antigonus, and by him importuned to come out to speak with him, as he sent him word it was fit he should to a greater man than himself, and one who had now an advantage over him, returned this noble answer.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "montaigne.f.v0070",
+      "kind": "verbatim",
+      "text": "12.]--I should have a register of injuries, or a prompter, as Darius, who, that he might not forget the offence he had received from those of Athens, so oft as he sat down to dinner, ordered one of his pages three times to repeat in his ear, \"Sir, remember the Athenians\";--[Herod., v.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "montaigne.f.v0071",
+      "kind": "verbatim",
+      "text": "It is not without good reason said \"that he who has not a good memory should never take upon him the trade of lying.\" I know very well that the grammarians--[Nigidius, Aulus Gellius, xi.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "montaigne.f.v0072",
+      "kind": "verbatim",
+      "text": "In what they, wholly invent, forasmuch as there is no contrary impression to jostle their invention there seems to be less danger of tripping; and yet even this by reason it is a vain body and without any hold, is very apt to escape the memory, if it be not well assured.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "montaigne.f.v0073",
+      "kind": "verbatim",
+      "text": "An ancient father says \"that a dog we know is better company than a man whose language we do not understand.\" \"Ut externus alieno pene non sit hominis vice.\" [\"As a foreigner cannot be said to supply us the place of a man.\" --Pliny, Nat.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "montaigne.f.v0074",
+      "kind": "verbatim",
+      "text": "At which the poor confounded ambassador, the more handsomely to disengage himself, made answer, that the Duke would have been very loth, out of respect to his Majesty, that such an execution should have been performed by day.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "montaigne.f.v0075",
+      "kind": "verbatim",
+      "text": "I know, experimentally, the disposition of nature so impatient of tedious and elaborate premeditation, that if it do not go frankly and gaily to work, it can perform nothing to purpose.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "montaigne.f.v0076",
+      "kind": "verbatim",
+      "text": "I perhaps sometimes hit upon something when I write, that seems quaint and sprightly to me, though it will appear dull and heavy to another.--But let us leave these fine compliments; every one talks thus of himself according to his talent.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "montaigne.f.v0077",
+      "kind": "verbatim",
+      "text": "Upon the rumour of which, all the people ran to see the sight, by whom his words and science, containing the principles and means to attain to this art, were recorded, and kept for many ages.--[Cicero, De Devina, ii.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "montaigne.f.v0078",
+      "kind": "verbatim",
+      "text": "37.] Cicero observes that of all the philosophers who have acknowledged a deity, Xenophanes the Colophonian only has endeavoured to eradicate all manner of divination--[Cicero, De Divin., i.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "montaigne.f.v0079",
+      "kind": "verbatim",
+      "text": "I had given anything with my own eyes to see those two great marvels, the book of Joachim the Calabrian abbot, which foretold all the future Popes, their names and qualities; and that of the Emperor Leo, which prophesied all the emperors and patriarchs of Greece.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "montaigne.f.v0080",
+      "kind": "verbatim",
+      "text": "As for the Scythians, 'tis said of them, that when Darius went his expedition to subdue them, he sent, by a herald, highly to reproach their king, that he always retired before him and declined a battle; to which Idanthyrses,--[Herod., iv.",
+      "work": "Essays of Michel de Montaigne — Volume 02",
+      "lang": "en",
+      "src": {
+        "work": "Essays of Michel de Montaigne — Volume 02"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "montaigne.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 7,
+      "worksSpan": 3,
+      "examples": [
+        "If I could have found him, I might perhaps have pursued the gentler course, being uncertain of your views; but I entreat you nevertheless to feel no manner of doubt that I refuse to carry out any wishes of yours, and that, where your commands are concerned, I know no distinction of person or matter.",
+        "If you have made your profit of life, you have had enough of it; go your way satisfied."
+      ]
+    }
+  ],
+  "concepts": [
+    "essai",
+    "jugement",
+    "coutume",
+    "amitié",
+    "prudence",
+    "vanité"
+  ],
+  "entities": [],
+  "doctrine": {
+    "concepts": [
+      "essai",
+      "jugement",
+      "coutume",
+      "amitié",
+      "prudence",
+      "vanité"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "le jugement ne doit pas être une clameur : la foule qui condamne un nom ne dit pas le droit",
+          "en": "judgement must not be a clamour: the crowd condemning a name does not say what is right",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "They had no sooner heard the name of one senator"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur se tient loin des grandes espérances : dans les amitiés ordinaires, on avance bride en main",
+          "en": "happiness keeps away from great hopes: in ordinary friendships, one walks with a bridle in hand",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "In those other ordinary friendships, you are to "
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "la liberté s'apprend par la pensée de la mort : qui a appris à mourir a désappris de servir",
+          "en": "liberty is learned by thinking on death: he who has learned to die has unlearned to serve",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "The premeditation of death is the premeditation of liberty; he who has learned to die has unlearned to serve."
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la vérité demande des matériaux : on ne bâtit pas un livre sans savoir ni art",
+          "en": "truth requires materials: no book is built without learning and art",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "Is it not to build a wall without stone or brick"
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "les titres ne pèsent rien devant la douleur : le pouvoir sans usage n’est qu’un nom",
+          "en": "titles weigh nothing before pain: power without use is but a name",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "At the first twitch of the gout it signifies muc",
+              "reviewed": true
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu se reconnaît à l’épreuve : le plus digne est le plus hasardeux",
+          "en": "virtue is known by the test: the worthiest is the most hazardous",
+          "anchors": [
+            {
+              "work": "Essais",
+              "startsWith": "Even so in virtue itself, of two like effects, w"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "Essais": {
+        "summary": {
+          "fr": "L’essai de soi-même : jugement, coutume, amitié.",
+          "en": "Trying oneself: judgement, custom, friendship."
+        },
+        "domains": [
+          "vertu",
+          "justice",
+          "verite"
+        ]
+      },
+      "Journal of Travels in Italy": {
+        "summary": {
+          "fr": "Le regard qui s’éprouve au-dehors, entre les puissants.",
+          "en": "The gaze trying itself abroad, among the powerful."
+        },
+        "domains": [
+          "liberte",
+          "pouvoir"
+        ]
+      }
+    }
+  },
+  "stats": {
+    "sentences": 272,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:056269c9d4bff0b633ff558d8a74ffd6f9236fe2ed925c8604b17bc68a992a0f"
+}

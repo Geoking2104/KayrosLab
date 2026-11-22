@@ -37,6 +37,11 @@ target/
 .openkb/
 salon/scripts/reports/
 
+# Salon — caches de récolte et staging (jamais publiés)
+salon/.cache/
+salon/.staging/
+gutindex.all.txt
+
 integrations/teams/dist/
 
 # Clés de signature d'audit (pilote Proof-of-Control)

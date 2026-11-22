@@ -74,6 +74,14 @@ else
   echo "AVERTISSEMENT : console statique absente — /console/ 404." >&2
 fi
 
+# Salon : page autonome + packs mémoire (68 auteurs).
+if [[ -f "${APP_DIR}/backend/web/public/salon/index.html" ]]; then
+  mkdir -p "${stage}/salon"
+  cp -a "${APP_DIR}/backend/web/public/salon/." "${stage}/salon/"
+else
+  echo "AVERTISSEMENT : salon statique absent — /salon/ 404." >&2
+fi
+
 if [[ -d "${APP_DIR}/legal" ]]; then
   mkdir -p "${stage}/legal"
   cp -a "${APP_DIR}/legal/." "${stage}/legal/"

@@ -43,6 +43,9 @@ function sanitizeTurn(turn) {
     id: str(turn.id, 64),
     authorId: str(turn.authorId, 64),
     text: str(turn.text, MAX_TEXT),
+    // La chaîne des prises est le cœur du contrat de parole : elle doit
+    // survivre à la synchronisation serveur (sinon `last?.prise` est perdu).
+    prise: turn.prise != null ? str(turn.prise, 240) : undefined,
     origin: turn.origin === 'agent' ? 'agent' : 'user',
     grounded: Boolean(turn.grounded),
     act: ACTS.has(turn.act) ? turn.act : 'adresse',

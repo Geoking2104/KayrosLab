@@ -1,654 +1,2002 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T16:51:01.187Z",
+  "updatedAt": "2026-11-22T11:09:37.176Z",
   "authors": {
     "smith": {
       "kb": "salon-smith",
-      "works": [],
+      "works": [
+        {
+          "title": "The Wealth of Nations",
+          "sentences": 78
+        },
+        {
+          "title": "The Theory of Moral Sentiments",
+          "sentences": 74
+        },
+        {
+          "title": "The Essays of Adam Smith",
+          "sentences": 75
+        }
+      ],
       "pack": {
         "path": "kb/smith.json",
-        "builtAt": "2026-10-06T16:51:00.911Z",
-        "sentences": 36,
-        "formulas": 20,
-        "checksum": "sha256:3d837dbf3e351ba44b43b51a896fbb7a0862be8b5bf15a6d70b39b64e4c8d381"
+        "builtAt": "2026-11-22T11:09:33.054Z",
+        "sentences": 227,
+        "formulas": 82,
+        "checksum": "sha256:cd10485b9ddceac8250456253eb9fdf4ea69524a44e84cd4db0fdd919cdfd73a"
       },
       "kbVersion": "smith@bootstrap-2026-10-03"
     },
     "aristote": {
       "kb": "salon-aristote",
-      "works": [],
+      "works": [
+        {
+          "title": "The Nicomachean ethics of Aristotle",
+          "sentences": 59
+        },
+        {
+          "title": "The Poetics of Aristotle",
+          "sentences": 61
+        },
+        {
+          "title": "Politics: A Treatise on Government",
+          "sentences": 59
+        },
+        {
+          "title": "The Athenian Constitution",
+          "sentences": 58
+        },
+        {
+          "title": "The Categories",
+          "sentences": 59
+        }
+      ],
       "pack": {
         "path": "kb/aristote.json",
-        "builtAt": "2026-10-06T16:51:00.936Z",
-        "sentences": 66,
-        "formulas": 36,
-        "checksum": "sha256:7ae37c72932e414881736b49cf8a34d80d4741b18a8ca104fec7922e86756484"
+        "builtAt": "2026-11-22T11:09:33.078Z",
+        "sentences": 296,
+        "formulas": 81,
+        "checksum": "sha256:b86cec33d161ed10960e4ca56b87646a3a3d4270cf5dbee934d49655dd1b247a"
       },
       "kbVersion": "aristote@bootstrap-2026-10-03"
     },
     "spinoza": {
       "kb": "salon-spinoza",
-      "works": [],
+      "works": [
+        {
+          "title": "Ethics",
+          "sentences": 56
+        },
+        {
+          "title": "On the Improvement of the Understanding",
+          "sentences": 58
+        },
+        {
+          "title": "Theologico-Political Treatise",
+          "sentences": 52
+        },
+        {
+          "title": "The Philosophy of Spinoza",
+          "sentences": 55
+        },
+        {
+          "title": "Ethics — Part 1",
+          "sentences": 55
+        }
+      ],
       "pack": {
         "path": "kb/spinoza.json",
-        "builtAt": "2026-10-06T16:51:00.942Z",
-        "sentences": 36,
-        "formulas": 20,
-        "checksum": "sha256:ef34e32da4f0ff29c04f9bfcca1d09896ec32831d140cf7fb1ecf31f889d7986"
+        "builtAt": "2026-11-22T11:09:33.098Z",
+        "sentences": 276,
+        "formulas": 81,
+        "checksum": "sha256:274906f182fe46efa1e5f7818738c3af47b4c356a6793c94ef82c8e8fca37fce"
       },
       "kbVersion": "spinoza@bootstrap-2026-10-03"
     },
     "darwin": {
       "kb": "salon-darwin",
-      "works": [],
+      "works": [
+        {
+          "title": "On the Origin of Species",
+          "sentences": 55
+        },
+        {
+          "title": "The Voyage of the Beagle",
+          "sentences": 58
+        },
+        {
+          "title": "The Descent of Man, and Selection in Relation to Sex",
+          "sentences": 53
+        },
+        {
+          "title": "The Expression of the Emotions in Man and Animals",
+          "sentences": 55
+        },
+        {
+          "title": "The Autobiography of Charles Darwin",
+          "sentences": 54
+        }
+      ],
       "pack": {
         "path": "kb/darwin.json",
-        "builtAt": "2026-10-06T16:51:00.950Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:92eb5db6ab959df77bcbcb315d39874b61da0aab8968b4cc4705892c57a9fc05"
+        "builtAt": "2026-11-22T11:09:33.116Z",
+        "sentences": 275,
+        "formulas": 80,
+        "checksum": "sha256:1e63c1fdc32ff9c8edcc5832818c47f5bd2d6f481b206d46340c34a17b025d13"
       },
       "kbVersion": "darwin@bootstrap-2026-10-03"
     },
     "confucius": {
       "kb": "salon-confucius",
-      "works": [],
+      "works": [
+        {
+          "title": "The Analects of Confucius (from the Chinese Classics)",
+          "sentences": 74
+        },
+        {
+          "title": "The book of filial duty",
+          "sentences": 73
+        },
+        {
+          "title": "The Sayings of Confucius A New Translation of the Greater Part of the Confucian Analects",
+          "sentences": 79
+        }
+      ],
       "pack": {
         "path": "kb/confucius.json",
-        "builtAt": "2026-10-06T16:51:00.954Z",
-        "sentences": 24,
-        "formulas": 14,
-        "checksum": "sha256:041e3a5557986982276a88ca811e21f0a1d9271801af9dad25a769e2333c4e52"
+        "builtAt": "2026-11-22T11:09:33.127Z",
+        "sentences": 226,
+        "formulas": 83,
+        "checksum": "sha256:c339af4d86fe955ea1b43e0617048b63227e874aa8a94a6d4fc53c865f03eeaf"
       },
       "kbVersion": "confucius@bootstrap-2026-10-03"
     },
     "poe": {
       "kb": "salon-poe",
-      "works": [],
+      "works": [
+        {
+          "title": "Tales, Volume 1",
+          "sentences": 53
+        },
+        {
+          "title": "Tales, Volume 2",
+          "sentences": 55
+        },
+        {
+          "title": "Tales, Volume 3",
+          "sentences": 57
+        },
+        {
+          "title": "Poems and Essays, Volume 4",
+          "sentences": 58
+        },
+        {
+          "title": "Tales, Volume 5",
+          "sentences": 52
+        }
+      ],
       "pack": {
         "path": "kb/poe.json",
-        "builtAt": "2026-10-06T16:51:00.959Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:6ab9dfe495af3ee56d22ee428b50eddca1350f2fed1469022220f67c17ecea35"
+        "builtAt": "2026-11-22T11:09:33.141Z",
+        "sentences": 275,
+        "formulas": 81,
+        "checksum": "sha256:8e677caec700db7b9d5a654cfb1de4dbfac962b6d2a287d08cce2d334843b71d"
       },
       "kbVersion": "poe@bootstrap-2026-10-03"
     },
     "kant": {
       "kb": "salon-kant",
-      "works": [],
+      "works": [
+        {
+          "title": "Fundamental Principles of the Metaphysic of Morals",
+          "sentences": 57
+        },
+        {
+          "title": "The Critique of Practical Reason",
+          "sentences": 59
+        },
+        {
+          "title": "The Critique of Pure Reason",
+          "sentences": 55
+        },
+        {
+          "title": "The Metaphysical Elements of Ethics",
+          "sentences": 58
+        },
+        {
+          "title": "Kant's Critique of Judgement",
+          "sentences": 55
+        }
+      ],
       "pack": {
         "path": "kb/kant.json",
-        "builtAt": "2026-10-06T16:51:00.965Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:10fb00d3a164fa1a960f869df496f44d410533a7dc0e428507c492266ae18fc0"
+        "builtAt": "2026-11-22T11:09:33.155Z",
+        "sentences": 284,
+        "formulas": 81,
+        "checksum": "sha256:37c7bc1f1d5720dc0712d7ca66eb797b03fad1d7d9b6a89bd84698d26f6e0ff2"
       },
       "kbVersion": "kant@bootstrap-2026-10-03"
     },
     "dostoevski": {
       "kb": "salon-dostoevski",
-      "works": [],
+      "works": [
+        {
+          "title": "Crime and Punishment",
+          "sentences": 49
+        },
+        {
+          "title": "The Brothers Karamazov",
+          "sentences": 50
+        },
+        {
+          "title": "Notes from the Underground",
+          "sentences": 52
+        },
+        {
+          "title": "The Idiot",
+          "sentences": 54
+        },
+        {
+          "title": "The possessed",
+          "sentences": 50
+        }
+      ],
       "pack": {
         "path": "kb/dostoevski.json",
-        "builtAt": "2026-10-06T16:51:00.970Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:aeb46fedb8535b72800c21390c728239ade652383164ca0b5016ea29bd3f2085"
+        "builtAt": "2026-11-22T11:09:33.165Z",
+        "sentences": 255,
+        "formulas": 80,
+        "checksum": "sha256:37a1ded6642c44230e3d4aeb1bb717d8014b29ddcd3022e1afe563bfd12a4d4c"
       },
       "kbVersion": "dostoevski@bootstrap-2026-10-03"
     },
     "kafka": {
       "kb": "salon-kafka",
-      "works": [],
+      "works": [
+        {
+          "title": "Metamorphosis",
+          "sentences": 51
+        },
+        {
+          "title": "The Trial",
+          "sentences": 53
+        },
+        {
+          "title": "Das Urteil: Eine Geschichte",
+          "sentences": 52
+        },
+        {
+          "title": "In der Strafkolonie",
+          "sentences": 52
+        },
+        {
+          "title": "Ein Landarzt: Kleine Erzählungen",
+          "sentences": 55
+        }
+      ],
       "pack": {
         "path": "kb/kafka.json",
-        "builtAt": "2026-10-06T16:51:00.975Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:89836386527b2809a27fcbf6a422248437facb6e7bf959a5cfd0f0c168c881cd"
+        "builtAt": "2026-11-22T11:09:33.173Z",
+        "sentences": 263,
+        "formulas": 81,
+        "checksum": "sha256:c4d3572a6dc1f279682ad1a524ebbe357d40d5debeb467656a6182dffa15dffc"
       },
       "kbVersion": "kafka@bootstrap-2026-10-03"
     },
     "nietzsche": {
       "kb": "salon-nietzsche",
-      "works": [],
+      "works": [
+        {
+          "title": "Thus Spake Zarathustra: A Book for All and None",
+          "sentences": 52
+        },
+        {
+          "title": "Beyond Good and Evil",
+          "sentences": 54
+        },
+        {
+          "title": "The Birth of Tragedy; or, Hellenism and Pessimism",
+          "sentences": 57
+        },
+        {
+          "title": "The Antichrist",
+          "sentences": 56
+        },
+        {
+          "title": "Human, All Too Human: A Book for Free Spirits",
+          "sentences": 57
+        }
+      ],
       "pack": {
         "path": "kb/nietzsche.json",
-        "builtAt": "2026-10-06T16:51:00.980Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:dd7a87e71983cdb4c7cba423c3a46231af6134c38da5b952387dfe663b2c0e11"
+        "builtAt": "2026-11-22T11:09:33.182Z",
+        "sentences": 276,
+        "formulas": 80,
+        "checksum": "sha256:9d48a94a1029b95649bc4238d39d32d9a2c998e751199642e29c88e2e057de88"
       },
       "kbVersion": "nietzsche@bootstrap-2026-10-03"
     },
     "balzac": {
       "kb": "salon-balzac",
-      "works": [],
+      "works": [
+        {
+          "title": "Father Goriot",
+          "sentences": 52
+        },
+        {
+          "title": "Eugenie Grandet",
+          "sentences": 50
+        },
+        {
+          "title": "Cousin Betty",
+          "sentences": 53
+        },
+        {
+          "title": "Lost Illusions",
+          "sentences": 49
+        },
+        {
+          "title": "The Magic Skin",
+          "sentences": 56
+        }
+      ],
       "pack": {
         "path": "kb/balzac.json",
-        "builtAt": "2026-10-06T16:51:00.984Z",
-        "sentences": 60,
-        "formulas": 34,
-        "checksum": "sha256:2598777966d1de2e0429c7dac192863f9bbbb950684702c245c95ede52eb4abf"
+        "builtAt": "2026-11-22T11:09:33.190Z",
+        "sentences": 260,
+        "formulas": 81,
+        "checksum": "sha256:f2757882aaef2a577ed62667468ab7276856ba8a2ee73beff2df6c9282e945ad"
       },
       "kbVersion": "balzac@bootstrap-2026-10-03"
     },
     "austen": {
       "kb": "salon-austen",
-      "works": [],
+      "works": [
+        {
+          "title": "Pride and Prejudice",
+          "sentences": 53
+        },
+        {
+          "title": "Sense and Sensibility",
+          "sentences": 52
+        },
+        {
+          "title": "Mansfield Park",
+          "sentences": 50
+        },
+        {
+          "title": "Persuasion",
+          "sentences": 56
+        },
+        {
+          "title": "Emma",
+          "sentences": 50
+        }
+      ],
       "pack": {
         "path": "kb/austen.json",
-        "builtAt": "2026-10-06T16:51:00.989Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:24cf18370126f91c27bb04679431eb617e7f84ad5b688f491146140a1452de36"
+        "builtAt": "2026-11-22T11:09:33.198Z",
+        "sentences": 261,
+        "formulas": 81,
+        "checksum": "sha256:214beab318bcc2401b77739c1ff495ab2a53bedfd04a597e48c7b0ead1efee22"
       },
       "kbVersion": "austen@bootstrap-2026-10-03"
     },
     "rousseau": {
       "kb": "salon-rousseau",
-      "works": [],
+      "works": [
+        {
+          "title": "Discourse on Inequality",
+          "sentences": 73
+        },
+        {
+          "title": "The Social Contract",
+          "sentences": 73
+        },
+        {
+          "title": "The Confessions",
+          "sentences": 69
+        },
+        {
+          "title": "Julie, or the New Heloise",
+          "sentences": 71
+        }
+      ],
       "pack": {
         "path": "kb/rousseau.json",
-        "builtAt": "2026-10-06T16:51:00.996Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:e6cea55a8e2e3893b1ea5b2123fa1adaa453cb1aaa9513fda311711f856b96ce"
+        "builtAt": "2026-11-22T11:09:33.207Z",
+        "sentences": 286,
+        "formulas": 82,
+        "checksum": "sha256:5c1b90849886b49b93b677cc1841b54f23bddde16b809e58cbcf8d3f0f3aa52f"
       },
       "kbVersion": "rousseau@bootstrap-2026-10-03"
     },
     "verne": {
       "kb": "salon-verne",
-      "works": [],
+      "works": [
+        {
+          "title": "Twenty Thousand Leagues under the Sea",
+          "sentences": 53
+        },
+        {
+          "title": "Around the World in Eighty Days",
+          "sentences": 54
+        },
+        {
+          "title": "A Journey into the Interior of the Earth",
+          "sentences": 48
+        },
+        {
+          "title": "From the Earth to the moon; and, round the moon",
+          "sentences": 57
+        },
+        {
+          "title": "Michael Strogoff; Or, The Courier of the Czar",
+          "sentences": 52
+        }
+      ],
       "pack": {
         "path": "kb/verne.json",
-        "builtAt": "2026-10-06T16:51:01.001Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:aad54556609835827016a3cfbdd34c0fd9e33205df32a850b60cc159488e6241"
+        "builtAt": "2026-11-22T11:09:33.215Z",
+        "sentences": 264,
+        "formulas": 80,
+        "checksum": "sha256:f250e3b48360487ec301a57cd810bb224efc3805bd3629555c7d91f6c8c170ae"
       },
       "kbVersion": "verne@bootstrap-2026-10-03"
     },
     "marx": {
       "kb": "salon-marx",
-      "works": [],
+      "works": [
+        {
+          "title": "The Communist Manifesto",
+          "sentences": 57
+        },
+        {
+          "title": "A Contribution to the Critique of Political Economy",
+          "sentences": 56
+        },
+        {
+          "title": "The Eighteenth Brumaire of Louis Bonaparte",
+          "sentences": 58
+        },
+        {
+          "title": "Secret Diplomatic History of The Eighteenth Century",
+          "sentences": 57
+        },
+        {
+          "title": "Manifesto of the Communist Party",
+          "sentences": 50
+        }
+      ],
       "pack": {
         "path": "kb/marx.json",
-        "builtAt": "2026-10-06T16:51:01.005Z",
-        "sentences": 48,
-        "formulas": 26,
-        "checksum": "sha256:31023c997512d1af83071fc3693f7fd1a5c0f6b1f3b97f3afda64a542785d43a"
+        "builtAt": "2026-11-22T11:09:33.222Z",
+        "sentences": 278,
+        "formulas": 80,
+        "checksum": "sha256:219bc134b20083253a6a673bec4bbfd7c1fb38a12dae89c9d895236b6e2bc313"
       },
       "kbVersion": "marx@bootstrap-2026-10-03"
     },
     "tolstoi": {
       "kb": "salon-tolstoi",
-      "works": [],
+      "works": [
+        {
+          "title": "War and Peace",
+          "sentences": 56
+        },
+        {
+          "title": "Anna Karenina",
+          "sentences": 52
+        },
+        {
+          "title": "Resurrection",
+          "sentences": 53
+        },
+        {
+          "title": "The Cossacks: A Tale of 1852",
+          "sentences": 50
+        },
+        {
+          "title": "The Kreutzer Sonata and Other Stories",
+          "sentences": 52
+        }
+      ],
       "pack": {
         "path": "kb/tolstoi.json",
-        "builtAt": "2026-10-06T16:51:01.010Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:ece16f3cfe969687dce1f86c3e3db6ae2b8aba807ac353efe2b5b2eb3e75cdc2"
+        "builtAt": "2026-11-22T11:09:33.231Z",
+        "sentences": 263,
+        "formulas": 80,
+        "checksum": "sha256:99229fa54434d25cf853e98086eb0e8393f4765a37c779ab4f8133e6bceedb49"
       },
       "kbVersion": "tolstoi@bootstrap-2026-10-03"
     },
     "marcaurele": {
       "kb": "salon-marcaurele",
-      "works": [],
+      "works": [
+        {
+          "title": "Meditations",
+          "sentences": 227
+        }
+      ],
       "pack": {
         "path": "kb/marcaurele.json",
-        "builtAt": "2026-10-06T16:51:01.013Z",
-        "sentences": 30,
-        "formulas": 17,
-        "checksum": "sha256:8e3e3e22345f82c6c89298aec17a262871c4e0b90c036b8bf26503c6eb7e0473"
+        "builtAt": "2026-11-22T11:09:33.238Z",
+        "sentences": 227,
+        "formulas": 81,
+        "checksum": "sha256:8a229cda9b403b6bf27aba112d8dccb1c8841a1a2ca22fdfcb61f111a4790056"
       },
       "kbVersion": "marcaurele@bootstrap-2026-10-03"
     },
     "montaigne": {
       "kb": "salon-montaigne",
-      "works": [],
+      "works": [
+        {
+          "title": "Essais",
+          "sentences": 70
+        },
+        {
+          "title": "Journal of Travels in Italy",
+          "sentences": 65
+        },
+        {
+          "title": "Essays of Michel de Montaigne — Volume 01",
+          "sentences": 68
+        },
+        {
+          "title": "Essays of Michel de Montaigne — Volume 02",
+          "sentences": 69
+        }
+      ],
       "pack": {
         "path": "kb/montaigne.json",
-        "builtAt": "2026-10-06T16:51:01.016Z",
-        "sentences": 25,
-        "formulas": 14,
-        "checksum": "sha256:bfc12415e034750a05d47349096ccaddd99944c5778735878747f1cd6734d4ca"
+        "builtAt": "2026-11-22T11:09:33.248Z",
+        "sentences": 272,
+        "formulas": 81,
+        "checksum": "sha256:056269c9d4bff0b633ff558d8a74ffd6f9236fe2ed925c8604b17bc68a992a0f"
       },
       "kbVersion": "montaigne@bootstrap-2026-10-03"
     },
     "cervantes": {
       "kb": "salon-cervantes",
-      "works": [],
+      "works": [
+        {
+          "title": "Don Quixote",
+          "sentences": 52
+        },
+        {
+          "title": "The Exemplary Novels of Cervantes",
+          "sentences": 59
+        },
+        {
+          "title": "Wit and Wisdom of Don Quixote",
+          "sentences": 53
+        },
+        {
+          "title": "The Story of Don Quixote",
+          "sentences": 58
+        },
+        {
+          "title": "The History of Don Quixote de la Mancha",
+          "sentences": 54
+        }
+      ],
       "pack": {
         "path": "kb/cervantes.json",
-        "builtAt": "2026-10-06T16:51:01.020Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:75d740195ecfe65904982eaeb8da95924301c1656e9d4f3175cd63e9e952c583"
+        "builtAt": "2026-11-22T11:09:33.256Z",
+        "sentences": 276,
+        "formulas": 81,
+        "checksum": "sha256:ff07db6888408094b4cb923d262326fecbecf2a707b8ad9fa5fd6fbe3ba0af8c"
       },
       "kbVersion": "cervantes@bootstrap-2026-10-03"
     },
     "machiavel": {
       "kb": "salon-machiavel",
-      "works": [],
+      "works": [
+        {
+          "title": "The Prince",
+          "sentences": 59
+        },
+        {
+          "title": "Discourses on the First Decade of Titus Livius",
+          "sentences": 62
+        },
+        {
+          "title": "History of Florence and of the Affairs of Italy",
+          "sentences": 58
+        },
+        {
+          "title": "La mandragola - La Clizia - Belfagor",
+          "sentences": 49
+        },
+        {
+          "title": "Machiavelli, Volume I",
+          "sentences": 53
+        }
+      ],
       "pack": {
         "path": "kb/machiavel.json",
-        "builtAt": "2026-10-06T16:51:01.025Z",
-        "sentences": 54,
-        "formulas": 30,
-        "checksum": "sha256:362b97005c0408846ac9528a52175a708b8f55723da19f69f16b81cbaba617cc"
+        "builtAt": "2026-11-22T11:09:33.265Z",
+        "sentences": 281,
+        "formulas": 80,
+        "checksum": "sha256:59bcf341fccf854676954416ec3f5d396178e8871b6ddd07b38b09ed978a88a4"
       },
       "kbVersion": "machiavel@bootstrap-2026-10-03"
     },
     "wilde": {
       "kb": "salon-wilde",
-      "works": [],
+      "works": [
+        {
+          "title": "The Picture of Dorian Gray",
+          "sentences": 44
+        },
+        {
+          "title": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+          "sentences": 41
+        },
+        {
+          "title": "An ideal husband",
+          "sentences": 33
+        },
+        {
+          "title": "De Profundis",
+          "sentences": 54
+        },
+        {
+          "title": "Lady Windermere's Fan",
+          "sentences": 36
+        }
+      ],
       "pack": {
         "path": "kb/wilde.json",
-        "builtAt": "2026-10-06T16:51:01.031Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:7350acaf78a5610b7c38892cf19a48798ed171e7db49fb4815b0cdf07109e762"
+        "builtAt": "2026-11-22T11:09:33.271Z",
+        "sentences": 208,
+        "formulas": 81,
+        "checksum": "sha256:39a2e74f4246365636ddd999e84769730035989e522cbe23908ab4f71df6ce52"
       },
       "kbVersion": "wilde@bootstrap-2026-10-03"
     },
     "platon": {
       "kb": "salon-platon",
-      "works": [],
+      "works": [
+        {
+          "title": "The Republic",
+          "sentences": 57
+        },
+        {
+          "title": "Apology",
+          "sentences": 53
+        },
+        {
+          "title": "Symposium",
+          "sentences": 57
+        },
+        {
+          "title": "Phaedo",
+          "sentences": 49
+        },
+        {
+          "title": "Gorgias",
+          "sentences": 52
+        }
+      ],
       "pack": {
         "path": "kb/platon.json",
-        "builtAt": "2026-10-06T16:51:01.036Z",
-        "sentences": 66,
-        "formulas": 36,
-        "checksum": "sha256:1cc31bb352c7067784b32173e7d4ca7192182e3bd73c4c0370e3fb52a67e1ce4"
+        "builtAt": "2026-11-22T11:09:33.279Z",
+        "sentences": 268,
+        "formulas": 80,
+        "checksum": "sha256:8399c020c4c17457c13342bee0774f8e0751366399f5728b1a268c5bc2c69ba7"
       },
       "kbVersion": "platon@bootstrap-2026-10-03"
     },
     "descartes": {
       "kb": "salon-descartes",
-      "works": [],
+      "works": [
+        {
+          "title": "Discourse on the Method of Rightly Conducting One's Reason and of Seeking Truth in the Sciences",
+          "sentences": 77
+        },
+        {
+          "title": "Six metaphysical meditations",
+          "sentences": 28
+        },
+        {
+          "title": "Selections from the Principles of Philosophy",
+          "sentences": 73
+        },
+        {
+          "title": "Discours de la méthode",
+          "sentences": 75
+        }
+      ],
       "pack": {
         "path": "kb/descartes.json",
-        "builtAt": "2026-10-06T16:51:01.041Z",
-        "sentences": 36,
-        "formulas": 20,
-        "checksum": "sha256:5b204f771c09d48d408d6ee2649de55086bcfbdd298d853b1981a266f4a559db"
+        "builtAt": "2026-11-22T11:09:33.288Z",
+        "sentences": 253,
+        "formulas": 82,
+        "checksum": "sha256:d975e7782ebdf56d88f34a66b8d6ec4e13c6506815c5c0fe50e3d6365632cc68"
       },
       "kbVersion": "descartes@bootstrap-2026-10-03"
     },
     "stendhal": {
       "kb": "salon-stendhal",
-      "works": [],
+      "works": [
+        {
+          "title": "Le rouge et le noir: chronique du XIXe siècle",
+          "sentences": 37
+        },
+        {
+          "title": "La Chartreuse De Parme",
+          "sentences": 57
+        },
+        {
+          "title": "De l'Amour",
+          "sentences": 54
+        },
+        {
+          "title": "Rome, Naples et Florence, en 1817",
+          "sentences": 58
+        },
+        {
+          "title": "L'Abbesse De Castro",
+          "sentences": 59
+        }
+      ],
       "pack": {
         "path": "kb/stendhal.json",
-        "builtAt": "2026-10-06T16:51:01.047Z",
-        "sentences": 60,
-        "formulas": 35,
-        "checksum": "sha256:5cf9ef429cdfb6b4f0b2a27d31388919612a98af943aa2a0bf5e66f0ea671040"
+        "builtAt": "2026-11-22T11:09:33.296Z",
+        "sentences": 265,
+        "formulas": 83,
+        "checksum": "sha256:94192bbba100b4dfe82ffc64d9b2c19ae41245d4a402a782abb81e66edc6fa2e"
       },
       "kbVersion": "stendhal@bootstrap-2026-10-03"
     },
     "suntzu": {
       "kb": "salon-suntzu",
-      "works": [],
+      "works": [
+        {
+          "title": "The Art of War",
+          "sentences": 222
+        }
+      ],
       "pack": {
         "path": "kb/suntzu.json",
-        "builtAt": "2026-10-06T16:51:01.051Z",
-        "sentences": 30,
-        "formulas": 17,
-        "checksum": "sha256:38a1f16112d58ea29bdbf3a63f4ae25698b737e7b49f21175ed6d4e51b31551d"
+        "builtAt": "2026-11-22T11:09:33.304Z",
+        "sentences": 222,
+        "formulas": 81,
+        "checksum": "sha256:7e717e4dfa61acfba1ec449da3ae396e0850e6fdacfad9b7386a9a8b355e9e12"
       },
       "kbVersion": "suntzu@bootstrap-2026-10-03"
     },
     "hugo": {
       "kb": "salon-hugo",
-      "works": [],
+      "works": [
+        {
+          "title": "Les Misérables",
+          "sentences": 48
+        },
+        {
+          "title": "Notre-Dame de Paris",
+          "sentences": 50
+        },
+        {
+          "title": "Quatrevingt-Treize",
+          "sentences": 44
+        },
+        {
+          "title": "Toilers of the sea",
+          "sentences": 45
+        },
+        {
+          "title": "The Man Who Laughs: A Romance of English History",
+          "sentences": 55
+        }
+      ],
       "pack": {
         "path": "kb/hugo.json",
-        "builtAt": "2026-10-06T16:51:01.055Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:16c61201b52a4146091140f5906c132f91c858a6ab093ff13eacadd7de245f95"
+        "builtAt": "2026-11-22T11:09:33.310Z",
+        "sentences": 242,
+        "formulas": 82,
+        "checksum": "sha256:a722b91b4252d596cefc81b16f796bf9beaf396ec506f497a1a4ba0e534c2b8d"
       },
       "kbVersion": "hugo@bootstrap-2026-10-03"
     },
     "voltaire": {
       "kb": "salon-voltaire",
-      "works": [],
+      "works": [
+        {
+          "title": "Candide, ou l'optimisme",
+          "sentences": 57
+        },
+        {
+          "title": "Voltaire's Philosophical Dictionary",
+          "sentences": 60
+        },
+        {
+          "title": "Micromégas",
+          "sentences": 56
+        },
+        {
+          "title": "Zadig, ou la Destinée, histoire orientale",
+          "sentences": 56
+        },
+        {
+          "title": "L'Ingénu",
+          "sentences": 56
+        }
+      ],
       "pack": {
         "path": "kb/voltaire.json",
-        "builtAt": "2026-10-06T16:51:01.059Z",
-        "sentences": 61,
-        "formulas": 35,
-        "checksum": "sha256:b5058c05807f70ad6a98d4433fc434fe5082cc10b8bd8e9a91e8c49a2c7536d1"
+        "builtAt": "2026-11-22T11:09:33.319Z",
+        "sentences": 285,
+        "formulas": 82,
+        "checksum": "sha256:7bb94108b493f10fa9fe43938307e1704ce8aafcde983fbeffa8c70badfaba5d"
       },
       "kbVersion": "voltaire@bootstrap-2026-10-03"
     },
     "shakespeare": {
       "kb": "salon-shakespeare",
-      "works": [],
+      "works": [
+        {
+          "title": "Hamlet",
+          "sentences": 46
+        },
+        {
+          "title": "The Tragedy of Macbeth",
+          "sentences": 45
+        },
+        {
+          "title": "A Midsummer Night's Dream",
+          "sentences": 47
+        },
+        {
+          "title": "Othello",
+          "sentences": 42
+        },
+        {
+          "title": "Shakespeare's Sonnets",
+          "sentences": 57
+        }
+      ],
       "pack": {
         "path": "kb/shakespeare.json",
-        "builtAt": "2026-10-06T16:51:01.064Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:5510dfb519499d8f9bcfc92a6a745eb0c86e06857433568a4780d96d5d5b9c18"
+        "builtAt": "2026-11-22T11:09:33.325Z",
+        "sentences": 237,
+        "formulas": 81,
+        "checksum": "sha256:36e8fe77d424b3ffb29d335d1f3fa15a904432ebffc933653f293cdd607def39"
       },
       "kbVersion": "shakespeare@bootstrap-2026-10-03"
     },
     "seneca": {
       "kb": "salon-seneca",
-      "works": [],
+      "works": [
+        {
+          "title": "On Benefits",
+          "sentences": 58
+        },
+        {
+          "title": "Minor Dialogues, Together With the Dialogue on Clemency",
+          "sentences": 54
+        },
+        {
+          "title": "The Tragedies of Seneca",
+          "sentences": 53
+        },
+        {
+          "title": "Apocolocyntosis",
+          "sentences": 58
+        },
+        {
+          "title": "Octavia Praetexta",
+          "sentences": 35
+        }
+      ],
       "pack": {
         "path": "kb/seneca.json",
-        "builtAt": "2026-10-06T16:51:01.068Z",
-        "sentences": 48,
-        "formulas": 26,
-        "checksum": "sha256:5dcb9e2736602c28f646f59fec66e0eb551bd9413c1408b13d73dd945fd94f02"
+        "builtAt": "2026-11-22T11:09:33.333Z",
+        "sentences": 258,
+        "formulas": 81,
+        "checksum": "sha256:c4435cf67f12b17c46fd7175e06fb0fd70c0daec1aa846cbb6c988bc80c0969e"
       },
       "kbVersion": "seneca@bootstrap-2026-10-03"
     },
     "ciceron": {
       "kb": "salon-ciceron",
-      "works": [],
+      "works": [
+        {
+          "title": "De Officiis",
+          "sentences": 56
+        },
+        {
+          "title": "Treatises on Friendship and Old Age",
+          "sentences": 56
+        },
+        {
+          "title": "Cicero's Tusculan Disputations",
+          "sentences": 53
+        },
+        {
+          "title": "The republic of Cicero",
+          "sentences": 54
+        },
+        {
+          "title": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+          "sentences": 57
+        }
+      ],
       "pack": {
         "path": "kb/ciceron.json",
-        "builtAt": "2026-10-06T16:51:01.072Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:2a3356e116f8cb7ddfa280b7016918f923deaf82e826f677c8addecf65a017d1"
+        "builtAt": "2026-11-22T11:09:33.342Z",
+        "sentences": 276,
+        "formulas": 81,
+        "checksum": "sha256:6513989ae683cdcff7abda211717c50dc7fb1206ef736bb9c67f097a56d67712"
       },
       "kbVersion": "ciceron@bootstrap-2026-10-03"
     },
     "epictete": {
       "kb": "salon-epictete",
-      "works": [],
+      "works": [
+        {
+          "title": "The Enchiridion",
+          "sentences": 68
+        },
+        {
+          "title": "Discourses",
+          "sentences": 64
+        },
+        {
+          "title": "Ojennusnuora",
+          "sentences": 69
+        },
+        {
+          "title": "The Teaching of Epictetus&#13; Being the 'Encheiridion of Epictetus,' with Selections from the 'Dissertations' and 'Fragments'",
+          "sentences": 70
+        }
+      ],
       "pack": {
         "path": "kb/epictete.json",
-        "builtAt": "2026-10-06T16:51:01.076Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:903eaecde3c82e568e39b15c42aef6584c0a7a6ad78d7b03b8151d21961155a6"
+        "builtAt": "2026-11-22T11:09:33.351Z",
+        "sentences": 271,
+        "formulas": 81,
+        "checksum": "sha256:b49a060377398ab266fc4efbcd4e2c8e7652841730478c64c3a1b4d622076763"
       },
       "kbVersion": "epictete@bootstrap-2026-10-03"
     },
     "epicure": {
       "kb": "salon-epicure",
-      "works": [],
+      "works": [
+        {
+          "title": "Letter to Herodotus (from Diogenes Laertius, Book X)",
+          "sentences": 78
+        }
+      ],
       "pack": {
         "path": "kb/epicure.json",
-        "builtAt": "2026-10-06T16:51:01.079Z",
-        "sentences": 30,
-        "formulas": 17,
-        "checksum": "sha256:5885b530c9a36387aa41269cc12b80c7152fa1cacfd6b9a32e0699fc2ea5d94d"
+        "builtAt": "2026-11-22T11:09:33.359Z",
+        "sentences": 78,
+        "formulas": 43,
+        "checksum": "sha256:887abeadd02b9ab3efa1bb67ff16ab1faf2091723623f50fc7a4c05a52600e1b"
       },
       "kbVersion": "epicure@bootstrap-2026-10-03"
     },
     "augustin": {
       "kb": "salon-augustin",
-      "works": [],
+      "works": [
+        {
+          "title": "The Confessions of St. Augustine",
+          "sentences": 68
+        },
+        {
+          "title": "The City of God, Volume I",
+          "sentences": 70
+        },
+        {
+          "title": "Writings in Connection with the Donatist Controversy",
+          "sentences": 69
+        },
+        {
+          "title": "Soliloquies",
+          "sentences": 67
+        }
+      ],
       "pack": {
         "path": "kb/augustin.json",
-        "builtAt": "2026-10-06T16:51:01.084Z",
-        "sentences": 48,
-        "formulas": 27,
-        "checksum": "sha256:1e57d6aab5eff281ed431e417a25259b7012315325de740ee08332d8247a0615"
+        "builtAt": "2026-11-22T11:09:33.372Z",
+        "sentences": 274,
+        "formulas": 81,
+        "checksum": "sha256:78d76fdd60ceb513015e7a0d9bdeea918b97b208685ba33aeb481714cc5cd942"
       },
       "kbVersion": "augustin@bootstrap-2026-10-03"
     },
     "boece": {
       "kb": "salon-boece",
-      "works": [],
+      "works": [
+        {
+          "title": "The Consolation of Philosophy",
+          "sentences": 228
+        }
+      ],
       "pack": {
         "path": "kb/boece.json",
-        "builtAt": "2026-10-06T16:51:01.087Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:86c465ff25b2931ee28b6e4983811a51bca6d1b8134d9059eac6b1b7a643c2e6"
+        "builtAt": "2026-11-22T11:09:33.379Z",
+        "sentences": 228,
+        "formulas": 81,
+        "checksum": "sha256:bc0f02565c4dff348803c0a1bc753205b26238e94f0cddeb8f22d66489b556e4"
       },
       "kbVersion": "boece@bootstrap-2026-10-03"
     },
     "aquinas": {
       "kb": "salon-aquinas",
-      "works": [],
+      "works": [
+        {
+          "title": "Summa Theologica",
+          "sentences": 75
+        },
+        {
+          "title": "On prayer and the contemplative life",
+          "sentences": 77
+        }
+      ],
       "pack": {
         "path": "kb/aquinas.json",
-        "builtAt": "2026-10-06T16:51:01.090Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:cb85d5015847c8c9128b6845c15edeb3182a44dd6f196b232ba7f98248fe68b4"
+        "builtAt": "2026-11-22T11:09:33.384Z",
+        "sentences": 152,
+        "formulas": 80,
+        "checksum": "sha256:afcc8760f608b6c6526a58e2387e88070a77bcaae2a167eb4e86841861dc22b5"
       },
       "kbVersion": "aquinas@bootstrap-2026-10-03"
     },
     "hobbes": {
       "kb": "salon-hobbes",
-      "works": [],
+      "works": [
+        {
+          "title": "Leviathan",
+          "sentences": 66
+        },
+        {
+          "title": "Philosophical Rudiments (De Cive)",
+          "sentences": 70
+        },
+        {
+          "title": "Tripos: Human Nature, Liberty and Necessity",
+          "sentences": 64
+        },
+        {
+          "title": "Behemoth",
+          "sentences": 68
+        }
+      ],
       "pack": {
         "path": "kb/hobbes.json",
-        "builtAt": "2026-10-06T16:51:01.095Z",
-        "sentences": 48,
-        "formulas": 26,
-        "checksum": "sha256:7966a1517cc3f05b3495b6e1d167a7119feca41159678f06a9aa9f3211a16c50"
+        "builtAt": "2026-11-22T11:09:33.392Z",
+        "sentences": 268,
+        "formulas": 80,
+        "checksum": "sha256:524fea9b50f2110330de49115f76299a358fa9967a30c2e25b218181df2c00a9"
       },
       "kbVersion": "hobbes@bootstrap-2026-10-03"
     },
     "locke": {
       "kb": "salon-locke",
-      "works": [],
+      "works": [
+        {
+          "title": "Second Treatise of Government",
+          "sentences": 77
+        },
+        {
+          "title": "An Essay Concerning Human Understanding",
+          "sentences": 71
+        },
+        {
+          "title": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+          "sentences": 75
+        }
+      ],
       "pack": {
         "path": "kb/locke.json",
-        "builtAt": "2026-10-06T16:51:01.098Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:3e36e8c9d5fdebd7e86108efc9a3d518282fc827d9c26a0d35c3e02b910768e1"
+        "builtAt": "2026-11-22T11:09:33.400Z",
+        "sentences": 223,
+        "formulas": 81,
+        "checksum": "sha256:7c85740a59e96f4dda32ed1797d775b838eaae47dfc717afee3dbddebd6665bd"
       },
       "kbVersion": "locke@bootstrap-2026-10-03"
     },
     "hume": {
       "kb": "salon-hume",
-      "works": [],
+      "works": [
+        {
+          "title": "An Enquiry Concerning Human Understanding",
+          "sentences": 57
+        },
+        {
+          "title": "A Treatise of Human Nature",
+          "sentences": 56
+        },
+        {
+          "title": "An Enquiry Concerning the Principles of Morals",
+          "sentences": 57
+        },
+        {
+          "title": "Dialogues Concerning Natural Religion",
+          "sentences": 58
+        },
+        {
+          "title": "Essays",
+          "sentences": 58
+        }
+      ],
       "pack": {
         "path": "kb/hume.json",
-        "builtAt": "2026-10-06T16:51:01.102Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:c3a0f0275229d3ef69b55d0c1a55e0a53a1d6e8d829506e616f3eca65405ba66"
+        "builtAt": "2026-11-22T11:09:33.409Z",
+        "sentences": 286,
+        "formulas": 81,
+        "checksum": "sha256:d2943e22f62014de96f452efd1bc710623aa218fb0130661c3557cdded224675"
       },
       "kbVersion": "hume@bootstrap-2026-10-03"
     },
     "leibniz": {
       "kb": "salon-leibniz",
-      "works": [],
+      "works": [
+        {
+          "title": "Theodicy",
+          "sentences": 76
+        },
+        {
+          "title": "La monadologie",
+          "sentences": 76
+        },
+        {
+          "title": "Leibnitz' Monadologie&#13; Deutsch mit einer Abhandlung über Leibnitz' und Herbart's Theorieen des wirklichen Geschehens",
+          "sentences": 77
+        }
+      ],
       "pack": {
         "path": "kb/leibniz.json",
-        "builtAt": "2026-10-06T16:51:01.106Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:73f88c2d3e2859d1e2a9e6d472fbd8d112e40405f801226d1f7640c55175470e"
+        "builtAt": "2026-11-22T11:09:33.415Z",
+        "sentences": 229,
+        "formulas": 82,
+        "checksum": "sha256:0d8645917f75f7b30e20d2b2a114be083cab989e94e8bed3850f697a2ffed19a"
       },
       "kbVersion": "leibniz@bootstrap-2026-10-03"
     },
     "pascal": {
       "kb": "salon-pascal",
-      "works": [],
+      "works": [
+        {
+          "title": "Pensées",
+          "sentences": 72
+        },
+        {
+          "title": "The Provincial Letters",
+          "sentences": 71
+        },
+        {
+          "title": "Notes de Voltaire et de Condorcet sur les pensées de Pascal",
+          "sentences": 73
+        }
+      ],
       "pack": {
         "path": "kb/pascal.json",
-        "builtAt": "2026-10-06T16:51:01.109Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:cb2707bad84130ef8fd40b208462a576158bf7727a9acba89ba91839a6310653"
+        "builtAt": "2026-11-22T11:09:33.422Z",
+        "sentences": 216,
+        "formulas": 82,
+        "checksum": "sha256:e2069e5d5cd08d3f04133322bc1c1af87655a4ec866f4deb9cd686d6782fd7fb"
       },
       "kbVersion": "pascal@bootstrap-2026-10-03"
     },
     "berkeley": {
       "kb": "salon-berkeley",
-      "works": [],
+      "works": [
+        {
+          "title": "A Treatise Concerning the Principles of Human Knowledge",
+          "sentences": 56
+        },
+        {
+          "title": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+          "sentences": 53
+        },
+        {
+          "title": "An Essay Towards a New Theory of Vision",
+          "sentences": 57
+        },
+        {
+          "title": "The Querist",
+          "sentences": 60
+        },
+        {
+          "title": "The Lady of Big Shanty",
+          "sentences": 52
+        }
+      ],
       "pack": {
         "path": "kb/berkeley.json",
-        "builtAt": "2026-10-06T16:51:01.112Z",
-        "sentences": 48,
-        "formulas": 26,
-        "checksum": "sha256:5257bdd78f666ec3cafbb21de2385c1921c38a44247691b5a37936ce2294a100"
+        "builtAt": "2026-11-22T11:09:33.429Z",
+        "sentences": 278,
+        "formulas": 81,
+        "checksum": "sha256:1caac45ed88cce3eaae885966772c4b87c768e20b2d43b91423d17c7b8933868"
       },
       "kbVersion": "berkeley@bootstrap-2026-10-03"
     },
     "hegel": {
       "kb": "salon-hegel",
-      "works": [],
+      "works": [
+        {
+          "title": "Phänomenologie des Geistes",
+          "sentences": 58
+        },
+        {
+          "title": "The Logic of Hegel",
+          "sentences": 59
+        },
+        {
+          "title": "Hegel's Lectures on the History of Philosophy: Volume 1 (of 3)",
+          "sentences": 55
+        },
+        {
+          "title": "Hegel's Philosophy of Mind",
+          "sentences": 58
+        },
+        {
+          "title": "The Philosophy of Fine Art, volume 1 (of 4)",
+          "sentences": 60
+        }
+      ],
       "pack": {
         "path": "kb/hegel.json",
-        "builtAt": "2026-10-06T16:51:01.116Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:ab5a2eaa80ba1725a18668e33ab9e7ea477ffb3fb4582e6d0bd61ca9738674ae"
+        "builtAt": "2026-11-22T11:09:33.437Z",
+        "sentences": 290,
+        "formulas": 81,
+        "checksum": "sha256:bb05871c4d7d4283d6838f405ee400401c11380fecacb0324c507478fa9aac88"
       },
       "kbVersion": "hegel@bootstrap-2026-10-03"
     },
     "schopenhauer": {
       "kb": "salon-schopenhauer",
-      "works": [],
+      "works": [
+        {
+          "title": "The World as Will and Idea (Vol. 1 of 3)",
+          "sentences": 57
+        },
+        {
+          "title": "On the Fourfold Root of the Principle of Sufficient Reason, and On the Will in Nature: Two Essays (revised edition)",
+          "sentences": 57
+        },
+        {
+          "title": "The Basis of Morality",
+          "sentences": 57
+        },
+        {
+          "title": "Studies in Pessimism",
+          "sentences": 54
+        },
+        {
+          "title": "The Wisdom of Life",
+          "sentences": 56
+        }
+      ],
       "pack": {
         "path": "kb/schopenhauer.json",
-        "builtAt": "2026-10-06T16:51:01.121Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:a6466ef0b6ec4646b34fb422d815274cc9729508ab904f0233289ad4c0641f7a"
+        "builtAt": "2026-11-22T11:09:33.447Z",
+        "sentences": 281,
+        "formulas": 81,
+        "checksum": "sha256:53a26dbbeb15953fc47d64a8a3c9241e47bec6b2b56b7845f1513bf08e216f69"
       },
       "kbVersion": "schopenhauer@bootstrap-2026-10-03"
     },
     "kierkegaard": {
       "kb": "salon-kierkegaard",
-      "works": [],
+      "works": [
+        {
+          "title": "Selections from the Writings of Kierkegaard",
+          "sentences": 68
+        },
+        {
+          "title": "Viettelijän päiväkirja",
+          "sentences": 77
+        }
+      ],
       "pack": {
         "path": "kb/kierkegaard.json",
-        "builtAt": "2026-10-06T16:51:01.125Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:9104919e55214cc548ca9115367879c3a4831a163fd25351af677de7235a3fd0"
+        "builtAt": "2026-11-22T11:09:33.454Z",
+        "sentences": 145,
+        "formulas": 80,
+        "checksum": "sha256:78a529693b83afe679d53600da56be597897f3dcecd015fa2ffdb2c1f8aea5c6"
       },
       "kbVersion": "kierkegaard@bootstrap-2026-10-03"
     },
     "mill": {
       "kb": "salon-mill",
-      "works": [],
+      "works": [
+        {
+          "title": "On Liberty",
+          "sentences": 56
+        },
+        {
+          "title": "Utilitarianism",
+          "sentences": 55
+        },
+        {
+          "title": "The Subjection of Women",
+          "sentences": 57
+        },
+        {
+          "title": "Considerations on Representative Government",
+          "sentences": 56
+        },
+        {
+          "title": "Autobiography",
+          "sentences": 56
+        }
+      ],
       "pack": {
         "path": "kb/mill.json",
-        "builtAt": "2026-10-06T16:51:01.128Z",
-        "sentences": 60,
-        "formulas": 34,
-        "checksum": "sha256:127b20c47b9fadf50284be2103daee342fdfd2c4069713fe9f2756b815095de8"
+        "builtAt": "2026-11-22T11:09:33.462Z",
+        "sentences": 280,
+        "formulas": 81,
+        "checksum": "sha256:d61c32c8796dfb54793549c57b1c907771174052ae19487dc625f3176c447046"
       },
       "kbVersion": "mill@bootstrap-2026-10-03"
     },
     "emerson": {
       "kb": "salon-emerson",
-      "works": [],
+      "works": [
+        {
+          "title": "Essays — First Series",
+          "sentences": 50
+        },
+        {
+          "title": "Essays — Second Series",
+          "sentences": 56
+        },
+        {
+          "title": "Nature",
+          "sentences": 54
+        },
+        {
+          "title": "The Conduct of Life",
+          "sentences": 53
+        },
+        {
+          "title": "Representative Men: Seven Lectures",
+          "sentences": 57
+        }
+      ],
       "pack": {
         "path": "kb/emerson.json",
-        "builtAt": "2026-10-06T16:51:01.133Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:dd01ae638f5a215cbd4c248fcbb4dc0e1bbe15d161c34f5993fb14377ff36604"
+        "builtAt": "2026-11-22T11:09:33.469Z",
+        "sentences": 270,
+        "formulas": 80,
+        "checksum": "sha256:e0bdd72805bb3d3f819f6e3fc6289d670005d8956fbdfdced5bab712a7f8f3cf"
       },
       "kbVersion": "emerson@bootstrap-2026-10-03"
     },
     "james": {
       "kb": "salon-james",
-      "works": [],
+      "works": [
+        {
+          "title": "The Varieties of Religious Experience: A Study in Human Nature",
+          "sentences": 53
+        },
+        {
+          "title": "Pragmatism: A New Name for Some Old Ways of Thinking",
+          "sentences": 57
+        },
+        {
+          "title": "The Will to Believe, and Other Essays in Popular Philosophy",
+          "sentences": 52
+        },
+        {
+          "title": "A Pluralistic Universe",
+          "sentences": 58
+        },
+        {
+          "title": "Essays in Radical Empiricism",
+          "sentences": 58
+        }
+      ],
       "pack": {
         "path": "kb/james.json",
-        "builtAt": "2026-10-06T16:51:01.138Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:92ec079cb6232388e14ec59c3041c55b9bff23279834ff72f684c61e6d2e8eec"
+        "builtAt": "2026-11-22T11:09:33.478Z",
+        "sentences": 278,
+        "formulas": 81,
+        "checksum": "sha256:7ab5fc6838557e0ad7041eb1868c55ea96580f50b5f7b7eea9c4a8c7edf13123"
       },
       "kbVersion": "james@bootstrap-2026-10-03"
     },
     "diderot": {
       "kb": "salon-diderot",
-      "works": [],
+      "works": [
+        {
+          "title": "Le neveu de Rameau",
+          "sentences": 48
+        },
+        {
+          "title": "La religieuse",
+          "sentences": 55
+        },
+        {
+          "title": "Jacques le fataliste et son maître",
+          "sentences": 49
+        },
+        {
+          "title": "Supplément au Voyage de Bougainville",
+          "sentences": 52
+        },
+        {
+          "title": "Ceci n'est pas un conte",
+          "sentences": 51
+        }
+      ],
       "pack": {
         "path": "kb/diderot.json",
-        "builtAt": "2026-10-06T16:51:01.142Z",
-        "sentences": 60,
-        "formulas": 34,
-        "checksum": "sha256:e0ab2ab7621616196cb84eb44ce072ce5f94ea56c0b1ea5cf8753d4d2322a76c"
+        "builtAt": "2026-11-22T11:09:33.485Z",
+        "sentences": 255,
+        "formulas": 83,
+        "checksum": "sha256:8358511d404bb2c3475157c6cf727280fb9cad7b7e64d64ac7f8682376394ecf"
       },
       "kbVersion": "diderot@bootstrap-2026-10-03"
     },
     "christianisme": {
       "kb": "salon-christianisme",
-      "works": [],
+      "works": [
+        {
+          "title": "The Gospel According to Matthew",
+          "sentences": 56
+        },
+        {
+          "title": "The Gospel According to Mark",
+          "sentences": 59
+        },
+        {
+          "title": "The Gospel According to Luke",
+          "sentences": 57
+        },
+        {
+          "title": "The Gospel According to John",
+          "sentences": 60
+        },
+        {
+          "title": "The Revelation of St. John",
+          "sentences": 58
+        }
+      ],
       "pack": {
         "path": "kb/christianisme.json",
-        "builtAt": "2026-10-06T16:51:01.146Z",
-        "sentences": 60,
-        "formulas": 34,
-        "checksum": "sha256:742d2de67c5b120d05814c6edb19877825f4759164533348db39c53a451a0cb0"
+        "builtAt": "2026-11-22T11:09:33.492Z",
+        "sentences": 290,
+        "formulas": 80,
+        "checksum": "sha256:f03d9b9e4031bd3fdefbe3bfb52e11cd5ed354cb586a0fcb55a4e15e5c6de423"
       },
       "kbVersion": "christianisme@bootstrap-2026-10-03"
     },
     "judaisme": {
       "kb": "salon-judaisme",
-      "works": [],
+      "works": [
+        {
+          "title": "Genesis",
+          "sentences": 58
+        },
+        {
+          "title": "Exodus",
+          "sentences": 59
+        },
+        {
+          "title": "Leviticus",
+          "sentences": 59
+        },
+        {
+          "title": "Numbers",
+          "sentences": 59
+        },
+        {
+          "title": "Deuteronomy",
+          "sentences": 59
+        }
+      ],
       "pack": {
         "path": "kb/judaisme.json",
-        "builtAt": "2026-10-06T16:51:01.149Z",
-        "sentences": 55,
-        "formulas": 30,
-        "checksum": "sha256:c76a8dca99df640a7c4ed9cc2a49b294f3f4a8fe42cabcdea9abaec4e7833758"
+        "builtAt": "2026-11-22T11:09:33.499Z",
+        "sentences": 294,
+        "formulas": 80,
+        "checksum": "sha256:4232592aedba6705f41471da844e2e721e88d682a4f62d40bb1f0ac14f6bf740"
       },
       "kbVersion": "judaisme@bootstrap-2026-10-03"
     },
     "islam": {
       "kb": "salon-islam",
-      "works": [],
+      "works": [
+        {
+          "title": "The Qur'an",
+          "sentences": 204
+        }
+      ],
       "pack": {
         "path": "kb/islam.json",
-        "builtAt": "2026-10-06T16:51:01.152Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:83178cb465e0172baebf18c4702a3eb4d2ecb9c646690723426e84c200819436"
+        "builtAt": "2026-11-22T11:09:33.505Z",
+        "sentences": 204,
+        "formulas": 82,
+        "checksum": "sha256:69886572ddd6190bb87dfc343b1b3a16c987046304e8f257407b861c2fa80e2f"
       },
       "kbVersion": "islam@bootstrap-2026-10-03"
     },
     "hindouisme": {
       "kb": "salon-hindouisme",
-      "works": [],
+      "works": [
+        {
+          "title": "Bhagavad Gita",
+          "sentences": 65
+        },
+        {
+          "title": "The Upanishads",
+          "sentences": 64
+        },
+        {
+          "title": "The Ramayana",
+          "sentences": 73
+        },
+        {
+          "title": "The Vedanta Sutras",
+          "sentences": 68
+        }
+      ],
       "pack": {
         "path": "kb/hindouisme.json",
-        "builtAt": "2026-10-06T16:51:01.156Z",
-        "sentences": 60,
-        "formulas": 33,
-        "checksum": "sha256:6a7378ed65162153e4df32e4271d64b1aca91752cf25d3cb3ac747f1b2f848f0"
+        "builtAt": "2026-11-22T11:09:33.516Z",
+        "sentences": 270,
+        "formulas": 81,
+        "checksum": "sha256:d9ee3111bb3867e2417ff65be37f85e15301113648d386dbc222d1f08938eb8b"
       },
       "kbVersion": "hindouisme@bootstrap-2026-10-03"
     },
     "bouddhisme": {
       "kb": "salon-bouddhisme",
-      "works": [],
+      "works": [
+        {
+          "title": "The Dhammapada",
+          "sentences": 78
+        },
+        {
+          "title": "Jataka Tales",
+          "sentences": 66
+        },
+        {
+          "title": "Buddhist Psalms",
+          "sentences": 73
+        }
+      ],
       "pack": {
         "path": "kb/bouddhisme.json",
-        "builtAt": "2026-10-06T16:51:01.159Z",
-        "sentences": 36,
-        "formulas": 20,
-        "checksum": "sha256:31bc2b60087890b4d77531c8dcc25c02fdcc96a8ddc62ec305b70736ea9baac8"
+        "builtAt": "2026-11-22T11:09:33.527Z",
+        "sentences": 217,
+        "formulas": 81,
+        "checksum": "sha256:3ed4fd67e1b3af8d843377144ca0d88375482ec5db63fd6a987c6e1b82cfd7d5"
       },
       "kbVersion": "bouddhisme@bootstrap-2026-10-03"
     },
     "taoisme": {
       "kb": "salon-taoisme",
-      "works": [],
+      "works": [
+        {
+          "title": "Tao Te Ching",
+          "sentences": 74
+        },
+        {
+          "title": "Zhuangzi",
+          "sentences": 71
+        }
+      ],
       "pack": {
         "path": "kb/taoisme.json",
-        "builtAt": "2026-10-06T16:51:01.163Z",
-        "sentences": 24,
-        "formulas": 13,
-        "checksum": "sha256:037d0b7cd7799539c675e978ef7ef888fb1e3ff7b0374f063243d919b83450ae"
+        "builtAt": "2026-11-22T11:09:33.533Z",
+        "sentences": 145,
+        "formulas": 81,
+        "checksum": "sha256:06ca82dd8c6b7dee6604b6b99a80fdaadfe2473fe637b33160de2f641025ec40"
       },
       "kbVersion": "taoisme@bootstrap-2026-10-03"
+    },
+    "moliere": {
+      "kb": "salon-moliere",
+      "works": [
+        {
+          "title": "L'Étourdi ou les contre-temps",
+          "sentences": 57
+        },
+        {
+          "title": "Don Juan, ou le Festin de pierre",
+          "sentences": 49
+        },
+        {
+          "title": "Le Mariage forcé",
+          "sentences": 50
+        },
+        {
+          "title": "Les Précieuses ridicules",
+          "sentences": 48
+        },
+        {
+          "title": "Sganarelle, ou le Cocu imaginaire",
+          "sentences": 57
+        }
+      ],
+      "pack": {
+        "path": "kb/moliere.json",
+        "builtAt": "2026-11-22T11:09:33.539Z",
+        "sentences": 261,
+        "formulas": 83,
+        "checksum": "sha256:38b5ba69745e5f346ff06317690fb1a294d2400da9dd82b0ea8658e52b4825a1"
+      },
+      "kbVersion": "moliere@bootstrap-2026-11-22"
+    },
+    "racine": {
+      "kb": "salon-racine",
+      "works": [
+        {
+          "title": "Esther",
+          "sentences": 70
+        },
+        {
+          "title": "Mithridate",
+          "sentences": 66
+        }
+      ],
+      "pack": {
+        "path": "kb/racine.json",
+        "builtAt": "2026-11-22T11:09:33.544Z",
+        "sentences": 136,
+        "formulas": 77,
+        "checksum": "sha256:41e059aa4c2503462b5e7f41596e142ea0254f43e127d00920c67f4d2868bad7"
+      },
+      "kbVersion": "racine@bootstrap-2026-11-22"
+    },
+    "montesquieu": {
+      "kb": "salon-montesquieu",
+      "works": [
+        {
+          "title": "Le temple de Gnide",
+          "sentences": 73
+        },
+        {
+          "title": "Esprit des lois livres I à V, précédés d'une introduction de l'éditeur",
+          "sentences": 73
+        },
+        {
+          "title": "Lettres persanes, tome I",
+          "sentences": 73
+        }
+      ],
+      "pack": {
+        "path": "kb/montesquieu.json",
+        "builtAt": "2026-11-22T11:09:33.550Z",
+        "sentences": 219,
+        "formulas": 84,
+        "checksum": "sha256:dacd00fc610fffd69e84bbca4d20325352a46fed51ca9583fead2183dee655a5"
+      },
+      "kbVersion": "montesquieu@bootstrap-2026-11-22"
+    },
+    "flaubert": {
+      "kb": "salon-flaubert",
+      "works": [
+        {
+          "title": "La tentation de Saint Antoine",
+          "sentences": 50
+        },
+        {
+          "title": "Trois contes",
+          "sentences": 52
+        },
+        {
+          "title": "Madame Bovary",
+          "sentences": 53
+        },
+        {
+          "title": "Dictionnaire des idées reçues",
+          "sentences": 46
+        },
+        {
+          "title": "Bouvard et Pécuchet",
+          "sentences": 47
+        }
+      ],
+      "pack": {
+        "path": "kb/flaubert.json",
+        "builtAt": "2026-11-22T11:09:33.559Z",
+        "sentences": 248,
+        "formulas": 81,
+        "checksum": "sha256:10fe3af89fcdba0cd3662c3c73eddfd5e728d57951e5328739d68bd67906fcaf"
+      },
+      "kbVersion": "flaubert@bootstrap-2026-11-22"
+    },
+    "maupassant": {
+      "kb": "salon-maupassant",
+      "works": [
+        {
+          "title": "Boule de Suif",
+          "sentences": 49
+        },
+        {
+          "title": "Le Horla",
+          "sentences": 48
+        },
+        {
+          "title": "Pierre et Jean",
+          "sentences": 48
+        },
+        {
+          "title": "L'inutile beauté",
+          "sentences": 49
+        },
+        {
+          "title": "Claire de Lune",
+          "sentences": 40
+        }
+      ],
+      "pack": {
+        "path": "kb/maupassant.json",
+        "builtAt": "2026-11-22T11:09:33.565Z",
+        "sentences": 234,
+        "formulas": 81,
+        "checksum": "sha256:f49c88dde31432a4833096b0f179cfa4783615fbe2575ac762e44eb10bd2e37e"
+      },
+      "kbVersion": "maupassant@bootstrap-2026-11-22"
+    },
+    "baudelaire": {
+      "kb": "salon-baudelaire",
+      "works": [
+        {
+          "title": "Les Fleurs du Mal",
+          "sentences": 56
+        },
+        {
+          "title": "Journaux intimes",
+          "sentences": 50
+        },
+        {
+          "title": "Les épaves de Charles Baudelaire",
+          "sentences": 58
+        },
+        {
+          "title": "De l'amour",
+          "sentences": 56
+        },
+        {
+          "title": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+          "sentences": 48
+        }
+      ],
+      "pack": {
+        "path": "kb/baudelaire.json",
+        "builtAt": "2026-11-22T11:09:33.573Z",
+        "sentences": 268,
+        "formulas": 82,
+        "checksum": "sha256:a91372e0a03fbd9874255c4297e809885b2946183dc829dbd3c9fd38819ec724"
+      },
+      "kbVersion": "baudelaire@bootstrap-2026-11-22"
+    },
+    "dickens": {
+      "kb": "salon-dickens",
+      "works": [
+        {
+          "title": "A Christmas Carol in Prose; Being a Ghost Story of Christmas",
+          "sentences": 53
+        },
+        {
+          "title": "A Tale of Two Cities",
+          "sentences": 53
+        },
+        {
+          "title": "The Mystery of Edwin Drood",
+          "sentences": 52
+        },
+        {
+          "title": "The Pickwick Papers",
+          "sentences": 55
+        },
+        {
+          "title": "Master Humphrey's Clock",
+          "sentences": 48
+        }
+      ],
+      "pack": {
+        "path": "kb/dickens.json",
+        "builtAt": "2026-11-22T11:09:33.581Z",
+        "sentences": 261,
+        "formulas": 80,
+        "checksum": "sha256:83e8dbef7cde648cf22c224470135e47739036ed5ee230930384b2b05e874ce8"
+      },
+      "kbVersion": "dickens@bootstrap-2026-11-22"
+    },
+    "melville": {
+      "kb": "salon-melville",
+      "works": [
+        {
+          "title": "Moby-Dick; or, The Whale",
+          "sentences": 58
+        },
+        {
+          "title": "Typee: A Romance of the South Seas",
+          "sentences": 57
+        },
+        {
+          "title": "I and My Chimney",
+          "sentences": 53
+        },
+        {
+          "title": "The Sleuth of St. James's Square",
+          "sentences": 47
+        },
+        {
+          "title": "Omoo: Adventures in the South Seas",
+          "sentences": 57
+        }
+      ],
+      "pack": {
+        "path": "kb/melville.json",
+        "builtAt": "2026-11-22T11:09:33.589Z",
+        "sentences": 272,
+        "formulas": 81,
+        "checksum": "sha256:42d878ade4197fbd6c714829380b2588bc03e515574342607708b5b810db7657"
+      },
+      "kbVersion": "melville@bootstrap-2026-11-22"
+    },
+    "twain": {
+      "kb": "salon-twain",
+      "works": [
+        {
+          "title": "What Is Man? and Other Essays",
+          "sentences": 52
+        },
+        {
+          "title": "The Adventures of Tom Sawyer, Complete",
+          "sentences": 50
+        },
+        {
+          "title": "Adventures of Huckleberry Finn",
+          "sentences": 49
+        },
+        {
+          "title": "A Connecticut Yankee in King Arthur's Court",
+          "sentences": 52
+        },
+        {
+          "title": "Tom Sawyer Abroad",
+          "sentences": 53
+        }
+      ],
+      "pack": {
+        "path": "kb/twain.json",
+        "builtAt": "2026-11-22T11:09:33.597Z",
+        "sentences": 256,
+        "formulas": 80,
+        "checksum": "sha256:8d833fb56abe22d292f35d61c099d9c70829cf1cd1ceb1413eb9648573cb5e20"
+      },
+      "kbVersion": "twain@bootstrap-2026-11-22"
+    },
+    "whitman": {
+      "kb": "salon-whitman",
+      "works": [
+        {
+          "title": "Leaves of Grass",
+          "sentences": 65
+        },
+        {
+          "title": "Poems by Walt Whitman",
+          "sentences": 63
+        },
+        {
+          "title": "Drum-Taps",
+          "sentences": 61
+        },
+        {
+          "title": "Sacrifice",
+          "sentences": 69
+        }
+      ],
+      "pack": {
+        "path": "kb/whitman.json",
+        "builtAt": "2026-11-22T11:09:33.605Z",
+        "sentences": 258,
+        "formulas": 80,
+        "checksum": "sha256:7926abf03c61969f8c0a9f77ad4492341cd10ec8aa5cbfa73ca2f7d12748e33d"
+      },
+      "kbVersion": "whitman@bootstrap-2026-11-22"
+    },
+    "bronte": {
+      "kb": "salon-bronte",
+      "works": [
+        {
+          "title": "Wuthering Heights",
+          "sentences": 213
+        }
+      ],
+      "pack": {
+        "path": "kb/bronte.json",
+        "builtAt": "2026-11-22T11:09:33.612Z",
+        "sentences": 213,
+        "formulas": 81,
+        "checksum": "sha256:8dece70dc8fa155c1990ee3d245428bf8ca7a72037e988913b7f4f349e162e41"
+      },
+      "kbVersion": "bronte@bootstrap-2026-11-22"
+    },
+    "hardy": {
+      "kb": "salon-hardy",
+      "works": [
+        {
+          "title": "Far from the Madding Crowd",
+          "sentences": 51
+        },
+        {
+          "title": "Tess of the d'Urbervilles: A Pure Woman",
+          "sentences": 54
+        },
+        {
+          "title": "The Return of the Native",
+          "sentences": 51
+        },
+        {
+          "title": "The Mayor of Casterbridge",
+          "sentences": 53
+        },
+        {
+          "title": "Jude the Obscure",
+          "sentences": 55
+        }
+      ],
+      "pack": {
+        "path": "kb/hardy.json",
+        "builtAt": "2026-11-22T11:09:33.620Z",
+        "sentences": 264,
+        "formulas": 81,
+        "checksum": "sha256:19784663c4a5eddb25715d4e058432db93a86fe08b6ffad7689dda50502de5ce"
+      },
+      "kbVersion": "hardy@bootstrap-2026-11-22"
+    },
+    "goethe": {
+      "kb": "salon-goethe",
+      "works": [
+        {
+          "title": "Iphigenie auf Tauris",
+          "sentences": 52
+        },
+        {
+          "title": "Egmont",
+          "sentences": 44
+        },
+        {
+          "title": "Reineke Fuchs",
+          "sentences": 55
+        },
+        {
+          "title": "West-östlicher Divan",
+          "sentences": 57
+        },
+        {
+          "title": "Novelle",
+          "sentences": 54
+        }
+      ],
+      "pack": {
+        "path": "kb/goethe.json",
+        "builtAt": "2026-11-22T11:09:33.626Z",
+        "sentences": 262,
+        "formulas": 80,
+        "checksum": "sha256:4e1eb1d125e73deaed15ca2a3a00c2110bdf7f229040291d59752cab2678fe67"
+      },
+      "kbVersion": "goethe@bootstrap-2026-11-22"
+    },
+    "dante": {
+      "kb": "salon-dante",
+      "works": [
+        {
+          "title": "La vita nuova",
+          "sentences": 226
+        }
+      ],
+      "pack": {
+        "path": "kb/dante.json",
+        "builtAt": "2026-11-22T11:09:33.634Z",
+        "sentences": 226,
+        "formulas": 80,
+        "checksum": "sha256:ca004d7410af496c82d2f909a9ea4eeabbd5bd008b60e9a3f84c29fe7761ace8"
+      },
+      "kbVersion": "dante@bootstrap-2026-11-22"
     }
   }
 }

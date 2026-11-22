@@ -16,6 +16,10 @@ export interface LiteraryWork {
   chars?: number;
   sample?: string;
   terms?: string[];
+  /** Identifiant Gutenberg quand l'œuvre a été vérifiée par RDF. */
+  gutenbergId?: number;
+  /** Langue du texte chargé (peut différer de la langue de l'auteur). */
+  lang?: string;
 }
 
 export interface LiteraryAuthor {
@@ -36,6 +40,8 @@ export interface LiteraryAuthor {
   terms: string[];
   stats: { words: number; distinct: number };
   sample: string;
+  /** Trois phrases verbatim contrastées (profil de voix), remplies par la récolte. */
+  samples?: string[];
 }
 
 export interface Passage {

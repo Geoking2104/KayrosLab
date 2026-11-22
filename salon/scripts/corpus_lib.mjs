@@ -6,21 +6,35 @@
  * Extraction de harvest_corpus.mjs (v2, lot 2) : mêmes comportements, à
  * l'identique — un module importable sans effet de bord de récolte.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { engineFallback, fetchWorkText } from './textlib.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const repo = join(here, '..', '..');
 
 /* --------------------------------------------------------------- moteur */
 
+/**
+ * Charge le moteur publié s'il est présent ; sinon le repli pur JS de
+ * textlib.mjs (même contrat : cleanSentence/bestSentence/scope/relevance).
+ * La branche `main` ne contient pas `backend/web/public/salon/salon-engine.js` ;
+ * les scripts doivent rester exécutables malgré tout.
+ */
 export function loadEngine() {
-  const eng = readFileSync(join(repo, 'backend/web/public/salon/salon-engine.js'), 'utf8');
-  const sb = { module: { exports: {} } };
-  sb.globalThis = sb;
-  new Function('module', 'exports', 'globalThis', eng)(sb.module, sb.module.exports, sb);
-  return sb.module.exports;
+  const file = join(repo, 'backend/web/public/salon/salon-engine.js');
+  if (!existsSync(file)) return engineFallback;
+  try {
+    const eng = readFileSync(file, 'utf8');
+    const sb = { module: { exports: {} } };
+    sb.globalThis = sb;
+    new Function('module', 'exports', 'globalThis', eng)(sb.module, sb.module.exports, sb);
+    const api = sb.module.exports && Object.keys(sb.module.exports).length ? sb.module.exports : sb;
+    return { ...engineFallback, ...api };
+  } catch {
+    return engineFallback;
+  }
 }
 export const E = loadEngine();
 
@@ -107,6 +121,13 @@ export function sentences(text) {
 /* ------------------------------------------------------------------ réseau */
 
 export async function fetchText(url) {
+  // Les URLs du catalogue pointent www.gutenberg.org (503 depuis ce réseau) :
+  // on bascule d'abord sur le miroir pglaf quand l'ID est extractible.
+  const idMatch = String(url).match(/(?:epub|files)\/(\d{1,7})\//) || String(url).match(/pg(\d{1,7})\.txt/i);
+  if (idMatch) {
+    const viaMirror = await fetchWorkText(idMatch[1]);
+    if (viaMirror) return viaMirror.text;
+  }
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 25000);
   try {

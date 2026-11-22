@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Salon — voix d'auteurs du domaine public</title>
+  <meta name="description" content="Conversez avec Voltaire, Molière, Platon, Dickinson et 64 autres auteurs du domaine public. Chaque réponse est ancrée dans leurs œuvres, citation vérifiée." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="masthead">
+    <p class="kicker">KayrosLab</p>
+    <h1>Le Salon</h1>
+    <p class="lede">Une table, des auteurs du domaine public, une question. Chaque réplique est ancrée dans leurs œuvres — ou avoue le manque.</p>
+  </header>
+
+  <main class="stage">
+    <section class="panel" aria-label="Choix du convive">
+      <label for="author">Convive</label>
+      <select id="author"></select>
+      <div id="card" class="card" aria-live="polite"></div>
+      <p class="notice">Voix simulée d'après les œuvres. Les citations sont vérifiées ; aucune œuvre n'est inventée.</p>
+    </section>
+
+    <section class="thread-panel" aria-label="Conversation">
+      <div id="thread" class="thread" aria-live="polite">
+        <p class="empty">Posez une question pour ouvrir la table.</p>
+      </div>
+      <form id="ask" class="ask">
+        <label class="sr-only" for="question">Votre question</label>
+        <input id="question" name="question" autocomplete="off" maxlength="1000" placeholder="Que reste-t-il de la liberté une fois qu'on a tout expliqué ?" required />
+        <button type="submit">Faire parler</button>
+      </form>
+      <div class="tools">
+        <button type="button" id="reset" class="ghost">Recommencer</button>
+        <span id="status" class="status" role="status"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Textes du domaine public (Project Gutenberg). Interface et mémoire compilées par KayrosLab. Aucune affiliation avec les auteurs.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

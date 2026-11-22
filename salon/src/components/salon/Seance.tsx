@@ -88,6 +88,7 @@ export function Seance({ circleId }: { circleId: string }) {
       return {
         name: turn.authorId === "user" ? t("host.short") : who ? authorCopy(who, locale).name : turn.authorId,
         text: turn.text,
+        prise: turn.prise,
       };
     });
     let previous = query;
@@ -117,7 +118,7 @@ export function Seance({ circleId }: { circleId: string }) {
           method: move.method,
           answering: pending ?? undefined,
           patch: patches[move.id],
-          persona: buildPersona(author, patches[move.id]),
+          persona: buildPersona(author, patches[move.id], latest.question),
         },
       });
       const text = spoken.text?.trim();
@@ -128,13 +129,16 @@ export function Seance({ circleId }: { circleId: string }) {
       addTurn(room.id, {
         authorId: move.id,
         text,
-        citations: cited.map((p) => ({ work: p.work, text: p.text.slice(0, 220) })),
+        prise: spoken.prise,
+        citations: (spoken.citations && spoken.citations.length
+          ? spoken.citations
+          : cited.map((p) => ({ work: p.work, text: p.text.slice(0, 220) }))),
         origin: "agent",
         grounded: spoken.grounded,
         act: move.act as SpeechAct,
         to: move.to,
       });
-      history.push({ name: authorCopy(author, locale).name, text });
+      history.push({ name: authorCopy(author, locale).name, text, prise: spoken.prise });
       previous = text;
       pending = move.method === "elenchus" ? "elenchus" : null;
     }

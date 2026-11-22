@@ -86,6 +86,7 @@ await app.register((await import('./routes/salon.mjs')).default);
 await app.register((await import('./routes/salon-whatsapp.mjs')).default);
 await app.register((await import('./routes/salon-x.mjs')).default);
 await app.register((await import('./routes/salon-kb.mjs')).default);
+await app.register((await import('./routes/salon-speak.mjs')).default);
 await app.register((await import('./routes/ideas.mjs')).default);
 await app.register((await import('./routes/portfolio.mjs')).default);
 await app.register((await import('./routes/forecasts.mjs')).default);

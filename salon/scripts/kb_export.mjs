@@ -22,12 +22,13 @@
  *   node salon/scripts/kb_export.mjs --check              # valide les sorties
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { basename, join } from "node:path";
+import { basename, join, resolve } from "node:path";
 import {
   CATALOG_FILE, MIRROR_DIR, NOISE, REPO, kbRawDir, kbRoot, loadCatalog, loadKbMap,
   nowIso, parseArgs, readJSON, saveKbMap, sentencesOf, sha256, stableChecksum,
   usableSentence, writeJSON,
 } from "./openkb_common.mjs";
+import { contentWords } from "./textlib.mjs";
 
 /* --------------------------------------------------------------- formules */
 
@@ -216,7 +217,9 @@ export function validatePack(pack, { catalogAuthor } = {}) {
     if (p.s.length < 36 || p.s.length > 340) hard.push(`${pack.authorId}: longueur hors bornes (${p.id}: ${p.s.length})`);
     if (!/[.!?…»"]$/.test(p.s)) hard.push(`${pack.authorId}: phrase sans ponctuation finale (${p.id})`);
     if (!/^[A-ZÀ-ÖØ-Þ«"“„¿¡0-9(\[]/.test(p.s)) hard.push(`${pack.authorId}: début de phrase suspect (${p.id})`);
-    if (NOISE.test(p.s)) hard.push(`${pack.authorId}: bruit éditorial (${p.id})`);
+    if (/project gutenberg|gutenberg\.org|isbn|table of contents|transcriber|produced by/i.test(p.s)) {
+      hard.push(`${pack.authorId}: bruit éditorial (${p.id})`);
+    }
     if (/\uFFFD/.test(p.s)) hard.push(`${pack.authorId}: caractère de remplacement (${p.id})`);
     const k = p.s.toLowerCase();
     if (seen.has(k)) hard.push(`${pack.authorId}: doublon (${p.id})`);
@@ -248,11 +251,51 @@ export function checkOutputs({ mirror = MIRROR_DIR } = {}) {
   return { hard, warn, authors };
 }
 
-/* ------------------------------------------------------------------- main */
+/* ------------------------------------------------------- projection SPA */
+
+function topTerms(text, n = 16) {
+  const freq = new Map();
+  for (const w of contentWords(text)) freq.set(w, (freq.get(w) || 0) + 1);
+  return [...freq.entries()]
+    .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]))
+    .slice(0, n).map(([w]) => w);
+}
+
+/**
+ * Projette les packs vers le corpus de l'app (salon/src/lib/salon/corpus.json).
+ * Plafonné à 120 phrases/auteur : le navigateur n'a pas besoin de plus pour
+ * la récupération, et le fichier reste raisonnable.
+ */
+export function writeSpaProjection(mirror = MIRROR_DIR, { maxPerAuthor = 120 } = {}) {
+  const manifest = readJSON(join(mirror, "kb-manifest.json"));
+  if (!manifest) throw new Error("kb-manifest.json manquant");
+  const spa = {};
+  for (const [id, info] of Object.entries(manifest.authors || {})) {
+    const pack = readJSON(join(mirror, info.pack || `kb/${id}.json`));
+    if (!pack) continue;
+    const all = pack.passages || [];
+    const step = Math.max(1, Math.floor(all.length / maxPerAuthor));
+    const picked = all.filter((_, i) => i % step === 0).slice(0, maxPerAuthor);
+    spa[id] = {
+      passages: picked.map((p) => ({ id: p.id, work: p.w, text: p.s })),
+      terms: topTerms(picked.map((p) => p.s).join(" "), 16),
+      sample: (picked.find((p) => p.s.length >= 90 && p.s.length <= 260) || picked[0] || {}).s || "",
+    };
+  }
+  writeJSON(join(REPO, "salon", "src", "lib", "salon", "corpus.json"), spa);
+  return Object.keys(spa).length;
+}
+
 
 async function main() {
   const args = parseArgs();
-  const mirror = MIRROR_DIR;
+  const mirror = args.out ? resolve(String(args.out)) : MIRROR_DIR;
+
+  if (args["spa-only"]) {
+    const n = writeSpaProjection(mirror);
+    console.log(`✓ projection SPA : ${n} auteurs → salon/src/lib/salon/corpus.json`);
+    return;
+  }
 
   if (args.check) {
     const { hard, warn, authors } = checkOutputs({ mirror });
@@ -303,6 +346,7 @@ async function main() {
       writeJSON(join(mirror, "kb", `${id}.json`), pack);
       const m = map.authors[id] || (map.authors[id] = { kb: `salon-${id}`, works: [] });
       m.pack = { path: `kb/${id}.json`, builtAt: pack.builtAt, sentences: pack.stats.sentences, formulas: pack.stats.formulas, checksum: pack.checksum };
+      m.works = worksStats[id] || [];
       m.kbVersion = kbVersion;
     }
     console.log(`  ✓ ${id} : ${pack.stats.sentences} phrases, ${pack.stats.formulas} formules (${source})`);
@@ -336,13 +380,17 @@ async function main() {
     source: fromCorpus ? "bootstrap-corpus" : "openkb",
     totals,
     authors: mAuthors,
+    // Ne pas perdre l'état de publication lors d'un export direct.
+    ...(manifest.published ? { published: manifest.published, publishedAt: manifest.publishedAt, gate: manifest.gate } : {}),
   };
 
   if (!args["dry-run"]) {
     writeJSON(corpusPath, mergedCorpus);
     writeJSON(join(mirror, "formulas.json"), formulasAgg);
     writeJSON(join(mirror, "kb-manifest.json"), nextManifest);
-    saveKbMap(map);
+    if (!args["no-map"]) saveKbMap(map);
+    // Projection SPA : uniquement pour le miroir publié (jamais depuis staging).
+    if (!args.out) writeSpaProjection(mirror);
   }
   console.log(`\n✓ ${Object.keys(built).length} pack(s) publié(s) — ${totals.sentences} phrases, ${totals.formulas} formules au total.`);
   console.log(`  → ${join(mirror, "kb")}/ · corpus.json · formulas.json · kb-manifest.json`);

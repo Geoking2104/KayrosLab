@@ -13,9 +13,9 @@
  *   node salon/scripts/kb_quote_audit.mjs --author voltaire --sample 100
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import {
-  MIRROR_DIR, REPORTS_DIR, kbRawDir, kbRoot, loadKbMap, nowIso, parseArgs,
+  MIRROR_DIR, REPORTS_DIR, REPO, kbRawDir, kbRoot, loadKbMap, nowIso, parseArgs,
   readJSON, writeJSON,
 } from "./openkb_common.mjs";
 
@@ -33,13 +33,15 @@ export function canonical(text) {
 
 function sourcesFor(authorId, root) {
   const rawDir = kbRawDir(authorId, root);
-  if (!existsSync(rawDir)) return [];
-  return readdirSync(rawDir).filter((f) => f.endsWith(".txt")).sort()
-    .map((f) => ({ file: f, text: canonical(readFileSync(join(rawDir, f), "utf8")) }));
+  const cacheDir = join(REPO, "salon", ".cache", "sources", authorId);
+  const dir = existsSync(rawDir) ? rawDir : (existsSync(cacheDir) ? cacheDir : null);
+  if (!dir) return [];
+  return readdirSync(dir).filter((f) => f.endsWith(".txt")).sort()
+    .map((f) => ({ file: f, text: canonical(readFileSync(join(dir, f), "utf8")) }));
 }
 
-export function auditAuthor(authorId, { root = kbRoot(), sample = 0 } = {}) {
-  const pack = readJSON(join(MIRROR_DIR, "kb", `${authorId}.json`));
+export function auditAuthor(authorId, { root = kbRoot(), sample = 0, mirror = MIRROR_DIR } = {}) {
+  const pack = readJSON(join(mirror, "kb", `${authorId}.json`));
   if (!pack) return { authorId, status: "no-pack", checked: 0, failed: [] };
   const verbatim = (pack.formulas || []).filter((f) => f.kind === "verbatim");
   const sources = sourcesFor(authorId, root);
@@ -57,12 +59,16 @@ export function auditAuthor(authorId, { root = kbRoot(), sample = 0 } = {}) {
 async function main() {
   const args = parseArgs();
   const root = args.root ? String(args.root) : kbRoot();
+  const mirror = args.mirror ? resolve(String(args.mirror)) : MIRROR_DIR;
   const map = loadKbMap();
-  const targets = args.all ? Object.keys(map.authors) : [String(args.author || "voltaire")];
+  const manifest = readJSON(join(mirror, "kb-manifest.json"));
+  const targets = args.all
+    ? (manifest && manifest.authors ? Object.keys(manifest.authors) : Object.keys(map.authors))
+    : [String(args.author || "voltaire")];
   const sample = args.sample ? Number(args.sample) : 0;
 
   const rows = [];
-  for (const id of targets) rows.push(auditAuthor(id, { root, sample }));
+  for (const id of targets) rows.push(auditAuthor(id, { root, sample, mirror }));
 
   const ok = rows.filter((r) => r.status === "ok").length;
   const skipped = rows.filter((r) => r.status === "no-source").length;
