@@ -32,6 +32,8 @@ on:
       - 'backend/web/locales/**'
       - 'assets/**'
       - 'legal/**'
+      - 'salon/**'
+      - 'backend/web/public/salon/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'tests/demo-html.test.mjs'
       - 'tests/sales-oracle-site.test.mjs'
@@ -109,6 +111,13 @@ jobs:
           done
           if [ -d frontend/positionning-app/dist ]; then cp -r frontend/positionning-app/dist/* deploy/positionner-app/; else echo "ERROR: positionning dist missing" >&2; exit 1; fi
           if [ -f backend/web/public/console/index.html ]; then cp -r backend/web/public/console/. deploy/console/; else echo "ERROR: console missing" >&2; exit 1; fi
+          if [ -f salon/index.html ]; then
+            mkdir -p deploy/salon
+            cp salon/index.html salon/app.js salon/style.css salon/catalog.json salon/doctrine.json salon/kb-manifest.json deploy/salon/
+            cp -r salon/kb deploy/salon/kb
+          else
+            echo "ERROR: salon missing" >&2; exit 1
+          fi
           if [ -d legal ]; then mkdir -p deploy/legal; cp -r legal/. deploy/legal/; fi
           touch deploy/.nojekyll
       - name: Publish to GitHub Pages
