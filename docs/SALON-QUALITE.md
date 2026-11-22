@@ -204,91 +204,90 @@ bloquante avant tout dÃ©ploiement :
 
 ## Cercle : persistance, partage, TTL
 
-Le cercle (convives, question, tours, prises) est enregistré côté serveur sous un
-identifiant anonyme généré par le navigateur (`salon-client-v1`, UUID).
+Le cercle (convives, question, tours, prises) est enregistrÃ© cÃ´tÃ© serveur sous un
+identifiant anonyme gÃ©nÃ©rÃ© par le navigateur (`salon-client-v1`, UUID). Les clÃ©s
+du store sont prÃ©fixÃ©es `anon-`.
 
 - `GET /v1/salon/room?id=<uuid>` renvoie `{ room, updatedAt, storage }` ;
-  `POST` avec `{ room }` remplace l'état et renvoie le nouvel `updatedAt`.
-- `storage` vaut `file` quand `KAYROS_SALON_DIR` pointe sur un volume persistant
-  (`/opt/kayroslab/data/salon` en production), `memory` sinon — dans ce dernier
-  cas les cercles disparaissent à chaque redémarrage.
-- **Partage multi-appareils** : l'URL `…/salon/?c=<uuid>` adopte l'identifiant
-  reçu (il est écrit dans `localStorage`), ce qui ouvre le même cercle sur un
-  autre navigateur. Le bouton « Copier le lien du cercle » copie cette URL
+  `POST` avec `{ room, intent, baseUpdatedAt }` enregistre et renvoie le nouvel
+  `updatedAt`.
+- `storage` vaut `file` quand `KAYROS_SALON_DIR` pointe sur un volume
+  persistant (`/opt/kayroslab/data/salon` en production), `memory` sinon â€” dans
+  ce dernier cas les cercles disparaissent Ã  chaque redÃ©marrage.
+- **Partage multi-appareils** : l'URL `â€¦/salon/?c=<uuid>` adopte l'identifiant
+  reÃ§u (Ã©crit dans `localStorage`), ce qui ouvre le mÃªme cercle sur un autre
+  navigateur. Le bouton Â« Copier le lien du cercle Â» copie cette URL
   (`navigator.clipboard`, repli sur un `prompt`).
 - **Synchronisation entre onglets** : la page relit le cercle au retour de focus
   (`focus`, `visibilitychange`) et toutes les 15 s ; elle applique la version
-  distante seulement si son `updatedAt` est plus récent et qu'aucun tour n'est en
-  cours (`busy`). Une question en cours de frappe n'est jamais écrasée.
-- **TTL** : `SALON_ROOM_TTL_DAYS` (30 jours par défaut) purge au démarrage puis
-  toutes les 6 h les cercles dont `updatedAt` (ou la date du fichier) dépasse le
-  délai. Les cercles sont anonymes : aucun préfixe n'est filtré.
-- Limite connue : l'écriture est « dernier arrivé gagne » ; deux onglets qui
-  modifient le même cercle au même instant peuvent perdre un tour. Un compte
-  (ou un `If-Match` sur `updatedAt`) serait nécessaire pour une fusion.
+  distante seulement si son `updatedAt` est plus rÃ©cent et qu'aucun tour n'est en
+  cours (`busy`). Une question en cours de frappe n'est jamais Ã©crasÃ©e.
+- **TTL** : `SALON_ROOM_TTL_DAYS` (30 jours par dÃ©faut) purge au dÃ©marrage puis
+  toutes les 6 h les cercles dont `updatedAt` (ou la date du fichier) dÃ©passe le
+  dÃ©lai, dans le namespace `anon-`.
+
+## Fusion des cercles concurrents
+
+`POST /v1/salon/room` accepte deux champs supplÃ©mentaires :
+
+- `baseUpdatedAt` : la version du cercle que le client avait lue ;
+- `intent` : `append` (dÃ©faut) ou `replace` (action destructive).
+
+Si le serveur a une version plus rÃ©cente et que l'intention est `append`,
+`mergeRooms` (`backend/fastify/lib/salon-merge.mjs`) fait l'union des convives et
+des tours, dÃ©doublonne par (auteur, texte) et rÃ©tablit l'ordre chronologique.
+Sans `baseUpdatedAt` mais avec un cercle dÃ©jÃ  rempli, la fusion s'applique aussi :
+ne rien perdre prime.
+
+Les actions destructives â€” recommencer, retirer un convive, poser une nouvelle
+question â€” envoient `intent: 'replace'` : sans cela, la fusion ferait revenir les
+tours que l'utilisateur vient de retirer.
+
+## Citations et ponctuation
+
+La vÃ©rification (`backend/fastify/lib/salon-quotes.mjs`) compare les citations
+aprÃ¨s normalisation : apostrophes et guillemets typographiques, tirets, espaces
+insÃ©cables, **et espace avant `; : ! ? .`**. Une citation de Candide Â« en
+enrageant; car Â» est donc reconnue dans une source qui porte Â« enrageant ; car Â».
+Les ellipses sont vÃ©rifiÃ©es par fragments ordonnÃ©s.
+
+## Deux rÃ©gimes de parole (citation ou doctrine)
+
+Le pack publiÃ© fait ~270 phrases par auteur : le mot d'une question peut y
+manquer (Â« devoir Â» chez Kant, Â« mariage Â» chez Austen). Un contrat unique
+Â« cite exactement ou tais-toi Â» produisait un aveu dans 5 cas sur 8.
+
+- **RÃ©gime strict** â€” le concept de la question figure dans les passages
+  retenus : la rÃ©plique doit contenir une citation exacte, vÃ©rifiÃ©e.
+- **RÃ©gime de doctrine** â€” le concept manque : la rÃ©plique parle depuis les
+  passages les plus proches (similaritÃ© `bge-m3`), **sans guillemets**. Toute
+  citation produite est quand mÃªme vÃ©rifiÃ©e ; si elle est fausse, la rÃ©ponse est
+  refusÃ©e. L'API renvoie alors `degraded: "doctrine sans citation"`.
+- **Salvage** â€” rÃ©plique valide sauf l'absence de citation : elle est conservÃ©e
+  (`engine: "llm"`, `degraded: "citation absente"`) au lieu d'Ãªtre remplacÃ©e par
+  un gabarit.
+
+La Â« prise Â» est nettoyÃ©e : ni citation recopiÃ©e d'un passage, ni balisage
+Markdown, ni phrase dans une autre langue, ni fragment trop court ; sinon elle
+est dÃ©rivÃ©e des premiÃ¨res phrases de la rÃ©plique.
+
+Mesure sur 8 auteurs (API live) : **0/8 â†’ 6â€“7/8** rÃ©pliques produites par le
+modÃ¨le (la variation vient du modÃ¨le). Les replis restants sont des citations
+inventÃ©es ou l'emploi d'une Å“uvre d'un autre auteur â€” refusÃ©s Ã  dessein.
+
+`providerFallback` est renvoyÃ© Ã  part : `degraded` dÃ©crit la rÃ©plique, pas la
+santÃ© du fournisseur.
+
+## /health : configurÃ© â‰  effectif
+
+`/health` expose `llm.provider` (configurÃ©) et `llm.effective` /
+`llm.lastFallback` (ce qui a rÃ©ellement rÃ©pondu). Un repli NVIDIA â†’ Mistral est
+visible sans consulter les logs ; aucune clÃ© n'est exposÃ©e.
 
 ## Variables d'environnement utiles
 
 | Variable | Effet |
 | --- | --- |
-| `KAYROS_SALON_DIR` | Répertoire des cercles (`file`) ; sinon mémoire |
-| `SALON_ROOM_TTL_DAYS` | Durée de vie d'un cercle inactif (30 par défaut) |
-| `SALON_EMBED_MODEL` | Modèle dense (`bge-m3`) |
-
-## Fusion des cercles concurrents
-
-`POST /v1/salon/room` accepte deux champs supplémentaires :
-
-- `baseUpdatedAt` : la version du cercle que le client avait lue ;
-- `intent` : `append` (défaut) ou `replace` (action destructive).
-
-Si le serveur a une version plus récente et que l'intention est `append`,
-`mergeRooms` (`backend/fastify/lib/salon-merge.mjs`) fait l'union des convives et
-des tours, dédoublonne par (auteur, texte) et rétablit l'ordre chronologique.
-Sans `baseUpdatedAt` mais avec un cercle déjà rempli, la fusion s'applique aussi :
-ne rien perdre prime.
-
-Les actions destructives — recommencer, retirer un convive, poser une nouvelle
-question — envoient `intent: 'replace'` : sans cela, la fusion ferait revenir les
-tours que l'utilisateur vient de retirer.
-
-## Citations et ponctuation
-
-La vérification (`backend/fastify/lib/salon-quotes.mjs`) compare les citations
-après normalisation : apostrophes et guillemets typographiques, tirets, espaces
-insécables, **et espace avant `; : ! ? .`**. Une citation de Candide « en
-enrageant; car » est donc reconnue dans une source qui porte « enrageant ; car ».
-Les ellipses sont vérifiées par fragments ordonnés.
-
-## /health : configuré ? effectif
-
-`/health` expose `llm.provider` (configuré) et `llm.effective` /
-`llm.lastFallback` (ce qui a réellement répondu). Un repli NVIDIA ? Mistral est
-visible sans consulter les logs ; aucune clé n'est exposée.
-
-## Deux régimes de parole (citation ou doctrine)
-
-Le pack publié fait ~270 phrases par auteur : le mot d'une question peut y
-manquer (« devoir » chez Kant, « mariage » chez Austen). Un contrat unique
-« cite exactement ou tais-toi » produisait un aveu dans 5 cas sur 8.
-
-- **Régime strict** — le concept de la question figure dans les passages
-  retenus : la réplique doit contenir une citation exacte, vérifiée.
-- **Régime de doctrine** — le concept manque : la réplique parle depuis les
-  passages les plus proches (similarité `bge-m3`), **sans guillemets**. Toute
-  citation produite est quand même vérifiée ; si elle est fausse, la réponse est
-  refusée. L'API renvoie alors `degraded: "doctrine sans citation"`.
-- **Salvage** — réplique valide sauf l'absence de citation : elle est conservée
-  (`engine: "llm"`, `degraded: "citation absente"`) au lieu d'être remplacée par
-  un gabarit.
-
-La « prise » est nettoyée : ni citation recopiée d'un passage, ni balisage
-Markdown, ni phrase dans une autre langue, ni fragment trop court ; sinon elle
-est dérivée des premières phrases de la réplique.
-
-Mesure sur 8 auteurs (API live) : **0/8 ? 6–7/8** répliques produites par le
-modèle (la variation vient du modèle). Les replis restants sont des citations
-inventées ou l'emploi d'une œuvre d'un autre auteur — refusés à dessein.
-
-`providerFallback` est renvoyé à part : `degraded` décrit la réplique, pas la
-santé du fournisseur.
+| `KAYROS_SALON_DIR` | RÃ©pertoire des cercles (`file`) ; sinon mÃ©moire |
+| `SALON_ROOM_TTL_DAYS` | DurÃ©e de vie d'un cercle inactif (30 par dÃ©faut) |
+| `SALON_EMBED_MODEL` | ModÃ¨le dense (`bge-m3`) |
