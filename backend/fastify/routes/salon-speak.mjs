@@ -458,7 +458,12 @@ export default async function salonSpeakRoutes(app) {
     const indexPool = indexed
       ? indexed.filter((c) => words(c.sentence).some((w) => principalSet.has(w)))
       : [];
-    const pool = indexPool.length ? indexPool : withPrincipal;
+    // Les packs publiés font ~270 phrases par auteur : le mot de la question
+    // peut y manquer (« devoir » chez Kant, « mariage » chez Austen). On garde
+    // alors les meilleurs passages denses, sans exiger le terme exact ; la
+    // réplique parlera de doctrine et ne citera rien.
+    const indexAll = indexed || [];
+    const pool = indexPool.length ? indexPool : (withPrincipal.length ? withPrincipal : indexAll);
     const top = pool[0] || null;
 
     // Ancrage insuffisant : aucun passage ne porte le concept de la question.
@@ -476,16 +481,16 @@ export default async function salonSpeakRoutes(app) {
       };
     }
 
-    const dense = indexPool.length ? null : await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, withPrincipal);
+    const dense = indexPool.length ? null : await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, pool.slice(0, 16));
     const reranked = indexPool.length
       ? await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, indexPool.slice(0, 12))
-      : (dense ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal));
-    const selected = (indexPool.length
-      ? (reranked && reranked.length ? reranked : indexPool)
-      : (dense && dense.length ? dense : (reranked && reranked.length ? reranked : withPrincipal))).slice(0, 5);
+      : (dense ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, pool.slice(0, 12)));
+    const selected = (reranked && reranked.length ? reranked : (dense && dense.length ? dense : pool)).slice(0, 5);
     const mode = indexPool.length ? 'hybrid+index' : (dense ? 'hybrid+dense' : 'hybrid');
     const cleaned = selected.filter((x) => x.sentence);
-    const strong = true;
+    // Contrat strict (citation obligatoire) seulement si le concept de la
+    // question figure dans les passages retenus.
+    const strong = indexPool.length > 0 || withPrincipal.length > 0;
     const sources = cleaned.map((x) => x.sentence);
 
     const messages = [
@@ -502,13 +507,17 @@ export default async function salonSpeakRoutes(app) {
             : (toward === 'author' && toName
               ? `Acte : réponse. Tu t’adresses à ${toName}. Tu fais avancer SA dernière prise d’un cran, toujours sur la question de table.`
               : 'Acte : réponse à l’hôte. Nomme-le une fois.'),
-          `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
+          strong
+            ? 'Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».'
+            : 'Aucun passage ne porte le mot de la question : réponds depuis ta doctrine, sans guillemets et sans inventer de citation.',
           `Langue de réponse : ${userLang === 'fr' ? 'français' : 'anglais'}.`,
           sources.some((s) => { const l = classifyLang(s); return l && l !== userLang; })
             ? `Les passages sont dans une autre langue : tu peux citer l’original exact ou sa traduction fidèle en ${userLang === 'fr' ? 'français' : 'anglais'}. Une citation traduite sera signalée comme telle.`
             : '',
           cleaned.length ? cleaned.map((x) => `« ${x.work} »\n${x.sentence}`).join('\n\n') : 'Aucun passage pertinent.',
-          'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>\nObligation : la REPLIQUE contient une citation EXACTE, entre guillemets « … », copiée mot pour mot d’un passage fourni. Sans citation, la réponse est refusée.',
+          strong
+            ? 'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>\nObligation : la REPLIQUE contient une citation EXACTE, entre guillemets « … », copiée mot pour mot d’un passage fourni. Sans citation, la réponse est refusée.'
+            : 'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste, sans aucun guillemet>\nInterdiction : ne cite aucun texte entre guillemets ; tu peux nommer une œuvre, jamais fabriquer une phrase d’auteur.',
         ].join('\n\n'),
       },
     ];
@@ -624,7 +633,8 @@ export default async function salonSpeakRoutes(app) {
       citations: citationsOut,
       engine: 'llm',
       provider: result.provider || null,
-      degraded: result.degraded || null,
+      // Honnêteté : une réplique de doctrine n'est pas ancrée sur une citation.
+      degraded: result.degraded || (!strong && citationsOut.length === 0 ? 'doctrine sans citation' : null),
       to: toward === 'author' ? toName : 'hôte',
       retrieval: { mode, coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), index: index ? { sentences: index.count, model: index.model } : null, ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
     };
