@@ -53,8 +53,8 @@ case "${lock_status}" in
 esac
 
 # ── Index vectoriel bge-m3 (une seule fois, persistant dans data/) ──────────
-if [ -f "${APP_DIR}/salon/scripts/build_embeddings.mjs" ] && [ ! -f "${APP_DIR}/backend/fastify/data/salon-emb/manifest.json" ]; then
-  echo "Construction de l'index bge-m3 (une fois)…"
+if [ -f "${APP_DIR}/salon/scripts/build_embeddings.mjs" ]; then
+  echo "Index bge-m3 : vérification / construction…"
   mkdir -p "${APP_DIR}/backend/fastify/data/salon-emb"
   timeout 900 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 80 \
     || echo "AVERTISSEMENT : index bge-m3 non construit (repli dense/lexical)." >&2
