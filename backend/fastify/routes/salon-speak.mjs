@@ -574,6 +574,21 @@ export default async function salonSpeakRoutes(app) {
       && (!strong || grounded);
 
     if (!valid) {
+      // Réplique recevable, seul le contrat de citation manque : on garde la
+      // voix de l'auteur plutôt que de servir un gabarit. Aucune citation n'est
+      // affichée, et l'avertissement le dit.
+      if (text && errors.length === 0 && wordCount >= 40 && wordCount <= 240) {
+        return {
+          ok: true,
+          text,
+          prise: prise || (text.split(/(?<=[.!?])\s+/)[0] || '').slice(0, 220),
+          citations: [],
+          engine: 'llm',
+          provider: result ? result.provider || null : null,
+          degraded: 'citation absente',
+          retrieval: { mode, coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), index: index ? { sentences: index.count, model: index.model } : null, ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
+        };
+      }
       const passage = cleaned[0] || null;
       const fb = composeFallback({ author, question, passage, act, toName: userLang === 'en' ? 'the host' : "l’hôte", lang: userLang });
       const fallbackCitations = passage ? [{ work: passage.work, text: passage.sentence }] : [];
