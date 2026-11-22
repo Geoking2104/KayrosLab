@@ -106,16 +106,41 @@ DNS ultérieur.
    (rire, vice, liberté, justice, pouvoir, vérité, bonheur, vertu, dieu, nature,
    amour, mort, guerre, richesse, travail, éducation, société, temps, art).
 2. **Diversité** : 22 candidats, 4 phrases maximum par œuvre.
-3. **Rerank par le modèle** : le proxy classe les 22 candidats et renvoie les
-   3 meilleurs (parseur tolérant JSON ou indices).
-4. **Garde d'ancrage** : si la couverture de la question est < 0,34 et qu'un
-   seul terme est couvert (questions de 5 termes et plus), le tour devient un
-   **aveu du manque** — aucune citation hors sujet.
-5. **Vérification** : citation sous-chaîne exacte, œuvre du registre, rejet des
+3. **Rerank dense `bge-m3`** : les 8 meilleurs candidats sont ré-embeddés avec
+   la question (1024 dimensions, Ollama local) et classés par cosine ; repli sur
+   le rerank modèle puis sur le lexical si les embeddings échouent.
+4. **Rerank modèle** : si le dense est indisponible, le proxy classe les
+   candidats et renvoie les 3 meilleurs.
+5. **Garde d'ancrage** : si aucun passage ne porte le concept principal (ou un
+   synonyme), le tour devient un **aveu du manque** — aucune citation hors sujet.
+6. **Vérification** : citation sous-chaîne exacte, œuvre du registre, rejet des
    œuvres d'autres auteurs, longueur et première personne.
 
-La réponse expose `retrieval: { mode: "hybrid", coverage, candidates, rerank }`
-ainsi que `engine`, `provider`, `degraded` et les `citations` vérifiées.
+La réponse expose `retrieval: { mode, coverage, candidates, rerank, dense }`.
+
+## Citations multilingues (i18n)
+
+- **L'original reste la preuve** : une citation est vérifiée contre la phrase
+  source, dans la langue du livre.
+- **Traduction d'affichage** : si la citation n'est pas dans la langue de
+  l'utilisateur (`locale: fr|en`), le serveur ajoute `translation` et
+  `translationLang` ; l'interface affiche l'original puis la traduction.
+- **Citation traduite par le modèle** : si le modèle traduit lui-même la phrase,
+  le serveur traduit les sources candidates et vérifie la correspondance ; la
+  citation est marquée `translated: true` avec `original`.
+- Les replis déterministes sont eux aussi traduits quand la langue diffère.
+
+## Diagnostic `bge-m3`
+
+`GET /v1/salon/embeddings/status` renvoie le modèle, la dimension et la latence
+sans exposer de secret :
+
+```json
+{ "ok": true, "model": "bge-m3", "dims": 1024, "latencyMs": 4155 }
+```
+
+Le déploiement VPS installe Ollama en loopback et exécute `ollama pull bge-m3`
+(`deploy/ovh-vps/install-ollama.sh`), avec validation d'un vecteur non vide.
 
 ## Mémoire : plafonds et cache
 
