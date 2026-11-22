@@ -385,6 +385,8 @@
           li.append(document.createTextNode(c.text ? ` — « ${c.text} »` : ''));
           if (c.translated) {
             li.append(el('span', 'translated', `traduction de « ${c.original || ''} »`));
+          } else if (c.translation) {
+            li.append(el('span', 'translated', `traduction : « ${c.translation} »`));
           }
           list.append(li);
         }

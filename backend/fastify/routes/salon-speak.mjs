@@ -199,10 +199,17 @@ async function rerankWithModel(llm, question, candidates) {
 }
 
 /** Aveu du manque : aucune citation, une thèse signée, la question rendue à la table. */
-function avowal({ author, doctrine, question, toName = "l’hôte" }) {
+function avowal({ author, doctrine, question, toName = "l’hôte", lang = 'fr' }) {
   const t = theses(doctrine, author.id, question, 1)[0];
+  const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : (lang === 'en' ? 'The host' : 'L’hôte');
+  if (lang === 'en') {
+    const thesis = (t && t.en) || author.blurbEn || author.blurb || 'my thesis remains to be stated';
+    return {
+      prise: 'On this question, my books offer no decisive passage.',
+      text: `${who}, I find in my works no sentence that truly answers this question; I will not quote falsely. What I can sign, without a quotation: ${thesis} That is little, but it is mine; the rest, the table will say. The question remains open, and I return it to whoever wishes to object.`,
+    };
+  }
   const thesis = t ? t.text : (author.blurb || 'ma thèse reste à préciser');
-  const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
   return {
     prise: 'Sur cette question, mes livres ne fournissent pas de passage décisif.',
     text: `${who}, je ne trouve dans mes œuvres aucune phrase qui réponde vraiment à cette question ; je ne citerai donc pas à faux. Ce que je peux signer, sans citation : ${thesis} C'est peu, mais c'est à moi ; le reste, la table le dira. La question reste ouverte, et je la rends à qui voudra objecter.`,
@@ -220,7 +227,7 @@ function theses(doctrine, authorId, question, limit = 4) {
       const text = t.fr || t.en;
       let hit = 0;
       for (const w of q) if (canonical(text).includes(w) || canonical(domain).includes(w)) hit += 1;
-      list.push({ domain, text, hit, anchors: t.anchors || [] });
+      list.push({ domain, text, en: t.en || t.fr, hit, anchors: t.anchors || [] });
     }
   }
   list.sort((a, b) => (b.hit - a.hit));
@@ -241,13 +248,20 @@ function buildPersona({ author, doctrine, question }) {
   ].filter(Boolean).join('\n');
 }
 
-function composeFallback({ author, question, passage, act, toName }) {
+function composeFallback({ author, question, passage, act, toName, lang = 'fr' }) {
   const work = passage ? passage.work : (author.works && author.works[0] ? author.works[0].title : 'mes œuvres');
   const quote = passage ? passage.sentence : '';
+  const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : (lang === 'en' ? 'The host' : 'L’hôte');
+  if (lang === 'en') {
+    const prise = act === 'objection' ? 'I grant a point, then distinguish.' : 'On this question, I answer from my books, not from politeness.';
+    const text = act === 'objection'
+      ? `${who}, I grant you part of it. Yet the question remains, and “${work}” displaces it: “${quote}” It is not your person I press, but what this sentence can no longer sustain. The difficulty is not in the words, but in what your thesis commits you to.`
+      : `${who}, this is what I can sign. In “${work}”: “${quote}” That answers what you have just put to me, and it is enough for today: the next word belongs to whoever wishes to object. I will stop here, without adding a useless maxim. The question remains open, and I return it to the table.`;
+    return { prise, text, work, quote };
+  }
   const prise = act === 'objection'
     ? "J’accorde un point, puis je distingue."
     : 'Sur cette question, je réponds depuis mes livres, non depuis une politesse.';
-  const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
   const text = act === 'objection'
     ? `${who}, je te l’accorde en partie. Pourtant la question demeure, et « ${work} » la déplace : « ${quote} » Ce n’est pas ta personne que je presse, c’est ce que cette phrase ne peut plus soutenir. Ainsi la difficulté n’est pas dans les mots, mais dans ce que ta thèse engage.`
     : `${who}, voici ce que je peux signer. Dans « ${work} » : « ${quote} » Cela répond à ce que tu viens de poser, et cela suffit pour aujourd’hui : la suite est à qui voudra objecter. Je m’en tiens là, sans ajouter de maxime inutile. La question reste ouverte, et je la rends à la table.`;
@@ -442,7 +456,7 @@ export default async function salonSpeakRoutes(app) {
 
     // Ancrage insuffisant : aucun passage ne porte le concept de la question.
     if (!top) {
-      const av = avowal({ author, doctrine: doctrine(), question, toName: "l’hôte" });
+      const av = avowal({ author, doctrine: doctrine(), question, toName: userLang === 'en' ? 'the host' : "l’hôte", lang: userLang });
       return {
         ok: true,
         text: av.text,
@@ -540,7 +554,7 @@ export default async function salonSpeakRoutes(app) {
 
     if (!valid) {
       const passage = cleaned[0] || null;
-      const fb = composeFallback({ author, question, passage, act, toName: "l’hôte" });
+      const fb = composeFallback({ author, question, passage, act, toName: userLang === 'en' ? 'the host' : "l’hôte", lang: userLang });
       return {
         ok: true,
         text: fb.text,
@@ -562,6 +576,25 @@ export default async function salonSpeakRoutes(app) {
         ...(c.translated ? { translated: true, original: c.original, lang: c.lang } : {}),
       };
     }).filter((c) => c.work);
+
+    // i18n : toute citation dans une autre langue que celle de l'utilisateur
+    // reçoit une traduction d'affichage ; l'original reste la preuve vérifiée.
+    const foreign = citationsOut.filter((c) => {
+      if (c.translated) return false;
+      const l = classifyLang(c.text);
+      return l && l !== userLang;
+    });
+    if (foreign.length) {
+      const translated = await translateBatch(app.kayrosContext && app.kayrosContext.llm, foreign.map((c) => c.text), userLang);
+      if (translated && translated.length === foreign.length) {
+        foreign.forEach((c, i) => {
+          if (translated[i] && translated[i] !== c.text) {
+            c.translation = translated[i];
+            c.translationLang = userLang;
+          }
+        });
+      }
+    }
 
     return {
       ok: true,
