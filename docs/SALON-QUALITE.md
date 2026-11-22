@@ -234,3 +234,34 @@ identifiant anonyme généré par le navigateur (`salon-client-v1`, UUID).
 | `KAYROS_SALON_DIR` | Répertoire des cercles (`file`) ; sinon mémoire |
 | `SALON_ROOM_TTL_DAYS` | Durée de vie d'un cercle inactif (30 par défaut) |
 | `SALON_EMBED_MODEL` | Modèle dense (`bge-m3`) |
+
+## Fusion des cercles concurrents
+
+`POST /v1/salon/room` accepte deux champs supplémentaires :
+
+- `baseUpdatedAt` : la version du cercle que le client avait lue ;
+- `intent` : `append` (défaut) ou `replace` (action destructive).
+
+Si le serveur a une version plus récente et que l'intention est `append`,
+`mergeRooms` (`backend/fastify/lib/salon-merge.mjs`) fait l'union des convives et
+des tours, dédoublonne par (auteur, texte) et rétablit l'ordre chronologique.
+Sans `baseUpdatedAt` mais avec un cercle déjà rempli, la fusion s'applique aussi :
+ne rien perdre prime.
+
+Les actions destructives — recommencer, retirer un convive, poser une nouvelle
+question — envoient `intent: 'replace'` : sans cela, la fusion ferait revenir les
+tours que l'utilisateur vient de retirer.
+
+## Citations et ponctuation
+
+La vérification (`backend/fastify/lib/salon-quotes.mjs`) compare les citations
+après normalisation : apostrophes et guillemets typographiques, tirets, espaces
+insécables, **et espace avant `; : ! ? .`**. Une citation de Candide « en
+enrageant; car » est donc reconnue dans une source qui porte « enrageant ; car ».
+Les ellipses sont vérifiées par fragments ordonnés.
+
+## /health : configuré ? effectif
+
+`/health` expose `llm.provider` (configuré) et `llm.effective` /
+`llm.lastFallback` (ce qui a réellement répondu). Un repli NVIDIA ? Mistral est
+visible sans consulter les logs ; aucune clé n'est exposée.
