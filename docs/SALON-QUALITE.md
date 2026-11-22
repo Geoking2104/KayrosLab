@@ -100,6 +100,18 @@ comptés dans le rapport.
 `geoking2104.github.io`) ; le vhost VPS `/salon/` reste prêt pour un basculement
 DNS ultérieur.
 
+## Persistance du cercle
+
+- Chaque navigateur génère un **UUID anonyme** (`salon-client-v1`) ; aucun compte.
+- `GET /v1/salon/room?id=<uuid>` relit la table ; `POST` sauvegarde
+  `{ room: { question, authorIds, turns } }`.
+- Les tours conservent `authorId`, `text`, `prise`, `citations`, `act`, `to` ; les
+  prises et la question sont donc restaurées avec le fil.
+- Sauvegarde débouncée (300 ms) après chaque tour, invitation ou retrait ;
+  l'État est borné par `sanitizeSalonState` (512 Ko, 48 cercles, 500 tours).
+- L'identifiant est non devinable et non listé ; routes limitées à 120 req/min
+  (GET) et 60 req/min (POST).
+
 ## Retrieval hybride (runtime `/v1/salon/speak`)
 
 1. **Rappel lexical élargi** : BM25 simplifié + expansion conceptuelle FR/EN
