@@ -100,6 +100,19 @@ for (const file of files) {
     dims = dims || previous.authors[authorId].dims || 0;
     continue;
   }
+  // Reprise : un auteur déjà calculé (json + f32) est réutilisé même sans manifeste.
+  if (!FORCE && existsSync(join(OUT, `${authorId}.json`)) && existsSync(join(OUT, `${authorId}.f32`))) {
+    try {
+      const meta = JSON.parse(readFileSync(join(OUT, `${authorId}.json`), 'utf8'));
+      if (meta && meta.dims && meta.count) {
+        manifest.authors[authorId] = { count: meta.count, dims: meta.dims };
+        total += meta.count;
+        dims = dims || meta.dims;
+        built += 1;
+        continue;
+      }
+    } catch { /* reconstruit */ }
+  }
 
   const pack = JSON.parse(readFileSync(join(PACKS, file), 'utf8'));
   const all = (pack.passages || []).filter((p) => p && p.s);

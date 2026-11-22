@@ -56,7 +56,7 @@ esac
 if [ -f "${APP_DIR}/salon/scripts/build_embeddings.mjs" ] && [ ! -f "${APP_DIR}/backend/fastify/data/salon-emb/manifest.json" ]; then
   echo "Construction de l'index bge-m3 (une fois)…"
   mkdir -p "${APP_DIR}/backend/fastify/data/salon-emb"
-  timeout 1200 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 160 \
+  timeout 900 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 80 \
     || echo "AVERTISSEMENT : index bge-m3 non construit (repli dense/lexical)." >&2
 fi
 
